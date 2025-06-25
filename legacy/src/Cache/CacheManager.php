@@ -1,9 +1,12 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
@@ -11,58 +14,57 @@ namespace TorrentPier\Cache;
 
 use Nette\Caching\Cache;
 use Nette\Caching\Storage;
-use Nette\Caching\Storages\FileStorage;
-use Nette\Caching\Storages\MemcachedStorage;
-use Nette\Caching\Storages\MemoryStorage;
-use Nette\Caching\Storages\SQLiteStorage;
-use TorrentPier\Dev;
 
 /**
  * Unified Cache Manager using Nette Caching internally
- * Maintains backward compatibility with Legacy Cache and Datastore APIs
- *
- * @package TorrentPier\Cache
+ * Maintains backward compatibility with Legacy Cache and Datastore APIs.
  */
 class CacheManager
 {
     /**
-     * Singleton instances of cache managers
+     * Singleton instances of cache managers.
+     *
      * @var array
      */
     private static array $instances = [];
 
     /**
-     * Nette Cache instance
+     * Nette Cache instance.
+     *
      * @var Cache
      */
     private Cache $cache;
 
     /**
-     * Storage instance
+     * Storage instance.
+     *
      * @var Storage
      */
     private Storage $storage;
 
     /**
-     * Cache prefix
+     * Cache prefix.
+     *
      * @var string
      */
     public string $prefix;
 
     /**
-     * Engine type
+     * Engine type.
+     *
      * @var string
      */
     public string $engine;
 
     /**
-     * Currently in usage (for backward compatibility)
+     * Currently in usage (for backward compatibility).
+     *
      * @var bool
      */
     public bool $used = true;
 
     /**
-     * Debug properties for backward compatibility
+     * Debug properties for backward compatibility.
      */
     public int $num_queries = 0;
     public float $sql_starttime = 0;
@@ -75,11 +77,11 @@ class CacheManager
     public ?string $cur_query = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param string $namespace
-     * @param Storage $storage Pre-built storage instance from UnifiedCacheSystem
-     * @param array $config
+     * @param string  $namespace
+     * @param Storage $storage   Pre-built storage instance from UnifiedCacheSystem
+     * @param array   $config
      */
     private function __construct(string $namespace, Storage $storage, array $config)
     {
@@ -95,16 +97,17 @@ class CacheManager
     }
 
     /**
-     * Get singleton instance (called by UnifiedCacheSystem)
+     * Get singleton instance (called by UnifiedCacheSystem).
      *
-     * @param string $namespace
-     * @param Storage $storage Pre-built storage instance
-     * @param array $config
+     * @param string  $namespace
+     * @param Storage $storage   Pre-built storage instance
+     * @param array   $config
+     *
      * @return self
      */
     public static function getInstance(string $namespace, Storage $storage, array $config): self
     {
-        $key = $namespace . '_' . md5(serialize($config));
+        $key = $namespace.'_'.md5(serialize($config));
 
         if (!isset(self::$instances[$key])) {
             self::$instances[$key] = new self($namespace, $storage, $config);
@@ -113,16 +116,16 @@ class CacheManager
         return self::$instances[$key];
     }
 
-
     /**
-     * Cache get method (Legacy Cache API)
+     * Cache get method (Legacy Cache API).
      *
      * @param string $name
+     *
      * @return mixed
      */
     public function get(string $name): mixed
     {
-        $key = $this->prefix . $name;
+        $key = $this->prefix.$name;
 
         $this->cur_query = "cache->get('$key')";
         $this->debug('start');
@@ -138,23 +141,24 @@ class CacheManager
     }
 
     /**
-     * Cache set method (Legacy Cache API)
+     * Cache set method (Legacy Cache API).
      *
      * @param string $name
-     * @param mixed $value
-     * @param int $ttl
+     * @param mixed  $value
+     * @param int    $ttl
+     *
      * @return bool
      */
     public function set(string $name, mixed $value, int $ttl = 604800): bool
     {
-        $key = $this->prefix . $name;
+        $key = $this->prefix.$name;
 
         $this->cur_query = "cache->set('$key')";
         $this->debug('start');
 
         $dependencies = [];
         if ($ttl > 0) {
-            $dependencies[Cache::Expire] = $ttl . ' seconds';
+            $dependencies[Cache::Expire] = $ttl.' seconds';
         }
 
         try {
@@ -172,16 +176,17 @@ class CacheManager
     }
 
     /**
-     * Cache remove method (Legacy Cache API)
+     * Cache remove method (Legacy Cache API).
      *
      * @param string|null $name
+     *
      * @return bool
      */
     public function rm(?string $name = null): bool
     {
         if ($name === null) {
             // Remove all items in this namespace
-            $this->cur_query = "cache->clean(all)";
+            $this->cur_query = 'cache->clean(all)';
             $this->debug('start');
 
             $this->cache->clean([Cache::All => true]);
@@ -193,7 +198,7 @@ class CacheManager
             return true;
         }
 
-        $key = $this->prefix . $name;
+        $key = $this->prefix.$name;
 
         $this->cur_query = "cache->remove('$key')";
         $this->debug('start');
@@ -208,20 +213,21 @@ class CacheManager
     }
 
     /**
-     * Advanced Nette Caching methods
+     * Advanced Nette Caching methods.
      */
 
     /**
-     * Load with callback (Nette native method)
+     * Load with callback (Nette native method).
      *
-     * @param string $key
+     * @param string        $key
      * @param callable|null $callback
-     * @param array $dependencies
+     * @param array         $dependencies
+     *
      * @return mixed
      */
     public function load(string $key, ?callable $callback = null, array $dependencies = []): mixed
     {
-        $fullKey = $this->prefix . $key;
+        $fullKey = $this->prefix.$key;
 
         $this->cur_query = "cache->load('$fullKey')";
         $this->debug('start');
@@ -238,16 +244,17 @@ class CacheManager
     }
 
     /**
-     * Save with dependencies
+     * Save with dependencies.
      *
      * @param string $key
-     * @param mixed $value
-     * @param array $dependencies
+     * @param mixed  $value
+     * @param array  $dependencies
+     *
      * @return void
      */
     public function save(string $key, mixed $value, array $dependencies = []): void
     {
-        $fullKey = $this->prefix . $key;
+        $fullKey = $this->prefix.$key;
 
         $this->cur_query = "cache->save('$fullKey')";
         $this->debug('start');
@@ -260,14 +267,15 @@ class CacheManager
     }
 
     /**
-     * Clean cache by criteria
+     * Clean cache by criteria.
      *
      * @param array $conditions
+     *
      * @return void
      */
     public function clean(array $conditions = []): void
     {
-        $this->cur_query = "cache->clean(" . json_encode($conditions) . ")";
+        $this->cur_query = 'cache->clean('.json_encode($conditions).')';
         $this->debug('start');
 
         $this->cache->clean($conditions);
@@ -278,17 +286,18 @@ class CacheManager
     }
 
     /**
-     * Bulk load
+     * Bulk load.
      *
-     * @param array $keys
+     * @param array         $keys
      * @param callable|null $callback
+     *
      * @return array
      */
     public function bulkLoad(array $keys, ?callable $callback = null): array
     {
-        $prefixedKeys = array_map(fn($key) => $this->prefix . $key, $keys);
+        $prefixedKeys = array_map(fn ($key) => $this->prefix.$key, $keys);
 
-        $this->cur_query = "cache->bulkLoad(" . count($keys) . " keys)";
+        $this->cur_query = 'cache->bulkLoad('.count($keys).' keys)';
         $this->debug('start');
 
         $result = $this->cache->bulkLoad($prefixedKeys, $callback);
@@ -301,15 +310,16 @@ class CacheManager
     }
 
     /**
-     * Memoize function call
+     * Memoize function call.
      *
      * @param callable $function
-     * @param mixed ...$args
+     * @param mixed    ...$args
+     *
      * @return mixed
      */
     public function call(callable $function, ...$args): mixed
     {
-        $this->cur_query = "cache->call(" . (is_string($function) ? $function : 'callable') . ")";
+        $this->cur_query = 'cache->call('.(is_string($function) ? $function : 'callable').')';
         $this->debug('start');
 
         $result = $this->cache->call($function, ...$args);
@@ -322,9 +332,10 @@ class CacheManager
     }
 
     /**
-     * Wrap function for memoization
+     * Wrap function for memoization.
      *
      * @param callable $function
+     *
      * @return callable
      */
     public function wrap(callable $function): callable
@@ -333,26 +344,29 @@ class CacheManager
     }
 
     /**
-     * Capture output
+     * Capture output.
      *
      * @param string $key
+     *
      * @return \Nette\Caching\OutputHelper|null
      */
     public function capture(string $key): ?\Nette\Caching\OutputHelper
     {
-        $fullKey = $this->prefix . $key;
+        $fullKey = $this->prefix.$key;
+
         return $this->cache->capture($fullKey);
     }
 
     /**
-     * Remove specific key
+     * Remove specific key.
      *
      * @param string $key
+     *
      * @return void
      */
     public function remove(string $key): void
     {
-        $fullKey = $this->prefix . $key;
+        $fullKey = $this->prefix.$key;
 
         $this->cur_query = "cache->remove('$fullKey')";
         $this->debug('start');
@@ -365,10 +379,11 @@ class CacheManager
     }
 
     /**
-     * Debug method (backward compatibility)
+     * Debug method (backward compatibility).
      *
-     * @param string $mode
+     * @param string      $mode
      * @param string|null $cur_query
+     *
      * @return void
      */
     public function debug(string $mode, ?string $cur_query = null): void
@@ -377,8 +392,8 @@ class CacheManager
             return;
         }
 
-        $id =& $this->dbg_id;
-        $dbg =& $this->dbg[$id];
+        $id = &$this->dbg_id;
+        $dbg = &$this->dbg[$id];
 
         switch ($mode) {
             case 'start':
@@ -402,9 +417,10 @@ class CacheManager
     }
 
     /**
-     * Find caller source (backward compatibility)
+     * Find caller source (backward compatibility).
      *
      * @param string $mode
+     *
      * @return string
      */
     public function debug_find_source(string $mode = 'all'): string
@@ -418,18 +434,19 @@ class CacheManager
                     case 'file':
                         return $trace['file'];
                     case 'line':
-                        return (string)$trace['line'];
+                        return (string) $trace['line'];
                     case 'all':
                     default:
-                        return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
+                        return hide_bb_path($trace['file']).'('.$trace['line'].')';
                 }
             }
         }
+
         return 'src not found';
     }
 
     /**
-     * Get storage instance (for advanced usage)
+     * Get storage instance (for advanced usage).
      *
      * @return Storage
      */
@@ -439,7 +456,7 @@ class CacheManager
     }
 
     /**
-     * Get Nette Cache instance (for advanced usage)
+     * Get Nette Cache instance (for advanced usage).
      *
      * @return Cache
      */
@@ -449,9 +466,10 @@ class CacheManager
     }
 
     /**
-     * Magic property getter for backward compatibility
+     * Magic property getter for backward compatibility.
      *
      * @param string $name
+     *
      * @return mixed
      */
     public function __get(string $name): mixed
@@ -461,10 +479,10 @@ class CacheManager
             // Legacy cache systems sometimes had a 'db' property for database storage
             // Our unified system doesn't use separate database connections for cache
             // Return an object with empty debug arrays for compatibility
-            return (object)[
-                'dbg' => [],
-                'engine' => $this->engine,
-                'sql_timetotal' => 0
+            return (object) [
+                'dbg'           => [],
+                'engine'        => $this->engine,
+                'sql_timetotal' => 0,
             ];
         }
 

@@ -1,23 +1,25 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 global $lang;
 
-if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
+if (!$user_id = (int) $this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
-if (!$field = (string)$this->request['field']) {
+if (!$field = (string) $this->request['field']) {
     $this->ajax_die('invalid profile field');
 }
 
@@ -27,7 +29,7 @@ if (IN_DEMO_MODE && in_array($field, ['username', 'user_email'])) {
 }
 
 $table = BB_USERS;
-$value = $this->request['value'] = (string)(isset($this->request['value'])) ? $this->request['value'] : 0;
+$value = $this->request['value'] = (string) (isset($this->request['value'])) ? $this->request['value'] : 0;
 
 switch ($field) {
     case 'username':
@@ -98,7 +100,7 @@ switch ($field) {
         break;
 
     case 'user_twitter':
-        if ($value && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $value)) {
+        if ($value && !preg_match('#^[a-zA-Z0-9_]{1,15}$#', $value)) {
             $this->ajax_die($lang['TWITTER_ERROR']);
         }
         $this->response['new_value'] = $this->request['value'];
@@ -118,7 +120,7 @@ switch ($field) {
         }
 
         $table = BB_BT_USERS;
-        $value = (int)$this->request['value'];
+        $value = (int) $this->request['value'];
 
         if ($value < 0) {
             $this->ajax_die($lang['WRONG_INPUT']);
@@ -134,12 +136,12 @@ switch ($field) {
 
         $btu = get_bt_userdata($user_id);
         $btu[$field] = $value;
-        $this->response['update_ids']['u_ratio'] = (string)get_bt_ratio($btu);
-        CACHE('bb_cache')->rm('btu_' . $user_id);
+        $this->response['update_ids']['u_ratio'] = (string) get_bt_ratio($btu);
+        CACHE('bb_cache')->rm('btu_'.$user_id);
         break;
 
     case 'user_points':
-        $value = (float)str_replace(',', '.', $this->request['value']);
+        $value = (float) str_replace(',', '.', $this->request['value']);
         $value = sprintf('%.2f', $value);
         if ($value < 0.0 || strlen(strstr($value, '.', true)) > 14) {
             $this->ajax_die($lang['WRONG_INPUT']);

@@ -1,9 +1,12 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
@@ -12,20 +15,19 @@ namespace TorrentPier\Captcha;
 use ReCaptcha\ReCaptcha;
 
 /**
- * Class GoogleCaptchaV3
- * @package TorrentPier\Captcha
+ * Class GoogleCaptchaV3.
  */
 class GoogleCaptchaV3 implements CaptchaInterface
 {
     /**
-     * Captcha service settings
+     * Captcha service settings.
      *
      * @var array
      */
     private array $settings;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $settings
      */
@@ -35,7 +37,7 @@ class GoogleCaptchaV3 implements CaptchaInterface
     }
 
     /**
-     * Returns captcha widget
+     * Returns captcha widget.
      *
      * @return string
      */
@@ -56,7 +58,7 @@ class GoogleCaptchaV3 implements CaptchaInterface
     }
 
     /**
-     * Checking captcha answer
+     * Checking captcha answer.
      *
      * @return bool
      */

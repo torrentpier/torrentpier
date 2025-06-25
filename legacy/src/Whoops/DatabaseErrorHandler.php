@@ -1,9 +1,12 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
@@ -13,7 +16,7 @@ use Whoops\Handler\Handler;
 use Whoops\Handler\HandlerInterface;
 
 /**
- * Database Error Handler for Whoops
+ * Database Error Handler for Whoops.
  *
  * Enhances error reporting by adding database query information,
  * recent SQL activity, and database error details to the error output.
@@ -25,7 +28,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
     private int $maxQueryHistory = 5;
 
     /**
-     * Handle the exception and add database information
+     * Handle the exception and add database information.
      */
     public function handle(): int
     {
@@ -51,34 +54,37 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
     }
 
     /**
-     * Set whether to add database info to output
+     * Set whether to add database info to output.
      */
     public function setAddToOutput(bool $add): self
     {
         $this->addToOutput = $add;
+
         return $this;
     }
 
     /**
-     * Set whether to include query history
+     * Set whether to include query history.
      */
     public function setIncludeQueryHistory(bool $include): self
     {
         $this->includeQueryHistory = $include;
+
         return $this;
     }
 
     /**
-     * Set maximum number of queries to show in history
+     * Set maximum number of queries to show in history.
      */
     public function setMaxQueryHistory(int $max): self
     {
         $this->maxQueryHistory = max(1, $max);
+
         return $this;
     }
 
     /**
-     * Add database context information to exception frames
+     * Add database context information to exception frames.
      */
     private function addDatabaseContextToFrames($inspector): void
     {
@@ -121,7 +127,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
     }
 
     /**
-     * Add global database information to the exception
+     * Add global database information to the exception.
      */
     private function addGlobalDatabaseInfo($exception): void
     {
@@ -146,7 +152,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
     }
 
     /**
-     * Add database info as frame comments when setAdditionalInfo is not available
+     * Add database info as frame comments when setAdditionalInfo is not available.
      */
     private function addDatabaseInfoAsFrameComments(array $databaseInfo): void
     {
@@ -174,7 +180,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
     }
 
     /**
-     * Check if a frame is related to database operations
+     * Check if a frame is related to database operations.
      */
     private function isDatabaseRelatedFrame(?string $fileName, ?string $className, ?string $functionName): bool
     {
@@ -236,7 +242,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
     }
 
     /**
-     * Get current database context
+     * Get current database context.
      */
     private function getCurrentDatabaseContext(): array
     {
@@ -265,21 +271,21 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                 }
             }
         } catch (\Exception $e) {
-            $context['error'] = 'Could not retrieve database context: ' . $e->getMessage();
+            $context['error'] = 'Could not retrieve database context: '.$e->getMessage();
         }
 
         return $context;
     }
 
     /**
-     * Collect comprehensive database information
+     * Collect comprehensive database information.
      */
     private function collectDatabaseInformation(): array
     {
         $info = [
-            'timestamp' => date('Y-m-d H:i:s'),
+            'timestamp'   => date('Y-m-d H:i:s'),
             'request_uri' => $_SERVER['REQUEST_URI'] ?? 'CLI',
-            'user_ip' => $_SERVER['REMOTE_ADDR'] ?? 'Unknown',
+            'user_ip'     => $_SERVER['REMOTE_ADDR'] ?? 'Unknown',
         ];
 
         try {
@@ -292,13 +298,13 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                         $db = \TorrentPier\Database\DatabaseFactory::getInstance($serverName);
 
                         $serverInfo = [
-                            'server_name' => $serverName,
-                            'engine' => $db->engine ?? 'Unknown',
-                            'host' => $db->db_server ?? 'Unknown',
-                            'database' => $db->selected_db ?? 'Unknown',
+                            'server_name'       => $serverName,
+                            'engine'            => $db->engine ?? 'Unknown',
+                            'host'              => $db->db_server ?? 'Unknown',
+                            'database'          => $db->selected_db ?? 'Unknown',
                             'connection_status' => $db->connection ? 'Connected' : 'Disconnected',
-                            'total_queries' => $db->num_queries ?? 0,
-                            'total_time' => isset($db->sql_timetotal) ? sprintf('%.3f sec', $db->sql_timetotal) : 'Unknown',
+                            'total_queries'     => $db->num_queries ?? 0,
+                            'total_time'        => isset($db->sql_timetotal) ? sprintf('%.3f sec', $db->sql_timetotal) : 'Unknown',
                         ];
 
                         // Current query
@@ -319,18 +325,17 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
 
                             foreach ($recentQueries as $query) {
                                 $serverInfo['recent_queries'][] = [
-                                    'sql' => $this->formatQueryForDisplay($query['sql'] ?? 'Unknown'),
-                                    'time' => isset($query['time']) ? sprintf('%.3f sec', $query['time']) : 'Unknown',
+                                    'sql'    => $this->formatQueryForDisplay($query['sql'] ?? 'Unknown'),
+                                    'time'   => isset($query['time']) ? sprintf('%.3f sec', $query['time']) : 'Unknown',
                                     'source' => $query['src'] ?? 'Unknown',
                                 ];
                             }
                         }
 
                         $info['databases'][$serverName] = $serverInfo;
-
                     } catch (\Exception $e) {
                         $info['databases'][$serverName] = [
-                            'error' => 'Could not retrieve info: ' . $e->getMessage()
+                            'error' => 'Could not retrieve info: '.$e->getMessage(),
                         ];
                     }
                 }
@@ -341,12 +346,12 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                 $db = DB();
 
                 $info['legacy_database'] = [
-                    'engine' => $db->engine ?? 'Unknown',
-                    'host' => $db->db_server ?? 'Unknown',
-                    'database' => $db->selected_db ?? 'Unknown',
+                    'engine'            => $db->engine ?? 'Unknown',
+                    'host'              => $db->db_server ?? 'Unknown',
+                    'database'          => $db->selected_db ?? 'Unknown',
                     'connection_status' => $db->connection ? 'Connected' : 'Disconnected',
-                    'total_queries' => $db->num_queries ?? 0,
-                    'total_time' => isset($db->sql_timetotal) ? sprintf('%.3f sec', $db->sql_timetotal) : 'Unknown',
+                    'total_queries'     => $db->num_queries ?? 0,
+                    'total_time'        => isset($db->sql_timetotal) ? sprintf('%.3f sec', $db->sql_timetotal) : 'Unknown',
                 ];
 
                 if (!empty($db->cur_query)) {
@@ -358,7 +363,6 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                     $info['legacy_database']['last_error'] = $sqlError;
                 }
             }
-
         } catch (\Exception $e) {
             $info['collection_error'] = $e->getMessage();
         }
@@ -367,7 +371,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
     }
 
     /**
-     * Format SQL query for readable display
+     * Format SQL query for readable display.
      */
     private function formatQueryForDisplay(string $query, int $maxLength = 500): string
     {
@@ -377,14 +381,14 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
 
         // Truncate if too long
         if (strlen($query) > $maxLength) {
-            $query = substr($query, 0, $maxLength) . '... [truncated]';
+            $query = substr($query, 0, $maxLength).'... [truncated]';
         }
 
         return $query;
     }
 
     /**
-     * Get priority - run after the main PrettyPageHandler
+     * Get priority - run after the main PrettyPageHandler.
      */
     public function contentType(): ?string
     {

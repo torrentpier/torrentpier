@@ -38,8 +38,8 @@ class ContainerFactory
         $isProduction = ($config['environment'] ?? 'development') === 'production';
 
         if ($isProduction) {
-            $builder->enableCompilation($config['compilation_dir'] ?? __DIR__ . '/../../../internal_data/cache/container');
-            $builder->writeProxiesToFile(true, $config['proxies_dir'] ?? __DIR__ . '/../../../internal_data/cache/proxies');
+            $builder->enableCompilation($config['compilation_dir'] ?? __DIR__.'/../../../internal_data/cache/container');
+            $builder->writeProxiesToFile(true, $config['proxies_dir'] ?? __DIR__.'/../../../internal_data/cache/proxies');
         }
 
         // Enable autowiring by default

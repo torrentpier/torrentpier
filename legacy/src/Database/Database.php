@@ -1,9 +1,12 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
@@ -17,7 +20,7 @@ use Nette\Database\Structure;
 
 /**
  * Modern Database class using Nette Database with backward compatibility
- * Implements singleton pattern while maintaining all existing SqlDb methods
+ * Implements singleton pattern while maintaining all existing SqlDb methods.
  */
 class Database
 {
@@ -55,7 +58,7 @@ class Database
     public array $DBS = [];
 
     /**
-     * Private constructor for singleton pattern
+     * Private constructor for singleton pattern.
      */
     private function __construct(array $cfg_values, string $server_name = 'db')
     {
@@ -67,16 +70,16 @@ class Database
 
         // Initialize our own tracking system (replaces the old $DBS global system)
         $this->DBS = [
-            'log_file' => 'sql_queries',
-            'log_counter' => 0,
-            'num_queries' => 0,
-            'sql_inittime' => 0,
-            'sql_timetotal' => 0
+            'log_file'      => 'sql_queries',
+            'log_counter'   => 0,
+            'num_queries'   => 0,
+            'sql_inittime'  => 0,
+            'sql_timetotal' => 0,
         ];
     }
 
     /**
-     * Get singleton instance for default database
+     * Get singleton instance for default database.
      */
     public static function getInstance(?array $cfg_values = null, string $server_name = 'db'): self
     {
@@ -89,7 +92,7 @@ class Database
     }
 
     /**
-     * Get instance for specific database server
+     * Get instance for specific database server.
      */
     public static function getServerInstance(array $cfg_values, string $server_name): self
     {
@@ -106,7 +109,7 @@ class Database
     }
 
     /**
-     * Initialize connection
+     * Initialize connection.
      */
     public function init(): void
     {
@@ -121,7 +124,7 @@ class Database
     }
 
     /**
-     * Open connection using Nette Database
+     * Open connection using Nette Database.
      */
     public function connect(): void
     {
@@ -159,7 +162,7 @@ class Database
     }
 
     /**
-     * Base query method (compatible with original)
+     * Base query method (compatible with original).
      */
     public function sql_query($query): ?ResultSet
     {
@@ -171,7 +174,7 @@ class Database
             $query = $this->build_sql($query);
         }
 
-        $query = '/* ' . $this->debugger->debug_find_source() . ' */ ' . $query;
+        $query = '/* '.$this->debugger->debug_find_source().' */ '.$query;
         $this->cur_query = $query;
         $this->debugger->debug('start');
 
@@ -204,7 +207,7 @@ class Database
     }
 
     /**
-     * Execute query WRAPPER (with error handling)
+     * Execute query WRAPPER (with error handling).
      */
     public function query($query): ResultSet
     {
@@ -216,7 +219,7 @@ class Database
     }
 
     /**
-     * Return number of rows
+     * Return number of rows.
      */
     public function num_rows($result = false): int
     {
@@ -230,7 +233,7 @@ class Database
     }
 
     /**
-     * Return number of affected rows
+     * Return number of affected rows.
      */
     public function affected_rows(): int
     {
@@ -238,7 +241,7 @@ class Database
     }
 
     /**
-     * Fetch current row (compatible with original)
+     * Fetch current row (compatible with original).
      */
     public function sql_fetchrow($result, string $field_name = ''): mixed
     {
@@ -254,7 +257,7 @@ class Database
 
             // Convert Row to array for backward compatibility
             // Nette Database Row extends ArrayHash, so we can cast it to array
-            $rowArray = (array)$row;
+            $rowArray = (array) $row;
 
             if ($field_name) {
                 return $rowArray[$field_name] ?? false;
@@ -299,6 +302,7 @@ class Database
                 } catch (\Exception $retryException) {
                     // If PDO retry also fails, log and re-throw
                     $this->debugger->log_error($retryException);
+
                     throw $retryException;
                 }
             }
@@ -312,7 +316,7 @@ class Database
     }
 
     /**
-     * Alias of sql_fetchrow()
+     * Alias of sql_fetchrow().
      */
     public function fetch_next($result): mixed
     {
@@ -320,7 +324,7 @@ class Database
     }
 
     /**
-     * Fetch row WRAPPER (with error handling)
+     * Fetch row WRAPPER (with error handling).
      */
     public function fetch_row($query, string $field_name = ''): mixed
     {
@@ -333,8 +337,8 @@ class Database
         } catch (\Exception $e) {
             // Enhance the exception with query information
             $enhancedException = new \RuntimeException(
-                "Database error during fetch_row: " . $e->getMessage() .
-                "\nProblematic Query: " . ($this->cur_query ?: $this->last_query ?: 'Unknown'),
+                'Database error during fetch_row: '.$e->getMessage().
+                "\nProblematic Query: ".($this->cur_query ?: $this->last_query ?: 'Unknown'),
                 $e->getCode(),
                 $e
             );
@@ -347,7 +351,7 @@ class Database
     }
 
     /**
-     * Fetch all rows
+     * Fetch all rows.
      */
     public function sql_fetchrowset($result, string $field_name = ''): array
     {
@@ -361,7 +365,7 @@ class Database
             while ($row = $result->fetch()) {
                 // Convert Row to array for backward compatibility
                 // Nette Database Row extends ArrayHash, so we can cast it to array
-                $rowArray = (array)$row;
+                $rowArray = (array) $row;
                 $rowset[] = $field_name ? ($rowArray[$field_name] ?? null) : $rowArray;
             }
         } catch (\Exception $e) {
@@ -391,11 +395,13 @@ class Database
                 } catch (\Exception $retryException) {
                     // If PDO retry also fails, log and re-throw
                     $this->debugger->log_error($retryException);
+
                     throw $retryException;
                 }
             } else {
                 // For other exceptions, just re-throw
                 $this->debugger->log_error($e);
+
                 throw $e;
             }
         }
@@ -404,7 +410,7 @@ class Database
     }
 
     /**
-     * Fetch all rows WRAPPER (with error handling)
+     * Fetch all rows WRAPPER (with error handling).
      */
     public function fetch_rowset($query, string $field_name = ''): array
     {
@@ -416,7 +422,7 @@ class Database
     }
 
     /**
-     * Get last inserted id after insert statement
+     * Get last inserted id after insert statement.
      */
     public function sql_nextid(): int
     {
@@ -424,7 +430,7 @@ class Database
     }
 
     /**
-     * Free sql result
+     * Free sql result.
      */
     public function sql_freeresult($result = false): void
     {
@@ -435,7 +441,7 @@ class Database
     }
 
     /**
-     * Get Database Explorer table access with debug logging
+     * Get Database Explorer table access with debug logging.
      */
     public function table(string $table): DebugSelection
     {
@@ -450,7 +456,7 @@ class Database
     }
 
     /**
-     * Get existing cache storage from TorrentPier's unified cache system
+     * Get existing cache storage from TorrentPier's unified cache system.
      *
      * @return \Nette\Caching\Storage
      */
@@ -460,6 +466,7 @@ class Database
         if (function_exists('CACHE')) {
             try {
                 $cacheManager = CACHE('database_structure');
+
                 return $cacheManager->getStorage();
             } catch (\Exception $e) {
                 // Fall back to DevNullStorage if cache system is not available yet
@@ -471,23 +478,23 @@ class Database
     }
 
     /**
-     * Escape data used in sql query (using Nette Database)
+     * Escape data used in sql query (using Nette Database).
      */
     public function escape($v, bool $check_type = false, bool $dont_escape = false): string
     {
         if ($dont_escape) {
-            return (string)$v;
+            return (string) $v;
         }
 
         if (!$check_type) {
-            return $this->escape_string((string)$v);
+            return $this->escape_string((string) $v);
         }
 
         switch (true) {
             case is_string($v):
-                return "'" . $this->escape_string($v) . "'";
+                return "'".$this->escape_string($v)."'";
             case is_int($v):
-                return (string)$v;
+                return (string) $v;
             case is_bool($v):
                 return $v ? '1' : '0';
             case is_float($v):
@@ -495,13 +502,14 @@ class Database
             case $v === null:
                 return 'NULL';
             default:
-                $this->trigger_error(__FUNCTION__ . ' - wrong params');
+                $this->trigger_error(__FUNCTION__.' - wrong params');
+
                 return '';
         }
     }
 
     /**
-     * Escape string using Nette Database
+     * Escape string using Nette Database.
      */
     public function escape_string(string $str): string
     {
@@ -511,11 +519,12 @@ class Database
 
         // Remove quotes from quoted string
         $quoted = $this->connection->quote($str);
+
         return substr($quoted, 1, -1);
     }
 
     /**
-     * Build SQL statement from array (maintaining compatibility)
+     * Build SQL statement from array (maintaining compatibility).
      */
     public function build_array(string $query_type, array $input_ary, bool $data_already_escaped = false, bool $check_data_type_in_escape = true): string
     {
@@ -524,7 +533,7 @@ class Database
         $check_type = $check_data_type_in_escape;
 
         if (empty($input_ary)) {
-            $this->trigger_error(__FUNCTION__ . ' - wrong params: $input_ary is empty');
+            $this->trigger_error(__FUNCTION__.' - wrong params: $input_ary is empty');
         }
 
         if ($query_type == 'INSERT') {
@@ -548,7 +557,7 @@ class Database
                 foreach ($sql_ary as $field => $val) {
                     $values[] = $this->escape($val, $check_type, $dont_escape);
                 }
-                $ary[] = '(' . implode(', ', $values) . ')';
+                $ary[] = '('.implode(', ', $values).')';
                 $values = [];
             }
             $fields = implode(', ', array_keys($input_ary[0]));
@@ -556,7 +565,7 @@ class Database
             $query = "($fields)\nVALUES\n$values";
         } elseif ($query_type == 'SELECT' || $query_type == 'UPDATE') {
             foreach ($input_ary as $field => $val) {
-                $ary[] = "$field = " . $this->escape($val, $check_type, $dont_escape);
+                $ary[] = "$field = ".$this->escape($val, $check_type, $dont_escape);
             }
             $glue = ($query_type == 'SELECT') ? "\nAND " : ",\n";
             $query = implode($glue, $ary);
@@ -564,36 +573,36 @@ class Database
 
         if (!isset($query)) {
             if (function_exists('bb_die')) {
-                bb_die('<pre><b>' . __FUNCTION__ . "</b>: Wrong params for <b>$query_type</b> query type\n\n\$input_ary:\n\n" . htmlspecialchars(print_r($input_ary, true)) . '</pre>');
+                bb_die('<pre><b>'.__FUNCTION__."</b>: Wrong params for <b>$query_type</b> query type\n\n\$input_ary:\n\n".htmlspecialchars(print_r($input_ary, true)).'</pre>');
             } else {
                 throw new \InvalidArgumentException("Wrong params for $query_type query type");
             }
         }
 
-        return "\n" . $query . "\n";
+        return "\n".$query."\n";
     }
 
     /**
-     * Get empty SQL array structure
+     * Get empty SQL array structure.
      */
     public function get_empty_sql_array(): array
     {
         return [
-            'SELECT' => [],
+            'SELECT'         => [],
             'select_options' => [],
-            'FROM' => [],
-            'INNER JOIN' => [],
-            'LEFT JOIN' => [],
-            'WHERE' => [],
-            'GROUP BY' => [],
-            'HAVING' => [],
-            'ORDER BY' => [],
-            'LIMIT' => [],
+            'FROM'           => [],
+            'INNER JOIN'     => [],
+            'LEFT JOIN'      => [],
+            'WHERE'          => [],
+            'GROUP BY'       => [],
+            'HAVING'         => [],
+            'ORDER BY'       => [],
+            'LIMIT'          => [],
         ];
     }
 
     /**
-     * Build SQL from array structure
+     * Build SQL from array structure.
      */
     public function build_sql(array $sql_ary): string
     {
@@ -609,31 +618,31 @@ class Database
         foreach ($sql_ary as $clause => $ary) {
             switch ($clause) {
                 case 'SELECT':
-                    $sql .= ($ary) ? ' SELECT ' . implode(' ', $sql_ary['select_options'] ?? []) . ' ' . implode(', ', $ary) : '';
+                    $sql .= ($ary) ? ' SELECT '.implode(' ', $sql_ary['select_options'] ?? []).' '.implode(', ', $ary) : '';
                     break;
                 case 'FROM':
-                    $sql .= ($ary) ? ' FROM ' . implode(', ', $ary) : '';
+                    $sql .= ($ary) ? ' FROM '.implode(', ', $ary) : '';
                     break;
                 case 'INNER JOIN':
-                    $sql .= ($ary) ? ' INNER JOIN ' . implode(' INNER JOIN ', $ary) : '';
+                    $sql .= ($ary) ? ' INNER JOIN '.implode(' INNER JOIN ', $ary) : '';
                     break;
                 case 'LEFT JOIN':
-                    $sql .= ($ary) ? ' LEFT JOIN ' . implode(' LEFT JOIN ', $ary) : '';
+                    $sql .= ($ary) ? ' LEFT JOIN '.implode(' LEFT JOIN ', $ary) : '';
                     break;
                 case 'WHERE':
-                    $sql .= ($ary) ? ' WHERE ' . implode(' AND ', $ary) : '';
+                    $sql .= ($ary) ? ' WHERE '.implode(' AND ', $ary) : '';
                     break;
                 case 'GROUP BY':
-                    $sql .= ($ary) ? ' GROUP BY ' . implode(', ', $ary) : '';
+                    $sql .= ($ary) ? ' GROUP BY '.implode(', ', $ary) : '';
                     break;
                 case 'HAVING':
-                    $sql .= ($ary) ? ' HAVING ' . implode(' AND ', $ary) : '';
+                    $sql .= ($ary) ? ' HAVING '.implode(' AND ', $ary) : '';
                     break;
                 case 'ORDER BY':
-                    $sql .= ($ary) ? ' ORDER BY ' . implode(', ', $ary) : '';
+                    $sql .= ($ary) ? ' ORDER BY '.implode(', ', $ary) : '';
                     break;
                 case 'LIMIT':
-                    $sql .= ($ary) ? ' LIMIT ' . implode(', ', $ary) : '';
+                    $sql .= ($ary) ? ' LIMIT '.implode(', ', $ary) : '';
                     break;
             }
         }
@@ -642,7 +651,7 @@ class Database
     }
 
     /**
-     * Return sql error array
+     * Return sql error array.
      */
     public function sql_error(): array
     {
@@ -663,14 +672,14 @@ class Database
                 if (isset($errorInfo[2]) && $errorInfo[2]) {
                     $message = $errorInfo[2]; // Driver-specific error message is most informative
                 } elseif (isset($errorInfo[1]) && $errorInfo[1]) {
-                    $message = "Error code: " . $errorInfo[1];
+                    $message = 'Error code: '.$errorInfo[1];
                 } else {
-                    $message = "SQLSTATE: " . $errorCode;
+                    $message = 'SQLSTATE: '.$errorCode;
                 }
 
                 return [
-                    'code' => $errorCode,
-                    'message' => $message
+                    'code'    => $errorCode,
+                    'message' => $message,
                 ];
             } catch (\Exception $e) {
                 return ['code' => $e->getCode(), 'message' => $e->getMessage()];
@@ -681,7 +690,7 @@ class Database
     }
 
     /**
-     * Close sql connection
+     * Close sql connection.
      */
     public function close(): void
     {
@@ -704,7 +713,7 @@ class Database
     }
 
     /**
-     * Add shutdown query
+     * Add shutdown query.
      */
     public function add_shutdown_query(string $sql): void
     {
@@ -712,7 +721,7 @@ class Database
     }
 
     /**
-     * Exec shutdown queries
+     * Exec shutdown queries.
      */
     public function exec_shutdown_queries(): void
     {
@@ -722,7 +731,7 @@ class Database
 
         if (!empty($this->shutdown['post_html'])) {
             $post_html_sql = $this->build_array('MULTI_INSERT', $this->shutdown['post_html']);
-            $this->query("REPLACE INTO " . (defined('BB_POSTS_HTML') ? BB_POSTS_HTML : 'bb_posts_html') . " $post_html_sql");
+            $this->query('REPLACE INTO '.(defined('BB_POSTS_HTML') ? BB_POSTS_HTML : 'bb_posts_html')." $post_html_sql");
         }
 
         if (!empty($this->shutdown['__sql'])) {
@@ -733,29 +742,29 @@ class Database
     }
 
     /**
-     * Lock tables
+     * Lock tables.
      */
     public function lock($tables, string $lock_type = 'WRITE'): ?ResultSet
     {
         $tables_sql = [];
 
-        foreach ((array)$tables as $table_name) {
+        foreach ((array) $tables as $table_name) {
             $tables_sql[] = "$table_name $lock_type";
         }
 
         if ($tables_sql = implode(', ', $tables_sql)) {
-            $this->locked = (bool)$this->sql_query("LOCK TABLES $tables_sql");
+            $this->locked = (bool) $this->sql_query("LOCK TABLES $tables_sql");
         }
 
         return $this->locked ? $this->result : null;
     }
 
     /**
-     * Unlock tables
+     * Unlock tables.
      */
     public function unlock(): bool
     {
-        if ($this->locked && $this->sql_query("UNLOCK TABLES")) {
+        if ($this->locked && $this->sql_query('UNLOCK TABLES')) {
             $this->locked = false;
         }
 
@@ -763,12 +772,12 @@ class Database
     }
 
     /**
-     * Obtain user level lock
+     * Obtain user level lock.
      */
     public function get_lock(string $name, int $timeout = 0): mixed
     {
         $lock_name = $this->get_lock_name($name);
-        $timeout = (int)$timeout;
+        $timeout = (int) $timeout;
         $row = $this->fetch_row("SELECT GET_LOCK('$lock_name', $timeout) AS lock_result");
 
         if ($row && $row['lock_result']) {
@@ -779,7 +788,7 @@ class Database
     }
 
     /**
-     * Release user level lock
+     * Release user level lock.
      */
     public function release_lock(string $name): mixed
     {
@@ -794,17 +803,18 @@ class Database
     }
 
     /**
-     * Check if lock is free
+     * Check if lock is free.
      */
     public function is_free_lock(string $name): mixed
     {
         $lock_name = $this->get_lock_name($name);
         $row = $this->fetch_row("SELECT IS_FREE_LOCK('$lock_name') AS lock_result");
+
         return $row ? $row['lock_result'] : null;
     }
 
     /**
-     * Make per db unique lock name
+     * Make per db unique lock name.
      */
     public function get_lock_name(string $name): string
     {
@@ -816,7 +826,7 @@ class Database
     }
 
     /**
-     * Get info about last query
+     * Get info about last query.
      */
     public function query_info(): string
     {
@@ -835,7 +845,7 @@ class Database
     }
 
     /**
-     * Get server version
+     * Get server version.
      */
     public function server_version(): string
     {
@@ -847,11 +857,12 @@ class Database
         if (preg_match('#^(\d+\.\d+\.\d+).*#', $version, $m)) {
             return $m[1];
         }
+
         return $version;
     }
 
     /**
-     * Set slow query marker (delegated to debugger)
+     * Set slow query marker (delegated to debugger).
      */
     public function expect_slow_query(int $ignoring_time = 60, int $new_priority = 10): void
     {
@@ -859,7 +870,7 @@ class Database
     }
 
     /**
-     * Store debug info (delegated to debugger)
+     * Store debug info (delegated to debugger).
      */
     public function debug(string $mode): void
     {
@@ -867,7 +878,7 @@ class Database
     }
 
     /**
-     * Trigger database error
+     * Trigger database error.
      */
     public function trigger_error(string $msg = 'Database Error'): void
     {
@@ -879,9 +890,9 @@ class Database
 
         // Build a meaningful error message
         if (!empty($error['message'])) {
-            $error_msg = "$msg: " . $error['message'];
+            $error_msg = "$msg: ".$error['message'];
             if (!empty($error['code'])) {
-                $error_msg = "$msg ({$error['code']}): " . $error['message'];
+                $error_msg = "$msg ({$error['code']}): ".$error['message'];
             }
         } else {
             // Base error message for all users
@@ -894,53 +905,54 @@ class Database
 
                 // Connection status
                 if ($this->connection) {
-                    $debug_info[] = "Connection: Active";
+                    $debug_info[] = 'Connection: Active';
+
                     try {
                         $pdo = $this->connection->getPdo();
                         if ($pdo) {
-                            $debug_info[] = "PDO: Available";
+                            $debug_info[] = 'PDO: Available';
                             $errorInfo = $pdo->errorInfo();
                             if ($errorInfo && count($errorInfo) >= 3) {
-                                $debug_info[] = "PDO ErrorInfo: " . json_encode($errorInfo);
+                                $debug_info[] = 'PDO ErrorInfo: '.json_encode($errorInfo);
                             }
-                            $debug_info[] = "PDO ErrorCode: " . $pdo->errorCode();
+                            $debug_info[] = 'PDO ErrorCode: '.$pdo->errorCode();
                         } else {
-                            $debug_info[] = "PDO: Null";
+                            $debug_info[] = 'PDO: Null';
                         }
                     } catch (\Exception $e) {
-                        $debug_info[] = "PDO Check Failed: " . $e->getMessage();
+                        $debug_info[] = 'PDO Check Failed: '.$e->getMessage();
                     }
                 } else {
-                    $debug_info[] = "Connection: None";
+                    $debug_info[] = 'Connection: None';
                 }
 
                 // Query information
                 if ($this->cur_query) {
-                    $debug_info[] = "Last Query: " . substr($this->cur_query, 0, 200) . (strlen($this->cur_query) > 200 ? '...' : '');
+                    $debug_info[] = 'Last Query: '.substr($this->cur_query, 0, 200).(strlen($this->cur_query) > 200 ? '...' : '');
                 } else {
-                    $debug_info[] = "Last Query: None";
+                    $debug_info[] = 'Last Query: None';
                 }
 
                 // Database information
-                $debug_info[] = "Database: " . ($this->selected_db ?: 'None');
-                $debug_info[] = "Server: " . $this->db_server;
+                $debug_info[] = 'Database: '.($this->selected_db ?: 'None');
+                $debug_info[] = 'Server: '.$this->db_server;
 
                 // Recent queries from debug log (if available)
                 if (isset($this->debugger->dbg) && !empty($this->debugger->dbg)) {
                     $recent_queries = array_slice($this->debugger->dbg, -3); // Last 3 queries
-                    $debug_info[] = "Recent Queries Count: " . count($recent_queries);
+                    $debug_info[] = 'Recent Queries Count: '.count($recent_queries);
                     foreach ($recent_queries as $i => $query_info) {
-                        $debug_info[] = "Query " . ($i + 1) . ": " . substr($query_info['sql'] ?? 'Unknown', 0, 100) . (strlen($query_info['sql'] ?? '') > 100 ? '...' : '');
+                        $debug_info[] = 'Query '.($i + 1).': '.substr($query_info['sql'] ?? 'Unknown', 0, 100).(strlen($query_info['sql'] ?? '') > 100 ? '...' : '');
                     }
                 }
 
                 if ($debug_info) {
-                    $error_msg .= " [DEBUG: " . implode("; ", $debug_info) . "]";
+                    $error_msg .= ' [DEBUG: '.implode('; ', $debug_info).']';
                 }
 
                 // Log this for investigation
                 if (function_exists('bb_log')) {
-                    bb_log("Unknown Database Error Debug:\n" . implode("\n", $debug_info), 'unknown_db_errors');
+                    bb_log("Unknown Database Error Debug:\n".implode("\n", $debug_info), 'unknown_db_errors');
                 }
             } else {
                 // For regular users: generic message only + contact admin hint
@@ -948,14 +960,14 @@ class Database
 
                 // Still log basic information for debugging
                 if (function_exists('bb_log')) {
-                    bb_log("Database Error (User-facing): $error_msg\nRequest: " . ($_SERVER['REQUEST_URI'] ?? 'CLI'), 'user_db_errors');
+                    bb_log("Database Error (User-facing): $error_msg\nRequest: ".($_SERVER['REQUEST_URI'] ?? 'CLI'), 'user_db_errors');
                 }
             }
         }
 
         // Add query context for debugging (but only for admins/developers)
         if ($this->cur_query && ($is_admin || $is_dev_mode)) {
-            $error_msg .= "\nQuery: " . $this->cur_query;
+            $error_msg .= "\nQuery: ".$this->cur_query;
         }
 
         if (function_exists('bb_die')) {
@@ -966,7 +978,7 @@ class Database
     }
 
     /**
-     * Find source of database call (delegated to debugger)
+     * Find source of database call (delegated to debugger).
      */
     public function debug_find_source(string $mode = 'all'): string
     {
@@ -974,7 +986,7 @@ class Database
     }
 
     /**
-     * Prepare for logging (delegated to debugger)
+     * Prepare for logging (delegated to debugger).
      */
     public function log_next_query(int $queries_count = 1, string $log_file = 'sql_queries'): void
     {
@@ -982,7 +994,7 @@ class Database
     }
 
     /**
-     * Log query (delegated to debugger)
+     * Log query (delegated to debugger).
      */
     public function log_query(string $log_file = 'sql_queries'): void
     {
@@ -990,7 +1002,7 @@ class Database
     }
 
     /**
-     * Log slow query (delegated to debugger)
+     * Log slow query (delegated to debugger).
      */
     public function log_slow_query(string $log_file = 'sql_slow_bb'): void
     {
@@ -998,7 +1010,7 @@ class Database
     }
 
     /**
-     * Log error (delegated to debugger)
+     * Log error (delegated to debugger).
      */
     public function log_error(?\Exception $exception = null): void
     {
@@ -1006,7 +1018,7 @@ class Database
     }
 
     /**
-     * Explain queries (delegated to debugger)
+     * Explain queries (delegated to debugger).
      */
     public function explain($mode, $html_table = '', array $row = []): mixed
     {
@@ -1014,7 +1026,7 @@ class Database
     }
 
     /**
-     * Magic method to provide backward compatibility for debug properties
+     * Magic method to provide backward compatibility for debug properties.
      */
     public function __get(string $name): mixed
     {
@@ -1042,7 +1054,7 @@ class Database
     }
 
     /**
-     * Magic method to check if debug properties exist
+     * Magic method to check if debug properties exist.
      */
     public function __isset(string $name): bool
     {
@@ -1062,7 +1074,7 @@ class Database
     }
 
     /**
-     * Destroy singleton instances (for testing)
+     * Destroy singleton instances (for testing).
      */
     public static function destroyInstances(): void
     {

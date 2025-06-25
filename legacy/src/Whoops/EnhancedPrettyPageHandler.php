@@ -1,9 +1,12 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
@@ -12,7 +15,7 @@ namespace TorrentPier\Whoops;
 use Whoops\Handler\PrettyPageHandler;
 
 /**
- * Enhanced PrettyPageHandler for TorrentPier
+ * Enhanced PrettyPageHandler for TorrentPier.
  *
  * Extends Whoops' default handler to include database query information
  * and other TorrentPier-specific debugging details in the error output.
@@ -28,7 +31,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
     }
 
     /**
-     * Get comprehensive database information
+     * Get comprehensive database information.
      */
     private function getDatabaseInformation(): array
     {
@@ -58,7 +61,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                 $sqlError = $db->sql_error();
                 if (!empty($sqlError['message'])) {
                     $info['Last Database Error'] = [
-                        'Code' => $sqlError['code'] ?? 'Unknown',
+                        'Code'    => $sqlError['code'] ?? 'Unknown',
                         'Message' => $sqlError['message'],
                     ];
                 }
@@ -77,7 +80,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                                 $errorInfo = $pdo->errorInfo();
                                 $info['PDO Error State'] = [
                                     'Code' => $errorCode,
-                                    'Info' => $errorInfo[2] ?? 'Unknown'
+                                    'Info' => $errorInfo[2] ?? 'Unknown',
                                 ];
                             }
                         }
@@ -97,9 +100,9 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                             try {
                                 $db = \TorrentPier\Database\DatabaseFactory::getInstance($serverName);
                                 $info["Server: $serverName"] = [
-                                    'Host' => $db->db_server ?? 'Unknown',
-                                    'Database' => $db->selected_db ?? 'Unknown',
-                                    'Queries' => $db->num_queries ?? 0,
+                                    'Host'      => $db->db_server ?? 'Unknown',
+                                    'Database'  => $db->selected_db ?? 'Unknown',
+                                    'Queries'   => $db->num_queries ?? 0,
                                     'Connected' => $db->connection ? 'Yes' : 'No',
                                 ];
                             } catch (\Exception $e) {
@@ -111,7 +114,6 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                     $info['Multi-Server Error'] = $e->getMessage();
                 }
             }
-
         } catch (\Exception $e) {
             $info['Collection Error'] = $e->getMessage();
         }
@@ -120,7 +122,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
     }
 
     /**
-     * Get recent SQL queries from debug log
+     * Get recent SQL queries from debug log.
      */
     private function getRecentSqlQueries(): array
     {
@@ -138,10 +140,10 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                     foreach ($recentQueries as $index => $queryInfo) {
                         $queryNum = $index + 1;
                         $queries["Query #$queryNum"] = [
-                            'SQL' => $this->formatSqlQuery($queryInfo['sql'] ?? 'Unknown'),
-                            'Time' => isset($queryInfo['time']) ? sprintf('%.3f sec', $queryInfo['time']) : 'Unknown',
+                            'SQL'    => $this->formatSqlQuery($queryInfo['sql'] ?? 'Unknown'),
+                            'Time'   => isset($queryInfo['time']) ? sprintf('%.3f sec', $queryInfo['time']) : 'Unknown',
                             'Source' => $queryInfo['src'] ?? 'Unknown',
-                            'Info' => $queryInfo['info'] ?? '',
+                            'Info'   => $queryInfo['info'] ?? '',
                         ];
 
                         // Add memory info if available
@@ -164,7 +166,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
     }
 
     /**
-     * Get TorrentPier environment information
+     * Get TorrentPier environment information.
      */
     private function getTorrentPierEnvironment(): array
     {
@@ -215,7 +217,6 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
             $env['Request URI'] = $_SERVER['REQUEST_URI'] ?? 'CLI';
             $env['User Agent'] = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
             $env['Remote IP'] = $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
-
         } catch (\Exception $e) {
             $env['Error'] = $e->getMessage();
         }
@@ -224,7 +225,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
     }
 
     /**
-     * Format SQL query for display
+     * Format SQL query for display.
      */
     private function formatSqlQuery(string $query): string
     {
@@ -234,14 +235,14 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
 
         // Truncate very long queries but keep them readable
         if (strlen($query) > 1000) {
-            return substr($query, 0, 1000) . "\n... [Query truncated - " . (strlen($query) - 1000) . " more characters]";
+            return substr($query, 0, 1000)."\n... [Query truncated - ".(strlen($query) - 1000).' more characters]';
         }
 
         return $query;
     }
 
     /**
-     * Override parent method to add database info and custom styling
+     * Override parent method to add database info and custom styling.
      */
     public function handle()
     {

@@ -1,14 +1,16 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 global $lang, $userdata;
@@ -17,9 +19,9 @@ if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
 }
 if (isset($this->request['post_id'])) {
-    $post_id = (int)$this->request['post_id'];
-    $post = DB()->fetch_row("SELECT t.*, f.*, p.*, pt.post_text
-		FROM " . BB_TOPICS . " t, " . BB_FORUMS . " f, " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt
+    $post_id = (int) $this->request['post_id'];
+    $post = DB()->fetch_row('SELECT t.*, f.*, p.*, pt.post_text
+		FROM '.BB_TOPICS.' t, '.BB_FORUMS.' f, '.BB_POSTS.' p, '.BB_POSTS_TEXT." pt
 		WHERE p.post_id = $post_id
 			AND t.topic_id = p.topic_id
 			AND f.forum_id = t.forum_id
@@ -34,9 +36,9 @@ if (isset($this->request['post_id'])) {
         $this->ajax_die($lang['TOPIC_LOCKED']);
     }
 } elseif (isset($this->request['topic_id'])) {
-    $topic_id = (int)$this->request['topic_id'];
-    $post = DB()->fetch_row("SELECT t.*, f.*
-			FROM " . BB_TOPICS . " t, " . BB_FORUMS . " f
+    $topic_id = (int) $this->request['topic_id'];
+    $post = DB()->fetch_row('SELECT t.*, f.*
+			FROM '.BB_TOPICS.' t, '.BB_FORUMS." f
 			WHERE t.topic_id = $topic_id
 				AND f.forum_id = t.forum_id
 			LIMIT 1");
@@ -56,7 +58,7 @@ switch ($this->request['type']) {
             \TorrentPier\Legacy\Admin\Common::post_delete($post_id);
 
             // Update atom feed
-            update_atom('topic', (int)$this->request['topic_id']);
+            update_atom('topic', (int) $this->request['topic_id']);
 
             $this->response['hide'] = true;
             $this->response['post_id'] = $post_id;
@@ -73,20 +75,20 @@ switch ($this->request['type']) {
         }
 
         $quote_username = ($post['post_username'] != '') ? $post['post_username'] : get_username($post['poster_id']);
-        $message = "[quote=\"" . $quote_username . "\"][qpost=" . $post['post_id'] . "]" . $post['post_text'] . "[/quote]\r";
+        $message = '[quote="'.$quote_username.'"][qpost='.$post['post_id'].']'.$post['post_text']."[/quote]\r";
 
         // hide user passkey
-        $message = preg_replace('#(?<=[\?&;]' . config()->get('passkey_key') . '=)[a-zA-Z0-9]#', 'passkey', $message);
+        $message = preg_replace('#(?<=[\?&;]'.config()->get('passkey_key').'=)[a-zA-Z0-9]#', 'passkey', $message);
         // hide sid
         $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
 
         $message = censor()->censorString($message);
 
         if ($post['post_id'] == $post['topic_first_post_id']) {
-            $message = "[quote]" . $post['topic_title'] . "[/quote]\r";
+            $message = '[quote]'.$post['topic_title']."[/quote]\r";
         }
         if (mb_strlen($message, DEFAULT_CHARSET) > 1000) {
-            $this->response['redirect'] = make_url(POSTING_URL . '?mode=quote&' . POST_POST_URL . '=' . $post_id);
+            $this->response['redirect'] = make_url(POSTING_URL.'?mode=quote&'.POST_POST_URL.'='.$post_id);
         }
 
         $this->response['quote'] = true;
@@ -94,7 +96,7 @@ switch ($this->request['type']) {
         break;
 
     case 'view_message':
-        $message = (string)$this->request['message'];
+        $message = (string) $this->request['message'];
         if (!trim($message)) {
             $this->ajax_die($lang['EMPTY_MESSAGE']);
         }
@@ -113,29 +115,29 @@ switch ($this->request['type']) {
             $this->ajax_die($lang['EDIT_OWN_POSTS']);
         }
         if ((mb_strlen($post['post_text'], DEFAULT_CHARSET) > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id)) {
-            $this->response['redirect'] = make_url(POSTING_URL . '?mode=editpost&' . POST_POST_URL . '=' . $post_id);
+            $this->response['redirect'] = make_url(POSTING_URL.'?mode=editpost&'.POST_POST_URL.'='.$post_id);
         } elseif ($this->request['type'] == 'editor') {
-            $text = (string)$this->request['text'];
+            $text = (string) $this->request['text'];
             $text = prepare_message($text);
 
             if (mb_strlen($text) > 2) {
                 if ($text != $post['post_text']) {
                     if (config()->get('max_smilies')) {
-                        $count_smilies = substr_count(bbcode2html($text), '<img class="smile" src="' . config()->get('smilies_path'));
+                        $count_smilies = substr_count(bbcode2html($text), '<img class="smile" src="'.config()->get('smilies_path'));
                         if ($count_smilies > config()->get('max_smilies')) {
                             $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], config()->get('max_smilies')));
                         }
                     }
-                    DB()->query("UPDATE " . BB_POSTS_TEXT . " SET post_text = '" . DB()->escape($text) . "' WHERE post_id = $post_id LIMIT 1");
+                    DB()->query('UPDATE '.BB_POSTS_TEXT." SET post_text = '".DB()->escape($text)."' WHERE post_id = $post_id LIMIT 1");
                     if ($post['topic_last_post_id'] != $post['post_id'] && $userdata['user_id'] == $post['poster_id']) {
-                        DB()->query("UPDATE " . BB_POSTS . " SET post_edit_time = '" . TIMENOW . "', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id LIMIT 1");
+                        DB()->query('UPDATE '.BB_POSTS." SET post_edit_time = '".TIMENOW."', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id LIMIT 1");
                     }
                     $s_text = str_replace('\n', "\n", $text);
                     $s_topic_title = str_replace('\n', "\n", $post['topic_title']);
                     add_search_words($post_id, stripslashes($s_text), stripslashes($s_topic_title));
                     update_post_html([
-                        'post_id' => $post_id,
-                        'post_text' => $text
+                        'post_id'   => $post_id,
+                        'post_text' => $text,
                     ]);
                 }
             } else {
@@ -143,7 +145,7 @@ switch ($this->request['type']) {
             }
 
             // Update atom feed
-            update_atom('topic', (int)$this->request['topic_id']);
+            update_atom('topic', (int) $this->request['topic_id']);
 
             $this->response['html'] = bbcode2html($text);
         } else {
@@ -155,33 +157,33 @@ switch ($this->request['type']) {
             }
 
             $hidden_form = '<input type="hidden" name="mode" value="editpost" />';
-            $hidden_form .= '<input type="hidden" name="' . POST_POST_URL . '" value="' . $post_id . '" />';
-            $hidden_form .= '<input type="hidden" name="subject" value="' . $post['topic_title'] . '" />';
+            $hidden_form .= '<input type="hidden" name="'.POST_POST_URL.'" value="'.$post_id.'" />';
+            $hidden_form .= '<input type="hidden" name="subject" value="'.$post['topic_title'].'" />';
 
             $this->response['text'] = '
-				<form action="' . POSTING_URL . '" method="post" name="post">
-					' . $hidden_form . '
+				<form action="'.POSTING_URL.'" method="post" name="post">
+					'.$hidden_form.'
 					<div class="buttons mrg_4">
-						<input type="button" value="B" name="codeB" title="' . $lang['BOLD'] . '" style="font-weight: bold;" />
-						<input type="button" value="i" name="codeI" title="' . $lang['ITALIC'] . '" style="font-style: italic;" />
-						<input type="button" value="u" name="codeU" title="' . $lang['UNDERLINE'] . '" style="text-decoration: underline;" />
-						<input type="button" value="s" name="codeS" title="' . $lang['STRIKEOUT'] . '" style="text-decoration: line-through;" />&nbsp;&nbsp;
-						<input type="button" value="' . $lang['QUOTE'] . '" name="codeQuote" title="' . $lang['QUOTE_TITLE'] . '" />
-						<input type="button" value="Img" name="codeImg" title="' . $lang['IMG_TITLE'] . '" />
-						<input type="button" value="' . $lang['URL'] . '" name="codeUrl" title="' . $lang['URL_TITLE'] . '" style="text-decoration: underline;" />&nbsp;
-						<input type="button" value="' . $lang['CODE'] . '" name="codeCode" title="' . $lang['CODE_TITLE'] . '" />
-						<input type="button" value="' . $lang['LIST'] . '" name="codeList" title="' . $lang['LIST_TITLE'] . '" />
-						<input type="button" value="1." name="codeOpt" title="' . $lang['LIST_ITEM'] . '" />&nbsp;
-						<input type="button" value="' . $lang['QUOTE_SEL'] . '" name="quoteselected" title="' . $lang['QUOTE_SELECTED'] . '" onclick="bbcode.onclickQuoteSel();" />&nbsp;
+						<input type="button" value="B" name="codeB" title="'.$lang['BOLD'].'" style="font-weight: bold;" />
+						<input type="button" value="i" name="codeI" title="'.$lang['ITALIC'].'" style="font-style: italic;" />
+						<input type="button" value="u" name="codeU" title="'.$lang['UNDERLINE'].'" style="text-decoration: underline;" />
+						<input type="button" value="s" name="codeS" title="'.$lang['STRIKEOUT'].'" style="text-decoration: line-through;" />&nbsp;&nbsp;
+						<input type="button" value="'.$lang['QUOTE'].'" name="codeQuote" title="'.$lang['QUOTE_TITLE'].'" />
+						<input type="button" value="Img" name="codeImg" title="'.$lang['IMG_TITLE'].'" />
+						<input type="button" value="'.$lang['URL'].'" name="codeUrl" title="'.$lang['URL_TITLE'].'" style="text-decoration: underline;" />&nbsp;
+						<input type="button" value="'.$lang['CODE'].'" name="codeCode" title="'.$lang['CODE_TITLE'].'" />
+						<input type="button" value="'.$lang['LIST'].'" name="codeList" title="'.$lang['LIST_TITLE'].'" />
+						<input type="button" value="1." name="codeOpt" title="'.$lang['LIST_ITEM'].'" />&nbsp;
+						<input type="button" value="'.$lang['QUOTE_SEL'].'" name="quoteselected" title="'.$lang['QUOTE_SELECTED'].'" onclick="bbcode.onclickQuoteSel();" />&nbsp;
 					</div>
-					<textarea id="message-' . $post_id . '" class="editor mrg_4" name="message" rows="18" cols="92">' . $post['post_text'] . '</textarea>
+					<textarea id="message-'.$post_id.'" class="editor mrg_4" name="message" rows="18" cols="92">'.$post['post_text'].'</textarea>
 					<div class="mrg_4 tCenter">
-						<input title="Alt+Enter" name="preview" type="submit" value="' . $lang['PREVIEW'] . '">
-						<input type="button" onclick="edit_post(' . $post_id . ');" value="' . $lang['CANCEL'] . '">
-						<input type="button" onclick="edit_post(' . $post_id . ', \'editor\', $(\'#message-' . $post_id . '\').val()); return false;" class="bold" value="' . $lang['SUBMIT'] . '">
+						<input title="Alt+Enter" name="preview" type="submit" value="'.$lang['PREVIEW'].'">
+						<input type="button" onclick="edit_post('.$post_id.');" value="'.$lang['CANCEL'].'">
+						<input type="button" onclick="edit_post('.$post_id.', \'editor\', $(\'#message-'.$post_id.'\').val()); return false;" class="bold" value="'.$lang['SUBMIT'].'">
 					</div><hr/>
 					<script type="text/javascript">
-					var bbcode = new BBCode("message-' . $post_id . '");
+					var bbcode = new BBCode("message-'.$post_id.'");
 					var ctrl = "ctrl";
 
 					bbcode.addTag("codeB", "b", null, "B", ctrl);
@@ -216,13 +218,13 @@ switch ($this->request['type']) {
             $this->ajax_die($lang['TOPIC_LOCKED']);
         }
 
-        $message = (string)$this->request['message'];
+        $message = (string) $this->request['message'];
         $message = prepare_message($message);
 
         // Flood control
-        $where_sql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
+        $where_sql = IS_GUEST ? "p.poster_ip = '".USER_IP."'" : "p.poster_id = {$userdata['user_id']}";
 
-        $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
+        $sql = 'SELECT MAX(p.post_time) AS last_post_time FROM '.BB_POSTS." p WHERE $where_sql";
         if ($row = DB()->fetch_row($sql) and $row['last_post_time']) {
             if ($userdata['user_level'] == USER) {
                 if ((TIMENOW - $row['last_post_time']) < config()->get('flood_interval')) {
@@ -233,14 +235,14 @@ switch ($this->request['type']) {
 
         // Double Post Control
         if (!empty($row['last_post_time']) && !IS_AM) {
-            $sql = "
+            $sql = '
 				SELECT pt.post_text
-				FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt
+				FROM '.BB_POSTS.' p, '.BB_POSTS_TEXT." pt
 				WHERE $where_sql
-					AND p.post_time = " . (int)$row['last_post_time'] . "
+					AND p.post_time = ".(int) $row['last_post_time'].'
 					AND pt.post_id = p.post_id
 				LIMIT 1
-			";
+			';
 
             if ($row = DB()->fetch_row($sql)) {
                 $last_msg = DB()->escape($row['post_text']);
@@ -252,15 +254,15 @@ switch ($this->request['type']) {
         }
 
         if (config()->get('max_smilies')) {
-            $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . config()->get('smilies_path'));
+            $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="'.config()->get('smilies_path'));
             if ($count_smilies > config()->get('max_smilies')) {
                 $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], config()->get('max_smilies')));
             }
         }
 
-        DB()->sql_query("INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ($topic_id, " . $post['forum_id'] . ", " . $userdata['user_id'] . ", '" . TIMENOW . "', '" . USER_IP . "')");
+        DB()->sql_query('INSERT INTO '.BB_POSTS." (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ($topic_id, ".$post['forum_id'].', '.$userdata['user_id'].", '".TIMENOW."', '".USER_IP."')");
         $post_id = DB()->sql_nextid();
-        DB()->sql_query("INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '" . DB()->escape($message) . "')");
+        DB()->sql_query('INSERT INTO '.BB_POSTS_TEXT." (post_id, post_text) VALUES ($post_id, '".DB()->escape($message)."')");
 
         \TorrentPier\Legacy\Post::update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, $userdata['user_id']);
 
@@ -268,8 +270,8 @@ switch ($this->request['type']) {
         $s_topic_title = str_replace('\n', "\n", $post['topic_title']);
         add_search_words($post_id, stripslashes($s_message), stripslashes($s_topic_title));
         update_post_html([
-            'post_id' => $post_id,
-            'post_text' => $message
+            'post_id'   => $post_id,
+            'post_text' => $message,
         ]);
 
         if (config()->get('topic_notify_enabled')) {
@@ -278,9 +280,9 @@ switch ($this->request['type']) {
         }
 
         // Update atom feed
-        update_atom('topic', (int)$this->request['topic_id']);
+        update_atom('topic', (int) $this->request['topic_id']);
 
-        $this->response['redirect'] = make_url(POST_URL . "$post_id#$post_id");
+        $this->response['redirect'] = make_url(POST_URL."$post_id#$post_id");
         break;
 
     default:

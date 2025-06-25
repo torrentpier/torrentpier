@@ -1,22 +1,24 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy\Admin;
 
 /**
- * Class Torrent
- * @package TorrentPier\Legacy\Admin
+ * Class Torrent.
  */
 class Torrent
 {
     /**
-     * Update boolean config table
+     * Update boolean config table.
      *
      * @param string $table_name
      * @param string $key
@@ -31,7 +33,7 @@ class Torrent
 		WHERE 1";
 
         if (!$result = DB()->sql_query($sql)) {
-            bb_die('Could not update ' . $table_name);
+            bb_die('Could not update '.$table_name);
         }
 
         if (isset($_POST[$field_name])) {
@@ -39,7 +41,7 @@ class Torrent
             $in_sql = [];
 
             foreach ($_POST[$field_name] as $i => $val) {
-                $in_sql[] = (int)$val;
+                $in_sql[] = (int) $val;
             }
 
             // Update status
@@ -49,14 +51,14 @@ class Torrent
 				WHERE $key IN($in_sql)";
 
                 if (!$result = DB()->sql_query($sql)) {
-                    bb_die('Could not update ' . $table_name);
+                    bb_die('Could not update '.$table_name);
                 }
             }
         }
     }
 
     /**
-     * Assign config variables to template
+     * Assign config variables to template.
      *
      * @param array $default_cfg
      * @param array $cfg
@@ -71,7 +73,7 @@ class Torrent
     }
 
     /**
-     * Assign boolean config variables to template
+     * Assign boolean config variables to template.
      *
      * @param array $default_cfg
      * @param array $cfg
@@ -83,19 +85,19 @@ class Torrent
         foreach ($default_cfg as $config_name => $config_value) {
             // YES/NO 'checked'
             $template->assign_vars([
-                strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? HTML_CHECKED : '',
-                strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? HTML_CHECKED : '',
+                strtoupper($config_name).'_YES' => ($cfg[$config_name]) ? HTML_CHECKED : '',
+                strtoupper($config_name).'_NO'  => (!$cfg[$config_name]) ? HTML_CHECKED : '',
             ]);
             // YES/NO lang vars
             $template->assign_vars([
-                'L_' . strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? "<u>$lang[YES]</u>" : $lang['YES'],
-                'L_' . strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? "<u>$lang[NO]</u>" : $lang['NO'],
+                'L_'.strtoupper($config_name).'_YES' => ($cfg[$config_name]) ? "<u>$lang[YES]</u>" : $lang['YES'],
+                'L_'.strtoupper($config_name).'_NO'  => (!$cfg[$config_name]) ? "<u>$lang[NO]</u>" : $lang['NO'],
             ]);
         }
     }
 
     /**
-     * Assign language config variables to template
+     * Assign language config variables to template.
      *
      * @param array $default_cfg
      */
@@ -105,19 +107,19 @@ class Torrent
 
         foreach ($default_cfg as $config_name => $config_value) {
             $template->assign_vars([
-                'L_' . strtoupper($config_name) => $lang[$config_name] ?? '',
-                'L_' . strtoupper($config_name) . '_EXPL' => $lang[$config_name . '_expl'] ?? '',
-                'L_' . strtoupper($config_name) . '_HEAD' => $lang[$config_name . '_head'] ?? '',
+                'L_'.strtoupper($config_name)         => $lang[$config_name] ?? '',
+                'L_'.strtoupper($config_name).'_EXPL' => $lang[$config_name.'_expl'] ?? '',
+                'L_'.strtoupper($config_name).'_HEAD' => $lang[$config_name.'_head'] ?? '',
             ]);
         }
     }
 
     /**
-     * Update config table
+     * Update config table.
      *
      * @param string $table_name
-     * @param array $default_cfg
-     * @param array $cfg
+     * @param array  $default_cfg
+     * @param array  $cfg
      * @param string $type
      */
     public static function update_config_table($table_name, $default_cfg, $cfg, $type)
@@ -129,7 +131,7 @@ class Torrent
                 } elseif ($type == 'bool') {
                     $config_value = ($_POST[$config_name]) ? 1 : 0;
                 } elseif ($type == 'num') {
-                    $config_value = abs((int)$_POST[$config_name]);
+                    $config_value = abs((int) $_POST[$config_name]);
                 } else {
                     return;
                 }

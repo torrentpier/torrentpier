@@ -1,7 +1,8 @@
 <?php
+
 /**
  * TorrentPier Initial Schema Migration
- * Creates essential database schema for fresh installations
+ * Creates essential database schema for fresh installations.
  */
 
 use Phinx\Migration\AbstractMigration;
@@ -36,10 +37,10 @@ class InitialSchema extends AbstractMigration
     {
         // bb_categories
         $table = $this->table('bb_categories', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'cat_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'cat_id',
         ]);
         $table->addColumn('cat_id', 'integer', ['limit' => 65535, 'signed' => false, 'identity' => true]) // SMALLINT UNSIGNED
             ->addColumn('cat_title', 'string', ['limit' => 100, 'default' => '', 'null' => false])
@@ -49,10 +50,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_forums
         $table = $this->table('bb_forums', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'forum_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'forum_id',
         ]);
         $table->addColumn('forum_id', 'integer', ['limit' => 65535, 'signed' => false, 'identity' => true]) // SMALLINT UNSIGNED
             ->addColumn('cat_id', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
@@ -92,10 +93,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_topics
         $table = $this->table('bb_topics', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'topic_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'topic_id',
         ]);
         $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('forum_id', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED (forum_id in original is SMALLINT(8))
@@ -125,10 +126,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_posts
         $table = $this->table('bb_posts', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'post_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'post_id',
         ]);
         $table->addColumn('post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
@@ -154,10 +155,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_posts_text
         $table = $this->table('bb_posts_text', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'post_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'post_id',
         ]);
         $table->addColumn('post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('post_text', 'text', ['limit' => 16777215, 'null' => false]) // MEDIUMTEXT
@@ -168,10 +169,10 @@ class InitialSchema extends AbstractMigration
     {
         // bb_bt_torrents - Core torrent registry (InnoDB for reliability)
         $table = $this->table('bb_bt_torrents', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'topic_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'topic_id',
         ]);
         $table->addColumn('info_hash', 'varbinary', ['limit' => 20, 'default' => '', 'null' => false])
             ->addColumn('info_hash_v2', 'varbinary', ['limit' => 32, 'default' => '', 'null' => false])
@@ -202,10 +203,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_tracker - Active peer tracking (InnoDB for reliability)
         $table = $this->table('bb_bt_tracker', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'peer_hash'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'peer_hash',
         ]);
         $table->addColumn('peer_hash', 'string', ['limit' => 32, 'collation' => 'utf8_bin', 'default' => '', 'null' => false])
             ->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
@@ -233,10 +234,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_users - User tracker statistics
         $table = $this->table('bb_bt_users', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'user_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'user_id',
         ]);
         $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('auth_key', 'char', ['limit' => 20, 'collation' => 'utf8_bin', 'default' => '', 'null' => false])
@@ -266,10 +267,10 @@ class InitialSchema extends AbstractMigration
     {
         // bb_bt_tracker_snap - Tracker snapshot
         $table = $this->table('bb_bt_tracker_snap', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'topic_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'topic_id',
         ]);
         $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('seeders', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
@@ -281,9 +282,9 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_dlstatus_snap - Download status snapshot
         $table = $this->table('bb_bt_dlstatus_snap', [
-            'engine' => 'InnoDB',
+            'engine'    => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
-            'id' => false
+            'id'        => false,
         ]);
         $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('dl_status', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
@@ -293,10 +294,10 @@ class InitialSchema extends AbstractMigration
 
         // buf_topic_view - Topic view buffer
         $table = $this->table('buf_topic_view', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'topic_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'topic_id',
         ]);
         $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('topic_views', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
@@ -304,10 +305,10 @@ class InitialSchema extends AbstractMigration
 
         // buf_last_seeder - Last seeder buffer
         $table = $this->table('buf_last_seeder', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'topic_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'topic_id',
         ]);
         $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('seeder_last_seen', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
@@ -319,10 +320,10 @@ class InitialSchema extends AbstractMigration
     {
         // bb_config - Main configuration
         $table = $this->table('bb_config', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'config_name'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'config_name',
         ]);
         $table->addColumn('config_name', 'string', ['limit' => 155, 'default' => '', 'null' => false])
             ->addColumn('config_value', 'text', ['null' => false])
@@ -330,10 +331,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_cron - Scheduled tasks
         $table = $this->table('bb_cron', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'cron_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'cron_id',
         ]);
         $table->addColumn('cron_id', 'integer', ['limit' => 65535, 'signed' => false, 'identity' => true]) // SMALLINT UNSIGNED
             ->addColumn('cron_active', 'integer', ['limit' => 255, 'default' => 1, 'null' => false]) // TINYINT
@@ -357,10 +358,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_sessions - User sessions
         $table = $this->table('bb_sessions', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'session_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'session_id',
         ]);
         $table->addColumn('session_id', 'char', ['limit' => 255, 'collation' => 'utf8_bin', 'default' => '', 'null' => false])
             ->addColumn('session_user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
@@ -376,10 +377,10 @@ class InitialSchema extends AbstractMigration
     {
         // bb_attachments
         $table = $this->table('bb_attachments', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['attach_id', 'post_id']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['attach_id', 'post_id'],
         ]);
         $table->addColumn('attach_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
@@ -388,10 +389,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_attachments_desc
         $table = $this->table('bb_attachments_desc', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'attach_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'attach_id',
         ]);
         $table->addColumn('attach_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('physical_filename', 'string', ['limit' => 255, 'default' => '', 'null' => false])
@@ -411,10 +412,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_extensions
         $table = $this->table('bb_extensions', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'ext_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'ext_id',
         ]);
         $table->addColumn('ext_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('group_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
@@ -424,10 +425,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_extension_groups
         $table = $this->table('bb_extension_groups', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'group_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'group_id',
         ]);
         $table->addColumn('group_id', 'integer', ['limit' => 16777215, 'identity' => true]) // MEDIUMINT
             ->addColumn('group_name', 'string', ['limit' => 20, 'default' => '', 'null' => false])
@@ -444,10 +445,10 @@ class InitialSchema extends AbstractMigration
     {
         // bb_users
         $table = $this->table('bb_users', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'user_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'user_id',
         ]);
         $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'identity' => true]) // MEDIUMINT
             ->addColumn('user_active', 'boolean', ['default' => true, 'null' => false])
@@ -492,10 +493,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_groups
         $table = $this->table('bb_groups', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'group_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'group_id',
         ]);
         $table->addColumn('group_id', 'integer', ['limit' => 16777215, 'identity' => true]) // MEDIUMINT
             ->addColumn('avatar_ext_id', 'integer', ['default' => 0, 'null' => false]) // INT(15) - using default Phinx INT
@@ -513,10 +514,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_user_group
         $table = $this->table('bb_user_group', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['group_id', 'user_id']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['group_id', 'user_id'],
         ]);
         $table->addColumn('group_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
             ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
@@ -527,10 +528,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_ranks
         $table = $this->table('bb_ranks', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'rank_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'rank_id',
         ]);
         $table->addColumn('rank_id', 'integer', ['limit' => 65535, 'signed' => false, 'identity' => true]) // SMALLINT UNSIGNED
             ->addColumn('rank_title', 'string', ['limit' => 50, 'default' => '', 'null' => false])
@@ -549,7 +550,7 @@ class InitialSchema extends AbstractMigration
             'bb_bt_last_torstat',
             'bb_bt_last_userstat',
             'bb_bt_torhelp',
-            'bb_bt_user_settings'
+            'bb_bt_user_settings',
         ];
 
         // Create these tables with InnoDB engine
@@ -563,10 +564,10 @@ class InitialSchema extends AbstractMigration
     {
         // bb_bt_dlstatus - Download status tracking
         $table = $this->table('bb_bt_dlstatus', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['user_id', 'topic_id']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['user_id', 'topic_id'],
         ]);
         $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
@@ -577,10 +578,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_torstat - Torrent statistics per user
         $table = $this->table('bb_bt_torstat', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['topic_id', 'user_id']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['topic_id', 'user_id'],
         ]);
         $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
@@ -590,10 +591,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_tor_dl_stat - Torrent download statistics
         $table = $this->table('bb_bt_tor_dl_stat', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['topic_id', 'user_id']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['topic_id', 'user_id'],
         ]);
         $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
@@ -605,10 +606,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_last_torstat - Last torrent statistics
         $table = $this->table('bb_bt_last_torstat', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['topic_id', 'user_id']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['topic_id', 'user_id'],
         ]);
         $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
@@ -623,10 +624,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_last_userstat - Last user statistics
         $table = $this->table('bb_bt_last_userstat', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'user_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'user_id',
         ]);
         $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('up_add', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
@@ -639,10 +640,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_torhelp - Torrent help system
         $table = $this->table('bb_bt_torhelp', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'user_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'user_id',
         ]);
         $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('topic_id_csv', 'text', ['null' => false])
@@ -650,10 +651,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_user_settings - User tracker preferences
         $table = $this->table('bb_bt_user_settings', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'user_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'user_id',
         ]);
         $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('tor_search_set', 'text', ['null' => false])
@@ -662,10 +663,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_thx - Thanks/voting system
         $table = $this->table('bb_thx', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['topic_id', 'user_id']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['topic_id', 'user_id'],
         ]);
         $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
@@ -685,10 +686,10 @@ class InitialSchema extends AbstractMigration
     {
         // bb_privmsgs - Private messages
         $table = $this->table('bb_privmsgs', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'privmsgs_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'privmsgs_id',
         ]);
         $table->addColumn('privmsgs_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('privmsgs_type', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
@@ -703,10 +704,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_privmsgs_text - Private message content
         $table = $this->table('bb_privmsgs_text', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'privmsgs_text_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'privmsgs_text_id',
         ]);
         $table->addColumn('privmsgs_text_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('privmsgs_text', 'text', ['limit' => 16777215, 'null' => false]) // MEDIUMTEXT
@@ -717,10 +718,10 @@ class InitialSchema extends AbstractMigration
     {
         // bb_posts_search - Search index for posts
         $table = $this->table('bb_posts_search', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'post_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'post_id',
         ]);
         $table->addColumn('post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('search_words', 'text', ['null' => false])
@@ -731,10 +732,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_posts_html - Cached HTML posts
         $table = $this->table('bb_posts_html', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'post_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'post_id',
         ]);
         $table->addColumn('post_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('post_html_time', 'timestamp', ['default' => 'CURRENT_TIMESTAMP', 'update' => 'CURRENT_TIMESTAMP', 'null' => false])
@@ -743,10 +744,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_search_results - Search result cache
         $table = $this->table('bb_search_results', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['session_id', 'search_type']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['session_id', 'search_type'],
         ]);
         $table->addColumn('session_id', 'char', ['limit' => 255, 'collation' => 'utf8_bin', 'default' => '', 'null' => false])
             ->addColumn('search_type', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
@@ -758,10 +759,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_search_rebuild - Search rebuild status
         $table = $this->table('bb_search_rebuild', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'rebuild_session_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'rebuild_session_id',
         ]);
         $table->addColumn('rebuild_session_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('start_post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
@@ -781,10 +782,10 @@ class InitialSchema extends AbstractMigration
     {
         // bb_smilies - Emoticons
         $table = $this->table('bb_smilies', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'smilies_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'smilies_id',
         ]);
         $table->addColumn('smilies_id', 'integer', ['limit' => 65535, 'signed' => false, 'identity' => true]) // SMALLINT UNSIGNED
             ->addColumn('code', 'string', ['limit' => 50, 'default' => '', 'null' => false])
@@ -794,10 +795,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_words - Word censoring
         $table = $this->table('bb_words', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'word_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'word_id',
         ]);
         $table->addColumn('word_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('word', 'char', ['limit' => 100, 'default' => '', 'null' => false])
@@ -806,10 +807,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_banlist - User bans
         $table = $this->table('bb_banlist', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['ban_id', 'ban_userid']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['ban_id', 'ban_userid'],
         ]);
         $table->addColumn('ban_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('ban_userid', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
@@ -818,10 +819,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_disallow - Disallowed usernames
         $table = $this->table('bb_disallow', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'disallow_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'disallow_id',
         ]);
         $table->addColumn('disallow_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('disallow_username', 'string', ['limit' => 25, 'default' => '', 'null' => false])
@@ -835,9 +836,9 @@ class InitialSchema extends AbstractMigration
     {
         // bb_log - Action logging
         $table = $this->table('bb_log', [
-            'engine' => 'InnoDB',
+            'engine'    => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
-            'id' => false
+            'id'        => false,
         ]);
         $table->addColumn('log_type_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('log_user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
@@ -858,10 +859,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_poll_votes - Poll voting
         $table = $this->table('bb_poll_votes', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['topic_id', 'vote_id']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['topic_id', 'vote_id'],
         ]);
         $table->addColumn('topic_id', 'integer', ['signed' => false, 'null' => false]) // INT UNSIGNED (using default Phinx INT)
             ->addColumn('vote_id', 'integer', ['limit' => 255, 'signed' => false, 'null' => false]) // TINYINT UNSIGNED
@@ -871,10 +872,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_poll_users - Poll participation
         $table = $this->table('bb_poll_users', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['topic_id', 'user_id']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['topic_id', 'user_id'],
         ]);
         $table->addColumn('topic_id', 'integer', ['signed' => false, 'null' => false]) // INT UNSIGNED (using default Phinx INT)
             ->addColumn('user_id', 'integer', ['limit' => 16777215, 'null' => false]) // MEDIUMINT
@@ -884,9 +885,9 @@ class InitialSchema extends AbstractMigration
 
         // bb_topics_watch - Topic watching
         $table = $this->table('bb_topics_watch', [
-            'engine' => 'InnoDB',
+            'engine'    => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
-            'id' => false
+            'id'        => false,
         ]);
         $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
@@ -898,10 +899,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_topic_tpl - Topic templates
         $table = $this->table('bb_topic_tpl', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'tpl_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'tpl_id',
         ]);
         $table->addColumn('tpl_id', 'integer', ['limit' => 65535, 'identity' => true]) // SMALLINT(6)
             ->addColumn('tpl_name', 'string', ['limit' => 60, 'default' => '', 'null' => false])
@@ -926,10 +927,10 @@ class InitialSchema extends AbstractMigration
     {
         // bb_attachments_config
         $table = $this->table('bb_attachments_config', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'config_name'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'config_name',
         ]);
         $table->addColumn('config_name', 'string', ['limit' => 155, 'default' => '', 'null' => false])
             ->addColumn('config_value', 'string', ['limit' => 255, 'default' => '', 'null' => false])
@@ -937,9 +938,9 @@ class InitialSchema extends AbstractMigration
 
         // bb_attach_quota
         $table = $this->table('bb_attach_quota', [
-            'engine' => 'InnoDB',
+            'engine'    => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
-            'id' => false
+            'id'        => false,
         ]);
         $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('group_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
@@ -950,10 +951,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_quota_limits
         $table = $this->table('bb_quota_limits', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => 'quota_limit_id'
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => 'quota_limit_id',
         ]);
         $table->addColumn('quota_limit_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('quota_desc', 'string', ['limit' => 20, 'default' => '', 'null' => false])
@@ -965,10 +966,10 @@ class InitialSchema extends AbstractMigration
     {
         // bb_auth_access
         $table = $this->table('bb_auth_access', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['group_id', 'forum_id']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['group_id', 'forum_id'],
         ]);
         $table->addColumn('group_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
             ->addColumn('forum_id', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
@@ -978,10 +979,10 @@ class InitialSchema extends AbstractMigration
 
         // bb_auth_access_snap
         $table = $this->table('bb_auth_access_snap', [
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
-            'id' => false,
-            'primary_key' => ['user_id', 'forum_id']
+            'engine'      => 'InnoDB',
+            'collation'   => 'utf8mb4_unicode_ci',
+            'id'          => false,
+            'primary_key' => ['user_id', 'forum_id'],
         ]);
         $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('forum_id', 'integer', ['limit' => 65535, 'default' => 0, 'null' => false]) // SMALLINT(6)
@@ -1005,7 +1006,7 @@ class InitialSchema extends AbstractMigration
             'bb_bt_dlstatus_snap', 'bb_bt_tracker_snap', 'bb_bt_users', 'bb_bt_tracker',
             'bb_bt_torrents', 'bb_sessions', 'bb_cron', 'bb_config', 'bb_ranks', 'bb_user_group',
             'bb_groups', 'bb_users', 'bb_extension_groups', 'bb_extensions', 'bb_attachments_desc',
-            'bb_attachments', 'bb_posts_text', 'bb_posts', 'bb_topics', 'bb_forums', 'bb_categories'
+            'bb_attachments', 'bb_posts_text', 'bb_posts', 'bb_topics', 'bb_forums', 'bb_categories',
         ];
 
         foreach ($tables as $table) {

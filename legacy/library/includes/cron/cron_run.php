@@ -1,20 +1,22 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 define('IN_CRON', true);
 
 // Set SESSION vars (optimized for InnoDB)
-DB()->query("
+DB()->query('
 	SET SESSION
 	  bulk_insert_buffer_size =  8*1024*1024
 	, join_buffer_size        =  4*1024*1024
@@ -23,10 +25,10 @@ DB()->query("
 	, sort_buffer_size        =  4*1024*1024
 	, tmp_table_size          = 80*1024*1024
 	, group_concat_max_len    =  1*1024*1024
-");
+');
 
 // Restore vars at shutdown
-DB()->add_shutdown_query("
+DB()->add_shutdown_query('
 	SET SESSION
 	  bulk_insert_buffer_size = DEFAULT
 	, join_buffer_size        = DEFAULT
@@ -35,17 +37,17 @@ DB()->add_shutdown_query("
 	, sort_buffer_size        = DEFAULT
 	, tmp_table_size          = DEFAULT
 	, group_concat_max_len    = DEFAULT
-");
+');
 
 // $cron_jobs obtained in cron_check.php
 foreach ($cron_jobs as $job) {
-    $job_script = CRON_JOB_DIR . basename($job['cron_script']);
+    $job_script = CRON_JOB_DIR.basename($job['cron_script']);
 
     if (is_file($job_script)) {
         $cron_start_time = utime();
         $cron_runtime_log = [];
         $cron_write_log = (CRON_LOG_ENABLED && (CRON_FORCE_LOG || $job['log_enabled'] >= 1));
-        $cron_sql_log_file = CRON_LOG_DIR . '/SQL-' . basename($job['cron_script']);
+        $cron_sql_log_file = CRON_LOG_DIR.'/SQL-'.basename($job['cron_script']);
 
         if ($cron_write_log) {
             $msg = [];
@@ -55,7 +57,7 @@ foreach ($cron_jobs as $job) {
             $msg[] = sprintf('%05d', getmypid());
             $msg[] = $job['cron_title'];
             $msg = implode(LOG_SEPR, $msg);
-            bb_log($msg . LOG_LF, CRON_LOG_DIR . '/' . CRON_LOG_FILE);
+            bb_log($msg.LOG_LF, CRON_LOG_DIR.'/'.CRON_LOG_FILE);
         }
 
         if ($job['log_sql_queries']) {
@@ -63,7 +65,7 @@ foreach ($cron_jobs as $job) {
         }
 
         set_time_limit(600);
-        require($job_script);
+        require $job_script;
 
         if ($job['log_sql_queries']) {
             DB()->log_next_query(0);
@@ -76,20 +78,20 @@ foreach ($cron_jobs as $job) {
             $msg[] = date('m-d');
             $msg[] = date('H:i:s');
             $msg[] = sprintf('%05d', getmypid());
-            $msg[] = round(utime() - $cron_start_time) . '/' . round(utime() - TIMESTART) . ' sec';
+            $msg[] = round(utime() - $cron_start_time).'/'.round(utime() - TIMESTART).' sec';
             $msg = implode(LOG_SEPR, $msg);
-            $msg .= LOG_LF . '------=-------=----------=------=-------=----------';
-            bb_log($msg . LOG_LF, CRON_LOG_DIR . '/' . CRON_LOG_FILE);
+            $msg .= LOG_LF.'------=-------=----------=------=-------=----------';
+            bb_log($msg.LOG_LF, CRON_LOG_DIR.'/'.CRON_LOG_FILE);
 
             if (is_array($cron_runtime_log)) {
                 $runtime_log_file = ($job['log_file']) ?: $job['cron_script'];
                 $cron_runtime_log[] = '';
-                bb_log($cron_runtime_log, CRON_LOG_DIR . '/' . basename($runtime_log_file));
+                bb_log($cron_runtime_log, CRON_LOG_DIR.'/'.basename($runtime_log_file));
             }
         }
 
-        DB()->query("
-			UPDATE " . BB_CRON . " SET
+        DB()->query('
+			UPDATE '.BB_CRON." SET
 				last_run = NOW(),
 				run_counter = run_counter + 1,
 				next_run =
@@ -118,7 +120,7 @@ foreach ($cron_jobs as $job) {
             return;
         }
     } else {
-        $cron_err_msg = "Can not run \"{$job['cron_title']}\" : file \"$job_script\" not found" . LOG_LF;
+        $cron_err_msg = "Can not run \"{$job['cron_title']}\" : file \"$job_script\" not found".LOG_LF;
         bb_log($cron_err_msg, 'cron_error');
     }
 }

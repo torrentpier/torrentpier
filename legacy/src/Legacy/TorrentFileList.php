@@ -1,23 +1,25 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy;
 
 /**
- * Class TorrentFileList
- * @package TorrentPier\Legacy
+ * Class TorrentFileList.
  */
 class TorrentFileList
 {
     public $tor_decoded = [];
     public $files_ary = [
-        '/' => []
+        '/' => [],
     ];
 
     public $multiple = false;
@@ -25,7 +27,7 @@ class TorrentFileList
     public $files_html = '';
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param $decoded_file_contents
      */
@@ -35,7 +37,7 @@ class TorrentFileList
     }
 
     /**
-     * Fetching file list
+     * Fetching file list.
      *
      * @return string
      */
@@ -45,7 +47,7 @@ class TorrentFileList
 
         $info = &$this->tor_decoded['info'];
         if (isset($info['meta version'], $info['file tree'])) { //v2
-            if (($info['meta version']) === 2 && is_array($info['file tree'])) {
+            if ($info['meta version'] === 2 && is_array($info['file tree'])) {
                 return $this->fileTreeList($info['file tree'], $info['name'] ?? '', config()->get('flist_timeout'));
             }
         }
@@ -58,6 +60,7 @@ class TorrentFileList
                 unset($this->files_ary['/']);
             }
             $filelist = $html->array2html($this->files_ary);
+
             return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
         }
 
@@ -65,7 +68,7 @@ class TorrentFileList
     }
 
     /**
-     * Forming file list
+     * Forming file list.
      *
      * @return void
      */
@@ -74,7 +77,7 @@ class TorrentFileList
         $info = &$this->tor_decoded['info'];
 
         if (isset($info['name.utf-8'])) {
-            $info['name'] =& $info['name.utf-8'];
+            $info['name'] = &$info['name.utf-8'];
         }
 
         if (isset($info['files']) && is_array($info['files'])) {
@@ -83,7 +86,7 @@ class TorrentFileList
 
             foreach ($info['files'] as $f) {
                 if (isset($f['path.utf-8'])) {
-                    $f['path'] =& $f['path.utf-8'];
+                    $f['path'] = &$f['path.utf-8'];
                 }
                 if (!isset($f['path']) || !is_array($f['path'])) {
                     continue;
@@ -95,15 +98,15 @@ class TorrentFileList
 
                 $structure = array_deep($f['path'], 'clean_tor_dirname', timeout: config()->get('flist_timeout'));
                 if (isset($structure['timeout'])) {
-                    bb_die("Timeout, too many nested files/directories for file listing, aborting after \n{$structure['recs']} recursive calls.\nNesting level: " . count($info['files'], COUNT_RECURSIVE));
+                    bb_die("Timeout, too many nested files/directories for file listing, aborting after \n{$structure['recs']} recursive calls.\nNesting level: ".count($info['files'], COUNT_RECURSIVE));
                 }
 
-                $length = isset($f['length']) ? (float)$f['length'] : 0;
+                $length = isset($f['length']) ? (float) $f['length'] : 0;
                 $subdir_count = count($f['path']) - 1;
 
                 if ($subdir_count > 0) {
                     $name = array_pop($f['path']);
-                    $cur_files_ary =& $this->files_ary;
+                    $cur_files_ary = &$this->files_ary;
 
                     for ($i = 0, $j = 1; $i < $subdir_count; $i++, $j++) {
                         $subdir = $f['path'][$i];
@@ -111,7 +114,7 @@ class TorrentFileList
                         if (!isset($cur_files_ary[$subdir]) || !is_array($cur_files_ary[$subdir])) {
                             $cur_files_ary[$subdir] = [];
                         }
-                        $cur_files_ary =& $cur_files_ary[$subdir];
+                        $cur_files_ary = &$cur_files_ary[$subdir];
 
                         if ($j === $subdir_count) {
                             if (is_string($cur_files_ary)) {
@@ -130,17 +133,18 @@ class TorrentFileList
             }
         } else {
             $name = clean_tor_dirname($info['name']);
-            $length = (float)$info['length'];
+            $length = (float) $info['length'];
             $this->files_ary['/'][] = "$name <i>$length</i>";
             natsort($this->files_ary['/']);
         }
     }
 
     /**
-     * File list generation for v2 supported torrents
+     * File list generation for v2 supported torrents.
      *
-     * @param array $array
+     * @param array  $array
      * @param string $name
+     *
      * @return string
      */
     public function fileTreeList(array $array, string $name = '', int $timeout = 0, bool $child = false): string
@@ -150,7 +154,7 @@ class TorrentFileList
         if ($timeout) {
             static $recursions = 0;
             if (time() > (TIMENOW + $timeout)) {
-                bb_die("Timeout, too many nested files/directories for file listing, aborting after \n$recursions recursive calls.\nNesting level: " . count($this->tor_decoded['info']['file tree'], COUNT_RECURSIVE));
+                bb_die("Timeout, too many nested files/directories for file listing, aborting after \n$recursions recursive calls.\nNesting level: ".count($this->tor_decoded['info']['file tree'], COUNT_RECURSIVE));
             }
             $recursions++;
         }
@@ -167,7 +171,7 @@ class TorrentFileList
         }
 
         if (!$child) {
-            return '<div class="tor-root-dir">' . (empty($allItems) ? '' : htmlCHR($name)) . '</div><ul class="tree-root">' . $allItems . '</ul>';
+            return '<div class="tor-root-dir">'.(empty($allItems) ? '' : htmlCHR($name)).'</div><ul class="tree-root">'.$allItems.'</ul>';
         }
 
         return $allItems;

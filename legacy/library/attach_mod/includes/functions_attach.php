@@ -1,18 +1,21 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 /**
- * All Attachment Functions needed everywhere
+ * All Attachment Functions needed everywhere.
  */
 
 /**
- * A simple dectobase64 function
+ * A simple dectobase64 function.
  */
 function base64_pack($number)
 {
@@ -33,7 +36,7 @@ function base64_pack($number)
         $remainder = $number % $base;
 
         if ($remainder < $base) {
-            $hexval = $chars[$remainder] . $hexval;
+            $hexval = $chars[$remainder].$hexval;
         }
 
         $number = floor($number / $base);
@@ -43,7 +46,7 @@ function base64_pack($number)
 }
 
 /**
- * base64todec function
+ * base64todec function.
  */
 function base64_unpack($string)
 {
@@ -55,7 +58,7 @@ function base64_unpack($string)
 
     for ($i = 1; $i <= $length; $i++) {
         $pos = $length - $i;
-        $operand = strpos($chars, (string)$string[$pos]);
+        $operand = strpos($chars, (string) $string[$pos]);
         $exponent = $base ** ($i - 1);
         $decValue = $operand * $exponent;
         $number += $decValue;
@@ -66,7 +69,7 @@ function base64_unpack($string)
 
 /**
  * Per Forum based Extension Group Permissions (Encode Number) -> Theoretically up to 158 Forums saveable. :)
- * We are using a base of 64, but splitting it to one-char and two-char numbers. :)
+ * We are using a base of 64, but splitting it to one-char and two-char numbers. :).
  */
 function auth_pack($auth_array)
 {
@@ -76,7 +79,7 @@ function auth_pack($auth_array)
     $auth_cache = '';
 
     foreach ($auth_array as $i => $iValue) {
-        $val = base64_pack((int)$auth_array[$i]);
+        $val = base64_pack((int) $auth_array[$i]);
         if (strlen($val) == 1 && !$one_char) {
             $auth_cache .= $one_char_encoding;
             $one_char = true;
@@ -92,7 +95,7 @@ function auth_pack($auth_array)
 }
 
 /**
- * Reverse the auth_pack process
+ * Reverse the auth_pack process.
  */
 function auth_unpack($auth_cache)
 {
@@ -117,13 +120,14 @@ function auth_unpack($auth_cache)
 
         $forum_auth = substr($auth_cache, $pos, $auth_len);
         $forum_id = base64_unpack($forum_auth);
-        $auth[] = (int)$forum_id;
+        $auth[] = (int) $forum_id;
     }
+
     return $auth;
 }
 
 /**
- * Used for determining if Forum ID is authed, please use this Function on all Posting Screens
+ * Used for determining if Forum ID is authed, please use this Function on all Posting Screens.
  */
 function is_forum_authed($auth_cache, $check_forum_id)
 {
@@ -151,16 +155,17 @@ function is_forum_authed($auth_cache, $check_forum_id)
         }
 
         $forum_auth = substr($auth_cache, $pos, $auth_len);
-        $forum_id = (int)base64_unpack($forum_auth);
+        $forum_id = (int) base64_unpack($forum_auth);
         if ($forum_id == $check_forum_id) {
             return true;
         }
     }
+
     return false;
 }
 
 /**
- * Deletes an Attachment
+ * Deletes an Attachment.
  */
 function unlink_attach($filename, $mode = false)
 {
@@ -169,9 +174,9 @@ function unlink_attach($filename, $mode = false)
     $filename = basename($filename);
 
     if ($mode == MODE_THUMBNAIL) {
-        $filename = $upload_dir . '/' . THUMB_DIR . '/t_' . $filename;
+        $filename = $upload_dir.'/'.THUMB_DIR.'/t_'.$filename;
     } else {
-        $filename = $upload_dir . '/' . $filename;
+        $filename = $upload_dir.'/'.$filename;
     }
 
     return @unlink($filename);
@@ -189,12 +194,12 @@ function physical_filename_already_stored($filename)
     $filename = basename($filename);
 
     $sql = 'SELECT attach_id
-		FROM ' . BB_ATTACHMENTS_DESC . "
-		WHERE physical_filename = '" . DB()->escape($filename) . "'
+		FROM '.BB_ATTACHMENTS_DESC."
+		WHERE physical_filename = '".DB()->escape($filename)."'
 		LIMIT 1";
 
     if (!($result = DB()->sql_query($sql))) {
-        bb_die('Could not get attachment information for filename: ' . htmlspecialchars($filename));
+        bb_die('Could not get attachment information for filename: '.htmlspecialchars($filename));
     }
     $num_rows = DB()->num_rows($result);
     DB()->sql_freeresult($result);
@@ -203,7 +208,7 @@ function physical_filename_already_stored($filename)
 }
 
 /**
- * get all attachments from a post (could be an post array too)
+ * get all attachments from a post (could be an post array too).
  */
 function get_attachments_from_post($post_id_array)
 {
@@ -216,7 +221,7 @@ function get_attachments_from_post($post_id_array)
             return $attachments;
         }
 
-        $post_id = (int)$post_id_array;
+        $post_id = (int) $post_id_array;
 
         $post_id_array = [];
         $post_id_array[] = $post_id;
@@ -228,16 +233,16 @@ function get_attachments_from_post($post_id_array)
         return $attachments;
     }
 
-    $display_order = ((int)$attach_config['display_order'] == 0) ? 'DESC' : 'ASC';
+    $display_order = ((int) $attach_config['display_order'] == 0) ? 'DESC' : 'ASC';
 
     $sql = 'SELECT a.post_id, d.*
-		FROM ' . BB_ATTACHMENTS . ' a, ' . BB_ATTACHMENTS_DESC . " d
+		FROM '.BB_ATTACHMENTS.' a, '.BB_ATTACHMENTS_DESC." d
 		WHERE a.post_id IN ($post_id_array)
 			AND a.attach_id = d.attach_id
 		ORDER BY d.filetime $display_order";
 
     if (!($result = DB()->sql_query($sql))) {
-        bb_die('Could not get attachment informations for post number ' . $post_id_array);
+        bb_die('Could not get attachment informations for post number '.$post_id_array);
     }
 
     $num_rows = DB()->num_rows($result);
@@ -252,7 +257,7 @@ function get_attachments_from_post($post_id_array)
 }
 
 /**
- * Get allowed Extensions and their respective Values
+ * Get allowed Extensions and their respective Values.
  */
 function get_extension_informations()
 {
@@ -270,9 +275,9 @@ function attachment_sync_topic($topics)
     $posts_without_attach = $topics_without_attach = [];
 
     // Check orphan post_attachment markers
-    $sql = "SELECT p.post_id
-		FROM " . BB_POSTS . " p
-		LEFT JOIN " . BB_ATTACHMENTS . " a USING(post_id)
+    $sql = 'SELECT p.post_id
+		FROM '.BB_POSTS.' p
+		LEFT JOIN '.BB_ATTACHMENTS." a USING(post_id)
 		WHERE p.topic_id IN($topics)
 			AND p.post_attachment = 1
 			AND a.post_id IS NULL";
@@ -282,13 +287,13 @@ function attachment_sync_topic($topics)
             $posts_without_attach[] = $row['post_id'];
         }
         if ($posts_sql = implode(',', $posts_without_attach)) {
-            DB()->query("UPDATE " . BB_POSTS . " SET post_attachment = 0 WHERE post_id IN($posts_sql)");
+            DB()->query('UPDATE '.BB_POSTS." SET post_attachment = 0 WHERE post_id IN($posts_sql)");
         }
     }
 
     // Update missing topic_attachment markers
-    DB()->query("
-		UPDATE " . BB_TOPICS . " t, " . BB_POSTS . " p SET
+    DB()->query('
+		UPDATE '.BB_TOPICS.' t, '.BB_POSTS." p SET
 			t.topic_attachment = 1
 		WHERE p.topic_id IN($topics)
 			AND p.post_attachment = 1
@@ -296,8 +301,8 @@ function attachment_sync_topic($topics)
 	");
 
     // Fix orphan topic_attachment markers
-    $sql = "SELECT t.topic_id
-		FROM " . BB_POSTS . " p, " . BB_TOPICS . " t
+    $sql = 'SELECT t.topic_id
+		FROM '.BB_POSTS.' p, '.BB_TOPICS." t
 		WHERE t.topic_id = p.topic_id
 			AND t.topic_id IN($topics)
 			AND t.topic_attachment = 1
@@ -309,13 +314,13 @@ function attachment_sync_topic($topics)
             $topics_without_attach[] = $row['topic_id'];
         }
         if ($topics_sql = implode(',', $topics_without_attach)) {
-            DB()->query("UPDATE " . BB_TOPICS . " SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
+            DB()->query('UPDATE '.BB_TOPICS." SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
         }
     }
 }
 
 /**
- * _set_var
+ * _set_var.
  *
  * Set variable, used by {@link get_var the get_var function}
  *
@@ -337,11 +342,12 @@ function _set_var(&$result, $var, $type, $multibyte = false)
 }
 
 /**
- * Used to get passed variable
+ * Used to get passed variable.
  *
- * @param $var_name
- * @param $default
+ * @param      $var_name
+ * @param      $default
  * @param bool $multibyte
+ *
  * @return array|string
  */
 function get_var($var_name, $default, $multibyte = false)

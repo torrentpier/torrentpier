@@ -1,32 +1,30 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier;
 
 use Bugsnag\Client;
-
+use Exception;
+use jacklul\MonologTelegramHandler\TelegramFormatter;
+use jacklul\MonologTelegramHandler\TelegramHandler;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\BrowserConsoleHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-
 use Whoops\Handler\PlainTextHandler;
-use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
 
-use jacklul\MonologTelegramHandler\TelegramHandler;
-use jacklul\MonologTelegramHandler\TelegramFormatter;
-
-use Exception;
-
 /**
- * Development and Debugging System
+ * Development and Debugging System.
  *
  * Singleton class that provides development and debugging functionality
  * including error handling, SQL logging, and debugging utilities.
@@ -36,18 +34,18 @@ class Dev
     private static ?Dev $instance = null;
 
     /**
-     * Whoops instance
+     * Whoops instance.
      *
      * @var Run
      */
     private Run $whoops;
 
     /**
-     * Initialize debugging system
+     * Initialize debugging system.
      */
     private function __construct()
     {
-        $this->whoops = new Run;
+        $this->whoops = new Run();
 
         if ($this->isDebugEnabled()) {
             $this->getWhoopsOnPage();
@@ -65,18 +63,19 @@ class Dev
     }
 
     /**
-     * Get the singleton instance of Dev
+     * Get the singleton instance of Dev.
      */
     public static function getInstance(): Dev
     {
         if (self::$instance === null) {
             self::$instance = new self();
         }
+
         return self::$instance;
     }
 
     /**
-     * Initialize the dev system (for compatibility)
+     * Initialize the dev system (for compatibility).
      */
     public static function init(): Dev
     {
@@ -84,7 +83,7 @@ class Dev
     }
 
     /**
-     * [Whoops] Bugsnag handler
+     * [Whoops] Bugsnag handler.
      *
      * @return void
      */
@@ -101,7 +100,7 @@ class Dev
     }
 
     /**
-     * [Whoops] Telegram handler
+     * [Whoops] Telegram handler.
      *
      * @return void
      */
@@ -113,23 +112,23 @@ class Dev
 
         $telegramSender = new PlainTextHandler();
         $telegramSender->loggerOnly(true);
-        $telegramSender->setLogger((new Logger(
+        $telegramSender->setLogger(new Logger(
             APP_NAME,
-            [(new TelegramHandler(config()->get('telegram_sender.token'), (int)config()->get('telegram_sender.chat_id'), timeout: (int)config()->get('telegram_sender.timeout')))
+            [(new TelegramHandler(config()->get('telegram_sender.token'), (int) config()->get('telegram_sender.chat_id'), timeout: (int) config()->get('telegram_sender.timeout')))
                 ->setFormatter(new TelegramFormatter())]
-        )));
+        ));
         $this->whoops->pushHandler($telegramSender);
     }
 
     /**
-     * [Whoops] On page handler (in debug)
+     * [Whoops] On page handler (in debug).
      *
      * @return void
      */
     private function getWhoopsOnPage(): void
     {
         /**
-         * Show errors on page with enhanced database information
+         * Show errors on page with enhanced database information.
          */
         $prettyPageHandler = new \TorrentPier\Whoops\EnhancedPrettyPageHandler();
         foreach (config()->get('whoops.blacklist', []) as $key => $secrets) {
@@ -140,41 +139,41 @@ class Dev
         $this->whoops->pushHandler($prettyPageHandler);
 
         /**
-         * Show log in browser console
+         * Show log in browser console.
          */
         $loggingInConsole = new PlainTextHandler();
         $loggingInConsole->loggerOnly(true);
-        $loggingInConsole->setLogger((new Logger(
+        $loggingInConsole->setLogger(new Logger(
             APP_NAME,
             [(new BrowserConsoleHandler())
-                ->setFormatter((new LineFormatter(null, null, true)))]
-        )));
+                ->setFormatter(new LineFormatter(null, null, true))]
+        ));
         $this->whoops->pushHandler($loggingInConsole);
     }
 
     /**
-     * [Whoops] Logger handler
+     * [Whoops] Logger handler.
      *
      * @return void
      */
     private function getWhoopsLogger(): void
     {
-        if ((int)ini_get('log_errors') !== 1) {
+        if ((int) ini_get('log_errors') !== 1) {
             return;
         }
 
         $loggingInFile = new PlainTextHandler();
         $loggingInFile->loggerOnly(true);
-        $loggingInFile->setLogger((new Logger(
+        $loggingInFile->setLogger(new Logger(
             APP_NAME,
             [(new StreamHandler(WHOOPS_LOG_FILE))
-                ->setFormatter((new LineFormatter(null, null, true)))]
-        )));
+                ->setFormatter(new LineFormatter(null, null, true))]
+        ));
         $this->whoops->pushHandler($loggingInFile);
     }
 
     /**
-     * [Whoops] Placeholder handler (non debug)
+     * [Whoops] Placeholder handler (non debug).
      *
      * @return void
      */
@@ -187,10 +186,11 @@ class Dev
     }
 
     /**
-     * Get SQL debug log (instance method)
+     * Get SQL debug log (instance method).
+     *
+     * @throws Exception
      *
      * @return string
-     * @throws Exception
      */
     public function getSqlLogInstance(): string
     {
@@ -213,11 +213,11 @@ class Dev
         // Add warning banner if legacy queries were detected
         if ($totalLegacyQueries > 0) {
             $log .= '<div style="background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 10px; margin-bottom: 10px; border-radius: 4px;">'
-                . '<strong>⚠️ Legacy Query Warning:</strong> '
-                . $totalLegacyQueries . ' quer' . ($totalLegacyQueries > 1 ? 'ies' : 'y') . ' with duplicate columns detected and automatically fixed. '
-                . 'These queries should be updated to explicitly select columns. '
-                . 'Check the legacy_queries.log file for details.'
-                . '</div>';
+                .'<strong>⚠️ Legacy Query Warning:</strong> '
+                .$totalLegacyQueries.' quer'.($totalLegacyQueries > 1 ? 'ies' : 'y').' with duplicate columns detected and automatically fixed. '
+                .'These queries should be updated to explicitly select columns. '
+                .'Check the legacy_queries.log file for details.'
+                .'</div>';
         }
 
         // Get debug information from new database system
@@ -254,36 +254,37 @@ class Dev
     }
 
     /**
-     * Sql debug status (instance method)
+     * Sql debug status (instance method).
      *
      * @return bool
      */
     public function sqlDebugAllowedInstance(): bool
     {
-        return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
+        return SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']);
     }
 
     /**
-     * Get SQL query html log
+     * Get SQL query html log.
      *
      * @param object $db_obj
      * @param string $log_name
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     private function getSqlLogHtml(object $db_obj, string $log_name): string
     {
         $log = '';
 
         foreach ($db_obj->dbg as $i => $dbg) {
-            $id = "sql_{$i}_" . random_int(0, mt_getrandmax());
+            $id = "sql_{$i}_".random_int(0, mt_getrandmax());
             $sql = $this->shortQueryInstance($dbg['sql'], true);
             $time = sprintf('%.3f', $dbg['time']);
-            $perc = '[' . round($dbg['time'] * 100 / $db_obj->sql_timetotal) . '%]';
+            $perc = '['.round($dbg['time'] * 100 / $db_obj->sql_timetotal).'%]';
             // Use plain text version for title attribute to avoid HTML issues
-            $info_plain = !empty($dbg['info_plain']) ? $dbg['info_plain'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
-            $info = !empty($dbg['info']) ? $dbg['info'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
+            $info_plain = !empty($dbg['info_plain']) ? $dbg['info_plain'].' ['.$dbg['src'].']' : $dbg['src'];
+            $info = !empty($dbg['info']) ? $dbg['info'].' ['.$dbg['src'].']' : $dbg['src'];
 
             // Check if this is a legacy query that needed compatibility fix
             $isLegacyQuery = !empty($dbg['is_legacy_query']);
@@ -291,23 +292,24 @@ class Dev
             $rowStyle = $isLegacyQuery ? ' style="background-color: #ffe6e6; border-left: 4px solid #dc3545; color: #721c24;"' : '';
             $legacyWarning = $isLegacyQuery ? '<span style="color: #dc3545; font-weight: bold; margin-right: 8px;">[LEGACY]</span>' : '';
 
-            $log .= '<div onclick="$(this).toggleClass(\'sqlHighlight\');" class="' . $rowClass . '" title="' . htmlspecialchars($info_plain) . '"' . $rowStyle . '>'
-                . $legacyWarning
-                . '<span style="letter-spacing: -1px;">' . $time . ' </span>'
-                . '<span class="copyElement" data-clipboard-target="#' . $id . '" title="Copy to clipboard" style="color: rgb(128,128,128); letter-spacing: -1px;">' . $perc . '</span>&nbsp;'
-                . '<span style="letter-spacing: 0;" id="' . $id . '">' . $sql . '</span>'
-                . '<span style="color: rgb(128,128,128);"> # ' . $info . ' </span>'
-                . '</div>';
+            $log .= '<div onclick="$(this).toggleClass(\'sqlHighlight\');" class="'.$rowClass.'" title="'.htmlspecialchars($info_plain).'"'.$rowStyle.'>'
+                .$legacyWarning
+                .'<span style="letter-spacing: -1px;">'.$time.' </span>'
+                .'<span class="copyElement" data-clipboard-target="#'.$id.'" title="Copy to clipboard" style="color: rgb(128,128,128); letter-spacing: -1px;">'.$perc.'</span>&nbsp;'
+                .'<span style="letter-spacing: 0;" id="'.$id.'">'.$sql.'</span>'
+                .'<span style="color: rgb(128,128,128);"> # '.$info.' </span>'
+                .'</div>';
         }
 
-        return '<div class="sqlLogTitle">' . $log_name . '</div>' . $log;
+        return '<div class="sqlLogTitle">'.$log_name.'</div>'.$log;
     }
 
     /**
-     * Short query (instance method)
+     * Short query (instance method).
      *
      * @param string $sql
-     * @param bool $esc_html
+     * @param bool   $esc_html
+     *
      * @return string
      */
     public function shortQueryInstance(string $sql, bool $esc_html = false): string
@@ -317,7 +319,7 @@ class Dev
 
         if (!empty($_COOKIE['sql_log_full'])) {
             if (mb_strlen($sql, DEFAULT_CHARSET) > $max_len) {
-                $sql = mb_substr($sql, 0, 50) . ' [...cut...] ' . mb_substr($sql, -50);
+                $sql = mb_substr($sql, 0, 50).' [...cut...] '.mb_substr($sql, -50);
             }
         }
 
@@ -327,10 +329,12 @@ class Dev
     // Static methods for backward compatibility (proxy to instance methods)
 
     /**
-     * Get SQL debug log (static)
+     * Get SQL debug log (static).
+     *
+     * @throws Exception
      *
      * @return string
-     * @throws Exception
+     *
      * @deprecated Use dev()->getSqlLog() instead
      */
     public static function getSqlLog(): string
@@ -339,9 +343,10 @@ class Dev
     }
 
     /**
-     * Sql debug status (static)
+     * Sql debug status (static).
      *
      * @return bool
+     *
      * @deprecated Use dev()->sqlDebugAllowed() instead
      */
     public static function sqlDebugAllowed(): bool
@@ -350,11 +355,13 @@ class Dev
     }
 
     /**
-     * Short query (static)
+     * Short query (static).
      *
      * @param string $sql
-     * @param bool $esc_html
+     * @param bool   $esc_html
+     *
      * @return string
+     *
      * @deprecated Use dev()->shortQuery() instead
      */
     public static function shortQuery(string $sql, bool $esc_html = false): string
@@ -363,10 +370,11 @@ class Dev
     }
 
     /**
-     * Get SQL debug log (for dev() singleton usage)
+     * Get SQL debug log (for dev() singleton usage).
+     *
+     * @throws Exception
      *
      * @return string
-     * @throws Exception
      */
     public function getSqlDebugLog(): string
     {
@@ -374,7 +382,7 @@ class Dev
     }
 
     /**
-     * Check if SQL debugging is allowed (for dev() singleton usage)
+     * Check if SQL debugging is allowed (for dev() singleton usage).
      *
      * @return bool
      */
@@ -384,10 +392,11 @@ class Dev
     }
 
     /**
-     * Format SQL query for display (for dev() singleton usage)
+     * Format SQL query for display (for dev() singleton usage).
      *
      * @param string $sql
-     * @param bool $esc_html
+     * @param bool   $esc_html
+     *
      * @return string
      */
     public function formatShortQuery(string $sql, bool $esc_html = false): string
@@ -396,7 +405,7 @@ class Dev
     }
 
     /**
-     * Get Whoops instance
+     * Get Whoops instance.
      *
      * @return Run
      */
@@ -406,7 +415,7 @@ class Dev
     }
 
     /**
-     * Check if debug mode is enabled
+     * Check if debug mode is enabled.
      *
      * @return bool
      */
@@ -416,7 +425,7 @@ class Dev
     }
 
     /**
-     * Check if application is in development environment
+     * Check if application is in development environment.
      *
      * @return bool
      */
@@ -426,17 +435,17 @@ class Dev
     }
 
     /**
-     * Prevent cloning of the singleton instance
+     * Prevent cloning of the singleton instance.
      */
     private function __clone()
     {
     }
 
     /**
-     * Prevent unserialization of the singleton instance
+     * Prevent unserialization of the singleton instance.
      */
     public function __wakeup()
     {
-        throw new \Exception("Cannot unserialize a singleton.");
+        throw new \Exception('Cannot unserialize a singleton.');
     }
 }

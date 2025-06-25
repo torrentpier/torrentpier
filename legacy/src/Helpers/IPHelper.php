@@ -1,9 +1,12 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
@@ -12,16 +15,16 @@ namespace TorrentPier\Helpers;
 use Longman\IPTools\Ip;
 
 /**
- * Class IPHelper
- * @package TorrentPier\Helpers
+ * Class IPHelper.
  */
 class IPHelper extends Ip
 {
     /**
      * Anonymize an IP/IPv6.
-     * Removes the last byte for v4 and the last 8 bytes for v6 IPs
+     * Removes the last byte for v4 and the last 8 bytes for v6 IPs.
      *
      * @param string $ip
+     *
      * @return string
      */
     public static function anonymizeIP(string $ip): string
@@ -45,7 +48,7 @@ class IPHelper extends Ip
         $ip = inet_ntop($packedAddress & inet_pton($mask));
 
         if ($wrappedIPv6) {
-            $ip = '[' . $ip . ']';
+            $ip = '['.$ip.']';
         }
 
         return $ip;
@@ -56,6 +59,7 @@ class IPHelper extends Ip
      * Decodes long format from both IPv4 & IPv6.
      *
      * @param string $ip
+     *
      * @return string
      */
     public static function long2ip_extended(string $ip): string

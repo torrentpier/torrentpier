@@ -1,18 +1,21 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!empty($setmodules)) {
     $module['FORUMS']['PERMISSIONS'] = basename(__FILE__);
+
     return;
 }
 
-require __DIR__ . '/pagestart.php';
+require __DIR__.'/pagestart.php';
 
 $forum_auth_fields = [
     'auth_view',
@@ -43,11 +46,11 @@ $simple_auth_ary = [
 $simple_auth_types = [
     $lang['PUBLIC'],
     $lang['REGISTERED'],
-    $lang['REGISTERED'] . ' [' . $lang['HIDDEN'] . ']',
+    $lang['REGISTERED'].' ['.$lang['HIDDEN'].']',
     $lang['PRIVATE'],
-    $lang['PRIVATE'] . ' [' . $lang['HIDDEN'] . ']',
+    $lang['PRIVATE'].' ['.$lang['HIDDEN'].']',
     $lang['MODERATORS'],
-    $lang['MODERATORS'] . ' [' . $lang['HIDDEN'] . ']',
+    $lang['MODERATORS'].' ['.$lang['HIDDEN'].']',
 ];
 
 $field_names = [];
@@ -59,7 +62,7 @@ $forum_auth_levels = ['ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN'];
 $forum_auth_const = [AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN];
 
 if (isset($_REQUEST[POST_FORUM_URL])) {
-    $forum_id = (int)$_REQUEST[POST_FORUM_URL];
+    $forum_id = (int) $_REQUEST[POST_FORUM_URL];
     $forum_sql = "WHERE forum_id = $forum_id";
 } else {
     unset($forum_id);
@@ -67,7 +70,7 @@ if (isset($_REQUEST[POST_FORUM_URL])) {
 }
 
 if (isset($_GET['adv'])) {
-    $adv = (int)$_GET['adv'];
+    $adv = (int) $_GET['adv'];
 } else {
     unset($adv);
 }
@@ -80,25 +83,25 @@ if (IN_DEMO_MODE && $submit) {
 }
 
 /**
- * Start program proper
+ * Start program proper.
  */
 if ($submit) {
     $sql = '';
 
     if (!empty($forum_id)) {
         if (isset($_POST['simpleauth'])) {
-            $simple_ary = $simple_auth_ary[(int)$_POST['simpleauth']];
+            $simple_ary = $simple_auth_ary[(int) $_POST['simpleauth']];
 
             for ($i = 0, $iMax = count($simple_ary); $i < $iMax; $i++) {
-                $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $simple_ary[$i];
+                $sql .= (($sql != '') ? ', ' : '').$forum_auth_fields[$i].' = '.$simple_ary[$i];
             }
 
             if (is_array($simple_ary)) {
-                $sql = 'UPDATE ' . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
+                $sql = 'UPDATE '.BB_FORUMS." SET $sql WHERE forum_id = $forum_id";
             }
         } else {
             for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
-                $value = (int)$_POST[$forum_auth_fields[$i]];
+                $value = (int) $_POST[$forum_auth_fields[$i]];
 
                 if ($forum_auth_fields[$i] == 'auth_vote') {
                     if ($_POST['auth_vote'] == AUTH_ALL) {
@@ -106,10 +109,10 @@ if ($submit) {
                     }
                 }
 
-                $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $value;
+                $sql .= (($sql != '') ? ', ' : '').$forum_auth_fields[$i].' = '.$value;
             }
 
-            $sql = 'UPDATE ' . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
+            $sql = 'UPDATE '.BB_FORUMS." SET $sql WHERE forum_id = $forum_id";
         }
 
         if ($sql != '') {
@@ -124,20 +127,20 @@ if ($submit) {
 
     $datastore->update('cat_forums');
     CACHE('bb_cache')->rm();
-    bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="' . 'admin_forumauth.php' . '">', '</a>'));
+    bb_die($lang['FORUM_AUTH_UPDATED'].'<br /><br />'.sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="'.'admin_forumauth.php'.'">', '</a>'));
 }
 
 /**
- * Get required information
+ * Get required information.
  */
-$forum_rows = DB()->fetch_rowset('SELECT * FROM ' . BB_FORUMS . " $forum_sql");
+$forum_rows = DB()->fetch_rowset('SELECT * FROM '.BB_FORUMS." $forum_sql");
 
 if (empty($forum_id)) {
     // Output the selection table if no forum id was specified
     $template->assign_vars([
         'TPL_AUTH_SELECT_FORUM' => true,
-        'S_AUTH_ACTION' => 'admin_forumauth.php',
-        'S_AUTH_SELECT' => get_forum_select('admin', 'f', null, 80),
+        'S_AUTH_ACTION'         => 'admin_forumauth.php',
+        'S_AUTH_SELECT'         => get_forum_select('admin', 'f', null, 80),
     ]);
 } else {
     // Output the authorisation details if an id was specified
@@ -174,13 +177,13 @@ if (empty($forum_id)) {
 
         for ($j = 0, $jMax = count($simple_auth_types); $j < $jMax; $j++) {
             $selected = ($matched_type == $j) ? ' selected' : '';
-            $simple_auth .= '<option value="' . $j . '"' . $selected . '>' . $simple_auth_types[$j] . '</option>';
+            $simple_auth .= '<option value="'.$j.'"'.$selected.'>'.$simple_auth_types[$j].'</option>';
         }
 
         $simple_auth .= '</select>';
 
         $template->assign_block_vars('forum_auth', [
-            'CELL_TITLE' => $lang['SIMPLE_MODE'],
+            'CELL_TITLE'           => $lang['SIMPLE_MODE'],
             'S_AUTH_LEVELS_SELECT' => $simple_auth,
         ]);
 
@@ -188,18 +191,18 @@ if (empty($forum_id)) {
     } else {
         // Output values of individual fields
         for ($j = 0, $jMax = count($forum_auth_fields); $j < $jMax; $j++) {
-            $custom_auth[$j] = '&nbsp;<select name="' . $forum_auth_fields[$j] . '">';
+            $custom_auth[$j] = '&nbsp;<select name="'.$forum_auth_fields[$j].'">';
 
             for ($k = 0, $kMax = count($forum_auth_levels); $k < $kMax; $k++) {
                 $selected = ($forum_rows[0][$forum_auth_fields[$j]] == $forum_auth_const[$k]) ? ' selected' : '';
-                $custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . $lang['FORUM_' . strtoupper($forum_auth_levels[$k])] . '</OPTION>';
+                $custom_auth[$j] .= '<option value="'.$forum_auth_const[$k].'"'.$selected.'>'.$lang['FORUM_'.strtoupper($forum_auth_levels[$k])].'</OPTION>';
             }
             $custom_auth[$j] .= '</select>&nbsp;';
 
             $cell_title = $field_names[$forum_auth_fields[$j]];
 
             $template->assign_block_vars('forum_auth', [
-                'CELL_TITLE' => $cell_title,
+                'CELL_TITLE'           => $cell_title,
                 'S_AUTH_LEVELS_SELECT' => $custom_auth[$j],
             ]);
 
@@ -208,20 +211,20 @@ if (empty($forum_id)) {
     }
 
     $adv_mode = empty($adv) ? '1' : '0';
-    $switch_mode = "admin_forumauth.php?" . POST_FORUM_URL . "=$forum_id&amp;adv=$adv_mode";
+    $switch_mode = 'admin_forumauth.php?'.POST_FORUM_URL."=$forum_id&amp;adv=$adv_mode";
     $switch_mode_text = empty($adv) ? $lang['ADVANCED_MODE'] : $lang['SIMPLE_MODE'];
-    $u_switch_mode = '<a href="' . $switch_mode . '">' . $switch_mode_text . '</a>';
+    $u_switch_mode = '<a href="'.$switch_mode.'">'.$switch_mode_text.'</a>';
 
-    $s_hidden_fields = '<input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '">';
+    $s_hidden_fields = '<input type="hidden" name="'.POST_FORUM_URL.'" value="'.$forum_id.'">';
 
     $template->assign_vars([
         'TPL_EDIT_FORUM_AUTH' => true,
-        'FORUM_NAME' => htmlCHR($forum_name),
-        'U_VIEWFORUM' => BB_ROOT . FORUM_URL . $forum_id,
-        'U_SWITCH_MODE' => $u_switch_mode,
-        'S_FORUMAUTH_ACTION' => 'admin_forumauth.php',
-        'S_COLUMN_SPAN' => $s_column_span,
-        'S_HIDDEN_FIELDS' => $s_hidden_fields,
+        'FORUM_NAME'          => htmlCHR($forum_name),
+        'U_VIEWFORUM'         => BB_ROOT.FORUM_URL.$forum_id,
+        'U_SWITCH_MODE'       => $u_switch_mode,
+        'S_FORUMAUTH_ACTION'  => 'admin_forumauth.php',
+        'S_COLUMN_SPAN'       => $s_column_span,
+        'S_HIDDEN_FIELDS'     => $s_hidden_fields,
     ]);
 }
 

@@ -1,26 +1,28 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 define('BB_SCRIPT', 'vote');
 
-require __DIR__ . '/common.php';
+require __DIR__.'/common.php';
 
 // Start session management
 $user->session_start(['req_login' => true]);
 
-$mode = (string)$_POST['mode'];
-$topic_id = (int)$_POST['topic_id'];
-$forum_id = (int)$_POST['forum_id'];
-$vote_id = (int)$_POST['vote_id'];
+$mode = (string) $_POST['mode'];
+$topic_id = (int) $_POST['topic_id'];
+$forum_id = (int) $_POST['forum_id'];
+$vote_id = (int) $_POST['vote_id'];
 
-$return_topic_url = TOPIC_URL . $topic_id;
-$return_topic_url .= !empty($_POST['start']) ? "&amp;start=" . (int)$_POST['start'] : '';
+$return_topic_url = TOPIC_URL.$topic_id;
+$return_topic_url .= !empty($_POST['start']) ? '&amp;start='.(int) $_POST['start'] : '';
 
 set_die_append_msg($forum_id, $topic_id);
 
@@ -76,7 +78,7 @@ switch ($mode) {
             bb_die(__('NO_VOTE_OPTION'));
         }
 
-        if (\TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)$userdata['user_id'])) {
+        if (\TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int) $userdata['user_id'])) {
             bb_die(__('ALREADY_VOTED'));
         }
 
@@ -93,9 +95,9 @@ switch ($mode) {
         try {
             DB()->table(BB_POLL_USERS)->insert([
                 'topic_id' => $topic_id,
-                'user_id' => $userdata['user_id'],
-                'vote_ip' => USER_IP,
-                'vote_dt' => TIMENOW
+                'user_id'  => $userdata['user_id'],
+                'vote_ip'  => USER_IP,
+                'vote_dt'  => TIMENOW,
             ]);
         } catch (\Nette\Database\UniqueConstraintViolationException $e) {
             // Ignore duplicate entry (equivalent to INSERT IGNORE)
@@ -175,5 +177,5 @@ switch ($mode) {
         bb_die(__('NEW_POLL_RESULTS'));
         break;
     default:
-        bb_die('Invalid mode: ' . htmlCHR($mode));
+        bb_die('Invalid mode: '.htmlCHR($mode));
 }

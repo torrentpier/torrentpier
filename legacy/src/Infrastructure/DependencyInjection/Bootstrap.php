@@ -44,7 +44,7 @@ class Bootstrap
 
     private static function loadEnvironment(string $rootPath): void
     {
-        if (file_exists($rootPath . '/.env')) {
+        if (file_exists($rootPath.'/.env')) {
             $dotenv = Dotenv::createImmutable($rootPath);
             $dotenv->load();
         }
@@ -53,17 +53,17 @@ class Bootstrap
     private static function loadConfiguration(string $rootPath, array $config): array
     {
         // Load base configuration
-        $configPath = $rootPath . '/config';
+        $configPath = $rootPath.'/config';
 
         // Container configuration
-        if (file_exists($configPath . '/container.php')) {
-            $containerConfig = require $configPath . '/container.php';
+        if (file_exists($configPath.'/container.php')) {
+            $containerConfig = require $configPath.'/container.php';
             $config = array_merge($config, $containerConfig);
         }
 
         // Services configuration
-        if (file_exists($configPath . '/services.php')) {
-            $servicesConfig = require $configPath . '/services.php';
+        if (file_exists($configPath.'/services.php')) {
+            $servicesConfig = require $configPath.'/services.php';
             $config['definitions'] = array_merge(
                 $config['definitions'] ?? [],
                 $servicesConfig
@@ -71,13 +71,13 @@ class Bootstrap
         }
 
         // Database configuration
-        if (file_exists($configPath . '/database.php')) {
-            $config['database'] = require $configPath . '/database.php';
+        if (file_exists($configPath.'/database.php')) {
+            $config['database'] = require $configPath.'/database.php';
         }
 
         // Cache configuration
-        if (file_exists($configPath . '/cache.php')) {
-            $config['cache'] = require $configPath . '/cache.php';
+        if (file_exists($configPath.'/cache.php')) {
+            $config['cache'] = require $configPath.'/cache.php';
         }
 
         // Environment from .env

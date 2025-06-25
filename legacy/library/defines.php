@@ -1,41 +1,43 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
-define('ADMIN_DIR', BB_PATH . '/admin');
-define('DATA_DIR', BB_PATH . '/data');
-define('INT_DATA_DIR', BB_PATH . '/internal_data');
-define('CACHE_DIR', BB_PATH . '/internal_data/cache');
-define('LOG_DIR', BB_PATH . '/internal_data/log');
-define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers');
-define('AJAX_DIR', BB_PATH . '/library/ajax');
-define('ATTACH_DIR', BB_PATH . '/library/attach_mod');
-define('INC_DIR', BB_PATH . '/library/includes');
-define('UCP_DIR', BB_PATH . '/library/includes/ucp');
-define('LANG_ROOT_DIR', BB_PATH . '/library/language');
-define('SITEMAP_DIR', BB_PATH . '/sitemap');
-define('IMAGES_DIR', BB_PATH . '/styles/images');
-define('TEMPLATES_DIR', BB_PATH . '/styles/templates');
+define('ADMIN_DIR', BB_PATH.'/admin');
+define('DATA_DIR', BB_PATH.'/data');
+define('INT_DATA_DIR', BB_PATH.'/internal_data');
+define('CACHE_DIR', BB_PATH.'/internal_data/cache');
+define('LOG_DIR', BB_PATH.'/internal_data/log');
+define('TRIGGERS_DIR', BB_PATH.'/internal_data/triggers');
+define('AJAX_DIR', BB_PATH.'/library/ajax');
+define('ATTACH_DIR', BB_PATH.'/library/attach_mod');
+define('INC_DIR', BB_PATH.'/library/includes');
+define('UCP_DIR', BB_PATH.'/library/includes/ucp');
+define('LANG_ROOT_DIR', BB_PATH.'/library/language');
+define('SITEMAP_DIR', BB_PATH.'/sitemap');
+define('IMAGES_DIR', BB_PATH.'/styles/images');
+define('TEMPLATES_DIR', BB_PATH.'/styles/templates');
 
 // System
 define('APP_NAME', 'TorrentPier');
 define('DEFAULT_CHARSET', 'UTF-8');
 define('UPDATER_URL', 'https://api.github.com/repos/torrentpier/torrentpier/releases');
-define('UPDATER_FILE', INT_DATA_DIR . '/updater.json');
+define('UPDATER_FILE', INT_DATA_DIR.'/updater.json');
 define('COOKIE_DBG', 'bb_dbg');
 
 // Templates
-define('ADMIN_TPL_DIR', TEMPLATES_DIR . '/admin/');
+define('ADMIN_TPL_DIR', TEMPLATES_DIR.'/admin/');
 define('XS_USE_ISSET', '1');
 define('XS_TPL_PREFIX', 'tpl_');
 define('XS_TAG_NONE', 0);
@@ -70,14 +72,14 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 define('MYSQLI_ERROR_REPORTING', MYSQLI_REPORT_ERROR); // MySQL error reporting mode | https://www.php.net/manual/mysqli-driver.report-mode.php
 ini_set('log_errors', 1); // Enable logging (For native & Whoops)
-ini_set('error_log', LOG_DIR . '/php_errors.log'); // path to log file enabled only if log_errors == 1 (native)
-define('WHOOPS_LOG_FILE', LOG_DIR . '/php_whoops.log'); // log file enabled only if log_errors == 1 and APP_DEBUG == true (whoops)
+ini_set('error_log', LOG_DIR.'/php_errors.log'); // path to log file enabled only if log_errors == 1 (native)
+define('WHOOPS_LOG_FILE', LOG_DIR.'/php_whoops.log'); // log file enabled only if log_errors == 1 and APP_DEBUG == true (whoops)
 
 // Triggers
-define('BB_ENABLED', TRIGGERS_DIR . '/$on');
-define('BB_DISABLED', TRIGGERS_DIR . '/$off');
-define('CRON_ALLOWED', TRIGGERS_DIR . '/cron_allowed');
-define('CRON_RUNNING', TRIGGERS_DIR . '/cron_running');
+define('BB_ENABLED', TRIGGERS_DIR.'/$on');
+define('BB_DISABLED', TRIGGERS_DIR.'/$off');
+define('CRON_ALLOWED', TRIGGERS_DIR.'/cron_allowed');
+define('CRON_RUNNING', TRIGGERS_DIR.'/cron_running');
 
 // Gzip
 define('GZIP_OUTPUT_ALLOWED', extension_loaded('zlib') && !ini_get('zlib.output_compression'));
@@ -124,8 +126,8 @@ define('DL_STATUS_WILL', 4);
 // Cron
 define('CRON_LOG_ENABLED', true); // global ON/OFF
 define('CRON_FORCE_LOG', false); // always log regardless of job settings
-define('CRON_DIR', INC_DIR . '/cron/');
-define('CRON_JOB_DIR', CRON_DIR . 'jobs/');
+define('CRON_DIR', INC_DIR.'/cron/');
+define('CRON_JOB_DIR', CRON_DIR.'jobs/');
 define('CRON_LOG_DIR', 'cron'); // inside LOG_DIR
 define('CRON_LOG_FILE', 'cron'); // without ext
 

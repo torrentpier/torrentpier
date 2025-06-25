@@ -1,36 +1,38 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Captcha;
 
 /**
- * Class YandexSmartCaptcha
- * @package TorrentPier\Captcha
+ * Class YandexSmartCaptcha.
  */
 class YandexSmartCaptcha implements CaptchaInterface
 {
     /**
-     * Captcha service settings
+     * Captcha service settings.
      *
      * @var array
      */
     private array $settings;
 
     /**
-     * Service verification endpoint
+     * Service verification endpoint.
      *
      * @var string
      */
     private string $verifyEndpoint = 'https://smartcaptcha.yandexcloud.net/validate';
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $settings
      */
@@ -40,7 +42,7 @@ class YandexSmartCaptcha implements CaptchaInterface
     }
 
     /**
-     * Returns captcha widget
+     * Returns captcha widget.
      *
      * @return string
      */
@@ -52,7 +54,7 @@ class YandexSmartCaptcha implements CaptchaInterface
     }
 
     /**
-     * Checking captcha answer
+     * Checking captcha answer.
      *
      * @return bool
      */
@@ -61,8 +63,8 @@ class YandexSmartCaptcha implements CaptchaInterface
         $ch = curl_init($this->verifyEndpoint);
         $args = [
             'secret' => $this->settings['secret_key'],
-            'token' => $_POST['smart-token'] ?? null,
-            'ip' => $_SERVER['REMOTE_ADDR'],
+            'token'  => $_POST['smart-token'] ?? null,
+            'ip'     => $_SERVER['REMOTE_ADDR'],
         ];
 
         curl_setopt($ch, CURLOPT_TIMEOUT, 1);
@@ -79,6 +81,7 @@ class YandexSmartCaptcha implements CaptchaInterface
         }
 
         $resp = json_decode($serverOutput);
-        return ($resp->status === 'ok');
+
+        return $resp->status === 'ok';
     }
 }

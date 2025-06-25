@@ -1,16 +1,19 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier;
 
 /**
- * Language management class
+ * Language management class.
  *
  * Singleton class that manages language loading and provides access to language variables
  * while maintaining backward compatibility with global $lang variable.
@@ -29,18 +32,19 @@ class Language
     }
 
     /**
-     * Get the singleton instance of Language
+     * Get the singleton instance of Language.
      */
     public static function getInstance(): Language
     {
         if (self::$instance === null) {
             self::$instance = new self();
         }
+
         return self::$instance;
     }
 
     /**
-     * Initialize the language system (for compatibility)
+     * Initialize the language system (for compatibility).
      */
     public static function init(): Language
     {
@@ -49,7 +53,7 @@ class Language
 
     /**
      * Initialize language loading based on user preferences
-     * Maintains compatibility with existing User.php language initialization
+     * Maintains compatibility with existing User.php language initialization.
      */
     public function initializeLanguage(string $userLang = '', bool $forceReload = false): void
     {
@@ -81,11 +85,11 @@ class Language
     }
 
     /**
-     * Load source language (fallback)
+     * Load source language (fallback).
      */
     private function loadSourceLanguage(): void
     {
-        $sourceFile = LANG_ROOT_DIR . '/en/main.php';
+        $sourceFile = LANG_ROOT_DIR.'/en/main.php';
         if (is_file($sourceFile)) {
             $lang = [];
             require $sourceFile;
@@ -94,18 +98,18 @@ class Language
     }
 
     /**
-     * Load user language
+     * Load user language.
      */
     private function loadUserLanguage(string $userLang): void
     {
-        $userFile = LANG_ROOT_DIR . '/' . $userLang . '/main.php';
+        $userFile = LANG_ROOT_DIR.'/'.$userLang.'/main.php';
         if (is_file($userFile)) {
             $lang = [];
             require $userFile;
             $this->userLanguage = $lang;
         } else {
             // Fall back to default language if user language doesn't exist
-            $defaultFile = LANG_ROOT_DIR . '/' . config()->get('default_lang', 'source') . '/main.php';
+            $defaultFile = LANG_ROOT_DIR.'/'.config()->get('default_lang', 'source').'/main.php';
             if (is_file($defaultFile)) {
                 $lang = [];
                 require $defaultFile;
@@ -118,7 +122,7 @@ class Language
     }
 
     /**
-     * Update global variables for backward compatibility
+     * Update global variables for backward compatibility.
      */
     private function updateGlobalVariables(): void
     {
@@ -128,7 +132,7 @@ class Language
 
     /**
      * Get a language string by key
-     * Supports dot notation for nested arrays (e.g., 'DATETIME.TODAY')
+     * Supports dot notation for nested arrays (e.g., 'DATETIME.TODAY').
      */
     public function get(string $key, mixed $default = null): mixed
     {
@@ -140,7 +144,7 @@ class Language
     }
 
     /**
-     * Get a language string from source language
+     * Get a language string from source language.
      */
     public function getSource(string $key, mixed $default = null): mixed
     {
@@ -152,7 +156,7 @@ class Language
     }
 
     /**
-     * Check if a language key exists
+     * Check if a language key exists.
      */
     public function has(string $key): bool
     {
@@ -164,7 +168,7 @@ class Language
     }
 
     /**
-     * Get all language variables
+     * Get all language variables.
      */
     public function all(): array
     {
@@ -172,7 +176,7 @@ class Language
     }
 
     /**
-     * Get all source language variables
+     * Get all source language variables.
      */
     public function allSource(): array
     {
@@ -180,7 +184,7 @@ class Language
     }
 
     /**
-     * Get current language code
+     * Get current language code.
      */
     public function getCurrentLanguage(): string
     {
@@ -188,7 +192,7 @@ class Language
     }
 
     /**
-     * Get available languages from config
+     * Get available languages from config.
      */
     public function getAvailableLanguages(): array
     {
@@ -196,7 +200,7 @@ class Language
     }
 
     /**
-     * Load additional language file (for modules/extensions)
+     * Load additional language file (for modules/extensions).
      */
     public function loadAdditionalFile(string $filename, string $language = ''): bool
     {
@@ -204,10 +208,10 @@ class Language
             $language = $this->currentLanguage;
         }
 
-        $filepath = LANG_ROOT_DIR . '/' . $language . '/' . $filename . '.php';
+        $filepath = LANG_ROOT_DIR.'/'.$language.'/'.$filename.'.php';
         if (!is_file($filepath)) {
             // Try source language as fallback
-            $filepath = LANG_ROOT_DIR . '/en/' . $filename . '.php';
+            $filepath = LANG_ROOT_DIR.'/en/'.$filename.'.php';
             if (!is_file($filepath)) {
                 return false;
             }
@@ -227,7 +231,7 @@ class Language
     }
 
     /**
-     * Set a language variable (runtime modification)
+     * Set a language variable (runtime modification).
      */
     public function set(string $key, mixed $value): void
     {
@@ -243,7 +247,7 @@ class Language
     }
 
     /**
-     * Get nested value using dot notation
+     * Get nested value using dot notation.
      */
     private function getNestedValue(array $array, string $key, mixed $default = null): mixed
     {
@@ -261,7 +265,7 @@ class Language
     }
 
     /**
-     * Set nested value using dot notation
+     * Set nested value using dot notation.
      */
     private function setNestedValue(array &$array, string $key, mixed $value): void
     {
@@ -279,7 +283,7 @@ class Language
     }
 
     /**
-     * Get language name for display
+     * Get language name for display.
      */
     public function getLanguageName(string $code = ''): string
     {
@@ -291,7 +295,7 @@ class Language
     }
 
     /**
-     * Get language locale
+     * Get language locale.
      */
     public function getLanguageLocale(string $code = ''): string
     {
@@ -303,7 +307,7 @@ class Language
     }
 
     /**
-     * Magic method to allow property access for backward compatibility
+     * Magic method to allow property access for backward compatibility.
      */
     public function __get(string $key): mixed
     {
@@ -311,7 +315,7 @@ class Language
     }
 
     /**
-     * Magic method to allow property setting for backward compatibility
+     * Magic method to allow property setting for backward compatibility.
      */
     public function __set(string $key, mixed $value): void
     {
@@ -319,7 +323,7 @@ class Language
     }
 
     /**
-     * Magic method to check if property exists
+     * Magic method to check if property exists.
      */
     public function __isset(string $key): bool
     {
@@ -327,17 +331,17 @@ class Language
     }
 
     /**
-     * Prevent cloning of the singleton instance
+     * Prevent cloning of the singleton instance.
      */
     private function __clone()
     {
     }
 
     /**
-     * Prevent unserialization of the singleton instance
+     * Prevent unserialization of the singleton instance.
      */
     public function __wakeup()
     {
-        throw new \Exception("Cannot unserialize a singleton.");
+        throw new \Exception('Cannot unserialize a singleton.');
     }
 }

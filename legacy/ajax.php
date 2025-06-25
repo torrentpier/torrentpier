@@ -1,16 +1,18 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 define('BB_SCRIPT', 'ajax');
 define('IN_AJAX', true);
 
-require __DIR__ . '/common.php';
+require __DIR__.'/common.php';
 
 // Init Ajax class
 $ajax = new TorrentPier\Ajax();
@@ -24,7 +26,7 @@ switch ($ajax->action) {
     case 'view_post':
     case 'posts':
     case 'post_mod_comment':
-        require INC_DIR . '/bbcode.php';
+        require INC_DIR.'/bbcode.php';
         break;
 
     case 'view_torrent':
@@ -32,7 +34,7 @@ switch ($ajax->action) {
     case 'change_tor_status':
     case 'change_torrent':
     case 'passkey':
-        require ATTACH_DIR . '/attachment_mod.php';
+        require ATTACH_DIR.'/attachment_mod.php';
         break;
 }
 

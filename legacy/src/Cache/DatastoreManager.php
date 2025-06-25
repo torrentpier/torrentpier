@@ -1,9 +1,12 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
@@ -11,36 +14,35 @@ namespace TorrentPier\Cache;
 
 use Nette\Caching\Cache;
 use Nette\Caching\Storage;
-use TorrentPier\Dev;
 
 /**
  * Datastore Manager using unified CacheManager internally
- * Maintains backward compatibility with Legacy Datastore API
- *
- * @package TorrentPier\Cache
+ * Maintains backward compatibility with Legacy Datastore API.
  */
 class DatastoreManager
 {
     /**
-     * Singleton instance
+     * Singleton instance.
+     *
      * @var self|null
      */
     private static ?self $instance = null;
 
     /**
-     * Unified cache manager instance
+     * Unified cache manager instance.
+     *
      * @var CacheManager
      */
     private CacheManager $cacheManager;
 
     /**
-     * Директория с builder-скриптами (внутри INC_DIR)
+     * Директория с builder-скриптами (внутри INC_DIR).
      */
     public string $ds_dir = 'datastore';
 
     /**
      * Готовая к употреблению data
-     * array('title' => data)
+     * array('title' => data).
      */
     public array $data = [];
 
@@ -48,38 +50,39 @@ class DatastoreManager
      * Список элементов, которые будут извлечены из хранилища при первом же запросе get()
      * до этого момента они ставятся в очередь $queued_items для дальнейшего извлечения _fetch()'ем
      * всех элементов одним запросом
-     * array('title1', 'title2'...)
+     * array('title1', 'title2'...).
      */
     public array $queued_items = [];
 
     /**
-     * 'title' => 'builder script name' inside "includes/datastore" dir
+     * 'title' => 'builder script name' inside "includes/datastore" dir.
      */
     public array $known_items = [
-        'cat_forums' => 'build_cat_forums.php',
-        'censor' => 'build_censor.php',
-        'check_updates' => 'build_check_updates.php',
-        'jumpbox' => 'build_cat_forums.php',
+        'cat_forums'             => 'build_cat_forums.php',
+        'censor'                 => 'build_censor.php',
+        'check_updates'          => 'build_check_updates.php',
+        'jumpbox'                => 'build_cat_forums.php',
         'viewtopic_forum_select' => 'build_cat_forums.php',
-        'latest_news' => 'build_cat_forums.php',
-        'network_news' => 'build_cat_forums.php',
-        'ads' => 'build_cat_forums.php',
-        'moderators' => 'build_moderators.php',
-        'stats' => 'build_stats.php',
-        'ranks' => 'build_ranks.php',
-        'ban_list' => 'build_bans.php',
-        'attach_extensions' => 'build_attach_extensions.php',
-        'smile_replacements' => 'build_smilies.php',
+        'latest_news'            => 'build_cat_forums.php',
+        'network_news'           => 'build_cat_forums.php',
+        'ads'                    => 'build_cat_forums.php',
+        'moderators'             => 'build_moderators.php',
+        'stats'                  => 'build_stats.php',
+        'ranks'                  => 'build_ranks.php',
+        'ban_list'               => 'build_bans.php',
+        'attach_extensions'      => 'build_attach_extensions.php',
+        'smile_replacements'     => 'build_smilies.php',
     ];
 
     /**
-     * Engine type (for backward compatibility)
+     * Engine type (for backward compatibility).
+     *
      * @var string
      */
     public string $engine;
 
     /**
-     * Debug properties (delegated to CacheManager)
+     * Debug properties (delegated to CacheManager).
      */
     public int $num_queries = 0;
     public float $sql_starttime = 0;
@@ -92,10 +95,10 @@ class DatastoreManager
     public ?string $cur_query = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Storage $storage Pre-built storage instance from UnifiedCacheSystem
-     * @param array $config
+     * @param array   $config
      */
     private function __construct(Storage $storage, array $config)
     {
@@ -106,10 +109,11 @@ class DatastoreManager
     }
 
     /**
-     * Get singleton instance
+     * Get singleton instance.
      *
      * @param Storage $storage Pre-built storage instance
-     * @param array $config
+     * @param array   $config
+     *
      * @return self
      */
     public static function getInstance(Storage $storage, array $config): self
@@ -122,9 +126,10 @@ class DatastoreManager
     }
 
     /**
-     * Enqueue items for batch loading
+     * Enqueue items for batch loading.
      *
      * @param array $items
+     *
      * @return void
      */
     public function enqueue(array $items): void
@@ -137,9 +142,10 @@ class DatastoreManager
     }
 
     /**
-     * Get datastore item
+     * Get datastore item.
      *
      * @param string $title
+     *
      * @return mixed
      */
     public function &get(string $title): mixed
@@ -148,14 +154,16 @@ class DatastoreManager
             $this->enqueue([$title]);
             $this->_fetch();
         }
+
         return $this->data[$title];
     }
 
     /**
-     * Store data into datastore
+     * Store data into datastore.
      *
      * @param string $item_name
-     * @param mixed $item_data
+     * @param mixed  $item_data
+     *
      * @return bool
      */
     public function store(string $item_name, mixed $item_data): bool
@@ -170,30 +178,34 @@ class DatastoreManager
         try {
             $this->cacheManager->save($item_name, $item_data, $dependencies);
             $this->_updateDebugCounters();
+
             return true;
         } catch (\Exception $e) {
             $this->_updateDebugCounters();
+
             return false;
         }
     }
 
     /**
-     * Remove data from memory cache
+     * Remove data from memory cache.
      *
      * @param array|string $items
+     *
      * @return void
      */
     public function rm(array|string $items): void
     {
-        foreach ((array)$items as $item) {
+        foreach ((array) $items as $item) {
             unset($this->data[$item]);
         }
     }
 
     /**
-     * Update datastore items
+     * Update datastore items.
      *
      * @param array|string $items
+     *
      * @return void
      */
     public function update(array|string $items): void
@@ -201,13 +213,13 @@ class DatastoreManager
         if ($items == 'all') {
             $items = array_keys(array_unique($this->known_items));
         }
-        foreach ((array)$items as $item) {
+        foreach ((array) $items as $item) {
             $this->_build_item($item);
         }
     }
 
     /**
-     * Clean datastore cache (for admin purposes)
+     * Clean datastore cache (for admin purposes).
      *
      * @return void
      */
@@ -220,7 +232,7 @@ class DatastoreManager
     }
 
     /**
-     * Fetch items from store
+     * Fetch items from store.
      *
      * @return void
      */
@@ -239,15 +251,17 @@ class DatastoreManager
     }
 
     /**
-     * Fetch items from cache store
+     * Fetch items from cache store.
+     *
+     * @throws \Exception
      *
      * @return void
-     * @throws \Exception
      */
     public function _fetch_from_store(): void
     {
         if (!$items = $this->queued_items) {
             $src = $this->_debug_find_caller('enqueue');
+
             throw new \Exception("Datastore: no items queued for fetching [$src]");
         }
 
@@ -256,7 +270,7 @@ class DatastoreManager
         $results = $this->cacheManager->bulkLoad($keys);
 
         foreach ($items as $item) {
-            $fullKey = $this->cacheManager->prefix . $item;
+            $fullKey = $this->cacheManager->prefix.$item;
 
             // Distinguish between cache miss (null) and cached false value
             if (array_key_exists($fullKey, $results)) {
@@ -273,11 +287,13 @@ class DatastoreManager
     }
 
     /**
-     * Build item using builder script
+     * Build item using builder script.
      *
      * @param string $title
-     * @return void
+     *
      * @throws \Exception
+     *
+     * @return void
      */
     public function _build_item(string $title): void
     {
@@ -285,7 +301,7 @@ class DatastoreManager
             throw new \Exception("Unknown datastore item: $title");
         }
 
-        $file = INC_DIR . '/' . $this->ds_dir . '/' . $this->known_items[$title];
+        $file = INC_DIR.'/'.$this->ds_dir.'/'.$this->known_items[$title];
         if (!file_exists($file)) {
             throw new \Exception("Datastore builder script not found: $file");
         }
@@ -294,23 +310,25 @@ class DatastoreManager
     }
 
     /**
-     * Find debug caller (backward compatibility)
+     * Find debug caller (backward compatibility).
      *
      * @param string $function_name
+     *
      * @return string
      */
     public function _debug_find_caller(string $function_name): string
     {
         foreach (debug_backtrace() as $trace) {
             if (isset($trace['function']) && $trace['function'] === $function_name) {
-                return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
+                return hide_bb_path($trace['file']).'('.$trace['line'].')';
             }
         }
+
         return 'caller not found';
     }
 
     /**
-     * Update debug counters from cache manager
+     * Update debug counters from cache manager.
      *
      * @return void
      */
@@ -323,15 +341,16 @@ class DatastoreManager
     }
 
     /**
-     * Advanced Nette caching methods (extended functionality)
+     * Advanced Nette caching methods (extended functionality).
      */
 
     /**
-     * Load with dependencies
+     * Load with dependencies.
      *
-     * @param string $key
+     * @param string        $key
      * @param callable|null $callback
-     * @param array $dependencies
+     * @param array         $dependencies
+     *
      * @return mixed
      */
     public function load(string $key, ?callable $callback = null, array $dependencies = []): mixed
@@ -340,11 +359,12 @@ class DatastoreManager
     }
 
     /**
-     * Save with dependencies
+     * Save with dependencies.
      *
      * @param string $key
-     * @param mixed $value
-     * @param array $dependencies
+     * @param mixed  $value
+     * @param array  $dependencies
+     *
      * @return void
      */
     public function save(string $key, mixed $value, array $dependencies = []): void
@@ -354,9 +374,10 @@ class DatastoreManager
     }
 
     /**
-     * Clean by criteria
+     * Clean by criteria.
      *
      * @param array $conditions
+     *
      * @return void
      */
     public function cleanByCriteria(array $conditions = []): void
@@ -366,9 +387,10 @@ class DatastoreManager
     }
 
     /**
-     * Clean by tags
+     * Clean by tags.
      *
      * @param array $tags
+     *
      * @return void
      */
     public function cleanByTags(array $tags): void
@@ -378,7 +400,7 @@ class DatastoreManager
     }
 
     /**
-     * Get cache manager instance (for advanced usage)
+     * Get cache manager instance (for advanced usage).
      *
      * @return CacheManager
      */
@@ -388,7 +410,7 @@ class DatastoreManager
     }
 
     /**
-     * Get engine name
+     * Get engine name.
      *
      * @return string
      */
@@ -398,7 +420,7 @@ class DatastoreManager
     }
 
     /**
-     * Check if storage supports tags
+     * Check if storage supports tags.
      *
      * @return bool
      */
@@ -408,10 +430,11 @@ class DatastoreManager
     }
 
     /**
-     * Magic method to delegate unknown method calls to cache manager
+     * Magic method to delegate unknown method calls to cache manager.
      *
      * @param string $method
-     * @param array $args
+     * @param array  $args
+     *
      * @return mixed
      */
     public function __call(string $method, array $args): mixed
@@ -419,6 +442,7 @@ class DatastoreManager
         if (method_exists($this->cacheManager, $method)) {
             $result = $this->cacheManager->$method(...$args);
             $this->_updateDebugCounters();
+
             return $result;
         }
 
@@ -426,9 +450,10 @@ class DatastoreManager
     }
 
     /**
-     * Magic property getter to delegate to cache manager
+     * Magic property getter to delegate to cache manager.
      *
      * @param string $name
+     *
      * @return mixed
      */
     public function __get(string $name): mixed
@@ -442,10 +467,10 @@ class DatastoreManager
             // Legacy cache systems sometimes had a 'db' property for database storage
             // Our unified system doesn't use separate database connections for cache
             // Return an object with empty debug arrays for compatibility
-            return (object)[
-                'dbg' => [],
-                'engine' => $this->engine,
-                'sql_timetotal' => 0
+            return (object) [
+                'dbg'           => [],
+                'engine'        => $this->engine,
+                'sql_timetotal' => 0,
             ];
         }
 
@@ -453,10 +478,11 @@ class DatastoreManager
     }
 
     /**
-     * Magic property setter to delegate to cache manager
+     * Magic property setter to delegate to cache manager.
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return void
      */
     public function __set(string $name, mixed $value): void

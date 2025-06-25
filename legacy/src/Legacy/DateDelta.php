@@ -1,25 +1,27 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy;
 
 /**
- * Class DateDelta
- * @package TorrentPier\Legacy
+ * Class DateDelta.
  */
 class DateDelta
 {
     public $auto_granularity = [
-        60 => 'seconds', // set granularity to "seconds" if delta less then 1 minute
-        10800 => 'minutes', // 3 hours
-        259200 => 'hours', // 3 days
-        31363200 => 'mday', // 12 months
+        60        => 'seconds', // set granularity to "seconds" if delta less then 1 minute
+        10800     => 'minutes', // 3 hours
+        259200    => 'hours', // 3 days
+        31363200  => 'mday', // 12 months
         311040000 => 'mon', // 10 years
     ];
     public $intervals = [];
@@ -34,11 +36,12 @@ class DateDelta
     }
 
     /**
-     * Makes the spellable phrase
+     * Makes the spellable phrase.
      *
-     * @param $first
-     * @param $last
+     * @param        $first
+     * @param        $last
      * @param string $from
+     *
      * @return bool|string
      */
     public function spellDelta($first, $last, $from = 'auto')
@@ -85,14 +88,16 @@ class DateDelta
                 break;
             }
         }
+
         return implode(' ', $parts);
     }
 
     /**
-     * Returns the associative array with date deltas
+     * Returns the associative array with date deltas.
      *
      * @param $first
      * @param $last
+     *
      * @return bool
      */
     public function getDelta($first, $last)
@@ -140,10 +145,11 @@ class DateDelta
     }
 
     /**
-     * Returns the length (in days) of the specified month
+     * Returns the length (in days) of the specified month.
      *
      * @param $year
      * @param $mon
+     *
      * @return int
      */
     public function monthLength($year, $mon)
@@ -152,6 +158,7 @@ class DateDelta
         while (checkdate($mon, $l + 1, $year)) {
             $l++;
         }
+
         return $l;
     }
 }

@@ -1,14 +1,17 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 /**
- * Called from admin_users.php and admin_groups.php in order to process Quota Settings (admin/admin_users.php:admin/admin_groups.php)
+ * Called from admin_users.php and admin_groups.php in order to process Quota Settings (admin/admin_users.php:admin/admin_groups.php).
  */
 function attachment_quota_settings($admin_mode, $mode, $submit = false)
 {
@@ -18,12 +21,12 @@ function attachment_quota_settings($admin_mode, $mode, $submit = false)
     if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
         $upload_dir = $attach_config['upload_dir'];
     } else {
-        $upload_dir = BB_ROOT . $attach_config['upload_dir'];
+        $upload_dir = BB_ROOT.$attach_config['upload_dir'];
     }
 
-    include ATTACH_DIR . '/includes/functions_selects.php';
-    if (!function_exists("process_quota_settings")) {
-        include ATTACH_DIR . '/includes/functions_admin.php';
+    include ATTACH_DIR.'/includes/functions_selects.php';
+    if (!function_exists('process_quota_settings')) {
+        include ATTACH_DIR.'/includes/functions_admin.php';
     }
 
     $user_id = 0;
@@ -47,7 +50,7 @@ function attachment_quota_settings($admin_mode, $mode, $submit = false)
                 $this_userdata = get_userdata($_POST['username'], true);
             }
 
-            $user_id = (int)$this_userdata['user_id'];
+            $user_id = (int) $this_userdata['user_id'];
         } else {
             $user_id = get_var('id', 0);
 
@@ -59,7 +62,7 @@ function attachment_quota_settings($admin_mode, $mode, $submit = false)
 
     if ($admin_mode == 'user' && !$submit && $mode != 'save') {
         // Show the contents
-        $sql = 'SELECT quota_limit_id, quota_type FROM ' . BB_QUOTA . ' WHERE user_id = ' . (int)$user_id;
+        $sql = 'SELECT quota_limit_id, quota_type FROM '.BB_QUOTA.' WHERE user_id = '.(int) $user_id;
 
         if (!($result = DB()->sql_query($sql))) {
             bb_die('Unable to get quota settings #1');
@@ -84,7 +87,7 @@ function attachment_quota_settings($admin_mode, $mode, $submit = false)
 
         $template->assign_vars([
             'S_SELECT_UPLOAD_QUOTA' => quota_limit_select('user_upload_quota', $upload_quota),
-            'S_SELECT_PM_QUOTA' => quota_limit_select('user_pm_quota', $pm_quota)
+            'S_SELECT_PM_QUOTA'     => quota_limit_select('user_pm_quota', $pm_quota),
         ]);
     }
 
@@ -109,7 +112,7 @@ function attachment_quota_settings($admin_mode, $mode, $submit = false)
         $group_id = get_var(POST_GROUPS_URL, 0);
 
         // Show the contents
-        $sql = 'SELECT quota_limit_id, quota_type FROM ' . BB_QUOTA . ' WHERE group_id = ' . (int)$group_id;
+        $sql = 'SELECT quota_limit_id, quota_type FROM '.BB_QUOTA.' WHERE group_id = '.(int) $group_id;
 
         if (!($result = DB()->sql_query($sql))) {
             bb_die('Unable to get quota settings #2');
@@ -134,7 +137,7 @@ function attachment_quota_settings($admin_mode, $mode, $submit = false)
 
         $template->assign_vars([
             'S_SELECT_UPLOAD_QUOTA' => quota_limit_select('group_upload_quota', $upload_quota),
-            'S_SELECT_PM_QUOTA' => quota_limit_select('group_pm_quota', $pm_quota)
+            'S_SELECT_PM_QUOTA'     => quota_limit_select('group_pm_quota', $pm_quota),
         ]);
     }
 

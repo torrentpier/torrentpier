@@ -1,9 +1,12 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
@@ -12,47 +15,46 @@ namespace TorrentPier;
 use Exception;
 
 /**
- * Class Updater
- * @package TorrentPier
+ * Class Updater.
  */
 class Updater
 {
     /**
-     * Target version of TorrentPier
+     * Target version of TorrentPier.
      *
      * @var string
      */
     public string $targetVersion;
 
     /**
-     * Json response
+     * Json response.
      *
      * @var array
      */
     private array $jsonResponse = [];
 
     /**
-     * Save path
+     * Save path.
      *
      * @var string
      */
     public string $savePath;
 
     /**
-     * Stream context
+     * Stream context.
      *
      * @var array
      */
     private const STREAM_CONTEXT = [
         'http' => [
-            'header' => 'User-Agent: ' . APP_NAME . '-' . TIMENOW,
-            'timeout' => 10,
-            'ignore_errors' => true
-        ]
+            'header'        => 'User-Agent: '.APP_NAME.'-'.TIMENOW,
+            'timeout'       => 10,
+            'ignore_errors' => true,
+        ],
     ];
 
     /**
-     * Updater constructor
+     * Updater constructor.
      *
      * @throws Exception
      */
@@ -77,13 +79,15 @@ class Updater
     }
 
     /**
-     * Download build from GitHub
+     * Download build from GitHub.
      *
      * @param string $path
      * @param string $targetVersion
-     * @param bool $force
-     * @return bool
+     * @param bool   $force
+     *
      * @throws Exception
+     *
+     * @return bool
      */
     public function download(string $path, string $targetVersion = 'latest', bool $force = false): bool
     {
@@ -101,7 +105,7 @@ class Updater
         }
 
         $downloadLink = $versionInfo['assets'][0]['browser_download_url'];
-        $this->savePath = $path . $versionInfo['assets'][0]['name'];
+        $this->savePath = $path.$versionInfo['assets'][0]['name'];
 
         if (!is_file($this->savePath) || $force) {
             $context = stream_context_create(self::STREAM_CONTEXT);
@@ -130,9 +134,10 @@ class Updater
     }
 
     /**
-     * Returns information of latest TorrentPier version available
+     * Returns information of latest TorrentPier version available.
      *
      * @param bool $allowPreReleases
+     *
      * @return array
      */
     public function getLastVersion(bool $allowPreReleases = true): array

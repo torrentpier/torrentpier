@@ -1,9 +1,12 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
@@ -11,24 +14,22 @@ namespace TorrentPier;
 
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
+use Egulias\EmailValidator\Validation\Extra\SpoofCheckValidation;
+use Egulias\EmailValidator\Validation\MessageIDValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
-use Egulias\EmailValidator\Validation\MessageIDValidation;
-use Egulias\EmailValidator\Validation\Extra\SpoofCheckValidation;
-
 use TorrentPier\Helpers\StringHelper;
 
 /**
- * Class Validate
- * @package TorrentPier
+ * Class Validate.
  */
 class Validate
 {
     /**
-     * Validate user entered username
+     * Validate user entered username.
      *
      * @param string $username
-     * @param bool $check_ban_and_taken
+     * @param bool   $check_ban_and_taken
      *
      * @return bool|string
      */
@@ -53,9 +54,10 @@ class Validate
         }
 
         // Allowed symbols
-        if (!preg_match('#^[' . $name_chars . ']+$#iu', $username, $m)) {
-            $invalid_chars = preg_replace('#[' . $name_chars . ']#iu', '', $username);
-            return "{$lang['USERNAME_INVALID']}: <b>" . htmlCHR($invalid_chars) . "</b>";
+        if (!preg_match('#^['.$name_chars.']+$#iu', $username, $m)) {
+            $invalid_chars = preg_replace('#['.$name_chars.']#iu', '', $username);
+
+            return "{$lang['USERNAME_INVALID']}: <b>".htmlCHR($invalid_chars).'</b>';
         }
         // HTML Entities
         if (preg_match_all('/&(#[0-9]+|[a-z]+);/iu', $username, $m)) {
@@ -68,7 +70,7 @@ class Validate
         if ($check_ban_and_taken) {
             // Check taken
             $username_sql = DB()->escape($username);
-            if ($row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE username = '$username_sql' LIMIT 1")) {
+            if ($row = DB()->fetch_row('SELECT username FROM '.BB_USERS." WHERE username = '$username_sql' LIMIT 1")) {
                 if ((!IS_GUEST && $row['username'] != $user->name) || IS_GUEST) {
                     return $lang['USERNAME_TAKEN'];
                 }
@@ -76,7 +78,7 @@ class Validate
 
             // Check banned
             $banned_names = [];
-            foreach (DB()->fetch_rowset("SELECT disallow_username FROM " . BB_DISALLOW . " ORDER BY NULL") as $row) {
+            foreach (DB()->fetch_rowset('SELECT disallow_username FROM '.BB_DISALLOW.' ORDER BY NULL') as $row) {
                 $banned_names[] = str_replace('\*', '.*?', preg_quote($row['disallow_username'], '#u'));
             }
             if ($banned_names_exp = implode('|', $banned_names)) {
@@ -90,10 +92,10 @@ class Validate
     }
 
     /**
-     * Validate user entered email
+     * Validate user entered email.
      *
      * @param string $email
-     * @param bool $check_taken
+     * @param bool   $check_taken
      *
      * @return bool|string
      */
@@ -124,7 +126,7 @@ class Validate
                 new RFCValidation(), // Standard RFC-like email validation.
                 new DNSCheckValidation(), // Will check if there are DNS records that signal that the server accepts emails. This does not entail that the email exists.
                 new MessageIDValidation(), // Follows RFC2822 for message-id to validate that field, that has some differences in the domain part.
-                new SpoofCheckValidation() // Will check for multi-utf-8 chars that can signal an erroneous email name.
+                new SpoofCheckValidation(), // Will check for multi-utf-8 chars that can signal an erroneous email name.
             ]);
 
             if (!$validator->isValid($email, $multipleValidations)) {
@@ -135,7 +137,7 @@ class Validate
         // Check taken
         if ($check_taken) {
             $email_sql = DB()->escape($email);
-            if ($row = DB()->fetch_row("SELECT `user_email` FROM " . BB_USERS . " WHERE user_email = '$email_sql' LIMIT 1")) {
+            if ($row = DB()->fetch_row('SELECT `user_email` FROM '.BB_USERS." WHERE user_email = '$email_sql' LIMIT 1")) {
                 if ($row['user_email'] == $userdata['user_email']) {
                     return false;
                 }
@@ -148,7 +150,7 @@ class Validate
     }
 
     /**
-     * Validate user entered password
+     * Validate user entered password.
      *
      * @param string $password
      * @param string $password_confirm

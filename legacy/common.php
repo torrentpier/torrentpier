@@ -1,14 +1,16 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (isset($_REQUEST['GLOBALS'])) {
-    die();
+    exit;
 }
 
 define('TIMESTART', utime());
@@ -50,19 +52,20 @@ foreach ($allowedCDNs as $allowedCDN) {
 }
 
 // Get all constants
-require_once BB_PATH . '/library/defines.php';
+require_once BB_PATH.'/library/defines.php';
 
 // Composer
-if (!is_file(BB_PATH . '/vendor/autoload.php')) {
-    die('🔩 Manual install: <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">Install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>.<br/>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
+if (!is_file(BB_PATH.'/vendor/autoload.php')) {
+    exit('🔩 Manual install: <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">Install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>.<br/>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
 }
-require_once BB_PATH . '/vendor/autoload.php';
+require_once BB_PATH.'/vendor/autoload.php';
 
 /**
  * Gets the value of an environment variable.
  *
- * @param string $key
+ * @param string     $key
  * @param mixed|null $default
+ *
  * @return mixed
  */
 function env(string $key, mixed $default = null): mixed
@@ -75,15 +78,15 @@ try {
     $dotenv = Dotenv\Dotenv::createMutable(BB_PATH);
     $dotenv->load();
 } catch (\Dotenv\Exception\InvalidPathException $pathException) {
-    die('🔩 Manual install: Rename from <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env.example</code> to <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env</code>, and configure it.<br/>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
+    exit('🔩 Manual install: Rename from <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env.example</code> to <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env</code>, and configure it.<br/>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
 }
 
 // Load config
-require_once BB_PATH . '/library/config.php';
+require_once BB_PATH.'/library/config.php';
 
 // Local config
-if (is_file(BB_PATH . '/library/config.local.php')) {
-    require_once BB_PATH . '/library/config.local.php';
+if (is_file(BB_PATH.'/library/config.local.php')) {
+    require_once BB_PATH.'/library/config.local.php';
 }
 
 /** @noinspection PhpUndefinedVariableInspection */
@@ -91,7 +94,7 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
 $config = \TorrentPier\Config::init($bb_cfg);
 
 /**
- * Get the Config instance
+ * Get the Config instance.
  *
  * @return \TorrentPier\Config
  */
@@ -101,7 +104,7 @@ function config(): \TorrentPier\Config
 }
 
 /**
- * Get the Censor instance
+ * Get the Censor instance.
  *
  * @return \TorrentPier\Censor
  */
@@ -111,7 +114,7 @@ function censor(): \TorrentPier\Censor
 }
 
 /**
- * Get the Dev instance
+ * Get the Dev instance.
  *
  * @return \TorrentPier\Dev
  */
@@ -121,7 +124,7 @@ function dev(): \TorrentPier\Dev
 }
 
 /**
- * Get the Language instance
+ * Get the Language instance.
  *
  * @return \TorrentPier\Language
  */
@@ -131,10 +134,11 @@ function lang(): \TorrentPier\Language
 }
 
 /**
- * Get a language string (shorthand for lang()->get())
+ * Get a language string (shorthand for lang()->get()).
  *
- * @param string $key Language key, supports dot notation (e.g., 'DATETIME.TODAY')
- * @param mixed $default Default value if key doesn't exist
+ * @param string $key     Language key, supports dot notation (e.g., 'DATETIME.TODAY')
+ * @param mixed  $default Default value if key doesn't exist
+ *
  * @return mixed Language string or default value
  */
 function __(string $key, mixed $default = null): mixed
@@ -143,10 +147,11 @@ function __(string $key, mixed $default = null): mixed
 }
 
 /**
- * Echo a language string (shorthand for echo __())
+ * Echo a language string (shorthand for echo __()).
  *
- * @param string $key Language key, supports dot notation
- * @param mixed $default Default value if key doesn't exist
+ * @param string $key     Language key, supports dot notation
+ * @param mixed  $default Default value if key doesn't exist
+ *
  * @return void
  */
 function _e(string $key, mixed $default = null): void
@@ -155,7 +160,7 @@ function _e(string $key, mixed $default = null): void
 }
 
 /**
- * Initialize debug
+ * Initialize debug.
  */
 define('APP_ENV', env('APP_ENV', 'production'));
 if (APP_ENV === 'development') {
@@ -163,24 +168,25 @@ if (APP_ENV === 'development') {
 } else {
     define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 }
-(\TorrentPier\Dev::init());
+\TorrentPier\Dev::init();
 
 /**
- * Server variables initialize
+ * Server variables initialize.
  */
 $server_protocol = config()->get('cookie_secure') ? 'https://' : 'http://';
-$server_port = in_array((int)config()->get('server_port'), [80, 443], true) ? '' : ':' . config()->get('server_port');
+$server_port = in_array((int) config()->get('server_port'), [80, 443], true) ? '' : ':'.config()->get('server_port');
 define('FORUM_PATH', config()->get('script_path'));
-define('FULL_URL', $server_protocol . config()->get('server_name') . $server_port . config()->get('script_path'));
+define('FULL_URL', $server_protocol.config()->get('server_name').$server_port.config()->get('script_path'));
 unset($server_protocol, $server_port);
 
 // Initialize the new DB factory with database configuration
 TorrentPier\Database\DatabaseFactory::init(config()->get('db'), config()->get('db_alias', []));
 
 /**
- * Get the Database instance
+ * Get the Database instance.
  *
  * @param string $db_alias
+ *
  * @return \TorrentPier\Database\Database
  */
 function DB(string $db_alias = 'db'): \TorrentPier\Database\Database
@@ -192,9 +198,10 @@ function DB(string $db_alias = 'db'): \TorrentPier\Database\Database
 TorrentPier\Cache\UnifiedCacheSystem::getInstance(config()->all());
 
 /**
- * Get cache manager instance (replaces legacy cache system)
+ * Get cache manager instance (replaces legacy cache system).
  *
  * @param string $cache_name
+ *
  * @return \TorrentPier\Cache\CacheManager
  */
 function CACHE(string $cache_name): \TorrentPier\Cache\CacheManager
@@ -203,7 +210,7 @@ function CACHE(string $cache_name): \TorrentPier\Cache\CacheManager
 }
 
 /**
- * Get datastore manager instance (replaces legacy datastore system)
+ * Get datastore manager instance (replaces legacy datastore system).
  *
  * @return \TorrentPier\Cache\DatastoreManager
  */
@@ -214,7 +221,7 @@ function datastore(): \TorrentPier\Cache\DatastoreManager
 
 /**
  * Backward compatibility: Global datastore variable
- * This allows existing code to continue using global $datastore
+ * This allows existing code to continue using global $datastore.
  */
 $datastore = datastore();
 
@@ -229,9 +236,9 @@ function bb_log($msg, $file_name = 'logs', $return_path = false)
     if (is_array($msg)) {
         $msg = implode(LOG_LF, $msg);
     }
-    $file_name .= (LOG_EXT) ? '.' . LOG_EXT : '';
+    $file_name .= (LOG_EXT) ? '.'.LOG_EXT : '';
 
-    $path = (LOG_DIR . '/' . $file_name);
+    $path = (LOG_DIR.'/'.$file_name);
     if ($return_path) {
         return $path;
     }
@@ -246,7 +253,7 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
 
     if (is_file($file) && ($max_size && (filesize($file) >= $max_size))) {
         $file_parts = pathinfo($file);
-        $new_name = ($file_parts['dirname'] . '/' . $file_parts['filename'] . '_[old]_' . date('Y-m-d_H-i-s_') . getmypid() . '.' . $file_parts['extension']);
+        $new_name = ($file_parts['dirname'].'/'.$file_parts['filename'].'_[old]_'.date('Y-m-d_H-i-s_').getmypid().'.'.$file_parts['extension']);
         clearstatcache();
         if (!is_file($new_name)) {
             rename($file, $new_name);
@@ -276,6 +283,7 @@ function bb_mkdir($path, $mode = 0777)
     $old_um = umask(0);
     $dir = mkdir_rec($path, $mode);
     umask($old_um);
+
     return $dir;
 }
 
@@ -290,31 +298,34 @@ function mkdir_rec($path, $mode): bool
 
 function verify_id($id, $length): bool
 {
-    return (is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id));
+    return is_string($id) && preg_match('#^[a-zA-Z0-9]{'.$length.'}$#', $id);
 }
 
 function clean_filename($fname)
 {
     static $s = ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' '];
+
     return str_replace($s, '_', str_compact($fname));
 }
 
 /**
- * Convert special characters to HTML entities
+ * Convert special characters to HTML entities.
  *
- * @param $txt
- * @param bool $double_encode
- * @param int $quote_style
+ * @param         $txt
+ * @param bool    $double_encode
+ * @param int     $quote_style
  * @param ?string $charset
+ *
  * @return string
  */
 function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = DEFAULT_CHARSET): string
 {
-    return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
+    return (string) htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
 }
 
 /**
  * @param string $str
+ *
  * @return string
  */
 function str_compact($str)
@@ -328,8 +339,10 @@ function str_compact($str)
  * Should not be considered sufficient for cryptography, etc.
  *
  * @param int $length
- * @return string
+ *
  * @throws Exception
+ *
+ * @return string
  */
 function make_rand_str(int $length = 10): string
 {
@@ -344,16 +357,17 @@ function make_rand_str(int $length = 10): string
 }
 
 /**
- * Calculates user ratio
+ * Calculates user ratio.
  *
  * @param array $btu
+ *
  * @return float|null
  */
 function get_bt_ratio(array $btu): ?float
 {
     return
         (!empty($btu['u_down_total']) && $btu['u_down_total'] > MIN_DL_FOR_RATIO)
-            ? round((($btu['u_up_total'] + $btu['u_up_release'] + $btu['u_up_bonus']) / $btu['u_down_total']), 2)
+            ? round(($btu['u_up_total'] + $btu['u_up_release'] + $btu['u_up_bonus']) / $btu['u_down_total'], 2)
             : null;
 }
 
@@ -364,7 +378,7 @@ function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $
         if (time() > (TIMENOW + $timeout)) {
             return [
                 'timeout' => true,
-                'recs' => $recursions
+                'recs'    => $recursions,
             ];
         }
         $recursions++;
@@ -389,9 +403,10 @@ function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $
 }
 
 /**
- * Hide BB_PATH
+ * Hide BB_PATH.
  *
  * @param string $path
+ *
  * @return string
  */
 function hide_bb_path(string $path): string
@@ -400,9 +415,10 @@ function hide_bb_path(string $path): string
 }
 
 /**
- * Returns memory usage statistic
+ * Returns memory usage statistic.
  *
  * @param string $param
+ *
  * @return int|void
  */
 function sys(string $param)
@@ -418,7 +434,7 @@ function sys(string $param)
 }
 
 /**
- * Some shared defines
+ * Some shared defines.
  */
 // Initialize demo mode
 define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
@@ -429,9 +445,9 @@ define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);
 // Initialization
 if (!defined('IN_TRACKER')) {
     // Init board
-    require_once INC_DIR . '/init_bb.php';
+    require_once INC_DIR.'/init_bb.php';
 } else {
-    define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
+    define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int) $_GET['port'] : random_int(1000, 65000)));
 
     define('PEER_HASH_EXPIRE', round(config()->get('announce_interval') * (0.85 * config()->get('tracker.expire_factor'))));
     define('PEERS_LIST_EXPIRE', round(config()->get('announce_interval') * 0.7));
@@ -442,7 +458,7 @@ if (!defined('IN_TRACKER')) {
     define('SCRAPE_LIST_PREFIX', 'scrape_list_');
 
     // Init tracker
-    require_once BB_PATH . '/bt/includes/init_tr.php';
+    require_once BB_PATH.'/bt/includes/init_tr.php';
 
     header('Content-Type: text/plain');
     header('Pragma: no-cache');

@@ -1,41 +1,43 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 /**
- * Remove target file
+ * Remove target file.
  *
- * @param string $file Path to file
- * @param bool $withoutOutput Hide output
+ * @param string $file          Path to file
+ * @param bool   $withoutOutput Hide output
  */
 function removeFile(string $file, bool $withoutOutput = false): void
 {
     if (unlink($file)) {
         if ($withoutOutput === false) {
-            echo "- File removed: $file" . PHP_EOL;
+            echo "- File removed: $file".PHP_EOL;
         }
     } else {
         if ($withoutOutput === false) {
-            echo "- File cannot be removed: $file" . PHP_EOL;
+            echo "- File cannot be removed: $file".PHP_EOL;
         }
         exit;
     }
 }
 
 /**
- * Remove folder (recursively)
+ * Remove folder (recursively).
  *
- * @param string $dir Path to folder
- * @param bool $withoutOutput Hide output
+ * @param string $dir           Path to folder
+ * @param bool   $withoutOutput Hide output
  */
 function removeDir(string $dir, bool $withoutOutput = false): void
 {
@@ -52,40 +54,42 @@ function removeDir(string $dir, bool $withoutOutput = false): void
 
     if (rmdir($dir)) {
         if ($withoutOutput === false) {
-            echo "- Folder removed: $dir" . PHP_EOL;
+            echo "- Folder removed: $dir".PHP_EOL;
         }
     } else {
         if ($withoutOutput === false) {
-            echo "- Folder cannot be removed: $dir" . PHP_EOL;
+            echo "- Folder cannot be removed: $dir".PHP_EOL;
         }
         exit;
     }
 }
 
 /**
- * Colored console output
+ * Colored console output.
  *
  * @param string $str
  * @param string $type
+ *
  * @return void
  */
 function out(string $str, string $type = ''): void
 {
     echo match ($type) {
-        'error' => "\033[31m$str \033[0m\n",
+        'error'   => "\033[31m$str \033[0m\n",
         'success' => "\033[32m$str \033[0m\n",
         'warning' => "\033[33m$str \033[0m\n",
-        'info' => "\033[36m$str \033[0m\n",
-        'debug' => "\033[90m$str \033[0m\n",
-        default => "$str\n",
+        'info'    => "\033[36m$str \033[0m\n",
+        'debug'   => "\033[90m$str \033[0m\n",
+        default   => "$str\n",
     };
 }
 
 /**
- * Run process with realtime output
+ * Run process with realtime output.
  *
- * @param string $cmd
+ * @param string      $cmd
  * @param string|null $input
+ *
  * @return int
  */
 function runProcess(string $cmd, ?string $input = null): int
@@ -100,6 +104,7 @@ function runProcess(string $cmd, ?string $input = null): int
 
     if (!is_resource($process)) {
         out('- Could not start subprocess', 'error');
+
         return -1;
     }
 
@@ -128,11 +133,12 @@ function runProcess(string $cmd, ?string $input = null): int
 }
 
 /**
- * Setting permissions recursively
+ * Setting permissions recursively.
  *
  * @param string $dir
- * @param int $dirPermissions
- * @param int $filePermissions
+ * @param int    $dirPermissions
+ * @param int    $filePermissions
+ *
  * @return void
  */
 function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
@@ -143,7 +149,7 @@ function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
             continue;
         }
 
-        $fullPath = realpath($dir . '/' . $file);
+        $fullPath = realpath($dir.'/'.$file);
         if (is_dir($fullPath)) {
             out("- Directory: $fullPath");
             chmod($fullPath, $dirPermissions);
@@ -153,6 +159,7 @@ function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
             chmod($fullPath, $filePermissions);
         } else {
             out("- Cannot find target path: $fullPath", 'error');
+
             return;
         }
     }

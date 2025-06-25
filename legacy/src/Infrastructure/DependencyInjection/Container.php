@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TorrentPier\Infrastructure\DependencyInjection;
 
 use DI\Container as DIContainer;
-use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 
 class Container implements ContainerInterface

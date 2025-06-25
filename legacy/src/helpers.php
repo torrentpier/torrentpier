@@ -9,7 +9,7 @@ use TorrentPier\Infrastructure\DependencyInjection\Container;
 
 if (!function_exists('container')) {
     /**
-     * Get the dependency injection container instance
+     * Get the dependency injection container instance.
      *
      * @return Container|null
      */
@@ -21,11 +21,13 @@ if (!function_exists('container')) {
 
 if (!function_exists('app')) {
     /**
-     * Get a service from the container or the container itself
+     * Get a service from the container or the container itself.
      *
      * @param string|null $id Service identifier
-     * @return mixed
+     *
      * @throws RuntimeException If container is not initialized or service not found
+     *
+     * @return mixed
      */
     function app(?string $id = null): mixed
     {
@@ -42,9 +44,9 @@ if (!function_exists('app')) {
         try {
             return $container->get($id);
         } catch (NotFoundExceptionInterface $e) {
-            throw new RuntimeException("Service '$id' not found in container: " . $e->getMessage(), 0, $e);
+            throw new RuntimeException("Service '$id' not found in container: ".$e->getMessage(), 0, $e);
         } catch (ContainerExceptionInterface $e) {
-            throw new RuntimeException("Container error while resolving '$id': " . $e->getMessage(), 0, $e);
+            throw new RuntimeException("Container error while resolving '$id': ".$e->getMessage(), 0, $e);
         }
     }
 }

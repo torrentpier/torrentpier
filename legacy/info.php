@@ -1,22 +1,24 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 define('BB_SCRIPT', 'info');
 
-require __DIR__ . '/common.php';
+require __DIR__.'/common.php';
 
 // Start session management
 $user->session_start();
 
 $info = [];
-$htmlDir = LANG_DIR . 'html/';
-$show = isset($_REQUEST['show']) ? (string)$_REQUEST['show'] : '';
+$htmlDir = LANG_DIR.'html/';
+$show = isset($_REQUEST['show']) ? (string) $_REQUEST['show'] : '';
 
 switch ($show) {
     case 'advert':
@@ -41,11 +43,11 @@ switch ($show) {
         break;
 }
 
-$require = is_file($htmlDir . $info['src']) ? ($htmlDir . $info['src']) : false;
+$require = is_file($htmlDir.$info['src']) ? ($htmlDir.$info['src']) : false;
 
 $template->assign_vars([
     'PAGE_TITLE' => mb_strtoupper($info['title'], DEFAULT_CHARSET),
-    'REQUIRE' => $require ? file_get_contents($require) : $lang['NOT_FOUND'],
+    'REQUIRE'    => $require ? file_get_contents($require) : $lang['NOT_FOUND'],
 ]);
 
 print_page('info.tpl', 'simple');

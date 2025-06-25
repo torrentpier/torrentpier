@@ -1,14 +1,16 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 $allowed_extensions = [];
@@ -18,7 +20,7 @@ $upload_icons = [];
 $attachments = [];
 
 /**
- * Create needed arrays for Extension Assignments
+ * Create needed arrays for Extension Assignments.
  */
 function init_complete_extensions_data()
 {
@@ -33,17 +35,17 @@ function init_complete_extensions_data()
     for ($i = 0, $size = count($extension_informations); $i < $size; $i++) {
         $extension = strtolower(trim($extension_informations[$i]['extension']));
         // Get allowed extensions
-        if ((int)$extension_informations[$i]['allow_group'] === 1) {
+        if ((int) $extension_informations[$i]['allow_group'] === 1) {
             $allowed_extensions[] = $extension;
         }
-        $display_categories[$extension] = (int)$extension_informations[$i]['cat_id'];
-        $download_modes[$extension] = (int)$extension_informations[$i]['download_mode'];
+        $display_categories[$extension] = (int) $extension_informations[$i]['cat_id'];
+        $download_modes[$extension] = (int) $extension_informations[$i]['download_mode'];
         $upload_icons[$extension] = trim($extension_informations[$i]['upload_icon']);
     }
 }
 
 /**
- * Writing Data into plain Template Vars
+ * Writing Data into plain Template Vars.
  */
 function init_display_template($template_var, $replacement, $filename = 'viewtopic_attach.tpl')
 {
@@ -56,14 +58,14 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
     if (!isset($template->uncompiled_code[$template_var]) && empty($template->uncompiled_code[$template_var])) {
         // If we don't have a file assigned to this handle, die.
         if (!isset($template->files[$template_var])) {
-            die("Template->loadfile(): No file specified for handle $template_var");
+            exit("Template->loadfile(): No file specified for handle $template_var");
         }
 
         $filename_2 = $template->files[$template_var];
 
         $str = file_get_contents($filename_2);
         if (empty($str)) {
-            die("Template->loadfile(): File $filename_2 for handle $template_var is empty");
+            exit("Template->loadfile(): File $filename_2 for handle $template_var is empty");
         }
 
         $template->uncompiled_code[$template_var] = $str;
@@ -71,16 +73,16 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
 
     $complete_filename = $filename;
     if ($complete_filename[0] != '/') {
-        $complete_filename = $template->root . '/' . $complete_filename;
+        $complete_filename = $template->root.'/'.$complete_filename;
     }
 
     if (!file_exists($complete_filename)) {
-        die("Template->make_filename(): Error - file $complete_filename does not exist");
+        exit("Template->make_filename(): Error - file $complete_filename does not exist");
     }
 
     $content = file_get_contents($complete_filename);
     if (empty($content)) {
-        die('Template->loadfile(): File ' . $complete_filename . ' is empty');
+        exit('Template->loadfile(): File '.$complete_filename.' is empty');
     }
 
     // replace $replacement with uncompiled code in $filename
@@ -88,13 +90,13 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
 }
 
 /**
- * Display Attachments in Posts
+ * Display Attachments in Posts.
  */
 function display_post_attachments($post_id, $switch_attachment)
 {
     global $attach_config, $is_auth;
 
-    if ((int)$switch_attachment == 0 || (int)$attach_config['disable_mod']) {
+    if ((int) $switch_attachment == 0 || (int) $attach_config['disable_mod']) {
         return;
     }
 
@@ -104,7 +106,7 @@ function display_post_attachments($post_id, $switch_attachment)
 }
 
 /**
- * Initializes some templating variables for displaying Attachments in Posts
+ * Initializes some templating variables for displaying Attachments in Posts.
  */
 function init_display_post_attachments($switch_attachment)
 {
@@ -114,8 +116,9 @@ function init_display_post_attachments($switch_attachment)
         $switch_attachment = $forum_row['topic_attachment'];
     }
 
-    if ((int)$switch_attachment == 0 || (int)$attach_config['disable_mod'] || (!($is_auth['auth_download'] && $is_auth['auth_view']))) {
+    if ((int) $switch_attachment == 0 || (int) $attach_config['disable_mod'] || (!($is_auth['auth_download'] && $is_auth['auth_view']))) {
         init_display_template('body', '{postrow.ATTACHMENTS}', 'viewtopic_attach_guest.tpl');
+
         return;
     }
 
@@ -123,7 +126,7 @@ function init_display_post_attachments($switch_attachment)
 
     for ($i = 0; $i < $total_posts; $i++) {
         if ($postrow[$i]['post_attachment'] == 1) {
-            $post_id_array[] = (int)$postrow[$i]['post_id'];
+            $post_id_array[] = (int) $postrow[$i]['post_id'];
         }
     }
 
@@ -141,11 +144,11 @@ function init_display_post_attachments($switch_attachment)
     @reset($attachments);
 
     for ($i = 0; $i < $num_rows; $i++) {
-        $attachments['_' . $rows[$i]['post_id']][] = $rows[$i];
+        $attachments['_'.$rows[$i]['post_id']][] = $rows[$i];
         //bt
         if ($rows[$i]['tracker_status']) {
             if (defined('TORRENT_POST')) {
-                bb_die('Multiple registered torrents in one topic<br /><br />first torrent found in post_id = ' . TORRENT_POST . '<br />current post_id = ' . $rows[$i]['post_id'] . '<br /><br />attachments info:<br /><pre style="text-align: left;">' . print_r($rows, true) . '</pre>');
+                bb_die('Multiple registered torrents in one topic<br /><br />first torrent found in post_id = '.TORRENT_POST.'<br />current post_id = '.$rows[$i]['post_id'].'<br /><br />attachments info:<br /><pre style="text-align: left;">'.print_r($rows, true).'</pre>');
             }
             define('TORRENT_POST', $rows[$i]['post_id']);
         }
@@ -158,19 +161,19 @@ function init_display_post_attachments($switch_attachment)
 }
 
 /**
- * END ATTACHMENT DISPLAY IN POSTS
+ * END ATTACHMENT DISPLAY IN POSTS.
  */
 
 /**
  * Assign Variables and Definitions based on the fetched Attachments - internal
  * used by all displaying functions, the Data was collected before, it's only dependend on the template used. :)
- * before this function is usable, init_display_attachments have to be called for specific pages (pm, posting, review etc...)
+ * before this function is usable, init_display_attachments have to be called for specific pages (pm, posting, review etc...).
  */
 function display_attachments($post_id)
 {
     global $template, $upload_dir, $userdata, $allowed_extensions, $display_categories, $download_modes, $lang, $attachments, $upload_icons, $attach_config;
 
-    $num_attachments = @count($attachments['_' . $post_id]);
+    $num_attachments = @count($attachments['_'.$post_id]);
 
     if ($num_attachments == 0) {
         return;
@@ -179,28 +182,28 @@ function display_attachments($post_id)
     $template->assign_block_vars('postrow.attach', []);
 
     for ($i = 0; $i < $num_attachments; $i++) {
-        $filename = $upload_dir . '/' . basename($attachments['_' . $post_id][$i]['physical_filename']);
+        $filename = $upload_dir.'/'.basename($attachments['_'.$post_id][$i]['physical_filename']);
 
         $upload_image = '';
-        if ($attach_config['upload_img'] && empty($upload_icons[$attachments['_' . $post_id][$i]['extension']])) {
-            $upload_image = '<img src="' . $attach_config['upload_img'] . '" alt="" border="0" />';
-        } elseif (trim($upload_icons[$attachments['_' . $post_id][$i]['extension']]) != '') {
-            $upload_image = '<img src="' . $upload_icons[$attachments['_' . $post_id][$i]['extension']] . '" alt="" border="0" />';
+        if ($attach_config['upload_img'] && empty($upload_icons[$attachments['_'.$post_id][$i]['extension']])) {
+            $upload_image = '<img src="'.$attach_config['upload_img'].'" alt="" border="0" />';
+        } elseif (trim($upload_icons[$attachments['_'.$post_id][$i]['extension']]) != '') {
+            $upload_image = '<img src="'.$upload_icons[$attachments['_'.$post_id][$i]['extension']].'" alt="" border="0" />';
         }
 
-        $filesize = humn_size($attachments['_' . $post_id][$i]['filesize']);
+        $filesize = humn_size($attachments['_'.$post_id][$i]['filesize']);
 
-        $display_name = htmlspecialchars($attachments['_' . $post_id][$i]['real_filename']);
-        $comment = htmlspecialchars($attachments['_' . $post_id][$i]['comment']);
+        $display_name = htmlspecialchars($attachments['_'.$post_id][$i]['real_filename']);
+        $comment = htmlspecialchars($attachments['_'.$post_id][$i]['comment']);
         $comment = str_replace("\n", '<br />', $comment);
 
         $denied = false;
 
         // Admin is allowed to view forbidden Attachments, but the error-message is displayed too to inform the Admin
-        if (!in_array($attachments['_' . $post_id][$i]['extension'], $allowed_extensions)) {
+        if (!in_array($attachments['_'.$post_id][$i]['extension'], $allowed_extensions)) {
             $denied = true;
 
-            $template->assign_block_vars('postrow.attach.denyrow', ['L_DENIED' => sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachments['_' . $post_id][$i]['extension'])]);
+            $template->assign_block_vars('postrow.attach.denyrow', ['L_DENIED' => sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachments['_'.$post_id][$i]['extension'])]);
         }
 
         if (!$denied || IS_ADMIN) {
@@ -210,8 +213,8 @@ function display_attachments($post_id)
             $link = false;
 
             // Shows the images in topic
-            if (@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT && (int)$attach_config['img_display_inlined']) {
-                if ((int)$attach_config['img_link_width'] != 0 || (int)$attach_config['img_link_height'] != 0) {
+            if (@(int) $display_categories[$attachments['_'.$post_id][$i]['extension']] == IMAGE_CAT && (int) $attach_config['img_display_inlined']) {
+                if ((int) $attach_config['img_link_width'] != 0 || (int) $attach_config['img_link_height'] != 0) {
                     // Get image sizes
                     [$width, $height] = getimagesize($filename);
 
@@ -219,7 +222,7 @@ function display_attachments($post_id)
                     if ($width == 0 && $height == 0) {
                         $image = true;
                     } else {
-                        if ($width <= (int)$attach_config['img_link_width'] && $height <= (int)$attach_config['img_link_height']) {
+                        if ($width <= (int) $attach_config['img_link_width'] && $height <= (int) $attach_config['img_link_height']) {
                             $image = true;
                         }
                     }
@@ -229,7 +232,7 @@ function display_attachments($post_id)
             }
 
             // Checks if image is thumbnail
-            if (@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT && $attachments['_' . $post_id][$i]['thumbnail'] == 1) {
+            if (@(int) $display_categories[$attachments['_'.$post_id][$i]['extension']] == IMAGE_CAT && $attachments['_'.$post_id][$i]['thumbnail'] == 1) {
                 $thumbnail = true;
                 $image = false;
             }
@@ -242,7 +245,7 @@ function display_attachments($post_id)
             if ($image) {
                 // Images
                 if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
-                    $img_source = BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'];
+                    $img_source = BB_ROOT.DL_URL.$attachments['_'.$post_id][$i]['attach_id'];
                     $download_link = true;
                 } else {
                     $img_source = $filename;
@@ -250,20 +253,20 @@ function display_attachments($post_id)
                 }
 
                 $template->assign_block_vars('postrow.attach.cat_images', [
-                    'DOWNLOAD_NAME' => $display_name,
+                    'DOWNLOAD_NAME'  => $display_name,
                     'S_UPLOAD_IMAGE' => $upload_image,
-                    'IMG_SRC' => $img_source,
-                    'FILESIZE' => $filesize,
-                    'COMMENT' => $comment
+                    'IMG_SRC'        => $img_source,
+                    'FILESIZE'       => $filesize,
+                    'COMMENT'        => $comment,
                 ]);
 
                 // Directly Viewed Image ... update the download count
                 if (!$download_link) {
-                    $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . '
+                    $sql = 'UPDATE '.BB_ATTACHMENTS_DESC.'
 						SET download_count = download_count + 1
-						WHERE attach_id = ' . (int)$attachments['_' . $post_id][$i]['attach_id'];
+						WHERE attach_id = '.(int) $attachments['_'.$post_id][$i]['attach_id'];
 
-                    if (!(DB()->sql_query($sql))) {
+                    if (!DB()->sql_query($sql)) {
                         bb_die('Could not update attachment download count');
                     }
                 }
@@ -272,10 +275,10 @@ function display_attachments($post_id)
             if ($thumbnail) {
                 // Images, but display Thumbnail
                 if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
-                    $thumb_source = BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'] . '&thumb=1';
+                    $thumb_source = BB_ROOT.DL_URL.$attachments['_'.$post_id][$i]['attach_id'].'&thumb=1';
                 } else {
                     // Get the thumbnail image
-                    $thumbnail_filename = $upload_dir . '/' . THUMB_DIR . '/t_' . basename($attachments['_' . $post_id][$i]['physical_filename']);
+                    $thumbnail_filename = $upload_dir.'/'.THUMB_DIR.'/t_'.basename($attachments['_'.$post_id][$i]['physical_filename']);
 
                     // Checks the thumbnail existence
                     if (!is_file($thumbnail_filename)) {
@@ -286,32 +289,32 @@ function display_attachments($post_id)
                 }
 
                 $template->assign_block_vars('postrow.attach.cat_thumb_images', [
-                    'DOWNLOAD_NAME' => $display_name,
+                    'DOWNLOAD_NAME'  => $display_name,
                     'S_UPLOAD_IMAGE' => $upload_image,
-                    'IMG_SRC' => BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
-                    'IMG_THUMB_SRC' => $thumb_source,
-                    'FILESIZE' => $filesize,
-                    'COMMENT' => $comment,
-                    'DOWNLOAD_COUNT' => declension((int)$attachments['_' . $post_id][$i]['download_count'], 'times'),
+                    'IMG_SRC'        => BB_ROOT.DL_URL.$attachments['_'.$post_id][$i]['attach_id'],
+                    'IMG_THUMB_SRC'  => $thumb_source,
+                    'FILESIZE'       => $filesize,
+                    'COMMENT'        => $comment,
+                    'DOWNLOAD_COUNT' => declension((int) $attachments['_'.$post_id][$i]['download_count'], 'times'),
                 ]);
             }
 
             // bt
-            if ($link && ($attachments['_' . $post_id][$i]['extension'] === TORRENT_EXT)) {
-                include ATTACH_DIR . '/displaying_torrent.php';
+            if ($link && ($attachments['_'.$post_id][$i]['extension'] === TORRENT_EXT)) {
+                include ATTACH_DIR.'/displaying_torrent.php';
             } elseif ($link) {
-                $target_blank = ((@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT)) ? 'target="_blank"' : '';
+                $target_blank = (@(int) $display_categories[$attachments['_'.$post_id][$i]['extension']] == IMAGE_CAT) ? 'target="_blank"' : '';
 
                 // display attachment
                 $template->assign_block_vars('postrow.attach.attachrow', [
-                    'U_DOWNLOAD_LINK' => BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
-                    'S_UPLOAD_IMAGE' => $upload_image,
-                    'DOWNLOAD_NAME' => $display_name,
-                    'FILESIZE' => $filesize,
-                    'COMMENT' => $comment,
-                    'TARGET_BLANK' => $target_blank,
-                    'IS_IMAGE' => (bool)$target_blank,
-                    'DOWNLOAD_COUNT' => declension((int)$attachments['_' . $post_id][$i]['download_count'], 'times')
+                    'U_DOWNLOAD_LINK' => BB_ROOT.DL_URL.$attachments['_'.$post_id][$i]['attach_id'],
+                    'S_UPLOAD_IMAGE'  => $upload_image,
+                    'DOWNLOAD_NAME'   => $display_name,
+                    'FILESIZE'        => $filesize,
+                    'COMMENT'         => $comment,
+                    'TARGET_BLANK'    => $target_blank,
+                    'IS_IMAGE'        => (bool) $target_blank,
+                    'DOWNLOAD_COUNT'  => declension((int) $attachments['_'.$post_id][$i]['download_count'], 'times'),
                 ]);
             }
         }

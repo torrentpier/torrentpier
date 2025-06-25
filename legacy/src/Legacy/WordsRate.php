@@ -1,17 +1,19 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy;
 
 /**
- * Class WordsRate
- * @package TorrentPier\Legacy
+ * Class WordsRate.
  */
 class WordsRate
 {
@@ -25,10 +27,10 @@ class WordsRate
     public function __construct()
     {
         // words starting with..
-        $del_list = file_get_contents(BB_ROOT . '/library/words_rate_del_list.txt');
+        $del_list = file_get_contents(BB_ROOT.'/library/words_rate_del_list.txt');
         $del_list = str_compact($del_list);
         $del_list = str_replace(' ', '|', preg_quote($del_list, '/'));
-        $del_exp = '/\b(' . $del_list . ')[\w\-]*/i';
+        $del_exp = '/\b('.$del_list.')[\w\-]*/i';
 
         $this->words_del_exp = $del_exp;
     }
@@ -37,6 +39,7 @@ class WordsRate
      * Returns "usefulness coefficient" for automatic deletion of short sentences as "thanks", "cool" and etc.
      *
      * @param string $text
+     *
      * @return int
      */
     public function get_words_rate($text)
@@ -67,7 +70,7 @@ class WordsRate
         if ($this->dbg_mode) {
             preg_match_all($this->words_del_exp, $text, $this->deleted_words);
             $text_dbg = preg_replace($this->words_del_exp, '<span class="del-word">$0</span>', $text);
-            $this->del_text_hl = '<div class="prune-post">' . $text_dbg . '</div>';
+            $this->del_text_hl = '<div class="prune-post">'.$text_dbg.'</div>';
         }
         $text = preg_replace($this->words_del_exp, '', $text);
 

@@ -1,17 +1,19 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy;
 
 /**
- * Class Poll
- * @package TorrentPier\Legacy
+ * Class Poll.
  */
 class Poll
 {
@@ -25,19 +27,21 @@ class Poll
     }
 
     /**
-     * Forming poll results
+     * Forming poll results.
      *
      * @param $posted_data
+     *
      * @return string
      */
     public function build_poll_data($posted_data)
     {
-        $poll_caption = (string)@$posted_data['poll_caption'];
-        $poll_votes = (string)@$posted_data['poll_votes'];
+        $poll_caption = (string) @$posted_data['poll_caption'];
+        $poll_votes = (string) @$posted_data['poll_votes'];
         $this->poll_votes = [];
 
         if (!$poll_caption = str_compact($poll_caption)) {
             global $lang;
+
             return $this->err_msg = $lang['EMPTY_POLL_TITLE'];
         }
         $this->poll_votes[] = $poll_caption; // header is vote_id = 0
@@ -52,12 +56,13 @@ class Poll
         // check for "< 3" -- 2 answer variants + header
         if (\count($this->poll_votes) < 3 || \count($this->poll_votes) > $this->max_votes + 1) {
             global $lang;
+
             return $this->err_msg = sprintf($lang['NEW_POLL_VOTES'], $this->max_votes);
         }
     }
 
     /**
-     * Recording poll info to the database
+     * Recording poll info to the database.
      *
      * @param int $topic_id
      */
@@ -68,10 +73,10 @@ class Poll
         $sql_ary = [];
         foreach ($this->poll_votes as $vote_id => $vote_text) {
             $sql_ary[] = [
-                'topic_id' => (int)$topic_id,
-                'vote_id' => (int)$vote_id,
-                'vote_text' => (string)$vote_text,
-                'vote_result' => (int)0,
+                'topic_id'    => (int) $topic_id,
+                'vote_id'     => (int) $vote_id,
+                'vote_text'   => (string) $vote_text,
+                'vote_result' => (int) 0,
             ];
         }
         // Delete existing poll data first, then insert new data
@@ -85,7 +90,7 @@ class Poll
     }
 
     /**
-     * Remove poll
+     * Remove poll.
      *
      * @param int $topic_id
      */
@@ -98,7 +103,7 @@ class Poll
     }
 
     /**
-     * Remove info about voters and their choices
+     * Remove info about voters and their choices.
      *
      * @param int $topic_id
      */
@@ -114,11 +119,13 @@ class Poll
     }
 
     /**
-     * Get poll items
+     * Get poll items.
      *
      * @param $topic_id
-     * @return array|false|mixed|string
+     *
      * @throws \JsonException
+     *
+     * @return array|false|mixed|string
      */
     public static function get_poll_data_items_js($topic_id)
     {
@@ -138,7 +145,7 @@ class Poll
 
         foreach ($poll_data as $row) {
             $opt_text_for_js = htmlCHR($row['vote_text']);
-            $opt_result_for_js = (int)$row['vote_result'];
+            $opt_result_for_js = (int) $row['vote_result'];
 
             $items[$row['topic_id']][$row['vote_id']] = [$opt_text_for_js, $opt_result_for_js];
         }
@@ -150,28 +157,30 @@ class Poll
     }
 
     /**
-     * Checks whether the user has voted in a poll
+     * Checks whether the user has voted in a poll.
      *
      * @param int $topic_id
      * @param int $user_id
+     *
      * @return bool
      */
     public static function userIsAlreadyVoted(int $topic_id, int $user_id): bool
     {
-        return (bool)DB()->table(BB_POLL_USERS)
+        return (bool) DB()->table(BB_POLL_USERS)
             ->where('topic_id', $topic_id)
             ->where('user_id', $user_id)
             ->fetch();
     }
 
     /**
-     * Check whether poll is active
+     * Check whether poll is active.
      *
      * @param array $t_data
+     *
      * @return bool
      */
     public static function pollIsActive(array $t_data): bool
     {
-        return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - config()->get('poll_max_days') * 86400);
+        return $t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - config()->get('poll_max_days') * 86400;
     }
 }

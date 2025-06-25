@@ -1,18 +1,21 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 /**
- * All Attachment Functions processing the Deletion Process
+ * All Attachment Functions processing the Deletion Process.
  */
 
 /**
- * Delete Attachment(s) from post(s) (intern)
+ * Delete Attachment(s) from post(s) (intern).
  */
 function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, $user_id = 0)
 {
@@ -32,7 +35,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
             } elseif (str_contains($attach_id_array, ',')) {
                 $attach_id_array = explode(',', $attach_id_array);
             } else {
-                $attach_id = (int)$attach_id_array;
+                $attach_id = (int) $attach_id_array;
                 $attach_id_array = [];
                 $attach_id_array[] = $attach_id;
             }
@@ -42,8 +45,8 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         $p_id = 'post_id';
 
         $sql = "SELECT $p_id
-			FROM " . BB_ATTACHMENTS . '
-				WHERE attach_id IN (' . implode(', ', $attach_id_array) . ")
+			FROM ".BB_ATTACHMENTS.'
+				WHERE attach_id IN ('.implode(', ', $attach_id_array).")
 			GROUP BY $p_id";
 
         if (!($result = DB()->sql_query($sql))) {
@@ -54,11 +57,12 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
         if ($num_post_list == 0) {
             DB()->sql_freeresult($result);
+
             return;
         }
 
         while ($row = DB()->sql_fetchrow($result)) {
-            $post_id_array[] = (int)$row[$p_id];
+            $post_id_array[] = (int) $row[$p_id];
         }
         DB()->sql_freeresult($result);
     }
@@ -73,7 +77,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         } elseif (str_contains($post_id_array, ',')) {
             $post_id_array = explode(',', $post_id_array);
         } else {
-            $post_id = (int)$post_id_array;
+            $post_id = (int) $post_id_array;
 
             $post_id_array = [];
             $post_id_array[] = $post_id;
@@ -89,10 +93,10 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         $attach_id_array = [];
 
         // Get the attach_ids to fill the array
-        $whereclause = 'WHERE post_id IN (' . implode(', ', $post_id_array) . ')';
+        $whereclause = 'WHERE post_id IN ('.implode(', ', $post_id_array).')';
 
         $sql = 'SELECT attach_id
-			FROM ' . BB_ATTACHMENTS . " $whereclause
+			FROM '.BB_ATTACHMENTS." $whereclause
 			GROUP BY attach_id";
 
         if (!($result = DB()->sql_query($sql))) {
@@ -103,11 +107,12 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
         if ($num_attach_list == 0) {
             DB()->sql_freeresult($result);
+
             return;
         }
 
         while ($row = DB()->sql_fetchrow($result)) {
-            $attach_id_array[] = (int)$row['attach_id'];
+            $attach_id_array[] = (int) $row['attach_id'];
         }
         DB()->sql_freeresult($result);
     }
@@ -118,7 +123,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         } elseif (str_contains($attach_id_array, ',')) {
             $attach_id_array = explode(',', $attach_id_array);
         } else {
-            $attach_id = (int)$attach_id_array;
+            $attach_id = (int) $attach_id_array;
 
             $attach_id_array = [];
             $attach_id_array[] = $attach_id;
@@ -132,17 +137,17 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
     $sql_id = 'post_id';
 
     if (count($post_id_array) && count($attach_id_array)) {
-        $sql = 'DELETE FROM ' . BB_ATTACHMENTS . '
-			WHERE attach_id IN (' . implode(', ', $attach_id_array) . ")
-				AND $sql_id IN (" . implode(', ', $post_id_array) . ')';
+        $sql = 'DELETE FROM '.BB_ATTACHMENTS.'
+			WHERE attach_id IN ('.implode(', ', $attach_id_array).")
+				AND $sql_id IN (".implode(', ', $post_id_array).')';
 
-        if (!(DB()->sql_query($sql))) {
+        if (!DB()->sql_query($sql)) {
             bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
         }
 
         //bt
         if ($sql_id == 'post_id') {
-            $sql = "SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE attach_id IN(" . implode(',', $attach_id_array) . ")";
+            $sql = 'SELECT topic_id FROM '.BB_BT_TORRENTS.' WHERE attach_id IN('.implode(',', $attach_id_array).')';
 
             if (!$result = DB()->sql_query($sql)) {
                 bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
@@ -156,7 +161,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
             if ($torrents_sql = implode(',', $torrents_sql)) {
                 // Remove peers from tracker
-                $sql = "DELETE FROM " . BB_BT_TRACKER . "
+                $sql = 'DELETE FROM '.BB_BT_TRACKER."
 					WHERE topic_id IN($torrents_sql)";
 
                 if (!DB()->sql_query($sql)) {
@@ -164,8 +169,8 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
                 }
             }
             // Delete torrents
-            $sql = "DELETE FROM " . BB_BT_TORRENTS . "
-				WHERE attach_id IN(" . implode(',', $attach_id_array) . ")";
+            $sql = 'DELETE FROM '.BB_BT_TORRENTS.'
+				WHERE attach_id IN('.implode(',', $attach_id_array).')';
 
             if (!DB()->sql_query($sql)) {
                 bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
@@ -175,8 +180,8 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
         foreach ($attach_id_array as $i => $iValue) {
             $sql = 'SELECT attach_id
-				FROM ' . BB_ATTACHMENTS . '
-						WHERE attach_id = ' . (int)$attach_id_array[$i];
+				FROM '.BB_ATTACHMENTS.'
+						WHERE attach_id = '.(int) $attach_id_array[$i];
 
             if (!($result = DB()->sql_query($sql))) {
                 bb_die('Could not select Attachment id #2');
@@ -187,8 +192,8 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
             if ($num_rows == 0) {
                 $sql = 'SELECT attach_id, physical_filename, thumbnail
-						FROM ' . BB_ATTACHMENTS_DESC . '
-							WHERE attach_id = ' . (int)$attach_id_array[$i];
+						FROM '.BB_ATTACHMENTS_DESC.'
+							WHERE attach_id = '.(int) $attach_id_array[$i];
 
                 if (!($result = DB()->sql_query($sql))) {
                     bb_die('Could not query attach description table');
@@ -204,13 +209,13 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
                     for ($j = 0; $j < $num_attach; $j++) {
                         unlink_attach($attachments[$j]['physical_filename']);
 
-                        if ((int)$attachments[$j]['thumbnail'] == 1) {
+                        if ((int) $attachments[$j]['thumbnail'] == 1) {
                             unlink_attach($attachments[$j]['physical_filename'], MODE_THUMBNAIL);
                         }
 
-                        $sql = 'DELETE FROM ' . BB_ATTACHMENTS_DESC . ' WHERE attach_id = ' . (int)$attachments[$j]['attach_id'];
+                        $sql = 'DELETE FROM '.BB_ATTACHMENTS_DESC.' WHERE attach_id = '.(int) $attachments[$j]['attach_id'];
 
-                        if (!(DB()->sql_query($sql))) {
+                        if (!DB()->sql_query($sql)) {
                             bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
                         }
 
@@ -230,8 +235,8 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
     // Now Sync the Topic/PM
     if (count($post_id_array)) {
         $sql = 'SELECT topic_id
-			FROM ' . BB_POSTS . '
-			WHERE post_id IN (' . implode(', ', $post_id_array) . ')
+			FROM '.BB_POSTS.'
+			WHERE post_id IN ('.implode(', ', $post_id_array).')
 			GROUP BY topic_id';
 
         if (!($result = DB()->sql_query($sql))) {

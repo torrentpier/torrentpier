@@ -1,20 +1,23 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Database;
 
+use Exception;
 use Nette\Database\Table\Selection;
 use ReflectionClass;
-use Exception;
 
 /**
- * DebugSelection - Wraps Nette Database Selection to provide debug logging and explain functionality
+ * DebugSelection - Wraps Nette Database Selection to provide debug logging and explain functionality.
  */
 class DebugSelection
 {
@@ -28,7 +31,7 @@ class DebugSelection
     }
 
     /**
-     * Magic method to delegate calls to the wrapped Selection
+     * Magic method to delegate calls to the wrapped Selection.
      */
     public function __call(string $name, array $arguments)
     {
@@ -43,7 +46,7 @@ class DebugSelection
     }
 
     /**
-     * Magic method to delegate property access
+     * Magic method to delegate property access.
      */
     public function __get(string $name)
     {
@@ -51,7 +54,7 @@ class DebugSelection
     }
 
     /**
-     * Magic method to delegate property setting
+     * Magic method to delegate property setting.
      */
     public function __set(string $name, $value): void
     {
@@ -59,7 +62,7 @@ class DebugSelection
     }
 
     /**
-     * Magic method to check if property is set
+     * Magic method to check if property is set.
      */
     public function __isset(string $name): bool
     {
@@ -67,7 +70,7 @@ class DebugSelection
     }
 
     /**
-     * Log query execution for debug panel
+     * Log query execution for debug panel.
      */
     private function logQuery(string $method, array $arguments): void
     {
@@ -87,7 +90,7 @@ class DebugSelection
     }
 
     /**
-     * Complete query logging after execution
+     * Complete query logging after execution.
      */
     private function completeQueryLogging(): void
     {
@@ -100,7 +103,7 @@ class DebugSelection
     }
 
     /**
-     * Generate SQL representation for logging and EXPLAIN
+     * Generate SQL representation for logging and EXPLAIN.
      */
     private function generateSqlForLogging(string $method, array $arguments, bool $useRawSQL = true): string
     {
@@ -115,6 +118,7 @@ class DebugSelection
                     if (!preg_match('/LIMIT\s+\d+/i', $sql)) {
                         $sql .= ' LIMIT 1';
                     }
+
                     return $sql;
                 case 'count':
                     // Replace SELECT * with SELECT COUNT(*)
@@ -132,12 +136,12 @@ class DebugSelection
             'insert' => $this->generateInsertSql($tableName, $arguments),
             'update' => $this->generateUpdateSql($tableName, $arguments, $useRawSQL),
             'delete' => $this->generateDeleteSql($tableName, $useRawSQL),
-            default => "-- Explorer method: {$method} on {$tableName}"
+            default  => "-- Explorer method: {$method} on {$tableName}"
         };
     }
 
     /**
-     * Generate INSERT SQL statement
+     * Generate INSERT SQL statement.
      */
     private function generateInsertSql(string $tableName, array $arguments): string
     {
@@ -148,7 +152,7 @@ class DebugSelection
         $data = $arguments[0];
         $columns = implode(', ', array_keys($data));
         $values = implode(', ', array_map(
-            static fn($v) => is_string($v) ? "'$v'" : $v,
+            static fn ($v) => is_string($v) ? "'$v'" : $v,
             array_values($data)
         ));
 
@@ -156,14 +160,14 @@ class DebugSelection
     }
 
     /**
-     * Generate UPDATE SQL statement
+     * Generate UPDATE SQL statement.
      */
     private function generateUpdateSql(string $tableName, array $arguments, bool $useRawSQL): string
     {
         $setPairs = [];
         if (isset($arguments[0]) && is_array($arguments[0])) {
             foreach ($arguments[0] as $key => $value) {
-                $setPairs[] = "{$key} = " . (is_string($value) ? "'$value'" : $value);
+                $setPairs[] = "{$key} = ".(is_string($value) ? "'$value'" : $value);
             }
         }
 
@@ -172,14 +176,14 @@ class DebugSelection
 
         // Extract WHERE clause from the SQL
         if (preg_match('/WHERE\s+(.+?)(?:\s+ORDER\s+BY|\s+LIMIT|\s+GROUP\s+BY|$)/i', $sql, $matches)) {
-            return "UPDATE {$tableName} SET {$setClause} WHERE " . trim($matches[1]);
+            return "UPDATE {$tableName} SET {$setClause} WHERE ".trim($matches[1]);
         }
 
         return "UPDATE {$tableName} SET {$setClause}";
     }
 
     /**
-     * Generate DELETE SQL statement
+     * Generate DELETE SQL statement.
      */
     private function generateDeleteSql(string $tableName, bool $useRawSQL): string
     {
@@ -187,14 +191,14 @@ class DebugSelection
 
         // Extract WHERE clause from the SQL
         if (preg_match('/WHERE\s+(.+?)(?:\s+ORDER\s+BY|\s+LIMIT|\s+GROUP\s+BY|$)/i', $sql, $matches)) {
-            return "DELETE FROM {$tableName} WHERE " . trim($matches[1]);
+            return "DELETE FROM {$tableName} WHERE ".trim($matches[1]);
         }
 
         return "DELETE FROM {$tableName}";
     }
 
     /**
-     * Get SQL from Nette Selection with optional parameter substitution
+     * Get SQL from Nette Selection with optional parameter substitution.
      */
     private function getSqlFromSelection(bool $replaceParameters = false): string
     {
@@ -209,7 +213,7 @@ class DebugSelection
                 $sql = $getSqlMethod->invoke($this->selection);
             } else {
                 // Try __toString() method as fallback
-                $sql = (string)$this->selection;
+                $sql = (string) $this->selection;
             }
 
             // For EXPLAIN to work, we need to replace ? with actual values
@@ -220,7 +224,7 @@ class DebugSelection
             return $sql;
         } catch (Exception $e) {
             // Fall back to simple representation
-            return "SELECT * FROM " . $this->selection->getName() . " WHERE 1=1";
+            return 'SELECT * FROM '.$this->selection->getName().' WHERE 1=1';
         }
     }
 
@@ -250,6 +254,7 @@ class DebugSelection
         $this->logQuery('fetch', []);
         $result = $this->selection->fetch();
         $this->completeQueryLogging();
+
         return $result;
     }
 
@@ -258,6 +263,7 @@ class DebugSelection
         $this->logQuery('fetchAll', []);
         $result = $this->selection->fetchAll();
         $this->completeQueryLogging();
+
         return $result;
     }
 
@@ -266,6 +272,7 @@ class DebugSelection
         $this->logQuery('insert', [$data]);
         $result = $this->selection->insert($data);
         $this->completeQueryLogging();
+
         return $result;
     }
 
@@ -274,6 +281,7 @@ class DebugSelection
         $this->logQuery('update', [$data]);
         $result = $this->selection->update($data);
         $this->completeQueryLogging();
+
         return $result;
     }
 
@@ -282,6 +290,7 @@ class DebugSelection
         $this->logQuery('delete', []);
         $result = $this->selection->delete();
         $this->completeQueryLogging();
+
         return $result;
     }
 
@@ -290,6 +299,7 @@ class DebugSelection
         $this->logQuery('count', []);
         $result = $this->selection->count();
         $this->completeQueryLogging();
+
         return $result;
     }
 }

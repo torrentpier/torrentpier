@@ -1,14 +1,16 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 set_die_append_msg();
@@ -24,7 +26,7 @@ if (isset($_POST['submit'])) {
         bb_die($lang['CAPTCHA_WRONG']);
     }
     $email = (!empty($_POST['email'])) ? trim(strip_tags(htmlspecialchars($_POST['email']))) : '';
-    $sql = "SELECT * FROM " . BB_USERS . " WHERE user_email = '" . DB()->escape($email) . "'";
+    $sql = 'SELECT * FROM '.BB_USERS." WHERE user_email = '".DB()->escape($email)."'";
     if ($result = DB()->sql_query($sql)) {
         if ($row = DB()->sql_fetchrow($result)) {
             if (!$row['user_active']) {
@@ -40,9 +42,9 @@ if (isset($_POST['submit'])) {
             $user_actkey = make_rand_str(ACTKEY_LENGTH);
             $user_password = make_rand_str(PASSWORD_MIN_LENGTH);
 
-            $sql = "UPDATE " . BB_USERS . "
+            $sql = 'UPDATE '.BB_USERS."
 				SET user_newpasswd = '$user_password', user_actkey = '$user_actkey'
-				WHERE user_id = " . $row['user_id'];
+				WHERE user_id = ".$row['user_id'];
             if (!DB()->sql_query($sql)) {
                 bb_die('Could not update new password information');
             }
@@ -55,9 +57,9 @@ if (isset($_POST['submit'])) {
 
             $emailer->set_template('user_activate_passwd', $row['user_lang']);
             $emailer->assign_vars([
-                'USERNAME' => $username,
-                'PASSWORD' => $user_password,
-                'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)
+                'USERNAME'   => $username,
+                'PASSWORD'   => $user_password,
+                'U_ACTIVATE' => make_url('profile.php?mode=activate&'.POST_USERS_URL.'='.$user_id.'&act_key='.$user_actkey),
             ]);
 
             $emailer->send();
@@ -74,11 +76,11 @@ if (isset($_POST['submit'])) {
 }
 
 $template->assign_vars([
-    'USERNAME' => $username,
-    'EMAIL' => $email,
-    'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
-    'S_HIDDEN_FIELDS' => '',
-    'S_PROFILE_ACTION' => 'profile.php?mode=sendpassword'
+    'USERNAME'         => $username,
+    'EMAIL'            => $email,
+    'CAPTCHA_HTML'     => ($need_captcha) ? bb_captcha('get') : '',
+    'S_HIDDEN_FIELDS'  => '',
+    'S_PROFILE_ACTION' => 'profile.php?mode=sendpassword',
 ]);
 
 print_page('usercp_sendpasswd.tpl');

@@ -1,9 +1,12 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
@@ -12,8 +15,7 @@ namespace TorrentPier;
 use Exception;
 
 /**
- * Class Ajax
- * @package TorrentPier
+ * Class Ajax.
  */
 class Ajax
 {
@@ -23,37 +25,37 @@ class Ajax
     public array $valid_actions = [
         // ACTION NAME => [AJAX_AUTH]
         'edit_user_profile' => ['admin'],
-        'change_user_rank' => ['admin'],
-        'change_user_opt' => ['admin'],
-        'manage_user' => ['admin'],
-        'manage_admin' => ['admin'],
-        'sitemap' => ['admin'],
+        'change_user_rank'  => ['admin'],
+        'change_user_opt'   => ['admin'],
+        'manage_user'       => ['admin'],
+        'manage_admin'      => ['admin'],
+        'sitemap'           => ['admin'],
 
-        'mod_action' => ['mod'],
-        'topic_tpl' => ['mod'],
+        'mod_action'       => ['mod'],
+        'topic_tpl'        => ['mod'],
         'group_membership' => ['mod'],
         'post_mod_comment' => ['mod'],
 
-        'avatar' => ['user'],
-        'passkey' => ['user'],
-        'change_torrent' => ['user'],
+        'avatar'            => ['user'],
+        'passkey'           => ['user'],
+        'change_torrent'    => ['user'],
         'change_tor_status' => ['user'],
-        'manage_group' => ['user'],
-        'callseed' => ['user'],
+        'manage_group'      => ['user'],
+        'callseed'          => ['user'],
 
-        'ffprobe_info' => ['guest'],
-        'thx' => ['guest'],
-        'view_post' => ['guest'],
-        'view_torrent' => ['guest'],
+        'ffprobe_info'  => ['guest'],
+        'thx'           => ['guest'],
+        'view_post'     => ['guest'],
+        'view_torrent'  => ['guest'],
         'user_register' => ['guest'],
-        'posts' => ['guest'],
-        'index_data' => ['guest'],
+        'posts'         => ['guest'],
+        'index_data'    => ['guest'],
     ];
 
     public string $action;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -62,7 +64,7 @@ class Ajax
     }
 
     /**
-     * Perform action
+     * Perform action.
      *
      * @throws Exception
      */
@@ -86,8 +88,8 @@ class Ajax
         // Actions check
         if (!$action) {
             $this->ajax_die('no action specified');
-        } elseif (!$action_params =& $this->valid_actions[$action]) {
-            $this->ajax_die('invalid action: ' . $action);
+        } elseif (!$action_params = &$this->valid_actions[$action]) {
+            $this->ajax_die('invalid action: '.$action);
         }
 
         // Exit if board is disabled via ON/OFF trigger or by admin
@@ -138,10 +140,11 @@ class Ajax
     }
 
     /**
-     * Exit on error
+     * Exit on error.
      *
      * @param string $error_msg
-     * @param int $error_code
+     * @param int    $error_code
+     *
      * @throws Exception
      */
     public function ajax_die(string $error_msg, int $error_code = E_AJAX_GENERAL_ERROR): void
@@ -151,8 +154,8 @@ class Ajax
 
         // Get caller info
         if (!empty($_COOKIE['explain'])) {
-            $ajax_debug = 'ajax die: ' . $this->debug_find_source();
-            $this->response['error_msg'] .= "\n\n" . $ajax_debug;
+            $ajax_debug = 'ajax die: '.$this->debug_find_source();
+            $this->response['error_msg'] .= "\n\n".$ajax_debug;
             $this->response['console_log'] = $ajax_debug;
         }
 
@@ -160,19 +163,20 @@ class Ajax
     }
 
     /**
-     * Initialization
+     * Initialization.
      */
     public function init()
     {
         $this->request = $_POST;
-        $this->action =& $this->request['action'];
+        $this->action = &$this->request['action'];
     }
 
     /**
-     * Send data
+     * Send data.
+     *
+     * @throws Exception
      *
      * @return void
-     * @throws Exception
      */
     public function send(): void
     {
@@ -191,7 +195,7 @@ class Ajax
             }
 
             $this->response['console_log'] = [
-                'request' => $console_log_request,
+                'request'  => $console_log_request,
                 'response' => $console_log_response,
             ];
         }
@@ -201,15 +205,17 @@ class Ajax
         }
 
         // sending output will be handled by $this->ob_handler()
-        exit();
+        exit;
     }
 
     /**
-     * OB Handler
+     * OB Handler.
      *
      * @param $contents
-     * @return string
+     *
      * @throws \JsonException
+     *
+     * @return string
      */
     public function ob_handler($contents): string
     {
@@ -230,7 +236,7 @@ class Ajax
     }
 
     /**
-     * Admin session
+     * Admin session.
      *
      * @throws Exception
      */
@@ -254,7 +260,7 @@ class Ajax
     }
 
     /**
-     * Prompt for password
+     * Prompt for password.
      *
      * @throws Exception
      */
@@ -265,9 +271,10 @@ class Ajax
     }
 
     /**
-     * Prompt for confirmation
+     * Prompt for confirmation.
      *
      * @param string $confirm_msg
+     *
      * @throws Exception
      */
     public function prompt_for_confirm(string $confirm_msg = ''): void
@@ -284,9 +291,10 @@ class Ajax
     }
 
     /**
-     * Verify mod rights
+     * Verify mod rights.
      *
      * @param int|string $forum_id
+     *
      * @throws Exception
      */
     public function verify_mod_rights($forum_id)
@@ -301,9 +309,10 @@ class Ajax
     }
 
     /**
-     * Find caller source
+     * Find caller source.
      *
      * @param string $mode
+     *
      * @return mixed|string
      */
     public function debug_find_source(string $mode = 'all'): mixed
@@ -320,240 +329,241 @@ class Ajax
                         return $trace['line'];
                     case 'all':
                     default:
-                        return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
+                        return hide_bb_path($trace['file']).'('.$trace['line'].')';
                 }
             }
         }
+
         return 'src not found';
     }
 
     /**
-     * Edit user profile actions
+     * Edit user profile actions.
      *
      * @return void
      */
     public function edit_user_profile()
     {
-        require AJAX_DIR . '/edit_user_profile.php';
+        require AJAX_DIR.'/edit_user_profile.php';
     }
 
     /**
-     * Change user rank actions
+     * Change user rank actions.
      *
      * @return void
      */
     public function change_user_rank()
     {
-        require AJAX_DIR . '/change_user_rank.php';
+        require AJAX_DIR.'/change_user_rank.php';
     }
 
     /**
-     * Change user opt actions
+     * Change user opt actions.
      *
      * @return void
      */
     public function change_user_opt()
     {
-        require AJAX_DIR . '/change_user_opt.php';
+        require AJAX_DIR.'/change_user_opt.php';
     }
 
     /**
-     * Passkey actions
+     * Passkey actions.
      *
      * @return void
      */
     public function passkey()
     {
-        require AJAX_DIR . '/passkey.php';
+        require AJAX_DIR.'/passkey.php';
     }
 
     /**
-     * Group membership actions
+     * Group membership actions.
      *
      * @return void
      */
     public function group_membership()
     {
-        require AJAX_DIR . '/group_membership.php';
+        require AJAX_DIR.'/group_membership.php';
     }
 
     /**
-     * Manage group actions
+     * Manage group actions.
      *
      * @return void
      */
     public function manage_group()
     {
-        require AJAX_DIR . '/edit_group_profile.php';
+        require AJAX_DIR.'/edit_group_profile.php';
     }
 
     /**
-     * Post moderator comment actions
+     * Post moderator comment actions.
      *
      * @return void
      */
     public function post_mod_comment()
     {
-        require AJAX_DIR . '/post_mod_comment.php';
+        require AJAX_DIR.'/post_mod_comment.php';
     }
 
     /**
-     * View post actions
+     * View post actions.
      *
      * @return void
      */
     public function view_post()
     {
-        require AJAX_DIR . '/view_post.php';
+        require AJAX_DIR.'/view_post.php';
     }
 
     /**
-     * Change torrent status actions
+     * Change torrent status actions.
      *
      * @return void
      */
     public function change_tor_status()
     {
-        require AJAX_DIR . '/change_tor_status.php';
+        require AJAX_DIR.'/change_tor_status.php';
     }
 
     /**
-     * Change torrent actions
+     * Change torrent actions.
      *
      * @return void
      */
     public function change_torrent()
     {
-        require AJAX_DIR . '/change_torrent.php';
+        require AJAX_DIR.'/change_torrent.php';
     }
 
     /**
-     * View torrent actions
+     * View torrent actions.
      *
      * @return void
      */
     public function view_torrent()
     {
-        require AJAX_DIR . '/view_torrent.php';
+        require AJAX_DIR.'/view_torrent.php';
     }
 
     /**
-     * User registration actions
+     * User registration actions.
      *
      * @return void
      */
     public function user_register()
     {
-        require AJAX_DIR . '/user_register.php';
+        require AJAX_DIR.'/user_register.php';
     }
 
     /**
-     * Moderator actions
+     * Moderator actions.
      *
      * @return void
      */
     public function mod_action()
     {
-        require AJAX_DIR . '/mod_action.php';
+        require AJAX_DIR.'/mod_action.php';
     }
 
     /**
-     * Posts actions
+     * Posts actions.
      *
      * @return void
      */
     public function posts()
     {
-        require AJAX_DIR . '/posts.php';
+        require AJAX_DIR.'/posts.php';
     }
 
     /**
-     * Manage user actions
+     * Manage user actions.
      *
      * @return void
      */
     public function manage_user()
     {
-        require AJAX_DIR . '/manage_user.php';
+        require AJAX_DIR.'/manage_user.php';
     }
 
     /**
-     * Manage admin actions
+     * Manage admin actions.
      *
      * @return void
      */
     public function manage_admin()
     {
-        require AJAX_DIR . '/manage_admin.php';
+        require AJAX_DIR.'/manage_admin.php';
     }
 
     /**
-     * Topic tpl actions
+     * Topic tpl actions.
      *
      * @return void
      */
     public function topic_tpl()
     {
-        require AJAX_DIR . '/topic_tpl.php';
+        require AJAX_DIR.'/topic_tpl.php';
     }
 
     /**
-     * Index data actions
+     * Index data actions.
      *
      * @return void
      */
     public function index_data()
     {
-        require AJAX_DIR . '/index_data.php';
+        require AJAX_DIR.'/index_data.php';
     }
 
     /**
-     * Avatar actions
+     * Avatar actions.
      *
      * @return void
      */
     public function avatar()
     {
-        require AJAX_DIR . '/avatar.php';
+        require AJAX_DIR.'/avatar.php';
     }
 
     /**
-     * Sitemap actions
+     * Sitemap actions.
      *
      * @return void
      */
     public function sitemap()
     {
-        require AJAX_DIR . '/sitemap.php';
+        require AJAX_DIR.'/sitemap.php';
     }
 
     /**
-     * Call seed actions
+     * Call seed actions.
      *
      * @return void
      */
     public function callseed()
     {
-        require AJAX_DIR . '/callseed.php';
+        require AJAX_DIR.'/callseed.php';
     }
 
     /**
-     * Get / Set votes
+     * Get / Set votes.
      *
      * @return void
      */
     public function thx()
     {
-        require AJAX_DIR . '/thanks.php';
+        require AJAX_DIR.'/thanks.php';
     }
 
     /**
-     * Get info from ffprobe (TorrServer API)
+     * Get info from ffprobe (TorrServer API).
      *
      * @return void
      */
     public function ffprobe_info()
     {
-        require AJAX_DIR . '/ffprobe_info.php';
+        require AJAX_DIR.'/ffprobe_info.php';
     }
 }

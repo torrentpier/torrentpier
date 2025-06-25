@@ -1,23 +1,25 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 global $userdata, $lang;
 
-if (!$mode = (string)$this->request['mode']) {
+if (!$mode = (string) $this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
 }
 
-if (!$user_id = (int)$this->request['user_id']) {
+if (!$user_id = (int) $this->request['user_id']) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
@@ -53,7 +55,7 @@ switch ($mode) {
             $this->prompt_for_confirm($lang['DELETE_USER_ALL_POSTS_CONFIRM']);
         }
 
-        $user_topics = DB()->fetch_rowset("SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_poster = $user_id", 'topic_id');
+        $user_topics = DB()->fetch_rowset('SELECT topic_id FROM '.BB_TOPICS." WHERE topic_poster = $user_id", 'topic_id');
         $deleted_topics = \TorrentPier\Legacy\Admin\Common::topic_delete($user_topics);
         $deleted_posts = \TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
         $this->response['info'] = $lang['USER_DELETED_POSTS'];
@@ -74,7 +76,7 @@ switch ($mode) {
             $this->prompt_for_confirm($lang['DEACTIVATE_CONFIRM']);
         }
 
-        DB()->query("UPDATE " . BB_USERS . " SET user_active = 1 WHERE user_id = " . $user_id);
+        DB()->query('UPDATE '.BB_USERS.' SET user_active = 1 WHERE user_id = '.$user_id);
         $this->response['info'] = $lang['USER_ACTIVATE_ON'];
         break;
     case 'user_deactivate':
@@ -85,7 +87,7 @@ switch ($mode) {
             $this->prompt_for_confirm($lang['ACTIVATE_CONFIRM']);
         }
 
-        DB()->query("UPDATE " . BB_USERS . " SET user_active = 0 WHERE user_id = " . $user_id);
+        DB()->query('UPDATE '.BB_USERS.' SET user_active = 0 WHERE user_id = '.$user_id);
         \TorrentPier\Sessions::delete_user_sessions($user_id);
         $this->response['info'] = $lang['USER_ACTIVATE_OFF'];
         break;
@@ -94,4 +96,4 @@ switch ($mode) {
 }
 
 $this->response['mode'] = $mode;
-$this->response['url'] = html_entity_decode(make_url('/') . PROFILE_URL . $user_id);
+$this->response['url'] = html_entity_decode(make_url('/').PROFILE_URL.$user_id);

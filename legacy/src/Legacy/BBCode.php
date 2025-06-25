@@ -1,47 +1,49 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy;
 
 /**
- * Class BBCode
- * @package TorrentPier\Legacy
+ * Class BBCode.
  */
 class BBCode
 {
-    /** @var array $tpl Replacements for some code elements */
+    /** @var array Replacements for some code elements */
     public array $tpl = [];
 
-    /** @var array $smilies Replacements for smilies */
+    /** @var array Replacements for smilies */
     public array $smilies = [];
 
-    /** @var array $tidy_cfg Tidy preprocessor configuration */
+    /** @var array Tidy preprocessor configuration */
     public array $tidy_cfg = [
-        'drop-empty-paras' => false,
-        'fix-uri' => false,
-        'force-output' => true,
-        'hide-comments' => true,
-        'join-classes' => false,
-        'join-styles' => false,
-        'merge-divs' => false,
-        'newline' => 'LF',
-        'output-xhtml' => true,
+        'drop-empty-paras'  => false,
+        'fix-uri'           => false,
+        'force-output'      => true,
+        'hide-comments'     => true,
+        'join-classes'      => false,
+        'join-styles'       => false,
+        'merge-divs'        => false,
+        'newline'           => 'LF',
+        'output-xhtml'      => true,
         'preserve-entities' => true,
-        'quiet' => true,
-        'quote-ampersand' => false,
-        'show-body-only' => true,
-        'show-errors' => false,
-        'show-warnings' => false,
-        'wrap' => 0,
+        'quiet'             => true,
+        'quote-ampersand'   => false,
+        'show-body-only'    => true,
+        'show-errors'       => false,
+        'show-warnings'     => false,
+        'wrap'              => 0,
     ];
 
-    /** @var array $block_tags Define some elements as block-processed */
+    /** @var array Define some elements as block-processed */
     public array $block_tags = [
         'align',
         'br',
@@ -61,7 +63,7 @@ class BBCode
     public $str_repl = [];
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -71,7 +73,7 @@ class BBCode
     }
 
     /**
-     * Initialize replacements for elements
+     * Initialize replacements for elements.
      */
     private function init_replacements(): void
     {
@@ -80,66 +82,66 @@ class BBCode
         $email_exp = '[a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+';
 
         $this->preg = [
-            '#\[quote="(.+?)"\]#isu' => $tpl['quote_username_open'],
-            '#\[spoiler="(.+?)"\]#isu' => $tpl['spoiler_title_open'],
-            '#\[acronym="(.+?)"\]#isu' => '<span class="post-acronym" title="$1">',
-            '#\[list=(a|A|i|I|1)\]#isu' => '<ul type="$1">',
-            '#\[\*=(\d+)\]#isu' => '<li value="$1">',
-            '#\[pre\](.*?)\[/pre\]#isu' => '<pre class="post-pre">$1</pre>',
-            '#\[name=([a-zA-Z0-9_]+?)\]#isu' => '<a name="$1"></a>',
-            '#\[url=\#([a-zA-Z0-9_]+?)\](.*?)\[/url\]#isu' => '<a class="postLink-name" href="#$1">$2</a>',
-            '#\[color=([\#0-9a-zA-Z]+)\]#isu' => '<span style="color: $1;">',
-            '#\[size=([1-2]?[0-9])\]#isu' => '<span style="font-size: $1px; line-height: normal;">',
-            '#\[align=(left|right|center|justify)\]#isu' => '<span class="post-align" style="text-align: $1;">',
-            '#\[font="([\w\- \']+)"\]#isu' => '<span style="font-family: $1;">',
-            '#\[font=([\w\- \']+)\]#isu' => '<span style="font-family: $1;">',
-            "#\[img\]($img_exp)\[/img\]#isu" => $tpl['img'],
-            "#\[img=(left|right|center)\]($img_exp)\[/img\]\s*#isu" => $tpl['img_aligned'],
-            "#\[email\]($email_exp)\[/email\]#isu" => '<a href="mailto:$1">$1</a>',
-            "#\[qpost=([0-9]*)\]#isu" => '<u class="q-post">$1</u>',
-            '#\[box=(?:\s*[\'"])?([\#0-9a-zA-Z]+)(?:[\'"]\s*)?\]#isu' => $tpl['box_open_color_single'],
+            '#\[quote="(.+?)"\]#isu'                                                                  => $tpl['quote_username_open'],
+            '#\[spoiler="(.+?)"\]#isu'                                                                => $tpl['spoiler_title_open'],
+            '#\[acronym="(.+?)"\]#isu'                                                                => '<span class="post-acronym" title="$1">',
+            '#\[list=(a|A|i|I|1)\]#isu'                                                               => '<ul type="$1">',
+            '#\[\*=(\d+)\]#isu'                                                                       => '<li value="$1">',
+            '#\[pre\](.*?)\[/pre\]#isu'                                                               => '<pre class="post-pre">$1</pre>',
+            '#\[name=([a-zA-Z0-9_]+?)\]#isu'                                                          => '<a name="$1"></a>',
+            '#\[url=\#([a-zA-Z0-9_]+?)\](.*?)\[/url\]#isu'                                            => '<a class="postLink-name" href="#$1">$2</a>',
+            '#\[color=([\#0-9a-zA-Z]+)\]#isu'                                                         => '<span style="color: $1;">',
+            '#\[size=([1-2]?[0-9])\]#isu'                                                             => '<span style="font-size: $1px; line-height: normal;">',
+            '#\[align=(left|right|center|justify)\]#isu'                                              => '<span class="post-align" style="text-align: $1;">',
+            '#\[font="([\w\- \']+)"\]#isu'                                                            => '<span style="font-family: $1;">',
+            '#\[font=([\w\- \']+)\]#isu'                                                              => '<span style="font-family: $1;">',
+            "#\[img\]($img_exp)\[/img\]#isu"                                                          => $tpl['img'],
+            "#\[img=(left|right|center)\]($img_exp)\[/img\]\s*#isu"                                   => $tpl['img_aligned'],
+            "#\[email\]($email_exp)\[/email\]#isu"                                                    => '<a href="mailto:$1">$1</a>',
+            "#\[qpost=([0-9]*)\]#isu"                                                                 => '<u class="q-post">$1</u>',
+            '#\[box=(?:\s*[\'"])?([\#0-9a-zA-Z]+)(?:[\'"]\s*)?\]#isu'                                 => $tpl['box_open_color_single'],
             '#\[box=(?:\s*[\'"])?([\#0-9a-zA-Z]+)(?:[\'"]\s*)?,\s*[\'"]?([\#0-9a-zA-Z]+)[\'"]?\]#isu' => $tpl['box_open_color'],
         ];
 
         $this->str = [
-            '[quote]' => $tpl['quote_open'],
-            '[/quote]' => $tpl['quote_close'],
-            '[spoiler]' => $tpl['spoiler_open'],
+            '[quote]'    => $tpl['quote_open'],
+            '[/quote]'   => $tpl['quote_close'],
+            '[spoiler]'  => $tpl['spoiler_open'],
             '[/spoiler]' => $tpl['spoiler_close'],
             '[/acronym]' => '</span>',
-            '[list]' => '<ul>',
-            '[*]' => '<li>',
-            '[/list]' => '</ul>',
-            '[/color]' => '</span>',
-            '[/size]' => '</span>',
-            '[/align]' => '</span>',
-            '[/font]' => '</span>',
-            '[tab]' => '&nbsp;&nbsp;&nbsp;&nbsp;',
-            '[br]' => "\n\n",
-            '[hr]' => $tpl['hr'],
-            '[b]' => '<span class="post-b">',
-            '[/b]' => '</span>',
-            '[u]' => '<span class="post-u">',
-            '[/u]' => '</span>',
-            '[i]' => '<span class="post-i">',
-            '[/i]' => '</span>',
-            '[s]' => '<span class="post-s">',
-            '[/s]' => '</span>',
-            '[sup]' => '<sup><small>',
-            '[/sup]' => '</small></sup>',
-            '[sub]' => '<sub><small>',
-            '[/sub]' => '</small></sub>',
-            '[box]' => $tpl['box_open'],
-            '[/box]' => $tpl['box_close'],
-            '[indent]' => '<div class="post-indent">',
-            '[/indent]' => '</div>',
-            '[pre]' => '<pre class="post-pre">',
-            '[/pre]' => '</pre>',
-            '[nfo]' => '<pre class="post-nfo">',
-            '[/nfo]' => '</pre>',
-            '[del]' => '<span class="post-s">',
-            '[/del]' => '</span>',
-            '[clear]' => '<div class="clear">&nbsp;</div>',
+            '[list]'     => '<ul>',
+            '[*]'        => '<li>',
+            '[/list]'    => '</ul>',
+            '[/color]'   => '</span>',
+            '[/size]'    => '</span>',
+            '[/align]'   => '</span>',
+            '[/font]'    => '</span>',
+            '[tab]'      => '&nbsp;&nbsp;&nbsp;&nbsp;',
+            '[br]'       => "\n\n",
+            '[hr]'       => $tpl['hr'],
+            '[b]'        => '<span class="post-b">',
+            '[/b]'       => '</span>',
+            '[u]'        => '<span class="post-u">',
+            '[/u]'       => '</span>',
+            '[i]'        => '<span class="post-i">',
+            '[/i]'       => '</span>',
+            '[s]'        => '<span class="post-s">',
+            '[/s]'       => '</span>',
+            '[sup]'      => '<sup><small>',
+            '[/sup]'     => '</small></sup>',
+            '[sub]'      => '<sub><small>',
+            '[/sub]'     => '</small></sub>',
+            '[box]'      => $tpl['box_open'],
+            '[/box]'     => $tpl['box_close'],
+            '[indent]'   => '<div class="post-indent">',
+            '[/indent]'  => '</div>',
+            '[pre]'      => '<pre class="post-pre">',
+            '[/pre]'     => '</pre>',
+            '[nfo]'      => '<pre class="post-nfo">',
+            '[/nfo]'     => '</pre>',
+            '[del]'      => '<span class="post-s">',
+            '[/del]'     => '</span>',
+            '[clear]'    => '<div class="clear">&nbsp;</div>',
         ];
 
         $this->preg_search = array_keys($this->preg);
@@ -149,7 +151,7 @@ class BBCode
     }
 
     /**
-     * Convert bbcodes to html. Text must be prepared with htmlCHR
+     * Convert bbcodes to html. Text must be prepared with htmlCHR.
      *
      * @param string $text
      *
@@ -171,7 +173,7 @@ class BBCode
     }
 
     /**
-     * Parse elements in the text
+     * Parse elements in the text.
      *
      * @param string $text
      *
@@ -210,7 +212,7 @@ class BBCode
     }
 
     /**
-     * Clean up test from trailing spaces and more
+     * Clean up test from trailing spaces and more.
      *
      * @param string $text
      *
@@ -221,11 +223,12 @@ class BBCode
         $text = trim($text);
         $text = str_replace("\r", '', $text);
         $text = preg_replace('#[ \t]+$#m', '', $text);
+
         return preg_replace('#\n{3,}#', "\n\n", $text);
     }
 
     /**
-     * Callback to [code]
+     * Callback to [code].
      *
      * @param array $m
      *
@@ -238,11 +241,12 @@ class BBCode
         $code = str_replace('  ', ' &nbsp;', $code);
         $code = str_replace("\t", '&nbsp; ', $code);
         $code = str_replace(['[', ']', ':', ')'], ['&#91;', '&#93;', '&#58;', '&#41;'], $code);
-        return $this->tpl['code_open'] . $code . $this->tpl['code_close'];
+
+        return $this->tpl['code_open'].$code.$this->tpl['code_close'];
     }
 
     /**
-     * Callback to [url]
+     * Callback to [url].
      *
      * @param array $m
      *
@@ -256,7 +260,7 @@ class BBCode
 
         if (!isset($url_parse['scheme']) && isset($url_parse['path'])) {
             if (!preg_match('/^([a-zA-Z0-9_\-\.]+\.php)(\?[^#]*)?$/', $url_parse['path'])) {
-                $url = 'http://' . $url;
+                $url = 'http://'.$url;
             }
         }
 
@@ -264,7 +268,7 @@ class BBCode
     }
 
     /**
-     * Callback to escape titles in block elements
+     * Callback to escape titles in block elements.
      *
      * @param array $m
      *
@@ -276,11 +280,12 @@ class BBCode
         $title = str_replace(['[', ']', ':', ')', '"'], ['&#91;', '&#93;', '&#58;', '&#41;', '&#34;'], $title);
         // reconvert because after extracting title there's a reverse convertion
         $title = htmlspecialchars($title, ENT_QUOTES);
-        return $m[1] . $title . $m[4];
+
+        return $m[1].$title.$m[4];
     }
 
     /**
-     * Callback to make text clickable
+     * Callback to make text clickable.
      *
      * @param string $text
      *
@@ -314,7 +319,7 @@ class BBCode
     }
 
     /**
-     * Callback to make URL clickable
+     * Callback to make URL clickable.
      *
      * @param array $m
      *
@@ -324,13 +329,13 @@ class BBCode
     {
         $max_len = 70;
         $href = $m[1];
-        $name = (mb_strlen($href, DEFAULT_CHARSET) > $max_len) ? mb_substr($href, 0, $max_len - 19) . '...' . mb_substr($href, -16) : $href;
+        $name = (mb_strlen($href, DEFAULT_CHARSET) > $max_len) ? mb_substr($href, 0, $max_len - 19).'...'.mb_substr($href, -16) : $href;
 
         return $this->nofollow_url($href, $name);
     }
 
     /**
-     * Replace smilies to images in text
+     * Replace smilies to images in text.
      *
      * @param string $text
      *
@@ -360,7 +365,7 @@ class BBCode
     }
 
     /**
-     * Replace text new line to html
+     * Replace text new line to html.
      *
      * @param string $text
      *
@@ -369,11 +374,12 @@ class BBCode
     private function new_line2html(string $text): string
     {
         $text = preg_replace('#\n{2,}#', '<span class="post-br"><br /></span>', $text);
+
         return str_replace("\n", '<br />', $text);
     }
 
     /**
-     * Prepare post text with tidy preprocessor
+     * Prepare post text with tidy preprocessor.
      *
      * @param string $text
      *
@@ -385,10 +391,11 @@ class BBCode
     }
 
     /**
-     * Nofollow links handling
+     * Nofollow links handling.
      *
      * @param string $href
      * @param string $name
+     *
      * @return string
      */
     private function nofollow_url(string $href, string $name): string

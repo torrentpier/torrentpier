@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TorrentPier\Infrastructure\DependencyInjection\Definitions;
 
 use DI;
-use Psr\Container\ContainerInterface;
 
 class PresentationDefinitions
 {

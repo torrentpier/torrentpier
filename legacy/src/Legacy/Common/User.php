@@ -1,87 +1,88 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy\Common;
 
+use Exception;
 use TorrentPier\Legacy\DateDelta;
 use TorrentPier\Sessions;
 
-use Exception;
-
 /**
- * Class User
- * @package TorrentPier\Legacy\Common
+ * Class User.
  */
 class User
 {
     /**
-     * Config
+     * Config.
      *
      * @var array
      */
     public $cfg = [
-        'req_login' => false,    // requires user to be logged in
+        'req_login'         => false,    // requires user to be logged in
         'req_session_admin' => false,    // requires active admin session (for moderation or admin actions)
     ];
 
     /**
-     * PHP-JS exchangeable options (JSON'ized as {USER_OPTIONS_JS} in TPL)
+     * PHP-JS exchangeable options (JSON'ized as {USER_OPTIONS_JS} in TPL).
      *
      * @var array
      */
     public $opt_js = [
         'only_new' => 0,     // show ony new posts or topics
-        'h_from' => 0,     // hide from
-        'h_av' => 0,     // hide avatar
-        'h_rnk_i' => 0,     // hide rank images
+        'h_from'   => 0,     // hide from
+        'h_av'     => 0,     // hide avatar
+        'h_rnk_i'  => 0,     // hide rank images
         'h_post_i' => 0,     // hide post images
-        'h_smile' => 0,     // hide smilies
-        'h_sig' => 0,     // hide signatures
-        'sp_op' => 0,     // show spoiler opened
-        'tr_t_ax' => 0,     // ajax open topics
-        'tr_t_t' => 0,     // show time of the creation topics
-        'hl_tr' => 1,     // show cursor in tracker.php
-        'i_aft_l' => 0,     // show images only after full loading
-        'h_tsp' => 0,     // show released title {...}
+        'h_smile'  => 0,     // hide smilies
+        'h_sig'    => 0,     // hide signatures
+        'sp_op'    => 0,     // show spoiler opened
+        'tr_t_ax'  => 0,     // ajax open topics
+        'tr_t_t'   => 0,     // show time of the creation topics
+        'hl_tr'    => 1,     // show cursor in tracker.php
+        'i_aft_l'  => 0,     // show images only after full loading
+        'h_tsp'    => 0,     // show released title {...}
     ];
 
     /**
-     * Defaults options for guests
+     * Defaults options for guests.
      *
      * @var array
      */
     public $opt_js_guest = [
-        'h_av' => 1,     // hide avatar
+        'h_av'    => 1,     // hide avatar
         'h_rnk_i' => 1,     // hide rank images
-        'h_sig' => 1,     // hide signatures
+        'h_sig'   => 1,     // hide signatures
     ];
 
     /**
-     * Sessiondata
+     * Sessiondata.
      *
      * @var array
      */
     public $sessiondata = [
-        'uk' => null,
+        'uk'  => null,
         'uid' => null,
         'sid' => '',
     ];
 
     /**
-     * Old $userdata
+     * Old $userdata.
      *
      * @var array
      */
     public $data = [];
 
     /**
-     * Shortcuts
+     * Shortcuts.
      *
      * @var
      */
@@ -95,7 +96,7 @@ class User
     public $level;
 
     /**
-     * User constructor
+     * User constructor.
      */
     public function __construct()
     {
@@ -103,7 +104,7 @@ class User
     }
 
     /**
-     * Start session (restore existent session or create new)
+     * Start session (restore existent session or create new).
      *
      * @param array $cfg
      *
@@ -122,23 +123,23 @@ class User
         if ($session_id || !$this->sessiondata['uk']) {
             $SQL = DB()->get_empty_sql_array();
 
-            $SQL['SELECT'][] = "u.*, s.*";
+            $SQL['SELECT'][] = 'u.*, s.*';
 
-            $SQL['FROM'][] = BB_SESSIONS . " s";
-            $SQL['INNER JOIN'][] = BB_USERS . " u ON(u.user_id = s.session_user_id)";
+            $SQL['FROM'][] = BB_SESSIONS.' s';
+            $SQL['INNER JOIN'][] = BB_USERS.' u ON(u.user_id = s.session_user_id)';
 
             if ($session_id) {
                 $SQL['WHERE'][] = "s.session_id = '$session_id'";
 
                 if (config()->get('torhelp_enabled')) {
-                    $SQL['SELECT'][] = "th.topic_id_csv AS torhelp";
-                    $SQL['LEFT JOIN'][] = BB_BT_TORHELP . " th ON(u.user_id = th.user_id)";
+                    $SQL['SELECT'][] = 'th.topic_id_csv AS torhelp';
+                    $SQL['LEFT JOIN'][] = BB_BT_TORHELP.' th ON(u.user_id = th.user_id)';
                 }
 
                 $userdata_cache_id = $session_id;
             } else {
-                $SQL['WHERE'][] = "s.session_ip = '" . USER_IP . "'";
-                $SQL['WHERE'][] = "s.session_user_id = " . GUEST_UID;
+                $SQL['WHERE'][] = "s.session_ip = '".USER_IP."'";
+                $SQL['WHERE'][] = 's.session_user_id = '.GUEST_UID;
 
                 $userdata_cache_id = USER_IP;
             }
@@ -173,9 +174,9 @@ class User
 
                 // Only update session a minute or so after last update
                 if ($update_sessions_table) {
-                    DB()->query("
-						UPDATE " . BB_SESSIONS . " SET
-							session_time = " . $this->data['session_time'] . "
+                    DB()->query('
+						UPDATE '.BB_SESSIONS.' SET
+							session_time = '.$this->data['session_time']."
 						WHERE session_id = '$session_id'
 						LIMIT 1
 					");
@@ -191,14 +192,14 @@ class User
             $login = false;
             $user_id = (config()->get('allow_autologin') && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
 
-            if ($userdata = get_userdata((int)$user_id, false, true)) {
+            if ($userdata = get_userdata((int) $user_id, false, true)) {
                 if ($userdata['user_id'] != GUEST_UID && $userdata['user_active']) {
                     if (verify_id($this->sessiondata['uk'], LOGIN_KEY_LENGTH) && $this->verify_autologin_id($userdata, true, false)) {
                         $login = ($userdata['autologin_id'] && $this->sessiondata['uk'] === $userdata['autologin_id']);
                     }
                 }
             }
-            if (!$userdata || ((int)$userdata['user_id'] !== GUEST_UID && !$login)) {
+            if (!$userdata || ((int) $userdata['user_id'] !== GUEST_UID && !$login)) {
                 $userdata = get_userdata(GUEST_UID, false, true);
             }
 
@@ -206,10 +207,10 @@ class User
         }
 
         define('IS_GUEST', !$this->data['session_logged_in']);
-        define('IS_ADMIN', !IS_GUEST && (int)$this->data['user_level'] === ADMIN);
-        define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
-        define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
-        define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
+        define('IS_ADMIN', !IS_GUEST && (int) $this->data['user_level'] === ADMIN);
+        define('IS_MOD', !IS_GUEST && (int) $this->data['user_level'] === MOD);
+        define('IS_GROUP_MEMBER', !IS_GUEST && (int) $this->data['user_level'] === GROUP_MEMBER);
+        define('IS_USER', !IS_GUEST && (int) $this->data['user_level'] === USER);
         define('IS_SUPER_ADMIN', IS_ADMIN && isset(config()->get('super_admins')[$this->data['user_id']]));
         define('IS_AM', IS_ADMIN || IS_MOD);
 
@@ -223,10 +224,10 @@ class User
         $this->init_userprefs();
 
         // Initial ban check
-        if ($banInfo = getBanInfo((int)$this->id)) {
+        if ($banInfo = getBanInfo((int) $this->id)) {
             $this->session_end();
             if (!empty($banInfo['ban_reason'])) {
-                bb_die($lang['YOU_BEEN_BANNED'] . '<br/><br/>' . $lang['REASON'] . ':&nbsp;' . '<b>' . $banInfo['ban_reason'] . '</b>');
+                bb_die($lang['YOU_BEEN_BANNED'].'<br/><br/>'.$lang['REASON'].':&nbsp;'.'<b>'.$banInfo['ban_reason'].'</b>');
             } else {
                 bb_die($lang['YOU_BEEN_BANNED']);
             }
@@ -236,10 +237,10 @@ class User
     }
 
     /**
-     * Create new session for the given user
+     * Create new session for the given user.
      *
      * @param array $userdata
-     * @param bool $auto_created
+     * @param bool  $auto_created
      *
      * @return array
      */
@@ -248,24 +249,24 @@ class User
         $this->data = $userdata;
         $session_id = $this->sessiondata['sid'];
 
-        $login = ((int)$this->data['user_id'] !== GUEST_UID);
-        $user_id = (int)$this->data['user_id'];
-        $mod_admin_session = ((int)$this->data['user_level'] === ADMIN || (int)$this->data['user_level'] === MOD);
+        $login = ((int) $this->data['user_id'] !== GUEST_UID);
+        $user_id = (int) $this->data['user_id'];
+        $mod_admin_session = ((int) $this->data['user_level'] === ADMIN || (int) $this->data['user_level'] === MOD);
 
         // Create new session
         for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
             $session_id = make_rand_str(SID_LENGTH);
 
             $args = DB()->build_array('INSERT', [
-                'session_id' => (string)$session_id,
-                'session_user_id' => (int)$user_id,
-                'session_start' => (int)TIMENOW,
-                'session_time' => (int)TIMENOW,
-                'session_ip' => (string)USER_IP,
-                'session_logged_in' => (int)$login,
-                'session_admin' => (int)$mod_admin_session,
+                'session_id'        => (string) $session_id,
+                'session_user_id'   => (int) $user_id,
+                'session_start'     => (int) TIMENOW,
+                'session_time'      => (int) TIMENOW,
+                'session_ip'        => (string) USER_IP,
+                'session_logged_in' => (int) $login,
+                'session_admin'     => (int) $mod_admin_session,
             ]);
-            $sql = "INSERT INTO " . BB_SESSIONS . $args;
+            $sql = 'INSERT INTO '.BB_SESSIONS.$args;
 
             if (DB()->query($sql)) {
                 break;
@@ -282,16 +283,16 @@ class User
                 $last_visit = TIMENOW;
                 define('FIRST_LOGON', true);
             } elseif ($session_time < (TIMENOW - config()->get('last_visit_update_intrv'))) {
-                $last_visit = max($session_time, (TIMENOW - 86400 * config()->get('max_last_visit_days')));
+                $last_visit = max($session_time, TIMENOW - 86400 * config()->get('max_last_visit_days'));
             }
 
             if ($last_visit != $this->data['user_lastvisit']) {
-                DB()->query("
-					UPDATE " . BB_USERS . " SET
-						user_session_time = " . TIMENOW . ",
+                DB()->query('
+					UPDATE '.BB_USERS.' SET
+						user_session_time = '.TIMENOW.",
 						user_lastvisit = $last_visit,
-						user_last_ip = '" . USER_IP . "',
-						user_reg_ip = IF(user_reg_ip = '', '" . USER_IP . "', user_reg_ip)
+						user_last_ip = '".USER_IP."',
+						user_reg_ip = IF(user_reg_ip = '', '".USER_IP."', user_reg_ip)
 					WHERE user_id = $user_id
 					LIMIT 1
 				");
@@ -330,7 +331,7 @@ class User
     }
 
     /**
-     * Initialize sessiondata stored in cookies
+     * Initialize sessiondata stored in cookies.
      *
      * @param bool $update_lastvisit
      * @param bool $set_cookie
@@ -339,20 +340,20 @@ class User
     {
         if ($this->data && is_array($this->data)) {
             Sessions::cache_rm_userdata($this->data);
-            DB()->query("
-                DELETE FROM " . BB_SESSIONS . "
+            DB()->query('
+                DELETE FROM '.BB_SESSIONS."
                 WHERE session_id = '{$this->data['session_id']}'
             ");
         }
 
         if (!IS_GUEST) {
             if ($update_lastvisit) {
-                DB()->query("
-					UPDATE " . BB_USERS . " SET
-						user_session_time = " . TIMENOW . ",
-						user_lastvisit = " . TIMENOW . ",
-						user_last_ip = '" . USER_IP . "',
-						user_reg_ip = IF(user_reg_ip = '', '" . USER_IP . "', user_reg_ip)
+                DB()->query('
+					UPDATE '.BB_USERS.' SET
+						user_session_time = '.TIMENOW.',
+						user_lastvisit = '.TIMENOW.",
+						user_last_ip = '".USER_IP."',
+						user_reg_ip = IF(user_reg_ip = '', '".USER_IP."', user_reg_ip)
 					WHERE user_id = {$this->data['user_id']}
 					LIMIT 1
 				");
@@ -371,10 +372,10 @@ class User
     }
 
     /**
-     * Login
+     * Login.
      *
      * @param array $args
-     * @param bool $mod_admin_login
+     * @param bool  $mod_admin_login
      *
      * @return array
      */
@@ -386,14 +387,14 @@ class User
         if ($username && $password) {
             $username_sql = str_replace("\\'", "''", $username);
 
-            $sql = "
+            $sql = '
 				SELECT *
-				FROM " . BB_USERS . "
+				FROM '.BB_USERS."
 				WHERE username = '$username_sql'
 				  AND user_active = 1
-				  AND user_id != " . GUEST_UID . "
+				  AND user_id != ".GUEST_UID.'
 				LIMIT 1
-			";
+			';
 
             if ($userdata = DB()->fetch_row($sql)) {
                 if (!$userdata['username'] || !$userdata['user_password'] || ($userdata['user_id'] == GUEST_UID) || !$userdata['user_active']) {
@@ -407,11 +408,11 @@ class User
 
                 // Start mod/admin session
                 if ($mod_admin_login) {
-                    DB()->query("
-						UPDATE " . BB_SESSIONS . " SET
-							session_admin = " . $this->data['user_level'] . "
-						WHERE session_user_id = " . $this->data['user_id'] . "
-							AND session_id = '" . $this->data['session_id'] . "'
+                    DB()->query('
+						UPDATE '.BB_SESSIONS.' SET
+							session_admin = '.$this->data['user_level'].'
+						WHERE session_user_id = '.$this->data['user_id']."
+							AND session_id = '".$this->data['session_id']."'
 					");
                     $this->data['session_admin'] = $this->data['user_level'];
                     Sessions::cache_update_userdata($this->data);
@@ -421,16 +422,16 @@ class User
 
                 if ($new_session_userdata = $this->session_create($userdata, false)) {
                     // Removing guest sessions from this IP
-                    DB()->query("
-						DELETE FROM " . BB_SESSIONS . "
-						WHERE session_ip = '" . USER_IP . "'
-							AND session_user_id = " . GUEST_UID . "
-					");
+                    DB()->query('
+						DELETE FROM '.BB_SESSIONS."
+						WHERE session_ip = '".USER_IP."'
+							AND session_user_id = ".GUEST_UID.'
+					');
 
                     return $new_session_userdata;
                 }
 
-                trigger_error("Could not start session : login", E_USER_ERROR);
+                trigger_error('Could not start session : login', E_USER_ERROR);
             }
         }
 
@@ -438,7 +439,7 @@ class User
     }
 
     /**
-     * Initialize sessiondata stored in cookies
+     * Initialize sessiondata stored in cookies.
      */
     public function get_sessiondata()
     {
@@ -450,7 +451,7 @@ class User
         }
         // user_id
         if (!empty($sd_resv['uid'])) {
-            $this->sessiondata['uid'] = (int)$sd_resv['uid'];
+            $this->sessiondata['uid'] = (int) $sd_resv['uid'];
         }
         // sid
         if (!empty($sd_resv['sid']) && verify_id($sd_resv['sid'], SID_LENGTH)) {
@@ -459,25 +460,24 @@ class User
     }
 
     /**
-     * Store sessiondata in cookies
+     * Store sessiondata in cookies.
      *
      * @param $user_id
      */
     public function set_session_cookies($user_id)
     {
-
         $debug_cookies = [
             COOKIE_DBG,
             'explain',
             'sql_log',
-            'sql_log_full'
+            'sql_log_full',
         ];
 
         if ($user_id == GUEST_UID) {
             $delete_cookies = [
                 COOKIE_DATA,
                 'torhelp',
-                'user_lang'
+                'user_lang',
             ];
             $delete_cookies = array_merge($delete_cookies, $debug_cookies);
 
@@ -513,9 +513,9 @@ class User
     }
 
     /**
-     * Verify autologin_id
+     * Verify autologin_id.
      *
-     * @param $userdata
+     * @param      $userdata
      * @param bool $expire_check
      * @param bool $create_new
      *
@@ -541,45 +541,46 @@ class User
     }
 
     /**
-     * Create autologin_id
+     * Create autologin_id.
      *
      * @param array $userdata
-     * @param bool $create_new
+     * @param bool  $create_new
+     *
+     * @throws Exception
      *
      * @return string
-     * @throws Exception
      */
     public function create_autologin_id(array $userdata, bool $create_new = true): string
     {
         $autologin_id = $create_new ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
-        DB()->query("
-			UPDATE " . BB_USERS . " SET
+        DB()->query('
+			UPDATE '.BB_USERS." SET
 				autologin_id = '$autologin_id'
-			WHERE user_id = " . (int)$userdata['user_id'] . "
+			WHERE user_id = ".(int) $userdata['user_id'].'
 			LIMIT 1
-		");
+		');
 
         return $autologin_id;
     }
 
     /**
-     * Set shortcuts
+     * Set shortcuts.
      */
     public function set_shortcuts()
     {
-        $this->id =& $this->data['user_id'];
-        $this->active =& $this->data['user_active'];
-        $this->name =& $this->data['username'];
-        $this->lastvisit =& $this->data['user_lastvisit'];
-        $this->regdate =& $this->data['user_regdate'];
-        $this->level =& $this->data['user_level'];
-        $this->opt =& $this->data['user_opt'];
+        $this->id = &$this->data['user_id'];
+        $this->active = &$this->data['user_active'];
+        $this->name = &$this->data['username'];
+        $this->lastvisit = &$this->data['user_lastvisit'];
+        $this->regdate = &$this->data['user_regdate'];
+        $this->level = &$this->data['user_level'];
+        $this->opt = &$this->data['user_opt'];
         $this->ip = CLIENT_IP;
     }
 
     /**
-     * Initialise user settings
+     * Initialise user settings.
      */
     public function init_userprefs()
     {
@@ -597,8 +598,8 @@ class User
             }
         }
 
-        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/');
-        define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/en/');
+        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR.'/'.config()->get('default_lang').'/');
+        define('SOURCE_LANG_DIR', LANG_ROOT_DIR.'/en/');
 
         if ($this->data['user_id'] != GUEST_UID) {
             if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
@@ -606,7 +607,7 @@ class User
             }
             if ($this->data['user_lang'] && $this->data['user_lang'] != config()->get('default_lang')) {
                 config()->set('default_lang', basename($this->data['user_lang']));
-                define('LANG_DIR', LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/');
+                define('LANG_DIR', LANG_ROOT_DIR.'/'.config()->get('default_lang').'/');
             }
 
             if (isset($this->data['user_timezone'])) {
@@ -636,7 +637,7 @@ class User
     }
 
     /**
-     * Mark read
+     * Mark read.
      *
      * @param $type
      */
@@ -644,9 +645,9 @@ class User
     {
         if ($type === 'all_forums') {
             // Update session time
-            DB()->query("
-				UPDATE " . BB_SESSIONS . " SET
-					session_time = " . TIMENOW . "
+            DB()->query('
+				UPDATE '.BB_SESSIONS.' SET
+					session_time = '.TIMENOW."
 				WHERE session_id = '{$this->data['session_id']}'
 				LIMIT 1
 			");
@@ -658,7 +659,7 @@ class User
             // Update lastvisit
             Sessions::db_update_userdata($this->data, [
                 'user_session_time' => $this->data['session_time'],
-                'user_lastvisit' => $this->data['user_lastvisit'],
+                'user_lastvisit'    => $this->data['user_lastvisit'],
             ]);
 
             // Delete cookies
@@ -669,7 +670,7 @@ class User
     }
 
     /**
-     * Load misc options
+     * Load misc options.
      */
     public function load_opt_js()
     {
@@ -685,7 +686,7 @@ class User
     }
 
     /**
-     * Get not auth forums
+     * Get not auth forums.
      *
      * @param $auth_type
      *
@@ -716,18 +717,18 @@ class User
         }
 
         $auth_field_match = [
-            AUTH_VIEW => 'auth_view',
-            AUTH_READ => 'auth_read',
-            AUTH_POST => 'auth_post',
-            AUTH_REPLY => 'auth_reply',
-            AUTH_EDIT => 'auth_edit',
-            AUTH_DELETE => 'auth_delete',
-            AUTH_STICKY => 'auth_sticky',
-            AUTH_ANNOUNCE => 'auth_announce',
-            AUTH_VOTE => 'auth_vote',
+            AUTH_VIEW       => 'auth_view',
+            AUTH_READ       => 'auth_read',
+            AUTH_POST       => 'auth_post',
+            AUTH_REPLY      => 'auth_reply',
+            AUTH_EDIT       => 'auth_edit',
+            AUTH_DELETE     => 'auth_delete',
+            AUTH_STICKY     => 'auth_sticky',
+            AUTH_ANNOUNCE   => 'auth_announce',
+            AUTH_VOTE       => 'auth_vote',
             AUTH_POLLCREATE => 'auth_pollcreate',
-            AUTH_ATTACH => 'auth_attachments',
-            AUTH_DOWNLOAD => 'auth_download',
+            AUTH_ATTACH     => 'auth_attachments',
+            AUTH_DOWNLOAD   => 'auth_download',
         ];
 
         $not_auth_forums = [];
@@ -744,9 +745,9 @@ class User
     }
 
     /**
-     * Get excluded forums
+     * Get excluded forums.
      *
-     * @param $auth_type
+     * @param        $auth_type
      * @param string $return_as
      *
      * @return array|string
@@ -777,19 +778,20 @@ class User
         }
 
         return match ($return_as) {
-            'csv' => implode(',', $excluded),
+            'csv'      => implode(',', $excluded),
             'flip_csv' => implode(',', array_flip($excluded)),
-            'array' => $excluded,
-            'flip' => array_flip($excluded),
-            default => [],
+            'array'    => $excluded,
+            'flip'     => array_flip($excluded),
+            default    => [],
         };
     }
 
     /**
-     * Check entered password
+     * Check entered password.
      *
      * @param string $enteredPassword
-     * @param array $userdata
+     * @param array  $userdata
+     *
      * @return bool
      */
     public function checkPassword(string $enteredPassword, array $userdata): bool
@@ -797,14 +799,14 @@ class User
         if (password_verify($enteredPassword, $userdata['user_password'])) {
             if (password_needs_rehash($userdata['user_password'], config()->get('password_hash_options.algo'), config()->get('password_hash_options.options'))) {
                 // Update password_hash
-                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+                DB()->query('UPDATE '.BB_USERS." SET user_password = '".$this->password_hash($enteredPassword)."' WHERE user_id = '".$userdata['user_id']."' AND user_password = '".$userdata['user_password']."' LIMIT 1");
             }
 
             return true;
         } else {
             if (hash('md5', hash('md5', $enteredPassword)) === $userdata['user_password']) {
                 // Update old md5 password
-                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+                DB()->query('UPDATE '.BB_USERS." SET user_password = '".$this->password_hash($enteredPassword)."' WHERE user_id = '".$userdata['user_id']."' AND user_password = '".$userdata['user_password']."' LIMIT 1");
 
                 return true;
             }
@@ -814,9 +816,10 @@ class User
     }
 
     /**
-     * Create password_hash
+     * Create password_hash.
      *
      * @param string $enteredPassword
+     *
      * @return string
      */
     public function password_hash(string $enteredPassword): string

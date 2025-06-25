@@ -1,16 +1,19 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Database;
 
 /**
- * Migration Status Manager
+ * Migration Status Manager.
  *
  * Provides read-only access to database migration status information
  * for the admin panel. Uses TorrentPier's database singleton and config system.
@@ -21,17 +24,17 @@ class MigrationStatus
     private string $migrationPath;
     private array $initialMigrations = [
         '20250619000001',
-        '20250619000002'
+        '20250619000002',
     ];
 
     public function __construct()
     {
         $this->migrationTable = BB_MIGRATIONS;
-        $this->migrationPath = BB_ROOT . 'migrations';
+        $this->migrationPath = BB_ROOT.'migrations';
     }
 
     /**
-     * Get complete migration status information
+     * Get complete migration status information.
      *
      * @return array Migration status data including applied/pending migrations
      */
@@ -44,12 +47,12 @@ class MigrationStatus
 
             if (!$tableExists) {
                 return [
-                    'table_exists' => false,
-                    'current_version' => null,
+                    'table_exists'       => false,
+                    'current_version'    => null,
                     'applied_migrations' => [],
                     'pending_migrations' => $this->getAvailableMigrations(),
-                    'setup_status' => $setupStatus,
-                    'requires_setup' => $setupStatus['needs_setup']
+                    'setup_status'       => $setupStatus,
+                    'requires_setup'     => $setupStatus['needs_setup'],
                 ];
             }
 
@@ -64,10 +67,10 @@ class MigrationStatus
             $appliedMigrationsArray = [];
             foreach ($appliedMigrations as $migration) {
                 $appliedMigrationsArray[] = [
-                    'version' => $migration->version,
+                    'version'        => $migration->version,
                     'migration_name' => $migration->migration_name,
-                    'start_time' => $migration->start_time,
-                    'end_time' => $migration->end_time
+                    'start_time'     => $migration->start_time,
+                    'end_time'       => $migration->end_time,
                 ];
             }
 
@@ -85,21 +88,20 @@ class MigrationStatus
             });
 
             return [
-                'table_exists' => true,
-                'current_version' => $currentVersion,
+                'table_exists'       => true,
+                'current_version'    => $currentVersion,
                 'applied_migrations' => $appliedMigrationsArray,
                 'pending_migrations' => array_values($pendingMigrations),
-                'setup_status' => $setupStatus,
-                'requires_setup' => $setupStatus['needs_setup']
+                'setup_status'       => $setupStatus,
+                'requires_setup'     => $setupStatus['needs_setup'],
             ];
-
         } catch (\Exception $e) {
-            bb_die('Error checking migration status: ' . $e->getMessage());
+            bb_die('Error checking migration status: '.$e->getMessage());
         }
     }
 
     /**
-     * Determine setup status for existing installations
+     * Determine setup status for existing installations.
      *
      * @return array Setup status information
      */
@@ -113,21 +115,21 @@ class MigrationStatus
             if (!$coreTablesExist) {
                 // Fresh installation
                 return [
-                    'type' => 'fresh',
-                    'needs_setup' => false,
-                    'message' => 'Fresh installation - migrations will run normally',
-                    'action_required' => false
+                    'type'            => 'fresh',
+                    'needs_setup'     => false,
+                    'message'         => 'Fresh installation - migrations will run normally',
+                    'action_required' => false,
                 ];
             }
 
             if (!$migrationTableExists) {
                 // Existing installation without migration system
                 return [
-                    'type' => 'existing_needs_setup',
-                    'needs_setup' => true,
-                    'message' => 'Existing installation detected - migration setup required',
+                    'type'            => 'existing_needs_setup',
+                    'needs_setup'     => true,
+                    'message'         => 'Existing installation detected - migration setup required',
                     'action_required' => true,
-                    'instructions' => 'Mark initial migrations as applied using --fake flag'
+                    'instructions'    => 'Mark initial migrations as applied using --fake flag',
                 ];
             }
 
@@ -136,34 +138,33 @@ class MigrationStatus
 
             if (!$initialMigrationsApplied) {
                 return [
-                    'type' => 'existing_partial_setup',
-                    'needs_setup' => true,
-                    'message' => 'Migration table exists but initial migrations not marked as applied',
+                    'type'            => 'existing_partial_setup',
+                    'needs_setup'     => true,
+                    'message'         => 'Migration table exists but initial migrations not marked as applied',
                     'action_required' => true,
-                    'instructions' => 'Run: php vendor/bin/phinx migrate --fake --target=20250619000002'
+                    'instructions'    => 'Run: php vendor/bin/phinx migrate --fake --target=20250619000002',
                 ];
             }
 
             // Fully set up
             return [
-                'type' => 'fully_setup',
-                'needs_setup' => false,
-                'message' => 'Migration system fully configured',
-                'action_required' => false
+                'type'            => 'fully_setup',
+                'needs_setup'     => false,
+                'message'         => 'Migration system fully configured',
+                'action_required' => false,
             ];
-
         } catch (\Exception $e) {
             return [
-                'type' => 'error',
-                'needs_setup' => false,
-                'message' => 'Error detecting setup status: ' . $e->getMessage(),
-                'action_required' => false
+                'type'            => 'error',
+                'needs_setup'     => false,
+                'message'         => 'Error detecting setup status: '.$e->getMessage(),
+                'action_required' => false,
             ];
         }
     }
 
     /**
-     * Check if core TorrentPier tables exist
+     * Check if core TorrentPier tables exist.
      *
      * @return bool True if core tables exist
      */
@@ -186,7 +187,7 @@ class MigrationStatus
     }
 
     /**
-     * Check if initial migrations are marked as applied
+     * Check if initial migrations are marked as applied.
      *
      * @return bool True if initial migrations are applied
      */
@@ -207,7 +208,7 @@ class MigrationStatus
     }
 
     /**
-     * Check if migration table exists
+     * Check if migration table exists.
      *
      * @return bool True if table exists, false otherwise
      */
@@ -230,7 +231,7 @@ class MigrationStatus
     }
 
     /**
-     * Get available migrations from filesystem
+     * Get available migrations from filesystem.
      *
      * @return array List of available migration files
      */
@@ -239,15 +240,15 @@ class MigrationStatus
         $migrations = [];
 
         if (is_dir($this->migrationPath)) {
-            $files = glob($this->migrationPath . '/*.php');
+            $files = glob($this->migrationPath.'/*.php');
             foreach ($files as $file) {
                 $filename = basename($file);
                 if (preg_match('/^(\d+)_(.+)\.php$/', $filename, $matches)) {
                     $migrations[] = [
-                        'version' => $matches[1],
-                        'name' => $matches[2],
-                        'filename' => $filename,
-                        'file_path' => $file
+                        'version'   => $matches[1],
+                        'name'      => $matches[2],
+                        'filename'  => $filename,
+                        'file_path' => $file,
                     ];
                 }
             }
@@ -262,7 +263,7 @@ class MigrationStatus
     }
 
     /**
-     * Get database schema information
+     * Get database schema information.
      *
      * @return array Database statistics and information
      */
@@ -270,35 +271,34 @@ class MigrationStatus
     {
         try {
             // Get database name using Nette Database Explorer
-            $dbInfo = DB()->query("SELECT DATABASE() as db_name")->fetch();
+            $dbInfo = DB()->query('SELECT DATABASE() as db_name')->fetch();
 
             // Get table count using Nette Database Explorer
-            $tableInfo = DB()->query("
+            $tableInfo = DB()->query('
                 SELECT COUNT(*) as table_count
                 FROM information_schema.tables
                 WHERE table_schema = DATABASE()
-            ")->fetch();
+            ')->fetch();
 
             // Get database size using Nette Database Explorer
-            $sizeInfo = DB()->query("
+            $sizeInfo = DB()->query('
                 SELECT
                     ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) as size_mb
                 FROM information_schema.tables
                 WHERE table_schema = DATABASE()
-            ")->fetch();
+            ')->fetch();
 
             return [
                 'database_name' => $dbInfo->db_name ?? 'Unknown',
-                'table_count' => $tableInfo->table_count ?? 0,
-                'size_mb' => $sizeInfo->size_mb ?? 0
+                'table_count'   => $tableInfo->table_count ?? 0,
+                'size_mb'       => $sizeInfo->size_mb ?? 0,
             ];
-
         } catch (\Exception $e) {
             return [
                 'database_name' => 'Unknown',
-                'table_count' => 0,
-                'size_mb' => 0,
-                'error' => $e->getMessage()
+                'table_count'   => 0,
+                'size_mb'       => 0,
+                'error'         => $e->getMessage(),
             ];
         }
     }

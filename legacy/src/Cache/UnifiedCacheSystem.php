@@ -1,9 +1,12 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
@@ -17,52 +20,57 @@ use Nette\Caching\Storages\SQLiteStorage;
 
 /**
  * Unified Cache System using Nette Caching
- * Replaces Legacy Caches class and provides both cache and datastore functionality
- *
- * @package TorrentPier\Cache
+ * Replaces Legacy Caches class and provides both cache and datastore functionality.
  */
 class UnifiedCacheSystem
 {
     /**
-     * Singleton instance
+     * Singleton instance.
+     *
      * @var self|null
      */
     private static ?self $instance = null;
 
     /**
-     * Configuration
+     * Configuration.
+     *
      * @var array
      */
     private array $cfg;
 
     /**
-     * Cache manager instances
+     * Cache manager instances.
+     *
      * @var array
      */
     private array $managers = [];
 
     /**
-     * References to cache managers (for backward compatibility)
+     * References to cache managers (for backward compatibility).
+     *
      * @var array
      */
     private array $ref = [];
 
     /**
-     * Datastore manager instance
+     * Datastore manager instance.
+     *
      * @var DatastoreManager|null
      */
     private ?DatastoreManager $datastore = null;
 
     /**
-     * Stub cache manager for non-configured caches
+     * Stub cache manager for non-configured caches.
+     *
      * @var CacheManager|null
      */
     private ?CacheManager $stub = null;
 
     /**
-     * Get singleton instance
+     * Get singleton instance.
      *
      * @param array|null $cfg
+     *
      * @return self
      */
     public static function getInstance(?array $cfg = null): self
@@ -78,7 +86,7 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $cfg
      */
@@ -90,15 +98,16 @@ class UnifiedCacheSystem
         $stubStorage = new MemoryStorage();
         $stubConfig = [
             'engine' => 'Memory',
-            'prefix' => $this->cfg['prefix'] ?? 'tp_'
+            'prefix' => $this->cfg['prefix'] ?? 'tp_',
         ];
         $this->stub = CacheManager::getInstance('__stub', $stubStorage, $stubConfig);
     }
 
     /**
-     * Get cache manager instance (backward compatible with CACHE() function)
+     * Get cache manager instance (backward compatible with CACHE() function).
      *
      * @param string $cache_name
+     *
      * @return CacheManager
      */
     public function get_cache_obj(string $cache_name): CacheManager
@@ -115,7 +124,7 @@ class UnifiedCacheSystem
                     $storage = $this->_buildStorage($cache_type, $cache_name);
                     $config = [
                         'engine' => $this->_getEngineType($cache_type),
-                        'prefix' => $this->cfg['prefix'] ?? 'tp_'
+                        'prefix' => $this->cfg['prefix'] ?? 'tp_',
                     ];
 
                     $this->managers[$cache_name] = CacheManager::getInstance($cache_name, $storage, $config);
@@ -128,9 +137,10 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Get datastore manager instance
+     * Get datastore manager instance.
      *
      * @param string $datastore_type
+     *
      * @return DatastoreManager
      */
     public function getDatastore(string $datastore_type = 'file'): DatastoreManager
@@ -140,7 +150,7 @@ class UnifiedCacheSystem
             $storage = $this->_buildDatastoreStorage($datastore_type);
             $config = [
                 'engine' => $this->_getEngineType($datastore_type),
-                'prefix' => $this->cfg['prefix'] ?? 'tp_'
+                'prefix' => $this->cfg['prefix'] ?? 'tp_',
             ];
 
             $this->datastore = DatastoreManager::getInstance($storage, $config);
@@ -150,10 +160,11 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Build storage instance directly (eliminates redundancy with CacheManager)
+     * Build storage instance directly (eliminates redundancy with CacheManager).
      *
      * @param string $cache_type
      * @param string $cache_name
+     *
      * @return Storage
      */
     private function _buildStorage(string $cache_type, string $cache_name): Storage
@@ -164,7 +175,7 @@ class UnifiedCacheSystem
             case 'apcu':
             case 'redis':
                 // Some deprecated cache types will fall back to file storage
-                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
+                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir().'/cache/', '/').'/'.$cache_name.'/';
 
                 // Create directory automatically using TorrentPier's bb_mkdir function
                 if (!is_dir($dir) && !bb_mkdir($dir)) {
@@ -174,7 +185,7 @@ class UnifiedCacheSystem
                 return new FileStorage($dir);
 
             case 'sqlite':
-                $dbFile = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '.db';
+                $dbFile = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir().'/cache/', '/').'/'.$cache_name.'.db';
 
                 // Create parent directory for SQLite file
                 $dbDir = dirname($dbFile);
@@ -191,11 +202,12 @@ class UnifiedCacheSystem
                 $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
                 $host = $memcachedConfig['host'] ?? '127.0.0.1';
                 $port = $memcachedConfig['port'] ?? 11211;
+
                 return new MemcachedStorage("{$host}:{$port}");
 
             default:
                 // Fallback to file storage
-                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
+                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir().'/cache/', '/').'/'.$cache_name.'/';
 
                 // Create directory automatically using TorrentPier's bb_mkdir function
                 if (!is_dir($dir) && !bb_mkdir($dir)) {
@@ -207,25 +219,27 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Get engine type name for debugging
+     * Get engine type name for debugging.
      *
      * @param string $cache_type
+     *
      * @return string
      */
     private function _getEngineType(string $cache_type): string
     {
         return match ($cache_type) {
-            'sqlite' => 'SQLite',
-            'memory' => 'Memory',
+            'sqlite'    => 'SQLite',
+            'memory'    => 'Memory',
             'memcached' => 'Memcached',
-            default => 'File',
+            default     => 'File',
         };
     }
 
     /**
-     * Build datastore storage instance
+     * Build datastore storage instance.
      *
      * @param string $datastore_type
+     *
      * @return Storage
      */
     private function _buildDatastoreStorage(string $datastore_type): Storage
@@ -236,7 +250,7 @@ class UnifiedCacheSystem
             case 'apcu':
             case 'redis':
                 // Some deprecated cache types will fall back to file storage
-                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
+                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir().'/cache/', '/').'/datastore/';
 
                 // Create directory automatically using TorrentPier's bb_mkdir function
                 if (!is_dir($dir) && !bb_mkdir($dir)) {
@@ -246,7 +260,7 @@ class UnifiedCacheSystem
                 return new FileStorage($dir);
 
             case 'sqlite':
-                $dbFile = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore.db';
+                $dbFile = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir().'/cache/', '/').'/datastore.db';
 
                 // Create parent directory for SQLite file
                 $dbDir = dirname($dbFile);
@@ -263,11 +277,12 @@ class UnifiedCacheSystem
                 $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
                 $host = $memcachedConfig['host'] ?? '127.0.0.1';
                 $port = $memcachedConfig['port'] ?? 11211;
+
                 return new MemcachedStorage("{$host}:{$port}");
 
             default:
                 // Fallback to file storage
-                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
+                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir().'/cache/', '/').'/datastore/';
 
                 // Create directory automatically using TorrentPier's bb_mkdir function
                 if (!is_dir($dir) && !bb_mkdir($dir)) {
@@ -279,7 +294,7 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Get all cache managers (for debugging)
+     * Get all cache managers (for debugging).
      *
      * @return array
      */
@@ -289,7 +304,7 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Get configuration
+     * Get configuration.
      *
      * @return array
      */
@@ -299,7 +314,7 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Clear all caches
+     * Clear all caches.
      *
      * @return void
      */
@@ -315,7 +330,7 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Get cache statistics
+     * Get cache statistics.
      *
      * @return array
      */
@@ -323,25 +338,25 @@ class UnifiedCacheSystem
     {
         $stats = [
             'total_managers' => count($this->managers),
-            'managers' => []
+            'managers'       => [],
         ];
 
         foreach ($this->managers as $name => $manager) {
             $stats['managers'][$name] = [
-                'engine' => $manager->engine,
-                'num_queries' => $manager->num_queries,
-                'total_time' => $manager->sql_timetotal,
-                'debug_enabled' => $manager->dbg_enabled
+                'engine'        => $manager->engine,
+                'num_queries'   => $manager->num_queries,
+                'total_time'    => $manager->sql_timetotal,
+                'debug_enabled' => $manager->dbg_enabled,
             ];
         }
 
         if ($this->datastore) {
             $stats['datastore'] = [
-                'engine' => $this->datastore->engine,
-                'num_queries' => $this->datastore->num_queries,
-                'total_time' => $this->datastore->sql_timetotal,
+                'engine'       => $this->datastore->engine,
+                'num_queries'  => $this->datastore->num_queries,
+                'total_time'   => $this->datastore->sql_timetotal,
                 'queued_items' => count($this->datastore->queued_items),
-                'loaded_items' => count($this->datastore->data)
+                'loaded_items' => count($this->datastore->data),
             ];
         }
 
@@ -350,9 +365,10 @@ class UnifiedCacheSystem
 
     /**
      * Magic method for backward compatibility
-     * Allows access to legacy properties like ->obj
+     * Allows access to legacy properties like ->obj.
      *
      * @param string $name
+     *
      * @return mixed
      */
     public function __get(string $name): mixed
@@ -364,6 +380,7 @@ class UnifiedCacheSystem
                 foreach ($this->managers as $cache_name => $manager) {
                     $obj[$cache_name] = $manager;
                 }
+
                 return $obj;
 
             case 'cfg':
@@ -378,10 +395,11 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Create cache manager with advanced Nette features
+     * Create cache manager with advanced Nette features.
      *
      * @param string $namespace
-     * @param array $config
+     * @param array  $config
+     *
      * @return CacheManager
      */
     public function createAdvancedCache(string $namespace, array $config = []): CacheManager
@@ -394,17 +412,18 @@ class UnifiedCacheSystem
         $storage = $this->_buildStorage($storageType, $namespace);
         $managerConfig = [
             'engine' => $this->_getEngineType($storageType),
-            'prefix' => $fullConfig['prefix']
+            'prefix' => $fullConfig['prefix'],
         ];
 
         return CacheManager::getInstance($namespace, $storage, $managerConfig);
     }
 
     /**
-     * Create cache with file dependencies
+     * Create cache with file dependencies.
      *
      * @param string $namespace
-     * @param array $files
+     * @param array  $files
+     *
      * @return CacheManager
      */
     public function createFileBasedCache(string $namespace, array $files = []): CacheManager
@@ -420,9 +439,10 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Create cache with tags support
+     * Create cache with tags support.
      *
      * @param string $namespace
+     *
      * @return CacheManager
      */
     public function createTaggedCache(string $namespace): CacheManager
@@ -431,24 +451,24 @@ class UnifiedCacheSystem
         $storage = $this->_buildStorage('sqlite', $namespace);
         $config = [
             'engine' => 'SQLite',
-            'prefix' => $this->cfg['prefix'] ?? 'tp_'
+            'prefix' => $this->cfg['prefix'] ?? 'tp_',
         ];
 
         return CacheManager::getInstance($namespace, $storage, $config);
     }
 
     /**
-     * Prevent cloning of the singleton instance
+     * Prevent cloning of the singleton instance.
      */
     private function __clone()
     {
     }
 
     /**
-     * Prevent unserialization of the singleton instance
+     * Prevent unserialization of the singleton instance.
      */
     public function __wakeup()
     {
-        throw new \Exception("Cannot unserialize a singleton.");
+        throw new \Exception('Cannot unserialize a singleton.');
     }
 }

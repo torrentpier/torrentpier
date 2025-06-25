@@ -1,22 +1,24 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Helpers;
 
 /**
- * Class CronHelper
- * @package TorrentPier\Helpers
+ * Class CronHelper.
  */
 class CronHelper
 {
     /**
-     * Checking whether cron scripts execution is enabled
+     * Checking whether cron scripts execution is enabled.
      *
      * @return bool
      */
@@ -26,7 +28,7 @@ class CronHelper
     }
 
     /**
-     * Unlock cron (time-dependent)
+     * Unlock cron (time-dependent).
      *
      * @return void
      */
@@ -41,7 +43,7 @@ class CronHelper
     }
 
     /**
-     * Снятие блокировки крона (по файлу)
+     * Снятие блокировки крона (по файлу).
      *
      * @return void
      */
@@ -54,9 +56,10 @@ class CronHelper
     }
 
     /**
-     * Создание файла блокировки
+     * Создание файла блокировки.
      *
      * @param string $lock_file
+     *
      * @return void
      */
     public static function touchLockFile(string $lock_file): void
@@ -65,7 +68,7 @@ class CronHelper
     }
 
     /**
-     * Включение форума (при разблокировке крона)
+     * Включение форума (при разблокировке крона).
      *
      * @return void
      */
@@ -77,7 +80,7 @@ class CronHelper
     }
 
     /**
-     * Отключение форума (при блокировке крона)
+     * Отключение форума (при блокировке крона).
      *
      * @return void
      */
@@ -89,7 +92,7 @@ class CronHelper
     }
 
     /**
-     * Проверка наличия файла блокировки
+     * Проверка наличия файла блокировки.
      *
      * @return bool
      */
@@ -110,15 +113,16 @@ class CronHelper
     }
 
     /**
-     * Отслеживание запуска задач
+     * Отслеживание запуска задач.
      *
      * @param string $mode
+     *
      * @return void
      */
     public static function trackRunning(string $mode): void
     {
         if (!defined('START_MARK')) {
-            define('START_MARK', TRIGGERS_DIR . '/cron_started_at_' . date('Y-m-d_H-i-s') . '_by_pid_' . getmypid());
+            define('START_MARK', TRIGGERS_DIR.'/cron_started_at_'.date('Y-m-d_H-i-s').'_by_pid_'.getmypid());
         }
 
         switch ($mode) {

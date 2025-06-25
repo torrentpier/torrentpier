@@ -1,14 +1,16 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 if (!config()->get('tp_updater_settings.enabled')) {
@@ -35,7 +37,7 @@ if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
     if (!is_file(UPDATER_FILE) || $updaterFileNeedReplaced) {
         file_write(json_encode([
             'previous_version' => $currentVersion,
-            'latest_version' => $getVersion
+            'latest_version'   => $getVersion,
         ]), UPDATER_FILE, replace_content: true);
     }
 
@@ -47,12 +49,12 @@ if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
 
     // Build data array
     $data = [
-        'available_update' => true,
-        'latest_version' => $getVersion,
-        'latest_version_size' => isset($updaterDownloader['assets'][0]['size']) ? humn_size($updaterDownloader['assets'][0]['size']) : false,
-        'latest_version_dl_link' => $latestBuildFileLink ?? $updaterDownloader['html_url'],
+        'available_update'        => true,
+        'latest_version'          => $getVersion,
+        'latest_version_size'     => isset($updaterDownloader['assets'][0]['size']) ? humn_size($updaterDownloader['assets'][0]['size']) : false,
+        'latest_version_dl_link'  => $latestBuildFileLink ?? $updaterDownloader['html_url'],
         'latest_version_checksum' => $buildFileChecksum,
-        'latest_version_link' => $updaterDownloader['html_url']
+        'latest_version_link'     => $updaterDownloader['html_url'],
     ];
 }
 

@@ -1,14 +1,16 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_TRACKER')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 // Exit if tracker is disabled
@@ -49,18 +51,18 @@ function drop_fast_announce($lp_info, $lp_cached_peers = [])
 function msg_die($msg)
 {
     $output = \Arokettu\Bencode\Bencode::encode([
-        'interval' => (int)1800,
-        'failure reason' => (string)$msg,
+        'interval'       => (int) 1800,
+        'failure reason' => (string) $msg,
     ]);
 
-    die($output);
+    exit($output);
 }
 
 function dummy_exit($interval = 1800, $cache_dict = [])
 {
     $output = [
-        'interval' => (int)$interval,
-        'peers' => (string)DUMMY_PEER,
+        'interval'    => (int) $interval,
+        'peers'       => (string) DUMMY_PEER,
         'external ip' => inet_pton($_SERVER['REMOTE_ADDR']),
     ];
 
@@ -80,5 +82,5 @@ function dummy_exit($interval = 1800, $cache_dict = [])
 
     $output = \Arokettu\Bencode\Bencode::encode($output);
 
-    die($output);
+    exit($output);
 }

@@ -1,16 +1,18 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 define('BB_ROOT', './../../');
 define('IN_ADMIN', true);
 
-require BB_ROOT . 'common.php';
+require BB_ROOT.'common.php';
 
 $user->session_start();
 
@@ -21,13 +23,13 @@ if (!IS_ADMIN) {
 $peers_in_last_minutes = [30, 15, 5, 1];
 $peers_in_last_sec_limit = 300;
 
-$announce_interval = (int)config()->get('announce_interval');
+$announce_interval = (int) config()->get('announce_interval');
 $stat = [];
 
 define('TMP_TRACKER_TABLE', 'tmp_tracker');
 
 DB()->query('
-	CREATE TEMPORARY TABLE ' . TMP_TRACKER_TABLE . " (
+	CREATE TEMPORARY TABLE '.TMP_TRACKER_TABLE." (
 		`topic_id` mediumint(8) unsigned NOT NULL default '0',
 		`user_id` mediumint(9) NOT NULL default '0',
 		`ip` char(42) binary default '0',
@@ -40,54 +42,52 @@ DB()->query('
 	)
 	SELECT
 		topic_id, user_id, ip, ipv6, peer_id, seeder, speed_up, speed_down, update_time
-	FROM " . BB_BT_TRACKER . '
+	FROM ".BB_BT_TRACKER.'
 ');
 
 // Peers within announce interval
-$stat += DB()->fetch_row('SELECT COUNT(*) AS p_within_ann FROM ' . TMP_TRACKER_TABLE . ' WHERE update_time >= ' . (TIMENOW - $announce_interval));
+$stat += DB()->fetch_row('SELECT COUNT(*) AS p_within_ann FROM '.TMP_TRACKER_TABLE.' WHERE update_time >= '.(TIMENOW - $announce_interval));
 // All peers, "max_peer_time"
-$stat += DB()->fetch_row('SELECT COUNT(*) AS p_all, SUM(speed_up) as speed_up, SUM(speed_down) as speed_down, UNIX_TIMESTAMP() - MIN(update_time) AS max_peer_time, UNIX_TIMESTAMP() - MAX(update_time) AS last_peer_time FROM ' . TMP_TRACKER_TABLE);
+$stat += DB()->fetch_row('SELECT COUNT(*) AS p_all, SUM(speed_up) as speed_up, SUM(speed_down) as speed_down, UNIX_TIMESTAMP() - MIN(update_time) AS max_peer_time, UNIX_TIMESTAMP() - MAX(update_time) AS last_peer_time FROM '.TMP_TRACKER_TABLE);
 // Active users
-$stat += DB()->fetch_row('SELECT COUNT(DISTINCT user_id) AS u_bt_active FROM ' . TMP_TRACKER_TABLE);
+$stat += DB()->fetch_row('SELECT COUNT(DISTINCT user_id) AS u_bt_active FROM '.TMP_TRACKER_TABLE);
 // All bt-users
-$stat += DB()->fetch_row('SELECT COUNT(*) AS u_bt_all FROM ' . BB_BT_USERS);
+$stat += DB()->fetch_row('SELECT COUNT(*) AS u_bt_all FROM '.BB_BT_USERS);
 // All bb-users
-$stat += DB()->fetch_row('SELECT COUNT(*) AS u_bb_all FROM ' . BB_USERS . ' WHERE user_id != ' . BOT_UID);
+$stat += DB()->fetch_row('SELECT COUNT(*) AS u_bb_all FROM '.BB_USERS.' WHERE user_id != '.BOT_UID);
 // Active torrents
-$stat += DB()->fetch_row('SELECT COUNT(DISTINCT topic_id) AS tor_active FROM ' . TMP_TRACKER_TABLE);
+$stat += DB()->fetch_row('SELECT COUNT(DISTINCT topic_id) AS tor_active FROM '.TMP_TRACKER_TABLE);
 // With seeder
-$stat += DB()->fetch_row('SELECT COUNT(DISTINCT topic_id) AS tor_with_seeder FROM ' . TMP_TRACKER_TABLE . ' WHERE seeder = 1');
+$stat += DB()->fetch_row('SELECT COUNT(DISTINCT topic_id) AS tor_with_seeder FROM '.TMP_TRACKER_TABLE.' WHERE seeder = 1');
 // All torrents
-$stat += DB()->fetch_row('SELECT COUNT(*) AS tor_all, SUM(size) AS torrents_size FROM ' . BB_BT_TORRENTS);
+$stat += DB()->fetch_row('SELECT COUNT(*) AS tor_all, SUM(size) AS torrents_size FROM '.BB_BT_TORRENTS);
 
 // Last xx minutes
 $peers_in_last_min = [];
 foreach ($peers_in_last_minutes as $t) {
     $row = DB()->fetch_row('
-		SELECT COUNT(*) AS peers FROM ' . TMP_TRACKER_TABLE . ' WHERE update_time >= ' . (TIMENOW - 60 * $t) . '
+		SELECT COUNT(*) AS peers FROM '.TMP_TRACKER_TABLE.' WHERE update_time >= '.(TIMENOW - 60 * $t).'
 	');
-    $peers_in_last_min[$t] = (int)$row['peers'];
+    $peers_in_last_min[$t] = (int) $row['peers'];
 }
 // Last xx seconds
 $peers_in_last_sec = [];
-$rowset = DB()->fetch_rowset('SELECT COUNT(*) AS peers FROM ' . TMP_TRACKER_TABLE . ' ORDER BY update_time DESC LIMIT ' . $peers_in_last_sec_limit);
+$rowset = DB()->fetch_rowset('SELECT COUNT(*) AS peers FROM '.TMP_TRACKER_TABLE.' ORDER BY update_time DESC LIMIT '.$peers_in_last_sec_limit);
 foreach ($rowset as $cnt => $row) {
-    $peers_in_last_sec[] = sprintf('%3s', $row['peers']) . (($cnt && !(++$cnt % 15)) ? "  \n" : '');
+    $peers_in_last_sec[] = sprintf('%3s', $row['peers']).(($cnt && !(++$cnt % 15)) ? "  \n" : '');
 }
 
 // Detailed statistics for peer clients
 
 $client_list = '';
 $clients_percentage = [];
-$numwant = !empty($_GET['client_numwant']) ? (int)$_GET['client_numwant'] : 100;
-$client_full = !empty($_GET['client_length']) ? (int)$_GET['client_length'] : false;
+$numwant = !empty($_GET['client_numwant']) ? (int) $_GET['client_numwant'] : 100;
+$client_full = !empty($_GET['client_length']) ? (int) $_GET['client_length'] : false;
 
 if ($client_full || !$stats_cache = CACHE('tr_cache')->get('tracker_clients_stats')) {
-
-    $rowset = DB()->fetch_rowset('SELECT peer_id AS client FROM ' . TMP_TRACKER_TABLE);
+    $rowset = DB()->fetch_rowset('SELECT peer_id AS client FROM '.TMP_TRACKER_TABLE);
 
     if (!empty($rowset)) {
-
         $client_count = 0;
 
         foreach ($rowset as $cnt => $row) {
@@ -116,7 +116,7 @@ if ($client_full || !$stats_cache = CACHE('tr_cache')->get('tracker_clients_stat
 
 $n = 1;
 foreach (array_slice($clients_percentage, 0, $numwant) as $client => $value) {
-    $client_list .= ($client_full) ? ("$client => $value<br/>") : "$n. " . get_user_torrent_client($client) . " $value<br/>";
+    $client_list .= ($client_full) ? ("$client => $value<br/>") : "$n. ".get_user_torrent_client($client)." $value<br/>";
     $n++;
 }
 
@@ -141,7 +141,7 @@ echo "\n
 	<td align=center>
 		$stat[tor_all] / <b>$stat[tor_active]</b> / $stat[tor_with_seeder]
 		&nbsp;
-		[ " . humn_size($stat['torrents_size']) . " ]
+		[ ".humn_size($stat['torrents_size'])." ]
 	</td></tr>
 \n";
 
@@ -150,15 +150,15 @@ echo "\n
 	<td align=center>
 		$stat[p_all] / <b>$stat[p_within_ann]</b>
 		&nbsp;
-		[ up:   " . humn_size($stat['speed_up']) . '/s,
-		  down: ' . humn_size($stat['speed_down']) . "/s ]
+		[ up:   ".humn_size($stat['speed_up']).'/s,
+		  down: '.humn_size($stat['speed_down'])."/s ]
 	</td></tr>
 \n";
 
-echo "\n<tr><td align=center> peers: in last " . implode(' / ', $peers_in_last_minutes) . " min</td>\n";
-echo "\n<td align=center>" . implode(' / ', $peers_in_last_min) . "</td></tr>\n";
-echo "\n<tr><td align=center> peers in last $peers_in_last_sec_limit sec <br /> [ per second, DESC order --> ] <br /> last peer: $stat[last_peer_time] seconds ago <br /> " . date('j M H:i:s [T O]') . " </td>\n";
-echo '<td align=center style="font-size: 13px; font-family: \'Courier New\',Courier,monospace;"><pre> ' . implode(' ', $peers_in_last_sec) . "</pre></td></tr>\n";
+echo "\n<tr><td align=center> peers: in last ".implode(' / ', $peers_in_last_minutes)." min</td>\n";
+echo "\n<td align=center>".implode(' / ', $peers_in_last_min)."</td></tr>\n";
+echo "\n<tr><td align=center> peers in last $peers_in_last_sec_limit sec <br /> [ per second, DESC order --> ] <br /> last peer: $stat[last_peer_time] seconds ago <br /> ".date('j M H:i:s [T O]')." </td>\n";
+echo '<td align=center style="font-size: 13px; font-family: \'Courier New\',Courier,monospace;"><pre> '.implode(' ', $peers_in_last_sec)."</pre></td></tr>\n";
 echo "\n
 	<tr><td align=center> clients: </td>
 	<td align=center>
@@ -166,17 +166,17 @@ echo "\n
     $client_list
 <br/>
 \n";
-echo (count($clients_percentage) > $numwant) ? ('<a href="' . 'tracker.php?client_numwant=' . ($numwant + 100) . '">' . 'Show more' . '</a><br/>') : '';
+echo (count($clients_percentage) > $numwant) ? ('<a href="'.'tracker.php?client_numwant='.($numwant + 100).'">'.'Show more'.'</a><br/>') : '';
 echo $client_full ? '<br/><b>Get more length and numbers via modifying the parameters in the url<b>' : (!empty($client_list) ? '<a href="tracker.php?client_length=6&client_numwant=10">Peer_ids with more length (version debugging)</a>' : '');
 echo '</td></tr>';
 echo '</table>';
 echo !$client_full ? '<p style = "text-align:right;">Simple stats for clients are being cached for one hour.</p>' : '';
 echo '<div align="center"><pre>';
 
-echo 'gen time: <b>' . sprintf('%.3f', array_sum(explode(' ', microtime())) - TIMESTART) . "</b> sec\n";
+echo 'gen time: <b>'.sprintf('%.3f', array_sum(explode(' ', microtime())) - TIMESTART)."</b> sec\n";
 echo '</pre></div>';
 echo '</body></html>';
 
-DB()->query('DROP TEMPORARY TABLE ' . TMP_TRACKER_TABLE);
+DB()->query('DROP TEMPORARY TABLE '.TMP_TRACKER_TABLE);
 
-exit();
+exit;

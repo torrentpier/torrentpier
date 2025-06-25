@@ -1,14 +1,16 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 global $lang;
@@ -18,26 +20,26 @@ $logged_online = $guests_online = 0;
 $time_online = TIMENOW - 300;
 
 $ulist = [
-    ADMIN => [],
-    MOD => [],
+    ADMIN        => [],
+    MOD          => [],
     GROUP_MEMBER => [],
-    USER => [],
+    USER         => [],
 ];
 $users_cnt = [
-    'admin' => 0,
-    'mod' => 0,
+    'admin'        => 0,
+    'mod'          => 0,
     'group_member' => 0,
-    'ignore_load' => 0,
-    'user' => 0,
-    'guest' => 0,
+    'ignore_load'  => 0,
+    'user'         => 0,
+    'guest'        => 0,
 ];
 $online = $online_short = ['userlist' => ''];
 
-$sql = "
+$sql = '
 	SELECT
 		u.username, u.user_id, u.user_opt, u.user_rank, u.user_level,
 		MAX(s.session_logged_in) AS session_logged_in, MAX(s.session_ip) AS session_ip, MAX(s.session_time - s.session_start) AS ses_len, COUNT(s.session_id) AS sessions, COUNT(DISTINCT s.session_ip) AS ips
-	FROM " . BB_SESSIONS . " s, " . BB_USERS . " u
+	FROM '.BB_SESSIONS.' s, '.BB_USERS." u
 	WHERE s.session_time > $time_online
 		AND u.user_id = s.session_user_id
 	GROUP BY s.session_user_id, u.username, u.user_id, u.user_opt, u.user_rank, u.user_level
@@ -77,7 +79,7 @@ foreach (DB()->fetch_rowset($sql) as $u) {
             $stat[] = "t:<span style=\"color: #1E90FF\">$t</span>";
         }
 
-        $ulist[$level][] = ($stat) ? "$name<span class=\"ou_stat\" style=\"color: #707070\" title=\"{$u['session_ip']}\"> [<b>" . implode(', ', $stat) . '</b>]</span>' : $name;
+        $ulist[$level][] = ($stat) ? "$name<span class=\"ou_stat\" style=\"color: #707070\" title=\"{$u['session_ip']}\"> [<b>".implode(', ', $stat).'</b>]</span>' : $name;
     } else {
         $guests_online = $u['ips'];
         $users_cnt['guest'] = $guests_online;
@@ -94,8 +96,8 @@ if ($ulist) {
 
         if (count($users) > 200) {
             $style = 'margin: 3px 0; padding: 2px 4px; border: 1px inset; height: 200px; overflow: auto;';
-            $block[] = "<div style=\"$style\">\n" . implode(",\n", $users) . "</div>\n";
-            $short[] = '<a href="index.php?online_full=1#online">' . $lang['USERS'] . ': ' . count($users) . '</a>';
+            $block[] = "<div style=\"$style\">\n".implode(",\n", $users)."</div>\n";
+            $short[] = '<a href="index.php?online_full=1#online">'.$lang['USERS'].': '.count($users).'</a>';
         } else {
             $inline[] = implode(",\n", $users);
             $short[] = implode(",\n", $users);
@@ -104,14 +106,14 @@ if ($ulist) {
         $logged_online += count($users);
     }
 
-    $online['userlist'] = implode(",\n", $inline) . implode("\n", $block);
+    $online['userlist'] = implode(",\n", $inline).implode("\n", $block);
     $online_short['userlist'] = implode(",\n", $short);
 }
 
 if (!$online['userlist']) {
     $online['userlist'] = $online_short['userlist'] = $lang['NONE'];
 } elseif (isset($_REQUEST['f'])) {
-    $online['userlist'] = $online_short['userlist'] = $lang['BROWSING_FORUM'] . ' ' . $online['userlist'];
+    $online['userlist'] = $online_short['userlist'] = $lang['BROWSING_FORUM'].' '.$online['userlist'];
 }
 
 $total_online = $logged_online + $guests_online;
@@ -119,7 +121,7 @@ $total_online = $logged_online + $guests_online;
 if ($total_online > config()->get('record_online_users')) {
     bb_update_config([
         'record_online_users' => $total_online,
-        'record_online_date' => TIMENOW
+        'record_online_date'  => TIMENOW,
     ]);
 }
 
@@ -136,5 +138,5 @@ $online['cnt'] = $online_short['cnt'] = <<<HTML
 ]
 HTML;
 
-CACHE('bb_cache')->set('online_' . $userdata['user_lang'], $online, 60);
-CACHE('bb_cache')->set('online_short_' . $userdata['user_lang'], $online_short, 60);
+CACHE('bb_cache')->set('online_'.$userdata['user_lang'], $online, 60);
+CACHE('bb_cache')->set('online_short_'.$userdata['user_lang'], $online_short, 60);

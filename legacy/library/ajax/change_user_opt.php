@@ -1,19 +1,21 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 global $bf, $lang;
 
-$user_id = (int)$this->request['user_id'];
+$user_id = (int) $this->request['user_id'];
 $new_opt = json_decode($this->request['user_opt'], true, 512, JSON_THROW_ON_ERROR);
 
 if (!$user_id or !$u_data = get_userdata($user_id)) {
@@ -30,7 +32,7 @@ foreach ($bf['user_opt'] as $opt_name => $opt_bit) {
     }
 }
 
-DB()->query("UPDATE " . BB_USERS . " SET user_opt = {$u_data['user_opt']} WHERE user_id = $user_id LIMIT 1");
+DB()->query('UPDATE '.BB_USERS." SET user_opt = {$u_data['user_opt']} WHERE user_id = $user_id LIMIT 1");
 
 // Remove data from cache
 \TorrentPier\Sessions::cache_rm_user_sessions($user_id);

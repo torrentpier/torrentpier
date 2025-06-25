@@ -1,18 +1,20 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 /**
- * Define some basic configuration arrays
+ * Define some basic configuration arrays.
  */
 $userdata = $theme = $images = $lang = $bf = $attach_config = [];
 $gen_simple_header = false;
@@ -26,6 +28,7 @@ define('USER_IP', $user_ip);
 
 /**
  * @param $contents
+ *
  * @return string
  */
 function send_page($contents)
@@ -35,6 +38,7 @@ function send_page($contents)
 
 /**
  * @param $contents
+ *
  * @return string
  */
 function compress_output($contents)
@@ -50,7 +54,7 @@ function compress_output($contents)
 }
 
 /**
- * Start output buffering
+ * Start output buffering.
  */
 if (!defined('IN_AJAX')) {
     ob_start('send_page');
@@ -58,11 +62,11 @@ if (!defined('IN_AJAX')) {
 
 // Cookie params
 $c = config()->get('cookie_prefix');
-define('COOKIE_DATA', $c . 'data');
-define('COOKIE_FORUM', $c . 'f');
-define('COOKIE_MARK', $c . 'mark_read');
-define('COOKIE_TOPIC', $c . 't');
-define('COOKIE_PM', $c . 'pm');
+define('COOKIE_DATA', $c.'data');
+define('COOKIE_FORUM', $c.'f');
+define('COOKIE_MARK', $c.'mark_read');
+define('COOKIE_TOPIC', $c.'t');
+define('COOKIE_PM', $c.'pm');
 unset($c);
 
 define('COOKIE_SESSION', 0);
@@ -71,15 +75,17 @@ define('COOKIE_PERSIST', TIMENOW + 31536000);
 define('COOKIE_MAX_TRACKS', 90);
 
 /**
- * Set cookie
+ * Set cookie.
  *
  * @param string $name
- * @param mixed $val
- * @param int $lifetime
- * @param bool $httponly
- * @param bool $isRaw
- * @return void
+ * @param mixed  $val
+ * @param int    $lifetime
+ * @param bool   $httponly
+ * @param bool   $isRaw
+ *
  * @throws \Josantonius\Cookie\Exceptions\CookieException
+ *
+ * @return void
  */
 function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false, bool $isRaw = false): void
 {
@@ -179,7 +185,7 @@ define('FEMALE', 2);
 define('NOGENDER', 0);
 
 // Poll
-# 1 - обычный опрос
+// 1 - обычный опрос
 define('POLL_FINISHED', 2);
 
 // Group avatars
@@ -187,18 +193,18 @@ define('GROUP_AVATAR_MASK', 999000);
 
 $dl_link_css = [
     DL_STATUS_RELEASER => 'genmed',
-    DL_STATUS_WILL => 'dlWill',
-    DL_STATUS_DOWN => 'leechmed',
+    DL_STATUS_WILL     => 'dlWill',
+    DL_STATUS_DOWN     => 'leechmed',
     DL_STATUS_COMPLETE => 'seedmed',
-    DL_STATUS_CANCEL => 'dlCancel',
+    DL_STATUS_CANCEL   => 'dlCancel',
 ];
 
 $dl_status_css = [
     DL_STATUS_RELEASER => 'genmed',
-    DL_STATUS_WILL => 'dlWill',
-    DL_STATUS_DOWN => 'dlDown',
+    DL_STATUS_WILL     => 'dlWill',
+    DL_STATUS_DOWN     => 'dlDown',
     DL_STATUS_COMPLETE => 'dlComplete',
-    DL_STATUS_CANCEL => 'dlCancel',
+    DL_STATUS_CANCEL   => 'dlCancel',
 ];
 
 // Table names
@@ -266,23 +272,23 @@ define('USERNAME_MAX_LENGTH', 30);
 define('USEREMAIL_MAX_LENGTH', 230);
 define('PASSWORD_MIN_LENGTH', 8);
 
-define('PAGE_HEADER', INC_DIR . '/page_header.php');
-define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
+define('PAGE_HEADER', INC_DIR.'/page_header.php');
+define('PAGE_FOOTER', INC_DIR.'/page_footer.php');
 
-define('CAT_URL', 'index.php?' . POST_CAT_URL . '=');
+define('CAT_URL', 'index.php?'.POST_CAT_URL.'=');
 define('DL_URL', config()->get('dl_url'));
-define('FORUM_URL', 'viewforum.php?' . POST_FORUM_URL . '=');
-define('GROUP_URL', 'group.php?' . POST_GROUPS_URL . '=');
+define('FORUM_URL', 'viewforum.php?'.POST_FORUM_URL.'=');
+define('GROUP_URL', 'group.php?'.POST_GROUPS_URL.'=');
 define('LOGIN_URL', config()->get('login_url'));
-define('MODCP_URL', 'modcp.php?' . POST_FORUM_URL . '=');
+define('MODCP_URL', 'modcp.php?'.POST_FORUM_URL.'=');
 define('PM_URL', config()->get('pm_url'));
-define('POST_URL', 'viewtopic.php?' . POST_POST_URL . '=');
+define('POST_URL', 'viewtopic.php?'.POST_POST_URL.'=');
 define('POSTING_URL', config()->get('posting_url'));
-define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;' . POST_USERS_URL . '=');
+define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;'.POST_USERS_URL.'=');
 define('BONUS_URL', 'profile.php?mode=bonus');
-define('TOPIC_URL', 'viewtopic.php?' . POST_TOPIC_URL . '=');
-define('FILELIST_URL', 'filelist.php?' . POST_TOPIC_URL . '=');
-define('PLAYBACK_M3U_URL', 'playback_m3u.php?' . POST_TOPIC_URL . '=');
+define('TOPIC_URL', 'viewtopic.php?'.POST_TOPIC_URL.'=');
+define('FILELIST_URL', 'filelist.php?'.POST_TOPIC_URL.'=');
+define('PLAYBACK_M3U_URL', 'playback_m3u.php?'.POST_TOPIC_URL.'=');
 
 define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 
@@ -313,16 +319,17 @@ define('SELECT', 6);
 function send_no_cache_headers()
 {
     header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+    header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
     header('Cache-Control: no-store, no-cache, must-revalidate');
     header('Cache-Control: post-check=0, pre-check=0', false);
     header('Pragma: no-cache');
 }
 
 /**
- * Converts "<br/>" / "<br>" tags to "\n" line breaks
+ * Converts "<br/>" / "<br>" tags to "\n" line breaks.
  *
  * @param string $string
+ *
  * @return string
  */
 function br2nl(string $string): string
@@ -331,12 +338,13 @@ function br2nl(string $string): string
 }
 
 /**
- * Adds commas between every group of thousands
+ * Adds commas between every group of thousands.
  *
- * @param float|null $num
- * @param int $decimals
+ * @param float|null  $num
+ * @param int         $decimals
  * @param string|null $decimal_separator
  * @param string|null $thousands_separator
+ *
  * @return string
  */
 function commify(?float $num, int $decimals = 0, ?string $decimal_separator = '.', ?string $thousands_separator = ','): string
@@ -345,11 +353,12 @@ function commify(?float $num, int $decimals = 0, ?string $decimal_separator = '.
 }
 
 /**
- * Convert HTML entities to their corresponding characters
+ * Convert HTML entities to their corresponding characters.
  *
  * @param string $string
- * @param int $flags
+ * @param int    $flags
  * @param string $encoding
+ *
  * @return string
  */
 function html_ent_decode(string $string, int $flags = ENT_QUOTES, string $encoding = DEFAULT_CHARSET): string
@@ -358,20 +367,21 @@ function html_ent_decode(string $string, int $flags = ENT_QUOTES, string $encodi
 }
 
 /**
- * Makes URL from path
+ * Makes URL from path.
  *
  * @param string $path
+ *
  * @return string
  */
 function make_url(string $path = ''): string
 {
-    return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
+    return FULL_URL.preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
 }
 
 /**
- * Functions
+ * Functions.
  */
-require_once INC_DIR . '/functions.php';
+require_once INC_DIR.'/functions.php';
 
 // Merge database configuration with base configuration using singleton
 // bb_cfg deprecated, but kept for compatibility with non-adapted code
@@ -385,10 +395,10 @@ $log_action = new TorrentPier\Legacy\LogAction();
 $html = new TorrentPier\Legacy\Common\Html();
 $user = new TorrentPier\Legacy\Common\User();
 
-$userdata =& $user->data;
+$userdata = &$user->data;
 
 /**
- * Cron
+ * Cron.
  */
 if (
     empty($_POST) &&
@@ -397,13 +407,12 @@ if (
     (TorrentPier\Helpers\CronHelper::isEnabled() || defined('START_CRON'))
 ) {
     if (TIMENOW - config()->get('cron_last_check') > config()->get('cron_check_interval')) {
-
         /** Update cron_last_check */
         bb_update_config(['cron_last_check' => TIMENOW + 10]);
-        bb_log(date('H:i:s - ') . getmypid() . ' -x-- DB-LOCK try' . LOG_LF, CRON_LOG_DIR . '/cron_check');
+        bb_log(date('H:i:s - ').getmypid().' -x-- DB-LOCK try'.LOG_LF, CRON_LOG_DIR.'/cron_check');
 
         if (DB()->get_lock('cron', 1)) {
-            bb_log(date('H:i:s - ') . getmypid() . ' --x- DB-LOCK OBTAINED !!!!!!!!!!!!!!!!!' . LOG_LF, CRON_LOG_DIR . '/cron_check');
+            bb_log(date('H:i:s - ').getmypid().' --x- DB-LOCK OBTAINED !!!!!!!!!!!!!!!!!'.LOG_LF, CRON_LOG_DIR.'/cron_check');
 
             /** Run cron */
             if (TorrentPier\Helpers\CronHelper::hasFileLock()) {
@@ -419,13 +428,13 @@ if (
 
                 TorrentPier\Helpers\CronHelper::trackRunning('start');
 
-                require(CRON_DIR . 'cron_check.php');
+                require CRON_DIR.'cron_check.php';
 
                 TorrentPier\Helpers\CronHelper::trackRunning('end');
             }
 
             if (defined('IN_CRON')) {
-                bb_log(date('H:i:s - ') . getmypid() . ' --x- ALL jobs FINISHED *************************************************' . LOG_LF, CRON_LOG_DIR . '/cron_check');
+                bb_log(date('H:i:s - ').getmypid().' --x- ALL jobs FINISHED *************************************************'.LOG_LF, CRON_LOG_DIR.'/cron_check');
             }
 
             DB()->release_lock('cron');
@@ -434,7 +443,7 @@ if (
 }
 
 /**
- * Exit if board is disabled via trigger
+ * Exit if board is disabled via trigger.
  */
 if ((config()->get('board_disable') || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
     if (config()->get('board_disable')) {
@@ -445,6 +454,6 @@ if ((config()->get('board_disable') || is_file(BB_DISABLED)) && !defined('IN_ADM
         // trigger lock
         TorrentPier\Helpers\CronHelper::releaseDeadlock();
         send_no_cache_headers();
-        bb_die('BOARD_DISABLE_CRON', (\TorrentPier\Helpers\CronHelper::isEnabled() ? 503 : null));
+        bb_die('BOARD_DISABLE_CRON', \TorrentPier\Helpers\CronHelper::isEnabled() ? 503 : null);
     }
 }

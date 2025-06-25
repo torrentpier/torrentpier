@@ -1,22 +1,24 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy\Admin;
 
 /**
- * Class Cron
- * @package TorrentPier\Legacy\Admin
+ * Class Cron.
  */
 class Cron
 {
     /**
-     * Run cron jobs
+     * Run cron jobs.
      *
      * @param string $jobs
      */
@@ -28,18 +30,18 @@ class Cron
 
         \define('IN_CRON', true);
 
-        $sql = "SELECT cron_script FROM " . BB_CRON . " WHERE cron_id IN ($jobs)";
+        $sql = 'SELECT cron_script FROM '.BB_CRON." WHERE cron_id IN ($jobs)";
         if (!$result = DB()->sql_query($sql)) {
             bb_die('Could not obtain cron script');
         }
 
         while ($row = DB()->sql_fetchrow($result)) {
             $job = $row['cron_script'];
-            $job_script = INC_DIR . '/cron/jobs/' . $job;
-            require($job_script);
+            $job_script = INC_DIR.'/cron/jobs/'.$job;
+            require $job_script;
         }
-        DB()->query("
-			UPDATE " . BB_CRON . " SET
+        DB()->query('
+			UPDATE '.BB_CRON." SET
 				last_run = NOW(),
 				run_counter = run_counter + 1,
 				next_run =
@@ -64,17 +66,17 @@ class Cron
     }
 
     /**
-     * Delete cron jobs
+     * Delete cron jobs.
      *
      * @param string $jobs
      */
     public static function delete_jobs(string $jobs): void
     {
-        DB()->query("DELETE FROM " . BB_CRON . " WHERE cron_id IN ($jobs)");
+        DB()->query('DELETE FROM '.BB_CRON." WHERE cron_id IN ($jobs)");
     }
 
     /**
-     * Toggle activity of cron jobs
+     * Toggle activity of cron jobs.
      *
      * @param string $jobs
      * @param string $cron_action
@@ -82,11 +84,11 @@ class Cron
     public static function toggle_active(string $jobs, string $cron_action): void
     {
         $active = ($cron_action == 'disable') ? 0 : 1;
-        DB()->query("UPDATE " . BB_CRON . " SET cron_active = $active WHERE cron_id IN ($jobs)");
+        DB()->query('UPDATE '.BB_CRON." SET cron_active = $active WHERE cron_id IN ($jobs)");
     }
 
     /**
-     * Validate cron admin post query
+     * Validate cron admin post query.
      *
      * @param array $cron_arr
      *
@@ -105,21 +107,22 @@ class Cron
             $errnum++;
         }
         if ($errnum > 0) {
-            $result = $errors . ' total ' . $errnum . ' errors <br/> <a href="javascript:history.back(-1)">Back</a>';
+            $result = $errors.' total '.$errnum.' errors <br/> <a href="javascript:history.back(-1)">Back</a>';
         } else {
             $result = 1;
         }
+
         return $result;
     }
 
     /**
-     * Insert cron job to database
+     * Insert cron job to database.
      *
      * @param array $cron_arr
      */
     public static function insert_cron_job(array $cron_arr): void
     {
-        $row = DB()->fetch_row("SELECT cron_title, cron_script FROM " . BB_CRON . " WHERE cron_title = '" . $_POST['cron_title'] . "' or cron_script = '" . $_POST['cron_script'] . "' ");
+        $row = DB()->fetch_row('SELECT cron_title, cron_script FROM '.BB_CRON." WHERE cron_title = '".$_POST['cron_title']."' or cron_script = '".$_POST['cron_script']."' ");
 
         if ($row) {
             global $lang;
@@ -130,7 +133,7 @@ class Cron
                 $langmode = $lang['TITLE_DUPLICATE'];
             }
 
-            $message = $langmode . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS_ADDED'], "<a href=\"javascript:history.back(-1)\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS'], "<a href=\"admin_cron.php?mode=list\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+            $message = $langmode.'<br /><br />'.sprintf($lang['CLICK_RETURN_JOBS_ADDED'], '<a href="javascript:history.back(-1)">', '</a>').'<br /><br />'.sprintf($lang['CLICK_RETURN_JOBS'], '<a href="admin_cron.php?mode=list">', '</a>').'<br /><br />'.sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);
         }
@@ -151,12 +154,12 @@ class Cron
         $disable_board = $cron_arr['disable_board'];
         $run_counter = $cron_arr['run_counter'];
 
-        DB()->query("INSERT INTO " . BB_CRON . " (cron_active, cron_title, cron_script, schedule, run_day, run_time, run_order, last_run, next_run, run_interval, log_enabled, log_file, log_sql_queries, disable_board, run_counter) VALUES (
+        DB()->query('INSERT INTO '.BB_CRON." (cron_active, cron_title, cron_script, schedule, run_day, run_time, run_order, last_run, next_run, run_interval, log_enabled, log_file, log_sql_queries, disable_board, run_counter) VALUES (
 	$cron_active, '$cron_title', '$cron_script', '$schedule', '$run_day', '$run_time', '$run_order', '$last_run', '$next_run', '$run_interval', $log_enabled, '$log_file', $log_sql_queries, $disable_board, '$run_counter')");
     }
 
     /**
-     * Update cron job in database
+     * Update cron job in database.
      *
      * @param array $cron_arr
      */
@@ -179,7 +182,7 @@ class Cron
         $disable_board = $cron_arr['disable_board'];
         $run_counter = $cron_arr['run_counter'];
 
-        DB()->query("UPDATE " . BB_CRON . " SET
+        DB()->query('UPDATE '.BB_CRON." SET
 		cron_active = '$cron_active',
 		cron_title = '$cron_title',
 		cron_script = '$cron_script',

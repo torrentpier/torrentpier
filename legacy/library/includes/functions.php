@@ -1,38 +1,44 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
     $ext = config()->get('file_id_ext')[$ext_id] ?? '';
-    return ($base_path ? "$base_path/" : '') . floor($id / $first_div) . '/' . ($id % $sec_div) . '/' . $id . ($ext ? ".$ext" : '');
+
+    return ($base_path ? "$base_path/" : '').floor($id / $first_div).'/'.($id % $sec_div).'/'.$id.($ext ? ".$ext" : '');
 }
 
 function get_avatar_path($id, $ext_id, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
     $base_path ??= config()->get('avatars.upload_path');
+
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
 function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 10000, $sec_div = 100)
 {
     $base_path ??= config()->get('attach.upload_path');
+
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
 function delete_avatar($user_id, $avatar_ext_id)
 {
     $avatar_file = $avatar_ext_id ? get_avatar_path($user_id, $avatar_ext_id) : false;
-    return ($avatar_file && is_file($avatar_file) && unlink($avatar_file));
+
+    return $avatar_file && is_file($avatar_file) && unlink($avatar_file);
 }
 
 function get_tracks($type)
@@ -48,23 +54,25 @@ function get_tracks($type)
             $c_name = COOKIE_PM;
             break;
         default:
-            trigger_error(__FUNCTION__ . ": invalid type '$type'", E_USER_ERROR);
+            trigger_error(__FUNCTION__.": invalid type '$type'", E_USER_ERROR);
     }
     $tracks = !empty($_COOKIE[$c_name]) ? json_decode($_COOKIE[$c_name], true) : false;
+
     return $tracks ?: [];
 }
 
 /**
- * Returns array with all banned users
+ * Returns array with all banned users.
  *
  * @param bool $return_as_names
+ *
  * @return array
  */
 function get_banned_users(bool $return_as_names = false): array
 {
     $banned_users = [];
 
-    foreach (DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_userid != 0") as $user) {
+    foreach (DB()->fetch_rowset('SELECT ban_userid FROM '.BB_BANLIST.' WHERE ban_userid != 0') as $user) {
         $banned_users[] = $return_as_names ? get_username($user['ban_userid']) : $user['ban_userid'];
     }
 
@@ -86,7 +94,7 @@ function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW
             $tracks = [$tracks => $val];
         }
         foreach ($tracks as $key => $val) {
-            $key = (int)$key;
+            $key = (int) $key;
             $val++;
             $curr_track_val = !empty($tracking_ary[$key]) ? $tracking_ary[$key] : 0;
 
@@ -118,12 +126,13 @@ function get_last_read($topic_id = 0, $forum_id = 0)
 
     $t = $tracking_topics[$topic_id] ?? 0;
     $f = $tracking_forums[$forum_id] ?? 0;
+
     return max($t, $f, $user->data['user_lastvisit']);
 }
 
 function is_unread($ref, $topic_id = 0, $forum_id = 0): bool
 {
-    return (!IS_GUEST && $ref > get_last_read($topic_id, $forum_id));
+    return !IS_GUEST && $ref > get_last_read($topic_id, $forum_id);
 }
 
 //
@@ -160,43 +169,43 @@ define('UG_PERM_USER_ONLY', 2);  // only personal user permissions
 define('UG_PERM_GROUP_ONLY', 3);  // only group permissions
 
 $bf['forum_perm'] = [
-    'auth_view' => AUTH_VIEW,
-    'auth_read' => AUTH_READ,
-    'auth_mod' => AUTH_MOD,
-    'auth_post' => AUTH_POST,
-    'auth_reply' => AUTH_REPLY,
-    'auth_edit' => AUTH_EDIT,
-    'auth_delete' => AUTH_DELETE,
-    'auth_sticky' => AUTH_STICKY,
-    'auth_announce' => AUTH_ANNOUNCE,
-    'auth_vote' => AUTH_VOTE,
-    'auth_pollcreate' => AUTH_POLLCREATE,
+    'auth_view'        => AUTH_VIEW,
+    'auth_read'        => AUTH_READ,
+    'auth_mod'         => AUTH_MOD,
+    'auth_post'        => AUTH_POST,
+    'auth_reply'       => AUTH_REPLY,
+    'auth_edit'        => AUTH_EDIT,
+    'auth_delete'      => AUTH_DELETE,
+    'auth_sticky'      => AUTH_STICKY,
+    'auth_announce'    => AUTH_ANNOUNCE,
+    'auth_vote'        => AUTH_VOTE,
+    'auth_pollcreate'  => AUTH_POLLCREATE,
     'auth_attachments' => AUTH_ATTACH,
-    'auth_download' => AUTH_DOWNLOAD,
+    'auth_download'    => AUTH_DOWNLOAD,
 ];
 
 $bf['user_opt'] = [
-#   'dis_opt_name'       =>     PROHIBITIONS used by administrators for users
-#   'user_opt_name'      =>     SETTINGS used by users
-    'user_viewemail' => 0, // [SETTINGS] Show my email for other users
-    'dis_sig' => 1, // [PROHIBITIONS] Block set signature
-    'dis_avatar' => 2, // [PROHIBITIONS] Block set avatar
-    'dis_pm' => 3, // [PROHIBITIONS] Block sending PMs
-    'user_viewonline' => 4, // [SETTINGS] Hide my online status (time of last activity)
-    'user_notify' => 5, // [SETTINGS] Report of replies in my "Watching topics" (Via email)
-    'user_notify_pm' => 6, // [SETTINGS] Report of new PMs in forum (Via email)
-    'dis_passkey' => 7, // [PROHIBITIONS] Block changing and adding passkey into torrents, also block downloading torrents
-    'user_porn_forums' => 8, // [SETTINGS] Hide 18+ content (Porn forums)
-    'user_callseed' => 9, // [SETTINGS] Allow to send "Callseed" PMs
-    'user_empty' => 10, // [SETTINGS] Block showing advertisements to me (Not used)
-    'dis_topic' => 11, // [PROHIBITIONS] Block to create new topics
-    'dis_post' => 12, // [PROHIBITIONS] Block to send replies in topics
-    'dis_post_edit' => 13, // [PROHIBITIONS] Block editing own posts / topics
-    'user_dls' => 14, // [SETTINGS] Hide list of "Current downloads" in my profile
-    'user_retracker' => 15, // [SETTINGS] Add my retracker into downloaded torrent files
+    //   'dis_opt_name'       =>     PROHIBITIONS used by administrators for users
+    //   'user_opt_name'      =>     SETTINGS used by users
+    'user_viewemail'           => 0, // [SETTINGS] Show my email for other users
+    'dis_sig'                  => 1, // [PROHIBITIONS] Block set signature
+    'dis_avatar'               => 2, // [PROHIBITIONS] Block set avatar
+    'dis_pm'                   => 3, // [PROHIBITIONS] Block sending PMs
+    'user_viewonline'          => 4, // [SETTINGS] Hide my online status (time of last activity)
+    'user_notify'              => 5, // [SETTINGS] Report of replies in my "Watching topics" (Via email)
+    'user_notify_pm'           => 6, // [SETTINGS] Report of new PMs in forum (Via email)
+    'dis_passkey'              => 7, // [PROHIBITIONS] Block changing and adding passkey into torrents, also block downloading torrents
+    'user_porn_forums'         => 8, // [SETTINGS] Hide 18+ content (Porn forums)
+    'user_callseed'            => 9, // [SETTINGS] Allow to send "Callseed" PMs
+    'user_empty'               => 10, // [SETTINGS] Block showing advertisements to me (Not used)
+    'dis_topic'                => 11, // [PROHIBITIONS] Block to create new topics
+    'dis_post'                 => 12, // [PROHIBITIONS] Block to send replies in topics
+    'dis_post_edit'            => 13, // [PROHIBITIONS] Block editing own posts / topics
+    'user_dls'                 => 14, // [SETTINGS] Hide list of "Current downloads" in my profile
+    'user_retracker'           => 15, // [SETTINGS] Add my retracker into downloaded torrent files
     'user_hide_torrent_client' => 16, // [SETTINGS] Option to hide user's torrent client in peer list
-    'user_hide_peer_country' => 17, // [SETTINGS] Option to hide user's country name in peer list
-    'user_hide_peer_username' => 18, // [SETTINGS] Option to hide peer username in peer list
+    'user_hide_peer_country'   => 17, // [SETTINGS] Option to hide user's country name in peer list
+    'user_hide_peer_username'  => 18, // [SETTINGS] Option to hide peer username in peer list
 ];
 
 function bit2dec($bit_num)
@@ -206,23 +215,26 @@ function bit2dec($bit_num)
         foreach ($bit_num as $bit) {
             $dec |= (1 << $bit);
         }
+
         return $dec;
     }
-    return (1 << $bit_num);
+
+    return 1 << $bit_num;
 }
 
 function bf_bit2dec($bf_array_name, $key)
 {
     global $bf;
     if (!isset($bf[$bf_array_name][$key])) {
-        trigger_error(__FUNCTION__ . ": bitfield '$key' not found", E_USER_ERROR);
+        trigger_error(__FUNCTION__.": bitfield '$key' not found", E_USER_ERROR);
     }
-    return (1 << $bf[$bf_array_name][$key]);
+
+    return 1 << $bf[$bf_array_name][$key];
 }
 
 function bf($int, $bf_array_name, $key)
 {
-    return (bf_bit2dec($bf_array_name, $key) & (int)$int);
+    return bf_bit2dec($bf_array_name, $key) & (int) $int;
 }
 
 function setbit(&$int, $bit_num, $on)
@@ -285,7 +297,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     }
 
     if (empty($auth_fields)) {
-        trigger_error(__FUNCTION__ . '(): empty $auth_fields', E_USER_ERROR);
+        trigger_error(__FUNCTION__.'(): empty $auth_fields', E_USER_ERROR);
     }
 
     //
@@ -310,22 +322,22 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     }
 
     if (empty($f_access)) {
-        trigger_error(__FUNCTION__ . '(): empty $f_access', E_USER_ERROR);
+        trigger_error(__FUNCTION__.'(): empty $f_access', E_USER_ERROR);
     }
 
     //
     // Get user or group permissions
     //
-    $forum_match_sql = ($forum_id != AUTH_LIST_ALL) ? "AND aa.forum_id = " . (int)$forum_id : '';
+    $forum_match_sql = ($forum_id != AUTH_LIST_ALL) ? 'AND aa.forum_id = '.(int) $forum_id : '';
 
     // GROUP mode
     if (!empty($ug_data['group_id'])) {
         $is_guest = false;
         $is_admin = false;
 
-        $sql = "SELECT aa.forum_id, aa.forum_perm
-			FROM " . BB_AUTH_ACCESS . " aa
-			WHERE aa.group_id = " . (int)$ug_data['group_id'] . "
+        $sql = 'SELECT aa.forum_id, aa.forum_perm
+			FROM '.BB_AUTH_ACCESS.' aa
+			WHERE aa.group_id = '.(int) $ug_data['group_id']."
 				$forum_match_sql";
 
         foreach (DB()->fetch_rowset($sql) as $row) {
@@ -339,15 +351,15 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
         if ($group_perm != UG_PERM_BOTH) {
             $group_single_user = ($group_perm == UG_PERM_USER_ONLY) ? 1 : 0;
 
-            $sql = "
+            $sql = '
 				SELECT
 					aa.forum_id, BIT_OR(aa.forum_perm) AS forum_perm
 				FROM
-					" . BB_USER_GROUP . " ug,
-					" . BB_GROUPS . " g,
-					" . BB_AUTH_ACCESS . " aa
+					'.BB_USER_GROUP.' ug,
+					'.BB_GROUPS.' g,
+					'.BB_AUTH_ACCESS.' aa
 				WHERE
-					    ug.user_id = " . (int)$ug_data['user_id'] . "
+					    ug.user_id = '.(int) $ug_data['user_id']."
 					AND ug.user_pending = 0
 					AND g.group_id = ug.group_id
 					AND g.group_single_user = $group_single_user
@@ -361,9 +373,9 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
             }
         } else {
             if (!$is_guest && !$is_admin) {
-                $sql = "SELECT aa.forum_id, aa.forum_perm
-					FROM " . BB_AUTH_ACCESS_SNAP . " aa
-					WHERE aa.user_id = " . (int)$ug_data['user_id'] . "
+                $sql = 'SELECT aa.forum_id, aa.forum_perm
+					FROM '.BB_AUTH_ACCESS_SNAP.' aa
+					WHERE aa.user_id = '.(int) $ug_data['user_id']."
 						$forum_match_sql";
 
                 foreach (DB()->fetch_rowset($sql) as $row) {
@@ -415,7 +427,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
                     $auth[$f_id][$auth_type] = false;
             }
             if ($add_auth_type_desc) {
-                $auth[$f_id][$auth_type . '_type'] =& $lang['AUTH_TYPES'][$f_data[$auth_type]];
+                $auth[$f_id][$auth_type.'_type'] = &$lang['AUTH_TYPES'][$f_data[$auth_type]];
             }
         }
     }
@@ -447,7 +459,7 @@ function get_select($select, $selected = null, $return_as = 'html', $first_opt =
 
     switch ($select) {
         case 'groups':
-            $sql = "SELECT group_id, group_name FROM " . BB_GROUPS . " WHERE group_single_user = 0 ORDER BY group_name";
+            $sql = 'SELECT group_id, group_name FROM '.BB_GROUPS.' WHERE group_single_user = 0 ORDER BY group_name';
             foreach (DB()->fetch_rowset($sql) as $row) {
                 $select_ary[$row['group_name']] = $row['group_id'];
             }
@@ -455,7 +467,7 @@ function get_select($select, $selected = null, $return_as = 'html', $first_opt =
             break;
 
         case 'forum_tpl':
-            $sql = "SELECT tpl_id, tpl_name FROM " . BB_TOPIC_TPL . " ORDER BY tpl_name";
+            $sql = 'SELECT tpl_id, tpl_name FROM '.BB_TOPIC_TPL.' ORDER BY tpl_name';
             $select_ary[$first_opt] = 0;
             foreach (DB()->fetch_rowset($sql) as $row) {
                 $select_ary[$row['tpl_name']] = $row['tpl_id'];
@@ -470,12 +482,14 @@ function get_select($select, $selected = null, $return_as = 'html', $first_opt =
 function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
 {
     global $html;
+
     return $html->build_select($name, $params, $selected, $max_length, $multiple_size, $js);
 }
 
 function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
 {
     global $html;
+
     return $html->build_checkbox($name, $title, $checked, $disabled, $class, $id, $value);
 }
 
@@ -487,11 +501,12 @@ function replace_quote($str, $double = true, $single = true)
     if ($single) {
         $str = str_replace("'", '&#039;', $str);
     }
+
     return $str;
 }
 
 /**
- * Build simple hidden fields from array
+ * Build simple hidden fields from array.
  */
 function build_hidden_fields($fields_ary)
 {
@@ -500,10 +515,10 @@ function build_hidden_fields($fields_ary)
     foreach ($fields_ary as $name => $val) {
         if (is_array($val)) {
             foreach ($val as $ary_key => $ary_val) {
-                $out .= '<input type="hidden" name="' . $name . '[' . $ary_key . ']" value="' . $ary_val . "\" />\n";
+                $out .= '<input type="hidden" name="'.$name.'['.$ary_key.']" value="'.$ary_val."\" />\n";
             }
         } else {
-            $out .= '<input type="hidden" name="' . $name . '" value="' . $val . "\" />\n";
+            $out .= '<input type="hidden" name="'.$name.'" value="'.$val."\" />\n";
         }
     }
 
@@ -512,7 +527,7 @@ function build_hidden_fields($fields_ary)
 
 /**
  * Choost russian word declension based on numeric [from dklab.ru]
- * Example for $expressions: array("ответ", "ответа", "ответов")
+ * Example for $expressions: array("ответ", "ответа", "ответов").
  */
 function declension($int, $expressions, $format = '%1$s %2$s')
 {
@@ -523,7 +538,7 @@ function declension($int, $expressions, $format = '%1$s %2$s')
     if (count($expressions) < 3) {
         $expressions[2] = $expressions[1];
     }
-    $count = (int)$int % 100;
+    $count = (int) $int % 100;
 
     if ($count >= 5 && $count <= 20) {
         $result = $expressions['2'];
@@ -555,14 +570,15 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
     // replace the parameter if it exists
     if (preg_match("/((\?|&|&amp;)$arg=)[^&]*/s", $url, $m)) {
         $cur = $m[0];
-        $new = null === $value ? '' : $m[1] . urlencode($value);
+        $new = null === $value ? '' : $m[1].urlencode($value);
         $url = str_replace($cur, $new, $url);
     } // add a parameter
     elseif (null !== $value) {
         $div = str_contains($url, '?') ? $amp : '?';
-        $url = $url . $div . $arg . '=' . urlencode($value);
+        $url = $url.$div.$arg.'='.urlencode($value);
     }
-    return $url . $anchor;
+
+    return $url.$anchor;
 }
 
 /**
@@ -573,7 +589,7 @@ function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
     static $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     static $rounders = [0, 0, 0, 2, 3, 3, 3, 3, 3];
 
-    $size = (float)$size;
+    $size = (float) $size;
     $ext = $sizes[0];
     $rnd = $rounders[0];
 
@@ -582,7 +598,7 @@ function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
         $ext = 'KB';
         $rounder = 1;
     } else {
-        for ($i = 1, $cnt = count($sizes); ($i < $cnt && $size >= 1024); $i++) {
+        for ($i = 1, $cnt = count($sizes); $i < $cnt && $size >= 1024; $i++) {
             $size /= 1024;
             $ext = $sizes[$i];
             $rnd = $rounders[$i];
@@ -592,7 +608,7 @@ function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
         $rounder = $rnd;
     }
 
-    return round($size, $rounder) . $space . $ext;
+    return round($size, $rounder).$space.$ext;
 }
 
 function bt_show_ip($ip, $port = '')
@@ -629,8 +645,8 @@ function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
     global $previous_settings, $search_id;
 
     if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
-        $val = (int)$_REQUEST[$key];
-    } elseif (!isset($_REQUEST[$key]) && isset($_REQUEST['prev_' . $key])) {
+        $val = (int) $_REQUEST[$key];
+    } elseif (!isset($_REQUEST[$key]) && isset($_REQUEST['prev_'.$key])) {
         $val = $off;
     } elseif (isset($previous_settings[$key]) && (!IS_GUEST || !empty($search_id))) {
         $val = ($previous_settings[$key]) ? $on : $off;
@@ -645,7 +661,7 @@ function select_get_val($key, &$val, $options_ary, $default, $num = true)
 
     if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
         if (isset($options_ary[$_REQUEST[$key]])) {
-            $val = ($num) ? (int)$_REQUEST[$key] : $_REQUEST[$key];
+            $val = ($num) ? (int) $_REQUEST[$key] : $_REQUEST[$key];
         }
     } elseif (isset($previous_settings[$key])) {
         $val = $previous_settings[$key];
@@ -655,11 +671,9 @@ function select_get_val($key, &$val, $options_ary, $default, $num = true)
 }
 
 /**
- * set_var
+ * set_var.
  *
  * Set variable, used by {@link request_var the request_var function}
- *
- * @access private
  */
 function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
 {
@@ -683,7 +697,7 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
 }
 
 /**
- * request_var
+ * request_var.
  *
  * Used to get passed variable
  */
@@ -752,13 +766,15 @@ function get_username($user_id)
     }
     if (is_array($user_id)) {
         $usernames = [];
-        foreach (DB()->fetch_rowset("SELECT user_id, username FROM " . BB_USERS . " WHERE user_id IN(" . get_id_csv($user_id) . ")") as $row) {
+        foreach (DB()->fetch_rowset('SELECT user_id, username FROM '.BB_USERS.' WHERE user_id IN('.get_id_csv($user_id).')') as $row) {
             $usernames[$row['user_id']] = $row['username'];
         }
+
         return $usernames;
     }
 
-    $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = '" . DB()->escape($user_id) . "' LIMIT 1");
+    $row = DB()->fetch_row('SELECT username FROM '.BB_USERS." WHERE user_id = '".DB()->escape($user_id)."' LIMIT 1");
+
     return $row['username'];
 }
 
@@ -768,7 +784,7 @@ function get_user_id($username)
         return false;
     }
 
-    if ($row = DB()->fetch_row("SELECT user_id FROM " . BB_USERS . " WHERE username = '" . DB()->escape($username) . "' LIMIT 1")) {
+    if ($row = DB()->fetch_row('SELECT user_id FROM '.BB_USERS." WHERE username = '".DB()->escape($username)."' LIMIT 1")) {
         return $row['user_id'];
     }
 
@@ -780,7 +796,7 @@ function str_short($text, $max_length, $space = ' ')
     if (!empty($max_length) && !empty($text) && (mb_strlen($text, DEFAULT_CHARSET) > $max_length)) {
         $text = mb_substr($text, 0, $max_length, DEFAULT_CHARSET);
 
-        if ($last_space_pos = $max_length - (int)strpos(strrev($text), (string)$space)) {
+        if ($last_space_pos = $max_length - (int) strpos(strrev($text), (string) $space)) {
             if ($last_space_pos > round($max_length * 3 / 4)) {
                 $last_space_pos--;
                 $text = mb_substr($text, 0, $last_space_pos, DEFAULT_CHARSET);
@@ -800,50 +816,50 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
     $from = !empty($row['user_from']) ? render_flag($row['user_from'], false) : $lang['NOSELECT'];
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
     $user_time = !empty($row['user_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($row['user_time']), delta_time($row['user_time'])) : $lang['NOSELECT'];
-    $posts = '<a href="search.php?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
-    $pm = config()->get('text_buttons') ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
+    $posts = '<a href="search.php?search_author=1&amp;uid='.$row['user_id'].'" target="_blank">'.$row['user_posts'] ?: 0 .'</a>';
+    $pm = config()->get('text_buttons') ? '<a class="txtb" href="'.(PM_URL.'?mode=post&amp;'.POST_USERS_URL.'='.$row['user_id']).'">'.$lang['SEND_PM_TXTB'].'</a>' : '<a href="'.(PM_URL.'?mode=post&amp;'.POST_USERS_URL.'='.$row['user_id']).'"><img src="'.$images['icon_pm'].'" alt="'.$lang['SEND_PRIVATE_MESSAGE'].'" title="'.$lang['SEND_PRIVATE_MESSAGE'].'" border="0" /></a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $have_auth || ($row['user_id'] == $userdata['user_id'])) {
-        $email_uri = (config()->get('board_email_form')) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
-        $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
+        $email_uri = (config()->get('board_email_form')) ? ('profile.php?mode=email&amp;'.POST_USERS_URL.'='.$row['user_id']) : 'mailto:'.$row['user_email'];
+        $email = '<a class="editable" href="'.$email_uri.'">'.$row['user_email'].'</a>';
     } else {
         $email = $lang['HIDDEN_USER'];
     }
 
     if ($row['user_website']) {
-        $www = config()->get('text_buttons') ? '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . $lang['VISIT_WEBSITE_TXTB'] . '</a>' : '<a class="txtb" href="' . $row['user_website'] . '" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
+        $www = config()->get('text_buttons') ? '<a class="txtb" href="'.$row['user_website'].'"  target="_userwww">'.$lang['VISIT_WEBSITE_TXTB'].'</a>' : '<a class="txtb" href="'.$row['user_website'].'" target="_userwww"><img src="'.$images['icon_www'].'" alt="'.$lang['VISIT_WEBSITE'].'" title="'.$lang['VISIT_WEBSITE'].'" border="0" /></a>';
     } else {
         $www = $lang['NOSELECT'];
     }
 
     return [
-        'from' => $from,
-        'joined' => $joined,
-        'joined_raw' => $row['user_regdate'],
-        'posts' => $posts,
-        'pm' => $pm,
-        'avatar' => $avatar,
-        'user_time' => $user_time,
+        'from'          => $from,
+        'joined'        => $joined,
+        'joined_raw'    => $row['user_regdate'],
+        'posts'         => $posts,
+        'pm'            => $pm,
+        'avatar'        => $avatar,
+        'user_time'     => $user_time,
         'user_time_raw' => ($row['user_time'] ?? ''),
-        'email' => $email,
-        'www' => $www
+        'email'         => $email,
+        'www'           => $www,
     ];
 }
 
 function get_bt_userdata($user_id)
 {
-    if (!$btu = CACHE('bb_cache')->get('btu_' . $user_id)) {
-        $btu = DB()->fetch_row("
+    if (!$btu = CACHE('bb_cache')->get('btu_'.$user_id)) {
+        $btu = DB()->fetch_row('
 			SELECT bt.*, SUM(tr.speed_up) AS speed_up, SUM(tr.speed_down) AS speed_down
-			FROM      " . BB_BT_USERS . " bt
-			LEFT JOIN " . BB_BT_TRACKER . " tr ON (bt.user_id = tr.user_id)
-			WHERE bt.user_id = " . (int)$user_id . "
+			FROM      '.BB_BT_USERS.' bt
+			LEFT JOIN '.BB_BT_TRACKER.' tr ON (bt.user_id = tr.user_id)
+			WHERE bt.user_id = '.(int) $user_id.'
 			GROUP BY bt.user_id
 			LIMIT 1
-		");
+		');
 
-        CACHE('bb_cache')->set('btu_' . $user_id, $btu, 300);
+        CACHE('bb_cache')->set('btu_'.$user_id, $btu, 300);
     }
 
     return $btu;
@@ -859,30 +875,30 @@ function show_bt_userdata($user_id): void
 
     $template->assign_vars([
         'SHOW_BT_USERDATA' => true,
-        'UP_TOTAL' => humn_size($btu['u_up_total']),
-        'UP_BONUS' => humn_size($btu['u_up_bonus']),
-        'RELEASED' => humn_size($btu['u_up_release']),
-        'DOWN_TOTAL' => humn_size($btu['u_down_total']),
+        'UP_TOTAL'         => humn_size($btu['u_up_total']),
+        'UP_BONUS'         => humn_size($btu['u_up_bonus']),
+        'RELEASED'         => humn_size($btu['u_up_release']),
+        'DOWN_TOTAL'       => humn_size($btu['u_down_total']),
         'DOWN_TOTAL_BYTES' => $btu['u_down_total'],
-        'USER_RATIO' => get_bt_ratio($btu),
-        'MIN_DL_FOR_RATIO' => humn_size((int)MIN_DL_FOR_RATIO),
-        'MIN_DL_BYTES' => (int)MIN_DL_FOR_RATIO,
-        'AUTH_KEY' => $btu['auth_key'],
+        'USER_RATIO'       => get_bt_ratio($btu),
+        'MIN_DL_FOR_RATIO' => humn_size((int) MIN_DL_FOR_RATIO),
+        'MIN_DL_BYTES'     => (int) MIN_DL_FOR_RATIO,
+        'AUTH_KEY'         => $btu['auth_key'],
 
-        'TD_DL' => humn_size($btu['down_today']),
-        'TD_UL' => humn_size($btu['up_today']),
-        'TD_REL' => humn_size($btu['up_release_today']),
-        'TD_BONUS' => humn_size($btu['up_bonus_today']),
+        'TD_DL'     => humn_size($btu['down_today']),
+        'TD_UL'     => humn_size($btu['up_today']),
+        'TD_REL'    => humn_size($btu['up_release_today']),
+        'TD_BONUS'  => humn_size($btu['up_bonus_today']),
         'TD_POINTS' => $btu['auth_key'] ? $btu['points_today'] : '0.00',
 
-        'YS_DL' => humn_size($btu['down_yesterday']),
-        'YS_UL' => humn_size($btu['up_yesterday']),
-        'YS_REL' => humn_size($btu['up_release_yesterday']),
-        'YS_BONUS' => humn_size($btu['up_bonus_yesterday']),
+        'YS_DL'     => humn_size($btu['down_yesterday']),
+        'YS_UL'     => humn_size($btu['up_yesterday']),
+        'YS_REL'    => humn_size($btu['up_release_yesterday']),
+        'YS_BONUS'  => humn_size($btu['up_bonus_yesterday']),
         'YS_POINTS' => $btu['auth_key'] ? $btu['points_yesterday'] : '0.00',
 
-        'SPEED_UP' => humn_size($btu['speed_up'], min: 'KB') . '/s',
-        'SPEED_DOWN' => humn_size($btu['speed_down'], min: 'KB') . '/s',
+        'SPEED_UP'   => humn_size($btu['speed_up'], min: 'KB').'/s',
+        'SPEED_DOWN' => humn_size($btu['speed_down'], min: 'KB').'/s',
     ]);
 }
 
@@ -896,7 +912,7 @@ function get_attachments_dir($cfg = null)
         return $cfg['upload_dir'];
     }
 
-    return BB_ROOT . $cfg['upload_dir'];
+    return BB_ROOT.$cfg['upload_dir'];
 }
 
 function bb_get_config($table, $from_db = false, $update_cache = true)
@@ -921,8 +937,8 @@ function bb_update_config($params, $table = BB_CONFIG)
     $updates = [];
     foreach ($params as $name => $val) {
         $updates[] = [
-            'config_name' => $name,
-            'config_value' => $val
+            'config_name'  => $name,
+            'config_value' => $val,
         ];
     }
     $updates = DB()->build_array('MULTI_INSERT', $updates);
@@ -936,18 +952,19 @@ function bb_update_config($params, $table = BB_CONFIG)
 function clean_username($username)
 {
     $username = mb_substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25, DEFAULT_CHARSET);
-    $username = rtrim($username, "\\");
+    $username = rtrim($username, '\\');
     $username = str_replace("'", "\'", $username);
 
     return $username;
 }
 
 /**
- * Get Userdata
+ * Get Userdata.
  *
  * @param int|string $u
- * @param bool $is_name
- * @param bool $allow_guest
+ * @param bool       $is_name
+ * @param bool       $allow_guest
+ *
  * @return mixed
  */
 function get_userdata(int|string $u, bool $is_name = false, bool $allow_guest = false, bool $profile_view = false)
@@ -957,30 +974,30 @@ function get_userdata(int|string $u, bool $is_name = false, bool $allow_guest = 
     }
 
     if (!$is_name) {
-        $u = (int)$u;
+        $u = (int) $u;
         if ($u === GUEST_UID && $allow_guest) {
             if ($u_data = CACHE('bb_cache')->get('guest_userdata')) {
                 return $u_data;
             }
         }
 
-        $where_sql = "WHERE user_id = " . $u;
+        $where_sql = 'WHERE user_id = '.$u;
     } else {
-        $where_sql = "WHERE username = '" . DB()->escape(clean_username($u)) . "'";
+        $where_sql = "WHERE username = '".DB()->escape(clean_username($u))."'";
     }
 
     if ($profile_view) {
-        $where_sql = "WHERE user_id = " . (int)$u . " OR username = '" . DB()->escape(clean_username($u)) . "'";
+        $where_sql = 'WHERE user_id = '.(int) $u." OR username = '".DB()->escape(clean_username($u))."'";
     }
 
-    $exclude_anon_sql = (!$allow_guest) ? "AND user_id != " . GUEST_UID : '';
-    $sql = "SELECT * FROM " . BB_USERS . " $where_sql $exclude_anon_sql LIMIT 1";
+    $exclude_anon_sql = (!$allow_guest) ? 'AND user_id != '.GUEST_UID : '';
+    $sql = 'SELECT * FROM '.BB_USERS." $where_sql $exclude_anon_sql LIMIT 1";
 
     if (!$u_data = DB()->fetch_row($sql)) {
         return false;
     }
 
-    if ((int)$u_data['user_id'] === GUEST_UID) {
+    if ((int) $u_data['user_id'] === GUEST_UID) {
         CACHE('bb_cache')->set('guest_userdata', $u_data);
     }
 
@@ -1045,7 +1062,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
                 break;
 
             default:
-                trigger_error(__FUNCTION__ . ": invalid mode '$mode'", E_USER_ERROR);
+                trigger_error(__FUNCTION__.": invalid mode '$mode'", E_USER_ERROR);
         }
         $cat_title = $forums['c'][$f['cat_id']]['cat_title'];
         $f_name = ($f['forum_parent']) ? ' |- ' : '';
@@ -1083,18 +1100,18 @@ function setup_style()
         }
     }
 
-    $template = new TorrentPier\Legacy\Template(TEMPLATES_DIR . '/' . $tpl_dir_name);
-    $css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
+    $template = new TorrentPier\Legacy\Template(TEMPLATES_DIR.'/'.$tpl_dir_name);
+    $css_dir = 'styles/'.basename(TEMPLATES_DIR).'/'.$tpl_dir_name.'/css/';
 
     $template->assign_vars([
-        'SPACER' => make_url('styles/images/spacer.gif'),
-        'STYLESHEET' => make_url($css_dir . $stylesheet),
+        'SPACER'           => make_url('styles/images/spacer.gif'),
+        'STYLESHEET'       => make_url($css_dir.$stylesheet),
         'EXT_LINK_NEW_WIN' => config()->get('ext_link_new_win'),
-        'TPL_DIR' => make_url($css_dir),
-        'SITE_URL' => make_url('/')
+        'TPL_DIR'          => make_url($css_dir),
+        'SITE_URL'         => make_url('/'),
     ]);
 
-    require_once TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php';
+    require_once TEMPLATES_DIR.'/'.$tpl_dir_name.'/tpl_config.php';
 
     return ['template_name' => $tpl_dir_name];
 }
@@ -1104,7 +1121,7 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
 {
     global $lang, $userdata;
 
-    $gmepoch = (int)$gmepoch;
+    $gmepoch = (int) $gmepoch;
 
     if (!$format) {
         $format = config()->get('default_dateformat');
@@ -1133,18 +1150,18 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
         $date_year = gmdate('Y', $gmepoch + (3600 * $tz));
 
         if ($date_today == $today && $date_month == $month && $date_year == $year) {
-            $date = 'today' . gmdate($time_format, $gmepoch + (3600 * $tz));
+            $date = 'today'.gmdate($time_format, $gmepoch + (3600 * $tz));
         } elseif ($today != 1 && $date_today == ($today - 1) && $date_month == $month && $date_year == $year) {
-            $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
+            $date = 'yesterday'.gmdate($time_format, $gmepoch + (3600 * $tz));
         } elseif ($today == 1 && $month != 1) {
-            $yesterday = date('t', mktime(0, 0, 0, ($month - 1), 1, $year));
+            $yesterday = date('t', mktime(0, 0, 0, $month - 1, 1, $year));
             if ($date_today == $yesterday && $date_month == ($month - 1) && $date_year == $year) {
-                $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
+                $date = 'yesterday'.gmdate($time_format, $gmepoch + (3600 * $tz));
             }
         } elseif ($today == 1 && $month == 1) {
-            $yesterday = date('t', mktime(0, 0, 0, 12, 1, ($year - 1)));
+            $yesterday = date('t', mktime(0, 0, 0, 12, 1, $year - 1));
             if ($date_today == $yesterday && $date_month == 12 && $date_year == ($year - 1)) {
-                $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
+                $date = 'yesterday'.gmdate($time_format, $gmepoch + (3600 * $tz));
             }
         }
     }
@@ -1153,9 +1170,10 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
 }
 
 /**
- * Get user's torrent client string
+ * Get user's torrent client string.
  *
  * @param string $peer_id
+ *
  * @return string
  */
 function get_user_torrent_client(string $peer_id): string
@@ -1171,19 +1189,20 @@ function get_user_torrent_client(string $peer_id): string
         }
     }
 
-    $clientIconPath = BB_ROOT . 'styles/images/clients/' . $bestMatch . $iconExtension;
+    $clientIconPath = BB_ROOT.'styles/images/clients/'.$bestMatch.$iconExtension;
     if (!empty($bestMatch) && is_file($clientIconPath)) {
-        return '<img class="client_icon" src="' . $clientIconPath . '" alt="' . $bestMatch . '" title="' . $peer_id . '">';
+        return '<img class="client_icon" src="'.$clientIconPath.'" alt="'.$bestMatch.'" title="'.$peer_id.'">';
     }
 
     return $peer_id;
 }
 
 /**
- * Returns country flag by country code
+ * Returns country flag by country code.
  *
  * @param string $code
- * @param bool $showName
+ * @param bool   $showName
+ *
  * @return string
  */
 function render_flag(string $code, bool $showName = true): string
@@ -1194,18 +1213,19 @@ function render_flag(string $code, bool $showName = true): string
     $nameIgnoreList = [
         'WBW',
         'PACE',
-        'LGBT'
+        'LGBT',
     ];
 
     if (isset($lang['COUNTRIES'][$code])) {
         if ($code === '0') {
             return ''; // No selected
         } else {
-            $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
+            $flagIconPath = BB_ROOT.'styles/images/flags/'.$code.$iconExtension;
             if (is_file($flagIconPath)) {
                 $langName = $lang['COUNTRIES'][$code];
-                $countryName = ($showName && !in_array($code, $nameIgnoreList)) ? '&nbsp;' . str_short($langName, 20) : '';
-                return '<span title="' . $langName . '"><img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '">' . $countryName . '</span>';
+                $countryName = ($showName && !in_array($code, $nameIgnoreList)) ? '&nbsp;'.str_short($langName, 20) : '';
+
+                return '<span title="'.$langName.'"><img src="'.$flagIconPath.'" class="poster-flag" alt="'.$code.'">'.$countryName.'</span>';
             }
         }
     }
@@ -1220,6 +1240,7 @@ function birthday_age($date)
     }
 
     $tz = TIMENOW + (3600 * config()->get('board_timezone'));
+
     return delta_time(strtotime($date, $tz));
 }
 
@@ -1246,9 +1267,9 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
     if ($total_pages > ((2 * ($begin_end + $from_middle)) + 2)) {
         $init_page_max = ($total_pages > $begin_end) ? $begin_end : $total_pages;
         for ($i = 1; $i < $init_page_max + 1; $i++) {
-            $page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "{$query_separator}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
+            $page_string .= ($i == $on_page) ? '<b>'.$i.'</b>' : '<a href="'.$base_url."{$query_separator}start=".(($i - 1) * $per_page).'">'.$i.'</a>';
             if ($i < $init_page_max) {
-                $page_string .= ", ";
+                $page_string .= ', ';
             }
         }
         if ($total_pages > $begin_end) {
@@ -1260,7 +1281,7 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
                 $init_page_max = ($on_page < $total_pages - ($begin_end + $from_middle)) ? $on_page : $total_pages - ($begin_end + $from_middle);
 
                 for ($i = $init_page_min - $from_middle; $i < $init_page_max + ($from_middle + 1); $i++) {
-                    $page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "{$query_separator}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
+                    $page_string .= ($i == $on_page) ? '<b>'.$i.'</b>' : '<a href="'.$base_url."{$query_separator}start=".(($i - 1) * $per_page).'">'.$i.'</a>';
                     if ($i < $init_page_max + $from_middle) {
                         $page_string .= ', ';
                     }
@@ -1270,15 +1291,15 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
                 $page_string .= '&nbsp;...&nbsp;';
             }
             for ($i = $total_pages - ($begin_end - 1); $i < $total_pages + 1; $i++) {
-                $page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "{$query_separator}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
+                $page_string .= ($i == $on_page) ? '<b>'.$i.'</b>' : '<a href="'.$base_url."{$query_separator}start=".(($i - 1) * $per_page).'">'.$i.'</a>';
                 if ($i < $total_pages) {
-                    $page_string .= ", ";
+                    $page_string .= ', ';
                 }
             }
         }
     } else {
         for ($i = 1; $i < $total_pages + 1; $i++) {
-            $page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "{$query_separator}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
+            $page_string .= ($i == $on_page) ? '<b>'.$i.'</b>' : '<a href="'.$base_url."{$query_separator}start=".(($i - 1) * $per_page).'">'.$i.'</a>';
             if ($i < $total_pages) {
                 $page_string .= ', ';
             }
@@ -1287,25 +1308,25 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 
     if ($add_prevnext_text) {
         if ($on_page > 1) {
-            $page_string = ' <a href="' . $base_url . "{$query_separator}start=" . (($on_page - 2) * $per_page) . '">' . $lang['PREVIOUS_PAGE'] . '</a>&nbsp;&nbsp;' . $page_string;
-            $meta_prev_link = FULL_URL . $base_url . "{$query_separator}start=" . (($on_page - 2) * $per_page);
+            $page_string = ' <a href="'.$base_url."{$query_separator}start=".(($on_page - 2) * $per_page).'">'.$lang['PREVIOUS_PAGE'].'</a>&nbsp;&nbsp;'.$page_string;
+            $meta_prev_link = FULL_URL.$base_url."{$query_separator}start=".(($on_page - 2) * $per_page);
         }
 
         if ($on_page < $total_pages) {
-            $page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "{$query_separator}start=" . ($on_page * $per_page) . '">' . $lang['NEXT_PAGE'] . '</a>';
-            $meta_next_link = FULL_URL . $base_url . "{$query_separator}start=" . ($on_page * $per_page);
+            $page_string .= '&nbsp;&nbsp;<a href="'.$base_url."{$query_separator}start=".($on_page * $per_page).'">'.$lang['NEXT_PAGE'].'</a>';
+            $meta_next_link = FULL_URL.$base_url."{$query_separator}start=".($on_page * $per_page);
         }
     }
 
     $pagination = false;
     if ($page_string && $total_pages > 1) {
-        $pagination = '<a class="menu-root" href="#pg-jump">' . $lang['GOTO_PAGE'] . '</a> :&nbsp;&nbsp;' . $page_string;
+        $pagination = '<a class="menu-root" href="#pg-jump">'.$lang['GOTO_PAGE'].'</a> :&nbsp;&nbsp;'.$page_string;
         $pagination = str_replace("{$query_separator}start=0", '', $pagination);
     }
 
     $template->assign_vars([
-        'PAGINATION' => $pagination,
-        'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], (floor($start_item / $per_page) + 1), ceil($num_items / $per_page)),
+        'PAGINATION'  => $pagination,
+        'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], floor($start_item / $per_page) + 1, ceil($num_items / $per_page)),
         'PG_BASE_URL' => $base_url,
         'PG_PER_PAGE' => $per_page,
         // Assign meta
@@ -1323,7 +1344,7 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 function bb_preg_quote($str, $delimiter)
 {
     $text = preg_quote($str);
-    $text = str_replace($delimiter, '\\' . $delimiter, $text);
+    $text = str_replace($delimiter, '\\'.$delimiter, $text);
 
     return $text;
 }
@@ -1342,7 +1363,7 @@ function bb_die($msg_text, $status_code = null)
 
     // Check
     if (defined('HAS_DIED')) {
-        trigger_error(__FUNCTION__ . ' was called multiple times', E_USER_ERROR);
+        trigger_error(__FUNCTION__.' was called multiple times', E_USER_ERROR);
     }
     define('HAS_DIED', 1);
     define('DISABLE_CACHING_OUTPUT', true);
@@ -1360,12 +1381,12 @@ function bb_die($msg_text, $status_code = null)
     // If the header hasn't been output then do it
     if (!defined('PAGE_HEADER_SENT')) {
         if (empty($template)) {
-            $template = new TorrentPier\Legacy\Template(BB_ROOT . "templates/" . config()->get('tpl_name'));
+            $template = new TorrentPier\Legacy\Template(BB_ROOT.'templates/'.config()->get('tpl_name'));
         }
         if (empty($theme)) {
             $theme = setup_style();
         }
-        require(PAGE_HEADER);
+        require PAGE_HEADER;
     }
 
     // Check for lang variable
@@ -1374,21 +1395,21 @@ function bb_die($msg_text, $status_code = null)
     }
 
     $template->assign_vars([
-        'TPL_BB_DIE' => true,
-        'MESSAGE_TEXT' => $msg_text
+        'TPL_BB_DIE'   => true,
+        'MESSAGE_TEXT' => $msg_text,
     ]);
 
     $template->set_filenames(['bb_die' => 'common.tpl']);
     $template->pparse('bb_die');
 
-    require(PAGE_FOOTER);
+    require PAGE_FOOTER;
 
     exit;
 }
 
 function bb_simple_die($txt, $status_code = null)
 {
-    header('Content-Type: text/plain; charset=' . DEFAULT_CHARSET);
+    header('Content-Type: text/plain; charset='.DEFAULT_CHARSET);
 
     if (isset($status_code)) {
         http_response_code($status_code);
@@ -1398,19 +1419,19 @@ function bb_simple_die($txt, $status_code = null)
         bb_die("bb_simple_die:<br /><br />$txt");
     }
 
-    die($txt);
+    exit($txt);
 }
 
 function login_redirect($url = '')
 {
-    redirect(LOGIN_URL . '?redirect=' . (($url) ?: ($_SERVER['REQUEST_URI'] ?? '/')));
+    redirect(LOGIN_URL.'?redirect='.(($url) ?: ($_SERVER['REQUEST_URI'] ?? '/')));
 }
 
 function meta_refresh($url, $time = 5)
 {
     global $template;
 
-    $template->assign_var('META', '<meta http-equiv="refresh" content="' . $time . ';url=' . $url . '" />');
+    $template->assign_var('META', '<meta http-equiv="refresh" content="'.$time.';url='.$url.'" />');
 }
 
 function redirect($url)
@@ -1427,7 +1448,7 @@ function redirect($url)
     $server_protocol = (config()->get('cookie_secure')) ? 'https://' : 'http://';
 
     $server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('server_name')));
-    $server_port = (config()->get('server_port') <> 80) ? ':' . trim(config()->get('server_port')) : '';
+    $server_port = (config()->get('server_port') != 80) ? ':'.trim(config()->get('server_port')) : '';
     $script_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('script_path')));
 
     if ($script_name) {
@@ -1435,13 +1456,13 @@ function redirect($url)
         $url = preg_replace("#^$script_name#", '', $url);
     }
 
-    $redirect_url = $server_protocol . $server_name . $server_port . $script_name . preg_replace('#^\/?(.*?)\/?$#', '/\1', $url);
+    $redirect_url = $server_protocol.$server_name.$server_port.$script_name.preg_replace('#^\/?(.*?)\/?$#', '/\1', $url);
 
     // Send no-cache headers to prevent browsers from caching redirects
     send_no_cache_headers();
 
     // Behave as per HTTP/1.1 spec for others
-    header('Location: ' . $redirect_url, response_code: 301);
+    header('Location: '.$redirect_url, response_code: 301);
     exit;
 }
 
@@ -1452,15 +1473,15 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
 
     $forum_display_sort = [
         'lang_key' => ['LASTPOST', 'SORT_TOPIC_TITLE', 'SORT_TIME'],
-        'fields' => ['t.topic_last_post_time', 't.topic_title', 't.topic_time']
+        'fields'   => ['t.topic_last_post_time', 't.topic_title', 't.topic_time'],
     ];
     $forum_display_order = [
         'lang_key' => ['DESC', 'ASC'],
-        'fields' => ['DESC', 'ASC']
+        'fields'   => ['DESC', 'ASC'],
     ];
 
     // get the good list
-    $list_name = 'forum_display_' . $list;
+    $list_name = 'forum_display_'.$list;
     $listrow = ${$list_name};
 
     // init the result
@@ -1474,12 +1495,13 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
         foreach ($listrow['lang_key'] as $i => $iValue) {
             $selected = ($i == $selected_row) ? ' selected' : '';
             $l_value = $lang[$listrow['lang_key'][$i]] ?? $iValue;
-            $res .= '<option value="' . $i . '"' . $selected . '>' . $l_value . '</option>';
+            $res .= '<option value="'.$i.'"'.$selected.'>'.$l_value.'</option>';
         }
     } else {
         // field
         $res = $listrow['fields'][$selected_row];
     }
+
     return $res;
 }
 
@@ -1490,51 +1512,55 @@ function topic_attachment_image($switch_attachment)
     if (!$switch_attachment || !($is_auth['auth_download'] && $is_auth['auth_view'])) {
         return '';
     }
+
     return '<img src="styles/images/icon_clip.gif" alt="" border="0" /> ';
 }
 
 function clear_dl_list($topics_csv)
 {
-    DB()->query("DELETE FROM " . BB_BT_DLSTATUS . " WHERE topic_id IN($topics_csv)");
-    DB()->query("DELETE FROM " . BB_BT_DLSTATUS_SNAP . " WHERE topic_id IN($topics_csv)");
+    DB()->query('DELETE FROM '.BB_BT_DLSTATUS." WHERE topic_id IN($topics_csv)");
+    DB()->query('DELETE FROM '.BB_BT_DLSTATUS_SNAP." WHERE topic_id IN($topics_csv)");
 }
 
 // $ids - array(id1,id2,..) or (string) id
 function get_id_csv($ids)
 {
-    $ids = array_values((array)$ids);
+    $ids = array_values((array) $ids);
     array_deep($ids, 'intval', 'one-dimensional');
-    return (string)implode(',', $ids);
+
+    return (string) implode(',', $ids);
 }
 
 // $ids - array(id1,id2,..) or (string) id1,id2,..
 function get_id_ary($ids)
 {
-    $ids = is_string($ids) ? explode(',', $ids) : array_values((array)$ids);
+    $ids = is_string($ids) ? explode(',', $ids) : array_values((array) $ids);
     array_deep($ids, 'intval', 'one-dimensional');
-    return (array)$ids;
+
+    return (array) $ids;
 }
 
 function get_topic_title($topic_id)
 {
-    $row = DB()->fetch_row("
-		SELECT topic_title FROM " . BB_TOPICS . " WHERE topic_id = " . (int)$topic_id . "
-	");
+    $row = DB()->fetch_row('
+		SELECT topic_title FROM '.BB_TOPICS.' WHERE topic_id = '.(int) $topic_id.'
+	');
+
     return $row['topic_title'];
 }
 
 function forum_exists($forum_id = null): bool
 {
     if (!isset($forum_id)) {
-        return (bool)DB()->fetch_row("SELECT * FROM " . BB_FORUMS . " LIMIT 1");
+        return (bool) DB()->fetch_row('SELECT * FROM '.BB_FORUMS.' LIMIT 1');
     }
 
-    return (bool)DB()->fetch_row("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1");
+    return (bool) DB()->fetch_row('SELECT forum_id FROM '.BB_FORUMS." WHERE forum_id = $forum_id LIMIT 1");
 }
 
 function cat_exists($cat_id): bool
 {
-    return (bool)DB()->fetch_row("SELECT cat_id FROM " . BB_CATEGORIES . " WHERE cat_id = $cat_id LIMIT 1");
+    return (bool) DB()->fetch_row('SELECT cat_id FROM '.BB_CATEGORIES." WHERE cat_id = $cat_id LIMIT 1");
 }
 
 function get_topic_icon($topic, $is_unread = null)
@@ -1579,7 +1605,7 @@ function build_topic_pagination($url, $replies, $per_page)
 
         for ($j = 0, $page = 1; $j < $replies; $j += $per_page, $page++) {
             $href = ($j) ? "$url&amp;start=$j" : $url;
-            $pg .= '<a href="' . $href . '" class="topicPG">' . $page . '</a>';
+            $pg .= '<a href="'.$href.'" class="topicPG">'.$page.'</a>';
 
             if ($page == 1 && $total_pages > 3) {
                 $pg .= ' .. ';
@@ -1599,9 +1625,9 @@ function print_confirmation($tpl_vars): void
     global $template, $lang;
 
     $template->assign_vars([
-        'TPL_CONFIRM' => true,
+        'TPL_CONFIRM'   => true,
         'CONFIRM_TITLE' => $lang['CONFIRM'],
-        'FORM_METHOD' => 'post'
+        'FORM_METHOD'   => 'post',
     ]);
 
     if (!isset($tpl_vars['QUESTION'])) {
@@ -1618,7 +1644,7 @@ function print_confirmation($tpl_vars): void
  *            'tpl'    => 'template file name',
  *            'simple' => $gen_simple_header,
  *          );
- *       OR (string) 'template_file_name'
+ *       OR (string) 'template_file_name'.
  *
  *  $type = ''        (common forum page)
  *          'admin'   (adminCP page)
@@ -1632,19 +1658,19 @@ function print_page($args, $type = '', $mode = '')
     global $template, $gen_simple_header;
 
     $tpl = (is_array($args) && !empty($args['tpl'])) ? $args['tpl'] : $args;
-    $tpl = ($type === 'admin') ? ADMIN_TPL_DIR . $tpl : $tpl;
+    $tpl = ($type === 'admin') ? ADMIN_TPL_DIR.$tpl : $tpl;
 
     $gen_simple_header = (is_array($args) && !empty($args['simple']) or $type === 'simple') ? true : $gen_simple_header;
 
     if ($mode !== 'no_header') {
-        require(PAGE_HEADER);
+        require PAGE_HEADER;
     }
 
     $template->set_filenames(['body' => $tpl]);
     $template->pparse('body');
 
     if ($mode !== 'no_footer') {
-        require(PAGE_FOOTER);
+        require PAGE_FOOTER;
     }
 }
 
@@ -1669,6 +1695,7 @@ function clean_title($str, $replace_underscore = false)
 {
     $str = ($replace_underscore) ? str_replace('_', ' ', $str) : $str;
     $str = htmlCHR(str_compact($str));
+
     return $str;
 }
 
@@ -1680,7 +1707,7 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
     $ltrim_chars = ($ltrim_star) ? ' *-!' : ' ';
     $wrap_with_quotes = preg_match('#^"[^"]+"$#', $text);
 
-    $text = ' ' . str_compact(ltrim($text, $ltrim_chars)) . ' ';
+    $text = ' '.str_compact(ltrim($text, $ltrim_chars)).' ';
 
     if (config()->get('search_engine_type') == 'sphinx') {
         $text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
@@ -1691,7 +1718,7 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
         $text = preg_replace('#(?<=\s)[\-*]+\s#u', ' ', $text);           // single " - ", " * "
         $text = trim($text, ' -|');
         $text = str_compact($text);
-        $text_match_sql = ($wrap_with_quotes && $text != '') ? '"' . $text . '"' : $text;
+        $text_match_sql = ($wrap_with_quotes && $text != '') ? '"'.$text.'"' : $text;
     } else {
         $text_match_sql = DB()->escape(trim($text));
     }
@@ -1722,11 +1749,11 @@ function log_sphinx_error($err_type, $err_msg, $query = '')
 {
     $ignore_err_txt = [
         'negation on top level',
-        'Query word length is less than min prefix length'
+        'Query word length is less than min prefix length',
     ];
-    if (!count($ignore_err_txt) || !preg_match('#' . implode('|', $ignore_err_txt) . '#i', $err_msg)) {
+    if (!count($ignore_err_txt) || !preg_match('#'.implode('|', $ignore_err_txt).'#i', $err_msg)) {
         $orig_query = strtr($_REQUEST['nm'], ["\n" => '\n']);
-        bb_log(date('m-d H:i:s') . " | $err_type | $err_msg | $orig_query | $query" . LOG_LF, 'sphinx_error');
+        bb_log(date('m-d H:i:s')." | $err_type | $err_msg | $orig_query | $query".LOG_LF, 'sphinx_error');
     }
 }
 
@@ -1752,7 +1779,7 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
         if (preg_match('#^"[^"]+"$#u', $title_match_sql)) {
             $sphinx->setMatchMode($sphinx::SPH_MATCH_PHRASE);
         }
-        if ($result = $sphinx->query($title_match_sql, $where, $userdata['username'] . ' (' . CLIENT_IP . ')')) {
+        if ($result = $sphinx->query($title_match_sql, $where, $userdata['username'].' ('.CLIENT_IP.')')) {
             if (!empty($result['matches'])) {
                 $where_ids = array_keys($result['matches']);
             }
@@ -1766,17 +1793,17 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
             log_sphinx_error('wrn', $warning, $title_match_sql);
         }
     } elseif (config()->get('search_engine_type') == 'mysql') {
-        $where_forum = ($forum_ids) ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
+        $where_forum = ($forum_ids) ? 'AND forum_id IN('.implode(',', $forum_ids).')' : '';
         $search_bool_mode = (config()->get('allow_search_in_bool_mode')) ? ' IN BOOLEAN MODE' : '';
 
         if ($title_match) {
             $where_id = 'topic_id';
-            $sql = "SELECT topic_id FROM " . BB_TOPICS . "
+            $sql = 'SELECT topic_id FROM '.BB_TOPICS."
 					WHERE MATCH (topic_title) AGAINST ('$title_match_sql'$search_bool_mode)
 					$where_forum";
         } else {
             $where_id = 'post_id';
-            $sql = "SELECT p.post_id FROM " . BB_POSTS . " p, " . BB_POSTS_SEARCH . " ps
+            $sql = 'SELECT p.post_id FROM '.BB_POSTS.' p, '.BB_POSTS_SEARCH." ps
 				WHERE ps.post_id = p.post_id
 					AND MATCH (ps.search_words) AGAINST ('$title_match_sql'$search_bool_mode)
 					$where_forum";
@@ -1793,11 +1820,12 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
 }
 
 /**
- * Encodes text match
+ * Encodes text match.
  *
  * Desc: for a more correct search for words containing a single quote
  *
  * @param $txt
+ *
  * @return array|string|string[]
  */
 function encode_text_match($txt)
@@ -1811,13 +1839,14 @@ function decode_text_match($txt)
 }
 
 /**
- * Create magnet link
+ * Create magnet link.
  *
- * @param string $infohash (xt=urn:btih)
- * @param string $infohash_v2 (xt=urn:btmh:1220)
- * @param string $auth_key (tr)
- * @param string $name (dn)
- * @param int|string $length (xl)
+ * @param string     $infohash    (xt=urn:btih)
+ * @param string     $infohash_v2 (xt=urn:btmh:1220)
+ * @param string     $auth_key    (tr)
+ * @param string     $name        (dn)
+ * @param int|string $length      (xl)
+ *
  * @return string
  */
 function create_magnet(string $infohash, string $infohash_v2, string $auth_key, string $name, int|string $length = 0): string
@@ -1839,22 +1868,22 @@ function create_magnet(string $infohash, string $infohash_v2, string $auth_key, 
     $magnet = 'magnet:?';
 
     if ($v1_support) {
-        $magnet .= 'xt=urn:btih:' . bin2hex($infohash);
+        $magnet .= 'xt=urn:btih:'.bin2hex($infohash);
     }
 
     if ($v2_support) {
         if ($v1_support) {
             $magnet .= '&';
         }
-        $magnet .= 'xt=urn:btmh:1220' . bin2hex($infohash_v2);
+        $magnet .= 'xt=urn:btmh:1220'.bin2hex($infohash_v2);
     }
 
-    $length = (int)$length;
+    $length = (int) $length;
     if ($length > 0) {
-        $magnet .= '&xl=' . $length;
+        $magnet .= '&xl='.$length;
     }
 
-    return '<a title="' . ($v2_support ? $lang['MAGNET_v2'] : $lang['MAGNET']) . '" href="' . $magnet . '&tr=' . urlencode(config()->get('bt_announce_url') . "?" . config()->get('passkey_key') . "=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . ($v2_support ? $images['icon_magnet_v2'] : $images['icon_magnet']) . '" width="12" height="12" border="0" /></a>';
+    return '<a title="'.($v2_support ? $lang['MAGNET_v2'] : $lang['MAGNET']).'" href="'.$magnet.'&tr='.urlencode(config()->get('bt_announce_url').'?'.config()->get('passkey_key')."=$auth_key").'&dn='.urlencode($name).'"><img src="'.($v2_support ? $images['icon_magnet_v2'] : $images['icon_magnet']).'" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
@@ -1862,10 +1891,10 @@ function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null
     global $lang, $template;
 
     $msg = '';
-    $msg .= $topic_id ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . $lang['TOPIC_RETURN'] . '</a></p>' : '';
-    $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . $lang['FORUM_RETURN'] . '</a></p>' : '';
-    $msg .= $group_id ? '<p class="mrg_10"><a href="' . GROUP_URL . $group_id . '">' . $lang['GROUP_RETURN'] . '</a></p>' : '';
-    $msg .= '<p class="mrg_10"><a href="index.php">' . $lang['INDEX_RETURN'] . '</a></p>';
+    $msg .= $topic_id ? '<p class="mrg_10"><a href="'.TOPIC_URL.$topic_id.'">'.$lang['TOPIC_RETURN'].'</a></p>' : '';
+    $msg .= $forum_id ? '<p class="mrg_10"><a href="'.FORUM_URL.$forum_id.'">'.$lang['FORUM_RETURN'].'</a></p>' : '';
+    $msg .= $group_id ? '<p class="mrg_10"><a href="'.GROUP_URL.$group_id.'">'.$lang['GROUP_RETURN'].'</a></p>' : '';
+    $msg .= '<p class="mrg_10"><a href="index.php">'.$lang['INDEX_RETURN'].'</a></p>';
     $template->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
 
@@ -1874,11 +1903,11 @@ function set_pr_die_append_msg($pr_uid)
     global $lang, $template;
 
     $template->assign_var('BB_DIE_APPEND_MSG', '
-		<a href="' . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . $lang['PROFILE_RETURN'] . '</a>
+		<a href="'.PROFILE_URL.$pr_uid.'" onclick="return post2url(this.href, {after_edit: 1});">'.$lang['PROFILE_RETURN'].'</a>
 		<br /><br />
-		<a href="profile.php?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . $lang['PROFILE_EDIT_RETURN'] . '</a>
+		<a href="profile.php?mode=editprofile'.(IS_ADMIN ? '&amp;'.POST_USERS_URL."=$pr_uid" : '').'" onclick="return post2url(this.href, {after_edit: 1});">'.$lang['PROFILE_EDIT_RETURN'].'</a>
 		<br /><br />
-		<a href="index.php">' . $lang['INDEX_RETURN'] . '</a>
+		<a href="index.php">'.$lang['INDEX_RETURN'].'</a>
 	');
 }
 
@@ -1891,26 +1920,27 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
 
     if ($poster_id == BOT_UID) {
         $poster_ip = '0';
-    } elseif ($row = DB()->fetch_row("SELECT user_reg_ip FROM " . BB_USERS . " WHERE user_id = $poster_id")) {
+    } elseif ($row = DB()->fetch_row('SELECT user_reg_ip FROM '.BB_USERS." WHERE user_id = $poster_id")) {
         $poster_ip = $row['user_reg_ip'];
     } else {
         $poster_id = $userdata['user_id'];
         $poster_ip = USER_IP;
     }
 
-    DB()->query("INSERT INTO " . BB_PRIVMSGS . " (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip) VALUES (" . PRIVMSGS_NEW_MAIL . ", '$subject', {$poster_id}, $user_id, " . TIMENOW . ", '$poster_ip')");
+    DB()->query('INSERT INTO '.BB_PRIVMSGS.' (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip) VALUES ('.PRIVMSGS_NEW_MAIL.", '$subject', {$poster_id}, $user_id, ".TIMENOW.", '$poster_ip')");
     $pm_id = DB()->sql_nextid();
 
-    DB()->query("INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_text) VALUES ($pm_id, '$message')");
-    DB()->query("UPDATE " . BB_USERS . " SET user_new_privmsg = user_new_privmsg + 1, user_last_privmsg = " . TIMENOW . ", user_newest_pm_id = $pm_id WHERE user_id = $user_id");
+    DB()->query('INSERT INTO '.BB_PRIVMSGS_TEXT." (privmsgs_text_id, privmsgs_text) VALUES ($pm_id, '$message')");
+    DB()->query('UPDATE '.BB_USERS.' SET user_new_privmsg = user_new_privmsg + 1, user_last_privmsg = '.TIMENOW.", user_newest_pm_id = $pm_id WHERE user_id = $user_id");
 }
 
 /**
- * Generates link to profile
+ * Generates link to profile.
  *
  * @param array $data
- * @param bool $target_blank
- * @param bool $no_link
+ * @param bool  $target_blank
+ * @param bool  $no_link
+ *
  * @return string
  */
 function profile_url(array $data, bool $target_blank = false, bool $no_link = false): string
@@ -1923,7 +1953,7 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
     }
 
     $username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
-    $user_id = !empty($data['user_id']) ? (int)$data['user_id'] : GUEST_UID;
+    $user_id = !empty($data['user_id']) ? (int) $data['user_id'] : GUEST_UID;
     $user_rank = !empty($data['user_rank']) ? $data['user_rank'] : 0;
 
     $title = '';
@@ -1938,19 +1968,19 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
     if (empty($title)) {
         $title = match ($user_id) {
             GUEST_UID => $lang['GUEST'],
-            BOT_UID => $username,
-            default => $lang['USER'],
+            BOT_UID   => $username,
+            default   => $lang['USER'],
         };
     }
 
-    $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
+    $profile = '<span title="'.$title.'" class="'.$style.'">'.$username.'</span>';
     if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && !$no_link) {
         $target_blank = $target_blank ? ' target="_blank" ' : '';
-        $profile = '<a ' . $target_blank . ' href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
+        $profile = '<a '.$target_blank.' href="'.make_url(PROFILE_URL.$user_id).'">'.$profile.'</a>';
     }
 
     if (getBanInfo($user_id)) {
-        return '<s>' . $profile . '</s>';
+        return '<s>'.$profile.'</s>';
     }
 
     return $profile;
@@ -1958,16 +1988,16 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
 
 function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $width = '')
 {
-    $height = $height ? 'height="' . $height . '"' : '';
-    $width = $width ? 'width="' . $width . '"' : '';
+    $height = $height ? 'height="'.$height.'"' : '';
+    $width = $width ? 'width="'.$width.'"' : '';
 
-    $user_avatar = '<img src="' . make_url(config()->get('avatars.display_path') . config()->get('avatars.no_avatar')) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+    $user_avatar = '<img src="'.make_url(config()->get('avatars.display_path').config()->get('avatars.no_avatar')).'" alt="'.$user_id.'" '.$height.' '.$width.' />';
 
     if ($user_id == BOT_UID && config()->get('avatars.bot_avatar')) {
-        $user_avatar = '<img src="' . make_url(config()->get('avatars.display_path') . config()->get('avatars.bot_avatar')) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+        $user_avatar = '<img src="'.make_url(config()->get('avatars.display_path').config()->get('avatars.bot_avatar')).'" alt="'.$user_id.'" '.$height.' '.$width.' />';
     } elseif ($allow_avatar && $ext_id) {
         if (is_file(get_avatar_path($user_id, $ext_id))) {
-            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, config()->get('avatars.display_path'))) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+            $user_avatar = '<img src="'.make_url(get_avatar_path($user_id, $ext_id, config()->get('avatars.display_path'))).'" alt="'.$user_id.'" '.$height.' '.$width.' />';
         }
     }
 
@@ -1975,9 +2005,10 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
 }
 
 /**
- * Returns gender image
+ * Returns gender image.
  *
  * @param int $gender
+ *
  * @return string|null
  */
 function genderImage(int $gender): ?string
@@ -1989,9 +2020,9 @@ function genderImage(int $gender): ?string
     }
 
     return match ($gender) {
-        MALE => '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />',
-        FEMALE => '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />',
-        default => '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />',
+        MALE    => '<img src="'.$images['icon_male'].'" alt="'.$lang['GENDER_SELECT'][MALE].'" title="'.$lang['GENDER_SELECT'][MALE].'" border="0" />',
+        FEMALE  => '<img src="'.$images['icon_female'].'" alt="'.$lang['GENDER_SELECT'][FEMALE].'" title="'.$lang['GENDER_SELECT'][FEMALE].'" border="0" />',
+        default => '<img src="'.$images['icon_nogender'].'" alt="'.$lang['GENDER_SELECT'][NOGENDER].'" title="'.$lang['GENDER_SELECT'][NOGENDER].'" border="0" />',
     };
 }
 
@@ -1999,7 +2030,7 @@ function is_gold($type): string
 {
     global $lang, $images;
 
-    $type = (int)$type;
+    $type = (int) $type;
     $is_gold = '';
 
     if (!config()->get('tracker.gold_silver_enabled')) {
@@ -2008,10 +2039,10 @@ function is_gold($type): string
 
     switch ($type) {
         case TOR_TYPE_GOLD:
-            $is_gold = '<img width="16" height="15" src="' . $images['icon_tor_gold'] . '" alt="' . $lang['GOLD'] . '" title="' . $lang['GOLD'] . '" />&nbsp;';
+            $is_gold = '<img width="16" height="15" src="'.$images['icon_tor_gold'].'" alt="'.$lang['GOLD'].'" title="'.$lang['GOLD'].'" />&nbsp;';
             break;
         case TOR_TYPE_SILVER:
-            $is_gold = '<img width="16" height="15" src="' . $images['icon_tor_silver'] . '" alt="' . $lang['SILVER'] . '" title="' . $lang['SILVER'] . '" />&nbsp;';
+            $is_gold = '<img width="16" height="15" src="'.$images['icon_tor_silver'].'" alt="'.$lang['SILVER'].'" title="'.$lang['SILVER'].'" />&nbsp;';
             break;
         default:
             break;
@@ -2028,7 +2059,7 @@ function update_atom($type, $id)
             break;
 
         case 'topic':
-            $topic_poster = (int)DB()->fetch_row("SELECT topic_poster FROM " . BB_TOPICS . " WHERE topic_id = $id LIMIT 1", 'topic_poster');
+            $topic_poster = (int) DB()->fetch_row('SELECT topic_poster FROM '.BB_TOPICS." WHERE topic_id = $id LIMIT 1", 'topic_poster');
             \TorrentPier\Legacy\Atom::update_user_feed($topic_poster, get_username($topic_poster));
             break;
     }
@@ -2056,17 +2087,18 @@ function hash_search($hash)
         bb_die(sprintf($lang['HASH_INVALID'], $hash));
     }
 
-    if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where")) {
-        redirect(TOPIC_URL . $row['topic_id']);
+    if ($row = DB()->fetch_row('SELECT topic_id FROM '.BB_BT_TORRENTS." $info_hash_where")) {
+        redirect(TOPIC_URL.$row['topic_id']);
     } else {
         bb_die(sprintf($lang['HASH_NOT_FOUND'], $hash));
     }
 }
 
 /**
- * Function for checking captcha answer
+ * Function for checking captcha answer.
  *
  * @param string $mode
+ *
  * @return bool|string
  */
 function bb_captcha(string $mode): bool|string
@@ -2085,12 +2117,12 @@ function bb_captcha(string $mode): bool|string
 
     // Selecting captcha service
     $captchaClasses = [
-        'googleV2' => \TorrentPier\Captcha\GoogleCaptchaV2::class,
-        'googleV3' => \TorrentPier\Captcha\GoogleCaptchaV3::class,
-        'hCaptcha' => \TorrentPier\Captcha\HCaptcha::class,
-        'yandex' => \TorrentPier\Captcha\YandexSmartCaptcha::class,
+        'googleV2'   => \TorrentPier\Captcha\GoogleCaptchaV2::class,
+        'googleV3'   => \TorrentPier\Captcha\GoogleCaptchaV3::class,
+        'hCaptcha'   => \TorrentPier\Captcha\HCaptcha::class,
+        'yandex'     => \TorrentPier\Captcha\YandexSmartCaptcha::class,
         'cloudflare' => \TorrentPier\Captcha\CloudflareTurnstileCaptcha::class,
-        'text' => \TorrentPier\Captcha\TextCaptcha::class
+        'text'       => \TorrentPier\Captcha\TextCaptcha::class,
     ];
     if (!isset($captchaClasses[$settings['service']])) {
         bb_die(sprintf('Captcha service (%s) not supported', $settings['service']));
@@ -2118,10 +2150,11 @@ function clean_tor_dirname($dirname)
 }
 
 /**
- * Get birthday icon
+ * Get birthday icon.
  *
  * @param $user_birthday
  * @param $user_id
+ *
  * @return string
  */
 function user_birthday_icon($user_birthday, $user_id): string
@@ -2132,13 +2165,14 @@ function user_birthday_icon($user_birthday, $user_id): string
     $user_birthday = ($user_id != GUEST_UID && !empty($user_birthday) && $user_birthday != '1900-01-01')
         ? bb_date(strtotime($user_birthday), 'md', false) : false;
 
-    return (config()->get('birthday_enabled') && $current_date == $user_birthday) ? '<img src="' . $images['icon_birthday'] . '" alt="' . $lang['HAPPY_BIRTHDAY'] . '" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />' : '';
+    return (config()->get('birthday_enabled') && $current_date == $user_birthday) ? '<img src="'.$images['icon_birthday'].'" alt="'.$lang['HAPPY_BIRTHDAY'].'" title="'.$lang['HAPPY_BIRTHDAY'].'" border="0" />' : '';
 }
 
 /**
- * Returns information about user ban
+ * Returns information about user ban.
  *
  * @param int|null $userId
+ *
  * @return array|null
  */
 function getBanInfo(?int $userId = null): ?array
@@ -2156,7 +2190,7 @@ function getBanInfo(?int $userId = null): ?array
 }
 
 /**
- * Read updater file
+ * Read updater file.
  *
  * @return array|bool
  */
@@ -2170,10 +2204,11 @@ function readUpdaterFile(): array|bool
 }
 
 /**
- * IP Geolocation API
+ * IP Geolocation API.
  *
  * @param string $ipAddress
- * @param int $port
+ * @param int    $port
+ *
  * @return array
  */
 function infoByIP(string $ipAddress, int $port = 0): array
@@ -2183,7 +2218,7 @@ function infoByIP(string $ipAddress, int $port = 0): array
     }
 
     $ipAddress = \TorrentPier\Helpers\IPHelper::long2ip_extended($ipAddress);
-    $cacheName = hash('xxh128', ($ipAddress . '_' . $port));
+    $cacheName = hash('xxh128', $ipAddress.'_'.$port);
 
     if (!$data = CACHE('bb_ip2countries')->get($cacheName)) {
         $data = [];
@@ -2191,30 +2226,30 @@ function infoByIP(string $ipAddress, int $port = 0): array
         $contextOptions = [];
         if (!empty(config()->get('ip2country_settings.api_token'))) {
             $contextOptions['http'] = [
-                'header' => "Authorization: Bearer " . config()->get('ip2country_settings.api_token') . "\r\n"
+                'header' => 'Authorization: Bearer '.config()->get('ip2country_settings.api_token')."\r\n",
             ];
         }
 
         $context = stream_context_create($contextOptions);
-        $response = file_get_contents(config()->get('ip2country_settings.endpoint') . $ipAddress, context: $context);
+        $response = file_get_contents(config()->get('ip2country_settings.endpoint').$ipAddress, context: $context);
 
         if ($response !== false) {
             $json = json_decode($response, true);
 
             if (is_array($json) && !empty($json)) {
                 $data = [
-                    'ipVersion' => $json['ipVersion'],
-                    'countryCode' => $json['countryCode'],
-                    'continent' => $json['continent'],
-                    'continentCode' => $json['continentCode']
+                    'ipVersion'     => $json['ipVersion'],
+                    'countryCode'   => $json['countryCode'],
+                    'continent'     => $json['continent'],
+                    'continentCode' => $json['continentCode'],
                 ];
             }
         }
 
         if (empty($data)) {
             $data = [
-                'response' => false,
-                'timestamp' => TIMENOW
+                'response'  => false,
+                'timestamp' => TIMENOW,
             ];
         }
         CACHE('bb_ip2countries')->set($cacheName, $data, 1200);

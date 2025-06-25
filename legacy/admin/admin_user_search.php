@@ -1,18 +1,21 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!empty($setmodules)) {
     $module['USERS']['SEARCH'] = basename(__FILE__);
+
     return;
 }
 
-require __DIR__ . '/pagestart.php';
+require __DIR__.'/pagestart.php';
 
 array_deep($_POST, 'trim');
 
@@ -20,7 +23,7 @@ $total_sql = '';
 
 if (!isset($_REQUEST['dosearch'])) {
     $sql = 'SELECT group_id, group_name
-				FROM ' . BB_GROUPS . '
+				FROM '.BB_GROUPS.'
 					WHERE group_single_user = 0
 						ORDER BY group_name ASC';
 
@@ -34,11 +37,11 @@ if (!isset($_REQUEST['dosearch'])) {
         $template->assign_block_vars('groups_exist', []);
 
         while ($row = DB()->sql_fetchrow($result)) {
-            $group_list .= '<option value="' . $row['group_id'] . '">' . strip_tags(htmlspecialchars($row['group_name'])) . '</option>';
+            $group_list .= '<option value="'.$row['group_id'].'">'.strip_tags(htmlspecialchars($row['group_name'])).'</option>';
         }
     }
 
-    $sql = 'SELECT * FROM ' . BB_RANKS . ' ORDER BY rank_title';
+    $sql = 'SELECT * FROM '.BB_RANKS.' ORDER BY rank_title';
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not obtain ranks data');
     }
@@ -48,7 +51,7 @@ if (!isset($_REQUEST['dosearch'])) {
         while ($row = DB()->sql_fetchrow($result)) {
             $rank = $row['rank_title'];
             $rank_id = $row['rank_id'];
-            $rank_select_box .= '<option value="' . $rank_id . '">' . $rank . '</option>';
+            $rank_select_box .= '<option value="'.$rank_id.'">'.$rank.'</option>';
         }
     }
 
@@ -56,7 +59,7 @@ if (!isset($_REQUEST['dosearch'])) {
     $timezone_list = \TorrentPier\Legacy\Common\Select::timezone('', 'timezone_type');
 
     $sql = 'SELECT f.forum_id, f.forum_name, f.forum_parent, c.cat_id, c.cat_title
-				FROM ( ' . BB_FORUMS . ' AS f INNER JOIN ' . BB_CATEGORIES . ' AS c ON c.cat_id = f.cat_id )
+				FROM ( '.BB_FORUMS.' AS f INNER JOIN '.BB_CATEGORIES.' AS c ON c.cat_id = f.cat_id )
 				ORDER BY c.cat_order, f.forum_order ASC';
 
     if (!$result = DB()->sql_query($sql)) {
@@ -72,11 +75,11 @@ if (!isset($_REQUEST['dosearch'])) {
 
         while ($row = DB()->sql_fetchrow($result)) {
             if ($row['cat_id'] != $last_cat_id) {
-                $forums_list .= '<optgroup label="' . htmlCHR($row['cat_title']) . '">';
+                $forums_list .= '<optgroup label="'.htmlCHR($row['cat_title']).'">';
                 $last_cat_id = $row['cat_id'];
             }
 
-            $forums_list .= '<option value="' . $row['forum_id'] . '">' . ($row['forum_parent'] ? HTML_SF_SPACER : '') . htmlCHR($row['forum_name']) . '</option>';
+            $forums_list .= '<option value="'.$row['forum_id'].'">'.($row['forum_parent'] ? HTML_SF_SPACER : '').htmlCHR($row['forum_name']).'</option>';
         }
     }
 
@@ -84,24 +87,24 @@ if (!isset($_REQUEST['dosearch'])) {
     $lastvisited_list = '';
 
     foreach ($lastvisited as $days) {
-        $lastvisited_list .= '<option value="' . $days . '">' . delta_time((TIMENOW - 86400 * $days), TIMENOW, 'days') . '</option>';
+        $lastvisited_list .= '<option value="'.$days.'">'.delta_time(TIMENOW - 86400 * $days, TIMENOW, 'days').'</option>';
     }
 
     $template->assign_vars([
         'TPL_ADMIN_USER_SEARCH_MAIN' => true,
 
-        'YEAR' => date('Y'),
-        'MONTH' => date('m'),
-        'DAY' => date('d'),
-        'GROUP_LIST' => $group_list,
-        'RANK_SELECT_BOX' => $rank_select_box,
-        'LANGUAGE_LIST' => $language_list,
-        'TIMEZONE_LIST' => $timezone_list,
-        'FORUMS_LIST' => $forums_list,
+        'YEAR'             => date('Y'),
+        'MONTH'            => date('m'),
+        'DAY'              => date('d'),
+        'GROUP_LIST'       => $group_list,
+        'RANK_SELECT_BOX'  => $rank_select_box,
+        'LANGUAGE_LIST'    => $language_list,
+        'TIMEZONE_LIST'    => $timezone_list,
+        'FORUMS_LIST'      => $forums_list,
         'LASTVISITED_LIST' => $lastvisited_list,
 
-        'U_SEARCH_USER' => BB_ROOT . 'search.php?mode=searchuser',
-        'S_SEARCH_ACTION' => 'admin_user_search.php'
+        'U_SEARCH_USER'   => BB_ROOT.'search.php?mode=searchuser',
+        'S_SEARCH_ACTION' => 'admin_user_search.php',
     ]);
 } else {
     $mode = '';
@@ -240,7 +243,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
     $base_url = 'admin_user_search.php?dosearch=true';
 
-    $select_sql = 'SELECT u.user_id, u.username, u.user_rank, u.user_email, u.user_posts, u.user_regdate, u.user_level, u.user_active, u.user_lastvisit FROM ' . BB_USERS . ' AS u';
+    $select_sql = 'SELECT u.user_id, u.username, u.user_rank, u.user_email, u.user_posts, u.user_regdate, u.user_level, u.user_active, u.user_lastvisit FROM '.BB_USERS.' AS u';
 
     $lower_b = 'LOWER(';
     $lower_e = ')';
@@ -248,7 +251,7 @@ if (!isset($_REQUEST['dosearch'])) {
     // validate data & prepare sql
     switch ($mode) {
         case 'search_username':
-            $base_url .= '&search_username=true&username=' . rawurlencode(stripslashes($username));
+            $base_url .= '&search_username=true&username='.rawurlencode(stripslashes($username));
 
             $text = sprintf($lang['SEARCH_FOR_USERNAME'], strip_tags(htmlspecialchars(stripslashes($username))));
 
@@ -263,12 +266,12 @@ if (!isset($_REQUEST['dosearch'])) {
                 bb_die($lang['SEARCH_INVALID_USERNAME']);
             }
 
-            $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE {$lower_b}username{$lower_e} $op '" . DB()->escape($username) . "' AND user_id <> " . GUEST_UID;
-            $select_sql .= "	WHERE {$lower_b}u.username{$lower_e} $op '" . DB()->escape($username) . "' AND u.user_id <> " . GUEST_UID;
+            $total_sql .= 'SELECT COUNT(user_id) AS total FROM '.BB_USERS." WHERE {$lower_b}username{$lower_e} $op '".DB()->escape($username)."' AND user_id <> ".GUEST_UID;
+            $select_sql .= "	WHERE {$lower_b}u.username{$lower_e} $op '".DB()->escape($username)."' AND u.user_id <> ".GUEST_UID;
             break;
 
         case 'search_email':
-            $base_url .= '&search_email=true&email=' . rawurlencode(stripslashes($email));
+            $base_url .= '&search_email=true&email='.rawurlencode(stripslashes($email));
 
             $text = sprintf($lang['SEARCH_FOR_EMAIL'], strip_tags(htmlspecialchars(stripslashes($email))));
 
@@ -283,12 +286,12 @@ if (!isset($_REQUEST['dosearch'])) {
                 bb_die($lang['SEARCH_INVALID_EMAIL']);
             }
 
-            $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE {$lower_b}user_email{$lower_e} $op '" . DB()->escape($email) . "' AND user_id <> " . GUEST_UID;
-            $select_sql .= "	WHERE {$lower_b}u.user_email{$lower_e} $op '" . DB()->escape($email) . "' AND u.user_id <> " . GUEST_UID;
+            $total_sql .= 'SELECT COUNT(user_id) AS total FROM '.BB_USERS." WHERE {$lower_b}user_email{$lower_e} $op '".DB()->escape($email)."' AND user_id <> ".GUEST_UID;
+            $select_sql .= "	WHERE {$lower_b}u.user_email{$lower_e} $op '".DB()->escape($email)."' AND u.user_id <> ".GUEST_UID;
             break;
 
         case 'search_ip':
-            $base_url .= '&search_ip=true&ip_address=' . rawurlencode(stripslashes($ip_address));
+            $base_url .= '&search_ip=true&ip_address='.rawurlencode(stripslashes($ip_address));
 
             $ip_address = trim($ip_address);
 
@@ -312,7 +315,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $where_sql = '';
             $where_sql .= ($ip_in_sql != '') ? "poster_ip IN ($ip_in_sql)" : '';
-            $where_sql .= ($ip_like_sql != '') ? ($where_sql != '') ? " OR $ip_like_sql" : (string)$ip_like_sql : '';
+            $where_sql .= ($ip_like_sql != '') ? ($where_sql != '') ? " OR $ip_like_sql" : (string) $ip_like_sql : '';
 
             if (!$where_sql) {
                 bb_die('invalid request');
@@ -321,7 +324,7 @@ if (!isset($_REQUEST['dosearch'])) {
             // start search
             $no_result_search = false;
             $ip_users_sql = '';
-            $sql = 'SELECT poster_id FROM ' . BB_POSTS . ' WHERE poster_id <> ' . GUEST_UID . " AND ($where_sql) GROUP BY poster_id";
+            $sql = 'SELECT poster_id FROM '.BB_POSTS.' WHERE poster_id <> '.GUEST_UID." AND ($where_sql) GROUP BY poster_id";
 
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not count users #1');
@@ -334,13 +337,13 @@ if (!isset($_REQUEST['dosearch'])) {
                 $total_sql = null;
                 $ip_users_sql = '';
                 while ($row = DB()->sql_fetchrow($result)) {
-                    $ip_users_sql .= ($ip_users_sql == '') ? $row['poster_id'] : ', ' . $row['poster_id'];
+                    $ip_users_sql .= ($ip_users_sql == '') ? $row['poster_id'] : ', '.$row['poster_id'];
                 }
             }
             $where_sql = '';
             $where_sql .= ($ip_in_sql != '') ? "user_last_ip IN ($ip_in_sql)" : '';
-            $where_sql .= ($ip_like_sql_flylast != '') ? ($where_sql != '') ? " OR $ip_like_sql_flylast" : (string)$ip_like_sql_flylast : '';
-            $sql = 'SELECT user_id FROM ' . BB_USERS . ' WHERE user_id <> ' . GUEST_UID . " AND ($where_sql) GROUP BY user_id";
+            $where_sql .= ($ip_like_sql_flylast != '') ? ($where_sql != '') ? " OR $ip_like_sql_flylast" : (string) $ip_like_sql_flylast : '';
+            $sql = 'SELECT user_id FROM '.BB_USERS.' WHERE user_id <> '.GUEST_UID." AND ($where_sql) GROUP BY user_id";
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not count users #2');
             }
@@ -351,13 +354,13 @@ if (!isset($_REQUEST['dosearch'])) {
                 $total_pages['total'] = DB()->num_rows($result);
                 $total_sql = null;
                 while ($row = DB()->sql_fetchrow($result)) {
-                    $ip_users_sql .= ($ip_users_sql == '') ? $row['user_id'] : ', ' . $row['user_id'];
+                    $ip_users_sql .= ($ip_users_sql == '') ? $row['user_id'] : ', '.$row['user_id'];
                 }
             }
             $where_sql = '';
             $where_sql .= ($ip_in_sql != '') ? "user_reg_ip IN ($ip_in_sql)" : '';
-            $where_sql .= ($ip_like_sql_flyreg != '') ? ($where_sql != '') ? " OR $ip_like_sql_flyreg" : (string)$ip_like_sql_flyreg : '';
-            $sql = 'SELECT user_id FROM ' . BB_USERS . ' WHERE user_id <> ' . GUEST_UID . " AND ($where_sql) GROUP BY user_id";
+            $where_sql .= ($ip_like_sql_flyreg != '') ? ($where_sql != '') ? " OR $ip_like_sql_flyreg" : (string) $ip_like_sql_flyreg : '';
+            $sql = 'SELECT user_id FROM '.BB_USERS.' WHERE user_id <> '.GUEST_UID." AND ($where_sql) GROUP BY user_id";
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not count users #3');
             }
@@ -368,7 +371,7 @@ if (!isset($_REQUEST['dosearch'])) {
                 $total_pages['total'] = DB()->num_rows($result);
                 $total_sql = null;
                 while ($row = DB()->sql_fetchrow($result)) {
-                    $ip_users_sql .= ($ip_users_sql == '') ? $row['user_id'] : ', ' . $row['user_id'];
+                    $ip_users_sql .= ($ip_users_sql == '') ? $row['user_id'] : ', '.$row['user_id'];
                 }
             }
             if ($no_result_search == true) {
@@ -379,7 +382,7 @@ if (!isset($_REQUEST['dosearch'])) {
             break;
 
         case 'search_joindate':
-            $base_url .= '&search_joindate=true&date_type=' . rawurlencode($date_type) . '&date_day=' . rawurlencode($date_day) . '&date_month=' . rawurlencode($date_month) . '&date_year=' . rawurlencode(stripslashes($date_year));
+            $base_url .= '&search_joindate=true&date_type='.rawurlencode($date_type).'&date_day='.rawurlencode($date_day).'&date_month='.rawurlencode($date_month).'&date_year='.rawurlencode(stripslashes($date_year));
 
             $date_type = strtolower(trim($date_type));
 
@@ -387,19 +390,19 @@ if (!isset($_REQUEST['dosearch'])) {
                 bb_die($lang['SEARCH_INVALID_DATE']);
             }
 
-            $date_day = (int)$date_day;
+            $date_day = (int) $date_day;
 
             if (!preg_match('/^([1-9]|[0-2][0-9]|3[0-1])$/', $date_day)) {
                 bb_die($lang['SEARCH_INVALID_DAY']);
             }
 
-            $date_month = (int)$date_month;
+            $date_month = (int) $date_month;
 
             if (!preg_match('/^(0?[1-9]|1[0-2])$/', $date_month)) {
                 bb_die($lang['SEARCH_INVALID_MONTH']);
             }
 
-            $date_year = (int)$date_year;
+            $date_year = (int) $date_year;
 
             if (!preg_match('/^(20[0-9]{2}|19[0-9]{2})$/', $date_year)) {
                 bb_die($lang['SEARCH_INVALID_YEAR']);
@@ -415,20 +418,20 @@ if (!isset($_REQUEST['dosearch'])) {
                 $arg = '>';
             }
 
-            $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE user_regdate $arg $time AND user_id <> " . GUEST_UID;
-            $select_sql .= "	WHERE u.user_regdate $arg $time AND u.user_id <> " . GUEST_UID;
+            $total_sql .= 'SELECT COUNT(user_id) AS total FROM '.BB_USERS." WHERE user_regdate $arg $time AND user_id <> ".GUEST_UID;
+            $select_sql .= "	WHERE u.user_regdate $arg $time AND u.user_id <> ".GUEST_UID;
             break;
 
         case 'search_group':
-            $group_id = (int)$group_id;
+            $group_id = (int) $group_id;
 
-            $base_url .= '&search_group=true&group_id=' . rawurlencode($group_id);
+            $base_url .= '&search_group=true&group_id='.rawurlencode($group_id);
 
             if (!$group_id) {
                 bb_die($lang['SEARCH_INVALID_GROUP']);
             }
 
-            $sql = 'SELECT group_name FROM ' . BB_GROUPS . " WHERE group_id = $group_id AND group_single_user = 0";
+            $sql = 'SELECT group_name FROM '.BB_GROUPS." WHERE group_id = $group_id AND group_single_user = 0";
 
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not select group data #2');
@@ -443,27 +446,27 @@ if (!isset($_REQUEST['dosearch'])) {
             $text = sprintf($lang['SEARCH_FOR_GROUP'], strip_tags(htmlspecialchars($group_name['group_name'])));
 
             $total_sql .= 'SELECT COUNT(u.user_id) AS total
-							FROM ' . BB_USERS . ' AS u, ' . BB_USER_GROUP . " AS ug
+							FROM '.BB_USERS.' AS u, '.BB_USER_GROUP." AS ug
 								WHERE u.user_id = ug.user_id
 										AND ug.group_id = $group_id
-										AND u.user_id <> " . GUEST_UID;
+										AND u.user_id <> ".GUEST_UID;
 
-            $select_sql .= ', ' . BB_USER_GROUP . " AS ug
+            $select_sql .= ', '.BB_USER_GROUP." AS ug
 								WHERE u.user_id = ug.user_id
 										AND ug.group_id = $group_id
-										AND u.user_id <> " . GUEST_UID;
+										AND u.user_id <> ".GUEST_UID;
             break;
 
         case 'search_rank':
-            $rank_id = (int)$rank_id;
+            $rank_id = (int) $rank_id;
 
-            $base_url .= '&search_rank=true&rank_id=' . rawurlencode($rank_id);
+            $base_url .= '&search_rank=true&rank_id='.rawurlencode($rank_id);
 
             if (!$rank_id) {
                 bb_die($lang['SEARCH_INVALID_RANK']);
             }
 
-            $sql = 'SELECT rank_title FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
+            $sql = 'SELECT rank_title FROM '.BB_RANKS." WHERE rank_id = $rank_id";
 
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not select rank data');
@@ -478,54 +481,54 @@ if (!isset($_REQUEST['dosearch'])) {
             $text = sprintf($lang['SEARCH_FOR_RANK'], strip_tags(htmlspecialchars($rank_title['rank_title'])));
 
             $total_sql .= 'SELECT COUNT(user_id) AS total
-							FROM ' . BB_USERS . "
+							FROM '.BB_USERS."
 								WHERE user_rank = $rank_id
-									AND user_id <> " . GUEST_UID;
+									AND user_id <> ".GUEST_UID;
 
             $select_sql .= "	WHERE u.user_rank = $rank_id
-									AND u.user_id <> " . GUEST_UID;
+									AND u.user_id <> ".GUEST_UID;
             break;
 
         case 'search_postcount':
             $postcount_type = strtolower(trim($postcount_type));
             $postcount_value = strtolower(trim($postcount_value));
 
-            $base_url .= '&search_postcount=true&postcount_type=' . rawurlencode($postcount_type) . '&postcount_value=' . rawurlencode(stripslashes($postcount_value));
+            $base_url .= '&search_postcount=true&postcount_type='.rawurlencode($postcount_type).'&postcount_value='.rawurlencode(stripslashes($postcount_value));
 
             switch ($postcount_type) {
                 case 'greater':
-                    $postcount_value = (int)$postcount_value;
+                    $postcount_value = (int) $postcount_value;
 
                     $text = sprintf($lang['SEARCH_FOR_POSTCOUNT_GREATER'], $postcount_value);
 
                     $total_sql .= 'SELECT COUNT(user_id) AS total
-									FROM ' . BB_USERS . "
+									FROM '.BB_USERS."
 										WHERE user_posts > $postcount_value
-											AND user_id <> " . GUEST_UID;
+											AND user_id <> ".GUEST_UID;
 
                     $select_sql .= "	WHERE u.user_posts > $postcount_value
-											AND u.user_id <> " . GUEST_UID;
+											AND u.user_id <> ".GUEST_UID;
                     break;
                 case 'lesser':
-                    $postcount_value = (int)$postcount_value;
+                    $postcount_value = (int) $postcount_value;
 
                     $text = sprintf($lang['SEARCH_FOR_POSTCOUNT_LESSER'], $postcount_value);
 
                     $total_sql .= 'SELECT COUNT(user_id) AS total
-									FROM ' . BB_USERS . "
+									FROM '.BB_USERS."
 										WHERE user_posts < $postcount_value
-											AND user_id <> " . GUEST_UID;
+											AND user_id <> ".GUEST_UID;
 
                     $select_sql .= "	WHERE u.user_posts < $postcount_value
-											AND u.user_id <> " . GUEST_UID;
+											AND u.user_id <> ".GUEST_UID;
                     break;
                 case 'equals':
                     // looking for a -
                     if (str_contains($postcount_value, '-')) {
                         $range = preg_split('/[-\s]+/', $postcount_value);
 
-                        $range_begin = (int)$range[0];
-                        $range_end = (int)$range[1];
+                        $range_begin = (int) $range[0];
+                        $range_end = (int) $range[1];
 
                         if ($range_begin > $range_end) {
                             bb_die($lang['SEARCH_INVALID_POSTCOUNT']);
@@ -534,26 +537,26 @@ if (!isset($_REQUEST['dosearch'])) {
                         $text = sprintf($lang['SEARCH_FOR_POSTCOUNT_RANGE'], $range_begin, $range_end);
 
                         $total_sql .= 'SELECT COUNT(user_id) AS total
-										FROM ' . BB_USERS . "
+										FROM '.BB_USERS."
 											WHERE user_posts >= $range_begin
 												AND user_posts <= $range_end
-												AND user_id <> " . GUEST_UID;
+												AND user_id <> ".GUEST_UID;
 
                         $select_sql .= "	WHERE u.user_posts >= $range_begin
 												AND u.user_posts <= $range_end
-												AND u.user_id <> " . GUEST_UID;
+												AND u.user_id <> ".GUEST_UID;
                     } else {
-                        $postcount_value = (int)$postcount_value;
+                        $postcount_value = (int) $postcount_value;
 
                         $text = sprintf($lang['SEARCH_FOR_POSTCOUNT_EQUALS'], $postcount_value);
 
                         $total_sql .= 'SELECT COUNT(user_id) AS total
-										FROM ' . BB_USERS . "
+										FROM '.BB_USERS."
 											WHERE user_posts = $postcount_value
-												AND user_id <> " . GUEST_UID;
+												AND user_id <> ".GUEST_UID;
 
                         $select_sql .= "	WHERE u.user_posts = $postcount_value
-												AND u.user_id <> " . GUEST_UID;
+												AND u.user_id <> ".GUEST_UID;
                     }
                     break;
                 default:
@@ -562,7 +565,7 @@ if (!isset($_REQUEST['dosearch'])) {
             break;
 
         case 'search_userfield':
-            $base_url .= '&search_userfield=true&userfield_type=' . rawurlencode($userfield_type) . '&userfield_value=' . rawurlencode(stripslashes($userfield_value));
+            $base_url .= '&search_userfield=true&userfield_type='.rawurlencode($userfield_type).'&userfield_value='.rawurlencode(stripslashes($userfield_value));
 
             $text = strip_tags(htmlspecialchars(stripslashes($userfield_value)));
 
@@ -613,44 +616,44 @@ if (!isset($_REQUEST['dosearch'])) {
             }
 
             $total_sql .= 'SELECT COUNT(user_id) AS total
-							FROM ' . BB_USERS . "
-								WHERE {$lower_b}$field{$lower_e} $op '" . DB()->escape($userfield_value) . "'
-									AND user_id <> " . GUEST_UID;
+							FROM '.BB_USERS."
+								WHERE {$lower_b}$field{$lower_e} $op '".DB()->escape($userfield_value)."'
+									AND user_id <> ".GUEST_UID;
 
-            $select_sql .= "	WHERE {$lower_b}u.$field{$lower_e} $op '" . DB()->escape($userfield_value) . "'
-									AND u.user_id <> " . GUEST_UID;
+            $select_sql .= "	WHERE {$lower_b}u.$field{$lower_e} $op '".DB()->escape($userfield_value)."'
+									AND u.user_id <> ".GUEST_UID;
             break;
 
         case 'search_lastvisited':
             $lastvisited_type = strtolower(trim($lastvisited_type));
-            $lastvisited_days = (int)$lastvisited_days;
+            $lastvisited_days = (int) $lastvisited_days;
 
-            $base_url .= '&search_lastvisited=true&lastvisited_type=' . rawurlencode(stripslashes($lastvisited_type)) . '&lastvisited_days=' . rawurlencode($lastvisited_days);
+            $base_url .= '&search_lastvisited=true&lastvisited_type='.rawurlencode(stripslashes($lastvisited_type)).'&lastvisited_days='.rawurlencode($lastvisited_days);
 
             $lastvisited_seconds = (TIMENOW - ((($lastvisited_days * 24) * 60) * 60));
 
             switch ($lastvisited_type) {
                 case 'in':
-                    $text = sprintf($lang['SEARCH_FOR_LASTVISITED_INTHELAST'], delta_time((TIMENOW - 86400 * $lastvisited_days), TIMENOW, 'days'));
+                    $text = sprintf($lang['SEARCH_FOR_LASTVISITED_INTHELAST'], delta_time(TIMENOW - 86400 * $lastvisited_days, TIMENOW, 'days'));
 
                     $total_sql .= 'SELECT COUNT(user_id) AS total
-									FROM ' . BB_USERS . "
+									FROM '.BB_USERS."
 										WHERE user_lastvisit >= $lastvisited_seconds
-											AND user_id <> " . GUEST_UID;
+											AND user_id <> ".GUEST_UID;
 
                     $select_sql .= "	WHERE u.user_lastvisit >= $lastvisited_seconds
-											AND u.user_id <> " . GUEST_UID;
+											AND u.user_id <> ".GUEST_UID;
                     break;
                 case 'after':
-                    $text = sprintf($lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'], delta_time((TIMENOW - 86400 * $lastvisited_days), TIMENOW, 'days'));
+                    $text = sprintf($lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'], delta_time(TIMENOW - 86400 * $lastvisited_days, TIMENOW, 'days'));
 
                     $total_sql .= 'SELECT COUNT(user_id) AS total
-									FROM ' . BB_USERS . "
+									FROM '.BB_USERS."
 										WHERE user_lastvisit < $lastvisited_seconds
-											AND user_id <> " . GUEST_UID;
+											AND user_id <> ".GUEST_UID;
 
                     $select_sql .= "	WHERE u.user_lastvisit < $lastvisited_seconds
-											AND u.user_id <> " . GUEST_UID;
+											AND u.user_id <> ".GUEST_UID;
 
                     break;
                 default:
@@ -659,7 +662,7 @@ if (!isset($_REQUEST['dosearch'])) {
             break;
 
         case 'search_language':
-            $base_url .= '&search_language=true&language_type=' . rawurlencode(stripslashes($language_type));
+            $base_url .= '&search_language=true&language_type='.rawurlencode(stripslashes($language_type));
 
             $language_type = strtolower(trim(stripslashes($language_type)));
 
@@ -670,34 +673,34 @@ if (!isset($_REQUEST['dosearch'])) {
             $text = sprintf($lang['SEARCH_FOR_LANGUAGE'], strip_tags(htmlspecialchars($language_type)));
 
             $total_sql .= 'SELECT COUNT(user_id) AS total
-							FROM ' . BB_USERS . "
-								WHERE user_lang = '" . DB()->escape($language_type) . "'
-									AND user_id <> " . GUEST_UID;
+							FROM '.BB_USERS."
+								WHERE user_lang = '".DB()->escape($language_type)."'
+									AND user_id <> ".GUEST_UID;
 
-            $select_sql .= "	WHERE u.user_lang = '" . DB()->escape($language_type) . "'
-									AND u.user_id <> " . GUEST_UID;
+            $select_sql .= "	WHERE u.user_lang = '".DB()->escape($language_type)."'
+									AND u.user_id <> ".GUEST_UID;
             break;
 
         case 'search_timezone':
-            $base_url .= '&search_timezone=true&timezone_type=' . rawurlencode(stripslashes($timezone_type));
+            $base_url .= '&search_timezone=true&timezone_type='.rawurlencode(stripslashes($timezone_type));
             $text = sprintf($lang['SEARCH_FOR_TIMEZONE'], strip_tags(htmlspecialchars(stripslashes($timezone_type))));
 
-            $timezone_type = (int)$timezone_type;
+            $timezone_type = (int) $timezone_type;
 
             $total_sql .= 'SELECT COUNT(user_id) AS total
-							FROM ' . BB_USERS . "
+							FROM '.BB_USERS."
 								WHERE user_timezone = $timezone_type
-									AND user_id <> " . GUEST_UID;
+									AND user_id <> ".GUEST_UID;
 
             $select_sql .= "	WHERE u.user_timezone = $timezone_type
-									AND u.user_id <> " . GUEST_UID;
+									AND u.user_id <> ".GUEST_UID;
             break;
 
         case 'search_moderators':
-            $base_url .= '&search_moderators=true&moderators_forum=' . rawurlencode(stripslashes($moderators_forum));
-            $moderators_forum = (int)$moderators_forum;
+            $base_url .= '&search_moderators=true&moderators_forum='.rawurlencode(stripslashes($moderators_forum));
+            $moderators_forum = (int) $moderators_forum;
 
-            $sql = 'SELECT forum_name FROM ' . BB_FORUMS . ' WHERE forum_id = ' . $moderators_forum;
+            $sql = 'SELECT forum_name FROM '.BB_FORUMS.' WHERE forum_id = '.$moderators_forum;
 
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not select forum data');
@@ -712,21 +715,21 @@ if (!isset($_REQUEST['dosearch'])) {
             $text = sprintf($lang['SEARCH_FOR_MODERATORS'], htmlCHR($forum_name['forum_name']));
 
             $total_sql .= 'SELECT COUNT(DISTINCT u.user_id) AS total
-							FROM ' . BB_USERS . ' AS u, ' . BB_GROUPS . ' AS g, ' . BB_USER_GROUP . ' AS ug, ' . BB_AUTH_ACCESS . ' AS aa
+							FROM '.BB_USERS.' AS u, '.BB_GROUPS.' AS g, '.BB_USER_GROUP.' AS ug, '.BB_AUTH_ACCESS.' AS aa
 								WHERE u.user_id = ug.user_id
 									AND ug.group_id = g.group_id
 									AND	g.group_id = aa.group_id
-									AND aa.forum_id = ' . $moderators_forum . '
-									AND aa.forum_perm & ' . BF_AUTH_MOD . '
-									AND u.user_id <> ' . GUEST_UID;
+									AND aa.forum_id = '.$moderators_forum.'
+									AND aa.forum_perm & '.BF_AUTH_MOD.'
+									AND u.user_id <> '.GUEST_UID;
 
-            $select_sql .= ', ' . BB_GROUPS . ' AS g, ' . BB_USER_GROUP . ' AS ug, ' . BB_AUTH_ACCESS . ' AS aa
+            $select_sql .= ', '.BB_GROUPS.' AS g, '.BB_USER_GROUP.' AS ug, '.BB_AUTH_ACCESS.' AS aa
 								WHERE u.user_id = ug.user_id
 									AND ug.group_id = g.group_id
 									AND	g.group_id = aa.group_id
-									AND aa.forum_id = ' . $moderators_forum . '
-									AND aa.forum_perm & ' . BF_AUTH_MOD . '
-									AND u.user_id <> ' . GUEST_UID . '
+									AND aa.forum_id = '.$moderators_forum.'
+									AND aa.forum_perm & '.BF_AUTH_MOD.'
+									AND u.user_id <> '.GUEST_UID.'
 								GROUP BY u.user_id, u.username, u.user_email, u.user_posts, u.user_regdate, u.user_level, u.user_active, u.user_lastvisit';
             break;
 
@@ -734,54 +737,54 @@ if (!isset($_REQUEST['dosearch'])) {
         default:
             $misc = strtolower(trim($misc));
 
-            $base_url .= '&search_misc=true&misc=' . rawurlencode(stripslashes($misc));
+            $base_url .= '&search_misc=true&misc='.rawurlencode(stripslashes($misc));
 
             switch ($misc) {
                 case 'admins':
                     $text = $lang['SEARCH_FOR_ADMINS'];
 
                     $total_sql .= 'SELECT COUNT(user_id) AS total
-									FROM ' . BB_USERS . '
-										WHERE user_level = ' . ADMIN . '
-											AND user_id <> ' . GUEST_UID;
+									FROM '.BB_USERS.'
+										WHERE user_level = '.ADMIN.'
+											AND user_id <> '.GUEST_UID;
 
-                    $select_sql .= '	WHERE u.user_level = ' . ADMIN . '
-											AND u.user_id <> ' . GUEST_UID;
+                    $select_sql .= '	WHERE u.user_level = '.ADMIN.'
+											AND u.user_id <> '.GUEST_UID;
                     break;
                 case 'mods':
                     $text = $lang['SEARCH_FOR_MODS'];
 
                     $total_sql .= 'SELECT COUNT(user_id) AS total
-									FROM ' . BB_USERS . '
-										WHERE user_level = ' . MOD . '
-											AND user_id <> ' . GUEST_UID;
+									FROM '.BB_USERS.'
+										WHERE user_level = '.MOD.'
+											AND user_id <> '.GUEST_UID;
 
-                    $select_sql .= '	WHERE u.user_level = ' . MOD . '
-											AND u.user_id <> ' . GUEST_UID;
+                    $select_sql .= '	WHERE u.user_level = '.MOD.'
+											AND u.user_id <> '.GUEST_UID;
                     break;
                 case 'banned':
                     $text = $lang['SEARCH_FOR_BANNED'];
 
                     $total_sql .= 'SELECT COUNT(u.user_id) AS total
-									FROM ' . BB_USERS . ' AS u, ' . BB_BANLIST . ' AS b
+									FROM '.BB_USERS.' AS u, '.BB_BANLIST.' AS b
 										WHERE u.user_id = b.ban_userid
-											AND u.user_id <> ' . GUEST_UID;
+											AND u.user_id <> '.GUEST_UID;
 
-                    $select_sql .= ', ' . BB_BANLIST . ' AS b
+                    $select_sql .= ', '.BB_BANLIST.' AS b
 										WHERE u.user_id = b.ban_userid
-											AND u.user_id <> ' . GUEST_UID;
+											AND u.user_id <> '.GUEST_UID;
 
                     break;
                 case 'disabled':
                     $text = $lang['SEARCH_FOR_DISABLED'];
 
                     $total_sql .= 'SELECT COUNT(user_id) AS total
-									FROM ' . BB_USERS . '
+									FROM '.BB_USERS.'
 										WHERE user_active = 0
-											AND user_id <> ' . GUEST_UID;
+											AND user_id <> '.GUEST_UID;
 
                     $select_sql .= '	WHERE u.user_active = 0
-											AND u.user_id <> ' . GUEST_UID;
+											AND u.user_id <> '.GUEST_UID;
 
                     break;
                 default:
@@ -832,7 +835,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
     $select_sql .= " $order";
 
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 0;
+    $page = isset($_GET['page']) ? (int) $_GET['page'] : 0;
 
     if ($page < 1) {
         $page = 1;
@@ -844,7 +847,7 @@ if (!isset($_REQUEST['dosearch'])) {
         $offset = (($page - 1) * config()->get('topics_per_page'));
     }
 
-    $limit = "LIMIT $offset, " . config()->get('topics_per_page');
+    $limit = "LIMIT $offset, ".config()->get('topics_per_page');
 
     $select_sql .= " $limit";
 
@@ -864,28 +867,28 @@ if (!isset($_REQUEST['dosearch'])) {
     $pagination = '';
 
     if ($page > 1) {
-        $pagination .= '<a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page - 1) . '">' . $lang['BACK'] . '</a>';
+        $pagination .= '<a href="'.$base_url.'&sort='.$sort.'&order='.$order.'&page='.($page - 1).'">'.$lang['BACK'].'</a>';
     }
     if ($page < $num_pages) {
-        $pagination .= ($pagination == '') ? '<a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page + 1) . '">' . $lang['NEXT'] . '</a>' : ' | <a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page + 1) . '">' . $lang['NEXT'] . '</a>';
+        $pagination .= ($pagination == '') ? '<a href="'.$base_url.'&sort='.$sort.'&order='.$order.'&page='.($page + 1).'">'.$lang['NEXT'].'</a>' : ' | <a href="'.$base_url.'&sort='.$sort.'&order='.$order.'&page='.($page + 1).'">'.$lang['NEXT'].'</a>';
     }
     if ($num_pages > 2) {
-        $pagination .= '&nbsp;&nbsp;<input type="text" name="page" maxlength="5" size="2" class="post" />&nbsp;<input type="submit" name="submit" value="' . $lang['GO'] . '" class="post" />';
+        $pagination .= '&nbsp;&nbsp;<input type="text" name="page" maxlength="5" size="2" class="post" />&nbsp;<input type="submit" name="submit" value="'.$lang['GO'].'" class="post" />';
     }
     $template->assign_vars([
         'TPL_ADMIN_USER_SEARCH_RESULTS' => true,
 
         'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], $page, $num_pages),
-        'PAGINATION' => $pagination,
-        'NEW_SEARCH' => sprintf($lang['SEARCH_USERS_NEW'], $text, $total_pages['total'], 'admin_user_search.php'),
+        'PAGINATION'  => $pagination,
+        'NEW_SEARCH'  => sprintf($lang['SEARCH_USERS_NEW'], $text, $total_pages['total'], 'admin_user_search.php'),
 
-        'U_USERNAME' => ($sort == 'username') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=username&order=$order",
-        'U_EMAIL' => ($sort == 'user_email') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=user_email&order=$order",
-        'U_POSTS' => ($sort == 'posts') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=posts&order=$order",
-        'U_JOINDATE' => ($sort == 'regdate') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=regdate&order=$order",
+        'U_USERNAME'  => ($sort == 'username') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=username&order=$order",
+        'U_EMAIL'     => ($sort == 'user_email') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=user_email&order=$order",
+        'U_POSTS'     => ($sort == 'posts') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=posts&order=$order",
+        'U_JOINDATE'  => ($sort == 'regdate') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=regdate&order=$order",
         'U_LASTVISIT' => ($sort == 'lastvisit') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=lastvisit&order=$order",
 
-        'S_POST_ACTION' => "$base_url&sort=$sort&order=$order"
+        'S_POST_ACTION' => "$base_url&sort=$sort&order=$order",
     ]);
 
     if (!$result = DB()->sql_query($select_sql)) {
@@ -897,10 +900,10 @@ if (!isset($_REQUEST['dosearch'])) {
     $users_sql = '';
 
     foreach ($rowset as $array) {
-        $users_sql .= ($users_sql == '') ? $array['user_id'] : ', ' . $array['user_id'];
+        $users_sql .= ($users_sql == '') ? $array['user_id'] : ', '.$array['user_id'];
     }
 
-    $sql = 'SELECT ban_userid AS user_id FROM ' . BB_BANLIST . " WHERE ban_userid IN ($users_sql)";
+    $sql = 'SELECT ban_userid AS user_id FROM '.BB_BANLIST." WHERE ban_userid IN ($users_sql)";
 
     if (!$result = DB()->sql_query($sql)) {
         bb_die('Could not select banned data');
@@ -919,17 +922,17 @@ if (!isset($_REQUEST['dosearch'])) {
 
         $template->assign_block_vars('userrow', [
             'ROW_CLASS' => $row_class,
-            'USER' => profile_url($rowset[$i], true),
-            'EMAIL' => $rowset[$i]['user_email'],
-            'JOINDATE' => bb_date($rowset[$i]['user_regdate']),
+            'USER'      => profile_url($rowset[$i], true),
+            'EMAIL'     => $rowset[$i]['user_email'],
+            'JOINDATE'  => bb_date($rowset[$i]['user_regdate']),
             'LASTVISIT' => $rowset[$i]['user_lastvisit'] ? bb_date($rowset[$i]['user_lastvisit']) : $lang['NEVER'],
-            'POSTS' => $rowset[$i]['user_posts'],
-            'BAN' => (!isset($banned[$rowset[$i]['user_id']])) ? $lang['NOT_BANNED'] : $lang['BANNED'],
-            'ABLED' => $rowset[$i]['user_active'] ? $lang['ENABLED'] : $lang['DISABLED'],
+            'POSTS'     => $rowset[$i]['user_posts'],
+            'BAN'       => (!isset($banned[$rowset[$i]['user_id']])) ? $lang['NOT_BANNED'] : $lang['BANNED'],
+            'ABLED'     => $rowset[$i]['user_active'] ? $lang['ENABLED'] : $lang['DISABLED'],
 
-            'U_VIEWPOSTS' => "../search.php?search_author=1&amp;uid={$rowset[$i]['user_id']}",
-            'U_MANAGE' => '../profile.php?mode=editprofile&' . POST_USERS_URL . '=' . $rowset[$i]['user_id'] . '&admin=1',
-            'U_PERMISSIONS' => 'admin_ug_auth.php?mode=user&' . POST_USERS_URL . '=' . $rowset[$i]['user_id'],
+            'U_VIEWPOSTS'   => "../search.php?search_author=1&amp;uid={$rowset[$i]['user_id']}",
+            'U_MANAGE'      => '../profile.php?mode=editprofile&'.POST_USERS_URL.'='.$rowset[$i]['user_id'].'&admin=1',
+            'U_PERMISSIONS' => 'admin_ug_auth.php?mode=user&'.POST_USERS_URL.'='.$rowset[$i]['user_id'],
         ]);
     }
 }

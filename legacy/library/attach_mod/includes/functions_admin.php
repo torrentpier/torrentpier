@@ -1,46 +1,49 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 /**
- * Set/change quotas
+ * Set/change quotas.
  *
- * @param $mode
- * @param $id
- * @param $quota_type
+ * @param     $mode
+ * @param     $id
+ * @param     $quota_type
  * @param int $quota_limit_id
  */
 function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 {
-    $id = (int)$id;
-    $quota_type = (int)$quota_type;
-    $quota_limit_id = (int)$quota_limit_id;
+    $id = (int) $id;
+    $quota_type = (int) $quota_type;
+    $quota_limit_id = (int) $quota_limit_id;
 
     if ($mode == 'user') {
         if (!$quota_limit_id) {
-            $sql = 'DELETE FROM ' . BB_QUOTA . " WHERE user_id = $id AND quota_type = $quota_type";
+            $sql = 'DELETE FROM '.BB_QUOTA." WHERE user_id = $id AND quota_type = $quota_type";
         } else {
             // Check if user is already entered
-            $sql = 'SELECT user_id FROM ' . BB_QUOTA . " WHERE user_id = $id AND quota_type = $quota_type";
+            $sql = 'SELECT user_id FROM '.BB_QUOTA." WHERE user_id = $id AND quota_type = $quota_type";
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not get entry #1');
             }
 
             if (DB()->num_rows($result) == 0) {
                 $sql_ary = [
-                    'user_id' => (int)$id,
-                    'group_id' => 0,
-                    'quota_type' => (int)$quota_type,
-                    'quota_limit_id' => (int)$quota_limit_id
+                    'user_id'        => (int) $id,
+                    'group_id'       => 0,
+                    'quota_type'     => (int) $quota_type,
+                    'quota_limit_id' => (int) $quota_limit_id,
                 ];
-                $sql = 'INSERT INTO ' . BB_QUOTA . ' ' . DB()->build_array('INSERT', $sql_ary);
+                $sql = 'INSERT INTO '.BB_QUOTA.' '.DB()->build_array('INSERT', $sql_ary);
             } else {
-                $sql = 'UPDATE ' . BB_QUOTA . "
+                $sql = 'UPDATE '.BB_QUOTA."
 					SET quota_limit_id = $quota_limit_id
 					WHERE user_id = $id
 						AND quota_type = $quota_type";
@@ -53,22 +56,22 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
         }
     } elseif ($mode == 'group') {
         if (!$quota_limit_id) {
-            $sql = 'DELETE FROM ' . BB_QUOTA . " WHERE group_id = $id AND quota_type = $quota_type";
+            $sql = 'DELETE FROM '.BB_QUOTA." WHERE group_id = $id AND quota_type = $quota_type";
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Unable to delete quota settings');
             }
         } else {
             // Check if user is already entered
-            $sql = 'SELECT group_id FROM ' . BB_QUOTA . " WHERE group_id = $id AND quota_type = $quota_type";
+            $sql = 'SELECT group_id FROM '.BB_QUOTA." WHERE group_id = $id AND quota_type = $quota_type";
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not get entry #2');
             }
 
             if (DB()->num_rows($result) == 0) {
-                $sql = 'INSERT INTO ' . BB_QUOTA . " (user_id, group_id, quota_type, quota_limit_id)
+                $sql = 'INSERT INTO '.BB_QUOTA." (user_id, group_id, quota_type, quota_limit_id)
 					VALUES (0, $id, $quota_type, $quota_limit_id)";
             } else {
-                $sql = 'UPDATE ' . BB_QUOTA . " SET quota_limit_id = $quota_limit_id
+                $sql = 'UPDATE '.BB_QUOTA." SET quota_limit_id = $quota_limit_id
 					WHERE group_id = $id AND quota_type = $quota_type";
             }
 
@@ -80,11 +83,12 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 }
 
 /**
- * Sort multi-dimensional array
+ * Sort multi-dimensional array.
  *
- * @param array $sort_array
+ * @param array      $sort_array
  * @param string|int $key
- * @param int $sort_order
+ * @param int        $sort_order
+ *
  * @return array
  */
 function sort_multi_array(array $sort_array, $key, int $sort_order = SORT_ASC): array
@@ -96,7 +100,7 @@ function sort_multi_array(array $sort_array, $key, int $sort_order = SORT_ASC): 
 }
 
 /**
- * Returns size of the upload directory in human readable format
+ * Returns size of the upload directory in human readable format.
  *
  * @return string
  */
@@ -111,10 +115,10 @@ function get_formatted_dirsize()
             if (
                 $file != 'index.php' &&
                 $file != '.htaccess' &&
-                !is_dir($upload_dir . '/' . $file) &&
-                !is_link($upload_dir . '/' . $file)
+                !is_dir($upload_dir.'/'.$file) &&
+                !is_link($upload_dir.'/'.$file)
             ) {
-                $upload_dir_size += filesize($upload_dir . '/' . $file);
+                $upload_dir_size += filesize($upload_dir.'/'.$file);
             }
         }
         closedir($dirname);
@@ -126,10 +130,11 @@ function get_formatted_dirsize()
 }
 
 /**
- * Build SQL statement for the search feature
+ * Build SQL statement for the search feature.
  *
  * @param $order_by
  * @param $total_rows
+ *
  * @return array
  */
 function search_attachments($order_by, &$total_rows)
@@ -149,15 +154,15 @@ function search_attachments($order_by, &$total_rows)
         $search_author = str_replace('*', '%', DB()->escape($search_author));
 
         // We need the post_id's, because we want to query the Attachment Table
-        $sql = 'SELECT user_id FROM ' . BB_USERS . " WHERE username LIKE '$search_author'";
+        $sql = 'SELECT user_id FROM '.BB_USERS." WHERE username LIKE '$search_author'";
         if (!($result = DB()->sql_query($sql))) {
-            bb_die('Could not obtain list of matching users (searching for: ' . $search_author . ')');
+            bb_die('Could not obtain list of matching users (searching for: '.$search_author.')');
         }
 
         $matching_userids = '';
         if ($row = DB()->sql_fetchrow($result)) {
             do {
-                $matching_userids .= (($matching_userids != '') ? ', ' : '') . $row['user_id'];
+                $matching_userids .= (($matching_userids != '') ? ', ' : '').$row['user_id'];
             } while ($row = DB()->sql_fetchrow($result));
 
             DB()->sql_freeresult($result);
@@ -165,57 +170,57 @@ function search_attachments($order_by, &$total_rows)
             bb_die($lang['NO_ATTACH_SEARCH_MATCH']);
         }
 
-        $where_sql[] = ' (t.user_id_1 IN (' . $matching_userids . ')) ';
+        $where_sql[] = ' (t.user_id_1 IN ('.$matching_userids.')) ';
     }
 
     // Search Keyword
     $search_keyword_fname = get_var('search_keyword_fname', '');
     if ($search_keyword_fname) {
         $match_word = str_replace('*', '%', $search_keyword_fname);
-        $where_sql[] = " (a.real_filename LIKE '" . DB()->escape($match_word) . "') ";
+        $where_sql[] = " (a.real_filename LIKE '".DB()->escape($match_word)."') ";
     }
 
     $search_keyword_comment = get_var('search_keyword_comment', '');
     if ($search_keyword_comment) {
         $match_word = str_replace('*', '%', $search_keyword_comment);
-        $where_sql[] = " (a.comment LIKE '" . DB()->escape($match_word) . "') ";
+        $where_sql[] = " (a.comment LIKE '".DB()->escape($match_word)."') ";
     }
 
     // Search Download Count
     $search_count_smaller = get_var('search_count_smaller', '');
     $search_count_greater = get_var('search_count_greater', '');
     if ($search_count_smaller != '') {
-        $where_sql[] = ' (a.download_count < ' . (int)$search_count_smaller . ') ';
+        $where_sql[] = ' (a.download_count < '.(int) $search_count_smaller.') ';
     } elseif ($search_count_greater != '') {
-        $where_sql[] = ' (a.download_count > ' . (int)$search_count_greater . ') ';
+        $where_sql[] = ' (a.download_count > '.(int) $search_count_greater.') ';
     }
 
     // Search Filesize
     $search_size_smaller = get_var('search_size_smaller', '');
     $search_size_greater = get_var('search_size_greater', '');
     if ($search_size_smaller != '') {
-        $where_sql[] = ' (a.filesize < ' . (int)$search_size_smaller . ') ';
+        $where_sql[] = ' (a.filesize < '.(int) $search_size_smaller.') ';
     } elseif ($search_size_greater != '') {
-        $where_sql[] = ' (a.filesize > ' . (int)$search_size_greater . ') ';
+        $where_sql[] = ' (a.filesize > '.(int) $search_size_greater.') ';
     }
 
     // Search Attachment Time
     $search_days_greater = get_var('search_days_greater', '');
     if ($search_days_greater) {
-        $where_sql[] = ' (a.filetime < ' . (TIMENOW - ((int)$search_days_greater * 86400)) . ') ';
+        $where_sql[] = ' (a.filetime < '.(TIMENOW - ((int) $search_days_greater * 86400)).') ';
     }
 
     // Search Forum
     $search_forum = get_var('search_forum', '');
     if ($search_forum) {
-        $where_sql[] = ' (p.forum_id = ' . (int)$search_forum . ') ';
+        $where_sql[] = ' (p.forum_id = '.(int) $search_forum.') ';
     }
 
     $sql = 'SELECT a.*, t.post_id, p.post_time, p.topic_id
-		FROM ' . BB_ATTACHMENTS . ' t, ' . BB_ATTACHMENTS_DESC . ' a, ' . BB_POSTS . ' p WHERE ';
+		FROM '.BB_ATTACHMENTS.' t, '.BB_ATTACHMENTS_DESC.' a, '.BB_POSTS.' p WHERE ';
 
     if (count($where_sql) > 0) {
-        $sql .= implode('AND', $where_sql) . ' AND ';
+        $sql .= implode('AND', $where_sql).' AND ';
     }
 
     $sql .= 't.post_id = p.post_id AND a.attach_id = t.attach_id ';

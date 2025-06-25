@@ -1,9 +1,12 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
@@ -11,7 +14,7 @@ namespace TorrentPier\Database;
 
 /**
  * Database Debug functionality extracted from Database class
- * Handles all debug logging, timing, and query explanation features
+ * Handles all debug logging, timing, and query explanation features.
  */
 class DatabaseDebugger
 {
@@ -48,7 +51,7 @@ class DatabaseDebugger
     }
 
     /**
-     * Initialize debug settings exactly like the original Database class
+     * Initialize debug settings exactly like the original Database class.
      */
     private function initializeDebugSettings(): void
     {
@@ -58,12 +61,12 @@ class DatabaseDebugger
     }
 
     /**
-     * Store debug info
+     * Store debug info.
      */
     public function debug(string $mode): void
     {
-        $id =& $this->dbg_id;
-        $dbg =& $this->dbg[$id];
+        $id = &$this->dbg_id;
+        $dbg = &$this->dbg[$id];
 
         if ($mode === 'start') {
             // Always update timing if required constants are defined
@@ -111,7 +114,7 @@ class DatabaseDebugger
                 // Add Nette Explorer marker to debug info for panel display
                 if ($this->is_nette_explorer_query && !str_contains($dbg['info'], '[Nette Explorer]')) {
                     // Store both plain text and HTML versions
-                    $dbg['info_plain'] = $dbg['info'] . ' [Nette Explorer]';
+                    $dbg['info_plain'] = $dbg['info'].' [Nette Explorer]';
                     $dbg['info'] .= ' <span style="color: #28a745; font-weight: bold; background: #d4edda; padding: 2px 6px; border-radius: 3px; font-size: 11px;">[Nette Explorer]</span>';
                     $dbg['is_nette_explorer'] = true;
                 } else {
@@ -141,7 +144,7 @@ class DatabaseDebugger
     }
 
     /**
-     * Find source of database call
+     * Find source of database call.
      */
     public function debug_find_source(string $mode = 'all'): string
     {
@@ -167,11 +170,12 @@ class DatabaseDebugger
                     case 'file':
                         return $frame['file'];
                     case 'line':
-                        return (string)($frame['line'] ?? '?');
+                        return (string) ($frame['line'] ?? '?');
                     case 'all':
                     default:
                         $file = function_exists('hide_bb_path') ? hide_bb_path($frame['file']) : basename($frame['file']);
                         $line = $frame['line'] ?? '?';
+
                         return "$file($line)";
                 }
             }
@@ -181,7 +185,7 @@ class DatabaseDebugger
     }
 
     /**
-     * Detect if the current query comes from Nette Explorer by examining the call stack
+     * Detect if the current query comes from Nette Explorer by examining the call stack.
      */
     public function detectNetteExplorerInTrace(array $trace): bool
     {
@@ -207,7 +211,7 @@ class DatabaseDebugger
     }
 
     /**
-     * Detect if SQL query syntax suggests it came from Nette Explorer
+     * Detect if SQL query syntax suggests it came from Nette Explorer.
      */
     public function detectNetteExplorerBySqlSyntax(string $sql): bool
     {
@@ -232,7 +236,7 @@ class DatabaseDebugger
     }
 
     /**
-     * Prepare for logging
+     * Prepare for logging.
      */
     public function log_next_query(int $queries_count = 1, string $log_file = 'sql_queries'): void
     {
@@ -241,7 +245,7 @@ class DatabaseDebugger
     }
 
     /**
-     * Log query
+     * Log query.
      */
     public function log_query(string $log_file = 'sql_queries'): void
     {
@@ -252,20 +256,20 @@ class DatabaseDebugger
         $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.3f', $this->cur_query_time);
         $msg = [];
         $msg[] = round($this->sql_starttime);
-        $msg[] = date('m-d H:i:s', (int)$this->sql_starttime);
+        $msg[] = date('m-d H:i:s', (int) $this->sql_starttime);
         $msg[] = sprintf('%-6s', $q_time);
         $msg[] = sprintf('%05d', getmypid());
         $msg[] = $this->db->db_server;
         $msg[] = function_exists('dev') ? dev()->formatShortQuery($this->db->cur_query) : $this->db->cur_query;
         $msg = implode(defined('LOG_SEPR') ? LOG_SEPR : ' | ', $msg);
-        $msg .= ($info = $this->db->query_info()) ? ' # ' . $info : '';
-        $msg .= ' # ' . $this->debug_find_source() . ' ';
+        $msg .= ($info = $this->db->query_info()) ? ' # '.$info : '';
+        $msg .= ' # '.$this->debug_find_source().' ';
         $msg .= defined('IN_CRON') ? 'cron' : basename($_SERVER['REQUEST_URI'] ?? '');
-        bb_log($msg . (defined('LOG_LF') ? LOG_LF : "\n"), $log_file);
+        bb_log($msg.(defined('LOG_LF') ? LOG_LF : "\n"), $log_file);
     }
 
     /**
-     * Log slow query
+     * Log slow query.
      */
     public function log_slow_query(string $log_file = 'sql_slow_bb'): void
     {
@@ -279,7 +283,7 @@ class DatabaseDebugger
     }
 
     /**
-     * Log error
+     * Log error.
      *
      * NOTE: This method logs detailed information to FILES only (error_log, bb_log).
      * Log files are not accessible to regular users, so detailed information is safe here.
@@ -292,21 +296,21 @@ class DatabaseDebugger
 
         if ($exception) {
             // Use the actual exception information which is more reliable
-            $error_msg = "Database Error: " . $exception->getMessage();
+            $error_msg = 'Database Error: '.$exception->getMessage();
             $error_code = $exception->getCode();
             if ($error_code) {
-                $error_msg = "Database Error ({$error_code}): " . $exception->getMessage();
+                $error_msg = "Database Error ({$error_code}): ".$exception->getMessage();
             }
 
             // Collect detailed error information
-            $error_details[] = "Exception: " . get_class($exception);
-            $error_details[] = "Message: " . $exception->getMessage();
-            $error_details[] = "Code: " . $exception->getCode();
-            $error_details[] = "File: " . $exception->getFile() . ":" . $exception->getLine();
+            $error_details[] = 'Exception: '.get_class($exception);
+            $error_details[] = 'Message: '.$exception->getMessage();
+            $error_details[] = 'Code: '.$exception->getCode();
+            $error_details[] = 'File: '.$exception->getFile().':'.$exception->getLine();
 
             // Add PDO-specific details if it's a PDO exception
             if ($exception instanceof \PDOException) {
-                $error_details[] = "PDO Error Info: " . json_encode($exception->errorInfo ?? []);
+                $error_details[] = 'PDO Error Info: '.json_encode($exception->errorInfo ?? []);
             }
         } else {
             // Fallback to PDO error state (legacy behavior)
@@ -317,39 +321,39 @@ class DatabaseDebugger
                 return; // Don't log empty or "no error" states
             }
 
-            $error_msg = "Database Error ({$error['code']}): " . $error['message'];
-            $error_details[] = "PDO Error Code: " . $error['code'];
-            $error_details[] = "PDO Error Message: " . $error['message'];
+            $error_msg = "Database Error ({$error['code']}): ".$error['message'];
+            $error_details[] = 'PDO Error Code: '.$error['code'];
+            $error_details[] = 'PDO Error Message: '.$error['message'];
         }
 
         // Add comprehensive context for debugging
-        $error_details[] = "Query: " . ($this->db->cur_query ?: 'None');
-        $error_details[] = "Source: " . $this->debug_find_source();
-        $error_details[] = "Database: " . ($this->db->selected_db ?: 'None');
-        $error_details[] = "Server: " . $this->db->db_server;
-        $error_details[] = "Timestamp: " . date('Y-m-d H:i:s');
-        $error_details[] = "Request URI: " . ($_SERVER['REQUEST_URI'] ?? 'CLI');
-        $error_details[] = "User IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown');
+        $error_details[] = 'Query: '.($this->db->cur_query ?: 'None');
+        $error_details[] = 'Source: '.$this->debug_find_source();
+        $error_details[] = 'Database: '.($this->db->selected_db ?: 'None');
+        $error_details[] = 'Server: '.$this->db->db_server;
+        $error_details[] = 'Timestamp: '.date('Y-m-d H:i:s');
+        $error_details[] = 'Request URI: '.($_SERVER['REQUEST_URI'] ?? 'CLI');
+        $error_details[] = 'User IP: '.($_SERVER['REMOTE_ADDR'] ?? 'Unknown');
 
         // Check connection status
         try {
             if ($this->db->connection) {
-                $error_details[] = "Connection Status: Active";
+                $error_details[] = 'Connection Status: Active';
                 $pdo = $this->db->connection->getPdo();
-                $error_details[] = "PDO Connection: " . ($pdo ? 'Available' : 'Null');
+                $error_details[] = 'PDO Connection: '.($pdo ? 'Available' : 'Null');
                 if ($pdo) {
                     $errorInfo = $pdo->errorInfo();
-                    $error_details[] = "Current PDO Error Info: " . json_encode($errorInfo);
+                    $error_details[] = 'Current PDO Error Info: '.json_encode($errorInfo);
                 }
             } else {
-                $error_details[] = "Connection Status: No connection";
+                $error_details[] = 'Connection Status: No connection';
             }
         } catch (\Exception $e) {
-            $error_details[] = "Connection Check Failed: " . $e->getMessage();
+            $error_details[] = 'Connection Check Failed: '.$e->getMessage();
         }
 
         // Build comprehensive log message
-        $log_message = $error_msg . "\n" . implode("\n", $error_details);
+        $log_message = $error_msg."\n".implode("\n", $error_details);
 
         // Log to both error_log and TorrentPier's logging system
         error_log($error_msg);
@@ -360,21 +364,21 @@ class DatabaseDebugger
         }
 
         // Also log to PHP error log for immediate access
-        error_log("DETAILED: " . $log_message);
+        error_log('DETAILED: '.$log_message);
     }
 
     /**
-     * Log legacy query that needed automatic compatibility fix
+     * Log legacy query that needed automatic compatibility fix.
      */
     public function logLegacyQuery(string $query, string $error): void
     {
         $legacy_entry = [
-            'query' => $query,
-            'error' => $error,
+            'query'  => $query,
+            'error'  => $error,
             'source' => $this->debug_find_source(),
-            'file' => $this->debug_find_source('file'),
-            'line' => $this->debug_find_source('line'),
-            'time' => microtime(true)
+            'file'   => $this->debug_find_source('file'),
+            'line'   => $this->debug_find_source('line'),
+            'time'   => microtime(true),
         ];
 
         $this->legacy_queries[] = $legacy_entry;
@@ -392,23 +396,23 @@ class DatabaseDebugger
                 $original_info = $this->dbg[$current_id]['info'] ?? '';
                 $original_info_plain = $this->dbg[$current_id]['info_plain'] ?? $original_info;
 
-                $this->dbg[$current_id]['info'] = 'LEGACY COMPATIBILITY FIX APPLIED - ' . $original_info;
-                $this->dbg[$current_id]['info_plain'] = 'LEGACY COMPATIBILITY FIX APPLIED - ' . $original_info_plain;
+                $this->dbg[$current_id]['info'] = 'LEGACY COMPATIBILITY FIX APPLIED - '.$original_info;
+                $this->dbg[$current_id]['info_plain'] = 'LEGACY COMPATIBILITY FIX APPLIED - '.$original_info_plain;
             }
         }
 
         // Log to file for permanent record
-        $msg = 'LEGACY QUERY DETECTED - NEEDS FIXING' . LOG_LF;
-        $msg .= 'Query:  ' . $query . LOG_LF;
-        $msg .= 'Error:  ' . $error . LOG_LF;
-        $msg .= 'Source: ' . $legacy_entry['source'] . LOG_LF;
-        $msg .= 'Time:   ' . date('Y-m-d H:i:s', (int)$legacy_entry['time']) . LOG_LF;
+        $msg = 'LEGACY QUERY DETECTED - NEEDS FIXING'.LOG_LF;
+        $msg .= 'Query:  '.$query.LOG_LF;
+        $msg .= 'Error:  '.$error.LOG_LF;
+        $msg .= 'Source: '.$legacy_entry['source'].LOG_LF;
+        $msg .= 'Time:   '.date('Y-m-d H:i:s', (int) $legacy_entry['time']).LOG_LF;
 
         bb_log($msg, 'legacy_queries', false);
     }
 
     /**
-     * Set slow query marker
+     * Set slow query marker.
      */
     public function expect_slow_query(int $ignoring_time = 60, int $new_priority = 10): void
     {
@@ -429,7 +433,7 @@ class DatabaseDebugger
     }
 
     /**
-     * Explain queries - maintains compatibility with legacy SqlDb
+     * Explain queries - maintains compatibility with legacy SqlDb.
      */
     public function explain($mode, $html_table = '', array $row = []): mixed
     {
@@ -451,14 +455,14 @@ class DatabaseDebugger
                     $query = "SELECT * FROM $m[1] WHERE $m[2]";
                 }
 
-                if (str_starts_with($query, "SELECT")) {
+                if (str_starts_with($query, 'SELECT')) {
                     $html_table = false;
 
                     try {
                         $result = $this->db->connection->query("EXPLAIN $query");
                         while ($row = $result->fetch()) {
                             // Convert row to array regardless of type
-                            $rowArray = (array)$row;
+                            $rowArray = (array) $row;
                             $html_table = $this->explain('add_explain_row', $html_table, $rowArray);
                         }
                     } catch (\Exception $e) {
@@ -477,27 +481,27 @@ class DatabaseDebugger
                 }
 
                 $id = $this->dbg_id - 1;
-                $htid = 'expl-' . spl_object_hash($this->db->connection) . '-' . $id;
+                $htid = 'expl-'.spl_object_hash($this->db->connection).'-'.$id;
                 $dbg = $this->dbg[$id] ?? [];
 
                 // Ensure required keys exist with defaults
                 $dbg = array_merge([
-                    'time' => $this->cur_query_time ?? 0,
-                    'sql' => $this->db->cur_query ?? '',
+                    'time'  => $this->cur_query_time ?? 0,
+                    'sql'   => $this->db->cur_query ?? '',
                     'query' => $this->db->cur_query ?? '',
-                    'src' => $this->debug_find_source(),
-                    'trace' => $this->debug_find_source()  // Backup for compatibility
+                    'src'   => $this->debug_find_source(),
+                    'trace' => $this->debug_find_source(),  // Backup for compatibility
                 ], $dbg);
 
                 $this->explain_out .= '
                 <table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0;">
                 <tr>
-                    <th style="height: 22px;" align="left">&nbsp;' . ($dbg['src'] ?? $dbg['trace']) . '&nbsp; [' . sprintf('%.3f', $dbg['time']) . ' s]&nbsp; <i>' . $this->db->query_info() . '</i></th>
-                    <th class="copyElement" data-clipboard-target="#' . $htid . '" style="height: 22px;" align="right" title="Copy to clipboard">' . "[{$this->db->engine}] {$this->db->db_server}.{$this->db->selected_db}" . ' :: Query #' . ($this->db->num_queries + 1) . '&nbsp;</th>
+                    <th style="height: 22px;" align="left">&nbsp;'.($dbg['src'] ?? $dbg['trace']).'&nbsp; ['.sprintf('%.3f', $dbg['time']).' s]&nbsp; <i>'.$this->db->query_info().'</i></th>
+                    <th class="copyElement" data-clipboard-target="#'.$htid.'" style="height: 22px;" align="right" title="Copy to clipboard">'."[{$this->db->engine}] {$this->db->db_server}.{$this->db->selected_db}".' :: Query #'.($this->db->num_queries + 1).'&nbsp;</th>
                 </tr>
-                <tr><td colspan="2">' . $this->explain_hold . '</td></tr>
+                <tr><td colspan="2">'.$this->explain_hold.'</td></tr>
                 </table>
-                <div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . (function_exists('dev') ? dev()->formatShortQuery($dbg['sql'] ?? $dbg['query'], true) : htmlspecialchars($dbg['sql'] ?? $dbg['query'])) . '&nbsp;&nbsp;</div></div>
+                <div class="sqlLog"><div id="'.$htid.'" class="sqlLogRow sqlExplain" style="padding: 0;">'.(function_exists('dev') ? dev()->formatShortQuery($dbg['sql'] ?? $dbg['query'], true) : htmlspecialchars($dbg['sql'] ?? $dbg['query'])).'&nbsp;&nbsp;</div></div>
                 <br />';
                 break;
 
@@ -506,21 +510,21 @@ class DatabaseDebugger
                     $html_table = true;
                     $this->explain_hold .= '<table width="100%" cellpadding="3" cellspacing="1" class="bodyline" style="border-width: 0;"><tr>';
                     foreach (array_keys($row) as $val) {
-                        $this->explain_hold .= '<td class="row3 gensmall" align="center"><b>' . htmlspecialchars($val) . '</b></td>';
+                        $this->explain_hold .= '<td class="row3 gensmall" align="center"><b>'.htmlspecialchars($val).'</b></td>';
                     }
                     $this->explain_hold .= '</tr>';
                 }
                 $this->explain_hold .= '<tr>';
                 foreach (array_values($row) as $i => $val) {
                     $class = !($i % 2) ? 'row1' : 'row2';
-                    $this->explain_hold .= '<td class="' . $class . ' gen">' . str_replace(["{$this->db->selected_db}.", ',', ';'], ['', ', ', ';<br />'], htmlspecialchars($val ?? '')) . '</td>';
+                    $this->explain_hold .= '<td class="'.$class.' gen">'.str_replace(["{$this->db->selected_db}.", ',', ';'], ['', ', ', ';<br />'], htmlspecialchars($val ?? '')).'</td>';
                 }
                 $this->explain_hold .= '</tr>';
 
                 return $html_table;
 
             case 'display':
-                echo '<a name="explain"></a><div class="med">' . $this->explain_out . '</div>';
+                echo '<a name="explain"></a><div class="med">'.$this->explain_out.'</div>';
                 break;
         }
 
@@ -528,20 +532,20 @@ class DatabaseDebugger
     }
 
     /**
-     * Get debug statistics for display
+     * Get debug statistics for display.
      */
     public function getDebugStats(): array
     {
         return [
-            'num_queries' => count($this->dbg),
+            'num_queries'   => count($this->dbg),
             'sql_timetotal' => $this->db->sql_timetotal,
-            'queries' => $this->dbg,
-            'explain_out' => $this->explain_out
+            'queries'       => $this->dbg,
+            'explain_out'   => $this->explain_out,
         ];
     }
 
     /**
-     * Clear debug data
+     * Clear debug data.
      */
     public function clearDebugData(): void
     {
@@ -552,7 +556,7 @@ class DatabaseDebugger
     }
 
     /**
-     * Mark next query as coming from Nette Explorer
+     * Mark next query as coming from Nette Explorer.
      */
     public function markAsNetteExplorerQuery(): void
     {
@@ -560,7 +564,7 @@ class DatabaseDebugger
     }
 
     /**
-     * Reset Nette Explorer query flag
+     * Reset Nette Explorer query flag.
      */
     public function resetNetteExplorerFlag(): void
     {

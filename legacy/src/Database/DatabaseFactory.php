@@ -1,16 +1,19 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Database;
 
 /**
- * Database Factory - maintains compatibility with existing DB() function calls
+ * Database Factory - maintains compatibility with existing DB() function calls.
  *
  * This factory completely replaces the legacy SqlDb/Dbs system with the new
  * Nette Database implementation while maintaining full backward compatibility.
@@ -22,7 +25,7 @@ class DatabaseFactory
     private static array $server_aliases = [];
 
     /**
-     * Initialize the factory with database configuration
+     * Initialize the factory with database configuration.
      */
     public static function init(array $db_config, array $db_aliases = []): void
     {
@@ -31,7 +34,7 @@ class DatabaseFactory
     }
 
     /**
-     * Get database instance (maintains compatibility with existing DB() calls)
+     * Get database instance (maintains compatibility with existing DB() calls).
      */
     public static function getInstance(string $srv_name_or_alias = 'db'): Database
     {
@@ -51,7 +54,7 @@ class DatabaseFactory
     }
 
     /**
-     * Resolve server name using alias system
+     * Resolve server name using alias system.
      */
     private static function resolveSrvName(string $name): string
     {
@@ -70,7 +73,7 @@ class DatabaseFactory
     }
 
     /**
-     * Check if a specific database server is configured
+     * Check if a specific database server is configured.
      */
     public static function hasServer(string $srv_name): bool
     {
@@ -78,7 +81,7 @@ class DatabaseFactory
     }
 
     /**
-     * Get all configured server names
+     * Get all configured server names.
      */
     public static function getServerNames(): array
     {
@@ -86,7 +89,7 @@ class DatabaseFactory
     }
 
     /**
-     * Clear all cached instances (useful for testing)
+     * Clear all cached instances (useful for testing).
      */
     public static function clearInstances(): void
     {

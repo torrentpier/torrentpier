@@ -1,15 +1,17 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 define('BB_SCRIPT', 'playback_m3u');
 
-require __DIR__ . '/common.php';
+require __DIR__.'/common.php';
 
 if (!config()->get('torr_server.enabled')) {
     redirect('index.php');
@@ -18,7 +20,7 @@ if (!config()->get('torr_server.enabled')) {
 // Valid file formats
 $validFormats = [
     'audio' => ['mp3', 'flac', 'wav', 'm4a'],
-    'video' => ['mp4', 'mkv', 'avi', 'm4v']
+    'video' => ['mp4', 'mkv', 'avi', 'm4v'],
 ];
 
 // Start session management
@@ -28,15 +30,15 @@ $user->session_start(['req_login' => config()->get('torr_server.disable_for_gues
 $page_cfg['allow_robots'] = false;
 
 // Check topic_id
-$topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
+$topic_id = isset($_GET[POST_TOPIC_URL]) ? (int) $_GET[POST_TOPIC_URL] : 0;
 if (!$topic_id) {
     bb_die($lang['INVALID_TOPIC_ID'], 404);
 }
 
 // Getting torrent info from database
 $sql = 'SELECT attach_id, forum_id, info_hash, info_hash_v2
-            FROM ' . BB_BT_TORRENTS . '
-            WHERE topic_id = ' . $topic_id . '
+            FROM '.BB_BT_TORRENTS.'
+            WHERE topic_id = '.$topic_id.'
         LIMIT 1';
 
 if (!$row = DB()->fetch_row($sql)) {
@@ -95,25 +97,25 @@ foreach ($m3uData as $entry) {
     $filesCount++;
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
     $template->assign_block_vars('m3ulist', [
-        'ROW_NUMBER' => $filesCount,
-        'FILE_INDEX' => $urlParams['index'],
-        'ROW_CLASS' => $rowClass,
-        'IS_VALID' => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
-        'IS_AUDIO' => (int)in_array($getExtension, $validFormats['audio']),
+        'ROW_NUMBER'  => $filesCount,
+        'FILE_INDEX'  => $urlParams['index'],
+        'ROW_CLASS'   => $rowClass,
+        'IS_VALID'    => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
+        'IS_AUDIO'    => (int) in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $streamLink,
-        'M3U_DL_LINK' => DL_URL . $row['attach_id'] . '&m3u=1',
-        'TITLE' => $title,
+        'M3U_DL_LINK' => DL_URL.$row['attach_id'].'&m3u=1',
+        'TITLE'       => $title,
     ]);
 }
 
 // Generate output
 $template->assign_vars([
-    'HAS_ITEMS' => $filesCount > 0,
-    'PAGE_TITLE' => $lang['PLAYBACK_M3U'],
-    'ATTACH_ID' => $row['attach_id'],
-    'INFO_HASH' => bin2hex($row['info_hash'] ?? $row['info_hash_v2']),
+    'HAS_ITEMS'         => $filesCount > 0,
+    'PAGE_TITLE'        => $lang['PLAYBACK_M3U'],
+    'ATTACH_ID'         => $row['attach_id'],
+    'INFO_HASH'         => bin2hex($row['info_hash'] ?? $row['info_hash_v2']),
     'FILES_COUNT_TITLE' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($filesCount, 'files')),
-    'U_TOPIC' => TOPIC_URL . $topic_id,
+    'U_TOPIC'           => TOPIC_URL.$topic_id,
 ]);
 
 print_page('playback_m3u.tpl');

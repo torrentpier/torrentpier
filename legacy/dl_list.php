@@ -1,19 +1,21 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 define('BB_SCRIPT', 'dl_list');
 
-require __DIR__ . '/common.php';
+require __DIR__.'/common.php';
 
 $forum_id = $_REQUEST[POST_FORUM_URL] ?? 0;
 $topic_id = $_REQUEST[POST_TOPIC_URL] ?? 0;
-$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
+$mode = isset($_REQUEST['mode']) ? (string) $_REQUEST['mode'] : '';
 $confirmed = isset($_POST['confirm']);
 
 // Get new DL-status
@@ -43,7 +45,7 @@ if (isset($_POST['redirect_type']) && $_POST['redirect_type'] == 'search') {
     $redirect = $full_url ?: "$dl_key=1";
 } else {
     $redirect_type = (!$topic_id) ? 'viewforum.php' : 'viewtopic.php';
-    $redirect = $full_url ?: ((!$topic_id) ? POST_FORUM_URL . "=$forum_id" : POST_TOPIC_URL . "=$topic_id");
+    $redirect = $full_url ?: ((!$topic_id) ? POST_FORUM_URL."=$forum_id" : POST_TOPIC_URL."=$topic_id");
 }
 
 // Start session management
@@ -53,7 +55,7 @@ set_die_append_msg();
 
 // Check if user logged in
 if (IS_GUEST) {
-    redirect(LOGIN_URL . "?redirect=$redirect_type&$redirect");
+    redirect(LOGIN_URL."?redirect=$redirect_type&$redirect");
 }
 
 // Check if user did not confirm
@@ -64,7 +66,7 @@ if (isset($_POST['cancel']) && $_POST['cancel']) {
 // Delete DL-list
 if ($mode == 'dl_delete' && $topic_id) {
     if (!IS_ADMIN) {
-        $sql = "SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1";
+        $sql = 'SELECT forum_id FROM '.BB_TOPICS." WHERE topic_id = $topic_id LIMIT 1";
 
         if (!$row = DB()->sql_fetchrow(DB()->sql_query($sql))) {
             bb_die('Could not obtain forum_id for this topic');
@@ -80,12 +82,12 @@ if ($mode == 'dl_delete' && $topic_id) {
     if (!$confirmed) {
         $hidden_fields = [
             POST_TOPIC_URL => $topic_id,
-            'mode' => 'dl_delete',
+            'mode'         => 'dl_delete',
         ];
 
         print_confirmation([
-            'QUESTION' => $lang['DL_LIST_DEL_CONFIRM'],
-            'FORM_ACTION' => 'dl_list.php',
+            'QUESTION'      => $lang['DL_LIST_DEL_CONFIRM'],
+            'FORM_ACTION'   => 'dl_list.php',
             'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
         ]);
     }
@@ -104,15 +106,15 @@ if ($mode == 'set_topics_dl_status') {
     }
 
     foreach ($_POST['dl_topics_id_list'] as $topic_id) {
-        $req_topics_ary[] = (int)$topic_id;
+        $req_topics_ary[] = (int) $topic_id;
     }
 } elseif ($mode == 'set_dl_status') {
-    $req_topics_ary[] = (int)$topic_id;
+    $req_topics_ary[] = (int) $topic_id;
 }
 
 // Get existing topics
 if ($req_topics_sql = implode(',', $req_topics_ary)) {
-    $sql = "SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_id IN($req_topics_sql)";
+    $sql = 'SELECT topic_id FROM '.BB_TOPICS." WHERE topic_id IN($req_topics_sql)";
 
     foreach (DB()->fetch_rowset($sql) as $row) {
         $topics_ary[] = $row['topic_id'];
@@ -124,14 +126,14 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
 
     foreach ($topics_ary as $topic_id) {
         $new_dlstatus_ary[] = [
-            'user_id' => (int)$user->id,
-            'topic_id' => (int)$topic_id,
-            'user_status' => (int)$new_dl_status,
+            'user_id'     => (int) $user->id,
+            'topic_id'    => (int) $topic_id,
+            'user_status' => (int) $new_dl_status,
         ];
     }
     $new_dlstatus_sql = DB()->build_array('MULTI_INSERT', $new_dlstatus_ary);
 
-    DB()->query("REPLACE INTO " . BB_BT_DLSTATUS . " $new_dlstatus_sql");
+    DB()->query('REPLACE INTO '.BB_BT_DLSTATUS." $new_dlstatus_sql");
 
     redirect("$redirect_type?$redirect");
 }

@@ -1,24 +1,26 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy;
 
 /**
- * Class Atom
- * @package TorrentPier\Legacy
+ * Class Atom.
  */
 class Atom
 {
     /**
-     * Update forum feed
+     * Update forum feed.
      *
-     * @param int $forum_id
+     * @param int   $forum_id
      * @param array $forum_data
      *
      * @return bool
@@ -27,7 +29,7 @@ class Atom
     {
         global $lang, $datastore;
         $sql = null;
-        $file_path = config()->get('atom.path') . '/f/' . $forum_id . '.atom';
+        $file_path = config()->get('atom.path').'/f/'.$forum_id.'.atom';
         $select_tor_sql = $join_tor_sql = '';
 
         if (!$forums = $datastore->get('cat_forums')) {
@@ -41,10 +43,10 @@ class Atom
         }
         if ($forum_id > 0 && $forum_data['allow_reg_tracker']) {
             $select_tor_sql = ', tor.size AS tor_size, tor.tor_status, tor.attach_id';
-            $join_tor_sql = "LEFT JOIN " . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)";
+            $join_tor_sql = 'LEFT JOIN '.BB_BT_TORRENTS.' tor ON(t.topic_id = tor.topic_id)';
         }
         if ($forum_id == 0) {
-            $sql = "
+            $sql = '
 			SELECT
 				t.topic_id, t.topic_title, t.topic_status,
 				u1.username AS first_username,
@@ -52,15 +54,15 @@ class Atom
 				p2.post_time AS topic_last_post_time, p2.post_edit_time AS topic_last_post_edit_time,
 				tor.size AS tor_size, tor.tor_status, tor.attach_id,
                 pt.post_html
-			FROM      " . BB_BT_TORRENTS . " tor
-			LEFT JOIN " . BB_TOPICS . " t   ON(tor.topic_id = t.topic_id)
-			LEFT JOIN " . BB_USERS . " u1  ON(t.topic_poster = u1.user_id)
-			LEFT JOIN " . BB_POSTS . " p1  ON(t.topic_first_post_id = p1.post_id)
-			LEFT JOIN " . BB_POSTS . " p2  ON(t.topic_last_post_id = p2.post_id)
-            LEFT JOIN " . BB_POSTS_HTML . " pt ON(p1.post_id = pt.post_id)
+			FROM      '.BB_BT_TORRENTS.' tor
+			LEFT JOIN '.BB_TOPICS.' t   ON(tor.topic_id = t.topic_id)
+			LEFT JOIN '.BB_USERS.' u1  ON(t.topic_poster = u1.user_id)
+			LEFT JOIN '.BB_POSTS.' p1  ON(t.topic_first_post_id = p1.post_id)
+			LEFT JOIN '.BB_POSTS.' p2  ON(t.topic_last_post_id = p2.post_id)
+            LEFT JOIN '.BB_POSTS_HTML.' pt ON(p1.post_id = pt.post_id)
 			ORDER BY t.topic_last_post_time DESC
 			LIMIT 100
-		";
+		';
         } elseif ($forum_id > 0) {
             $sql = "
 			SELECT
@@ -70,11 +72,11 @@ class Atom
 				p2.post_time AS topic_last_post_time, p2.post_edit_time AS topic_last_post_edit_time,
                 pt.post_html
 				$select_tor_sql
-			FROM      " . BB_TOPICS . " t
-			LEFT JOIN " . BB_USERS . " u1  ON(t.topic_poster = u1.user_id)
-			LEFT JOIN " . BB_POSTS . " p1  ON(t.topic_first_post_id = p1.post_id)
-			LEFT JOIN " . BB_POSTS . " p2  ON(t.topic_last_post_id = p2.post_id)
-            LEFT JOIN " . BB_POSTS_HTML . " pt ON(p1.post_id = pt.post_id)
+			FROM      ".BB_TOPICS.' t
+			LEFT JOIN '.BB_USERS.' u1  ON(t.topic_poster = u1.user_id)
+			LEFT JOIN '.BB_POSTS.' p1  ON(t.topic_first_post_id = p1.post_id)
+			LEFT JOIN '.BB_POSTS.' p2  ON(t.topic_last_post_id = p2.post_id)
+            LEFT JOIN '.BB_POSTS_HTML." pt ON(p1.post_id = pt.post_id)
 				$join_tor_sql
 			WHERE t.forum_id = $forum_id
 			ORDER BY t.topic_last_post_time DESC
@@ -101,6 +103,7 @@ class Atom
         }
         if (!\count($topics)) {
             @unlink($file_path);
+
             return false;
         }
         if (self::create_atom($file_path, 'f', $forum_id, htmlCHR($forum_data['forum_name']), $topics)) {
@@ -111,9 +114,9 @@ class Atom
     }
 
     /**
-     * Update user feed
+     * Update user feed.
      *
-     * @param int $user_id
+     * @param int    $user_id
      * @param string $username
      *
      * @return bool
@@ -121,8 +124,8 @@ class Atom
     public static function update_user_feed($user_id, $username)
     {
         global $lang, $datastore;
-        $file_path = config()->get('atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
-        $sql = "
+        $file_path = config()->get('atom.path').'/u/'.floor($user_id / 5000).'/'.($user_id % 100).'/'.$user_id.'.atom';
+        $sql = '
 		SELECT
 			t.topic_id, t.topic_title, t.topic_status,
 			u1.username AS first_username,
@@ -130,12 +133,12 @@ class Atom
 			p2.post_time AS topic_last_post_time, p2.post_edit_time AS topic_last_post_edit_time,
 			tor.size AS tor_size, tor.tor_status, tor.attach_id,
             pt.post_html
-		FROM      " . BB_TOPICS . " t
-		LEFT JOIN " . BB_USERS . " u1  ON(t.topic_poster = u1.user_id)
-		LEFT JOIN " . BB_POSTS . " p1  ON(t.topic_first_post_id = p1.post_id)
-		LEFT JOIN " . BB_POSTS . " p2  ON(t.topic_last_post_id = p2.post_id)
-        LEFT JOIN " . BB_POSTS_HTML . " pt ON(p1.post_id = pt.post_id)
-		LEFT JOIN " . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)
+		FROM      '.BB_TOPICS.' t
+		LEFT JOIN '.BB_USERS.' u1  ON(t.topic_poster = u1.user_id)
+		LEFT JOIN '.BB_POSTS.' p1  ON(t.topic_first_post_id = p1.post_id)
+		LEFT JOIN '.BB_POSTS.' p2  ON(t.topic_last_post_id = p2.post_id)
+        LEFT JOIN '.BB_POSTS_HTML.' pt ON(p1.post_id = pt.post_id)
+		LEFT JOIN '.BB_BT_TORRENTS." tor ON(t.topic_id = tor.topic_id)
 		WHERE t.topic_poster = $user_id
 		ORDER BY t.topic_last_post_time DESC
 		LIMIT 50
@@ -157,6 +160,7 @@ class Atom
         }
         if (!\count($topics)) {
             @unlink($file_path);
+
             return false;
         }
         if (self::create_atom($file_path, 'u', $user_id, $username, $topics)) {
@@ -167,13 +171,13 @@ class Atom
     }
 
     /**
-     * Create and save atom feed
+     * Create and save atom feed.
      *
      * @param string $file_path
      * @param string $mode
-     * @param int $id
+     * @param int    $id
      * @param string $title
-     * @param array $topics
+     * @param array  $topics
      *
      * @return bool
      */
@@ -198,16 +202,16 @@ class Atom
             break;
         }
         $atom = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
-        $atom .= "<feed xmlns=\"http://www.w3.org/2005/Atom\" xml:base=\"" . FULL_URL . "\">\n";
+        $atom .= '<feed xmlns="http://www.w3.org/2005/Atom" xml:base="'.FULL_URL."\">\n";
         $atom .= "<title>$title</title>\n";
-        $atom .= "<updated>" . $date . "T$time+00:00</updated>\n";
+        $atom .= '<updated>'.$date."T$time+00:00</updated>\n";
         $atom .= "<id>tag:rto.feed,2000:/$mode/$id</id>\n";
-        $atom .= "<link href=\"" . FULL_URL . "\" />\n";
+        $atom .= '<link href="'.FULL_URL."\" />\n";
         foreach ($topics as $topic) {
             $topic_id = $topic['topic_id'];
             $tor_size = '';
             if (isset($topic['tor_size'])) {
-                $tor_size = str_replace('&nbsp;', ' ', ' [' . humn_size($topic['tor_size']) . ']');
+                $tor_size = str_replace('&nbsp;', ' ', ' ['.humn_size($topic['tor_size']).']');
             }
             $tor_status = '';
             if (isset($topic['tor_status'])) {
@@ -224,32 +228,33 @@ class Atom
             $updated = '';
             $checktime = TIMENOW - 604800; // 1 week
             if ($topic['topic_first_post_edit_time'] && $topic['topic_first_post_edit_time'] > $checktime) {
-                $updated = '[' . $lang['ATOM_UPDATED'] . '] ';
+                $updated = '['.$lang['ATOM_UPDATED'].'] ';
             }
             $atom .= "<entry>\n";
             $atom .= "	<title type=\"html\"><![CDATA[$updated$topic_title$tor_status$tor_size]]></title>\n";
             $atom .= "	<author>\n";
             $atom .= "		<name>$author_name</name>\n";
             $atom .= "	</author>\n";
-            $atom .= "	<updated>" . $date . "T$time+00:00</updated>\n";
-            $atom .= "	<id>tag:rto.feed," . $date . ":/t/$topic_id</id>\n";
+            $atom .= '	<updated>'.$date."T$time+00:00</updated>\n";
+            $atom .= '	<id>tag:rto.feed,'.$date.":/t/$topic_id</id>\n";
             if (config()->get('atom.direct_down') && isset($topic['attach_id'])) {
-                $atom .= "	<link href=\"" . DL_URL . $topic['attach_id'] . "\" />\n";
+                $atom .= '	<link href="'.DL_URL.$topic['attach_id']."\" />\n";
             } else {
-                $atom .= "	<link href=\"" . TOPIC_URL . $topic_id . "\" />\n";
+                $atom .= '	<link href="'.TOPIC_URL.$topic_id."\" />\n";
             }
 
             if (config()->get('atom.direct_view')) {
-                $atom .= "	<description>" . $topic['post_html'] . "\n\nNews URL: " . FULL_URL . TOPIC_URL . $topic_id . "</description>\n";
+                $atom .= '	<description>'.$topic['post_html']."\n\nNews URL: ".FULL_URL.TOPIC_URL.$topic_id."</description>\n";
             }
 
             $atom .= "</entry>\n";
         }
-        $atom .= "</feed>";
+        $atom .= '</feed>';
         @unlink($file_path);
         $fp = fopen($file_path, 'wb+');
         fwrite($fp, $atom);
         fclose($fp);
+
         return true;
     }
 }

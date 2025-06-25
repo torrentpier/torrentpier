@@ -1,18 +1,21 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!empty($setmodules)) {
     $module['USERS']['ACTIONS_LOG'] = basename(__FILE__);
+
     return;
 }
 
-require __DIR__ . '/pagestart.php';
+require __DIR__.'/pagestart.php';
 
 $datastore->enqueue([
     'moderators',
@@ -66,7 +69,7 @@ if (!$mod = $datastore->get('moderators')) {
 array_deep($mod['moderators'], 'html_entity_decode');
 array_deep($mod['admins'], 'html_entity_decode');
 
-$users = array($lang['ACTS_LOG_ALL_ACTIONS'] => $all_users) + array_flip($mod['moderators']) + array_flip($mod['admins']);
+$users = [$lang['ACTS_LOG_ALL_ACTIONS'] => $all_users] + array_flip($mod['moderators']) + array_flip($mod['admins']);
 
 unset($mod);
 
@@ -80,45 +83,45 @@ $f_data = $forums['f'];
 unset($forums);
 
 // Start
-$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
+$start = isset($_REQUEST['start']) ? abs((int) $_REQUEST['start']) : 0;
 
 // Type
-$type_selected = array($def_types);
+$type_selected = [$def_types];
 $type_csv = '';
 
-if ($var =& $_REQUEST[$type_key]) {
+if ($var = &$_REQUEST[$type_key]) {
     $type_selected = get_id_ary($var);
 
     if (in_array($all_types, $type_selected)) {
-        $type_selected = array($all_types);
+        $type_selected = [$all_types];
     }
     $type_csv = implode(',', $type_selected);
     $url = ($type_csv != $def_types) ? url_arg($url, $type_key, $type_csv) : $url;
 }
 
 // User
-$user_selected = array($def_users);
+$user_selected = [$def_users];
 $user_csv = '';
 
-if ($var =& $_REQUEST[$user_key]) {
+if ($var = &$_REQUEST[$user_key]) {
     $user_selected = get_id_ary($var);
 
     if (in_array($all_users, $user_selected)) {
-        $user_selected = array($all_users);
+        $user_selected = [$all_users];
     }
     $user_csv = implode(',', $user_selected);
     $url = ($user_csv != $def_users) ? url_arg($url, $user_key, $user_csv) : $url;
 }
 
 // Forum
-$forum_selected = array($def_forums);
+$forum_selected = [$def_forums];
 $forum_csv = '';
 
-if ($var =& $_REQUEST[$forum_key]) {
+if ($var = &$_REQUEST[$forum_key]) {
     $forum_selected = get_id_ary($var);
 
     if (in_array($all_forums, $forum_selected)) {
-        $forum_selected = array($all_forums);
+        $forum_selected = [$all_forums];
     }
     $forum_csv = implode(',', $forum_selected);
     $url = ($forum_csv != $def_forums) ? url_arg($url, $forum_key, $forum_csv) : $url;
@@ -128,7 +131,7 @@ if ($var =& $_REQUEST[$forum_key]) {
 $topic_selected = null;
 $topic_csv = '';
 
-if ($var =& $_REQUEST[$topic_key]) {
+if ($var = &$_REQUEST[$topic_key]) {
     $topic_selected = get_id_ary($var);
     $topic_csv = implode(',', $topic_selected);
     $url = $topic_csv ? url_arg($url, $topic_key, $topic_csv) : $url;
@@ -137,7 +140,7 @@ if ($var =& $_REQUEST[$topic_key]) {
 // Sort
 $sort_val = $def_sort;
 
-if ($var =& $_REQUEST[$sort_key] && $var != $def_sort) {
+if ($var = &$_REQUEST[$sort_key] && $var != $def_sort) {
     $sort_val = ($var == $sort_asc) ? $sort_asc : $sort_desc;
     $url = url_arg($url, $sort_key, $sort_val);
 }
@@ -146,11 +149,11 @@ if ($var =& $_REQUEST[$sort_key] && $var != $def_sort) {
 $datetime_val = $def_datetime;
 $daysback_val = $def_days;
 
-if ($var =& $_REQUEST[$daysback_key] && $var != $def_days) {
-    $daysback_val = max((int)$var, 1);
+if ($var = &$_REQUEST[$daysback_key] && $var != $def_days) {
+    $daysback_val = max((int) $var, 1);
     $url = url_arg($url, $daysback_key, $daysback_val);
 }
-if ($var =& $_REQUEST[$datetime_key] && $var != $def_datetime) {
+if ($var = &$_REQUEST[$datetime_key] && $var != $def_datetime) {
     $tz = TIMENOW + (3600 * config()->get('board_timezone'));
     if (($tmp_timestamp = strtotime($var, $tz)) > 0) {
         $datetime_val = $tmp_timestamp;
@@ -162,13 +165,13 @@ $time_end_val = 86400 + mktime(0, 0, 0, date('m', $datetime_val), date('d', $dat
 $time_start_val = $time_end_val - 86400 * $daysback_val;
 
 // First log time
-$row = DB()->fetch_row('SELECT MIN(log_time) AS first_log_time FROM ' . BB_LOG);
-$first_log_time = (int)$row['first_log_time'];
+$row = DB()->fetch_row('SELECT MIN(log_time) AS first_log_time FROM '.BB_LOG);
+$first_log_time = (int) $row['first_log_time'];
 
 // Title match
 $title_match_val = $title_match_sql = '';
 
-if ($var =& $_REQUEST[$title_match_key]) {
+if ($var = &$_REQUEST[$title_match_key]) {
     if ($tmp_title_match = substr(urldecode(trim($var)), 0, $title_match_max_len)) {
         $title_match_sql = DB()->escape($tmp_title_match);
         $url = url_arg($url, $title_match_key, urlencode($tmp_title_match));
@@ -184,12 +187,12 @@ $where .= $topic_csv ? " AND l.log_topic_id IN($topic_csv)" : '';
 $where .= $title_match_sql ? " AND MATCH (l.log_topic_title) AGAINST ('$title_match_sql' IN BOOLEAN MODE)" : '';
 
 $sql = 'SELECT l.*, u.*
-	FROM ' . BB_LOG . ' l
-	LEFT JOIN ' . BB_USERS . " u ON(u.user_id = l.log_user_id)
+	FROM '.BB_LOG.' l
+	LEFT JOIN '.BB_USERS." u ON(u.user_id = l.log_user_id)
 	$where
 	ORDER BY l.log_time
 	$sort_val
-	LIMIT $start, " . ($per_page + 1);
+	LIMIT $start, ".($per_page + 1);
 
 $log_rowset = DB()->fetch_rowset($sql);
 $log_count = count($log_rowset);
@@ -242,12 +245,12 @@ if ($log_rowset) {
                     $topic_title_new = $row['log_topic_title_new'];
                 }
                 // forum_name
-                if ($fid =& $row['log_forum_id']) {
-                    $forum_name = ($fname =& $f_data[$fid]['forum_name']) ? $fname : 'id:' . $row['log_forum_id'];
+                if ($fid = &$row['log_forum_id']) {
+                    $forum_name = ($fname = &$f_data[$fid]['forum_name']) ? $fname : 'id:'.$row['log_forum_id'];
                 }
                 // forum_name_new
-                if ($fid =& $row['log_forum_id_new']) {
-                    $forum_name_new = ($fname =& $f_data[$fid]['forum_name']) ? $fname : 'id:' . $row['log_forum_id'];
+                if ($fid = &$row['log_forum_id_new']) {
+                    $forum_name_new = ($fname = &$f_data[$fid]['forum_name']) ? $fname : 'id:'.$row['log_forum_id'];
                 }
 
                 break;
@@ -260,103 +263,103 @@ if ($log_rowset) {
         $datetime_href_s = url_arg($url, $datetime_key, date($dt_format, $row['log_time']));
         $datetime_href_s = url_arg($datetime_href_s, $daysback_key, 1);
 
-        $template->assign_block_vars('log', array(
-            'ACTION_DESC' => $lang['LOG_ACTION']['LOG_TYPE'][$log_type_flip[$row['log_type_id']]],
+        $template->assign_block_vars('log', [
+            'ACTION_DESC'   => $lang['LOG_ACTION']['LOG_TYPE'][$log_type_flip[$row['log_type_id']]],
             'ACTION_HREF_S' => url_arg($url, $type_key, $row['log_type_id']),
 
-            'USER_ID' => $row['log_user_id'],
-            'USERNAME' => profile_url($row, true),
+            'USER_ID'     => $row['log_user_id'],
+            'USERNAME'    => profile_url($row, true),
             'USER_HREF_S' => url_arg($url, $user_key, $row['log_user_id']),
-            'USER_IP' => \TorrentPier\Helpers\IPHelper::isValid($row['log_user_ip']) ? \TorrentPier\Helpers\IPHelper::long2ip_extended($row['log_user_ip']) : '127.0.0.1',
+            'USER_IP'     => \TorrentPier\Helpers\IPHelper::isValid($row['log_user_ip']) ? \TorrentPier\Helpers\IPHelper::long2ip_extended($row['log_user_ip']) : '127.0.0.1',
 
-            'FORUM_ID' => $row['log_forum_id'],
-            'FORUM_HREF' => BB_ROOT . FORUM_URL . $row['log_forum_id'],
+            'FORUM_ID'     => $row['log_forum_id'],
+            'FORUM_HREF'   => BB_ROOT.FORUM_URL.$row['log_forum_id'],
             'FORUM_HREF_S' => url_arg($url, $forum_key, $row['log_forum_id']),
-            'FORUM_NAME' => htmlCHR($forum_name),
+            'FORUM_NAME'   => htmlCHR($forum_name),
 
-            'FORUM_ID_NEW' => $row['log_forum_id_new'],
-            'FORUM_HREF_NEW' => BB_ROOT . FORUM_URL . $row['log_forum_id_new'],
+            'FORUM_ID_NEW'     => $row['log_forum_id_new'],
+            'FORUM_HREF_NEW'   => BB_ROOT.FORUM_URL.$row['log_forum_id_new'],
             'FORUM_HREF_NEW_S' => url_arg($url, $forum_key, $row['log_forum_id_new']),
-            'FORUM_NAME_NEW' => htmlCHR($forum_name_new),
+            'FORUM_NAME_NEW'   => htmlCHR($forum_name_new),
 
-            'TOPIC_ID' => $row['log_topic_id'],
-            'TOPIC_HREF' => (!$topic_deleted) ? BB_ROOT . TOPIC_URL . $row['log_topic_id'] : '',
+            'TOPIC_ID'     => $row['log_topic_id'],
+            'TOPIC_HREF'   => (!$topic_deleted) ? BB_ROOT.TOPIC_URL.$row['log_topic_id'] : '',
             'TOPIC_HREF_S' => url_arg($url, $topic_key, $row['log_topic_id']),
-            'TOPIC_TITLE' => $topic_title,
+            'TOPIC_TITLE'  => $topic_title,
 
-            'TOPIC_ID_NEW' => $row['log_topic_id_new'],
-            'TOPIC_HREF_NEW' => BB_ROOT . TOPIC_URL . $row['log_topic_id_new'],
+            'TOPIC_ID_NEW'     => $row['log_topic_id_new'],
+            'TOPIC_HREF_NEW'   => BB_ROOT.TOPIC_URL.$row['log_topic_id_new'],
             'TOPIC_HREF_NEW_S' => url_arg($url, $topic_key, $row['log_topic_id_new']),
-            'TOPIC_TITLE_NEW' => $topic_title_new,
+            'TOPIC_TITLE_NEW'  => $topic_title_new,
 
-            'DATETIME' => bb_date($row['log_time'], 'd-M-y H:i'),
+            'DATETIME'        => bb_date($row['log_time'], 'd-M-y H:i'),
             'DATETIME_HREF_S' => $datetime_href_s,
-            'MSG' => $msg,
-            'ROW_CLASS' => $row_class,
+            'MSG'             => $msg,
+            'ROW_CLASS'       => $row_class,
 
-        ));
+        ]);
 
         // Topics
         if ($topic_csv && empty($filter['topics'][$row['log_topic_title']])) {
-            $template->assign_block_vars('topics', array(
+            $template->assign_block_vars('topics', [
                 'TOPIC_TITLE' => $row['log_topic_title'],
-            ));
+            ]);
             $filter['topics'][$row['log_topic_title']] = true;
         }
         // Forums
         if ($forum_csv && empty($filter['forums'][$forum_name])) {
-            $template->assign_block_vars('forums', array(
+            $template->assign_block_vars('forums', [
                 'FORUM_NAME' => htmlCHR($forum_name),
-            ));
+            ]);
             $filter['forums'][$forum_name] = true;
         }
         // Users
         if ($user_csv && empty($filter['users'])) {
-            $template->assign_block_vars('users', array(
+            $template->assign_block_vars('users', [
                 'USERNAME' => profile_url($row, true),
-            ));
+            ]);
             $filter['users'] = true;
         }
     }
 
-    $template->assign_vars(array(
-        'FILTERS' => $topic_csv || $forum_csv || $user_csv,
+    $template->assign_vars([
+        'FILTERS'       => $topic_csv || $forum_csv || $user_csv,
         'FILTER_TOPICS' => !empty($filter['topics']),
         'FILTER_FORUMS' => !empty($filter['forums']),
-        'FILTER_USERS' => !empty($filter['users']),
-    ));
+        'FILTER_USERS'  => !empty($filter['users']),
+    ]);
 } else {
     $template->assign_block_vars('log_not_found', []);
 }
 
 // Select
-$log_type_select = array($lang['ACTS_LOG_ALL_ACTIONS'] => $all_types) + $log_action->log_type_select;
+$log_type_select = [$lang['ACTS_LOG_ALL_ACTIONS'] => $all_types] + $log_action->log_type_select;
 
-$template->assign_vars(array(
+$template->assign_vars([
     'LOG_COLSPAN' => 4,
 
-    'DATETIME_NAME' => $datetime_key,
-    'DATETIME_VAL' => date('Y-m-d', $datetime_val),
-    'DAYSBACK_NAME' => $daysback_key,
-    'DAYSBACK_VAL' => $daysback_val,
+    'DATETIME_NAME'  => $datetime_key,
+    'DATETIME_VAL'   => date('Y-m-d', $datetime_val),
+    'DAYSBACK_NAME'  => $daysback_key,
+    'DAYSBACK_VAL'   => $daysback_val,
     'FIRST_LOG_TIME' => $first_log_time ? date('Y-m-d', $first_log_time) : $lang['ACC_NONE'],
 
-    'TITLE_MATCH_MAX' => $title_match_max_len,
+    'TITLE_MATCH_MAX'  => $title_match_max_len,
     'TITLE_MATCH_NAME' => $title_match_key,
-    'TITLE_MATCH_VAL' => $title_match_val,
+    'TITLE_MATCH_VAL'  => $title_match_val,
 
-    'SORT_NAME' => $sort_key,
-    'SORT_ASC' => $sort_asc,
-    'SORT_DESC' => $sort_desc,
-    'SORT_ASC_CHECKED' => ($sort_val == $sort_asc) ? HTML_CHECKED : '',
+    'SORT_NAME'         => $sort_key,
+    'SORT_ASC'          => $sort_asc,
+    'SORT_DESC'         => $sort_desc,
+    'SORT_ASC_CHECKED'  => ($sort_val == $sort_asc) ? HTML_CHECKED : '',
     'SORT_DESC_CHECKED' => ($sort_val == $sort_desc) ? HTML_CHECKED : '',
 
-    'SEL_FORUM' => get_forum_select('admin', "{$forum_key}[]", $forum_selected, $max_forum_name_len, $select_max_height, '', $all_forums),
+    'SEL_FORUM'    => get_forum_select('admin', "{$forum_key}[]", $forum_selected, $max_forum_name_len, $select_max_height, '', $all_forums),
     'SEL_LOG_TYPE' => build_select("{$type_key}[]", $log_type_select, $type_selected, 60, $select_max_height),
-    'SEL_USERS' => build_select("{$user_key}[]", $users, $user_selected, 16, $select_max_height),
+    'SEL_USERS'    => build_select("{$user_key}[]", $users, $user_selected, 16, $select_max_height),
 
     'S_LOG_ACTION' => 'admin_log.php',
-    'TOPIC_CSV' => $topic_csv,
-));
+    'TOPIC_CSV'    => $topic_csv,
+]);
 
 print_page('admin_log.tpl', 'admin');

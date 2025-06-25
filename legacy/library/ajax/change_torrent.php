@@ -1,14 +1,16 @@
 <?php
+
 /**
- * TorrentPier – Bull-powered BitTorrent tracker engine
+ * TorrentPier – Bull-powered BitTorrent tracker engine.
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ *
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ *
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
-    die(basename(__FILE__));
+    exit(basename(__FILE__));
 }
 
 global $userdata, $lang, $log_action;
@@ -20,8 +22,8 @@ if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
 }
 
-$attach_id = (int)$this->request['attach_id'];
-$type = (string)$this->request['type'];
+$attach_id = (int) $this->request['attach_id'];
+$type = (string) $this->request['type'];
 
 if (!$torrent = \TorrentPier\Legacy\Torrent::get_torrent_info($attach_id)) {
     $this->ajax_die($lang['INVALID_ATTACH_ID']);
@@ -56,24 +58,24 @@ switch ($type) {
 
         // Log action
         $log_action->mod('mod_topic_change_tor_type', [
-            'forum_id' => $torrent['forum_id'],
-            'topic_id' => $torrent['topic_id'],
+            'forum_id'    => $torrent['forum_id'],
+            'topic_id'    => $torrent['topic_id'],
             'topic_title' => $torrent['topic_title'],
-            'log_msg' => sprintf($lang['TOR_TYPE_LOG_ACTION'], $tor_type_lang),
+            'log_msg'     => sprintf($lang['TOR_TYPE_LOG_ACTION'], $tor_type_lang),
         ]);
 
         $title = $lang['CHANGE_TOR_TYPE'];
-        $url = make_url(TOPIC_URL . $torrent['topic_id']);
+        $url = make_url(TOPIC_URL.$torrent['topic_id']);
         break;
 
     case 'reg':
         \TorrentPier\Legacy\Torrent::tracker_register($attach_id);
-        $url = (TOPIC_URL . $torrent['topic_id']);
+        $url = (TOPIC_URL.$torrent['topic_id']);
         break;
 
     case 'unreg':
         \TorrentPier\Legacy\Torrent::tracker_unregister($attach_id);
-        $url = (TOPIC_URL . $torrent['topic_id']);
+        $url = (TOPIC_URL.$torrent['topic_id']);
         break;
 
     case 'del_torrent':
@@ -81,7 +83,7 @@ switch ($type) {
             $this->prompt_for_confirm($lang['DEL_TORRENT']);
         }
         \TorrentPier\Legacy\Torrent::delete_torrent($attach_id);
-        $url = make_url(TOPIC_URL . $torrent['topic_id']);
+        $url = make_url(TOPIC_URL.$torrent['topic_id']);
         break;
 
     case 'del_torrent_move_topic':
@@ -89,7 +91,7 @@ switch ($type) {
             $this->prompt_for_confirm($lang['DEL_MOVE_TORRENT']);
         }
         \TorrentPier\Legacy\Torrent::delete_torrent($attach_id);
-        $url = make_url("modcp.php?" . POST_TOPIC_URL . "={$torrent['topic_id']}&mode=move&sid={$userdata['session_id']}");
+        $url = make_url('modcp.php?'.POST_TOPIC_URL."={$torrent['topic_id']}&mode=move&sid={$userdata['session_id']}");
         break;
 }
 
