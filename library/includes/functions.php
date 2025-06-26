@@ -1450,6 +1450,9 @@ function redirect($url)
 
     $redirect_url = $server_protocol . $server_name . $server_port . $script_name . preg_replace('#^\/?(.*?)\/?$#', '/\1', $url);
 
+    // Send no-cache headers to prevent browsers from caching redirects
+    send_no_cache_headers();
+
     // Behave as per HTTP/1.1 spec for others
     header('Location: ' . $redirect_url, response_code: 301);
     exit;
