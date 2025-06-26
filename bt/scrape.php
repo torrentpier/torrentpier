@@ -32,7 +32,7 @@ $info_hash_hex = bin2hex($info_hash);
 
 // Check info_hash length
 if (strlen($info_hash) !== 20) {
-    msg_die('Invalid info_hash: ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
+    msg_die('Invalid info_hash: ' . (mb_check_encoding($info_hash, DEFAULT_CHARSET) ? $info_hash : $info_hash_hex));
 }
 
 // Handle multiple hashes
@@ -97,7 +97,7 @@ if (!empty($info_hash_count)) {
 
 // Verify if torrent registered on tracker
 if (empty($torrents)) {
-    msg_die('Torrent not registered, info_hash = ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
+    msg_die('Torrent not registered, info_hash = ' . (mb_check_encoding($info_hash, DEFAULT_CHARSET) ? $info_hash : $info_hash_hex));
 }
 
 die(\Arokettu\Bencode\Bencode::encode($torrents));
