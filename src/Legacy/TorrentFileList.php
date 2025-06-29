@@ -54,7 +54,7 @@ class TorrentFileList
 
         if ($this->multiple) {
             if (!empty($this->files_ary['/'])) {
-                $this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
+                $this->files_ary = $this->files_ary + $this->files_ary['/'];
                 unset($this->files_ary['/']);
             }
             $filelist = $html->array2html($this->files_ary);
