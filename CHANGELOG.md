@@ -2,6 +2,18 @@
 
 # 📖 Change Log
 
+## [v2.4.8](https://github.com/torrentpier/torrentpier/compare/v2.4.7..v2.4.8) (2025-06-30)
+
+### 🐛 Bug Fixes
+
+- *(TorrentFileList)* Avoid `array_merge` reindexing for numeric folder names ([#2014](https://github.com/torrentpier/torrentpier/pull/2014)) - ([a5fbc2f](https://github.com/torrentpier/torrentpier/commit/a5fbc2ffc7389c30ffbb98d253ff8e936528fec1))
+- *(redirect)* Add no-cache headers to prevent browser caching of redirects ([#2010](https://github.com/torrentpier/torrentpier/pull/2010)) - ([134b3df](https://github.com/torrentpier/torrentpier/commit/134b3dfa5cd8e8e5ce3f10912b58afecc4f118e0))
+
+### 🚜 Refactor
+
+- Use `DEFAULT_CHARSET` constant instead of hardcoded string ([#2011](https://github.com/torrentpier/torrentpier/pull/2011)) - ([c2cbc77](https://github.com/torrentpier/torrentpier/commit/c2cbc77b144057d3d37cd58b635eabc6280fe137))
+
+
 ## [v2.4.7](https://github.com/torrentpier/torrentpier/compare/v2.4.6..v2.4.7) (2025-06-24)
 
 ### 🐛 Bug Fixes
