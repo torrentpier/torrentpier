@@ -174,3 +174,9 @@ $RECYCLE.BIN/
 
 # Claude Code
 CLAUDE.local.md
+
+# Docusaurus
+/docs/.docusaurus
+/docs/.cache-loader
+/docs/build
+/docs/node_modules

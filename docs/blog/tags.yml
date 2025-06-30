@@ -1,0 +1,14 @@
+announcement:
+  label: Announcement
+  permalink: /announcement
+  description: Announcement tag description
+
+laravel:
+  label: Laravel
+  permalink: /laravel
+  description: Laravel tag description
+
+development:
+  label: Development
+  permalink: /development
+  description: Development tag description
