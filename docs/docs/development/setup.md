@@ -286,6 +286,6 @@ Follow conventional commits:
 
 ## Next Steps
 
-- Review [Coding Standards](/docs/development/coding-standards)
-- Learn about [Testing](/docs/development/testing)
-- Understand [API Development](/docs/api/overview)
+- Review Coding Standards
+- Learn about Testing
+- Understand API Development
