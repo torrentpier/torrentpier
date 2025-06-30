@@ -16,7 +16,7 @@ permissions:
 # Allow only one concurrent deployment
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -30,6 +30,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
