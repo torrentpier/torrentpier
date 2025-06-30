@@ -19,11 +19,14 @@
     },
     "require": {
         "php": "^8.4",
+        "http-interop/http-factory-guzzle": "^1.2",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
+        "laravel/scout": "^10.15",
         "laravel/telescope": "^5.9",
         "laravel/tinker": "^2.10.1",
+        "meilisearch/meilisearch-php": "^1.15",
         "predis/predis": "^3.0",
         "tightenco/ziggy": "^2.4"
     },
