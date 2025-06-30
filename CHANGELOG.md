@@ -2,6 +2,17 @@
 
 # 📖 Change Log
 
+## [v2.8.2](https://github.com/torrentpier/torrentpier/compare/v2.8.1..v2.8.2) (2025-06-30)
+
+### 🐛 Bug Fixes
+
+- *(TorrentFileList)* Avoid `array_merge` reindexing for numeric folder names ([#2014](https://github.com/torrentpier/torrentpier/pull/2014)) - ([915e1d8](https://github.com/torrentpier/torrentpier/commit/915e1d817c61d2a4f0691b24ec1bc6577a9cd44b))
+
+### 🚜 Refactor
+
+- Use `DEFAULT_CHARSET` constant instead of hardcoded string ([#2011](https://github.com/torrentpier/torrentpier/pull/2011)) - ([7ac3359](https://github.com/torrentpier/torrentpier/commit/7ac335974baa44a8575bebb71ae2fbc0902d10e7))
+
+
 ## [v2.8.1](https://github.com/torrentpier/torrentpier/compare/v2.8.0..v2.8.1) (2025-06-24)
 
 ### 🐛 Bug Fixes
