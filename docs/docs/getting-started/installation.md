@@ -193,6 +193,6 @@ php artisan optimize:clear
 
 ## Next Steps
 
-- Configure [Application Settings](/docs/getting-started/configuration)
-- Set up [Email Configuration](/docs/getting-started/email)
-- Review [Security Best Practices](/docs/getting-started/security)
+- Configure Application Settings
+- Set up Email Configuration
+- Review Security Best Practices
