@@ -11,22 +11,14 @@ npm start
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-## Build
-
-```bash
-npm run build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
 ## Deployment
 
 The documentation is automatically deployed to GitHub Pages when changes are pushed to the main branch. The deployment is handled by GitHub Actions.
 
 ## Structure
 
-- `/docs` - Main documentation content
 - `/blog` - Development blog posts
+- `/docs` - Main documentation content
 - `/src` - Custom React components and pages
 - `/static` - Static assets like images
 
