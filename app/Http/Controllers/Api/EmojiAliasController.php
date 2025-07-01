@@ -53,37 +53,37 @@ class EmojiAliasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(EmojiAlias $emojiAlias, Request $request)
+    public function show(EmojiAlias $alias, Request $request)
     {
-        $emojiAlias->load(['emoji' => function ($query) {
+        $alias->load(['emoji' => function ($query) {
             $query->with('category');
         }]);
 
-        return new EmojiAliasResource($emojiAlias);
+        return new EmojiAliasResource($alias);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEmojiAliasRequest $request, EmojiAlias $emojiAlias)
+    public function update(UpdateEmojiAliasRequest $request, EmojiAlias $alias)
     {
-        $emojiAlias->update($request->validated());
+        $alias->update($request->validated());
 
         if ($request->get('with_emoji')) {
-            $emojiAlias->load(['emoji' => function ($query) {
+            $alias->load(['emoji' => function ($query) {
                 $query->with('category');
             }]);
         }
 
-        return new EmojiAliasResource($emojiAlias);
+        return new EmojiAliasResource($alias);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(EmojiAlias $emojiAlias)
+    public function destroy(EmojiAlias $alias)
     {
-        $emojiAlias->delete();
+        $alias->delete();
 
         return response()->json(null, 204);
     }

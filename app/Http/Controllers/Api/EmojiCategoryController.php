@@ -44,9 +44,9 @@ class EmojiCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(EmojiCategory $emojiCategory, Request $request)
+    public function show(EmojiCategory $category, Request $request)
     {
-        $emojiCategory->load([
+        $category->load([
             'emojis' => function ($query) use ($request) {
                 $query->orderBy('display_order');
                 if ($request->get('with_aliases')) {
@@ -55,25 +55,25 @@ class EmojiCategoryController extends Controller
             },
         ]);
 
-        return new EmojiCategoryResource($emojiCategory);
+        return new EmojiCategoryResource($category);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEmojiCategoryRequest $request, EmojiCategory $emojiCategory)
+    public function update(UpdateEmojiCategoryRequest $request, EmojiCategory $category)
     {
-        $emojiCategory->update($request->validated());
+        $category->update($request->validated());
 
-        return new EmojiCategoryResource($emojiCategory);
+        return new EmojiCategoryResource($category);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(EmojiCategory $emojiCategory)
+    public function destroy(EmojiCategory $category)
     {
-        $emojiCategory->delete();
+        $category->delete();
 
         return response()->json(null, 204);
     }

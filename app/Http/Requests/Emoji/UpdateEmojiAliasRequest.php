@@ -22,7 +22,7 @@ class UpdateEmojiAliasRequest extends FormRequest
      */
     public function rules(): array
     {
-        $aliasId = $this->route('emoji_alias')->id;
+        $aliasId = $this->route('alias')->id;
 
         return [
             'emoji_id' => 'sometimes|exists:emojis,id',
