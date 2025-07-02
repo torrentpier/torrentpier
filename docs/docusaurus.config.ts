@@ -9,29 +9,19 @@ const config: Config = {
   tagline: 'Modern Laravel-based BitTorrent tracker',
   favicon: 'img/favicon.ico',
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: true,
   },
 
-  // Set the production url of your site here
   url: 'https://docs.torrentpier.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'torrentpier', // Usually your GitHub org/user name.
-  projectName: 'torrentpier.github.io', // Usually your repo name.
+  organizationName: 'torrentpier',
+  projectName: 'torrentpier.github.io',
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -43,10 +33,8 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/torrentpier/torrentpier/tree/dexter/docs/',
+          editUrl: 'https://github.com/torrentpier/torrentpier/tree/dexter/docs/',
+          exclude: ['api/**'], // Exclude API folder from main docs
         },
         blog: {
           showReadingTime: true,
@@ -54,11 +42,7 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/torrentpier/torrentpier/tree/dexter/docs/',
-          // Useful options to enforce blogging best practices
+          editUrl: 'https://github.com/torrentpier/torrentpier/tree/dexter/docs/',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -70,8 +54,20 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'api',
+        path: 'docs/api',
+        routeBasePath: 'api',
+        sidebarPath: './sidebars.ts',
+        editUrl: 'https://github.com/torrentpier/torrentpier/tree/dexter/docs/',
+      },
+    ],
+  ],
+
   themeConfig: {
-    // Replace with your project's social card
     image: 'img/social-card.jpg',
     navbar: {
       title: 'TorrentPier',
@@ -82,15 +78,17 @@ const config: Config = {
       items: [
         {to: '/blog/welcome', label: 'Blog', position: 'left'},
         {
-          to: '/docs/api/overview',
-          label: 'API',
-          position: 'left',
-        },
-        {
           type: 'docSidebar',
           sidebarId: 'docsSidebar',
           position: 'left',
           label: 'Documentation',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'apiSidebar',
+          docsPluginId: 'api',
+          position: 'left',
+          label: 'API',
         },
         {
           href: 'https://github.com/torrentpier/torrentpier',
@@ -108,6 +106,10 @@ const config: Config = {
             {
               label: 'Getting Started',
               to: '/docs/intro',
+            },
+            {
+              label: 'API Reference',
+              to: '/api/overview',
             },
           ],
         },
