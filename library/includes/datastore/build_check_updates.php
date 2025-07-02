@@ -35,6 +35,7 @@ $currentVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($bb_cfg['tp_
 // Has update!
 if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
     $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
+    $SHAFileHash = $updaterDownloader['assets'][0]['digest'] ?? '';
 
     // Check updater file
     $updaterFile = readUpdaterFile();
@@ -48,10 +49,12 @@ if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
         ]), UPDATER_FILE, replace_content: true);
     }
 
-    // Get MD5 checksum
+    // Get MD5 / sha256 checksum
     $buildFileChecksum = '';
-    if (isset($latestBuildFileLink)) {
-        $buildFileChecksum = strtoupper(md5_file($latestBuildFileLink));
+    if (!empty($SHAFileHash)) {
+        $buildFileChecksum = $SHAFileHash;
+    } else {
+        $buildFileChecksum = 'MD5: ' . strtoupper(md5_file($latestBuildFileLink));
     }
 
     // Build data array

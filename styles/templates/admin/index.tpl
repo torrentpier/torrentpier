@@ -160,7 +160,7 @@
     <!-- IF updater.UPDATE_AVAILABLE -->
     <tr>
         <td class="row1" nowrap="nowrap" width="25%"><b>{L_UPDATE_AVAILABLE}:</b></td>
-        <td class="row2"><b>{updater.NEW_VERSION_NUMBER}</b><!-- IF updater.NEW_VERSION_SIZE -->&nbsp;({L_SIZE}:&nbsp;{updater.NEW_VERSION_SIZE})<!-- ENDIF -->&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_DL_LINK}">{L_DOWNLOAD}</a>&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_LINK}">{L_CHANGELOG}</a><!-- IF updater.NEW_VERSION_MD5 -->&nbsp;&middot;&nbsp;<span class="copyElement" data-clipboard-text="{updater.NEW_VERSION_MD5}" title="{L_COPY_TO_CLIPBOARD}">MD5:&nbsp;{updater.NEW_VERSION_MD5}</span><!-- ENDIF --></td>
+        <td class="row2"><b>{updater.NEW_VERSION_NUMBER}</b><!-- IF updater.NEW_VERSION_SIZE -->&nbsp;({L_SIZE}:&nbsp;{updater.NEW_VERSION_SIZE})<!-- ENDIF -->&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_DL_LINK}">{L_DOWNLOAD}</a>&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_LINK}">{L_CHANGELOG}</a><!-- IF updater.NEW_VERSION_HASH -->&nbsp;&middot;&nbsp;<span class="copyElement" data-clipboard-text="{updater.NEW_VERSION_HASH}" title="{L_COPY_TO_CLIPBOARD}">{updater.NEW_VERSION_HASH}</span><!-- ENDIF --></td>
     </tr>
     <!-- ENDIF -->
     <!-- END updater -->
