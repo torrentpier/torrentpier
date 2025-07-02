@@ -2,6 +2,17 @@
 
 # 📖 Change Log
 
+## [v2.4.9](https://github.com/torrentpier/torrentpier/compare/v2.4.8..v2.4.9) (2025-07-02)
+
+### 🚀 Features
+
+- *(updater)* Added exceptions logging ([#2026](https://github.com/torrentpier/torrentpier/pull/2026)) - ([57d0d59](https://github.com/torrentpier/torrentpier/commit/57d0d59b5379600f63cf7d5f774e3ec000e39473))
+
+### 🚜 Refactor
+
+- *(TorrentFileList)* Reduce duplication in root directory unset logic ([#2027](https://github.com/torrentpier/torrentpier/pull/2027)) - ([6840376](https://github.com/torrentpier/torrentpier/commit/68403760c1e9e01133536bb5021b08d9101d323e))
+
+
 ## [v2.4.8](https://github.com/torrentpier/torrentpier/compare/v2.4.7..v2.4.8) (2025-06-30)
 
 ### 🐛 Bug Fixes
