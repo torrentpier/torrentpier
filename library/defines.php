@@ -15,6 +15,7 @@ if (!defined('BB_ROOT')) {
 define('ADMIN_DIR', BB_PATH . '/admin');
 define('DATA_DIR', BB_PATH . '/data');
 define('INT_DATA_DIR', BB_PATH . '/internal_data');
+define('AJAX_HTML_DIR', BB_ROOT . '/internal_data/ajax_html/');
 define('CACHE_DIR', BB_PATH . '/internal_data/cache');
 define('LOG_DIR', BB_PATH . '/internal_data/log');
 define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers');
