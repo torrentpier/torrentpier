@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Emoji\IndexEmojiAliasRequest;
 use App\Http\Requests\Emoji\SearchEmojiAliasRequest;
 use App\Http\Requests\Emoji\StoreEmojiAliasRequest;
 use App\Http\Requests\Emoji\UpdateEmojiAliasRequest;
@@ -15,7 +16,7 @@ class EmojiAliasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(IndexEmojiAliasRequest $request)
     {
         $aliases = EmojiAlias::query()
             ->when($request->get('emoji_id'), function ($query, $emojiId) {

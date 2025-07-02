@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Emoji\IndexEmojiRequest;
 use App\Http\Requests\Emoji\SearchEmojiRequest;
 use App\Http\Requests\Emoji\StoreEmojiRequest;
 use App\Http\Requests\Emoji\UpdateEmojiRequest;
@@ -15,7 +16,7 @@ class EmojiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(IndexEmojiRequest $request)
     {
         $emojis = Emoji::query()
             ->when($request->get('category_id'), function ($query, $categoryId) {
