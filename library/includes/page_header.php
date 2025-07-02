@@ -194,6 +194,8 @@ $template->assign_vars([
     'BONUS_URL' => BB_ROOT . BONUS_URL,
     'TOPIC_URL' => BB_ROOT . TOPIC_URL,
 
+    'AJAX_HTML_DIR' => AJAX_HTML_DIR,
+
     'ONLY_NEW_POSTS' => ONLY_NEW_POSTS,
     'ONLY_NEW_TOPICS' => ONLY_NEW_TOPICS,
 
