@@ -90,7 +90,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
             'NEW_VERSION_DL_LINK' => $update_data['latest_version_dl_link'],
             'NEW_VERSION_LINK' => $update_data['latest_version_link'],
-            'NEW_VERSION_MD5' => $update_data['latest_version_checksum']
+            'NEW_VERSION_HASH' => $update_data['latest_version_checksum']
         ]);
     }
 
