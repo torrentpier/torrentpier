@@ -9,7 +9,7 @@ The Emoji Aliases API allows you to manage alternative shortcodes for emojis, en
 
 ## Base URL
 
-```
+```http
 /api/emoji/aliases
 ```
 
@@ -357,7 +357,7 @@ curl -X DELETE "https://api.example.com/api/emoji/aliases/3" \
 
 #### Example Response
 
-```
+```text
 HTTP/1.1 204 No Content
 ```
 

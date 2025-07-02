@@ -11,7 +11,7 @@ Welcome to the API documentation. This section covers all available REST API end
 
 All API endpoints are prefixed with `/api/` and use the following base URL:
 
-```
+```http
 https://your-domain.com/api/
 ```
 
@@ -34,7 +34,7 @@ curl -X POST https://your-domain.com/api/login \
 
 Include the token in the Authorization header:
 
-```bash
+```text
 Authorization: Bearer your-token-here
 ```
 
@@ -43,6 +43,7 @@ Authorization: Bearer your-token-here
 All API responses follow a consistent JSON format:
 
 ### Success Response
+
 ```json
 {
   "data": {
@@ -53,6 +54,7 @@ All API responses follow a consistent JSON format:
 ```
 
 ### Collection Response
+
 ```json
 {
   "data": [
@@ -80,6 +82,7 @@ All API responses follow a consistent JSON format:
 ```
 
 ### Error Response
+
 ```json
 {
   "message": "Validation failed",
@@ -112,7 +115,7 @@ API requests are rate-limited to prevent abuse:
 
 Rate limit headers are included in responses:
 
-```
+```text
 X-RateLimit-Limit: 60
 X-RateLimit-Remaining: 59
 X-RateLimit-Reset: 1640995200
@@ -126,7 +129,8 @@ List endpoints support pagination using query parameters:
 - `per_page` - Items per page (default: 50, max: 100)
 
 Example:
-```
+
+```http
 GET /api/emoji/emojis?page=2&per_page=25
 ```
 
@@ -148,7 +152,8 @@ Use these parameters to include related data:
 - `with_emoji` - Include emoji information (for aliases)
 
 Example:
-```
+
+```http
 GET /api/emoji/emojis?search=smile&with_category=1&with_aliases=1
 ```
 
@@ -156,7 +161,7 @@ GET /api/emoji/emojis?search=smile&with_category=1&with_aliases=1
 
 The current API version is v1. Future versions will be available at:
 
-```
+```http
 /api/v2/endpoint
 ```
 

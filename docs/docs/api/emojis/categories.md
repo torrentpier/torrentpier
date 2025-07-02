@@ -9,7 +9,7 @@ The Emoji Categories API allows you to manage emoji categories used to organize 
 
 ## Base URL
 
-```
+```http
 /api/emoji/categories
 ```
 
@@ -248,7 +248,7 @@ curl -X DELETE "https://api.example.com/api/emoji/categories/3" \
 
 #### Example Response
 
-```
+```text
 HTTP/1.1 204 No Content
 ```
 

@@ -9,7 +9,7 @@ The Emoji API allows you to manage individual emojis, including Unicode emojis, 
 
 ## Base URL
 
-```
+```http
 /api/emoji/emojis
 ```
 
@@ -237,6 +237,7 @@ POST /api/emoji/emojis
 #### Example Requests
 
 **Unicode Emoji:**
+
 ```bash
 curl -X POST "https://api.example.com/api/emoji/emojis" \
   -H "Content-Type: application/json" \
@@ -251,6 +252,7 @@ curl -X POST "https://api.example.com/api/emoji/emojis" \
 ```
 
 **Custom Image Emoji:**
+
 ```bash
 curl -X POST "https://api.example.com/api/emoji/emojis" \
   -H "Content-Type: application/json" \
@@ -265,6 +267,7 @@ curl -X POST "https://api.example.com/api/emoji/emojis" \
 ```
 
 **CSS Sprite Emoji:**
+
 ```bash
 curl -X POST "https://api.example.com/api/emoji/emojis" \
   -H "Content-Type: application/json" \
@@ -387,7 +390,7 @@ curl -X DELETE "https://api.example.com/api/emoji/emojis/25" \
 
 #### Example Response
 
-```
+```text
 HTTP/1.1 204 No Content
 ```
 

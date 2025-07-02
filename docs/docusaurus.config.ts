@@ -34,7 +34,6 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/torrentpier/torrentpier/tree/dexter/docs/',
-          exclude: ['api/**'], // Exclude API folder from main docs
         },
         blog: {
           showReadingTime: true,
@@ -54,24 +53,7 @@ const config: Config = {
     ],
   ],
 
-  plugins: [
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'api',
-        path: 'docs/api',
-        routeBasePath: 'api',
-        sidebarPath: './sidebars.ts',
-        editUrl: 'https://github.com/torrentpier/torrentpier/tree/dexter/docs/',
-        beforeDefaultRemarkPlugins: [],
-        beforeDefaultRehypePlugins: [],
-        remarkPlugins: [],
-        rehypePlugins: [],
-        showLastUpdateTime: true,
-        showLastUpdateAuthor: true,
-      } satisfies import('@docusaurus/plugin-content-docs').Options,
-    ],
-  ],
+  plugins: [],
 
   themeConfig: {
     image: 'img/social-card.jpg',
@@ -92,7 +74,6 @@ const config: Config = {
         {
           type: 'docSidebar',
           sidebarId: 'apiSidebar',
-          docsPluginId: 'api',
           position: 'left',
           label: 'API',
         },
@@ -115,7 +96,7 @@ const config: Config = {
             },
             {
               label: 'API Reference',
-              to: '/api/overview',
+              to: '/docs/api/overview',
             },
           ],
         },
