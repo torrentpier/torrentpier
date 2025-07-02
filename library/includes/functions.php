@@ -1099,6 +1099,7 @@ function setup_style()
     $css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
     $template->assign_vars([
+        'BB_ROOT' => BB_ROOT,
         'SPACER' => make_url('styles/images/spacer.gif'),
         'STYLESHEET' => make_url($css_dir . $stylesheet),
         'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
