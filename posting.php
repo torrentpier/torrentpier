@@ -625,6 +625,8 @@ $template->assign_vars([
     'POSTER_RGROUPS' => !empty($poster_rgroups) ? $poster_rgroups : '',
     'ATTACH_RG_SIG' => $switch_rg_sig ?: false,
 
+    'U_VIEWTOPIC' => ($mode == 'reply') ? TOPIC_URL . "$topic_id&amp;postorder=desc" : '',
+
     'S_NOTIFY_CHECKED' => $notify_user ? 'checked' : '',
     'S_ROBOTS_CHECKED' => $robots_indexing ? 'checked' : '',
     'S_TYPE_TOGGLE' => $topic_type_toggle,

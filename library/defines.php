@@ -15,11 +15,13 @@ if (!defined('BB_ROOT')) {
 define('ADMIN_DIR', BB_PATH . '/admin');
 define('DATA_DIR', BB_PATH . '/data');
 define('INT_DATA_DIR', BB_PATH . '/internal_data');
+define('AJAX_HTML_DIR', BB_ROOT . '/internal_data/ajax_html/');
 define('CACHE_DIR', BB_PATH . '/internal_data/cache');
 define('LOG_DIR', BB_PATH . '/internal_data/log');
 define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers');
 define('AJAX_DIR', BB_PATH . '/library/ajax');
 define('ATTACH_DIR', BB_PATH . '/library/attach_mod');
+define('CFG_DIR', BB_PATH . '/library/config');
 define('INC_DIR', BB_PATH . '/library/includes');
 define('UCP_DIR', BB_PATH . '/library/includes/ucp');
 define('LANG_ROOT_DIR', BB_PATH . '/library/language');
