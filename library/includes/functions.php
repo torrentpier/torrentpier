@@ -800,6 +800,11 @@ function str_short($text, $max_length, $space = ' ')
     return $text ?? '';
 }
 
+function wbr($text, $max_word_length = HTML_WBR_LENGTH)
+{
+    return preg_replace("/([\w\->;:.,~!?(){}@#$%^*\/\\\\]{" . $max_word_length . "})/ui", '$1<wbr>', $text);
+}
+
 function generate_user_info($row, bool $have_auth = IS_ADMIN): array
 {
     global $userdata, $lang, $images, $bb_cfg;

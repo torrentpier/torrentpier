@@ -293,6 +293,7 @@ define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 
 define('HTML_SELECT_MAX_LENGTH', 60);
 define('HTML_SF_SPACER', '&nbsp;|-&nbsp;');
+define('HTML_WBR_LENGTH', 12);
 
 define('HTML_CHECKED', ' checked ');
 define('HTML_DISABLED', ' disabled ');
