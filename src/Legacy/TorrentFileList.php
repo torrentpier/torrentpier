@@ -53,8 +53,10 @@ class TorrentFileList
         $this->build_filelist_array();
 
         if ($this->multiple) {
-            if (!empty($this->files_ary['/'])) {
-                $this->files_ary = $this->files_ary + $this->files_ary['/'];
+            if (isset($this->files_ary['/'])) {
+                if (!empty($this->files_ary['/'])) {
+                    $this->files_ary = $this->files_ary + $this->files_ary['/'];
+                }
                 unset($this->files_ary['/']);
             }
             $filelist = $html->array2html($this->files_ary);
