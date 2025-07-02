@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Emoji\SearchEmojiRequest;
 use App\Http\Requests\Emoji\StoreEmojiRequest;
 use App\Http\Requests\Emoji\UpdateEmojiRequest;
 use App\Http\Resources\EmojiResource;
@@ -95,24 +96,17 @@ class EmojiController extends Controller
     /**
      * Search emojis using Laravel Scout.
      */
-    public function search(Request $request)
+    public function search(SearchEmojiRequest $request)
     {
-        $request->validate([
-            'q' => 'required|string|min:1',
-            'limit' => 'integer|min:1|max:100',
-        ]);
-
         $emojis = Emoji::search($request->get('q'))
             ->take($request->get('limit', 20))
             ->get();
 
         // Load relationships if requested
-        if ($request->get('with_category')) {
-            $emojis->load('category');
-        }
-        if ($request->get('with_aliases')) {
-            $emojis->load('aliases');
-        }
+        $emojis->load(array_filter([
+            $request->get('with_category') ? 'category' : null,
+            $request->get('with_aliases') ? 'aliases' : null,
+        ]));
 
         return EmojiResource::collection($emojis);
     }

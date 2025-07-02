@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Emoji\SearchEmojiAliasRequest;
 use App\Http\Requests\Emoji\StoreEmojiAliasRequest;
 use App\Http\Requests\Emoji\UpdateEmojiAliasRequest;
 use App\Http\Resources\EmojiAliasResource;
@@ -91,13 +92,8 @@ class EmojiAliasController extends Controller
     /**
      * Search aliases using Laravel Scout.
      */
-    public function search(Request $request)
+    public function search(SearchEmojiAliasRequest $request)
     {
-        $request->validate([
-            'q' => 'required|string|min:1',
-            'limit' => 'integer|min:1|max:100',
-        ]);
-
         $aliases = EmojiAlias::search($request->get('q'))
             ->take($request->get('limit', 20))
             ->get();

@@ -25,8 +25,18 @@ describe('Emoji Category API Endpoints', function () {
     });
 
     test('can list categories with emoji counts', function () {
-        $category1 = EmojiCategory::factory()->create(['title' => 'Category 1']);
-        $category2 = EmojiCategory::factory()->create(['title' => 'Category 2']);
+        // Ensure we start with clean slate
+        EmojiCategory::query()->delete();
+        Emoji::query()->delete();
+
+        $category1 = EmojiCategory::factory()->create([
+            'title' => 'Category 1',
+            'display_order' => 1,
+        ]);
+        $category2 = EmojiCategory::factory()->create([
+            'title' => 'Category 2',
+            'display_order' => 2,
+        ]);
 
         Emoji::factory()->count(5)->create(['emoji_category_id' => $category1->id]);
         Emoji::factory()->count(3)->create(['emoji_category_id' => $category2->id]);

@@ -93,9 +93,9 @@ class EmojiSeeder extends Seeder
         ];
 
         // Insert emojis
-        $displayOrder = 0;
         foreach ($emojis as $categoryData) {
             $category = $categoryModels[$categoryData['category']];
+            $displayOrder = 0;
 
             foreach ($categoryData['emojis'] as $emojiData) {
                 $displayOrder++;
