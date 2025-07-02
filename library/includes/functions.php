@@ -953,6 +953,47 @@ function bb_update_config($params, $table = BB_CONFIG)
     bb_get_config($table, true, true);
 }
 
+function get_db_stat($mode)
+{
+    switch ($mode) {
+        case 'usercount':
+            $sql = "SELECT COUNT(user_id) AS total FROM " . BB_USERS;
+            break;
+
+        case 'newestuser':
+            $sql = "SELECT user_id, username FROM " . BB_USERS . " WHERE user_id <> " . GUEST_UID . " ORDER BY user_id DESC LIMIT 1";
+            break;
+
+        case 'postcount':
+        case 'topiccount':
+            $sql = "SELECT SUM(forum_topics) AS topic_total, SUM(forum_posts) AS post_total FROM " . BB_FORUMS;
+            break;
+    }
+
+    if (!($result = DB()->sql_query($sql))) {
+        return false;
+    }
+
+    $row = DB()->sql_fetchrow($result);
+
+    switch ($mode) {
+        case 'usercount':
+            return $row['total'];
+            break;
+        case 'newestuser':
+            return $row;
+            break;
+        case 'postcount':
+            return $row['post_total'];
+            break;
+        case 'topiccount':
+            return $row['topic_total'];
+            break;
+    }
+
+    return false;
+}
+
 function clean_username($username)
 {
     $username = mb_substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25, DEFAULT_CHARSET);
@@ -960,6 +1001,28 @@ function clean_username($username)
     $username = str_replace("'", "\'", $username);
 
     return $username;
+}
+
+function bb_ltrim($str, $charlist = false)
+{
+    if ($charlist === false) {
+        return ltrim($str);
+    }
+
+    $str = ltrim($str, $charlist);
+
+    return $str;
+}
+
+function bb_rtrim($str, $charlist = false)
+{
+    if ($charlist === false) {
+        return rtrim($str);
+    }
+
+    $str = rtrim($str, $charlist);
+
+    return $str;
 }
 
 /**
