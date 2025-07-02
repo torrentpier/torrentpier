@@ -569,14 +569,6 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
 }
 
 /**
- * Adds commas between every group of thousands
- */
-function commify($number): string
-{
-    return number_format($number);
-}
-
-/**
  * Returns a size formatted in a more human-friendly format, rounded to the nearest GB, MB, KB..
  */
 function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
