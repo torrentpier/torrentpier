@@ -18,9 +18,16 @@ if (!$bb_cfg['tp_updater_settings']['enabled']) {
 }
 
 $data = [];
+$data[] = ['latest_check_timestamp' => TIMENOW];
 
-$updaterDownloader = new \TorrentPier\Updater();
-$updaterDownloader = $updaterDownloader->getLastVersion($bb_cfg['tp_updater_settings']['allow_pre_releases']);
+try {
+    $updaterDownloader = new \TorrentPier\Updater();
+    $updaterDownloader = $updaterDownloader->getLastVersion($bb_cfg['tp_updater_settings']['allow_pre_releases']);
+} catch (Exception $exception) {
+    bb_log('[Updater] Exception: ' . $exception->getMessage() . LOG_LF);
+    $this->store('check_updates', $data);
+    return;
+}
 
 $getVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($updaterDownloader['tag_name']);
 $currentVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($bb_cfg['tp_version']);
@@ -58,5 +65,4 @@ if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
     ];
 }
 
-$data[] = ['latest_check_timestamp' => TIMENOW];
 $this->store('check_updates', $data);
