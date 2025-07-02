@@ -26,9 +26,9 @@ $posts_without_attach = $topics_without_attach = [];
 
 DB()->query("
 	CREATE TEMPORARY TABLE $tmp_attach_tbl (
-		physical_filename VARCHAR(255) NOT NULL default '',
+		physical_filename VARCHAR(255) NOT NULL default '' COLLATE utf8mb4_unicode_ci,
 		KEY physical_filename (physical_filename(20))
-	) ENGINE = MyISAM DEFAULT CHARSET = utf8
+	) ENGINE = MyISAM DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci
 ");
 DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_attach_tbl");
 
