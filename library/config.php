@@ -209,6 +209,7 @@ $bb_cfg['lang'] = [
     'ar' => [
         'name' => 'Arabic',
         'locale' => 'ar_SA.UTF-8',
+        'rtl' => true,
     ],
     'hy' => [
         'name' => 'Armenian',
@@ -285,6 +286,7 @@ $bb_cfg['lang'] = [
     'he' => [
         'name' => 'Hebrew',
         'locale' => 'he_IL.UTF-8',
+        'rtl' => true,
     ],
     'hi' => [
         'name' => 'Hindi',
@@ -724,8 +726,8 @@ $bb_cfg['tracker'] = [
     'update_dlstat' => true,
     'expire_factor' => 2.5,
     'compact_mode' => true,
-    'upd_user_up_down_stat' => true,
-    'browser_redirect_url' => '',
+    'upd_user_up_down_stat' => true, // unused
+    'browser_redirect_url' => '', // unused
     'scrape' => true,
     'limit_active_tor' => true,
     'limit_seed_count' => 0,

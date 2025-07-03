@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{$bb_cfg['default_lang']}">
+<html dir="{USER_LANG_DIRECTION}" lang="{USER_LANG}">
 <head>
 <meta charset="{CONTENT_ENCODING}">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
