@@ -30,6 +30,8 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL], profile_view: true)) {
     bb_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
+$profiledata['user_birthday'] = $profiledata['user_birthday']->format('Y-m-d');
+
 if (!$ranks = $datastore->get('ranks')) {
     $datastore->update('ranks');
     $ranks = $datastore->get('ranks');
