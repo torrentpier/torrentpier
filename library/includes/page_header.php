@@ -117,6 +117,7 @@ $template->assign_vars([
     'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
 
     'USER_LANG' => $userdata['user_lang'],
+    'USER_LANG_DIRECTION' => (isset($bb_cfg['lang'][$userdata['user_lang']]['rtl']) && $bb_cfg['lang'][$userdata['user_lang']]['rtl'] === true) ? 'rtl' : 'ltr',
 
     'INCLUDE_BBCODE_JS' => !empty($page_cfg['include_bbcode_js']),
     'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),

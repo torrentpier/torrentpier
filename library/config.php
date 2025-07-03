@@ -204,6 +204,7 @@ $bb_cfg['lang'] = [
     'ar' => [
         'name' => 'Arabic',
         'locale' => 'ar_SA.UTF-8',
+        'rtl' => true,
     ],
     'hy' => [
         'name' => 'Armenian',
@@ -280,6 +281,7 @@ $bb_cfg['lang'] = [
     'he' => [
         'name' => 'Hebrew',
         'locale' => 'he_IL.UTF-8',
+        'rtl' => true,
     ],
     'hi' => [
         'name' => 'Hindi',
