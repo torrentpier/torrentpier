@@ -1,7 +1,7 @@
 <!-- IF TPL_ADMIN_FRAMESET -->
 <!--========================================================================-->
 <!DOCTYPE html>
-<html lang="{$bb_cfg['default_lang']}">
+<html dir="{USER_LANG_DIRECTION}" lang="{USER_LANG}">
 <head>
   <meta charset="{CONTENT_ENCODING}">
   <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
