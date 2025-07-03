@@ -2,6 +2,18 @@
 
 # 📖 Change Log
 
+## [v2.4.10](https://github.com/torrentpier/torrentpier/compare/v2.4.9..v2.4.10) (2025-07-03)
+
+### 🚀 Features
+
+- *(lang)* Added `RTL` languages support ([#2031](https://github.com/torrentpier/torrentpier/pull/2031)) - ([9024640](https://github.com/torrentpier/torrentpier/commit/9024640d59428cc164fc6b10246ee40e333ec8e9))
+- Restore some deprecated code for backward compatibility ([#2028](https://github.com/torrentpier/torrentpier/pull/2028)) - ([695864e](https://github.com/torrentpier/torrentpier/commit/695864ef6995a3c7b16ade822036c23908fc3aaf))
+
+### ◀️ Revert
+
+- "refactor: Moved `Select` class into `Legacy\Common` ([#1846](https://github.com/torrentpier/torrentpier/pull/1846))" - ([e697672](https://github.com/torrentpier/torrentpier/commit/e6976721dc2f6cde6a09b6a55e2f37e5f43f5932))
+
+
 ## [v2.4.9](https://github.com/torrentpier/torrentpier/compare/v2.4.8..v2.4.9) (2025-07-02)
 
 ### 🚀 Features
