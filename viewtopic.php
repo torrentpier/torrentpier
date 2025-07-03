@@ -565,6 +565,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $poster_from = ($postrow[$i]['user_from'] && !$poster_guest) ? $postrow[$i]['user_from'] : '';
     $poster_joined = !$poster_guest ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
     $poster_longevity = !$poster_guest ? delta_time($postrow[$i]['user_regdate']) : '';
+    $poster_birthday = $postrow[$i]['user_birthday']->format('Y-m-d');
     $post_id = $postrow[$i]['post_id'];
     $mc_type = (int)$postrow[$i]['mc_type'];
     $mc_comment = $postrow[$i]['mc_comment'];
@@ -715,7 +716,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'DELETE' => $delpost_btn,
         'IP' => $ip_btn,
 
-        'POSTER_BIRTHDAY' => user_birthday_icon($postrow[$i]['user_birthday'], $postrow[$i]['user_id']),
+        'POSTER_BIRTHDAY' => user_birthday_icon($poster_birthday, $postrow[$i]['user_id']),
 
         'MC_COMMENT' => $mc_type ? bbcode2html($mc_comment) : '',
         'MC_BBCODE' => $mc_type ? $mc_comment : '',
