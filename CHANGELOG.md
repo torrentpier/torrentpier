@@ -2,6 +2,18 @@
 
 # 📖 Change Log
 
+## [v2.8.3](https://github.com/torrentpier/torrentpier/compare/v2.8.2..v2.8.3) (2025-07-03)
+
+### 🚀 Features
+
+- *(lang)* Added `RTL` languages support ([#2031](https://github.com/torrentpier/torrentpier/pull/2031)) - ([fd46d3d](https://github.com/torrentpier/torrentpier/commit/fd46d3d04ad3ab1453256b2ab620508e2ba33586))
+- *(updater)* Added exceptions logging ([#2026](https://github.com/torrentpier/torrentpier/pull/2026)) - ([51f2c70](https://github.com/torrentpier/torrentpier/commit/51f2c70d81b910012cdecd111b5b92c1dfd0d6f6))
+
+### 🚜 Refactor
+
+- *(TorrentFileList)* Reduce duplication in root directory unset logic ([#2027](https://github.com/torrentpier/torrentpier/pull/2027)) - ([d4d8210](https://github.com/torrentpier/torrentpier/commit/d4d82101dd67c9f4cd86e0f6f909495696974354))
+
+
 ## [v2.8.2](https://github.com/torrentpier/torrentpier/compare/v2.8.1..v2.8.2) (2025-06-30)
 
 ### 🐛 Bug Fixes
