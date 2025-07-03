@@ -2212,10 +2212,10 @@ function infoByIP(string $ipAddress, int $port = 0): array
                     ];
                 }
             } else {
-                bb_log("[FreeIPAPI] Failed to get IP info for: $ipAddress");
+                bb_log("[FreeIPAPI] Failed to get IP info for: $ipAddress" . LOG_LF);
             }
         } catch (Exception $e) {
-            bb_log("[FreeIPAPI] " . $e->getMessage());
+            bb_log("[FreeIPAPI] " . $e->getMessage() . LOG_LF);
         }
 
         if (empty($data)) {

@@ -16,9 +16,16 @@ if (!config()->get('tp_updater_settings.enabled')) {
 }
 
 $data = [];
+$data[] = ['latest_check_timestamp' => TIMENOW];
 
-$updaterDownloader = new \TorrentPier\Updater();
-$updaterDownloader = $updaterDownloader->getLastVersion(config()->get('tp_updater_settings.allow_pre_releases'));
+try {
+    $updaterDownloader = new \TorrentPier\Updater();
+    $updaterDownloader = $updaterDownloader->getLastVersion(config()->get('tp_updater_settings.allow_pre_releases'));
+} catch (Exception $exception) {
+    bb_log('[Updater] Exception: ' . $exception->getMessage() . LOG_LF);
+    $this->store('check_updates', $data);
+    return;
+}
 
 $getVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($updaterDownloader['tag_name']);
 $currentVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix(config()->get('tp_version'));
@@ -26,6 +33,7 @@ $currentVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix(config()->ge
 // Has update!
 if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
     $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
+    $SHAFileHash = $updaterDownloader['assets'][0]['digest'] ?? '';
 
     // Check updater file
     $updaterFile = readUpdaterFile();
@@ -39,10 +47,12 @@ if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
         ]), UPDATER_FILE, replace_content: true);
     }
 
-    // Get MD5 checksum
+    // Get MD5 / sha256 checksum
     $buildFileChecksum = '';
-    if (isset($latestBuildFileLink)) {
-        $buildFileChecksum = strtoupper(md5_file($latestBuildFileLink));
+    if (!empty($SHAFileHash)) {
+        $buildFileChecksum = $SHAFileHash;
+    } else {
+        $buildFileChecksum = 'MD5: ' . strtoupper(md5_file($latestBuildFileLink));
     }
 
     // Build data array
@@ -56,5 +66,4 @@ if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
     ];
 }
 
-$data[] = ['latest_check_timestamp' => TIMENOW];
 $this->store('check_updates', $data);
