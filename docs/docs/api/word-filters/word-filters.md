@@ -380,17 +380,6 @@ Available content types for `applies_to` field:
 - `usernames` - Usernames
 - `topics` - Topic titles
 
-## Features
-
-- Full-text search using Laravel Scout
-- Flexible pattern matching (exact, wildcard, regex)
-- Content type targeting
-- Severity levels for prioritization
-- User tracking for filter creation
-- Comprehensive validation
-- Pagination support
-- Active/inactive status management
-
 ## Notes
 
 - Search functionality uses Laravel Scout for fast full-text searching on pattern and notes fields
