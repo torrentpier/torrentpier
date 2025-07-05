@@ -100,7 +100,7 @@ class EmojiController extends Controller
     public function search(SearchEmojiRequest $request)
     {
         $emojis = Emoji::search($request->get('q'))
-            ->take($request->get('limit', 20))
+            ->take((int) $request->get('limit', 20))
             ->get();
 
         // Load relationships if requested

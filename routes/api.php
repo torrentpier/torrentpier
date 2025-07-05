@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\EmojiAliasController;
 use App\Http\Controllers\Api\EmojiCategoryController;
 use App\Http\Controllers\Api\EmojiController;
+use App\Http\Controllers\Api\WordFilterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,11 @@ Route::prefix('emoji')->group(function () {
 
     // Emoji Categories
     Route::apiResource('categories', EmojiCategoryController::class);
+});
+
+// Word Filter API Routes
+Route::prefix('word-filters')->group(function () {
+    // Search route must come before resource routes
+    Route::get('search', [WordFilterController::class, 'search'])->name('word-filters.search');
+    Route::apiResource('/', WordFilterController::class)->parameters(['' => 'filter']);
 });
