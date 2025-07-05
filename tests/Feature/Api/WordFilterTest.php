@@ -6,10 +6,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-beforeEach(function () {
-    config(['scout.driver' => 'collection']);
-});
-
 describe('Word Filter API', function () {
     describe('Index', function () {
         test('can list word filters', function () {

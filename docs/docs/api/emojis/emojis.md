@@ -1,5 +1,5 @@
 ---
-title: Emoji API
+title: Emoji
 sidebar_position: 1
 ---
 
@@ -9,7 +9,7 @@ The Emoji API allows you to manage individual emojis, including Unicode emojis, 
 
 ## Base URL
 
-```http
+```text
 /api/emoji/emojis
 ```
 
@@ -19,7 +19,7 @@ The Emoji API allows you to manage individual emojis, including Unicode emojis, 
 
 Get a paginated list of emojis with optional filtering and relationship loading.
 
-```http
+```text
 GET /api/emoji/emojis
 ```
 
@@ -95,7 +95,7 @@ curl -X GET "https://api.example.com/api/emoji/emojis?category_id=1&with_aliases
 
 Search emojis using Laravel Scout for full-text search capabilities.
 
-```http
+```text
 GET /api/emoji/emojis/search
 ```
 
@@ -151,7 +151,7 @@ curl -X GET "https://api.example.com/api/emoji/emojis/search?q=smile&limit=10&wi
 
 Get a specific emoji by ID with full relationship data.
 
-```http
+```text
 GET /api/emoji/emojis/{id}
 ```
 
@@ -212,7 +212,7 @@ curl -X GET "https://api.example.com/api/emoji/emojis/1" \
 
 Create a new emoji. Supports Unicode emojis, custom images, and CSS sprites.
 
-```http
+```text
 POST /api/emoji/emojis
 ```
 
@@ -316,7 +316,7 @@ curl -X POST "https://api.example.com/api/emoji/emojis" \
 
 Update an existing emoji.
 
-```http
+```text
 PUT /api/emoji/emojis/{id}
 PATCH /api/emoji/emojis/{id}
 ```
@@ -371,7 +371,7 @@ curl -X PATCH "https://api.example.com/api/emoji/emojis/25" \
 
 Delete an emoji. Associated aliases will be automatically deleted.
 
-```http
+```text
 DELETE /api/emoji/emojis/{id}
 ```
 

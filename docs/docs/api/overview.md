@@ -11,7 +11,7 @@ Welcome to the API documentation. This section covers all available REST API end
 
 All API endpoints are prefixed with `/api/` and use the following base URL:
 
-```http
+```text
 https://your-domain.com/api/
 ```
 
@@ -130,7 +130,7 @@ List endpoints support pagination using query parameters:
 
 Example:
 
-```http
+```text
 GET /api/emoji/emojis?page=2&per_page=25
 ```
 
@@ -153,7 +153,7 @@ Use these parameters to include related data:
 
 Example:
 
-```http
+```text
 GET /api/emoji/emojis?search=smile&with_category=1&with_aliases=1
 ```
 
@@ -161,7 +161,7 @@ GET /api/emoji/emojis?search=smile&with_category=1&with_aliases=1
 
 The current API version is v1. Future versions will be available at:
 
-```http
+```text
 /api/v2/endpoint
 ```
 

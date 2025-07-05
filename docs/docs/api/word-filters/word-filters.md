@@ -1,3 +1,8 @@
+---
+title: Word Filters
+sidebar_position: 2
+---
+
 # Word Filters API
 
 The Word Filters API allows you to manage content filtering rules for your forum. Word filters can automatically replace, block, or moderate content based on configurable patterns.

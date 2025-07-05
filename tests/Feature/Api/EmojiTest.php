@@ -4,10 +4,6 @@ use App\Models\Emoji;
 use App\Models\EmojiAlias;
 use App\Models\EmojiCategory;
 
-beforeEach(function () {
-    config(['scout.driver' => 'collection']);
-});
-
 describe('Emoji API Endpoints', function () {
     test('can list emojis', function () {
         $category = EmojiCategory::factory()->create();
