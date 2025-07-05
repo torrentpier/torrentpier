@@ -1,5 +1,5 @@
 ---
-title: Emoji Aliases API
+title: Emoji Aliases
 sidebar_position: 2
 ---
 
@@ -9,7 +9,7 @@ The Emoji Aliases API allows you to manage alternative shortcodes for emojis, en
 
 ## Base URL
 
-```http
+```text
 /api/emoji/aliases
 ```
 
@@ -19,7 +19,7 @@ The Emoji Aliases API allows you to manage alternative shortcodes for emojis, en
 
 Get a paginated list of emoji aliases with optional filtering and relationship loading.
 
-```http
+```text
 GET /api/emoji/aliases
 ```
 
@@ -124,7 +124,7 @@ curl -X GET "https://api.example.com/api/emoji/aliases?emoji_id=1&with_emoji=1" 
 
 Search emoji aliases using Laravel Scout for full-text search capabilities.
 
-```http
+```text
 GET /api/emoji/aliases/search
 ```
 
@@ -187,7 +187,7 @@ curl -X GET "https://api.example.com/api/emoji/aliases/search?q=hap&limit=5&with
 
 Get a specific emoji alias by ID with full relationship data.
 
-```http
+```text
 GET /api/emoji/aliases/{id}
 ```
 
@@ -246,7 +246,7 @@ curl -X GET "https://api.example.com/api/emoji/aliases/1" \
 
 Create a new alias for an existing emoji.
 
-```http
+```text
 POST /api/emoji/aliases
 ```
 
@@ -289,7 +289,7 @@ curl -X POST "https://api.example.com/api/emoji/aliases" \
 
 Update an existing emoji alias.
 
-```http
+```text
 PUT /api/emoji/aliases/{id}
 PATCH /api/emoji/aliases/{id}
 ```
@@ -338,7 +338,7 @@ curl -X PATCH "https://api.example.com/api/emoji/aliases/3" \
 
 Delete an emoji alias. The associated emoji remains unchanged.
 
-```http
+```text
 DELETE /api/emoji/aliases/{id}
 ```
 
