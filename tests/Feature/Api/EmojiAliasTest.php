@@ -296,7 +296,7 @@ describe('Emoji Alias Search API', function () {
             'alias' => ':sad:',
         ]);
 
-        $response = $this->getJson('/api/emoji/aliases/search?q=happy');
+        $response = $this->getJson('/api/emoji/aliases/search?q=happy&with_emoji=1');
 
         $response->assertOk()
             ->assertJsonStructure([

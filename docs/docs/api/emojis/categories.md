@@ -1,5 +1,5 @@
 ---
-title: Emoji Categories API
+title: Emoji Categories
 sidebar_position: 3
 ---
 
@@ -9,7 +9,7 @@ The Emoji Categories API allows you to manage emoji categories used to organize 
 
 ## Base URL
 
-```http
+```text
 /api/emoji/categories
 ```
 
@@ -19,7 +19,7 @@ The Emoji Categories API allows you to manage emoji categories used to organize 
 
 Get a list of all emoji categories.
 
-```http
+```text
 GET /api/emoji/categories
 ```
 
@@ -68,7 +68,7 @@ curl -X GET "https://api.example.com/api/emoji/categories?with_emojis=1" \
 
 Get a specific emoji category by ID.
 
-```http
+```text
 GET /api/emoji/categories/{id}
 ```
 
@@ -133,7 +133,7 @@ curl -X GET "https://api.example.com/api/emoji/categories/1?with_aliases=1" \
 
 Create a new emoji category.
 
-```http
+```text
 POST /api/emoji/categories
 ```
 
@@ -178,7 +178,7 @@ curl -X POST "https://api.example.com/api/emoji/categories" \
 
 Update an existing emoji category.
 
-```http
+```text
 PUT /api/emoji/categories/{id}
 PATCH /api/emoji/categories/{id}
 ```
@@ -229,7 +229,7 @@ curl -X PATCH "https://api.example.com/api/emoji/categories/3" \
 
 Delete an emoji category. Associated emojis will have their category_id set to null.
 
-```http
+```text
 DELETE /api/emoji/categories/{id}
 ```
 
