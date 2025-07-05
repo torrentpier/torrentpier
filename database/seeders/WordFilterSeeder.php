@@ -144,7 +144,7 @@ class WordFilterSeeder extends Seeder
         );
 
         WordFilter::updateOrCreate(
-            ['pattern' => '/\\b(torrent|magnet:|ed2k:)\\/\\/\\b/i'],
+            ['pattern' => '/\\b(?:https?:\\/\\/[^\\s]+\\.torrent|magnet:\\?[^\\s]+|ed2k:\\/\\/\\|file\\|[^\\s]+)/i'],
             [
                 'replacement' => null,
                 'filter_type' => 'block',
@@ -361,11 +361,11 @@ class WordFilterSeeder extends Seeder
         $patterns = [
             '/\\b\\d{3}-\\d{2}-\\d{4}\\b/', // SSN pattern
             '/\\b[A-Z]{2}\\d{6}\\b/', // License plate pattern
-            '/\\b(https?:\\/\\/)?[\\w\\-]+(\\.[\\w\\-]+)+[/#?]?.*$/', // URL pattern
-            '/\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b/i', // Email pattern
-            '/\\b\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}\\b/', // Credit card pattern
-            '/\\b(\\+?1[\\s-]?)?\\(?\\d{3}\\)?[\\s-]?\\d{3}[\\s-]?\\d{4}\\b/', // Phone pattern
-            '/\\$\\d+(\\.\\d{2})?\\b/', // Currency pattern
+            '/\\bhttps?:\\/\\/[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]\\.[a-zA-Z]{2,6}\\b/', // Simplified URL pattern
+            '/\\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}\\b/i', // Simplified email pattern
+            '/\\b(?:\\d{4}[-\\s]?){3}\\d{4}\\b/', // Simplified credit card pattern
+            '/\\b\\+?1?[-\\s]?\\(?\\d{3}\\)?[-\\s]?\\d{3}[-\\s]?\\d{4}\\b/', // Simplified phone pattern
+            '/\\$\\d{1,8}(?:\\.\\d{2})?\\b/', // Currency pattern with limit
             '/\\b[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}\\b/i', // UUID pattern
         ];
 
