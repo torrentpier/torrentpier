@@ -6,6 +6,7 @@
 *.md diff=markdown
 *.php diff=php
 
+/.github export-ignore
 CHANGELOG.md export-ignore
 LICENSE export-ignore
 README.md export-ignore
