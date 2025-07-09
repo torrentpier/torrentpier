@@ -84,9 +84,9 @@ The `.env.sail.example` file contains pre-configured settings for Docker service
 
 ```env
 # Database
-DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_PORT=3306
+DB_CONNECTION=pgsql
+DB_HOST=pgsql
+DB_PORT=5432
 DB_DATABASE=torrentpier
 DB_USERNAME=sail
 DB_PASSWORD=password
@@ -116,7 +116,7 @@ AWS_USE_PATH_STYLE_ENDPOINT=true
 
 TorrentPier's Sail configuration includes:
 
-- **MySQL 8.0** - Primary database
+- **PostgreSQL 17** - Primary database
 - **Redis** - Caching and queues
 - **Meilisearch** - Full-text search engine
 - **Mailpit** - Email testing interface
@@ -131,10 +131,13 @@ To add additional services:
 ```
 
 Available services include:
-- PostgreSQL
+- MySQL
 - MariaDB
+- MongoDB
+- Valkey
 - Memcached
-- MinIO
+- Typesense
+- RabbitMQ
 - Selenium
 - Soketi
 
@@ -211,14 +214,14 @@ Available services include:
 ### Database Operations
 
 ```bash
-# Access MySQL CLI
-./vendor/bin/sail mysql
+# Access PostgreSQL CLI
+./vendor/bin/sail psql
 
 # Export database
-./vendor/bin/sail exec mysql mysqldump -u sail -ppassword torrentpier > backup.sql
+./vendor/bin/sail exec pgsql pg_dump -U sail torrentpier > backup.sql
 
 # Import database
-./vendor/bin/sail exec mysql mysql -u sail -ppassword torrentpier < backup.sql
+./vendor/bin/sail exec pgsql psql -U sail torrentpier < backup.sql
 ```
 
 ### Shell Access
@@ -360,7 +363,7 @@ If you get port conflicts, customize ports in `.env`:
 
 ```env
 APP_PORT=8080
-FORWARD_DB_PORT=3307
+FORWARD_DB_PORT=5433
 FORWARD_REDIS_PORT=6380
 FORWARD_MEILISEARCH_PORT=7701
 FORWARD_MAILPIT_PORT=1026
@@ -406,16 +409,16 @@ rm -rf vendor node_modules
 
 If you can't connect to the database:
 
-1. Wait for MySQL to be ready:
+1. Wait for PostgreSQL to be ready:
 
 ```bash
-./vendor/bin/sail exec mysql mysqladmin ping -h localhost --silent --wait=30
+./vendor/bin/sail exec pgsql pg_isready -h localhost -U sail
 ```
 
-2. Check MySQL logs:
+2. Check PostgreSQL logs:
 
 ```bash
-./vendor/bin/sail logs mysql
+./vendor/bin/sail logs pgsql
 ```
 
 3. Verify credentials match `.env` file
