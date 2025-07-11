@@ -1,12 +1,9 @@
 ---
 sidebar_position: 1
+title: Development Setup
 ---
 
 # Development Setup
-
-:::warning Work in Progress
-This documentation is currently under development and not yet complete. Some sections may be incomplete or subject to change as the project evolves.
-:::
 
 This guide will help you set up a local development environment for TorrentPier.
 
@@ -26,7 +23,7 @@ This guide will help you set up a local development environment for TorrentPier.
 ```bash
 # Clone the repository
 git clone https://github.com/torrentpier/torrentpier.git
-cd dexter
+cd torrentpier
 
 # Install dependencies
 composer install
@@ -122,13 +119,11 @@ Recommended extensions:
 ### Always Use Artisan Commands
 
 ```bash
-# Generate model with all resources
-php artisan make:model Post --all
+# Generate model with all resources and API controller
+php artisan make:model Post --all --api
 
 # Create controller
 php artisan make:controller PostController --resource
-
-# Create React page component manually in resources/js/pages/
 ```
 
 ### Useful Commands
@@ -233,59 +228,27 @@ php artisan make:model Post -mfsc
 // - Controller: app/Http/Controllers/PostController.php
 ```
 
-## Git Workflow
-
-### Branching Strategy
-
-```bash
-# Create feature branch
-git checkout -b feature/user-profile
-
-# Create bugfix branch
-git checkout -b bugfix/login-issue
-
-# Push branch
-git push -u origin feature/user-profile
-```
-
-### Commit Messages
-
-Follow conventional commits:
-- `feat:` New feature
-- `fix:` Bug fix
-- `docs:` Documentation
-- `style:` Code style
-- `refactor:` Code refactoring
-- `test:` Tests
-- `chore:` Maintenance
-
 ## Troubleshooting
 
 ### Common Issues
 
 1. **npm install fails**
-   ```bash
+```bash
    rm -rf node_modules package-lock.json
    npm install
-   ```
+```
 
 2. **Composer memory limit**
-   ```bash
+```bash
    COMPOSER_MEMORY_LIMIT=-1 composer install
-   ```
+```
 
 3. **Permission errors**
-   ```bash
+```bash
    chmod -R 775 storage bootstrap/cache
-   ```
+```
 
 4. **Cache issues**
-   ```bash
+```bash
    php artisan optimize:clear
-   ```
-
-## Next Steps
-
-- Review Coding Standards
-- Learn about Testing
-- Understand API Development
+```

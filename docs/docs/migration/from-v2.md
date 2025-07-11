@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: TorrentPier v2.x
 ---
 
 # Migrating from TorrentPier v2.x
@@ -94,11 +95,10 @@ cp -r /path/to/old/data/attachments /path/to/new/storage/app/attachments
 
 Map old settings to new:
 
-| Old Setting | New Setting | Notes |
-|------------|-------------|-------|
-| `$bb_cfg['bt_announce_url']` | `TRACKER_ANNOUNCE_URL` | In .env file |
-| `$bb_cfg['torrent_pass']` | Auto-generated | More secure |
-| `$bb_cfg['ratio_enabled']` | `TRACKER_RATIO_ENABLED` | Boolean |
+| Old Setting                  | New Setting             | Notes        |
+|------------------------------|-------------------------|--------------|
+| `$bb_cfg['bt_announce_url']` | `TRACKER_ANNOUNCE_URL`  | In .env file |
+| `$bb_cfg['ratio_enabled']`   | `TRACKER_RATIO_ENABLED` | Boolean      |
 
 ### Step 6: Test Migration
 
@@ -107,25 +107,6 @@ Map old settings to new:
 php artisan migrate:status
 php artisan torrentpier:verify
 ```
-
-## Data Mapping
-
-### Users Table
-
-| v2.x Column | New Column | Changes |
-|-------------|------------|---------|
-| `user_id` | `id` | Same data |
-| `username` | `username` | Validated |
-| `user_password` | `password` | Re-hashed |
-| `user_email` | `email` | Verified |
-
-### Torrents Table
-
-| v2.x Column | New Column | Changes |
-|-------------|------------|---------|
-| `topic_id` | `id` | New IDs |
-| `info_hash` | `info_hash` | Same |
-| `size` | `size` | Bigint |
 
 ## Post-Migration
 
@@ -163,17 +144,6 @@ php artisan cache:clear
 php artisan optimize
 ```
 
-## Rollback Plan
-
-If issues occur:
-
-1. Stop new installation
-2. Restore DNS to old server
-3. Investigate issues
-4. Fix and retry
-
-Keep old installation running until confident.
-
 ## Common Issues
 
 ### Password Reset Required
@@ -202,18 +172,3 @@ If you had custom mods in v2.x:
 2. Evaluate if still needed
 3. Reimplement using Laravel patterns
 4. Submit as pull requests
-
-## Getting Help
-
-- GitHub Issues
-- Community Forum
-- Documentation
-- Discord Channel
-
-## Next Steps
-
-After successful migration:
-- Configure new features
-- Train moderators
-- Update user guides
-- Monitor feedback

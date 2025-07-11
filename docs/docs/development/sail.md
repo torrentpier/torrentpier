@@ -1,8 +1,9 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
+title: Docker Development
 ---
 
-# Laravel Sail Development
+# Docker Development
 
 Laravel Sail provides a Docker-powered local development environment for TorrentPier. This guide covers everything you need to know about using Sail for development.
 

@@ -4,10 +4,6 @@ sidebar_position: 1
 
 # Welcome to TorrentPier
 
-:::warning Work in Progress
-This documentation is currently under development and not yet complete. Some sections may be incomplete or subject to change as the project evolves.
-:::
-
 TorrentPier is a modern, Laravel-based BitTorrent tracker and open-source software that allows you to run your own private or public torrent community. This is a complete rewrite of the original TorrentPier v2.x, built from the ground up using modern web technologies and best practices. This documentation will guide you through the architecture, features, and development process of the new TorrentPier.
 
 ## Key Features
