@@ -4,10 +4,6 @@ sidebar_position: 1
 
 # Installation
 
-:::warning Work in Progress
-This documentation is currently under development and not yet complete. Some sections may be incomplete or subject to change as the project evolves.
-:::
-
 This guide will help you install and set up TorrentPier on your server.
 
 ## Requirements
@@ -190,9 +186,3 @@ If you encounter issues, try clearing all caches:
 ```bash
 php artisan optimize:clear
 ```
-
-## Next Steps
-
-- Configure Application Settings
-- Set up Email Configuration
-- Review Security Best Practices

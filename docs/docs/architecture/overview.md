@@ -1,12 +1,9 @@
 ---
 sidebar_position: 1
+title: Overview
 ---
 
 # Architecture Overview
-
-:::warning Work in Progress
-This documentation is currently under development and not yet complete. Some sections may be incomplete or subject to change as the project evolves.
-:::
 
 TorrentPier follows a modern, scalable architecture built on Laravel's proven patterns and best practices.
 
