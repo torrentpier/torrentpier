@@ -41,7 +41,7 @@ class EmojiAliasController extends Controller
      */
     public function show(EmojiAlias $alias)
     {
-        // Not needed
+        // Not needed for Inertia - handled in frontend
     }
 
     /**
