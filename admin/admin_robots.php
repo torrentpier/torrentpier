@@ -16,8 +16,12 @@ require __DIR__ . '/pagestart.php';
 
 $robots_file = BB_ROOT . 'robots.txt';
 
-// Обработка сохранения
 if (isset($_POST['save'])) {
+    // Check for demo mode
+    if (IN_DEMO_MODE) {
+        bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+    }
+
     $robots_txt = $_POST['robots_txt'] ?? '';
 
     if (!is_writable($robots_file) && is_file($robots_file)) {
