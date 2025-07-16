@@ -33,6 +33,10 @@ if (!$result = DB()->sql_query($sql)) {
     }
 
     if (isset($_POST['submit'])) {
+        // Check for demo mode
+        if (IN_DEMO_MODE) {
+            bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+        }
         if (!empty($new_params)) {
             bb_update_config($new_params);
         }

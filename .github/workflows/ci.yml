@@ -43,3 +43,32 @@ jobs:
         with:
           name: TorrentPier-master
           path: ${{ steps.create-zip.outputs.ZIP_NAME }}
+
+  deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-22.04
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: 🔩 Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: 🖇 Install Composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_DIR }}
+          protocol: ${{ secrets.FTP_PROTOCOL }}
+          port: ${{ secrets.FTP_PORT }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .env
