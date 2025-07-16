@@ -33,6 +33,7 @@ class StoreEmojiRequest extends FormRequest
                 'unique:emojis,emoji_shortcode',
                 Rule::notIn(\App\Models\EmojiAlias::pluck('alias')->toArray()),
             ],
+            'image' => 'nullable|image|max:2048|mimes:png,jpg,jpeg,gif,webp',
             'image_url' => 'nullable|string|max:500',
             'sprite_mode' => 'boolean',
             'sprite_params' => 'nullable|array',
@@ -55,6 +56,7 @@ class StoreEmojiRequest extends FormRequest
             'emoji_shortcode.regex' => 'The emoji shortcode must be in the format :name: (e.g., :smile:)',
             'emoji_shortcode.unique' => 'This shortcode is already taken.',
             'emoji_shortcode.not_in' => 'This shortcode conflicts with an existing alias.',
+            'image.max' => 'The image must not be larger than 2MB.',
         ];
     }
 }
