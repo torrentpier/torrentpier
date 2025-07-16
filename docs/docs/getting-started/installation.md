@@ -12,7 +12,7 @@ Before installing TorrentPier, ensure your server meets these requirements:
 
 - **PHP** 8.4 or higher
 - **MySQL** 8.0+ / PostgreSQL 15+ / SQLite 3.8.8+ / SQL Server 2017+
-- **Node.js** 18.0 or higher
+- **Node.js** 22.0 or higher
 - **Composer** 2.0 or higher
 - **Redis** (optional, for caching and queues)
 

@@ -12,7 +12,7 @@ This guide will help you set up a local development environment for TorrentPier.
 - Git
 - PHP 8.4+
 - Composer
-- Node.js 18+
+- Node.js 22+
 - MySQL/PostgreSQL
 - Redis (optional)
 
