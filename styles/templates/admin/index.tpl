@@ -1,7 +1,7 @@
 <!-- IF TPL_ADMIN_FRAMESET -->
 <!--========================================================================-->
 <!DOCTYPE html>
-<html dir="{USER_LANG_DIRECTION}" lang="{USER_LANG}">
+<html>
 <head>
   <meta charset="{CONTENT_ENCODING}">
   <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
