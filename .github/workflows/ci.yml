@@ -51,18 +51,21 @@ jobs:
     name: 🎉 Deploy
     runs-on: ubuntu-22.04
     steps:
-      - name: 🚚 Get latest code
+      - name: Checkout code 🗳
         uses: actions/checkout@v4
 
-      - name: 🔩 Setup PHP
+      - name: Setup PHP 🔩
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
 
-      - name: 🖇 Install Composer dependencies
+      - name: Update composer.lock file
+        run: composer update --no-install
+
+      - name: Install Composer dependencies 🪚
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-      - name: 📂 Sync files
+      - name: Sync files 📂
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
