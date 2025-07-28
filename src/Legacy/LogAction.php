@@ -35,6 +35,7 @@ class LogAction
         'mod_topic_tor_unregister' => 17,
         'mod_topic_tor_register' => 18,
         'mod_topic_tor_delete' => 19,
+        'mod_topic_attach_updated' => 20,
     ];
     public $log_type_select = [];
     public $log_disabled = false;
