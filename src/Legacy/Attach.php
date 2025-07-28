@@ -479,6 +479,8 @@ class Attach
                             unlink_attach($row['physical_filename'], MODE_THUMBNAIL);
                         }
 
+                        // todo: log action - torrent updated
+
                         //bt
                         if ($this->attachment_extension_list[$actual_element] === TORRENT_EXT && $attachments[$actual_element]['tracker_status']) {
                             Torrent::tracker_unregister($attachment_id);
