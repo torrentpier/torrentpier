@@ -2849,6 +2849,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
     'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
     'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
+    'mod_topic_tor_register' => 'Topic:<br /> <b>torrent registered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',

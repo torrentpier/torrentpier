@@ -68,11 +68,21 @@ switch ($type) {
 
     case 'reg':
         \TorrentPier\Legacy\Torrent::tracker_register($attach_id);
+        $log_action->mod('mod_topic_tor_register', [
+            'forum_id' => $torrent['forum_id'],
+            'topic_id' => $torrent['topic_id'],
+            'topic_title' => $torrent['topic_title'],
+        ]);
         $url = (TOPIC_URL . $torrent['topic_id']);
         break;
 
     case 'unreg':
         \TorrentPier\Legacy\Torrent::tracker_unregister($attach_id);
+        $log_action->mod('mod_topic_tor_unregister', [
+            'forum_id' => $torrent['forum_id'],
+            'topic_id' => $torrent['topic_id'],
+            'topic_title' => $torrent['topic_title'],
+        ]);
         $url = (TOPIC_URL . $torrent['topic_id']);
         break;
 
