@@ -475,17 +475,24 @@ class Attach
                         // Delete the Old Attachment
                         unlink_attach($row['physical_filename']);
 
+                        $attachment_type = $lang['ATTACHMENT'];
+
                         if ((int)$row['thumbnail'] === 1) {
                             unlink_attach($row['physical_filename'], MODE_THUMBNAIL);
+                            $attachment_type = $lang['ATTACHMENT_THUMBNAIL'];
                         }
 
                         //bt
                         if ($this->attachment_extension_list[$actual_element] === TORRENT_EXT && $attachments[$actual_element]['tracker_status']) {
                             Torrent::tracker_unregister($attachment_id);
+                            $attachment_type = $lang['TORRENT'];
                         }
                         //bt end
 
-                        \define('ATTACHMENT_UPDATED', true);
+                        \define('ATTACHMENT_UPDATED', [
+                            'status' => true,
+                            'attachment_type' => $attachment_type
+                        ]);
 
                         // Make sure it is displayed
                         $this->attachment_list[$actual_element] = $this->attach_filename;
