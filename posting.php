@@ -368,6 +368,15 @@ if (($delete || $mode == 'delete') && !$confirm) {
 
         if (!$error_msg) {
             \TorrentPier\Legacy\Post::user_notification($mode, $post_data, $post_info['topic_title'], $forum_id, $topic_id, $notify_user);
+
+            if (defined('ATTACHMENT_UPDATED')) {
+                global $log_action;
+                $log_action->mod('mod_topic_attach_updated', [
+                    'forum_id' => $forum_id,
+                    'topic_id' => $topic_id,
+                    'topic_title' => $post_info['topic_title'],
+                ]);
+            }
         }
 
         if ($mode == 'newtopic' || $mode == 'reply') {
