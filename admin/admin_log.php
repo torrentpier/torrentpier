@@ -228,6 +228,7 @@ if ($log_rowset) {
             case $log_type['mod_topic_change_tor_status']:
             case $log_type['mod_topic_change_tor_type']:
             case $log_type['mod_topic_tor_unregister']:
+            case $log_type['mod_topic_tor_register']:
             case $log_type['mod_topic_renamed']:
             case $log_type['mod_post_delete']:
             case $log_type['mod_post_pin']:

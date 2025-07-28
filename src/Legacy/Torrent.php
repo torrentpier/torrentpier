@@ -97,7 +97,7 @@ class Torrent
      */
     public static function tracker_unregister($attach_id, $mode = '')
     {
-        global $lang, $bb_cfg, $log_action;
+        global $lang, $bb_cfg;
 
         $attach_id = (int)$attach_id;
         $post_id = $topic_id = $topic_title = $forum_id = null;
@@ -152,13 +152,6 @@ class Torrent
             $torrServer = new TorrServerAPI();
             $torrServer->removeM3U($attach_id);
         }
-
-        // Log action
-        $log_action->mod('mod_topic_tor_unregister', [
-            'forum_id' => $forum_id,
-            'topic_id' => $topic_id,
-            'topic_title' => $topic_title,
-        ]);
 
         // Delete torrent
         $sql = "DELETE FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id";
