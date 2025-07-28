@@ -181,7 +181,7 @@ class Torrent
      */
     public static function delete_torrent($attach_id, $mode = '')
     {
-        global $lang, $reg_mode, $topic_id;
+        global $lang, $reg_mode, $topic_id, $log_action;
 
         $attach_id = (int)$attach_id;
         $reg_mode = $mode;
@@ -201,6 +201,13 @@ class Torrent
         self::torrent_auth_check($forum_id, $poster_id);
         self::tracker_unregister($attach_id);
         delete_attachment(0, $attach_id);
+
+        // Log action
+        $log_action->mod('mod_topic_tor_delete', [
+            'forum_id' => $torrent['forum_id'],
+            'topic_id' => $torrent['topic_id'],
+            'topic_title' => $torrent['topic_title'],
+        ]);
     }
 
     /**

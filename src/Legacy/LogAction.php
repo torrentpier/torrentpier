@@ -34,6 +34,7 @@ class LogAction
         'mod_topic_change_tor_type' => 16,
         'mod_topic_tor_unregister' => 17,
         'mod_topic_tor_register' => 18,
+        'mod_topic_tor_delete' => 19,
     ];
     public $log_type_select = [];
     public $log_disabled = false;
