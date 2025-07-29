@@ -32,6 +32,37 @@ if (!$poster_id = (int)$this->request['poster_id']) {
 $cache_lifetime = 3600;
 $thanks_cache_key = 'topic_thanks_' . $topic_id;
 
+/**
+ * Get thanks by topic id
+ *
+ * @param $topic_id
+ * @return array
+ */
+function get_thanks_list($topic_id)
+{
+    global $thanks_cache_key, $cache_lifetime;
+
+    if (!$cached_thanks = CACHE('bb_cache')->get($thanks_cache_key)) {
+        $cached_thanks = [];
+        $sql = DB()->fetch_rowset('SELECT u.username, u.user_rank, u.user_id, thx.* FROM ' . BB_THX . ' thx, ' . BB_USERS . " u WHERE thx.topic_id = $topic_id AND thx.user_id = u.user_id");
+
+        foreach ($sql as $row) {
+            $cached_thanks[$row['user_id']] = [
+                'user_id' => $row['user_id'],
+                'username' => $row['username'],
+                'user_rank' => $row['user_rank'],
+                'time' => $row['time']
+            ];
+        }
+
+        if (!empty($cached_thanks)) {
+            CACHE('bb_cache')->set($thanks_cache_key, $cached_thanks, $cache_lifetime);
+        }
+    }
+
+    return $cached_thanks;
+}
+
 switch ($mode) {
     case 'add':
         if (IS_GUEST) {
@@ -42,13 +73,21 @@ switch ($mode) {
             $this->ajax_die($lang['LIKE_OWN_POST']);
         }
 
-        if (DB()->fetch_row('SELECT topic_id FROM ' . BB_THX . " WHERE topic_id = $topic_id  AND user_id = " . $userdata['user_id'])) {
+        $cached_thanks = get_thanks_list($topic_id);
+        if (isset($cached_thanks[$userdata['user_id']])) {
             $this->ajax_die($lang['LIKE_ALREADY']);
         }
 
         $columns = 'topic_id, user_id, time';
         $values = "$topic_id, {$userdata['user_id']}, " . TIMENOW;
         DB()->query('INSERT IGNORE INTO ' . BB_THX . " ($columns) VALUES ($values)");
+
+        $cached_thanks[$userdata['user_id']] = [
+            'user_id' => $userdata['user_id'],
+            'username' => $userdata['username'],
+            'user_rank' => $userdata['user_rank'],
+            'time' => TIMENOW
+        ];
 
         // Limit voters per topic
         $tor_thank_limit_per_topic = (int)$bb_cfg['tor_thank_limit_per_topic'];
@@ -57,6 +96,10 @@ switch ($mode) {
             if ($thanks_count > $tor_thank_limit_per_topic) {
                 DB()->query('DELETE FROM ' . BB_THX . " WHERE topic_id = $topic_id ORDER BY time ASC LIMIT 1");
             }
+        }
+
+        if (!empty($cached_thanks)) {
+            CACHE('bb_cache')->set($thanks_cache_key, $cached_thanks, $cache_lifetime);
         }
         break;
     case 'get':
