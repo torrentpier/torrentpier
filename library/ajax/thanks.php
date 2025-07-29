@@ -95,8 +95,9 @@ switch ($mode) {
             $thanks_count = count($cached_thanks);
             if ($thanks_count > $tor_thank_limit_per_topic) {
                 $oldest_user_id = null;
-                foreach ($cached_thanks as $user_id) {
-                    $oldest_user_id = $user_id;
+                foreach ($cached_thanks as $user_id => $thanks_data) {
+                    // First value
+                    $oldest_user_id = $thanks_data['user_id'];
                     break;
                 }
 
