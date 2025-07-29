@@ -29,6 +29,40 @@ if (!$poster_id = (int)$this->request['poster_id']) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
+$cache_lifetime = 3600;
+$thanks_cache_key = 'topic_thanks_' . $topic_id;
+
+/**
+ * Get thanks by topic id
+ *
+ * @param $topic_id
+ * @param string $thanks_cache_key
+ * @param int $cache_lifetime
+ * @return array
+ */
+function get_thanks_list($topic_id, string $thanks_cache_key, int $cache_lifetime)
+{
+    if (!$cached_thanks = CACHE('bb_cache')->get($thanks_cache_key)) {
+        $cached_thanks = [];
+        $sql = DB()->fetch_rowset('SELECT u.username, u.user_rank, u.user_id, thx.* FROM ' . BB_THX . ' thx, ' . BB_USERS . " u WHERE thx.topic_id = $topic_id AND thx.user_id = u.user_id");
+
+        foreach ($sql as $row) {
+            $cached_thanks[$row['user_id']] = [
+                'user_id' => $row['user_id'],
+                'username' => $row['username'],
+                'user_rank' => $row['user_rank'],
+                'time' => $row['time']
+            ];
+        }
+
+        if (!empty($cached_thanks)) {
+            CACHE('bb_cache')->set($thanks_cache_key, $cached_thanks, $cache_lifetime);
+        }
+    }
+
+    return $cached_thanks;
+}
+
 switch ($mode) {
     case 'add':
         if (IS_GUEST) {
@@ -39,7 +73,8 @@ switch ($mode) {
             $this->ajax_die($lang['LIKE_OWN_POST']);
         }
 
-        if (DB()->fetch_row('SELECT topic_id FROM ' . BB_THX . " WHERE topic_id = $topic_id  AND user_id = " . $userdata['user_id'])) {
+        $cached_thanks = get_thanks_list($topic_id, $thanks_cache_key, $cache_lifetime);
+        if (isset($cached_thanks[$userdata['user_id']])) {
             $this->ajax_die($lang['LIKE_ALREADY']);
         }
 
@@ -47,10 +82,34 @@ switch ($mode) {
         $values = "$topic_id, {$userdata['user_id']}, " . TIMENOW;
         DB()->query('INSERT IGNORE INTO ' . BB_THX . " ($columns) VALUES ($values)");
 
+        $cached_thanks[$userdata['user_id']] = [
+            'user_id' => $userdata['user_id'],
+            'username' => $userdata['username'],
+            'user_rank' => $userdata['user_rank'],
+            'time' => TIMENOW
+        ];
+
         // Limit voters per topic
-        $thanks_count = DB()->fetch_row('SELECT COUNT(*) as thx FROM ' . BB_THX . " WHERE topic_id = $topic_id")['thx'];
-        if ($thanks_count > (int)$bb_cfg['tor_thank_limit_per_topic']) {
-            DB()->query('DELETE FROM ' . BB_THX . " WHERE topic_id = $topic_id ORDER BY time ASC LIMIT 1");
+        $tor_thank_limit_per_topic = (int)$bb_cfg['tor_thank_limit_per_topic'];
+        if ($tor_thank_limit_per_topic > 0) {
+            $thanks_count = count($cached_thanks);
+            if ($thanks_count > $tor_thank_limit_per_topic) {
+                $oldest_user_id = null;
+                foreach ($cached_thanks as $user_id => $thanks_data) {
+                    // First value
+                    $oldest_user_id = $thanks_data['user_id'];
+                    break;
+                }
+
+                if ($oldest_user_id) {
+                    DB()->query('DELETE FROM ' . BB_THX . " WHERE topic_id = $topic_id AND user_id = $oldest_user_id LIMIT 1");
+                    unset($cached_thanks[$oldest_user_id]);
+                }
+            }
+        }
+
+        if (!empty($cached_thanks)) {
+            CACHE('bb_cache')->set($thanks_cache_key, $cached_thanks, $cache_lifetime);
         }
         break;
     case 'get':
@@ -58,9 +117,9 @@ switch ($mode) {
             $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
         }
 
+        $cached_thanks = get_thanks_list($topic_id, $thanks_cache_key, $cache_lifetime);
         $user_list = [];
-        $sql = DB()->fetch_rowset('SELECT u.username, u.user_rank, u.user_id, t.* FROM ' . BB_THX . ' t, ' . BB_USERS . " u WHERE t.topic_id = $topic_id AND t.user_id = u.user_id");
-        foreach ($sql as $row) {
+        foreach ($cached_thanks as $row) {
             $user_list[] = '<b>' . profile_url($row) . ' <i>(' . bb_date($row['time']) . ')</i></b>';
         }
 

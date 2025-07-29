@@ -569,7 +569,7 @@ $bb_cfg['limit_max_search_results'] = false; // Limit for number of search resul
 
 // Posting
 $bb_cfg['prevent_multiposting'] = true; // TODO: replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
-$bb_cfg['max_smilies'] = 25; //Max number of smilies in a post (0 - unlimited)
+$bb_cfg['max_smilies'] = 25; // Max number of smilies in a post (0 - unlimited)
 $bb_cfg['max_symbols_post'] = 5000; // TODO: Max number of symbols in a post (0 - unlimited)
 
 // PM
@@ -593,7 +593,7 @@ $bb_cfg['user_not_active_days_keep'] = 180; // After how many days should I dele
 // Vote for torrents
 $bb_cfg['tor_thank'] = true;
 $bb_cfg['tor_thanks_list_guests'] = true; // Show voters to guests
-$bb_cfg['tor_thank_limit_per_topic'] = 50;
+$bb_cfg['tor_thank_limit_per_topic'] = 50; // Set "0" to disable limit
 
 // Groups
 $bb_cfg['group_members_per_page'] = 50; // How many groups will be displayed in a page
