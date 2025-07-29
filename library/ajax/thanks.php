@@ -65,7 +65,7 @@ switch ($mode) {
         }
 
         if (!$cached_thanks = CACHE('bb_cache')->get($thanks_cache_key)) {
-            $cached_thanks = DB()->fetch_rowset('SELECT u.username, u.user_rank, u.user_id, t.* FROM ' . BB_THX . ' t, ' . BB_USERS . " u WHERE t.topic_id = $topic_id AND t.user_id = u.user_id");
+            $cached_thanks = DB()->fetch_rowset('SELECT u.username, u.user_rank, u.user_id, thx.* FROM ' . BB_THX . ' thx, ' . BB_USERS . " u WHERE thx.topic_id = $topic_id AND thx.user_id = u.user_id");
             if (!empty($cached_thanks)) {
                 CACHE('bb_cache')->set($thanks_cache_key, $cached_thanks, $cache_lifetime);
             }
