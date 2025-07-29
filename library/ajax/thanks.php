@@ -94,7 +94,16 @@ switch ($mode) {
         if ($tor_thank_limit_per_topic > 0) {
             $thanks_count = count($cached_thanks);
             if ($thanks_count > $tor_thank_limit_per_topic) {
-                DB()->query('DELETE FROM ' . BB_THX . " WHERE topic_id = $topic_id ORDER BY time ASC LIMIT 1");
+                $oldest_user_id = null;
+                foreach ($cached_thanks as $user_id) {
+                    $oldest_user_id = $user_id;
+                    break;
+                }
+
+                if ($oldest_user_id) {
+                    DB()->query('DELETE FROM ' . BB_THX . " WHERE topic_id = $topic_id AND user_id = $oldest_user_id LIMIT 1");
+                    unset($cached_thanks[$oldest_user_id]);
+                }
             }
         }
 
