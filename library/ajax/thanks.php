@@ -36,12 +36,12 @@ $thanks_cache_key = 'topic_thanks_' . $topic_id;
  * Get thanks by topic id
  *
  * @param $topic_id
+ * @param string $thanks_cache_key
+ * @param int $cache_lifetime
  * @return array
  */
-function get_thanks_list($topic_id)
+function get_thanks_list($topic_id, string $thanks_cache_key, int $cache_lifetime)
 {
-    global $thanks_cache_key, $cache_lifetime;
-
     if (!$cached_thanks = CACHE('bb_cache')->get($thanks_cache_key)) {
         $cached_thanks = [];
         $sql = DB()->fetch_rowset('SELECT u.username, u.user_rank, u.user_id, thx.* FROM ' . BB_THX . ' thx, ' . BB_USERS . " u WHERE thx.topic_id = $topic_id AND thx.user_id = u.user_id");
@@ -73,7 +73,7 @@ switch ($mode) {
             $this->ajax_die($lang['LIKE_OWN_POST']);
         }
 
-        $cached_thanks = get_thanks_list($topic_id);
+        $cached_thanks = get_thanks_list($topic_id, $thanks_cache_key, $cache_lifetime);
         if (isset($cached_thanks[$userdata['user_id']])) {
             $this->ajax_die($lang['LIKE_ALREADY']);
         }
@@ -107,7 +107,7 @@ switch ($mode) {
             $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
         }
 
-        $cached_thanks = get_thanks_list($topic_id);
+        $cached_thanks = get_thanks_list($topic_id, $thanks_cache_key, $cache_lifetime);
         $user_list = [];
         foreach ($cached_thanks as $row) {
             $user_list[] = '<b>' . profile_url($row) . ' <i>(' . bb_date($row['time']) . ')</i></b>';
