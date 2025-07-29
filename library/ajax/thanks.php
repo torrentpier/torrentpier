@@ -92,7 +92,7 @@ switch ($mode) {
         // Limit voters per topic
         $tor_thank_limit_per_topic = (int)$bb_cfg['tor_thank_limit_per_topic'];
         if ($tor_thank_limit_per_topic > 0) {
-            $thanks_count = DB()->fetch_row('SELECT COUNT(*) as thx FROM ' . BB_THX . " WHERE topic_id = $topic_id")['thx'];
+            $thanks_count = count($cached_thanks);
             if ($thanks_count > $tor_thank_limit_per_topic) {
                 DB()->query('DELETE FROM ' . BB_THX . " WHERE topic_id = $topic_id ORDER BY time ASC LIMIT 1");
             }
