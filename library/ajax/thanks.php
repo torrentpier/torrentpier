@@ -29,6 +29,9 @@ if (!$poster_id = (int)$this->request['poster_id']) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
+$cache_lifetime = 3600;
+$thanks_cache_key = 'topic_thanks_' . $topic_id;
+
 switch ($mode) {
     case 'add':
         if (IS_GUEST) {
