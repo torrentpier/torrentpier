@@ -644,10 +644,15 @@ class Torrent
         // Send torrent
         $output = Bencode::encode($tor);
 
-        if (config()->get('tracker.use_old_torrent_name_format')) {
-            $dl_fname = '[' . config()->get('server_name') . '].t' . $topic_id . '.' . TORRENT_EXT;
+        $real_filename = clean_filename(basename($attachment['real_filename']));
+        if ($bb_cfg['tracker']['use_real_filename']) {
+            $dl_fname = $real_filename;
         } else {
-            $dl_fname = html_ent_decode($topic_title) . ' [' . config()->get('server_name') . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
+            if ($bb_cfg['tracker']['use_old_torrent_name_format']) {
+                $dl_fname = '[' . $bb_cfg['server_name'] . '].t' . $topic_id . '.' . TORRENT_EXT;
+            } else {
+                $dl_fname = html_ent_decode($topic_title) . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
+            }
         }
 
         if (!empty($_COOKIE['explain'])) {

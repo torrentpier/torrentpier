@@ -742,7 +742,8 @@ $bb_cfg['tracker'] = [
     'hybrid_stat_protocol' => 1, // For hybrid torrents there are two identical requests sent by clients, for counting stats we gotta choose one, you can change this to '2' in future, when v1 protocol is outdated
     'disabled_v1_torrents' => false, // disallow registration of v1-only torrents, for future implementations where client will use v2 only and there won't be need for v1, thus relieving tracker
     'disabled_v2_torrents' => false, // disallow registration of v2-only torrents
-    'use_old_torrent_name_format' => false, // when enabled, the names of torrent files will have the classic format: [yoursite.com].txxx.torrent
+    'use_real_filename' => false, // Use original torrent filename for downloads. If disabled, filename will be generated automatically
+    'use_old_torrent_name_format' => false, // Use classic filename format '[yoursite.com].txxx.torrent'. Only works when use_real_filename is disabled
 ];
 
 // Ratio settings
