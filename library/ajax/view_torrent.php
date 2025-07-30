@@ -31,7 +31,7 @@ if (!$torrent) {
 
 // Check rights
 $is_auth = auth(AUTH_ALL, $torrent['forum_id'], $userdata);
-if (!$is_auth['auth_download']) {
+if (!$is_auth['auth_view']) {
     $this->ajax_die($lang['SORRY_AUTH_VIEW_ATTACH']);
 }
 
