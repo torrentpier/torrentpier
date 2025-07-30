@@ -11,16 +11,28 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang;
+global $lang, $userdata;
 
 if (!isset($this->request['attach_id'])) {
     $this->ajax_die($lang['EMPTY_ATTACH_ID']);
 }
 $attach_id = (int)$this->request['attach_id'];
 
-$torrent = DB()->fetch_row("SELECT attach_id, physical_filename FROM " . BB_ATTACHMENTS_DESC . " WHERE attach_id = $attach_id LIMIT 1");
+$torrent = DB()->fetch_row("
+    SELECT
+        ad.attach_id, ad.physical_filename,
+        tor.forum_id
+    FROM " . BB_ATTACHMENTS_DESC . " ad
+    INNER JOIN " . BB_BT_TORRENTS . " tor ON (ad.attach_id = tor.attach_id)
+    WHERE ad.attach_id = $attach_id LIMIT 1");
 if (!$torrent) {
     $this->ajax_die($lang['ERROR_BUILD']);
+}
+
+// Check rights
+$is_auth = auth(AUTH_ALL, $torrent['forum_id'], $userdata);
+if (!$is_auth['auth_download']) {
+    $this->ajax_die($lang['SORRY_AUTH_VIEW_ATTACH']);
 }
 
 $file_contents = null;
@@ -37,7 +49,6 @@ try {
 }
 
 $torrent = new TorrentPier\Legacy\TorrentFileList($tor);
-
 $tor_filelist = $torrent->get_filelist();
 
 $this->response['html'] = $tor_filelist;
