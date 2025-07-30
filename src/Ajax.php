@@ -50,7 +50,7 @@ class Ajax
         'index_data' => ['guest'],
     ];
 
-    public string $action;
+    public ?string $action;
 
     /**
      * Constructor
