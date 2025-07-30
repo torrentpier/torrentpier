@@ -34,7 +34,7 @@ if (!$topic_id) {
 }
 
 // Getting torrent info from database
-$sql = 'SELECT attach_id, forum_id, info_hash, info_hash_v2
+$sql = 'SELECT attach_id, forum_id, info_hash, info_hash_v2, tor_status, poster_id
             FROM ' . BB_BT_TORRENTS . '
             WHERE topic_id = ' . $topic_id . '
         LIMIT 1';
@@ -56,6 +56,13 @@ set_die_append_msg($forum_id, $topic_id);
 $is_auth = auth(AUTH_ALL, $forum_id, $userdata);
 if (!$is_auth['auth_download']) {
     bb_die($lang['SORRY_AUTH_VIEW_ATTACH']);
+}
+
+// Check for frozen torrent
+$releaser = $userdata['user_id'] == $row['poster_id'];
+$tor_status = $row['tor_status'];
+if (!IS_AM && isset($bb_cfg['tor_frozen'][$tor_status]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_status]) && $releaser)) {
+    bb_die($lang['TOR_STATUS_FORBIDDEN'] . $lang['TOR_STATUS_NAME'][$tor_status]);
 }
 
 // Parse M3U file
