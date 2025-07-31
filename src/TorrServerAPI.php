@@ -52,7 +52,9 @@ class TorrServerAPI
      */
     public function __construct()
     {
-        $this->url = config()->get('torr_server.url') . '/';
+        global $bb_cfg;
+
+        $this->url = rtrim(trim($bb_cfg['torr_server']['url']), '/') . '/';
     }
 
     /**

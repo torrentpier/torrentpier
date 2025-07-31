@@ -68,6 +68,7 @@ switch ($type) {
 
     case 'reg':
         \TorrentPier\Legacy\Torrent::tracker_register($attach_id);
+        // Log action
         $log_action->mod('mod_topic_tor_register', [
             'forum_id' => $torrent['forum_id'],
             'topic_id' => $torrent['topic_id'],
@@ -78,6 +79,7 @@ switch ($type) {
 
     case 'unreg':
         \TorrentPier\Legacy\Torrent::tracker_unregister($attach_id);
+        // Log action
         $log_action->mod('mod_topic_tor_unregister', [
             'forum_id' => $torrent['forum_id'],
             'topic_id' => $torrent['topic_id'],
