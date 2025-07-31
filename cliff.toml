@@ -110,7 +110,7 @@ commit_parsers = [
   { body = ".*security", group = "<!-- 8 -->🛡️ Security" },
   { message = "^revert", group = "<!-- 9 -->◀️ Revert" },
   { message = "^crowdin|^crodwin", group = "<!-- 10 -->🈳 New translations" }, # crowdin pulls supporting
-  { message = "^Composer", group = "<!-- 11 -->📦 Dependencies" }, # dependabot pulls supporting
+  { message = "^Composer|^deps", group = "<!-- 11 -->📦 Dependencies" }, # dependabot pulls supporting
   { message = "^rem|^drop|^removed", group = "<!-- 12 -->🗑️ Removed" },
   { message = ".*", group = "<!-- 13 -->💼 Other" },
 ]
