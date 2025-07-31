@@ -53,7 +53,7 @@
     "arokettu/torrent-file": "^5.2.1",
     "bugsnag/bugsnag": "^v3.29.1",
     "claviska/simpleimage": "^4.0",
-    "belomaxorka/captcha": "1.*",
+    "gregwar/captcha": "1.*",
     "egulias/email-validator": "^4.0.1",
     "filp/whoops": "^2.15",
     "z4kn4fein/php-semver": "^v3.0.0",
