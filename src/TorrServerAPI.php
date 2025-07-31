@@ -54,7 +54,7 @@ class TorrServerAPI
     {
         global $bb_cfg;
 
-        $this->url = $bb_cfg['torr_server']['url'] . '/';
+        $this->url = rtrim(trim($bb_cfg['torr_server']['url']), '/') . '/';
     }
 
     /**
