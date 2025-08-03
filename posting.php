@@ -253,7 +253,11 @@ if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $po
 $robots_indexing = $post_info['topic_allow_robots'] ?? true;
 if ($submit || $refresh) {
     if (IS_AM) {
-        $robots_indexing = !empty($_POST['robots']);
+        if ($post_info['auth_read'] == AUTH_ALL) {
+            $robots_indexing = !empty($_POST['robots']);
+        } else {
+            $robots_indexing = true;
+        }
     }
     $notify_user = (int)!empty($_POST['notify']);
 } else {
@@ -504,7 +508,7 @@ if (!IS_GUEST) {
 $topic_type_toggle = '';
 if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
     // Allow robots indexing
-    if (IS_AM) {
+    if (IS_AM && $post_info['auth_read'] == AUTH_ALL) {
         $template->assign_var('SHOW_ROBOTS_CHECKBOX');
     }
 
