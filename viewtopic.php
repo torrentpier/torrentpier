@@ -113,9 +113,6 @@ $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
 $topic_attachment = isset($t_data['topic_attachment']) ? (int)$t_data['topic_attachment'] : null;
 
-// Allow robots indexing
-$page_cfg['allow_robots'] = (bool)$t_data['topic_allow_robots'];
-
 if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) {
     bb_die($lang['ERROR_PORNO_FORUM']);
 }
@@ -228,6 +225,13 @@ $datastore->rm('cat_forums');
 
 // Make jumpbox
 make_jumpbox();
+
+// Allow robots indexing
+if ($is_auth['auth_read']) {
+    $page_cfg['allow_robots'] = (bool)$t_data['topic_allow_robots'];
+} else {
+    $page_cfg['allow_robots'] = false;
+}
 
 if ($post_id && !empty($t_data['prev_posts'])) {
     $start = floor(($t_data['prev_posts'] - 1) / $posts_per_page) * $posts_per_page;
