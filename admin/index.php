@@ -128,14 +128,14 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $topics_per_day = $total_topics;
     }
 
-    if ($users_per_day > $total_users) {
+    if ((int)$users_per_day > $total_users) {
         $users_per_day = $total_users;
     }
 
     $template->assign_vars([
-        'NUMBER_OF_POSTS' => $total_posts,
-        'NUMBER_OF_TOPICS' => $total_topics,
-        'NUMBER_OF_USERS' => $total_users,
+        'NUMBER_OF_POSTS' => commify($total_posts),
+        'NUMBER_OF_TOPICS' => commify($total_topics),
+        'NUMBER_OF_USERS' => commify($total_users),
         'START_DATE' => $start_date,
         'POSTS_PER_DAY' => $posts_per_day,
         'TOPICS_PER_DAY' => $topics_per_day,

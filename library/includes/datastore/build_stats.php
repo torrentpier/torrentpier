@@ -15,7 +15,7 @@ $data = [];
 
 // usercount
 $row = DB()->fetch_row("SELECT COUNT(*) AS usercount FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")");
-$data['usercount'] = commify($row['usercount']);
+$data['usercount'] = (int)$row['usercount'];
 
 // newestuser
 $row = DB()->fetch_row("SELECT user_id, username, user_rank FROM " . BB_USERS . " WHERE user_active = 1 AND user_id NOT IN(" . EXCLUDED_USERS . ") ORDER BY user_id DESC LIMIT 1");
@@ -23,8 +23,8 @@ $data['newestuser'] = $row;
 
 // post/topic count
 $row = DB()->fetch_row("SELECT SUM(forum_topics) AS topiccount, SUM(forum_posts) AS postcount FROM " . BB_FORUMS);
-$data['postcount'] = commify($row['postcount']);
-$data['topiccount'] = commify($row['topiccount']);
+$data['postcount'] = (int)$row['postcount'];
+$data['topiccount'] = (int)$row['topiccount'];
 
 // Tracker stats
 if (config()->get('tor_stats')) {
