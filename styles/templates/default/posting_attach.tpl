@@ -1,6 +1,8 @@
 <!-- IF TPL_ADD_ATTACHMENT -->
 <!--========================================================================-->
 
+<style>#clear_file_upload { display: none; }</style>
+
 <tr>
 	<th colspan="2" class="thHead">{L_ADD_ATTACHMENT_TITLE}</th>
 </tr>
@@ -10,6 +12,7 @@
 		<table class="borderless" cellspacing="0">
 		<tr>
 			<td class="pad_4">
+				<input type="button" id="clear_file_upload" value="{L_CLEAR}" />
 				<input type="file" name="fileupload" size="45" maxlength="{FILESIZE}" />
 				<p class="small nowrap">{L_ADD_ATTACHMENT_EXPLAIN}</p>
 			</td>
@@ -25,6 +28,24 @@
 		<input type="submit" class="bold" name="add_attachment" value="{L_ADD_ATTACHMENT}" />
 	</td>
 </tr>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[name="fileupload"]').on('change', function () {
+            if (this.files && this.files.length > 0) {
+                $('input[type=button]#clear_file_upload').show();
+            } else {
+                $('input[type=button]#clear_file_upload').hide();
+            }
+        });
+
+        $('input[type=button]#clear_file_upload').on('click', function () {
+            $('input[name="filecomment"]').val('');
+            $('input[name="fileupload"]').val('');
+            $('input[type=button]#clear_file_upload').hide();
+        });
+    });
+</script>
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_ADD_ATTACHMENT -->
