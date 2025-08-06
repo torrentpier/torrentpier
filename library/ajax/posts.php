@@ -26,7 +26,7 @@ if (isset($this->request['post_id'])) {
 			AND p.post_id  = pt.post_id
 		LIMIT 1");
     if (!$post) {
-        $this->ajax_die('not post');
+        $this->ajax_die($lang['TOPIC_POST_NOT_EXIST']);
     }
 
     $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
