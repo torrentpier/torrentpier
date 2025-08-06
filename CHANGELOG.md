@@ -2,6 +2,42 @@
 
 # 📖 Change Log
 
+## [v2.4.11](https://github.com/torrentpier/torrentpier/compare/v2.4.10..v2.4.11) (2025-08-06)
+
+### 🚀 Features
+
+- *(log action)* Show `torrent delete` action ([#2061](https://github.com/torrentpier/torrentpier/pull/2061)) - ([f80cad0](https://github.com/torrentpier/torrentpier/commit/f80cad0c6f8606ae3314e6dc4962f027f12798a3))
+- *(log action)* Show torrent register action ([#2060](https://github.com/torrentpier/torrentpier/pull/2060)) - ([66c01a5](https://github.com/torrentpier/torrentpier/commit/66c01a591f8618e911fd042cc23bf36902de8a38))
+- *(view_torrent.php)* Added checking auth to download ([#2067](https://github.com/torrentpier/torrentpier/pull/2067)) - ([7e38c5b](https://github.com/torrentpier/torrentpier/commit/7e38c5b63cacaec4c974a423fd1a6c0352529fd6))
+- *(vote topic)* Improved functionality & implemented caching ([#2063](https://github.com/torrentpier/torrentpier/pull/2063)) - ([e1337ef](https://github.com/torrentpier/torrentpier/commit/e1337ef5bc9cd7741d40cd645059019b5b5b576a))
+- Add clear button for file upload input in `posting_attach.tpl` ([#2072](https://github.com/torrentpier/torrentpier/pull/2072)) - ([7c6ab0e](https://github.com/torrentpier/torrentpier/commit/7c6ab0eed4691fa0f1bd29f9e19f956fdb16b43e))
+- Prevent robots indexing for private topics ([#2071](https://github.com/torrentpier/torrentpier/pull/2071)) - ([eecfe1a](https://github.com/torrentpier/torrentpier/commit/eecfe1a9515034d263a49f84210d3d32430253be))
+- Added check for frozen torrent in `playback_m3u.php` ([#2065](https://github.com/torrentpier/torrentpier/pull/2065)) - ([57a9f3f](https://github.com/torrentpier/torrentpier/commit/57a9f3f7c67ca5c8db2218269a465bfc2d4644b4))
+- Add option to use original torrent filenames for downloads ([#2064](https://github.com/torrentpier/torrentpier/pull/2064)) - ([07399fc](https://github.com/torrentpier/torrentpier/commit/07399fc00df214d1ad863e8a893495ace26ff7fa))
+- Added check for demo-mode in `admin_robots.php` and `admin_sitemap.php` ([#2046](https://github.com/torrentpier/torrentpier/pull/2046)) - ([dd64236](https://github.com/torrentpier/torrentpier/commit/dd64236da12f7d76e0b548601c86f38164a71725))
+
+### 🐛 Bug Fixes
+
+- *(ACP)* A non-numeric value encountered for stats ([#2073](https://github.com/torrentpier/torrentpier/pull/2073)) - ([d690447](https://github.com/torrentpier/torrentpier/commit/d690447cdbdf7f07de9a539ef752dab69a205390))
+- *(Attach.php)* Trying to access array offset on value of type null ([#2075](https://github.com/torrentpier/torrentpier/pull/2075)) - ([abb2b24](https://github.com/torrentpier/torrentpier/commit/abb2b242b75d1acc41e2d901f8b558e90a3b35d7))
+- Prevent showing meta description if defined `HAS_DIED` ([#2070](https://github.com/torrentpier/torrentpier/pull/2070)) - ([3eba11f](https://github.com/torrentpier/torrentpier/commit/3eba11f26b3432ef7446de5bc938cbcbfa4932f5))
+- Make `Ajax::$action` property nullable to handle missing POST parameter ([#2066](https://github.com/torrentpier/torrentpier/pull/2066)) - ([efd85ee](https://github.com/torrentpier/torrentpier/commit/efd85eef4ad69e5b53be3f3d0ea75d267d0b664c))
+
+### 📦 Dependencies
+
+- Replace `belomaxorka/captcha` with `gregwar/captcha` ([#2069](https://github.com/torrentpier/torrentpier/pull/2069)) - ([d12e6ba](https://github.com/torrentpier/torrentpier/commit/d12e6ba922d38c5c24380c58c037d405af5c38c9))
+
+### 🚜 Refactor
+
+- *(admin)* Remove redundant `dir` and `lang` attributes from html tag ([#2051](https://github.com/torrentpier/torrentpier/pull/2051)) - ([bb992fd](https://github.com/torrentpier/torrentpier/commit/bb992fd81b0fede511ab566fdc7bf4d25b924ae2))
+
+### ⚙️ Miscellaneous
+
+- Some minor improvements ([#2076](https://github.com/torrentpier/torrentpier/pull/2076)) - ([5ff296f](https://github.com/torrentpier/torrentpier/commit/5ff296f83be87a0cc5607fd352d62321819b0e03))
+- Some minor improvements ([#2068](https://github.com/torrentpier/torrentpier/pull/2068)) - ([e3eb22e](https://github.com/torrentpier/torrentpier/commit/e3eb22e2d8d7b3bd2413cfcb1badfbd81ee9dc54))
+- Added pull request template & updated workflow ([#2052](https://github.com/torrentpier/torrentpier/pull/2052)) - ([a863a61](https://github.com/torrentpier/torrentpier/commit/a863a619419881e831a6556fa5e77dae746ff031))
+
+
 ## [v2.4.10](https://github.com/torrentpier/torrentpier/compare/v2.4.9..v2.4.10) (2025-07-03)
 
 ### 🚀 Features
