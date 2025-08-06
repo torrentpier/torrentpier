@@ -788,9 +788,10 @@ class Attach
             }
             DB()->sql_freeresult($result);
 
-            $allowed_filesize = $row['max_filesize'] ?: $attach_config['max_filesize'];
-            $cat_id = (int)$row['cat_id'];
-            $auth_cache = trim($row['forum_permissions']);
+            $allowed_filesize = $row['max_filesize'] ?? $attach_config['max_filesize'];
+            $cat_id = isset($row['cat_id']) ? (int)$row['cat_id'] : 0;
+            $auth_cache = isset($row['forum_permissions']) ? trim($row['forum_permissions']) : '';
+            $row['allow_group'] = $row['allow_group'] ?? 0;
 
             // check Filename
             if (preg_match("#[\\/:*?\"<>|]#i", $this->filename)) {
