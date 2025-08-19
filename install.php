@@ -319,6 +319,35 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
         }
     }
 
+    // Suggest configuration files based on selected web server
+    out("\n--- Web Server configuration ---\n", 'info');
+    echo "Which web server are you using? (nginx / caddy / apache): ";
+    $webserver = mb_strtolower(trim(readline()));
+    $install_dir = 'install' . DIRECTORY_SEPARATOR;
+
+    switch ($webserver) {
+        case 'nginx':
+            $config_path = BB_ROOT . $install_dir . 'nginx.conf';
+            if (is_file($config_path)) {
+                out("- Nginx configuration file: $config_path", 'success');
+            } else {
+                out("- Nginx config not found: $config_path", 'warning');
+                out('- You can find an example in the documentation', 'info');
+            }
+            break;
+
+        case 'caddy':
+            $config_path = BB_ROOT . $install_dir . 'Caddyfile';
+            if (is_file($config_path)) {
+                out("- Caddy configuration file: $config_path", 'success');
+            } else {
+                out("- Caddy config not found: $config_path", 'warning');
+                out('- You can find an example in the documentation', 'info');
+            }
+            break;
+    }
+    sleep(3);
+
     // Cleanup...
     if (is_file(BB_ROOT . '_cleanup.php')) {
         out("\n--- Finishing installation (Cleanup) ---\n", 'info');

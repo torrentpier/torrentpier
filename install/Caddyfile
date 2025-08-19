@@ -1,7 +1,7 @@
 # Example Caddy configuration for TorrentPier
 
 example.com {
-    root * /path/to/root
+    root * /path/to/www
     encode gzip zstd
     php_fastcgi unix//run/php/php-fpm.sock
     try_files {path} {path}/ /index.php?{query}
