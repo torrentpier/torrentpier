@@ -101,7 +101,7 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
    ```
 4. After, run this command in the project directory to install Composer dependencies
    ```shell
-   composer install --optimize-autoloader --no-dev
+   composer install --prefer-dist --optimize-autoloader
    ```
 5. Create a database and import the dump located at `install/sql/mysql.sql`
 6. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
