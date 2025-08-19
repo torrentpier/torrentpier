@@ -72,15 +72,15 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 > [!NOTE]
 > Thanks to [Sergei Solovev](https://github.com/SeAnSolovev) for this installation script ❤️
 
-### Quick (For web-panels) ☕️
+### Quick (With installation script) ☕️
 
 1. Select the folder where you want TorrentPier installed
    ```shell
-   cd /path/to/public_html
+   cd /path/to/www
    ```
 2. Download the latest version of TorrentPier
    ```shell
-   sudo git clone https://github.com/torrentpier/torrentpier.git .
+   git clone --branch v2.4 --depth 1 https://github.com/torrentpier/torrentpier.git .
    ```
 3. After completing, execute the command below and follow the instructions
    ```shell
@@ -90,15 +90,18 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 
 ### Manual 🔩
 
-1. Install [Composer](https://getcomposer.org/)
-2. Run the following command to create the TorrentPier project
+1. [Check our system requirements](#-requirements)
+2. Select the folder where you want TorrentPier installed
    ```shell
-   composer create-project torrentpier/torrentpier
+   cd /path/to/www
    ```
-3. [Check our system requirements](#-requirements)
+3. Download the latest version of TorrentPier
+   ```shell
+   git clone --branch v2.4 --depth 1 https://github.com/torrentpier/torrentpier.git .
+   ```
 4. After, run this command in the project directory to install Composer dependencies
    ```shell
-   composer install
+   composer install --optimize-autoloader --no-dev
    ```
 5. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
 6. Create a database and run migrations to set up the schema
