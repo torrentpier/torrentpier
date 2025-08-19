@@ -297,26 +297,43 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
 
     // Autofill host in robots.txt
     $robots_txt_file = BB_ROOT . 'robots.txt';
-    if (isset($TP_HOST) && is_file($robots_txt_file)) {
+    if (isset($TP_HOST) && is_file($robots_txt_file) && is_writable($robots_txt_file)) {
         $content = file_get_contents($robots_txt_file);
         $content = str_replace('example.com', $TP_HOST, $content);
         file_put_contents($robots_txt_file, $content);
     }
 
-    if (isset($APP_ENV) && $APP_ENV === 'local') {
-        if (!is_file(BB_ROOT . 'library/config.local.php')) {
-            if (copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php')) {
-                out('- Local configuration file created!', 'success');
+    // Suggest configuration files based on selected web server
+    out("--- Web Server configuration ---\n", 'info');
+    echo "Which web server are you using? (nginx / caddy / apache): ";
+    $webserver = mb_strtolower(trim(readline()));
+    $install_dir = 'install' . DIRECTORY_SEPARATOR;
+
+    switch ($webserver) {
+        case 'nginx':
+            $config_path = BB_ROOT . $install_dir . 'nginx.conf';
+            if (is_file($config_path)) {
+                out("- Nginx configuration file: $config_path", 'success');
             } else {
-                out('- Cannot create library/config.local.php file. You can create it manually, just copy config.php and rename it to config.local.php', 'warning');
+                out("- Nginx config not found: $config_path", 'warning');
+                out('- You can find an example in the documentation', 'info');
             }
-        }
-    } else {
-        if (rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()))) {
-            out("- Installation file renamed!", 'success');
-        } else {
-            out('- Cannot rename installation file (' . __FILE__ . '). Please, rename it manually for security reasons', 'warning');
-        }
+            break;
+
+        case 'caddy':
+            $config_path = BB_ROOT . $install_dir . 'Caddyfile';
+            if (is_file($config_path)) {
+                out("- Caddy configuration file: $config_path", 'success');
+            } else {
+                out("- Caddy config not found: $config_path", 'warning');
+                out('- You can find an example in the documentation', 'info');
+            }
+            break;
+    }
+    if (in_array($webserver, ['nginx', 'caddy'])) {
+        out("- Note: These configuration files include settings specific to TorrentPier,\nsuch as URL rewriting, security headers, and PHP handling", 'info');
+        out('- Adapt them to your environment and web server setup', 'info');
+        sleep(3);
     }
 
     // Cleanup...
@@ -334,6 +351,24 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
             unlink(BB_ROOT . '_cleanup.php');
         } else {
             out('- Skipping...', 'info');
+        }
+    }
+
+    if (isset($APP_ENV) && $APP_ENV === 'local') {
+        if (!is_file(BB_ROOT . 'library/config.local.php')) {
+            echo "\n";
+            if (copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php')) {
+                out('- Local configuration file created!', 'success');
+            } else {
+                out('- Cannot create library/config.local.php file. You can create it manually, just copy config.php and rename it to config.local.php', 'warning');
+            }
+        }
+    } else {
+        echo "\n";
+        if (rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()))) {
+            out("- Installation file renamed!", 'success');
+        } else {
+            out('- Cannot rename installation file (' . __FILE__ . '). Please, rename it manually for security reasons', 'warning');
         }
     }
 
