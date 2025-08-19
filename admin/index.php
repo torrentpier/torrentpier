@@ -132,6 +132,19 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $users_per_day = $total_users;
     }
 
+    // Get database version info
+    $database_version = $lang['NOT_AVAILABLE'];
+    $sql = 'SELECT VERSION() as version';
+    $result = DB()->sql_query($sql);
+    $row = DB()->sql_fetchrow($result);
+    if (isset($row['version'])) {
+        $database_version = $row['version'];
+    }
+
+    // Get disk space information & memory info
+    $getDiskSpaceInfo = getDiskSpaceInfo();
+    $getMemoryInfo = getMemoryInfo();
+
     $template->assign_vars([
         'NUMBER_OF_POSTS' => commify($total_posts),
         'NUMBER_OF_TOPICS' => commify($total_topics),
@@ -141,6 +154,15 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'TOPICS_PER_DAY' => $topics_per_day,
         'USERS_PER_DAY' => $users_per_day,
         'AVATAR_DIR_SIZE' => $avatar_dir_size,
+        // System info
+        'SERVER_OS' => htmlCHR(php_uname('s') . ' ' . php_uname('r') . ' ' . php_uname('m')),
+        'SERVER_PHP_VER' => htmlCHR(phpversion()),
+        'SERVER_PHP_SAPI' => htmlCHR(php_sapi_name()),
+        'SERVER_PHP_MEM_LIMIT' => htmlCHR(ini_get('memory_limit')),
+        'SERVER_PHP_MAX_EXECUTION_TIME' => htmlCHR(ini_get('max_execution_time')),
+        'SERVER_DATABASE_VER' => htmlCHR($database_version),
+        'SERVER_DISK_SPACE_INFO' => htmlCHR(sprintf('%s (used: %s | free: %s)', $getDiskSpaceInfo['total'], $getDiskSpaceInfo['used'], $getDiskSpaceInfo['free'])),
+        'SERVER_MEMORY_INFO' => htmlCHR(sprintf('%s (used: %s | free: %s)', $getMemoryInfo['system_total'], $getMemoryInfo['system_used'], $getMemoryInfo['system_free'])),
     ]);
 
     if (isset($_GET['users_online'])) {
@@ -223,6 +245,130 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     ]);
     send_no_cache_headers();
     print_page('index.tpl', 'admin', 'no_header');
+}
+
+/**
+ * Get disk space information
+ *
+ * @param string $path
+ * @return array|string[]
+ */
+function getDiskSpaceInfo(string $path = BB_ROOT): array
+{
+    global $lang;
+
+    try {
+        $bytes_total = disk_total_space($path);
+        $bytes_free = disk_free_space($path);
+
+        if ($bytes_total === false || $bytes_free === false) {
+            return [
+                'total' => $lang['NOT_AVAILABLE'],
+                'free' => $lang['NOT_AVAILABLE'],
+                'used' => $lang['NOT_AVAILABLE'],
+                'percent_used' => $lang['NOT_AVAILABLE']
+            ];
+        }
+
+        $bytes_used = $bytes_total - $bytes_free;
+        $percent_used = ($bytes_total > 0) ? round(($bytes_used / $bytes_total) * 100, 2) : 0;
+
+        return [
+            'total' => humn_size($bytes_total),
+            'free' => humn_size($bytes_free),
+            'used' => humn_size($bytes_used),
+            'percent_used' => $percent_used,
+            'path' => realpath($path)
+        ];
+
+    } catch (Exception $e) {
+        return [
+            'total' => 'Ошибка: ' . $e->getMessage(),
+            'free' => 'Ошибка: ' . $e->getMessage(),
+            'used' => 'Ошибка: ' . $e->getMessage(),
+            'percent_used' => 'Ошибка: ' . $e->getMessage()
+        ];
+    }
+}
+
+/**
+ * Get memory info
+ *
+ * @return array
+ */
+function getMemoryInfo(): array
+{
+    global $lang;
+
+    $memInfo = [];
+
+    $memInfo['php_memory_usage'] = humn_size(memory_get_usage(true));
+    $memInfo['php_memory_peak'] = humn_size(memory_get_peak_usage(true));
+    $memInfo['php_memory_limit'] = ini_get('memory_limit');
+
+    // Попытка получить системную информацию о памяти
+    if (function_exists('sys_getloadavg') && is_readable('/proc/meminfo')) {
+        $meminfo = file_get_contents('/proc/meminfo');
+        if ($meminfo) {
+            $lines = explode("\n", $meminfo);
+            $memdata = [];
+
+            foreach ($lines as $line) {
+                if (preg_match('/^(\w+):\s*(\d+)\s*kB/', $line, $matches)) {
+                    $memdata[$matches[1]] = $matches[2] * 1024;
+                }
+            }
+
+            if (isset($memdata['MemTotal'])) {
+                $total = $memdata['MemTotal'];
+                $free = $memdata['MemFree'] ?? 0;
+                $available = $memdata['MemAvailable'] ?? $free;
+                $buffers = $memdata['Buffers'] ?? 0;
+                $cached = $memdata['Cached'] ?? 0;
+
+                $used = $total - $available;
+                $percent_used = ($total > 0) ? round(($used / $total) * 100, 2) : 0;
+
+                $memInfo['system_total'] = humn_size($total);
+                $memInfo['system_free'] = humn_size($free);
+                $memInfo['system_available'] = humn_size($available);
+                $memInfo['system_used'] = humn_size($used);
+                $memInfo['system_buffers'] = humn_size($buffers);
+                $memInfo['system_cached'] = humn_size($cached);
+                $memInfo['system_percent_used'] = $percent_used;
+            }
+        }
+    } elseif (stripos(PHP_OS, 'win') === 0) {
+        try {
+            $output = shell_exec('wmic OS get TotalVisibleMemorySize,FreePhysicalMemory /value 2>nul');
+            if ($output) {
+                preg_match('/FreePhysicalMemory=(\d+)/', $output, $free_matches);
+                preg_match('/TotalVisibleMemorySize=(\d+)/', $output, $total_matches);
+
+                if (!empty($free_matches[1]) && !empty($total_matches[1])) {
+                    $total = $total_matches[1] * 1024;
+                    $free = $free_matches[1] * 1024;
+                    $used = $total - $free;
+                    $percent_used = ($total > 0) ? round(($used / $total) * 100, 2) : 0;
+
+                    $memInfo['system_total'] = humn_size($total);
+                    $memInfo['system_free'] = humn_size($free);
+                    $memInfo['system_used'] = humn_size($used);
+                    $memInfo['system_percent_used'] = $percent_used;
+                }
+            }
+        } catch (Exception $e) {
+        }
+    }
+
+    if (!isset($memInfo['system_total'])) {
+        $memInfo['system_total'] = $lang['NOT_AVAILABLE'];
+        $memInfo['system_free'] = $lang['NOT_AVAILABLE'];
+        $memInfo['system_used'] = $lang['NOT_AVAILABLE'];
+        $memInfo['system_percent_used'] = $lang['NOT_AVAILABLE'];
+    }
+
+    return $memInfo;
 }
 
 print_page('index.tpl', 'admin');
