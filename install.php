@@ -356,6 +356,7 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
 
     if (isset($APP_ENV) && $APP_ENV === 'local') {
         if (!is_file(BB_ROOT . 'library/config.local.php')) {
+            echo "\n";
             if (copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php')) {
                 out('- Local configuration file created!', 'success');
             } else {
@@ -363,6 +364,7 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
             }
         }
     } else {
+        echo "\n";
         if (rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()))) {
             out("- Installation file renamed!", 'success');
         } else {
