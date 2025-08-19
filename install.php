@@ -303,22 +303,6 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
         file_put_contents($robots_txt_file, $content);
     }
 
-    if (isset($APP_ENV) && $APP_ENV === 'local') {
-        if (!is_file(BB_ROOT . 'library/config.local.php')) {
-            if (copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php')) {
-                out('- Local configuration file created!', 'success');
-            } else {
-                out('- Cannot create library/config.local.php file. You can create it manually, just copy config.php and rename it to config.local.php', 'warning');
-            }
-        }
-    } else {
-        if (rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()))) {
-            out("- Installation file renamed!", 'success');
-        } else {
-            out('- Cannot rename installation file (' . __FILE__ . '). Please, rename it manually for security reasons', 'warning');
-        }
-    }
-
     // Suggest configuration files based on selected web server
     out("\n--- Web Server configuration ---\n", 'info');
     echo "Which web server are you using? (nginx / caddy / apache): ";
@@ -347,8 +331,8 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
             break;
     }
     if (in_array($webserver, ['nginx', 'caddy'])) {
-        out('Note: These configuration files include settings specific to TorrentPier, such as URL rewriting, security headers, and PHP handling', 'info');
-        out('Adapt them to your environment and web server setup', 'info');
+        out("- Note: These configuration files include settings specific to TorrentPier,\nsuch as URL rewriting, security headers, and PHP handling", 'info');
+        out('- Adapt them to your environment and web server setup', 'info');
         sleep(3);
     }
 
@@ -367,6 +351,22 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
             unlink(BB_ROOT . '_cleanup.php');
         } else {
             out('- Skipping...', 'info');
+        }
+    }
+
+    if (isset($APP_ENV) && $APP_ENV === 'local') {
+        if (!is_file(BB_ROOT . 'library/config.local.php')) {
+            if (copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php')) {
+                out('- Local configuration file created!', 'success');
+            } else {
+                out('- Cannot create library/config.local.php file. You can create it manually, just copy config.php and rename it to config.local.php', 'warning');
+            }
+        }
+    } else {
+        if (rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()))) {
+            out("- Installation file renamed!", 'success');
+        } else {
+            out('- Cannot rename installation file (' . __FILE__ . '). Please, rename it manually for security reasons', 'warning');
         }
     }
 
