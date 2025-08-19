@@ -42,12 +42,39 @@ header('X-Frame-Options: SAMEORIGIN');
 date_default_timezone_set('UTC');
 
 // Set remote address
-$allowedCDNs = ['HTTP_X_FORWARDED_FOR', 'HTTP_FASTLY_CLIENT_IP', 'HTTP_CF_CONNECTING_IP'];
-foreach ($allowedCDNs as $allowedCDN) {
-    if (isset($_SERVER[$allowedCDN]) && filter_var($_SERVER[$allowedCDN], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
-        $_SERVER['REMOTE_ADDR'] = $_SERVER[$allowedCDN];
+$trustedProxies = [
+    // Optional trusted proxy validation (empty array = disabled)
+    // '127.0.0.1'
+];
+
+$allowedCDNs = [
+    'HTTP_CF_CONNECTING_IP',
+    'HTTP_FASTLY_CLIENT_IP',
+    'HTTP_X_REAL_IP',
+    'HTTP_X_FORWARDED_FOR'
+];
+
+if (empty($trustedProxies) || in_array($_SERVER['REMOTE_ADDR'], $trustedProxies)) {
+    foreach ($allowedCDNs as $header) {
+        if (!isset($_SERVER[$header])) {
+            continue;
+        }
+
+        if ($header === 'HTTP_X_FORWARDED_FOR') {
+            // Handle X-Forwarded-For which may contain multiple IPs
+            $ips = explode(',', $_SERVER[$header]);
+            $clientIP = trim($ips[0]);
+        } else {
+            $clientIP = $_SERVER[$header];
+        }
+
+        if (filter_var($clientIP, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+            $_SERVER['REMOTE_ADDR'] = $clientIP;
+            break;
+        }
     }
 }
+unset($trustedProxies, $clientIP, $allowedCDNs);
 
 // Get all constants
 require_once BB_PATH . '/library/defines.php';
