@@ -180,18 +180,12 @@
     <tr>
         <td class="row1" nowrap="nowrap">Database:</td>
         <td class="row2"><b>{SERVER_DATABASE_VER}</b></td>
-        <td class="row1" nowrap="nowrap">SAPI:</td>
-        <td class="row2"><b>{SERVER_PHP_SAPI}</b></td>
-    </tr>
-    <tr>
-        <td class="row1" nowrap="nowrap">Disk space info:</td>
-        <td class="row2"><b>{SERVER_DISK_SPACE_INFO}</b></td>
         <td class="row1" nowrap="nowrap">Memory limit:</td>
         <td class="row2"><b>{SERVER_PHP_MEM_LIMIT}</b></td>
     </tr>
     <tr>
-        <td class="row1" nowrap="nowrap">Memory info:</td>
-        <td class="row2"><b>{SERVER_MEMORY_INFO}</b></td>
+        <td class="row1" nowrap="nowrap">Disk space info:</td>
+        <td class="row2"><b>{SERVER_DISK_SPACE_INFO}</b></td>
         <td class="row1" nowrap="nowrap">Max execution time:</td>
         <td class="row2"><b>{SERVER_PHP_MAX_EXECUTION_TIME}</b></td>
     </tr>
