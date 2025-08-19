@@ -297,14 +297,14 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
 
     // Autofill host in robots.txt
     $robots_txt_file = BB_ROOT . 'robots.txt';
-    if (isset($TP_HOST) && is_file($robots_txt_file)) {
+    if (isset($TP_HOST) && is_file($robots_txt_file) && is_writable($robots_txt_file)) {
         $content = file_get_contents($robots_txt_file);
         $content = str_replace('example.com', $TP_HOST, $content);
         file_put_contents($robots_txt_file, $content);
     }
 
     // Suggest configuration files based on selected web server
-    out("\n--- Web Server configuration ---\n", 'info');
+    out("--- Web Server configuration ---\n", 'info');
     echo "Which web server are you using? (nginx / caddy / apache): ";
     $webserver = mb_strtolower(trim(readline()));
     $install_dir = 'install' . DIRECTORY_SEPARATOR;
