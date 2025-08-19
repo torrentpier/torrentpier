@@ -674,8 +674,8 @@ $bb_cfg['group_avatars'] = [
 
 // Captcha
 $bb_cfg['captcha'] = [
-    'disabled' => true,
-    'service' => 'googleV3', // Available services: text, googleV2, googleV3, hCaptcha, yandex, cloudflare
+    'disabled' => false,
+    'service' => 'text', // Available services: text, googleV2, googleV3, hCaptcha, yandex, cloudflare
     'public_key' => '',
     'secret_key' => '',
     'theme' => 'light', // theming (available: light, dark) (working only if supported by captcha service)
