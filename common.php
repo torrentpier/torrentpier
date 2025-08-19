@@ -51,7 +51,11 @@ $allowedCDNs = [
     'HTTP_CF_CONNECTING_IP',
     'HTTP_FASTLY_CLIENT_IP',
     'HTTP_X_REAL_IP',
-    'HTTP_X_FORWARDED_FOR'
+    'HTTP_X_FORWARDED_FOR',
+    // Add your custom headers here if needed
+    // Example: 'HTTP_TRUE_CLIENT_IP',        // Akamai
+    // Example: 'HTTP_X_CLIENT_IP',           // Custom proxy
+    // Example: 'HTTP_INCAP_CLIENT_IP',       // Incapsula
 ];
 
 if (empty($trustedProxies) || in_array($_SERVER['REMOTE_ADDR'], $trustedProxies)) {
