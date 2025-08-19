@@ -162,7 +162,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'SERVER_PHP_MAX_EXECUTION_TIME' => htmlCHR(ini_get('max_execution_time')),
         'SERVER_DATABASE_VER' => htmlCHR($database_version),
         'SERVER_DISK_SPACE_INFO' => htmlCHR(sprintf('%s (used: %s | free: %s)', $getDiskSpaceInfo['total'], $getDiskSpaceInfo['used'], $getDiskSpaceInfo['free'])),
-        'SERVER_MEMORY_INFO' => htmlCHR(sprintf('%s (used: %s | free: %s)', $getMemoryInfo['system_total'], $getMemoryInfo['system_used'], $getMemoryInfo['system_available'] ?? $getMemoryInfo['system_free'])),
+        'SERVER_MEMORY_INFO' => htmlCHR(sprintf('%s (used: %s | free: %s)', $getMemoryInfo['system_total'], $getMemoryInfo['system_used'], ($getMemoryInfo['system_available'] ?? $getMemoryInfo['system_free']))),
     ]);
 
     if (isset($_GET['users_online'])) {
