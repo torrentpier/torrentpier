@@ -346,9 +346,11 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
             }
             break;
     }
-    out('Note: These configuration files include settings specific to TorrentPier, such as URL rewriting, security headers, and PHP handling', 'info');
-    out('Adapt them to your environment and web server setup', 'info');
-    sleep(3);
+    if (in_array($webserver, ['nginx', 'caddy'])) {
+        out('Note: These configuration files include settings specific to TorrentPier, such as URL rewriting, security headers, and PHP handling', 'info');
+        out('Adapt them to your environment and web server setup', 'info');
+        sleep(3);
+    }
 
     // Cleanup...
     if (is_file(BB_ROOT . '_cleanup.php')) {
