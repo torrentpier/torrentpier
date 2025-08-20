@@ -1616,11 +1616,13 @@ function forum_exists($forum_id = null): bool
         return (bool)DB()->fetch_row("SELECT 1 FROM " . BB_FORUMS . " LIMIT 1");
     }
 
+    $forum_id = (int)$forum_id;
     return (bool)DB()->fetch_row("SELECT 1 FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1");
 }
 
 function cat_exists($cat_id): bool
 {
+    $cat_id = (int)$cat_id;
     return (bool)DB()->fetch_row("SELECT 1 FROM " . BB_CATEGORIES . " WHERE cat_id = $cat_id LIMIT 1");
 }
 
