@@ -132,6 +132,18 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $users_per_day = $total_users;
     }
 
+    // Get database version info
+    $database_version = $lang['NOT_AVAILABLE'];
+    $sql = 'SELECT VERSION() as version';
+    $result = DB()->sql_query($sql);
+    $row = DB()->sql_fetchrow($result);
+    if (isset($row['version'])) {
+        $database_version = $row['version'];
+    }
+
+    // Get disk space information
+    $getDiskSpaceInfo = getDiskSpaceInfo();
+
     $template->assign_vars([
         'NUMBER_OF_POSTS' => commify($total_posts),
         'NUMBER_OF_TOPICS' => commify($total_topics),
@@ -141,6 +153,13 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'TOPICS_PER_DAY' => $topics_per_day,
         'USERS_PER_DAY' => $users_per_day,
         'AVATAR_DIR_SIZE' => $avatar_dir_size,
+        // System info
+        'SERVER_OS' => htmlCHR(php_uname('s') . ' ' . php_uname('r') . ' ' . php_uname('m')),
+        'SERVER_PHP_VER' => htmlCHR(phpversion()),
+        'SERVER_PHP_MEM_LIMIT' => htmlCHR(ini_get('memory_limit')),
+        'SERVER_PHP_MAX_EXECUTION_TIME' => htmlCHR(ini_get('max_execution_time')),
+        'SERVER_DATABASE_VER' => htmlCHR($database_version),
+        'SERVER_DISK_SPACE_INFO' => htmlCHR(sprintf($lang['ADMIN_SYSTEM_DISK_SPACE_INFO'], $getDiskSpaceInfo['total'], $getDiskSpaceInfo['used'], $getDiskSpaceInfo['free'])),
     ]);
 
     if (isset($_GET['users_online'])) {
@@ -223,6 +242,48 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     ]);
     send_no_cache_headers();
     print_page('index.tpl', 'admin', 'no_header');
+}
+
+/**
+ * Get disk space information
+ *
+ * @param string $path
+ * @return array|string[]
+ */
+function getDiskSpaceInfo(string $path = BB_ROOT): array
+{
+    global $lang;
+
+    $default_values = [
+        'total' => $lang['NOT_AVAILABLE'],
+        'free' => $lang['NOT_AVAILABLE'],
+        'used' => $lang['NOT_AVAILABLE'],
+        'percent_used' => $lang['NOT_AVAILABLE']
+    ];
+
+    try {
+        $bytes_total = disk_total_space($path);
+        $bytes_free = disk_free_space($path);
+
+        if ($bytes_total === false || $bytes_free === false) {
+            return $default_values;
+        }
+
+        $bytes_used = $bytes_total - $bytes_free;
+        $percent_used = ($bytes_total > 0) ? round(($bytes_used / $bytes_total) * 100, 2) : 0;
+
+        return [
+            'total' => humn_size($bytes_total),
+            'free' => humn_size($bytes_free),
+            'used' => humn_size($bytes_used),
+            'percent_used' => $percent_used,
+            'path' => realpath($path)
+        ];
+
+    } catch (Exception $e) {
+        bb_log("[getDiskSpaceInfo] " . $e->getMessage() . LOG_LF);
+        return $default_values;
+    }
 }
 
 print_page('index.tpl', 'admin');
