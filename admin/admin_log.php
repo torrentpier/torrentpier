@@ -235,6 +235,11 @@ if ($log_rowset) {
             case $log_type['mod_post_pin']:
             case $log_type['mod_post_unpin']:
             case $log_type['mod_topic_split']:
+            case $log_type['topic_poll_started']:
+            case $log_type['topic_poll_finish']:
+            case $log_type['topic_poll_deleted']:
+            case $log_type['topic_poll_added']:
+            case $log_type['topic_poll_edited']:
                 // topic_title
                 if (!empty($row['log_topic_title'])) {
                     $topic_title = $row['log_topic_title'];
