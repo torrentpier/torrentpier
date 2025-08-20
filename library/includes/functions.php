@@ -1621,7 +1621,7 @@ function forum_exists($forum_id = null): bool
 
 function cat_exists($cat_id): bool
 {
-    return (bool)DB()->fetch_row("SELECT cat_id FROM " . BB_CATEGORIES . " WHERE cat_id = $cat_id LIMIT 1");
+    return (bool)DB()->fetch_row("SELECT 1 FROM " . BB_CATEGORIES . " WHERE cat_id = $cat_id LIMIT 1");
 }
 
 function get_topic_icon($topic, $is_unread = null)
