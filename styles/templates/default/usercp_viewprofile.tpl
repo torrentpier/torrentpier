@@ -301,7 +301,7 @@ ajax.callback.group_membership = function(data) {
                 <td id="username">
                     <span class="editable bold">{USERNAME}</span>
                     <!-- BEGIN ban -->
-                    <!-- IF ban.IS_BANNED -->(<b title="{L_BANNED_USERS}" style="color: red;">{L_BANNED}</b>)<!-- ENDIF -->
+                    <!-- IF ban.IS_BANNED -->(<b title="{L_BANNED_USERS}" class="warnColor2">{L_BANNED}</b>)<!-- ENDIF -->
                     <!-- END ban -->
                 </td>
             </tr>
