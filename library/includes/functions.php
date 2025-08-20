@@ -271,10 +271,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     $add_auth_type_desc = ($forum_id != AUTH_LIST_ALL);
 
     // Check forum existence
-    if (!forum_exists()) {
-        return [];
-    }
-    if ($add_auth_type_desc && !forum_exists($forum_id)) {
+    if (!forum_exists() || ($add_auth_type_desc && !forum_exists($forum_id))) {
         return [];
     }
 
@@ -1612,7 +1609,7 @@ function get_topic_title($topic_id)
 
 function forum_exists($forum_id = null): bool
 {
-    if (!isset($forum_id)) {
+    if ($forum_id === null) {
         return (bool)DB()->fetch_row("SELECT 1 FROM " . BB_FORUMS . " LIMIT 1");
     }
 
