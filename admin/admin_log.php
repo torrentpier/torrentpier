@@ -236,7 +236,7 @@ if ($log_rowset) {
             case $log_type['mod_post_unpin']:
             case $log_type['mod_topic_split']:
             case $log_type['mod_topic_poll_started']:
-            case $log_type['mod_topic_poll_finish']:
+            case $log_type['mod_topic_poll_finished']:
             case $log_type['mod_topic_poll_deleted']:
             case $log_type['mod_topic_poll_added']:
             case $log_type['mod_topic_poll_edited']:

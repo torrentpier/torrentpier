@@ -121,7 +121,7 @@ switch ($mode) {
         }
 
         // Log action
-        $log_action->mod('mod_topic_poll_finish', [
+        $log_action->mod('mod_topic_poll_finished', [
             'forum_id' => $forum_id,
             'topic_id' => $topic_id,
             'topic_title' => $t_data['topic_title'],
