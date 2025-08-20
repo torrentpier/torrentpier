@@ -254,17 +254,19 @@ function getDiskSpaceInfo(string $path = BB_ROOT): array
 {
     global $lang;
 
+    $default_values = [
+        'total' => $lang['NOT_AVAILABLE'],
+        'free' => $lang['NOT_AVAILABLE'],
+        'used' => $lang['NOT_AVAILABLE'],
+        'percent_used' => $lang['NOT_AVAILABLE']
+    ];
+
     try {
         $bytes_total = disk_total_space($path);
         $bytes_free = disk_free_space($path);
 
         if ($bytes_total === false || $bytes_free === false) {
-            return [
-                'total' => $lang['NOT_AVAILABLE'],
-                'free' => $lang['NOT_AVAILABLE'],
-                'used' => $lang['NOT_AVAILABLE'],
-                'percent_used' => $lang['NOT_AVAILABLE']
-            ];
+            return $default_values;
         }
 
         $bytes_used = $bytes_total - $bytes_free;
@@ -279,12 +281,8 @@ function getDiskSpaceInfo(string $path = BB_ROOT): array
         ];
 
     } catch (Exception $e) {
-        return [
-            'total' => 'Ошибка: ' . $e->getMessage(),
-            'free' => 'Ошибка: ' . $e->getMessage(),
-            'used' => 'Ошибка: ' . $e->getMessage(),
-            'percent_used' => 'Ошибка: ' . $e->getMessage()
-        ];
+        bb_log("[getDiskSpaceInfo] " . $e->getMessage() . LOG_LF);
+        return $default_values;
     }
 }
 
