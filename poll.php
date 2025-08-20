@@ -111,7 +111,7 @@ switch ($mode) {
         ]);
 
         // Starting the poll
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id");
+        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = " . POLL_STARTED . " WHERE topic_id = $topic_id");
         bb_die($lang['NEW_POLL_START']);
         break;
     case 'poll_finish':
