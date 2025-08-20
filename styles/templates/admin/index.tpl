@@ -169,24 +169,24 @@
 
 <table class="forumline">
     <tr>
-        <th colspan="4">System information</th>
+        <th colspan="4">{L_ADMIN_SYSTEM_INFORMATION}</th>
     </tr>
     <tr>
-        <td class="row1" nowrap="nowrap">OS:</td>
+        <td class="row1" nowrap="nowrap">{L_ADMIN_SYSTEM_OS}</td>
         <td class="row2"><b>{SERVER_OS}</b></td>
-        <td class="row1" nowrap="nowrap">PHP:</td>
+        <td class="row1" nowrap="nowrap">{L_ADMIN_SYSTEM_PHP_VER}</td>
         <td class="row2"><b>{SERVER_PHP_VER}</b></td>
     </tr>
     <tr>
-        <td class="row1" nowrap="nowrap">Database:</td>
+        <td class="row1" nowrap="nowrap">{L_ADMIN_SYSTEM_DATABASE_VER}</td>
         <td class="row2"><b>{SERVER_DATABASE_VER}</b></td>
-        <td class="row1" nowrap="nowrap">Memory limit:</td>
+        <td class="row1" nowrap="nowrap">{L_ADMIN_SYSTEM_PHP_MEM_LIMIT}</td>
         <td class="row2"><b>{SERVER_PHP_MEM_LIMIT}</b></td>
     </tr>
     <tr>
-        <td class="row1" nowrap="nowrap">Disk space info:</td>
+        <td class="row1" nowrap="nowrap">{L_ADMIN_SYSTEM_DISK_SPACE_INFO_TITLE}</td>
         <td class="row2"><b>{SERVER_DISK_SPACE_INFO}</b></td>
-        <td class="row1" nowrap="nowrap">Max execution time:</td>
+        <td class="row1" nowrap="nowrap">{L_ADMIN_SYSTEM_PHP_MAX_EXECUTION_TIME}</td>
         <td class="row2"><b>{SERVER_PHP_MAX_EXECUTION_TIME}</b></td>
     </tr>
 </table>

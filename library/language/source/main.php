@@ -1970,6 +1970,16 @@ $lang['DATABASE_SIZE'] = 'Database size';
 $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Not available';
 
+// System information
+$lang['ADMIN_SYSTEM_INFORMATION'] = 'System information';
+$lang['ADMIN_SYSTEM_OS'] = 'OS:';
+$lang['ADMIN_SYSTEM_PHP_VER'] = 'PHP:';
+$lang['ADMIN_SYSTEM_DATABASE_VER'] = 'Database:';
+$lang['ADMIN_SYSTEM_PHP_MEM_LIMIT'] = 'Memory limit:';
+$lang['ADMIN_SYSTEM_DISK_SPACE_INFO_TITLE'] = 'Disk space info:';
+$lang['ADMIN_SYSTEM_DISK_SPACE_INFO'] = '%s (used: %s | free: %s)';
+$lang['ADMIN_SYSTEM_PHP_MAX_EXECUTION_TIME'] = 'Max execution time:';
+
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Cache';

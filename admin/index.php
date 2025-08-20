@@ -159,7 +159,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'SERVER_PHP_MEM_LIMIT' => htmlCHR(ini_get('memory_limit')),
         'SERVER_PHP_MAX_EXECUTION_TIME' => htmlCHR(ini_get('max_execution_time')),
         'SERVER_DATABASE_VER' => htmlCHR($database_version),
-        'SERVER_DISK_SPACE_INFO' => htmlCHR(sprintf('%s (used: %s | free: %s)', $getDiskSpaceInfo['total'], $getDiskSpaceInfo['used'], $getDiskSpaceInfo['free'])),
+        'SERVER_DISK_SPACE_INFO' => htmlCHR(sprintf($lang['ADMIN_SYSTEM_DISK_SPACE_INFO'], $getDiskSpaceInfo['total'], $getDiskSpaceInfo['used'], $getDiskSpaceInfo['free'])),
     ]);
 
     if (isset($_GET['users_online'])) {
