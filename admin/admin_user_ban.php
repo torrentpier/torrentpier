@@ -29,7 +29,11 @@ if ($submit) {
         }
 
         if (!getBanInfo((int)$this_userdata['user_id'])) {
-            $sql = 'INSERT INTO ' . BB_BANLIST . ' (ban_userid) VALUES (' . $this_userdata['user_id'] . ')';
+            $ban_reason = '';
+            if (!empty($_POST['ban_reason'])) {
+                $ban_reason = trim($_POST['ban_reason']);
+            }
+            $sql = 'INSERT INTO ' . BB_BANLIST . ' (ban_userid, ban_reason) VALUES (' . $this_userdata['user_id'] . ', "' . DB()->escape($ban_reason) . '")';
             if (!DB()->sql_query($sql)) {
                 bb_die('Could not insert ban_userid info into database');
             }

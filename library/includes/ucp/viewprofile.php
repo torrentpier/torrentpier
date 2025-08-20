@@ -85,7 +85,7 @@ if (config()->get('ratio_null_enabled') && $btu = get_bt_userdata($profiledata['
 if ($banInfo = getBanInfo((int)$profiledata['user_id'])) {
     $template->assign_block_vars('ban', [
         'IS_BANNED' => true,
-        'BAN_REASON' => $banInfo['ban_reason']
+        'BAN_REASON' => IS_ADMIN ? $banInfo['ban_reason'] : '',
     ]);
 }
 

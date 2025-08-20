@@ -229,6 +229,16 @@ ajax.callback.group_membership = function(data) {
 			{RANK_IMAGE}
 		<!-- ENDIF -->
 		</p>
+        <!-- BEGIN ban -->
+        <hr/>
+        <!-- IF ban.IS_BANNED -->
+        <b title="{L_BANNED_USERS}" class="warnColor2">{L_BANNED}</b>
+        <!-- ENDIF -->
+        <!-- IF ban.BAN_REASON -->
+        <div class="mrg_4">{L_REASON}: {ban.BAN_REASON}</div>
+        <!-- ENDIF -->
+        <hr/>
+        <!-- END ban -->
         <!-- IF BIRTHDAY_ICON --><div class="mrg_8">{BIRTHDAY_ICON}</div><!-- ENDIF -->
 		<h4 class="cat border bw_TB">{L_CONTACT}&nbsp;{USERNAME}</span></h4>
 
@@ -300,9 +310,6 @@ ajax.callback.group_membership = function(data) {
                 <th>{L_USERNAME}:</th>
                 <td id="username">
                     <span class="editable bold">{USERNAME}</span>
-                    <!-- BEGIN ban -->
-                    <!-- IF ban.IS_BANNED -->(<b title="{L_BANNED_USERS}" style="color: red;">{L_BANNED}</b>)<!-- ENDIF -->
-                    <!-- END ban -->
                 </td>
             </tr>
 			<!-- IF SHOW_ROLE -->

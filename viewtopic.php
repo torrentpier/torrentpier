@@ -739,10 +739,7 @@ for ($i = 0; $i < $total_posts; $i++) {
 
     // Ban information
     if ($banInfo = getBanInfo((int)$poster_id)) {
-        $template->assign_block_vars('postrow.ban', [
-            'IS_BANNED' => true,
-            'BAN_REASON' => $banInfo['ban_reason']
-        ]);
+        $template->assign_block_vars('postrow.ban', ['IS_BANNED' => true]);
     }
 
     if (isset($postrow[$i]['post_attachment']) && $is_auth['auth_download'] && function_exists('display_post_attachments')) {
