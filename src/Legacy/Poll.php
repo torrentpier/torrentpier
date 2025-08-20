@@ -163,6 +163,6 @@ class Poll
     public static function pollIsActive(array $t_data): bool
     {
         global $bb_cfg;
-        return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days'] * 86400);
+        return ($t_data['topic_vote'] == POLL_STARTED && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days'] * 86400);
     }
 }
