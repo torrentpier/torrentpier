@@ -22,16 +22,6 @@
 
     redir /sitemap.xml /sitemap/sitemap.xml 301
 
-    @static {
-        path *.html *.css *.js *.json *.xml *.txt *.ico
-        path *.png *.jpg *.jpeg *.gif *.svg *.webp
-        path *.woff *.woff2 *.ttf *.eot
-    }
-    header @static {
-        Content-Type "{mime}; charset=utf-8"
-        Cache-Control "public, max-age=31536000"
-    }
-
     @html_css_js {
         path *.html *.css *.js *.json *.xml *.txt
     }
