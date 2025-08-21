@@ -1,5 +1,4 @@
 # Example Caddy configuration for TorrentPier
-# Used by default for Docker
 
 {$TP_HOST} { # Set your host manually if you are not using Docker
     root * /app # Set your web root manually if you are not using Docker

@@ -30,7 +30,7 @@ RUN echo "*/10 * * * * php /app/cron.php >> /proc/1/fd/1 2>&1" > /etc/cron.d/app
     && crontab /etc/cron.d/app-cron
 
 COPY install/Caddyfile /etc/caddy/Caddyfile
-COPY install/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY install/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
 # EXPOSE 80 443
