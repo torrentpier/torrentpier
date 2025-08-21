@@ -17,7 +17,7 @@
     file_server
 
     @blocked {
-        path /install/* /internal_data/* /library/* /config/*
+        path /install/* /internal_data/* /library/*
         path /.ht* /.en* /.git* /.docker*
         path *.sql *.tpl *.db *.inc *.log *.md
         path /docker-compose.yml /Dockerfile /.env*
