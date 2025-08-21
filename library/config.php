@@ -554,8 +554,15 @@ $bb_cfg['posts_cache_days_keep'] = 14;
 $bb_cfg['use_ajax_posts'] = true;
 
 // Search
-$bb_cfg['search_engine_type'] = 'mysql'; // none, mysql, sphinx
+$bb_cfg['search_engine_type'] = 'mysql'; // none, mysql, sphinx, manticore
 
+// Manticore
+$bb_cfg['manticore_host'] = '127.0.0.1';
+$bb_cfg['manticore_port'] = 9308;
+$bb_cfg['manticore_mysql_port'] = 9306;
+$bb_cfg['manticore_timeout'] = 5;
+
+// Sphinx
 $bb_cfg['sphinx_topic_titles_host'] = '127.0.0.1';
 $bb_cfg['sphinx_topic_titles_port'] = 3312;
 $bb_cfg['sphinx_config_path'] = '../install/sphinx/sphinx.conf';
