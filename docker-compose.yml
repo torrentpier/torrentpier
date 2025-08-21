@@ -5,7 +5,8 @@ services:
     build: .
     container_name: php-app
     ports:
-      - "${TP_PORT}:80"
+      - "80:80"
+      - "443:443"
     env_file:
       - .env
     volumes:
@@ -13,6 +14,8 @@ services:
       - ./internal_data:/app/internal_data
       - ./data:/app/data
       - ./sitemap:/app/sitemap
+      - caddy_data:/data
+      - caddy_config:/config
     depends_on:
       - db
 
@@ -34,3 +37,5 @@ services:
 
 volumes:
   db_data:
+  caddy_data:
+  caddy_config:
