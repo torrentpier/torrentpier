@@ -18,6 +18,7 @@ fi
 cp .env .env.backup
 echo "💾 Backup created: .env.backup"
 
+# Enable server-side cron
 if grep -q "APP_CRON_ENABLED=true" .env; then
     sed -i 's/APP_CRON_ENABLED=true/APP_CRON_ENABLED=false/' .env
 fi
@@ -95,7 +96,6 @@ else
     echo "" >> .env
     echo "# Docker-specific configuration" >> .env
     echo "SSL_ENABLED=$SSL_ENABLED" >> .env
-    echo "SSL_PORT=443" >> .env
     echo "✅ Added Docker SSL configuration (SSL_ENABLED=$SSL_ENABLED)"
 fi
 
