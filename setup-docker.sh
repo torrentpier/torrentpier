@@ -85,11 +85,14 @@ ENABLE_SSL=$(echo "$ENABLE_SSL" | tr '[:upper:]' '[:lower:]')
 
 if [ "$ENABLE_SSL" = "y" ] || [ "$ENABLE_SSL" = "yes" ]; then
     SSL_ENABLED="on"
-    if grep -q "TP_PORT=80" .env; then
-        sed -i 's/TP_PORT=80/TP_PORT=443/' .env
+    if grep -q "TP_PORT" .env; then
+       sed -i "s|TP_PORT=.*|TP_PORT=443|" .env
     fi
 else
     SSL_ENABLED="off"
+    if grep -q "TP_PORT" .env; then
+        sed -i "s|TP_PORT=.*|TP_PORT=80|" .env
+    fi
 fi
 
 if grep -q "SSL_ENABLED" .env; then
