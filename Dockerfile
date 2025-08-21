@@ -32,11 +32,9 @@ RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-scripts
 
 COPY . /app
 
-RUN php _cleanup.php && rm _cleanup.php \
-    && chown -R www-data:www-data /app \
-    && chmod -R 755 /app
+RUN php _cleanup.php && rm _cleanup.php
 
-RUN echo "*/10 * * * * www-data php /app/cron.php >> /proc/1/fd/1 2>&1" > /etc/cron.d/app-cron \
+RUN echo "*/10 * * * * php /app/cron.php >> /proc/1/fd/1 2>&1" > /etc/cron.d/app-cron \
     && chmod 0644 /etc/cron.d/app-cron \
     && crontab /etc/cron.d/app-cron
 
