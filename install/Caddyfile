@@ -1,10 +1,9 @@
 # Example Caddy configuration for TorrentPier
 
-{$TP_HOST} { # Set your host manually if you are not using Docker
-    root * /app # Set your web root manually if you are not using Docker
+example.com {
+    root * /path/to/www
     encode gzip zstd
-    php_fastcgi app:9000 # Used for Docker
-    # php_fastcgi unix//run/php/php-fpm.sock
+    php_fastcgi unix//run/php/php-fpm.sock
     try_files {path} {path}/ /index.php?{query}
     file_server
 
