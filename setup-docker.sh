@@ -55,6 +55,7 @@ echo ""
 read -p "🌐 Enter your host (IP or domain, e.g. 192.168.1.100 or example.com): " TP_HOST
 
 if [ -z "$TP_HOST" ]; then
+    echo ""
     echo "❌ Error: Host cannot be empty!"
     exit 1
 fi
