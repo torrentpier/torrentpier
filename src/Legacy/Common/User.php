@@ -641,8 +641,6 @@ class User
             }
 
             $userLangCacheKey = "user_lang_{$langKey}";
-            $userLang = CACHE('bb_lang')->get($userLangCacheKey);
-
             if (!$userLang = CACHE('bb_lang')->get($userLangCacheKey)) {
                 $lang = [];
                 require(LANG_DIR . 'main.php');
