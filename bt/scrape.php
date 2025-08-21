@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,9 +11,7 @@ define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require dirname(__DIR__) . '/common.php';
 
-global $bb_cfg;
-
-if (!$bb_cfg['tracker']['scrape']) {
+if (!config()->get('tracker.scrape')) {
     msg_die('Please disable SCRAPE!');
 }
 
@@ -34,7 +32,7 @@ $info_hash_hex = bin2hex($info_hash);
 
 // Check info_hash length
 if (strlen($info_hash) !== 20) {
-    msg_die('Invalid info_hash: ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
+    msg_die('Invalid info_hash: ' . (mb_check_encoding($info_hash, DEFAULT_CHARSET) ? $info_hash : $info_hash_hex));
 }
 
 // Handle multiple hashes
@@ -60,15 +58,15 @@ foreach ($info_hash_array[1] as $hash) {
 $info_hash_count = count($info_hashes);
 
 if (!empty($info_hash_count)) {
-    if ($info_hash_count > $bb_cfg['max_scrapes']) {
-        $info_hashes = array_slice($info_hashes, 0, $bb_cfg['max_scrapes']);
+    if ($info_hash_count > config()->get('max_scrapes')) {
+        $info_hashes = array_slice($info_hashes, 0, config()->get('max_scrapes'));
     }
 
     $info_hashes_sql = implode('\', \'', $info_hashes);
 
     /**
      * Currently torrent clients send truncated v2 hashes (the design raises questions).
-     * https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
+     * @see https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
      */
     $info_hash_where = "tor.info_hash IN ('$info_hashes_sql') OR SUBSTRING(tor.info_hash_v2, 1, 20) IN ('$info_hashes_sql')";
 
@@ -99,7 +97,7 @@ if (!empty($info_hash_count)) {
 
 // Verify if torrent registered on tracker
 if (empty($torrents)) {
-    msg_die('Torrent not registered, info_hash = ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
+    msg_die('Torrent not registered, info_hash = ' . (mb_check_encoding($info_hash, DEFAULT_CHARSET) ? $info_hash : $info_hash_hex));
 }
 
 die(\Arokettu\Bencode\Bencode::encode($torrents));

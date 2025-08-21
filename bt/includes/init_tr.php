@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,11 +11,9 @@ if (!defined('IN_TRACKER')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg;
-
 // Exit if tracker is disabled
-if ($bb_cfg['tracker']['bt_off']) {
-    msg_die($bb_cfg['tracker']['bt_off_reason']);
+if (config()->get('tracker.bt_off')) {
+    msg_die(config()->get('tracker.bt_off_reason'));
 }
 
 //

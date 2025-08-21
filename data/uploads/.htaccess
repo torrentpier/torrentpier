@@ -1,3 +1,0 @@
-php_flag engine off
-RemoveHandler .php .php5 .php4 .php3 .phtml .pl .asp
-AddType text/plain .php .php .htm .html .phtml .pl .asp

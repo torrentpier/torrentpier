@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,11 +11,11 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $user, $lang, $bb_cfg;
+global $user, $lang;
 
 $post_id = isset($this->request['post_id']) ? (int)$this->request['post_id'] : null;
 $topic_id = isset($this->request['topic_id']) ? (int)$this->request['topic_id'] : null;
-$return_text = $bb_cfg['show_post_bbcode_button'] && isset($this->request['return_text']) && (bool)$this->request['return_text'];
+$return_text = config()->get('show_post_bbcode_button.enabled') && isset($this->request['return_text']) && (bool)$this->request['return_text'];
 
 if (is_null($post_id)) {
     $post_id = DB()->fetch_row("SELECT topic_first_post_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id", 'topic_first_post_id');

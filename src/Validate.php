@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -45,10 +45,10 @@ class Validate
         $username = clean_username($username);
 
         // Length
-        if (mb_strlen($username, 'UTF-8') > USERNAME_MAX_LENGTH) {
+        if (mb_strlen($username, DEFAULT_CHARSET) > USERNAME_MAX_LENGTH) {
             return $lang['USERNAME_TOO_LONG'];
         }
-        if (mb_strlen($username, 'UTF-8') < USERNAME_MIN_LENGTH) {
+        if (mb_strlen($username, DEFAULT_CHARSET) < USERNAME_MIN_LENGTH) {
             return $lang['USERNAME_TOO_SMALL'];
         }
 
@@ -99,7 +99,7 @@ class Validate
      */
     public static function email(string $email, bool $check_taken = true)
     {
-        global $lang, $userdata, $bb_cfg;
+        global $lang, $userdata;
 
         // Check for empty
         if (empty($email)) {
@@ -112,12 +112,12 @@ class Validate
         }
 
         // Check max length
-        if (\strlen($email) > USEREMAIL_MAX_LENGTH) {
+        if (mb_strlen($email, DEFAULT_CHARSET) > USEREMAIL_MAX_LENGTH) {
             return $lang['EMAIL_TOO_LONG'];
         }
 
         // Extended email validation
-        if ($bb_cfg['extended_email_validation']) {
+        if (config()->get('extended_email_validation')) {
             $validator = new EmailValidator();
 
             $multipleValidations = new MultipleValidationWithAnd([
@@ -157,7 +157,7 @@ class Validate
      */
     public static function password(string $password, string $password_confirm)
     {
-        global $lang, $bb_cfg;
+        global $lang;
 
         // Check for empty
         if (empty($password) || empty($password_confirm)) {
@@ -170,34 +170,34 @@ class Validate
         }
 
         // Length
-        if (mb_strlen($password, 'UTF-8') > PASSWORD_MAX_LENGTH) {
+        if (mb_strlen($password, DEFAULT_CHARSET) > PASSWORD_MAX_LENGTH) {
             return sprintf($lang['CHOOSE_PASS_ERR_MAX'], PASSWORD_MAX_LENGTH);
         }
-        if (mb_strlen($password, 'UTF-8') < PASSWORD_MIN_LENGTH) {
+        if (mb_strlen($password, DEFAULT_CHARSET) < PASSWORD_MIN_LENGTH) {
             return sprintf($lang['CHOOSE_PASS_ERR_MIN'], PASSWORD_MIN_LENGTH);
         }
 
         // Symbols check
-        if ($bb_cfg['password_symbols']) {
+        if (config()->get('password_symbols')) {
             // Numbers
-            if ($bb_cfg['password_symbols']['nums']) {
+            if (config()->get('password_symbols.nums')) {
                 if (!StringHelper::isContainsNums($password)) {
                     return $lang['CHOOSE_PASS_ERR_NUM'];
                 }
             }
             // Letters
-            if ($bb_cfg['password_symbols']['letters']['lowercase']) {
+            if (config()->get('password_symbols.letters.lowercase')) {
                 if (!StringHelper::isContainsLetters($password)) {
                     return $lang['CHOOSE_PASS_ERR_LETTER'];
                 }
             }
-            if ($bb_cfg['password_symbols']['letters']['uppercase']) {
+            if (config()->get('password_symbols.letters.uppercase')) {
                 if (!StringHelper::isContainsLetters($password, true)) {
                     return $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'];
                 }
             }
             // Spec symbols
-            if ($bb_cfg['password_symbols']['spec_symbols']) {
+            if (config()->get('password_symbols.spec_symbols')) {
                 if (!StringHelper::isContainsSpecSymbols($password)) {
                     return $lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'];
                 }

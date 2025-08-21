@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $lang, $bb_cfg;
+global $userdata, $lang;
 
 if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
@@ -19,7 +19,7 @@ if (!$mode = (string)$this->request['mode']) {
 
 switch ($mode) {
     case 'clear_cache':
-        foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val) {
+        foreach (config()->get('cache.engines') as $cache_name => $cache_val) {
             CACHE($cache_name)->rm();
         }
 
@@ -48,20 +48,20 @@ switch ($mode) {
         $this->response['template_cache_html'] = '<span class="seed bold">' . $lang['ALL_TEMPLATE_CLEARED'] . '</span>';
         break;
     case 'indexer':
-        exec("indexer --config {$bb_cfg['sphinx_config_path']} --all --rotate", $result);
+        exec("indexer --config " . config()->get('sphinx_config_path') . " --all --rotate", $result);
 
-        if (!is_file($bb_cfg['sphinx_config_path'] . ".log")) {
-            file_put_contents($bb_cfg['sphinx_config_path'] . ".log", "##############################" . date("H:i:s", TIMENOW) . "##############################\r\n\r\n\r\n\r\n", FILE_APPEND);
+        if (!is_file(config()->get('sphinx_config_path') . ".log")) {
+            file_put_contents(config()->get('sphinx_config_path') . ".log", "##############################" . date("H:i:s", TIMENOW) . "##############################\r\n\r\n\r\n\r\n", FILE_APPEND);
         }
 
-        file_put_contents($bb_cfg['sphinx_config_path'] . ".log", "##############################" . date("H:i:s", TIMENOW) . "##############################\r\n", FILE_APPEND);
+        file_put_contents(config()->get('sphinx_config_path') . ".log", "##############################" . date("H:i:s", TIMENOW) . "##############################\r\n", FILE_APPEND);
 
         foreach ($result as $row) {
-            file_put_contents($bb_cfg['sphinx_config_path'] . ".log", $row . "\r\n", FILE_APPEND);
+            file_put_contents(config()->get('sphinx_config_path') . ".log", $row . "\r\n", FILE_APPEND);
         }
 
-        file_put_contents($bb_cfg['sphinx_config_path'] . ".log", "\r\n", FILE_APPEND);
-        file_put_contents($bb_cfg['sphinx_config_path'] . ".log", "\r\n", FILE_APPEND);
+        file_put_contents(config()->get('sphinx_config_path') . ".log", "\r\n", FILE_APPEND);
+        file_put_contents(config()->get('sphinx_config_path') . ".log", "\r\n", FILE_APPEND);
 
         $this->response['indexer_html'] = '<span class="seed bold">' . $lang['INDEXER'] . '</span>';
         break;
@@ -81,10 +81,6 @@ switch ($mode) {
     case 'unlock_cron':
         \TorrentPier\Helpers\CronHelper::enableBoard();
         $this->response['unlock_cron_html'] = '<span class="seed bold">' . $lang['ADMIN_UNLOCKED'] . '</span>';
-        break;
-    case 'restore_corrupt_files':
-        file_write('', RESTORE_CORRUPT_CONFIRM_FILE, replace_content: true);
-        $this->response['restore_corrupt_files_html'] = '<span class="seed bold">' . $lang['INTEGRITY_RESTORE_CONFIRM_OK'] . '</span>';
         break;
     default:
         $this->ajax_die('Invalid mode: ' . $mode);

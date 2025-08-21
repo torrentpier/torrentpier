@@ -404,7 +404,7 @@ ajax.callback.view_post = function(data) {
 	<!-- ENDIF -->
 	<td class="row4 small nowrap">
 		<u>{tor.TOR_SIZE_RAW}</u>
-		<!-- IF not tor.TOR_FROZEN --><a class="small tr-dl" title="{L_DOWNLOAD}" href="{DOWNLOAD_URL}{tor.ATTACH_ID}">{tor.TOR_SIZE}</a> <!-- IF MAGNET_LINKS -->{tor.MAGNET}<!-- ENDIF --><!-- ELSE -->
+		<!-- IF not tor.TOR_FROZEN --><a class="small tr-dl" title="{L_DOWNLOAD}" href="{DOWNLOAD_URL}{tor.ATTACH_ID}">{tor.TOR_SIZE}</a> <!-- IF tor.MAGNET -->{tor.MAGNET}<!-- ENDIF --><!-- ELSE -->
 		{tor.TOR_SIZE}<!-- ENDIF -->
 	</td>
 	<td class="row4 seedmed" title="{tor.SEEDS_TITLE}"><b>{tor.SEEDS}</b></td>
@@ -468,7 +468,7 @@ ajax.callback.view_post = function(data) {
 </div><!--/bottom_info-->
 
 <script type="text/javascript">
-// Скрыть содержимое {...}
+// Hide content
 if (user.opt_js.h_tsp) {
 	$('a.tLink').each(function(){
 		$(this).html( $(this).html().replace(/\{.+?\}/g, '{...}') );
@@ -485,7 +485,7 @@ $(function(){
 	<!-- IF POSTER_MATCH_URL -->
 	$('a.f, a.pg').each(function(){ this.href += '&{POSTER_MATCH_URL}'; });
 	<!-- ENDIF -->
-	// лимит на количество выбранных разделов
+	// limit on the number of selected sections
 	fs_last_val = $('#fs-main').val();
 
 	$('#fs-main').bind('change', function(){

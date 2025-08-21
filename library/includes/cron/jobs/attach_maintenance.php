@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -26,9 +26,9 @@ $posts_without_attach = $topics_without_attach = [];
 
 DB()->query("
 	CREATE TEMPORARY TABLE $tmp_attach_tbl (
-		physical_filename VARCHAR(255) NOT NULL default '',
+		physical_filename VARCHAR(255) NOT NULL default '' COLLATE utf8mb4_unicode_ci,
 		KEY physical_filename (physical_filename(20))
-	) ENGINE = MyISAM DEFAULT CHARSET = utf8
+	) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci
 ");
 DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_attach_tbl");
 
@@ -48,7 +48,7 @@ if ($dir = @opendir($attach_dir)) {
     $f_len = 0;
 
     while (false !== ($f = readdir($dir))) {
-        if ($f == 'index.php' || $f == '.htaccess' || is_dir("$attach_dir/$f") || is_link("$attach_dir/$f")) {
+        if (str_starts_with($f, \TorrentPier\TorrServerAPI::M3U['prefix']) || $f == 'index.php' || $f == '.htaccess' || is_dir("$attach_dir/$f") || is_link("$attach_dir/$f")) {
             continue;
         }
         $f = DB()->escape($f);
@@ -144,6 +144,13 @@ if ($check_attachments) {
         $orphan_db_attach[] = $row['attach_id'];
     }
     // Delete all orphan attachments
+    if (config()->get('torr_server.enabled') && $fix_errors) {
+        foreach ($orphan_db_attach as $attach_id) {
+            // TorrServer integration
+            $torrServer = new \TorrentPier\TorrServerAPI();
+            $torrServer->removeM3U($attach_id);
+        }
+    }
     if ($orphans_sql = implode(',', $orphan_db_attach)) {
         if ($fix_errors) {
             DB()->query("DELETE FROM " . BB_ATTACHMENTS_DESC . " WHERE attach_id IN($orphans_sql)");

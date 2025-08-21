@@ -2,12 +2,15 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy\Common;
+
+use claviska\SimpleImage;
+use Exception;
 
 /**
  * Class Upload
@@ -86,7 +89,8 @@ class Upload
         IMAGETYPE_JPEG => 'jpg',
         IMAGETYPE_PNG => 'png',
         IMAGETYPE_BMP => 'bmp',
-        IMAGETYPE_WEBP => 'webp'
+        IMAGETYPE_WEBP => 'webp',
+        IMAGETYPE_AVIF => 'avif'
     ];
 
     /**
@@ -99,7 +103,7 @@ class Upload
      */
     public function init(array $cfg = [], array $post_params = [], bool $uploaded_only = true): bool
     {
-        global $bb_cfg, $lang;
+        global $lang;
 
         $this->cfg = array_merge($this->cfg, $cfg);
         $this->file = $post_params;
@@ -113,7 +117,7 @@ class Upload
         // Handling errors while uploading
         if (isset($this->file['error']) && ($this->file['error'] !== UPLOAD_ERR_OK)) {
             if (isset($lang['UPLOAD_ERRORS'][$this->file['error']])) {
-                $this->errors[] = $lang['UPLOAD_ERROR_COMMON'] . '<br><br>' . $lang['UPLOAD_ERRORS'][$this->file['error']];
+                $this->errors[] = $lang['UPLOAD_ERROR_COMMON'] . '<br/><br/>' . $lang['UPLOAD_ERRORS'][$this->file['error']];
             } else {
                 $this->errors[] = $lang['UPLOAD_ERROR_COMMON'];
             }
@@ -146,7 +150,7 @@ class Upload
         $file_name_ary = explode('.', $this->file['name']);
         $this->file_ext = strtolower(end($file_name_ary));
 
-        $this->ext_ids = array_flip($bb_cfg['file_id_ext']);
+        $this->ext_ids = array_flip(config()->get('file_id_ext'));
 
         // Actions for images [E.g. Change avatar]
         if ($this->cfg['max_width'] || $this->cfg['max_height']) {
@@ -164,14 +168,14 @@ class Upload
                 if (($this->cfg['max_width'] && $width > $this->cfg['max_width']) || ($this->cfg['max_height'] && $height > $this->cfg['max_height'])) {
                     for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
                         try {
-                            $image = new \claviska\SimpleImage();
+                            $image = new SimpleImage();
                             $image
                                 ->fromFile($this->file['tmp_name'])
                                 ->autoOrient()
                                 ->resize($this->cfg['max_width'], $this->cfg['max_height'])
                                 ->toFile($this->file['tmp_name']);
                             break;
-                        } catch (\Exception $e) {
+                        } catch (Exception $e) {
                             if ($i == $max_try) {
                                 $this->errors[] = sprintf($lang['UPLOAD_ERROR_DIMENSIONS'], $this->cfg['max_width'], $this->cfg['max_height']);
                                 return false;
@@ -202,20 +206,21 @@ class Upload
      * @param array $params
      * @return bool
      */
-    public function store(string $mode = '', array $params = [])
+    public function store(string $mode, array $params = []): bool
     {
-        if ($mode == 'avatar') {
-            delete_avatar($params['user_id'], $params['avatar_ext_id']);
-            $file_path = get_avatar_path($params['user_id'], $this->file_ext_id);
-            return $this->_move($file_path);
+        switch ($mode) {
+            case 'avatar':
+                delete_avatar($params['user_id'], $params['avatar_ext_id']);
+                $file_path = get_avatar_path($params['user_id'], $this->file_ext_id);
+                break;
+            case 'attach':
+                $file_path = get_attach_path($params['topic_id']);
+                break;
+            default:
+                trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
         }
 
-        if ($mode == 'attach') {
-            $file_path = get_attach_path($params['topic_id']);
-            return $this->_move($file_path);
-        }
-
-        trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
+        return $this->_move($file_path);
     }
 
     /**

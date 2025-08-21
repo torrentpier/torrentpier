@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -20,7 +20,6 @@ define('LOG_DIR', BB_PATH . '/internal_data/log');
 define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers');
 define('AJAX_DIR', BB_PATH . '/library/ajax');
 define('ATTACH_DIR', BB_PATH . '/library/attach_mod');
-define('CFG_DIR', BB_PATH . '/library/config');
 define('INC_DIR', BB_PATH . '/library/includes');
 define('UCP_DIR', BB_PATH . '/library/includes/ucp');
 define('LANG_ROOT_DIR', BB_PATH . '/library/language');
@@ -30,11 +29,10 @@ define('TEMPLATES_DIR', BB_PATH . '/styles/templates');
 
 // System
 define('APP_NAME', 'TorrentPier');
+define('DEFAULT_CHARSET', 'UTF-8');
 define('UPDATER_URL', 'https://api.github.com/repos/torrentpier/torrentpier/releases');
 define('UPDATER_FILE', INT_DATA_DIR . '/updater.json');
-define('API_IP_URL', 'https://freeipapi.com/api/json/');
-define('CHECKSUMS_FILE', INT_DATA_DIR . '/checksums.md5');
-define('RESTORE_CORRUPT_CONFIRM_FILE', INT_DATA_DIR . '/rescorrupt.integrity');
+define('COOKIE_DBG', 'bb_dbg');
 
 // Templates
 define('ADMIN_TPL_DIR', TEMPLATES_DIR . '/admin/');
@@ -68,6 +66,8 @@ define('LOG_MAX_SIZE', 1048576); // bytes
 
 // Error reporting
 ini_set('error_reporting', E_ALL); // PHP error reporting mode | https://www.php.net/manual/en/errorfunc.constants.php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 define('MYSQLI_ERROR_REPORTING', MYSQLI_REPORT_ERROR); // MySQL error reporting mode | https://www.php.net/manual/mysqli-driver.report-mode.php
 ini_set('log_errors', 1); // Enable logging (For native & Whoops)
 ini_set('error_log', LOG_DIR . '/php_errors.log'); // path to log file enabled only if log_errors == 1 (native)
@@ -83,29 +83,34 @@ define('CRON_RUNNING', TRIGGERS_DIR . '/cron_running');
 define('GZIP_OUTPUT_ALLOWED', extension_loaded('zlib') && !ini_get('zlib.output_compression'));
 define('UA_GZIP_SUPPORTED', isset($_SERVER['HTTP_ACCEPT_ENCODING']) && str_contains($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip'));
 
+// Migrations table
+define('BB_MIGRATIONS', 'bb_migrations');
+
 // Tracker shared constants
 define('BB_BT_TORRENTS', 'bb_bt_torrents');
 define('BB_BT_TRACKER', 'bb_bt_tracker');
 define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
 define('BB_BT_USERS', 'bb_bt_users');
+define('BB_USERS', 'bb_users');
 define('BT_AUTH_KEY_LENGTH', 20); // Passkey length
 
 // Torrents (reserved: -1)
-define('TOR_NOT_APPROVED', 0); // не проверено
-define('TOR_CLOSED', 1); // закрыто
-define('TOR_APPROVED', 2); // проверено
-define('TOR_NEED_EDIT', 3); // недооформлено
-define('TOR_NO_DESC', 4); // неоформлено
-define('TOR_DUP', 5); // повтор
-define('TOR_CLOSED_CPHOLD', 6); // закрыто правообладателем
-define('TOR_CONSUMED', 7); // поглощено
-define('TOR_DOUBTFUL', 8); // сомнительно
-define('TOR_CHECKING', 9); // проверяется
-define('TOR_TMP', 10); // временная
-define('TOR_PREMOD', 11); // премодерация
-define('TOR_REPLENISH', 12); // пополняемая
+define('TOR_NOT_APPROVED', 0);
+define('TOR_CLOSED', 1);
+define('TOR_APPROVED', 2);
+define('TOR_NEED_EDIT', 3);
+define('TOR_NO_DESC', 4);
+define('TOR_DUP', 5);
+define('TOR_CLOSED_CPHOLD', 6);
+define('TOR_CONSUMED', 7);
+define('TOR_DOUBTFUL', 8);
+define('TOR_CHECKING', 9);
+define('TOR_TMP', 10);
+define('TOR_PREMOD', 11);
+define('TOR_REPLENISH', 12);
 
 // Torrent types (Gold / Silver)
+define('TOR_TYPE_DEFAULT', 0);
 define('TOR_TYPE_GOLD', 1);
 define('TOR_TYPE_SILVER', 2);
 
@@ -131,6 +136,15 @@ define('ONLY_NEW_TOPICS', 2);
 // User UIDs
 define('GUEST_UID', -1);
 define('BOT_UID', -746);
+
+// User Levels
+define('DELETED', -1);
+define('USER', 0);
+define('ADMIN', 1);
+define('MOD', 2);
+define('GROUP_MEMBER', 20);
+define('CP_HOLDER', 25);
+define('EXCLUDED_USERS', implode(',', [GUEST_UID, BOT_UID]));
 
 // Ratio limits
 define('TR_RATING_LIMITS', true);        // ON/OFF

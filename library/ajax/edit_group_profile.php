@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg, $userdata, $lang;
+global $userdata, $lang;
 
 if (!$group_id = (int)$this->request['group_id'] or !$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
     $this->ajax_die($lang['NO_GROUP_ID_SPECIFIED']);
@@ -51,4 +51,4 @@ switch ($mode) {
 }
 
 $value_sql = DB()->escape($value, true);
-DB()->query("UPDATE " . BB_GROUPS . " SET $mode = $value_sql WHERE group_id = $group_id");
+DB()->query("UPDATE " . BB_GROUPS . " SET $mode = $value_sql WHERE group_id = $group_id LIMIT 1");

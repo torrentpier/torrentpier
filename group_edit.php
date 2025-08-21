@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -35,10 +35,10 @@ if ($group_id) {
 if ($is_moderator) {
     // Avatar
     if ($submit) {
-        if (!empty($_FILES['avatar']['name']) && $bb_cfg['group_avatars']['up_allowed']) {
+        if (!empty($_FILES['avatar']['name']) && config()->get('group_avatars.up_allowed')) {
             $upload = new TorrentPier\Legacy\Common\Upload();
 
-            if ($upload->init($bb_cfg['group_avatars'], $_FILES['avatar']) and $upload->store('avatar', ['user_id' => GROUP_AVATAR_MASK . $group_id, 'avatar_ext_id' => $group_info['avatar_ext_id']])) {
+            if ($upload->init(config()->get('group_avatars'), $_FILES['avatar']) and $upload->store('avatar', ['user_id' => GROUP_AVATAR_MASK . $group_id, 'avatar_ext_id' => $group_info['avatar_ext_id']])) {
                 $avatar_ext_id = (int)$upload->file_ext_id;
                 DB()->query("UPDATE " . BB_GROUPS . " SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id LIMIT 1");
             } else {
@@ -76,7 +76,7 @@ if ($is_moderator) {
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_GROUP_CONFIG_ACTION' => "group_edit.php?" . POST_GROUPS_URL . "=$group_id",
 
-        'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['group_avatars']['max_width'], $bb_cfg['group_avatars']['max_height'], humn_size($bb_cfg['group_avatars']['max_size'])),
+        'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], config()->get('group_avatars.max_width'), config()->get('group_avatars.max_height'), humn_size(config()->get('group_avatars.max_size'))),
         'AVATAR_IMG' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),
     ]);
 

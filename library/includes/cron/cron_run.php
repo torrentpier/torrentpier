@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -13,11 +13,10 @@ if (!defined('BB_ROOT')) {
 
 define('IN_CRON', true);
 
-// Set SESSION vars
+// Set SESSION vars (optimized for InnoDB)
 DB()->query("
 	SET SESSION
-	  myisam_sort_buffer_size = 16*1024*1024
-	, bulk_insert_buffer_size =  8*1024*1024
+	  bulk_insert_buffer_size =  8*1024*1024
 	, join_buffer_size        =  4*1024*1024
 	, read_buffer_size        =  4*1024*1024
 	, read_rnd_buffer_size    =  8*1024*1024
@@ -29,8 +28,7 @@ DB()->query("
 // Restore vars at shutdown
 DB()->add_shutdown_query("
 	SET SESSION
-	  myisam_sort_buffer_size = DEFAULT
-	, bulk_insert_buffer_size = DEFAULT
+	  bulk_insert_buffer_size = DEFAULT
 	, join_buffer_size        = DEFAULT
 	, read_buffer_size        = DEFAULT
 	, read_rnd_buffer_size    = DEFAULT
@@ -116,7 +114,8 @@ foreach ($cron_jobs as $job) {
 		");
 
         if (utime() - TIMESTART > 600) {
-            return;  // чтобы daily скрипты не блокировали надолго interval'ные
+            // so that daily scripts do not block interval scripts for a long time
+            return;
         }
     } else {
         $cron_err_msg = "Can not run \"{$job['cron_title']}\" : file \"$job_script\" not found" . LOG_LF;

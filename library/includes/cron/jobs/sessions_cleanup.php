@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,10 +11,10 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$user_session_expire_time = TIMENOW - (int)$bb_cfg['user_session_duration'];
-$admin_session_expire_time = TIMENOW - (int)$bb_cfg['admin_session_duration'];
+$user_session_expire_time = TIMENOW - (int)config()->get('user_session_duration');
+$admin_session_expire_time = TIMENOW - (int)config()->get('admin_session_duration');
 
-$user_session_gc_time = $user_session_expire_time - (int)$bb_cfg['user_session_gc_ttl'];
+$user_session_gc_time = $user_session_expire_time - (int)config()->get('user_session_gc_ttl');
 $admin_session_gc_time = $admin_session_expire_time;
 
 // ############################ Tables LOCKED ################################

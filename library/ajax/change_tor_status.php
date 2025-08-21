@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $bb_cfg, $lang;
+global $userdata, $lang, $log_action;
 
 if (!$attach_id = (int)$this->request['attach_id']) {
     $this->ajax_die($lang['EMPTY_ATTACH_ID']);
@@ -22,7 +22,7 @@ if (!$mode = (string)$this->request['mode']) {
 }
 
 $comment = false;
-if ($bb_cfg['tor_comment']) {
+if (config()->get('tor_comment')) {
     $comment = (string)$this->request['comment'];
 }
 
@@ -44,7 +44,7 @@ switch ($mode) {
     case 'status':
         $new_status = (int)$this->request['status'];
 
-        // Валидность статуса
+        // Check status validity
         if (!isset($lang['TOR_STATUS_NAME'][$new_status])) {
             $this->ajax_die($lang['TOR_STATUS_FAILED']);
         }
@@ -55,17 +55,17 @@ switch ($mode) {
             $this->ajax_die($lang['NOT_MODERATOR']);
         }
 
-        // Тот же статус
+        // Error if same status
         if ($tor['tor_status'] == $new_status) {
             $this->ajax_die($lang['TOR_STATUS_DUB']);
         }
 
-        // Запрет на изменение/присвоение CH-статуса модератором
+        // Prohibition on changing/assigning CH-status by moderator
         if ($new_status == TOR_CLOSED_CPHOLD && !IS_ADMIN) {
             $this->ajax_die($lang['TOR_DONT_CHANGE']);
         }
 
-        // Права на изменение статуса
+        // Check rights to change status
         if ($tor['tor_status'] == TOR_CLOSED_CPHOLD) {
             if (!IS_ADMIN) {
                 $this->verify_mod_rights($tor['forum_id']);
@@ -75,7 +75,7 @@ switch ($mode) {
             $this->verify_mod_rights($tor['forum_id']);
         }
 
-        // Подтверждение изменения статуса, выставленного другим модератором
+        // Confirmation of status change set by another moderator
         if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != $userdata['user_id'] && $tor['checked_time'] + 2 * 3600 > TIMENOW) {
             if (empty($this->request['confirmed'])) {
                 $msg = $lang['TOR_STATUS_OF'] . " {$lang['TOR_STATUS_NAME'][$tor['tor_status']]}\n\n";
@@ -87,12 +87,24 @@ switch ($mode) {
 
         \TorrentPier\Legacy\Torrent::change_tor_status($attach_id, $new_status);
 
-        $this->response['status'] = $bb_cfg['tor_icons'][$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b> &middot; ' . profile_url($userdata) . ' &middot; <i>' . delta_time(TIMENOW) . $lang['TOR_BACK'] . '</i>';
+        // Log action
+        $log_msg = sprintf($lang['TOR_STATUS_LOG_ACTION'], config()->get('tor_icons')[$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b>', config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . $lang['TOR_STATUS_NAME'][$tor['tor_status']] . '</b>');
+        if ($comment && $comment != $lang['COMMENT']) {
+            $log_msg .= "<br/>{$lang['COMMENT']}: <b>$comment</b>.";
+        }
+        $log_action->mod('mod_topic_change_tor_status', [
+            'forum_id' => $tor['forum_id'],
+            'topic_id' => $tor['topic_id'],
+            'topic_title' => $tor['topic_title'],
+            'log_msg' => $log_msg . '<br/>-------------',
+        ]);
 
-        if ($bb_cfg['tor_comment'] && (($comment && $comment != $lang['COMMENT']) || in_array($new_status, $bb_cfg['tor_reply']))) {
+        $this->response['status'] = config()->get('tor_icons')[$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b> &middot; ' . profile_url($userdata) . ' &middot; <i>' . delta_time(TIMENOW) . $lang['TOR_BACK'] . '</i>';
+
+        if (config()->get('tor_comment') && (($comment && $comment != $lang['COMMENT']) || in_array($new_status, config()->get('tor_reply')))) {
             if ($tor['poster_id'] > 0) {
                 $subject = sprintf($lang['TOR_MOD_TITLE'], $tor['topic_title']);
-                $message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $tor['topic_id']), $bb_cfg['tor_icons'][$new_status] . ' ' . $lang['TOR_STATUS_NAME'][$new_status]);
+                $message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $tor['topic_id']), config()->get('tor_icons')[$new_status] . ' ' . $lang['TOR_STATUS_NAME'][$new_status]);
 
                 if ($comment && $comment != $lang['COMMENT']) {
                     $message .= "\n\n[b]" . $lang['COMMENT'] . '[/b]: ' . $comment;
@@ -105,7 +117,7 @@ switch ($mode) {
         break;
 
     case 'status_reply':
-        if (!$bb_cfg['tor_comment']) {
+        if (!config()->get('tor_comment')) {
             $this->ajax_die($lang['MODULE_OFF']);
         }
 

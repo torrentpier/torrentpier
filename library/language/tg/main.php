@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -63,6 +63,9 @@ $lang['SELECT_ACTION'] = 'Интихоб кунед амал';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'номашҳур';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+$lang['NO_ITEMS'] = 'There seems to be no data here...';
+$lang['PLEASE_TRY_AGAIN'] = 'Please try again after few seconds...';
 
 $lang['NEXT_PAGE'] = 'Баъдӣ';
 $lang['PREVIOUS_PAGE'] = 'гузашта';
@@ -376,6 +379,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'маҳдудияти Emoticons аз %s emoticon
 
 $lang['ATTACH_SIGNATURE'] = 'Замима имзо (имзо мумкин аст дар намуди тағйир)';
 $lang['NOTIFY'] = 'Вақте ки дар бораи ҷавобҳо маро огоҳ';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'паёми шумо бо муваффақият дохил шуд.';
 $lang['EDITED'] = 'Дар паёми иваз карда шуд';
@@ -983,6 +987,7 @@ $lang['DATETIME']['DEC'] = 'Дек';
 
 // Country selector
 $lang['COUNTRY'] = 'Country';
+$lang['SET_OWN_COUNTRY'] = 'Set own country (Manually)';
 $lang['COUNTRIES'] = [
     0 => 'Не-ро интихоб кунед',
     'AD' => 'Andorra',
@@ -1267,6 +1272,24 @@ $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Пурбинандатаринҳо';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Дар Тамдиди \'%s\' аз тарафи администратор Шӯрои хомуш шуд, бинобар ин дар ин Замимаи аст, нишон дода нашавад.'; // used in Posts and PM's, replace %s with mime type
 
+// Viewtopic -> Display of Attachments -> TorrServer integration
+$lang['STREAM'] = 'Stream';
+$lang['RESOLUTION'] = 'Resolution: <b>%s</b>';
+$lang['CHANNELS'] = 'Channels: <b>%s</b>';
+$lang['CHANNELS_LAYOUT'] = 'Channels layout: <b>%s</b>';
+$lang['BITRATE'] = 'Bitrate: <b>%s</b>';
+$lang['SAMPLE_RATE'] = 'Sample rate: <b>%s</b>';
+$lang['AUDIO_TRACK'] = 'Audio track information (%d):';
+$lang['AUDIO_CODEC'] = 'Audio codec: <b title="%s">%s</b>';
+$lang['VIDEO_CODEC'] = 'Video codec: <b title="%s">%s</b>';
+$lang['SHOW_MORE_INFORMATION_FILE'] = 'Show more information about file';
+$lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOT_SUPPORTED'] = 'This file cannot be played in the browser...';
+$lang['M3U_FFPROBE_NO_DATA'] = 'It seems ffprobe will not be able to return data about this codec...';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
+
 $lang['ATTACHMENT'] = 'замимаҳо';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Замимаи бандангуштӣ';
 
@@ -1347,11 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Оё ҷӯйе оид ба Назоратчии қайд 
 $lang['BT_REG_FAIL_SAME_HASH'] = 'ҷӯйе дигар бо ҳамин info_hash аллакай <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
+$lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Хориҷ аз Назоратчии';
 $lang['BT_UNREGISTERED'] = 'ҷӯйе никоњи';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1376,6 +1405,7 @@ $lang['SEEDING'] = 'тухмӣ';
 $lang['LEECHING'] = 'пиявка';
 $lang['IS_REGISTERED'] = 'Сабтшуда';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1412,6 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Намуди ҷӯйе бо муваффақият т
 $lang['DEL_TORRENT'] = 'Оё мутмаинед, ки мехоҳед тоза ҷӯйе?';
 $lang['DEL_MOVE_TORRENT'] = 'Оё мутмаинед, ки мехоҳед тоза ва ҳаракат ба ин мавзӯъ?';
 $lang['UNEXECUTED_RELEASE'] = 'Оё шумо озод бешакл пеш аз таъсиси як ислоҳи нав нотамом Ӯ!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Таѓйир додани вазъи тақсимоти - %s';
@@ -1446,6 +1477,7 @@ $lang['SET_SILVER_TORRENT'] = 'Ворид нуқра';
 $lang['UNSET_SILVER_TORRENT'] = 'UnMake нуқра';
 $lang['GOLD_STATUS'] = 'Ҷӯйе GOLD! Ҳаракати БЕРУНОРИ Оё фикр намекунанд!';
 $lang['SILVER_STATUS'] = 'Ҷӯйе нуқра! Ҳаракати БЕРУНОРИ қисман НАЗАР!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Ҷустуҷӯи Форумҳо';
@@ -1572,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Ин хосият танҳо барои admins 
 
 $lang['LOGS'] = 'Мавзӯъ таърих';
 $lang['FORUM_LOGS'] = 'Таърихи Форум';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'лоиҳакаш';
 
 $lang['LAST_IP'] = 'Last IP:';
@@ -1693,7 +1725,6 @@ $lang['NOTICE'] = '! ДИҚҚАТИ!';
 $lang['COPY'] = 'Дар сомона тавр версияҳои электронии маҳсулоти ато намекунад, ва танҳо дар як ҷамъоварии ва феҳристбандии намудани маълумотномаҳо ҷониби хонандагони мо фиристод ва нашр дар форуми машғул аст. Агар шумо соҳиби қонунӣ ягон мавод пешнињод ва намехоҳам, ки ишора ба он ки дар фењристи мо буд, бо мо тамос гиред ва мо фавран ӯро тоза кунед. Файлҳои барои мубодилаи оид ба Назоратчии аз тарафи истифодабарандагони сомонаи дода, ва маъмурияти тавр масъулияти нигоҳдории онҳо масъулият надорад. Дархост дар файлҳои ҳифз муаллифӣ пур накардаӣ, ва инчунин файлҳои аз нигоҳдории ғайриқонунии!';
 
 // FILELIST
-$lang['FILELIST'] = 'FileList';
 $lang['COLLAPSE'] = 'феҳристи фурӯпошии';
 $lang['EXPAND'] = 'васеъ';
 $lang['SWITCH'] = 'калид';
@@ -1811,8 +1842,10 @@ $lang['BOLD'] = 'Матни Bold: [b]text[/b] (Ctrl + B)';
 $lang['ITALIC'] = 'Матни Italic: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Таъкид матн: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Матни Strikeout: [s]text[/s] (Ctrl + S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Матни Quote: [quote]text[/quote] (Ctrl + Q)';
@@ -1848,6 +1881,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'қатъ';
 $lang['DL_UPD'] = 'Фосилаи:';
 $lang['DL_INFO'] = 'нишон <i><b>only маълумот барои session</b></i> ҷорӣ';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin аввали баъди';
@@ -1910,6 +1946,32 @@ $lang['TRACKER_CONFIG'] = 'танзимоти Назоратчии';
 $lang['RELEASE_TEMPLATES'] = 'Шаблон озод';
 $lang['ACTIONS_LOG'] = 'Њисобот оид ба амалиёти';
 
+// Migrations
+$lang['MIGRATIONS_STATUS']  = 'Database Migration Status';
+$lang['MIGRATIONS_DATABASE_NAME']  = 'Database Name';
+$lang['MIGRATIONS_DATABASE_TOTAL']  = 'Total Tables';
+$lang['MIGRATIONS_DATABASE_SIZE']  = 'Database Size';
+$lang['MIGRATIONS_DATABASE_INFO']  = 'Database Information';
+$lang['MIGRATIONS_SYSTEM']  = 'Migration System';
+$lang['MIGRATIONS_NEEDS_SETUP']  = 'Needs Setup';
+$lang['MIGRATIONS_ACTIVE']  = 'фаъол';
+$lang['MIGRATIONS_NOT_INITIALIZED']  = 'Not Initialized';
+$lang['MIGRATIONS_UP_TO_DATE']  = 'All up to date';
+$lang['MIGRATIONS_PENDING_COUNT']  = 'pending';
+$lang['MIGRATIONS_APPLIED']  = 'Applied Migrations';
+$lang['MIGRATIONS_PENDING']  = 'Pending Migrations';
+$lang['MIGRATIONS_VERSION']  = 'Version';
+$lang['MIGRATIONS_NAME']  = 'Migration Name';
+$lang['MIGRATIONS_FILE']  = 'Migration File';
+$lang['MIGRATIONS_APPLIED_AT']  = 'Applied At';
+$lang['MIGRATIONS_COMPLETED_AT']  = 'Completed At';
+$lang['MIGRATIONS_CURRENT_VERSION']  = 'Current Version';
+$lang['MIGRATIONS_NOT_APPLIED']  = 'No migrations applied';
+$lang['MIGRATIONS_INSTRUCTIONS']  = 'Instructions';
+$lang['MIGRATIONS_SETUP_STATUS']  = 'Setup Status';
+$lang['MIGRATIONS_SETUP_GUIDE']  = 'See setup guide below';
+$lang['MIGRATIONS_ACTION_REQUIRED']  = 'Action Required';
+
 // Index
 $lang['MAIN_INDEX'] = 'Индекси Форум';
 $lang['FORUM_STATS'] = 'Омор Форум';
@@ -1951,6 +2013,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'ҳисоб Заметки корбар
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Нишон номгўи истифодабарандагони онлайн';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Интихоби корбар';
@@ -2290,14 +2357,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Ба номи корбарӣ ва disallowed б�
 $lang['DISALLOWED_ALREADY'] = 'Номи шумо ворид карда наметавонистанд disallowed шавад. Ин ё аллакай дар рӯйхат мавҷуд аст, ки дар каломи рӯйхати сензор вуҷуд надорад, ё бояд як номи корбарӣ алоқаманде мазкур аст.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sHere%s ангушт занед барои баргаштан ба иозат Маъмурияти Логин';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Маълумот Version';
@@ -2787,6 +2846,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Мавзӯъ: <br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post: <br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
@@ -2963,12 +3025,8 @@ $lang['SITEMAP_ADMIN'] = 'Идоракунии талаф дод';
 $lang['SITEMAP_CREATED'] = 'Харитаи офаридааст';
 $lang['SITEMAP_AVAILABLE'] = 'ва дар дастрас аст';
 $lang['SITEMAP_NOT_CREATED'] = 'Харитаи ҳанӯз офарида нашудааст';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Огоҳинома аз муҳаррики ҷустуҷӯ';
-$lang['SITEMAP_SENT'] = 'ирсол ба итмом';
-$lang['SITEMAP_ERROR'] = 'хатои фиристодани';
 $lang['SITEMAP_OPTIONS'] = 'Имконот';
 $lang['SITEMAP_CREATE'] = 'Эҷоди / навсозии талаф дод';
-$lang['SITEMAP_NOTIFY'] = 'Огоҳ системаҳои ҷустуҷӯӣ дар бораи нави талаф дод';
 $lang['SITEMAP_WHAT_NEXT'] = 'Чӣ бояд кард навбатӣ?';
 $lang['SITEMAP_GOOGLE_1'] = 'Ба Реестри сомонаи Шумо дар <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> истифодаи ҳисоби Google шумо.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> сайти шумо ба қайд гирифта.';
@@ -2996,6 +3054,8 @@ $lang['HASH_NOT_FOUND'] = 'Озод бо шудаи %s ёфт нашуд';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Дар ин саҳифа шумо метавонед муайян кунед, ки матни қоидаҳои асосии захираҳои аст, ба истифодабарандагон нишон дода мешавад.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'истифодабарандагони ғайрифаъол дар 30 рӯз',
@@ -3050,7 +3110,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Санҷед, ки шумо як робот не';
 $lang['CAPTCHA_WRONG'] = 'Шумо карда наметавонистанд тасдиқ мекунанд, ки шумо ҳастанд робот не';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha будан нест, пурра configured</h2><p>If шумо аллакай тавлидшуда калидҳои нашуда бошад, шумо метавонед онро дар <a href="https://www.google.com/recaptcha/admin">https кор: //www.google.com/recaptcha/admin</a>.<br />After шумо тавлид калидҳои, ба шумо лозим аст, ки онҳоро дар китобхонаи файл / Танзимоти .php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

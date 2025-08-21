@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -16,7 +16,8 @@
  */
 function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, $user_id = 0)
 {
-    $lang = [];
+    global $lang;
+
     // Generate Array, if it's not an array
     if ($post_id_array === 0 && $attach_id_array === 0 && $page === 0) {
         return;
@@ -211,6 +212,12 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
                         if (!(DB()->sql_query($sql))) {
                             bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
+                        }
+
+                        // TorrServer integration
+                        if (config()->get('torr_server.enabled')) {
+                            $torrServer = new \TorrentPier\TorrServerAPI();
+                            $torrServer->removeM3U($attachments[$j]['attach_id']);
                         }
                     }
                 } else {

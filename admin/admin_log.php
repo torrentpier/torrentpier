@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -59,7 +59,7 @@ $def_forums = $all_forums;
 $def_sort = $sort_desc;
 
 // Moderators data
-if (!$mod = $datastore->get('moderators') and !$datastore->has('moderators')) {
+if (!$mod = $datastore->get('moderators')) {
     $datastore->update('moderators');
     $mod = $datastore->get('moderators');
 }
@@ -71,7 +71,7 @@ $users = array($lang['ACTS_LOG_ALL_ACTIONS'] => $all_users) + array_flip($mod['m
 unset($mod);
 
 // Forums data
-if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
+if (!$forums = $datastore->get('cat_forums')) {
     $datastore->update('cat_forums');
     $forums = $datastore->get('cat_forums');
 }
@@ -151,7 +151,7 @@ if ($var =& $_REQUEST[$daysback_key] && $var != $def_days) {
     $url = url_arg($url, $daysback_key, $daysback_val);
 }
 if ($var =& $_REQUEST[$datetime_key] && $var != $def_datetime) {
-    $tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
+    $tz = TIMENOW + (3600 * config()->get('board_timezone'));
     if (($tmp_timestamp = strtotime($var, $tz)) > 0) {
         $datetime_val = $tmp_timestamp;
         $url = url_arg($url, $datetime_key, date($dt_format, $datetime_val));
@@ -225,6 +225,9 @@ if ($log_rowset) {
             case $log_type['mod_topic_unlock']:
             case $log_type['mod_topic_set_downloaded']:
             case $log_type['mod_topic_unset_downloaded']:
+            case $log_type['mod_topic_change_tor_status']:
+            case $log_type['mod_topic_change_tor_type']:
+            case $log_type['mod_topic_tor_unregister']:
             case $log_type['mod_topic_renamed']:
             case $log_type['mod_post_delete']:
             case $log_type['mod_post_pin']:

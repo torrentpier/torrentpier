@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -24,7 +24,7 @@ $page_cfg['load_tpl_vars'] = [
 //
 // Is PM disabled?
 //
-if ($bb_cfg['privmsg_disable']) {
+if (config()->get('privmsg_disable')) {
     bb_die('PM_DISABLED');
 }
 
@@ -59,13 +59,13 @@ $user->session_start(['req_login' => true]);
 
 $template->assign_vars([
     'IN_PM' => true,
-    'QUICK_REPLY' => $bb_cfg['show_quick_reply'] && $folder == 'inbox' && $mode == 'read',
+    'QUICK_REPLY' => config()->get('show_quick_reply') && $folder == 'inbox' && $mode == 'read',
 ]);
 
 //
 // Set mode for quick reply
 //
-if (empty($mode) && $bb_cfg['show_quick_reply'] && $folder == 'inbox' && $preview) {
+if (empty($mode) && config()->get('show_quick_reply') && $folder == 'inbox' && $preview) {
     $mode = 'reply';
 }
 
@@ -206,7 +206,7 @@ if ($mode == 'read') {
         }
 
         if ($sent_info = DB()->sql_fetchrow($result)) {
-            if ($bb_cfg['max_sentbox_privmsgs'] && $sent_info['sent_items'] >= $bb_cfg['max_sentbox_privmsgs']) {
+            if (config()->get('max_sentbox_privmsgs') && $sent_info['sent_items'] >= config()->get('max_sentbox_privmsgs')) {
                 $sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
 					WHERE privmsgs_type = " . PRIVMSGS_SENT_MAIL . "
 						AND privmsgs_date = " . $sent_info['oldest_post_time'] . "
@@ -376,8 +376,8 @@ if ($mode == 'read') {
     //
     $post_subject = htmlCHR($privmsg['privmsgs_subject']);
     $private_message = $privmsg['privmsgs_text'];
-    $post_subject = $wordCensor->censorString($post_subject);
-    $private_message = $wordCensor->censorString($private_message);
+    $post_subject = censor()->censorString($post_subject);
+    $private_message = censor()->censorString($private_message);
     $private_message = bbcode2html($private_message);
 
     //
@@ -604,7 +604,7 @@ if ($mode == 'read') {
         }
 
         if ($saved_info = DB()->sql_fetchrow($result)) {
-            if ($bb_cfg['max_savebox_privmsgs'] && $saved_info['savebox_items'] >= $bb_cfg['max_savebox_privmsgs']) {
+            if (config()->get('max_savebox_privmsgs') && $saved_info['savebox_items'] >= config()->get('max_savebox_privmsgs')) {
                 $sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
 					WHERE ( ( privmsgs_to_userid = " . $userdata['user_id'] . "
 								AND privmsgs_type = " . PRIVMSGS_SAVED_IN_MAIL . " )
@@ -749,7 +749,7 @@ if ($mode == 'read') {
             $last_post_time = $db_row['last_post_time'];
             $current_time = TIMENOW;
 
-            if (($current_time - $last_post_time) < $bb_cfg['flood_interval']) {
+            if (($current_time - $last_post_time) < config()->get('flood_interval')) {
                 bb_die($lang['FLOOD_ERROR']);
             }
         }
@@ -802,11 +802,11 @@ if ($mode == 'read') {
         }
 
         // Check smilies limit
-        if ($bb_cfg['max_smilies_pm']) {
-            $count_smilies = substr_count(bbcode2html($privmsg_message), '<img class="smile" src="' . $bb_cfg['smilies_path']);
-            if ($count_smilies > $bb_cfg['max_smilies_pm']) {
+        if (config()->get('max_smilies_pm')) {
+            $count_smilies = substr_count(bbcode2html($privmsg_message), '<img class="smile" src="' . config()->get('smilies_path'));
+            if ($count_smilies > config()->get('max_smilies_pm')) {
                 $error = true;
-                $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies_pm']);
+                $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . sprintf($lang['MAX_SMILIES_PER_POST'], config()->get('max_smilies_pm'));
             }
         }
     }
@@ -834,7 +834,7 @@ if ($mode == 'read') {
             }
 
             if ($inbox_info = DB()->sql_fetchrow($result)) {
-                if ($bb_cfg['max_inbox_privmsgs'] && $inbox_info['inbox_items'] >= $bb_cfg['max_inbox_privmsgs']) {
+                if (config()->get('max_inbox_privmsgs') && $inbox_info['inbox_items'] >= config()->get('max_inbox_privmsgs')) {
                     $sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
 						WHERE ( privmsgs_type = " . PRIVMSGS_NEW_MAIL . "
 								OR privmsgs_type = " . PRIVMSGS_READ_MAIL . "
@@ -902,7 +902,7 @@ if ($mode == 'read') {
 
             \TorrentPier\Sessions::cache_rm_user_sessions($to_userdata['user_id']);
 
-            if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled']) {
+            if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && config()->get('pm_notify_enabled')) {
                 // Sending email
                 $emailer = new TorrentPier\Emailer();
 
@@ -914,7 +914,7 @@ if ($mode == 'read') {
                     'USERNAME' => html_entity_decode($to_username),
                     'NAME_FROM' => $userdata['username'],
                     'MSG_SUBJECT' => html_entity_decode($privmsg_subject),
-                    'U_INBOX' => make_url(PM_URL . "?folder=inbox&mode=read&p=$privmsg_sent_id"),
+                    'U_INBOX' => make_url(PM_URL . "?folder=inbox&mode=read&" . POST_POST_URL . "=$privmsg_sent_id"),
                 ]);
 
                 $emailer->send();
@@ -1044,8 +1044,8 @@ if ($mode == 'read') {
 
     if ($preview && !$error) {
         $preview_message = bbcode2html($privmsg_message);
-        $preview_subject = $wordCensor->censorString($privmsg_subject);
-        $preview_message = $wordCensor->censorString($preview_message);
+        $preview_subject = censor()->censorString($privmsg_subject);
+        $preview_message = censor()->censorString($preview_message);
 
         $s_hidden_fields = '<input type="hidden" name="folder" value="' . $folder . '" />';
         $s_hidden_fields .= '<input type="hidden" name="mode" value="' . $mode . '" />';
@@ -1252,7 +1252,7 @@ if ($mode == 'read') {
         $msg_days = 0;
     }
 
-    $sql .= $limit_msg_time . " ORDER BY pm.privmsgs_date DESC LIMIT $start, " . $bb_cfg['topics_per_page'];
+    $sql .= $limit_msg_time . " ORDER BY pm.privmsgs_date DESC LIMIT $start, " . config()->get('topics_per_page');
     $sql_all_tot = $sql_tot;
     $sql_tot .= $limit_msg_time_total;
 
@@ -1308,11 +1308,11 @@ if ($mode == 'read') {
     // Output data for inbox status
     //
     $box_limit_img_length = $box_limit_percent = $l_box_size_status = '';
-    $max_pm = ($folder != 'outbox') ? $bb_cfg["max_{$folder}_privmsgs"] : null;
+    $max_pm = ($folder != 'outbox') ? config()->get("max_{$folder}_privmsgs") : null;
 
     if ($max_pm) {
         $box_limit_percent = min(round(($pm_all_total / $max_pm) * 100), 100);
-        $box_limit_img_length = min(round(($pm_all_total / $max_pm) * $bb_cfg['privmsg_graphic_length']), $bb_cfg['privmsg_graphic_length']);
+        $box_limit_img_length = min(round(($pm_all_total / $max_pm) * config()->get('privmsg_graphic_length')), config()->get('privmsg_graphic_length'));
         $box_limit_remain = max(($max_pm - $pm_all_total), 0);
 
         $template->assign_var('PM_BOX_SIZE_INFO');
@@ -1381,7 +1381,7 @@ if ($mode == 'read') {
 
             $msg_userid = $row['user_id'];
             $msg_user = profile_url($row);
-            $msg_subject = $wordCensor->censorString($row['privmsgs_subject']);
+            $msg_subject = censor()->censorString($row['privmsgs_subject']);
 
             $u_subject = PM_URL . "?folder=$folder&amp;mode=read&amp;" . POST_POST_URL . "=$privmsg_id";
 
@@ -1410,7 +1410,7 @@ if ($mode == 'read') {
             ]);
         } while ($row = DB()->sql_fetchrow($result));
 
-        generate_pagination(PM_URL . "?folder=$folder", $pm_total, $bb_cfg['topics_per_page'], $start);
+        generate_pagination(PM_URL . "?folder=$folder", $pm_total, config()->get('topics_per_page'), $start);
     } else {
         $template->assign_block_vars('switch_no_messages', []);
     }

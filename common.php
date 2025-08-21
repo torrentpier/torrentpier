@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -54,7 +54,7 @@ require_once BB_PATH . '/library/defines.php';
 
 // Composer
 if (!is_file(BB_PATH . '/vendor/autoload.php')) {
-    die('🔩 Manual install: <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">Install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>.<br>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
+    die('🔩 Manual install: <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">Install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>.<br/>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
 }
 require_once BB_PATH . '/vendor/autoload.php';
 
@@ -75,7 +75,7 @@ try {
     $dotenv = Dotenv\Dotenv::createMutable(BB_PATH);
     $dotenv->load();
 } catch (\Dotenv\Exception\InvalidPathException $pathException) {
-    die('🔩 Manual install: Rename from <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env.example</code> to <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env</code>, and configure it.<br>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
+    die('🔩 Manual install: Rename from <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env.example</code> to <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env</code>, and configure it.<br/>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
 }
 
 // Load config
@@ -86,62 +86,137 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
     require_once BB_PATH . '/library/config.local.php';
 }
 
+/** @noinspection PhpUndefinedVariableInspection */
+// Initialize Config singleton, bb_cfg from global file config
+$config = \TorrentPier\Config::init($bb_cfg);
+
 /**
- * Error reporting
+ * Get the Config instance
+ *
+ * @return \TorrentPier\Config
  */
-$debug = new \TorrentPier\Dev();
+function config(): \TorrentPier\Config
+{
+    return \TorrentPier\Config::getInstance();
+}
+
+/**
+ * Get the Censor instance
+ *
+ * @return \TorrentPier\Censor
+ */
+function censor(): \TorrentPier\Censor
+{
+    return \TorrentPier\Censor::getInstance();
+}
+
+/**
+ * Get the Dev instance
+ *
+ * @return \TorrentPier\Dev
+ */
+function dev(): \TorrentPier\Dev
+{
+    return \TorrentPier\Dev::getInstance();
+}
+
+/**
+ * Get the Language instance
+ *
+ * @return \TorrentPier\Language
+ */
+function lang(): \TorrentPier\Language
+{
+    return \TorrentPier\Language::getInstance();
+}
+
+/**
+ * Get a language string (shorthand for lang()->get())
+ *
+ * @param string $key Language key, supports dot notation (e.g., 'DATETIME.TODAY')
+ * @param mixed $default Default value if key doesn't exist
+ * @return mixed Language string or default value
+ */
+function __(string $key, mixed $default = null): mixed
+{
+    return \TorrentPier\Language::getInstance()->get($key, $default);
+}
+
+/**
+ * Echo a language string (shorthand for echo __())
+ *
+ * @param string $key Language key, supports dot notation
+ * @param mixed $default Default value if key doesn't exist
+ * @return void
+ */
+function _e(string $key, mixed $default = null): void
+{
+    echo \TorrentPier\Language::getInstance()->get($key, $default);
+}
+
+/**
+ * Initialize debug
+ */
+define('APP_ENV', env('APP_ENV', 'production'));
+if (APP_ENV === 'development') {
+    define('DBG_USER', true); // forced debug
+} else {
+    define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
+}
+(\TorrentPier\Dev::init());
 
 /**
  * Server variables initialize
  */
-$server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
-$server_port = in_array((int)$bb_cfg['server_port'], [80, 443], true) ? '' : ':' . $bb_cfg['server_port'];
-define('FORUM_PATH', $bb_cfg['script_path']);
-define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
+$server_protocol = config()->get('cookie_secure') ? 'https://' : 'http://';
+$server_port = in_array((int)config()->get('server_port'), [80, 443], true) ? '' : ':' . config()->get('server_port');
+define('FORUM_PATH', config()->get('script_path'));
+define('FULL_URL', $server_protocol . config()->get('server_name') . $server_port . config()->get('script_path'));
 unset($server_protocol, $server_port);
 
-/**
- * Database
- */
-$DBS = new TorrentPier\Legacy\Dbs($bb_cfg);
+// Initialize the new DB factory with database configuration
+TorrentPier\Database\DatabaseFactory::init(config()->get('db'), config()->get('db_alias', []));
 
-function DB(string $db_alias = 'db')
+/**
+ * Get the Database instance
+ *
+ * @param string $db_alias
+ * @return \TorrentPier\Database\Database
+ */
+function DB(string $db_alias = 'db'): \TorrentPier\Database\Database
 {
-    global $DBS;
-    return $DBS->get_db_obj($db_alias);
+    return TorrentPier\Database\DatabaseFactory::getInstance($db_alias);
 }
 
-/**
- * Cache
- */
-$CACHES = new TorrentPier\Legacy\Caches($bb_cfg);
+// Initialize Unified Cache System
+TorrentPier\Cache\UnifiedCacheSystem::getInstance(config()->all());
 
-function CACHE(string $cache_name)
+/**
+ * Get cache manager instance (replaces legacy cache system)
+ *
+ * @param string $cache_name
+ * @return \TorrentPier\Cache\CacheManager
+ */
+function CACHE(string $cache_name): \TorrentPier\Cache\CacheManager
 {
-    global $CACHES;
-    return $CACHES->get_cache_obj($cache_name);
+    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->get_cache_obj($cache_name);
 }
 
 /**
- * Datastore
+ * Get datastore manager instance (replaces legacy datastore system)
+ *
+ * @return \TorrentPier\Cache\DatastoreManager
  */
-switch ($bb_cfg['datastore_type']) {
-    case 'apcu':
-        $datastore = new TorrentPier\Legacy\Datastore\APCu($bb_cfg['cache']['prefix']);
-        break;
-    case 'memcached':
-        $datastore = new TorrentPier\Legacy\Datastore\Memcached($bb_cfg['cache']['memcached'], $bb_cfg['cache']['prefix']);
-        break;
-    case 'sqlite':
-        $datastore = new TorrentPier\Legacy\Datastore\Sqlite($bb_cfg['cache']['db_dir'] . 'datastore', $bb_cfg['cache']['prefix']);
-        break;
-    case 'redis':
-        $datastore = new TorrentPier\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
-        break;
-    case 'filecache':
-    default:
-        $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
+function datastore(): \TorrentPier\Cache\DatastoreManager
+{
+    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->getDatastore(config()->get('datastore_type', 'file'));
 }
+
+/**
+ * Backward compatibility: Global datastore variable
+ * This allows existing code to continue using global $datastore
+ */
+$datastore = datastore();
 
 // Functions
 function utime()
@@ -233,7 +308,7 @@ function clean_filename($fname)
  * @param ?string $charset
  * @return string
  */
-function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = 'UTF-8'): string
+function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = DEFAULT_CHARSET): string
 {
     return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
 }
@@ -244,7 +319,7 @@ function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTE
  */
 function str_compact($str)
 {
-    return preg_replace('#\s+#u', ' ', trim($str ?? ''));
+    return preg_replace('/\s\s+/', ' ', trim($str ?? ''));
 }
 
 /**
@@ -324,6 +399,12 @@ function hide_bb_path(string $path): string
     return ltrim(str_replace(BB_PATH, '', $path), '/\\');
 }
 
+/**
+ * Returns memory usage statistic
+ *
+ * @param string $param
+ * @return int|void
+ */
 function sys(string $param)
 {
     switch ($param) {
@@ -339,6 +420,10 @@ function sys(string $param)
 /**
  * Some shared defines
  */
+// Initialize demo mode
+define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
+
+// Ratio status
 define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);
 
 // Initialization
@@ -348,9 +433,9 @@ if (!defined('IN_TRACKER')) {
 } else {
     define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
 
-    define('PEER_HASH_EXPIRE', round($bb_cfg['announce_interval'] * (0.85 * $bb_cfg['tracker']['expire_factor'])));
-    define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7));
-    define('SCRAPE_LIST_EXPIRE', round($bb_cfg['scrape_interval'] * 0.7));
+    define('PEER_HASH_EXPIRE', round(config()->get('announce_interval') * (0.85 * config()->get('tracker.expire_factor'))));
+    define('PEERS_LIST_EXPIRE', round(config()->get('announce_interval') * 0.7));
+    define('SCRAPE_LIST_EXPIRE', round(config()->get('scrape_interval') * 0.7));
 
     define('PEER_HASH_PREFIX', 'peer_');
     define('PEERS_LIST_PREFIX', 'peers_list_');

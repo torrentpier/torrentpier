@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -34,16 +34,16 @@ $user->session_start();
 set_die_append_msg();
 
 // Posts per page
-$posts_per_page = $bb_cfg['posts_per_page'];
+$posts_per_page = config()->get('posts_per_page');
 $select_ppp = '';
 
 if ($userdata['session_admin']) {
-    if ($req_ppp = abs((int)(@$_REQUEST['ppp'])) and in_array($req_ppp, $bb_cfg['allowed_posts_per_page'])) {
+    if ($req_ppp = abs((int)(@$_REQUEST['ppp'])) and in_array($req_ppp, config()->get('allowed_posts_per_page'))) {
         $posts_per_page = $req_ppp;
     }
 
     $select_ppp = [];
-    foreach ($bb_cfg['allowed_posts_per_page'] as $ppp) {
+    foreach (config()->get('allowed_posts_per_page') as $ppp) {
         $select_ppp[$ppp] = $ppp;
     }
 }
@@ -85,17 +85,17 @@ if ($topic_id && isset($_GET['view']) && ($_GET['view'] == 'next' || $_GET['view
 
 // Get forum/topic data
 if ($topic_id) {
-    $sql = "SELECT t.*, f.*, tw.notify_status
+    $sql = "SELECT t.*, f.cat_id, f.forum_name, f.forum_desc, f.forum_status, f.forum_order, f.forum_posts, f.forum_topics, f.forum_last_post_id, f.forum_tpl_id, f.prune_days, f.auth_view, f.auth_read, f.auth_post, f.auth_reply, f.auth_edit, f.auth_delete, f.auth_sticky, f.auth_announce, f.auth_vote, f.auth_pollcreate, f.auth_attachments, f.auth_download, f.allow_reg_tracker, f.allow_porno_topic, f.self_moderated, f.forum_parent, f.show_on_index, f.forum_display_sort, f.forum_display_order, tw.notify_status
 		FROM " . BB_TOPICS . " t
-		LEFT JOIN " . BB_FORUMS . " f USING(forum_id)
+		LEFT JOIN " . BB_FORUMS . " f ON t.forum_id = f.forum_id
 		LEFT JOIN " . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
 		WHERE t.topic_id = $topic_id
 	";
 } elseif ($post_id) {
-    $sql = "SELECT t.*, f.*, p.post_time, tw.notify_status
+    $sql = "SELECT t.*, f.cat_id, f.forum_name, f.forum_desc, f.forum_status, f.forum_order, f.forum_posts, f.forum_topics, f.forum_last_post_id, f.forum_tpl_id, f.prune_days, f.auth_view, f.auth_read, f.auth_post, f.auth_reply, f.auth_edit, f.auth_delete, f.auth_sticky, f.auth_announce, f.auth_vote, f.auth_pollcreate, f.auth_attachments, f.auth_download, f.allow_reg_tracker, f.allow_porno_topic, f.self_moderated, f.forum_parent, f.show_on_index, f.forum_display_sort, f.forum_display_order, p.post_time, tw.notify_status
 		FROM " . BB_TOPICS . " t
-		LEFT JOIN " . BB_FORUMS . " f  USING(forum_id)
-		LEFT JOIN " . BB_POSTS . " p  USING(topic_id)
+		LEFT JOIN " . BB_FORUMS . " f ON t.forum_id = f.forum_id
+		LEFT JOIN " . BB_POSTS . " p ON t.topic_id = p.topic_id
 		LEFT JOIN " . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
 		WHERE p.post_id = $post_id
 	";
@@ -112,6 +112,9 @@ $forum_topic_data =& $t_data;
 $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
 $topic_attachment = isset($t_data['topic_attachment']) ? (int)$t_data['topic_attachment'] : null;
+
+// Allow robots indexing
+$page_cfg['allow_robots'] = (bool)$t_data['topic_allow_robots'];
 
 if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) {
     bb_die($lang['ERROR_PORNO_FORUM']);
@@ -174,9 +177,11 @@ if (!$is_auth['auth_read']) {
 }
 
 $forum_name = $t_data['forum_name'];
+$parent_id = (is_numeric($t_data['forum_parent']) && $t_data['forum_parent'] > 0) ? $t_data['forum_parent'] : false;
 $topic_title = $t_data['topic_title'];
 $topic_id = $t_data['topic_id'];
 $topic_time = $t_data['topic_time'];
+$locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
 
 $moderation = (!empty($_REQUEST['mod']) && $is_auth['auth_mod']);
 
@@ -195,7 +200,7 @@ if ($is_auth['auth_mod']) {
 
 if ($moderation) {
     if (IS_ADMIN) {
-        if (!$forum_select = $datastore->get('viewtopic_forum_select') and !$datastore->has('viewtopic_forum_select')) {
+        if (!$forum_select = $datastore->get('viewtopic_forum_select')) {
             $datastore->update('viewtopic_forum_select');
             $forum_select = $datastore->get('viewtopic_forum_select');
         }
@@ -207,7 +212,7 @@ if ($moderation) {
     $template->assign_vars(['S_FORUM_SELECT' => $forum_select_html]);
 }
 
-if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
+if (!$forums = $datastore->get('cat_forums')) {
     $datastore->update('cat_forums');
     $forums = $datastore->get('cat_forums');
 }
@@ -215,8 +220,8 @@ if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums'))
 $template->assign_vars([
     'CAT_TITLE' => $forums['cat_title_html'][$t_data['cat_id']],
     'U_VIEWCAT' => CAT_URL . $t_data['cat_id'],
-    'PARENT_FORUM_HREF' => ($parent_id = $t_data['forum_parent']) ? FORUM_URL . $parent_id : '',
-    'PARENT_FORUM_NAME' => ($parent_id = $t_data['forum_parent']) ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
+    'PARENT_FORUM_HREF' => $parent_id ? FORUM_URL . $parent_id : '',
+    'PARENT_FORUM_NAME' => $parent_id ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
 ]);
 unset($forums);
 $datastore->rm('cat_forums');
@@ -231,7 +236,7 @@ if ($post_id && !empty($t_data['prev_posts'])) {
 // Is user watching this thread?
 $can_watch_topic = $is_watching_topic = false;
 
-if ($bb_cfg['topic_notify_enabled']) {
+if (config()->get('topic_notify_enabled')) {
     if (!IS_GUEST) {
         $can_watch_topic = true;
 
@@ -353,13 +358,13 @@ if ($postrow = DB()->fetch_rowset($sql)) {
     bb_die($lang['NO_POSTS_TOPIC']);
 }
 
-if (!$ranks = $datastore->get('ranks') and !$datastore->has('ranks')) {
+if (!$ranks = $datastore->get('ranks')) {
     $datastore->update('ranks');
     $ranks = $datastore->get('ranks');
 }
 
 // Censor topic title
-$topic_title = $wordCensor->censorString($topic_title);
+$topic_title = censor()->censorString($topic_title);
 
 // Post, reply and other URL generation for templating vars
 $new_topic_url = POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id";
@@ -368,8 +373,8 @@ $view_forum_url = FORUM_URL . $forum_id;
 $view_prev_topic_url = TOPIC_URL . $topic_id . "&amp;view=previous#newest";
 $view_next_topic_url = TOPIC_URL . $topic_id . "&amp;view=next#newest";
 
-$reply_img = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED) ? $images['reply_locked'] : $images['reply_new'];
-$reply_alt = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED) ? $lang['TOPIC_LOCKED_SHORT'] : $lang['REPLY_TO_TOPIC'];
+$reply_img = $locked ? $images['reply_locked'] : $images['reply_new'];
+$reply_alt = $locked ? $lang['TOPIC_LOCKED_SHORT'] : $lang['REPLY_TO_TOPIC'];
 
 // Set 'body' template for attach_mod
 $template->set_filenames(['body' => 'viewtopic.tpl']);
@@ -421,7 +426,7 @@ $pg_url .= $post_days ? "&amp;postdays=$post_days" : '';
 $pg_url .= ($post_order != 'asc') ? "&amp;postorder=$post_order" : '';
 $pg_url .= isset($_REQUEST['single']) ? "&amp;single=1" : '';
 $pg_url .= $moderation ? "&amp;mod=1" : '';
-$pg_url .= ($posts_per_page != $bb_cfg['posts_per_page']) ? "&amp;ppp=$posts_per_page" : '';
+$pg_url .= ($posts_per_page != config()->get('posts_per_page')) ? "&amp;ppp=$posts_per_page" : '';
 
 generate_pagination($pg_url, $total_replies, $posts_per_page, $start);
 
@@ -443,7 +448,7 @@ $sel_post_order_ary = [
 ];
 
 $topic_has_poll = $t_data['topic_vote'];
-$poll_time_expired = ($t_data['topic_time'] < TIMENOW - $bb_cfg['poll_max_days'] * 86400);
+$poll_time_expired = ($t_data['topic_time'] < TIMENOW - config()->get('poll_max_days') * 86400);
 $can_manage_poll = ($t_data['topic_poster'] == $userdata['user_id'] || $is_auth['auth_mod']);
 $can_add_poll = ($can_manage_poll && !$topic_has_poll && !$poll_time_expired && !$start);
 
@@ -465,19 +470,19 @@ $template->assign_vars([
     'TOPIC_TITLE' => $topic_title,
     'PORNO_FORUM' => $t_data['allow_porno_topic'],
     'REPLY_IMG' => $reply_img,
-    'SHOW_BOT_NICK' => $bb_cfg['show_bot_nick'],
+    'SHOW_BOT_NICK' => config()->get('show_bot_nick'),
     'T_POST_REPLY' => $reply_alt,
 
     'HIDE_FROM' => $user->opt_js['h_from'],
     'HIDE_AVATAR' => $user->opt_js['h_av'],
-    'HIDE_RANK_IMG' => ($user->opt_js['h_rnk_i'] && $bb_cfg['show_rank_image']),
+    'HIDE_RANK_IMG' => ($user->opt_js['h_rnk_i'] && config()->get('show_rank_image')),
     'HIDE_POST_IMG' => $user->opt_js['h_post_i'],
     'HIDE_SMILE' => $user->opt_js['h_smile'],
     'HIDE_SIGNATURE' => $user->opt_js['h_sig'],
     'SPOILER_OPENED' => $user->opt_js['sp_op'],
     'SHOW_IMG_AFTER_LOAD' => $user->opt_js['i_aft_l'],
 
-    'HIDE_RANK_IMG_DIS' => !$bb_cfg['show_rank_image'],
+    'HIDE_RANK_IMG_DIS' => !config()->get('show_rank_image'),
 
     'PINNED_FIRST_POST' => $t_data['topic_show_first_post'],
     'PIN_HREF' => $t_data['topic_show_first_post'] ? "modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=post_unpin" : "modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=post_pin",
@@ -554,12 +559,13 @@ for ($i = 0; $i < $total_posts; $i++) {
     $poster_bot = ($poster_id == BOT_UID);
     $poster = $poster_guest ? $lang['GUEST'] : $postrow[$i]['username'];
 
-    $post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
+    $post_date = bb_date($postrow[$i]['post_time'], config()->get('post_date_format'));
     $max_post_time = max($max_post_time, $postrow[$i]['post_time']);
     $poster_posts = !$poster_guest ? $postrow[$i]['user_posts'] : '';
     $poster_from = ($postrow[$i]['user_from'] && !$poster_guest) ? $postrow[$i]['user_from'] : '';
     $poster_joined = !$poster_guest ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
     $poster_longevity = !$poster_guest ? delta_time($postrow[$i]['user_regdate']) : '';
+    $poster_birthday = $postrow[$i]['user_birthday']->format('Y-m-d');
     $post_id = $postrow[$i]['post_id'];
     $mc_type = (int)$postrow[$i]['mc_type'];
     $mc_comment = $postrow[$i]['mc_comment'];
@@ -579,8 +585,8 @@ for ($i = 0; $i < $total_posts; $i++) {
     $poster_rank = $rank_image = '';
     $user_rank = $postrow[$i]['user_rank'];
     if (!$user->opt_js['h_rnk_i'] and isset($ranks[$user_rank])) {
-        $rank_image = ($bb_cfg['show_rank_image'] && $ranks[$user_rank]['rank_image']) ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
-        $poster_rank = $bb_cfg['show_rank_text'] ? $ranks[$user_rank]['rank_title'] : '';
+        $rank_image = (config()->get('show_rank_image') && $ranks[$user_rank]['rank_image']) ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
+        $poster_rank = config()->get('show_rank_text') ? $ranks[$user_rank]['rank_title'] : '';
     }
 
     // Handle anon users posting with usernames
@@ -597,7 +603,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     }
 
     if (!$poster_bot) {
-        $quote_btn = ($is_auth['auth_reply'] && !($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED));
+        $quote_btn = ($is_auth['auth_reply'] && !$locked);
         $edit_btn = (($userdata['user_id'] == $poster_id && $is_auth['auth_edit']) || $is_auth['auth_mod']);
         $ip_btn = ($is_auth['auth_mod'] || IS_MOD);
     }
@@ -606,7 +612,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     // Parse message and sig
     $message = get_parsed_post($postrow[$i]);
 
-    $user_sig = ($bb_cfg['allow_sig'] && !$user->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
+    $user_sig = (config()->get('allow_sig') && !$user->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
 
     if (bf($postrow[$i]['user_opt'], 'user_opt', 'dis_sig')) {
         $user_sig = $lang['SIGNATURE_DISABLE'];
@@ -619,8 +625,8 @@ for ($i = 0; $i < $total_posts; $i++) {
         $user_sig = str_replace(
             '\"', '"',
             substr(
-                preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) use ($wordCensor) {
-                    return $wordCensor->censorString(reset($matches));
+                preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) {
+                    return censor()->censorString(reset($matches));
                 }, '>' . $user_sig . '<'), 1, -1
             )
         );
@@ -629,15 +635,15 @@ for ($i = 0; $i < $total_posts; $i++) {
     $message = str_replace(
         '\"', '"',
         substr(
-            preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) use ($wordCensor) {
-                return $wordCensor->censorString(reset($matches));
+            preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) {
+                return censor()->censorString(reset($matches));
             }, '>' . $message . '<'), 1, -1
         )
     );
 
     // Replace newlines (we use this rather than nl2br because till recently it wasn't XHTML compliant)
     if ($user_sig) {
-        $user_sig = $bb_cfg['user_signature_start'] . $user_sig . $bb_cfg['user_signature_end'];
+        $user_sig = config()->get('user_signature_start') . $user_sig . config()->get('user_signature_end');
     }
 
     // Editing information
@@ -666,6 +672,13 @@ for ($i = 0; $i < $total_posts; $i++) {
 
     $is_first_post = ($post_id == $t_data['topic_first_post_id']);
 
+    // Set meta description
+    if ($is_first_post || $i == 0) {
+        $message_meta = preg_replace('#<br\s*/?>\s*#si', ' ', $message);
+        $message_meta = str_replace('&#10;', '', $message_meta);
+        $page_cfg['meta_description'] = str_short(strip_tags($message_meta), 220);
+    }
+
     $template->assign_block_vars('postrow', [
         'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
         'POST_ID' => $post_id,
@@ -674,11 +687,11 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_NAME_JS' => addslashes($poster),
         'POSTER_RANK' => $poster_rank,
         'RANK_IMAGE' => $rank_image,
-        'POSTER_JOINED' => $bb_cfg['show_poster_joined'] ? $poster_longevity : '',
+        'POSTER_JOINED' => config()->get('show_poster_joined') ? $poster_longevity : '',
 
         'POSTER_JOINED_DATE' => $poster_joined,
-        'POSTER_POSTS' => ($bb_cfg['show_poster_posts'] && $poster_posts) ? '<a href="search.php?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
-        'POSTER_FROM' => $bb_cfg['show_poster_from'] ? render_flag($poster_from, false) : '',
+        'POSTER_POSTS' => (config()->get('show_poster_posts') && $poster_posts) ? '<a href="search.php?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
+        'POSTER_FROM' => config()->get('show_poster_from') ? render_flag($poster_from, false) : '',
         'POSTER_BOT' => $poster_bot,
         'POSTER_GUEST' => $poster_guest,
         'POSTER_ID' => $poster_id,
@@ -703,7 +716,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'DELETE' => $delpost_btn,
         'IP' => $ip_btn,
 
-        'POSTER_BIRTHDAY' => user_birthday_icon($postrow[$i]['user_birthday'], $postrow[$i]['user_id']),
+        'POSTER_BIRTHDAY' => user_birthday_icon($poster_birthday, $postrow[$i]['user_id']),
 
         'MC_COMMENT' => $mc_type ? bbcode2html($mc_comment) : '',
         'MC_BBCODE' => $mc_type ? $mc_comment : '',
@@ -752,13 +765,13 @@ if (defined('SPLIT_FORM_START')) {
 }
 
 // Quick Reply
-if ($bb_cfg['show_quick_reply']) {
-    if ($is_auth['auth_reply'] && !($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED)) {
+if (config()->get('show_quick_reply')) {
+    if ($is_auth['auth_reply'] && !$locked) {
         $template->assign_vars([
             'QUICK_REPLY' => true,
             'QR_POST_ACTION' => POSTING_URL,
             'QR_TOPIC_ID' => $topic_id,
-            'CAPTCHA_HTML' => (IS_GUEST && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : ''
+            'CAPTCHA_HTML' => (IS_GUEST && !config()->get('captcha.disabled')) ? bb_captcha('get') : ''
         ]);
 
         if (!IS_GUEST) {
@@ -776,7 +789,7 @@ foreach ($is_auth as $name => $is) {
 $template->assign_vars(['PG_ROW_CLASS' => $pg_row_class ?? 'row1']);
 
 if (IS_ADMIN) {
-    $template->assign_vars(['U_LOGS' => "admin/admin_log.php?" . POST_TOPIC_URL . "=$topic_id&amp;db={$bb_cfg['log_days_keep']}"]);
+    $template->assign_vars(['U_LOGS' => "admin/admin_log.php?" . POST_TOPIC_URL . "=$topic_id&amp;db=" . config()->get('log_days_keep')]);
 }
 
 print_page('viewtopic.tpl');

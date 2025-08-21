@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-if (!$bb_cfg['topic_notify_enabled']) {
+if (!config()->get('topic_notify_enabled')) {
     bb_die($lang['DISABLED']);
 }
 
@@ -35,7 +35,7 @@ if (isset($_GET[POST_USERS_URL])) {
     }
 }
 $start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
-$per_page = $bb_cfg['topics_per_page'];
+$per_page = config()->get('topics_per_page');
 
 if (isset($_POST['topic_id_list'])) {
     $topic_ids = implode(",", $_POST['topic_id_list']);
@@ -83,7 +83,7 @@ if ($watch_count > 0) {
                 'ROW_CLASS' => (!($i % 2)) ? 'row1' : 'row2',
                 'POST_ID' => $watch[$i]['topic_first_post_id'],
                 'TOPIC_ID' => $watch[$i]['topic_id'],
-                'TOPIC_TITLE' => str_short($wordCensor->censorString($watch[$i]['topic_title']), 70),
+                'TOPIC_TITLE' => str_short(censor()->censorString($watch[$i]['topic_title']), 70),
                 'FULL_TOPIC_TITLE' => $watch[$i]['topic_title'],
                 'U_TOPIC' => TOPIC_URL . $watch[$i]['topic_id'],
                 'FORUM_TITLE' => $watch[$i]['forum_name'],
@@ -96,7 +96,7 @@ if ($watch_count > 0) {
                 'IS_UNREAD' => $is_unread,
                 'POLL' => (bool)$watch[$i]['topic_vote'],
                 'TOPIC_ICON' => get_topic_icon($watch[$i], $is_unread),
-                'PAGINATION' => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination(TOPIC_URL . $watch[$i]['topic_id'], $watch[$i]['topic_replies'], $bb_cfg['posts_per_page'])
+                'PAGINATION' => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination(TOPIC_URL . $watch[$i]['topic_id'], $watch[$i]['topic_replies'], config()->get('posts_per_page'))
             ]);
         }
 

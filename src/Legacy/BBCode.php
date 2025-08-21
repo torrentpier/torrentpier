@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -19,7 +19,7 @@ class BBCode
     public array $tpl = [];
 
     /** @var array $smilies Replacements for smilies */
-    public $smilies;
+    public array $smilies = [];
 
     /** @var array $tidy_cfg Tidy preprocessor configuration */
     public array $tidy_cfg = [
@@ -76,7 +76,7 @@ class BBCode
     private function init_replacements(): void
     {
         $tpl = $this->tpl;
-        $img_exp = '(https?:)?//[^\s\?&;=\#\"<>]+?\.(jpg|jpeg|gif|png|bmp|webp)([a-z0-9/?&%;][^\[\]]*)?';
+        $img_exp = '(https?:)?//[^\s\?&;=\#\"<>]+?\.(jpg|jpeg|gif|png|bmp|webp|avif)([a-z0-9/?&%;][^\[\]]*)?';
         $email_exp = '[a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+';
 
         $this->preg = [
@@ -97,6 +97,8 @@ class BBCode
             "#\[img=(left|right|center)\]($img_exp)\[/img\]\s*#isu" => $tpl['img_aligned'],
             "#\[email\]($email_exp)\[/email\]#isu" => '<a href="mailto:$1">$1</a>',
             "#\[qpost=([0-9]*)\]#isu" => '<u class="q-post">$1</u>',
+            '#\[box=(?:\s*[\'"])?([\#0-9a-zA-Z]+)(?:[\'"]\s*)?\]#isu' => $tpl['box_open_color_single'],
+            '#\[box=(?:\s*[\'"])?([\#0-9a-zA-Z]+)(?:[\'"]\s*)?,\s*[\'"]?([\#0-9a-zA-Z]+)[\'"]?\]#isu' => $tpl['box_open_color'],
         ];
 
         $this->str = [
@@ -127,10 +129,14 @@ class BBCode
             '[/sup]' => '</small></sup>',
             '[sub]' => '<sub><small>',
             '[/sub]' => '</small></sub>',
-            '[box]' => '<div class="post-box-default"><div class="post-box">',
-            '[/box]' => '</div></div>',
+            '[box]' => $tpl['box_open'],
+            '[/box]' => $tpl['box_close'],
             '[indent]' => '<div class="post-indent">',
             '[/indent]' => '</div>',
+            '[pre]' => '<pre class="post-pre">',
+            '[/pre]' => '</pre>',
+            '[nfo]' => '<pre class="post-nfo">',
+            '[/nfo]' => '</pre>',
             '[del]' => '<span class="post-s">',
             '[/del]' => '</span>',
             '[clear]' => '<div class="clear">&nbsp;</div>',
@@ -151,15 +157,13 @@ class BBCode
      */
     public function bbcode2html(string $text): string
     {
-        global $bb_cfg;
-
         $text = self::clean_up($text);
         $text = $this->parse($text);
         $text = $this->make_clickable($text);
         $text = $this->smilies_pass($text);
         $text = $this->new_line2html($text);
 
-        if ($bb_cfg['tidy_post']) {
+        if (config()->get('tidy_post')) {
             $text = $this->tidy($text);
         }
 
@@ -246,22 +250,17 @@ class BBCode
      */
     private function url_callback(array $m): string
     {
-        global $bb_cfg;
-
         $url = trim($m[1]);
         $url_name = isset($m[2]) ? trim($m[2]) : $url;
+        $url_parse = parse_url($url);
 
-        if (!preg_match('#^https?://#iu', $url) && !preg_match('/^#/', $url)) {
-            $url = 'http://' . $url;
+        if (!isset($url_parse['scheme']) && isset($url_parse['path'])) {
+            if (!preg_match('/^([a-zA-Z0-9_\-\.]+\.php)(\?[^#]*)?$/', $url_parse['path'])) {
+                $url = 'http://' . $url;
+            }
         }
 
-        if (\in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
-            $link = "<a href=\"$url\" class=\"postLink\">$url_name</a>";
-        } else {
-            $link = "<a href=\"$url\" class=\"postLink\" rel=\"nofollow\">$url_name</a>";
-        }
-
-        return $link;
+        return $this->nofollow_url($url, $url_name);
     }
 
     /**
@@ -323,19 +322,11 @@ class BBCode
      */
     private function make_url_clickable_callback(array $m): string
     {
-        global $bb_cfg;
-
         $max_len = 70;
         $href = $m[1];
-        $name = (mb_strlen($href, 'UTF-8') > $max_len) ? mb_substr($href, 0, $max_len - 19) . '...' . mb_substr($href, -16) : $href;
+        $name = (mb_strlen($href, DEFAULT_CHARSET) > $max_len) ? mb_substr($href, 0, $max_len - 19) . '...' . mb_substr($href, -16) : $href;
 
-        if (\in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
-            $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
-        } else {
-            $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";
-        }
-
-        return $link;
+        return $this->nofollow_url($href, $name);
     }
 
     /**
@@ -349,14 +340,16 @@ class BBCode
     {
         global $datastore;
 
-        if (null === $this->smilies) {
-            if (!$this->smilies = $datastore->get('smile_replacements') and !$datastore->has('smile_replacements')) {
-                $datastore->update('smile_replacements');
-                $this->smilies = $datastore->get('smile_replacements');
-            }
-        }
+        $this->smilies = $datastore->get('smile_replacements');
 
-        if ($this->smilies) {
+        if (!empty($this->smilies)) {
+            if (defined('IN_ADMIN')) {
+                foreach ($this->smilies['repl'] as &$smile) {
+                    $smile = preg_replace('/src="([^"]+)"/', 'src="./../$1"', $smile);
+                }
+                unset($smile);
+            }
+
             /** @noinspection NestedPositiveIfStatementsInspection */
             if ($parsed_text = preg_replace($this->smilies['orig'], $this->smilies['repl'], $text)) {
                 return $parsed_text;
@@ -389,5 +382,23 @@ class BBCode
     private function tidy(string $text): string
     {
         return tidy_repair_string($text, $this->tidy_cfg, 'utf8');
+    }
+
+    /**
+     * Nofollow links handling
+     *
+     * @param string $href
+     * @param string $name
+     * @return string
+     */
+    private function nofollow_url(string $href, string $name): string
+    {
+        if (\in_array(parse_url($href, PHP_URL_HOST), config()->get('nofollow.allowed_url')) || config()->get('nofollow.disabled')) {
+            $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
+        } else {
+            $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";
+        }
+
+        return $link;
     }
 }

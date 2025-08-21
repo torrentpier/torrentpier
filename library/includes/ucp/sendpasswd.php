@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -13,11 +13,11 @@ if (!defined('BB_ROOT')) {
 
 set_die_append_msg();
 
-if (!$bb_cfg['emailer']['enabled']) {
+if (!config()->get('emailer.enabled')) {
     bb_die($lang['EMAILER_DISABLED']);
 }
 
-$need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN && !$bb_cfg['captcha']['disabled']);
+$need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN && !config()->get('captcha.disabled'));
 
 if (isset($_POST['submit'])) {
     if ($need_captcha && !bb_captcha('check')) {

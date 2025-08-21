@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -69,44 +69,44 @@ $order_by = '';
 if ($view === 'username') {
     switch ($mode) {
         case 'username':
-            $order_by = 'ORDER BY u.username ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
+            $order_by = 'ORDER BY u.username ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
             break;
         case 'attachments':
-            $order_by = 'ORDER BY total_attachments ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
+            $order_by = 'ORDER BY total_attachments ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
             break;
         case 'filesize':
-            $order_by = 'ORDER BY total_size ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
+            $order_by = 'ORDER BY total_size ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
             break;
         default:
             $mode = 'attachments';
             $sort_order = 'DESC';
-            $order_by = 'ORDER BY total_attachments ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
+            $order_by = 'ORDER BY total_attachments ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
             break;
     }
 } elseif ($view === 'attachments') {
     switch ($mode) {
         case 'real_filename':
-            $order_by = 'ORDER BY a.real_filename ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
+            $order_by = 'ORDER BY a.real_filename ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
             break;
         case 'comment':
-            $order_by = 'ORDER BY a.comment ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
+            $order_by = 'ORDER BY a.comment ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
             break;
         case 'extension':
-            $order_by = 'ORDER BY a.extension ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
+            $order_by = 'ORDER BY a.extension ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
             break;
         case 'filesize':
-            $order_by = 'ORDER BY a.filesize ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
+            $order_by = 'ORDER BY a.filesize ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
             break;
         case 'downloads':
-            $order_by = 'ORDER BY a.download_count ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
+            $order_by = 'ORDER BY a.download_count ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
             break;
         case 'post_time':
-            $order_by = 'ORDER BY a.filetime ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
+            $order_by = 'ORDER BY a.filetime ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
             break;
         default:
             $mode = 'a.real_filename';
             $sort_order = 'ASC';
-            $order_by = 'ORDER BY a.real_filename ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
+            $order_by = 'ORDER BY a.real_filename ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
             break;
     }
 }
@@ -422,11 +422,7 @@ if ($view === 'attachments') {
 
                     $row = DB()->sql_fetchrow($result);
                     DB()->sql_freeresult($result);
-                    $post_title = $row['topic_title'];
-
-                    if (strlen($post_title) > 32) {
-                        $post_title = str_short($post_title, 30);
-                    }
+                    $post_title = str_short($row['topic_title'], 30);
 
                     $view_topic = BB_ROOT . POST_URL . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id'];
 
@@ -474,8 +470,8 @@ if ($view === 'attachments') {
 }
 
 // Generate Pagination
-if ($do_pagination && $total_rows > $bb_cfg['topics_per_page']) {
-    generate_pagination('admin_attach_cp.php?view=' . $view . '&amp;mode=' . $mode . '&amp;order=' . $sort_order . '&amp;uid=' . $uid, $total_rows, $bb_cfg['topics_per_page'], $start);
+if ($do_pagination && $total_rows > config()->get('topics_per_page')) {
+    generate_pagination('admin_attach_cp.php?view=' . $view . '&amp;mode=' . $mode . '&amp;order=' . $sort_order . '&amp;uid=' . $uid, $total_rows, config()->get('topics_per_page'), $start);
 }
 
 print_page('admin_attach_cp.tpl', 'admin');

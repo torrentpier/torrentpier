@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -63,6 +63,9 @@ $lang['SELECT_ACTION'] = 'בחר פעולה';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'לא ידוע';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+$lang['NO_ITEMS'] = 'There seems to be no data here...';
+$lang['PLEASE_TRY_AGAIN'] = 'Please try again after few seconds...';
 
 $lang['NEXT_PAGE'] = 'הבא';
 $lang['PREVIOUS_PAGE'] = 'הקודם';
@@ -376,6 +379,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'הבעה גבול של %s הבעה חריגה.'
 
 $lang['ATTACH_SIGNATURE'] = 'לצרף חתימה (חתימות ניתן לשנות פרופיל)';
 $lang['NOTIFY'] = 'הודע לי כאשר תגובות';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'ההודעה שלך יוזנו בהצלחה.';
 $lang['EDITED'] = 'את ההודעה השתנה';
@@ -983,6 +987,7 @@ $lang['DATETIME']['DEC'] = 'דצמבר';
 
 // Country selector
 $lang['COUNTRY'] = 'Country';
+$lang['SET_OWN_COUNTRY'] = 'Set own country (Manually)';
 $lang['COUNTRIES'] = [
     0 => 'לא בחר',
     'AD' => 'Andorra',
@@ -1267,6 +1272,24 @@ $lang['FILESIZE'] = 'גודל קובץ';
 $lang['VIEWED'] = 'צפו';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'הסיומת \'%s\' הייתה מנוטרלת על-ידי לוח admin, לכן קובץ מצורף זה לא מוצג.'; // used in Posts and PM's, replace %s with mime type
 
+// Viewtopic -> Display of Attachments -> TorrServer integration
+$lang['STREAM'] = 'Stream';
+$lang['RESOLUTION'] = 'Resolution: <b>%s</b>';
+$lang['CHANNELS'] = 'Channels: <b>%s</b>';
+$lang['CHANNELS_LAYOUT'] = 'Channels layout: <b>%s</b>';
+$lang['BITRATE'] = 'Bitrate: <b>%s</b>';
+$lang['SAMPLE_RATE'] = 'Sample rate: <b>%s</b>';
+$lang['AUDIO_TRACK'] = 'Audio track information (%d):';
+$lang['AUDIO_CODEC'] = 'Audio codec: <b title="%s">%s</b>';
+$lang['VIDEO_CODEC'] = 'Video codec: <b title="%s">%s</b>';
+$lang['SHOW_MORE_INFORMATION_FILE'] = 'Show more information about file';
+$lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOT_SUPPORTED'] = 'This file cannot be played in the browser...';
+$lang['M3U_FFPROBE_NO_DATA'] = 'It seems ffprobe will not be able to return data about this codec...';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
+
 $lang['ATTACHMENT'] = 'קבצים מצורפים';
 $lang['ATTACHMENT_THUMBNAIL'] = 'התמונה הממוזערת של הקובץ המצורף';
 
@@ -1347,11 +1370,17 @@ $lang['BT_REG_FAIL'] = 'לא יכול לרשום סיקור על טראקר';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'עוד סיקור עם אותו info_hash כבר <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
+$lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'הסר מ-tracker';
 $lang['BT_UNREGISTERED'] = 'סיקור לא רשומים';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1376,6 +1405,7 @@ $lang['SEEDING'] = 'זרע';
 $lang['LEECHING'] = 'עלוקה';
 $lang['IS_REGISTERED'] = 'רשום';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1412,6 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'הקלד את סיקור בהצלחה שינה';
 $lang['DEL_TORRENT'] = 'אתה בטוח שאתה רוצה למחוק את הטורנט?';
 $lang['DEL_MOVE_TORRENT'] = 'אתה בטוח שאתה רוצה למחוק ולהעביר את הנושא?';
 $lang['UNEXECUTED_RELEASE'] = 'יש לך צורה שחרור לפני יצירת תיקון חדש שלו מפותח!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'משנים את הסטטוס של הפצה - %s';
@@ -1446,6 +1477,7 @@ $lang['SET_SILVER_TORRENT'] = 'לעשות כסף';
 $lang['UNSET_SILVER_TORRENT'] = 'לשלול כסף';
 $lang['GOLD_STATUS'] = 'זהב סיקור! הורד התנועה אינו רואה!';
 $lang['SILVER_STATUS'] = 'כסף סיקור! הורד התנועה חלקית נחשב!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'חיפוש בפורומים';
@@ -1572,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'באפשרות זו רק עבור סופר מנ
 
 $lang['LOGS'] = 'נושא ההיסטוריה.';
 $lang['FORUM_LOGS'] = 'פורום היסטוריה';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'מעצב';
 
 $lang['LAST_IP'] = 'אתמול ה-IP:';
@@ -1693,7 +1725,6 @@ $lang['NOTICE'] = '!שימו לב!';
 $lang['COPY'] = 'האתר אינו נותן גרסאות אלקטרוניות של מוצרים, ולא עוסקת רק בתחום איסוף, קיטלוג של הפניות שנשלחו שפורסם ב " פורום על ידי הקוראים שלנו. אם אתה בעליו החוקיים של כל חומר שהוגש ואני לא רוצה את זה את התייחסות זה היה בקטלוג שלנו, צור איתנו קשר ואנו מיד להסיר אותה. קבצים עבור exchange על הגשש ניתנים על-ידי המשתמשים באתר, והממשל אינו נושא באחריות עבור תחזוקה שלהם. את הבקשה כדי לא למלא את הקבצים מוגנים על ידי זכויות יוצרים, וכן קבצים של חוקי תחזוקה!';
 
 // FILELIST
-$lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'התמוטטות directory';
 $lang['EXPAND'] = 'הרחב';
 $lang['SWITCH'] = 'מתג';
@@ -1811,8 +1842,10 @@ $lang['BOLD'] = 'טקסט מודגש: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'טקסט נטוי: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'קו תחתון טקסט: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'טקסט חוצה: [s]text[/s] (Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'ציטוט טקסט: [quote]text[/quote] (Ctrl+Q)';
@@ -1848,6 +1881,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'הפסיקה';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'מראה נתונים <i><b>only הנוכחי session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'סיכת הפוסט הראשון';
@@ -1910,6 +1946,32 @@ $lang['TRACKER_CONFIG'] = 'גשש הגדרות';
 $lang['RELEASE_TEMPLATES'] = 'שחרור תבניות';
 $lang['ACTIONS_LOG'] = 'דו " ח על פעולה';
 
+// Migrations
+$lang['MIGRATIONS_STATUS']  = 'Database Migration Status';
+$lang['MIGRATIONS_DATABASE_NAME']  = 'Database Name';
+$lang['MIGRATIONS_DATABASE_TOTAL']  = 'Total Tables';
+$lang['MIGRATIONS_DATABASE_SIZE']  = 'Database Size';
+$lang['MIGRATIONS_DATABASE_INFO']  = 'Database Information';
+$lang['MIGRATIONS_SYSTEM']  = 'Migration System';
+$lang['MIGRATIONS_NEEDS_SETUP']  = 'Needs Setup';
+$lang['MIGRATIONS_ACTIVE']  = 'פעיל';
+$lang['MIGRATIONS_NOT_INITIALIZED']  = 'Not Initialized';
+$lang['MIGRATIONS_UP_TO_DATE']  = 'All up to date';
+$lang['MIGRATIONS_PENDING_COUNT']  = 'pending';
+$lang['MIGRATIONS_APPLIED']  = 'Applied Migrations';
+$lang['MIGRATIONS_PENDING']  = 'Pending Migrations';
+$lang['MIGRATIONS_VERSION']  = 'Version';
+$lang['MIGRATIONS_NAME']  = 'Migration Name';
+$lang['MIGRATIONS_FILE']  = 'Migration File';
+$lang['MIGRATIONS_APPLIED_AT']  = 'Applied At';
+$lang['MIGRATIONS_COMPLETED_AT']  = 'Completed At';
+$lang['MIGRATIONS_CURRENT_VERSION']  = 'Current Version';
+$lang['MIGRATIONS_NOT_APPLIED']  = 'No migrations applied';
+$lang['MIGRATIONS_INSTRUCTIONS']  = 'Instructions';
+$lang['MIGRATIONS_SETUP_STATUS']  = 'Setup Status';
+$lang['MIGRATIONS_SETUP_GUIDE']  = 'See setup guide below';
+$lang['MIGRATIONS_ACTION_REQUIRED']  = 'Action Required';
+
 // Index
 $lang['MAIN_INDEX'] = 'פורום מדד';
 $lang['FORUM_STATS'] = 'פורום סטטיסטיקה';
@@ -1951,6 +2013,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'הודעות המשתמש לספור �
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'הצגת רשימת משתמשים באינטרנט';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'בחר משתמש';
@@ -2290,14 +2357,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'האסורות שם המשתמש נוספה בה
 $lang['DISALLOWED_ALREADY'] = 'השם שהזנת לא יכול להיות אסורות. זה גם כבר קיים ברשימה, קיימת המילה צנזור הרשימה, או התאמת שם משתמש קיים.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'לחץ על %sHere%s לחזור לאסור את שם המשתמש ניהול';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'גרסה מידע';
@@ -2787,6 +2846,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'נושא:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'פוסט:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
@@ -2963,12 +3025,8 @@ $lang['SITEMAP_ADMIN'] = 'לנהל את ה-sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap יצר';
 $lang['SITEMAP_AVAILABLE'] = 'והוא זמין ב';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap הוא עדיין לא נוצר';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'הודעה של מנוע החיפוש';
-$lang['SITEMAP_SENT'] = 'שלח הושלם';
-$lang['SITEMAP_ERROR'] = 'שולח שגיאה';
 $lang['SITEMAP_OPTIONS'] = 'אפשרויות';
 $lang['SITEMAP_CREATE'] = 'צור / עדכן את ה-sitemap';
-$lang['SITEMAP_NOTIFY'] = 'ליידע את מנועי החיפוש על גרסה חדשה של ה-sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'מה לעשות הלאה?';
 $lang['SITEMAP_GOOGLE_1'] = 'לרשום את האתר שלך ב <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> באמצעות חשבון Google שלך.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> של האתר נרשמת.';
@@ -2996,6 +3054,8 @@ $lang['HASH_NOT_FOUND'] = 'שחרור עם חשיש %s לא מצאתי';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'בדף זה, אתה יכול לציין את הטקסט של הכללים הבסיסיים של משאב זה מוצג בפני המשתמשים.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'משתמשים לא-פעילים ב-30 ימים',
@@ -3050,7 +3110,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'בדוק שאתה לא רובוט';
 $lang['CAPTCHA_WRONG'] = 'אתה יכול לאשר שאתה לא רובוט';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha לא להיות לגמרי configured</h2><p>if לא כבר יצר את המפתחות, אתה יכול לעשות את זה על <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After לך ליצור את המפתחות, אתה צריך לשים אותם על הקובץ בספריה/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

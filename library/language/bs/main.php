@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -63,6 +63,9 @@ $lang['SELECT_ACTION'] = 'Odaberite akciju';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Nepoznati';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+$lang['NO_ITEMS'] = 'There seems to be no data here...';
+$lang['PLEASE_TRY_AGAIN'] = 'Please try again after few seconds...';
 
 $lang['NEXT_PAGE'] = 'Sljedeći';
 $lang['PREVIOUS_PAGE'] = 'Prethodni';
@@ -376,6 +379,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Praktički limit od %s smajlica premašio.';
 
 $lang['ATTACH_SIGNATURE'] = 'Zakači potpis (potpisi se može promijeniti u profil)';
 $lang['NOTIFY'] = 'Obavesti me kad na odgovara';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Tvoja poruka je uspješno ušao.';
 $lang['EDITED'] = 'Poruka je promenjena';
@@ -983,6 +987,7 @@ $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
 $lang['COUNTRY'] = 'Country';
+$lang['SET_OWN_COUNTRY'] = 'Set own country (Manually)';
 $lang['COUNTRIES'] = [
     0 => 'Ne odaberite',
     'AD' => 'Andorra',
@@ -1267,6 +1272,24 @@ $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Smatra';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Produžni \'%s\' je deaktivirana od odbor admin, stoga ovo Prilog nije prikazao.'; // used in Posts and PM's, replace %s with mime type
 
+// Viewtopic -> Display of Attachments -> TorrServer integration
+$lang['STREAM'] = 'Stream';
+$lang['RESOLUTION'] = 'Resolution: <b>%s</b>';
+$lang['CHANNELS'] = 'Channels: <b>%s</b>';
+$lang['CHANNELS_LAYOUT'] = 'Channels layout: <b>%s</b>';
+$lang['BITRATE'] = 'Bitrate: <b>%s</b>';
+$lang['SAMPLE_RATE'] = 'Sample rate: <b>%s</b>';
+$lang['AUDIO_TRACK'] = 'Audio track information (%d):';
+$lang['AUDIO_CODEC'] = 'Audio codec: <b title="%s">%s</b>';
+$lang['VIDEO_CODEC'] = 'Video codec: <b title="%s">%s</b>';
+$lang['SHOW_MORE_INFORMATION_FILE'] = 'Show more information about file';
+$lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOT_SUPPORTED'] = 'This file cannot be played in the browser...';
+$lang['M3U_FFPROBE_NO_DATA'] = 'It seems ffprobe will not be able to return data about this codec...';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
+
 $lang['ATTACHMENT'] = 'Prilozi';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Nema Prilog';
 
@@ -1347,11 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Ne mogu registar bujicama na tragač';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Još bujicama sa isti info_hash već <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
+$lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Ukloni od tragač';
 $lang['BT_UNREGISTERED'] = 'Bujicama neprijavljeni';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1376,6 +1405,7 @@ $lang['SEEDING'] = 'Seme';
 $lang['LEECHING'] = 'Pijavica';
 $lang['IS_REGISTERED'] = 'Registriran';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1412,6 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tip potoka uspješno promijenio';
 $lang['DEL_TORRENT'] = 'Jesi li sigurna da želiš da izbrišete potoka?';
 $lang['DEL_MOVE_TORRENT'] = 'Jesi li sigurna da želiš da izbrišete i potez temu?';
 $lang['UNEXECUTED_RELEASE'] = 'Imaš bezobličan. oslobodi pre nego što stvarajući novu popraviti svoje unformed!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Mijenja položaj distribucije - %s';
@@ -1446,6 +1477,7 @@ $lang['SET_SILVER_TORRENT'] = 'Napravi silver';
 $lang['UNSET_SILVER_TORRENT'] = 'Uništiti silver';
 $lang['GOLD_STATUS'] = 'ZLATO POTOKA! PREUZIMANJE SAOBRAĆAJ NE SMATRAJ!';
 $lang['SILVER_STATUS'] = 'SILVER POTOKA! PREUZIMANJE SAOBRAĆAJ DJELOMIČNO SMATRA!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Potrazi u Forumima';
@@ -1572,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Ovo jedina opcija za super colorada';
 
 $lang['LOGS'] = 'Tema istoriju';
 $lang['FORUM_LOGS'] = 'Povijest Forum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Dizajner';
 
 $lang['LAST_IP'] = 'Prošle IP:';
@@ -1693,7 +1725,6 @@ $lang['NOTICE'] = '!PAŽNJA!';
 $lang['COPY'] = 'Sajt ne daje elektronska verzija proizvodi, i zarucio samo u sakupljanju i kataloški od preporuke poslao i objavio u forum za našim čitateljima. Ako si zakonski vlasnik bilo podnijela materijal i ne želim da referentni da je to bilo u našoj katalog, kontaktirajte nas, a mi ćemo se odmah uklone. Dosjee za razmjenu na tragač su dobili od korisnika sajt, i uprave ne snositi odgovornost za svoje održavanje. Zahtjev da ne napuni u dosjeima zaštićen autorskih prava, i također fajlove od ilegalne održavanje!';
 
 // FILELIST
-$lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Kolaps direktorij';
 $lang['EXPAND'] = 'Proširiti';
 $lang['SWITCH'] = 'Prekidač';
@@ -1811,8 +1842,10 @@ $lang['BOLD'] = 'Hrabar tekst: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Italic tekst: [i]text[/i] (Ctrl+sam)';
 $lang['UNDERLINE'] = 'Podvući tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Istakni tekst: [s]text[/s] (Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citiram tekst: [quote]text[/quote] (Ctrl+Q)';
@@ -1848,6 +1881,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'prestao';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'pokazuje podatke <i><b>only za trenutni session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin prvi položaj';
@@ -1910,6 +1946,32 @@ $lang['TRACKER_CONFIG'] = 'Tragač postavke';
 $lang['RELEASE_TEMPLATES'] = 'Oslobodi Turskoj';
 $lang['ACTIONS_LOG'] = 'Izvještaj o akciju';
 
+// Migrations
+$lang['MIGRATIONS_STATUS']  = 'Database Migration Status';
+$lang['MIGRATIONS_DATABASE_NAME']  = 'Database Name';
+$lang['MIGRATIONS_DATABASE_TOTAL']  = 'Total Tables';
+$lang['MIGRATIONS_DATABASE_SIZE']  = 'Database Size';
+$lang['MIGRATIONS_DATABASE_INFO']  = 'Database Information';
+$lang['MIGRATIONS_SYSTEM']  = 'Migration System';
+$lang['MIGRATIONS_NEEDS_SETUP']  = 'Needs Setup';
+$lang['MIGRATIONS_ACTIVE']  = 'Aktivni';
+$lang['MIGRATIONS_NOT_INITIALIZED']  = 'Not Initialized';
+$lang['MIGRATIONS_UP_TO_DATE']  = 'All up to date';
+$lang['MIGRATIONS_PENDING_COUNT']  = 'pending';
+$lang['MIGRATIONS_APPLIED']  = 'Applied Migrations';
+$lang['MIGRATIONS_PENDING']  = 'Pending Migrations';
+$lang['MIGRATIONS_VERSION']  = 'Version';
+$lang['MIGRATIONS_NAME']  = 'Migration Name';
+$lang['MIGRATIONS_FILE']  = 'Migration File';
+$lang['MIGRATIONS_APPLIED_AT']  = 'Applied At';
+$lang['MIGRATIONS_COMPLETED_AT']  = 'Completed At';
+$lang['MIGRATIONS_CURRENT_VERSION']  = 'Current Version';
+$lang['MIGRATIONS_NOT_APPLIED']  = 'No migrations applied';
+$lang['MIGRATIONS_INSTRUCTIONS']  = 'Instructions';
+$lang['MIGRATIONS_SETUP_STATUS']  = 'Setup Status';
+$lang['MIGRATIONS_SETUP_GUIDE']  = 'See setup guide below';
+$lang['MIGRATIONS_ACTION_REQUIRED']  = 'Action Required';
+
 // Index
 $lang['MAIN_INDEX'] = 'Forum Indeks';
 $lang['FORUM_STATS'] = 'Forum Statistike';
@@ -1951,6 +2013,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Korisnik mjesta računati je sinhroniz
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Pokaži listu online korisnici';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Odaberite Korisnik';
@@ -2290,14 +2357,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'U dozvoljeno korisničko ime je dodato uspješno
 $lang['DISALLOWED_ALREADY'] = 'Ime ti je ušao nije mogao biti dozvoljeno. Ni već postoji na listi, postoji u riječ cenzora spisku, ili iste korisničko ime je poklon.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik %sHere%s da se vrati u Disallow korisničko ime Uprave';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Verziju Informacije';
@@ -2787,6 +2846,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Tema:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
@@ -2963,12 +3025,8 @@ $lang['SITEMAP_ADMIN'] = 'Snaći mapa sajta';
 $lang['SITEMAP_CREATED'] = 'Mapa sajta stvorio';
 $lang['SITEMAP_AVAILABLE'] = 'i dostupna je na';
 $lang['SITEMAP_NOT_CREATED'] = 'Mapa sajta nije još stvorio';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Obavijest o tražilice';
-$lang['SITEMAP_SENT'] = 'pošalji završio';
-$lang['SITEMAP_ERROR'] = 'šaljem greška';
 $lang['SITEMAP_OPTIONS'] = 'Opcija';
 $lang['SITEMAP_CREATE'] = 'Stvoriti / ažurirati mapa sajta';
-$lang['SITEMAP_NOTIFY'] = 'Obavesti pretraživača o nova verzija mapa sajta';
 $lang['SITEMAP_WHAT_NEXT'] = 'Šta sledeće da uradim?';
 $lang['SITEMAP_GOOGLE_1'] = 'Registra tvog sajta na <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> koristeći Google je tvoj račun.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> lokacije ste registrirani.';
@@ -2996,6 +3054,8 @@ $lang['HASH_NOT_FOUND'] = 'Oslobodi sa hašiš %s ne našao';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na ovoj stranici, možeš navesti poruku od osnovnih pravila resurs je prikazan korisnicima.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'neaktivni korisnici za 30 dana',
@@ -3050,7 +3110,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Provjeri da vi niste robot';
 $lang['CAPTCHA_WRONG'] = 'Ti nije mogao potvrditi da vi niste robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne bude u potpunosti configured</h2><p>if već nisi napravio ključeve, možeš ti to na <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After si stvaraju ključeve, moraš ih staviti u dosije biblioteci/putanju.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

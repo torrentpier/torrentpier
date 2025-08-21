@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -25,7 +25,7 @@ $lang['POSTS_SHORT'] = 'Vəzifə';
 $lang['POSTED'] = 'Göndərilib';
 $lang['USERNAME'] = 'İstifadəçi adı';
 $lang['PASSWORD'] = 'Parol';
-$lang['PASSWORD_SHOW_BTN'] = 'Show password';
+$lang['PASSWORD_SHOW_BTN'] = 'Şifrəni göstər';
 $lang['EMAIL'] = 'E-poçt';
 $lang['PM'] = 'ТЧ';
 $lang['AUTHOR'] = 'Müəllif';
@@ -60,9 +60,12 @@ $lang['ENABLED'] = 'Aktiv';
 $lang['DISABLED'] = 'Qaralar';
 $lang['ERROR'] = 'Səhv';
 $lang['SELECT_ACTION'] = 'Seçin fəaliyyət';
-$lang['CLEAR'] = 'Clear';
-$lang['MOVE_TO_TOP'] = 'Move to top';
+$lang['CLEAR'] = 'Təmizlə';
+$lang['MOVE_TO_TOP'] = 'Ən yuxarı daşı';
 $lang['UNKNOWN'] = 'Məlum deyil';
+$lang['COPY_TO_CLIPBOARD'] = 'Panoya surəti';
+$lang['NO_ITEMS'] = 'There seems to be no data here...';
+$lang['PLEASE_TRY_AGAIN'] = 'Please try again after few seconds...';
 
 $lang['NEXT_PAGE'] = 'Daha sonra';
 $lang['PREVIOUS_PAGE'] = 'Əvvəlki';
@@ -376,6 +379,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Limit ifadeler olan ifadeler %s keçib.';
 
 $lang['ATTACH_SIGNATURE'] = 'Birləşdirmək imza (dəyişmək mümkündürsə, profili)';
 $lang['NOTIFY'] = 'Məlumat zaman mənə cavab azn';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Mesaj idi uğurla tətbiq edir.';
 $lang['EDITED'] = 'Mesaj dəyişdirildi';
@@ -983,6 +987,7 @@ $lang['DATETIME']['DEC'] = 'Dekabr';
 
 // Country selector
 $lang['COUNTRY'] = 'Country';
+$lang['SET_OWN_COUNTRY'] = 'Set own country (Manually)';
 $lang['COUNTRIES'] = [
     0 => 'Heç bir seçim',
     'AD' => 'Andorra',
@@ -1267,6 +1272,24 @@ $lang['FILESIZE'] = 'Boy';
 $lang['VIEWED'] = 'Hesab';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Məsləhət \'%s\' idi qaralar inzibati komissiya, ona görə də bu qoyması göstərilir.'; // used in Posts and PM's, replace %s with mime type
 
+// Viewtopic -> Display of Attachments -> TorrServer integration
+$lang['STREAM'] = 'Stream';
+$lang['RESOLUTION'] = 'Resolution: <b>%s</b>';
+$lang['CHANNELS'] = 'Channels: <b>%s</b>';
+$lang['CHANNELS_LAYOUT'] = 'Channels layout: <b>%s</b>';
+$lang['BITRATE'] = 'Bitrate: <b>%s</b>';
+$lang['SAMPLE_RATE'] = 'Sample rate: <b>%s</b>';
+$lang['AUDIO_TRACK'] = 'Audio track information (%d):';
+$lang['AUDIO_CODEC'] = 'Audio codec: <b title="%s">%s</b>';
+$lang['VIDEO_CODEC'] = 'Video codec: <b title="%s">%s</b>';
+$lang['SHOW_MORE_INFORMATION_FILE'] = 'Show more information about file';
+$lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOT_SUPPORTED'] = 'This file cannot be played in the browser...';
+$lang['M3U_FFPROBE_NO_DATA'] = 'It seems ffprobe will not be able to return data about this codec...';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
+
 $lang['ATTACHMENT'] = 'Əlavələr';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Əlavə Eskiz';
 
@@ -1347,11 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Uğursuz qeydiyyatdan torrent azn tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Digər torrent ilə eyni info_hash artıq <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
+$lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Aradan qaldırılması tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent qeydiyyata alınmamış';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1376,6 +1405,7 @@ $lang['SEEDING'] = 'Toxum';
 $lang['LEECHING'] = 'Zəli';
 $lang['IS_REGISTERED'] = 'Qeydə';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1412,6 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Növü torrent uğurla dəyişdi';
 $lang['DEL_TORRENT'] = 'Siz əmin deyilsinizsə aradan qaldırılması torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Siz əmin deyilsinizsə aradan qaldırılması və hərəkət mövzu?';
 $lang['UNEXECUTED_RELEASE'] = 'Var бесформенные azad yaradılması əvvəl yeni Fix неоформленном!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Status paylanması - %s';
@@ -1449,6 +1480,7 @@ $lang['SET_SILVER_TORRENT'] = 'Gümüş';
 $lang['UNSET_SILVER_TORRENT'] = 'Переигрывать gümüş';
 $lang['GOLD_STATUS'] = 'QIZIL TORRENT! DOWNLOAD TRAFİK HESAB ETMİR!';
 $lang['SILVER_STATUS'] = 'GÜMÜŞ TORRENT! DOWNLOAD TRAFİK QİSMƏN BAXILIR!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Axtarış forumlarda';
@@ -1575,7 +1607,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Bu variant üçün yalnız super admins';
 
 $lang['LOGS'] = 'Tarixi mövzular';
 $lang['FORUM_LOGS'] = 'Forum Tarixi';
-$lang['AUTOCLEAN'] = 'Автоочистка:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Dizayner';
 
 $lang['LAST_IP'] = 'Son İP:';
@@ -1696,7 +1728,6 @@ $lang['NOTICE'] = '!Diqqət!';
 $lang['COPY'] = 'Veb vermir elektron versiyası məhsulları, məşğul olur və yalnız коллекционированием və каталогизацией bing, göndərilən və çap olunan forumda oxucu. Əgər siz bir və ya məlumatlara hüququ hər hansı təqdim material və istədiyiniz üçün link ona idi ki, bizim kataloqda, bizimlə əlaqə saxlayın və biz dərhal rədd et. Faylları mübadilə tracker təqdim istifadəçiləri, sayt və administrasiyası məsuliyyət daşımır onların məzmunu. Xahiş edirik заливать faylları, qorunan müəllif hüquqları, eləcə də faylları qeyri-leqal məzmunlu!';
 
 // FILELIST
-$lang['FILELIST'] = 'Siyahısı';
 $lang['COLLAPSE'] = 'Kataloq dağılmasından';
 $lang['EXPAND'] = 'Yerləşdirmək';
 $lang['SWITCH'] = 'Keçid';
@@ -1814,8 +1845,10 @@ $lang['BOLD'] = 'Qalın mətn: [b]text[/b] (əsas birləşməsi Ctrl+B)';
 $lang['ITALIC'] = 'Курсивный mətn: [i]text[/i] (əsas birləşməsi Ctrl+ı)';
 $lang['UNDERLINE'] = 'Qeyd mətni: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый mətn: [s]text[/s] (Ctrl+c)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Sitat mətn: [quote]text[/quote] (əsas birləşməsi Ctrl+M)';
@@ -1851,6 +1884,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'dayandırdı';
 $lang['DL_UPD'] = 'упд: ';
 $lang['DL_INFO'] = 'məlumatları göstərir <i><b>only üçün cari session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Çapa ilk post';
@@ -1913,6 +1949,32 @@ $lang['TRACKER_CONFIG'] = 'Parametrlər tracker';
 $lang['RELEASE_TEMPLATES'] = 'Şablonlar Buraxılması';
 $lang['ACTIONS_LOG'] = 'Hesabat hərəkətləri';
 
+// Migrations
+$lang['MIGRATIONS_STATUS']  = 'Database Migration Status';
+$lang['MIGRATIONS_DATABASE_NAME']  = 'Database Name';
+$lang['MIGRATIONS_DATABASE_TOTAL']  = 'Total Tables';
+$lang['MIGRATIONS_DATABASE_SIZE']  = 'Database Size';
+$lang['MIGRATIONS_DATABASE_INFO']  = 'Database Information';
+$lang['MIGRATIONS_SYSTEM']  = 'Migration System';
+$lang['MIGRATIONS_NEEDS_SETUP']  = 'Needs Setup';
+$lang['MIGRATIONS_ACTIVE']  = 'Aktiv';
+$lang['MIGRATIONS_NOT_INITIALIZED']  = 'Not Initialized';
+$lang['MIGRATIONS_UP_TO_DATE']  = 'All up to date';
+$lang['MIGRATIONS_PENDING_COUNT']  = 'pending';
+$lang['MIGRATIONS_APPLIED']  = 'Applied Migrations';
+$lang['MIGRATIONS_PENDING']  = 'Pending Migrations';
+$lang['MIGRATIONS_VERSION']  = 'Version';
+$lang['MIGRATIONS_NAME']  = 'Migration Name';
+$lang['MIGRATIONS_FILE']  = 'Migration File';
+$lang['MIGRATIONS_APPLIED_AT']  = 'Applied At';
+$lang['MIGRATIONS_COMPLETED_AT']  = 'Completed At';
+$lang['MIGRATIONS_CURRENT_VERSION']  = 'Current Version';
+$lang['MIGRATIONS_NOT_APPLIED']  = 'No migrations applied';
+$lang['MIGRATIONS_INSTRUCTIONS']  = 'Instructions';
+$lang['MIGRATIONS_SETUP_STATUS']  = 'Setup Status';
+$lang['MIGRATIONS_SETUP_GUIDE']  = 'See setup guide below';
+$lang['MIGRATIONS_ACTION_REQUIRED']  = 'Action Required';
+
 // Index
 $lang['MAIN_INDEX'] = 'İndeksi Forum';
 $lang['FORUM_STATS'] = 'Statistika Forum';
@@ -1954,6 +2016,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Mesaj istifadəçi qraf idi sinxroniza
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Siyahı online istifadəçilər';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Seçin istifadəçi';
@@ -2293,14 +2360,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Неодобренные istifadəçi adı idi u
 $lang['DISALLOWED_ALREADY'] = 'Təqdim adı olunmasından imtina edilə bilməz. Bu və ya artıq mövcud siyahıda siyahısında iştirak edir sözü цензор və ya müvafiq adına istifadəçi mövcuddur.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Basın %sHere%s qaytarmaq qadağan Administrasiyası istifadəçi Adı';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Məlumat Versiyası';
@@ -2790,6 +2849,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Mövzu:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Vəzifə:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
@@ -2967,12 +3029,8 @@ $lang['SITEMAP_ADMIN'] = 'İdarə saytın Xəritəsi';
 $lang['SITEMAP_CREATED'] = 'Saytın xəritəsi yaradılmışdır';
 $lang['SITEMAP_AVAILABLE'] = 'və mövcud';
 $lang['SITEMAP_NOT_CREATED'] = 'Saytın xəritəsi hələ yaradılıb';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Xəbərdarlıq axtarış motorları';
-$lang['SITEMAP_SENT'] = 'göndər dolu';
-$lang['SITEMAP_ERROR'] = 'səhv göndərilməsi';
 $lang['SITEMAP_OPTIONS'] = 'Variantlar';
 $lang['SITEMAP_CREATE'] = 'Yaradılması və / və saytın yenilənməsi';
-$lang['SITEMAP_NOTIFY'] = 'Məlumat axtarış sisteminin yeni versiyası haqqında sayt';
 $lang['SITEMAP_WHAT_NEXT'] = 'Nə etməli?';
 $lang['SITEMAP_GOOGLE_1'] = 'Qeydiyyatdan sizin sayta <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> köməyi ilə haqq-hesab Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> siz sayta qeydiyyatdan keçmişdir.';
@@ -3000,6 +3058,8 @@ $lang['HASH_NOT_FOUND'] = 'Məsələ ilə hash %s tapılmadı';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Bu səhifədə verə bilərsiniz mətn əsas qaydaları resurs göstərilir istifadəçilər üçün.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'passiv istifadəçiləri 30 gün müddətində',
@@ -3054,7 +3114,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Əmin olun ki, Siz robot deyil';
 $lang['CAPTCHA_WRONG'] = 'Ola bilər ki, təsdiq Siz robot deyil';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha olmadan tam configured</h2><p>if siz hələ сгенерировал düymələri, bunu edə bilərsiniz azn <a href="https://www.google.com/recaptcha/admin">https://ВСП.google.com/рекапчу/admin</a>.<br />After siz генерируете düymələri, lazımdır onları qoymaq fayl Library/onları.PHP.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

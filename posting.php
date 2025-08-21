@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -221,7 +221,7 @@ if (!$is_auth[$is_auth_type]) {
 }
 
 if ($mode == 'new_rel') {
-    if ($tor_status = implode(',', $bb_cfg['tor_cannot_new'])) {
+    if ($tor_status = implode(',', config()->get('tor_cannot_new'))) {
         $sql = DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
 			FROM " . BB_BT_TORRENTS . " tor, " . BB_TOPICS . " t
 			WHERE poster_id = {$userdata['user_id']}
@@ -232,7 +232,7 @@ if ($mode == 'new_rel') {
 
         $topics = '';
         foreach ($sql as $row) {
-            $topics .= $bb_cfg['tor_icons'][$row['tor_status']] . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
+            $topics .= config()->get('tor_icons')[$row['tor_status']] . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
         }
         if ($topics && !(IS_SUPER_ADMIN && !empty($_REQUEST['edit_tpl']))) {
             bb_die($topics . $lang['UNEXECUTED_RELEASE']);
@@ -243,14 +243,18 @@ if ($mode == 'new_rel') {
 }
 
 // Disallowed release editing with a certain status
-if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $post_data['first_post'] && !IS_AM) {
-    if ($tor_status = DB()->fetch_row("SELECT tor_status FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id AND forum_id = $forum_id AND tor_status IN(" . implode(',', $bb_cfg['tor_cannot_edit']) . ") LIMIT 1")) {
-        bb_die($lang['NOT_EDIT_TOR_STATUS'] . ':&nbsp;<span title="' . $lang['TOR_STATUS_NAME'][$tor_status['tor_status']] . '">' . $bb_cfg['tor_icons'][$tor_status['tor_status']] . '&nbsp;' . $lang['TOR_STATUS_NAME'][$tor_status['tor_status']] . '</span>.');
+if (!empty(config()->get('tor_cannot_edit')) && $post_info['allow_reg_tracker'] && $post_data['first_post'] && !IS_AM) {
+    if ($tor_status = DB()->fetch_row("SELECT tor_status FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id AND forum_id = $forum_id AND tor_status IN(" . implode(',', config()->get('tor_cannot_edit')) . ") LIMIT 1")) {
+        bb_die($lang['NOT_EDIT_TOR_STATUS'] . ':&nbsp;<span title="' . $lang['TOR_STATUS_NAME'][$tor_status['tor_status']] . '">' . config()->get('tor_icons')[$tor_status['tor_status']] . '&nbsp;' . $lang['TOR_STATUS_NAME'][$tor_status['tor_status']] . '</span>.');
     }
 }
 
-// Notify
+// Notify & Allow robots indexing
+$robots_indexing = $post_info['topic_allow_robots'] ?? true;
 if ($submit || $refresh) {
+    if (IS_AM) {
+        $robots_indexing = !empty($_POST['robots']);
+    }
     $notify_user = (int)!empty($_POST['notify']);
 } else {
     $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
@@ -264,7 +268,8 @@ $update_post_time = !empty($_POST['update_post_time']);
 
 execute_posting_attachment_handling();
 
-// если за время пока вы писали ответ, в топике появились новые сообщения, перед тем как ваше сообщение будет отправлено, выводится предупреждение с обзором этих сообщений
+// If while you were writing a response, new messages appeared in the topic,
+// before your message is sent, a warning is displayed with an overview of these messages
 $topic_has_new_posts = false;
 
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && isset($_COOKIE[COOKIE_TOPIC])) {
@@ -276,7 +281,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 				AND pt.post_id = p.post_id
 				AND p.post_time > $topic_last_read
 			ORDER BY p.post_time
-			LIMIT " . $bb_cfg['posts_per_page'];
+			LIMIT " . config()->get('posts_per_page');
 
         if ($rowset = DB()->fetch_rowset($sql)) {
             $topic_has_new_posts = true;
@@ -286,7 +291,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
                     'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
                     'POSTER' => profile_url($row),
                     'POSTER_NAME_JS' => addslashes($row['username']),
-                    'POST_DATE' => '<a class="small" href="' . POST_URL . $row['post_id'] . '#' . $row['post_id'] . '" title="' . $lang['POST_LINK'] . '">' . bb_date($row['post_time'], $bb_cfg['post_date_format']) . '</a>',
+                    'POST_DATE' => '<a class="small" href="' . POST_URL . $row['post_id'] . '#' . $row['post_id'] . '" title="' . $lang['POST_LINK'] . '">' . bb_date($row['post_time'], config()->get('post_date_format')) . '</a>',
                     'MESSAGE' => get_parsed_post($row)
                 ]);
             }
@@ -334,7 +339,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             if (!$error_msg) {
                 $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
 
-                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig);
+                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing);
 
                 $post_url = POST_URL . "$post_id#$post_id";
                 $post_msg = ($mode == 'editpost') ? $lang['EDITED'] : $lang['STORED'];
@@ -369,10 +374,10 @@ if (($delete || $mode == 'delete') && !$confirm) {
             set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
         }
 
-        if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg) {
+        if (defined('TORRENT_ATTACH_ID') && config()->get('bt_newtopic_auto_reg') && !$error_msg) {
             if (!DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
-                if ($bb_cfg['premod']) {
-                    // Получение списка id форумов начиная с parent
+                if (config()->get('premod')) {
+                    // Getting a list of forum ids starting with "parent"
                     $forum_parent = $forum_id;
                     if ($post_info['forum_parent']) {
                         $forum_parent = $post_info['forum_parent'];
@@ -386,7 +391,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
                     }
                     $sub_forums[] = $forum_id;
                     $sub_forums = implode(',', $sub_forums);
-                    // Подсчет проверенных релизов в форумах раздела
+                    // Counting verified releases in section forums
                     $count_checked_releases = DB()->fetch_row("
 						SELECT COUNT(*) AS checked_releases
 						FROM " . BB_BT_TORRENTS . "
@@ -414,7 +419,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
 				<div class="warnColor1">
 					<b>' . $lang['LOCKED_WARN'] . '</b>
 				</div>
-				<br /><hr /><br />
+				<br /><hr/><br />
 			';
             $return_message = $locked_warn . $return_message;
         }
@@ -463,12 +468,12 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
             $message = '[quote="' . $quote_username . '"][qpost=' . $post_info['post_id'] . ']' . $message . '[/quote]';
 
             // hide user passkey
-            $message = preg_replace('#(?<=[\?&;]' . $bb_cfg['passkey_key'] . '=)[a-zA-Z0-9]#', 'passkey', $message);
+            $message = preg_replace('#(?<=[\?&;]' . config()->get('passkey_key') . '=)[a-zA-Z0-9]#', 'passkey', $message);
             // hide sid
             $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
 
-            $subject = $wordCensor->censorString($subject);
-            $message = $wordCensor->censorString($message);
+            $subject = censor()->censorString($subject);
+            $message = censor()->censorString($message);
 
             if (!preg_match('/^Re:/', $subject) && !empty($subject)) {
                 $subject = 'Re: ' . $subject;
@@ -496,9 +501,14 @@ if (!IS_GUEST) {
     }
 }
 
-// Topic type selection
 $topic_type_toggle = '';
 if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
+    // Allow robots indexing
+    if (IS_AM) {
+        $template->assign_var('SHOW_ROBOTS_CHECKBOX');
+    }
+
+    // Topic type selection
     $template->assign_block_vars('switch_type_toggle', []);
 
     if ($is_auth['auth_sticky']) {
@@ -608,16 +618,15 @@ $template->assign_vars([
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
 
     'USERNAME' => @$username,
-    'CAPTCHA_HTML' => (IS_GUEST && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',
+    'CAPTCHA_HTML' => (IS_GUEST && !config()->get('captcha.disabled')) ? bb_captcha('get') : '',
     'SUBJECT' => $subject,
     'MESSAGE' => $message,
 
     'POSTER_RGROUPS' => !empty($poster_rgroups) ? $poster_rgroups : '',
-    'ATTACH_RG_SIG' => ($switch_rg_sig) ?: false,
+    'ATTACH_RG_SIG' => $switch_rg_sig ?: false,
 
-    'U_VIEWTOPIC' => ($mode == 'reply') ? TOPIC_URL . "$topic_id&amp;postorder=desc" : '',
-
-    'S_NOTIFY_CHECKED' => ($notify_user) ? 'checked' : '',
+    'S_NOTIFY_CHECKED' => $notify_user ? 'checked' : '',
+    'S_ROBOTS_CHECKED' => $robots_indexing ? 'checked' : '',
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,

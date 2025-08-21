@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -16,7 +16,7 @@ if (defined('PAGE_HEADER_SENT')) {
 }
 
 // Parse and show the overall page header
-global $page_cfg, $userdata, $user, $ads, $bb_cfg, $template, $lang, $images;
+global $page_cfg, $userdata, $user, $ads, $template, $lang, $images;
 
 $logged_in = (int)!empty($userdata['session_logged_in']);
 
@@ -52,7 +52,7 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
         'TOTAL_USERS_ONLINE' => ${$online_list}['stat'],
         'LOGGED_IN_USER_LIST' => ${$online_list}['userlist'],
         'USERS_ONLINE_COUNTS' => ${$online_list}['cnt'],
-        'RECORD_USERS' => sprintf($lang['RECORD_ONLINE_USERS'], $bb_cfg['record_online_users'], bb_date($bb_cfg['record_online_date'])),
+        'RECORD_USERS' => sprintf($lang['RECORD_ONLINE_USERS'], config()->get('record_online_users'), bb_date(config()->get('record_online_date'))),
     ]);
 }
 
@@ -111,22 +111,24 @@ $template->assign_vars([
 // The following assigns all _common_ variables that may be used at any point in a template
 $template->assign_vars([
     'SIMPLE_HEADER' => !empty($gen_simple_header),
-    'CONTENT_ENCODING' => $bb_cfg['charset'],
+    'CONTENT_ENCODING' => DEFAULT_CHARSET,
 
     'IN_ADMIN' => defined('IN_ADMIN'),
     'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
 
     'USER_LANG' => $userdata['user_lang'],
+    'USER_LANG_DIRECTION' => (isset($bb_cfg['lang'][$userdata['user_lang']]['rtl']) && $bb_cfg['lang'][$userdata['user_lang']]['rtl'] === true) ? 'rtl' : 'ltr',
 
     'INCLUDE_BBCODE_JS' => !empty($page_cfg['include_bbcode_js']),
     'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
-    'ALLOW_ROBOTS' => !$bb_cfg['board_disable'] && (!isset($page_cfg['allow_robots']) || $page_cfg['allow_robots'] === true),
+    'ALLOW_ROBOTS' => !config()->get('board_disable') && (!isset($page_cfg['allow_robots']) || $page_cfg['allow_robots'] === true),
+    'META_DESCRIPTION' => !empty($page_cfg['meta_description']) ? trim(htmlCHR($page_cfg['meta_description'])) : '',
 
-    'SITENAME' => $bb_cfg['sitename'],
+    'SITENAME' => config()->get('sitename'),
     'U_INDEX' => BB_ROOT . 'index.php',
-    'T_INDEX' => sprintf($lang['FORUM_INDEX'], $bb_cfg['sitename']),
+    'T_INDEX' => sprintf($lang['FORUM_INDEX'], config()->get('sitename')),
 
     'IS_GUEST' => IS_GUEST,
     'IS_USER' => IS_USER,
@@ -137,9 +139,9 @@ $template->assign_vars([
     'FORUM_PATH' => FORUM_PATH,
     'FULL_URL' => FULL_URL,
 
-    'CURRENT_TIME' => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, $bb_cfg['last_visit_date_format'], false)),
-    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', (float)$bb_cfg['board_timezone'])])),
-    'BOARD_TIMEZONE' => $bb_cfg['board_timezone'],
+    'CURRENT_TIME' => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, config()->get('last_visit_date_format'), false)),
+    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', (float)config()->get('board_timezone'))])),
+    'BOARD_TIMEZONE' => config()->get('board_timezone'),
 
     'PM_INFO' => $pm_info,
     'PRIVMSG_IMG' => $icon_pm,
@@ -150,7 +152,7 @@ $template->assign_vars([
     'THIS_USER' => profile_url($userdata),
     'THIS_AVATAR' => get_avatar($userdata['user_id'], $userdata['avatar_ext_id'], !bf($userdata['user_opt'], 'user_opt', 'dis_avatar')),
     'SHOW_LOGIN_LINK' => !defined('IN_LOGIN'),
-    'AUTOLOGIN_DISABLED' => !$bb_cfg['allow_autologin'],
+    'AUTOLOGIN_DISABLED' => !config()->get('allow_autologin'),
     'S_LOGIN_ACTION' => LOGIN_URL,
 
     'U_CUR_DOWNLOADS' => PROFILE_URL . $userdata['user_id'],
@@ -162,15 +164,15 @@ $template->assign_vars([
     'U_OPTIONS' => 'profile.php?mode=editprofile',
     'U_PRIVATEMSGS' => PM_URL . "?folder=inbox",
     'U_PROFILE' => PROFILE_URL . $userdata['user_id'],
-    'U_READ_PM' => PM_URL . "?folder=inbox" . (($userdata['user_newest_pm_id'] && $userdata['user_new_privmsg'] == 1) ? "&mode=read&p={$userdata['user_newest_pm_id']}" : ''),
+    'U_READ_PM' => PM_URL . "?folder=inbox" . (($userdata['user_newest_pm_id'] && $userdata['user_new_privmsg'] == 1) ? "&mode=read&" . POST_POST_URL . "={$userdata['user_newest_pm_id']}" : ''),
     'U_REGISTER' => 'profile.php?mode=register',
     'U_SEARCH' => 'search.php',
     'U_SEND_PASSWORD' => "profile.php?mode=sendpassword",
-    'U_TERMS' => $bb_cfg['terms_and_conditions_url'],
+    'U_TERMS' => config()->get('terms_and_conditions_url'),
     'U_TRACKER' => 'tracker.php',
 
-    'SHOW_SIDEBAR1' => !empty($bb_cfg['page']['show_sidebar1'][BB_SCRIPT]) || $bb_cfg['show_sidebar1_on_every_page'],
-    'SHOW_SIDEBAR2' => !empty($bb_cfg['page']['show_sidebar2'][BB_SCRIPT]) || $bb_cfg['show_sidebar2_on_every_page'],
+    'SHOW_SIDEBAR1' => !empty(config()->get('page.show_sidebar1')[BB_SCRIPT]) || config()->get('show_sidebar1_on_every_page'),
+    'SHOW_SIDEBAR2' => !empty(config()->get('page.show_sidebar2')[BB_SCRIPT]) || config()->get('show_sidebar2_on_every_page'),
 
     'HTML_AGREEMENT' => LANG_DIR . 'html/user_agreement.html',
     'HTML_COPYRIGHT' => LANG_DIR . 'html/copyright_holders.html',
@@ -184,11 +186,11 @@ $template->assign_vars([
     'DOWNLOAD_URL' => BB_ROOT . DL_URL,
     'FORUM_URL' => BB_ROOT . FORUM_URL,
     'GROUP_URL' => BB_ROOT . GROUP_URL,
-    'LOGIN_URL' => $bb_cfg['login_url'],
+    'LOGIN_URL' => config()->get('login_url'),
     'NEWEST_URL' => '&amp;view=newest#newest',
-    'PM_URL' => $bb_cfg['pm_url'],
+    'PM_URL' => config()->get('pm_url'),
     'POST_URL' => BB_ROOT . POST_URL,
-    'POSTING_URL' => $bb_cfg['posting_url'],
+    'POSTING_URL' => config()->get('posting_url'),
     'PROFILE_URL' => BB_ROOT . PROFILE_URL,
     'BONUS_URL' => BB_ROOT . BONUS_URL,
     'TOPIC_URL' => BB_ROOT . TOPIC_URL,
@@ -207,7 +209,7 @@ $template->assign_vars([
     'U_WATCHED_TOPICS' => 'profile.php?mode=watch'
 ]);
 
-if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torhelp'])) {
+if (!empty(config()->get('page.show_torhelp')[BB_SCRIPT]) && !empty($userdata['torhelp'])) {
     $ignore_time = !empty($_COOKIE['torhelp']) ? (int)$_COOKIE['torhelp'] : 0;
 
     if (TIMENOW > $ignore_time) {
@@ -248,6 +250,6 @@ $template->pparse('page_header');
 
 define('PAGE_HEADER_SENT', true);
 
-if (!$bb_cfg['gzip_compress']) {
+if (!config()->get('gzip_compress')) {
     flush();
 }

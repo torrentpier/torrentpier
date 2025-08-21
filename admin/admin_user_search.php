@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -52,8 +52,8 @@ if (!isset($_REQUEST['dosearch'])) {
         }
     }
 
-    $language_list = \TorrentPier\Legacy\Select::language('', 'language_type');
-    $timezone_list = \TorrentPier\Legacy\Select::timezone('', 'timezone_type');
+    $language_list = \TorrentPier\Legacy\Common\Select::language('', 'language_type');
+    $timezone_list = \TorrentPier\Legacy\Common\Select::timezone('', 'timezone_type');
 
     $sql = 'SELECT f.forum_id, f.forum_name, f.forum_parent, c.cat_id, c.cat_title
 				FROM ( ' . BB_FORUMS . ' AS f INNER JOIN ' . BB_CATEGORIES . ' AS c ON c.cat_id = f.cat_id )
@@ -252,8 +252,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $text = sprintf($lang['SEARCH_FOR_USERNAME'], strip_tags(htmlspecialchars(stripslashes($username))));
 
-            $username = str_replace("\*", '%', trim(strip_tags(strtolower($username))));
-
+            $username = str_replace('*', '%', trim(strip_tags(strtolower($username))));
             if (str_contains($username, '%')) {
                 $op = 'LIKE';
             } else {
@@ -273,8 +272,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $text = sprintf($lang['SEARCH_FOR_EMAIL'], strip_tags(htmlspecialchars(stripslashes($email))));
 
-            $email = str_replace("\*", '%', trim(strip_tags(strtolower($email))));
-
+            $email = str_replace('*', '%', trim(strip_tags(strtolower($email))));
             if (str_contains($email, '%')) {
                 $op = 'LIKE';
             } else {
@@ -568,8 +566,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $text = strip_tags(htmlspecialchars(stripslashes($userfield_value)));
 
-            $userfield_value = str_replace("\*", '%', trim(strip_tags(strtolower($userfield_value))));
-
+            $userfield_value = str_replace('*', '%', trim(strip_tags(strtolower($userfield_value))));
             if (str_contains($userfield_value, '%')) {
                 $op = 'LIKE';
             } else {
@@ -844,10 +841,10 @@ if (!isset($_REQUEST['dosearch'])) {
     if ($page == 1) {
         $offset = 0;
     } else {
-        $offset = (($page - 1) * $bb_cfg['topics_per_page']);
+        $offset = (($page - 1) * config()->get('topics_per_page'));
     }
 
-    $limit = "LIMIT $offset, " . $bb_cfg['topics_per_page'];
+    $limit = "LIMIT $offset, " . config()->get('topics_per_page');
 
     $select_sql .= " $limit";
 
@@ -862,7 +859,7 @@ if (!isset($_REQUEST['dosearch'])) {
             bb_die($lang['SEARCH_NO_RESULTS']);
         }
     }
-    $num_pages = ceil($total_pages['total'] / $bb_cfg['topics_per_page']);
+    $num_pages = ceil($total_pages['total'] / config()->get('topics_per_page'));
 
     $pagination = '';
 

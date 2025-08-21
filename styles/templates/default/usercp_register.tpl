@@ -41,7 +41,7 @@
         <div class="title">{L_YOUR_NEW_PASSWORD}</div>
         <div>
             <input value="" autocomplete="off" type="text"/>
-            <span class="regenerate" title="{L_REGENERATE}" onclick="autocomplete(true);"></span>
+            <span class="regenerate" title="{L_REGENERATE}" onclick="autocomplete(true, {#PASSWORD_MIN_LENGTH#});"></span>
         </div>
     </div>
 </div>
@@ -85,7 +85,7 @@
         <tr>
             <td class="prof-title"><!-- IF EDIT_PROFILE -->{L_NEW_PASSWORD}: * <br/><h6>{L_PASSWORD_IF_CHANGED}</h6><!-- ELSE -->{L_PASSWORD}: *<!-- ENDIF --></td>
             <td>
-                <input id="pass" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="new_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="autocomplete" title="{L_AUTOCOMPLETE}">&#9668;</span>&nbsp;<i class="med">{PASSWORD_LONG}</i>
+                <input id="pass" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="new_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="autocomplete" data-password-length="{#PASSWORD_MIN_LENGTH#}" title="{L_AUTOCOMPLETE}">&#9668;</span>&nbsp;<i class="med">{PASSWORD_LONG}</i>
             </td>
         </tr>
         <tr>
@@ -155,13 +155,43 @@
         </tr>
         <tr>
             <td class="prof-title">{L_LOCATION}:</td>
-            <td>{COUNTRY_SELECT}&nbsp;<span id="check_country">{COUNTRY_SELECTED}</td>
+            <td>
+                <label>{L_SET_OWN_COUNTRY}
+                    <input {CHECKED_MANUAL_COUNTRY} name="user_from_set_manual" type="checkbox">
+                </label>
+                <hr/>
+                <div id="country_select_hide">{COUNTRY_SELECT}&nbsp;<span id="check_country">{COUNTRY_SELECTED}</span></div>
+                <div style="display: none;" id="country_manual_select"><input type="text" name="user_from" size="50" maxlength="150" value="{USER_FROM}"/></div>
+            </td>
             <script type="text/javascript">
-                $('#user_from').bind('change', function () {
-                    ajax.exec({
-                        action: 'user_register',
-                        mode: 'check_country',
-                        country: $(this).val()
+                $(document).ready(function () {
+                    // Handle manual country select
+                    const $manualCheckbox = $('input[name="user_from_set_manual"]');
+                    const $countrySelectHide = $('div#country_select_hide');
+                    const $countryManualSelect = $('div#country_manual_select');
+                    function toggleCountrySelectors() {
+                        if ($manualCheckbox.is(':checked')) {
+                            $countrySelectHide.find('select').prop('disabled', true);
+                            $countrySelectHide.hide();
+                            $countryManualSelect.find('input').prop('disabled', false);
+                            $countryManualSelect.show();
+                        } else {
+                            $countryManualSelect.find('input').prop('disabled', true);
+                            $countryManualSelect.hide();
+                            $countrySelectHide.find('select').prop('disabled', false);
+                            $countrySelectHide.show();
+                        }
+                    }
+                    toggleCountrySelectors();
+                    $manualCheckbox.change(toggleCountrySelectors);
+
+                    // Handle flag icon changing
+                    $('#user_from').bind('change', function () {
+                        ajax.exec({
+                            action: 'user_register',
+                            mode: 'check_country',
+                            country: $(this).val()
+                        });
                     });
                 });
             </script>
@@ -290,6 +320,29 @@
             </td>
         </tr>
         <tr>
+            <td class="prof-title">{L_HIDE_PEER_TORRENT_CLIENT}:</td>
+            <td>
+                <label><input type="radio" name="user_hide_torrent_client" value="1" <!-- IF USER_HIDE_TORRENT_CLIENT -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_hide_torrent_client" value="0" <!-- IF not USER_HIDE_TORRENT_CLIENT -->checked<!-- ENDIF --> />{L_NO}</label>
+            </td>
+        </tr>
+        <!-- IF $bb_cfg['ip2country_settings']['enabled'] -->
+        <tr>
+            <td class="prof-title">{L_HIDE_PEER_COUNTRY_NAME}:</td>
+            <td>
+                <label><input type="radio" name="user_hide_peer_country" value="1" <!-- IF USER_HIDE_PEER_COUNTRY -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_hide_peer_country" value="0" <!-- IF not USER_HIDE_PEER_COUNTRY -->checked<!-- ENDIF --> />{L_NO}</label>
+            </td>
+        </tr>
+        <!-- ENDIF -->
+        <tr>
+            <td class="prof-title">{L_HIDE_PEER_USERNAME}:</td>
+            <td>
+                <label><input type="radio" name="user_hide_peer_username" value="1" <!-- IF USER_HIDE_PEER_USERNAME -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_hide_peer_username" value="0" <!-- IF not USER_HIDE_PEER_USERNAME -->checked<!-- ENDIF --> />{L_NO}</label>
+            </td>
+        </tr>
+        <tr>
             <th colspan="2">{L_AVATAR_PANEL}</th>
         </tr>
         <!-- IF AVATAR_DISALLOWED -->
@@ -309,7 +362,7 @@
                             <div class="spacer_4"></div>
                             {L_UPLOAD_AVATAR_FILE}:
                             <input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['avatars']['max_size']}"/>
-                            <input type="file" name="avatar"/>
+                            <input type="file" name="avatar" accept="image/*"/>
                             <!-- ENDIF -->
                         </td>
                         <td class="tCenter nowrap">

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -22,7 +22,11 @@ if (isset($_POST['mode']) || isset($_GET['mode'])) {
     $mode = '';
 }
 
-$pathToSmilesDir = BB_ROOT . $bb_cfg['smilies_path'];
+if ($mode == 'delete' && isset($_POST['cancel'])) {
+    $mode = '';
+}
+
+$pathToSmilesDir = BB_ROOT . config()->get('smilies_path');
 $delimeter = '=+:';
 $s_hidden_fields = '';
 $smiley_paks = $smiley_images = [];
@@ -174,17 +178,28 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 } elseif ($mode != '') {
     switch ($mode) {
         case 'delete':
+            $confirmed = isset($_POST['confirm']);
             $smiley_id = (!empty($_POST['id'])) ? $_POST['id'] : $_GET['id'];
             $smiley_id = (int)$smiley_id;
 
-            $sql = 'DELETE FROM ' . BB_SMILIES . ' WHERE smilies_id = ' . $smiley_id;
-            $result = DB()->sql_query($sql);
-            if (!$result) {
-                bb_die('Could not delete smiley');
-            }
-            $datastore->update('smile_replacements');
+            if ($confirmed) {
+                $sql = 'DELETE FROM ' . BB_SMILIES . ' WHERE smilies_id = ' . $smiley_id;
+                $result = DB()->sql_query($sql);
+                if (!$result) {
+                    bb_die('Could not delete smiley');
+                }
 
-            bb_die($lang['SMILEY_DEL_SUCCESS'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+                $datastore->update('smile_replacements');
+                bb_die($lang['SMILEY_DEL_SUCCESS'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            } else {
+                $hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
+                $hidden_fields .= '<input type="hidden" name="id" value="' . $smiley_id . '" />';
+
+                print_confirmation([
+                    'FORM_ACTION' => 'admin_smilies.php',
+                    'HIDDEN_FIELDS' => $hidden_fields,
+                ]);
+            }
             break;
 
         case 'edit':

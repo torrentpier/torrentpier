@@ -2,19 +2,19 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-global $bb_cfg, $page_cfg, $template, $images, $lang;
+global $page_cfg, $template, $images, $lang;
 
 $width = $height = [];
 $template_name = basename(__DIR__);
 
 $_img = BB_ROOT . 'styles/images/';
 $_main = BB_ROOT . 'styles/' . basename(TEMPLATES_DIR) . '/' . $template_name . '/images/';
-$_lang = $_main . 'lang/' . basename($bb_cfg['default_lang']) . '/';
+$_lang = $_main . 'lang/' . basename(config()->get('default_lang')) . '/';
 
 // post_buttons
 $images['icon_code'] = $_lang . 'icon_code.gif';
@@ -38,6 +38,8 @@ $images['icon_male'] = $_main . 'icon_male.gif';
 $images['icon_female'] = $_main . 'icon_female.gif';
 $images['icon_nogender'] = $_main . 'icon_nogender.gif';
 
+$images['icon_tor_m3u_icon'] = $_img . 'tor_m3u_format.png';
+$images['icon_tor_filelist'] = $_img . 't_info.png';
 $images['icon_tor_gold'] = $_img . 'tor_gold.gif';
 $images['icon_tor_silver'] = $_img . 'tor_silver.gif';
 
@@ -115,14 +117,13 @@ $images['progress_bar_full'] = $_main . 'progress_bar_full.gif';
 
 $template->assign_vars([
     'IMG' => $_main,
-    'TEXT_BUTTONS' => $bb_cfg['text_buttons'],
-    'POST_BTN_SPACER' => $bb_cfg['text_buttons'] ? '&nbsp;' : '',
+    'TEXT_BUTTONS' => config()->get('text_buttons'),
+    'POST_BTN_SPACER' => config()->get('text_buttons') ? '&nbsp;' : '',
     'TOPIC_ATTACH_ICON' => '<img src="' . $_img . 'icon_clip.gif" alt="" />',
     'OPEN_MENU_IMG_ALT' => '<img src="' . $_main . 'menu_open_1.gif" class="menu-alt1" alt="" />',
-    'TOPIC_LEFT_COL_SPACER_WITDH' => $bb_cfg['topic_left_column_witdh'] - 8, // 8px padding
-    'POST_IMG_WIDTH_DECR_JS' => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['post_img_width_decr'],
-    'ATTACH_IMG_WIDTH_DECR_JS' => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['attach_img_width_decr'],
-    'MAGNET_LINKS' => $bb_cfg['magnet_links_enabled'],
+    'TOPIC_LEFT_COL_SPACER_WITDH' => config()->get('topic_left_column_witdh') - 8, // 8px padding
+    'POST_IMG_WIDTH_DECR_JS' => config()->get('topic_left_column_witdh') + config()->get('post_img_width_decr'),
+    'ATTACH_IMG_WIDTH_DECR_JS' => config()->get('topic_left_column_witdh') + config()->get('attach_img_width_decr'),
     'FEED_IMG' => '<img src="' . $_main . 'feed.png" class="feed-small" alt="' . $lang['ATOM_FEED'] . '" />',
 ]);
 
@@ -130,25 +131,25 @@ $template->assign_vars([
 if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tpl_vars'])) {
     if (isset($vars['post_buttons'])) {
         $template->assign_vars([
-            'CODE_IMG' => $bb_cfg['text_buttons'] ? $lang['CODE_TOPIC_TXTB'] : '<img src="' . $images['icon_code'] . '" alt="' . $lang['CODE_TOPIC_TXTB'] . '" title="' . $lang['CODE'] . '" />',
-            'QUOTE_IMG' => $bb_cfg['text_buttons'] ? $lang['REPLY_WITH_QUOTE_TXTB'] : '<img src="' . $images['icon_quote'] . '" alt="' . $lang['REPLY_WITH_QUOTE_TXTB'] . '" title="' . $lang['REPLY_WITH_QUOTE'] . '" />',
-            'EDIT_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['EDIT_DELETE_POST_TXTB'] : '<img src="' . $images['icon_edit'] . '" alt="' . $lang['EDIT_DELETE_POST_TXTB'] . '" title="' . $lang['EDIT_POST'] . '" />',
-            'DELETE_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['DELETE_POST_TXTB'] : '<img src="' . $images['icon_delpost'] . '" alt="' . $lang['DELETE_POST_TXTB'] . '" title="' . $lang['DELETE_POST'] . '" />',
-            'IP_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['VIEW_IP_TXTB'] : '<img src="' . $images['icon_ip'] . '" alt="' . $lang['VIEW_IP_TXTB'] . '" title="' . $lang['VIEW_IP'] . '" />',
-            'MOD_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['MODERATE_POST_TXTB'] : '<img src="' . $images['icon_mod'] . '" alt="' . $lang['MODERATE_POST_TXTB'] . '" title="' . $lang['MODERATE_POST'] . '" />',
-            'MC_IMG' => $bb_cfg['text_buttons'] ? '[' . $lang['COMMENT'] . ']' : '<img src="' . $images['icon_mc'] . '" alt="[' . $lang['COMMENT'] . ']" title="' . $lang['COMMENT'] . '" />',
-            'POLL_IMG' => $bb_cfg['text_buttons'] ? $lang['TOPIC_POLL'] : '<img src="' . $images['icon_poll'] . '" alt="' . $lang['TOPIC_POLL'] . '" title="' . $lang['ADD_POLL'] . '" />',
+            'CODE_IMG' => config()->get('text_buttons') ? $lang['CODE_TOPIC_TXTB'] : '<img src="' . $images['icon_code'] . '" alt="' . $lang['CODE_TOPIC_TXTB'] . '" title="' . $lang['CODE'] . '" />',
+            'QUOTE_IMG' => config()->get('text_buttons') ? $lang['REPLY_WITH_QUOTE_TXTB'] : '<img src="' . $images['icon_quote'] . '" alt="' . $lang['REPLY_WITH_QUOTE_TXTB'] . '" title="' . $lang['REPLY_WITH_QUOTE'] . '" />',
+            'EDIT_POST_IMG' => config()->get('text_buttons') ? $lang['EDIT_DELETE_POST_TXTB'] : '<img src="' . $images['icon_edit'] . '" alt="' . $lang['EDIT_DELETE_POST_TXTB'] . '" title="' . $lang['EDIT_POST'] . '" />',
+            'DELETE_POST_IMG' => config()->get('text_buttons') ? $lang['DELETE_POST_TXTB'] : '<img src="' . $images['icon_delpost'] . '" alt="' . $lang['DELETE_POST_TXTB'] . '" title="' . $lang['DELETE_POST'] . '" />',
+            'IP_POST_IMG' => config()->get('text_buttons') ? $lang['VIEW_IP_TXTB'] : '<img src="' . $images['icon_ip'] . '" alt="' . $lang['VIEW_IP_TXTB'] . '" title="' . $lang['VIEW_IP'] . '" />',
+            'MOD_POST_IMG' => config()->get('text_buttons') ? $lang['MODERATE_POST_TXTB'] : '<img src="' . $images['icon_mod'] . '" alt="' . $lang['MODERATE_POST_TXTB'] . '" title="' . $lang['MODERATE_POST'] . '" />',
+            'MC_IMG' => config()->get('text_buttons') ? '[' . $lang['COMMENT'] . ']' : '<img src="' . $images['icon_mc'] . '" alt="[' . $lang['COMMENT'] . ']" title="' . $lang['COMMENT'] . '" />',
+            'POLL_IMG' => config()->get('text_buttons') ? $lang['TOPIC_POLL'] : '<img src="' . $images['icon_poll'] . '" alt="' . $lang['TOPIC_POLL'] . '" title="' . $lang['ADD_POLL'] . '" />',
 
             'QUOTE_URL' => BB_ROOT . POSTING_URL . '?mode=quote&amp;' . POST_POST_URL . '=',
             'EDIT_POST_URL' => BB_ROOT . POSTING_URL . '?mode=editpost&amp;' . POST_POST_URL . '=',
             'DELETE_POST_URL' => BB_ROOT . POSTING_URL . '?mode=delete&amp;' . POST_POST_URL . '=',
             'IP_POST_URL' => BB_ROOT . 'modcp.php?mode=ip&amp;' . POST_POST_URL . '=',
 
-            'PROFILE_IMG' => $bb_cfg['text_buttons'] ? $lang['READ_PROFILE_TXTB'] : '<img src="' . $images['icon_profile'] . '" alt="' . $lang['READ_PROFILE_TXTB'] . '" title="' . $lang['READ_PROFILE'] . '" />',
-            'PM_IMG' => $bb_cfg['text_buttons'] ? $lang['SEND_PM_TXTB'] : '<img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PM_TXTB'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" />',
-            'EMAIL_IMG' => $bb_cfg['text_buttons'] ? $lang['SEND_EMAIL_TXTB'] : '<img src="' . $images['icon_email'] . '" alt="' . $lang['SEND_EMAIL_TXTB'] . '" title="' . $lang['SEND_EMAIL'] . '" />',
-            'WWW_IMG' => $bb_cfg['text_buttons'] ? $lang['VISIT_WEBSITE_TXTB'] : '<img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE_TXTB'] . '" title="' . $lang['VISIT_WEBSITE'] . '" />',
-            'ICQ_IMG' => $bb_cfg['text_buttons'] ? $lang['ICQ_TXTB'] : '<img src="' . $images['icon_icq'] . '" alt="' . $lang['ICQ_TXTB'] . '" title="' . $lang['ICQ'] . '" />',
+            'PROFILE_IMG' => config()->get('text_buttons') ? $lang['READ_PROFILE_TXTB'] : '<img src="' . $images['icon_profile'] . '" alt="' . $lang['READ_PROFILE_TXTB'] . '" title="' . $lang['READ_PROFILE'] . '" />',
+            'PM_IMG' => config()->get('text_buttons') ? $lang['SEND_PM_TXTB'] : '<img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PM_TXTB'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" />',
+            'EMAIL_IMG' => config()->get('text_buttons') ? $lang['SEND_EMAIL_TXTB'] : '<img src="' . $images['icon_email'] . '" alt="' . $lang['SEND_EMAIL_TXTB'] . '" title="' . $lang['SEND_EMAIL'] . '" />',
+            'WWW_IMG' => config()->get('text_buttons') ? $lang['VISIT_WEBSITE_TXTB'] : '<img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE_TXTB'] . '" title="' . $lang['VISIT_WEBSITE'] . '" />',
+            'ICQ_IMG' => config()->get('text_buttons') ? $lang['ICQ_TXTB'] : '<img src="' . $images['icon_icq'] . '" alt="' . $lang['ICQ_TXTB'] . '" title="' . $lang['ICQ'] . '" />',
 
             'EMAIL_URL' => BB_ROOT . 'profile.php?mode=email&amp;' . POST_USERS_URL . '=',
             'FORUM_URL' => BB_ROOT . FORUM_URL,

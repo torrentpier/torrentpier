@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -42,6 +42,10 @@ if (!defined('BB_ROOT')) {
         cursor: pointer;
     }
 
+    .sqlLogRow:hover {
+        border-color: #8B0000;
+    }
+
     .sqlLogWrapped {
         white-space: normal;
         overflow: visible;
@@ -53,10 +57,6 @@ if (!defined('BB_ROOT')) {
         cursor: inherit !important;
     }
 
-    .sqlHover {
-        border-color: #8B0000;
-    }
-
     .sqlHighlight {
         background: #FFE4E1;
     }
@@ -64,14 +64,21 @@ if (!defined('BB_ROOT')) {
 
 <?php
 if (!empty($_COOKIE['explain'])) {
-    foreach ($DBS->srv as $srv_name => $db_obj) {
-        if (!empty($db_obj->do_explain)) {
-            $db_obj->explain('display');
+    // Get all database server instances from the new DatabaseFactory
+    $server_names = \TorrentPier\Database\DatabaseFactory::getServerNames();
+    foreach ($server_names as $srv_name) {
+        try {
+            $db_obj = \TorrentPier\Database\DatabaseFactory::getInstance($srv_name);
+            if (!empty($db_obj->do_explain)) {
+                $db_obj->explain('display');
+            }
+        } catch (\Exception $e) {
+            // Skip if server not available
         }
     }
 }
 
-$sql_log = !empty($_COOKIE['sql_log']) ? $debug->getSqlLog() : false;
+$sql_log = !empty($_COOKIE['sql_log']) ? dev()->getSqlDebugLog() : false;
 
 if ($sql_log) {
     echo '<div class="sqlLog" id="sqlLog">' . $sql_log . '</div><!-- / sqlLog --><br clear="all" />';

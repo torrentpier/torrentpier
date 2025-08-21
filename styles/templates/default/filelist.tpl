@@ -2,9 +2,11 @@
 <ul>
     <li>{L_BT_FLIST_CREATION_DATE}: <b>{TORRENT_CREATION_DATE}</b></li>
     <li>{L_DL_CLIENT}: <b>{TORRENT_CLIENT}</b></li>
+    <li>{L_BT_IS_PRIVATE}: <b>{TORRENT_PRIVATE}</b></li>
 </ul>
-<br>
+<br/>
 
+<h1 class="pagetitle">{L_BT_FLIST}</h1>
 <table class="forumline">
     <thead>
     <tr>
@@ -20,7 +22,7 @@
         <td>{filelist.ROW_NUMBER}</td>
         <td>{filelist.FILE_PATH}</td>
         <td>{filelist.FILE_LENGTH}</td>
-        <td>{filelist.FILE_HASH}</td>
+        <td><span class="copyElement" data-clipboard-text="{filelist.FILE_HASH}" title="{L_COPY_TO_CLIPBOARD}">{filelist.FILE_HASH}</span></td>
     </tr>
     </tbody>
     <!-- END filelist -->

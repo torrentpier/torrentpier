@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -25,11 +25,11 @@ if (defined('ATTACH_INSTALL')) {
  */
 function attach_mod_get_lang($language_file)
 {
-    global $attach_config, $bb_cfg;
+    global $attach_config;
 
-    $file = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/' . $language_file . '.php';
+    $file = LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/' . $language_file . '.php';
     if (file_exists($file)) {
-        return $bb_cfg['default_lang'];
+        return config()->get('default_lang');
     }
 
     $file = LANG_ROOT_DIR . '/' . $attach_config['board_lang'] . '/' . $language_file . '.php';
@@ -45,8 +45,6 @@ function attach_mod_get_lang($language_file)
  */
 function get_config()
 {
-    global $bb_cfg;
-
     $attach_config = [];
 
     $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
@@ -60,7 +58,7 @@ function get_config()
     }
 
     // We assign the original default board language here, because it gets overwritten later with the users default language
-    $attach_config['board_lang'] = trim($bb_cfg['default_lang']);
+    $attach_config['board_lang'] = trim(config()->get('default_lang'));
 
     return $attach_config;
 }

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -41,5 +41,5 @@ $ajax->exec();
 /**
  * @deprecated ajax_common
  * Dirty class removed from here since 2.2.0
- * To add new actions see at src/Legacy/Ajax.php
+ * To add new actions see at src/Ajax.php
  */

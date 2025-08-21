@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -16,7 +16,7 @@ $user->session_start(['req_login' => true]);
 $start = abs((int)request_var('start', 0));
 $mode = (string)request_var('mode', 'joined');
 $sort_order = (request_var('order', 'ASC') == 'ASC') ? 'ASC' : 'DESC';
-$username = request_var('username', '');
+$username = trim(request_var('username', ''));
 $role = (string)request_var('role', 'all');
 
 // Memberlist sorting
@@ -41,9 +41,9 @@ $select_sort_order .= '</select>';
 // Role selector
 $role_select = [
     'all' => $lang['ALL'],
-    'user' => $lang['USERS'],
-    'admin' => $lang['ADMINISTRATORS'],
-    'moderator' => $lang['MODERATORS']
+    'user' => $lang['AUTH_USER'],
+    'admin' => $lang['AUTH_ADMIN'],
+    'moderator' => $lang['MODERATOR']
 ];
 $select_sort_role = '<select name="role">';
 foreach ($role_select as $key => $value) {
@@ -54,40 +54,47 @@ $select_sort_role .= '</select>';
 
 switch ($mode) {
     case 'username':
-        $order_by = "username $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "username $sort_order LIMIT $start, " . config()->get('topics_per_page');
         break;
     case 'location':
-        $order_by = "user_from $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_from $sort_order LIMIT $start, " . config()->get('topics_per_page');
         break;
     case 'posts':
-        $order_by = "user_posts $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_posts $sort_order LIMIT $start, " . config()->get('topics_per_page');
         break;
     case 'email':
-        $order_by = "user_email $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_email $sort_order LIMIT $start, " . config()->get('topics_per_page');
         break;
     case 'website':
-        $order_by = "user_website $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_website $sort_order LIMIT $start, " . config()->get('topics_per_page');
         break;
     case 'topten':
         $order_by = "user_posts $sort_order LIMIT 10";
         break;
     case 'joined':
     default:
-        $order_by = "user_regdate $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_regdate $sort_order LIMIT $start, " . config()->get('topics_per_page');
         break;
 }
 
 $where_sql = '';
+
+// Search by role
 switch ($role) {
     case 'user':
-        $where_sql = ' AND user_level = ' . USER;
+        $where_sql .= ' AND user_level = ' . USER;
         break;
     case 'admin':
-        $where_sql = ' AND user_level = ' . ADMIN;
+        $where_sql .= ' AND user_level = ' . ADMIN;
         break;
     case 'moderator':
-        $where_sql = ' AND user_level = ' . MOD;
+        $where_sql .= ' AND user_level = ' . MOD;
         break;
+}
+
+// Search by username
+if (!empty($username)) {
+    $where_sql .= ' AND username LIKE "' . DB()->escape(str_replace('*', '%', clean_username($username))) . '"';
 }
 
 // Generate user information
@@ -118,7 +125,7 @@ if ($result = DB()->fetch_rowset($sql)) {
 
 // Pagination
 $paginationurl = "memberlist.php?mode=$mode&amp;order=$sort_order&amp;role=$role";
-$paginationurl .= $username ? "&amp;username=$username" : '';
+$paginationurl .= !empty($username) ? "&amp;username=$username" : '';
 
 if ($mode != 'topten') {
     $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ") $where_sql";
@@ -127,7 +134,7 @@ if ($mode != 'topten') {
     }
     if ($total = DB()->sql_fetchrow($result)) {
         $total_members = $total['total'];
-        generate_pagination($paginationurl, $total_members, $bb_cfg['topics_per_page'], $start);
+        generate_pagination($paginationurl, $total_members, config()->get('topics_per_page'), $start);
     }
     DB()->sql_freeresult($result);
 }

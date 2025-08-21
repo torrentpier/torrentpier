@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -865,7 +865,7 @@ function get_list($mode, $id, $select)
         if ($row[$idfield] == $id) {
             $s = ' selected';
         }
-        $catlist .= '<option value="' . $row[$idfield] . '"' . $s . '>&nbsp;' . htmlCHR(str_short($row[$namefield], 60)) . '</option>\n';
+        $catlist .= '<option value="' . $row[$idfield] . '"' . $s . '>&nbsp;' . str_short(htmlCHR($row[$namefield]), 60) . '</option>\n';
     }
 
     return $catlist;
@@ -1102,7 +1102,7 @@ function sf_get_list($mode, $exclude = 0, $select = 0)
                 $selected = ($fid == $select) ? HTML_SELECTED : '';
                 $disabled = ($fid == $exclude && !$forum_parent) ? HTML_DISABLED : '';
                 $style = $disabled ? ' style="color: gray" ' : (($fid == $exclude) ? ' style="color: darkred" ' : '');
-                $opt .= '<option value="' . $fid . '" ' . $selected . $disabled . $style . '>' . ($f['forum_parent'] ? HTML_SF_SPACER : '') . htmlCHR(str_short($f['forum_name'], 60)) . "&nbsp;</option>\n";
+                $opt .= '<option value="' . $fid . '" ' . $selected . $disabled . $style . '>' . ($f['forum_parent'] ? HTML_SF_SPACER : '') . str_short(htmlCHR($f['forum_name']), 60) . "&nbsp;</option>\n";
             }
 
             $opt .= '</optgroup>';

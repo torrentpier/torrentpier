@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -21,7 +21,7 @@ if (!IS_ADMIN) {
 $peers_in_last_minutes = [30, 15, 5, 1];
 $peers_in_last_sec_limit = 300;
 
-$announce_interval = (int)$bb_cfg['announce_interval'];
+$announce_interval = (int)config()->get('announce_interval');
 $stat = [];
 
 define('TMP_TRACKER_TABLE', 'tmp_tracker');
@@ -116,7 +116,7 @@ if ($client_full || !$stats_cache = CACHE('tr_cache')->get('tracker_clients_stat
 
 $n = 1;
 foreach (array_slice($clients_percentage, 0, $numwant) as $client => $value) {
-    $client_list .= ($client_full) ? ("$client => $value<br>") : "$n. " . get_user_torrent_client($client) . " $value<br>";
+    $client_list .= ($client_full) ? ("$client => $value<br/>") : "$n. " . get_user_torrent_client($client) . " $value<br/>";
     $n++;
 }
 
@@ -164,16 +164,16 @@ echo "\n
 	<td align=center>
 
     $client_list
-<br>
+<br/>
 \n";
-echo (count($clients_percentage) > $numwant) ? ('<a href="' . 'tracker.php?client_numwant=' . ($numwant + 100) . '">' . 'Show more' . '</a><br>') : '';
-echo $client_full ? '<br><b>Get more length and numbers via modifying the parameters in the url<b>' : (!empty($client_list) ? '<a href="tracker.php?client_length=6&client_numwant=10">Peer_ids with more length (version debugging)</a>' : '');
+echo (count($clients_percentage) > $numwant) ? ('<a href="' . 'tracker.php?client_numwant=' . ($numwant + 100) . '">' . 'Show more' . '</a><br/>') : '';
+echo $client_full ? '<br/><b>Get more length and numbers via modifying the parameters in the url<b>' : (!empty($client_list) ? '<a href="tracker.php?client_length=6&client_numwant=10">Peer_ids with more length (version debugging)</a>' : '');
 echo '</td></tr>';
 echo '</table>';
 echo !$client_full ? '<p style = "text-align:right;">Simple stats for clients are being cached for one hour.</p>' : '';
 echo '<div align="center"><pre>';
 
-echo 'gen time: <b>' . sprintf('%.4f', array_sum(explode(' ', microtime())) - TIMESTART) . "</b> sec\n";
+echo 'gen time: <b>' . sprintf('%.3f', array_sum(explode(' ', microtime())) - TIMESTART) . "</b> sec\n";
 echo '</pre></div>';
 echo '</body></html>';
 

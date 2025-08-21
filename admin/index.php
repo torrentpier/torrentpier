@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -10,19 +10,13 @@
 require __DIR__ . '/pagestart.php';
 
 // Statistics
-if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
+if (!$stats = $datastore->get('stats')) {
     $datastore->update('stats');
     $stats = $datastore->get('stats');
 }
 
-// Files integrity check
-if (!$files_integrity_data = $datastore->get('files_integrity') and !$datastore->has('files_integrity')) {
-    $datastore->update('files_integrity');
-    $files_integrity_data = $datastore->get('files_integrity');
-}
-
 // Check for updates
-if (!$update_data = $datastore->get('check_updates') and !$datastore->has('check_updates')) {
+if (!$update_data = $datastore->get('check_updates')) {
     $datastore->update('check_updates');
     $update_data = $datastore->get('check_updates');
 }
@@ -84,19 +78,9 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 } elseif (isset($_GET['pane']) && $_GET['pane'] == 'right') {
     $template->assign_vars([
         'TPL_ADMIN_MAIN' => true,
-        'ADMIN_LOCK' => (bool)$bb_cfg['board_disable'],
+        'ADMIN_LOCK' => (bool)config()->get('board_disable'),
         'ADMIN_LOCK_CRON' => is_file(BB_DISABLED),
     ]);
-
-    // Files integrity check results
-    if (!empty($files_integrity_data)) {
-        $template->assign_block_vars('integrity_check', [
-            'INTEGRITY_SUCCESS' => (bool)$files_integrity_data['success'],
-            'INTEGRITY_WRONG_FILES_LIST' => implode("\n</li>\n<li>\n", $files_integrity_data['wrong_files']),
-            'INTEGRITY_LAST_CHECK_TIME' => sprintf($lang['INTEGRITY_LAST_CHECK'], bb_date($files_integrity_data['timestamp'])),
-            'INTEGRITY_CHECKED_FILES' => sprintf($lang['INTEGRITY_CHECKED'], $files_integrity_data['total_num'], ($files_integrity_data['total_num'] - $files_integrity_data['wrong_files_num'])),
-        ]);
-    }
 
     // Check for updates
     if (isset($update_data['available_update'])) {
@@ -106,7 +90,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
             'NEW_VERSION_DL_LINK' => $update_data['latest_version_dl_link'],
             'NEW_VERSION_LINK' => $update_data['latest_version_link'],
-            'NEW_VERSION_MD5' => $update_data['latest_version_checksum']
+            'NEW_VERSION_HASH' => $update_data['latest_version_checksum']
         ]);
     }
 
@@ -114,8 +98,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     $total_posts = $stats['postcount'];
     $total_topics = $stats['topiccount'];
     $total_users = $stats['usercount'];
-    $start_date = bb_date($bb_cfg['board_startdate']);
-    $boarddays = (TIMENOW - $bb_cfg['board_startdate']) / 86400;
+    $start_date = bb_date(config()->get('board_startdate'));
+    $boarddays = (TIMENOW - config()->get('board_startdate')) / 86400;
 
     $posts_per_day = sprintf('%.2f', $total_posts / $boarddays);
     $topics_per_day = sprintf('%.2f', $total_topics / $boarddays);
@@ -123,10 +107,10 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
     $avatar_dir_size = 0;
 
-    if ($avatar_dir = opendir($bb_cfg['avatars']['upload_path'])) {
+    if ($avatar_dir = opendir(config()->get('avatars.upload_path'))) {
         while ($file = readdir($avatar_dir)) {
             if ($file != '.' && $file != '..') {
-                $avatar_dir_size += @filesize($bb_cfg['avatars']['upload_path'] . $file);
+                $avatar_dir_size += @filesize(config()->get('avatars.upload_path') . $file);
             }
         }
         closedir($avatar_dir);
@@ -203,7 +187,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                     'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'd-M-Y H:i', false),
                     'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'd-M-Y H:i', false),
                     'IP_ADDRESS' => $reg_ip,
-                    'U_WHOIS_IP' => $bb_cfg['whois_info'] . $reg_ip,
+                    'U_WHOIS_IP' => config()->get('whois_info') . $reg_ip,
                 ]);
             }
         }
@@ -222,7 +206,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                     'STARTED' => bb_date($onlinerow_guest[$i]['session_start'], 'd-M-Y H:i', false),
                     'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'd-M-Y H:i', false),
                     'IP_ADDRESS' => $guest_ip,
-                    'U_WHOIS_IP' => $bb_cfg['whois_info'] . $guest_ip,
+                    'U_WHOIS_IP' => config()->get('whois_info') . $guest_ip,
                 ]);
             }
         }
@@ -234,7 +218,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 } else {
     // Generate frameset
     $template->assign_vars([
-        'CONTENT_ENCODING' => $bb_cfg['charset'],
+        'CONTENT_ENCODING' => DEFAULT_CHARSET,
         'TPL_ADMIN_FRAMESET' => true,
     ]);
     send_no_cache_headers();

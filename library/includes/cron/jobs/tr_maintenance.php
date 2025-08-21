@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,12 +11,12 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-if (empty($bb_cfg['seeder_last_seen_days_keep']) || empty($bb_cfg['seeder_never_seen_days_keep'])) {
+if (empty(config()->get('seeder_last_seen_days_keep')) || empty(config()->get('seeder_never_seen_days_keep'))) {
     return;
 }
 
-$last_seen_time = TIMENOW - 86400 * $bb_cfg['seeder_last_seen_days_keep'];
-$never_seen_time = TIMENOW - 86400 * $bb_cfg['seeder_never_seen_days_keep'];
+$last_seen_time = TIMENOW - 86400 * config()->get('seeder_last_seen_days_keep');
+$never_seen_time = TIMENOW - 86400 * config()->get('seeder_never_seen_days_keep');
 $limit_sql = 3000;
 
 $topics_sql = $attach_sql = [];

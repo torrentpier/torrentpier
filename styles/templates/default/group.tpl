@@ -228,7 +228,7 @@
     <!-- ENDIF -->
 
     <!-- IF PENDING_USERS -->
-    <table class="forumline">
+    <table class="forumline tablesorter">
         <thead>
         <tr>
             <th class="{sorter: false}"><b class="tbs-text">#</b></th>
@@ -253,7 +253,7 @@
             <td>{pending.PM}</td>
             <td>{pending.EMAIL}</td>
             <td>{pending.FROM}</td>
-            <td><u>{pending.JOINED_RAW}</u>{pending.JOINED}</td>
+            <td class="small"><u>{pending.JOINED_RAW}</u>{pending.JOINED}</td>
             <td>{pending.POSTS}</td>
             <td>{pending.WWW}</td>
         </tr>

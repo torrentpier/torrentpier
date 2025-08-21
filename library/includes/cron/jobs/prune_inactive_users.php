@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -14,11 +14,10 @@ if (!defined('BB_ROOT')) {
 $users_per_cycle = 1000;
 
 while (true) {
-    @set_time_limit(600);
-
+    set_time_limit(600);
     $prune_users = $not_activated_users = $not_active_users = [];
 
-    if ($not_activated_days = (int)$bb_cfg['user_not_activated_days_keep']) {
+    if ($not_activated_days = (int)config()->get('user_not_activated_days_keep')) {
         $sql = DB()->fetch_rowset("SELECT user_id FROM " . BB_USERS . "
 			WHERE user_level      = 0
 			AND user_lastvisit    = 0
@@ -32,7 +31,7 @@ while (true) {
         }
     }
 
-    if ($not_active_days = (int)$bb_cfg['user_not_active_days_keep']) {
+    if ($not_active_days = (int)config()->get('user_not_active_days_keep')) {
         $sql = DB()->fetch_rowset("SELECT user_id FROM " . BB_USERS . "
 			WHERE user_level   = 0
 			AND user_posts     = 0

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -41,6 +41,7 @@ class Ajax
         'manage_group' => ['user'],
         'callseed' => ['user'],
 
+        'ffprobe_info' => ['guest'],
         'thx' => ['guest'],
         'view_post' => ['guest'],
         'view_torrent' => ['guest'],
@@ -67,7 +68,9 @@ class Ajax
      */
     public function exec()
     {
-        global $lang, $bb_cfg;
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        // bb_cfg deprecated, but kept for compatibility with non-adapted ajax files
+        global $bb_cfg, $lang;
 
         // Exit if we already have errors
         if (!empty($this->response['error_code'])) {
@@ -88,8 +91,8 @@ class Ajax
         }
 
         // Exit if board is disabled via ON/OFF trigger or by admin
-        if ($bb_cfg['board_disable'] || is_file(BB_DISABLED)) {
-            if ($bb_cfg['board_disable']) {
+        if (config()->get('board_disable') || is_file(BB_DISABLED)) {
+            if (config()->get('board_disable')) {
                 $this->ajax_die($lang['BOARD_DISABLE']);
             } elseif (is_file(BB_DISABLED) && $this->action !== 'manage_admin') {
                 $this->ajax_die($lang['BOARD_DISABLE_CRON']);
@@ -173,11 +176,28 @@ class Ajax
      */
     public function send(): void
     {
-        global $debug;
         $this->response['action'] = $this->action;
 
-        if ($debug->sqlDebugAllowed()) {
-            $this->response['sql_log'] = $debug->getSqlLog();
+        // Show ajax action in console log
+        if (!empty($_COOKIE['explain'])) {
+            $console_log_request = $console_log_response = [];
+
+            foreach ($this->request as $key => $value) {
+                $console_log_request[$key] = $value;
+            }
+
+            foreach ($this->response as $key => $value) {
+                $console_log_response[$key] = $value;
+            }
+
+            $this->response['console_log'] = [
+                'request' => $console_log_request,
+                'response' => $console_log_response,
+            ];
+        }
+
+        if (dev()->checkSqlDebugAllowed()) {
+            $this->response['sql_log'] = dev()->getSqlDebugLog();
         }
 
         // sending output will be handled by $this->ob_handler()
@@ -193,12 +213,8 @@ class Ajax
      */
     public function ob_handler($contents): string
     {
-        global $debug;
-
-        if (!$debug->isProduction) {
-            if ($contents) {
-                $this->response['raw_output'] = $contents;
-            }
+        if (DBG_USER && $contents) {
+            $this->response['raw_output'] = $contents;
         }
 
         $response_js = json_encode($this->response, JSON_THROW_ON_ERROR);
@@ -526,9 +542,18 @@ class Ajax
      *
      * @return void
      */
-
     public function thx()
     {
         require AJAX_DIR . '/thanks.php';
+    }
+
+    /**
+     * Get info from ffprobe (TorrServer API)
+     *
+     * @return void
+     */
+    public function ffprobe_info()
+    {
+        require AJAX_DIR . '/ffprobe_info.php';
     }
 }

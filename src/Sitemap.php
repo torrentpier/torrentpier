@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -31,19 +31,30 @@ class Sitemap
 
         $forumUrls = [];
 
-        if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
+        if (!$forums = $datastore->get('cat_forums')) {
             $datastore->update('cat_forums');
             $forums = $datastore->get('cat_forums');
         }
 
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
-        $ignore_forum_sql = $not_forums_id ? "WHERE forum_id NOT IN($not_forums_id)" : '';
+        $ignore_forum_sql = $not_forums_id ? "WHERE f.forum_id NOT IN($not_forums_id)" : '';
 
-        $sql = DB()->sql_query("SELECT forum_id, forum_name FROM " . BB_FORUMS . " " . $ignore_forum_sql . " ORDER BY forum_id ASC");
+        $sql = DB()->sql_query("
+            SELECT
+                f.forum_id,
+                f.forum_name,
+                MAX(t.topic_time) AS last_topic_time
+            FROM " . BB_FORUMS . " f
+            LEFT JOIN " . BB_TOPICS . " t ON f.forum_id = t.forum_id
+            " . $ignore_forum_sql . "
+            GROUP BY f.forum_id, f.forum_name
+            ORDER BY f.forum_id ASC
+        ");
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $forumUrls[] = [
                 'url' => FORUM_URL . $row['forum_id'],
+                'time' => $row['last_topic_time']
             ];
         }
 
@@ -61,7 +72,7 @@ class Sitemap
 
         $topicUrls = [];
 
-        if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
+        if (!$forums = $datastore->get('cat_forums')) {
             $datastore->update('cat_forums');
             $forums = $datastore->get('cat_forums');
         }
@@ -69,12 +80,12 @@ class Sitemap
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
         $ignore_forum_sql = $not_forums_id ? "WHERE forum_id NOT IN($not_forums_id)" : '';
 
-        $sql = DB()->sql_query("SELECT topic_id, topic_title, topic_time FROM " . BB_TOPICS . " " . $ignore_forum_sql . " ORDER BY topic_time ASC");
+        $sql = DB()->sql_query("SELECT topic_id, topic_title, topic_last_post_time FROM " . BB_TOPICS . " " . $ignore_forum_sql . " ORDER BY topic_last_post_time ASC");
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $topicUrls[] = [
                 'url' => TOPIC_URL . $row['topic_id'],
-                'time' => $row['topic_time'],
+                'time' => $row['topic_last_post_time'],
             ];
         }
 
@@ -88,13 +99,11 @@ class Sitemap
      */
     private function getStaticUrls(): array
     {
-        global $bb_cfg;
-
         $staticUrls = [];
 
-        if (isset($bb_cfg['static_sitemap'])) {
+        if (config()->has('static_sitemap')) {
             /** @var array $urls разбиваем строку по переносам */
-            $urls = explode("\n", $bb_cfg['static_sitemap']);
+            $urls = explode("\n", config()->get('static_sitemap'));
             foreach ($urls as $url) {
                 /** @var string $url проверяем что адрес валиден и с указанными протоколом */
                 if (filter_var(trim($url), FILTER_VALIDATE_URL)) {
@@ -120,7 +129,7 @@ class Sitemap
         $sitemap = new STM(SITEMAP_DIR . '/sitemap_dynamic.xml');
 
         foreach ($this->getForumUrls() as $forum) {
-            $sitemap->addItem(make_url($forum['url']), time(), STM::HOURLY, 0.7);
+            $sitemap->addItem(make_url($forum['url']), $forum['time'], STM::HOURLY, 0.7);
         }
 
         foreach ($this->getTopicUrls() as $topic) {
@@ -177,36 +186,5 @@ class Sitemap
         bb_update_config(['sitemap_time' => TIMENOW]);
 
         return true;
-    }
-
-
-    /**
-     * Отправка карты сайта на указанный URL
-     *
-     * @param $url
-     * @param $map
-     *
-     * @return string
-     */
-    public function sendSitemap($url, $map): string
-    {
-        $file = $url . urlencode($map);
-
-        if (\function_exists('curl_init')) {
-            $ch = curl_init();
-
-            curl_setopt($ch, CURLOPT_URL, $file);
-            curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6);
-
-            $data = curl_exec($ch);
-            curl_close($ch);
-
-            return $data;
-        }
-
-        return file_get_contents($file);
     }
 }

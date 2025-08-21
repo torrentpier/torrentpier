@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -67,7 +67,7 @@ class Attach
         $this->attachment_extension_list = get_var('extension_list', ['']);
         $this->attachment_mimetype_list = get_var('mimetype_list', ['']);
 
-        $this->filename = (isset($_FILES['fileupload'], $_FILES['fileupload']['name']) && $_FILES['fileupload']['name'] !== 'none') ? trim(stripslashes($_FILES['fileupload']['name'])) : '';
+        $this->filename = (isset($_FILES['fileupload']['name']) && $_FILES['fileupload']['name'] !== 'none') ? trim(stripslashes($_FILES['fileupload']['name'])) : '';
 
         $this->attachment_list = get_var('attachment_list', ['']);
         $this->attachment_thumbnail_list = get_var('attach_thumbnail_list', [0]);
@@ -431,7 +431,7 @@ class Attach
                             }
                         }
 
-                        // Get current informations to delete the Old Attachment
+                        // Get current information to delete the Old Attachment
                         $sql = 'SELECT physical_filename, comment, thumbnail
 							FROM ' . BB_ATTACHMENTS_DESC . '
 							WHERE attach_id = ' . (int)$attachment_id;
@@ -569,7 +569,7 @@ class Attach
                     }
                 } else {
                     if (empty($this->attachment_mimetype_list[$i]) && $this->attachment_extension_list[$i] === TORRENT_EXT) {
-                        $this->attachment_mimetype_list[$i] = 'application/x-bittorrent';
+                        $this->attachment_mimetype_list[$i] = TORRENT_MIMETYPE;
                     }
 
                     // insert attachment into db
@@ -757,7 +757,7 @@ class Attach
             // Handling errors while uploading
             if (isset($this->error) && ($this->error !== UPLOAD_ERR_OK)) {
                 if (isset($lang['UPLOAD_ERRORS'][$this->error])) {
-                    bb_die($lang['UPLOAD_ERROR_COMMON'] . '<br><br>' . $lang['UPLOAD_ERRORS'][$this->error]);
+                    bb_die($lang['UPLOAD_ERROR_COMMON'] . '<br/><br/>' . $lang['UPLOAD_ERRORS'][$this->error]);
                 } else {
                     bb_die($lang['UPLOAD_ERROR_COMMON']);
                 }

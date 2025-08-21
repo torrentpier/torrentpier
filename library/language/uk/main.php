@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -63,6 +63,9 @@ $lang['SELECT_ACTION'] = 'Виберіть дію';
 $lang['CLEAR'] = 'Очистити';
 $lang['MOVE_TO_TOP'] = 'На початок';
 $lang['UNKNOWN'] = 'Не вказана';
+$lang['COPY_TO_CLIPBOARD'] = 'Копіювати до буферу обміну';
+$lang['NO_ITEMS'] = 'Здається, даних тут немає...';
+$lang['PLEASE_TRY_AGAIN'] = 'Спробуйте ще раз через декілька секунд...';
 
 $lang['NEXT_PAGE'] = 'Наступ.';
 $lang['PREVIOUS_PAGE'] = 'Попер.';
@@ -274,8 +277,8 @@ $lang['SPOILER_HEAD'] = 'прихований текст';
 $lang['SPOILER_CLOSE'] = 'згорнути';
 $lang['PLAY_ON_CURPAGE'] = 'Почати відтворення на цій сторінці';
 
-$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Востаннє змінено %s (%s); всього редагувань: %d'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Востаннє змінено %s (%s); всього редагувань: %d'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Закрити тему';
 $lang['UNLOCK_TOPIC'] = 'Розблокувати тему';
@@ -376,6 +379,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Перевищено ліміт (%s) смайл
 
 $lang['ATTACH_SIGNATURE'] = 'Приєднати підпис (можна змінити в профілі)';
 $lang['NOTIFY'] = 'Сповіщати мене про відповіді';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Дозволити роботам індексування цієї теми';
 
 $lang['STORED'] = 'Ваше повідомлення було додано успішно.';
 $lang['EDITED'] = 'Повідомлення було змінено';
@@ -536,7 +540,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Знайти теми користувача'; //
 $lang['NO_USER_ID_SPECIFIED'] = 'Вибачте, але такого користувача не існує.';
 $lang['WRONG_PROFILE'] = 'Ви не можете редагувати чужий профіль.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
+$lang['ONLY_ONE_AVATAR'] = 'Можна вказати тільки один тип аватара';
 $lang['FILE_NO_DATA'] = 'Файл з вказаною Вами URL-адресою не містить даних';
 $lang['NO_CONNECTION_URL'] = 'Неможливо встановити з\'єднання з URL-адресою, що Ви вказали';
 $lang['INCOMPLETE_URL'] = 'Ви вказали неповний URL';
@@ -597,7 +601,7 @@ $lang['RESET_AUTOLOGIN'] = 'Видалити ключ автоматичного
 $lang['RESET_AUTOLOGIN_EXPL'] = 'включаючи всі місця, де Ви заходили на форум з увімкненим авто-входом';
 
 $lang['AVATAR'] = 'Аватар';
-$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
+$lang['AVATAR_EXPLAIN'] = 'Показує невелике зображення під інформацією про вас в повідомленнях. Може бути показано тільки одне зображення, шириною не більше %d пікселів, висотою не більше %d пікселів і розміром не більше %s.';
 $lang['AVATAR_DELETE'] = 'Видалити аватар';
 $lang['AVATAR_DISABLE'] = 'Опція управління аватаром відключена за порушення <a href="%s"><b>правил форуму</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Завантажити аватар';
@@ -607,7 +611,7 @@ $lang['RETURN_PROFILE'] = 'Повернутися до профілю';
 $lang['SELECT_CATEGORY'] = 'Виберіть категорію';
 
 $lang['DELETE_IMAGE'] = 'Видалити зображення';
-$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
+$lang['SET_MONSTERID_AVATAR'] = 'Встановити аватар MonsterID';
 $lang['CURRENT_IMAGE'] = 'Поточне зображення';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Сповіщати про нові ПП';
@@ -687,17 +691,17 @@ $lang['DESC'] = 'за спаданням';
 $lang['ORDER'] = 'Сортувати';
 
 // Thanks
-$lang['THANK_TOPIC'] = 'Vote for this topic';
-$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['THANK_TOPIC'] = 'Проголосувати за цю тему';
+$lang['THANKS_GRATITUDE'] = 'Ми цінуємо вашу вдячність';
 $lang['LAST_LIKES'] = 'Останній голос';
-$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
-$lang['NO_LIKES'] = 'Nobody gave a vote yet';
-$lang['LIKE_ALREADY'] = 'You already voted this topic';
+$lang['LIKE_OWN_POST'] = 'Ви не можете проголосувати за власну публікацію.';
+$lang['NO_LIKES'] = 'Ще ніхто не проголосував';
+$lang['LIKE_ALREADY'] = 'Ви вже проголосували за цю тему';
 
 // Invites
-$lang['INVITE_CODE'] = 'Invite code';
-$lang['INCORRECT_INVITE'] = 'Invite not found';
-$lang['INVITE_EXPIRED'] = 'Invite expired';
+$lang['INVITE_CODE'] = 'Код запрошення';
+$lang['INCORRECT_INVITE'] = 'Запрошення не знайдено';
+$lang['INVITE_EXPIRED'] = 'Термін дії запрошення закінчився';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Групи користувачів';
@@ -743,8 +747,8 @@ $lang['GROUP_REQUEST'] = 'Було подано запит про вступ д�
 $lang['GROUP_APPROVED'] = 'Ваш запит був схвалений.';
 $lang['GROUP_ADDED'] = 'Ви були додані до групи.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Ви вже є членом групи';
-$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
-$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
+$lang['USER_IS_MEMBER_GROUP'] = '%s вже є членом цієї групи';
+$lang['USER_IS_MOD_GROUP'] = '%s є модератором групи';
 $lang['GROUP_TYPE_UPDATED'] = 'Тип групи успішно оновлено.';
 $lang['EFFECTIVE_DATE'] = 'Дата набуття чинності';
 
@@ -982,22 +986,23 @@ $lang['DATETIME']['NOV'] = 'Лис';
 $lang['DATETIME']['DEC'] = 'Гру';
 
 // Country selector
-$lang['COUNTRY'] = 'Country';
+$lang['COUNTRY'] = 'Країна';
+$lang['SET_OWN_COUNTRY'] = 'Вказати свою країну (вручну)';
 $lang['COUNTRIES'] = [
     0 => 'Не вказано',
-    'AD' => 'Andorra',
-    'AE' => 'United Arab Emirates',
-    'AF' => 'Afghanistan',
-    'AG' => 'Antigua and Barbuda',
-    'AI' => 'Anguilla',
-    'AL' => 'Albania',
-    'AM' => 'Armenia',
-    'AO' => 'Angola',
+    'AD' => 'Андора',
+    'AE' => 'Об\'єднані Арабські Емірати',
+    'AF' => 'Афганістан',
+    'AG' => 'Антиґуа і Барбуда',
+    'AI' => 'Ангілья',
+    'AL' => 'Албанія',
+    'AM' => 'Вірменія',
+    'AO' => 'Ангола',
     'AQ' => 'Antarctica',
     'AR' => 'Argentina',
     'AS' => 'American Samoa',
-    'AT' => 'Austria',
-    'AU' => 'Australia',
+    'AT' => 'Австрія',
+    'AU' => 'Австралія',
     'AW' => 'Aruba',
     'AX' => 'Aland Islands',
     'AZ' => 'Azerbaijan',
@@ -1015,7 +1020,7 @@ $lang['COUNTRIES'] = [
     'BN' => 'Brunei Darussalam',
     'BO' => 'Bolivia, Plurinational State of',
     'BQ' => 'Caribbean Netherlands',
-    'BR' => 'Brazil',
+    'BR' => 'Бразилія',
     'BS' => 'Bahamas',
     'BT' => 'Bhutan',
     'BV' => 'Bouvet Island',
@@ -1039,15 +1044,15 @@ $lang['COUNTRIES'] = [
     'CV' => 'Cape Verde',
     'CW' => 'Country of Curaçao',
     'CX' => 'Christmas Island',
-    'CY' => 'Cyprus',
-    'CZ' => 'Czech Republic',
-    'DE' => 'Germany',
+    'CY' => 'Кіпр',
+    'CZ' => 'Чехія',
+    'DE' => 'Німеччина',
     'DJ' => 'Djibouti',
     'DK' => 'Denmark',
     'DM' => 'Dominica',
     'DO' => 'Dominican Republic',
     'DZ' => 'Algeria',
-    'EC' => 'Ecuador',
+    'EC' => 'Еквадор',
     'EE' => 'Estonia',
     'EG' => 'Egypt',
     'EH' => 'Western Sahara',
@@ -1060,9 +1065,9 @@ $lang['COUNTRIES'] = [
     'FK' => 'Falkland Islands (Malvinas)',
     'FM' => 'Micronesia, Federated States of',
     'FO' => 'Faroe Islands',
-    'FR' => 'France',
+    'FR' => 'Франція',
     'GA' => 'Gabon',
-    'GB-ENG' => 'England',
+    'GB-ENG' => 'Англія',
     'GB-NIR' => 'Northern Ireland',
     'GB-SCT' => 'Scotland',
     'GB-WLS' => 'Wales',
@@ -1078,7 +1083,7 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR' => 'Greece',
+    'GR' => 'Греція',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
     'GU' => 'Guam',
@@ -1087,7 +1092,7 @@ $lang['COUNTRIES'] = [
     'HK' => 'Hong Kong',
     'HM' => 'Heard Island and McDonald Islands',
     'HN' => 'Honduras',
-    'HR' => 'Croatia',
+    'HR' => 'Хорватія',
     'HT' => 'Haiti',
     'HU' => 'Hungary',
     'ID' => 'Indonesia',
@@ -1220,7 +1225,7 @@ $lang['COUNTRIES'] = [
     'TV' => 'Tuvalu',
     'TW' => 'Taiwan (Republic of China)',
     'TZ' => 'Tanzania, United Republic of',
-    'UA' => 'Ukraine',
+    'UA' => 'Україна',
     'UG' => 'Uganda',
     'UM' => 'US Minor Outlying Islands',
     'US' => 'United States',
@@ -1266,6 +1271,24 @@ $lang['DOWNLOAD'] = 'Завантажити'; // this Language Variable is defin
 $lang['FILESIZE'] = 'Розмір файлу';
 $lang['VIEWED'] = 'Переглянуто';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Розширення \'%s\' було деактивовано адміністратором, тому це вкладення не відображається.'; // used in Posts and PM's, replace %s with mime type
+
+// Viewtopic -> Display of Attachments -> TorrServer integration
+$lang['STREAM'] = 'Stream';
+$lang['RESOLUTION'] = 'Resolution: <b>%s</b>';
+$lang['CHANNELS'] = 'Channels: <b>%s</b>';
+$lang['CHANNELS_LAYOUT'] = 'Channels layout: <b>%s</b>';
+$lang['BITRATE'] = 'Bitrate: <b>%s</b>';
+$lang['SAMPLE_RATE'] = 'Sample rate: <b>%s</b>';
+$lang['AUDIO_TRACK'] = 'Audio track information (%d):';
+$lang['AUDIO_CODEC'] = 'Audio codec: <b title="%s">%s</b>';
+$lang['VIDEO_CODEC'] = 'Video codec: <b title="%s">%s</b>';
+$lang['SHOW_MORE_INFORMATION_FILE'] = 'Show more information about file';
+$lang['DOWNLOAD_M3U_FILE'] = 'Завантажити .m3u файл';
+$lang['PLAYBACK_M3U'] = 'Відтворити .m3u файл';
+$lang['COPY_STREAM_LINK'] = 'Скопіювати посилання на потік в буфер обміну';
+$lang['M3U_NOT_SUPPORTED'] = 'Цей файл не може відтворюватися у браузері...';
+$lang['M3U_FFPROBE_NO_DATA'] = 'It seems ffprobe will not be able to return data about this codec...';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'Вкладення';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Вкладення піктограми';
@@ -1347,11 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Не вдалося зареєструвати торе�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Інший торрент з таким же info_hash вже <a href="%s"><b>зареєстрований</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Список файлів';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
-$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_CREATION_DATE'] = 'Дата створення';
+$lang['BT_IS_PRIVATE'] = 'Приватний торрент';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
+$lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Вилучити з трекера';
 $lang['BT_UNREGISTERED'] = 'Торент незареєстрований';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1376,6 +1405,7 @@ $lang['SEEDING'] = 'Сідер';
 $lang['LEECHING'] = 'Лічер';
 $lang['IS_REGISTERED'] = 'Зареєстрований';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1412,6 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Тип торрента успішно змінен�
 $lang['DEL_TORRENT'] = 'Ви впевнені, що хочете видалити торрент?';
 $lang['DEL_MOVE_TORRENT'] = 'Ви впевнені, що хочете видалити та перемістити тему?';
 $lang['UNEXECUTED_RELEASE'] = 'У Вас є недооформлений реліз, перш ніж створювати новий - виправте свій недооформлений!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Зміна статусу роздачі - %s';
@@ -1446,6 +1477,7 @@ $lang['SET_SILVER_TORRENT'] = 'Зробити срібним';
 $lang['UNSET_SILVER_TORRENT'] = 'Зняти срібло';
 $lang['GOLD_STATUS'] = 'ЗОЛОТА РОЗДАЧА! ЗАВАНТАЖЕНЕ НЕ ЗАРАХОВУЄТЬСЯ!';
 $lang['SILVER_STATUS'] = 'СРІБНА РОЗДАЧА! ЗАВАНТАЖЕНЕ ЗАРАХОВУЄТЬСЯ ЛИШЕ НАПОЛОВИНУ!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Шукати на форумах';
@@ -1572,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Ця опція доступна тільки �
 
 $lang['LOGS'] = 'Історія теми';
 $lang['FORUM_LOGS'] = 'Історія форуму';
-$lang['AUTOCLEAN'] = 'Автоочищення';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Дизайнер';
 
 $lang['LAST_IP'] = 'Остання IP:';
@@ -1648,7 +1680,7 @@ $lang['SEND_PM_TXTB'] = '[ПП]';
 
 $lang['DECLENSION']['REPLIES'] = ['відповідь', 'відповіді'];
 $lang['DECLENSION']['TIMES'] = ['раз', 'разів'];
-$lang['DECLENSION']['FILES'] = ['file', 'files'];
+$lang['DECLENSION']['FILES'] = ['файл', 'файли'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['секунда', 'секунд'],
@@ -1693,11 +1725,10 @@ $lang['NOTICE'] = '!УВАГА!';
 $lang['COPY'] = 'Сайт не надає електронні версії творів, а займається лише колекціонуванням та каталогізацією посилань, що надсилають та публікують на форумі наші читачі. Якщо ви є правовласником будь-якого представленого матеріалу і не бажаєте, щоб посилання на нього були в нашому каталозі, зв\'яжіться з нами і ми негайно приберемо його. Файли для обміну на трекері надані користувачами сайту, і адміністрація не несе відповідальності за їх зміст. Прохання не завантажувати файли, захищені авторськими правами, а також файли нелегального змісту!';
 
 // FILELIST
-$lang['FILELIST'] = 'Список файлів';
 $lang['COLLAPSE'] = 'Згорнути теку';
 $lang['EXPAND'] = 'Розгорнути';
 $lang['SWITCH'] = 'Перейти';
-$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Збільшення/зменшення вікна';
 $lang['EMPTY_ATTACH_ID'] = 'Відсутній ідентифікатор файла!';
 $lang['TOR_NOT_FOUND'] = 'Файл відсутній на сервері!';
 $lang['ERROR_BUILD'] = 'Вміст даного торрент-файлу не може бути переглянуто на сайті (не вдалося вибудувати список файлів)';
@@ -1781,8 +1812,8 @@ $lang['OFF'] = 'вимк';
 $lang['MEMORY'] = 'Пам\'ять: ';
 $lang['QUERIES'] = 'запити';
 $lang['LIMIT'] = 'Ліміт:';
-$lang['SHOW_LOG'] = 'Show log';
-$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['SHOW_LOG'] = 'Показати журнал';
+$lang['EXPLAINED_LOG'] = 'Пояснений журнал';
 $lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
@@ -1811,8 +1842,10 @@ $lang['BOLD'] = 'Жирний текст: [b]текст[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Курсив: [i]текст[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Підкреслений текст: [u]текст[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Закреслений текст: [s]текст[/s] (Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Цитата: [quote]текст[/quote] (Ctrl+Q)';
@@ -1823,7 +1856,7 @@ $lang['CODE_TITLE'] = 'Код: [code]код[/code] (Ctrl+K)';
 $lang['LIST'] = 'Список';
 $lang['LIST_TITLE'] = 'Список: [list]текст[/list] (Ctrl+І)';
 $lang['LIST_ITEM'] = 'Нумерований список: [list=]текст[/list] (Ctrl+O)';
-$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM'] = 'Акронім';
 $lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Цитувати виділене';
 $lang['JAVASCRIPT_ON'] = 'Для надсилання повідомлень необхідно включити JavaScript';
@@ -1842,12 +1875,15 @@ $lang['DL_DL'] = 'Завантажено';
 $lang['DL_UL_SPEED'] = 'Швидкість віддачі';
 $lang['DL_DL_SPEED'] = 'Швидкість завантаження';
 $lang['DL_PORT'] = 'Порт';
-$lang['DL_CLIENT'] = 'BitTorrent client';
+$lang['DL_CLIENT'] = 'BitTorrent клієнт';
 $lang['DL_FORMULA'] = 'Формула: Віддано/Розмір роздачі';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'зупинено';
 $lang['DL_UPD'] = 'Підключений: ';
 $lang['DL_INFO'] = 'показані дані <i><b>тільки за поточну сесію</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Закріпити перший пост';
@@ -1910,6 +1946,32 @@ $lang['TRACKER_CONFIG'] = 'Налаштування трекера';
 $lang['RELEASE_TEMPLATES'] = 'Шаблони для релізів';
 $lang['ACTIONS_LOG'] = 'Звіт про дії';
 
+// Migrations
+$lang['MIGRATIONS_STATUS']  = 'Database Migration Status';
+$lang['MIGRATIONS_DATABASE_NAME']  = 'Database Name';
+$lang['MIGRATIONS_DATABASE_TOTAL']  = 'Total Tables';
+$lang['MIGRATIONS_DATABASE_SIZE']  = 'Database Size';
+$lang['MIGRATIONS_DATABASE_INFO']  = 'Database Information';
+$lang['MIGRATIONS_SYSTEM']  = 'Migration System';
+$lang['MIGRATIONS_NEEDS_SETUP']  = 'Needs Setup';
+$lang['MIGRATIONS_ACTIVE']  = 'Активні (є сідер або лічер)';
+$lang['MIGRATIONS_NOT_INITIALIZED']  = 'Not Initialized';
+$lang['MIGRATIONS_UP_TO_DATE']  = 'All up to date';
+$lang['MIGRATIONS_PENDING_COUNT']  = 'pending';
+$lang['MIGRATIONS_APPLIED']  = 'Applied Migrations';
+$lang['MIGRATIONS_PENDING']  = 'Pending Migrations';
+$lang['MIGRATIONS_VERSION']  = 'Версія';
+$lang['MIGRATIONS_NAME']  = 'Migration Name';
+$lang['MIGRATIONS_FILE']  = 'Migration File';
+$lang['MIGRATIONS_APPLIED_AT']  = 'Applied At';
+$lang['MIGRATIONS_COMPLETED_AT']  = 'Completed At';
+$lang['MIGRATIONS_CURRENT_VERSION']  = 'Поточна версія';
+$lang['MIGRATIONS_NOT_APPLIED']  = 'No migrations applied';
+$lang['MIGRATIONS_INSTRUCTIONS']  = 'Instructions';
+$lang['MIGRATIONS_SETUP_STATUS']  = 'Setup Status';
+$lang['MIGRATIONS_SETUP_GUIDE']  = 'See setup guide below';
+$lang['MIGRATIONS_ACTION_REQUIRED']  = 'Action Required';
+
 // Index
 $lang['MAIN_INDEX'] = 'Список форумів';
 $lang['FORUM_STATS'] = 'Статистика форумів';
@@ -1936,8 +1998,8 @@ $lang['NOT_AVAILABLE'] = 'Недоступне';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Cache';
-$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
+$lang['CLEAR_CACHE'] = 'Кеш';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Кеш шаблонів';
 
 // Update
 $lang['USER_LEVELS'] = 'Рівні користувачів';
@@ -1951,6 +2013,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Кількість повідомле�
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Показати список користувачів онлайн';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Виберіть користувача';
@@ -2290,14 +2357,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Заборонене ім\'я користува
 $lang['DISALLOWED_ALREADY'] = 'Ім\'я, яке Ви намагаєтеся заборонити вже заборонено, або є в списку нецензурних слів, або існує користувач з відповідним ім\'ям.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sПовернутися до керування забороненими іменами%s';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Інформація про версію';
@@ -2787,6 +2846,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Тема:<br /> <b>розділена</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Пост:<br /> <b>видалено</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
@@ -2823,7 +2885,7 @@ $lang['RELEASE_WELCOME'] = 'Будь ласка, заповніть форму �
 $lang['NEW_RELEASE'] = 'Новий реліз';
 $lang['NEXT'] = 'Продовжити';
 $lang['OTHER'] = 'Інший';
-$lang['OTHERS'] = 'Others';
+$lang['OTHERS'] = 'Інші';
 $lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Ви повинні заповнити поле <b>%s</b>';
@@ -2963,12 +3025,8 @@ $lang['SITEMAP_ADMIN'] = 'Керування картою сайту (sitemap)';
 $lang['SITEMAP_CREATED'] = 'Файл sitemap створений';
 $lang['SITEMAP_AVAILABLE'] = 'і доступний за адресою';
 $lang['SITEMAP_NOT_CREATED'] = 'Файл sitemap ще не створено';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Сповіщення пошукової системи';
-$lang['SITEMAP_SENT'] = 'надсилання завершено';
-$lang['SITEMAP_ERROR'] = 'помилка надсилання';
 $lang['SITEMAP_OPTIONS'] = 'Опції';
 $lang['SITEMAP_CREATE'] = 'Створити / оновити файл sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Повідомити пошукові системи про наявність нової версії файлу sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Що робити далі?';
 $lang['SITEMAP_GOOGLE_1'] = 'Зареєструйте Ваш сайт на <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> з використанням Вашого облікового запису Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Додати файл sitemap</a> зареєстрованого Вами сайту.';
@@ -2996,6 +3054,8 @@ $lang['HASH_NOT_FOUND'] = 'Роздачу з хешем %s не знайдено
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'На цій сторінці Ви можете вказати текст основних правил ресурсу, які відображаються для користувачів.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'неактивні користувачі протягом 30 днів',
@@ -3050,7 +3110,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Перевірка, що Ви не робот';
 $lang['CAPTCHA_WRONG'] = 'Ви не змогли підтвердити, що Ви не робот';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha налаштована не повністю</h2><p>Якщо Ви ще не згенерували ключі, можете це зробити на сторінці <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />Після того, як Ви згенеруєте ключі, потрібно прописати їх у файл library/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Відповісти';

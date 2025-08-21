@@ -146,8 +146,8 @@
 <table class="attach bordered med">
 	<tr class="row3">
 		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}
-        <a href="{postrow.attach.tor_reged.FILELIST_LINK}" title="File hashes | .torrent meta-info" target="_blank"><img src="./styles/images/t_info.png" width="12" height="12" border="0"></a>
-        <!-- IF MAGNET_LINKS and not postrow.attach.tor_reged.TOR_FROZEN -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
+		<a href="{#FILELIST_URL#}{TOPIC_ID}" title="{L_BT_FLIST_LINK_TITLE}" target="_blank"><img alt="{L_BT_FLIST_LINK_TITLE}" src="{postrow.attach.tor_reged.FILELIST_ICON}" width="12" height="12" border="0"></a>
+		<!-- IF postrow.attach.tor_reged.MAGNET and not postrow.attach.tor_reged.TOR_FROZEN -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
 	</tr>
     <!-- IF postrow.attach.tor_reged.TOR_TYPE -->
     <tr class="row4">
@@ -160,8 +160,8 @@
 			{postrow.attach.tor_reged.TRACKER_LINK}
 			[ <span title="{postrow.attach.tor_reged.REGED_DELTA}">{postrow.attach.tor_reged.REGED_TIME}</span> ]
             <!-- IF not postrow.attach.tor_reged.TOR_FROZEN -->
-            <br><!-- IF postrow.attach.tor_reged.HASH --><br>info_hash: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH}" title="Copy to clipboard">{postrow.attach.tor_reged.HASH}</span><!-- ENDIF -->
-            <!-- IF postrow.attach.tor_reged.HASH_V2 --><br>info_hash v2: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH_V2}" title="Copy to clipboard">{postrow.attach.tor_reged.HASH_V2}</span><!-- ENDIF -->
+            <br/><!-- IF postrow.attach.tor_reged.HASH --><br/>info_hash: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH}" title="{L_COPY_TO_CLIPBOARD}">{postrow.attach.tor_reged.HASH}</span><!-- ENDIF -->
+            <!-- IF postrow.attach.tor_reged.HASH_V2 --><br/>info_hash v2: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH_V2}" title="{L_COPY_TO_CLIPBOARD}">{postrow.attach.tor_reged.HASH_V2}</span><!-- ENDIF -->
             <!-- ENDIF -->
         </td>
 		<td width="15%" rowspan="4" class="tCenter pad_6">
@@ -172,7 +172,13 @@
 			<p>{postrow.attach.tor_reged.S_UPLOAD_IMAGE}</p><p><b>{L_DOWNLOAD}</b></p></a>
 			<!-- ENDIF -->
 			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
-			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
+			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_BT_FLIST}" /></p>
+			<!-- BEGIN tor_server -->
+			<!-- IF postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK -->
+			<hr/>
+			<a href="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK}" target="_blank"><p><img alt="{L_PLAYBACK_M3U}" src="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_ICON}" width="21" height="21" border="0"></p>{L_PLAYBACK_M3U}</a>
+			<!-- ENDIF -->
+			<!-- END tor_server -->
 		</td>
 	</tr>
 	<tr class="row1">

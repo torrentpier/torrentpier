@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,9 +11,9 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg, $lang, $userdata;
+global $lang, $userdata;
 
-if (!$bb_cfg['tor_thank']) {
+if (!config()->get('tor_thank')) {
     $this->ajax_die($lang['MODULE_OFF']);
 }
 
@@ -49,12 +49,12 @@ switch ($mode) {
 
         // Limit voters per topic
         $thanks_count = DB()->fetch_row('SELECT COUNT(*) as thx FROM ' . BB_THX . " WHERE topic_id = $topic_id")['thx'];
-        if ($thanks_count > (int)$bb_cfg['tor_thank_limit_per_topic']) {
+        if ($thanks_count > (int)config()->get('tor_thank_limit_per_topic')) {
             DB()->query('DELETE FROM ' . BB_THX . " WHERE topic_id = $topic_id ORDER BY time ASC LIMIT 1");
         }
         break;
     case 'get':
-        if (IS_GUEST && !$bb_cfg['tor_thanks_list_guests']) {
+        if (IS_GUEST && !config()->get('tor_thanks_list_guests')) {
             $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
         }
 

@@ -2,23 +2,30 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_ROOT', __DIR__ . '/');
+define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+define('BB_PATH', BB_ROOT);
 
 // Check CLI mode
-if (php_sapi_name() !== 'cli') {
+if (PHP_SAPI != 'cli') {
     die('Please run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php ' . basename(__FILE__) . '</code> in CLI mode');
 }
+
+// Get all constants
+require_once BB_ROOT . 'library/defines.php';
+
+// Include CLI functions
+require INC_DIR . '/functions_cli.php';
 
 /**
  * System requirements
  */
-define('CHECK_REQUIREMENTS', [
-    'php_min_version' => '8.1.0',
+const CHECK_REQUIREMENTS = [
+    'php_min_version' => '8.2.0',
     'ext_list' => [
         'json',
         'curl',
@@ -29,128 +36,10 @@ define('CHECK_REQUIREMENTS', [
         'intl',
         'xml',
         'xmlwriter',
-        'zip'
+        'zip',
+        'gd'
     ],
-]);
-
-/**
- * Colored console output
- *
- * @param string $str
- * @param string $type
- * @return void
- */
-function out(string $str, string $type = ''): void
-{
-    echo match ($type) {
-        'error' => "\033[31m$str \033[0m\n",
-        'success' => "\033[32m$str \033[0m\n",
-        'warning' => "\033[33m$str \033[0m\n",
-        'info' => "\033[36m$str \033[0m\n",
-        'debug' => "\033[90m$str \033[0m\n",
-        default => "$str\n",
-    };
-}
-
-/**
- * Run process with realtime output
- *
- * @param string $cmd
- * @param string|null $input
- * @return void
- */
-function runProcess(string $cmd, string $input = null): void
-{
-    $descriptorSpec = [
-        0 => ['pipe', 'r'],
-        1 => ['pipe', 'w'],
-        2 => ['pipe', 'w'],
-    ];
-
-    $process = proc_open($cmd, $descriptorSpec, $pipes);
-
-    if (!is_resource($process)) {
-        out('- Could not start subprocess', 'error');
-        return;
-    }
-
-    // Write input if provided
-    if ($input !== null) {
-        fwrite($pipes[0], $input);
-        fclose($pipes[0]);
-    }
-
-    // Read and print output in real-time
-    while (!feof($pipes[1])) {
-        echo stream_get_contents($pipes[1], 1);
-        flush(); // Flush output buffer for immediate display
-    }
-
-    // Read and print error output
-    while (!feof($pipes[2])) {
-        echo stream_get_contents($pipes[2], 1);
-        flush();
-    }
-
-    fclose($pipes[1]);
-    fclose($pipes[2]);
-
-    proc_close($process);
-}
-
-/**
- * Remove directory recursively
- *
- * @param string $dir
- * @return void
- */
-function rmdir_rec(string $dir): void
-{
-    $it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
-    $files = new RecursiveIteratorIterator($it,
-        RecursiveIteratorIterator::CHILD_FIRST);
-    foreach ($files as $file) {
-        if ($file->isDir()) {
-            rmdir($file->getPathname());
-        } else {
-            unlink($file->getPathname());
-        }
-    }
-    rmdir($dir);
-}
-
-/**
- * Setting permissions recursively
- *
- * @param string $dir
- * @param int $dirPermissions
- * @param int $filePermissions
- * @return void
- */
-function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
-{
-    $dp = opendir($dir);
-    while ($file = readdir($dp)) {
-        if (($file == '.') || ($file == '..')) {
-            continue;
-        }
-
-        $fullPath = realpath($dir . '/' . $file);
-        if (is_dir($fullPath)) {
-            // out("- Directory: $fullPath");
-            chmod($fullPath, $dirPermissions);
-            chmod_r($fullPath, $dirPermissions, $filePermissions);
-        } elseif (is_file($fullPath)) {
-            // out("- File: $fullPath");
-            chmod($fullPath, $filePermissions);
-        } else {
-            out("- Cannot find target path: $fullPath", 'error');
-            return;
-        }
-    }
-
-    closedir($dp);
-}
+];
 
 // Welcoming message
 out("--- TorrentPier Installer ---\n", 'info');
@@ -160,25 +49,31 @@ out("- Checking installed extensions...", 'info');
 
 // [1] Check PHP Version
 if (!version_compare(PHP_VERSION, CHECK_REQUIREMENTS['php_min_version'], '>=')) {
-    out("- TorrentPier requires PHP version " . CHECK_REQUIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION, 'error');
+    out("- TorrentPier requires PHP version " . CHECK_REQUIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION, 'warning');
 }
 
 // [2] Check installed PHP Extensions on server
 foreach (CHECK_REQUIREMENTS['ext_list'] as $ext) {
     if (!extension_loaded($ext)) {
-        out("- ext-$ext not installed", 'error');
-        exit;
+        out("- ext-$ext not installed. Check out php.ini file", 'error');
+        if (!defined('EXTENSIONS_NOT_INSTALLED')) {
+            define('EXTENSIONS_NOT_INSTALLED', true);
+        }
     } else {
         out("- ext-$ext installed!");
     }
 }
-out("- All extensions are installed!\n", 'success');
+if (!defined('EXTENSIONS_NOT_INSTALLED')) {
+    out("- All extensions are installed!\n", 'success');
+} else {
+    exit;
+}
 
 // Check if already installed
 if (is_file(BB_ROOT . '.env')) {
     out('- TorrentPier already installed', 'warning');
     echo 'Are you sure want to re-install TorrentPier? [y/N]: ';
-    if (readline() === 'y') {
+    if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
         out("\n- Re-install process started...", 'info');
         // environment
         if (is_file(BB_ROOT . '.env')) {
@@ -200,7 +95,7 @@ if (is_file(BB_ROOT . '.env')) {
         }
         // composer dir
         if (is_dir(BB_ROOT . 'vendor')) {
-            rmdir_rec(BB_ROOT . 'vendor');
+            removeDir(BB_ROOT . 'vendor', true);
             if (!is_dir(BB_ROOT . 'vendor')) {
                 out("- Composer directory successfully removed!");
             } else {
@@ -209,6 +104,7 @@ if (is_file(BB_ROOT . '.env')) {
             }
         }
         out("- Re-install process completed!\n", 'success');
+        out('- Starting installation...', 'info');
     } else {
         exit;
     }
@@ -230,27 +126,42 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
         out('- Downloading Composer...', 'info');
         if (copy('https://getcomposer.org/installer', BB_ROOT . 'composer-setup.php')) {
             out("- Composer successfully downloaded!\n", 'success');
-            runProcess('php ' . BB_ROOT . 'composer-setup.php');
+            runProcess('php ' . BB_ROOT . 'composer-setup.php --install-dir=' . BB_ROOT);
         } else {
-            out('- Cannot download Composer', 'error');
+            out('- Cannot download Composer. Please, download it (composer.phar) manually', 'error');
             exit;
         }
         if (is_file(BB_ROOT . 'composer-setup.php')) {
             if (unlink(BB_ROOT . 'composer-setup.php')) {
                 out("- Composer installation file successfully removed!\n", 'success');
             } else {
-                out('- Cannot remove Composer installation file. Delete it manually', 'warning');
+                out('- Cannot remove Composer installation file (composer-setup.php). Please, delete it manually', 'warning');
             }
         }
+    } else {
+        out("- composer.phar file found!\n", 'success');
     }
 
     // Installing dependencies
     if (is_file(BB_ROOT . 'composer.phar')) {
         out('- Installing dependencies...', 'info');
+
         runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
+        define('COMPOSER_COMPLETED', true);
+    } else {
+        out('- composer.phar not found. Please, download it (composer.phar) manually', 'error');
+        exit;
+    }
+} else {
+    out('- Composer dependencies are present!', 'success');
+    out("- Note: Remove 'vendor' folder if you want to re-install dependencies\n");
+}
+
+// Check composer dependencies
+if (defined('COMPOSER_COMPLETED')) {
+    if (is_file(BB_ROOT . 'vendor/autoload.php')) {
         out("- Completed! Composer dependencies are installed!\n", 'success');
     } else {
-        out('- composer.phar not found', 'error');
         exit;
     }
 }
@@ -266,7 +177,7 @@ if (is_file(BB_ROOT . '.env.example') && !is_file(BB_ROOT . '.env')) {
 }
 
 // Editing ENV file
-$DB_HOST = '';
+$DB_HOST = 'localhost';
 $DB_PORT = 3306;
 $DB_DATABASE = '';
 $DB_USERNAME = '';
@@ -287,23 +198,23 @@ if (is_file(BB_ROOT . '.env')) {
         if (trim($line) !== '' && !str_starts_with($line, '#')) {
             $parts = explode('=', $line, 2);
             $key = trim($parts[0]);
-            $value = isset($parts[1]) ? trim($parts[1]) : '';
-
-            // Database default values
-            if (in_array($key, ['DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'])) {
-                $$key = $value;
-            }
+            $value = (!empty($parts[1]) && $key !== 'DB_PASSWORD') ? trim($parts[1]) : '';
 
             out("\nCurrent value of $key: $value", 'debug');
             echo "Enter a new value for $key (or leave empty to not change): ";
-            $newValue = readline();
+            $newValue = trim(readline());
 
-            if (!empty($newValue)) {
-                $line = "$key=$newValue";
-                // Configuring database connection
-                if (in_array($key, ['DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'])) {
-                    $$key = $newValue;
+            if (!empty($newValue) || $key === 'DB_PASSWORD') {
+                if ($key === 'TP_HOST') {
+                    if (!preg_match('/^https?:\/\//', $newValue)) {
+                        $newValue = 'https://' . $newValue;
+                    }
+                    $newValue = parse_url($newValue, PHP_URL_HOST);
                 }
+                $line = "$key=$newValue";
+                $$key = $newValue;
+            } else {
+                $$key = $value;
             }
         }
 
@@ -345,7 +256,7 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     }
 
     // Creating database if not exist
-    if ($conn->query("CREATE DATABASE IF NOT EXISTS $DB_DATABASE")) {
+    if ($conn->query("CREATE DATABASE IF NOT EXISTS $DB_DATABASE CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")) {
         out('- Database created successfully!', 'success');
     } else {
         out("- Cannot create database: $DB_DATABASE", 'error');
@@ -353,35 +264,68 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     }
     $conn->select_db($DB_DATABASE);
 
-    // Checking SQL dump
-    $dumpPath = BB_ROOT . 'install/sql/mysql.sql';
-    if (is_file($dumpPath) && is_readable($dumpPath)) {
-        out('- SQL dump file found and readable!', 'success');
-    } else {
-        out('- SQL dump file not found / not readable', 'error');
+    // Close database connection - migrations will handle their own connections
+    $conn->close();
+
+    // Run database migrations
+    out('- Setting up database using migrations...', 'info');
+
+    // Check if phinx.php exists
+    if (!is_file(BB_ROOT . 'phinx.php')) {
+        out('- Migration configuration (phinx.php) not found', 'error');
         exit;
     }
 
-    // Inserting SQL dump
-    out('- Start importing SQL dump...', 'info');
-    $tempLine = '';
-    foreach (file($dumpPath) as $line) {
-        if (str_starts_with($line, '--') || $line == '') {
-            continue;
-        }
+    // Run migrations
+    $migrationResult = runProcess('php vendor/bin/phinx migrate --configuration=' . BB_ROOT . 'phinx.php');
+    if ($migrationResult !== 0) {
+        out('- Database migration failed', 'error');
+        exit;
+    }
 
-        $tempLine .= $line;
-        if (str_ends_with(trim($line), ';')) {
-            if (!$conn->query($tempLine)) {
-                out("- Error performing query: $tempLine", 'error');
-                exit;
+    out("- Database setup completed!\n", 'success');
+
+    // Autofill host in robots.txt
+    $robots_txt_file = BB_ROOT . 'robots.txt';
+    if (isset($TP_HOST) && is_file($robots_txt_file)) {
+        $content = file_get_contents($robots_txt_file);
+        $content = str_replace('example.com', $TP_HOST, $content);
+        file_put_contents($robots_txt_file, $content);
+    }
+
+    if (isset($APP_ENV) && $APP_ENV === 'local') {
+        if (!is_file(BB_ROOT . 'library/config.local.php')) {
+            if (copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php')) {
+                out('- Local configuration file created!', 'success');
+            } else {
+                out('- Cannot create library/config.local.php file. You can create it manually, just copy config.php and rename it to config.local.php', 'warning');
             }
-            $tempLine = '';
+        }
+    } else {
+        if (rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()))) {
+            out("- Installation file renamed!", 'success');
+        } else {
+            out('- Cannot rename installation file (' . __FILE__ . '). Please, rename it manually for security reasons', 'warning');
         }
     }
 
-    $conn->close();
-    out("- Importing SQL dump completed!\n", 'success');
-    out("- Voila! Good luck & have fun!", 'success');
-    rename(__FILE__, hash('md5', time()));
+    // Cleanup...
+    if (is_file(BB_ROOT . '_cleanup.php')) {
+        out("\n--- Finishing installation (Cleanup) ---\n", 'info');
+        out('The cleanup process will remove:');
+        out('- Development documentation (README, CHANGELOG)', 'debug');
+        out('- Git configuration files', 'debug');
+        out('- CI/CD pipelines and code analysis tools', 'debug');
+        out('- Translation and contribution guidelines', 'debug');
+        echo 'Do you want to delete these files permanently? [y/N]: ';
+        if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
+            out("\n- Cleanup...", 'info');
+            require_once BB_ROOT . '_cleanup.php';
+            unlink(BB_ROOT . '_cleanup.php');
+        } else {
+            out('- Skipping...', 'info');
+        }
+    }
+
+    out("\n- Voila! Good luck & have fun!", 'success');
 }

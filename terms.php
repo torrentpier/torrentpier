@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -15,13 +15,13 @@ require INC_DIR . '/bbcode.php';
 // Start session management
 $user->session_start();
 
-if (!$bb_cfg['terms'] && !IS_ADMIN) {
+if (!config()->get('terms') && !IS_ADMIN) {
     redirect('index.php');
 }
 
 $template->assign_vars([
     'TERMS_EDIT' => bbcode2html(sprintf($lang['TERMS_EMPTY_TEXT'], make_url('admin/admin_terms.php'))),
-    'TERMS_HTML' => bbcode2html($bb_cfg['terms']),
+    'TERMS_HTML' => bbcode2html(config()->get('terms')),
 ]);
 
 print_page('terms.tpl');

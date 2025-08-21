@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 DB()->expect_slow_query(600);
 
-if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['seed_bonus_release']) {
+if (config()->get('seed_bonus_enabled') && config()->get('seed_bonus_points') && config()->get('seed_bonus_release')) {
     DB()->query("
 		CREATE TEMPORARY TABLE tmp_bonus (
 			user_id       INT UNSIGNED NOT NULL DEFAULT '0',
@@ -21,7 +21,7 @@ if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['se
 		) ENGINE = MEMORY
 	");
 
-    $tor_size = ($bb_cfg['seed_bonus_tor_size'] * 1073741824);
+    $tor_size = (config()->get('seed_bonus_tor_size') * 1073741824);
 
     DB()->query("INSERT INTO tmp_bonus
 		SELECT bt.user_id, count(bt.seeder) AS release_count
@@ -29,27 +29,20 @@ if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['se
 			WHERE tor.topic_id = bt.topic_id
 				AND tor.size   > $tor_size
 				AND bt.seeder  > 0
-			GROUP BY user_id
+			GROUP BY bt.user_id
 	");
 
-    $seed_bonus = unserialize($bb_cfg['seed_bonus_points']);
-    $seed_release = unserialize($bb_cfg['seed_bonus_release']);
-
-    $sql = "SELECT last_run
-		FROM " . BB_CRON . "
-		WHERE cron_script = '" . basename(__FILE__) . "'
-		LIMIT 1";
-    $cron_runs = DB()->fetch_row($sql);
-    $cron_job_last_run = (TIMENOW - strtotime($cron_runs['last_run']));
+    $seed_bonus = unserialize(config()->get('seed_bonus_points'));
+    $seed_release = unserialize(config()->get('seed_bonus_release'));
 
     foreach ($seed_bonus as $i => $points) {
         if (!$points || !$seed_release[$i]) {
             continue;
         }
 
-        $user_points = ($cron_job_last_run < 3600) ? round((float)$points * ($cron_job_last_run / 3600), 2) : 0;
+        $user_points = ((float)$points / 4);
         $release = (int)$seed_release[$i];
-        $user_regdate = (TIMENOW - $bb_cfg['seed_bonus_user_regdate'] * 86400);
+        $user_regdate = (TIMENOW - config()->get('seed_bonus_user_regdate') * 86400);
 
         DB()->query("
 			UPDATE " . BB_USERS . " u, " . BB_BT_USERS . " bu, tmp_bonus b

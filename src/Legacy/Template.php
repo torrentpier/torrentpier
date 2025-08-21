@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -17,7 +17,7 @@ class Template
 {
     /**
      * Variable that holds all the data we'll be substituting into the compiled templates.
-     * This will end up being a multi-dimensional array like this:
+     * This will end up being a multidimensional array like this:
      * $this->_tpldata[block.][iteration#][child.][iteration#][child2.][iteration#][variablename] == value
      * if it's a root-level variable, it'll be like this:
      * $this->vars[varname] == value  or  $this->_tpldata['.'][0][varname] == value
@@ -99,7 +99,7 @@ class Template
      */
     public function __construct($root = '.')
     {
-        global $bb_cfg, $lang;
+        global $lang;
 
         // setting pointer "vars"
         $this->vars = &$this->_tpldata['.'][0];
@@ -107,8 +107,9 @@ class Template
         $this->tpldir = TEMPLATES_DIR;
         $this->root = $root;
         $this->tpl = basename($root);
+        // Use Language singleton but maintain backward compatibility with global $lang
         $this->lang =& $lang;
-        $this->use_cache = $bb_cfg['xs_use_cache'];
+        $this->use_cache = config()->get('xs_use_cache');
 
         // Check template exists
         if (!is_dir($this->root)) {
@@ -228,11 +229,12 @@ class Template
     {
         $this->cur_tpl = $filename;
 
-        global $lang, $source_lang, $bb_cfg, $user;
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        // bb_cfg deprecated, but kept for compatibility with non-adapted themes
+        global $lang, $bb_cfg, $user;
 
         $L =& $lang;
         $V =& $this->vars;
-        $SL =& $source_lang;
 
         if ($filename) {
             include $filename;
@@ -419,7 +421,7 @@ class Template
         // Append the variable reference.
         $varref .= "['$varname']";
 
-        $varref = "<?php echo isset($varref) ? $varref : ''; ?>";
+        $varref = '<?php echo isset(' . $varref . ') ? ' . $varref . ' : \'\'; ?>';
 
         return $varref;
     }
@@ -764,10 +766,15 @@ class Template
             $code = str_replace($search, $replace, $code);
         }
         // This will handle the remaining root-level varrefs
-        $code = preg_replace('#\{(L_([a-z0-9\-_]+?))\}#i', '<?php echo isset($L[\'$2\']) ? $L[\'$2\'] : (isset($SL[\'$2\']) ? $SL[\'$2\'] : $V[\'$1\']); ?>', $code);
+        // Handle L_ language variables specifically - show plain text when not found
+        $code = preg_replace('#\{(L_([a-z0-9\-_]+?))\}#i', '<?php echo isset($L[\'$2\']) ? $L[\'$2\'] : (isset($V[\'$1\']) ? $V[\'$1\'] : \'$1\'); ?>', $code);
+        // Handle PHP variables
         $code = preg_replace('#\{(\$[a-z_][a-z0-9_$\->\'\"\.\[\]]*?)\}#i', '<?php echo isset($1) ? $1 : \'\'; ?>', $code);
+        // Handle constants
         $code = preg_replace('#\{(\#([a-z_][a-z0-9_]*?)\#)\}#i', '<?php echo defined(\'$2\') ? $2 : \'\'; ?>', $code);
-        $code = preg_replace('#\{([a-z0-9\-_]+?)\}#i', '<?php echo isset($V[\'$1\']) ? $V[\'$1\'] : \'\'; ?>', $code);
+        // Handle simple variables (but NOT variables with dots - those should be handled by block processing)
+        // Only match variables that don't contain dots
+        $code = preg_replace('#\{([a-z0-9\-_]+)\}#i', '<?php echo isset($V[\'$1\']) ? $V[\'$1\'] : \'\'; ?>', $code);
         return $code;
     }
 
@@ -793,7 +800,7 @@ class Template
 
         for ($i = 0; $i < $tokens_cnt; $i++) {
             $token = &$tokens[$i];
-            $token = $token ?? '';
+            $token ??= '';
 
             switch ($token) {
                 case 'eq':
@@ -982,16 +989,14 @@ class Template
      */
     public function write_cache($filename, $code)
     {
-        file_write($code, $filename, max_size: false, replace_content: true);
+        return file_write($code, $filename, max_size: false, replace_content: true);
     }
 
     public function xs_startup()
     {
-        global $bb_cfg;
-
         // adding language variable (eg: "english" or "german")
         // can be used to make truly multi-lingual templates
-        $this->vars['LANG'] ??= $bb_cfg['default_lang'];
+        $this->vars['LANG'] ??= config()->get('default_lang');
         // adding current template
         $tpl = $this->root . '/';
         if (str_starts_with($tpl, './')) {

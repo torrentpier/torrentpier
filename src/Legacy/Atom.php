@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -25,12 +25,19 @@ class Atom
      */
     public static function update_forum_feed($forum_id, $forum_data)
     {
-        global $bb_cfg, $lang;
+        global $lang, $datastore;
         $sql = null;
-        $file_path = $bb_cfg['atom']['path'] . '/f/' . $forum_id . '.atom';
+        $file_path = config()->get('atom.path') . '/f/' . $forum_id . '.atom';
         $select_tor_sql = $join_tor_sql = '';
+
+        if (!$forums = $datastore->get('cat_forums')) {
+            $datastore->update('cat_forums');
+            $forums = $datastore->get('cat_forums');
+        }
+        $not_forums_id = $forums['not_auth_forums']['guest_view'];
+
         if ($forum_id == 0) {
-            $forum_data['forum_name'] = $lang['ATOM_GLOBAL_FEED'] ?? $bb_cfg['server_name'];
+            $forum_data['forum_name'] = $lang['ATOM_GLOBAL_FEED'] ?? config()->get('server_name');
         }
         if ($forum_id > 0 && $forum_data['allow_reg_tracker']) {
             $select_tor_sql = ', tor.size AS tor_size, tor.tor_status, tor.attach_id';
@@ -77,13 +84,16 @@ class Atom
         $topics_tmp = DB()->fetch_rowset($sql);
         $topics = [];
         foreach ($topics_tmp as $topic) {
+            if (in_array($topic['topic_id'], explode(',', $not_forums_id))) {
+                continue;
+            }
             if (isset($topic['topic_status'])) {
                 if ($topic['topic_status'] == TOPIC_MOVED) {
                     continue;
                 }
             }
             if (isset($topic['tor_status'])) {
-                if (isset($bb_cfg['tor_frozen'][$topic['tor_status']])) {
+                if (isset(config()->get('tor_frozen')[$topic['tor_status']])) {
                     continue;
                 }
             }
@@ -110,8 +120,8 @@ class Atom
      */
     public static function update_user_feed($user_id, $username)
     {
-        global $bb_cfg;
-        $file_path = $bb_cfg['atom']['path'] . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
+        global $lang, $datastore;
+        $file_path = config()->get('atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
         $sql = "
 		SELECT
 			t.topic_id, t.topic_title, t.topic_status,
@@ -139,7 +149,7 @@ class Atom
                 }
             }
             if (isset($topic['tor_status'])) {
-                if (isset($bb_cfg['tor_frozen'][$topic['tor_status']])) {
+                if (isset(config()->get('tor_frozen')[$topic['tor_status']])) {
                     continue;
                 }
             }
@@ -169,7 +179,7 @@ class Atom
      */
     private static function create_atom($file_path, $mode, $id, $title, $topics)
     {
-        global $bb_cfg, $lang, $wordCensor;
+        global $lang;
         $date = null;
         $time = null;
         $dir = \dirname($file_path);
@@ -203,7 +213,7 @@ class Atom
             if (isset($topic['tor_status'])) {
                 $tor_status = " ({$lang['TOR_STATUS_NAME'][$topic['tor_status']]})";
             }
-            $topic_title = $wordCensor->censorString($topic['topic_title']);
+            $topic_title = censor()->censorString($topic['topic_title']);
             $author_name = $topic['first_username'] ?: $lang['GUEST'];
             $last_time = $topic['topic_last_post_time'];
             if ($topic['topic_last_post_edit_time']) {
@@ -212,7 +222,7 @@ class Atom
             $date = bb_date($last_time, 'Y-m-d', 0);
             $time = bb_date($last_time, 'H:i:s', 0);
             $updated = '';
-            $checktime = TIMENOW - 604800; // неделя (week)
+            $checktime = TIMENOW - 604800; // 1 week
             if ($topic['topic_first_post_edit_time'] && $topic['topic_first_post_edit_time'] > $checktime) {
                 $updated = '[' . $lang['ATOM_UPDATED'] . '] ';
             }
@@ -223,13 +233,13 @@ class Atom
             $atom .= "	</author>\n";
             $atom .= "	<updated>" . $date . "T$time+00:00</updated>\n";
             $atom .= "	<id>tag:rto.feed," . $date . ":/t/$topic_id</id>\n";
-            if ($bb_cfg['atom']['direct_down'] && isset($topic['attach_id'])) {
+            if (config()->get('atom.direct_down') && isset($topic['attach_id'])) {
                 $atom .= "	<link href=\"" . DL_URL . $topic['attach_id'] . "\" />\n";
             } else {
                 $atom .= "	<link href=\"" . TOPIC_URL . $topic_id . "\" />\n";
             }
 
-            if ($bb_cfg['atom']['direct_view']) {
+            if (config()->get('atom.direct_view')) {
                 $atom .= "	<description>" . $topic['post_html'] . "\n\nNews URL: " . FULL_URL . TOPIC_URL . $topic_id . "</description>\n";
             }
 

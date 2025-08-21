@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -61,6 +61,7 @@ switch ($mode) {
             'CONFIG_MODS' => true,
 
             'MAGNET_LINKS_ENABLED' => $new['magnet_links_enabled'],
+            'MAGNET_LINKS_FOR_GUESTS' => $new['magnet_links_for_guests'],
             'GENDER' => $new['gender'],
             'CALLSEED' => $new['callseed'],
             'TOR_STATS' => $new['tor_stats'],
@@ -135,8 +136,8 @@ switch ($mode) {
             'POSTS_PER_PAGE' => $new['posts_per_page'],
             'HOT_TOPIC' => $new['hot_threshold'],
             'DEFAULT_DATEFORMAT' => $new['default_dateformat'],
-            'LANG_SELECT' => \TorrentPier\Legacy\Select::language($new['default_lang'], 'default_lang'),
-            'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($new['board_timezone'], 'board_timezone'),
+            'LANG_SELECT' => \TorrentPier\Legacy\Common\Select::language($new['default_lang'], 'default_lang'),
+            'TIMEZONE_SELECT' => \TorrentPier\Legacy\Common\Select::timezone($new['board_timezone'], 'board_timezone'),
             'MAX_LOGIN_ATTEMPTS' => $new['max_login_attempts'],
             'LOGIN_RESET_TIME' => $new['login_reset_time'],
             'PRUNE_ENABLE' => (bool)$new['prune_enable'],

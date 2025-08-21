@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -31,7 +31,8 @@ echo '<html><body><head></head>';
 echo '<br /><br /><table border="1" cellspacing="0" cellpadding="6" align="center">';
 
 foreach ($sql as $i => $query) {
-    $row = mysqli_fetch_row(DB()->query($query))[0];
+    $result = DB()->fetch_row($query);
+    $row = array_values($result)[0]; // Get first column value
     $row = ($i == 2) ? humn_size($row) : $row;
     echo "<tr><td>{$lang['TR_STATS'][$i]}</td><td><b>$row</b></td>";
 }
@@ -39,7 +40,7 @@ foreach ($sql as $i => $query) {
 echo '</table>';
 echo '<div align="center"><pre>';
 
-echo 'gen time: <b>' . sprintf('%.4f', array_sum(explode(' ', microtime())) - TIMESTART) . "</b> sec\n";
+echo 'gen time: <b>' . sprintf('%.3f', array_sum(explode(' ', microtime())) - TIMESTART) . "</b> sec\n";
 
 echo '</pre></div>';
 echo '</body></html>';

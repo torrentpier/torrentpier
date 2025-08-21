@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -14,9 +14,9 @@ if (!defined('BB_ROOT')) {
 $user_id = $userdata['user_id'];
 $user_points = $userdata['user_points'];
 
-if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['bonus_upload'] && $bb_cfg['bonus_upload_price']) {
-    $upload_row = unserialize($bb_cfg['bonus_upload']);
-    $price_row = unserialize($bb_cfg['bonus_upload_price']);
+if (config()->get('seed_bonus_enabled') && config()->get('bonus_upload') && config()->get('bonus_upload_price')) {
+    $upload_row = unserialize(config()->get('bonus_upload'));
+    $price_row = unserialize(config()->get('bonus_upload_price'));
 } else {
     bb_die($lang['EXCHANGE_NOT']);
 }

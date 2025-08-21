@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $bb_cfg, $lang;
+global $userdata, $lang, $log_action;
 
 if (!isset($this->request['attach_id'])) {
     $this->ajax_die($lang['EMPTY_ATTACH_ID']);
@@ -19,31 +19,11 @@ if (!isset($this->request['attach_id'])) {
 if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
 }
+
 $attach_id = (int)$this->request['attach_id'];
 $type = (string)$this->request['type'];
 
-$torrent = DB()->fetch_row("
-		SELECT
-			a.post_id, d.physical_filename, d.extension, d.tracker_status,
-			t.topic_first_post_id,
-			p.poster_id, p.topic_id, p.forum_id,
-			f.allow_reg_tracker
-		FROM
-			" . BB_ATTACHMENTS . " a,
-			" . BB_ATTACHMENTS_DESC . " d,
-			" . BB_POSTS . " p,
-			" . BB_TOPICS . " t,
-			" . BB_FORUMS . " f
-		WHERE
-			    a.attach_id = $attach_id
-			AND d.attach_id = $attach_id
-			AND p.post_id = a.post_id
-			AND t.topic_id = p.topic_id
-			AND f.forum_id = p.forum_id
-		LIMIT 1
-	");
-
-if (!$torrent) {
+if (!$torrent = \TorrentPier\Legacy\Torrent::get_torrent_info($attach_id)) {
     $this->ajax_die($lang['INVALID_ATTACH_ID']);
 }
 
@@ -63,12 +43,25 @@ switch ($type) {
     case 'unset_silver_gold':
         if ($type == 'set_silver') {
             $tor_type = TOR_TYPE_SILVER;
+            $tor_type_lang = $lang['SILVER'];
         } elseif ($type == 'set_gold') {
             $tor_type = TOR_TYPE_GOLD;
+            $tor_type_lang = $lang['GOLD'];
         } else {
-            $tor_type = 0;
+            $tor_type = TOR_TYPE_DEFAULT;
+            $tor_type_lang = "{$lang['UNSET_GOLD_TORRENT']} / {$lang['UNSET_SILVER_TORRENT']}";
         }
+
         \TorrentPier\Legacy\Torrent::change_tor_type($attach_id, $tor_type);
+
+        // Log action
+        $log_action->mod('mod_topic_change_tor_type', [
+            'forum_id' => $torrent['forum_id'],
+            'topic_id' => $torrent['topic_id'],
+            'topic_title' => $torrent['topic_title'],
+            'log_msg' => sprintf($lang['TOR_TYPE_LOG_ACTION'], $tor_type_lang),
+        ]);
+
         $title = $lang['CHANGE_TOR_TYPE'];
         $url = make_url(TOPIC_URL . $torrent['topic_id']);
         break;

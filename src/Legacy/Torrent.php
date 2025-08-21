@@ -2,15 +2,18 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy;
 
+use TorrentPier\TorrServerAPI;
+
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
+
 use Exception;
 
 /**
@@ -26,7 +29,7 @@ class Torrent
      *
      * @return array
      */
-    private static function get_torrent_info($attach_id)
+    public static function get_torrent_info($attach_id)
     {
         global $lang;
 
@@ -34,8 +37,8 @@ class Torrent
 
         $sql = "
 		SELECT
-			a.post_id, d.physical_filename, d.extension, d.tracker_status,
-			t.topic_first_post_id,
+			a.post_id, d.physical_filename, d.extension, d.tracker_status, d.mimetype,
+			t.topic_first_post_id, t.topic_title,
 			p.poster_id, p.topic_id, p.forum_id,
 			f.allow_reg_tracker
 		FROM
@@ -94,16 +97,17 @@ class Torrent
      */
     public static function tracker_unregister($attach_id, $mode = '')
     {
-        global $lang, $bb_cfg;
+        global $lang, $log_action;
 
         $attach_id = (int)$attach_id;
-        $post_id = $topic_id = $forum_id = $info_hash = null;
+        $post_id = $topic_id = $topic_title = $forum_id = null;
 
         // Get torrent info
         if ($torrent = self::get_torrent_info($attach_id)) {
             $post_id = $torrent['post_id'];
             $topic_id = $torrent['topic_id'];
             $forum_id = $torrent['forum_id'];
+            $topic_title = $torrent['topic_title'];
         }
 
         if ($mode == 'request') {
@@ -128,7 +132,7 @@ class Torrent
         }
 
         // Unset DL-Type for topic
-        if ($bb_cfg['bt_unset_dltype_on_tor_unreg'] && $topic_id) {
+        if (config()->get('bt_unset_dltype_on_tor_unreg') && $topic_id) {
             $sql = "UPDATE " . BB_TOPICS . " SET topic_dl_type = " . TOPIC_DL_TYPE_NORMAL . " WHERE topic_id = $topic_id";
 
             if (!$result = DB()->sql_query($sql)) {
@@ -143,13 +147,18 @@ class Torrent
             bb_die('Could not delete peers');
         }
 
-        // Ocelot
-        if ($bb_cfg['ocelot']['enabled']) {
-            if ($row = DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id LIMIT 1")) {
-                $info_hash = $row['info_hash'];
-            }
-            self::ocelot_update_tracker('delete_torrent', ['info_hash' => rawurlencode($info_hash), 'id' => $topic_id]);
+        // TorrServer integration
+        if (config()->get('torr_server.enabled')) {
+            $torrServer = new TorrServerAPI();
+            $torrServer->removeM3U($attach_id);
         }
+
+        // Log action
+        $log_action->mod('mod_topic_tor_unregister', [
+            'forum_id' => $forum_id,
+            'topic_id' => $topic_id,
+            'topic_title' => $topic_title,
+        ]);
 
         // Delete torrent
         $sql = "DELETE FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id";
@@ -240,7 +249,7 @@ class Torrent
      */
     public static function change_tor_type($attach_id, $tor_status_gold)
     {
-        global $topic_id, $lang, $bb_cfg;
+        global $topic_id, $lang;
 
         if (!$torrent = self::get_torrent_info($attach_id)) {
             bb_die($lang['TOR_NOT_FOUND']);
@@ -252,17 +261,8 @@ class Torrent
 
         $topic_id = $torrent['topic_id'];
         $tor_status_gold = (int)$tor_status_gold;
-        $info_hash = null;
 
         DB()->query("UPDATE " . BB_BT_TORRENTS . " SET tor_type = $tor_status_gold WHERE topic_id = $topic_id");
-
-        // Ocelot
-        if ($bb_cfg['ocelot']['enabled']) {
-            if ($row = DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id LIMIT 1")) {
-                $info_hash = $row['info_hash'];
-            }
-            self::ocelot_update_tracker('update_torrent', ['info_hash' => rawurlencode($info_hash), 'freetorrent' => $tor_status_gold]);
-        }
     }
 
     /**
@@ -277,7 +277,7 @@ class Torrent
      */
     public static function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
     {
-        global $bb_cfg, $lang, $reg_mode;
+        global $lang, $reg_mode;
 
         $attach_id = (int)$attach_id;
         $reg_mode = $mode;
@@ -327,19 +327,19 @@ class Torrent
             self::torrent_error_exit(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
         }
 
-        if ($bb_cfg['bt_disable_dht']) {
+        if (config()->get('bt_disable_dht')) {
             $tor['info']['private'] = (int)1;
             $fp = fopen($filename, 'wb+');
             fwrite($fp, Bencode::encode($tor));
             fclose($fp);
         }
 
-        if ($bb_cfg['bt_check_announce_url']) {
+        if (config()->get('bt_check_announce_url')) {
             $announce_urls = [];
             include INC_DIR . '/torrent_announce_urls.php';
 
             $ann = $tor['announce'] ?? '';
-            $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
+            $announce_urls['main_url'] = config()->get('bt_announce_url');
 
             if (!$ann || !in_array($ann, $announce_urls)) {
                 $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
@@ -365,11 +365,11 @@ class Torrent
             $bt_v1 = true;
         }
 
-        if ($bb_cfg['tracker']['disabled_v1_torrents'] && isset($bt_v1) && !isset($bt_v2)) {
+        if (config()->get('tracker.disabled_v1_torrents') && isset($bt_v1) && !isset($bt_v2)) {
             self::torrent_error_exit($lang['BT_V1_ONLY_DISALLOWED']);
         }
 
-        if ($bb_cfg['tracker']['disabled_v2_torrents'] && !isset($bt_v1) && isset($bt_v2)) {
+        if (config()->get('tracker.disabled_v2_torrents') && !isset($bt_v1) && isset($bt_v2)) {
             self::torrent_error_exit($lang['BT_V2_ONLY_DISALLOWED']);
         }
 
@@ -387,9 +387,12 @@ class Torrent
             $info_hash_where = "WHERE info_hash_v2 = '$info_hash_v2_sql'";
         }
 
-        // Ocelot
-        if ($bb_cfg['ocelot']['enabled']) {
-            self::ocelot_update_tracker('add_torrent', ['info_hash' => rawurlencode($info_hash ?? hex2bin(substr($v2_hash, 0, 40))), 'id' => $topic_id, 'freetorrent' => 0]);
+        // TorrServer integration
+        if (config()->get('torr_server.enabled')) {
+            $torrServer = new TorrServerAPI();
+            if ($torrServer->uploadTorrent($filename, $torrent['mimetype'])) {
+                $torrServer->saveM3U($attach_id, bin2hex($info_hash ?? $info_hash_v2));
+            }
         }
 
         if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where LIMIT 1")) {
@@ -464,7 +467,7 @@ class Torrent
         }
 
         // set DL-Type for topic
-        if ($bb_cfg['bt_set_dltype_on_tor_reg']) {
+        if (config()->get('bt_set_dltype_on_tor_reg')) {
             $sql = 'UPDATE ' . BB_TOPICS . ' SET topic_dl_type = ' . TOPIC_DL_TYPE_DL . " WHERE topic_id = $topic_id";
 
             if (!$result = DB()->sql_query($sql)) {
@@ -472,7 +475,7 @@ class Torrent
             }
         }
 
-        if ($bb_cfg['tracker']['tor_topic_up']) {
+        if (config()->get('tracker.tor_topic_up')) {
             DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id");
         }
 
@@ -491,9 +494,9 @@ class Torrent
      */
     public static function send_torrent_with_passkey($filename)
     {
-        global $attachment, $auth_pages, $userdata, $bb_cfg, $lang;
+        global $attachment, $auth_pages, $userdata, $lang;
 
-        if (!$bb_cfg['bt_add_auth_key'] || $attachment['extension'] !== TORRENT_EXT || !$size = @filesize($filename)) {
+        if (!config()->get('bt_add_auth_key') || $attachment['extension'] !== TORRENT_EXT || !$size = @filesize($filename)) {
             return;
         }
 
@@ -501,8 +504,8 @@ class Torrent
         $user_id = $userdata['user_id'];
         $attach_id = $attachment['attach_id'];
 
-        if (!$passkey_key = $bb_cfg['passkey_key']) {
-            bb_die('Could not add passkey (wrong config $bb_cfg[\'passkey_key\'])');
+        if (!$passkey_key = config()->get('passkey_key')) {
+            bb_die('Could not add passkey (wrong config passkey_key)');
         }
 
         // Get $post_id & $poster_id
@@ -537,14 +540,10 @@ class Torrent
 
         if ($bt_userdata = get_bt_userdata($user_id)) {
             $passkey_val = $bt_userdata['auth_key'];
-
-            if ($bb_cfg['ocelot']['enabled']) {
-                self::ocelot_update_tracker('add_user', ['id' => $user_id, 'passkey' => $passkey_val]);
-            }
         }
 
         // Ratio limits
-        $min_ratio = $bb_cfg['bt_min_ratio_allow_dl_tor'];
+        $min_ratio = config()->get('bt_min_ratio_allow_dl_tor');
 
         if ($min_ratio && $user_id != $poster_id && ($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
             if ($user_ratio < $min_ratio && $post_id) {
@@ -571,15 +570,15 @@ class Torrent
         }
 
         // Get tracker announcer
-        $announce_url = $bb_cfg['ocelot']['enabled'] ? $bb_cfg['ocelot']['url'] . "$passkey_val/announce" : $bb_cfg['bt_announce_url'] . "?$passkey_key=$passkey_val";
+        $announce_url = config()->get('bt_announce_url') . "?$passkey_key=$passkey_val";
 
         // Replace original announce url with tracker default
-        if ($bb_cfg['bt_replace_ann_url'] || !isset($tor['announce'])) {
+        if (config()->get('bt_replace_ann_url') || !isset($tor['announce'])) {
             $tor['announce'] = $announce_url;
         }
 
         // Creating / cleaning announce-list
-        if (!isset($tor['announce-list']) || !is_array($tor['announce-list']) || $bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
+        if (!isset($tor['announce-list']) || !is_array($tor['announce-list']) || config()->get('bt_del_addit_ann_urls') || config()->get('bt_disable_dht')) {
             $tor['announce-list'] = [];
         }
 
@@ -598,15 +597,15 @@ class Torrent
         }
 
         // Add retracker
-        if (!empty($bb_cfg['tracker']['retracker_host']) && $bb_cfg['tracker']['retracker']) {
+        if (!empty(config()->get('tracker.retracker_host')) && config()->get('tracker.retracker')) {
             if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
-                $tor['announce-list'] = array_merge($tor['announce-list'], [[$bb_cfg['tracker']['retracker_host']]]);
+                $tor['announce-list'] = array_merge($tor['announce-list'], [[config()->get('tracker.retracker_host')]]);
             }
         }
 
         // Adding tracker announcer to announce-list
         if (!empty($tor['announce-list'])) {
-            if ($bb_cfg['bt_replace_ann_url']) {
+            if (config()->get('bt_replace_ann_url')) {
                 // Adding tracker announcer as main announcer (At start)
                 array_unshift($tor['announce-list'], [$announce_url]);
             } else {
@@ -630,7 +629,7 @@ class Torrent
         }
 
         // Add publisher & topic url
-        $publisher_name = $bb_cfg['server_name'];
+        $publisher_name = config()->get('server_name');
         $publisher_url = make_url(TOPIC_URL . $topic_id);
 
         $tor['publisher'] = (string)$publisher_name;
@@ -645,7 +644,11 @@ class Torrent
         // Send torrent
         $output = Bencode::encode($tor);
 
-        $dl_fname = html_entity_decode($topic_title, ENT_QUOTES, 'UTF-8') . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
+        if (config()->get('tracker.use_old_torrent_name_format')) {
+            $dl_fname = '[' . config()->get('server_name') . '].t' . $topic_id . '.' . TORRENT_EXT;
+        } else {
+            $dl_fname = html_ent_decode($topic_title) . ' [' . config()->get('server_name') . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
+        }
 
         if (!empty($_COOKIE['explain'])) {
             $out = "attach path: $filename<br /><br />";
@@ -654,7 +657,7 @@ class Torrent
             bb_die("<pre>$out</pre>");
         }
 
-        header("Content-Type: application/x-bittorrent; name=\"$dl_fname\"");
+        header("Content-Type: " . TORRENT_MIMETYPE . "; name=\"$dl_fname\"");
         header("Content-Disposition: attachment; filename=\"$dl_fname\"");
 
         exit($output);
@@ -670,7 +673,7 @@ class Torrent
      */
     public static function generate_passkey($user_id, bool $force_generate = false)
     {
-        global $bb_cfg, $lang;
+        global $lang;
 
         $user_id = (int)$user_id;
 
@@ -694,19 +697,13 @@ class Torrent
         if (!$old_passkey) {
             // Create first passkey
             DB()->query("INSERT IGNORE INTO " . BB_BT_USERS . " (user_id, auth_key) VALUES ($user_id, '$passkey_val')");
-            if (DB()->affected_rows() == 1) {
-                return $passkey_val;
-            }
         } else {
             // Update exists passkey
             DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id LIMIT 1");
-            if (DB()->affected_rows() == 1) {
-                // Ocelot
-                if ($bb_cfg['ocelot']['enabled']) {
-                    self::ocelot_update_tracker('change_passkey', ['oldpasskey' => $old_passkey, 'newpasskey' => $passkey_val]);
-                }
-                return $passkey_val;
-            }
+        }
+
+        if (DB()->affected_rows() == 1) {
+            return $passkey_val;
         }
 
         return false;
@@ -764,81 +761,12 @@ class Torrent
 
         if (isset($reg_mode) && ($reg_mode == 'request' || $reg_mode == 'newtopic')) {
             if (isset($return_message)) {
-                $msg .= $return_message . '<br /><br /><hr /><br />';
+                $msg .= $return_message . '<br /><br /><hr/><br />';
             }
             $msg .= '<b>' . $lang['BT_REG_FAIL'] . '</b><br /><br />';
         }
 
         bb_die($msg . $message);
-    }
-
-    /**
-     * Update torrent on Ocelot tracker
-     *
-     * @param string $action
-     * @param array $updates
-     *
-     * @return bool
-     */
-    private static function ocelot_update_tracker($action, $updates)
-    {
-        global $bb_cfg;
-
-        $get = $bb_cfg['ocelot']['secret'] . "/update?action=$action";
-
-        foreach ($updates as $key => $value) {
-            $get .= "&$key=$value";
-        }
-
-        $max_attempts = 3;
-        $err = false;
-
-        return !(self::ocelot_send_request($get, $max_attempts, $err) === false);
-    }
-
-    /**
-     * Send request to the Ocelot traker
-     *
-     * @param string $get
-     * @param int $max_attempts
-     * @param bool $err
-     *
-     * @return bool|int
-     */
-    private static function ocelot_send_request($get, $max_attempts = 1, &$err = false)
-    {
-        global $bb_cfg;
-
-        $header = "GET /$get HTTP/1.1\r\nConnection: Close\r\n\r\n";
-        $attempts = $success = $response = 0;
-
-        while (!$success && $attempts++ < $max_attempts) {
-            // Send request
-            $file = fsockopen($bb_cfg['ocelot']['host'], $bb_cfg['ocelot']['port'], $error_num, $error_string);
-            if ($file) {
-                if (fwrite($file, $header) === false) {
-                    $err = "Failed to fwrite()";
-                    continue;
-                }
-            } else {
-                $err = "Failed to fsockopen() - $error_num - $error_string";
-                continue;
-            }
-
-            // Check for response
-            while (!feof($file)) {
-                $response .= fread($file, 1024);
-            }
-
-            $data_end = strrpos($response, "\n");
-            $status = substr($response, $data_end + 1);
-
-            if ($status == "success") {
-                $success = true;
-            }
-        }
-
-        return $success;
     }
 
     /**
@@ -849,8 +777,9 @@ class Torrent
      */
     public static function getPasskey(int|string $user_id): bool|string
     {
-        if ($passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1")) {
-            return $passkey['auth_key'];
+        $bt_userdata = get_bt_userdata($user_id);
+        if (isset($bt_userdata['auth_key'])) {
+            return $bt_userdata['auth_key'];
         }
 
         return false;

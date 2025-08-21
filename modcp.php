@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -223,16 +223,16 @@ switch ($mode) {
             $result = \TorrentPier\Legacy\Admin\Common::topic_delete($req_topics, $forum_id);
 
             //Обновление кеша новостей на главной
-            $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-            if (isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $result) {
+            $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
+            if (isset($news_forums[$forum_id]) && config()->get('show_latest_news') && $result) {
                 $datastore->enqueue([
                     'latest_news'
                 ]);
                 $datastore->update('latest_news');
             }
 
-            $net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-            if (isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $result) {
+            $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
+            if (isset($net_forums[$forum_id]) && config()->get('show_network_news') && $result) {
                 $datastore->enqueue([
                     'network_news'
                 ]);
@@ -258,16 +258,16 @@ switch ($mode) {
             $result = \TorrentPier\Legacy\Admin\Common::topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']), $_POST['reason_move_bot']);
 
             //Обновление кеша новостей на главной
-            $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-            if ((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && $bb_cfg['show_latest_news'] && $result) {
+            $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
+            if ((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && config()->get('show_latest_news') && $result) {
                 $datastore->enqueue([
                     'latest_news'
                 ]);
                 $datastore->update('latest_news');
             }
 
-            $net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-            if ((isset($net_forums[$forum_id]) || isset($net_forums[$new_forum_id])) && $bb_cfg['show_network_news'] && $result) {
+            $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
+            if ((isset($net_forums[$forum_id]) || isset($net_forums[$new_forum_id])) && config()->get('show_network_news') && $result) {
                 $datastore->enqueue([
                     'network_news'
                 ]);
@@ -355,7 +355,7 @@ switch ($mode) {
     case 'set_download':
     case 'unset_download':
         $set_download = ($mode == 'set_download');
-        $new_dl_type = ($set_download) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
+        $new_dl_type = $set_download ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
 
         DB()->query("
 			UPDATE " . BB_TOPICS . " SET
@@ -557,7 +557,7 @@ switch ($mode) {
                     $poster = $postrow[$i]['username'];
                     $poster_rank = $postrow[$i]['user_rank'];
 
-                    $post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
+                    $post_date = bb_date($postrow[$i]['post_time'], config()->get('post_date_format'));
 
                     $message = $postrow[$i]['post_text'];
 
@@ -698,7 +698,7 @@ switch ($mode) {
     case 'post_pin':
     case 'post_unpin':
         $pin = ($mode == 'post_pin');
-        $new_topic_status = ($pin) ? 1 : 0;
+        $new_topic_status = $pin ? 1 : 0;
 
         if (count((array)$topic_csv)) {
             $sql = "
@@ -728,7 +728,7 @@ switch ($mode) {
 			");
 
             // Log action
-            $type = ($pin) ? 'mod_post_pin' : 'mod_post_unpin';
+            $type = $pin ? 'mod_post_pin' : 'mod_post_unpin';
 
             foreach ($log_topics as $topic_id => $topic_title) {
                 $log_action->mod($type, [
@@ -738,7 +738,7 @@ switch ($mode) {
                 ]);
             }
 
-            $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+            $msg = $pin ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
             bb_die(return_msg_mcp($msg));
         } elseif ($topic_id) {
             $sql = "
@@ -769,7 +769,7 @@ switch ($mode) {
 			");
 
             // Log action
-            $type = ($pin) ? 'mod_post_pin' : 'mod_post_unpin';
+            $type = $pin ? 'mod_post_pin' : 'mod_post_unpin';
 
             foreach ($log_topics as $topic_id => $topic_title) {
                 $log_action->mod($type, [
@@ -779,7 +779,7 @@ switch ($mode) {
                 ]);
             }
 
-            $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+            $msg = $pin ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
             bb_die(return_msg_mcp($msg));
         }
         break;

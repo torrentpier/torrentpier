@@ -1,10 +1,9 @@
 <!-- IF TPL_ADMIN_FRAMESET -->
 <!--========================================================================-->
 <!DOCTYPE html>
-<html lang="{$bb_cfg['default_lang']}">
+<html dir="{USER_LANG_DIRECTION}" lang="{USER_LANG}">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset={CONTENT_ENCODING}"/>
-  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta charset="{CONTENT_ENCODING}">
   <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
   <title>{L_ADMIN}</title>
 </head>
@@ -81,37 +80,15 @@
     $('#sync_topics').html(data.sync_topics_html);
     $('#sync_user_posts').html(data.sync_user_posts_html);
     $('#unlock_cron').html(data.unlock_cron_html);
-    $('#restore_corrupt_files').html(data.restore_corrupt_files_html);
   }
 </script>
 
-<br>
-<!-- BEGIN integrity_check -->
-<!-- IF integrity_check.INTEGRITY_SUCCESS -->
-<div class="alert alert-success" style="width: 95%;">
-    <h4 class="alert-heading">{L_INTEGRITY_CHECK_SUCCESS}</h4>
-    <h6>{integrity_check.INTEGRITY_CHECKED_FILES} {integrity_check.INTEGRITY_LAST_CHECK_TIME}</h6>
-</div>
-<!-- ELSE -->
-<div class="alert alert-danger" style="width: 95%;">
-    <h4 class="alert-heading">{L_INTEGRITY_CHECK_FAIL}</h4>
-    <h6>{integrity_check.INTEGRITY_CHECKED_FILES} {integrity_check.INTEGRITY_LAST_CHECK_TIME}</h6>
-    <hr>
-    <!-- IF integrity_check.INTEGRITY_WRONG_FILES_LIST -->
-    <ul style="max-height: 120px; overflow-x: auto;">
-        <li>{integrity_check.INTEGRITY_WRONG_FILES_LIST}</li>
-    </ul>
-    <hr>
-    <a href="#" id="restore_corrupt_files" onclick="ajax.manage_admin('restore_corrupt_files'); return false;">{L_INTEGRITY_RESTORE_ON_NEXT_RUN}</a>
-    <!-- ENDIF -->
-</div>
-<!-- ENDIF -->
-<!-- END integrity_check -->
+<br/>
 
 <!-- IF ADMIN_LOCK_CRON -->
 <div class="alert alert-danger" style="width: 95%;">
   <h4 class="alert-heading">{L_ADMIN_DISABLE_CRON_TITLE}</h4>
-  <hr>
+  <hr/>
   <a href="#" id="unlock_cron" onclick="ajax.manage_admin('unlock_cron'); return false;">{L_ADMIN_UNLOCK_CRON}</a>
   ({L_ADMIN_DISABLE_CRON})
 </div>
@@ -120,7 +97,7 @@
 <!-- IF ADMIN_LOCK -->
 <div class="alert alert-danger" style="width: 95%;">
   <h4 class="alert-heading">{L_ADMIN_DISABLE_TITLE}</h4>
-  <hr>
+  <hr/>
   <a href="admin_board.php?mode=config">{L_ADMIN_UNLOCK}</a>
   ({L_ADMIN_DISABLE})
 </div>
@@ -183,7 +160,7 @@
     <!-- IF updater.UPDATE_AVAILABLE -->
     <tr>
         <td class="row1" nowrap="nowrap" width="25%"><b>{L_UPDATE_AVAILABLE}:</b></td>
-        <td class="row2"><b>{updater.NEW_VERSION_NUMBER}</b><!-- IF updater.NEW_VERSION_SIZE -->&nbsp;({L_SIZE}:&nbsp;{updater.NEW_VERSION_SIZE})<!-- ENDIF -->&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_DL_LINK}">{L_DOWNLOAD}</a>&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_LINK}">{L_CHANGELOG}</a><!-- IF updater.NEW_VERSION_MD5 -->&nbsp;&middot;&nbsp;MD5:&nbsp;{updater.NEW_VERSION_MD5}<!-- ENDIF --></td>
+        <td class="row2"><b>{updater.NEW_VERSION_NUMBER}</b><!-- IF updater.NEW_VERSION_SIZE -->&nbsp;({L_SIZE}:&nbsp;{updater.NEW_VERSION_SIZE})<!-- ENDIF -->&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_DL_LINK}">{L_DOWNLOAD}</a>&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_LINK}">{L_CHANGELOG}</a><!-- IF updater.NEW_VERSION_HASH -->&nbsp;&middot;&nbsp;<span class="copyElement" data-clipboard-text="{updater.NEW_VERSION_HASH}" title="{L_COPY_TO_CLIPBOARD}">{updater.NEW_VERSION_HASH}</span><!-- ENDIF --></td>
     </tr>
     <!-- ENDIF -->
     <!-- END updater -->

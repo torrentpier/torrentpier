@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -39,13 +39,20 @@ class Updater
     public string $savePath;
 
     /**
+     * LTS version pattern (v2.8.*)
+     *
+     * @var string
+     */
+    private const LTS_VERSION_PATTERN = '/^v2\.8\.\d+$/';
+
+    /**
      * Stream context
      *
      * @var array
      */
     private const STREAM_CONTEXT = [
         'http' => [
-            'header' => 'User-Agent: ' . APP_NAME,
+            'header' => 'User-Agent: ' . APP_NAME . '-' . TIMENOW,
             'timeout' => 10,
             'ignore_errors' => true
         ]
@@ -62,7 +69,7 @@ class Updater
         $response = file_get_contents(UPDATER_URL, context: $context);
 
         if ($response !== false) {
-            $this->jsonResponse = json_decode(mb_convert_encoding($response, 'UTF-8', mb_detect_encoding($response)), true);
+            $this->jsonResponse = json_decode(mb_convert_encoding($response, DEFAULT_CHARSET, mb_detect_encoding($response)), true);
         }
 
         // Empty JSON result
@@ -130,12 +137,67 @@ class Updater
     }
 
     /**
-     * Returns information of latest TorrentPier version
+     * Returns information of latest TorrentPier LTS version (v2.8.*) available
      *
+     * @param bool $allowPreReleases
+     * @return array
+     * @throws Exception
+     */
+    public function getLastVersion(bool $allowPreReleases = true): array
+    {
+        // Filter releases to get only LTS versions (v2.8.*)
+        $ltsVersions = array_filter($this->jsonResponse, function ($release) {
+            return preg_match(self::LTS_VERSION_PATTERN, $release['tag_name']);
+        });
+
+        if (empty($ltsVersions)) {
+            throw new Exception('No LTS versions (v2.8.*) found');
+        }
+
+        // Sort LTS versions by version number (descending)
+        usort($ltsVersions, function ($a, $b) {
+            return version_compare($b['tag_name'], $a['tag_name']);
+        });
+
+        if (!$allowPreReleases) {
+            foreach ($ltsVersions as $release) {
+                if (isset($release['prerelease']) && $release['prerelease']) {
+                    continue;
+                }
+                return $release;
+            }
+
+            // If no stable LTS versions found
+            throw new Exception('No stable LTS versions (v2.8.*) found');
+        }
+
+        return $ltsVersions[0];
+    }
+
+    /**
+     * Get all available LTS versions (v2.8.*)
+     *
+     * @param bool $allowPreReleases
      * @return array
      */
-    public function getLastVersion(): array
+    public function getAllLTSVersions(bool $allowPreReleases = true): array
     {
-        return $this->jsonResponse[0];
+        // Filter releases to get only LTS versions (v2.8.*)
+        $ltsVersions = array_filter($this->jsonResponse, function ($release) use ($allowPreReleases) {
+            $isLTSVersion = preg_match(self::LTS_VERSION_PATTERN, $release['tag_name']);
+
+            if (!$allowPreReleases && isset($release['prerelease']) && $release['prerelease']) {
+                return false;
+            }
+
+            return $isLTSVersion;
+        });
+
+        // Sort LTS versions by version number (descending)
+        usort($ltsVersions, function ($a, $b) {
+            return version_compare($b['tag_name'], $a['tag_name']);
+        });
+
+        return array_values($ltsVersions);
     }
 }

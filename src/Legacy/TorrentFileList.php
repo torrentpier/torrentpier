@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -41,20 +41,22 @@ class TorrentFileList
      */
     public function get_filelist()
     {
-        global $bb_cfg, $html;
+        global $html;
 
         $info = &$this->tor_decoded['info'];
         if (isset($info['meta version'], $info['file tree'])) { //v2
             if (($info['meta version']) === 2 && is_array($info['file tree'])) {
-                return $this->fileTreeList($info['file tree'], $info['name'] ?? '', $bb_cfg['flist_timeout']);
+                return $this->fileTreeList($info['file tree'], $info['name'] ?? '', config()->get('flist_timeout'));
             }
         }
 
         $this->build_filelist_array();
 
         if ($this->multiple) {
-            if (!empty($this->files_ary['/'])) {
-                $this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
+            if (isset($this->files_ary['/'])) {
+                if (!empty($this->files_ary['/'])) {
+                    $this->files_ary = $this->files_ary + $this->files_ary['/'];
+                }
                 unset($this->files_ary['/']);
             }
             $filelist = $html->array2html($this->files_ary);
@@ -71,8 +73,6 @@ class TorrentFileList
      */
     private function build_filelist_array()
     {
-        global $bb_cfg;
-
         $info = &$this->tor_decoded['info'];
 
         if (isset($info['name.utf-8'])) {
@@ -95,7 +95,7 @@ class TorrentFileList
                     continue;
                 }
 
-                $structure = array_deep($f['path'], 'clean_tor_dirname', timeout: $bb_cfg['flist_timeout']);
+                $structure = array_deep($f['path'], 'clean_tor_dirname', timeout: config()->get('flist_timeout'));
                 if (isset($structure['timeout'])) {
                     bb_die("Timeout, too many nested files/directories for file listing, aborting after \n{$structure['recs']} recursive calls.\nNesting level: " . count($info['files'], COUNT_RECURSIVE));
                 }

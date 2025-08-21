@@ -1,6 +1,6 @@
 <!-- IF #IN_DEMO_MODE -->
 <div class="tCenter">
-    <span class="leech">{L_TP_VERSION}: {$bb_cfg['tp_version']}</span><br>
+    <span class="leech">{L_TP_VERSION}: {$bb_cfg['tp_version']}</span><br/>
     <span class="seed">{L_USERNAME}: admin / {L_PASSWORD}: admin</span>
 </div>
 <!-- ENDIF -->

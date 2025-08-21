@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -12,18 +12,18 @@ if (!defined('BB_ROOT')) {
 }
 
 // Server settings
-$reserved_name = 'torrentpier.com';
-$reserved_port = 80;
+$reserved_name = env('TP_HOST', 'example.com');
+$reserved_port = env('TP_PORT', 80);
 
 $bb_cfg = [];
 
-// Increase number after changing js or css
-$bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
-
 // Version info
-$bb_cfg['tp_version'] = 'v2.4.5-dev';
-$bb_cfg['tp_release_date'] = 'XX-XX-2024';
+$bb_cfg['tp_version'] = 'v2.8.3';
+$bb_cfg['tp_release_date'] = '03-07-2025';
 $bb_cfg['tp_release_codename'] = 'Cattle';
+
+// Increase version number after changing JS or CSS
+$bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Database
 // Settings for database ['db']['srv_name'] => (array) srv_cfg;
@@ -60,27 +60,22 @@ $bb_cfg['cache'] = [
         'host' => '127.0.0.1',
         'port' => 11211,
     ],
-    'redis' => [
-        'host' => '127.0.0.1',
-        'port' => 6379,
-        'pconnect' => !PHP_ZTS, // Redis pconnect supported only for non-thread safe compilations of PHP
-    ],
-    // Available cache types: filecache, memcached, sqlite, redis, apcu (filecache by default)
+    // Available cache types: file, sqlite, memory, memcached (file by default)
     'engines' => [
-        'bb_cache' => ['filecache'],
-        'bb_config' => ['filecache'],
-        'tr_cache' => ['filecache'],
-        'session_cache' => ['filecache'],
-        'bb_cap_sid' => ['filecache'],
-        'bb_login_err' => ['filecache'],
-        'bb_poll_data' => ['filecache'],
-        'bb_ip2countries' => ['filecache'],
+        'bb_cache' => ['file'],
+        'bb_config' => ['file'],
+        'tr_cache' => ['file'],
+        'session_cache' => ['file'],
+        'bb_cap_sid' => ['file'],
+        'bb_login_err' => ['file'],
+        'bb_poll_data' => ['file'],
+        'bb_ip2countries' => ['file'],
     ],
 ];
 
 // Datastore
-// Available datastore types: filecache, memcached, sqlite, redis, apcu (filecache by default)
-$bb_cfg['datastore_type'] = 'filecache';
+// Available datastore types: file, sqlite, memory, memcache (file by default)
+$bb_cfg['datastore_type'] = 'file';
 
 // Server
 $bb_cfg['server_name'] = $domain_name = !empty($_SERVER['SERVER_NAME']) ? idn_to_utf8($_SERVER['SERVER_NAME']) : $reserved_name;
@@ -98,25 +93,58 @@ $bb_cfg['passkey_key'] = 'uk'; // Passkey key name in GET request
 $bb_cfg['ignore_reported_ip'] = false; // Ignore IP reported by client
 $bb_cfg['verify_reported_ip'] = true; // Verify IP reported by client against $_SERVER['HTTP_X_FORWARDED_FOR']
 $bb_cfg['allow_internal_ip'] = false; // Allow internal IP (10.xx.. etc.)
+$bb_cfg['disallowed_ports'] = [
+    // https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L53
+    // Hyper Text Transfer Protocol (HTTP) - port used for web traffic
+    8080,
+    8081,
+    // Kazaa - peer-to-peer file sharing, some known vulnerabilities, and at least one worm (Benjamin) targeting it.
+    1214,
+    // IANA registered for Microsoft WBT Server, used for Windows Remote Desktop and Remote Assistance connections
+    3389,
+    // eDonkey 2000 P2P file sharing service. http://www.edonkey2000.com/
+    4662,
+    // Gnutella (FrostWire, Limewire, Shareaza, etc.), BearShare file sharing app
+    6346,
+    6347,
+    // Port used by p2p software, such as WinMX, Napster.
+    6699,
+];
 $bb_cfg['client_ban'] = [
     'enabled' => false,
-    // Clients to be blocked, for example, peer id '-UT' will block all uTorrent clients, '-UT2' will block builds starting with 2 (default: false)
+    'only_allow_mode' => false,
+    // Clients to be blocked / allowed (in "only allow mode"), for example, peer id '-UT' will block all uTorrent clients, '-UT2' will block builds starting with 2 (default: false)
     // The second argument is being shown in the torrent client as a failure message
     // Handy client list: https://github.com/transmission/transmission/blob/f85c3b6f8db95d5363f6ec38eee603f146c6adb6/libtransmission/clients.cc#L504
     'clients' => [
+        // 'client_id' => 'Ban reason (can be empty)'
         '-UT' => 'uTorrent — NOT ad-free and open-source',
         '-MG' => 'Mostly leeching client',
+        '-ZO' => '',
     ]
 ];
 
-// Ocelot
-$bb_cfg['ocelot'] = [
+// TorrentPier updater settings
+$bb_cfg['tp_updater_settings'] = [
+    'enabled' => true,
+    'allow_pre_releases' => false
+];
+
+// TorrServer integration
+$bb_cfg['torr_server'] = [
+    // Read more: https://github.com/YouROK/TorrServer
     'enabled' => false,
-    'host' => $domain_name,
-    'port' => 34000,
-    'url' => "http://$domain_name:34000/", // with '/'
-    'secret' => 'some_10_chars', // 10 chars
-    'stats' => 'some_10_chars', // 10 chars
+    'url' => "http://$domain_name:8090",
+    'timeout' => 5,
+    'disable_for_guest' => true
+];
+
+// FreeIPAPI settings
+$bb_cfg['ip2country_settings'] = [
+    // Documentation: https://docs.freeipapi.com/
+    'enabled' => true,
+    'endpoint' => 'https://freeipapi.com/api/json/',
+    'api_token' => '', // not required for basic usage
 ];
 
 // FAQ url help link
@@ -162,7 +190,7 @@ $bb_cfg['posting_url'] = 'posting.php'; # "http://{$domain_name}/posting.php"
 $bb_cfg['pm_url'] = 'privmsg.php'; # "http://{$domain_name}/privmsg.php"
 
 // Language
-$bb_cfg['charset'] = 'UTF-8';
+$bb_cfg['auto_language_detection'] = true; // Use browser language (auto-detect) as default language for guests
 $bb_cfg['lang'] = [
     // Languages available for selecting
     'af' => [
@@ -176,6 +204,7 @@ $bb_cfg['lang'] = [
     'ar' => [
         'name' => 'Arabic',
         'locale' => 'ar_SA.UTF-8',
+        'rtl' => true,
     ],
     'hy' => [
         'name' => 'Armenian',
@@ -252,6 +281,7 @@ $bb_cfg['lang'] = [
     'he' => [
         'name' => 'Hebrew',
         'locale' => 'he_IL.UTF-8',
+        'rtl' => true,
     ],
     'hi' => [
         'name' => 'Hindi',
@@ -394,30 +424,33 @@ $bb_cfg['invites_system'] = [
     'codes' => [
         // Syntax: 'invite_code' => 'validity_period'
         // The 'validity_period' value is based on strtotime() function: https://www.php.net/manual/en/function.strtotime.php
-        // Invite link example: site_url/profile.php?mode=register&invite=new_year
-        'new_year' => '2022-12-31 00:00:01',
-        'ein_volk' => '29 July 1936',
-        'catch_up_overtake' => '1917-10-09'
+        // You can also create a permanent invite, set 'permanent' value for 'validity_period'
+        // Invite link example: site_url/profile.php?mode=register&invite=new_year2023
+        'new_year2023' => '2022-12-31 00:00:01',
+        '340c4bb6ea2d284c13e085b60b990a8a' => '12 April 1961',
+        'tp_birthday' => '2005-04-04',
+        'endless' => 'permanent'
     ]
 ];
 $bb_cfg['password_symbols'] = [
     // What symbols should be required in the password
-    'nums' => true, // Numeric
-    'spec_symbols' => false, // Special symbols
-    'letters' => [ // Letters
-        'uppercase' => true, // Uppercase letters
-        'lowercase' => true // Lowercase letters
+    'nums' => true,
+    'spec_symbols' => false,
+    'letters' => [
+        'uppercase' => false,
+        'lowercase' => true
     ]
 ];
 $bb_cfg['password_hash_options'] = [
     // https://www.php.net/manual/ru/password.constants.php
     'algo' => PASSWORD_BCRYPT,
-    'options' => []
+    'options' => ['cost' => 12]
 ];
 
 // Email
 $bb_cfg['emailer'] = [
     'enabled' => true,
+    'sendmail_command' => '/usr/sbin/sendmail -bs',
     'smtp' => [
         'enabled' => false, // send email via external SMTP server
         'host' => 'localhost', // SMTP server host
@@ -469,6 +502,10 @@ $bb_cfg['telegram_sender'] = [
 ];
 
 // Special users
+$bb_cfg['dbg_users'] = [
+    // Syntax: 'user_id' => 'username'
+    2 => 'admin',
+];
 $bb_cfg['unlimited_users'] = [
     // Syntax: 'user_id' => 'username'
     2 => 'admin',
@@ -485,7 +522,10 @@ $bb_cfg['sf_on_first_page_only'] = true; // Show subforums only on the first pag
 $bb_cfg['allowed_topics_per_page'] = [50, 100, 150, 200, 250, 300]; // Allowed number of topics per page
 
 // Topics
-$bb_cfg['show_post_bbcode_button'] = true; // Show "Code" button in topic to display BBCode of topic
+$bb_cfg['show_post_bbcode_button'] = [ // Show "Code" button in topic to display BBCode of topic
+    'enabled' => true,
+    'only_for_first_post' => true,
+];
 $bb_cfg['show_quick_reply'] = true; // Show quick reply forim
 $bb_cfg['show_rank_text'] = false; // Show user rank name in topics
 $bb_cfg['show_rank_image'] = true; // Show user rank image in topics
@@ -566,7 +606,6 @@ $bb_cfg['flist_max_files'] = 0; // Max allowed number of files to process for gi
 $bb_cfg['last_visit_date_format'] = 'd-M H:i';
 $bb_cfg['last_post_date_format'] = 'd-M-y H:i';
 $bb_cfg['poll_max_days'] = 180; // How many days will the poll be active
-$bb_cfg['integrity_check'] = true; // TorrentPier files integrity check (Not recommended to disable!)
 
 $bb_cfg['allow_change'] = [
     'language' => true, // Allow user to change language
@@ -577,17 +616,11 @@ $bb_cfg['trash_forum_id'] = 0; // (int) 7
 
 $bb_cfg['first_logon_redirect_url'] = 'index.php'; // Which page should the user be redirected to after registration is completed?
 $bb_cfg['terms_and_conditions_url'] = 'terms.php'; // Link to forum rules page
-$bb_cfg['tor_help_links'] = '<div class="mrg_2"><a target="_blank" class="genmed" href="https://torrentpier.com/forums/osnovnye-voprosy-po-torrentpier.10/">Полезная информация</a></div>';
+$bb_cfg['tor_help_links'] = '<div class="mrg_2"><a target="_blank" class="genmed" href="https://yoursite.com/">See $bb_cfg[\'tor_help_links\'] in config.php</a></div>';
 
 $bb_cfg['user_agreement_url'] = 'info.php?show=user_agreement';
 $bb_cfg['copyright_holders_url'] = 'info.php?show=copyright_holders';
 $bb_cfg['advert_url'] = 'info.php?show=advert';
-
-$bb_cfg['sitemap_sending'] = [
-    // A list of URLs to which to send a sitemap for indexing by a search robot.
-    // Syntax: 'Resource name' => 'link to endpoint'
-    'Google' => 'https://google.com/webmasters/sitemaps/ping?sitemap=',
-];
 
 // Extensions
 $bb_cfg['file_id_ext'] = [
@@ -601,7 +634,8 @@ $bb_cfg['file_id_ext'] = [
     9 => 'zip',
     10 => '7z',
     11 => 'bmp',
-    12 => 'webp'
+    12 => 'webp',
+    13 => 'avif'
 ];
 
 // Attachments
@@ -615,7 +649,7 @@ $bb_cfg['gen_forums_allowed_ext'] = ['zip', 'rar']; // TODO: For regular section
 
 // Avatars
 $bb_cfg['avatars'] = [
-    'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp'], // Allowed file extensions (after changing, do the same for $bb_cfg['file_id_ext'])
+    'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp', 'avif'], // Allowed file extensions (after changing, do the same for $bb_cfg['file_id_ext'])
     'bot_avatar' => '/gallery/bot.gif', // The bot's avatar
     'max_size' => 100 * 1024, // Avatar's allowed dimensions
     'max_height' => 100, // Avatar height in px
@@ -628,7 +662,7 @@ $bb_cfg['avatars'] = [
 
 // Group avatars
 $bb_cfg['group_avatars'] = [
-    'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp'], // Allowed file extensions (add the same for $bb_cfg['file_id_ext'])
+    'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp', 'avif'], // Allowed file extensions (add the same for $bb_cfg['file_id_ext'])
     'max_size' => 300 * 1024, // max avatar size in bytes
     'max_height' => 300, // Avatar height in px
     'max_width' => 300, // Avatar weight in px
@@ -639,12 +673,12 @@ $bb_cfg['group_avatars'] = [
 ];
 
 // Captcha
-// Get a Google reCAPTCHA API Key: https://www.google.com/recaptcha/admin
 $bb_cfg['captcha'] = [
     'disabled' => true,
+    'service' => 'googleV3', // Available services: text, googleV2, googleV3, hCaptcha, yandex, cloudflare
     'public_key' => '',
     'secret_key' => '',
-    'theme' => 'light', // theming (available: light, dark)
+    'theme' => 'light', // theming (available: light, dark) (working only if supported by captcha service)
 ];
 
 // Atom feed
@@ -687,8 +721,6 @@ $bb_cfg['tracker'] = [
     'update_dlstat' => true,
     'expire_factor' => 2.5,
     'compact_mode' => true,
-    'upd_user_up_down_stat' => true,
-    'browser_redirect_url' => '',
     'scrape' => true,
     'limit_active_tor' => true,
     'limit_seed_count' => 0,
@@ -707,7 +739,8 @@ $bb_cfg['tracker'] = [
     'gold_silver_enabled' => true, // golden / silver days mode (If enabled, then disable "freeleech")
     'hybrid_stat_protocol' => 1, // For hybrid torrents there are two identical requests sent by clients, for counting stats we gotta choose one, you can change this to '2' in future, when v1 protocol is outdated
     'disabled_v1_torrents' => false, // disallow registration of v1-only torrents, for future implementations where client will use v2 only and there won't be need for v1, thus relieving tracker
-    'disabled_v2_torrents' => false // disallow registration of v2-only torrents
+    'disabled_v2_torrents' => false, // disallow registration of v2-only torrents
+    'use_old_torrent_name_format' => false, // when enabled, the names of torrent files will have the classic format: [yoursite.com].txxx.torrent
 ];
 
 // Ratio settings

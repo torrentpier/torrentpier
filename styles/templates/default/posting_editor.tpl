@@ -75,7 +75,9 @@ ajax.callback.posts = function(data) {
 	<input type="button" value="&#8667;" name="codeIndent" title="{L_INDENT_TAG}" />&nbsp;
 	<input type="button" value="{L_SPOILER}" name="codeSpoiler" title="{L_SPOILER}" />
     <input type="button" value="{L_ACRONYM}" name="codeAcronym" title="{L_ACRONYM_TITLE}" />
+    <input type="button" value="pre" name="codePre" title="{L_PRE_TAG}" />
     <input type="button" value="box" name="codeBox" title="{L_BOX_TAG}" />
+    <input type="button" value="nfo" name="codeNfo" title="{L_NFO_TAG}" />
 </span>
 
 <div class="buttons floatR">
@@ -209,6 +211,8 @@ function checkForm(form) {
     bbcode.addTag("codeAcronym", 'acronym="text"', "/acronym", "", ctrl);
     bbcode.addTag("codeBox", "box", null, "", ctrl);
     bbcode.addTag("codeIndent", "indent", null, "", ctrl);
+    bbcode.addTag("codePre", "pre", null, "", ctrl);
+    bbcode.addTag("codeNfo", "nfo", null, "", ctrl);
 
     bbcode.addTag("fontFace", function (e) {
         var v = e.value;

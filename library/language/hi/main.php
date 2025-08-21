@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -63,6 +63,9 @@ $lang['SELECT_ACTION'] = 'कार्रवाई चुनें';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'अनजान';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+$lang['NO_ITEMS'] = 'There seems to be no data here...';
+$lang['PLEASE_TRY_AGAIN'] = 'Please try again after few seconds...';
 
 $lang['NEXT_PAGE'] = 'आगामी';
 $lang['PREVIOUS_PAGE'] = 'पिछला';
@@ -376,6 +379,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'इमोटिकॉन की सीमा %s
 
 $lang['ATTACH_SIGNATURE'] = 'हस्ताक्षर संलग्न करें (प्रोफ़ाइल में हस्ताक्षर परिवर्तित किए जा सकते हैं)';
 $lang['NOTIFY'] = 'उत्तर पर मुझे सूचित करें';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'आपका संदेश सफलतापूर्वक दर्ज किया गया है';
 $lang['EDITED'] = 'संदेश बदल दिया गया है';
@@ -983,6 +987,7 @@ $lang['DATETIME']['DEC'] = 'दिसम्बर';
 
 // Country selector
 $lang['COUNTRY'] = 'Country';
+$lang['SET_OWN_COUNTRY'] = 'Set own country (Manually)';
 $lang['COUNTRIES'] = [
     0 => 'कोई चयन नहीं',
     'AD' => 'Andorra',
@@ -1267,6 +1272,24 @@ $lang['FILESIZE'] = 'फाइल का आकार';
 $lang['VIEWED'] = 'देखा गया';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'बोर्ड के व्यवस्थापक द्वारा एक्सटेंशन \'%s\' को निष्क्रिय कर दिया गया था, इसलिए यह अनुलग्नक प्रदर्शित नहीं किया गया है।'; // used in Posts and PM's, replace %s with mime type
 
+// Viewtopic -> Display of Attachments -> TorrServer integration
+$lang['STREAM'] = 'Stream';
+$lang['RESOLUTION'] = 'Resolution: <b>%s</b>';
+$lang['CHANNELS'] = 'Channels: <b>%s</b>';
+$lang['CHANNELS_LAYOUT'] = 'Channels layout: <b>%s</b>';
+$lang['BITRATE'] = 'Bitrate: <b>%s</b>';
+$lang['SAMPLE_RATE'] = 'Sample rate: <b>%s</b>';
+$lang['AUDIO_TRACK'] = 'Audio track information (%d):';
+$lang['AUDIO_CODEC'] = 'Audio codec: <b title="%s">%s</b>';
+$lang['VIDEO_CODEC'] = 'Video codec: <b title="%s">%s</b>';
+$lang['SHOW_MORE_INFORMATION_FILE'] = 'Show more information about file';
+$lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOT_SUPPORTED'] = 'This file cannot be played in the browser...';
+$lang['M3U_FFPROBE_NO_DATA'] = 'It seems ffprobe will not be able to return data about this codec...';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
+
 $lang['ATTACHMENT'] = 'संलग्नक';
 $lang['ATTACHMENT_THUMBNAIL'] = 'अनुलग्नक थंबनेल';
 
@@ -1347,11 +1370,17 @@ $lang['BT_REG_FAIL'] = 'ट्रैकर पर धार डाउनलो�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'उसी जानकारी के साथ एक और धार पहले ही <a href="%s"><b> रजिस्ट्रीकृत 1233_2_2_321</a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
+$lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'ट्रैकर से निकालें';
 $lang['BT_UNREGISTERED'] = 'टॉरेंट अपंजीकृत';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1376,6 +1405,7 @@ $lang['SEEDING'] = 'बीज';
 $lang['LEECHING'] = 'जोंक';
 $lang['IS_REGISTERED'] = 'दर्ज कराई';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1412,6 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'टरेंट सफलतापूर्वक �
 $lang['DEL_TORRENT'] = 'क्या आप निश्चित रूप से धार को हटाना चाहते हैं?';
 $lang['DEL_MOVE_TORRENT'] = 'क्या आप वाकई विषय को हटाना चाहते हैं?';
 $lang['UNEXECUTED_RELEASE'] = 'क्या आपके पास एक नया निर्बाध बनाने से पहले एक निर्बाध रिलीज है?';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'वितरण की स्थिति बदलने - %s';
@@ -1446,6 +1477,7 @@ $lang['SET_SILVER_TORRENT'] = 'चांदी बनाओ';
 $lang['UNSET_SILVER_TORRENT'] = 'चांदी को अनमॅक करें';
 $lang['GOLD_STATUS'] = 'स्वर्ण टॉरेंट! डाउनलोड ट्रैफिक नहीं मानता है!';
 $lang['SILVER_STATUS'] = 'चांदी टॉरेंट! डाउनलोड किए जाने वाले ट्रैफिक पार्टिशन';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'फ़ोरम में खोजें';
@@ -1572,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'केवल सुपर व्यवस्थ
 
 $lang['LOGS'] = 'विषय इतिहास';
 $lang['FORUM_LOGS'] = 'इतिहास फ़ोरम';
-$lang['AUTOCLEAN'] = 'स्वतः स्वच्छ:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'डिजाइनर';
 
 $lang['LAST_IP'] = 'अंतिम आईपी:';
@@ -1693,7 +1725,6 @@ $lang['NOTICE'] = '!ध्यान!';
 $lang['COPY'] = 'यह साइट उत्पादों के इलेक्ट्रॉनिक संस्करणों को नहीं देती है, और हमारे पाठकों द्वारा फोरम में भेजे गए और प्रकाशित किए गए संदर्भों के संग्रह और सूचीकरण में केवल व्यस्त है। यदि आप किसी भी जमा सामग्री के कानूनी मालिक हैं और चाहते हैं कि यह करने के लिए संदर्भ हमारी सूची में था, हमसे संपर्क करें और हम तुरंत उसे निकाल देंगे ट्रैकर पर एक एक्सचेंज के लिए फ़ाइलें एक साइट के उपयोगकर्ताओं द्वारा दी गई हैं, और प्रशासन उनके रखरखाव की ज़िम्मेदारी को सहन नहीं करता है। कॉपीराइट के द्वारा संरक्षित फ़ाइलों को भरने के अनुरोध, और अवैध रखरखाव की भी फ़ाइलें!';
 
 // FILELIST
-$lang['FILELIST'] = 'filelist';
 $lang['COLLAPSE'] = 'निर्देशिका को संकुचित करें';
 $lang['EXPAND'] = 'विस्तार';
 $lang['SWITCH'] = 'स्विच';
@@ -1811,8 +1842,10 @@ $lang['BOLD'] = 'बोल्ड टेक्स्ट: [b]text[/b] (Ctrl + B)';
 $lang['ITALIC'] = 'इटैलिक टेक्स्ट: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'टेक्स्ट रेखांकित करें: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'स्ट्राइकआउट पाठ: [s]text[/s] (Ctrl + S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'उद्धरण पाठ: [quote]text[/quote] (Ctrl + Q)';
@@ -1848,6 +1881,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'रोका हुआ';
 $lang['DL_UPD'] = 'upd:';
 $lang['DL_INFO'] = 'वर्तमान सत्र के लिए केवल <i><b> डेटा दिखाता है 1233_2_2_321</i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'पहली पोस्ट पिन करें';
@@ -1910,6 +1946,32 @@ $lang['TRACKER_CONFIG'] = 'ट्रैकर सेटिंग्स';
 $lang['RELEASE_TEMPLATES'] = 'रिलीज़ टेम्पलेट्स';
 $lang['ACTIONS_LOG'] = 'कार्रवाई पर रिपोर्ट';
 
+// Migrations
+$lang['MIGRATIONS_STATUS']  = 'Database Migration Status';
+$lang['MIGRATIONS_DATABASE_NAME']  = 'Database Name';
+$lang['MIGRATIONS_DATABASE_TOTAL']  = 'Total Tables';
+$lang['MIGRATIONS_DATABASE_SIZE']  = 'Database Size';
+$lang['MIGRATIONS_DATABASE_INFO']  = 'Database Information';
+$lang['MIGRATIONS_SYSTEM']  = 'Migration System';
+$lang['MIGRATIONS_NEEDS_SETUP']  = 'Needs Setup';
+$lang['MIGRATIONS_ACTIVE']  = 'सक्रिय';
+$lang['MIGRATIONS_NOT_INITIALIZED']  = 'Not Initialized';
+$lang['MIGRATIONS_UP_TO_DATE']  = 'All up to date';
+$lang['MIGRATIONS_PENDING_COUNT']  = 'pending';
+$lang['MIGRATIONS_APPLIED']  = 'Applied Migrations';
+$lang['MIGRATIONS_PENDING']  = 'Pending Migrations';
+$lang['MIGRATIONS_VERSION']  = 'Version';
+$lang['MIGRATIONS_NAME']  = 'Migration Name';
+$lang['MIGRATIONS_FILE']  = 'Migration File';
+$lang['MIGRATIONS_APPLIED_AT']  = 'Applied At';
+$lang['MIGRATIONS_COMPLETED_AT']  = 'Completed At';
+$lang['MIGRATIONS_CURRENT_VERSION']  = 'Current Version';
+$lang['MIGRATIONS_NOT_APPLIED']  = 'No migrations applied';
+$lang['MIGRATIONS_INSTRUCTIONS']  = 'Instructions';
+$lang['MIGRATIONS_SETUP_STATUS']  = 'Setup Status';
+$lang['MIGRATIONS_SETUP_GUIDE']  = 'See setup guide below';
+$lang['MIGRATIONS_ACTION_REQUIRED']  = 'Action Required';
+
 // Index
 $lang['MAIN_INDEX'] = 'फोरम सूचकांक';
 $lang['FORUM_STATS'] = 'फोरम सांख्यिकी';
@@ -1951,6 +2013,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'उपयोगकर्ता पो�
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'ऑनलाइन उपयोगकर्ताओं की सूची दिखाएं';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'एक उपयोगकर्ता का चयन करें';
@@ -2290,14 +2357,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'अस्वीकृत उपयोगकर�
 $lang['DISALLOWED_ALREADY'] = 'आपके द्वारा दर्ज नाम अस्वीकृत नहीं किया जा सकता है यह या तो पहले से ही सूची में मौजूद है, शब्द सेंसर सूची में मौजूद है, या एक मेल उपयोगकर्ता नाम मौजूद है।';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'अस्वीकार उपयोगकर्ता नाम प्रशासन पर वापस जाने के लिए %s हायर %s पर क्लिक करें';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'संस्करण जानकारी';
@@ -2787,6 +2846,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'विषय: <br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'पोस्ट: <br /> <b> हटाए गए 1233_2_2_321',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
@@ -2963,12 +3025,8 @@ $lang['SITEMAP_ADMIN'] = 'साइटमैप प्रबंधित कर�
 $lang['SITEMAP_CREATED'] = 'साइटमैप बनाया गया';
 $lang['SITEMAP_AVAILABLE'] = 'और यहां पर उपलब्ध है';
 $lang['SITEMAP_NOT_CREATED'] = 'साइटमैप अभी तक बनाया नहीं गया है';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'खोज इंजन की अधिसूचना';
-$lang['SITEMAP_SENT'] = 'भेजें पूर्ण';
-$lang['SITEMAP_ERROR'] = 'त्रुटि भेजना';
 $lang['SITEMAP_OPTIONS'] = 'विकल्प';
 $lang['SITEMAP_CREATE'] = 'साइटमैप बनाएं / अपडेट करें';
-$lang['SITEMAP_NOTIFY'] = 'साइटमैप के नए संस्करण के बारे में खोज इंजन को सूचित करें';
 $lang['SITEMAP_WHAT_NEXT'] = 'आगे क्या करना है?';
 $lang['SITEMAP_GOOGLE_1'] = 'अपने Google खाते का उपयोग करके <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> पर अपनी साइट को पंजीकृत करें';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank"> साइट की साइटमैप </a> जोड़ें जो आपने पंजीकृत की है।';
@@ -2996,6 +3054,8 @@ $lang['HASH_NOT_FOUND'] = 'हैश %s के साथ रिलीज़ न�
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'इस पृष्ठ पर, आप संसाधनों के मूल नियमों का टेक्स्ट उपयोगकर्ताओं को प्रदर्शित किया जा सकता है।';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => '30 दिनों में निष्क्रिय उपयोगकर्ता',
@@ -3050,7 +3110,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'जांचें कि आप रोबोट नहीं हैं';
 $lang['CAPTCHA_WRONG'] = 'आप यह पुष्टि नहीं कर सके कि आप रोबोट नहीं हैं';
-$lang['CAPTCHA_SETTINGS'] = '<h2> रीकैप्चाचा पूरी तरह से कॉन्फ़िगर नहीं किया जा रहा है </h2><p> यदि आपने पहले से कुंजी उत्पन्न नहीं की है, तो आप इसे <a href="https://www.google.com/recaptcha/admin">https: //www.google.com/recaptcha/admin</a>.<br /> पर कर सकते हैं, आप कुंजी उत्पन्न करने के बाद, आपको उन्हें फ़ाइल लाइब्रेरी / कॉन्फ़िग पर डालनी होगी .php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

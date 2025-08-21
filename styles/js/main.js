@@ -1,7 +1,7 @@
 /*
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -62,7 +62,7 @@ if (document.all) {
 }
 
 function imgFit(img, maxW) {
-  img.title = 'Размеры изображения: ' + img.width + ' x ' + img.height;
+  img.title = 'Image Dimensions: ' + img.width + ' x ' + img.height;
   if (typeof (img.naturalHeight) === 'undefined') {
     img.naturalHeight = img.height;
     img.naturalWidth = img.width;
@@ -70,13 +70,13 @@ function imgFit(img, maxW) {
   if (img.width > maxW) {
     img.height = Math.round((maxW / img.width) * img.height);
     img.width = maxW;
-    img.title = 'Нажмите на изображение, чтобы посмотреть его в полный размер';
+    img.title = 'Click on the image to view it full size';
     img.style.cursor = 'move';
     return false;
   } else if (img.width === maxW && img.width < img.naturalWidth) {
     img.height = img.naturalHeight;
     img.width = img.naturalWidth;
-    img.title = 'Размеры изображения: ' + img.naturalWidth + ' x ' + img.naturalHeight;
+    img.title = 'Image Dimensions: ' + img.naturalWidth + ' x ' + img.naturalHeight;
     return false;
   } else {
     return true;
@@ -315,7 +315,7 @@ Ajax.prototype = {
       $('body').prepend(response.raw_output);
     }
     if (response.sql_log) {
-      $('#sqlLog').prepend(response.sql_log + '<hr />');
+      $('#sqlLog').prepend(response.sql_log + '<hr/>');
       fixSqlLog();
     }
     if (response.update_ids) {
@@ -324,14 +324,14 @@ Ajax.prototype = {
       }
     }
     if (response.prompt_password) {
-      var user_password = prompt('Для доступа к данной функции, пожалуйста, введите свой пароль', '');
+      var user_password = prompt('To access this feature, please enter your password', '');
       if (user_password) {
         var req = ajax.request[action];
         req.user_password = user_password;
         ajax.exec(req);
       } else {
         ajax.clearActionState(action);
-        ajax.showErrorMsg('Введен неверный пароль');
+        ajax.showErrorMsg('Incorrect password entered');
       }
     } else if (response.prompt_confirm) {
       if (window.confirm(response.confirm_msg)) {
@@ -343,11 +343,13 @@ Ajax.prototype = {
       }
     } else if (response.error_code) {
       ajax.showErrorMsg(response.error_msg);
-      console.log(response.console_log);
       $('.loading-1').removeClass('loading-1').html('error');
     } else {
       ajax.callback[action](response);
       ajax.clearActionState(action);
+    }
+    if (response.console_log) {
+      console.log(response.console_log);
     }
   },
 
@@ -439,9 +441,9 @@ $(document).ready(function () {
     var text = xml.statusText;
     if (status === 200) {
       status = '';
-      text = 'неверный формат данных';
+      text = 'invalid data format';
     }
-    $(this).html("Ошибка в: <i>" + ajax.url + "</i><br /><b>" + status + " " + text + "</b>").show();
+    $(this).html("Error in: <i>" + ajax.url + "</i><br /><b>" + status + " " + text + "</b>").show();
     ajax.setStatusBoxPosition($(this));
   });
 
@@ -460,19 +462,33 @@ $(document).ready(function () {
 /**
  * Autocomplete password
  **/
-var array_for_rand_pass = ["a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F", "g", "G", "h", "H", "i", "I", "j", "J", "k", "K", "l", "L", "m", "M", "n", "N", "o", "O", "p", "P", "q", "Q", "r", "R", "s", "S", "t", "T", "u", "U", "v", "V", "w", "W", "x", "X", "y", "Y", "z", "Z", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-var array_rand = function (array) {
-  var array_length = array.length;
-  var result = Math.random() * array_length;
-  return Math.floor(result);
-};
+function generatePassword(length) {
+  const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+  const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const numberChars = "0123456789";
+  const specialChars = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
 
-var autocomplete = function (noCenter) {
-  var string_result = ""; // Empty string
-  for (var i = 1; i <= 8; i++) {
-    string_result += array_for_rand_pass[array_rand(array_for_rand_pass)];
+  let password = [
+    getRandomChar(lowercaseChars),
+    getRandomChar(uppercaseChars),
+    getRandomChar(numberChars),
+    getRandomChar(specialChars)
+  ];
+
+  for (let i = 4; i < length; i++) {
+    password.push(getRandomChar(lowercaseChars));
   }
 
+  password = password.sort(() => Math.random() - 0.5);
+  return password.slice(0, length).join("");
+}
+
+function getRandomChar(charSet) {
+  return charSet[Math.floor(Math.random() * charSet.length)];
+}
+
+var autocomplete = function (noCenter = false, passwordLength = 10) {
+  let string_result = generatePassword(passwordLength);
   var _popup_left = (Math.ceil(window.screen.availWidth / 2) - 150);
   var _popup_top = (Math.ceil(window.screen.availHeight / 2) - 50);
 
@@ -491,10 +507,9 @@ var autocomplete = function (noCenter) {
 
 $(document).ready(function () {
   $("span#autocomplete").click(function () {
-    autocomplete();
+    autocomplete(false, $(this).data('password-length'));
   });
 
-  // перемещение окна
   var _X, _Y;
   var _bMoveble = false;
 

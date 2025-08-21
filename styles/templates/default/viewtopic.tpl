@@ -16,7 +16,7 @@
 <!-- ENDIF -->
 <!-- ENDIF / LOGGED_IN -->
 
-<!-- IF $bb_cfg['show_post_bbcode_button'] -->
+<!-- IF $bb_cfg['show_post_bbcode_button']['enabled'] -->
 <script type="text/javascript">
     let loadedText = [];
 
@@ -34,7 +34,7 @@
     ajax.callback.view_post = function (data) {
         loadedText[data.post_id] = true;
         $('#post_' + data.post_id + ' div.post_body').prepend(
-            '<div class="tCenter" id="ptx-' + data.post_id + '"><textarea style="width: 99%; height: 200px; line-height: 1.2;" readonly>' + data['post_text'] + '</textarea><hr></div>'
+            '<div class="tCenter" id="ptx-' + data.post_id + '"><textarea style="width: 99%; height: 200px; line-height: 1.2;" readonly>' + data['post_text'] + '</textarea><hr/></div>'
         );
     };
 </script>
@@ -213,7 +213,7 @@ ajax.callback.post_mod_comment = function(data) {
 <!-- ENDIF -->
 <!-- IF CAN_MANAGE_POLL -->
 <script type="text/javascript">
-// заполняет #poll-form и отправляет запрос
+// fills out the #poll-form and sends the request
 function poll_manage (mode, confirm_msg)
 {
 	if (confirm_msg != null && !window.confirm( confirm_msg )) {
@@ -426,11 +426,11 @@ function build_poll_add_form (src_el)
 			<!-- IF postrow.MOD_CHECKBOX --><input type="checkbox" class="select_post" onclick="set_hid_chbox('{postrow.POST_ID}');"><!-- ENDIF -->
 
 			<p style="float: right;<!-- IF TEXT_BUTTONS --> padding: 3px 2px 4px;<!-- ELSE --> padding: 1px 6px 2px;<!-- ENDIF -->" class="post_btn_1">
-				<!-- IF postrow.IS_FIRST_POST and CAN_ADD_POLL --><a href="#" onclick="return build_poll_add_form(this);" class="txtb">{POLL_IMG}</a><!-- ENDIF -->
+				<!-- IF postrow.IS_FIRST_POST and CAN_ADD_POLL --><a href="#" onclick="return build_poll_add_form(this);" class="txtb">{POLL_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, topic_id : {TOPIC_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF postrow.IS_FIRST_POST && $bb_cfg['show_post_bbcode_button'] --><a href="#" class="txtb" onclick="ajax.view_post('{postrow.POST_ID}'); return false;">{CODE_IMG}</a><!-- ENDIF -->
+				<!-- IF $bb_cfg['show_post_bbcode_button']['enabled'] --><!-- IF postrow.IS_FIRST_POST || !$bb_cfg['show_post_bbcode_button']['only_for_first_post'] --><a href="#" class="txtb" onclick="ajax.view_post('{postrow.POST_ID}'); return false;">{CODE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF --><!-- ENDIF -->
 				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;{#POST_TOPIC_URL#}={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
 					<a class="menu-root menu-alt1 txtb" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}
@@ -448,16 +448,16 @@ function build_poll_add_form (src_el)
 				<div id="pg_{postrow.POST_ID}" class="alert alert-gray" style="width: 92%;">
 					<h4 class="alert-heading">{L_RELEASE_FROM_RG} — <a href="{postrow.RG_URL}">{postrow.RG_NAME}</a></h4>
 					<div id="pg_info_{postrow.POST_ID}">
-						<!-- IF postrow.RG_AVATAR --><hr /><a href="{postrow.RG_URL}">{postrow.RG_AVATAR}</a><!-- ENDIF -->
+						<!-- IF postrow.RG_AVATAR --><hr/><a href="{postrow.RG_URL}">{postrow.RG_AVATAR}</a><!-- ENDIF -->
                         <!-- IF postrow.RG_DESC --><div class="post-wrap">{L_DESCRIPTION}: {postrow.RG_DESC}</div><!-- ENDIF -->
-						<!-- IF postrow.RG_SIG and postrow.RG_SIG_ATTACH --><hr /><div id="rg_sig">{L_SIGNATURE}: {postrow.RG_SIG}</div><!-- ENDIF -->
-						<hr /><a href="{postrow.RG_FIND_URL}">{L_MORE_RELEASES}</a>
+						<!-- IF postrow.RG_SIG and postrow.RG_SIG_ATTACH --><hr/><div id="rg_sig">{L_SIGNATURE}: {postrow.RG_SIG}</div><!-- ENDIF -->
+						<hr/><a href="{postrow.RG_FIND_URL}">{L_MORE_RELEASES}</a>
 					</div>
 				</div>
 				<!-- ENDIF -->
 				<div id="pc_{postrow.POST_ID}" <!-- IF not postrow.MC_COMMENT -->style="display: none;"<!-- ENDIF -->>
 					<div id="mc_class_{postrow.POST_ID}" class="alert alert-{postrow.MC_CLASS}" style="width: 92%;">
-						<h4 class="alert-heading">{postrow.MC_TITLE}</h4><hr />
+						<h4 class="alert-heading">{postrow.MC_TITLE}</h4><hr/>
 						<div id="mc_comment_{postrow.POST_ID}">{postrow.MC_COMMENT}</div>
 					</div>
 				</div>
@@ -598,7 +598,7 @@ function build_poll_add_form (src_el)
 <!-- ENDIF -->
 
 <!-- IF QUICK_REPLY -->
-<br>
+<br/>
 <form action="{QR_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
 <input type="hidden" name="mode" value="reply" />
 <input type="hidden" name="{#POST_TOPIC_URL#}" value="{QR_TOPIC_ID}" />
@@ -623,12 +623,14 @@ function build_poll_add_form (src_el)
 
 	</td>
 </tr>
+<!-- IF S_WATCH_TOPIC -->
 <tr id="post_opt" class="row2">
 	<td class="td2 med tCenter pad_4">
-		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled<!-- ENDIF --> />
+		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked<!-- ENDIF -->/>
 		{L_QR_NOTIFY}&nbsp;</label>
 	</td>
 </tr>
+<!-- ENDIF -->
 </table><!--/topic_quick_reply-->
 
 </form>

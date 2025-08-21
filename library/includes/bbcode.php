@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -83,6 +83,23 @@ HTML;
 	<span class="post-hr">-</span>
 HTML;
 
+// Box
+    $bbcode_tpl['box_open'] = <<<HTML
+    <div class="post-box-default"><div class="post-box">
+HTML;
+
+    $bbcode_tpl['box_open_color'] = <<<HTML
+    <div class="post-box-default"><div class="post-box" style="border-color: $1; background-color: $2;">
+HTML;
+
+    $bbcode_tpl['box_open_color_single'] = <<<HTML
+    <div class="post-box-default"><div class="post-box" style="border-color: $1;">
+HTML;
+
+    $bbcode_tpl['box_close'] = <<<HTML
+    </div></div>
+HTML;
+
     array_deep($bbcode_tpl, 'bbcode_tpl_compact');
     return $bbcode_tpl;
 }
@@ -106,7 +123,7 @@ function prepare_message($message)
 // Either in a window or inline
 function generate_smilies($mode)
 {
-    global $bb_cfg, $template, $lang, $user, $datastore;
+    global $template, $lang, $user, $datastore;
 
     $inline_columns = 4;
     $inline_rows = 7;
@@ -116,12 +133,9 @@ function generate_smilies($mode)
         $user->session_start();
     }
 
-    if (!$data = $datastore->get('smile_replacements') and !$datastore->has('smile_replacements')) {
-        $datastore->update('smile_replacements');
-        $data = $datastore->get('smile_replacements');
-    }
+    $data = $datastore->get('smile_replacements');
 
-    if ($sql = $data['smile']) {
+    if (isset($data['smile']) && $sql = $data['smile']) {
         $num_smilies = 0;
         $rowset = [];
         foreach ($sql as $row) {
@@ -146,7 +160,7 @@ function generate_smilies($mode)
 
                 $template->assign_block_vars('smilies_row.smilies_col', [
                     'SMILEY_CODE' => $data['code'],
-                    'SMILEY_IMG' => $bb_cfg['smilies_path'] . '/' . $smile_url,
+                    'SMILEY_IMG' => config()->get('smilies_path') . '/' . $smile_url,
                     'SMILEY_DESC' => $data['emoticon'],
                 ]);
 
@@ -327,11 +341,9 @@ function strip_bbcode($message, $stripquotes = true, $fast_and_dirty = false, $s
 
 function extract_search_words($text)
 {
-    global $bb_cfg;
-
-    $max_words_count = $bb_cfg['max_search_words_per_post'];
-    $min_word_len = max(2, $bb_cfg['search_min_word_len'] - 1);
-    $max_word_len = $bb_cfg['search_max_word_len'];
+    $max_words_count = config()->get('max_search_words_per_post');
+    $min_word_len = max(2, config()->get('search_min_word_len') - 1);
+    $max_word_len = config()->get('search_max_word_len');
 
     $text = ' ' . str_compact(strip_tags(mb_strtolower($text))) . ' ';
     $text = str_replace(['&#91;', '&#93;'], ['[', ']'], $text);
@@ -368,12 +380,10 @@ function extract_search_words($text)
 
 function add_search_words($post_id, $post_message, $topic_title = '', $only_return_words = false)
 {
-    global $bb_cfg;
-
     $text = $topic_title . ' ' . $post_message;
     $words = ($text) ? extract_search_words($text) : [];
 
-    if ($only_return_words || $bb_cfg['search_engine_type'] == 'sphinx') {
+    if ($only_return_words || config()->get('search_engine_type') == 'sphinx') {
         return implode("\n", $words);
     }
 
@@ -391,12 +401,12 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
 
 function bbcode2html($text)
 {
-    global $bbcode, $wordCensor;
+    global $bbcode;
 
     if (!isset($bbcode)) {
         $bbcode = new TorrentPier\Legacy\BBCode();
     }
-    $text = $wordCensor->censorString($text);
+    $text = censor()->censorString($text);
     return $bbcode->bbcode2html($text);
 }
 
@@ -411,22 +421,19 @@ function get_words_rate($text)
 
 function hide_passkey($str)
 {
-    global $bb_cfg;
-    return preg_replace("#\?{$bb_cfg['passkey_key']}=[a-zA-Z0-9]{" . BT_AUTH_KEY_LENGTH . "}#", "?{$bb_cfg['passkey_key']}=passkey", $str);
+    return preg_replace("#\?{config()->get('passkey_key')}=[a-zA-Z0-9]{" . BT_AUTH_KEY_LENGTH . "}#", "?{config()->get('passkey_key')}=passkey", $str);
 }
 
 function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
 {
-    global $bb_cfg;
-
-    if ($bb_cfg['use_posts_cache'] && !empty($postrow['post_html'])) {
+    if (config()->get('use_posts_cache') && !empty($postrow['post_html'])) {
         return $postrow['post_html'];
     }
 
     $message = bbcode2html($postrow['post_text']);
 
     // Posts cache
-    if ($bb_cfg['use_posts_cache']) {
+    if (config()->get('use_posts_cache')) {
         DB()->shutdown['post_html'][] = [
             'post_id' => (int)$postrow['post_id'],
             'post_html' => (string)$message

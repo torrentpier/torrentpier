@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,20 +11,16 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg;
-
 DB()->expect_slow_query(600);
 
 //
 // Make tracker snapshot
 //
-if (!$bb_cfg['ocelot']['enabled']) {
-    define('NEW_BB_BT_TRACKER_SNAP', 'new_tracker_snap');
-    define('OLD_BB_BT_TRACKER_SNAP', 'old_tracker_snap');
+define('NEW_BB_BT_TRACKER_SNAP', 'new_tracker_snap');
+define('OLD_BB_BT_TRACKER_SNAP', 'old_tracker_snap');
 
-    DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
-    DB()->query("CREATE TABLE " . NEW_BB_BT_TRACKER_SNAP . " LIKE " . BB_BT_TRACKER_SNAP);
-}
+DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
+DB()->query("CREATE TABLE " . NEW_BB_BT_TRACKER_SNAP . " LIKE " . BB_BT_TRACKER_SNAP);
 
 $per_cycle = 50000;
 $row = DB()->fetch_row("SELECT MIN(topic_id) AS start_id, MAX(topic_id) AS finish_id FROM " . BB_BT_TRACKER);
@@ -37,44 +33,25 @@ while (true) {
 
     $val = [];
 
-    if (!$bb_cfg['ocelot']['enabled']) {
-        $sql = "
-			SELECT
-				topic_id, SUM(seeder) AS seeders, (COUNT(*) - SUM(seeder)) AS leechers,
-				SUM(speed_up) AS speed_up, SUM(speed_down) AS speed_down, SUM(complete) AS completed
-			FROM " . BB_BT_TRACKER . "
-			WHERE topic_id BETWEEN $start_id AND $end_id
-			GROUP BY topic_id
-		";
-    } else {
-        $sql = "
-			SELECT
-				topic_id, SUM(speed_up) AS speed_up, SUM(speed_down) AS speed_down
-			FROM " . BB_BT_TRACKER . "
-			WHERE topic_id BETWEEN $start_id AND $end_id
-			GROUP BY topic_id
-		";
-    }
+    $sql = "
+		SELECT
+			topic_id, SUM(seeder) AS seeders, (COUNT(*) - SUM(seeder)) AS leechers,
+			SUM(speed_up) AS speed_up, SUM(speed_down) AS speed_down, SUM(complete) AS completed
+		FROM " . BB_BT_TRACKER . "
+		WHERE topic_id BETWEEN $start_id AND $end_id
+		GROUP BY topic_id
+	";
 
     foreach (DB()->fetch_rowset($sql) as $row) {
         $val[] = implode(',', $row);
     }
 
     if ($val) {
-        if (!$bb_cfg['ocelot']['enabled']) {
-            DB()->query("
-				REPLACE INTO " . NEW_BB_BT_TRACKER_SNAP . "
+        DB()->query("
+			REPLACE INTO " . NEW_BB_BT_TRACKER_SNAP . "
 				(topic_id, seeders, leechers, speed_up, speed_down, completed)
-				VALUES(" . implode('),(', $val) . ")
-			");
-        } else {
-            DB()->query("
-				INSERT INTO " . BB_BT_TRACKER_SNAP . "
-				(topic_id, speed_up, speed_down)
-				VALUES(" . implode('),(', $val) . ")
-				ON DUPLICATE KEY UPDATE speed_up = VALUES(speed_up), speed_down = VALUES(speed_down)
-			");
-        }
+			VALUES(" . implode('),(', $val) . ")
+		");
     }
 
     if ($end_id > $finish_id) {
@@ -84,15 +61,13 @@ while (true) {
     $start_id += $per_cycle;
 }
 
-if (!$bb_cfg['ocelot']['enabled']) {
-    DB()->query("
-		RENAME TABLE
+DB()->query("
+	RENAME TABLE
 		" . BB_BT_TRACKER_SNAP . " TO " . OLD_BB_BT_TRACKER_SNAP . ",
 		" . NEW_BB_BT_TRACKER_SNAP . " TO " . BB_BT_TRACKER_SNAP . "
-	");
+");
 
-    DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
-}
+DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
 
 //
 // Make dl-list snapshot
@@ -104,7 +79,7 @@ DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_DLSTATUS_SNAP . ", " . OLD_BB_BT
 
 DB()->query("CREATE TABLE " . NEW_BB_BT_DLSTATUS_SNAP . " LIKE " . BB_BT_DLSTATUS_SNAP);
 
-if ($bb_cfg['bt_show_dl_list'] && $bb_cfg['bt_dl_list_only_count']) {
+if (config()->get('bt_show_dl_list') && config()->get('bt_dl_list_only_count')) {
     DB()->query("
 		INSERT INTO " . NEW_BB_BT_DLSTATUS_SNAP . "
 			(topic_id, dl_status, users_count)
@@ -127,7 +102,7 @@ DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_DLSTATUS_SNAP . ", " . OLD_BB_BT
 //
 // TORHELP
 //
-if ($bb_cfg['torhelp_enabled']) {
+if (config()->get('torhelp_enabled')) {
     $tor_min_seeders = 0;   // "<="
     $tor_min_leechers = 2;   // ">="
     $tor_min_completed = 10;  // ">="
@@ -170,7 +145,7 @@ if ($bb_cfg['torhelp_enabled']) {
 			WHERE
 			      trsn.seeders          <=  $tor_min_seeders
 			  AND trsn.leechers         >=  $tor_min_leechers
-			  AND tor.forum_id          !=  " . (int)$bb_cfg['trash_forum_id'] . "
+			                          AND tor.forum_id          !=  " . (int)config()->get('trash_forum_id') . "
 			  AND tor.complete_count    >=  $tor_min_completed
 			  AND tor.seeder_last_seen  <=  (UNIX_TIMESTAMP() - $tor_seed_last_seen_days*86400)
 			  AND dl.user_id            IN($online_users_csv)

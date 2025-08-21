@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -13,7 +13,7 @@ if (!defined('IN_AJAX')) {
 
 global $datastore, $lang;
 
-if (!$ranks = $datastore->get('ranks') and !$datastore->has('ranks')) {
+if (!$ranks = $datastore->get('ranks')) {
     $datastore->update('ranks');
     $ranks = $datastore->get('ranks');
 }
@@ -28,7 +28,7 @@ if ($rank_id != 0 && !isset($ranks[$rank_id])) {
     $this->ajax_die("invalid rank_id: $rank_id");
 }
 
-DB()->query("UPDATE " . BB_USERS . " SET user_rank = $rank_id WHERE user_id = $user_id");
+DB()->query("UPDATE " . BB_USERS . " SET user_rank = $rank_id WHERE user_id = $user_id LIMIT 1");
 
 \TorrentPier\Sessions::cache_rm_user_sessions($user_id);
 

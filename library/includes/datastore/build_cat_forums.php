@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bf, $bb_cfg;
+global $bf;
 
 //
 // cat_forums
@@ -106,7 +106,7 @@ $this->store('cat_forums', $data);
 //
 // jumpbox
 //
-if ($bb_cfg['show_jumpbox']) {
+if (config()->get('show_jumpbox')) {
     $data = [
         'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
         'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
@@ -125,8 +125,8 @@ $this->store('viewtopic_forum_select', $data);
 //
 // latest_news
 //
-if ($bb_cfg['show_latest_news'] and $news_forum_ids = $bb_cfg['latest_news_forum_id']) {
-    $news_count = max($bb_cfg['latest_news_count'], 1);
+if (config()->get('show_latest_news') and $news_forum_ids = config()->get('latest_news_forum_id')) {
+    $news_count = max(config()->get('latest_news_count'), 1);
 
     $data = DB()->fetch_rowset("
 		SELECT topic_id, topic_time, topic_title, forum_id
@@ -143,8 +143,8 @@ if ($bb_cfg['show_latest_news'] and $news_forum_ids = $bb_cfg['latest_news_forum
 //
 // Network_news
 //
-if ($bb_cfg['show_network_news'] and $net_forum_ids = $bb_cfg['network_news_forum_id']) {
-    $net_count = max($bb_cfg['network_news_count'], 1);
+if (config()->get('show_network_news') and $net_forum_ids = config()->get('network_news_forum_id')) {
+    $net_count = max(config()->get('network_news_count'), 1);
 
     $data = DB()->fetch_rowset("
 		SELECT topic_id, topic_time, topic_title, forum_id

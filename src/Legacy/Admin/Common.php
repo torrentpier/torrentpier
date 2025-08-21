@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -330,7 +330,7 @@ class Common
 
         $result = DB()->query("
 		SELECT
-			d.physical_filename
+			d.physical_filename, a.attach_id
 		FROM
 			" . $tmp_delete_topics . " del,
 			" . BB_POSTS . " p,
@@ -346,6 +346,11 @@ class Common
             if ($filename = basename($row['physical_filename'])) {
                 @unlink("$attach_dir/" . $filename);
                 @unlink("$attach_dir/" . THUMB_DIR . '/t_' . $filename);
+            }
+            // TorrServer integration
+            if (config()->get('torr_server.enabled')) {
+                $torrServer = new \TorrentPier\TorrServerAPI();
+                $torrServer->removeM3U($row['attach_id']);
             }
         }
         unset($row, $result);
@@ -427,7 +432,7 @@ class Common
      * @param string $reason_move
      * @return bool
      */
-    public static function topic_move(int|array|string $topic_id, int|string $to_forum_id, int|string $from_forum_id = null, bool $leave_shadow = false, bool $insert_bot_msg = false, string $reason_move = ''): bool
+    public static function topic_move(int|array|string $topic_id, int|string $to_forum_id, null|int|string $from_forum_id = null, bool $leave_shadow = false, bool $insert_bot_msg = false, string $reason_move = ''): bool
     {
         global $log_action;
 
@@ -694,7 +699,7 @@ class Common
      */
     public static function user_delete($user_id, $delete_posts = false)
     {
-        global $bb_cfg, $log_action;
+        global $log_action;
 
         if (!$user_csv = get_id_csv($user_id)) {
             return false;
@@ -774,7 +779,7 @@ class Common
 
         // Delete user feed
         foreach (explode(',', $user_csv) as $user_id) {
-            $file_path = $bb_cfg['atom']['path'] . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
+            $file_path = config()->get('atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
             @unlink($file_path);
         }
     }

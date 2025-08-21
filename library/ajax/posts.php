@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $bb_cfg, $userdata, $wordCensor;
+global $lang, $userdata;
 
 if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
@@ -76,16 +76,16 @@ switch ($this->request['type']) {
         $message = "[quote=\"" . $quote_username . "\"][qpost=" . $post['post_id'] . "]" . $post['post_text'] . "[/quote]\r";
 
         // hide user passkey
-        $message = preg_replace('#(?<=[\?&;]' . $bb_cfg['passkey_key'] . '=)[a-zA-Z0-9]#', 'passkey', $message);
+        $message = preg_replace('#(?<=[\?&;]' . config()->get('passkey_key') . '=)[a-zA-Z0-9]#', 'passkey', $message);
         // hide sid
         $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
 
-        $message = $wordCensor->censorString($message);
+        $message = censor()->censorString($message);
 
         if ($post['post_id'] == $post['topic_first_post_id']) {
             $message = "[quote]" . $post['topic_title'] . "[/quote]\r";
         }
-        if (mb_strlen($message, 'UTF-8') > 1000) {
+        if (mb_strlen($message, DEFAULT_CHARSET) > 1000) {
             $this->response['redirect'] = make_url(POSTING_URL . '?mode=quote&' . POST_POST_URL . '=' . $post_id);
         }
 
@@ -112,7 +112,7 @@ switch ($this->request['type']) {
         if ($post['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod']) {
             $this->ajax_die($lang['EDIT_OWN_POSTS']);
         }
-        if ((mb_strlen($post['post_text'], 'UTF-8') > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id)) {
+        if ((mb_strlen($post['post_text'], DEFAULT_CHARSET) > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id)) {
             $this->response['redirect'] = make_url(POSTING_URL . '?mode=editpost&' . POST_POST_URL . '=' . $post_id);
         } elseif ($this->request['type'] == 'editor') {
             $text = (string)$this->request['text'];
@@ -120,10 +120,10 @@ switch ($this->request['type']) {
 
             if (mb_strlen($text) > 2) {
                 if ($text != $post['post_text']) {
-                    if ($bb_cfg['max_smilies']) {
-                        $count_smilies = substr_count(bbcode2html($text), '<img class="smile" src="' . $bb_cfg['smilies_path']);
-                        if ($count_smilies > $bb_cfg['max_smilies']) {
-                            $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
+                    if (config()->get('max_smilies')) {
+                        $count_smilies = substr_count(bbcode2html($text), '<img class="smile" src="' . config()->get('smilies_path'));
+                        if ($count_smilies > config()->get('max_smilies')) {
+                            $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], config()->get('max_smilies')));
                         }
                     }
                     DB()->query("UPDATE " . BB_POSTS_TEXT . " SET post_text = '" . DB()->escape($text) . "' WHERE post_id = $post_id LIMIT 1");
@@ -179,7 +179,7 @@ switch ($this->request['type']) {
 						<input title="Alt+Enter" name="preview" type="submit" value="' . $lang['PREVIEW'] . '">
 						<input type="button" onclick="edit_post(' . $post_id . ');" value="' . $lang['CANCEL'] . '">
 						<input type="button" onclick="edit_post(' . $post_id . ', \'editor\', $(\'#message-' . $post_id . '\').val()); return false;" class="bold" value="' . $lang['SUBMIT'] . '">
-					</div><hr>
+					</div><hr/>
 					<script type="text/javascript">
 					var bbcode = new BBCode("message-' . $post_id . '");
 					var ctrl = "ctrl";
@@ -225,7 +225,7 @@ switch ($this->request['type']) {
         $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
         if ($row = DB()->fetch_row($sql) and $row['last_post_time']) {
             if ($userdata['user_level'] == USER) {
-                if ((TIMENOW - $row['last_post_time']) < $bb_cfg['flood_interval']) {
+                if ((TIMENOW - $row['last_post_time']) < config()->get('flood_interval')) {
                     $this->ajax_die($lang['FLOOD_ERROR']);
                 }
             }
@@ -251,10 +251,10 @@ switch ($this->request['type']) {
             }
         }
 
-        if ($bb_cfg['max_smilies']) {
-            $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . $bb_cfg['smilies_path']);
-            if ($count_smilies > $bb_cfg['max_smilies']) {
-                $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
+        if (config()->get('max_smilies')) {
+            $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . config()->get('smilies_path'));
+            if ($count_smilies > config()->get('max_smilies')) {
+                $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], config()->get('max_smilies')));
             }
         }
 
@@ -272,7 +272,7 @@ switch ($this->request['type']) {
             'post_text' => $message
         ]);
 
-        if ($bb_cfg['topic_notify_enabled']) {
+        if (config()->get('topic_notify_enabled')) {
             $notify = !empty($this->request['notify']);
             \TorrentPier\Legacy\Post::user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
         }

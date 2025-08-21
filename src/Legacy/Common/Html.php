@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -52,6 +52,7 @@ class Html
         $this->_build_select_rec($params);
 
         $select_params = $js ? " $js" : '';
+        $select_params .= ' autocomplete="off"';
         $select_params .= $multiple_size ? ' multiple size="' . $multiple_size . '"' : '';
         $select_params .= ' name="' . htmlCHR($name) . '"';
         $select_params .= ' id="' . htmlCHR($name) . '"';
@@ -70,7 +71,7 @@ class Html
             if (\is_array($opt_val)) {
                 $this->cur_attr =& $this->cur_attr[$opt_name];
 
-                $label = htmlCHR(str_short($opt_name, $this->max_length));
+                $label = str_short(htmlCHR($opt_name), $this->max_length);
 
                 $this->options .= "\t<optgroup label=\"&nbsp;" . $label . "\">\n";
                 $this->_build_select_rec($opt_val);
@@ -78,7 +79,7 @@ class Html
 
                 $this->cur_attr =& $this->attr;
             } else {
-                $text = htmlCHR(str_short($opt_name, $this->max_length));
+                $text = str_short(htmlCHR($opt_name), $this->max_length);
                 $value = ' value="' . htmlCHR($opt_val) . '"';
 
                 $class = isset($this->cur_attr[$opt_name]['class']) ? ' class="' . $this->cur_attr[$opt_name]['class'] . '"' : '';

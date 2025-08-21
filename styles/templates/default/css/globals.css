@@ -1,7 +1,7 @@
 /*
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -392,6 +392,26 @@ a.gen, a.med, a.genmed, a.small, a.gensmall {
   display: inline-block;
 }
 
+.post_body pre {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.post-pre {
+  white-space: pre-wrap;
+  font-family: "Lucida Console", Consolas, monospace;
+}
+
+.post-nfo {
+  font-size: 13px;
+  line-height: 1em;
+  white-space: pre;
+  font-family: Consolas, monospace;
+  overflow-y: hidden;
+}
+
 /* ---------------------------------- *
      Code blocks
  * ---------------------------------- */
@@ -509,7 +529,6 @@ img.postImg {
 
 img.postImgAligned {
   margin: 4px 4px 2px;
-
 }
 
 var.img-left {
@@ -559,6 +578,14 @@ a.postLink-name, a.postLink-name:visited {
 /* ---------------------------------- *
      Inputs, buttons, forms
  * ---------------------------------- */
+input[type=button],
+input[type=submit],
+input[type=reset],
+input[type=file],
+button {
+  cursor: pointer;
+}
+
 input, textarea, select {
   font-family: Verdana, sans-serif;
 }
@@ -571,6 +598,7 @@ select, input {
 }
 
 textarea {
+  resize: none;
   font-size: 12px;
 }
 

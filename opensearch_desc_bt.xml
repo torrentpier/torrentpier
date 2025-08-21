@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-    <ShortName>TorrentPier (Tracker)</ShortName>
-    <Description>TorrentPier (Tracker)</Description>
-    <InputEncoding>UTF-8</InputEncoding>
-    <Image height="16" width="16" type="image/x-icon">https://torrentpier.com/favicon.ico</Image>
-    <Url type="text/html" template="https://torrentpier.com/tracker.php?submit=1&amp;o=13&amp;nm={searchTerms}"/>
-</OpenSearchDescription>

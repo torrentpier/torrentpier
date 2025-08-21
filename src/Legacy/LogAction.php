@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -20,16 +20,19 @@ class LogAction
         'mod_topic_move' => 2,
         'mod_topic_lock' => 3,
         'mod_topic_unlock' => 4,
-        'mod_topic_set_downloaded' => 5,
-        'mod_topic_unset_downloaded' => 6,
-        'mod_topic_renamed' => 7,
-        'mod_post_delete' => 8,
-        'mod_post_pin' => 9,
-        'mod_post_unpin' => 10,
-        'mod_topic_split' => 11,
-        'adm_user_delete' => 12,
-        'adm_user_ban' => 13,
-        'adm_user_unban' => 14,
+        'mod_post_delete' => 5,
+        'mod_topic_split' => 6,
+        'adm_user_delete' => 7,
+        'adm_user_ban' => 8,
+        'adm_user_unban' => 9,
+        'mod_post_pin' => 10,
+        'mod_post_unpin' => 11,
+        'mod_topic_set_downloaded' => 12,
+        'mod_topic_unset_downloaded' => 13,
+        'mod_topic_renamed' => 14,
+        'mod_topic_change_tor_status' => 15,
+        'mod_topic_change_tor_type' => 16,
+        'mod_topic_tor_unregister' => 17,
     ];
     public $log_type_select = [];
     public $log_disabled = false;
@@ -41,7 +44,7 @@ class LogAction
      */
     public function init()
     {
-        global $lang, $bb_cfg;
+        global $lang;
 
         foreach ($lang['LOG_ACTION']['LOG_TYPE'] as $log_type => $log_desc) {
             $this->log_type_select[strip_tags($log_desc)] = $this->log_type[$log_type];

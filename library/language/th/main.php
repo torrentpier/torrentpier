@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -63,6 +63,9 @@ $lang['SELECT_ACTION'] = 'เลือกการกระทำ';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'ไม่ทราบ';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+$lang['NO_ITEMS'] = 'There seems to be no data here...';
+$lang['PLEASE_TRY_AGAIN'] = 'Please try again after few seconds...';
 
 $lang['NEXT_PAGE'] = 'ต่อไป';
 $lang['PREVIOUS_PAGE'] = 'ก่อนหน้านี้';
@@ -376,6 +379,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'ไอคอนสื่ออารมณ์�
 
 $lang['ATTACH_SIGNATURE'] = 'ให้แนบเป็นสิ่งที่แนบมาด้วยลายเซ็นต์(ลายเซ็นก็คงจะเปลี่ยนแปลงไปในโพรไฟล์)';
 $lang['NOTIFY'] = 'แจ้งให้ทราบฉันตอนในการตอบกลับ';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'ข้อความของคุณได้ถูกป้อนมาเรียบร้อยแล้ว';
 $lang['EDITED'] = 'ข้อความถูกเปลี่ยนแปลง';
@@ -983,6 +987,7 @@ $lang['DATETIME']['DEC'] = 'ธ.ค.';
 
 // Country selector
 $lang['COUNTRY'] = 'Country';
+$lang['SET_OWN_COUNTRY'] = 'Set own country (Manually)';
 $lang['COUNTRIES'] = [
     0 => 'ไม่เลือก',
     'AD' => 'Andorra',
@@ -1267,6 +1272,24 @@ $lang['FILESIZE'] = 'ขนาดแฟ้มได้';
 $lang['VIEWED'] = 'ดู';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'ส่วนขยายแฟ้ม\'%s\'ถูกปิดการใช้งานโดยการแอดมิน,ดังนั้นนี่คือสิ่งที่แนบมาด้วยไม่ถูกแสดงให้เห็น'; // used in Posts and PM's, replace %s with mime type
 
+// Viewtopic -> Display of Attachments -> TorrServer integration
+$lang['STREAM'] = 'Stream';
+$lang['RESOLUTION'] = 'Resolution: <b>%s</b>';
+$lang['CHANNELS'] = 'Channels: <b>%s</b>';
+$lang['CHANNELS_LAYOUT'] = 'Channels layout: <b>%s</b>';
+$lang['BITRATE'] = 'Bitrate: <b>%s</b>';
+$lang['SAMPLE_RATE'] = 'Sample rate: <b>%s</b>';
+$lang['AUDIO_TRACK'] = 'Audio track information (%d):';
+$lang['AUDIO_CODEC'] = 'Audio codec: <b title="%s">%s</b>';
+$lang['VIDEO_CODEC'] = 'Video codec: <b title="%s">%s</b>';
+$lang['SHOW_MORE_INFORMATION_FILE'] = 'Show more information about file';
+$lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOT_SUPPORTED'] = 'This file cannot be played in the browser...';
+$lang['M3U_FFPROBE_NO_DATA'] = 'It seems ffprobe will not be able to return data about this codec...';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
+
 $lang['ATTACHMENT'] = 'สิ่งที่แนบมาด้วย';
 $lang['ATTACHMENT_THUMBNAIL'] = 'สิ่งที่แนบมาด้วยภาพตัวอย่าง';
 
@@ -1347,11 +1370,17 @@ $lang['BT_REG_FAIL'] = 'ไม่สามารถลงทะเบียน�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'อีกทอร์เรนต์กับเดียวกัน info_hash แล้ว <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
+$lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'ลบออกจากแทร็กเกอร์';
 $lang['BT_UNREGISTERED'] = 'ทอร์เรนต์ไม่จดทะเบี';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1376,6 +1405,7 @@ $lang['SEEDING'] = 'เมล็ดพันธ์';
 $lang['LEECHING'] = 'ดูดเลือ';
 $lang['IS_REGISTERED'] = 'จดทะเบียน';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1412,6 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'ประเภททอร์เรนต์เร�
 $lang['DEL_TORRENT'] = 'คุณแน่ใจหรือว่าคุณต้องการจะลบทอร์เรนต์?';
 $lang['DEL_MOVE_TORRENT'] = 'คุณแน่ใจหรือว่าคุณต้องการจะลบและเคลื่อนเรื่อ?';
 $lang['UNEXECUTED_RELEASE'] = 'คุณมี shapeless ปลดปล่อยก่อนที่กำลังสร้างใหม่ซ่อมของเขา unformed!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'การเปลี่ยนสถานะของดิสทริบิวชัน-%s';
@@ -1446,6 +1477,7 @@ $lang['SET_SILVER_TORRENT'] = 'ทำเงิน';
 $lang['UNSET_SILVER_TORRENT'] = 'ต้องปลดสีเงิน';
 $lang['GOLD_STATUS'] = 'ทองทอร์เรนต์! ดาวน์โหลดการจราจรไม่ได้พิจารณา!';
 $lang['SILVER_STATUS'] = 'เงินทอร์เรนต์! ดาวน์โหลดการจราจรบางส่วนของพิจารณา!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'ค้นหาใน Forums';
@@ -1572,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'เลือกตัวเลือกนี�
 
 $lang['LOGS'] = 'เรื่องประวัติศาสตร์';
 $lang['FORUM_LOGS'] = 'ประวัติศาสตร์ชุ';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'ดีไซเนอร์';
 
 $lang['LAST_IP'] = 'สุดท้ายเลขไอพี:';
@@ -1693,7 +1725,6 @@ $lang['NOTICE'] = '!ความสนใจ!';
 $lang['COPY'] = 'เว็บไซต์ไม่ได้ให้อิเล็กทรอนิกส์รุ่นของผลิตภัณฑ์และเป็นคู่หมั้นของเดียวที่อยู่ในนรวบรวมและ cataloguing ที่จะอ้างอิงไปยังส่งและตีพิมพ์ที่อภิปรายของเราอ่าน ถ้าคุณเป็นเจ้าของร้านถูกกฏหมายของส่งวัสดุและไม่ต้องนั่งที่อ้างอิงไปมันเป็นของเราแคตตาล็อติดต่อเราและพวกเราจะไปทันทีเลยอมลบเธอออก แฟ้มสำหรับการแลกเปลี่ยนบนแทร็กเกอร์ได้รับโดยผู้ใช้ของเว็บไซต์และคณะกรรมการไม่มีความรับผิดชอบสำหรับพวกเขาต้องดูแลรักษาเรือเนี่ย สิ่งที่ร้องขอมาต้องการให้ไม่ได้งั้นเติมคำลงในแฟ้มได้รับการปกป้องจาก copyrights และยังแฟ้มของผิดกฏหมายงเชียว!';
 
 // FILELIST
-$lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'ย่อเก็บไดเรกทอรี';
 $lang['EXPAND'] = 'ขยายรายการ';
 $lang['SWITCH'] = 'เปลี่ยน';
@@ -1811,8 +1842,10 @@ $lang['BOLD'] = 'ล้างข้อความ:[b]text[/b](ปุ่มพ�
 $lang['ITALIC'] = 'ตัวเอียงข้อความ:[i]text[/i](ปุ่มพิมพ์ Ctrl+ฉั)';
 $lang['UNDERLINE'] = 'ขีดเส้นใต้ข้อความ:[u]text[/u](ปุ่มพิมพ์ Ctrl+ดำน้ำ)';
 $lang['STRIKEOUT'] = 'ตัวขีดเส้นพาดกลางข้อความ:[s]text[/s](ปุ่มพิมพ์ Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'อ้างอิงข้อความ:[quote]text[/quote](ปุ่มพิมพ์ Ctrl+Q)';
@@ -1848,6 +1881,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'หยุด';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'แสดงข้อมูล <i><b>only สำหรับปัจจุบัน session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'เข็มรโพสครั้งแรก';
@@ -1910,6 +1946,32 @@ $lang['TRACKER_CONFIG'] = 'ตัวติดตามการตั้งค�
 $lang['RELEASE_TEMPLATES'] = 'ปล่อยตัวต้นแบบ';
 $lang['ACTIONS_LOG'] = 'รายงานการกระทำ';
 
+// Migrations
+$lang['MIGRATIONS_STATUS']  = 'Database Migration Status';
+$lang['MIGRATIONS_DATABASE_NAME']  = 'Database Name';
+$lang['MIGRATIONS_DATABASE_TOTAL']  = 'Total Tables';
+$lang['MIGRATIONS_DATABASE_SIZE']  = 'Database Size';
+$lang['MIGRATIONS_DATABASE_INFO']  = 'Database Information';
+$lang['MIGRATIONS_SYSTEM']  = 'Migration System';
+$lang['MIGRATIONS_NEEDS_SETUP']  = 'Needs Setup';
+$lang['MIGRATIONS_ACTIVE']  = 'ที่ทำงานอยู่';
+$lang['MIGRATIONS_NOT_INITIALIZED']  = 'Not Initialized';
+$lang['MIGRATIONS_UP_TO_DATE']  = 'All up to date';
+$lang['MIGRATIONS_PENDING_COUNT']  = 'pending';
+$lang['MIGRATIONS_APPLIED']  = 'Applied Migrations';
+$lang['MIGRATIONS_PENDING']  = 'Pending Migrations';
+$lang['MIGRATIONS_VERSION']  = 'Version';
+$lang['MIGRATIONS_NAME']  = 'Migration Name';
+$lang['MIGRATIONS_FILE']  = 'Migration File';
+$lang['MIGRATIONS_APPLIED_AT']  = 'Applied At';
+$lang['MIGRATIONS_COMPLETED_AT']  = 'Completed At';
+$lang['MIGRATIONS_CURRENT_VERSION']  = 'Current Version';
+$lang['MIGRATIONS_NOT_APPLIED']  = 'No migrations applied';
+$lang['MIGRATIONS_INSTRUCTIONS']  = 'Instructions';
+$lang['MIGRATIONS_SETUP_STATUS']  = 'Setup Status';
+$lang['MIGRATIONS_SETUP_GUIDE']  = 'See setup guide below';
+$lang['MIGRATIONS_ACTION_REQUIRED']  = 'Action Required';
+
 // Index
 $lang['MAIN_INDEX'] = 'อภิปราดัชนี';
 $lang['FORUM_STATS'] = 'ชุสถิติ';
@@ -1951,6 +2013,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'ของผู้ใช้กัป�
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'แสดงรายการของผู้ใช้แบบออนไลน์';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'เลือกผู้ใช้';
@@ -2290,14 +2357,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'ที่ไม่อนุญาตให้ค
 $lang['DISALLOWED_ALREADY'] = 'ชื่อที่คุณป้อนมาอาจจะไม่ต้องไม่อนุญาตให้คุณได้ มันเหมือนกันแล้วมีอยู่ในรายชื่ออยู่ในคำ censor รายชื่อหรือตรงกับชื่อผู้ใช้อยู่ด้วย';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'คลิก %sHere%s จะกลับมาออนชื่อผู้ใช้ไม่อนุญาตผู้บริหาร';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'ข้อมูลของรุ่น';
@@ -2787,6 +2846,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'หัวข้อ:<br /><b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'โพสต์:<br /><b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
@@ -2963,12 +3025,8 @@ $lang['SITEMAP_ADMIN'] = 'จัดการ sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap กสร้างขึ้น';
 $lang['SITEMAP_AVAILABLE'] = 'และตอนที่มีอยู่';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap ตอนนี้ยังไม่ได้ถูกสร้าง';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'การแจ้งให้ทราบของเครื่องมือสำหรับค้นหา name';
-$lang['SITEMAP_SENT'] = 'ส่งเสร็จสมบูรณ์';
-$lang['SITEMAP_ERROR'] = 'กำลังส่งข้อผิดพลาด';
 $lang['SITEMAP_OPTIONS'] = 'ตัวเลือก';
 $lang['SITEMAP_CREATE'] = 'หรับสร้าง/ปรับปรุงที่ sitemap';
-$lang['SITEMAP_NOTIFY'] = 'แจ้งให้ทราบการค้นหาเครื่องยนต์มันเรื่องใหม่เวอร์ชั่นของ sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'ต้องทำอะไรต่อ?';
 $lang['SITEMAP_GOOGLE_1'] = 'ลงทะเบียนของคุณเว็บไซต์ที่ <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> ใช้ของบัญชีผู้ใช้ของกูเกิ้ล.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> ของเว็บไซต์คุณจดทะเบียน';
@@ -2996,6 +3054,8 @@ $lang['HASH_NOT_FOUND'] = 'ปล่อยตัวด้วค่อยจั�
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'ในหน้านี้คุณสามารถกำหนดข้อความของพื้นฐานกฏของทรัพยากรจะถูกแสดงเป็นเพื่อใช้ได้';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'ทะเบียนผู้ใช้ที่ไม่ได้ทำงานอยู่ใน 30 วัน',
@@ -3050,7 +3110,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'ตรวจสอบว่าคุณไม่ใช่หุ่นยนต์';
 $lang['CAPTCHA_WRONG'] = 'คุณไม่สามารถยืนยันว่าคุณไม่ใช่หุ่นยนต์';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha การไม่เต็ม configured</h2><p>if คุณยังไม่ได้อยู่แล้วที่ถูกสร้างกุญแจคุณสามารถทำมัน <a href="https://www.google.com/recaptcha/admin">https://qshortcut นเรียกว่า"กูเกิ้ล"com/recaptcha/admin</a> น<br />After คุณสร้างกุญแจคุณต้องการให้พวกเขาที่โรงแฟ้มสมุด/config นphp น</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';
