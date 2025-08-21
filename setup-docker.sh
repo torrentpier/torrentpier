@@ -34,6 +34,7 @@ fi
 
 echo ""
 read -s -p "🔐 Enter database password for 'torrentpier_user': " DB_PASSWORD
+echo ""
 
 if [ -z "$DB_PASSWORD" ]; then
     echo "❌ Error: Database password cannot be empty!"
