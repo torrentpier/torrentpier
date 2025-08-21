@@ -38,7 +38,7 @@
     header @html_css_js Content-Type "{mime}; charset=utf-8"
 }
 
-# HTTPS redirect (only if SSL is enabled)
-# http://{$TP_HOST} {
-#     redir https://{$TP_HOST}{uri} permanent
-# }
+http://{$TP_HOST} {
+    @ssl_enabled expression {env.SSL_ENABLED} == "on"
+    redir @ssl_enabled https://{$TP_HOST}{uri} permanent
+}
