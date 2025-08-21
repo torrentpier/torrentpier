@@ -60,6 +60,8 @@ if [ -z "$TP_HOST" ]; then
     exit 1
 fi
 
+TP_HOST=$(echo "$TP_HOST" | sed -E 's|^https?://||')
+TP_HOST=$(echo "$TP_HOST" | sed 's|/||g')
 ESCAPED_HOST=$(printf '%s\n' "$TP_HOST" | sed 's/[&/\]/\\&/g')
 
 if grep -q "TP_HOST=" .env; then
