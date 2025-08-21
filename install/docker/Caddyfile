@@ -1,10 +1,5 @@
 # Caddy configuration for TorrentPier (Docker)
 
-{
-    auto_https {$SSL_ENABLED:off}
-    admin off
-}
-
 {$TP_HOST}:{$TP_PORT:80} {
     root * /app
     encode gzip zstd
@@ -26,9 +21,4 @@
         path *.html *.css *.js *.json *.xml *.txt
     }
     header @html_css_js Content-Type "{mime}; charset=utf-8"
-}
-
-http://{$TP_HOST} {
-    @ssl_enabled expression {env.SSL_ENABLED} == "on"
-    redir @ssl_enabled https://{$TP_HOST}{uri} permanent
 }
