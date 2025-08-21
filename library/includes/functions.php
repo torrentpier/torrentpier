@@ -1814,21 +1814,56 @@ function init_sphinx()
     return $sphinx;
 }
 
-function log_sphinx_error($err_type, $err_msg, $query = '')
+function init_manticore()
+{
+    global $manticore, $bb_cfg;
+
+    if (!isset($manticore)) {
+        try {
+            $config = [
+                'host' => $bb_cfg['manticore_host'] ?? '127.0.0.1',
+                'port' => $bb_cfg['manticore_port'] ?? 9308,
+                'transport' => 'Http', // или 'Mysql' для MySQL протокола
+                'timeout' => $bb_cfg['manticore_timeout'] ?? 5,
+            ];
+
+            $manticore = new \Manticoresearch\Client($config);
+        } catch (Exception $e) {
+            error_log("Manticore connection error: " . $e->getMessage());
+            throw new Exception("Failed to connect to Manticore: " . $e->getMessage());
+        }
+    }
+
+    return $manticore;
+}
+
+function log_search_error($engine, $err_type, $err_msg, $query = '')
 {
     $ignore_err_txt = [
         'negation on top level',
-        'Query word length is less than min prefix length'
+        'Query word length is less than min prefix length',
+        'empty query',
+        'query too short'
     ];
-    if (!count($ignore_err_txt) || !preg_match('#' . implode('|', $ignore_err_txt) . '#i', $err_msg)) {
-        $orig_query = strtr($_REQUEST['nm'], ["\n" => '\n']);
-        bb_log(date('m-d H:i:s') . " | $err_type | $err_msg | $orig_query | $query" . LOG_LF, 'sphinx_error');
+
+    $should_log = true;
+    foreach ($ignore_err_txt as $ignore_pattern) {
+        if (stripos($err_msg, $ignore_pattern) !== false) {
+            $should_log = false;
+            break;
+        }
+    }
+
+    if ($should_log) {
+        $orig_query = strtr($_REQUEST['nm'] ?? '', ["\n" => '\n']);
+        $log_entry = date('m-d H:i:s') . " | $engine | $err_type | $err_msg | $orig_query | $query" . LOG_LF;
+        bb_log($log_entry, 'search_error');
     }
 }
 
 function get_title_match_topics($title_match_sql, array $forum_ids = [])
 {
-    global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
+    global $bb_cfg, $sphinx, $manticore, $userdata, $title_match, $lang;
 
     $where_ids = [];
     if ($forum_ids) {
@@ -1836,7 +1871,58 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
     }
     $title_match_sql = encode_text_match($title_match_sql);
 
-    if ($bb_cfg['search_engine_type'] == 'sphinx') {
+    if ($bb_cfg['search_engine_type'] == 'manticore') {
+        try {
+            $manticore = init_manticore();
+
+            // Определяем в каком индексе искать
+            $index_name = $title_match ? 'topics' : 'posts';
+
+            // Подготавливаем поисковый запрос
+            $search_query = $title_match_sql;
+
+            // Экранируем специальные символы для Manticore
+            if (!preg_match('#^"[^"]+"$#u', $search_query)) {
+                $search_query = str_replace(['@', '(', ')', '~', '&', '|', '^'], ['\@', '\(', '\)', '\~', '\&', '\|', '\^'], $search_query);
+            }
+
+            // Формируем WHERE условие для фильтра по форумам
+            $forum_filter = '';
+            if (!empty($forum_ids)) {
+                $forum_filter = " AND forum_id IN (" . implode(',', array_map('intval', $forum_ids)) . ")";
+            }
+
+            // Базовый SQL запрос для поиска
+            if ($title_match) {
+                // Поиск в заголовках тем
+                $sql = "SELECT topic_id FROM topics WHERE MATCH('{$search_query}')$forum_filter LIMIT 1000 OPTION ranker=none";
+            } else {
+                // Поиск в содержимом постов
+                $sql = "SELECT post_id FROM posts WHERE MATCH('{$search_query}')$forum_filter LIMIT 1000 OPTION ranker=none";
+            }
+
+            // Выполняем поиск
+            $results = $manticore->sql($sql);
+
+            if (!empty($results[0]['data'])) {
+                foreach ($results[0]['data'] as $row) {
+                    $where_ids[] = $title_match ? $row['topic_id'] : $row['post_id'];
+                }
+            }
+
+        } catch (Exception $e) {
+            // Логируем ошибку
+            log_search_error('manticore', 'ERR', $e->getMessage(), $title_match_sql);
+
+            // Проверяем тип ошибки
+            if (strpos($e->getMessage(), 'connection') !== false ||
+                strpos($e->getMessage(), 'timeout') !== false) {
+                bb_die($lang['SEARCH_ERROR']);
+            }
+        }
+
+    } elseif ($bb_cfg['search_engine_type'] == 'sphinx') {
+        // Оригинальная логика Sphinx
         $sphinx = init_sphinx();
 
         $where = $title_match ? 'topics' : 'posts';
@@ -1848,6 +1934,7 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
         if (preg_match('#^"[^"]+"$#u', $title_match_sql)) {
             $sphinx->setMatchMode($sphinx::SPH_MATCH_PHRASE);
         }
+
         if ($result = $sphinx->query($title_match_sql, $where, $userdata['username'] . ' (' . CLIENT_IP . ')')) {
             if (!empty($result['matches'])) {
                 $where_ids = array_keys($result['matches']);
@@ -1856,36 +1943,305 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
             if (strpos($error, 'errno=110')) {
                 bb_die($lang['SEARCH_ERROR']);
             }
-            log_sphinx_error('ERR', $error, $title_match_sql);
+            log_search_error('sphinx', 'ERR', $error, $title_match_sql);
         }
+
         if ($warning = $sphinx->getLastWarning()) {
-            log_sphinx_error('wrn', $warning, $title_match_sql);
+            log_search_error('sphinx', 'wrn', $warning, $title_match_sql);
         }
+
     } elseif ($bb_cfg['search_engine_type'] == 'mysql') {
-        $where_forum = ($forum_ids) ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
+        // MySQL полнотекстовый поиск
+        $where_forum = ($forum_ids) ? "AND forum_id IN(" . implode(',', array_map('intval', $forum_ids)) . ")" : '';
         $search_bool_mode = ($bb_cfg['allow_search_in_bool_mode']) ? ' IN BOOLEAN MODE' : '';
 
         if ($title_match) {
             $where_id = 'topic_id';
             $sql = "SELECT topic_id FROM " . BB_TOPICS . "
-					WHERE MATCH (topic_title) AGAINST ('$title_match_sql'$search_bool_mode)
-					$where_forum";
+                    WHERE MATCH (topic_title) AGAINST ('" . DB()->escape($title_match_sql) . "'$search_bool_mode)
+                    $where_forum";
         } else {
             $where_id = 'post_id';
             $sql = "SELECT p.post_id FROM " . BB_POSTS . " p, " . BB_POSTS_SEARCH . " ps
-				WHERE ps.post_id = p.post_id
-					AND MATCH (ps.search_words) AGAINST ('$title_match_sql'$search_bool_mode)
-					$where_forum";
+                WHERE ps.post_id = p.post_id
+                    AND MATCH (ps.search_words) AGAINST ('" . DB()->escape($title_match_sql) . "'$search_bool_mode)
+                    $where_forum";
         }
 
         foreach (DB()->fetch_rowset($sql) as $row) {
-            $where_ids[] = $row[$where_id];
+            $where_ids[] = (int)$row[$where_id];
         }
     } else {
         bb_die($lang['SEARCH_OFF']);
     }
 
     return $where_ids;
+}
+
+function create_manticore_indexes()
+{
+    try {
+        $manticore = init_manticore();
+        $topics_sql = "CREATE TABLE IF NOT EXISTS topics (
+            topic_id bigint,
+            forum_id integer,
+            topic_title text
+        )
+        min_word_len='1'
+        morphology='stem_enru'
+        charset_table='0..9, A..Z->a..z, _, a..z, U+410..U+42C->U+430..U+44C, U+42E..U+42F->U+44E..U+44F, U+430..U+44C, U+44E..U+44F, U+0401->U+0435, U+0451->U+0435, U+042D->U+0435, U+044D->U+0435'
+        min_stemming_len='4'
+        enable_star='1'
+        phrase_boundary='U+003A, U+002D, U+002E, U+0024'
+        html_strip='1'";
+
+        // Создание индекса для постов
+        $posts_sql = "CREATE TABLE IF NOT EXISTS posts (
+            post_id bigint,
+            topic_id integer,
+            forum_id integer,
+            post_text text,
+            topic_title text
+        )
+        min_word_len='1'
+        morphology='stem_enru'
+        charset_table='0..9, A..Z->a..z, _, a..z, U+410..U+42C->U+430..U+44C, U+42E..U+42F->U+44E..U+44F, U+430..U+44C, U+44E..U+44F, U+0401->U+0435, U+0451->U+0435, U+042D->U+0435, U+044D->U+0435'
+        min_stemming_len='4'
+        enable_star='1'
+        phrase_boundary='U+003A, U+002D, U+002E, U+0024'
+        html_strip='1'";
+
+        // Создание индекса для пользователей
+        $users_sql = "CREATE TABLE IF NOT EXISTS users (
+            user_id bigint,
+            username text
+        )
+        min_word_len='1'
+        morphology='stem_enru'
+        charset_table='0..9, A..Z->a..z, _, a..z, U+410..U+42C->U+430..U+44C, U+42E..U+42F->U+44E..U+44F, U+430..U+44C, U+44E..U+44F, U+0401->U+0435, U+0451->U+0435, U+042D->U+0435, U+044D->U+0435'";
+
+        // Создаем индексы через SQL
+        $manticore->sql($topics_sql);
+        $manticore->sql($posts_sql);
+        $manticore->sql($users_sql);
+
+        return true;
+    } catch (Exception $e) {
+        error_log("Error creating Manticore indexes: " . $e->getMessage());
+        return false;
+    }
+}
+
+function index_data_to_manticore($limit = 1000, $offset = 0, $index_type = 'all')
+{
+    try {
+        $manticore = init_manticore();
+        $total_indexed = 0;
+
+        if ($index_type == 'all' || $index_type == 'topics') {
+            $sql = "SELECT topic_id, forum_id, topic_title
+                    FROM " . BB_TOPICS . "
+                    WHERE topic_id BETWEEN $offset AND " . ($offset + $limit);
+
+            $topics = DB()->fetch_rowset($sql);
+
+            if (!empty($topics)) {
+                foreach ($topics as $topic) {
+                    $insert_sql = "INSERT INTO topics (topic_id, forum_id, topic_title) VALUES (
+                        {$topic['topic_id']},
+                        {$topic['forum_id']},
+                        '" . $manticore->escape($topic['topic_title']) . "'
+                    )";
+                    $manticore->sql($insert_sql);
+                    $total_indexed++;
+                }
+            }
+        }
+
+        if ($index_type == 'all' || $index_type == 'posts') {
+            $sql = "SELECT pt.post_id, pt.post_text, t.topic_title, t.topic_id, t.forum_id
+                    FROM " . BB_POSTS_TEXT . " pt
+                    LEFT JOIN " . BB_TOPICS . " t ON pt.post_id = t.topic_first_post_id
+                    WHERE pt.post_id BETWEEN $offset AND " . ($offset + $limit);
+
+            $posts = DB()->fetch_rowset($sql);
+
+            if (!empty($posts)) {
+                foreach ($posts as $post) {
+                    $insert_sql = "INSERT INTO posts (post_id, topic_id, forum_id, post_text, topic_title) VALUES (
+                        {$post['post_id']},
+                        " . ($post['topic_id'] ?? 0) . ",
+                        " . ($post['forum_id'] ?? 0) . ",
+                        '" . $manticore->escape($post['post_text']) . "',
+                        '" . $manticore->escape($post['topic_title'] ?? '') . "'
+                    )";
+                    $manticore->sql($insert_sql);
+                    $total_indexed++;
+                }
+            }
+        }
+
+        if ($index_type == 'all' || $index_type == 'users') {
+            $sql = "SELECT user_id, username
+                    FROM " . BB_USERS . "
+                    WHERE user_id BETWEEN $offset AND " . ($offset + $limit);
+
+            $users = DB()->fetch_rowset($sql);
+
+            if (!empty($users)) {
+                foreach ($users as $user) {
+                    $insert_sql = "INSERT INTO users (user_id, username) VALUES (
+                        {$user['user_id']},
+                        '" . $manticore->escape($user['username']) . "'
+                    )";
+                    $manticore->sql($insert_sql);
+                    $total_indexed++;
+                }
+            }
+        }
+
+        return $total_indexed;
+    } catch (Exception $e) {
+        error_log("Error indexing data to Manticore: " . $e->getMessage());
+        return false;
+    }
+}
+
+function check_manticore_status()
+{
+    try {
+        $manticore = init_manticore();
+        $status = $manticore->sql('SHOW STATUS');
+        return !empty($status);
+    } catch (Exception $e) {
+        return false;
+    }
+}
+
+function clear_manticore_indexes($index_name = 'all')
+{
+    try {
+        $manticore = init_manticore();
+
+        if ($index_name == 'all') {
+            $manticore->sql('TRUNCATE TABLE topics');
+            $manticore->sql('TRUNCATE TABLE posts');
+            $manticore->sql('TRUNCATE TABLE users');
+        } else {
+            $manticore->sql("TRUNCATE TABLE $index_name");
+        }
+
+        return true;
+    } catch (Exception $e) {
+        error_log("Error clearing Manticore indexes: " . $e->getMessage());
+        return false;
+    }
+}
+
+function search_users_manticore($username_query, $limit = 100)
+{
+    global $bb_cfg;
+
+    if ($bb_cfg['search_engine_type'] != 'manticore') {
+        return [];
+    }
+
+    try {
+        $manticore = init_manticore();
+
+        // Экранируем поисковый запрос
+        $search_query = str_replace(['@', '(', ')', '~', '&', '|', '^'], ['\@', '\(', '\)', '\~', '\&', '\|', '\^'], $username_query);
+
+        $sql = "SELECT user_id, username FROM users WHERE MATCH('{$search_query}') LIMIT $limit";
+
+        $results = $manticore->sql($sql);
+
+        $users = [];
+        if (!empty($results[0]['data'])) {
+            foreach ($results[0]['data'] as $row) {
+                $users[] = [
+                    'user_id' => $row['user_id'],
+                    'username' => $row['username']
+                ];
+            }
+        }
+
+        return $users;
+    } catch (Exception $e) {
+        log_search_error('manticore', 'ERR', $e->getMessage(), $username_query);
+        return [];
+    }
+}
+
+function update_document_in_manticore($index, $document_data)
+{
+    try {
+        $manticore = init_manticore();
+
+        switch ($index) {
+            case 'topics':
+                $sql = "REPLACE INTO topics (topic_id, forum_id, topic_title) VALUES (
+                    {$document_data['topic_id']},
+                    {$document_data['forum_id']},
+                    '" . $manticore->escape($document_data['topic_title']) . "'
+                )";
+                break;
+
+            case 'posts':
+                $sql = "REPLACE INTO posts (post_id, topic_id, forum_id, post_text, topic_title) VALUES (
+                    {$document_data['post_id']},
+                    " . ($document_data['topic_id'] ?? 0) . ",
+                    " . ($document_data['forum_id'] ?? 0) . ",
+                    '" . $manticore->escape($document_data['post_text']) . "',
+                    '" . $manticore->escape($document_data['topic_title'] ?? '') . "'
+                )";
+                break;
+
+            case 'users':
+                $sql = "REPLACE INTO users (user_id, username) VALUES (
+                    {$document_data['user_id']},
+                    '" . $manticore->escape($document_data['username']) . "'
+                )";
+                break;
+
+            default:
+                return false;
+        }
+
+        $manticore->sql($sql);
+        return true;
+    } catch (Exception $e) {
+        error_log("Error updating document in Manticore: " . $e->getMessage());
+        return false;
+    }
+}
+
+function delete_document_from_manticore($index, $document_id)
+{
+    try {
+        $manticore = init_manticore();
+
+        switch ($index) {
+            case 'topics':
+                $sql = "DELETE FROM topics WHERE topic_id = $document_id";
+                break;
+            case 'posts':
+                $sql = "DELETE FROM posts WHERE post_id = $document_id";
+                break;
+            case 'users':
+                $sql = "DELETE FROM users WHERE user_id = $document_id";
+                break;
+            default:
+                return false;
+        }
+
+        $manticore->sql($sql);
+        return true;
+
+    } catch (Exception $e) {
+        error_log("Error deleting document from Manticore: " . $e->getMessage());
+        return false;
+    }
 }
 
 /**
