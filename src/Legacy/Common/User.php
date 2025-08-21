@@ -631,7 +631,7 @@ class User
             $source_lang = $cachedLang['source'];
         } else {
             $sourceCacheKey = 'source_lang';
-            if (!$source_lang = CACHE('bb_lang')->get($sourceCacheKey)) {
+            if (!($source_lang = CACHE('bb_lang')->get($sourceCacheKey))) {
                 $lang = [];
                 require(SOURCE_LANG_DIR . 'main.php');
                 $source_lang = $lang;
@@ -641,7 +641,7 @@ class User
             }
 
             $userLangCacheKey = "user_lang_{$langKey}";
-            if (!$userLang = CACHE('bb_lang')->get($userLangCacheKey)) {
+            if (!($userLang = CACHE('bb_lang')->get($userLangCacheKey))) {
                 $lang = [];
                 require(LANG_DIR . 'main.php');
                 $userLang = $lang;
