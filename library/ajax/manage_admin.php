@@ -48,6 +48,10 @@ switch ($mode) {
         $this->response['template_cache_html'] = '<span class="seed bold">' . $lang['ALL_TEMPLATE_CLEARED'] . '</span>';
         break;
     case 'indexer':
+        if ($bb_cfg['search_engine_type'] != 'sphinx') {
+            return;
+        }
+
         exec("indexer --config {$bb_cfg['sphinx_config_path']} --all --rotate", $result);
 
         if (!is_file($bb_cfg['sphinx_config_path'] . ".log")) {
