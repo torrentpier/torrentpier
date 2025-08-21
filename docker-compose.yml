@@ -1,9 +1,11 @@
 version: "3.9"
 
 services:
-  app:
-    build: .
-    container_name: php-app
+  torrentpier-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: torrentpier-app
     ports:
       - "80:80"
       - "443:443"
@@ -17,11 +19,11 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
-      - db
+      - torrentpier-db
 
-  db:
+  torrentpier-db:
     image: mariadb:10.11
-    container_name: db
+    container_name: torrentpier-db
     restart: always
     env_file:
       - .env
