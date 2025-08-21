@@ -70,12 +70,31 @@ else
     echo "✅ Added TP_HOST to .env"
 fi
 
-if ! grep -q "SSL_ENABLED" .env; then
+echo ""
+echo "⚠️  SSL Notes:"
+echo "   - SSL requires a real domain (not localhost/IP)"
+echo "   - Caddy will automatically get Let's Encrypt certificates"
+echo "   - Port 80 and 443 must be accessible from the internet"
+echo ""
+
+read -p "🔐 Do you want to enable SSL (HTTPS)? [y/N]: " ENABLE_SSL
+ENABLE_SSL=$(echo "$ENABLE_SSL" | tr '[:upper:]' '[:lower:]')
+
+if [ "$ENABLE_SSL" = "y" ] || [ "$ENABLE_SSL" = "yes" ]; then
+    SSL_ENABLED="on"
+else
+    SSL_ENABLED="off"
+fi
+
+if grep -q "SSL_ENABLED" .env; then
+    sed -i "s|SSL_ENABLED=.*|SSL_ENABLED=$SSL_ENABLED|" .env
+    echo "✅ Updated SSL_ENABLED to $SSL_ENABLED"
+else
     echo "" >> .env
     echo "# Docker-specific configuration" >> .env
-    echo "SSL_ENABLED=off" >> .env
+    echo "SSL_ENABLED=$SSL_ENABLED" >> .env
     echo "SSL_PORT=443" >> .env
-    echo "✅ Added Docker SSL configuration"
+    echo "✅ Added Docker SSL configuration (SSL_ENABLED=$SSL_ENABLED)"
 fi
 
 echo ""
@@ -83,16 +102,9 @@ echo "🎉 Docker setup complete!"
 echo ""
 echo "📋 Next steps:"
 echo "   1. Run: docker-compose up"
-echo "   2. Open: http://$TP_HOST"
-echo ""
-echo "🔒 To enable HTTPS/SSL:"
-echo "   1. Edit .env file and change:"
-echo "      SSL_ENABLED=off    →  SSL_ENABLED=on"
-echo "   2. Make sure your domain points to this server"
-echo "   3. Restart: docker-compose down && docker-compose up"
-echo ""
-echo "⚠️  SSL Notes:"
-echo "   - SSL requires a real domain (not localhost/IP)"
-echo "   - Caddy will automatically get Let's Encrypt certificates"
-echo "   - Port 80 and 443 must be accessible from the internet"
+if [ "$SSL_ENABLED" = "on" ]; then
+    echo "   2. Open: https://$TP_HOST"
+else
+    echo "   2. Open: http://$TP_HOST"
+fi
 echo ""
