@@ -34,7 +34,6 @@ fi
 
 echo ""
 read -s -p "🔐 Enter database password for 'torrentpier_user': " DB_PASSWORD
-echo ""
 
 if [ -z "$DB_PASSWORD" ]; then
     echo "❌ Error: Database password cannot be empty!"
@@ -53,7 +52,6 @@ fi
 
 echo ""
 read -p "🌐 Enter your host (IP or domain, e.g. 192.168.1.100 or example.com): " TP_HOST
-echo ""
 
 if [ -z "$TP_HOST" ]; then
     echo "❌ Error: Host cannot be empty!"
