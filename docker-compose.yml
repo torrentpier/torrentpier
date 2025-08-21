@@ -6,11 +6,10 @@ services:
     container_name: torrentpier-app
     ports:
       - "80:80"
-      - "443:443"
+      # - "443:443"
     env_file:
       - .env
     volumes:
-      - ./:/app
       - ./internal_data:/app/internal_data
       - ./data:/app/data
       - ./sitemap:/app/sitemap
@@ -30,8 +29,6 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "${DB_PORT}:3306"
     volumes:
       - db_data:/var/lib/mysql
       - ./install/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql:ro
