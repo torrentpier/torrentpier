@@ -30,6 +30,8 @@ COPY . /app
 
 RUN composer install --prefer-dist --optimize-autoloader
 
+RUN php _cleanup.php && rm _cleanup.php
+
 RUN echo "*/10 * * * * php /app/cron.php >> /proc/1/fd/1 2>&1" > /etc/cron.d/app-cron \
     && chmod 0644 /etc/cron.d/app-cron \
     && crontab /etc/cron.d/app-cron
