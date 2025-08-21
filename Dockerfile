@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libxml2-dev \
     libzip-dev \
+    libonig-dev \
     && docker-php-ext-install -j$(nproc) \
         mysqli \
         mbstring \
