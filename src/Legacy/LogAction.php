@@ -35,6 +35,11 @@ class LogAction
         'mod_topic_tor_unregister' => 17,
         'mod_topic_tor_register' => 18,
         'mod_topic_tor_delete' => 19,
+        'mod_topic_poll_started' => 20,
+        'mod_topic_poll_finished' => 21,
+        'mod_topic_poll_deleted' => 22,
+        'mod_topic_poll_added' => 23,
+        'mod_topic_poll_edited' => 24
     ];
     public $log_type_select = [];
     public $log_disabled = false;

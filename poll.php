@@ -103,8 +103,15 @@ switch ($mode) {
             bb_die($lang['POST_HAS_NO_POLL']);
         }
 
+        // Log action
+        $log_action->mod('mod_topic_poll_started', [
+            'forum_id' => $forum_id,
+            'topic_id' => $topic_id,
+            'topic_title' => $t_data['topic_title'],
+        ]);
+
         // Starting the poll
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id");
+        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = " . POLL_STARTED . " WHERE topic_id = $topic_id");
         bb_die($lang['NEW_POLL_START']);
         break;
     case 'poll_finish':
@@ -112,6 +119,13 @@ switch ($mode) {
         if (!$t_data['topic_vote']) {
             bb_die($lang['POST_HAS_NO_POLL']);
         }
+
+        // Log action
+        $log_action->mod('mod_topic_poll_finished', [
+            'forum_id' => $forum_id,
+            'topic_id' => $topic_id,
+            'topic_title' => $t_data['topic_title'],
+        ]);
 
         // Finishing the poll
         DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = " . POLL_FINISHED . " WHERE topic_id = $topic_id");
@@ -122,6 +136,13 @@ switch ($mode) {
         if (!$t_data['topic_vote']) {
             bb_die($lang['POST_HAS_NO_POLL']);
         }
+
+        // Log action
+        $log_action->mod('mod_topic_poll_deleted', [
+            'forum_id' => $forum_id,
+            'topic_id' => $topic_id,
+            'topic_title' => $t_data['topic_title'],
+        ]);
 
         // Removing poll from database
         $poll->delete_poll($topic_id);
@@ -141,6 +162,13 @@ switch ($mode) {
             bb_die($poll->err_msg);
         }
 
+        // Log action
+        $log_action->mod('mod_topic_poll_added', [
+            'forum_id' => $forum_id,
+            'topic_id' => $topic_id,
+            'topic_title' => $t_data['topic_title'],
+        ]);
+
         // Adding poll info to the database
         $poll->insert_votes_into_db($topic_id);
         bb_die($lang['NEW_POLL_ADDED']);
@@ -158,6 +186,13 @@ switch ($mode) {
         if ($poll->err_msg) {
             bb_die($poll->err_msg);
         }
+
+        // Log action
+        $log_action->mod('mod_topic_poll_edited', [
+            'forum_id' => $forum_id,
+            'topic_id' => $topic_id,
+            'topic_title' => $t_data['topic_title'],
+        ]);
 
         // Updating poll info to the database
         $poll->insert_votes_into_db($topic_id);

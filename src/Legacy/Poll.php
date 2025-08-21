@@ -79,7 +79,7 @@ class Poll
 
         DB()->query("REPLACE INTO " . BB_POLL_VOTES . $sql_args);
 
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id");
+        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = " . POLL_STARTED . " WHERE topic_id = $topic_id");
     }
 
     /**
@@ -89,7 +89,7 @@ class Poll
      */
     public function delete_poll($topic_id)
     {
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 0 WHERE topic_id = $topic_id");
+        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = " . POLL_DELETED . " WHERE topic_id = $topic_id");
         $this->delete_votes_data($topic_id);
     }
 
@@ -163,6 +163,6 @@ class Poll
     public static function pollIsActive(array $t_data): bool
     {
         global $bb_cfg;
-        return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days'] * 86400);
+        return ($t_data['topic_vote'] == POLL_STARTED && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days'] * 86400);
     }
 }
