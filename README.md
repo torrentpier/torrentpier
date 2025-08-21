@@ -65,7 +65,24 @@ and go from there. The documentation will be translated to English in the near f
 
 For the installation, select one of the installation variants below:
 
-### Quick (Clean install) 🚀
+### Quick Start with Docker 🚀
+
+1. Select the folder where you want TorrentPier installed
+   ```shell
+   cd /path/to/www
+   ```
+2. Download the latest version of TorrentPier
+   ```shell
+   git clone --branch v2.4 --depth 1 https://github.com/torrentpier/torrentpier.git .
+   ```
+3. Setup Docker
+   ```shell
+   chmod +x setup-docker.sh
+   ./setup-docker.sh
+   ```
+4. Voila! ✨
+
+### Quick (Installation script) 🚀
 
 Check out our [autoinstall](https://github.com/torrentpier/autoinstall) repository with detailed instructions.
 
