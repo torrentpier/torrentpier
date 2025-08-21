@@ -32,13 +32,14 @@ RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-scripts
 
 COPY . /app
 
-RUN php _cleanup.php && rm _cleanup.php \
-    && chown -R www-data:www-data /app \
-    && chmod -R 755 /app
+RUN php _cleanup.php && rm _cleanup.php
+
+RUN chown -R www-data:www-data /app \
+    && find /app -type d -exec chmod 755 {} \; \
+    && find /app -type f -exec chmod 644 {} \;
 
 RUN echo "*/10 * * * * www-data php /app/cron.php >> /proc/1/fd/1 2>&1" > /etc/cron.d/app-cron \
-    && chmod 0644 /etc/cron.d/app-cron \
-    && crontab /etc/cron.d/app-cron
+    && chmod 0644 /etc/cron.d/app-cron
 
 COPY install/docker/Caddyfile /etc/caddy/Caddyfile
 COPY install/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
