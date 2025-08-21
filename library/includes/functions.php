@@ -1769,9 +1769,9 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
 
     $text = ' ' . str_compact(ltrim($text, $ltrim_chars)) . ' ';
 
-    if ($bb_cfg['search_engine_type'] == 'sphinx') {
+    if ($bb_cfg['search_engine_type'] == 'manticore') {
         $text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
-        $text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // valid characters (except '"' which are separate)
+        $text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|@]#u', ' ', $text); // valid characters for Manticore
         $text = str_replace(['-', '*'], [' -', '* '], $text);                                // only at the beginning/end of a word
         $text = preg_replace('#\s*\|\s*#u', '|', $text);                  // "| " -> "|"
         $text = preg_replace('#\|+#u', ' | ', $text);                     // "||" -> "|"
@@ -1790,36 +1790,47 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
     return $text_match_sql;
 }
 
-function init_sphinx()
+function init_manticore()
 {
-    global $sphinx;
+    global $manticore, $bb_cfg;
 
-    if (!isset($sphinx)) {
-        $sphinx = \Sphinx\SphinxClient::create();
+    if (!isset($manticore)) {
+        try {
+            $host = $bb_cfg['manticore_host'] ?? 'localhost';
+            $port = $bb_cfg['manticore_port'] ?? 9306;
 
-        $sphinx->setConnectTimeout(5);
-        $sphinx->setRankingMode($sphinx::SPH_RANK_NONE);
-        $sphinx->setMatchMode($sphinx::SPH_MATCH_BOOLEAN);
+            $dsn = "mysql:host={$host};port={$port}";
+            $manticore = new PDO($dsn, '', '', [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_TIMEOUT => 5
+            ]);
+        } catch (PDOException $e) {
+            error_log("Manticore connection failed: " . $e->getMessage());
+            return false;
+        }
     }
 
-    return $sphinx;
+    return $manticore;
 }
 
-function log_sphinx_error($err_type, $err_msg, $query = '')
+function log_manticore_error($err_type, $err_msg, $query = '')
 {
     $ignore_err_txt = [
         'negation on top level',
-        'Query word length is less than min prefix length'
+        'Query word length is less than min prefix length',
+        'empty query'
     ];
+
     if (!count($ignore_err_txt) || !preg_match('#' . implode('|', $ignore_err_txt) . '#i', $err_msg)) {
-        $orig_query = strtr($_REQUEST['nm'], ["\n" => '\n']);
-        bb_log(date('m-d H:i:s') . " | $err_type | $err_msg | $orig_query | $query" . LOG_LF, 'sphinx_error');
+        $orig_query = strtr($_REQUEST['nm'] ?? '', ["\n" => '\n']);
+        bb_log(date('m-d H:i:s') . " | $err_type | $err_msg | $orig_query | $query" . LOG_LF, 'manticore_error');
     }
 }
 
 function get_title_match_topics($title_match_sql, array $forum_ids = [])
 {
-    global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
+    global $bb_cfg, $manticore, $userdata, $title_match, $lang;
 
     $where_ids = [];
     if ($forum_ids) {
@@ -1827,31 +1838,55 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
     }
     $title_match_sql = encode_text_match($title_match_sql);
 
-    if ($bb_cfg['search_engine_type'] == 'sphinx') {
-        $sphinx = init_sphinx();
+    if ($bb_cfg['search_engine_type'] == 'manticore') {
+        $manticore = init_manticore();
 
-        $where = $title_match ? 'topics' : 'posts';
+        if (!$manticore) {
+            bb_die($lang['SEARCH_ERROR']);
+            return [];
+        }
 
-        $sphinx->setServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
-        if ($forum_ids) {
-            $sphinx->setFilter('forum_id', $forum_ids, false);
-        }
-        if (preg_match('#^"[^"]+"$#u', $title_match_sql)) {
-            $sphinx->setMatchMode($sphinx::SPH_MATCH_PHRASE);
-        }
-        if ($result = $sphinx->query($title_match_sql, $where, $userdata['username'] . ' (' . CLIENT_IP . ')')) {
-            if (!empty($result['matches'])) {
-                $where_ids = array_keys($result['matches']);
+        try {
+            if ($title_match) {
+                // Search in topics index
+                $query = "SELECT topic_id as id FROM topics WHERE MATCH(?)";
+                $search_field = 'topic_title';
+            } else {
+                // Search in posts index
+                $query = "SELECT post_id as id FROM posts WHERE MATCH(?)";
+                $search_field = 'post_text';
             }
-        } elseif ($error = $sphinx->getLastError()) {
-            if (strpos($error, 'errno=110')) {
+
+            $params = [$title_match_sql];
+
+            // Add forum filter if needed
+            if ($forum_ids) {
+                $placeholders = str_repeat('?,', count($forum_ids) - 1) . '?';
+                $query .= " AND forum_id IN ({$placeholders})";
+                $params = array_merge($params, $forum_ids);
+            }
+
+            // Add ordering and limit
+            $query .= " ORDER BY WEIGHT() DESC LIMIT 10000";
+
+            $stmt = $manticore->prepare($query);
+            $stmt->execute($params);
+
+            while ($row = $stmt->fetch()) {
+                $where_ids[] = (int)$row['id'];
+            }
+
+        } catch (PDOException $e) {
+            $error_msg = $e->getMessage();
+
+            // Handle connection timeout
+            if (strpos($error_msg, 'timeout') !== false || strpos($error_msg, 'Connection refused') !== false) {
                 bb_die($lang['SEARCH_ERROR']);
             }
-            log_sphinx_error('ERR', $error, $title_match_sql);
+
+            log_manticore_error('ERR', $error_msg, $title_match_sql);
         }
-        if ($warning = $sphinx->getLastWarning()) {
-            log_sphinx_error('wrn', $warning, $title_match_sql);
-        }
+
     } elseif ($bb_cfg['search_engine_type'] == 'mysql') {
         $where_forum = ($forum_ids) ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
         $search_bool_mode = ($bb_cfg['allow_search_in_bool_mode']) ? ' IN BOOLEAN MODE' : '';
@@ -1859,14 +1894,14 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
         if ($title_match) {
             $where_id = 'topic_id';
             $sql = "SELECT topic_id FROM " . BB_TOPICS . "
-					WHERE MATCH (topic_title) AGAINST ('$title_match_sql'$search_bool_mode)
-					$where_forum";
+                    WHERE MATCH (topic_title) AGAINST ('$title_match_sql'$search_bool_mode)
+                    $where_forum";
         } else {
             $where_id = 'post_id';
             $sql = "SELECT p.post_id FROM " . BB_POSTS . " p, " . BB_POSTS_SEARCH . " ps
-				WHERE ps.post_id = p.post_id
-					AND MATCH (ps.search_words) AGAINST ('$title_match_sql'$search_bool_mode)
-					$where_forum";
+                WHERE ps.post_id = p.post_id
+                    AND MATCH (ps.search_words) AGAINST ('$title_match_sql'$search_bool_mode)
+                    $where_forum";
         }
 
         foreach (DB()->fetch_rowset($sql) as $row) {
@@ -1877,6 +1912,192 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
     }
 
     return $where_ids;
+}
+
+function build_manticore_query($search_terms, $index_name, $filters = [])
+{
+    $query = "SELECT id, weight() as relevance FROM {$index_name} WHERE MATCH(?)";
+    $params = [$search_terms];
+
+    // Add filters
+    foreach ($filters as $field => $values) {
+        if (is_array($values) && !empty($values)) {
+            $placeholders = str_repeat('?,', count($values) - 1) . '?';
+            $query .= " AND {$field} IN ({$placeholders})";
+            $params = array_merge($params, $values);
+        } elseif (!is_array($values) && $values !== null) {
+            $query .= " AND {$field} = ?";
+            $params[] = $values;
+        }
+    }
+
+    return ['query' => $query, 'params' => $params];
+}
+
+function execute_manticore_search($query, $params = [])
+{
+    global $lang;
+
+    $manticore = init_manticore();
+    if (!$manticore) {
+        return false;
+    }
+
+    try {
+        $stmt = $manticore->prepare($query);
+        $stmt->execute($params);
+        return $stmt;
+    } catch (PDOException $e) {
+        log_manticore_error('ERR', $e->getMessage(), $query);
+
+        // Handle specific errors
+        if (strpos($e->getMessage(), 'timeout') !== false) {
+            bb_die($lang['SEARCH_ERROR']);
+        }
+
+        return false;
+    }
+}
+
+function get_manticore_status()
+{
+    $manticore = init_manticore();
+    if (!$manticore) {
+        return false;
+    }
+
+    try {
+        $stmt = $manticore->query("SHOW STATUS");
+        $status = $stmt->fetchAll();
+
+        $stmt = $manticore->query("SHOW META");
+        $meta = $stmt->fetchAll();
+
+        return [
+            'status' => $status,
+            'meta' => $meta
+        ];
+    } catch (PDOException $e) {
+        log_manticore_error('ERR', $e->getMessage(), 'SHOW STATUS/META');
+        return false;
+    }
+}
+
+function search_users($username, $limit = 100)
+{
+    global $bb_cfg, $lang;
+
+    if ($bb_cfg['search_engine_type'] == 'manticore') {
+        $manticore = init_manticore();
+
+        if (!$manticore) {
+            return [];
+        }
+
+        try {
+            $query = "SELECT user_id FROM users WHERE MATCH(?) ORDER BY WEIGHT() DESC LIMIT ?";
+            $stmt = $manticore->prepare($query);
+            $stmt->execute([$username, $limit]);
+
+            $user_ids = [];
+            while ($row = $stmt->fetch()) {
+                $user_ids[] = (int)$row['user_id'];
+            }
+
+            return $user_ids;
+
+        } catch (PDOException $e) {
+            log_manticore_error('ERR', $e->getMessage(), $username);
+            return [];
+        }
+    }
+
+    return [];
+}
+
+function search_all_content($search_query, $forum_ids = [], $search_type = 'all')
+{
+    global $bb_cfg;
+
+    $results = [
+        'topics' => [],
+        'posts' => [],
+        'users' => []
+    ];
+
+    if ($bb_cfg['search_engine_type'] == 'manticore') {
+        $manticore = init_manticore();
+
+        if (!$manticore) {
+            return $results;
+        }
+
+        try {
+            // Search topics
+            if ($search_type === 'all' || $search_type === 'topics') {
+                $query = "SELECT topic_id, forum_id, WEIGHT() as relevance FROM topics WHERE MATCH(?)";
+                $params = [$search_query];
+
+                if ($forum_ids) {
+                    $placeholders = str_repeat('?,', count($forum_ids) - 1) . '?';
+                    $query .= " AND forum_id IN ({$placeholders})";
+                    $params = array_merge($params, $forum_ids);
+                }
+
+                $query .= " ORDER BY WEIGHT() DESC LIMIT 1000";
+
+                $stmt = $manticore->prepare($query);
+                $stmt->execute($params);
+
+                while ($row = $stmt->fetch()) {
+                    $results['topics'][] = [
+                        'id' => (int)$row['topic_id'],
+                        'forum_id' => (int)$row['forum_id'],
+                        'relevance' => (float)$row['relevance']
+                    ];
+                }
+            }
+
+            // Search posts
+            if ($search_type === 'all' || $search_type === 'posts') {
+                $query = "SELECT post_id, topic_id, forum_id, WEIGHT() as relevance FROM posts WHERE MATCH(?)";
+                $params = [$search_query];
+
+                if ($forum_ids) {
+                    $placeholders = str_repeat('?,', count($forum_ids) - 1) . '?';
+                    $query .= " AND forum_id IN ({$placeholders})";
+                    $params = array_merge($params, $forum_ids);
+                }
+
+                $query .= " ORDER BY WEIGHT() DESC LIMIT 1000";
+
+                $stmt = $manticore->prepare($query);
+                $stmt->execute($params);
+
+                while ($row = $stmt->fetch()) {
+                    $results['posts'][] = [
+                        'id' => (int)$row['post_id'],
+                        'topic_id' => (int)$row['topic_id'],
+                        'forum_id' => (int)$row['forum_id'],
+                        'relevance' => (float)$row['relevance']
+                    ];
+                }
+            }
+
+            // Search users
+            if ($search_type === 'all' || $search_type === 'users') {
+                $user_ids = search_users($search_query, 100);
+                $results['users'] = array_map(function ($id) {
+                    return ['id' => $id, 'relevance' => 1.0];
+                }, $user_ids);
+            }
+
+        } catch (PDOException $e) {
+            log_manticore_error('ERR', $e->getMessage(), $search_query);
+        }
+    }
+
+    return $results;
 }
 
 /**
