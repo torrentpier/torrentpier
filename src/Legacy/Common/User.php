@@ -622,17 +622,52 @@ class User
             define('LANG_DIR', DEFAULT_LANG_DIR);
         }
 
-        /** Temporary place source language to the global */
-        $lang = [];
-        require(SOURCE_LANG_DIR . 'main.php');
-        $source_lang = $lang;
-        unset($lang);
+        $langKey = $this->data['user_lang'];
+        $cacheKey = "merged_lang_{$langKey}";
 
-        /** Place user language to the global */
-        global $lang;
-        require(LANG_DIR . 'main.php');
-        setlocale(LC_ALL, $bb_cfg['lang'][$this->data['user_lang']]['locale'] ?? 'en_US.UTF-8');
-        $lang = array_deep_merge($source_lang, $lang);
+        if ($cachedLang = CACHE('bb_lang')->get($cacheKey)) {
+            global $lang;
+            $lang = $cachedLang['merged'];
+            $source_lang = $cachedLang['source'];
+        } else {
+            $sourceCacheKey = 'source_lang';
+            if (!$source_lang = CACHE('bb_lang')->get($sourceCacheKey)) {
+                $lang = [];
+                require(SOURCE_LANG_DIR . 'main.php');
+                $source_lang = $lang;
+                unset($lang);
+
+                CACHE('bb_lang')->set($sourceCacheKey, $source_lang, 86400);
+            }
+
+            $userLangCacheKey = "user_lang_{$langKey}";
+            $userLang = CACHE('bb_lang')->get($userLangCacheKey);
+
+            if (!$userLang = CACHE('bb_lang')->get($userLangCacheKey)) {
+                $lang = [];
+                require(LANG_DIR . 'main.php');
+                $userLang = $lang;
+                unset($lang);
+
+                CACHE('bb_lang')->set($userLangCacheKey, $userLang, 86400);
+            }
+
+            global $lang;
+            $lang = $this->arrayMergeLangs($source_lang, $userLang);
+
+            CACHE('bb_lang')->set($cacheKey, [
+                'merged' => $lang,
+                'source' => $source_lang
+            ], 86400);
+        }
+
+        static $currentLocale = null;
+        $newLocale = $bb_cfg['lang'][$this->data['user_lang']]['locale'] ?? 'en_US.UTF-8';
+
+        if ($currentLocale !== $newLocale) {
+            setlocale(LC_ALL, $newLocale);
+            $currentLocale = $newLocale;
+        }
 
         $theme = setup_style();
         $DeltaTime = new DateDelta();
@@ -643,6 +678,51 @@ class User
         }
 
         $this->load_opt_js();
+    }
+
+    public function arrayMergeLangs($base, $overlay, $cacheKey = null)
+    {
+        if ($cacheKey && function_exists('CACHE')) {
+            if ($cached = CACHE('bb_lang')->get($cacheKey)) {
+                return $cached;
+            }
+        }
+
+        if (count($overlay) <= 10) {
+            $result = array_replace_recursive($base, $overlay);
+        } else {
+            $result = array_deep_merge($base, $overlay);
+        }
+
+        if ($cacheKey && function_exists('CACHE')) {
+            CACHE('bb_lang')->set($cacheKey, $result, 3600);
+        }
+
+        return $result;
+    }
+
+    public function clearLanguageCache($langKey = null): void
+    {
+        if ($langKey) {
+            CACHE('bb_lang')->rm("merged_lang_{$langKey}");
+            CACHE('bb_lang')->rm("user_lang_{$langKey}");
+        } else {
+            CACHE('bb_lang')->rm('source_lang');
+        }
+    }
+
+    public function clearAllLanguageCache(): void
+    {
+        global $bb_cfg;
+
+        CACHE('bb_lang')->rm('source_lang');
+
+        if (isset($bb_cfg['lang']) && is_array($bb_cfg['lang'])) {
+            foreach (array_keys($bb_cfg['lang']) as $lang) {
+                CACHE('bb_lang')->rm("merged_lang_{$lang}");
+                CACHE('bb_lang')->rm("user_lang_{$lang}");
+            }
+        }
     }
 
     /**
