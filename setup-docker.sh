@@ -18,6 +18,10 @@ fi
 cp .env .env.backup
 echo "💾 Backup created: .env.backup"
 
+if grep -q "APP_CRON_ENABLED=true" .env; then
+    sed -i 's/APP_CRON_ENABLED=true/APP_CRON_ENABLED=false/' .env
+fi
+
 if grep -q "DB_HOST=localhost" .env; then
     sed -i 's/DB_HOST=localhost/DB_HOST=torrentpier-db/' .env
     echo "✅ Updated DB_HOST for Docker"
