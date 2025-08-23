@@ -29,19 +29,33 @@ fi
 cp .env .env.backup
 echo "💾 Backup created: .env.backup"
 
-# Enable server-side cron
+# Docker-specific configurations
+echo ""
+echo "🔧 Configuring for Docker environment..."
+
 if grep -q "^APP_CRON_ENABLED=true" .env; then
    sed -i 's/^APP_CRON_ENABLED=true/APP_CRON_ENABLED=false/' .env
+   echo "✅ Disabled APP_CRON_ENABLED (Docker will handle cron)"
+elif ! grep -q "^APP_CRON_ENABLED=" .env; then
+   echo "" >> .env
+   echo "APP_CRON_ENABLED=false" >> .env
+   echo "✅ Added APP_CRON_ENABLED=false"
 fi
 
-if grep -q "^DB_HOST=localhost" .env; then
-   sed -i 's/^DB_HOST=localhost/DB_HOST=torrentpier-db/' .env
+if grep -q "^DB_HOST=" .env; then
+   sed -i 's/^DB_HOST=.*/DB_HOST=torrentpier-db/' .env
    echo "✅ Updated DB_HOST for Docker"
+else
+   echo "DB_HOST=torrentpier-db" >> .env
+   echo "✅ Added DB_HOST for Docker"
 fi
 
-if grep -q "^DB_USERNAME=root" .env; then
-   sed -i 's/^DB_USERNAME=root/DB_USERNAME=torrentpier_user/' .env
+if grep -q "^DB_USERNAME=" .env; then
+   sed -i 's/^DB_USERNAME=.*/DB_USERNAME=torrentpier_user/' .env
    echo "✅ Updated DB_USERNAME to torrentpier_user"
+else
+   echo "DB_USERNAME=torrentpier_user" >> .env
+   echo "✅ Added DB_USERNAME=torrentpier_user"
 fi
 
 echo ""
@@ -73,23 +87,20 @@ if [ -z "$TP_HOST" ]; then
    exit 1
 fi
 
-# Basic validation for host format
+TP_HOST=$(echo "$TP_HOST" | sed -E 's|^https?://||' | sed 's|/.*||')
 if [[ ! "$TP_HOST" =~ ^[a-zA-Z0-9.-]+$ ]]; then
    echo "❌ Error: Invalid host format! Use only letters, numbers, dots, and hyphens."
    exit 1
 fi
 
-TP_HOST=$(echo "$TP_HOST" | sed -E 's|^https?://||')
-TP_HOST=$(echo "$TP_HOST" | sed 's|/||g')
 ESCAPED_HOST=$(printf '%s\n' "$TP_HOST" | sed 's/[[\.*^$()+?{|]/\\&/g')
 
 if grep -q "^TP_HOST=" .env; then
    sed -i "s/^TP_HOST=.*/TP_HOST=$ESCAPED_HOST/" .env
-   echo "✅ Updated TP_HOST to $TP_HOST"
 else
    echo "TP_HOST=$TP_HOST" >> .env
-   echo "✅ Added TP_HOST to .env"
 fi
+echo "✅ Set TP_HOST to $TP_HOST"
 
 echo ""
 echo "⚠️  SSL Notes:"
