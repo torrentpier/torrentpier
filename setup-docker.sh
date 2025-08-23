@@ -120,38 +120,58 @@ ENABLE_SSL=$(echo "$ENABLE_SSL" | tr '[:upper:]' '[:lower:]')
 
 if [ "$ENABLE_SSL" = "y" ] || [ "$ENABLE_SSL" = "yes" ]; then
    SSL_ENABLED="on"
-   if grep -q "^TP_PORT=" .env; then
-      sed -i "s/^TP_PORT=.*/TP_PORT=443/" .env
-   else
-      echo "TP_PORT=443" >> .env
-   fi
+   TP_PORT="443"
+   echo "✅ SSL enabled - site will be available at https://$TP_HOST"
 else
    SSL_ENABLED="off"
-   if grep -q "^TP_PORT=" .env; then
-       sed -i "s/^TP_PORT=.*/TP_PORT=80/" .env
-   else
-       echo "TP_PORT=80" >> .env
-   fi
+   TP_PORT="80"
+   echo "✅ HTTP mode - site will be available at http://$TP_HOST"
 fi
 
 if grep -q "^SSL_ENABLED=" .env; then
    sed -i "s/^SSL_ENABLED=.*/SSL_ENABLED=$SSL_ENABLED/" .env
-   echo "✅ Updated SSL_ENABLED to $SSL_ENABLED"
 else
    echo "" >> .env
-   echo "# Docker-specific configuration" >> .env
+   echo "# Docker SSL Configuration" >> .env
    echo "SSL_ENABLED=$SSL_ENABLED" >> .env
-   echo "✅ Added Docker SSL configuration (SSL_ENABLED=$SSL_ENABLED)"
 fi
 
+if grep -q "^TP_PORT=" .env; then
+   sed -i "s/^TP_PORT=.*/TP_PORT=$TP_PORT/" .env
+else
+   echo "TP_PORT=$TP_PORT" >> .env
+fi
+
+echo "✅ SSL configuration complete"
+
 echo ""
+echo "📋 Configuration Summary:"
+echo "   Host: $TP_HOST"
+echo "   SSL: $SSL_ENABLED"
+echo "   Port: $TP_PORT"
+if [ "$SSL_ENABLED" = "on" ]; then
+   echo "   Docker Ports: 80, 443, 443/udp"
+else
+   echo "   Docker Ports: 80 only"
+fi
+echo "   Cron: Handled by Docker"
+echo ""
+
 echo "🎉 Docker setup complete!"
 echo ""
 echo "📋 Next steps:"
-echo "   1. Run: docker-compose up"
+echo "   1. Run: docker-compose up -d"
+echo "   2. Wait for database initialization..."
 if [ "$SSL_ENABLED" = "on" ]; then
-   echo "   2. Open: https://$TP_HOST"
+   echo "   3. Open: https://$TP_HOST"
+   echo "   4. First HTTPS access may take a moment for SSL certificate"
 else
-   echo "   2. Open: http://$TP_HOST"
+   echo "   3. Open: http://$TP_HOST"
 fi
+echo ""
+echo "🔍 Useful commands:"
+echo "   - View logs: docker-compose logs -f"
+echo "   - Stop: docker-compose down"
+echo "   - Restart: docker-compose restart"
+echo "   - Update: docker-compose pull && docker-compose up -d"
 echo ""
