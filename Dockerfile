@@ -36,7 +36,7 @@ RUN docker-php-ext-install \
     hash \
     zip \
     pcntl \
-    opcache \
+    opcache
 
 # PECL extensions
 RUN pecl install redis apcu && docker-php-ext-enable redis apcu
