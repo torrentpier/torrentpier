@@ -1,46 +1,66 @@
-FROM dunglas/frankenphp:1-php8.4
+FROM php:8.3-fpm-alpine
 
-RUN apt-get update && apt-get install -y \
-    cron \
-    supervisor \
-    libicu-dev \
-    libtidy-dev \
-    libjpeg-dev \
+# Install system dependencies
+RUN apk add --no-cache \
+    git \
+    curl \
     libpng-dev \
-    libfreetype6-dev \
-    libxml2-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
     libzip-dev \
-    libonig-dev \
-    && docker-php-ext-install -j$(nproc) \
-        mysqli \
-        mbstring \
-        gd \
-        bcmath \
-        intl \
-        tidy \
-        xml \
-        xmlwriter \
-        zip \
-    && rm -rf /var/lib/apt/lists/*
+    zip \
+    unzip \
+    icu-dev \
+    tidyhtml-dev \
+    libxml2-dev \
+    mysql-client \
+    caddy \
+    supervisor
 
+# Install PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install \
+    mysqli \
+    mbstring \
+    gd \
+    bcmath \
+    intl \
+    tidy \
+    xml \
+    xmlwriter \
+    zip
+
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /app
+# Create app directory
+WORKDIR /var/www/html
 
-COPY composer.json composer.lock ./
-RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-scripts
+# Copy application files
+COPY . .
 
-COPY . /app
+# Create necessary directories
+RUN mkdir -p /var/log/supervisor \
+    && mkdir -p /etc/caddy \
+    && mkdir -p /data/caddy \
+    && mkdir -p /var/www/html/internal_data \
+    && chmod -R 755 /var/www/html
 
-RUN php _cleanup.php && rm _cleanup.php
+# Install Composer dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-RUN echo "*/10 * * * * php /app/cron.php >> /proc/1/fd/1 2>&1" > /etc/cron.d/app-cron \
-    && chmod 0644 /etc/cron.d/app-cron \
-    && crontab /etc/cron.d/app-cron
+# Copy configuration files
+COPY docker/Caddyfile /etc/caddy/Caddyfile
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY docker/php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-COPY install/docker/Caddyfile /etc/caddy/Caddyfile
-COPY install/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod +x /usr/local/bin/entrypoint.sh
 
+# Expose ports
 EXPOSE 80 443
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# Start services
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
