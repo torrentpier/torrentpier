@@ -1,25 +1,25 @@
 services:
-  torrentpier-app:
+  torrentpier:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: torrentpier-app
+    container_name: TorrentPier
     ports:
-      - "${TP_PORT:-80}:${TP_PORT:-80}"
+      - "80:80"
+      # - "443:443"
+      # - "443:443/udp"
     env_file:
       - .env
     volumes:
-      - ./internal_data:/app/internal_data
-      - ./data:/app/data
-      - ./sitemap:/app/sitemap
-      - caddy_data:/data
-      - caddy_config:/config
+      - ./data:/var/www/data
+      - ./internal_data:/var/www/internal_data
+      - ./sitemap:/var/www/sitemap
     depends_on:
-      - torrentpier-db
+      - database
 
-  torrentpier-db:
+  database:
     image: mariadb:10.11
-    container_name: torrentpier-db
+    container_name: MariaDB
     restart: always
     env_file:
       - .env
@@ -34,5 +34,3 @@ services:
 
 volumes:
   db_data:
-  caddy_data:
-  caddy_config:

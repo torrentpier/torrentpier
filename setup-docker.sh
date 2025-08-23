@@ -43,10 +43,10 @@ elif ! grep -q "^APP_CRON_ENABLED=" .env; then
 fi
 
 if grep -q "^DB_HOST=" .env; then
-   sed -i 's/^DB_HOST=.*/DB_HOST=torrentpier-db/' .env
+   sed -i 's/^DB_HOST=.*/DB_HOST=database/' .env
    echo "✅ Updated DB_HOST for Docker"
 else
-   echo "DB_HOST=torrentpier-db" >> .env
+   echo "DB_HOST=database" >> .env
    echo "✅ Added DB_HOST for Docker"
 fi
 
