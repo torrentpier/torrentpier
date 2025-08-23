@@ -44,10 +44,6 @@ WORKDIR /var/www
 # Remove default server definition
 RUN rm -rf /var/www/html
 
-# Configuration files
-COPY install/docker/Caddyfile /etc/caddy/Caddyfile
-COPY install/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 # Install composer dependencies
 COPY composer.json composer.lock* ./
 
@@ -55,7 +51,7 @@ RUN if [ -f composer.json ]; then \
         composer install --prefer-dist --no-dev --optimize-autoloader --no-scripts; \
     fi
 
-# Copy application code
+# Copy TorrentPier code
 COPY . /var/www/
 
 # Cleanup TorrentPier instance
@@ -72,6 +68,10 @@ RUN chown -R www-data:www-data /var/www \
 RUN echo "*/10 * * * * www-data cd /var/www && php cron.php >/proc/1/fd/1 2>&1" > /etc/cron.d/app-cron \
     && chmod 0644 /etc/cron.d/app-cron \
     && crontab /etc/cron.d/app-cron
+
+# Configuration files
+COPY install/docker/Caddyfile /etc/caddy/Caddyfile
+COPY install/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Expose active ports
 EXPOSE 80
