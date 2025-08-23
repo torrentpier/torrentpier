@@ -31,16 +31,11 @@ fi
 chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html
 
-# Create necessary directories if they don't exist
-for dir in "internal_data" "data" "sitemap"; do
-    if [ ! -d "/var/www/html/$dir" ]; then
-        mkdir -p "/var/www/html/$dir"
-        echo "Created directory: $dir"
-    fi
-done
-
-# Set proper permissions for all directories
-chown -R www-data:www-data /var/www/html/internal_data /var/www/html/data /var/www/html/sitemap 2>/dev/null || true
+# Create internal_data directory if it doesn't exist
+if [ ! -d "/var/www/html/internal_data" ]; then
+    mkdir -p /var/www/html/internal_data
+    chown -R www-data:www-data /var/www/html/internal_data
+fi
 
 # Generate Caddyfile based on SSL settings
 if [ "$SSL_ENABLED" = "true" ]; then

@@ -11,8 +11,6 @@ services:
       - caddy_data:/data/caddy
       - caddy_config:/config/caddy
       - ./internal_data:/var/www/html/internal_data
-      - ./data:/var/www/html/data
-      - ./sitemap:/var/www/html/sitemap
     environment:
       - TP_HOST=${TP_HOST:-localhost}
       - TP_PORT=${TP_PORT:-80}
