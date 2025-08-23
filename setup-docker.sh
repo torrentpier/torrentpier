@@ -4,6 +4,16 @@ set -e
 echo "🐳 Setting up TorrentPier for Docker..."
 echo ""
 
+if ! command -v docker &> /dev/null; then
+    echo "❌ Error: Docker is not installed!"
+    exit 1
+fi
+
+if ! command -v docker-compose &> /dev/null; then
+    echo "❌ Error: docker-compose is not installed!"
+    exit 1
+fi
+
 if [ ! -f .env ]; then
    if [ -f .env.example ]; then
        cp .env.example .env
