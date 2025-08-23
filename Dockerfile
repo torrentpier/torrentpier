@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libtidy-dev \
     zip \
     unzip \
     libzip-dev \
@@ -19,15 +20,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install PHP extensions
 RUN docker-php-ext-install \
-    bcmath \
-    fileinfo \
-    mbstring \
     mysqli \
-    xml \
-    zip \
+    mbstring \
+    gd \
+    bcmath \
     intl \
+    tidy \
+    xml \
+    xmlwriter \
+    fileinfo \
+    dom \
+    ctype \
+    curl \
+    filter \
+    hash \
+    zip \
     pcntl \
-    opcache
+    opcache \
 
 # PECL extensions
 RUN pecl install redis apcu && docker-php-ext-enable redis apcu
