@@ -7,10 +7,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     cron \
     curl \
     supervisor \
+    libjpeg-turbo-dev \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
     libtidy-dev \
+    libcurl4-openssl-dev \
     zip \
     unzip \
     libzip-dev \
