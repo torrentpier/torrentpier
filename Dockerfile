@@ -30,11 +30,10 @@ RUN docker-php-ext-install \
     opcache
 
 # PECL extensions
-RUN pecl install redis xdebug apcu xhprof \
-    && docker-php-ext-enable redis xdebug apcu xhprof
+RUN pecl install redis apcu && docker-php-ext-enable redis apcu
 
 # Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear
 
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
