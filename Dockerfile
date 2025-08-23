@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     cron \
     curl \
     supervisor \
-    libjpeg-turbo-dev \
+    libjpeg62-turbo-dev \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
