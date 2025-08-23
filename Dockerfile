@@ -39,49 +39,38 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Configuration files
-COPY install/docker/Caddyfile /etc/caddy/Caddyfile
-COPY install/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 # Set working directory
 WORKDIR /var/www
 
 # Remove default server definition
 RUN rm -rf /var/www/html
 
-# Copy existing application directory contents
-COPY . /var/www
-
-# Copy existing application directory permissions
-COPY --chown=www-data:www-data . /var/www
-
-# Change current user to www
-USER www-data
+# Configuration files
+COPY install/docker/Caddyfile /etc/caddy/Caddyfile
+COPY install/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Install composer dependencies
+COPY composer.json composer.lock* ./
+
 RUN if [ -f composer.json ]; then \
         composer install --prefer-dist --no-dev --optimize-autoloader --no-scripts; \
     fi
 
-# Cleanup TorrentPier instance
-RUN php _cleanup.php && rm _cleanup.php
+# Copy application code
+COPY . /var/www/
 
-# Set permissions for TorrentPier directories
-RUN if [ -d "/var/www/internal_data" ]; then \
-        chown -R www-data:www-data /var/www/internal_data; \
-        chmod -R 775 /var/www/internal_data; \
-    fi \
-    && if [ -d "/var/www/data" ]; then \
-        chown -R www-data:www-data /var/www/data; \
-        chmod -R 775 /var/www/data; \
-    fi \
-    && if [ -d "/var/www/sitemap" ]; then \
-        chown -R www-data:www-data /var/www/sitemap; \
-        chmod -R 775 /var/www/sitemap; \
+# Cleanup TorrentPier instance
+RUN if [ -f _cleanup.php ]; then \
+        php _cleanup.php && rm _cleanup.php; \
     fi
 
+# Set permissions for TorrentPier directories
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 755 /var/www \
+    && chmod -R 775 /var/www/internal_data /var/www/data /var/www/sitemap
+
 # Setup cron
-RUN echo "*/10 * * * * php /app/cron.php >> /proc/1/fd/1 2>&1" > /etc/cron.d/app-cron \
+RUN echo "*/10 * * * * www-data cd /var/www && php cron.php >/proc/1/fd/1 2>&1" > /etc/cron.d/app-cron \
     && chmod 0644 /etc/cron.d/app-cron \
     && crontab /etc/cron.d/app-cron
 
@@ -90,4 +79,5 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 443/udp
 
+# Startup supervisor
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
