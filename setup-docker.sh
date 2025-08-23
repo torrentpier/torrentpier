@@ -109,7 +109,13 @@ echo "   - Caddy will automatically get Let's Encrypt certificates"
 echo "   - Port 80 and 443 must be accessible from the internet"
 echo ""
 
-read -p "🔐 Do you want to enable SSL (HTTPS)? [y/N]: " ENABLE_SSL
+if [[ "$TP_HOST" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]] || [[ "$TP_HOST" == "localhost" ]]; then
+    echo "⚠️  IP address or localhost detected - SSL will be disabled"
+    ENABLE_SSL="no"
+else
+    read -p "🔐 Enable SSL (HTTPS) for $TP_HOST? [y/N]: " ENABLE_SSL
+fi
+
 ENABLE_SSL=$(echo "$ENABLE_SSL" | tr '[:upper:]' '[:lower:]')
 
 if [ "$ENABLE_SSL" = "y" ] || [ "$ENABLE_SSL" = "yes" ]; then
