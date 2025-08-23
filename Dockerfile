@@ -6,7 +6,6 @@ RUN apk add --no-cache \
     curl \
     libpng-dev \
     libjpeg-turbo-dev \
-    libxslt \
     freetype-dev \
     libzip-dev \
     zip \
@@ -14,8 +13,6 @@ RUN apk add --no-cache \
     icu-dev \
     tidyhtml-dev \
     libxml2-dev \
-    oniguruma-dev \
-    libgcrypt \
     mysql-client \
     caddy \
     supervisor
