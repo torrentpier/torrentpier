@@ -63,10 +63,10 @@ COPY install/docker/Caddyfile /etc/caddy/Caddyfile
 COPY install/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Setup cron
-RUN echo "*/10 * * * * www-data cd /var/www && /usr/local/bin/php cron.php >> /proc/1/fd/1 2>&1" \
+RUN echo "*/10 * * * * root cd /var/www && sudo -u www-data /usr/local/bin/php cron.php >> /proc/1/fd/1 2>&1" \
     > /etc/cron.d/app-cron \
     && chmod 0644 /etc/cron.d/app-cron \
-    && crontab -u www-data /etc/cron.d/app-cron
+    && crontab /etc/cron.d/app-cron
 
 # Expose ports
 EXPOSE 80
