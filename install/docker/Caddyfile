@@ -4,7 +4,6 @@
     root * /var/www
     encode gzip zstd
     php_server
-    try_files {path} {path}/ /index.php?{query}
     file_server
 
     @blocked {
@@ -17,10 +16,10 @@
 
     redir /sitemap.xml /sitemap/sitemap.xml 301
 
-    @html_css_js {
-        path *.html *.css *.js *.json *.xml *.txt
+    @static {
+        path *.html *.css *.js *.json *.xml *.txt *.png *.jpg *.jpeg *.gif *.svg *.webp *.avif
     }
-    header @html_css_js Content-Type "{mime}; charset=utf-8"
+    header @static Content-Type "{mime}; charset=utf-8"
 
     log {
         output stdout
