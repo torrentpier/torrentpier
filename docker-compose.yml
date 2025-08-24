@@ -16,6 +16,8 @@ services:
       - ./sitemap:/var/www/sitemap
       - ./library/config.php:/var/www/library/config.php
       - ./library/defines.php:/var/www/library/defines.php
+      - caddy_data:/data
+      - caddy_config:/config
     depends_on:
       - database
 
@@ -36,3 +38,5 @@ services:
 
 volumes:
   db_data:
+  caddy_data:
+  caddy_config:
