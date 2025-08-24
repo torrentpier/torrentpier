@@ -21,6 +21,7 @@ RUN apk add --no-cache dcron && \
 
 WORKDIR /app/public
 COPY . /app/public
-RUN composer install --no-dev --optimize-autoloader && chmod +x ./install/docker/docker-entrypoint.sh
+RUN composer install --no-dev --optimize-autoloader && chmod +x ./install/docker/docker-entrypoint.sh && \
+    cp ./install/docker/php.ini /usr/local/etc/php/php.ini
 
 ENTRYPOINT "/app/public/install/docker/docker-entrypoint.sh"
