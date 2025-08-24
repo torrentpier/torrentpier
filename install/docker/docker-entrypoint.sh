@@ -3,5 +3,5 @@
 # Cron
 crond -f -l 2 &
 
-# FrankePHP
+# FrankenPHP
 exec frankenphp run --config /etc/frankenphp/Caddyfile
