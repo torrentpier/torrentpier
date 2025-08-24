@@ -67,7 +67,7 @@ RUN rm -rf /var/www/html
 COPY composer.json composer.lock* ./
 
 RUN if [ -f composer.json ]; then \
-        composer install --prefer-dist --no-dev --optimize-autoloader --no-scripts; \
+        composer install --prefer-dist --no-dev --optimize-autoloader --no-scripts --no-interaction; \
     fi
 
 # Copy TorrentPier code
