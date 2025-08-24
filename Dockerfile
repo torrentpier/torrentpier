@@ -13,7 +13,27 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN docker-php-ext-install tidy
 
 # PECL extensions
-RUN pecl install redis apcu imagick && docker-php-ext-enable redis apcu imagick
+RUN pecl install redis apcu imagick
+
+# Enable PHP extensions
+RUN docker-php-ext-enable \
+    mbstring \
+    gd \
+    mysqli \
+    redis \
+    apcu \
+    imagick \
+    bcmath \
+    intl \
+    xml \
+    xmlwriter \
+    dom \
+    fileinfo \
+    curl \
+    zip \
+    opcache \
+    iconv \
+    pcntl
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear
