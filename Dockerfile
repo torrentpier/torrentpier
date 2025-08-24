@@ -55,7 +55,8 @@ RUN if [ -f _cleanup.php ]; then \
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www \
     && find /var/www/internal_data /var/www/data /var/www/sitemap -type d -exec chmod 775 {} \; \
-    && find /var/www/internal_data /var/www/data /var/www/sitemap -type f -exec chmod 664 {} \;
+    && find /var/www/internal_data /var/www/data /var/www/sitemap -type f -exec chmod 664 {} \; \
+    && chmod g+s /var/www/internal_data /var/www/data /var/www/sitemap
 
 # Configuration files
 COPY install/docker/Caddyfile /etc/caddy/Caddyfile
