@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev \
     libicu-dev \
     libpq-dev \
+    libmagickwand-dev \
     zip \
     unzip \
     default-mysql-client
@@ -47,7 +48,7 @@ RUN docker-php-ext-install \
     iconv
 
 # PECL extensions
-RUN pecl install redis apcu && docker-php-ext-enable redis apcu
+RUN pecl install redis apcu imagick && docker-php-ext-enable redis apcu imagick
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear
