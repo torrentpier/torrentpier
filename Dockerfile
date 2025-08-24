@@ -3,13 +3,17 @@ FROM dunglas/frankenphp:1.9-php8.4-alpine
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 RUN install-php-extensions \
+    apcu \
+    redis \
+    memcached \
     mbstring \
     mysqli \
-	pdo_mysql \
-	gd \
-	intl \
-	tidy \
-	bcmath \
+    pdo_mysql \
+    pdo_sqlite \
+    gd \
+    intl \
+    tidy \
+    bcmath \
     xml \
     xmlwriter
 
