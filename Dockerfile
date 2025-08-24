@@ -56,13 +56,13 @@ RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www \
     && chmod -R 775 /var/www/internal_data /var/www/data /var/www/sitemap
 
-# Setup cron
-RUN echo "*/10 * * * * www-data cd /var/www && php cron.php >/proc/1/fd/1 2>&1" > /etc/cron.d/app-cron \
-    && chmod 0644 /etc/cron.d/app-cron
-
 # Configuration files
 COPY install/docker/Caddyfile /etc/caddy/Caddyfile
 COPY install/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Setup cron (после копирования проекта)
+RUN echo "*/10 * * * * www-data cd /var/www && php cron.php >/proc/1/fd/1 2>&1" > /etc/cron.d/app-cron \
+ && chmod 0644 /etc/cron.d/app-cron
 
 # Expose ports
 EXPOSE 80
