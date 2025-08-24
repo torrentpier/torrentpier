@@ -4,23 +4,22 @@ example.com {
     root * /path/to/www
     encode gzip zstd
     php_fastcgi unix//run/php/php-fpm.sock
-    try_files {path} {path}/ /index.php?{query}
     file_server
 
     @blocked {
         path /install/* /internal_data/* /library/*
-        path /.ht* /.en*
-        path /.git/*
+        path /.ht* /.en* /.git* /.docker*
         path *.sql *.tpl *.db *.inc *.log *.md
+        path /docker-compose.yml /Dockerfile /.env*
     }
     respond @blocked 404
 
-    redir /sitemap.xml /sitemap/sitemap.xml
+    redir /sitemap.xml /sitemap/sitemap.xml 301
 
-    @html_css_js {
-        path *.html *.css *.js *.json *.xml *.txt
+    @static {
+        path *.html *.css *.js *.json *.xml *.txt *.png *.jpg *.jpeg *.gif *.svg *.webp *.avif
     }
-    header @html_css_js Content-Type "{mime}; charset=utf-8"
+    header @static Content-Type "{mime}; charset=utf-8"
 }
 
 # Refer to the Caddy docs for more information:
