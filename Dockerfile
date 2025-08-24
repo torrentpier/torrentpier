@@ -33,7 +33,8 @@ RUN docker-php-ext-enable \
     zip \
     opcache \
     iconv \
-    pcntl
+    pcntl \
+    tidy
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear
