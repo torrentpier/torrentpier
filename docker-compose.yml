@@ -20,6 +20,7 @@ services:
       - caddy_config:/config
     depends_on:
       - database
+      - redis
 
   database:
     image: mariadb:10.11
@@ -35,6 +36,13 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./install/sql/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql:ro
+
+  redis:
+    image: redis:7-alpine
+    container_name: Redis
+    restart: always
+    ports:
+      - "6379:6379"
 
 volumes:
   db_data:
