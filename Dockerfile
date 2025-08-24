@@ -3,51 +3,14 @@ FROM dunglas/frankenphp:1-php8.4-bookworm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
     cron \
-    curl \
     supervisor \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    libpng-dev \
-    libwebp-dev \
-    libavif-dev \
-    libonig-dev \
-    libxml2-dev \
     libtidy-dev \
-    libcurl4-openssl-dev \
-    libzip-dev \
-    libicu-dev \
-    libpq-dev \
     libmagickwand-dev \
-    zip \
-    unzip \
     default-mysql-client
 
-# Configure GD extension
-RUN docker-php-ext-configure gd \
-    --with-jpeg \
-    --with-webp \
-    --with-freetype \
-    --with-avif
-
 # Install PHP extensions
-RUN docker-php-ext-install \
-    mysqli \
-    mbstring \
-    gd \
-    bcmath \
-    intl \
-    tidy \
-    xml \
-    xmlwriter \
-    fileinfo \
-    dom \
-    curl \
-    zip \
-    pcntl \
-    opcache \
-    iconv
+RUN docker-php-ext-install tidy
 
 # PECL extensions
 RUN pecl install redis apcu imagick && docker-php-ext-enable redis apcu imagick
