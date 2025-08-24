@@ -54,15 +54,18 @@ RUN if [ -f _cleanup.php ]; then \
 # Set permissions for TorrentPier directories
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www \
-    && chmod -R 775 /var/www/internal_data /var/www/data /var/www/sitemap
+    && find /var/www/internal_data /var/www/data /var/www/sitemap -type d -exec chmod 775 {} \; \
+    && find /var/www/internal_data /var/www/data /var/www/sitemap -type f -exec chmod 664 {} \;
 
 # Configuration files
 COPY install/docker/Caddyfile /etc/caddy/Caddyfile
 COPY install/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Setup cron
-RUN echo "*/10 * * * * www-data cd /var/www && php cron.php >/proc/1/fd/1 2>&1" > /etc/cron.d/app-cron \
- && chmod 0644 /etc/cron.d/app-cron
+RUN echo "*/10 * * * * www-data cd /var/www && /usr/local/bin/php cron.php >> /proc/1/fd/1 2>&1" \
+    > /etc/cron.d/app-cron \
+    && chmod 0644 /etc/cron.d/app-cron \
+    && crontab -u www-data /etc/cron.d/app-cron
 
 # Expose ports
 EXPOSE 80
