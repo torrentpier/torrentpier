@@ -40,13 +40,11 @@ RUN docker-php-ext-install \
     xmlwriter \
     fileinfo \
     dom \
-    ctype \
     curl \
-    filter \
-    hash \
     zip \
     pcntl \
-    opcache
+    opcache \
+    iconv
 
 # PECL extensions
 RUN pecl install redis apcu && docker-php-ext-enable redis apcu
