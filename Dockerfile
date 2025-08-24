@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install PHP extensions
 RUN docker-php-ext-install tidy \
- && docker-php-ext-enable tidy gd bcmath intl mysqli pdo_mysql
+ && docker-php-ext-enable tidy
 
 # PECL extensions
 RUN pecl install redis apcu imagick \
