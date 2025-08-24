@@ -29,7 +29,6 @@ fi
 cp .env .env.backup
 echo "💾 Backup created: .env.backup"
 
-# Docker-specific configurations
 echo ""
 echo "🔧 Configuring for Docker environment..."
 
@@ -67,7 +66,6 @@ if [ -z "$DB_PASSWORD" ]; then
    exit 1
 fi
 
-# More robust password escaping for sed
 ESCAPED_PASSWORD=$(printf '%s\n' "$DB_PASSWORD" | sed 's/[[\.*^$()+?{|]/\\&/g')
 
 if grep -q "^DB_PASSWORD=" .env; then
@@ -117,14 +115,32 @@ fi
 
 ENABLE_SSL=$(echo "$ENABLE_SSL" | tr '[:upper:]' '[:lower:]')
 
+if [ ! -f "docker-compose.yml" ]; then
+   echo "❌ Error: docker-compose.yml not found!"
+   exit 1
+fi
+
+cp docker-compose.yml docker-compose.yml.backup
+echo "💾 Backup created: docker-compose.yml.backup"
+
 if [ "$ENABLE_SSL" = "y" ] || [ "$ENABLE_SSL" = "yes" ]; then
    SSL_ENABLED="on"
    TP_PORT="443"
+
+   sed -i 's/^[[:space:]]*# *- *"443:443"[[:space:]]*$/      - "443:443"/' docker-compose.yml
+   sed -i 's/^[[:space:]]*# *- *"443:443\/udp"[[:space:]]*$/      - "443:443\/udp"/' docker-compose.yml
+
    echo "✅ SSL enabled - site will be available at https://$TP_HOST"
+   echo "✅ Uncommented HTTPS ports in docker-compose.yml"
 else
    SSL_ENABLED="off"
    TP_PORT="80"
+
+   sed -i 's/^[[:space:]]*- *"443:443"[[:space:]]*$/      # - "443:443"/' docker-compose.yml
+   sed -i 's/^[[:space:]]*- *"443:443\/udp"[[:space:]]*$/      # - "443:443\/udp"/' docker-compose.yml
+
    echo "✅ HTTP mode - site will be available at http://$TP_HOST"
+   echo "✅ Commented HTTPS ports in docker-compose.yml"
 fi
 
 if grep -q "^SSL_ENABLED=" .env; then
