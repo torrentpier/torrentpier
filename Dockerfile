@@ -34,9 +34,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Change current user to www-data
-USER www-data
-
 # Remove default server definition
 RUN rm -rf /var/www/html
 
@@ -49,16 +46,17 @@ RUN if [ -f composer.json ]; then \
 # Copy TorrentPier code
 COPY . /var/www/
 
-RUN chmod g+s /var/www/internal_data /var/www/data /var/www/sitemap
+# Cleanup TorrentPier instance
+RUN if [ -f _cleanup.php ]; then \
+        php _cleanup.php && rm _cleanup.php; \
+    fi
 
-# Change current user to root
-USER root
-
-# Настройка прав для всех директорий проекта
+# Set permissions for TorrentPier directories
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www \
     && find /var/www/internal_data /var/www/data /var/www/sitemap -type d -exec chmod 775 {} \; \
-    && find /var/www/internal_data /var/www/data /var/www/sitemap -type f -exec chmod 664 {} \;
+    && find /var/www/internal_data /var/www/data /var/www/sitemap -type f -exec chmod 664 {} \; \
+    && chmod g+s /var/www/internal_data /var/www/data /var/www/sitemap
 
 # Configuration files
 COPY install/docker/Caddyfile /etc/caddy/Caddyfile
