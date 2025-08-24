@@ -5,19 +5,28 @@ FROM dunglas/frankenphp:1-php8.4-bookworm
 RUN apt-get update && apt-get install -y --no-install-recommends \
     cron \
     supervisor \
+    git \
+    unzip \
+    default-mysql-client \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
+    libwebp-dev \
+    libavif-dev \
     libonig-dev \
     libzip-dev \
     libicu-dev \
     libtidy-dev \
-    git unzip libmagickwand-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd bcmath tidy mysqli pdo_mysql intl \
-    && pecl install redis apcu imagick \
-    && docker-php-ext-enable redis apcu imagick tidy gd bcmath mysqli pdo_mysql intl \
-    && rm -rf /var/lib/apt/lists/*
+    libmagickwand-dev \
+ && docker-php-ext-configure gd \
+      --with-freetype \
+      --with-jpeg \
+      --with-webp \
+      --with-avif \
+ && docker-php-ext-install -j"$(nproc)" gd bcmath tidy mysqli pdo_mysql intl \
+ && pecl install redis apcu imagick \
+ && docker-php-ext-enable gd bcmath tidy mysqli pdo_mysql intl redis apcu imagick \
+ && rm -rf /var/lib/apt/lists/* /tmp/pear
 
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
