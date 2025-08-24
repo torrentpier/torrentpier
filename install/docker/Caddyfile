@@ -1,0 +1,30 @@
+# Caddy configuration for TorrentPier (Docker)
+
+{$TP_HOST} {
+    root * /app/public
+    encode gzip zstd
+    php_server
+    try_files {path} {path}/ /index.php?{query}
+    file_server
+
+    @blocked {
+        path /install/* /internal_data/* /library/*
+        path /.ht* /.en* /.git* /.docker*
+        path *.sql *.tpl *.db *.inc *.log *.md
+        path /docker-compose.yml /Dockerfile /.env*
+    }
+    respond @blocked 404
+
+    redir /sitemap.xml /sitemap/sitemap.xml 301
+
+    @static {
+        path *.html *.css *.js *.json *.xml *.txt *.png *.jpg *.jpeg *.gif *.svg *.webp *.avif
+    }
+    header @static Content-Type "{mime}; charset=utf-8"
+
+    log {
+        output stdout
+        format console
+        level INFO
+    }
+}

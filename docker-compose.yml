@@ -1,0 +1,47 @@
+services:
+  torrentpier:
+    build: .
+    container_name: TorrentPier
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/var/www/data
+      - ./internal_data:/var/www/internal_data
+      - ./sitemap:/var/www/sitemap
+      - ./library/config.php:/var/www/library/config.php
+      - ./library/defines.php:/var/www/library/defines.php
+      - ./install/docker/Caddyfile:/etc/frankenphp/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - database
+      # - redis
+
+  database:
+    image: mariadb:10.11
+    container_name: MariaDB
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./install/sql/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql:ro
+
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: Redis
+  #   restart: always
+
+volumes:
+  db_data:
+  caddy_data:
+  caddy_config:

@@ -111,6 +111,40 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
   * `sitemap`
 8. Voila! ✨
 
+### Manual (With Docker) 🐳
+1. Ensure Docker and Docker Compose are installed on your system.
+   Verify that ports 80 (HTTP) and 443 (HTTPS) are free or adjust them in the docker-compose.yml
+2. Select the folder where you want TorrentPier installed
+   ```shell
+   cd /path/to/www
+   ```
+3. Download the latest version of TorrentPier
+   ```shell
+   git clone --branch v2.4 --depth 1 https://github.com/torrentpier/torrentpier.git .
+   ```
+4. Configure environment variables in `.env`. Use the template below and adjust values according to your environment:
+   ```env
+   # Common params
+   TP_HOST=example.com     # Replace with your domain/localhost
+   TP_PORT=80              # HTTP port (Caddy will handle HTTPS automatically)
+   APP_ENV=production
+   APP_CRON_ENABLED=false  # Disable internal cron (Docker image uses its own)
+   APP_DEMO_MODE=false
+
+   # Database credentials
+   DB_HOST=database        # Use service name from Docker Compose
+   DB_PORT=3306
+   DB_DATABASE=torrentpier
+   DB_USERNAME=user
+   DB_PASSWORD=secret
+   DB_ROOT_PASSWORD=topsecret  # Only used in Docker
+   ```
+5. Start the application with Docker Compose
+   ```shell
+   docker compose up -d
+   ```
+6. Voila! ✨
+
 > [!IMPORTANT]
 > The specific settings depend on the server you are using, but in general we recommend chmod **0755** for folders, and chmod **0644** for the files in them.
 
