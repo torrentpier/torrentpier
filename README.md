@@ -111,10 +111,9 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
   * `sitemap`
 8. Voila! ✨
 
-### Manual install with Docker 🐳
+### Manual (With Docker) 🐳
 1. Ensure Docker and Docker Compose are installed on your system.
    Verify that ports 80 (HTTP) and 443 (HTTPS) are free or adjust them in the docker-compose.yml
-
 2. Select the folder where you want TorrentPier installed
    ```shell
    cd /path/to/www
@@ -140,14 +139,11 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
    DB_PASSWORD=secret
    DB_ROOT_PASSWORD=topsecret  # Only used in Docker
    ```
-
 5. Start the application with Docker Compose
    ```shell
    docker compose up -d
    ```
-
 6. Voila! ✨
-
 
 > [!IMPORTANT]
 > The specific settings depend on the server you are using, but in general we recommend chmod **0755** for folders, and chmod **0644** for the files in them.
