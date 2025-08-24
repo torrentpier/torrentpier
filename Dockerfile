@@ -7,26 +7,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     supervisor \
     libtidy-dev \
     libmagickwand-dev \
-    default-mysql-client
+    default-mysql-client \
+ && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install tidy
+RUN docker-php-ext-install tidy \
+ && docker-php-ext-enable tidy gd bcmath intl mysqli pdo_mysql
 
 # PECL extensions
-RUN pecl install redis apcu imagick
-
-# Enable PHP extensions
-RUN docker-php-ext-enable \
-    gd \
-    tidy \
-    opcache \
-    pdo \
-    redis \
-    apcu \
-    zip
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear
+RUN pecl install redis apcu imagick \
+ && docker-php-ext-enable redis apcu imagick \
+ && rm -rf /tmp/pear
 
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -39,7 +30,6 @@ RUN rm -rf /var/www/html
 
 # Install composer dependencies
 COPY composer.json composer.lock* ./
-
 RUN if [ -f composer.json ]; then \
         composer install --prefer-dist --no-dev --optimize-autoloader --no-scripts --no-interaction; \
     fi
@@ -66,7 +56,7 @@ RUN echo "*/10 * * * * www-data cd /var/www && php cron.php >/proc/1/fd/1 2>&1" 
 COPY install/docker/Caddyfile /etc/caddy/Caddyfile
 COPY install/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Expose active ports
+# Expose ports
 EXPOSE 80
 EXPOSE 443
 EXPOSE 443/udp
