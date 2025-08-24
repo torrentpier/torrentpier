@@ -17,24 +17,13 @@ RUN pecl install redis apcu imagick
 
 # Enable PHP extensions
 RUN docker-php-ext-enable \
-    mbstring \
     gd \
-    mysqli \
+    tidy \
+    opcache \
+    pdo \
     redis \
     apcu \
-    imagick \
-    bcmath \
-    intl \
-    xml \
-    xmlwriter \
-    dom \
-    fileinfo \
-    curl \
-    zip \
-    opcache \
-    iconv \
-    pcntl \
-    tidy
+    zip
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/pear
