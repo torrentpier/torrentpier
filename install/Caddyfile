@@ -4,6 +4,7 @@ example.com {
     root * /path/to/www
     encode gzip zstd
     php_fastcgi unix//run/php/php-fpm.sock
+    try_files {path} {path}/ /index.php?{query}
     file_server
 
     @blocked {

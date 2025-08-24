@@ -4,6 +4,7 @@
     root * /var/www
     encode gzip zstd
     php_server
+    try_files {path} {path}/ /index.php?{query}
     file_server
 
     @blocked {
