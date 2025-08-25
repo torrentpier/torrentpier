@@ -22,22 +22,25 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set repository name
+        run: echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/TorrentPier:latest .
+          docker build -t ghcr.io/${{ github.repository_owner }}/$REPO_NAME:latest .
 
       - name: Tag image with release version
         if: startsWith(github.ref, 'refs/tags/')
         run: |
           VERSION=${GITHUB_REF#refs/tags/}
-          docker tag ghcr.io/${{ github.repository_owner }}/TorrentPier:latest ghcr.io/${{ github.repository_owner }}/TorrentPier:$VERSION
+          docker tag ghcr.io/${{ github.repository_owner }}/$REPO_NAME:latest ghcr.io/${{ github.repository_owner }}/$REPO_NAME:$VERSION
 
       - name: Push latest tag
         run: |
-          docker push ghcr.io/${{ github.repository_owner }}/TorrentPier:latest
+          docker push ghcr.io/${{ github.repository_owner }}/$REPO_NAME:latest
 
       - name: Push version tag
         if: startsWith(github.ref, 'refs/tags/')
         run: |
           VERSION=${GITHUB_REF#refs/tags/}
-          docker push ghcr.io/${{ github.repository_owner }}/TorrentPier:$VERSION
+          docker push ghcr.io/${{ github.repository_owner }}/$REPO_NAME:$VERSION
