@@ -127,7 +127,7 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
    ```shell
    cp .env.docker .env
    ```
-5. Configure environment variables in `.env`. Edit the file and adjust values according to your environment:
+5. Configure environment variables in `.env`. Edit the file and adjust values according to your environment
    ```shell
    nano .env  # or use your preferred editor
    ```
