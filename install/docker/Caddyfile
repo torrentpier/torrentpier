@@ -1,6 +1,6 @@
 # Caddy configuration for TorrentPier (Docker)
 
-{$TP_HOST} {
+{$TP_HOST:-:$TP_PORT} {
     root * /app/public
     encode gzip zstd
     php_server

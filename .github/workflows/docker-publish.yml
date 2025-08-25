@@ -23,7 +23,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set repository name
-        run: echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+        run: echo "REPO_NAME=${GITHUB_REPOSITORY#*/}-v2.4" >> $GITHUB_ENV
 
       - name: Build Docker image
         run: |
