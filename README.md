@@ -117,9 +117,10 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 > [!TIP]
 > You can automate steps 4-7 by running `php install.php` instead, which will guide you through the setup process interactively.
 
-### Manual (With Docker) 🐳
+### Using Docker 🐳
+
 1. Ensure Docker and Docker Compose are installed on your system.
-   Verify that ports 80 (HTTP) and 443 (HTTPS) are free or adjust them in the docker-compose.yml
+   Verify that ports `80 (HTTP)` and `443 (HTTPS)` are free or adjust them in the `docker-compose.yml`
 2. Select the folder where you want TorrentPier installed
    ```shell
    cd /path/to/www
@@ -128,28 +129,19 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
    ```shell
    git clone --branch master --depth 1 https://github.com/torrentpier/torrentpier.git .
    ```
-4. Configure environment variables in `.env`. Use the template below and adjust values according to your environment:
-   ```env
-   # Common params
-   TP_HOST=example.com     # Replace with your domain/localhost
-   TP_PORT=80              # HTTP port (Caddy will handle HTTPS automatically)
-   APP_ENV=production
-   APP_CRON_ENABLED=false  # Disable internal cron (Docker image uses its own)
-   APP_DEMO_MODE=false
-
-   # Database credentials
-   DB_HOST=database        # Use service name from Docker Compose
-   DB_PORT=3306
-   DB_DATABASE=torrentpier
-   DB_USERNAME=user
-   DB_PASSWORD=secret
-   DB_ROOT_PASSWORD=topsecret  # Only used in Docker
+4. Copy the Docker environment template (`.env.docker`) file and configure it
+   ```shell
+   cp .env.docker .env
    ```
-5. Start the application with Docker Compose
+5. Configure environment variables in `.env`. Edit the file and adjust values according to your environment
+   ```shell
+   nano .env  # or use your preferred editor
+   ```
+6. Start the application with Docker Compose
    ```shell
    docker compose up -d
    ```
-6. Voila! ✨
+7. Voila! ✨
 
 > [!IMPORTANT]
 > The specific settings depend on the server you are using, but in general we recommend chmod **0755** for folders, and chmod **0644** for the files in them.

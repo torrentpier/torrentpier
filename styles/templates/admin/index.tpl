@@ -167,6 +167,7 @@
 </table>
 <br/>
 
+<!-- IF not #IN_DEMO_MODE -->
 <table class="forumline">
     <tr>
         <th colspan="4">{L_ADMIN_SYSTEM_INFORMATION}</th>
@@ -191,6 +192,7 @@
     </tr>
 </table>
 <br/>
+<!-- ENDIF -->
 
 <table class="forumline">
   <tr>
