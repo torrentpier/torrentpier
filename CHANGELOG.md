@@ -2,6 +2,28 @@
 
 # 📖 Change Log
 
+## [v2.4.12](https://github.com/torrentpier/torrentpier/compare/v2.4.11..v2.4.12) (2025-08-25)
+
+### 🚀 Features
+
+- *(installer)* Add web server config guidance post-installation ([#2086](https://github.com/torrentpier/torrentpier/pull/2086)) - ([b1b8c23](https://github.com/torrentpier/torrentpier/commit/b1b8c23d93af2bb2ee3069ca9e87273a2675d546))
+- *(log action)* Show poll (create, finish, edit, delete) actions ([#2095](https://github.com/torrentpier/torrentpier/pull/2095)) - ([36837f4](https://github.com/torrentpier/torrentpier/commit/36837f4bc9e8327b0115873a14551f925b4db3b7))
+- Allow setting custom ban reason when banning users ([#2094](https://github.com/torrentpier/torrentpier/pull/2094)) - ([16e28a5](https://github.com/torrentpier/torrentpier/commit/16e28a5c41d775a9fbaae8dbc80f0c3ef89a2d65))
+- Bring back support `seo_url` function in `Sitemap.php` ([#2093](https://github.com/torrentpier/torrentpier/pull/2093)) - ([af9bf73](https://github.com/torrentpier/torrentpier/commit/af9bf7382ca1318eef3f349efeddbd1ea32b28b1))
+- Add system information dashboard to admin panel ([#2092](https://github.com/torrentpier/torrentpier/pull/2092)) - ([9a4d30c](https://github.com/torrentpier/torrentpier/commit/9a4d30c6daadf3d413239b1cf0c06373e174b672))
+- Enhance client IP detection with trusted proxy validation ([#2085](https://github.com/torrentpier/torrentpier/pull/2085)) - ([1e3e58a](https://github.com/torrentpier/torrentpier/commit/1e3e58aeed66d73292c529eb2c3110408ae83e71))
+
+### ⚙️ Miscellaneous
+
+- *(ci)* Removed docker-publish.yml ([#2107](https://github.com/torrentpier/torrentpier/pull/2107)) - ([67af552](https://github.com/torrentpier/torrentpier/commit/67af55216999020bda7186e22301a626c95d3667))
+- *(docker)* Configure MySQL charset and collation ([#2102](https://github.com/torrentpier/torrentpier/pull/2102)) - ([9b00d57](https://github.com/torrentpier/torrentpier/commit/9b00d571b14acb1c93515f98f9233b340dc9a7ea))
+- Some minor improvements & updated Docker setup instructions ([#2101](https://github.com/torrentpier/torrentpier/pull/2101)) - ([01b5269](https://github.com/torrentpier/torrentpier/commit/01b5269f22eb3d926a5453767bc295364ad8210c))
+- Docker support ([#2100](https://github.com/torrentpier/torrentpier/pull/2100)) - ([e7b1781](https://github.com/torrentpier/torrentpier/commit/e7b178146eea02b77c4d89cdfa02a4dfe34ade57))
+- Added missing `mysqli` extension in README & updated some workflows ([#2091](https://github.com/torrentpier/torrentpier/pull/2091)) - ([7c3faa9](https://github.com/torrentpier/torrentpier/commit/7c3faa922f610810d06c05c7044e07ac18952593))
+- Fixed incorrect installation guidlines in `README.md` ([#2090](https://github.com/torrentpier/torrentpier/pull/2090)) - ([2468b60](https://github.com/torrentpier/torrentpier/commit/2468b60363e303747c614bb4854f022c2abd32c2))
+- Use `text` captcha driver by default ([#2084](https://github.com/torrentpier/torrentpier/pull/2084)) - ([7a393e3](https://github.com/torrentpier/torrentpier/commit/7a393e3548cf9866e322794b88e105da780ecbfe))
+
+
 ## [v2.4.11](https://github.com/torrentpier/torrentpier/compare/v2.4.10..v2.4.11) (2025-08-06)
 
 ### 🚀 Features
