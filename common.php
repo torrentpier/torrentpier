@@ -350,7 +350,14 @@ function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $
     }
 }
 
-function array_deep_merge($base, $overlay)
+/**
+ * Array deep merge
+ *
+ * @param array $base
+ * @param array $overlay
+ * @return array
+ */
+function array_deep_merge(array $base, array $overlay): array
 {
     foreach ($overlay as $key => $value) {
         if (is_array($value) && isset($base[$key]) && is_array($base[$key])) {
@@ -359,6 +366,7 @@ function array_deep_merge($base, $overlay)
             $base[$key] = $value;
         }
     }
+
     return $base;
 }
 
