@@ -75,7 +75,6 @@ $bb_cfg['cache'] = [
         'bb_login_err' => ['filecache'],
         'bb_poll_data' => ['filecache'],
         'bb_ip2countries' => ['filecache'],
-        'bb_lang' => ['filecache'],
     ],
 ];
 
