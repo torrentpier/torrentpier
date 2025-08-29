@@ -475,8 +475,7 @@ class User
         if ($user_id == GUEST_UID) {
             $delete_cookies = [
                 COOKIE_DATA,
-                'torhelp',
-                'user_lang'
+                'torhelp'
             ];
             $delete_cookies = array_merge($delete_cookies, $debug_cookies);
 
@@ -602,9 +601,6 @@ class User
         define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
 
         if ($this->data['user_id'] != GUEST_UID) {
-            if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
-                $this->data['user_lang'] = $_COOKIE['user_lang'];
-            }
             if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang']) {
                 $bb_cfg['default_lang'] = basename($this->data['user_lang']);
                 define('LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
