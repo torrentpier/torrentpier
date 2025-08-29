@@ -487,7 +487,7 @@ class User
             }
         } else {
             if (!isset($bb_cfg['dbg_users'][$this->data['user_id']]) && DBG_USER) {
-                bb_setcookie(COOKIE_DBG, null);
+                bb_setcookie(COOKIE_DBG, '', COOKIE_EXPIRED);
             } elseif (isset($bb_cfg['dbg_users'][$this->data['user_id']]) && !DBG_USER) {
                 bb_setcookie(COOKIE_DBG, hash('xxh128', $bb_cfg['dbg_users'][$this->data['user_id']]), COOKIE_SESSION);
             }
