@@ -18,6 +18,7 @@ $page_cfg['load_tpl_vars'] = [
     'post_icons',
     'topic_icons'
 ];
+$page_cfg['allow_robots'] = false;
 
 // Start session management
 $user->session_start(array('req_login' => config()->get('disable_search_for_guest')));

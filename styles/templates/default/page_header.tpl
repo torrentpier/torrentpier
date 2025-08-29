@@ -20,10 +20,8 @@
 <meta property="og:title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
 <meta property="twitter:title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
 <meta property="twitter:card" content="summary">
-<!-- IF ALLOW_ROBOTS -->
-<meta name="robots" content="all">
-<!-- ELSE -->
-<meta name="robots" content="none">
+<!-- IF not ALLOW_ROBOTS -->
+<meta name="robots" content="noindex">
 <!-- ENDIF -->
 <!-- IF META_PREV_PAGE -->
 <link rel="prev" href="{META_PREV_PAGE}">

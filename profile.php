@@ -18,6 +18,10 @@ $user->session_start();
 set_die_append_msg();
 $mode = request_var('mode', 'viewprofile');
 
+if ($mode === 'register') {
+    $page_cfg['allow_robots'] = false;
+}
+
 switch ($mode) {
     case 'viewprofile':
         require UCP_DIR . '/viewprofile.php';

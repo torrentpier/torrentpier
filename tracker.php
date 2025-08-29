@@ -17,6 +17,7 @@ $page_cfg['use_tablesorter'] = true;
 $page_cfg['load_tpl_vars'] = [
     'post_icons'
 ];
+$page_cfg['allow_robots'] = false;
 
 // Session start
 $user->session_start(array('req_login' => config()->get('bt_tor_browse_only_reg')));
