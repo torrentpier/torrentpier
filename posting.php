@@ -16,6 +16,7 @@ require ATTACH_DIR . '/attachment_mod.php';
 $page_cfg['load_tpl_vars'] = [
     'post_icons'
 ];
+$page_cfg['allow_robots'] = false;
 
 $submit = (bool)@$_REQUEST['post'];
 $refresh = $preview = (bool)@$_REQUEST['preview'];
