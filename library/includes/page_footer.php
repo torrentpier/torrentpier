@@ -91,4 +91,4 @@ if (defined('REQUESTED_PAGE') && !defined('DISABLE_CACHING_OUTPUT')) {
     }
 }
 
-exit();
+bb_exit();
