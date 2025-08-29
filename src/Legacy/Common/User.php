@@ -296,8 +296,8 @@ class User
 					LIMIT 1
 				");
 
-                bb_setcookie(COOKIE_TOPIC, null);
-                bb_setcookie(COOKIE_FORUM, null);
+                bb_setcookie(COOKIE_TOPIC, '');
+                bb_setcookie(COOKIE_FORUM, '');
 
                 $this->data['user_lastvisit'] = $last_visit;
             }
@@ -482,7 +482,7 @@ class User
 
             foreach ($delete_cookies as $cookie) {
                 if (isset($_COOKIE[$cookie])) {
-                    bb_setcookie($cookie, null);
+                    bb_setcookie($cookie, '', COOKIE_EXPIRED);
                 }
             }
         } else {
@@ -496,7 +496,7 @@ class User
             if (!SQL_DEBUG || !DBG_USER) {
                 foreach ($debug_cookies as $cookie) {
                     if (isset($_COOKIE[$cookie])) {
-                        bb_setcookie($cookie, null);
+                        bb_setcookie($cookie, '', COOKIE_EXPIRED);
                     }
                 }
             }
@@ -506,7 +506,7 @@ class User
             $c_sdata_curr = ($this->sessiondata) ? json_encode($this->sessiondata) : '';
 
             if ($c_sdata_curr !== $c_sdata_resv) {
-                bb_setcookie(COOKIE_DATA, $c_sdata_curr, httponly: true);
+                bb_setcookie(COOKIE_DATA, $c_sdata_curr, COOKIE_PERSIST, true);
             }
         }
     }
@@ -672,9 +672,9 @@ class User
             ]);
 
             // Delete cookies
-            bb_setcookie(COOKIE_TOPIC, null);
-            bb_setcookie(COOKIE_FORUM, null);
-            bb_setcookie(COOKIE_MARK, null);
+            bb_setcookie(COOKIE_TOPIC, '');
+            bb_setcookie(COOKIE_FORUM, '');
+            bb_setcookie(COOKIE_MARK, '');
         }
     }
 
