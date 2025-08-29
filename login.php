@@ -12,6 +12,8 @@ define('IN_LOGIN', true);
 
 require __DIR__ . '/common.php';
 
+$page_cfg['allow_robots'] = false;
+
 array_deep($_POST, 'trim');
 
 // Start session management
