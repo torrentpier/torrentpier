@@ -106,18 +106,27 @@ function rand(min, max) {
  *            (default: domain of calling document)
  * [secure]   Boolean value indicating if the cookie transmission requires a
  *            secure transmission
+ * [sameSite] Controls the SameSite attribute of the cookie
+ *            Possible values: "Lax", "Strict", "None"
+ *            If "None" is used, Secure should be true
  */
-function setCookie(name, value, days, path, domain, secure) {
+function setCookie(name, value, days, path, domain, secure, sameSite) {
+  let expires = '';
+
   if (days !== 'SESSION') {
-    var date = new Date();
+    let date = new Date();
     days = days || 365;
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    var expires = date.toGMTString();
-  } else {
-    var expires = '';
+    expires = date.toGMTString();
   }
 
-  document.cookie = name + '=' + encodeURI(value) + ((expires) ? '; expires=' + expires : '') + ((path) ? '; path=' + path : ((cookiePath) ? '; path=' + cookiePath : '')) + ((domain) ? '; domain=' + domain : ((cookieDomain) ? '; domain=' + cookieDomain : '')) + ((secure) ? '; secure' : ((cookieSecure) ? '; secure' : ''));
+  document.cookie =
+    name + '=' + encodeURIComponent(value)
+    + (expires ? '; expires=' + expires : '')
+    + (path ? '; path=' + path : (typeof cookiePath !== 'undefined' ? '; path=' + cookiePath : ''))
+    + (domain ? '; domain=' + domain : (typeof cookieDomain !== 'undefined' ? '; domain=' + cookieDomain : ''))
+    + (secure ? '; secure' : (typeof cookieSecure !== 'undefined' && cookieSecure ? '; secure' : ''))
+    + (sameSite ? '; samesite=' + sameSite : (typeof cookieSameSite !== 'undefined' ? '; samesite=' + cookieSameSite : ''));
 }
 
 /**
