@@ -208,11 +208,11 @@ if ($check_attachments) {
     }
 }
 if ($debug_mode) {
-    dump($orphan_files);
-    dump($orphan_db_attach);
-    dump($orphan_tor);
-    dump($posts_without_attach);
-    dump($topics_without_attach);
+    prn_r($orphan_files, '$orphan_files');
+    prn_r($orphan_db_attach, '$orphan_db_attach');
+    prn_r($orphan_tor, '$orphan_tor');
+    prn_r($posts_without_attach, '$posts_without_attach');
+    prn_r($topics_without_attach, '$topics_without_attach');
 }
 
 DB()->query("DROP TEMPORARY TABLE $tmp_attach_tbl");

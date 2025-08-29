@@ -327,6 +327,32 @@ function send_no_cache_headers()
 }
 
 /**
+ * @param string $output
+ */
+function bb_exit($output = '')
+{
+    if ($output) {
+        echo $output;
+    }
+    exit;
+}
+
+/**
+ * @param $var
+ * @param string $title
+ * @param bool $print
+ * @return string
+ */
+function prn_r($var, $title = '', $print = true)
+{
+    $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
+    if ($print) {
+        echo $r;
+    }
+    return $r;
+}
+
+/**
  * Converts "<br/>" / "<br>" tags to "\n" line breaks
  *
  * @param string $string

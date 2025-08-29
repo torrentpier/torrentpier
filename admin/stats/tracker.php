@@ -179,4 +179,4 @@ echo '</body></html>';
 
 DB()->query('DROP TEMPORARY TABLE ' . TMP_TRACKER_TABLE);
 
-exit();
+bb_exit();

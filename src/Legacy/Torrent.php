@@ -665,7 +665,7 @@ class Torrent
         header("Content-Type: " . TORRENT_MIMETYPE . "; name=\"$dl_fname\"");
         header("Content-Disposition: attachment; filename=\"$dl_fname\"");
 
-        exit($output);
+        bb_exit($output);
     }
 
     /**
