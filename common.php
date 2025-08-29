@@ -374,6 +374,16 @@ function make_rand_str(int $length = 10): string
     return $randomString;
 }
 
+function bb_crc32($str)
+{
+    return (float)sprintf('%u', crc32($str));
+}
+
+function hexhex($value)
+{
+    return dechex(hexdec($value));
+}
+
 /**
  * Calculates user ratio
  *

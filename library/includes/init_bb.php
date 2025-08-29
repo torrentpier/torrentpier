@@ -66,6 +66,7 @@ define('COOKIE_PM', $c . 'pm');
 unset($c);
 
 define('COOKIE_SESSION', 0);
+define('COOKIE_EXPIRED', TIMENOW - 31536000);
 define('COOKIE_PERSIST', TIMENOW + 31536000);
 
 define('COOKIE_MAX_TRACKS', 90);
@@ -81,23 +82,18 @@ define('COOKIE_MAX_TRACKS', 90);
  * @return void
  * @throws \Josantonius\Cookie\Exceptions\CookieException
  */
-function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false, bool $isRaw = false): void
+function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false): bool
 {
-    $cookie = new \Josantonius\Cookie\Cookie(
-        domain: config()->get('cookie_domain'),
-        expires: $lifetime,
-        httpOnly: $httponly,
-        path: config()->get('script_path'),
-        raw: $isRaw,
-        sameSite: config()->get('cookie_same_site'),
-        secure: config()->get('cookie_secure')
-    );
+    global $bb_cfg;
 
-    if (!empty($val)) {
-        $cookie->set($name, $val);
-    } else {
-        $cookie->remove($name);
-    }
+    return setcookie($name, $val, [
+        'expires' => $lifetime,
+        'path' => $bb_cfg['script_path'],
+        'domain' => $bb_cfg['cookie_domain'],
+        'secure' => $bb_cfg['cookie_secure'],
+        'httponly' => $httponly,
+        'samesite' => $bb_cfg['cookie_same_site'],
+    ]);
 }
 
 // User related
