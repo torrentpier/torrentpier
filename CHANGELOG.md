@@ -2,6 +2,27 @@
 
 # 📖 Change Log
 
+## [v2.4.13](https://github.com/torrentpier/torrentpier/compare/v2.4.12..v2.4.13) (2025-08-30)
+
+### 🚀 Features
+
+- Bring back `bb_exit()` & `prn_r()` functions ([#2114](https://github.com/torrentpier/torrentpier/pull/2114)) - ([65c1b9c](https://github.com/torrentpier/torrentpier/commit/65c1b9c6821bbb96474ec79d02c7d5618b4fddb0))
+
+### 🐛 Bug Fixes
+
+- *(cookie)* Correct cookie value handling and add SameSite support ([#2115](https://github.com/torrentpier/torrentpier/pull/2115)) - ([f89551a](https://github.com/torrentpier/torrentpier/commit/f89551ac18d0fc13cf9df64a75c9fbf6e4727cc5))
+- *(i18n)* Support deep merge for nested translation keys ([#2111](https://github.com/torrentpier/torrentpier/pull/2111)) - ([98583fa](https://github.com/torrentpier/torrentpier/commit/98583faab9918baa4ad03d1a67e1ebe2640011ab))
+- Prevent robots indexing for login & registration pages ([#2116](https://github.com/torrentpier/torrentpier/pull/2116)) - ([e98e669](https://github.com/torrentpier/torrentpier/commit/e98e66941a8b9b0a9e4b38c0ba4816b2793dcd4e))
+
+### ⚙️ Miscellaneous
+
+- *(docker)* Fixed Caddyfile syntax ([#2108](https://github.com/torrentpier/torrentpier/pull/2108)) - ([2cac35a](https://github.com/torrentpier/torrentpier/commit/2cac35a21840b7d3fa17be651416b87fe3faec07))
+
+### ◀️ Revert
+
+- Demo mode: Save user language in cookies ([#2117](https://github.com/torrentpier/torrentpier/pull/2117)) - ([2061ce2](https://github.com/torrentpier/torrentpier/commit/2061ce29a8a28b902d1042d5c864814b1eb1d1d6))
+
+
 ## [v2.4.12](https://github.com/torrentpier/torrentpier/compare/v2.4.11..v2.4.12) (2025-08-25)
 
 ### 🚀 Features
@@ -15,7 +36,6 @@
 
 ### ⚙️ Miscellaneous
 
-- *(ci)* Removed docker-publish.yml ([#2107](https://github.com/torrentpier/torrentpier/pull/2107)) - ([67af552](https://github.com/torrentpier/torrentpier/commit/67af55216999020bda7186e22301a626c95d3667))
 - *(docker)* Configure MySQL charset and collation ([#2102](https://github.com/torrentpier/torrentpier/pull/2102)) - ([9b00d57](https://github.com/torrentpier/torrentpier/commit/9b00d571b14acb1c93515f98f9233b340dc9a7ea))
 - Some minor improvements & updated Docker setup instructions ([#2101](https://github.com/torrentpier/torrentpier/pull/2101)) - ([01b5269](https://github.com/torrentpier/torrentpier/commit/01b5269f22eb3d926a5453767bc295364ad8210c))
 - Docker support ([#2100](https://github.com/torrentpier/torrentpier/pull/2100)) - ([e7b1781](https://github.com/torrentpier/torrentpier/commit/e7b178146eea02b77c4d89cdfa02a4dfe34ade57))
