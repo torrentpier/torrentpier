@@ -1183,20 +1183,20 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.27.0",
+            "version": "v12.27.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "3fdcf8f3788fcb154df12ebf1fe0dd4a199e92a8"
+                "reference": "168844fe531baaa11db00f7902fd0116d46d3bdd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/3fdcf8f3788fcb154df12ebf1fe0dd4a199e92a8",
-                "reference": "3fdcf8f3788fcb154df12ebf1fe0dd4a199e92a8",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/168844fe531baaa11db00f7902fd0116d46d3bdd",
+                "reference": "168844fe531baaa11db00f7902fd0116d46d3bdd",
                 "shasum": ""
             },
             "require": {
-                "brick/math": "^0.11|^0.12|^0.13",
+                "brick/math": "^0.11|^0.12|^0.13|^0.14",
                 "composer-runtime-api": "^2.2",
                 "doctrine/inflector": "^2.0.5",
                 "dragonmantank/cron-expression": "^3.4",
@@ -1396,7 +1396,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-09-02T15:32:28+00:00"
+            "time": "2025-09-02T23:59:38+00:00"
         },
         {
             "name": "laravel/prompts",
