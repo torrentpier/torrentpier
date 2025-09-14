@@ -11,10 +11,17 @@ namespace TorrentPier\Legacy;
 
 /**
  * Class LogAction
+ * Handles logging of moderator and administrator actions.
+ *
  * @package TorrentPier\Legacy
  */
 class LogAction
 {
+    /**
+     * List of available log types (action name => ID).
+     *
+     * @var array<string,int>
+     */
     public array $log_type = [
         'mod_topic_delete' => 1,
         'mod_topic_move' => 2,
@@ -43,17 +50,21 @@ class LogAction
     ];
 
     /**
-     * @var array
+     * Log types prepared for select lists (description => ID).
+     *
+     * @var array<string,int>
      */
     public array $log_type_select = [];
 
     /**
+     * Flag to disable logging.
+     *
      * @var bool
      */
     public bool $log_disabled = false;
 
     /**
-     * Init
+     * Initializes the log type select array using language definitions.
      *
      * @return void
      */
@@ -67,10 +78,17 @@ class LogAction
     }
 
     /**
-     * Moderator
+     * Logs moderator actions.
      *
-     * @param string $type_name
-     * @param array $args
+     * @param string $type_name Action type key (from $log_type).
+     * @param array $args Action parameters:
+     *                          - forum_id
+     *                          - forum_id_new
+     *                          - topic_id
+     *                          - topic_id_new
+     *                          - topic_title
+     *                          - topic_title_new
+     *                          - log_msg
      *
      * @return void
      */
@@ -120,10 +138,10 @@ class LogAction
     }
 
     /**
-     * Admin
+     * Logs administrator actions (wrapper for mod()).
      *
-     * @param string $type_name
-     * @param array $args
+     * @param string $type_name Action type key (from $log_type).
+     * @param array $args Action parameters (same as mod()).
      *
      * @return void
      */
