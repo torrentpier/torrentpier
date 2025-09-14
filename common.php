@@ -430,6 +430,26 @@ function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $
 }
 
 /**
+ * Array deep merge
+ *
+ * @param array $base
+ * @param array $overlay
+ * @return array
+ */
+function array_deep_merge(array $base, array $overlay): array
+{
+    foreach ($overlay as $key => $value) {
+        if (is_array($value) && isset($base[$key]) && is_array($base[$key])) {
+            $base[$key] = array_deep_merge($base[$key], $value);
+        } else {
+            $base[$key] = $value;
+        }
+    }
+
+    return $base;
+}
+
+/**
  * Hide BB_PATH
  *
  * @param string $path
