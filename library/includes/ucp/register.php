@@ -15,6 +15,10 @@ array_deep($_POST, 'trim');
 
 set_die_append_msg();
 
+if (IN_DEMO_MODE) {
+    config()->set('reg_email_activation', false);
+}
+
 if (IS_ADMIN) {
     config()->set('reg_email_activation', false);
 
