@@ -1996,6 +1996,16 @@ $lang['DATABASE_SIZE'] = 'Объем БД';
 $lang['GZIP_COMPRESSION'] = 'сжатие Gzip';
 $lang['NOT_AVAILABLE'] = 'Недоступно';
 
+// System information
+$lang['ADMIN_SYSTEM_INFORMATION'] = 'System information';
+$lang['ADMIN_SYSTEM_OS'] = 'OS:';
+$lang['ADMIN_SYSTEM_PHP_VER'] = 'PHP:';
+$lang['ADMIN_SYSTEM_DATABASE_VER'] = 'Database:';
+$lang['ADMIN_SYSTEM_PHP_MEM_LIMIT'] = 'Memory limit:';
+$lang['ADMIN_SYSTEM_DISK_SPACE_INFO_TITLE'] = 'Disk space info:';
+$lang['ADMIN_SYSTEM_DISK_SPACE_INFO'] = '%s (used: %s | free: %s)';
+$lang['ADMIN_SYSTEM_PHP_MAX_EXECUTION_TIME'] = 'Max execution time:';
+
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Кэш';
@@ -2849,6 +2859,8 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_change_tor_status' => 'Топик:<br /> <b>изменен статус торрента</b>',
     'mod_topic_change_tor_type' => 'Топик:<br /> <b>изменен тип торрента</b>',
     'mod_topic_tor_unregister' => 'Топик:<br /> <b>торрент разрегистрирован</b>',
+    'mod_topic_tor_register' => 'Topic:<br /> <b>torrent registered</b>',
+    'mod_topic_tor_delete' => 'Topic:<br /> <b>torrent deleted</b>',
     'mod_topic_renamed' => 'Топик:<br /> <b>переименован</b>',
     'mod_post_delete' => 'Пост:<br /> <b>удален</b>',
     'mod_post_pin' => 'Пост:<br /> <b>закреплен</b>',
