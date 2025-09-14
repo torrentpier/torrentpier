@@ -143,9 +143,6 @@ switch ($mode) {
             bb_die($lang['PROFILE_NOT_FOUND']);
         }
         $pr_data['user_birthday'] = $pr_data['user_birthday']->format('Y-m-d');
-        if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
-            $pr_data['user_lang'] = $_COOKIE['user_lang'];
-        }
         break;
 
     default:
@@ -293,11 +290,7 @@ foreach ($profile_fields as $field => $can_edit) {
             $user_lang = isset($_POST['user_lang']) ? (string)$_POST['user_lang'] : $pr_data['user_lang'];
             if ($submit && ($user_lang != $pr_data['user_lang'] || $mode == 'register')) {
                 $pr_data['user_lang'] = $user_lang;
-                if (IN_DEMO_MODE) {
-                    bb_setcookie('user_lang', $user_lang);
-                } else {
-                    $db_data['user_lang'] = $user_lang;
-                }
+                $db_data['user_lang'] = $user_lang;
             }
             break;
 
