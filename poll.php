@@ -197,6 +197,13 @@ switch ($mode) {
             bb_die($poll->err_msg);
         }
 
+        // Log action
+        $log_action->mod('mod_topic_poll_edited', [
+            'forum_id' => $forum_id,
+            'topic_id' => $topic_id,
+            'topic_title' => $t_data['topic_title'],
+        ]);
+
         // Updating poll info to the database
         $poll->insert_votes_into_db($topic_id);
         CACHE('bb_poll_data')->rm("poll_$topic_id");
