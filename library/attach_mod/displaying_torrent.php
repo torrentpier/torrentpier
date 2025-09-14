@@ -89,13 +89,13 @@ if ($tor_auth_reg || $tor_auth_del) {
     $tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }
 
-if ($bb_cfg['tracker']['use_real_filename']) {
+if (config()->get('tracker.use_real_filename')) {
     $display_name = $real_filename;
 } else {
-    if ($bb_cfg['tracker']['use_old_torrent_name_format']) {
-        $display_name = '[' . $bb_cfg['server_name'] . '].t' . $bt_topic_id . '.' . TORRENT_EXT;
+    if (config()->get('tracker.use_old_torrent_name_format')) {
+        $display_name = '[' . config()->get('server_name') . '].t' . $bt_topic_id . '.' . TORRENT_EXT;
     } else {
-        $display_name = $t_data['topic_title'] . ' [' . $bb_cfg['server_name'] . '-' . $bt_topic_id . ']' . '.' . TORRENT_EXT;
+        $display_name = $t_data['topic_title'] . ' [' . config()->get('server_name') . '-' . $bt_topic_id . ']' . '.' . TORRENT_EXT;
     }
 }
 

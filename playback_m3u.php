@@ -61,7 +61,7 @@ if (!$is_auth['auth_download']) {
 // Check for frozen torrent
 $releaser = $userdata['user_id'] == $row['poster_id'];
 $tor_status = $row['tor_status'];
-if (!IS_AM && isset($bb_cfg['tor_frozen'][$tor_status]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_status]) && $releaser)) {
+if (!IS_AM && isset(config()->get('tor_frozen')[$tor_status]) && !(isset(config()->get('tor_frozen_author_download')[$tor_status]) && $releaser)) {
     bb_die($lang['TOR_STATUS_FORBIDDEN'] . $lang['TOR_STATUS_NAME'][$tor_status]);
 }
 

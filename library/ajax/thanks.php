@@ -11,9 +11,9 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg, $lang, $userdata;
+global $lang, $userdata;
 
-if (!$bb_cfg['tor_thank']) {
+if (!config()->get('tor_thank')) {
     $this->ajax_die($lang['MODULE_OFF']);
 }
 
@@ -38,9 +38,10 @@ $thanks_cache_key = 'topic_thanks_' . $topic_id;
  * @param $topic_id
  * @param string $thanks_cache_key
  * @param int $cache_lifetime
+ *
  * @return array
  */
-function get_thanks_list($topic_id, string $thanks_cache_key, int $cache_lifetime)
+function get_thanks_list($topic_id, string $thanks_cache_key, int $cache_lifetime): array
 {
     if (!$cached_thanks = CACHE('bb_cache')->get($thanks_cache_key)) {
         $cached_thanks = [];
@@ -90,7 +91,7 @@ switch ($mode) {
         ];
 
         // Limit voters per topic
-        $tor_thank_limit_per_topic = (int)$bb_cfg['tor_thank_limit_per_topic'];
+        $tor_thank_limit_per_topic = (int)config()->get('tor_thank_limit_per_topic');
         if ($tor_thank_limit_per_topic > 0) {
             $thanks_count = count($cached_thanks);
             if ($thanks_count > $tor_thank_limit_per_topic) {
@@ -113,7 +114,7 @@ switch ($mode) {
         }
         break;
     case 'get':
-        if (IS_GUEST && !$bb_cfg['tor_thanks_list_guests']) {
+        if (IS_GUEST && !config()->get('tor_thanks_list_guests')) {
             $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
         }
 

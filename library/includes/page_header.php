@@ -117,13 +117,13 @@ $template->assign_vars([
     'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
 
     'USER_LANG' => $userdata['user_lang'],
-    'USER_LANG_DIRECTION' => (isset($bb_cfg['lang'][$userdata['user_lang']]['rtl']) && $bb_cfg['lang'][$userdata['user_lang']]['rtl'] === true) ? 'rtl' : 'ltr',
+    'USER_LANG_DIRECTION' => (isset(config()->get('lang')[$userdata['user_lang']]['rtl']) && (config()->get('lang')[$userdata['user_lang']]['rtl'] === true)) ? 'rtl' : 'ltr',
 
     'INCLUDE_BBCODE_JS' => !empty($page_cfg['include_bbcode_js']),
     'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
-    'ALLOW_ROBOTS' => !$bb_cfg['board_disable'] && (!isset($page_cfg['allow_robots']) || $page_cfg['allow_robots'] === true),
+    'ALLOW_ROBOTS' => !config()->get('board_disable') && (!isset($page_cfg['allow_robots']) || $page_cfg['allow_robots'] === true),
     'META_DESCRIPTION' => (!defined('HAS_DIED') && !empty($page_cfg['meta_description'])) ? trim(htmlCHR($page_cfg['meta_description'])) : '',
 
     'SITENAME' => config()->get('sitename'),
