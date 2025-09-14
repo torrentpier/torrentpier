@@ -2,6 +2,70 @@
 
 # 📖 Change Log
 
+## [v2.8.4](https://github.com/torrentpier/torrentpier/compare/v2.8.3..v2.8.4) (2025-09-14)
+
+### 🚀 Features
+
+- *(installer)* Add web server config guidance post-installation ([#2086](https://github.com/torrentpier/torrentpier/pull/2086)) - ([414c916](https://github.com/torrentpier/torrentpier/commit/414c9169f68e23ba6214f59de5dd2a5d7d63db69))
+- *(log action)* Show `torrent delete` action ([#2061](https://github.com/torrentpier/torrentpier/pull/2061)) - ([4e79ea1](https://github.com/torrentpier/torrentpier/commit/4e79ea1476e9e302d04255606351f136cf4582d7))
+- *(log action)* Show torrent register action ([#2060](https://github.com/torrentpier/torrentpier/pull/2060)) - ([8507d62](https://github.com/torrentpier/torrentpier/commit/8507d620cef1d74f50a6d9b569f976a5a055654d))
+- *(view_torrent.php)* Added checking auth to download ([#2067](https://github.com/torrentpier/torrentpier/pull/2067)) - ([f02df3d](https://github.com/torrentpier/torrentpier/commit/f02df3d34c612f4ea7a514762069c27e9d2b9054))
+- *(vote topic)* Improved functionality & implemented caching ([#2063](https://github.com/torrentpier/torrentpier/pull/2063)) - ([b48a7bc](https://github.com/torrentpier/torrentpier/commit/b48a7bc66f37769acad83ac095da7fc0204a51f4))
+- Bring back `bb_exit()` & `prn_r()` functions ([#2114](https://github.com/torrentpier/torrentpier/pull/2114)) - ([3dc5826](https://github.com/torrentpier/torrentpier/commit/3dc5826a5a35c23c8f54d9d06b9fa56a2a869c0a))
+- Allow setting custom ban reason when banning users ([#2094](https://github.com/torrentpier/torrentpier/pull/2094)) - ([006ea21](https://github.com/torrentpier/torrentpier/commit/006ea210c4dd33e2c3eba6fba2bd7c9a8439dd9b))
+- Bring back support `seo_url` function in `Sitemap.php` ([#2093](https://github.com/torrentpier/torrentpier/pull/2093)) - ([f3027f4](https://github.com/torrentpier/torrentpier/commit/f3027f461a9b1d18461639e10751eb28aacda235))
+- Add system information dashboard to admin panel ([#2092](https://github.com/torrentpier/torrentpier/pull/2092)) - ([479696e](https://github.com/torrentpier/torrentpier/commit/479696ed72acb3bb7a8848b91a9c63b6258f8f26))
+- Enhance client IP detection with trusted proxy validation ([#2085](https://github.com/torrentpier/torrentpier/pull/2085)) - ([c3cb8b6](https://github.com/torrentpier/torrentpier/commit/c3cb8b665609b1b2950a90de0c89bb9da55fbd81))
+- Add clear button for file upload input in `posting_attach.tpl` ([#2072](https://github.com/torrentpier/torrentpier/pull/2072)) - ([13e2603](https://github.com/torrentpier/torrentpier/commit/13e2603e90b852461caee6f7e937be0936531212))
+- Prevent robots indexing for private topics ([#2071](https://github.com/torrentpier/torrentpier/pull/2071)) - ([9243b12](https://github.com/torrentpier/torrentpier/commit/9243b12a44e8a0333a2552be83f28da23c3bd07d))
+- Added check for frozen torrent in `playback_m3u.php` ([#2065](https://github.com/torrentpier/torrentpier/pull/2065)) - ([20184a5](https://github.com/torrentpier/torrentpier/commit/20184a5e5ddcf54711ab6b3a4c9ce3be24f8a388))
+- Add option to use original torrent filenames for downloads ([#2064](https://github.com/torrentpier/torrentpier/pull/2064)) - ([9246868](https://github.com/torrentpier/torrentpier/commit/92468686fbc1130710d62b4b50a626ae3c50ebe6))
+- Added check for demo-mode in `admin_robots.php` and `admin_sitemap.php` ([#2046](https://github.com/torrentpier/torrentpier/pull/2046)) - ([49931d1](https://github.com/torrentpier/torrentpier/commit/49931d167f4b8439e4e2fc1340f303903de2a844))
+- Restore some deprecated code for backward compatibility ([#2028](https://github.com/torrentpier/torrentpier/pull/2028)) - ([4e91f59](https://github.com/torrentpier/torrentpier/commit/4e91f592efeca188bab218891b6c557cef14f9df))
+
+### 🐛 Bug Fixes
+
+- *(ACP)* A non-numeric value encountered for stats ([#2073](https://github.com/torrentpier/torrentpier/pull/2073)) - ([2055ef5](https://github.com/torrentpier/torrentpier/commit/2055ef5587aa3de5047e5be0d2ae7887af18774a))
+- *(Attach.php)* Trying to access array offset on value of type null ([#2075](https://github.com/torrentpier/torrentpier/pull/2075)) - ([07b3c7f](https://github.com/torrentpier/torrentpier/commit/07b3c7f129f4f2c9b7373d87726381f44f842e0d))
+- *(cookie)* Correct cookie value handling and add SameSite support ([#2115](https://github.com/torrentpier/torrentpier/pull/2115)) - ([1da3fc5](https://github.com/torrentpier/torrentpier/commit/1da3fc58909cc759dd872ec0a22ede9fe088de9e))
+- *(i18n)* Support deep merge for nested translation keys ([#2131](https://github.com/torrentpier/torrentpier/pull/2131)) - ([e71bb24](https://github.com/torrentpier/torrentpier/commit/e71bb24f7b8c123595f4dbecd4a26a12d591551e))
+- Prevent robots indexing for login & registration pages ([#2116](https://github.com/torrentpier/torrentpier/pull/2116)) - ([4e71b5c](https://github.com/torrentpier/torrentpier/commit/4e71b5c31d42896e090362806e1bcf72dd15c3c0))
+- Prevent showing meta description if defined `HAS_DIED` ([#2070](https://github.com/torrentpier/torrentpier/pull/2070)) - ([7858cb4](https://github.com/torrentpier/torrentpier/commit/7858cb45961bbd8330bbc0108155553d5a3c15dd))
+- Make `Ajax::$action` property nullable to handle missing POST parameter ([#2066](https://github.com/torrentpier/torrentpier/pull/2066)) - ([41e5de8](https://github.com/torrentpier/torrentpier/commit/41e5de8ae7decf6abf365c56dd9df45ccdd6e47f))
+- Handle Nette DateTime objects in birthday validation ([#2032](https://github.com/torrentpier/torrentpier/pull/2032)) - ([6e7e3dd](https://github.com/torrentpier/torrentpier/commit/6e7e3dd9efde5f8dda4435f186e054697c85fd05))
+
+### 🈳 New translations
+
+- New Crowdin updates ([#2127](https://github.com/torrentpier/torrentpier/pull/2127)) - ([1495a75](https://github.com/torrentpier/torrentpier/commit/1495a754825252cdcb372448ae3aa5b6b04604e6))
+
+### 📦 Dependencies
+
+- Replace `belomaxorka/captcha` with `gregwar/captcha` ([#2069](https://github.com/torrentpier/torrentpier/pull/2069)) - ([656f1ae](https://github.com/torrentpier/torrentpier/commit/656f1ae81689aa6d7a11807fba4c84111f6cec86))
+
+### 🚜 Refactor
+
+- *(admin)* Remove redundant `dir` and `lang` attributes from html tag ([#2051](https://github.com/torrentpier/torrentpier/pull/2051)) - ([3412a70](https://github.com/torrentpier/torrentpier/commit/3412a7009491e6b3a99a38f576eb587a150197f3))
+
+### ⚙️ Miscellaneous
+
+- *(docker)* Configure MySQL charset and collation ([#2102](https://github.com/torrentpier/torrentpier/pull/2102)) - ([d1d97bc](https://github.com/torrentpier/torrentpier/commit/d1d97bc615845eb43655bcb1bd35cfa80e6c7f78))
+- Some minor improvements & updated Docker setup instructions ([#2101](https://github.com/torrentpier/torrentpier/pull/2101)) - ([8d4ecd8](https://github.com/torrentpier/torrentpier/commit/8d4ecd85cbc6c08cf8e763f65e286759153c60e4))
+- Added missing mysqli extension in README ([#2130](https://github.com/torrentpier/torrentpier/pull/2130)) - ([e20cadf](https://github.com/torrentpier/torrentpier/commit/e20cadf4be16c647ce721cd7f8a1236c07db5022))
+- Force disable `reg_email_activation` in demo mode ([#2129](https://github.com/torrentpier/torrentpier/pull/2129)) - ([e51b128](https://github.com/torrentpier/torrentpier/commit/e51b1286d76041149c5da47dbaff648d27c8eff3))
+- Minor improvements ([#2126](https://github.com/torrentpier/torrentpier/pull/2126)) - ([f758d38](https://github.com/torrentpier/torrentpier/commit/f758d38736a4650bf7a81cf965a0fd4b6d3a4b62))
+- Docker support ([#2100](https://github.com/torrentpier/torrentpier/pull/2100)) - ([7388f47](https://github.com/torrentpier/torrentpier/commit/7388f47055d8e91c23db090892fc7ee585eb2dcc))
+- Fixed incorrect installation guidlines in `README.md` ([#2090](https://github.com/torrentpier/torrentpier/pull/2090)) - ([4dc7662](https://github.com/torrentpier/torrentpier/commit/4dc7662b4c4ad4ad208a86cc0622dd324e3d7883))
+- Use `text` captcha driver by default ([#2084](https://github.com/torrentpier/torrentpier/pull/2084)) - ([63dedfc](https://github.com/torrentpier/torrentpier/commit/63dedfcfa4e1d5090f777ceb93fa6cedd1787840))
+- Some minor improvements ([#2076](https://github.com/torrentpier/torrentpier/pull/2076)) - ([ca337f6](https://github.com/torrentpier/torrentpier/commit/ca337f6143d0f751b7d86f34f4c005f2654beb2a))
+- Some minor improvements ([#2068](https://github.com/torrentpier/torrentpier/pull/2068)) - ([b793a6e](https://github.com/torrentpier/torrentpier/commit/b793a6e13e91baac00c0cb8661d17c5e60d3f3bb))
+- Removed deploy pipeline ([#2047](https://github.com/torrentpier/torrentpier/pull/2047)) - ([144aa05](https://github.com/torrentpier/torrentpier/commit/144aa0558d11062c102224c5fd94c1ab8f994da9))
+
+### ◀️ Revert
+
+- Demo mode: Save user language in cookies ([#2128](https://github.com/torrentpier/torrentpier/pull/2128)) - ([a5ad7ba](https://github.com/torrentpier/torrentpier/commit/a5ad7bad09853f7700c450c451a6c34a880a1b25))
+- "refactor: Moved `Select` class into `Legacy\Common` ([#1846](https://github.com/torrentpier/torrentpier/pull/1846))" - ([d2f5971](https://github.com/torrentpier/torrentpier/commit/d2f5971d37a2e8ec01629108f7b40b9d2c800d5d))
+
+
 ## [v2.8.3](https://github.com/torrentpier/torrentpier/compare/v2.8.2..v2.8.3) (2025-07-03)
 
 ### 🚀 Features
