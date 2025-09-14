@@ -81,7 +81,7 @@ class Poll
 
         DB()->table(BB_TOPICS)
             ->where('topic_id', $topic_id)
-            ->update(['topic_vote' => 1]);
+            ->update(['topic_vote' => POLL_STARTED]);
     }
 
     /**
@@ -93,7 +93,7 @@ class Poll
     {
         DB()->table(BB_TOPICS)
             ->where('topic_id', $topic_id)
-            ->update(['topic_vote' => 0]);
+            ->update(['topic_vote' => POLL_DELETED]);
         $this->delete_votes_data($topic_id);
     }
 
@@ -172,6 +172,6 @@ class Poll
      */
     public static function pollIsActive(array $t_data): bool
     {
-        return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - config()->get('poll_max_days') * 86400);
+        return ($t_data['topic_vote'] == POLL_STARTED && $t_data['topic_time'] > TIMENOW - config()->get('poll_max_days') * 86400);
     }
 }

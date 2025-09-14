@@ -175,7 +175,8 @@ define('FEMALE', 2);
 define('NOGENDER', 0);
 
 // Poll
-# 1 - обычный опрос
+define('POLL_DELETED', 0);
+define('POLL_STARTED', 1);
 define('POLL_FINISHED', 2);
 
 // Group avatars

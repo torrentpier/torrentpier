@@ -15,7 +15,7 @@ namespace TorrentPier\Legacy;
  */
 class LogAction
 {
-    public $log_type = [
+    public array $log_type = [
         'mod_topic_delete' => 1,
         'mod_topic_move' => 2,
         'mod_topic_lock' => 3,
@@ -35,16 +35,29 @@ class LogAction
         'mod_topic_tor_unregister' => 17,
         'mod_topic_tor_register' => 18,
         'mod_topic_tor_delete' => 19,
+        'mod_topic_poll_started' => 20,
+        'mod_topic_poll_finished' => 21,
+        'mod_topic_poll_deleted' => 22,
+        'mod_topic_poll_added' => 23,
+        'mod_topic_poll_edited' => 24
     ];
-    public $log_type_select = [];
-    public $log_disabled = false;
+
+    /**
+     * @var array
+     */
+    public array $log_type_select = [];
+
+    /**
+     * @var bool
+     */
+    public bool $log_disabled = false;
 
     /**
      * Init
      *
      * @return void
      */
-    public function init()
+    public function init(): void
     {
         global $lang;
 
@@ -58,8 +71,10 @@ class LogAction
      *
      * @param string $type_name
      * @param array $args
+     *
+     * @return void
      */
-    public function mod(string $type_name, array $args = [])
+    public function mod(string $type_name, array $args = []): void
     {
         global $userdata;
 
@@ -109,8 +124,10 @@ class LogAction
      *
      * @param string $type_name
      * @param array $args
+     *
+     * @return void
      */
-    public function admin(string $type_name, array $args = [])
+    public function admin(string $type_name, array $args = []): void
     {
         $this->mod($type_name, $args);
     }
