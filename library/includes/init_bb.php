@@ -84,15 +84,13 @@ define('COOKIE_MAX_TRACKS', 90);
  */
 function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false): bool
 {
-    global $bb_cfg;
-
     return setcookie($name, $val, [
         'expires' => $lifetime,
-        'path' => $bb_cfg['script_path'],
-        'domain' => $bb_cfg['cookie_domain'],
-        'secure' => $bb_cfg['cookie_secure'],
+        'path' => config()->get('script_path'),
+        'domain' => config()->get('cookie_domain'),
+        'secure' => config()->get('cookie_secure'),
         'httponly' => $httponly,
-        'samesite' => $bb_cfg['cookie_same_site'],
+        'samesite' => config()->get('cookie_same_site'),
     ]);
 }
 

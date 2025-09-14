@@ -645,13 +645,13 @@ class Torrent
         $output = Bencode::encode($tor);
 
         $real_filename = clean_filename(basename($attachment['real_filename']));
-        if ($bb_cfg['tracker']['use_real_filename']) {
+        if (config()->get('tracker.use_real_filename')) {
             $dl_fname = $real_filename;
         } else {
-            if ($bb_cfg['tracker']['use_old_torrent_name_format']) {
-                $dl_fname = '[' . $bb_cfg['server_name'] . '].t' . $topic_id . '.' . TORRENT_EXT;
+            if (config()->get('tracker.use_old_torrent_name_format')) {
+                $dl_fname = '[' . config()->get('server_name') . '].t' . $topic_id . '.' . TORRENT_EXT;
             } else {
-                $dl_fname = html_ent_decode($topic_title) . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
+                $dl_fname = html_ent_decode($topic_title) . ' [' . config()->get('server_name') . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
             }
         }
 
