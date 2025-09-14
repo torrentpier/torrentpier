@@ -114,7 +114,7 @@ class Language
         }
 
         // Merge with source language as fallback
-        $this->userLanguage = array_merge($this->sourceLanguage, $this->userLanguage);
+        $this->userLanguage = array_deep_merge($this->sourceLanguage, $this->userLanguage);
     }
 
     /**
