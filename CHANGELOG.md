@@ -2,6 +2,21 @@
 
 # 📖 Change Log
 
+## [v2.8.4.1](https://github.com/torrentpier/torrentpier/compare/v2.8.4..v2.8.4.1) (2025-09-14)
+
+### 🚀 Features
+
+- *(log action)* Show poll (create, finish, edit, delete) actions ([#2132](https://github.com/torrentpier/torrentpier/pull/2132)) - ([8f970c1](https://github.com/torrentpier/torrentpier/commit/8f970c119307161c2ec6d619630827dac26fecc2))
+
+### 🐛 Bug Fixes
+
+- `Undefined variable $bb_cfg` & use new syntax for config variables ([#2134](https://github.com/torrentpier/torrentpier/pull/2134)) - ([eddc773](https://github.com/torrentpier/torrentpier/commit/eddc7734d1f02c55965a45973dbdeb7112beeaf2))
+
+### ⚙️ Miscellaneous
+
+- Hide `ratio_url_help` when ratio disabled ([#2133](https://github.com/torrentpier/torrentpier/pull/2133)) - ([9c038b4](https://github.com/torrentpier/torrentpier/commit/9c038b49704a8103c815b39bf0e15df1abe75a62))
+
+
 ## [v2.8.4](https://github.com/torrentpier/torrentpier/compare/v2.8.3..v2.8.4) (2025-09-14)
 
 ### 🚀 Features
