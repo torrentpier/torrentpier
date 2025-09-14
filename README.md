@@ -80,7 +80,7 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
    ```
 2. Download the latest version of TorrentPier
    ```shell
-   git clone --branch v2.4 --depth 1 https://github.com/torrentpier/torrentpier.git .
+   git clone --branch master --depth 1 https://github.com/torrentpier/torrentpier.git .
    ```
 3. After completing, execute the command below and follow the instructions
    ```shell
@@ -97,7 +97,7 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
    ```
 3. Download the latest version of TorrentPier
    ```shell
-   git clone --branch v2.4 --depth 1 https://github.com/torrentpier/torrentpier.git .
+   git clone --branch master --depth 1 https://github.com/torrentpier/torrentpier.git .
    ```
 4. After, run this command in the project directory to install Composer dependencies
    ```shell
@@ -126,7 +126,7 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
    ```
 3. Download the latest version of TorrentPier
    ```shell
-   git clone --branch v2.4 --depth 1 https://github.com/torrentpier/torrentpier.git .
+   git clone --branch master --depth 1 https://github.com/torrentpier/torrentpier.git .
    ```
 4. Configure environment variables in `.env`. Use the template below and adjust values according to your environment:
    ```env
