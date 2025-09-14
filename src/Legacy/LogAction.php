@@ -11,11 +11,18 @@ namespace TorrentPier\Legacy;
 
 /**
  * Class LogAction
+ * Handles logging of moderator and administrator actions.
+ *
  * @package TorrentPier\Legacy
  */
 class LogAction
 {
-    public $log_type = [
+    /**
+     * List of available log types (action name => ID).
+     *
+     * @var array<string,int>
+     */
+    public array $log_type = [
         'mod_topic_delete' => 1,
         'mod_topic_move' => 2,
         'mod_topic_lock' => 3,
@@ -35,16 +42,33 @@ class LogAction
         'mod_topic_tor_unregister' => 17,
         'mod_topic_tor_register' => 18,
         'mod_topic_tor_delete' => 19,
+        'mod_topic_poll_started' => 20,
+        'mod_topic_poll_finished' => 21,
+        'mod_topic_poll_deleted' => 22,
+        'mod_topic_poll_added' => 23,
+        'mod_topic_poll_edited' => 24
     ];
-    public $log_type_select = [];
-    public $log_disabled = false;
 
     /**
-     * Init
+     * Log types prepared for select lists (description => ID).
+     *
+     * @var array<string,int>
+     */
+    public array $log_type_select = [];
+
+    /**
+     * Flag to disable logging.
+     *
+     * @var bool
+     */
+    public bool $log_disabled = false;
+
+    /**
+     * Initializes the log type select array using language definitions.
      *
      * @return void
      */
-    public function init()
+    public function init(): void
     {
         global $lang;
 
@@ -54,12 +78,21 @@ class LogAction
     }
 
     /**
-     * Moderator
+     * Logs moderator actions.
      *
-     * @param string $type_name
-     * @param array $args
+     * @param string $type_name Action type key (from $log_type).
+     * @param array $args Action parameters:
+     *                          - forum_id
+     *                          - forum_id_new
+     *                          - topic_id
+     *                          - topic_id_new
+     *                          - topic_title
+     *                          - topic_title_new
+     *                          - log_msg
+     *
+     * @return void
      */
-    public function mod(string $type_name, array $args = [])
+    public function mod(string $type_name, array $args = []): void
     {
         global $userdata;
 
@@ -105,12 +138,14 @@ class LogAction
     }
 
     /**
-     * Admin
+     * Logs administrator actions (wrapper for mod()).
      *
-     * @param string $type_name
-     * @param array $args
+     * @param string $type_name Action type key (from $log_type).
+     * @param array $args Action parameters (same as mod()).
+     *
+     * @return void
      */
-    public function admin(string $type_name, array $args = [])
+    public function admin(string $type_name, array $args = []): void
     {
         $this->mod($type_name, $args);
     }
