@@ -269,17 +269,11 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 		<input type="hidden" name="' . POST_USERS_URL . '" value="' . $user_id . '" />
 	';
 
-    $s_user_type = ($this_userdata['user_level'] == ADMIN) ? '
-		<select name="userlevel">
-			<option value="admin" selected>' . $lang['AUTH_ADMIN'] . '</option>
-			<option value="user">' . $lang['AUTH_USER'] . '</option>
-		</select>
-	' : '
-		<select name="userlevel">
-			<option value="admin">' . $lang['AUTH_ADMIN'] . '</option>
-			<option value="user" selected>' . $lang['AUTH_USER'] . '</option>
-		</select>
-	';
+    $s_user_type = '
+        <select name="userlevel">
+            <option value="admin"' . ($this_userdata['user_level'] == ADMIN ? ' selected' : '') . '>' . $lang['AUTH_ADMIN'] . '</option>
+            <option value="user"' . ($this_userdata['user_level'] != ADMIN ? ' selected' : '') . '>' . $lang['AUTH_USER'] . '</option>
+        </select>';
 
     $template->assign_block_vars('switch_user_auth', []);
 
