@@ -147,10 +147,12 @@ ajax.callback.group_membership = function(data) {
                 break;
             case 'get_traf_stats':
                 $('#traf-stats-tbl').html(data.html);
-                $('#bt_user_ratio').html(data.user_ratio);
-                $('#traf-stats-span').hide();
                 $('#traf-stats-tbl').show();
-                $('#bt_user_ratio').show();
+                if (data.user_ratio) {
+                    $('#bt_user_ratio').html(data.user_ratio);
+                    $('#bt_user_ratio').show();
+                }
+                $('#traf-stats-span').hide();
                 break;
         }
     };
@@ -423,6 +425,18 @@ ajax.callback.group_membership = function(data) {
 				( {L_UPLOADED} <b class="seedmed">{UP_TOTAL}</b> + {L_RELEASED} <b class="seedmed">{RELEASED}</b> + {L_BONUS} <b class="seedmed">{UP_BONUS}</b> ) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
 				</td>
 			</tr>
+            <!-- ELSE-->
+            <!-- IF SHOW_PASSKEY -->
+            <tr>
+                <th>{L_BT_PASSKEY}:</th>
+                <td>
+                    [ <span id="passkey-btn"><a class="med" href="#" onclick="$('#passkey-gen').show(); $('#passkey-btn').hide(); return false;">{L_BT_PASSKEY_VIEW}</a></span>
+                    <span id="passkey-gen" class="med" style="display: none;">
+						<b id="passkey" class="med bold"><!-- IF AUTH_KEY -->{AUTH_KEY}<!-- ELSE -->{L_NOSELECT}<!-- ENDIF --></b>&nbsp;|&nbsp;<a href="#" onclick="ajax.exec({ action: 'passkey', mode: 'generate', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
+					</span> ]
+                </td>
+            </tr>
+            <!-- ENDIF -->
 			<!-- ENDIF -->
 
 			<!-- IF LOCATION -->

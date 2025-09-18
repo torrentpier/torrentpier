@@ -149,10 +149,6 @@ switch ($mode) {
         break;
 
     case 'get_traf_stats':
-        if (!RATIO_ENABLED) {
-            $this->ajax_die($lang['MODULE_OFF']);
-        }
-
         if (IS_GUEST) {
             $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
         }
@@ -163,7 +159,6 @@ switch ($mode) {
 
         $speed_up = ($btu['speed_up']) ? humn_size($btu['speed_up']) . '/s' : '0 KB/s';
         $speed_down = ($btu['speed_down']) ? humn_size($btu['speed_down']) . '/s' : '0 KB/s';
-        $user_ratio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">' . get_bt_ratio($btu) . '</b>' : $lang['IT_WILL_BE_DOWN'] . ' <b>' . humn_size(MIN_DL_FOR_RATIO) . '</b>';
 
         $html = '
 			<tr class="row3">
@@ -189,10 +184,13 @@ switch ($mode) {
         $html .= config()->get('seed_bonus_enabled') ? '<td colspan="1"></td>' : '';
         $html .= '</tr>';
 
-        $this->response['user_ratio'] = '
-			<th><a href="' . config()->get('ratio_url_help') . '" class="bold">' . $lang['USER_RATIO'] . '</a>:</th>
-			<td>' . $user_ratio . '</td>
-		';
+        if (RATIO_ENABLED) {
+            $user_ratio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">' . get_bt_ratio($btu) . '</b>' : $lang['IT_WILL_BE_DOWN'] . ' <b>' . humn_size(MIN_DL_FOR_RATIO) . '</b>';
+            $this->response['user_ratio'] = '
+			    <th><a href="' . config()->get('ratio_url_help') . '" class="bold">' . $lang['USER_RATIO'] . '</a>:</th>
+			    <td>' . $user_ratio . '</td>
+		    ';
+        }
         break;
 
     default:
