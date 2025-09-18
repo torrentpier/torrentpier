@@ -253,7 +253,7 @@ if (!empty(config()->get('tor_cannot_edit')) && $post_info['allow_reg_tracker'] 
 // Notify & Allow robots indexing
 $robots_indexing = $post_info['topic_allow_robots'] ?? true;
 if ($submit || $refresh) {
-    if (IS_AM) {
+    if ($is_auth['auth_mod']) {
         if ($post_info['auth_read'] == AUTH_ALL) {
             $robots_indexing = !empty($_POST['robots']);
         } else {
@@ -509,7 +509,7 @@ if (!IS_GUEST) {
 $topic_type_toggle = '';
 if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
     // Allow robots indexing
-    if (IS_AM && $post_info['auth_read'] == AUTH_ALL) {
+    if ($is_auth['auth_mod'] && $post_info['auth_read'] == AUTH_ALL) {
         $template->assign_var('SHOW_ROBOTS_CHECKBOX');
     }
 
