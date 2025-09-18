@@ -127,7 +127,7 @@ class Ajax
                 $this->check_admin_session();
                 break;
             default:
-                trigger_error("invalid auth type for $action", E_USER_ERROR);
+                throw new \RuntimeException("invalid auth type for $action");
         }
 
         // Run action

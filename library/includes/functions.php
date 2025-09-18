@@ -48,7 +48,7 @@ function get_tracks($type)
             $c_name = COOKIE_PM;
             break;
         default:
-            trigger_error(__FUNCTION__ . ": invalid type '$type'", E_USER_ERROR);
+            throw new \RuntimeException(__FUNCTION__ . ": invalid type '$type'");
     }
     $tracks = !empty($_COOKIE[$c_name]) ? json_decode($_COOKIE[$c_name], true) : false;
     return $tracks ?: [];
@@ -215,7 +215,7 @@ function bf_bit2dec($bf_array_name, $key)
 {
     global $bf;
     if (!isset($bf[$bf_array_name][$key])) {
-        trigger_error(__FUNCTION__ . ": bitfield '$key' not found", E_USER_ERROR);
+        throw new \RuntimeException(__FUNCTION__ . ": bitfield '$key' not found");
     }
     return (1 << $bf[$bf_array_name][$key]);
 }
@@ -282,7 +282,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     }
 
     if (empty($auth_fields)) {
-        trigger_error(__FUNCTION__ . '(): empty $auth_fields', E_USER_ERROR);
+        throw new \RuntimeException(__FUNCTION__ . '(): empty $auth_fields');
     }
 
     //
@@ -307,7 +307,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     }
 
     if (empty($f_access)) {
-        trigger_error(__FUNCTION__ . '(): empty $f_access', E_USER_ERROR);
+        throw new \RuntimeException(__FUNCTION__ . '(): empty $f_access');
     }
 
     //
@@ -1110,7 +1110,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
                 break;
 
             default:
-                trigger_error(__FUNCTION__ . ": invalid mode '$mode'", E_USER_ERROR);
+                throw new \RuntimeException(__FUNCTION__ . ": invalid mode '$mode'");
         }
         $cat_title = $forums['c'][$f['cat_id']]['cat_title'];
         $f_name = ($f['forum_parent']) ? ' |- ' : '';
@@ -1408,7 +1408,7 @@ function bb_die($msg_text, $status_code = null)
 
     // Check
     if (defined('HAS_DIED')) {
-        trigger_error(__FUNCTION__ . ' was called multiple times', E_USER_ERROR);
+        throw new \RuntimeException(__FUNCTION__ . ' was called multiple times');
     }
     define('HAS_DIED', 1);
     define('DISABLE_CACHING_OUTPUT', true);
@@ -1487,7 +1487,7 @@ function meta_refresh($url, $time = 5)
 function redirect($url)
 {
     if (headers_sent($filename, $linenum)) {
-        trigger_error("Headers already sent in $filename($linenum)", E_USER_ERROR);
+        throw new \RuntimeException(__FUNCTION__ . ": Headers already sent in $filename($linenum)");
     }
 
     if (str_contains(urldecode($url), "\n") || str_contains(urldecode($url), "\r") || str_contains(urldecode($url), ';url')) {

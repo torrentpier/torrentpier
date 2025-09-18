@@ -474,7 +474,7 @@ function sys(string $param)
         case 'mem_peak':
             return memory_get_peak_usage();
         default:
-            trigger_error("invalid param: $param", E_USER_ERROR);
+            throw new \RuntimeException(__FUNCTION__ . ": invalid param '$param'");
     }
 }
 

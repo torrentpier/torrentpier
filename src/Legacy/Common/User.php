@@ -272,7 +272,7 @@ class User
                 break;
             }
             if ($i == $max_try) {
-                trigger_error('Error creating new session', E_USER_ERROR);
+                throw new \RuntimeException('Error creating new session');
             }
         }
         // Update last visit for logged in users
@@ -398,7 +398,7 @@ class User
 
             if ($userdata = DB()->fetch_row($sql)) {
                 if (!$userdata['username'] || !$userdata['user_password'] || ($userdata['user_id'] == GUEST_UID) || !$userdata['user_active']) {
-                    trigger_error('invalid userdata', E_USER_ERROR);
+                    throw new \RuntimeException('invalid userdata');
                 }
 
                 // Check password
@@ -431,7 +431,7 @@ class User
                     return $new_session_userdata;
                 }
 
-                trigger_error("Could not start session : login", E_USER_ERROR);
+                throw new \RuntimeException("Could not start session : login");
             }
         }
 

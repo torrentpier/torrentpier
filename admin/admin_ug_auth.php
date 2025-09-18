@@ -71,7 +71,7 @@ if ($submit && $mode == 'user') {
     }
 
     if (!$group_id || !$user_id || null === $this_user_level) {
-        trigger_error('data missing', E_USER_ERROR);
+        throw new \RuntimeException('data missing');
     }
 
     // Make user an admin (if already user)
