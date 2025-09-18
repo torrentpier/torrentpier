@@ -217,7 +217,7 @@ class Upload
                 $file_path = get_attach_path($params['topic_id']);
                 break;
             default:
-                trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
+                throw new \RuntimeException("Invalid upload mode: $mode");
         }
 
         return $this->_move($file_path);

@@ -150,7 +150,7 @@ switch ($mode) {
         break;
 
     default:
-        trigger_error("invalid mode: $mode", E_USER_ERROR);
+        throw new \RuntimeException("invalid mode: $mode");
 }
 
 // Captcha
@@ -575,7 +575,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  default
          */
         default:
-            trigger_error("invalid profile field: $field", E_USER_ERROR);
+            throw new \RuntimeException("invalid profile field: $field");
     }
 }
 
