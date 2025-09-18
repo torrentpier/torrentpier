@@ -2,6 +2,24 @@
 
 # 📖 Change Log
 
+## [v2.8.5](https://github.com/torrentpier/torrentpier/compare/v2.8.4.1..v2.8.5) (2025-09-18)
+
+### 🐛 Bug Fixes
+
+- *(PHP 8.4)* Replace `trigger_error` with `RuntimeException` ([#2142](https://github.com/torrentpier/torrentpier/pull/2142)) - ([4112eb9](https://github.com/torrentpier/torrentpier/commit/4112eb99c0b65915c70bdb8e94a12f5e4a3baf0d))
+- *(posting.php)* Use `auth_mod` instead of `IS_AM` when checking robots indexing ([#2140](https://github.com/torrentpier/torrentpier/pull/2140)) - ([4f91777](https://github.com/torrentpier/torrentpier/commit/4f91777a9b625a16bfd46e93a04d4c260462a22f))
+- Use `development` environment instead of `local` ([#2143](https://github.com/torrentpier/torrentpier/pull/2143)) - ([9b6ba59](https://github.com/torrentpier/torrentpier/commit/9b6ba595a412fe5c0b3ea37c7ff87587c13b4e77))
+- Passkey not showing when user ratio disabled ([#2141](https://github.com/torrentpier/torrentpier/pull/2141)) - ([9b5aee5](https://github.com/torrentpier/torrentpier/commit/9b5aee59cd49347ff1fda4b6d396ce02656f1037))
+
+### 🈳 New translations
+
+- New Crowdin updates ([#2135](https://github.com/torrentpier/torrentpier/pull/2135)) - ([7a23dee](https://github.com/torrentpier/torrentpier/commit/7a23dee141a8ef565bfbee384b71064be9c76279))
+
+### 🚜 Refactor
+
+- *(admin_ug_auth.php)* Simplify user level select rendering ([#2139](https://github.com/torrentpier/torrentpier/pull/2139)) - ([da4cf1a](https://github.com/torrentpier/torrentpier/commit/da4cf1ae62649d5da75fea3313aa2c2cea908614))
+
+
 ## [v2.8.4.1](https://github.com/torrentpier/torrentpier/compare/v2.8.4..v2.8.4.1) (2025-09-14)
 
 ### 🚀 Features
