@@ -875,7 +875,7 @@ class Database
 
         // Define these variables early so they're available throughout the method
         $is_admin = defined('IS_ADMIN') && IS_ADMIN;
-        $is_dev_mode = (defined('APP_ENV') && APP_ENV === 'local') || (defined('DBG_USER') && DBG_USER);
+        $is_dev_mode = (defined('APP_ENV') && APP_ENV === 'development') || (defined('DBG_USER') && DBG_USER);
 
         // Build a meaningful error message
         if (!empty($error['message'])) {
@@ -940,7 +940,7 @@ class Database
 
                 // Log this for investigation
                 if (function_exists('bb_log')) {
-                    bb_log("Unknown Database Error Debug:\n" . implode("\n", $debug_info), 'unknown_db_errors');
+                    bb_log("Unknown Database Error Debug:\n" . implode(LOG_LF, $debug_info) . LOG_LF . str_repeat('=', 30) . LOG_LF, 'unknown_db_errors');
                 }
             } else {
                 // For regular users: generic message only + contact admin hint
@@ -948,7 +948,7 @@ class Database
 
                 // Still log basic information for debugging
                 if (function_exists('bb_log')) {
-                    bb_log("Database Error (User-facing): $error_msg\nRequest: " . ($_SERVER['REQUEST_URI'] ?? 'CLI'), 'user_db_errors');
+                    bb_log("Database Error (User-facing): $error_msg\nRequest: " . ($_SERVER['REQUEST_URI'] ?? 'CLI') . LOG_LF . str_repeat('=', 30) . LOG_LF, 'user_db_errors');
                 }
             }
         }

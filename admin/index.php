@@ -281,7 +281,7 @@ function getDiskSpaceInfo(string $path = BB_ROOT): array
         ];
 
     } catch (Exception $e) {
-        bb_log("[getDiskSpaceInfo] " . $e->getMessage() . LOG_LF);
+        bb_log(__FUNCTION__ . ": " . $e->getMessage() . LOG_LF);
         return $default_values;
     }
 }

@@ -349,14 +349,14 @@ class DatabaseDebugger
         }
 
         // Build comprehensive log message
-        $log_message = $error_msg . "\n" . implode("\n", $error_details);
+        $log_message = $error_msg . LOG_LF . implode(LOG_LF, $error_details);
 
         // Log to both error_log and TorrentPier's logging system
         error_log($error_msg);
 
         // Use TorrentPier's bb_log for better file management and organization
         if (function_exists('bb_log')) {
-            bb_log($log_message, 'database_errors');
+            bb_log($log_message . LOG_LF . str_repeat('=', 30) . LOG_LF, 'database_errors');
         }
 
         // Also log to PHP error log for immediate access
