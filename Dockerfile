@@ -24,5 +24,6 @@ COPY . /app/public
 RUN php _cleanup.php && rm _cleanup.php
 RUN composer install --no-dev --optimize-autoloader && chmod +x ./install/docker/docker-entrypoint.sh && \
     cp ./install/docker/php.ini /usr/local/etc/php/php.ini
+RUN php vendor/bin/phinx migrate --configuration=phinx.php
 
 ENTRYPOINT "/app/public/install/docker/docker-entrypoint.sh"
