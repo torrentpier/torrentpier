@@ -732,7 +732,7 @@ class Torrent
      * @param int $id
      * @param string $mode
      *
-     * @return bool
+     * @return bool|array
      */
     private static function get_registered_torrents($id, $mode)
     {

@@ -130,7 +130,7 @@ $template->assign_vars([
     'SHOW_PASSKEY' => (IS_ADMIN || $profile_user_id),
     'SHOW_ROLE' => (IS_AM || $profile_user_id || $profiledata['user_active']),
     'GROUP_MEMBERSHIP' => false,
-    'TRAF_STATS' => !(IS_AM || $profile_user_id),
+    'TRAF_STATS' => !(IS_AM || $profile_user_id) && !IS_GUEST,
 ]);
 
 if (IS_AM) {
