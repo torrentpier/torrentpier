@@ -34,7 +34,6 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
-      - ./install/sql/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql:ro
       - ./install/docker/my.cnf:/etc/mysql/conf.d/my.cnf:ro
 
   # redis:

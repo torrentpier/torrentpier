@@ -40,7 +40,7 @@ if (!is_writable($configFile)) {
 }
 
 // Ask for version
-fwrite(STDOUT, 'Enter version number (e.g, v2.4.0): ');
+fwrite(STDOUT, 'Enter version number (e.g, v2.8.3): ');
 $version = trim(fgets(STDIN));
 
 if (empty($version)) {

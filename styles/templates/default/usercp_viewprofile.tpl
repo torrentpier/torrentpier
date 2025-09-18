@@ -425,7 +425,7 @@ ajax.callback.group_membership = function(data) {
 				( {L_UPLOADED} <b class="seedmed">{UP_TOTAL}</b> + {L_RELEASED} <b class="seedmed">{RELEASED}</b> + {L_BONUS} <b class="seedmed">{UP_BONUS}</b> ) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
 				</td>
 			</tr>
-            <!-- ELSE-->
+            <!-- ELSE -->
             <!-- IF SHOW_PASSKEY -->
             <tr>
                 <th>{L_BT_PASSKEY}:</th>
