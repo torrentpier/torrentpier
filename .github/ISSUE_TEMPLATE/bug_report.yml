@@ -13,7 +13,7 @@ body:
     attributes:
       label: TorrentPier Version
       description: TorrentPier version your using?
-      placeholder: 2.4.0
+      placeholder: 2.8.3
     validations:
       required: true
   - type: input
