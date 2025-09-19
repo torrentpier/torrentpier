@@ -22,7 +22,7 @@ RUN apk add --no-cache dcron && \
 WORKDIR /app/public
 COPY . /app/public
 RUN php _cleanup.php && rm _cleanup.php
-RUN composer install --no-dev --optimize-autoloader && chmod +x ./install/docker/docker-entrypoint.sh && \
+RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader && chmod +x ./install/docker/docker-entrypoint.sh && \
     cp ./install/docker/php.ini /usr/local/etc/php/php.ini
 RUN php vendor/bin/phinx migrate --configuration=phinx.php
 

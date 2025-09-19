@@ -11,18 +11,18 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout code 🗳
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup PHP 🔩
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
 
-      - name: Install Composer dependencies 🪚
-        run: composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
+      - name: Install Composer dependencies
+        run: composer install --no-dev --no-interaction --no-ansi --prefer-dist --optimize-autoloader
 
-      - name: Get commit hash 🔗
+      - name: Get commit hash
         id: get-commit-hash
         run: |
           COMMIT_HASH=$(git rev-parse --short HEAD)
@@ -31,14 +31,14 @@ jobs:
       - name: Cleanup
         run: php _cleanup.php && rm _cleanup.php
 
-      - name: Create archive 🗞
+      - name: Create archive
         id: create-zip
         run: |
           ZIP_NAME="torrentpier-${{ steps.get-commit-hash.outputs.COMMIT_HASH }}.zip"
           zip -r "$ZIP_NAME" . -x ".git/*"
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
 
-      - name: Upload Archive 📤
+      - name: Upload Archive
         uses: actions/upload-artifact@v4
         with:
           name: TorrentPier-master

@@ -1,4 +1,4 @@
-name: Changelog generation
+name: Changelog generation (schedule)
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   changelog:
-    name: Changelog generation
+    name: Generate changelog 📖
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
