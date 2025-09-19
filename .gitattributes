@@ -1,0 +1,13 @@
+* text=auto eol=lf
+
+*.css diff=css
+*.tpl diff=html
+*.md diff=markdown
+*.php diff=php
+
+/.github export-ignore
+CHANGELOG.md export-ignore
+CLAUDE.md export-ignore
+LICENSE export-ignore
+README.md export-ignore
+UPGRADE_GUIDE.md

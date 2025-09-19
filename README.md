@@ -14,7 +14,6 @@
   <a href="https://packagist.org/packages/torrentpier/torrentpier"><img src="https://img.shields.io/packagist/v/torrentpier/torrentpier" alt="Version"></a>
   <a href="https://github.com/torrentpier/torrentpier/releases"><img src="https://img.shields.io/github/release-date/torrentpier/torrentpier" alt="Last release"></a>
   <img src="https://img.shields.io/github/repo-size/torrentpier/torrentpier" alt="Size">
-  <a href="https://github.com/SamKirkland/FTP-Deploy-Action"><img src="https://img.shields.io/badge/Deployed to TorrentPier Demo with-FTP DEPLOY ACTION-%3CCOLOR%3E?color=2b9348" alt="Deployed to TorrentPier Demo with FTP Deploy Action"></a>
 </p>
 
 ## 🐂 About TorrentPier
@@ -178,7 +177,7 @@ For detailed testing documentation, see [tests/README.md](tests/README.md).
 
 ## 💚 Contributing / Contributors
 
-Please read our [contributing policy](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md) for details, and the process for
+Please read our [contributing policy](.github/CONTRIBUTING.md) and [code of conduct](.github/CODE_OF_CONDUCT.md) for details, and the process for
 submitting pull requests to us. But we are always ready to review your pull-request for compliance with
 these requirements. Just send it!
 
