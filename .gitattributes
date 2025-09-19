@@ -10,4 +10,4 @@ CHANGELOG.md export-ignore
 CLAUDE.md export-ignore
 LICENSE export-ignore
 README.md export-ignore
-UPGRADE_GUIDE.md
+UPGRADE_GUIDE.md export-ignore
