@@ -147,6 +147,9 @@ define('MOD', 2);
 define('GROUP_MEMBER', 20);
 define('CP_HOLDER', 25);
 define('EXCLUDED_USERS', implode(',', [GUEST_UID, BOT_UID]));
+if (!defined('EXCLUDED_USERS_CSV')) {
+    define('EXCLUDED_USERS_CSV', EXCLUDED_USERS);
+}
 
 // Ratio limits
 define('TR_RATING_LIMITS', true);        // ON/OFF
