@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Találd meg az összes kimenet a csoport';
 $lang['NOT_A_RELEASE_GROUP'] = 'Ez a csoport nem egy release csoport';
 
 // Search
-$lang['SEARCH_OFF'] = 'Keresés átmenetileg le van tiltva';
 $lang['SEARCH_ERROR'] = 'Abban a pillanatban, a kereső nem available<br /><br />Try megismétlem a kérést, miután több másodperc';
 $lang['SEARCH_HELP_URL'] = 'Keresés Segítség';
 $lang['SEARCH_QUERY'] = 'Keresési Lekérdezés';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Vissza szerkesztése';
 $lang['PROFILE_RETURN'] = 'Menj a profil';
 
 $lang['WARNING'] = 'Figyelmeztetés';
-$lang['INDEXER'] = 'Újraindexelési keresés';
 
 $lang['FORUM_STYLE'] = 'Fórum-stílus';
 
