@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Знайсці ўсе рэлізы групы';
 $lang['NOT_A_RELEASE_GROUP'] = 'Гэтая група не з\'яўляецца рэліз-групу';
 
 // Search
-$lang['SEARCH_OFF'] = 'Пошук часова адключаны';
 $lang['SEARCH_ERROR'] = 'На дадзены момант пошукавая сістэма не available<br /><br />Try паўтарыць запыт праз некалькі секунд';
 $lang['SEARCH_HELP_URL'] = 'Пошук';
 $lang['SEARCH_QUERY'] = 'Пошукавы Запыт';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Вярнуцца да рэдагавання';
 $lang['PROFILE_RETURN'] = 'Перайсці ў профіль';
 
 $lang['WARNING'] = 'Папярэджанне';
-$lang['INDEXER'] = 'Пошук пераіндэксацыя';
 
 $lang['FORUM_STYLE'] = 'Стыль форуму';
 
