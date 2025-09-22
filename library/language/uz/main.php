@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'guruhning barcha versiyalar topish';
 $lang['NOT_A_RELEASE_GROUP'] = 'Bu guruh bir-reliz guruhi emas';
 
 // Search
-$lang['SEARCH_OFF'] = 'Qidiruv vaqtincha o\'chirib qo\'yilgan';
 $lang['SEARCH_ERROR'] = 'Ayni paytda, qidiruvi, bir necha soniyadan keyin so\'rov takrorlash uchun available<br /><br />Try emas';
 $lang['SEARCH_HELP_URL'] = 'Qidiruv Yordam';
 $lang['SEARCH_QUERY'] = 'Qidiruv so\'rovlar';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'tahrir qaytish';
 $lang['PROFILE_RETURN'] = 'profili o\'tish';
 
 $lang['WARNING'] = 'ogohlantirish';
-$lang['INDEXER'] = 'reindex qidiruv';
 
 $lang['FORUM_STYLE'] = 'Forum uslubi';
 
