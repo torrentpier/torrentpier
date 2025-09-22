@@ -47,24 +47,6 @@ switch ($mode) {
 
         $this->response['template_cache_html'] = '<span class="seed bold">' . $lang['ALL_TEMPLATE_CLEARED'] . '</span>';
         break;
-    case 'indexer':
-        exec("indexer --config " . config()->get('sphinx_config_path') . " --all --rotate", $result);
-
-        if (!is_file(config()->get('sphinx_config_path') . ".log")) {
-            file_put_contents(config()->get('sphinx_config_path') . ".log", "##############################" . date("H:i:s", TIMENOW) . "##############################\r\n\r\n\r\n\r\n", FILE_APPEND);
-        }
-
-        file_put_contents(config()->get('sphinx_config_path') . ".log", "##############################" . date("H:i:s", TIMENOW) . "##############################\r\n", FILE_APPEND);
-
-        foreach ($result as $row) {
-            file_put_contents(config()->get('sphinx_config_path') . ".log", $row . "\r\n", FILE_APPEND);
-        }
-
-        file_put_contents(config()->get('sphinx_config_path') . ".log", "\r\n", FILE_APPEND);
-        file_put_contents(config()->get('sphinx_config_path') . ".log", "\r\n", FILE_APPEND);
-
-        $this->response['indexer_html'] = '<span class="seed bold">' . $lang['INDEXER'] . '</span>';
-        break;
     case 'update_user_level':
         \TorrentPier\Legacy\Group::update_user_level('all');
         $this->response['update_user_level_html'] = '<span class="seed bold">' . $lang['USER_LEVELS_UPDATED'] . '</span>';

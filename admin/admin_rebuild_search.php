@@ -182,7 +182,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     }
 
     // find how much time the last cycle took
-    $last_cycle_time = (int)(TIMENOW - $start_time);
+    $last_cycle_time = TIMENOW - $start_time;
 
     // check if we had any data
     if ($num_rows != 0) {
@@ -190,11 +190,11 @@ if ($mode == 'submit' || $mode == 'refresh') {
             // insert a new session entry
             $args = DB()->build_array('INSERT', array(
                 'end_post_id' => (int)$end_post_id,
-                'end_time' => (int)TIMENOW,
+                'end_time' => TIMENOW,
                 'last_cycle_time' => (int)$last_cycle_time,
                 'session_time' => (int)$last_cycle_time,
                 'session_posts' => (int)$num_rows,
-                'session_cycles' => (int)1,
+                'session_cycles' => 1,
                 'start_post_id' => (int)$start_post_id,
                 'start_time' => (int)$start_time,
                 'search_size' => (int)$search_tables_size,
