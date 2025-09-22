@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Të gjeni të gjitha shkarkimet e grupit';
 $lang['NOT_A_RELEASE_GROUP'] = 'Ky grup nuk është një version i grupit';
 
 // Search
-$lang['SEARCH_OFF'] = 'Kërkimi është me aftësi të kufizuara përkohësisht';
 $lang['SEARCH_ERROR'] = 'Në këtë moment, motor kërkimi nuk është available<br /><br />Try për të përsëritur kërkesën pas disa sekonda';
 $lang['SEARCH_HELP_URL'] = 'Kërko Ndihmë';
 $lang['SEARCH_QUERY'] = 'Search Query';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Të kthehen në përpunim';
 $lang['PROFILE_RETURN'] = 'Shko tek profili';
 
 $lang['WARNING'] = 'Paralajmërim';
-$lang['INDEXER'] = 'Reindex kërko';
 
 $lang['FORUM_STYLE'] = 'Forumi stil';
 
