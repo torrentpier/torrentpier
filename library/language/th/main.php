@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'ค้นหาทุกที่พึ่งถูก
 $lang['NOT_A_RELEASE_GROUP'] = 'กลุ่มนี้ไม่ใช่การปลดปล่อยนกลุ่ม';
 
 // Search
-$lang['SEARCH_OFF'] = 'การค้นหาคือปิดการใช้งานชั่วคราว';
 $lang['SEARCH_ERROR'] = 'ตอนนี้การค้นหาเครื่องยนต์ไม่ใช่ available<br /><br />Try องการที่จะทำซ้ำสิ่งที่ร้องขอมาต้องการหลังจากหลายวินาที';
 $lang['SEARCH_HELP_URL'] = 'การค้นหาช่วย';
 $lang['SEARCH_QUERY'] = 'การค้นหา Query';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'กลับไปที่ทำการแก
 $lang['PROFILE_RETURN'] = 'ไปที่โพรไฟล์';
 
 $lang['WARNING'] = 'คำเตือน';
-$lang['INDEXER'] = 'Reindex การค้นหา';
 
 $lang['FORUM_STYLE'] = 'รูปแบบชุ';
 
