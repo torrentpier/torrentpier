@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Leia kõik pressiteated, kontserni';
 $lang['NOT_A_RELEASE_GROUP'] = 'See rühm ei ole grupi pressiteade';
 
 // Search
-$lang['SEARCH_OFF'] = 'Otsing on ajutiselt keelatud';
 $lang['SEARCH_ERROR'] = 'Hetkel, otsingumootor ei available<br /><br />Try korrata taotluse pärast mitu sekundit';
 $lang['SEARCH_HELP_URL'] = 'Otsi Abi';
 $lang['SEARCH_QUERY'] = 'Otsingupäringu';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Tagasi toimetamine';
 $lang['PROFILE_RETURN'] = 'Mine profiili';
 
 $lang['WARNING'] = 'Hoiatus';
-$lang['INDEXER'] = 'Reindex otsing';
 
 $lang['FORUM_STYLE'] = 'Foorumi stiil';
 
