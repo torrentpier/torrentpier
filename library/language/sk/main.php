@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Nájsť všetky správy skupiny';
 $lang['NOT_A_RELEASE_GROUP'] = 'Táto skupina nie je uvoľnenie skupiny';
 
 // Search
-$lang['SEARCH_OFF'] = 'Vyhľadávanie je dočasne vypnutá';
 $lang['SEARCH_ERROR'] = 'V okamihu, vyhľadávače nie je available<br /><br />Try opakovať žiadosť po niekoľkých sekúnd';
 $lang['SEARCH_HELP_URL'] = 'Nápoveď Vyhľadávania';
 $lang['SEARCH_QUERY'] = 'Vyhľadávací Dopyt';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Návrat na úpravu';
 $lang['PROFILE_RETURN'] = 'Prejdite na požadovaný profil';
 
 $lang['WARNING'] = 'Upozornenie';
-$lang['INDEXER'] = 'Preindexovanie vyhľadávania';
 
 $lang['FORUM_STYLE'] = 'Fórum štýl';
 
