@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Menemukan semua rilis group';
 $lang['NOT_A_RELEASE_GROUP'] = 'Kelompok ini tidak rilis group';
 
 // Search
-$lang['SEARCH_OFF'] = 'Pencarian sementara dinonaktifkan';
 $lang['SEARCH_ERROR'] = 'Pada saat ini, mesin pencari tidak available<br /><br />Try untuk mengulangi permintaan setelah beberapa detik';
 $lang['SEARCH_HELP_URL'] = 'Bantuan Pencarian';
 $lang['SEARCH_QUERY'] = 'Pencarian Query';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Kembali ke editing';
 $lang['PROFILE_RETURN'] = 'Pergi ke profil';
 
 $lang['WARNING'] = 'Peringatan';
-$lang['INDEXER'] = 'Reindex pencarian';
 
 $lang['FORUM_STYLE'] = 'Forum gaya';
 
