@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Atrast visas relīzes par grupu';
 $lang['NOT_A_RELEASE_GROUP'] = 'Šī grupa ir ne presei grupa';
 
 // Search
-$lang['SEARCH_OFF'] = 'Meklēšana ir atspējoti';
 $lang['SEARCH_ERROR'] = 'Brīdī, meklētājprogrammas nav available<br /><br />Try, lai atkārtotu pieprasījumu pēc dažām sekundēm';
 $lang['SEARCH_HELP_URL'] = 'Meklēšanas Palīdzība';
 $lang['SEARCH_QUERY'] = 'Meklēšanas Vaicājums';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Atgriezties pie rediģēšanas';
 $lang['PROFILE_RETURN'] = 'Pārejiet uz profilu';
 
 $lang['WARNING'] = 'Brīdinājums';
-$lang['INDEXER'] = 'Reindex meklēšana';
 
 $lang['FORUM_STYLE'] = 'Foruma stils';
 

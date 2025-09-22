@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Finde alle udgivelser af gruppen';
 $lang['NOT_A_RELEASE_GROUP'] = 'Denne gruppe er ikke en release gruppe';
 
 // Search
-$lang['SEARCH_OFF'] = 'Søgning er midlertidigt deaktiveret';
 $lang['SEARCH_ERROR'] = 'I det øjeblik, den søgemaskine er ikke available<br /><br />Try at gentage anmodningen efter flere sekunder';
 $lang['SEARCH_HELP_URL'] = 'Hjælp Til Søgning';
 $lang['SEARCH_QUERY'] = 'Søgning';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Tilbage til redigering';
 $lang['PROFILE_RETURN'] = 'Gå til profil';
 
 $lang['WARNING'] = 'Advarsel';
-$lang['INDEXER'] = 'Reindex søg';
 
 $lang['FORUM_STYLE'] = 'Forum stil';
 

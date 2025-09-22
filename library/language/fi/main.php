@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Etsi kaikki tiedotteet ryhmä';
 $lang['NOT_A_RELEASE_GROUP'] = 'Tämä ryhmä ei ole release-ryhmä';
 
 // Search
-$lang['SEARCH_OFF'] = 'Haku on väliaikaisesti poissa käytöstä';
 $lang['SEARCH_ERROR'] = 'Tällä hetkellä hakukone ei ole available<br /><br />Try toistaa pyynnön jälkeen muutaman sekunnin';
 $lang['SEARCH_HELP_URL'] = 'Haku Auttaa';
 $lang['SEARCH_QUERY'] = 'Kyselyn';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Palaa editointi';
 $lang['PROFILE_RETURN'] = 'Mene profiili';
 
 $lang['WARNING'] = 'Varoitus';
-$lang['INDEXER'] = 'Reindex haku';
 
 $lang['FORUM_STYLE'] = 'Foorumin tyyli';
 

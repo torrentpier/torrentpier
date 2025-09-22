@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Trova tutte le versioni del gruppo';
 $lang['NOT_A_RELEASE_GROUP'] = 'Questo gruppo non è un gruppo di rilascio';
 
 // Search
-$lang['SEARCH_OFF'] = 'La ricerca è temporaneamente disabilitato';
 $lang['SEARCH_ERROR'] = 'Al momento, il motore di ricerca non è available<br /><br />Try a ripetere la richiesta dopo alcuni secondi';
 $lang['SEARCH_HELP_URL'] = 'La Ricerca Di Aiuto';
 $lang['SEARCH_QUERY'] = 'Query Di Ricerca';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Tornare a modificare';
 $lang['PROFILE_RETURN'] = 'Vai al profilo';
 
 $lang['WARNING'] = 'Avviso';
-$lang['INDEXER'] = 'Il Reindex di ricerca';
 
 $lang['FORUM_STYLE'] = 'Lo stile del Forum';
 

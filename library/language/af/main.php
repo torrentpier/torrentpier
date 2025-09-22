@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Vind alle uitgawes van die groep';
 $lang['NOT_A_RELEASE_GROUP'] = 'Hierdie groep is nie \'n vrystelgroep nie';
 
 // Search
-$lang['SEARCH_OFF'] = 'Soek is tydelik gedeaktiveer';
 $lang['SEARCH_ERROR'] = 'Op die oomblik is die soekenjin nie beskikbaar nie<br /><br />Probeer om die versoek na \'n paar sekondes te herhaal';
 $lang['SEARCH_HELP_URL'] = 'Soekhulp';
 $lang['SEARCH_QUERY'] = 'Soek navraag';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Keer terug na redigering';
 $lang['PROFILE_RETURN'] = 'Gaan na die profiel';
 
 $lang['WARNING'] = 'waarskuwing';
-$lang['INDEXER'] = 'Reindex soek';
 
 $lang['FORUM_STYLE'] = 'Forum styl';
 

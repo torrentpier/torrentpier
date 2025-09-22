@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Najít všechny zprávy skupiny';
 $lang['NOT_A_RELEASE_GROUP'] = 'Tato skupina není release group';
 
 // Search
-$lang['SEARCH_OFF'] = 'Vyhledávání je dočasně zakázáno';
 $lang['SEARCH_ERROR'] = 'V okamžiku, vyhledávač není available<br /><br />Try opakovat žádost po několik sekund';
 $lang['SEARCH_HELP_URL'] = 'Vyhledávání V Nápovědě';
 $lang['SEARCH_QUERY'] = 'Vyhledávací Dotaz';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Návrat k editaci';
 $lang['PROFILE_RETURN'] = 'Přejděte na profil';
 
 $lang['WARNING'] = 'Varování';
-$lang['INDEXER'] = 'Reindex vyhledávání';
 
 $lang['FORUM_STYLE'] = 'Fórum styl';
 

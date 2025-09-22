@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Znajdź wszystkie wydawnictwa grupy';
 $lang['NOT_A_RELEASE_GROUP'] = 'Ta grupa nie jest wydanie-grupy';
 
 // Search
-$lang['SEARCH_OFF'] = 'Wyszukaj tymczasowo wyłączony';
 $lang['SEARCH_ERROR'] = 'W tej chwili wyszukiwarka nie available<br /><br />Try powtórzyć żądanie w ciągu kilku sekund';
 $lang['SEARCH_HELP_URL'] = 'Wyszukiwanie';
 $lang['SEARCH_QUERY'] = 'Zapytanie';
@@ -1918,7 +1917,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Powrócić do edycji';
 $lang['PROFILE_RETURN'] = 'Przejdź do profilu';
 
 $lang['WARNING'] = 'Ostrzeżenie';
-$lang['INDEXER'] = 'Wyszukaj sporządzanie';
 
 $lang['FORUM_STYLE'] = 'Styl forum';
 

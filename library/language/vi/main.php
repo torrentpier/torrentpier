@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Tìm tất cả trong phiên bản của các nhóm';
 $lang['NOT_A_RELEASE_GROUP'] = 'Nhóm này không phải là một hành,';
 
 // Search
-$lang['SEARCH_OFF'] = 'Tìm kiếm tạm thời là khuyết tật';
 $lang['SEARCH_ERROR'] = 'Tại thời điểm này, các công cụ tìm kiếm là không available<br /><br />Try để lặp lại yêu cầu sau vài giây';
 $lang['SEARCH_HELP_URL'] = 'Tìm Giúp Đỡ';
 $lang['SEARCH_QUERY'] = 'Tìm Kiếm';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Trở về để chỉnh sửa';
 $lang['PROFILE_RETURN'] = 'Đi đến các hồ sơ';
 
 $lang['WARNING'] = 'Cảnh báo';
-$lang['INDEXER'] = 'Lập chỉ mục lại tìm kiếm';
 
 $lang['FORUM_STYLE'] = 'Phong cách diễn đàn';
 

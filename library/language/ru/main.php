@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Найти все релизы группы';
 $lang['NOT_A_RELEASE_GROUP'] = 'Эта группа не является релиз группой';
 
 // Search
-$lang['SEARCH_OFF'] = 'Поиск временно отключен';
 $lang['SEARCH_ERROR'] = 'В данный момент поисковик недоступен<br /><br />Попробуйте повторить запрос через несколько секунд';
 $lang['SEARCH_HELP_URL'] = 'Помощь по поиску';
 $lang['SEARCH_QUERY'] = 'Запрос';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Вернуться к редактировани
 $lang['PROFILE_RETURN'] = 'Перейти к просмотру профиля';
 
 $lang['WARNING'] = 'Предупреждение';
-$lang['INDEXER'] = 'Переиндексировать поиск';
 
 $lang['FORUM_STYLE'] = 'Стиль форума';
 
@@ -1962,7 +1960,7 @@ $lang['MIGRATIONS_APPLIED'] = 'Примененные миграции';
 $lang['MIGRATIONS_PENDING'] = 'Ожидаемые миграции';
 $lang['MIGRATIONS_VERSION'] = 'Версия';
 $lang['MIGRATIONS_NAME'] = 'Имя миграции';
-$lang['MIGRATIONS_FILE'] = 'Migration File';
+$lang['MIGRATIONS_FILE'] = 'Файл миграции';
 $lang['MIGRATIONS_APPLIED_AT'] = 'Применено в';
 $lang['MIGRATIONS_COMPLETED_AT'] = 'Завершено в';
 $lang['MIGRATIONS_CURRENT_VERSION'] = 'Текущая версия';
@@ -1997,14 +1995,14 @@ $lang['GZIP_COMPRESSION'] = 'сжатие Gzip';
 $lang['NOT_AVAILABLE'] = 'Недоступно';
 
 // System information
-$lang['ADMIN_SYSTEM_INFORMATION'] = 'System information';
-$lang['ADMIN_SYSTEM_OS'] = 'OS:';
+$lang['ADMIN_SYSTEM_INFORMATION'] = 'Информация о системе';
+$lang['ADMIN_SYSTEM_OS'] = 'ОС:';
 $lang['ADMIN_SYSTEM_PHP_VER'] = 'PHP:';
-$lang['ADMIN_SYSTEM_DATABASE_VER'] = 'Database:';
-$lang['ADMIN_SYSTEM_PHP_MEM_LIMIT'] = 'Memory limit:';
-$lang['ADMIN_SYSTEM_DISK_SPACE_INFO_TITLE'] = 'Disk space info:';
-$lang['ADMIN_SYSTEM_DISK_SPACE_INFO'] = '%s (used: %s | free: %s)';
-$lang['ADMIN_SYSTEM_PHP_MAX_EXECUTION_TIME'] = 'Max execution time:';
+$lang['ADMIN_SYSTEM_DATABASE_VER'] = 'База данных:';
+$lang['ADMIN_SYSTEM_PHP_MEM_LIMIT'] = 'Ограничение по памяти:';
+$lang['ADMIN_SYSTEM_DISK_SPACE_INFO_TITLE'] = 'Информация о дисковом пространстве:';
+$lang['ADMIN_SYSTEM_DISK_SPACE_INFO'] = '%s (используется: %s | свободно: %s)';
+$lang['ADMIN_SYSTEM_PHP_MAX_EXECUTION_TIME'] = 'Время выполнения:';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
@@ -2859,14 +2857,14 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_change_tor_status' => 'Топик:<br /> <b>изменен статус торрента</b>',
     'mod_topic_change_tor_type' => 'Топик:<br /> <b>изменен тип торрента</b>',
     'mod_topic_tor_unregister' => 'Топик:<br /> <b>торрент разрегистрирован</b>',
-    'mod_topic_tor_register' => 'Topic:<br /> <b>torrent registered</b>',
-    'mod_topic_tor_delete' => 'Topic:<br /> <b>torrent deleted</b>',
+    'mod_topic_tor_register' => 'Топик:<br /> <b>торрент разрегистрирован</b>',
+    'mod_topic_tor_delete' => 'Топик:<br /> <b>торрент удалён</b>',
     'mod_topic_renamed' => 'Топик:<br /> <b>переименован</b>',
-    'mod_topic_poll_started' => 'Topic:<br /> <b>poll started</b>',
-    'mod_topic_poll_finished' => 'Topic:<br /> <b>poll finished</b>',
-    'mod_topic_poll_deleted' => 'Topic:<br /> <b>poll deleted</b>',
-    'mod_topic_poll_added' => 'Topic:<br /> <b>poll added</b>',
-    'mod_topic_poll_edited' => 'Topic:<br /> <b>poll edited</b>',
+    'mod_topic_poll_started' => 'Топик:<br /> <b>начат опрос</b>',
+    'mod_topic_poll_finished' => 'Топик:<br /> <b>опрос завершен</b>',
+    'mod_topic_poll_deleted' => 'Топик:<br /> <b>опрос удален</b>',
+    'mod_topic_poll_added' => 'Топик:<br /> <b>опрос создан</b>',
+    'mod_topic_poll_edited' => 'Топик:<br /> <b>опрос отредактирован</b>',
     'mod_post_delete' => 'Пост:<br /> <b>удален</b>',
     'mod_post_pin' => 'Пост:<br /> <b>закреплен</b>',
     'mod_post_unpin' => 'Пост:<br /> <b>откреплен</b>',

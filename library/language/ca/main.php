@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Trobar tots els llançaments del grup';
 $lang['NOT_A_RELEASE_GROUP'] = 'Aquest grup no és un alliberament grup';
 
 // Search
-$lang['SEARCH_OFF'] = 'La cerca es desactiven temporalment';
 $lang['SEARCH_ERROR'] = 'De moment, el motor de cerca no és available<br /><br />Try a repetir la petició, després de diversos segons';
 $lang['SEARCH_HELP_URL'] = 'Cerca Ajuda';
 $lang['SEARCH_QUERY'] = 'Consulta De Cerca';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Tornar a l\'edició';
 $lang['PROFILE_RETURN'] = 'Anar al perfil';
 
 $lang['WARNING'] = 'Avís';
-$lang['INDEXER'] = 'Dades de la cerca';
 
 $lang['FORUM_STYLE'] = 'Fòrum d\'estil';
 

@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = '找到所有版本的小组';
 $lang['NOT_A_RELEASE_GROUP'] = '这个小组不是一个释放组';
 
 // Search
-$lang['SEARCH_OFF'] = '搜索是暂时被禁用';
 $lang['SEARCH_ERROR'] = '目前，搜索引擎是不available<br /><br />Try重复请求后几秒钟';
 $lang['SEARCH_HELP_URL'] = '搜索的帮助';
 $lang['SEARCH_QUERY'] = '搜索查询';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = '回到编辑';
 $lang['PROFILE_RETURN'] = '去档案';
 
 $lang['WARNING'] = '警告';
-$lang['INDEXER'] = '重新编制索引搜索';
 
 $lang['FORUM_STYLE'] = '论坛的风格';
 

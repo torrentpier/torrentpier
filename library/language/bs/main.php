@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Da nađem sve što pušta u grupi';
 $lang['NOT_A_RELEASE_GROUP'] = 'Ova grupa nije oslobodi grupi';
 
 // Search
-$lang['SEARCH_OFF'] = 'Potraga je privremeno invalid';
 $lang['SEARCH_ERROR'] = 'U ovom trenutku, tražilice nije available<br /><br />Try da ponavljam zahtjev nakon nekoliko sekundi';
 $lang['SEARCH_HELP_URL'] = 'Potrazi Pomoc';
 $lang['SEARCH_QUERY'] = 'Potrazi Upit';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Povratak na uređivanje';
 $lang['PROFILE_RETURN'] = 'Idi u profil';
 
 $lang['WARNING'] = 'Upozorenje';
-$lang['INDEXER'] = 'Reindex potragu';
 
 $lang['FORUM_STYLE'] = 'Forum stil';
 
