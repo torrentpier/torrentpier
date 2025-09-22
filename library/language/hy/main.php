@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Գտնել բոլոր հաղորդագրություն
 $lang['NOT_A_RELEASE_GROUP'] = 'Այս խումբը չէ հաղորդագրություն խումբ';
 
 // Search
-$lang['SEARCH_OFF'] = 'Որոնում է ժամանակավորապես անջատված է';
 $lang['SEARCH_ERROR'] = 'Այս պահին որոնման համակարգը չի available<br /><br />Try է կրկնել հարցումը մի քանի վայրկյան անց';
 $lang['SEARCH_HELP_URL'] = 'Որոնում';
 $lang['SEARCH_QUERY'] = 'Որոնման Հարցում';
@@ -1918,7 +1917,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Վերադառնալ խմբագրման';
 $lang['PROFILE_RETURN'] = 'Անցնել անձնագիրը';
 
 $lang['WARNING'] = 'Նախազգուշացում';
-$lang['INDEXER'] = 'Որոնում переиндексация';
 
 $lang['FORUM_STYLE'] = 'Համաժողովի ոճը';
 
