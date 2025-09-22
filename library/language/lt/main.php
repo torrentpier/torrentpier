@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Rasti visus spaudai grupės';
 $lang['NOT_A_RELEASE_GROUP'] = 'Ši grupė nėra išleidimo grupė';
 
 // Search
-$lang['SEARCH_OFF'] = 'Paieška yra laikinai išjungta';
 $lang['SEARCH_ERROR'] = 'Tuo metu paieškos sistema nėra available<br /><br />Try pakartoti prašymą po kelių sekundžių';
 $lang['SEARCH_HELP_URL'] = 'Paieška Padės';
 $lang['SEARCH_QUERY'] = 'Paieškos Užklausa';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Grįžti į redagavimą';
 $lang['PROFILE_RETURN'] = 'Eik į profilio';
 
 $lang['WARNING'] = 'Įspėjimas';
-$lang['INDEXER'] = 'Reindex paieška';
 
 $lang['FORUM_STYLE'] = 'Forumo stiliaus';
 
