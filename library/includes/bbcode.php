@@ -382,14 +382,15 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
 {
     $text = $topic_title . ' ' . $post_message;
     $words = ($text) ? extract_search_words($text) : [];
+    $words_csv = implode("\n", $words);
 
-    if ($only_return_words || config()->get('search_engine_type') == 'sphinx') {
-        return implode("\n", $words);
+    if ($only_return_words) {
+        return $words_csv;
     }
 
     DB()->query("DELETE FROM " . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
 
-    if ($words_sql = DB()->escape(implode("\n", $words))) {
+    if ($words_sql = DB()->escape($words_csv)) {
         DB()->query("REPLACE INTO " . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ($post_id, '$words_sql')");
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0984063a0d232a6e5f6656b67496c081",
+    "content-hash": "a7ab5f68bb892a0dacf0f189e1091df9",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -799,16 +799,16 @@
         },
         {
             "name": "claviska/simpleimage",
-            "version": "4.2.1",
+            "version": "4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/claviska/SimpleImage.git",
-                "reference": "ec6d5021e5a7153a2520d64c59b86b6f3c4157c5"
+                "reference": "b6f0950a12e8928b84475c960e46a0eb2ca45340"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/claviska/SimpleImage/zipball/ec6d5021e5a7153a2520d64c59b86b6f3c4157c5",
-                "reference": "ec6d5021e5a7153a2520d64c59b86b6f3c4157c5",
+                "url": "https://api.github.com/repos/claviska/SimpleImage/zipball/b6f0950a12e8928b84475c960e46a0eb2ca45340",
+                "reference": "b6f0950a12e8928b84475c960e46a0eb2ca45340",
                 "shasum": ""
             },
             "require": {
@@ -840,7 +840,7 @@
             "description": "A PHP class that makes working with images as simple as possible.",
             "support": {
                 "issues": "https://github.com/claviska/SimpleImage/issues",
-                "source": "https://github.com/claviska/SimpleImage/tree/4.2.1"
+                "source": "https://github.com/claviska/SimpleImage/tree/4.3.0"
             },
             "funding": [
                 {
@@ -848,7 +848,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-22T13:25:03+00:00"
+            "time": "2025-09-17T20:35:09+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -1186,61 +1186,6 @@
                 "source": "https://github.com/Gemorroj/M3uParser/tree/master"
             },
             "time": "2025-05-04T19:36:03+00:00"
-        },
-        {
-            "name": "gigablah/sphinxphp",
-            "version": "2.0.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gigablah/sphinxphp.git",
-                "reference": "6d5e97fdd33c1129ca372203d1330827c1cbc46c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gigablah/sphinxphp/zipball/6d5e97fdd33c1129ca372203d1330827c1cbc46c",
-                "reference": "6d5e97fdd33c1129ca372203d1330827c1cbc46c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*",
-                "satooshi/php-coveralls": "dev-master"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Sphinx": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Andrew Aksyonoff",
-                    "homepage": "http://sphinxsearch.com/"
-                }
-            ],
-            "description": "Sphinx Search PHP API",
-            "homepage": "http://sphinxsearch.com/",
-            "keywords": [
-                "api",
-                "search",
-                "sphinx"
-            ],
-            "support": {
-                "issues": "https://github.com/gigablah/sphinxphp/issues",
-                "source": "https://github.com/gigablah/sphinxphp/tree/2.0.x"
-            },
-            "time": "2013-08-22T08:05:44+00:00"
         },
         {
             "name": "google/recaptcha",

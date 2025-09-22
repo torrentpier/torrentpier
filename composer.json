@@ -56,7 +56,6 @@
     "gregwar/captcha": "1.*",
     "egulias/email-validator": "^4.0.1",
     "filp/whoops": "^2.15",
-    "gigablah/sphinxphp": "2.0.8",
     "google/recaptcha": "^1.3",
     "jacklul/monolog-telegram": "^3.1",
     "gemorroj/m3u-parser": "dev-master",

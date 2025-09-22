@@ -1751,23 +1751,9 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
 
     $text = str_compact($text);
     $ltrim_chars = ($ltrim_star) ? ' *-!' : ' ';
-    $wrap_with_quotes = preg_match('#^"[^"]+"$#', $text);
 
     $text = ' ' . str_compact(ltrim($text, $ltrim_chars)) . ' ';
-
-    if (config()->get('search_engine_type') == 'sphinx') {
-        $text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
-        $text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // valid characters (except '"' which are separate)
-        $text = str_replace(['-', '*'], [' -', '* '], $text);                                // only at the beginning/end of a word
-        $text = preg_replace('#\s*\|\s*#u', '|', $text);                  // "| " -> "|"
-        $text = preg_replace('#\|+#u', ' | ', $text);                     // "||" -> "|"
-        $text = preg_replace('#(?<=\s)[\-*]+\s#u', ' ', $text);           // single " - ", " * "
-        $text = trim($text, ' -|');
-        $text = str_compact($text);
-        $text_match_sql = ($wrap_with_quotes && $text != '') ? '"' . $text . '"' : $text;
-    } else {
-        $text_match_sql = DB()->escape(trim($text));
-    }
+    $text_match_sql = DB()->escape(trim($text));
 
     if (!$text_match_sql && $die_if_empty) {
         bb_die($lang['NO_SEARCH_MATCH']);
@@ -1776,69 +1762,16 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
     return $text_match_sql;
 }
 
-function init_sphinx()
-{
-    global $sphinx;
-
-    if (!isset($sphinx)) {
-        $sphinx = \Sphinx\SphinxClient::create();
-
-        $sphinx->setConnectTimeout(5);
-        $sphinx->setRankingMode($sphinx::SPH_RANK_NONE);
-        $sphinx->setMatchMode($sphinx::SPH_MATCH_BOOLEAN);
-    }
-
-    return $sphinx;
-}
-
-function log_sphinx_error($err_type, $err_msg, $query = '')
-{
-    $ignore_err_txt = [
-        'negation on top level',
-        'Query word length is less than min prefix length'
-    ];
-    if (!count($ignore_err_txt) || !preg_match('#' . implode('|', $ignore_err_txt) . '#i', $err_msg)) {
-        $orig_query = strtr($_REQUEST['nm'], ["\n" => '\n']);
-        bb_log(date('m-d H:i:s') . " | $err_type | $err_msg | $orig_query | $query" . LOG_LF, 'sphinx_error');
-    }
-}
-
 function get_title_match_topics($title_match_sql, array $forum_ids = [])
 {
-    global $sphinx, $userdata, $title_match, $lang;
+    global $title_match;
 
     $where_ids = [];
     if ($forum_ids) {
         $forum_ids = array_diff($forum_ids, [0 => 0]);
     }
-    $title_match_sql = encode_text_match($title_match_sql);
 
-    if (config()->get('search_engine_type') == 'sphinx') {
-        $sphinx = init_sphinx();
-
-        $where = $title_match ? 'topics' : 'posts';
-
-        $sphinx->setServer(config()->get('sphinx_topic_titles_host'), config()->get('sphinx_topic_titles_port'));
-        if ($forum_ids) {
-            $sphinx->setFilter('forum_id', $forum_ids, false);
-        }
-        if (preg_match('#^"[^"]+"$#u', $title_match_sql)) {
-            $sphinx->setMatchMode($sphinx::SPH_MATCH_PHRASE);
-        }
-        if ($result = $sphinx->query($title_match_sql, $where, $userdata['username'] . ' (' . CLIENT_IP . ')')) {
-            if (!empty($result['matches'])) {
-                $where_ids = array_keys($result['matches']);
-            }
-        } elseif ($error = $sphinx->getLastError()) {
-            if (strpos($error, 'errno=110')) {
-                bb_die($lang['SEARCH_ERROR']);
-            }
-            log_sphinx_error('ERR', $error, $title_match_sql);
-        }
-        if ($warning = $sphinx->getLastWarning()) {
-            log_sphinx_error('wrn', $warning, $title_match_sql);
-        }
-    } elseif (config()->get('search_engine_type') == 'mysql') {
+    if (config()->get('search_engine_type') == 'mysql') {
         $where_forum = ($forum_ids) ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
         $search_bool_mode = (config()->get('allow_search_in_bool_mode')) ? ' IN BOOLEAN MODE' : '';
 
@@ -1858,29 +1791,9 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
         foreach (DB()->fetch_rowset($sql) as $row) {
             $where_ids[] = $row[$where_id];
         }
-    } else {
-        bb_die($lang['SEARCH_OFF']);
     }
 
     return $where_ids;
-}
-
-/**
- * Encodes text match
- *
- * Desc: for a more correct search for words containing a single quote
- *
- * @param $txt
- * @return array|string|string[]
- */
-function encode_text_match($txt)
-{
-    return str_replace("'", '&#039;', $txt);
-}
-
-function decode_text_match($txt)
-{
-    return str_replace('&#039;', "'", $txt);
 }
 
 /**
