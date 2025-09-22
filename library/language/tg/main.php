@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Пайдо ҳамаи Варақаҳои гурӯҳи'
 $lang['NOT_A_RELEASE_GROUP'] = 'Ин гурӯҳ аст, як гурӯҳи озод нест,';
 
 // Search
-$lang['SEARCH_OFF'] = 'Ҷустуҷӯ муваққатан ғайрифаъол';
 $lang['SEARCH_ERROR'] = 'Дар ҳоли ҳозир, системаи ҷустуҷӯии аст available<br /><br />Try на ба такрор дархости пас аз чанд сония';
 $lang['SEARCH_HELP_URL'] = 'Ҷустуҷӯ Кӯмак';
 $lang['SEARCH_QUERY'] = 'Ҷустуҷӯ Дархости';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Бозгашт ба таҳриркунӣ';
 $lang['PROFILE_RETURN'] = 'Бирав ба профили';
 
 $lang['WARNING'] = 'Огоҳӣ';
-$lang['INDEXER'] = 'Ҷустуҷӯи Reindex';
 
 $lang['FORUM_STYLE'] = 'Услуби Форум';
 
