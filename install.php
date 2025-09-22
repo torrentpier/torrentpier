@@ -211,6 +211,9 @@ if (is_file(BB_ROOT . '.env')) {
                     }
                     $newValue = parse_url($newValue, PHP_URL_HOST);
                 }
+                if ($key === 'APP_ENV' && !in_array($newValue, ['development', 'production'])) {
+                    $newValue = 'production';
+                }
                 $line = "$key=$newValue";
                 $$key = $newValue;
             } else {
