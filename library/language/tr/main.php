@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Grubun tüm bültenleri';
 $lang['NOT_A_RELEASE_GROUP'] = 'Bu grup serbest bir grup değil';
 
 // Search
-$lang['SEARCH_OFF'] = 'Ara geçici olarak devre dışı bırakılır';
 $lang['SEARCH_ERROR'] = 'Şu anda, arama motoru, birkaç saniye sonra istek tekrar available<br /><br />Try değil';
 $lang['SEARCH_HELP_URL'] = 'Arama Yardım';
 $lang['SEARCH_QUERY'] = 'Arama Sorgusu';
@@ -1919,7 +1918,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Düzenleme dönmek';
 $lang['PROFILE_RETURN'] = 'Profiline git';
 
 $lang['WARNING'] = 'Uyarı';
-$lang['INDEXER'] = 'Anda arama';
 
 $lang['FORUM_STYLE'] = 'Forum tarzı';
 
