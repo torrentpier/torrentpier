@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Find all releases of the group';
 $lang['NOT_A_RELEASE_GROUP'] = 'This group is not a release group';
 
 // Search
-$lang['SEARCH_OFF'] = 'Search is temporarily disabled';
 $lang['SEARCH_ERROR'] = 'At the moment, the search engine is not available<br /><br />Try to repeat the request after several seconds';
 $lang['SEARCH_HELP_URL'] = 'Search Help';
 $lang['SEARCH_QUERY'] = 'Search Query';
