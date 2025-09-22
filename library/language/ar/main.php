@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'إيجاد جميع إصدارات المجموعة';
 $lang['NOT_A_RELEASE_GROUP'] = 'هذه المجموعة ليست مجموعة الإصدار';
 
 // Search
-$lang['SEARCH_OFF'] = 'البحث تعطيل مؤقتا';
 $lang['SEARCH_ERROR'] = 'في هذه اللحظة, محرك البحث ليس available<br /><br />Try إلى تكرار الطلب بعد عدة ثوان';
 $lang['SEARCH_HELP_URL'] = 'تعليمات البحث';
 $lang['SEARCH_QUERY'] = 'البحث';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'العودة إلى التحرير';
 $lang['PROFILE_RETURN'] = 'انتقل إلى الملف الشخصي';
 
 $lang['WARNING'] = 'تحذير';
-$lang['INDEXER'] = 'Reindex البحث';
 
 $lang['FORUM_STYLE'] = 'ستايل المنتدى';
 
