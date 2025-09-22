@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = '을 찾아 모든 자료 그룹';
 $lang['NOT_A_RELEASE_GROUP'] = '이 그룹은 그룹 릴리스';
 
 // Search
-$lang['SEARCH_OFF'] = '검색를 일시적으로 사용할 수 없';
 $lang['SEARCH_ERROR'] = '지금이 순간,검색 엔진은 available<br /><br />Try 를 요청을 반복 몇 초 후에';
 $lang['SEARCH_HELP_URL'] = '검색';
 $lang['SEARCH_QUERY'] = '검색 쿼리';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = '익 편집';
 $lang['PROFILE_RETURN'] = '프로필로 이동하';
 
 $lang['WARNING'] = '경고';
-$lang['INDEXER'] = '재인덱스 검색';
 
 $lang['FORUM_STYLE'] = '포럼 스타일';
 
