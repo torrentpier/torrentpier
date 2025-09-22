@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'מצא את כל מהדורות של הקבוצה';
 $lang['NOT_A_RELEASE_GROUP'] = 'קבוצה זו אינה שחרור הקבוצה';
 
 // Search
-$lang['SEARCH_OFF'] = 'חיפוש זה מושבת באופן זמני';
 $lang['SEARCH_ERROR'] = 'כרגע, מנוע החיפוש הוא לא available<br /><br />Try לחזור על הבקשה לאחר מספר שניות.';
 $lang['SEARCH_HELP_URL'] = 'חיפוש עזרה';
 $lang['SEARCH_QUERY'] = 'שאילתת חיפוש';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'לחזור עריכה';
 $lang['PROFILE_RETURN'] = 'עבור אל הפרופיל';
 
 $lang['WARNING'] = 'אזהרה';
-$lang['INDEXER'] = 'Reindex חיפוש';
 
 $lang['FORUM_STYLE'] = 'פורום בסגנון';
 
