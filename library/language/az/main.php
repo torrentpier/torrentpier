@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Bütün tapa relizlər qrupu';
 $lang['NOT_A_RELEASE_GROUP'] = 'Bu qrup deyil, azad-qrup';
 
 // Search
-$lang['SEARCH_OFF'] = 'Axtarış müvəqqəti olaraq aradan';
 $lang['SEARCH_ERROR'] = 'Hal-hazırda axtarış sistemi deyil available<br /><br />Try təkrar sorğu vasitəsilə bir neçə saniyə';
 $lang['SEARCH_HELP_URL'] = 'Axtarış';
 $lang['SEARCH_QUERY'] = 'Axtarış Sorğu';
@@ -1918,7 +1917,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Geri redaktə etmək üçün';
 $lang['PROFILE_RETURN'] = 'Get profil';
 
 $lang['WARNING'] = 'Xəbərdarlıq';
-$lang['INDEXER'] = 'Axtarış переиндексация';
 
 $lang['FORUM_STYLE'] = 'Stil forum';
 
