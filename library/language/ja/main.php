@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'すべてのスリリースのグループ';
 $lang['NOT_A_RELEASE_GROUP'] = 'このグループがリリースグループ';
 
 // Search
-$lang['SEARCH_OFF'] = '検索は一時的に無効にな';
 $lang['SEARCH_ERROR'] = '現在の検索エンジンはavailable<br /><br />Try繰り返し申請の後の数秒間';
 $lang['SEARCH_HELP_URL'] = '検索ヘルプ';
 $lang['SEARCH_QUERY'] = '検索クエリ';
@@ -1919,7 +1918,6 @@ $lang['PROFILE_EDIT_RETURN'] = '戻り編集';
 $lang['PROFILE_RETURN'] = 'の概要';
 
 $lang['WARNING'] = '警告';
-$lang['INDEXER'] = 'Reindex検索';
 
 $lang['FORUM_STYLE'] = 'フォーラムスタイル';
 
