@@ -791,7 +791,6 @@ $lang['MORE_RELEASES'] = 'Finden Sie alle Pressemitteilungen der Gruppe';
 $lang['NOT_A_RELEASE_GROUP'] = 'Diese Gruppe ist nicht, eine release-Gruppe';
 
 // Search
-$lang['SEARCH_OFF'] = 'Suche ist vorübergehend deaktiviert';
 $lang['SEARCH_ERROR'] = 'Im moment, die Suchmaschine ist nicht available<br /><br />Try, wiederholen Sie die Anfrage nach einigen Sekunden';
 $lang['SEARCH_HELP_URL'] = 'Suchhilfe';
 $lang['SEARCH_QUERY'] = 'Suchanfrage';
@@ -1915,7 +1914,6 @@ $lang['PROFILE_EDIT_RETURN'] = 'Zurück zu Bearbeiten';
 $lang['PROFILE_RETURN'] = 'Gehen Sie auf das Profil';
 
 $lang['WARNING'] = 'Warnung';
-$lang['INDEXER'] = 'Suche neu indizieren';
 
 $lang['FORUM_STYLE'] = 'Forum style';
 
