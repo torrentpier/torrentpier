@@ -1797,24 +1797,6 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
 }
 
 /**
- * Encodes text match
- *
- * Desc: for a more correct search for words containing a single quote
- *
- * @param $txt
- * @return array|string|string[]
- */
-function encode_text_match($txt)
-{
-    return str_replace("'", '&#039;', $txt);
-}
-
-function decode_text_match($txt)
-{
-    return str_replace('&#039;', "'", $txt);
-}
-
-/**
  * Create magnet link
  *
  * @param string $infohash (xt=urn:btih)
