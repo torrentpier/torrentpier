@@ -142,32 +142,117 @@ class ManticoreSearch
      * Insert or update a topic in the RT index
      *
      * @param int $topic_id Topic ID
-     * @param string $topic_title Topic title
-     * @param int $forum_id Forum ID
+     * @param null|string $topic_title Topic title
+     * @param null|int $forum_id Forum ID
      * @return void
      */
-    public function upsertTopic(int $topic_id, string $topic_title, int $forum_id)
+    public function upsertTopic(int $topic_id, null|string $topic_title = null, null|int $forum_id = null): void
     {
-        $sql = "REPLACE INTO topics_rt (id, topic_title, forum_id) VALUES (?, ?, ?)";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$topic_id, $topic_title, $forum_id]);
+        if ($topic_title === null && $forum_id === null) {
+            return;
+        }
+
+        // REPLACE
+        if ($topic_title !== null) {
+            $columns = ['id', 'topic_title'];
+            $placeholders = [':id', ':title'];
+            $params = [
+                ':id' => $topic_id,
+                ':title' => $topic_title,
+            ];
+
+            if ($forum_id !== null) {
+                $columns[] = 'forum_id';
+                $placeholders[] = ':forum_id';
+                $params[':forum_id'] = $forum_id;
+            }
+
+            $sql = "REPLACE INTO topics_rt (" . implode(', ', $columns) . ") VALUES (" . implode(', ', $placeholders) . ")";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($params);
+        }
+
+        // UPDATE
+        if ($forum_id !== null) {
+            $sql = "UPDATE topics_rt SET forum_id = :forum_id WHERE id = :id";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                ':forum_id' => $forum_id,
+                ':id' => $topic_id,
+            ]);
+        }
     }
 
     /**
      * Insert or update a post in the RT index
      *
      * @param int $post_id Post ID
-     * @param string $post_text Post text
-     * @param string $topic_title Topic title
-     * @param int $topic_id Topic ID
-     * @param int $forum_id Forum ID
+     * @param null|string $post_text Post text
+     * @param null|string $topic_title Topic title
+     * @param null|int $topic_id Topic ID
+     * @param null|int $forum_id Forum ID
      * @return void
      */
-    public function upsertPost(int $post_id, string $post_text, string $topic_title, int $topic_id, int $forum_id): void
+    public function upsertPost(int $post_id, null|string $post_text, null|string $topic_title, null|int $topic_id, null|int $forum_id): void
     {
-        $sql = "REPLACE INTO posts_rt (id, post_text, topic_title, topic_id, forum_id) VALUES (?, ?, ?, ?, ?)";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$post_id, $post_text, $topic_title, $topic_id, $forum_id]);
+        if ($post_text === null && $topic_title === null && $topic_id === null && $forum_id === null) {
+            return;
+        }
+
+        // REPLACE
+        if ($post_text !== null || $topic_title !== null) {
+            $columns = ['id'];
+            $placeholders = [':id'];
+            $params = [':id' => $post_id];
+
+            if ($post_text !== null) {
+                $columns[] = 'post_text';
+                $placeholders[] = ':post_text';
+                $params[':post_text'] = $post_text;
+            }
+
+            if ($topic_title !== null) {
+                $columns[] = 'topic_title';
+                $placeholders[] = ':topic_title';
+                $params[':topic_title'] = $topic_title;
+            }
+
+            if ($topic_id !== null) {
+                $columns[] = 'topic_id';
+                $placeholders[] = ':topic_id';
+                $params[':topic_id'] = $topic_id;
+            }
+
+            if ($forum_id !== null) {
+                $columns[] = 'forum_id';
+                $placeholders[] = ':forum_id';
+                $params[':forum_id'] = $forum_id;
+            }
+
+            $sql = "REPLACE INTO posts_rt (" . implode(', ', $columns) . ") VALUES (" . implode(', ', $placeholders) . ")";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($params);
+        }
+
+        // UPDATE
+        $updates = [];
+        $params = [':id' => $post_id];
+
+        if ($topic_id !== null) {
+            $updates[] = 'topic_id = :topic_id';
+            $params[':topic_id'] = $topic_id;
+        }
+
+        if ($forum_id !== null) {
+            $updates[] = 'forum_id = :forum_id';
+            $params[':forum_id'] = $forum_id;
+        }
+
+        if ($updates) {
+            $sql = "UPDATE posts_rt SET " . implode(', ', $updates) . " WHERE id = :id";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($params);
+        }
     }
 
     /**
