@@ -282,7 +282,7 @@ class Common
         // Get all topic IDs to delete from Manticore
         $manticore_topics = DB()->fetch_rowset("SELECT topic_id FROM $tmp_delete_topics");
         foreach ($manticore_topics as $topic_row) {
-            sync_topic_to_manticore($topic_row['topic_id'], '', 0, 'delete');
+            sync_topic_to_manticore($topic_row['topic_id'], action: 'delete');
         }
 
         // Get all post IDs from topics to delete from Manticore
