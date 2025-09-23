@@ -1096,6 +1096,23 @@ $environment = [
 ];
 ```
 
+## 🌍 HTTP Helper Migration
+
+The `IsHelper` class has been **renamed** to `HttpHelper` for better clarity and consistency.  
+This change is **breaking** because the old class name is no longer available.
+
+### 🔄 Migration Strategy
+
+Replace all references of:
+```php
+\TorrentPier\Helpers\IsHelper
+```
+
+With:
+```php
+\TorrentPier\Helpers\HttpHelper
+```
+
 ## ⚠️ Breaking Changes
 
 ### Database Layer Changes
@@ -1114,6 +1131,7 @@ $environment = [
 - `new TorrentPier\Dev()` → Use `dev()` global function
 - Static `Dev::` methods → Use `dev()` instance methods
 - `\TorrentPier\Legacy\Select::` → Use `\TorrentPier\Legacy\Common\Select::`
+- `\TorrentPier\Helpers\IsHelper::` → Use `\TorrentPier\Helpers\HttpHelper::`
 
 ### File Structure Changes
 - New `/src/Database/` directory for modern database classes
