@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Бозгашт ба таҳриркунӣ';
 $lang['PROFILE_RETURN'] = 'Бирав ба профили';
 
 $lang['WARNING'] = 'Огоҳӣ';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Услуби Форум';
 
