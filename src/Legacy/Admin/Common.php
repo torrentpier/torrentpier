@@ -556,13 +556,13 @@ class Common
     /**
      * Post deletion
      *
-     * @param string $mode_or_post_id
-     * @param null $user_id
+     * @param $mode_or_post_id
+     * @param $user_id
      * @param bool $exclude_first
      *
      * @return bool|int
      */
-    public static function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
+    public static function post_delete($mode_or_post_id, $user_id = null, bool $exclude_first = true)
     {
         global $log_action;
 
