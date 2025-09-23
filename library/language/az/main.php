@@ -1917,6 +1917,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Geri redaktə etmək üçün';
 $lang['PROFILE_RETURN'] = 'Get profil';
 
 $lang['WARNING'] = 'Xəbərdarlıq';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Stil forum';
 
