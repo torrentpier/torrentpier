@@ -399,7 +399,7 @@ $bb_cfg['show_sidebar2_on_every_page'] = false; // Show right sidebar in every p
 
 // Cookie
 $bb_cfg['cookie_domain'] = in_array($domain_name, [$_SERVER['SERVER_ADDR'], 'localhost'], true) ? '' : ".$domain_name";
-$bb_cfg['cookie_secure'] = \TorrentPier\Helpers\IsHelper::isHTTPS();
+$bb_cfg['cookie_secure'] = \TorrentPier\Helpers\HttpHelper::isHTTPS();
 $bb_cfg['cookie_prefix'] = 'bb_'; // 'bb_'
 $bb_cfg['cookie_same_site'] = 'Lax'; // Lax, None, Strict | https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
