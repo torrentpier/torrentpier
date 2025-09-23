@@ -8,7 +8,7 @@
  */
 
 if (!defined('BB_ROOT')) {
-    define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+    define('BB_ROOT', dirname(__DIR__) . '/');
     define('BB_PATH', BB_ROOT);
 }
 
