@@ -231,7 +231,7 @@ class ManticoreSearch
      */
     public function initialLoad(int $batchSize = 1000): bool
     {
-        $log_message[] = str_repeat('=', 10) . date('Y-m-d H:i:s') . str_repeat('=', 10) . "\n";
+        $log_message[] = str_repeat('=', 10) . ' ' . date('Y-m-d H:i:s') . ' ' . str_repeat('=', 10) . "\n";
         $log_message[] = "Starting initial indexing...";
 
         // Очищаем индексы
