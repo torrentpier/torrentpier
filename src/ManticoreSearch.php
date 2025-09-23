@@ -14,8 +14,6 @@ use PDO;
 /**
  * Class ManticoreSearch
  * @package TorrentPier
- *
- * Управление поиском через Manticore RT индексы.
  */
 class ManticoreSearch
 {
