@@ -18,26 +18,26 @@ use PDO;
 class ManticoreSearch
 {
     /**
-     * PDO подключение к Manticore
+     * PDO connection to Manticore
      *
      * @var PDO
      */
     private PDO $pdo;
 
     /**
-     * Конфигурация поиска
+     * Search configuration
      *
-     * Содержит настройки, переданные из $bb_cfg:
-     * - 'manticore_host' - хост Manticore
-     * - 'manticore_port' - порт Manticore
-     * - другие опции, если необходимы
+     * Contains settings passed from $bb_cfg:
+     * - 'manticore_host' - Manticore host
+     * - 'manticore_port' - Manticore port
+     * - other options if needed
      *
      * @var array
      */
     private array $config;
 
     /**
-     * Конструктор
+     * Constructor
      *
      * @param array $bb_cfg
      */
@@ -49,7 +49,7 @@ class ManticoreSearch
     }
 
     /**
-     * Подключение к Manticore через PDO
+     * Connect to Manticore via PDO
      *
      * @return void
      */
@@ -66,7 +66,7 @@ class ManticoreSearch
     }
 
     /**
-     * Создание RT индексов, если их нет
+     * Create RT indexes if they don’t exist
      *
      * @return void
      */
@@ -97,19 +97,19 @@ class ManticoreSearch
             try {
                 $this->pdo->exec($sql);
             } catch (PDOException $e) {
-                // ...
+                // handle errors silently
             }
         }
     }
 
     /**
-     * Поиск по RT индексу
+     * Search in RT index
      *
-     * @param string $query Текст поискового запроса
-     * @param string $index Имя индекса (topics_rt, posts_rt, users_rt)
-     * @param array $forum_ids Массив ID форумов для фильтрации (только для topics/posts)
-     * @param int $limit Максимальное количество результатов
-     * @param int $offset Смещение (для пагинации)
+     * @param string $query Search query text
+     * @param string $index Index name (topics_rt, posts_rt, users_rt)
+     * @param array $forum_ids Forum IDs for filtering (topics/posts only)
+     * @param int $limit Max number of results
+     * @param int $offset Offset (for pagination)
      * @return array ['matches' => [id => row], 'total' => int]
      */
     public function search(string $query, string $index, array $forum_ids = [], int $limit = 5000, int $offset = 0): array
@@ -139,11 +139,11 @@ class ManticoreSearch
     }
 
     /**
-     * Добавить или обновить топик в RT индексе
+     * Insert or update a topic in the RT index
      *
-     * @param int $topic_id ID топика
-     * @param string $topic_title Название топика
-     * @param int $forum_id ID форума
+     * @param int $topic_id Topic ID
+     * @param string $topic_title Topic title
+     * @param int $forum_id Forum ID
      * @return void
      */
     public function upsertTopic(int $topic_id, string $topic_title, int $forum_id)
@@ -154,13 +154,13 @@ class ManticoreSearch
     }
 
     /**
-     * Добавить или обновить пост в RT индексе
+     * Insert or update a post in the RT index
      *
-     * @param int $post_id ID поста
-     * @param string $post_text Текст поста
-     * @param string $topic_title Название топика
-     * @param int $topic_id ID топика
-     * @param int $forum_id ID форума
+     * @param int $post_id Post ID
+     * @param string $post_text Post text
+     * @param string $topic_title Topic title
+     * @param int $topic_id Topic ID
+     * @param int $forum_id Forum ID
      * @return void
      */
     public function upsertPost(int $post_id, string $post_text, string $topic_title, int $topic_id, int $forum_id): void
@@ -171,10 +171,10 @@ class ManticoreSearch
     }
 
     /**
-     * Добавить или обновить пользователя в RT индексе
+     * Insert or update a user in the RT index
      *
-     * @param int $user_id ID пользователя
-     * @param string $username Имя пользователя
+     * @param int $user_id User ID
+     * @param string $username Username
      * @return void
      */
     public function upsertUser(int $user_id, string $username): void
@@ -185,9 +185,9 @@ class ManticoreSearch
     }
 
     /**
-     * Удалить топик из RT индекса
+     * Delete a topic from the RT index
      *
-     * @param int $topic_id ID топика
+     * @param int $topic_id Topic ID
      * @return void
      */
     public function deleteTopic(int $topic_id): void
@@ -198,9 +198,9 @@ class ManticoreSearch
     }
 
     /**
-     * Удалить пост из RT индекса
+     * Delete a post from the RT index
      *
-     * @param int $post_id ID поста
+     * @param int $post_id Post ID
      * @return void
      */
     public function deletePost(int $post_id): void
@@ -211,9 +211,9 @@ class ManticoreSearch
     }
 
     /**
-     * Удалить пользователя из RT индекса
+     * Delete a user from the RT index
      *
-     * @param int $user_id ID пользователя
+     * @param int $user_id User ID
      * @return void
      */
     public function deleteUser(int $user_id): void
@@ -224,7 +224,7 @@ class ManticoreSearch
     }
 
     /**
-     * Первоначальная загрузка всех данных из основной базы в RT индексы
+     * Perform initial loading of all data from the main DB into RT indexes
      *
      * @param int $batchSize
      * @return bool
@@ -234,7 +234,7 @@ class ManticoreSearch
         $log_message[] = str_repeat('=', 10) . ' ' . date('Y-m-d H:i:s') . ' ' . str_repeat('=', 10);
         $log_message[] = "Starting initial indexing...";
 
-        // Очищаем индексы
+        // Clear indexes
         $this->pdo->exec("TRUNCATE RTINDEX topics_rt");
         $this->pdo->exec("TRUNCATE RTINDEX posts_rt");
         $this->pdo->exec("TRUNCATE RTINDEX users_rt");
@@ -287,7 +287,7 @@ class ManticoreSearch
             $users = DB()->fetch_rowset("
                 SELECT user_id, username
                 FROM " . BB_USERS . "
-                WHERE user_id > 0
+                WHERE user_id NOT IN(" . EXCLUDED_USERS . ")
                 LIMIT {$batchSize} OFFSET {$offset}");
 
             foreach ($users as $user) {
