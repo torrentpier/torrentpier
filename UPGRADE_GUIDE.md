@@ -40,7 +40,7 @@ TorrentPier now includes a modern database migration system using **Phinx** (fro
   ├── 20250619000001_initial_schema.php    # Complete database schema
   ├── 20250619000002_seed_initial_data.php # Essential data seeding
   └── future_migrations...                 # Your custom migrations
-/phinx.php                                 # Migration configuration
+/scripts/phinx.php                         # Migration configuration
 ```
 
 ### For New Installations
@@ -219,7 +219,7 @@ php vendor/bin/phinx migrate -e production
 The migration system uses your existing `.env` configuration:
 
 ```php
-// phinx.php automatically reads from .env
+// scripts/phinx.php automatically reads from .env
 'production' => [
     'adapter' => 'mysql',
     'host' => env('DB_HOST', 'localhost'),

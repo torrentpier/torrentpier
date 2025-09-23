@@ -107,13 +107,13 @@ The project uses **StyleCI** with PSR-2 preset for code style enforcement. Style
 ### Migration Commands
 ```bash
 # Run all pending migrations
-php vendor/bin/phinx migrate --configuration=phinx.php
+php vendor/bin/phinx migrate --configuration=scripts/phinx.php
 
 # Check migration status
-php vendor/bin/phinx status --configuration=phinx.php
+php vendor/bin/phinx status --configuration=scripts/phinx.php
 
 # Mark migrations as applied (for existing installations)
-php vendor/bin/phinx migrate --fake --configuration=phinx.php
+php vendor/bin/phinx migrate --fake --configuration=scripts/phinx.php
 ```
 
 ## Legacy Compatibility Strategy
