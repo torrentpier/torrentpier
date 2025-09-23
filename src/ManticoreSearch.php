@@ -231,7 +231,7 @@ class ManticoreSearch
      */
     public function initialLoad(int $batchSize = 1000): bool
     {
-        $log_message[] = str_repeat('=', 10) . ' ' . date('Y-m-d H:i:s') . ' ' . str_repeat('=', 10) . "\n";
+        $log_message[] = str_repeat('=', 10) . ' ' . date('Y-m-d H:i:s') . ' ' . str_repeat('=', 10);
         $log_message[] = "Starting initial indexing...";
 
         // Очищаем индексы
@@ -299,7 +299,7 @@ class ManticoreSearch
             $log_message[] = "  [OK] Indexed " . min($offset + $batchSize, $totalUsers) . " / {$totalUsers} users";
         }
 
-        $log_message[] = "Initial indexing completed successfully!";
+        $log_message[] = "Initial indexing completed successfully!\n";
 
         bb_log($log_message, 'manticore_index');
         return true;
