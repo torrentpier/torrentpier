@@ -89,7 +89,7 @@ class ManticoreSearch
 
             'users_rt' => "CREATE TABLE IF NOT EXISTS users_rt (
                 id bigint,
-                username text
+                username string
             )"
         ];
 
