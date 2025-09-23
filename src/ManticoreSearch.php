@@ -240,14 +240,12 @@ class ManticoreSearch
         $this->pdo->exec("TRUNCATE RTINDEX users_rt");
         $log_message[] = "[OK] Indexes truncated";
 
-        $db = DB();
-
         // --- TOPICS ---
-        $totalTopics = (int)$db->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_TOPICS)['cnt'];
+        $totalTopics = (int)DB()->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_TOPICS)['cnt'];
         $log_message[] = "Indexing topics: total {$totalTopics}";
 
         for ($offset = 0; $offset < $totalTopics; $offset += $batchSize) {
-            $topics = $db->fetch_rowset("
+            $topics = DB()->fetch_rowset("
                 SELECT topic_id, topic_title, forum_id
                 FROM " . BB_TOPICS . "
                 LIMIT {$batchSize} OFFSET {$offset}");
@@ -259,11 +257,11 @@ class ManticoreSearch
         }
 
         // --- POSTS ---
-        $totalPosts = (int)$db->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_POSTS_TEXT)['cnt'];
+        $totalPosts = (int)DB()->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_POSTS_TEXT)['cnt'];
         $log_message[] = "Indexing posts: total {$totalPosts}";
 
         for ($offset = 0; $offset < $totalPosts; $offset += $batchSize) {
-            $posts = $db->fetch_rowset("
+            $posts = DB()->fetch_rowset("
                 SELECT pt.post_id, pt.post_text, t.topic_title, t.topic_id, t.forum_id
                 FROM " . BB_POSTS_TEXT . " pt
                 LEFT JOIN " . BB_TOPICS . " t ON pt.post_id = t.topic_first_post_id
@@ -282,11 +280,11 @@ class ManticoreSearch
         }
 
         // --- USERS ---
-        $totalUsers = (int)$db->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")")['cnt'];
+        $totalUsers = (int)DB()->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")")['cnt'];
         $log_message[] = "Indexing users: total {$totalUsers}";
 
         for ($offset = 0; $offset < $totalUsers; $offset += $batchSize) {
-            $users = $db->fetch_rowset("
+            $users = DB()->fetch_rowset("
                 SELECT user_id, username
                 FROM " . BB_USERS . "
                 WHERE user_id > 0

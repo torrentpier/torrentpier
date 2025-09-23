@@ -49,8 +49,11 @@ switch ($mode) {
         break;
     case 'indexer':
         $manticore = getManticoreSearch();
-        $manticore->initialLoad();
-        return '<span class="seed bold">' . $lang['INDEXER'] . '</span>';
+        if ($manticore->initialLoad()) {
+            return '<span class="seed bold">' . $lang['INDEXER'] . '</span>';
+        } else {
+            return '<span class="leech bold">' . $lang['ERROR'] . '</span>';
+        }
     case 'update_user_level':
         \TorrentPier\Legacy\Group::update_user_level('all');
         $this->response['update_user_level_html'] = '<span class="seed bold">' . $lang['USER_LEVELS_UPDATED'] . '</span>';
