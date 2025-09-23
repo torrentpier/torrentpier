@@ -279,6 +279,22 @@ class Common
             return 0;
         }
 
+        // Get all topic IDs to delete from Manticore
+        $manticore_topics = DB()->fetch_rowset("SELECT topic_id FROM $tmp_delete_topics");
+        foreach ($manticore_topics as $topic_row) {
+            sync_topic_to_manticore($topic_row['topic_id'], '', 0, 'delete');
+        }
+
+        // Get all post IDs from topics to delete from Manticore
+        $manticore_posts = DB()->fetch_rowset("
+            SELECT p.post_id
+            FROM $tmp_delete_topics del, " . BB_POSTS . " p
+            WHERE p.topic_id = del.topic_id
+        ");
+        foreach ($manticore_posts as $post_row) {
+            sync_post_to_manticore($post_row['post_id'], '', '', 0, 0, 'delete');
+        }
+
         // Update user posts count
         $tmp_user_posts = 'tmp_user_posts';
 
