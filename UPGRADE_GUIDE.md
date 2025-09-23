@@ -8,6 +8,7 @@ This guide helps you upgrade your TorrentPier installation to the latest version
 - [Database Layer Migration](#database-layer-migration)
 - [Unified Cache System Migration](#unified-cache-system-migration)
 - [Configuration System Migration](#configuration-system-migration)
+- [Search System Migration](#search-system-migration)
 - [Language System Migration](#language-system-migration)
 - [Censor System Migration](#censor-system-migration)
 - [Select System Migration](#select-system-migration)
