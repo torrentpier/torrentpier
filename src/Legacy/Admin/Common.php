@@ -292,7 +292,7 @@ class Common
             WHERE p.topic_id = del.topic_id
         ");
         foreach ($manticore_posts as $post_row) {
-            sync_post_to_manticore($post_row['post_id'], '', '', 0, 0, 'delete');
+            sync_post_to_manticore($post_row['post_id'], action: 'delete');
         }
 
         // Update user posts count
@@ -512,7 +512,7 @@ class Common
 
         // Get all posts in moved topics for Manticore update (before DB update)
         $all_posts_for_manticore = DB()->fetch_rowset("
-            SELECT post_id, topic_id
+            SELECT post_id
             FROM " . BB_POSTS . "
             WHERE topic_id IN($topic_csv)
         ");
@@ -534,7 +534,7 @@ class Common
 
         foreach ($topics as $topic_id => $row) {
             // Manticore [Update topic]
-            sync_topic_to_manticore($topic_id, null, $to_forum_id, 'update');
+            sync_topic_to_manticore($topic_id, forum_id: $to_forum_id);
 
             // Log action
             $log_action->mod('mod_topic_move', [
@@ -547,7 +547,7 @@ class Common
 
         // Manticore [Update all posts in moved topics]
         foreach ($all_posts_for_manticore as $post_row) {
-            sync_post_to_manticore($post_row['post_id'], null, null, $post_row['topic_id'], $to_forum_id, 'update');
+            sync_post_to_manticore($post_row['post_id'], forum_id: $to_forum_id);
         }
 
         return true;
@@ -811,7 +811,7 @@ class Common
         // Delete user feed / manticore data
         foreach (explode(',', $user_csv) as $user_id) {
             // Manticore [User Delete]
-            sync_user_to_manticore($user_id, '', 'delete');
+            sync_user_to_manticore($user_id, action: 'delete');
 
             // feed
             $file_path = config()->get('atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
