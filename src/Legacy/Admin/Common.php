@@ -712,9 +712,6 @@ class Common
         }
         $user_csv = get_id_csv($user_id);
 
-        // Manticore [User Delete]
-        sync_user_to_manticore($user_id, '', 'delete');
-
         // LOG
         $log_action->admin('adm_user_delete', ['log_msg' => self::get_usernames_for_log($user_id)]);
 
@@ -783,8 +780,12 @@ class Common
         DB()->query("UPDATE " . BB_PRIVMSGS . " SET privmsgs_from_userid = " . DELETED . " WHERE privmsgs_from_userid IN($user_csv)");
         DB()->query("UPDATE " . BB_PRIVMSGS . " SET privmsgs_to_userid = " . DELETED . " WHERE privmsgs_to_userid IN($user_csv)");
 
-        // Delete user feed
+        // Delete user feed / manticore data
         foreach (explode(',', $user_csv) as $user_id) {
+            // Manticore [User Delete]
+            sync_user_to_manticore($user_id, '', 'delete');
+
+            // feed
             $file_path = config()->get('atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
             @unlink($file_path);
         }
