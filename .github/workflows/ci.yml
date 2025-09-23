@@ -29,7 +29,7 @@ jobs:
           echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_OUTPUT
 
       - name: Cleanup
-        run: php _cleanup.php && rm _cleanup.php
+        run: php scripts/cleanup.php && rm scripts/cleanup.php
 
       - name: Create archive
         id: create-zip
