@@ -1226,6 +1226,22 @@ function setupCustomCensoring(): void {
 }
 ```
 
+### HttpHelper usage
+```php
+use TorrentPier\Helpers\HttpHelper;
+
+// ✅ Always use HttpHelper to detect protocol
+if (HttpHelper::isHTTPS()) {
+    // Handle HTTPS-specific logic
+}
+
+// ✅ Prefer HttpHelper over deprecated IsHelper
+function getBaseUrl(): string {
+    $protocol = HttpHelper::isHTTPS() ? 'https://' : 'http://';
+    return $protocol . $_SERVER['HTTP_HOST'];
+}
+```
+
 ### Error Handling
 ```php
 // ✅ Graceful error handling
