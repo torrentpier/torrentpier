@@ -1853,7 +1853,7 @@ function get_title_match_topics_mysql(string $title_match_sql, array $forum_ids,
  * @param string $action
  * @return void
  */
-function sync_topic_to_manticore($topic_id, $topic_title, $forum_id, string $action = 'upsert'): void
+function sync_topic_to_manticore($topic_id, $topic_title = null, $forum_id = null, string $action = 'upsert'): void
 {
     global $bb_cfg;
 
@@ -1885,7 +1885,7 @@ function sync_topic_to_manticore($topic_id, $topic_title, $forum_id, string $act
  * @param string $action
  * @return void
  */
-function sync_post_to_manticore($post_id, $post_text, $topic_title, $topic_id, $forum_id, string $action = 'upsert'): void
+function sync_post_to_manticore($post_id, $post_text = null, $topic_title = null, $topic_id = null, $forum_id = null, string $action = 'upsert'): void
 {
     global $bb_cfg;
 
@@ -1914,7 +1914,7 @@ function sync_post_to_manticore($post_id, $post_text, $topic_title, $topic_id, $
  * @param string $action
  * @return void
  */
-function sync_user_to_manticore($user_id, $username, string $action = 'upsert'): void
+function sync_user_to_manticore($user_id, $username = null, string $action = 'upsert'): void
 {
     global $bb_cfg;
 
