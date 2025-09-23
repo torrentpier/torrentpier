@@ -75,14 +75,14 @@ class ManticoreSearch
         $indexes = [
             'topics_rt' => "CREATE TABLE IF NOT EXISTS topics_rt (
                 id bigint,
-                topic_title text,
+                topic_title text indexed,
                 forum_id int
             )",
 
             'posts_rt' => "CREATE TABLE IF NOT EXISTS posts_rt (
                 id bigint,
-                post_text text,
-                topic_title text,
+                post_text text indexed,
+                topic_title text indexed,
                 topic_id int,
                 forum_id int
             )",
@@ -123,10 +123,7 @@ class ManticoreSearch
             $params = array_merge($params, $forum_ids);
         }
 
-        $offset = (int)$offset;
-        $limit = (int)$limit;
         $sql = "SELECT * FROM {$index} WHERE " . implode(' AND ', $where) . " LIMIT $offset, $limit";
-
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
 
