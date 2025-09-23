@@ -226,6 +226,7 @@ class ManticoreSearch
     /**
      * Первоначальная загрузка всех данных из основной базы в RT индексы
      *
+     * @param int $batchSize
      * @return bool
      */
     public function initialLoad(int $batchSize = 1000): bool
