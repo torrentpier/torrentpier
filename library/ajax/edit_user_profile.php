@@ -35,6 +35,10 @@ switch ($field) {
         if ($err = \TorrentPier\Validate::username($value)) {
             $this->ajax_die($err);
         }
+
+        // Manticore [Update username]
+        sync_user_to_manticore($user_id, $value);
+
         $this->response['new_value'] = $this->request['value'];
         break;
 

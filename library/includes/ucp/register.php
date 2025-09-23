@@ -691,6 +691,11 @@ if ($submit && !$errors) {
 
             DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$pr_data['user_id']}");
 
+            // Manticore [Update username]
+            if (!empty($db_data['username'])) {
+                sync_user_to_manticore($pr_data['user_id'], $db_data['username']);
+            }
+
             if ($pr_data['user_id'] != $userdata['user_id']) {
                 if ($pr_data['user_level'] == MOD && !empty($db_data['username'])) {
                     $datastore->update('moderators');
