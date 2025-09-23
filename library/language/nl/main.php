@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Terug naar bewerken';
 $lang['PROFILE_RETURN'] = 'Ga naar het profiel';
 
 $lang['WARNING'] = 'Waarschuwing';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Forum stijl';
 
