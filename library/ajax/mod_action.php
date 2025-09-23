@@ -77,6 +77,9 @@ switch ($mode) {
 
         DB()->query("UPDATE " . BB_TOPICS . " SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id LIMIT 1");
 
+        // Manticore [Update topic title]
+        sync_topic_to_manticore($topic_id, topic_title: $new_title);
+
         // Update the news cache on the index page
         $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
         if (isset($news_forums[$t_data['forum_id']]) && config()->get('show_latest_news')) {
