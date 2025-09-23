@@ -231,19 +231,19 @@ class ManticoreSearch
      */
     public function initialLoad(int $batchSize = 1000): bool
     {
-        echo "Starting initial indexing...\n";
+        $log_message[] = "Starting initial indexing...";
 
         // Очищаем индексы
         $this->pdo->exec("TRUNCATE RTINDEX topics_rt");
         $this->pdo->exec("TRUNCATE RTINDEX posts_rt");
         $this->pdo->exec("TRUNCATE RTINDEX users_rt");
-        echo "[OK] Indexes truncated.\n";
+        $log_message[] = "[OK] Indexes truncated";
 
         $db = DB();
 
         // --- TOPICS ---
         $totalTopics = (int)$db->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_TOPICS)['cnt'];
-        echo "Indexing topics: total {$totalTopics}\n";
+        $log_message[] = "Indexing topics: total {$totalTopics}";
 
         for ($offset = 0; $offset < $totalTopics; $offset += $batchSize) {
             $topics = $db->fetch_rowset("
@@ -254,12 +254,12 @@ class ManticoreSearch
             foreach ($topics as $topic) {
                 $this->upsertTopic($topic['topic_id'], $topic['topic_title'], $topic['forum_id']);
             }
-            echo "  [OK] Indexed " . min($offset + $batchSize, $totalTopics) . " / {$totalTopics} topics\n";
+            $log_message[] = "  [OK] Indexed " . min($offset + $batchSize, $totalTopics) . " / {$totalTopics} topics";
         }
 
         // --- POSTS ---
         $totalPosts = (int)$db->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_POSTS_TEXT)['cnt'];
-        echo "Indexing posts: total {$totalPosts}\n";
+        $log_message[] = "Indexing posts: total {$totalPosts}";
 
         for ($offset = 0; $offset < $totalPosts; $offset += $batchSize) {
             $posts = $db->fetch_rowset("
@@ -277,12 +277,12 @@ class ManticoreSearch
                     $post['forum_id'] ?? 0
                 );
             }
-            echo "  [OK] Indexed " . min($offset + $batchSize, $totalPosts) . " / {$totalPosts} posts\n";
+            $log_message[] = "  [OK] Indexed " . min($offset + $batchSize, $totalPosts) . " / {$totalPosts} posts\n";
         }
 
         // --- USERS ---
         $totalUsers = (int)$db->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_USERS . " WHERE user_id > 0")['cnt'];
-        echo "Indexing users: total {$totalUsers}\n";
+        $log_message[] = "Indexing users: total {$totalUsers}";
 
         for ($offset = 0; $offset < $totalUsers; $offset += $batchSize) {
             $users = $db->fetch_rowset("
@@ -294,10 +294,13 @@ class ManticoreSearch
             foreach ($users as $user) {
                 $this->upsertUser($user['user_id'], $user['username']);
             }
-            echo "  [OK] Indexed " . min($offset + $batchSize, $totalUsers) . " / {$totalUsers} users\n";
+
+            $log_message[] = "  [OK] Indexed " . min($offset + $batchSize, $totalUsers) . " / {$totalUsers} users";
         }
 
-        echo "Initial indexing completed successfully!\n";
+        $log_message[] = "Initial indexing completed successfully!";
+
+        bb_log(str_repeat('=', 30) . implode(LOG_LF, $log_message) . LOG_LF, 'manticore_index');
         return true;
     }
 }
