@@ -35,7 +35,7 @@ function env(string $key, mixed $default = null): mixed
 
 return [
     'paths' => [
-        'migrations' => BB_ROOT . '/migrations'
+        'migrations' => BB_ROOT . 'migrations'
     ],
     'environments' => [
         'default_migration_table' => BB_MIGRATIONS,
