@@ -50,7 +50,7 @@ switch ($mode) {
     case 'indexer':
         $manticore = getManticoreSearch();
         if ($manticore->initialLoad()) {
-            return '<span class="seed bold">' . $lang['INDEXER'] . '</span>';
+            return '<span class="seed bold">' . $lang['INDEXER_SUCCESS'] . '</span>';
         } else {
             return '<span class="leech bold">' . $lang['ERROR'] . '</span>';
         }
