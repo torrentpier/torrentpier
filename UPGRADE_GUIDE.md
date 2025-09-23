@@ -12,6 +12,7 @@ This guide helps you upgrade your TorrentPier installation to the latest version
 - [Censor System Migration](#censor-system-migration)
 - [Select System Migration](#select-system-migration)
 - [Development System Migration](#development-system-migration)
+- [HTTP Helper Migration](#http-helper-migration)
 - [Breaking Changes](#breaking-changes)
 - [Best Practices](#best-practices)
 
@@ -1096,6 +1097,23 @@ $environment = [
 ];
 ```
 
+## 🌍 HTTP Helper Migration
+
+The `IsHelper` class has been **renamed** to `HttpHelper` for better clarity and consistency.  
+This change is **breaking** because the old class name is no longer available.
+
+### 🔄 Migration Strategy
+
+Replace all references of:
+```php
+\TorrentPier\Helpers\IsHelper
+```
+
+With:
+```php
+\TorrentPier\Helpers\HttpHelper
+```
+
 ## ⚠️ Breaking Changes
 
 ### Database Layer Changes
@@ -1114,6 +1132,7 @@ $environment = [
 - `new TorrentPier\Dev()` → Use `dev()` global function
 - Static `Dev::` methods → Use `dev()` instance methods
 - `\TorrentPier\Legacy\Select::` → Use `\TorrentPier\Legacy\Common\Select::`
+- `\TorrentPier\Helpers\IsHelper::` → Use `\TorrentPier\Helpers\HttpHelper::`
 
 ### File Structure Changes
 - New `/src/Database/` directory for modern database classes
@@ -1205,6 +1224,22 @@ function setupCustomCensoring(): void {
     if (isCustomModeEnabled()) {
         censor()->addWord('custombad*', '[censored]');
     }
+}
+```
+
+### HttpHelper usage
+```php
+use TorrentPier\Helpers\HttpHelper;
+
+// ✅ Always use HttpHelper to detect protocol
+if (HttpHelper::isHTTPS()) {
+    // Handle HTTPS-specific logic
+}
+
+// ✅ Prefer HttpHelper over deprecated IsHelper
+function getBaseUrl(): string {
+    $protocol = HttpHelper::isHTTPS() ? 'https://' : 'http://';
+    return $protocol . $_SERVER['HTTP_HOST'];
 }
 ```
 

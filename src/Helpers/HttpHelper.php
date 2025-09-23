@@ -10,10 +10,10 @@
 namespace TorrentPier\Helpers;
 
 /**
- * Class IsHelper
+ * Class HttpHelper
  * @package TorrentPier\Helpers
  */
-class IsHelper
+class HttpHelper
 {
     /**
      * Return true if server have SSL
