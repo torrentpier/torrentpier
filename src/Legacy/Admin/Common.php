@@ -509,8 +509,11 @@ class Common
         // Sync
         self::sync('forum', array_keys($sync_forums));
 
-        // Log action
         foreach ($topics as $topic_id => $row) {
+            // Manticore [Update topic]
+            sync_topic_to_manticore($topic_id, $row['topic_title'], $to_forum_id);
+
+            // Log action
             $log_action->mod('mod_topic_move', [
                 'forum_id' => $row['forum_id'],
                 'forum_id_new' => $to_forum_id,
