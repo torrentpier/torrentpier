@@ -282,7 +282,7 @@ class ManticoreSearch
         }
 
         // --- USERS ---
-        $totalUsers = (int)$db->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_USERS . " WHERE user_id > 0")['cnt'];
+        $totalUsers = (int)$db->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")")['cnt'];
         $log_message[] = "Indexing users: total {$totalUsers}";
 
         for ($offset = 0; $offset < $totalUsers; $offset += $batchSize) {
