@@ -259,12 +259,16 @@ class ManticoreSearch
      * Insert or update a user in the RT index
      *
      * @param int $user_id User ID
-     * @param string $username Username
+     * @param null|string $username Username
      * @return void
      */
-    public function upsertUser(int $user_id, string $username): void
+    public function upsertUser(int $user_id, null|string $username): void
     {
-        $sql = "REPLACE INTO users_rt (id, username) VALUES (?, ?)";
+        if ($username === null) {
+            return;
+        }
+
+        $sql = "UPDATE users_rt (id, username) VALUES (?, ?)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$user_id, $username]);
     }
