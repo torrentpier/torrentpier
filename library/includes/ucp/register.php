@@ -618,6 +618,9 @@ if ($submit && !$errors) {
             }
         }
 
+        // Manticore [User Add]
+        sync_user_to_manticore($new_user_id, $username);
+
         if (IS_ADMIN) {
             set_pr_die_append_msg($new_user_id);
             $message = $lang['ACCOUNT_ADDED'];

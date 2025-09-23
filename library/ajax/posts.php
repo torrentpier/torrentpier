@@ -280,6 +280,9 @@ switch ($this->request['type']) {
         // Update atom feed
         update_atom('topic', (int)$this->request['topic_id']);
 
+        // Manticore [Post]
+        sync_post_to_manticore($post_id, $message, $post['topic_title'], $topic_id, $post['forum_id']);
+
         $this->response['redirect'] = make_url(POST_URL . "$post_id#$post_id");
         break;
 

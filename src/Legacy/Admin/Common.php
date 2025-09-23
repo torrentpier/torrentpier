@@ -709,6 +709,9 @@ class Common
         }
         $user_csv = get_id_csv($user_id);
 
+        // Manticore [User Delete]
+        sync_user_to_manticore($user_id, '', 'delete');
+
         // LOG
         $log_action->admin('adm_user_delete', ['log_msg' => self::get_usernames_for_log($user_id)]);
 
