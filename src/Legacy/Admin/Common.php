@@ -208,10 +208,10 @@ class Common
     /**
      * Topic deletion
      *
-     * @param string $mode_or_topic_id
-     * @param null $forum_id
-     * @param int $prune_time
-     * @param bool $prune_all
+     * @param $mode_or_topic_id
+     * @param $forum_id
+     * @param $prune_time
+     * @param $prune_all
      *
      * @return bool|int
      */
@@ -566,7 +566,7 @@ class Common
     {
         global $log_action;
 
-        $del_user_posts = ($mode_or_post_id === 'user');  // Delete all user posts
+        $del_user_posts = ($mode_or_post_id === 'user'); // Delete all user posts
 
         // Get required params
         if ($del_user_posts) {
@@ -655,6 +655,12 @@ class Common
         if (!$deleted_posts_count = $row['posts_count']) {
             DB()->query("DROP TEMPORARY TABLE $tmp_delete_posts");
             return 0;
+        }
+
+        // Delete from Manticore RT index before physical deletion
+        $manticore_posts = DB()->fetch_rowset("SELECT post_id FROM $tmp_delete_posts");
+        foreach ($manticore_posts as $post_row) {
+            sync_post_to_manticore($post_row['post_id'], action: 'delete');
         }
 
         // Delete attachments (from disk)
