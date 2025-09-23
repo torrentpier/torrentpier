@@ -510,6 +510,13 @@ class Common
             }
         }
 
+        // Get all posts in moved topics for Manticore update (before DB update)
+        $all_posts_for_manticore = DB()->fetch_rowset("
+            SELECT post_id, post_subject, topic_id
+            FROM " . BB_POSTS . "
+            WHERE topic_id IN($topic_csv)
+        ");
+
         DB()->query("UPDATE " . BB_TOPICS . " SET forum_id = $to_forum_id WHERE topic_id IN($topic_csv)");
         DB()->query("UPDATE " . BB_POSTS . " SET forum_id = $to_forum_id WHERE topic_id IN($topic_csv)");
         DB()->query("UPDATE " . BB_BT_TORRENTS . " SET forum_id = $to_forum_id WHERE topic_id IN($topic_csv)");
@@ -536,6 +543,11 @@ class Common
                 'topic_id' => $topic_id,
                 'topic_title' => $row['topic_title'],
             ]);
+        }
+
+        // Manticore [Update all posts in moved topics]
+        foreach ($all_posts_for_manticore as $post_row) {
+            sync_post_to_manticore($post_row['post_id'], '', '', $post_row['topic_id'], $to_forum_id);
         }
 
         return true;
