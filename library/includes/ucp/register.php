@@ -568,7 +568,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     }
                 }
             }
-            $tp_data['TEMPLATES_SELECT'] = \TorrentPier\Legacy\Select::template($pr_data['tpl_name'], 'tpl_name');
+            $tp_data['TEMPLATES_SELECT'] = \TorrentPier\Legacy\Common\Select::template($pr_data['tpl_name'], 'tpl_name');
             break;
 
         /**
@@ -725,8 +725,8 @@ $template->assign_vars([
     'INVITE_CODE' => !empty($_GET['invite']) ? htmlCHR($_GET['invite']) : '',
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
 
-    'LANGUAGE_SELECT' => \TorrentPier\Legacy\Select::language($pr_data['user_lang'], 'user_lang'),
-    'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
+    'LANGUAGE_SELECT' => \TorrentPier\Legacy\Common\Select::language($pr_data['user_lang'], 'user_lang'),
+    'TIMEZONE_SELECT' => \TorrentPier\Legacy\Common\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
 
     'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], config()->get('avatars.max_width'), config()->get('avatars.max_height'), humn_size(config()->get('avatars.max_size'))),
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
