@@ -819,10 +819,12 @@ class Common
             // Manticore [User Delete]
             sync_user_to_manticore($user_id, action: 'delete');
 
-            // feed
+            // Feed
             $file_path = config()->get('atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
             @unlink($file_path);
         }
+
+        return true;
     }
 
     /**
