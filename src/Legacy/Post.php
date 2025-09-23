@@ -167,6 +167,9 @@ class Post
             if ($mode == 'newtopic') {
                 $topic_id = DB()->sql_nextid();
             }
+
+            // Manticore [Topic]
+            sync_topic_to_manticore($topic_id, $post_subject, $forum_id);
         }
 
         $edited_sql = ($mode == 'editpost' && !$post_data['last_post'] && $post_data['poster_post']) ? ", post_edit_time = $current_time, post_edit_count = post_edit_count + 1" : "";
@@ -219,6 +222,9 @@ class Post
                 $datastore->update('network_news');
             }
         }
+
+        // Manticore [Post]
+        sync_post_to_manticore($post_id, $post_message, $post_subject, $topic_id, $forum_id);
 
         meta_refresh(POST_URL . "$post_id#$post_id");
         set_die_append_msg($forum_id, $topic_id);

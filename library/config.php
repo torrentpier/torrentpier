@@ -548,7 +548,11 @@ $bb_cfg['posts_cache_days_keep'] = 14;
 $bb_cfg['use_ajax_posts'] = true;
 
 // Search
-$bb_cfg['search_engine_type'] = 'mysql'; // mysql
+$bb_cfg['search_engine_type'] = 'mysql'; // mysql, manticore
+
+$bb_cfg['manticore_host'] = '127.0.0.1';
+$bb_cfg['manticore_port'] = 9306;
+$bb_cfg['search_fallback_to_mysql'] = true;
 
 $bb_cfg['disable_ft_search_in_posts'] = false; // disable searching in post bodies
 $bb_cfg['disable_search_for_guest'] = true; // Disable search for guests

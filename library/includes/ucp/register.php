@@ -618,6 +618,9 @@ if ($submit && !$errors) {
             }
         }
 
+        // Manticore [User Add]
+        sync_user_to_manticore($new_user_id, $username);
+
         if (IS_ADMIN) {
             set_pr_die_append_msg($new_user_id);
             $message = $lang['ACCOUNT_ADDED'];
@@ -687,6 +690,11 @@ if ($submit && !$errors) {
             $sql_args = DB()->build_array('UPDATE', $db_data);
 
             DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$pr_data['user_id']}");
+
+            // Manticore [Update username]
+            if (!empty($db_data['username'])) {
+                sync_user_to_manticore($pr_data['user_id'], $db_data['username']);
+            }
 
             if ($pr_data['user_id'] != $userdata['user_id']) {
                 if ($pr_data['user_level'] == MOD && !empty($db_data['username'])) {

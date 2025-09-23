@@ -137,6 +137,9 @@ switch ($this->request['type']) {
                         'post_id' => $post_id,
                         'post_text' => $text
                     ]);
+
+                    // Manticore [Post update]
+                    sync_post_to_manticore($post_id, $text, $post['topic_title'], $post['topic_id'], $post['forum_id']);
                 }
             } else {
                 $this->ajax_die($lang['EMPTY_MESSAGE']);
@@ -279,6 +282,9 @@ switch ($this->request['type']) {
 
         // Update atom feed
         update_atom('topic', (int)$this->request['topic_id']);
+
+        // Manticore [Post create]
+        sync_post_to_manticore($post_id, $message, $post['topic_title'], $topic_id, $post['forum_id']);
 
         $this->response['redirect'] = make_url(POST_URL . "$post_id#$post_id");
         break;

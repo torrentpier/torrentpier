@@ -208,10 +208,10 @@ class Common
     /**
      * Topic deletion
      *
-     * @param string $mode_or_topic_id
-     * @param null $forum_id
-     * @param int $prune_time
-     * @param bool $prune_all
+     * @param $mode_or_topic_id
+     * @param $forum_id
+     * @param $prune_time
+     * @param $prune_all
      *
      * @return bool|int
      */
@@ -277,6 +277,22 @@ class Common
         if (!$deleted_topics_count = $row['topics_count']) {
             DB()->query("DROP TEMPORARY TABLE $tmp_delete_topics");
             return 0;
+        }
+
+        // Get all topic IDs to delete from Manticore
+        $manticore_topics = DB()->fetch_rowset("SELECT topic_id FROM $tmp_delete_topics");
+        foreach ($manticore_topics as $topic_row) {
+            sync_topic_to_manticore($topic_row['topic_id'], action: 'delete');
+        }
+
+        // Get all post IDs from topics to delete from Manticore
+        $manticore_posts = DB()->fetch_rowset("
+            SELECT p.post_id
+            FROM $tmp_delete_topics del, " . BB_POSTS . " p
+            WHERE p.topic_id = del.topic_id
+        ");
+        foreach ($manticore_posts as $post_row) {
+            sync_post_to_manticore($post_row['post_id'], action: 'delete');
         }
 
         // Update user posts count
@@ -424,15 +440,15 @@ class Common
     /**
      * Topic movement
      *
-     * @param int|array|string $topic_id
-     * @param int|string $to_forum_id
-     * @param int|string|null $from_forum_id
+     * @param $topic_id
+     * @param $to_forum_id
+     * @param $from_forum_id
      * @param bool $leave_shadow
      * @param bool $insert_bot_msg
      * @param string $reason_move
      * @return bool
      */
-    public static function topic_move(int|array|string $topic_id, int|string $to_forum_id, null|int|string $from_forum_id = null, bool $leave_shadow = false, bool $insert_bot_msg = false, string $reason_move = ''): bool
+    public static function topic_move($topic_id, $to_forum_id, $from_forum_id = null, bool $leave_shadow = false, bool $insert_bot_msg = false, string $reason_move = ''): bool
     {
         global $log_action;
 
@@ -494,6 +510,13 @@ class Common
             }
         }
 
+        // Get all posts in moved topics for Manticore update (before DB update)
+        $all_posts_for_manticore = DB()->fetch_rowset("
+            SELECT post_id
+            FROM " . BB_POSTS . "
+            WHERE topic_id IN($topic_csv)
+        ");
+
         DB()->query("UPDATE " . BB_TOPICS . " SET forum_id = $to_forum_id WHERE topic_id IN($topic_csv)");
         DB()->query("UPDATE " . BB_POSTS . " SET forum_id = $to_forum_id WHERE topic_id IN($topic_csv)");
         DB()->query("UPDATE " . BB_BT_TORRENTS . " SET forum_id = $to_forum_id WHERE topic_id IN($topic_csv)");
@@ -509,8 +532,11 @@ class Common
         // Sync
         self::sync('forum', array_keys($sync_forums));
 
-        // Log action
         foreach ($topics as $topic_id => $row) {
+            // Manticore [Update topic]
+            sync_topic_to_manticore($topic_id, forum_id: $to_forum_id);
+
+            // Log action
             $log_action->mod('mod_topic_move', [
                 'forum_id' => $row['forum_id'],
                 'forum_id_new' => $to_forum_id,
@@ -519,23 +545,28 @@ class Common
             ]);
         }
 
+        // Manticore [Update all posts in moved topics]
+        foreach ($all_posts_for_manticore as $post_row) {
+            sync_post_to_manticore($post_row['post_id'], forum_id: $to_forum_id);
+        }
+
         return true;
     }
 
     /**
      * Post deletion
      *
-     * @param string $mode_or_post_id
-     * @param null $user_id
+     * @param $mode_or_post_id
+     * @param $user_id
      * @param bool $exclude_first
      *
      * @return bool|int
      */
-    public static function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
+    public static function post_delete($mode_or_post_id, $user_id = null, bool $exclude_first = true)
     {
         global $log_action;
 
-        $del_user_posts = ($mode_or_post_id === 'user');  // Delete all user posts
+        $del_user_posts = ($mode_or_post_id === 'user'); // Delete all user posts
 
         // Get required params
         if ($del_user_posts) {
@@ -624,6 +655,12 @@ class Common
         if (!$deleted_posts_count = $row['posts_count']) {
             DB()->query("DROP TEMPORARY TABLE $tmp_delete_posts");
             return 0;
+        }
+
+        // Delete from Manticore RT index before physical deletion
+        $manticore_posts = DB()->fetch_rowset("SELECT post_id FROM $tmp_delete_posts");
+        foreach ($manticore_posts as $post_row) {
+            sync_post_to_manticore($post_row['post_id'], action: 'delete');
         }
 
         // Delete attachments (from disk)
@@ -777,11 +814,17 @@ class Common
         DB()->query("UPDATE " . BB_PRIVMSGS . " SET privmsgs_from_userid = " . DELETED . " WHERE privmsgs_from_userid IN($user_csv)");
         DB()->query("UPDATE " . BB_PRIVMSGS . " SET privmsgs_to_userid = " . DELETED . " WHERE privmsgs_to_userid IN($user_csv)");
 
-        // Delete user feed
+        // Delete user feed / manticore data
         foreach (explode(',', $user_csv) as $user_id) {
+            // Manticore [User Delete]
+            sync_user_to_manticore($user_id, action: 'delete');
+
+            // Feed
             $file_path = config()->get('atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
             @unlink($file_path);
         }
+
+        return true;
     }
 
     /**

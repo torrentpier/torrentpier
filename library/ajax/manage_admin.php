@@ -47,6 +47,14 @@ switch ($mode) {
 
         $this->response['template_cache_html'] = '<span class="seed bold">' . $lang['ALL_TEMPLATE_CLEARED'] . '</span>';
         break;
+    case 'indexer':
+        $manticore = getManticoreSearch();
+        if ($manticore->initialLoad()) {
+            $this->response['indexer_html'] = '<span class="seed bold">' . $lang['INDEXER_SUCCESS'] . '</span>';
+        } else {
+            $this->response['indexer_html'] = '<span class="leech bold">' . $lang['ERROR'] . '</span>';
+        }
+        break;
     case 'update_user_level':
         \TorrentPier\Legacy\Group::update_user_level('all');
         $this->response['update_user_level_html'] = '<span class="seed bold">' . $lang['USER_LEVELS_UPDATED'] . '</span>';

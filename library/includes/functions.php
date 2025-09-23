@@ -1745,24 +1745,46 @@ function clean_title($str, $replace_underscore = false)
     return $str;
 }
 
-function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
+function clean_text_match(?string $text, bool $ltrim_star = true, bool $die_if_empty = false): string
 {
     global $lang;
 
     $text = str_compact($text);
     $ltrim_chars = ($ltrim_star) ? ' *-!' : ' ';
-
     $text = ' ' . str_compact(ltrim($text, $ltrim_chars)) . ' ';
-    $text_match_sql = DB()->escape(trim($text));
 
-    if (!$text_match_sql && $die_if_empty) {
+    if (config()->get('search_engine_type') == 'manticore') {
+        $text = preg_replace('#[^\w\s\-\*\|"а-яё]#ui', ' ', $text);
+        $text = str_compact($text);
+        $text = trim($text);
+    } else {
+        $text = DB()->escape(trim($text));
+    }
+
+    if (!$text && $die_if_empty) {
         bb_die($lang['NO_SEARCH_MATCH']);
     }
 
-    return $text_match_sql;
+    return $text;
 }
 
-function get_title_match_topics($title_match_sql, array $forum_ids = [])
+/**
+ * getManticoreSearch instance
+ *
+ * @return \TorrentPier\ManticoreSearch|null
+ */
+function getManticoreSearch(): ?\TorrentPier\ManticoreSearch
+{
+    global $manticore_search, $bb_cfg;
+
+    if ($manticore_search === null) {
+        $manticore_search = new \TorrentPier\ManticoreSearch($bb_cfg);
+    }
+
+    return $manticore_search;
+}
+
+function get_title_match_topics(string $title_match_sql, array $forum_ids = []): ?array
 {
     global $title_match;
 
@@ -1771,29 +1793,146 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
         $forum_ids = array_diff($forum_ids, [0 => 0]);
     }
 
-    if (config()->get('search_engine_type') == 'mysql') {
-        $where_forum = ($forum_ids) ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
-        $search_bool_mode = (config()->get('allow_search_in_bool_mode')) ? ' IN BOOLEAN MODE' : '';
+    if (config()->get('search_engine_type') == 'manticore') {
+        try {
+            $manticore = getManticoreSearch();
+            $index = $title_match ? 'topics_rt' : 'posts_rt';
+            $result = $manticore->search($title_match_sql, $index, $forum_ids);
 
-        if ($title_match) {
-            $where_id = 'topic_id';
-            $sql = "SELECT topic_id FROM " . BB_TOPICS . "
-					WHERE MATCH (topic_title) AGAINST ('$title_match_sql'$search_bool_mode)
-					$where_forum";
-        } else {
-            $where_id = 'post_id';
-            $sql = "SELECT p.post_id FROM " . BB_POSTS . " p, " . BB_POSTS_SEARCH . " ps
-				WHERE ps.post_id = p.post_id
-					AND MATCH (ps.search_words) AGAINST ('$title_match_sql'$search_bool_mode)
-					$where_forum";
-        }
+            if (!empty($result['matches'])) {
+                $where_ids = array_keys($result['matches']);
+            }
+        } catch (Exception $e) {
+            bb_log("Manticore search error: " . $e->getMessage() . LOG_LF, 'manticore_errors');
 
-        foreach (DB()->fetch_rowset($sql) as $row) {
-            $where_ids[] = $row[$where_id];
+            // Fallback to MySQL if needed
+            if (config()->get('search_fallback_to_mysql')) {
+                get_title_match_topics_mysql($title_match_sql, $forum_ids, $where_ids);
+            }
         }
+    } else {
+        get_title_match_topics_mysql($title_match_sql, $forum_ids, $where_ids);
     }
 
     return $where_ids;
+}
+
+function get_title_match_topics_mysql(string $title_match_sql, array $forum_ids, array &$where_ids): void
+{
+    global $title_match;
+
+    $where_forum = $forum_ids ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
+    $search_bool_mode = config()->get('allow_search_in_bool_mode') ? ' IN BOOLEAN MODE' : '';
+
+    if ($title_match) {
+        // topics
+        $sql = "SELECT topic_id FROM " . BB_TOPICS . "
+                WHERE MATCH (topic_title) AGAINST ('$title_match_sql'$search_bool_mode)
+                $where_forum";
+        foreach (DB()->fetch_rowset($sql) as $row) {
+            $where_ids[] = $row['topic_id'];
+        }
+    } else {
+        // posts
+        $sql = "SELECT p.post_id FROM " . BB_POSTS . " p, " . BB_POSTS_SEARCH . " ps
+            WHERE ps.post_id = p.post_id
+                AND MATCH (ps.search_words) AGAINST ('$title_match_sql'$search_bool_mode)
+                $where_forum";
+        foreach (DB()->fetch_rowset($sql) as $row) {
+            $where_ids[] = $row['post_id'];
+        }
+    }
+}
+
+/**
+ * Sync topics to manticore
+ *
+ * @param $topic_id
+ * @param $topic_title
+ * @param $forum_id
+ * @param string $action
+ * @return void
+ */
+function sync_topic_to_manticore($topic_id, $topic_title = null, $forum_id = null, string $action = 'upsert'): void
+{
+    global $bb_cfg;
+
+    if ($bb_cfg['search_engine_type'] !== 'manticore') {
+        return;
+    }
+
+    try {
+        $manticore = getManticoreSearch();
+
+        if ($action === 'delete') {
+            $manticore->deleteTopic($topic_id);
+        } else {
+            $manticore->upsertTopic($topic_id, $topic_title, $forum_id);
+        }
+    } catch (Exception $e) {
+        bb_log("Failed to sync topic to Manticore: " . $e->getMessage() . LOG_LF, 'manticore_errors');
+    }
+}
+
+/**
+ * Sync posts to manticore
+ *
+ * @param $post_id
+ * @param $post_text
+ * @param $topic_title
+ * @param $topic_id
+ * @param $forum_id
+ * @param string $action
+ * @return void
+ */
+function sync_post_to_manticore($post_id, $post_text = null, $topic_title = null, $topic_id = null, $forum_id = null, string $action = 'upsert'): void
+{
+    global $bb_cfg;
+
+    if ($bb_cfg['search_engine_type'] !== 'manticore') {
+        return;
+    }
+
+    try {
+        $manticore = getManticoreSearch();
+
+        if ($action === 'delete') {
+            $manticore->deletePost($post_id);
+        } else {
+            $manticore->upsertPost($post_id, $post_text, $topic_title, $topic_id, $forum_id);
+        }
+    } catch (Exception $e) {
+        bb_log("Failed to sync post to Manticore: " . $e->getMessage() . LOG_LF, 'manticore_errors');
+    }
+}
+
+/**
+ * Sync users to manticore
+ *
+ * @param $user_id
+ * @param $username
+ * @param string $action
+ * @return void
+ */
+function sync_user_to_manticore($user_id, $username = null, string $action = 'upsert'): void
+{
+    global $bb_cfg;
+
+    if ($bb_cfg['search_engine_type'] !== 'manticore') {
+        return;
+    }
+
+    try {
+        $manticore = getManticoreSearch();
+
+        if ($action === 'delete') {
+            $manticore->deleteUser($user_id);
+        } else {
+            $manticore->upsertUser($user_id, $username);
+        }
+    } catch (Exception $e) {
+        bb_log("Failed to sync user to Manticore: " . $e->getMessage() . LOG_LF, 'manticore_errors');
+    }
 }
 
 /**
