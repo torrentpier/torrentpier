@@ -105,7 +105,7 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 5. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
 6. Create a database and run migrations to set up the schema
    ```shell
-   php vendor/bin/phinx migrate --configuration=phinx.php
+   php vendor/bin/phinx migrate --configuration=scripts/phinx.php
    ```
 7. Provide write permissions to the specified folders:
    * `data/avatars`, `data/uploads`, `data/uploads/thumbs`
