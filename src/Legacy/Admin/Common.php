@@ -512,7 +512,7 @@ class Common
 
         // Get all posts in moved topics for Manticore update (before DB update)
         $all_posts_for_manticore = DB()->fetch_rowset("
-            SELECT post_id, post_subject, topic_id
+            SELECT post_id, topic_id
             FROM " . BB_POSTS . "
             WHERE topic_id IN($topic_csv)
         ");
@@ -534,7 +534,7 @@ class Common
 
         foreach ($topics as $topic_id => $row) {
             // Manticore [Update topic]
-            sync_topic_to_manticore($topic_id, $row['topic_title'], $to_forum_id);
+            sync_topic_to_manticore($topic_id, null, $to_forum_id, 'update');
 
             // Log action
             $log_action->mod('mod_topic_move', [
@@ -547,7 +547,7 @@ class Common
 
         // Manticore [Update all posts in moved topics]
         foreach ($all_posts_for_manticore as $post_row) {
-            sync_post_to_manticore($post_row['post_id'], '', '', $post_row['topic_id'], $to_forum_id);
+            sync_post_to_manticore($post_row['post_id'], null, null, $post_row['topic_id'], $to_forum_id, 'update');
         }
 
         return true;
