@@ -74,6 +74,7 @@
   ajax.callback.manage_admin = function (data) {
     $('#cache').html(data.cache_html);
     $('#datastore').html(data.datastore_html);
+    $('#indexer').html(data.indexer_html);
     $('#template_cache').html(data.template_cache_html);
     $('#update_user_level').html(data.update_user_level_html);
     $('#sync_topics').html(data.sync_topics_html);
@@ -115,6 +116,9 @@
     <td><b>{L_UPDATE}:</b></td>
     <td>
       <a href="#" id="update_user_level" onclick="ajax.manage_admin('update_user_level'); return false;">{L_USER_LEVELS}</a>
+      <!-- IF $bb_cfg['search_engine_type'] == "manticore" -->&middot;
+      <a href="#" id="indexer" onclick="ajax.manage_admin('indexer'); return false;">{L_INDEXER}</a>
+      <!-- ENDIF -->
     </td>
   </tr>
   <tr>
