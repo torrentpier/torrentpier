@@ -12,6 +12,7 @@ This guide helps you upgrade your TorrentPier installation to the latest version
 - [Censor System Migration](#censor-system-migration)
 - [Select System Migration](#select-system-migration)
 - [Development System Migration](#development-system-migration)
+- [HTTP Helper Migration](#http-helper-migration)
 - [Breaking Changes](#breaking-changes)
 - [Best Practices](#best-practices)
 
