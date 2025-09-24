@@ -273,7 +273,7 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     // Run database migrations
     out('- Setting up database using migrations...', 'info');
 
-    // Check if scripts/phinx.php exists
+    // Check if phinx.php exists
     if (!is_file(BB_ROOT . 'scripts/phinx.php')) {
         out('- Migration configuration (scripts/phinx.php) not found', 'error');
         exit;
