@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Trở về để chỉnh sửa';
 $lang['PROFILE_RETURN'] = 'Đi đến các hồ sơ';
 
 $lang['WARNING'] = 'Cảnh báo';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Phong cách diễn đàn';
 

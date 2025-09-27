@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'לחזור עריכה';
 $lang['PROFILE_RETURN'] = 'עבור אל הפרופיל';
 
 $lang['WARNING'] = 'אזהרה';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'פורום בסגנון';
 

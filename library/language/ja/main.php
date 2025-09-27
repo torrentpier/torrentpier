@@ -1918,6 +1918,8 @@ $lang['PROFILE_EDIT_RETURN'] = '戻り編集';
 $lang['PROFILE_RETURN'] = 'の概要';
 
 $lang['WARNING'] = '警告';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'フォーラムスタイル';
 

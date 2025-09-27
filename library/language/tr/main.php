@@ -1918,6 +1918,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Düzenleme dönmek';
 $lang['PROFILE_RETURN'] = 'Profiline git';
 
 $lang['WARNING'] = 'Uyarı';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Forum tarzı';
 

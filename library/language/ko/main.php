@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = '익 편집';
 $lang['PROFILE_RETURN'] = '프로필로 이동하';
 
 $lang['WARNING'] = '경고';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = '포럼 스타일';
 

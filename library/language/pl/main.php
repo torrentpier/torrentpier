@@ -1917,6 +1917,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Powrócić do edycji';
 $lang['PROFILE_RETURN'] = 'Przejdź do profilu';
 
 $lang['WARNING'] = 'Ostrzeżenie';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Styl forum';
 

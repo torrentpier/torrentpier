@@ -1917,6 +1917,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Natrag na uređivanju';
 $lang['PROFILE_RETURN'] = 'Idi u profil';
 
 $lang['WARNING'] = 'Upozorenje';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Stil foruma';
 

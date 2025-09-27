@@ -1917,6 +1917,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Վերադառնալ խմբագրման';
 $lang['PROFILE_RETURN'] = 'Անցնել անձնագիրը';
 
 $lang['WARNING'] = 'Նախազգուշացում';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Համաժողովի ոճը';
 
