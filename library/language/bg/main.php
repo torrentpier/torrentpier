@@ -184,7 +184,7 @@ $lang['FORUM_LOCKED_MAIN'] = 'Форумът е заключен';
 // Login
 $lang['ENTER_PASSWORD'] = 'Моля, въведете потребителско име и парола за да влезете в системата.';
 $lang['LOGIN'] = 'Вход в';
-$lang['LOGOUT'] = 'Излезе';
+$lang['LOGOUT'] = 'Излизане';
 $lang['CONFIRM_LOGOUT'] = 'Сигурни ли сте, че искате да излезете?';
 
 $lang['FORGOTTEN_PASSWORD'] = 'Забравена парола?';
