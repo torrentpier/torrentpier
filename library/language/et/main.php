@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Tagasi toimetamine';
 $lang['PROFILE_RETURN'] = 'Mine profiili';
 
 $lang['WARNING'] = 'Hoiatus';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Foorumi stiil';
 

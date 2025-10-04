@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Vissza szerkesztése';
 $lang['PROFILE_RETURN'] = 'Menj a profil';
 
 $lang['WARNING'] = 'Figyelmeztetés';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Fórum-stílus';
 

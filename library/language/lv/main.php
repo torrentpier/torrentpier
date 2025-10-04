@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Atgriezties pie rediģēšanas';
 $lang['PROFILE_RETURN'] = 'Pārejiet uz profilu';
 
 $lang['WARNING'] = 'Brīdinājums';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Foruma stils';
 

@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Volver a la edición';
 $lang['PROFILE_RETURN'] = 'El perfil';
 
 $lang['WARNING'] = 'Advertencia';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Foro de estilo';
 

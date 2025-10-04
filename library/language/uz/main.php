@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'tahrir qaytish';
 $lang['PROFILE_RETURN'] = 'profili o\'tish';
 
 $lang['WARNING'] = 'ogohlantirish';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Forum uslubi';
 

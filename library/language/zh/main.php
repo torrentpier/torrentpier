@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = '回到编辑';
 $lang['PROFILE_RETURN'] = '去档案';
 
 $lang['WARNING'] = '警告';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = '论坛的风格';
 

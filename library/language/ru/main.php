@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Вернуться к редактировани
 $lang['PROFILE_RETURN'] = 'Перейти к просмотру профиля';
 
 $lang['WARNING'] = 'Предупреждение';
+$lang['INDEXER'] = 'Переиндексировать поиск';
+$lang['INDEXER_SUCCESS'] = 'Поисковый индекс успешно обновлён';
 
 $lang['FORUM_STYLE'] = 'Стиль форума';
 

@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Návrat na úpravu';
 $lang['PROFILE_RETURN'] = 'Prejdite na požadovaný profil';
 
 $lang['WARNING'] = 'Upozornenie';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Fórum štýl';
 
