@@ -273,14 +273,14 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     // Run database migrations
     out('- Setting up database using migrations...', 'info');
 
-    // Check if scripts/phinx.php exists
-    if (!is_file(BB_ROOT . 'scripts/phinx.php')) {
-        out('- Migration configuration (scripts/phinx.php) not found', 'error');
+    // Check if phinx.php exists
+    if (!is_file(BB_ROOT . 'phinx.php')) {
+        out('- Migration configuration (phinx.php) not found', 'error');
         exit;
     }
 
     // Run migrations
-    $migrationResult = runProcess('php vendor/bin/phinx migrate --configuration=' . BB_ROOT . 'scripts/phinx.php');
+    $migrationResult = runProcess('php vendor/bin/phinx migrate --configuration=' . BB_ROOT . 'phinx.php');
     if ($migrationResult !== 0) {
         out('- Database migration failed', 'error');
         exit;
@@ -330,7 +330,7 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     }
 
     // Cleanup...
-    if (is_file(BB_ROOT . 'scripts/cleanup.php')) {
+    if (is_file(BB_ROOT . '_cleanup.php')) {
         out("\n--- Finishing installation (Cleanup) ---\n", 'info');
         out('The cleanup process will remove:');
         out('- Development documentation (README, CHANGELOG)', 'debug');
@@ -340,8 +340,8 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
         echo 'Do you want to delete these files permanently? [y/N]: ';
         if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
             out("\n- Cleanup...", 'info');
-            require_once BB_ROOT . 'scripts/cleanup.php';
-            unlink(BB_ROOT . 'scripts/cleanup.php');
+            require_once BB_ROOT . '_cleanup.php';
+            unlink(BB_ROOT . '_cleanup.php');
         } else {
             out('- Skipping...', 'info');
         }

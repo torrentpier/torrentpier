@@ -3,23 +3,22 @@
  * Phinx configuration for TorrentPier
  */
 
-define('BB_ROOT', dirname(__DIR__) . '/');
-define('BB_PATH', BB_ROOT);
-
 if (PHP_SAPI != 'cli') {
     die(basename(__FILE__));
 }
 
 // Only load what's needed for Phinx - don't bootstrap the entire application
+const BB_ROOT = __DIR__ . DIRECTORY_SEPARATOR;
+const BB_PATH = __DIR__;
 require_once BB_ROOT . 'library/defines.php';
 
 // Load environment variables
 use Dotenv\Dotenv;
 
-require_once BB_ROOT . 'vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-if (file_exists(BB_ROOT . '.env')) {
-    $dotenv = Dotenv::createMutable(BB_ROOT);
+if (file_exists(__DIR__ . '/.env')) {
+    $dotenv = Dotenv::createMutable(__DIR__);
     $dotenv->load();
 }
 
@@ -35,7 +34,7 @@ function env(string $key, mixed $default = null): mixed
 
 return [
     'paths' => [
-        'migrations' => BB_ROOT . 'migrations'
+        'migrations' => __DIR__ . '/migrations'
     ],
     'environments' => [
         'default_migration_table' => BB_MIGRATIONS,

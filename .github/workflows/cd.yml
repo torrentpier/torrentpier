@@ -51,7 +51,7 @@ jobs:
         run: composer install --no-dev --no-interaction --no-ansi --prefer-dist --optimize-autoloader
 
       - name: Cleanup
-        run: php scripts/cleanup.php && rm scripts/cleanup.php
+        run: php _cleanup.php && rm _cleanup.php
 
       - name: Create archive
         id: create-zip
