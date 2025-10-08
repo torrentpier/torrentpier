@@ -1183,16 +1183,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.32.5",
+            "version": "v12.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "77b2740391cd2a825ba59d6fada45e9b8b9bcc5a"
+                "reference": "124efc5f09d4668a4dc13f94a1018c524a58bcb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/77b2740391cd2a825ba59d6fada45e9b8b9bcc5a",
-                "reference": "77b2740391cd2a825ba59d6fada45e9b8b9bcc5a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/124efc5f09d4668a4dc13f94a1018c524a58bcb1",
+                "reference": "124efc5f09d4668a4dc13f94a1018c524a58bcb1",
                 "shasum": ""
             },
             "require": {
@@ -1398,7 +1398,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-09-30T17:39:22+00:00"
+            "time": "2025-10-07T14:30:39+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -1525,16 +1525,16 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v10.19.0",
+            "version": "v10.19.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "996b2a8b5ccc583e7df667c8aac924a46bc8bdd3"
+                "reference": "bc8dbffc06472e28147ee739aec95fdf653f9d91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/996b2a8b5ccc583e7df667c8aac924a46bc8bdd3",
-                "reference": "996b2a8b5ccc583e7df667c8aac924a46bc8bdd3",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/bc8dbffc06472e28147ee739aec95fdf653f9d91",
+                "reference": "bc8dbffc06472e28147ee739aec95fdf653f9d91",
                 "shasum": ""
             },
             "require": {
@@ -1602,7 +1602,7 @@
                 "issues": "https://github.com/laravel/scout/issues",
                 "source": "https://github.com/laravel/scout"
             },
-            "time": "2025-08-26T14:24:24+00:00"
+            "time": "2025-10-07T14:48:20+00:00"
         },
         {
             "name": "laravel/serializable-closure",
