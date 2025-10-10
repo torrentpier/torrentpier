@@ -204,10 +204,14 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                 $env['Execution Time'] = sprintf('%.3f sec', microtime(true) - TIMESTART);
             }
 
-            if (function_exists('sys')) {
+            if (function_exists('sys') && function_exists('humn_size')) {
                 // Use plain text formatting for memory values (no HTML entities)
-                $env['Peak Memory'] = str_replace('&nbsp;', ' ', humn_size(sys('mem_peak')));
-                $env['Current Memory'] = str_replace('&nbsp;', ' ', humn_size(sys('mem')));
+                $env['Peak Memory'] = str_replace('&nbsp;', ' ', \humn_size(sys('mem_peak')));
+                $env['Current Memory'] = str_replace('&nbsp;', ' ', \humn_size(sys('mem')));
+            } elseif (function_exists('sys')) {
+                // Fallback if humn_size() is not available yet
+                $env['Peak Memory'] = number_format(sys('mem_peak')) . ' bytes';
+                $env['Current Memory'] = number_format(sys('mem')) . ' bytes';
             }
 
             // Request information
