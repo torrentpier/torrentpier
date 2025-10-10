@@ -2,6 +2,14 @@
 
 # 📖 Change Log
 
+## [v2.8.7](https://github.com/torrentpier/torrentpier/compare/v2.8.6..v2.8.7) (2025-10-10)
+
+### 🐛 Bug Fixes
+
+- *(updater)* Add fallback to `zipball_url` when no assets available ([#2175](https://github.com/torrentpier/torrentpier/pull/2175)) - ([8338ab1](https://github.com/torrentpier/torrentpier/commit/8338ab1f0cac7241edd05bef042c7c2df1f5d5d3))
+- Undefined `humn_size()` in `EnhancedPrettyPageHandler.php` ([#2174](https://github.com/torrentpier/torrentpier/pull/2174)) - ([8349c11](https://github.com/torrentpier/torrentpier/commit/8349c118f162032ab305d43c815578921a22870c))
+
+
 ## [v2.8.6](https://github.com/torrentpier/torrentpier/compare/v2.8.5..v2.8.6) (2025-10-10)
 
 ### 🚀 Features
