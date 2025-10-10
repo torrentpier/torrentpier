@@ -2,6 +2,41 @@
 
 # 📖 Change Log
 
+## [v2.8.6](https://github.com/torrentpier/torrentpier/compare/v2.8.5..v2.8.6) (2025-10-10)
+
+### 🚀 Features
+
+- Added `Manticore` search engine support 🔎 ([#2158](https://github.com/torrentpier/torrentpier/pull/2158)) - ([1011928](https://github.com/torrentpier/torrentpier/commit/101192896618518368f558bd397c2dddfd0f7065))
+
+### 🐛 Bug Fixes
+
+- *(docker)* Move database migrations from build to runtime ([#2172](https://github.com/torrentpier/torrentpier/pull/2172)) - ([118d349](https://github.com/torrentpier/torrentpier/commit/118d3490c30381d40c8ca783ca8988b882e743c5))
+- *(docker)* Correct entrypoint and migration handling ([#2144](https://github.com/torrentpier/torrentpier/pull/2144)) - ([1822c90](https://github.com/torrentpier/torrentpier/commit/1822c907ebd7bdaff996f1a8fcc8d64a88ec8888))
+- *(manticore)* Implement correct partial field updates with UPDATE/REPLACE strategy ([#2173](https://github.com/torrentpier/torrentpier/pull/2173)) - ([968da37](https://github.com/torrentpier/torrentpier/commit/968da3751d8c455387edc75f819deaf259b7f4d3))
+
+### 🈳 New translations
+
+- New Crowdin updates ([#2154](https://github.com/torrentpier/torrentpier/pull/2154)) - ([bf9be51](https://github.com/torrentpier/torrentpier/commit/bf9be510ce7e2e38ccb2ead9c000c85b89f06a63))
+
+### 🗑️ Removed
+
+- Legacy `Sphinx API` support ([#2153](https://github.com/torrentpier/torrentpier/pull/2153)) - ([4ba315d](https://github.com/torrentpier/torrentpier/commit/4ba315db37144a6f38dcd3fa5437dd346df990d2))
+- Deploy pipeline ([#2145](https://github.com/torrentpier/torrentpier/pull/2145)) - ([7cca19d](https://github.com/torrentpier/torrentpier/commit/7cca19d11d94d200f681da0e12dbb9638761a9fb))
+
+### 🚜 Refactor
+
+- `IsHelper` class renamed to `HttpHelper` ([#2160](https://github.com/torrentpier/torrentpier/pull/2160)) - ([c97dd8e](https://github.com/torrentpier/torrentpier/commit/c97dd8e0dcefd37346e09c1796c3c87d334fca8f))
+
+### ⚙️ Miscellaneous
+
+- Updated README ([#2157](https://github.com/torrentpier/torrentpier/pull/2157)) - ([6d152e8](https://github.com/torrentpier/torrentpier/commit/6d152e81c32c3c514d4a496bcbef4edc77b1a45a))
+- Moved scripts into `scripts` folder ([#2156](https://github.com/torrentpier/torrentpier/pull/2156)) - ([f11947d](https://github.com/torrentpier/torrentpier/commit/f11947db3517ac95f5a0799d591b5b9847216a8b))
+- Force `production` environment if entered incorrect environment name ([#2152](https://github.com/torrentpier/torrentpier/pull/2152)) - ([048186c](https://github.com/torrentpier/torrentpier/commit/048186c3564426dc033d789c8cdd48965e0d8176))
+- Added `EXCLUDED_USERS_CSV` alias for `EXCLUDED_USERS` ([#2151](https://github.com/torrentpier/torrentpier/pull/2151)) - ([ff45ef4](https://github.com/torrentpier/torrentpier/commit/ff45ef4e953aab46b2e9db708b1c089f9a848c98))
+- Add PHP 8.2–8.4 test matrix with Pest ([#2150](https://github.com/torrentpier/torrentpier/pull/2150)) - ([881b277](https://github.com/torrentpier/torrentpier/commit/881b277ae8dc0feca8bfb05cef8081a1cd5dde64))
+- Minor improvements ([#2149](https://github.com/torrentpier/torrentpier/pull/2149)) - ([9ab089c](https://github.com/torrentpier/torrentpier/commit/9ab089ca469d7a09dd609243466b5570e5f66bd3))
+
+
 ## [v2.8.5](https://github.com/torrentpier/torrentpier/compare/v2.8.4.1..v2.8.5) (2025-09-18)
 
 ### 🐛 Bug Fixes
