@@ -208,7 +208,7 @@ function generate_smilies($mode)
  */
 function strip_quotes($text)
 {
-    $lowertext = strtolower($text);
+    $lowertext = mb_strtolower($text, DEFAULT_CHARSET);
 
     // find all [quote tags
     $start_pos = [];
@@ -345,7 +345,7 @@ function extract_search_words($text)
     $min_word_len = max(2, config()->get('search_min_word_len') - 1);
     $max_word_len = config()->get('search_max_word_len');
 
-    $text = ' ' . str_compact(strip_tags(mb_strtolower($text))) . ' ';
+    $text = ' ' . str_compact(strip_tags(mb_strtolower($text, DEFAULT_CHARSET))) . ' ';
     $text = str_replace(['&#91;', '&#93;'], ['[', ']'], $text);
 
     // HTML entities like &nbsp;
