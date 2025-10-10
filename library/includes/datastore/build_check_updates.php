@@ -41,7 +41,7 @@ if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
     } elseif (isset($updaterDownloader['zipball_url'])) {
         $latestBuildFileLink = $updaterDownloader['zipball_url'];
     } else {
-        bb_log('[Updater] ');
+        bb_log('[Updater] No download options available for version ' . $getVersion . LOG_LF);
         $this->store('check_updates', $data);
         return;
     }
