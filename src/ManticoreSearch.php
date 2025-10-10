@@ -149,14 +149,44 @@ class ManticoreSearch
             return;
         }
 
-        // REPLACE
-        if ($topic_title !== null) {
-            $columns = ['id', 'topic_title'];
-            $placeholders = [':id', ':title'];
-            $params = [
-                ':id' => $topic_id,
-                ':title' => $topic_title,
-            ];
+        // Check if record exists
+        $stmt = $this->pdo->prepare("SELECT * FROM topics_rt WHERE id = ?");
+        $stmt->execute([$topic_id]);
+        $existing = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($existing) {
+            // Record exists - need to decide between UPDATE and REPLACE
+            
+            // If only updating attributes (not text fields), use UPDATE (faster)
+            if ($topic_title === null && $forum_id !== null) {
+                $sql = "UPDATE topics_rt SET forum_id = :forum_id WHERE id = :id";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([
+                    ':forum_id' => $forum_id,
+                    ':id' => $topic_id,
+                ]);
+            } 
+            // If updating text field (topic_title), must use REPLACE with all fields
+            else {
+                $sql = "REPLACE INTO topics_rt (id, topic_title, forum_id) VALUES (:id, :title, :forum_id)";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([
+                    ':id' => $topic_id,
+                    ':title' => $topic_title ?? $existing['topic_title'],
+                    ':forum_id' => $forum_id ?? $existing['forum_id'],
+                ]);
+            }
+        } else {
+            // INSERT new record
+            $columns = ['id'];
+            $placeholders = [':id'];
+            $params = [':id' => $topic_id];
+
+            if ($topic_title !== null) {
+                $columns[] = 'topic_title';
+                $placeholders[] = ':title';
+                $params[':title'] = $topic_title;
+            }
 
             if ($forum_id !== null) {
                 $columns[] = 'forum_id';
@@ -167,16 +197,6 @@ class ManticoreSearch
             $sql = "REPLACE INTO topics_rt (" . implode(', ', $columns) . ") VALUES (" . implode(', ', $placeholders) . ")";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute($params);
-        }
-
-        // UPDATE
-        if ($forum_id !== null) {
-            $sql = "UPDATE topics_rt SET forum_id = :forum_id WHERE id = :id";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([
-                ':forum_id' => $forum_id,
-                ':id' => $topic_id,
-            ]);
         }
     }
 
@@ -196,8 +216,49 @@ class ManticoreSearch
             return;
         }
 
-        // REPLACE
-        if ($post_text !== null || $topic_title !== null) {
+        // Check if record exists
+        $stmt = $this->pdo->prepare("SELECT * FROM posts_rt WHERE id = ?");
+        $stmt->execute([$post_id]);
+        $existing = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($existing) {
+            // Record exists - need to decide between UPDATE and REPLACE
+            
+            // If only updating attributes (not text fields), use UPDATE (faster)
+            if ($post_text === null && $topic_title === null && ($topic_id !== null || $forum_id !== null)) {
+                $updates = [];
+                $params = [':id' => $post_id];
+
+                if ($topic_id !== null) {
+                    $updates[] = 'topic_id = :topic_id';
+                    $params[':topic_id'] = $topic_id;
+                }
+
+                if ($forum_id !== null) {
+                    $updates[] = 'forum_id = :forum_id';
+                    $params[':forum_id'] = $forum_id;
+                }
+
+                if ($updates) {
+                    $sql = "UPDATE posts_rt SET " . implode(', ', $updates) . " WHERE id = :id";
+                    $stmt = $this->pdo->prepare($sql);
+                    $stmt->execute($params);
+                }
+            } 
+            // If updating text fields (post_text or topic_title), must use REPLACE with all fields
+            else {
+                $sql = "REPLACE INTO posts_rt (id, post_text, topic_title, topic_id, forum_id) VALUES (:id, :post_text, :topic_title, :topic_id, :forum_id)";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute([
+                    ':id' => $post_id,
+                    ':post_text' => $post_text ?? $existing['post_text'],
+                    ':topic_title' => $topic_title ?? $existing['topic_title'],
+                    ':topic_id' => $topic_id ?? $existing['topic_id'],
+                    ':forum_id' => $forum_id ?? $existing['forum_id'],
+                ]);
+            }
+        } else {
+            // INSERT new record
             $columns = ['id'];
             $placeholders = [':id'];
             $params = [':id' => $post_id];
@@ -230,26 +291,6 @@ class ManticoreSearch
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute($params);
         }
-
-        // UPDATE
-        $updates = [];
-        $params = [':id' => $post_id];
-
-        if ($topic_id !== null) {
-            $updates[] = 'topic_id = :topic_id';
-            $params[':topic_id'] = $topic_id;
-        }
-
-        if ($forum_id !== null) {
-            $updates[] = 'forum_id = :forum_id';
-            $params[':forum_id'] = $forum_id;
-        }
-
-        if ($updates) {
-            $sql = "UPDATE posts_rt SET " . implode(', ', $updates) . " WHERE id = :id";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute($params);
-        }
     }
 
     /**
@@ -265,9 +306,22 @@ class ManticoreSearch
             return;
         }
 
-        $sql = "UPDATE users_rt (id, username) VALUES (?, ?)";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$user_id, $username]);
+        // Check if record exists
+        $stmt = $this->pdo->prepare("SELECT id FROM users_rt WHERE id = ?");
+        $stmt->execute([$user_id]);
+        $exists = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($exists) {
+            // Partial UPDATE of existing record
+            $sql = "UPDATE users_rt SET username = ? WHERE id = ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$username, $user_id]);
+        } else {
+            // INSERT new record
+            $sql = "REPLACE INTO users_rt (id, username) VALUES (?, ?)";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$user_id, $username]);
+        }
     }
 
     /**
