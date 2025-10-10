@@ -32,8 +32,19 @@ $currentVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix(config()->ge
 
 // Has update!
 if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
-    $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
-    $SHAFileHash = $updaterDownloader['assets'][0]['digest'] ?? '';
+    $fileSize = $SHAFileHash = $latestBuildFileLink = '';
+
+    if (isset($updaterDownloader['assets'][0]['browser_download_url'])) {
+        $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
+        $fileSize = $updaterDownloader['assets'][0]['size'];
+        $SHAFileHash = $updaterDownloader['assets'][0]['digest'];
+    } elseif (isset($updaterDownloader['zipball_url'])) {
+        $latestBuildFileLink = $updaterDownloader['zipball_url'];
+    } else {
+        bb_log('[Updater] No download options available for version ' . $getVersion . LOG_LF);
+        $this->store('check_updates', $data);
+        return;
+    }
 
     // Check updater file
     $updaterFile = readUpdaterFile();
@@ -59,8 +70,8 @@ if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
     $data = [
         'available_update' => true,
         'latest_version' => $getVersion,
-        'latest_version_size' => isset($updaterDownloader['assets'][0]['size']) ? humn_size($updaterDownloader['assets'][0]['size']) : false,
-        'latest_version_dl_link' => $latestBuildFileLink ?? $updaterDownloader['html_url'],
+        'latest_version_size' => $fileSize ? humn_size($fileSize) : false,
+        'latest_version_dl_link' => $latestBuildFileLink,
         'latest_version_checksum' => $buildFileChecksum,
         'latest_version_link' => $updaterDownloader['html_url']
     ];
