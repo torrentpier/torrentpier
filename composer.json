@@ -68,7 +68,7 @@
     "robmorgan/phinx": "^0.16.9",
     "samdark/sitemap": "2.4.1",
     "symfony/mailer": "^7.3",
-    "symfony/polyfill": "v1.32.0",
+    "symfony/polyfill": "v1.33.0",
     "vlucas/phpdotenv": "^5.5",
     "z4kn4fein/php-semver": "^v3.0.0"
   },
