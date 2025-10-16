@@ -571,8 +571,8 @@ $(document).ready(function() {
     $('.theme-icon').text('🌙');
   }
 
-  // Toggle dark mode on button click
-  $('#dark-mode-toggle').click(function(e) {
+  // Toggle dark mode on link click
+  $('.dark-mode-toggle').click(function(e) {
     e.preventDefault();
     var isDarkMode = $('body').hasClass('dark-mode');
 

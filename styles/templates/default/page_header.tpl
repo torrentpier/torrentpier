@@ -281,7 +281,7 @@ function go_to_page ()
 		<a href="{U_OPTIONS}"><b>{L_OPTIONS}</b></a> &#0183;
 		<a href="{U_CUR_DOWNLOADS}">{L_PROFILE}</a> <a href="#dls-menu" class="menu-root menu-alt1">&#9660;</a>
 		&#0183;
-		<a href="#" id="dark-mode-toggle" class="dark-mode-toggle" title="{L_DARK_MODE_TOGGLE}"><span class="theme-icon">☀️</span></a>
+		<a href="#" class="dark-mode-toggle" title="{L_DARK_MODE_TOGGLE}"><span class="theme-icon">☀️</span></a>
 	</td>
 </tr>
 </table>
@@ -312,7 +312,7 @@ function go_to_page ()
 					</form> &#0183;
 				<a href="{U_SEND_PASSWORD}">{L_FORGOTTEN_PASSWORD}</a>
 				&#0183;
-				<a href="#" id="dark-mode-toggle" class="dark-mode-toggle" title="{L_DARK_MODE_TOGGLE}"><span class="theme-icon">☀️</span></a>
+				<a href="#" class="dark-mode-toggle" title="{L_DARK_MODE_TOGGLE}"><span class="theme-icon">☀️</span></a>
 			</td>
 		</tr>
 	</table>
