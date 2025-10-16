@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "arokettu/bencode",
-            "version": "4.3.1",
+            "version": "4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arokettu/bencode.git",
-                "reference": "0955a7037670c24d5ae5fdafe5ff5894aba024e7"
+                "reference": "032e827e3c266a23d541afb5d42889288b999fdc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arokettu/bencode/zipball/0955a7037670c24d5ae5fdafe5ff5894aba024e7",
-                "reference": "0955a7037670c24d5ae5fdafe5ff5894aba024e7",
+                "url": "https://api.github.com/repos/arokettu/bencode/zipball/032e827e3c266a23d541afb5d42889288b999fdc",
+                "reference": "032e827e3c266a23d541afb5d42889288b999fdc",
                 "shasum": ""
             },
             "require": {
@@ -33,7 +33,7 @@
                 "pear/math_biginteger": "^1.0",
                 "phpunit/phpunit": "^10.5.28",
                 "psy/psysh": "*",
-                "sandfox.dev/code-standard": "^1.2025.05.07",
+                "sandfox.dev/code-standard": "^1.2025.09.17",
                 "squizlabs/php_codesniffer": "*",
                 "vimeo/psalm": "^6"
             },
@@ -76,7 +76,7 @@
                 "issues": "https://gitlab.com/sandfox/bencode/-/issues",
                 "source": "https://gitlab.com/sandfox/bencode"
             },
-            "time": "2025-05-20T19:25:23+00:00"
+            "time": "2025-10-09T20:55:32+00:00"
         },
         {
             "name": "arokettu/is-resource",
