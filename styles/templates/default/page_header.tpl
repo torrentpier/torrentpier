@@ -31,6 +31,7 @@
 <!-- ENDIF / META_NEXT_PAGE -->
 {META}
 <link rel="stylesheet" href="{STYLESHEET}?v={$bb_cfg['css_ver']}" type="text/css">
+<link rel="stylesheet" href="{SITE_URL}styles/templates/default/css/dark-mode.css?v={$bb_cfg['css_ver']}" type="text/css">
 <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
 
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-1.12.4.min.js"></script>
@@ -279,6 +280,8 @@ function go_to_page ()
 	<td width="50%" class="tRight">
 		<a href="{U_OPTIONS}"><b>{L_OPTIONS}</b></a> &#0183;
 		<a href="{U_CUR_DOWNLOADS}">{L_PROFILE}</a> <a href="#dls-menu" class="menu-root menu-alt1">&#9660;</a>
+		&#0183;
+		<a href="#" id="dark-mode-toggle" class="dark-mode-toggle" title="{L_DARK_MODE_TOGGLE}"><span class="theme-icon">☀️</span></a>
 	</td>
 </tr>
 </table>
@@ -308,6 +311,8 @@ function go_to_page ()
 						<input type="submit" name="login" value="{L_LOGIN}" tabindex="4" />
 					</form> &#0183;
 				<a href="{U_SEND_PASSWORD}">{L_FORGOTTEN_PASSWORD}</a>
+				&#0183;
+				<a href="#" id="dark-mode-toggle" class="dark-mode-toggle" title="{L_DARK_MODE_TOGGLE}"><span class="theme-icon">☀️</span></a>
 			</td>
 		</tr>
 	</table>

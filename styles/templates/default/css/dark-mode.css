@@ -1,0 +1,1003 @@
+/*
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
+
+/* ---------------------------------- *
+     Dark Mode Styles
+ * ---------------------------------- */
+
+body.dark-mode {
+  background: #2b2b2b;
+  color: #d4d4d4;
+}
+
+/* ---------------------------------- *
+     Dark Mode Toggle Link
+ * ---------------------------------- */
+.dark-mode-toggle {
+  text-decoration: none;
+  cursor: pointer;
+  display: inline;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.dark-mode-toggle:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.theme-icon {
+  font-size: 14px;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ---------------------------------- *
+     Links
+ * ---------------------------------- */
+body.dark-mode :link,
+body.dark-mode :visited {
+  color: #5DA5FF;
+}
+
+body.dark-mode :link:hover,
+body.dark-mode :visited:hover,
+body.dark-mode :link:focus,
+body.dark-mode :visited:focus {
+  color: #FF9D5C;
+}
+
+body.dark-mode :link:active,
+body.dark-mode :visited:active {
+  color: #FF9D5C;
+}
+
+body.dark-mode .a-like {
+  color: #5DA5FF !important;
+}
+
+body.dark-mode .a-like:hover {
+  color: #FF9D5C !important;
+}
+
+body.dark-mode .colorAdmin,
+body.dark-mode a.colorAdmin,
+body.dark-mode a.colorAdmin:visited {
+  color: #FF6B6B !important;
+}
+
+body.dark-mode .colorSuperMod,
+body.dark-mode a.colorSuperMod,
+body.dark-mode a.colorSuperMod:visited {
+  color: #4DA6FF !important;
+}
+
+body.dark-mode .colorMod,
+body.dark-mode a.colorMod,
+body.dark-mode a.colorMod:visited {
+  color: #66CC66 !important;
+}
+
+body.dark-mode .colorGroup,
+body.dark-mode a.colorGroup,
+body.dark-mode a.colorGroup:visited {
+  color: #7A9FCC !important;
+}
+
+body.dark-mode .colorUser,
+body.dark-mode a.colorUser,
+body.dark-mode a.colorUser:visited {
+  color: #5DA5FF !important;
+}
+
+body.dark-mode .colorCPH,
+body.dark-mode a.colorCPH,
+body.dark-mode a.colorCPH:visited {
+  color: #4DA6FF !important;
+}
+
+body.dark-mode .adm,
+body.dark-mode a.adm,
+body.dark-mode a.adm:visited {
+  color: #FF9999;
+}
+
+body.dark-mode a.leech,
+body.dark-mode a.leechmed,
+body.dark-mode a.leechsmall,
+body.dark-mode a.leech:visited,
+body.dark-mode a.leechmed:visited,
+body.dark-mode a.leechsmall:visited {
+  color: #FF6B6B;
+}
+
+body.dark-mode a.seed,
+body.dark-mode a.seedmed,
+body.dark-mode a.seedsmall,
+body.dark-mode a.seed:visited,
+body.dark-mode a.seedmed:visited,
+body.dark-mode a.seedsmall:visited {
+  color: #66CC66;
+}
+
+body.dark-mode a.points,
+body.dark-mode a.pointsmed,
+body.dark-mode a.pointssmall,
+body.dark-mode a.points:visited,
+body.dark-mode a.pointsmed:visited,
+body.dark-mode a.pointssmall:visited,
+body.dark-mode .points {
+  color: #6B9AFF;
+}
+
+body.dark-mode .nick,
+body.dark-mode .nick a {
+  color: #5DA5FF !important;
+}
+
+body.dark-mode .nav em {
+  color: #FF6B6B;
+}
+
+body.dark-mode a.topictitle:visited,
+body.dark-mode a.torTopic:visited,
+body.dark-mode a.tLink:visited {
+  color: #AAA;
+}
+
+/* ---------------------------------- *
+     Backgrounds
+ * ---------------------------------- */
+body.dark-mode .row1,
+body.dark-mode .row1 td {
+  background: #3a3a3a;
+}
+
+body.dark-mode .row2,
+body.dark-mode .row2 td {
+  background: #424242;
+}
+
+body.dark-mode .row3,
+body.dark-mode .row3 td {
+  background: #4a4a4a;
+}
+
+body.dark-mode .row4,
+body.dark-mode .row4 td {
+  background: #3d3d3d;
+}
+
+body.dark-mode .row5,
+body.dark-mode .row5 td {
+  background: #414141;
+}
+
+body.dark-mode .row6,
+body.dark-mode .row6 td {
+  background: #454545;
+}
+
+body.dark-mode .prow1 {
+  background: #3d3d3d;
+}
+
+body.dark-mode .prow2 {
+  background: #414141;
+}
+
+body.dark-mode .prow3 {
+  background: #424242;
+}
+
+body.dark-mode .p-body tr {
+  background: #3d3d3d;
+}
+
+body.dark-mode .p-body tr:hover {
+  background: #4a4a4a;
+}
+
+/* ---------------------------------- *
+     Headers
+ * ---------------------------------- */
+body.dark-mode .maintitle,
+body.dark-mode .pagetitle {
+  color: #e0e0e0;
+}
+
+/* ---------------------------------- *
+     General text
+ * ---------------------------------- */
+body.dark-mode .gen,
+body.dark-mode .med,
+body.dark-mode .genmed,
+body.dark-mode .small,
+body.dark-mode .gensmall {
+  color: #e0e0e0;
+}
+
+body.dark-mode a.gen,
+body.dark-mode a.med,
+body.dark-mode a.genmed,
+body.dark-mode a.small,
+body.dark-mode a.gensmall {
+  color: #5DA5FF;
+}
+
+/* ---------------------------------- *
+     Borders and lines
+ * ---------------------------------- */
+body.dark-mode hr {
+  border-color: #555;
+  background: #555;
+}
+
+body.dark-mode .hr1 {
+  border-top-color: #555;
+}
+
+body.dark-mode .c-body,
+body.dark-mode .q,
+body.dark-mode .sp-wrap,
+body.dark-mode .sp-head,
+body.dark-mode .sp-body {
+  border-color: #555;
+}
+
+/* ---------------------------------- *
+     Code blocks
+ * ---------------------------------- */
+body.dark-mode .c-head,
+body.dark-mode .q-head {
+  color: #b0b0b0;
+}
+
+body.dark-mode .c-body {
+  color: #66CC66;
+  background: #333;
+}
+
+/* ---------------------------------- *
+     Quote blocks
+ * ---------------------------------- */
+body.dark-mode .q {
+  background: #333;
+  color: #d0d0d0;
+}
+
+body.dark-mode .q .q {
+  background: #3a3a3a;
+}
+
+body.dark-mode .q .q .q {
+  background: #333;
+}
+
+body.dark-mode .q .q .q .q {
+  background: #3a3a3a;
+}
+
+body.dark-mode .q .q .q .q .q {
+  background: #333;
+}
+
+body.dark-mode .q .q .q .q .q .q {
+  background: #3a3a3a;
+}
+
+/* ---------------------------------- *
+    Spoiler
+ * ---------------------------------- */
+body.dark-mode .sp-wrap {
+  background: #3a3a3a;
+}
+
+body.dark-mode .sp-head {
+  color: #d0d0d0;
+}
+
+body.dark-mode .sp-body {
+  background: #373737;
+  border-color: #555;
+}
+
+body.dark-mode .sp-fold {
+  color: #999;
+}
+
+/* ---------------------------------- *
+     Inputs, buttons, forms
+ * ---------------------------------- */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background: #3a3a3a;
+  color: #d4d4d4;
+  border-color: #5a5a5a;
+}
+
+body.dark-mode input.mainoption,
+body.dark-mode input.main,
+body.dark-mode input.liteoption,
+body.dark-mode input.lite {
+  background: #3a3a3a;
+  border-color: #5a5a5a;
+}
+
+body.dark-mode input.button,
+body.dark-mode .buttons input {
+  background: #3a3a3a;
+  border-color: #5a5a5a;
+  -webkit-appearance: none;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+body.dark-mode .buttons input:hover {
+  border-color: #6a6a6a;
+  background: #424242;
+}
+
+body.dark-mode button {
+  background: #3a3a3a;
+  color: #d4d4d4;
+  border: 1px solid #5a5a5a;
+  -webkit-appearance: none;
+  border-radius: 3px;
+}
+
+body.dark-mode button:hover {
+  background: #424242;
+  border-color: #6a6a6a;
+}
+
+body.dark-mode input.button,
+body.dark-mode .buttons input,
+body.dark-mode input.mainoption,
+body.dark-mode input.main,
+body.dark-mode input.liteoption,
+body.dark-mode input.lite {
+  color: #d4d4d4;
+}
+
+body.dark-mode input.hint {
+  color: #888;
+}
+
+body.dark-mode input.error {
+  color: #FF6B6B;
+}
+
+body.dark-mode .cat input[type="text"] {
+  background: #333;
+}
+
+body.dark-mode optgroup {
+  color: #5DA5FF;
+  background: #424242;
+}
+
+body.dark-mode optgroup option {
+  color: #d4d4d4;
+  background: #3a3a3a;
+}
+
+body.dark-mode legend {
+  color: #7A9FCC;
+}
+
+body.dark-mode .has_sf {
+  color: #d0d0d0;
+  background: #373737;
+}
+
+body.dark-mode input.pOrdSel {
+  border-color: #3a3a3a;
+  color: #d0d0d0;
+}
+
+body.dark-mode select.text_color option {
+  background: #3d3d3d;
+}
+
+body.dark-mode select.text_size option.em {
+  background: #3d3d3d;
+}
+
+body.dark-mode .select-action {
+  background: #373737;
+}
+
+/* ---------------------------------- *
+     Basic tables
+ * ---------------------------------- */
+body.dark-mode .bodyline {
+  background: #2b2b2b;
+  border-color: #555;
+}
+
+body.dark-mode .bodyline th {
+  background: #3a4a5a;
+  color: #d4d4d4;
+}
+
+body.dark-mode table.forumline {
+  background: #555;
+  border-color: #555;
+}
+
+body.dark-mode .forumline th {
+  border-color: #555;
+  border-top-color: #666;
+  color: #d4d4d4;
+  background-color: #424242;
+}
+
+body.dark-mode .forumline td {
+  border-color: #555;
+}
+
+body.dark-mode .forumline th,
+body.dark-mode .thHead {
+  color: #b0d4f0;
+  background: #2e4a6c;
+}
+
+body.dark-mode .forumline th:first-child {
+  border-left-color: #666;
+}
+
+body.dark-mode .forumline th:last-child {
+  border-right-color: #666;
+}
+
+body.dark-mode table.bordered {
+  border-color: #555;
+}
+
+body.dark-mode .bordered th,
+body.dark-mode .bordered td {
+  border-color: #555;
+}
+
+body.dark-mode table.message td {
+  background: #3a3a3a;
+}
+
+body.dark-mode .cat,
+body.dark-mode td.cat,
+body.dark-mode td.catTitle,
+body.dark-mode td.catHead,
+body.dark-mode td.catBottom {
+  background: #424242 !important;
+  color: #e8e8e8 !important;
+}
+
+body.dark-mode .catTitle {
+  color: #e8e8e8 !important;
+}
+
+body.dark-mode .cat a,
+body.dark-mode .catTitle a,
+body.dark-mode .catHead a,
+body.dark-mode td.cat a,
+body.dark-mode td.catTitle a,
+body.dark-mode td.catHead a {
+  color: #e8e8e8 !important;
+  font-weight: bold;
+}
+
+body.dark-mode table.info_msg {
+  border-color: #555;
+  background: #424242;
+}
+
+body.dark-mode table.info_msg .msg {
+  border-color: #555;
+  background: #3a3a3a;
+}
+
+body.dark-mode table.error {
+  border-color: #993300;
+  background: #5a3030;
+}
+
+body.dark-mode table.error .msg {
+  border-color: #993300;
+  background: #4a2828;
+  color: #FF9999;
+}
+
+body.dark-mode .pm_box_size .progress {
+  background: #66CC66;
+}
+
+/* ---------------------------------- *
+     Page Container
+ * ---------------------------------- */
+body.dark-mode #page_container {
+  background: #2b2b2b !important;
+  border-color: #555 !important;
+}
+
+/* ---------------------------------- *
+     Page Header
+ * ---------------------------------- */
+body.dark-mode #page_header {
+  background: #2b2b2b;
+}
+
+body.dark-mode #main-nav {
+  background: #3a3a3a;
+  border-color: #555;
+}
+
+body.dark-mode #main-nav a {
+  color: #5DA5FF;
+}
+
+body.dark-mode #main-nav span {
+  color: #666 !important;
+}
+
+body.dark-mode #main-nav .new-pm-link {
+  color: #FF9D5C;
+}
+
+body.dark-mode #logo {
+  background: #2b2b2b;
+}
+
+body.dark-mode .topmenu {
+  background: #3a3a3a;
+  border-color: #555;
+}
+
+body.dark-mode .topmenu input[type="text"],
+body.dark-mode .topmenu input[type="password"] {
+  background: #424242;
+  color: #e8e8e8 !important;
+  border-color: #5a5a5a;
+}
+
+body.dark-mode .topmenu input[type="text"]::placeholder {
+  color: #888 !important;
+}
+
+body.dark-mode #search-text,
+body.dark-mode input#search-text {
+  background: #424242 !important;
+  color: #e8e8e8 !important;
+  border-color: #5a5a5a !important;
+}
+
+body.dark-mode #search-text::placeholder {
+  color: #888 !important;
+}
+
+body.dark-mode .topmenu select {
+  background: #424242;
+  color: #d4d4d4;
+  border-color: #5a5a5a;
+}
+
+body.dark-mode .topmenu input[type="submit"],
+body.dark-mode .topmenu input[type="button"] {
+  background: #424242;
+  color: #d4d4d4;
+  border-color: #5a5a5a;
+}
+
+body.dark-mode .topmenu input[type="submit"]:hover,
+body.dark-mode .topmenu input[type="button"]:hover {
+  background: #4a4a4a;
+}
+
+/* ---------------------------------- *
+     Menus
+ * ---------------------------------- */
+body.dark-mode .menu-sub {
+  background: #3a3a3a;
+  border-color: #555;
+}
+
+body.dark-mode .menu-sub th {
+  background: #424242;
+  color: #d4d4d4;
+}
+
+body.dark-mode .menu-sub td {
+  background: #3a3a3a;
+}
+
+body.dark-mode .menu-a a {
+  color: #5DA5FF;
+}
+
+/* ---------------------------------- *
+     Sidebar
+ * ---------------------------------- */
+body.dark-mode #sidebar1 {
+  background: #2b2b2b;
+}
+
+body.dark-mode #sidebar1 h3 {
+  color: #d4d4d4 !important;
+}
+
+body.dark-mode #sidebar1 h3 a {
+  color: #5DA5FF !important;
+}
+
+body.dark-mode #sidebar1 h5 {
+  color: #d4d4d4 !important;
+}
+
+body.dark-mode #sidebar1 a {
+  color: #5DA5FF !important;
+}
+
+body.dark-mode #sidebar1 ul,
+body.dark-mode #sidebar1 li {
+  color: #d4d4d4 !important;
+}
+
+body.dark-mode #sidebar2 {
+  background: #2b2b2b;
+}
+
+body.dark-mode #sidebar2 h3 {
+  color: #d4d4d4;
+}
+
+body.dark-mode #sidebar2 h3 a {
+  color: #5DA5FF;
+}
+
+body.dark-mode #sidebar2 h5 {
+  color: #d4d4d4;
+}
+
+body.dark-mode #sidebar2 a {
+  color: #5DA5FF;
+}
+
+body.dark-mode #sidebar2 ul,
+body.dark-mode #sidebar2 li {
+  color: #d4d4d4;
+}
+
+body.dark-mode #user_ratio {
+  background: #3a3a3a;
+  border-color: #555;
+}
+
+body.dark-mode #user_ratio h3 {
+  background: #424242;
+  color: #d4d4d4;
+}
+
+body.dark-mode #user_ratio table {
+  color: #d4d4d4;
+}
+
+/* ---------------------------------- *
+     Content
+ * ---------------------------------- */
+body.dark-mode #main_content {
+  background: #2b2b2b;
+}
+
+body.dark-mode #latest_news {
+  background: #2b2b2b;
+}
+
+body.dark-mode #latest_news h3 {
+  color: #d4d4d4;
+  background: #3a3a3a;
+  border-color: #555;
+}
+
+body.dark-mode .news_date {
+  color: #888 !important;
+}
+
+body.dark-mode .news_title {
+  color: #d4d4d4;
+}
+
+body.dark-mode .news_title a {
+  color: #5DA5FF;
+}
+
+body.dark-mode .news_title.new a {
+  color: #FF9D5C;
+}
+
+/* Forum/Category Titles */
+body.dark-mode .f_titles,
+body.dark-mode td.f_titles {
+  border-color: #555 !important;
+  color: #e8e8e8 !important;
+}
+
+body.dark-mode .f_titles a,
+body.dark-mode td.f_titles a {
+  color: #5DA5FF !important;
+}
+
+body.dark-mode .cat_title,
+body.dark-mode .category-title {
+  color: #e8e8e8 !important;
+  background: #424242 !important;
+  border-color: #555 !important;
+}
+
+body.dark-mode .cat_title a {
+  color: #e8e8e8 !important;
+}
+
+/* Forum Description */
+body.dark-mode .forum_desc {
+  color: #b0b0b0 !important;
+}
+
+/* Forum Statistics Columns */
+body.dark-mode .f_topics,
+body.dark-mode td.f_topics,
+body.dark-mode .f_posts,
+body.dark-mode td.f_posts {
+  color: #d4d4d4 !important;
+}
+
+body.dark-mode .f_last_post,
+body.dark-mode td.f_last_post {
+  color: #d4d4d4 !important;
+}
+
+body.dark-mode .f_last_post a,
+body.dark-mode td.f_last_post a {
+  color: #5DA5FF !important;
+}
+
+body.dark-mode .last_td {
+  border-color: #555 !important;
+  color: #d4d4d4 !important;
+}
+
+/* ---------------------------------- *
+     Highlight
+ * ---------------------------------- */
+body.dark-mode .highlight {
+  color: #FF6B6B;
+  background: #4a4a00;
+}
+
+/* ---------------------------------- *
+     Misc
+ * ---------------------------------- */
+body.dark-mode .infobox {
+  border-color: #555;
+  background: #3a3a3a !important;
+}
+
+body.dark-mode .infobox h1 {
+  background: #4a4a4a;
+}
+
+body.dark-mode .post-box {
+  border-color: #5a5a5a;
+}
+
+body.dark-mode .post-acronym {
+  border-bottom-color: #66CC66;
+  color: #77DD77;
+}
+
+body.dark-mode .hl_only_new {
+  color: #FF9D5C;
+}
+
+body.dark-mode #old-browser-warn {
+  background: #5a5a00;
+  color: #d4d4d4;
+}
+
+body.dark-mode .gen_btn,
+body.dark-mode .ajax_dropdown,
+body.dark-mode .ajax-call-form {
+  background: #3a3a3a !important;
+}
+
+body.dark-mode .menu-root {
+  background: #3a3a3a !important;
+}
+
+body.dark-mode #main_content_wrap {
+  background: #2b2b2b !important;
+}
+
+/* ---------------------------------- *
+     Page Footer
+ * ---------------------------------- */
+body.dark-mode #page_footer {
+  background: #2b2b2b !important;
+  color: #d4d4d4;
+  border-top: 1px solid #555 !important;
+}
+
+body.dark-mode #page_footer a {
+  color: #5DA5FF;
+}
+
+body.dark-mode #page_footer a:hover {
+  color: #FF9D5C;
+}
+
+body.dark-mode #page_footer table,
+body.dark-mode #page_footer td,
+body.dark-mode #page_footer tr {
+  background: #2b2b2b !important;
+  border-color: #555 !important;
+}
+
+body.dark-mode .bottom_info,
+body.dark-mode .copyright {
+  color: #999 !important;
+}
+
+body.dark-mode #timezone {
+  color: #999 !important;
+}
+
+body.dark-mode #f_icons_legend {
+  background: #2b2b2b !important;
+}
+
+body.dark-mode #f_icons_legend td {
+  border-color: #555 !important;
+}
+
+/* ---------------------------------- *
+     Additional Overrides for White Elements
+ * ---------------------------------- */
+body.dark-mode .spacer,
+body.dark-mode .clear {
+  background: transparent !important;
+}
+
+body.dark-mode table,
+body.dark-mode table td,
+body.dark-mode table th {
+  border-color: #555 !important;
+}
+
+body.dark-mode .nav {
+  color: #d4d4d4;
+}
+
+body.dark-mode .thHead,
+body.dark-mode .thSides,
+body.dark-mode .thTop,
+body.dark-mode .thBottom,
+body.dark-mode .thCornerL,
+body.dark-mode .thCornerR {
+  background: #2e4a6c !important;
+  color: #b0d4f0 !important;
+  border-color: #555 !important;
+}
+
+body.dark-mode .tCenter td,
+body.dark-mode .tRight td,
+body.dark-mode .tLeft td {
+  border-color: #555;
+}
+
+/* ---------------------------------- *
+     Profile Pages
+ * ---------------------------------- */
+body.dark-mode .prof-title {
+  color: #d4d4d4 !important;
+  background: #3a3a3a !important;
+}
+
+body.dark-mode .prof-title h6 {
+  color: #b0b0b0 !important;
+}
+
+body.dark-mode h6 {
+  color: #b0b0b0 !important;
+}
+
+/* ---------------------------------- *
+     Admin Panel
+ * ---------------------------------- */
+body.dark-mode #body_container {
+  background: #2b2b2b !important;
+  border-color: #555 !important;
+}
+
+body.dark-mode form {
+  background: #2b2b2b !important;
+}
+
+body.dark-mode fieldset {
+  background: #3a3a3a !important;
+  border-color: #555 !important;
+}
+
+body.dark-mode fieldset legend {
+  color: #d4d4d4 !important;
+}
+
+body.dark-mode .admin table {
+  background: #2b2b2b !important;
+}
+
+body.dark-mode .admin td,
+body.dark-mode .admin th {
+  background: #3a3a3a !important;
+  color: #d4d4d4 !important;
+  border-color: #555 !important;
+}
+
+body.dark-mode .admin th {
+  background: #424242 !important;
+}
+
+body.dark-mode .admin input,
+body.dark-mode .admin select,
+body.dark-mode .admin textarea {
+  background: #424242 !important;
+  color: #e8e8e8 !important;
+  border-color: #5a5a5a !important;
+}
+
+body.dark-mode .admin label {
+  color: #d4d4d4 !important;
+}
+
+/* More comprehensive admin overrides */
+body.dark-mode table.bodyline,
+body.dark-mode .bodyline {
+  background: #2b2b2b !important;
+  border-color: #555 !important;
+}
+
+body.dark-mode .forumline {
+  background: #2b2b2b !important;
+}
+
+body.dark-mode .forumline tr,
+body.dark-mode .forumline td {
+  background: #3a3a3a !important;
+  color: #d4d4d4 !important;
+}
+
+/* Ensure all forms have dark background */
+body.dark-mode form,
+body.dark-mode form table,
+body.dark-mode form td,
+body.dark-mode form tr {
+  background: transparent !important;
+}
+
+body.dark-mode form table.forumline {
+  background: #2b2b2b !important;
+}
+
+/* Admin body container specific */
+body.dark-mode #body_container,
+body.dark-mode div#body_container {
+  background: #2b2b2b !important;
+  color: #d4d4d4 !important;
+}
