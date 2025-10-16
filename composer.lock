@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a7ab5f68bb892a0dacf0f189e1091df9",
+    "content-hash": "64c29e39069d6cf975a3c4eba931dc7e",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -4005,16 +4005,16 @@
         },
         {
             "name": "symfony/polyfill",
-            "version": "v1.32.0",
+            "version": "v1.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill.git",
-                "reference": "c4ee386e95ccdbea59cea802ea776d806319d506"
+                "reference": "293ea305a8c3511ff1d64c009d7855399bc5beeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill/zipball/c4ee386e95ccdbea59cea802ea776d806319d506",
-                "reference": "c4ee386e95ccdbea59cea802ea776d806319d506",
+                "url": "https://api.github.com/repos/symfony/polyfill/zipball/293ea305a8c3511ff1d64c009d7855399bc5beeb",
+                "reference": "293ea305a8c3511ff1d64c009d7855399bc5beeb",
                 "shasum": ""
             },
             "require": {
@@ -4102,7 +4102,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/polyfill/issues",
-                "source": "https://github.com/symfony/polyfill/tree/v1.32.0"
+                "source": "https://github.com/symfony/polyfill/tree/v1.33.0"
             },
             "funding": [
                 {
@@ -4114,11 +4114,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-02T09:40:28+00:00"
+            "time": "2025-08-19T12:13:28+00:00"
         },
         {
             "name": "symfony/service-contracts",
