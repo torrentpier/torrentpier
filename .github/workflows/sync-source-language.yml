@@ -10,6 +10,8 @@ on:
 jobs:
   sync-source:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout main repository
         uses: actions/checkout@v5
@@ -43,6 +45,8 @@ jobs:
 
       - name: Commit and push changes
         if: steps.check_changes.outputs.has_changes == 'true'
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
         run: |
           cd translations
           git config user.name "Yury Pikhtarev"
@@ -51,7 +55,7 @@ jobs:
           git commit -m "chore: sync source language from main repo
 
           Auto-synced from torrentpier/torrentpier@${{ github.sha }}
-          Triggered by: ${{ github.event.head_commit.message }}"
+          Triggered by: ${COMMIT_MSG}"
           git push
 
       - name: Trigger Crowdin sync

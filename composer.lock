@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36042713651d9ae9d31b6626e9816130",
+    "content-hash": "d60a02777620b2c1cde84d1f227c39d7",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -1139,16 +1139,16 @@
         },
         {
             "name": "gemorroj/m3u-parser",
-            "version": "dev-master",
+            "version": "6.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Gemorroj/M3uParser.git",
-                "reference": "95c62fd837e7adad1694d86dd8f6b31b603ab819"
+                "reference": "92fc0fe236d77e1b5a26c735ffcb6fc637eb298a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Gemorroj/M3uParser/zipball/95c62fd837e7adad1694d86dd8f6b31b603ab819",
-                "reference": "95c62fd837e7adad1694d86dd8f6b31b603ab819",
+                "url": "https://api.github.com/repos/Gemorroj/M3uParser/zipball/92fc0fe236d77e1b5a26c735ffcb6fc637eb298a",
+                "reference": "92fc0fe236d77e1b5a26c735ffcb6fc637eb298a",
                 "shasum": ""
             },
             "require": {
@@ -1159,7 +1159,6 @@
                 "phpstan/phpstan": "^2.1",
                 "phpunit/phpunit": "^9.6.22"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1183,9 +1182,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Gemorroj/M3uParser/issues",
-                "source": "https://github.com/Gemorroj/M3uParser/tree/master"
+                "source": "https://github.com/Gemorroj/M3uParser/tree/6.0.1"
             },
-            "time": "2025-05-04T19:36:03+00:00"
+            "time": "2025-03-25T19:21:43+00:00"
         },
         {
             "name": "google/recaptcha",
@@ -7652,9 +7651,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "gemorroj/m3u-parser": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
