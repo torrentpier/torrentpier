@@ -2100,6 +2100,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Grupa dozvole su ažurirane';
 $lang['AUTH_UPDATED'] = 'Dozvole su ažurirane';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Kliknite %sHere%s vratiti prava korisnika';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Kliknite %sHere%s vratiti u grupi dozvole';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliknite %sHere%s, da se vratim na forum dozvole';
