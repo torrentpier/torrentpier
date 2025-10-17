@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'أذونات المجموعة تم تحديث';
 $lang['AUTH_UPDATED'] = 'أذونات تم تحديث';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'انقر فوق %sHere%s العودة إلى أذونات المستخدم';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'انقر فوق %sHere%s العودة إلى أذونات المجموعة';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'انقر فوق %sHere%s العودة إلى المنتدى Permissions';
