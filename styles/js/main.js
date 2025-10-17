@@ -557,3 +557,35 @@ $(document).ready(function () {
     _bMoveble = false;
   });
 });
+
+/**
+ * Dark mode toggle
+ **/
+$(document).ready(function() {
+  // Check for saved dark mode preference
+  var darkModeEnabled = getCookie('dark_mode') === '1';
+
+  // Apply dark mode if enabled
+  if (darkModeEnabled) {
+    $('body').addClass('dark-mode');
+    $('.theme-icon').text('🌙');
+  }
+
+  // Toggle dark mode on link click
+  $('.dark-mode-toggle').click(function(e) {
+    e.preventDefault();
+    var isDarkMode = $('body').hasClass('dark-mode');
+
+    if (isDarkMode) {
+      // Switch to light mode
+      $('body').removeClass('dark-mode');
+      $('.theme-icon').text('☀️');
+      setCookie('dark_mode', '0', 365);
+    } else {
+      // Switch to dark mode
+      $('body').addClass('dark-mode');
+      $('.theme-icon').text('🌙');
+      setCookie('dark_mode', '1', 365);
+    }
+  });
+});
