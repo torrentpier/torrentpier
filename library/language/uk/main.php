@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Права групи змінено';
 $lang['AUTH_UPDATED'] = 'Права доступу змінено';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = '%sПовернутися до керування правами користувачів%s';
 $lang['CLICK_RETURN_GROUPAUTH'] = '%sПовернутися до керування правами груп%s';
 $lang['CLICK_RETURN_FORUMAUTH'] = '%sПовернутися до керування доступом до форумів%s';
