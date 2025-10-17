@@ -1291,7 +1291,7 @@ function birthday_age($date)
 
 /**
  * Format registration time intervals
- * Takes an array of restricted hours and returns formatted string of allowed hours
+ * Takes an array of restricted hours and returns a formatted string of allowed hours
  *
  * @param array $restricted_hours Array of hours when registration is restricted
  * @return array ['intervals' => '09:00-10:59', 'current_time' => '15:30']
@@ -1320,13 +1320,13 @@ function format_registration_intervals(array $restricted_hours): array
         } elseif ($hour == $end + 1) {
             $end = $hour;
         } else {
-            // End of interval, save it
+            // End of an interval, save it
             $intervals[] = sprintf('%02d:00-%02d:59', $start, $end);
             $start = $end = $hour;
         }
     }
 
-    // Add last interval
+    // Add the last interval
     if ($start !== null) {
         $intervals[] = sprintf('%02d:00-%02d:59', $start, $end);
     }
