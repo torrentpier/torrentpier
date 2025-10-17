@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Groepspermitte is opgedateer';
 $lang['AUTH_UPDATED'] = 'Magtigings is opgedateer';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klik %sHere%s om terug te keer na Gebruiker Toestemmings';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klik %sHere%s om terug te keer na Groepspermitte';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik %sHere%s om terug te keer na Forum toestemmings';
