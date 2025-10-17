@@ -1289,6 +1289,61 @@ function birthday_age($date)
     return delta_time(strtotime($date, $tz));
 }
 
+/**
+ * Format registration time intervals
+ * Takes an array of restricted hours and returns a formatted string of allowed hours
+ *
+ * @param array $restricted_hours Array of hours when registration is restricted
+ * @return array ['intervals' => '09:00-10:59', 'current_time' => '15:30']
+ */
+function format_registration_intervals(array $restricted_hours): array
+{
+    // Validate and filter restricted hours to be within 0-23
+    $restricted_hours = array_filter($restricted_hours, fn($h) => is_int($h) && $h >= 0 && $h <= 23);
+
+    // Use board timezone for the current time
+    $tz = config()->get('board_timezone');
+    $current_time = gmdate('H:i', TIMENOW + (3600 * $tz));
+
+    // Calculate allowed hours (0-23 minus restricted)
+    $all_hours = range(0, 23);
+    $allowed_hours = array_diff($all_hours, $restricted_hours);
+    sort($allowed_hours);
+
+    if (empty($allowed_hours)) {
+        return [
+            'intervals' => '',
+            'current_time' => $current_time
+        ];
+    }
+
+    // Group consecutive hours into intervals
+    $intervals = [];
+    $start = $end = null;
+
+    foreach ($allowed_hours as $hour) {
+        if ($start === null) {
+            $start = $end = $hour;
+        } elseif ($hour === $end + 1) {
+            $end = $hour;
+        } else {
+            // End of an interval, save it
+            $intervals[] = sprintf('%02d:00-%02d:59', $start, $end);
+            $start = $end = $hour;
+        }
+    }
+
+    // Add the last interval
+    if ($start !== null) {
+        $intervals[] = sprintf('%02d:00-%02d:59', $start, $end);
+    }
+
+    return [
+        'intervals' => implode(', ', $intervals),
+        'current_time' => $current_time
+    ];
+}
+
 //
 // Pagination routine, generates
 // page number sequence
