@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'קבוצת הרשאות עודכנו';
 $lang['AUTH_UPDATED'] = 'הרשאות עודכנו';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'לחץ על %sHere%s לחזור הרשאות משתמש';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'לחץ על %sHere%s לחזור הרשאות הקבוצה';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'לחץ על %sHere%s לחזור פורום הרשאות';
