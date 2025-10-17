@@ -1298,6 +1298,13 @@ function birthday_age($date)
  */
 function format_registration_intervals(array $restricted_hours): array
 {
+    // Validate and filter restricted hours to be within 0-23
+    $restricted_hours = array_filter($restricted_hours, fn($h) => is_int($h) && $h >= 0 && $h <= 23);
+
+    // Use board timezone for the current time
+    $tz = config()->get('board_timezone');
+    $current_time = gmdate('H:i', TIMENOW + (3600 * $tz));
+
     // Calculate allowed hours (0-23 minus restricted)
     $all_hours = range(0, 23);
     $allowed_hours = array_diff($all_hours, $restricted_hours);
@@ -1306,7 +1313,7 @@ function format_registration_intervals(array $restricted_hours): array
     if (empty($allowed_hours)) {
         return [
             'intervals' => '',
-            'current_time' => date('H:i')
+            'current_time' => $current_time
         ];
     }
 
@@ -1317,7 +1324,7 @@ function format_registration_intervals(array $restricted_hours): array
     foreach ($allowed_hours as $hour) {
         if ($start === null) {
             $start = $end = $hour;
-        } elseif ($hour == $end + 1) {
+        } elseif ($hour === $end + 1) {
             $end = $hour;
         } else {
             // End of an interval, save it
@@ -1333,7 +1340,7 @@ function format_registration_intervals(array $restricted_hours): array
 
     return [
         'intervals' => implode(', ', $intervals),
-        'current_time' => date('H:i')
+        'current_time' => $current_time
     ];
 }
 
