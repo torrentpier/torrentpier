@@ -2100,6 +2100,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Uprawnienia grupy zostały zaktualizowane';
 $lang['AUTH_UPDATED'] = 'Uprawnienia zostały zaktualizowane';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Kliknij %sHere%s odzyskać prawa użytkownika';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Kliknij %sHere%s powrócić do grupy, uprawnienia';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliknij %sHere%s, aby powrócić na forum rozdzielczości';
