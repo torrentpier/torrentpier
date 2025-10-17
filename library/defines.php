@@ -29,11 +29,11 @@ define('IMAGES_DIR', BB_PATH . '/styles/images');
 define('TEMPLATES_DIR', BB_PATH . '/styles/templates');
 
 // Languages
-if (is_dir(BB_PATH . '/vendor/torrentpier/translations/languages/')) {
-    define('LANG_ROOT_DIR', BB_PATH . '/vendor/torrentpier/translations/languages/');
-} else {
-    define('LANG_ROOT_DIR', BB_PATH . '/library/language/');
-}
+define('LANG_ROOT_DIR',
+    file_exists(BB_PATH . '/vendor/torrentpier/translations/languages/')
+        ? BB_PATH . '/vendor/torrentpier/translations/languages/'
+        : BB_PATH . '/library/language/'
+);
 
 // System
 define('APP_NAME', 'TorrentPier');
