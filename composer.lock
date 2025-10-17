@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64c29e39069d6cf975a3c4eba931dc7e",
+    "content-hash": "36042713651d9ae9d31b6626e9816130",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -4297,6 +4297,64 @@
                 }
             ],
             "time": "2025-08-25T06:35:40+00:00"
+        },
+        {
+            "name": "torrentpier/translations",
+            "version": "v2.8.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/torrentpier/translations.git",
+                "reference": "971315f11084f0cf6ae819f6d8ef6caf88d3673e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/torrentpier/translations/zipball/971315f11084f0cf6ae819f6d8ef6caf88d3673e",
+                "reference": "971315f11084f0cf6ae819f6d8ef6caf88d3673e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "languages/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Exile",
+                    "email": "admin@torrentpier.com",
+                    "homepage": "https://github.com/Exileum",
+                    "role": "Developer"
+                },
+                {
+                    "name": "belomaxorka",
+                    "email": "roman25052006.kelesh@gmail.com",
+                    "homepage": "https://github.com/belomaxorka",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Composer package with TorrentPier localization files in different languages",
+            "homepage": "https://github.com/torrentpier",
+            "keywords": [
+                "crowdin",
+                "i18n",
+                "l10n",
+                "torrentpier",
+                "translations"
+            ],
+            "support": {
+                "email": "support@torrentpier.com",
+                "forum": "https://torrentpier.com",
+                "issues": "https://github.com/torrentpier/torrentpier/issues",
+                "source": "https://github.com/torrentpier/translations/tree/v2.8.7"
+            },
+            "time": "2025-10-17T14:03:23+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

@@ -1,9 +1,0 @@
-files:
-  - source: /styles/templates/default/images/lang/source/*.*
-    translation: /styles/templates/default/images/lang/%two_letters_code%/%original_file_name%
-  - source: /library/language/source/*.*
-    translation: /library/language/%two_letters_code%/%original_file_name%
-  - source: /library/language/source/email/*.*
-    translation: /library/language/%two_letters_code%/email/%original_file_name%
-  - source: /library/language/source/html/*.*
-    translation: /library/language/%two_letters_code%/html/%original_file_name%

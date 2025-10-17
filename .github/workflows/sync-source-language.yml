@@ -1,0 +1,60 @@
+name: Sync Source Language to Translations
+
+on:
+  push:
+    paths:
+      - 'library/language/source/**'
+    branches:
+      - master
+
+jobs:
+  sync-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v5
+        with:
+          path: main
+
+      - name: Checkout translations repository
+        uses: actions/checkout@v5
+        with:
+          repository: torrentpier/translations
+          token: ${{ secrets.TRANSLATIONS_REPO_TOKEN }}
+          path: translations
+
+      - name: Sync source files
+        run: |
+          # Remove old source directory in translations repo
+          rm -rf translations/languages/source
+
+          # Copy fresh source from main repo
+          cp -r main/library/language/source translations/languages/source
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          cd translations
+          if [[ -n $(git status -s) ]]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          cd translations
+          git config user.name "Yury Pikhtarev"
+          git config user.email "exileum@icloud.com"
+          git add languages/source
+          git commit -m "chore: sync source language from main repo
+
+          Auto-synced from torrentpier/torrentpier@${{ github.sha }}
+          Triggered by: ${{ github.event.head_commit.message }}"
+          git push
+
+      - name: Trigger Crowdin sync
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          echo "Source language updated, Crowdin will pick up changes automatically"

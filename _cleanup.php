@@ -36,7 +36,6 @@ $items = [
     'CHANGELOG.md',
     'CLAUDE.md',
     'cliff.toml',
-    'crowdin.yml',
     'phpunit.xml',
     'README.md',
     'tests',
