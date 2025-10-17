@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'กลุ่มมีสิทธิ์ที่�
 $lang['AUTH_UPDATED'] = 'สิทธิ์ที่อนุญาตต้องถูกปรับให้ทันสมัยแล้ว';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'คลิก %sHere%s ต้องกลับไปที่ต้นของผู้ใช้สิทธิ์ที่อนุญาต';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'คลิก %sHere%s ต้องกลับไปยังกลุ่มสิทธิ์ที่อนุญาต';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'คลิก %sHere%s ต้องกลับไปอภิปราสิทธิ์ที่อนุญาต';
