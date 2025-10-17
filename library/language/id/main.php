@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Kelompok izin telah diperbarui';
 $lang['AUTH_UPDATED'] = 'Izin telah diperbarui';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klik %sHere%s untuk kembali ke User Permissions';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klik %sHere%s untuk kembali ke Kelompok Permissions';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik %sHere%s untuk kembali ke Forum Permissions';
