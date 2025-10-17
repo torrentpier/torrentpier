@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Group togri yangilandi';
 $lang['AUTH_UPDATED'] = 'Ruxsatlar yangilandi';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Foydalanuvchi ruxsati qaytish uchun %sHere%s bosing';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Group ruxsati qaytish uchun %sHere%s bosing';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Forum ruxsati qaytish uchun %sHere%s bosing';
