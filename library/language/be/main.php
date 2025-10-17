@@ -3158,3 +3158,6 @@ $lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
 $lang['RELEASER_STAT_SIZE'] = 'Total size:';
 $lang['RELEASER_STAT'] = 'Releaser stats:';
 $lang['RELEASER_STAT_SHOW'] = 'Show stats';
+
+// Dark mode
+$lang['DARK_MODE_TOGGLE'] = 'Toggle dark mode';
