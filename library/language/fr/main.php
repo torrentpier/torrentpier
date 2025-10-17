@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Revenir à l\'édition de';
 $lang['PROFILE_RETURN'] = 'Accédez au profil';
 
 $lang['WARNING'] = 'Avertissement';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Forum de style';
 
@@ -2095,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Les autorisations de groupe ont été mis à jour
 $lang['AUTH_UPDATED'] = 'Les autorisations ont été mis à jour';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Cliquez sur %sHere%s pour retourner à l\'Utilisateur des Autorisations';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Cliquez sur %sHere%s pour revenir à des Autorisations de Groupe';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Cliquez sur %sHere%s de retour au Forum des Autorisations';
@@ -3155,3 +3158,6 @@ $lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
 $lang['RELEASER_STAT_SIZE'] = 'Total size:';
 $lang['RELEASER_STAT'] = 'Releaser stats:';
 $lang['RELEASER_STAT_SHOW'] = 'Show stats';
+
+// Dark mode
+$lang['DARK_MODE_TOGGLE'] = 'Toggle dark mode';

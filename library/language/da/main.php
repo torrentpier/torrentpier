@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Gruppe tilladelser er blevet opdateret';
 $lang['AUTH_UPDATED'] = 'Tilladelser er blevet opdateret';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klik på %sHere%s for at vende tilbage til brugertilladelser';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klik på %sHere%s for at vende tilbage til Gruppe rettigheder';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik på %sHere%s for at vende tilbage til Forum Tilladelser';
@@ -3157,3 +3158,6 @@ $lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
 $lang['RELEASER_STAT_SIZE'] = 'Total size:';
 $lang['RELEASER_STAT'] = 'Releaser stats:';
 $lang['RELEASER_STAT_SHOW'] = 'Show stats';
+
+// Dark mode
+$lang['DARK_MODE_TOGGLE'] = 'Toggle dark mode';

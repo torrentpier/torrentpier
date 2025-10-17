@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = '集团的权限已经更新，';
 $lang['AUTH_UPDATED'] = '权限已更新';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = '点击%sHere%s回到用户的权限';
 $lang['CLICK_RETURN_GROUPAUTH'] = '点击%sHere%s回到小组的权限';
 $lang['CLICK_RETURN_FORUMAUTH'] = '点击%sHere%s回到论坛的权限';
@@ -3157,3 +3158,6 @@ $lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
 $lang['RELEASER_STAT_SIZE'] = 'Total size:';
 $lang['RELEASER_STAT'] = 'Releaser stats:';
 $lang['RELEASER_STAT_SHOW'] = 'Show stats';
+
+// Dark mode
+$lang['DARK_MODE_TOGGLE'] = 'Toggle dark mode';

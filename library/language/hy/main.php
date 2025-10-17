@@ -2100,6 +2100,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Թույլտվության խմբի թարմաց�
 $lang['AUTH_UPDATED'] = 'Թույլտվության թարմացվել';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Սեղմեք %sHere%s վերադարձնել օգտագործողի իրավունքները';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Սեղմեք %sHere%s վերադառնալ խմբում թույլտվության';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Սեղմեք %sHere%s վերադառնալ համաժողովը թույլտվության';
@@ -3161,3 +3162,6 @@ $lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
 $lang['RELEASER_STAT_SIZE'] = 'Total size:';
 $lang['RELEASER_STAT'] = 'Releaser stats:';
 $lang['RELEASER_STAT_SHOW'] = 'Show stats';
+
+// Dark mode
+$lang['DARK_MODE_TOGGLE'] = 'Toggle dark mode';

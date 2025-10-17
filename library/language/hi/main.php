@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'समूह अनुमतियां अप�
 $lang['AUTH_UPDATED'] = 'अनुमतियों को अद्यतन किया गया है';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'उपयोगकर्ता अनुमतियों पर वापस जाने के लिए %sHere%s पर क्लिक करें';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'समूह अनुमतियों पर वापस जाने के लिए %s हीरे %s पर क्लिक करें';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'फोरम अनुमतियों पर वापस जाने के लिए %s हीरे %s पर क्लिक करें';
@@ -3157,3 +3158,6 @@ $lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
 $lang['RELEASER_STAT_SIZE'] = 'Total size:';
 $lang['RELEASER_STAT'] = 'Releaser stats:';
 $lang['RELEASER_STAT_SHOW'] = 'Show stats';
+
+// Dark mode
+$lang['DARK_MODE_TOGGLE'] = 'Toggle dark mode';
