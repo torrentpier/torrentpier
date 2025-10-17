@@ -2097,7 +2097,6 @@ $lang['GROUP_AUTH_UPDATED'] = 'Group permissions have been updated';
 $lang['AUTH_UPDATED'] = 'Permissions have been updated';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
-$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Click %sHere%s to return to User Permissions';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Click %sHere%s to return to Group Permissions';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Click %sHere%s to return to Forum Permissions';
