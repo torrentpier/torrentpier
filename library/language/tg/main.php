@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'иҷозатҳои Group кардаанд таҷ�
 $lang['AUTH_UPDATED'] = 'Рухсатдории кардаанд таҷдид шуда,';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = '%sHere%s ангушт занед барои баргаштан ба Иҷозатҳои Корбар';
 $lang['CLICK_RETURN_GROUPAUTH'] = '%sHere%s ангушт занед барои баргаштан ба гурӯҳи Иҷозатҳои';
 $lang['CLICK_RETURN_FORUMAUTH'] = '%sHere%s ангушт занед барои баргаштан ба Иҷозатҳои Форум';
