@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Povolenia skupiny boli aktualizované';
 $lang['AUTH_UPDATED'] = 'Povolenia boli aktualizované';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Kliknite na tlačidlo %sHere%s ak sa chcete vrátiť do Povolenia Používateľa';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Kliknite na tlačidlo %sHere%s ak sa chcete vrátiť do Skupiny Povolenia';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliknite na tlačidlo %sHere%s ak sa chcete vrátiť na Fórum Povolenia';
