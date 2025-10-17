@@ -24,10 +24,16 @@ define('ATTACH_DIR', BB_PATH . '/library/attach_mod');
 define('CFG_DIR', BB_PATH . '/library/config');
 define('INC_DIR', BB_PATH . '/library/includes');
 define('UCP_DIR', BB_PATH . '/library/includes/ucp');
-define('LANG_ROOT_DIR', BB_PATH . '/library/language');
 define('SITEMAP_DIR', BB_PATH . '/sitemap');
 define('IMAGES_DIR', BB_PATH . '/styles/images');
 define('TEMPLATES_DIR', BB_PATH . '/styles/templates');
+
+// Languages
+define('LANG_ROOT_DIR',
+    file_exists(BB_PATH . '/vendor/torrentpier/translations/languages/')
+        ? BB_PATH . '/vendor/torrentpier/translations/languages/'
+        : BB_PATH . '/library/language/'
+);
 
 // System
 define('APP_NAME', 'TorrentPier');

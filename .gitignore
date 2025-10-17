@@ -18,6 +18,10 @@ sitemap
 internal_data/triggers
 library/config.local.php
 vendor
+# Exclude all translations except source
+# Translations are now managed via Composer
+library/language/*
+!library/language/source/
 
 ### Archives ###
 *.phar
