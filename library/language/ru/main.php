@@ -3157,3 +3157,6 @@ $lang['BT_NULL_RATIO_SUCCESS'] = 'Рейтинг успешно сброшен!'
 $lang['RELEASER_STAT_SIZE'] = 'Общий размер:';
 $lang['RELEASER_STAT'] = 'Статистика релизера:';
 $lang['RELEASER_STAT_SHOW'] = 'Показать статистику';
+
+// Dark mode
+$lang['DARK_MODE_TOGGLE'] = 'Toggle dark mode';
