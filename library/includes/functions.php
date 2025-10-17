@@ -268,7 +268,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     $add_auth_type_desc = ($forum_id != AUTH_LIST_ALL);
 
     // Check forum existence
-    if (!forum_exists() || ($add_auth_type_desc && !forum_exists($forum_id))) {
+    if ($add_auth_type_desc && !forum_exists($forum_id)) {
         return [];
     }
 
