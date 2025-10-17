@@ -2099,6 +2099,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Разрешение групи са обнове
 $lang['AUTH_UPDATED'] = 'Разрешения са били актуализирани';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Кликнете %sHere%s върне правото на потребителя';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Кликнете %sHere%s се върнете към групата на разрешение';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Кликнете %sHere%s, за да се върнете на разрешения форум';
