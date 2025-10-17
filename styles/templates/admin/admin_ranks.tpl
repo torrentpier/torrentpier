@@ -33,9 +33,30 @@
 	<td valign="top"><h4>{L_RANK_IMAGE}:</h4><br />
 		<h6>{L_RANK_IMAGE_EXPLAIN}</h6></td>
 	<td>
-		<input class="post" type="text" name="rank_image" size="60" maxlength="255" value="{IMAGE}" />
+		<select class="post" name="rank_image" id="rank_image_selector">
+			<option value="">{L_NONE}</option>
+			<!-- BEGIN rank_images -->
+			<option value="{rank_images.IMAGE_PATH}" <!-- IF rank_images.SELECTED -->selected="selected"<!-- ENDIF -->>{rank_images.IMAGE_FILE}</option>
+			<!-- END rank_images -->
+		</select>
 		<br /><br />
-		{IMAGE_DISPLAY}
+		<div id="rank_image_preview">
+			{IMAGE_DISPLAY}
+		</div>
+		<script type="text/javascript">
+		$(function() {
+			$('#rank_image_selector').on('change', function() {
+				var imagePath = $(this).val();
+				var previewDiv = $('#rank_image_preview');
+				
+				if (imagePath) {
+					previewDiv.html('<img src="../' + imagePath + '" />');
+				} else {
+					previewDiv.html('');
+				}
+			});
+		});
+		</script>
 	</td>
 </tr>
 <tr>

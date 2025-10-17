@@ -58,6 +58,25 @@ if ($mode != '') {
 
         $s_hidden_fields .= '<input type="hidden" name="mode" value="save" />';
 
+        // Scan the ranks images folder
+        $ranks_dir = '../styles/images/ranks/';
+        $rank_images = [];
+
+        if (is_dir($ranks_dir)) {
+            $allowed_extensions = ['gif', 'png', 'jpg', 'jpeg', 'bmp', 'webp', 'avif', 'ico'];
+            $files = scandir($ranks_dir);
+
+            foreach ($files as $file) {
+                if ($file != '.' && $file != '..') {
+                    $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                    if (in_array($ext, $allowed_extensions)) {
+                        $rank_images[] = $file;
+                    }
+                }
+            }
+            sort($rank_images);
+        }
+
         $template->assign_vars([
             'TPL_RANKS_EDIT' => true,
 
@@ -69,6 +88,18 @@ if ($mode != '') {
             'S_RANK_ACTION' => 'admin_ranks.php',
             'S_HIDDEN_FIELDS' => $s_hidden_fields
         ]);
+
+        // Pass the list of images to the template
+        foreach ($rank_images as $img) {
+            $img_path = 'styles/images/ranks/' . $img;
+            $selected = !empty($rank_info['rank_image']) && $rank_info['rank_image'] == $img_path;
+
+            $template->assign_block_vars('rank_images', [
+                'IMAGE_FILE' => $img,
+                'IMAGE_PATH' => $img_path,
+                'SELECTED' => $selected
+            ]);
+        }
     } elseif ($mode == 'save') {
         //
         // Ok, they sent us our info, let's update it.
