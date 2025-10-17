@@ -93,12 +93,6 @@ if ($mode != '') {
         }
 
         if ($rank_id) {
-
-            $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
-            if (!$result = DB()->sql_query($sql)) {
-                bb_die($lang['NO_UPDATE_RANKS']);
-            }
-
             $sql = 'UPDATE ' . BB_RANKS . "
 				SET rank_title = '" . DB()->escape($rank_title) . "',
 					rank_image = '" . DB()->escape($rank_image) . "',
