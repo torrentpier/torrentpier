@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Rühma õigused on uuendatud';
 $lang['AUTH_UPDATED'] = 'Load on uuendatud';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klõpsake %sHere%s naasta Kasutaja Õigused';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klõpsake %sHere%s naasta Rühma Õigused';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klõpsake %sHere%s naasta Foorumi Õigused';
