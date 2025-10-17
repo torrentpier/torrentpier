@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Δικαιώματα της ομάδας έχου
 $lang['AUTH_UPDATED'] = 'Δικαιώματα έχουν ενημερωθεί';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Κάντε κλικ %sHere%s να επιστρέψετε τα Δικαιώματα των Χρηστών';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Κάντε κλικ %sHere%s για να επιστρέψετε Δικαιώματα της Ομάδας';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Κάντε κλικ %sHere%s για να επιστρέψετε στο Φόρουμ Δικαιώματα';
