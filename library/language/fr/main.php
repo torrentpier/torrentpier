@@ -1914,6 +1914,8 @@ $lang['PROFILE_EDIT_RETURN'] = 'Revenir à l\'édition de';
 $lang['PROFILE_RETURN'] = 'Accédez au profil';
 
 $lang['WARNING'] = 'Avertissement';
+$lang['INDEXER'] = 'Reindex search';
+$lang['INDEXER_SUCCESS'] = 'Search index updated successfully';
 
 $lang['FORUM_STYLE'] = 'Forum de style';
 
@@ -3155,3 +3157,6 @@ $lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
 $lang['RELEASER_STAT_SIZE'] = 'Total size:';
 $lang['RELEASER_STAT'] = 'Releaser stats:';
 $lang['RELEASER_STAT_SHOW'] = 'Show stats';
+
+// Dark mode
+$lang['DARK_MODE_TOGGLE'] = 'Toggle dark mode';
