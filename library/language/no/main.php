@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Gruppe tillatelser har blitt oppdatert';
 $lang['AUTH_UPDATED'] = 'Tillatelser har blitt oppdatert';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klikk %sHere%s for å gå tilbake til brukertillatelser';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klikk %sHere%s for å gå tilbake til Gruppen Tillatelser';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klikk %sHere%s for å gå tilbake til Forumet Tillatelser';
