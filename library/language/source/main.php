@@ -3161,3 +3161,5 @@ $lang['RELEASER_STAT_SHOW'] = 'Show stats';
 
 // Dark mode
 $lang['DARK_MODE_TOGGLE'] = 'Toggle dark mode';
+
+// Test sync
