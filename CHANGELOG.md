@@ -2,6 +2,18 @@
 
 # 📖 Change Log
 
+## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/master/TorrentPier-master)
+
+### 📦 Dependencies
+
+- *(deps)* Bump symfony/mailer from 7.3.3 to 7.3.4 ([#2181](https://github.com/torrentpier/torrentpier/pull/2181)) - ([b994bc1](https://github.com/torrentpier/torrentpier/commit/b994bc1b1b07011512ac13c425eaa6d233cd0efe))
+- *(deps)* Bump symfony/polyfill from 1.32.0 to 1.33.0 ([#2180](https://github.com/torrentpier/torrentpier/pull/2180)) - ([10206fe](https://github.com/torrentpier/torrentpier/commit/10206fec169f4b46d9c8bbaabd1f3bcddf8de15f))
+- *(deps)* Bump arokettu/torrent-file from 5.3.2 to 5.3.3 ([#2185](https://github.com/torrentpier/torrentpier/pull/2185)) - ([becae8b](https://github.com/torrentpier/torrentpier/commit/becae8b7a3a2b609ab6bfa08036287fd88ae69ec))
+- *(deps)* Bump arokettu/bencode from 4.3.1 to 4.3.2 ([#2182](https://github.com/torrentpier/torrentpier/pull/2182)) - ([5640848](https://github.com/torrentpier/torrentpier/commit/5640848277232be9077e168af643f73cf457a36a))
+- *(deps)* Bump arokettu/monsterid from 4.1.0 to 4.1.1 ([#2183](https://github.com/torrentpier/torrentpier/pull/2183)) - ([27cdd74](https://github.com/torrentpier/torrentpier/commit/27cdd743d6bd108bf21530a50cb485b77e61b37b))
+- *(deps-dev)* Bump symfony/var-dumper from 7.3.3 to 7.3.4 ([#2184](https://github.com/torrentpier/torrentpier/pull/2184)) - ([9044a15](https://github.com/torrentpier/torrentpier/commit/9044a15dfc1bba84e107d0c0574b9c1f1ca0fb80))
+
+
 ## [v2.8.7](https://github.com/torrentpier/torrentpier/compare/v2.8.6..v2.8.7) (2025-10-10)
 
 ### 🐛 Bug Fixes
@@ -141,6 +153,9 @@
 - Demo mode: Save user language in cookies ([#2128](https://github.com/torrentpier/torrentpier/pull/2128)) - ([a5ad7ba](https://github.com/torrentpier/torrentpier/commit/a5ad7bad09853f7700c450c451a6c34a880a1b25))
 - "refactor: Moved `Select` class into `Legacy\Common` ([#1846](https://github.com/torrentpier/torrentpier/pull/1846))" - ([d2f5971](https://github.com/torrentpier/torrentpier/commit/d2f5971d37a2e8ec01629108f7b40b9d2c800d5d))
 
+## New Contributors ❤️
+
+* @advancedalloy made their first contribution
 
 ## [v2.8.3](https://github.com/torrentpier/torrentpier/compare/v2.8.2..v2.8.3) (2025-07-03)
 
