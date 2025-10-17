@@ -2097,6 +2097,7 @@ $lang['GROUP_AUTH_UPDATED'] = 'Grupi lejet kanë qenë të përditësuar';
 $lang['AUTH_UPDATED'] = 'Lejet kanë qenë të përditësuar';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
 $lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['NO_FORUMS_AVAILABLE'] = 'No forums available. Create forums first to manage permissions.';
 $lang['CLICK_RETURN_USERAUTH'] = 'Kliko %sHere%s të kthehen në Lejet e Përdoruesit';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Kliko %sHere%s të kthehen për Grupin Lejet';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliko %sHere%s të kthehen në Forum Lejet';
