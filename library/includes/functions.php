@@ -1289,6 +1289,54 @@ function birthday_age($date)
     return delta_time(strtotime($date, $tz));
 }
 
+/**
+ * Format registration time intervals
+ * Takes an array of restricted hours and returns formatted string of allowed hours
+ *
+ * @param array $restricted_hours Array of hours when registration is restricted
+ * @return array ['intervals' => '09:00-10:59', 'current_time' => '15:30']
+ */
+function format_registration_intervals(array $restricted_hours): array
+{
+    // Calculate allowed hours (0-23 minus restricted)
+    $all_hours = range(0, 23);
+    $allowed_hours = array_diff($all_hours, $restricted_hours);
+    sort($allowed_hours);
+
+    if (empty($allowed_hours)) {
+        return [
+            'intervals' => '',
+            'current_time' => date('H:i')
+        ];
+    }
+
+    // Group consecutive hours into intervals
+    $intervals = [];
+    $start = $end = null;
+
+    foreach ($allowed_hours as $hour) {
+        if ($start === null) {
+            $start = $end = $hour;
+        } elseif ($hour == $end + 1) {
+            $end = $hour;
+        } else {
+            // End of interval, save it
+            $intervals[] = sprintf('%02d:00-%02d:59', $start, $end);
+            $start = $end = $hour;
+        }
+    }
+
+    // Add last interval
+    if ($start !== null) {
+        $intervals[] = sprintf('%02d:00-%02d:59', $start, $end);
+    }
+
+    return [
+        'intervals' => implode(', ', $intervals),
+        'current_time' => date('H:i')
+    ];
+}
+
 //
 // Pagination routine, generates
 // page number sequence

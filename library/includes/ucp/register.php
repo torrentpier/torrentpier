@@ -65,7 +65,13 @@ switch ($mode) {
             } // Time limit
             elseif (config()->get('new_user_reg_restricted')) {
                 if (in_array(date('G'), config()->get('new_user_reg_interval'), true)) {
-                    bb_die($lang['REGISTERED_IN_TIME']);
+                    $time_info = format_registration_intervals(config()->get('new_user_reg_interval'));
+                    $message = sprintf(
+                        $lang['REGISTERED_IN_TIME'],
+                        $time_info['intervals'],
+                        $time_info['current_time']
+                    );
+                    bb_die($message);
                 }
             }
         }
