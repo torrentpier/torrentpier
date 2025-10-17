@@ -268,7 +268,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     $add_auth_type_desc = ($forum_id != AUTH_LIST_ALL);
 
     // Check forum existence
-    if (!forum_exists() || ($add_auth_type_desc && !forum_exists($forum_id))) {
+    if ($add_auth_type_desc && !forum_exists($forum_id)) {
         return [];
     }
 
@@ -1910,11 +1910,11 @@ function sync_post_to_manticore($post_id, $post_text = null, $topic_title = null
  * Sync users to manticore
  *
  * @param $user_id
- * @param $username
+ * @param ?string $username
  * @param string $action
  * @return void
  */
-function sync_user_to_manticore($user_id, $username = null, string $action = 'upsert'): void
+function sync_user_to_manticore($user_id, ?string $username = null, string $action = 'upsert'): void
 {
     global $bb_cfg;
 
