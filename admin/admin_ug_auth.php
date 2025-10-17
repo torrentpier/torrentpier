@@ -185,6 +185,14 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
     }
+
+    // Check if forums exist
+    if (empty($forums['f'])) {
+        $message = $lang['NO_FORUMS_AVAILABLE'];
+        $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+        bb_die($message);
+    }
+
     $base_url = basename(__FILE__) . "?mode=user&amp;" . POST_USERS_URL . "=$user_id";
 
     $ug_data = $this_userdata;
@@ -298,6 +306,14 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
     }
+
+    // Check if forums exist
+    if (empty($forums['f'])) {
+        $message = $lang['NO_FORUMS_AVAILABLE'];
+        $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+        bb_die($message);
+    }
+
     $base_url = basename(__FILE__) . "?mode=group&amp;" . POST_GROUPS_URL . "=$group_id";
 
     $ug_data = array('group_id' => $group_id);
