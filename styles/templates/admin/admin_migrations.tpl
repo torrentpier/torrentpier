@@ -58,7 +58,7 @@
     </tr>
     <!-- ENDIF -->
     <tr>
-        <td class="row1"><b>Current Version:</b></td>
+        <td class="row1"><b>{L_MIGRATIONS_CURRENT_VERSION}:</b></td>
         <td class="row2">
             <!-- IF MIGRATION_CURRENT_VERSION -->
             {MIGRATION_CURRENT_VERSION}
