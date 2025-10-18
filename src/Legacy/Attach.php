@@ -829,7 +829,7 @@ class Attach
                         return;
                     }
                 }
-                @chmod($upload_dir . '/' . basename($this->attach_filename), 0666);
+                @chmod($upload_dir . '/' . basename($this->attach_filename), 0644);
 
                 break;
 
@@ -845,7 +845,7 @@ class Attach
                         return;
                     }
                 }
-                @chmod($upload_dir . '/' . $this->attach_filename, 0666);
+                @chmod($upload_dir . '/' . $this->attach_filename, 0644);
 
                 break;
         }
