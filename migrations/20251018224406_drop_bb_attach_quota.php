@@ -11,9 +11,11 @@ final class DropBbAttachQuota extends AbstractMigration
      */
     public function up(): void
     {
-        $this->table('bb_attach_quota')
-            ->drop()
-            ->save();
+        if ($this->hasTable('bb_attach_quota')) {
+            $this->table('bb_attach_quota')
+                ->drop()
+                ->save();
+        }
     }
 
     /**

@@ -11,9 +11,11 @@ final class DropBbQuotaLimits extends AbstractMigration
      */
     public function up(): void
     {
-        $this->table('bb_quota_limits')
-            ->drop()
-            ->save();
+        if ($this->hasTable('bb_quota_limits')) {
+            $this->table('bb_quota_limits')
+                ->drop()
+                ->save();
+        }
     }
 
     /**

@@ -11,7 +11,9 @@ final class RemoveQuotaConfigsFromAttachmentsConfig extends AbstractMigration
      */
     public function up(): void
     {
-        $this->execute("DELETE FROM bb_attachments_config WHERE config_name IN ('attachment_quota', 'default_upload_quota', 'default_pm_quota')");
+        if ($this->hasTable('bb_attachments_config')) {
+            $this->execute("DELETE FROM bb_attachments_config WHERE config_name IN ('attachment_quota', 'default_upload_quota', 'default_pm_quota')");
+        }
     }
 
     /**
