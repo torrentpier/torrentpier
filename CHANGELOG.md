@@ -4,6 +4,16 @@
 
 ## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/master/TorrentPier-master)
 
+### 🚀 Features
+
+- *(ranks)* Add visual image selector for rank administration ([#2189](https://github.com/torrentpier/torrentpier/pull/2189)) - ([4df9d0d](https://github.com/torrentpier/torrentpier/commit/4df9d0dc827cbd6591494a19390964082e009bf0))
+- Implement comprehensive dark mode with user preference persistence ([#2179](https://github.com/torrentpier/torrentpier/pull/2179)) - ([c77b2ff](https://github.com/torrentpier/torrentpier/commit/c77b2fffda24ff6b475aa9f0f578c04067e24668))
+
+### 🐛 Bug Fixes
+
+- *(admin)* Prevent error when managing permissions with no forums ([#2190](https://github.com/torrentpier/torrentpier/pull/2190)) - ([ed6b0d1](https://github.com/torrentpier/torrentpier/commit/ed6b0d13a2697912062a194427e49d95838c4736))
+- *(ranks)* Remove unnecessary user_rank reset on rank save ([#2188](https://github.com/torrentpier/torrentpier/pull/2188)) - ([afb2606](https://github.com/torrentpier/torrentpier/commit/afb2606549cb8415b379c2c38306fd0eff4ee57f))
+
 ### 📦 Dependencies
 
 - *(deps)* Bump symfony/mailer from 7.3.3 to 7.3.4 ([#2181](https://github.com/torrentpier/torrentpier/pull/2181)) - ([b994bc1](https://github.com/torrentpier/torrentpier/commit/b994bc1b1b07011512ac13c425eaa6d233cd0efe))
@@ -12,6 +22,20 @@
 - *(deps)* Bump arokettu/bencode from 4.3.1 to 4.3.2 ([#2182](https://github.com/torrentpier/torrentpier/pull/2182)) - ([5640848](https://github.com/torrentpier/torrentpier/commit/5640848277232be9077e168af643f73cf457a36a))
 - *(deps)* Bump arokettu/monsterid from 4.1.0 to 4.1.1 ([#2183](https://github.com/torrentpier/torrentpier/pull/2183)) - ([27cdd74](https://github.com/torrentpier/torrentpier/commit/27cdd743d6bd108bf21530a50cb485b77e61b37b))
 - *(deps-dev)* Bump symfony/var-dumper from 7.3.3 to 7.3.4 ([#2184](https://github.com/torrentpier/torrentpier/pull/2184)) - ([9044a15](https://github.com/torrentpier/torrentpier/commit/9044a15dfc1bba84e107d0c0574b9c1f1ca0fb80))
+
+### 💼 Other
+
+- New Crowdin updates ([#2186](https://github.com/torrentpier/torrentpier/pull/2186)) - ([b06ce88](https://github.com/torrentpier/torrentpier/commit/b06ce88b8e84618dfa627758cde7df5711a98a01))
+
+### 🚜 Refactor
+
+- *(i18n)* Improve language strings and dynamic registration intervals ([#2192](https://github.com/torrentpier/torrentpier/pull/2192)) - ([245378d](https://github.com/torrentpier/torrentpier/commit/245378d063583855ea6e4fd19a0aeebe888c70f1))
+- *(i18n)* Migrate from Crowdin to translation package system ([#2191](https://github.com/torrentpier/torrentpier/pull/2191)) - ([fdc0798](https://github.com/torrentpier/torrentpier/commit/fdc07988f82af96bae20b1ff19c5351560667116))
+
+### 🧪 Testing
+
+- Trigger source sync (removal) - ([6c3498a](https://github.com/torrentpier/torrentpier/commit/6c3498a6aacff97665f30be6f928611a70e2135b))
+- Trigger source sync - ([b350301](https://github.com/torrentpier/torrentpier/commit/b350301e1232537c816e8fc10c1adf9341b35246))
 
 
 ## [v2.8.7](https://github.com/torrentpier/torrentpier/compare/v2.8.6..v2.8.7) (2025-10-10)
@@ -34,14 +58,14 @@
 - *(docker)* Correct entrypoint and migration handling ([#2144](https://github.com/torrentpier/torrentpier/pull/2144)) - ([1822c90](https://github.com/torrentpier/torrentpier/commit/1822c907ebd7bdaff996f1a8fcc8d64a88ec8888))
 - *(manticore)* Implement correct partial field updates with UPDATE/REPLACE strategy ([#2173](https://github.com/torrentpier/torrentpier/pull/2173)) - ([968da37](https://github.com/torrentpier/torrentpier/commit/968da3751d8c455387edc75f819deaf259b7f4d3))
 
-### 🈳 New translations
-
-- New Crowdin updates ([#2154](https://github.com/torrentpier/torrentpier/pull/2154)) - ([bf9be51](https://github.com/torrentpier/torrentpier/commit/bf9be510ce7e2e38ccb2ead9c000c85b89f06a63))
-
 ### 🗑️ Removed
 
 - Legacy `Sphinx API` support ([#2153](https://github.com/torrentpier/torrentpier/pull/2153)) - ([4ba315d](https://github.com/torrentpier/torrentpier/commit/4ba315db37144a6f38dcd3fa5437dd346df990d2))
 - Deploy pipeline ([#2145](https://github.com/torrentpier/torrentpier/pull/2145)) - ([7cca19d](https://github.com/torrentpier/torrentpier/commit/7cca19d11d94d200f681da0e12dbb9638761a9fb))
+
+### 💼 Other
+
+- New Crowdin updates ([#2154](https://github.com/torrentpier/torrentpier/pull/2154)) - ([bf9be51](https://github.com/torrentpier/torrentpier/commit/bf9be510ce7e2e38ccb2ead9c000c85b89f06a63))
 
 ### 🚜 Refactor
 
@@ -66,7 +90,7 @@
 - Use `development` environment instead of `local` ([#2143](https://github.com/torrentpier/torrentpier/pull/2143)) - ([9b6ba59](https://github.com/torrentpier/torrentpier/commit/9b6ba595a412fe5c0b3ea37c7ff87587c13b4e77))
 - Passkey not showing when user ratio disabled ([#2141](https://github.com/torrentpier/torrentpier/pull/2141)) - ([9b5aee5](https://github.com/torrentpier/torrentpier/commit/9b5aee59cd49347ff1fda4b6d396ce02656f1037))
 
-### 🈳 New translations
+### 💼 Other
 
 - New Crowdin updates ([#2135](https://github.com/torrentpier/torrentpier/pull/2135)) - ([7a23dee](https://github.com/torrentpier/torrentpier/commit/7a23dee141a8ef565bfbee384b71064be9c76279))
 
@@ -122,13 +146,13 @@
 - Make `Ajax::$action` property nullable to handle missing POST parameter ([#2066](https://github.com/torrentpier/torrentpier/pull/2066)) - ([41e5de8](https://github.com/torrentpier/torrentpier/commit/41e5de8ae7decf6abf365c56dd9df45ccdd6e47f))
 - Handle Nette DateTime objects in birthday validation ([#2032](https://github.com/torrentpier/torrentpier/pull/2032)) - ([6e7e3dd](https://github.com/torrentpier/torrentpier/commit/6e7e3dd9efde5f8dda4435f186e054697c85fd05))
 
-### 🈳 New translations
-
-- New Crowdin updates ([#2127](https://github.com/torrentpier/torrentpier/pull/2127)) - ([1495a75](https://github.com/torrentpier/torrentpier/commit/1495a754825252cdcb372448ae3aa5b6b04604e6))
-
 ### 📦 Dependencies
 
 - Replace `belomaxorka/captcha` with `gregwar/captcha` ([#2069](https://github.com/torrentpier/torrentpier/pull/2069)) - ([656f1ae](https://github.com/torrentpier/torrentpier/commit/656f1ae81689aa6d7a11807fba4c84111f6cec86))
+
+### 💼 Other
+
+- New Crowdin updates ([#2127](https://github.com/torrentpier/torrentpier/pull/2127)) - ([1495a75](https://github.com/torrentpier/torrentpier/commit/1495a754825252cdcb372448ae3aa5b6b04604e6))
 
 ### 🚜 Refactor
 
