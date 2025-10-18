@@ -17,8 +17,6 @@ require __DIR__ . '/pagestart.php';
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 
-attachment_quota_settings('group', $mode, isset($_POST['group_update']));
-
 if (!empty($_POST['edit']) || !empty($_POST['new'])) {
     if (!empty($_POST['edit'])) {
         if (!$row = \TorrentPier\Legacy\Group::get_group_data($group_id)) {

@@ -767,12 +767,10 @@ class Common
         DB()->query("UPDATE " . BB_BT_TORRENTS . " SET poster_id = " . DELETED . " WHERE poster_id IN($user_csv)");
 
         DB()->query("
-		DELETE ug, g, a, qt1, qt2
+		DELETE ug, g, a
 		FROM " . BB_USER_GROUP . " ug
 		LEFT JOIN " . BB_GROUPS . " g   ON(g.group_id = ug.group_id AND g.group_single_user = 1)
 		LEFT JOIN " . BB_AUTH_ACCESS . " a   ON(a.group_id = g.group_id)
-		LEFT JOIN " . BB_QUOTA . " qt1 ON(qt1.user_id = ug.user_id)
-		LEFT JOIN " . BB_QUOTA . " qt2 ON(qt2.group_id = g.group_id)
 		WHERE ug.user_id IN($user_csv)
 	");
 
