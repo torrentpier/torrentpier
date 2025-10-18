@@ -4302,12 +4302,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/torrentpier/translations.git",
-                "reference": "0b39338e16eb2026d8fb63182b09ef25fcd483af"
+                "reference": "98a6cdf2c092fd463be1d84e9ad353ac0aee2ee7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/torrentpier/translations/zipball/0b39338e16eb2026d8fb63182b09ef25fcd483af",
-                "reference": "0b39338e16eb2026d8fb63182b09ef25fcd483af",
+                "url": "https://api.github.com/repos/torrentpier/translations/zipball/98a6cdf2c092fd463be1d84e9ad353ac0aee2ee7",
+                "reference": "98a6cdf2c092fd463be1d84e9ad353ac0aee2ee7",
                 "shasum": ""
             },
             "require": {
@@ -4353,7 +4353,7 @@
                 "issues": "https://github.com/torrentpier/torrentpier/issues",
                 "source": "https://github.com/torrentpier/translations/tree/main"
             },
-            "time": "2025-10-18T11:36:44+00:00"
+            "time": "2025-10-18T16:34:02+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
