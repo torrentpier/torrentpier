@@ -25,7 +25,9 @@ final class DropUserSkypeFromBbUsers extends AbstractMigration
             ->addColumn('user_skype', 'string', [
                 'limit' => 32,
                 'default' => '',
-                'null' => false
+                'null' => false,
+                'encoding' => 'utf8mb4',
+                'collation' => 'utf8mb4_unicode_ci'
             ])
             ->save();
     }

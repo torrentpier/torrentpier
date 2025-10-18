@@ -25,7 +25,9 @@ final class DropUserIcqFromBbUsers extends AbstractMigration
             ->addColumn('user_icq', 'string', [
                 'limit' => 15,
                 'default' => '',
-                'null' => false
+                'null' => false,
+                'encoding' => 'utf8mb4',
+                'collation' => 'utf8mb4_unicode_ci'
             ])
             ->save();
     }
