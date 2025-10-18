@@ -1072,7 +1072,6 @@ $bb_cfg['countries'] = [
     'ZW' => 'Zimbabwe'
 ];
 
-
 // PeerID's of torrent clients list
 $bb_cfg['tor_clients'] = [
     '-AG' => 'Ares', '-AZ' => 'Vuze', '-A~' => 'Ares', '-BC' => 'BitComet',

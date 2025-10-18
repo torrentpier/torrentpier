@@ -28,7 +28,6 @@ $images['icon_delpost'] = $_main . 'icon_delete.gif';
 $images['icon_ip'] = $_lang . 'icon_ip.gif';
 $images['icon_mod'] = $_main . 'icon_mod.gif';
 $images['icon_www'] = $_lang . 'icon_www.gif';
-$images['icon_icq'] = $_lang . 'icon_icq_add.gif';
 
 $images['icon_mc'] = $_lang . 'icon_mc.gif';
 $images['icon_poll'] = $_lang . 'icon_poll.gif';
@@ -149,7 +148,6 @@ if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tp
             'PM_IMG' => config()->get('text_buttons') ? $lang['SEND_PM_TXTB'] : '<img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PM_TXTB'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" />',
             'EMAIL_IMG' => config()->get('text_buttons') ? $lang['SEND_EMAIL_TXTB'] : '<img src="' . $images['icon_email'] . '" alt="' . $lang['SEND_EMAIL_TXTB'] . '" title="' . $lang['SEND_EMAIL'] . '" />',
             'WWW_IMG' => config()->get('text_buttons') ? $lang['VISIT_WEBSITE_TXTB'] : '<img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE_TXTB'] . '" title="' . $lang['VISIT_WEBSITE'] . '" />',
-            'ICQ_IMG' => config()->get('text_buttons') ? $lang['ICQ_TXTB'] : '<img src="' . $images['icon_icq'] . '" alt="' . $lang['ICQ_TXTB'] . '" title="' . $lang['ICQ'] . '" />',
 
             'EMAIL_URL' => BB_ROOT . 'profile.php?mode=email&amp;' . POST_USERS_URL . '=',
             'FORUM_URL' => BB_ROOT . FORUM_URL,
