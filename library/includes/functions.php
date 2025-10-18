@@ -1254,29 +1254,25 @@ function get_user_torrent_client(string $peer_id): string
  */
 function render_flag(string $code, bool $showName = true): string
 {
-    global $lang;
     static $iconExtension = '.svg';
 
-    $nameIgnoreList = [
-        'WBW',
-        'PACE',
-        'LGBT'
-    ];
-
-    if (isset($lang['COUNTRIES'][$code])) {
-        if ($code === '0') {
-            return ''; // No selected
-        } else {
-            $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
-            if (is_file($flagIconPath)) {
-                $langName = $lang['COUNTRIES'][$code];
-                $countryName = ($showName && !in_array($code, $nameIgnoreList)) ? '&nbsp;' . str_short($langName, 20) : '';
-                return '<span title="' . $langName . '"><img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '">' . $countryName . '</span>';
-            }
-        }
+    if ($code === '0') {
+        return ''; // No selected
     }
 
-    return $code;
+    $countries = config()->get('countries');
+    if (!isset($countries[$code])) {
+        return $code;
+    }
+
+    $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
+    if (!is_file($flagIconPath)) {
+        return $code;
+    }
+
+    $langName = $countries[$code];
+    $countryName = $showName ? '&nbsp;' . str_short($langName, 20) : '';
+    return '<span title="' . $langName . '"><img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '">' . $countryName . '</span>';
 }
 
 function birthday_age($date)
