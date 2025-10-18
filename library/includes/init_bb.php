@@ -159,10 +159,6 @@ define('ADMIN_MAX_ATTACHMENTS', 50);
 define('THUMB_DIR', 'thumbs');
 define('MODE_THUMBNAIL', 1);
 
-// Quota Types
-define('QUOTA_UPLOAD_LIMIT', 1);
-define('QUOTA_PM_LIMIT', 2);
-
 // Torrents
 define('TOR_STATUS_NORMAL', 0);
 define('TOR_STATUS_FROZEN', 1);
@@ -228,8 +224,6 @@ define('BB_POSTS_TEXT', 'bb_posts_text');
 define('BB_POSTS_HTML', 'bb_posts_html');
 define('BB_PRIVMSGS', 'bb_privmsgs');
 define('BB_PRIVMSGS_TEXT', 'bb_privmsgs_text');
-define('BB_QUOTA_LIMITS', 'bb_quota_limits');
-define('BB_QUOTA', 'bb_attach_quota');
 define('BB_RANKS', 'bb_ranks');
 define('BB_SEARCH_REBUILD', 'bb_search_rebuild');
 define('BB_SEARCH', 'bb_search_results');

@@ -217,8 +217,6 @@ if ($submit_change && $view === 'attachments') {
 if ($view == 'stats') {
     $upload_dir_size = get_formatted_dirsize();
 
-    $attachment_quota = humn_size($attach_config['attachment_quota']);
-
     // number_of_attachments
     $row = DB()->fetch_row('SELECT COUNT(*) AS total FROM ' . BB_ATTACHMENTS_DESC);
     $number_of_attachments = $number_of_posts = $row['total'];
@@ -236,7 +234,6 @@ if ($view == 'stats') {
     $template->assign_vars([
         'TPL_ATTACH_STATISTICS' => true,
         'TOTAL_FILESIZE' => $upload_dir_size,
-        'ATTACH_QUOTA' => $attachment_quota,
         'NUMBER_OF_ATTACHMENTS' => $number_of_attachments,
         'NUMBER_OF_POSTS' => $number_of_posts,
         'NUMBER_OF_PMS' => $number_of_pms,

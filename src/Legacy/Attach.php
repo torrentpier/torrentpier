@@ -74,137 +74,6 @@ class Attach
     }
 
     /**
-     * Get Quota Limits
-     * @param array $userdata_quota
-     * @param int $user_id
-     */
-    public function get_quota_limits(array $userdata_quota, $user_id = 0)
-    {
-        global $attach_config;
-
-        $priority = 'user;group';
-
-        if (IS_ADMIN) {
-            $attach_config['pm_filesize_limit'] = 0; // Unlimited
-            $attach_config['upload_filesize_limit'] = 0; // Unlimited
-            return;
-        }
-
-        $quota_type = QUOTA_UPLOAD_LIMIT;
-        $limit_type = 'upload_filesize_limit';
-        $default = 'attachment_quota';
-
-        if (!$user_id) {
-            $user_id = (int)$userdata_quota['user_id'];
-        }
-
-        $priority = explode(';', $priority);
-        $found = false;
-
-        foreach ($priority as $item) {
-            if ($item === 'group' && !$found) {
-                // Get Group Quota, if we find one, we have our quota
-                $sql = 'SELECT u.group_id
-					FROM ' . BB_USER_GROUP . ' u, ' . BB_GROUPS . ' g
-					WHERE g.group_single_user = 0
-						AND u.user_pending = 0
-						AND u.group_id = g.group_id
-						AND u.user_id = ' . (int)$user_id;
-
-                if (!($result = DB()->sql_query($sql))) {
-                    bb_die('Could not get user group');
-                }
-
-                $rows = DB()->sql_fetchrowset($result);
-                DB()->sql_freeresult($result);
-
-                if ($rows) {
-                    $group_id = [];
-
-                    foreach ($rows as $row) {
-                        $group_id[] = (int)$row['group_id'];
-                    }
-
-                    $sql = 'SELECT l.quota_limit
-						FROM ' . BB_QUOTA . ' q, ' . BB_QUOTA_LIMITS . ' l
-						WHERE q.group_id IN (' . implode(', ', $group_id) . ')
-							AND q.group_id <> 0
-							AND q.quota_type = ' . (int)$quota_type . '
-							AND q.quota_limit_id = l.quota_limit_id
-						ORDER BY l.quota_limit DESC
-						LIMIT 1';
-
-                    if (!($result = DB()->sql_query($sql))) {
-                        bb_die('Could not get group quota');
-                    }
-
-                    if (DB()->num_rows($result)) {
-                        $row = DB()->sql_fetchrow($result);
-                        $attach_config[$limit_type] = $row['quota_limit'];
-                        $found = true;
-                    }
-                    DB()->sql_freeresult($result);
-                }
-            }
-
-            if ($item === 'user' && !$found) {
-                // Get User Quota, if the user is not in a group or the group has no quotas
-                $sql = 'SELECT l.quota_limit
-					FROM ' . BB_QUOTA . ' q, ' . BB_QUOTA_LIMITS . ' l
-					WHERE q.user_id = ' . $user_id . '
-						AND q.user_id <> 0
-						AND q.quota_type = ' . $quota_type . '
-						AND q.quota_limit_id = l.quota_limit_id
-					LIMIT 1';
-
-                if (!($result = DB()->sql_query($sql))) {
-                    bb_die('Could not get user quota');
-                }
-
-                if (DB()->num_rows($result)) {
-                    $row = DB()->sql_fetchrow($result);
-                    $attach_config[$limit_type] = $row['quota_limit'];
-                    $found = true;
-                }
-                DB()->sql_freeresult($result);
-            }
-        }
-
-        if (!$found) {
-            // Set Default Quota Limit
-            $quota_id = (int)((int)$quota_type === QUOTA_UPLOAD_LIMIT) ? $attach_config['default_upload_quota'] : $attach_config['default_pm_quota'];
-
-            if (!$quota_id) {
-                $attach_config[$limit_type] = $attach_config[$default];
-            } else {
-                $sql = 'SELECT quota_limit
-					FROM ' . BB_QUOTA_LIMITS . '
-					WHERE quota_limit_id = ' . (int)$quota_id . '
-					LIMIT 1';
-
-                if (!($result = DB()->sql_query($sql))) {
-                    bb_die('Could not get default quota limit');
-                }
-
-                if (DB()->num_rows($result) > 0) {
-                    $row = DB()->sql_fetchrow($result);
-                    $attach_config[$limit_type] = $row['quota_limit'];
-                } else {
-                    $attach_config[$limit_type] = $attach_config[$default];
-                }
-                DB()->sql_freeresult($result);
-            }
-        }
-
-        // Never exceed the complete Attachment Upload Quota
-        if ($quota_type === QUOTA_UPLOAD_LIMIT) {
-            if ($attach_config[$limit_type] > $attach_config[$default]) {
-                $attach_config[$limit_type] = $attach_config[$default];
-            }
-        }
-    }
-
-    /**
      * Handle all modes... (intern)
      * @private
      */
@@ -784,7 +653,13 @@ class Attach
             }
 
             if (!($row = DB()->sql_fetchrow($result))) {
-                /** TODO **/
+                DB()->sql_freeresult($result);
+                $error = true;
+                if (!empty($error_msg)) {
+                    $error_msg .= '<br />';
+                }
+                $error_msg .= sprintf($lang['DISALLOWED_EXTENSION'], htmlspecialchars($this->extension));
+                return;
             }
             DB()->sql_freeresult($result);
 
@@ -924,86 +799,6 @@ class Attach
                 $error_msg .= sprintf($lang['ATTACHMENT_TOO_BIG'], $allowed_filesize);
             }
 
-            // Check our complete quota
-            if ($attach_config['attachment_quota']) {
-                $sql = 'SELECT sum(filesize) as total FROM ' . BB_ATTACHMENTS_DESC;
-
-                if (!($result = DB()->sql_query($sql))) {
-                    bb_die('Could not query total filesize #1');
-                }
-
-                $row = DB()->sql_fetchrow($result);
-                DB()->sql_freeresult($result);
-
-                $total_filesize = $row['total'];
-
-                if (($total_filesize + $this->filesize) > $attach_config['attachment_quota']) {
-                    $error = true;
-                    if (!empty($error_msg)) {
-                        $error_msg .= '<br />';
-                    }
-                    $error_msg .= $lang['ATTACH_QUOTA_REACHED'];
-                }
-            }
-
-            $this->get_quota_limits($userdata);
-
-            // Check our user quota
-            if ($attach_config['upload_filesize_limit']) {
-                $sql = 'SELECT attach_id
-					FROM ' . BB_ATTACHMENTS . '
-					WHERE user_id_1 = ' . (int)$userdata['user_id'] . '
-					GROUP BY attach_id';
-
-                if (!($result = DB()->sql_query($sql))) {
-                    bb_die('Could not query attachments');
-                }
-
-                $attach_ids = DB()->sql_fetchrowset($result);
-                $num_attach_ids = DB()->num_rows($result);
-                DB()->sql_freeresult($result);
-
-                $attach_id = [];
-
-                for ($i = 0; $i < $num_attach_ids; $i++) {
-                    $attach_id[] = (int)$attach_ids[$i]['attach_id'];
-                }
-
-                if ($num_attach_ids > 0) {
-                    // Now get the total filesize
-                    $sql = 'SELECT sum(filesize) as total
-						FROM ' . BB_ATTACHMENTS_DESC . '
-						WHERE attach_id IN (' . implode(', ', $attach_id) . ')';
-
-                    if (!($result = DB()->sql_query($sql))) {
-                        bb_die('Could not query total filesize #2');
-                    }
-
-                    $row = DB()->sql_fetchrow($result);
-                    DB()->sql_freeresult($result);
-                    $total_filesize = $row['total'];
-                } else {
-                    $total_filesize = 0;
-                }
-
-                if (($total_filesize + $this->filesize) > $attach_config['upload_filesize_limit']) {
-                    $upload_filesize_limit = $attach_config['upload_filesize_limit'];
-                    $size_lang = ($upload_filesize_limit >= 1048576) ? $lang['MB'] : (($upload_filesize_limit >= 1024) ? $lang['KB'] : $lang['BYTES']);
-
-                    if ($upload_filesize_limit >= 1048576) {
-                        $upload_filesize_limit = round($upload_filesize_limit / 1048576 * 100) / 100;
-                    } elseif ($upload_filesize_limit >= 1024) {
-                        $upload_filesize_limit = round($upload_filesize_limit / 1024 * 100) / 100;
-                    }
-
-                    $error = true;
-                    if (!empty($error_msg)) {
-                        $error_msg .= '<br />';
-                    }
-                    $error_msg .= sprintf($lang['USER_UPLOAD_QUOTA_REACHED'], $upload_filesize_limit, $size_lang);
-                }
-            }
-
             if ($error) {
                 unlink_attach($this->attach_filename);
                 unlink_attach($this->attach_filename, MODE_THUMBNAIL);
@@ -1034,7 +829,7 @@ class Attach
                         return;
                     }
                 }
-                @chmod($upload_dir . '/' . basename($this->attach_filename), 0666);
+                @chmod($upload_dir . '/' . basename($this->attach_filename), 0644);
 
                 break;
 
@@ -1050,7 +845,7 @@ class Attach
                         return;
                     }
                 }
-                @chmod($upload_dir . '/' . $this->attach_filename, 0666);
+                @chmod($upload_dir . '/' . $this->attach_filename, 0644);
 
                 break;
         }

@@ -26,10 +26,6 @@
             <td class="row2"><b>{TOTAL_FILESIZE}</b></td>
         </tr>
         <tr>
-            <td class="row1 nowrap">{L_ATTACH_QUOTA}:</td>
-            <td class="row2"><b>{ATTACH_QUOTA}</b></td>
-        </tr>
-        <tr>
             <td class="row1 nowrap">{L_NUMBER_POSTS_ATTACH}:</td>
             <td class="row2"><b>{NUMBER_OF_POSTS}</b></td>
         </tr>

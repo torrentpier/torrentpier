@@ -11,7 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-require ATTACH_DIR . '/includes/functions_includes.php';
 require ATTACH_DIR . '/includes/functions_attach.php';
 require ATTACH_DIR . '/includes/functions_delete.php';
 require ATTACH_DIR . '/includes/functions_thumbs.php';
