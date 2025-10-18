@@ -414,7 +414,7 @@ function build_poll_add_form (src_el)
 	<td class="message td2" rowspan="2">
 
 		<div class="post_head">
-			<p style="float: left;<!-- IF TEXT_BUTTONS --> padding: 4px 0 3px;<!-- ELSE --> padding-top: 5px;<!-- ENDIF -->">
+			<p style="float: left; padding: 4px 0 3px;">
 				<!-- IF postrow.IS_UNREAD -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF -->
 				<a class="small" href="{POST_URL}{postrow.POST_ID}#{postrow.POST_ID}" title="{L_POST_LINK}">{postrow.POST_DATE}&nbsp;|&nbsp;#{postrow.POST_NUMBER}</a>
                 <!-- IF postrow.POSTER_AUTHOR -->&middot;&nbsp;<span>{L_AUTHOR}</span><!-- ENDIF -->
@@ -425,16 +425,16 @@ function build_poll_add_form (src_el)
 
 			<!-- IF postrow.MOD_CHECKBOX --><input type="checkbox" class="select_post" onclick="set_hid_chbox('{postrow.POST_ID}');"><!-- ENDIF -->
 
-			<p style="float: right;<!-- IF TEXT_BUTTONS --> padding: 3px 2px 4px;<!-- ELSE --> padding: 1px 6px 2px;<!-- ENDIF -->" class="post_btn_1">
-				<!-- IF postrow.IS_FIRST_POST and CAN_ADD_POLL --><a href="#" onclick="return build_poll_add_form(this);" class="txtb">{POLL_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, topic_id : {TOPIC_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF $bb_cfg['show_post_bbcode_button']['enabled'] --><!-- IF postrow.IS_FIRST_POST || !$bb_cfg['show_post_bbcode_button']['only_for_first_post'] --><a href="#" class="txtb" onclick="ajax.view_post('{postrow.POST_ID}'); return false;">{CODE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF --><!-- ENDIF -->
-				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;{#POST_TOPIC_URL#}={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+			<p style="float: right; padding: 3px 2px 4px;" class="post_btn_1">
+				<!-- IF postrow.IS_FIRST_POST and CAN_ADD_POLL --><a href="#" onclick="return build_poll_add_form(this);" class="txtb">[ {L_POLL} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">[ {L_QUOTE} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">[ {L_EDIT} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, topic_id : {TOPIC_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">[ {L_DELETE} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF $bb_cfg['show_post_bbcode_button']['enabled'] --><!-- IF postrow.IS_FIRST_POST || !$bb_cfg['show_post_bbcode_button']['only_for_first_post'] --><a href="#" class="txtb" onclick="ajax.view_post('{postrow.POST_ID}'); return false;">[ {L_CODE} ]</a>{POST_BTN_SPACER}<!-- ENDIF --><!-- ENDIF -->
+				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;{#POST_TOPIC_URL#}={TOPIC_ID}">[ {L_IP} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
-					<a class="menu-root menu-alt1 txtb" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}
-					<!-- IF not IN_MODERATION --><a class="txtb" href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}#{postrow.POST_ID}">{MOD_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+					<a class="menu-root menu-alt1 txtb" href="#mc_{postrow.POST_ID}">[ {L_COMMENT} ]</a>{POST_BTN_SPACER}
+					<!-- IF not IN_MODERATION --><a class="txtb" href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}#{postrow.POST_ID}">[ {L_MODERATE} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- ENDIF -->
 			</p>
 			<div class="clear"></div>
@@ -505,9 +505,9 @@ function build_poll_add_form (src_el)
 	<!-- IF postrow.POSTER_BOT || not postrow.PROFILE -->
 		&nbsp;
 	<!-- ELSE -->
-		<div style="<!-- IF TEXT_BUTTONS --> padding: 2px 6px 4px;<!-- ELSE --> padding: 2px 3px;<!-- ENDIF -->" class="post_btn_2">
-			<a class="txtb" href="{PROFILE_URL}{postrow.POSTER_ID}">{PROFILE_IMG}</a>{POST_BTN_SPACER}
-			<a class="txtb" href="{PM_URL}?mode=post&amp;{#POST_USERS_URL#}={postrow.POSTER_ID}">{PM_IMG}</a>{POST_BTN_SPACER}
+		<div style="padding: 2px 6px 4px;" class="post_btn_2">
+			<a class="txtb" href="{PROFILE_URL}{postrow.POSTER_ID}">[ {L_PROFILE} ]</a>{POST_BTN_SPACER}
+			<a class="txtb" href="{PM_URL}?mode=post&amp;{#POST_USERS_URL#}={postrow.POSTER_ID}">[ {L_SEND_PM_SHORT} ]</a>{POST_BTN_SPACER}
 		</div>
 	<!-- ENDIF -->
 

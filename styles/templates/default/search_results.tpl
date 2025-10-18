@@ -41,7 +41,7 @@
 	<td class="message td2">
 
 		<div class="post_head">
-			<p style="float: left;<!-- IF TEXT_BUTTONS --> padding: 4px 0 3px;<!-- ELSE --> padding-top: 5px;<!-- ENDIF -->">
+			<p style="float: left; padding: 4px 0 3px;">
 				<!-- IF t.p.IS_UNREAD -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF -->
 				<a class="small" href="{POST_URL}{t.p.POST_ID}#{t.p.POST_ID}" title="{L_POST_LINK}">{t.p.POST_DATE}</a>
 				<!-- IF t.p.POSTED_AFTER -->
@@ -49,11 +49,11 @@
 				<!-- ENDIF -->
 			</p>
 
-			<p style="float: right;<!-- IF TEXT_BUTTONS --> padding: 3px 2px 4px;<!-- ELSE --> padding: 1px 6px 2px;<!-- ENDIF -->" class="post_btn_1">
-				<!-- IF t.p.QUOTE --><a class="txtb" href="{QUOTE_URL}{t.p.POST_ID}">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF t.p.EDIT --><a class="txtb" href="{EDIT_POST_URL}{t.p.POST_ID}">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF t.p.DELETE --><a class="txtb" href="{DELETE_POST_URL}{t.p.POST_ID}">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF t.p.IP --><a class="txtb" href="{IP_POST_URL}{t.p.POST_ID}&amp;{#POST_TOPIC_URL#}={t.TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+			<p style="float: right; padding: 3px 2px 4px;" class="post_btn_1">
+				<!-- IF t.p.QUOTE --><a class="txtb" href="{QUOTE_URL}{t.p.POST_ID}">[ {L_QUOTE} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF t.p.EDIT --><a class="txtb" href="{EDIT_POST_URL}{t.p.POST_ID}">[ {L_EDIT} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF t.p.DELETE --><a class="txtb" href="{DELETE_POST_URL}{t.p.POST_ID}">[ {L_DELETE} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF t.p.IP --><a class="txtb" href="{IP_POST_URL}{t.p.POST_ID}&amp;{#POST_TOPIC_URL#}={t.TOPIC_ID}">[ {L_IP} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
 			</p>
 			<div class="clear"></div>
 		</div>

@@ -533,7 +533,6 @@ $bb_cfg['show_poster_joined'] = true; // Show user's registration date in topics
 $bb_cfg['show_poster_posts'] = true; // Show user's post count in topics
 $bb_cfg['show_poster_from'] = true; // Show user's country in topics
 $bb_cfg['show_bot_nick'] = true; // Show bot's nickname
-$bb_cfg['text_buttons'] = false; // replace EDIT, QUOTE... images with text links
 $bb_cfg['post_date_format'] = 'd-M-Y H:i'; // Date format for topics
 $bb_cfg['ext_link_new_win'] = true; // open external links in new window
 

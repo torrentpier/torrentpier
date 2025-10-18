@@ -1394,18 +1394,12 @@ $lang['COLOR_STEEL_BLUE'] = 'Steel Blue';
 $lang['COLOR_GRAY'] = 'Gray';
 $lang['COLOR_DARK_GREEN'] = 'Dark Green';
 
-//txtb
-$lang['REPLY_WITH_QUOTE_TXTB'] = '[Quote]';
-$lang['READ_PROFILE_TXTB'] = '[Profile]';
-$lang['SEND_EMAIL_TXTB'] = '[E-mail]';
-$lang['VISIT_WEBSITE_TXTB'] = '[www]';
-$lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
-$lang['CODE_TOPIC_TXTB'] = '[Code]';
-$lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
-$lang['VIEW_IP_TXTB'] = '[ip]';
-$lang['DELETE_POST_TXTB'] = '[x]';
-$lang['MODERATE_POST_TXTB'] = '[m]';
-$lang['SEND_PM_TXTB'] = '[PM]';
+// Short buttons
+$lang['IP'] = 'IP';
+$lang['POLL'] = 'Poll';
+$lang['MODERATE'] = 'Moderate';
+$lang['SEND_PM_SHORT'] = 'PM';
+$lang['WEBSITE_SHORT'] = 'WWW';
 
 $lang['DECLENSION']['REPLIES'] = ['reply', 'replies'];
 $lang['DECLENSION']['TIMES'] = ['time', 'times'];
@@ -2737,7 +2731,7 @@ $lang['DAY'] = 'Day';
 $lang['POST_EDIT_CANNOT'] = 'Sorry, but you cannot edit posts';
 $lang['FORUMS_IN_CAT'] = 'forums in that category';
 
-$lang['MC_TITLE'] = 'Comment Moderation';
+$lang['MC_TITLE'] = 'Moderation comment';
 $lang['MC_LEGEND'] = 'Type a comment';
 $lang['MC_FAQ'] = 'Entered text will be displayed under this message';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s in your message";

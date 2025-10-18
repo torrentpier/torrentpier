@@ -360,15 +360,9 @@ if ($mode == 'read') {
     $post_date = bb_date($privmsg['privmsgs_date']);
 
     $temp_url = "profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $user_id_from;
-    $profile_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_profile'] . '" alt="' . $lang['READ_PROFILE'] . '" title="' . $lang['READ_PROFILE'] . '" border="0" /></a>';
     $profile = '<a href="' . $temp_url . '">' . $lang['READ_PROFILE'] . '</a>';
 
-    $temp_url = PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id_from";
-    $pm_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
-    $pm = '<a href="' . $temp_url . '">' . $lang['SEND_PRIVATE_MESSAGE'] . '</a>';
-
     $temp_url = "search.php?search_author=1&amp;uid=$user_id_from";
-    $search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . sprintf($lang['SEARCH_USER_POSTS'], $username_from) . '" title="' . sprintf($lang['SEARCH_USER_POSTS'], $username_from) . '" border="0" /></a>';
     $search = '<a href="' . $temp_url . '">' . sprintf($lang['SEARCH_USER_POSTS'], $username_from) . '</a>';
 
     //
@@ -397,10 +391,7 @@ if ($mode == 'read') {
         'POST_SUBJECT' => $post_subject,
         'POST_DATE' => $post_date,
         'PM_MESSAGE' => $private_message,
-
-        'PROFILE_IMG' => $profile_img,
         'PROFILE' => $profile,
-        'SEARCH_IMG' => $search_img,
         'SEARCH' => $search
     ]);
 } elseif (($delete && $mark_list) || $delete_all) {
