@@ -1,2 +1,0 @@
-Color: #3c618b
-Font: Arial (Regular) 11pt
