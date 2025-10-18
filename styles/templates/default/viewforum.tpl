@@ -291,7 +291,7 @@ td.topic_id { cursor: pointer; }
 
 <table width="100%">
 	<tr>
-		<td><a href="{U_POST_NEW_TOPIC}"><img src="{POST_IMG}" alt="{T_POST_NEW_TOPIC}" /></a></td>
+		<td><a href="{U_POST_NEW_TOPIC}" class="btn-post-topic">{T_POST_NEW_TOPIC}</a></td>
 		<td class="nav" width="100%">
 			&nbsp;<a href="{U_INDEX}">{L_HOME}</a>&nbsp;<em>&raquo;</em>
 			<a href="{U_VIEWCAT}">{CAT_TITLE}</a>
@@ -594,7 +594,7 @@ td.topic_id { cursor: pointer; }
 
 <table width="100%">
 	<tr>
-		<td><a href="{U_POST_NEW_TOPIC}"><img src="{POST_IMG}" alt="{T_POST_NEW_TOPIC}" /></a></td>
+		<td><a href="{U_POST_NEW_TOPIC}" class="btn-post-topic">{T_POST_NEW_TOPIC}</a></td>
 		<td class="nav" width="100%">
 			&nbsp;<a href="{U_INDEX}">{L_HOME}</a>&nbsp;<em>&raquo;</em>
 			<a href="{U_VIEWCAT}">{CAT_TITLE}</a>

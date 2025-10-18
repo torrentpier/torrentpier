@@ -14,7 +14,6 @@ $template_name = basename(__DIR__);
 
 $_img = BB_ROOT . 'styles/images/';
 $_main = BB_ROOT . 'styles/' . basename(TEMPLATES_DIR) . '/' . $template_name . '/images/';
-$_lang = $_main . 'lang/' . basename(config()->get('default_lang')) . '/';
 
 // post_buttons
 $images['icon_delpost'] = $_main . 'icon_delete.gif';
@@ -64,13 +63,6 @@ $images['icon_dn'] = $_img . 'icon_dn.gif';
 $images['icon_magnet'] = $_img . 'magnet.png';
 $images['icon_magnet_v2'] = $_img . 'magnet_v2.png';
 
-// posting_icons
-$images['post_new'] = $_lang . 'post.gif';
-$images['post_locked'] = $_lang . 'reply-locked.gif';
-$images['reply_new'] = $_lang . 'reply.gif';
-$images['reply_locked'] = $_lang . 'reply-locked.gif';
-$images['release_new'] = $_lang . 'release.gif';
-
 // pm_icons
 $images['pm_inbox'] = $_main . 'msg_inbox.gif';
 $images['pm_outbox'] = $_main . 'msg_outbox.gif';
@@ -78,10 +70,6 @@ $images['pm_savebox'] = $_main . 'msg_savebox.gif';
 $images['pm_sentbox'] = $_main . 'msg_sentbox.gif';
 $images['pm_readmsg'] = $_main . 'folder.gif';
 $images['pm_unreadmsg'] = $_main . 'folder_new.gif';
-$images['pm_replymsg'] = $_lang . 'reply.gif';
-$images['pm_postmsg'] = $_lang . 'msg_newpost.gif';
-$images['pm_quotemsg'] = $_lang . 'icon_quote.gif';
-$images['pm_editmsg'] = $_lang . 'icon_edit.gif';
 $images['pm_new_msg'] = '';
 $images['pm_no_new_msg'] = '';
 

@@ -185,7 +185,7 @@ ajax.callback.post_mod_comment = function(data) {
 <table cellpadding="0" class="w100">
 <tr>
 	<td valign="bottom">
-		<a href="{U_POST_REPLY_TOPIC}"><img src="{REPLY_IMG}" alt="{T_POST_REPLY}" /></a>
+		<a href="{U_POST_REPLY_TOPIC}" class="btn-post-topic">{T_POST_REPLY}</a>
 	</td>
 	<td class="nav w100" style="padding-left: 8px;">
 		<a href="{U_INDEX}">{L_HOME}</a>&nbsp;<em>&raquo;</em>
@@ -639,7 +639,7 @@ function build_poll_add_form (src_el)
 <table cellpadding="0" class="w100" style="padding-top: 2px;">
 <tr>
 	<td valign="top">
-		<a href="{U_POST_REPLY_TOPIC}"><img src="{REPLY_IMG}" alt="{T_POST_REPLY}" /></a>
+		<a href="{U_POST_REPLY_TOPIC}" class="btn-post-topic">{T_POST_REPLY}</a>
 	</td>
 	<td class="nav w100" style="padding-left: 8px;">
 		<a href="{U_INDEX}">{L_HOME}</a>&nbsp;<em>&raquo;</em>

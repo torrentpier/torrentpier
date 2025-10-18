@@ -377,7 +377,6 @@ $view_forum_url = FORUM_URL . $forum_id;
 $view_prev_topic_url = TOPIC_URL . $topic_id . "&amp;view=previous#newest";
 $view_next_topic_url = TOPIC_URL . $topic_id . "&amp;view=next#newest";
 
-$reply_img = $locked ? $images['reply_locked'] : $images['reply_new'];
 $reply_alt = $locked ? $lang['TOPIC_LOCKED_SHORT'] : $lang['REPLY_TO_TOPIC'];
 
 // Set 'body' template for attach_mod
@@ -473,7 +472,6 @@ $template->assign_vars([
     'PAGE_TITLE' => $page_title,
     'TOPIC_TITLE' => $topic_title,
     'PORNO_FORUM' => $t_data['allow_porno_topic'],
-    'REPLY_IMG' => $reply_img,
     'SHOW_BOT_NICK' => config()->get('show_bot_nick'),
     'T_POST_REPLY' => $reply_alt,
 

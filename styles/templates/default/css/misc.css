@@ -108,3 +108,23 @@ pre, .pre {
 .copyElement {
   cursor: pointer !important;
 }
+
+.btn-post-topic {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #E4E9ED;
+  border: 1px solid #B7C0C5;
+  border-radius: 4px;
+  color: #333;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: normal;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-post-topic:hover {
+  background: #D1D7DC;
+  border-color: #A5AFB4;
+  text-decoration: none;
+}

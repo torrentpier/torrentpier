@@ -361,11 +361,9 @@ if ($topics_csv = implode(',', $topic_ids)) {
 
 if ($forum_data['allow_reg_tracker']) {
     $post_new_topic_url = POSTING_URL . "?mode=new_rel&amp;" . POST_FORUM_URL . "=$forum_id";
-    $post_img = $images['release_new'];
     $post_new_topic = $lang['POST_NEW_RELEASE'];
 } else {
     $post_new_topic_url = POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id";
-    $post_img = $images['post_new'];
     $post_new_topic = $lang['POST_NEW_TOPIC'];
 }
 
@@ -395,7 +393,6 @@ $template->assign_vars([
     'FORUM_NAME' => htmlCHR($forum_data['forum_name']),
     'FORUM_DESC' => htmlCHR($forum_data['forum_desc']),
     'TORRENTS' => $forum_data['allow_reg_tracker'],
-    'POST_IMG' => ($forum_data['forum_status'] == FORUM_LOCKED) ? $images['post_locked'] : $post_img,
 
     'FOLDER_IMG' => $images['folder'],
     'FOLDER_NEW_IMG' => $images['folder_new'],
