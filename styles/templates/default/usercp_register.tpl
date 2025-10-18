@@ -130,14 +130,6 @@
         </tr>
         <!-- ENDIF -->
         <tr>
-            <td class="prof-title">{L_ICQ}:</td>
-            <td><input type="text" name="user_icq" size="30" maxlength="15" value="{USER_ICQ}"/></td>
-        </tr>
-        <tr>
-            <td class="prof-title">{L_SKYPE}:</td>
-            <td><input type="text" name="user_skype" size="30" maxlength="32" value="{USER_SKYPE}"/></td>
-        </tr>
-        <tr>
             <td class="prof-title">{L_TWITTER}:</td>
             <td><input type="text" name="user_twitter" size="30" maxlength="15" value="{USER_TWITTER}"/></td>
         </tr>

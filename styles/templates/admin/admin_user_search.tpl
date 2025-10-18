@@ -59,7 +59,7 @@
 		<td class="row2">&nbsp;</td>
 	</tr>
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_USERFIELD}:</b>&nbsp;<select name="userfield_type"><option value="icq" selected>{L_ICQ}</option><option value="skype">{L_SKYPE}</option><option value="twitter">{L_TWITTER}</option><option value="website">{L_WEBSITE}</option><option value="location">{L_LOCATION}</option><option value="interests">{L_INTERESTS}</option></select>&nbsp;<input class="post" type="text" name="userfield_value" maxlength="25" size="25" />&nbsp;<input type="submit" class="post2" name="search_userfield" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_USERFIELD_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_USERFIELD}:</b>&nbsp;<select name="userfield_type"><option value="twitter">{L_TWITTER}</option><option value="website">{L_WEBSITE}</option><option value="location">{L_LOCATION}</option><option value="interests">{L_INTERESTS}</option></select>&nbsp;<input class="post" type="text" name="userfield_value" maxlength="25" size="25" />&nbsp;<input type="submit" class="post2" name="search_userfield" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_USERFIELD_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>

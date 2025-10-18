@@ -580,14 +580,6 @@ if (!isset($_REQUEST['dosearch'])) {
             $userfield_type = strtolower(trim($userfield_type));
 
             switch ($userfield_type) {
-                case 'icq':
-                    $text = sprintf($lang['SEARCH_FOR_USERFIELD_ICQ'], $text);
-                    $field = 'user_icq';
-                    break;
-                case 'skype':
-                    $text = sprintf($lang['SEARCH_FOR_USERFIELD_SKYPE'], $text);
-                    $field = 'user_skype';
-                    break;
                 case 'twitter':
                     $text = sprintf($lang['SEARCH_FOR_USERFIELD_TWITTER'], $text);
                     $field = 'user_twitter';

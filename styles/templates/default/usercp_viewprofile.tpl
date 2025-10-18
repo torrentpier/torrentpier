@@ -75,8 +75,6 @@
 <var class="ajax-params">{action: "edit_user_profile", id: "user_website"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_occ"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_interests"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_icq"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_skype"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_twitter", editableType: "yesno-twitter"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_gender", editableType: "yesno-gender"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_birthday", editableType: "yesno-birthday"}</var>
@@ -257,22 +255,6 @@ ajax.callback.group_membership = function(data) {
 		<tr>
 			<th>{L_PRIVATE_MESSAGE}:</th>
 			<td class="tLeft med">{PM}</td>
-		</tr>
-		<!-- ENDIF -->
-		<!-- IF ICQ -->
-		<tr>
-			<th>{L_ICQ}:</th>
-			<td class="tLeft med" id="user_icq">
-				<span class="editable">{ICQ}</span>
-			</td>
-		</tr>
-		<!-- ENDIF -->
-		<!-- IF SKYPE -->
-		<tr>
-			<th>{L_SKYPE}:</th>
-			<td class="tLeft med" id="user_skype">
-				<span class="editable">{SKYPE}</span>
-			</td>
 		</tr>
 		<!-- ENDIF -->
 		<!-- IF TWITTER -->

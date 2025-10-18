@@ -122,8 +122,6 @@ switch ($mode) {
             'user_timezone' => config()->get('allow_change.timezone'),
             'user_opt' => true,
             'avatar_ext_id' => true,
-            'user_icq' => true,
-            'user_skype' => true,
             'user_twitter' => true,
             'user_website' => true,
             'user_from' => true,
@@ -434,23 +432,6 @@ foreach ($profile_fields as $field => $can_edit) {
             break;
 
         /**
-         *  ICQ (edit)
-         */
-        case 'user_icq':
-            $icq = isset($_POST['user_icq']) ? (string)$_POST['user_icq'] : $pr_data['user_icq'];
-            if ($submit && $icq != $pr_data['user_icq']) {
-                if ($icq == '' || preg_match('#^\d{6,15}$#', $icq)) {
-                    $pr_data['user_icq'] = $icq;
-                    $db_data['user_icq'] = (string)$icq;
-                } else {
-                    $pr_data['user_icq'] = '';
-                    $errors[] = htmlCHR($lang['ICQ_ERROR']);
-                }
-            }
-            $tp_data['USER_ICQ'] = $pr_data['user_icq'];
-            break;
-
-        /**
          *  Сайт (edit)
          */
         case 'user_website':
@@ -527,21 +508,6 @@ foreach ($profile_fields as $field => $can_edit) {
                 $db_data['user_interests'] = (string)$interests;
             }
             $tp_data['USER_INTERESTS'] = $pr_data['user_interests'];
-            break;
-
-        /**
-         *  Skype (edit)
-         */
-        case 'user_skype':
-            $skype = isset($_POST['user_skype']) ? (string)$_POST['user_skype'] : $pr_data['user_skype'];
-            if ($submit && $skype != $pr_data['user_skype']) {
-                if ($skype != '' && !preg_match("#^[a-zA-Z0-9_.\-@,]{6,32}$#", $skype)) {
-                    $errors[] = $lang['SKYPE_ERROR'];
-                }
-                $pr_data['user_skype'] = $skype;
-                $db_data['user_skype'] = (string)$skype;
-            }
-            $tp_data['USER_SKYPE'] = $pr_data['user_skype'];
             break;
 
         /**

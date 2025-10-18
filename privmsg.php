@@ -259,13 +259,13 @@ if ($mode == 'read') {
         'edit' => PM_URL . '?mode=edit&amp;' . POST_POST_URL . "=$privmsg_id"
     ];
     $post_icons = [
-        'post_img' => '<a href="' . $post_urls['post'] . '"><img src="' . $images['pm_postmsg'] . '" alt="' . $lang['POST_NEW_PM'] . '" border="0" /></a>',
+        'post_img' => '<a href="' . $post_urls['post'] . '" class="btn-post-topic">' . $lang['POST_NEW_PM'] . '</a>',
         'post' => '<a href="' . $post_urls['post'] . '">' . $lang['POST_NEW_PM'] . '</a>',
-        'reply_img' => '<a href="' . $post_urls['reply'] . '"><img src="' . $images['pm_replymsg'] . '" alt="' . $lang['POST_REPLY_PM'] . '" border="0" /></a>',
+        'reply_img' => '<a href="' . $post_urls['reply'] . '" class="btn-post-topic">' . $lang['POST_REPLY_PM'] . '</a>',
         'reply' => '<a href="' . $post_urls['reply'] . '">' . $lang['POST_REPLY_PM'] . '</a>',
-        'quote_img' => '<a href="' . $post_urls['quote'] . '"><img src="' . $images['pm_quotemsg'] . '" alt="' . $lang['POST_QUOTE_PM'] . '" border="0" /></a>',
+        'quote_img' => '<a href="' . $post_urls['quote'] . '" class="btn-post-topic">' . $lang['POST_QUOTE_PM'] . '</a>',
         'quote' => '<a href="' . $post_urls['quote'] . '">' . $lang['POST_QUOTE_PM'] . '</a>',
-        'edit_img' => '<a href="' . $post_urls['edit'] . '"><img src="' . $images['pm_editmsg'] . '" alt="' . $lang['EDIT_PM'] . '" border="0" /></a>',
+        'edit_img' => '<a href="' . $post_urls['edit'] . '" class="btn-post-topic">' . $lang['EDIT_PM'] . '</a>',
         'edit' => '<a href="' . $post_urls['edit'] . '">' . $lang['EDIT_PM'] . '</a>'
     ];
 
@@ -360,15 +360,9 @@ if ($mode == 'read') {
     $post_date = bb_date($privmsg['privmsgs_date']);
 
     $temp_url = "profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $user_id_from;
-    $profile_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_profile'] . '" alt="' . $lang['READ_PROFILE'] . '" title="' . $lang['READ_PROFILE'] . '" border="0" /></a>';
     $profile = '<a href="' . $temp_url . '">' . $lang['READ_PROFILE'] . '</a>';
 
-    $temp_url = PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id_from";
-    $pm_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
-    $pm = '<a href="' . $temp_url . '">' . $lang['SEND_PRIVATE_MESSAGE'] . '</a>';
-
     $temp_url = "search.php?search_author=1&amp;uid=$user_id_from";
-    $search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . sprintf($lang['SEARCH_USER_POSTS'], $username_from) . '" title="' . sprintf($lang['SEARCH_USER_POSTS'], $username_from) . '" border="0" /></a>';
     $search = '<a href="' . $temp_url . '">' . sprintf($lang['SEARCH_USER_POSTS'], $username_from) . '</a>';
 
     //
@@ -397,10 +391,7 @@ if ($mode == 'read') {
         'POST_SUBJECT' => $post_subject,
         'POST_DATE' => $post_date,
         'PM_MESSAGE' => $private_message,
-
-        'PROFILE_IMG' => $profile_img,
         'PROFILE' => $profile,
-        'SEARCH_IMG' => $search_img,
         'SEARCH' => $search
     ]);
 } elseif (($delete && $mark_list) || $delete_all) {
@@ -1173,7 +1164,7 @@ if ($mode == 'read') {
     //
     // New message
     //
-    $post_new_mesg_url = '<a href="' . PM_URL . '?mode=post"><img src="' . $images['post_new'] . '" alt="' . $lang['SEND_A_NEW_MESSAGE'] . '" border="0" /></a>';
+    $post_new_mesg_url = '<a href="' . PM_URL . '?mode=post" class="btn-post-topic">' . $lang['SEND_A_NEW_MESSAGE'] . '</a>';
 
     //
     // General SQL to obtain messages
@@ -1301,7 +1292,7 @@ if ($mode == 'read') {
             break;
     }
     $post_pm = PM_URL . "?mode=post";
-    $post_pm_img = '<a href="' . $post_pm . '"><img src="' . $images['pm_postmsg'] . '" alt="' . $lang['POST_NEW_PM'] . '" border="0" /></a>';
+    $post_pm_img = '<a href="' . $post_pm . '" class="btn-post-topic">' . $lang['POST_NEW_PM'] . '</a>';
     $post_pm = '<a href="' . $post_pm . '">' . $lang['POST_NEW_PM'] . '</a>';
 
     //

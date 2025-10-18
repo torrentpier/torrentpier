@@ -1001,3 +1001,17 @@ body.dark-mode div#body_container {
   background: #2b2b2b !important;
   color: #d4d4d4 !important;
 }
+
+/* ---------------------------------- *
+     Buttons
+ * ---------------------------------- */
+body.dark-mode .btn-post-topic {
+  background: #3a3a3a;
+  border-color: #555;
+  color: #d4d4d4;
+}
+
+body.dark-mode .btn-post-topic:hover {
+  background: #424242;
+  border-color: #666;
+}

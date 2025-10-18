@@ -87,20 +87,6 @@ switch ($field) {
         $this->response['new_value'] = $this->request['value'];
         break;
 
-    case 'user_icq':
-        if ($value && !preg_match('#^\d{6,15}$#', $value)) {
-            $this->ajax_die($lang['ICQ_ERROR']);
-        }
-        $this->response['new_value'] = $this->request['value'];
-        break;
-
-    case 'user_skype':
-        if ($value && !preg_match("#^[a-zA-Z0-9_.\-@,]{6,32}$#", $value)) {
-            $this->ajax_die($lang['SKYPE_ERROR']);
-        }
-        $this->response['new_value'] = $this->request['value'];
-        break;
-
     case 'user_twitter':
         if ($value && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $value)) {
             $this->ajax_die($lang['TWITTER_ERROR']);
