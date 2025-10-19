@@ -11,6 +11,9 @@ namespace TorrentPier;
 
 use Exception;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
 
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -125,12 +128,18 @@ class Emailer
         }
 
         // Convert UPPERCASE to lowercase for Twig
-        $twigVars = [];
-        foreach ($this->vars as $key => $value) {
-            $twigVars[strtolower($key)] = $value;
-        }
+        $twigVars = array_change_key_case($this->vars, CASE_LOWER);
 
-        return $twig->render($twigTemplate, $twigVars);
+        try {
+            return $twig->render($twigTemplate, $twigVars);
+        } catch (LoaderError|RuntimeError|SyntaxError $e) {
+            throw new Exception(sprintf(
+                'Email template render failed for "%s" (lang: %s): %s',
+                $this->template_file,
+                $this->template_lang,
+                $e->getMessage()
+            ), previous: $e);
+        }
     }
 
     /**
@@ -181,6 +190,8 @@ class Emailer
             ->replyTo($this->reply ?? new Address(config()->get('board_email')));
 
         $message->getHeaders()->addTextHeader('X-Auto-Response-Suppress', 'OOF, DR, RN, NRN, AutoReply');
+        $message->getHeaders()->addTextHeader('Auto-Submitted', 'auto-generated');
+        $message->getHeaders()->addTextHeader('Precedence', 'bulk');
 
         switch ($email_format) {
             case EMAIL_TYPE_HTML:
