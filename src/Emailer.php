@@ -10,6 +10,8 @@
 namespace TorrentPier;
 
 use Exception;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
@@ -24,66 +26,70 @@ use Symfony\Component\Mime\Email;
  */
 class Emailer
 {
-    /** @var string message text */
-    private string $message;
-
-    /** @var string message subject */
     private string $subject;
-
     private ?Address $to = null;
-
     private ?Address $reply = null;
-
-    /** @var array message template with the language */
-    private array $tpl_msg = [];
-
-    /** @var array variables to be substituted in message templates */
+    private string $template_file = '';
+    private string $template_lang = '';
     private array $vars = [];
 
+    private static ?Environment $twig = null;
+
     /**
-     * Setting the message subject
-     *
-     * @param string $subject
-     *
-     * @return void
+     * Initialize Twig environment
      */
+    private function getTwig(): Environment
+    {
+        if (self::$twig === null) {
+            $loader = new FilesystemLoader();
+
+            // Add email_templates directories for all languages
+            $languages = glob(LANG_ROOT_DIR . '/*', GLOB_ONLYDIR);
+            foreach ($languages as $langPath) {
+                $lang = basename($langPath);
+                $templatePath = LANG_ROOT_DIR . '/' . $lang . '/email_templates';
+                if (is_dir($templatePath)) {
+                    $loader->addPath($templatePath, $lang);
+                }
+            }
+
+            // Add default language namespace
+            $defaultLang = config()->get('default_lang');
+            $defaultPath = LANG_ROOT_DIR . '/' . $defaultLang . '/email_templates';
+            if (is_dir($defaultPath)) {
+                $loader->addPath($defaultPath);
+            }
+
+            self::$twig = new Environment($loader, [
+                'cache' => CACHE_DIR . '/twig',
+                'auto_reload' => true,
+                'autoescape' => false, // Plain text emails
+            ]);
+        }
+
+        return self::$twig;
+    }
+
     public function set_subject(string $subject): void
     {
         $this->subject = $subject;
     }
 
-    /**
-     * Set recipient address
-     *
-     * @param string $email recipient address
-     * @param string $name recipient name
-     *
-     * @return void
-     */
     public function set_to(string $email, string $name): void
     {
         $this->to = new Address($email, $name);
     }
 
-    /**
-     * Setting an address for the response
-     *
-     * @param string $email recipient address
-     *
-     * @return void
-     */
     public function set_reply(string $email): void
     {
         $this->reply = new Address($email);
     }
 
     /**
-     * Setting the message template
+     * Set email template
      *
-     * @param string $template_file
-     * @param string $template_lang
-     *
-     * @return void
+     * @param string $template_file Template name without .twig extension
+     * @param string $template_lang Language code (defaults to site default)
      */
     public function set_template(string $template_file, string $template_lang = ''): void
     {
@@ -91,33 +97,37 @@ class Emailer
             $template_lang = config()->get('default_lang');
         }
 
-        if (empty($this->tpl_msg[$template_lang . $template_file])) {
-            $tpl_file = LANG_ROOT_DIR . '/' . $template_lang . '/email/' . $template_file . '.html';
-
-            if (!is_file($tpl_file)) {
-                $tpl_file = LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/email/' . $template_file . '.html';
-
-                if (!is_file($tpl_file)) {
-                    throw new Exception('Could not find email template file: ' . $template_file);
-                }
-            }
-
-            if (!$fd = fopen($tpl_file, 'rb')) {
-                throw new Exception('Failed opening email template file: ' . $tpl_file);
-            }
-
-            $this->tpl_msg[$template_lang . $template_file] = fread($fd, filesize($tpl_file));
-            fclose($fd);
-        }
-
-        $this->message = $this->tpl_msg[$template_lang . $template_file];
+        $this->template_file = $template_file;
+        $this->template_lang = $template_lang;
     }
 
     /**
-     * Sending a message to recipients via Symfony Mailer
+     * Render email message using Twig
+     */
+    private function renderMessage(): string
+    {
+        $twig = $this->getTwig();
+
+        // Try a language-specific template first, fallback to default
+        $twigTemplate = '@' . $this->template_lang . '/' . $this->template_file . '.twig';
+
+        if (!$twig->getLoader()->exists($twigTemplate)) {
+            $twigTemplate = $this->template_file . '.twig';
+        }
+
+        // Convert UPPERCASE to lowercase for Twig
+        $twigVars = [];
+        foreach ($this->vars as $key => $value) {
+            $twigVars[strtolower($key)] = $value;
+        }
+
+        return $twig->render($twigTemplate, $twigVars);
+    }
+
+    /**
+     * Send email
      *
-     * @param string $email_format
-     *
+     * @param string $email_format Email format constant (EMAIL_TYPE_TEXT or EMAIL_TYPE_HTML)
      * @return bool
      * @throws Exception
      */
@@ -129,24 +139,13 @@ class Emailer
             return false;
         }
 
-        /** Replace vars and prepare message */
-        $this->message = preg_replace('#\{([a-z0-9\-_]*?)}#is', "$\\1", $this->message);
-        foreach ($this->vars as $key => $val) {
-            $this->message = preg_replace(sprintf('/\$\{?%s\}?/', $key), $val, $this->message);
-        }
-        $this->message = trim($this->message);
-
-        /** Set some variables */
+        $message_body = $this->renderMessage();
         $this->subject = !empty($this->subject) ? $this->subject : $lang['EMAILER_SUBJECT']['EMPTY'];
 
-        /** Prepare message */
+        // Configure transport
         if (config()->get('emailer.smtp.enabled')) {
             if (!empty(config()->get('emailer.smtp.host'))) {
-                $sslType = config()->get('emailer.smtp.ssl_type');
-                if (empty($sslType)) {
-                    $sslType = null;
-                }
-                /** @var EsmtpTransport $transport external SMTP with SSL */
+                $sslType = config()->get('emailer.smtp.ssl_type') ?: null;
                 $transport = (new EsmtpTransport(
                     config()->get('emailer.smtp.host'),
                     config()->get('emailer.smtp.port'),
@@ -163,7 +162,6 @@ class Emailer
 
         $mailer = new Mailer($transport);
 
-        /** @var Email $message */
         $message = (new Email())
             ->subject($this->subject)
             ->to($this->to)
@@ -171,25 +169,19 @@ class Emailer
             ->returnPath(new Address(config()->get('bounce_email')))
             ->replyTo($this->reply ?? new Address(config()->get('board_email')));
 
-        /**
-         * This non-standard header tells compliant autoresponders ("email holiday mode") to not
-         * reply to this message because it's an automated email
-         */
-        $message->getHeaders()
-            ->addTextHeader('X-Auto-Response-Suppress', 'OOF, DR, RN, NRN, AutoReply');
+        $message->getHeaders()->addTextHeader('X-Auto-Response-Suppress', 'OOF, DR, RN, NRN, AutoReply');
 
         switch ($email_format) {
             case EMAIL_TYPE_HTML:
-                $message->html($this->message);
+                $message->html($message_body);
                 break;
             case EMAIL_TYPE_TEXT:
-                $message->text($this->message);
+                $message->text($message_body);
                 break;
             default:
                 throw new Exception('Unknown email format: ' . $email_format);
         }
 
-        /** Send message */
         try {
             $mailer->send($message);
         } catch (TransportExceptionInterface $e) {
@@ -200,13 +192,9 @@ class Emailer
     }
 
     /**
-     * Set message template variables
-     *
-     * @param $vars
-     *
-     * @return void
+     * Set template variables
      */
-    public function assign_vars($vars): void
+    public function assign_vars(array $vars): void
     {
         $this->vars = array_merge([
             'BOARD_EMAIL' => config()->get('board_email'),
