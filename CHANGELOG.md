@@ -29,6 +29,8 @@
 
 ### 🚜 Refactor
 
+- *(attachments)* [**breaking**] Remove quota limits system ([#2196](https://github.com/torrentpier/torrentpier/pull/2196)) - ([f2f3579](https://github.com/torrentpier/torrentpier/commit/f2f35794de6eced281ba64d8c60201ea38861edc))
+- *(i18n)* Move country list to configuration and optimize flag rendering logic ([#2193](https://github.com/torrentpier/torrentpier/pull/2193)) - ([5f1209c](https://github.com/torrentpier/torrentpier/commit/5f1209c9c6a3e0717ed480f8fd92f7b57e16d7a7))
 - *(i18n)* Improve language strings and dynamic registration intervals ([#2192](https://github.com/torrentpier/torrentpier/pull/2192)) - ([245378d](https://github.com/torrentpier/torrentpier/commit/245378d063583855ea6e4fd19a0aeebe888c70f1))
 - *(i18n)* Migrate from Crowdin to translation package system ([#2191](https://github.com/torrentpier/torrentpier/pull/2191)) - ([fdc0798](https://github.com/torrentpier/torrentpier/commit/fdc07988f82af96bae20b1ff19c5351560667116))
 
@@ -36,6 +38,13 @@
 
 - Trigger source sync (removal) - ([6c3498a](https://github.com/torrentpier/torrentpier/commit/6c3498a6aacff97665f30be6f928611a70e2135b))
 - Trigger source sync - ([b350301](https://github.com/torrentpier/torrentpier/commit/b350301e1232537c816e8fc10c1adf9341b35246))
+
+### ⚙️ Miscellaneous
+
+- *(i18n)* Update country list to use configuration and expand translation grouping logic - ([fb74d40](https://github.com/torrentpier/torrentpier/commit/fb74d406cacb88a282eafde1818458601ad10f47))
+- *(i18n)* Standardize and improve grammar, spelling, and consistency across language strings in main.php ([#2195](https://github.com/torrentpier/torrentpier/pull/2195)) - ([df5d213](https://github.com/torrentpier/torrentpier/commit/df5d21336fb6bed2baf7a9c73f6ea58a298c682a))
+- *(language)* Update torrentpier/translations to latest reference in composer.lock - ([320a3ca](https://github.com/torrentpier/torrentpier/commit/320a3cac18efeafc0428dbdcfe4347e28291a191))
+- Remove ICQ and Skype user fields and associated references ([#2194](https://github.com/torrentpier/torrentpier/pull/2194)) - ([f61d925](https://github.com/torrentpier/torrentpier/commit/f61d925f1c1728585327e8745bb5b9f5451809cb))
 
 
 ## [v2.8.7](https://github.com/torrentpier/torrentpier/compare/v2.8.6..v2.8.7) (2025-10-10)
