@@ -44,7 +44,7 @@ class Emailer
             $loader = new FilesystemLoader();
 
             // Add email_templates directories for all languages
-            $languages = glob(LANG_ROOT_DIR . '/*', GLOB_ONLYDIR);
+            $languages = glob(LANG_ROOT_DIR . '/*', GLOB_ONLYDIR) ?: [];
             foreach ($languages as $langPath) {
                 $lang = basename($langPath);
                 $templatePath = LANG_ROOT_DIR . '/' . $lang . '/email_templates';
@@ -60,8 +60,14 @@ class Emailer
                 $loader->addPath($defaultPath);
             }
 
+            // Ensure cache directory exists
+            $cacheDir = CACHE_DIR . '/twig';
+            if (!is_dir($cacheDir)) {
+                @mkdir($cacheDir, 0775, true);
+            }
+
             self::$twig = new Environment($loader, [
-                'cache' => CACHE_DIR . '/twig',
+                'cache' => $cacheDir,
                 'auto_reload' => true,
                 'autoescape' => false, // Plain text emails
             ]);
@@ -136,14 +142,12 @@ class Emailer
      */
     public function send(string $email_format = 'text/plain'): bool
     {
-        global $lang;
-
         if (!config()->get('emailer.enabled')) {
             return false;
         }
 
         $message_body = $this->renderMessage();
-        $this->subject = !empty($this->subject) ? $this->subject : $lang['EMAILER_SUBJECT']['EMPTY'];
+        $this->subject = !empty($this->subject) ? $this->subject : lang()->get('EMAILER_SUBJECT.EMPTY');
 
         // Configure transport
         if (config()->get('emailer.smtp.enabled')) {
