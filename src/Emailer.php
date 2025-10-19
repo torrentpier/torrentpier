@@ -108,11 +108,14 @@ class Emailer
     {
         $twig = $this->getTwig();
 
-        // Try a language-specific template first, fallback to default
+        // Try language-specific template first, fallback to @source, then default
         $twigTemplate = '@' . $this->template_lang . '/' . $this->template_file . '.twig';
 
         if (!$twig->getLoader()->exists($twigTemplate)) {
-            $twigTemplate = $this->template_file . '.twig';
+            $sourceTpl = '@source/' . $this->template_file . '.twig';
+            $twigTemplate = $twig->getLoader()->exists($sourceTpl)
+                ? $sourceTpl
+                : $this->template_file . '.twig';
         }
 
         // Convert UPPERCASE to lowercase for Twig
@@ -161,6 +164,10 @@ class Emailer
         }
 
         $mailer = new Mailer($transport);
+
+        if ($this->to === null) {
+            throw new Exception('Email recipient is not set');
+        }
 
         $message = (new Email())
             ->subject($this->subject)
