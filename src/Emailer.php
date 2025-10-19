@@ -52,7 +52,11 @@ class Emailer
                 $lang = basename($langPath);
                 $templatePath = LANG_ROOT_DIR . '/' . $lang . '/email_templates';
                 if (is_dir($templatePath)) {
-                    $loader->addPath($templatePath, $lang);
+                    try {
+                        $loader->addPath($templatePath, $lang);
+                    } catch (LoaderError) {
+                        // Skip invalid template paths
+                    }
                 }
             }
 
@@ -60,10 +64,14 @@ class Emailer
             $defaultLang = config()->get('default_lang');
             $defaultPath = LANG_ROOT_DIR . '/' . $defaultLang . '/email_templates';
             if (is_dir($defaultPath)) {
-                $loader->addPath($defaultPath);
+                try {
+                    $loader->addPath($defaultPath);
+                } catch (LoaderError) {
+                    // Skip invalid default path
+                }
             }
 
-            // Ensure cache directory exists
+            // Ensure the cache directory exists
             $cacheDir = CACHE_DIR . '/twig';
             if (!is_dir($cacheDir)) {
                 @mkdir($cacheDir, 0775, true);
@@ -112,12 +120,14 @@ class Emailer
 
     /**
      * Render email message using Twig
+     *
+     * @throws Exception
      */
     private function renderMessage(): string
     {
         $twig = $this->getTwig();
 
-        // Try language-specific template first, fallback to @source, then default
+        // Try a language-specific template first, fallback to @source, then default
         $twigTemplate = '@' . $this->template_lang . '/' . $this->template_file . '.twig';
 
         if (!$twig->getLoader()->exists($twigTemplate)) {
@@ -128,7 +138,7 @@ class Emailer
         }
 
         // Convert UPPERCASE to lowercase for Twig
-        $twigVars = array_change_key_case($this->vars, CASE_LOWER);
+        $twigVars = array_change_key_case($this->vars);
 
         try {
             return $twig->render($twigTemplate, $twigVars);
