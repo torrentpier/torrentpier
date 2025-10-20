@@ -58,7 +58,7 @@ trait FeedEntryMapperTrait
     }
 
     /**
-     * Check if torrent is frozen and should be excluded
+     * Check if the torrent is frozen and should be excluded
      *
      * @param array $topic
      * @return bool

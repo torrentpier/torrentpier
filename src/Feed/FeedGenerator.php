@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace TorrentPier\Feed;
 
 use DateTime;
-use DateTimeImmutable;
 use Exception;
 use FeedIo\Adapter\Http\Client;
 use FeedIo\Feed;
