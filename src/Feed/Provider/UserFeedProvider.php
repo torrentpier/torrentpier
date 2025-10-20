@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace TorrentPier\Feed\Provider;
 
-use DateTime;
+use DateTimeImmutable;
 use Exception;
 use TorrentPier\Feed\Model\FeedMetadata;
 
@@ -49,7 +49,7 @@ class UserFeedProvider implements FeedProviderInterface
         return new FeedMetadata(
             title: $this->username,
             link: FULL_URL,
-            lastModified: new DateTime()
+            lastModified: new DateTimeImmutable()
         );
     }
 

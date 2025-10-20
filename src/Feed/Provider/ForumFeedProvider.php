@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace TorrentPier\Feed\Provider;
 
-use DateTime;
+use DateTimeImmutable;
 use Exception;
 use TorrentPier\Feed\Exception\FeedGenerationException;
 use TorrentPier\Feed\Model\FeedMetadata;
@@ -83,7 +83,7 @@ class ForumFeedProvider implements FeedProviderInterface
         return new FeedMetadata(
             title: $title,
             link: FULL_URL,
-            lastModified: new DateTime()
+            lastModified: new DateTimeImmutable()
         );
     }
 

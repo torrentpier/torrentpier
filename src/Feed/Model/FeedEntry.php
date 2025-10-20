@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace TorrentPier\Feed\Model;
 
-use DateTime;
+use DateTimeImmutable;
 
 /**
  * Value object representing a single feed entry
@@ -21,14 +21,14 @@ readonly class FeedEntry
     /**
      * @param string $title Entry title
      * @param string $link Entry URL
-     * @param DateTime $lastModified Last modification date
+     * @param DateTimeImmutable $lastModified Last modification date
      * @param string $author Author name
      * @param string|null $description Optional entry description/content
      */
     public function __construct(
         public string $title,
         public string $link,
-        public DateTime $lastModified,
+        public DateTimeImmutable $lastModified,
         public string $author,
         public ?string $description = null
     ) {

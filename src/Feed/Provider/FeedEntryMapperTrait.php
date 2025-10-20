@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace TorrentPier\Feed\Provider;
 
-use DateTime;
+use DateTimeImmutable;
 use Exception;
 use TorrentPier\Feed\Model\FeedEntry;
 
@@ -48,7 +48,7 @@ trait FeedEntryMapperTrait
             $entries[] = new FeedEntry(
                 title: $title,
                 link: $this->buildEntryLink($topic),
-                lastModified: new DateTime('@' . $lastTime),
+                lastModified: new DateTimeImmutable('@' . $lastTime),
                 author: $topic['first_username'] ?: __('GUEST'),
                 description: $this->buildEntryDescription($topic)
             );

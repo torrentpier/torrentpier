@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace TorrentPier\Feed\Model;
 
-use DateTime;
+use DateTimeImmutable;
 
 /**
  * Value object representing feed metadata
@@ -21,12 +21,12 @@ readonly class FeedMetadata
     /**
      * @param string $title Feed title
      * @param string $link Feed main URL
-     * @param DateTime $lastModified Last modification date
+     * @param DateTimeImmutable $lastModified Last modification date
      */
     public function __construct(
         public string $title,
         public string $link,
-        public DateTime $lastModified
+        public DateTimeImmutable $lastModified
     ) {
     }
 }
