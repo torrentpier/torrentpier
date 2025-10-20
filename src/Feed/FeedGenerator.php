@@ -36,11 +36,14 @@ final class FeedGenerator
      */
     private function __construct()
     {
-        // Find PSR-18 HTTP client
-        $psr18Client = Psr18ClientDiscovery::find();
-
-        // Wrap PSR-18 client in FeedIo adapter
-        $client = new Client($psr18Client);
+        try {
+            // Find PSR-18 HTTP client
+            $psr18Client = Psr18ClientDiscovery::find();
+            // Wrap PSR-18 client in FeedIo adapter
+            $client = new Client($psr18Client);
+        } catch (Throwable $e) {
+            throw new FeedGenerationException('HTTP client discovery failed: ' . $e->getMessage(), 0, $e);
+        }
 
         // Create a logger (use NullLogger to avoid dependencies)
         $logger = new NullLogger();
@@ -74,7 +77,7 @@ final class FeedGenerator
     public function generate(FeedProviderInterface $provider): string
     {
         try {
-            $cacheTtl = config()->get('atom.cache_ttl') ?? 600; // Default 10 minutes
+            $cacheTtl = (int) config()->get('atom.cache_ttl', 600); // Default 10 minutes
 
             // If TTL is 0 or negative, disable caching (always generate fresh)
             if ($cacheTtl <= 0) {
@@ -86,7 +89,7 @@ final class FeedGenerator
 
             // Try to get from the cache
             $cached = $cache->get($cacheKey);
-            if (!$cached) {
+            if ($cached === false || $cached === null) {
                 // Generate and cache
                 $cached = $this->generateFeed($provider);
                 $cache->set($cacheKey, $cached, $cacheTtl);
