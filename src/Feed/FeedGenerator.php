@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace TorrentPier\Feed;
 
+use DateTime;
+use DateTimeImmutable;
 use Exception;
 use FeedIo\Adapter\Http\Client;
 use FeedIo\Feed;
@@ -84,7 +86,8 @@ final class FeedGenerator
             $cache = CACHE('bb_cache');
 
             // Try to get from the cache
-            if (!$cached = $cache->get($cacheKey)) {
+            $cached = $cache->get($cacheKey);
+            if (!$cached) {
                 // Generate and cache
                 $cached = $this->generateFeed($provider);
                 $cache->set($cacheKey, $cached, $cacheTtl);
@@ -114,14 +117,14 @@ final class FeedGenerator
         // Set feed metadata
         $feed->setTitle($metadata->title);
         $feed->setLink($metadata->link);
-        $feed->setLastModified($metadata->lastModified);
+        $feed->setLastModified(DateTime::createFromImmutable($metadata->lastModified));
 
         // Add feed entries
         foreach ($provider->getEntries() as $entryData) {
             $entry = $feed->newItem();
             $entry->setTitle($entryData->title);
             $entry->setLink($entryData->link);
-            $entry->setLastModified($entryData->lastModified);
+            $entry->setLastModified(DateTime::createFromImmutable($entryData->lastModified));
 
             if ($entryData->description !== null) {
                 $entry->setContent($entryData->description);
