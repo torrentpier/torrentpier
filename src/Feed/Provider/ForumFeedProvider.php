@@ -24,7 +24,6 @@ class ForumFeedProvider implements FeedProviderInterface
 {
     use FeedEntryMapperTrait;
 
-    private int $forumId;
     private ?string $forumName;
     private ?array $forumData;
 
@@ -32,9 +31,10 @@ class ForumFeedProvider implements FeedProviderInterface
      * @param int $forumId Forum ID (0 for global feed)
      * @param string|null $forumName Forum name (will be loaded if not provided)
      */
-    public function __construct(int $forumId, ?string $forumName = null)
-    {
-        $this->forumId = $forumId;
+    public function __construct(
+        private readonly int $forumId,
+        ?string $forumName = null
+    ) {
         $this->forumName = $forumName;
         $this->forumData = null;
 

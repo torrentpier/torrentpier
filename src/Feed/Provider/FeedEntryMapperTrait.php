@@ -29,8 +29,6 @@ trait FeedEntryMapperTrait
      */
     private function mapTopicsToEntries(array $topics): array
     {
-        global $lang;
-
         $entries = [];
 
         foreach ($topics as $topic) {
@@ -40,53 +38,112 @@ trait FeedEntryMapperTrait
             }
 
             // Skip frozen torrents
-            if (isset($topic['tor_status']) && isset(config()->get('tor_frozen')[$topic['tor_status']])) {
+            if ($this->isFrozenTorrent($topic)) {
                 continue;
             }
 
-            // Build title with torrent info
-            $torSize = '';
-            if (isset($topic['tor_size'])) {
-                $torSize = ' [' . humn_size($topic['tor_size']) . ']';
-            }
-
-            $torStatus = '';
-            if (isset($topic['tor_status'], $lang['TOR_STATUS_NAME'][$topic['tor_status']])) {
-                $torStatus = " ({$lang['TOR_STATUS_NAME'][$topic['tor_status']]})";
-            }
-
-            $title = censor()->censorString($topic['topic_title']) . $torStatus . $torSize;
-
-            // Determine last modification time
+            $title = $this->getUpdatedPrefix($topic) . $this->buildTorrentTitle($topic);
             $lastTime = $topic['topic_last_post_edit_time'] ?: $topic['topic_last_post_time'];
 
-            // Determine a link (direct download or topic view)
-            $link = config()->get('atom.direct_down') && isset($topic['attach_id'])
-                ? DL_URL . $topic['attach_id']
-                : TOPIC_URL . $topic['topic_id'];
-
-            // Prepare description if enabled
-            $description = null;
-            if (config()->get('atom.direct_view') && isset($topic['post_html'])) {
-                $description = $topic['post_html'] . "\n\nTopic: " . FULL_URL . TOPIC_URL . $topic['topic_id'];
-            }
-
-            // Check for updated marker
-            $updated = '';
-            $checktime = TIMENOW - 604800; // 1 week
-            if (isset($topic['topic_first_post_edit_time']) && $topic['topic_first_post_edit_time'] > $checktime) {
-                $updated = '[' . $lang['ATOM_UPDATED'] . '] ';
-            }
-
             $entries[] = new FeedEntry(
-                title: $updated . $title,
-                link: $link,
+                title: $title,
+                link: $this->buildEntryLink($topic),
                 lastModified: new DateTime('@' . $lastTime),
-                author: $topic['first_username'] ?: $lang['GUEST'],
-                description: $description
+                author: $topic['first_username'] ?: __('GUEST'),
+                description: $this->buildEntryDescription($topic)
             );
         }
 
         return $entries;
+    }
+
+    /**
+     * Check if torrent is frozen and should be excluded
+     *
+     * @param array $topic
+     * @return bool
+     */
+    private function isFrozenTorrent(array $topic): bool
+    {
+        return isset($topic['tor_status']) && isset(config()->get('tor_frozen')[$topic['tor_status']]);
+    }
+
+    /**
+     * Build torrent title with status and size info
+     *
+     * @param array $topic
+     * @return string
+     */
+    private function buildTorrentTitle(array $topic): string
+    {
+        $title = censor()->censorString($topic['topic_title']);
+
+        // Add torrent status if available
+        if (isset($topic['tor_status'])) {
+            $statusName = __('TOR_STATUS_NAME.' . $topic['tor_status']);
+            // Only add status if translation exists (not just the key)
+            if ($statusName !== 'TOR_STATUS_NAME.' . $topic['tor_status']) {
+                $title .= ' (' . $statusName . ')';
+            }
+        }
+
+        // Add torrent size if available
+        if (isset($topic['tor_size'])) {
+            $title .= ' [' . humn_size($topic['tor_size']) . ']';
+        }
+
+        return $title;
+    }
+
+    /**
+     * Build entry link (direct download or topic view)
+     *
+     * @param array $topic
+     * @return string
+     */
+    private function buildEntryLink(array $topic): string
+    {
+        // Direct download link if enabled and attachment exists
+        if (config()->get('atom.direct_down') && isset($topic['attach_id'])) {
+            return DL_URL . $topic['attach_id'];
+        }
+
+        // Default to topic view
+        return TOPIC_URL . $topic['topic_id'];
+    }
+
+    /**
+     * Build entry description if enabled
+     *
+     * @param array $topic
+     * @return string|null
+     */
+    private function buildEntryDescription(array $topic): ?string
+    {
+        if (!config()->get('atom.direct_view') || !isset($topic['post_html'])) {
+            return null;
+        }
+
+        return $topic['post_html'] . "\n\nTopic: " . FULL_URL . TOPIC_URL . $topic['topic_id'];
+    }
+
+    /**
+     * Get [UPDATED] prefix for recently edited topics
+     *
+     * @param array $topic
+     * @return string
+     */
+    private function getUpdatedPrefix(array $topic): string
+    {
+        if (!isset($topic['topic_first_post_edit_time'])) {
+            return '';
+        }
+
+        $checktime = TIMENOW - 604800; // 1 week
+        if ($topic['topic_first_post_edit_time'] > $checktime) {
+            return '[' . __('ATOM_UPDATED') . '] ';
+        }
+
+        return '';
     }
 }

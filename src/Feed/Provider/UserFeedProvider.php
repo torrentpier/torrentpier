@@ -23,17 +23,14 @@ class UserFeedProvider implements FeedProviderInterface
 {
     use FeedEntryMapperTrait;
 
-    private int $userId;
-    private string $username;
-
     /**
      * @param int $userId User ID
      * @param string $username Username
      */
-    public function __construct(int $userId, string $username)
-    {
-        $this->userId = $userId;
-        $this->username = $username;
+    public function __construct(
+        private readonly int $userId,
+        private readonly string $username
+    ) {
     }
 
     /**
