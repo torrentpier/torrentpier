@@ -70,6 +70,7 @@
     "symfony/mailer": "^7.3",
     "symfony/polyfill": "v1.33.0",
     "torrentpier/translations": "dev-main",
+    "twig/twig": "^3.21",
     "vlucas/phpdotenv": "^5.5",
     "z4kn4fein/php-semver": "^v3.0.0"
   },
