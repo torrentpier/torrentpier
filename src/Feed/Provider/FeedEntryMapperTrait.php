@@ -65,7 +65,12 @@ trait FeedEntryMapperTrait
      */
     private function isFrozenTorrent(array $topic): bool
     {
-        return isset($topic['tor_status']) && isset(config()->get('tor_frozen')[$topic['tor_status']]);
+        if (!isset($topic['tor_status'])) {
+            return false;
+        }
+
+        $torFrozen = config()->get('tor_frozen');
+        return is_array($torFrozen) && isset($torFrozen[$topic['tor_status']]);
     }
 
     /**
