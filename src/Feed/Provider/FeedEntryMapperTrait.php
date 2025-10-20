@@ -109,7 +109,7 @@ trait FeedEntryMapperTrait
     private function buildEntryLink(array $topic): string
     {
         // Direct download link if enabled and attachment exists
-        if (config()->get('atom.direct_down') && isset($topic['attach_id'])) {
+        if (config()->get('atom.direct_down') && !empty($topic['attach_id'])) {
             return DL_URL . $topic['attach_id'];
         }
 
@@ -125,7 +125,7 @@ trait FeedEntryMapperTrait
      */
     private function buildEntryDescription(array $topic): ?string
     {
-        if (!config()->get('atom.direct_view') || !isset($topic['post_html'])) {
+        if (!config()->get('atom.direct_view') || empty($topic['post_html'])) {
             return null;
         }
 
