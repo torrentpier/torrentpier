@@ -685,6 +685,7 @@ $bb_cfg['atom'] = [
     'direct_down' => true, // Allow direct downloading of torrents from feeds
     'direct_view' => true, // Allow direct viewing of post-texts in feeds
     'cache_ttl' => 600, // Cache duration in seconds (10 minutes)
+    'updated_window' => 604800, // Time window for [UPDATED] prefix in seconds (1 week)
 ];
 
 // Nofollow

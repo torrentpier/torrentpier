@@ -144,7 +144,8 @@ trait FeedEntryMapperTrait
             return '';
         }
 
-        $checktime = TIMENOW - 604800; // 1 week
+        $window = (int)(config()->get('atom.updated_window') ?? 604800); // default: 1 week
+        $checktime = TIMENOW - $window;
         if ($topic['topic_first_post_edit_time'] > $checktime) {
             return '[' . __('ATOM_UPDATED') . '] ';
         }
