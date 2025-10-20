@@ -30,6 +30,7 @@
 ### 🚜 Refactor
 
 - *(attachments)* [**breaking**] Remove quota limits system ([#2196](https://github.com/torrentpier/torrentpier/pull/2196)) - ([f2f3579](https://github.com/torrentpier/torrentpier/commit/f2f35794de6eced281ba64d8c60201ea38861edc))
+- *(i18n)* Remove unused language keys and fix hardcoded strings ([#2197](https://github.com/torrentpier/torrentpier/pull/2197)) - ([d104689](https://github.com/torrentpier/torrentpier/commit/d10468995d90b96b90c47117081f462fc5fb06cc))
 - *(i18n)* Move country list to configuration and optimize flag rendering logic ([#2193](https://github.com/torrentpier/torrentpier/pull/2193)) - ([5f1209c](https://github.com/torrentpier/torrentpier/commit/5f1209c9c6a3e0717ed480f8fd92f7b57e16d7a7))
 - *(i18n)* Improve language strings and dynamic registration intervals ([#2192](https://github.com/torrentpier/torrentpier/pull/2192)) - ([245378d](https://github.com/torrentpier/torrentpier/commit/245378d063583855ea6e4fd19a0aeebe888c70f1))
 - *(i18n)* Migrate from Crowdin to translation package system ([#2191](https://github.com/torrentpier/torrentpier/pull/2191)) - ([fdc0798](https://github.com/torrentpier/torrentpier/commit/fdc07988f82af96bae20b1ff19c5351560667116))
