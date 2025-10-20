@@ -34,7 +34,7 @@ trait TopicVisibilityFilterTrait
         // Get guest_view string, default to empty
         $guestView = $forums['not_auth_forums']['guest_view'] ?? '';
 
-        // Explode and cast to int array (empty string produces empty array)
+        // Explode and cast to an int array (empty string produces an empty array)
         $notForumsId = $guestView !== ''
             ? array_map('intval', explode(',', $guestView))
             : [];
@@ -49,8 +49,8 @@ trait TopicVisibilityFilterTrait
             // Get forum_id as int, default to 0 if missing
             $forumId = isset($topic['forum_id']) ? (int)$topic['forum_id'] : 0;
 
-            // Keep topic if its forum is NOT in forbidden list (non-strict comparison)
-            return !in_array($forumId, $notForumsId, false);
+            // Keep a topic if its forum is NOT in a forbidden list (non-strict comparison)
+            return !in_array($forumId, $notForumsId);
         });
     }
 }

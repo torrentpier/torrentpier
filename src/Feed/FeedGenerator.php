@@ -12,11 +12,11 @@ declare(strict_types=1);
 namespace TorrentPier\Feed;
 
 use DateTime;
-use Exception;
 use FeedIo\Adapter\Http\Client;
 use FeedIo\Feed;
 use FeedIo\FeedIo;
 use Http\Discovery\Psr18ClientDiscovery;
+use LogicException;
 use Psr\Log\NullLogger;
 use Throwable;
 use TorrentPier\Feed\Exception\FeedGenerationException;
@@ -84,7 +84,7 @@ final class FeedGenerator
                 return $this->generateFeed($provider);
             }
 
-            // Include current locale in cache key to ensure language-specific feeds
+            // Include the current locale in a cache key to ensure language-specific feeds
             $locale = lang()->getCurrentLanguage();
             $cacheKey = $provider->getCacheKey() . ':lang=' . $locale;
             $cache = CACHE('bb_cache');
@@ -155,10 +155,10 @@ final class FeedGenerator
 
     /**
      * Prevent unserialization
-     * @throws \LogicException
+     * @throws LogicException
      */
     public function __wakeup()
     {
-        throw new \LogicException('Cannot unserialize singleton');
+        throw new LogicException('Cannot unserialize singleton');
     }
 }
