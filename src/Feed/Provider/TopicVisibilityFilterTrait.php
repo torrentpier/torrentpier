@@ -49,8 +49,8 @@ trait TopicVisibilityFilterTrait
             // Get forum_id as int, default to 0 if missing
             $forumId = isset($topic['forum_id']) ? (int)$topic['forum_id'] : 0;
 
-            // Keep a topic if its forum is NOT in a forbidden list (non-strict comparison)
-            return !in_array($forumId, $notForumsId);
+            // Keep a topic if its forum is NOT in a forbidden list (strict comparison)
+            return !in_array($forumId, $notForumsId, true);
         });
     }
 }
