@@ -75,10 +75,8 @@ class ForumFeedProvider implements FeedProviderInterface
      */
     public function getMetadata(): FeedMetadata
     {
-        global $lang;
-
         $title = $this->forumId === 0
-            ? ($lang['ATOM_GLOBAL_FEED'] ?? config()->get('server_name'))
+            ? (__('ATOM_GLOBAL_FEED') ?: config()->get('server_name'))
             : htmlCHR($this->forumName);
 
         return new FeedMetadata(
