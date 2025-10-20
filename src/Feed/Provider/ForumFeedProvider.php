@@ -23,6 +23,7 @@ use TorrentPier\Feed\Model\FeedMetadata;
 class ForumFeedProvider implements FeedProviderInterface
 {
     use FeedEntryMapperTrait;
+    use TopicVisibilityFilterTrait;
 
     private ?string $forumName;
     private ?array $forumData;
@@ -112,7 +113,7 @@ class ForumFeedProvider implements FeedProviderInterface
     {
         $sql = "
             SELECT
-                t.topic_id, t.topic_title, t.topic_status,
+                t.topic_id, t.topic_title, t.topic_status, t.forum_id,
                 u1.username AS first_username,
                 p1.post_time AS topic_first_post_time,
                 p1.post_edit_time AS topic_first_post_edit_time,
@@ -151,7 +152,7 @@ class ForumFeedProvider implements FeedProviderInterface
 
         $sql = "
             SELECT
-                t.topic_id, t.topic_title, t.topic_status,
+                t.topic_id, t.topic_title, t.topic_status, t.forum_id,
                 u1.username AS first_username,
                 p1.post_time AS topic_first_post_time,
                 p1.post_edit_time AS topic_first_post_edit_time,
@@ -171,28 +172,5 @@ class ForumFeedProvider implements FeedProviderInterface
         ";
 
         return DB()->fetch_rowset($sql);
-    }
-
-    /**
-     * Filter topics from forbidden forums (for guests)
-     *
-     * @param array $topics
-     * @return array
-     */
-    private function filterForbiddenTopics(array $topics): array
-    {
-        global $datastore;
-
-        // Get forbidden forums for guests
-        if (!$forums = $datastore->get('cat_forums')) {
-            $datastore->update('cat_forums');
-            $forums = $datastore->get('cat_forums');
-        }
-        $notForumsId = explode(',', $forums['not_auth_forums']['guest_view'] ?? '');
-
-        // Filter out topics from forbidden forums
-        return array_filter($topics, function ($topic) use ($notForumsId) {
-            return !in_array($topic['topic_id'], $notForumsId, true);
-        });
     }
 }

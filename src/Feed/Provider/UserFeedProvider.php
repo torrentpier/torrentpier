@@ -22,6 +22,7 @@ use TorrentPier\Feed\Model\FeedMetadata;
 class UserFeedProvider implements FeedProviderInterface
 {
     use FeedEntryMapperTrait;
+    use TopicVisibilityFilterTrait;
 
     /**
      * @param int $userId User ID
@@ -60,6 +61,10 @@ class UserFeedProvider implements FeedProviderInterface
     public function getEntries(): array
     {
         $topics = $this->getUserTopics();
+
+        // Filter topics from forbidden forums (for guests)
+        $topics = $this->filterForbiddenTopics($topics);
+
         return $this->mapTopicsToEntries($topics);
     }
 
@@ -72,7 +77,7 @@ class UserFeedProvider implements FeedProviderInterface
     {
         $sql = "
             SELECT
-                t.topic_id, t.topic_title, t.topic_status,
+                t.topic_id, t.topic_title, t.topic_status, t.forum_id,
                 u1.username AS first_username,
                 p1.post_time AS topic_first_post_time,
                 p1.post_edit_time AS topic_first_post_edit_time,
