@@ -58,19 +58,26 @@ class HCaptcha implements CaptchaInterface
      */
     public function check(): bool
     {
-        $data = [
-            'secret' => $this->settings['secret_key'],
-            'response' => $_POST['h-captcha-response'] ?? null,
-        ];
+        try {
+            $response = httpClient()->post($this->verifyEndpoint, [
+                'form_params' => [
+                    'secret' => $this->settings['secret_key'],
+                    'response' => $_POST['h-captcha-response'] ?? null,
+                ],
+            ]);
 
-        $verify = curl_init();
-        curl_setopt($verify, CURLOPT_URL, $this->verifyEndpoint);
-        curl_setopt($verify, CURLOPT_POST, true);
-        curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($verify);
+            if ($response->getStatusCode() !== 200) {
+                return false;
+            }
 
-        $responseData = json_decode($response);
-        return $responseData->success;
+            $responseData = json_decode((string) $response->getBody(), false);
+            return $responseData->success ?? false;
+        } catch (\Throwable $e) {
+            // Log error but don't expose to user
+            if (function_exists('bb_log')) {
+                bb_log("HCaptcha verification failed: {$e->getMessage()}" . LOG_LF);
+            }
+            return false;
+        }
     }
 }

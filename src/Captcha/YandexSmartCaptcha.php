@@ -58,27 +58,33 @@ class YandexSmartCaptcha implements CaptchaInterface
      */
     public function check(): bool
     {
-        $ch = curl_init($this->verifyEndpoint);
-        $args = [
-            'secret' => $this->settings['secret_key'],
-            'token' => $_POST['smart-token'] ?? null,
-            'ip' => $_SERVER['REMOTE_ADDR'],
-        ];
+        try {
+            $response = httpClient()->post($this->verifyEndpoint, [
+                'form_params' => [
+                    'secret' => $this->settings['secret_key'],
+                    'token' => $_POST['smart-token'] ?? null,
+                    'ip' => $_SERVER['REMOTE_ADDR'],
+                ],
+                'timeout' => 1,
+            ]);
 
-        curl_setopt($ch, CURLOPT_TIMEOUT, 1);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($args));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $httpCode = $response->getStatusCode();
 
-        $serverOutput = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+            // Yandex SmartCaptcha returns true on non-200 responses
+            // This is original behavior preserved from legacy code
+            if ($httpCode !== 200) {
+                return true;
+            }
 
-        if ($httpCode !== 200) {
+            $responseData = json_decode((string) $response->getBody(), false);
+            return ($responseData->status ?? '') === 'ok';
+        } catch (\Throwable $e) {
+            // Log error but don't expose to user
+            if (function_exists('bb_log')) {
+                bb_log("Yandex SmartCaptcha verification failed: {$e->getMessage()}" . LOG_LF);
+            }
+            // Return true on timeout/error (preserving original behavior)
             return true;
         }
-
-        $resp = json_decode($serverOutput);
-        return ($resp->status === 'ok');
     }
 }

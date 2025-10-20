@@ -60,16 +60,27 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
     public function check(): bool
     {
         $turnstileResponse = $_POST['cf-turnstile-response'] ?? '';
-        $postFields = "secret={$this->settings['secret_key']}&response=$turnstileResponse";
 
-        $ch = curl_init($this->verifyEndpoint);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-        $response = curl_exec($ch);
-        curl_close($ch);
+        try {
+            $response = httpClient()->post($this->verifyEndpoint, [
+                'form_params' => [
+                    'secret' => $this->settings['secret_key'],
+                    'response' => $turnstileResponse,
+                ],
+            ]);
 
-        $responseData = json_decode($response);
-        return $responseData->success;
+            if ($response->getStatusCode() !== 200) {
+                return false;
+            }
+
+            $responseData = json_decode((string) $response->getBody(), false);
+            return $responseData->success ?? false;
+        } catch (\Throwable $e) {
+            // Log error but don't expose to user
+            if (function_exists('bb_log')) {
+                bb_log("Cloudflare Turnstile verification failed: {$e->getMessage()}" . LOG_LF);
+            }
+            return false;
+        }
     }
 }

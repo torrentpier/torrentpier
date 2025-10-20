@@ -2350,20 +2350,23 @@ function infoByIP(string $ipAddress, int $port = 0): array
     if (!$data = CACHE('bb_ip2countries')->get($cacheName)) {
         $data = [];
 
-        $contextOptions = [];
-        if (!empty(config()->get('ip2country_settings.api_token'))) {
-            $contextOptions['http'] = [
-                'header' => "Authorization: Bearer " . config()->get('ip2country_settings.api_token') . "\r\n"
-            ];
-        }
-
-        $context = stream_context_create($contextOptions);
-
         try {
-            $response = file_get_contents(config()->get('ip2country_settings.endpoint') . $ipAddress, context: $context);
+            $requestOptions = [];
 
-            if ($response !== false) {
-                $json = json_decode($response, true);
+            // Add authorization header if API token is configured
+            if (!empty(config()->get('ip2country_settings.api_token'))) {
+                $requestOptions['headers'] = [
+                    'Authorization' => 'Bearer ' . config()->get('ip2country_settings.api_token')
+                ];
+            }
+
+            $response = httpClient()->get(
+                config()->get('ip2country_settings.endpoint') . $ipAddress,
+                $requestOptions
+            );
+
+            if ($response->getStatusCode() === 200) {
+                $json = json_decode((string) $response->getBody(), true);
 
                 if (is_array($json) && !empty($json)) {
                     $data = [
@@ -2374,7 +2377,7 @@ function infoByIP(string $ipAddress, int $port = 0): array
                     ];
                 }
             } else {
-                bb_log("[FreeIPAPI] Failed to get IP info for: $ipAddress" . LOG_LF);
+                bb_log("[FreeIPAPI] Failed to get IP info for: $ipAddress (HTTP {$response->getStatusCode()})" . LOG_LF);
             }
         } catch (Exception $e) {
             bb_log("[FreeIPAPI] " . $e->getMessage() . LOG_LF);

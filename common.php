@@ -132,6 +132,16 @@ function config(): \TorrentPier\Config
 }
 
 /**
+ * Get the HTTP Client instance
+ *
+ * @return \TorrentPier\Http\HttpClient
+ */
+function httpClient(): \TorrentPier\Http\HttpClient
+{
+    return \TorrentPier\Http\HttpClient::getInstance();
+}
+
+/**
  * Get the Censor instance
  *
  * @return \TorrentPier\Censor
