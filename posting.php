@@ -416,9 +416,6 @@ if (($delete || $mode == 'delete') && !$confirm) {
             }
         }
 
-        // Update atom feed
-        update_atom('topic', $topic_id);
-
         if ($mode == 'reply' && $post_info['topic_status'] == TOPIC_LOCKED) {
             $locked_warn = '
 				<div class="warnColor1">

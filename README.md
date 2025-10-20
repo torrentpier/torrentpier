@@ -109,7 +109,7 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
    ```
 7. Provide write permissions to the specified folders:
    * `data/avatars`, `data/uploads`, `data/uploads/thumbs`
-   * `internal_data/atom`, `internal_data/cache`, `internal_data/log`, `internal_data/triggers`
+   * `internal_data/cache`, `internal_data/log`, `internal_data/triggers`
    * `sitemap`
 8. Voila! ✨
 

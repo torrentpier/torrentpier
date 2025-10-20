@@ -55,9 +55,6 @@ switch ($this->request['type']) {
             }
             \TorrentPier\Legacy\Admin\Common::post_delete($post_id);
 
-            // Update atom feed
-            update_atom('topic', (int)$this->request['topic_id']);
-
             $this->response['hide'] = true;
             $this->response['post_id'] = $post_id;
         } else {
@@ -144,9 +141,6 @@ switch ($this->request['type']) {
             } else {
                 $this->ajax_die($lang['EMPTY_MESSAGE']);
             }
-
-            // Update atom feed
-            update_atom('topic', (int)$this->request['topic_id']);
 
             $this->response['html'] = bbcode2html($text);
         } else {
@@ -279,9 +273,6 @@ switch ($this->request['type']) {
             $notify = !empty($this->request['notify']);
             \TorrentPier\Legacy\Post::user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
         }
-
-        // Update atom feed
-        update_atom('topic', (int)$this->request['topic_id']);
 
         // Manticore [Post create]
         sync_post_to_manticore($post_id, $message, $post['topic_title'], $topic_id, $post['forum_id']);
