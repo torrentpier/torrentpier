@@ -53,8 +53,7 @@ $(function(){
 });
 </script>
 
-<form id="feed-form" method="post" action="feed.php" target="_blank" style="display: none;">
-	<input type="hidden" name="mode" value="get_feed_url">
+<form id="feed-form" method="get" action="feed.php" target="_blank" style="display: none;">
 	<input type="hidden" name="type" value="{#POST_FORUM_URL#}">
 	<input id="feed-id" type="hidden" name="id" value="">
 </form>

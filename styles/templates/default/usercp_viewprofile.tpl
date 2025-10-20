@@ -374,7 +374,7 @@ ajax.callback.group_membership = function(data) {
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
 						[ <a href="{U_SEARCH_RELEASES}" class="med">{L_SEARCH_RELEASES}</a> ]
 						<!-- IF $bb_cfg['topic_notify_enabled'] --><!-- IF PROFILE_USER || IS_ADMIN -->[ <a href="{U_WATCHED_TOPICS}&{#POST_USERS_URL#}={PROFILE_USER_ID}" class="med">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF --><!-- ENDIF -->
-						[ <a title="{L_ATOM_SUBSCRIBE}" href="#" onclick="return post2url('feed.php', {mode: 'get_feed_url', type: 'u', id: {PROFILE_USER_ID}})">{FEED_IMG}</a> ]
+						[ <a title="{L_ATOM_SUBSCRIBE}" href="feed.php?type=u&id={PROFILE_USER_ID}" target="_blank">{FEED_IMG}</a> ]
 					</p>
 				</td>
 			</tr>

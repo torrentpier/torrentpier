@@ -427,11 +427,6 @@ class Common
         // Sync
         self::sync('forum', array_keys($sync_forums));
 
-        // Update atom feed
-        foreach ($atom_csv as $atom) {
-            update_atom('user', $atom);
-        }
-
         DB()->query("DROP TEMPORARY TABLE $tmp_delete_topics");
 
         return $deleted_topics_count;
@@ -713,14 +708,6 @@ class Common
         self::sync('forum', array_keys($sync_forums));
         self::sync('user_posts', $sync_users);
 
-        // Update atom feed
-        foreach ($sync_topics as $atom_topic) {
-            update_atom('topic', $atom_topic);
-        }
-        foreach ($sync_users as $atom_user) {
-            update_atom('user', $atom_user);
-        }
-
         DB()->query("DROP TEMPORARY TABLE $tmp_delete_posts");
 
         return $deleted_posts_count;
@@ -816,10 +803,6 @@ class Common
         foreach (explode(',', $user_csv) as $user_id) {
             // Manticore [User Delete]
             sync_user_to_manticore($user_id, action: 'delete');
-
-            // Feed
-            $file_path = config()->get('atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
-            @unlink($file_path);
         }
 
         return true;

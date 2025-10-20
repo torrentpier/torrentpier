@@ -11,57 +11,63 @@ define('BB_SCRIPT', 'feed');
 
 require __DIR__ . '/common.php';
 
+use TorrentPier\Feed\Exception\FeedGenerationException;
+use TorrentPier\Feed\FeedGenerator;
+use TorrentPier\Feed\Provider\ForumFeedProvider;
+use TorrentPier\Feed\Provider\UserFeedProvider;
+
 // Init userdata
 $user->session_start(['req_login' => true]);
 
-$mode = $_REQUEST['mode'] ?? '';
-$type = $_POST['type'] ?? '';
-$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
-$timecheck = TIMENOW - 600;
+// Get request parameters
+$type = $_GET['type'] ?? '';
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-if (!$mode) {
-    bb_simple_die($lang['ATOM_NO_MODE']);
+// Validate type and ID
+if (!in_array($type, ['f', 'u'], true) || $id < 0) {
+    bb_simple_die(__('ATOM_ERROR'));
 }
 
-if ($mode === 'get_feed_url' && ($type === 'f' || $type === 'u') && $id >= 0) {
-    if ($type == 'f') {
-        // Check if the user has actually sent a forum ID
-        $sql = "SELECT allow_reg_tracker, forum_name FROM " . BB_FORUMS . " WHERE forum_id = $id LIMIT 1";
-        if (!$forum_data = DB()->fetch_row($sql)) {
-            if ($id == 0) {
-                $forum_data = [];
-            } else {
-                bb_simple_die($lang['ATOM_ERROR'] . ' #1');
-            }
-        }
-        if (is_file(config()->get('atom.path') . '/f/' . $id . '.atom') && filemtime(config()->get('atom.path') . '/f/' . $id . '.atom') > $timecheck) {
-            redirect(config()->get('atom.url') . '/f/' . $id . '.atom');
-        } else {
-            if (\TorrentPier\Legacy\Atom::update_forum_feed($id, $forum_data)) {
-                redirect(config()->get('atom.url') . '/f/' . $id . '.atom');
-            } else {
-                bb_simple_die($lang['ATOM_NO_FORUM']);
-            }
-        }
-    }
-    if ($type === 'u') {
-        // Check if the user has actually sent a user ID
+try {
+    $generator = FeedGenerator::getInstance();
+    $atomContent = '';
+
+    if ($type === 'f') {
+        // Forum feed
+        $provider = new ForumFeedProvider($id);
+        $atomContent = $generator->generate($provider);
+    } elseif ($type === 'u') {
+        // User feed
         if ($id < 1) {
-            bb_simple_die($lang['ATOM_ERROR'] . ' #2');
+            bb_simple_die(__('ATOM_ERROR'));
         }
-        if (!$username = get_username($id)) {
-            bb_simple_die($lang['ATOM_ERROR'] . ' #3');
+
+        $username = get_username($id);
+        if (!$username) {
+            bb_simple_die(__('NO_USER_ID_SPECIFIED'));
         }
-        if (is_file(config()->get('atom.path') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') && filemtime(config()->get('atom.path') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') > $timecheck) {
-            redirect(config()->get('atom.url') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
-        } else {
-            if (\TorrentPier\Legacy\Atom::update_user_feed($id, $username)) {
-                redirect(config()->get('atom.url') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
-            } else {
-                bb_simple_die($lang['ATOM_NO_USER']);
-            }
-        }
+
+        $provider = new UserFeedProvider($id, $username);
+        $atomContent = $generator->generate($provider);
     }
-} else {
-    bb_simple_die($lang['ATOM_ERROR'] . ' #4');
+
+    // Output Atom feed with proper headers
+    $cacheTtl = config()->get('atom.cache_ttl') ?? 600;
+    header('Content-Type: application/atom+xml; charset=UTF-8');
+    header('Cache-Control: public, max-age=' . $cacheTtl);
+    header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $cacheTtl) . ' GMT');
+
+    echo $atomContent;
+} catch (FeedGenerationException $e) {
+    // Show detailed error only to super admins
+    if (IS_SUPER_ADMIN) {
+        bb_simple_die('Feed generation error: ' . $e->getMessage());
+    }
+    bb_simple_die(__('ATOM_ERROR'));
+} catch (Throwable $e) {
+    // Catch any other unexpected errors
+    if (IS_SUPER_ADMIN) {
+        bb_simple_die('Unexpected error: ' . $e->getMessage());
+    }
+    bb_simple_die(__('ATOM_ERROR'));
 }

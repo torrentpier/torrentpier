@@ -315,7 +315,7 @@ $template->assign_vars([
     'U_SEARCH_SELF_BY_MY' => "search.php?uid={$userdata['user_id']}&amp;o=1",
     'U_SEARCH_LATEST' => 'search.php?search_id=latest',
     'U_SEARCH_UNANSWERED' => 'search.php?search_id=unanswered',
-    'U_ATOM_FEED' => is_file(config()->get('atom.path') . '/f/0.atom') ? make_url(config()->get('atom.url') . '/f/0.atom') : false,
+    'U_ATOM_FEED' => make_url('feed.php?type=f&id=0'),
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
     'BOARD_START' => config()->get('show_board_start_index') ? ($lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date(config()->get('board_startdate')) . '</b>') : false,
