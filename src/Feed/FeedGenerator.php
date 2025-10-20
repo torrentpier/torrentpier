@@ -12,8 +12,12 @@ declare(strict_types=1);
 namespace TorrentPier\Feed;
 
 use Exception;
+use FeedIo\Adapter\Http\Client;
 use FeedIo\Feed;
 use FeedIo\FeedIo;
+use Http\Discovery\Psr18ClientDiscovery;
+use Psr\Log\NullLogger;
+use Throwable;
 use TorrentPier\Feed\Exception\FeedGenerationException;
 use TorrentPier\Feed\Provider\FeedProviderInterface;
 
@@ -21,7 +25,7 @@ use TorrentPier\Feed\Provider\FeedProviderInterface;
  * Feed generator (singleton)
  * Generates Atom feeds using a feed-io library with caching support
  */
-class FeedGenerator
+final class FeedGenerator
 {
     private static ?self $instance = null;
     private FeedIo $feedIo;
@@ -32,13 +36,13 @@ class FeedGenerator
     private function __construct()
     {
         // Find PSR-18 HTTP client
-        $psr18Client = \Http\Discovery\Psr18ClientDiscovery::find();
+        $psr18Client = Psr18ClientDiscovery::find();
 
         // Wrap PSR-18 client in FeedIo adapter
-        $client = new \FeedIo\Adapter\Http\Client($psr18Client);
+        $client = new Client($psr18Client);
 
         // Create a logger (use NullLogger to avoid dependencies)
-        $logger = new \Psr\Log\NullLogger();
+        $logger = new NullLogger();
 
         // Create a FeedIo instance
         $this->feedIo = new FeedIo($client, $logger);
@@ -60,7 +64,7 @@ class FeedGenerator
 
     /**
      * Generate Atom feed from a provider
-     * Results are cached for performance
+     * Results are cached for performance unless TTL is 0 or negative
      *
      * @param FeedProviderInterface $provider Feed data provider
      * @return string Atom XML string
@@ -68,10 +72,15 @@ class FeedGenerator
      */
     public function generate(FeedProviderInterface $provider): string
     {
-        $cacheKey = $provider->getCacheKey();
-        $cacheTtl = config()->get('atom.cache_ttl') ?? 600; // Default 10 minutes
-
         try {
+            $cacheTtl = config()->get('atom.cache_ttl') ?? 600; // Default 10 minutes
+
+            // If TTL is 0 or negative, disable caching (always generate fresh)
+            if ($cacheTtl <= 0) {
+                return $this->generateFeed($provider);
+            }
+
+            $cacheKey = $provider->getCacheKey();
             $cache = CACHE('bb_cache');
 
             // Try to get from the cache
@@ -82,7 +91,7 @@ class FeedGenerator
             }
 
             return $cached;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             throw new FeedGenerationException(
                 "Failed to generate feed: " . $e->getMessage(),
                 0,
