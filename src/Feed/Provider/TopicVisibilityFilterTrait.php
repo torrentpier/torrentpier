@@ -24,18 +24,33 @@ trait TopicVisibilityFilterTrait
      */
     private function filterForbiddenTopics(array $topics): array
     {
-        global $datastore;
-
-        // Get forbidden forums for guests
-        if (!$forums = $datastore->get('cat_forums')) {
-            $datastore->update('cat_forums');
-            $forums = $datastore->get('cat_forums');
+        // Get forbidden forums for guests using datastore helper
+        $forums = datastore()->get('cat_forums');
+        if (!$forums) {
+            datastore()->update('cat_forums');
+            $forums = datastore()->get('cat_forums');
         }
-        $notForumsId = explode(',', $forums['not_auth_forums']['guest_view'] ?? '');
 
-        // Filter out topics from forbidden forums using forum_id
+        // Get guest_view string, default to empty
+        $guestView = $forums['not_auth_forums']['guest_view'] ?? '';
+
+        // Explode and cast to int array (empty string produces empty array)
+        $notForumsId = $guestView !== ''
+            ? array_map('intval', explode(',', $guestView))
+            : [];
+
+        // If no forbidden forums, return all topics
+        if (empty($notForumsId)) {
+            return $topics;
+        }
+
+        // Filter out topics from forbidden forums
         return array_filter($topics, function ($topic) use ($notForumsId) {
-            return !in_array($topic['forum_id'], $notForumsId, true);
+            // Get forum_id as int, default to 0 if missing
+            $forumId = isset($topic['forum_id']) ? (int)$topic['forum_id'] : 0;
+
+            // Keep topic if its forum is NOT in forbidden list (non-strict comparison)
+            return !in_array($forumId, $notForumsId, false);
         });
     }
 }
