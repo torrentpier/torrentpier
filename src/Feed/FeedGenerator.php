@@ -155,10 +155,10 @@ final class FeedGenerator
 
     /**
      * Prevent unserialization
-     * @throws Exception
+     * @throws \LogicException
      */
     public function __wakeup()
     {
-        throw new Exception("Cannot unserialize singleton");
+        throw new \LogicException('Cannot unserialize singleton');
     }
 }
