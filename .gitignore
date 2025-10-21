@@ -49,3 +49,5 @@ $RECYCLE.BIN/
 .Trashes
 *.orig
 *.rej
+
+docker-compose.local.yml
