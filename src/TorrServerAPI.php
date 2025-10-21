@@ -9,10 +9,9 @@
 
 namespace TorrentPier;
 
-use Curl\Curl;
-use CURLFile;
-
 use stdClass;
+use TorrentPier\Http\HttpClient;
+use TorrentPier\Http\Exception\HttpClientException;
 
 /**
  * Class TorrServerAPI
@@ -26,6 +25,13 @@ class TorrServerAPI
      * @var string
      */
     private string $url;
+
+    /**
+     * HTTP client instance
+     *
+     * @var HttpClient
+     */
+    private HttpClient $httpClient;
 
     /**
      * Endpoints list
@@ -53,6 +59,9 @@ class TorrServerAPI
     public function __construct()
     {
         $this->url = rtrim(trim(config()->get('torr_server.url')), '/') . '/';
+        $this->httpClient = HttpClient::getInstance([
+            'timeout' => config()->get('torr_server.timeout')
+        ]);
     }
 
     /**
@@ -69,23 +78,31 @@ class TorrServerAPI
             return false;
         }
 
-        $curl = new Curl();
-        $curl->setTimeout(config()->get('torr_server.timeout'));
+        try {
+            $response = $this->httpClient->post($this->url . $this->endpoints['upload'], [
+                'headers' => [
+                    'Accept' => 'application/json'
+                ],
+                'multipart' => [
+                    [
+                        'name' => 'file',
+                        'contents' => fopen($path, 'r'),
+                        'filename' => basename($path),
+                        'headers' => ['Content-Type' => $mimetype]
+                    ]
+                ]
+            ]);
 
-        $curl->setHeaders([
-            'Accept' => 'application/json',
-            'Content-Type' => 'multipart/form-data'
-        ]);
-        $curl->post($this->url . $this->endpoints['upload'], [
-            'file' => new CURLFile($path, $mimetype)
-        ]);
-        $isSuccess = $curl->httpStatusCode === 200;
-        if (!$isSuccess) {
-            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}" . LOG_LF);
+            $isSuccess = $response->getStatusCode() === 200;
+            if (!$isSuccess) {
+                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$response->getStatusCode()} | Content: {$response->getBody()->getContents()}" . LOG_LF);
+            }
+
+            return $isSuccess;
+        } catch (HttpClientException $e) {
+            bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
+            return false;
         }
-        $curl->close();
-
-        return $isSuccess;
     }
 
     /**
@@ -108,35 +125,41 @@ class TorrServerAPI
             }
         }
 
-        $curl = new Curl();
-        $curl->setTimeout(config()->get('torr_server.timeout'));
+        try {
+            $response = $this->httpClient->get($this->url . $this->endpoints['playlist'], [
+                'headers' => [
+                    'Accept' => 'audio/x-mpegurl'
+                ],
+                'query' => ['hash' => $hash]
+            ]);
 
-        $curl->setHeader('Accept', 'audio/x-mpegurl');
-        $curl->get($this->url . $this->endpoints['playlist'], ['hash' => $hash]);
-        if ($curl->httpStatusCode === 200 && !empty($curl->response)) {
-            // Validate response
-            $validResponse = false;
-            $responseLines = explode("\n", $curl->response);
-            foreach ($responseLines as $line) {
-                $line = trim($line);
-                if ($line === '') {
-                    continue;
+            $responseBody = $response->getBody()->getContents();
+            if ($response->getStatusCode() === 200 && !empty($responseBody)) {
+                // Validate response
+                $validResponse = false;
+                $responseLines = explode("\n", $responseBody);
+                foreach ($responseLines as $line) {
+                    $line = trim($line);
+                    if ($line === '') {
+                        continue;
+                    }
+
+                    if (str_starts_with($line, '#EXTINF')) {
+                        $validResponse = true;
+                        break;
+                    }
                 }
 
-                if (str_starts_with($line, '#EXTINF')) {
-                    $validResponse = true;
-                    break;
+                // Store M3U file
+                if ($validResponse && !is_file($m3uFile)) {
+                    file_put_contents($m3uFile, $responseBody);
                 }
+            } else {
+                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$response->getStatusCode()} | Content: {$responseBody}" . LOG_LF);
             }
-
-            // Store M3U file
-            if ($validResponse && !is_file($m3uFile)) {
-                file_put_contents($m3uFile, $curl->response);
-            }
-        } else {
-            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}" . LOG_LF);
+        } catch (HttpClientException $e) {
+            bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
         }
-        $curl->close();
 
         return is_file($m3uFile) && (int)filesize($m3uFile) > 0;
     }
@@ -205,42 +228,52 @@ class TorrServerAPI
                 }
             }
 
-            $curl = new Curl();
-            $curl->setTimeout(config()->get('torr_server.timeout'));
+            try {
+                $httpResponse = $this->httpClient->get($this->url . $this->endpoints['ffprobe'] . '/' . $hash . '/' . $index, [
+                    'headers' => [
+                        'Accept' => 'application/json'
+                    ]
+                ]);
 
-            $curl->setHeader('Accept', 'application/json');
-            $curl->get($this->url . $this->endpoints['ffprobe'] . '/' . $hash . '/' . $index);
-            $response->{$index} = $curl->response;
-            if ($curl->httpStatusCode === 200 && !empty($response->{$index})) {
-                CACHE('tr_cache')->set("ffprobe_m3u_$attach_id", $response, 3600);
-            } else {
-                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode}" . LOG_LF);
+                $response->{$index} = $httpResponse->getBody()->getContents();
+                if ($httpResponse->getStatusCode() === 200 && !empty($response->{$index})) {
+                    CACHE('tr_cache')->set("ffprobe_m3u_$attach_id", $response, 3600);
+                } else {
+                    bb_log("TorrServer (ERROR) [$this->url]: Response code: {$httpResponse->getStatusCode()}" . LOG_LF);
+                }
+            } catch (HttpClientException $e) {
+                bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
             }
-            $curl->close();
         }
 
         return $response;
     }
 
     /**
-     * Up stream
+     * Upstream
      *
      * @param string $hash
      * @return bool
      */
     private function getStream(string $hash): bool
     {
-        $curl = new Curl();
-        $curl->setTimeout(config()->get('torr_server.timeout'));
+        try {
+            $response = $this->httpClient->get($this->url . $this->endpoints['stream'], [
+                'headers' => [
+                    'Accept' => 'application/octet-stream'
+                ],
+                'query' => ['link' => $hash]
+            ]);
 
-        $curl->setHeader('Accept', 'application/octet-stream');
-        $curl->get($this->url . $this->endpoints['stream'], ['link' => $hash]);
-        $isSuccess = $curl->httpStatusCode === 200;
-        if (!$isSuccess) {
-            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}" . LOG_LF);
+            $isSuccess = $response->getStatusCode() === 200;
+            if (!$isSuccess) {
+                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$response->getStatusCode()} | Content: {$response->getBody()->getContents()}" . LOG_LF);
+            }
+
+            return $isSuccess;
+        } catch (HttpClientException $e) {
+            bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
+            return false;
         }
-        $curl->close();
-
-        return $isSuccess;
     }
 }
