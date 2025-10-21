@@ -11,6 +11,7 @@ namespace TorrentPier\Cache;
 
 use Exception;
 use InvalidArgumentException;
+use Throwable;
 use Nette\Caching\Storage;
 use Nette\Caching\Storages\FileStorage;
 use Nette\Caching\Storages\MemcachedStorage;
@@ -72,7 +73,12 @@ class UnifiedCacheSystem
     {
         if (self::$instance === null) {
             if ($cfg === null) {
-                throw new InvalidArgumentException('Configuration must be provided on first initialization');
+                // Fallback to global config if available
+                $cfg = function_exists('config') ? config()->all() : [];
+
+                if (empty($cfg)) {
+                    throw new InvalidArgumentException('Configuration must be provided on first initialization');
+                }
             }
             self::$instance = new self($cfg);
         }
@@ -121,7 +127,7 @@ class UnifiedCacheSystem
                             'engine' => $this->_getEngineType($cache_type),
                             'prefix' => $this->cfg['prefix'] ?? 'tp_'
                         ];
-                    } catch (Exception $e) {
+                    } catch (Throwable $e) {
                         // Log error and fallback to file storage
                         error_log("Failed to initialize {$cache_type} storage for {$cache_name}: " . $e->getMessage());
 
@@ -217,12 +223,16 @@ class UnifiedCacheSystem
             case 'memcached':
                 $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
                 $host = $memcachedConfig['host'] ?? '127.0.0.1';
-                $port = $memcachedConfig['port'] ?? 11211;
+                $port = (int)($memcachedConfig['port'] ?? 11211);
 
                 $storage = new MemcachedStorage($host, $port);
 
-                // Verify memcached is actually reachable
+                // Set connection timeout to avoid hanging on unreachable server
                 $connection = $storage->getConnection();
+                $connection->setOption(\Memcached::OPT_CONNECT_TIMEOUT, 100); // 100ms
+                $connection->setOption(\Memcached::OPT_POLL_TIMEOUT, 100); // 100ms
+
+                // Verify memcached is actually reachable
                 $stats = $connection->getStats();
 
                 if (empty($stats)) {
@@ -300,12 +310,16 @@ class UnifiedCacheSystem
             case 'memcached':
                 $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
                 $host = $memcachedConfig['host'] ?? '127.0.0.1';
-                $port = $memcachedConfig['port'] ?? 11211;
+                $port = (int)($memcachedConfig['port'] ?? 11211);
 
                 $storage = new MemcachedStorage($host, $port);
 
-                // Verify memcached is actually reachable
+                // Set connection timeout to avoid hanging on unreachable server
                 $connection = $storage->getConnection();
+                $connection->setOption(\Memcached::OPT_CONNECT_TIMEOUT, 100); // 100ms
+                $connection->setOption(\Memcached::OPT_POLL_TIMEOUT, 100); // 100ms
+
+                // Verify memcached is actually reachable
                 $stats = $connection->getStats();
 
                 if (empty($stats)) {
