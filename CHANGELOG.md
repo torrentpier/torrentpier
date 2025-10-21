@@ -6,12 +6,16 @@
 
 ### 🚀 Features
 
+- *(email)* Migrate email templates from HTML placeholders to Twig ([#2198](https://github.com/torrentpier/torrentpier/pull/2198)) - ([3a29494](https://github.com/torrentpier/torrentpier/commit/3a29494ba13326975ab7f382873783bb9c4394c0))
 - *(ranks)* Add visual image selector for rank administration ([#2189](https://github.com/torrentpier/torrentpier/pull/2189)) - ([4df9d0d](https://github.com/torrentpier/torrentpier/commit/4df9d0dc827cbd6591494a19390964082e009bf0))
+- [**breaking**] Modernize Atom feed generation with dynamic on-the-fly rendering ([#2200](https://github.com/torrentpier/torrentpier/pull/2200)) - ([8b45e8d](https://github.com/torrentpier/torrentpier/commit/8b45e8d446a280a59b20a61819b1992babdc0102))
 - Implement comprehensive dark mode with user preference persistence ([#2179](https://github.com/torrentpier/torrentpier/pull/2179)) - ([c77b2ff](https://github.com/torrentpier/torrentpier/commit/c77b2fffda24ff6b475aa9f0f578c04067e24668))
 
 ### 🐛 Bug Fixes
 
 - *(admin)* Prevent error when managing permissions with no forums ([#2190](https://github.com/torrentpier/torrentpier/pull/2190)) - ([ed6b0d1](https://github.com/torrentpier/torrentpier/commit/ed6b0d13a2697912062a194427e49d95838c4736))
+- *(email)* Improve grammar, punctuation, and consistency in email templates - ([c384ba5](https://github.com/torrentpier/torrentpier/commit/c384ba5db7e3daf6bdd94e57339e8cdd54d162ab))
+- *(email)* Correct punctuation in topic notification template - ([f41761e](https://github.com/torrentpier/torrentpier/commit/f41761e71e36160aba995456785fba265b1b5435))
 - *(ranks)* Remove unnecessary user_rank reset on rank save ([#2188](https://github.com/torrentpier/torrentpier/pull/2188)) - ([afb2606](https://github.com/torrentpier/torrentpier/commit/afb2606549cb8415b379c2c38306fd0eff4ee57f))
 
 ### 📦 Dependencies
@@ -44,6 +48,8 @@
 
 - *(i18n)* Update country list to use configuration and expand translation grouping logic - ([fb74d40](https://github.com/torrentpier/torrentpier/commit/fb74d406cacb88a282eafde1818458601ad10f47))
 - *(i18n)* Standardize and improve grammar, spelling, and consistency across language strings in main.php ([#2195](https://github.com/torrentpier/torrentpier/pull/2195)) - ([df5d213](https://github.com/torrentpier/torrentpier/commit/df5d21336fb6bed2baf7a9c73f6ea58a298c682a))
+- *(language)* Update composer.lock for 'league/flysystem' and 'torrentpier/translations' dependencies to latest versions - ([81eb9bb](https://github.com/torrentpier/torrentpier/commit/81eb9bb77876407f1e464e02af38da717604d2ec))
+- *(language)* Update composer.lock for updated dependencies (translations and webmozart/assert) - ([4bcb45d](https://github.com/torrentpier/torrentpier/commit/4bcb45d2bf7386c60629375a6f64e6e4854275bd))
 - *(language)* Update torrentpier/translations to latest reference in composer.lock - ([320a3ca](https://github.com/torrentpier/torrentpier/commit/320a3cac18efeafc0428dbdcfe4347e28291a191))
 - Remove ICQ and Skype user fields and associated references ([#2194](https://github.com/torrentpier/torrentpier/pull/2194)) - ([f61d925](https://github.com/torrentpier/torrentpier/commit/f61d925f1c1728585327e8745bb5b9f5451809cb))
 
