@@ -18,8 +18,8 @@ $reserved_port = env('TP_PORT', 80);
 $bb_cfg = [];
 
 // Version info
-$bb_cfg['tp_version'] = 'v2.8.7';
-$bb_cfg['tp_release_date'] = '10-10-2025';
+$bb_cfg['tp_version'] = 'v2.8.8';
+$bb_cfg['tp_release_date'] = '21-10-2025';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
 // Increase version number after changing JS or CSS

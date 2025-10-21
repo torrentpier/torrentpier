@@ -2,10 +2,11 @@
 
 # 📖 Change Log
 
-## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/master/TorrentPier-master)
+## [v2.8.8](https://github.com/torrentpier/torrentpier/compare/v2.8.7..v2.8.8) (2025-10-21)
 
 ### 🚀 Features
 
+- *(cache)* Add memcached support with automatic fallback to file storage ([#2205](https://github.com/torrentpier/torrentpier/pull/2205)) - ([0894274](https://github.com/torrentpier/torrentpier/commit/0894274ae81a20f6fcd9d1ff3f3577848e0a6a5a))
 - *(email)* Migrate email templates from HTML placeholders to Twig ([#2198](https://github.com/torrentpier/torrentpier/pull/2198)) - ([3a29494](https://github.com/torrentpier/torrentpier/commit/3a29494ba13326975ab7f382873783bb9c4394c0))
 - *(ranks)* Add visual image selector for rank administration ([#2189](https://github.com/torrentpier/torrentpier/pull/2189)) - ([4df9d0d](https://github.com/torrentpier/torrentpier/commit/4df9d0dc827cbd6591494a19390964082e009bf0))
 - [**breaking**] Modernize Atom feed generation with dynamic on-the-fly rendering ([#2200](https://github.com/torrentpier/torrentpier/pull/2200)) - ([8b45e8d](https://github.com/torrentpier/torrentpier/commit/8b45e8d446a280a59b20a61819b1992babdc0102))
@@ -14,6 +15,7 @@
 ### 🐛 Bug Fixes
 
 - *(admin)* Prevent error when managing permissions with no forums ([#2190](https://github.com/torrentpier/torrentpier/pull/2190)) - ([ed6b0d1](https://github.com/torrentpier/torrentpier/commit/ed6b0d13a2697912062a194427e49d95838c4736))
+- *(database)* Prevent connection destruction during shutdown functions ([#2206](https://github.com/torrentpier/torrentpier/pull/2206)) - ([6fbe294](https://github.com/torrentpier/torrentpier/commit/6fbe294c4ea983c8df927bedc3645eb3b5234555))
 - *(email)* Improve grammar, punctuation, and consistency in email templates - ([c384ba5](https://github.com/torrentpier/torrentpier/commit/c384ba5db7e3daf6bdd94e57339e8cdd54d162ab))
 - *(email)* Correct punctuation in topic notification template - ([f41761e](https://github.com/torrentpier/torrentpier/commit/f41761e71e36160aba995456785fba265b1b5435))
 - *(ranks)* Remove unnecessary user_rank reset on rank save ([#2188](https://github.com/torrentpier/torrentpier/pull/2188)) - ([afb2606](https://github.com/torrentpier/torrentpier/commit/afb2606549cb8415b379c2c38306fd0eff4ee57f))
@@ -38,6 +40,9 @@
 - *(i18n)* Move country list to configuration and optimize flag rendering logic ([#2193](https://github.com/torrentpier/torrentpier/pull/2193)) - ([5f1209c](https://github.com/torrentpier/torrentpier/commit/5f1209c9c6a3e0717ed480f8fd92f7b57e16d7a7))
 - *(i18n)* Improve language strings and dynamic registration intervals ([#2192](https://github.com/torrentpier/torrentpier/pull/2192)) - ([245378d](https://github.com/torrentpier/torrentpier/commit/245378d063583855ea6e4fd19a0aeebe888c70f1))
 - *(i18n)* Migrate from Crowdin to translation package system ([#2191](https://github.com/torrentpier/torrentpier/pull/2191)) - ([fdc0798](https://github.com/torrentpier/torrentpier/commit/fdc07988f82af96bae20b1ff19c5351560667116))
+- Replace delta_time with humanTime using Carbon library ([#2204](https://github.com/torrentpier/torrentpier/pull/2204)) - ([f2139ab](https://github.com/torrentpier/torrentpier/commit/f2139abea9c8d2b0fbdc0217d447b5f7ef302cf4))
+- Replace php-curl-class with centralized HttpClient in TorrServerAPI ([#2202](https://github.com/torrentpier/torrentpier/pull/2202)) - ([dd518af](https://github.com/torrentpier/torrentpier/commit/dd518af918e91bcfa8cbb92f66d6f56078050647))
+- Introduce centralized HTTP client with Guzzle integration ([#2201](https://github.com/torrentpier/torrentpier/pull/2201)) - ([077e4ce](https://github.com/torrentpier/torrentpier/commit/077e4ce5b4f2111b2d1948f68d0403f2f96d507b))
 
 ### 🧪 Testing
 
@@ -48,6 +53,7 @@
 
 - *(i18n)* Update country list to use configuration and expand translation grouping logic - ([fb74d40](https://github.com/torrentpier/torrentpier/commit/fb74d406cacb88a282eafde1818458601ad10f47))
 - *(i18n)* Standardize and improve grammar, spelling, and consistency across language strings in main.php ([#2195](https://github.com/torrentpier/torrentpier/pull/2195)) - ([df5d213](https://github.com/torrentpier/torrentpier/commit/df5d21336fb6bed2baf7a9c73f6ea58a298c682a))
+- *(language)* Update composer.lock to latest translations reference - ([f5d270b](https://github.com/torrentpier/torrentpier/commit/f5d270b9f834b2c052f0a8cee6f25fb941a0a8ed))
 - *(language)* Update composer.lock for 'league/flysystem' and 'torrentpier/translations' dependencies to latest versions - ([81eb9bb](https://github.com/torrentpier/torrentpier/commit/81eb9bb77876407f1e464e02af38da717604d2ec))
 - *(language)* Update composer.lock for updated dependencies (translations and webmozart/assert) - ([4bcb45d](https://github.com/torrentpier/torrentpier/commit/4bcb45d2bf7386c60629375a6f64e6e4854275bd))
 - *(language)* Update torrentpier/translations to latest reference in composer.lock - ([320a3ca](https://github.com/torrentpier/torrentpier/commit/320a3cac18efeafc0428dbdcfe4347e28291a191))
