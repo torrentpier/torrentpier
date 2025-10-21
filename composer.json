@@ -65,7 +65,6 @@
     "monolog/monolog": "^3.4",
     "nette/caching": "^3.3",
     "nette/database": "^3.2",
-    "php-curl-class/php-curl-class": "^12.0.0",
     "php-feed-io/feed-io": "^6.1",
     "php-http/guzzle7-adapter": "^1.1",
     "robmorgan/phinx": "^0.16.9",

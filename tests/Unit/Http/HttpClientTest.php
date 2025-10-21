@@ -378,6 +378,60 @@ describe('HttpClient Class', function () {
             expect(fn() => $this->httpClient->download('https://example.com/file.txt', $this->testFile))
                 ->toThrow(HttpClientException::class);
         });
+
+        it('downloads file with progress callback', function () {
+            $fileContent = str_repeat('A', 1000); // 1KB of data
+            $this->mockHandler->append(new Response(200, [], $fileContent));
+
+            $result = $this->httpClient->downloadWithProgress(
+                'https://example.com/file.txt',
+                $this->testFile,
+                function ($percent, $downloaded, $total) {
+                    // Note: MockHandler doesn't trigger progress callbacks
+                    // This just validates the callback signature is correct
+                }
+            );
+
+            // File should be downloaded successfully even with a progress callback
+            expect($result)->toBeTrue()
+                ->and(file_exists($this->testFile))->toBeTrue()
+                ->and(file_get_contents($this->testFile))->toBe($fileContent);
+        });
+
+        it('downloads file without progress callback', function () {
+            $this->mockHandler->append(new Response(200, [], 'File content without callback'));
+
+            $result = $this->httpClient->downloadWithProgress(
+                'https://example.com/file.txt',
+                $this->testFile
+            );
+
+            expect($result)->toBeTrue()
+                ->and(file_exists($this->testFile))->toBeTrue()
+                ->and(file_get_contents($this->testFile))->toBe('File content without callback');
+        });
+
+        it('handles download with progress exceptions', function () {
+            $request = new Request('GET', 'https://example.com');
+            $this->mockHandler->append(new ConnectException('Connection failed', $request));
+
+            expect(fn() => $this->httpClient->downloadWithProgress(
+                'https://example.com/file.txt',
+                $this->testFile,
+                function ($percent, $downloaded, $total) {
+                    // Progress callback
+                }
+            ))->toThrow(HttpClientException::class);
+        });
+
+        it('throws exception on failed download with progress', function () {
+            $this->mockHandler->append(new Response(404, [], 'Not Found'));
+
+            expect(fn() => $this->httpClient->downloadWithProgress(
+                'https://example.com/notfound.txt',
+                $this->testFile
+            ))->toThrow(HttpClientException::class);
+        });
     });
 
     describe('Configuration', function () {

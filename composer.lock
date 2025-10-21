@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f0eb4fc4a50aad1dc2284cd23fa9b54",
+    "content-hash": "ae20f6262ba8a904f1d0816182e88e3d",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -2608,86 +2608,6 @@
                 }
             ],
             "time": "2024-09-09T07:06:30+00:00"
-        },
-        {
-            "name": "php-curl-class/php-curl-class",
-            "version": "12.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "7a8f05efb18bb865dbce864b8fd34d4f5d920c74"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/7a8f05efb18bb865dbce864b8fd34d4f5d920c74",
-                "reference": "7a8f05efb18bb865dbce864b8fd34d4f5d920c74",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "php": ">=8.0"
-            },
-            "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "*",
-                "ext-gd": "*",
-                "friendsofphp/php-cs-fixer": "*",
-                "phpcompatibility/php-compatibility": "dev-develop",
-                "phpcsstandards/phpcsutils": "@alpha",
-                "phpstan/phpstan": "*",
-                "phpunit/phpunit": "*",
-                "squizlabs/php_codesniffer": "*"
-            },
-            "suggest": {
-                "ext-mbstring": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Curl\\": "src/Curl/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Unlicense"
-            ],
-            "authors": [
-                {
-                    "name": "Zach Borboa"
-                },
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/php-curl-class/php-curl-class/graphs/contributors"
-                }
-            ],
-            "description": "PHP Curl Class makes it easy to send HTTP requests and integrate with web APIs.",
-            "homepage": "https://github.com/php-curl-class/php-curl-class",
-            "keywords": [
-                "API-Client",
-                "api",
-                "class",
-                "client",
-                "curl",
-                "framework",
-                "http",
-                "http-client",
-                "http-proxy",
-                "json",
-                "php",
-                "php-curl",
-                "php-curl-library",
-                "proxy",
-                "requests",
-                "restful",
-                "web-scraper",
-                "web-scraping ",
-                "web-service",
-                "xml"
-            ],
-            "support": {
-                "issues": "https://github.com/php-curl-class/php-curl-class/issues",
-                "source": "https://github.com/php-curl-class/php-curl-class/tree/12.0.0"
-            },
-            "time": "2025-03-25T18:04:16+00:00"
         },
         {
             "name": "php-feed-io/feed-io",
