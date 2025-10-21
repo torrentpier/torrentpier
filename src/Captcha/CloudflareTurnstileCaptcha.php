@@ -61,7 +61,11 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
      */
     public function check(): bool
     {
+        // Require token present - fail closed
         $turnstileResponse = $_POST['cf-turnstile-response'] ?? '';
+        if (empty($turnstileResponse)) {
+            return false;
+        }
 
         try {
             $response = httpClient()->post($this->verifyEndpoint, [
@@ -78,8 +82,20 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
                 return false;
             }
 
+            // Safely decode JSON with error checking
             $responseData = json_decode((string)$response->getBody(), false);
-            return $responseData->success ?? false;
+            if ($responseData === null || json_last_error() !== JSON_ERROR_NONE) {
+                bb_log("Cloudflare Turnstile verification failed: Invalid JSON response" . LOG_LF);
+                return false;
+            }
+
+            // Validate that the response contains the expected 'success' field
+            if (!isset($responseData->success)) {
+                bb_log("Cloudflare Turnstile verification failed: Missing 'success' field in response" . LOG_LF);
+                return false;
+            }
+
+            return $responseData->success === true;
         } catch (Throwable $e) {
             bb_log("Cloudflare Turnstile verification failed: {$e->getMessage()}" . LOG_LF);
             return false;

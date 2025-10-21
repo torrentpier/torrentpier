@@ -50,7 +50,7 @@ class HCaptcha implements CaptchaInterface
     {
         return "
         <div class='h-captcha' data-sitekey='{$this->settings['public_key']}' data-theme='" . ($this->settings['theme'] ?? 'light') . "'></div>
-        <script src='https://hcaptcha.com/1/api.js?hl={$this->settings['language']}' async defer></script>";
+        <script src='https://js.hcaptcha.com/1/api.js?hl={$this->settings['language']}' async defer></script>";
     }
 
     /**
@@ -60,11 +60,17 @@ class HCaptcha implements CaptchaInterface
      */
     public function check(): bool
     {
+        // Require token present - fail closed
+        $hcaptchaResponse = $_POST['h-captcha-response'] ?? '';
+        if (empty($hcaptchaResponse)) {
+            return false;
+        }
+
         try {
             $response = httpClient()->post($this->verifyEndpoint, [
                 'form_params' => [
                     'secret' => $this->settings['secret_key'],
-                    'response' => $_POST['h-captcha-response'] ?? null,
+                    'response' => $hcaptchaResponse,
                     'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
                 ],
                 'timeout' => 3,
@@ -75,8 +81,20 @@ class HCaptcha implements CaptchaInterface
                 return false;
             }
 
+            // Safely decode JSON with error checking
             $responseData = json_decode((string)$response->getBody(), false);
-            return $responseData->success ?? false;
+            if ($responseData === null || json_last_error() !== JSON_ERROR_NONE) {
+                bb_log("HCaptcha verification failed: Invalid JSON response" . LOG_LF);
+                return false;
+            }
+
+            // Validate that the response contains the expected 'success' field
+            if (!isset($responseData->success)) {
+                bb_log("HCaptcha verification failed: Missing 'success' field in response" . LOG_LF);
+                return false;
+            }
+
+            return $responseData->success === true;
         } catch (Throwable $e) {
             bb_log("HCaptcha verification failed: {$e->getMessage()}" . LOG_LF);
             return false;

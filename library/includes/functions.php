@@ -2349,6 +2349,7 @@ function infoByIP(string $ipAddress, int $port = 0): array
 
     if (!$data = CACHE('bb_ip2countries')->get($cacheName)) {
         $data = [];
+        $svc = parse_url((string)config()->get('ip2country_settings.endpoint'), PHP_URL_HOST) ?: 'ip2country';
 
         try {
             $requestOptions = [
@@ -2379,11 +2380,10 @@ function infoByIP(string $ipAddress, int $port = 0): array
                     ];
                 }
             } else {
-                $svc = parse_url((string)config()->get('ip2country_settings.endpoint'), PHP_URL_HOST) ?: 'ip2country';
                 bb_log("[$svc] Failed to get IP info for: $ipAddress (HTTP {$response->getStatusCode()})" . LOG_LF);
             }
         } catch (Exception $e) {
-            bb_log("[FreeIPAPI] " . $e->getMessage() . LOG_LF);
+            bb_log("[$svc] " . $e->getMessage() . LOG_LF);
         }
 
         if (empty($data)) {

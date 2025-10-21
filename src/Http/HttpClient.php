@@ -324,7 +324,7 @@ final class HttpClient
                 }
             }
 
-            // Exponential backoff: 1s, 2s, 4s, 8s, etc.
+            // Exponential backoff: 2s, 4s, 8s, etc.
             return (int)(1000 * (2 ** $retries));
         };
     }

@@ -81,8 +81,20 @@ class YandexSmartCaptcha implements CaptchaInterface
                 return false;
             }
 
+            // Safely decode JSON with error checking
             $responseData = json_decode((string)$response->getBody(), false);
-            return (($responseData->status ?? '') === 'ok');
+            if ($responseData === null || json_last_error() !== JSON_ERROR_NONE) {
+                bb_log("Yandex SmartCaptcha verification failed: Invalid JSON response" . LOG_LF);
+                return false;
+            }
+
+            // Validate that the response contains the expected 'status' field
+            if (!isset($responseData->status)) {
+                bb_log("Yandex SmartCaptcha verification failed: Missing 'status' field in response" . LOG_LF);
+                return false;
+            }
+
+            return $responseData->status === 'ok';
         } catch (Throwable $e) {
             bb_log("Yandex SmartCaptcha verification failed: {$e->getMessage()}" . LOG_LF);
             return false;
