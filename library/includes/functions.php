@@ -2349,35 +2349,41 @@ function infoByIP(string $ipAddress, int $port = 0): array
 
     if (!$data = CACHE('bb_ip2countries')->get($cacheName)) {
         $data = [];
-
-        $contextOptions = [];
-        if (!empty(config()->get('ip2country_settings.api_token'))) {
-            $contextOptions['http'] = [
-                'header' => "Authorization: Bearer " . config()->get('ip2country_settings.api_token') . "\r\n"
-            ];
-        }
-
-        $context = stream_context_create($contextOptions);
+        $svc = parse_url((string)config()->get('ip2country_settings.endpoint'), PHP_URL_HOST) ?: 'ip2country';
 
         try {
-            $response = file_get_contents(config()->get('ip2country_settings.endpoint') . $ipAddress, context: $context);
+            $requestOptions = [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+            ];
 
-            if ($response !== false) {
-                $json = json_decode($response, true);
+            // Add authorization header if API token is configured
+            if (!empty(config()->get('ip2country_settings.api_token'))) {
+                $requestOptions['headers']['Authorization'] = 'Bearer ' . config()->get('ip2country_settings.api_token');
+            }
+
+            $response = httpClient()->get(
+                config()->get('ip2country_settings.endpoint') . $ipAddress,
+                $requestOptions
+            );
+
+            if ($response->getStatusCode() === 200) {
+                $json = json_decode((string) $response->getBody(), true);
 
                 if (is_array($json) && !empty($json)) {
                     $data = [
-                        'ipVersion' => $json['ipVersion'],
-                        'countryCode' => $json['countryCode'],
-                        'continent' => $json['continent'],
-                        'continentCode' => $json['continentCode']
+                        'ipVersion' => $json['ipVersion'] ?? null,
+                        'countryCode' => $json['countryCode'] ?? null,
+                        'continent' => $json['continent'] ?? null,
+                        'continentCode' => $json['continentCode'] ?? null,
                     ];
                 }
             } else {
-                bb_log("[FreeIPAPI] Failed to get IP info for: $ipAddress" . LOG_LF);
+                bb_log("[$svc] Failed to get IP info for: $ipAddress (HTTP {$response->getStatusCode()})" . LOG_LF);
             }
         } catch (Exception $e) {
-            bb_log("[FreeIPAPI] " . $e->getMessage() . LOG_LF);
+            bb_log("[$svc] " . $e->getMessage() . LOG_LF);
         }
 
         if (empty($data)) {

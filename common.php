@@ -132,6 +132,16 @@ function config(): \TorrentPier\Config
 }
 
 /**
+ * Get the HTTP Client instance
+ *
+ * @return \TorrentPier\Http\HttpClient
+ */
+function httpClient(): \TorrentPier\Http\HttpClient
+{
+    return \TorrentPier\Http\HttpClient::getInstance();
+}
+
+/**
  * Get the Censor instance
  *
  * @return \TorrentPier\Censor
@@ -479,10 +489,12 @@ function sys(string $param)
 }
 
 /**
- * Some shared defines
+ * Some shared definitions
  */
 // Initialize demo mode
 define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
+// Initialize debug mode
+define('IN_DEBUG_MODE', env('APP_DEBUG_MODE', false));
 
 // Ratio status
 define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);
