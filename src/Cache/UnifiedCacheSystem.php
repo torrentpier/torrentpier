@@ -9,11 +9,14 @@
 
 namespace TorrentPier\Cache;
 
+use Exception;
+use InvalidArgumentException;
 use Nette\Caching\Storage;
 use Nette\Caching\Storages\FileStorage;
 use Nette\Caching\Storages\MemcachedStorage;
 use Nette\Caching\Storages\MemoryStorage;
 use Nette\Caching\Storages\SQLiteStorage;
+use RuntimeException;
 
 /**
  * Unified Cache System using Nette Caching
@@ -60,7 +63,7 @@ class UnifiedCacheSystem
     private ?CacheManager $stub = null;
 
     /**
-     * Get singleton instance
+     * Get a singleton instance
      *
      * @param array|null $cfg
      * @return self
@@ -69,7 +72,7 @@ class UnifiedCacheSystem
     {
         if (self::$instance === null) {
             if ($cfg === null) {
-                throw new \InvalidArgumentException('Configuration must be provided on first initialization');
+                throw new InvalidArgumentException('Configuration must be provided on first initialization');
             }
             self::$instance = new self($cfg);
         }
@@ -86,7 +89,7 @@ class UnifiedCacheSystem
     {
         $this->cfg = $cfg['cache'] ?? [];
 
-        // Create stub cache manager
+        // Create a stub cache manager
         $stubStorage = new MemoryStorage();
         $stubConfig = [
             'engine' => 'Memory',
@@ -96,7 +99,7 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Get cache manager instance (backward compatible with CACHE() function)
+     * Get a cache manager instance (backward compatible with CACHE() function)
      *
      * @param string $cache_name
      * @return CacheManager
@@ -112,11 +115,23 @@ class UnifiedCacheSystem
 
                 if (!isset($this->managers[$cache_name])) {
                     // Build storage and config directly
-                    $storage = $this->_buildStorage($cache_type, $cache_name);
-                    $config = [
-                        'engine' => $this->_getEngineType($cache_type),
-                        'prefix' => $this->cfg['prefix'] ?? 'tp_'
-                    ];
+                    try {
+                        $storage = $this->_buildStorage($cache_type, $cache_name);
+                        $config = [
+                            'engine' => $this->_getEngineType($cache_type),
+                            'prefix' => $this->cfg['prefix'] ?? 'tp_'
+                        ];
+                    } catch (Exception $e) {
+                        // Log error and fallback to file storage
+                        error_log("Failed to initialize {$cache_type} storage for {$cache_name}: " . $e->getMessage());
+
+                        // Fallback to file storage
+                        $storage = $this->_buildStorage('file', $cache_name);
+                        $config = [
+                            'engine' => 'File (fallback from ' . $cache_type . ')',
+                            'prefix' => $this->cfg['prefix'] ?? 'tp_'
+                        ];
+                    }
 
                     $this->managers[$cache_name] = CacheManager::getInstance($cache_name, $storage, $config);
                 }
@@ -128,7 +143,7 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Get datastore manager instance
+     * Get a datastore manager instance
      *
      * @param string $datastore_type
      * @return DatastoreManager
@@ -137,11 +152,23 @@ class UnifiedCacheSystem
     {
         if ($this->datastore === null) {
             // Build storage and config for datastore
-            $storage = $this->_buildDatastoreStorage($datastore_type);
-            $config = [
-                'engine' => $this->_getEngineType($datastore_type),
-                'prefix' => $this->cfg['prefix'] ?? 'tp_'
-            ];
+            try {
+                $storage = $this->_buildDatastoreStorage($datastore_type);
+                $config = [
+                    'engine' => $this->_getEngineType($datastore_type),
+                    'prefix' => $this->cfg['prefix'] ?? 'tp_'
+                ];
+            } catch (Exception $e) {
+                // Log error and fallback to file storage
+                error_log("Failed to initialize {$datastore_type} datastore storage: " . $e->getMessage());
+
+                // Fallback to file storage
+                $storage = $this->_buildDatastoreStorage('file');
+                $config = [
+                    'engine' => 'File (fallback from ' . $datastore_type . ')',
+                    'prefix' => $this->cfg['prefix'] ?? 'tp_'
+                ];
+            }
 
             $this->datastore = DatastoreManager::getInstance($storage, $config);
         }
@@ -150,7 +177,7 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Build storage instance directly (eliminates redundancy with CacheManager)
+     * Build a storage instance directly (eliminates redundancy with CacheManager)
      *
      * @param string $cache_type
      * @param string $cache_name
@@ -166,9 +193,9 @@ class UnifiedCacheSystem
                 // Some deprecated cache types will fall back to file storage
                 $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
 
-                // Create directory automatically using TorrentPier's bb_mkdir function
+                // Create a directory automatically using TorrentPier's bb_mkdir function
                 if (!is_dir($dir) && !bb_mkdir($dir)) {
-                    throw new \RuntimeException("Failed to create cache directory: $dir");
+                    throw new RuntimeException("Failed to create cache directory: $dir");
                 }
 
                 return new FileStorage($dir);
@@ -179,7 +206,7 @@ class UnifiedCacheSystem
                 // Create parent directory for SQLite file
                 $dbDir = dirname($dbFile);
                 if (!is_dir($dbDir) && !bb_mkdir($dbDir)) {
-                    throw new \RuntimeException("Failed to create cache directory for SQLite: $dbDir");
+                    throw new RuntimeException("Failed to create cache directory for SQLite: $dbDir");
                 }
 
                 return new SQLiteStorage($dbFile);
@@ -191,15 +218,26 @@ class UnifiedCacheSystem
                 $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
                 $host = $memcachedConfig['host'] ?? '127.0.0.1';
                 $port = $memcachedConfig['port'] ?? 11211;
-                return new MemcachedStorage("{$host}:{$port}");
+
+                $storage = new MemcachedStorage($host, $port);
+
+                // Verify memcached is actually reachable
+                $connection = $storage->getConnection();
+                $stats = $connection->getStats();
+
+                if (empty($stats)) {
+                    throw new RuntimeException("Memcached server at {$host}:{$port} is unreachable");
+                }
+
+                return $storage;
 
             default:
                 // Fallback to file storage
                 $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
 
-                // Create directory automatically using TorrentPier's bb_mkdir function
+                // Create a directory automatically using TorrentPier's bb_mkdir function
                 if (!is_dir($dir) && !bb_mkdir($dir)) {
-                    throw new \RuntimeException("Failed to create cache directory: $dir");
+                    throw new RuntimeException("Failed to create cache directory: $dir");
                 }
 
                 return new FileStorage($dir);
@@ -207,7 +245,7 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Get engine type name for debugging
+     * Get an engine type name for debugging
      *
      * @param string $cache_type
      * @return string
@@ -238,9 +276,9 @@ class UnifiedCacheSystem
                 // Some deprecated cache types will fall back to file storage
                 $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
 
-                // Create directory automatically using TorrentPier's bb_mkdir function
+                // Create a directory automatically using TorrentPier's bb_mkdir function
                 if (!is_dir($dir) && !bb_mkdir($dir)) {
-                    throw new \RuntimeException("Failed to create datastore directory: $dir");
+                    throw new RuntimeException("Failed to create datastore directory: $dir");
                 }
 
                 return new FileStorage($dir);
@@ -251,7 +289,7 @@ class UnifiedCacheSystem
                 // Create parent directory for SQLite file
                 $dbDir = dirname($dbFile);
                 if (!is_dir($dbDir) && !bb_mkdir($dbDir)) {
-                    throw new \RuntimeException("Failed to create datastore directory for SQLite: $dbDir");
+                    throw new RuntimeException("Failed to create datastore directory for SQLite: $dbDir");
                 }
 
                 return new SQLiteStorage($dbFile);
@@ -263,15 +301,26 @@ class UnifiedCacheSystem
                 $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
                 $host = $memcachedConfig['host'] ?? '127.0.0.1';
                 $port = $memcachedConfig['port'] ?? 11211;
-                return new MemcachedStorage("{$host}:{$port}");
+
+                $storage = new MemcachedStorage($host, $port);
+
+                // Verify memcached is actually reachable
+                $connection = $storage->getConnection();
+                $stats = $connection->getStats();
+
+                if (empty($stats)) {
+                    throw new RuntimeException("Memcached server at {$host}:{$port} is unreachable");
+                }
+
+                return $storage;
 
             default:
                 // Fallback to file storage
                 $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
 
-                // Create directory automatically using TorrentPier's bb_mkdir function
+                // Create a directory automatically using TorrentPier's bb_mkdir function
                 if (!is_dir($dir) && !bb_mkdir($dir)) {
-                    throw new \RuntimeException("Failed to create datastore directory: $dir");
+                    throw new RuntimeException("Failed to create datastore directory: $dir");
                 }
 
                 return new FileStorage($dir);
@@ -306,12 +355,10 @@ class UnifiedCacheSystem
     public function clearAll(): void
     {
         foreach ($this->managers as $manager) {
-            $manager->rm(); // Clear all items in namespace
+            $manager->rm(); // Clear all items in the namespace
         }
 
-        if ($this->datastore) {
-            $this->datastore->clean();
-        }
+        $this->datastore?->clean();
     }
 
     /**
@@ -373,12 +420,12 @@ class UnifiedCacheSystem
                 return $this->ref;
 
             default:
-                throw new \InvalidArgumentException("Property '$name' not found");
+                throw new InvalidArgumentException("Property '$name' not found");
         }
     }
 
     /**
-     * Create cache manager with advanced Nette features
+     * Create a cache manager with advanced Nette features
      *
      * @param string $namespace
      * @param array $config
@@ -401,7 +448,7 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Create cache with file dependencies
+     * Create a cache with file dependencies
      *
      * @param string $namespace
      * @param array $files
@@ -420,14 +467,14 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Create cache with tags support
+     * Create a cache with tags' support
      *
      * @param string $namespace
      * @return CacheManager
      */
     public function createTaggedCache(string $namespace): CacheManager
     {
-        // Use SQLite storage which supports tags via journal
+        // Use SQLite storage which supports tags via the journal
         $storage = $this->_buildStorage('sqlite', $namespace);
         $config = [
             'engine' => 'SQLite',
@@ -449,6 +496,6 @@ class UnifiedCacheSystem
      */
     public function __wakeup()
     {
-        throw new \Exception("Cannot unserialize a singleton.");
+        throw new Exception("Cannot unserialize a singleton.");
     }
 }

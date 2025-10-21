@@ -5,6 +5,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 RUN install-php-extensions \
     apcu \
     redis \
+    memcached \
     mbstring \
     mysqli \
     pdo_mysql \

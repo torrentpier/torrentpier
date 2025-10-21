@@ -57,8 +57,8 @@ $bb_cfg['cache'] = [
     'db_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
     'prefix' => 'tp_',
     'memcached' => [
-        'host' => '127.0.0.1',
-        'port' => 11211,
+        'host' => env('MEMCACHED_HOST', '127.0.0.1'),
+        'port' => env('MEMCACHED_PORT', 11211),
     ],
     // Available cache types: file, sqlite, memory, memcached (file by default)
     'engines' => [
