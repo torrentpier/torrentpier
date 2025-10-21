@@ -519,7 +519,7 @@ $template->assign_vars([
     'SESSION_ADMIN' => $userdata['session_admin'],
     'MOD_REDIRECT_URL' => $mod_redirect_url,
     'MODERATION_ON' => $moderation,
-    'PRUNE_DAYS' => !empty($forum_data['prune_days']) ? delta_time((TIMENOW - 86400 * $forum_data['prune_days']), TIMENOW, 'days') : false,
+    'PRUNE_DAYS' => !empty($forum_data['prune_days']) ? humanTime((TIMENOW - 86400 * $forum_data['prune_days']), TIMENOW) : false,
 
     'CAT_ID' => $forum_data['cat_id'],
     'CAT_TITLE' => $forums['cat_title_html'][$forum_data['cat_id']],

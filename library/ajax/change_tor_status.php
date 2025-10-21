@@ -79,7 +79,7 @@ switch ($mode) {
         if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != $userdata['user_id'] && $tor['checked_time'] + 2 * 3600 > TIMENOW) {
             if (empty($this->request['confirmed'])) {
                 $msg = $lang['TOR_STATUS_OF'] . " {$lang['TOR_STATUS_NAME'][$tor['tor_status']]}\n\n";
-                $msg .= ($username = get_username($tor['checked_user_id'])) ? $lang['TOR_STATUS_CHANGED'] . html_entity_decode($username) . ", " . delta_time($tor['checked_time']) . $lang['TOR_BACK'] . "\n\n" : "";
+                $msg .= ($username = get_username($tor['checked_user_id'])) ? $lang['TOR_STATUS_CHANGED'] . html_entity_decode($username) . ", " . humanTime($tor['checked_time']) . $lang['TOR_BACK'] . "\n\n" : "";
                 $msg .= $lang['PROCEED'] . '?';
                 $this->prompt_for_confirm($msg);
             }
@@ -99,7 +99,7 @@ switch ($mode) {
             'log_msg' => $log_msg . '<br/>-------------',
         ]);
 
-        $this->response['status'] = config()->get('tor_icons')[$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b> &middot; ' . profile_url($userdata) . ' &middot; <i>' . delta_time(TIMENOW) . $lang['TOR_BACK'] . '</i>';
+        $this->response['status'] = config()->get('tor_icons')[$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b> &middot; ' . profile_url($userdata) . ' &middot; <i>' . humanTime(TIMENOW) . $lang['TOR_BACK'] . '</i>';
 
         if (config()->get('tor_comment') && (($comment && $comment != $lang['COMMENT']) || in_array($new_status, config()->get('tor_reply')))) {
             if ($tor['poster_id'] > 0) {

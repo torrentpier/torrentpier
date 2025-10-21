@@ -45,7 +45,7 @@
 				<!-- IF t.p.IS_UNREAD -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF -->
 				<a class="small" href="{POST_URL}{t.p.POST_ID}#{t.p.POST_ID}" title="{L_POST_LINK}">{t.p.POST_DATE}</a>
 				<!-- IF t.p.POSTED_AFTER -->
-					<span class="posted_since">({L_POSTED_AFTER} {t.p.POSTED_AFTER})</span>
+					<span class="posted_since">({t.p.POSTED_AFTER})</span>
 				<!-- ENDIF -->
 			</p>
 

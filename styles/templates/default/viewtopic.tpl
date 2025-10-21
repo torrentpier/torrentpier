@@ -419,7 +419,7 @@ function build_poll_add_form (src_el)
 				<a class="small" href="{POST_URL}{postrow.POST_ID}#{postrow.POST_ID}" title="{L_POST_LINK}">{postrow.POST_DATE}&nbsp;|&nbsp;#{postrow.POST_NUMBER}</a>
                 <!-- IF postrow.POSTER_AUTHOR -->&middot;&nbsp;<span>{L_AUTHOR}</span><!-- ENDIF -->
 				<!-- IF postrow.POSTED_AFTER -->
-					<span class="posted_since">({L_POSTED_AFTER} {postrow.POSTED_AFTER})</span>
+					<span class="posted_since">({postrow.POSTED_AFTER})</span>
 				<!-- ENDIF -->
 			</p>
 
