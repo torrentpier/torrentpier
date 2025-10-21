@@ -59,6 +59,8 @@ $bb_cfg['cache'] = [
     'memcached' => [
         'host' => env('MEMCACHED_HOST', '127.0.0.1'),
         'port' => env('MEMCACHED_PORT', 11211),
+        'connect_timeout' => 100, // Connection timeout in milliseconds
+        'poll_timeout' => 100,    // Poll timeout in milliseconds
     ],
     // Available cache types: file, sqlite, memory, memcached (file by default)
     'engines' => [

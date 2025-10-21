@@ -227,10 +227,12 @@ class UnifiedCacheSystem
 
                 $storage = new MemcachedStorage($host, $port);
 
-                // Set connection timeout to avoid hanging on unreachable server
+                // Set connection timeout to avoid hanging on an unreachable server
                 $connection = $storage->getConnection();
-                $connection->setOption(\Memcached::OPT_CONNECT_TIMEOUT, 100); // 100ms
-                $connection->setOption(\Memcached::OPT_POLL_TIMEOUT, 100); // 100ms
+                $connectTimeout = $memcachedConfig['connect_timeout'] ?? 100;
+                $pollTimeout = $memcachedConfig['poll_timeout'] ?? 100;
+                $connection->setOption(\Memcached::OPT_CONNECT_TIMEOUT, $connectTimeout);
+                $connection->setOption(\Memcached::OPT_POLL_TIMEOUT, $pollTimeout);
 
                 // Verify memcached is actually reachable
                 $stats = $connection->getStats();
@@ -314,10 +316,12 @@ class UnifiedCacheSystem
 
                 $storage = new MemcachedStorage($host, $port);
 
-                // Set connection timeout to avoid hanging on unreachable server
+                // Set connection timeout to avoid hanging on an unreachable server
                 $connection = $storage->getConnection();
-                $connection->setOption(\Memcached::OPT_CONNECT_TIMEOUT, 100); // 100ms
-                $connection->setOption(\Memcached::OPT_POLL_TIMEOUT, 100); // 100ms
+                $connectTimeout = $memcachedConfig['connect_timeout'] ?? 100;
+                $pollTimeout = $memcachedConfig['poll_timeout'] ?? 100;
+                $connection->setOption(\Memcached::OPT_CONNECT_TIMEOUT, $connectTimeout);
+                $connection->setOption(\Memcached::OPT_POLL_TIMEOUT, $pollTimeout);
 
                 // Verify memcached is actually reachable
                 $stats = $connection->getStats();
