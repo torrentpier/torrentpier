@@ -36,19 +36,24 @@ class TimeHelper
     {
         $locale = config()->get('default_lang', 'en');
 
-        // Parse timestamp - handle both numeric strings and date strings
-        $time = is_numeric($timestamp)
-            ? Carbon::createFromTimestamp((int)$timestamp)
-            : Carbon::parse($timestamp);
+        try {
+            // Parse timestamp - handle both numeric strings and date strings
+            $time = is_numeric($timestamp)
+                ? Carbon::createFromTimestamp((int)$timestamp)
+                : Carbon::parse($timestamp);
 
-        // Parse reference if provided
-        $ref = null;
-        if ($reference !== null) {
-            $ref = is_numeric($reference)
-                ? Carbon::createFromTimestamp((int)$reference)
-                : Carbon::parse($reference);
+            // Parse reference if provided
+            $ref = null;
+            if ($reference !== null) {
+                $ref = is_numeric($reference)
+                    ? Carbon::createFromTimestamp((int)$reference)
+                    : Carbon::parse($reference);
+            }
+
+            return $time->locale($locale)->diffForHumans($ref);
+        } catch (\Exception $e) {
+            // Fallback for invalid timestamps
+            return '';
         }
-
-        return $time->locale($locale)->diffForHumans($ref);
     }
 }

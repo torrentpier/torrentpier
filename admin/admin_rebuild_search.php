@@ -330,8 +330,8 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
         'LAST_CYCLE_TIME' => humanTime(TIMENOW),
         'SESSION_TIME' => humanTime(($last_session_data['start_time'] == 0) ? TIMENOW : $last_session_data['start_time']),
-        'SESSION_AVERAGE_CYCLE_TIME' => humanTime((int)$session_average_cycle_time, 0),
-        'SESSION_ESTIMATED_TIME' => humanTime((int)$session_estimated_time, 0),
+        'SESSION_AVERAGE_CYCLE_TIME' => humanTime(TIMENOW - (int)$session_average_cycle_time, TIMENOW),
+        'SESSION_ESTIMATED_TIME' => humanTime(TIMENOW - (int)$session_estimated_time, TIMENOW),
 
         'SEARCH_TABLES_SIZE' => humn_size($search_tables_size),
         'FINAL_SEARCH_TABLES_SIZE' => humn_size($final_search_tables_size),
