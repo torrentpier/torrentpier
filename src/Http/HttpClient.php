@@ -15,8 +15,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use LogicException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -47,10 +45,6 @@ final class HttpClient
      */
     private const DEFAULT_MAX_RETRIES = 3;
 
-    /**
-     * Default User-Agent header
-     */
-    private const DEFAULT_USER_AGENT = APP_NAME . '/' . BB_VERSION;
 
     /**
      * Private constructor to prevent direct instantiation
@@ -76,7 +70,7 @@ final class HttpClient
             'timeout' => self::DEFAULT_TIMEOUT,
             'connect_timeout' => self::DEFAULT_CONNECT_TIMEOUT,
             'headers' => [
-                'User-Agent' => self::DEFAULT_USER_AGENT,
+                'User-Agent' => APP_NAME . '/' . config()->get('tp_version', 'Unknown'),
             ],
             'http_errors' => false, // Don't throw exceptions on 4xx/5xx responses
             'verify' => true, // Verify SSL certificates
@@ -86,9 +80,9 @@ final class HttpClient
     }
 
     /**
-     * Get singleton instance
+     * Get a singleton instance
      *
-     * @param array $config Additional Guzzle configuration (only used on first call)
+     * @param array $config Additional Guzzle configuration (only used on the first call)
      * @return self
      */
     public static function getInstance(array $config = []): self
@@ -240,17 +234,17 @@ final class HttpClient
     public function download(string $uri, string $savePath, array $options = []): bool
     {
         try {
-            // Use streaming to avoid loading entire file into memory
+            // Use streaming to avoid loading an entire file into memory
             $options['sink'] = $savePath;
 
             $response = $this->get($uri, $options);
 
-            // Check if download was successful
+            // Check if the download was successful
             if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
                 return file_exists($savePath);
             }
 
-            // Remove failed download file if it exists
+            // Remove the failed download file if it exists
             if (file_exists($savePath)) {
                 @unlink($savePath);
             }
@@ -278,10 +272,10 @@ final class HttpClient
     private function retryDecider(): callable
     {
         return function (
-            int $retries,
-            RequestInterface $request,
+            int                $retries,
+            RequestInterface   $request,
             ?ResponseInterface $response = null,
-            ?Throwable $exception = null
+            ?Throwable         $exception = null
         ) {
             // Don't retry if we've exceeded max retries
             if ($retries >= self::DEFAULT_MAX_RETRIES) {
@@ -320,12 +314,12 @@ final class HttpClient
             if ($response && $response->hasHeader('Retry-After')) {
                 $retryAfter = $response->getHeaderLine('Retry-After');
                 if (is_numeric($retryAfter)) {
-                    return (int) $retryAfter * 1000; // Convert to milliseconds
+                    return (int)$retryAfter * 1000; // Convert to milliseconds
                 }
             }
 
             // Exponential backoff: 1s, 2s, 4s, 8s, etc.
-            return (int) (1000 * (2 ** ($retries - 1)));
+            return (int)(1000 * (2 ** ($retries - 1)));
         };
     }
 
@@ -340,14 +334,14 @@ final class HttpClient
         return function (callable $handler) {
             return function (RequestInterface $request, array $options) use ($handler) {
                 // Log request if debug logging is enabled
-                if (defined('DEBUG_MODE') && DEBUG_MODE && function_exists('bb_log')) {
+                if (defined('IN_DEBUG_MODE') && IN_DEBUG_MODE && function_exists('bb_log')) {
                     $this->logRequest($request);
                 }
 
                 return $handler($request, $options)->then(
                     function (ResponseInterface $response) use ($request) {
                         // Log response if debug logging is enabled
-                        if (defined('DEBUG_MODE') && DEBUG_MODE && function_exists('bb_log')) {
+                        if (defined('IN_DEBUG_MODE') && IN_DEBUG_MODE && function_exists('bb_log')) {
                             $this->logResponse($request, $response);
                         }
                         return $response;
