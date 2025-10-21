@@ -10,6 +10,9 @@
 namespace TorrentPier;
 
 use Exception;
+use Psr\Http\Message\ResponseInterface;
+use TorrentPier\Http\HttpClient;
+use TorrentPier\Http\Exception\HttpClientException;
 
 /**
  * Class Updater
@@ -39,24 +42,18 @@ class Updater
     public string $savePath;
 
     /**
+     * HTTP client instance
+     *
+     * @var HttpClient
+     */
+    private HttpClient $httpClient;
+
+    /**
      * LTS version pattern (v2.8.*)
      *
      * @var string
      */
     private const LTS_VERSION_PATTERN = '/^v2\.8\.\d+$/';
-
-    /**
-     * Stream context
-     *
-     * @var array
-     */
-    private const STREAM_CONTEXT = [
-        'http' => [
-            'header' => 'User-Agent: ' . APP_NAME . '-' . TIMENOW,
-            'timeout' => 10,
-            'ignore_errors' => true
-        ]
-    ];
 
     /**
      * Updater constructor
@@ -65,34 +62,60 @@ class Updater
      */
     public function __construct()
     {
-        $context = stream_context_create(self::STREAM_CONTEXT);
-        $response = file_get_contents(UPDATER_URL, context: $context);
+        // Initialize HTTP client with 10-second timeout
+        $this->httpClient = HttpClient::getInstance([
+            'timeout' => 10
+        ]);
 
-        if ($response !== false) {
-            $this->jsonResponse = json_decode(mb_convert_encoding($response, DEFAULT_CHARSET, mb_detect_encoding($response)), true);
-        }
+        try {
+            $response = $this->httpClient->get(UPDATER_URL, [
+                'headers' => [
+                    'Accept' => 'application/json'
+                ]
+            ]);
 
-        // Empty JSON result
-        if (empty($this->jsonResponse)) {
-            throw new Exception('Empty JSON response');
-        }
+            // Check response status
+            $statusCode = $response->getStatusCode();
+            if ($statusCode !== 200) {
+                $this->handleGitHubError($response);
+            }
 
-        // Response message from GitHub
-        if (isset($this->jsonResponse['message'])) {
-            throw new Exception($this->jsonResponse['message']);
+            $responseBody = $response->getBody()->getContents();
+            $this->jsonResponse = json_decode(
+                mb_convert_encoding($responseBody, DEFAULT_CHARSET, mb_detect_encoding($responseBody)),
+                true
+            );
+
+            // Empty JSON result
+            if (empty($this->jsonResponse)) {
+                throw new Exception('Empty JSON response from GitHub API');
+            }
+
+            // Response message from GitHub (error message)
+            if (isset($this->jsonResponse['message'])) {
+                throw new Exception('GitHub API error: ' . $this->jsonResponse['message']);
+            }
+        } catch (HttpClientException $e) {
+            throw new Exception('Failed to fetch releases from GitHub: ' . $e->getMessage(), 0, $e);
         }
     }
 
     /**
-     * Download build from GitHub
+     * Download the build from GitHub with streaming support
      *
-     * @param string $path
-     * @param string $targetVersion
-     * @param bool $force
+     * @param string $path Target directory path
+     * @param string $targetVersion Version to download ('latest' or specific version tag)
+     * @param bool $force Force re-download even if a file exists
+     * @param callable|null $progressCallback Progress callback function (float $percent, int $downloaded, int $total)
      * @return bool
      * @throws Exception
      */
-    public function download(string $path, string $targetVersion = 'latest', bool $force = false): bool
+    public function download(
+        string    $path,
+        string    $targetVersion = 'latest',
+        bool      $force = false,
+        ?callable $progressCallback = null
+    ): bool
     {
         $this->targetVersion = $targetVersion;
 
@@ -104,33 +127,40 @@ class Updater
         }
 
         if (empty($versionInfo)) {
-            throw new Exception('No version info');
+            throw new Exception('No version info found for version: ' . $this->targetVersion);
+        }
+
+        if (empty($versionInfo['assets'][0]['browser_download_url'])) {
+            throw new Exception('No download URL found in release assets');
         }
 
         $downloadLink = $versionInfo['assets'][0]['browser_download_url'];
         $this->savePath = $path . $versionInfo['assets'][0]['name'];
 
+        // Download the file if it doesn't exist or a force flag is set
         if (!is_file($this->savePath) || $force) {
-            $context = stream_context_create(self::STREAM_CONTEXT);
-            $getFile = file_get_contents($downloadLink, context: $context);
-            if ($getFile === false) {
-                return false;
-            }
+            try {
+                $success = $this->httpClient->downloadWithProgress(
+                    $downloadLink,
+                    $this->savePath,
+                    $progressCallback
+                );
 
-            // Save build file
-            file_put_contents($this->savePath, $getFile);
-            if (!is_file($this->savePath)) {
-                throw new Exception("Can't save TorrentPier build file");
+                if (!$success || !is_file($this->savePath)) {
+                    throw new Exception("Failed to save TorrentPier build file to: $this->savePath");
+                }
+            } catch (HttpClientException $e) {
+                // Clean up failed download
+                if (is_file($this->savePath)) {
+                    @unlink($this->savePath);
+                }
+                throw new Exception("Failed to download release: {$e->getMessage()}", 0, $e);
             }
         }
 
-        // Get MD5 checksums
-        $getMD5OfRemoteFile = strtoupper(md5_file($downloadLink));
-        $getMD5OfSavedFile = strtoupper(md5_file($this->savePath));
-
-        // Compare MD5 hashes
-        if ($getMD5OfRemoteFile !== $getMD5OfSavedFile) {
-            throw new Exception("MD5 hashes don't match");
+        // Verify a file exists and has content
+        if (!is_file($this->savePath) || filesize($this->savePath) === 0) {
+            throw new Exception("Downloaded file is empty or does not exist: $this->savePath");
         }
 
         return true;
@@ -199,5 +229,42 @@ class Updater
         });
 
         return array_values($ltsVersions);
+    }
+
+    /**
+     * Handle GitHub API errors based on the response status code
+     *
+     * @param ResponseInterface $response
+     * @return void
+     * @throws Exception
+     */
+    private function handleGitHubError(ResponseInterface $response): void
+    {
+        $statusCode = $response->getStatusCode();
+        $body = $response->getBody()->getContents();
+        $data = json_decode($body, true);
+        $message = $data['message'] ?? 'Unknown GitHub API error';
+
+        switch ($statusCode) {
+            case 403:
+                // Check if it's rate limiting
+                if (isset($data['documentation_url']) && str_contains($data['documentation_url'], 'rate-limiting')) {
+                    $resetTime = $response->getHeader('X-RateLimit-Reset')[0] ?? null;
+                    $resetMsg = $resetTime ? ' (resets at ' . date('Y-m-d H:i:s', (int)$resetTime) . ')' : '';
+                    throw new Exception("GitHub API rate limit exceeded$resetMsg: $message");
+                }
+                throw new Exception("GitHub API access forbidden: $message");
+
+            case 404:
+                throw new Exception("GitHub API resource not found: $message");
+
+            case 500:
+            case 502:
+            case 503:
+                throw new Exception("GitHub API server error ($statusCode): $message");
+
+            default:
+                throw new Exception("GitHub API error ($statusCode): $message");
+        }
     }
 }
