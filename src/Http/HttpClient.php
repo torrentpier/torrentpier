@@ -20,6 +20,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 use TorrentPier\Http\Exception\HttpClientException;
+use const PHP_ROUND_HALF_UP;
 
 /**
  * HTTP Client (singleton)
@@ -261,6 +262,43 @@ final class HttpClient
                 $e
             );
         }
+    }
+
+    /**
+     * Download a file with progress callback support
+     * Useful for providing user feedback during large downloads
+     *
+     * @param string $uri URI to download from
+     * @param string $savePath Local path to save the file
+     * @param callable|null $progressCallback Callback function (float $percent, int $downloaded, int $total)
+     * @param array $options Additional request options
+     * @return bool True on success
+     * @throws HttpClientException
+     */
+    public function downloadWithProgress(
+        string    $uri,
+        string    $savePath,
+        ?callable $progressCallback = null,
+        array     $options = []
+    ): bool
+    {
+        // Add a progress callback if provided
+        if ($progressCallback !== null) {
+            $options['progress'] = function (
+                int|float $downloadTotal,
+                int|float $downloadedBytes,
+                int|float $uploadTotal,
+                int|float $uploadedBytes
+            ) use ($progressCallback): void {
+                if ($downloadTotal > 0) {
+                    $percent = round(($downloadedBytes / $downloadTotal) * 100, 2, PHP_ROUND_HALF_UP);
+                    $progressCallback($percent, (int)$downloadedBytes, (int)$downloadTotal);
+                }
+            };
+        }
+
+        // Use the regular download method with progress options
+        return $this->download($uri, $savePath, $options);
     }
 
     /**
