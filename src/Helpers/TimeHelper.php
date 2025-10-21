@@ -11,6 +11,7 @@ namespace TorrentPier\Helpers;
 
 use Carbon\Carbon;
 
+use Exception;
 use function config;
 use function is_numeric;
 
@@ -51,7 +52,7 @@ class TimeHelper
             }
 
             return $time->locale($locale)->diffForHumans($ref);
-        } catch (\Exception $e) {
+        } catch (Exception) {
             // Fallback for invalid timestamps
             return '';
         }
