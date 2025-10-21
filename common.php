@@ -142,6 +142,16 @@ function httpClient(): \TorrentPier\Http\HttpClient
 }
 
 /**
+ * Format time difference in human-readable format
+ *
+ * @see \TorrentPier\Helpers\TimeHelper::humanTime()
+ */
+function humanTime(int|string $timestamp, int|string|null $reference = null): string
+{
+    return \TorrentPier\Helpers\TimeHelper::humanTime($timestamp, $reference);
+}
+
+/**
  * Get the Censor instance
  *
  * @return \TorrentPier\Censor

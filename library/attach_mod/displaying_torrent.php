@@ -210,7 +210,7 @@ if ($tor_reged && $tor_info) {
             'TOR_FROZEN' => !IS_AM ? (isset(config()->get('tor_frozen')[$tor_info['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
             'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
             'TOR_STATUS_ICON' => config()->get('tor_icons')[$tor_info['tor_status']],
-            'TOR_STATUS_BY' => ($tor_info['checked_user_id'] && ($is_auth['auth_mod'] || $tor_status_by_for_all)) ? ('<span title="' . bb_date($tor_info['checked_time']) . '"> &middot; ' . profile_url($tor_info) . ' &middot; <i>' . delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] . '</i></span>') : '',
+            'TOR_STATUS_BY' => ($tor_info['checked_user_id'] && ($is_auth['auth_mod'] || $tor_status_by_for_all)) ? ('<span title="' . bb_date($tor_info['checked_time']) . '"> &middot; ' . profile_url($tor_info) . ' &middot; <i>' . humanTime($tor_info['checked_time']) . $lang['TOR_BACK'] . '</i></span>') : '',
             'TOR_STATUS_SELECT' => build_select('sel_status', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
             'TOR_STATUS_REPLY' => config()->get('tor_comment') && !IS_GUEST && in_array($tor_info['tor_status'], config()->get('tor_reply')) && $userdata['user_id'] == $tor_info['poster_id'] && $t_data['topic_status'] != TOPIC_LOCKED,
             //end torrent status mod
@@ -225,7 +225,7 @@ if ($tor_reged && $tor_info) {
             'HASH_V2' => !empty($tor_info['info_hash_v2']) ? strtoupper(bin2hex($tor_info['info_hash_v2'])) : false,
             'FILELIST_ICON' => $images['icon_tor_filelist'],
             'REGED_TIME' => bb_date($tor_info['reg_time']),
-            'REGED_DELTA' => delta_time($tor_info['reg_time']),
+            'REGED_DELTA' => humanTime($tor_info['reg_time']),
             'TORRENT_SIZE' => humn_size($tor_size, 2),
             'DOWNLOAD_COUNT' => $download_count,
             'COMPLETED' => $tor_completed_count,
@@ -250,7 +250,7 @@ if ($tor_reged && $tor_info) {
             'SHOW_DL_LIST_TOR_INFO' => true,
 
             'TOR_SIZE' => humn_size($tor_size, 2),
-            'TOR_LONGEVITY' => delta_time($tor_info['reg_time']),
+            'TOR_LONGEVITY' => humanTime($tor_info['reg_time']),
             'TOR_DOWNLOAD_COUNT' => $download_count,
             'TOR_COMPLETED' => $tor_completed_count,
         ]);
@@ -501,7 +501,7 @@ if ($tor_reged && $tor_info) {
                         'DOWN_TOTAL_RAW' => $peer['downloaded'],
                         'SPEED_UP_RAW' => $peer['speed_up'],
                         'SPEED_DOWN_RAW' => $peer['speed_down'],
-                        'UPD_EXP_TIME' => $peer['update_time'] ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . delta_time($peer['update_time']) . $lang['TOR_BACK'] : $lang['DL_STOPPED'],
+                        'UPD_EXP_TIME' => $peer['update_time'] ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . humanTime($peer['update_time']) . $lang['TOR_BACK'] : $lang['DL_STOPPED'],
                         'TOR_RATIO' => $up_ratio ? $lang['USER_RATIO'] . "UL/DL: $up_ratio" : ''
                     ]);
 
@@ -550,7 +550,7 @@ if ($tor_reged && $tor_info) {
 
         // Show "seeder last seen info"
         if (($s_mode == 'count' && !$seed_count) || (!$seeders && !defined('SEEDER_EXIST'))) {
-            $last_seen_time = ($tor_info['seeder_last_seen']) ? delta_time($tor_info['seeder_last_seen']) : $lang['NEVER'];
+            $last_seen_time = ($tor_info['seeder_last_seen']) ? humanTime($tor_info['seeder_last_seen']) : $lang['NEVER'];
             $last_seeder_username = (!empty($tor_info['last_seeder_id']) && $last_seeder = get_userdata($tor_info['last_seeder_id'])) ? ' -> <b>' . profile_url(['username' => $last_seeder['username'], 'user_id' => $last_seeder['user_id'], 'user_rank' => $last_seeder['user_rank']]) . '</b>' : ($tor_info['last_seeder_id'] < 0 ? ' -> ' . $lang['GUEST'] : '');
 
             $template->assign_vars(['SEEDER_LAST_SEEN' => sprintf($lang['SEEDER_LAST_SEEN'], $last_seen_time)]);

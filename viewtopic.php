@@ -566,7 +566,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $poster_posts = !$poster_guest ? $postrow[$i]['user_posts'] : '';
     $poster_from = ($postrow[$i]['user_from'] && !$poster_guest) ? $postrow[$i]['user_from'] : '';
     $poster_joined = !$poster_guest ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
-    $poster_longevity = !$poster_guest ? delta_time($postrow[$i]['user_regdate']) : '';
+    $poster_longevity = !$poster_guest ? humanTime($postrow[$i]['user_regdate']) : '';
     $poster_birthday = $postrow[$i]['user_birthday']->format('Y-m-d');
     $post_id = $postrow[$i]['post_id'];
     $mc_type = (int)$postrow[$i]['mc_type'];
@@ -699,7 +699,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_ID' => $poster_id,
         'POSTER_AUTHOR' => ($poster_id == $t_data['topic_poster']),
         'POSTER_GENDER' => !$poster_guest ? genderImage((int)$postrow[$i]['user_gender']) : '',
-        'POSTED_AFTER' => $prev_post_time ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
+        'POSTED_AFTER' => $prev_post_time ? humanTime($postrow[$i]['post_time'], $prev_post_time) : '',
         'IS_UNREAD' => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
         'IS_FIRST_POST' => (!$start && $is_first_post),
         'MOD_CHECKBOX' => ($moderation && ($start || defined('SPLIT_FORM_START'))),

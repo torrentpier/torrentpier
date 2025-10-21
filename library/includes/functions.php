@@ -432,9 +432,20 @@ function auth_check($bf_ary, $bf_key, $perm_ary, $perm_key, $is_admin = false)
     return bf($perm_ary[$perm_key], $bf_ary, $bf_key);
 }
 
+/**
+ * Format time difference in human-readable format
+ *
+ * @deprecated Use humanTime() instead
+ * @see humanTime()
+ *
+ * @param int|string $timestamp_1 First timestamp
+ * @param int|string $timestamp_2 Second timestamp (defaults to now)
+ * @param string $granularity Ignored (kept for backward compatibility)
+ * @return string Human-readable time difference
+ */
 function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
 {
-    return $GLOBALS['DeltaTime']->spellDelta($timestamp_1, $timestamp_2, $granularity);
+    return humanTime($timestamp_1, $timestamp_2);
 }
 
 function get_select($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
@@ -801,7 +812,7 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
 
     $from = !empty($row['user_from']) ? render_flag($row['user_from'], false) : $lang['NOSELECT'];
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
-    $user_time = !empty($row['user_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($row['user_time']), delta_time($row['user_time'])) : $lang['NOSELECT'];
+    $user_time = !empty($row['user_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($row['user_time']), humanTime($row['user_time'])) : $lang['NOSELECT'];
     $posts = '<a href="search.php?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
     $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_SHORT'] . '</a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
@@ -1282,7 +1293,7 @@ function birthday_age($date)
     }
 
     $tz = TIMENOW + (3600 * config()->get('board_timezone'));
-    return delta_time(strtotime($date, $tz));
+    return humanTime(strtotime($date, $tz));
 }
 
 /**

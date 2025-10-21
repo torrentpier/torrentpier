@@ -743,7 +743,7 @@ if (!$mode || $show_main_page) {
                         'FORUM_DESC' => htmlCHR($forum_rows[$j]['forum_desc']),
                         'NUM_TOPICS' => $forum_rows[$j]['forum_topics'],
                         'NUM_POSTS' => $forum_rows[$j]['forum_posts'],
-                        'PRUNE_DAYS' => !empty($forum_rows[$j]['prune_days']) ? delta_time((TIMENOW - 86400 * $forum_rows[$j]['prune_days']), TIMENOW, 'days') : $lang['DISABLED'],
+                        'PRUNE_DAYS' => !empty($forum_rows[$j]['prune_days']) ? humanTime((TIMENOW - 86400 * $forum_rows[$j]['prune_days']), TIMENOW) : $lang['DISABLED'],
 
                         'ORDER' => $forum_rows[$j]['forum_order'],
                         'FORUM_ID' => $forum_rows[$j]['forum_id'],

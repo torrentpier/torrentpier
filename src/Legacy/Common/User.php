@@ -9,7 +9,6 @@
 
 namespace TorrentPier\Legacy\Common;
 
-use TorrentPier\Legacy\DateDelta;
 use TorrentPier\Sessions;
 
 use Exception;
@@ -619,7 +618,6 @@ class User
         lang()->initializeLanguage($this->data['user_lang']);
 
         $theme = setup_style();
-        $DeltaTime = new DateDelta();
 
         // Handle marking posts read
         if (!IS_GUEST && !empty($_COOKIE[COOKIE_MARK])) {

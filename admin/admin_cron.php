@@ -127,7 +127,7 @@ switch ($mode) {
             ));
         }
 
-        $run_day = array($lang['DELTA_TIME']['INTERVALS']['mday'][0] => 0);
+        $run_day = array(__('DAY') => 0);
         for ($i = 1; $i <= 28; $i++) {
             $run_day[$i] = $i;
         }
@@ -148,7 +148,7 @@ switch ($mode) {
         break;
 
     case 'add':
-        $run_day = array($lang['DELTA_TIME']['INTERVALS']['mday'][0] => 0);
+        $run_day = array(__('DAY') => 0);
         for ($i = 1; $i <= 28; $i++) {
             $run_day[$i] = $i;
         }

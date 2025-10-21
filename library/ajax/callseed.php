@@ -30,7 +30,7 @@ $forum_id = $t_data['forum_id'];
 if ($t_data['seeders'] >= 3) {
     $this->ajax_die(sprintf($lang['CALLSEED_HAVE_SEED'], $t_data['seeders']));
 } elseif ($t_data['call_seed_time'] >= (TIMENOW - 86400)) {
-    $time_left = delta_time($t_data['call_seed_time'] + 86400, TIMENOW, 'days');
+    $time_left = humanTime($t_data['call_seed_time'] + 86400, TIMENOW);
     $this->ajax_die(sprintf($lang['CALLSEED_MSG_SPAM'], $time_left));
 } elseif (isset(config()->get('tor_no_tor_act')[$t_data['tor_status']])) {
     $this->ajax_die($lang['NOT_AVAILABLE']);
