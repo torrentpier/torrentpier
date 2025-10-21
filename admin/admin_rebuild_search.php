@@ -328,7 +328,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
         'TOTAL_DETAILS' => sprintf($lang['PROCESS_DETAILS'], $total_posts_processed - $num_rows + 1, $total_posts_processed, $total_posts),
         'TOTAL_PERCENT' => sprintf($lang['PERCENT_COMPLETED'], round($total_percent, 2)),
 
-        'LAST_CYCLE_TIME' => humanTime(TIMENOW),
+        'LAST_CYCLE_TIME' => humanTime($start_time),
         'SESSION_TIME' => humanTime(($last_session_data['start_time'] == 0) ? TIMENOW : $last_session_data['start_time']),
         'SESSION_AVERAGE_CYCLE_TIME' => humanTime(TIMENOW - (int)$session_average_cycle_time, TIMENOW),
         'SESSION_ESTIMATED_TIME' => humanTime(TIMENOW - (int)$session_estimated_time, TIMENOW),
