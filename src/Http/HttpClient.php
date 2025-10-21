@@ -314,12 +314,18 @@ final class HttpClient
             if ($response && $response->hasHeader('Retry-After')) {
                 $retryAfter = $response->getHeaderLine('Retry-After');
                 if (is_numeric($retryAfter)) {
-                    return (int)$retryAfter * 1000; // Convert to milliseconds
+                    return (int)$retryAfter * 1000; // seconds -> ms
+                }
+                // Support http-date format
+                $ts = strtotime($retryAfter);
+                if ($ts !== false) {
+                    $delay = max(0, $ts - time());
+                    return (int)($delay * 1000);
                 }
             }
 
             // Exponential backoff: 1s, 2s, 4s, 8s, etc.
-            return (int)(1000 * (2 ** ($retries - 1)));
+            return (int)(1000 * (2 ** $retries));
         };
     }
 

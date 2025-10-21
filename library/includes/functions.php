@@ -2351,13 +2351,15 @@ function infoByIP(string $ipAddress, int $port = 0): array
         $data = [];
 
         try {
-            $requestOptions = [];
+            $requestOptions = [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+            ];
 
             // Add authorization header if API token is configured
             if (!empty(config()->get('ip2country_settings.api_token'))) {
-                $requestOptions['headers'] = [
-                    'Authorization' => 'Bearer ' . config()->get('ip2country_settings.api_token')
-                ];
+                $requestOptions['headers']['Authorization'] = 'Bearer ' . config()->get('ip2country_settings.api_token');
             }
 
             $response = httpClient()->get(
@@ -2370,14 +2372,15 @@ function infoByIP(string $ipAddress, int $port = 0): array
 
                 if (is_array($json) && !empty($json)) {
                     $data = [
-                        'ipVersion' => $json['ipVersion'],
-                        'countryCode' => $json['countryCode'],
-                        'continent' => $json['continent'],
-                        'continentCode' => $json['continentCode']
+                        'ipVersion' => $json['ipVersion'] ?? null,
+                        'countryCode' => $json['countryCode'] ?? null,
+                        'continent' => $json['continent'] ?? null,
+                        'continentCode' => $json['continentCode'] ?? null,
                     ];
                 }
             } else {
-                bb_log("[FreeIPAPI] Failed to get IP info for: $ipAddress (HTTP {$response->getStatusCode()})" . LOG_LF);
+                $svc = parse_url((string)config()->get('ip2country_settings.endpoint'), PHP_URL_HOST) ?: 'ip2country';
+                bb_log("[$svc] Failed to get IP info for: $ipAddress (HTTP {$response->getStatusCode()})" . LOG_LF);
             }
         } catch (Exception $e) {
             bb_log("[FreeIPAPI] " . $e->getMessage() . LOG_LF);

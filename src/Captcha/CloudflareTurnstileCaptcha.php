@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Captcha;
 
+use Throwable;
+
 /**
  * Class CloudflareTurnstileCaptcha
  * @package TorrentPier\Captcha
@@ -66,20 +68,20 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
                 'form_params' => [
                     'secret' => $this->settings['secret_key'],
                     'response' => $turnstileResponse,
+                    'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
                 ],
+                'timeout' => 3,
+                'connect_timeout' => 2,
             ]);
 
             if ($response->getStatusCode() !== 200) {
                 return false;
             }
 
-            $responseData = json_decode((string) $response->getBody(), false);
+            $responseData = json_decode((string)$response->getBody(), false);
             return $responseData->success ?? false;
-        } catch (\Throwable $e) {
-            // Log error but don't expose to user
-            if (function_exists('bb_log')) {
-                bb_log("Cloudflare Turnstile verification failed: {$e->getMessage()}" . LOG_LF);
-            }
+        } catch (Throwable $e) {
+            bb_log("Cloudflare Turnstile verification failed: {$e->getMessage()}" . LOG_LF);
             return false;
         }
     }

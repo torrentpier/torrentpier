@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Captcha;
 
+use Throwable;
+
 /**
  * Class YandexSmartCaptcha
  * @package TorrentPier\Captcha
@@ -58,33 +60,32 @@ class YandexSmartCaptcha implements CaptchaInterface
      */
     public function check(): bool
     {
+        // Require token present
+        $token = $_POST['smart-token'] ?? null;
+        if (!$token) {
+            return false;
+        }
+
         try {
             $response = httpClient()->post($this->verifyEndpoint, [
                 'form_params' => [
                     'secret' => $this->settings['secret_key'],
-                    'token' => $_POST['smart-token'] ?? null,
-                    'ip' => $_SERVER['REMOTE_ADDR'],
+                    'token' => $token,
+                    'ip' => $_SERVER['REMOTE_ADDR'] ?? '',
                 ],
-                'timeout' => 1,
+                'timeout' => 3,
+                'connect_timeout' => 2,
             ]);
 
-            $httpCode = $response->getStatusCode();
-
-            // Yandex SmartCaptcha returns true on non-200 responses
-            // This is original behavior preserved from legacy code
-            if ($httpCode !== 200) {
-                return true;
+            if ($response->getStatusCode() !== 200) {
+                return false;
             }
 
-            $responseData = json_decode((string) $response->getBody(), false);
-            return ($responseData->status ?? '') === 'ok';
-        } catch (\Throwable $e) {
-            // Log error but don't expose to user
-            if (function_exists('bb_log')) {
-                bb_log("Yandex SmartCaptcha verification failed: {$e->getMessage()}" . LOG_LF);
-            }
-            // Return true on timeout/error (preserving original behavior)
-            return true;
+            $responseData = json_decode((string)$response->getBody(), false);
+            return (($responseData->status ?? '') === 'ok');
+        } catch (Throwable $e) {
+            bb_log("Yandex SmartCaptcha verification failed: {$e->getMessage()}" . LOG_LF);
+            return false;
         }
     }
 }

@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Captcha;
 
+use Throwable;
+
 /**
  * Class HCaptcha
  * @package TorrentPier\Captcha
@@ -48,7 +50,7 @@ class HCaptcha implements CaptchaInterface
     {
         return "
         <div class='h-captcha' data-sitekey='{$this->settings['public_key']}' data-theme='" . ($this->settings['theme'] ?? 'light') . "'></div>
-        <script src='https://www.hCaptcha.com/1/api.js?hl={$this->settings['language']}' async defer></script>";
+        <script src='https://hcaptcha.com/1/api.js?hl={$this->settings['language']}' async defer></script>";
     }
 
     /**
@@ -63,20 +65,20 @@ class HCaptcha implements CaptchaInterface
                 'form_params' => [
                     'secret' => $this->settings['secret_key'],
                     'response' => $_POST['h-captcha-response'] ?? null,
+                    'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
                 ],
+                'timeout' => 3,
+                'connect_timeout' => 2,
             ]);
 
             if ($response->getStatusCode() !== 200) {
                 return false;
             }
 
-            $responseData = json_decode((string) $response->getBody(), false);
+            $responseData = json_decode((string)$response->getBody(), false);
             return $responseData->success ?? false;
-        } catch (\Throwable $e) {
-            // Log error but don't expose to user
-            if (function_exists('bb_log')) {
-                bb_log("HCaptcha verification failed: {$e->getMessage()}" . LOG_LF);
-            }
+        } catch (Throwable $e) {
+            bb_log("HCaptcha verification failed: {$e->getMessage()}" . LOG_LF);
             return false;
         }
     }
