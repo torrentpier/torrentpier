@@ -121,7 +121,7 @@ class Database
     }
 
     /**
-     * Open connection using Nette Database
+     * Open a connection using Nette Database
      */
     public function connect(): void
     {
@@ -696,11 +696,9 @@ class Database
 
             $this->exec_shutdown_queries();
 
-            // Nette Database connection will be closed automatically
-            $this->connection = null;
+            // Nette Database connection will be closed automatically by PHP
+            // Do NOT set $this->connection = null here - other shutdown functions may still need it
         }
-
-        $this->selected_db = null;
     }
 
     /**
