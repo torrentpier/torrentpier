@@ -90,14 +90,18 @@ describe('HttpClient Class', function () {
             expect(fn() => clone $instance)->toThrow(Error::class);
         });
 
+        it('throws exception when trying to serialize', function () {
+            // Singleton pattern prevents serialization through __serialize (PHP 8.2+)
+            $instance = HttpClient::getInstance();
+
+            expect(fn() => $instance->__serialize())->toThrow(LogicException::class);
+        });
+
         it('throws exception when trying to unserialize', function () {
             // Singleton pattern prevents unserialization through __unserialize (PHP 8.2+)
-            // We test this by checking the method exists and throws
             $instance = HttpClient::getInstance();
-            $reflection = new ReflectionClass($instance);
 
-            expect($reflection->hasMethod('__serialize'))->toBeTrue()
-                ->and($reflection->hasMethod('__unserialize'))->toBeTrue();
+            expect(fn() => $instance->__unserialize([]))->toThrow(LogicException::class);
         });
     });
 

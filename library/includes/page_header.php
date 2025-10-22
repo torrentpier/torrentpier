@@ -117,7 +117,10 @@ $template->assign_vars([
     'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
 
     'USER_LANG' => $userdata['user_lang'],
-    'USER_LANG_DIRECTION' => (isset((config()->get('lang') ?? [])[$userdata['user_lang']]['rtl']) && ((config()->get('lang') ?? [])[$userdata['user_lang']]['rtl'] === true)) ? 'rtl' : 'ltr',
+    'USER_LANG_DIRECTION' => (function() use ($userdata) {
+        $langConfig = config()->get('lang') ?? [];
+        return (isset($langConfig[$userdata['user_lang']]['rtl']) && $langConfig[$userdata['user_lang']]['rtl'] === true) ? 'rtl' : 'ltr';
+    })(),
 
     'INCLUDE_BBCODE_JS' => !empty($page_cfg['include_bbcode_js']),
     'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),

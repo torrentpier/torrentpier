@@ -433,14 +433,11 @@ class Dev
     }
 
     /**
-     * Prevent unserialization of the singleton instance
-     */
-    /**
      * Prevent serialization of the singleton instance
      */
     public function __serialize(): array
     {
-        throw new \Exception("Cannot serialize a singleton.");
+        throw new \LogicException("Cannot serialize a singleton.");
     }
 
     /**
@@ -448,6 +445,6 @@ class Dev
      */
     public function __unserialize(array $data): void
     {
-        throw new \Exception("Cannot unserialize a singleton.");
+        throw new \LogicException("Cannot unserialize a singleton.");
     }
 }
