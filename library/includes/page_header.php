@@ -143,7 +143,7 @@ $template->assign_vars([
     'FULL_URL' => FULL_URL,
 
     'CURRENT_TIME' => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, config()->get('last_visit_date_format'), false)),
-    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', (float)config()->get('board_timezone'))])),
+    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], config()->get('timezones')[str_replace(',', '.', (float)config()->get('board_timezone'))])),
     'BOARD_TIMEZONE' => config()->get('board_timezone'),
 
     'PM_INFO' => $pm_info,

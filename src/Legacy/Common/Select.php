@@ -50,14 +50,14 @@ class Select
      */
     public static function timezone(string $default, string $select_name = 'timezone'): string
     {
-        global $sys_timezone, $lang;
+        global $sys_timezone;
 
         if (!isset($default)) {
             $default = $sys_timezone;
         }
         $tz_select = '<select name="' . $select_name . '">';
 
-        foreach ($lang['TZ'] as $offset => $zone) {
+        foreach (config()->get('timezones') as $offset => $zone) {
             $selected = ($offset == $default) ? ' selected' : '';
             $tz_select .= '<option value="' . $offset . '"' . $selected . '>' . $zone . '</option>';
         }
