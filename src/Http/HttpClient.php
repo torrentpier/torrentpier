@@ -440,10 +440,17 @@ final class HttpClient
     }
 
     /**
-     * Prevent unserialization
-     * @throws LogicException
+     * Prevent serialization of the singleton instance
      */
-    public function __wakeup()
+    public function __serialize(): array
+    {
+        throw new LogicException('Cannot serialize singleton');
+    }
+
+    /**
+     * Prevent unserialization of the singleton instance
+     */
+    public function __unserialize(array $data): void
     {
         throw new LogicException('Cannot unserialize singleton');
     }

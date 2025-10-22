@@ -173,10 +173,18 @@ class Config
     private function __clone() {}
 
     /**
+     * Prevent serialization of the singleton instance
+     */
+    public function __serialize(): array
+    {
+        throw new \LogicException("Cannot serialize a singleton.");
+    }
+
+    /**
      * Prevent unserialization of the singleton instance
      */
-    public function __wakeup()
+    public function __unserialize(array $data): void
     {
-        throw new \Exception("Cannot unserialize a singleton.");
+        throw new \LogicException("Cannot unserialize a singleton.");
     }
 }

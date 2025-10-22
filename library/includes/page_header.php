@@ -117,7 +117,10 @@ $template->assign_vars([
     'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
 
     'USER_LANG' => $userdata['user_lang'],
-    'USER_LANG_DIRECTION' => (isset(config()->get('lang')[$userdata['user_lang']]['rtl']) && (config()->get('lang')[$userdata['user_lang']]['rtl'] === true)) ? 'rtl' : 'ltr',
+    'USER_LANG_DIRECTION' => (function() use ($userdata) {
+        $langConfig = config()->get('lang') ?? [];
+        return (isset($langConfig[$userdata['user_lang']]['rtl']) && $langConfig[$userdata['user_lang']]['rtl'] === true) ? 'rtl' : 'ltr';
+    })(),
 
     'INCLUDE_BBCODE_JS' => !empty($page_cfg['include_bbcode_js']),
     'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),
@@ -171,8 +174,8 @@ $template->assign_vars([
     'U_TERMS' => config()->get('terms_and_conditions_url'),
     'U_TRACKER' => 'tracker.php',
 
-    'SHOW_SIDEBAR1' => !empty(config()->get('page.show_sidebar1')[BB_SCRIPT]) || config()->get('show_sidebar1_on_every_page'),
-    'SHOW_SIDEBAR2' => !empty(config()->get('page.show_sidebar2')[BB_SCRIPT]) || config()->get('show_sidebar2_on_every_page'),
+    'SHOW_SIDEBAR1' => !empty((config()->get('page.show_sidebar1') ?? [])[BB_SCRIPT]) || config()->get('show_sidebar1_on_every_page'),
+    'SHOW_SIDEBAR2' => !empty((config()->get('page.show_sidebar2') ?? [])[BB_SCRIPT]) || config()->get('show_sidebar2_on_every_page'),
 
     'HTML_AGREEMENT' => LANG_DIR . 'html/user_agreement.html',
     'HTML_COPYRIGHT' => LANG_DIR . 'html/copyright_holders.html',
@@ -215,7 +218,7 @@ $template->assign_vars([
     'U_WATCHED_TOPICS' => 'profile.php?mode=watch'
 ]);
 
-if (!empty(config()->get('page.show_torhelp')[BB_SCRIPT]) && !empty($userdata['torhelp'])) {
+if (!empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty($userdata['torhelp'])) {
     $ignore_time = !empty($_COOKIE['torhelp']) ? (int)$_COOKIE['torhelp'] : 0;
 
     if (TIMENOW > $ignore_time) {
