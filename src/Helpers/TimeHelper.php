@@ -92,11 +92,6 @@ class TimeHelper
             $carbon = Carbon::createFromTimestamp($timestamp, 'UTC')->addHours($timezoneOffset);
             $now = Carbon::createFromTimestamp(time(), 'UTC')->addHours($timezoneOffset);
 
-            // Set locale for translations
-            if ($translateDates) {
-                Carbon::setLocale($locale);
-            }
-
             if ($friendlyDate) {
                 // Check if the date is today
                 if ($carbon->isSameDay($now)) {
@@ -110,11 +105,12 @@ class TimeHelper
                 }
             }
 
-            // Use translatedFormat if translate_dates is enabled
+            // Use instance-based locale to avoid global state modification
             return $translateDates
-                ? $carbon->translatedFormat($format)
+                ? $carbon->locale($locale)->translatedFormat($format)
                 : $carbon->format($format);
-        } catch (Exception) {
+        } catch (Exception $e) {
+            error_log('TimeHelper::formatDate error: ' . $e->getMessage());
             return '';
         }
     }
