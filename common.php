@@ -35,7 +35,7 @@ if (!defined('BB_ROOT')) {
     define('BB_ROOT', './');
 }
 if (!defined('BB_SCRIPT')) {
-    define('BB_SCRIPT', null);
+    define('BB_SCRIPT', '');
 }
 
 header('X-Frame-Options: SAMEORIGIN');

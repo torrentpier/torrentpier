@@ -175,7 +175,18 @@ class Config
     /**
      * Prevent unserialization of the singleton instance
      */
-    public function __wakeup()
+    /**
+     * Prevent serialization of the singleton instance
+     */
+    public function __serialize(): array
+    {
+        throw new \Exception("Cannot serialize a singleton.");
+    }
+
+    /**
+     * Prevent unserialization of the singleton instance
+     */
+    public function __unserialize(array $data): void
     {
         throw new \Exception("Cannot unserialize a singleton.");
     }

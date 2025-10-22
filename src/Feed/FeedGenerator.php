@@ -157,7 +157,18 @@ final class FeedGenerator
      * Prevent unserialization
      * @throws LogicException
      */
-    public function __wakeup()
+    /**
+     * Prevent serialization of the singleton instance
+     */
+    public function __serialize(): array
+    {
+        throw new LogicException('Cannot serialize singleton');
+    }
+
+    /**
+     * Prevent unserialization of the singleton instance
+     */
+    public function __unserialize(array $data): void
     {
         throw new LogicException('Cannot unserialize singleton');
     }
