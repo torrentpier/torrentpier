@@ -91,12 +91,13 @@ describe('HttpClient Class', function () {
         });
 
         it('throws exception when trying to unserialize', function () {
-            // Singleton pattern prevents unserialization through __wakeup
+            // Singleton pattern prevents unserialization through __unserialize (PHP 8.2+)
             // We test this by checking the method exists and throws
             $instance = HttpClient::getInstance();
             $reflection = new ReflectionClass($instance);
 
-            expect($reflection->hasMethod('__wakeup'))->toBeTrue();
+            expect($reflection->hasMethod('__serialize'))->toBeTrue()
+                ->and($reflection->hasMethod('__unserialize'))->toBeTrue();
         });
     });
 
