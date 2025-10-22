@@ -154,10 +154,6 @@ final class FeedGenerator
     }
 
     /**
-     * Prevent unserialization
-     * @throws LogicException
-     */
-    /**
      * Prevent serialization of the singleton instance
      */
     public function __serialize(): array
