@@ -1176,57 +1176,43 @@ function setup_style()
     return ['template_name' => $tpl_dir_name];
 }
 
-// Create date / time with format and friendly date
-function bb_date($gmepoch, $format = false, $friendly_date = true)
+/**
+ * Format timestamp with timezone and locale support
+ *
+ * @param int $timestamp Unix timestamp
+ * @param string|false $format Date format (false = use default)
+ * @param bool $friendly_date Show "Today"/"Yesterday"
+ * @return string Formatted date string
+ */
+function bb_date(int $timestamp, string|false $format = false, bool $friendly_date = true): string
 {
-    global $lang, $userdata;
+    global $userdata;
 
-    $gmepoch = (int)$gmepoch;
-
-    if (!$format) {
-        $format = config()->get('default_dateformat');
-    }
-    if (empty($lang)) {
-        lang()->initializeLanguage();
-    }
-
+    // Determine timezone offset
     if (!defined('IS_GUEST') || IS_GUEST) {
-        $tz = config()->get('board_timezone');
+        $tz = (float)config()->get('board_timezone', 0);
     } else {
-        $tz = $userdata['user_timezone'];
+        $tz = (float)($userdata['user_timezone'] ?? 0);
     }
 
-    $date = gmdate($format, $gmepoch + (3600 * $tz));
+    // Determine user locale
+    $locale = $userdata['user_lang'] ?? config()->get('default_lang', 'en');
 
-    if ($friendly_date) {
-        $time_format = ' H:i';
+    // Prepare labels for "today" and "yesterday"
+    $labels = [
+        'today' => __('DATETIME.TODAY', 'Today'),
+        'yesterday' => __('DATETIME.YESTERDAY', 'Yesterday'),
+    ];
 
-        $today = gmdate('d', TIMENOW + (3600 * $tz));
-        $month = gmdate('m', TIMENOW + (3600 * $tz));
-        $year = gmdate('Y', TIMENOW + (3600 * $tz));
-
-        $date_today = gmdate('d', $gmepoch + (3600 * $tz));
-        $date_month = gmdate('m', $gmepoch + (3600 * $tz));
-        $date_year = gmdate('Y', $gmepoch + (3600 * $tz));
-
-        if ($date_today == $today && $date_month == $month && $date_year == $year) {
-            $date = 'today' . gmdate($time_format, $gmepoch + (3600 * $tz));
-        } elseif ($today != 1 && $date_today == ($today - 1) && $date_month == $month && $date_year == $year) {
-            $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
-        } elseif ($today == 1 && $month != 1) {
-            $yesterday = date('t', mktime(0, 0, 0, ($month - 1), 1, $year));
-            if ($date_today == $yesterday && $date_month == ($month - 1) && $date_year == $year) {
-                $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
-            }
-        } elseif ($today == 1 && $month == 1) {
-            $yesterday = date('t', mktime(0, 0, 0, 12, 1, ($year - 1)));
-            if ($date_today == $yesterday && $date_month == 12 && $date_year == ($year - 1)) {
-                $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
-            }
-        }
-    }
-
-    return (config()->get('translate_dates')) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
+    // Use TimeHelper for actual formatting
+    return \TorrentPier\Helpers\TimeHelper::formatDate(
+        $timestamp,
+        $format,
+        $friendly_date,
+        $tz,
+        $locale,
+        $labels
+    );
 }
 
 /**

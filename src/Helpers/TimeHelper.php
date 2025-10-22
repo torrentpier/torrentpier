@@ -57,4 +57,61 @@ class TimeHelper
             return '';
         }
     }
+
+    /**
+     * Format timestamp with timezone and locale support
+     *
+     * @param int $timestamp Unix timestamp (UTC)
+     * @param string|false $format Date format string (false = use default)
+     * @param bool $friendlyDate Show "Today"/"Yesterday" instead of date
+     * @param float $timezoneOffset Timezone offset in hours (e.g., 3, -5, 5.5)
+     * @param string|null $locale Locale for translations (null = use default)
+     * @param array $labels Custom labels for "today" and "yesterday"
+     * @return string Formatted date string
+     */
+    public static function formatDate(
+        int          $timestamp,
+        string|false $format = false,
+        bool         $friendlyDate = true,
+        float        $timezoneOffset = 0,
+        ?string      $locale = null,
+        array        $labels = []
+    ): string
+    {
+        if (!$format) {
+            $format = function_exists('config')
+                ? config()->get('default_dateformat', 'd-M-Y H:i')
+                : 'd-M-Y H:i';
+        }
+
+        $locale = $locale ?? (function_exists('config') ? config()->get('default_lang', 'en') : 'en');
+        $translateDates = function_exists('config') ? config()->get('translate_dates', true) : true;
+
+        try {
+            // Create Carbon instance with timezone offset
+            $carbon = Carbon::createFromTimestamp($timestamp, 'UTC')->addHours($timezoneOffset);
+            $now = Carbon::createFromTimestamp(time(), 'UTC')->addHours($timezoneOffset);
+
+            if ($friendlyDate) {
+                // Check if the date is today
+                if ($carbon->isSameDay($now)) {
+                    $todayLabel = $labels['today'] ?? 'Today';
+                    return $todayLabel . ' ' . $carbon->format('H:i');
+                }
+                // Check if the date is yesterday
+                if ($carbon->isSameDay($now->copy()->subDay())) {
+                    $yesterdayLabel = $labels['yesterday'] ?? 'Yesterday';
+                    return $yesterdayLabel . ' ' . $carbon->format('H:i');
+                }
+            }
+
+            // Use instance-based locale to avoid global state modification
+            return $translateDates
+                ? $carbon->locale($locale)->translatedFormat($format)
+                : $carbon->format($format);
+        } catch (Exception $e) {
+            error_log('TimeHelper::formatDate error: ' . $e->getMessage());
+            return '';
+        }
+    }
 }
