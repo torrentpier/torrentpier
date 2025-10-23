@@ -143,6 +143,114 @@ class Config
         return $this->config[$section] ?? [];
     }
 
+    // ========================================================================
+    // MOD CONFIGURATION NAMESPACE ISOLATION
+    // ========================================================================
+
+    /**
+     * Get mod-specific configuration value
+     *
+     * Reads from 'mods.{mod_id}.{key}' namespace
+     *
+     * @param string $modId Mod identifier
+     * @param string $key Config key
+     * @param mixed $default Default value if not found
+     * @return mixed Config value
+     */
+    public function getModConfig(string $modId, string $key, mixed $default = null): mixed
+    {
+        return $this->get("mods.{$modId}.{$key}", $default);
+    }
+
+    /**
+     * Set mod-specific configuration value
+     *
+     * Writes to 'mods.{mod_id}.{key}' namespace
+     *
+     * @param string $modId Mod identifier
+     * @param string $key Config key
+     * @param mixed $value Config value
+     * @return void
+     */
+    public function setModConfig(string $modId, string $key, mixed $value): void
+    {
+        $this->set("mods.{$modId}.{$key}", $value);
+    }
+
+    /**
+     * Get all configuration for a specific mod
+     *
+     * Returns entire 'mods.{mod_id}' namespace
+     *
+     * @param string $modId Mod identifier
+     * @return array Mod configuration array
+     */
+    public function getAllModConfig(string $modId): array
+    {
+        return $this->get("mods.{$modId}", []);
+    }
+
+    /**
+     * Check if mod-specific configuration key exists
+     *
+     * @param string $modId Mod identifier
+     * @param string $key Config key
+     * @return bool
+     */
+    public function hasModConfig(string $modId, string $key): bool
+    {
+        return $this->has("mods.{$modId}.{$key}");
+    }
+
+    /**
+     * Delete mod-specific configuration key
+     *
+     * @param string $modId Mod identifier
+     * @param string $key Config key
+     * @return void
+     */
+    public function deleteModConfig(string $modId, string $key): void
+    {
+        $allModConfig = $this->getAllModConfig($modId);
+
+        if (str_contains($key, '.')) {
+            // Handle nested keys
+            $keys = explode('.', $key);
+            $target = &$allModConfig;
+
+            foreach ($keys as $i => $k) {
+                if ($i === count($keys) - 1) {
+                    unset($target[$k]);
+                } else {
+                    if (!isset($target[$k]) || !is_array($target[$k])) {
+                        return; // Key path doesn't exist
+                    }
+                    $target = &$target[$k];
+                }
+            }
+        } else {
+            unset($allModConfig[$key]);
+        }
+
+        // Update the entire mod config
+        $this->set("mods.{$modId}", $allModConfig);
+    }
+
+    /**
+     * Clear all configuration for a specific mod
+     *
+     * Removes entire 'mods.{mod_id}' namespace
+     *
+     * @param string $modId Mod identifier
+     * @return void
+     */
+    public function clearModConfig(string $modId): void
+    {
+        if (isset($this->config['mods'][$modId])) {
+            unset($this->config['mods'][$modId]);
+        }
+    }
+
     /**
      * Magic method to allow property access
      */

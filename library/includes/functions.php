@@ -2122,6 +2122,9 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
         $profile = '<a ' . $target_blank . ' href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
     }
 
+    // Hook: user.display_name - allows mods to modify username display
+    $profile = hooks()->apply_filter('user.display_name', $profile, $data);
+
     if (getBanInfo($user_id)) {
         return '<s>' . $profile . '</s>';
     }

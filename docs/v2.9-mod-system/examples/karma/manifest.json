@@ -1,0 +1,75 @@
+{
+  "id": "karma-system",
+  "name": "Karma System",
+  "description": "User karma/reputation system with upvote/downvote functionality",
+  "version": "2.0.0",
+  "author": "TorrentPier Team",
+  "author_email": "support@torrentpier.com",
+  "author_url": "https://torrentpier.com",
+  "license": "MIT",
+  "requires": {
+    "torrentpier": ">=3.0.0",
+    "php": ">=8.2.0"
+  },
+  "dependencies": [],
+  "hooks": [
+    {
+      "name": "user.display_name",
+      "description": "Adds karma points to username display"
+    },
+    {
+      "name": "post.after_display",
+      "description": "Displays karma voting buttons in posts"
+    },
+    {
+      "name": "profile.info_display",
+      "description": "Shows karma information in user profile"
+    },
+    {
+      "name": "ajax.karma_vote",
+      "description": "Handles karma voting AJAX requests"
+    }
+  ],
+  "ajax_handlers": [
+    {
+      "name": "karma_vote",
+      "method": "handleVote",
+      "permission": "user"
+    },
+    {
+      "name": "karma_stats",
+      "method": "getStats",
+      "permission": "user"
+    }
+  ],
+  "admin_pages": [
+    {
+      "slug": "karma-settings",
+      "title": "Karma Settings",
+      "capability": "admin",
+      "icon": "⭐"
+    }
+  ],
+  "cron_jobs": [
+    {
+      "name": "karma_recalculate",
+      "schedule": "daily",
+      "method": "recalculateAllKarma",
+      "description": "Recalculate karma for all users"
+    }
+  ],
+  "config": {
+    "enabled": true,
+    "min_posts_to_vote": 10,
+    "votes_per_day": 5,
+    "upvote_value": 1,
+    "downvote_value": -1,
+    "show_in_profile": true,
+    "show_in_posts": true,
+    "show_in_username": false,
+    "require_reason": false,
+    "self_vote_allowed": false,
+    "icon_upvote": "👍",
+    "icon_downvote": "👎"
+  }
+}

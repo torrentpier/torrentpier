@@ -137,6 +137,8 @@ function mockDatabase(): Database
     $mock->shouldReceive('init')->andReturn(true);
     $mock->shouldReceive('connect')->andReturn(true);
     $mock->shouldReceive('sql_query')->andReturn(mockResultSet());
+    $mock->shouldReceive('query')->andReturn(mockResultSet());
+    $mock->shouldReceive('prepare')->andReturn(mockPdoStatement());
     $mock->shouldReceive('num_rows')->andReturn(1);
     $mock->shouldReceive('affected_rows')->andReturn(1);
     $mock->shouldReceive('sql_nextid')->andReturn(123);
@@ -180,8 +182,9 @@ function mockPdoStatement(): PDOStatement
 {
     $mock = Mockery::mock(PDOStatement::class);
     $mock->shouldReceive('execute')->andReturn(true);
-    $mock->shouldReceive('fetch')->andReturn(['id' => 1, 'name' => 'test']);
-    $mock->shouldReceive('fetchAll')->andReturn([['id' => 1, 'name' => 'test']]);
+    $mock->shouldReceive('fetch')->andReturn(false)->byDefault(); // Return false (no rows) by default
+    $mock->shouldReceive('fetchAll')->andReturn([])->byDefault(); // Return empty array by default
+    $mock->shouldReceive('fetchColumn')->andReturn(0)->byDefault(); // Return 0 for COUNT queries
 
     return $mock;
 }
@@ -204,10 +207,10 @@ function mockDatabaseDebugger(): DatabaseDebugger
 function mockCacheManager(): CacheManager
 {
     $mock = Mockery::mock(CacheManager::class);
-    $mock->shouldReceive('get')->andReturn('test_value');
+    $mock->shouldReceive('get')->andReturn(false)->byDefault(); // Return false (cache miss) by default
     $mock->shouldReceive('set')->andReturn(true);
     $mock->shouldReceive('rm')->andReturn(true);
-    $mock->shouldReceive('load')->andReturn('test_value');
+    $mock->shouldReceive('load')->andReturn(false)->byDefault();
     $mock->shouldReceive('save')->andReturn(true);
     $mock->shouldReceive('clean')->andReturn(true);
 
@@ -512,9 +515,63 @@ function mockUtimeFunction(): void
     }
 }
 
+function mockCacheFunction(): void
+{
+    if (!function_exists('CACHE')) {
+        eval('function CACHE($name = "default") { return mockCacheManager(); }');
+    }
+}
+
+function mockDbFunction(): void
+{
+    if (!function_exists('DB')) {
+        eval('function DB() { return mockDatabase(); }');
+    }
+}
+
+function mockConfigFunction(): void
+{
+    if (!function_exists('config')) {
+        eval('
+            function config() {
+                return new class {
+                    public function get($key, $default = null) {
+                        // Mock versions for ModLoader and HttpClient
+                        if ($key === "version") {
+                            return "3.0.0";
+                        }
+                        if ($key === "tp_version") {
+                            return "2.4.0";
+                        }
+                        return $default;
+                    }
+                    public function set($key, $value) {
+                        return true;
+                    }
+                };
+            }
+        ');
+    }
+}
+
+function mockHooksFunction(): void
+{
+    if (!function_exists('hooks')) {
+        eval('
+            function hooks() {
+                return TorrentPier\\Hooks\\HookManager::getInstance();
+            }
+        ');
+    }
+}
+
 // Initialize test environment when Pest loads
 setupTestEnvironment();
 mockDevFunction();
 mockBbLogFunction();
 mockHideBbPathFunction();
 mockUtimeFunction();
+mockCacheFunction();
+mockDbFunction();
+mockConfigFunction();
+mockHooksFunction();
