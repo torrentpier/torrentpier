@@ -2,6 +2,18 @@
 
 # 📖 Change Log
 
+## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/master/TorrentPier-master)
+
+### 🐛 Bug Fixes
+
+- *(php8.5)* Add PHP 8.5 compatibility ([#2207](https://github.com/torrentpier/torrentpier/pull/2207)) - ([a0dd7a5](https://github.com/torrentpier/torrentpier/commit/a0dd7a54db3d86d11d1723952e2c47458d19917e))
+
+### 🚜 Refactor
+
+- *(datetime)* Integrate Carbon for date formatting ([#2208](https://github.com/torrentpier/torrentpier/pull/2208)) - ([d749c9b](https://github.com/torrentpier/torrentpier/commit/d749c9b48134f0d5ae2dde5f426c1f6e75e3bc80))
+- *(timezone)* Replace `$lang['TZ']` with centralized configuration for timezone management - ([a9d1158](https://github.com/torrentpier/torrentpier/commit/a9d1158e4eeb6d77e1fe180d8ec8b1f137777084))
+
+
 ## [v2.8.8](https://github.com/torrentpier/torrentpier/compare/v2.8.7..v2.8.8) (2025-10-21)
 
 ### 🚀 Features
