@@ -43,6 +43,13 @@ class Dev
     private Run $whoops;
 
     /**
+     * Debug log messages
+     *
+     * @var array
+     */
+    private array $debugLog = [];
+
+    /**
      * Initialize debugging system
      */
     private function __construct()
@@ -446,5 +453,93 @@ class Dev
     public function __unserialize(array $data): void
     {
         throw new \LogicException("Cannot unserialize a singleton.");
+    }
+
+    /**
+     * Add debug log message
+     *
+     * @param string $category Category/section of the log (e.g., 'mod_system', 'hooks', 'cache')
+     * @param string $message Debug message
+     * @param array $context Additional context data
+     * @return void
+     */
+    public function log(string $category, string $message, array $context = []): void
+    {
+        $this->debugLog[] = [
+            'time' => microtime(true),
+            'category' => $category,
+            'message' => $message,
+            'context' => $context,
+        ];
+    }
+
+    /**
+     * Get debug log as HTML
+     *
+     * @return string
+     */
+    public function getDebugLog(): string
+    {
+        if (empty($this->debugLog)) {
+            return '';
+        }
+
+        $html = '<div class="sqlLogTitle">Debug Log (' . count($this->debugLog) . ' entries)</div>';
+
+        $categoryColors = [
+            'mod_system' => '#007bff',
+            'hooks' => '#28a745',
+            'cache' => '#ffc107',
+            'database' => '#dc3545',
+            'template' => '#6f42c1',
+        ];
+
+        foreach ($this->debugLog as $i => $entry) {
+            $color = $categoryColors[$entry['category']] ?? '#6c757d';
+            $time = sprintf('%.4f', $entry['time'] - ($_SERVER['REQUEST_TIME_FLOAT'] ?? $entry['time']));
+
+            $id = "debug_{$i}_" . random_int(0, mt_getrandmax());
+
+            $contextHtml = '';
+            if (!empty($entry['context'])) {
+                $contextJson = json_encode($entry['context'], JSON_UNESCAPED_UNICODE);
+                $contextHtml = ' <span style="color: rgb(128,128,128);"># ' . htmlspecialchars($contextJson) . '</span>';
+            }
+
+            $html .= '<div onclick="$(this).toggleClass(\'sqlHighlight\');" class="sqlLogRow" style="border-left: 3px solid ' . $color . ';">'
+                . '<span style="letter-spacing: -1px;">' . $time . 's </span>'
+                . '<span class="copyElement" data-clipboard-target="#' . $id . '" title="Copy to clipboard" style="color: ' . $color . '; letter-spacing: -1px; font-weight: bold;">[' . $entry['category'] . ']</span>&nbsp;'
+                . '<span style="letter-spacing: 0;" id="' . $id . '">' . htmlspecialchars($entry['message']) . '</span>'
+                . $contextHtml
+                . '</div>';
+        }
+
+        return $html;
+    }
+
+    /**
+     * Clear debug log
+     *
+     * @return void
+     */
+    public function clearDebugLog(): void
+    {
+        $this->debugLog = [];
+    }
+
+    /**
+     * Get debug log wrapped in HTML container (for page footer display)
+     *
+     * @return string
+     */
+    public function getDebugLogHtml(): string
+    {
+        $debugLog = $this->getDebugLog();
+
+        if (empty($debugLog)) {
+            return '';
+        }
+
+        return $debugLog;
     }
 }

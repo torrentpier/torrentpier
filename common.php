@@ -264,10 +264,55 @@ function datastore(): \TorrentPier\Cache\DatastoreManager
 }
 
 /**
+ * Get hook system manager instance
+ *
+ * @return \TorrentPier\Hooks\HookManager
+ */
+function hooks(): \TorrentPier\Hooks\HookManager
+{
+    return TorrentPier\Hooks\HookManager::getInstance();
+}
+
+/**
  * Backward compatibility: Global datastore variable
  * This allows existing code to continue using global $datastore
  */
 $datastore = datastore();
+
+/**
+ * Initialize Mod System
+ */
+$modLoader = TorrentPier\ModSystem\ModLoader::getInstance(BB_PATH . '/mods');
+
+/**
+ * Get the ModLoader instance
+ *
+ * @return \TorrentPier\ModSystem\ModLoader
+ */
+function modLoader(): \TorrentPier\ModSystem\ModLoader
+{
+    return TorrentPier\ModSystem\ModLoader::getInstance();
+}
+
+/**
+ * Load and activate mods from database
+ * This queries active mods from the bb_mods table and loads them
+ */
+try {
+    dev()->log('mod_system', 'ModLoader path: ' . $modLoader->getModsPath());
+
+    $modLoader->loadActiveMods();
+
+    $activeMods = $modLoader->getActiveMods();
+    dev()->log('mod_system', 'Active mods loaded: ' . count($activeMods));
+
+    foreach ($activeMods as $modId => $mod) {
+        dev()->log('mod_system', "Mod loaded: {$modId}", ['class' => get_class($mod)]);
+    }
+} catch (\Exception $e) {
+    dev()->log('mod_system', 'MOD SYSTEM ERROR: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+    bb_log('Failed to initialize mod system: ' . $e->getMessage(), 'mod_errors');
+}
 
 // Functions
 function utime()

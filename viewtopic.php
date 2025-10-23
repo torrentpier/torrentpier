@@ -555,7 +555,10 @@ if ($topic_has_poll) {
 
 $prev_post_time = $max_post_time = 0;
 
+dev()->log('hooks', 'viewtopic: Starting posts loop', ['total_posts' => $total_posts]);
+
 for ($i = 0; $i < $total_posts; $i++) {
+    dev()->log('hooks', "viewtopic: Processing post #{$i}");
     $poster_id = $postrow[$i]['user_id'];
     $poster_guest = ($poster_id == GUEST_UID);
     $poster_bot = ($poster_id == BOT_UID);
@@ -734,6 +737,11 @@ for ($i = 0; $i < $total_posts; $i++) {
         'RG_SIG' => $rg_signature,
         'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig']
     ]);
+
+    // Hook: post.after_display - allows mods to add content after each post
+    dev()->log('hooks', "viewtopic: BEFORE calling post.after_display hook for post #{$i}");
+    hooks()->do_action('post.after_display', $postrow[$i]);
+    dev()->log('hooks', "viewtopic: AFTER calling post.after_display hook for post #{$i}");
 
     // Ban information
     if ($banInfo = getBanInfo((int)$poster_id)) {

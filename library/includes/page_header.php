@@ -255,6 +255,10 @@ if (!IS_GUEST) {
 }
 
 $template->set_filenames(['page_header' => 'page_header.tpl']);
+
+// Hook: template.head - allows mods to inject CSS/JS into page head
+hooks()->do_action('template.head');
+
 $template->pparse('page_header');
 
 define('PAGE_HEADER_SENT', true);
