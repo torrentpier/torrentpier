@@ -95,24 +95,6 @@ class Torrent
     }
 
     /**
-     * Assign language config variables to template
-     *
-     * @param array $default_cfg
-     */
-    public static function set_tpl_vars_lang($default_cfg)
-    {
-        global $template, $lang;
-
-        foreach ($default_cfg as $config_name => $config_value) {
-            $template->assign_vars([
-                'L_' . strtoupper($config_name) => $lang[$config_name] ?? '',
-                'L_' . strtoupper($config_name) . '_EXPL' => $lang[$config_name . '_expl'] ?? '',
-                'L_' . strtoupper($config_name) . '_HEAD' => $lang[$config_name . '_head'] ?? '',
-            ]);
-        }
-    }
-
-    /**
      * Update config table
      *
      * @param string $table_name
