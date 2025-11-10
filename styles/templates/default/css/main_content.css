@@ -57,7 +57,7 @@ td.topic_id {
 table.mod_ip {
   background: #F9F9F9;
   border: 1px solid #A5AFB4;
-  border-collapse: separate;
+  border-collapse: collapse;
 }
 
 table.mod_ip td {
@@ -172,9 +172,6 @@ table.forums {
   margin-right: 1px;
 }
 
-.sf_separator {
-}
-
 .sf_title a {
   text-decoration: none;
 }
@@ -217,13 +214,7 @@ table.forums {
 .f_stat_inline {
   margin-top: 1px;
   white-space: nowrap;
-}
-
-.f_stat_topics {
-}
-
-.f_stat_posts {
-  padding-left: 3px;
+  display: block;
 }
 
 .f_icon {
@@ -248,10 +239,6 @@ table.forums {
 
 .f_last_post {
   width: 230px;
-}
-
-.f_stat_inline {
-  display: block;
 }
 
 table.forums {
@@ -442,9 +429,6 @@ a.postLink:visited {
 
 .signature {
   clear: both;
-}
-
-.signature {
   max-height: 100px;
   overflow: hidden;
 }
@@ -499,7 +483,7 @@ a.postLink:visited {
   font-size: 11px;
   font-weight: bold;
   letter-spacing: 1px;
-  text-align: center
+  text-align: center;
 }
 
 img.poster-flag {
@@ -615,9 +599,6 @@ img.client_icon {
   height: auto;
   display: inline !important;
   vertical-align: middle;
-}
-
-.dl_list {
 }
 
 .dl_list td {
@@ -826,6 +807,10 @@ a.tr-dl:visited, a.f-dl:visited, a.dl-link:visited {
   color: #0080FF;
 }
 
+#fs-sel-cat {
+  width: 260px;
+}
+
 #fs-sel-cat option.cat-title {
   font-weight: bold;
   color: #005A88;
@@ -855,16 +840,6 @@ tr.hl-tr:hover td {
   padding: 8px;
   max-height: 500px;
   overflow: auto;
-}
-
-#fs-sel-cat {
-  width: 260px;
-}
-
-#fs-sel-cat option.cat-title {
-  font-weight: bold;
-  color: #005A88;
-  background: #F5F5F5;
 }
 
 .dlWill {
