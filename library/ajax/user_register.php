@@ -49,7 +49,7 @@ switch ($mode) {
 
     case 'check_country':
         $country = (string)$this->request['country'];
-        $html = render_flag($country);
+        $html = render_flag($country, false);
         break;
 
     default:

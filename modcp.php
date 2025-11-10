@@ -73,9 +73,9 @@ function validate_mode_condition($request_index, $mod_action = '')
 $user->session_start(['req_login' => true]);
 
 // Obtain initial vars
-$forum_id = $_REQUEST[POST_FORUM_URL] ?? 0;
-$topic_id = $_REQUEST[POST_TOPIC_URL] ?? 0;
-$post_id = $_REQUEST[POST_POST_URL] ?? 0;
+$forum_id = isset($_REQUEST[POST_FORUM_URL]) ? (int)$_REQUEST[POST_FORUM_URL] : 0;
+$topic_id = isset($_REQUEST[POST_TOPIC_URL]) ? (int)$_REQUEST[POST_TOPIC_URL] : 0;
+$post_id = isset($_REQUEST[POST_POST_URL]) ? (int)$_REQUEST[POST_POST_URL] : 0;
 
 $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $confirmed = isset($_POST['confirm']);
