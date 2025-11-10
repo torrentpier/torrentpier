@@ -91,15 +91,8 @@ if ($submit && $confirm) {
 
 // Set template vars
 \TorrentPier\Legacy\Admin\Torrent::set_tpl_vars($default_cfg_str, $cfg);
-\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($default_cfg_str);
-
 \TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_bool($default_cfg_bool, $cfg);
-\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($default_cfg_bool);
-
 \TorrentPier\Legacy\Admin\Torrent::set_tpl_vars($default_cfg_num, $cfg);
-\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($default_cfg_num);
-
-\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($db_fields_bool);
 
 // Get Forums list
 $sql = 'SELECT f.*
