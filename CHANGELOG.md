@@ -7,11 +7,22 @@
 ### 🐛 Bug Fixes
 
 - *(php8.5)* Add PHP 8.5 compatibility ([#2207](https://github.com/torrentpier/torrentpier/pull/2207)) - ([a0dd7a5](https://github.com/torrentpier/torrentpier/commit/a0dd7a54db3d86d11d1723952e2c47458d19917e))
+- *(security)* Prevent SQL injection in moderator panel topic_id parameter ([#2216](https://github.com/torrentpier/torrentpier/pull/2216)) - ([6a0f649](https://github.com/torrentpier/torrentpier/commit/6a0f6499d89fa5d6e2afa8ee53802a1ad11ece80))
+
+### 📦 Dependencies
+
+- *(deps)* Bump arokettu/torrent-file from 5.3.3 to 5.3.4 ([#2211](https://github.com/torrentpier/torrentpier/pull/2211)) - ([99ed126](https://github.com/torrentpier/torrentpier/commit/99ed1267589d727563eea1360291690d80260ee0))
+- *(deps)* Bump symfony/mailer from 7.3.4 to 7.3.5 ([#2212](https://github.com/torrentpier/torrentpier/pull/2212)) - ([6402b78](https://github.com/torrentpier/torrentpier/commit/6402b7873320a23b8e832fa04eda8ebf2cde43c1))
+- *(deps)* Bump nette/database from 3.2.7 to 3.2.8 ([#2213](https://github.com/torrentpier/torrentpier/pull/2213)) - ([b5153fd](https://github.com/torrentpier/torrentpier/commit/b5153fd2f09452ebbc2330412b4f6c4e6842868c))
+- *(deps)* Bump twig/twig from 3.21.1 to 3.22.0 ([#2214](https://github.com/torrentpier/torrentpier/pull/2214)) - ([3002647](https://github.com/torrentpier/torrentpier/commit/30026476f17e31167448512f173586c7857138c8))
+- *(deps-dev)* Bump symfony/var-dumper from 7.3.4 to 7.3.5 ([#2210](https://github.com/torrentpier/torrentpier/pull/2210)) - ([3055554](https://github.com/torrentpier/torrentpier/commit/305555474442e04f2044dd8073cc9a26570f3607))
 
 ### 🚜 Refactor
 
 - *(datetime)* Integrate Carbon for date formatting ([#2208](https://github.com/torrentpier/torrentpier/pull/2208)) - ([d749c9b](https://github.com/torrentpier/torrentpier/commit/d749c9b48134f0d5ae2dde5f426c1f6e75e3bc80))
+- *(styles)* Remove empty selectors and duplicate rules ([#2218](https://github.com/torrentpier/torrentpier/pull/2218)) - ([d61c587](https://github.com/torrentpier/torrentpier/commit/d61c587bb91af75f0df4b48333af656e9de1df66))
 - *(timezone)* Replace `$lang['TZ']` with centralized configuration for timezone management - ([a9d1158](https://github.com/torrentpier/torrentpier/commit/a9d1158e4eeb6d77e1fe180d8ec8b1f137777084))
+- Remove deprecated `set_tpl_vars_lang` method ([#2217](https://github.com/torrentpier/torrentpier/pull/2217)) - ([c0c132d](https://github.com/torrentpier/torrentpier/commit/c0c132df3f6be3e146f144da4c97be195bad45a6))
 
 
 ## [v2.8.8](https://github.com/torrentpier/torrentpier/compare/v2.8.7..v2.8.8) (2025-10-21)
