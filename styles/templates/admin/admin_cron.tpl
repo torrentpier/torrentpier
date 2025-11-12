@@ -64,7 +64,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 </tr>
 <!-- ENDIF -->
 <tr>
-	<th colspan="10">{L_CRON_LIST}</th>
+	<th colspan="11">{L_CRON_LIST}</th>
 </tr>
 
 <tr class="row3 med tCenter">
