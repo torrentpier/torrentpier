@@ -63,7 +63,22 @@ switch ($mode) {
 
         foreach ($sql as $i => $row) {
             $execution_time = $row['execution_time'] ?? 0;
-            $execution_time_formatted = $execution_time > 0 ? number_format($execution_time, 4) . ' ' . $lang['SEC'] : '—';
+
+            if ($execution_time > 0) {
+                $execution_time_formatted = number_format($execution_time, 4) . ' ' . $lang['SEC'];
+
+                if ($execution_time < 1) {
+                    $time_color = '#286e0f';
+                } elseif ($execution_time < 10) {
+                    $time_color = '#d7b101';
+                } else {
+                    $time_color = '#bc2a4d';
+                }
+
+                $execution_time_formatted = '<span style="color: ' . $time_color . ';"><b>' . $execution_time_formatted . '</b></span>';
+            } else {
+                $execution_time_formatted = '—';
+            }
 
             $template->assign_block_vars('list', array(
                 'ROW_CLASS' => !($i % 2) ? 'row2' : 'row1',
