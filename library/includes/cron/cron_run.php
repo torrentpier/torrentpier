@@ -63,7 +63,9 @@ foreach ($cron_jobs as $job) {
         }
 
         set_time_limit(600);
+        $job_start_time = microtime(true);
         require($job_script);
+        $job_execution_time = microtime(true) - $job_start_time;
 
         if ($job['log_sql_queries']) {
             DB()->log_next_query(0);
@@ -92,6 +94,7 @@ foreach ($cron_jobs as $job) {
 			UPDATE " . BB_CRON . " SET
 				last_run = NOW(),
 				run_counter = run_counter + 1,
+				execution_time = " . (float)$job_execution_time . ",
 				next_run =
 			CASE
 				WHEN schedule = 'hourly' THEN
