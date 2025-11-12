@@ -77,6 +77,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 	<td>{L_CRON_LAST_RUN}</td>
 	<td>{L_CRON_NEXT_RUN}</td>
 	<td>{L_CRON_RUN_COUNT}</td>
+	<td>{L_CRON_EXECUTION_TIME}</td>
 	<td>{L_CRON_MANAGE}</td>
 </tr>
 
@@ -91,6 +92,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 	<td class="nowrap tCenter">{list.LAST_RUN}</td>
 	<td class="nowrap tCenter">{list.NEXT_RUN}</td>
 	<td class="nowrap tCenter"><span style="color: #505050;" class="leechmed"><b>{list.RUN_COUNT}</b></span></td>
+	<td class="nowrap tCenter"><span style="color: #286e0f;" class="seedmed"><b>{list.EXECUTION_TIME}</b></span></td>
 	<td class="nowrap tCenter">
 		<a href="admin_cron.php?mode=run&id={list.CRON_ID}"><img src="{SITE_URL}styles/images/icon_sync.gif" alt="[Run]" title="{L_CRON_RUN}" /></a>
 		<a href="admin_cron.php?mode=edit&id={list.CRON_ID}"><img src="{SITE_URL}styles/images/icon_edit.gif" alt="[Edit]" title="{L_CRON_EDIT_HEAD_EDIT}" /></a>

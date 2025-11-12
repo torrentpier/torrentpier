@@ -62,6 +62,9 @@ switch ($mode) {
         $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . ' ORDER BY cron_id');
 
         foreach ($sql as $i => $row) {
+            $execution_time = $row['execution_time'] ?? 0;
+            $execution_time_formatted = $execution_time > 0 ? number_format($execution_time, 4) . ' ' . $lang['SEC'] : '—';
+
             $template->assign_block_vars('list', array(
                 'ROW_CLASS' => !($i % 2) ? 'row2' : 'row1',
                 'JOB_ID' => $i + 1,
@@ -74,6 +77,7 @@ switch ($mode) {
                 'LAST_RUN' => $row['last_run'],
                 'NEXT_RUN' => $row['next_run'],
                 'RUN_COUNT' => $row['run_counter'],
+                'EXECUTION_TIME' => $execution_time_formatted,
             ));
         }
 
