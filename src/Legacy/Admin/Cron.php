@@ -24,11 +24,11 @@ class Cron
     {
         /** @noinspection PhpUnusedLocalVariableInspection */
         // bb_cfg deprecated, but kept for compatibility with non-adapted cron jobs
-        global $bb_cfg, $datastore;
+        global $bb_cfg, $datastore, $cron_runtime_log;
 
         \define('IN_CRON', true);
 
-        $sql = "SELECT cron_id, cron_script FROM " . BB_CRON . " WHERE cron_id IN ($jobs)";
+        $sql = "SELECT * FROM " . BB_CRON . " WHERE cron_id IN ($jobs)";
         if (!$result = DB()->sql_query($sql)) {
             bb_die('Could not obtain cron script');
         }
@@ -38,9 +38,23 @@ class Cron
             $job_id = $row['cron_id'];
             $job_script = INC_DIR . '/cron/jobs/' . $job;
 
+            $cron_runtime_log = [];
+            $cron_write_log = ($row['log_enabled'] >= 1);
+
+            if ($cron_write_log) {
+                $cron_runtime_log[] = '[MANUAL RUN] Started at ' . date('Y-m-d H:i:s') . ' from admin panel';
+            }
+
             $start_time = microtime(true);
             require($job_script);
             $execution_time = microtime(true) - $start_time;
+
+            if ($cron_write_log && is_array($cron_runtime_log) && !empty($cron_runtime_log)) {
+                $runtime_log_file = ($row['log_file']) ?: $row['cron_script'];
+                $cron_runtime_log[] = '[MANUAL RUN] Finished at ' . date('Y-m-d H:i:s');
+                $cron_runtime_log[] = '';
+                bb_log($cron_runtime_log, CRON_LOG_DIR . '/' . basename($runtime_log_file));
+            }
 
             DB()->query("
                 UPDATE " . BB_CRON . " SET
