@@ -24,43 +24,63 @@ class Cron
     {
         /** @noinspection PhpUnusedLocalVariableInspection */
         // bb_cfg deprecated, but kept for compatibility with non-adapted cron jobs
-        global $bb_cfg, $datastore;
+        global $bb_cfg, $datastore, $cron_runtime_log;
 
         \define('IN_CRON', true);
 
-        $sql = "SELECT cron_script FROM " . BB_CRON . " WHERE cron_id IN ($jobs)";
+        $sql = "SELECT * FROM " . BB_CRON . " WHERE cron_id IN ($jobs)";
         if (!$result = DB()->sql_query($sql)) {
             bb_die('Could not obtain cron script');
         }
 
         while ($row = DB()->sql_fetchrow($result)) {
             $job = $row['cron_script'];
+            $job_id = $row['cron_id'];
             $job_script = INC_DIR . '/cron/jobs/' . $job;
+
+            $cron_runtime_log = [];
+            $cron_write_log = ($row['log_enabled'] >= 1);
+
+            if ($cron_write_log) {
+                $cron_runtime_log[] = '[MANUAL RUN] Started at ' . date('Y-m-d H:i:s') . ' from admin panel';
+            }
+
+            $start_time = microtime(true);
             require($job_script);
+            $execution_time = microtime(true) - $start_time;
+
+            if ($cron_write_log && is_array($cron_runtime_log) && !empty($cron_runtime_log)) {
+                $runtime_log_file = ($row['log_file']) ?: $row['cron_script'];
+                $cron_runtime_log[] = '[MANUAL RUN] Finished at ' . date('Y-m-d H:i:s');
+                $cron_runtime_log[] = '';
+                bb_log($cron_runtime_log, CRON_LOG_DIR . '/' . basename($runtime_log_file));
+            }
+
+            DB()->query("
+                UPDATE " . BB_CRON . " SET
+                    last_run = NOW(),
+                    run_counter = run_counter + 1,
+                    execution_time = " . (float)$execution_time . ",
+                    next_run =
+                CASE
+                    WHEN schedule = 'hourly' THEN
+                        DATE_ADD(NOW(), INTERVAL 1 HOUR)
+                    WHEN schedule = 'daily' THEN
+                        DATE_ADD(DATE_ADD(CURDATE(), INTERVAL 1 DAY), INTERVAL TIME_TO_SEC(run_time) SECOND)
+                    WHEN schedule = 'weekly' THEN
+                        DATE_ADD(
+                            DATE_ADD(DATE_SUB(CURDATE(), INTERVAL WEEKDAY(NOW()) DAY), INTERVAL 7 DAY),
+                        INTERVAL CONCAT(ROUND(run_day-1), ' ', run_time) DAY_SECOND)
+                    WHEN schedule = 'monthly' THEN
+                        DATE_ADD(
+                            DATE_ADD(DATE_SUB(CURDATE(), INTERVAL DAYOFMONTH(NOW())-1 DAY), INTERVAL 1 MONTH),
+                        INTERVAL CONCAT(ROUND(run_day-1), ' ', run_time) DAY_SECOND)
+                    ELSE
+                        DATE_ADD(NOW(), INTERVAL TIME_TO_SEC(run_interval) SECOND)
+                END
+                WHERE cron_id = $job_id
+            ");
         }
-        DB()->query("
-			UPDATE " . BB_CRON . " SET
-				last_run = NOW(),
-				run_counter = run_counter + 1,
-				next_run =
-			CASE
-				WHEN schedule = 'hourly' THEN
-					DATE_ADD(NOW(), INTERVAL 1 HOUR)
-				WHEN schedule = 'daily' THEN
-					DATE_ADD(DATE_ADD(CURDATE(), INTERVAL 1 DAY), INTERVAL TIME_TO_SEC(run_time) SECOND)
-				WHEN schedule = 'weekly' THEN
-					DATE_ADD(
-						DATE_ADD(DATE_SUB(CURDATE(), INTERVAL WEEKDAY(NOW()) DAY), INTERVAL 7 DAY),
-					INTERVAL CONCAT(ROUND(run_day-1), ' ', run_time) DAY_SECOND)
-				WHEN schedule = 'monthly' THEN
-					DATE_ADD(
-						DATE_ADD(DATE_SUB(CURDATE(), INTERVAL DAYOFMONTH(NOW())-1 DAY), INTERVAL 1 MONTH),
-					INTERVAL CONCAT(ROUND(run_day-1), ' ', run_time) DAY_SECOND)
-				ELSE
-					DATE_ADD(NOW(), INTERVAL TIME_TO_SEC(run_interval) SECOND)
-			END
-			WHERE cron_id IN ($jobs)
-		");
     }
 
     /**

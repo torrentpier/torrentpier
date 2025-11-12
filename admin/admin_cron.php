@@ -62,6 +62,24 @@ switch ($mode) {
         $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . ' ORDER BY cron_id');
 
         foreach ($sql as $i => $row) {
+            $execution_time = $row['execution_time'] ?? 0;
+
+            if ($execution_time > 0) {
+                $execution_time_formatted = number_format($execution_time, 4) . ' ' . $lang['SEC'];
+
+                if ($execution_time < 1) {
+                    $time_color = '#286e0f';
+                } elseif ($execution_time < 10) {
+                    $time_color = '#d7b101';
+                } else {
+                    $time_color = '#bc2a4d';
+                }
+
+                $execution_time_formatted = '<span style="color: ' . $time_color . ';"><b>' . $execution_time_formatted . '</b></span>';
+            } else {
+                $execution_time_formatted = '—';
+            }
+
             $template->assign_block_vars('list', array(
                 'ROW_CLASS' => !($i % 2) ? 'row2' : 'row1',
                 'JOB_ID' => $i + 1,
@@ -74,6 +92,7 @@ switch ($mode) {
                 'LAST_RUN' => $row['last_run'],
                 'NEXT_RUN' => $row['next_run'],
                 'RUN_COUNT' => $row['run_counter'],
+                'EXECUTION_TIME' => $execution_time_formatted,
             ));
         }
 
@@ -114,11 +133,11 @@ switch ($mode) {
                 'CRON_SCRIPT' => $row['cron_script'],
                 'SCHEDULE' => $row['schedule'] ? $lang['SCHEDULE'][$row['schedule']] : '',
                 'RUN_DAY' => $row['run_day'],
-                'RUN_TIME' => $row['run_time'],
+                'RUN_TIME' => $row['run_time']->format('%H:%I:%S'),
                 'RUN_ORDER' => $row['run_order'],
                 'LAST_RUN' => $row['last_run'],
                 'NEXT_RUN' => $row['next_run'],
-                'RUN_INTERVAL' => $row['run_interval'],
+                'RUN_INTERVAL' => $row['run_interval']->format('%H:%I:%S'),
                 'LOG_ENABLED' => $row['log_enabled'],
                 'LOG_FILE' => $row['log_file'],
                 'LOG_SQL_QUERIES' => $row['log_sql_queries'],
