@@ -858,10 +858,10 @@ $template->assign_vars(array(
     'SEED_EXIST_CHBOX' => build_checkbox($seed_exist_key, $lang['BT_SEED_EXIST'], $seed_exist),
     'ONLY_NEW_CHBOX' => build_checkbox($new_key, $lang['BT_ONLY_NEW'], $only_new, IS_GUEST),
 
-    'DL_CANCEL_CHBOX' => build_checkbox($dl_cancel_key, $lang['SEARCH_DL_CANCEL'], $dl_cancel_val, IS_GUEST, 'dlCancel'),
-    'DL_COMPL_CHBOX' => build_checkbox($dl_compl_key, $lang['SEARCH_DL_COMPLETE'], $dl_compl_val, IS_GUEST, 'dlComplete'),
-    'DL_DOWN_CHBOX' => build_checkbox($dl_down_key, $lang['SEARCH_DL_DOWN'], $dl_down_val, IS_GUEST, 'dlDown'),
-    'DL_WILL_CHBOX' => build_checkbox($dl_will_key, $lang['SEARCH_DL_WILL'], $dl_will_val, IS_GUEST, 'dlWill'),
+    'DL_CANCEL_CHBOX' => build_checkbox($dl_cancel_key, $lang['SEARCH_DL_CANCEL'], $dl_cancel_val, IS_GUEST, $dl_link_css[DL_STATUS_CANCEL]),
+    'DL_COMPL_CHBOX' => build_checkbox($dl_compl_key, $lang['SEARCH_DL_COMPLETE'], $dl_compl_val, IS_GUEST, $dl_link_css[DL_STATUS_COMPLETE]),
+    'DL_DOWN_CHBOX' => build_checkbox($dl_down_key, $lang['SEARCH_DL_DOWN'], $dl_down_val, IS_GUEST, $dl_link_css[DL_STATUS_DOWN]),
+    'DL_WILL_CHBOX' => build_checkbox($dl_will_key, $lang['SEARCH_DL_WILL'], $dl_will_val, IS_GUEST, $dl_link_css[DL_STATUS_WILL]),
 
     'POSTER_NAME_NAME' => $poster_name_key,
     'POSTER_NAME_VAL' => htmlCHR($poster_name_val),
