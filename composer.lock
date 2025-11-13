@@ -5068,12 +5068,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/torrentpier/translations.git",
-                "reference": "508bea477b1a95ebfb5c70cfe5bf19dcd15e3bae"
+                "reference": "0e717f760138686528f0a886f7405451138995a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/torrentpier/translations/zipball/508bea477b1a95ebfb5c70cfe5bf19dcd15e3bae",
-                "reference": "508bea477b1a95ebfb5c70cfe5bf19dcd15e3bae",
+                "url": "https://api.github.com/repos/torrentpier/translations/zipball/0e717f760138686528f0a886f7405451138995a0",
+                "reference": "0e717f760138686528f0a886f7405451138995a0",
                 "shasum": ""
             },
             "require": {
@@ -5119,7 +5119,7 @@
                 "issues": "https://github.com/torrentpier/torrentpier/issues",
                 "source": "https://github.com/torrentpier/translations/tree/main"
             },
-            "time": "2025-11-04T19:48:37+00:00"
+            "time": "2025-11-12T16:44:52+00:00"
         },
         {
             "name": "twig/twig",
