@@ -4,6 +4,10 @@
 
 ## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/master/TorrentPier-master)
 
+### 🚀 Features
+
+- *(cron)* Add execution time tracking for cron jobs ([#2220](https://github.com/torrentpier/torrentpier/pull/2220)) - ([66b6dcf](https://github.com/torrentpier/torrentpier/commit/66b6dcf9d48b5fe580eaa6b0f5b1f7b74948ffa8))
+
 ### 🐛 Bug Fixes
 
 - *(php8.5)* Add PHP 8.5 compatibility ([#2207](https://github.com/torrentpier/torrentpier/pull/2207)) - ([a0dd7a5](https://github.com/torrentpier/torrentpier/commit/a0dd7a54db3d86d11d1723952e2c47458d19917e))
