@@ -92,6 +92,15 @@ class Template
 
     public $lang = [];
 
+    /** @var array Registered template hooks */
+    private $hooks = [
+        'template_before_assign_vars' => [],
+        'template_before_compile' => [],
+        'template_after_compile' => [],
+        'template_before_render' => [],
+        'template_after_render' => [],
+    ];
+
     /**
      * Constructor. Installs XS mod on first run or updates it and sets the root dir.
      *
@@ -115,6 +124,60 @@ class Template
         if (!is_dir($this->root)) {
             die("Theme ({$this->tpl}) directory not found");
         }
+    }
+
+    /**
+     * Register a template hook callback
+     *
+     * @param string $hookName Hook name
+     * @param callable $callback Callback function
+     * @param int $priority Priority (lower runs first)
+     */
+    public function registerHook(string $hookName, callable $callback, int $priority = 10): void
+    {
+        if (!isset($this->hooks[$hookName])) {
+            $this->hooks[$hookName] = [];
+        }
+
+        $this->hooks[$hookName][] = [
+            'callback' => $callback,
+            'priority' => $priority,
+        ];
+
+        // Sort by priority
+        usort($this->hooks[$hookName], function ($a, $b) {
+            return $a['priority'] <=> $b['priority'];
+        });
+    }
+
+    /**
+     * Execute hook callbacks
+     *
+     * @param string $hookName Hook name
+     * @param mixed $data Data to pass to callbacks
+     * @return mixed Modified data
+     */
+    private function executeHook(string $hookName, $data = null)
+    {
+        if (!isset($this->hooks[$hookName]) || empty($this->hooks[$hookName])) {
+            return $data;
+        }
+
+        foreach ($this->hooks[$hookName] as $hook) {
+            try {
+                $result = call_user_func($hook['callback'], $data, $this);
+                if ($result !== null) {
+                    $data = $result;
+                }
+            } catch (\Exception $e) {
+                // Log error but don't break template rendering
+                if (function_exists('bb_log')) {
+                    bb_log("Template hook error ({$hookName}): " . $e->getMessage(), 'template_hooks');
+                }
+            }
+        }
+
+        return $data;
     }
 
     /**
@@ -273,11 +336,20 @@ class Template
             die("Template->loadfile(): No files found for handle $handle");
         }
         $this->xs_startup();
+
+        // Execute before_render hook
+        $this->executeHook('template_before_render', ['handle' => $handle, 'template' => $this]);
+
         $force_recompile = !empty($this->uncompiled_code[$handle]);
         // checking if php file exists.
         if (!empty($this->files_cache[$handle]) && !$force_recompile) {
             // php file exists - running it instead of tpl
+            ob_start();
             $this->execute($this->files_cache[$handle], '', $handle);
+            $output = ob_get_clean();
+            // Execute after_render hook
+            $output = $this->executeHook('template_after_render', $output);
+            echo $output;
             return true;
         }
         if (!$this->loadfile($handle)) {
@@ -293,11 +365,16 @@ class Template
             }
         }
         // Run the compiled code.
+        ob_start();
         if (empty($this->files_cache[$handle]) || $force_recompile) {
             $this->execute('', $this->compiled_code[$handle], $handle);
         } else {
             $this->execute($this->files_cache[$handle], '', $handle);
         }
+        $output = ob_get_clean();
+        // Execute after_render hook
+        $output = $this->executeHook('template_after_render', $output);
+        echo $output;
         return true;
     }
 
@@ -344,6 +421,9 @@ class Template
      */
     public function assign_vars($vararray)
     {
+        // Execute hook to allow mods to modify variables
+        $vararray = $this->executeHook('template_before_assign_vars', $vararray);
+
         foreach ($vararray as $key => $val) {
             $this->vars[$key] = $val;
         }
@@ -461,6 +541,9 @@ class Template
         if (!$code && !empty($filename)) {
             $code = file_get_contents($filename);
         }
+
+        // Execute before_compile hook to allow mods to modify template source
+        $code = $this->executeHook('template_before_compile', $code);
 
         // Replace <!-- (END)PHP --> tags
         $search = ['<!-- PHP -->', '<!-- ENDPHP -->'];
@@ -733,7 +816,12 @@ class Template
         $code_header = '';
         $code_footer = '';
 
-        return $code_header . implode('', $compiled) . $code_footer;
+        $compiledCode = $code_header . implode('', $compiled) . $code_footer;
+
+        // Execute after_compile hook to allow mods to modify compiled output
+        $compiledCode = $this->executeHook('template_after_compile', $compiledCode);
+
+        return $compiledCode;
     }
 
     /**
