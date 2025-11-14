@@ -24,6 +24,7 @@
 ### 🚜 Refactor
 
 - *(datetime)* Integrate Carbon for date formatting ([#2208](https://github.com/torrentpier/torrentpier/pull/2208)) - ([d749c9b](https://github.com/torrentpier/torrentpier/commit/d749c9b48134f0d5ae2dde5f426c1f6e75e3bc80))
+- *(search)* Use `$dl_link_css` instead of hardcoded class names ([#2221](https://github.com/torrentpier/torrentpier/pull/2221)) - ([2d873e9](https://github.com/torrentpier/torrentpier/commit/2d873e9dbb7e35637b5ac4b82365798a19feb9ba))
 - *(styles)* Remove empty selectors and duplicate rules ([#2218](https://github.com/torrentpier/torrentpier/pull/2218)) - ([d61c587](https://github.com/torrentpier/torrentpier/commit/d61c587bb91af75f0df4b48333af656e9de1df66))
 - *(timezone)* Replace `$lang['TZ']` with centralized configuration for timezone management - ([a9d1158](https://github.com/torrentpier/torrentpier/commit/a9d1158e4eeb6d77e1fe180d8ec8b1f137777084))
 - Remove deprecated `set_tpl_vars_lang` method ([#2217](https://github.com/torrentpier/torrentpier/pull/2217)) - ([c0c132d](https://github.com/torrentpier/torrentpier/commit/c0c132df3f6be3e146f144da4c97be195bad45a6))
