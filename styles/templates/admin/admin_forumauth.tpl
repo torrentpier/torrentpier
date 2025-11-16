@@ -52,6 +52,13 @@
 <tr>
 	<td colspan="2" class="med tCenter">{U_SWITCH_MODE}</td>
 </tr>
+<!-- IF not IS_SUBFORUM -->
+<tr>
+    <td colspan="2" class="row1" style="padding: 10px;">
+        <label><input type="checkbox" name="apply_to_subforums" value="1" /> {L_APPLY_TO_SUBFORUMS}</label>
+    </td>
+</tr>
+<!-- ENDIF -->
 <tr>
 	<td colspan="2" class="catBottom">
 		<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;

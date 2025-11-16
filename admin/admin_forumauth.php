@@ -113,7 +113,12 @@ if ($submit) {
         }
 
         if ($sql != '') {
-            if (!DB()->sql_query($sql)) {
+            $query = $sql;
+            if (!empty($_POST['apply_to_subforums'])) {
+                // Apply to subforums if checkbox is checked
+                $query .= " OR forum_parent = $forum_id";
+            }
+            if (!DB()->sql_query($query)) {
                 bb_die('Could not update auth table');
             }
         }
@@ -213,6 +218,7 @@ if (empty($forum_id)) {
     $u_switch_mode = '<a href="' . $switch_mode . '">' . $switch_mode_text . '</a>';
 
     $s_hidden_fields = '<input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '">';
+    $is_subforum = $forum_rows[0]['forum_parent'] > 0;
 
     $template->assign_vars([
         'TPL_EDIT_FORUM_AUTH' => true,
@@ -222,6 +228,7 @@ if (empty($forum_id)) {
         'S_FORUMAUTH_ACTION' => 'admin_forumauth.php',
         'S_COLUMN_SPAN' => $s_column_span,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
+        'IS_SUBFORUM' => $is_subforum,
     ]);
 }
 

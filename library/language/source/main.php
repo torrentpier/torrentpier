@@ -1569,6 +1569,7 @@ $lang['USER_LEVEL'] = 'User Level';
 $lang['AUTH_USER'] = 'User';
 $lang['AUTH_ADMIN'] = 'Administrator';
 $lang['FORUM_AUTH_UPDATED'] = 'Forum permissions have been updated';
+$lang['APPLY_TO_SUBFORUMS'] = 'Apply to subforums';
 
 $lang['AUTH_UPDATED'] = 'Permissions have been updated';
 $lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
