@@ -7,6 +7,7 @@
 ### 🚀 Features
 
 - *(cron)* Add execution time tracking for cron jobs ([#2220](https://github.com/torrentpier/torrentpier/pull/2220)) - ([66b6dcf](https://github.com/torrentpier/torrentpier/commit/66b6dcf9d48b5fe580eaa6b0f5b1f7b74948ffa8))
+- Add option to apply forum permissions to subforums ([#2223](https://github.com/torrentpier/torrentpier/pull/2223)) - ([1bcfd24](https://github.com/torrentpier/torrentpier/commit/1bcfd2437c5ee424952107e3983cfc5dece4ba9f))
 
 ### 🐛 Bug Fixes
 
