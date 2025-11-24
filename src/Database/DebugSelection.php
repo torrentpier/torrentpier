@@ -285,10 +285,18 @@ class DebugSelection
         return $result;
     }
 
-    public function count(): int
+    public function count(?string $column = null): int
     {
-        $this->logQuery('count', []);
-        $result = $this->selection->count();
+        $this->logQuery('count', [$column]);
+        $result = $this->selection->count($column);
+        $this->completeQueryLogging();
+        return $result;
+    }
+
+    public function aggregation(string $function): mixed
+    {
+        $this->logQuery('aggregation', [$function]);
+        $result = $this->selection->aggregation($function);
         $this->completeQueryLogging();
         return $result;
     }
