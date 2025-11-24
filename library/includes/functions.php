@@ -435,13 +435,13 @@ function auth_check($bf_ary, $bf_key, $perm_ary, $perm_key, $is_admin = false)
 /**
  * Format time difference in human-readable format
  *
- * @deprecated Use humanTime() instead
- * @see humanTime()
- *
  * @param int|string $timestamp_1 First timestamp
  * @param int|string $timestamp_2 Second timestamp (defaults to now)
  * @param string $granularity Ignored (kept for backward compatibility)
  * @return string Human-readable time difference
+ * @deprecated Use humanTime() instead
+ * @see humanTime()
+ *
  */
 function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
 {
@@ -1802,7 +1802,7 @@ function clean_text_match(?string $text, bool $ltrim_star = true, bool $die_if_e
     $text = ' ' . str_compact(ltrim($text, $ltrim_chars)) . ' ';
 
     if (config()->get('search_engine_type') == 'manticore') {
-        $text = preg_replace('#[^\w\s\-\*\|"а-яё]#ui', ' ', $text);
+        $text = strip_tags($text);
         $text = str_compact($text);
         $text = trim($text);
     } else {
@@ -2366,7 +2366,7 @@ function infoByIP(string $ipAddress, int $port = 0): array
             );
 
             if ($response->getStatusCode() === 200) {
-                $json = json_decode((string) $response->getBody(), true);
+                $json = json_decode((string)$response->getBody(), true);
 
                 if (is_array($json) && !empty($json)) {
                     $data = [
