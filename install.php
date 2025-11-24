@@ -258,11 +258,30 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
         out('- Connected successfully!', 'success');
     }
 
-    // Creating database if not exist
-    if ($conn->query("CREATE DATABASE IF NOT EXISTS $DB_DATABASE CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")) {
+    // Check if database already exists
+    $dbCheckResult = $conn->query("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$DB_DATABASE'");
+    if ($dbCheckResult && $dbCheckResult->num_rows > 0) {
+        out("- Database '$DB_DATABASE' already exists!", 'warning');
+        echo "Do you want to drop the existing database and create a new one? [y/N]: ";
+        if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
+            out("- Dropping existing database '$DB_DATABASE'...", 'info');
+            if ($conn->query("DROP DATABASE `$DB_DATABASE`")) {
+                out("- Database '$DB_DATABASE' successfully dropped!", 'success');
+            } else {
+                out("- Cannot drop database: $DB_DATABASE. Error: " . $conn->error, 'error');
+                exit;
+            }
+        } else {
+            out('- Installation cancelled by user', 'warning');
+            exit;
+        }
+    }
+
+    // Creating database
+    if ($conn->query("CREATE DATABASE $DB_DATABASE CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")) {
         out('- Database created successfully!', 'success');
     } else {
-        out("- Cannot create database: $DB_DATABASE", 'error');
+        out("- Cannot create database: $DB_DATABASE. Error: " . $conn->error, 'error');
         exit;
     }
     $conn->select_db($DB_DATABASE);
