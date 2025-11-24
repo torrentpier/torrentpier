@@ -233,6 +233,11 @@ if ($is_auth['auth_read']) {
     $page_cfg['allow_robots'] = false;
 }
 
+// Set OG image URL for topic
+if (config()->get('og_image.enabled', true)) {
+    $page_cfg['og_image_url'] = FULL_URL . 'og-image.php?type=topic&id=' . $topic_id;
+}
+
 if ($post_id && !empty($t_data['prev_posts'])) {
     $start = floor(($t_data['prev_posts'] - 1) / $posts_per_page) * $posts_per_page;
 }

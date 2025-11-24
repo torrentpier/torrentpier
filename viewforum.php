@@ -56,6 +56,11 @@ if (!empty($forum_data['forum_desc'])) {
     $page_cfg['meta_description'] = $forum_data['forum_desc'];
 }
 
+// Set OG image URL for forum
+if (config()->get('og_image.enabled', true)) {
+    $page_cfg['og_image_url'] = FULL_URL . 'og-image.php?type=forum&id=' . $forum_id;
+}
+
 // Make jumpbox
 make_jumpbox();
 

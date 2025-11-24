@@ -307,4 +307,12 @@ class DebugSelection
         $this->completeQueryLogging();
         return $result;
     }
+
+    public function get(mixed $key): ?\Nette\Database\Table\ActiveRow
+    {
+        $this->logQuery('fetch', [$key]);
+        $result = $this->selection->get($key);
+        $this->completeQueryLogging();
+        return $result;
+    }
 }

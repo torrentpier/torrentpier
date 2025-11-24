@@ -30,6 +30,11 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL], profile_view: true)) {
     bb_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
+// Set OG image URL for user profile
+if (config()->get('og_image.enabled', true)) {
+    $page_cfg['og_image_url'] = FULL_URL . 'og-image.php?type=user&id=' . $profiledata['user_id'];
+}
+
 $profiledata['user_birthday'] = $profiledata['user_birthday']->format('Y-m-d');
 
 if (!$ranks = $datastore->get('ranks')) {
