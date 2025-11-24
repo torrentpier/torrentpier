@@ -80,6 +80,14 @@
     $('#sync_topics').html(data.sync_topics_html);
     $('#sync_user_posts').html(data.sync_user_posts_html);
     $('#unlock_cron').html(data.unlock_cron_html);
+    if (data.tr_stats_html) {
+      $('#tr_stats_section').html(data.tr_stats_html).show();
+      $('#tr_stats').text('{L_TORRENT_STATS_TITLE}');
+    }
+    if (data.tracker_stats_html) {
+      $('#tracker_stats_section').html(data.tracker_stats_html).show();
+      $('#tracker_stats').text('{L_TRACKER_STATS_TITLE}');
+    }
   }
 </script>
 
@@ -131,8 +139,8 @@
   <tr>
     <td><b>{L_STATISTICS}:</b></td>
     <td>
-      <a href="stats/tr_stats.php" target="_blank">tr_stats.php</a>&nbsp;&middot;
-      <a href="stats/tracker.php" target="_blank">tracker.php</a>
+      <a href="#" id="tr_stats" onclick="ajax.manage_admin('tr_stats'); $(this).text('{L_LOADING}'); return false;">{L_TORRENT_STATS_TITLE}</a>&nbsp;&middot;
+      <a href="#" id="tracker_stats" onclick="ajax.manage_admin('tracker_stats'); $(this).text('{L_LOADING}'); return false;">{L_TRACKER_STATS_TITLE}</a>
     </td>
   </tr>
   <tr>
@@ -143,6 +151,9 @@
   </tr>
 </table>
 <br/>
+
+<div id="tr_stats_section" style="display:none;"></div>
+<div id="tracker_stats_section" style="display:none;"></div>
 
 <table class="forumline">
     <tr>
