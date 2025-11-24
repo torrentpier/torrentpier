@@ -105,7 +105,7 @@ class DebugSelection
     private function generateSqlForLogging(string $method, array $arguments, bool $useRawSQL = true): string
     {
         // For SELECT operations, try to get the SQL from Nette
-        if (in_array($method, ['fetch', 'fetchAll', 'count'], true)) {
+        if (in_array($method, ['fetch', 'fetchAll', 'count', 'aggregation'], true)) {
             $sql = $useRawSQL ? $this->getSqlFromSelection() : $this->getSqlFromSelection(true);
 
             // Modify the SQL based on the method
@@ -117,8 +117,15 @@ class DebugSelection
                     }
                     return $sql;
                 case 'count':
-                    // Replace SELECT * with SELECT COUNT(*)
-                    return preg_replace('/^SELECT\s+\*/i', 'SELECT COUNT(*)', $sql);
+                    // Replace SELECT * with SELECT COUNT(*) or COUNT(column)
+                    $countExpr = isset($arguments[0]) && $arguments[0] !== null
+                        ? 'SELECT COUNT(' . $arguments[0] . ')'
+                        : 'SELECT COUNT(*)';
+                    return preg_replace('/^SELECT\s+\*/i', $countExpr, $sql);
+                case 'aggregation':
+                    // Replace SELECT * with SELECT {aggregation_function}
+                    $aggFunc = $arguments[0] ?? 'COUNT(*)';
+                    return preg_replace('/^SELECT\s+\*/i', 'SELECT ' . $aggFunc, $sql);
                 case 'fetchAll':
                 default:
                     return $sql;

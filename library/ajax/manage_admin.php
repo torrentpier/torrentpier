@@ -129,7 +129,8 @@ switch ($mode) {
         // Tracker statistics
         $announceInterval = (int)config()->get('announce_interval');
 
-        // Create a temporary table for tracker data
+        // Drop any existing temporary table and create a fresh one
+        DB()->query('DROP TEMPORARY TABLE IF EXISTS tmp_tracker_stats');
         DB()->query('
             CREATE TEMPORARY TABLE tmp_tracker_stats (
                 `topic_id` mediumint(8) unsigned NOT NULL default 0,
