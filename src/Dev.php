@@ -182,8 +182,41 @@ class Dev
     {
         $this->whoops->pushHandler(function ($e) {
             echo config()->get('whoops.error_message');
-            echo "<hr/>Error: {$e->getMessage()}.";
+            echo "<hr/>Error: " . $this->sanitizeErrorMessage($e->getMessage()) . ".";
         });
+    }
+
+    /**
+     * Sanitize error message to hide sensitive information
+     *
+     * @param string $message
+     * @return string
+     */
+    private function sanitizeErrorMessage(string $message): string
+    {
+        // Patterns to sanitize
+        $patterns = [
+            // Database credentials
+            '/password[\s=:\'"]+[^\s\'"]+/i' => 'password=***',
+            '/passwd[\s=:\'"]+[^\s\'"]+/i' => 'passwd=***',
+            '/pwd[\s=:\'"]+[^\s\'"]+/i' => 'pwd=***',
+            // File paths
+            '/[a-z]:\\\\[^\s]+/i' => '***\\***',
+            '/\/[a-z0-9_\-\/]+\/(public|src|library|vendor)\/[^\s]+/i' => '***/$1/***',
+            // API keys and tokens
+            '/api[_-]?key[\s=:\'"]+[^\s\'"]+/i' => 'api_key=***',
+            '/token[\s=:\'"]+[^\s\'"]+/i' => 'token=***',
+            // Database connection strings
+            '/mysql:\/\/[^@]+@[^\s]+/' => 'mysql://***:***@***',
+            // IP addresses (optional, uncomment if needed)
+            // '/\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b/' => '***.***.***.***',
+        ];
+
+        foreach ($patterns as $pattern => $replacement) {
+            $message = preg_replace($pattern, $replacement, $message);
+        }
+
+        return htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
     }
 
     /**
