@@ -14,12 +14,22 @@
 <meta name="apple-mobile-web-app-title" content="{SITENAME}">
 <meta name="application-name" content="{SITENAME}"/>
 <meta property="og:site_name" content="{SITENAME}">
+<!-- IF OG_IMAGE_URL -->
+<meta property="og:image" content="{OG_IMAGE_URL}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="twitter:image" content="{OG_IMAGE_URL}">
+<meta property="twitter:card" content="summary_large_image">
+<!-- ELSE -->
 <meta property="og:image" content="{SITE_URL}styles/images/logo/logo.png" />
-<meta property="og:type" content="website">
 <meta property="twitter:image" content="{SITE_URL}styles/images/logo/logo.png">
+<!-- ENDIF -->
+<meta property="og:type" content="website">
 <meta property="og:title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
 <meta property="twitter:title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
+<!-- IF not OG_IMAGE_URL -->
 <meta property="twitter:card" content="summary">
+<!-- ENDIF -->
 <!-- IF not ALLOW_ROBOTS -->
 <meta name="robots" content="noindex">
 <!-- ENDIF -->

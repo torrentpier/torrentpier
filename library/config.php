@@ -691,6 +691,16 @@ $bb_cfg['atom'] = [
     'updated_window' => 604800, // Time window for [UPDATED] prefix in seconds (1 week)
 ];
 
+// Open Graph images (for social media sharing)
+$bb_cfg['og_image'] = [
+    'enabled' => true, // Enable dynamic OG image generation
+    'background_color' => '#ffffff', // Default background color (hex)
+    'text_color' => '#24292f', // Text color (hex) - GitHub-style dark gray
+    'text_font_size' => 48, // Font size in pixels
+    'font_path' => null, // Custom font path (TTF), null for default
+    'logo_path' => BB_PATH . '/styles/images/logo/logo-og.png', // Logo path (48x48)
+];
+
 // Nofollow
 $bb_cfg['nofollow'] = [
     'disabled' => false,

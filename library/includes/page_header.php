@@ -128,6 +128,7 @@ $template->assign_vars([
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
     'ALLOW_ROBOTS' => !config()->get('board_disable') && (!isset($page_cfg['allow_robots']) || $page_cfg['allow_robots'] === true),
     'META_DESCRIPTION' => (!defined('HAS_DIED') && !empty($page_cfg['meta_description'])) ? trim(htmlCHR($page_cfg['meta_description'])) : '',
+    'OG_IMAGE_URL' => $page_cfg['og_image_url'] ?? '',
 
     'SITENAME' => config()->get('sitename'),
     'U_INDEX' => BB_ROOT . 'index.php',
