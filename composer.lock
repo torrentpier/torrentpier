@@ -5068,12 +5068,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/torrentpier/translations.git",
-                "reference": "1619d843a2febf84c94d320710113abb9cf707a6"
+                "reference": "a1c90ccdf4603d6333335d10b47e0d386e6abcef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/torrentpier/translations/zipball/1619d843a2febf84c94d320710113abb9cf707a6",
-                "reference": "1619d843a2febf84c94d320710113abb9cf707a6",
+                "url": "https://api.github.com/repos/torrentpier/translations/zipball/a1c90ccdf4603d6333335d10b47e0d386e6abcef",
+                "reference": "a1c90ccdf4603d6333335d10b47e0d386e6abcef",
                 "shasum": ""
             },
             "require": {
@@ -5119,7 +5119,7 @@
                 "issues": "https://github.com/torrentpier/torrentpier/issues",
                 "source": "https://github.com/torrentpier/translations/tree/main"
             },
-            "time": "2025-11-16T17:29:10+00:00"
+            "time": "2025-11-24T21:38:50+00:00"
         },
         {
             "name": "twig/twig",
@@ -6601,16 +6601,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.11.1",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "f626740b38009078de0dc8b2b9dc4e7f749c6eba"
+                "reference": "92a98ada2b93d9b201a613cb5a33584dde25f195"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/f626740b38009078de0dc8b2b9dc4e7f749c6eba",
-                "reference": "f626740b38009078de0dc8b2b9dc4e7f749c6eba",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/92a98ada2b93d9b201a613cb5a33584dde25f195",
+                "reference": "92a98ada2b93d9b201a613cb5a33584dde25f195",
                 "shasum": ""
             },
             "require": {
@@ -6653,9 +6653,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.11.1"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.12.0"
             },
-            "time": "2025-11-21T11:31:57+00:00"
+            "time": "2025-11-21T15:09:14+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
@@ -8517,5 +8517,5 @@
         "php": ">=8.2"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
