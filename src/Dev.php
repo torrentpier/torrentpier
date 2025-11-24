@@ -182,7 +182,9 @@ class Dev
     {
         $this->whoops->pushHandler(function ($e) {
             echo config()->get('whoops.error_message');
-            echo "<hr/>Error: " . $this->sanitizeErrorMessage($e->getMessage()) . ".";
+            if (config()->get('whoops.show_error_details')) {
+                echo "<hr/>Error: " . $this->sanitizeErrorMessage($e->getMessage()) . ".";
+            }
         });
     }
 
