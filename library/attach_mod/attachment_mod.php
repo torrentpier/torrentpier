@@ -13,30 +13,9 @@ if (!defined('BB_ROOT')) {
 
 require ATTACH_DIR . '/includes/functions_attach.php';
 require ATTACH_DIR . '/includes/functions_delete.php';
-require ATTACH_DIR . '/includes/functions_thumbs.php';
 
 if (defined('ATTACH_INSTALL')) {
     return;
-}
-
-/**
- * wrapper function for determining the correct language directory
- */
-function attach_mod_get_lang($language_file)
-{
-    global $attach_config;
-
-    $file = LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/' . $language_file . '.php';
-    if (file_exists($file)) {
-        return config()->get('default_lang');
-    }
-
-    $file = LANG_ROOT_DIR . '/' . $attach_config['board_lang'] . '/' . $language_file . '.php';
-    if (file_exists($file)) {
-        return $attach_config['board_lang'];
-    }
-
-    bb_die('Attachment mod language file does not exist: language/' . $attach_config['board_lang'] . '/' . $language_file . '.php');
 }
 
 /**

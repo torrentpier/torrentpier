@@ -12,37 +12,6 @@
  */
 
 /**
- * A simple dectobase64 function
- */
-function base64_pack($number)
-{
-    $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-';
-    $base = strlen($chars);
-
-    if ($number > 4096) {
-        return;
-    }
-
-    if ($number < $base) {
-        return $chars[$number];
-    }
-
-    $hexval = '';
-
-    while ($number > 0) {
-        $remainder = $number % $base;
-
-        if ($remainder < $base) {
-            $hexval = $chars[$remainder] . $hexval;
-        }
-
-        $number = floor($number / $base);
-    }
-
-    return $hexval;
-}
-
-/**
  * base64todec function
  */
 function base64_unpack($string)
@@ -62,64 +31,6 @@ function base64_unpack($string)
     }
 
     return $number;
-}
-
-/**
- * Per Forum based Extension Group Permissions (Encode Number) -> Theoretically up to 158 Forums saveable. :)
- * We are using a base of 64, but splitting it to one-char and two-char numbers. :)
- */
-function auth_pack($auth_array)
-{
-    $one_char_encoding = '#';
-    $two_char_encoding = '.';
-    $one_char = $two_char = false;
-    $auth_cache = '';
-
-    foreach ($auth_array as $i => $iValue) {
-        $val = base64_pack((int)$auth_array[$i]);
-        if (strlen($val) == 1 && !$one_char) {
-            $auth_cache .= $one_char_encoding;
-            $one_char = true;
-        } elseif (strlen($val) == 2 && !$two_char) {
-            $auth_cache .= $two_char_encoding;
-            $two_char = true;
-        }
-
-        $auth_cache .= $val;
-    }
-
-    return $auth_cache;
-}
-
-/**
- * Reverse the auth_pack process
- */
-function auth_unpack($auth_cache)
-{
-    $one_char_encoding = '#';
-    $two_char_encoding = '.';
-
-    $auth = [];
-    $auth_len = 1;
-
-    for ($pos = 0, $posMax = strlen($auth_cache); $pos < $posMax; $pos += $auth_len) {
-        $forum_auth = $auth_cache[$pos];
-        if ($forum_auth == $one_char_encoding) {
-            $auth_len = 1;
-            continue;
-        }
-
-        if ($forum_auth == $two_char_encoding) {
-            $auth_len = 2;
-            $pos--;
-            continue;
-        }
-
-        $forum_auth = substr($auth_cache, $pos, $auth_len);
-        $forum_id = base64_unpack($forum_auth);
-        $auth[] = (int)$forum_id;
-    }
-    return $auth;
 }
 
 /**
@@ -175,31 +86,6 @@ function unlink_attach($filename, $mode = false)
     }
 
     return @unlink($filename);
-}
-
-/**
- * Physical Filename stored already ?
- */
-function physical_filename_already_stored($filename)
-{
-    if ($filename == '') {
-        return false;
-    }
-
-    $filename = basename($filename);
-
-    $sql = 'SELECT attach_id
-		FROM ' . BB_ATTACHMENTS_DESC . "
-		WHERE physical_filename = '" . DB()->escape($filename) . "'
-		LIMIT 1";
-
-    if (!($result = DB()->sql_query($sql))) {
-        bb_die('Could not get attachment information for filename: ' . htmlspecialchars($filename));
-    }
-    $num_rows = DB()->num_rows($result);
-    DB()->sql_freeresult($result);
-
-    return $num_rows != 0;
 }
 
 /**

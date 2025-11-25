@@ -849,17 +849,5 @@ class Attach
 
                 break;
         }
-
-        if (!$error && $this->thumbnail === 1) {
-            $source = $upload_dir . '/' . basename($this->attach_filename);
-            $dest_file = realpath($upload_dir);
-            $dest_file .= '/' . THUMB_DIR . '/t_' . basename($this->attach_filename);
-
-            if (!createThumbnail($source, $dest_file, $this->type)) {
-                if (!$file || !createThumbnail($file, $dest_file, $this->type)) {
-                    $this->thumbnail = 0;
-                }
-            }
-        }
     }
 }
