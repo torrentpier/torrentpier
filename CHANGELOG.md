@@ -7,11 +7,13 @@
 ### 🚀 Features
 
 - *(cron)* Add execution time tracking for cron jobs ([#2220](https://github.com/torrentpier/torrentpier/pull/2220)) - ([66b6dcf](https://github.com/torrentpier/torrentpier/commit/66b6dcf9d48b5fe580eaa6b0f5b1f7b74948ffa8))
+- *(install)* Add database drop option during installation ([#2226](https://github.com/torrentpier/torrentpier/pull/2226)) - ([ec0fb14](https://github.com/torrentpier/torrentpier/commit/ec0fb14c3a85840a721d4eb52307589c43bebc99))
 - Add option to apply forum permissions to subforums ([#2223](https://github.com/torrentpier/torrentpier/pull/2223)) - ([1bcfd24](https://github.com/torrentpier/torrentpier/commit/1bcfd2437c5ee424952107e3983cfc5dece4ba9f))
 
 ### 🐛 Bug Fixes
 
 - *(php8.5)* Add PHP 8.5 compatibility ([#2207](https://github.com/torrentpier/torrentpier/pull/2207)) - ([a0dd7a5](https://github.com/torrentpier/torrentpier/commit/a0dd7a54db3d86d11d1723952e2c47458d19917e))
+- *(search)* Improve Manticore Search stability and query escaping ([#2225](https://github.com/torrentpier/torrentpier/pull/2225)) - ([89f520c](https://github.com/torrentpier/torrentpier/commit/89f520cf3a8e2c0af0296de94ae6a6f83fa46c04))
 - *(security)* Prevent SQL injection in moderator panel topic_id parameter ([#2216](https://github.com/torrentpier/torrentpier/pull/2216)) - ([6a0f649](https://github.com/torrentpier/torrentpier/commit/6a0f6499d89fa5d6e2afa8ee53802a1ad11ece80))
 
 ### 📦 Dependencies
@@ -24,11 +26,16 @@
 
 ### 🚜 Refactor
 
+- *(admin)* Migrate stats pages to ajax with Nette Explorer ([#2227](https://github.com/torrentpier/torrentpier/pull/2227)) - ([7e7d17f](https://github.com/torrentpier/torrentpier/commit/7e7d17f80cdd7afc18a44ccb1c7c7d39bbd23549))
 - *(datetime)* Integrate Carbon for date formatting ([#2208](https://github.com/torrentpier/torrentpier/pull/2208)) - ([d749c9b](https://github.com/torrentpier/torrentpier/commit/d749c9b48134f0d5ae2dde5f426c1f6e75e3bc80))
 - *(search)* Use `$dl_link_css` instead of hardcoded class names ([#2221](https://github.com/torrentpier/torrentpier/pull/2221)) - ([2d873e9](https://github.com/torrentpier/torrentpier/commit/2d873e9dbb7e35637b5ac4b82365798a19feb9ba))
 - *(styles)* Remove empty selectors and duplicate rules ([#2218](https://github.com/torrentpier/torrentpier/pull/2218)) - ([d61c587](https://github.com/torrentpier/torrentpier/commit/d61c587bb91af75f0df4b48333af656e9de1df66))
 - *(timezone)* Replace `$lang['TZ']` with centralized configuration for timezone management - ([a9d1158](https://github.com/torrentpier/torrentpier/commit/a9d1158e4eeb6d77e1fe180d8ec8b1f137777084))
 - Remove deprecated `set_tpl_vars_lang` method ([#2217](https://github.com/torrentpier/torrentpier/pull/2217)) - ([c0c132d](https://github.com/torrentpier/torrentpier/commit/c0c132df3f6be3e146f144da4c97be195bad45a6))
+
+### ⚙️ Miscellaneous
+
+- *(i18n)* Update composer.lock with latest dependencies and translations updates - ([458d6d5](https://github.com/torrentpier/torrentpier/commit/458d6d562d301e205b57416061df2666c1d1c523))
 
 
 ## [v2.8.8](https://github.com/torrentpier/torrentpier/compare/v2.8.7..v2.8.8) (2025-10-21)
