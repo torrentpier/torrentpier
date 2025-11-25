@@ -9,8 +9,8 @@
 
 namespace TorrentPier\Legacy\Common;
 
-use claviska\SimpleImage;
 use Exception;
+use TorrentPier\Image\ImageService;
 
 /**
  * Class Upload
@@ -130,13 +130,9 @@ class Upload
             return false;
         }
 
-        // Check file size
+        // Check file is not empty
         if (!$this->file_size = filesize($this->file['tmp_name'])) {
             $this->errors[] = "Uploaded file is empty: {$this->file['tmp_name']}";
-            return false;
-        }
-        if ($this->cfg['max_size'] && $this->file_size > $this->cfg['max_size']) {
-            $this->errors[] = sprintf($lang['UPLOAD_ERROR_SIZE'], humn_size($this->cfg['max_size']));
             return false;
         }
 
@@ -164,29 +160,37 @@ class Upload
                 }
                 $this->file_ext = $this->img_types[$type];
 
-                // width & height
-                if (($this->cfg['max_width'] && $width > $this->cfg['max_width']) || ($this->cfg['max_height'] && $height > $this->cfg['max_height'])) {
-                    for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
-                        try {
-                            $image = new SimpleImage();
-                            $image
-                                ->fromFile($this->file['tmp_name'])
-                                ->autoOrient()
-                                ->resize($this->cfg['max_width'], $this->cfg['max_height'])
-                                ->toFile($this->file['tmp_name']);
-                            break;
-                        } catch (Exception $e) {
-                            if ($i == $max_try) {
-                                $this->errors[] = sprintf($lang['UPLOAD_ERROR_DIMENSIONS'], $this->cfg['max_width'], $this->cfg['max_height']);
-                                return false;
-                            }
-                        }
+                // Resize image to fit max dimensions (always resize for avatars to optimize file size)
+                try {
+                    $maxWidth = $this->cfg['max_width'] ?: null;
+                    $maxHeight = $this->cfg['max_height'] ?: null;
+
+                    ImageService::read($this->file['tmp_name'])
+                        ->scaleDown($maxWidth, $maxHeight)
+                        ->save($this->file['tmp_name']);
+
+                    // Update file size after resize
+                    $this->file_size = filesize($this->file['tmp_name']);
+
+                    // If still too large, try to compress with lower quality
+                    if ($this->cfg['max_size'] && $this->file_size > $this->cfg['max_size']) {
+                        $this->compressToMaxSize($this->file['tmp_name'], $this->cfg['max_size']);
+                        $this->file_size = filesize($this->file['tmp_name']);
                     }
+                } catch (Exception $e) {
+                    $this->errors[] = sprintf($lang['UPLOAD_ERROR_DIMENSIONS'], $this->cfg['max_width'], $this->cfg['max_height']);
+                    return false;
                 }
             } else {
                 $this->errors[] = $lang['UPLOAD_ERROR_NOT_IMAGE'];
                 return false;
             }
+        }
+
+        // Check file size (after image processing or for non-images)
+        if ($this->cfg['max_size'] && $this->file_size > $this->cfg['max_size']) {
+            $this->errors[] = sprintf($lang['UPLOAD_ERROR_SIZE'], humn_size($this->cfg['max_size']));
+            return false;
         }
 
         // Check extension
@@ -248,5 +252,24 @@ class Upload
         @chmod($file_path, 0664);
 
         return file_exists($file_path);
+    }
+
+    /**
+     * Compress image to fit max file size by reducing quality
+     *
+     * @param string $path
+     * @param int $maxSize
+     * @return void
+     */
+    private function compressToMaxSize(string $path, int $maxSize): void
+    {
+        $quality = 85;
+        $minQuality = 30;
+
+        while (filesize($path) > $maxSize && $quality > $minQuality) {
+            $quality = max($quality - 10, $minQuality);
+            ImageService::read($path)->save($path, quality: $quality);
+            clearstatcache(true, $path);
+        }
     }
 }

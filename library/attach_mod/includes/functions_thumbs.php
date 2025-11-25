@@ -11,6 +11,8 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+use TorrentPier\Image\ImageService;
+
 /**
  * Create thumbnail
  *
@@ -37,14 +39,10 @@ function createThumbnail(string $source, string $newFile, string $mimeType): boo
 
     // Making the thumbnail image
     try {
-        $image = new \claviska\SimpleImage();
-        $image
-            ->fromFile($source)
-            ->autoOrient()
-            ->resize(150)
-            ->toFile($newFile, $mimeType, ['quality' => 85]);
+        ImageService::read($source)
+            ->scaleDown(width: 150)
+            ->save($newFile, quality: 85);
     } catch (Exception $e) {
-        // Handle errors
         throw new Exception($e->getMessage());
     }
 
