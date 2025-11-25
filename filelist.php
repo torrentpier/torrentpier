@@ -23,10 +23,8 @@ if (!$topic_id) {
     bb_die($lang['INVALID_TOPIC_ID'], 404);
 }
 
-$sql = 'SELECT t.forum_id, t.attach_id, t.info_hash, t.info_hash_v2, t.size, ad.physical_filename
+$sql = 'SELECT t.forum_id, t.info_hash, t.info_hash_v2, t.size, t.topic_id
         FROM ' . BB_BT_TORRENTS . ' t
-        LEFT JOIN ' . BB_ATTACHMENTS_DESC . ' ad
-        ON t.attach_id = ad.attach_id
         WHERE t.topic_id = ' . $topic_id . '
         LIMIT 1';
 
@@ -49,7 +47,7 @@ $t_version_field = $meta_v2 ? 'v2' : 'v1';
 $t_files_field = $meta_v2 ? 'getFileTree' : 'getFiles';
 $t_hash_field = $meta_v2 ? 'piecesRoot' : 'sha1';
 
-$file_path = get_attachments_dir() . '/' . $row['physical_filename'];
+$file_path = get_attach_path($topic_id);
 if (!is_file($file_path)) {
     bb_die($lang['TOR_NOT_FOUND'], 410);
 }
