@@ -124,11 +124,6 @@ if ($userdata['session_admin'] && !empty($_REQUEST['mod'])) {
         ]);
     }
 }
-if ($topic_attachment) {
-    $datastore->enqueue([
-        'attach_extensions'
-    ]);
-}
 
 set_die_append_msg($forum_id);
 
@@ -523,10 +518,8 @@ $template->assign_vars([
 ]);
 require INC_DIR . '/torrent_show_dl_list.php';
 
-if ($topic_attachment) {
-    require ATTACH_DIR . '/attachment_mod.php';
-    init_display_post_attachments($t_data['topic_attachment']);
-}
+// Topic attachment info is now handled via topic-based storage
+// Torrent download links are displayed via tracker integration
 
 //
 // Update the topic view counter
@@ -740,9 +733,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         $template->assign_block_vars('postrow.ban', ['IS_BANNED' => true]);
     }
 
-    if (isset($postrow[$i]['post_attachment']) && $is_auth['auth_download'] && function_exists('display_post_attachments')) {
-        display_post_attachments($post_id, $postrow[$i]['post_attachment']);
-    }
+    // Post attachments display removed - torrent files are now topic-based
 
     if ($moderation && !defined('SPLIT_FORM_START') && ($start || $post_id == $t_data['topic_first_post_id'])) {
         define('SPLIT_FORM_START', true);

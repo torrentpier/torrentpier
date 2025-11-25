@@ -11,7 +11,9 @@ define('BB_SCRIPT', 'posting');
 
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
-require ATTACH_DIR . '/attachment_mod.php';
+
+// Torrent upload handler
+use TorrentPier\Legacy\TorrentUpload;
 
 $page_cfg['load_tpl_vars'] = [
     'post_icons'
@@ -271,7 +273,9 @@ if ($submit || $refresh) {
 
 $update_post_time = !empty($_POST['update_post_time']);
 
-execute_posting_attachment_handling();
+// Torrent upload handling will be done after post submission
+$torrent_uploaded = false;
+$torrent_upload_error = '';
 
 // If while you were writing a response, new messages appeared in the topic,
 // before your message is sent, a warning is displayed with an overview of these messages
@@ -369,7 +373,58 @@ if (($delete || $mode == 'delete') && !$confirm) {
             $user_id = ($mode == 'reply' || $mode == 'newtopic') ? $userdata['user_id'] : $post_data['poster_id'];
             \TorrentPier\Legacy\Post::update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
         }
-        $attachment_mod['posting']->insert_attachment($post_id);
+
+        // Handle torrent file upload for torrent forums
+        if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && !empty($_FILES['attach']['name'])) {
+            $upload = new TorrentUpload();
+            $filesize = $upload->store($topic_id, $_FILES['attach']);
+
+            if ($filesize !== false) {
+                // Update topic with attachment info
+                TorrentUpload::updateTopicAttachment($topic_id, $upload->getExtId(), $filesize);
+                $torrent_uploaded = true;
+
+                // Auto-register torrent on tracker
+                if (config()->get('bt_newtopic_auto_reg')) {
+                    if (!DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id")) {
+                        if (config()->get('premod')) {
+                            // Getting a list of forum ids starting with "parent"
+                            $forum_parent = $forum_id;
+                            if ($post_info['forum_parent']) {
+                                $forum_parent = $post_info['forum_parent'];
+                            }
+                            $count_rowset = DB()->fetch_rowset("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_parent = $forum_parent");
+                            $sub_forums = [];
+                            foreach ($count_rowset as $count_row) {
+                                if ($count_row['forum_id'] != $forum_id) {
+                                    $sub_forums[] = $count_row['forum_id'];
+                                }
+                            }
+                            $sub_forums[] = $forum_id;
+                            $sub_forums = implode(',', $sub_forums);
+                            // Counting verified releases in section forums
+                            $count_checked_releases = DB()->fetch_row("
+                                SELECT COUNT(*) AS checked_releases
+                                FROM " . BB_BT_TORRENTS . "
+                                WHERE poster_id  = " . $userdata['user_id'] . "
+                                  AND forum_id   IN($sub_forums)
+                                  AND tor_status IN(" . TOR_APPROVED . "," . TOR_DOUBTFUL . "," . TOR_TMP . ")
+                                LIMIT 1
+                            ", 'checked_releases');
+                            if ($count_checked_releases || IS_AM) {
+                                \TorrentPier\Legacy\Torrent::tracker_register_by_topic($topic_id, 'newtopic', TOR_NOT_APPROVED);
+                            } else {
+                                \TorrentPier\Legacy\Torrent::tracker_register_by_topic($topic_id, 'newtopic', TOR_PREMOD);
+                            }
+                        } else {
+                            \TorrentPier\Legacy\Torrent::tracker_register_by_topic($topic_id, 'newtopic', TOR_NOT_APPROVED);
+                        }
+                    }
+                }
+            } else {
+                $torrent_upload_error = implode('<br>', $upload->getErrors());
+            }
+        }
 
         if (!$error_msg) {
             \TorrentPier\Legacy\Post::user_notification($mode, $post_data, $post_info['topic_title'], $forum_id, $topic_id, $notify_user);
@@ -377,43 +432,6 @@ if (($delete || $mode == 'delete') && !$confirm) {
 
         if ($mode == 'newtopic' || $mode == 'reply') {
             set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
-        }
-
-        if (defined('TORRENT_ATTACH_ID') && config()->get('bt_newtopic_auto_reg') && !$error_msg) {
-            if (!DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
-                if (config()->get('premod')) {
-                    // Getting a list of forum ids starting with "parent"
-                    $forum_parent = $forum_id;
-                    if ($post_info['forum_parent']) {
-                        $forum_parent = $post_info['forum_parent'];
-                    }
-                    $count_rowset = DB()->fetch_rowset("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_parent = $forum_parent");
-                    $sub_forums = [];
-                    foreach ($count_rowset as $count_row) {
-                        if ($count_row['forum_id'] != $forum_id) {
-                            $sub_forums[] = $count_row['forum_id'];
-                        }
-                    }
-                    $sub_forums[] = $forum_id;
-                    $sub_forums = implode(',', $sub_forums);
-                    // Counting verified releases in section forums
-                    $count_checked_releases = DB()->fetch_row("
-						SELECT COUNT(*) AS checked_releases
-						FROM " . BB_BT_TORRENTS . "
-						WHERE poster_id  = " . $userdata['user_id'] . "
-						  AND forum_id   IN($sub_forums)
-						  AND tor_status IN(" . TOR_APPROVED . "," . TOR_DOUBTFUL . "," . TOR_TMP . ")
-						LIMIT 1
-					", 'checked_releases');
-                    if ($count_checked_releases || IS_AM) {
-                        \TorrentPier\Legacy\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
-                    } else {
-                        \TorrentPier\Legacy\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_PREMOD);
-                    }
-                } else {
-                    \TorrentPier\Legacy\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
-                }
-            }
         }
 
         if ($mode == 'reply' && $post_info['topic_status'] == TOPIC_LOCKED) {

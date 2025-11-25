@@ -901,15 +901,38 @@ function show_bt_userdata($user_id): void
 
 function get_attachments_dir($cfg = null)
 {
-    if (!$cfg and !$cfg = $GLOBALS['attach_config']) {
-        $cfg = bb_get_config(BB_ATTACH_CONFIG, true, false);
+    // New config system - use attach.upload_path from config
+    $upload_path = config()->get('attach.upload_path');
+    if ($upload_path) {
+        // Return absolute path
+        if ($upload_path[0] == '/' || ($upload_path[0] != '/' && isset($upload_path[1]) && $upload_path[1] == ':')) {
+            return $upload_path;
+        }
+        return BB_ROOT . $upload_path;
     }
 
-    if ($cfg['upload_dir'][0] == '/' || ($cfg['upload_dir'][0] != '/' && $cfg['upload_dir'][1] == ':')) {
-        return $cfg['upload_dir'];
+    // Legacy fallback for migration script - read from old BB_ATTACH_CONFIG table
+    if (!$cfg && !empty($GLOBALS['attach_config'])) {
+        $cfg = $GLOBALS['attach_config'];
+    }
+    if (!$cfg && defined('BB_ATTACH_CONFIG')) {
+        try {
+            $cfg = bb_get_config(BB_ATTACH_CONFIG, true, false);
+        } catch (\Exception $e) {
+            // Table doesn't exist anymore, use default
+            return BB_ROOT . 'data/uploads';
+        }
     }
 
-    return BB_ROOT . $cfg['upload_dir'];
+    if ($cfg && !empty($cfg['upload_dir'])) {
+        if ($cfg['upload_dir'][0] == '/' || ($cfg['upload_dir'][0] != '/' && $cfg['upload_dir'][1] == ':')) {
+            return $cfg['upload_dir'];
+        }
+        return BB_ROOT . $cfg['upload_dir'];
+    }
+
+    // Default fallback
+    return BB_ROOT . 'data/uploads';
 }
 
 function bb_get_config($table, $from_db = false, $update_cache = true)

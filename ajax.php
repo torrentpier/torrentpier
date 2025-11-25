@@ -26,14 +26,6 @@ switch ($ajax->action) {
     case 'post_mod_comment':
         require INC_DIR . '/bbcode.php';
         break;
-
-    case 'view_torrent':
-    case 'mod_action':
-    case 'change_tor_status':
-    case 'change_torrent':
-    case 'passkey':
-        require ATTACH_DIR . '/attachment_mod.php';
-        break;
 }
 
 $ajax->exec();
