@@ -708,19 +708,32 @@ body.dark-mode #latest_news h3 {
 }
 
 body.dark-mode .news_date {
-  color: #888 !important;
+  color: #aaa;
+  background: #3a3a3a;
+  border-color: #555;
 }
 
 body.dark-mode .news_title {
   color: #d4d4d4;
+  background: none;
 }
 
 body.dark-mode .news_title a {
-  color: #5DA5FF;
+  color: #e0e0e0;
 }
 
 body.dark-mode .news_title.new a {
-  color: #FF9D5C;
+  color: #fff;
+  font-weight: bold;
+}
+
+body.dark-mode #latest_news a {
+  color: #e0e0e0;
+}
+
+body.dark-mode #latest_news .new a {
+  color: #fff;
+  font-weight: bold;
 }
 
 /* Forum/Category Titles */
