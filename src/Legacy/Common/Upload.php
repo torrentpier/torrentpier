@@ -162,8 +162,11 @@ class Upload
 
                 // Resize image to fit max dimensions (always resize for avatars to optimize file size)
                 try {
+                    $maxWidth = $this->cfg['max_width'] ?: null;
+                    $maxHeight = $this->cfg['max_height'] ?: null;
+
                     ImageService::read($this->file['tmp_name'])
-                        ->scaleDown($this->cfg['max_width'], $this->cfg['max_height'])
+                        ->scaleDown($maxWidth, $maxHeight)
                         ->save($this->file['tmp_name']);
 
                     // Update file size after resize
@@ -263,8 +266,8 @@ class Upload
         $quality = 85;
         $minQuality = 30;
 
-        while (filesize($path) > $maxSize && $quality >= $minQuality) {
-            $quality -= 10;
+        while (filesize($path) > $maxSize && $quality > $minQuality) {
+            $quality = max($quality - 10, $minQuality);
             ImageService::read($path)->save($path, quality: $quality);
             clearstatcache(true, $path);
         }
