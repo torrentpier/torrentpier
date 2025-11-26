@@ -14,7 +14,7 @@ if (!defined('IN_AJAX')) {
 global $lang, $userdata;
 
 if (!isset($this->request['attach_id'])) {
-    $this->ajax_die($lang['EMPTY_ATTACH_ID']);
+    $this->ajax_die($lang['EMPTY_TOPIC_ID']);
 }
 $attach_id = (int)$this->request['attach_id'];
 

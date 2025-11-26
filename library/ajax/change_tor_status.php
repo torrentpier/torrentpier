@@ -13,8 +13,8 @@ if (!defined('IN_AJAX')) {
 
 global $userdata, $lang, $log_action;
 
-if (!$attach_id = (int)$this->request['attach_id']) {
-    $this->ajax_die($lang['EMPTY_ATTACH_ID']);
+if (!$topic_id = (int)$this->request['topic_id']) {
+    $this->ajax_die($lang['EMPTY_TOPIC_ID']);
 }
 
 if (!$mode = (string)$this->request['mode']) {
@@ -32,7 +32,7 @@ $tor = DB()->fetch_row("
 	FROM       " . BB_BT_TORRENTS . " tor
 	INNER JOIN " . BB_FORUMS . " f ON(f.forum_id = tor.forum_id)
 	INNER JOIN " . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
-	WHERE tor.attach_id = $attach_id
+	WHERE tor.topic_id = $topic_id
 	LIMIT 1
 ");
 
@@ -85,7 +85,7 @@ switch ($mode) {
             }
         }
 
-        \TorrentPier\Legacy\Torrent::change_tor_status($attach_id, $new_status);
+        \TorrentPier\Legacy\Torrent::change_tor_status($topic_id, $new_status);
 
         // Log action
         $log_msg = sprintf($lang['TOR_STATUS_LOG_ACTION'], config()->get('tor_icons')[$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b>', config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . $lang['TOR_STATUS_NAME'][$tor['tor_status']] . '</b>');
@@ -136,4 +136,4 @@ switch ($mode) {
         $this->ajax_die('Invalid mode: ' . $mode);
 }
 
-$this->response['attach_id'] = $attach_id;
+$this->response['topic_id'] = $topic_id;
