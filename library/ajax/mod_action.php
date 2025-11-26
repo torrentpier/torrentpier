@@ -27,21 +27,26 @@ switch ($mode) {
             $this->ajax_die($lang['TOR_STATUS_FAILED']);
         }
 
-        $topic_ids = DB()->fetch_rowset("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE topic_id IN($topics)", 'attach_id');
+        $topic_ids_list = explode(',', $topics);
 
-        foreach ($topic_ids as $attach_id) {
+        foreach ($topic_ids_list as $topic_id) {
+            $topic_id = (int)$topic_id;
+            if (!$topic_id) {
+                continue;
+            }
+
             $tor = DB()->fetch_row("
                 SELECT
                     tor.forum_id, tor.topic_id, t.topic_title, tor.tor_status
                 FROM       " . BB_BT_TORRENTS . " tor
                 INNER JOIN " . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
-                WHERE tor.attach_id = $attach_id LIMIT 1");
+                WHERE tor.topic_id = $topic_id LIMIT 1");
 
             if (!$tor) {
                 $this->ajax_die($lang['TORRENT_FAILED']);
             }
 
-            \TorrentPier\Legacy\Torrent::change_tor_status($attach_id, $status);
+            \TorrentPier\Legacy\Torrent::change_tor_status($topic_id, $status);
 
             // Log action
             $log_msg = sprintf($lang['TOR_STATUS_LOG_ACTION'], config()->get('tor_icons')[$status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$status] . '</b>', config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . $lang['TOR_STATUS_NAME'][$tor['tor_status']] . '</b>');
@@ -53,7 +58,7 @@ switch ($mode) {
             ]);
         }
         $this->response['status'] = config()->get('tor_icons')[$status];
-        $this->response['topics'] = explode(',', $topics);
+        $this->response['topics'] = $topic_ids_list;
         break;
 
     case 'edit_topic_title':
