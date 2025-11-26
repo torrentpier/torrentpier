@@ -229,4 +229,8 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_topic')) {
 
 $template->assign_var('USER_RESTRICTIONS', implode('</li><li>', $user_restrictions));
 
+// Hook: profile.info_display - allows mods to add information to user profile
+// Mods can use global $template to assign their own variables
+hooks()->do_action('profile.info_display', $profiledata);
+
 print_page('usercp_viewprofile.tpl');

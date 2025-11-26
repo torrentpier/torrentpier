@@ -60,6 +60,19 @@ if (!defined('BB_ROOT')) {
     .sqlHighlight {
         background: #FFE4E1;
     }
+
+    .debugLog {
+        clear: both;
+        font-family: Courier, monospace;
+        font-size: 12px;
+        white-space: nowrap;
+        background: #F0F8FF;
+        border: 1px solid #87CEEB;
+        overflow: auto;
+        width: 98%;
+        margin: 10px auto 0;
+        padding: 2px 4px;
+    }
 </style>
 
 <?php
@@ -83,6 +96,13 @@ $sql_log = !empty($_COOKIE['sql_log']) ? dev()->getSqlDebugLog() : false;
 if ($sql_log) {
     echo '<div class="sqlLog" id="sqlLog">' . $sql_log . '</div><!-- / sqlLog --><br clear="all" />';
 }
+
+// Debug log (separate from SQL log)
+$debug_log = !empty($_COOKIE['sql_log']) ? dev()->getDebugLogHtml() : false;
+
+if ($debug_log) {
+    echo '<div class="debugLog" id="debugLog">' . $debug_log . '</div><!-- / debugLog --><br clear="all" />';
+}
 ?>
 
 <script type="text/javascript">
@@ -92,5 +112,14 @@ if ($sql_log) {
         }
     }
 
-    $(document).ready(fixSqlLog);
+    function fixDebugLog() {
+        if ($("#debugLog").height() > 400) {
+            $("#debugLog").height(400);
+        }
+    }
+
+    $(document).ready(function() {
+        fixSqlLog();
+        fixDebugLog();
+    });
 </script>

@@ -131,7 +131,13 @@ class Ajax
         }
 
         // Run action
+        hooks()->do_action('ajax.before_execute', $action, $this->request, $this->response);
+        hooks()->do_action("ajax.before_{$action}", $this->request, $this->response);
+
         $this->$action();
+
+        hooks()->do_action("ajax.after_{$action}", $this->request, $this->response);
+        hooks()->do_action('ajax.after_execute', $action, $this->request, $this->response);
 
         // Send output
         $this->send();
