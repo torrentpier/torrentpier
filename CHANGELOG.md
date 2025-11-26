@@ -12,6 +12,7 @@
 
 ### 🐛 Bug Fixes
 
+- *(css)* Add dark mode support for latest news section ([#2230](https://github.com/torrentpier/torrentpier/pull/2230)) - ([704a71f](https://github.com/torrentpier/torrentpier/commit/704a71f870185f0b22ddb448f4509dde269ecb03))
 - *(php8.5)* Add PHP 8.5 compatibility ([#2207](https://github.com/torrentpier/torrentpier/pull/2207)) - ([a0dd7a5](https://github.com/torrentpier/torrentpier/commit/a0dd7a54db3d86d11d1723952e2c47458d19917e))
 - *(search)* Improve Manticore Search stability and query escaping ([#2225](https://github.com/torrentpier/torrentpier/pull/2225)) - ([89f520c](https://github.com/torrentpier/torrentpier/commit/89f520cf3a8e2c0af0296de94ae6a6f83fa46c04))
 - *(security)* Prevent SQL injection in moderator panel topic_id parameter ([#2216](https://github.com/torrentpier/torrentpier/pull/2216)) - ([6a0f649](https://github.com/torrentpier/torrentpier/commit/6a0f6499d89fa5d6e2afa8ee53802a1ad11ece80))
@@ -28,6 +29,7 @@
 
 - *(admin)* Migrate stats pages to ajax with Nette Explorer ([#2227](https://github.com/torrentpier/torrentpier/pull/2227)) - ([7e7d17f](https://github.com/torrentpier/torrentpier/commit/7e7d17f80cdd7afc18a44ccb1c7c7d39bbd23549))
 - *(datetime)* Integrate Carbon for date formatting ([#2208](https://github.com/torrentpier/torrentpier/pull/2208)) - ([d749c9b](https://github.com/torrentpier/torrentpier/commit/d749c9b48134f0d5ae2dde5f426c1f6e75e3bc80))
+- *(image)* [**breaking**] Migrate from SimpleImage to Intervention Image v3 ([#2229](https://github.com/torrentpier/torrentpier/pull/2229)) - ([39ffdfd](https://github.com/torrentpier/torrentpier/commit/39ffdfd6119a0ec7e44e98e82005967bd2558eae))
 - *(search)* Use `$dl_link_css` instead of hardcoded class names ([#2221](https://github.com/torrentpier/torrentpier/pull/2221)) - ([2d873e9](https://github.com/torrentpier/torrentpier/commit/2d873e9dbb7e35637b5ac4b82365798a19feb9ba))
 - *(styles)* Remove empty selectors and duplicate rules ([#2218](https://github.com/torrentpier/torrentpier/pull/2218)) - ([d61c587](https://github.com/torrentpier/torrentpier/commit/d61c587bb91af75f0df4b48333af656e9de1df66))
 - *(timezone)* Replace `$lang['TZ']` with centralized configuration for timezone management - ([a9d1158](https://github.com/torrentpier/torrentpier/commit/a9d1158e4eeb6d77e1fe180d8ec8b1f137777084))
