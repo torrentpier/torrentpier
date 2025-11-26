@@ -124,28 +124,26 @@ switch ($mode) {
         $user_id = (int)$this->request['user_id'];
 
         $sql = "
-				SELECT COUNT(tor.poster_id) as total_releases, SUM(tor.size) as total_size, SUM(tor.complete_count) as total_complete, SUM(ad.download_count) as total_dl_count
+				SELECT COUNT(tor.poster_id) as total_releases, SUM(tor.size) as total_size, SUM(tor.complete_count) as total_complete
 				FROM " . BB_BT_TORRENTS . " tor
 					LEFT JOIN " . BB_USERS . " u ON(u.user_id = tor.poster_id)
-					LEFT JOIN " . BB_ATTACHMENTS_DESC . " ad ON(ad.attach_id = tor.attach_id)
 					LEFT JOIN " . BB_BT_USERS . " ut ON(ut.user_id = tor.poster_id)
 				WHERE u.user_id = $user_id
 				GROUP BY tor.poster_id
 				LIMIT 1
 			";
 
-        $total_releases_size = $total_releases = $total_releases_completed = $total_releases_downloaded = 0;
+        $total_releases_size = $total_releases = $total_releases_completed = 0;
         if ($row = DB()->fetch_row($sql)) {
             $total_releases = $row['total_releases'];
             $total_releases_size = $row['total_size'];
-            $total_releases_downloaded = $row['total_dl_count'];
             $total_releases_completed = $row['total_complete'];
         }
 
         $html = '[
             ' . $lang['RELEASES'] . ': <span class="seed bold">' . $total_releases . '</span> |
             ' . $lang['RELEASER_STAT_SIZE'] . ' <span class="seed bold">' . humn_size($total_releases_size) . '</span> |
-            ' . $lang['DOWNLOADED'] . ': <span title="' . $lang['COMPLETED'] . ':&nbsp;' . declension((int)$total_releases_completed, 'times') . '" class="seed bold">' . declension((int)$total_releases_downloaded, 'times') . '</span> ]';
+            ' . $lang['DOWNLOADED'] . ': <span class="seed bold">' . declension((int)$total_releases_completed, 'times') . '</span> ]';
         break;
 
     case 'get_traf_stats':
