@@ -13,30 +13,28 @@ if (!defined('IN_AJAX')) {
 
 global $lang, $userdata;
 
-if (!isset($this->request['attach_id'])) {
+if (!isset($this->request['topic_id'])) {
     $this->ajax_die($lang['EMPTY_TOPIC_ID']);
 }
-$attach_id = (int)$this->request['attach_id'];
+$topic_id = (int)$this->request['topic_id'];
 
-$torrent = DB()->fetch_row("
+$topic = DB()->fetch_row("
     SELECT
-        ad.attach_id, ad.physical_filename,
-        tor.forum_id
-    FROM " . BB_ATTACHMENTS_DESC . " ad
-    INNER JOIN " . BB_BT_TORRENTS . " tor ON (ad.attach_id = tor.attach_id)
-    WHERE ad.attach_id = $attach_id LIMIT 1");
-if (!$torrent) {
+        t.topic_id, t.forum_id, t.attach_ext_id
+    FROM " . BB_TOPICS . " t
+    WHERE t.topic_id = $topic_id LIMIT 1");
+if (!$topic || $topic['attach_ext_id'] != 8) {
     $this->ajax_die($lang['ERROR_BUILD']);
 }
 
 // Check rights
-$is_auth = auth(AUTH_ALL, $torrent['forum_id'], $userdata);
+$is_auth = auth(AUTH_ALL, $topic['forum_id'], $userdata);
 if (!$is_auth['auth_view']) {
     $this->ajax_die($lang['SORRY_AUTH_VIEW_ATTACH']);
 }
 
 $file_contents = null;
-$filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
+$filename = get_attach_path($topic_id);
 if (!is_file($filename) || !$file_contents = file_get_contents($filename)) {
     $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
 }
