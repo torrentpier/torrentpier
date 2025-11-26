@@ -123,10 +123,9 @@ class Common
 					MIN(p.post_id) AS topic_first_post_id,
 					MAX(p.post_id) AS topic_last_post_id,
 					MAX(p.post_time) AS topic_last_post_time,
-					IF(MAX(a.attach_id), 1, 0) AS topic_attachment
+					IF(t.attach_ext_id > 0, 1, 0) AS topic_attachment
 				FROM      " . BB_TOPICS . " t
 				LEFT JOIN " . BB_POSTS . " p ON(p.topic_id = t.topic_id)
-				LEFT JOIN " . BB_ATTACHMENTS . " a ON(a.post_id = p.post_id)
 				WHERE t.topic_status != " . TOPIC_MOVED . "
 					$where_sql
 				GROUP BY t.topic_id
@@ -341,46 +340,35 @@ class Common
 		LEFT JOIN " . BB_POLL_USERS . " pu USING(topic_id)
 	");
 
-        // Delete attachments (from disk)
-        $attach_dir = get_attachments_dir();
-
+        // Delete torrent files (from disk)
         $result = DB()->query("
-		SELECT
-			d.physical_filename, a.attach_id
-		FROM
-			" . $tmp_delete_topics . " del,
-			" . BB_POSTS . " p,
-			" . BB_ATTACHMENTS . " a,
-			" . BB_ATTACHMENTS_DESC . " d
-		WHERE
-			    p.topic_id = del.topic_id
-			AND a.post_id = p.post_id
-			AND d.attach_id = a.attach_id
-	");
+			SELECT del.topic_id
+			FROM " . $tmp_delete_topics . " del
+			INNER JOIN " . BB_TOPICS . " t ON(t.topic_id = del.topic_id)
+			WHERE t.attach_ext_id > 0
+		");
 
         while ($row = DB()->fetch_next($result)) {
-            if ($filename = basename($row['physical_filename'])) {
-                @unlink("$attach_dir/" . $filename);
-                @unlink("$attach_dir/" . THUMB_DIR . '/t_' . $filename);
+            $file_path = get_attach_path($row['topic_id']);
+            if (is_file($file_path)) {
+                @unlink($file_path);
             }
             // TorrServer integration
             if (config()->get('torr_server.enabled')) {
                 $torrServer = new \TorrentPier\TorrServerAPI();
-                $torrServer->removeM3U($row['attach_id']);
+                $torrServer->removeM3U($row['topic_id']);
             }
         }
         unset($row, $result);
 
-        // Delete posts, posts_text, attachments (from DB)
+        // Delete posts, posts_text (from DB)
         DB()->query("
-		DELETE p, pt, ps, a, d, ph
+		DELETE p, pt, ps, ph
 		FROM      " . $tmp_delete_topics . " del
 		LEFT JOIN " . BB_POSTS . " p  ON(p.topic_id = del.topic_id)
 		LEFT JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
 		LEFT JOIN " . BB_POSTS_HTML . " ph ON(ph.post_id = p.post_id)
 		LEFT JOIN " . BB_POSTS_SEARCH . " ps ON(ps.post_id = p.post_id)
-		LEFT JOIN " . BB_ATTACHMENTS . " a  ON(a.post_id = p.post_id)
-		LEFT JOIN " . BB_ATTACHMENTS_DESC . " d  ON(d.attach_id = a.attach_id)
 	");
 
         // Delete topics, topics watch
@@ -658,40 +646,20 @@ class Common
             sync_post_to_manticore($post_row['post_id'], action: 'delete');
         }
 
-        // Delete attachments (from disk)
-        $attach_dir = get_attachments_dir();
+        // Delete torrent files when the first post is deleted (from disk)
+        // Note: Torrent files are associated with topics via topic_id, not posts
+        // When a first post is deleted, the topic is usually deleted too (handled in topic_delete)
+        // Here we handle orphan cases where torrents might remain
 
-        $result = DB()->query("
-		SELECT
-			d.physical_filename
-		FROM
-			" . $tmp_delete_posts . " del,
-			" . BB_ATTACHMENTS . " a,
-			" . BB_ATTACHMENTS_DESC . " d
-		WHERE
-			    a.post_id = del.post_id
-			AND d.attach_id = a.attach_id
-	");
-
-        while ($row = DB()->fetch_next($result)) {
-            if ($filename = basename($row['physical_filename'])) {
-                @unlink("$attach_dir/" . $filename);
-                @unlink("$attach_dir/" . THUMB_DIR . '/t_' . $filename);
-            }
-        }
-        unset($row, $result);
-
-        // Delete posts, posts_text, attachments (from DB)
+        // Delete posts, posts_text (from DB)
         DB()->query("
-		DELETE p, pt, ps, tor, a, d, ph
+		DELETE p, pt, ps, tor, ph
 		FROM      " . $tmp_delete_posts . " del
 		LEFT JOIN " . BB_POSTS . " p   ON(p.post_id  = del.post_id)
 		LEFT JOIN " . BB_POSTS_TEXT . " pt  ON(pt.post_id  = del.post_id)
 		LEFT JOIN " . BB_POSTS_HTML . " ph  ON(ph.post_id  = del.post_id)
 		LEFT JOIN " . BB_POSTS_SEARCH . " ps  ON(ps.post_id  = del.post_id)
 		LEFT JOIN " . BB_BT_TORRENTS . " tor ON(tor.post_id = del.post_id)
-		LEFT JOIN " . BB_ATTACHMENTS . " a   ON(a.post_id  = del.post_id)
-		LEFT JOIN " . BB_ATTACHMENTS_DESC . " d   ON(d.attach_id = a.attach_id)
 	");
 
         // Log action
