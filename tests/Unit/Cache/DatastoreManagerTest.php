@@ -58,7 +58,6 @@ describe('DatastoreManager Class', function () {
                 'stats',
                 'ranks',
                 'ban_list',
-                'attach_extensions',
                 'smile_replacements'
             ];
 
