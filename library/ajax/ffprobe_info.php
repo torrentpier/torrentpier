@@ -21,9 +21,9 @@ if (config()->get('torr_server.disable_for_guest') && IS_GUEST) {
     $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
 }
 
-$attach_id = $this->request['attach_id'] ?? '';
-if (empty($attach_id) || !is_numeric($attach_id)) {
-    $this->ajax_die($lang['INVALID_ATTACH_ID']);
+$topic_id = $this->request['topic_id'] ?? '';
+if (empty($topic_id) || !is_numeric($topic_id)) {
+    $this->ajax_die($lang['INVALID_TOPIC_ID']);
 }
 
 $file_index = $this->request['file_index'] ?? '';
@@ -38,7 +38,7 @@ if (!$info_hash = (string)$this->request['info_hash'] or !ctype_xdigit($info_has
 $isAudio = isset($this->request['is_audio']) && $this->request['is_audio'];
 
 // Get ffprobe info from TorrServer
-$ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($info_hash, $file_index, $attach_id);
+$ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($info_hash, $file_index, $topic_id);
 $ffpInfo = $ffpInfo->{$file_index};
 if (isset($ffpInfo->streams)) {
     // Video codec information
