@@ -38,12 +38,10 @@ class Attach
     public $attachment_extension_list;
     public $attachment_mimetype_list;
     public $attachment_list;
-    public $attachment_thumbnail_list;
 
     public $num_attachments = 0; // number of attachments in message
     public $filesize = 0;
     public $filetime = 0;
-    public $thumbnail = 0;
     public $page = 0; // On which page we are on ? This should be filled by child classes.
 
     // Switches
@@ -70,7 +68,6 @@ class Attach
         $this->filename = (isset($_FILES['fileupload']['name']) && $_FILES['fileupload']['name'] !== 'none') ? trim(stripslashes($_FILES['fileupload']['name'])) : '';
 
         $this->attachment_list = get_var('attachment_list', ['']);
-        $this->attachment_thumbnail_list = get_var('attach_thumbnail_list', [0]);
     }
 
     /**
@@ -96,12 +93,11 @@ class Attach
             $delete = isset($_POST['del_attachment']);
             $edit = isset($_POST['edit_comment']);
             $update_attachment = isset($_POST['update_attachment']);
-            $del_thumbnail = isset($_POST['del_thumbnail']);
 
             $add_attachment_box = !empty($_POST['add_attachment_box']);
             $posted_attachments_box = !empty($_POST['posted_attachments_box']);
 
-            $refresh = $add || $delete || $edit || $del_thumbnail || $update_attachment || $add_attachment_box || $posted_attachments_box;
+            $refresh = $add || $delete || $edit || $update_attachment || $add_attachment_box || $posted_attachments_box;
         }
 
         // Get Attachments
@@ -158,14 +154,13 @@ class Attach
 
         if ($preview || $refresh || $error) {
             $delete_attachment = isset($_POST['del_attachment']);
-            $delete_thumbnail = isset($_POST['del_thumbnail']);
 
             $add_attachment = isset($_POST['add_attachment']);
             $edit_attachment = isset($_POST['edit_comment']);
             $update_attachment = isset($_POST['update_attachment']);
 
             // Perform actions on temporary attachments
-            if ($delete_attachment || $delete_thumbnail) {
+            if ($delete_attachment) {
                 // store old values
                 $actual_id_list = get_var('attach_id_list', [0]);
                 $actual_comment_list = get_var('comment_list', ['']);
@@ -176,7 +171,6 @@ class Attach
                 $actual_filetime_list = get_var('filetime_list', [0]);
 
                 $actual_list = get_var('attachment_list', ['']);
-                $actual_thumbnail_list = get_var('attach_thumbnail_list', [0]);
 
                 // clean values
                 $this->attachment_list = [];
@@ -187,21 +181,12 @@ class Attach
                 $this->attachment_filesize_list = [];
                 $this->attachment_filetime_list = [];
                 $this->attachment_id_list = [];
-                $this->attachment_thumbnail_list = [];
 
                 // restore values :)
                 if (isset($_POST['attachment_list'])) {
                     for ($i = 0, $iMax = is_countable($actual_list) ? \count($actual_list) : 0; $i < $iMax; $i++) {
                         $restore = false;
-                        $del_thumb = false;
 
-                        if ($delete_thumbnail) {
-                            if (!isset($_POST['del_thumbnail'][$actual_list[$i]])) {
-                                $restore = true;
-                            } else {
-                                $del_thumb = true;
-                            }
-                        }
                         if ($delete_attachment) {
                             if (!isset($_POST['del_attachment'][$actual_list[$i]])) {
                                 $restore = true;
@@ -217,18 +202,6 @@ class Attach
                             $this->attachment_filesize_list[] = $actual_filesize_list[$i];
                             $this->attachment_filetime_list[] = $actual_filetime_list[$i];
                             $this->attachment_id_list[] = $actual_id_list[$i];
-                            $this->attachment_thumbnail_list[] = $actual_thumbnail_list[$i];
-                        } elseif (!$del_thumb) {
-                            // delete selected attachment
-                            if ($actual_id_list[$i] == '0') {
-                                unlink_attach($actual_list[$i]);
-
-                                if ($actual_thumbnail_list[$i] == 1) {
-                                    unlink_attach($actual_list[$i], MODE_THUMBNAIL);
-                                }
-                            } else {
-                                delete_attachment($post_id, $actual_id_list[$i], $this->page);
-                            }
                         }
                     }
                 }
@@ -515,7 +488,6 @@ class Attach
                 $hidden .= '<input type="hidden" name="filesize_list[]" value="' . @$this->attachment_filesize_list[$i] . '" />';
                 $hidden .= '<input type="hidden" name="filetime_list[]" value="' . @$this->attachment_filetime_list[$i] . '" />';
                 $hidden .= '<input type="hidden" name="attach_id_list[]" value="' . @$this->attachment_id_list[$i] . '" />';
-                $hidden .= '<input type="hidden" name="attach_thumbnail_list[]" value="' . @$this->attachment_thumbnail_list[$i] . '" />';
 
                 if (!$this->posted_attachments_body || !$this->attachment_list) {
                     $hidden .= '<input type="hidden" name="comment_list[]" value="' . $this->attachment_comment_list[$i] . '" />';
@@ -701,7 +673,6 @@ class Attach
 
             if ($error) {
                 unlink_attach($this->attach_filename);
-                unlink_attach($this->attach_filename, MODE_THUMBNAIL);
                 $this->post_attach = false;
             }
         }
