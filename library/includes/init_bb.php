@@ -76,14 +76,14 @@ define('COOKIE_MAX_TRACKS', 90);
  *
  * @param string $name
  * @param mixed $val
- * @param int $lifetime
+ * @param int|null $lifetime
  * @param bool $httponly
- * @param bool $isRaw
- * @return void
- * @throws \Josantonius\Cookie\Exceptions\CookieException
+ * @return bool
  */
-function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false): bool
+function bb_setcookie(string $name, mixed $val, ?int $lifetime = null, bool $httponly = false): bool
 {
+    $lifetime ??= COOKIE_PERSIST;
+
     return setcookie($name, $val, [
         'expires' => $lifetime,
         'path' => config()->get('script_path'),
