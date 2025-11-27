@@ -60,15 +60,17 @@ if (config()->get('bt_allow_spmode_change')) {
 }
 
 $bt_topic_id = $t_data['topic_id'];
+$topic_id = $t_data['topic_id'];
 $bt_user_id = $userdata['user_id'];
-$attach_id = $attachments['_' . $post_id][$i]['attach_id'];
-$tracker_status = $attachments['_' . $post_id][$i]['tracker_status'];
-$download_count = declension((int)$attachments['_' . $post_id][$i]['download_count'], 'times');
-$tor_file_size = humn_size($attachments['_' . $post_id][$i]['filesize']);
-$tor_file_time = bb_date($attachments['_' . $post_id][$i]['filetime']);
-$real_filename = clean_filename(basename($attachments['_' . $post_id][$i]['real_filename']));
+$comment = ''; // TODO
+$display_name = ''; // TODO
+//$tracker_status = $attachments['_' . $post_id][$i]['tracker_status'];
+$download_count = declension((int)0/**$attachments['_' . $post_id][$i]['download_count']**/, 'times');
+$tor_file_size = humn_size(0/**$attachments['_' . $post_id][$i]['filesize']**/);
+$tor_file_time = bb_date(0/**$attachments['_' . $post_id][$i]['filetime']**/);
+$real_filename = clean_filename(basename(''/**$attachments['_' . $post_id][$i]['real_filename']**/));
 
-$tor_reged = (bool)$tracker_status;
+$tor_reged = true;//(bool)$tracker_status;
 $show_peers = (bool)config()->get('bt_show_peers');
 
 $locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
@@ -79,12 +81,12 @@ $tor_auth_del = ($tor_auth && $tor_reged);
 
 $tracker_link = ($tor_reged) ? $lang['BT_REG_YES'] : $lang['BT_REG_NO'];
 
-$download_link = DL_URL . $attach_id;
+$download_link = DL_URL . $topic_id;
 $description = ($comment) ?: preg_replace("#" . "." . TORRENT_EXT . "$#i", '', $display_name);
 
 if ($tor_auth_reg || $tor_auth_del) {
-    $reg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : ' . $attach_id . ', type: \'reg\'}); return false;">' . $lang['BT_REG_ON_TRACKER'] . '</a>';
-    $unreg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : ' . $attach_id . ', type: \'unreg\'}); return false;">' . $lang['BT_UNREG_FROM_TRACKER'] . '</a>';
+    $reg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', topic_id : ' . $topic_id . ', type: \'reg\'}); return false;">' . $lang['BT_REG_ON_TRACKER'] . '</a>';
+    $unreg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', topic_id : ' . $topic_id . ', type: \'unreg\'}); return false;">' . $lang['BT_UNREG_FROM_TRACKER'] . '</a>';
 
     $tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }
@@ -103,7 +105,7 @@ if (!$tor_reged) {
     $template->assign_block_vars('postrow.attach.tor_not_reged', [
         'DOWNLOAD_NAME' => $display_name,
         'TRACKER_LINK' => $tracker_link,
-        'ATTACH_ID' => $attach_id,
+        'ATTACH_ID' => $topic_id,
 
         'S_UPLOAD_IMAGE' => $upload_image,
         'U_DOWNLOAD_LINK' => $download_link,
@@ -120,7 +122,7 @@ if (!$tor_reged) {
     $sql = "SELECT bt.*, u.user_id, u.username, u.user_rank
 		FROM " . BB_BT_TORRENTS . " bt
 		LEFT JOIN " . BB_USERS . " u ON(bt.checked_user_id = u.user_id)
-		WHERE bt.attach_id = $attach_id";
+		WHERE bt.topic_id = $topic_id";
 
     if (!$result = DB()->sql_query($sql)) {
         bb_die('Could not obtain torrent information');
@@ -130,15 +132,14 @@ if (!$tor_reged) {
 }
 
 if ($tor_reged && !$tor_info) {
-    DB()->query("UPDATE " . BB_ATTACHMENTS_DESC . " SET tracker_status = 0 WHERE attach_id = $attach_id");
-
+	DB()->query("UPDATE ". BB_TOPICS ." SET tracker_status = 0 WHERE topic_id = $topic_id LIMIT 1");
     bb_die('Torrent status fixed');
 }
 
 if ($tor_auth) {
     $template->assign_vars([
         'TOR_CONTROLS' => true,
-        'TOR_ATTACH_ID' => $attach_id
+        'TOR_ATTACH_ID' => $topic_id
     ]);
 
     if ($t_data['self_moderated'] || $is_auth['auth_mod']) {
@@ -202,7 +203,7 @@ if ($tor_reged && $tor_info) {
         $template->assign_block_vars('postrow.attach.tor_reged', [
             'DOWNLOAD_NAME' => $display_name,
             'TRACKER_LINK' => $tracker_link,
-            'ATTACH_ID' => $attach_id,
+            'ATTACH_ID' => $topic_id,
             'TOR_SILVER_GOLD' => $tor_type,
             'TOR_TYPE' => is_gold($tor_type),
 
@@ -232,7 +233,7 @@ if ($tor_reged && $tor_info) {
         ]);
 
         // TorrServer integration
-        if (config()->get('torr_server.enabled') && (!IS_GUEST || !config()->get('torr_server.disable_for_guest')) && (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id)) {
+        if (config()->get('torr_server.enabled') && (!IS_GUEST || !config()->get('torr_server.disable_for_guest')) && (new \TorrentPier\TorrServerAPI())->getM3UPath($topic_id)) {
             $template->assign_block_vars('postrow.attach.tor_reged.tor_server', [
                 'TORR_SERVER_M3U_LINK' => PLAYBACK_M3U_URL . $bt_topic_id,
                 'TORR_SERVER_M3U_ICON' => $images['icon_tor_m3u_icon'],
@@ -573,7 +574,7 @@ if ($tor_reged && $tor_info) {
 if (config()->get('bt_allow_spmode_change') && $s_mode != 'full') {
     $template->assign_vars([
         'PEERS_FULL_LINK' => true,
-        'SPMODE_FULL_HREF' => TOPIC_URL . "$bt_topic_id&amp;spmode=full#seeders"
+        'SPMODE_FULL_HREF' => TOPIC_URL . "$topic_id&amp;spmode=full#seeders"
     ]);
 }
 
