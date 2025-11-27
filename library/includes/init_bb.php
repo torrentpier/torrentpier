@@ -211,8 +211,6 @@ define('BB_CATEGORIES', 'bb_categories');
 define('BB_CONFIG', 'bb_config');
 define('BB_CRON', 'bb_cron');
 define('BB_DISALLOW', 'bb_disallow');
-define('BB_EXTENSION_GROUPS', 'bb_extension_groups');
-define('BB_EXTENSIONS', 'bb_extensions');
 define('BB_FORUMS', 'bb_forums');
 define('BB_GROUPS', 'bb_groups');
 define('BB_LOG', 'bb_log');
