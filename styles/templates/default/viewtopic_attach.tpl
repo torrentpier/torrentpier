@@ -2,68 +2,6 @@
 <div class="clear"></div>
 <div class="spacer_8"></div>
 
-<!-- BEGIN denyrow -->
-<fieldset class="attach">
-<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT}</legend>
-	<p class="attach_link denied">{postrow.attach.denyrow.L_DENIED}</p>
-</fieldset>
-
-<div class="spacer_12"></div>
-<!-- END denyrow -->
-
-<!-- BEGIN cat_images -->
-<fieldset class="attach">
-<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT} ({postrow.attach.cat_images.FILESIZE})</legend>
-	<p class="tCenter">
-		<img src="{postrow.attach.cat_images.IMG_SRC}" id="attachImg" class="postImg" alt="img" border="0" />
-	</p>
-	<!-- IF postrow.attach.cat_images.COMMENT -->
-	<p class="attach_comment med">
-		{postrow.attach.cat_images.COMMENT}
-	</p>
-	<!-- ENDIF -->
-</fieldset>
-
-<div class="spacer_12"></div>
-<!-- END cat_images -->
-
-<!-- BEGIN cat_thumb_images -->
-<fieldset class="attach">
-<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT_THUMBNAIL}</legend>
-	<p class="attach_link">
-		<a href="{postrow.attach.cat_thumb_images.IMG_SRC}" target="_blank"><img src="{postrow.attach.cat_thumb_images.IMG_THUMB_SRC}" alt="{postrow.attach.cat_thumb_images.DOWNLOAD_NAME}" border="0" /></a>
-	</p>
-	<p class="attach_link">
-		<a href="{postrow.attach.cat_thumb_images.IMG_SRC}" target="_blank"><b>{postrow.attach.cat_thumb_images.DOWNLOAD_NAME}</b></a>
-        <span class="attach_stats med">({postrow.attach.cat_thumb_images.FILESIZE}, {L_VIEWS}: {postrow.attach.cat_thumb_images.DOWNLOAD_COUNT})</span>
-	</p>
-	<!-- IF postrow.attach.cat_thumb_images.COMMENT -->
-	<p class="attach_comment med">
-		{postrow.attach.cat_thumb_images.COMMENT}
-	</p>
-	<!-- ENDIF -->
-</fieldset>
-
-<div class="spacer_12"></div>
-<!-- END cat_thumb_images -->
-
-<!-- BEGIN attachrow -->
-<fieldset class="attach">
-<legend>{postrow.attach.attachrow.S_UPLOAD_IMAGE} {L_ATTACHMENT}</legend>
-	<p class="attach_link">
-		<a href="{postrow.attach.attachrow.U_DOWNLOAD_LINK}" {postrow.attach.attachrow.TARGET_BLANK}><b>{postrow.attach.attachrow.DOWNLOAD_NAME}</b></a>
-		<span class="attach_stats med">({postrow.attach.attachrow.FILESIZE}, <!-- IF postrow.attach.attachrow.IS_IMAGE -->{L_VIEWS}<!-- ELSE -->{L_DOWNLOADED}<!-- ENDIF -->: {postrow.attach.attachrow.DOWNLOAD_COUNT})</span>
-	</p>
-	<!-- IF postrow.attach.attachrow.COMMENT -->
-	<p class="attach_comment med">
-		{postrow.attach.attachrow.COMMENT}
-	</p>
-	<!-- ENDIF -->
-</fieldset>
-
-<div class="spacer_12"></div>
-<!-- END attachrow -->
-
 <!-- BEGIN tor_not_reged -->
 <table class="attach bordered med">
 	<tr class="row3">

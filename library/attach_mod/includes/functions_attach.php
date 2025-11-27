@@ -71,24 +71,6 @@ function is_forum_authed($auth_cache, $check_forum_id)
 }
 
 /**
- * Deletes an Attachment
- */
-function unlink_attach($filename, $mode = false)
-{
-    global $upload_dir, $attach_config;
-
-    $filename = basename($filename);
-
-    if ($mode == MODE_THUMBNAIL) {
-        $filename = $upload_dir . '/' . THUMB_DIR . '/t_' . $filename;
-    } else {
-        $filename = $upload_dir . '/' . $filename;
-    }
-
-    return @unlink($filename);
-}
-
-/**
  * get all attachments from a post (could be an post array too)
  */
 function get_attachments_from_post($post_id_array)
@@ -137,68 +119,7 @@ function get_attachments_from_post($post_id_array)
     return $attachments;
 }
 
-/**
- * Get allowed Extensions and their respective Values
- */
-function get_extension_informations()
-{
-    return $GLOBALS['datastore']->get('attach_extensions');
-}
 
-//
-// Sync Topic
-//
-function attachment_sync_topic($topics)
-{
-    if (is_array($topics)) {
-        $topics = implode(',', $topics);
-    }
-    $posts_without_attach = $topics_without_attach = [];
-
-    // Check orphan post_attachment markers
-    $sql = "SELECT p.post_id
-		FROM " . BB_POSTS . " p
-		LEFT JOIN " . BB_ATTACHMENTS . " a USING(post_id)
-		WHERE p.topic_id IN($topics)
-			AND p.post_attachment = 1
-			AND a.post_id IS NULL";
-
-    if ($rowset = DB()->fetch_rowset($sql)) {
-        foreach ($rowset as $row) {
-            $posts_without_attach[] = $row['post_id'];
-        }
-        if ($posts_sql = implode(',', $posts_without_attach)) {
-            DB()->query("UPDATE " . BB_POSTS . " SET post_attachment = 0 WHERE post_id IN($posts_sql)");
-        }
-    }
-
-    // Update missing topic_attachment markers
-    DB()->query("
-		UPDATE " . BB_TOPICS . " t, " . BB_POSTS . " p SET
-			t.topic_attachment = 1
-		WHERE p.topic_id IN($topics)
-			AND p.post_attachment = 1
-			AND p.topic_id = t.topic_id
-	");
-
-    // Fix orphan topic_attachment markers
-    $sql = "SELECT t.topic_id
-		FROM " . BB_POSTS . " p, " . BB_TOPICS . " t
-		WHERE t.topic_id = p.topic_id
-			AND t.topic_id IN($topics)
-			AND t.topic_attachment = 1
-		GROUP BY p.topic_id
-		HAVING SUM(p.post_attachment) = 0";
-
-    if ($rowset = DB()->fetch_rowset($sql)) {
-        foreach ($rowset as $row) {
-            $topics_without_attach[] = $row['topic_id'];
-        }
-        if ($topics_sql = implode(',', $topics_without_attach)) {
-            DB()->query("UPDATE " . BB_TOPICS . " SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
-        }
-    }
-}
 
 /**
  * _set_var

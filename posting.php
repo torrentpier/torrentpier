@@ -271,8 +271,6 @@ if ($submit || $refresh) {
 
 $update_post_time = !empty($_POST['update_post_time']);
 
-execute_posting_attachment_handling();
-
 // If while you were writing a response, new messages appeared in the topic,
 // before your message is sent, a warning is displayed with an overview of these messages
 $topic_has_new_posts = false;
