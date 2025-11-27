@@ -83,7 +83,7 @@ class Torrent
 
         if ($poster_id != $userdata['user_id'] && !$is_auth['auth_mod']) {
             bb_die($lang['NOT_MODERATOR']);
-        } elseif (!$is_auth['auth_view'] || !$is_auth['auth_attachments'] || $attach_config['disable_mod']) {
+        } elseif (!$is_auth['auth_view'] || !$is_auth['auth_attachments']) {
             bb_die(sprintf($lang['SORRY_AUTH_READ'], $is_auth['auth_read_type']));
         }
         return $is_auth;

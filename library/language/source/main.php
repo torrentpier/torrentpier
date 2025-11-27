@@ -836,7 +836,6 @@ $lang['M3U_FFPROBE_NO_DATA'] = 'It seems ffprobe will not be able to return data
 $lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'Attachments';
-$lang['ATTACHMENT_THUMBNAIL'] = 'Attachment Thumbnail';
 
 // Posting/PM -> Posting Attachments
 $lang['ADD_ATTACHMENT'] = 'Add Attachment';
@@ -849,7 +848,6 @@ $lang['FILE_COMMENT'] = 'File Comment';
 $lang['POSTED_ATTACHMENTS'] = 'Posted Attachments';
 $lang['UPDATE_COMMENT'] = 'Update Comment';
 $lang['DELETE_ATTACHMENT'] = 'Delete Attachment';
-$lang['DELETE_THUMBNAIL'] = 'Delete Thumbnail';
 $lang['UPLOAD_NEW_VERSION'] = 'Upload New Version';
 
 // Errors -> Posting Attachments

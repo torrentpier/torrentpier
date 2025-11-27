@@ -182,7 +182,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
             DB()->sql_freeresult($result);
 
             if ($num_rows == 0) {
-                $sql = 'SELECT attach_id, physical_filename, thumbnail
+                $sql = 'SELECT attach_id, physical_filename
 						FROM ' . BB_ATTACHMENTS_DESC . '
 							WHERE attach_id = ' . (int)$attach_id_array[$i];
 
@@ -199,10 +199,6 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
                     // delete attachments
                     for ($j = 0; $j < $num_attach; $j++) {
                         unlink_attach($attachments[$j]['physical_filename']);
-
-                        if ((int)$attachments[$j]['thumbnail'] == 1) {
-                            unlink_attach($attachments[$j]['physical_filename'], MODE_THUMBNAIL);
-                        }
 
                         $sql = 'DELETE FROM ' . BB_ATTACHMENTS_DESC . ' WHERE attach_id = ' . (int)$attachments[$j]['attach_id'];
 
@@ -221,19 +217,5 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
                 }
             }
         }
-    }
-
-    // Now Sync the Topic/PM
-    if (count($post_id_array)) {
-        $sql = 'SELECT topic_id
-			FROM ' . BB_POSTS . '
-			WHERE post_id IN (' . implode(', ', $post_id_array) . ')
-			GROUP BY topic_id';
-
-        if (!($result = DB()->sql_query($sql))) {
-            bb_die('Could not select topic id');
-        }
-
-        DB()->sql_freeresult($result);
     }
 }
