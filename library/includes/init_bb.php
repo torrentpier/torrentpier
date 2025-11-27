@@ -146,19 +146,6 @@ define('POST_POST_URL', 'p');
 define('POST_TOPIC_URL', 't');
 define('POST_USERS_URL', 'u');
 
-// Download Modes
-define('INLINE_LINK', 1);
-define('PHYSICAL_LINK', 2);
-
-// Categories
-define('NONE_CAT', 0);
-define('IMAGE_CAT', 1);
-
-// Misc
-define('ADMIN_MAX_ATTACHMENTS', 50);
-define('THUMB_DIR', 'thumbs');
-define('MODE_THUMBNAIL', 1);
-
 // Torrents
 define('TOR_STATUS_NORMAL', 0);
 define('TOR_STATUS_FROZEN', 1);
