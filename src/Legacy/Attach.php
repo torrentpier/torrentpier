@@ -53,21 +53,21 @@ class Attach
      */
     public function __construct()
     {
-        $this->add_attachment_body = get_var('add_attachment_body', 0);
-        $this->posted_attachments_body = get_var('posted_attachments_body', 0);
+        $this->add_attachment_body = 0;
+        $this->posted_attachments_body = 0;
 
-        $this->file_comment = get_var('filecomment', '');
-        $this->attachment_id_list = get_var('attach_id_list', [0]);
-        $this->attachment_comment_list = get_var('comment_list', ['']);
-        $this->attachment_filesize_list = get_var('filesize_list', [0]);
-        $this->attachment_filetime_list = get_var('filetime_list', [0]);
-        $this->attachment_filename_list = get_var('filename_list', ['']);
-        $this->attachment_extension_list = get_var('extension_list', ['']);
-        $this->attachment_mimetype_list = get_var('mimetype_list', ['']);
+        $this->file_comment = '';
+        $this->attachment_id_list = [0];
+        $this->attachment_comment_list = [''];
+        $this->attachment_filesize_list = [0];
+        $this->attachment_filetime_list = [0];
+        $this->attachment_filename_list = [''];
+        $this->attachment_extension_list = [''];
+        $this->attachment_mimetype_list = [''];
 
         $this->filename = (isset($_FILES['fileupload']['name']) && $_FILES['fileupload']['name'] !== 'none') ? trim(stripslashes($_FILES['fileupload']['name'])) : '';
 
-        $this->attachment_list = get_var('attachment_list', ['']);
+        $this->attachment_list = [''];
     }
 
     /**
@@ -76,9 +76,7 @@ class Attach
      */
     public function handle_attachments($mode)
     {
-        global $is_auth, $attach_config, $refresh, $update_attachment, $post_id, $submit, $preview, $error, $error_msg, $lang;
-
-        $sql_id = 'post_id';
+        global $is_auth, $refresh, $update_attachment, $post_id, $submit, $preview, $error, $error_msg, $lang;
 
         // nothing, if the user is not authorized
         if (!$is_auth['auth_attachments']) {
@@ -93,7 +91,6 @@ class Attach
             $delete = isset($_POST['del_attachment']);
             $edit = isset($_POST['edit_comment']);
             $update_attachment = isset($_POST['update_attachment']);
-
             $add_attachment_box = !empty($_POST['add_attachment_box']);
             $posted_attachments_box = !empty($_POST['posted_attachments_box']);
 
@@ -115,7 +112,6 @@ class Attach
                     $this->attachment_mimetype_list[] = $attachment['mimetype'];
                     $this->attachment_filesize_list[] = $attachment['filesize'];
                     $this->attachment_filetime_list[] = $attachment['filetime'];
-                    $this->attachment_id_list[] = $attachment['attach_id'];
                 }
             }
         }
@@ -154,25 +150,12 @@ class Attach
 
         if ($preview || $refresh || $error) {
             $delete_attachment = isset($_POST['del_attachment']);
-
             $add_attachment = isset($_POST['add_attachment']);
             $edit_attachment = isset($_POST['edit_comment']);
             $update_attachment = isset($_POST['update_attachment']);
 
             // Perform actions on temporary attachments
             if ($delete_attachment) {
-                // store old values
-                $actual_id_list = get_var('attach_id_list', [0]);
-                $actual_comment_list = get_var('comment_list', ['']);
-                $actual_filename_list = get_var('filename_list', ['']);
-                $actual_extension_list = get_var('extension_list', ['']);
-                $actual_mimetype_list = get_var('mimetype_list', ['']);
-                $actual_filesize_list = get_var('filesize_list', [0]);
-                $actual_filetime_list = get_var('filetime_list', [0]);
-
-                $actual_list = get_var('attachment_list', ['']);
-
-                // clean values
                 $this->attachment_list = [];
                 $this->attachment_comment_list = [];
                 $this->attachment_filename_list = [];
@@ -181,33 +164,9 @@ class Attach
                 $this->attachment_filesize_list = [];
                 $this->attachment_filetime_list = [];
                 $this->attachment_id_list = [];
-
-                // restore values :)
-                if (isset($_POST['attachment_list'])) {
-                    for ($i = 0, $iMax = is_countable($actual_list) ? \count($actual_list) : 0; $i < $iMax; $i++) {
-                        $restore = false;
-
-                        if ($delete_attachment) {
-                            if (!isset($_POST['del_attachment'][$actual_list[$i]])) {
-                                $restore = true;
-                            }
-                        }
-
-                        if ($restore) {
-                            $this->attachment_list[] = $actual_list[$i];
-                            $this->attachment_comment_list[] = $actual_comment_list[$i];
-                            $this->attachment_filename_list[] = $actual_filename_list[$i];
-                            $this->attachment_extension_list[] = $actual_extension_list[$i];
-                            $this->attachment_mimetype_list[] = $actual_mimetype_list[$i];
-                            $this->attachment_filesize_list[] = $actual_filesize_list[$i];
-                            $this->attachment_filetime_list[] = $actual_filetime_list[$i];
-                            $this->attachment_id_list[] = $actual_id_list[$i];
-                        }
-                    }
-                }
             } elseif ($edit_attachment || $update_attachment || $add_attachment || $preview) {
                 if ($edit_attachment) {
-                    $actual_comment_list = get_var('comment_list', ['']);
+                    $actual_comment_list = [''];
 
                     $this->attachment_comment_list = [];
 
@@ -228,7 +187,7 @@ class Attach
                     $this->upload_attachment();
 
                     if (!$error) {
-                        $actual_id_list = get_var('attach_id_list', [0]);
+                        $actual_id_list = [0];
 
                         $attachment_id = 0;
                         $actual_element = 0;
@@ -332,127 +291,6 @@ class Attach
         }
 
         return true;
-    }
-
-    /**
-     * Basic Insert Attachment Handling for all Message Types
-     */
-    public function do_insert_attachment($mode, $message_type, $message_id)
-    {
-        global $upload_dir;
-
-        if ((int)$message_id < 0) {
-            return false;
-        }
-
-        global $post_info, $userdata;
-
-        $post_id = (int)$message_id;
-        $user_id_1 = (isset($post_info['poster_id'])) ? (int)$post_info['poster_id'] : 0;
-
-        if (!$user_id_1) {
-            $user_id_1 = (int)$userdata['user_id'];
-        }
-
-        if ($mode === 'attach_list') {
-            for ($i = 0, $iMax = is_countable($this->attachment_list) ? \count($this->attachment_list) : 0; $i < $iMax; $i++) {
-                if ($this->attachment_id_list[$i]) {
-                    //bt
-                    if ($this->attachment_extension_list[$i] === TORRENT_EXT && !\defined('TORRENT_ATTACH_ID')) {
-                        \define('TORRENT_ATTACH_ID', $this->attachment_id_list[$i]);
-                    }
-                    //bt end
-
-                    // update entry in db if attachment already stored in db and filespace
-                    $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . "
-						SET comment = '" . DB()->escape($this->attachment_comment_list[$i]) . "'
-						WHERE attach_id = " . $this->attachment_id_list[$i];
-
-                    if (!(DB()->sql_query($sql))) {
-                        bb_die('Unable to update the file comment');
-                    }
-                } else {
-                    if (empty($this->attachment_mimetype_list[$i]) && $this->attachment_extension_list[$i] === TORRENT_EXT) {
-                        $this->attachment_mimetype_list[$i] = TORRENT_MIMETYPE;
-                    }
-
-                    // insert attachment into db
-                    $sql_ary = [
-                        'physical_filename' => (string)basename($this->attachment_list[$i]),
-                        'real_filename' => (string)basename($this->attachment_filename_list[$i]),
-                        'comment' => (string)@$this->attachment_comment_list[$i],
-                        'extension' => (string)strtolower($this->attachment_extension_list[$i]),
-                        'mimetype' => (string)strtolower($this->attachment_mimetype_list[$i]),
-                        'filesize' => (int)$this->attachment_filesize_list[$i],
-                        'filetime' => (int)$this->attachment_filetime_list[$i],
-                    ];
-
-                    $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . DB()->build_array('INSERT', $sql_ary);
-
-                    if (!(DB()->sql_query($sql))) {
-                        bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
-                    }
-
-                    $attach_id = DB()->sql_nextid();
-
-                    //bt
-                    if ($this->attachment_extension_list[$i] === TORRENT_EXT && !\defined('TORRENT_ATTACH_ID')) {
-                        \define('TORRENT_ATTACH_ID', $attach_id);
-                    }
-                    //bt end
-
-                    $sql_ary = [
-                        'attach_id' => (int)$attach_id,
-                        'post_id' => (int)$post_id,
-                        'user_id_1' => (int)$user_id_1,
-                    ];
-
-                    $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . DB()->build_array('INSERT', $sql_ary);
-
-                    if (!(DB()->sql_query($sql))) {
-                        bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
-                    }
-                }
-            }
-
-            return true;
-        }
-
-        if ($mode === 'last_attachment') {
-            if ($this->post_attach && !isset($_POST['update_attachment'])) {
-                // insert attachment into db, here the user submited it directly
-                $sql_ary = [
-                    'physical_filename' => (string)basename($this->attach_filename),
-                    'real_filename' => (string)basename($this->filename),
-                    'comment' => (string)$this->file_comment,
-                    'extension' => (string)strtolower($this->extension),
-                    'mimetype' => (string)strtolower($this->type),
-                    'filesize' => (int)$this->filesize,
-                    'filetime' => (int)$this->filetime,
-                ];
-
-                $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . DB()->build_array('INSERT', $sql_ary);
-
-                // Inform the user that his post has been created, but nothing is attached
-                if (!(DB()->sql_query($sql))) {
-                    bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
-                }
-
-                $attach_id = DB()->sql_nextid();
-
-                $sql_ary = [
-                    'attach_id' => (int)$attach_id,
-                    'post_id' => (int)$post_id,
-                    'user_id_1' => (int)$user_id_1,
-                ];
-
-                $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . DB()->build_array('INSERT', $sql_ary);
-
-                if (!(DB()->sql_query($sql))) {
-                    bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
-                }
-            }
-        }
     }
 
     /**
@@ -598,14 +436,7 @@ class Attach
                 }
             }
 
-            // Check Forum Permissions
-            if (!$error && !IS_ADMIN && !is_forum_authed($auth_cache, $forum_id) && trim($auth_cache)) {
-                $error = true;
-                if (!empty($error_msg)) {
-                    $error_msg .= '<br />';
-                }
-                $error_msg .= sprintf($lang['DISALLOWED_EXTENSION_WITHIN_FORUM'], htmlspecialchars($this->extension));
-            }
+
 
             //bt
             // Block uploading more than one torrent file
@@ -675,50 +506,6 @@ class Attach
                 unlink_attach($this->attach_filename);
                 $this->post_attach = false;
             }
-        }
-    }
-
-    // Copy the temporary attachment to the right location (copy, move_uploaded_file)
-    public function move_uploaded_attachment($upload_mode, $file)
-    {
-        global $error, $error_msg, $lang, $upload_dir;
-
-        if (!is_uploaded_file($file)) {
-            bb_die('Unable to upload file. The given source has not been uploaded');
-        }
-
-        switch ($upload_mode) {
-            case 'copy':
-
-                if (!@copy($file, $upload_dir . '/' . basename($this->attach_filename))) {
-                    if (!@move_uploaded_file($file, $upload_dir . '/' . basename($this->attach_filename))) {
-                        $error = true;
-                        if (!empty($error_msg)) {
-                            $error_msg .= '<br />';
-                        }
-                        $error_msg .= sprintf($lang['GENERAL_UPLOAD_ERROR'], './' . $upload_dir . '/' . $this->attach_filename);
-                        return;
-                    }
-                }
-                @chmod($upload_dir . '/' . basename($this->attach_filename), 0644);
-
-                break;
-
-            case 'move':
-
-                if (!@move_uploaded_file($file, $upload_dir . '/' . basename($this->attach_filename))) {
-                    if (!@copy($file, $upload_dir . '/' . basename($this->attach_filename))) {
-                        $error = true;
-                        if (!empty($error_msg)) {
-                            $error_msg .= '<br />';
-                        }
-                        $error_msg .= sprintf($lang['GENERAL_UPLOAD_ERROR'], './' . $upload_dir . '/' . $this->attach_filename);
-                        return;
-                    }
-                }
-                @chmod($upload_dir . '/' . $this->attach_filename, 0644);
-
-                break;
         }
     }
 }
