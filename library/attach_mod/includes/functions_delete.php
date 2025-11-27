@@ -234,9 +234,6 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
             bb_die('Could not select topic id');
         }
 
-        while ($row = DB()->sql_fetchrow($result)) {
-            attachment_sync_topic($row['topic_id']);
-        }
         DB()->sql_freeresult($result);
     }
 }

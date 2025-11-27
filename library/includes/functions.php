@@ -1602,16 +1602,6 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
     return $res;
 }
 
-function topic_attachment_image($switch_attachment)
-{
-    global $is_auth;
-
-    if (!$switch_attachment || !($is_auth['auth_download'] && $is_auth['auth_view'])) {
-        return '';
-    }
-    return '<img src="styles/images/icon_clip.gif" alt="" border="0" /> ';
-}
-
 function clear_dl_list($topics_csv)
 {
     DB()->query("DELETE FROM " . BB_BT_DLSTATUS . " WHERE topic_id IN($topics_csv)");
