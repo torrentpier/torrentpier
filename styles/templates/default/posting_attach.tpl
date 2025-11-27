@@ -76,9 +76,6 @@
 		<input type="submit" name="update_attachment[{attach_row.ATTACH_ID}]" value="{L_UPLOAD_NEW_VERSION}" />&nbsp;
 		<!-- END switch_update_attachment -->
 		<input type="submit" name="del_attachment[{attach_row.ATTACH_FILENAME}]" value="{L_DELETE_ATTACHMENT}" />&nbsp;
-		<!-- BEGIN switch_thumbnail -->
-		<input type="submit" name="del_thumbnail[{attach_row.ATTACH_FILENAME}]" value="{L_DELETE_THUMBNAIL}" />&nbsp;
-		<!-- END switch_thumbnail -->
 	</td>
 </tr>
 <tr>

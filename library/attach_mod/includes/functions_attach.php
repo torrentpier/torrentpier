@@ -96,13 +96,11 @@ function get_attachments_from_post($post_id_array)
         return $attachments;
     }
 
-    $display_order = ((int)$attach_config['display_order'] == 0) ? 'DESC' : 'ASC';
-
     $sql = 'SELECT a.post_id, d.*
 		FROM ' . BB_ATTACHMENTS . ' a, ' . BB_ATTACHMENTS_DESC . " d
 		WHERE a.post_id IN ($post_id_array)
 			AND a.attach_id = d.attach_id
-		ORDER BY d.filetime $display_order";
+		ORDER BY d.filetime ASC";
 
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not get attachment informations for post number ' . $post_id_array);

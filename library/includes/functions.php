@@ -899,19 +899,6 @@ function show_bt_userdata($user_id): void
     ]);
 }
 
-function get_attachments_dir($cfg = null)
-{
-    if (!$cfg and !$cfg = $GLOBALS['attach_config']) {
-        $cfg = bb_get_config(BB_ATTACH_CONFIG, true, false);
-    }
-
-    if ($cfg['upload_dir'][0] == '/' || ($cfg['upload_dir'][0] != '/' && $cfg['upload_dir'][1] == ':')) {
-        return $cfg['upload_dir'];
-    }
-
-    return BB_ROOT . $cfg['upload_dir'];
-}
-
 function bb_get_config($table, $from_db = false, $update_cache = true)
 {
     if ($from_db or !$cfg = CACHE('bb_config')->get("config_{$table}")) {
