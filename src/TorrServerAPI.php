@@ -166,9 +166,8 @@ class TorrServerAPI
      */
     public function getM3UPath(int $topic_id): string|false
     {
-        $m3uFile = Attachment::getPath($topic_id, M3U_EXT_ID);
-        if (is_file($m3uFile)) {
-            return $m3uFile;
+        if (Attachment::m3uExists($topic_id)) {
+            return Attachment::getPath($topic_id, M3U_EXT_ID);
         }
 
         return false;
@@ -186,8 +185,8 @@ class TorrServerAPI
         CACHE('tr_cache')->rm("ffprobe_m3u_$topic_id");
 
         // Unlink .m3u file
-        $m3uFile = Attachment::getPath($topic_id, M3U_EXT_ID);
-        if (is_file($m3uFile)) {
+        if (Attachment::m3uExists($topic_id)) {
+            $m3uFile = Attachment::getPath($topic_id, M3U_EXT_ID);
             if (unlink($m3uFile)) {
                 return true;
             } else {
