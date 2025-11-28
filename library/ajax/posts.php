@@ -18,7 +18,10 @@ if (!isset($this->request['type'])) {
 }
 if (isset($this->request['post_id'])) {
     $post_id = (int)$this->request['post_id'];
-    $post = DB()->fetch_row("SELECT t.*, f.*, p.*, pt.post_text
+    $post = DB()->fetch_row("SELECT
+            t.topic_id, t.topic_title, t.topic_status, t.topic_first_post_id, t.topic_last_post_id, t.forum_id,
+            p.post_id, p.poster_id, p.post_time, p.post_username,
+            pt.post_text
 		FROM " . BB_TOPICS . " t, " . BB_FORUMS . " f, " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt
 		WHERE p.post_id = $post_id
 			AND t.topic_id = p.topic_id
@@ -35,10 +38,9 @@ if (isset($this->request['post_id'])) {
     }
 } elseif (isset($this->request['topic_id'])) {
     $topic_id = (int)$this->request['topic_id'];
-    $post = DB()->fetch_row("SELECT t.*, f.*
-			FROM " . BB_TOPICS . " t, " . BB_FORUMS . " f
+    $post = DB()->fetch_row("SELECT t.topic_id, t.topic_title, t.topic_status, t.forum_id
+			FROM " . BB_TOPICS . " t
 			WHERE t.topic_id = $topic_id
-				AND f.forum_id = t.forum_id
 			LIMIT 1");
     if (!$post) {
         $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
@@ -109,7 +111,7 @@ switch ($this->request['type']) {
         if ($post['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod']) {
             $this->ajax_die($lang['EDIT_OWN_POSTS']);
         }
-        if ((mb_strlen($post['post_text'], DEFAULT_CHARSET) > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id)) {
+        if ((mb_strlen($post['post_text'], DEFAULT_CHARSET) > 1000) || ($post['topic_first_post_id'] == $post_id)) {
             $this->response['redirect'] = make_url(POSTING_URL . '?mode=editpost&' . POST_POST_URL . '=' . $post_id);
         } elseif ($this->request['type'] == 'editor') {
             $text = (string)$this->request['text'];

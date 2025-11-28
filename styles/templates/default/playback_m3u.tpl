@@ -4,7 +4,7 @@
     ajax.ffprobe_info = function (file_index, is_audio) {
         ajax.exec({
             action: 'ffprobe_info',
-            attach_id: {ATTACH_ID},
+            topic_id: {TOPIC_ID},
             info_hash: '{INFO_HASH}',
             file_index: file_index,
             is_audio: is_audio

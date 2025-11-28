@@ -960,7 +960,6 @@ $lang['TOR_STATUS_OF'] = 'Distribution has the status of:';
 $lang['TOR_STATUS_CHANGED'] = 'Status changed: ';
 $lang['TOR_BACK'] = ' back';
 $lang['PROCEED'] = 'Proceed';
-$lang['INVALID_ATTACH_ID'] = 'Missing file identifier!';
 $lang['CHANGE_TOR_TYPE'] = 'Type the torrent successfully changed';
 $lang['DEL_TORRENT'] = 'Are you sure you want to delete the torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Are you sure you want to delete and move the topic?';

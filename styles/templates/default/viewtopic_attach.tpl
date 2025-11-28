@@ -42,19 +42,19 @@
                 function change_torrents() {
                     ajax.exec({
                         action: 'change_torrent',
-                        attach_id: {unregistered_torrent.ATTACH_ID},
-                        type: $('#tor-select-{unregistered_torrent.ATTACH_ID}').val(),
+                        topic_id: {TOPIC_ID},
+                        type: $('#tor-select-{TOPIC_ID}').val(),
                     });
                 }
             </script>
-            <select name="tor_action" id="tor-select-{unregistered_torrent.ATTACH_ID}"
-                    onchange="$('#tor-confirm-{unregistered_torrent.ATTACH_ID}').attr('checked', false); $('#tor-submit-{unregistered_torrent.ATTACH_ID}').attr('disabled', true);">
+            <select name="tor_action" id="tor-select-{TOPIC_ID}"
+                    onchange="$('#tor-confirm-{TOPIC_ID}').attr('checked', false); $('#tor-submit-{TOPIC_ID}').attr('disabled', true);">
                 <option value="" selected class="select-action">&raquo; {L_SELECT_ACTION}</option>
                 <option value="del_torrent">{L_DELETE_TORRENT}</option>
                 <option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
             </select>
             <a href="#"
-               onclick="change_torrents($('#tor-{torrent.ATTACH_ID} select').val()); return false;"><input
+               onclick="change_torrents($('#tor-{TOPIC_ID} select').val()); return false;"><input
                     type="submit" value="{L_SUBMIT}" class="liteoption"/></a>
         </td>
     </tr>
@@ -124,7 +124,7 @@
 	<tr class="row1">
 		<td>{L_TOR_STATUS}:</td>
 		<td>
-			<span id="tor-{torrent.ATTACH_ID}-status">{torrent.TOR_STATUS_ICON} <b>{torrent.TOR_STATUS_TEXT}</b>
+			<span id="tor-{TOPIC_ID}-status">{torrent.TOR_STATUS_ICON} <b>{torrent.TOR_STATUS_TEXT}</b>
 			<!-- IF torrent.TOR_STATUS_BY -->{torrent.TOR_STATUS_BY}<!-- ENDIF -->
 			</span>
 			<!-- IF torrent.TOR_STATUS_REPLY || AUTH_MOD -->
@@ -132,7 +132,7 @@
 				ajax.change_tor_status = function(mode) {
 					ajax.exec({
 						action    : 'change_tor_status',
-						attach_id : {torrent.ATTACH_ID},
+						topic_id  : {TOPIC_ID},
 						mode      : mode,
 						status    : $('#sel_status').val(),
 						comment   : $('#comment').val(),
@@ -140,7 +140,7 @@
 				};
 				ajax.callback.change_tor_status = function(data) {
 				<!-- IF AUTH_MOD -->
-					$('#tor-'+ data.attach_id +'-status').html(data.status);
+					$('#tor-'+ data.topic_id +'-status').html(data.status);
 				<!-- ELSEIF torrent.TOR_STATUS_REPLY -->
 					$('#tor_comment').html('{L_TOR_AUTH_SENT_COMMENT}');
 				<!-- ENDIF -->
@@ -154,7 +154,7 @@
 			<!-- ENDIF -->
 
 			<!-- IF AUTH_MOD -->
-			<span id="tor-{torrent.ATTACH_ID}">{torrent.TOR_STATUS_SELECT}</span>
+			<span id="tor-{TOPIC_ID}">{torrent.TOR_STATUS_SELECT}</span>
 			<a href="#" onclick="ajax.change_tor_status('status'); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
 			<!-- ELSEIF torrent.TOR_STATUS_REPLY -->
 			<a href="#" onclick="ajax.change_tor_status('status_reply'); return false;"><input type="submit" value="{L_TOR_AUTH_FIXED}" class="liteoption" /></a>
@@ -189,13 +189,13 @@
                 function change_torrents() {
                     ajax.exec({
                         action: 'change_torrent',
-                        attach_id: {torrent.ATTACH_ID},
-                        type: $('#tor-select-{torrent.ATTACH_ID}').val(),
+                        topic_id: {TOPIC_ID},
+                        type: $('#tor-select-{TOPIC_ID}').val(),
                     });
                 }
             </script>
-            <select name="tor_action" id="tor-select-{torrent.ATTACH_ID}"
-                    onchange="$('#tor-confirm-{torrent.ATTACH_ID}').attr('checked', false); $('#tor-submit-{torrent.ATTACH_ID}').attr('disabled', true);">
+            <select name="tor_action" id="tor-select-{TOPIC_ID}"
+                    onchange="$('#tor-confirm-{TOPIC_ID}').attr('checked', false); $('#tor-submit-{TOPIC_ID}').attr('disabled', true);">
                 <option value="" selected class="select-action">&raquo; {L_SELECT_ACTION}</option>
                 <option value="del_torrent">{L_DELETE_TORRENT}</option>
                 <option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
@@ -215,7 +215,7 @@
                 <!-- ENDIF -->
             </select>
             <a href="#"
-               onclick="change_torrents($('#tor-{torrent.ATTACH_ID} select').val()); return false;"><input
+               onclick="change_torrents($('#tor-{TOPIC_ID} select').val()); return false;"><input
                     type="submit" value="{L_EDIT}" class="liteoption"/></a>
         </td>
     </tr>
@@ -254,7 +254,7 @@ $('#tor-filelist-btn').click(function () {
 
     ajax.exec({
         action: 'view_torrent',
-        attach_id: {torrent.ATTACH_ID}
+        topic_id: {TOPIC_ID}
     });
     ajax.callback.view_torrent = function (data) {
         $('#tor-filelist').html(data.html);

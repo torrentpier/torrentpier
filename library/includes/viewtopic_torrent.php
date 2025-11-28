@@ -105,7 +105,6 @@ if (!$tor_reged) {
     $template->assign_block_vars('unregistered_torrent', [
         'DOWNLOAD_NAME' => $display_name,
         'TRACKER_LINK' => $tracker_link,
-        'ATTACH_ID' => $topic_id,
 
         'S_UPLOAD_IMAGE' => $upload_image,
         'U_DOWNLOAD_LINK' => $download_link,
@@ -139,7 +138,6 @@ if ($tor_reged && !$tor_info) {
 if ($tor_auth) {
     $template->assign_vars([
         'TOR_CONTROLS' => true,
-        'TOR_ATTACH_ID' => $topic_id
     ]);
 
     if ($t_data['self_moderated'] || $is_auth['auth_mod']) {
@@ -203,7 +201,6 @@ if ($tor_reged && $tor_info) {
         $template->assign_block_vars('torrent', [
             'DOWNLOAD_NAME' => $display_name,
             'TRACKER_LINK' => $tracker_link,
-            'ATTACH_ID' => $topic_id,
             'TOR_SILVER_GOLD' => $tor_type,
             'TOR_TYPE' => is_gold($tor_type),
 

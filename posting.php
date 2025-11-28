@@ -376,7 +376,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
         }
 
-        if (defined('TORRENT_ATTACH_ID') && config()->get('bt_newtopic_auto_reg') && !$error_msg) {
+        if (is_file(get_attach_path($topic_id)) && config()->get('bt_newtopic_auto_reg') && !$error_msg) {
             if (!DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id LIMIT 1")) {
                 if (config()->get('premod')) {
                     // Getting a list of forum ids starting with "parent"
@@ -403,12 +403,12 @@ if (($delete || $mode == 'delete') && !$confirm) {
 						LIMIT 1
 					", 'checked_releases');
                     if ($count_checked_releases || IS_AM) {
-                        \TorrentPier\Legacy\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
+                        \TorrentPier\Legacy\Torrent::tracker_register($topic_id, 'newtopic', TOR_NOT_APPROVED);
                     } else {
-                        \TorrentPier\Legacy\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_PREMOD);
+                        \TorrentPier\Legacy\Torrent::tracker_register($topic_id, 'newtopic', TOR_PREMOD);
                     }
                 } else {
-                    \TorrentPier\Legacy\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
+                    \TorrentPier\Legacy\Torrent::tracker_register($topic_id, 'newtopic', TOR_NOT_APPROVED);
                 }
             }
         }
@@ -460,7 +460,7 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
         $message = $post_info['post_text'];
 
         if ($mode == 'quote') {
-            if ($post_info['post_attachment'] && !IS_AM) {
+            if ($post_info['attach_ext_id'] == TORRENT_EXT_ID && !IS_AM) {
                 $message = $post_info['topic_title'];
             }
             $quote_username = ($post_info['post_username'] != '') ? $post_info['post_username'] : $post_info['username'];

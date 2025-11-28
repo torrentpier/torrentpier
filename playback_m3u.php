@@ -34,7 +34,7 @@ if (!$topic_id) {
 }
 
 // Getting torrent info from database
-$sql = 'SELECT attach_id, forum_id, info_hash, info_hash_v2, tor_status, poster_id
+$sql = 'SELECT topic_id, forum_id, info_hash, info_hash_v2, tor_status, poster_id
             FROM ' . BB_BT_TORRENTS . '
             WHERE topic_id = ' . $topic_id . '
         LIMIT 1';
@@ -45,7 +45,7 @@ if (!$row = DB()->fetch_row($sql)) {
 
 // Check m3u file exist
 $torrServer = new \TorrentPier\TorrServerAPI();
-if (!$m3uFile = $torrServer->getM3UPath($row['attach_id'])) {
+if (!$m3uFile = $torrServer->getM3UPath($topic_id)) {
     bb_die($lang['ERROR_NO_ATTACHMENT']);
 }
 
@@ -108,7 +108,7 @@ foreach ($m3uData as $entry) {
         'IS_VALID' => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
         'IS_AUDIO' => (int)in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $streamLink,
-        'M3U_DL_LINK' => DL_URL . $row['attach_id'] . '&m3u=1',
+        'M3U_DL_LINK' => DL_URL . $topic_id . '&m3u=1',
         'TITLE' => $title,
     ]);
 }
@@ -117,7 +117,7 @@ foreach ($m3uData as $entry) {
 $template->assign_vars([
     'HAS_ITEMS' => $filesCount > 0,
     'PAGE_TITLE' => $lang['PLAYBACK_M3U'],
-    'ATTACH_ID' => $row['attach_id'],
+    'TOPIC_ID' => $topic_id,
     'INFO_HASH' => bin2hex($row['info_hash'] ?? $row['info_hash_v2']),
     'FILES_COUNT_TITLE' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($filesCount, 'files')),
     'U_TOPIC' => TOPIC_URL . $topic_id,
