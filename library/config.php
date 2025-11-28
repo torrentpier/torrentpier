@@ -637,7 +637,8 @@ $bb_cfg['file_id_ext'] = [
     10 => '7z',
     11 => 'bmp',
     12 => 'webp',
-    13 => 'avif'
+    13 => 'avif',
+    14 => 'm3u',
 ];
 
 // Attachments

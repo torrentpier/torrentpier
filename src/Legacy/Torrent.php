@@ -139,7 +139,7 @@ class Torrent
         $forum_id = $torrent['forum_id'];
         $poster_id = $torrent['topic_poster'];
 
-        if ($torrent['attach_ext_id'] !== TORRENT_BIN_EXT) {
+        if ($torrent['attach_ext_id'] !== TORRENT_EXT_ID) {
             bb_die($lang['NOT_TORRENT']);
         }
 
@@ -223,7 +223,7 @@ class Torrent
         $info_hash = $info_hash_v2 = null;
         $info_hash_sql = $info_hash_v2_sql = $info_hash_where = null;
 
-        if ($torrent['attach_ext_id'] !== TORRENT_BIN_EXT) {
+        if ($torrent['attach_ext_id'] !== TORRENT_EXT_ID) {
             self::torrent_error_exit($lang['NOT_TORRENT']);
         }
         if (!$torrent['allow_reg_tracker']) {
@@ -422,7 +422,7 @@ class Torrent
         $topic_title = $t_data['topic_title'];
         $filename = get_attach_path($topic_id);
 
-        if (!config()->get('bt_add_auth_key') || $t_data['attach_ext_id'] !== TORRENT_BIN_EXT || !$size = @filesize($filename)) {
+        if (!config()->get('bt_add_auth_key') || $t_data['attach_ext_id'] !== TORRENT_EXT_ID || !$size = @filesize($filename)) {
             return;
         }
 

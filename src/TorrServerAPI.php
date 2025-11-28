@@ -45,13 +45,6 @@ class TorrServerAPI
         'ffprobe' => 'ffp'
     ];
 
-    /**
-     * M3U file params
-     */
-    const M3U = [
-        'prefix' => 'm3u_',
-        'extension' => '.m3u'
-    ];
 
     /**
      * TorrServer constructor
@@ -108,13 +101,13 @@ class TorrServerAPI
     /**
      * Saves M3U file (local)
      *
-     * @param string|int $attach_id
+     * @param int $topic_id
      * @param string $hash
-     * @return string
+     * @return bool
      */
-    public function saveM3U(string|int $attach_id, string $hash): string
+    public function saveM3U(int $topic_id, string $hash): bool
     {
-        $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $attach_id . self::M3U['extension'];
+        $m3uFile = get_attach_path($topic_id, M3U_EXT_ID);
 
         // Make stream call to store torrent in memory
         for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
@@ -167,12 +160,12 @@ class TorrServerAPI
     /**
      * Returns full path to M3U file
      *
-     * @param int|string $attach_id
-     * @return string
+     * @param int $topic_id
+     * @return string|false
      */
-    public function getM3UPath(int|string $attach_id): string
+    public function getM3UPath(int $topic_id): string|false
     {
-        $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $attach_id . self::M3U['extension'];
+        $m3uFile = get_attach_path($topic_id, M3U_EXT_ID);
         if (is_file($m3uFile)) {
             return $m3uFile;
         }
@@ -181,18 +174,18 @@ class TorrServerAPI
     }
 
     /**
-     * Removed M3U file (local)
+     * Removes M3U file (local)
      *
-     * @param string|int $attach_id
+     * @param int $topic_id
      * @return bool
      */
-    public function removeM3U(string|int $attach_id): bool
+    public function removeM3U(int $topic_id): bool
     {
         // Remove ffprobe data from cache
-        CACHE('tr_cache')->rm("ffprobe_m3u_$attach_id");
+        CACHE('tr_cache')->rm("ffprobe_m3u_$topic_id");
 
         // Unlink .m3u file
-        $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $attach_id . self::M3U['extension'];
+        $m3uFile = get_attach_path($topic_id, M3U_EXT_ID);
         if (is_file($m3uFile)) {
             if (unlink($m3uFile)) {
                 return true;
@@ -209,12 +202,12 @@ class TorrServerAPI
      *
      * @param string $hash
      * @param int $index
-     * @param int|string $attach_id
+     * @param int $topic_id
      * @return mixed
      */
-    public function getFfpInfo(string $hash, int $index, int|string $attach_id): mixed
+    public function getFfpInfo(string $hash, int $index, int $topic_id): mixed
     {
-        if (!$response = CACHE('tr_cache')->get("ffprobe_m3u_$attach_id")) {
+        if (!$response = CACHE('tr_cache')->get("ffprobe_m3u_$topic_id")) {
             $response = new stdClass();
         }
 
@@ -237,7 +230,7 @@ class TorrServerAPI
 
                 $response->{$index} = $httpResponse->getBody()->getContents();
                 if ($httpResponse->getStatusCode() === 200 && !empty($response->{$index})) {
-                    CACHE('tr_cache')->set("ffprobe_m3u_$attach_id", $response, 3600);
+                    CACHE('tr_cache')->set("ffprobe_m3u_$topic_id", $response, 3600);
                 } else {
                     bb_log("TorrServer (ERROR) [$this->url]: Response code: {$httpResponse->getStatusCode()}" . LOG_LF);
                 }

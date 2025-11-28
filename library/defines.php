@@ -20,7 +20,6 @@ define('CACHE_DIR', BB_PATH . '/internal_data/cache');
 define('LOG_DIR', BB_PATH . '/internal_data/log');
 define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers');
 define('AJAX_DIR', BB_PATH . '/library/ajax');
-define('ATTACH_DIR', BB_PATH . '/library/attach_mod');
 define('CFG_DIR', BB_PATH . '/library/config');
 define('INC_DIR', BB_PATH . '/library/includes');
 define('UCP_DIR', BB_PATH . '/library/includes/ucp');
