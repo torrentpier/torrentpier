@@ -182,9 +182,6 @@ $dl_status_css = [
 // Table names
 define('BUF_TOPIC_VIEW', 'buf_topic_view');
 define('BUF_LAST_SEEDER', 'buf_last_seeder');
-define('BB_ATTACH_CONFIG', 'bb_attachments_config');
-define('BB_ATTACHMENTS_DESC', 'bb_attachments_desc');
-define('BB_ATTACHMENTS', 'bb_attachments');
 define('BB_AUTH_ACCESS_SNAP', 'bb_auth_access_snap');
 define('BB_AUTH_ACCESS', 'bb_auth_access');
 define('BB_BANLIST', 'bb_banlist');
