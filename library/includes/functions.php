@@ -23,8 +23,9 @@ function get_avatar_path($id, $ext_id, $base_path = null, $first_div = 10000, $s
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
-function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 10000, $sec_div = 100)
+function get_attach_path($id, $ext_id = null, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
+    $ext_id ??= TORRENT_EXT_ID;
     $base_path ??= config()->get('attach.upload_path');
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
