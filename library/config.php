@@ -518,6 +518,18 @@ $bb_cfg['super_admins'] = [
     2 => 'admin',
 ];
 
+// TODO: Move premium users management to admin panel
+$bb_cfg['premium_users'] = [
+    // Syntax: 'user_id' => 'username'
+    2 => 'admin',
+];
+
+// Torrent download limits
+$bb_cfg['torrent_dl'] = [
+    'daily_limit' => 50,
+    'daily_limit_premium' => 100,
+];
+
 // Subforums
 $bb_cfg['sf_on_first_page_only'] = true; // Show subforums only on the first page of the forum
 
@@ -745,7 +757,6 @@ $bb_cfg['tracker'] = [
     'hybrid_stat_protocol' => 1, // For hybrid torrents there are two identical requests sent by clients, for counting stats we gotta choose one, you can change this to '2' in future, when v1 protocol is outdated
     'disabled_v1_torrents' => false, // disallow registration of v1-only torrents, for future implementations where client will use v2 only and there won't be need for v1, thus relieving tracker
     'disabled_v2_torrents' => false, // disallow registration of v2-only torrents
-    'use_real_filename' => false, // Use original torrent filename for downloads. If disabled, filename will be generated automatically
     'use_old_torrent_name_format' => false, // Use classic filename format '[yoursite.com].txxx.torrent'. Only works when use_real_filename is disabled
 ];
 

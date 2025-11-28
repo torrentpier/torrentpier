@@ -867,6 +867,7 @@ $lang['ERROR_MISSING_OLD_ENTRY'] = 'Unable to Update Attachment, could not find 
 // Errors -> Download
 $lang['NO_ATTACHMENT_SELECTED'] = 'You haven\'t selected an attachment to download or view.';
 $lang['ERROR_NO_ATTACHMENT'] = 'The selected Attachment does not exist anymore';
+$lang['DOWNLOAD_LIMIT_EXCEEDED'] = 'Daily download limit exceeded. Please try again tomorrow.';
 
 // Delete Attachments
 $lang['DELETED_ATTACHMENTS'] = 'The selected Attachments have been deleted.';

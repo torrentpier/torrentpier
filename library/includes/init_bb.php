@@ -214,6 +214,8 @@ define('BB_SMILIES', 'bb_smilies');
 define('BB_TOPIC_TPL', 'bb_topic_tpl');
 define('BB_TOPICS', 'bb_topics');
 define('BB_TOPICS_WATCH', 'bb_topics_watch');
+define('BB_TORRENT_DL', 'bb_torrent_dl');
+define('BB_USER_DL_DAY', 'bb_user_dl_day');
 define('BB_USER_GROUP', 'bb_user_group');
 define('BB_WORDS', 'bb_words');
 define('BB_THX', 'bb_thx');

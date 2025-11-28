@@ -211,6 +211,7 @@ class User
         define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
         define('IS_SUPER_ADMIN', IS_ADMIN && isset(config()->get('super_admins')[$this->data['user_id']]));
         define('IS_AM', IS_ADMIN || IS_MOD);
+        define('IS_PREMIUM', !IS_GUEST && isset(config()->get('premium_users')[$this->data['user_id']]));
 
         $this->set_shortcuts();
 
