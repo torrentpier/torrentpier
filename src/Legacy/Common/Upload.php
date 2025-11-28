@@ -46,14 +46,6 @@ class Upload
         'error' => UPLOAD_ERR_NO_FILE,
     ];
 
-    /**
-     * Trash...
-     *
-     * TODO: Refactoring
-     * @var string
-     */
-    public $orig_name = '';
-    public $file_path = '';
     public $file_ext = '';
     public $file_ext_id = '';
 
