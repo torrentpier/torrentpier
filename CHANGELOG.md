@@ -2,7 +2,7 @@
 
 # 📖 Change Log
 
-## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/master/TorrentPier-master)
+## [v2.8.9](https://github.com/torrentpier/torrentpier/compare/v2.8.8..v2.8.9) (2025-11-28)
 
 ### 🚀 Features
 
