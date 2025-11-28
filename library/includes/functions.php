@@ -1971,7 +1971,7 @@ function sync_user_to_manticore($user_id, ?string $username = null, string $acti
  * @param int|string $length (xl)
  * @return string
  */
-function create_magnet(string $infohash, string $infohash_v2, string $auth_key, string $name, int|string $length = 0): string
+function create_magnet(?string $infohash, ?string $infohash_v2, string $auth_key, string $name, int|string $length = 0): string
 {
     global $images, $lang;
 

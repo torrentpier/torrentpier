@@ -62,13 +62,11 @@ if (config()->get('bt_allow_spmode_change')) {
 $bt_topic_id = $t_data['topic_id'];
 $topic_id = $t_data['topic_id'];
 $bt_user_id = $userdata['user_id'];
-$comment = ''; // TODO
 $display_name = ''; // TODO
 $download_count = declension((int)($t_data['download_count'] ?? 0), 'times');
-$tor_file_size = humn_size(filesize(get_attach_path($topic_id)) ?: 0);
+$tor_file_size = humn_size(\TorrentPier\Attachment::getSize($topic_id));
 $tor_file_time = bb_date($t_data['topic_time']);
-
-$tor_reged = true;//(bool)$tracker_status;
+$tor_reged = (bool)$t_data['tracker_status'];
 $show_peers = (bool)config()->get('bt_show_peers');
 
 $locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
@@ -80,7 +78,6 @@ $tor_auth_del = ($tor_auth && $tor_reged);
 $tracker_link = ($tor_reged) ? $lang['BT_REG_YES'] : $lang['BT_REG_NO'];
 
 $download_link = DL_URL . $topic_id;
-$description = ($comment) ?: preg_replace("#" . "." . TORRENT_EXT . "$#i", '', $display_name);
 
 if ($tor_auth_reg || $tor_auth_del) {
     $reg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', topic_id : ' . $topic_id . ', type: \'reg\'}); return false;">' . $lang['BT_REG_ON_TRACKER'] . '</a>';
@@ -107,10 +104,6 @@ if (!$tor_reged) {
         'DOWNLOAD_COUNT' => $download_count,
         'POSTED_TIME' => $tor_file_time,
     ]);
-
-    if ($comment) {
-        $template->assign_block_vars('unregistered_torrent.comment', ['COMMENT' => $comment]);
-    }
 } else {
     $sql = "SELECT bt.*, u.user_id, u.username, u.user_rank
 		FROM " . BB_BT_TORRENTS . " bt
@@ -229,10 +222,6 @@ if ($tor_reged && $tor_info) {
                 'TORR_SERVER_M3U_LINK' => PLAYBACK_M3U_URL . $bt_topic_id,
                 'TORR_SERVER_M3U_ICON' => $images['icon_tor_m3u_icon'],
             ]);
-        }
-
-        if ($comment) {
-            $template->assign_block_vars('torrent.comment', ['COMMENT' => $comment]);
         }
     }
 

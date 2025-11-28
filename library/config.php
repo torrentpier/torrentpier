@@ -656,11 +656,10 @@ $bb_cfg['file_id_ext'] = [
 // Attachments
 $bb_cfg['attach'] = [
     'upload_path' => DATA_DIR . '/uploads', // Storage path for torrent files
-    'max_size' => 5 * 1024 * 1024, // TODO: Max size of a file
+    'max_size' => 5 * 1024 * 1024, // Max file size
+    'up_allowed' => true, // Enable file uploads
+    'allowed_ext' => ['torrent'], // Allowed extensions (torrent only)
 ];
-
-$bb_cfg['tor_forums_allowed_ext'] = ['torrent', 'zip', 'rar']; // TODO: For sections with releases
-$bb_cfg['gen_forums_allowed_ext'] = ['zip', 'rar']; // TODO: For regular sections
 
 // Avatars
 $bb_cfg['avatars'] = [
