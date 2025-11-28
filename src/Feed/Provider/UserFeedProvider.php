@@ -83,7 +83,7 @@ class UserFeedProvider implements FeedProviderInterface
                 p1.post_edit_time AS topic_first_post_edit_time,
                 p2.post_time AS topic_last_post_time,
                 p2.post_edit_time AS topic_last_post_edit_time,
-                tor.size AS tor_size, tor.tor_status, tor.attach_id,
+                tor.size AS tor_size, tor.tor_status,
                 pt.post_html
             FROM " . BB_TOPICS . " t
             LEFT JOIN " . BB_USERS . " u1 ON(t.topic_poster = u1.user_id)
