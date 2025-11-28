@@ -81,4 +81,15 @@ class Attachment
     {
         return is_file(self::getPath($topicId));
     }
+
+    /**
+     * Check if the M3U file exists for TorrServer integration.
+     *
+     * @param int $topicId Topic ID
+     * @return bool True if M3U file exists
+     */
+    public static function m3uExists(int $topicId): bool
+    {
+        return is_file(self::getPath($topicId, M3U_EXT_ID));
+    }
 }
