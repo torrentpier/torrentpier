@@ -7,22 +7,20 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
+namespace TorrentPier\Torrent;
 
 /**
- * Class TorrentFileList
- * @package TorrentPier\Legacy
+ * Parses and displays a file list from torrent files (v1 and v2).
  */
-class TorrentFileList
+class FileList
 {
-    public $tor_decoded = [];
-    public $files_ary = [
+    public array $tor_decoded = [];
+    public array $files_ary = [
         '/' => []
     ];
 
-    public $multiple = false;
-    public $root_dir = '';
-    public $files_html = '';
+    public bool $multiple = false;
+    public string $root_dir = '';
 
     /**
      * Constructor
@@ -35,11 +33,11 @@ class TorrentFileList
     }
 
     /**
-     * Fetching file list
+     * Fetching a file list
      *
      * @return string
      */
-    public function get_filelist()
+    public function get_filelist(): string
     {
         global $html;
 
@@ -60,18 +58,18 @@ class TorrentFileList
                 unset($this->files_ary['/']);
             }
             $filelist = $html->array2html($this->files_ary);
-            return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
+            return "<div class=\"tor-root-dir\">$this->root_dir</div>$filelist";
         }
 
         return implode('', $this->files_ary['/']);
     }
 
     /**
-     * Forming file list
+     * Forming a file list
      *
      * @return void
      */
-    private function build_filelist_array()
+    private function build_filelist_array(): void
     {
         $info = &$this->tor_decoded['info'];
 
@@ -143,6 +141,8 @@ class TorrentFileList
      *
      * @param array $array
      * @param string $name
+     * @param int $timeout
+     * @param bool $child
      * @return string
      */
     public function fileTreeList(array $array, string $name = '', int $timeout = 0, bool $child = false): string

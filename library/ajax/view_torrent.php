@@ -46,7 +46,7 @@ try {
     return;
 }
 
-$torrent = new TorrentPier\Legacy\TorrentFileList($tor);
+$torrent = new TorrentPier\Torrent\FileList($tor);
 $tor_filelist = $torrent->get_filelist();
 
 $this->response['html'] = $tor_filelist;
