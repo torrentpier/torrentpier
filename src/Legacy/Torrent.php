@@ -35,17 +35,18 @@ class Torrent
     {
         global $lang;
 
-        $t_data = DB()->table(BB_TOPICS)
+        $row = DB()->table(BB_TOPICS)
             ->select('topic_id, topic_first_post_id, topic_title, topic_poster, forum_id, tracker_status, attach_ext_id')
             ->where('topic_id', $topic_id)
             ->fetch();
 
-        if (!$t_data) {
+        if (!$row) {
             bb_die($lang['INVALID_TOPIC_ID']);
         }
 
-        // allow_reg_tracker vie relation with bb_forums
-        $t_data['allow_reg_tracker'] = $t_data->ref(BB_FORUMS, 'forum_id')?->allow_reg_tracker ?? 0;
+        // Convert to array and add allow_reg_tracker from related bb_forums
+        $t_data = $row->toArray();
+        $t_data['allow_reg_tracker'] = $row->ref(BB_FORUMS, 'forum_id')?->allow_reg_tracker ?? 0;
 
         return $t_data;
     }
