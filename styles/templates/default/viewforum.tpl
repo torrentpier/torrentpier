@@ -466,7 +466,7 @@ td.topic_id { cursor: pointer; }
 	<!-- BEGIN tor -->
 		<div>
 			<div><span class="seedmed" title="{L_SEEDERS}"><b>{t.tor.SEEDERS}</b></span><span class="med"> | </span><span class="leechmed" title="{L_LEECHERS}"><b>{t.tor.LEECHERS}</b></span></div>
-			<div style="padding-top: 2px" class="small"><!-- IF t.TOR_FROZEN -->{t.tor.TOR_SIZE}<!-- ELSE --><a href="{DOWNLOAD_URL}{t.tor.ATTACH_ID}" title="{L_DL_TORRENT}" class="small">{t.tor.TOR_SIZE}</a> <!-- IF t.tor.MAGNET -->{t.tor.MAGNET}<!-- ENDIF --><!-- ENDIF --></div>
+			<div style="padding-top: 2px" class="small"><!-- IF t.TOR_FROZEN -->{t.tor.TOR_SIZE}<!-- ELSE --><a href="{DOWNLOAD_URL}{t.TOPIC_ID}" title="{L_DL_TORRENT}" class="small">{t.tor.TOR_SIZE}</a> <!-- IF t.tor.MAGNET -->{t.tor.MAGNET}<!-- ENDIF --><!-- ENDIF --></div>
 		</div>
 	<!-- END tor -->
 	</td>

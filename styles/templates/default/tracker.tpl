@@ -404,7 +404,7 @@ ajax.callback.view_post = function(data) {
 	<!-- ENDIF -->
 	<td class="row4 small nowrap">
 		<u>{tor.TOR_SIZE_RAW}</u>
-		<!-- IF not tor.TOR_FROZEN --><a class="small tr-dl" title="{L_DOWNLOAD}" href="{DOWNLOAD_URL}{tor.ATTACH_ID}">{tor.TOR_SIZE}</a> <!-- IF tor.MAGNET -->{tor.MAGNET}<!-- ENDIF --><!-- ELSE -->
+		<!-- IF not tor.TOR_FROZEN --><a class="small tr-dl" title="{L_DOWNLOAD}" href="{DOWNLOAD_URL}{tor.TOPIC_ID}">{tor.TOR_SIZE}</a> <!-- IF tor.MAGNET -->{tor.MAGNET}<!-- ENDIF --><!-- ELSE -->
 		{tor.TOR_SIZE}<!-- ENDIF -->
 	</td>
 	<td class="row4 seedmed" title="{tor.SEEDS_TITLE}"><b>{tor.SEEDS}</b></td>

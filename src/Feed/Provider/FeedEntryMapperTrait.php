@@ -108,9 +108,10 @@ trait FeedEntryMapperTrait
      */
     private function buildEntryLink(array $topic): string
     {
-        // Direct download link if enabled and attachment exists
-        if (config()->get('atom.direct_down') && !empty($topic['attach_id'])) {
-            return DL_URL . $topic['attach_id'];
+        // Direct download link if enabled
+        // TODO: check attachment ext id
+        if (config()->get('atom.direct_down')) {
+            return DL_URL . $topic['topic_id'];
         }
 
         // Default to topic view

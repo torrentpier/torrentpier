@@ -21,7 +21,7 @@ $limit_sql = 3000;
 
 $topics_sql = [];
 
-$sql = "SELECT topic_id, attach_id
+$sql = "SELECT topic_id
 	FROM " . BB_BT_TORRENTS . "
 	WHERE reg_time < $never_seen_time
 		AND seeder_last_seen < $last_seen_time
