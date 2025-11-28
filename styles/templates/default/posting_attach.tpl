@@ -14,7 +14,7 @@
 			<td class="pad_4">
 				<input type="button" id="clear_file_upload" value="{L_CLEAR}" />
 				<input type="file" name="fileupload" size="45" maxlength="{FILESIZE}" />
-				<input type="submit" class="bold" name="add_attachment" value="{L_ADD_ATTACHMENT}" style="margin-left: 8px;" />
+				<input type="submit" class="bold" name="post" value="{L_ADD_ATTACHMENT}" style="margin-left: 8px;" />
 				<p class="small nowrap">{L_ADD_ATTACHMENT_EXPLAIN}</p>
 			</td>
 			<td class="med pad_4" style="padding-left: 12px;">{RULES}</td>
