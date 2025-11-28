@@ -461,7 +461,13 @@ function build_poll_add_form (src_el)
 						<div id="mc_comment_{postrow.POST_ID}">{postrow.MC_COMMENT}</div>
 					</div>
 				</div>
-				{postrow.ATTACHMENTS}
+                <!-- IF postrow.IS_FIRST_POST -->
+                    <!-- IF SHOW_GUEST_STUB -->
+                        <!-- INCLUDE viewtopic_attach_guest.tpl -->
+                    <!-- ELSE -->
+                        <!-- INCLUDE viewtopic_attach.tpl -->
+                    <!-- ENDIF -->
+                <!-- ENDIF -->
 			</div><!--/post_wrap-->
 			<!-- IF postrow.SIGNATURE -->{postrow.SIGNATURE}<!-- ENDIF -->
 			<!-- IF postrow.EDITED_MESSAGE --><div class="last_edited">{postrow.EDITED_MESSAGE}</div><!-- ENDIF -->

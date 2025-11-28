@@ -730,8 +730,12 @@ for ($i = 0; $i < $total_posts; $i++) {
         $template->assign_block_vars('postrow.ban', ['IS_BANNED' => true]);
     }
 
-    if (isset($postrow[$i]['post_attachment']) && $is_auth['auth_download'] && function_exists('display_post_attachments')) {
-        display_post_attachments($post_id, $postrow[$i]['post_attachment']);
+    if ($is_first_post && $t_data['attach_ext_id'] && $is_auth['auth_download']) {
+        if (IS_GUEST) {
+            $template->assign_var('SHOW_GUEST_STUB', ($t_data['attach_ext_id'] == TORRENT_EXT_ID));
+        } elseif ($t_data['attach_ext_id'] == TORRENT_EXT_ID) {
+            require(INC_DIR . '/viewtopic_torrent.php');
+        }
     }
 
     if ($moderation && !defined('SPLIT_FORM_START') && ($start || $post_id == $t_data['topic_first_post_id'])) {

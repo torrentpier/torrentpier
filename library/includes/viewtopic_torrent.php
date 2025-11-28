@@ -102,7 +102,7 @@ if (config()->get('tracker.use_real_filename')) {
 }
 
 if (!$tor_reged) {
-    $template->assign_block_vars('postrow.attach.tor_not_reged', [
+    $template->assign_block_vars('unregistered_torrent', [
         'DOWNLOAD_NAME' => $display_name,
         'TRACKER_LINK' => $tracker_link,
         'ATTACH_ID' => $topic_id,
@@ -116,7 +116,7 @@ if (!$tor_reged) {
     ]);
 
     if ($comment) {
-        $template->assign_block_vars('postrow.attach.tor_not_reged.comment', ['COMMENT' => $comment]);
+        $template->assign_block_vars('unregistered_torrent.comment', ['COMMENT' => $comment]);
     }
 } else {
     $sql = "SELECT bt.*, u.user_id, u.username, u.user_rank
@@ -194,13 +194,13 @@ if ($tor_reged && $tor_info) {
     }
 
     if (!$dl_allowed) {
-        $template->assign_block_vars('postrow.attach.tor_reged', []);
+        $template->assign_block_vars('torrent', []);
         $template->assign_vars([
             'TOR_BLOCKED' => true,
             'TOR_BLOCKED_MSG' => sprintf($lang['BT_LOW_RATIO_FOR_DL'], round($user_ratio, 2), "search.php?dlu=$bt_user_id&amp;dlc=1"),
         ]);
     } else {
-        $template->assign_block_vars('postrow.attach.tor_reged', [
+        $template->assign_block_vars('torrent', [
             'DOWNLOAD_NAME' => $display_name,
             'TRACKER_LINK' => $tracker_link,
             'ATTACH_ID' => $topic_id,
@@ -234,14 +234,14 @@ if ($tor_reged && $tor_info) {
 
         // TorrServer integration
         if (config()->get('torr_server.enabled') && (!IS_GUEST || !config()->get('torr_server.disable_for_guest')) && (new \TorrentPier\TorrServerAPI())->getM3UPath($topic_id)) {
-            $template->assign_block_vars('postrow.attach.tor_reged.tor_server', [
+            $template->assign_block_vars('torrent.tor_server', [
                 'TORR_SERVER_M3U_LINK' => PLAYBACK_M3U_URL . $bt_topic_id,
                 'TORR_SERVER_M3U_ICON' => $images['icon_tor_m3u_icon'],
             ]);
         }
 
         if ($comment) {
-            $template->assign_block_vars('postrow.attach.tor_reged.comment', ['COMMENT' => $comment]);
+            $template->assign_block_vars('torrent.comment', ['COMMENT' => $comment]);
         }
     }
 

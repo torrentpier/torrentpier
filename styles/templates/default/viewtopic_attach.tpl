@@ -1,32 +1,32 @@
-<!-- BEGIN attach -->
 <div class="clear"></div>
+
 <div class="spacer_8"></div>
 
-<!-- BEGIN tor_not_reged -->
+<!-- BEGIN unregistered_torrent -->
 <table class="attach bordered med">
 	<tr class="row3">
-		<th colspan="3">{postrow.attach.tor_not_reged.DOWNLOAD_NAME}</th>
+		<th colspan="3">{unregistered_torrent.DOWNLOAD_NAME}</th>
 	</tr>
 	<tr class="row1">
 		<td width="15%">{L_TORRENT}:</td>
-		<td width="70%">{postrow.attach.tor_not_reged.TRACKER_LINK}</td>
+		<td width="70%">{unregistered_torrent.TRACKER_LINK}</td>
 		<td width="15%" rowspan="3" class="tCenter pad_6">
-			<p>{postrow.attach.tor_not_reged.S_UPLOAD_IMAGE}</p>
+			<p>{unregistered_torrent.S_UPLOAD_IMAGE}</p>
 			<p>{L_DOWNLOAD}</p>
-			<p class="small">{postrow.attach.tor_not_reged.FILESIZE}</p>
+			<p class="small">{unregistered_torrent.FILESIZE}</p>
 		</td>
 	</tr>
 	<tr class="row1">
 		<td>{L_ADDED}:</td>
-		<td>{postrow.attach.tor_not_reged.POSTED_TIME}</td>
+		<td>{unregistered_torrent.POSTED_TIME}</td>
 	</tr>
 	<tr class="row1">
 		<td>{L_DOWNLOADED}:</td>
-		<td>{postrow.attach.tor_not_reged.DOWNLOAD_COUNT} <!-- IF SHOW_DL_LIST_LINK -->&nbsp;[ <a href="{DL_LIST_HREF}" class="med">{L_SHOW_DL_LIST}</a> ] <!-- ENDIF --></td>
+		<td>{unregistered_torrent.DOWNLOAD_COUNT} <!-- IF SHOW_DL_LIST_LINK -->&nbsp;[ <a href="{DL_LIST_HREF}" class="med">{L_SHOW_DL_LIST}</a> ] <!-- ENDIF --></td>
 	</tr>
 	<!-- BEGIN comment -->
 	<tr class="row1 tCenter">
-		<td colspan="3">{postrow.attach.tor_not_reged.comment.COMMENT}</td>
+		<td colspan="3">{unregistered_torrent.comment.COMMENT}</td>
 	</tr>
 	<!-- END comment -->
     <!-- IF TOR_CONTROLS -->
@@ -42,19 +42,19 @@
                 function change_torrents() {
                     ajax.exec({
                         action: 'change_torrent',
-                        attach_id: {postrow.attach.tor_not_reged.ATTACH_ID},
-                        type: $('#tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}').val(),
+                        attach_id: {unregistered_torrent.ATTACH_ID},
+                        type: $('#tor-select-{unregistered_torrent.ATTACH_ID}').val(),
                     });
                 }
             </script>
-            <select name="tor_action" id="tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}"
-                    onchange="$('#tor-confirm-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('checked', false); $('#tor-submit-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('disabled', true);">
+            <select name="tor_action" id="tor-select-{unregistered_torrent.ATTACH_ID}"
+                    onchange="$('#tor-confirm-{unregistered_torrent.ATTACH_ID}').attr('checked', false); $('#tor-submit-{unregistered_torrent.ATTACH_ID}').attr('disabled', true);">
                 <option value="" selected class="select-action">&raquo; {L_SELECT_ACTION}</option>
                 <option value="del_torrent">{L_DELETE_TORRENT}</option>
                 <option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
             </select>
             <a href="#"
-               onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input
+               onclick="change_torrents($('#tor-{torrent.ATTACH_ID} select').val()); return false;"><input
                     type="submit" value="{L_SUBMIT}" class="liteoption"/></a>
         </td>
     </tr>
@@ -62,9 +62,9 @@
 </table>
 
 <div class="spacer_12"></div>
-<!-- END tor_not_reged -->
+<!-- END unregistered_torrent -->
 
-<!-- BEGIN tor_reged -->
+<!-- BEGIN torrent -->
 
 <!-- IF TOR_BLOCKED -->
 <table id="tor_blocked" class="error">
@@ -83,39 +83,39 @@
 
 <table class="attach bordered med">
 	<tr class="row3">
-		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}
-		<a href="{#FILELIST_URL#}{TOPIC_ID}" title="{L_BT_FLIST_LINK_TITLE}" target="_blank"><img alt="{L_BT_FLIST_LINK_TITLE}" src="{postrow.attach.tor_reged.FILELIST_ICON}" width="12" height="12" border="0"></a>
-		<!-- IF postrow.attach.tor_reged.MAGNET and not postrow.attach.tor_reged.TOR_FROZEN -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
+		<th colspan="3" class="{torrent.DL_LINK_CLASS}">{torrent.DOWNLOAD_NAME}
+		<a href="{#FILELIST_URL#}{TOPIC_ID}" title="{L_BT_FLIST_LINK_TITLE}" target="_blank"><img alt="{L_BT_FLIST_LINK_TITLE}" src="{torrent.FILELIST_ICON}" width="12" height="12" border="0"></a>
+		<!-- IF torrent.MAGNET and not torrent.TOR_FROZEN -->&nbsp;{torrent.MAGNET}<!-- ENDIF --></th>
 	</tr>
-    <!-- IF postrow.attach.tor_reged.TOR_TYPE -->
+    <!-- IF torrent.TOR_TYPE -->
     <tr class="row4">
-        <th colspan="3" class="row7">{postrow.attach.tor_reged.TOR_TYPE}&nbsp;<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 -->{L_SILVER_STATUS}<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 -->{L_GOLD_STATUS}<!-- ENDIF -->&nbsp;{postrow.attach.tor_reged.TOR_TYPE}</th>
+        <th colspan="3" class="row7">{torrent.TOR_TYPE}&nbsp;<!-- IF torrent.TOR_SILVER_GOLD == 2 -->{L_SILVER_STATUS}<!-- ELSEIF torrent.TOR_SILVER_GOLD == 1 -->{L_GOLD_STATUS}<!-- ENDIF -->&nbsp;{torrent.TOR_TYPE}</th>
     </tr>
     <!-- ENDIF -->
 	<tr class="row1">
 		<td width="15%">{L_TORRENT}:</td>
 		<td width="70%">
-			{postrow.attach.tor_reged.TRACKER_LINK}
-			[ <span title="{postrow.attach.tor_reged.REGED_DELTA}">{postrow.attach.tor_reged.REGED_TIME}</span> ]
-            <!-- IF not postrow.attach.tor_reged.TOR_FROZEN -->
-            <br/><!-- IF postrow.attach.tor_reged.HASH --><br/>info_hash: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH}" title="{L_COPY_TO_CLIPBOARD}">{postrow.attach.tor_reged.HASH}</span><!-- ENDIF -->
-            <!-- IF postrow.attach.tor_reged.HASH_V2 --><br/>info_hash v2: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH_V2}" title="{L_COPY_TO_CLIPBOARD}">{postrow.attach.tor_reged.HASH_V2}</span><!-- ENDIF -->
+			{torrent.TRACKER_LINK}
+			[ <span title="{torrent.REGED_DELTA}">{torrent.REGED_TIME}</span> ]
+            <!-- IF not torrent.TOR_FROZEN -->
+            <br/><!-- IF torrent.HASH --><br/>info_hash: <span class="copyElement" data-clipboard-text="{torrent.HASH}" title="{L_COPY_TO_CLIPBOARD}">{torrent.HASH}</span><!-- ENDIF -->
+            <!-- IF torrent.HASH_V2 --><br/>info_hash v2: <span class="copyElement" data-clipboard-text="{torrent.HASH_V2}" title="{L_COPY_TO_CLIPBOARD}">{torrent.HASH_V2}</span><!-- ENDIF -->
             <!-- ENDIF -->
         </td>
 		<td width="15%" rowspan="4" class="tCenter pad_6">
-			<!-- IF postrow.attach.tor_reged.TOR_FROZEN -->
-			<p>{postrow.attach.tor_reged.S_UPLOAD_IMAGE}</p><p>{L_DOWNLOAD}</p>
+			<!-- IF torrent.TOR_FROZEN -->
+			<p>{torrent.S_UPLOAD_IMAGE}</p><p>{L_DOWNLOAD}</p>
 			<!-- ELSE -->
-			<a href="{postrow.attach.tor_reged.U_DOWNLOAD_LINK}" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">
-			<p>{postrow.attach.tor_reged.S_UPLOAD_IMAGE}</p><p><b>{L_DOWNLOAD}</b></p></a>
+			<a href="{torrent.U_DOWNLOAD_LINK}" class="{torrent.DL_LINK_CLASS}">
+			<p>{torrent.S_UPLOAD_IMAGE}</p><p><b>{L_DOWNLOAD}</b></p></a>
 			<!-- ENDIF -->
-			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
+			<p class="small">{torrent.FILESIZE}</p>
 			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_BT_FLIST}" /></p>
-			<!-- IF not postrow.attach.tor_reged.TOR_FROZEN -->
+			<!-- IF not torrent.TOR_FROZEN -->
 			<!-- BEGIN tor_server -->
-			<!-- IF postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK -->
+			<!-- IF torrent.tor_server.TORR_SERVER_M3U_LINK -->
 			<hr/>
-			<a href="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK}" target="_blank"><p><img alt="{L_PLAYBACK_M3U}" src="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_ICON}" width="21" height="21" border="0"></p>{L_PLAYBACK_M3U}</a>
+			<a href="{torrent.tor_server.TORR_SERVER_M3U_LINK}" target="_blank"><p><img alt="{L_PLAYBACK_M3U}" src="{torrent.tor_server.TORR_SERVER_M3U_ICON}" width="21" height="21" border="0"></p>{L_PLAYBACK_M3U}</a>
 			<!-- ENDIF -->
 			<!-- END tor_server -->
 			<!-- ENDIF -->
@@ -124,15 +124,15 @@
 	<tr class="row1">
 		<td>{L_TOR_STATUS}:</td>
 		<td>
-			<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}-status">{postrow.attach.tor_reged.TOR_STATUS_ICON} <b>{postrow.attach.tor_reged.TOR_STATUS_TEXT}</b>
-			<!-- IF postrow.attach.tor_reged.TOR_STATUS_BY -->{postrow.attach.tor_reged.TOR_STATUS_BY}<!-- ENDIF -->
+			<span id="tor-{torrent.ATTACH_ID}-status">{torrent.TOR_STATUS_ICON} <b>{torrent.TOR_STATUS_TEXT}</b>
+			<!-- IF torrent.TOR_STATUS_BY -->{torrent.TOR_STATUS_BY}<!-- ENDIF -->
 			</span>
-			<!-- IF postrow.attach.tor_reged.TOR_STATUS_REPLY || AUTH_MOD -->
+			<!-- IF torrent.TOR_STATUS_REPLY || AUTH_MOD -->
 			<script type="text/javascript">
 				ajax.change_tor_status = function(mode) {
 					ajax.exec({
 						action    : 'change_tor_status',
-						attach_id : {postrow.attach.tor_reged.ATTACH_ID},
+						attach_id : {torrent.ATTACH_ID},
 						mode      : mode,
 						status    : $('#sel_status').val(),
 						comment   : $('#comment').val(),
@@ -141,7 +141,7 @@
 				ajax.callback.change_tor_status = function(data) {
 				<!-- IF AUTH_MOD -->
 					$('#tor-'+ data.attach_id +'-status').html(data.status);
-				<!-- ELSEIF postrow.attach.tor_reged.TOR_STATUS_REPLY -->
+				<!-- ELSEIF torrent.TOR_STATUS_REPLY -->
 					$('#tor_comment').html('{L_TOR_AUTH_SENT_COMMENT}');
 				<!-- ENDIF -->
 					$('#comment').attr('value', '');
@@ -154,9 +154,9 @@
 			<!-- ENDIF -->
 
 			<!-- IF AUTH_MOD -->
-			<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}">{postrow.attach.tor_reged.TOR_STATUS_SELECT}</span>
+			<span id="tor-{torrent.ATTACH_ID}">{torrent.TOR_STATUS_SELECT}</span>
 			<a href="#" onclick="ajax.change_tor_status('status'); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
-			<!-- ELSEIF postrow.attach.tor_reged.TOR_STATUS_REPLY -->
+			<!-- ELSEIF torrent.TOR_STATUS_REPLY -->
 			<a href="#" onclick="ajax.change_tor_status('status_reply'); return false;"><input type="submit" value="{L_TOR_AUTH_FIXED}" class="liteoption" /></a>
 			<!-- ENDIF -->
 			</span>
@@ -165,15 +165,15 @@
 	</tr>
 	<tr class="row1">
 		<td>{L_DOWNLOADED}:</td>
-		<td><span title="{L_COMPLETED}: {postrow.attach.tor_reged.COMPLETED}">{postrow.attach.tor_reged.DOWNLOAD_COUNT}</span></td>
+		<td><span title="{L_COMPLETED}: {torrent.COMPLETED}">{torrent.DOWNLOAD_COUNT}</span></td>
 	</tr>
 	<tr class="row1">
 		<td>{L_SIZE}:</td>
-		<td>{postrow.attach.tor_reged.TORRENT_SIZE}</td>
+		<td>{torrent.TORRENT_SIZE}</td>
 	</tr>
     <!-- BEGIN comment -->
     <tr class="row1 tCenter">
-        <td colspan="3">{postrow.attach.tor_reged.comment.COMMENT}</td>
+        <td colspan="3">{torrent.comment.COMMENT}</td>
     </tr>
     <!-- END comment -->
     <!-- IF TOR_CONTROLS -->
@@ -189,22 +189,22 @@
                 function change_torrents() {
                     ajax.exec({
                         action: 'change_torrent',
-                        attach_id: {postrow.attach.tor_reged.ATTACH_ID},
-                        type: $('#tor-select-{postrow.attach.tor_reged.ATTACH_ID}').val(),
+                        attach_id: {torrent.ATTACH_ID},
+                        type: $('#tor-select-{torrent.ATTACH_ID}').val(),
                     });
                 }
             </script>
-            <select name="tor_action" id="tor-select-{postrow.attach.tor_reged.ATTACH_ID}"
-                    onchange="$('#tor-confirm-{postrow.attach.tor_reged.ATTACH_ID}').attr('checked', false); $('#tor-submit-{postrow.attach.tor_reged.ATTACH_ID}').attr('disabled', true);">
+            <select name="tor_action" id="tor-select-{torrent.ATTACH_ID}"
+                    onchange="$('#tor-confirm-{torrent.ATTACH_ID}').attr('checked', false); $('#tor-submit-{torrent.ATTACH_ID}').attr('disabled', true);">
                 <option value="" selected class="select-action">&raquo; {L_SELECT_ACTION}</option>
                 <option value="del_torrent">{L_DELETE_TORRENT}</option>
                 <option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
                 <!-- IF AUTH_MOD -->
                 <!-- IF $bb_cfg['tracker']['gold_silver_enabled'] -->
-                <!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 -->
+                <!-- IF torrent.TOR_SILVER_GOLD == 1 -->
                 <option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
                 <option value="set_silver">{L_SET_SILVER_TORRENT}</option>
-                <!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 -->
+                <!-- ELSEIF torrent.TOR_SILVER_GOLD == 2 -->
                 <option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
                 <option value="set_gold">{L_SET_GOLD_TORRENT}</option>
                 <!-- ELSE -->
@@ -215,7 +215,7 @@
                 <!-- ENDIF -->
             </select>
             <a href="#"
-               onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input
+               onclick="change_torrents($('#tor-{torrent.ATTACH_ID} select').val()); return false;"><input
                     type="submit" value="{L_EDIT}" class="liteoption"/></a>
         </td>
     </tr>
@@ -254,7 +254,7 @@ $('#tor-filelist-btn').click(function () {
 
     ajax.exec({
         action: 'view_torrent',
-        attach_id: {postrow.attach.tor_reged.ATTACH_ID}
+        attach_id: {torrent.ATTACH_ID}
     });
     ajax.callback.view_torrent = function (data) {
         $('#tor-filelist').html(data.html);
@@ -425,6 +425,5 @@ $('#tor-filelist-btn').click(function () {
 
 <div class="spacer_12"></div>
 <!-- ENDIF -->
-<!-- END tor_reged -->
 
-<!-- END attach -->
+<!-- END torrent -->
