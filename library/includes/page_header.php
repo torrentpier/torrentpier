@@ -249,9 +249,7 @@ $in_out = ($logged_in) ? 'in' : 'out';
 $template->assign_block_vars("switch_user_logged_{$in_out}", []);
 
 if (!IS_GUEST) {
-    header('Cache-Control: private, pre-check=0, post-check=0, max-age=0');
-    header('Expires: 0');
-    header('Pragma: no-cache');
+    header('Cache-Control: private, no-cache, no-store, must-revalidate');
 }
 
 $template->set_filenames(['page_header' => 'page_header.tpl']);
