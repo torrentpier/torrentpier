@@ -9,6 +9,7 @@
 
 namespace TorrentPier;
 
+use TorrentPier\Legacy\Common\Upload;
 use TorrentPier\Torrent\Registry;
 
 /**
@@ -16,6 +17,39 @@ use TorrentPier\Torrent\Registry;
  */
 class Attachment
 {
+    /**
+     * Store an attachment file for a topic.
+     * Handles unregistering old torrent if replacing.
+     *
+     * @param int $topicId Topic ID
+     * @param array $fileData $_FILES['fileupload'] array
+     * @param bool $torrentRegistered Whether torrent is currently registered on tracker
+     * @return array{success: bool, error: string|null, ext_id: int|null}
+     */
+    public static function store(int $topicId, array $fileData, bool $torrentRegistered = false): array
+    {
+        if ($torrentRegistered) {
+            Registry::unregister($topicId);
+        }
+
+        $upload = new Upload();
+
+        if (!$upload->init(config()->getSection('attach'), $fileData)) {
+            return ['success' => false, 'error' => implode('<br />', $upload->errors), 'ext_id' => null];
+        }
+
+        if (!$upload->store('attach', ['topic_id' => $topicId])) {
+            return ['success' => false, 'error' => implode('<br />', $upload->errors), 'ext_id' => null];
+        }
+
+        // Update topic with new extension ID
+        DB()->table(BB_TOPICS)
+            ->where('topic_id', $topicId)
+            ->update(['attach_ext_id' => $upload->file_ext_id]);
+
+        return ['success' => true, 'error' => null, 'ext_id' => $upload->file_ext_id];
+    }
+
     /**
      * Delete attachment completely (unregister from the tracker, delete a file and clear the topic).
      * Also handles TorrServer cleanup.
