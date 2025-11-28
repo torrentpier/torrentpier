@@ -23,44 +23,31 @@ use Exception;
 class Torrent
 {
     /**
-     * Get torrent info by attach id
+     * Get torrent info by topic id
      *
-     * @param int $attach_id
+     * @param $topic_id
      *
      * @return array
      */
-    public static function get_torrent_info($attach_id)
+    public static function get_torrent_info($topic_id): array
     {
         global $lang;
 
-        $attach_id = (int)$attach_id;
+        $topic_id = (int)$topic_id;
 
-        $sql = "
-		SELECT
-			a.post_id, d.physical_filename, d.extension, d.tracker_status, d.mimetype,
-			t.topic_first_post_id, t.topic_title,
-			p.poster_id, p.topic_id, p.forum_id,
-			f.allow_reg_tracker
-		FROM
-			" . BB_ATTACHMENTS . " a,
-			" . BB_ATTACHMENTS_DESC . " d,
-			" . BB_POSTS . " p,
-			" . BB_TOPICS . " t,
-			" . BB_FORUMS . " f
-		WHERE
-			    a.attach_id = $attach_id
-			AND d.attach_id = $attach_id
-			AND p.post_id = a.post_id
-			AND t.topic_id = p.topic_id
-			AND f.forum_id = p.forum_id
-		LIMIT 1
-	";
+        $t_data = DB()->table(BB_TOPICS)
+            ->select('topic_first_post_id, topic_title, topic_poster AS poster_id, topic_id, forum_id')
+            ->where('topic_id', $topic_id)
+            ->fetch();
 
-        if (!$torrent = DB()->fetch_row($sql)) {
-            bb_die($lang['INVALID_ATTACH_ID']);
+        if (!$t_data) {
+            bb_die($lang['INVALID_TOPIC_ID']);
         }
 
-        return $torrent;
+        // allow_reg_tracker vie relation with bb_forums
+        $t_data['allow_reg_tracker'] = $t_data->ref(BB_FORUMS, 'forum_id')?->allow_reg_tracker ?? 0;
+
+        return $t_data;
     }
 
     /**
@@ -95,17 +82,16 @@ class Torrent
      * @param int $attach_id
      * @param string $mode
      */
-    public static function tracker_unregister($attach_id, $mode = '')
+    public static function tracker_unregister($topic_id, $mode = '')
     {
         global $lang;
 
-        $attach_id = (int)$attach_id;
-        $post_id = $topic_id = $topic_title = $forum_id = null;
+        $topic_id = (int)$topic_id;
+        $post_id = $topic_title = $forum_id = null;
 
         // Get torrent info
-        if ($torrent = self::get_torrent_info($attach_id)) {
+        if ($torrent = self::get_torrent_info($topic_id)) {
             $post_id = $torrent['post_id'];
-            $topic_id = $torrent['topic_id'];
             $forum_id = $torrent['forum_id'];
             $topic_title = $torrent['topic_title'];
         }
@@ -118,17 +104,6 @@ class Torrent
                 bb_die($lang['BT_UNREGISTERED_ALREADY']);
             }
             self::torrent_auth_check($forum_id, $torrent['poster_id']);
-        }
-
-        if (!$topic_id) {
-            $sql = "SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id";
-
-            if (!$result = DB()->sql_query($sql)) {
-                bb_die('Could not query torrent information');
-            }
-            if ($row = DB()->sql_fetchrow($result)) {
-                $topic_id = $row['topic_id'];
-            }
         }
 
         // Unset DL-Type for topic
@@ -150,18 +125,18 @@ class Torrent
         // TorrServer integration
         if (config()->get('torr_server.enabled')) {
             $torrServer = new TorrServerAPI();
-            $torrServer->removeM3U($attach_id);
+            $torrServer->removeM3U($topic_id);
         }
 
         // Delete torrent
-        $sql = "DELETE FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id";
+        $sql = "DELETE FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id";
 
         if (!DB()->sql_query($sql)) {
             bb_die('Could not delete torrent from torrents table');
         }
 
         // Update tracker_status
-        $sql = "UPDATE " . BB_ATTACHMENTS_DESC . " SET tracker_status = 0 WHERE attach_id = $attach_id";
+        $sql = "UPDATE " . BB_TOPICS . " SET tracker_status = 0 WHERE attach_id = $attach_id";
 
         if (!DB()->sql_query($sql)) {
             bb_die('Could not update torrent status #1');
@@ -268,21 +243,20 @@ class Torrent
     /**
      * Register torrent on tracker
      *
-     * @param int $attach_id
+     * @param int $topic_id
      * @param string $mode
      * @param int $tor_status
      * @param int $reg_time
      *
      * @return bool
      */
-    public static function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
+    public static function tracker_register($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
     {
         global $lang, $reg_mode;
 
-        $attach_id = (int)$attach_id;
         $reg_mode = $mode;
 
-        if (!$torrent = self::get_torrent_info($attach_id)) {
+        if (!$torrent = self::get_torrent_info($topic_id)) {
             bb_die($lang['TOR_NOT_FOUND']);
         }
 
@@ -313,7 +287,7 @@ class Torrent
 
         self::torrent_auth_check($forum_id, $torrent['poster_id']);
 
-        $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
+        $filename = get_attach_path($topic_id);
 
         if (!is_file($filename)) {
             self::torrent_error_exit($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
@@ -391,7 +365,7 @@ class Torrent
         if (config()->get('torr_server.enabled')) {
             $torrServer = new TorrServerAPI();
             if ($torrServer->uploadTorrent($filename, $torrent['mimetype'])) {
-                $torrServer->saveM3U($attach_id, bin2hex($info_hash ?? $info_hash_v2));
+                $torrServer->saveM3U($topic_id, bin2hex($info_hash ?? $info_hash_v2));
             }
         }
 

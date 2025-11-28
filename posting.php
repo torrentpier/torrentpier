@@ -377,7 +377,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
         }
 
         if (defined('TORRENT_ATTACH_ID') && config()->get('bt_newtopic_auto_reg') && !$error_msg) {
-            if (!DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
+            if (!DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id LIMIT 1")) {
                 if (config()->get('premod')) {
                     // Getting a list of forum ids starting with "parent"
                     $forum_parent = $forum_id;
@@ -534,14 +534,9 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
 $topic_dl_type = $post_info['topic_dl_type'] ?? 0;
 
 if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_type || $is_auth['auth_mod'])) {
-    $sql = "
-		SELECT tor.attach_id
-		FROM " . BB_POSTS . " p
-		LEFT JOIN " . BB_BT_TORRENTS . " tor ON (p.post_id = tor.post_id)
-		WHERE p.post_id = $post_id
-	";
+    $sql = "SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id LIMIT 1";
     $result = DB()->fetch_row($sql);
-    if (!empty($result['attach_id'])) {
+    if (!empty($result['topic_id'])) {
         if (!$topic_type_toggle) {
             $topic_type_toggle = $lang['POST_TOPIC_AS'] . ': ';
         }
