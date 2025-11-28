@@ -584,7 +584,7 @@ if ($submit && !$errors) {
 
         // Generate passkey
         for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
-            if (\TorrentPier\Legacy\Torrent::generate_passkey($new_user_id, true)) {
+            if (\TorrentPier\Torrent\Passkey::generate($new_user_id, true)) {
                 break;
             }
             if ($i == $max_try) {

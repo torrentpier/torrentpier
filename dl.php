@@ -90,7 +90,7 @@ if (!$dlTracker->recordDownload($topic_id, $userdata['user_id'], IS_PREMIUM)) {
 if ($t_data['attach_ext_id'] == 8) {
     // Only admins can download the original unmodified torrent file
     if (!(isset($_GET['original']) && IS_ADMIN)) {
-        \TorrentPier\Legacy\Torrent::send_torrent_with_passkey($t_data);
+        \TorrentPier\Torrent\Sender::sendWithPasskey($t_data);
     }
 }
 

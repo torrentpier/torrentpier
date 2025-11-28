@@ -85,7 +85,7 @@ switch ($mode) {
             }
         }
 
-        \TorrentPier\Legacy\Torrent::change_tor_status($topic_id, $new_status);
+        \TorrentPier\Torrent\Moderation::changeStatus($topic_id, $new_status);
 
         // Log action
         $log_msg = sprintf($lang['TOR_STATUS_LOG_ACTION'], config()->get('tor_icons')[$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b>', config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . $lang['TOR_STATUS_NAME'][$tor['tor_status']] . '</b>');
