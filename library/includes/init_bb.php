@@ -219,8 +219,11 @@ define('BB_WORDS', 'bb_words');
 define('BB_THX', 'bb_thx');
 
 define('TORRENT_EXT', 'torrent');
-define('TORRENT_BIN_EXT', 8);
+define('TORRENT_EXT_ID', 8);
 define('TORRENT_MIMETYPE', 'application/x-bittorrent');
+
+define('M3U_EXT', 'm3u');
+define('M3U_EXT_ID', 14);
 
 define('TOPIC_DL_TYPE_NORMAL', 0);
 define('TOPIC_DL_TYPE_DL', 1);
