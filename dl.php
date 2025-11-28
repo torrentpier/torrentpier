@@ -81,21 +81,22 @@ if (!IS_AM && $t_data['tor_status']) {
 }
 
 // Check download limit
-$dlTracker = new \TorrentPier\Torrent\DownloadTracker();
-if (!$dlTracker->recordDownload($topic_id, $userdata['user_id'], IS_PREMIUM)) {
+$dlCounter = new \TorrentPier\Torrent\DownloadCounter();
+if (!$dlCounter->recordDownload($topic_id, $userdata['user_id'], IS_PREMIUM)) {
     bb_die(__('DOWNLOAD_LIMIT_EXCEEDED'));
 }
 
 // For torrents - add a passkey and send
-if ($t_data['attach_ext_id'] == 8) {
-    // Only admins can download the original unmodified torrent file
-    if (!(isset($_GET['original']) && IS_ADMIN)) {
+if ($t_data['attach_ext_id'] == TORRENT_EXT_ID) {
+    // Admins and topic author can download the original unmodified torrent file
+    $is_author = !IS_GUEST && $userdata['user_id'] == $t_data['topic_poster'];
+    if (!(isset($_GET['original']) && (IS_ADMIN || $is_author))) {
         \TorrentPier\Torrent\Sender::sendWithPasskey($t_data);
     }
 }
 
 // Get a file path and send for non-torrent files
-$file_path = get_attach_path($topic_id);
+$file_path = \TorrentPier\Attachment::getPath($topic_id);
 
 if (!is_file($file_path)) {
     bb_die(__('ERROR_NO_ATTACHMENT') . ' [HDD]');

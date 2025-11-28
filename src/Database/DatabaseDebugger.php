@@ -84,7 +84,7 @@ class DatabaseDebugger
                 $dbg['src'] = $this->debug_find_source();
                 $dbg['file'] = $this->debug_find_source('file');
                 $dbg['line'] = $this->debug_find_source('line');
-                $dbg['time'] = '';
+                $dbg['time'] = 0;
                 $dbg['info'] = '';
                 $dbg['mem_before'] = function_exists('sys') ? sys('mem') : 0;
             }

@@ -10,12 +10,12 @@
 namespace TorrentPier\Torrent;
 
 /**
- * Tracks unique torrent file downloads with daily limits.
+ * Counts unique torrent file downloads with daily limits.
  *
  * Tracks unique downloads per user and enforces daily download limits.
  * Data is aggregated daily by cron job and stored in the topic table.
  */
-class DownloadTracker
+class DownloadCounter
 {
     /**
      * Daily download limit for regular users

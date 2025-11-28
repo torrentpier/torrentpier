@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Torrent;
 
+use TorrentPier\Attachment;
 use TorrentPier\TorrServerAPI;
 
 use Arokettu\Bencode\Bencode;
@@ -42,7 +43,6 @@ class Registry
 
         $torrent = self::getTorrentInfo($topicId);
 
-        $post_id = $torrent['topic_first_post_id'];
         $topic_id = $torrent['topic_id'];
         $forum_id = $torrent['forum_id'];
         $poster_id = $torrent['topic_poster'];
@@ -62,7 +62,7 @@ class Registry
 
         self::checkAuth($forum_id, $torrent['topic_poster']);
 
-        $filename = get_attach_path($topic_id);
+        $filename = Attachment::getPath($topic_id);
 
         if (!is_file($filename)) {
             self::errorExit($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
@@ -197,7 +197,6 @@ class Registry
             DB()->table(BB_BT_TORRENTS)->insert([
                 'info_hash' => $info_hash,
                 'info_hash_v2' => $info_hash_v2,
-                'post_id' => $post_id,
                 'poster_id' => $poster_id,
                 'topic_id' => $topic_id,
                 'forum_id' => $forum_id,
@@ -316,4 +315,5 @@ class Registry
             'topic_title' => $torrent['topic_title'],
         ]);
     }
+
 }

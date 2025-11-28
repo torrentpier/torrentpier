@@ -47,7 +47,7 @@ $t_version_field = $meta_v2 ? 'v2' : 'v1';
 $t_files_field = $meta_v2 ? 'getFileTree' : 'getFiles';
 $t_hash_field = $meta_v2 ? 'piecesRoot' : 'sha1';
 
-$file_path = get_attach_path($topic_id);
+$file_path = \TorrentPier\Attachment::getPath($topic_id);
 if (!is_file($file_path)) {
     bb_die($lang['TOR_NOT_FOUND'], 410);
 }
