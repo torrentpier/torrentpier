@@ -654,7 +654,7 @@ if ($allowed_forums) {
         // SELECT
         $select = "
 			SELECT
-				tor.topic_id, tor.post_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
+				tor.topic_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
 				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, t.topic_vote, sn.seeders, sn.leechers, tor.info_hash, tor.info_hash_v2
 		";
         $select .= (!$hide_speed) ? ", sn.speed_up, sn.speed_down" : '';
@@ -732,7 +732,6 @@ if ($allowed_forums) {
                 'TOPIC_ID' => $tor['topic_id'],
                 'TOPIC_TITLE' => $tor['topic_title'],
                 'TOPIC_TIME' => bb_date($tor['topic_time'], 'd-M-y') . ' <b>&middot;</b> ' . humanTime($tor['topic_time']),
-                'POST_ID' => $tor['post_id'],
                 'POSTER_ID' => $poster_id,
                 'USERNAME' => $hide_author ? '' : profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
 

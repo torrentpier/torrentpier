@@ -652,14 +652,14 @@ class Common
         // Here we handle orphan cases where torrents might remain
 
         // Delete posts, posts_text (from DB)
+        // Note: Torrents are linked to topics via topic_id, not posts - they are deleted in topic_delete()
         DB()->query("
-		DELETE p, pt, ps, tor, ph
+		DELETE p, pt, ps, ph
 		FROM      " . $tmp_delete_posts . " del
 		LEFT JOIN " . BB_POSTS . " p   ON(p.post_id  = del.post_id)
 		LEFT JOIN " . BB_POSTS_TEXT . " pt  ON(pt.post_id  = del.post_id)
 		LEFT JOIN " . BB_POSTS_HTML . " ph  ON(ph.post_id  = del.post_id)
 		LEFT JOIN " . BB_POSTS_SEARCH . " ps  ON(ps.post_id  = del.post_id)
-		LEFT JOIN " . BB_BT_TORRENTS . " tor ON(tor.post_id = del.post_id)
 	");
 
         // Log action

@@ -124,11 +124,6 @@ if ($userdata['session_admin'] && !empty($_REQUEST['mod'])) {
         ]);
     }
 }
-if ($topic_attachment) {
-    $datastore->enqueue([
-        'attach_extensions'
-    ]);
-}
 
 set_die_append_msg($forum_id);
 
@@ -522,11 +517,6 @@ $template->assign_vars([
     'DL_LIST_HREF' => TOPIC_URL . "$topic_id&amp;dl=names&amp;spmode=full",
 ]);
 require INC_DIR . '/torrent_show_dl_list.php';
-
-if ($topic_attachment) {
-    require ATTACH_DIR . '/attachment_mod.php';
-    init_display_post_attachments($t_data['topic_attachment']);
-}
 
 //
 // Update the topic view counter
