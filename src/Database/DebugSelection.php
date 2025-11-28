@@ -307,4 +307,19 @@ class DebugSelection
         $this->completeQueryLogging();
         return $result;
     }
+
+    /**
+     * Fetch pairs as an associative array.
+     *
+     * @param string|int|null $key Column for keys (or null for numeric index)
+     * @param string|int|null $value Column for values (or null for entire row)
+     * @return array
+     */
+    public function fetchPairs(string|int|null $key = null, string|int|null $value = null): array
+    {
+        $this->logQuery('fetchPairs', [$key, $value]);
+        $result = $this->selection->fetchPairs($key, $value);
+        $this->completeQueryLogging();
+        return $result;
+    }
 }

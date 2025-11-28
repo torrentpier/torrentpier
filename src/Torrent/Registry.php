@@ -285,6 +285,52 @@ class Registry
     }
 
     /**
+     * Auto-register torrent with appropriate status based on premod settings.
+     * Determines initial status based on user's verified releases in the forum section.
+     *
+     * @param int $topicId Topic ID
+     * @param int $userId User ID (poster)
+     * @param int $forumId Forum ID
+     * @param int|null $forumParent Parent forum ID (for section-based premod check)
+     * @return bool True if registered, false if already registered or disabled
+     */
+    public static function autoRegister(int $topicId, int $userId, int $forumId, ?int $forumParent = null): bool
+    {
+        if (!config()->get('bt_newtopic_auto_reg')) {
+            return false;
+        }
+
+        // Already registered
+        if (DB()->table(BB_BT_TORRENTS)->where('topic_id', $topicId)->fetch()) {
+            return false;
+        }
+
+        if (config()->get('premod') && !IS_AM) {
+            // Get section forums (parent and siblings)
+            $sectionParent = $forumParent ?: $forumId;
+            $sectionForums = DB()->table(BB_FORUMS)
+                ->where('forum_parent', $sectionParent)
+                ->fetchPairs('forum_id', 'forum_id');
+
+            $forumIds = array_values($sectionForums);
+            if (!in_array($forumId, $forumIds)) {
+                $forumIds[] = $forumId;
+            }
+
+            // Check if a user has verified releases in the section
+            $hasVerified = DB()->table(BB_BT_TORRENTS)
+                ->where('poster_id', $userId)
+                ->where('forum_id', $forumIds)
+                ->where('tor_status', [TOR_APPROVED, TOR_DOUBTFUL, TOR_TMP])
+                ->fetch();
+
+            $torStatus = $hasVerified ? TOR_NOT_APPROVED : TOR_PREMOD;
+        }
+
+        return self::register($topicId, 'newtopic', $torStatus);
+    }
+
+    /**
      * Delete torrent completely.
      *
      * @param int $topicId Topic ID
