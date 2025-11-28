@@ -34,7 +34,7 @@ if (!$is_auth['auth_view']) {
 }
 
 $file_contents = null;
-$filename = get_attach_path($topic_id);
+$filename = \TorrentPier\Attachment::getPath($topic_id);
 if (!is_file($filename) || !$file_contents = file_get_contents($filename)) {
     $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
 }

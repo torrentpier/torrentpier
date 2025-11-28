@@ -816,6 +816,8 @@ $lang['SORRY_AUTH_VIEW_ATTACH'] = 'Sorry but you are not authorized to view or d
 $lang['DESCRIPTION'] = 'Description'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Download'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'File size';
+$lang['MAX_FILE_SIZE'] = 'Max file size';
+$lang['ALLOWED_EXTENSIONS'] = 'Allowed extensions';
 
 // Viewtopic -> Display of Attachments -> TorrServer integration
 $lang['STREAM'] = 'Stream';
@@ -842,11 +844,9 @@ $lang['ADD_ATTACHMENT'] = 'Add Attachment';
 $lang['ADD_ATTACHMENT_TITLE'] = 'Add an Attachment';
 $lang['ADD_ATTACHMENT_EXPLAIN'] = 'If you do not want to add an Attachment to your Post, please leave the Fields blank';
 $lang['FILENAME'] = 'Filename';
-$lang['FILE_COMMENT'] = 'File Comment';
 
 // Posting/PM -> Posted Attachments
 $lang['POSTED_ATTACHMENTS'] = 'Posted Attachments';
-$lang['UPDATE_COMMENT'] = 'Update Comment';
 $lang['DELETE_ATTACHMENT'] = 'Delete Attachment';
 $lang['UPLOAD_NEW_VERSION'] = 'Upload New Version';
 
