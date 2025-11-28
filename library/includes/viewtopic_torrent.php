@@ -64,11 +64,9 @@ $topic_id = $t_data['topic_id'];
 $bt_user_id = $userdata['user_id'];
 $comment = ''; // TODO
 $display_name = ''; // TODO
-//$tracker_status = $attachments['_' . $post_id][$i]['tracker_status'];
-$download_count = declension((int)0/**$attachments['_' . $post_id][$i]['download_count']**/, 'times');
-$tor_file_size = humn_size(0/**$attachments['_' . $post_id][$i]['filesize']**/);
-$tor_file_time = bb_date(0/**$attachments['_' . $post_id][$i]['filetime']**/);
-$real_filename = clean_filename(basename(''/**$attachments['_' . $post_id][$i]['real_filename']**/));
+$download_count = declension((int)($t_data['download_count'] ?? 0), 'times');
+$tor_file_size = humn_size(filesize(get_attach_path($topic_id)) ?: 0);
+$tor_file_time = bb_date($t_data['topic_time']);
 
 $tor_reged = true;//(bool)$tracker_status;
 $show_peers = (bool)config()->get('bt_show_peers');
@@ -91,14 +89,10 @@ if ($tor_auth_reg || $tor_auth_del) {
     $tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }
 
-if (config()->get('tracker.use_real_filename')) {
-    $display_name = $real_filename;
+if (config()->get('tracker.use_old_torrent_name_format')) {
+    $display_name = '[' . config()->get('server_name') . '].t' . $bt_topic_id . '.' . TORRENT_EXT;
 } else {
-    if (config()->get('tracker.use_old_torrent_name_format')) {
-        $display_name = '[' . config()->get('server_name') . '].t' . $bt_topic_id . '.' . TORRENT_EXT;
-    } else {
-        $display_name = $t_data['topic_title'] . ' [' . config()->get('server_name') . '-' . $bt_topic_id . ']' . '.' . TORRENT_EXT;
-    }
+    $display_name = $t_data['topic_title'] . ' [' . config()->get('server_name') . '-' . $bt_topic_id . ']' . '.' . TORRENT_EXT;
 }
 
 if (!$tor_reged) {
@@ -131,7 +125,7 @@ if (!$tor_reged) {
 }
 
 if ($tor_reged && !$tor_info) {
-	DB()->query("UPDATE ". BB_TOPICS ." SET tracker_status = 0 WHERE topic_id = $topic_id LIMIT 1");
+    DB()->query("UPDATE " . BB_TOPICS . " SET tracker_status = 0 WHERE topic_id = $topic_id LIMIT 1");
     bb_die('Torrent status fixed');
 }
 

@@ -80,6 +80,12 @@ if (!IS_AM && $t_data['tor_status']) {
     }
 }
 
+// Check download limit
+$dlTracker = new \TorrentPier\Torrent\DownloadTracker();
+if (!$dlTracker->recordDownload($topic_id, $userdata['user_id'], IS_PREMIUM)) {
+    bb_die(__('DOWNLOAD_LIMIT_EXCEEDED'));
+}
+
 // For torrents - add a passkey and send
 if ($t_data['attach_ext_id'] == 8) {
     // Only admins can download the original unmodified torrent file
