@@ -46,7 +46,7 @@ switch ($mode) {
                 $this->ajax_die($lang['TORRENT_FAILED']);
             }
 
-            \TorrentPier\Legacy\Torrent::change_tor_status($topic_id, $status);
+            \TorrentPier\Torrent\Moderation::changeStatus($topic_id, $status);
 
             // Log action
             $log_msg = sprintf($lang['TOR_STATUS_LOG_ACTION'], config()->get('tor_icons')[$status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$status] . '</b>', config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . $lang['TOR_STATUS_NAME'][$tor['tor_status']] . '</b>');

@@ -23,7 +23,7 @@ if (!isset($this->request['type'])) {
 $topic_id = (int)$this->request['topic_id'];
 $type = (string)$this->request['type'];
 
-if (!$torrent = \TorrentPier\Legacy\Torrent::get_torrent_info($topic_id)) {
+if (!$torrent = \TorrentPier\Torrent\Registry::getTorrentInfo($topic_id)) {
     $this->ajax_die($lang['INVALID_TOPIC_ID']);
 }
 
@@ -57,7 +57,7 @@ switch ($type) {
             $tor_type_lang = "{$lang['UNSET_GOLD_TORRENT']} / {$lang['UNSET_SILVER_TORRENT']}";
         }
 
-        \TorrentPier\Legacy\Torrent::change_tor_type($topic_id, $tor_type);
+        \TorrentPier\Torrent\Moderation::changeType($topic_id, $tor_type);
 
         // Log action
         $log_action->mod('mod_topic_change_tor_type', [
@@ -72,7 +72,7 @@ switch ($type) {
         break;
 
     case 'reg':
-        \TorrentPier\Legacy\Torrent::tracker_register($topic_id);
+        \TorrentPier\Torrent\Registry::register($topic_id);
         // Log action
         $log_action->mod('mod_topic_tor_register', [
             'forum_id' => $torrent['forum_id'],
@@ -83,7 +83,7 @@ switch ($type) {
         break;
 
     case 'unreg':
-        \TorrentPier\Legacy\Torrent::tracker_unregister($topic_id);
+        \TorrentPier\Torrent\Registry::unregister($topic_id);
         // Log action
         $log_action->mod('mod_topic_tor_unregister', [
             'forum_id' => $torrent['forum_id'],
@@ -97,7 +97,7 @@ switch ($type) {
         if (empty($this->request['confirmed'])) {
             $this->prompt_for_confirm($lang['DEL_TORRENT']);
         }
-        \TorrentPier\Legacy\Torrent::delete_torrent($topic_id);
+        \TorrentPier\Torrent\Registry::delete($topic_id);
         $url = make_url(TOPIC_URL . $topic_id);
         break;
 
@@ -105,7 +105,7 @@ switch ($type) {
         if (empty($this->request['confirmed'])) {
             $this->prompt_for_confirm($lang['DEL_MOVE_TORRENT']);
         }
-        \TorrentPier\Legacy\Torrent::delete_torrent($topic_id);
+        \TorrentPier\Torrent\Registry::delete($topic_id);
         $url = make_url("modcp.php?" . POST_TOPIC_URL . "={$topic_id}&mode=move&sid={$userdata['session_id']}");
         break;
 }

@@ -31,11 +31,11 @@ switch ($mode) {
             $this->prompt_for_confirm($lang['BT_GEN_PASSKEY_NEW']);
         }
 
-        if (!$passkey = \TorrentPier\Legacy\Torrent::generate_passkey($req_uid, IS_ADMIN)) {
+        if (!$passkey = \TorrentPier\Torrent\Passkey::generate($req_uid, IS_ADMIN)) {
             $this->ajax_die('Could not insert passkey');
         }
 
-        \TorrentPier\Legacy\Torrent::tracker_rm_user($req_uid);
+        \TorrentPier\Tracker\Peers::removeByUser($req_uid);
         $this->response['passkey'] = $passkey;
         break;
     default:
