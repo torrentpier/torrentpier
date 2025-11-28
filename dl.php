@@ -26,7 +26,7 @@ if (!$topic_id) {
 // Get topic data with torrent info
 $sql = "
     SELECT
-        t.topic_id, t.topic_title, t.topic_poster, t.forum_id, t.attach_ext_id,
+        t.topic_id, t.topic_title, t.topic_poster, t.topic_first_post_id, t.forum_id, t.attach_ext_id, t.tracker_status,
         tor.tor_status, tor.poster_id
     FROM " . BB_TOPICS . " t
     LEFT JOIN " . BB_BT_TORRENTS . " tor ON tor.topic_id = t.topic_id
