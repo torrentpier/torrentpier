@@ -21,6 +21,7 @@ $submit = (bool)@$_REQUEST['post'];
 $refresh = $preview = (bool)@$_REQUEST['preview'];
 $delete = (bool)@$_REQUEST['delete'];
 $mode = (string)@$_REQUEST['mode'];
+$del_attachment = !empty($_POST['del_attachment']);
 $confirm = isset($_POST['confirm']);
 
 $forum_id = (int)@$_REQUEST[POST_FORUM_URL];
@@ -249,6 +250,21 @@ if (!empty(config()->get('tor_cannot_edit')) && $post_info['allow_reg_tracker'] 
     }
 }
 
+// Handle attachment deletion
+if ($del_attachment && $mode == 'editpost' && $post_data['first_post']) {
+    $can_delete = $post_data['poster_post'] || $is_auth['auth_mod'];
+
+    if ($can_delete && $post_info['attach_ext_id']) {
+        \TorrentPier\Attachment::delete($topic_id);
+
+        // Refresh post_info
+        $post_info['attach_ext_id'] = 0;
+        $post_info['tracker_status'] = 0;
+    }
+
+    $refresh = true;
+}
+
 // Notify & Allow robots indexing
 $robots_indexing = $post_info['topic_allow_robots'] ?? true;
 if ($submit || $refresh) {
@@ -366,7 +382,27 @@ if (($delete || $mode == 'delete') && !$confirm) {
             $user_id = ($mode == 'reply' || $mode == 'newtopic') ? $userdata['user_id'] : $post_data['poster_id'];
             \TorrentPier\Legacy\Post::update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
         }
-        $attachment_mod['posting']->insert_attachment($post_id);
+        // Handle file upload for the first post in tracker forums
+        $is_first_post = $mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']);
+        $can_upload = $post_info['allow_reg_tracker'] && $is_auth['auth_attachments'] && $is_first_post;
+        $file_attached = !empty($post_info['attach_ext_id']);
+        $has_file = !empty($_FILES['fileupload']['name']);
+        $torrent_registered = !empty($post_info['tracker_status']);
+
+        if ($can_upload && $has_file && (!$file_attached || $mode == 'editpost')) {
+            // Unregister an old torrent before replacing a file (will be re-registered below)
+            if ($torrent_registered) {
+                \TorrentPier\Torrent\Registry::unregister($topic_id);
+            }
+
+            $upload = new TorrentPier\Legacy\Common\Upload();
+
+            if ($upload->init(config()->getSection('attach'), $_FILES['fileupload']) && $upload->store('attach', ['topic_id' => $topic_id])) {
+                DB()->query("UPDATE " . BB_TOPICS . " SET attach_ext_id = " . (int)$upload->file_ext_id . " WHERE topic_id = $topic_id LIMIT 1");
+            } else {
+                $error_msg = implode('<br />', $upload->errors);
+            }
+        }
 
         if (!$error_msg) {
             \TorrentPier\Legacy\Post::user_notification($mode, $post_data, $post_info['topic_title'], $forum_id, $topic_id, $notify_user);
@@ -376,7 +412,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
         }
 
-        if (is_file(get_attach_path($topic_id)) && config()->get('bt_newtopic_auto_reg') && !$error_msg) {
+        if (\TorrentPier\Attachment::exists($topic_id) && config()->get('bt_newtopic_auto_reg') && !$error_msg) {
             if (!DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id LIMIT 1")) {
                 if (config()->get('premod')) {
                     // Getting a list of forum ids starting with "parent"
@@ -631,6 +667,39 @@ $template->assign_vars([
 
 if ($mode == 'newtopic' || $post_data['first_post']) {
     $template->assign_var('POSTING_SUBJECT');
+
+    // Attachment upload form (only for tracker forums with attachment permissions)
+    if ($post_info['allow_reg_tracker'] && $is_auth['auth_attachments']) {
+        $attach_ext_id = $post_info['attach_ext_id'] ?? 0;
+        $file_attached = !empty($attach_ext_id);
+
+        $template->assign_var('ATTACHBOX');
+        $template->assign_vars([
+            'TPL_ADD_ATTACHMENT' => true,
+            'S_FORM_ENCTYPE' => 'enctype="multipart/form-data"',
+            'FILESIZE' => config()->get('attach.max_size'),
+            'RULES' => __('ALLOWED_EXTENSIONS') . ': .' . implode(', .', config()->get('attach.allowed_ext'))
+                . '<br />' . __('MAX_FILE_SIZE') . ': ' . humn_size(config()->get('attach.max_size')),
+        ]);
+
+        // Show existing attachment for editpost
+        if ($file_attached && $mode == 'editpost') {
+            // Author can download the original torrent (without a passkey)
+            $is_author = $userdata['user_id'] == $post_info['topic_poster'];
+            $dl_url = DL_URL . $topic_id;
+            if ($attach_ext_id == TORRENT_EXT_ID && $is_author) {
+                $dl_url .= '&original';
+            }
+
+            $template->assign_vars(['TPL_POSTED_ATTACHMENTS' => true]);
+            $template->assign_block_vars('attach_row', [
+                'FILE_NAME' => ($attach_ext_id == TORRENT_EXT_ID) ? $post_info['topic_title'] . '.torrent' : $lang['ATTACHMENT'],
+                'ATTACH_FILENAME' => $topic_id,
+                'ATTACH_ID' => $topic_id,
+                'U_VIEW_ATTACHMENT' => $dl_url,
+            ]);
+        }
+    }
 }
 
 // Update post time
