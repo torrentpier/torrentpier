@@ -34,15 +34,15 @@ $sql = "
     LIMIT 1
 ";
 
-if (!$topic_data = DB()->fetch_row($sql)) {
-    bb_die(__('ERROR_NO_ATTACHMENT'));
+if (!$t_data = DB()->fetch_row($sql)) {
+    bb_die(__('ERROR_NO_ATTACHMENT') . '[DB]');
 }
 
-if (!$topic_data['attach_ext_id']) {
-    bb_die(__('ERROR_NO_ATTACHMENT'));
+if (!$t_data['attach_ext_id']) {
+    bb_die(__('ERROR_NO_ATTACHMENT') . '[EXT_ID]');
 }
 
-$forum_id = $topic_data['forum_id'];
+$forum_id = $t_data['forum_id'];
 
 
 // Authorization check
@@ -57,7 +57,7 @@ if (!$is_auth['auth_download']) {
 if ($m3u) {
     $torrServer = new \TorrentPier\TorrServerAPI();
     if (!$m3uFile = $torrServer->getM3UPath($topic_id)) {
-        bb_die(__('ERROR_NO_ATTACHMENT'));
+        bb_die(__('ERROR_NO_ATTACHMENT') . '[M3U]');
     }
 
     $filename = basename($m3uFile);
@@ -69,7 +69,7 @@ if ($m3u) {
 }
 
 // Check tor status for frozen downloads
-if (!IS_AM && $topic_data['tor_status']) {
+if (!IS_AM && $t_data['tor_status']) {
     $row = DB()->table(BB_BT_TORRENTS)
         ->select('tor_status, poster_id')
         ->where('topic_id', $topic_id)
@@ -81,10 +81,10 @@ if (!IS_AM && $topic_data['tor_status']) {
 }
 
 // For torrents - add a passkey and send
-if ($topic_data['attach_ext_id'] == 8) {
+if ($t_data['attach_ext_id'] == 8) {
     // Only admins can download the original unmodified torrent file
     if (!(isset($_GET['original']) && IS_ADMIN)) {
-        \TorrentPier\Legacy\Torrent::send_torrent_with_passkey($topic_data);
+        \TorrentPier\Legacy\Torrent::send_torrent_with_passkey($t_data);
     }
 }
 
@@ -95,12 +95,11 @@ if (!is_file($file_path)) {
     bb_die(__('ERROR_NO_ATTACHMENT') . ' [HDD]');
 }
 
-$ext = config()->get('file_id_ext')[$topic_data['attach_ext_id']] ?? '';
+$ext = config()->get('file_id_ext')[$t_data['attach_ext_id']] ?? '';
 $send_filename = "t-$topic_id" . ($ext ? ".$ext" : '');
 
-header('Pragma: public');
-header("Content-Type: application/octet-stream; name=\"$send_filename\"");
-header("Content-Disposition: attachment; filename=\"$send_filename\"");
+header('Content-Type: application/octet-stream');
+header("Content-Disposition: attachment; filename*=UTF-8''" . rawurlencode($send_filename));
 header('Content-Length: ' . filesize($file_path));
 
 readfile($file_path);
