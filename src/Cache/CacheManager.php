@@ -387,7 +387,7 @@ class CacheManager
                 $dbg['src'] = $this->debug_find_source();
                 $dbg['file'] = $this->debug_find_source('file');
                 $dbg['line'] = $this->debug_find_source('line');
-                $dbg['time'] = '';
+                $dbg['time'] = 0;
                 break;
             case 'stop':
                 $this->cur_query_time = utime() - $this->sql_starttime;

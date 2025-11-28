@@ -10,6 +10,7 @@
 namespace TorrentPier\Legacy\Common;
 
 use Exception;
+use TorrentPier\Attachment;
 use TorrentPier\Image\ImageService;
 
 /**
@@ -210,7 +211,7 @@ class Upload
                 $file_path = get_avatar_path($params['user_id'], $this->file_ext_id);
                 break;
             case 'attach':
-                $file_path = get_attach_path($params['topic_id']);
+                $file_path = Attachment::getPath($params['topic_id']);
                 break;
             default:
                 throw new \RuntimeException("Invalid upload mode: $mode");

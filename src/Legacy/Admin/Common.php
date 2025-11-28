@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Legacy\Admin;
 
+use TorrentPier\Attachment;
 use TorrentPier\Legacy\Post;
 
 /**
@@ -349,7 +350,7 @@ class Common
 		");
 
         while ($row = DB()->fetch_next($result)) {
-            $file_path = get_attach_path($row['topic_id']);
+            $file_path = Attachment::getPath($row['topic_id']);
             if (is_file($file_path)) {
                 @unlink($file_path);
             }

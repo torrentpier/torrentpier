@@ -1,0 +1,84 @@
+<?php
+/**
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
+
+namespace TorrentPier;
+
+use TorrentPier\Torrent\Registry;
+
+/**
+ * Attachment file management.
+ */
+class Attachment
+{
+    /**
+     * Delete attachment completely (unregister from the tracker, delete a file and clear the topic).
+     * Also handles TorrServer cleanup.
+     *
+     * @param int $topicId Topic ID
+     * @return bool True on success
+     */
+    public static function delete(int $topicId): bool
+    {
+        $row = DB()->table(BB_TOPICS)
+            ->where('topic_id', $topicId)
+            ->fetch();
+
+        if ($row?->tracker_status) {
+            Registry::unregister($topicId);
+        }
+
+        // Delete a physical file
+        $attachPath = self::getPath($topicId);
+        if (is_file($attachPath)) {
+            unlink($attachPath);
+        }
+
+        // Clear attachment info in a topic
+        DB()->table(BB_TOPICS)
+            ->where('topic_id', $topicId)
+            ->update(['attach_ext_id' => 0]);
+
+        return true;
+    }
+
+    /**
+     * Get an attachment file path.
+     *
+     * @param int $topicId Topic ID
+     * @param int|null $extId Extension ID (default: TORRENT_EXT_ID)
+     * @return string File path
+     */
+    public static function getPath(int $topicId, ?int $extId = null): string
+    {
+        return get_attach_path($topicId, $extId);
+    }
+
+    /**
+     * Get attachment file size in bytes.
+     *
+     * @param int $topicId Topic ID
+     * @return int File size in bytes, 0 if a file doesn't exist
+     */
+    public static function getSize(int $topicId): int
+    {
+        $path = self::getPath($topicId);
+        return is_file($path) ? (filesize($path) ?: 0) : 0;
+    }
+
+    /**
+     * Check if an attachment file exists.
+     *
+     * @param int $topicId Topic ID
+     * @return bool True if a file exists
+     */
+    public static function exists(int $topicId): bool
+    {
+        return is_file(self::getPath($topicId));
+    }
+}

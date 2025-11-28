@@ -11,6 +11,7 @@ namespace TorrentPier\Torrent;
 
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
+use TorrentPier\Attachment;
 
 use Exception;
 
@@ -30,7 +31,7 @@ class Sender
 
         $topic_id = $t_data['topic_id'];
         $topic_title = $t_data['topic_title'];
-        $filename = get_attach_path($topic_id);
+        $filename = Attachment::getPath($topic_id);
 
         if (!config()->get('bt_add_auth_key') || $t_data['attach_ext_id'] !== TORRENT_EXT_ID || !$size = @filesize($filename)) {
             return;

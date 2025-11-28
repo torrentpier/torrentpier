@@ -14,18 +14,12 @@
 			<td class="pad_4">
 				<input type="button" id="clear_file_upload" value="{L_CLEAR}" />
 				<input type="file" name="fileupload" size="45" maxlength="{FILESIZE}" />
+				<input type="submit" class="bold" name="add_attachment" value="{L_ADD_ATTACHMENT}" style="margin-left: 8px;" />
 				<p class="small nowrap">{L_ADD_ATTACHMENT_EXPLAIN}</p>
 			</td>
 			<td class="med pad_4" style="padding-left: 12px;">{RULES}</td>
 		</tr>
 		</table>
-	</td>
-</tr>
-<tr>
-	<td class="pad_4">{L_FILE_COMMENT}</td>
-	<td class="pad_4">
-		<input type="text" name="filecomment" size="45" maxlength="255" value="{FILE_COMMENT}" />
-		<input type="submit" class="bold" name="add_attachment" value="{L_ADD_ATTACHMENT}" />
 	</td>
 </tr>
 
@@ -40,7 +34,6 @@
         });
 
         $('input[type=button]#clear_file_upload').on('click', function () {
-            $('input[name="filecomment"]').val('');
             $('input[name="fileupload"]').val('');
             $('input[type=button]#clear_file_upload').hide();
         });
@@ -61,13 +54,6 @@
 <tr>
 	<td class="row5"><b>{L_FILENAME}</b></td>
 	<td class="row5"><a class="gen" href="{attach_row.U_VIEW_ATTACHMENT}" target="_blank"><b>{attach_row.FILE_NAME}</b></a></td>
-</tr>
-<tr>
-	<td class="row1">{L_FILE_COMMENT}</td>
-	<td class="row1">
-		<input type="text" name="comment_list[]" size="45" maxlength="255" value="{attach_row.FILE_COMMENT}" />&nbsp;
-		<input type="submit" name="edit_comment[{attach_row.ATTACH_FILENAME}]" value="{L_UPDATE_COMMENT}" />
-	</td>
 </tr>
 <tr>
 	<td class="row1">{L_OPTIONS}</td>

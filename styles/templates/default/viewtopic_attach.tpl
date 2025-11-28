@@ -24,11 +24,6 @@
 		<td>{L_DOWNLOADED}:</td>
 		<td>{unregistered_torrent.DOWNLOAD_COUNT} <!-- IF SHOW_DL_LIST_LINK -->&nbsp;[ <a href="{DL_LIST_HREF}" class="med">{L_SHOW_DL_LIST}</a> ] <!-- ENDIF --></td>
 	</tr>
-	<!-- BEGIN comment -->
-	<tr class="row1 tCenter">
-		<td colspan="3">{unregistered_torrent.comment.COMMENT}</td>
-	</tr>
-	<!-- END comment -->
     <!-- IF TOR_CONTROLS -->
     <tr class="row3 tCenter">
         <td colspan="3">
@@ -171,11 +166,6 @@
 		<td>{L_SIZE}:</td>
 		<td>{torrent.TORRENT_SIZE}</td>
 	</tr>
-    <!-- BEGIN comment -->
-    <tr class="row1 tCenter">
-        <td colspan="3">{torrent.comment.COMMENT}</td>
-    </tr>
-    <!-- END comment -->
     <!-- IF TOR_CONTROLS -->
     <tr class="row3 tCenter">
         <td colspan="3">

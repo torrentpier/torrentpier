@@ -11,6 +11,7 @@ namespace TorrentPier;
 
 use stdClass;
 use TorrentPier\Http\HttpClient;
+use TorrentPier\Attachment;
 use TorrentPier\Http\Exception\HttpClientException;
 
 /**
@@ -107,7 +108,7 @@ class TorrServerAPI
      */
     public function saveM3U(int $topic_id, string $hash): bool
     {
-        $m3uFile = get_attach_path($topic_id, M3U_EXT_ID);
+        $m3uFile = Attachment::getPath($topic_id, M3U_EXT_ID);
 
         // Make stream call to store torrent in memory
         for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
@@ -165,7 +166,7 @@ class TorrServerAPI
      */
     public function getM3UPath(int $topic_id): string|false
     {
-        $m3uFile = get_attach_path($topic_id, M3U_EXT_ID);
+        $m3uFile = Attachment::getPath($topic_id, M3U_EXT_ID);
         if (is_file($m3uFile)) {
             return $m3uFile;
         }
@@ -185,7 +186,7 @@ class TorrServerAPI
         CACHE('tr_cache')->rm("ffprobe_m3u_$topic_id");
 
         // Unlink .m3u file
-        $m3uFile = get_attach_path($topic_id, M3U_EXT_ID);
+        $m3uFile = Attachment::getPath($topic_id, M3U_EXT_ID);
         if (is_file($m3uFile)) {
             if (unlink($m3uFile)) {
                 return true;
