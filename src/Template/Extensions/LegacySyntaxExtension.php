@@ -69,68 +69,93 @@ class LegacySyntaxExtension extends AbstractExtension
 
     /**
      * Convert legacy IF statements to Twig syntax
+     * Uses iterative approach processing innermost blocks first
      */
     private function convertIfStatements(string $content): string
     {
-        // Use a more precise approach that handles multiple IF statements on the same line
-        // and properly handles all types of nested structures
-
         $iterations = 0;
-        $maxIterations = 100; // Increase iterations for complex nested structures
+        $maxIterations = 100;
+
+        // Condition pattern: match anything that's not --> (to prevent greedy matching across tags)
+        // Using (?:(?!-->).)+ instead of .+? to prevent matching across -->
+        $condPattern = '((?:(?!-->).)+)';
 
         do {
             $previousContent = $content;
 
-            // Process most specific patterns first (with ELSE/ELSEIF)
-            // Use negative lookahead to ensure we don't match across different IF blocks
+            // Process innermost IF blocks first (those without nested IFs)
+            // This ensures we handle nested structures correctly from inside out
 
-            // <!-- IF condition -->...<!-- ELSEIF condition2 -->...<!-- ELSE -->...<!-- ENDIF -->
-            // Handle the complex IF/ELSEIF/ELSE structure first
-            $content = preg_replace_callback('/<!-- IF ([^>]+?) -->((?:(?!<!-- (?:IF|ENDIF|ELSEIF|ELSE)).)*?)<!-- ELSEIF ([^>]+?)(?:\s*\/[^>]*)? -->((?:(?!<!-- (?:ENDIF|ELSE)).)*?)<!-- ELSE(?:\s*\/[^>]*)? -->((?:(?!<!-- ENDIF).)*?)<!-- ENDIF(?:\s*\/[^>]*)? -->/s', function ($matches) {
-                $condition1 = $this->convertCondition($matches[1]);
-                $ifBody = $matches[2];
-                $condition2 = $this->convertCondition($matches[3]);
-                $elseifBody = $matches[4];
-                $elseBody = $matches[5];
+            // Pattern for simple IF...ENDIF (no nested IF, no ELSE/ELSEIF)
+            $content = preg_replace_callback(
+                '/<!-- IF\s+' . $condPattern . '\s*-->((?:(?!<!-- (?:IF|ENDIF|ELSE|ELSEIF)\b).)*?)<!-- ENDIF(?:\s*\/[^>]*)?\s*-->/s',
+                function ($matches) {
+                    $condition = $this->convertCondition(trim($matches[1]));
+                    $body = $matches[2];
+                    return "{% if $condition %}$body{% endif %}";
+                },
+                $content
+            );
 
-                return "{% if $condition1 %}$ifBody{% elseif $condition2 %}$elseifBody{% else %}$elseBody{% endif %}";
-            }, $content);
+            // Pattern for IF...ELSE...ENDIF (no nested IF, no ELSEIF)
+            $content = preg_replace_callback(
+                '/<!-- IF\s+' . $condPattern . '\s*-->((?:(?!<!-- (?:IF|ENDIF|ELSE|ELSEIF)\b).)*?)<!-- ELSE(?:\s*\/[^>]*)?\s*-->((?:(?!<!-- (?:IF|ENDIF)\b).)*?)<!-- ENDIF(?:\s*\/[^>]*)?\s*-->/s',
+                function ($matches) {
+                    $condition = $this->convertCondition(trim($matches[1]));
+                    $ifBody = $matches[2];
+                    $elseBody = $matches[3];
+                    return "{% if $condition %}$ifBody{% else %}$elseBody{% endif %}";
+                },
+                $content
+            );
 
-            // <!-- IF condition -->...<!-- ELSEIF condition2 -->...<!-- ENDIF -->
-            // Also handle <!-- ELSEIF / COMMENT --> format
-            $content = preg_replace_callback('/<!-- IF ([^>]+?) -->((?:(?!<!-- (?:IF|ENDIF|ELSEIF)).)*?)<!-- ELSEIF ([^>]+?)(?:\s*\/[^>]*)? -->((?:(?!<!-- ENDIF).)*?)<!-- ENDIF(?:\s*\/[^>]*)? -->/s', function ($matches) {
-                $condition1 = $this->convertCondition($matches[1]);
-                $ifBody = $matches[2];
-                $condition2 = $this->convertCondition($matches[3]);
-                $elseifBody = $matches[4];
+            // Pattern for IF...ELSEIF...ENDIF (no nested IF)
+            $content = preg_replace_callback(
+                '/<!-- IF\s+' . $condPattern . '\s*-->((?:(?!<!-- (?:IF|ENDIF|ELSEIF)\b).)*?)<!-- ELSEIF\s+' . $condPattern . '\s*(?:\/[^>]*)?\s*-->((?:(?!<!-- (?:IF|ENDIF)\b).)*?)<!-- ENDIF(?:\s*\/[^>]*)?\s*-->/s',
+                function ($matches) {
+                    $condition1 = $this->convertCondition(trim($matches[1]));
+                    $ifBody = $matches[2];
+                    $condition2 = $this->convertCondition(trim($matches[3]));
+                    $elseifBody = $matches[4];
+                    return "{% if $condition1 %}$ifBody{% elseif $condition2 %}$elseifBody{% endif %}";
+                },
+                $content
+            );
 
-                return "{% if $condition1 %}$ifBody{% elseif $condition2 %}$elseifBody{% endif %}";
-            }, $content);
+            // Pattern for IF...ELSEIF...ELSE...ENDIF (no nested IF)
+            $content = preg_replace_callback(
+                '/<!-- IF\s+' . $condPattern . '\s*-->((?:(?!<!-- (?:IF|ENDIF|ELSEIF|ELSE)\b).)*?)<!-- ELSEIF\s+' . $condPattern . '\s*(?:\/[^>]*)?\s*-->((?:(?!<!-- (?:IF|ENDIF|ELSE)\b).)*?)<!-- ELSE(?:\s*\/[^>]*)?\s*-->((?:(?!<!-- (?:IF|ENDIF)\b).)*?)<!-- ENDIF(?:\s*\/[^>]*)?\s*-->/s',
+                function ($matches) {
+                    $condition1 = $this->convertCondition(trim($matches[1]));
+                    $ifBody = $matches[2];
+                    $condition2 = $this->convertCondition(trim($matches[3]));
+                    $elseifBody = $matches[4];
+                    $elseBody = $matches[5];
+                    return "{% if $condition1 %}$ifBody{% elseif $condition2 %}$elseifBody{% else %}$elseBody{% endif %}";
+                },
+                $content
+            );
 
-            // <!-- IF condition -->...<!-- ELSE -->...<!-- ENDIF -->
-            // Also handle <!-- ELSE / COMMENT --> format
-            $content = preg_replace_callback('/<!-- IF ([^>]+?) -->((?:(?!<!-- (?:IF|ENDIF|ELSE)).)*?)<!-- ELSE(?:\s*\/[^>]*)? -->((?:(?!<!-- ENDIF).)*?)<!-- ENDIF(?:\s*\/[^>]*)? -->/s', function ($matches) {
-                $condition = $this->convertCondition($matches[1]);
-                $ifBody = $matches[2];
-                $elseBody = $matches[3];
-
-                return "{% if $condition %}$ifBody{% else %}$elseBody{% endif %}";
-            }, $content);
-
-            // Simple <!-- IF condition -->...<!-- ENDIF --> (process innermost first)
-            // Use a pattern that matches the smallest possible IF...ENDIF pair
-            $content = preg_replace_callback('/<!-- IF ([^>]+?) -->((?:(?!<!-- (?:IF|ENDIF)).)*?)<!-- ENDIF(?:\s*\/[^>]*)? -->/s', function ($matches) {
-                $condition = $this->convertCondition($matches[1]);
-                $body = $matches[2];
-
-                return "{% if $condition %}$body{% endif %}";
-            }, $content);
-
-            // Convert any remaining standalone <!-- ELSE --> tags (from nested structures)
-            $content = preg_replace('/<!-- ELSE(?:\s*\/[^>]*)? -->/', '{% else %}', $content);
+            // Handle multiple ELSEIF chains (up to 3 ELSEIFs for now)
+            $content = preg_replace_callback(
+                '/<!-- IF\s+' . $condPattern . '\s*-->((?:(?!<!-- (?:IF|ENDIF|ELSEIF)\b).)*?)<!-- ELSEIF\s+' . $condPattern . '\s*(?:\/[^>]*)?\s*-->((?:(?!<!-- (?:IF|ENDIF|ELSEIF)\b).)*?)<!-- ELSEIF\s+' . $condPattern . '\s*(?:\/[^>]*)?\s*-->((?:(?!<!-- (?:IF|ENDIF)\b).)*?)<!-- ENDIF(?:\s*\/[^>]*)?\s*-->/s',
+                function ($matches) {
+                    $cond1 = $this->convertCondition(trim($matches[1]));
+                    $body1 = $matches[2];
+                    $cond2 = $this->convertCondition(trim($matches[3]));
+                    $body2 = $matches[4];
+                    $cond3 = $this->convertCondition(trim($matches[5]));
+                    $body3 = $matches[6];
+                    return "{% if $cond1 %}$body1{% elseif $cond2 %}$body2{% elseif $cond3 %}$body3{% endif %}";
+                },
+                $content
+            );
 
             $iterations++;
         } while ($content !== $previousContent && $iterations < $maxIterations);
+
+        // Clean up any standalone ELSE tags that might remain (shouldn't happen normally)
+        $content = preg_replace('/<!-- ELSE(?:\s*\/[^>]*)?\s*-->/', '{% else %}', $content);
 
         return $content;
     }
@@ -202,53 +227,46 @@ class LegacySyntaxExtension extends AbstractExtension
     {
         $condition = trim($condition);
 
-        // Convert constants #CONSTANT to constant('CONSTANT') FIRST, before other conversions
-        $condition = preg_replace('/#([A-Z0-9_]+)\b/', "constant('$1')", $condition);
+        // Step 1: Convert constants #CONSTANT# to constant('CONSTANT') FIRST
+        // Handle both #CONSTANT# (with closing #) and #CONSTANT (without)
+        $condition = preg_replace('/#([A-Z0-9_]+)#?/', "constant('$1')", $condition);
 
-        // Convert PHP-style array access to Twig array access
+        // Step 2: Convert PHP-style array access to Twig dot notation
         // Handle nested array access like $bb_cfg['key']['subkey']
+        $maxIterations = 10;
+        $iterations = 0;
         do {
             $previousCondition = $condition;
             // Match $variable['key'] patterns
-            $condition = preg_replace_callback('/\$([a-zA-Z_][a-zA-Z0-9_]*)\[([\'"][^\'"]*[\'"])\]/', function ($matches) {
-                $varName = $matches[1];
-                $key = trim($matches[2], '\'"');
-                return "$varName.$key";
+            $condition = preg_replace_callback('/\$([a-zA-Z_][a-zA-Z0-9_]*)\[([\'"])([^\'"]*)\2\]/', function ($matches) {
+                return $matches[1] . '.' . $matches[3];
             }, $condition);
             // Match variable.key['subkey'] patterns (for nested access)
-            $condition = preg_replace_callback('/([a-zA-Z_][a-zA-Z0-9_.]*)\[([\'"][^\'"]*[\'"])\]/', function ($matches) {
-                $varName = $matches[1];
-                $key = trim($matches[2], '\'"');
-                return "$varName.$key";
+            $condition = preg_replace_callback('/([a-zA-Z_][a-zA-Z0-9_.]+)\[([\'"])([^\'"]*)\2\]/', function ($matches) {
+                return $matches[1] . '.' . $matches[3];
             }, $condition);
-        } while ($condition !== $previousCondition);
+            $iterations++;
+        } while ($condition !== $previousCondition && $iterations < $maxIterations);
 
-        // Convert PHP-style negation ! to Twig 'not' operator
-        $condition = preg_replace('/!(?=\s*[a-zA-Z_$])/', 'not ', $condition);
-
-        // Convert block item variables (they should stay as-is, no V. prefix needed)
-        $condition = preg_replace('/\b([a-z0-9_]+_item)\.([A-Z0-9_]+)\b/', '$1.$2', $condition);
-
-        // Convert variable references, but not if they're constants or part of object/array access
-        $condition = preg_replace('/\b(?<!constant\(\')(?<![a-z0-9_]\.)(?<![a-z0-9_]_item\.)([A-Z0-9_]+)(?!\.[A-Z0-9_])(?!\'\))(?!\])\b/', 'V.$1', $condition);
+        // Step 3: Convert remaining $variable to variable (without $)
         $condition = preg_replace('/\$([a-zA-Z_][a-zA-Z0-9_]*)/', '$1', $condition);
 
-        // Convert operators (with word boundaries to avoid partial matches)
+        // Step 4: Convert PHP-style negation ! to Twig 'not' operator
+        $condition = preg_replace('/!(?=\s*[a-zA-Z_])/', 'not ', $condition);
+
+        // Step 5: Convert operators BEFORE variable conversion (to avoid issues with 'or', 'and' in var names)
         $operators = [
-            '/\beq\b/' => '==',
-            '/\bne\b/' => '!=',
-            '/\bneq\b/' => '!=',
-            '/\blt\b/' => '<',
-            '/\ble\b/' => '<=',
-            '/\blte\b/' => '<=',
-            '/\bgt\b/' => '>',
-            '/\bge\b/' => '>=',
-            '/\bgte\b/' => '>=',
-            '/\band\b/' => 'and',
-            '/\bor\b/' => 'or',
-            '/\bnot\b/' => 'not',
-            '/\bmod\b/' => '%',
-            // Handle C-style logical operators
+            '/\beq\b/i' => '==',
+            '/\bne\b/i' => '!=',
+            '/\bneq\b/i' => '!=',
+            '/\blt\b/i' => '<',
+            '/\ble\b/i' => '<=',
+            '/\blte\b/i' => '<=',
+            '/\bgt\b/i' => '>',
+            '/\bge\b/i' => '>=',
+            '/\bgte\b/i' => '>=',
+            '/\bmod\b/i' => '%',
+            // C-style logical operators
             '/&&/' => ' and ',
             '/\|\|/' => ' or ',
         ];
@@ -256,6 +274,43 @@ class LegacySyntaxExtension extends AbstractExtension
         foreach ($operators as $pattern => $replacement) {
             $condition = preg_replace($pattern, $replacement, $condition);
         }
+
+        // Step 6: Convert uppercase variables to V.VARIABLE
+        // Skip if: already has V. prefix, is part of _item. access, is inside constant(), has lowercase prefix
+        $condition = preg_replace_callback('/\b([A-Z][A-Z0-9_]*)\b/', function ($matches) use ($condition) {
+            $var = $matches[0];
+            $fullMatch = $matches[0];
+
+            // Get position in original string to check context
+            $pos = strpos($condition, $fullMatch);
+
+            // Skip if already prefixed with V.
+            if ($pos >= 2 && substr($condition, $pos - 2, 2) === 'V.') {
+                return $var;
+            }
+
+            // Skip if part of block_item.VAR pattern (preceded by _item.)
+            if ($pos >= 6 && substr($condition, $pos - 6, 6) === '_item.') {
+                return $var;
+            }
+
+            // Skip if inside constant('...')
+            if (preg_match('/constant\s*\(\s*[\'"]' . preg_quote($var, '/') . '[\'"]\s*\)/', $condition)) {
+                return $var;
+            }
+
+            // Skip if has lowercase prefix (like bb_cfg.VAR)
+            if ($pos > 0 && preg_match('/[a-z0-9_]\.$/', substr($condition, 0, $pos))) {
+                return $var;
+            }
+
+            return 'V.' . $var;
+        }, $condition);
+
+        // Step 7: Convert word-based logical operators (after variable conversion to avoid conflicts)
+        $condition = preg_replace('/\band\b/i', 'and', $condition);
+        $condition = preg_replace('/\bor\b/i', 'or', $condition);
+        $condition = preg_replace('/\bnot\b/i', 'not', $condition);
 
         return $condition;
     }
@@ -312,13 +367,17 @@ class LegacySyntaxExtension extends AbstractExtension
         // Build the full block path for complex nested variables
         $fullBlockPath = array_merge($parentBlocks, [$currentBlock]);
 
+        // Escape block name for regex (and ensure word boundary matching)
+        $blockNameEscaped = preg_quote($currentBlock, '/');
+
         // For nested blocks, we need to handle variables that reference the full path
         // For example: {c.f.VARIABLE} when we're in the 'f' block should become {{ f_item.VARIABLE }}
         // because the 'f' loop is already inside the 'c' loop context
 
         if (!empty($parentBlocks)) {
             // Convert full path variables like {parent.current.VARIABLE} to {{ current_item.VARIABLE }}
-            $fullPathPattern = implode('\.', $fullBlockPath);
+            // Use array_map with preg_quote to properly escape each block name
+            $fullPathPattern = implode('\.', array_map(fn($b) => preg_quote($b, '/'), $fullBlockPath));
             $content = preg_replace_callback('/\{' . $fullPathPattern . '\.([A-Z0-9_.]+)\}/', function ($matches) use ($currentBlock) {
                 $varPath = $matches[1];
                 return "{{ {$currentBlock}_item.$varPath|default('') }}";
@@ -333,13 +392,15 @@ class LegacySyntaxExtension extends AbstractExtension
         }
 
         // Convert simple block variables for current level {blockname.VARIABLE}
-        $content = preg_replace_callback('/\{' . preg_quote($currentBlock) . '\.([A-Z0-9_.]+)\}/', function ($matches) use ($currentBlock) {
+        // Use negative lookbehind to ensure we match exact block name, not partial (e.g., don't match 'cf' when looking for 'c')
+        $content = preg_replace_callback('/\{(?<![a-z0-9_])' . $blockNameEscaped . '\.([A-Z0-9_.]+)\}/', function ($matches) use ($currentBlock) {
             $varPath = $matches[1];
             return "{{ {$currentBlock}_item.$varPath|default('') }}";
         }, $content);
 
         // Convert block variables in attributes and other contexts (without curly braces)
-        $content = preg_replace('/\b' . preg_quote($currentBlock) . '\.([A-Z0-9_.]+)\b/', $currentBlock . '_item.$1', $content);
+        // Use word boundary \b to prevent partial matches
+        $content = preg_replace('/(?<![a-z0-9_])' . $blockNameEscaped . '\.([A-Z0-9_.]+)(?![a-z0-9_])/', $currentBlock . '_item.$1', $content);
 
         return $content;
     }
@@ -352,23 +413,61 @@ class LegacySyntaxExtension extends AbstractExtension
         $iterations = 0;
         $maxIterations = 50;
 
+        // Condition pattern: match anything that's not -->
+        $condPattern = '((?:(?!-->).)+)';
+
         do {
             $previousContent = $content;
 
-            // Convert complete IF...ELSE...ENDIF structures with context
-            $content = preg_replace_callback('/<!-- IF ([^>]+?) -->((?:(?!<!-- (?:IF|ENDIF|ELSE)).)*?)<!-- ELSE(?:\s*\/[^>]*)? -->((?:(?!<!-- ENDIF).)*?)<!-- ENDIF(?:\s*\/[^>]*)? -->/s', function ($matches) use ($blockStack) {
-                $condition = $this->convertConditionWithContext(trim($matches[1]), $blockStack);
-                $ifBody = $matches[2];
-                $elseBody = $matches[3];
-                return "{% if $condition %}$ifBody{% else %}$elseBody{% endif %}";
-            }, $content);
+            // Simple IF...ENDIF (innermost first)
+            $content = preg_replace_callback(
+                '/<!-- IF\s+' . $condPattern . '\s*-->((?:(?!<!-- (?:IF|ENDIF|ELSE|ELSEIF)\b).)*?)<!-- ENDIF(?:\s*\/[^>]*)?\s*-->/s',
+                function ($matches) use ($blockStack) {
+                    $condition = $this->convertConditionWithContext(trim($matches[1]), $blockStack);
+                    $body = $matches[2];
+                    return "{% if $condition %}$body{% endif %}";
+                },
+                $content
+            );
 
-            // Convert simple IF...ENDIF structures with context
-            $content = preg_replace_callback('/<!-- IF ([^>]+?) -->((?:(?!<!-- (?:IF|ENDIF)).)*?)<!-- ENDIF(?:\s*\/[^>]*)? -->/s', function ($matches) use ($blockStack) {
-                $condition = $this->convertConditionWithContext(trim($matches[1]), $blockStack);
-                $body = $matches[2];
-                return "{% if $condition %}$body{% endif %}";
-            }, $content);
+            // IF...ELSE...ENDIF
+            $content = preg_replace_callback(
+                '/<!-- IF\s+' . $condPattern . '\s*-->((?:(?!<!-- (?:IF|ENDIF|ELSE|ELSEIF)\b).)*?)<!-- ELSE(?:\s*\/[^>]*)?\s*-->((?:(?!<!-- (?:IF|ENDIF)\b).)*?)<!-- ENDIF(?:\s*\/[^>]*)?\s*-->/s',
+                function ($matches) use ($blockStack) {
+                    $condition = $this->convertConditionWithContext(trim($matches[1]), $blockStack);
+                    $ifBody = $matches[2];
+                    $elseBody = $matches[3];
+                    return "{% if $condition %}$ifBody{% else %}$elseBody{% endif %}";
+                },
+                $content
+            );
+
+            // IF...ELSEIF...ENDIF
+            $content = preg_replace_callback(
+                '/<!-- IF\s+' . $condPattern . '\s*-->((?:(?!<!-- (?:IF|ENDIF|ELSEIF)\b).)*?)<!-- ELSEIF\s+' . $condPattern . '\s*(?:\/[^>]*)?\s*-->((?:(?!<!-- (?:IF|ENDIF)\b).)*?)<!-- ENDIF(?:\s*\/[^>]*)?\s*-->/s',
+                function ($matches) use ($blockStack) {
+                    $cond1 = $this->convertConditionWithContext(trim($matches[1]), $blockStack);
+                    $body1 = $matches[2];
+                    $cond2 = $this->convertConditionWithContext(trim($matches[3]), $blockStack);
+                    $body2 = $matches[4];
+                    return "{% if $cond1 %}$body1{% elseif $cond2 %}$body2{% endif %}";
+                },
+                $content
+            );
+
+            // IF...ELSEIF...ELSE...ENDIF
+            $content = preg_replace_callback(
+                '/<!-- IF\s+' . $condPattern . '\s*-->((?:(?!<!-- (?:IF|ENDIF|ELSEIF|ELSE)\b).)*?)<!-- ELSEIF\s+' . $condPattern . '\s*(?:\/[^>]*)?\s*-->((?:(?!<!-- (?:IF|ENDIF|ELSE)\b).)*?)<!-- ELSE(?:\s*\/[^>]*)?\s*-->((?:(?!<!-- (?:IF|ENDIF)\b).)*?)<!-- ENDIF(?:\s*\/[^>]*)?\s*-->/s',
+                function ($matches) use ($blockStack) {
+                    $cond1 = $this->convertConditionWithContext(trim($matches[1]), $blockStack);
+                    $body1 = $matches[2];
+                    $cond2 = $this->convertConditionWithContext(trim($matches[3]), $blockStack);
+                    $body2 = $matches[4];
+                    $elseBody = $matches[5];
+                    return "{% if $cond1 %}$body1{% elseif $cond2 %}$body2{% else %}$elseBody{% endif %}";
+                },
+                $content
+            );
 
             $iterations++;
         } while ($content !== $previousContent && $iterations < $maxIterations);
