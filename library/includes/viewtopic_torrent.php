@@ -62,8 +62,11 @@ if (config()->get('bt_allow_spmode_change')) {
 $bt_topic_id = $t_data['topic_id'];
 $topic_id = $t_data['topic_id'];
 $bt_user_id = $userdata['user_id'];
-$display_name = ''; // TODO
-$download_count = declension((int)($t_data['download_count'] ?? 0), 'times');
+
+// Download count: historical (aggregated) + today's live count
+$live_dl_count = DB()->table(BB_TORRENT_DL)->where('topic_id', $topic_id)->count('*');
+$download_count = declension((int)($t_data['download_count'] ?? 0) + $live_dl_count, 'times');
+
 $tor_file_size = humn_size($t_data['attach_filesize'] ?: \TorrentPier\Attachment::getSize($topic_id));
 $tor_file_time = bb_date($t_data['topic_time']);
 $tor_reged = (bool)$t_data['tracker_status'];

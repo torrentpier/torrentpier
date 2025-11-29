@@ -23,7 +23,7 @@ $topic = DB()->fetch_row("
         t.topic_id, t.forum_id, t.attach_ext_id
     FROM " . BB_TOPICS . " t
     WHERE t.topic_id = $topic_id LIMIT 1");
-if (!$topic || $topic['attach_ext_id'] != 8) {
+if (!$topic || $topic['attach_ext_id'] != TORRENT_EXT_ID) {
     $this->ajax_die($lang['ERROR_BUILD']);
 }
 
