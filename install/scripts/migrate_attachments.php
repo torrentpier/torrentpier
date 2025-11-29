@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Standalone migration script to move torrent files from old attach_mod system to topic-based storage.
+ * Standalone migration script to move torrent files from an old attach_mod system to topic-based storage.
  *
  * This script migrates torrent files from the old attach_mod system (bb_attachments_desc + bb_attachments)
  * to the new topic-based storage where files are stored as {floor(id/10000)}/{id%100}/{topic_id}.torrent
@@ -71,7 +71,7 @@ const TOPIC_DL_TYPE_DL = 1;
 // Set to true if bt_set_dltype_on_tor_reg was enabled on your tracker
 const SET_DL_TYPE = true;
 
-// Set to true to delete old attachment records after successful migration
+// Set to true to delete old attachment records after a successful migration
 const CLEANUP_OLD_TABLES = true;
 
 // =====================================================
@@ -87,31 +87,32 @@ $batch_size = 100;
 $dry_run = in_array('--dry-run', $argv);
 $verbose = in_array('-v', $argv) || in_array('--verbose', $argv);
 
-echo "======================================\n";
-echo "TorrentPier Attachment Migration\n";
-echo "======================================\n\n";
+echo "\n";
+echo "🔄 ══════════════════════════════════════\n";
+echo "   TorrentPier Attachment Migration\n";
+echo "══════════════════════════════════════════\n\n";
 
 if ($dry_run) {
-    echo "DRY RUN MODE - No changes will be made\n\n";
+    echo "🧪 DRY RUN MODE - No changes will be made\n\n";
 }
 
 // Validate paths
 if (!is_dir($old_upload_path)) {
-    die("ERROR: Old upload directory not found: $old_upload_path\n");
+    die("❌ ERROR: Old upload directory not found: $old_upload_path\n");
 }
 
 if (!is_dir($new_upload_path)) {
     if ($dry_run) {
-        echo "Would create new upload directory: $new_upload_path\n";
+        echo "📁 Would create new upload directory: $new_upload_path\n";
     } else {
         if (!mkdir($new_upload_path, 0755, true)) {
-            die("ERROR: Cannot create new upload directory: $new_upload_path\n");
+            die("❌ ERROR: Cannot create new upload directory: $new_upload_path\n");
         }
     }
 }
 
-echo "Old upload directory: $old_upload_path\n";
-echo "New upload directory: $new_upload_path\n\n";
+echo "📂 Source: $old_upload_path\n";
+echo "📂 Target: $new_upload_path\n\n";
 
 // Connect to database
 try {
@@ -122,13 +123,13 @@ try {
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
     );
 } catch (PDOException $e) {
-    die("ERROR: Database connection failed: " . $e->getMessage() . "\n");
+    die("❌ ERROR: Database connection failed: " . $e->getMessage() . "\n");
 }
 
-echo "Connected to database: " . DB_NAME . "\n\n";
+echo "🗄️  Database: " . DB_NAME . " ✓\n\n";
 
 /**
- * Get new file path for topic (matches get_attach_path logic)
+ * Get a new file path for a topic (matches get_attach_path logic)
  */
 function getNewFilePath(int $topicId, string $basePath): string
 {
@@ -144,7 +145,7 @@ function getNewFilePath(int $topicId, string $basePath): string
 }
 
 /**
- * Check if torrent is registered in tracker
+ * Check if a torrent is registered in the tracker
  */
 function isRegisteredOnTracker(PDO $pdo, int $topicId): bool
 {
@@ -155,13 +156,12 @@ function isRegisteredOnTracker(PDO $pdo, int $topicId): bool
 
 $total_processed = 0;
 $total_migrated = 0;
-$total_skipped = 0;
 $total_failed = 0;
 $last_attach_id = 0;
 
 // Process in batches
 while (true) {
-    // Get batch of torrent attachments that haven't been migrated yet
+    // Get a batch of torrent attachments that haven't been migrated yet
     $sql = "
         SELECT
             d.attach_id, d.physical_filename, d.extension, d.filesize, d.real_filename, d.download_count,
@@ -199,24 +199,36 @@ while (true) {
         $new_dir = dirname($new_path);
 
         if ($verbose) {
-            echo "Processing attach_id=$attach_id, topic_id=$topic_id\n";
-            echo "  Old: $old_path\n";
-            echo "  New: $new_path\n";
+            echo "📦 Processing attach_id=$attach_id, topic_id=$topic_id\n";
+            echo "   ├─ Old: $old_path\n";
+            echo "   └─ New: $new_path\n";
         }
 
-        // Check if source file exists
+        // Check if a source file exists
         if (!is_file($old_path)) {
-            echo "WARNING: Source file not found for topic $topic_id: $old_path\n";
+            echo "⚠️  Source file not found for topic $topic_id: $old_path\n";
             $total_failed++;
             continue;
         }
 
-        // Check if already migrated
+        // Check if a destination file already exists
         if (is_file($new_path)) {
-            if ($verbose) {
-                echo "  SKIP: File already exists at destination\n";
+            // Verify files are identical by comparing content
+            $old_hash = md5_file($old_path);
+            $new_hash = md5_file($new_path);
+
+            if ($old_hash !== $new_hash) {
+                echo "❌ CONFLICT topic $topic_id - files differ!\n";
+                echo "   ├─ Old: $old_path (md5: $old_hash)\n";
+                echo "   └─ New: $new_path (md5: $new_hash)\n";
+                $total_failed++;
+                continue;
             }
-            // Still update the topic table
+
+            if ($verbose) {
+                echo "   🔍 File exists and identical, completing migration...\n";
+            }
+
             if (!$dry_run) {
                 $tracker_status = isRegisteredOnTracker($pdo, $topic_id) ? 1 : 0;
                 $dl_type_sql = (SET_DL_TYPE && $tracker_status) ? ", topic_dl_type = " . TOPIC_DL_TYPE_DL : "";
@@ -235,20 +247,28 @@ while (true) {
                     $pdo->exec("DELETE FROM " . BB_ATTACHMENTS . " WHERE attach_id = $attach_id");
                     $pdo->exec("DELETE FROM " . BB_ATTACHMENTS_DESC . " WHERE attach_id = $attach_id");
                 }
+
+                // Remove old file since new one is identical
+                unlink($old_path);
             }
-            $total_skipped++;
+
+            $total_migrated++;
+
+            if ($verbose) {
+                echo "   ✅ Completed (file was already in place)\n";
+            }
             continue;
         }
 
-        // Create directory structure if needed
+        // Create a directory structure if needed
         if (!is_dir($new_dir)) {
             if ($dry_run) {
                 if ($verbose) {
-                    echo "  Would create directory: $new_dir\n";
+                    echo "   📁 Would create directory: $new_dir\n";
                 }
             } else {
                 if (!mkdir($new_dir, 0755, true)) {
-                    echo "ERROR: Cannot create directory $new_dir for topic $topic_id\n";
+                    echo "❌ Cannot create directory $new_dir for topic $topic_id\n";
                     $total_failed++;
                     continue;
                 }
@@ -258,13 +278,13 @@ while (true) {
         // Move the file
         if ($dry_run) {
             if ($verbose) {
-                echo "  Would move file to: $new_path\n";
+                echo "   📤 Would move file to: $new_path\n";
             }
         } else {
             if (!rename($old_path, $new_path)) {
                 // Try copy + delete as fallback
                 if (!copy($old_path, $new_path)) {
-                    echo "ERROR: Cannot move file for topic $topic_id\n";
+                    echo "❌ Cannot move file for topic $topic_id\n";
                     $total_failed++;
                     continue;
                 }
@@ -277,13 +297,13 @@ while (true) {
         if ($dry_run) {
             if ($verbose) {
                 $registered = isRegisteredOnTracker($pdo, $topic_id);
-                echo "  Would update topic: attach_ext_id=" . TORRENT_EXT_ID . ", attach_filesize=$filesize, download_count=$download_count, tracker_status=" . ($registered ? 1 : 0);
+                echo "   🗃️  Would update: ext_id=" . TORRENT_EXT_ID . ", size=$filesize, downloads=$download_count, tracker=" . ($registered ? 1 : 0);
                 if (SET_DL_TYPE && $registered) {
-                    echo ", topic_dl_type=" . TOPIC_DL_TYPE_DL;
+                    echo ", dl_type=" . TOPIC_DL_TYPE_DL;
                 }
                 echo "\n";
                 if (CLEANUP_OLD_TABLES) {
-                    echo "  Would delete from bb_attachments and bb_attachments_desc (attach_id=$attach_id)\n";
+                    echo "   🗑️  Would cleanup old records (attach_id=$attach_id)\n";
                 }
             }
         } else {
@@ -309,38 +329,45 @@ while (true) {
         $total_migrated++;
 
         if ($verbose) {
-            echo "  OK: Migrated successfully\n";
+            echo "   ✅ Migrated successfully\n";
         }
     }
 
-    // Update last processed attach_id for next batch
+    // Update last-processed attach_id for the next batch
     $last_attach_id = (int)$row['attach_id'];
 
-    echo "Progress: $total_processed processed, $total_migrated migrated, $total_skipped skipped, $total_failed failed\n";
+    echo "⏳ Progress: $total_processed processed | ✅ $total_migrated migrated | ❌ $total_failed failed\n";
 
     // Small pause to prevent overloading
     usleep(100000); // 100ms
 }
 
-echo "\n======================================\n";
-echo "Migration Complete\n";
-echo "======================================\n";
-echo "Total processed: $total_processed\n";
-echo "Total migrated:  $total_migrated\n";
-echo "Total skipped:   $total_skipped\n";
-echo "Total failed:    $total_failed\n";
+echo "\n";
+echo "══════════════════════════════════════════\n";
+echo "📊 Migration Summary\n";
+echo "══════════════════════════════════════════\n";
+echo "   📦 Processed: $total_processed\n";
+echo "   ✅ Migrated:  $total_migrated\n";
+echo "   ❌ Failed:    $total_failed\n";
+echo "──────────────────────────────────────────\n";
 
 if ($dry_run) {
-    echo "\nThis was a dry run. No changes were made.\n";
-    echo "Run without --dry-run to perform the actual migration.\n";
+    echo "\n🧪 This was a dry run. No changes were made.\n";
+    echo "👉 Run without --dry-run to perform the actual migration.\n";
 } else {
     if (CLEANUP_OLD_TABLES) {
-        echo "\nOld attachment records were deleted from bb_attachments and bb_attachments_desc.\n";
+        echo "\n🗑️  Old attachment records were cleaned up.\n";
     }
 }
 
 if ($total_failed > 0) {
-    echo "\nWARNING: Some files failed to migrate. Check the output above for details.\n";
+    echo "\n⚠️  WARNING: Some files failed to migrate. Check the output above.\n";
 }
 
-echo "\nDone.\n";
+if ($total_failed === 0 && $total_migrated > 0) {
+    echo "\n🎉 All done! Migration completed successfully.\n";
+} elseif ($total_processed === 0) {
+    echo "\n📭 Nothing to migrate.\n";
+} else {
+    echo "\n✨ Done.\n";
+}
