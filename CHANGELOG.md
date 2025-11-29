@@ -39,11 +39,6 @@
 
 - *(i18n)* Update composer.lock with latest dependencies and translations updates - ([458d6d5](https://github.com/torrentpier/torrentpier/commit/458d6d562d301e205b57416061df2666c1d1c523))
 
-## New Contributors ❤️
-
-* @belomaxorka made their first contribution
-* @exileum made their first contribution in [#2230](https://github.com/torrentpier/torrentpier/pull/2230)
-* @dependabot[bot] made their first contribution in [#2210](https://github.com/torrentpier/torrentpier/pull/2210)
 
 ## [v2.8.8](https://github.com/torrentpier/torrentpier/compare/v2.8.7..v2.8.8) (2025-10-21)
 
