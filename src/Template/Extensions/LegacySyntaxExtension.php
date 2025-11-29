@@ -26,6 +26,7 @@ class LegacySyntaxExtension extends AbstractExtension
             new TwigFilter('legacy_convert', [$this, 'convertLegacySyntax'], ['is_safe' => ['html']]),
             new TwigFilter('legacy_var', [$this, 'convertVariable'], ['is_safe' => ['html']]),
             new TwigFilter('legacy_block', [$this, 'convertBlock'], ['is_safe' => ['html']]),
+            new TwigFilter('lang_fallback', [$this, 'langFallback'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -180,12 +181,12 @@ class LegacySyntaxExtension extends AbstractExtension
      */
     private function convertVariables(string $content): string
     {
-        // Convert language variables {L_VARIABLE}
-        // Some L_ prefixed vars are passed via assign_vars (like L_VIEWING_PROFILE),
-        // so check V.L_XXX first, then fall back to L.XXX (language array)
+        // Convert language variables {L_VARIABLE} to use lang_fallback filter
+        // Checks V.L_XXX first (template override), then L.XXX (language array)
+        // If neither found - shows variable name with debug highlighting in DBG_USER mode
         $content = preg_replace_callback('/\{L_([A-Z0-9_]+)\}/', function ($matches) {
             $varName = $matches[1];
-            return "{{ V.L_$varName|default(L.$varName)|default('') }}";
+            return "{{ V.L_$varName|default(L.$varName)|lang_fallback('$varName') }}";
         }, $content);
 
         // Convert constants {#CONSTANT#} to {{ constant('CONSTANT') }}
@@ -588,6 +589,31 @@ class LegacySyntaxExtension extends AbstractExtension
         }
 
         return $content;
+    }
+
+    /**
+     * Filter for language variable fallback with debug highlighting
+     * Used as: {{ V.L_VAR|default(L.VAR)|lang_fallback('VAR') }}
+     *
+     * @param mixed $value The value from the filter chain (could be the translation or null)
+     * @param string $key Language key (e.g., 'MEMBERSHIP_IN')
+     * @return string The value if not empty, or variable name with optional debug styling
+     */
+    public function langFallback(mixed $value, string $key): string
+    {
+        // If we have a valid value, return it
+        if ($value !== null && $value !== '') {
+            return (string)$value;
+        }
+
+        // Fallback: show variable name, with red highlight in debug mode
+        $varName = 'L_' . $key;
+
+        if (defined('DBG_USER') && DBG_USER) {
+            return '<span style="background:#ff6b6b;color:#fff;padding:1px 4px;border-radius:2px;font-size:11px;">' . $varName . '</span>';
+        }
+
+        return $varName;
     }
 
     /**
