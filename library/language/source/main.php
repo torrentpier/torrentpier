@@ -802,6 +802,8 @@ $lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
 $lang['M3U_NOT_SUPPORTED'] = 'This file cannot be played in the browser...';
 $lang['M3U_FFPROBE_NO_DATA'] = 'It seems ffprobe will not be able to return data about this codec...';
 $lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
+$lang['TORRSERVER_UNAVAILABLE'] = 'TorrServer is unavailable';
+$lang['TORRSERVER_INVALID_REQUEST'] = 'Invalid request parameters';
 
 $lang['ATTACHMENT'] = 'Attachments';
 

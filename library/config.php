@@ -137,7 +137,7 @@ $bb_cfg['torr_server'] = [
     // Read more: https://github.com/YouROK/TorrServer
     'enabled' => false,
     'url' => "http://$domain_name:8090",
-    'timeout' => 5,
+    'timeout' => 3,
     'disable_for_guest' => true
 ];
 

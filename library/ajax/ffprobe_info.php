@@ -26,19 +26,22 @@ if (empty($topic_id) || !is_numeric($topic_id)) {
     $this->ajax_die($lang['INVALID_TOPIC_ID']);
 }
 
-$file_index = $this->request['file_index'] ?? '';
-if (empty($file_index) || !is_numeric($file_index)) {
-    $this->ajax_die("Invalid file index: $file_index");
+$file_index = $this->request['file_index'] ?? null;
+if ($file_index === null || !is_numeric($file_index) || $file_index < 0) {
+    $this->ajax_die($lang['TORRSERVER_INVALID_REQUEST'] . ": file_index=$file_index");
 }
 
 if (!$info_hash = (string)$this->request['info_hash'] or !ctype_xdigit($info_hash)) {
-    $this->ajax_die("Invalid info_hash: $info_hash");
+    $this->ajax_die($lang['TORRSERVER_INVALID_REQUEST'] . ": info_hash=$info_hash");
 }
 
 $isAudio = isset($this->request['is_audio']) && $this->request['is_audio'];
 
 // Get ffprobe info from TorrServer
 $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($info_hash, $file_index, $topic_id);
+if (!$ffpInfo || !isset($ffpInfo->{$file_index})) {
+    $this->ajax_die($lang['TORRSERVER_UNAVAILABLE']);
+}
 $ffpInfo = $ffpInfo->{$file_index};
 if (isset($ffpInfo->streams)) {
     // Video codec information
