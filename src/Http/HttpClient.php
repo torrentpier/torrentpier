@@ -106,6 +106,25 @@ final class HttpClient
     }
 
     /**
+     * Create a simple Guzzle client without retry middleware
+     * Use this for services that need fast fail without retries
+     *
+     * @param array $config Guzzle configuration options
+     * @return Client
+     */
+    public static function createSimpleClient(array $config = []): Client
+    {
+        $defaultConfig = [
+            'timeout' => self::DEFAULT_TIMEOUT,
+            'connect_timeout' => self::DEFAULT_CONNECT_TIMEOUT,
+            'http_errors' => false,
+            'verify' => true,
+        ];
+
+        return new Client(array_merge($defaultConfig, $config));
+    }
+
+    /**
      * Get the underlying Guzzle client
      * Use this for advanced Guzzle features
      *

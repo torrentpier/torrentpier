@@ -9,10 +9,10 @@
 
 namespace TorrentPier;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use stdClass;
 use TorrentPier\Http\HttpClient;
-use TorrentPier\Attachment;
-use TorrentPier\Http\Exception\HttpClientException;
 
 /**
  * Class TorrServerAPI
@@ -28,11 +28,11 @@ class TorrServerAPI
     private string $url;
 
     /**
-     * HTTP client instance
+     * HTTP client (simple, without retries)
      *
-     * @var HttpClient
+     * @var Client
      */
-    private HttpClient $httpClient;
+    private Client $client;
 
     /**
      * Endpoints list
@@ -53,9 +53,42 @@ class TorrServerAPI
     public function __construct()
     {
         $this->url = rtrim(trim(config()->get('torr_server.url')), '/') . '/';
-        $this->httpClient = HttpClient::getInstance([
-            'timeout' => config()->get('torr_server.timeout')
+        $this->client = HttpClient::createSimpleClient([
+            'timeout' => config()->get('torr_server.timeout'),
+            'connect_timeout' => 2,
         ]);
+    }
+
+    /**
+     * Check if TorrServer is available (cached for 30 sec)
+     *
+     * @return bool
+     */
+    public function isAvailable(): bool
+    {
+        static $checked = null;
+
+        if ($checked !== null) {
+            return $checked;
+        }
+
+        $cacheKey = 'torrserver_available';
+        if (($cached = CACHE('bb_cache')->get($cacheKey)) !== false) {
+            return $checked = (bool)$cached;
+        }
+
+        try {
+            $response = $this->client->get($this->url . 'echo', [
+                'timeout' => 2,
+                'connect_timeout' => 1
+            ]);
+            $checked = $response->getStatusCode() === 200;
+        } catch (GuzzleException) {
+            $checked = false;
+        }
+
+        CACHE('bb_cache')->set($cacheKey, (int)$checked, 30);
+        return $checked;
     }
 
     /**
@@ -72,8 +105,14 @@ class TorrServerAPI
             return false;
         }
 
+        // Skip if TorrServer is unavailable
+        if (!$this->isAvailable()) {
+            return false;
+        }
+
         try {
-            $response = $this->httpClient->post($this->url . $this->endpoints['upload'], [
+            $response = $this->client->post($this->url . $this->endpoints['upload'], [
+                'timeout' => config()->get('torr_server.timeout'),
                 'headers' => [
                     'Accept' => 'application/json'
                 ],
@@ -93,7 +132,7 @@ class TorrServerAPI
             }
 
             return $isSuccess;
-        } catch (HttpClientException $e) {
+        } catch (GuzzleException $e) {
             bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
             return false;
         }
@@ -110,8 +149,8 @@ class TorrServerAPI
     {
         $m3uFile = Attachment::getPath($topic_id, M3U_EXT_ID);
 
-        // Make stream call to store torrent in memory
-        for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
+        // Make stream call to store torrent in memory (2 retry max)
+        for ($i = 0, $max_try = 2; $i <= $max_try; $i++) {
             if ($this->getStream($hash)) {
                 break;
             } elseif ($i == $max_try) {
@@ -120,7 +159,8 @@ class TorrServerAPI
         }
 
         try {
-            $response = $this->httpClient->get($this->url . $this->endpoints['playlist'], [
+            $response = $this->client->get($this->url . $this->endpoints['playlist'], [
+                'timeout' => config()->get('torr_server.timeout'),
                 'headers' => [
                     'Accept' => 'audio/x-mpegurl'
                 ],
@@ -151,7 +191,7 @@ class TorrServerAPI
             } else {
                 bb_log("TorrServer (ERROR) [$this->url]: Response code: {$response->getStatusCode()} | Content: {$responseBody}" . LOG_LF);
             }
-        } catch (HttpClientException $e) {
+        } catch (GuzzleException $e) {
             bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
         }
 
@@ -212,8 +252,8 @@ class TorrServerAPI
         }
 
         if (!isset($response->{$index})) {
-            // Make stream call to store torrent in memory
-            for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
+            // Make stream call to store torrent in memory (2 retry max)
+            for ($i = 0, $max_try = 2; $i <= $max_try; $i++) {
                 if ($this->getStream($hash)) {
                     break;
                 } elseif ($i == $max_try) {
@@ -222,7 +262,8 @@ class TorrServerAPI
             }
 
             try {
-                $httpResponse = $this->httpClient->get($this->url . $this->endpoints['ffprobe'] . '/' . $hash . '/' . $index, [
+                $httpResponse = $this->client->get($this->url . $this->endpoints['ffprobe'] . '/' . $hash . '/' . $index, [
+                    'timeout' => config()->get('torr_server.timeout'),
                     'headers' => [
                         'Accept' => 'application/json'
                     ]
@@ -234,7 +275,7 @@ class TorrServerAPI
                 } else {
                     bb_log("TorrServer (ERROR) [$this->url]: Response code: {$httpResponse->getStatusCode()}" . LOG_LF);
                 }
-            } catch (HttpClientException $e) {
+            } catch (GuzzleException $e) {
                 bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
             }
         }
@@ -251,7 +292,8 @@ class TorrServerAPI
     private function getStream(string $hash): bool
     {
         try {
-            $response = $this->httpClient->get($this->url . $this->endpoints['stream'], [
+            $response = $this->client->get($this->url . $this->endpoints['stream'], [
+                'timeout' => config()->get('torr_server.timeout'),
                 'headers' => [
                     'Accept' => 'application/octet-stream'
                 ],
@@ -264,7 +306,7 @@ class TorrServerAPI
             }
 
             return $isSuccess;
-        } catch (HttpClientException $e) {
+        } catch (GuzzleException $e) {
             bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
             return false;
         }

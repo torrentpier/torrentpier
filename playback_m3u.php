@@ -76,7 +76,12 @@ foreach ($m3uData as $entry) {
     if (!filter_var($streamLink, FILTER_VALIDATE_URL)) {
         continue;
     }
-    parse_str(parse_url($streamLink, PHP_URL_QUERY), $urlParams);
+    parse_str(parse_url($streamLink, PHP_URL_QUERY) ?? '', $urlParams);
+
+    // Skip if no index parameter
+    if (!isset($urlParams['index'])) {
+        continue;
+    }
 
     // Parse tags
     foreach ($entry->getExtTags() as $extTag) {
@@ -93,7 +98,7 @@ foreach ($m3uData as $entry) {
 
     // Validate file extension
     $getExtension = pathinfo($title, PATHINFO_EXTENSION);
-    if ($getExtension === str_replace('.', '', $torrServer::M3U['extension'])) {
+    if ($getExtension === M3U_EXT) {
         // Skip m3u files
         continue;
     }
