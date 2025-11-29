@@ -766,8 +766,8 @@ class Template
             $code = str_replace($search, $replace, $code);
         }
         // This will handle the remaining root-level varrefs
-        // Handle L_ language variables specifically - show plain text when not found
-        $code = preg_replace('#\{(L_([a-z0-9\-_]+?))\}#i', '<?php echo isset($L[\'$2\']) ? $L[\'$2\'] : (isset($V[\'$1\']) ? $V[\'$1\'] : \'$1\'); ?>', $code);
+        // Handle L_ language variables specifically - show highlighted text when not found (in debug mode)
+        $code = preg_replace('#\{(L_([a-z0-9\-_]+?))\}#i', '<?php echo isset($L[\'$2\']) ? $L[\'$2\'] : (isset($V[\'$1\']) ? $V[\'$1\'] : (DBG_USER ? \'<span style="background:#ff6b6b;color:#fff;padding:1px 4px;border-radius:2px;font-size:11px;">$1</span>\' : \'$1\')); ?>', $code);
         // Handle PHP variables
         $code = preg_replace('#\{(\$[a-z_][a-z0-9_$\->\'\"\.\[\]]*?)\}#i', '<?php echo isset($1) ? $1 : \'\'; ?>', $code);
         // Handle constants
