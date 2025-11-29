@@ -35,6 +35,10 @@ if ($dead_topics) {
 
     // Unregister each torrent properly
     foreach ($dead_topics as $topic_id) {
-        Registry::unregister($topic_id);
+        try {
+            Registry::unregister($topic_id);
+        } catch (Throwable) {
+            // Continue with remaining topics
+        }
     }
 }
