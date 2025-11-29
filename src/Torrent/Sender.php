@@ -59,7 +59,7 @@ class Sender
         // Ratio limits
         $min_ratio = config()->get('bt_min_ratio_allow_dl_tor');
 
-        if ($min_ratio && $user_id != $t_data['topic_poster'] && ($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
+        if ($min_ratio && $user_id != $t_data['topic_poster'] && $bt_userdata && ($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
             if ($user_ratio < $min_ratio) {
                 $dl = DB()->table(BB_BT_DLSTATUS)
                     ->select('user_status')

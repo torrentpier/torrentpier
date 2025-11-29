@@ -189,6 +189,7 @@ while (true) {
     foreach ($rowset as $row) {
         $total_processed++;
         $attach_id = $row['attach_id'];
+        $last_attach_id = (int)$attach_id;
         $topic_id = (int)$row['topic_id'];
         $filesize = (int)$row['filesize'];
         $download_count = (int)$row['download_count'];
@@ -333,8 +334,7 @@ while (true) {
         }
     }
 
-    // Update last-processed attach_id for the next batch
-    $last_attach_id = (int)$row['attach_id'];
+    // Progress tracked via $last_attach_id updated in the foreach loop
 
     echo "⏳ Progress: $total_processed processed | ✅ $total_migrated migrated | ❌ $total_failed failed\n";
 
