@@ -596,10 +596,10 @@ for ($i = 0; $i < $total_posts; $i++) {
 
     if (!$poster_bot) {
         $quote_btn = ($is_auth['auth_reply'] && !$locked);
-        $edit_btn = (($userdata['user_id'] == $poster_id && $is_auth['auth_edit']) || $is_auth['auth_mod']);
+        $edit_btn = ((\TorrentPier\Topic\Guard::isAuthor($poster_id) && $is_auth['auth_edit']) || $is_auth['auth_mod']);
         $ip_btn = ($is_auth['auth_mod'] || IS_MOD);
     }
-    $delpost_btn = ($post_id != $t_data['topic_first_post_id'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $poster_id && $is_auth['auth_delete'] && $t_data['topic_last_post_id'] == $post_id && $postrow[$i]['post_time'] + 3600 * 3 > TIMENOW)));
+    $delpost_btn = ($post_id != $t_data['topic_first_post_id'] && ($is_auth['auth_mod'] || (\TorrentPier\Topic\Guard::isAuthor($poster_id) && $is_auth['auth_delete'] && $t_data['topic_last_post_id'] == $post_id && $postrow[$i]['post_time'] + 3600 * 3 > TIMENOW)));
 
     // Parse message and sig
     $message = get_parsed_post($postrow[$i]);

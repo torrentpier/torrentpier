@@ -51,7 +51,7 @@ if (isset($this->request['post_id'])) {
 
 switch ($this->request['type']) {
     case 'delete':
-        if ($post['post_id'] != $post['topic_first_post_id'] && $is_auth['auth_delete'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $post['poster_id'] && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600 * 3 > TIMENOW))) {
+        if ($post['post_id'] != $post['topic_first_post_id'] && $is_auth['auth_delete'] && ($is_auth['auth_mod'] || (\TorrentPier\Topic\Guard::isAuthor($post['poster_id']) && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600 * 3 > TIMENOW))) {
             if (empty($this->request['confirmed'])) {
                 $this->prompt_for_confirm($lang['CONFIRM_DELETE']);
             }
@@ -126,7 +126,7 @@ switch ($this->request['type']) {
                         }
                     }
                     DB()->query("UPDATE " . BB_POSTS_TEXT . " SET post_text = '" . DB()->escape($text) . "' WHERE post_id = $post_id LIMIT 1");
-                    if ($post['topic_last_post_id'] != $post['post_id'] && $userdata['user_id'] == $post['poster_id']) {
+                    if ($post['topic_last_post_id'] != $post['post_id'] && \TorrentPier\Topic\Guard::isAuthor($post['poster_id'])) {
                         DB()->query("UPDATE " . BB_POSTS . " SET post_edit_time = '" . TIMENOW . "', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id LIMIT 1");
                     }
                     $s_text = str_replace('\n', "\n", $text);
