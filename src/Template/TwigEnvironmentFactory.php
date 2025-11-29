@@ -27,25 +27,22 @@ class TwigEnvironmentFactory
      */
     public function create(string $templateDir, string $cacheDir, bool $useCache = true): Environment
     {
-        // Prepare template directories - include both admin and default directories
-        $templateDirs = [$templateDir];
+        // Create a filesystem loader with the main template directory
+        $loader = new FilesystemLoader($templateDir);
 
-        // Add admin template directory if it exists and is different from main template dir
+        // Add an admin template directory with @admin namespace
         $adminTemplateDir = dirname($templateDir) . '/admin';
         if (is_dir($adminTemplateDir) && $adminTemplateDir !== $templateDir) {
-            $templateDirs[] = $adminTemplateDir;
+            $loader->addPath($adminTemplateDir, 'admin');
         }
 
-        // Add default template directory as fallback if current dir is not default
+        // Add the default template directory as fallback if the current dir is not default
         $defaultTemplateDir = dirname($templateDir) . '/default';
-        if (is_dir($defaultTemplateDir) && $defaultTemplateDir !== $templateDir && !in_array($defaultTemplateDir, $templateDirs)) {
-            $templateDirs[] = $defaultTemplateDir;
+        if (is_dir($defaultTemplateDir) && $defaultTemplateDir !== $templateDir) {
+            $loader->addPath($defaultTemplateDir);
         }
 
-        // Create the main filesystem loader with multiple directories
-        $loader = new FilesystemLoader($templateDirs);
-
-        // Wrap with legacy loader for backward compatibility
+        // Wrap with a legacy loader for backward compatibility
         $legacyLoader = new LegacyTemplateLoader($loader, $templateDir);
 
         // Configure Twig environment

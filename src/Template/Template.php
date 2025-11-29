@@ -424,11 +424,12 @@ class Template
         // Normalize the path
         $template_full_path = realpath($template_full_path) ?: $template_full_path;
 
-        // Check if it's an admin template
+        // Check if it's an admin template - use @admin namespace
         $adminTemplateDir = realpath(dirname($this->root) . '/admin');
         if ($adminTemplateDir && str_starts_with($template_full_path, $adminTemplateDir . '/')) {
-            // Admin template - return a relative path from the admin directory
-            return str_replace($adminTemplateDir . '/', '', $template_full_path);
+            // Admin template - use @admin namespace to ensure correct resolution
+            $relativePath = str_replace($adminTemplateDir . '/', '', $template_full_path);
+            return '@admin/' . $relativePath;
         }
 
         // Check if it's a regular template in the current directory
