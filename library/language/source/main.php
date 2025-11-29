@@ -809,14 +809,13 @@ $lang['ATTACHMENT'] = 'Attachments';
 
 // Posting -> Posting Attachments
 $lang['ADD_ATTACHMENT'] = 'Add Attachment';
-$lang['ADD_ATTACHMENT_TITLE'] = 'Add an Attachment';
 $lang['ADD_ATTACHMENT_EXPLAIN'] = 'If you do not want to add an Attachment to your Post, please leave the Fields blank';
+$lang['UPDATE_ATTACHMENT'] = 'Update Attachment';
 $lang['FILENAME'] = 'Filename';
 
 // Posting -> Posted Attachments
 $lang['POSTED_ATTACHMENTS'] = 'Posted Attachments';
 $lang['DELETE_ATTACHMENT'] = 'Delete Attachment';
-$lang['UPLOAD_NEW_VERSION'] = 'Upload New Version';
 
 // Errors -> Download
 $lang['NO_ATTACHMENT_SELECTED'] = 'You haven\'t selected an attachment to download or view.';
