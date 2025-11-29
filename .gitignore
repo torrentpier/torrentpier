@@ -9,7 +9,8 @@ composer-setup.php
 .env
 .php_cs.cache
 data/avatars
-data/uploads
+data/uploads/*
+!data/uploads/.keep
 internal_data/atom
 internal_data/cache
 internal_data/log
