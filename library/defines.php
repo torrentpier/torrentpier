@@ -43,17 +43,6 @@ define('COOKIE_DBG', 'bb_dbg');
 
 // Templates
 define('ADMIN_TPL_DIR', TEMPLATES_DIR . '/admin/');
-define('XS_USE_ISSET', '1');
-define('XS_TPL_PREFIX', 'tpl_');
-define('XS_TAG_NONE', 0);
-define('XS_TAG_BEGIN', 2);
-define('XS_TAG_END', 3);
-define('XS_TAG_INCLUDE', 4);
-define('XS_TAG_IF', 5);
-define('XS_TAG_ELSE', 6);
-define('XS_TAG_ELSEIF', 7);
-define('XS_TAG_ENDIF', 8);
-define('XS_TAG_BEGINELSE', 11);
 
 // Debug
 define('SQL_DEBUG', true); // enable forum sql & cache debug

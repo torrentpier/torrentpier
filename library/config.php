@@ -387,6 +387,12 @@ $bb_cfg['lang'] = [
     ],
 ];
 
+// Twig template engine
+$bb_cfg['twig'] = [
+    'cache_enabled' => true,
+    'debug_bar' => false,
+];
+
 // Templates
 $bb_cfg['templates'] = [
     // Available templates for selecting
