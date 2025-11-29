@@ -656,11 +656,12 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
                 $dl_url .= '&original';
             }
 
-            $template->assign_vars(['TPL_POSTED_ATTACHMENTS' => true]);
+            $template->assign_vars([
+                'FILE_ATTACHED' => true,
+            ]);
             $template->assign_block_vars('attach_row', [
                 'FILE_NAME' => ($attach_ext_id == TORRENT_EXT_ID) ? $post_info['topic_title'] . '.torrent' : $lang['ATTACHMENT'],
                 'ATTACH_FILENAME' => $topic_id,
-                'ATTACH_ID' => $topic_id,
                 'U_VIEW_ATTACHMENT' => $dl_url,
             ]);
         }

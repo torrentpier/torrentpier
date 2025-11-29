@@ -4,7 +4,7 @@
 <style>#clear_file_upload { display: none; }</style>
 
 <tr>
-	<th colspan="2" class="thHead">{L_ADD_ATTACHMENT_TITLE}</th>
+	<th colspan="2" class="thHead"><!-- IF FILE_ATTACHED -->{L_UPDATE_ATTACHMENT}<!-- ELSE -->{L_ADD_ATTACHMENT}<!-- ENDIF --></th>
 </tr>
 <tr>
 	<td class="pad_4"><b>{L_FILENAME}</b></td>
@@ -14,7 +14,7 @@
 			<td class="pad_4">
 				<input type="button" id="clear_file_upload" value="{L_CLEAR}" />
 				<input type="file" name="fileupload" size="45" maxlength="{FILESIZE}" />
-				<input type="submit" class="bold" name="post" value="{L_ADD_ATTACHMENT}" style="margin-left: 8px;" />
+				<input type="submit" class="bold" name="post" value="<!-- IF FILE_ATTACHED -->{L_UPDATE_ATTACHMENT}<!-- ELSE -->{L_ADD_ATTACHMENT}<!-- ENDIF -->" style="margin-left: 8px;" />
 				<p class="small nowrap">{L_ADD_ATTACHMENT_EXPLAIN}</p>
 			</td>
 			<td class="med pad_4" style="padding-left: 12px;">{RULES}</td>
@@ -43,7 +43,7 @@
 <!--========================================================================-->
 <!-- ENDIF / TPL_ADD_ATTACHMENT -->
 
-<!-- IF TPL_POSTED_ATTACHMENTS -->
+<!-- IF FILE_ATTACHED -->
 <!--========================================================================-->
 
 <tbody class="pad_4">
@@ -58,9 +58,6 @@
 <tr>
 	<td class="row1">{L_OPTIONS}</td>
 	<td class="row1">
-		<!-- BEGIN switch_update_attachment -->
-		<input type="submit" name="update_attachment[{attach_row.ATTACH_ID}]" value="{L_UPLOAD_NEW_VERSION}" />&nbsp;
-		<!-- END switch_update_attachment -->
 		<input type="submit" name="del_attachment[{attach_row.ATTACH_FILENAME}]" value="{L_DELETE_ATTACHMENT}" />&nbsp;
 	</td>
 </tr>
@@ -71,4 +68,4 @@
 </tbody>
 
 <!--========================================================================-->
-<!-- ENDIF / TPL_POSTED_ATTACHMENTS -->
+<!-- ENDIF / FILE_ATTACHED -->
