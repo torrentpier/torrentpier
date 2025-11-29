@@ -314,10 +314,21 @@ class Template
         }
 
         if ($handle === 'page_footer') {
-            $loadedTemplates = Loaders\LegacyTemplateLoader::getLoadedTemplates();
-            $count = count($loadedTemplates);
-            $list = $count > 0 ? implode(', ', $loadedTemplates) : '(from cache)';
-            $label = $count > 0 ? "Templates ($count)" : "Templates";
+            $legacyTemplates = Loaders\LegacyTemplateLoader::getLegacyTemplates();
+            $nativeTemplates = Loaders\LegacyTemplateLoader::getNativeTemplates();
+            $legacyCount = count($legacyTemplates);
+            $nativeCount = count($nativeTemplates);
+            $totalCount = $legacyCount + $nativeCount;
+
+            if ($totalCount > 0) {
+                $legacyList = $legacyCount > 0 ? implode(', ', $legacyTemplates) : '';
+                $nativeList = $nativeCount > 0 ? implode(', ', $nativeTemplates) : '';
+                $label = "Legacy: $legacyCount, Native: $nativeCount";
+                $list = $legacyList . ($legacyList && $nativeList ? ' | ' : '') . $nativeList;
+            } else {
+                $label = 'Templates';
+                $list = '(from cache)';
+            }
 
             $output .= sprintf(
                 '<script>document.getElementById("twig-templates").innerHTML = "%s: <b>%s</b>";' .

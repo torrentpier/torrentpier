@@ -15,14 +15,21 @@ use TorrentPier\Template\Extensions\LegacySyntaxExtension;
 
 /**
  * Template loader that converts legacy TorrentPier template syntax to Twig syntax
+ *
+ * Supports two file extensions:
+ * - .tpl - Legacy syntax, automatically converted to Twig
+ * - .twig - Native Twig syntax, no conversion (faster)
  */
 class LegacyTemplateLoader implements LoaderInterface
 {
     private LoaderInterface $loader;
     private LegacySyntaxExtension $syntaxConverter;
 
-    /** @var array<string> Track all loaded templates with includes */
-    private static array $loadedTemplates = [];
+    /** @var array<string> Track legacy templates (converted) */
+    private static array $legacyTemplates = [];
+
+    /** @var array<string> Track native Twig templates (no conversion) */
+    private static array $nativeTemplates = [];
 
     public function __construct(LoaderInterface $loader)
     {
@@ -31,11 +38,27 @@ class LegacyTemplateLoader implements LoaderInterface
     }
 
     /**
-     * Get all templates loaded during this request
+     * Get all templates loaded during this request (legacy + native combined)
      */
     public static function getLoadedTemplates(): array
     {
-        return self::$loadedTemplates;
+        return array_merge(self::$legacyTemplates, self::$nativeTemplates);
+    }
+
+    /**
+     * Get legacy templates that were converted
+     */
+    public static function getLegacyTemplates(): array
+    {
+        return self::$legacyTemplates;
+    }
+
+    /**
+     * Get native Twig templates (no conversion needed)
+     */
+    public static function getNativeTemplates(): array
+    {
+        return self::$nativeTemplates;
     }
 
     /**
@@ -43,26 +66,31 @@ class LegacyTemplateLoader implements LoaderInterface
      */
     public static function resetLoadedTemplates(): void
     {
-        self::$loadedTemplates = [];
+        self::$legacyTemplates = [];
+        self::$nativeTemplates = [];
     }
 
     public function getSourceContext(string $name): Source
     {
-        // Track the loaded template
-        if (!in_array($name, self::$loadedTemplates, true)) {
-            self::$loadedTemplates[] = $name;
+        $source = $this->loader->getSourceContext($name);
+
+        // Native .twig files - skip conversion entirely
+        if (str_ends_with($name, '.twig')) {
+            if (!in_array($name, self::$nativeTemplates, true)) {
+                self::$nativeTemplates[] = $name;
+            }
+            return $source;
         }
 
-        // Get the original source
-        $source = $this->loader->getSourceContext($name);
+        // Track as a legacy template
+        if (!in_array($name, self::$legacyTemplates, true)) {
+            self::$legacyTemplates[] = $name;
+        }
+
+        // Convert legacy syntax if detected
         $content = $source->getCode();
-
-        // Check if we need to convert legacy syntax
         if ($this->syntaxConverter->isLegacySyntax($content)) {
-            // Convert legacy syntax to Twig syntax
             $convertedContent = $this->syntaxConverter->convertLegacySyntax($content);
-
-            // Create a new source with converted content
             return new Source($convertedContent, $source->getName(), $source->getPath());
         }
 
@@ -71,6 +99,11 @@ class LegacyTemplateLoader implements LoaderInterface
 
     public function getCacheKey(string $name): string
     {
+        // Native Twig files don't need special cache key suffix
+        if (str_ends_with($name, '.twig')) {
+            return $this->loader->getCacheKey($name);
+        }
+
         return $this->loader->getCacheKey($name) . '_legacy';
     }
 
