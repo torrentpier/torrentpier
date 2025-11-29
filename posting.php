@@ -538,7 +538,7 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
 $topic_dl_type = $post_info['topic_dl_type'] ?? 0;
 
 if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_type || $is_auth['auth_mod'])) {
-    if ($post_info['tracker_status']) {
+    if (!empty($post_info['tracker_status'])) {
         if (!$topic_type_toggle) {
             $topic_type_toggle = $lang['POST_TOPIC_AS'] . ': ';
         }
