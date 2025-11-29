@@ -43,6 +43,9 @@ beforeEach(function () {
     if (!defined('XS_TAG_BEGINELSE')) {
         define('XS_TAG_BEGINELSE', 8);
     }
+    if (!defined('DBG_USER')) {
+        define('DBG_USER', false);
+    }
 
     // Mock required functions if they don't exist
     if (!function_exists('clean_filename')) {
