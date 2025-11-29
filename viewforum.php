@@ -455,7 +455,7 @@ foreach ($topic_rowset as $topic) {
         'TOR_STATUS_ICON' => isset($topic['tor_status']) ? config()->get('tor_icons')[$topic['tor_status']] : '',
         'TOR_STATUS_TEXT' => isset($topic['tor_status']) ? $lang['TOR_STATUS_NAME'][$topic['tor_status']] : '',
 
-        'ATTACH' => $topic['topic_attachment'] ?? false,
+        'ATTACH' => !empty($topic['attach_ext_id']),
         'STATUS' => $topic['topic_status'],
         'TYPE' => $topic['topic_type'],
         'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL && !$forum_data['allow_reg_tracker']),

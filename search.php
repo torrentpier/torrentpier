@@ -799,7 +799,7 @@ else {
             'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
             'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], config()->get('posts_per_page')),
             'REPLIES' => $moved ? '' : $topic['topic_replies'],
-            'ATTACH' => $topic['topic_attachment'],
+            'ATTACH' => !empty($topic['attach_ext_id']),
             'STATUS' => $topic['topic_status'],
             'TYPE' => $topic['topic_type'],
             'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL),

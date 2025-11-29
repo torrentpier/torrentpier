@@ -108,7 +108,6 @@ class Common
 					topic_first_post_id  INT UNSIGNED NOT NULL DEFAULT '0',
 					topic_last_post_id   INT UNSIGNED NOT NULL DEFAULT '0',
 					topic_last_post_time INT UNSIGNED NOT NULL DEFAULT '0',
-					topic_attachment     INT UNSIGNED NOT NULL DEFAULT '0',
 					PRIMARY KEY (topic_id)
 				) ENGINE = MEMORY
 			");
@@ -123,8 +122,7 @@ class Common
 					COUNT(p.post_id) AS total_posts,
 					MIN(p.post_id) AS topic_first_post_id,
 					MAX(p.post_id) AS topic_last_post_id,
-					MAX(p.post_time) AS topic_last_post_time,
-					IF(t.attach_ext_id > 0, 1, 0) AS topic_attachment
+					MAX(p.post_time) AS topic_last_post_time
 				FROM      " . BB_TOPICS . " t
 				LEFT JOIN " . BB_POSTS . " p ON(p.topic_id = t.topic_id)
 				WHERE t.topic_status != " . TOPIC_MOVED . "
@@ -139,8 +137,7 @@ class Common
 					t.topic_replies        = tmp.total_posts - 1,
 					t.topic_first_post_id  = tmp.topic_first_post_id,
 					t.topic_last_post_id   = tmp.topic_last_post_id,
-					t.topic_last_post_time = tmp.topic_last_post_time,
-					t.topic_attachment     = tmp.topic_attachment
+					t.topic_last_post_time = tmp.topic_last_post_time
 				WHERE
 					t.topic_id = tmp.topic_id
 			");
