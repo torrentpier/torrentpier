@@ -108,9 +108,8 @@ trait FeedEntryMapperTrait
      */
     private function buildEntryLink(array $topic): string
     {
-        // Direct download link if enabled
-        // TODO: check attachment ext id
-        if (config()->get('atom.direct_down')) {
+        // Direct download link if enabled and torrent is registered
+        if (config()->get('atom.direct_down') && !empty($topic['tracker_status'])) {
             return DL_URL . $topic['topic_id'];
         }
 

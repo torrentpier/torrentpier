@@ -42,10 +42,13 @@ class Attachment
             return ['success' => false, 'error' => implode('<br />', $upload->errors), 'ext_id' => null];
         }
 
-        // Update topic with new extension ID
+        // Update the topic table with new information
         DB()->table(BB_TOPICS)
             ->where('topic_id', $topicId)
-            ->update(['attach_ext_id' => $upload->file_ext_id]);
+            ->update([
+                'attach_ext_id' => $upload->file_ext_id,
+                'attach_filesize' => $upload->file_size,
+            ]);
 
         return ['success' => true, 'error' => null, 'ext_id' => $upload->file_ext_id];
     }
@@ -76,7 +79,10 @@ class Attachment
         // Clear attachment info in a topic
         DB()->table(BB_TOPICS)
             ->where('topic_id', $topicId)
-            ->update(['attach_ext_id' => 0]);
+            ->update([
+                'attach_ext_id' => 0,
+                'attach_filesize' => 0,
+            ]);
 
         return true;
     }
