@@ -70,13 +70,8 @@ if ($m3u) {
 
 // Check tor status for frozen downloads
 if (!IS_AM && $t_data['tor_status']) {
-    $row = DB()->table(BB_BT_TORRENTS)
-        ->select('tor_status, poster_id')
-        ->where('topic_id', $topic_id)
-        ->fetch();
-
-    if (isset(config()->get('tor_frozen')[$row['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$row['tor_status']]) && $userdata['user_id'] === $row['poster_id'])) {
-        bb_die(__('TOR_STATUS_FORBIDDEN') . __('TOR_STATUS_NAME.' . $row['tor_status']));
+    if (isset(config()->get('tor_frozen')[$t_data['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$t_data['tor_status']]) && \TorrentPier\Topic\Guard::isAuthor($t_data['poster_id']))) {
+        bb_die(__('TOR_STATUS_FORBIDDEN') . __('TOR_STATUS_NAME.' . $t_data['tor_status']));
     }
 }
 
@@ -89,8 +84,7 @@ if (!$dlCounter->recordDownload($topic_id, $userdata['user_id'], IS_PREMIUM)) {
 // For torrents - add a passkey and send
 if ($t_data['attach_ext_id'] == TORRENT_EXT_ID) {
     // Admins and topic author can download the original unmodified torrent file
-    $is_author = !IS_GUEST && $userdata['user_id'] == $t_data['topic_poster'];
-    if (!(isset($_GET['original']) && (IS_ADMIN || $is_author))) {
+    if (!(isset($_GET['original']) && (IS_ADMIN || \TorrentPier\Topic\Guard::isAuthor($t_data['topic_poster'])))) {
         \TorrentPier\Torrent\Sender::sendWithPasskey($t_data);
     }
 }

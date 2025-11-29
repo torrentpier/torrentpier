@@ -192,12 +192,12 @@ if ($tor_reged && $tor_info) {
             'TOR_TYPE' => is_gold($tor_type),
 
             // torrent status mod
-            'TOR_FROZEN' => !IS_AM ? (isset(config()->get('tor_frozen')[$tor_info['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
+            'TOR_FROZEN' => !IS_AM ? (isset(config()->get('tor_frozen')[$tor_info['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$tor_info['tor_status']]) && \TorrentPier\Topic\Guard::isAuthor($tor_info['poster_id']))) ? true : '' : '',
             'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
             'TOR_STATUS_ICON' => config()->get('tor_icons')[$tor_info['tor_status']],
             'TOR_STATUS_BY' => ($tor_info['checked_user_id'] && ($is_auth['auth_mod'] || $tor_status_by_for_all)) ? ('<span title="' . bb_date($tor_info['checked_time']) . '"> &middot; ' . profile_url($tor_info) . ' &middot; <i>' . humanTime($tor_info['checked_time']) . $lang['TOR_BACK'] . '</i></span>') : '',
             'TOR_STATUS_SELECT' => build_select('sel_status', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
-            'TOR_STATUS_REPLY' => config()->get('tor_comment') && !IS_GUEST && in_array($tor_info['tor_status'], config()->get('tor_reply')) && $userdata['user_id'] == $tor_info['poster_id'] && $t_data['topic_status'] != TOPIC_LOCKED,
+            'TOR_STATUS_REPLY' => config()->get('tor_comment') && !IS_GUEST && in_array($tor_info['tor_status'], config()->get('tor_reply')) && \TorrentPier\Topic\Guard::isAuthor($tor_info['poster_id']) && $t_data['topic_status'] != TOPIC_LOCKED,
             //end torrent status mod
 
             'S_UPLOAD_IMAGE' => $upload_image,

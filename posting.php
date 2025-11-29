@@ -538,9 +538,7 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
 $topic_dl_type = $post_info['topic_dl_type'] ?? 0;
 
 if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_type || $is_auth['auth_mod'])) {
-    $sql = "SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id LIMIT 1";
-    $result = DB()->fetch_row($sql);
-    if (!empty($result['topic_id'])) {
+    if ($post_info['tracker_status']) {
         if (!$topic_type_toggle) {
             $topic_type_toggle = $lang['POST_TOPIC_AS'] . ': ';
         }
@@ -653,9 +651,8 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
         // Show existing attachment for editpost
         if ($file_attached && $mode == 'editpost') {
             // Author can download the original torrent (without a passkey)
-            $is_author = $userdata['user_id'] == $post_info['topic_poster'];
             $dl_url = DL_URL . $topic_id;
-            if ($attach_ext_id == TORRENT_EXT_ID && $is_author) {
+            if ($attach_ext_id == TORRENT_EXT_ID && \TorrentPier\Topic\Guard::isAuthor($post_info['topic_poster'])) {
                 $dl_url .= '&original';
             }
 
