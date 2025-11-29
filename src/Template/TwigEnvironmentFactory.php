@@ -10,10 +10,10 @@
 namespace TorrentPier\Template;
 
 use Twig\Environment;
+use Twig\Error\LoaderError;
 use Twig\Loader\FilesystemLoader;
 use Twig\Cache\FilesystemCache;
 use TorrentPier\Template\Extensions\LegacySyntaxExtension;
-use TorrentPier\Template\Extensions\BlockExtension;
 use TorrentPier\Template\Extensions\LanguageExtension;
 use TorrentPier\Template\Loaders\LegacyTemplateLoader;
 
@@ -24,6 +24,7 @@ class TwigEnvironmentFactory
 {
     /**
      * Create a Twig environment with TorrentPier configuration
+     * @throws LoaderError
      */
     public function create(string $templateDir, string $cacheDir, bool $useCache = true): Environment
     {
@@ -43,7 +44,7 @@ class TwigEnvironmentFactory
         }
 
         // Wrap with a legacy loader for backward compatibility
-        $legacyLoader = new LegacyTemplateLoader($loader, $templateDir);
+        $legacyLoader = new LegacyTemplateLoader($loader);
 
         // Configure Twig environment
         $options = [
@@ -76,9 +77,6 @@ class TwigEnvironmentFactory
     {
         // Legacy syntax conversion extension
         $twig->addExtension(new LegacySyntaxExtension());
-
-        // Block system extension
-        $twig->addExtension(new BlockExtension());
 
         // Language extension
         $twig->addExtension(new LanguageExtension());

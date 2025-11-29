@@ -71,7 +71,7 @@ class LegacySyntaxExtension extends AbstractExtension
         // Convert legacy includes first (simplest)
         $content = $this->convertIncludes($content);
 
-        // Convert legacy blocks (BEGIN/END) - this will also handle IF statements within block context
+        // Convert legacy blocks (BEGIN/END) - this will also handle IF statements within the block context
         $content = $this->convertBlocks($content);
 
         // Convert any remaining IF statements that are not within blocks
@@ -266,7 +266,7 @@ class LegacySyntaxExtension extends AbstractExtension
             $iterations++;
         } while ($condition !== $previousCondition && $iterations < $maxIterations);
 
-        // Step 3: Convert remaining $variable to variable (without $)
+        // Step 3: Convert the remaining $ variable to variable (without $)
         $condition = preg_replace('/\$([a-zA-Z_][a-zA-Z0-9_]*)/', '$1', $condition);
 
         // Step 4: Convert PHP-style negation ! to Twig 'not' operator
@@ -299,7 +299,7 @@ class LegacySyntaxExtension extends AbstractExtension
             $var = $matches[0];
             $fullMatch = $matches[0];
 
-            // Get position in original string to check context
+            // Get position in the original string to check context
             $pos = strpos($condition, $fullMatch);
 
             // Skip if already prefixed with V.
@@ -307,7 +307,7 @@ class LegacySyntaxExtension extends AbstractExtension
                 return $var;
             }
 
-            // Skip if part of block_item.VAR pattern (preceded by _item.)
+            // Skip if part of the block_item.VAR pattern (preceded by _item.)
             if ($pos >= 6 && substr($condition, $pos - 6, 6) === '_item.') {
                 return $var;
             }
@@ -317,7 +317,7 @@ class LegacySyntaxExtension extends AbstractExtension
                 return $var;
             }
 
-            // Skip if has lowercase prefix (like bb_cfg.VAR)
+            // Skip if it has a lowercase prefix (like bb_cfg.VAR)
             if ($pos > 0 && preg_match('/[a-z0-9_]\.$/', substr($condition, 0, $pos))) {
                 return $var;
             }
@@ -338,7 +338,7 @@ class LegacySyntaxExtension extends AbstractExtension
      */
     private function convertBlocks(string $content): string
     {
-        return $this->convertBlocksRecursive($content, []);
+        return $this->convertBlocksRecursive($content);
     }
 
     /**
@@ -378,7 +378,7 @@ class LegacySyntaxExtension extends AbstractExtension
     }
 
     /**
-     * Convert block variables with proper nesting context
+     * Convert block variables with a proper nesting context
      */
     private function convertBlockVariables(string $content, string $currentBlock, array $parentBlocks): string
     {
@@ -410,7 +410,7 @@ class LegacySyntaxExtension extends AbstractExtension
         }
 
         // Convert simple block variables for current level {blockname.VARIABLE}
-        // Use negative lookbehind to ensure we match exact block name, not partial (e.g., don't match 'cf' when looking for 'c')
+        // Use negative lookbehind to ensure we match the exact block name, not partial (e.g., don't match 'cf' when looking for 'c')
         $content = preg_replace_callback('/\{(?<![a-z0-9_])' . $blockNameEscaped . '\.([A-Z0-9_.]+)\}/', function ($matches) use ($currentBlock) {
             $varPath = $matches[1];
             return "{{ {$currentBlock}_item.$varPath|default('') }}";
@@ -570,13 +570,13 @@ class LegacySyntaxExtension extends AbstractExtension
             return '';
         }
 
-        // Security: ensure path is within allowed directories
+        // Security: ensure a path is within allowed directories
         $realPath = realpath($path);
         if ($realPath === false) {
             return "<!-- include_file: file not found: $path -->";
         }
 
-        // Check if file is within BB_ROOT
+        // Check if a file is within BB_ROOT
         $bbRoot = defined('BB_ROOT') ? realpath(BB_ROOT) : realpath('.');
         if (!str_starts_with($realPath, $bbRoot)) {
             return "<!-- include_file: access denied: $path -->";
@@ -606,7 +606,7 @@ class LegacySyntaxExtension extends AbstractExtension
             return (string)$value;
         }
 
-        // Fallback: show variable name, with red highlight in debug mode
+        // Fallback: show the variable name, with red highlight in debug mode
         $varName = 'L_' . $key;
 
         if (defined('DBG_USER') && DBG_USER) {

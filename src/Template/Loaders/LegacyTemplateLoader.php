@@ -19,17 +19,14 @@ use TorrentPier\Template\Extensions\LegacySyntaxExtension;
 class LegacyTemplateLoader implements LoaderInterface
 {
     private LoaderInterface $loader;
-    private string $templateDir;
     private LegacySyntaxExtension $syntaxConverter;
-    private array $cache = [];
 
-    /** @var array<string> Track all loaded templates including includes */
+    /** @var array<string> Track all loaded templates with includes */
     private static array $loadedTemplates = [];
 
-    public function __construct(LoaderInterface $loader, string $templateDir)
+    public function __construct(LoaderInterface $loader)
     {
         $this->loader = $loader;
-        $this->templateDir = $templateDir;
         $this->syntaxConverter = new LegacySyntaxExtension();
     }
 
@@ -51,7 +48,7 @@ class LegacyTemplateLoader implements LoaderInterface
 
     public function getSourceContext(string $name): Source
     {
-        // Track loaded template
+        // Track the loaded template
         if (!in_array($name, self::$loadedTemplates, true)) {
             self::$loadedTemplates[] = $name;
         }
@@ -65,7 +62,7 @@ class LegacyTemplateLoader implements LoaderInterface
             // Convert legacy syntax to Twig syntax
             $convertedContent = $this->syntaxConverter->convertLegacySyntax($content);
 
-            // Create new source with converted content
+            // Create a new source with converted content
             return new Source($convertedContent, $source->getName(), $source->getPath());
         }
 
