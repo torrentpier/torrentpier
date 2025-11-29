@@ -77,7 +77,7 @@ class UserFeedProvider implements FeedProviderInterface
     {
         $sql = "
             SELECT
-                t.topic_id, t.topic_title, t.topic_status, t.forum_id,
+                t.topic_id, t.topic_title, t.topic_status, t.tracker_status, t.forum_id,
                 u1.username AS first_username,
                 p1.post_time AS topic_first_post_time,
                 p1.post_edit_time AS topic_first_post_edit_time,

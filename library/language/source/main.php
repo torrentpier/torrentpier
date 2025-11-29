@@ -1069,12 +1069,9 @@ $lang['SEARCH_RELEASES'] = 'Releases';
 $lang['TOR_SEARCH_TITLE'] = 'Torrent search options';
 $lang['OPEN_TOPIC'] = 'Open topic';
 
-$lang['ALLOWED_ONLY_1ST_POST_ATTACH'] = 'Posting torrents allowed only in first post';
-$lang['ALLOWED_ONLY_1ST_POST_REG'] = 'Registering torrents allowed only from first post';
 $lang['REG_NOT_ALLOWED_IN_THIS_FORUM'] = 'Could not register torrent in this forum';
 $lang['ALREADY_REG'] = 'Torrent already registered';
 $lang['NOT_TORRENT'] = 'This file is not torrent';
-$lang['ONLY_1_TOR_PER_TOPIC'] = 'You can register only one torrent in one topic';
 $lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Active torrents';
 

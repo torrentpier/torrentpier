@@ -305,6 +305,8 @@ class Registry
             return false;
         }
 
+        $torStatus = TOR_NOT_APPROVED;
+
         if (config()->get('premod') && !IS_AM) {
             // Get section forums (parent and siblings)
             $sectionParent = $forumParent ?: $forumId;
