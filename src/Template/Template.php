@@ -10,27 +10,20 @@
 namespace TorrentPier\Template;
 
 use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
-use TorrentPier\Template\Extensions\LegacySyntaxExtension;
-use TorrentPier\Template\Extensions\BlockExtension;
-use TorrentPier\Template\Extensions\LanguageExtension;
-use TorrentPier\Template\Loaders\LegacyTemplateLoader;
 
 /**
  * Modern Template class using Twig internally with full backward compatibility
- * Implements singleton pattern while maintaining all existing Template methods
+ * Implements a singleton pattern while maintaining all existing Template methods
  */
 class Template
 {
     private static ?Template $instance = null;
     private static array $instances = [];
-    private static array $renderedTemplates = [];
     private static float $totalRenderTime = 0;
 
     private ?Environment $twig = null;
-    private ?TwigEnvironmentFactory $factory = null;
 
-    // Backward compatibility properties - mirror original Template class
+    // Backward compatibility properties - mirror the original Template class
     public array $_tpldata = [
         '.' => [
             0 => []
@@ -44,19 +37,15 @@ class Template
     public string $root = '';
     public string $cachedir = '';
     public string $tpldir = '';
-    public string $tpldef = 'default';
     public int $use_cache = 1;
     public string $tpl = '';
-    public string $cur_tpl = '';
     public array $replace = [];
     public string $preparse = '';
     public string $postparse = '';
-    public array $style_config = [];
     public array $lang = [];
-    public array $uncompiled_code = [];
 
     /**
-     * Private constructor for singleton pattern
+     * Private constructor for a singleton pattern
      */
     private function __construct(string $root = '.')
     {
@@ -71,7 +60,7 @@ class Template
         $this->use_cache = config()->get('xs_use_cache');
         $this->cachedir = CACHE_DIR . '/';
 
-        // Check template directory exists
+        // Check the template directory exists
         if (!is_dir($this->root)) {
             die("Theme ({$this->tpl}) directory not found");
         }
@@ -113,8 +102,8 @@ class Template
      */
     private function initializeTwig(): void
     {
-        $this->factory = new TwigEnvironmentFactory();
-        $this->twig = $this->factory->create($this->root, $this->cachedir, $this->use_cache);
+        $factory = new TwigEnvironmentFactory();
+        $this->twig = $factory->create($this->root, $this->cachedir, $this->use_cache);
 
         // Add template variables to Twig globals
         $this->twig->addGlobal('_tpldata', $this->_tpldata);
@@ -131,7 +120,7 @@ class Template
     }
 
     /**
-     * Assigns template filename for handle (backward compatibility)
+     * Assigns a template filename for a handle (backward compatibility)
      */
     public function set_filename(string $handle, string $filename, bool $xs_include = false, bool $quiet = false): bool
     {
@@ -140,7 +129,7 @@ class Template
         $this->files_cache[$handle] = '';
         $this->files_cache2[$handle] = '';
 
-        // Check if we have valid filename
+        // Check if we have a valid filename
         if (!$this->files[$handle]) {
             if ($xs_include || $quiet) {
                 return false;
@@ -164,7 +153,7 @@ class Template
             die('Template->make_filename(): Error - template file not found: <br /><br />' . hide_bb_path($this->files[$handle]));
         }
 
-        // Check if we should recompile cache
+        // Check if we should recompile the cache
         if (!empty($this->files_cache[$handle])) {
             $cache_time = @filemtime($this->files_cache[$handle]);
             if (@filemtime($this->files[$handle]) > $cache_time) {
@@ -258,7 +247,7 @@ class Template
             }
         }
 
-        // Check if handle exists
+        // Check if a handle exists
         if (empty($this->files[$handle]) && empty($this->files_cache[$handle])) {
             die("Template->loadfile(): No files found for handle $handle");
         }
@@ -272,7 +261,7 @@ class Template
 
         $template_full_path = $this->files[$handle];
 
-        // Get template name relative to configured template directories
+        // Get a template name relative to configured template directories
         $template_name = $this->getRelativeTemplateName($template_full_path);
 
         // Prepare template context
@@ -285,7 +274,7 @@ class Template
             ]
         );
 
-        // Reset tracking on first template (page_header) - BEFORE render
+        // Reset tracking on the first template (page_header) - BEFORE render
         if ($handle === 'page_header') {
             self::$totalRenderTime = 0;
             Loaders\LegacyTemplateLoader::resetLoadedTemplates();
@@ -331,7 +320,7 @@ class Template
             $output = preg_replace('/(<body[^>]*>)/i', '$1' . $debugBar, $output, 1);
         }
 
-        // Update debug bar with final stats in page_footer
+        // Update the debug bar with final stats in page_footer
         if ($handle === 'page_footer') {
             $loadedTemplates = Loaders\LegacyTemplateLoader::getLoadedTemplates();
             $totalTime = self::$totalRenderTime;
@@ -372,11 +361,11 @@ class Template
     }
 
     /**
-     * Generate filename with path (backward compatibility)
+     * Generate a filename with a path (backward compatibility)
      */
     public function make_filename(string $filename, bool $xs_include = false): string
     {
-        // Check replacements list
+        // Check the replacement list
         if (!$xs_include && isset($this->replace[$filename])) {
             $filename = $this->replace[$filename];
         }
@@ -427,7 +416,6 @@ class Template
     }
 
 
-
     /**
      * Convert absolute template path to relative template name for Twig
      */
@@ -439,18 +427,18 @@ class Template
         // Check if it's an admin template
         $adminTemplateDir = realpath(dirname($this->root) . '/admin');
         if ($adminTemplateDir && str_starts_with($template_full_path, $adminTemplateDir . '/')) {
-            // Admin template - return relative path from admin directory
+            // Admin template - return a relative path from the admin directory
             return str_replace($adminTemplateDir . '/', '', $template_full_path);
         }
 
-        // Check if it's a regular template in current directory
+        // Check if it's a regular template in the current directory
         $rootDir = realpath($this->root);
         if ($rootDir && str_starts_with($template_full_path, $rootDir . '/')) {
-            // Regular template - return relative path from root directory
+            // Regular template - return a relative path from the root directory
             return str_replace($rootDir . '/', '', $template_full_path);
         }
 
-        // Check if it's a template in default directory (fallback)
+        // Check if it's a template in the default directory (fallback)
         $defaultTemplateDir = realpath(dirname($this->root) . '/default');
         if ($defaultTemplateDir && str_starts_with($template_full_path, $defaultTemplateDir . '/')) {
             // Default template - return relative path from default directory
@@ -462,7 +450,7 @@ class Template
     }
 
     /**
-     * Get list of available templates for debugging
+     * Get a list of available templates for debugging
      */
     private function getAvailableTemplates(): array
     {
@@ -483,58 +471,10 @@ class Template
                 return $templates;
             }
         } catch (\Exception $e) {
-            // If we can't get templates from loader, return what we know
+            // If we can't get templates from the loader, return what we know
         }
 
         return array_keys($this->files);
-    }
-
-    /**
-     * Debug method to dump template data
-     */
-    public function debugDump(string $title = 'Template Debug', bool $die = false): void
-    {
-        echo "<h2>$title</h2>";
-        echo "<h3>_tpldata structure:</h3>";
-        echo "<pre>";
-        print_r($this->_tpldata);
-        echo "</pre>";
-
-        echo "<h3>Root variables (vars):</h3>";
-        echo "<pre>";
-        print_r($this->vars);
-        echo "</pre>";
-
-        echo "<h3>Language variables (first 10):</h3>";
-        echo "<pre>";
-        print_r(array_slice($this->lang, 0, 10, true));
-        echo "</pre>";
-
-        echo "<h3>Template files:</h3>";
-        echo "<pre>";
-        print_r($this->files);
-        echo "</pre>";
-
-        if ($die) {
-            die();
-        }
-    }
-
-    /**
-     * Debug method to dump specific block data
-     */
-    public function debugBlock(string $blockName): void
-    {
-        echo "<h3>Block '$blockName' data:</h3>";
-        echo "<pre>";
-        $blockKey = $blockName . '.';
-        if (isset($this->_tpldata[$blockKey])) {
-            print_r($this->_tpldata[$blockKey]);
-        } else {
-            echo "Block '$blockName' not found in _tpldata\n";
-            echo "Available blocks: " . implode(', ', array_keys($this->_tpldata)) . "\n";
-        }
-        echo "</pre>";
     }
 
     /**
