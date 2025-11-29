@@ -22,45 +22,39 @@ class Template
 
     private ?Environment $twig = null;
 
-    /** @var array Block data for template loops */
-    public array $_tpldata = ['.' => [0 => []]];
+    /** Block data for template loops */
+    private array $blockData = ['.' => [0 => []]];
 
-    /** @var array Template variables (reference to _tpldata['.'][0]) */
-    public array $vars = [];
+    /** Template variables (reference to blockData['.'][0]) */
+    private array $variables = [];
 
-    /** @var array Registered template files by handle */
-    public array $files = [];
+    /** Registered template files by handle */
+    private array $files = [];
 
-    /** @var string Template root directory */
-    public string $root = '';
+    /** Template root directory */
+    private string $rootDir;
 
-    /** @var string Cache directory */
-    public string $cachedir = '';
+    /** Cache directory */
+    private string $cacheDir;
 
-    /** @var string Current template name */
-    public string $tpl = '';
+    /** Current template name */
+    private string $templateName;
 
-    /** @var string Pre-parse template handle */
-    public string $preparse = '';
-
-    /** @var string Post-parse template handle */
-    public string $postparse = '';
-
-    /** @var array Language variables reference */
-    public array $lang = [];
+    /** Language variables reference */
+    private array $lang = [];
 
     private function __construct(string $root = '.')
     {
         global $lang;
 
-        $this->vars = &$this->_tpldata['.'][0];
-        $this->root = $root;
-        $this->tpl = basename($root);
+        $this->variables = &$this->blockData['.'][0];
+        $this->rootDir = $root;
+        $this->templateName = basename($root);
         $this->lang = &$lang;
-        $this->cachedir = CACHE_DIR . '/';
+        $this->cacheDir = CACHE_DIR . '/';
 
-        if (!is_dir($this->root)) {
-            die("Template directory not found: $this->tpl");
+        if (!is_dir($this->rootDir)) {
+            die("Template directory not found: $this->templateName");
         }
 
         $this->initializeTwig();
@@ -82,44 +76,14 @@ class Template
         return self::$instances[$key];
     }
 
-    private function initializeTwig(): void
+    public function getCacheDir(): string
     {
-        $useCache = (bool)config()->get('twig.cache_enabled', true);
-        $factory = new TwigEnvironmentFactory();
-        $this->twig = $factory->create($this->root, $this->cachedir, $useCache);
-
-        $this->twig->addGlobal('_tpldata', $this->_tpldata);
-        $this->twig->addGlobal('V', $this->vars);
-        $this->twig->addGlobal('L', $this->lang);
+        return $this->cacheDir;
     }
 
-    public function getTwig(): Environment
+    public function getVar(string $name, mixed $default = null): mixed
     {
-        return $this->twig;
-    }
-
-    /**
-     * Register template file for a handle
-     */
-    public function set_filename(string $handle, string $filename, bool $quiet = false): bool
-    {
-        $this->files[$handle] = $this->make_filename($filename);
-
-        if (!$this->files[$handle]) {
-            if ($quiet) {
-                return false;
-            }
-            die("Template error: invalid template $filename");
-        }
-
-        if (!@file_exists($this->files[$handle])) {
-            if ($quiet) {
-                return false;
-            }
-            die('Template not found: ' . hide_bb_path($this->files[$handle]));
-        }
-
-        return true;
+        return $this->variables[$name] ?? $default;
     }
 
     /**
@@ -128,51 +92,50 @@ class Template
     public function set_filenames(array $filenames): void
     {
         foreach ($filenames as $handle => $filename) {
-            $this->set_filename($handle, $filename);
+            $this->registerTemplate($handle, $filename);
         }
     }
 
     /**
      * Assign template variables
      */
-    public function assign_vars(array $vararray): void
+    public function assign_vars(array $variables): void
     {
-        foreach ($vararray as $key => $val) {
-            $this->vars[$key] = $val;
+        foreach ($variables as $key => $value) {
+            $this->variables[$key] = $value;
         }
-        $this->twig->addGlobal('V', $this->vars);
+        $this->twig->addGlobal('V', $this->variables);
     }
 
     /**
      * Assign single template variable
      */
-    public function assign_var(string $varname, mixed $varval = true): void
+    public function assign_var(string $name, mixed $value = true): void
     {
-        $this->vars[$varname] = $varval;
-        $this->twig->addGlobal('V', $this->vars);
+        $this->variables[$name] = $value;
+        $this->twig->addGlobal('V', $this->variables);
     }
 
     /**
      * Assign block variables for loops
      */
-    public function assign_block_vars(string $blockname, array $vararray): bool
+    public function assign_block_vars(string $block, array $variables): bool
     {
-        if (str_contains($blockname, '.')) {
-            // Nested block
-            $blocks = explode('.', $blockname);
-            $blockcount = count($blocks) - 1;
+        if (str_contains($block, '.')) {
+            $blocks = explode('.', $block);
+            $blockCount = count($blocks) - 1;
 
-            $str = &$this->_tpldata;
-            for ($i = 0; $i < $blockcount; $i++) {
-                $str = &$str[$blocks[$i] . '.'];
-                $str = &$str[(is_countable($str) ? count($str) : 0) - 1];
+            $data = &$this->blockData;
+            for ($i = 0; $i < $blockCount; $i++) {
+                $data = &$data[$blocks[$i] . '.'];
+                $data = &$data[(is_countable($data) ? count($data) : 0) - 1];
             }
-            $str[$blocks[$blockcount] . '.'][] = $vararray;
+            $data[$blocks[$blockCount] . '.'][] = $variables;
         } else {
-            $this->_tpldata[$blockname . '.'][] = $vararray;
+            $this->blockData[$block . '.'][] = $variables;
         }
 
-        $this->twig->addGlobal('_tpldata', $this->_tpldata);
+        $this->twig->addGlobal('_tpldata', $this->blockData);
         return true;
     }
 
@@ -181,23 +144,6 @@ class Template
      */
     public function pparse(string $handle): bool
     {
-        // Handle pre- / post-parse
-        if ($this->preparse || $this->postparse) {
-            $preparse = $this->preparse;
-            $postparse = $this->postparse;
-            $this->preparse = '';
-            $this->postparse = '';
-
-            if ($preparse) {
-                $this->pparse($preparse);
-            }
-            if ($postparse) {
-                $str = $handle;
-                $handle = $postparse;
-                $this->pparse($str);
-            }
-        }
-
         if (empty($this->files[$handle])) {
             die("Template error: no file for handle '$handle'");
         }
@@ -208,9 +154,9 @@ class Template
         $templateName = $this->getRelativeTemplateName($templatePath);
 
         $context = [
-            '_tpldata' => $this->_tpldata,
+            '_tpldata' => $this->blockData,
             'L' => $this->lang,
-            'V' => $this->vars
+            'V' => $this->variables
         ];
 
         // Reset tracking on page_header
@@ -230,10 +176,129 @@ class Template
         $renderTime = (microtime(true) - $renderStart) * 1000;
         self::$totalRenderTime += $renderTime;
 
-        // Debug bar (if enabled in config)
+        $output = $this->injectDebugBar($handle, $output, $renderTime);
+
+        echo $output;
+        return true;
+    }
+
+    /**
+     * Initialize Twig environment
+     */
+    private function initializeTwig(): void
+    {
+        $useCache = (bool)config()->get('twig.cache_enabled', true);
+        $factory = new TwigEnvironmentFactory();
+        $this->twig = $factory->create($this->rootDir, $this->cacheDir, $useCache);
+
+        $this->twig->addGlobal('_tpldata', $this->blockData);
+        $this->twig->addGlobal('V', $this->variables);
+        $this->twig->addGlobal('L', $this->lang);
+    }
+
+    /**
+     * Register template file
+     */
+    private function registerTemplate(string $handle, string $filename): void
+    {
+        $this->files[$handle] = $this->buildTemplatePath($filename);
+
+        if (!$this->files[$handle]) {
+            die("Template error: invalid template $filename");
+        }
+
+        if (!@file_exists($this->files[$handle])) {
+            if (false) {
+                return;
+            }
+            die('Template not found: ' . hide_bb_path($this->files[$handle]));
+        }
+    }
+
+    /**
+     * Build a full template path
+     */
+    private function buildTemplatePath(string $filename): string
+    {
+        // Handle admin templates
+        if (str_starts_with($filename, 'admin/')) {
+            $adminDir = dirname($this->rootDir) . '/admin';
+            if (is_dir($adminDir)) {
+                return $adminDir . '/' . substr($filename, 6);
+            }
+        }
+
+        // Relative path
+        if ($filename[0] !== '/' && (strlen($filename) < 2 || $filename[1] !== ':')) {
+            return $this->rootDir . '/' . $filename;
+        }
+
+        return $filename;
+    }
+
+    /**
+     * Initialize standard template variables
+     */
+    private function initStartupVars(): void
+    {
+        $this->variables['LANG'] ??= config()->get('default_lang');
+
+        $tpl = $this->rootDir . '/';
+        if (str_starts_with($tpl, './')) {
+            $tpl = substr($tpl, 2);
+        }
+        $this->variables['TEMPLATE'] ??= $tpl;
+        $this->variables['TEMPLATE_NAME'] ??= $this->templateName;
+
+        $this->twig->addGlobal('V', $this->variables);
+    }
+
+    /**
+     * Convert full path to Twig template name
+     */
+    private function getRelativeTemplateName(string $fullPath): string
+    {
+        $fullPath = realpath($fullPath) ?: $fullPath;
+
+        // Admin template - use @admin namespace
+        $adminDir = realpath(dirname($this->rootDir) . '/admin');
+        if ($adminDir && str_starts_with($fullPath, $adminDir . '/')) {
+            return '@admin/' . str_replace($adminDir . '/', '', $fullPath);
+        }
+
+        // Current theme directory
+        $rootDir = realpath($this->rootDir);
+        if ($rootDir && str_starts_with($fullPath, $rootDir . '/')) {
+            return str_replace($rootDir . '/', '', $fullPath);
+        }
+
+        // Default theme fallback
+        $defaultDir = realpath(dirname($this->rootDir) . '/default');
+        if ($defaultDir && str_starts_with($fullPath, $defaultDir . '/')) {
+            return str_replace($defaultDir . '/', '', $fullPath);
+        }
+
+        return basename($fullPath);
+    }
+
+    /**
+     * Injects the debug bar into the given output for debugging purposes.
+     *
+     * @param string $handle The handle representing the section of the page being rendered (e.g., 'page_header', 'page_footer').
+     * @param string $output The current HTML output of the section being rendered.
+     * @param float $renderTime The time taken to render the section, in milliseconds.
+     *
+     * @return string The modified HTML output with the debug bar included, if enabled, or the original output if the debug bar is disabled.
+     */
+    private function injectDebugBar(string $handle, string $output, float $renderTime): string
+    {
         $showDebugBar = config()->get('twig.debug_bar', false);
 
-        if ($showDebugBar && $handle === 'page_header' && stripos($output, '<body') !== false) {
+        if (!$showDebugBar) {
+            return $output;
+        }
+
+        if ($handle === 'page_header' && stripos($output, '<body') !== false) {
             $debugBar = sprintf(
                 '<div id="twig-debug-bar" style="position:fixed;top:0;left:0;right:0;z-index:99999;' .
                 'background:linear-gradient(90deg,#1a472a,#2d5a3d);color:#90EE90;font-family:monospace;' .
@@ -245,13 +310,13 @@ class Template
                 '<span style="margin-left:auto;opacity:0.7;">TorrentPier Twig Engine</span>' .
                 '</div><style>body{padding-top:28px !important;}</style>',
                 Environment::VERSION,
-                $this->tpl,
+                $this->templateName,
                 $renderTime
             );
             $output = preg_replace('/(<body[^>]*>)/i', '$1' . $debugBar, $output, 1);
         }
 
-        if ($showDebugBar && $handle === 'page_footer') {
+        if ($handle === 'page_footer') {
             $loadedTemplates = Loaders\LegacyTemplateLoader::getLoadedTemplates();
             $count = count($loadedTemplates);
             $list = $count > 0 ? implode(', ', $loadedTemplates) : '(from cache)';
@@ -266,82 +331,6 @@ class Template
             );
         }
 
-        echo $output;
-        return true;
-    }
-
-    /**
-     * Build a full template path
-     */
-    public function make_filename(string $filename): string
-    {
-        // Handle admin templates
-        if (str_starts_with($filename, 'admin/')) {
-            $adminDir = dirname($this->root) . '/admin';
-            if (is_dir($adminDir)) {
-                return $adminDir . '/' . substr($filename, 6);
-            }
-        }
-
-        // Relative path
-        if ($filename[0] !== '/' && (strlen($filename) < 2 || $filename[1] !== ':')) {
-            return $this->root . '/' . $filename;
-        }
-
-        return $filename;
-    }
-
-    /**
-     * Initialize standard template variables
-     */
-    private function initStartupVars(): void
-    {
-        $this->vars['LANG'] ??= config()->get('default_lang');
-
-        $tpl = $this->root . '/';
-        if (str_starts_with($tpl, './')) {
-            $tpl = substr($tpl, 2);
-        }
-        $this->vars['TEMPLATE'] ??= $tpl;
-        $this->vars['TEMPLATE_NAME'] ??= $this->tpl;
-
-        $this->twig->addGlobal('V', $this->vars);
-    }
-
-    /**
-     * Convert full path to Twig template name
-     */
-    private function getRelativeTemplateName(string $fullPath): string
-    {
-        $fullPath = realpath($fullPath) ?: $fullPath;
-
-        // Admin template - use @admin namespace
-        $adminDir = realpath(dirname($this->root) . '/admin');
-        if ($adminDir && str_starts_with($fullPath, $adminDir . '/')) {
-            return '@admin/' . str_replace($adminDir . '/', '', $fullPath);
-        }
-
-        // Current theme directory
-        $rootDir = realpath($this->root);
-        if ($rootDir && str_starts_with($fullPath, $rootDir . '/')) {
-            return str_replace($rootDir . '/', '', $fullPath);
-        }
-
-        // Default theme fallback
-        $defaultDir = realpath(dirname($this->root) . '/default');
-        if ($defaultDir && str_starts_with($fullPath, $defaultDir . '/')) {
-            return str_replace($defaultDir . '/', '', $fullPath);
-        }
-
-        return basename($fullPath);
-    }
-
-    /**
-     * Reset instances (for testing)
-     */
-    public static function destroyInstances(): void
-    {
-        self::$instance = null;
-        self::$instances = [];
+        return $output;
     }
 }

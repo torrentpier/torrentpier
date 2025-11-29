@@ -35,7 +35,7 @@ switch ($mode) {
     case 'clear_template_cache':
         global $template;
 
-        $twigCacheDir = $template->cachedir . 'twig';
+        $twigCacheDir = $template->getCacheDir() . 'twig';
         if (is_dir($twigCacheDir)) {
             $iterator = new \RecursiveIteratorIterator(
                 new \RecursiveDirectoryIterator($twigCacheDir, \FilesystemIterator::SKIP_DOTS),
