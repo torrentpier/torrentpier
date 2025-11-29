@@ -37,6 +37,7 @@ class LegacySyntaxExtension extends AbstractExtension
             new TwigFunction('get_var', [$this, 'getVariable']),
             new TwigFunction('get_lang', [$this, 'getLanguageVariable']),
             new TwigFunction('get_constant', [$this, 'getConstant']),
+            new TwigFunction('include_file', [$this, 'includeFile'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -54,6 +55,17 @@ class LegacySyntaxExtension extends AbstractExtension
     {
         // Normalize variations: <!-- ELSE IF --> to <!-- ELSEIF -->
         $content = preg_replace('/<!-- ELSE\s+IF\s+/i', '<!-- ELSEIF ', $content);
+
+        // Convert PHP includes to Twig include_file function
+        // Pattern: include($V['VAR']); -> {{ include_file(V.VAR) }}
+        $content = preg_replace_callback(
+            '/<\?php\s+include\s*\(\s*\$V\[\s*[\'"]([^\'"]+)[\'"]\s*\]\s*\)\s*;\s*\?>/',
+            function ($matches) {
+                $varName = $matches[1];
+                return "{{ include_file(V.$varName) }}";
+            },
+            $content
+        );
 
         // Convert legacy includes first (simplest)
         $content = $this->convertIncludes($content);
@@ -545,6 +557,37 @@ class LegacySyntaxExtension extends AbstractExtension
     public function getConstant(string $name): mixed
     {
         return defined($name) ? constant($name) : '';
+    }
+
+    /**
+     * Include a file from a path and return its contents
+     * Used to safely include HTML/PHP files in Twig templates
+     */
+    public function includeFile(?string $path): string
+    {
+        if (empty($path)) {
+            return '';
+        }
+
+        // Security: ensure path is within allowed directories
+        $realPath = realpath($path);
+        if ($realPath === false) {
+            return "<!-- include_file: file not found: $path -->";
+        }
+
+        // Check if file is within BB_ROOT
+        $bbRoot = defined('BB_ROOT') ? realpath(BB_ROOT) : realpath('.');
+        if (!str_starts_with($realPath, $bbRoot)) {
+            return "<!-- include_file: access denied: $path -->";
+        }
+
+        // Read and return file content
+        $content = file_get_contents($realPath);
+        if ($content === false) {
+            return "<!-- include_file: cannot read: $path -->";
+        }
+
+        return $content;
     }
 
     /**
