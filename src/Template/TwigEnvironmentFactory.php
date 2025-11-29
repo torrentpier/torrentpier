@@ -13,6 +13,8 @@ use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Loader\FilesystemLoader;
 use Twig\Cache\FilesystemCache;
+use Twig\TwigFunction;
+use Twig\TwigFilter;
 use TorrentPier\Template\Extensions\LegacySyntaxExtension;
 use TorrentPier\Template\Extensions\LanguageExtension;
 use TorrentPier\Template\Loaders\LegacyTemplateLoader;
@@ -94,25 +96,25 @@ class TwigEnvironmentFactory
         $twig->addGlobal('lang', $GLOBALS['lang'] ?? []);
 
         // Add TorrentPier configuration functions
-        $twig->addFunction(new \Twig\TwigFunction('config', function ($key = null) {
+        $twig->addFunction(new TwigFunction('config', function ($key = null) {
             return $key ? config()->get($key) : config();
         }));
 
-        $twig->addFunction(new \Twig\TwigFunction('lang', function ($key = null, $default = '') {
+        $twig->addFunction(new TwigFunction('lang', function ($key = null, $default = '') {
             return $key ? lang()->get($key, $default) : lang();
         }));
 
         // Add utility functions
-        $twig->addFunction(new \Twig\TwigFunction('make_url', 'make_url'));
-        $twig->addFunction(new \Twig\TwigFunction('bb_date', 'bb_date'));
-        $twig->addFunction(new \Twig\TwigFunction('humn_size', 'humn_size'));
-        $twig->addFunction(new \Twig\TwigFunction('profile_url', 'profile_url'));
-        $twig->addFunction(new \Twig\TwigFunction('render_flag', 'render_flag'));
+        $twig->addFunction(new TwigFunction('make_url', 'make_url'));
+        $twig->addFunction(new TwigFunction('bb_date', 'bb_date'));
+        $twig->addFunction(new TwigFunction('humn_size', 'humn_size'));
+        $twig->addFunction(new TwigFunction('profile_url', 'profile_url'));
+        $twig->addFunction(new TwigFunction('render_flag', 'render_flag'));
 
         // Add filters for backward compatibility
-        $twig->addFilter(new \Twig\TwigFilter('htmlspecialchars', 'htmlspecialchars'));
-        $twig->addFilter(new \Twig\TwigFilter('clean_filename', 'clean_filename'));
-        $twig->addFilter(new \Twig\TwigFilter('hide_bb_path', 'hide_bb_path'));
-        $twig->addFilter(new \Twig\TwigFilter('str_short', 'str_short'));
+        $twig->addFilter(new TwigFilter('htmlspecialchars', 'htmlspecialchars'));
+        $twig->addFilter(new TwigFilter('clean_filename', 'clean_filename'));
+        $twig->addFilter(new TwigFilter('hide_bb_path', 'hide_bb_path'));
+        $twig->addFilter(new TwigFilter('str_short', 'str_short'));
     }
 }

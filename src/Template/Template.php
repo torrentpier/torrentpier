@@ -54,7 +54,7 @@ class Template
         $this->cacheDir = CACHE_DIR . '/';
 
         if (!is_dir($this->rootDir)) {
-            die("Template directory not found: $this->templateName");
+            throw new \RuntimeException("Template directory not found: $this->templateName");
         }
 
         $this->initializeTwig();
@@ -145,7 +145,7 @@ class Template
     public function pparse(string $handle): bool
     {
         if (empty($this->files[$handle])) {
-            die("Template error: no file for handle '$handle'");
+            throw new \RuntimeException("Template error: no file for handle '$handle'");
         }
 
         $this->initStartupVars();
@@ -170,7 +170,7 @@ class Template
         try {
             $output = $this->twig->render($templateName, $context);
         } catch (\Exception $e) {
-            die("Template render error '$handle': " . $e->getMessage());
+            throw new \RuntimeException("Template render error '$handle': " . $e->getMessage(), 0, $e);
         }
 
         $renderTime = (microtime(true) - $renderStart) * 1000;
@@ -204,14 +204,11 @@ class Template
         $this->files[$handle] = $this->buildTemplatePath($filename);
 
         if (!$this->files[$handle]) {
-            die("Template error: invalid template $filename");
+            throw new \RuntimeException("Template error: invalid template $filename");
         }
 
         if (!@file_exists($this->files[$handle])) {
-            if (false) {
-                return;
-            }
-            die('Template not found: ' . hide_bb_path($this->files[$handle]));
+            throw new \RuntimeException('Template not found: ' . hide_bb_path($this->files[$handle]));
         }
     }
 

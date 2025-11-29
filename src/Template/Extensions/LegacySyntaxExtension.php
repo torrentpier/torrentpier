@@ -294,36 +294,22 @@ class LegacySyntaxExtension extends AbstractExtension
         }
 
         // Step 6: Convert uppercase variables to V.VARIABLE
-        // Skip if: already has V. prefix, is part of _item. access, is inside constant(), has lowercase prefix
-        $condition = preg_replace_callback('/\b([A-Z][A-Z0-9_]*)\b/', function ($matches) use ($condition) {
-            $var = $matches[0];
-            $fullMatch = $matches[0];
+        // Use negative lookbehinds to skip if preceded by: V., _item., or any word char + dot
+        // Use negative lookahead to skip variables followed by dot (they're already object refs)
+        $condition = preg_replace_callback(
+            '/(?<!V\.)(?<!_item\.)(?<!\w\.)\b([A-Z][A-Z0-9_]*)\b(?!\.)/',
+            function ($matches) use ($condition) {
+                $var = $matches[0];
 
-            // Get position in the original string to check context
-            $pos = strpos($condition, $fullMatch);
+                // Skip if inside constant('...') - this is a global check, intentionally
+                if (preg_match('/constant\s*\(\s*[\'"]' . preg_quote($var, '/') . '[\'"]\s*\)/', $condition)) {
+                    return $var;
+                }
 
-            // Skip if already prefixed with V.
-            if ($pos >= 2 && substr($condition, $pos - 2, 2) === 'V.') {
-                return $var;
-            }
-
-            // Skip if part of the block_item.VAR pattern (preceded by _item.)
-            if ($pos >= 6 && substr($condition, $pos - 6, 6) === '_item.') {
-                return $var;
-            }
-
-            // Skip if inside constant('...')
-            if (preg_match('/constant\s*\(\s*[\'"]' . preg_quote($var, '/') . '[\'"]\s*\)/', $condition)) {
-                return $var;
-            }
-
-            // Skip if it has a lowercase prefix (like bb_cfg.VAR)
-            if ($pos > 0 && preg_match('/[a-z0-9_]\.$/', substr($condition, 0, $pos))) {
-                return $var;
-            }
-
-            return 'V.' . $var;
-        }, $condition);
+                return 'V.' . $var;
+            },
+            $condition
+        );
 
         // Step 7: Convert word-based logical operators (after variable conversion to avoid conflicts)
         $condition = preg_replace('/\band\b/i', 'and', $condition);
@@ -576,9 +562,10 @@ class LegacySyntaxExtension extends AbstractExtension
             return "<!-- include_file: file not found: $path -->";
         }
 
-        // Check if a file is within BB_ROOT
+        // Check if a file is within BB_ROOT (with trailing separator to prevent prefix attacks)
         $bbRoot = defined('BB_ROOT') ? realpath(BB_ROOT) : realpath('.');
-        if (!str_starts_with($realPath, $bbRoot)) {
+        $bbRootWithSeparator = rtrim($bbRoot, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (!str_starts_with($realPath, $bbRootWithSeparator) && $realPath !== $bbRoot) {
             return "<!-- include_file: access denied: $path -->";
         }
 
