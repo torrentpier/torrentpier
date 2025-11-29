@@ -86,11 +86,7 @@ if ($tor_auth_reg || $tor_auth_del) {
     $tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }
 
-if (config()->get('tracker.use_old_torrent_name_format')) {
-    $display_name = '[' . config()->get('server_name') . '].t' . $bt_topic_id . '.' . TORRENT_EXT;
-} else {
-    $display_name = $t_data['topic_title'] . ' [' . config()->get('server_name') . '-' . $bt_topic_id . ']' . '.' . TORRENT_EXT;
-}
+$display_name = \TorrentPier\Attachment::getDownloadFilename($bt_topic_id, $t_data['topic_title']);
 
 if (!$tor_reged) {
     $template->assign_block_vars('unregistered_torrent', [

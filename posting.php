@@ -648,7 +648,6 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
                 . '<br />' . __('MAX_FILE_SIZE') . ': ' . humn_size(config()->get('attach.max_size')),
         ]);
 
-        // Show existing attachment for editpost
         if ($file_attached && $mode == 'editpost') {
             // Author can download the original torrent (without a passkey)
             $dl_url = DL_URL . $topic_id;
@@ -659,8 +658,9 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
             $template->assign_vars([
                 'FILE_ATTACHED' => true,
             ]);
+
             $template->assign_block_vars('attach_row', [
-                'FILE_NAME' => ($attach_ext_id == TORRENT_EXT_ID) ? $post_info['topic_title'] . '.torrent' : $lang['ATTACHMENT'],
+                'FILE_NAME' => \TorrentPier\Attachment::getDownloadFilename($topic_id, $post_info['topic_title']),
                 'ATTACH_FILENAME' => $topic_id,
                 'U_VIEW_ATTACHMENT' => $dl_url,
             ]);

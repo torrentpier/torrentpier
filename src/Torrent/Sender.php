@@ -156,11 +156,7 @@ class Sender
         // Send torrent
         $output = Bencode::encode($tor);
 
-        if (config()->get('tracker.use_old_torrent_name_format')) {
-            $dl_fname = '[' . config()->get('server_name') . '].t' . $topic_id . '.' . TORRENT_EXT;
-        } else {
-            $dl_fname = html_ent_decode($topic_title) . ' [' . config()->get('server_name') . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
-        }
+        $dl_fname = Attachment::getDownloadFilename($topic_id, $topic_title);
 
         if (!empty($_COOKIE['explain'])) {
             $out = "attachment path: $filename<br /><br />";

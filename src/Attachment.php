@@ -132,4 +132,28 @@ class Attachment
     {
         return is_file(self::getPath($topicId, M3U_EXT_ID));
     }
+
+    /**
+     * Get download filename for attachment.
+     *
+     * Format depends on tracker.torrent_filename_with_title config:
+     * - true: "Topic Title [server.org].t123.torrent"
+     * - false: "[server.org].t123.torrent"
+     *
+     * @param int $topicId Topic ID
+     * @param string $topicTitle Topic title
+     * @param string $extension File extension (default: 'torrent')
+     * @return string Formatted filename for download
+     */
+    public static function getDownloadFilename(int $topicId, string $topicTitle, string $extension = TORRENT_EXT): string
+    {
+        $serverName = config()->get('server_name');
+        $title = html_ent_decode($topicTitle);
+
+        if (config()->get('tracker.torrent_filename_with_title')) {
+            return $title . ' [' . $serverName . '].t' . $topicId . '.' . $extension;
+        }
+
+        return '[' . $serverName . '].t' . $topicId . '.' . $extension;
+    }
 }

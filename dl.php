@@ -63,7 +63,6 @@ if ($m3u) {
     $filename = basename($m3uFile);
     header('Content-Type: ' . mime_content_type($m3uFile));
     header("Content-Disposition: attachment; filename=\"$filename\"");
-    // $attachment['extension'] = str_replace('.', '', \TorrentPier\TorrServerAPI::M3U['extension']);
     readfile($m3uFile);
     exit;
 }
@@ -97,7 +96,7 @@ if (!is_file($file_path)) {
 }
 
 $ext = config()->get('file_id_ext')[$t_data['attach_ext_id']] ?? '';
-$send_filename = "t-$topic_id" . ($ext ? ".$ext" : '');
+$send_filename = \TorrentPier\Attachment::getDownloadFilename($topic_id, $t_data['topic_title'], $ext);
 
 header('Content-Type: application/octet-stream');
 header("Content-Disposition: attachment; filename*=UTF-8''" . rawurlencode($send_filename));
