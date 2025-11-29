@@ -52,6 +52,9 @@ class LegacySyntaxExtension extends AbstractExtension
      */
     public function convertLegacySyntax(string $content): string
     {
+        // Normalize variations: <!-- ELSE IF --> to <!-- ELSEIF -->
+        $content = preg_replace('/<!-- ELSE\s+IF\s+/i', '<!-- ELSEIF ', $content);
+
         // Convert legacy includes first (simplest)
         $content = $this->convertIncludes($content);
 
@@ -165,10 +168,12 @@ class LegacySyntaxExtension extends AbstractExtension
      */
     private function convertVariables(string $content): string
     {
-        // Convert language variables {L_VARIABLE} to {{ L.VARIABLE }} FIRST
+        // Convert language variables {L_VARIABLE}
+        // Some L_ prefixed vars are passed via assign_vars (like L_VIEWING_PROFILE),
+        // so check V.L_XXX first, then fall back to L.XXX (language array)
         $content = preg_replace_callback('/\{L_([A-Z0-9_]+)\}/', function ($matches) {
             $varName = $matches[1];
-            return "{{ L.$varName|default('') }}";
+            return "{{ V.L_$varName|default(L.$varName)|default('') }}";
         }, $content);
 
         // Convert constants {#CONSTANT#} to {{ constant('CONSTANT') }}

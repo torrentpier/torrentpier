@@ -73,6 +73,10 @@ $patterns = [
     // Block with subblock patterns
     '<!-- IF t.tor.MAGNET -->content<!-- ENDIF -->',
     '<!-- IF torrent.tor_server.TORR_SERVER_M3U_LINK -->content<!-- ENDIF -->',
+
+    // ELSE IF with space (legacy variation)
+    '<!-- IF IS_ADMIN -->admin<!-- ELSE IF RANK_IMAGE -->rank<!-- ENDIF -->',
+    '<!-- IF A -->a<!-- ELSE IF $bb_cfg[\'reg_email_activation\'] -->b<!-- ENDIF -->',
 ];
 
 echo "=== Testing Real Template Patterns ===\n\n";

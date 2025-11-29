@@ -16,7 +16,7 @@ $converter = new LegacySyntaxExtension();
 $testCases = [
     // === VARIABLES ===
     ['Simple variable', '{VARIABLE}', "{{ V.VARIABLE|default('') }}"],
-    ['Language variable', '{L_HELLO}', "{{ L.HELLO|default('') }}"],
+    ['Language variable', '{L_HELLO}', "{{ V.L_HELLO|default(L.HELLO)|default('') }}"],
     ['Constant', '{#CONSTANT#}', "{{ constant('CONSTANT')|default('') }}"],
     ['PHP variable', '{$myvar}', "{{ myvar|default('') }}"],
 
