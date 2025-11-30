@@ -206,6 +206,17 @@ function _e(string $key, mixed $default = null): void
 }
 
 /**
+ * Get the Template instance
+ *
+ * @param string|null $root Template root directory
+ * @return \TorrentPier\Template\Template
+ */
+function template(?string $root = null): \TorrentPier\Template\Template
+{
+    return \TorrentPier\Template\Template::getInstance($root);
+}
+
+/**
  * Initialize debug
  */
 define('APP_ENV', env('APP_ENV', 'production'));

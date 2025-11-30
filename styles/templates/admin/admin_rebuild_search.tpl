@@ -70,7 +70,7 @@ function swap_values()
 	</td>
 </tr>
 <tr>
-	<td><h4>{L_CLEAR_SEARCH_TABLES}</h4><h6>{L_CLEAR_SEARCH_TABLES_EXPLAIN}</h6></td>
+	<td><h4>{L_CLEAR_SEARCH_TABLES}</h4></td>
 	<td class="nowrap">
 		<input type="radio" name="clear_search" value="0" {CLEAR_SEARCH_DISABLED} checked />{L_CLEAR_SEARCH_NO}&nbsp;
 		<input type="radio" name="clear_search" value="1" {CLEAR_SEARCH_DISABLED} />{L_CLEAR_SEARCH_DELETE}&nbsp;

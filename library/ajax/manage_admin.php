@@ -35,15 +35,20 @@ switch ($mode) {
     case 'clear_template_cache':
         global $template;
 
-        $match = XS_TPL_PREFIX;
-        $dir = $template->cachedir;
-        $res = @opendir($dir);
-        while (($file = readdir($res)) !== false) {
-            if (str_starts_with($file, $match)) {
-                @unlink($dir . $file);
+        $twigCacheDir = $template->getCacheDir() . 'twig';
+        if (is_dir($twigCacheDir)) {
+            $iterator = new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($twigCacheDir, \FilesystemIterator::SKIP_DOTS),
+                \RecursiveIteratorIterator::CHILD_FIRST
+            );
+            foreach ($iterator as $file) {
+                if ($file->isDir()) {
+                    @rmdir($file->getPathname());
+                } else {
+                    @unlink($file->getPathname());
+                }
             }
         }
-        closedir($res);
 
         $this->response['template_cache_html'] = '<span class="seed bold">' . $lang['ALL_TEMPLATE_CLEARED'] . '</span>';
         break;
