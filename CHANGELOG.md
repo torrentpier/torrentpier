@@ -2,6 +2,85 @@
 
 # 📖 Change Log
 
+## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/master/TorrentPier-master)
+
+### 🚀 Features
+
+- Add up/down migration for topic attachment columns - ([94ce3f0](https://github.com/torrentpier/torrentpier/commit/94ce3f0e141db7c686a4c1f8a73f4a0c66f28cc1))
+- Remove legacy `attach_mod` tables and improve migration script - ([ec2fb19](https://github.com/torrentpier/torrentpier/commit/ec2fb19a749d8041b4000a10b8874b05a5f8fff5))
+- Add migration script for torrent attachments to topic-based storage - ([c16545e](https://github.com/torrentpier/torrentpier/commit/c16545e45b1409da5da45296d8fc69368d938677))
+- Introduce `Topic\Guard` class for user authorization checks - ([d7c84e2](https://github.com/torrentpier/torrentpier/commit/d7c84e2fbffa40f1b3efaa031474e41e10bf400d))
+- Enhance tracker functionality with `tracker_status` support and attachment improvements - ([244cf19](https://github.com/torrentpier/torrentpier/commit/244cf19b0f827a58b14e2d0f4b858abd8b035222))
+- Add `fetchPairs` method and `autoRegister` logic to streamline torrent registration - ([83f2678](https://github.com/torrentpier/torrentpier/commit/83f26786469e6b411669614b008ac96283550620))
+- Enable attachment upload and deletion for the first post in tracker forums - ([8e1e6c6](https://github.com/torrentpier/torrentpier/commit/8e1e6c6eeeb93c0de01c5b461bea3f53b17c9339))
+
+### 🐛 Bug Fixes
+
+- Add exception handling to `Registry::unregister` to ensure cron job continuity - ([cbf980a](https://github.com/torrentpier/torrentpier/commit/cbf980ada8e1b44bc2473be2000d27b96cfdff1a))
+- Ensure null-safe check for `$bt_userdata` in ratio handling & improve attachment migration tracking - ([6054770](https://github.com/torrentpier/torrentpier/commit/60547701df245b31c49a754af2fef7876df9d05e))
+- Handle potential null values in cron run times and intervals - ([ffac8ae](https://github.com/torrentpier/torrentpier/commit/ffac8ae0beb696d75d849ee091bc1a08bc00e3dd))
+
+### 💼 Other
+
+- *(admin)* Remove legacy attachment-related admin files** - ([bf177b7](https://github.com/torrentpier/torrentpier/commit/bf177b7576132d9095f387fb004f1069ecd5fe16))
+- *(attachments)* Remove legacy attachment-mod components and maintenance cron** - ([0ea2a4a](https://github.com/torrentpier/torrentpier/commit/0ea2a4a3668ec216797e7c3c4f2d26cd138ce352))
+- *(tracker)* Remove legacy attachment dependency and update queries** - ([0f572d6](https://github.com/torrentpier/torrentpier/commit/0f572d638a164e0212cca7c9eb5aee8f84cf3f52))
+- Enhance TorrServer integration and streamline validation logic** - ([55391f5](https://github.com/torrentpier/torrentpier/commit/55391f5beea4d9bc9e16e5cad0ea8d7b57074c06))
+- Enhance language variable handling and streamline template logic** - ([045660f](https://github.com/torrentpier/torrentpier/commit/045660f1cdd51e5a83f4af23357fc5d98d0836f0))
+- Remove legacy attachment deletion logic and optimize M3U handling** - ([e7a6359](https://github.com/torrentpier/torrentpier/commit/e7a6359055b433fc3b4ab000f64d5c400e474dbb))
+- Clean up attachment and torrent logic** - ([b0e57a6](https://github.com/torrentpier/torrentpier/commit/b0e57a69e67cbaae364423cef5e9b7cce429c8eb))
+- Improve attachment handling and migrate download tracker logic** - ([6a7482d](https://github.com/torrentpier/torrentpier/commit/6a7482d3f596cbaa4ed61108a60413823beeb837))
+- Split `Torrent` class into modular components under `TorrentPier\Torrent` namespace** - ([265f01c](https://github.com/torrentpier/torrentpier/commit/265f01cdb9301a594f7b4845026604e163bacc6a))
+- Migrate `TorrentFileList` to `Torrent\FileList` with namespace update** - ([e519d1c](https://github.com/torrentpier/torrentpier/commit/e519d1ccb4b365b94f02bafbe9f5f7e2a6998897))
+- Add download tracking system with daily limits and aggregation** - ([797d06a](https://github.com/torrentpier/torrentpier/commit/797d06ae82e0d8398c156b071b6f3faef2aec558))
+- Update `dl_url` format and improve attachment path handling** - ([712d59d](https://github.com/torrentpier/torrentpier/commit/712d59d031cfc2299cab195587ba0cfc95fa6003))
+- Replace `attach_id` with `topic_id` across torrent logic and templates** - ([e098ac3](https://github.com/torrentpier/torrentpier/commit/e098ac3f8b6415cc42dab1d800114d87910843be))
+- Update torrent template variables and remove legacy logic checks** - ([2daa494](https://github.com/torrentpier/torrentpier/commit/2daa4945fabce9b8a4fee60086e24d12766915df))
+- Remove `attach_id` from `bb_bt_torrents` and simplify torrent logic** - ([3ee3bcf](https://github.com/torrentpier/torrentpier/commit/3ee3bcf3139de7b81a14adf8835e3de12f67dc0d))
+- Add `tracker_status` column and update torrent methods** - ([a6585d6](https://github.com/torrentpier/torrentpier/commit/a6585d68944f3d3aee4205b20c336cd4b4af7696))
+- Replace `attach_id` with `topic_id` in torrents logic** - ([89aead1](https://github.com/torrentpier/torrentpier/commit/89aead1dec4b2d4b328c3121657da8538d654694))
+- Remove deprecated attachment-related columns and indexes** - ([d03209e](https://github.com/torrentpier/torrentpier/commit/d03209e29327ab1b2e620cd634253408fb9db175))
+- Update caching headers and remove unused attachment constants** - ([d55bff4](https://github.com/torrentpier/torrentpier/commit/d55bff49c338bbfc8288fbbb90d924fb02d8a61d))
+- Remove unused `orig_name` and `file_path` properties from `Upload` class** - ([2f464d3](https://github.com/torrentpier/torrentpier/commit/2f464d3a7a326da8e50918b0d5ee2e04e356179a))
+- Remove `TorrentUpload` class and legacy torrent handling logic** - ([3332649](https://github.com/torrentpier/torrentpier/commit/33326495db3b0f10439fea97fc5ab9d2002dfa96))
+- Standardize attachment logic and fix error handling** - ([66e7233](https://github.com/torrentpier/torrentpier/commit/66e72336b73f218df248d9f119e56fba12d62653))
+- Remove `attach_id` references and standardize on `topic_id`** - ([a1ca111](https://github.com/torrentpier/torrentpier/commit/a1ca1114168c326a6fcca33905c017dc93bfdfdb))
+- Rename `Attach.php` and move to root for better organization** - ([ac65ae0](https://github.com/torrentpier/torrentpier/commit/ac65ae0c4e819f580349ee3b34a7ff467f747c58))
+- Remove legacy attachment mod and associated functions** - ([310e49a](https://github.com/torrentpier/torrentpier/commit/310e49ad4e5d4647b49f28b884d54cdbdff903ac))
+- Remove legacy thumbnail handling from attachments** - ([13176b3](https://github.com/torrentpier/torrentpier/commit/13176b30175819f570e9fcb760c8d1e0b52f0ac1))
+- Drop `bb_extensions` and `bb_extension_groups` tables** - ([d52691d](https://github.com/torrentpier/torrentpier/commit/d52691ddfd79a6f4a17f7c5092ef9e9695cfefb0))
+- Remove `attach_extensions` support and related constants** - ([654a076](https://github.com/torrentpier/torrentpier/commit/654a076c206e0869e1c14b6b0b60d2a92a2d9c88))
+- Remove thumbnail support from attachment handling** - ([b3b4e33](https://github.com/torrentpier/torrentpier/commit/b3b4e3367137428cbe998109769a32561f8a0706))
+- Update `bb_setcookie` to use nullable lifetime parameter** - ([30a41fc](https://github.com/torrentpier/torrentpier/commit/30a41fc860b8b340b01908e1986565068bb349c5))
+- Remove legacy attachment mod and related functionality** - ([36f8cb2](https://github.com/torrentpier/torrentpier/commit/36f8cb25dcfbc33983357e3948912c3d139809cc))
+- Replace `attach_id` references with `topic_id` in torrent view logic** - ([19a48a0](https://github.com/torrentpier/torrentpier/commit/19a48a0884dd6def8e29dfa787124f2385476cb2))
+- Streamline attachment logic and replace `attach_id` references with `topic_id`** - ([c208b50](https://github.com/torrentpier/torrentpier/commit/c208b50e498048c661d1e9c3de3040fe5afe874b))
+- Implement `TorrentUpload` class for managing torrent file attachments** - ([d65a11a](https://github.com/torrentpier/torrentpier/commit/d65a11ad289eaff3eb75c9a9386e8ee919316fdd))
+- Remove obsolete attachment logic from common module** - ([ec9894f](https://github.com/torrentpier/torrentpier/commit/ec9894feb52d463478a166cc15859f5a9ce3a94a))
+- Add new columns for attachment metadata in topics table** - ([be6d83f](https://github.com/torrentpier/torrentpier/commit/be6d83f1aec95036947d780b0563463ee00efa14))
+- Remove `attach_id` logic from torrent maintenance cron** - ([6656310](https://github.com/torrentpier/torrentpier/commit/66563102cd22ca95954b8b0d0f2502c74c3aed3c))
+- Replace `attach_id` with `topic_id` in ajax torrent view** - ([c6d5b63](https://github.com/torrentpier/torrentpier/commit/c6d5b634ce1cd1388a7d7aa77aa946b4fa576887))
+- Standardize topic handling in moderator actions** - ([8a9fa62](https://github.com/torrentpier/torrentpier/commit/8a9fa62e7a4063d0b0a5ee1edabbab8fb36cf62e))
+- Remove legacy download count logic in user stats query** - ([4c715c6](https://github.com/torrentpier/torrentpier/commit/4c715c6a7a42fde2b338b60f4823b52c79d146de))
+- Remove legacy attachment-related language entries** - ([ac8cf1a](https://github.com/torrentpier/torrentpier/commit/ac8cf1a3f553b5455b32c34c4faeeecc52779926))
+- Replace `attach_id` with `topic_id` across ajax library** - ([2cb12f0](https://github.com/torrentpier/torrentpier/commit/2cb12f09660d9f44341ad57ca66519b1cae5595b))
+
+### 🚜 Refactor
+
+- Update torrent attachment checks and download count logic - ([536dc8c](https://github.com/torrentpier/torrentpier/commit/536dc8c56ab5e8a79580cf8804ebff8f54dd64c1))
+- Centralize torrent filename generation logic - ([1fcd205](https://github.com/torrentpier/torrentpier/commit/1fcd205d1eda4535396a969e5cd4a71a0bfd6897))
+- Improve attachment handling and template logic - ([3834565](https://github.com/torrentpier/torrentpier/commit/38345654bff91d66fcd5c3cedc52ee8190cf8db8))
+- Remove `topic_attachment` field and update attachment checks - ([94f53f6](https://github.com/torrentpier/torrentpier/commit/94f53f6bc3ea9449a87320a5f99c66435f80ee8d))
+
+### 🧪 Testing
+
+- Add missing `DBG_USER` constant definition in `TemplateGracefulFallbackTest` - ([1f04619](https://github.com/torrentpier/torrentpier/commit/1f04619f7eb381a68c3dce97c0ff4770501ea4b2))
+
+### ⚙️ Miscellaneous
+
+- Remove `_attach.php` and deprecated attachment handling logic - ([e2bb8ce](https://github.com/torrentpier/torrentpier/commit/e2bb8ce311319542cd46a3c0b837111cc5772d82))
+
+
 ## [v2.8.9](https://github.com/torrentpier/torrentpier/compare/v2.8.8..v2.8.9) (2025-11-28)
 
 ### 🚀 Features
