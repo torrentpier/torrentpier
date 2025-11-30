@@ -16,7 +16,6 @@ use Twig\Environment;
  */
 class Template
 {
-    private static ?Template $instance = null;
     private static array $instances = [];
     private static float $totalRenderTime = 0;
 
@@ -67,10 +66,6 @@ class Template
 
         if (!isset(self::$instances[$key])) {
             self::$instances[$key] = new self($root);
-
-            if (self::$instance === null) {
-                self::$instance = self::$instances[$key];
-            }
         }
 
         return self::$instances[$key];
@@ -127,8 +122,13 @@ class Template
 
             $data = &$this->blockData;
             for ($i = 0; $i < $blockCount; $i++) {
-                $data = &$data[$blocks[$i] . '.'];
-                $data = &$data[(is_countable($data) ? count($data) : 0) - 1];
+                $key = $blocks[$i] . '.';
+                // Auto-initialize the parent block if missing (prevents PHP 8+ errors)
+                if (empty($data[$key])) {
+                    $data[$key][] = [];
+                }
+                $data = &$data[$key];
+                $data = &$data[count($data) - 1];
             }
             $data[$blocks[$blockCount] . '.'][] = $variables;
         } else {
