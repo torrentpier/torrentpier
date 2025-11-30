@@ -1714,19 +1714,22 @@ function print_confirmation($tpl_vars): void
 
 /**
  *  $args = array(
- *            'tpl'    => 'template file name',
+ *            'tpl' => 'template file name',
  *            'simple' => $gen_simple_header,
  *          );
  *       OR (string) 'template_file_name'
  *
- *  $type = ''        (common forum page)
- *          'admin'   (adminCP page)
- *          'simple'  (simple page without common header)
+ *  $type = '' (common forum page)
+ *          'admin' (adminCP page)
+ *          'simple' (simple page without a common header)
  *
  *  $mode = 'no_header'
  *          'no_footer'
+ *
+ *  $variables = [] - variables to pass directly to the template (for .twig files)
+ *                    These are merged with existing template variables
  */
-function print_page($args, $type = '', $mode = '')
+function print_page($args, $type = '', $mode = '', array $variables = [])
 {
     global $template, $gen_simple_header;
 
@@ -1734,6 +1737,11 @@ function print_page($args, $type = '', $mode = '')
     $tpl = ($type === 'admin') ? ADMIN_TPL_DIR . $tpl : $tpl;
 
     $gen_simple_header = (is_array($args) && !empty($args['simple']) or $type === 'simple') ? true : $gen_simple_header;
+
+    // Assign variables BEFORE the header so PAGE_TITLE is available
+    if (!empty($variables)) {
+        $template->assign_vars($variables, true);
+    }
 
     if ($mode !== 'no_header') {
         require(PAGE_HEADER);

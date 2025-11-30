@@ -1,21 +1,21 @@
 <table class="forumline">
     <tr>
-        <th>{L_TERMS}</th>
+        <th>{{ __('TERMS') }}</th>
     </tr>
-    <!-- IF TERMS_HTML -->
+    {% if TERMS_HTML %}
     <tr>
         <td class="row1">
             <div class="post_wrap">
-                {TERMS_HTML}
+                {{ TERMS_HTML|raw }}
             </div>
         </td>
     </tr>
-    <!-- ENDIF -->
-    <!-- IF IS_ADMIN -->
+    {% endif %}
+    {% if IS_ADMIN %}
     <tr>
         <td class="row1">
-            {TERMS_EDIT}
+            {{ TERMS_EDIT|raw }}
         </td>
     </tr>
-    <!-- ENDIF -->
+    {% endif %}
 </table>

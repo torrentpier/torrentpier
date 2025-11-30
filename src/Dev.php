@@ -245,7 +245,7 @@ class Dev
             }
         }
 
-        // Add warning banner if legacy queries were detected
+        // Add a warning banner if legacy queries were detected
         if ($totalLegacyQueries > 0) {
             $log .= '<div style="background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 10px; margin-bottom: 10px; border-radius: 4px;">'
                 . '<strong>⚠️ Legacy Query Warning:</strong> '
@@ -255,7 +255,43 @@ class Dev
                 . '</div>';
         }
 
-        // Get debug information from new database system
+        // Check for template variable conflicts
+        $templateConflicts = \TorrentPier\Template\Template::getVariableConflicts();
+        if (!empty($templateConflicts)) {
+            $conflictCount = count($templateConflicts);
+            $conflictList = array_map(fn($c) => $c['variable'] . ' in ' . $c['template'], $templateConflicts);
+            $log .= '<div style="background-color: #fff3cd; border: 1px solid #ffc107; color: #856404; padding: 10px; margin-bottom: 10px; border-radius: 4px;">'
+                . '<strong>⚠️ Template Variable Conflict:</strong> '
+                . $conflictCount . ' variable' . ($conflictCount > 1 ? 's' : '') . ' conflict with reserved keys. '
+                . 'Details: ' . implode(', ', $conflictList) . '. '
+                . 'Check the template_conflicts.log file for details.'
+                . '</div>';
+        }
+
+        // Check for template variable shadowing (variables overwritten with different values)
+        $templateShadowing = \TorrentPier\Template\Template::getVariableShadowing();
+        if (!empty($templateShadowing)) {
+            $shadowCount = count($templateShadowing);
+            $shadowList = array_map(function ($s) {
+                $old = is_scalar($s['old_value']) ? (string)$s['old_value'] : gettype($s['old_value']);
+                $new = is_scalar($s['new_value']) ? (string)$s['new_value'] : gettype($s['new_value']);
+                if (strlen($old) > 20) {
+                    $old = substr($old, 0, 17) . '...';
+                }
+                if (strlen($new) > 20) {
+                    $new = substr($new, 0, 17) . '...';
+                }
+                return $s['variable'] . " ({$old} → {$new})";
+            }, $templateShadowing);
+            $log .= '<div style="background-color: #fff0e6; border: 1px solid #ffcc99; color: #cc5500; padding: 10px; margin-bottom: 10px; border-radius: 4px;">'
+                . '<strong>🔄 Template Variable Shadowing:</strong> '
+                . $shadowCount . ' variable' . ($shadowCount > 1 ? 's were' : ' was') . ' overwritten during render. '
+                . 'Details: ' . implode(', ', $shadowList) . '. '
+                . 'Check the template_shadowing.log file for details.'
+                . '</div>';
+        }
+
+        // Get debug information from a new database system
         foreach ($server_names as $srv_name) {
             try {
                 $db_obj = \TorrentPier\Database\DatabaseFactory::getInstance($srv_name);

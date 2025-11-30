@@ -19,6 +19,15 @@ class Template
     private static array $instances = [];
     private static float $totalRenderTime = 0;
 
+    /** Reserved context keys that should not be overwritten */
+    private const RESERVED_KEYS = ['L', '_tpldata', 'V'];
+
+    /** @var array<array{variable: string, template: string, source: string, time: float}> */
+    private static array $variableConflicts = [];
+
+    /** @var array<array{variable: string, old_value: mixed, new_value: mixed, source: string, time: float}> */
+    private static array $variableShadowing = [];
+
     private ?Environment $twig = null;
 
     /** Block data for template loops */
@@ -94,9 +103,13 @@ class Template
     /**
      * Assign template variables
      */
-    public function assign_vars(array $variables): void
+    public function assign_vars(array $variables, bool $trackShadowing = false): void
     {
         foreach ($variables as $key => $value) {
+            // Track when a variable is being overwritten with a different value
+            if ($trackShadowing && array_key_exists($key, $this->variables) && $this->variables[$key] !== $value) {
+                $this->logVariableShadowing($key, $this->variables[$key], $value);
+            }
             $this->variables[$key] = $value;
         }
         $this->twig->addGlobal('V', $this->variables);
@@ -140,7 +153,41 @@ class Template
     }
 
     /**
-     * Parse and output template
+     * Render a native Twig template with variables directly in context
+     * For new .twig templates - cleaner API without V. prefix
+     */
+    public function render(string $template, array $variables = []): void
+    {
+        $templatePath = $this->buildTemplatePath($template);
+
+        if (!@file_exists($templatePath)) {
+            throw new \RuntimeException('Template not found: ' . hide_bb_path($templatePath));
+        }
+
+        $templateName = $this->getRelativeTemplateName($templatePath);
+
+        // Variables directly at root level, plus L for language and _tpldata for blocks
+        $context = array_merge($variables, [
+            '_tpldata' => $this->blockData,
+            'L' => $this->lang,
+        ]);
+
+        $renderStart = microtime(true);
+
+        try {
+            $output = $this->twig->render($templateName, $context);
+        } catch (\Exception $e) {
+            throw new \RuntimeException("Template render error '$template': " . $e->getMessage(), 0, $e);
+        }
+
+        $renderTime = (microtime(true) - $renderStart) * 1000;
+        self::$totalRenderTime += $renderTime;
+
+        echo $output;
+    }
+
+    /**
+     * Parse and output template (legacy API)
      */
     public function pparse(string $handle): bool
     {
@@ -152,16 +199,25 @@ class Template
 
         $templatePath = $this->files[$handle];
         $templateName = $this->getRelativeTemplateName($templatePath);
+        $isNativeTwig = str_ends_with($templateName, '.twig');
 
+        // Build context - for native .twig files, expose variables at root level too
         $context = [
             '_tpldata' => $this->blockData,
             'L' => $this->lang,
             'V' => $this->variables
         ];
 
+        // For native Twig templates, expose V variables at root level for cleaner syntax
+        if ($isNativeTwig) {
+            $context = $this->exposeVariablesToRoot($context, $templateName);
+        }
+
         // Reset tracking on page_header
         if ($handle === 'page_header') {
             self::$totalRenderTime = 0;
+            self::$variableConflicts = [];
+            self::$variableShadowing = [];
             Loaders\LegacyTemplateLoader::resetLoadedTemplates();
         }
 
@@ -180,6 +236,144 @@ class Template
 
         echo $output;
         return true;
+    }
+
+    /**
+     * Expose V variables to root context for cleaner template syntax
+     * Logs conflicts when variables would override reserved keys
+     */
+    private function exposeVariablesToRoot(array $context, string $templateName): array
+    {
+        foreach ($this->variables as $key => $value) {
+            if (in_array($key, self::RESERVED_KEYS, true)) {
+                $this->logVariableConflict($key, $templateName);
+                continue;
+            }
+            $context[$key] = $value;
+        }
+
+        return $context;
+    }
+
+    /**
+     * Log a variable conflict for debugging
+     */
+    private function logVariableConflict(string $variable, string $template): void
+    {
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
+        $source = 'unknown';
+        foreach ($backtrace as $frame) {
+            if (isset($frame['file']) && !str_contains($frame['file'], '/src/Template/')) {
+                $source = basename($frame['file']) . ':' . ($frame['line'] ?? '?');
+                break;
+            }
+        }
+
+        $conflict = [
+            'variable' => $variable,
+            'template' => $template,
+            'source' => $source,
+            'time' => microtime(true)
+        ];
+
+        self::$variableConflicts[] = $conflict;
+
+        // Log to file
+        $msg = str_repeat('=', 60) . LOG_LF;
+        $msg .= 'Template Variable Conflict' . LOG_LF;
+        $msg .= str_repeat('=', 60) . LOG_LF;
+        $msg .= "Variable: $variable" . LOG_LF;
+        $msg .= "Template: $template" . LOG_LF;
+        $msg .= "Source:   $source" . LOG_LF;
+        $msg .= 'Time:     ' . date('Y-m-d H:i:s') . LOG_LF;
+        $msg .= 'Note:     This variable conflicts with a reserved key and was not exposed to root context.' . LOG_LF;
+        $msg .= '          Use V.' . $variable . ' in the template instead.' . LOG_LF;
+
+        if (function_exists('bb_log')) {
+            bb_log($msg, 'template_conflicts', false);
+        }
+    }
+
+    /**
+     * Get variable conflicts logged during this request
+     */
+    public static function getVariableConflicts(): array
+    {
+        return self::$variableConflicts;
+    }
+
+    /**
+     * Reset variable conflicts tracking
+     */
+    public static function resetVariableConflicts(): void
+    {
+        self::$variableConflicts = [];
+    }
+
+    /**
+     * Log when a variable is being overwritten with a different value
+     */
+    private function logVariableShadowing(string $variable, mixed $oldValue, mixed $newValue): void
+    {
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10);
+        $source = 'unknown';
+        foreach ($backtrace as $frame) {
+            if (isset($frame['file']) && !str_contains($frame['file'], '/src/Template/') && !str_contains($frame['file'], '/library/includes/functions.php')) {
+                $source = basename($frame['file']) . ':' . ($frame['line'] ?? '?');
+                break;
+            }
+        }
+
+        $shadowing = [
+            'variable' => $variable,
+            'old_value' => $oldValue,
+            'new_value' => $newValue,
+            'source' => $source,
+            'time' => microtime(true)
+        ];
+
+        self::$variableShadowing[] = $shadowing;
+
+        // Format values for logging (truncate long values)
+        $oldStr = is_scalar($oldValue) ? (string)$oldValue : gettype($oldValue);
+        $newStr = is_scalar($newValue) ? (string)$newValue : gettype($newValue);
+        if (strlen($oldStr) > 50) {
+            $oldStr = substr($oldStr, 0, 47) . '...';
+        }
+        if (strlen($newStr) > 50) {
+            $newStr = substr($newStr, 0, 47) . '...';
+        }
+
+        // Log to file
+        $msg = str_repeat('=', 60) . LOG_LF;
+        $msg .= 'Template Variable Shadowing' . LOG_LF;
+        $msg .= str_repeat('=', 60) . LOG_LF;
+        $msg .= "Variable: $variable" . LOG_LF;
+        $msg .= "Old:      $oldStr" . LOG_LF;
+        $msg .= "New:      $newStr" . LOG_LF;
+        $msg .= "Source:   $source" . LOG_LF;
+        $msg .= 'Time:     ' . date('Y-m-d H:i:s') . LOG_LF;
+        $msg .= 'Note:     This variable was overwritten. Check if this is intentional.' . LOG_LF;
+
+        if (function_exists('bb_log')) {
+            bb_log($msg, 'template_shadowing', false);
+        }
+    }
+
+    /**
+     * Get variable shadowing logged during this request
+     */
+    public static function getVariableShadowing(): array
+    {
+        return self::$variableShadowing;
+    }
+
+    /**
+     * Reset variable shadowing tracking
+     */
+    public static function resetVariableShadowing(): void
+    {
+        self::$variableShadowing = [];
     }
 
     /**

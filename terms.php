@@ -19,9 +19,8 @@ if (!config()->get('terms') && !IS_ADMIN) {
     redirect('index.php');
 }
 
-$template->assign_vars([
-    'TERMS_EDIT' => bbcode2html(sprintf($lang['TERMS_EMPTY_TEXT'], make_url('admin/admin_terms.php'))),
+print_page('terms.twig', variables: [
+    'PAGE_TITLE' => __('TERMS'),
+    'TERMS_EDIT' => bbcode2html(sprintf(__('TERMS_EMPTY_TEXT'), make_url('admin/admin_terms.php'))),
     'TERMS_HTML' => bbcode2html(config()->get('terms')),
 ]);
-
-print_page('terms.tpl');
