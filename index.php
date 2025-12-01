@@ -2,158 +2,85 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Front Controller
- *
- * Handles routing for all non-excluded paths.
- * Excluded: /admin/*, /bt/*, direct *.php files
+ * Front Controller Entry Point
  *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-// Parse request URI
-$requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-$path = parse_url($requestUri, PHP_URL_PATH);
+use TorrentPier\Router\FrontController;
 
-// Remove trailing slash for consistency (except root)
-if ($path !== '/' && str_ends_with($path, '/')) {
-    $path = rtrim($path, '/');
-}
+// Load autoloader (provides all classes including TorrentPier\Router\*)
+require __DIR__ . '/vendor/autoload.php';
 
-// ==============================================================
-// Bypass conditions - excluded directories handled directly
-// ==============================================================
+$fc = new FrontController(__DIR__);
+$result = $fc->resolve();
 
-$excludedPrefixes = ['/admin', '/bt'];
+switch ($result['action']) {
+    case FrontController::ACTION_REQUIRE_EXIT:
+        require $result['file'];
+        exit;
 
-foreach ($excludedPrefixes as $prefix) {
-    if (str_starts_with($path, $prefix)) {
-        $file = __DIR__ . $path;
-        if (is_file($file)) {
-            require $file;
-            exit;
-        }
-        // Try index.php for directory requests (e.g., /admin → /admin/index.php)
-        if (is_file($file . '/index.php')) {
-            require $file . '/index.php';
-            exit;
-        }
+    case FrontController::ACTION_REDIRECT:
+        header('Location: ' . $result['url'], true, 301);
+        exit;
+
+    case FrontController::ACTION_NOT_FOUND:
         http_response_code(404);
         exit;
-    }
-}
 
-// 3. Direct PHP file requests
-//    - Files with routes: 301 redirect to clean URL (SEO friendly)
-//    - Other files: include it directly if exists (gradual migration)
-//    - Non-existent files: 301 redirect to clean URL
-if (str_ends_with($path, '.php') && $path !== '/index.php') {
-    $cleanPath = substr($path, 0, -4);
-    $query = $_SERVER['QUERY_STRING'] ?? '';
+    case FrontController::ACTION_STATIC:
+        return false; // Let web server handle
 
-    // Files that have clean URL routes - redirect for SEO
-    $routedFiles = ['/search', '/tracker', '/profile', '/privmsg', '/posting', '/poll', '/modcp', '/memberlist', '/login', '/info', '/terms'];
-    if (in_array($cleanPath, $routedFiles)) {
-        $redirectUrl = $cleanPath . ($query ? '?' . $query : '');
-        header('Location: ' . $redirectUrl, true, 301);
-        exit;
-    }
+    case FrontController::ACTION_ROUTE:
+        // Bootstrap and route
+        define('BB_ROOT', './');
+        define('FRONT_CONTROLLER', true);
+        require_once __DIR__ . '/common.php';
 
-    // Other .php files - include it directly if exists
-    $filePath = __DIR__ . $path;
-    if (is_file($filePath)) {
-        require $filePath;
-        exit;
-    }
+        $router = \TorrentPier\Router\Router::getInstance();
 
-    // File doesn't exist - fall through to router (will show 404 page)
-}
+        // Load routes only if not already loaded (FrontController may have loaded them)
+        if (!$router->areRoutesLoaded()) {
+            $routes = require __DIR__ . '/library/routes.php';
+            $routes($router);
+            $router->setRoutesLoaded();
+        }
 
-// 4. Static files (images, css, js, etc.) - let server handle
-$staticExtensions = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'ico', 'svg', 'woff', 'woff2', 'ttf', 'eot', 'map'];
-$extension = pathinfo($path, PATHINFO_EXTENSION);
-if (in_array(strtolower($extension), $staticExtensions)) {
-    return false; // Web server should serve static files
-}
+        $request = \Laminas\Diactoros\ServerRequestFactory::fromGlobals();
 
-// ==============================================================
-// Special case: Root path "/" = forum index
-// Until index is migrated to controllers, use legacy file
-// ==============================================================
+        try {
+            $response = $router->dispatch($request);
 
-if ($path === '/' || $path === '/index.php') {
-    // Simply include the legacy index file - it handles everything itself
-    require __DIR__ . '/index_legacy.php';
-    exit;
-}
+            // Legacy file needs global scope execution
+            if ($response->hasHeader('X-Legacy-Execute')) {
+                require $GLOBALS['__legacy_controller_path'];
+                exit;
+            }
 
-// ==============================================================
-// Router handling for clean URLs
-// ==============================================================
+            (new \Laminas\HttpHandlerRunner\Emitter\SapiEmitter())->emit($response);
 
-define('BB_ROOT', './');
-define('FRONT_CONTROLLER', true);
+        } catch (\League\Route\Http\Exception\NotFoundException $e) {
+            http_response_code(404);
+            if (!defined('BB_SCRIPT')) {
+                define('BB_SCRIPT', '404');
+            }
+            global $user;
+            if ($user !== null && !defined('SESSION_STARTED')) {
+                $user->session_start();
+            }
+            bb_die('PAGE_NOT_FOUND', 404);
 
-// Load common.php in global scope (BB_SCRIPT will be '' for routed pages)
-// This ensures all globals are properly initialized
-// Note: Using require_once because legacy files also require common.php
-require_once __DIR__ . '/common.php';
+        } catch (\League\Route\Http\Exception\MethodNotAllowedException $e) {
+            http_response_code(405);
+            foreach ($e->getHeaders() as $name => $value) {
+                header("$name: $value");
+            }
+            echo 'Method Not Allowed';
 
-// Initialize router
-$router = \TorrentPier\Router\Router::getInstance();
-
-// Load routes
-$routes = require __DIR__ . '/library/routes.php';
-$routes($router);
-
-// Create PSR-7 request from globals
-$request = \Laminas\Diactoros\ServerRequestFactory::fromGlobals();
-
-try {
-    // Dispatch the request
-    $response = $router->dispatch($request);
-
-    // Check if this is a legacy file that needs global scope execution
-    if ($response->hasHeader('X-Legacy-Execute')) {
-        // Execute in global scope - legacy files use $GLOBALS and need this
-        require $GLOBALS['__legacy_controller_path'];
-        exit;
-    }
-
-    // Emit the response
-    (new \Laminas\HttpHandlerRunner\Emitter\SapiEmitter())->emit($response);
-} catch (\League\Route\Http\Exception\NotFoundException $e) {
-    // Route not found - show 404 page
-    http_response_code(404);
-
-    // Define BB_SCRIPT for page_header.php
-    if (!defined('BB_SCRIPT')) {
-        define('BB_SCRIPT', '404');
-    }
-
-    // common.php already loaded by front controller
-    global $user;
-    if ($user !== null && !defined('SESSION_STARTED')) {
-        $user->session_start();
-    }
-
-    bb_die('PAGE_NOT_FOUND', 404);
-} catch (\League\Route\Http\Exception\MethodNotAllowedException $e) {
-    // Method not allowed
-    http_response_code(405);
-    header('Allow: ' . implode(', ', $e->getAllowedMethods()));
-    echo 'Method Not Allowed';
-} catch (\Throwable $e) {
-    // Unexpected error
-    http_response_code(500);
-
-    if (defined('APP_ENV') && APP_ENV === 'development') {
-        echo "Error: " . htmlspecialchars($e->getMessage()) . "\n";
-        echo "File: " . htmlspecialchars($e->getFile()) . ":" . $e->getLine() . "\n";
-        echo "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
-    } else {
-        error_log('Router error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
-        echo 'Internal Server Error';
-    }
+        } catch (\Throwable $e) {
+            dev()->getWhoops()->handleException($e);
+        }
+        break;
 }

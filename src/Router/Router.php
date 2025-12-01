@@ -27,6 +27,7 @@ class Router
 {
     private static ?self $instance = null;
     private LeagueRouter $router;
+    private bool $routesLoaded = false;
 
     private function __construct()
     {
@@ -122,5 +123,44 @@ class Router
     public static function reset(): void
     {
         self::$instance = null;
+    }
+
+    /**
+     * Check if a route exists for the given path
+     */
+    public function hasRoute(string $path, string $method = 'GET'): bool
+    {
+        // Create a minimal PSR-7 request to test matching
+        $request = new \Laminas\Diactoros\ServerRequest(
+            serverParams: ['REQUEST_METHOD' => $method],
+            uri: $path,
+            method: $method
+        );
+
+        try {
+            $this->router->dispatch($request);
+            return true;
+        } catch (\League\Route\Http\Exception\NotFoundException) {
+            return false;
+        } catch (\Throwable) {
+            // Route exists, but handler failed - that's OK, route still exists
+            return true;
+        }
+    }
+
+    /**
+     * Mark routes as loaded
+     */
+    public function setRoutesLoaded(): void
+    {
+        $this->routesLoaded = true;
+    }
+
+    /**
+     * Check if routes have been loaded
+     */
+    public function areRoutesLoaded(): bool
+    {
+        return $this->routesLoaded;
     }
 }
