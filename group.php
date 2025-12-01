@@ -393,7 +393,7 @@ if (!$group_id) {
         'MOD_TIME' => !empty($group_info['mod_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($group_info['mod_time']), humanTime($group_info['mod_time'])) : $lang['NONE'],
         'MOD_TIME_RAW' => !empty($group_info['mod_time']) ? $group_info['mod_time'] : '',
         'U_SEARCH_USER' => 'search.php?mode=searchuser',
-        'U_SEARCH_RELEASES' => "tracker.php?srg=$group_id",
+        'U_SEARCH_RELEASES' => "tracker?srg=$group_id",
         'U_GROUP_RELEASES' => GROUP_URL . $group_id . "&view=releases",
         'U_GROUP_MEMBERS' => GROUP_URL . $group_id . "&view=members",
         'U_GROUP_CONFIG' => "group_edit.php?" . POST_GROUPS_URL . "=$group_id",

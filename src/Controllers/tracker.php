@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'tracker');
-
-require __DIR__ . '/common.php';
-
 // Page config
 $page_cfg['include_bbcode_js'] = true;
 $page_cfg['use_tablesorter'] = true;
@@ -32,7 +28,7 @@ $title_match_max_len = 60;
 $poster_name_max_len = 25;
 $tor_colspan = 12; // torrents table colspan with all columns
 $per_page = config()->get('topics_per_page');
-$tracker_url = basename(__FILE__);
+$tracker_url = 'tracker';
 
 $time_format = 'H:i';
 $date_format = 'j-M-y';
@@ -775,7 +771,7 @@ if ($allowed_forums) {
 
 // Pagination
 if ($tor_count) {
-    $base_url = "$tracker_url?search_id=$search_id";
+    $base_url = "tracker?search_id=$search_id";
     $search_matches = ($tor_count == 1) ? sprintf($lang['FOUND_SEARCH_MATCH'], $tor_count) : sprintf($lang['FOUND_SEARCH_MATCHES'], $tor_count);
     $search_max = "(max: $tor_search_limit)";
 
@@ -904,7 +900,7 @@ $template->assign_vars(array(
     'TIME_SELECT' => build_select($time_key, $time_select, $time_val),
     'S_NOT_SEEN_SELECT' => build_select($s_not_seen_key, $s_not_seen_select, $s_not_seen_val),
     'S_RG_SELECT' => build_select($s_rg_key, $s_release_group_select, $s_rg_val),
-    'TOR_SEARCH_ACTION' => $tracker_url,
+    'TOR_SEARCH_ACTION' => 'tracker',
     'TOR_COLSPAN' => $tor_colspan,
     'TOR_STATUS' => $statuses ?? '',
     'TITLE_MATCH_MAX' => $title_match_max_len,
@@ -917,7 +913,7 @@ $template->assign_vars(array(
     'SHOW_SPEED' => $show_speed_val,
     'MAX_FS' => $max_forums_selected,
     'L_MAX_FS' => sprintf($lang['SEL_CHAPTERS_HELP'], $max_forums_selected),
-    'TRACKER_URL' => make_url('tracker.php?'),
+    'TRACKER_URL' => make_url('tracker?'),
 
     'TR_CAT_URL' => "$tracker_url?$cat_key=",
     'TR_FORUM_URL' => "$tracker_url?$forum_key=",

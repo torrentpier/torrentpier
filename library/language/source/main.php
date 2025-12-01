@@ -1834,7 +1834,7 @@ $lang['BT_ADD_AUTH_KEY_HEAD'] = 'Passkey';
 $lang['BT_ADD_AUTH_KEY'] = 'Enable adding passkey to the torrent-files before downloading';
 
 $lang['BT_TOR_BROWSE_ONLY_REG_HEAD'] = 'Torrent browser (tracker)';
-$lang['BT_TOR_BROWSE_ONLY_REG'] = 'Torrent browser (tracker.php) accessible only for logged-in users';
+$lang['BT_TOR_BROWSE_ONLY_REG'] = 'Torrent browser accessible only for logged-in users';
 $lang['BT_SEARCH_BOOL_MODE'] = 'Allow boolean full-text searches';
 $lang['BT_SEARCH_BOOL_MODE_EXPL'] = 'use *, +, - in searches';
 
