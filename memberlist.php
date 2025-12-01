@@ -9,7 +9,7 @@
 
 define('BB_SCRIPT', 'memberlist');
 
-require __DIR__ . '/common.php';
+require_once __DIR__ . '/common.php';
 
 $user->session_start(['req_login' => true]);
 

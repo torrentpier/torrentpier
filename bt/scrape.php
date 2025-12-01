@@ -9,7 +9,7 @@
 
 define('IN_TRACKER', true);
 define('BB_ROOT', './../');
-require dirname(__DIR__) . '/common.php';
+require_once dirname(__DIR__) . '/common.php';
 
 if (!config()->get('tracker.scrape')) {
     msg_die('Please disable SCRAPE!');

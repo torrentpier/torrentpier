@@ -22,7 +22,7 @@ $cron_action = $_POST['cron_action'] ?? '';
 
 if ($mode == 'run' && !$job_id) {
     define('BB_ROOT', './../');
-    require BB_ROOT . 'common.php';
+    require_once BB_ROOT . 'common.php';
     $user->session_start();
     redirect('admin/' . basename(__FILE__) . '?mode=list');
 } else {

@@ -10,7 +10,7 @@
 define('BB_SCRIPT', 'login');
 define('IN_LOGIN', true);
 
-require __DIR__ . '/common.php';
+require_once __DIR__ . '/common.php';
 
 $page_cfg['allow_robots'] = false;
 

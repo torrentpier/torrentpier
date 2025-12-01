@@ -9,7 +9,7 @@
 
 define('BB_SCRIPT', 'playback_m3u');
 
-require __DIR__ . '/common.php';
+require_once __DIR__ . '/common.php';
 
 if (!config()->get('torr_server.enabled')) {
     redirect('index.php');

@@ -9,7 +9,7 @@
 
 define('BB_SCRIPT', 'posting');
 
-require __DIR__ . '/common.php';
+require_once __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
 $page_cfg['load_tpl_vars'] = [

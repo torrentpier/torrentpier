@@ -9,7 +9,7 @@
 
 define('BB_SCRIPT', 'filelist');
 
-require __DIR__ . '/common.php';
+require_once __DIR__ . '/common.php';
 
 // Start session management
 $user->session_start();

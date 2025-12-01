@@ -9,7 +9,7 @@
 
 define('BB_SCRIPT', 'group_edit');
 
-require __DIR__ . '/common.php';
+require_once __DIR__ . '/common.php';
 
 $page_cfg['include_bbcode_js'] = true;
 

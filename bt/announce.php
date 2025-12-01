@@ -9,7 +9,7 @@
 
 define('IN_TRACKER', true);
 define('BB_ROOT', './../');
-require dirname(__DIR__) . '/common.php';
+require_once dirname(__DIR__) . '/common.php';
 
 // Check User-Agent for existence
 $userAgent = (string)$_SERVER['HTTP_USER_AGENT'];

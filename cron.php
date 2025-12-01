@@ -10,4 +10,4 @@
 define('START_CRON', true);
 define('BB_ROOT', __DIR__ . '/');
 
-require __DIR__ . '/common.php';
+require_once __DIR__ . '/common.php';

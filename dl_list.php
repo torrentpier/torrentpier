@@ -9,7 +9,7 @@
 
 define('BB_SCRIPT', 'dl_list');
 
-require __DIR__ . '/common.php';
+require_once __DIR__ . '/common.php';
 
 $forum_id = $_REQUEST[POST_FORUM_URL] ?? 0;
 $topic_id = $_REQUEST[POST_TOPIC_URL] ?? 0;

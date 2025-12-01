@@ -9,7 +9,7 @@
 
 define('BB_SCRIPT', 'feed');
 
-require __DIR__ . '/common.php';
+require_once __DIR__ . '/common.php';
 
 use TorrentPier\Feed\Exception\FeedGenerationException;
 use TorrentPier\Feed\FeedGenerator;

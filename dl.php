@@ -10,7 +10,7 @@
 define('BB_SCRIPT', 'dl');
 define('NO_GZIP', true);
 
-require __DIR__ . '/common.php';
+require_once __DIR__ . '/common.php';
 
 $topic_id = (int)request_var('t', 0);
 $m3u = isset($_GET['m3u']) && $_GET['m3u'];
