@@ -768,7 +768,7 @@ function get_username($user_id)
     }
 
     $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = '" . DB()->escape($user_id) . "' LIMIT 1");
-    return $row['username'];
+    return $row ? $row['username'] : false;
 }
 
 function get_user_id($username)
