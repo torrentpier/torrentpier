@@ -7,13 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'info');
-
-require_once __DIR__ . '/common.php';
-
-// Start session management
-$user->session_start();
-
 $info = [];
 $htmlDir = LANG_DIR . 'html/';
 $show = isset($_REQUEST['show']) ? (string)$_REQUEST['show'] : '';

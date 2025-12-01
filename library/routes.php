@@ -22,16 +22,22 @@ return function (Router $router): void {
     // Migrated controllers (in src/Controllers/)
     // ==============================================================
 
-    $router->any('/terms', new LegacyAdapter(
+    $router->get('/info', new LegacyAdapter(
+        $basePath . '/src/Controllers/info.php',
+    ));
+
+    $router->get('/dl', new LegacyAdapter(
+        $basePath . '/src/Controllers/dl.php',
+    ));
+
+    $router->get('/terms', new LegacyAdapter(
         $basePath . '/src/Controllers/terms.php',
-        'terms'
     ));
 
     // Tracker needs custom session options (req_login)
     $router->any('/tracker', new LegacyAdapter(
         $basePath . '/src/Controllers/tracker.php',
-        'tracker',
-        ['manage_session' => true]
+        options: ['manage_session' => true],
     ));
 
     // ==============================================================
@@ -39,15 +45,14 @@ return function (Router $router): void {
     // ==============================================================
 
     $legacyRoutes = [
-        '/search',
-        '/profile',
-        '/privmsg',
-        '/posting',
-        '/poll',
-        '/modcp',
-        '/memberlist',
-        '/login',
-        '/info',
+        '/search',      // GET, POST
+        '/profile',     // GET, POST
+        '/privmsg',     // GET, POST
+        '/posting',     // GET, POST
+        '/poll',        // POST
+        '/modcp',       // GET, POST
+        '/memberlist',  // GET, POST
+        '/login',       // GET, POST
     ];
 
     foreach ($legacyRoutes as $path) {

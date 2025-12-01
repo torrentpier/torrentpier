@@ -143,7 +143,7 @@ class Router
         } catch (\League\Route\Http\Exception\NotFoundException) {
             return false;
         } catch (\Throwable) {
-            // Route exists, but handler failed - that's OK, route still exists
+            // Route exists, but the handler failed - that's OK, route still exists
             return true;
         }
     }

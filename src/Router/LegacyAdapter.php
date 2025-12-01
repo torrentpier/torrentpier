@@ -25,14 +25,16 @@ class LegacyAdapter
 {
     /**
      * @param string $controllerPath Absolute path to the controller file
-     * @param string $scriptName BB_SCRIPT value for this controller
+     * @param string|null $scriptName BB_SCRIPT value (auto-derived from filename if null)
      * @param array $options Additional options
      */
     public function __construct(
-        private string $controllerPath,
-        private string $scriptName,
-        private array $options = []
-    ) {
+        private readonly string $controllerPath,
+        private ?string         $scriptName = null,
+        private readonly array  $options = []
+    )
+    {
+        $this->scriptName ??= pathinfo($controllerPath, PATHINFO_FILENAME);
     }
 
     /**
@@ -69,7 +71,7 @@ class LegacyAdapter
         global $tracking_topics, $tracking_forums;
         global $dl_link_css;
 
-        // Start session for migrated controllers (simple controllers like terms.php)
+        // Start a session for migrated controllers (simple controllers like terms.php)
         // Controllers that need custom session options can set 'manage_session' => true
         $manageSession = $this->options['manage_session'] ?? false;
         if (!$manageSession && $user !== null && !defined('SESSION_STARTED')) {
@@ -131,6 +133,6 @@ class LegacyAdapter
      */
     public function getScriptName(): string
     {
-        return $this->scriptName;
+        return $this->scriptName ?? '';
     }
 }
