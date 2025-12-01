@@ -34,7 +34,9 @@ if (empty($_SERVER['SERVER_ADDR'])) {
 if (!defined('BB_ROOT')) {
     define('BB_ROOT', './');
 }
-if (!defined('BB_SCRIPT')) {
+// Don't define BB_SCRIPT when using front controller - each controller defines its own
+// For direct file access (legacy), BB_SCRIPT is defined before common.php is loaded
+if (!defined('BB_SCRIPT') && !defined('FRONT_CONTROLLER')) {
     define('BB_SCRIPT', '');
 }
 
@@ -96,10 +98,10 @@ require_once BB_PATH . '/vendor/autoload.php';
  * @param mixed|null $default
  * @return mixed
  */
-function env(string $key, mixed $default = null): mixed
-{
-    return \TorrentPier\Env::get($key, $default);
-}
+    function env(string $key, mixed $default = null): mixed
+    {
+        return \TorrentPier\Env::get($key, $default);
+    }
 
 // Load ENV
 try {

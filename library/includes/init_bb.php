@@ -51,8 +51,10 @@ function compress_output($contents)
 
 /**
  * Start output buffering
+ * Note: When using FRONT_CONTROLLER, the router handles response emission,
+ * and compression should be handled at the web server level
  */
-if (!defined('IN_AJAX')) {
+if (!defined('IN_AJAX') && !defined('FRONT_CONTROLLER')) {
     ob_start('send_page');
 }
 
