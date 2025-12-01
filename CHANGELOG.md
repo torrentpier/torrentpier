@@ -67,6 +67,8 @@
 
 ### 🚜 Refactor
 
+- Migrate terms.tpl to terms.twig and enhance variable handling in Template class - ([f6db2d0](https://github.com/torrentpier/torrentpier/commit/f6db2d0c04da6197b278cb1d221d50262639588d))
+- Remove redundant `Template::$instance` and improve block data initialization - ([d236a0c](https://github.com/torrentpier/torrentpier/commit/d236a0c87384d338ebaf6ed90985518b35b89f23))
 - Update torrent attachment checks and download count logic - ([536dc8c](https://github.com/torrentpier/torrentpier/commit/536dc8c56ab5e8a79580cf8804ebff8f54dd64c1))
 - Centralize torrent filename generation logic - ([1fcd205](https://github.com/torrentpier/torrentpier/commit/1fcd205d1eda4535396a969e5cd4a71a0bfd6897))
 - Improve attachment handling and template logic - ([3834565](https://github.com/torrentpier/torrentpier/commit/38345654bff91d66fcd5c3cedc52ee8190cf8db8))
