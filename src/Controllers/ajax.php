@@ -7,17 +7,11 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'ajax');
-define('IN_AJAX', true);
-
-require_once __DIR__ . '/common.php';
+const IN_AJAX = true;
 
 // Init Ajax class
 $ajax = new TorrentPier\Ajax();
 $ajax->init();
-
-// Init userdata
-$user->session_start();
 
 // Load actions required modules
 switch ($ajax->action) {

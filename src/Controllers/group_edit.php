@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'group_edit');
-
-require_once __DIR__ . '/common.php';
-
 $page_cfg['include_bbcode_js'] = true;
 
 // Start session management

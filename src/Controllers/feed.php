@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'feed');
-
-require_once __DIR__ . '/common.php';
-
 use TorrentPier\Feed\Exception\FeedGenerationException;
 use TorrentPier\Feed\FeedGenerator;
 use TorrentPier\Feed\Provider\ForumFeedProvider;

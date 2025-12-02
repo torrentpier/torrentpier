@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'forum');
-
-require_once __DIR__ . '/common.php';
-
 $page_cfg['include_bbcode_js'] = true;
 
 $show_last_topic = true;
@@ -29,9 +25,6 @@ $start = abs((int)request_var('start', ''));
 $mark_read = (request_var('mark', '') === 'topics');
 
 $anon = GUEST_UID;
-
-// Start session
-$user->session_start();
 
 $lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
 

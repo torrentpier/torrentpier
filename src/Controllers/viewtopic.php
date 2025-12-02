@@ -7,9 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'topic');
-
-require_once __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
 $datastore->enqueue([
@@ -27,9 +24,6 @@ $newest = $next_topic_id = 0;
 $start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
 $topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
 $post_id = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int)$_GET[POST_POST_URL] : 0;
-
-// Start session
-$user->session_start();
 
 set_die_append_msg();
 
