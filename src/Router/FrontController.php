@@ -183,7 +183,7 @@ class FrontController
     private function isStatic(string $path): bool
     {
         $extension = pathinfo($path, PATHINFO_EXTENSION);
-        return in_array(strtolower($extension), $this->staticExtensions);
+        return in_array(strtolower($extension), $this->staticExtensions, true);
     }
 
     /**

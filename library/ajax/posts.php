@@ -46,7 +46,7 @@ if (isset($this->request['post_id'])) {
         $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
     }
 
-    $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
+    $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata);
 }
 
 switch ($this->request['type']) {
