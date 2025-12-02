@@ -9,6 +9,8 @@
 
 require INC_DIR . '/bbcode.php';
 
+global $page_cfg;
+$page_cfg = $page_cfg ?? [];
 $page_cfg['use_tablesorter'] = true;
 $page_cfg['load_tpl_vars'] = [
     'post_buttons',

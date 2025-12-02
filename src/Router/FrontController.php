@@ -138,8 +138,15 @@ class FrontController
         $cleanPath = substr($path, 0, -4);
         $query = $_SERVER['QUERY_STRING'] ?? '';
 
-        // Check if a route exists for the clean path - redirect for SEO
+        // Check if a route exists for the clean path
         if ($this->routeExists($cleanPath)) {
+            // For POST requests, route directly (redirect would lose POST data)
+            // For GET requests, redirect for SEO
+            $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+            if ($method !== 'GET') {
+                return ['action' => self::ACTION_ROUTE];
+            }
+
             return [
                 'action' => self::ACTION_REDIRECT,
                 'url' => $cleanPath . ($query ? '?' . $query : '')

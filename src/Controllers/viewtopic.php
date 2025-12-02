@@ -7,6 +7,10 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+// Variables needed by included files (viewtopic_torrent.php) and template config
+global $t_data, $is_auth, $page_cfg;
+$page_cfg = $page_cfg ?? [];
+
 require INC_DIR . '/bbcode.php';
 
 $datastore->enqueue([
@@ -19,6 +23,9 @@ $page_cfg['load_tpl_vars'] = [
     'post_icons',
     'topic_icons'
 ];
+
+// Start session AFTER setting page_cfg so tpl_config.php can access load_tpl_vars
+$user->session_start();
 
 $newest = $next_topic_id = 0;
 $start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;

@@ -41,13 +41,13 @@ return function (Router $router): void {
     $router->any('/login', new LegacyAdapter($basePath . '/src/Controllers/login.php'));
     $router->any('/memberlist', new LegacyAdapter($basePath . '/src/Controllers/memberlist.php', options: ['manage_session' => true]));
     $router->any('/modcp', new LegacyAdapter($basePath . '/src/Controllers/modcp.php', options: ['manage_session' => true]));
-    $router->any('/posting', new LegacyAdapter($basePath . '/src/Controllers/posting.php'));
+    $router->any('/posting', new LegacyAdapter($basePath . '/src/Controllers/posting.php', options: ['manage_session' => true]));
     $router->any('/privmsg', new LegacyAdapter($basePath . '/src/Controllers/privmsg.php', 'pm', ['manage_session' => true]));
     $router->any('/profile', new LegacyAdapter($basePath . '/src/Controllers/profile.php'));
     $router->any('/search', new LegacyAdapter($basePath . '/src/Controllers/search.php', options: ['manage_session' => true]));
     $router->any('/tracker', new LegacyAdapter($basePath . '/src/Controllers/tracker.php', options: ['manage_session' => true]));
-    $router->any('/viewforum', new LegacyAdapter($basePath . '/src/Controllers/viewforum.php', 'forum'));
-    $router->any('/viewtopic', new LegacyAdapter($basePath . '/src/Controllers/viewtopic.php', 'topic'));
+    $router->any('/viewforum', new LegacyAdapter($basePath . '/src/Controllers/viewforum.php', 'forum', ['manage_session' => true]));
+    $router->any('/viewtopic', new LegacyAdapter($basePath . '/src/Controllers/viewtopic.php', 'topic', ['manage_session' => true]));
 
     // ==============================================================
     // Legacy files with clean URLs (self-bootstrap)

@@ -8,6 +8,8 @@
  */
 
 // Page config
+global $page_cfg;
+$page_cfg = $page_cfg ?? [];
 $page_cfg['include_bbcode_js'] = true;
 $page_cfg['use_tablesorter'] = true;
 $page_cfg['load_tpl_vars'] = [

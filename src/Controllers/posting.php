@@ -9,10 +9,15 @@
 
 require INC_DIR . '/bbcode.php';
 
+global $page_cfg;
+$page_cfg = $page_cfg ?? [];
 $page_cfg['load_tpl_vars'] = [
     'post_icons'
 ];
 $page_cfg['allow_robots'] = false;
+
+// Start session AFTER setting page_cfg so tpl_config.php can access load_tpl_vars
+$user->session_start(['req_login' => true]);
 
 $submit = (bool)@$_REQUEST['post'];
 $refresh = $preview = (bool)@$_REQUEST['preview'];

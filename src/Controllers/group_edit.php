@@ -7,6 +7,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+global $page_cfg;
+$page_cfg = $page_cfg ?? [];
 $page_cfg['include_bbcode_js'] = true;
 
 // Start session management

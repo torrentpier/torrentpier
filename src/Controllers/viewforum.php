@@ -7,6 +7,9 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+// Ensure $page_cfg is properly initialized as global array
+global $page_cfg;
+$page_cfg = $page_cfg ?? [];
 $page_cfg['include_bbcode_js'] = true;
 
 $show_last_topic = true;
@@ -18,6 +21,9 @@ $page_cfg['load_tpl_vars'] = [
     'post_icons',
     'topic_icons'
 ];
+
+// Start session AFTER setting page_cfg so tpl_config.php can access load_tpl_vars
+$user->session_start();
 
 // Init request vars
 $forum_id = (int)request_var(POST_FORUM_URL, '');
