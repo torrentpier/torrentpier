@@ -28,7 +28,7 @@ $submit = isset($_REQUEST['submit']);
 
 // Check for demo mode
 if (IN_DEMO_MODE && $submit) {
-    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+    bb_die(__('CANT_EDIT_IN_DEMO_MODE'));
 }
 
 $group_data = [];
@@ -53,7 +53,7 @@ if ($submit && $mode == 'user') {
 
     // Obtain relevant data for this user
     if (!$row = get_userdata($user_id)) {
-        bb_die($lang['NO_SUCH_USER']);
+        bb_die(__('NO_SUCH_USER'));
     }
     $this_user_level = $row['user_level'];
 
@@ -78,7 +78,7 @@ if ($submit && $mode == 'user') {
     if (isset($_POST['userlevel'])) {
         if ($_POST['userlevel'] === 'admin') {
             if ($userdata['user_id'] == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID) {
-                bb_die($lang['AUTH_GENERAL_ERROR']);
+                bb_die(__('AUTH_GENERAL_ERROR'));
             }
 
             DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . ADMIN . " WHERE user_id = $user_id");
@@ -86,25 +86,25 @@ if ($submit && $mode == 'user') {
             // Delete any entries in auth_access, they are not required if user is becoming an admin
             \TorrentPier\Legacy\Group::delete_permissions($group_id, $user_id);
 
-            $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+            $message = __('AUTH_UPDATED') . '<br /><br />';
+            $message .= sprintf(__('CLICK_RETURN_USERAUTH'), '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br /><br />';
+            $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);
         } // Make admin a user (if already admin)
         elseif ($_POST['userlevel'] === 'user') {
             // ignore if you're trying to change yourself from an admin to user!
             if ($userdata['user_id'] == $user_id) {
-                bb_die($lang['AUTH_SELF_ERROR']);
+                bb_die(__('AUTH_SELF_ERROR'));
             }
             // Update users level, reset to USER
             DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . USER . " WHERE user_id = $user_id");
 
             \TorrentPier\Legacy\Group::delete_permissions($group_id, $user_id);
 
-            $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+            $message = __('AUTH_UPDATED') . '<br /><br />';
+            $message .= sprintf(__('CLICK_RETURN_USERAUTH'), '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br /><br />';
+            $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);
         }
@@ -129,10 +129,10 @@ if ($submit && $mode == 'user') {
     \TorrentPier\Legacy\Group::store_permissions($group_id, $auth);
     \TorrentPier\Legacy\Group::update_user_level($user_id);
 
-    $l_auth_return = ($mode == 'user') ? $lang['CLICK_RETURN_USERAUTH'] : $lang['CLICK_RETURN_GROUPAUTH'];
-    $message = $lang['AUTH_UPDATED'] . '<br /><br />';
+    $l_auth_return = ($mode == 'user') ? __('CLICK_RETURN_USERAUTH') : __('CLICK_RETURN_GROUPAUTH');
+    $message = __('AUTH_UPDATED') . '<br /><br />';
     $message .= sprintf($l_auth_return, '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br /><br />';
-    $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+    $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
     bb_die($message);
 }
@@ -141,7 +141,7 @@ if ($submit && $mode == 'user') {
 //
 elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POST['auth']))) {
     if (!$group_data = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
-        bb_die($lang['GROUP_NOT_EXIST']);
+        bb_die(__('GROUP_NOT_EXIST'));
     }
 
     $auth = [];
@@ -157,10 +157,10 @@ elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POS
     \TorrentPier\Legacy\Group::store_permissions($group_id, $auth);
     \TorrentPier\Legacy\Group::update_user_level('all');
 
-    $l_auth_return = $lang['CLICK_RETURN_GROUPAUTH'];
-    $message = $lang['AUTH_UPDATED'] . '<br /><br />';
+    $l_auth_return = __('CLICK_RETURN_GROUPAUTH');
+    $message = __('AUTH_UPDATED') . '<br /><br />';
     $message .= sprintf($l_auth_return, '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_GROUPS_URL . '=' . $group_id . '">', '</a>') . '<br /><br />';
-    $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+    $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
     bb_die($message);
 }
@@ -178,7 +178,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         $this_userdata = get_userdata($user_id);
     }
     if (!$this_userdata) {
-        bb_die($lang['NO_SUCH_USER']);
+        bb_die(__('NO_SUCH_USER'));
     }
 
     if (!$forums = $datastore->get('cat_forums')) {
@@ -188,8 +188,8 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     // Check if forums exist
     if (empty($forums['f'])) {
-        $message = $lang['NO_FORUMS_AVAILABLE'];
-        $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+        $message = __('NO_FORUMS_AVAILABLE');
+        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
         bb_die($message);
     }
 
@@ -223,7 +223,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                 'FORUM_NAME' => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
                 'SF_SPACER' => $f_data['forum_parent'] ? HTML_SF_SPACER : '',
                 'IS_MODERATOR' => (bool)$auth_mod,
-                'MOD_STATUS' => $auth_mod ? $lang['MODERATOR'] : $lang['NONE'],
+                'MOD_STATUS' => $auth_mod ? __('MODERATOR') : __('NONE'),
                 'MOD_CLASS' => $auth_mod ? ($disabled ? 'yesDisabled' : 'yesMOD') : 'noMOD',
                 'AUTH_MOD_VAL' => $auth_mod ? 1 : 0,
             ));
@@ -263,7 +263,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     foreach ($forum_auth_fields as $auth_type) {
         $template->assign_block_vars('acltype', array(
-            'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", $lang[strtoupper($auth_type)]),
+            'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", __(strtoupper($auth_type))),
             'ACL_TYPE_BF' => $bf['forum_perm'][$auth_type],
         ));
         $s_column_span++;
@@ -279,8 +279,8 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     $s_user_type = '
         <select name="userlevel">
-            <option value="admin"' . ($this_userdata['user_level'] == ADMIN ? ' selected' : '') . '>' . $lang['AUTH_ADMIN'] . '</option>
-            <option value="user"' . ($this_userdata['user_level'] != ADMIN ? ' selected' : '') . '>' . $lang['AUTH_USER'] . '</option>
+            <option value="admin"' . ($this_userdata['user_level'] == ADMIN ? ' selected' : '') . '>' . __('AUTH_ADMIN') . '</option>
+            <option value="user"' . ($this_userdata['user_level'] != ADMIN ? ' selected' : '') . '>' . __('AUTH_USER') . '</option>
         </select>';
 
     $template->assign_block_vars('switch_user_auth', []);
@@ -288,10 +288,10 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     $template->assign_vars(array(
         'TPL_AUTH_UG_MAIN' => true,
         'USER_OR_GROUPNAME' => profile_url($this_userdata, true),
-        'USER_LEVEL' => $lang['USER_LEVEL'] . ' : ' . $s_user_type,
-        'T_USER_OR_GROUPNAME' => $lang['USERNAME'],
-        'T_AUTH_TITLE' => $lang['AUTH_CONTROL_USER'],
-        'T_AUTH_EXPLAIN' => $lang['USER_AUTH_EXPLAIN'],
+        'USER_LEVEL' => __('USER_LEVEL') . ' : ' . $s_user_type,
+        'T_USER_OR_GROUPNAME' => __('USERNAME'),
+        'T_AUTH_TITLE' => __('AUTH_CONTROL_USER'),
+        'T_AUTH_EXPLAIN' => __('USER_AUTH_EXPLAIN'),
         'S_COLUMN_SPAN' => $s_column_span,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
     ));
@@ -299,7 +299,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     $page_cfg['quirks_mode'] = true;
 
     if (!$group_data = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
-        bb_die($lang['GROUP_NOT_EXIST']);
+        bb_die(__('GROUP_NOT_EXIST'));
     }
 
     if (!$forums = $datastore->get('cat_forums')) {
@@ -309,8 +309,8 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     // Check if forums exist
     if (empty($forums['f'])) {
-        $message = $lang['NO_FORUMS_AVAILABLE'];
-        $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+        $message = __('NO_FORUMS_AVAILABLE');
+        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
         bb_die($message);
     }
 
@@ -340,7 +340,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                 'FORUM_NAME' => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
                 'SF_SPACER' => $f_data['forum_parent'] ? HTML_SF_SPACER : '',
                 'IS_MODERATOR' => (bool)$auth_mod,
-                'MOD_STATUS' => $auth_mod ? $lang['MODERATOR'] : $lang['NO'],
+                'MOD_STATUS' => $auth_mod ? __('MODERATOR') : __('NO'),
                 'MOD_CLASS' => $auth_mod ? 'yesMOD' : 'noMOD',
                 'AUTH_MOD_VAL' => $auth_mod ? 1 : 0,
             ));
@@ -380,7 +380,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     foreach ($forum_auth_fields as $auth_type) {
         $template->assign_block_vars('acltype', array(
-            'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", $lang[strtoupper($auth_type)]),
+            'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", __(strtoupper($auth_type))),
             'ACL_TYPE_BF' => $bf['forum_perm'][$auth_type],
         ));
         $s_column_span++;
@@ -396,10 +396,10 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     $template->assign_vars(array(
         'TPL_AUTH_UG_MAIN' => true,
-        'T_USER_OR_GROUPNAME' => $lang['GROUP_NAME'],
+        'T_USER_OR_GROUPNAME' => __('GROUP_NAME'),
         'USER_LEVEL' => false,
-        'T_AUTH_TITLE' => $lang['AUTH_CONTROL_GROUP'],
-        'T_AUTH_EXPLAIN' => $lang['GROUP_AUTH_EXPLAIN'],
+        'T_AUTH_TITLE' => __('AUTH_CONTROL_GROUP'),
+        'T_AUTH_EXPLAIN' => __('GROUP_AUTH_EXPLAIN'),
         'USER_OR_GROUPNAME' => ('<span class="gen">' . htmlCHR($group_data['group_name']) . '</span>'),
         'S_COLUMN_SPAN' => $s_column_span,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,

@@ -73,7 +73,7 @@ if ($mode == 'dl_delete' && $topic_id) {
         $is_auth = auth(AUTH_ALL, $row['forum_id'], $userdata);
 
         if (!$is_auth['auth_mod']) {
-            bb_die($lang['NOT_MODERATOR']);
+            bb_die(__('NOT_MODERATOR'));
         }
     }
 
@@ -84,7 +84,7 @@ if ($mode == 'dl_delete' && $topic_id) {
         ];
 
         print_confirmation([
-            'QUESTION' => $lang['DL_LIST_DEL_CONFIRM'],
+            'QUESTION' => __('DL_LIST_DEL_CONFIRM'),
             'FORM_ACTION' => 'dl_list.php',
             'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
         ]);
@@ -100,7 +100,7 @@ $req_topics_ary = $topics_ary = [];
 // Get topics selected by user
 if ($mode == 'set_topics_dl_status') {
     if (!isset($_POST['dl_topics_id_list']) || !is_array($_POST['dl_topics_id_list'])) {
-        bb_die($lang['NONE_SELECTED']);
+        bb_die(__('NONE_SELECTED'));
     }
 
     foreach ($_POST['dl_topics_id_list'] as $topic_id) {

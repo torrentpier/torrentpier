@@ -70,9 +70,9 @@ class LogAction
      */
     public function init(): void
     {
-        global $lang;
+        
 
-        foreach ($lang['LOG_ACTION']['LOG_TYPE'] as $log_type => $log_desc) {
+        foreach (__('LOG_ACTION')['LOG_TYPE'] as $log_type => $log_desc) {
             $this->log_type_select[strip_tags($log_desc)] = $this->log_type[$log_type];
         }
     }

@@ -22,15 +22,13 @@ trait HelperTrait
      */
     public static function getTorrentInfo(int $topicId): array
     {
-        global $lang;
-
         $row = DB()->table(BB_TOPICS)
             ->select('topic_id, topic_first_post_id, topic_title, topic_poster, forum_id, tracker_status, attach_ext_id')
             ->where('topic_id', $topicId)
             ->fetch();
 
         if (!$row) {
-            bb_die($lang['INVALID_TOPIC_ID']);
+            bb_die(__('INVALID_TOPIC_ID'));
         }
 
         $t_data = $row->toArray();
@@ -47,7 +45,7 @@ trait HelperTrait
      */
     protected static function checkAuth(int $forumId, int $posterId): void
     {
-        global $userdata, $lang;
+        global $userdata;
 
         if (IS_ADMIN) {
             return;
@@ -56,9 +54,9 @@ trait HelperTrait
         $is_auth = auth(AUTH_ALL, $forumId, $userdata);
 
         if ($posterId != $userdata['user_id'] && !$is_auth['auth_mod']) {
-            bb_die($lang['NOT_MODERATOR']);
+            bb_die(__('NOT_MODERATOR'));
         } elseif (!$is_auth['auth_view'] || !$is_auth['auth_attachments']) {
-            bb_die(sprintf($lang['SORRY_AUTH_READ'], $is_auth['auth_read_type']));
+            bb_die(sprintf(__('SORRY_AUTH_READ'), $is_auth['auth_read_type']));
         }
     }
 
@@ -69,7 +67,7 @@ trait HelperTrait
      */
     protected static function errorExit(string $message): void
     {
-        global $reg_mode, $return_message, $lang;
+        global $reg_mode, $return_message;
 
         $msg = '';
 
@@ -77,7 +75,7 @@ trait HelperTrait
             if (isset($return_message)) {
                 $msg .= $return_message . '<br /><br /><hr/><br />';
             }
-            $msg .= '<b>' . $lang['BT_REG_FAIL'] . '</b><br /><br />';
+            $msg .= '<b>' . __('BT_REG_FAIL') . '</b><br /><br />';
         }
 
         bb_die($msg . $message);

@@ -34,7 +34,6 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
     public function getGlobals(): array
     {
         $images = $this->getImages();
-        $lang = lang()->all();
 
         return array_merge(
             [
@@ -44,9 +43,9 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
                 'TOPIC_ATTACH_ICON' => '<img src="' . $this->sharedImgPath . 'icon_clip.gif" alt="" />',
                 'OPEN_MENU_IMG_ALT' => '<img src="' . $this->imgPath . 'menu_open_1.gif" class="menu-alt1" alt="" />',
             ],
-            $this->getConfigVars($lang),
+            $this->getConfigVars(),
             $this->getPostButtonsVars(),
-            $this->getPostIconsVars($images, $lang),
+            $this->getPostIconsVars($images),
             $this->getPmIconsVars($images)
         );
     }
@@ -74,7 +73,7 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
         return '<img src="' . htmlspecialchars($src) . '"' . $classAttr . ' alt="' . htmlspecialchars($alt) . '" />';
     }
 
-    private function getConfigVars(array $lang): array
+    private function getConfigVars(): array
     {
         if (!function_exists('config')) {
             return [];
@@ -88,7 +87,7 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
             'TOPIC_LEFT_COL_SPACER_WITDH' => $topicLeftColWidth - 8,
             'POST_IMG_WIDTH_DECR_JS' => $topicLeftColWidth + $postImgWidthDecr,
             'ATTACH_IMG_WIDTH_DECR_JS' => $topicLeftColWidth + $attachImgWidthDecr,
-            'FEED_IMG' => '<img src="' . $this->imgPath . 'feed.png" class="feed-small" alt="' . ($lang['ATOM_FEED'] ?? '') . '" />',
+            'FEED_IMG' => '<img src="' . $this->imgPath . 'feed.png" class="feed-small" alt="' . __('ATOM_FEED') . '" />',
         ];
     }
 
@@ -107,14 +106,14 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
         ];
     }
 
-    private function getPostIconsVars(array $images, array $lang): array
+    private function getPostIconsVars(array $images): array
     {
         return [
-            'MINIPOST_IMG' => '<img src="' . $images['icon_minipost'] . '" class="icon1" alt="' . ($lang['POST'] ?? '') . '" />',
-            'ICON_GOTOPOST' => '<img src="' . $images['icon_gotopost'] . '" class="icon1" alt="' . ($lang['GO'] ?? '') . '" title="' . ($lang['GOTO_PAGE'] ?? '') . '" />',
-            'MINIPOST_IMG_NEW' => '<img src="' . $images['icon_minipost_new'] . '" class="icon1" alt="' . ($lang['NEW'] ?? '') . '" />',
-            'ICON_LATEST_REPLY' => '<img src="' . $images['icon_latest_reply'] . '" class="icon2" alt="' . ($lang['LATEST'] ?? '') . '" title="' . ($lang['VIEW_LATEST_POST'] ?? '') . '" />',
-            'ICON_NEWEST_REPLY' => '<img src="' . $images['icon_newest_reply'] . '" class="icon2" alt="' . ($lang['NEWEST'] ?? '') . '" title="' . ($lang['VIEW_NEWEST_POST'] ?? '') . '" />',
+            'MINIPOST_IMG' => '<img src="' . $images['icon_minipost'] . '" class="icon1" alt="' . __('POST') . '" />',
+            'ICON_GOTOPOST' => '<img src="' . $images['icon_gotopost'] . '" class="icon1" alt="' . __('GO') . '" title="' . __('GOTO_PAGE') . '" />',
+            'MINIPOST_IMG_NEW' => '<img src="' . $images['icon_minipost_new'] . '" class="icon1" alt="' . __('NEW') . '" />',
+            'ICON_LATEST_REPLY' => '<img src="' . $images['icon_latest_reply'] . '" class="icon2" alt="' . __('LATEST') . '" title="' . __('VIEW_LATEST_POST') . '" />',
+            'ICON_NEWEST_REPLY' => '<img src="' . $images['icon_newest_reply'] . '" class="icon2" alt="' . __('NEWEST') . '" title="' . __('VIEW_NEWEST_POST') . '" />',
         ];
     }
 

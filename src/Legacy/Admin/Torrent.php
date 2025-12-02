@@ -78,7 +78,7 @@ class Torrent
      */
     public static function set_tpl_vars_bool($default_cfg, $cfg)
     {
-        global $template, $lang;
+        global $template;
 
         foreach ($default_cfg as $config_name => $config_value) {
             // YES/NO 'checked'
@@ -88,8 +88,8 @@ class Torrent
             ]);
             // YES/NO lang vars
             $template->assign_vars([
-                'L_' . strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? "<u>$lang[YES]</u>" : $lang['YES'],
-                'L_' . strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? "<u>$lang[NO]</u>" : $lang['NO'],
+                'L_' . strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? '<u>' . __('YES') . '</u>' : __('YES'),
+                'L_' . strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? '<u>' . __('NO') . '</u>' : __('NO'),
             ]);
         }
     }

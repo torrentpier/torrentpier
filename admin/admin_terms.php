@@ -19,7 +19,7 @@ $preview = isset($_POST['preview']);
 
 if (isset($_POST['post']) && (config()->get('terms') !== $_POST['message'])) {
     bb_update_config(['terms' => $_POST['message']]);
-    bb_die($lang['TERMS_UPDATED_SUCCESSFULLY'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_TERMS_CONFIG'], '<a href="admin_terms.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+    bb_die(__('TERMS_UPDATED_SUCCESSFULLY') . '<br /><br />' . sprintf(__('CLICK_RETURN_TERMS_CONFIG'), '<a href="admin_terms.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
 }
 
 $template->assign_vars([

@@ -20,10 +20,10 @@ $prune_performed = false;
 
 if (isset($_REQUEST['submit'])) {
     if (!$var =& $_REQUEST['f'] or !$f_selected = get_id_ary($var)) {
-        bb_die($lang['SELECT_FORUM']);
+        bb_die(__('SELECT_FORUM'));
     }
     if (!$var =& $_REQUEST['prunedays'] or !$prunedays = abs((int)$var)) {
-        bb_die($lang['NOT_DAYS']);
+        bb_die(__('NOT_DAYS'));
     }
 
     $prunetime = TIMENOW - 86400 * $prunedays;
@@ -45,10 +45,10 @@ if (isset($_REQUEST['submit'])) {
         ]);
     }
     if (!$prune_performed) {
-        bb_die($lang['NONE_SELECTED']);
+        bb_die(__('NONE_SELECTED'));
     }
     if (!$pruned_total) {
-        bb_die($lang['NO_SEARCH_MATCH']);
+        bb_die(__('NO_SEARCH_MATCH'));
     }
 }
 

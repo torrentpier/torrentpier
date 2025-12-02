@@ -111,10 +111,10 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             }
         }
 
-        bb_die($lang['SMILEY_IMPORT_SUCCESS'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die(__('SMILEY_IMPORT_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
     } else {
         // Display the script to get the smile_pak cfg file
-        $smile_paks_select = '<select name="smile_pak"><option value="">' . $lang['SELECT_PAK'] . '</option>';
+        $smile_paks_select = '<select name="smile_pak"><option value="">' . __('SELECT_PAK') . '</option>';
         foreach ($smiley_paks as $key => $value) {
             if (!empty($value)) {
                 $smile_paks_select .= '<option>' . $value . '</option>';
@@ -158,7 +158,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
         exit;
     }
 
-    bb_die(sprintf($lang['EXPORT_SMILES'], '<a href="admin_smilies.php?export_pack=send">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+    bb_die(sprintf(__('EXPORT_SMILES'), '<a href="admin_smilies.php?export_pack=send">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
 } elseif (isset($_POST['add']) || isset($_GET['add'])) {
     $filename_list = '';
     for ($i = 0, $iMax = count($smiley_images); $i < $iMax; $i++) {
@@ -190,7 +190,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
                 }
 
                 $datastore->update('smile_replacements');
-                bb_die($lang['SMILEY_DEL_SUCCESS'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+                bb_die(__('SMILEY_DEL_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
             } else {
                 $hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
                 $hidden_fields .= '<input type="hidden" name="id" value="' . $smiley_id . '" />';
@@ -248,7 +248,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             // If no code was entered complain
             if ($smile_code == '' || $smile_url == '') {
-                bb_die($lang['FIELDS_EMPTY']);
+                bb_die(__('FIELDS_EMPTY'));
             }
 
             // Convert < and > to proper htmlentities for parsing
@@ -263,7 +263,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             }
             $datastore->update('smile_replacements');
 
-            bb_die($lang['SMILEY_EDIT_SUCCESS'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('SMILEY_EDIT_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
             break;
 
         case 'savenew':
@@ -277,7 +277,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             // If no code was entered complain
             if ($smile_code == '' || $smile_url == '') {
-                bb_die($lang['FIELDS_EMPTY']);
+                bb_die(__('FIELDS_EMPTY'));
             }
 
             // Convert < and > to proper htmlentities for parsing
@@ -292,7 +292,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             }
             $datastore->update('smile_replacements');
 
-            bb_die($lang['SMILEY_ADD_SUCCESS'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('SMILEY_ADD_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
             break;
     }
 } else {

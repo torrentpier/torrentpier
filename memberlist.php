@@ -20,7 +20,7 @@ $username = trim(request_var('username', ''));
 $role = (string)request_var('role', 'all');
 
 // Memberlist sorting
-$mode_types_text = [$lang['SORT_JOINED'], $lang['SORT_USERNAME'], $lang['SORT_LOCATION'], $lang['SORT_POSTS'], $lang['SORT_EMAIL'], $lang['SORT_WEBSITE'], $lang['SORT_TOP_TEN']];
+$mode_types_text = [__('SORT_JOINED'), __('SORT_USERNAME'), __('SORT_LOCATION'), __('SORT_POSTS'), __('SORT_EMAIL'), __('SORT_WEBSITE'), __('SORT_TOP_TEN')];
 $mode_types = ['joined', 'username', 'location', 'posts', 'email', 'website', 'topten'];
 
 $select_sort_mode = '<select name="mode">';
@@ -32,18 +32,18 @@ $select_sort_mode .= '</select>';
 
 $select_sort_order = '<select name="order">';
 if ($sort_order == 'ASC') {
-    $select_sort_order .= '<option value="ASC" selected>' . $lang['ASC'] . '</option><option value="DESC">' . $lang['DESC'] . '</option>';
+    $select_sort_order .= '<option value="ASC" selected>' . __('ASC') . '</option><option value="DESC">' . __('DESC') . '</option>';
 } else {
-    $select_sort_order .= '<option value="ASC">' . $lang['ASC'] . '</option><option value="DESC" selected>' . $lang['DESC'] . '</option>';
+    $select_sort_order .= '<option value="ASC">' . __('ASC') . '</option><option value="DESC" selected>' . __('DESC') . '</option>';
 }
 $select_sort_order .= '</select>';
 
 // Role selector
 $role_select = [
-    'all' => $lang['ALL'],
-    'user' => $lang['AUTH_USER'],
-    'admin' => $lang['AUTH_ADMIN'],
-    'moderator' => $lang['MODERATOR']
+    'all' => __('ALL'),
+    'user' => __('AUTH_USER'),
+    'admin' => __('AUTH_ADMIN'),
+    'moderator' => __('MODERATOR')
 ];
 $select_sort_role = '<select name="role">';
 foreach ($role_select as $key => $value) {
@@ -120,7 +120,7 @@ if ($result = DB()->fetch_rowset($sql)) {
         ]);
     }
 } else {
-    $template->assign_block_vars('no_username', ['NO_USER_ID_SPECIFIED' => $lang['NO_USER_ID_SPECIFIED']]);
+    $template->assign_block_vars('no_username', ['NO_USER_ID_SPECIFIED' => __('NO_USER_ID_SPECIFIED')]);
 }
 
 // Pagination
@@ -141,7 +141,7 @@ if ($mode != 'topten') {
 
 // Generate output
 $template->assign_vars([
-    'PAGE_TITLE' => $lang['MEMBERLIST'],
+    'PAGE_TITLE' => __('MEMBERLIST'),
     'S_MODE_SELECT' => $select_sort_mode,
     'S_ORDER_SELECT' => $select_sort_order,
     'S_ROLE_SELECT' => $select_sort_role,

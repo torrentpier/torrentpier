@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $userdata;
+global $userdata;
 
 if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
@@ -42,7 +42,7 @@ switch ($mode) {
         if ($err = \TorrentPier\Validate::password($pass, $pass_confirm)) {
             $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         } else {
-            $text = IS_GUEST ? $lang['CHOOSE_PASS_REG_OK'] : $lang['CHOOSE_PASS_OK'];
+            $text = IS_GUEST ? __('CHOOSE_PASS_REG_OK') : __('CHOOSE_PASS_OK');
             $html = '<img src="./styles/images/good.gif"> <span class="seedmed bold">' . $text . '</span>';
         }
         break;

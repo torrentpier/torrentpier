@@ -11,13 +11,13 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $bf, $lang;
+global $bf;
 
 $user_id = (int)$this->request['user_id'];
 $new_opt = json_decode($this->request['user_opt'], true, 512, JSON_THROW_ON_ERROR);
 
 if (!$user_id or !$u_data = get_userdata($user_id)) {
-    $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+    $this->ajax_die(__('NO_USER_ID_SPECIFIED'));
 }
 
 if (!is_array($new_opt)) {
@@ -35,4 +35,4 @@ DB()->query("UPDATE " . BB_USERS . " SET user_opt = {$u_data['user_opt']} WHERE 
 // Remove data from cache
 \TorrentPier\Sessions::cache_rm_user_sessions($user_id);
 
-$this->response['resp_html'] = $lang['SAVED'];
+$this->response['resp_html'] = __('SAVED');

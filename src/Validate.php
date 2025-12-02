@@ -34,34 +34,34 @@ class Validate
      */
     public static function username(string $username, bool $check_ban_and_taken = true): bool|string
     {
-        global $user, $lang;
+        global $user;
         static $name_chars = 'a-z0-9а-яё_@$%^&;(){}\#\-\'.:+ ';
 
         // Check for empty
         if (empty($username)) {
-            return $lang['CHOOSE_A_NAME'];
+            return __('CHOOSE_A_NAME');
         }
 
         $username = clean_username($username);
 
         // Length
         if (mb_strlen($username, DEFAULT_CHARSET) > USERNAME_MAX_LENGTH) {
-            return $lang['USERNAME_TOO_LONG'];
+            return __('USERNAME_TOO_LONG');
         }
         if (mb_strlen($username, DEFAULT_CHARSET) < USERNAME_MIN_LENGTH) {
-            return $lang['USERNAME_TOO_SMALL'];
+            return __('USERNAME_TOO_SMALL');
         }
 
         // Allowed symbols
         if (!preg_match('#^[' . $name_chars . ']+$#iu', $username, $m)) {
             $invalid_chars = preg_replace('#[' . $name_chars . ']#iu', '', $username);
-            return "{$lang['USERNAME_INVALID']}: <b>" . htmlCHR($invalid_chars) . "</b>";
+            return __('USERNAME_INVALID') . ": <b>" . htmlCHR($invalid_chars) . "</b>";
         }
         // HTML Entities
         if (preg_match_all('/&(#[0-9]+|[a-z]+);/iu', $username, $m)) {
             foreach ($m[0] as $ent) {
                 if (!preg_match('/^(&amp;|&lt;|&gt;)$/iu', $ent)) {
-                    return $lang['USERNAME_INVALID'];
+                    return __('USERNAME_INVALID');
                 }
             }
         }
@@ -70,7 +70,7 @@ class Validate
             $username_sql = DB()->escape($username);
             if ($row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE username = '$username_sql' LIMIT 1")) {
                 if ((!IS_GUEST && $row['username'] != $user->name) || IS_GUEST) {
-                    return $lang['USERNAME_TAKEN'];
+                    return __('USERNAME_TAKEN');
                 }
             }
 
@@ -81,7 +81,7 @@ class Validate
             }
             if ($banned_names_exp = implode('|', $banned_names)) {
                 if (preg_match("#^($banned_names_exp)$#iu", $username)) {
-                    return $lang['USERNAME_DISALLOWED'];
+                    return __('USERNAME_DISALLOWED');
                 }
             }
         }
@@ -99,21 +99,21 @@ class Validate
      */
     public static function email(string $email, bool $check_taken = true)
     {
-        global $lang, $userdata;
+        global $userdata;
 
         // Check for empty
         if (empty($email)) {
-            return $lang['CHOOSE_E_MAIL'];
+            return __('CHOOSE_E_MAIL');
         }
 
         // Basic email validate
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return $lang['EMAIL_INVALID'];
+            return __('EMAIL_INVALID');
         }
 
         // Check max length
         if (mb_strlen($email, DEFAULT_CHARSET) > USEREMAIL_MAX_LENGTH) {
-            return $lang['EMAIL_TOO_LONG'];
+            return __('EMAIL_TOO_LONG');
         }
 
         // Extended email validation
@@ -128,7 +128,7 @@ class Validate
             ]);
 
             if (!$validator->isValid($email, $multipleValidations)) {
-                return $lang['EMAIL_INVALID'];
+                return __('EMAIL_INVALID');
             }
         }
 
@@ -140,7 +140,7 @@ class Validate
                     return false;
                 }
 
-                return $lang['EMAIL_TAKEN'];
+                return __('EMAIL_TAKEN');
             }
         }
 
@@ -157,24 +157,24 @@ class Validate
      */
     public static function password(string $password, string $password_confirm)
     {
-        global $lang;
+        
 
         // Check for empty
         if (empty($password) || empty($password_confirm)) {
-            return $lang['CHOOSE_PASS'];
+            return __('CHOOSE_PASS');
         }
 
         // Check password confirm
         if ($password_confirm != $password) {
-            return $lang['CHOOSE_PASS_ERR'];
+            return __('CHOOSE_PASS_ERR');
         }
 
         // Length
         if (mb_strlen($password, DEFAULT_CHARSET) > PASSWORD_MAX_LENGTH) {
-            return sprintf($lang['CHOOSE_PASS_ERR_MAX'], PASSWORD_MAX_LENGTH);
+            return sprintf(__('CHOOSE_PASS_ERR_MAX'), PASSWORD_MAX_LENGTH);
         }
         if (mb_strlen($password, DEFAULT_CHARSET) < PASSWORD_MIN_LENGTH) {
-            return sprintf($lang['CHOOSE_PASS_ERR_MIN'], PASSWORD_MIN_LENGTH);
+            return sprintf(__('CHOOSE_PASS_ERR_MIN'), PASSWORD_MIN_LENGTH);
         }
 
         // Symbols check
@@ -182,24 +182,24 @@ class Validate
             // Numbers
             if (config()->get('password_symbols.nums')) {
                 if (!StringHelper::isContainsNums($password)) {
-                    return $lang['CHOOSE_PASS_ERR_NUM'];
+                    return __('CHOOSE_PASS_ERR_NUM');
                 }
             }
             // Letters
             if (config()->get('password_symbols.letters.lowercase')) {
                 if (!StringHelper::isContainsLetters($password)) {
-                    return $lang['CHOOSE_PASS_ERR_LETTER'];
+                    return __('CHOOSE_PASS_ERR_LETTER');
                 }
             }
             if (config()->get('password_symbols.letters.uppercase')) {
                 if (!StringHelper::isContainsLetters($password, true)) {
-                    return $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'];
+                    return __('CHOOSE_PASS_ERR_LETTER_UPPERCASE');
                 }
             }
             // Spec symbols
             if (config()->get('password_symbols.spec_symbols')) {
                 if (!StringHelper::isContainsSpecSymbols($password)) {
-                    return $lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'];
+                    return __('CHOOSE_PASS_ERR_SPEC_SYMBOL');
                 }
             }
         }

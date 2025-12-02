@@ -97,10 +97,10 @@ class TwigEnvironmentFactory
     private function addGlobalFunctions(Environment $twig): void
     {
         // Add commonly used global variables
-        $twig->addGlobal('bb_cfg', config()->all());
+        $twig->addGlobal('bb_cfg', config());
         $twig->addGlobal('user', $GLOBALS['user'] ?? null);
         $twig->addGlobal('userdata', $GLOBALS['userdata'] ?? []);
-        $twig->addGlobal('lang', lang()->all());
+        $twig->addGlobal('lang', lang());
 
         // Add TorrentPier configuration functions
         $twig->addFunction(new TwigFunction('config', fn($key = null) => $key ? config()->get($key) : config()));

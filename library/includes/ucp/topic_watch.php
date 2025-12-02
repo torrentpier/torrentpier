@@ -12,7 +12,7 @@ if (!defined('BB_ROOT')) {
 }
 
 if (!config()->get('topic_notify_enabled')) {
-    bb_die($lang['DISABLED']);
+    bb_die(__('DISABLED'));
 }
 
 // Page config
@@ -28,10 +28,10 @@ if (isset($_GET[POST_USERS_URL])) {
         if ($_GET[POST_USERS_URL] == $userdata['user_id'] || IS_ADMIN) {
             $user_id = DB()->escape($_GET[POST_USERS_URL]);
         } else {
-            bb_die($lang['NOT_AUTHORISED']);
+            bb_die(__('NOT_AUTHORISED'));
         }
     } else {
-        bb_die($lang['USER_NOT_EXIST']);
+        bb_die(__('USER_NOT_EXIST'));
     }
 }
 $start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
@@ -46,7 +46,7 @@ if (isset($_POST['topic_id_list'])) {
 }
 
 $template->assign_vars([
-    'PAGE_TITLE' => $lang['WATCHED_TOPICS'],
+    'PAGE_TITLE' => __('WATCHED_TOPICS'),
     'S_FORM_ACTION' => BB_ROOT . 'profile.php?mode=watch'
 ]);
 
@@ -101,9 +101,9 @@ if ($watch_count > 0) {
         }
 
         $template->assign_vars([
-            'MATCHES' => (count($watch) == 1) ? sprintf($lang['FOUND_SEARCH_MATCH'], count($watch)) : sprintf($lang['FOUND_SEARCH_MATCHES'], count($watch)),
+            'MATCHES' => (count($watch) == 1) ? sprintf(__('FOUND_SEARCH_MATCH'), count($watch)) : sprintf(__('FOUND_SEARCH_MATCHES'), count($watch)),
             'PAGINATION' => generate_pagination(BB_ROOT . 'profile.php?mode=watch', $watch_count, $per_page, $start),
-            'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], (floor($start / $per_page) + 1), ceil($watch_count / $per_page)),
+            'PAGE_NUMBER' => sprintf(__('PAGE_OF'), (floor($start / $per_page) + 1), ceil($watch_count / $per_page)),
             'U_PER_PAGE' => BB_ROOT . 'profile.php?mode=watch',
             'PER_PAGE' => $per_page
         ]);
@@ -111,7 +111,7 @@ if ($watch_count > 0) {
     DB()->sql_freeresult($result);
 } else {
     meta_refresh('index.php');
-    bb_die($lang['NO_WATCHED_TOPICS']);
+    bb_die(__('NO_WATCHED_TOPICS'));
 }
 
 print_page('usercp_topic_watch.tpl');

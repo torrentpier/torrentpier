@@ -46,12 +46,12 @@ class Moderation
      */
     public static function changeType(int $topicId, int $torType): void
     {
-        global $lang;
+        
 
         self::getTorrentInfo($topicId); // validates topic exists
 
         if (!IS_AM) {
-            bb_die($lang['ONLY_FOR_MOD']);
+            bb_die(__('ONLY_FOR_MOD'));
         }
 
         DB()->table(BB_BT_TORRENTS)

@@ -11,10 +11,10 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $userdata;
+global $userdata;
 
 if (!config()->get('tor_thank')) {
-    $this->ajax_die($lang['MODULE_OFF']);
+    $this->ajax_die(__('MODULE_OFF'));
 }
 
 if (!$mode = (string)$this->request['mode']) {
@@ -22,11 +22,11 @@ if (!$mode = (string)$this->request['mode']) {
 }
 
 if (!$topic_id = (int)$this->request['topic_id']) {
-    $this->ajax_die($lang['INVALID_TOPIC_ID']);
+    $this->ajax_die(__('INVALID_TOPIC_ID'));
 }
 
 if (!$poster_id = (int)$this->request['poster_id']) {
-    $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+    $this->ajax_die(__('NO_USER_ID_SPECIFIED'));
 }
 
 $cache_lifetime = 3600;
@@ -67,16 +67,16 @@ function get_thanks_list($topic_id, string $thanks_cache_key, int $cache_lifetim
 switch ($mode) {
     case 'add':
         if (IS_GUEST) {
-            $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
+            $this->ajax_die(__('NEED_TO_LOGIN_FIRST'));
         }
 
         if ($poster_id == $userdata['user_id']) {
-            $this->ajax_die($lang['LIKE_OWN_POST']);
+            $this->ajax_die(__('LIKE_OWN_POST'));
         }
 
         $cached_thanks = get_thanks_list($topic_id, $thanks_cache_key, $cache_lifetime);
         if (isset($cached_thanks[$userdata['user_id']])) {
-            $this->ajax_die($lang['LIKE_ALREADY']);
+            $this->ajax_die(__('LIKE_ALREADY'));
         }
 
         $columns = 'topic_id, user_id, time';
@@ -115,7 +115,7 @@ switch ($mode) {
         break;
     case 'get':
         if (IS_GUEST && !config()->get('tor_thanks_list_guests')) {
-            $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
+            $this->ajax_die(__('NEED_TO_LOGIN_FIRST'));
         }
 
         $cached_thanks = get_thanks_list($topic_id, $thanks_cache_key, $cache_lifetime);
@@ -124,7 +124,7 @@ switch ($mode) {
             $user_list[] = '<b>' . profile_url($row) . ' <i>(' . bb_date($row['time']) . ')</i></b>';
         }
 
-        $this->response['html'] = implode(', ', $user_list) ?: $lang['NO_LIKES'];
+        $this->response['html'] = implode(', ', $user_list) ?: __('NO_LIKES');
         break;
     default:
         $this->ajax_die('Invalid mode: ' . $mode);

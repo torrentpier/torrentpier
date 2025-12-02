@@ -17,7 +17,7 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 if (!IS_SUPER_ADMIN) {
-    bb_die($lang['ONLY_FOR_SUPER_ADMIN']);
+    bb_die(__('ONLY_FOR_SUPER_ADMIN'));
 }
 
 require INC_DIR . '/bbcode.php';
@@ -51,7 +51,7 @@ if (isset($_REQUEST['cancel_button'])) {
 		");
     }
 
-    bb_die(sprintf($lang['REBUILD_SEARCH_ABORTED'], $last_session_data['end_post_id']) . '<br /><br />' . sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="admin_rebuild_search.php">', '</a>'));
+    bb_die(sprintf(__('REBUILD_SEARCH_ABORTED'), $last_session_data['end_post_id']) . '<br /><br />' . sprintf(__('CLICK_RETURN_REBUILD_SEARCH'), '<a href="admin_rebuild_search.php">', '</a>'));
 }
 
 // from which post to start processing
@@ -99,13 +99,13 @@ if (isset($_REQUEST['time_limit'])) {
     $time_limit = (int)$_REQUEST['time_limit'];
 } else {
     $time_limit = $def_time_limit;
-    $time_limit_explain = $lang['TIME_LIMIT_EXPLAIN'];
+    $time_limit_explain = __('TIME_LIMIT_EXPLAIN');
 
     // check for webserver timeout (IE returns null)
     if (isset($_SERVER['HTTP_KEEP_ALIVE'])) {
         // get webserver timeout
         $webserver_timeout = (int)$_SERVER['HTTP_KEEP_ALIVE'];
-        $time_limit_explain .= '<br />' . sprintf($lang['TIME_LIMIT_EXPLAIN_WEBSERVER'], $webserver_timeout);
+        $time_limit_explain .= '<br />' . sprintf(__('TIME_LIMIT_EXPLAIN_WEBSERVER'), $webserver_timeout);
 
         if ($time_limit > $webserver_timeout) {
             $time_limit = $webserver_timeout;
@@ -119,7 +119,7 @@ $refresh_rate = isset($_REQUEST['refresh_rate']) ? (int)$_REQUEST['refresh_rate'
 // check if the user gave wrong input
 if ($mode == 'submit') {
     if (($session_posts_processing || $post_limit || $refresh_rate || $time_limit) <= 0) {
-        bb_die($lang['WRONG_INPUT'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="admin_rebuild_search.php">', '</a>'));
+        bb_die(__('WRONG_INPUT') . '<br /><br />' . sprintf(__('CLICK_RETURN_REBUILD_SEARCH'), '<a href="admin_rebuild_search.php">', '</a>'));
     }
 }
 
@@ -223,8 +223,8 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $template->assign_vars(array('TPL_REBUILD_SEARCH_PROGRESS' => true));
 
     $processing_messages = '';
-    $processing_messages .= $timer_expired ? sprintf($lang['TIMER_EXPIRED'], TIMENOW - $start_time) : '';
-    $processing_messages .= ($start == 0 && $clear_search) ? $lang['CLEARED_SEARCH_TABLES'] : '';
+    $processing_messages .= $timer_expired ? sprintf(__('TIMER_EXPIRED'), TIMENOW - $start_time) : '';
+    $processing_messages .= ($start == 0 && $clear_search) ? __('CLEARED_SEARCH_TABLES') : '';
 
     // check if we have reached the end of our post processing
     $session_posts_processed = get_processed_posts('session');
@@ -239,10 +239,10 @@ if ($mode == 'submit' || $mode == 'refresh') {
         $form_parameters .= '&refresh_rate=' . $refresh_rate;
 
         $form_action = 'admin_rebuild_search.php' . '?mode=refresh' . $form_parameters;
-        $next_button = $lang['NEXT'];
+        $next_button = __('NEXT');
         $progress_bar_img = theme_images('progress_bar');
 
-        $processing_messages .= sprintf($lang['PROCESSING_NEXT_POSTS'], $post_limit);
+        $processing_messages .= sprintf(__('PROCESSING_NEXT_POSTS'), $post_limit);
 
         meta_refresh($form_action, $refresh_rate);
 
@@ -254,11 +254,11 @@ if ($mode == 'submit' || $mode == 'refresh') {
         // end of processing
 
         $form_action = 'admin_rebuild_search.php';
-        $next_button = $lang['FINISHED'];
+        $next_button = __('FINISHED');
         $progress_bar_img = theme_images('progress_bar_full');
 
-        $processing_messages .= ($session_posts_processed < $session_posts_processing) ? sprintf($lang['DELETED_POSTS'], $session_posts_processing - $session_posts_processed) : '';
-        $processing_messages .= ($total_posts_processed == $total_posts) ? $lang['ALL_POSTS_PROCESSED'] : $lang['ALL_SESSION_POSTS_PROCESSED'];
+        $processing_messages .= ($session_posts_processed < $session_posts_processing) ? sprintf(__('DELETED_POSTS'), $session_posts_processing - $session_posts_processed) : '';
+        $processing_messages .= ($total_posts_processed == $total_posts) ? __('ALL_POSTS_PROCESSED') : __('ALL_SESSION_POSTS_PROCESSED');
 
         // if we have processed all the db posts we need to update the rebuild_status
         DB()->query('UPDATE ' . BB_SEARCH_REBUILD . ' SET
@@ -275,7 +275,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
             DB()->query("OPTIMIZE TABLE $table");
         }
 
-        $processing_messages .= '<br />' . $lang['ALL_TABLES_OPTIMIZED'];
+        $processing_messages .= '<br />' . __('ALL_TABLES_OPTIMIZED');
     }
 
     // calculate the percent
@@ -316,17 +316,17 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
     $template->assign_vars(array(
         'L_NEXT' => $next_button,
-        'L_TIME_LAST_POSTS_ADMIN' => sprintf($lang['TIME_LAST_POSTS'], $num_rows),
+        'L_TIME_LAST_POSTS_ADMIN' => sprintf(__('TIME_LAST_POSTS'), $num_rows),
 
-        'PROCESSING_POSTS' => sprintf($lang['PROCESSED_POST_IDS'], $start_post_id, $end_post_id),
+        'PROCESSING_POSTS' => sprintf(__('PROCESSED_POST_IDS'), $start_post_id, $end_post_id),
         'PROCESSING_MESSAGES' => $processing_messages,
         'PROGRESS_BAR_IMG' => $progress_bar_img,
 
-        'SESSION_DETAILS' => sprintf($lang['PROCESS_DETAILS'], $session_posts_processed - $num_rows + 1, $session_posts_processed, $session_posts_processing),
-        'SESSION_PERCENT' => sprintf($lang['PERCENT_COMPLETED'], round($session_percent, 2)),
+        'SESSION_DETAILS' => sprintf(__('PROCESS_DETAILS'), $session_posts_processed - $num_rows + 1, $session_posts_processed, $session_posts_processing),
+        'SESSION_PERCENT' => sprintf(__('PERCENT_COMPLETED'), round($session_percent, 2)),
 
-        'TOTAL_DETAILS' => sprintf($lang['PROCESS_DETAILS'], $total_posts_processed - $num_rows + 1, $total_posts_processed, $total_posts),
-        'TOTAL_PERCENT' => sprintf($lang['PERCENT_COMPLETED'], round($total_percent, 2)),
+        'TOTAL_DETAILS' => sprintf(__('PROCESS_DETAILS'), $total_posts_processed - $num_rows + 1, $total_posts_processed, $total_posts),
+        'TOTAL_PERCENT' => sprintf(__('PERCENT_COMPLETED'), round($total_percent, 2)),
 
         'LAST_CYCLE_TIME' => humanTime($start_time),
         'SESSION_TIME' => humanTime(($last_session_data['start_time'] == 0) ? TIMENOW : $last_session_data['start_time']),
@@ -364,15 +364,15 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
         // check our last status
         if ($last_session_data['rebuild_session_status'] == REBUILD_SEARCH_PROCESSED) {
-            $last_saved_processing = sprintf($lang['INFO_PROCESSING_STOPPED'], $last_saved_post_id, $total_posts_processed, $last_saved_date);
+            $last_saved_processing = sprintf(__('INFO_PROCESSING_STOPPED'), $last_saved_post_id, $total_posts_processed, $last_saved_date);
             $clear_search_disabled = 'disabled';
 
             $template->assign_block_vars('start_select_input', []);
         } elseif ($last_session_data['rebuild_session_status'] == REBUILD_SEARCH_ABORTED) {
-            $last_saved_processing = sprintf($lang['INFO_PROCESSING_ABORTED'], $last_saved_post_id, $total_posts_processed, $last_saved_date);
+            $last_saved_processing = sprintf(__('INFO_PROCESSING_ABORTED'), $last_saved_post_id, $total_posts_processed, $last_saved_date);
             // check if the interrupted cycle has finished
             if (TIMENOW - $last_session_data['end_time'] < $last_session_data['last_cycle_time']) {
-                $last_saved_processing .= '<br />' . $lang['INFO_PROCESSING_ABORTED_SOON'];
+                $last_saved_processing .= '<br />' . __('INFO_PROCESSING_ABORTED_SOON');
             }
             $clear_search_disabled = 'disabled';
 
@@ -381,12 +381,12 @@ if ($mode == 'submit' || $mode == 'refresh') {
             // when finished
 
             if ($last_session_data['end_post_id'] < $max_post_id) {
-                $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED_NEW'], $last_saved_post_id, $total_posts_processed, $last_saved_date, $total_posts - $total_posts_processed);
+                $last_saved_processing = sprintf(__('INFO_PROCESSING_FINISHED_NEW'), $last_saved_post_id, $total_posts_processed, $last_saved_date, $total_posts - $total_posts_processed);
                 $clear_search_disabled = 'disabled';
 
                 $template->assign_block_vars('start_select_input', []);
             } else {
-                $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED'], $total_posts, $last_saved_date);
+                $last_saved_processing = sprintf(__('INFO_PROCESSING_FINISHED'), $total_posts, $last_saved_date);
 
                 $template->assign_block_vars('start_text_input', []);
             }

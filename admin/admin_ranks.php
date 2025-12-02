@@ -44,7 +44,7 @@ if ($mode != '') {
 
         if ($mode == 'edit') {
             if (empty($rank_id)) {
-                bb_die($lang['MUST_SELECT_RANK']);
+                bb_die(__('MUST_SELECT_RANK'));
             }
 
             $sql = 'SELECT * FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
@@ -111,7 +111,7 @@ if ($mode != '') {
         $rank_image = isset($_POST['rank_image']) ? trim($_POST['rank_image']) : '';
 
         if ($rank_title == '') {
-            bb_die($lang['MUST_SELECT_RANK']);
+            bb_die(__('MUST_SELECT_RANK'));
         }
 
         //
@@ -130,19 +130,19 @@ if ($mode != '') {
 					rank_style = '" . DB()->escape($rank_style) . "'
 				WHERE rank_id = $rank_id";
 
-            $message = $lang['RANK_UPDATED'];
+            $message = __('RANK_UPDATED');
         } else {
             $sql = 'INSERT INTO ' . BB_RANKS . " (rank_title, rank_image, rank_style)
 				VALUES ('" . DB()->escape($rank_title) . "', '" . DB()->escape($rank_image) . "', '" . DB()->escape($rank_style) . "')";
 
-            $message = $lang['RANK_ADDED'];
+            $message = __('RANK_ADDED');
         }
 
         if (!$result = DB()->sql_query($sql)) {
             bb_die('Could not update / insert into ranks table');
         }
 
-        $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
         $datastore->update('ranks');
 
@@ -169,14 +169,14 @@ if ($mode != '') {
 
                 $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
                 if (!$result = DB()->sql_query($sql)) {
-                    bb_die($lang['NO_UPDATE_RANKS']);
+                    bb_die(__('NO_UPDATE_RANKS'));
                 }
 
                 $datastore->update('ranks');
 
-                bb_die($lang['RANK_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+                bb_die(__('RANK_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
             } else {
-                bb_die($lang['MUST_SELECT_RANK']);
+                bb_die(__('MUST_SELECT_RANK'));
             }
         } else {
             $hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';

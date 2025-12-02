@@ -20,7 +20,7 @@ $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 if (!empty($_POST['edit']) || !empty($_POST['new'])) {
     if (!empty($_POST['edit'])) {
         if (!$row = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
-            bb_die($lang['GROUP_NOT_EXIST']);
+            bb_die(__('GROUP_NOT_EXIST'));
         }
         $group_info = [
             'group_name' => $row['group_name'],
@@ -56,7 +56,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         'GROUP_NAME' => stripslashes(htmlspecialchars($group_info['group_name'])),
         'GROUP_DESCRIPTION' => stripslashes(htmlspecialchars($group_info['group_description'])),
         'GROUP_MODERATOR' => replace_quote($group_info['group_mod_name']),
-        'T_GROUP_EDIT_DELETE' => ($mode == 'newgroup') ? $lang['CREATE_NEW_GROUP'] : $lang['EDIT_GROUP'],
+        'T_GROUP_EDIT_DELETE' => ($mode == 'newgroup') ? __('CREATE_NEW_GROUP') : __('EDIT_GROUP'),
         'U_SEARCH_USER' => BB_ROOT . 'search.php?mode=searchuser',
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
         'S_GROUP_CLOSED_TYPE' => GROUP_CLOSED,
@@ -71,14 +71,14 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
 } elseif (!empty($_POST['group_update'])) {
     if (!empty($_POST['group_delete'])) {
         if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
-            bb_die($lang['GROUP_NOT_EXIST']);
+            bb_die(__('GROUP_NOT_EXIST'));
         }
         // Delete Group
         \TorrentPier\Legacy\Group::delete_group($group_id);
 
-        $message = $lang['DELETED_GROUP'] . '<br /><br />';
-        $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br /><br />';
-        $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+        $message = __('DELETED_GROUP') . '<br /><br />';
+        $message .= sprintf(__('CLICK_RETURN_GROUPSADMIN'), '<a href="admin_groups.php">', '</a>') . '<br /><br />';
+        $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
         bb_die($message);
     } else {
@@ -89,14 +89,14 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         $group_moderator = $_POST['username'] ?? '';
 
         if ($group_name === '') {
-            bb_die($lang['NO_GROUP_NAME']);
+            bb_die(__('NO_GROUP_NAME'));
         } elseif ($group_moderator === '') {
-            bb_die($lang['NO_GROUP_MODERATOR']);
+            bb_die(__('NO_GROUP_MODERATOR'));
         }
         $this_userdata = get_userdata($group_moderator, true);
 
         if (!$group_moderator = $this_userdata['user_id']) {
-            bb_die($lang['NO_GROUP_MODERATOR']);
+            bb_die(__('NO_GROUP_MODERATOR'));
         }
 
         $sql_ary = [
@@ -110,7 +110,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
 
         if ($mode == 'editgroup') {
             if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
-                bb_die($lang['GROUP_NOT_EXIST']);
+                bb_die(__('GROUP_NOT_EXIST'));
             }
 
             if ($group_info['group_moderator'] != $group_moderator) {
@@ -129,9 +129,9 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             // Update group's data
             DB()->query('UPDATE ' . BB_GROUPS . " SET $sql_args WHERE group_id = $group_id");
 
-            $message = $lang['UPDATED_GROUP'] . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+            $message = __('UPDATED_GROUP') . '<br /><br />';
+            $message .= sprintf(__('CLICK_RETURN_GROUPSADMIN'), '<a href="admin_groups.php">', '</a>') . '<br /><br />';
+            $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);
         } elseif ($mode == 'newgroup') {
@@ -145,13 +145,13 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             // Create user_group for group's moderator
             \TorrentPier\Legacy\Group::add_user_into_group($new_group_id, $group_moderator);
 
-            $message = $lang['ADDED_NEW_GROUP'] . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+            $message = __('ADDED_NEW_GROUP') . '<br /><br />';
+            $message .= sprintf(__('CLICK_RETURN_GROUPSADMIN'), '<a href="admin_groups.php">', '</a>') . '<br /><br />';
+            $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);
         } else {
-            bb_die($lang['NO_GROUP_ACTION']);
+            bb_die(__('NO_GROUP_ACTION'));
         }
     }
 } else {

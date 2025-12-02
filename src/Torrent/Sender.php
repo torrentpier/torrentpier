@@ -27,7 +27,7 @@ class Sender
      */
     public static function sendWithPasskey(array $t_data): void
     {
-        global $userdata, $lang;
+        global $userdata;
 
         $topic_id = $t_data['topic_id'];
         $topic_title = $t_data['topic_title'];
@@ -45,11 +45,11 @@ class Sender
         }
 
         if (!$t_data['tracker_status']) {
-            bb_die($lang['PASSKEY_ERR_TOR_NOT_REG']);
+            bb_die(__('PASSKEY_ERR_TOR_NOT_REG'));
         }
 
         if (bf($userdata['user_opt'], 'user_opt', 'dis_passkey') && !IS_GUEST) {
-            bb_die($lang['DISALLOWED']);
+            bb_die(__('DISALLOWED'));
         }
 
         if ($bt_userdata = get_bt_userdata($user_id)) {
@@ -68,7 +68,7 @@ class Sender
                     ->fetch();
 
                 if (!$dl || $dl['user_status'] != DL_STATUS_COMPLETE) {
-                    bb_die(sprintf($lang['BT_LOW_RATIO_FOR_DL'], round($user_ratio, 2), "search.php?dlu=$user_id&amp;dlc=1"));
+                    bb_die(sprintf(__('BT_LOW_RATIO_FOR_DL'), round($user_ratio, 2), "search.php?dlu=$user_id&amp;dlc=1"));
                 }
             }
         }
@@ -78,7 +78,7 @@ class Sender
         try {
             $tor = Bencode::decode($file_contents, dictType: Collection::ARRAY);
         } catch (Exception $e) {
-            bb_die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
+            bb_die(htmlCHR(__('TORFILE_INVALID') . ": " . $e->getMessage()));
         }
 
         // Get tracker announcer

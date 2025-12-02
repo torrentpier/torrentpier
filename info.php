@@ -20,23 +20,23 @@ $show = isset($_REQUEST['show']) ? (string)$_REQUEST['show'] : '';
 
 switch ($show) {
     case 'advert':
-        $info['title'] = $lang['ADVERT'];
+        $info['title'] = __('ADVERT');
         $info['src'] = 'advert.html';
         break;
 
     case 'copyright_holders':
-        $info['title'] = $lang['COPYRIGHT_HOLDERS'];
+        $info['title'] = __('COPYRIGHT_HOLDERS');
         $info['src'] = 'copyright_holders.html';
         break;
 
     case 'user_agreement':
-        $info['title'] = $lang['USER_AGREEMENT'];
+        $info['title'] = __('USER_AGREEMENT');
         $info['src'] = 'user_agreement.html';
         break;
 
     default:
     case 'not_found':
-        $info['title'] = $lang['NOT_FOUND'];
+        $info['title'] = __('NOT_FOUND');
         $info['src'] = 'not_found.html';
         break;
 }
@@ -45,7 +45,7 @@ $require = is_file($htmlDir . $info['src']) ? ($htmlDir . $info['src']) : false;
 
 $template->assign_vars([
     'PAGE_TITLE' => mb_strtoupper($info['title'], DEFAULT_CHARSET),
-    'REQUIRE' => $require ? file_get_contents($require) : $lang['NOT_FOUND'],
+    'REQUIRE' => $require ? file_get_contents($require) : __('NOT_FOUND'),
 ]);
 
 print_page('info.tpl', 'simple');

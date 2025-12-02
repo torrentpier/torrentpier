@@ -45,7 +45,7 @@ if ($mode != '') {
                 $word = $word_info['word'];
                 $replacement = $word_info['replacement'];
             } else {
-                bb_die($lang['NO_WORD_SELECTED']);
+                bb_die(__('NO_WORD_SELECTED'));
             }
         }
 
@@ -62,18 +62,18 @@ if ($mode != '') {
         $replacement = trim(request_var('replacement', ''));
 
         if ($word == '' || $replacement == '') {
-            bb_die($lang['MUST_ENTER_WORD']);
+            bb_die(__('MUST_ENTER_WORD'));
         }
 
         if ($word_id) {
             $sql = 'UPDATE ' . BB_WORDS . "
 				SET word = '" . DB()->escape($word) . "', replacement = '" . DB()->escape($replacement) . "'
 				WHERE word_id = $word_id";
-            $message = $lang['WORD_UPDATED'];
+            $message = __('WORD_UPDATED');
         } else {
             $sql = 'INSERT INTO ' . BB_WORDS . " (word, replacement)
 				VALUES ('" . DB()->escape($word) . "', '" . DB()->escape($replacement) . "')";
-            $message = $lang['WORD_ADDED'];
+            $message = __('WORD_ADDED');
         }
 
         if (!$result = DB()->sql_query($sql)) {
@@ -82,7 +82,7 @@ if ($mode != '') {
 
         $datastore->update('censor');
         censor()->reload(); // Reload the singleton instance with updated words
-        $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_WORDADMIN'), '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
         bb_die($message);
     } elseif ($mode == 'delete') {
@@ -98,9 +98,9 @@ if ($mode != '') {
             $datastore->update('censor');
             censor()->reload(); // Reload the singleton instance with updated words
 
-            bb_die($lang['WORD_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('WORD_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_WORDADMIN'), '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
         } else {
-            bb_die($lang['NO_WORD_SELECTED']);
+            bb_die(__('NO_WORD_SELECTED'));
         }
     }
 } else {

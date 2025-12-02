@@ -18,9 +18,9 @@ require __DIR__ . '/pagestart.php';
 $mode = $_GET['mode'] ?? '';
 
 $return_links = [
-    'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'),
-    'config' => '<br /><br />' . sprintf($lang['CLICK_RETURN_CONFIG'], '<a href="admin_board.php?mode=config">', '</a>'),
-    'config_mods' => '<br /><br />' . sprintf($lang['CLICK_RETURN_CONFIG_MODS'], '<a href="admin_board.php?mode=config_mods">', '</a>')
+    'index' => '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'),
+    'config' => '<br /><br />' . sprintf(__('CLICK_RETURN_CONFIG'), '<a href="admin_board.php?mode=config">', '</a>'),
+    'config_mods' => '<br /><br />' . sprintf(__('CLICK_RETURN_CONFIG_MODS'), '<a href="admin_board.php?mode=config_mods">', '</a>')
 ];
 
 /**
@@ -50,7 +50,7 @@ if (!$result = DB()->sql_query($sql)) {
     }
 
     if (isset($_POST['submit'])) {
-        bb_die($lang['CONFIG_UPDATED'] . $return_links[$mode] . $return_links['index']);
+        bb_die(__('CONFIG_UPDATED') . $return_links[$mode] . $return_links['index']);
     }
 }
 

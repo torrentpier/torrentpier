@@ -110,7 +110,7 @@ class User
      */
     public function session_start(array $cfg = [])
     {
-        global $lang;
+        
 
         $update_sessions_table = false;
         $this->cfg = array_merge($this->cfg, $cfg);
@@ -226,9 +226,9 @@ class User
         if ($banInfo = getBanInfo((int)$this->id)) {
             $this->session_end();
             if (!empty($banInfo['ban_reason'])) {
-                bb_die($lang['YOU_BEEN_BANNED'] . '<br/><br/>' . $lang['REASON'] . ':&nbsp;' . '<b>' . $banInfo['ban_reason'] . '</b>');
+                bb_die(__('YOU_BEEN_BANNED') . '<br/><br/>' . __('REASON') . ':&nbsp;' . '<b>' . $banInfo['ban_reason'] . '</b>');
             } else {
-                bb_die($lang['YOU_BEEN_BANNED']);
+                bb_die(__('YOU_BEEN_BANNED'));
             }
         }
 

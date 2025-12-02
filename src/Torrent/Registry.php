@@ -37,7 +37,7 @@ class Registry
      */
     public static function register(int $topicId, string $mode = '', int $torStatus = TOR_NOT_APPROVED, $regTime = TIMENOW): bool
     {
-        global $lang, $reg_mode;
+        global $reg_mode;
 
         $reg_mode = $mode;
 
@@ -51,13 +51,13 @@ class Registry
         $info_hash_sql = $info_hash_v2_sql = $info_hash_where = null;
 
         if ($torrent['attach_ext_id'] !== TORRENT_EXT_ID) {
-            self::errorExit($lang['NOT_TORRENT']);
+            self::errorExit(__('NOT_TORRENT'));
         }
         if (!$torrent['allow_reg_tracker']) {
-            self::errorExit($lang['REG_NOT_ALLOWED_IN_THIS_FORUM']);
+            self::errorExit(__('REG_NOT_ALLOWED_IN_THIS_FORUM'));
         }
         if ($torrent['tracker_status']) {
-            self::errorExit($lang['ALREADY_REG']);
+            self::errorExit(__('ALREADY_REG'));
         }
 
         self::checkAuth($forum_id, $torrent['topic_poster']);
@@ -65,7 +65,7 @@ class Registry
         $filename = Attachment::getPath($topic_id);
 
         if (!is_file($filename)) {
-            self::errorExit($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
+            self::errorExit(__('ERROR_NO_ATTACHMENT') . '<br /><br />' . htmlCHR($filename));
         }
 
         $file_contents = file_get_contents($filename);
@@ -73,7 +73,7 @@ class Registry
         try {
             $tor = Bencode::decode($file_contents, dictType: Collection::ARRAY);
         } catch (Exception $e) {
-            self::errorExit(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
+            self::errorExit(htmlCHR(__('TORFILE_INVALID') . ": " . $e->getMessage()));
         }
 
         if (config()->get('bt_disable_dht')) {
@@ -91,7 +91,7 @@ class Registry
             $announce_urls['main_url'] = config()->get('bt_announce_url');
 
             if (!$ann || !in_array($ann, $announce_urls)) {
-                $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
+                $msg = sprintf(__('INVALID_ANN_URL'), htmlspecialchars($ann), $announce_urls['main_url']);
                 self::errorExit($msg);
             }
             unset($announce_urls);
@@ -100,7 +100,7 @@ class Registry
         $info = $tor['info'] ?? [];
 
         if (!isset($info['name'], $info['piece length'])) {
-            self::errorExit($lang['TORFILE_INVALID']);
+            self::errorExit(__('TORFILE_INVALID'));
         }
 
         // Check if torrent contains info_hash v2 or v1
@@ -115,11 +115,11 @@ class Registry
         }
 
         if (config()->get('tracker.disabled_v1_torrents') && isset($bt_v1) && !isset($bt_v2)) {
-            self::errorExit($lang['BT_V1_ONLY_DISALLOWED']);
+            self::errorExit(__('BT_V1_ONLY_DISALLOWED'));
         }
 
         if (config()->get('tracker.disabled_v2_torrents') && !isset($bt_v1) && isset($bt_v2)) {
-            self::errorExit($lang['BT_V2_ONLY_DISALLOWED']);
+            self::errorExit(__('BT_V2_ONLY_DISALLOWED'));
         }
 
         // Getting info_hash v1
@@ -145,7 +145,7 @@ class Registry
         }
 
         if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where LIMIT 1")) {
-            $msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
+            $msg = sprintf(__('BT_REG_FAIL_SAME_HASH'), TOPIC_URL . $row['topic_id']);
             set_die_append_msg($forum_id, $topic_id);
             bb_die($msg);
         }
@@ -161,14 +161,14 @@ class Registry
                     if (isset($f['length']) && is_numeric($f['length'])) {
                         $totallen += $f['length'];
                     } else {
-                        self::errorExit($lang['TORFILE_INVALID']);
+                        self::errorExit(__('TORFILE_INVALID'));
                     }
                 }
             }
             $totallen = (float)$totallen;
         } elseif (isset($bt_v2)) {
             $fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
-                global $lang;
+                
 
                 $size = 0;
                 foreach ($array as $key => $value) {
@@ -178,7 +178,7 @@ class Registry
                         if (isset($value['']['length']) && is_numeric($value['']['length'])) {
                             $size += $value['']['length'];
                         } else {
-                            self::errorExit($lang['TORFILE_INVALID']);
+                            self::errorExit(__('TORFILE_INVALID'));
                         }
                     }
                 }
@@ -188,7 +188,7 @@ class Registry
 
             $totallen = (float)$fileTreeSize($info['file tree']);
         } else {
-            self::errorExit($lang['TORFILE_INVALID']);
+            self::errorExit(__('TORFILE_INVALID'));
         }
 
         $size = sprintf('%.0f', (float)$totallen);
@@ -205,9 +205,9 @@ class Registry
                 'tor_status' => $torStatus,
             ]);
         } catch (UniqueConstraintViolationException) {
-            self::errorExit($lang['BT_REG_FAIL_SAME_HASH']);
+            self::errorExit(__('BT_REG_FAIL_SAME_HASH'));
         } catch (DriverException) {
-            bb_die($lang['BT_REG_FAIL']);
+            bb_die(__('BT_REG_FAIL'));
         }
 
         // Update tracker status
@@ -229,7 +229,7 @@ class Registry
 
         if ($reg_mode == 'request' || $reg_mode == 'newtopic') {
             set_die_append_msg($forum_id, $topic_id);
-            bb_die(sprintf($lang['BT_REGISTERED'], DL_URL . $topic_id));
+            bb_die(sprintf(__('BT_REGISTERED'), DL_URL . $topic_id));
         }
 
         return true;
@@ -243,13 +243,13 @@ class Registry
      */
     public static function unregister(int $topicId, string $mode = ''): void
     {
-        global $lang;
+        
 
         $torrent = self::getTorrentInfo($topicId);
 
         if ($mode == 'request') {
             if (!$torrent['tracker_status']) {
-                bb_die($lang['BT_UNREGISTERED_ALREADY']);
+                bb_die(__('BT_UNREGISTERED_ALREADY'));
             }
             self::checkAuth($torrent['forum_id'], $torrent['topic_poster']);
         }
@@ -280,7 +280,7 @@ class Registry
 
         if ($mode == 'request') {
             set_die_append_msg($torrent['forum_id'], $topicId);
-            bb_die($lang['BT_UNREGISTERED']);
+            bb_die(__('BT_UNREGISTERED'));
         }
     }
 
@@ -340,7 +340,7 @@ class Registry
      */
     public static function delete(int $topicId, string $mode = ''): void
     {
-        global $lang, $reg_mode, $log_action;
+        global $reg_mode, $log_action;
 
         $reg_mode = $mode;
 
@@ -350,7 +350,7 @@ class Registry
         $poster_id = $torrent['topic_poster'];
 
         if ($torrent['attach_ext_id'] !== TORRENT_EXT_ID) {
-            bb_die($lang['NOT_TORRENT']);
+            bb_die(__('NOT_TORRENT'));
         }
 
         self::checkAuth($forum_id, $poster_id);

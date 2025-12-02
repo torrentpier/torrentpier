@@ -18,7 +18,7 @@ $edit_tpl_mode = ($can_edit_tpl && !empty($_REQUEST['edit_tpl']));
 $sql = "SELECT forum_name, allow_reg_tracker, forum_tpl_id FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
 
 if (!$forum_id || !$f_data = DB()->fetch_row($sql)) {
-    bb_die($lang['FORUM_NOT_EXIST']);
+    bb_die(__('FORUM_NOT_EXIST'));
 }
 // tpl_data
 $tpl_data = [];
@@ -31,7 +31,7 @@ if (!$f_data['forum_tpl_id'] || !$tpl_data = DB()->fetch_row($sql)) {
 }
 
 $template->assign_vars([
-    'PAGE_TITLE' => $lang['NEW_RELEASE'],
+    'PAGE_TITLE' => __('NEW_RELEASE'),
     'FORUM_NAME' => $f_data['forum_name'],
     'FORUM_ID' => $forum_id,
     'TPL_FORM_ACTION' => POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id",

@@ -19,7 +19,7 @@ if (IS_GUEST) {
 }
 
 if (!IS_ADMIN) {
-    bb_die($lang['NOT_ADMIN']);
+    bb_die(__('NOT_ADMIN'));
 }
 
 if (!$userdata['session_admin']) {

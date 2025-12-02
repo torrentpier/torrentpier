@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $lang;
+global $userdata;
 
 if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
@@ -23,14 +23,14 @@ switch ($mode) {
             CACHE($cache_name)->rm();
         }
 
-        $this->response['cache_html'] = '<span class="seed bold">' . $lang['ALL_CACHE_CLEARED'] . '</span>';
+        $this->response['cache_html'] = '<span class="seed bold">' . __('ALL_CACHE_CLEARED') . '</span>';
         break;
     case 'clear_datastore':
         global $datastore;
 
         $datastore->clean();
 
-        $this->response['datastore_html'] = '<span class="seed bold">' . $lang['DATASTORE_CLEARED'] . '</span>';
+        $this->response['datastore_html'] = '<span class="seed bold">' . __('DATASTORE_CLEARED') . '</span>';
         break;
     case 'clear_template_cache':
         global $template;
@@ -50,32 +50,32 @@ switch ($mode) {
             }
         }
 
-        $this->response['template_cache_html'] = '<span class="seed bold">' . $lang['ALL_TEMPLATE_CLEARED'] . '</span>';
+        $this->response['template_cache_html'] = '<span class="seed bold">' . __('ALL_TEMPLATE_CLEARED') . '</span>';
         break;
     case 'indexer':
         $manticore = getManticoreSearch();
         if ($manticore->initialLoad()) {
-            $this->response['indexer_html'] = '<span class="seed bold">' . $lang['INDEXER_SUCCESS'] . '</span>';
+            $this->response['indexer_html'] = '<span class="seed bold">' . __('INDEXER_SUCCESS') . '</span>';
         } else {
-            $this->response['indexer_html'] = '<span class="leech bold">' . $lang['ERROR'] . '</span>';
+            $this->response['indexer_html'] = '<span class="leech bold">' . __('ERROR') . '</span>';
         }
         break;
     case 'update_user_level':
         \TorrentPier\Legacy\Group::update_user_level('all');
-        $this->response['update_user_level_html'] = '<span class="seed bold">' . $lang['USER_LEVELS_UPDATED'] . '</span>';
+        $this->response['update_user_level_html'] = '<span class="seed bold">' . __('USER_LEVELS_UPDATED') . '</span>';
         break;
     case 'sync_topics':
         \TorrentPier\Legacy\Admin\Common::sync('topic', 'all');
         \TorrentPier\Legacy\Admin\Common::sync_all_forums();
-        $this->response['sync_topics_html'] = '<span class="seed bold">' . $lang['TOPICS_DATA_SYNCHRONIZED'] . '</span>';
+        $this->response['sync_topics_html'] = '<span class="seed bold">' . __('TOPICS_DATA_SYNCHRONIZED') . '</span>';
         break;
     case 'sync_user_posts':
         \TorrentPier\Legacy\Admin\Common::sync('user_posts', 'all');
-        $this->response['sync_user_posts_html'] = '<span class="seed bold">' . $lang['USER_POSTS_COUNT_SYNCHRONIZED'] . '</span>';
+        $this->response['sync_user_posts_html'] = '<span class="seed bold">' . __('USER_POSTS_COUNT_SYNCHRONIZED') . '</span>';
         break;
     case 'unlock_cron':
         \TorrentPier\Helpers\CronHelper::enableBoard();
-        $this->response['unlock_cron_html'] = '<span class="seed bold">' . $lang['ADMIN_UNLOCKED'] . '</span>';
+        $this->response['unlock_cron_html'] = '<span class="seed bold">' . __('ADMIN_UNLOCKED') . '</span>';
         break;
 
     case 'tr_stats':
@@ -122,7 +122,7 @@ switch ($mode) {
 
         $html = '<table class="forumline"><tr><th colspan="2">' . __('TORRENT_STATS_TITLE') . '</th></tr>';
         foreach ($stats as $i => $value) {
-            $label = $lang['TR_STATS'][$i] ?? "Stat $i";
+            $label = __('TR_STATS')[$i] ?? "Stat $i";
             $html .= '<tr><td class="row1">' . $label . '</td><td class="row2"><b>' . $value . '</b></td></tr>';
         }
         $html .= '</table><br/>';

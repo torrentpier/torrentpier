@@ -254,7 +254,7 @@ foreach ($cat_forums as $cid => $c) {
             'TOPICS' => commify($f['forum_topics']),
             'LAST_SF_ID' => $f['last_sf_id'] ?? null,
             'MODERATORS' => isset($moderators[$fid]) ? implode(', ', $moderators[$fid]) : '',
-            'FORUM_FOLDER_ALT' => $new ? $lang['NEW'] : $lang['OLD']
+            'FORUM_FOLDER_ALT' => $new ? __('NEW') : __('OLD')
         ]);
 
         if ($f['last_post_id']) {
@@ -272,34 +272,34 @@ foreach ($cat_forums as $cid => $c) {
 $template->assign_vars([
     'SHOW_FORUMS' => $forums_count,
     'SHOW_MAP' => isset($_GET['map']) && !IS_GUEST,
-    'PAGE_TITLE' => $viewcat ? $cat_title_html[$viewcat] : $lang['HOME'],
-    'NO_FORUMS_MSG' => $only_new ? $lang['NO_NEW_POSTS'] : $lang['NO_FORUMS'],
+    'PAGE_TITLE' => $viewcat ? $cat_title_html[$viewcat] : __('HOME'),
+    'NO_FORUMS_MSG' => $only_new ? __('NO_NEW_POSTS') : __('NO_FORUMS'),
 
-    'TOTAL_TOPICS' => sprintf($lang['POSTED_TOPICS_TOTAL'], commify($stats['topiccount'])),
-    'TOTAL_POSTS' => sprintf($lang['POSTED_ARTICLES_TOTAL'], commify($stats['postcount'])),
-    'TOTAL_USERS' => sprintf($lang['REGISTERED_USERS_TOTAL'], commify($stats['usercount'])),
+    'TOTAL_TOPICS' => sprintf(__('POSTED_TOPICS_TOTAL'), commify($stats['topiccount'])),
+    'TOTAL_POSTS' => sprintf(__('POSTED_ARTICLES_TOTAL'), commify($stats['postcount'])),
+    'TOTAL_USERS' => sprintf(__('REGISTERED_USERS_TOTAL'), commify($stats['usercount'])),
     'TOTAL_GENDER' => config()->get('gender') ? sprintf(
-        $lang['USERS_TOTAL_GENDER'],
+        __('USERS_TOTAL_GENDER'),
         $stats['male'],
         $stats['female'],
         $stats['unselect']
     ) : '',
-    'NEWEST_USER' => sprintf($lang['NEWEST_USER'], profile_url($stats['newestuser'])),
+    'NEWEST_USER' => sprintf(__('NEWEST_USER'), profile_url($stats['newestuser'])),
 
     // Tracker stats
     'TORRENTS_STAT' => config()->get('tor_stats') ? sprintf(
-        $lang['TORRENTS_STAT'],
+        __('TORRENTS_STAT'),
         $stats['torrentcount'],
         humn_size($stats['size'])
     ) : '',
     'PEERS_STAT' => config()->get('tor_stats') ? sprintf(
-        $lang['PEERS_STAT'],
+        __('PEERS_STAT'),
         $stats['peers'],
         $stats['seeders'],
         $stats['leechers']
     ) : '',
     'SPEED_STAT' => config()->get('tor_stats') ? sprintf(
-        $lang['SPEED_STAT'],
+        __('SPEED_STAT'),
         humn_size($stats['speed']) . '/s'
     ) : '',
     'SHOW_MOD_INDEX' => config()->get('show_mod_index'),
@@ -318,7 +318,7 @@ $template->assign_vars([
     'U_ATOM_FEED' => make_url('feed.php?type=f&id=0'),
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
-    'BOARD_START' => config()->get('show_board_start_index') ? ($lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date(config()->get('board_startdate')) . '</b>') : false,
+    'BOARD_START' => config()->get('show_board_start_index') ? (__('BOARD_STARTED') . ':&nbsp;' . '<b>' . bb_date(config()->get('board_startdate')) . '</b>') : false,
 ]);
 
 // Set tpl vars for bt_userdata
@@ -387,10 +387,10 @@ if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
             }
             $week_list[] = profile_url($week) . ' <span class="small">(' . birthday_age(date('Y-m-d', strtotime('-1 year', strtotime($week['user_birthday'])))) . ')</span>';
         }
-        $week_all = $week_all ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
-        $week_list = sprintf($lang['BIRTHDAY_WEEK'], config()->get('birthday_check_day'), implode(', ', $week_list)) . $week_all;
+        $week_all = $week_all ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . __('ALL') . '">...</a>' : '';
+        $week_list = sprintf(__('BIRTHDAY_WEEK'), config()->get('birthday_check_day'), implode(', ', $week_list)) . $week_all;
     } else {
-        $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], config()->get('birthday_check_day'));
+        $week_list = sprintf(__('NOBIRTHDAY_WEEK'), config()->get('birthday_check_day'));
     }
 
     if (!empty($stats['birthday_today_list'])) {
@@ -402,10 +402,10 @@ if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
             }
             $today_list[] = profile_url($today) . ' <span class="small">(' . birthday_age($today['user_birthday']) . ')</span>';
         }
-        $today_all = $today_all ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
-        $today_list = $lang['BIRTHDAY_TODAY'] . implode(', ', $today_list) . $today_all;
+        $today_all = $today_all ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="' . __('ALL') . '">...</a>' : '';
+        $today_list = __('BIRTHDAY_TODAY') . implode(', ', $today_list) . $today_all;
     } else {
-        $today_list = $lang['NOBIRTHDAY_TODAY'];
+        $today_list = __('NOBIRTHDAY_TODAY');
     }
 
     $template->assign_vars([
@@ -428,7 +428,7 @@ if (IS_AM) {
 define('SHOW_ONLINE', $show_online_users);
 
 if (isset($_GET['map'])) {
-    $template->assign_vars(['PAGE_TITLE' => $lang['FORUM_MAP']]);
+    $template->assign_vars(['PAGE_TITLE' => __('FORUM_MAP')]);
 }
 
 print_page('index.tpl');

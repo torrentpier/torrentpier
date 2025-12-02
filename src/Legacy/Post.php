@@ -31,7 +31,7 @@ class Post
      */
     public static function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &$message)
     {
-        global $user, $userdata, $lang;
+        global $user, $userdata;
 
         // Check username
         if (!empty($username)) {
@@ -50,26 +50,26 @@ class Post
         if (!empty($subject)) {
             $subject = str_replace('&amp;', '&', $subject);
         } elseif ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
-            $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['EMPTY_SUBJECT'] : $lang['EMPTY_SUBJECT'];
+            $error_msg .= (!empty($error_msg)) ? '<br />' . __('EMPTY_SUBJECT') : __('EMPTY_SUBJECT');
         }
 
         // Check message
         if (!empty($message)) {
         } elseif ($mode != 'delete') {
-            $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['EMPTY_MESSAGE'] : $lang['EMPTY_MESSAGE'];
+            $error_msg .= (!empty($error_msg)) ? '<br />' . __('EMPTY_MESSAGE') : __('EMPTY_MESSAGE');
         }
 
         // Check smilies limit
         if (config()->get('max_smilies')) {
             $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . config()->get('smilies_path'));
             if ($count_smilies > config()->get('max_smilies')) {
-                $to_many_smilies = sprintf($lang['MAX_SMILIES_PER_POST'], config()->get('max_smilies'));
+                $to_many_smilies = sprintf(__('MAX_SMILIES_PER_POST'), config()->get('max_smilies'));
                 $error_msg .= (!empty($error_msg)) ? '<br />' . $to_many_smilies : $to_many_smilies;
             }
         }
 
         if (IS_GUEST && !config()->get('captcha.disabled') && !bb_captcha('check')) {
-            $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['CAPTCHA_WRONG'] : $lang['CAPTCHA_WRONG'];
+            $error_msg .= (!empty($error_msg)) ? '<br />' . __('CAPTCHA_WRONG') : __('CAPTCHA_WRONG');
         }
     }
 
@@ -96,7 +96,7 @@ class Post
      */
     public static function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig, $robots_indexing)
     {
-        global $userdata, $post_info, $is_auth, $lang, $datastore;
+        global $userdata, $post_info, $is_auth, $datastore;
 
         $current_time = TIMENOW;
 
@@ -109,7 +109,7 @@ class Post
             if ($row = DB()->fetch_row($sql) and $row['last_post_time']) {
                 if ($userdata['user_level'] == USER) {
                     if ((TIMENOW - $row['last_post_time']) < config()->get('flood_interval')) {
-                        bb_die($lang['FLOOD_ERROR']);
+                        bb_die(__('FLOOD_ERROR'));
                     }
                 }
             }
@@ -131,7 +131,7 @@ class Post
                 $last_msg = DB()->escape($row['post_text']);
 
                 if ($last_msg == $post_message) {
-                    bb_die($lang['DOUBLE_POST_ERROR']);
+                    bb_die(__('DOUBLE_POST_ERROR'));
                 }
             }
         }
@@ -327,9 +327,9 @@ class Post
      */
     public static function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id, $post_id)
     {
-        global $lang;
+        
 
-        $message = $lang['DELETED'];
+        $message = __('DELETED');
         Common::post_delete($post_id);
 
         set_die_append_msg($forum_id, $topic_id);
@@ -347,7 +347,7 @@ class Post
      */
     public static function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
     {
-        global $lang, $userdata;
+        global $userdata;
 
         if (!config()->get('topic_notify_enabled')) {
             return;
@@ -379,7 +379,7 @@ class Post
                         $emailer = new Emailer();
 
                         $emailer->set_to($row['user_email'], $row['username']);
-                        $emailer->set_subject(sprintf($lang['EMAILER_SUBJECT']['TOPIC_NOTIFY'], $topic_title));
+                        $emailer->set_subject(sprintf(__('EMAILER_SUBJECT')['TOPIC_NOTIFY'], $topic_title));
 
                         $emailer->set_template('topic_notify', $row['user_lang']);
                         $emailer->assign_vars([
@@ -433,7 +433,7 @@ class Post
      */
     public static function insert_post(string $mode, int|string $topic_id, null|int|string $forum_id = null, null|int|string $old_forum_id = null, null|int|string $new_topic_id = null, string $new_topic_title = '', null|int|string $old_topic_id = null, string $reason_move = ''): void
     {
-        global $userdata, $lang;
+        global $userdata;
 
         if (!$topic_id) {
             return;
@@ -462,10 +462,10 @@ class Post
                 return;
             }
 
-            $reason_move = !empty($reason_move) ? htmlCHR($reason_move) : $lang['NOSELECT'];
-            $post_text = sprintf($lang['BOT_TOPIC_MOVED_FROM_TO'], '[url=' . make_url(FORUM_URL . $old_forum_id) . ']' . $forum_names[$old_forum_id] . '[/url]', '[url=' . make_url(FORUM_URL . $forum_id) . ']' . $forum_names[$forum_id] . '[/url]', $reason_move, profile_url($userdata));
+            $reason_move = !empty($reason_move) ? htmlCHR($reason_move) : __('NOSELECT');
+            $post_text = sprintf(__('BOT_TOPIC_MOVED_FROM_TO'), '[url=' . make_url(FORUM_URL . $old_forum_id) . ']' . $forum_names[$old_forum_id] . '[/url]', '[url=' . make_url(FORUM_URL . $forum_id) . ']' . $forum_names[$forum_id] . '[/url]', $reason_move, profile_url($userdata));
         } elseif ($mode == 'after_split_to_old') {
-            $post_text = sprintf($lang['BOT_MESS_SPLITS'], '[url=' . make_url(TOPIC_URL . $new_topic_id) . ']' . htmlCHR($new_topic_title) . '[/url]', profile_url($userdata));
+            $post_text = sprintf(__('BOT_MESS_SPLITS'), '[url=' . make_url(TOPIC_URL . $new_topic_id) . ']' . htmlCHR($new_topic_title) . '[/url]', profile_url($userdata));
         } elseif ($mode == 'after_split_to_new') {
             $sql = "SELECT t.topic_title, p.post_time
 			FROM " . BB_TOPICS . " t, " . BB_POSTS . " p
@@ -475,7 +475,7 @@ class Post
             if ($row = DB()->fetch_row($sql)) {
                 $post_time = $row['post_time'] - 1;
 
-                $post_text = sprintf($lang['BOT_TOPIC_SPLITS'], '[url=' . make_url(TOPIC_URL . $old_topic_id) . ']' . $row['topic_title'] . '[/url]', profile_url($userdata));
+                $post_text = sprintf(__('BOT_TOPIC_SPLITS'), '[url=' . make_url(TOPIC_URL . $old_topic_id) . ']' . $row['topic_title'] . '[/url]', profile_url($userdata));
             } else {
                 return;
             }

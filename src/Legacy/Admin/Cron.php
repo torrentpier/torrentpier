@@ -142,15 +142,15 @@ class Cron
         $row = DB()->fetch_row("SELECT cron_title, cron_script FROM " . BB_CRON . " WHERE cron_title = '" . $_POST['cron_title'] . "' or cron_script = '" . $_POST['cron_script'] . "' ");
 
         if ($row) {
-            global $lang;
+            
 
             if ($_POST['cron_script'] == $row['cron_script']) {
-                $langmode = $lang['SCRIPT_DUPLICATE'];
+                $langmode = __('SCRIPT_DUPLICATE');
             } else {
-                $langmode = $lang['TITLE_DUPLICATE'];
+                $langmode = __('TITLE_DUPLICATE');
             }
 
-            $message = $langmode . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS_ADDED'], "<a href=\"javascript:history.back(-1)\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS'], "<a href=\"admin_cron.php?mode=list\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+            $message = $langmode . "<br /><br />" . sprintf(__('CLICK_RETURN_JOBS_ADDED'), "<a href=\"javascript:history.back(-1)\">", "</a>") . "<br /><br />" . sprintf(__('CLICK_RETURN_JOBS'), "<a href=\"admin_cron.php?mode=list\">", "</a>") . "<br /><br />" . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), "<a href=\"index.php?pane=right\">", "</a>");
 
             bb_die($message);
         }

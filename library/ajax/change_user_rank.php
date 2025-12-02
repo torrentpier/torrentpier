@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $datastore, $lang;
+global $datastore;
 
 if (!$ranks = $datastore->get('ranks')) {
     $datastore->update('ranks');
@@ -21,7 +21,7 @@ if (!$ranks = $datastore->get('ranks')) {
 $rank_id = (int)$this->request['rank_id'];
 
 if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
-    $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+    $this->ajax_die(__('NO_USER_ID_SPECIFIED'));
 }
 
 if ($rank_id != 0 && !isset($ranks[$rank_id])) {
@@ -34,5 +34,5 @@ DB()->query("UPDATE " . BB_USERS . " SET user_rank = $rank_id WHERE user_id = $u
 
 $user_rank = $rank_id ? '<span class="' . $ranks[$rank_id]['rank_style'] . '">' . $ranks[$rank_id]['rank_title'] . '</span>' : '';
 
-$this->response['html'] = $rank_id ? $lang['AWARDED_RANK'] . "<b> $user_rank </b>" : $lang['SHOT_RANK'];
-$this->response['rank_name'] = $rank_id ? $user_rank : $lang['USER'];
+$this->response['html'] = $rank_id ? __('AWARDED_RANK') . "<b> $user_rank </b>" : __('SHOT_RANK');
+$this->response['rank_name'] = $rank_id ? $user_rank : __('USER');

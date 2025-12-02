@@ -17,7 +17,7 @@ require INC_DIR . '/bbcode.php';
 //
 function return_msg_mcp($status_msg)
 {
-    global $topic_id, $req_topics, $forum_id, $lang, $mode;
+    global $topic_id, $req_topics, $forum_id, $mode;
 
     if (count($req_topics) == 1) {
         $topic_id = reset($req_topics);
@@ -27,14 +27,14 @@ function return_msg_mcp($status_msg)
     $message .= '<br /><br />';
 
     if ($topic_id && $mode != 'delete') {
-        $message .= sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="' . TOPIC_URL . $topic_id . '">', '</a>');
+        $message .= sprintf(__('CLICK_RETURN_TOPIC'), '<a href="' . TOPIC_URL . $topic_id . '">', '</a>');
         $message .= '<br /><br />';
     } elseif (count($req_topics) != 1) {
-        $message .= sprintf($lang['CLICK_RETURN_MODCP'], '<a href="' . FORUM_URL . "$forum_id&amp;mod=1" . '">', '</a>');
+        $message .= sprintf(__('CLICK_RETURN_MODCP'), '<a href="' . FORUM_URL . "$forum_id&amp;mod=1" . '">', '</a>');
         $message .= '<br /><br />';
     }
 
-    $message .= sprintf($lang['CLICK_RETURN_FORUM'], '<a href="' . FORUM_URL . $forum_id . '">', '</a>');
+    $message .= sprintf(__('CLICK_RETURN_FORUM'), '<a href="' . FORUM_URL . $forum_id . '">', '</a>');
 
     return $message;
 }
@@ -113,7 +113,7 @@ if ($topic_id) {
 	";
 
     if (!$topic_row = DB()->fetch_row($sql)) {
-        bb_die($lang['INVALID_TOPIC_ID_DB']);
+        bb_die(__('INVALID_TOPIC_ID_DB'));
     }
 
     $forum_id = $topic_row['forum_id'];
@@ -123,7 +123,7 @@ if ($topic_id) {
     $sql = "SELECT forum_name, forum_topics FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
 
     if (!$topic_row = DB()->fetch_row($sql)) {
-        bb_die($lang['FORUM_NOT_EXIST']);
+        bb_die(__('FORUM_NOT_EXIST'));
     }
 
     $forum_name = $topic_row['forum_name'];
@@ -161,7 +161,7 @@ if ($mode == 'ip') {
 
 // Exit if user not authorized
 if (!$is_auth['auth_mod']) {
-    bb_die($lang['NOT_MODERATOR']);
+    bb_die(__('NOT_MODERATOR'));
 }
 
 // Redirect to login page if not admin session
@@ -186,14 +186,14 @@ switch ($mode) {
     case 'post_unpin':
 
         if (empty($_POST['topic_id_list']) && empty($topic_id)) {
-            bb_die($lang['NONE_SELECTED']);
+            bb_die(__('NONE_SELECTED'));
         }
 
         $req_topics = $_POST['topic_id_list'] ?? $topic_id;
         validate_topics($forum_id, $req_topics, $topic_titles);
 
         if (!$req_topics || !($topic_csv = get_id_csv($req_topics))) {
-            bb_die($lang['NONE_SELECTED']);
+            bb_die(__('NONE_SELECTED'));
         }
 
         $hidden_fields = [
@@ -216,7 +216,7 @@ switch ($mode) {
     case 'delete':
 
         if (!$is_auth['auth_delete']) {
-            bb_die(sprintf($lang['SORRY_AUTH_DELETE'], $is_auth['auth_delete_type']));
+            bb_die(sprintf(__('SORRY_AUTH_DELETE'), $is_auth['auth_delete_type']));
         }
 
         if ($confirmed) {
@@ -239,11 +239,11 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = $result ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
+            $msg = $result ? __('TOPICS_REMOVED') : __('NO_TOPICS_REMOVED');
             bb_die(return_msg_mcp($msg));
         } else {
             print_confirmation([
-                'QUESTION' => $lang['CONFIRM_DELETE_TOPIC'],
+                'QUESTION' => __('CONFIRM_DELETE_TOPIC'),
                 'ITEMS_LIST' => implode("\n</li>\n<li>\n", $topic_titles),
                 'FORM_ACTION' => 'modcp.php',
                 'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields)
@@ -274,7 +274,7 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = $result ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
+            $msg = $result ? __('TOPICS_MOVED') : __('NO_TOPICS_MOVED');
             bb_die(return_msg_mcp($msg));
         } else {
             if (IS_ADMIN) {
@@ -291,8 +291,8 @@ switch ($mode) {
                 'SHOW_LEAVESHADOW' => $is_moderator,
                 'SHOW_BOT_OPTIONS' => $is_moderator,
 
-                'MESSAGE_TITLE' => $lang['CONFIRM'],
-                'MESSAGE_TEXT' => $lang['CONFIRM_MOVE_TOPIC'],
+                'MESSAGE_TITLE' => __('CONFIRM'),
+                'MESSAGE_TEXT' => __('CONFIRM_MOVE_TOPIC'),
                 'TOPIC_TITLES' => implode("\n</li>\n<li>\n", $topic_titles),
 
                 'S_FORUM_SELECT' => $forum_select,
@@ -326,7 +326,7 @@ switch ($mode) {
         }
 
         if (!$topic_csv = get_id_csv($topic_csv)) {
-            bb_die($lang['NONE_SELECTED']);
+            bb_die(__('NONE_SELECTED'));
         }
 
         DB()->query("
@@ -346,7 +346,7 @@ switch ($mode) {
             ]);
         }
 
-        $msg = ($lock) ? $lang['TOPICS_LOCKED'] : $lang['TOPICS_UNLOCKED'];
+        $msg = ($lock) ? __('TOPICS_LOCKED') : __('TOPICS_UNLOCKED');
         bb_die(return_msg_mcp($msg));
 
         break;
@@ -378,7 +378,7 @@ switch ($mode) {
             'topic_title' => get_topic_title($topic_id)
         ]);
 
-        $msg = ($set_download) ? $lang['TOPICS_DOWN_SETS'] : $lang['TOPICS_DOWN_UNSETS'];
+        $msg = ($set_download) ? __('TOPICS_DOWN_SETS') : __('TOPICS_DOWN_UNSETS');
         bb_die(return_msg_mcp($msg));
 
         break;
@@ -445,7 +445,7 @@ switch ($mode) {
 
                 $post_subject = clean_title($_POST['subject']);
                 if (empty($post_subject)) {
-                    bb_die($lang['EMPTY_SUBJECT']);
+                    bb_die(__('EMPTY_SUBJECT'));
                 }
 
                 $new_forum_id = (int)$_POST['new_forum_id'];
@@ -501,8 +501,8 @@ switch ($mode) {
                 \TorrentPier\Legacy\Admin\Common::sync('forum', [$forum_id, $new_forum_id]);
 
                 //bot
-                $message = $lang['TOPIC_SPLIT'] . '<br /><br /><a href="' . TOPIC_URL . "$topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_OLD'] . '</a>';
-                $message .= ' &nbsp;::&nbsp; <a href="' . TOPIC_URL . "$new_topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_NEW'] . '</a>';
+                $message = __('TOPIC_SPLIT') . '<br /><br /><a href="' . TOPIC_URL . "$topic_id&amp;sid=" . $userdata['session_id'] . '">' . __('TOPIC_SPLIT_OLD') . '</a>';
+                $message .= ' &nbsp;::&nbsp; <a href="' . TOPIC_URL . "$new_topic_id&amp;sid=" . $userdata['session_id'] . '">' . __('TOPIC_SPLIT_NEW') . '</a>';
 
                 // Log action
                 $log_action->mod('mod_topic_split', [
@@ -518,13 +518,13 @@ switch ($mode) {
             }
         } elseif ($post_id_sql && $delete_posts) {
             if (!$is_auth['auth_delete']) {
-                bb_die(sprintf($lang['SORRY_AUTH_DELETE'], $is_auth['auth_delete_type']));
+                bb_die(sprintf(__('SORRY_AUTH_DELETE'), $is_auth['auth_delete_type']));
             }
 
             // Delete posts
             $result = \TorrentPier\Legacy\Admin\Common::post_delete(explode(',', $post_id_sql));
 
-            $msg = $result ? $lang['DELETE_POSTS_SUCCESFULLY'] : $lang['NO_POSTS_REMOVED'];
+            $msg = $result ? __('DELETE_POSTS_SUCCESFULLY') : __('NO_POSTS_REMOVED');
             bb_die(return_msg_mcp($msg));
         } else {
             $sql = "SELECT u.username, u.user_rank, p.*, pt.post_text, p.post_username
@@ -594,7 +594,7 @@ switch ($mode) {
         $rdns_ip_num = (isset($_GET['rdns'])) ? $_GET['rdns'] : '';
 
         if (!$post_id) {
-            bb_die($lang['NO_SUCH_POST']);
+            bb_die(__('NO_SUCH_POST'));
         }
 
         // Look up relevant data for this post
@@ -604,12 +604,12 @@ switch ($mode) {
         }
 
         if (!($post_row = DB()->sql_fetchrow($result))) {
-            bb_die($lang['NO_SUCH_POST']);
+            bb_die(__('NO_SUCH_POST'));
         }
 
         $no_lookup = false;
         if (!$ip_this_post = \TorrentPier\Helpers\IPHelper::long2ip_extended($post_row['poster_ip'])) {
-            $ip_this_post = $lang['NOT_AVAILABLE'];
+            $ip_this_post = __('NOT_AVAILABLE');
             $no_lookup = true;
         }
 
@@ -644,7 +644,7 @@ switch ($mode) {
 
                 $no_lookup = false;
                 if (!$ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($row['poster_ip'])) {
-                    $ip = $lang['NOT_AVAILABLE'];
+                    $ip = __('NOT_AVAILABLE');
                     $no_lookup = true;
                 }
                 $ip = ($rdns_ip_num == $ip || $rdns_ip_num == 'all') ? gethostbyaddr($ip) : $ip;
@@ -718,7 +718,7 @@ switch ($mode) {
             }
 
             if (!$topic_csv = get_id_csv($topic_csv)) {
-                bb_die($lang['NONE_SELECTED']);
+                bb_die(__('NONE_SELECTED'));
             }
 
             DB()->query("
@@ -738,7 +738,7 @@ switch ($mode) {
                 ]);
             }
 
-            $msg = $pin ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+            $msg = $pin ? __('POST_PINNED') : __('POST_UNPINNED');
             bb_die(return_msg_mcp($msg));
         } elseif ($topic_id) {
             $sql = "
@@ -759,7 +759,7 @@ switch ($mode) {
             }
 
             if (!$topic_csv = get_id_csv($topic_csv)) {
-                bb_die($lang['NONE_SELECTED']);
+                bb_die(__('NONE_SELECTED'));
             }
 
             DB()->query("
@@ -779,7 +779,7 @@ switch ($mode) {
                 ]);
             }
 
-            $msg = $pin ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+            $msg = $pin ? __('POST_PINNED') : __('POST_UNPINNED');
             bb_die(return_msg_mcp($msg));
         }
         break;
@@ -789,7 +789,7 @@ switch ($mode) {
         break;
 }
 
-$template->assign_vars(['PAGE_TITLE' => $lang['MOD_CP']]);
+$template->assign_vars(['PAGE_TITLE' => __('MOD_CP')]);
 
 require(PAGE_HEADER);
 

@@ -41,9 +41,9 @@ class GoogleCaptchaV3 implements CaptchaInterface
      */
     public function get(): string
     {
-        global $lang;
+        
 
-        return "{$lang['CAPTCHA_OCCURS_BACKGROUND']}
+        return __('CAPTCHA_OCCURS_BACKGROUND') . "
         <script src='https://www.google.com/recaptcha/api.js?render={$this->settings['public_key']}&lang={$this->settings['language']}'></script>
         <script>
         grecaptcha.ready(function() {

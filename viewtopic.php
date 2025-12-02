@@ -55,7 +55,7 @@ if (isset($_REQUEST['single'])) {
 }
 
 if (!$topic_id && !$post_id) {
-    bb_die($lang['TOPIC_POST_NOT_EXIST'], 404);
+    bb_die(__('TOPIC_POST_NOT_EXIST'), 404);
 }
 
 $tracking_topics = get_tracks('topic');
@@ -78,7 +78,7 @@ if ($topic_id && isset($_GET['view']) && ($_GET['view'] == 'next' || $_GET['view
     if ($row = DB()->fetch_row($sql)) {
         $next_topic_id = $topic_id = $row['topic_id'];
     } else {
-        $message = ($_GET['view'] == 'next') ? $lang['NO_NEWER_TOPICS'] : $lang['NO_OLDER_TOPICS'];
+        $message = ($_GET['view'] == 'next') ? __('NO_NEWER_TOPICS') : __('NO_OLDER_TOPICS');
         bb_die($message);
     }
 }
@@ -100,12 +100,12 @@ if ($topic_id) {
 		WHERE p.post_id = $post_id
 	";
 } else {
-    bb_die($lang['TOPIC_POST_NOT_EXIST'], 404);
+    bb_die(__('TOPIC_POST_NOT_EXIST'), 404);
 }
 
 if (!$t_data = DB()->fetch_row($sql)) {
     meta_refresh('index.php', 10);
-    bb_die($lang['TOPIC_POST_NOT_EXIST'], 404);
+    bb_die(__('TOPIC_POST_NOT_EXIST'), 404);
 }
 
 $forum_topic_data =& $t_data;
@@ -113,7 +113,7 @@ $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
 
 if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) {
-    bb_die($lang['ERROR_PORNO_FORUM']);
+    bb_die(__('ERROR_PORNO_FORUM'));
 }
 
 if ($userdata['session_admin'] && !empty($_REQUEST['mod'])) {
@@ -164,7 +164,7 @@ if (!$is_auth['auth_read']) {
         $redirect .= ($start && !$post_id) ? "&start=$start" : '';
         redirect(LOGIN_URL . "?redirect=$redirect");
     }
-    bb_die($lang['TOPIC_POST_NOT_EXIST'], 404);
+    bb_die(__('TOPIC_POST_NOT_EXIST'), 404);
 }
 
 $forum_name = $t_data['forum_name'];
@@ -246,7 +246,7 @@ if (config()->get('topic_notify_enabled')) {
                 }
 
                 set_die_append_msg($forum_id, $topic_id);
-                bb_die($lang['NO_LONGER_WATCHING']);
+                bb_die(__('NO_LONGER_WATCHING'));
             }
         } elseif ($t_data['notify_status'] == TOPIC_WATCH_UNNOTIFIED) {
             if (isset($_GET['watch'])) {
@@ -258,7 +258,7 @@ if (config()->get('topic_notify_enabled')) {
                 }
 
                 set_die_append_msg($forum_id, $topic_id);
-                bb_die($lang['YOU_ARE_WATCHING']);
+                bb_die(__('YOU_ARE_WATCHING'));
             }
         }
     } else {
@@ -353,7 +353,7 @@ if ($postrow = DB()->fetch_rowset($sql)) {
     }
     $total_posts = count($postrow);
 } else {
-    bb_die($lang['NO_POSTS_TOPIC']);
+    bb_die(__('NO_POSTS_TOPIC'));
 }
 
 if (!$ranks = $datastore->get('ranks')) {
@@ -371,7 +371,7 @@ $view_forum_url = FORUM_URL . $forum_id;
 $view_prev_topic_url = TOPIC_URL . $topic_id . "&amp;view=previous#newest";
 $view_next_topic_url = TOPIC_URL . $topic_id . "&amp;view=next#newest";
 
-$reply_alt = $locked ? $lang['TOPIC_LOCKED_SHORT'] : $lang['REPLY_TO_TOPIC'];
+$reply_alt = $locked ? __('TOPIC_LOCKED_SHORT') : __('REPLY_TO_TOPIC');
 
 // Set 'body' template for attach_mod
 $template->set_filenames(['body' => 'viewtopic.tpl']);
@@ -379,41 +379,41 @@ $template->set_filenames(['body' => 'viewtopic.tpl']);
 //
 // User authorisation levels output
 //
-$s_auth_can = (($is_auth['auth_post']) ? $lang['RULES_POST_CAN'] : $lang['RULES_POST_CANNOT']) . '<br />';
-$s_auth_can .= (($is_auth['auth_reply']) ? $lang['RULES_REPLY_CAN'] : $lang['RULES_REPLY_CANNOT']) . '<br />';
-$s_auth_can .= (($is_auth['auth_edit']) ? $lang['RULES_EDIT_CAN'] : $lang['RULES_EDIT_CANNOT']) . '<br />';
-$s_auth_can .= (($is_auth['auth_delete']) ? $lang['RULES_DELETE_CAN'] : $lang['RULES_DELETE_CANNOT']) . '<br />';
-$s_auth_can .= (($is_auth['auth_vote']) ? $lang['RULES_VOTE_CAN'] : $lang['RULES_VOTE_CANNOT']) . '<br />';
-$s_auth_can .= (($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT']) . '<br />';
-$s_auth_can .= (($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT']) . '<br />';
+$s_auth_can = (($is_auth['auth_post']) ? __('RULES_POST_CAN') : __('RULES_POST_CANNOT')) . '<br />';
+$s_auth_can .= (($is_auth['auth_reply']) ? __('RULES_REPLY_CAN') : __('RULES_REPLY_CANNOT')) . '<br />';
+$s_auth_can .= (($is_auth['auth_edit']) ? __('RULES_EDIT_CAN') : __('RULES_EDIT_CANNOT')) . '<br />';
+$s_auth_can .= (($is_auth['auth_delete']) ? __('RULES_DELETE_CAN') : __('RULES_DELETE_CANNOT')) . '<br />';
+$s_auth_can .= (($is_auth['auth_vote']) ? __('RULES_VOTE_CAN') : __('RULES_VOTE_CANNOT')) . '<br />';
+$s_auth_can .= (($is_auth['auth_attachments']) ? __('RULES_ATTACH_CAN') : __('RULES_ATTACH_CANNOT')) . '<br />';
+$s_auth_can .= (($is_auth['auth_download']) ? __('RULES_DOWNLOAD_CAN') : __('RULES_DOWNLOAD_CANNOT')) . '<br />';
 
 // Moderator output
 $topic_mod = '';
 if ($is_auth['auth_mod']) {
-    $s_auth_can .= $lang['RULES_MODERATE'];
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_delete') . '" alt="' . $lang['DELETE_TOPIC'] . '" title="' . $lang['DELETE_TOPIC'] . '" border="0" /></a>&nbsp;';
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . $lang['MOVE_TOPIC'] . '" title="' . $lang['MOVE_TOPIC'] . '" border="0" /></a>&nbsp;';
-    $topic_mod .= ($t_data['topic_status'] == TOPIC_UNLOCKED) ? "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_lock') . '" alt="' . $lang['LOCK_TOPIC'] . '" title="' . $lang['LOCK_TOPIC'] . '" border="0" /></a>&nbsp;' : "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_unlock') . '" alt="' . $lang['UNLOCK_TOPIC'] . '" title="' . $lang['UNLOCK_TOPIC'] . '" border="0" /></a>&nbsp;';
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_split') . '" alt="' . $lang['SPLIT_TOPIC'] . '" title="' . $lang['SPLIT_TOPIC'] . '" border="0" /></a>&nbsp;';
+    $s_auth_can .= __('RULES_MODERATE');
+    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_delete') . '" alt="' . __('DELETE_TOPIC') . '" title="' . __('DELETE_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . __('MOVE_TOPIC') . '" title="' . __('MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= ($t_data['topic_status'] == TOPIC_UNLOCKED) ? "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_lock') . '" alt="' . __('LOCK_TOPIC') . '" title="' . __('LOCK_TOPIC') . '" border="0" /></a>&nbsp;' : "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_unlock') . '" alt="' . __('UNLOCK_TOPIC') . '" title="' . __('UNLOCK_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_split') . '" alt="' . __('SPLIT_TOPIC') . '" title="' . __('SPLIT_TOPIC') . '" border="0" /></a>&nbsp;';
 
     if ($t_data['allow_reg_tracker'] || $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL || IS_ADMIN) {
         if ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL) {
-            $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unset_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_normal') . '" alt="' . $lang['UNSET_DL_STATUS'] . '" title="' . $lang['UNSET_DL_STATUS'] . '" border="0" /></a>';
+            $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unset_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_normal') . '" alt="' . __('UNSET_DL_STATUS') . '" title="' . __('UNSET_DL_STATUS') . '" border="0" /></a>';
         } else {
-            $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=set_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_dl') . '" alt="' . $lang['SET_DL_STATUS'] . '" title="' . $lang['SET_DL_STATUS'] . '" border="0" /></a>';
+            $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=set_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_dl') . '" alt="' . __('SET_DL_STATUS') . '" title="' . __('SET_DL_STATUS') . '" border="0" /></a>';
         }
     }
 } elseif (!IS_GUEST && ($t_data['topic_poster'] == $userdata['user_id']) && $t_data['self_moderated']) {
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . $lang['MOVE_TOPIC'] . '" title="' . $lang['MOVE_TOPIC'] . '" border="0" /></a>&nbsp;';
+    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . __('MOVE_TOPIC') . '" title="' . __('MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
 }
 
 // Topic watch information
 $s_watching_topic = '';
 if ($can_watch_topic) {
     if ($is_watching_topic) {
-        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['STOP_WATCHING_TOPIC'] . '</a>';
+        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . __('STOP_WATCHING_TOPIC') . '</a>';
     } else {
-        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['START_WATCHING_TOPIC'] . '</a>';
+        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . __('START_WATCHING_TOPIC') . '</a>';
     }
 }
 
@@ -429,19 +429,19 @@ generate_pagination($pg_url, $total_replies, $posts_per_page, $start);
 
 // Selects
 $sel_previous_days = [
-    0 => $lang['ALL_POSTS'],
-    1 => $lang['1_DAY'],
-    7 => $lang['7_DAYS'],
-    14 => $lang['2_WEEKS'],
-    30 => $lang['1_MONTH'],
-    90 => $lang['3_MONTHS'],
-    180 => $lang['6_MONTHS'],
-    364 => $lang['1_YEAR']
+    0 => __('ALL_POSTS'),
+    1 => __('1_DAY'),
+    7 => __('7_DAYS'),
+    14 => __('2_WEEKS'),
+    30 => __('1_MONTH'),
+    90 => __('3_MONTHS'),
+    180 => __('6_MONTHS'),
+    364 => __('1_YEAR')
 ];
 
 $sel_post_order_ary = [
-    $lang['OLDEST_FIRST'] => 'asc',
-    $lang['NEWEST_FIRST'] => 'desc'
+    __('OLDEST_FIRST') => 'asc',
+    __('NEWEST_FIRST') => 'desc'
 ];
 
 $topic_has_poll = $t_data['topic_vote'];
@@ -450,7 +450,7 @@ $can_manage_poll = ($t_data['topic_poster'] == $userdata['user_id'] || $is_auth[
 $can_add_poll = ($can_manage_poll && !$topic_has_poll && !$poll_time_expired && !$start);
 
 $page_title = ((int)($start / $posts_per_page) === 0) ? $topic_title :
-    $topic_title . ' - ' . $lang['SHORT_PAGE'] . ' ' . (floor($start / $posts_per_page) + 1);
+    $topic_title . ' - ' . __('SHORT_PAGE') . ' ' . (floor($start / $posts_per_page) + 1);
 
 //
 // Send vars to template
@@ -482,7 +482,7 @@ $template->assign_vars([
 
     'PINNED_FIRST_POST' => $t_data['topic_show_first_post'],
     'PIN_HREF' => $t_data['topic_show_first_post'] ? "modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=post_unpin" : "modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=post_pin",
-    'PIN_TITLE' => $t_data['topic_show_first_post'] ? $lang['POST_UNPIN'] : $lang['POST_PIN'],
+    'PIN_TITLE' => $t_data['topic_show_first_post'] ? __('POST_UNPIN') : __('POST_PIN'),
 
     'AUTH_MOD' => $is_auth['auth_mod'],
     'IN_MODERATION' => $moderation,
@@ -548,13 +548,13 @@ for ($i = 0; $i < $total_posts; $i++) {
     $poster_id = $postrow[$i]['user_id'];
     $poster_guest = ($poster_id == GUEST_UID);
     $poster_bot = ($poster_id == BOT_UID);
-    $poster = $poster_guest ? $lang['GUEST'] : $postrow[$i]['username'];
+    $poster = $poster_guest ? __('GUEST') : $postrow[$i]['username'];
 
     $post_date = bb_date($postrow[$i]['post_time'], config()->get('post_date_format'));
     $max_post_time = max($max_post_time, $postrow[$i]['post_time']);
     $poster_posts = !$poster_guest ? $postrow[$i]['user_posts'] : '';
     $poster_from = ($postrow[$i]['user_from'] && !$poster_guest) ? $postrow[$i]['user_from'] : '';
-    $poster_joined = !$poster_guest ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
+    $poster_joined = !$poster_guest ? __('JOINED') . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
     $poster_longevity = !$poster_guest ? humanTime($postrow[$i]['user_regdate']) : '';
     $poster_birthday = $postrow[$i]['user_birthday']->format('Y-m-d');
     $post_id = $postrow[$i]['post_id'];
@@ -606,7 +606,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $user_sig = (config()->get('allow_sig') && !$user->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
 
     if (bf($postrow[$i]['user_opt'], 'user_opt', 'dis_sig')) {
-        $user_sig = $lang['SIGNATURE_DISABLE'];
+        $user_sig = __('SIGNATURE_DISABLE');
     } elseif ($user_sig) {
         $user_sig = bbcode2html($user_sig);
     }
@@ -639,7 +639,7 @@ for ($i = 0; $i < $total_posts; $i++) {
 
     // Editing information
     if ($postrow[$i]['post_edit_count']) {
-        $l_edit_time_total = ($postrow[$i]['post_edit_count'] == 1) ? $lang['EDITED_TIME_TOTAL'] : $lang['EDITED_TIMES_TOTAL'];
+        $l_edit_time_total = ($postrow[$i]['post_edit_count'] == 1) ? __('EDITED_TIME_TOTAL') : __('EDITED_TIMES_TOTAL');
         $l_edited_by = '<br /><br />' . sprintf($l_edit_time_total, profile_url(['username' => $poster, 'user_id' => $poster_id, 'user_rank' => $user_rank]), bb_date($postrow[$i]['post_edit_time']), $postrow[$i]['post_edit_count']);
     } else {
         $l_edited_by = '';
@@ -657,7 +657,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         default => '',
     };
     $mc_select_type = [];
-    foreach ($lang['MC_COMMENT'] as $key => $value) {
+    foreach (__('MC_COMMENT') as $key => $value) {
         $mc_select_type[$key] = $value['type'];
     }
 
@@ -712,7 +712,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'MC_COMMENT' => $mc_type ? bbcode2html($mc_comment) : '',
         'MC_BBCODE' => $mc_type ? $mc_comment : '',
         'MC_CLASS' => $mc_class,
-        'MC_TITLE' => sprintf($lang['MC_COMMENT'][$mc_type]['title'], $mc_user_id),
+        'MC_TITLE' => sprintf(__('MC_COMMENT')[$mc_type]['title'], $mc_user_id),
         'MC_SELECT_TYPE' => build_select("mc_type_$post_id", array_flip($mc_select_type), $mc_type),
 
         'RG_AVATAR' => $rg_avatar,

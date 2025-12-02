@@ -70,7 +70,7 @@ class Ajax
     {
         /** @noinspection PhpUnusedLocalVariableInspection */
         // bb_cfg deprecated, but kept for compatibility with non-adapted ajax files
-        global $bb_cfg, $lang;
+        global $bb_cfg;
 
         // Exit if we already have errors
         if (!empty($this->response['error_code'])) {
@@ -93,9 +93,9 @@ class Ajax
         // Exit if board is disabled via ON/OFF trigger or by admin
         if (config()->get('board_disable') || is_file(BB_DISABLED)) {
             if (config()->get('board_disable')) {
-                $this->ajax_die($lang['BOARD_DISABLE']);
+                $this->ajax_die(__('BOARD_DISABLE'));
             } elseif (is_file(BB_DISABLED) && $this->action !== 'manage_admin') {
-                $this->ajax_die($lang['BOARD_DISABLE_CRON']);
+                $this->ajax_die(__('BOARD_DISABLE_CRON'));
             }
         }
 
@@ -105,24 +105,24 @@ class Ajax
                 break;
             case 'user': // USER
                 if (IS_GUEST) {
-                    $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
+                    $this->ajax_die(__('NEED_TO_LOGIN_FIRST'));
                 }
                 break;
             case 'mod': // MOD
                 if (!IS_AM) {
-                    $this->ajax_die($lang['ONLY_FOR_MOD']);
+                    $this->ajax_die(__('ONLY_FOR_MOD'));
                 }
                 $this->check_admin_session();
                 break;
             case 'admin': // ADMIN
                 if (!IS_ADMIN) {
-                    $this->ajax_die($lang['ONLY_FOR_ADMIN']);
+                    $this->ajax_die(__('ONLY_FOR_ADMIN'));
                 }
                 $this->check_admin_session();
                 break;
             case 'super_admin': // SUPER_ADMIN
                 if (!IS_SUPER_ADMIN) {
-                    $this->ajax_die($lang['ONLY_FOR_SUPER_ADMIN']);
+                    $this->ajax_die(__('ONLY_FOR_SUPER_ADMIN'));
                 }
                 $this->check_admin_session();
                 break;
@@ -236,7 +236,7 @@ class Ajax
      */
     public function check_admin_session()
     {
-        global $user, $lang;
+        global $user;
 
         if (!$user->data['session_admin']) {
             if (empty($this->request['user_password'])) {
@@ -247,7 +247,7 @@ class Ajax
                     'login_password' => $_POST['user_password'],
                 ];
                 if (!$user->login($login_args, true)) {
-                    $this->ajax_die($lang['ERROR_LOGIN']);
+                    $this->ajax_die(__('ERROR_LOGIN'));
                 }
             }
         }
@@ -272,10 +272,10 @@ class Ajax
      */
     public function prompt_for_confirm(string $confirm_msg = ''): void
     {
-        global $lang;
+        
 
         if (empty($confirm_msg)) {
-            $confirm_msg = $lang['QUESTION'];
+            $confirm_msg = __('QUESTION');
         }
 
         $this->response['prompt_confirm'] = 1;
@@ -291,12 +291,12 @@ class Ajax
      */
     public function verify_mod_rights($forum_id)
     {
-        global $userdata, $lang;
+        global $userdata;
 
         $is_auth = auth(AUTH_MOD, $forum_id, $userdata);
 
         if (!$is_auth['auth_mod']) {
-            $this->ajax_die($lang['ONLY_FOR_MOD']);
+            $this->ajax_die(__('ONLY_FOR_MOD'));
         }
     }
 

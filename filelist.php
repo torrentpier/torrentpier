@@ -15,12 +15,12 @@ require __DIR__ . '/common.php';
 $user->session_start();
 
 if (config()->get('bt_disable_dht') && IS_GUEST) {
-    bb_die($lang['BT_PRIVATE_TRACKER'], 403);
+    bb_die(__('BT_PRIVATE_TRACKER'), 403);
 }
 
 $topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
 if (!$topic_id) {
-    bb_die($lang['INVALID_TOPIC_ID'], 404);
+    bb_die(__('INVALID_TOPIC_ID'), 404);
 }
 
 $sql = 'SELECT t.forum_id, t.info_hash, t.info_hash_v2, t.size, t.topic_id
@@ -29,13 +29,13 @@ $sql = 'SELECT t.forum_id, t.info_hash, t.info_hash_v2, t.size, t.topic_id
         LIMIT 1';
 
 if (!$row = DB()->fetch_row($sql)) {
-    bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
+    bb_die(__('INVALID_TOPIC_ID_DB'), 404);
 }
 
 // Check rights
 $is_auth = auth(AUTH_ALL, $row['forum_id'], $userdata);
 if (!$is_auth['auth_view']) {
-    bb_die($lang['SORRY_AUTH_VIEW_ATTACH'], 403);
+    bb_die(__('SORRY_AUTH_VIEW_ATTACH'), 403);
 }
 
 // Protocol meta
@@ -49,7 +49,7 @@ $t_hash_field = $meta_v2 ? 'piecesRoot' : 'sha1';
 
 $file_path = \TorrentPier\Attachment::getPath($topic_id);
 if (!is_file($file_path)) {
-    bb_die($lang['TOR_NOT_FOUND'], 410);
+    bb_die(__('TOR_NOT_FOUND'), 410);
 }
 
 $file_contents = file_get_contents($file_path);
@@ -64,18 +64,18 @@ if (config()->get('flist_max_files')) {
     }
 
     if ($file_count > config()->get('flist_max_files')) {
-        bb_die(sprintf($lang['BT_FLIST_LIMIT'], config()->get('flist_max_files'), $file_count), 410);
+        bb_die(sprintf(__('BT_FLIST_LIMIT'), config()->get('flist_max_files'), $file_count), 410);
     }
 }
 
 try {
     $torrent = \Arokettu\Torrent\TorrentFile::loadFromString($file_contents);
 } catch (\Exception $e) {
-    bb_die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"), 410);
+    bb_die(htmlCHR(__('TORFILE_INVALID') . ": " . $e->getMessage()), 410);
 }
 
 if (IS_GUEST && $torrent->isPrivate()) {
-    bb_die($lang['BT_PRIVATE_TORRENT'], 403);
+    bb_die(__('BT_PRIVATE_TORRENT'), 403);
 }
 
 // Get torrent files
@@ -97,18 +97,18 @@ foreach ($files as $file) {
     ]);
 }
 
-$torrent_name = !empty($t_name = $torrent->getName()) ? str_short(htmlCHR($t_name), 200) : $lang['UNKNOWN'];
+$torrent_name = !empty($t_name = $torrent->getName()) ? str_short(htmlCHR($t_name), 200) : __('UNKNOWN');
 $torrent_size = humn_size($row['size'], 2);
 
 // Output page
 $template->assign_vars([
     'PAGE_TITLE' => "$torrent_name (" . $torrent_size . ")",
-    'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension(iterator_count($files), 'files')),
-    'TORRENT_CREATION_DATE' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : $lang['UNKNOWN'],
-    'TORRENT_CLIENT' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR($creator) : $lang['UNKNOWN'],
-    'TORRENT_PRIVATE' => $torrent->isPrivate() ? $lang['YES'] : $lang['NO'],
+    'FILES_COUNT' => sprintf(__('BT_FLIST_FILE_PATH'), declension(iterator_count($files), 'files')),
+    'TORRENT_CREATION_DATE' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : __('UNKNOWN'),
+    'TORRENT_CLIENT' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR($creator) : __('UNKNOWN'),
+    'TORRENT_PRIVATE' => $torrent->isPrivate() ? __('YES') : __('NO'),
 
-    'BTMR_NOTICE' => sprintf($lang['BT_FLIST_BTMR_NOTICE'], 'https://github.com/kovalensky/tmrr'),
+    'BTMR_NOTICE' => sprintf(__('BT_FLIST_BTMR_NOTICE'), 'https://github.com/kovalensky/tmrr'),
     'U_TOPIC' => TOPIC_URL . $topic_id,
 ]);
 

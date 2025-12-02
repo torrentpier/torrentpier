@@ -261,7 +261,7 @@ function setbit(&$int, $bit_num, $on)
 */
 function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG_PERM_BOTH)
 {
-    global $lang, $bf, $datastore;
+    global $bf, $datastore;
 
     $is_guest = true;
     $is_admin = false;
@@ -413,7 +413,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
                     $auth[$f_id][$auth_type] = false;
             }
             if ($add_auth_type_desc) {
-                $auth[$f_id][$auth_type . '_type'] =& $lang['AUTH_TYPES'][$f_data[$auth_type]];
+                $auth[$f_id][$auth_type . '_type'] =& __('AUTH_TYPES')[$f_data[$auth_type]];
             }
         }
     }
@@ -809,26 +809,26 @@ function wbr($text, $max_word_length = HTML_WBR_LENGTH)
 
 function generate_user_info($row, bool $have_auth = IS_ADMIN): array
 {
-    global $userdata, $lang;
+    global $userdata;
 
-    $from = !empty($row['user_from']) ? render_flag($row['user_from'], false) : $lang['NOSELECT'];
+    $from = !empty($row['user_from']) ? render_flag($row['user_from'], false) : __('NOSELECT');
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
-    $user_time = !empty($row['user_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($row['user_time']), humanTime($row['user_time'])) : $lang['NOSELECT'];
+    $user_time = !empty($row['user_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($row['user_time']), humanTime($row['user_time'])) : __('NOSELECT');
     $posts = '<a href="search.php?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
-    $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_SHORT'] . '</a>';
+    $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . __('SEND_PM_SHORT') . '</a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $have_auth || ($row['user_id'] == $userdata['user_id'])) {
         $email_uri = (config()->get('board_email_form')) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
-        $email = $lang['HIDDEN_USER'];
+        $email = __('HIDDEN_USER');
     }
 
     if ($row['user_website']) {
-        $www = '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">[ ' . $lang['WEBSITE_SHORT'] . ' ]</a>';
+        $www = '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">[ ' . __('WEBSITE_SHORT') . ' ]</a>';
     } else {
-        $www = $lang['NOSELECT'];
+        $www = __('NOSELECT');
     }
 
     return [
@@ -1070,7 +1070,7 @@ function make_jumpbox(): void
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
 function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '', $all_forums_option = null)
 {
-    global $lang, $datastore;
+    global $datastore;
 
     if (is_array($mode)) {
         $not_auth_forums_fary = array_flip($mode);
@@ -1079,7 +1079,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
     if (null === $max_length) {
         $max_length = HTML_SELECT_MAX_LENGTH;
     }
-    $select = null === $all_forums_option ? [] : [$lang['ALL_AVAILABLE'] => $all_forums_option];
+    $select = null === $all_forums_option ? [] : [__('ALL_AVAILABLE') => $all_forums_option];
     if (!$forums = $datastore->get('cat_forums')) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
@@ -1329,7 +1329,7 @@ function format_registration_intervals(array $restricted_hours): array
 //
 function generate_pagination($base_url, $num_items, $per_page, $start_item, $add_prevnext_text = true)
 {
-    global $lang, $template;
+    global $template;
 
     $begin_end = 3;
     $from_middle = 1;
@@ -1387,25 +1387,25 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 
     if ($add_prevnext_text) {
         if ($on_page > 1) {
-            $page_string = ' <a href="' . $base_url . "{$query_separator}start=" . (($on_page - 2) * $per_page) . '">' . $lang['PREVIOUS_PAGE'] . '</a>&nbsp;&nbsp;' . $page_string;
+            $page_string = ' <a href="' . $base_url . "{$query_separator}start=" . (($on_page - 2) * $per_page) . '">' . __('PREVIOUS_PAGE') . '</a>&nbsp;&nbsp;' . $page_string;
             $meta_prev_link = FULL_URL . $base_url . "{$query_separator}start=" . (($on_page - 2) * $per_page);
         }
 
         if ($on_page < $total_pages) {
-            $page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "{$query_separator}start=" . ($on_page * $per_page) . '">' . $lang['NEXT_PAGE'] . '</a>';
+            $page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "{$query_separator}start=" . ($on_page * $per_page) . '">' . __('NEXT_PAGE') . '</a>';
             $meta_next_link = FULL_URL . $base_url . "{$query_separator}start=" . ($on_page * $per_page);
         }
     }
 
     $pagination = false;
     if ($page_string && $total_pages > 1) {
-        $pagination = '<a class="menu-root" href="#pg-jump">' . $lang['GOTO_PAGE'] . '</a> :&nbsp;&nbsp;' . $page_string;
+        $pagination = '<a class="menu-root" href="#pg-jump">' . __('GOTO_PAGE') . '</a> :&nbsp;&nbsp;' . $page_string;
         $pagination = str_replace("{$query_separator}start=0", '', $pagination);
     }
 
     $template->assign_vars([
         'PAGINATION' => $pagination,
-        'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], (floor($start_item / $per_page) + 1), ceil($num_items / $per_page)),
+        'PAGE_NUMBER' => sprintf(__('PAGE_OF'), (floor($start_item / $per_page) + 1), ceil($num_items / $per_page)),
         'PG_BASE_URL' => $base_url,
         'PG_PER_PAGE' => $per_page,
         // Assign meta
@@ -1469,8 +1469,8 @@ function bb_die($msg_text, $status_code = null)
     }
 
     // Check for lang variable
-    if (!empty($lang[$msg_text])) {
-        $msg_text = $lang[$msg_text];
+    if ($translated = __($msg_text)) {
+        $msg_text = $translated;
     }
 
     $template->assign_vars([
@@ -1553,8 +1553,6 @@ function redirect($url)
 // build a list of the sortable fields or return field name
 function get_forum_display_sort_option($selected_row = 0, $action = 'list', $list = 'sort')
 {
-    global $lang;
-
     $forum_display_sort = [
         'lang_key' => ['LASTPOST', 'SORT_TOPIC_TITLE', 'SORT_TIME'],
         'fields' => ['t.topic_last_post_time', 't.topic_title', 't.topic_time']
@@ -1578,7 +1576,7 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
     if ($action == 'list') {
         foreach ($listrow['lang_key'] as $i => $iValue) {
             $selected = ($i == $selected_row) ? ' selected' : '';
-            $l_value = $lang[$listrow['lang_key'][$i]] ?? $iValue;
+            $l_value = __($listrow['lang_key'][$i]) ?: $iValue;
             $res .= '<option value="' . $i . '"' . $selected . '>' . $l_value . '</option>';
         }
     } else {
@@ -1691,16 +1689,16 @@ function build_topic_pagination($url, $replies, $per_page)
 
 function print_confirmation($tpl_vars): void
 {
-    global $template, $lang;
+    global $template;
 
     $template->assign_vars([
         'TPL_CONFIRM' => true,
-        'CONFIRM_TITLE' => $lang['CONFIRM'],
+        'CONFIRM_TITLE' => __('CONFIRM'),
         'FORM_METHOD' => 'post'
     ]);
 
     if (!isset($tpl_vars['QUESTION'])) {
-        $tpl_vars['QUESTION'] = $lang['QUESTION'];
+        $tpl_vars['QUESTION'] = __('QUESTION');
     }
 
     $template->assign_vars($tpl_vars);
@@ -1777,8 +1775,6 @@ function clean_title($str, $replace_underscore = false)
 
 function clean_text_match(?string $text, bool $ltrim_star = true, bool $die_if_empty = false): string
 {
-    global $lang;
-
     $text = str_compact($text);
     $ltrim_chars = ($ltrim_star) ? ' *-!' : ' ';
     $text = ' ' . str_compact(ltrim($text, $ltrim_chars)) . ' ';
@@ -1792,7 +1788,7 @@ function clean_text_match(?string $text, bool $ltrim_star = true, bool $die_if_e
     }
 
     if (!$text && $die_if_empty) {
-        bb_die($lang['NO_SEARCH_MATCH']);
+        bb_die(__('NO_SEARCH_MATCH'));
     }
 
     return $text;
@@ -1977,8 +1973,6 @@ function sync_user_to_manticore($user_id, ?string $username = null, string $acti
  */
 function create_magnet(?string $infohash, ?string $infohash_v2, string $auth_key, string $name, int|string $length = 0): string
 {
-    global $lang;
-
     if (!config()->get('magnet_links_enabled')) {
         return false;
     }
@@ -2010,33 +2004,33 @@ function create_magnet(?string $infohash, ?string $infohash_v2, string $auth_key
     }
 
     $icon = $v2_support ? theme_images('icon_magnet_v2') : theme_images('icon_magnet');
-    $title = $v2_support ? $lang['MAGNET_v2'] : $lang['MAGNET'];
+    $title = $v2_support ? __('MAGNET_v2') : __('MAGNET');
 
     return '<a title="' . $title . '" href="' . $magnet . '&tr=' . urlencode(config()->get('bt_announce_url') . "?" . config()->get('passkey_key') . "=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . $icon . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
 {
-    global $lang, $template;
+    global $template;
 
     $msg = '';
-    $msg .= $topic_id ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . $lang['TOPIC_RETURN'] . '</a></p>' : '';
-    $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . $lang['FORUM_RETURN'] . '</a></p>' : '';
-    $msg .= $group_id ? '<p class="mrg_10"><a href="' . GROUP_URL . $group_id . '">' . $lang['GROUP_RETURN'] . '</a></p>' : '';
-    $msg .= '<p class="mrg_10"><a href="index.php">' . $lang['INDEX_RETURN'] . '</a></p>';
+    $msg .= $topic_id ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . __('TOPIC_RETURN') . '</a></p>' : '';
+    $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . __('FORUM_RETURN') . '</a></p>' : '';
+    $msg .= $group_id ? '<p class="mrg_10"><a href="' . GROUP_URL . $group_id . '">' . __('GROUP_RETURN') . '</a></p>' : '';
+    $msg .= '<p class="mrg_10"><a href="index.php">' . __('INDEX_RETURN') . '</a></p>';
     $template->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
 
 function set_pr_die_append_msg($pr_uid)
 {
-    global $lang, $template;
+    global $template;
 
     $template->assign_var('BB_DIE_APPEND_MSG', '
-		<a href="' . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . $lang['PROFILE_RETURN'] . '</a>
+		<a href="' . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_RETURN') . '</a>
 		<br /><br />
-		<a href="profile.php?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . $lang['PROFILE_EDIT_RETURN'] . '</a>
+		<a href="profile.php?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_EDIT_RETURN') . '</a>
 		<br /><br />
-		<a href="index.php">' . $lang['INDEX_RETURN'] . '</a>
+		<a href="index.php">' . __('INDEX_RETURN') . '</a>
 	');
 }
 
@@ -2073,14 +2067,14 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
  */
 function profile_url(array $data, bool $target_blank = false, bool $no_link = false): string
 {
-    global $lang, $datastore;
+    global $datastore;
 
     if (!$ranks = $datastore->get('ranks')) {
         $datastore->update('ranks');
         $ranks = $datastore->get('ranks');
     }
 
-    $username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
+    $username = !empty($data['username']) ? $data['username'] : __('GUEST');
     $user_id = !empty($data['user_id']) ? (int)$data['user_id'] : GUEST_UID;
     $user_rank = !empty($data['user_rank']) ? $data['user_rank'] : 0;
 
@@ -2095,9 +2089,9 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
 
     if (empty($title)) {
         $title = match ($user_id) {
-            GUEST_UID => $lang['GUEST'],
+            GUEST_UID => __('GUEST'),
             BOT_UID => $username,
-            default => $lang['USER'],
+            default => __('USER'),
         };
     }
 
@@ -2140,23 +2134,19 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
  */
 function genderImage(int $gender): ?string
 {
-    global $lang;
-
     if (!config()->get('gender')) {
         return false;
     }
 
     return match ($gender) {
-        MALE => '<img src="' . theme_images('icon_male') . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />',
-        FEMALE => '<img src="' . theme_images('icon_female') . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />',
-        default => '<img src="' . theme_images('icon_nogender') . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />',
+        MALE => '<img src="' . theme_images('icon_male') . '" alt="' . __('GENDER_SELECT')[MALE] . '" title="' . __('GENDER_SELECT')[MALE] . '" border="0" />',
+        FEMALE => '<img src="' . theme_images('icon_female') . '" alt="' . __('GENDER_SELECT')[FEMALE] . '" title="' . __('GENDER_SELECT')[FEMALE] . '" border="0" />',
+        default => '<img src="' . theme_images('icon_nogender') . '" alt="' . __('GENDER_SELECT')[NOGENDER] . '" title="' . __('GENDER_SELECT')[NOGENDER] . '" border="0" />',
     };
 }
 
 function is_gold($type): string
 {
-    global $lang;
-
     $type = (int)$type;
     $is_gold = '';
 
@@ -2166,10 +2156,10 @@ function is_gold($type): string
 
     switch ($type) {
         case TOR_TYPE_GOLD:
-            $is_gold = '<img width="16" height="15" src="' . theme_images('icon_tor_gold') . '" alt="' . $lang['GOLD'] . '" title="' . $lang['GOLD'] . '" />&nbsp;';
+            $is_gold = '<img width="16" height="15" src="' . theme_images('icon_tor_gold') . '" alt="' . __('GOLD') . '" title="' . __('GOLD') . '" />&nbsp;';
             break;
         case TOR_TYPE_SILVER:
-            $is_gold = '<img width="16" height="15" src="' . theme_images('icon_tor_silver') . '" alt="' . $lang['SILVER'] . '" title="' . $lang['SILVER'] . '" />&nbsp;';
+            $is_gold = '<img width="16" height="15" src="' . theme_images('icon_tor_silver') . '" alt="' . __('SILVER') . '" title="' . __('SILVER') . '" />&nbsp;';
             break;
         default:
             break;
@@ -2180,13 +2170,11 @@ function is_gold($type): string
 
 function hash_search($hash)
 {
-    global $lang;
-
     $hash = htmlCHR(trim($hash));
     $info_hash_where = null;
 
     if (!isset($hash) || !ctype_xdigit($hash)) {
-        bb_die(sprintf($lang['HASH_INVALID'], $hash));
+        bb_die(sprintf(__('HASH_INVALID'), $hash));
     }
 
     $info_hash = DB()->escape(pack('H*', $hash));
@@ -2197,13 +2185,13 @@ function hash_search($hash)
     } elseif (mb_strlen($hash, DEFAULT_CHARSET) == 64) {
         $info_hash_where = "WHERE info_hash_v2 = '$info_hash'";
     } else {
-        bb_die(sprintf($lang['HASH_INVALID'], $hash));
+        bb_die(sprintf(__('HASH_INVALID'), $hash));
     }
 
     if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where")) {
         redirect(TOPIC_URL . $row['topic_id']);
     } else {
-        bb_die(sprintf($lang['HASH_NOT_FOUND'], $hash));
+        bb_die(sprintf(__('HASH_NOT_FOUND'), $hash));
     }
 }
 
@@ -2215,15 +2203,13 @@ function hash_search($hash)
  */
 function bb_captcha(string $mode): bool|string
 {
-    global $lang;
-
     $settings = config()->get('captcha');
     $settings['language'] = config()->get('default_lang');
 
     // Checking captcha settings
     if (!$settings['disabled'] && $settings['service'] !== 'text') {
         if (empty($settings['public_key']) || empty($settings['secret_key'])) {
-            bb_die($lang['CAPTCHA_SETTINGS']);
+            bb_die(__('CAPTCHA_SETTINGS'));
         }
     }
 
@@ -2270,14 +2256,12 @@ function clean_tor_dirname($dirname)
  */
 function user_birthday_icon($user_birthday, $user_id): string
 {
-    global $lang;
-
     $current_date = bb_date(TIMENOW, 'md', false);
     $user_birthday = ($user_id != GUEST_UID && !empty($user_birthday) && $user_birthday != '1900-01-01')
         ? bb_date(strtotime($user_birthday), 'md', false) : false;
 
     if (config()->get('birthday_enabled') && $current_date == $user_birthday) {
-        return '<img src="' . theme_images('icon_birthday') . '" alt="' . $lang['HAPPY_BIRTHDAY'] . '" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />';
+        return '<img src="' . theme_images('icon_birthday') . '" alt="' . __('HAPPY_BIRTHDAY') . '" title="' . __('HAPPY_BIRTHDAY') . '" border="0" />';
     }
 
     return '';

@@ -11,28 +11,28 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang;
+// global removed
 
 if (!config()->get('torr_server.enabled')) {
-    $this->ajax_die($lang['MODULE_OFF']);
+    $this->ajax_die(__('MODULE_OFF'));
 }
 
 if (config()->get('torr_server.disable_for_guest') && IS_GUEST) {
-    $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
+    $this->ajax_die(__('NEED_TO_LOGIN_FIRST'));
 }
 
 $topic_id = $this->request['topic_id'] ?? '';
 if (empty($topic_id) || !is_numeric($topic_id)) {
-    $this->ajax_die($lang['INVALID_TOPIC_ID']);
+    $this->ajax_die(__('INVALID_TOPIC_ID'));
 }
 
 $file_index = $this->request['file_index'] ?? null;
 if ($file_index === null || !is_numeric($file_index) || $file_index < 0) {
-    $this->ajax_die($lang['TORRSERVER_INVALID_REQUEST'] . ": file_index=$file_index");
+    $this->ajax_die(__('TORRSERVER_INVALID_REQUEST') . ": file_index=$file_index");
 }
 
 if (!$info_hash = (string)$this->request['info_hash'] or !ctype_xdigit($info_hash)) {
-    $this->ajax_die($lang['TORRSERVER_INVALID_REQUEST'] . ": info_hash=$info_hash");
+    $this->ajax_die(__('TORRSERVER_INVALID_REQUEST') . ": info_hash=$info_hash");
 }
 
 $isAudio = isset($this->request['is_audio']) && $this->request['is_audio'];
@@ -40,7 +40,7 @@ $isAudio = isset($this->request['is_audio']) && $this->request['is_audio'];
 // Get ffprobe info from TorrServer
 $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($info_hash, $file_index, $topic_id);
 if (!$ffpInfo || !isset($ffpInfo->{$file_index})) {
-    $this->ajax_die($lang['TORRSERVER_UNAVAILABLE']);
+    $this->ajax_die(__('TORRSERVER_UNAVAILABLE'));
 }
 $ffpInfo = $ffpInfo->{$file_index};
 if (isset($ffpInfo->streams)) {
@@ -55,9 +55,9 @@ if (isset($ffpInfo->streams)) {
     });
     // Audio tracks information
     $audioDub = array_map(function ($stream) {
-        global $lang;
+        // global removed
 
-        $result = '<span class="warnColor2">' . sprintf($lang['AUDIO_TRACK'], (!isset($stream->index) || $stream->index === 0) ? 1 : $stream->index) . '</span><br/>';
+        $result = '<span class="warnColor2">' . sprintf(__('AUDIO_TRACK'), (!isset($stream->index) || $stream->index === 0) ? 1 : $stream->index) . '</span><br/>';
         if (isset($stream->tags->language)) {
             if (isset($stream->tags->title)) {
                 $result .= '<b>' . mb_strtoupper($stream->tags->language, DEFAULT_CHARSET) . ' (' . $stream->tags->title . ')' . '</b>';
@@ -68,19 +68,19 @@ if (isset($ffpInfo->streams)) {
         }
 
         if (!empty($stream->codec_name)) {
-            $result .= sprintf($lang['AUDIO_CODEC'], $stream->codec_long_name, mb_strtoupper($stream->codec_name, DEFAULT_CHARSET)) . '<br/>';
+            $result .= sprintf(__('AUDIO_CODEC'), $stream->codec_long_name, mb_strtoupper($stream->codec_name, DEFAULT_CHARSET)) . '<br/>';
         }
         if (!empty($stream->bit_rate)) {
-            $result .= sprintf($lang['BITRATE'], humn_bitrate((int)$stream->bit_rate)) . '<br/>';
+            $result .= sprintf(__('BITRATE'), humn_bitrate((int)$stream->bit_rate)) . '<br/>';
         }
         if (!empty($stream->sample_rate)) {
-            $result .= sprintf($lang['SAMPLE_RATE'], humn_sample_rate((int)$stream->sample_rate)) . '<br/>';
+            $result .= sprintf(__('SAMPLE_RATE'), humn_sample_rate((int)$stream->sample_rate)) . '<br/>';
         }
         if (!empty($stream->channels)) {
-            $result .= sprintf($lang['CHANNELS'], $stream->channels) . '<br/>';
+            $result .= sprintf(__('CHANNELS'), $stream->channels) . '<br/>';
         }
         if (!empty($stream->channel_layout)) {
-            $result .= sprintf($lang['CHANNELS_LAYOUT'], $stream->channel_layout);
+            $result .= sprintf(__('CHANNELS_LAYOUT'), $stream->channel_layout);
         }
 
         return $result;
@@ -88,9 +88,9 @@ if (isset($ffpInfo->streams)) {
 
     // Generate output data
     $data = [
-        'filesize' => sprintf($lang['FILESIZE'] . ': <b>%s</b>', humn_size($ffpInfo->format->size)),
-        'resolution' => (!$isAudio && isset($videoCodecInfo)) ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
-        'video_codec' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf($lang['VIDEO_CODEC'], $videoCodecInfo->codec_long_name, mb_strtoupper($videoCodecInfo->codec_name, DEFAULT_CHARSET)) : '',
+        'filesize' => sprintf(__('FILESIZE') . ': <b>%s</b>', humn_size($ffpInfo->format->size)),
+        'resolution' => (!$isAudio && isset($videoCodecInfo)) ? sprintf(__('RESOLUTION'), $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
+        'video_codec' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf(__('VIDEO_CODEC'), $videoCodecInfo->codec_long_name, mb_strtoupper($videoCodecInfo->codec_name, DEFAULT_CHARSET)) : '',
         'audio_dub' => implode('<hr/>', $audioDub)
     ];
 

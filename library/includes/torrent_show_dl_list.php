@@ -31,7 +31,7 @@ $show_dl_buttons = (!IS_GUEST && $dl_topic && config()->get('bt_show_dl_list_but
 // link to clear DL-List
 $template->assign_vars(['S_DL_DELETE' => false]);
 if (($is_auth['auth_mod']) && ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL)) {
-    $s_dl_delete = "<br /><a href=\"dl_list.php?mode=dl_delete&amp;" . POST_TOPIC_URL . "=$topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['DL_LIST_DEL'] . '</a>';
+    $s_dl_delete = "<br /><a href=\"dl_list.php?mode=dl_delete&amp;" . POST_TOPIC_URL . "=$topic_id&amp;sid=" . $userdata['session_id'] . '">' . __('DL_LIST_DEL') . '</a>';
     $template->assign_vars(['S_DL_DELETE' => $s_dl_delete]);
 }
 
@@ -84,7 +84,7 @@ if ($show_dl_list) {
                 $dl_cat[$i] = "<span class=$desc>" . $dl_cat[$i] . '</span>';
 
                 $template->assign_block_vars('dl_users.users_row', [
-                    'DL_OPTION_NAME' => $lang[strtoupper($desc)],
+                    'DL_OPTION_NAME' => __(strtoupper($desc)),
                     'DL_OPTION_USERS' => $dl_cat[$i],
                     'DL_COUNT' => $dl_count[$i],
                     'DL_USERS_DIV_STYLE' => $dl_users_div_style
@@ -94,7 +94,7 @@ if ($show_dl_list) {
                     continue;
                 }
                 $template->assign_block_vars('dl_counts.count_row', [
-                    'DL_OPTION_NAME' => $lang[strtoupper($desc)],
+                    'DL_OPTION_NAME' => __(strtoupper($desc)),
                     'DL_OPTION_USERS' => $dl_count[$i]
                 ]);
             }

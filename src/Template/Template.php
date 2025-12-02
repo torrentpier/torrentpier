@@ -48,17 +48,11 @@ class Template
     /** Current template name */
     private string $templateName;
 
-    /** Language variables reference */
-    private array $lang = [];
-
     private function __construct(string $root = '.')
     {
-        global $lang;
-
         $this->variables = &$this->blockData['.'][0];
         $this->rootDir = $root;
         $this->templateName = basename($root);
-        $this->lang = &$lang;
         $this->cacheDir = CACHE_DIR . '/';
 
         if (!is_dir($this->rootDir)) {
@@ -184,7 +178,7 @@ class Template
         // Variables directly at root level, plus L for language and _tpldata for blocks
         $context = array_merge($variables, [
             '_tpldata' => $this->blockData,
-            'L' => $this->lang,
+            'L' => lang(),
         ]);
 
         $renderStart = microtime(true);
@@ -218,7 +212,7 @@ class Template
 
         $context = [
             '_tpldata' => $this->blockData,
-            'L' => $this->lang,
+            'L' => lang(),
             'V' => $this->variables,
         ];
 
@@ -401,7 +395,7 @@ class Template
 
         $this->twig->addGlobal('_tpldata', $this->blockData);
         $this->twig->addGlobal('V', $this->variables);
-        $this->twig->addGlobal('L', $this->lang);
+        $this->twig->addGlobal('L', lang());
     }
 
     /**
