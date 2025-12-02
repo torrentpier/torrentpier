@@ -20,9 +20,6 @@ use Twig\TwigTest;
  */
 class LegacySyntaxExtension extends AbstractExtension
 {
-    /** Variables passed directly in context root, not via V (from ThemeExtension) */
-    private const CONTEXT_VARS = ['IMG', 'MOVED', 'ANNOUNCE', 'STICKY', 'LOCKED'];
-
     public function getFilters(): array
     {
         return [
@@ -210,14 +207,8 @@ class LegacySyntaxExtension extends AbstractExtension
             return "{{ $varPath|default('') }}";
         }, $content);
 
-        // Convert legacy variables {VARIABLE} to {{ V.VARIABLE }} LAST
-        $content = preg_replace_callback('/\{([A-Z0-9_]+)\}/', function ($matches) {
-            $varName = $matches[1];
-            if (in_array($varName, self::CONTEXT_VARS, true)) {
-                return "{{ $varName|default('') }}";
-            }
-            return "{{ V.$varName|default('') }}";
-        }, $content);
+        // Convert legacy variables {VARIABLE} to {{ V.VARIABLE }}
+        $content = preg_replace('/\{([A-Z0-9_]+)\}/', "{{ V.$1|default('') }}", $content);
 
         // Convert nested block variables {block.subblock.VARIABLE} (but not simple block vars handled in convertBlocks)
         // Exclude variables that end with _item. as those are already processed block variables
@@ -309,11 +300,6 @@ class LegacySyntaxExtension extends AbstractExtension
 
                 // Skip if inside constant('...')
                 if (preg_match('/constant\s*\(\s*[\'"]' . preg_quote($var, '/') . '[\'"]\s*\)/', $condition)) {
-                    return $var;
-                }
-
-                // Context vars are in the root, not in V
-                if (in_array($var, self::CONTEXT_VARS, true)) {
                     return $var;
                 }
 

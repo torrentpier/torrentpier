@@ -47,7 +47,6 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
             $this->getConfigVars($lang),
             $this->getPostButtonsVars(),
             $this->getPostIconsVars($images, $lang),
-            $this->getTopicIconsVars(),
             $this->getPmIconsVars($images)
         );
     }
@@ -116,20 +115,6 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
             'MINIPOST_IMG_NEW' => '<img src="' . $images['icon_minipost_new'] . '" class="icon1" alt="' . ($lang['NEW'] ?? '') . '" />',
             'ICON_LATEST_REPLY' => '<img src="' . $images['icon_latest_reply'] . '" class="icon2" alt="' . ($lang['LATEST'] ?? '') . '" title="' . ($lang['VIEW_LATEST_POST'] ?? '') . '" />',
             'ICON_NEWEST_REPLY' => '<img src="' . $images['icon_newest_reply'] . '" class="icon2" alt="' . ($lang['NEWEST'] ?? '') . '" title="' . ($lang['VIEW_NEWEST_POST'] ?? '') . '" />',
-        ];
-    }
-
-    private function getTopicIconsVars(): array
-    {
-        if (!defined('TOPIC_MOVED')) {
-            return [];
-        }
-
-        return [
-            'MOVED' => TOPIC_MOVED,
-            'ANNOUNCE' => POST_ANNOUNCE,
-            'STICKY' => POST_STICKY,
-            'LOCKED' => TOPIC_LOCKED,
         ];
     }
 

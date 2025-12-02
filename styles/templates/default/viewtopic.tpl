@@ -408,7 +408,7 @@ function build_poll_add_form (src_el)
 		<!-- IF postrow.POSTER_BIRTHDAY --><p class="birthday">{postrow.POSTER_BIRTHDAY}</p><!-- ENDIF -->
 	<!-- ENDIF -->
 
-	<p><img src="{SPACER}" width="{TOPIC_LEFT_COL_SPACER_WITDH}" height="<!-- IF postrow.POSTER_AVATAR || postrow.RANK_IMAGE -->2<!-- ELSE -->30<!-- ENDIF -->" border="0" alt="" /></p>
+	<p><img src="{SPACER}" width="{{ TOPIC_LEFT_COL_SPACER_WITDH }}" height="<!-- IF postrow.POSTER_AVATAR || postrow.RANK_IMAGE -->2<!-- ELSE -->30<!-- ENDIF -->" border="0" alt="" /></p>
 
 	</td>
 	<td class="message td2" rowspan="2">

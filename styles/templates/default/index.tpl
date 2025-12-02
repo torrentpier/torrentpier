@@ -21,8 +21,8 @@
 	<div class="floatL">
 		<a href="{U_SEARCH_LATEST}" class="med">{L_SEARCH_LATEST}</a> &#0183;
 		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_SEARCH_SELF}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT}</a> &#0183;
-        <!-- IF U_ATOM_FEED --><a href="{U_ATOM_FEED}" class="med">{FEED_IMG} {L_LATEST_RELEASES}</a> &#0183;<!-- ENDIF -->
-		<a href="{U_INDEX}?map=1" class="med bold">{FEED_IMG} {L_FORUM_MAP}</a>
+        <!-- IF U_ATOM_FEED --><a href="{U_ATOM_FEED}" class="med">{{ FEED_IMG|raw }} {L_LATEST_RELEASES}</a> &#0183;<!-- ENDIF -->
+		<a href="{U_INDEX}?map=1" class="med bold">{{ FEED_IMG|raw }} {L_FORUM_MAP}</a>
 	</div>
 	<div class="floatR med bold">
 		<a class="menu-root" href="#only-new-options">{L_DISPLAYING_OPTIONS}</a>
@@ -172,7 +172,7 @@
 
 	<table class="forums">
 	<tr>
-		<td class="row1 f_icon"><img class="forum_icon" src="{IMG}whosonline.gif" alt="" /></td>
+		<td class="row1 f_icon"><img class="forum_icon" src="{{ IMG }}whosonline.gif" alt="" /></td>
 		<td class="row1 small last_td">
 			<div class="med" style="line-height: 16px">
 				<p>{TOTAL_TOPICS}</p>
@@ -243,11 +243,11 @@
 
 	<table class="bCenter med" id="f_icons_legend">
 	<tr>
-		<td><img class="forum_icon" src="{IMG}folder_new_big.gif" alt="{L_NEW}"/></td>
+		<td><img class="forum_icon" src="{{ IMG }}folder_new_big.gif" alt="{L_NEW}"/></td>
 		<td>{L_NEW_POSTS}</td>
-		<td><img class="forum_icon" src="{IMG}folder_big.gif" alt="{L_OLD}" /></td>
+		<td><img class="forum_icon" src="{{ IMG }}folder_big.gif" alt="{L_OLD}" /></td>
 		<td>{L_NO_NEW_POSTS}</td>
-		<td><img class="forum_icon" src="{IMG}folder_locked_big.gif" alt="{L_FORUM_LOCKED_MAIN}" /></td>
+		<td><img class="forum_icon" src="{{ IMG }}folder_locked_big.gif" alt="{L_FORUM_LOCKED_MAIN}" /></td>
 		<td>{L_FORUM_LOCKED_MAIN}</td>
 	</tr>
 	</table>

@@ -216,20 +216,10 @@ class Template
         $templateName = $this->getRelativeTemplateName($templatePath);
         $isNativeTwig = str_ends_with($templateName, '.twig');
 
-        // Build context - for native .twig files, expose variables at root level too
-        // Get reserved vars from ThemeExtension for legacy template compatibility
-        $themeVars = $this->twig->getGlobals();
-
         $context = [
             '_tpldata' => $this->blockData,
             'L' => $this->lang,
             'V' => $this->variables,
-            // Reserved vars from ThemeExtension
-            'IMG' => $themeVars['IMG'] ?? '',
-            'MOVED' => $themeVars['MOVED'] ?? 0,
-            'ANNOUNCE' => $themeVars['ANNOUNCE'] ?? 0,
-            'STICKY' => $themeVars['STICKY'] ?? 0,
-            'LOCKED' => $themeVars['LOCKED'] ?? 0,
         ];
 
         // For native Twig templates, expose V variables at root level for cleaner syntax
