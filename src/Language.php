@@ -12,8 +12,8 @@ namespace TorrentPier;
 /**
  * Language management class
  *
- * Singleton class that manages language loading and provides access to language variables
- * while maintaining backward compatibility with global $lang variable.
+ * Singleton class that manages language loading and provides access to language variables.
+ * Use lang() helper or __() function to access language strings.
  */
 class Language
 {
@@ -75,9 +75,6 @@ class Language
         setlocale(LC_ALL, $locale);
 
         $this->initialized = true;
-
-        // Update global variables for backward compatibility
-        $this->updateGlobalVariables();
     }
 
     /**
@@ -115,15 +112,6 @@ class Language
 
         // Merge with source language as fallback
         $this->userLanguage = array_deep_merge($this->sourceLanguage, $this->userLanguage);
-    }
-
-    /**
-     * Update global variables for backward compatibility
-     */
-    private function updateGlobalVariables(): void
-    {
-        global $lang;
-        $lang = $this->userLanguage;
     }
 
     /**
@@ -219,10 +207,6 @@ class Language
         // Merge with existing language data
         $this->userLanguage = array_merge($this->userLanguage, $lang);
 
-        // Update global variable for backward compatibility
-        global $lang;
-        $lang = $this->userLanguage;
-
         return true;
     }
 
@@ -236,10 +220,6 @@ class Language
         } else {
             $this->userLanguage[$key] = $value;
         }
-
-        // Update global variable for backward compatibility
-        global $lang;
-        $lang = $this->userLanguage;
     }
 
     /**

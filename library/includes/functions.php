@@ -526,7 +526,7 @@ function build_hidden_fields($fields_ary)
 function declension($int, $expressions, $format = '%1$s %2$s')
 {
     if (!is_array($expressions)) {
-        $expressions = $GLOBALS['lang']['DECLENSION'][strtoupper($expressions)];
+        $expressions = lang()->get('DECLENSION.' . strtoupper($expressions));
     }
 
     if (count($expressions) < 3) {
@@ -1430,7 +1430,7 @@ function bb_preg_quote($str, $delimiter)
 
 function bb_die($msg_text, $status_code = null)
 {
-    global $ajax, $lang, $template, $theme, $userdata, $user;
+    global $ajax, $template, $theme, $userdata, $user;
 
     if (isset($status_code)) {
         http_response_code($status_code);
@@ -1447,10 +1447,8 @@ function bb_die($msg_text, $status_code = null)
     define('HAS_DIED', 1);
     define('DISABLE_CACHING_OUTPUT', true);
 
-    // If empty lang, initialize language singleton
-    if (empty($lang)) {
-        lang()->initializeLanguage();
-    }
+    // Ensure language is initialized
+    lang()->initializeLanguage();
 
     // If empty session
     if (empty($userdata)) {

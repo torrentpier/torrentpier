@@ -14,7 +14,7 @@ if (!defined('BB_ROOT')) {
 /**
  * Define some basic configuration arrays
  */
-$userdata = $theme = $lang = $bf = [];
+$userdata = $theme = $bf = [];
 $gen_simple_header = false;
 $user = null;
 

@@ -27,9 +27,9 @@
 <div id="editable-tpl-yesno-gender" style="display: none;">
 	<span class="editable-inputs nowrap" style="display: none;">
 		<select class="editable-value">
-			<option value="0">&nbsp;{$lang['GENDER_SELECT'][0]}&nbsp;</option>
-			<option value="1">&nbsp;{$lang['GENDER_SELECT'][1]}&nbsp;</option>
-			<option value="2">&nbsp;{$lang['GENDER_SELECT'][2]}&nbsp;</option>
+			<option value="0">&nbsp;{{ L.GENDER_SELECT[0] }}&nbsp;</option>
+			<option value="1">&nbsp;{{ L.GENDER_SELECT[1] }}&nbsp;</option>
+			<option value="2">&nbsp;{{ L.GENDER_SELECT[2] }}&nbsp;</option>
 		</select>
 		<input type="button" class="editable-submit" value="&raquo;" style="width: 30px; font-weight: bold;">
 		<input type="button" class="editable-cancel" value="x" style="width: 30px;">

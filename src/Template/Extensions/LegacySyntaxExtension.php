@@ -531,8 +531,7 @@ class LegacySyntaxExtension extends AbstractExtension
      */
     public function getLanguageVariable(string $key, mixed $default = ''): mixed
     {
-        global $lang;
-        return $lang[$key] ?? $default;
+        return lang()->get($key, $default);
     }
 
     /**
