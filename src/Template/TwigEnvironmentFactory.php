@@ -17,6 +17,7 @@ use Twig\TwigFunction;
 use Twig\TwigFilter;
 use TorrentPier\Template\Extensions\LegacySyntaxExtension;
 use TorrentPier\Template\Extensions\LanguageExtension;
+use TorrentPier\Template\Extensions\ThemeExtension;
 use TorrentPier\Template\Loaders\LegacyTemplateLoader;
 
 /**
@@ -65,7 +66,7 @@ class TwigEnvironmentFactory
         $twig = new Environment($legacyLoader, $options);
 
         // Add TorrentPier-specific extensions
-        $this->addExtensions($twig);
+        $this->addExtensions($twig, $templateDir);
 
         // Add global functions for backward compatibility
         $this->addGlobalFunctions($twig);
@@ -76,13 +77,18 @@ class TwigEnvironmentFactory
     /**
      * Add TorrentPier-specific Twig extensions
      */
-    private function addExtensions(Environment $twig): void
+    private function addExtensions(Environment $twig, string $templateDir): void
     {
         // Legacy syntax conversion extension
         $twig->addExtension(new LegacySyntaxExtension());
 
         // Language extension
         $twig->addExtension(new LanguageExtension());
+
+        // Theme extension (images, icons, etc.)
+        $themeExtension = new ThemeExtension();
+        $themeExtension->setTemplatePath($templateDir);
+        $twig->addExtension($themeExtension);
     }
 
     /**
@@ -91,19 +97,14 @@ class TwigEnvironmentFactory
     private function addGlobalFunctions(Environment $twig): void
     {
         // Add commonly used global variables
-        $twig->addGlobal('bb_cfg', $GLOBALS['bb_cfg'] ?? []);
+        $twig->addGlobal('bb_cfg', config()->all());
         $twig->addGlobal('user', $GLOBALS['user'] ?? null);
         $twig->addGlobal('userdata', $GLOBALS['userdata'] ?? []);
-        $twig->addGlobal('lang', $GLOBALS['lang'] ?? []);
+        $twig->addGlobal('lang', lang()->all());
 
         // Add TorrentPier configuration functions
-        $twig->addFunction(new TwigFunction('config', function ($key = null) {
-            return $key ? config()->get($key) : config();
-        }));
-
-        $twig->addFunction(new TwigFunction('lang', function ($key = null, $default = '') {
-            return $key ? lang()->get($key, $default) : lang();
-        }));
+        $twig->addFunction(new TwigFunction('config', fn($key = null) => $key ? config()->get($key) : config()));
+        $twig->addFunction(new TwigFunction('lang', fn($key = null, $default = '') => $key ? lang()->get($key, $default) : lang()));
 
         // Add utility functions
         $twig->addFunction(new TwigFunction('make_url', 'make_url'));

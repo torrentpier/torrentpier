@@ -16,7 +16,7 @@ if (defined('PAGE_HEADER_SENT')) {
 }
 
 // Parse and show the overall page header
-global $page_cfg, $userdata, $user, $ads, $template, $lang, $images;
+global $page_cfg, $userdata, $user, $ads, $template, $lang;
 
 $logged_in = (int)!empty($userdata['session_logged_in']);
 
@@ -57,14 +57,14 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
 }
 
 // Info about new private messages
-$icon_pm = $images['pm_no_new_msg'];
+$icon_pm = theme_images('pm_no_new_msg');
 $pm_info = $lang['NO_NEW_PM'];
 $have_new_pm = $have_unread_pm = 0;
 
 if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
     if ($userdata['user_new_privmsg']) {
         $have_new_pm = $userdata['user_new_privmsg'];
-        $icon_pm = $images['pm_new_msg'];
+        $icon_pm = theme_images('pm_new_msg');
         $pm_info = declension($userdata['user_new_privmsg'], $lang['NEW_PMS_DECLENSION'], $lang['NEW_PMS_FORMAT']);
 
         if ($userdata['user_last_privmsg'] > $userdata['user_lastvisit'] && defined('IN_PM')) {

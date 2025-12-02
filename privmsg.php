@@ -1367,7 +1367,7 @@ if ($mode == 'read') {
 
             $flag = $row['privmsgs_type'];
 
-            $icon_flag = ($flag == PRIVMSGS_NEW_MAIL || $flag == PRIVMSGS_UNREAD_MAIL) ? $images['pm_unreadmsg'] : $images['pm_readmsg'];
+            $icon_flag = ($flag == PRIVMSGS_NEW_MAIL || $flag == PRIVMSGS_UNREAD_MAIL) ? theme_images('pm_unreadmsg') : theme_images('pm_readmsg');
             $icon_flag_alt = ($flag == PRIVMSGS_NEW_MAIL || $flag == PRIVMSGS_UNREAD_MAIL) ? $lang['UNREAD_MESSAGE'] : $lang['READ_MESSAGE'];
 
             $msg_userid = $row['user_id'];

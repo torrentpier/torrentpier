@@ -155,15 +155,15 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
     if ($rowset = DB()->fetch_rowset($sql)) {
         $template->assign_vars([
             'SHOW_SUBFORUMS' => true,
-            'FORUM_IMG' => $images['forum'],
-            'FORUM_NEW_IMG' => $images['forum_new'],
-            'FORUM_LOCKED_IMG' => $images['forum_locked']
+            'FORUM_IMG' => theme_images('forum'),
+            'FORUM_NEW_IMG' => theme_images('forum_new'),
+            'FORUM_LOCKED_IMG' => theme_images('forum_locked')
         ]);
     }
     foreach ($rowset as $sf_data) {
         $sf_forum_id = $sf_data['forum_id'];
         $sf_last_tid = $sf_data['last_topic_id'];
-        $folder_image = $images['forum'];
+        $folder_image = theme_images('forum');
         $last_post = $lang['NO_POSTS'];
 
         if (!$fname_html =& $forums['forum_name_html'][$sf_forum_id]) {
@@ -171,9 +171,9 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
         }
 
         if ($sf_data['forum_status'] == FORUM_LOCKED) {
-            $folder_image = $images['forum_locked'];
+            $folder_image = theme_images('forum_locked');
         } elseif (is_unread($sf_data['topic_last_post_time'], $sf_last_tid, $sf_forum_id)) {
-            $folder_image = $images['forum_new'];
+            $folder_image = theme_images('forum_new');
         }
 
         $last_post_user = profile_url(['username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']]);
@@ -181,7 +181,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
         if ($sf_data['forum_last_post_id']) {
             $last_post = bb_date($sf_data['topic_last_post_time'], config()->get('last_post_date_format'));
             $last_post .= "<br />$last_post_user";
-            $last_post .= '<a href="' . POST_URL . $sf_data['forum_last_post_id'] . '#' . $sf_data['forum_last_post_id'] . '"><img src="' . $images['icon_latest_reply'] . '" class="icon2" alt="latest" title="' . $lang['VIEW_LATEST_POST'] . '" /></a>';
+            $last_post .= '<a href="' . POST_URL . $sf_data['forum_last_post_id'] . '#' . $sf_data['forum_last_post_id'] . '"><img src="' . theme_images('icon_latest_reply') . '" class="icon2" alt="latest" title="' . $lang['VIEW_LATEST_POST'] . '" /></a>';
         }
 
         $template->assign_block_vars('f', [
@@ -206,7 +206,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
                 'LAST_POST_TIME' => bb_date($sf_data['topic_last_post_time'], config()->get('last_post_date_format')),
                 'LAST_POST_ID' => $sf_data['forum_last_post_id'],
                 'LAST_POST_USER' => $last_post_user,
-                'ICON_LATEST_REPLY' => $images['icon_latest_reply']
+                'ICON_LATEST_REPLY' => theme_images('icon_latest_reply')
             ]);
         } else {
             $template->assign_block_vars('f.last', ['FORUM_LAST_POST' => false]);
@@ -393,12 +393,12 @@ $template->assign_vars([
     'FORUM_DESC' => htmlCHR($forum_data['forum_desc']),
     'TORRENTS' => $forum_data['allow_reg_tracker'],
 
-    'FOLDER_IMG' => $images['folder'],
-    'FOLDER_NEW_IMG' => $images['folder_new'],
-    'FOLDER_LOCKED_IMG' => $images['folder_locked'],
-    'FOLDER_STICKY_IMG' => $images['folder_sticky'],
-    'FOLDER_ANNOUNCE_IMG' => $images['folder_announce'],
-    'FOLDER_DOWNLOAD_IMG' => $images['folder_dl'],
+    'FOLDER_IMG' => theme_images('folder'),
+    'FOLDER_NEW_IMG' => theme_images('folder_new'),
+    'FOLDER_LOCKED_IMG' => theme_images('folder_locked'),
+    'FOLDER_STICKY_IMG' => theme_images('folder_sticky'),
+    'FOLDER_ANNOUNCE_IMG' => theme_images('folder_announce'),
+    'FOLDER_DOWNLOAD_IMG' => theme_images('folder_dl'),
 
     'SHOW_ONLY_NEW_MENU' => true,
     'ONLY_NEW_POSTS_ON' => ($only_new == ONLY_NEW_POSTS),

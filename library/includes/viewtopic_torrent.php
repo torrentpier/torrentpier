@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css, $lang, $images;
+global $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css, $lang;
 
 $tor_status_by_for_all = true;
 $change_peers_bgr_over = true;
@@ -25,7 +25,7 @@ $peers_overflow_div_height = '400px';
 $peers_div_style_normal = 'padding: 3px;';
 $peers_div_style_overflow = "padding: 6px; height: $peers_overflow_div_height; overflow: auto; border: 1px inset;";
 $s_last_seed_date_format = 'Y-m-d';
-$upload_image = '<img src="' . $images['icon_dn'] . '" alt="' . $lang['DL_TORRENT'] . '" border="0" />';
+$upload_image = '<img src="' . theme_images('icon_dn') . '" alt="' . $lang['DL_TORRENT'] . '" border="0" />';
 
 $peers_cnt = $seed_count = $leech_count = 0;
 $seeders = $leechers = '';
@@ -207,7 +207,7 @@ if ($tor_reged && $tor_info) {
             'MAGNET' => $tor_magnet,
             'HASH' => !empty($tor_info['info_hash']) ? strtoupper(bin2hex($tor_info['info_hash'])) : false,
             'HASH_V2' => !empty($tor_info['info_hash_v2']) ? strtoupper(bin2hex($tor_info['info_hash_v2'])) : false,
-            'FILELIST_ICON' => $images['icon_tor_filelist'],
+            'FILELIST_ICON' => theme_images('icon_tor_filelist'),
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => humanTime($tor_info['reg_time']),
             'TORRENT_SIZE' => humn_size($tor_size, 2),
@@ -219,7 +219,7 @@ if ($tor_reged && $tor_info) {
         if (config()->get('torr_server.enabled') && (!IS_GUEST || !config()->get('torr_server.disable_for_guest')) && \TorrentPier\Attachment::m3uExists($topic_id)) {
             $template->assign_block_vars('torrent.tor_server', [
                 'TORR_SERVER_M3U_LINK' => PLAYBACK_M3U_URL . $bt_topic_id,
-                'TORR_SERVER_M3U_ICON' => $images['icon_tor_m3u_icon'],
+                'TORR_SERVER_M3U_ICON' => theme_images('icon_tor_m3u_icon'),
             ]);
         }
     }

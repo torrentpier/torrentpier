@@ -809,7 +809,7 @@ function wbr($text, $max_word_length = HTML_WBR_LENGTH)
 
 function generate_user_info($row, bool $have_auth = IS_ADMIN): array
 {
-    global $userdata, $lang, $images;
+    global $userdata, $lang;
 
     $from = !empty($row['user_from']) ? render_flag($row['user_from'], false) : $lang['NOSELECT'];
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
@@ -1158,8 +1158,6 @@ function setup_style()
         'TPL_DIR' => make_url($css_dir),
         'SITE_URL' => make_url('/')
     ]);
-
-    require_once TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php';
 
     return ['template_name' => $tpl_dir_name];
 }
@@ -1638,29 +1636,27 @@ function cat_exists($cat_id): bool
 
 function get_topic_icon($topic, $is_unread = null)
 {
-    global $images;
-
     $t_hot = ($topic['topic_replies'] >= config()->get('hot_threshold'));
     $is_unread ??= is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']);
 
     if ($topic['topic_status'] == TOPIC_MOVED) {
-        $folder_image = $images['folder'];
+        $folder_image = theme_images('folder');
     } else {
-        $folder = ($t_hot) ? $images['folder_hot'] : $images['folder'];
-        $folder_new = ($t_hot) ? $images['folder_hot_new'] : $images['folder_new'];
+        $folder = ($t_hot) ? theme_images('folder_hot') : theme_images('folder');
+        $folder_new = ($t_hot) ? theme_images('folder_hot_new') : theme_images('folder_new');
 
         if ($topic['topic_type'] == POST_ANNOUNCE) {
-            $folder = $images['folder_announce'];
-            $folder_new = $images['folder_announce_new'];
+            $folder = theme_images('folder_announce');
+            $folder_new = theme_images('folder_announce_new');
         } elseif ($topic['topic_type'] == POST_STICKY) {
-            $folder = $images['folder_sticky'];
-            $folder_new = $images['folder_sticky_new'];
+            $folder = theme_images('folder_sticky');
+            $folder_new = theme_images('folder_sticky_new');
         } elseif ($topic['topic_status'] == TOPIC_LOCKED) {
-            $folder = $images['folder_locked'];
-            $folder_new = $images['folder_locked_new'];
+            $folder = theme_images('folder_locked');
+            $folder_new = theme_images('folder_locked_new');
         } elseif ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL) {
-            $folder = ($t_hot) ? $images['folder_dl_hot'] : $images['folder_dl'];
-            $folder_new = ($t_hot) ? $images['folder_dl_hot_new'] : $images['folder_dl_new'];
+            $folder = ($t_hot) ? theme_images('folder_dl_hot') : theme_images('folder_dl');
+            $folder_new = ($t_hot) ? theme_images('folder_dl_hot_new') : theme_images('folder_dl_new');
         }
 
         $folder_image = ($is_unread) ? $folder_new : $folder;
@@ -1981,7 +1977,7 @@ function sync_user_to_manticore($user_id, ?string $username = null, string $acti
  */
 function create_magnet(?string $infohash, ?string $infohash_v2, string $auth_key, string $name, int|string $length = 0): string
 {
-    global $images, $lang;
+    global $lang;
 
     if (!config()->get('magnet_links_enabled')) {
         return false;
@@ -2013,7 +2009,10 @@ function create_magnet(?string $infohash, ?string $infohash_v2, string $auth_key
         $magnet .= '&xl=' . $length;
     }
 
-    return '<a title="' . ($v2_support ? $lang['MAGNET_v2'] : $lang['MAGNET']) . '" href="' . $magnet . '&tr=' . urlencode(config()->get('bt_announce_url') . "?" . config()->get('passkey_key') . "=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . ($v2_support ? $images['icon_magnet_v2'] : $images['icon_magnet']) . '" width="12" height="12" border="0" /></a>';
+    $icon = $v2_support ? theme_images('icon_magnet_v2') : theme_images('icon_magnet');
+    $title = $v2_support ? $lang['MAGNET_v2'] : $lang['MAGNET'];
+
+    return '<a title="' . $title . '" href="' . $magnet . '&tr=' . urlencode(config()->get('bt_announce_url') . "?" . config()->get('passkey_key') . "=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . $icon . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
@@ -2141,22 +2140,22 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
  */
 function genderImage(int $gender): ?string
 {
-    global $lang, $images;
+    global $lang;
 
     if (!config()->get('gender')) {
         return false;
     }
 
     return match ($gender) {
-        MALE => '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />',
-        FEMALE => '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />',
-        default => '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />',
+        MALE => '<img src="' . theme_images('icon_male') . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />',
+        FEMALE => '<img src="' . theme_images('icon_female') . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />',
+        default => '<img src="' . theme_images('icon_nogender') . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />',
     };
 }
 
 function is_gold($type): string
 {
-    global $lang, $images;
+    global $lang;
 
     $type = (int)$type;
     $is_gold = '';
@@ -2167,10 +2166,10 @@ function is_gold($type): string
 
     switch ($type) {
         case TOR_TYPE_GOLD:
-            $is_gold = '<img width="16" height="15" src="' . $images['icon_tor_gold'] . '" alt="' . $lang['GOLD'] . '" title="' . $lang['GOLD'] . '" />&nbsp;';
+            $is_gold = '<img width="16" height="15" src="' . theme_images('icon_tor_gold') . '" alt="' . $lang['GOLD'] . '" title="' . $lang['GOLD'] . '" />&nbsp;';
             break;
         case TOR_TYPE_SILVER:
-            $is_gold = '<img width="16" height="15" src="' . $images['icon_tor_silver'] . '" alt="' . $lang['SILVER'] . '" title="' . $lang['SILVER'] . '" />&nbsp;';
+            $is_gold = '<img width="16" height="15" src="' . theme_images('icon_tor_silver') . '" alt="' . $lang['SILVER'] . '" title="' . $lang['SILVER'] . '" />&nbsp;';
             break;
         default:
             break;
@@ -2271,13 +2270,17 @@ function clean_tor_dirname($dirname)
  */
 function user_birthday_icon($user_birthday, $user_id): string
 {
-    global $images, $lang;
+    global $lang;
 
     $current_date = bb_date(TIMENOW, 'md', false);
     $user_birthday = ($user_id != GUEST_UID && !empty($user_birthday) && $user_birthday != '1900-01-01')
         ? bb_date(strtotime($user_birthday), 'md', false) : false;
 
-    return (config()->get('birthday_enabled') && $current_date == $user_birthday) ? '<img src="' . $images['icon_birthday'] . '" alt="' . $lang['HAPPY_BIRTHDAY'] . '" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />' : '';
+    if (config()->get('birthday_enabled') && $current_date == $user_birthday) {
+        return '<img src="' . theme_images('icon_birthday') . '" alt="' . $lang['HAPPY_BIRTHDAY'] . '" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />';
+    }
+
+    return '';
 }
 
 /**

@@ -230,10 +230,10 @@ foreach ($cat_forums as $cid => $c) {
 
         $forums_count++;
         $new = is_unread($f['last_post_time'], $f['last_topic_id'], $f['forum_id']) ? '_new' : '';
-        $folder_image = $is_sf ? $images["icon_minipost{$new}"] : $images["forum{$new}"];
+        $folder_image = $is_sf ? theme_images("icon_minipost{$new}") : theme_images("forum{$new}");
 
         if ($f['forum_status'] == FORUM_LOCKED) {
-            $folder_image = $is_sf ? $images['icon_minipost'] : $images['forum_locked'];
+            $folder_image = $is_sf ? theme_images('icon_minipost') : theme_images('forum_locked');
         }
 
         if ($is_sf) {
@@ -303,9 +303,9 @@ $template->assign_vars([
         humn_size($stats['speed']) . '/s'
     ) : '',
     'SHOW_MOD_INDEX' => config()->get('show_mod_index'),
-    'FORUM_IMG' => $images['forum'],
-    'FORUM_NEW_IMG' => $images['forum_new'],
-    'FORUM_LOCKED_IMG' => $images['forum_locked'],
+    'FORUM_IMG' => theme_images('forum'),
+    'FORUM_NEW_IMG' => theme_images('forum_new'),
+    'FORUM_LOCKED_IMG' => theme_images('forum_locked'),
 
     'SHOW_ONLY_NEW_MENU' => true,
     'ONLY_NEW_POSTS_ON' => $only_new == ONLY_NEW_POSTS,

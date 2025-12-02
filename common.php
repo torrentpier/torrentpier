@@ -217,6 +217,29 @@ function template(?string $root = null): \TorrentPier\Template\Template
 }
 
 /**
+ * Get theme images array
+ *
+ * @param string|null $key Specific image key, or null for all images
+ * @return mixed Image path, all images array, or empty string if key not found
+ */
+function theme_images(?string $key = null): mixed
+{
+    $twig = template()->getTwig();
+    if (!$twig) {
+        return $key === null ? [] : '';
+    }
+
+    $themeVars = $twig->getGlobals();
+    $images = $themeVars['images'] ?? [];
+
+    if ($key === null) {
+        return $images;
+    }
+
+    return $images[$key] ?? '';
+}
+
+/**
  * Initialize debug
  */
 define('APP_ENV', env('APP_ENV', 'production'));

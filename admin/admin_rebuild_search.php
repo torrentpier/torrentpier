@@ -240,7 +240,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
         $form_action = 'admin_rebuild_search.php' . '?mode=refresh' . $form_parameters;
         $next_button = $lang['NEXT'];
-        $progress_bar_img = $images['progress_bar'];
+        $progress_bar_img = theme_images('progress_bar');
 
         $processing_messages .= sprintf($lang['PROCESSING_NEXT_POSTS'], $post_limit);
 
@@ -255,7 +255,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
         $form_action = 'admin_rebuild_search.php';
         $next_button = $lang['FINISHED'];
-        $progress_bar_img = $images['progress_bar_full'];
+        $progress_bar_img = theme_images('progress_bar_full');
 
         $processing_messages .= ($session_posts_processed < $session_posts_processing) ? sprintf($lang['DELETED_POSTS'], $session_posts_processing - $session_posts_processed) : '';
         $processing_messages .= ($total_posts_processed == $total_posts) ? $lang['ALL_POSTS_PROCESSED'] : $lang['ALL_SESSION_POSTS_PROCESSED'];

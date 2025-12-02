@@ -20,6 +20,9 @@ use Twig\TwigTest;
  */
 class LegacySyntaxExtension extends AbstractExtension
 {
+    /** Variables passed directly in context root, not via V (from ThemeExtension) */
+    private const CONTEXT_VARS = ['IMG', 'MOVED', 'ANNOUNCE', 'STICKY', 'LOCKED'];
+
     public function getFilters(): array
     {
         return [
@@ -210,6 +213,9 @@ class LegacySyntaxExtension extends AbstractExtension
         // Convert legacy variables {VARIABLE} to {{ V.VARIABLE }} LAST
         $content = preg_replace_callback('/\{([A-Z0-9_]+)\}/', function ($matches) {
             $varName = $matches[1];
+            if (in_array($varName, self::CONTEXT_VARS, true)) {
+                return "{{ $varName|default('') }}";
+            }
             return "{{ V.$varName|default('') }}";
         }, $content);
 
@@ -301,8 +307,13 @@ class LegacySyntaxExtension extends AbstractExtension
             function ($matches) use ($condition) {
                 $var = $matches[0];
 
-                // Skip if inside constant('...') - this is a global check, intentionally
+                // Skip if inside constant('...')
                 if (preg_match('/constant\s*\(\s*[\'"]' . preg_quote($var, '/') . '[\'"]\s*\)/', $condition)) {
+                    return $var;
+                }
+
+                // Context vars are in the root, not in V
+                if (in_array($var, self::CONTEXT_VARS, true)) {
                     return $var;
                 }
 

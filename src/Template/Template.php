@@ -20,7 +20,7 @@ class Template
     private static float $totalRenderTime = 0;
 
     /** Reserved context keys that should not be overwritten */
-    private const RESERVED_KEYS = ['L', '_tpldata', 'V'];
+    private const RESERVED_KEYS = ['L', '_tpldata', 'V', 'IMG', 'MOVED', 'ANNOUNCE', 'STICKY', 'LOCKED'];
 
     /** @var array<array{variable: string, template: string, source: string, time: float}> */
     private static array $variableConflicts = [];
@@ -68,13 +68,20 @@ class Template
         $this->initializeTwig();
     }
 
+    private static ?self $defaultInstance = null;
+
     public static function getInstance(?string $root = null): self
     {
+        if ($root === null && self::$defaultInstance !== null) {
+            return self::$defaultInstance;
+        }
+
         $root = $root ?: '.';
         $key = md5($root);
 
         if (!isset(self::$instances[$key])) {
             self::$instances[$key] = new self($root);
+            self::$defaultInstance ??= self::$instances[$key];
         }
 
         return self::$instances[$key];
@@ -83,6 +90,14 @@ class Template
     public function getCacheDir(): string
     {
         return $this->cacheDir;
+    }
+
+    /**
+     * Get the Twig environment instance
+     */
+    public function getTwig(): ?Environment
+    {
+        return $this->twig;
     }
 
     public function getVar(string $name, mixed $default = null): mixed
@@ -202,10 +217,19 @@ class Template
         $isNativeTwig = str_ends_with($templateName, '.twig');
 
         // Build context - for native .twig files, expose variables at root level too
+        // Get reserved vars from ThemeExtension for legacy template compatibility
+        $themeVars = $this->twig->getGlobals();
+
         $context = [
             '_tpldata' => $this->blockData,
             'L' => $this->lang,
-            'V' => $this->variables
+            'V' => $this->variables,
+            // Reserved vars from ThemeExtension
+            'IMG' => $themeVars['IMG'] ?? '',
+            'MOVED' => $themeVars['MOVED'] ?? 0,
+            'ANNOUNCE' => $themeVars['ANNOUNCE'] ?? 0,
+            'STICKY' => $themeVars['STICKY'] ?? 0,
+            'LOCKED' => $themeVars['LOCKED'] ?? 0,
         ];
 
         // For native Twig templates, expose V variables at root level for cleaner syntax
