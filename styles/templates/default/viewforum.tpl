@@ -152,7 +152,7 @@ ajax.callback.mod_action = function (data) {
 </script>
 
 <div id="mod-action-content" style="display: none;">
-<form id="mod-action" method="post" action="modcp.php" class="tokenized">
+<form id="mod-action" method="post" action="modcp" class="tokenized">
 	<input type="hidden" name="{#POST_FORUM_URL#}" value="{FORUM_ID}" />
 	<div class="floatL">
 	<input type="checkbox" onclick="$('.topic-chbox').attr({ checked: this.checked }); if(this.checked){$('.tt-text').addClass('hl-tt');}else{$('.tt-text').removeClass('hl-tt');}" />

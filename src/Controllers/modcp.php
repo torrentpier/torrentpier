@@ -7,9 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'modcp');
-
-require_once __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
 //
@@ -245,7 +242,7 @@ switch ($mode) {
             print_confirmation([
                 'QUESTION' => $lang['CONFIRM_DELETE_TOPIC'],
                 'ITEMS_LIST' => implode("\n</li>\n<li>\n", $topic_titles),
-                'FORM_ACTION' => 'modcp.php',
+                'FORM_ACTION' => 'modcp',
                 'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields)
             ]);
         }
@@ -296,7 +293,7 @@ switch ($mode) {
                 'TOPIC_TITLES' => implode("\n</li>\n<li>\n", $topic_titles),
 
                 'S_FORUM_SELECT' => $forum_select,
-                'S_MODCP_ACTION' => 'modcp.php',
+                'S_MODCP_ACTION' => 'modcp',
                 'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
             ]);
 
@@ -546,7 +543,7 @@ switch ($mode) {
                 $template->assign_vars([
                     'FORUM_NAME' => htmlCHR($forum_name),
                     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
-                    'S_SPLIT_ACTION' => 'modcp.php',
+                    'S_SPLIT_ACTION' => 'modcp',
                     'S_HIDDEN_FIELDS' => $s_hidden_fields,
                     'S_FORUM_SELECT' => get_forum_select('admin', 'new_forum_id', $forum_id),
                 ]);
@@ -620,7 +617,7 @@ switch ($mode) {
         $template->assign_vars([
             'TPL_MODCP_IP' => true,
             'IP' => $ip_this_post,
-            'U_LOOKUP_IP' => !$no_lookup ? "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'] : '',
+            'U_LOOKUP_IP' => !$no_lookup ? "modcp?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'] : '',
         ]);
         unset($no_lookup);
 
@@ -653,7 +650,7 @@ switch ($mode) {
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'IP' => $ip,
                     'POSTS' => $row['postings'],
-                    'U_LOOKUP_IP' => !$no_lookup ? "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $ip . "&amp;sid=" . $userdata['session_id'] : '',
+                    'U_LOOKUP_IP' => !$no_lookup ? "modcp?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $ip . "&amp;sid=" . $userdata['session_id'] : '',
                 ]);
                 unset($no_lookup);
 

@@ -7,13 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'profile');
-define('IN_PROFILE', true);
-
-require_once __DIR__ . '/common.php';
-
-// Start session management
-$user->session_start();
+const IN_PROFILE = true;
 
 set_die_append_msg();
 $mode = request_var('mode', 'viewprofile');

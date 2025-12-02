@@ -108,8 +108,8 @@ if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tp
             'QUOTE_URL' => BB_ROOT . POSTING_URL . '?mode=quote&amp;' . POST_POST_URL . '=',
             'EDIT_POST_URL' => BB_ROOT . POSTING_URL . '?mode=editpost&amp;' . POST_POST_URL . '=',
             'DELETE_POST_URL' => BB_ROOT . POSTING_URL . '?mode=delete&amp;' . POST_POST_URL . '=',
-            'IP_POST_URL' => BB_ROOT . 'modcp.php?mode=ip&amp;' . POST_POST_URL . '=',
-            'EMAIL_URL' => BB_ROOT . 'profile.php?mode=email&amp;' . POST_USERS_URL . '=',
+            'IP_POST_URL' => BB_ROOT . 'modcp?mode=ip&amp;' . POST_POST_URL . '=',
+            'EMAIL_URL' => BB_ROOT . 'profile?mode=email&amp;' . POST_USERS_URL . '=',
             'FORUM_URL' => BB_ROOT . FORUM_URL,
             'PM_URL' => BB_ROOT . PM_URL,
             'PROFILE_URL' => BB_ROOT . PROFILE_URL
