@@ -161,11 +161,11 @@
     </tr>
     <tr>
         <td class="row1" nowrap="nowrap" width="25%">{L_TP_VERSION}:</td>
-        <td class="row2"><b>{$bb_cfg['tp_release_codename']} ({$bb_cfg['tp_version']})</b></td>
+        <td class="row2"><b>{{ config('tp_release_codename') }} ({{ config('tp_version') }})</b></td>
     </tr>
     <tr>
         <td class="row1" nowrap="nowrap" width="25%">{L_TP_RELEASE_DATE}:</td>
-        <td class="row2"><b>{$bb_cfg['tp_release_date']}</b></td>
+        <td class="row2"><b>{{ config('tp_release_date') }}</b></td>
     </tr>
     <!-- BEGIN updater -->
     <!-- IF updater.UPDATE_AVAILABLE -->
