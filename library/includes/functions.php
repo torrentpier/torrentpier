@@ -1426,7 +1426,7 @@ function bb_preg_quote($str, $delimiter)
 
 function bb_die($msg_text, $status_code = null)
 {
-    global $ajax, $template, $theme, $userdata, $user;
+    global $ajax, $theme, $userdata, $user;
 
     if (isset($status_code)) {
         http_response_code($status_code);
@@ -1453,9 +1453,6 @@ function bb_die($msg_text, $status_code = null)
 
     // If the header hasn't been output then do it
     if (!defined('PAGE_HEADER_SENT')) {
-        if (empty($template)) {
-            $template = template(BB_ROOT . "templates/" . config()->get('tpl_name'));
-        }
         if (empty($theme)) {
             $theme = setup_style();
         }

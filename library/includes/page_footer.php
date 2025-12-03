@@ -11,20 +11,20 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $template;
+global $userdata;
 
-if (!empty($template)) {
+if (defined('PAGE_HEADER_SENT')) {
     $birthday_tp = ((string)bb_date(TIMENOW, 'd.m', false) === '04.04') ? '&nbsp;|&nbsp;&#127881;&#127856;&#128154;' : '';
 
-    $template->assign_vars([
+    template()->assign_vars([
         'SIMPLE_FOOTER' => !empty($gen_simple_header),
         'POWERED' => 'Fueled by <a target="_blank" referrerpolicy="origin" href="https://github.com/torrentpier/torrentpier">TorrentPier</a> &copy; 2005-' . date('Y') . $birthday_tp,
         'SHOW_ADMIN_LINK' => (IS_ADMIN && !defined('IN_ADMIN')),
         'ADMIN_LINK_HREF' => 'admin/index.php',
     ]);
 
-    $template->set_filenames(['page_footer' => 'page_footer.tpl']);
-    $template->pparse('page_footer');
+    template()->set_filenames(['page_footer' => 'page_footer.tpl']);
+    template()->pparse('page_footer');
 }
 
 $show_dbg_info = (DBG_USER && !(isset($_GET['pane']) && $_GET['pane'] == 'left'));
