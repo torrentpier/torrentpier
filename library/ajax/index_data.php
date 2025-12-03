@@ -11,7 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata;
 
 if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
@@ -92,7 +91,7 @@ switch ($mode) {
         }
 
         $user_id = (int)$this->request['user_id'];
-        if (!IS_ADMIN && $user_id != $userdata['user_id']) {
+        if (!IS_ADMIN && $user_id != userdata('user_id')) {
             $this->ajax_die(__('NOT_AUTHORISED'));
         }
 

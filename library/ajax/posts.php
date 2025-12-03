@@ -11,8 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata;
-
 if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
 }
@@ -32,7 +30,7 @@ if (isset($this->request['post_id'])) {
         $this->ajax_die(__('TOPIC_POST_NOT_EXIST'));
     }
 
-    $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata);
+    $is_auth = auth(AUTH_ALL, $post['forum_id'], userdata());
     if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
         $this->ajax_die(__('TOPIC_LOCKED'));
     }
@@ -46,7 +44,7 @@ if (isset($this->request['post_id'])) {
         $this->ajax_die(__('INVALID_TOPIC_ID_DB'));
     }
 
-    $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata);
+    $is_auth = auth(AUTH_ALL, $post['forum_id'], userdata());
 }
 
 switch ($this->request['type']) {
@@ -65,7 +63,7 @@ switch ($this->request['type']) {
         break;
 
     case 'reply':
-        if (bf($userdata['user_opt'], 'user_opt', 'dis_post')) {
+        if (bf(userdata('user_opt'), 'user_opt', 'dis_post')) {
             $this->ajax_die(__('RULES_REPLY_CANNOT'));
         } elseif (!$is_auth['auth_reply']) {
             $this->ajax_die(sprintf(__('SORRY_AUTH_REPLY'), strip_tags($is_auth['auth_reply_type'])));
@@ -105,10 +103,10 @@ switch ($this->request['type']) {
 
     case 'edit':
     case 'editor':
-        if (bf($userdata['user_opt'], 'user_opt', 'dis_post_edit')) {
+        if (bf(userdata('user_opt'), 'user_opt', 'dis_post_edit')) {
             $this->ajax_die(__('POST_EDIT_CANNOT'));
         }
-        if ($post['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod']) {
+        if ($post['poster_id'] != userdata('user_id') && !$is_auth['auth_mod']) {
             $this->ajax_die(__('EDIT_OWN_POSTS'));
         }
         if ((mb_strlen($post['post_text'], DEFAULT_CHARSET) > 1000) || ($post['topic_first_post_id'] == $post_id)) {
@@ -146,7 +144,7 @@ switch ($this->request['type']) {
 
             $this->response['html'] = bbcode2html($text);
         } else {
-            $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata);
+            $is_auth = auth(AUTH_ALL, $post['forum_id'], userdata());
             if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
                 $this->ajax_die(__('TOPIC_LOCKED'));
             } elseif (!$is_auth['auth_edit']) {
@@ -206,7 +204,7 @@ switch ($this->request['type']) {
             $this->ajax_die(__('INVALID_TOPIC_ID'));
         }
 
-        if (bf($userdata['user_opt'], 'user_opt', 'dis_post')) {
+        if (bf(userdata('user_opt'), 'user_opt', 'dis_post')) {
             $this->ajax_die(__('RULES_REPLY_CANNOT'));
         } elseif (!$is_auth['auth_reply']) {
             $this->ajax_die(sprintf(__('SORRY_AUTH_REPLY'), strip_tags($is_auth['auth_reply_type'])));
@@ -219,11 +217,11 @@ switch ($this->request['type']) {
         $message = prepare_message($message);
 
         // Flood control
-        $where_sql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
+        $where_sql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {userdata('user_id')}";
 
         $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
         if ($row = DB()->fetch_row($sql) and $row['last_post_time']) {
-            if ($userdata['user_level'] == USER) {
+            if (userdata('user_level') == USER) {
                 if ((TIMENOW - $row['last_post_time']) < config()->get('flood_interval')) {
                     $this->ajax_die(__('FLOOD_ERROR'));
                 }
@@ -257,11 +255,11 @@ switch ($this->request['type']) {
             }
         }
 
-        DB()->sql_query("INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ($topic_id, " . $post['forum_id'] . ", " . $userdata['user_id'] . ", '" . TIMENOW . "', '" . USER_IP . "')");
+        DB()->sql_query("INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ($topic_id, " . $post['forum_id'] . ", " . userdata('user_id') . ", '" . TIMENOW . "', '" . USER_IP . "')");
         $post_id = DB()->sql_nextid();
         DB()->sql_query("INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '" . DB()->escape($message) . "')");
 
-        \TorrentPier\Legacy\Post::update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, $userdata['user_id']);
+        \TorrentPier\Legacy\Post::update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, userdata('user_id'));
 
         $s_message = str_replace('\n', "\n", $message);
         $s_topic_title = str_replace('\n', "\n", $post['topic_title']);

@@ -11,8 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata;
-
 if (!config()->get('tor_thank')) {
     $this->ajax_die(__('MODULE_OFF'));
 }
@@ -70,23 +68,23 @@ switch ($mode) {
             $this->ajax_die(__('NEED_TO_LOGIN_FIRST'));
         }
 
-        if ($poster_id == $userdata['user_id']) {
+        if ($poster_id == userdata('user_id')) {
             $this->ajax_die(__('LIKE_OWN_POST'));
         }
 
         $cached_thanks = get_thanks_list($topic_id, $thanks_cache_key, $cache_lifetime);
-        if (isset($cached_thanks[$userdata['user_id']])) {
+        if (isset($cached_thanks[userdata('user_id')])) {
             $this->ajax_die(__('LIKE_ALREADY'));
         }
 
         $columns = 'topic_id, user_id, time';
-        $values = "$topic_id, {$userdata['user_id']}, " . TIMENOW;
+        $values = "$topic_id, {userdata('user_id')}, " . TIMENOW;
         DB()->query('INSERT IGNORE INTO ' . BB_THX . " ($columns) VALUES ($values)");
 
-        $cached_thanks[$userdata['user_id']] = [
-            'user_id' => $userdata['user_id'],
-            'username' => $userdata['username'],
-            'user_rank' => $userdata['user_rank'],
+        $cached_thanks[userdata('user_id')] = [
+            'user_id' => userdata('user_id'),
+            'username' => userdata('username'),
+            'user_rank' => userdata('user_rank'),
             'time' => TIMENOW
         ];
 

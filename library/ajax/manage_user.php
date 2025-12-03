@@ -11,8 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata;
-
 if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
 }
@@ -28,7 +26,7 @@ if (IN_DEMO_MODE) {
 
 switch ($mode) {
     case 'delete_profile':
-        if ($userdata['user_id'] == $user_id) {
+        if (userdata('user_id') == $user_id) {
             $this->ajax_die(__('USER_DELETE_ME'));
         }
         if (empty($this->request['confirmed'])) {
@@ -39,14 +37,14 @@ switch ($mode) {
             \TorrentPier\Sessions::delete_user_sessions($user_id);
             \TorrentPier\Legacy\Admin\Common::user_delete($user_id);
 
-            $user_id = $userdata['user_id']; // Store self user_id for redirect after successful deleting
+            $user_id = userdata('user_id'); // Store self user_id for redirect after successful deleting
             $this->response['info'] = __('USER_DELETED');
         } else {
             $this->ajax_die(__('USER_DELETE_CSV'));
         }
         break;
     case 'delete_topics':
-        if ($userdata['user_id'] == $user_id) {
+        if (userdata('user_id') == $user_id) {
             $this->prompt_for_confirm(__('DELETE_USER_POSTS_ME'));
         }
         if (empty($this->request['confirmed'])) {
@@ -59,7 +57,7 @@ switch ($mode) {
         $this->response['info'] = __('USER_DELETED_POSTS');
         break;
     case 'delete_message':
-        if ($userdata['user_id'] == $user_id) {
+        if (userdata('user_id') == $user_id) {
             $this->prompt_for_confirm(__('DELETE_USER_POSTS_ME'));
         }
         if (empty($this->request['confirmed'])) {
@@ -78,7 +76,7 @@ switch ($mode) {
         $this->response['info'] = __('USER_ACTIVATE_ON');
         break;
     case 'user_deactivate':
-        if ($userdata['user_id'] == $user_id) {
+        if (userdata('user_id') == $user_id) {
             $this->ajax_die(__('USER_DEACTIVATE_ME'));
         }
         if (empty($this->request['confirmed'])) {

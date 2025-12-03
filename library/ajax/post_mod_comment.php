@@ -11,8 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata;
-
 $post_id = (int)$this->request['post_id'];
 $mc_type = (int)$this->request['mc_type'];
 $mc_text = (string)$this->request['mc_text'];
@@ -33,12 +31,12 @@ if (!$post) {
 $data = [
     'mc_comment' => ($mc_type) ? $mc_text : '',
     'mc_type' => $mc_type,
-    'mc_user_id' => ($mc_type) ? $userdata['user_id'] : 0
+    'mc_user_id' => ($mc_type) ? userdata('user_id') : 0
 ];
 $sql_args = DB()->build_array('UPDATE', $data);
 DB()->query("UPDATE " . BB_POSTS . " SET $sql_args WHERE post_id = $post_id");
 
-if ($mc_type && $post['poster_id'] != $userdata['user_id']) {
+if ($mc_type && $post['poster_id'] != userdata('user_id')) {
     $subject = sprintf(__('MC_COMMENT_PM_SUBJECT'), __('MC_COMMENT')[$mc_type]['type']);
     $message = sprintf(__('MC_COMMENT_PM_MSG'), get_username($post['poster_id']), make_url(POST_URL . "$post_id#$post_id"), __('MC_COMMENT')[$mc_type]['type'], $mc_text);
 
@@ -56,6 +54,6 @@ $mc_class = match ($mc_type) {
 
 $this->response['mc_type'] = $mc_type;
 $this->response['post_id'] = $post_id;
-$this->response['mc_title'] = sprintf(__('MC_COMMENT')[$mc_type]['title'], profile_url($userdata));
+$this->response['mc_title'] = sprintf(__('MC_COMMENT')[$mc_type]['title'], profile_url(userdata()));
 $this->response['mc_text'] = bbcode2html($mc_text);
 $this->response['mc_class'] = $mc_class;

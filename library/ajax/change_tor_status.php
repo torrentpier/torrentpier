@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $log_action;
+global $log_action;
 
 if (!$topic_id = (int)$this->request['topic_id']) {
     $this->ajax_die(__('EMPTY_TOPIC_ID'));
@@ -76,7 +76,7 @@ switch ($mode) {
         }
 
         // Confirmation of status change set by another moderator
-        if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != $userdata['user_id'] && $tor['checked_time'] + 2 * 3600 > TIMENOW) {
+        if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != userdata('user_id') && $tor['checked_time'] + 2 * 3600 > TIMENOW) {
             if (empty($this->request['confirmed'])) {
                 $msg = __('TOR_STATUS_OF') . " " . __('TOR_STATUS_NAME')[$tor['tor_status']] . "\n\n";
                 $msg .= ($username = get_username($tor['checked_user_id'])) ? __('TOR_STATUS_CHANGED') . html_entity_decode($username) . ", " . humanTime($tor['checked_time']) . __('TOR_BACK') . "\n\n" : "";
@@ -99,7 +99,7 @@ switch ($mode) {
             'log_msg' => $log_msg . '<br/>-------------',
         ]);
 
-        $this->response['status'] = config()->get('tor_icons')[$new_status] . ' <b> ' . __('TOR_STATUS_NAME')[$new_status] . '</b> &middot; ' . profile_url($userdata) . ' &middot; <i>' . humanTime(TIMENOW) . __('TOR_BACK') . '</i>';
+        $this->response['status'] = config()->get('tor_icons')[$new_status] . ' <b> ' . __('TOR_STATUS_NAME')[$new_status] . '</b> &middot; ' . profile_url(userdata()) . ' &middot; <i>' . humanTime(TIMENOW) . __('TOR_BACK') . '</i>';
 
         if (config()->get('tor_comment') && (($comment && $comment != __('COMMENT')) || in_array($new_status, config()->get('tor_reply')))) {
             if ($tor['poster_id'] > 0) {
@@ -110,7 +110,7 @@ switch ($mode) {
                     $message .= "\n\n[b]" . __('COMMENT') . '[/b]: ' . $comment;
                 }
 
-                send_pm($tor['poster_id'], $subject, $message, $userdata['user_id']);
+                send_pm($tor['poster_id'], $subject, $message, userdata('user_id'));
                 \TorrentPier\Sessions::cache_rm_user_sessions($tor['poster_id']);
             }
         }
@@ -128,7 +128,7 @@ switch ($mode) {
             $message .= "\n\n[b]" . __('COMMENT') . '[/b]: ' . $comment;
         }
 
-        send_pm($tor['checked_user_id'], $subject, $message, $userdata['user_id']);
+        send_pm($tor['checked_user_id'], $subject, $message, userdata('user_id'));
         \TorrentPier\Sessions::cache_rm_user_sessions($tor['checked_user_id']);
         break;
 

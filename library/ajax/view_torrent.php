@@ -11,8 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata;
-
 if (!isset($this->request['topic_id'])) {
     $this->ajax_die(__('EMPTY_TOPIC_ID'));
 }
@@ -28,7 +26,7 @@ if (!$topic || $topic['attach_ext_id'] != TORRENT_EXT_ID) {
 }
 
 // Check rights
-$is_auth = auth(AUTH_ALL, $topic['forum_id'], $userdata);
+$is_auth = auth(AUTH_ALL, $topic['forum_id'], userdata());
 if (!$is_auth['auth_view']) {
     $this->ajax_die(__('SORRY_AUTH_VIEW_ATTACH'));
 }

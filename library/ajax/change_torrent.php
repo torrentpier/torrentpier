@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $log_action;
+global $log_action;
 
 if (!isset($this->request['topic_id'])) {
     $this->ajax_die(__('EMPTY_TOPIC_ID'));
@@ -27,7 +27,7 @@ if (!$torrent = \TorrentPier\Torrent\Registry::getTorrentInfo($topic_id)) {
     $this->ajax_die(__('INVALID_TOPIC_ID'));
 }
 
-if ($torrent['topic_poster'] == $userdata['user_id'] && !IS_AM) {
+if ($torrent['topic_poster'] == userdata('user_id') && !IS_AM) {
     switch ($type) {
         case 'del_torrent':
         case 'reg':
@@ -106,7 +106,7 @@ switch ($type) {
             $this->prompt_for_confirm(__('DEL_MOVE_TORRENT'));
         }
         \TorrentPier\Torrent\Registry::delete($topic_id);
-        $url = make_url("modcp.php?" . POST_TOPIC_URL . "={$topic_id}&mode=move&sid={$userdata['session_id']}");
+        $url = make_url("modcp.php?" . POST_TOPIC_URL . "={$topic_id}&mode=move&sid={userdata('session_id')}");
         break;
 }
 
