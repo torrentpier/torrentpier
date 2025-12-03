@@ -303,6 +303,28 @@ function datastore(): \TorrentPier\Cache\DatastoreManager
  */
 $datastore = datastore();
 
+/**
+ * User singleton helper
+ *
+ * @return \TorrentPier\Legacy\Common\User
+ */
+function user(): \TorrentPier\Legacy\Common\User
+{
+    return TorrentPier\Legacy\Common\User::getInstance();
+}
+
+/**
+ * Userdata helper - returns user data array
+ *
+ * @param string|null $key Optional key to get specific value
+ * @return mixed
+ */
+function userdata(?string $key = null): mixed
+{
+    $data = user()->data;
+    return $key === null ? $data : ($data[$key] ?? null);
+}
+
 // Functions
 function utime()
 {

@@ -20,6 +20,22 @@ use Exception;
 class User
 {
     /**
+     * Singleton instance
+     */
+    private static ?User $instance = null;
+
+    /**
+     * Get singleton instance
+     */
+    public static function getInstance(): User
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    /**
      * Config
      *
      * @var array
