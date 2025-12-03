@@ -11,11 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-/**
- * Define some basic configuration arrays
- */
-$gen_simple_header = false;
-
 // Obtain and encode user IP
 $client_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
 $user_ip = \TorrentPier\Helpers\IPHelper::ip2long($client_ip);
@@ -378,10 +373,6 @@ require_once INC_DIR . '/functions.php';
 
 // Merge database configuration with base configuration using singleton
 config()->merge(bb_get_config(BB_CONFIG));
-// wordCensor deprecated, but kept for compatibility with non-adapted code
-$wordCensor = censor();
-
-$html = new TorrentPier\Legacy\Common\Html();
 
 
 /**

@@ -298,12 +298,6 @@ function datastore(): \TorrentPier\Cache\DatastoreManager
 }
 
 /**
- * Backward compatibility: Global datastore variable
- * This allows existing code to continue using global $datastore
- */
-$datastore = datastore();
-
-/**
  * User singleton helper
  *
  * @return \TorrentPier\Legacy\Common\User
@@ -337,6 +331,35 @@ function log_action(): \TorrentPier\Legacy\LogAction
         $instance = new \TorrentPier\Legacy\LogAction();
     }
     return $instance;
+}
+
+/**
+ * Html helper singleton
+ *
+ * @return \TorrentPier\Legacy\Common\Html
+ */
+function html(): \TorrentPier\Legacy\Common\Html
+{
+    static $instance = null;
+    if ($instance === null) {
+        $instance = new \TorrentPier\Legacy\Common\Html();
+    }
+    return $instance;
+}
+
+/**
+ * Simple header flag getter/setter
+ *
+ * @param bool|null $set Set value (true/false) or null to just get current value
+ * @return bool Current value
+ */
+function simple_header(?bool $set = null): bool
+{
+    static $value = false;
+    if ($set !== null) {
+        $value = $set;
+    }
+    return $value;
 }
 
 /**

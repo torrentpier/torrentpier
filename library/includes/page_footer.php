@@ -15,7 +15,7 @@ if (defined('PAGE_HEADER_SENT')) {
     $birthday_tp = ((string)bb_date(TIMENOW, 'd.m', false) === '04.04') ? '&nbsp;|&nbsp;&#127881;&#127856;&#128154;' : '';
 
     template()->assign_vars([
-        'SIMPLE_FOOTER' => !empty($gen_simple_header),
+        'SIMPLE_FOOTER' => simple_header(),
         'POWERED' => 'Fueled by <a target="_blank" referrerpolicy="origin" href="https://github.com/torrentpier/torrentpier">TorrentPier</a> &copy; 2005-' . date('Y') . $birthday_tp,
         'SHOW_ADMIN_LINK' => (IS_ADMIN && !defined('IN_ADMIN')),
         'ADMIN_LINK_HREF' => 'admin/index.php',

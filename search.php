@@ -911,8 +911,6 @@ function prevent_huge_searches($SQL)
 
 function username_search($search_match)
 {
-    global $gen_simple_header;
-
     $username_list = '';
 
     if (!empty($search_match)) {

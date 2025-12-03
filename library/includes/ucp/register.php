@@ -24,7 +24,7 @@ if (IS_ADMIN) {
 
     $new_user = (int)request_var('admin', '');
     if ($new_user) {
-        $gen_simple_header = true;
+        simple_header(true);
     }
 
     template()->assign_vars(['NEW_USER' => $new_user]);

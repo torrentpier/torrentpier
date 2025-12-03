@@ -16,7 +16,7 @@ if (defined('PAGE_HEADER_SENT')) {
 }
 
 // Parse and show the overall page header
-global $page_cfg, $ads;
+global $page_cfg;
 
 $logged_in = (int)!empty(userdata('session_logged_in'));
 
@@ -61,7 +61,7 @@ $icon_pm = theme_images('pm_no_new_msg');
 $pm_info = __('NO_NEW_PM');
 $have_new_pm = $have_unread_pm = 0;
 
-if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
+if ($logged_in && !simple_header() && !defined('IN_ADMIN')) {
     if (userdata('user_new_privmsg')) {
         $have_new_pm = userdata('user_new_privmsg');
         $icon_pm = theme_images('pm_new_msg');
@@ -110,7 +110,7 @@ template()->assign_vars([
 
 // The following assigns all _common_ variables that may be used at any point in a template
 template()->assign_vars([
-    'SIMPLE_HEADER' => !empty($gen_simple_header),
+    'SIMPLE_HEADER' => simple_header(),
     'CONTENT_ENCODING' => DEFAULT_CHARSET,
 
     'IN_ADMIN' => defined('IN_ADMIN'),

@@ -436,14 +436,12 @@ function get_select($select, $selected = null, $return_as = 'html', $first_opt =
 
 function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
 {
-    global $html;
-    return $html->build_select($name, $params, $selected, $max_length, $multiple_size, $js);
+    return html()->build_select($name, $params, $selected, $max_length, $multiple_size, $js);
 }
 
 function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
 {
-    global $html;
-    return $html->build_checkbox($name, $title, $checked, $disabled, $class, $id, $value);
+    return html()->build_checkbox($name, $title, $checked, $disabled, $class, $id, $value);
 }
 
 function replace_quote($str, $double = true, $single = true)
@@ -1648,7 +1646,7 @@ function print_confirmation($tpl_vars): void
 /**
  *  $args = array(
  *            'tpl' => 'template file name',
- *            'simple' => $gen_simple_header,
+ *            'simple' => true, // use simple header
  *          );
  *       OR (string) 'template_file_name'
  *
@@ -1664,12 +1662,12 @@ function print_confirmation($tpl_vars): void
  */
 function print_page($args, $type = '', $mode = '', array $variables = [])
 {
-    global $gen_simple_header;
-
     $tpl = (is_array($args) && !empty($args['tpl'])) ? $args['tpl'] : $args;
     $tpl = ($type === 'admin') ? ADMIN_TPL_DIR . $tpl : $tpl;
 
-    $gen_simple_header = (is_array($args) && !empty($args['simple']) or $type === 'simple') ? true : $gen_simple_header;
+    if ((is_array($args) && !empty($args['simple'])) || $type === 'simple') {
+        simple_header(true);
+    }
 
     // Assign variables BEFORE the header so PAGE_TITLE is available
     if (!empty($variables)) {
