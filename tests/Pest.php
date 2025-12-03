@@ -412,37 +412,6 @@ function resetGlobalState(): void
     // Reset any global database connections
     global $db;
     $db = null;
-
-    // Initialize critical global variables needed by datastore builders
-    mockForumBitfieldMappings();
-}
-
-/**
- * Mock forum bitfield mappings needed by datastore builders
- * This prevents "Trying to access array offset on null" warnings in tests
- */
-function mockForumBitfieldMappings(): void
-{
-    global $bf;
-
-    if (!isset($bf) || !isset($bf['forum_perm'])) {
-        $bf = [];
-        $bf['forum_perm'] = [
-            'auth_view' => 0,        // AUTH_VIEW
-            'auth_read' => 1,        // AUTH_READ
-            'auth_mod' => 2,         // AUTH_MOD
-            'auth_post' => 3,        // AUTH_POST
-            'auth_reply' => 4,       // AUTH_REPLY
-            'auth_edit' => 5,        // AUTH_EDIT
-            'auth_delete' => 6,      // AUTH_DELETE
-            'auth_sticky' => 7,      // AUTH_STICKY
-            'auth_announce' => 8,    // AUTH_ANNOUNCE
-            'auth_vote' => 9,        // AUTH_VOTE
-            'auth_pollcreate' => 10, // AUTH_POLLCREATE
-            'auth_attachments' => 11, // AUTH_ATTACH
-            'auth_download' => 12,   // AUTH_DOWNLOAD
-        ];
-    }
 }
 
 /**

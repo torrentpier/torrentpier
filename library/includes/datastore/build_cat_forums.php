@@ -11,8 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bf;
-
 //
 // cat_forums
 //
@@ -31,7 +29,7 @@ $data = [
 ];
 
 // Store only these fields from BB_FORUMS in $data['f']
-$forum_store_fields = array_flip(array_keys($bf['forum_perm']));
+$forum_store_fields = array_flip(array_keys(bitfields('forum_perm')));
 $forum_store_fields += array_flip([
     'forum_id',
     'cat_id',

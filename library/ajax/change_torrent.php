@@ -11,7 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $log_action;
 
 if (!isset($this->request['topic_id'])) {
     $this->ajax_die(__('EMPTY_TOPIC_ID'));
@@ -60,7 +59,7 @@ switch ($type) {
         \TorrentPier\Torrent\Moderation::changeType($topic_id, $tor_type);
 
         // Log action
-        $log_action->mod('mod_topic_change_tor_type', [
+        log_action()->mod('mod_topic_change_tor_type', [
             'forum_id' => $torrent['forum_id'],
             'topic_id' => $topic_id,
             'topic_title' => $torrent['topic_title'],
@@ -74,7 +73,7 @@ switch ($type) {
     case 'reg':
         \TorrentPier\Torrent\Registry::register($topic_id);
         // Log action
-        $log_action->mod('mod_topic_tor_register', [
+        log_action()->mod('mod_topic_tor_register', [
             'forum_id' => $torrent['forum_id'],
             'topic_id' => $topic_id,
             'topic_title' => $torrent['topic_title'],
@@ -85,7 +84,7 @@ switch ($type) {
     case 'unreg':
         \TorrentPier\Torrent\Registry::unregister($topic_id);
         // Log action
-        $log_action->mod('mod_topic_tor_unregister', [
+        log_action()->mod('mod_topic_tor_unregister', [
             'forum_id' => $torrent['forum_id'],
             'topic_id' => $topic_id,
             'topic_title' => $torrent['topic_title'],

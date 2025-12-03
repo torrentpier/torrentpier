@@ -11,7 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $log_action;
 
 if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
@@ -50,7 +49,7 @@ switch ($mode) {
 
             // Log action
             $log_msg = sprintf(__('TOR_STATUS_LOG_ACTION'), config()->get('tor_icons')[$status] . ' <b> ' . __('TOR_STATUS_NAME')[$status] . '</b>', config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . __('TOR_STATUS_NAME')[$tor['tor_status']] . '</b>');
-            $log_action->mod('mod_topic_change_tor_status', [
+            log_action()->mod('mod_topic_change_tor_status', [
                 'forum_id' => $tor['forum_id'],
                 'topic_id' => $tor['topic_id'],
                 'topic_title' => $tor['topic_title'],
@@ -103,7 +102,7 @@ switch ($mode) {
         }
 
         // Log action
-        $log_action->mod('mod_topic_renamed', [
+        log_action()->mod('mod_topic_renamed', [
             'forum_id' => $t_data['forum_id'],
             'topic_id' => $topic_id,
             'topic_id_new' => $topic_id,

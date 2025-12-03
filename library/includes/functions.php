@@ -160,46 +160,6 @@ define('UG_PERM_BOTH', 1);  // both user and group
 define('UG_PERM_USER_ONLY', 2);  // only personal user permissions
 define('UG_PERM_GROUP_ONLY', 3);  // only group permissions
 
-$bf['forum_perm'] = [
-    'auth_view' => AUTH_VIEW,
-    'auth_read' => AUTH_READ,
-    'auth_mod' => AUTH_MOD,
-    'auth_post' => AUTH_POST,
-    'auth_reply' => AUTH_REPLY,
-    'auth_edit' => AUTH_EDIT,
-    'auth_delete' => AUTH_DELETE,
-    'auth_sticky' => AUTH_STICKY,
-    'auth_announce' => AUTH_ANNOUNCE,
-    'auth_vote' => AUTH_VOTE,
-    'auth_pollcreate' => AUTH_POLLCREATE,
-    'auth_attachments' => AUTH_ATTACH,
-    'auth_download' => AUTH_DOWNLOAD,
-];
-
-$bf['user_opt'] = [
-#   'dis_opt_name'       =>     PROHIBITIONS used by administrators for users
-#   'user_opt_name'      =>     SETTINGS used by users
-    'user_viewemail' => 0, // [SETTINGS] Show my email for other users
-    'dis_sig' => 1, // [PROHIBITIONS] Block set signature
-    'dis_avatar' => 2, // [PROHIBITIONS] Block set avatar
-    'dis_pm' => 3, // [PROHIBITIONS] Block sending PMs
-    'user_viewonline' => 4, // [SETTINGS] Hide my online status (time of last activity)
-    'user_notify' => 5, // [SETTINGS] Report of replies in my "Watching topics" (Via email)
-    'user_notify_pm' => 6, // [SETTINGS] Report of new PMs in forum (Via email)
-    'dis_passkey' => 7, // [PROHIBITIONS] Block changing and adding passkey into torrents, also block downloading torrents
-    'user_porn_forums' => 8, // [SETTINGS] Hide 18+ content (Porn forums)
-    'user_callseed' => 9, // [SETTINGS] Allow to send "Callseed" PMs
-    'user_empty' => 10, // [SETTINGS] Block showing advertisements to me (Not used)
-    'dis_topic' => 11, // [PROHIBITIONS] Block to create new topics
-    'dis_post' => 12, // [PROHIBITIONS] Block to send replies in topics
-    'dis_post_edit' => 13, // [PROHIBITIONS] Block editing own posts / topics
-    'user_dls' => 14, // [SETTINGS] Hide list of "Current downloads" in my profile
-    'user_retracker' => 15, // [SETTINGS] Add my retracker into downloaded torrent files
-    'user_hide_torrent_client' => 16, // [SETTINGS] Option to hide user's torrent client in peer list
-    'user_hide_peer_country' => 17, // [SETTINGS] Option to hide user's country name in peer list
-    'user_hide_peer_username' => 18, // [SETTINGS] Option to hide peer username in peer list
-];
-
 function bit2dec($bit_num)
 {
     if (is_array($bit_num)) {
@@ -214,11 +174,11 @@ function bit2dec($bit_num)
 
 function bf_bit2dec($bf_array_name, $key)
 {
-    global $bf;
-    if (!isset($bf[$bf_array_name][$key])) {
+    $bf = bitfields($bf_array_name);
+    if (!isset($bf[$key])) {
         throw new \RuntimeException(__FUNCTION__ . ": bitfield '$key' not found");
     }
-    return (1 << $bf[$bf_array_name][$key]);
+    return (1 << $bf[$key]);
 }
 
 function bf($int, $bf_array_name, $key)
@@ -261,8 +221,6 @@ function setbit(&$int, $bit_num, $on)
 */
 function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG_PERM_BOTH)
 {
-    global $bf;
-
     $is_guest = true;
     $is_admin = false;
     $auth = $auth_fields = $u_access = [];
@@ -277,8 +235,8 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     // Get $auth_fields
     //
     if ($type == AUTH_ALL) {
-        $auth_fields = array_keys($bf['forum_perm']);
-    } elseif ($auth_type = array_search($type, $bf['forum_perm'])) {
+        $auth_fields = array_keys(bitfields('forum_perm'));
+    } elseif ($auth_type = array_search($type, bitfields('forum_perm'))) {
         $auth_fields = [$auth_type];
     }
 
@@ -1127,6 +1085,12 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
 
 function setup_style()
 {
+    static $initialized = false;
+    if ($initialized) {
+        return;
+    }
+    $initialized = true;
+
     // AdminCP works only with default template
     $tpl_dir_name = defined('IN_ADMIN') ? 'default' : basename(config()->get('tpl_name'));
     $stylesheet = defined('IN_ADMIN') ? 'main.css' : basename(config()->get('stylesheet'));
@@ -1150,8 +1114,6 @@ function setup_style()
         'TPL_DIR' => make_url($css_dir),
         'SITE_URL' => make_url('/')
     ]);
-
-    return ['template_name' => $tpl_dir_name];
 }
 
 /**
@@ -1418,7 +1380,7 @@ function bb_preg_quote($str, $delimiter)
 
 function bb_die($msg_text, $status_code = null)
 {
-    global $ajax, $theme;
+    global $ajax;
 
     if (isset($status_code)) {
         http_response_code($status_code);
@@ -1445,9 +1407,7 @@ function bb_die($msg_text, $status_code = null)
 
     // If the header hasn't been output then do it
     if (!defined('PAGE_HEADER_SENT')) {
-        if (empty($theme)) {
-            $theme = setup_style();
-        }
+        setup_style();
         require(PAGE_HEADER);
     }
 

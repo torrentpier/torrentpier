@@ -340,7 +340,7 @@ class Registry
      */
     public static function delete(int $topicId, string $mode = ''): void
     {
-        global $reg_mode, $log_action;
+        global $reg_mode;
 
         $reg_mode = $mode;
 
@@ -357,7 +357,7 @@ class Registry
         self::unregister($topicId);
 
         // Log action
-        $log_action->mod('mod_topic_tor_delete', [
+        log_action()->mod('mod_topic_tor_delete', [
             'forum_id' => $torrent['forum_id'],
             'topic_id' => $torrent['topic_id'],
             'topic_title' => $torrent['topic_title'],

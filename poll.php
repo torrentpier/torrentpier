@@ -110,7 +110,7 @@ switch ($mode) {
         }
 
         // Log action
-        $log_action->mod('mod_topic_poll_started', [
+        log_action()->mod('mod_topic_poll_started', [
             'forum_id' => $forum_id,
             'topic_id' => $topic_id,
             'topic_title' => $t_data['topic_title'],
@@ -129,7 +129,7 @@ switch ($mode) {
         }
 
         // Log action
-        $log_action->mod('mod_topic_poll_finished', [
+        log_action()->mod('mod_topic_poll_finished', [
             'forum_id' => $forum_id,
             'topic_id' => $topic_id,
             'topic_title' => $t_data['topic_title'],
@@ -148,7 +148,7 @@ switch ($mode) {
         }
 
         // Log action
-        $log_action->mod('mod_topic_poll_deleted', [
+        log_action()->mod('mod_topic_poll_deleted', [
             'forum_id' => $forum_id,
             'topic_id' => $topic_id,
             'topic_title' => $t_data['topic_title'],
@@ -173,7 +173,7 @@ switch ($mode) {
         }
 
         // Log action
-        $log_action->mod('mod_topic_poll_added', [
+        log_action()->mod('mod_topic_poll_added', [
             'forum_id' => $forum_id,
             'topic_id' => $topic_id,
             'topic_title' => $t_data['topic_title'],
@@ -198,7 +198,7 @@ switch ($mode) {
         }
 
         // Log action
-        $log_action->mod('mod_topic_poll_edited', [
+        log_action()->mod('mod_topic_poll_edited', [
             'forum_id' => $forum_id,
             'topic_id' => $topic_id,
             'topic_title' => $t_data['topic_title'],

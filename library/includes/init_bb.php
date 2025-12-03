@@ -14,7 +14,6 @@ if (!defined('BB_ROOT')) {
 /**
  * Define some basic configuration arrays
  */
-$theme = $bf = [];
 $gen_simple_header = false;
 
 // Obtain and encode user IP
@@ -378,14 +377,10 @@ function make_url(string $path = ''): string
 require_once INC_DIR . '/functions.php';
 
 // Merge database configuration with base configuration using singleton
-// bb_cfg deprecated, but kept for compatibility with non-adapted code
 config()->merge(bb_get_config(BB_CONFIG));
-$bb_cfg = config()->all();
-
 // wordCensor deprecated, but kept for compatibility with non-adapted code
 $wordCensor = censor();
 
-$log_action = new TorrentPier\Legacy\LogAction();
 $html = new TorrentPier\Legacy\Common\Html();
 
 

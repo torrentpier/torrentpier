@@ -339,7 +339,7 @@ switch ($mode) {
         $type = ($lock) ? 'mod_topic_lock' : 'mod_topic_unlock';
 
         foreach ($log_topics as $topic_id => $topic_title) {
-            $log_action->mod($type, [
+            log_action()->mod($type, [
                 'forum_id' => $forum_id,
                 'topic_id' => $topic_id,
                 'topic_title' => $topic_title
@@ -372,7 +372,7 @@ switch ($mode) {
         // Log action
         $type = ($set_download) ? 'mod_topic_set_downloaded' : 'mod_topic_unset_downloaded';
 
-        $log_action->mod($type, [
+        log_action()->mod($type, [
             'forum_id' => $forum_id,
             'topic_id' => $topic_id,
             'topic_title' => get_topic_title($topic_id)
@@ -505,7 +505,7 @@ switch ($mode) {
                 $message .= ' &nbsp;::&nbsp; <a href="' . TOPIC_URL . "$new_topic_id&amp;sid=" . userdata('session_id') . '">' . __('TOPIC_SPLIT_NEW') . '</a>';
 
                 // Log action
-                $log_action->mod('mod_topic_split', [
+                log_action()->mod('mod_topic_split', [
                     'forum_id' => $forum_id,
                     'forum_id_new' => $new_forum_id,
                     'topic_id' => $topic_id,
@@ -731,7 +731,7 @@ switch ($mode) {
             $type = $pin ? 'mod_post_pin' : 'mod_post_unpin';
 
             foreach ($log_topics as $topic_id => $topic_title) {
-                $log_action->mod($type, [
+                log_action()->mod($type, [
                     'forum_id' => $forum_id,
                     'topic_id' => $topic_id,
                     'topic_title' => $topic_title
@@ -772,7 +772,7 @@ switch ($mode) {
             $type = $pin ? 'mod_post_pin' : 'mod_post_unpin';
 
             foreach ($log_topics as $topic_id => $topic_title) {
-                $log_action->mod($type, [
+                log_action()->mod($type, [
                     'forum_id' => $forum_id,
                     'topic_id' => $topic_id,
                     'topic_title' => $topic_title,

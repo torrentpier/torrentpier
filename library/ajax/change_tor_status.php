@@ -11,7 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $log_action;
 
 if (!$topic_id = (int)$this->request['topic_id']) {
     $this->ajax_die(__('EMPTY_TOPIC_ID'));
@@ -92,7 +91,7 @@ switch ($mode) {
         if ($comment && $comment != __('COMMENT')) {
             $log_msg .= "<br/>{__('COMMENT')}: <b>$comment</b>.";
         }
-        $log_action->mod('mod_topic_change_tor_status', [
+        log_action()->mod('mod_topic_change_tor_status', [
             'forum_id' => $tor['forum_id'],
             'topic_id' => $tor['topic_id'],
             'topic_title' => $tor['topic_title'],

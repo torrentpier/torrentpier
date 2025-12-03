@@ -126,7 +126,7 @@ class User
      */
     public function session_start(array $cfg = [])
     {
-        
+
 
         $update_sessions_table = false;
         $this->cfg = array_merge($this->cfg, $cfg);
@@ -596,8 +596,6 @@ class User
      */
     public function init_userprefs()
     {
-        global $theme, $DeltaTime;
-
         if (defined('LANG_DIR')) {
             return;
         }  // prevent multiple calling
@@ -640,7 +638,7 @@ class User
         // Initialize Language singleton with user preferences
         lang()->initializeLanguage($this->data['user_lang']);
 
-        $theme = setup_style();
+        setup_style();
 
         // Handle marking posts read
         if (!IS_GUEST && !empty($_COOKIE[COOKIE_MARK])) {

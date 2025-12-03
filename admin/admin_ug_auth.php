@@ -229,7 +229,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
             ));
 
             foreach ($forum_auth_fields as $auth_type) {
-                $bf_num = $bf['forum_perm'][$auth_type];
+                $bf_num = bitfields('forum_perm')[$auth_type];
                 $f_perm = $f_data[$auth_type];
                 $auth_via_acl = ($u_access[$f_id][$auth_type] || $g_access[$f_id][$auth_type]);
 
@@ -264,7 +264,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     foreach ($forum_auth_fields as $auth_type) {
         template()->assign_block_vars('acltype', array(
             'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", __(strtoupper($auth_type))),
-            'ACL_TYPE_BF' => $bf['forum_perm'][$auth_type],
+            'ACL_TYPE_BF' => bitfields('forum_perm')[$auth_type],
         ));
         $s_column_span++;
     }
@@ -346,7 +346,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
             ));
 
             foreach ($forum_auth_fields as $auth_type) {
-                $bf_num = $bf['forum_perm'][$auth_type];
+                $bf_num = bitfields('forum_perm')[$auth_type];
                 $f_perm = $f_data[$auth_type];
                 $auth_via_acl = $u_access[$f_id][$auth_type];
 
@@ -381,7 +381,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     foreach ($forum_auth_fields as $auth_type) {
         template()->assign_block_vars('acltype', array(
             'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", __(strtoupper($auth_type))),
-            'ACL_TYPE_BF' => $bf['forum_perm'][$auth_type],
+            'ACL_TYPE_BF' => bitfields('forum_perm')[$auth_type],
         ));
         $s_column_span++;
     }

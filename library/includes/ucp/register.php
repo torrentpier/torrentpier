@@ -378,7 +378,7 @@ foreach ($profile_fields as $field => $can_edit) {
             foreach ($update_user_opt as $opt => $can_change_opt) {
                 if ($submit && (isset($_POST[$opt]) && $can_change_opt || $reg_mode)) {
                     $change_opt = ($reg_mode) ? $can_change_opt : !empty($_POST[$opt]);
-                    setbit($user_opt, $bf['user_opt'][$opt], $change_opt);
+                    setbit($user_opt, bitfields('user_opt')[$opt], $change_opt);
                 }
                 $tp_data[strtoupper($opt)] = bf($user_opt, 'user_opt', $opt);
             }

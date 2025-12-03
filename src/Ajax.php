@@ -68,10 +68,6 @@ class Ajax
      */
     public function exec()
     {
-        /** @noinspection PhpUnusedLocalVariableInspection */
-        // bb_cfg deprecated, but kept for compatibility with non-adapted ajax files
-        global $bb_cfg;
-
         // Exit if we already have errors
         if (!empty($this->response['error_code'])) {
             $this->send();

@@ -11,8 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $bf;
-
 $user_id = (int)$this->request['user_id'];
 $new_opt = json_decode($this->request['user_opt'], true, 512, JSON_THROW_ON_ERROR);
 
@@ -24,7 +22,7 @@ if (!is_array($new_opt)) {
     $this->ajax_die('invalid new_opt');
 }
 
-foreach ($bf['user_opt'] as $opt_name => $opt_bit) {
+foreach (bitfields('user_opt') as $opt_name => $opt_bit) {
     if (isset($new_opt[$opt_name])) {
         setbit($u_data['user_opt'], $opt_bit, !empty($new_opt[$opt_name]));
     }

@@ -19,7 +19,7 @@ datastore()->enqueue([
     'cat_forums',
 ]);
 
-$log_action->init();
+log_action()->init();
 
 $per_page = 50;
 $row_class_1 = 'row1';
@@ -208,7 +208,7 @@ generate_pagination($url, $items_count, $per_page, $start);
 $filter = [];
 
 if ($log_rowset) {
-    $log_type = $log_action->log_type;
+    $log_type = log_action()->log_type;
     $log_type_flip = array_flip($log_type);
 
     foreach ($log_rowset as $row_num => $row) {
@@ -337,7 +337,7 @@ if ($log_rowset) {
 }
 
 // Select
-$log_type_select = array(__('ACTS_LOG_ALL_ACTIONS') => $all_types) + $log_action->log_type_select;
+$log_type_select = array(__('ACTS_LOG_ALL_ACTIONS') => $all_types) + log_action()->log_type_select;
 
 template()->assign_vars(array(
     'LOG_COLSPAN' => 4,
