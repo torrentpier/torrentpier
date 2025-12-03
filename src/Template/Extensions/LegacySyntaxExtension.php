@@ -207,8 +207,9 @@ class LegacySyntaxExtension extends AbstractExtension
             return "{{ $varPath|default('') }}";
         }, $content);
 
-        // Convert legacy variables {VARIABLE} to {{ V.VARIABLE }}
-        $content = preg_replace('/\{([A-Z0-9_]+)\}/', "{{ V.$1|default('') }}", $content);
+        // Convert legacy variables {VARIABLE} to Twig syntax
+        // Check global first (ThemeExtension globals), then fall back to V (template variables)
+        $content = preg_replace('/\{([A-Z0-9_]+)\}/', "{{ $1|default(V.$1)|default('') }}", $content);
 
         // Convert nested block variables {block.subblock.VARIABLE} (but not simple block vars handled in convertBlocks)
         // Exclude variables that end with _item. as those are already processed block variables
