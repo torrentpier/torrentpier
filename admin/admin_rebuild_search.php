@@ -220,7 +220,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     }
 
     $last_session_data = get_rebuild_session_details('last', 'all');
-    $template->assign_vars(array('TPL_REBUILD_SEARCH_PROGRESS' => true));
+    template()->assign_vars(array('TPL_REBUILD_SEARCH_PROGRESS' => true));
 
     $processing_messages = '';
     $processing_messages .= $timer_expired ? sprintf(__('TIMER_EXPIRED'), TIMENOW - $start_time) : '';
@@ -247,7 +247,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
         meta_refresh($form_action, $refresh_rate);
 
         // create the meta tag for refresh
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'CANCEL_BUTTON' => true,
         ));
     } else {
@@ -314,7 +314,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     create_percent_box('session', create_percent_color($session_percent), $session_percent);
     create_percent_box('total', create_percent_color($total_percent), $total_percent);
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'L_NEXT' => $next_button,
         'L_TIME_LAST_POSTS_ADMIN' => sprintf(__('TIME_LAST_POSTS'), $num_rows),
 
@@ -367,7 +367,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
             $last_saved_processing = sprintf(__('INFO_PROCESSING_STOPPED'), $last_saved_post_id, $total_posts_processed, $last_saved_date);
             $clear_search_disabled = 'disabled';
 
-            $template->assign_block_vars('start_select_input', []);
+            template()->assign_block_vars('start_select_input', []);
         } elseif ($last_session_data['rebuild_session_status'] == REBUILD_SEARCH_ABORTED) {
             $last_saved_processing = sprintf(__('INFO_PROCESSING_ABORTED'), $last_saved_post_id, $total_posts_processed, $last_saved_date);
             // check if the interrupted cycle has finished
@@ -376,7 +376,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
             }
             $clear_search_disabled = 'disabled';
 
-            $template->assign_block_vars('start_select_input', []);
+            template()->assign_block_vars('start_select_input', []);
         } else {
             // when finished
 
@@ -384,21 +384,21 @@ if ($mode == 'submit' || $mode == 'refresh') {
                 $last_saved_processing = sprintf(__('INFO_PROCESSING_FINISHED_NEW'), $last_saved_post_id, $total_posts_processed, $last_saved_date, $total_posts - $total_posts_processed);
                 $clear_search_disabled = 'disabled';
 
-                $template->assign_block_vars('start_select_input', []);
+                template()->assign_block_vars('start_select_input', []);
             } else {
                 $last_saved_processing = sprintf(__('INFO_PROCESSING_FINISHED'), $total_posts, $last_saved_date);
 
-                $template->assign_block_vars('start_text_input', []);
+                template()->assign_block_vars('start_text_input', []);
             }
         }
 
-        $template->assign_block_vars('last_saved_info', []);
+        template()->assign_block_vars('last_saved_info', []);
     } else {
-        $template->assign_block_vars('start_text_input', []);
+        template()->assign_block_vars('start_text_input', []);
     }
 
     // create the output of page
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'TPL_REBUILD_SEARCH_MAIN' => true,
 
         'L_TIME_LIMIT_EXPLAIN' => $time_limit_explain,
@@ -570,16 +570,14 @@ function create_color($mode, $code)
 // create the percent bar & box
 function create_percent_box($box, $percent_color, $percent_width)
 {
-    global $template;
-
     if ($box == 'session') {
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'SESSION_PERCENT_BOX' => true,
             'SESSION_PERCENT_COLOR' => $percent_color,
             'SESSION_PERCENT_WIDTH' => round($percent_width),
         ));
     } else {
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'TOTAL_PERCENT_BOX' => true,
             'TOTAL_PERCENT_COLOR' => $percent_color,
             'TOTAL_PERCENT_WIDTH' => round($percent_width),

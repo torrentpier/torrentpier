@@ -91,7 +91,7 @@ foreach (DB()->fetch_rowset($sql) as $row) {
     $groups[$row['group_name']] = $row['group_id'];
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'MESSAGE' => $message,
     'SUBJECT' => $subject,
     'REPLY_TO' => $reply_to,

@@ -63,7 +63,7 @@ if ($submit) {
     $datastore->update('ban_list');
     bb_die(__('BAN_UPDATE_SUCESSFUL') . '<br /><br />' . sprintf(__('CLICK_RETURN_BANADMIN'), '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
 } else {
-    $template->assign_vars(['S_BANLIST_ACTION' => 'admin_user_ban.php']);
+    template()->assign_vars(['S_BANLIST_ACTION' => 'admin_user_ban.php']);
 
     $select_userlist = '';
     foreach (getBanInfo() as $ban) {
@@ -75,7 +75,7 @@ if ($submit) {
     }
     $select_userlist = '<select name="unban_user[]" multiple size="5">' . $select_userlist . '</select>';
 
-    $template->assign_vars([
+    template()->assign_vars([
         'U_SEARCH_USER' => './../search.php?mode=searchuser',
         'S_UNBAN_USERLIST_SELECT' => $select_userlist,
         'S_BAN_ACTION' => 'admin_user_ban.php'

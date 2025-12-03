@@ -267,7 +267,7 @@ if ($log_rowset) {
         $datetime_href_s = url_arg($url, $datetime_key, date($dt_format, $row['log_time']));
         $datetime_href_s = url_arg($datetime_href_s, $daysback_key, 1);
 
-        $template->assign_block_vars('log', array(
+        template()->assign_block_vars('log', array(
             'ACTION_DESC' => __('LOG_ACTION')['LOG_TYPE'][$log_type_flip[$row['log_type_id']]],
             'ACTION_HREF_S' => url_arg($url, $type_key, $row['log_type_id']),
 
@@ -305,41 +305,41 @@ if ($log_rowset) {
 
         // Topics
         if ($topic_csv && empty($filter['topics'][$row['log_topic_title']])) {
-            $template->assign_block_vars('topics', array(
+            template()->assign_block_vars('topics', array(
                 'TOPIC_TITLE' => $row['log_topic_title'],
             ));
             $filter['topics'][$row['log_topic_title']] = true;
         }
         // Forums
         if ($forum_csv && empty($filter['forums'][$forum_name])) {
-            $template->assign_block_vars('forums', array(
+            template()->assign_block_vars('forums', array(
                 'FORUM_NAME' => htmlCHR($forum_name),
             ));
             $filter['forums'][$forum_name] = true;
         }
         // Users
         if ($user_csv && empty($filter['users'])) {
-            $template->assign_block_vars('users', array(
+            template()->assign_block_vars('users', array(
                 'USERNAME' => profile_url($row, true),
             ));
             $filter['users'] = true;
         }
     }
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'FILTERS' => $topic_csv || $forum_csv || $user_csv,
         'FILTER_TOPICS' => !empty($filter['topics']),
         'FILTER_FORUMS' => !empty($filter['forums']),
         'FILTER_USERS' => !empty($filter['users']),
     ));
 } else {
-    $template->assign_block_vars('log_not_found', []);
+    template()->assign_block_vars('log_not_found', []);
 }
 
 // Select
 $log_type_select = array(__('ACTS_LOG_ALL_ACTIONS') => $all_types) + $log_action->log_type_select;
 
-$template->assign_vars(array(
+template()->assign_vars(array(
     'LOG_COLSPAN' => 4,
 
     'DATETIME_NAME' => $datetime_key,

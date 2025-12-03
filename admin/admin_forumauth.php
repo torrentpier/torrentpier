@@ -139,7 +139,7 @@ $forum_rows = DB()->fetch_rowset('SELECT * FROM ' . BB_FORUMS . " $forum_sql");
 
 if (empty($forum_id)) {
     // Output the selection table if no forum id was specified
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_AUTH_SELECT_FORUM' => true,
         'S_AUTH_ACTION' => 'admin_forumauth.php',
         'S_AUTH_SELECT' => get_forum_select('admin', 'f', null, 80),
@@ -184,7 +184,7 @@ if (empty($forum_id)) {
 
         $simple_auth .= '</select>';
 
-        $template->assign_block_vars('forum_auth', [
+        template()->assign_block_vars('forum_auth', [
             'CELL_TITLE' => __('SIMPLE_MODE'),
             'S_AUTH_LEVELS_SELECT' => $simple_auth,
         ]);
@@ -203,7 +203,7 @@ if (empty($forum_id)) {
 
             $cell_title = $field_names[$forum_auth_fields[$j]];
 
-            $template->assign_block_vars('forum_auth', [
+            template()->assign_block_vars('forum_auth', [
                 'CELL_TITLE' => $cell_title,
                 'S_AUTH_LEVELS_SELECT' => $custom_auth[$j],
             ]);
@@ -220,7 +220,7 @@ if (empty($forum_id)) {
     $s_hidden_fields = '<input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '">';
     $is_subforum = $forum_rows[0]['forum_parent'] > 0;
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_EDIT_FORUM_AUTH' => true,
         'FORUM_NAME' => htmlCHR($forum_name),
         'U_VIEWFORUM' => BB_ROOT . FORUM_URL . $forum_id,

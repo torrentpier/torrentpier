@@ -52,7 +52,7 @@ foreach ($sql as $row) {
     }
 }
 
-$template->assign_vars(array(
+template()->assign_vars(array(
     'CRON_ENABLED' => TorrentPier\Helpers\CronHelper::isEnabled(),
     'CRON_CHECK_INTERVAL' => $new['cron_check_interval'],
 ));
@@ -80,7 +80,7 @@ switch ($mode) {
                 $execution_time_formatted = '—';
             }
 
-            $template->assign_block_vars('list', array(
+            template()->assign_block_vars('list', array(
                 'ROW_CLASS' => !($i % 2) ? 'row2' : 'row1',
                 'JOB_ID' => $i + 1,
                 'CRON_ID' => $row['cron_id'],
@@ -96,7 +96,7 @@ switch ($mode) {
             ));
         }
 
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'TPL_CRON_LIST' => true,
             'S_CRON_ACTION' => 'admin_cron.php',
             'S_MODE' => 'list',
@@ -104,7 +104,7 @@ switch ($mode) {
 
         //detect cron status
         if (is_file(CRON_RUNNING)) {
-            $template->assign_vars(array(
+            template()->assign_vars(array(
                 'CRON_RUNNING' => true,
             ));
         }
@@ -126,7 +126,7 @@ switch ($mode) {
         $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . " WHERE cron_id = $job_id");
 
         foreach ($sql as $row) {
-            $template->assign_vars(array(
+            template()->assign_vars(array(
                 'CRON_ID' => $row['cron_id'],
                 'CRON_ACTIVE' => $row['cron_active'],
                 'CRON_TITLE' => $row['cron_title'],
@@ -156,7 +156,7 @@ switch ($mode) {
             $schedule[$key] = $type;
         }
 
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'TPL_CRON_EDIT' => true,
             'S_CRON_ACTION' => 'admin_cron.php',
             'S_MODE' => 'edit',
@@ -177,7 +177,7 @@ switch ($mode) {
             $schedule[$key] = $type;
         }
 
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'TPL_CRON_EDIT' => true,
             'S_CRON_ACTION' => 'admin_cron.php',
             'S_MODE' => 'add',

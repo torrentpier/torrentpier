@@ -31,7 +31,7 @@ if (!isset($_REQUEST['dosearch'])) {
     $group_list = '';
 
     if (DB()->num_rows($result) != 0) {
-        $template->assign_block_vars('groups_exist', []);
+        template()->assign_block_vars('groups_exist', []);
 
         while ($row = DB()->sql_fetchrow($result)) {
             $group_list .= '<option value="' . $row['group_id'] . '">' . strip_tags(htmlspecialchars($row['group_name'])) . '</option>';
@@ -44,7 +44,7 @@ if (!isset($_REQUEST['dosearch'])) {
     }
     $rank_select_box = '';
     if (DB()->num_rows($result) != 0) {
-        $template->assign_block_vars('ranks_exist', []);
+        template()->assign_block_vars('ranks_exist', []);
         while ($row = DB()->sql_fetchrow($result)) {
             $rank = $row['rank_title'];
             $rank_id = $row['rank_id'];
@@ -68,7 +68,7 @@ if (!isset($_REQUEST['dosearch'])) {
     $forums_list = '';
 
     if (DB()->num_rows($result) != 0) {
-        $template->assign_block_vars('forums_exist', []);
+        template()->assign_block_vars('forums_exist', []);
 
         while ($row = DB()->sql_fetchrow($result)) {
             if ($row['cat_id'] != $last_cat_id) {
@@ -87,7 +87,7 @@ if (!isset($_REQUEST['dosearch'])) {
         $lastvisited_list .= '<option value="' . $days . '">' . humanTime((TIMENOW - 86400 * $days), TIMENOW) . '</option>';
     }
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_ADMIN_USER_SEARCH_MAIN' => true,
 
         'YEAR' => date('Y'),
@@ -864,7 +864,7 @@ if (!isset($_REQUEST['dosearch'])) {
     if ($num_pages > 2) {
         $pagination .= '&nbsp;&nbsp;<input type="text" name="page" maxlength="5" size="2" class="post" />&nbsp;<input type="submit" name="submit" value="' . __('GO') . '" class="post" />';
     }
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_ADMIN_USER_SEARCH_RESULTS' => true,
 
         'PAGE_NUMBER' => sprintf(__('PAGE_OF'), $page, $num_pages),
@@ -909,7 +909,7 @@ if (!isset($_REQUEST['dosearch'])) {
     for ($i = 0, $iMax = count($rowset); $i < $iMax; $i++) {
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
-        $template->assign_block_vars('userrow', [
+        template()->assign_block_vars('userrow', [
             'ROW_CLASS' => $row_class,
             'USER' => profile_url($rowset[$i], true),
             'EMAIL' => $rowset[$i]['user_email'],

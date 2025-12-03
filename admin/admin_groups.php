@@ -31,7 +31,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             'release_group' => $row['release_group']
         ];
         $mode = 'editgroup';
-        $template->assign_block_vars('group_edit', []);
+        template()->assign_block_vars('group_edit', []);
     } elseif (!empty($_POST['new'])) {
         $group_info = [
             'group_name' => '',
@@ -50,7 +50,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
 		<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />
 	';
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_EDIT_GROUP' => true,
 
         'GROUP_NAME' => stripslashes(htmlspecialchars($group_info['group_name'])),
@@ -155,7 +155,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         }
     }
 } else {
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_GROUP_SELECT' => true,
 
         'S_GROUP_ACTION' => 'admin_groups.php',

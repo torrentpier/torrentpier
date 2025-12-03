@@ -136,7 +136,7 @@ if ($mode) {
             $sel_forum = ($forum_parent && !isset($_REQUEST['forum_parent'])) ? $forum_id : $forum_parent;
             $s_parent .= sf_get_list('forum', $forum_id, $sel_forum);
 
-            $template->assign_vars(array(
+            template()->assign_vars(array(
                 'TPL_EDIT_FORUM' => true,
 
                 'S_FORUM_DISPLAY_SORT_LIST' => $forum_display_sort_list,
@@ -355,7 +355,7 @@ if ($mode) {
                 POST_CAT_URL => $cat_id,
             );
 
-            $template->assign_vars(array(
+            template()->assign_vars(array(
                 'TPL_EDIT_CATEGORY' => true,
                 'CAT_TITLE' => htmlCHR($cat_info['cat_title']),
                 'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
@@ -413,7 +413,7 @@ if ($mode) {
                 'from_id' => $forum_id,
             );
 
-            $template->assign_vars(array(
+            template()->assign_vars(array(
                 'TPL_DELETE_FORUM' => true,
 
                 'WHAT_TO_DELETE' => htmlCHR($foruminfo['forum_name']),
@@ -496,7 +496,7 @@ if ($mode) {
                 if ($row['forums_count'] > 0) {
                     bb_die(__('MUST_DELETE_FORUMS'));
                 } else {
-                    $template->assign_var('NOWHERE_TO_MOVE', __('NOWHERE_TO_MOVE'));
+                    template()->assign_var('NOWHERE_TO_MOVE', __('NOWHERE_TO_MOVE'));
                 }
             }
 
@@ -505,7 +505,7 @@ if ($mode) {
                 'from_id' => $cat_id,
             );
 
-            $template->assign_vars(array(
+            template()->assign_vars(array(
                 'TPL_DELETE_FORUM' => true,
 
                 'WHAT_TO_DELETE' => htmlCHR($catinfo['cat_title']),
@@ -664,7 +664,7 @@ if ($mode) {
 }
 
 if (!$mode || $show_main_page) {
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'TPL_FORUMS_LIST' => true,
 
         'S_FORUM_ACTION' => 'admin_forums.php',
@@ -708,7 +708,7 @@ if (!$mode || $show_main_page) {
         $bgr_class_2 = 'prow2';
         $bgr_class_over = 'prow3';
 
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'U_ALL_FORUMS' => 'admin_forums.php?' . POST_CAT_URL . '=all',
             'FORUMS_COUNT' => $total_forums,
         ));
@@ -716,7 +716,7 @@ if (!$mode || $show_main_page) {
         for ($i = 0; $i < $total_categories; $i++) {
             $cat_id = $category_rows[$i]['cat_id'];
 
-            $template->assign_block_vars('c', array(
+            template()->assign_block_vars('c', array(
                 'S_ADD_FORUM_SUBMIT' => "addforum[$cat_id]",
                 'S_ADD_FORUM_NAME' => "forumname[$cat_id]",
 
@@ -738,7 +738,7 @@ if (!$mode || $show_main_page) {
                 $row_bgr = " class=\"$bgr_class\" onmouseover=\"this.className='$bgr_class_over';\" onmouseout=\"this.className='$bgr_class';\"";
 
                 if ($forum_rows[$j]['cat_id'] == $cat_id) {
-                    $template->assign_block_vars('c.f', array(
+                    template()->assign_block_vars('c.f', array(
                         'FORUM_NAME' => htmlCHR($forum_rows[$j]['forum_name']),
                         'FORUM_DESC' => htmlCHR($forum_rows[$j]['forum_desc']),
                         'NUM_TOPICS' => $forum_rows[$j]['forum_topics'],

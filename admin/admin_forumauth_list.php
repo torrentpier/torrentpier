@@ -179,13 +179,13 @@ if (empty($forum_id) && empty($cat_id)) {
     // Output the summary list if no forum id was
     // specified
     //
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'TPL_AUTH_FORUM_LIST' => true,
         'S_COLUMN_SPAN' => count($forum_auth_fields) + 1,
     ));
 
     for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
-        $template->assign_block_vars('forum_auth_titles', array(
+        template()->assign_block_vars('forum_auth_titles', array(
             'CELL_TITLE' => $field_names[$forum_auth_fields[$i]],
         ));
     }
@@ -204,14 +204,14 @@ if (empty($forum_id) && empty($cat_id)) {
     for ($i = 0; $i < $cat_count; $i++) {
         $cat_id = $category_rows[$i]['cat_id'];
 
-        $template->assign_block_vars('cat_row', array(
+        template()->assign_block_vars('cat_row', array(
                 'CAT_NAME' => htmlCHR($category_rows[$i]['cat_title']),
                 'CAT_URL' => 'admin_forumauth_list.php' . '?' . POST_CAT_URL . '=' . $category_rows[$i]['cat_id'])
         );
 
         for ($j = 0, $jMax = count($forum_rows); $j < $jMax; $j++) {
             if ($cat_id == $forum_rows[$j]['cat_id']) {
-                $template->assign_block_vars('cat_row.forum_row', array(
+                template()->assign_block_vars('cat_row.forum_row', array(
                     'ROW_CLASS' => !($j % 2) ? 'row4' : 'row5',
                     'FORUM_NAME' => '<a class="' . ($forum_rows[$j]['forum_parent'] ? 'genmed' : 'gen') . '" href="admin_forumauth.php?' . POST_FORUM_URL . '=' . $forum_rows[$j]['forum_id'] . '">' . htmlCHR($forum_rows[$j]['forum_name']) . '</a>',
                     'IS_SUBFORUM' => $forum_rows[$j]['forum_parent'],
@@ -225,7 +225,7 @@ if (empty($forum_id) && empty($cat_id)) {
                             break;
                         }
                     }
-                    $template->assign_block_vars('cat_row.forum_row.forum_auth_data', array(
+                    template()->assign_block_vars('cat_row.forum_row.forum_auth_data', array(
                             'CELL_VALUE' => __('FORUM_' . $item_auth_level),
                             'AUTH_EXPLAIN' => sprintf(__('FORUM_AUTH_LIST_EXPLAIN_' . strtoupper($forum_auth_fields[$k])), __('FORUM_AUTH_LIST_EXPLAIN_' . strtoupper($item_auth_level))))
                     );
@@ -244,7 +244,7 @@ if (empty($forum_id) && empty($cat_id)) {
     // in the category
     //
     for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
-        $template->assign_block_vars('forum_auth_titles', array(
+        template()->assign_block_vars('forum_auth_titles', array(
             'CELL_TITLE' => $field_names[$forum_auth_fields[$i]],
         ));
     }
@@ -263,14 +263,14 @@ if (empty($forum_id) && empty($cat_id)) {
     $cat_id = reset($category_rows)['cat_id'];
     $cat_name = reset($category_rows)['cat_title'];
 
-    $template->assign_block_vars('cat_row', array(
+    template()->assign_block_vars('cat_row', array(
             'CAT_NAME' => htmlCHR($cat_name),
             'CAT_URL' => 'admin_forumauth_list.php?' . POST_CAT_URL . '=' . $cat_id)
     );
 
     for ($j = 0, $jMax = count($forum_rows); $j < $jMax; $j++) {
         if ($cat_id == $forum_rows[$j]['cat_id']) {
-            $template->assign_block_vars('cat_row.forum_row', array(
+            template()->assign_block_vars('cat_row.forum_row', array(
                 'ROW_CLASS' => !($j % 2) ? 'row4' : 'row5',
                 'FORUM_NAME' => '<a class="' . ($forum_rows[$j]['forum_parent'] ? 'genmed' : 'gen') . '" href="admin_forumauth.php?' . POST_FORUM_URL . '=' . $forum_rows[$j]['forum_id'] . '">' . htmlCHR($forum_rows[$j]['forum_name']) . '</a>',
                 'IS_SUBFORUM' => $forum_rows[$j]['forum_parent'],
@@ -284,7 +284,7 @@ if (empty($forum_id) && empty($cat_id)) {
                         break;
                     }
                 }
-                $template->assign_block_vars('cat_row.forum_row.forum_auth_data', array(
+                template()->assign_block_vars('cat_row.forum_row.forum_auth_data', array(
                         'CELL_VALUE' => __('FORUM_' . $item_auth_level),
                         'AUTH_EXPLAIN' => sprintf(__('FORUM_AUTH_LIST_EXPLAIN_' . strtoupper($forum_auth_fields[$k])), __('FORUM_AUTH_LIST_EXPLAIN_' . strtoupper($item_auth_level))))
                 );
@@ -305,7 +305,7 @@ if (empty($forum_id) && empty($cat_id)) {
         }
         $custom_auth[$j] .= '</select>';
 
-        $template->assign_block_vars('forum_auth_data', array(
+        template()->assign_block_vars('forum_auth_data', array(
                 'S_AUTH_LEVELS_SELECT' => $custom_auth[$j])
         );
     }
@@ -315,7 +315,7 @@ if (empty($forum_id) && empty($cat_id)) {
     //
     $s_hidden_fields = '<input type="hidden" name="' . POST_CAT_URL . '" value="' . $cat_id . '">';
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'TPL_AUTH_CAT' => true,
         'CAT_NAME' => htmlCHR($cat_name),
         'S_FORUMAUTH_ACTION' => 'admin_forumauth_list.php',

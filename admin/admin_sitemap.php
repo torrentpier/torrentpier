@@ -46,7 +46,7 @@ if (!$result = DB()->sql_query($sql)) {
 $s_mess = __('SITEMAP_CREATED') . ': <b>' . bb_date($new['sitemap_time'], config()->get('post_date_format')) . '</b> ' . __('SITEMAP_AVAILABLE') . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">' . make_url('sitemap/sitemap.xml') . '</a>';
 $message = is_file(SITEMAP_DIR . '/sitemap.xml') ? $s_mess : __('SITEMAP_NOT_CREATED');
 
-$template->assign_vars([
+template()->assign_vars([
     'STATIC_SITEMAP' => $new['static_sitemap'],
     'MESSAGE' => $message
 ]);

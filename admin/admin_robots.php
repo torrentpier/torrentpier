@@ -41,7 +41,7 @@ if (is_file($robots_file)) {
     $current_content = file_get_contents($robots_file);
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'S_ACTION' => 'admin_robots.php',
     'ROBOTS_TXT' => htmlCHR($current_content),
 ]);

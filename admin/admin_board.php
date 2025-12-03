@@ -56,7 +56,7 @@ if (!$result = DB()->sql_query($sql)) {
 
 switch ($mode) {
     case 'config_mods':
-        $template->assign_vars([
+        template()->assign_vars([
             'S_CONFIG_ACTION' => 'admin_board.php?mode=config_mods',
             'CONFIG_MODS' => true,
 
@@ -96,7 +96,7 @@ switch ($mode) {
                     continue;
                 }
 
-                $template->assign_block_vars('seed_bonus', [
+                template()->assign_block_vars('seed_bonus', [
                     'RELEASE' => $seed_release[$i],
                     'POINTS' => $row
                 ]);
@@ -112,7 +112,7 @@ switch ($mode) {
                     continue;
                 }
 
-                $template->assign_block_vars('bonus_upload', [
+                template()->assign_block_vars('bonus_upload', [
                     'UP' => $row,
                     'PRICE' => $price_row[$i]
                 ]);
@@ -121,7 +121,7 @@ switch ($mode) {
         break;
 
     default:
-        $template->assign_vars([
+        template()->assign_vars([
             'S_CONFIG_ACTION' => 'admin_board.php?mode=config',
             'CONFIG' => true,
 

@@ -124,10 +124,10 @@ foreach ($rowset as $rid => $forum) {
 
 foreach ($db_fields_bool as $field_name => $field_def_val) {
     $$field_name = '<select name="' . $field_name . "[]\" multiple size=\"$forum_rows\">" . $$field_name . '</select>';
-    $template->assign_vars(array('S_' . strtoupper($field_name) => $$field_name));
+    template()->assign_vars(array('S_' . strtoupper($field_name) => $$field_name));
 }
 
-$template->assign_vars(array(
+template()->assign_vars(array(
     'L_BT_SHOW_PEERS_MODE_COUNT' => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_COUNT) ? '<u>' . __('BT_SHOW_PEERS_MODE_COUNT') . '</u>' : __('BT_SHOW_PEERS_MODE_COUNT'),
     'L_BT_SHOW_PEERS_MODE_NAMES' => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_NAMES) ? '<u>' . __('BT_SHOW_PEERS_MODE_NAMES') . '</u>' : __('BT_SHOW_PEERS_MODE_NAMES'),
     'L_BT_SHOW_PEERS_MODE_FULL' => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_FULL) ? '<u>' . __('BT_SHOW_PEERS_MODE_FULL') . '</u>' : __('BT_SHOW_PEERS_MODE_FULL'),

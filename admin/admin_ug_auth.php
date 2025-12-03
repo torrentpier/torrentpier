@@ -202,7 +202,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     $g_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data, [], UG_PERM_GROUP_ONLY);
 
     foreach ($forums['c'] as $c_id => $c_data) {
-        $template->assign_block_vars('c', array(
+        template()->assign_block_vars('c', array(
             'CAT_ID' => $c_id,
             'CAT_TITLE' => $forums['cat_title_html'][$c_id],
             'CAT_HREF' => "$base_url&amp;" . POST_CAT_URL . "=$c_id",
@@ -217,7 +217,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
             $auth_mod = ($u_access[$f_id]['auth_mod'] || $g_access[$f_id]['auth_mod']);
             $disabled = $g_access[$f_id]['auth_mod'];
 
-            $template->assign_block_vars('c.f', array(
+            template()->assign_block_vars('c.f', array(
                 'DISABLED' => $disabled,
                 'FORUM_ID' => $f_id,
                 'FORUM_NAME' => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
@@ -243,7 +243,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                     $acl_class = $auth_via_acl ? 'yes' : 'no';
                 }
 
-                $template->assign_block_vars('c.f.acl', array(
+                template()->assign_block_vars('c.f.acl', array(
                     'DISABLED' => $disabled,
                     'PERM_SIGN' => $perm_sign,
                     'ACL_CLASS' => $acl_class,
@@ -255,14 +255,14 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         }
     }
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'AUTH_MOD_BF' => AUTH_MOD,
     ));
 
     $s_column_span = 2;
 
     foreach ($forum_auth_fields as $auth_type) {
-        $template->assign_block_vars('acltype', array(
+        template()->assign_block_vars('acltype', array(
             'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", __(strtoupper($auth_type))),
             'ACL_TYPE_BF' => $bf['forum_perm'][$auth_type],
         ));
@@ -283,9 +283,9 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
             <option value="user"' . ($this_userdata['user_level'] != ADMIN ? ' selected' : '') . '>' . __('AUTH_USER') . '</option>
         </select>';
 
-    $template->assign_block_vars('switch_user_auth', []);
+    template()->assign_block_vars('switch_user_auth', []);
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'TPL_AUTH_UG_MAIN' => true,
         'USER_OR_GROUPNAME' => profile_url($this_userdata, true),
         'USER_LEVEL' => __('USER_LEVEL') . ' : ' . $s_user_type,
@@ -320,7 +320,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     $u_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data);
 
     foreach ($forums['c'] as $c_id => $c_data) {
-        $template->assign_block_vars('c', array(
+        template()->assign_block_vars('c', array(
             'CAT_ID' => $c_id,
             'CAT_TITLE' => $forums['cat_title_html'][$c_id],
             'CAT_HREF' => "$base_url&amp;" . POST_CAT_URL . "=$c_id",
@@ -334,7 +334,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
             $f_data = $forums['f'][$f_id];
             $auth_mod = $u_access[$f_id]['auth_mod'];
 
-            $template->assign_block_vars('c.f', array(
+            template()->assign_block_vars('c.f', array(
                 'DISABLED' => false,
                 'FORUM_ID' => $f_id,
                 'FORUM_NAME' => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
@@ -360,7 +360,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                     $acl_class = $auth_via_acl ? 'yes' : 'no';
                 }
 
-                $template->assign_block_vars('c.f.acl', array(
+                template()->assign_block_vars('c.f.acl', array(
                     'DISABLED' => $disabled,
                     'PERM_SIGN' => $perm_sign,
                     'ACL_CLASS' => $acl_class,
@@ -372,14 +372,14 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         }
     }
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'AUTH_MOD_BF' => AUTH_MOD,
     ));
 
     $s_column_span = 2;
 
     foreach ($forum_auth_fields as $auth_type) {
-        $template->assign_block_vars('acltype', array(
+        template()->assign_block_vars('acltype', array(
             'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", __(strtoupper($auth_type))),
             'ACL_TYPE_BF' => $bf['forum_perm'][$auth_type],
         ));
@@ -394,7 +394,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 		<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />
 	';
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'TPL_AUTH_UG_MAIN' => true,
         'T_USER_OR_GROUPNAME' => __('GROUP_NAME'),
         'USER_LEVEL' => false,
@@ -407,12 +407,12 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 } else {
     // Select a user/group
     if ($mode == 'user') {
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'TPL_SELECT_USER' => true,
             'U_SEARCH_USER' => BB_ROOT . 'search.php?mode=searchuser',
         ));
     } else {
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'TPL_SELECT_GROUP' => true,
             'S_GROUP_SELECT' => get_select('groups'),
         ));
@@ -420,12 +420,12 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     $s_hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
     ));
 }
 
-$template->assign_vars(array(
+template()->assign_vars(array(
     'YES_SIGN' => $yes_sign,
     'NO_SIGN' => $no_sign,
     'S_AUTH_ACTION' => 'admin_ug_auth.php',

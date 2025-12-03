@@ -38,7 +38,7 @@ if (isset($_REQUEST['submit'])) {
         $pruned_total += $pruned_topics;
         $prune_performed = true;
 
-        $template->assign_block_vars('pruned', [
+        template()->assign_block_vars('pruned', [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
             'PRUNED_TOPICS' => $pruned_topics
@@ -52,7 +52,7 @@ if (isset($_REQUEST['submit'])) {
     }
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'PRUNED_TOTAL' => $pruned_total,
     'S_PRUNE_ACTION' => basename(__FILE__),
     'SEL_FORUM' => get_forum_select('admin', 'f[]', null, 65, 16, '', $all_forums)

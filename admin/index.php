@@ -44,7 +44,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     // Get modules from cache
     $module = CACHE('bb_cache')->get('admin_module_' . $user->id);
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_ADMIN_NAVIGATE' => true,
         'U_FORUM_INDEX' => '../index.php',
         'U_ADMIN_INDEX' => 'index.php?pane=right',
@@ -55,7 +55,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     foreach ($module as $cat => $action_array) {
         $cat = __($cat) ?: str_replace("_", ' ', $cat);
 
-        $template->assign_block_vars('catrow', [
+        template()->assign_block_vars('catrow', [
             'ADMIN_CATEGORY' => $cat,
         ]);
 
@@ -67,7 +67,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
             $action = __($action) ?: str_replace("_", ' ', $action);
 
-            $template->assign_block_vars('catrow.modulerow', [
+            template()->assign_block_vars('catrow.modulerow', [
                 'ROW_CLASS' => $row_class,
                 'ADMIN_MODULE' => $action,
                 'U_ADMIN_MODULE' => $file,
@@ -76,7 +76,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         }
     }
 } elseif (isset($_GET['pane']) && $_GET['pane'] == 'right') {
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_ADMIN_MAIN' => true,
         'ADMIN_LOCK' => (bool)config()->get('board_disable'),
         'ADMIN_LOCK_CRON' => is_file(BB_DISABLED),
@@ -84,7 +84,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
     // Check for updates
     if (isset($update_data['available_update'])) {
-        $template->assign_block_vars('updater', [
+        template()->assign_block_vars('updater', [
             'UPDATE_AVAILABLE' => $update_data['available_update'],
             'NEW_VERSION_NUMBER' => $update_data['latest_version'],
             'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
@@ -144,7 +144,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     // Get disk space information
     $getDiskSpaceInfo = getDiskSpaceInfo();
 
-    $template->assign_vars([
+    template()->assign_vars([
         'NUMBER_OF_POSTS' => commify($total_posts),
         'NUMBER_OF_TOPICS' => commify($total_topics),
         'NUMBER_OF_USERS' => commify($total_users),
@@ -163,7 +163,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     ]);
 
     if (isset($_GET['users_online'])) {
-        $template->assign_vars([
+        template()->assign_vars([
             'SHOW_USERS_ONLINE' => true,
         ]);
 
@@ -200,7 +200,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                 $row_class = 'row1';
                 $reg_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($onlinerow_reg[$i]['session_ip']);
 
-                $template->assign_block_vars('reg_user_row', [
+                template()->assign_block_vars('reg_user_row', [
                     'ROW_CLASS' => $row_class,
                     'USER' => profile_url($onlinerow_reg[$i], true),
                     'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'd-M-Y H:i', false),
@@ -220,7 +220,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                 $row_class = 'row2';
                 $guest_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($onlinerow_guest[$i]['session_ip']);
 
-                $template->assign_block_vars('guest_user_row', [
+                template()->assign_block_vars('guest_user_row', [
                     'ROW_CLASS' => $row_class,
                     'STARTED' => bb_date($onlinerow_guest[$i]['session_start'], 'd-M-Y H:i', false),
                     'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'd-M-Y H:i', false),
@@ -230,13 +230,13 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             }
         }
     } else {
-        $template->assign_vars([
+        template()->assign_vars([
             'USERS_ONLINE_HREF' => 'index.php?pane=right&users_online=1',
         ]);
     }
 } else {
     // Generate frameset
-    $template->assign_vars([
+    template()->assign_vars([
         'CONTENT_ENCODING' => DEFAULT_CHARSET,
         'TPL_ADMIN_FRAMESET' => true,
     ]);

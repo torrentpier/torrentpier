@@ -49,7 +49,7 @@ if ($mode != '') {
             }
         }
 
-        $template->assign_vars([
+        template()->assign_vars([
             'TPL_ADMIN_WORDS_EDIT' => true,
             'WORD' => $word,
             'REPLACEMENT' => $replacement,
@@ -112,7 +112,7 @@ if ($mode != '') {
     $word_rows = DB()->sql_fetchrowset($result);
     $word_count = count($word_rows);
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_ADMIN_WORDS_LIST' => true,
         'S_WORDS_ACTION' => 'admin_words.php',
         'S_HIDDEN_FIELDS' => ''
@@ -125,7 +125,7 @@ if ($mode != '') {
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
-        $template->assign_block_vars('words', [
+        template()->assign_block_vars('words', [
             'ROW_CLASS' => $row_class,
             'WORD' => $word,
             'REPLACEMENT' => $replacement,

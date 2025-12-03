@@ -77,7 +77,7 @@ if ($mode != '') {
             sort($rank_images);
         }
 
-        $template->assign_vars([
+        template()->assign_vars([
             'TPL_RANKS_EDIT' => true,
 
             'RANK' => !empty($rank_info['rank_title']) ? $rank_info['rank_title'] : '',
@@ -94,7 +94,7 @@ if ($mode != '') {
             $img_path = 'styles/images/ranks/' . $img;
             $selected = !empty($rank_info['rank_image']) && $rank_info['rank_image'] == $img_path;
 
-            $template->assign_block_vars('rank_images', [
+            template()->assign_block_vars('rank_images', [
                 'IMAGE_FILE' => $img,
                 'IMAGE_PATH' => $img_path,
                 'SELECTED' => $selected
@@ -201,7 +201,7 @@ if ($mode != '') {
     $rank_count = DB()->num_rows($result);
     $rank_rows = DB()->sql_fetchrowset($result);
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_RANKS_LIST' => true,
         'S_RANKS_ACTION' => 'admin_ranks.php'
     ]);
@@ -212,7 +212,7 @@ if ($mode != '') {
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
-        $template->assign_block_vars('ranks', [
+        template()->assign_block_vars('ranks', [
             'ROW_CLASS' => $row_class,
             'RANK' => $rank,
             'STYLE' => $rank_rows[$i]['rank_style'],

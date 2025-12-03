@@ -124,7 +124,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
         $hidden_vars = '<input type="hidden" name="mode" value="import">';
 
-        $template->assign_vars([
+        template()->assign_vars([
             'TPL_SMILE_IMPORT' => true,
 
             'S_SMILEY_ACTION' => 'admin_smilies.php',
@@ -167,7 +167,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
     $s_hidden_fields = '<input type="hidden" name="mode" value="savenew" />';
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_SMILE_EDIT' => true,
         'SMILEY_IMG' => $pathToSmilesDir . '/' . $smiley_images[0],
         'S_SMILEY_ACTION' => 'admin_smilies.php',
@@ -226,7 +226,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             $s_hidden_fields = '<input type="hidden" name="mode" value="save" /><input type="hidden" name="smile_id" value="' . $smile_data['smilies_id'] . '" />';
 
-            $template->assign_vars([
+            template()->assign_vars([
                 'TPL_SMILE_EDIT' => true,
                 'SMILEY_CODE' => $smile_data['code'],
                 'SMILEY_EMOTICON' => $smile_data['emoticon'],
@@ -304,7 +304,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
     $smilies = DB()->sql_fetchrowset($result);
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_SMILE_MAIN' => true,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_SMILEY_ACTION' => 'admin_smilies.php'
@@ -318,7 +318,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
-        $template->assign_block_vars('smiles', [
+        template()->assign_block_vars('smiles', [
             'ROW_CLASS' => $row_class,
 
             'SMILEY_IMG' => $pathToSmilesDir . '/' . $smilies[$i]['smile_url'],
