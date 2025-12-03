@@ -33,9 +33,7 @@ switch ($mode) {
         $this->response['datastore_html'] = '<span class="seed bold">' . __('DATASTORE_CLEARED') . '</span>';
         break;
     case 'clear_template_cache':
-        global $template;
-
-        $twigCacheDir = $template->getCacheDir() . 'twig';
+        $twigCacheDir = template()->getCacheDir() . 'twig';
         if (is_dir($twigCacheDir)) {
             $iterator = new \RecursiveIteratorIterator(
                 new \RecursiveDirectoryIterator($twigCacheDir, \FilesystemIterator::SKIP_DOTS),
