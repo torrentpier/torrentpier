@@ -12,7 +12,7 @@ define('IN_ADMIN', true);
 
 require dirname(__DIR__) . '/common.php';
 
-$user->session_start();
+user()->session_start();
 
 if (IS_GUEST) {
     redirect(LOGIN_URL . '?redirect=admin/index.php');
@@ -22,7 +22,7 @@ if (!IS_ADMIN) {
     bb_die(__('NOT_ADMIN'));
 }
 
-if (!$userdata['session_admin']) {
+if (!userdata('session_admin')) {
     $redirect = url_arg($_SERVER['REQUEST_URI'], 'admin', 1);
     redirect(LOGIN_URL . "?redirect=$redirect");
 }

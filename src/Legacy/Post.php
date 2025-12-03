@@ -31,13 +31,11 @@ class Post
      */
     public static function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &$message)
     {
-        global $user, $userdata;
-
         // Check username
         if (!empty($username)) {
             $username = clean_username($username);
 
-            if (!$userdata['session_logged_in'] || ($userdata['session_logged_in'] && $username != $user->name)) {
+            if (!userdata('session_logged_in') || (userdata('session_logged_in') && $username != user()->name)) {
                 if ($err = Validate::username($username)) {
                     $error_msg .= $err;
                 }
@@ -96,18 +94,18 @@ class Post
      */
     public static function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig, $robots_indexing)
     {
-        global $userdata, $post_info, $is_auth;
+        global $post_info, $is_auth;
 
         $current_time = TIMENOW;
 
         // Flood control
         $row = null;
-        $where_sql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
+        $where_sql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = " . userdata('user_id');
 
         if ($mode == 'newtopic' || $mode == 'reply') {
             $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
             if ($row = DB()->fetch_row($sql) and $row['last_post_time']) {
-                if ($userdata['user_level'] == USER) {
+                if (userdata('user_level') == USER) {
                     if ((TIMENOW - $row['last_post_time']) < config()->get('flood_interval')) {
                         bb_die(__('FLOOD_ERROR'));
                     }
@@ -143,7 +141,7 @@ class Post
 			INSERT INTO
 				" . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_dl_type, topic_allow_robots)
 			VALUES
-				('$post_subject', " . $userdata['user_id'] . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_dl_type, $robots_indexing)
+				('$post_subject', " . userdata('user_id') . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_dl_type, $robots_indexing)
 		";
 
             $sql_update = "
@@ -180,7 +178,7 @@ class Post
             DB()->sql_query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = $current_time WHERE topic_id = $topic_id LIMIT 1");
         }
 
-        $sql = ($mode != 'editpost') ? "INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip, poster_rg_id, attach_rg_sig) VALUES ($topic_id, $forum_id, " . $userdata['user_id'] . ", '$post_username', $current_time, '" . USER_IP . "', $poster_rg_id, $attach_rg_sig)" : "UPDATE " . BB_POSTS . " SET post_username = '$post_username'" . $edited_sql . ", poster_rg_id = $poster_rg_id, attach_rg_sig = $attach_rg_sig WHERE post_id = $post_id";
+        $sql = ($mode != 'editpost') ? "INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip, poster_rg_id, attach_rg_sig) VALUES ($topic_id, $forum_id, " . userdata('user_id') . ", '$post_username', $current_time, '" . USER_IP . "', $poster_rg_id, $attach_rg_sig)" : "UPDATE " . BB_POSTS . " SET post_username = '$post_username'" . $edited_sql . ", poster_rg_id = $poster_rg_id, attach_rg_sig = $attach_rg_sig WHERE post_id = $post_id";
         if (!DB()->sql_query($sql)) {
             bb_die('Error in posting #2');
         }
@@ -194,7 +192,7 @@ class Post
             bb_die('Error in posting #3');
         }
 
-        if ($userdata['user_id'] != BOT_UID) {
+        if (userdata('user_id') != BOT_UID) {
             $s_post_message = str_replace('\n', "\n", $post_message);
             $s_post_subject = str_replace('\n', "\n", $post_subject);
             add_search_words($post_id, stripslashes($s_post_message), stripslashes($s_post_subject));
@@ -347,8 +345,6 @@ class Post
      */
     public static function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
     {
-        global $userdata;
-
         if (!config()->get('topic_notify_enabled')) {
             return;
         }
@@ -361,7 +357,7 @@ class Post
                 $watch_list = DB()->fetch_rowset("SELECT u.username, u.user_id, u.user_email, u.user_lang
 				FROM " . BB_TOPICS_WATCH . " tw, " . BB_USERS . " u
 				WHERE tw.topic_id = $topic_id
-					AND tw.user_id NOT IN ({$userdata['user_id']}, " . EXCLUDED_USERS . $banned_users . ")
+					AND tw.user_id NOT IN (" . userdata('user_id') . ", " . EXCLUDED_USERS . $banned_users . ")
 					AND tw.notify_status = " . TOPIC_WATCH_NOTIFIED . "
 					AND u.user_id = tw.user_id
 					AND u.user_active = 1
@@ -406,14 +402,14 @@ class Post
                 }
             }
 
-            $topic_watch = DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}", 'topic_id');
+            $topic_watch = DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . userdata('user_id'), 'topic_id');
 
             if (!$notify_user && !empty($topic_watch)) {
-                DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
+                DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . userdata('user_id'));
             } elseif ($notify_user && empty($topic_watch)) {
                 DB()->query("
 				INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
-				VALUES (" . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
+				VALUES (" . userdata('user_id') . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
 			");
             }
         }
@@ -433,8 +429,6 @@ class Post
      */
     public static function insert_post(string $mode, int|string $topic_id, null|int|string $forum_id = null, null|int|string $old_forum_id = null, null|int|string $new_topic_id = null, string $new_topic_title = '', null|int|string $old_topic_id = null, string $reason_move = ''): void
     {
-        global $userdata;
-
         if (!$topic_id) {
             return;
         }
@@ -463,9 +457,9 @@ class Post
             }
 
             $reason_move = !empty($reason_move) ? htmlCHR($reason_move) : __('NOSELECT');
-            $post_text = sprintf(__('BOT_TOPIC_MOVED_FROM_TO'), '[url=' . make_url(FORUM_URL . $old_forum_id) . ']' . $forum_names[$old_forum_id] . '[/url]', '[url=' . make_url(FORUM_URL . $forum_id) . ']' . $forum_names[$forum_id] . '[/url]', $reason_move, profile_url($userdata));
+            $post_text = sprintf(__('BOT_TOPIC_MOVED_FROM_TO'), '[url=' . make_url(FORUM_URL . $old_forum_id) . ']' . $forum_names[$old_forum_id] . '[/url]', '[url=' . make_url(FORUM_URL . $forum_id) . ']' . $forum_names[$forum_id] . '[/url]', $reason_move, profile_url(userdata()));
         } elseif ($mode == 'after_split_to_old') {
-            $post_text = sprintf(__('BOT_MESS_SPLITS'), '[url=' . make_url(TOPIC_URL . $new_topic_id) . ']' . htmlCHR($new_topic_title) . '[/url]', profile_url($userdata));
+            $post_text = sprintf(__('BOT_MESS_SPLITS'), '[url=' . make_url(TOPIC_URL . $new_topic_id) . ']' . htmlCHR($new_topic_title) . '[/url]', profile_url(userdata()));
         } elseif ($mode == 'after_split_to_new') {
             $sql = "SELECT t.topic_title, p.post_time
 			FROM " . BB_TOPICS . " t, " . BB_POSTS . " p
@@ -475,7 +469,7 @@ class Post
             if ($row = DB()->fetch_row($sql)) {
                 $post_time = $row['post_time'] - 1;
 
-                $post_text = sprintf(__('BOT_TOPIC_SPLITS'), '[url=' . make_url(TOPIC_URL . $old_topic_id) . ']' . $row['topic_title'] . '[/url]', profile_url($userdata));
+                $post_text = sprintf(__('BOT_TOPIC_SPLITS'), '[url=' . make_url(TOPIC_URL . $old_topic_id) . ']' . $row['topic_title'] . '[/url]', profile_url(userdata()));
             } else {
                 return;
             }

@@ -236,17 +236,15 @@ class Ajax
      */
     public function check_admin_session()
     {
-        global $user;
-
-        if (!$user->data['session_admin']) {
+        if (!userdata('session_admin')) {
             if (empty($this->request['user_password'])) {
                 $this->prompt_for_password();
             } else {
                 $login_args = [
-                    'login_username' => $user->data['username'],
+                    'login_username' => userdata('username'),
                     'login_password' => $_POST['user_password'],
                 ];
-                if (!$user->login($login_args, true)) {
+                if (!user()->login($login_args, true)) {
                     $this->ajax_die(__('ERROR_LOGIN'));
                 }
             }
@@ -291,9 +289,7 @@ class Ajax
      */
     public function verify_mod_rights($forum_id)
     {
-        global $userdata;
-
-        $is_auth = auth(AUTH_MOD, $forum_id, $userdata);
+        $is_auth = auth(AUTH_MOD, $forum_id, userdata());
 
         if (!$is_auth['auth_mod']) {
             $this->ajax_die(__('ONLY_FOR_MOD'));

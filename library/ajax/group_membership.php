@@ -11,8 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $user;
-
 if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
     $this->ajax_die(__('NO_USER_ID_SPECIFIED'));
 }
@@ -27,7 +25,7 @@ switch ($mode) {
 					SELECT ug.user_pending, g.group_id, g.group_type, g.group_name, g.group_moderator, self.user_id AS can_view
 					FROM       " . BB_USER_GROUP . " ug
 					INNER JOIN " . BB_GROUPS . " g ON(g.group_id = ug.group_id AND g.group_single_user = 0)
-					 LEFT JOIN " . BB_USER_GROUP . " self ON(self.group_id = g.group_id AND self.user_id = {$user->id} AND self.user_pending = 0)
+					 LEFT JOIN " . BB_USER_GROUP . " self ON(self.group_id = g.group_id AND self.user_id = " . user()->id . " AND self.user_pending = 0)
 					WHERE ug.user_id = $user_id
 					ORDER BY g.group_name
 				";
@@ -46,7 +44,7 @@ switch ($mode) {
                 if ($row['group_type'] == GROUP_HIDDEN && !$row['can_view']) {
                     continue;
                 }
-                if ($row['group_moderator'] == $user->id) {
+                if ($row['group_moderator'] == user()->id) {
                     // the user himself is the moderator of this group
                     $class .= ' selfMod';
                     $href .= "&amp;" . POST_USERS_URL . "=$user_id";

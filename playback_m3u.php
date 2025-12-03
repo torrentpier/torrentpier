@@ -22,7 +22,7 @@ $validFormats = [
 ];
 
 // Start session management
-$user->session_start(['req_login' => config()->get('torr_server.disable_for_guest')]);
+user()->session_start(['req_login' => config()->get('torr_server.disable_for_guest')]);
 
 // Disable robots indexing
 $page_cfg['allow_robots'] = false;
@@ -53,7 +53,7 @@ $forum_id = $row['forum_id'];
 set_die_append_msg($forum_id, $topic_id);
 
 // Check rights
-$is_auth = auth(AUTH_ALL, $forum_id, $userdata);
+$is_auth = auth(AUTH_ALL, $forum_id, userdata());
 if (!$is_auth['auth_download']) {
     bb_die(__('SORRY_AUTH_VIEW_ATTACH'));
 }

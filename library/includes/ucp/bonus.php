@@ -11,8 +11,8 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$user_id = $userdata['user_id'];
-$user_points = $userdata['user_points'];
+$user_id = userdata('user_id');
+$user_points = userdata('user_points');
 
 if (config()->get('seed_bonus_enabled') && config()->get('bonus_upload') && config()->get('bonus_upload_price')) {
     $upload_row = unserialize(config()->get('bonus_upload'));
@@ -29,10 +29,10 @@ if (isset($_POST['bonus_id'])) {
     $upload = $upload_row[$id] * 1024 * 1024 * 1024;
     $points = $price_row[$id];
 
-    if ($userdata['user_points'] < $points) {
+    if (userdata('user_points') < $points) {
         meta_refresh('index.php', 10);
 
-        $message = __('BONUS_NOT_SUCCES') . '<br /><br /><a href="' . BONUS_URL . '">' . __('BONUS_RETURN') . '</a><br /><br /><a href="' . PROFILE_URL . $userdata['user_id'] . '">' . __('RETURN_PROFILE') . '</a><br /><br />' . sprintf(__('CLICK_RETURN_INDEX'), '<a href="index.php">', '</a>');
+        $message = __('BONUS_NOT_SUCCES') . '<br /><br /><a href="' . BONUS_URL . '">' . __('BONUS_RETURN') . '</a><br /><br /><a href="' . PROFILE_URL . userdata('user_id') . '">' . __('RETURN_PROFILE') . '</a><br /><br />' . sprintf(__('CLICK_RETURN_INDEX'), '<a href="index.php">', '</a>');
 
         bb_die($message);
     }
@@ -50,7 +50,7 @@ if (isset($_POST['bonus_id'])) {
     meta_refresh(BONUS_URL, 10);
 
     $message = sprintf(__('BONUS_SUCCES'), humn_size($upload_row[$id] * 1024 * 1024 * 1024));
-    $message .= '<br /><br /><a href="' . BONUS_URL . '">' . __('BONUS_RETURN') . '</a><br /><br /><a href="' . PROFILE_URL . $userdata['user_id'] . '">' . __('RETURN_PROFILE') . '</a><br /><br />' . sprintf(__('CLICK_RETURN_INDEX'), '<a href="index.php">', '</a>');
+    $message .= '<br /><br /><a href="' . BONUS_URL . '">' . __('BONUS_RETURN') . '</a><br /><br /><a href="' . PROFILE_URL . userdata('user_id') . '">' . __('RETURN_PROFILE') . '</a><br /><br />' . sprintf(__('CLICK_RETURN_INDEX'), '<a href="index.php">', '</a>');
 
     bb_die($message);
 } else {

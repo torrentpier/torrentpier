@@ -43,7 +43,7 @@ if (config()->get('show_network_news')) {
 }
 
 // Init userdata
-$user->session_start();
+user()->session_start();
 
 // Set meta description
 $page_cfg['meta_description'] = config()->get('site_desc');
@@ -84,9 +84,9 @@ $cat_title_html = $forums['cat_title_html'];
 $forum_name_html = $forums['forum_name_html'];
 
 $anon = GUEST_UID;
-$excluded_forums_csv = $user->get_excluded_forums(AUTH_VIEW);
+$excluded_forums_csv = user()->get_excluded_forums(AUTH_VIEW);
 $excluded_forums_array = $excluded_forums_csv ? explode(',', $excluded_forums_csv) : [];
-$only_new = $user->opt_js['only_new'];
+$only_new = user()->opt_js['only_new'];
 
 // Validate requested category id
 if ($viewcat && !($viewcat =& $forums['c'][$viewcat]['cat_id'])) {

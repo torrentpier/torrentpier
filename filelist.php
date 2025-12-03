@@ -12,7 +12,7 @@ define('BB_SCRIPT', 'filelist');
 require __DIR__ . '/common.php';
 
 // Start session management
-$user->session_start();
+user()->session_start();
 
 if (config()->get('bt_disable_dht') && IS_GUEST) {
     bb_die(__('BT_PRIVATE_TRACKER'), 403);
@@ -33,7 +33,7 @@ if (!$row = DB()->fetch_row($sql)) {
 }
 
 // Check rights
-$is_auth = auth(AUTH_ALL, $row['forum_id'], $userdata);
+$is_auth = auth(AUTH_ALL, $row['forum_id'], userdata());
 if (!$is_auth['auth_view']) {
     bb_die(__('SORRY_AUTH_VIEW_ATTACH'), 403);
 }

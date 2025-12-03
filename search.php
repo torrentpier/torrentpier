@@ -21,7 +21,7 @@ $page_cfg['load_tpl_vars'] = [
 $page_cfg['allow_robots'] = false;
 
 // Start session management
-$user->session_start(array('req_login' => config()->get('disable_search_for_guest')));
+user()->session_start(array('req_login' => config()->get('disable_search_for_guest')));
 
 set_die_append_msg();
 
@@ -36,7 +36,7 @@ if (isset($_POST['del_my_post'])) {
         bb_die(__('NONE_SELECTED'));
     }
 
-    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 0 WHERE poster_id = {$user->id} AND topic_id IN($topic_csv)");
+    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 0 WHERE poster_id = " . user()->id . " AND topic_id IN($topic_csv)");
 
     if (DB()->affected_rows()) {
         //bb_die('Выбранные темы ['. count($_POST['topic_id_list']) .' шт.] удалены из списка "Мои сообщения"');
@@ -55,9 +55,9 @@ if (isset($_POST['del_my_post'])) {
         redirect('index.php');
     }
 
-    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = {$user->id}");
+    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = " . user()->id);
 
-    redirect("search.php?" . POST_USERS_URL . "={$user->id}");
+    redirect("search.php?" . POST_USERS_URL . "=" . user()->id);
 }
 
 $tracking_topics = get_tracks('topic');
@@ -72,7 +72,7 @@ if ($mode =& $_REQUEST['mode']) {
     }
 }
 
-$excluded_forums_csv = $user->get_excluded_forums(AUTH_READ);
+$excluded_forums_csv = user()->get_excluded_forums(AUTH_READ);
 
 $search_limit = 500;
 $forum_select_size = 16;   // forum select box max rows
@@ -830,7 +830,7 @@ if ($items_display) {
 
         'DL_CONTROLS' => ($dl_search && $dl_user_id_val == $user_id),
         'DL_ACTION' => 'dl_list.php',
-        'MY_POSTS' => (!$post_mode && $my_posts && $user->id == $poster_id_val),
+        'MY_POSTS' => (!$post_mode && $my_posts && user()->id == $poster_id_val),
     ));
 
     print_page('search_results.tpl');

@@ -22,12 +22,10 @@ class Guard
      */
     public static function isAuthor(int $posterId): bool
     {
-        global $userdata;
-
         if (IS_GUEST) {
             return false;
         }
 
-        return $userdata['user_id'] == $posterId;
+        return userdata('user_id') == $posterId;
     }
 }

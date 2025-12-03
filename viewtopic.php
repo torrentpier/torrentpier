@@ -29,7 +29,7 @@ $topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
 $post_id = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int)$_GET[POST_POST_URL] : 0;
 
 // Start session
-$user->session_start();
+user()->session_start();
 
 set_die_append_msg();
 
@@ -156,7 +156,7 @@ if ($post_id && !empty($t_data['post_time']) && ($t_data['topic_replies'] + 1) >
 }
 
 // Auth check
-$is_auth = auth(AUTH_ALL, $forum_id, $userdata, $t_data);
+$is_auth = auth(AUTH_ALL, $forum_id, userdata(), $t_data);
 
 if (!$is_auth['auth_read']) {
     if (IS_GUEST) {
@@ -569,13 +569,13 @@ for ($i = 0; $i < $total_posts; $i++) {
     $rg_signature = $postrow[$i]['group_signature'] ? bbcode2html(htmlCHR($postrow[$i]['group_signature'])) : '';
 
     $poster_avatar = '';
-    if ((!$user->opt_js['h_av'] || $poster_bot) && !$poster_guest) {
+    if ((!user()->opt_js['h_av'] || $poster_bot) && !$poster_guest) {
         $poster_avatar = get_avatar($poster_id, $postrow[$i]['avatar_ext_id'], !bf($postrow[$i]['user_opt'], 'user_opt', 'dis_avatar'));
     }
 
     $poster_rank = $rank_image = '';
     $user_rank = $postrow[$i]['user_rank'];
-    if (!$user->opt_js['h_rnk_i'] and isset($ranks[$user_rank])) {
+    if (!user()->opt_js['h_rnk_i'] and isset($ranks[$user_rank])) {
         $rank_image = (config()->get('show_rank_image') && $ranks[$user_rank]['rank_image']) ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
         $poster_rank = config()->get('show_rank_text') ? $ranks[$user_rank]['rank_title'] : '';
     }
@@ -603,7 +603,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     // Parse message and sig
     $message = get_parsed_post($postrow[$i]);
 
-    $user_sig = (config()->get('allow_sig') && !$user->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
+    $user_sig = (config()->get('allow_sig') && !user()->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
 
     if (bf($postrow[$i]['user_opt'], 'user_opt', 'dis_sig')) {
         $user_sig = __('SIGNATURE_DISABLE');

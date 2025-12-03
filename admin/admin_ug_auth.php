@@ -77,7 +77,7 @@ if ($submit && $mode == 'user') {
     // Make user an admin (if already user)
     if (isset($_POST['userlevel'])) {
         if ($_POST['userlevel'] === 'admin') {
-            if ($userdata['user_id'] == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID) {
+            if (userdata('user_id') == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID) {
                 bb_die(__('AUTH_GENERAL_ERROR'));
             }
 
@@ -94,7 +94,7 @@ if ($submit && $mode == 'user') {
         } // Make admin a user (if already admin)
         elseif ($_POST['userlevel'] === 'user') {
             // ignore if you're trying to change yourself from an admin to user!
-            if ($userdata['user_id'] == $user_id) {
+            if (userdata('user_id') == $user_id) {
                 bb_die(__('AUTH_SELF_ERROR'));
             }
             // Update users level, reset to USER

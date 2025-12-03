@@ -26,7 +26,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     $module = [];
 
     // Scan modules
-    if (!CACHE('bb_cache')->get('admin_module_' . $user->id)) {
+    if (!CACHE('bb_cache')->get('admin_module_' . user()->id)) {
         $dir = opendir('.');
         $setmodules = true;
         while ($file = readdir($dir)) {
@@ -38,11 +38,11 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         closedir($dir);
 
         // Set modules into cache
-        CACHE('bb_cache')->set('admin_module_' . $user->id, $module, 600);
+        CACHE('bb_cache')->set('admin_module_' . user()->id, $module, 600);
     }
 
     // Get modules from cache
-    $module = CACHE('bb_cache')->get('admin_module_' . $user->id);
+    $module = CACHE('bb_cache')->get('admin_module_' . user()->id);
 
     template()->assign_vars([
         'TPL_ADMIN_NAVIGATE' => true,

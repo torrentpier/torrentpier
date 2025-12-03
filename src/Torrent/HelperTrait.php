@@ -45,15 +45,13 @@ trait HelperTrait
      */
     protected static function checkAuth(int $forumId, int $posterId): void
     {
-        global $userdata;
-
         if (IS_ADMIN) {
             return;
         }
 
-        $is_auth = auth(AUTH_ALL, $forumId, $userdata);
+        $is_auth = auth(AUTH_ALL, $forumId, userdata());
 
-        if ($posterId != $userdata['user_id'] && !$is_auth['auth_mod']) {
+        if ($posterId != userdata('user_id') && !$is_auth['auth_mod']) {
             bb_die(__('NOT_MODERATOR'));
         } elseif (!$is_auth['auth_view'] || !$is_auth['auth_attachments']) {
             bb_die(sprintf(__('SORRY_AUTH_READ'), $is_auth['auth_read_type']));

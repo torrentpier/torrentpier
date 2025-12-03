@@ -31,9 +31,9 @@ $mark_read = (request_var('mark', '') === 'topics');
 $anon = GUEST_UID;
 
 // Start session
-$user->session_start();
+user()->session_start();
 
-$lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
+$lastvisit = IS_GUEST ? TIMENOW : userdata('user_lastvisit');
 
 // Caching output
 $req_page = "forum_f{$forum_id}";
@@ -60,7 +60,7 @@ if (!empty($forum_data['forum_desc'])) {
 make_jumpbox();
 
 // Only new
-$only_new = $user->opt_js['only_new'];
+$only_new = user()->opt_js['only_new'];
 $only_new_sql = '';
 if ($only_new == ONLY_NEW_POSTS) {
     $only_new_sql = "AND t.topic_last_post_time > $lastvisit";
@@ -69,7 +69,7 @@ if ($only_new == ONLY_NEW_POSTS) {
 }
 
 // Auth
-$is_auth = auth(AUTH_ALL, $forum_id, $userdata, $forum_data);
+$is_auth = auth(AUTH_ALL, $forum_id, userdata(), $forum_data);
 
 $moderation = (!empty($_REQUEST['mod']) && $is_auth['auth_mod']);
 
@@ -94,7 +94,7 @@ if ($is_auth['auth_mod']) {
     $redirect = url_arg($redirect, 'mod', 1, '&');
     $mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
-    if ($moderation && !$userdata['session_admin']) {
+    if ($moderation && !userdata('session_admin')) {
         redirect($mod_redirect_url);
     }
     if (isset($_REQUEST['tst']) && $_REQUEST['tst'] != -1) {
@@ -128,12 +128,12 @@ if (!$forums = datastore()->get('cat_forums')) {
     $forums = datastore()->get('cat_forums');
 }
 
-if ($forums['forum'][$forum_id]['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) {
+if ($forums['forum'][$forum_id]['allow_porno_topic'] && bf(userdata('user_opt'), 'user_opt', 'user_porn_forums')) {
     bb_die(__('ERROR_PORNO_FORUM'));
 }
 
 if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) && $show_subforums) {
-    $not_auth_forums = $user->get_excluded_forums(AUTH_VIEW);
+    $not_auth_forums = user()->get_excluded_forums(AUTH_VIEW);
     $ignore_forum_sql = ($not_auth_forums) ? "AND f.forum_id NOT IN($not_auth_forums)" : '';
 
     $sql = "
@@ -298,10 +298,10 @@ if ($forum_data['allow_reg_tracker']) {
 
     $join_tor_sql = "
 		LEFT JOIN " . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)
-		LEFT JOIN " . BB_BT_USERS . " bt  ON(bt.user_id = {$userdata['user_id']})
+		LEFT JOIN " . BB_BT_USERS . " bt  ON(bt.user_id = " . userdata('user_id') . ")
 		LEFT JOIN " . BB_BT_TRACKER_SNAP . " sn  ON(tor.topic_id = sn.topic_id)
 	";
-    $join_tor_sql .= $join_dl ? " LEFT JOIN " . BB_BT_DLSTATUS . " dl ON(dl.user_id = {$userdata['user_id']} AND dl.topic_id = t.topic_id)" : '';
+    $join_tor_sql .= $join_dl ? " LEFT JOIN " . BB_BT_DLSTATUS . " dl ON(dl.user_id = " . userdata('user_id') . " AND dl.topic_id = t.topic_id)" : '';
 }
 
 // Title match
@@ -410,7 +410,7 @@ template()->assign_vars([
     'S_AUTH_LIST' => $u_auth,
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
     'U_MARK_READ' => FORUM_URL . $forum_id . "&amp;mark=topics",
-    'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&" . POST_FORUM_URL . "=$forum_id",
+    'U_SEARCH_SELF' => "search.php?uid=" . userdata('user_id') . "&" . POST_FORUM_URL . "=$forum_id",
 ]);
 
 // Okay, lets dump out the page ...
@@ -514,7 +514,7 @@ template()->assign_vars([
     'FOUND_TOPICS' => $found_topics,
 
     'AUTH_MOD' => $is_auth['auth_mod'],
-    'SESSION_ADMIN' => $userdata['session_admin'],
+    'SESSION_ADMIN' => userdata('session_admin'),
     'MOD_REDIRECT_URL' => $mod_redirect_url,
     'MODERATION_ON' => $moderation,
     'PRUNE_DAYS' => !empty($forum_data['prune_days']) ? humanTime((TIMENOW - 86400 * $forum_data['prune_days']), TIMENOW) : false,

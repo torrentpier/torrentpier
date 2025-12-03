@@ -47,7 +47,7 @@ if (isset($_POST['redirect_type']) && $_POST['redirect_type'] == 'search') {
 }
 
 // Start session management
-$user->session_start();
+user()->session_start();
 
 set_die_append_msg();
 
@@ -70,7 +70,7 @@ if ($mode == 'dl_delete' && $topic_id) {
             bb_die('Could not obtain forum_id for this topic');
         }
 
-        $is_auth = auth(AUTH_ALL, $row['forum_id'], $userdata);
+        $is_auth = auth(AUTH_ALL, $row['forum_id'], userdata());
 
         if (!$is_auth['auth_mod']) {
             bb_die(__('NOT_MODERATOR'));
@@ -124,7 +124,7 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
 
     foreach ($topics_ary as $topic_id) {
         $new_dlstatus_ary[] = [
-            'user_id' => (int)$user->id,
+            'user_id' => (int)user()->id,
             'topic_id' => (int)$topic_id,
             'user_status' => (int)$new_dl_status,
         ];

@@ -61,7 +61,7 @@ if (config()->get('bt_allow_spmode_change')) {
 
 $bt_topic_id = $t_data['topic_id'];
 $topic_id = $t_data['topic_id'];
-$bt_user_id = $userdata['user_id'];
+$bt_user_id = userdata('user_id');
 
 // Download count: historical (aggregated) + today's live count
 $live_dl_count = DB()->table(BB_TORRENT_DL)->where('topic_id', $topic_id)->count('*');
@@ -441,14 +441,14 @@ if ($tor_reged && $tor_info) {
                     $tr[$x]++;
 
                     $peerUsername = __('HIDDEN_USER');
-                    if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_username')) {
+                    if (IS_AM || $peer['user_id'] == userdata('user_id') || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_username')) {
                         $releaserSign = (!$guest && $peer['releaser']) ? '&nbsp;<b><sup>&reg;</sup></b>' : '';
                         $peerUsername = profile_url($peer) . $releaserSign;
                         $peerUsername = $peer['update_time'] ? $peerUsername : "<s>$peerUsername</s>";
                     }
 
                     $peerTorrentClient = __('HIDDEN_USER');
-                    if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_torrent_client')) {
+                    if (IS_AM || $peer['user_id'] == userdata('user_id') || !bf($peer['user_opt'], 'user_opt', 'user_hide_torrent_client')) {
                         if (isset($peer['peer_id'])) {
                             $peerTorrentClient = get_user_torrent_client($peer['peer_id']);
                         }
@@ -456,7 +456,7 @@ if ($tor_reged && $tor_info) {
 
                     $peerCountry = __('HIDDEN_USER');
                     if (config()->get('ip2country_settings.enabled')) {
-                        if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_country')) {
+                        if (IS_AM || $peer['user_id'] == userdata('user_id') || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_country')) {
                             if ($infoByIP = infoByIP((!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']), $peer['port'])) {
                                 if (!empty($infoByIP['countryCode'])) {
                                     $peerCountry = render_flag($infoByIP['countryCode'], false);

@@ -15,7 +15,7 @@ $releasing = $seeding = $leeching = [];
 $releasing_count = $seeding_count = $leeching_count = 0;
 
 // Auth
-$excluded_forums_csv = $user->get_excluded_forums(AUTH_VIEW);
+$excluded_forums_csv = user()->get_excluded_forums(AUTH_VIEW);
 $not_auth_forums_sql = ($excluded_forums_csv) ? "
 	AND f.forum_id NOT IN($excluded_forums_csv)
 	AND f.forum_parent NOT IN($excluded_forums_csv)

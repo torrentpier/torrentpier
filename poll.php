@@ -12,7 +12,7 @@ define('BB_SCRIPT', 'vote');
 require __DIR__ . '/common.php';
 
 // Start session management
-$user->session_start(['req_login' => true]);
+user()->session_start(['req_login' => true]);
 
 $mode = (string)$_POST['mode'];
 $topic_id = (int)$_POST['topic_id'];

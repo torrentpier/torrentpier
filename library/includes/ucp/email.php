@@ -60,7 +60,7 @@ if ($row = DB()->fetch_row($sql)) {
 
             $emailer->set_template('profile_send_email', $user_lang);
             $emailer->assign_vars([
-                'FROM_USERNAME' => $userdata['username'],
+                'FROM_USERNAME' => userdata('username'),
                 'TO_USERNAME' => $username,
                 'MESSAGE' => $message
             ]);

@@ -70,7 +70,7 @@ function validate_mode_condition($request_index, $mod_action = '')
 }
 
 // Start session management
-$user->session_start(['req_login' => true]);
+user()->session_start(['req_login' => true]);
 
 // Obtain initial vars
 $forum_id = isset($_REQUEST[POST_FORUM_URL]) ? (int)$_REQUEST[POST_FORUM_URL] : 0;
@@ -143,7 +143,7 @@ if (isset($_POST['cancel']) || IS_GUEST) {
 }
 
 // Start auth check
-$is_auth = auth(AUTH_ALL, $forum_id, $userdata);
+$is_auth = auth(AUTH_ALL, $forum_id, userdata());
 $is_moderator = (IS_AM);
 
 if ($mode == 'ip') {
@@ -151,7 +151,7 @@ if ($mode == 'ip') {
     $is_auth['auth_mod'] = $is_moderator;
 } elseif ($mode == 'move' && !$is_auth['auth_mod']) {
     // User can move his own topic if this forum is "self_moderated"
-    if ($topic_id && $topic_row['self_moderated'] && $topic_row['topic_poster'] == $userdata['user_id']) {
+    if ($topic_id && $topic_row['self_moderated'] && $topic_row['topic_poster'] == userdata('user_id')) {
         $is_auth['auth_mod'] = true;
 
         $_POST['insert_bot_msg'] = 1;
@@ -165,7 +165,7 @@ if (!$is_auth['auth_mod']) {
 }
 
 // Redirect to login page if not admin session
-if ($is_moderator && !$userdata['session_admin']) {
+if ($is_moderator && !userdata('session_admin')) {
     $redirect = $_POST['redirect'] ?? $_SERVER['REQUEST_URI'];
     redirect(LOGIN_URL . "?redirect=$redirect&admin=1");
 }
@@ -197,7 +197,7 @@ switch ($mode) {
         }
 
         $hidden_fields = [
-            'sid' => $userdata['session_id'],
+            'sid' => userdata('session_id'),
             'mode' => $mode,
             POST_FORUM_URL => $forum_id,
             POST_TOPIC_URL => $topic_id
@@ -280,7 +280,7 @@ switch ($mode) {
             if (IS_ADMIN) {
                 $forum_select_mode = 'admin';
             } else {
-                $not_auth_forums_csv = $user->get_not_auth_forums(AUTH_VIEW);
+                $not_auth_forums_csv = user()->get_not_auth_forums(AUTH_VIEW);
                 $forum_select_mode = explode(',', $not_auth_forums_csv);
             }
 
@@ -501,8 +501,8 @@ switch ($mode) {
                 \TorrentPier\Legacy\Admin\Common::sync('forum', [$forum_id, $new_forum_id]);
 
                 //bot
-                $message = __('TOPIC_SPLIT') . '<br /><br /><a href="' . TOPIC_URL . "$topic_id&amp;sid=" . $userdata['session_id'] . '">' . __('TOPIC_SPLIT_OLD') . '</a>';
-                $message .= ' &nbsp;::&nbsp; <a href="' . TOPIC_URL . "$new_topic_id&amp;sid=" . $userdata['session_id'] . '">' . __('TOPIC_SPLIT_NEW') . '</a>';
+                $message = __('TOPIC_SPLIT') . '<br /><br /><a href="' . TOPIC_URL . "$topic_id&amp;sid=" . userdata('session_id') . '">' . __('TOPIC_SPLIT_OLD') . '</a>';
+                $message .= ' &nbsp;::&nbsp; <a href="' . TOPIC_URL . "$new_topic_id&amp;sid=" . userdata('session_id') . '">' . __('TOPIC_SPLIT_NEW') . '</a>';
 
                 // Log action
                 $log_action->mod('mod_topic_split', [
@@ -538,7 +538,7 @@ switch ($mode) {
                 bb_die('Could not get topic / post information');
             }
 
-            $s_hidden_fields = '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" /><input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '" /><input type="hidden" name="' . POST_TOPIC_URL . '" value="' . $topic_id . '" /><input type="hidden" name="mode" value="split" />';
+            $s_hidden_fields = '<input type="hidden" name="sid" value="' . userdata('session_id') . '" /><input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '" /><input type="hidden" name="' . POST_TOPIC_URL . '" value="' . $topic_id . '" /><input type="hidden" name="mode" value="split" />';
 
             if (($total_posts = DB()->num_rows($result)) > 0) {
                 $postrow = DB()->sql_fetchrowset($result);
@@ -620,7 +620,7 @@ switch ($mode) {
         template()->assign_vars([
             'TPL_MODCP_IP' => true,
             'IP' => $ip_this_post,
-            'U_LOOKUP_IP' => !$no_lookup ? "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'] : '',
+            'U_LOOKUP_IP' => !$no_lookup ? "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . userdata('session_id') : '',
         ]);
         unset($no_lookup);
 
@@ -653,7 +653,7 @@ switch ($mode) {
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'IP' => $ip,
                     'POSTS' => $row['postings'],
-                    'U_LOOKUP_IP' => !$no_lookup ? "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $ip . "&amp;sid=" . $userdata['session_id'] : '',
+                    'U_LOOKUP_IP' => !$no_lookup ? "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $ip . "&amp;sid=" . userdata('session_id') : '',
                 ]);
                 unset($no_lookup);
 

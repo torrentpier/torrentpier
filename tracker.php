@@ -20,7 +20,7 @@ $page_cfg['load_tpl_vars'] = [
 $page_cfg['allow_robots'] = false;
 
 // Session start
-$user->session_start(array('req_login' => config()->get('bt_tor_browse_only_reg')));
+user()->session_start(array('req_login' => config()->get('bt_tor_browse_only_reg')));
 
 set_die_append_msg();
 
@@ -340,7 +340,7 @@ if (!$forums = datastore()->get('cat_forums')) {
 $cat_title_html = $forums['cat_title_html'];
 $forum_name_html = $forums['forum_name_html'];
 
-$excluded_forums_csv = $user->get_excluded_forums(AUTH_READ);
+$excluded_forums_csv = user()->get_excluded_forums(AUTH_READ);
 $allowed_forums = array_diff(explode(',', $forums['tracker_forums']), explode(',', $excluded_forums_csv));
 
 foreach ($allowed_forums as $forum_id) {
@@ -863,10 +863,10 @@ template()->assign_vars(array(
     'TITLE_MATCH_NAME' => $title_match_key,
     'TITLE_MATCH_VAL' => htmlCHR($title_match_val),
 
-    'AJAX_TOPICS' => $user->opt_js['tr_t_ax'],
-    'SHOW_TIME_TOPICS' => $user->opt_js['tr_t_t'],
-    'SHOW_CURSOR' => $user->opt_js['hl_tr'],
-    'HIDE_CONTENTS' => $user->opt_js['h_tsp'],
+    'AJAX_TOPICS' => user()->opt_js['tr_t_ax'],
+    'SHOW_TIME_TOPICS' => user()->opt_js['tr_t_t'],
+    'SHOW_CURSOR' => user()->opt_js['hl_tr'],
+    'HIDE_CONTENTS' => user()->opt_js['h_tsp'],
 
     'U_SEARCH_USER' => "search.php?mode=searchuser&input_name=$poster_name_key",
 ));

@@ -123,14 +123,12 @@ function prepare_message($message)
 // Either in a window or inline
 function generate_smilies($mode)
 {
-    global $user;
-
     $inline_columns = 4;
     $inline_rows = 7;
     $window_columns = 8;
 
     if ($mode == 'window') {
-        $user->session_start();
+        user()->session_start();
     }
 
     $data = datastore()->get('smile_replacements');

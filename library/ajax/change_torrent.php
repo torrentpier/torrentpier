@@ -106,7 +106,7 @@ switch ($type) {
             $this->prompt_for_confirm(__('DEL_MOVE_TORRENT'));
         }
         \TorrentPier\Torrent\Registry::delete($topic_id);
-        $url = make_url("modcp.php?" . POST_TOPIC_URL . "={$topic_id}&mode=move&sid={userdata('session_id')}");
+        $url = make_url("modcp.php?" . POST_TOPIC_URL . "={$topic_id}&mode=move&sid=" . userdata('session_id'));
         break;
 }
 

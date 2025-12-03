@@ -31,7 +31,7 @@ $show_dl_buttons = (!IS_GUEST && $dl_topic && config()->get('bt_show_dl_list_but
 // link to clear DL-List
 template()->assign_vars(['S_DL_DELETE' => false]);
 if (($is_auth['auth_mod']) && ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL)) {
-    $s_dl_delete = "<br /><a href=\"dl_list.php?mode=dl_delete&amp;" . POST_TOPIC_URL . "=$topic_id&amp;sid=" . $userdata['session_id'] . '">' . __('DL_LIST_DEL') . '</a>';
+    $s_dl_delete = "<br /><a href=\"dl_list.php?mode=dl_delete&amp;" . POST_TOPIC_URL . "=$topic_id&amp;sid=" . userdata('session_id') . '">' . __('DL_LIST_DEL') . '</a>';
     template()->assign_vars(['S_DL_DELETE' => $s_dl_delete]);
 }
 
@@ -114,7 +114,7 @@ if ($show_dl_buttons) {
     ]);
 
     $dl_hidden_fields = '
-		<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" />
+		<input type="hidden" name="sid" value="' . userdata('session_id') . '" />
 		<input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '" />
 		<input type="hidden" name="' . POST_TOPIC_URL . '" value="' . $topic_id . '" />
 		<input type="hidden" name="mode" value="set_dl_status" />

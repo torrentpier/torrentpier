@@ -34,7 +34,6 @@ class Validate
      */
     public static function username(string $username, bool $check_ban_and_taken = true): bool|string
     {
-        global $user;
         static $name_chars = 'a-z0-9а-яё_@$%^&;(){}\#\-\'.:+ ';
 
         // Check for empty
@@ -69,7 +68,7 @@ class Validate
             // Check taken
             $username_sql = DB()->escape($username);
             if ($row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE username = '$username_sql' LIMIT 1")) {
-                if ((!IS_GUEST && $row['username'] != $user->name) || IS_GUEST) {
+                if ((!IS_GUEST && $row['username'] != user()->name) || IS_GUEST) {
                     return __('USERNAME_TAKEN');
                 }
             }
@@ -99,8 +98,6 @@ class Validate
      */
     public static function email(string $email, bool $check_taken = true)
     {
-        global $userdata;
-
         // Check for empty
         if (empty($email)) {
             return __('CHOOSE_E_MAIL');
@@ -136,7 +133,7 @@ class Validate
         if ($check_taken) {
             $email_sql = DB()->escape($email);
             if ($row = DB()->fetch_row("SELECT `user_email` FROM " . BB_USERS . " WHERE user_email = '$email_sql' LIMIT 1")) {
-                if ($row['user_email'] == $userdata['user_email']) {
+                if ($row['user_email'] == userdata('user_email')) {
                     return false;
                 }
 

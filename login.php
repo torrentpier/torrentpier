@@ -17,12 +17,12 @@ $page_cfg['allow_robots'] = false;
 array_deep($_POST, 'trim');
 
 // Start session management
-$user->session_start();
+user()->session_start();
 
 // Logout
 if (!empty($_GET['logout'])) {
     if (!IS_GUEST) {
-        $user->session_end();
+        user()->session_end();
     }
     redirect('index.php');
 }
@@ -49,7 +49,7 @@ if (!$redirect_url || str_contains(urldecode($redirect_url), "\n") || str_contai
     $redirect_url = 'index.php';
 }
 
-$redirect_url = str_replace("&sid={$user->data['session_id']}", '', $redirect_url);
+$redirect_url = str_replace("&sid=" . user()->data['session_id'], '', $redirect_url);
 
 if (isset($_REQUEST['admin']) && !IS_AM) {
     bb_die(__('NOT_ADMIN'));
@@ -87,7 +87,7 @@ if (isset($_POST['login'])) {
     }
 
     if (!$login_errors) {
-        if ($user->login($_POST, $mod_admin_login)) {
+        if (user()->login($_POST, $mod_admin_login)) {
             $redirect_url = (defined('FIRST_LOGON')) ? config()->get('first_logon_redirect_url') : $redirect_url;
             // Reset when entering the correct login/password combination
             CACHE('bb_login_err')->rm('l_err_' . USER_IP);

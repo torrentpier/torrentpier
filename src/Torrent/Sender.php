@@ -27,8 +27,6 @@ class Sender
      */
     public static function sendWithPasskey(array $t_data): void
     {
-        global $userdata;
-
         $topic_id = $t_data['topic_id'];
         $topic_title = $t_data['topic_title'];
         $filename = Attachment::getPath($topic_id);
@@ -38,7 +36,7 @@ class Sender
         }
 
         $passkey_val = '';
-        $user_id = $userdata['user_id'];
+        $user_id = userdata('user_id');
 
         if (!$passkey_key = config()->get('passkey_key')) {
             bb_die('Could not add passkey (wrong config passkey_key)');
@@ -48,7 +46,7 @@ class Sender
             bb_die(__('PASSKEY_ERR_TOR_NOT_REG'));
         }
 
-        if (bf($userdata['user_opt'], 'user_opt', 'dis_passkey') && !IS_GUEST) {
+        if (bf(userdata('user_opt'), 'user_opt', 'dis_passkey') && !IS_GUEST) {
             bb_die(__('DISALLOWED'));
         }
 
@@ -110,7 +108,7 @@ class Sender
 
         // Add retracker
         if (!empty(config()->get('tracker.retracker_host')) && config()->get('tracker.retracker')) {
-            if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
+            if (bf(userdata('user_opt'), 'user_opt', 'user_retracker') || IS_GUEST) {
                 $tor['announce-list'] = array_merge($tor['announce-list'], [[config()->get('tracker.retracker_host')]]);
             }
         }

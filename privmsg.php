@@ -55,7 +55,7 @@ if ($folder =& $_REQUEST['folder']) {
 }
 
 // Start session management
-$user->session_start(['req_login' => true]);
+user()->session_start(['req_login' => true]);
 
 template()->assign_vars([
     'IN_PM' => true,
@@ -112,27 +112,27 @@ if ($mode == 'read') {
     switch ($folder) {
         case 'inbox':
             $l_box_name = __('INBOX');
-            $pm_sql_user = "AND pm.privmsgs_to_userid = " . $userdata['user_id'] . "
+            $pm_sql_user = "AND pm.privmsgs_to_userid = " . userdata('user_id') . "
 				AND ( pm.privmsgs_type = " . PRIVMSGS_READ_MAIL . "
 					OR pm.privmsgs_type = " . PRIVMSGS_NEW_MAIL . "
 					OR pm.privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " )";
             break;
         case 'outbox':
             $l_box_name = __('OUTBOX');
-            $pm_sql_user = "AND pm.privmsgs_from_userid =  " . $userdata['user_id'] . "
+            $pm_sql_user = "AND pm.privmsgs_from_userid =  " . userdata('user_id') . "
 				AND ( pm.privmsgs_type = " . PRIVMSGS_NEW_MAIL . "
 					OR pm.privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " ) ";
             break;
         case 'sentbox':
             $l_box_name = __('SENTBOX');
-            $pm_sql_user = "AND pm.privmsgs_from_userid =  " . $userdata['user_id'] . "
+            $pm_sql_user = "AND pm.privmsgs_from_userid =  " . userdata('user_id') . "
 				AND pm.privmsgs_type = " . PRIVMSGS_SENT_MAIL;
             break;
         case 'savebox':
             $l_box_name = __('SAVEBOX');
-            $pm_sql_user = "AND ( ( pm.privmsgs_to_userid = " . $userdata['user_id'] . "
+            $pm_sql_user = "AND ( ( pm.privmsgs_to_userid = " . userdata('user_id') . "
 					AND pm.privmsgs_type = " . PRIVMSGS_SAVED_IN_MAIL . " )
-				OR ( pm.privmsgs_from_userid = " . $userdata['user_id'] . "
+				OR ( pm.privmsgs_from_userid = " . userdata('user_id') . "
 					AND pm.privmsgs_type = " . PRIVMSGS_SAVED_OUT_MAIL . " )
 				)";
             break;
@@ -181,12 +181,12 @@ if ($mode == 'read') {
                 break;
         }
 
-        $sql = "UPDATE " . BB_USERS . " SET $sql WHERE user_id = " . $userdata['user_id'];
+        $sql = "UPDATE " . BB_USERS . " SET $sql WHERE user_id = " . userdata('user_id');
         if (!DB()->sql_query($sql)) {
             bb_die('Could not update private message read status for user');
         }
         if (DB()->affected_rows()) {
-            \TorrentPier\Sessions::cache_rm_userdata($userdata);
+            \TorrentPier\Sessions::cache_rm_userdata(userdata());
         }
 
         $sql = "UPDATE " . BB_PRIVMSGS . "
@@ -428,22 +428,22 @@ if ($mode == 'read') {
 
         switch ($folder) {
             case 'inbox':
-                $delete_type = "privmsgs_to_userid = " . $userdata['user_id'] . " AND (
+                $delete_type = "privmsgs_to_userid = " . userdata('user_id') . " AND (
 				privmsgs_type = " . PRIVMSGS_READ_MAIL . " OR privmsgs_type = " . PRIVMSGS_NEW_MAIL . " OR privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " )";
                 break;
 
             case 'outbox':
-                $delete_type = "privmsgs_from_userid = " . $userdata['user_id'] . " AND ( privmsgs_type = " . PRIVMSGS_NEW_MAIL . " OR privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " )";
+                $delete_type = "privmsgs_from_userid = " . userdata('user_id') . " AND ( privmsgs_type = " . PRIVMSGS_NEW_MAIL . " OR privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " )";
                 break;
 
             case 'sentbox':
-                $delete_type = "privmsgs_from_userid = " . $userdata['user_id'] . " AND privmsgs_type = " . PRIVMSGS_SENT_MAIL;
+                $delete_type = "privmsgs_from_userid = " . userdata('user_id') . " AND privmsgs_type = " . PRIVMSGS_SENT_MAIL;
                 break;
 
             case 'savebox':
-                $delete_type = "( ( privmsgs_from_userid = " . $userdata['user_id'] . "
+                $delete_type = "( ( privmsgs_from_userid = " . userdata('user_id') . "
 					AND privmsgs_type = " . PRIVMSGS_SAVED_OUT_MAIL . " )
-				OR ( privmsgs_to_userid = " . $userdata['user_id'] . "
+				OR ( privmsgs_to_userid = " . userdata('user_id') . "
 					AND privmsgs_type = " . PRIVMSGS_SAVED_IN_MAIL . " ) )";
                 break;
         }
@@ -469,10 +469,10 @@ if ($mode == 'read') {
             if ($folder == 'inbox' || $folder == 'outbox') {
                 switch ($folder) {
                     case 'inbox':
-                        $sql = "privmsgs_to_userid = " . $userdata['user_id'];
+                        $sql = "privmsgs_to_userid = " . userdata('user_id');
                         break;
                     case 'outbox':
-                        $sql = "privmsgs_from_userid = " . $userdata['user_id'];
+                        $sql = "privmsgs_from_userid = " . userdata('user_id');
                         break;
                 }
 
@@ -547,23 +547,23 @@ if ($mode == 'read') {
 
             switch ($folder) {
                 case 'inbox':
-                    $delete_sql .= "privmsgs_to_userid = " . $userdata['user_id'] . " AND (
+                    $delete_sql .= "privmsgs_to_userid = " . userdata('user_id') . " AND (
 						privmsgs_type = " . PRIVMSGS_READ_MAIL . " OR privmsgs_type = " . PRIVMSGS_NEW_MAIL . " OR privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " )";
                     break;
 
                 case 'outbox':
-                    $delete_sql .= "privmsgs_from_userid = " . $userdata['user_id'] . " AND (
+                    $delete_sql .= "privmsgs_from_userid = " . userdata('user_id') . " AND (
 						privmsgs_type = " . PRIVMSGS_NEW_MAIL . " OR privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " )";
                     break;
 
                 case 'sentbox':
-                    $delete_sql .= "privmsgs_from_userid = " . $userdata['user_id'] . " AND privmsgs_type = " . PRIVMSGS_SENT_MAIL;
+                    $delete_sql .= "privmsgs_from_userid = " . userdata('user_id') . " AND privmsgs_type = " . PRIVMSGS_SENT_MAIL;
                     break;
 
                 case 'savebox':
-                    $delete_sql .= "( ( privmsgs_from_userid = " . $userdata['user_id'] . "
+                    $delete_sql .= "( ( privmsgs_from_userid = " . userdata('user_id') . "
 						AND privmsgs_type = " . PRIVMSGS_SAVED_OUT_MAIL . " )
-					OR ( privmsgs_to_userid = " . $userdata['user_id'] . "
+					OR ( privmsgs_to_userid = " . userdata('user_id') . "
 						AND privmsgs_type = " . PRIVMSGS_SAVED_IN_MAIL . " ) )";
                     break;
             }
@@ -586,9 +586,9 @@ if ($mode == 'read') {
         // See if recipient is at their savebox limit
         $sql = "SELECT COUNT(privmsgs_id) AS savebox_items, MIN(privmsgs_date) AS oldest_post_time
 			FROM " . BB_PRIVMSGS . "
-			WHERE ( ( privmsgs_to_userid = " . $userdata['user_id'] . "
+			WHERE ( ( privmsgs_to_userid = " . userdata('user_id') . "
 					AND privmsgs_type = " . PRIVMSGS_SAVED_IN_MAIL . " )
-				OR ( privmsgs_from_userid = " . $userdata['user_id'] . "
+				OR ( privmsgs_from_userid = " . userdata('user_id') . "
 					AND privmsgs_type = " . PRIVMSGS_SAVED_OUT_MAIL . ") )";
         if (!($result = DB()->sql_query($sql))) {
             bb_die('Could not obtain sent message info for sender');
@@ -597,9 +597,9 @@ if ($mode == 'read') {
         if ($saved_info = DB()->sql_fetchrow($result)) {
             if (config()->get('max_savebox_privmsgs') && $saved_info['savebox_items'] >= config()->get('max_savebox_privmsgs')) {
                 $sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
-					WHERE ( ( privmsgs_to_userid = " . $userdata['user_id'] . "
+					WHERE ( ( privmsgs_to_userid = " . userdata('user_id') . "
 								AND privmsgs_type = " . PRIVMSGS_SAVED_IN_MAIL . " )
-							OR ( privmsgs_from_userid = " . $userdata['user_id'] . "
+							OR ( privmsgs_from_userid = " . userdata('user_id') . "
 								AND privmsgs_type = " . PRIVMSGS_SAVED_OUT_MAIL . ") )
 						AND privmsgs_date = " . $saved_info['oldest_post_time'];
                 if (!$result = DB()->sql_query($sql)) {
@@ -632,10 +632,10 @@ if ($mode == 'read') {
         if ($folder == 'inbox' || $folder == 'outbox') {
             switch ($folder) {
                 case 'inbox':
-                    $sql = "privmsgs_to_userid = " . $userdata['user_id'];
+                    $sql = "privmsgs_to_userid = " . userdata('user_id');
                     break;
                 case 'outbox':
-                    $sql = "privmsgs_from_userid = " . $userdata['user_id'];
+                    $sql = "privmsgs_from_userid = " . userdata('user_id');
                     break;
             }
 
@@ -702,7 +702,7 @@ if ($mode == 'read') {
         switch ($folder) {
             case 'inbox':
                 $saved_sql .= " SET privmsgs_type = " . PRIVMSGS_SAVED_IN_MAIL . "
-					WHERE privmsgs_to_userid = " . $userdata['user_id'] . "
+					WHERE privmsgs_to_userid = " . userdata('user_id') . "
 						AND ( privmsgs_type = " . PRIVMSGS_READ_MAIL . "
 							OR privmsgs_type = " . PRIVMSGS_NEW_MAIL . "
 							OR privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . ")";
@@ -710,14 +710,14 @@ if ($mode == 'read') {
 
             case 'outbox':
                 $saved_sql .= " SET privmsgs_type = " . PRIVMSGS_SAVED_OUT_MAIL . "
-					WHERE privmsgs_from_userid = " . $userdata['user_id'] . "
+					WHERE privmsgs_from_userid = " . userdata('user_id') . "
 						AND ( privmsgs_type = " . PRIVMSGS_NEW_MAIL . "
 							OR privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " ) ";
                 break;
 
             case 'sentbox':
                 $saved_sql .= " SET privmsgs_type = " . PRIVMSGS_SAVED_OUT_MAIL . "
-					WHERE privmsgs_from_userid = " . $userdata['user_id'] . "
+					WHERE privmsgs_from_userid = " . userdata('user_id') . "
 						AND privmsgs_type = " . PRIVMSGS_SENT_MAIL;
                 break;
         }
@@ -733,7 +733,7 @@ if ($mode == 'read') {
 } elseif ($submit || $refresh || $mode != '') {
     if (IS_USER && $submit && $mode != 'edit') {
         // Flood control
-        $sql = "SELECT MAX(privmsgs_date) AS last_post_time FROM " . BB_PRIVMSGS . " WHERE privmsgs_from_userid = " . $userdata['user_id'];
+        $sql = "SELECT MAX(privmsgs_date) AS last_post_time FROM " . BB_PRIVMSGS . " WHERE privmsgs_from_userid = " . userdata('user_id');
         if ($result = DB()->sql_query($sql)) {
             $db_row = DB()->sql_fetchrow($result);
 
@@ -750,7 +750,7 @@ if ($mode == 'read') {
         $sql = 'SELECT privmsgs_from_userid
 			FROM ' . BB_PRIVMSGS . '
 			WHERE privmsgs_id = ' . (int)$privmsg_id . '
-				AND privmsgs_from_userid = ' . $userdata['user_id'];
+				AND privmsgs_from_userid = ' . userdata('user_id');
 
         if (!($result = DB()->sql_query($sql))) {
             bb_die('Could not obtain message details');
@@ -806,7 +806,7 @@ if ($mode == 'read') {
         //
         // Has admin prevented user from sending PM's?
         //
-        if (bf($userdata['user_opt'], 'user_opt', 'dis_pm')) {
+        if (bf(userdata('user_opt'), 'user_opt', 'dis_pm')) {
             bb_die(__('CANNOT_SEND_PRIVMSG'));
         }
 
@@ -851,10 +851,10 @@ if ($mode == 'read') {
             }
 
             $sql_info = "INSERT INTO " . BB_PRIVMSGS . " (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip)
-				VALUES (" . PRIVMSGS_NEW_MAIL . ", '" . DB()->escape($privmsg_subject) . "', " . $userdata['user_id'] . ", " . $to_userdata['user_id'] . ", $msg_time, '" . USER_IP . "')";
+				VALUES (" . PRIVMSGS_NEW_MAIL . ", '" . DB()->escape($privmsg_subject) . "', " . userdata('user_id') . ", " . $to_userdata['user_id'] . ", $msg_time, '" . USER_IP . "')";
         } else {
             $sql_info = "UPDATE " . BB_PRIVMSGS . "
-				SET privmsgs_type = " . PRIVMSGS_NEW_MAIL . ", privmsgs_subject = '" . DB()->escape($privmsg_subject) . "', privmsgs_from_userid = " . $userdata['user_id'] . ", privmsgs_to_userid = " . $to_userdata['user_id'] . ", privmsgs_date = $msg_time, privmsgs_ip = '" . USER_IP . "'
+				SET privmsgs_type = " . PRIVMSGS_NEW_MAIL . ", privmsgs_subject = '" . DB()->escape($privmsg_subject) . "', privmsgs_from_userid = " . userdata('user_id') . ", privmsgs_to_userid = " . $to_userdata['user_id'] . ", privmsgs_date = $msg_time, privmsgs_ip = '" . USER_IP . "'
 				WHERE privmsgs_id = $privmsg_id";
         }
 
@@ -903,7 +903,7 @@ if ($mode == 'read') {
                 $emailer->set_template('privmsg_notify', $to_userdata['user_lang']);
                 $emailer->assign_vars([
                     'USERNAME' => html_entity_decode($to_username),
-                    'NAME_FROM' => $userdata['username'],
+                    'NAME_FROM' => userdata('username'),
                     'MSG_SUBJECT' => html_entity_decode($privmsg_subject),
                     'U_INBOX' => make_url(PM_URL . "?folder=inbox&mode=read&" . POST_POST_URL . "=$privmsg_sent_id"),
                 ]);
@@ -939,7 +939,7 @@ if ($mode == 'read') {
             }
 
             if ($postrow = DB()->sql_fetchrow($result)) {
-                if ($userdata['user_id'] != $postrow['user_id']) {
+                if (userdata('user_id') != $postrow['user_id']) {
                     bb_die(__('EDIT_OWN_POSTS'));
                 }
             }
@@ -966,7 +966,7 @@ if ($mode == 'read') {
 				FROM " . BB_PRIVMSGS . " pm, " . BB_PRIVMSGS_TEXT . " pmt, " . BB_USERS . " u
 				WHERE pm.privmsgs_id = $privmsg_id
 					AND pmt.privmsgs_text_id = pm.privmsgs_id
-					AND pm.privmsgs_from_userid = " . $userdata['user_id'] . "
+					AND pm.privmsgs_from_userid = " . userdata('user_id') . "
 					AND ( pm.privmsgs_type = " . PRIVMSGS_NEW_MAIL . "
 						OR pm.privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " )
 					AND u.user_id = pm.privmsgs_to_userid";
@@ -988,7 +988,7 @@ if ($mode == 'read') {
 				FROM " . BB_PRIVMSGS . " pm, " . BB_PRIVMSGS_TEXT . " pmt, " . BB_USERS . " u
 				WHERE pm.privmsgs_id = $privmsg_id
 					AND pmt.privmsgs_text_id = pm.privmsgs_id
-					AND pm.privmsgs_to_userid = " . $userdata['user_id'] . "
+					AND pm.privmsgs_to_userid = " . userdata('user_id') . "
 					AND u.user_id = pm.privmsgs_from_userid";
             if (!($result = DB()->sql_query($sql))) {
                 bb_die('Could not obtain private message for editing #2');
@@ -1016,7 +1016,7 @@ if ($mode == 'read') {
     //
     // Has admin prevented user from sending PM's?
     //
-    if (bf($userdata['user_opt'], 'user_opt', 'dis_pm') && $mode != 'edit') {
+    if (bf(userdata('user_opt'), 'user_opt', 'dis_pm') && $mode != 'edit') {
         $message = (__('CANNOT_SEND_PRIVMSG'));
     }
 
@@ -1050,7 +1050,7 @@ if ($mode == 'read') {
             'TOPIC_TITLE' => $preview_subject,
             'POST_SUBJECT' => $preview_subject,
             'MESSAGE_TO' => $to_username,
-            'MESSAGE_FROM' => $userdata['username'],
+            'MESSAGE_FROM' => userdata('username'),
             'POST_DATE' => bb_date(TIMENOW),
             'PREVIEW_MSG' => $preview_message,
 
@@ -1130,23 +1130,23 @@ if ($mode == 'read') {
     //
     // Reset PM counters
     //
-    $userdata['user_new_privmsg'] = 0;
-    $userdata['user_unread_privmsg'] = $userdata['user_new_privmsg'] + $userdata['user_unread_privmsg'];
-    $userdata['user_last_privmsg'] = $userdata['session_start'];
+    user()->data['user_new_privmsg'] = 0;
+    user()->data['user_unread_privmsg'] = userdata('user_new_privmsg') + userdata('user_unread_privmsg');
+    user()->data['user_last_privmsg'] = userdata('session_start');
 
     //
     // Update unread status
     //
-    \TorrentPier\Sessions::db_update_userdata($userdata, [
+    \TorrentPier\Sessions::db_update_userdata(userdata(), [
         'user_unread_privmsg' => 'user_unread_privmsg + user_new_privmsg',
         'user_new_privmsg' => 0,
-        'user_last_privmsg' => $userdata['session_start']
+        'user_last_privmsg' => userdata('session_start')
     ]);
 
     $sql = "UPDATE " . BB_PRIVMSGS . "
 		SET privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . "
 		WHERE privmsgs_type = " . PRIVMSGS_NEW_MAIL . "
-			AND privmsgs_to_userid = " . $userdata['user_id'];
+			AND privmsgs_to_userid = " . userdata('user_id');
     if (!DB()->sql_query($sql)) {
         bb_die('Could not update private message new / read status (2) for user');
     }
@@ -1175,12 +1175,12 @@ if ($mode == 'read') {
 		FROM " . BB_PRIVMSGS . " pm, " . BB_USERS . " u ";
     switch ($folder) {
         case 'inbox':
-            $sql_tot .= "WHERE privmsgs_to_userid = " . $userdata['user_id'] . "
+            $sql_tot .= "WHERE privmsgs_to_userid = " . userdata('user_id') . "
 				AND ( privmsgs_type =  " . PRIVMSGS_NEW_MAIL . "
 					OR privmsgs_type = " . PRIVMSGS_READ_MAIL . "
 					OR privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " )";
 
-            $sql .= "WHERE pm.privmsgs_to_userid = " . $userdata['user_id'] . "
+            $sql .= "WHERE pm.privmsgs_to_userid = " . userdata('user_id') . "
 				AND u.user_id = pm.privmsgs_from_userid
 				AND ( pm.privmsgs_type =  " . PRIVMSGS_NEW_MAIL . "
 					OR pm.privmsgs_type = " . PRIVMSGS_READ_MAIL . "
@@ -1188,35 +1188,35 @@ if ($mode == 'read') {
             break;
 
         case 'outbox':
-            $sql_tot .= "WHERE privmsgs_from_userid = " . $userdata['user_id'] . "
+            $sql_tot .= "WHERE privmsgs_from_userid = " . userdata('user_id') . "
 				AND ( privmsgs_type =  " . PRIVMSGS_NEW_MAIL . "
 					OR privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " )";
 
-            $sql .= "WHERE pm.privmsgs_from_userid = " . $userdata['user_id'] . "
+            $sql .= "WHERE pm.privmsgs_from_userid = " . userdata('user_id') . "
 				AND u.user_id = pm.privmsgs_to_userid
 				AND ( pm.privmsgs_type =  " . PRIVMSGS_NEW_MAIL . "
 					OR privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " )";
             break;
 
         case 'sentbox':
-            $sql_tot .= "WHERE privmsgs_from_userid = " . $userdata['user_id'] . "
+            $sql_tot .= "WHERE privmsgs_from_userid = " . userdata('user_id') . "
 				AND privmsgs_type =  " . PRIVMSGS_SENT_MAIL;
 
-            $sql .= "WHERE pm.privmsgs_from_userid = " . $userdata['user_id'] . "
+            $sql .= "WHERE pm.privmsgs_from_userid = " . userdata('user_id') . "
 				AND u.user_id = pm.privmsgs_to_userid
 				AND pm.privmsgs_type =  " . PRIVMSGS_SENT_MAIL;
             break;
 
         case 'savebox':
-            $sql_tot .= "WHERE ( ( privmsgs_to_userid = " . $userdata['user_id'] . "
+            $sql_tot .= "WHERE ( ( privmsgs_to_userid = " . userdata('user_id') . "
 					AND privmsgs_type = " . PRIVMSGS_SAVED_IN_MAIL . " )
-				OR ( privmsgs_from_userid = " . $userdata['user_id'] . "
+				OR ( privmsgs_from_userid = " . userdata('user_id') . "
 					AND privmsgs_type = " . PRIVMSGS_SAVED_OUT_MAIL . ") )";
 
             $sql .= "WHERE u.user_id = pm.privmsgs_from_userid
-				AND ( ( pm.privmsgs_to_userid = " . $userdata['user_id'] . "
+				AND ( ( pm.privmsgs_to_userid = " . userdata('user_id') . "
 					AND pm.privmsgs_type = " . PRIVMSGS_SAVED_IN_MAIL . " )
-				OR ( pm.privmsgs_from_userid = " . $userdata['user_id'] . "
+				OR ( pm.privmsgs_from_userid = " . userdata('user_id') . "
 					AND pm.privmsgs_type = " . PRIVMSGS_SAVED_OUT_MAIL . " ) )";
             break;
 

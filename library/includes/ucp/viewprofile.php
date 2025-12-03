@@ -22,7 +22,7 @@ if (IS_GUEST) {
     redirect(LOGIN_URL . "?redirect={$_SERVER['REQUEST_URI']}");
 } else {
     if (empty($_GET[POST_USERS_URL])) {
-        $_GET[POST_USERS_URL] = $userdata['user_id'];
+        $_GET[POST_USERS_URL] = userdata('user_id');
     }
 }
 
@@ -51,7 +51,7 @@ if (IS_ADMIN) {
     $rank_select = build_select('rank-sel', $rank_select, $user_rank);
 }
 
-if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == $userdata['user_id'] || IS_ADMIN) {
+if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == userdata('user_id') || IS_ADMIN) {
     $email_uri = (config()->get('board_email_form')) ? 'profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
     $email = '<a class="editable" href="' . $email_uri . '">' . $profiledata['user_email'] . '</a>';
 } else {
@@ -62,7 +62,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['
 // Generate page
 //
 
-$profile_user_id = ($profiledata['user_id'] == $userdata['user_id']);
+$profile_user_id = ($profiledata['user_id'] == userdata('user_id'));
 
 $signature = (config()->get('allow_sig') && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
 

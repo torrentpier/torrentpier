@@ -45,7 +45,7 @@ $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
 
 // Start session management
-$user->session_start();
+user()->session_start();
 
 set_die_append_msg($forum_id, $topic_id);
 
@@ -54,7 +54,7 @@ $is_auth = [];
 switch ($mode) {
     case 'newtopic':
     case 'new_rel':
-        if (bf($userdata['user_opt'], 'user_opt', 'dis_topic')) {
+        if (bf(userdata('user_opt'), 'user_opt', 'dis_topic')) {
             bb_die(__('RULES_POST_CANNOT'));
         }
         if ($topic_type == POST_ANNOUNCE) {
@@ -68,14 +68,14 @@ switch ($mode) {
 
     case 'reply':
     case 'quote':
-        if (bf($userdata['user_opt'], 'user_opt', 'dis_post')) {
+        if (bf(userdata('user_opt'), 'user_opt', 'dis_post')) {
             bb_die(__('RULES_REPLY_CANNOT'));
         }
         $is_auth_type = 'auth_reply';
         break;
 
     case 'editpost':
-        if (bf($userdata['user_opt'], 'user_opt', 'dis_post_edit')) {
+        if (bf(userdata('user_opt'), 'user_opt', 'dis_post_edit')) {
             bb_die(__('RULES_EDIT_CANNOT'));
         }
         $is_auth_type = 'auth_edit';
@@ -149,7 +149,7 @@ if ($post_info = DB()->fetch_row($sql)) {
 
     set_die_append_msg($forum_id);
 
-    $is_auth = auth(AUTH_ALL, $forum_id, $userdata, $post_info);
+    $is_auth = auth(AUTH_ALL, $forum_id, userdata(), $post_info);
 
     if ($post_info['forum_status'] == FORUM_LOCKED && !$is_auth['auth_mod']) {
         bb_die(__('FORUM_LOCKED'));
@@ -160,7 +160,7 @@ if ($post_info = DB()->fetch_row($sql)) {
     if ($mode == 'editpost' || $mode == 'delete') {
         $topic_id = $post_info['topic_id'];
 
-        $post_data['poster_post'] = ($post_info['poster_id'] == $userdata['user_id']);
+        $post_data['poster_post'] = ($post_info['poster_id'] == userdata('user_id'));
         $post_data['first_post'] = ($post_info['topic_first_post_id'] == $post_id);
         $post_data['last_post'] = ($post_info['topic_last_post_id'] == $post_id);
         $post_data['last_topic'] = ($post_info['forum_last_post_id'] == $post_id);
@@ -171,7 +171,7 @@ if ($post_info = DB()->fetch_row($sql)) {
         $switch_rg_sig = (bool)$post_info['attach_rg_sig'];
 
         // Can this user edit/delete the post?
-        if ($post_info['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod']) {
+        if ($post_info['poster_id'] != userdata('user_id') && !$is_auth['auth_mod']) {
             $auth_err = ($delete || $mode == 'delete') ? __('DELETE_OWN_POSTS') : __('EDIT_OWN_POSTS');
         } elseif (!$post_data['last_post'] && !$is_auth['auth_mod'] && ($mode == 'delete' || $delete)) {
             $auth_err = __('CANNOT_DELETE_REPLIED');
@@ -225,7 +225,7 @@ if ($mode == 'new_rel') {
     if ($tor_status = implode(',', config()->get('tor_cannot_new'))) {
         $sql = DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
 			FROM " . BB_BT_TORRENTS . " tor, " . BB_TOPICS . " t
-			WHERE poster_id = {$userdata['user_id']}
+			WHERE poster_id = " . userdata('user_id') . "
 				AND tor.topic_id = t.topic_id
 				AND tor.tor_status IN ($tor_status)
 			ORDER BY tor.reg_time
@@ -277,10 +277,10 @@ if ($submit || $refresh) {
     }
     $notify_user = (int)!empty($_POST['notify']);
 } else {
-    $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
+    $notify_user = bf(userdata('user_opt'), 'user_opt', 'user_notify');
 
     if (!IS_GUEST && $mode != 'newtopic' && !$notify_user) {
-        $notify_user = (int)DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . $userdata['user_id']);
+        $notify_user = (int)DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . userdata('user_id'));
     }
 }
 
@@ -372,14 +372,14 @@ if (($delete || $mode == 'delete') && !$confirm) {
             if (!$post_data['first_post']) {
                 \TorrentPier\Legacy\Post::delete_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id);
             } else {
-                redirect('modcp.php?' . POST_TOPIC_URL . "=$topic_id&mode=delete&sid=" . $userdata['session_id']);
+                redirect('modcp.php?' . POST_TOPIC_URL . "=$topic_id&mode=delete&sid=" . userdata('session_id'));
             }
             break;
     }
 
     if (!$error_msg) {
         if (!in_array($mode, ['editpost', 'delete'])) {
-            $user_id = ($mode == 'reply' || $mode == 'newtopic') ? $userdata['user_id'] : $post_data['poster_id'];
+            $user_id = ($mode == 'reply' || $mode == 'newtopic') ? userdata('user_id') : $post_data['poster_id'];
             \TorrentPier\Legacy\Post::update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
         }
         // Handle file upload for the first post in tracker forums
@@ -411,7 +411,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
         if (\TorrentPier\Attachment::exists($topic_id) && !$error_msg) {
             \TorrentPier\Torrent\Registry::autoRegister(
                 $topic_id,
-                $userdata['user_id'],
+                userdata('user_id'),
                 $forum_id,
                 $post_info['forum_parent'] ?? null
             );
@@ -454,10 +454,10 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
 } else {
     // User default entry point
     if ($mode == 'newtopic') {
-        $username = !IS_GUEST ? $userdata['username'] : '';
+        $username = !IS_GUEST ? userdata('username') : '';
         $subject = $message = '';
     } elseif ($mode == 'reply') {
-        $username = !IS_GUEST ? $userdata['username'] : '';
+        $username = !IS_GUEST ? userdata('username') : '';
         $subject = $message = '';
     } elseif ($mode == 'quote' || $mode == 'editpost') {
         $subject = ($post_data['first_post']) ? $post_info['topic_title'] : '';
@@ -562,13 +562,13 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
 //bt end
 
 // Get poster release group data
-if ($userdata['user_level'] == GROUP_MEMBER || IS_AM) {
+if (userdata('user_level') == GROUP_MEMBER || IS_AM) {
     $poster_rgroups = '';
 
     $sql = "SELECT ug.group_id, g.group_name, g.release_group
 		FROM " . BB_USER_GROUP . " ug
 		INNER JOIN " . BB_GROUPS . " g ON(g.group_id = ug.group_id)
-		WHERE ug.user_id = {$userdata['user_id']}
+		WHERE ug.user_id = " . userdata('user_id') . "
 			AND g.release_group = 1
 		ORDER BY g.group_name";
 

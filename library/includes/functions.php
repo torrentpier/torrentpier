@@ -91,9 +91,9 @@ function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW
             $val++;
             $curr_track_val = !empty($tracking_ary[$key]) ? $tracking_ary[$key] : 0;
 
-            if ($val > max($curr_track_val, $user->data['user_lastvisit'])) {
+            if ($val > max($curr_track_val, user()->data['user_lastvisit'])) {
                 $tracking_ary[$key] = $val;
-            } elseif ($curr_track_val < $user->data['user_lastvisit']) {
+            } elseif ($curr_track_val < user()->data['user_lastvisit']) {
                 unset($tracking_ary[$key]);
             }
         }
@@ -119,7 +119,7 @@ function get_last_read($topic_id = 0, $forum_id = 0)
 
     $t = $tracking_topics[$topic_id] ?? 0;
     $f = $tracking_forums[$forum_id] ?? 0;
-    return max($t, $f, $user->data['user_lastvisit']);
+    return max($t, $f, user()->data['user_lastvisit']);
 }
 
 function is_unread($ref, $topic_id = 0, $forum_id = 0): bool
@@ -809,8 +809,6 @@ function wbr($text, $max_word_length = HTML_WBR_LENGTH)
 
 function generate_user_info($row, bool $have_auth = IS_ADMIN): array
 {
-    global $userdata;
-
     $from = !empty($row['user_from']) ? render_flag($row['user_from'], false) : __('NOSELECT');
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
     $user_time = !empty($row['user_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($row['user_time']), humanTime($row['user_time'])) : __('NOSELECT');
@@ -818,7 +816,7 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
     $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . __('SEND_PM_SHORT') . '</a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
-    if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $have_auth || ($row['user_id'] == $userdata['user_id'])) {
+    if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $have_auth || ($row['user_id'] == userdata('user_id'))) {
         $email_uri = (config()->get('board_email_form')) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
@@ -1129,16 +1127,14 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
 
 function setup_style()
 {
-    global $userdata;
-
     // AdminCP works only with default template
     $tpl_dir_name = defined('IN_ADMIN') ? 'default' : basename(config()->get('tpl_name'));
     $stylesheet = defined('IN_ADMIN') ? 'main.css' : basename(config()->get('stylesheet'));
 
-    if (!IS_GUEST && !empty($userdata['tpl_name'])) {
+    if (!IS_GUEST && !empty(userdata('tpl_name'))) {
         foreach (config()->get('templates') as $folder => $name) {
-            if ($userdata['tpl_name'] == $folder) {
-                $tpl_dir_name = basename($userdata['tpl_name']);
+            if (userdata('tpl_name') == $folder) {
+                $tpl_dir_name = basename(userdata('tpl_name'));
             }
         }
     }
@@ -1168,17 +1164,15 @@ function setup_style()
  */
 function bb_date(int $timestamp, string|false $format = false, bool $friendly_date = true): string
 {
-    global $userdata;
-
     // Determine timezone offset
     if (!defined('IS_GUEST') || IS_GUEST) {
         $tz = (float)config()->get('board_timezone', 0);
     } else {
-        $tz = (float)($userdata['user_timezone'] ?? 0);
+        $tz = (float)(userdata('user_timezone') ?? 0);
     }
 
     // Determine user locale
-    $locale = $userdata['user_lang'] ?? config()->get('default_lang', 'en');
+    $locale = userdata('user_lang') ?? config()->get('default_lang', 'en');
 
     // Prepare labels for "today" and "yesterday"
     $labels = [
@@ -1424,7 +1418,7 @@ function bb_preg_quote($str, $delimiter)
 
 function bb_die($msg_text, $status_code = null)
 {
-    global $ajax, $theme, $userdata, $user;
+    global $ajax, $theme;
 
     if (isset($status_code)) {
         http_response_code($status_code);
@@ -1445,8 +1439,8 @@ function bb_die($msg_text, $status_code = null)
     lang()->initializeLanguage();
 
     // If empty session
-    if (empty($userdata)) {
-        $userdata = $user->session_start();
+    if (empty(userdata())) {
+        user()->session_start();
     }
 
     // If the header hasn't been output then do it
@@ -2011,8 +2005,6 @@ function set_pr_die_append_msg($pr_uid)
 
 function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
 {
-    global $userdata;
-
     $subject = DB()->escape($subject);
     $message = DB()->escape($message);
 
@@ -2021,7 +2013,7 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
     } elseif ($row = DB()->fetch_row("SELECT user_reg_ip FROM " . BB_USERS . " WHERE user_id = $poster_id")) {
         $poster_ip = $row['user_reg_ip'];
     } else {
-        $poster_id = $userdata['user_id'];
+        $poster_id = userdata('user_id');
         $poster_ip = USER_IP;
     }
 

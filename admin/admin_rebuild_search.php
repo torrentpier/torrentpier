@@ -412,7 +412,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
         'LAST_SAVED_PROCESSING' => $last_saved_processing,
 
-        'SESSION_ID' => $userdata['session_id'],
+        'SESSION_ID' => userdata('session_id'),
 
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_REBUILD_SEARCH_ACTION' => 'admin_rebuild_search.php?mode=submit',

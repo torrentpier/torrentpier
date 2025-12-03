@@ -17,7 +17,7 @@ $ajax = new TorrentPier\Ajax();
 $ajax->init();
 
 // Init userdata
-$user->session_start();
+user()->session_start();
 
 // Load actions required modules
 switch ($ajax->action) {

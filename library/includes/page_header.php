@@ -16,9 +16,9 @@ if (defined('PAGE_HEADER_SENT')) {
 }
 
 // Parse and show the overall page header
-global $page_cfg, $userdata, $user, $ads;
+global $page_cfg, $ads;
 
-$logged_in = (int)!empty($userdata['session_logged_in']);
+$logged_in = (int)!empty(userdata('session_logged_in'));
 
 // Generate logged in/logged out status
 if ($logged_in) {
@@ -30,7 +30,7 @@ if ($logged_in) {
 // Online userlist
 if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
     $online_full = !empty($_REQUEST['online_full']);
-    $online_list = $online_full ? 'online_' . $userdata['user_lang'] : 'online_short_' . $userdata['user_lang'];
+    $online_list = $online_full ? 'online_' . userdata('user_lang') : 'online_short_' . userdata('user_lang');
 
     ${$online_list} = [
         'stat' => '',
@@ -62,44 +62,44 @@ $pm_info = __('NO_NEW_PM');
 $have_new_pm = $have_unread_pm = 0;
 
 if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
-    if ($userdata['user_new_privmsg']) {
-        $have_new_pm = $userdata['user_new_privmsg'];
+    if (userdata('user_new_privmsg')) {
+        $have_new_pm = userdata('user_new_privmsg');
         $icon_pm = theme_images('pm_new_msg');
-        $pm_info = declension($userdata['user_new_privmsg'], __('NEW_PMS_DECLENSION'), __('NEW_PMS_FORMAT'));
+        $pm_info = declension(userdata('user_new_privmsg'), __('NEW_PMS_DECLENSION'), __('NEW_PMS_FORMAT'));
 
-        if ($userdata['user_last_privmsg'] > $userdata['user_lastvisit'] && defined('IN_PM')) {
-            $userdata['user_last_privmsg'] = $userdata['user_lastvisit'];
+        if (userdata('user_last_privmsg') > userdata('user_lastvisit') && defined('IN_PM')) {
+            user()->data['user_last_privmsg'] = userdata('user_lastvisit');
 
-            \TorrentPier\Sessions::db_update_userdata($userdata, [
-                'user_last_privmsg' => $userdata['user_lastvisit']
+            \TorrentPier\Sessions::db_update_userdata(userdata(), [
+                'user_last_privmsg' => userdata('user_lastvisit')
             ]);
 
-            $have_new_pm = ($userdata['user_new_privmsg'] > 1);
+            $have_new_pm = (userdata('user_new_privmsg') > 1);
         }
     }
-    if (!$have_new_pm && $userdata['user_unread_privmsg']) {
+    if (!$have_new_pm && userdata('user_unread_privmsg')) {
         // sync unread pm count
         if (defined('IN_PM')) {
             $row = DB()->fetch_row("
 				SELECT COUNT(*) AS pm_count
 				FROM " . BB_PRIVMSGS . "
-				WHERE privmsgs_to_userid = " . $userdata['user_id'] . "
+				WHERE privmsgs_to_userid = " . userdata('user_id') . "
 					AND privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . "
 				GROUP BY privmsgs_to_userid
 			");
 
             $real_unread_pm_count = (int)($row['pm_count'] ?? 0);
 
-            if ($userdata['user_unread_privmsg'] != $real_unread_pm_count) {
-                $userdata['user_unread_privmsg'] = $real_unread_pm_count;
+            if (userdata('user_unread_privmsg') != $real_unread_pm_count) {
+                user()->data['user_unread_privmsg'] = $real_unread_pm_count;
 
-                \TorrentPier\Sessions::db_update_userdata($userdata, [
+                \TorrentPier\Sessions::db_update_userdata(userdata(), [
                     'user_unread_privmsg' => $real_unread_pm_count
                 ]);
             }
         }
 
-        $pm_info = declension($userdata['user_unread_privmsg'], __('UNREAD_PMS_DECLENSION'), __('UNREAD_PMS_FORMAT'));
+        $pm_info = declension(userdata('user_unread_privmsg'), __('UNREAD_PMS_DECLENSION'), __('UNREAD_PMS_FORMAT'));
         $have_unread_pm = true;
     }
 }
@@ -116,14 +116,15 @@ template()->assign_vars([
     'IN_ADMIN' => defined('IN_ADMIN'),
     'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
 
-    'USER_LANG' => $userdata['user_lang'],
-    'USER_LANG_DIRECTION' => (function() use ($userdata) {
+    'USER_LANG' => userdata('user_lang'),
+    'USER_LANG_DIRECTION' => (function() {
         $langConfig = config()->get('lang') ?? [];
-        return (isset($langConfig[$userdata['user_lang']]['rtl']) && $langConfig[$userdata['user_lang']]['rtl'] === true) ? 'rtl' : 'ltr';
+        $userLang = userdata('user_lang');
+        return (isset($langConfig[$userLang]['rtl']) && $langConfig[$userLang]['rtl'] === true) ? 'rtl' : 'ltr';
     })(),
 
     'INCLUDE_BBCODE_JS' => !empty($page_cfg['include_bbcode_js']),
-    'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),
+    'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode(user()->opt_js, JSON_THROW_ON_ERROR),
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
     'ALLOW_ROBOTS' => !config()->get('board_disable') && (!isset($page_cfg['allow_robots']) || $page_cfg['allow_robots'] === true),
@@ -150,15 +151,15 @@ template()->assign_vars([
     'PRIVMSG_IMG' => $icon_pm,
 
     'LOGGED_IN' => $logged_in,
-    'SESSION_USER_ID' => $userdata['user_id'],
-    'POINTS' => $userdata['user_points'],
-    'THIS_USER' => profile_url($userdata),
-    'THIS_AVATAR' => get_avatar($userdata['user_id'], $userdata['avatar_ext_id'], !bf($userdata['user_opt'], 'user_opt', 'dis_avatar')),
+    'SESSION_USER_ID' => userdata('user_id'),
+    'POINTS' => userdata('user_points'),
+    'THIS_USER' => profile_url(userdata()),
+    'THIS_AVATAR' => get_avatar(userdata('user_id'), userdata('avatar_ext_id'), !bf(userdata('user_opt'), 'user_opt', 'dis_avatar')),
     'SHOW_LOGIN_LINK' => !defined('IN_LOGIN'),
     'AUTOLOGIN_DISABLED' => !config()->get('allow_autologin'),
     'S_LOGIN_ACTION' => LOGIN_URL,
 
-    'U_CUR_DOWNLOADS' => PROFILE_URL . $userdata['user_id'],
+    'U_CUR_DOWNLOADS' => PROFILE_URL . userdata('user_id'),
     'U_FORUM' => 'viewforum.php',
     'U_GROUPS' => 'group.php',
     'U_LOGIN_LOGOUT' => $u_login_logout,
@@ -166,8 +167,8 @@ template()->assign_vars([
     'U_MODCP' => 'modcp.php',
     'U_OPTIONS' => 'profile.php?mode=editprofile',
     'U_PRIVATEMSGS' => PM_URL . "?folder=inbox",
-    'U_PROFILE' => PROFILE_URL . $userdata['user_id'],
-    'U_READ_PM' => PM_URL . "?folder=inbox" . (($userdata['user_newest_pm_id'] && $userdata['user_new_privmsg'] == 1) ? "&mode=read&" . POST_POST_URL . "={$userdata['user_newest_pm_id']}" : ''),
+    'U_PROFILE' => PROFILE_URL . userdata('user_id'),
+    'U_READ_PM' => PM_URL . "?folder=inbox" . ((userdata('user_newest_pm_id') && userdata('user_new_privmsg') == 1) ? "&mode=read&" . POST_POST_URL . "=" . userdata('user_newest_pm_id') : ''),
     'U_REGISTER' => 'profile.php?mode=register',
     'U_SEARCH' => 'search.php',
     'U_SEND_PASSWORD' => "profile.php?mode=sendpassword",
@@ -206,19 +207,19 @@ template()->assign_vars([
     // Misc
     'BOT_UID' => BOT_UID,
     'COOKIE_MARK' => COOKIE_MARK,
-    'SID' => $userdata['session_id'],
-    'SID_HIDDEN' => '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" />',
+    'SID' => userdata('session_id'),
+    'SID_HIDDEN' => '<input type="hidden" name="sid" value="' . userdata('session_id') . '" />',
 
     'CHECKED' => HTML_CHECKED,
     'DISABLED' => HTML_DISABLED,
     'READONLY' => HTML_READONLY,
     'SELECTED' => HTML_SELECTED,
 
-    'U_SEARCH_SELF_BY_LAST' => "search.php?uid={$userdata['user_id']}&amp;o=5",
+    'U_SEARCH_SELF_BY_LAST' => "search.php?uid=" . userdata('user_id') . "&amp;o=5",
     'U_WATCHED_TOPICS' => 'profile.php?mode=watch'
 ]);
 
-if (!empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty($userdata['torhelp'])) {
+if (!empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty(userdata('torhelp'))) {
     $ignore_time = !empty($_COOKIE['torhelp']) ? (int)$_COOKIE['torhelp'] : 0;
 
     if (TIMENOW > $ignore_time) {
@@ -229,7 +230,7 @@ if (!empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty($use
         $sql = "
 			SELECT topic_id, topic_title
 			FROM " . BB_TOPICS . "
-			WHERE topic_id IN(" . $userdata['torhelp'] . ")
+			WHERE topic_id IN(" . userdata('torhelp') . ")
 			LIMIT 8
 		";
         $torhelp_topics = [];

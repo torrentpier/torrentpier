@@ -78,7 +78,7 @@ switch ($mode) {
         }
 
         $columns = 'topic_id, user_id, time';
-        $values = "$topic_id, {userdata('user_id')}, " . TIMENOW;
+        $values = "$topic_id, " . userdata('user_id') . ", " . TIMENOW;
         DB()->query('INSERT IGNORE INTO ' . BB_THX . " ($columns) VALUES ($values)");
 
         $cached_thanks[userdata('user_id')] = [

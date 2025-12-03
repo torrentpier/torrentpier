@@ -14,9 +14,8 @@ if (!defined('BB_ROOT')) {
 /**
  * Define some basic configuration arrays
  */
-$userdata = $theme = $bf = [];
+$theme = $bf = [];
 $gen_simple_header = false;
-$user = null;
 
 // Obtain and encode user IP
 $client_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
@@ -388,9 +387,7 @@ $wordCensor = censor();
 
 $log_action = new TorrentPier\Legacy\LogAction();
 $html = new TorrentPier\Legacy\Common\Html();
-$user = new TorrentPier\Legacy\Common\User();
 
-$userdata =& $user->data;
 
 /**
  * Cron

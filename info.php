@@ -12,7 +12,7 @@ define('BB_SCRIPT', 'info');
 require __DIR__ . '/common.php';
 
 // Start session management
-$user->session_start();
+user()->session_start();
 
 $info = [];
 $htmlDir = LANG_DIR . 'html/';

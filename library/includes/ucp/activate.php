@@ -26,7 +26,7 @@ if ($row = DB()->sql_fetchrow($result)) {
     if ($row['user_active'] && trim($row['user_actkey']) == '') {
         bb_die(__('ALREADY_ACTIVATED'));
     } elseif ((trim($row['user_actkey']) == trim($_GET['act_key'])) && (trim($row['user_actkey']) != '')) {
-        $sql_update_pass = ($row['user_newpasswd'] != '') ? ", user_password = '" . $user->password_hash($row['user_newpasswd']) . "', user_newpasswd = ''" : '';
+        $sql_update_pass = ($row['user_newpasswd'] != '') ? ", user_password = '" . user()->password_hash($row['user_newpasswd']) . "', user_newpasswd = ''" : '';
 
         $sql = "UPDATE " . BB_USERS . "
 			SET user_active = 1, user_actkey = ''" . $sql_update_pass . "

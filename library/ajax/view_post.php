@@ -11,8 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $user;
-
 $post_id = isset($this->request['post_id']) ? (int)$this->request['post_id'] : null;
 $topic_id = isset($this->request['topic_id']) ? (int)$this->request['topic_id'] : null;
 $return_text = config()->get('show_post_bbcode_button.enabled') && isset($this->request['return_text']) && (bool)$this->request['return_text'];
@@ -47,7 +45,7 @@ if ($post_data['auth_read'] == AUTH_REG) {
         $this->ajax_die(__('NEED_TO_LOGIN_FIRST'));
     }
 } elseif ($post_data['auth_read'] != AUTH_ALL) {
-    $is_auth = auth(AUTH_READ, $post_data['forum_id'], $user->data, $post_data);
+    $is_auth = auth(AUTH_READ, $post_data['forum_id'], user()->data, $post_data);
     if (!$is_auth['auth_read']) {
         $this->ajax_die(__('TOPIC_POST_NOT_EXIST'));
     }

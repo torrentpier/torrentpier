@@ -13,7 +13,7 @@ define('IN_PROFILE', true);
 require __DIR__ . '/common.php';
 
 // Start session management
-$user->session_start();
+user()->session_start();
 
 set_die_append_msg();
 $mode = request_var('mode', 'viewprofile');

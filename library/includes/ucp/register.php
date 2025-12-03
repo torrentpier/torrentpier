@@ -134,9 +134,9 @@ switch ($mode) {
         // Select a profile: your own for the user, any for the admin
         if (IS_ADMIN && !empty($_REQUEST[POST_USERS_URL])) {
             $pr_user_id = (int)$_REQUEST[POST_USERS_URL];
-            $adm_edit = ($pr_user_id != $userdata['user_id']);
+            $adm_edit = ($pr_user_id != userdata('user_id'));
         } else {
-            $pr_user_id = $userdata['user_id'];
+            $pr_user_id = userdata('user_id');
         }
         $profile_fields_sql = implode(', ', array_keys($profile_fields));
         $sql = "
@@ -243,7 +243,7 @@ foreach ($profile_fields as $field => $can_edit) {
                         $errors[] = $err;
                     }
 
-                    $db_data['user_password'] = $user->password_hash($new_pass);
+                    $db_data['user_password'] = user()->password_hash($new_pass);
                 }
 
                 if ($mode == 'register') {
@@ -252,7 +252,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     }
                 } else {
                     if (!empty($cur_pass)) {
-                        $cur_pass_valid = $user->checkPassword($cur_pass, $pr_data);
+                        $cur_pass_valid = user()->checkPassword($cur_pass, $pr_data);
                     }
                     if (!empty($new_pass) && !$cur_pass_valid) {
                         $errors[] = __('CHOOSE_PASS_FAILED');
@@ -655,7 +655,7 @@ if ($submit && !$errors) {
                 $emailer->send();
 
                 $message = __('PROFILE_UPDATED_INACTIVE');
-                $user->session_end();
+                user()->session_end();
             } else {
                 meta_refresh('index.php', 10);
                 $message = __('PROFILE_UPDATED');
@@ -670,7 +670,7 @@ if ($submit && !$errors) {
                 sync_user_to_manticore($pr_data['user_id'], $db_data['username']);
             }
 
-            if ($pr_data['user_id'] != $userdata['user_id']) {
+            if ($pr_data['user_id'] != userdata('user_id')) {
                 if ($pr_data['user_level'] == MOD && !empty($db_data['username'])) {
                     datastore()->update('moderators');
                 }
@@ -719,7 +719,7 @@ template()->assign_vars([
     'SIG_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_sig'),
 
     'PR_USER_ID' => $pr_data['user_id'],
-    'U_RESET_AUTOLOGIN' => LOGIN_URL . "?logout=1&amp;reset_autologin=1&amp;sid={$userdata['session_id']}",
+    'U_RESET_AUTOLOGIN' => LOGIN_URL . "?logout=1&amp;reset_autologin=1&amp;sid=" . userdata('session_id'),
 ]);
 
 print_page('usercp_register.tpl');

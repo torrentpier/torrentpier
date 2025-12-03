@@ -14,7 +14,7 @@ require __DIR__ . '/common.php';
 $page_cfg['include_bbcode_js'] = true;
 
 // Start session management
-$user->session_start(['req_login' => true]);
+user()->session_start(['req_login' => true]);
 
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : null;
 $group_info = [];
