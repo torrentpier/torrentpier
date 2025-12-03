@@ -865,13 +865,11 @@ function get_bt_userdata($user_id)
 
 function show_bt_userdata($user_id): void
 {
-    global $template;
-
     if (!$btu = get_bt_userdata($user_id)) {
         return;
     }
 
-    $template->assign_vars([
+    template()->assign_vars([
         'SHOW_BT_USERDATA' => true,
         'UP_TOTAL' => humn_size($btu['u_up_total']),
         'UP_BONUS' => humn_size($btu['u_up_bonus']),
@@ -1053,7 +1051,7 @@ function get_userdata(int|string $u, bool $is_name = false, bool $allow_guest = 
 
 function make_jumpbox(): void
 {
-    global $datastore, $template;
+    global $datastore;
 
     if (!config()->get('show_jumpbox')) {
         return;
@@ -1064,7 +1062,7 @@ function make_jumpbox(): void
         $jumpbox = $datastore->get('jumpbox');
     }
 
-    $template->assign_vars(['JUMPBOX' => IS_GUEST ? DB()->escape($jumpbox['guest']) : DB()->escape($jumpbox['user'])]);
+    template()->assign_vars(['JUMPBOX' => IS_GUEST ? DB()->escape($jumpbox['guest']) : DB()->escape($jumpbox['user'])]);
 }
 
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
@@ -1133,7 +1131,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
 
 function setup_style()
 {
-    global $template, $userdata;
+    global $userdata;
 
     // AdminCP works only with default template
     $tpl_dir_name = defined('IN_ADMIN') ? 'default' : basename(config()->get('tpl_name'));
@@ -1147,10 +1145,10 @@ function setup_style()
         }
     }
 
-    $template = template(TEMPLATES_DIR . '/' . $tpl_dir_name);
+    template(TEMPLATES_DIR . '/' . $tpl_dir_name);
     $css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
-    $template->assign_vars([
+    template()->assign_vars([
         'BB_ROOT' => BB_ROOT,
         'SPACER' => make_url('styles/images/spacer.gif'),
         'STYLESHEET' => make_url($css_dir . $stylesheet),
@@ -1329,8 +1327,6 @@ function format_registration_intervals(array $restricted_hours): array
 //
 function generate_pagination($base_url, $num_items, $per_page, $start_item, $add_prevnext_text = true)
 {
-    global $template;
-
     $begin_end = 3;
     $from_middle = 1;
 
@@ -1403,7 +1399,7 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
         $pagination = str_replace("{$query_separator}start=0", '', $pagination);
     }
 
-    $template->assign_vars([
+    template()->assign_vars([
         'PAGINATION' => $pagination,
         'PAGE_NUMBER' => sprintf(__('PAGE_OF'), (floor($start_item / $per_page) + 1), ceil($num_items / $per_page)),
         'PG_BASE_URL' => $base_url,
@@ -1471,13 +1467,13 @@ function bb_die($msg_text, $status_code = null)
         $msg_text = $translated;
     }
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_BB_DIE' => true,
         'MESSAGE_TEXT' => $msg_text
     ]);
 
-    $template->set_filenames(['bb_die' => 'common.tpl']);
-    $template->pparse('bb_die');
+    template()->set_filenames(['bb_die' => 'common.tpl']);
+    template()->pparse('bb_die');
 
     require(PAGE_FOOTER);
 
@@ -1511,9 +1507,7 @@ function login_redirect($url = '')
 
 function meta_refresh($url, $time = 5)
 {
-    global $template;
-
-    $template->assign_var('META', '<meta http-equiv="refresh" content="' . $time . ';url=' . $url . '" />');
+    template()->assign_var('META', '<meta http-equiv="refresh" content="' . $time . ';url=' . $url . '" />');
 }
 
 function redirect($url)
@@ -1687,9 +1681,7 @@ function build_topic_pagination($url, $replies, $per_page)
 
 function print_confirmation($tpl_vars): void
 {
-    global $template;
-
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_CONFIRM' => true,
         'CONFIRM_TITLE' => __('CONFIRM'),
         'FORM_METHOD' => 'post'
@@ -1699,7 +1691,7 @@ function print_confirmation($tpl_vars): void
         $tpl_vars['QUESTION'] = __('QUESTION');
     }
 
-    $template->assign_vars($tpl_vars);
+    template()->assign_vars($tpl_vars);
 
     print_page('common.tpl');
 }
@@ -1723,7 +1715,7 @@ function print_confirmation($tpl_vars): void
  */
 function print_page($args, $type = '', $mode = '', array $variables = [])
 {
-    global $template, $gen_simple_header;
+    global $gen_simple_header;
 
     $tpl = (is_array($args) && !empty($args['tpl'])) ? $args['tpl'] : $args;
     $tpl = ($type === 'admin') ? ADMIN_TPL_DIR . $tpl : $tpl;
@@ -1732,15 +1724,15 @@ function print_page($args, $type = '', $mode = '', array $variables = [])
 
     // Assign variables BEFORE the header so PAGE_TITLE is available
     if (!empty($variables)) {
-        $template->assign_vars($variables, true);
+        template()->assign_vars($variables, true);
     }
 
     if ($mode !== 'no_header') {
         require(PAGE_HEADER);
     }
 
-    $template->set_filenames(['body' => $tpl]);
-    $template->pparse('body');
+    template()->set_filenames(['body' => $tpl]);
+    template()->pparse('body');
 
     if ($mode !== 'no_footer') {
         require(PAGE_FOOTER);
@@ -2009,21 +2001,17 @@ function create_magnet(?string $infohash, ?string $infohash_v2, string $auth_key
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
 {
-    global $template;
-
     $msg = '';
     $msg .= $topic_id ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . __('TOPIC_RETURN') . '</a></p>' : '';
     $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . __('FORUM_RETURN') . '</a></p>' : '';
     $msg .= $group_id ? '<p class="mrg_10"><a href="' . GROUP_URL . $group_id . '">' . __('GROUP_RETURN') . '</a></p>' : '';
     $msg .= '<p class="mrg_10"><a href="index.php">' . __('INDEX_RETURN') . '</a></p>';
-    $template->assign_var('BB_DIE_APPEND_MSG', $msg);
+    template()->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
 
 function set_pr_die_append_msg($pr_uid)
 {
-    global $template;
-
-    $template->assign_var('BB_DIE_APPEND_MSG', '
+    template()->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="' . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_RETURN') . '</a>
 		<br /><br />
 		<a href="profile.php?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_EDIT_RETURN') . '</a>
