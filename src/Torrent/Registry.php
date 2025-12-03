@@ -37,9 +37,7 @@ class Registry
      */
     public static function register(int $topicId, string $mode = '', int $torStatus = TOR_NOT_APPROVED, $regTime = TIMENOW): bool
     {
-        global $reg_mode;
-
-        $reg_mode = $mode;
+        self::regMode($mode);
 
         $torrent = self::getTorrentInfo($topicId);
 
@@ -340,9 +338,7 @@ class Registry
      */
     public static function delete(int $topicId, string $mode = ''): void
     {
-        global $reg_mode;
-
-        $reg_mode = $mode;
+        self::regMode($mode);
 
         $torrent = self::getTorrentInfo($topicId);
 

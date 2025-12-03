@@ -288,7 +288,7 @@ if (isset($_GET[$user_releases_key])) {
 } elseif (!empty($_REQUEST['max'])) {
     $_REQUEST[$forum_key] = $search_all;
 } else {
-    // Get "checkbox" and "select" vars
+    // Get "checkbox" and "select" vars (previous_settings not loaded yet, using defaults)
     foreach ($GPC as $name => $params) {
         if ($params[GPC_TYPE] == CHBOX) {
             checkbox_get_val($params[KEY_NAME], ${"{$name}_val"}, $params[DEF_VAL]);

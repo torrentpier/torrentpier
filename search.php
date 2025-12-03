@@ -335,9 +335,9 @@ if ($search_id) {
 // Get simple "CHBOX" and "SELECT" type vars
 foreach ($GPC as $name => $params) {
     if ($params[GPC_TYPE] == CHBOX) {
-        checkbox_get_val($params[KEY_NAME], ${"{$name}_val"}, $params[DEF_VAL]);
+        checkbox_get_val($params[KEY_NAME], ${"{$name}_val"}, $params[DEF_VAL], 1, 0, $previous_settings, $search_id);
     } elseif ($params[GPC_TYPE] == SELECT) {
-        select_get_val($params[KEY_NAME], ${"{$name}_val"}, ${"{$name}_opt"}, $params[DEF_VAL]);
+        select_get_val($params[KEY_NAME], ${"{$name}_val"}, ${"{$name}_opt"}, $params[DEF_VAL], true, $previous_settings);
     }
 }
 

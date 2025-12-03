@@ -357,7 +357,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             if (!$error_msg) {
                 $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
 
-                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing);
+                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing, (bool)$post_info['allow_reg_tracker'], (bool)$is_auth['auth_mod']);
 
                 $post_url = POST_URL . "$post_id#$post_id";
                 $post_msg = ($mode == 'editpost') ? __('EDITED') : __('STORED');

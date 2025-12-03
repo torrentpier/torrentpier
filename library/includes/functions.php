@@ -589,10 +589,8 @@ function bt_show_port($port)
     return config()->get('bt_show_port_only_moder') ? false : $port;
 }
 
-function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
+function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0, ?array $previous_settings = null, $search_id = null)
 {
-    global $previous_settings, $search_id;
-
     if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
         $val = (int)$_REQUEST[$key];
     } elseif (!isset($_REQUEST[$key]) && isset($_REQUEST['prev_' . $key])) {
@@ -604,10 +602,8 @@ function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
     }
 }
 
-function select_get_val($key, &$val, $options_ary, $default, $num = true)
+function select_get_val($key, &$val, $options_ary, $default, $num = true, ?array $previous_settings = null)
 {
-    global $previous_settings;
-
     if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
         if (isset($options_ary[$_REQUEST[$key]])) {
             $val = ($num) ? (int)$_REQUEST[$key] : $_REQUEST[$key];

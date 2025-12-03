@@ -89,12 +89,13 @@ class Post
      * @param int $poster_rg_id
      * @param int $attach_rg_sig
      * @param int $robots_indexing
+     * @param bool $allow_reg_tracker
+     * @param bool $is_moderator
      *
      * @return string
      */
-    public static function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig, $robots_indexing)
+    public static function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig, $robots_indexing, bool $allow_reg_tracker = false, bool $is_moderator = false)
     {
-        global $post_info, $is_auth;
 
         $current_time = TIMENOW;
 
@@ -135,7 +136,7 @@ class Post
         }
 
         if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
-            $topic_dl_type = (isset($_POST['topic_dl_type']) && ($post_info['allow_reg_tracker'] || $is_auth['auth_mod'])) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
+            $topic_dl_type = (isset($_POST['topic_dl_type']) && ($allow_reg_tracker || $is_moderator)) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
 
             $sql_insert = "
 			INSERT INTO

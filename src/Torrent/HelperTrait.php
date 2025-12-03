@@ -15,6 +15,21 @@ namespace TorrentPier\Torrent;
 trait HelperTrait
 {
     /**
+     * Registration mode getter/setter (replaces global $reg_mode)
+     *
+     * @param string|null $mode Set mode ('request', 'newtopic', etc.) or null to just get
+     * @return string|null Current mode
+     */
+    protected static function regMode(?string $mode = null): ?string
+    {
+        static $value = null;
+        if ($mode !== null) {
+            $value = $mode;
+        }
+        return $value;
+    }
+
+    /**
      * Get torrent info by topic ID.
      *
      * @param int $topicId Topic ID
@@ -65,11 +80,12 @@ trait HelperTrait
      */
     protected static function errorExit(string $message): void
     {
-        global $reg_mode, $return_message;
+        global $return_message;
 
         $msg = '';
+        $reg_mode = self::regMode();
 
-        if (isset($reg_mode) && ($reg_mode == 'request' || $reg_mode == 'newtopic')) {
+        if ($reg_mode !== null && ($reg_mode == 'request' || $reg_mode == 'newtopic')) {
             if (isset($return_message)) {
                 $msg .= $return_message . '<br /><br /><hr/><br />';
             }
