@@ -50,7 +50,7 @@ $page_cfg['meta_description'] = config()->get('site_desc');
 
 // Init main vars
 $viewcat = isset($_GET[POST_CAT_URL]) ? (int)$_GET[POST_CAT_URL] : 0;
-$lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
+$lastvisit = IS_GUEST ? TIMENOW : userdata('user_lastvisit');
 
 // Caching output
 $req_page = 'index_page';
@@ -59,7 +59,7 @@ $req_page .= $viewcat ? "_c{$viewcat}" : '';
 define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . config()->get('default_lang'));
 
-$hide_cat_opt = isset($user->opt_js['h_cat']) ? (string)$user->opt_js['h_cat'] : 0;
+$hide_cat_opt = isset(user()->opt_js['h_cat']) ? (string)user()->opt_js['h_cat'] : 0;
 $hide_cat_user = array_flip(explode('-', $hide_cat_opt));
 $showhide = isset($_GET['sh']) ? (int)$_GET['sh'] : 0;
 
@@ -312,7 +312,7 @@ template()->assign_vars([
     'ONLY_NEW_TOPICS_ON' => $only_new == ONLY_NEW_TOPICS,
 
     'U_SEARCH_NEW' => 'search.php?new=1',
-    'U_SEARCH_SELF_BY_MY' => "search.php?uid={$userdata['user_id']}&amp;o=1",
+    'U_SEARCH_SELF_BY_MY' => "search.php?uid=" . userdata('user_id') . "&amp;o=1",
     'U_SEARCH_LATEST' => 'search.php?search_id=latest',
     'U_SEARCH_UNANSWERED' => 'search.php?search_id=unanswered',
     'U_ATOM_FEED' => make_url('feed.php?type=f&id=0'),
@@ -323,7 +323,7 @@ template()->assign_vars([
 
 // Set tpl vars for bt_userdata
 if (config()->get('bt_show_dl_stat_on_index') && !IS_GUEST) {
-    show_bt_userdata($userdata['user_id']);
+    show_bt_userdata(userdata('user_id'));
 }
 
 // Latest news

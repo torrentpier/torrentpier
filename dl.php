@@ -76,7 +76,7 @@ if (!IS_AM && $t_data['tor_status']) {
 
 // Check download limit
 $dlCounter = new \TorrentPier\Torrent\DownloadCounter();
-if (!$dlCounter->recordDownload($topic_id, $userdata['user_id'], IS_PREMIUM)) {
+if (!$dlCounter->recordDownload($topic_id, userdata('user_id'), IS_PREMIUM)) {
     bb_die(__('DOWNLOAD_LIMIT_EXCEEDED'));
 }
 

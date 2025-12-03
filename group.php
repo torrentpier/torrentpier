@@ -38,7 +38,7 @@ if ($group_id) {
     if (!$group_info['group_id'] || !$group_info['group_moderator'] || !$group_info['moderator_name']) {
         bb_die("Invalid group data [group_id: $group_id]");
     }
-    $is_moderator = ($userdata['user_id'] == $group_info['group_moderator'] || IS_ADMIN);
+    $is_moderator = (userdata('user_id') == $group_info['group_moderator'] || IS_ADMIN);
 }
 
 if (!$group_id) {
@@ -59,7 +59,7 @@ if (!$group_id) {
 		LEFT JOIN
 			" . BB_USER_GROUP . " ug ON
 			    ug.group_id = g.group_id
-			AND ug.user_id = " . $userdata['user_id'] . "
+			AND ug.user_id = " . userdata('user_id') . "
 		LEFT JOIN
 			" . BB_USER_GROUP . " ug2 ON
 			    ug2.group_id = g.group_id
@@ -148,7 +148,7 @@ if (!$group_id) {
     $sql = "SELECT g.group_id, g.group_name, ug.user_id, u.user_email, u.username, u.user_lang
 		FROM " . BB_GROUPS . " g
 		LEFT JOIN " . BB_USERS . " u ON(u.user_id = g.group_moderator)
-		LEFT JOIN " . BB_USER_GROUP . " ug ON(ug.group_id = g.group_id AND ug.user_id = {$userdata['user_id']})
+		LEFT JOIN " . BB_USER_GROUP . " ug ON(ug.group_id = g.group_id AND ug.user_id = " . userdata('user_id') . ")
 		WHERE g.group_id = $group_id
 			AND group_single_user = 0
 			AND g.group_type = " . GROUP_OPEN . "
@@ -164,7 +164,7 @@ if (!$group_id) {
         bb_die(__('ALREADY_MEMBER_GROUP'));
     }
 
-    \TorrentPier\Legacy\Group::add_user_into_group($group_id, $userdata['user_id'], 1, TIMENOW);
+    \TorrentPier\Legacy\Group::add_user_into_group($group_id, userdata('user_id'), 1, TIMENOW);
 
     if (config()->get('group_send_email')) {
         // Sending email
@@ -175,7 +175,7 @@ if (!$group_id) {
 
         $emailer->set_template('group_request', $moderator['user_lang']);
         $emailer->assign_vars([
-            'USER' => $userdata['username'],
+            'USER' => userdata('username'),
             'GROUP_MODERATOR' => $moderator['username'],
             'U_GROUP' => make_url(GROUP_URL . $group_id)
         ]);
@@ -186,7 +186,7 @@ if (!$group_id) {
     set_die_append_msg(group_id: $group_id);
     bb_die(__('GROUP_JOINED'));
 } elseif (!empty($_POST['unsub']) || !empty($_POST['unsubpending'])) {
-    \TorrentPier\Legacy\Group::delete_user_group($group_id, $userdata['user_id']);
+    \TorrentPier\Legacy\Group::delete_user_group($group_id, userdata('user_id'));
 
     set_die_append_msg(group_id: $group_id);
     bb_die(__('UNSUB_SUCCESS'));
@@ -314,7 +314,7 @@ if (!$group_id) {
     $sql = "SELECT user_pending
 		FROM " . BB_USER_GROUP . "
 		WHERE group_id = $group_id
-			AND user_id = " . $userdata['user_id'] . "
+			AND user_id = " . userdata('user_id') . "
 		LIMIT 1";
 
     if ($row = DB()->fetch_row($sql)) {
@@ -325,7 +325,7 @@ if (!$group_id) {
         }
     }
 
-    if ($userdata['user_id'] == $group_moderator['user_id']) {
+    if (userdata('user_id') == $group_moderator['user_id']) {
         $group_details = __('ARE_GROUP_MODERATOR');
         $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
     } elseif ($is_group_member || $is_group_pending_member) {

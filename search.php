@@ -84,10 +84,10 @@ $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $url = basename(__FILE__);
 
 $anon_id = GUEST_UID;
-$user_id = $userdata['user_id'];
-$lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
+$user_id = userdata('user_id');
+$lastvisit = IS_GUEST ? TIMENOW : userdata('user_lastvisit');
 $search_id = (isset($_GET['id']) && verify_id($_GET['id'], SEARCH_ID_LENGTH)) ? $_GET['id'] : '';
-$session_id = $userdata['session_id'];
+$session_id = userdata('session_id');
 
 $items_found = $items_display = $previous_settings = null;
 $text_match_sql = '';
@@ -282,8 +282,8 @@ if (empty($_GET) && empty($_POST)) {
         'TEXT_MATCH_KEY' => $text_match_key,
         'POSTER_NAME_KEY' => $poster_name_key,
 
-        'THIS_USER_ID' => $userdata['user_id'],
-        'THIS_USER_NAME' => addslashes($userdata['username']),
+        'THIS_USER_ID' => userdata('user_id'),
+        'THIS_USER_NAME' => addslashes(userdata('username')),
         'SEARCH_ACTION' => 'search.php',
         'U_SEARCH_USER' => "search.php?mode=searchuser&amp;input_name=$poster_name_key",
         'ONLOAD_FOCUS_ID' => 'text_match_input',
@@ -677,10 +677,10 @@ else {
         if ($my_posts) {
             $SQL['WHERE'][] = "p.poster_id = $poster_id_val";
         }
-        if ($my_posts && $user->id == $poster_id_val) {
+        if ($my_posts && user()->id == $poster_id_val) {
             $SQL['WHERE'][] = "p.user_post = 1";
 
-            if ($userdata['user_posts']) {
+            if (userdata('user_posts')) {
                 template()->assign_var('BB_DIE_APPEND_MSG', '
 					<form id="mod-action" method="POST" action="search.php">
 						<input type="submit" name="add_my_post" value="' . __('RESTORE_ALL_POSTS') . '" class="bold" onclick="if (!window.confirm( this.value +\'?\' )){ return false };" />

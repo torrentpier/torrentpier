@@ -37,7 +37,7 @@ set_die_append_msg();
 $posts_per_page = config()->get('posts_per_page');
 $select_ppp = '';
 
-if ($userdata['session_admin']) {
+if (userdata('session_admin')) {
     if ($req_ppp = abs((int)(@$_REQUEST['ppp'])) and in_array($req_ppp, config()->get('allowed_posts_per_page'))) {
         $posts_per_page = $req_ppp;
     }
@@ -88,7 +88,7 @@ if ($topic_id) {
     $sql = "SELECT t.*, f.cat_id, f.forum_name, f.forum_desc, f.forum_status, f.forum_order, f.forum_posts, f.forum_topics, f.forum_last_post_id, f.forum_tpl_id, f.prune_days, f.auth_view, f.auth_read, f.auth_post, f.auth_reply, f.auth_edit, f.auth_delete, f.auth_sticky, f.auth_announce, f.auth_vote, f.auth_pollcreate, f.auth_attachments, f.auth_download, f.allow_reg_tracker, f.allow_porno_topic, f.self_moderated, f.forum_parent, f.show_on_index, f.forum_display_sort, f.forum_display_order, tw.notify_status
 		FROM " . BB_TOPICS . " t
 		LEFT JOIN " . BB_FORUMS . " f ON t.forum_id = f.forum_id
-		LEFT JOIN " . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
+		LEFT JOIN " . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = " . userdata('user_id') . ")
 		WHERE t.topic_id = $topic_id
 	";
 } elseif ($post_id) {
@@ -96,7 +96,7 @@ if ($topic_id) {
 		FROM " . BB_TOPICS . " t
 		LEFT JOIN " . BB_FORUMS . " f ON t.forum_id = f.forum_id
 		LEFT JOIN " . BB_POSTS . " p ON t.topic_id = p.topic_id
-		LEFT JOIN " . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
+		LEFT JOIN " . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = " . userdata('user_id') . ")
 		WHERE p.post_id = $post_id
 	";
 } else {
@@ -112,11 +112,11 @@ $forum_topic_data =& $t_data;
 $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
 
-if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) {
+if ($t_data['allow_porno_topic'] && bf(userdata('user_opt'), 'user_opt', 'user_porn_forums')) {
     bb_die(__('ERROR_PORNO_FORUM'));
 }
 
-if ($userdata['session_admin'] && !empty($_REQUEST['mod'])) {
+if (userdata('session_admin') && !empty($_REQUEST['mod'])) {
     if (IS_ADMIN) {
         datastore()->enqueue([
             'viewtopic_forum_select'
@@ -184,7 +184,7 @@ if ($is_auth['auth_mod']) {
     $redirect = url_arg($redirect, 'mod', 1, '&');
     $mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
-    if ($moderation && !$userdata['session_admin']) {
+    if ($moderation && !userdata('session_admin')) {
         redirect($mod_redirect_url);
     }
 }
@@ -197,7 +197,7 @@ if ($moderation) {
         }
         $forum_select_html = $forum_select['viewtopic_forum_select'];
     } else {
-        $not_auth_forums_csv = $user->get_not_auth_forums(AUTH_VIEW);
+        $not_auth_forums_csv = user()->get_not_auth_forums(AUTH_VIEW);
         $forum_select_html = get_forum_select(explode(',', $not_auth_forums_csv), 'new_forum_id');
     }
     template()->assign_vars(['S_FORUM_SELECT' => $forum_select_html]);
@@ -242,7 +242,7 @@ if (config()->get('topic_notify_enabled')) {
             $is_watching_topic = true;
             if (isset($_GET['unwatch'])) {
                 if ($_GET['unwatch'] == 'topic') {
-                    DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
+                    DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . userdata('user_id'));
                 }
 
                 set_die_append_msg($forum_id, $topic_id);
@@ -253,7 +253,7 @@ if (config()->get('topic_notify_enabled')) {
                 if ($_GET['watch'] == 'topic') {
                     DB()->query("
 						INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
-						VALUES (" . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
+						VALUES (" . userdata('user_id') . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
 					");
                 }
 
@@ -391,29 +391,29 @@ $s_auth_can .= (($is_auth['auth_download']) ? __('RULES_DOWNLOAD_CAN') : __('RUL
 $topic_mod = '';
 if ($is_auth['auth_mod']) {
     $s_auth_can .= __('RULES_MODERATE');
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_delete') . '" alt="' . __('DELETE_TOPIC') . '" title="' . __('DELETE_TOPIC') . '" border="0" /></a>&nbsp;';
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . __('MOVE_TOPIC') . '" title="' . __('MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
-    $topic_mod .= ($t_data['topic_status'] == TOPIC_UNLOCKED) ? "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_lock') . '" alt="' . __('LOCK_TOPIC') . '" title="' . __('LOCK_TOPIC') . '" border="0" /></a>&nbsp;' : "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_unlock') . '" alt="' . __('UNLOCK_TOPIC') . '" title="' . __('UNLOCK_TOPIC') . '" border="0" /></a>&nbsp;';
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_split') . '" alt="' . __('SPLIT_TOPIC') . '" title="' . __('SPLIT_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_delete') . '" alt="' . __('DELETE_TOPIC') . '" title="' . __('DELETE_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . __('MOVE_TOPIC') . '" title="' . __('MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= ($t_data['topic_status'] == TOPIC_UNLOCKED) ? "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_lock') . '" alt="' . __('LOCK_TOPIC') . '" title="' . __('LOCK_TOPIC') . '" border="0" /></a>&nbsp;' : "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_unlock') . '" alt="' . __('UNLOCK_TOPIC') . '" title="' . __('UNLOCK_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_split') . '" alt="' . __('SPLIT_TOPIC') . '" title="' . __('SPLIT_TOPIC') . '" border="0" /></a>&nbsp;';
 
     if ($t_data['allow_reg_tracker'] || $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL || IS_ADMIN) {
         if ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL) {
-            $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unset_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_normal') . '" alt="' . __('UNSET_DL_STATUS') . '" title="' . __('UNSET_DL_STATUS') . '" border="0" /></a>';
+            $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unset_download&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_normal') . '" alt="' . __('UNSET_DL_STATUS') . '" title="' . __('UNSET_DL_STATUS') . '" border="0" /></a>';
         } else {
-            $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=set_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_dl') . '" alt="' . __('SET_DL_STATUS') . '" title="' . __('SET_DL_STATUS') . '" border="0" /></a>';
+            $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=set_download&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_dl') . '" alt="' . __('SET_DL_STATUS') . '" title="' . __('SET_DL_STATUS') . '" border="0" /></a>';
         }
     }
-} elseif (!IS_GUEST && ($t_data['topic_poster'] == $userdata['user_id']) && $t_data['self_moderated']) {
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . __('MOVE_TOPIC') . '" title="' . __('MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
+} elseif (!IS_GUEST && ($t_data['topic_poster'] == userdata('user_id')) && $t_data['self_moderated']) {
+    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . __('MOVE_TOPIC') . '" title="' . __('MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
 }
 
 // Topic watch information
 $s_watching_topic = '';
 if ($can_watch_topic) {
     if ($is_watching_topic) {
-        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . __('STOP_WATCHING_TOPIC') . '</a>';
+        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;unwatch=topic&amp;start=$start&amp;sid=" . userdata('session_id') . '">' . __('STOP_WATCHING_TOPIC') . '</a>';
     } else {
-        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . __('START_WATCHING_TOPIC') . '</a>';
+        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;watch=topic&amp;start=$start&amp;sid=" . userdata('session_id') . '">' . __('START_WATCHING_TOPIC') . '</a>';
     }
 }
 
@@ -446,7 +446,7 @@ $sel_post_order_ary = [
 
 $topic_has_poll = $t_data['topic_vote'];
 $poll_time_expired = ($t_data['topic_time'] < TIMENOW - config()->get('poll_max_days') * 86400);
-$can_manage_poll = ($t_data['topic_poster'] == $userdata['user_id'] || $is_auth['auth_mod']);
+$can_manage_poll = ($t_data['topic_poster'] == userdata('user_id') || $is_auth['auth_mod']);
 $can_add_poll = ($can_manage_poll && !$topic_has_poll && !$poll_time_expired && !$start);
 
 $page_title = ((int)($start / $posts_per_page) === 0) ? $topic_title :
@@ -469,14 +469,14 @@ template()->assign_vars([
     'SHOW_BOT_NICK' => config()->get('show_bot_nick'),
     'T_POST_REPLY' => $reply_alt,
 
-    'HIDE_FROM' => $user->opt_js['h_from'],
-    'HIDE_AVATAR' => $user->opt_js['h_av'],
-    'HIDE_RANK_IMG' => ($user->opt_js['h_rnk_i'] && config()->get('show_rank_image')),
-    'HIDE_POST_IMG' => $user->opt_js['h_post_i'],
-    'HIDE_SMILE' => $user->opt_js['h_smile'],
-    'HIDE_SIGNATURE' => $user->opt_js['h_sig'],
-    'SPOILER_OPENED' => $user->opt_js['sp_op'],
-    'SHOW_IMG_AFTER_LOAD' => $user->opt_js['i_aft_l'],
+    'HIDE_FROM' => user()->opt_js['h_from'],
+    'HIDE_AVATAR' => user()->opt_js['h_av'],
+    'HIDE_RANK_IMG' => (user()->opt_js['h_rnk_i'] && config()->get('show_rank_image')),
+    'HIDE_POST_IMG' => user()->opt_js['h_post_i'],
+    'HIDE_SMILE' => user()->opt_js['h_smile'],
+    'HIDE_SIGNATURE' => user()->opt_js['h_sig'],
+    'SPOILER_OPENED' => user()->opt_js['sp_op'],
+    'SHOW_IMG_AFTER_LOAD' => user()->opt_js['i_aft_l'],
 
     'HIDE_RANK_IMG_DIS' => !config()->get('show_rank_image'),
 
@@ -500,7 +500,7 @@ template()->assign_vars([
     'U_VIEW_NEWER_TOPIC' => $view_next_topic_url,
     'U_POST_NEW_TOPIC' => $new_topic_url,
     'U_POST_REPLY_TOPIC' => $reply_topic_url,
-    'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&" . POST_TOPIC_URL . "=$topic_id&dm=1",
+    'U_SEARCH_SELF' => "search.php?uid=" . userdata('user_id') . "&" . POST_TOPIC_URL . "=$topic_id&dm=1",
 
     'TOPIC_HAS_POLL' => $topic_has_poll,
     'POLL_IS_EDITABLE' => !$poll_time_expired,
@@ -536,7 +536,7 @@ if ($topic_has_poll) {
     } else {
         template()->assign_vars([
             'SHOW_VOTE_BTN' => \TorrentPier\Legacy\Poll::pollIsActive($t_data),
-            'POLL_ALREADY_VOTED' => \TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)$userdata['user_id']),
+            'POLL_ALREADY_VOTED' => \TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)userdata('user_id')),
             'POLL_VOTES_JS' => $poll_votes_js
         ]);
     }
@@ -769,7 +769,7 @@ if (config()->get('show_quick_reply')) {
         ]);
 
         if (!IS_GUEST) {
-            $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
+            $notify_user = bf(userdata('user_opt'), 'user_opt', 'user_notify');
 
             template()->assign_vars(['QR_NOTIFY_CHECKED' => ($notify_user) ? ($notify_user && $is_watching_topic) : $is_watching_topic]);
         }

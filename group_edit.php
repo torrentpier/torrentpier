@@ -29,7 +29,7 @@ if ($group_id) {
     if (!$group_info['group_id'] || !$group_info['group_moderator'] || !$group_info['moderator_name']) {
         bb_die("Invalid group data [group_id: $group_id]");
     }
-    $is_moderator = ($userdata['user_id'] == $group_info['group_moderator'] || IS_ADMIN);
+    $is_moderator = (userdata('user_id') == $group_info['group_moderator'] || IS_ADMIN);
 }
 
 if ($is_moderator) {

@@ -38,7 +38,7 @@ if (!$t_data = DB()->table(BB_TOPICS)->where('topic_id', $topic_id)->fetch()?->t
 
 // Checking the rights
 if ($mode != 'poll_vote') {
-    if ($t_data['topic_poster'] != $userdata['user_id']) {
+    if ($t_data['topic_poster'] != userdata('user_id')) {
         if (!IS_AM) {
             bb_die(__('NOT_AUTHORISED'));
         }
@@ -76,7 +76,7 @@ switch ($mode) {
             bb_die(__('NO_VOTE_OPTION'));
         }
 
-        if (\TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)$userdata['user_id'])) {
+        if (\TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)userdata('user_id'))) {
             bb_die(__('ALREADY_VOTED'));
         }
 
@@ -93,7 +93,7 @@ switch ($mode) {
         try {
             DB()->table(BB_POLL_USERS)->insert([
                 'topic_id' => $topic_id,
-                'user_id' => $userdata['user_id'],
+                'user_id' => userdata('user_id'),
                 'vote_ip' => USER_IP,
                 'vote_dt' => TIMENOW
             ]);

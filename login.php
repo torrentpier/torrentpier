@@ -55,10 +55,10 @@ if (isset($_REQUEST['admin']) && !IS_AM) {
     bb_die(__('NOT_ADMIN'));
 }
 
-$mod_admin_login = (IS_AM && !$user->data['session_admin']);
+$mod_admin_login = (IS_AM && !userdata('session_admin'));
 
 // login username & password
-$login_username = ($mod_admin_login) ? $userdata['username'] : ($_POST['login_username'] ?? '');
+$login_username = ($mod_admin_login) ? userdata('username') : ($_POST['login_username'] ?? '');
 $login_password = $_POST['login_password'] ?? '';
 
 // Checking for incorrect login/password combination
