@@ -31,7 +31,7 @@ $peers_cnt = $seed_count = $leech_count = 0;
 $seeders = $leechers = '';
 $tor_info = [];
 
-$template->assign_vars([
+template()->assign_vars([
     'SEED_COUNT' => false,
     'LEECH_COUNT' => false,
     'TOR_SPEED_UP' => false,
@@ -92,7 +92,7 @@ if ($tor_auth_reg || $tor_auth_del) {
 $display_name = \TorrentPier\Attachment::getDownloadFilename($bt_topic_id, $t_data['topic_title']);
 
 if (!$tor_reged) {
-    $template->assign_block_vars('unregistered_torrent', [
+    template()->assign_block_vars('unregistered_torrent', [
         'DOWNLOAD_NAME' => $display_name,
         'TRACKER_LINK' => $tracker_link,
 
@@ -122,12 +122,12 @@ if ($tor_reged && !$tor_info) {
 }
 
 if ($tor_auth) {
-    $template->assign_vars([
+    template()->assign_vars([
         'TOR_CONTROLS' => true,
     ]);
 
     if ($t_data['self_moderated'] || $is_auth['auth_mod']) {
-        $template->assign_vars(['AUTH_MOVE' => true]);
+        template()->assign_vars(['AUTH_MOVE' => true]);
     }
 }
 
@@ -170,7 +170,7 @@ if ($tor_reged && $tor_info) {
         }
 
         if ((isset($user_ratio, $min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
-            $template->assign_vars([
+            template()->assign_vars([
                 'SHOW_RATIO_WARN' => true,
                 'RATIO_WARN_MSG' => sprintf(__('BT_RATIO_WARNING_MSG'), $min_ratio_dl, config()->get('ratio_url_help')),
             ]);
@@ -178,13 +178,13 @@ if ($tor_reged && $tor_info) {
     }
 
     if (!$dl_allowed) {
-        $template->assign_block_vars('torrent', []);
-        $template->assign_vars([
+        template()->assign_block_vars('torrent', []);
+        template()->assign_vars([
             'TOR_BLOCKED' => true,
             'TOR_BLOCKED_MSG' => sprintf(__('BT_LOW_RATIO_FOR_DL'), round($user_ratio, 2), "search.php?dlu=$bt_user_id&amp;dlc=1"),
         ]);
     } else {
-        $template->assign_block_vars('torrent', [
+        template()->assign_block_vars('torrent', [
             'DOWNLOAD_NAME' => $display_name,
             'TRACKER_LINK' => $tracker_link,
             'TOR_SILVER_GOLD' => $tor_type,
@@ -217,7 +217,7 @@ if ($tor_reged && $tor_info) {
 
         // TorrServer integration
         if (config()->get('torr_server.enabled') && (!IS_GUEST || !config()->get('torr_server.disable_for_guest')) && \TorrentPier\Attachment::m3uExists($topic_id)) {
-            $template->assign_block_vars('torrent.tor_server', [
+            template()->assign_block_vars('torrent.tor_server', [
                 'TORR_SERVER_M3U_LINK' => PLAYBACK_M3U_URL . $bt_topic_id,
                 'TORR_SERVER_M3U_ICON' => theme_images('icon_tor_m3u_icon'),
             ]);
@@ -225,7 +225,7 @@ if ($tor_reged && $tor_info) {
     }
 
     if (config()->get('show_tor_info_in_dl_list')) {
-        $template->assign_vars([
+        template()->assign_vars([
             'SHOW_DL_LIST' => true,
             'SHOW_DL_LIST_TOR_INFO' => true,
 
@@ -356,7 +356,7 @@ if ($tor_reged && $tor_info) {
                 $tor_speed_down = (int)@$peers[0]['speed_down'];
                 $peers = $tmp;
 
-                $template->assign_vars([
+                template()->assign_vars([
                     'TOR_SPEED_UP' => ($tor_speed_up) ? humn_size($tor_speed_up, min: 'KB') . '/s' : '0 KB/s',
                     'TOR_SPEED_DOWN' => ($tor_speed_down) ? humn_size($tor_speed_down, min: 'KB') . '/s' : '0 KB/s'
                 ]);
@@ -391,16 +391,16 @@ if ($tor_reged && $tor_info) {
                             define('SEEDER_EXIST', true);
                             $seed_order_action = TOPIC_URL . "$bt_topic_id&amp;spmode=full#seeders";
 
-                            $template->assign_block_vars((string)$x_full, [
+                            template()->assign_block_vars((string)$x_full, [
                                 'SEED_ORD_ACT' => $seed_order_action,
                                 'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s'
                             ]);
 
                             if ($ip) {
-                                $template->assign_block_vars("$x_full.iphead", []);
+                                template()->assign_block_vars("$x_full.iphead", []);
                             }
                             if ($port !== false) {
-                                $template->assign_block_vars("$x_full.porthead", []);
+                                template()->assign_block_vars("$x_full.porthead", []);
                             }
                         }
                         $compl_perc = ($tor_size) ? round(($p_max_up / $tor_size), 1) : 0;
@@ -413,17 +413,17 @@ if ($tor_reged && $tor_info) {
                             define('LEECHER_EXIST', true);
                             $leech_order_action = TOPIC_URL . "$bt_topic_id&amp;spmode=full#leechers";
 
-                            $template->assign_block_vars((string)$x_full, [
+                            template()->assign_block_vars((string)$x_full, [
                                 'LEECH_ORD_ACT' => $leech_order_action,
                                 'LEECHERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s',
                                 'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], min: 'KB') . '/s'
                             ]);
 
                             if ($ip) {
-                                $template->assign_block_vars("$x_full.iphead", []);
+                                template()->assign_block_vars("$x_full.iphead", []);
                             }
                             if ($port !== false) {
-                                $template->assign_block_vars("$x_full.porthead", []);
+                                template()->assign_block_vars("$x_full.porthead", []);
                             }
                         }
                         $compl_size = ($peer['remain'] && $tor_size && $tor_size > $peer['remain']) ? ($tor_size - $peer['remain']) : 0;
@@ -467,7 +467,7 @@ if ($tor_reged && $tor_info) {
                         }
                     }
 
-                    $template->assign_block_vars("$x_full.$x_row", [
+                    template()->assign_block_vars("$x_full.$x_row", [
                         'ROW_BGR' => $row_bgr,
                         'NAME' => $peerUsername,
                         'PEER_ID' => $peerTorrentClient,
@@ -486,13 +486,13 @@ if ($tor_reged && $tor_info) {
                     ]);
 
                     if ($ip) {
-                        $template->assign_block_vars("$x_full.$x_row.ip", [
+                        template()->assign_block_vars("$x_full.$x_row.ip", [
                             'U_WHOIS_IP' => config()->get('whois_info') . $ip,
                             'IP' => $ip
                         ]);
                     }
                     if ($port !== false) {
-                        $template->assign_block_vars("$x_full.$x_row.port", ['PORT' => $port]);
+                        template()->assign_block_vars("$x_full.$x_row.port", ['PORT' => $port]);
                     }
                 } // Count only & only names modes
                 else {
@@ -513,14 +513,14 @@ if ($tor_reged && $tor_info) {
 
             if ($s_mode != 'full' && $seeders) {
                 $seeders[strlen($seeders) - 9] = ' ';
-                $template->assign_vars([
+                template()->assign_vars([
                     'SEED_LIST' => $seeders,
                     'SEED_COUNT' => ($seed_count) ?: 0,
                 ]);
             }
             if ($s_mode != 'full' && $leechers) {
                 $leechers[strlen($leechers) - 9] = ' ';
-                $template->assign_vars([
+                template()->assign_vars([
                     'LEECH_LIST' => $leechers,
                     'LEECH_COUNT' => ($leech_count) ?: 0,
                 ]);
@@ -533,31 +533,31 @@ if ($tor_reged && $tor_info) {
             $last_seen_time = ($tor_info['seeder_last_seen']) ? humanTime($tor_info['seeder_last_seen']) : __('NEVER');
             $last_seeder_username = (!empty($tor_info['last_seeder_id']) && $last_seeder = get_userdata($tor_info['last_seeder_id'])) ? ' -> <b>' . profile_url(['username' => $last_seeder['username'], 'user_id' => $last_seeder['user_id'], 'user_rank' => $last_seeder['user_rank']]) . '</b>' : ($tor_info['last_seeder_id'] < 0 ? ' -> ' . __('GUEST') : '');
 
-            $template->assign_vars(['SEEDER_LAST_SEEN' => sprintf(__('SEEDER_LAST_SEEN'), $last_seen_time)]);
-            $template->assign_vars(['SEEDER_USERNAME' => $last_seeder_username]);
+            template()->assign_vars(['SEEDER_LAST_SEEN' => sprintf(__('SEEDER_LAST_SEEN'), $last_seen_time)]);
+            template()->assign_vars(['SEEDER_USERNAME' => $last_seeder_username]);
         }
     }
 
-    $template->assign_block_vars('tor_title', ['U_DOWNLOAD_LINK' => $download_link]);
+    template()->assign_block_vars('tor_title', ['U_DOWNLOAD_LINK' => $download_link]);
 
     if ($peers_cnt > $max_peers_before_overflow && $s_mode == 'full') {
-        $template->assign_vars([
+        template()->assign_vars([
             'PEERS_OVERFLOW' => true,
             'PEERS_DIV_STYLE' => $peers_div_style_overflow
         ]);
     } else {
-        $template->assign_vars(['PEERS_DIV_STYLE' => $peers_div_style_normal]);
+        template()->assign_vars(['PEERS_DIV_STYLE' => $peers_div_style_normal]);
     }
 }
 
 if (config()->get('bt_allow_spmode_change') && $s_mode != 'full') {
-    $template->assign_vars([
+    template()->assign_vars([
         'PEERS_FULL_LINK' => true,
         'SPMODE_FULL_HREF' => TOPIC_URL . "$topic_id&amp;spmode=full#seeders"
     ]);
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'SHOW_DL_LIST_LINK' => ((config()->get('bt_show_dl_list') || config()->get('allow_dl_list_names_mode')) && $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL),
     'SHOW_TOR_ACT' => ($tor_reged && $show_peers && (!isset(config()->get('tor_no_tor_act')[$tor_info['tor_status']]) || IS_AM)),
     'S_MODE_COUNT' => ($s_mode == 'count'),

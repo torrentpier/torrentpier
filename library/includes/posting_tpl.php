@@ -30,7 +30,7 @@ if (!$f_data['forum_tpl_id'] || !$tpl_data = DB()->fetch_row($sql)) {
     }
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'PAGE_TITLE' => __('NEW_RELEASE'),
     'FORUM_NAME' => $f_data['forum_name'],
     'FORUM_ID' => $forum_id,
@@ -53,7 +53,7 @@ if ($tpl_data) {
         }
     }
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_ID' => $tpl_data['tpl_id'],
         'TPL_NAME' => $tpl_data['tpl_name'],
         'TPL_SRC_FORM_VAL' => $tpl_data['tpl_src_form'],
@@ -64,13 +64,13 @@ if ($tpl_data) {
 }
 
 if ($edit_tpl_mode) {
-    $template->assign_vars([
+    template()->assign_vars([
         'NO_TPL_ASSIGNED' => !($f_data['forum_tpl_id']),
         'TPL_SELECT' => get_select('forum_tpl', $f_data['forum_tpl_id'])
     ]);
 
     if ($tpl_data) {
-        $template->assign_vars([
+        template()->assign_vars([
             'TPL_COMMENT' => $tpl_data['tpl_comment'],
             'TPL_RULES_POST_ID' => $tpl_data['tpl_rules_post_id'],
             'TPL_LAST_EDIT_TIME' => bb_date($tpl_data['tpl_last_edit_tm'], 'd-M-y H:i'),

@@ -123,7 +123,7 @@ function prepare_message($message)
 // Either in a window or inline
 function generate_smilies($mode)
 {
-    global $template, $user, $datastore;
+    global $user, $datastore;
 
     $inline_columns = 4;
     $inline_rows = 7;
@@ -155,10 +155,10 @@ function generate_smilies($mode)
 
             foreach ($rowset as $smile_url => $data) {
                 if (!$col) {
-                    $template->assign_block_vars('smilies_row', []);
+                    template()->assign_block_vars('smilies_row', []);
                 }
 
-                $template->assign_block_vars('smilies_row.smilies_col', [
+                template()->assign_block_vars('smilies_row.smilies_col', [
                     'SMILEY_CODE' => $data['code'],
                     'SMILEY_IMG' => config()->get('smilies_path') . '/' . $smile_url,
                     'SMILEY_DESC' => $data['emoticon'],
@@ -178,14 +178,14 @@ function generate_smilies($mode)
             }
 
             if ($mode == 'inline' && $num_smilies > $inline_rows * $inline_columns) {
-                $template->assign_block_vars('switch_smilies_extra', []);
+                template()->assign_block_vars('switch_smilies_extra', []);
 
-                $template->assign_vars([
+                template()->assign_vars([
                     'U_MORE_SMILIES' => POSTING_URL . "?mode=smilies",
                 ]);
             }
 
-            $template->assign_vars([
+            template()->assign_vars([
                 'PAGE_TITLE' => __('EMOTICONS'),
                 'S_SMILIES_COLSPAN' => $s_colspan,
             ]);

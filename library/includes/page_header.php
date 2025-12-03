@@ -16,7 +16,7 @@ if (defined('PAGE_HEADER_SENT')) {
 }
 
 // Parse and show the overall page header
-global $page_cfg, $userdata, $user, $ads, $template;
+global $page_cfg, $userdata, $user, $ads;
 
 $logged_in = (int)!empty($userdata['session_logged_in']);
 
@@ -39,7 +39,7 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
     ];
 
     if (defined('IS_GUEST') && !(IS_GUEST || IS_USER)) {
-        $template->assign_var('SHOW_ONLINE_LIST');
+        template()->assign_var('SHOW_ONLINE_LIST');
 
         if (!${$online_list} = CACHE('bb_cache')->get($online_list)) {
             require INC_DIR . '/online_userlist.php';
@@ -48,7 +48,7 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
         }
     }
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TOTAL_USERS_ONLINE' => ${$online_list}['stat'],
         'LOGGED_IN_USER_LIST' => ${$online_list}['userlist'],
         'USERS_ONLINE_COUNTS' => ${$online_list}['cnt'],
@@ -103,13 +103,13 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
         $have_unread_pm = true;
     }
 }
-$template->assign_vars([
+template()->assign_vars([
     'HAVE_NEW_PM' => $have_new_pm,
     'HAVE_UNREAD_PM' => $have_unread_pm
 ]);
 
 // The following assigns all _common_ variables that may be used at any point in a template
-$template->assign_vars([
+template()->assign_vars([
     'SIMPLE_HEADER' => !empty($gen_simple_header),
     'CONTENT_ENCODING' => DEFAULT_CHARSET,
 
@@ -238,7 +238,7 @@ if (!empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty($use
             $torhelp_topics[] = '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a>';
         }
 
-        $template->assign_vars([
+        template()->assign_vars([
             'TORHELP_TOPICS' => implode("</li>\n<li>", $torhelp_topics)
         ]);
     }
@@ -246,14 +246,14 @@ if (!empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty($use
 
 // Login box
 $in_out = ($logged_in) ? 'in' : 'out';
-$template->assign_block_vars("switch_user_logged_{$in_out}", []);
+template()->assign_block_vars("switch_user_logged_{$in_out}", []);
 
 if (!IS_GUEST) {
     header('Cache-Control: private, no-cache, no-store, must-revalidate');
 }
 
-$template->set_filenames(['page_header' => 'page_header.tpl']);
-$template->pparse('page_header');
+template()->set_filenames(['page_header' => 'page_header.tpl']);
+template()->pparse('page_header');
 
 define('PAGE_HEADER_SENT', true);
 
