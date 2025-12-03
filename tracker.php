@@ -628,7 +628,7 @@ if ($allowed_forums) {
     }
 
     if (!$tor_list_sql || $start > $tor_count) {
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'TOR_NOT_FOUND' => true,
             'NO_MATCH_MSG' => __('NO_MATCH'),
         ));
@@ -724,7 +724,7 @@ if ($allowed_forums) {
             $forum_id = (!$hide_forum && isset($tor['forum_id'])) ? $tor['forum_id'] : '';
             $poster_id = (!$hide_author && isset($tor['poster_id'])) ? $tor['poster_id'] : '';
 
-            $template->assign_block_vars('tor', array(
+            template()->assign_block_vars('tor', array(
                 'CAT_ID' => $cat_id,
                 'CAT_TITLE' => $cat_id ? $cat_title_html[$cat_id] : '',
                 'FORUM_ID' => $forum_id,
@@ -767,7 +767,7 @@ if ($allowed_forums) {
         }
     }
 } else {
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'TOR_NOT_FOUND' => true,
         'NO_MATCH_MSG' => __('BT_NO_SEARCHABLE_FORUMS'),
     ));
@@ -781,7 +781,7 @@ if ($tor_count) {
 
     generate_pagination($base_url, $tor_count, $per_page, $start);
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'MATCHES' => $search_matches,
         'SERACH_MAX' => $search_max,
     ));
@@ -829,7 +829,7 @@ if (config()->get('tracker.search_by_tor_status')) {
 }
 
 // Sort dir
-$template->assign_vars(array(
+template()->assign_vars(array(
     'SORT_NAME' => $sort_key,
     'SORT_ASC' => $sort_asc,
     'SORT_DESC' => $sort_desc,
@@ -840,7 +840,7 @@ $template->assign_vars(array(
 // Displaying options
 $tor_type_lang = __('GOLD') . ' / ' . __('SILVER');
 
-$template->assign_vars(array(
+template()->assign_vars(array(
     'SHOW_CAT_CHBOX' => build_checkbox($show_cat_key, __('BT_SHOW_CAT'), $show_cat_val),
     'SHOW_FORUM_CHBOX' => build_checkbox($show_forum_key, __('BT_SHOW_FORUM'), $show_forum_val),
     'SHOW_AUTHOR_CHBOX' => build_checkbox($show_author_key, __('BT_SHOW_AUTHOR'), $show_author_val),
@@ -896,7 +896,7 @@ foreach ($save_through_pages as $name) {
 // Set colspan
 $tor_colspan = $tor_colspan - $hide_cat - $hide_forum - $hide_author - $hide_speed;
 
-$template->assign_vars(array(
+template()->assign_vars(array(
     'PAGE_TITLE' => __('TRACKER'),
     'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
     'CAT_FORUM_SELECT' => $cat_forum_select,

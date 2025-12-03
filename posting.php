@@ -305,7 +305,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
             $topic_has_new_posts = true;
 
             foreach ($rowset as $i => $row) {
-                $template->assign_block_vars('new_posts', [
+                template()->assign_block_vars('new_posts', [
                     'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
                     'POSTER' => profile_url($row),
                     'POSTER_NAME_JS' => addslashes($row['username']),
@@ -313,7 +313,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
                     'MESSAGE' => get_parsed_post($row)
                 ]);
             }
-            $template->assign_vars(['TPL_SHOW_NEW_POSTS' => true]);
+            template()->assign_vars(['TPL_SHOW_NEW_POSTS' => true]);
 
             set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
             unset($rowset);
@@ -442,7 +442,7 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
         $preview_message = htmlCHR($message, false, ENT_NOQUOTES);
         $preview_message = bbcode2html($preview_message);
 
-        $template->assign_vars([
+        template()->assign_vars([
             'TPL_PREVIEW_POST' => true,
             'TOPIC_TITLE' => $preview_subject,
             'POST_SUBJECT' => $preview_subject,
@@ -490,17 +490,17 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
 }
 
 if ($error_msg) {
-    $template->assign_vars(['ERROR_MESSAGE' => $error_msg]);
+    template()->assign_vars(['ERROR_MESSAGE' => $error_msg]);
 }
 
 if (IS_GUEST || ($mode == 'editpost' && $post_info['poster_id'] == GUEST_UID)) {
-    $template->assign_var('POSTING_USERNAME');
+    template()->assign_var('POSTING_USERNAME');
 }
 
 // Notify checkbox
 if (!IS_GUEST) {
     if ($mode != 'editpost' || ($mode == 'editpost' && $post_info['poster_id'] != GUEST_UID)) {
-        $template->assign_var('SHOW_NOTIFY_CHECKBOX');
+        template()->assign_var('SHOW_NOTIFY_CHECKBOX');
     }
 }
 
@@ -508,11 +508,11 @@ $topic_type_toggle = '';
 if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
     // Allow robots indexing
     if ($is_auth['auth_mod'] && $post_info['auth_read'] == AUTH_ALL) {
-        $template->assign_var('SHOW_ROBOTS_CHECKBOX');
+        template()->assign_var('SHOW_ROBOTS_CHECKBOX');
     }
 
     // Topic type selection
-    $template->assign_block_vars('switch_type_toggle', []);
+    template()->assign_block_vars('switch_type_toggle', []);
 
     if ($is_auth['auth_sticky']) {
         $topic_type_toggle .= '<label><input type="radio" name="topictype" value="' . POST_STICKY . '"';
@@ -602,10 +602,10 @@ switch ($mode) {
 // Generate smilies listing for page output
 generate_smilies('inline');
 
-$template->set_filenames(['body' => 'posting.tpl']);
+template()->set_filenames(['body' => 'posting.tpl']);
 
 // Output the data to the template
-$template->assign_vars([
+template()->assign_vars([
     'FORUM_NAME' => htmlCHR($forum_name),
     'PAGE_TITLE' => $page_title,
     'POSTING_TYPE_TITLE' => $page_title,
@@ -632,15 +632,15 @@ $template->assign_vars([
 ]);
 
 if ($mode == 'newtopic' || $post_data['first_post']) {
-    $template->assign_var('POSTING_SUBJECT');
+    template()->assign_var('POSTING_SUBJECT');
 
     // Attachment upload form (only for tracker forums with attachment permissions)
     if ($post_info['allow_reg_tracker'] && $is_auth['auth_attachments']) {
         $attach_ext_id = $post_info['attach_ext_id'] ?? 0;
         $file_attached = !empty($attach_ext_id);
 
-        $template->assign_var('ATTACHBOX');
-        $template->assign_vars([
+        template()->assign_var('ATTACHBOX');
+        template()->assign_vars([
             'TPL_ADD_ATTACHMENT' => true,
             'S_FORM_ENCTYPE' => 'enctype="multipart/form-data"',
             'FILESIZE' => config()->get('attach.max_size'),
@@ -655,11 +655,11 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
                 $dl_url .= '&original';
             }
 
-            $template->assign_vars([
+            template()->assign_vars([
                 'FILE_ATTACHED' => true,
             ]);
 
-            $template->assign_block_vars('attach_row', [
+            template()->assign_block_vars('attach_row', [
                 'FILE_NAME' => \TorrentPier\Attachment::getDownloadFilename($topic_id, $post_info['topic_title']),
                 'ATTACH_FILENAME' => $topic_id,
                 'U_VIEW_ATTACHMENT' => $dl_url,
@@ -670,7 +670,7 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
 
 // Update post time
 if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post']) {
-    $template->assign_vars([
+    template()->assign_vars([
         'SHOW_UPDATE_POST_TIME' => ($is_auth['auth_mod'] || ($post_data['poster_post'] && $post_info['post_time'] + 3600 * 3 > TIMENOW)),
         'UPDATE_POST_TIME_CHECKED' => ($post_data['poster_post'] && ($post_info['post_time'] + 3600 * 2 > TIMENOW)),
     ]);
@@ -683,6 +683,6 @@ if ($mode == 'reply' && $is_auth['auth_read']) {
 
 require(PAGE_HEADER);
 
-$template->pparse('body');
+template()->pparse('body');
 
 require(PAGE_FOOTER);

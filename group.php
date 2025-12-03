@@ -121,13 +121,13 @@ if (!$group_id) {
         $s_hidden_fields = '';
 
         foreach ($groups as $type => $grp) {
-            $template->assign_block_vars('groups', [
+            template()->assign_block_vars('groups', [
                 'MEMBERSHIP' => __('GROUP_MEMBER_' . strtoupper($type)),
                 'GROUP_SELECT' => build_group($grp)
             ]);
         }
 
-        $template->assign_vars([
+        template()->assign_vars([
             'SELECT_GROUP' => true,
             'PAGE_TITLE' => __('GROUP_CONTROL_PANEL'),
             'S_USERGROUP_ACTION' => 'group.php',
@@ -329,7 +329,7 @@ if (!$group_id) {
         $group_details = __('ARE_GROUP_MODERATOR');
         $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
     } elseif ($is_group_member || $is_group_pending_member) {
-        $template->assign_vars([
+        template()->assign_vars([
             'SHOW_UNSUBSCRIBE_CONTROLS' => true,
             'CONTROL_NAME' => ($is_group_member) ? 'unsub' : 'unsubpending',
         ]);
@@ -340,7 +340,7 @@ if (!$group_id) {
         $s_hidden_fields = '';
     } else {
         if ($group_info['group_type'] == GROUP_OPEN) {
-            $template->assign_var('SHOW_SUBSCRIBE_CONTROLS');
+            template()->assign_var('SHOW_SUBSCRIBE_CONTROLS');
 
             $group_details = __('THIS_OPEN_GROUP');
             $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
@@ -369,7 +369,7 @@ if (!$group_id) {
     }
 
     $i = 0;
-    $template->assign_vars([
+    template()->assign_vars([
         'ROW_NUMBER' => $i + ($start + 1),
         'GROUP_INFO' => true,
         'PAGE_TITLE' => __('GROUP_CONTROL_PANEL'),
@@ -454,7 +454,7 @@ if (!$group_id) {
             foreach ($releases as $i => $release) {
                 $row_class = !($i % 2) ? 'row1' : 'row2';
 
-                $template->assign_block_vars('releases', [
+                template()->assign_block_vars('releases', [
                     'ROW_NUMBER' => $i + ($start + 1),
                     'ROW_CLASS' => $row_class,
                     'RELEASER' => profile_url(['user_id' => $release['poster_id'], 'username' => $release['username'], 'user_rank' => $release['user_rank']]),
@@ -465,7 +465,7 @@ if (!$group_id) {
                 ]);
             }
 
-            $template->assign_vars(['RELEASES' => true]);
+            template()->assign_vars(['RELEASES' => true]);
 
             break;
 
@@ -511,7 +511,7 @@ if (!$group_id) {
                 if ($group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator) {
                     $row_class = !($i % 2) ? 'row1' : 'row2';
 
-                    $template->assign_block_vars('member', [
+                    template()->assign_block_vars('member', [
                         'ROW_NUMBER' => $i + ($start + 1),
                         'ROW_CLASS' => $row_class,
                         'USER' => profile_url($member),
@@ -529,19 +529,19 @@ if (!$group_id) {
                     ]);
 
                     if ($is_moderator) {
-                        $template->assign_block_vars('member.switch_mod_option', []);
+                        template()->assign_block_vars('member.switch_mod_option', []);
                     }
                 }
             }
 
             // No group members
             if (!$members_count) {
-                $template->assign_block_vars('switch_no_members', []);
+                template()->assign_block_vars('switch_no_members', []);
             }
 
             // No group members
             if ($group_info['group_type'] == GROUP_HIDDEN && !$is_group_member && !$is_moderator) {
-                $template->assign_block_vars('switch_hidden_group', []);
+                template()->assign_block_vars('switch_hidden_group', []);
             }
 
             // Pending
@@ -568,7 +568,7 @@ if (!$group_id) {
 
                     $user_select = '<input type="checkbox" name="member[]" value="' . $user_id . '">';
 
-                    $template->assign_block_vars('pending', [
+                    template()->assign_block_vars('pending', [
                         'ROW_CLASS' => $row_class,
                         'AVATAR_IMG' => $pending_info['avatar'],
                         'USER' => profile_url($member),
@@ -583,15 +583,15 @@ if (!$group_id) {
                     ]);
                 }
 
-                $template->assign_vars(['PENDING_USERS' => true]);
+                template()->assign_vars(['PENDING_USERS' => true]);
             }
 
-            $template->assign_vars(['MEMBERS' => true]);
+            template()->assign_vars(['MEMBERS' => true]);
     }
 
     if ($is_moderator) {
-        $template->assign_block_vars('switch_mod_option', []);
-        $template->assign_block_vars('switch_add_member', []);
+        template()->assign_block_vars('switch_mod_option', []);
+        template()->assign_block_vars('switch_add_member', []);
     }
 }
 

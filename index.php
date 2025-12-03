@@ -204,19 +204,19 @@ $datastore->rm('moderators');
 // Build index page
 $forums_count = 0;
 foreach ($cat_forums as $cid => $c) {
-    $template->assign_block_vars('h_c', [
+    template()->assign_block_vars('h_c', [
         'H_C_ID' => $cid,
         'H_C_TITLE' => $cat_title_html[$cid],
         'H_C_CHEKED' => in_array($cid, preg_split('/[-]+/', $hide_cat_opt)) ? 'checked' : '',
     ]);
 
-    $template->assign_vars(['H_C_AL_MESS' => $hide_cat_opt && !$showhide]);
+    template()->assign_vars(['H_C_AL_MESS' => $hide_cat_opt && !$showhide]);
 
     if (!$showhide && isset($hide_cat_user[$cid]) && !$viewcat) {
         continue;
     }
 
-    $template->assign_block_vars('c', [
+    template()->assign_block_vars('c', [
         'CAT_ID' => $cid,
         'CAT_TITLE' => $cat_title_html[$cid],
         'U_VIEWCAT' => CAT_URL . $cid,
@@ -237,7 +237,7 @@ foreach ($cat_forums as $cid => $c) {
         }
 
         if ($is_sf) {
-            $template->assign_block_vars('c.f.sf', [
+            template()->assign_block_vars('c.f.sf', [
                 'SF_ID' => $fid,
                 'SF_NAME' => $fname_html,
                 'SF_NEW' => $new ? ' new' : ''
@@ -245,7 +245,7 @@ foreach ($cat_forums as $cid => $c) {
             continue;
         }
 
-        $template->assign_block_vars('c.f', [
+        template()->assign_block_vars('c.f', [
             'FORUM_FOLDER_IMG' => $folder_image,
             'FORUM_ID' => $fid,
             'FORUM_NAME' => $fname_html,
@@ -258,7 +258,7 @@ foreach ($cat_forums as $cid => $c) {
         ]);
 
         if ($f['last_post_id']) {
-            $template->assign_block_vars('c.f.last', [
+            template()->assign_block_vars('c.f.last', [
                 'LAST_TOPIC_ID' => $f['last_topic_id'],
                 'LAST_TOPIC_TIP' => $f['last_topic_title'],
                 'LAST_TOPIC_TITLE' => str_short($f['last_topic_title'], $last_topic_max_len),
@@ -269,7 +269,7 @@ foreach ($cat_forums as $cid => $c) {
     }
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'SHOW_FORUMS' => $forums_count,
     'SHOW_MAP' => isset($_GET['map']) && !IS_GUEST,
     'PAGE_TITLE' => $viewcat ? $cat_title_html[$viewcat] : __('HOME'),
@@ -334,14 +334,14 @@ if (config()->get('show_latest_news')) {
         $latest_news = $datastore->get('latest_news');
     }
 
-    $template->assign_vars(['SHOW_LATEST_NEWS' => true]);
+    template()->assign_vars(['SHOW_LATEST_NEWS' => true]);
 
     foreach ($latest_news as $news) {
         if (in_array($news['forum_id'], $excluded_forums_array)) {
             continue;
         }
 
-        $template->assign_block_vars('news', [
+        template()->assign_block_vars('news', [
             'NEWS_TOPIC_ID' => $news['topic_id'],
             'NEWS_TITLE' => str_short(censor()->censorString($news['topic_title']), config()->get('max_news_title')),
             'NEWS_TIME' => bb_date($news['topic_time'], 'd-M', false),
@@ -358,14 +358,14 @@ if (config()->get('show_network_news')) {
         $network_news = $datastore->get('network_news');
     }
 
-    $template->assign_vars(['SHOW_NETWORK_NEWS' => true]);
+    template()->assign_vars(['SHOW_NETWORK_NEWS' => true]);
 
     foreach ($network_news as $net) {
         if (in_array($net['forum_id'], $excluded_forums_array)) {
             continue;
         }
 
-        $template->assign_block_vars('net', [
+        template()->assign_block_vars('net', [
             'NEWS_TOPIC_ID' => $net['topic_id'],
             'NEWS_TITLE' => str_short(censor()->censorString($net['topic_title']), config()->get('max_net_title')),
             'NEWS_TIME' => bb_date($net['topic_time'], 'd-M', false),
@@ -408,7 +408,7 @@ if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
         $today_list = __('NOBIRTHDAY_TODAY');
     }
 
-    $template->assign_vars([
+    template()->assign_vars([
         'WHOSBIRTHDAY_WEEK' => $week_list,
         'WHOSBIRTHDAY_TODAY' => $today_list
     ]);
@@ -428,7 +428,7 @@ if (IS_AM) {
 define('SHOW_ONLINE', $show_online_users);
 
 if (isset($_GET['map'])) {
-    $template->assign_vars(['PAGE_TITLE' => __('FORUM_MAP')]);
+    template()->assign_vars(['PAGE_TITLE' => __('FORUM_MAP')]);
 }
 
 print_page('index.tpl');

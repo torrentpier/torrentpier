@@ -57,7 +57,7 @@ if ($folder =& $_REQUEST['folder']) {
 // Start session management
 $user->session_start(['req_login' => true]);
 
-$template->assign_vars([
+template()->assign_vars([
     'IN_PM' => true,
     'QUICK_REPLY' => config()->get('show_quick_reply') && $folder == 'inbox' && $mode == 'read',
 ]);
@@ -100,7 +100,7 @@ $savebox_url = ($folder != 'savebox' || $mode != '') ? '<a href="' . PM_URL . "?
 //
 // Start main
 //
-$template->assign_var('POSTING_SUBJECT');
+template()->assign_var('POSTING_SUBJECT');
 
 if ($mode == 'read') {
     if (!empty($_GET[POST_POST_URL])) {
@@ -329,9 +329,9 @@ if ($mode == 'read') {
     //
     // Load templates
     //
-    $template->set_filenames(['body' => 'privmsgs_read.tpl']);
+    template()->set_filenames(['body' => 'privmsgs_read.tpl']);
 
-    $template->assign_vars([
+    template()->assign_vars([
         'INBOX' => $inbox_url,
 
         'POST_PM_IMG' => $post_img,
@@ -377,7 +377,7 @@ if ($mode == 'read') {
     //
     // Dump it to the templating engine
     //
-    $template->assign_vars([
+    template()->assign_vars([
         'TO_USER' => profile_url(['username' => $username_to, 'user_id' => $user_id_to, 'user_rank' => $privmsg['to_user_rank']]),
         'FROM_USER' => profile_url($privmsg),
 
@@ -1045,7 +1045,7 @@ if ($mode == 'read') {
             $s_hidden_fields .= '<input type="hidden" name="' . POST_POST_URL . '" value="' . $privmsg_id . '" />';
         }
 
-        $template->assign_vars([
+        template()->assign_vars([
             'TPL_PREVIEW_POST' => true,
             'TOPIC_TITLE' => $preview_subject,
             'POST_SUBJECT' => $preview_subject,
@@ -1062,19 +1062,19 @@ if ($mode == 'read') {
     // Start error handling
     //
     if ($error) {
-        $template->assign_vars(['ERROR_MESSAGE' => $error_msg]);
+        template()->assign_vars(['ERROR_MESSAGE' => $error_msg]);
     }
 
     //
     // Load templates
     //
-    $template->set_filenames(['body' => 'posting.tpl']);
+    template()->set_filenames(['body' => 'posting.tpl']);
 
     //
     // Enable extensions in posting_body
     //
-    $template->assign_block_vars('switch_privmsg', []);
-    $template->assign_var('POSTING_USERNAME');
+    template()->assign_block_vars('switch_privmsg', []);
+    template()->assign_var('POSTING_USERNAME');
 
     //
     // Assign posting title & hidden fields
@@ -1106,7 +1106,7 @@ if ($mode == 'read') {
 
     $privmsg_subject = clean_title($privmsg_subject);
 
-    $template->assign_vars([
+    template()->assign_vars([
         'SUBJECT' => htmlCHR($privmsg_subject),
         'USERNAME' => $to_username,
         'MESSAGE' => $privmsg_message,
@@ -1159,7 +1159,7 @@ if ($mode == 'read') {
     //
     // Load templates
     //
-    $template->set_filenames(['body' => 'privmsgs.tpl']);
+    template()->set_filenames(['body' => 'privmsgs.tpl']);
 
     //
     // New message
@@ -1306,7 +1306,7 @@ if ($mode == 'read') {
         $box_limit_img_length = min(round(($pm_all_total / $max_pm) * config()->get('privmsg_graphic_length')), config()->get('privmsg_graphic_length'));
         $box_limit_remain = max(($max_pm - $pm_all_total), 0);
 
-        $template->assign_var('PM_BOX_SIZE_INFO');
+        template()->assign_var('PM_BOX_SIZE_INFO');
 
         switch ($folder) {
             case 'inbox':
@@ -1327,7 +1327,7 @@ if ($mode == 'read') {
     //
     // Dump vars to template
     //
-    $template->assign_vars([
+    template()->assign_vars([
         'BOX_NAME' => $l_box_name,
         'BOX_EXPL' => ($folder == 'outbox') ? __('OUTBOX_EXPL') : '',
         'INBOX' => $inbox_url,
@@ -1387,7 +1387,7 @@ if ($mode == 'read') {
             $row_class = !($i & 1) ? 'row1' : 'row2';
             $i++;
 
-            $template->assign_block_vars('listrow', [
+            template()->assign_block_vars('listrow', [
                 'ROW_CLASS' => $row_class,
                 'FROM' => $msg_user,
                 'SUBJECT' => htmlCHR($msg_subject),
@@ -1403,15 +1403,15 @@ if ($mode == 'read') {
 
         generate_pagination(PM_URL . "?folder=$folder", $pm_total, config()->get('topics_per_page'), $start);
     } else {
-        $template->assign_block_vars('switch_no_messages', []);
+        template()->assign_block_vars('switch_no_messages', []);
     }
 }
 
-$template->assign_vars(['PAGE_TITLE' => @$page_title]);
+template()->assign_vars(['PAGE_TITLE' => @$page_title]);
 
 require(PAGE_HEADER);
 
-$template->pparse('body');
+template()->pparse('body');
 
 require(PAGE_FOOTER);
 

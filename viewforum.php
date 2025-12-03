@@ -104,9 +104,9 @@ if ($is_auth['auth_mod']) {
         $show_type_separator = false;
     }
     $select_tst = array_merge([__('TOR_STATUS_SELECT_ALL') => -1], array_flip(__('TOR_STATUS_NAME')));
-    $template->assign_vars(['SELECT_TST' => build_select('tst', $select_tst, $tor_status)]);
+    template()->assign_vars(['SELECT_TST' => build_select('tst', $select_tst, $tor_status)]);
     $select_st = array_merge([__('TOR_STATUS_SELECT_ACTION') => -1], array_flip(__('TOR_STATUS_NAME')));
-    $template->assign_vars(['SELECT_ST' => build_select('st', $select_st, -1)]);
+    template()->assign_vars(['SELECT_ST' => build_select('st', $select_st, -1)]);
 }
 
 // Topics read tracks
@@ -153,7 +153,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 	";
 
     if ($rowset = DB()->fetch_rowset($sql)) {
-        $template->assign_vars([
+        template()->assign_vars([
             'SHOW_SUBFORUMS' => true,
             'FORUM_IMG' => theme_images('forum'),
             'FORUM_NEW_IMG' => theme_images('forum_new'),
@@ -184,7 +184,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
             $last_post .= '<a href="' . POST_URL . $sf_data['forum_last_post_id'] . '#' . $sf_data['forum_last_post_id'] . '"><img src="' . theme_images('icon_latest_reply') . '" class="icon2" alt="latest" title="' . __('VIEW_LATEST_POST') . '" /></a>';
         }
 
-        $template->assign_block_vars('f', [
+        template()->assign_block_vars('f', [
             'FORUM_FOLDER_IMG' => $folder_image,
 
             'FORUM_ID' => $sf_forum_id,
@@ -197,7 +197,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
         ]);
 
         if ($sf_data['forum_last_post_id']) {
-            $template->assign_block_vars('f.last', [
+            template()->assign_block_vars('f.last', [
                 'FORUM_LAST_POST' => true,
                 'SHOW_LAST_TOPIC' => $show_last_topic,
                 'LAST_TOPIC_ID' => $sf_data['last_topic_id'],
@@ -209,7 +209,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
                 'ICON_LATEST_REPLY' => theme_images('icon_latest_reply')
             ]);
         } else {
-            $template->assign_block_vars('f.last', ['FORUM_LAST_POST' => false]);
+            template()->assign_block_vars('f.last', ['FORUM_LAST_POST' => false]);
         }
     }
 }
@@ -367,7 +367,7 @@ if ($forum_data['allow_reg_tracker']) {
 }
 
 // Post URL generation for templating vars
-$template->assign_vars([
+template()->assign_vars([
     'U_POST_NEW_TOPIC' => $post_new_topic_url,
     'S_SELECT_TOPIC_DAYS' => build_select('topicdays', array_flip($sel_previous_days), $topic_days),
     'S_POST_DAYS_ACTION' => FORUM_URL . "$forum_id&amp;start=$start",
@@ -386,7 +386,7 @@ $u_auth[] = ($is_auth['auth_download']) ? __('RULES_DOWNLOAD_CAN') : __('RULES_D
 $u_auth[] = ($is_auth['auth_mod']) ? __('RULES_MODERATE') : '';
 $u_auth = implode("<br />\n", $u_auth);
 
-$template->assign_vars([
+template()->assign_vars([
     'PAGE_TITLE' => htmlCHR($forum_data['forum_name']),
     'FORUM_ID' => $forum_id,
     'FORUM_NAME' => htmlCHR($forum_data['forum_name']),
@@ -437,7 +437,7 @@ foreach ($topic_rowset as $topic) {
         }
     }
 
-    $template->assign_block_vars('t', [
+    template()->assign_block_vars('t', [
         'FORUM_ID' => $forum_id,
         'TOPIC_ID' => $topic_id,
         'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
@@ -471,7 +471,7 @@ foreach ($topic_rowset as $topic) {
     if (isset($topic['tor_size'])) {
         $tor_magnet = create_magnet($topic['info_hash'], $topic['info_hash_v2'], $topic['auth_key'], html_ent_decode($topic['topic_title']), $topic['tor_size']);
 
-        $template->assign_block_vars('t.tor', [
+        template()->assign_block_vars('t.tor', [
             'SEEDERS' => (int)$topic['seeders'],
             'LEECHERS' => (int)$topic['leechers'],
             'TOR_SIZE' => humn_size($topic['tor_size'], 1),
@@ -487,7 +487,7 @@ unset($topic_rowset);
 $pg_url = FORUM_URL . $forum_id;
 $pg_url .= $sort_value ? "&sort=$sort_value" : '';
 $pg_url .= $order_value ? "&order=$order_value" : '';
-$template->assign_var('MOD_URL', $pg_url);
+template()->assign_var('MOD_URL', $pg_url);
 $pg_url = FORUM_URL . $forum_id;
 $pg_url .= $topic_days ? "&amp;topicdays=$topic_days" : '';
 $pg_url .= $sort_value ? "&amp;sort=$sort_value" : '';
@@ -503,12 +503,12 @@ if ($found_topics) {
     } else {
         $no_topics_msg = ($topic_days || $title_match) ? __('NO_SEARCH_MATCH') : ($forum_data['allow_reg_tracker'] ? __('NO_RELEASES_POST_ONE') : __('NO_TOPICS_POST_ONE'));
     }
-    $template->assign_vars([
+    template()->assign_vars([
         'NO_TOPICS' => $no_topics_msg,
     ]);
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'PAGE_URL' => $pg_url,
     'PAGE_URL_TPP' => url_arg($pg_url, 'tpp', null),
     'FOUND_TOPICS' => $found_topics,

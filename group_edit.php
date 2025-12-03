@@ -58,7 +58,7 @@ if ($is_moderator) {
 
     $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
 
-    $template->assign_vars([
+    template()->assign_vars([
         'PAGE_TITLE' => __('GROUP_CONTROL_PANEL'),
         'GROUP_NAME' => htmlCHR($group_info['group_name']),
         'GROUP_ID' => $group_id,
@@ -80,12 +80,12 @@ if ($is_moderator) {
         'AVATAR_IMG' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),
     ]);
 
-    $template->set_filenames(['body' => 'group_edit.tpl']);
-    $template->assign_vars(['PAGE_TITLE' => __('GROUP_CONFIGURATION')]);
+    template()->set_filenames(['body' => 'group_edit.tpl']);
+    template()->assign_vars(['PAGE_TITLE' => __('GROUP_CONFIGURATION')]);
 
     require(PAGE_HEADER);
 
-    $template->pparse('body');
+    template()->pparse('body');
 
     require(PAGE_FOOTER);
 } else {

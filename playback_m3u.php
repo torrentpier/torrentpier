@@ -105,7 +105,7 @@ foreach ($m3uData as $entry) {
 
     $filesCount++;
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
-    $template->assign_block_vars('m3ulist', [
+    template()->assign_block_vars('m3ulist', [
         'ROW_NUMBER' => $filesCount,
         'FILE_INDEX' => $urlParams['index'],
         'ROW_CLASS' => $rowClass,
@@ -118,7 +118,7 @@ foreach ($m3uData as $entry) {
 }
 
 // Generate output
-$template->assign_vars([
+template()->assign_vars([
     'HAS_ITEMS' => $filesCount > 0,
     'PAGE_TITLE' => __('PLAYBACK_M3U'),
     'TOPIC_ID' => $topic_id,

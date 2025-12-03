@@ -26,7 +26,7 @@ $user->session_start(array('req_login' => config()->get('disable_search_for_gues
 set_die_append_msg();
 
 if (isset($_POST['del_my_post'])) {
-    $template->assign_var('BB_DIE_APPEND_MSG', '
+    template()->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="#" onclick="window.close(); window.opener.focus();">' . __('GOTO_MY_MESSAGE') . '</a>
 		<br /><br />
 		<a href="index.php">' . __('INDEX_RETURN') . '</a>
@@ -45,7 +45,7 @@ if (isset($_POST['del_my_post'])) {
         bb_die(__('NO_TOPICS_MY_MESSAGE'));
     }
 } elseif (isset($_POST['add_my_post'])) {
-    $template->assign_var('BB_DIE_APPEND_MSG', '
+    template()->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="#" onclick="window.close(); window.opener.focus();">' . __('GOTO_MY_MESSAGE') . '</a>
 		<br /><br />
 		<a href="index.php">' . __('INDEX_RETURN') . '</a>
@@ -274,7 +274,7 @@ if (empty($_GET) && empty($_POST)) {
     $forum_select_mode = explode(',', $excluded_forums_csv);
     $forum_select = get_forum_select($forum_select_mode, "{$forum_key}[]", $search_all, $max_forum_name_len, $forum_select_size, 'style="width: 95%;"', $search_all);
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'TPL_SEARCH_MAIN' => true,
         'PAGE_TITLE' => __('SEARCH'),
 
@@ -569,7 +569,7 @@ if ($post_mode) {
         $forum_id = (int)$first_post['forum_id'];
         $is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);
 
-        $template->assign_block_vars('t', array(
+        template()->assign_block_vars('t', array(
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
@@ -590,7 +590,7 @@ if ($post_mode) {
             $message = get_parsed_post($post);
             $message = censor()->censorString($message);
 
-            $template->assign_block_vars('t.p', array(
+            template()->assign_block_vars('t.p', array(
                 'ROW_NUM' => $row_num,
                 'POSTER_ID' => $post['poster_id'],
                 'POSTER' => profile_url($post),
@@ -681,7 +681,7 @@ else {
             $SQL['WHERE'][] = "p.user_post = 1";
 
             if ($userdata['user_posts']) {
-                $template->assign_var('BB_DIE_APPEND_MSG', '
+                template()->assign_var('BB_DIE_APPEND_MSG', '
 					<form id="mod-action" method="POST" action="search.php">
 						<input type="submit" name="add_my_post" value="' . __('RESTORE_ALL_POSTS') . '" class="bold" onclick="if (!window.confirm( this.value +\'?\' )){ return false };" />
 					</form>
@@ -788,7 +788,7 @@ else {
         $is_unread = is_unread($topic['topic_last_post_time'], $topic_id, $forum_id);
         $moved = ($topic['topic_status'] == TOPIC_MOVED);
 
-        $template->assign_block_vars('t', array(
+        template()->assign_block_vars('t', array(
             'ROW_NUM' => $row_num,
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
@@ -822,7 +822,7 @@ if ($items_display) {
 
     generate_pagination($url, $items_count, $per_page, $start);
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'PAGE_TITLE' => __('SEARCH'),
 
         'SEARCH_MATCHES' => ($items_count) ? sprintf(__('FOUND_SEARCH_MATCHES'), $items_count) : '',
@@ -911,7 +911,7 @@ function prevent_huge_searches($SQL)
 
 function username_search($search_match)
 {
-    global $template, $gen_simple_header;
+    global $gen_simple_header;
 
     $username_list = '';
 
@@ -938,7 +938,7 @@ function username_search($search_match)
 
     $input_name = isset($_REQUEST['input_name']) ? htmlCHR($_REQUEST['input_name']) : 'username';
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'TPL_SEARCH_USERNAME' => true,
 
         'PAGE_TITLE' => __('SEARCH'),

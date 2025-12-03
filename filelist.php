@@ -88,7 +88,7 @@ $files_count = 0;
 foreach ($files as $file) {
     $files_count++;
     $row_class = ($files_count % 2) ? 'row1' : 'row2';
-    $template->assign_block_vars('filelist', [
+    template()->assign_block_vars('filelist', [
         'ROW_NUMBER' => $files_count,
         'ROW_CLASS' => $row_class,
         'FILE_PATH' => clean_tor_dirname(implode('/', $file->path)),
@@ -101,7 +101,7 @@ $torrent_name = !empty($t_name = $torrent->getName()) ? str_short(htmlCHR($t_nam
 $torrent_size = humn_size($row['size'], 2);
 
 // Output page
-$template->assign_vars([
+template()->assign_vars([
     'PAGE_TITLE' => "$torrent_name (" . $torrent_size . ")",
     'FILES_COUNT' => sprintf(__('BT_FLIST_FILE_PATH'), declension(iterator_count($files), 'files')),
     'TORRENT_CREATION_DATE' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : __('UNKNOWN'),

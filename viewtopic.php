@@ -200,7 +200,7 @@ if ($moderation) {
         $not_auth_forums_csv = $user->get_not_auth_forums(AUTH_VIEW);
         $forum_select_html = get_forum_select(explode(',', $not_auth_forums_csv), 'new_forum_id');
     }
-    $template->assign_vars(['S_FORUM_SELECT' => $forum_select_html]);
+    template()->assign_vars(['S_FORUM_SELECT' => $forum_select_html]);
 }
 
 if (!$forums = $datastore->get('cat_forums')) {
@@ -208,7 +208,7 @@ if (!$forums = $datastore->get('cat_forums')) {
     $forums = $datastore->get('cat_forums');
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'CAT_TITLE' => $forums['cat_title_html'][$t_data['cat_id']],
     'U_VIEWCAT' => CAT_URL . $t_data['cat_id'],
     'PARENT_FORUM_HREF' => $parent_id ? FORUM_URL . $parent_id : '',
@@ -374,7 +374,7 @@ $view_next_topic_url = TOPIC_URL . $topic_id . "&amp;view=next#newest";
 $reply_alt = $locked ? __('TOPIC_LOCKED_SHORT') : __('REPLY_TO_TOPIC');
 
 // Set 'body' template for attach_mod
-$template->set_filenames(['body' => 'viewtopic.tpl']);
+template()->set_filenames(['body' => 'viewtopic.tpl']);
 
 //
 // User authorisation levels output
@@ -455,7 +455,7 @@ $page_title = ((int)($start / $posts_per_page) === 0) ? $topic_title :
 //
 // Send vars to template
 //
-$template->assign_vars([
+template()->assign_vars([
     'PAGE_URL' => $pg_url,
     'PAGE_URL_PPP' => url_arg($pg_url, 'ppp', null),
     'PAGE_START' => $start,
@@ -510,7 +510,7 @@ $template->assign_vars([
 ]);
 
 // Does this topic contain DL-List?
-$template->assign_vars([
+template()->assign_vars([
     'SHOW_TOR_ACT' => false,
     'PEERS_FULL_LINK' => false,
     'DL_LIST_HREF' => TOPIC_URL . "$topic_id&amp;dl=names&amp;spmode=full",
@@ -532,9 +532,9 @@ if ($topic_has_poll) {
     $poll_votes_js = \TorrentPier\Legacy\Poll::get_poll_data_items_js($topic_id);
 
     if (!$poll_votes_js) {
-        $template->assign_vars(['TOPIC_HAS_POLL' => false]);
+        template()->assign_vars(['TOPIC_HAS_POLL' => false]);
     } else {
-        $template->assign_vars([
+        template()->assign_vars([
             'SHOW_VOTE_BTN' => \TorrentPier\Legacy\Poll::pollIsActive($t_data),
             'POLL_ALREADY_VOTED' => \TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)$userdata['user_id']),
             'POLL_VOTES_JS' => $poll_votes_js
@@ -670,7 +670,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         $page_cfg['meta_description'] = str_short(strip_tags($message_meta), 220);
     }
 
-    $template->assign_block_vars('postrow', [
+    template()->assign_block_vars('postrow', [
         'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
         'POST_ID' => $post_id,
         'IS_NEWEST' => ($post_id == $newest),
@@ -726,12 +726,12 @@ for ($i = 0; $i < $total_posts; $i++) {
 
     // Ban information
     if ($banInfo = getBanInfo((int)$poster_id)) {
-        $template->assign_block_vars('postrow.ban', ['IS_BANNED' => true]);
+        template()->assign_block_vars('postrow.ban', ['IS_BANNED' => true]);
     }
 
     if ($is_first_post && $t_data['attach_ext_id'] && $is_auth['auth_download']) {
         if (IS_GUEST) {
-            $template->assign_var('SHOW_GUEST_STUB', ($t_data['attach_ext_id'] == TORRENT_EXT_ID));
+            template()->assign_var('SHOW_GUEST_STUB', ($t_data['attach_ext_id'] == TORRENT_EXT_ID));
         } elseif ($t_data['attach_ext_id'] == TORRENT_EXT_ID) {
             require(INC_DIR . '/viewtopic_torrent.php');
         }
@@ -749,7 +749,7 @@ for ($i = 0; $i < $total_posts; $i++) {
 set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id, $max_post_time);
 
 if (defined('SPLIT_FORM_START')) {
-    $template->assign_vars([
+    template()->assign_vars([
         'SPLIT_FORM' => true,
         'START' => $start,
         'S_SPLIT_ACTION' => 'modcp.php',
@@ -761,7 +761,7 @@ if (defined('SPLIT_FORM_START')) {
 // Quick Reply
 if (config()->get('show_quick_reply')) {
     if ($is_auth['auth_reply'] && !$locked) {
-        $template->assign_vars([
+        template()->assign_vars([
             'QUICK_REPLY' => true,
             'QR_POST_ACTION' => POSTING_URL,
             'QR_TOPIC_ID' => $topic_id,
@@ -771,19 +771,19 @@ if (config()->get('show_quick_reply')) {
         if (!IS_GUEST) {
             $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
 
-            $template->assign_vars(['QR_NOTIFY_CHECKED' => ($notify_user) ? ($notify_user && $is_watching_topic) : $is_watching_topic]);
+            template()->assign_vars(['QR_NOTIFY_CHECKED' => ($notify_user) ? ($notify_user && $is_watching_topic) : $is_watching_topic]);
         }
     }
 }
 
 foreach ($is_auth as $name => $is) {
-    $template->assign_vars([strtoupper($name) => $is]);
+    template()->assign_vars([strtoupper($name) => $is]);
 }
 
-$template->assign_vars(['PG_ROW_CLASS' => $pg_row_class ?? 'row1']);
+template()->assign_vars(['PG_ROW_CLASS' => $pg_row_class ?? 'row1']);
 
 if (IS_ADMIN) {
-    $template->assign_vars(['U_LOGS' => "admin/admin_log.php?" . POST_TOPIC_URL . "=$topic_id&amp;db=" . config()->get('log_days_keep')]);
+    template()->assign_vars(['U_LOGS' => "admin/admin_log.php?" . POST_TOPIC_URL . "=$topic_id&amp;db=" . config()->get('log_days_keep')]);
 }
 
 print_page('viewtopic.tpl');

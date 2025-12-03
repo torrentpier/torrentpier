@@ -286,7 +286,7 @@ switch ($mode) {
 
             $forum_select = get_forum_select($forum_select_mode, 'new_forum', $forum_id);
 
-            $template->assign_vars([
+            template()->assign_vars([
                 'TPL_MODCP_MOVE' => true,
                 'SHOW_LEAVESHADOW' => $is_moderator,
                 'SHOW_BOT_OPTIONS' => $is_moderator,
@@ -300,7 +300,7 @@ switch ($mode) {
                 'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
             ]);
 
-            $template->set_filenames(['body' => 'modcp.tpl']);
+            template()->set_filenames(['body' => 'modcp.tpl']);
         }
         break;
 
@@ -543,7 +543,7 @@ switch ($mode) {
             if (($total_posts = DB()->num_rows($result)) > 0) {
                 $postrow = DB()->sql_fetchrowset($result);
 
-                $template->assign_vars([
+                template()->assign_vars([
                     'FORUM_NAME' => htmlCHR($forum_name),
                     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
                     'S_SPLIT_ACTION' => 'modcp.php',
@@ -568,7 +568,7 @@ switch ($mode) {
                     $message = bbcode2html($message);
 
                     $row_class = !($i % 2) ? 'row1' : 'row2';
-                    $template->assign_block_vars('postrow', [
+                    template()->assign_block_vars('postrow', [
                         'ROW_CLASS' => $row_class,
                         'POSTER_NAME' => profile_url(['username' => $poster, 'user_id' => $poster_id, 'user_rank' => $poster_rank]),
                         'POST_DATE' => $post_date,
@@ -585,7 +585,7 @@ switch ($mode) {
                 }
             }
         }
-        $template->set_filenames(['body' => 'modcp_split.tpl']);
+        template()->set_filenames(['body' => 'modcp_split.tpl']);
         break;
 
     case 'ip':
@@ -617,7 +617,7 @@ switch ($mode) {
 
         $poster_id = $post_row['poster_id'];
 
-        $template->assign_vars([
+        template()->assign_vars([
             'TPL_MODCP_IP' => true,
             'IP' => $ip_this_post,
             'U_LOOKUP_IP' => !$no_lookup ? "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'] : '',
@@ -638,7 +638,7 @@ switch ($mode) {
             $i = 0;
             do {
                 if ($row['poster_ip'] == $post_row['poster_ip']) {
-                    $template->assign_vars(['POSTS' => $row['postings']]);
+                    template()->assign_vars(['POSTS' => $row['postings']]);
                     continue;
                 }
 
@@ -649,7 +649,7 @@ switch ($mode) {
                 }
                 $ip = ($rdns_ip_num == $ip || $rdns_ip_num == 'all') ? gethostbyaddr($ip) : $ip;
 
-                $template->assign_block_vars('iprow', [
+                template()->assign_block_vars('iprow', [
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'IP' => $ip,
                     'POSTS' => $row['postings'],
@@ -681,7 +681,7 @@ switch ($mode) {
         if ($row = DB()->sql_fetchrow($result)) {
             $i = 0;
             do {
-                $template->assign_block_vars('userrow', [
+                template()->assign_block_vars('userrow', [
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'USERNAME' => profile_url($row),
                     'POSTS' => $row['postings'],
@@ -692,7 +692,7 @@ switch ($mode) {
             } while ($row = DB()->sql_fetchrow($result));
         }
 
-        $template->set_filenames(['body' => 'modcp.tpl']);
+        template()->set_filenames(['body' => 'modcp.tpl']);
         break;
 
     case 'post_pin':
@@ -789,10 +789,10 @@ switch ($mode) {
         break;
 }
 
-$template->assign_vars(['PAGE_TITLE' => __('MOD_CP')]);
+template()->assign_vars(['PAGE_TITLE' => __('MOD_CP')]);
 
 require(PAGE_HEADER);
 
-$template->pparse('body');
+template()->pparse('body');
 
 require(PAGE_FOOTER);

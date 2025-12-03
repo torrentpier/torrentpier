@@ -114,7 +114,7 @@ if (isset($_POST['login'])) {
 
 // Login page
 if (IS_GUEST || $mod_admin_login) {
-    $template->assign_vars([
+    template()->assign_vars([
         'LOGIN_USERNAME' => htmlCHR($login_username),
         'LOGIN_PASSWORD' => htmlCHR($login_password),
         'ERROR_MESSAGE' => implode('<br />', $login_errors),
