@@ -109,12 +109,9 @@ if ($is_auth['auth_mod']) {
     template()->assign_vars(['SELECT_ST' => build_select('st', $select_st, -1)]);
 }
 
-// Topics read tracks
-$tracking_topics = get_tracks('topic');
-$tracking_forums = get_tracks('forum');
-
 if ($mark_read && !IS_GUEST) {
-    set_tracks(COOKIE_FORUM, $tracking_forums, $forum_id);
+    $forums_tracking = &tracking_forums();
+    set_tracks(COOKIE_FORUM, $forums_tracking, $forum_id);
 
     set_die_append_msg($forum_id);
     bb_die(__('TOPICS_MARKED_READ'));

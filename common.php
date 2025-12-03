@@ -456,6 +456,36 @@ function bitfields(?string $type = null): array
     return $type === null ? $bf : ($bf[$type] ?? []);
 }
 
+/**
+ * Read tracker singleton - tracks read status of topics and forums
+ *
+ * @return \TorrentPier\ReadTracker
+ */
+function read_tracker(): \TorrentPier\ReadTracker
+{
+    return \TorrentPier\ReadTracker::getInstance();
+}
+
+/**
+ * Get topic tracking data
+ *
+ * @return array Reference to tracking array
+ */
+function &tracking_topics(): array
+{
+    return read_tracker()->getTopics();
+}
+
+/**
+ * Get forum tracking data
+ *
+ * @return array Reference to tracking array
+ */
+function &tracking_forums(): array
+{
+    return read_tracker()->getForums();
+}
+
 // Functions
 function utime()
 {

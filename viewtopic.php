@@ -58,9 +58,6 @@ if (!$topic_id && !$post_id) {
     bb_die(__('TOPIC_POST_NOT_EXIST'), 404);
 }
 
-$tracking_topics = get_tracks('topic');
-$tracking_forums = get_tracks('forum');
-
 // Find topic id if user requested a newer or older topic
 if ($topic_id && isset($_GET['view']) && ($_GET['view'] == 'next' || $_GET['view'] == 'previous')) {
     $sql_condition = ($_GET['view'] == 'next') ? '>' : '<';
@@ -746,7 +743,8 @@ for ($i = 0; $i < $total_posts; $i++) {
     }
 }
 
-set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id, $max_post_time);
+$topics_tracking = &tracking_topics();
+set_tracks(COOKIE_TOPIC, $topics_tracking, $topic_id, $max_post_time);
 
 if (defined('SPLIT_FORM_START')) {
     template()->assign_vars([

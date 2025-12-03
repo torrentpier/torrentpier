@@ -41,9 +41,6 @@ if ($mode == 'smilies') {
     exit;
 }
 
-$tracking_topics = get_tracks('topic');
-$tracking_forums = get_tracks('forum');
-
 // Start session management
 user()->session_start();
 
@@ -291,7 +288,7 @@ $update_post_time = !empty($_POST['update_post_time']);
 $topic_has_new_posts = false;
 
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && isset($_COOKIE[COOKIE_TOPIC])) {
-    if ($topic_last_read = max((int)(@$tracking_topics[$topic_id]), (int)(@$tracking_forums[$forum_id]))) {
+    if ($topic_last_read = max((int)(tracking_topics()[$topic_id] ?? 0), (int)(tracking_forums()[$forum_id] ?? 0))) {
         $sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
 			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u
 			WHERE p.topic_id = " . (int)$topic_id . "
@@ -315,7 +312,8 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
             }
             template()->assign_vars(['TPL_SHOW_NEW_POSTS' => true]);
 
-            set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
+            $topics_tracking = &tracking_topics();
+            set_tracks(COOKIE_TOPIC, $topics_tracking, $topic_id);
             unset($rowset);
         }
     }
@@ -404,7 +402,8 @@ if (($delete || $mode == 'delete') && !$confirm) {
         }
 
         if ($mode == 'newtopic' || $mode == 'reply') {
-            set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
+            $topics_tracking = &tracking_topics();
+            set_tracks(COOKIE_TOPIC, $topics_tracking, $topic_id);
         }
 
         // Auto-register torrent on tracker

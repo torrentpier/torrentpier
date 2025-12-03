@@ -19,9 +19,6 @@ if (!config()->get('topic_notify_enabled')) {
 $page_cfg['use_tablesorter'] = true;
 $page_cfg['include_bbcode_js'] = true;
 
-$tracking_topics = get_tracks('topic');
-$tracking_forums = get_tracks('forum');
-
 $user_id = userdata('user_id');
 if (isset($_GET[POST_USERS_URL])) {
     if (get_username($_GET[POST_USERS_URL])) {

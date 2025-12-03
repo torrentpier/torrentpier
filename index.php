@@ -63,10 +63,6 @@ $hide_cat_opt = isset(user()->opt_js['h_cat']) ? (string)user()->opt_js['h_cat']
 $hide_cat_user = array_flip(explode('-', $hide_cat_opt));
 $showhide = isset($_GET['sh']) ? (int)$_GET['sh'] : 0;
 
-// Topics read tracks
-$tracking_topics = get_tracks('topic');
-$tracking_forums = get_tracks('forum');
-
 // Statistics
 $stats = datastore()->get('stats');
 if ($stats === false) {

@@ -60,9 +60,6 @@ if (isset($_POST['del_my_post'])) {
     redirect("search.php?" . POST_USERS_URL . "=" . user()->id);
 }
 
-$tracking_topics = get_tracks('topic');
-$tracking_forums = get_tracks('forum');
-
 if ($mode =& $_REQUEST['mode']) {
     // This handles the simple windowed user search functions called from various other scripts
     if ($mode == 'searchuser') {
@@ -609,7 +606,8 @@ if ($post_mode) {
             $new_tracks[$topic_id] = max($curr_new_track_val, $post['post_time']);
         }
     }
-    set_tracks(COOKIE_TOPIC, $tracking_topics, $new_tracks);
+    $topics_tracking = &tracking_topics();
+    set_tracks(COOKIE_TOPIC, $topics_tracking, $new_tracks);
 } // Displaying "as topics" mode
 else {
     $order = $order_opt[$order_val]['sql'];

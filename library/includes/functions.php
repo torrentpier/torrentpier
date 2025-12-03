@@ -74,8 +74,6 @@ function get_banned_users(bool $return_as_names = false): array
 
 function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW)
 {
-    global $tracking_topics, $tracking_forums, $user;
-
     if (IS_GUEST) {
         return;
     }
@@ -99,7 +97,7 @@ function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW
         }
     }
 
-    $overflow = count($tracking_topics) + count($tracking_forums) - COOKIE_MAX_TRACKS;
+    $overflow = count(tracking_topics()) + count(tracking_forums()) - COOKIE_MAX_TRACKS;
 
     if ($overflow > 0) {
         arsort($tracking_ary);
@@ -115,10 +113,8 @@ function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW
 
 function get_last_read($topic_id = 0, $forum_id = 0)
 {
-    global $tracking_topics, $tracking_forums, $user;
-
-    $t = $tracking_topics[$topic_id] ?? 0;
-    $f = $tracking_forums[$forum_id] ?? 0;
+    $t = tracking_topics()[$topic_id] ?? 0;
+    $f = tracking_forums()[$forum_id] ?? 0;
     return max($t, $f, user()->data['user_lastvisit']);
 }
 
