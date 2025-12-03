@@ -32,7 +32,7 @@ if (isset($this->request['post_id'])) {
         $this->ajax_die(__('TOPIC_POST_NOT_EXIST'));
     }
 
-    $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
+    $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata);
     if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
         $this->ajax_die(__('TOPIC_LOCKED'));
     }
@@ -46,7 +46,7 @@ if (isset($this->request['post_id'])) {
         $this->ajax_die(__('INVALID_TOPIC_ID_DB'));
     }
 
-    $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
+    $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata);
 }
 
 switch ($this->request['type']) {
@@ -146,7 +146,7 @@ switch ($this->request['type']) {
 
             $this->response['html'] = bbcode2html($text);
         } else {
-            $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
+            $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata);
             if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
                 $this->ajax_die(__('TOPIC_LOCKED'));
             } elseif (!$is_auth['auth_edit']) {
