@@ -1378,14 +1378,12 @@ function bb_preg_quote($str, $delimiter)
 
 function bb_die($msg_text, $status_code = null)
 {
-    global $ajax;
-
     if (isset($status_code)) {
         http_response_code($status_code);
     }
 
     if (defined('IN_AJAX')) {
-        $ajax->ajax_die($msg_text);
+        ajax()->ajax_die($msg_text);
     }
 
     // Check
@@ -1731,26 +1729,8 @@ function clean_text_match(?string $text, bool $ltrim_star = true, bool $die_if_e
     return $text;
 }
 
-/**
- * getManticoreSearch instance
- *
- * @return \TorrentPier\ManticoreSearch|null
- */
-function getManticoreSearch(): ?\TorrentPier\ManticoreSearch
+function get_title_match_topics(string $title_match_sql, array $forum_ids = [], bool $title_only = true): ?array
 {
-    global $manticore_search;
-
-    if ($manticore_search === null) {
-        $manticore_search = new \TorrentPier\ManticoreSearch();
-    }
-
-    return $manticore_search;
-}
-
-function get_title_match_topics(string $title_match_sql, array $forum_ids = []): ?array
-{
-    global $title_match;
-
     $where_ids = [];
     if ($forum_ids) {
         $forum_ids = array_diff($forum_ids, [0 => 0]);
@@ -1758,8 +1738,8 @@ function get_title_match_topics(string $title_match_sql, array $forum_ids = []):
 
     if (config()->get('search_engine_type') == 'manticore') {
         try {
-            $manticore = getManticoreSearch();
-            $index = $title_match ? 'topics_rt' : 'posts_rt';
+            $manticore = manticore();
+            $index = $title_only ? 'topics_rt' : 'posts_rt';
             $result = $manticore->search($title_match_sql, $index, $forum_ids);
 
             if (!empty($result['matches'])) {
@@ -1770,24 +1750,22 @@ function get_title_match_topics(string $title_match_sql, array $forum_ids = []):
 
             // Fallback to MySQL if needed
             if (config()->get('search_fallback_to_mysql')) {
-                get_title_match_topics_mysql($title_match_sql, $forum_ids, $where_ids);
+                get_title_match_topics_mysql($title_match_sql, $forum_ids, $where_ids, $title_only);
             }
         }
     } else {
-        get_title_match_topics_mysql($title_match_sql, $forum_ids, $where_ids);
+        get_title_match_topics_mysql($title_match_sql, $forum_ids, $where_ids, $title_only);
     }
 
     return $where_ids;
 }
 
-function get_title_match_topics_mysql(string $title_match_sql, array $forum_ids, array &$where_ids): void
+function get_title_match_topics_mysql(string $title_match_sql, array $forum_ids, array &$where_ids, bool $title_only = true): void
 {
-    global $title_match;
-
     $where_forum = $forum_ids ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
     $search_bool_mode = config()->get('allow_search_in_bool_mode') ? ' IN BOOLEAN MODE' : '';
 
-    if ($title_match) {
+    if ($title_only) {
         // topics
         $sql = "SELECT topic_id FROM " . BB_TOPICS . "
                 WHERE MATCH (topic_title) AGAINST ('$title_match_sql'$search_bool_mode)
@@ -1823,7 +1801,7 @@ function sync_topic_to_manticore($topic_id, $topic_title = null, $forum_id = nul
     }
 
     try {
-        $manticore = getManticoreSearch();
+        $manticore = manticore();
 
         if ($action === 'delete') {
             $manticore->deleteTopic($topic_id);
@@ -1853,7 +1831,7 @@ function sync_post_to_manticore($post_id, $post_text = null, $topic_title = null
     }
 
     try {
-        $manticore = getManticoreSearch();
+        $manticore = manticore();
 
         if ($action === 'delete') {
             $manticore->deletePost($post_id);
@@ -1880,7 +1858,7 @@ function sync_user_to_manticore($user_id, ?string $username = null, string $acti
     }
 
     try {
-        $manticore = getManticoreSearch();
+        $manticore = manticore();
 
         if ($action === 'delete') {
             $manticore->deleteUser($user_id);

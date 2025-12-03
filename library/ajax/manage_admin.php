@@ -48,7 +48,7 @@ switch ($mode) {
         $this->response['template_cache_html'] = '<span class="seed bold">' . __('ALL_TEMPLATE_CLEARED') . '</span>';
         break;
     case 'indexer':
-        $manticore = getManticoreSearch();
+        $manticore = manticore();
         if ($manticore->initialLoad()) {
             $this->response['indexer_html'] = '<span class="seed bold">' . __('INDEXER_SUCCESS') . '</span>';
         } else {

@@ -400,13 +400,8 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
 
 function bbcode2html($text)
 {
-    global $bbcode;
-
-    if (!isset($bbcode)) {
-        $bbcode = new TorrentPier\Legacy\BBCode();
-    }
     $text = censor()->censorString($text);
-    return $bbcode->bbcode2html($text);
+    return bbcode()->bbcode2html($text);
 }
 
 function get_words_rate($text)

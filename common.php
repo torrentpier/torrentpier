@@ -363,6 +363,48 @@ function simple_header(?bool $set = null): bool
 }
 
 /**
+ * BBCode parser singleton
+ *
+ * @return \TorrentPier\Legacy\BBCode
+ */
+function bbcode(): \TorrentPier\Legacy\BBCode
+{
+    static $instance = null;
+    if ($instance === null) {
+        $instance = new \TorrentPier\Legacy\BBCode();
+    }
+    return $instance;
+}
+
+/**
+ * Ajax handler singleton
+ *
+ * @return \TorrentPier\Ajax
+ */
+function ajax(): \TorrentPier\Ajax
+{
+    static $instance = null;
+    if ($instance === null) {
+        $instance = new \TorrentPier\Ajax();
+    }
+    return $instance;
+}
+
+/**
+ * Manticore search singleton
+ *
+ * @return \TorrentPier\ManticoreSearch|null
+ */
+function manticore(): ?\TorrentPier\ManticoreSearch
+{
+    static $instance = null;
+    if ($instance === null) {
+        $instance = new \TorrentPier\ManticoreSearch();
+    }
+    return $instance;
+}
+
+/**
  * Bitfields helper - returns bitfield definitions
  *
  * @param string|null $type Optional type ('forum_perm' or 'user_opt')

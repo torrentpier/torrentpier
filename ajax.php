@@ -13,14 +13,13 @@ define('IN_AJAX', true);
 require __DIR__ . '/common.php';
 
 // Init Ajax class
-$ajax = new TorrentPier\Ajax();
-$ajax->init();
+ajax()->init();
 
 // Init userdata
 user()->session_start();
 
 // Load actions required modules
-switch ($ajax->action) {
+switch (ajax()->action) {
     case 'view_post':
     case 'posts':
     case 'post_mod_comment':
@@ -28,7 +27,7 @@ switch ($ajax->action) {
         break;
 }
 
-$ajax->exec();
+ajax()->exec();
 
 /**
  * @deprecated ajax_common
