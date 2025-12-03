@@ -54,7 +54,7 @@ if (isset($_POST['bonus_id'])) {
 
     bb_die($message);
 } else {
-    $template->assign_vars([
+    template()->assign_vars([
         'U_USER_PROFILE' => PROFILE_URL . $user_id,
         'S_MODE_ACTION' => BONUS_URL,
         'PAGE_TITLE' => __('EXCHANGE_BONUS'),
@@ -67,7 +67,7 @@ if (isset($_POST['bonus_id'])) {
         }
         $class = ($user_points >= $price) ? 'seed' : 'leech';
 
-        $template->assign_block_vars('bonus_upload', [
+        template()->assign_block_vars('bonus_upload', [
             'ROW_CLASS' => !($i % 2) ? 'row2' : 'row1',
             'ID' => $i,
             'DESC' => sprintf(__('BONUS_UPLOAD_DESC'), humn_size($upload_row[$i] * 1024 * 1024 * 1024)),

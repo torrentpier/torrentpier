@@ -27,7 +27,7 @@ if (IS_ADMIN) {
         $gen_simple_header = true;
     }
 
-    $template->assign_vars(['NEW_USER' => $new_user]);
+    template()->assign_vars(['NEW_USER' => $new_user]);
 }
 
 $can_register = (IS_GUEST || IS_ADMIN);
@@ -692,10 +692,10 @@ if ($submit && !$errors) {
     }
 }
 
-$template->assign_vars($can_edit_tpl);
-$template->assign_vars($tp_data);
+template()->assign_vars($can_edit_tpl);
+template()->assign_vars($tp_data);
 
-$template->assign_vars([
+template()->assign_vars([
     'PAGE_TITLE' => ($mode == 'editprofile') ? __('EDIT_PROFILE') . ($adm_edit ? " :: {$pr_data['username']}" : '') : __('REGISTER'),
     'SHOW_REG_AGREEMENT' => ($mode == 'register' && !IS_ADMIN),
     'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',

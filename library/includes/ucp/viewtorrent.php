@@ -51,7 +51,7 @@ if ($releasing) {
     foreach ($releasing as $i => $row) {
         $topic_title = $row['topic_title'];
 
-        $template->assign_block_vars('released', [
+        template()->assign_block_vars('released', [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
             'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>$topic_title</s>",
@@ -71,7 +71,7 @@ if ($seeding) {
     foreach ($seeding as $i => $row) {
         $topic_title = $row['topic_title'];
 
-        $template->assign_block_vars('seed', [
+        template()->assign_block_vars('seed', [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
             'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>$topic_title</s>",
@@ -93,7 +93,7 @@ if ($leeching) {
         $compl_perc = $compl_size ? floor($compl_size * 100 / $row['size']) : 0;
         $topic_title = $row['topic_title'];
 
-        $template->assign_block_vars('leech', [
+        template()->assign_block_vars('leech', [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
             'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>$topic_title</s>",
@@ -110,7 +110,7 @@ if ($leeching) {
     }
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'SHOW_SEARCH_DL' => IS_AM || $profile_user_id,
     'USERNAME' => $profiledata['username'],
     'L_RELEASINGS' => __('RELEASING') . ": " . (($releasing_count) ? "<b>$releasing_count</b>" : '0'),

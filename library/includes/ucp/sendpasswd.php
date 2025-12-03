@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
     $email = $username = '';
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'USERNAME' => $username,
     'EMAIL' => $email,
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',

@@ -45,7 +45,7 @@ if (isset($_POST['topic_id_list'])) {
     }
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'PAGE_TITLE' => __('WATCHED_TOPICS'),
     'S_FORM_ACTION' => BB_ROOT . 'profile.php?mode=watch'
 ]);
@@ -79,7 +79,7 @@ if ($watch_count > 0) {
         for ($i = 0, $iMax = count($watch); $i < $iMax; $i++) {
             $is_unread = is_unread($watch[$i]['topic_last_post_time'], $watch[$i]['topic_id'], $watch[$i]['forum_id']);
 
-            $template->assign_block_vars('watch', [
+            template()->assign_block_vars('watch', [
                 'ROW_CLASS' => (!($i % 2)) ? 'row1' : 'row2',
                 'POST_ID' => $watch[$i]['topic_first_post_id'],
                 'TOPIC_ID' => $watch[$i]['topic_id'],
@@ -100,7 +100,7 @@ if ($watch_count > 0) {
             ]);
         }
 
-        $template->assign_vars([
+        template()->assign_vars([
             'MATCHES' => (count($watch) == 1) ? sprintf(__('FOUND_SEARCH_MATCH'), count($watch)) : sprintf(__('FOUND_SEARCH_MATCHES'), count($watch)),
             'PAGINATION' => generate_pagination(BB_ROOT . 'profile.php?mode=watch', $watch_count, $per_page, $start),
             'PAGE_NUMBER' => sprintf(__('PAGE_OF'), (floor($start / $per_page) + 1), ceil($watch_count / $per_page)),

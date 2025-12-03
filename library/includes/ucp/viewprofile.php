@@ -78,18 +78,18 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
 
 // Null ratio
 if (config()->get('ratio_null_enabled') && $btu = get_bt_userdata($profiledata['user_id'])) {
-    $template->assign_vars(['NULLED_RATIO' => $btu['ratio_nulled']]);
+    template()->assign_vars(['NULLED_RATIO' => $btu['ratio_nulled']]);
 }
 
 // Ban information
 if ($banInfo = getBanInfo((int)$profiledata['user_id'])) {
-    $template->assign_block_vars('ban', [
+    template()->assign_block_vars('ban', [
         'IS_BANNED' => true,
         'BAN_REASON' => IS_ADMIN ? $banInfo['ban_reason'] : '',
     ]);
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'PAGE_TITLE' => sprintf(__('VIEWING_USER_PROFILE'), $profiledata['username']),
     'USERNAME' => $profiledata['username'],
     'PROFILE_USER_ID' => $profiledata['user_id'],
@@ -163,7 +163,7 @@ if (IS_AM) {
         }
         $group_membership = implode(', ', $group_membership);
     }
-    $template->assign_vars([
+    template()->assign_vars([
         'GROUP_MEMBERSHIP' => (bool)$group_membership,
         'GROUP_MEMBERSHIP_TXT' => $group_membership
     ]);
@@ -178,7 +178,7 @@ if (IS_AM || $profile_user_id || !bf($profiledata['user_opt'], 'user_opt', 'user
 if (IS_AM || $profile_user_id) {
     show_bt_userdata($profiledata['user_id']);
 } else {
-    $template->assign_vars([
+    template()->assign_vars([
         'DOWN_TOTAL_BYTES' => false,
         'MIN_DL_BYTES' => false,
     ]);
@@ -195,7 +195,7 @@ if (IS_ADMIN) {
         'dis_topic' => bf($profiledata['user_opt'], 'user_opt', 'dis_topic'),
     ], JSON_THROW_ON_ERROR);
 
-    $template->assign_vars([
+    template()->assign_vars([
         'EDITABLE_TPLS' => true,
         'AJAX_USER_OPT' => $ajax_user_opt,
         'U_MANAGE' => "profile.php?mode=editprofile&amp;" . POST_USERS_URL . "={$profiledata['user_id']}",
@@ -227,6 +227,6 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_topic')) {
     $user_restrictions[] = __('NEW_THREADS');
 }
 
-$template->assign_var('USER_RESTRICTIONS', implode('</li><li>', $user_restrictions));
+template()->assign_var('USER_RESTRICTIONS', implode('</li><li>', $user_restrictions));
 
 print_page('usercp_viewprofile.tpl');
