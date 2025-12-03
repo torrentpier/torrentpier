@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $datastore;
+global $userdata;
 
 if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
@@ -20,10 +20,10 @@ if (!$mode = (string)$this->request['mode']) {
 $html = '';
 switch ($mode) {
     case 'birthday_week':
-        $datastore->enqueue([
+        datastore()->enqueue([
             'stats'
         ]);
-        $stats = $datastore->get('stats');
+        $stats = datastore()->get('stats');
 
         $users = [];
 
@@ -38,10 +38,10 @@ switch ($mode) {
         break;
 
     case 'birthday_today':
-        $datastore->enqueue([
+        datastore()->enqueue([
             'stats'
         ]);
-        $stats = $datastore->get('stats');
+        $stats = datastore()->get('stats');
 
         $users = [];
 
@@ -58,12 +58,12 @@ switch ($mode) {
     case 'get_forum_mods':
         $forum_id = (int)$this->request['forum_id'];
 
-        $datastore->enqueue([
+        datastore()->enqueue([
             'moderators'
         ]);
 
         $moderators = [];
-        $mod = $datastore->get('moderators');
+        $mod = datastore()->get('moderators');
 
         if (isset($mod['mod_users'][$forum_id])) {
             foreach ($mod['mod_users'][$forum_id] as $user_id) {
@@ -80,7 +80,7 @@ switch ($mode) {
         $html = ':&nbsp;';
         $html .= ($moderators) ? implode(', ', $moderators) : __('NONE');
         unset($moderators, $mod);
-        $datastore->rm('moderators');
+        datastore()->rm('moderators');
         break;
 
     case 'null_ratio':

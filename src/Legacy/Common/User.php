@@ -692,15 +692,14 @@ class User
      */
     public function get_not_auth_forums($auth_type)
     {
-        global $datastore;
 
         if (IS_ADMIN) {
             return '';
         }
 
-        if (!$forums = $datastore->get('cat_forums')) {
-            $datastore->update('cat_forums');
-            $forums = $datastore->get('cat_forums');
+        if (!$forums = datastore()->get('cat_forums')) {
+            datastore()->update('cat_forums');
+            $forums = datastore()->get('cat_forums');
         }
 
         if ($auth_type == AUTH_VIEW) {
@@ -759,11 +758,10 @@ class User
         }
 
         if (bf($this->opt, 'user_opt', 'user_porn_forums')) {
-            global $datastore;
 
-            if (!$forums = $datastore->get('cat_forums')) {
-                $datastore->update('cat_forums');
-                $forums = $datastore->get('cat_forums');
+            if (!$forums = datastore()->get('cat_forums')) {
+                datastore()->update('cat_forums');
+                $forums = datastore()->get('cat_forums');
             }
 
             if (isset($forums['forum'])) {

@@ -127,7 +127,7 @@ if ($submit) {
         $adv = 0;
     }
 
-    $datastore->update('cat_forums');
+    datastore()->update('cat_forums');
     CACHE('bb_cache')->rm();
     bb_die(__('FORUM_AUTH_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMAUTH'), '<a href="' . 'admin_forumauth.php' . '">', '</a>'));
 }

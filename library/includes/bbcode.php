@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$datastore->enqueue([
+datastore()->enqueue([
     'smile_replacements',
     'cat_forums',
 ]);
@@ -123,7 +123,7 @@ function prepare_message($message)
 // Either in a window or inline
 function generate_smilies($mode)
 {
-    global $user, $datastore;
+    global $user;
 
     $inline_columns = 4;
     $inline_rows = 7;
@@ -133,7 +133,7 @@ function generate_smilies($mode)
         $user->session_start();
     }
 
-    $data = $datastore->get('smile_replacements');
+    $data = datastore()->get('smile_replacements');
 
     if (isset($data['smile']) && $sql = $data['smile']) {
         $num_smilies = 0;

@@ -672,7 +672,7 @@ if ($submit && !$errors) {
 
             if ($pr_data['user_id'] != $userdata['user_id']) {
                 if ($pr_data['user_level'] == MOD && !empty($db_data['username'])) {
-                    $datastore->update('moderators');
+                    datastore()->update('moderators');
                 }
             }
 

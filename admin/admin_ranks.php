@@ -144,7 +144,7 @@ if ($mode != '') {
 
         $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
-        $datastore->update('ranks');
+        datastore()->update('ranks');
 
         bb_die($message);
     } elseif ($mode == 'delete') {
@@ -172,7 +172,7 @@ if ($mode != '') {
                     bb_die(__('NO_UPDATE_RANKS'));
                 }
 
-                $datastore->update('ranks');
+                datastore()->update('ranks');
 
                 bb_die(__('RANK_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
             } else {

@@ -181,9 +181,9 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         bb_die(__('NO_SUCH_USER'));
     }
 
-    if (!$forums = $datastore->get('cat_forums')) {
-        $datastore->update('cat_forums');
-        $forums = $datastore->get('cat_forums');
+    if (!$forums = datastore()->get('cat_forums')) {
+        datastore()->update('cat_forums');
+        $forums = datastore()->get('cat_forums');
     }
 
     // Check if forums exist
@@ -270,7 +270,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     }
 
     unset($forums, $u_access, $g_access);
-    $datastore->rm('cat_forums');
+    datastore()->rm('cat_forums');
 
     $s_hidden_fields = '
 		<input type="hidden" name="mode" value="' . $mode . '" />
@@ -302,9 +302,9 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         bb_die(__('GROUP_NOT_EXIST'));
     }
 
-    if (!$forums = $datastore->get('cat_forums')) {
-        $datastore->update('cat_forums');
-        $forums = $datastore->get('cat_forums');
+    if (!$forums = datastore()->get('cat_forums')) {
+        datastore()->update('cat_forums');
+        $forums = datastore()->get('cat_forums');
     }
 
     // Check if forums exist
@@ -387,7 +387,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     }
 
     unset($forums, $ug_data, $u_access);
-    $datastore->rm('cat_forums');
+    datastore()->rm('cat_forums');
 
     $s_hidden_fields = '
 		<input type="hidden" name="mode" value="' . $mode . '" />

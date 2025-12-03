@@ -225,18 +225,18 @@ switch ($mode) {
             //Обновление кеша новостей на главной
             $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
             if (isset($news_forums[$forum_id]) && config()->get('show_latest_news') && $result) {
-                $datastore->enqueue([
+                datastore()->enqueue([
                     'latest_news'
                 ]);
-                $datastore->update('latest_news');
+                datastore()->update('latest_news');
             }
 
             $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
             if (isset($net_forums[$forum_id]) && config()->get('show_network_news') && $result) {
-                $datastore->enqueue([
+                datastore()->enqueue([
                     'network_news'
                 ]);
-                $datastore->update('network_news');
+                datastore()->update('network_news');
             }
 
             $msg = $result ? __('TOPICS_REMOVED') : __('NO_TOPICS_REMOVED');
@@ -260,18 +260,18 @@ switch ($mode) {
             //Обновление кеша новостей на главной
             $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
             if ((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && config()->get('show_latest_news') && $result) {
-                $datastore->enqueue([
+                datastore()->enqueue([
                     'latest_news'
                 ]);
-                $datastore->update('latest_news');
+                datastore()->update('latest_news');
             }
 
             $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
             if ((isset($net_forums[$forum_id]) || isset($net_forums[$new_forum_id])) && config()->get('show_network_news') && $result) {
-                $datastore->enqueue([
+                datastore()->enqueue([
                     'network_news'
                 ]);
-                $datastore->update('network_news');
+                datastore()->update('network_news');
             }
 
             $msg = $result ? __('TOPICS_MOVED') : __('NO_TOPICS_MOVED');

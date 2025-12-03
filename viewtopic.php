@@ -12,7 +12,7 @@ define('BB_SCRIPT', 'topic');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
-$datastore->enqueue([
+datastore()->enqueue([
     'ranks',
     'cat_forums'
 ]);
@@ -118,7 +118,7 @@ if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_
 
 if ($userdata['session_admin'] && !empty($_REQUEST['mod'])) {
     if (IS_ADMIN) {
-        $datastore->enqueue([
+        datastore()->enqueue([
             'viewtopic_forum_select'
         ]);
     }
@@ -191,9 +191,9 @@ if ($is_auth['auth_mod']) {
 
 if ($moderation) {
     if (IS_ADMIN) {
-        if (!$forum_select = $datastore->get('viewtopic_forum_select')) {
-            $datastore->update('viewtopic_forum_select');
-            $forum_select = $datastore->get('viewtopic_forum_select');
+        if (!$forum_select = datastore()->get('viewtopic_forum_select')) {
+            datastore()->update('viewtopic_forum_select');
+            $forum_select = datastore()->get('viewtopic_forum_select');
         }
         $forum_select_html = $forum_select['viewtopic_forum_select'];
     } else {
@@ -203,9 +203,9 @@ if ($moderation) {
     template()->assign_vars(['S_FORUM_SELECT' => $forum_select_html]);
 }
 
-if (!$forums = $datastore->get('cat_forums')) {
-    $datastore->update('cat_forums');
-    $forums = $datastore->get('cat_forums');
+if (!$forums = datastore()->get('cat_forums')) {
+    datastore()->update('cat_forums');
+    $forums = datastore()->get('cat_forums');
 }
 
 template()->assign_vars([
@@ -215,7 +215,7 @@ template()->assign_vars([
     'PARENT_FORUM_NAME' => $parent_id ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
 ]);
 unset($forums);
-$datastore->rm('cat_forums');
+datastore()->rm('cat_forums');
 
 // Make jumpbox
 make_jumpbox();
@@ -356,9 +356,9 @@ if ($postrow = DB()->fetch_rowset($sql)) {
     bb_die(__('NO_POSTS_TOPIC'));
 }
 
-if (!$ranks = $datastore->get('ranks')) {
-    $datastore->update('ranks');
-    $ranks = $datastore->get('ranks');
+if (!$ranks = datastore()->get('ranks')) {
+    datastore()->update('ranks');
+    $ranks = datastore()->get('ranks');
 }
 
 // Censor topic title

@@ -14,7 +14,7 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-$datastore->enqueue([
+datastore()->enqueue([
     'moderators',
     'cat_forums',
 ]);
@@ -59,9 +59,9 @@ $def_forums = $all_forums;
 $def_sort = $sort_desc;
 
 // Moderators data
-if (!$mod = $datastore->get('moderators')) {
-    $datastore->update('moderators');
-    $mod = $datastore->get('moderators');
+if (!$mod = datastore()->get('moderators')) {
+    datastore()->update('moderators');
+    $mod = datastore()->get('moderators');
 }
 array_deep($mod['moderators'], 'html_entity_decode');
 array_deep($mod['admins'], 'html_entity_decode');
@@ -71,9 +71,9 @@ $users = array(__('ACTS_LOG_ALL_ACTIONS') => $all_users) + array_flip($mod['mode
 unset($mod);
 
 // Forums data
-if (!$forums = $datastore->get('cat_forums')) {
-    $datastore->update('cat_forums');
-    $forums = $datastore->get('cat_forums');
+if (!$forums = datastore()->get('cat_forums')) {
+    datastore()->update('cat_forums');
+    $forums = datastore()->get('cat_forums');
 }
 $f_data = $forums['f'];
 

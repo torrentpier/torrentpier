@@ -10,15 +10,15 @@
 require __DIR__ . '/pagestart.php';
 
 // Statistics
-if (!$stats = $datastore->get('stats')) {
-    $datastore->update('stats');
-    $stats = $datastore->get('stats');
+if (!$stats = datastore()->get('stats')) {
+    datastore()->update('stats');
+    $stats = datastore()->get('stats');
 }
 
 // Check for updates
-if (!$update_data = $datastore->get('check_updates')) {
-    $datastore->update('check_updates');
-    $update_data = $datastore->get('check_updates');
+if (!$update_data = datastore()->get('check_updates')) {
+    datastore()->update('check_updates');
+    $update_data = datastore()->get('check_updates');
 }
 
 // Generate relevant output

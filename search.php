@@ -105,9 +105,9 @@ $tracker_tbl = BB_BT_TRACKER . ' tr';
 $users_tbl = BB_USERS . ' u';
 
 // Cat/forum data
-if (!$forums = $datastore->get('cat_forums')) {
-    $datastore->update('cat_forums');
-    $forums = $datastore->get('cat_forums');
+if (!$forums = datastore()->get('cat_forums')) {
+    datastore()->update('cat_forums');
+    $forums = datastore()->get('cat_forums');
 }
 $forum_name_html = $forums['forum_name_html'];
 
@@ -311,7 +311,7 @@ if (empty($_GET) && empty($_POST)) {
 }
 
 unset($forums);
-$datastore->rm('cat_forums');
+datastore()->rm('cat_forums');
 
 // Restore previously found items list and search settings if we have valid $search_id
 if ($search_id) {

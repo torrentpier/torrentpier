@@ -27,13 +27,12 @@ class Sitemap
      */
     private function getForumUrls(): array
     {
-        global $datastore;
 
         $forumUrls = [];
 
-        if (!$forums = $datastore->get('cat_forums')) {
-            $datastore->update('cat_forums');
-            $forums = $datastore->get('cat_forums');
+        if (!$forums = datastore()->get('cat_forums')) {
+            datastore()->update('cat_forums');
+            $forums = datastore()->get('cat_forums');
         }
 
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
@@ -72,13 +71,12 @@ class Sitemap
      */
     private function getTopicUrls(): array
     {
-        global $datastore;
 
         $topicUrls = [];
 
-        if (!$forums = $datastore->get('cat_forums')) {
-            $datastore->update('cat_forums');
-            $forums = $datastore->get('cat_forums');
+        if (!$forums = datastore()->get('cat_forums')) {
+            datastore()->update('cat_forums');
+            $forums = datastore()->get('cat_forums');
         }
 
         $not_forums_id = $forums['not_auth_forums']['guest_view'];

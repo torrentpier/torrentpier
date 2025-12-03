@@ -84,7 +84,7 @@ if ($submit && $confirm) {
     \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_bool, $cfg, 'bool');
     \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_num, $cfg, 'num');
 
-    $datastore->update('cat_forums');
+    datastore()->update('cat_forums');
 
     bb_die(__('CONFIG_UPD') . '<br /><br />' . sprintf(__('RETURN_CONFIG'), '<a href="admin_bt_forum_cfg.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
 }

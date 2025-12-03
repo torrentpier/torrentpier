@@ -60,7 +60,7 @@ if ($submit) {
         }
     }
 
-    $datastore->update('ban_list');
+    datastore()->update('ban_list');
     bb_die(__('BAN_UPDATE_SUCESSFUL') . '<br /><br />' . sprintf(__('CLICK_RETURN_BANADMIN'), '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
 } else {
     template()->assign_vars(['S_BANLIST_ACTION' => 'admin_user_ban.php']);

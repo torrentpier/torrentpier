@@ -26,9 +26,8 @@ switch ($mode) {
         $this->response['cache_html'] = '<span class="seed bold">' . __('ALL_CACHE_CLEARED') . '</span>';
         break;
     case 'clear_datastore':
-        global $datastore;
 
-        $datastore->clean();
+        datastore()->clean();
 
         $this->response['datastore_html'] = '<span class="seed bold">' . __('DATASTORE_CLEARED') . '</span>';
         break;

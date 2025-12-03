@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $datastore, $log_action;
+global $userdata, $log_action;
 
 if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
@@ -88,18 +88,18 @@ switch ($mode) {
         // Update the news cache on the index page
         $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
         if (isset($news_forums[$t_data['forum_id']]) && config()->get('show_latest_news')) {
-            $datastore->enqueue([
+            datastore()->enqueue([
                 'latest_news'
             ]);
-            $datastore->update('latest_news');
+            datastore()->update('latest_news');
         }
 
         $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
         if (isset($net_forums[$t_data['forum_id']]) && config()->get('show_network_news')) {
-            $datastore->enqueue([
+            datastore()->enqueue([
                 'network_news'
             ]);
-            $datastore->update('network_news');
+            datastore()->update('network_news');
         }
 
         // Log action

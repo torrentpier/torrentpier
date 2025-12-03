@@ -20,43 +20,24 @@ class ManticoreSearch
 {
     /**
      * PDO connection to Manticore
-     *
-     * @var PDO
      */
     private PDO $pdo;
 
     /**
-     * Search configuration
-     *
-     * Contains settings passed from $bb_cfg:
-     * - 'manticore_host' - Manticore host
-     * - 'manticore_port' - Manticore port
-     * - other options if needed
-     *
-     * @var array
-     */
-    private array $config;
-
-    /**
      * Constructor
-     *
-     * @param array $bb_cfg
      */
-    public function __construct(array $bb_cfg)
+    public function __construct()
     {
-        $this->config = $bb_cfg;
         $this->connect();
     }
 
     /**
      * Connect to Manticore via PDO
-     *
-     * @return void
      */
     private function connect(): void
     {
-        $host = $this->config['manticore_host'] ?? '127.0.0.1';
-        $port = $this->config['manticore_port'] ?? 9306;
+        $host = config()->get('manticore_host', '127.0.0.1');
+        $port = config()->get('manticore_port', 9306);
 
         $this->pdo = new PDO(
             "mysql:host={$host};port={$port};charset=utf8mb4",

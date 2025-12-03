@@ -261,7 +261,7 @@ function setbit(&$int, $bit_num, $on)
 */
 function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG_PERM_BOTH)
 {
-    global $bf, $datastore;
+    global $bf;
 
     $is_guest = true;
     $is_admin = false;
@@ -292,9 +292,9 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     // If f_access has been passed, or auth is needed to return an array of forums
     // then we need to pull the auth information on the given forum (or all forums)
     if (empty($f_access)) {
-        if (!$forums = $datastore->get('cat_forums')) {
-            $datastore->update('cat_forums');
-            $forums = $datastore->get('cat_forums');
+        if (!$forums = datastore()->get('cat_forums')) {
+            datastore()->update('cat_forums');
+            $forums = datastore()->get('cat_forums');
         }
 
         if ($forum_id == AUTH_LIST_ALL) {
@@ -1051,15 +1051,14 @@ function get_userdata(int|string $u, bool $is_name = false, bool $allow_guest = 
 
 function make_jumpbox(): void
 {
-    global $datastore;
 
     if (!config()->get('show_jumpbox')) {
         return;
     }
 
-    if (!$jumpbox = $datastore->get('jumpbox')) {
-        $datastore->update('jumpbox');
-        $jumpbox = $datastore->get('jumpbox');
+    if (!$jumpbox = datastore()->get('jumpbox')) {
+        datastore()->update('jumpbox');
+        $jumpbox = datastore()->get('jumpbox');
     }
 
     template()->assign_vars(['JUMPBOX' => IS_GUEST ? DB()->escape($jumpbox['guest']) : DB()->escape($jumpbox['user'])]);
@@ -1068,7 +1067,6 @@ function make_jumpbox(): void
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
 function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '', $all_forums_option = null)
 {
-    global $datastore;
 
     if (is_array($mode)) {
         $not_auth_forums_fary = array_flip($mode);
@@ -1078,9 +1076,9 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
         $max_length = HTML_SELECT_MAX_LENGTH;
     }
     $select = null === $all_forums_option ? [] : [__('ALL_AVAILABLE') => $all_forums_option];
-    if (!$forums = $datastore->get('cat_forums')) {
-        $datastore->update('cat_forums');
-        $forums = $datastore->get('cat_forums');
+    if (!$forums = datastore()->get('cat_forums')) {
+        datastore()->update('cat_forums');
+        $forums = datastore()->get('cat_forums');
     }
 
     foreach ($forums['f'] as $fid => $f) {
@@ -1788,10 +1786,10 @@ function clean_text_match(?string $text, bool $ltrim_star = true, bool $die_if_e
  */
 function getManticoreSearch(): ?\TorrentPier\ManticoreSearch
 {
-    global $manticore_search, $bb_cfg;
+    global $manticore_search;
 
     if ($manticore_search === null) {
-        $manticore_search = new \TorrentPier\ManticoreSearch($bb_cfg);
+        $manticore_search = new \TorrentPier\ManticoreSearch();
     }
 
     return $manticore_search;
@@ -1868,9 +1866,7 @@ function get_title_match_topics_mysql(string $title_match_sql, array $forum_ids,
  */
 function sync_topic_to_manticore($topic_id, $topic_title = null, $forum_id = null, string $action = 'upsert'): void
 {
-    global $bb_cfg;
-
-    if ($bb_cfg['search_engine_type'] !== 'manticore') {
+    if (config()->get('search_engine_type') !== 'manticore') {
         return;
     }
 
@@ -1900,9 +1896,7 @@ function sync_topic_to_manticore($topic_id, $topic_title = null, $forum_id = nul
  */
 function sync_post_to_manticore($post_id, $post_text = null, $topic_title = null, $topic_id = null, $forum_id = null, string $action = 'upsert'): void
 {
-    global $bb_cfg;
-
-    if ($bb_cfg['search_engine_type'] !== 'manticore') {
+    if (config()->get('search_engine_type') !== 'manticore') {
         return;
     }
 
@@ -1929,9 +1923,7 @@ function sync_post_to_manticore($post_id, $post_text = null, $topic_title = null
  */
 function sync_user_to_manticore($user_id, ?string $username = null, string $action = 'upsert'): void
 {
-    global $bb_cfg;
-
-    if ($bb_cfg['search_engine_type'] !== 'manticore') {
+    if (config()->get('search_engine_type') !== 'manticore') {
         return;
     }
 
@@ -2050,11 +2042,10 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
  */
 function profile_url(array $data, bool $target_blank = false, bool $no_link = false): string
 {
-    global $datastore;
 
-    if (!$ranks = $datastore->get('ranks')) {
-        $datastore->update('ranks');
-        $ranks = $datastore->get('ranks');
+    if (!$ranks = datastore()->get('ranks')) {
+        datastore()->update('ranks');
+        $ranks = datastore()->get('ranks');
     }
 
     $username = !empty($data['username']) ? $data['username'] : __('GUEST');
@@ -2258,10 +2249,9 @@ function user_birthday_icon($user_birthday, $user_id): string
  */
 function getBanInfo(?int $userId = null): ?array
 {
-    global $datastore;
 
     // Get bans info from datastore
-    $bans = $datastore->get('ban_list');
+    $bans = datastore()->get('ban_list');
 
     if (!isset($userId)) {
         return $bans;

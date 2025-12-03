@@ -333,9 +333,9 @@ if ($search_id) {
 }
 
 // Get allowed for searching forums list
-if (!$forums = $datastore->get('cat_forums')) {
-    $datastore->update('cat_forums');
-    $forums = $datastore->get('cat_forums');
+if (!$forums = datastore()->get('cat_forums')) {
+    datastore()->update('cat_forums');
+    $forums = datastore()->get('cat_forums');
 }
 $cat_title_html = $forums['cat_title_html'];
 $forum_name_html = $forums['forum_name_html'];
@@ -353,7 +353,7 @@ foreach ($allowed_forums as $forum_id) {
     }
 }
 unset($forums);
-$datastore->rm('cat_forums');
+datastore()->rm('cat_forums');
 
 // Get current search settings
 if (!$set_default) {

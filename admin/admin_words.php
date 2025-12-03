@@ -80,7 +80,7 @@ if ($mode != '') {
             bb_die('Could not insert data into words table');
         }
 
-        $datastore->update('censor');
+        datastore()->update('censor');
         censor()->reload(); // Reload the singleton instance with updated words
         $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_WORDADMIN'), '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
@@ -95,7 +95,7 @@ if ($mode != '') {
                 bb_die('Could not remove data from words table');
             }
 
-            $datastore->update('censor');
+            datastore()->update('censor');
             censor()->reload(); // Reload the singleton instance with updated words
 
             bb_die(__('WORD_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_WORDADMIN'), '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));

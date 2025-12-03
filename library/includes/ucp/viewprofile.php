@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 require INC_DIR . '/bbcode.php';
 
-$datastore->enqueue([
+datastore()->enqueue([
     'ranks',
     'cat_forums'
 ]);
@@ -32,9 +32,9 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL], profile_view: true)) {
 
 $profiledata['user_birthday'] = $profiledata['user_birthday']->format('Y-m-d');
 
-if (!$ranks = $datastore->get('ranks')) {
-    $datastore->update('ranks');
-    $ranks = $datastore->get('ranks');
+if (!$ranks = datastore()->get('ranks')) {
+    datastore()->update('ranks');
+    $ranks = datastore()->get('ranks');
 }
 
 $poster_rank = $rank_image = $rank_style = $rank_select = '';

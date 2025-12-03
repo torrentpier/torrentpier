@@ -43,9 +43,9 @@ define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest');
 
 set_die_append_msg();
-if (!$forums = $datastore->get('cat_forums')) {
-    $datastore->update('cat_forums');
-    $forums = $datastore->get('cat_forums');
+if (!$forums = datastore()->get('cat_forums')) {
+    datastore()->update('cat_forums');
+    $forums = datastore()->get('cat_forums');
 }
 if (!$forum_id or !$forum_data = @$forums['forum'][$forum_id]) {
     bb_die(__('FORUM_NOT_EXIST'));
@@ -123,9 +123,9 @@ if ($mark_read && !IS_GUEST) {
 // Subforums
 $show_subforums = config()->get('sf_on_first_page_only') ? !$start : true;
 
-if (!$forums = $datastore->get('cat_forums')) {
-    $datastore->update('cat_forums');
-    $forums = $datastore->get('cat_forums');
+if (!$forums = datastore()->get('cat_forums')) {
+    datastore()->update('cat_forums');
+    $forums = datastore()->get('cat_forums');
 }
 
 if ($forums['forum'][$forum_id]['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) {
@@ -214,7 +214,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
     }
 }
 unset($rowset);
-$datastore->rm('cat_forums');
+datastore()->rm('cat_forums');
 
 // Topics per page
 $topics_per_page = config()->get('topics_per_page');

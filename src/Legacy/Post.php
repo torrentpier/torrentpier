@@ -96,7 +96,7 @@ class Post
      */
     public static function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig, $robots_indexing)
     {
-        global $userdata, $post_info, $is_auth, $datastore;
+        global $userdata, $post_info, $is_auth;
 
         $current_time = TIMENOW;
 
@@ -206,20 +206,20 @@ class Post
         if (config()->get('show_latest_news')) {
             $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
             if (isset($news_forums[$forum_id]) && config()->get('show_latest_news') && $mode == 'newtopic') {
-                $datastore->enqueue([
+                datastore()->enqueue([
                     'latest_news'
                 ]);
-                $datastore->update('latest_news');
+                datastore()->update('latest_news');
             }
         }
 
         if (config()->get('show_network_news')) {
             $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
             if (isset($net_forums[$forum_id]) && config()->get('show_network_news') && $mode == 'newtopic') {
-                $datastore->enqueue([
+                datastore()->enqueue([
                     'network_news'
                 ]);
-                $datastore->update('network_news');
+                datastore()->update('network_news');
             }
         }
 

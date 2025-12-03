@@ -11,11 +11,10 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $datastore;
 
-if (!$ranks = $datastore->get('ranks')) {
-    $datastore->update('ranks');
-    $ranks = $datastore->get('ranks');
+if (!$ranks = datastore()->get('ranks')) {
+    datastore()->update('ranks');
+    $ranks = datastore()->get('ranks');
 }
 
 $rank_id = (int)$this->request['rank_id'];

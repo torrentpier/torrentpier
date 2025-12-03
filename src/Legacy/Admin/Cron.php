@@ -24,7 +24,7 @@ class Cron
     {
         /** @noinspection PhpUnusedLocalVariableInspection */
         // bb_cfg deprecated, but kept for compatibility with non-adapted cron jobs
-        global $bb_cfg, $datastore, $cron_runtime_log;
+        global $bb_cfg, $cron_runtime_log;
 
         \define('IN_CRON', true);
 

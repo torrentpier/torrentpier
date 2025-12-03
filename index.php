@@ -25,19 +25,19 @@ $show_online_users = true;
 // Show subforums
 $show_subforums = true;
 
-$datastore->enqueue([
+datastore()->enqueue([
     'stats',
     'moderators',
     'cat_forums'
 ]);
 
 if (config()->get('show_latest_news')) {
-    $datastore->enqueue([
+    datastore()->enqueue([
         'latest_news'
     ]);
 }
 if (config()->get('show_network_news')) {
-    $datastore->enqueue([
+    datastore()->enqueue([
         'network_news'
     ]);
 }
@@ -68,17 +68,17 @@ $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
 
 // Statistics
-$stats = $datastore->get('stats');
+$stats = datastore()->get('stats');
 if ($stats === false) {
-    $datastore->update('stats');
-    $stats = $datastore->get('stats');
+    datastore()->update('stats');
+    $stats = datastore()->get('stats');
 }
 
 // Forums data
-$forums = $datastore->get('cat_forums');
+$forums = datastore()->get('cat_forums');
 if ($forums === false) {
-    $datastore->update('cat_forums');
-    $forums = $datastore->get('cat_forums');
+    datastore()->update('cat_forums');
+    $forums = datastore()->get('cat_forums');
 }
 $cat_title_html = $forums['cat_title_html'];
 $forum_name_html = $forums['forum_name_html'];
@@ -174,15 +174,15 @@ if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
     }
     CACHE('bb_cache')->set($cache_name, $cat_forums, 180);
     unset($row, $forums);
-    $datastore->rm('cat_forums');
+    datastore()->rm('cat_forums');
 }
 
 // Obtain list of moderators
 $moderators = [];
-$mod = $datastore->get('moderators');
+$mod = datastore()->get('moderators');
 if ($mod === false) {
-    $datastore->update('moderators');
-    $mod = $datastore->get('moderators');
+    datastore()->update('moderators');
+    $mod = datastore()->get('moderators');
 }
 
 if (!empty($mod)) {
@@ -199,7 +199,7 @@ if (!empty($mod)) {
 }
 
 unset($mod);
-$datastore->rm('moderators');
+datastore()->rm('moderators');
 
 // Build index page
 $forums_count = 0;
@@ -328,10 +328,10 @@ if (config()->get('bt_show_dl_stat_on_index') && !IS_GUEST) {
 
 // Latest news
 if (config()->get('show_latest_news')) {
-    $latest_news = $datastore->get('latest_news');
+    $latest_news = datastore()->get('latest_news');
     if ($latest_news === false) {
-        $datastore->update('latest_news');
-        $latest_news = $datastore->get('latest_news');
+        datastore()->update('latest_news');
+        $latest_news = datastore()->get('latest_news');
     }
 
     template()->assign_vars(['SHOW_LATEST_NEWS' => true]);
@@ -352,10 +352,10 @@ if (config()->get('show_latest_news')) {
 
 // Network news
 if (config()->get('show_network_news')) {
-    $network_news = $datastore->get('network_news');
+    $network_news = datastore()->get('network_news');
     if ($network_news === false) {
-        $datastore->update('network_news');
-        $network_news = $datastore->get('network_news');
+        datastore()->update('network_news');
+        $network_news = datastore()->get('network_news');
     }
 
     template()->assign_vars(['SHOW_NETWORK_NEWS' => true]);
