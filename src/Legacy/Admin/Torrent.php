@@ -63,10 +63,8 @@ class Torrent
      */
     public static function set_tpl_vars($default_cfg, $cfg)
     {
-        global $template;
-
         foreach ($default_cfg as $config_name => $config_value) {
-            $template->assign_vars([strtoupper($config_name) => htmlspecialchars($cfg[$config_name])]);
+            template()->assign_vars([strtoupper($config_name) => htmlspecialchars($cfg[$config_name])]);
         }
     }
 
@@ -78,16 +76,14 @@ class Torrent
      */
     public static function set_tpl_vars_bool($default_cfg, $cfg)
     {
-        global $template;
-
         foreach ($default_cfg as $config_name => $config_value) {
             // YES/NO 'checked'
-            $template->assign_vars([
+            template()->assign_vars([
                 strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? HTML_CHECKED : '',
                 strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? HTML_CHECKED : '',
             ]);
             // YES/NO lang vars
-            $template->assign_vars([
+            template()->assign_vars([
                 'L_' . strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? '<u>' . __('YES') . '</u>' : __('YES'),
                 'L_' . strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? '<u>' . __('NO') . '</u>' : __('NO'),
             ]);

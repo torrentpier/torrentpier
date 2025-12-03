@@ -506,7 +506,6 @@ class Post
      */
     public static function topic_review($topic_id)
     {
-        global $template;
 
         // Fetch posts data
         $review_posts = DB()->fetch_rowset("
@@ -524,7 +523,7 @@ class Post
 
         // Topic posts block
         foreach ($review_posts as $i => $post) {
-            $template->assign_block_vars('review', [
+            template()->assign_block_vars('review', [
                 'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
                 'POSTER' => profile_url($post),
                 'POSTER_NAME_JS' => addslashes($post['username']),
@@ -535,7 +534,7 @@ class Post
             ]);
         }
 
-        $template->assign_vars([
+        template()->assign_vars([
             'TPL_TOPIC_REVIEW' => (bool)$review_posts,
         ]);
     }

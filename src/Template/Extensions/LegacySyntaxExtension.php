@@ -522,8 +522,7 @@ class LegacySyntaxExtension extends AbstractExtension
      */
     public function getVariable(string $varName, mixed $default = ''): mixed
     {
-        global $template;
-        return $template->getVar($varName, $default);
+        return template()->getVar($varName, $default);
     }
 
     /**
