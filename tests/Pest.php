@@ -408,10 +408,6 @@ function resetGlobalState(): void
     // Reset any global variables that might affect tests
     $_COOKIE = [];
     $_SESSION = [];
-
-    // Reset any global database connections
-    global $db;
-    $db = null;
 }
 
 /**
