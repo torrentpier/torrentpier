@@ -21,7 +21,7 @@ if (!$mode = (string)$this->request['mode']) {
 
 $comment = false;
 if (config()->get('tor_comment')) {
-    $comment = (string)$this->request['comment'];
+    $comment = (string)($this->request['comment'] ?? '');
 }
 
 $tor = DB()->fetch_row("
