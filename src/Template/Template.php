@@ -20,7 +20,7 @@ class Template
     private static float $totalRenderTime = 0;
 
     /** Reserved context keys that should not be overwritten */
-    private const RESERVED_KEYS = ['L', '_tpldata', 'V', 'IMG', 'MOVED', 'ANNOUNCE', 'STICKY', 'LOCKED'];
+    private const RESERVED_KEYS = ['L', '_tpldata', 'V', 'IMG'];
 
     /** @var array<array{variable: string, template: string, source: string, time: float}> */
     private static array $variableConflicts = [];
