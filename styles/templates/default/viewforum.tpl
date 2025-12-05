@@ -393,7 +393,7 @@ td.topic_id { cursor: pointer; }
 		<td class="small bold nowrap tRight w100">
 			&nbsp;
 			<!-- IF LOGGED_IN -->
-			<a class="small" href="feed.php?type=f&id={FORUM_ID}" target="_blank">{FEED_IMG} {L_ATOM_SUBSCRIBE}</a>&nbsp;&#0183;
+			<a class="small" href="feed.php?type=f&id={FORUM_ID}" target="_blank">{{ FEED_IMG|raw }} {L_ATOM_SUBSCRIBE}</a>&nbsp;&#0183;
 			<a class="small" href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a>&nbsp;&#0183;
 			<a class="menu-root" href="#only-new-options">{L_DISPLAYING_OPTIONS}</a>
 			<!-- ENDIF / LOGGED_IN -->
@@ -445,7 +445,7 @@ td.topic_id { cursor: pointer; }
 	<div class="torTopic">
 		<!-- IF t.TOR_STATUS_ICON --><span id="status-{t.TOPIC_ID}" title="{t.TOR_STATUS_TEXT}">{t.TOR_STATUS_ICON}</span>&#0183;<!-- ENDIF -->
 		<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
-		<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_TOPIC_MOVED}</span>
+		<!-- IF t.STATUS == 2 --><span class="topicMoved">{L_TOPIC_MOVED}</span>
 			<!-- ELSEIF t.DL_CLASS --><span class="{t.DL_CLASS} iconDL"><b>{L_TOPIC_DL}</b></span>
 		<!-- ENDIF -->
 		<!-- IF t.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span><!-- ENDIF -->
@@ -474,7 +474,7 @@ td.topic_id { cursor: pointer; }
     <td class="tCenter small nowrap" style="padding: 3px 4px 2px;">
         <p>
             <span title="{L_REPLIES}: {t.REPLIES}">{t.REPLIES}</span>
-            <!-- IF t.STATUS != MOVED --><span class="small"> | </span><!-- ENDIF -->
+            <!-- IF t.STATUS != 2 --><span class="small"> | </span><!-- ENDIF -->
             <span title="{L_VIEWS}: {t.VIEWS}">{t.VIEWS}</span>
         </p>
         <!-- BEGIN tor -->
@@ -545,7 +545,7 @@ td.topic_id { cursor: pointer; }
 	<td class="tt">
 		<span class="topictitle">
 			<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
-			<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_TOPIC_MOVED}</span>
+			<!-- IF t.STATUS == 2 --><span class="topicMoved">{L_TOPIC_MOVED}</span>
 				<!-- ELSEIF t.DL --><span class="">{L_TOPIC_DL}</span>
 				<!-- ELSEIF t.ATTACH -->{TOPIC_ATTACH_ICON}
 			<!-- ENDIF -->
@@ -633,7 +633,7 @@ td.topic_id { cursor: pointer; }
 <!-- IF IS_ADMIN -->
 <div class="med tCenter">{L_ADMIN}:
   <a href="{POSTING_URL}?mode=new_rel&amp;{#POST_FORUM_URL#}={FORUM_ID}&amp;edit_tpl=1" class="bold" target="_blank">{L_DESIGNER}</a>&nbsp;&middot;
-  <a href="admin/admin_log.php?{#POST_FORUM_URL#}={FORUM_ID}&amp;db={$bb_cfg['log_days_keep']}" target="_blank">{L_FORUM_LOGS}</a>&nbsp;&middot;
+  <a href="admin/admin_log.php?{#POST_FORUM_URL#}={FORUM_ID}&amp;db={{ config('log_days_keep') }}" target="_blank">{L_FORUM_LOGS}</a>&nbsp;&middot;
   <a href="admin/admin_forums.php?mode=editforum&amp;{#POST_FORUM_URL#}={FORUM_ID}" target="_blank">{L_EDIT}</a>&nbsp;&middot;
   <a href="admin/admin_forumauth.php?{#POST_FORUM_URL#}={FORUM_ID}" target="_blank">{L_PERMISSIONS}</a>&nbsp;&middot;
   <a href="admin/admin_forums.php?mode=deleteforum&amp;{#POST_FORUM_URL#}={FORUM_ID}" target="_blank">{L_DELETE}</a>

@@ -11,8 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $lang;
-
 // Obtain user/online information
 $logged_online = $guests_online = 0;
 $time_online = TIMENOW - 300;
@@ -95,7 +93,7 @@ if ($ulist) {
         if (count($users) > 200) {
             $style = 'margin: 3px 0; padding: 2px 4px; border: 1px inset; height: 200px; overflow: auto;';
             $block[] = "<div style=\"$style\">\n" . implode(",\n", $users) . "</div>\n";
-            $short[] = '<a href="index.php?online_full=1#online">' . $lang['USERS'] . ': ' . count($users) . '</a>';
+            $short[] = '<a href="index.php?online_full=1#online">' . __('USERS') . ': ' . count($users) . '</a>';
         } else {
             $inline[] = implode(",\n", $users);
             $short[] = implode(",\n", $users);
@@ -109,9 +107,9 @@ if ($ulist) {
 }
 
 if (!$online['userlist']) {
-    $online['userlist'] = $online_short['userlist'] = $lang['NONE'];
+    $online['userlist'] = $online_short['userlist'] = __('NONE');
 } elseif (isset($_REQUEST['f'])) {
-    $online['userlist'] = $online_short['userlist'] = $lang['BROWSING_FORUM'] . ' ' . $online['userlist'];
+    $online['userlist'] = $online_short['userlist'] = __('BROWSING_FORUM') . ' ' . $online['userlist'];
 }
 
 $total_online = $logged_online + $guests_online;
@@ -123,7 +121,7 @@ if ($total_online > config()->get('record_online_users')) {
     ]);
 }
 
-$online['stat'] = $online_short['stat'] = sprintf($lang['ONLINE_USERS'], $total_online, $logged_online, $guests_online);
+$online['stat'] = $online_short['stat'] = sprintf(__('ONLINE_USERS'), $total_online, $logged_online, $guests_online);
 
 $online['cnt'] = $online_short['cnt'] = <<<HTML
 [
@@ -136,5 +134,5 @@ $online['cnt'] = $online_short['cnt'] = <<<HTML
 ]
 HTML;
 
-CACHE('bb_cache')->set('online_' . $userdata['user_lang'], $online, 60);
-CACHE('bb_cache')->set('online_short_' . $userdata['user_lang'], $online_short, 60);
+CACHE('bb_cache')->set('online_' . userdata('user_lang'), $online, 60);
+CACHE('bb_cache')->set('online_short_' . userdata('user_lang'), $online_short, 60);

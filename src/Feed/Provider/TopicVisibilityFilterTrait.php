@@ -24,12 +24,8 @@ trait TopicVisibilityFilterTrait
      */
     private function filterForbiddenTopics(array $topics): array
     {
-        // Get forbidden forums for guests using datastore helper
-        $forums = datastore()->get('cat_forums');
-        if (!$forums) {
-            datastore()->update('cat_forums');
-            $forums = datastore()->get('cat_forums');
-        }
+        // Get forbidden forums for guests
+        $forums = forum_tree();
 
         // Get guest_view string, default to empty
         $guestView = $forums['not_auth_forums']['guest_view'] ?? '';

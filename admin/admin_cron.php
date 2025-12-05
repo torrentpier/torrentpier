@@ -23,7 +23,7 @@ $cron_action = $_POST['cron_action'] ?? '';
 if ($mode == 'run' && !$job_id) {
     define('BB_ROOT', './../');
     require BB_ROOT . 'common.php';
-    $user->session_start();
+    user()->session_start();
     redirect('admin/' . basename(__FILE__) . '?mode=list');
 } else {
     require __DIR__ . '/pagestart.php';
@@ -31,11 +31,11 @@ if ($mode == 'run' && !$job_id) {
 
 // Check for demo mode
 if (IN_DEMO_MODE && ($submit || !in_array($mode, ['add', 'list']))) {
-    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+    bb_die(__('CANT_EDIT_IN_DEMO_MODE'));
 }
 
 if (!IS_SUPER_ADMIN) {
-    bb_die($lang['ONLY_FOR_SUPER_ADMIN']);
+    bb_die(__('ONLY_FOR_SUPER_ADMIN'));
 }
 
 $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CONFIG . " WHERE config_name = 'cron_check_interval'");
@@ -52,7 +52,7 @@ foreach ($sql as $row) {
     }
 }
 
-$template->assign_vars(array(
+template()->assign_vars(array(
     'CRON_ENABLED' => TorrentPier\Helpers\CronHelper::isEnabled(),
     'CRON_CHECK_INTERVAL' => $new['cron_check_interval'],
 ));
@@ -65,7 +65,7 @@ switch ($mode) {
             $execution_time = $row['execution_time'] ?? 0;
 
             if ($execution_time > 0) {
-                $execution_time_formatted = number_format($execution_time, 4) . ' ' . $lang['SEC'];
+                $execution_time_formatted = number_format($execution_time, 4) . ' ' . __('SEC');
 
                 if ($execution_time < 1) {
                     $time_color = '#286e0f';
@@ -80,14 +80,14 @@ switch ($mode) {
                 $execution_time_formatted = '—';
             }
 
-            $template->assign_block_vars('list', array(
+            template()->assign_block_vars('list', array(
                 'ROW_CLASS' => !($i % 2) ? 'row2' : 'row1',
                 'JOB_ID' => $i + 1,
                 'CRON_ID' => $row['cron_id'],
-                'CRON_ACTIVE' => $row['cron_active'] ? '<img src="../styles/images/icon_run.gif" alt="' . $lang['YES'] . '" />' : '<img src="../styles/images/icon_delete.gif" alt="' . $lang['NO'] . '" />',
+                'CRON_ACTIVE' => $row['cron_active'] ? '<img src="../styles/images/icon_run.gif" alt="' . __('YES') . '" />' : '<img src="../styles/images/icon_delete.gif" alt="' . __('NO') . '" />',
                 'CRON_TITLE' => $row['cron_title'],
                 'CRON_SCRIPT' => $row['cron_script'],
-                'SCHEDULE' => $row['schedule'] ? $lang['SCHEDULE'][$row['schedule']] : '<b class="leech">' . $lang['NOSELECT'] . '</b>',
+                'SCHEDULE' => $row['schedule'] ? __('SCHEDULE')[$row['schedule']] : '<b class="leech">' . __('NOSELECT') . '</b>',
                 'RUN_DAY' => $row['run_day'],
                 'LAST_RUN' => $row['last_run'],
                 'NEXT_RUN' => $row['next_run'],
@@ -96,7 +96,7 @@ switch ($mode) {
             ));
         }
 
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'TPL_CRON_LIST' => true,
             'S_CRON_ACTION' => 'admin_cron.php',
             'S_MODE' => 'list',
@@ -104,7 +104,7 @@ switch ($mode) {
 
         //detect cron status
         if (is_file(CRON_RUNNING)) {
-            $template->assign_vars(array(
+            template()->assign_vars(array(
                 'CRON_RUNNING' => true,
             ));
         }
@@ -126,12 +126,12 @@ switch ($mode) {
         $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . " WHERE cron_id = $job_id");
 
         foreach ($sql as $row) {
-            $template->assign_vars(array(
+            template()->assign_vars(array(
                 'CRON_ID' => $row['cron_id'],
                 'CRON_ACTIVE' => $row['cron_active'],
                 'CRON_TITLE' => $row['cron_title'],
                 'CRON_SCRIPT' => $row['cron_script'],
-                'SCHEDULE' => $row['schedule'] ? $lang['SCHEDULE'][$row['schedule']] : '',
+                'SCHEDULE' => $row['schedule'] ? __('SCHEDULE')[$row['schedule']] : '',
                 'RUN_DAY' => $row['run_day'],
                 'RUN_TIME' => $row['run_time']?->format('%H:%I:%S') ?? '',
                 'RUN_ORDER' => $row['run_order'],
@@ -151,18 +151,18 @@ switch ($mode) {
             $run_day[$i] = $i;
         }
 
-        $schedule = array($lang['SCHEDULE']['select'] => 0);
-        foreach ($lang['SCHEDULE'] as $type => $key) {
+        $schedule = array(__('SCHEDULE')['select'] => 0);
+        foreach (__('SCHEDULE') as $type => $key) {
             $schedule[$key] = $type;
         }
 
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'TPL_CRON_EDIT' => true,
             'S_CRON_ACTION' => 'admin_cron.php',
             'S_MODE' => 'edit',
             'SCHEDULE' => build_select('schedule', $schedule, $row['schedule']),
             'RUN_DAY' => build_select('run_day', $run_day, $row['run_day']),
-            'L_CRON_EDIT_HEAD' => $lang['CRON_EDIT_HEAD_EDIT'],
+            'L_CRON_EDIT_HEAD' => __('CRON_EDIT_HEAD_EDIT'),
         ));
         break;
 
@@ -173,11 +173,11 @@ switch ($mode) {
         }
 
         $schedule = [];
-        foreach ($lang['SCHEDULE'] as $type => $key) {
+        foreach (__('SCHEDULE') as $type => $key) {
             $schedule[$key] = $type;
         }
 
-        $template->assign_vars(array(
+        template()->assign_vars(array(
             'TPL_CRON_EDIT' => true,
             'S_CRON_ACTION' => 'admin_cron.php',
             'S_MODE' => 'add',
@@ -202,7 +202,7 @@ switch ($mode) {
 
     case 'delete':
         \TorrentPier\Legacy\Admin\Cron::delete_jobs($job_id);
-        bb_die($lang['JOB_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_JOBS'], '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die(__('JOB_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
         break;
 }
 

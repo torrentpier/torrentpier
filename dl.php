@@ -16,7 +16,7 @@ $topic_id = (int)request_var('t', 0);
 $m3u = isset($_GET['m3u']) && $_GET['m3u'];
 
 // Start session
-$user->session_start();
+user()->session_start();
 set_die_append_msg();
 
 if (!$topic_id) {
@@ -44,9 +44,8 @@ if (!$t_data['attach_ext_id']) {
 
 $forum_id = $t_data['forum_id'];
 
-
 // Authorization check
-$is_auth = auth(AUTH_ALL, $forum_id, $userdata);
+$is_auth = auth(AUTH_ALL, $forum_id, userdata());
 set_die_append_msg($forum_id, $topic_id);
 
 if (!$is_auth['auth_download']) {
@@ -76,7 +75,7 @@ if (!IS_AM && $t_data['tor_status']) {
 
 // Check download limit
 $dlCounter = new \TorrentPier\Torrent\DownloadCounter();
-if (!$dlCounter->recordDownload($topic_id, $userdata['user_id'], IS_PREMIUM)) {
+if (!$dlCounter->recordDownload($topic_id, userdata('user_id'), IS_PREMIUM)) {
     bb_die(__('DOWNLOAD_LIMIT_EXCEEDED'));
 }
 

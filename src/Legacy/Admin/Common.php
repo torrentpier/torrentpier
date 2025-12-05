@@ -214,8 +214,6 @@ class Common
      */
     public static function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $prune_all = false)
     {
-        global $lang, $log_action;
-
         $topic_csv = [];
         $prune = ($mode_or_topic_id === 'prune');
 
@@ -399,10 +397,10 @@ class Common
         } else {
             foreach ($log_topics as $row) {
                 if ($row['topic_status'] == TOPIC_MOVED) {
-                    $row['topic_title'] = '<i>' . $lang['TOPIC_MOVED'] . '</i> ' . $row['topic_title'];
+                    $row['topic_title'] = '<i>' . __('TOPIC_MOVED') . '</i> ' . $row['topic_title'];
                 }
 
-                $log_action->mod('mod_topic_delete', [
+                log_action()->mod('mod_topic_delete', [
                     'forum_id' => $row['forum_id'],
                     'topic_id' => $row['topic_id'],
                     'topic_title' => $row['topic_title'],
@@ -431,8 +429,6 @@ class Common
      */
     public static function topic_move($topic_id, $to_forum_id, $from_forum_id = null, bool $leave_shadow = false, bool $insert_bot_msg = false, string $reason_move = ''): bool
     {
-        global $log_action;
-
         $to_forum_id = (int)$to_forum_id;
 
         // Verify input params
@@ -518,7 +514,7 @@ class Common
             sync_topic_to_manticore($topic_id, forum_id: $to_forum_id);
 
             // Log action
-            $log_action->mod('mod_topic_move', [
+            log_action()->mod('mod_topic_move', [
                 'forum_id' => $row['forum_id'],
                 'forum_id_new' => $to_forum_id,
                 'topic_id' => $topic_id,
@@ -545,8 +541,6 @@ class Common
      */
     public static function post_delete($mode_or_post_id, $user_id = null, bool $exclude_first = true)
     {
-        global $log_action;
-
         $del_user_posts = ($mode_or_post_id === 'user'); // Delete all user posts
 
         // Get required params
@@ -662,10 +656,10 @@ class Common
 
         // Log action
         if ($del_user_posts) {
-            $log_action->admin('mod_post_delete', ['log_msg' => 'user: ' . self::get_usernames_for_log($user_id) . "<br />posts: $deleted_posts_count"]);
+            log_action()->admin('mod_post_delete', ['log_msg' => 'user: ' . self::get_usernames_for_log($user_id) . "<br />posts: $deleted_posts_count"]);
         } elseif (!\defined('IN_CRON')) {
             foreach ($log_topics as $row) {
-                $log_action->mod('mod_post_delete', ['forum_id' => $row['forum_id'], 'topic_id' => $row['topic_id'], 'topic_title' => $row['topic_title']]);
+                log_action()->mod('mod_post_delete', ['forum_id' => $row['forum_id'], 'topic_id' => $row['topic_id'], 'topic_title' => $row['topic_title']]);
             }
         }
 
@@ -689,8 +683,6 @@ class Common
      */
     public static function user_delete($user_id, $delete_posts = false)
     {
-        global $log_action;
-
         if (!$user_csv = get_id_csv($user_id)) {
             return false;
         }
@@ -700,7 +692,7 @@ class Common
         $user_csv = get_id_csv($user_id);
 
         // LOG
-        $log_action->admin('adm_user_delete', ['log_msg' => self::get_usernames_for_log($user_id)]);
+        log_action()->admin('adm_user_delete', ['log_msg' => self::get_usernames_for_log($user_id)]);
 
         // Avatar
         $result = DB()->query("SELECT user_id, avatar_ext_id FROM " . BB_USERS . " WHERE avatar_ext_id > 0 AND user_id IN($user_csv)");

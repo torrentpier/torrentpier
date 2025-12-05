@@ -47,7 +47,7 @@ if (isset($_POST['redirect_type']) && $_POST['redirect_type'] == 'search') {
 }
 
 // Start session management
-$user->session_start();
+user()->session_start();
 
 set_die_append_msg();
 
@@ -70,10 +70,10 @@ if ($mode == 'dl_delete' && $topic_id) {
             bb_die('Could not obtain forum_id for this topic');
         }
 
-        $is_auth = auth(AUTH_ALL, $row['forum_id'], $userdata);
+        $is_auth = auth(AUTH_ALL, $row['forum_id'], userdata());
 
         if (!$is_auth['auth_mod']) {
-            bb_die($lang['NOT_MODERATOR']);
+            bb_die(__('NOT_MODERATOR'));
         }
     }
 
@@ -84,7 +84,7 @@ if ($mode == 'dl_delete' && $topic_id) {
         ];
 
         print_confirmation([
-            'QUESTION' => $lang['DL_LIST_DEL_CONFIRM'],
+            'QUESTION' => __('DL_LIST_DEL_CONFIRM'),
             'FORM_ACTION' => 'dl_list.php',
             'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
         ]);
@@ -100,7 +100,7 @@ $req_topics_ary = $topics_ary = [];
 // Get topics selected by user
 if ($mode == 'set_topics_dl_status') {
     if (!isset($_POST['dl_topics_id_list']) || !is_array($_POST['dl_topics_id_list'])) {
-        bb_die($lang['NONE_SELECTED']);
+        bb_die(__('NONE_SELECTED'));
     }
 
     foreach ($_POST['dl_topics_id_list'] as $topic_id) {
@@ -124,7 +124,7 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
 
     foreach ($topics_ary as $topic_id) {
         $new_dlstatus_ary[] = [
-            'user_id' => (int)$user->id,
+            'user_id' => (int)user()->id,
             'topic_id' => (int)$topic_id,
             'user_status' => (int)$new_dl_status,
         ];

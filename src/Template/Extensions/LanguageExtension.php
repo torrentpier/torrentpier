@@ -41,7 +41,7 @@ class LanguageExtension extends AbstractExtension
      */
     public function translate(string $key, mixed $default = ''): mixed
     {
-        return function_exists('__') ? __($key, $default) : ($GLOBALS['lang'][$key] ?? $default);
+        return __($key, $default);
     }
 
     /**
@@ -57,7 +57,7 @@ class LanguageExtension extends AbstractExtension
      */
     public function get(string $key, mixed $default = ''): mixed
     {
-        return function_exists('lang') ? lang()->get($key, $default) : ($GLOBALS['lang'][$key] ?? $default);
+        return lang()->get($key, $default);
     }
 
     /**
@@ -65,6 +65,6 @@ class LanguageExtension extends AbstractExtension
      */
     public function has(string $key): bool
     {
-        return function_exists('lang') ? lang()->has($key) : isset($GLOBALS['lang'][$key]);
+        return lang()->has($key);
     }
 }

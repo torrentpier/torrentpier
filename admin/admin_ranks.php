@@ -44,7 +44,7 @@ if ($mode != '') {
 
         if ($mode == 'edit') {
             if (empty($rank_id)) {
-                bb_die($lang['MUST_SELECT_RANK']);
+                bb_die(__('MUST_SELECT_RANK'));
             }
 
             $sql = 'SELECT * FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
@@ -77,7 +77,7 @@ if ($mode != '') {
             sort($rank_images);
         }
 
-        $template->assign_vars([
+        template()->assign_vars([
             'TPL_RANKS_EDIT' => true,
 
             'RANK' => !empty($rank_info['rank_title']) ? $rank_info['rank_title'] : '',
@@ -94,7 +94,7 @@ if ($mode != '') {
             $img_path = 'styles/images/ranks/' . $img;
             $selected = !empty($rank_info['rank_image']) && $rank_info['rank_image'] == $img_path;
 
-            $template->assign_block_vars('rank_images', [
+            template()->assign_block_vars('rank_images', [
                 'IMAGE_FILE' => $img,
                 'IMAGE_PATH' => $img_path,
                 'SELECTED' => $selected
@@ -111,7 +111,7 @@ if ($mode != '') {
         $rank_image = isset($_POST['rank_image']) ? trim($_POST['rank_image']) : '';
 
         if ($rank_title == '') {
-            bb_die($lang['MUST_SELECT_RANK']);
+            bb_die(__('MUST_SELECT_RANK'));
         }
 
         //
@@ -130,21 +130,21 @@ if ($mode != '') {
 					rank_style = '" . DB()->escape($rank_style) . "'
 				WHERE rank_id = $rank_id";
 
-            $message = $lang['RANK_UPDATED'];
+            $message = __('RANK_UPDATED');
         } else {
             $sql = 'INSERT INTO ' . BB_RANKS . " (rank_title, rank_image, rank_style)
 				VALUES ('" . DB()->escape($rank_title) . "', '" . DB()->escape($rank_image) . "', '" . DB()->escape($rank_style) . "')";
 
-            $message = $lang['RANK_ADDED'];
+            $message = __('RANK_ADDED');
         }
 
         if (!$result = DB()->sql_query($sql)) {
             bb_die('Could not update / insert into ranks table');
         }
 
-        $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
-        $datastore->update('ranks');
+        datastore()->update('ranks');
 
         bb_die($message);
     } elseif ($mode == 'delete') {
@@ -169,14 +169,14 @@ if ($mode != '') {
 
                 $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
                 if (!$result = DB()->sql_query($sql)) {
-                    bb_die($lang['NO_UPDATE_RANKS']);
+                    bb_die(__('NO_UPDATE_RANKS'));
                 }
 
-                $datastore->update('ranks');
+                datastore()->update('ranks');
 
-                bb_die($lang['RANK_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+                bb_die(__('RANK_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
             } else {
-                bb_die($lang['MUST_SELECT_RANK']);
+                bb_die(__('MUST_SELECT_RANK'));
             }
         } else {
             $hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
@@ -201,7 +201,7 @@ if ($mode != '') {
     $rank_count = DB()->num_rows($result);
     $rank_rows = DB()->sql_fetchrowset($result);
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_RANKS_LIST' => true,
         'S_RANKS_ACTION' => 'admin_ranks.php'
     ]);
@@ -212,7 +212,7 @@ if ($mode != '') {
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
-        $template->assign_block_vars('ranks', [
+        template()->assign_block_vars('ranks', [
             'ROW_CLASS' => $row_class,
             'RANK' => $rank,
             'STYLE' => $rank_rows[$i]['rank_style'],

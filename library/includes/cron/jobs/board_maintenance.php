@@ -60,4 +60,4 @@ if (IN_DEMO_MODE) {
 }
 
 // Check for updates
-$datastore->update('check_updates');
+datastore()->update('check_updates');

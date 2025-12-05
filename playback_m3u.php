@@ -22,15 +22,15 @@ $validFormats = [
 ];
 
 // Start session management
-$user->session_start(['req_login' => config()->get('torr_server.disable_for_guest')]);
+user()->session_start(['req_login' => config()->get('torr_server.disable_for_guest')]);
 
 // Disable robots indexing
-$page_cfg['allow_robots'] = false;
+page_cfg('allow_robots', false);
 
 // Check topic_id
 $topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
 if (!$topic_id) {
-    bb_die($lang['INVALID_TOPIC_ID'], 404);
+    bb_die(__('INVALID_TOPIC_ID'), 404);
 }
 
 // Getting torrent info from database
@@ -40,28 +40,28 @@ $sql = 'SELECT topic_id, forum_id, info_hash, info_hash_v2, tor_status, poster_i
         LIMIT 1';
 
 if (!$row = DB()->fetch_row($sql)) {
-    bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
+    bb_die(__('INVALID_TOPIC_ID_DB'), 404);
 }
 
 // Check m3u file exist
 $torrServer = new \TorrentPier\TorrServerAPI();
 if (!$m3uFile = $torrServer->getM3UPath($topic_id)) {
-    bb_die($lang['ERROR_NO_ATTACHMENT']);
+    bb_die(__('ERROR_NO_ATTACHMENT'));
 }
 
 $forum_id = $row['forum_id'];
 set_die_append_msg($forum_id, $topic_id);
 
 // Check rights
-$is_auth = auth(AUTH_ALL, $forum_id, $userdata);
+$is_auth = auth(AUTH_ALL, $forum_id, userdata());
 if (!$is_auth['auth_download']) {
-    bb_die($lang['SORRY_AUTH_VIEW_ATTACH']);
+    bb_die(__('SORRY_AUTH_VIEW_ATTACH'));
 }
 
 // Check for frozen torrent
 $tor_status = $row['tor_status'];
 if (!IS_AM && isset(config()->get('tor_frozen')[$tor_status]) && !(isset(config()->get('tor_frozen_author_download')[$tor_status]) && \TorrentPier\Topic\Guard::isAuthor($row['poster_id']))) {
-    bb_die($lang['TOR_STATUS_FORBIDDEN'] . $lang['TOR_STATUS_NAME'][$tor_status]);
+    bb_die(__('TOR_STATUS_FORBIDDEN') . __('TOR_STATUS_NAME')[$tor_status]);
 }
 
 // Parse M3U file
@@ -105,7 +105,7 @@ foreach ($m3uData as $entry) {
 
     $filesCount++;
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
-    $template->assign_block_vars('m3ulist', [
+    template()->assign_block_vars('m3ulist', [
         'ROW_NUMBER' => $filesCount,
         'FILE_INDEX' => $urlParams['index'],
         'ROW_CLASS' => $rowClass,
@@ -118,12 +118,12 @@ foreach ($m3uData as $entry) {
 }
 
 // Generate output
-$template->assign_vars([
+template()->assign_vars([
     'HAS_ITEMS' => $filesCount > 0,
-    'PAGE_TITLE' => $lang['PLAYBACK_M3U'],
+    'PAGE_TITLE' => __('PLAYBACK_M3U'),
     'TOPIC_ID' => $topic_id,
     'INFO_HASH' => bin2hex($row['info_hash'] ?? $row['info_hash_v2']),
-    'FILES_COUNT_TITLE' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($filesCount, 'files')),
+    'FILES_COUNT_TITLE' => sprintf(__('BT_FLIST_FILE_PATH'), declension($filesCount, 'files')),
     'U_TOPIC' => TOPIC_URL . $topic_id,
 ]);
 

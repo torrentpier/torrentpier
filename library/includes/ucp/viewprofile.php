@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 require INC_DIR . '/bbcode.php';
 
-$datastore->enqueue([
+datastore()->enqueue([
     'ranks',
     'cat_forums'
 ]);
@@ -22,19 +22,19 @@ if (IS_GUEST) {
     redirect(LOGIN_URL . "?redirect={$_SERVER['REQUEST_URI']}");
 } else {
     if (empty($_GET[POST_USERS_URL])) {
-        $_GET[POST_USERS_URL] = $userdata['user_id'];
+        $_GET[POST_USERS_URL] = userdata('user_id');
     }
 }
 
 if (!$profiledata = get_userdata($_GET[POST_USERS_URL], profile_view: true)) {
-    bb_die($lang['NO_USER_ID_SPECIFIED']);
+    bb_die(__('NO_USER_ID_SPECIFIED'));
 }
 
 $profiledata['user_birthday'] = $profiledata['user_birthday']->format('Y-m-d');
 
-if (!$ranks = $datastore->get('ranks')) {
-    $datastore->update('ranks');
-    $ranks = $datastore->get('ranks');
+if (!$ranks = datastore()->get('ranks')) {
+    datastore()->update('ranks');
+    $ranks = datastore()->get('ranks');
 }
 
 $poster_rank = $rank_image = $rank_style = $rank_select = '';
@@ -44,14 +44,14 @@ if ($user_rank = $profiledata['user_rank'] and isset($ranks[$user_rank])) {
     $rank_style = $ranks[$user_rank]['rank_style'];
 }
 if (IS_ADMIN) {
-    $rank_select = [$lang['NONE'] => 0];
+    $rank_select = [__('NONE') => 0];
     foreach ($ranks as $row) {
         $rank_select[$row['rank_title']] = $row['rank_id'];
     }
     $rank_select = build_select('rank-sel', $rank_select, $user_rank);
 }
 
-if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == $userdata['user_id'] || IS_ADMIN) {
+if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == userdata('user_id') || IS_ADMIN) {
     $email_uri = (config()->get('board_email_form')) ? 'profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
     $email = '<a class="editable" href="' . $email_uri . '">' . $profiledata['user_email'] . '</a>';
 } else {
@@ -62,13 +62,13 @@ if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['
 // Generate page
 //
 
-$profile_user_id = ($profiledata['user_id'] == $userdata['user_id']);
+$profile_user_id = ($profiledata['user_id'] == userdata('user_id'));
 
 $signature = (config()->get('allow_sig') && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
 
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
     if ($profile_user_id) {
-        $signature = $lang['SIGNATURE_DISABLE'];
+        $signature = __('SIGNATURE_DISABLE');
     } else {
         $signature = '';
     }
@@ -78,45 +78,45 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
 
 // Null ratio
 if (config()->get('ratio_null_enabled') && $btu = get_bt_userdata($profiledata['user_id'])) {
-    $template->assign_vars(['NULLED_RATIO' => $btu['ratio_nulled']]);
+    template()->assign_vars(['NULLED_RATIO' => $btu['ratio_nulled']]);
 }
 
 // Ban information
 if ($banInfo = getBanInfo((int)$profiledata['user_id'])) {
-    $template->assign_block_vars('ban', [
+    template()->assign_block_vars('ban', [
         'IS_BANNED' => true,
         'BAN_REASON' => IS_ADMIN ? $banInfo['ban_reason'] : '',
     ]);
 }
 
-$template->assign_vars([
-    'PAGE_TITLE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
+template()->assign_vars([
+    'PAGE_TITLE' => sprintf(__('VIEWING_USER_PROFILE'), $profiledata['username']),
     'USERNAME' => $profiledata['username'],
     'PROFILE_USER_ID' => $profiledata['user_id'],
     'PROFILE_USER' => $profile_user_id,
     'USER_REGDATE' => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', false),
-    'POSTER_RANK' => $poster_rank ? "<span class=\"$rank_style\">" . $poster_rank . "</span>" : $lang['USER'],
+    'POSTER_RANK' => $poster_rank ? "<span class=\"$rank_style\">" . $poster_rank . "</span>" : __('USER'),
     'RANK_IMAGE' => $rank_image,
     'RANK_SELECT' => $rank_select,
     'POSTS' => $profiledata['user_posts'],
-    'PM' => '<a href="' . PM_URL . '?mode=post&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] . '">' . $lang['SEND_PRIVATE_MESSAGE'] . '</a>',
+    'PM' => '<a href="' . PM_URL . '?mode=post&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] . '">' . __('SEND_PRIVATE_MESSAGE') . '</a>',
     'EMAIL' => $email,
     'WWW' => $profiledata['user_website'],
-    'LAST_VISIT_TIME' => $profiledata['user_lastvisit'] ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : $lang['NEVER'],
-    'LAST_ACTIVITY_TIME' => $profiledata['user_session_time'] ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : $lang['NEVER'],
+    'LAST_VISIT_TIME' => $profiledata['user_lastvisit'] ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? __('HIDDEN_USER') : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : __('NEVER'),
+    'LAST_ACTIVITY_TIME' => $profiledata['user_session_time'] ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? __('HIDDEN_USER') : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : __('NEVER'),
     'USER_ACTIVE' => $profiledata['user_active'],
     'LOCATION' => render_flag($profiledata['user_from']),
     'OCCUPATION' => $profiledata['user_occ'],
     'INTERESTS' => $profiledata['user_interests'],
     'TWITTER' => $profiledata['user_twitter'],
     'USER_POINTS' => $profiledata['user_points'],
-    'GENDER' => config()->get('gender') ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
+    'GENDER' => config()->get('gender') ? __('GENDER_SELECT')[$profiledata['user_gender']] : '',
     'BIRTHDAY' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? $profiledata['user_birthday'] : '',
     'BIRTHDAY_ICON' => user_birthday_icon($profiledata['user_birthday'], $profiledata['user_id']),
     'AGE' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? birthday_age($profiledata['user_birthday']) : '',
 
-    'L_VIEWING_PROFILE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
-    'L_MY_PROFILE' => sprintf($lang['VIEWING_MY_PROFILE'], 'profile.php?mode=editprofile'),
+    'L_VIEWING_PROFILE' => sprintf(__('VIEWING_USER_PROFILE'), $profiledata['username']),
+    'L_MY_PROFILE' => sprintf(__('VIEWING_MY_PROFILE'), 'profile.php?mode=editprofile'),
 
     'U_SEARCH_USER' => "search.php?search_author=1&amp;uid={$profiledata['user_id']}",
     'U_SEARCH_TOPICS' => "search.php?uid={$profiledata['user_id']}&amp;myt=1",
@@ -153,17 +153,17 @@ if (IS_AM) {
             }
         }
         if ($member) {
-            $group_membership[] = $lang['PARTY'] . " <b>$member</b>";
+            $group_membership[] = __('PARTY') . " <b>$member</b>";
         }
         if ($pending) {
-            $group_membership[] = $lang['CANDIDATE'] . " <b>$pending</b>";
+            $group_membership[] = __('CANDIDATE') . " <b>$pending</b>";
         }
         if ($single) {
-            $group_membership[] = $lang['INDIVIDUAL'];
+            $group_membership[] = __('INDIVIDUAL');
         }
         $group_membership = implode(', ', $group_membership);
     }
-    $template->assign_vars([
+    template()->assign_vars([
         'GROUP_MEMBERSHIP' => (bool)$group_membership,
         'GROUP_MEMBERSHIP_TXT' => $group_membership
     ]);
@@ -178,7 +178,7 @@ if (IS_AM || $profile_user_id || !bf($profiledata['user_opt'], 'user_opt', 'user
 if (IS_AM || $profile_user_id) {
     show_bt_userdata($profiledata['user_id']);
 } else {
-    $template->assign_vars([
+    template()->assign_vars([
         'DOWN_TOTAL_BYTES' => false,
         'MIN_DL_BYTES' => false,
     ]);
@@ -195,7 +195,7 @@ if (IS_ADMIN) {
         'dis_topic' => bf($profiledata['user_opt'], 'user_opt', 'dis_topic'),
     ], JSON_THROW_ON_ERROR);
 
-    $template->assign_vars([
+    template()->assign_vars([
         'EDITABLE_TPLS' => true,
         'AJAX_USER_OPT' => $ajax_user_opt,
         'U_MANAGE' => "profile.php?mode=editprofile&amp;" . POST_USERS_URL . "={$profiledata['user_id']}",
@@ -206,27 +206,27 @@ if (IS_ADMIN) {
 $user_restrictions = [];
 
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_avatar')) {
-    $user_restrictions[] = $lang['HIDE_AVATARS'];
+    $user_restrictions[] = __('HIDE_AVATARS');
 }
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
-    $user_restrictions[] = $lang['SHOW_CAPTION'];
+    $user_restrictions[] = __('SHOW_CAPTION');
 }
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_passkey')) {
-    $user_restrictions[] = $lang['DOWNLOAD_TORRENT'];
+    $user_restrictions[] = __('DOWNLOAD_TORRENT');
 }
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_pm')) {
-    $user_restrictions[] = $lang['SEND_PM'];
+    $user_restrictions[] = __('SEND_PM');
 }
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_post')) {
-    $user_restrictions[] = $lang['SEND_MESSAGE'];
+    $user_restrictions[] = __('SEND_MESSAGE');
 }
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_post_edit')) {
-    $user_restrictions[] = $lang['EDIT_POST'];
+    $user_restrictions[] = __('EDIT_POST');
 }
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_topic')) {
-    $user_restrictions[] = $lang['NEW_THREADS'];
+    $user_restrictions[] = __('NEW_THREADS');
 }
 
-$template->assign_var('USER_RESTRICTIONS', implode('</li><li>', $user_restrictions));
+template()->assign_var('USER_RESTRICTIONS', implode('</li><li>', $user_restrictions));
 
 print_page('usercp_viewprofile.tpl');

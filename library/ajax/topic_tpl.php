@@ -11,10 +11,8 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $lang;
-
 if (!IS_SUPER_ADMIN) {
-    $this->ajax_die($lang['ONLY_FOR_SUPER_ADMIN']);
+    $this->ajax_die(__('ONLY_FOR_SUPER_ADMIN'));
 }
 
 array_deep($this->request, 'trim');
@@ -68,7 +66,7 @@ switch ($mode) {
             'tpl_comment' => (string)$tpl_comment,
             'tpl_rules_post_id' => (int)$tpl_rules_post_id,
             'tpl_last_edit_tm' => (int)TIMENOW,
-            'tpl_last_edit_by' => (int)$userdata['user_id']
+            'tpl_last_edit_by' => (int)userdata('user_id')
         ];
         break;
 }
@@ -121,7 +119,7 @@ switch ($mode) {
 
     // сохранение изменений
     case 'save':
-        if ($tpl_data['tpl_last_edit_tm'] > $this->request['tpl_l_ed_tst'] && $tpl_data['tpl_last_edit_by'] != $userdata['user_id']) {
+        if ($tpl_data['tpl_last_edit_tm'] > $this->request['tpl_l_ed_tst'] && $tpl_data['tpl_last_edit_by'] != userdata('user_id')) {
             $last_edit_by_username = get_username((int)$tpl_data['tpl_last_edit_by']);
             $msg = "Изменения не были сохранены!\n\n";
             $msg .= 'Шаблон был отредактирован: ' . html_ent_decode($last_edit_by_username) . ', ' . bb_date($tpl_data['tpl_last_edit_tm'], 'd-M-y H:i');
@@ -134,7 +132,7 @@ switch ($mode) {
         $this->response['tpl_id'] = $tpl_id;
         $this->response['tpl_name'] = $tpl_name;
         $this->response['html']['tpl-last-edit-time'] = bb_date(TIMENOW, 'd-M-y H:i');
-        $this->response['html']['tpl-last-edit-by'] = profile_url(get_userdata($userdata['username'], true));
+        $this->response['html']['tpl-last-edit-by'] = profile_url(get_userdata(userdata('username'), true));
         break;
 
     // создание нового шаблона

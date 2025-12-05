@@ -30,8 +30,8 @@
 <link rel="next" href="{META_NEXT_PAGE}">
 <!-- ENDIF / META_NEXT_PAGE -->
 {META}
-<link rel="stylesheet" href="{STYLESHEET}?v={$bb_cfg['css_ver']}" type="text/css">
-<link rel="stylesheet" href="{SITE_URL}styles/templates/default/css/dark-mode.css?v={$bb_cfg['css_ver']}" type="text/css">
+<link rel="stylesheet" href="{STYLESHEET}?v={{ config('css_ver') }}" type="text/css">
+<link rel="stylesheet" href="{SITE_URL}styles/templates/default/css/dark-mode.css?v={{ config('css_ver') }}" type="text/css">
 <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
 
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-1.12.4.min.js"></script>
@@ -40,10 +40,10 @@
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/clipboard.min.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/printThis.min.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/legacy.js"></script>
-<script type="text/javascript" src="{SITE_URL}styles/js/main.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/main.js?v={{ config('js_ver') }}"></script>
 
 <!-- IF INCLUDE_BBCODE_JS -->
-<script type="text/javascript" src="{SITE_URL}styles/js/bbcode.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/bbcode.js?v={{ config('js_ver') }}"></script>
 <script type="text/javascript">
 	window.BB = {};
 	window.encURL = encodeURIComponent;
@@ -52,9 +52,9 @@
 var bb_url = '{SITE_URL}';
 var bbl    = { "code": "{L_CODE}", "wrote": "{L_WROTE}", "quote": "{L_QUOTE}", "quoted_post": "{L_GOTO_QUOTED_POST}", "loading": "{L_LOADING}", "spoiler_head": "{L_SPOILER_HEAD}", "spoiler_close": "{L_SPOILER_CLOSE}", "links_are": "{L_LINKS_ARE_FORBIDDEN}", "scr_rules": "{L_SCREENSHOTS_RULES}", "play_on": "{L_PLAY_ON_CURPAGE}" };
 
-var postImg_MaxWidth = screen.width - {POST_IMG_WIDTH_DECR_JS};
+var postImg_MaxWidth = screen.width - {{ POST_IMG_WIDTH_DECR_JS }};
 var postImgAligned_MaxWidth = Math.round(screen.width/3);
-var attachImg_MaxWidth = screen.width - {ATTACH_IMG_WIDTH_DECR_JS};
+var attachImg_MaxWidth = screen.width - {{ ATTACH_IMG_WIDTH_DECR_JS }};
 var ExternalLinks_InNewWindow = '{EXT_LINK_NEW_WIN}';
 var hidePostImg = false;
 </script>
@@ -62,11 +62,11 @@ var hidePostImg = false;
 
 <script type="text/javascript">
 var BB_ROOT      = "{#BB_ROOT#}";
-var cookieDomain = "{$bb_cfg['cookie_domain']}";
-var cookiePath   = "{$bb_cfg['script_path']}";
-var cookiePrefix = "{$bb_cfg['cookie_prefix']}";
-var cookieSecure = "{$bb_cfg['cookie_secure']}";
-var cookieSameSite = "{$bb_cfg['cookie_same_site']}";
+var cookieDomain = "{{ config('cookie_domain') }}";
+var cookiePath   = "{{ config('script_path') }}";
+var cookiePrefix = "{{ config('cookie_prefix') }}";
+var cookieSecure = "{{ config('cookie_secure') }}";
+var cookieSameSite = "{{ config('cookie_same_site') }}";
 var LOGGED_IN    = {LOGGED_IN};
 var IWP          = 'HEIGHT=510,WIDTH=780,resizable=yes';
 var IWP_US       = 'HEIGHT=250,WIDTH=400,resizable=yes';
@@ -104,7 +104,7 @@ $(document).ready(function () {
 });
 <!-- ENDIF -->
 
-var ajax = new Ajax('{SITE_URL}{$bb_cfg['ajax_url']}', 'POST', 'json');
+var ajax = new Ajax('{SITE_URL}{{ config('ajax_url') }}', 'POST', 'json');
 
 function getElText (e)
 {

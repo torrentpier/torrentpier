@@ -11,8 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $lang, $datastore, $log_action;
-
 if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
 }
@@ -23,8 +21,8 @@ switch ($mode) {
         $status = (int)$this->request['status'];
 
         // Check status validity
-        if (!isset($lang['TOR_STATUS_NAME'][$status])) {
-            $this->ajax_die($lang['TOR_STATUS_FAILED']);
+        if (!isset(__('TOR_STATUS_NAME')[$status])) {
+            $this->ajax_die(__('TOR_STATUS_FAILED'));
         }
 
         $topic_ids_list = explode(',', $topics);
@@ -43,14 +41,14 @@ switch ($mode) {
                 WHERE tor.topic_id = $topic_id LIMIT 1");
 
             if (!$tor) {
-                $this->ajax_die($lang['TORRENT_FAILED']);
+                $this->ajax_die(__('TORRENT_FAILED'));
             }
 
             \TorrentPier\Torrent\Moderation::changeStatus($topic_id, $status);
 
             // Log action
-            $log_msg = sprintf($lang['TOR_STATUS_LOG_ACTION'], config()->get('tor_icons')[$status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$status] . '</b>', config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . $lang['TOR_STATUS_NAME'][$tor['tor_status']] . '</b>');
-            $log_action->mod('mod_topic_change_tor_status', [
+            $log_msg = sprintf(__('TOR_STATUS_LOG_ACTION'), config()->get('tor_icons')[$status] . ' <b> ' . __('TOR_STATUS_NAME')[$status] . '</b>', config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . __('TOR_STATUS_NAME')[$tor['tor_status']] . '</b>');
+            log_action()->mod('mod_topic_change_tor_status', [
                 'forum_id' => $tor['forum_id'],
                 'topic_id' => $tor['topic_id'],
                 'topic_title' => $tor['topic_title'],
@@ -67,14 +65,14 @@ switch ($mode) {
         $new_title = clean_title((string)$this->request['topic_title']);
 
         if (!$topic_id) {
-            $this->ajax_die($lang['INVALID_TOPIC_ID']);
+            $this->ajax_die(__('INVALID_TOPIC_ID'));
         }
         if ($new_title == '') {
-            $this->ajax_die($lang['DONT_MESSAGE_TITLE']);
+            $this->ajax_die(__('DONT_MESSAGE_TITLE'));
         }
 
         if (!$t_data = DB()->fetch_row("SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
-            $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
+            $this->ajax_die(__('INVALID_TOPIC_ID_DB'));
         }
         $this->verify_mod_rights($t_data['forum_id']);
 
@@ -88,22 +86,22 @@ switch ($mode) {
         // Update the news cache on the index page
         $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
         if (isset($news_forums[$t_data['forum_id']]) && config()->get('show_latest_news')) {
-            $datastore->enqueue([
+            datastore()->enqueue([
                 'latest_news'
             ]);
-            $datastore->update('latest_news');
+            datastore()->update('latest_news');
         }
 
         $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
         if (isset($net_forums[$t_data['forum_id']]) && config()->get('show_network_news')) {
-            $datastore->enqueue([
+            datastore()->enqueue([
                 'network_news'
             ]);
-            $datastore->update('network_news');
+            datastore()->update('network_news');
         }
 
         // Log action
-        $log_action->mod('mod_topic_renamed', [
+        log_action()->mod('mod_topic_renamed', [
             'forum_id' => $t_data['forum_id'],
             'topic_id' => $topic_id,
             'topic_id_new' => $topic_id,
@@ -120,7 +118,7 @@ switch ($mode) {
         $profiledata = get_userdata($user_id);
 
         if (!$user_id) {
-            $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+            $this->ajax_die(__('NO_USER_ID_SPECIFIED'));
         }
 
         $reg_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " . BB_USERS . "
@@ -137,7 +135,7 @@ switch ($mode) {
         $link_reg_ip = $link_last_ip = '';
 
         if (!empty($reg_ip)) {
-            $link_reg_ip .= $lang['OTHER_IP'] . '&nbsp';
+            $link_reg_ip .= __('OTHER_IP') . '&nbsp';
             foreach ($reg_ip as $row) {
                 $link_reg_ip .= profile_url($row) . ', ';
             }
@@ -145,7 +143,7 @@ switch ($mode) {
         }
 
         if (!empty($last_ip)) {
-            $link_last_ip .= $lang['OTHER_IP'] . '&nbsp';
+            $link_last_ip .= __('OTHER_IP') . '&nbsp';
             foreach ($last_ip as $row) {
                 $link_last_ip .= profile_url($row) . ', ';
             }
@@ -153,9 +151,9 @@ switch ($mode) {
         }
 
         if ($profiledata['user_level'] == ADMIN && !IS_ADMIN) {
-            $reg_ip = $last_ip = $lang['HIDDEN'];
+            $reg_ip = $last_ip = __('HIDDEN');
         } elseif ($profiledata['user_level'] == MOD && !IS_AM) {
-            $reg_ip = $last_ip = $lang['HIDDEN'];
+            $reg_ip = $last_ip = __('HIDDEN');
         } else {
             $user_reg_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($profiledata['user_reg_ip']);
             $user_last_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($profiledata['user_last_ip']);
@@ -166,12 +164,12 @@ switch ($mode) {
         $this->response['ip_list_html'] = '
 			<br /><table class="mod_ip bCenter borderless" cellspacing="1">
 				<tr class="row5" >
-					<td>' . $lang['REG_IP'] . '</td>
+					<td>' . __('REG_IP') . '</td>
 					<td class="tCenter">' . $reg_ip . '</td>
 					<td><div>' . $link_reg_ip . '</div></td>
 				</tr>
 				<tr class="row4">
-					<td>' . $lang['LAST_IP'] . '</td>
+					<td>' . __('LAST_IP') . '</td>
 					<td class="tCenter">' . $last_ip . '</td>
 					<td><div>' . $link_last_ip . '</div></td>
 				</tr>

@@ -35,7 +35,7 @@
 	<td class="poster_info td1">
 
 		<p class="nick">{t.p.POSTER}</p>
-		<p><img src="{SPACER}" width="{TOPIC_LEFT_COL_SPACER_WITDH}" height="30" alt="" /></p>
+		<p><img src="{SPACER}" width="{{ TOPIC_LEFT_COL_SPACER_WITDH }}" height="30" alt="" /></p>
 
 	</td>
 	<td class="message td2">
@@ -166,8 +166,8 @@ function show_edit_options ()
 		<td class="tLeft" style="padding: 2px 5px 3px 4px;">
 		<div class="topictitle" onmousedown="$p('tid_{t.TOPIC_ID}').className='opened'">
 			<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
-			<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_TOPIC_MOVED}</span>
-				<!-- ELSEIF t.TYPE == ANNOUNCE --><span class="topicAnnounce">{L_TOPIC_ANNOUNCEMENT}</span>
+			<!-- IF t.STATUS == 2 --><span class="topicMoved">{L_TOPIC_MOVED}</span>
+				<!-- ELSEIF t.TYPE == 2 --><span class="topicAnnounce">{L_TOPIC_ANNOUNCEMENT}</span>
 				<!-- ELSEIF t.DL_CLASS --><span class="{t.DL_CLASS} iconDL">{L_TOPIC_DL}</span>
 				<!-- ELSEIF t.ATTACH and not t.DL -->{TOPIC_ATTACH_ICON}
 			<!-- ENDIF -->

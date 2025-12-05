@@ -217,6 +217,29 @@ function template(?string $root = null): \TorrentPier\Template\Template
 }
 
 /**
+ * Get theme images array
+ *
+ * @param string|null $key Specific image key, or null for all images
+ * @return mixed Image path, all images array, or empty string if key not found
+ */
+function theme_images(?string $key = null): mixed
+{
+    $twig = template()->getTwig();
+    if (!$twig) {
+        return $key === null ? [] : '';
+    }
+
+    $themeVars = $twig->getGlobals();
+    $images = $themeVars['images'] ?? [];
+
+    if ($key === null) {
+        return $images;
+    }
+
+    return $images[$key] ?? '';
+}
+
+/**
  * Initialize debug
  */
 define('APP_ENV', env('APP_ENV', 'production'));
@@ -275,10 +298,288 @@ function datastore(): \TorrentPier\Cache\DatastoreManager
 }
 
 /**
- * Backward compatibility: Global datastore variable
- * This allows existing code to continue using global $datastore
+ * User singleton helper
+ *
+ * @return \TorrentPier\Legacy\Common\User
  */
-$datastore = datastore();
+function user(): \TorrentPier\Legacy\Common\User
+{
+    return TorrentPier\Legacy\Common\User::getInstance();
+}
+
+/**
+ * Userdata helper - returns user data array
+ *
+ * @param string|null $key Optional key to get specific value
+ * @return mixed
+ */
+function userdata(?string $key = null): mixed
+{
+    $data = user()->data;
+    return $key === null ? $data : ($data[$key] ?? null);
+}
+
+/**
+ * LogAction singleton helper
+ *
+ * @return \TorrentPier\Legacy\LogAction
+ */
+function log_action(): \TorrentPier\Legacy\LogAction
+{
+    static $instance = null;
+    if ($instance === null) {
+        $instance = new \TorrentPier\Legacy\LogAction();
+    }
+    return $instance;
+}
+
+/**
+ * Html helper singleton
+ *
+ * @return \TorrentPier\Legacy\Common\Html
+ */
+function html(): \TorrentPier\Legacy\Common\Html
+{
+    static $instance = null;
+    if ($instance === null) {
+        $instance = new \TorrentPier\Legacy\Common\Html();
+    }
+    return $instance;
+}
+
+/**
+ * Simple header flag getter/setter
+ *
+ * @param bool|null $set Set value (true/false) or null to just get current value
+ * @return bool Current value
+ */
+function simple_header(?bool $set = null): bool
+{
+    static $value = false;
+    if ($set !== null) {
+        $value = $set;
+    }
+    return $value;
+}
+
+/**
+ * BBCode parser singleton
+ *
+ * @return \TorrentPier\Legacy\BBCode
+ */
+function bbcode(): \TorrentPier\Legacy\BBCode
+{
+    static $instance = null;
+    if ($instance === null) {
+        $instance = new \TorrentPier\Legacy\BBCode();
+    }
+    return $instance;
+}
+
+/**
+ * Ajax handler singleton
+ *
+ * @return \TorrentPier\Ajax
+ */
+function ajax(): \TorrentPier\Ajax
+{
+    static $instance = null;
+    if ($instance === null) {
+        $instance = new \TorrentPier\Ajax();
+    }
+    return $instance;
+}
+
+/**
+ * Manticore search singleton
+ *
+ * @return \TorrentPier\ManticoreSearch|null
+ */
+function manticore(): ?\TorrentPier\ManticoreSearch
+{
+    static $instance = null;
+    if ($instance === null) {
+        $instance = new \TorrentPier\ManticoreSearch();
+    }
+    return $instance;
+}
+
+/**
+ * Bitfields helper - returns bitfield definitions
+ *
+ * @param string|null $type Optional type ('forum_perm' or 'user_opt')
+ * @return array
+ */
+function bitfields(?string $type = null): array
+{
+    static $bf = null;
+    if ($bf === null) {
+        $bf = [
+            'forum_perm' => [
+                'auth_view' => AUTH_VIEW,
+                'auth_read' => AUTH_READ,
+                'auth_mod' => AUTH_MOD,
+                'auth_post' => AUTH_POST,
+                'auth_reply' => AUTH_REPLY,
+                'auth_edit' => AUTH_EDIT,
+                'auth_delete' => AUTH_DELETE,
+                'auth_sticky' => AUTH_STICKY,
+                'auth_announce' => AUTH_ANNOUNCE,
+                'auth_vote' => AUTH_VOTE,
+                'auth_pollcreate' => AUTH_POLLCREATE,
+                'auth_attachments' => AUTH_ATTACH,
+                'auth_download' => AUTH_DOWNLOAD,
+            ],
+            'user_opt' => [
+                'user_viewemail' => 0,
+                'dis_sig' => 1,
+                'dis_avatar' => 2,
+                'dis_pm' => 3,
+                'user_viewonline' => 4,
+                'user_notify' => 5,
+                'user_notify_pm' => 6,
+                'dis_passkey' => 7,
+                'user_porn_forums' => 8,
+                'user_callseed' => 9,
+                'user_empty' => 10,
+                'dis_topic' => 11,
+                'dis_post' => 12,
+                'dis_post_edit' => 13,
+                'user_dls' => 14,
+                'user_retracker' => 15,
+                'user_hide_torrent_client' => 16,
+                'user_hide_peer_country' => 17,
+                'user_hide_peer_username' => 18,
+            ],
+        ];
+    }
+    return $type === null ? $bf : ($bf[$type] ?? []);
+}
+
+/**
+ * Read tracker singleton - tracks read status of topics and forums
+ *
+ * @return \TorrentPier\ReadTracker
+ */
+function read_tracker(): \TorrentPier\ReadTracker
+{
+    return \TorrentPier\ReadTracker::getInstance();
+}
+
+/**
+ * Get topic tracking data
+ *
+ * @return array Reference to tracking array
+ */
+function &tracking_topics(): array
+{
+    return read_tracker()->getTopics();
+}
+
+/**
+ * Get forum tracking data
+ *
+ * @return array Reference to tracking array
+ */
+function &tracking_forums(): array
+{
+    return read_tracker()->getForums();
+}
+
+/**
+ * Get forum tree data (categories and forums hierarchy)
+ *
+ * @param bool $refresh Refresh cached data before returning
+ * @return array Forum tree data
+ */
+function forum_tree(bool $refresh = false): array
+{
+    $instance = \TorrentPier\Forum\ForumTree::getInstance();
+    if ($refresh) {
+        $instance->refresh();
+    }
+    return $instance->get();
+}
+
+/**
+ * Page configuration getter/setter (replaces global $page_cfg)
+ *
+ * Usage:
+ *   page_cfg('key', $value)  - set a value
+ *   page_cfg('key')          - get a value
+ *   page_cfg()               - get all config
+ *
+ * @param string|null $key Config key
+ * @param mixed $value Value to set (null to get)
+ * @return mixed Config value or all config array
+ */
+function page_cfg(?string $key = null, mixed $value = null): mixed
+{
+    static $config = [];
+
+    if ($key === null) {
+        return $config;
+    }
+
+    if (func_num_args() === 2) {
+        $config[$key] = $value;
+        return $value;
+    }
+
+    return $config[$key] ?? null;
+}
+
+/**
+ * Get CSS class for download link by status
+ *
+ * @param int $status Download status constant (DL_STATUS_*)
+ * @return string CSS class name
+ */
+function dl_link_css(int $status): string
+{
+    static $map = [
+        DL_STATUS_RELEASER => 'genmed',
+        DL_STATUS_WILL => 'dlWill',
+        DL_STATUS_DOWN => 'leechmed',
+        DL_STATUS_COMPLETE => 'seedmed',
+        DL_STATUS_CANCEL => 'dlCancel',
+    ];
+    return $map[$status] ?? 'genmed';
+}
+
+/**
+ * Get CSS class for download status display
+ *
+ * @param int $status Download status constant (DL_STATUS_*)
+ * @return string CSS class name
+ */
+function dl_status_css(int $status): string
+{
+    static $map = [
+        DL_STATUS_RELEASER => 'genmed',
+        DL_STATUS_WILL => 'dlWill',
+        DL_STATUS_DOWN => 'dlDown',
+        DL_STATUS_COMPLETE => 'dlComplete',
+        DL_STATUS_CANCEL => 'dlCancel',
+    ];
+    return $map[$status] ?? 'gen';
+}
+
+/**
+ * Get list of all download status constants
+ *
+ * @return array List of DL_STATUS_* constants
+ */
+function dl_status_list(): array
+{
+    return [
+        DL_STATUS_RELEASER,
+        DL_STATUS_WILL,
+        DL_STATUS_DOWN,
+        DL_STATUS_COMPLETE,
+        DL_STATUS_CANCEL,
+    ];
+}
 
 // Functions
 function utime()

@@ -65,14 +65,12 @@ class Censor
      */
     private function loadCensoredWords(): void
     {
-        global $datastore;
-
         if (!$this->isEnabled()) {
             return;
         }
 
         // Get censored words
-        $censoredWords = $datastore->get('censor');
+        $censoredWords = datastore()->get('censor');
 
         foreach ($censoredWords as $word) {
             $this->words[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($word['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';

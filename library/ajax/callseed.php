@@ -11,29 +11,27 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $lang;
-
 if (!config()->get('callseed')) {
-    $this->ajax_die($lang['MODULE_OFF']);
+    $this->ajax_die(__('MODULE_OFF'));
 }
 
 if (!$topic_id = (int)$this->request['topic_id']) {
-    $this->ajax_die($lang['INVALID_TOPIC_ID']);
+    $this->ajax_die(__('INVALID_TOPIC_ID'));
 }
 
 if (!$t_data = topic_info($topic_id)) {
-    $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
+    $this->ajax_die(__('INVALID_TOPIC_ID_DB'));
 }
 
 $forum_id = $t_data['forum_id'];
 
 if ($t_data['seeders'] >= 3) {
-    $this->ajax_die(sprintf($lang['CALLSEED_HAVE_SEED'], $t_data['seeders']));
+    $this->ajax_die(sprintf(__('CALLSEED_HAVE_SEED'), $t_data['seeders']));
 } elseif ($t_data['call_seed_time'] >= (TIMENOW - 86400)) {
     $time_left = humanTime($t_data['call_seed_time'] + 86400, TIMENOW);
-    $this->ajax_die(sprintf($lang['CALLSEED_MSG_SPAM'], $time_left));
+    $this->ajax_die(sprintf(__('CALLSEED_MSG_SPAM'), $time_left));
 } elseif (isset(config()->get('tor_no_tor_act')[$t_data['tor_status']])) {
-    $this->ajax_die($lang['NOT_AVAILABLE']);
+    $this->ajax_die(__('NOT_AVAILABLE'));
 }
 
 $banned_users = ($get_banned_users = get_banned_users()) ? (', ' . implode(', ', $get_banned_users)) : '';
@@ -45,13 +43,13 @@ $user_list = DB()->fetch_rowset("
 	LEFT JOIN " . BB_BT_TRACKER . " tr ON(tr.user_id = dl.user_id)
 	WHERE dl.topic_id = $topic_id
 		AND dl.user_status IN (" . DL_STATUS_COMPLETE . ", " . DL_STATUS_DOWN . ")
-		AND dl.user_id NOT IN ({$userdata['user_id']}, " . EXCLUDED_USERS . $banned_users . ")
+		AND dl.user_id NOT IN (" . userdata('user_id') . ", " . EXCLUDED_USERS . $banned_users . ")
 		AND u.user_active = 1
 	GROUP BY dl.user_id
 ");
 
-$subject = sprintf($lang['CALLSEED_SUBJECT'], $t_data['topic_title']);
-$message = sprintf($lang['CALLSEED_TEXT'], make_url(TOPIC_URL . $topic_id), $t_data['topic_title'], make_url(DL_URL . $topic_id));
+$subject = sprintf(__('CALLSEED_SUBJECT'), $t_data['topic_title']);
+$message = sprintf(__('CALLSEED_TEXT'), make_url(TOPIC_URL . $topic_id), $t_data['topic_title'], make_url(DL_URL . $topic_id));
 
 if ($user_list) {
     foreach ($user_list as $row) {
@@ -71,8 +69,6 @@ DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " 
 
 function topic_info($topic_id)
 {
-    global $lang;
-
     $sql = "
 		SELECT
 			tor.poster_id, tor.forum_id, tor.call_seed_time, tor.tor_status,
@@ -84,10 +80,10 @@ function topic_info($topic_id)
 	";
 
     if (!$torrent = DB()->fetch_row($sql)) {
-        bb_die($lang['TOPIC_POST_NOT_EXIST'], 404);
+        bb_die(__('TOPIC_POST_NOT_EXIST'), 404);
     }
 
     return $torrent;
 }
 
-$this->response['response'] = $lang['CALLSEED_MSG_OK'];
+$this->response['response'] = __('CALLSEED_MSG_OK');

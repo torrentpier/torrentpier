@@ -19,7 +19,7 @@ $robots_file = BB_ROOT . 'robots.txt';
 if (isset($_POST['save'])) {
     // Check for demo mode
     if (IN_DEMO_MODE) {
-        bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+        bb_die(__('CANT_EDIT_IN_DEMO_MODE'));
     }
 
     $robots_txt = $_POST['robots_txt'] ?? '';
@@ -33,7 +33,7 @@ if (isset($_POST['save'])) {
         bb_die('Could not write robots.txt #2');
     }
 
-    bb_die($lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'], '<a href="admin_robots.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+    bb_die(__('ROBOTS_TXT_UPDATED_SUCCESSFULLY') . '<br /><br />' . sprintf(__('CLICK_RETURN_ROBOTS_TXT_CONFIG'), '<a href="admin_robots.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
 }
 
 $current_content = '';
@@ -41,7 +41,7 @@ if (is_file($robots_file)) {
     $current_content = file_get_contents($robots_file);
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'S_ACTION' => 'admin_robots.php',
     'ROBOTS_TXT' => htmlCHR($current_content),
 ]);

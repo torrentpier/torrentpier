@@ -114,7 +114,7 @@ function html2text (str)
 <tr>
 	<td class="tLeft"><span class="poll-vote-caption"></span></td>
 	<td>&nbsp;</td>
-	<td class="nowrap"><img src="{IMG}/vote_lcap.gif" width="4" height="12" alt="" /><img src="{IMG}/voting_bar.gif" class="poll-vote-img" width="1" height="12" alt="" /><img src="{IMG}/vote_rcap.gif" width="4" height="12" alt="" /></td>
+	<td class="nowrap"><img src="{{ IMG }}vote_lcap.gif" width="4" height="12" alt="" /><img src="{{ IMG }}voting_bar.gif" class="poll-vote-img" width="1" height="12" alt="" /><img src="{{ IMG }}vote_rcap.gif" width="4" height="12" alt="" /></td>
 	<td class="nowrap tRight bold">&nbsp;<span class="poll-vote-percent"></span>&nbsp;</td>
 	<td class="nowrap tCenter">[ <span class="poll-vote-result"></span> ]</td>
 </tr>

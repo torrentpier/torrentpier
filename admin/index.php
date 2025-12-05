@@ -10,15 +10,15 @@
 require __DIR__ . '/pagestart.php';
 
 // Statistics
-if (!$stats = $datastore->get('stats')) {
-    $datastore->update('stats');
-    $stats = $datastore->get('stats');
+if (!$stats = datastore()->get('stats')) {
+    datastore()->update('stats');
+    $stats = datastore()->get('stats');
 }
 
 // Check for updates
-if (!$update_data = $datastore->get('check_updates')) {
-    $datastore->update('check_updates');
-    $update_data = $datastore->get('check_updates');
+if (!$update_data = datastore()->get('check_updates')) {
+    datastore()->update('check_updates');
+    $update_data = datastore()->get('check_updates');
 }
 
 // Generate relevant output
@@ -26,7 +26,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     $module = [];
 
     // Scan modules
-    if (!CACHE('bb_cache')->get('admin_module_' . $user->id)) {
+    if (!CACHE('bb_cache')->get('admin_module_' . user()->id)) {
         $dir = opendir('.');
         $setmodules = true;
         while ($file = readdir($dir)) {
@@ -38,13 +38,13 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         closedir($dir);
 
         // Set modules into cache
-        CACHE('bb_cache')->set('admin_module_' . $user->id, $module, 600);
+        CACHE('bb_cache')->set('admin_module_' . user()->id, $module, 600);
     }
 
     // Get modules from cache
-    $module = CACHE('bb_cache')->get('admin_module_' . $user->id);
+    $module = CACHE('bb_cache')->get('admin_module_' . user()->id);
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_ADMIN_NAVIGATE' => true,
         'U_FORUM_INDEX' => '../index.php',
         'U_ADMIN_INDEX' => 'index.php?pane=right',
@@ -53,9 +53,9 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     ksort($module);
 
     foreach ($module as $cat => $action_array) {
-        $cat = (!empty($lang[$cat])) ? $lang[$cat] : str_replace("_", ' ', $cat);
+        $cat = __($cat) ?: str_replace("_", ' ', $cat);
 
-        $template->assign_block_vars('catrow', [
+        template()->assign_block_vars('catrow', [
             'ADMIN_CATEGORY' => $cat,
         ]);
 
@@ -65,9 +65,9 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         foreach ($action_array as $action => $file) {
             $row_class = !($row_count % 2) ? 'row1' : 'row2';
 
-            $action = (!empty($lang[$action])) ? $lang[$action] : str_replace("_", ' ', $action);
+            $action = __($action) ?: str_replace("_", ' ', $action);
 
-            $template->assign_block_vars('catrow.modulerow', [
+            template()->assign_block_vars('catrow.modulerow', [
                 'ROW_CLASS' => $row_class,
                 'ADMIN_MODULE' => $action,
                 'U_ADMIN_MODULE' => $file,
@@ -76,7 +76,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         }
     }
 } elseif (isset($_GET['pane']) && $_GET['pane'] == 'right') {
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_ADMIN_MAIN' => true,
         'ADMIN_LOCK' => (bool)config()->get('board_disable'),
         'ADMIN_LOCK_CRON' => is_file(BB_DISABLED),
@@ -84,7 +84,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
     // Check for updates
     if (isset($update_data['available_update'])) {
-        $template->assign_block_vars('updater', [
+        template()->assign_block_vars('updater', [
             'UPDATE_AVAILABLE' => $update_data['available_update'],
             'NEW_VERSION_NUMBER' => $update_data['latest_version'],
             'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
@@ -117,7 +117,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
         $avatar_dir_size = humn_size($avatar_dir_size);
     } else {
-        $avatar_dir_size = $lang['NOT_AVAILABLE'];
+        $avatar_dir_size = __('NOT_AVAILABLE');
     }
 
     if ((int)$posts_per_day > $total_posts) {
@@ -133,7 +133,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     }
 
     // Get database version info
-    $database_version = $lang['NOT_AVAILABLE'];
+    $database_version = __('NOT_AVAILABLE');
     $sql = 'SELECT VERSION() as version';
     $result = DB()->sql_query($sql);
     $row = DB()->sql_fetchrow($result);
@@ -144,7 +144,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     // Get disk space information
     $getDiskSpaceInfo = getDiskSpaceInfo();
 
-    $template->assign_vars([
+    template()->assign_vars([
         'NUMBER_OF_POSTS' => commify($total_posts),
         'NUMBER_OF_TOPICS' => commify($total_topics),
         'NUMBER_OF_USERS' => commify($total_users),
@@ -159,11 +159,11 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'SERVER_PHP_MEM_LIMIT' => htmlCHR(ini_get('memory_limit')),
         'SERVER_PHP_MAX_EXECUTION_TIME' => htmlCHR(ini_get('max_execution_time')),
         'SERVER_DATABASE_VER' => htmlCHR($database_version),
-        'SERVER_DISK_SPACE_INFO' => htmlCHR(sprintf($lang['ADMIN_SYSTEM_DISK_SPACE_INFO'], $getDiskSpaceInfo['total'], $getDiskSpaceInfo['used'], $getDiskSpaceInfo['free'])),
+        'SERVER_DISK_SPACE_INFO' => htmlCHR(sprintf(__('ADMIN_SYSTEM_DISK_SPACE_INFO'), $getDiskSpaceInfo['total'], $getDiskSpaceInfo['used'], $getDiskSpaceInfo['free'])),
     ]);
 
     if (isset($_GET['users_online'])) {
-        $template->assign_vars([
+        template()->assign_vars([
             'SHOW_USERS_ONLINE' => true,
         ]);
 
@@ -200,7 +200,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                 $row_class = 'row1';
                 $reg_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($onlinerow_reg[$i]['session_ip']);
 
-                $template->assign_block_vars('reg_user_row', [
+                template()->assign_block_vars('reg_user_row', [
                     'ROW_CLASS' => $row_class,
                     'USER' => profile_url($onlinerow_reg[$i], true),
                     'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'd-M-Y H:i', false),
@@ -220,7 +220,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                 $row_class = 'row2';
                 $guest_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($onlinerow_guest[$i]['session_ip']);
 
-                $template->assign_block_vars('guest_user_row', [
+                template()->assign_block_vars('guest_user_row', [
                     'ROW_CLASS' => $row_class,
                     'STARTED' => bb_date($onlinerow_guest[$i]['session_start'], 'd-M-Y H:i', false),
                     'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'd-M-Y H:i', false),
@@ -230,13 +230,13 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             }
         }
     } else {
-        $template->assign_vars([
+        template()->assign_vars([
             'USERS_ONLINE_HREF' => 'index.php?pane=right&users_online=1',
         ]);
     }
 } else {
     // Generate frameset
-    $template->assign_vars([
+    template()->assign_vars([
         'CONTENT_ENCODING' => DEFAULT_CHARSET,
         'TPL_ADMIN_FRAMESET' => true,
     ]);
@@ -252,13 +252,11 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
  */
 function getDiskSpaceInfo(string $path = BB_ROOT): array
 {
-    global $lang;
-
     $default_values = [
-        'total' => $lang['NOT_AVAILABLE'],
-        'free' => $lang['NOT_AVAILABLE'],
-        'used' => $lang['NOT_AVAILABLE'],
-        'percent_used' => $lang['NOT_AVAILABLE']
+        'total' => __('NOT_AVAILABLE'),
+        'free' => __('NOT_AVAILABLE'),
+        'used' => __('NOT_AVAILABLE'),
+        'percent_used' => __('NOT_AVAILABLE')
     ];
 
     try {

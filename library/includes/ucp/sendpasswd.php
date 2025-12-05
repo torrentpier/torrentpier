@@ -14,24 +14,24 @@ if (!defined('BB_ROOT')) {
 set_die_append_msg();
 
 if (!config()->get('emailer.enabled')) {
-    bb_die($lang['EMAILER_DISABLED']);
+    bb_die(__('EMAILER_DISABLED'));
 }
 
 $need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN && !config()->get('captcha.disabled'));
 
 if (isset($_POST['submit'])) {
     if ($need_captcha && !bb_captcha('check')) {
-        bb_die($lang['CAPTCHA_WRONG']);
+        bb_die(__('CAPTCHA_WRONG'));
     }
     $email = (!empty($_POST['email'])) ? trim(strip_tags(htmlspecialchars($_POST['email']))) : '';
     $sql = "SELECT * FROM " . BB_USERS . " WHERE user_email = '" . DB()->escape($email) . "'";
     if ($result = DB()->sql_query($sql)) {
         if ($row = DB()->sql_fetchrow($result)) {
             if (!$row['user_active']) {
-                bb_die($lang['NO_SEND_ACCOUNT_INACTIVE']);
+                bb_die(__('NO_SEND_ACCOUNT_INACTIVE'));
             }
             if (in_array($row['user_level'], [MOD, ADMIN])) {
-                bb_die($lang['NO_SEND_ACCOUNT']);
+                bb_die(__('NO_SEND_ACCOUNT'));
             }
 
             $username = $row['username'];
@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
             $emailer = new TorrentPier\Emailer();
 
             $emailer->set_to($row['user_email'], $username);
-            $emailer->set_subject($lang['EMAILER_SUBJECT']['USER_ACTIVATE_PASSWD']);
+            $emailer->set_subject(__('EMAILER_SUBJECT')['USER_ACTIVATE_PASSWD']);
 
             $emailer->set_template('user_activate_passwd', $row['user_lang']);
             $emailer->assign_vars([
@@ -62,9 +62,9 @@ if (isset($_POST['submit'])) {
 
             $emailer->send();
 
-            bb_die($lang['PASSWORD_UPDATED']);
+            bb_die(__('PASSWORD_UPDATED'));
         } else {
-            bb_die($lang['NO_EMAIL_MATCH']);
+            bb_die(__('NO_EMAIL_MATCH'));
         }
     } else {
         bb_die('Could not obtain user information for sendpassword');
@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
     $email = $username = '';
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'USERNAME' => $username,
     'EMAIL' => $email,
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',

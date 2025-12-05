@@ -43,7 +43,7 @@ $(function(){
 		var f_id = $(a).attr('href');
 		$(a)
 			.attr('href', '{U_FORUM}?{#POST_FORUM_URL#}='+ f_id)
-			.before('<img class="feed-small" src="{IMG}feed.png" alt="feed" onclick="open_feed('+ f_id +')">')
+			.before('<img class="feed-small" src="{{ IMG }}feed.png" alt="feed" onclick="open_feed('+ f_id +')">')
 		;
 	});
 	$.each($('span.c_title'), function(i,el) {

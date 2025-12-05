@@ -84,9 +84,9 @@ if ($submit && $confirm) {
     \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_bool, $cfg, 'bool');
     \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_num, $cfg, 'num');
 
-    $datastore->update('cat_forums');
+    forum_tree(refresh: true);
 
-    bb_die($lang['CONFIG_UPD'] . '<br /><br />' . sprintf($lang['RETURN_CONFIG'], '<a href="admin_bt_forum_cfg.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+    bb_die(__('CONFIG_UPD') . '<br /><br />' . sprintf(__('RETURN_CONFIG'), '<a href="admin_bt_forum_cfg.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
 }
 
 // Set template vars
@@ -124,13 +124,13 @@ foreach ($rowset as $rid => $forum) {
 
 foreach ($db_fields_bool as $field_name => $field_def_val) {
     $$field_name = '<select name="' . $field_name . "[]\" multiple size=\"$forum_rows\">" . $$field_name . '</select>';
-    $template->assign_vars(array('S_' . strtoupper($field_name) => $$field_name));
+    template()->assign_vars(array('S_' . strtoupper($field_name) => $$field_name));
 }
 
-$template->assign_vars(array(
-    'L_BT_SHOW_PEERS_MODE_COUNT' => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_COUNT) ? '<u>' . $lang['BT_SHOW_PEERS_MODE_COUNT'] . '</u>' : $lang['BT_SHOW_PEERS_MODE_COUNT'],
-    'L_BT_SHOW_PEERS_MODE_NAMES' => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_NAMES) ? '<u>' . $lang['BT_SHOW_PEERS_MODE_NAMES'] . '</u>' : $lang['BT_SHOW_PEERS_MODE_NAMES'],
-    'L_BT_SHOW_PEERS_MODE_FULL' => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_FULL) ? '<u>' . $lang['BT_SHOW_PEERS_MODE_FULL'] . '</u>' : $lang['BT_SHOW_PEERS_MODE_FULL'],
+template()->assign_vars(array(
+    'L_BT_SHOW_PEERS_MODE_COUNT' => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_COUNT) ? '<u>' . __('BT_SHOW_PEERS_MODE_COUNT') . '</u>' : __('BT_SHOW_PEERS_MODE_COUNT'),
+    'L_BT_SHOW_PEERS_MODE_NAMES' => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_NAMES) ? '<u>' . __('BT_SHOW_PEERS_MODE_NAMES') . '</u>' : __('BT_SHOW_PEERS_MODE_NAMES'),
+    'L_BT_SHOW_PEERS_MODE_FULL' => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_FULL) ? '<u>' . __('BT_SHOW_PEERS_MODE_FULL') . '</u>' : __('BT_SHOW_PEERS_MODE_FULL'),
 
     'BT_SHOW_PEERS_MODE_COUNT_VAL' => SHOW_PEERS_COUNT,
     'BT_SHOW_PEERS_MODE_NAMES_VAL' => SHOW_PEERS_NAMES,

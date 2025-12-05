@@ -70,9 +70,7 @@ class LogAction
      */
     public function init(): void
     {
-        global $lang;
-
-        foreach ($lang['LOG_ACTION']['LOG_TYPE'] as $log_type => $log_desc) {
+        foreach (__('LOG_ACTION')['LOG_TYPE'] as $log_type => $log_desc) {
             $this->log_type_select[strip_tags($log_desc)] = $this->log_type[$log_type];
         }
     }
@@ -94,8 +92,6 @@ class LogAction
      */
     public function mod(string $type_name, array $args = []): void
     {
-        global $userdata;
-
         if (empty($this->log_type)) {
             $this->init();
         }
@@ -111,13 +107,8 @@ class LogAction
         $topic_title_new =& $args['topic_title_new'];
         $log_msg =& $args['log_msg'];
 
-        if (!empty($userdata)) {
-            $user_id = $userdata['user_id'];
-            $session_ip = $userdata['session_ip'];
-        } else {
-            $user_id = '';
-            $session_ip = '';
-        }
+        $user_id = userdata('user_id') ?: '';
+        $session_ip = userdata('session_ip') ?: '';
 
         $sql_ary = [
             'log_type_id' => (int)$this->log_type[(string)$type_name],

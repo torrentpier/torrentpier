@@ -15,7 +15,7 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 if (!config()->get('emailer.enabled')) {
-    bb_die($lang['EMAILER_DISABLED']);
+    bb_die(__('EMAILER_DISABLED'));
 }
 
 set_time_limit(1200);
@@ -30,13 +30,13 @@ $errors = $user_id_sql = [];
 
 if (isset($_POST['submit'])) {
     if (!$subject) {
-        $errors[] = $lang['EMPTY_SUBJECT'];
+        $errors[] = __('EMPTY_SUBJECT');
     }
     if (!$message) {
-        $errors[] = $lang['EMPTY_MESSAGE'];
+        $errors[] = __('EMPTY_MESSAGE');
     }
     if (!$group_id) {
-        $errors[] = $lang['GROUP_NOT_EXIST'];
+        $errors[] = __('GROUP_NOT_EXIST');
     }
 
     if (!$errors) {
@@ -86,12 +86,12 @@ $sql = 'SELECT group_id, group_name
 	ORDER BY group_name
 ';
 
-$groups = ['-- ' . $lang['ALL_USERS'] . ' --' => -1];
+$groups = ['-- ' . __('ALL_USERS') . ' --' => -1];
 foreach (DB()->fetch_rowset($sql) as $row) {
     $groups[$row['group_name']] = $row['group_id'];
 }
 
-$template->assign_vars([
+template()->assign_vars([
     'MESSAGE' => $message,
     'SUBJECT' => $subject,
     'REPLY_TO' => $reply_to,

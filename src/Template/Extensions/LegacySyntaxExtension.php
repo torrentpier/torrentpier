@@ -207,11 +207,9 @@ class LegacySyntaxExtension extends AbstractExtension
             return "{{ $varPath|default('') }}";
         }, $content);
 
-        // Convert legacy variables {VARIABLE} to {{ V.VARIABLE }} LAST
-        $content = preg_replace_callback('/\{([A-Z0-9_]+)\}/', function ($matches) {
-            $varName = $matches[1];
-            return "{{ V.$varName|default('') }}";
-        }, $content);
+        // Convert legacy variables {VARIABLE} to Twig syntax
+        // Check global first (ThemeExtension globals), then fall back to V (template variables)
+        $content = preg_replace('/\{([A-Z0-9_]+)\}/', "{{ $1|default(V.$1)|default('') }}", $content);
 
         // Convert nested block variables {block.subblock.VARIABLE} (but not simple block vars handled in convertBlocks)
         // Exclude variables that end with _item. as those are already processed block variables
@@ -301,7 +299,7 @@ class LegacySyntaxExtension extends AbstractExtension
             function ($matches) use ($condition) {
                 $var = $matches[0];
 
-                // Skip if inside constant('...') - this is a global check, intentionally
+                // Skip if inside constant('...')
                 if (preg_match('/constant\s*\(\s*[\'"]' . preg_quote($var, '/') . '[\'"]\s*\)/', $condition)) {
                     return $var;
                 }
@@ -525,8 +523,7 @@ class LegacySyntaxExtension extends AbstractExtension
      */
     public function getVariable(string $varName, mixed $default = ''): mixed
     {
-        global $template;
-        return $template->getVar($varName, $default);
+        return template()->getVar($varName, $default);
     }
 
     /**
@@ -534,8 +531,7 @@ class LegacySyntaxExtension extends AbstractExtension
      */
     public function getLanguageVariable(string $key, mixed $default = ''): mixed
     {
-        global $lang;
-        return $lang[$key] ?? $default;
+        return lang()->get($key, $default);
     }
 
     /**

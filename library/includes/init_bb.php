@@ -11,13 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-/**
- * Define some basic configuration arrays
- */
-$userdata = $theme = $images = $lang = $bf = [];
-$gen_simple_header = false;
-$user = null;
-
 // Obtain and encode user IP
 $client_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
 $user_ip = \TorrentPier\Helpers\IPHelper::ip2long($client_ip);
@@ -163,21 +156,6 @@ define('POLL_FINISHED', 2);
 // Group avatars
 define('GROUP_AVATAR_MASK', 999000);
 
-$dl_link_css = [
-    DL_STATUS_RELEASER => 'genmed',
-    DL_STATUS_WILL => 'dlWill',
-    DL_STATUS_DOWN => 'leechmed',
-    DL_STATUS_COMPLETE => 'seedmed',
-    DL_STATUS_CANCEL => 'dlCancel',
-];
-
-$dl_status_css = [
-    DL_STATUS_RELEASER => 'genmed',
-    DL_STATUS_WILL => 'dlWill',
-    DL_STATUS_DOWN => 'dlDown',
-    DL_STATUS_COMPLETE => 'dlComplete',
-    DL_STATUS_CANCEL => 'dlCancel',
-];
 
 // Table names
 define('BUF_TOPIC_VIEW', 'buf_topic_view');
@@ -379,18 +357,7 @@ function make_url(string $path = ''): string
 require_once INC_DIR . '/functions.php';
 
 // Merge database configuration with base configuration using singleton
-// bb_cfg deprecated, but kept for compatibility with non-adapted code
 config()->merge(bb_get_config(BB_CONFIG));
-$bb_cfg = config()->all();
-
-// wordCensor deprecated, but kept for compatibility with non-adapted code
-$wordCensor = censor();
-
-$log_action = new TorrentPier\Legacy\LogAction();
-$html = new TorrentPier\Legacy\Common\Html();
-$user = new TorrentPier\Legacy\Common\User();
-
-$userdata =& $user->data;
 
 /**
  * Cron

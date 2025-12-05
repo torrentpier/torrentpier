@@ -15,6 +15,36 @@ namespace TorrentPier\Torrent;
 trait HelperTrait
 {
     /**
+     * Registration mode getter/setter (replaces global $reg_mode)
+     *
+     * @param string|null $mode Set mode ('request', 'newtopic', etc.) or null to just get
+     * @return string|null Current mode
+     */
+    protected static function regMode(?string $mode = null): ?string
+    {
+        static $value = null;
+        if ($mode !== null) {
+            $value = $mode;
+        }
+        return $value;
+    }
+
+    /**
+     * Return message getter/setter (replaces global $return_message)
+     *
+     * @param string|null $message Set message or null to just get
+     * @return string|null Current message
+     */
+    public static function returnMessage(?string $message = null): ?string
+    {
+        static $value = null;
+        if ($message !== null) {
+            $value = $message;
+        }
+        return $value;
+    }
+
+    /**
      * Get torrent info by topic ID.
      *
      * @param int $topicId Topic ID
@@ -22,15 +52,13 @@ trait HelperTrait
      */
     public static function getTorrentInfo(int $topicId): array
     {
-        global $lang;
-
         $row = DB()->table(BB_TOPICS)
             ->select('topic_id, topic_first_post_id, topic_title, topic_poster, forum_id, tracker_status, attach_ext_id')
             ->where('topic_id', $topicId)
             ->fetch();
 
         if (!$row) {
-            bb_die($lang['INVALID_TOPIC_ID']);
+            bb_die(__('INVALID_TOPIC_ID'));
         }
 
         $t_data = $row->toArray();
@@ -47,18 +75,16 @@ trait HelperTrait
      */
     protected static function checkAuth(int $forumId, int $posterId): void
     {
-        global $userdata, $lang;
-
         if (IS_ADMIN) {
             return;
         }
 
-        $is_auth = auth(AUTH_ALL, $forumId, $userdata);
+        $is_auth = auth(AUTH_ALL, $forumId, userdata());
 
-        if ($posterId != $userdata['user_id'] && !$is_auth['auth_mod']) {
-            bb_die($lang['NOT_MODERATOR']);
+        if ($posterId != userdata('user_id') && !$is_auth['auth_mod']) {
+            bb_die(__('NOT_MODERATOR'));
         } elseif (!$is_auth['auth_view'] || !$is_auth['auth_attachments']) {
-            bb_die(sprintf($lang['SORRY_AUTH_READ'], $is_auth['auth_read_type']));
+            bb_die(sprintf(__('SORRY_AUTH_READ'), $is_auth['auth_read_type']));
         }
     }
 
@@ -69,15 +95,15 @@ trait HelperTrait
      */
     protected static function errorExit(string $message): void
     {
-        global $reg_mode, $return_message, $lang;
-
         $msg = '';
+        $reg_mode = self::regMode();
 
-        if (isset($reg_mode) && ($reg_mode == 'request' || $reg_mode == 'newtopic')) {
-            if (isset($return_message)) {
+        if ($reg_mode !== null && ($reg_mode == 'request' || $reg_mode == 'newtopic')) {
+            $return_message = self::returnMessage();
+            if ($return_message !== null) {
                 $msg .= $return_message . '<br /><br /><hr/><br />';
             }
-            $msg .= '<b>' . $lang['BT_REG_FAIL'] . '</b><br /><br />';
+            $msg .= '<b>' . __('BT_REG_FAIL') . '</b><br /><br />';
         }
 
         bb_die($msg . $message);

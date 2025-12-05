@@ -28,7 +28,7 @@ $status = $migrationStatus->getMigrationStatus();
 $schemaInfo = $migrationStatus->getSchemaInfo();
 
 // Template variables
-$template->assign_vars([
+template()->assign_vars([
     'PAGE_TITLE' => __('MIGRATIONS_STATUS'),
     'CURRENT_TIME' => date('Y-m-d H:i:s'),
 
@@ -54,7 +54,7 @@ $template->assign_vars([
 // Assign migration data for template
 if (!empty($status['applied_migrations'])) {
     foreach ($status['applied_migrations'] as $i => $migration) {
-        $template->assign_block_vars('applied_migrations', [
+        template()->assign_block_vars('applied_migrations', [
             'VERSION' => $migration['version'],
             'NAME' => $migration['migration_name'] ?? __('UNKNOWN'),
             'START_TIME' => $migration['start_time'] ?? __('UNKNOWN'),
@@ -66,7 +66,7 @@ if (!empty($status['applied_migrations'])) {
 
 if (!empty($status['pending_migrations'])) {
     foreach ($status['pending_migrations'] as $i => $migration) {
-        $template->assign_block_vars('pending_migrations', [
+        template()->assign_block_vars('pending_migrations', [
             'VERSION' => $migration['version'],
             'NAME' => $migration['name'],
             'FILENAME' => $migration['filename'],

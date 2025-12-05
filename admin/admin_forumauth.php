@@ -41,18 +41,18 @@ $simple_auth_ary = [
 ];
 
 $simple_auth_types = [
-    $lang['PUBLIC'],
-    $lang['REGISTERED'],
-    $lang['REGISTERED'] . ' [' . $lang['HIDDEN'] . ']',
-    $lang['PRIVATE'],
-    $lang['PRIVATE'] . ' [' . $lang['HIDDEN'] . ']',
-    $lang['MODERATORS'],
-    $lang['MODERATORS'] . ' [' . $lang['HIDDEN'] . ']',
+    __('PUBLIC'),
+    __('REGISTERED'),
+    __('REGISTERED') . ' [' . __('HIDDEN') . ']',
+    __('PRIVATE'),
+    __('PRIVATE') . ' [' . __('HIDDEN') . ']',
+    __('MODERATORS'),
+    __('MODERATORS') . ' [' . __('HIDDEN') . ']',
 ];
 
 $field_names = [];
 foreach ($forum_auth_fields as $auth_type) {
-    $field_names[$auth_type] = $lang[strtoupper($auth_type)];
+    $field_names[$auth_type] = __(strtoupper($auth_type));
 }
 
 $forum_auth_levels = ['ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN'];
@@ -76,7 +76,7 @@ $submit = isset($_POST['submit']);
 
 // Check for demo mode
 if (IN_DEMO_MODE && $submit) {
-    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+    bb_die(__('CANT_EDIT_IN_DEMO_MODE'));
 }
 
 /**
@@ -127,9 +127,9 @@ if ($submit) {
         $adv = 0;
     }
 
-    $datastore->update('cat_forums');
+    forum_tree(refresh: true);
     CACHE('bb_cache')->rm();
-    bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="' . 'admin_forumauth.php' . '">', '</a>'));
+    bb_die(__('FORUM_AUTH_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMAUTH'), '<a href="' . 'admin_forumauth.php' . '">', '</a>'));
 }
 
 /**
@@ -139,7 +139,7 @@ $forum_rows = DB()->fetch_rowset('SELECT * FROM ' . BB_FORUMS . " $forum_sql");
 
 if (empty($forum_id)) {
     // Output the selection table if no forum id was specified
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_AUTH_SELECT_FORUM' => true,
         'S_AUTH_ACTION' => 'admin_forumauth.php',
         'S_AUTH_SELECT' => get_forum_select('admin', 'f', null, 80),
@@ -184,8 +184,8 @@ if (empty($forum_id)) {
 
         $simple_auth .= '</select>';
 
-        $template->assign_block_vars('forum_auth', [
-            'CELL_TITLE' => $lang['SIMPLE_MODE'],
+        template()->assign_block_vars('forum_auth', [
+            'CELL_TITLE' => __('SIMPLE_MODE'),
             'S_AUTH_LEVELS_SELECT' => $simple_auth,
         ]);
 
@@ -197,13 +197,13 @@ if (empty($forum_id)) {
 
             for ($k = 0, $kMax = count($forum_auth_levels); $k < $kMax; $k++) {
                 $selected = ($forum_rows[0][$forum_auth_fields[$j]] == $forum_auth_const[$k]) ? ' selected' : '';
-                $custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . $lang['FORUM_' . strtoupper($forum_auth_levels[$k])] . '</OPTION>';
+                $custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . __('FORUM_' . strtoupper($forum_auth_levels[$k])) . '</OPTION>';
             }
             $custom_auth[$j] .= '</select>&nbsp;';
 
             $cell_title = $field_names[$forum_auth_fields[$j]];
 
-            $template->assign_block_vars('forum_auth', [
+            template()->assign_block_vars('forum_auth', [
                 'CELL_TITLE' => $cell_title,
                 'S_AUTH_LEVELS_SELECT' => $custom_auth[$j],
             ]);
@@ -214,13 +214,13 @@ if (empty($forum_id)) {
 
     $adv_mode = empty($adv) ? '1' : '0';
     $switch_mode = "admin_forumauth.php?" . POST_FORUM_URL . "=$forum_id&amp;adv=$adv_mode";
-    $switch_mode_text = empty($adv) ? $lang['ADVANCED_MODE'] : $lang['SIMPLE_MODE'];
+    $switch_mode_text = empty($adv) ? __('ADVANCED_MODE') : __('SIMPLE_MODE');
     $u_switch_mode = '<a href="' . $switch_mode . '">' . $switch_mode_text . '</a>';
 
     $s_hidden_fields = '<input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '">';
     $is_subforum = $forum_rows[0]['forum_parent'] > 0;
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_EDIT_FORUM_AUTH' => true,
         'FORUM_NAME' => htmlCHR($forum_name),
         'U_VIEWFORUM' => BB_ROOT . FORUM_URL . $forum_id,

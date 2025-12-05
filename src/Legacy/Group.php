@@ -22,8 +22,6 @@ class Group
      */
     public static function update_user_level($user_id)
     {
-        global $datastore;
-
         if (\is_array($user_id)) {
             $user_id = implode(',', $user_id);
         }
@@ -74,7 +72,7 @@ class Group
 
         self::update_user_permissions($user_id);
         self::delete_orphan_usergroups();
-        $datastore->update('moderators');
+        datastore()->update('moderators');
     }
 
     /**

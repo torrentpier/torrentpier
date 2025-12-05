@@ -146,14 +146,14 @@
                     <a href="{log.TOPIC_HREF_S}" class="med"><span class="med">{log.TOPIC_TITLE}</span></a>
                     <!-- IF log.TOPIC_HREF -->
                     <a href="{log.TOPIC_HREF}" class="med" target="_blank">
-                        <img src="{IMG}icon_latest_reply.gif" class="icon2" alt="" title=""/>
+                        <img src="{{ IMG }}icon_latest_reply.gif" class="icon2" alt="" title=""/>
                     </a>
                     <!-- ENDIF -->
                     <!-- IF log.TOPIC_TITLE_NEW -->
                     <span class="nav"><em>&raquo;</em></span>
                     <a href="{log.TOPIC_HREF_NEW_S}" class="med"><span class="med">{log.TOPIC_TITLE_NEW}</span></a>
                     <a href="{log.TOPIC_HREF_NEW}" class="med" target="_blank">
-                        <img src="{IMG}icon_latest_reply.gif" class="icon2" alt="" title=""/>
+                        <img src="{{ IMG }}icon_latest_reply.gif" class="icon2" alt="" title=""/>
                     </a>
                     <!-- ENDIF -->
                 </div>
@@ -161,13 +161,13 @@
                 <!-- IF log.FORUM_NAME -->
                 <div class="small nowrap">
                     <a href="{log.FORUM_HREF}" class="med" target="_blank">
-                        <img src="{IMG}icon_minipost.gif" class="icon1" alt="" title=""/>
+                        <img src="{{ IMG }}icon_minipost.gif" class="icon1" alt="" title=""/>
                     </a>
                     <a href="{log.FORUM_HREF_S}" class="med"><i>{log.FORUM_NAME}</i></a>
                     <!-- IF log.FORUM_NAME_NEW -->
                     <span class="nav"><em>&raquo;</em></span>
                     <a href="{log.FORUM_HREF_NEW}" class="med" target="_blank">
-                        <img src="{IMG}icon_minipost.gif" class="icon1" alt="" title=""/>
+                        <img src="{{ IMG }}icon_minipost.gif" class="icon1" alt="" title=""/>
                     </a>
                     <a href="{log.FORUM_HREF_NEW_S}" class="med"><i>{log.FORUM_NAME_NEW}</i></a>
                     <!-- ENDIF -->

@@ -190,23 +190,25 @@ describe('CacheManager Class', function () {
         });
 
         it('memoizes function calls', function () {
-            // Test with string function name instead of closure to avoid serialization
-            $callCount = 0;
-
-            // Create a global counter for testing
-            $GLOBALS['test_call_count'] = 0;
-
-            // Define a named function that can be cached
+            // Define a named function that can be cached with static counter
             if (!function_exists('test_expensive_function')) {
-                function test_expensive_function($param)
+                function test_expensive_function($param, $mode = 'call')
                 {
-                    $GLOBALS['test_call_count']++;
+                    static $callCount = 0;
+                    if ($mode === 'reset') {
+                        $callCount = 0;
+                        return null;
+                    }
+                    if ($mode === 'count') {
+                        return $callCount;
+                    }
+                    $callCount++;
                     return "result_$param";
                 }
             }
 
             // Reset counter
-            $GLOBALS['test_call_count'] = 0;
+            test_expensive_function('', 'reset');
 
             // For closures that can't be serialized, just test that the method exists
             // and doesn't throw exceptions with simpler data
@@ -215,7 +217,7 @@ describe('CacheManager Class', function () {
             // Test with serializable function name
             $result1 = $this->cacheManager->call('test_expensive_function', 'test');
             expect($result1)->toBe('result_test');
-            expect($GLOBALS['test_call_count'])->toBe(1);
+            expect(test_expensive_function('', 'count'))->toBe(1);
         });
 
         it('wraps functions for memoization', function () {

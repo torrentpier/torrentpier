@@ -26,8 +26,6 @@ class Passkey
      */
     public static function generate(int $userId, bool $forceGenerate = false): string|false
     {
-        global $lang;
-
         // Check if user can change passkey
         if (!$forceGenerate) {
             $user = DB()->table(BB_USERS)
@@ -36,7 +34,7 @@ class Passkey
                 ->fetch();
 
             if ($user && bf($user['user_opt'], 'user_opt', 'dis_passkey')) {
-                bb_die($lang['NOT_AUTHORISED']);
+                bb_die(__('NOT_AUTHORISED'));
             }
         }
 

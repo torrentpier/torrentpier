@@ -11,10 +11,8 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang;
-
 if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
-    $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+    $this->ajax_die(__('NO_USER_ID_SPECIFIED'));
 }
 
 if (!$field = (string)$this->request['field']) {
@@ -23,7 +21,7 @@ if (!$field = (string)$this->request['field']) {
 
 // Check for demo mode
 if (IN_DEMO_MODE && in_array($field, ['username', 'user_email'])) {
-    $this->ajax_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+    $this->ajax_die(__('CANT_EDIT_IN_DEMO_MODE'));
 }
 
 $table = BB_USERS;
@@ -54,33 +52,33 @@ switch ($field) {
         if ($value == '' || preg_match('#^https?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+$#iu', $value)) {
             $this->response['new_value'] = htmlCHR($value);
         } else {
-            $this->ajax_die($lang['WEBSITE_ERROR']);
+            $this->ajax_die(__('WEBSITE_ERROR'));
         }
         break;
 
     case 'user_gender':
         if (!config()->get('gender')) {
-            $this->ajax_die($lang['MODULE_OFF']);
+            $this->ajax_die(__('MODULE_OFF'));
         }
-        if (!isset($lang['GENDER_SELECT'][$value])) {
-            $this->ajax_die($lang['ERROR']);
+        if (!isset(__('GENDER_SELECT')[$value])) {
+            $this->ajax_die(__('ERROR'));
         }
-        $this->response['new_value'] = $lang['GENDER_SELECT'][$value];
+        $this->response['new_value'] = __('GENDER_SELECT')[$value];
         break;
 
     case 'user_birthday':
         if (!config()->get('birthday_enabled')) {
-            $this->ajax_die($lang['MODULE_OFF']);
+            $this->ajax_die(__('MODULE_OFF'));
         }
         $birthday_date = date_parse($value);
 
         if (!empty($birthday_date['year'])) {
             if (strtotime($value) >= TIMENOW) {
-                $this->ajax_die($lang['WRONG_BIRTHDAY_FORMAT']);
+                $this->ajax_die(__('WRONG_BIRTHDAY_FORMAT'));
             } elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] > config()->get('birthday_max_age')) {
-                $this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], config()->get('birthday_max_age')));
+                $this->ajax_die(sprintf(__('BIRTHDAY_TO_HIGH'), config()->get('birthday_max_age')));
             } elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] < config()->get('birthday_min_age')) {
-                $this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], config()->get('birthday_min_age')));
+                $this->ajax_die(sprintf(__('BIRTHDAY_TO_LOW'), config()->get('birthday_min_age')));
             }
         }
 
@@ -89,7 +87,7 @@ switch ($field) {
 
     case 'user_twitter':
         if ($value && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $value)) {
-            $this->ajax_die($lang['TWITTER_ERROR']);
+            $this->ajax_die(__('TWITTER_ERROR'));
         }
         $this->response['new_value'] = $this->request['value'];
         break;
@@ -104,14 +102,14 @@ switch ($field) {
     case 'u_up_release':
     case 'u_up_bonus':
         if (!IS_ADMIN) {
-            $this->ajax_die($lang['NOT_ADMIN']);
+            $this->ajax_die(__('NOT_ADMIN'));
         }
 
         $table = BB_BT_USERS;
         $value = (int)$this->request['value'];
 
         if ($value < 0) {
-            $this->ajax_die($lang['WRONG_INPUT']);
+            $this->ajax_die(__('WRONG_INPUT'));
         }
 
         foreach (['KB' => 1, 'MB' => 2, 'GB' => 3, 'TB' => 4, 'PB' => 5, 'EB' => 6, 'ZB' => 7, 'YB' => 8] as $s => $m) {
@@ -132,7 +130,7 @@ switch ($field) {
         $value = (float)str_replace(',', '.', $this->request['value']);
         $value = sprintf('%.2f', $value);
         if ($value < 0.0 || strlen(strstr($value, '.', true)) > 14) {
-            $this->ajax_die($lang['WRONG_INPUT']);
+            $this->ajax_die(__('WRONG_INPUT'));
         }
         $this->response['new_value'] = $value;
         break;

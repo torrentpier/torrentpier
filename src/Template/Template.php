@@ -20,7 +20,7 @@ class Template
     private static float $totalRenderTime = 0;
 
     /** Reserved context keys that should not be overwritten */
-    private const RESERVED_KEYS = ['L', '_tpldata', 'V'];
+    private const RESERVED_KEYS = ['L', '_tpldata', 'V', 'IMG'];
 
     /** @var array<array{variable: string, template: string, source: string, time: float}> */
     private static array $variableConflicts = [];
@@ -48,17 +48,11 @@ class Template
     /** Current template name */
     private string $templateName;
 
-    /** Language variables reference */
-    private array $lang = [];
-
     private function __construct(string $root = '.')
     {
-        global $lang;
-
         $this->variables = &$this->blockData['.'][0];
         $this->rootDir = $root;
         $this->templateName = basename($root);
-        $this->lang = &$lang;
         $this->cacheDir = CACHE_DIR . '/';
 
         if (!is_dir($this->rootDir)) {
@@ -68,13 +62,20 @@ class Template
         $this->initializeTwig();
     }
 
+    private static ?self $defaultInstance = null;
+
     public static function getInstance(?string $root = null): self
     {
+        if ($root === null && self::$defaultInstance !== null) {
+            return self::$defaultInstance;
+        }
+
         $root = $root ?: '.';
         $key = md5($root);
 
         if (!isset(self::$instances[$key])) {
             self::$instances[$key] = new self($root);
+            self::$defaultInstance ??= self::$instances[$key];
         }
 
         return self::$instances[$key];
@@ -83,6 +84,14 @@ class Template
     public function getCacheDir(): string
     {
         return $this->cacheDir;
+    }
+
+    /**
+     * Get the Twig environment instance
+     */
+    public function getTwig(): ?Environment
+    {
+        return $this->twig;
     }
 
     public function getVar(string $name, mixed $default = null): mixed
@@ -169,7 +178,7 @@ class Template
         // Variables directly at root level, plus L for language and _tpldata for blocks
         $context = array_merge($variables, [
             '_tpldata' => $this->blockData,
-            'L' => $this->lang,
+            'L' => lang(),
         ]);
 
         $renderStart = microtime(true);
@@ -201,11 +210,10 @@ class Template
         $templateName = $this->getRelativeTemplateName($templatePath);
         $isNativeTwig = str_ends_with($templateName, '.twig');
 
-        // Build context - for native .twig files, expose variables at root level too
         $context = [
             '_tpldata' => $this->blockData,
-            'L' => $this->lang,
-            'V' => $this->variables
+            'L' => lang(),
+            'V' => $this->variables,
         ];
 
         // For native Twig templates, expose V variables at root level for cleaner syntax
@@ -387,7 +395,7 @@ class Template
 
         $this->twig->addGlobal('_tpldata', $this->blockData);
         $this->twig->addGlobal('V', $this->variables);
-        $this->twig->addGlobal('L', $this->lang);
+        $this->twig->addGlobal('L', lang());
     }
 
     /**

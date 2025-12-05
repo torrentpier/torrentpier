@@ -11,19 +11,17 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $user;
-
 if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
 }
 
 $user_id = (int)$this->request['user_id'];
 if (!$user_id or !$u_data = get_userdata($user_id)) {
-    $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+    $this->ajax_die(__('NO_USER_ID_SPECIFIED'));
 }
 
-if (!IS_ADMIN && $user_id != $user->id) {
-    $this->ajax_die($lang['NOT_AUTHORISED']);
+if (!IS_ADMIN && $user_id != user()->id) {
+    $this->ajax_die(__('NOT_AUTHORISED'));
 }
 
 $new_ext_id = 0;

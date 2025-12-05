@@ -18,14 +18,14 @@ $submit = isset($_POST['submit']);
 
 // Check for demo mode
 if (IN_DEMO_MODE && $submit) {
-    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+    bb_die(__('CANT_EDIT_IN_DEMO_MODE'));
 }
 
 if ($submit) {
     // Ban action
     if (!empty($_POST['username'])) {
         if (!$this_userdata = get_userdata($_POST['username'], true)) {
-            bb_die($lang['NO_USER_ID_SPECIFIED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('NO_USER_ID_SPECIFIED') . '<br /><br />' . sprintf(__('CLICK_RETURN_BANADMIN'), '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
         }
 
         if (!getBanInfo((int)$this_userdata['user_id'])) {
@@ -60,10 +60,10 @@ if ($submit) {
         }
     }
 
-    $datastore->update('ban_list');
-    bb_die($lang['BAN_UPDATE_SUCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+    datastore()->update('ban_list');
+    bb_die(__('BAN_UPDATE_SUCESSFUL') . '<br /><br />' . sprintf(__('CLICK_RETURN_BANADMIN'), '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
 } else {
-    $template->assign_vars(['S_BANLIST_ACTION' => 'admin_user_ban.php']);
+    template()->assign_vars(['S_BANLIST_ACTION' => 'admin_user_ban.php']);
 
     $select_userlist = '';
     foreach (getBanInfo() as $ban) {
@@ -71,11 +71,11 @@ if ($submit) {
     }
 
     if ($select_userlist == '') {
-        $select_userlist = '<option value="-1">' . $lang['NO_BANNED_USERS'] . '</option>';
+        $select_userlist = '<option value="-1">' . __('NO_BANNED_USERS') . '</option>';
     }
     $select_userlist = '<select name="unban_user[]" multiple size="5">' . $select_userlist . '</select>';
 
-    $template->assign_vars([
+    template()->assign_vars([
         'U_SEARCH_USER' => './../search.php?mode=searchuser',
         'S_UNBAN_USERLIST_SELECT' => $select_userlist,
         'S_BAN_ACTION' => 'admin_user_ban.php'

@@ -12,17 +12,17 @@ define('IN_LOGIN', true);
 
 require __DIR__ . '/common.php';
 
-$page_cfg['allow_robots'] = false;
+page_cfg('allow_robots', false);
 
 array_deep($_POST, 'trim');
 
 // Start session management
-$user->session_start();
+user()->session_start();
 
 // Logout
 if (!empty($_GET['logout'])) {
     if (!IS_GUEST) {
-        $user->session_end();
+        user()->session_end();
     }
     redirect('index.php');
 }
@@ -49,16 +49,16 @@ if (!$redirect_url || str_contains(urldecode($redirect_url), "\n") || str_contai
     $redirect_url = 'index.php';
 }
 
-$redirect_url = str_replace("&sid={$user->data['session_id']}", '', $redirect_url);
+$redirect_url = str_replace("&sid=" . user()->data['session_id'], '', $redirect_url);
 
 if (isset($_REQUEST['admin']) && !IS_AM) {
-    bb_die($lang['NOT_ADMIN']);
+    bb_die(__('NOT_ADMIN'));
 }
 
-$mod_admin_login = (IS_AM && !$user->data['session_admin']);
+$mod_admin_login = (IS_AM && !userdata('session_admin'));
 
 // login username & password
-$login_username = ($mod_admin_login) ? $userdata['username'] : ($_POST['login_username'] ?? '');
+$login_username = ($mod_admin_login) ? userdata('username') : ($_POST['login_username'] ?? '');
 $login_password = $_POST['login_password'] ?? '';
 
 // Checking for incorrect login/password combination
@@ -77,17 +77,17 @@ if (isset($_POST['login'])) {
             redirect('index.php');
         }
         if ($login_username == '' || $login_password == '') {
-            $login_errors[] = $lang['ENTER_PASSWORD'];
+            $login_errors[] = __('ENTER_PASSWORD');
         }
     }
 
     // Captcha
     if ($need_captcha && !config()->get('captcha.disabled') && !bb_captcha('check')) {
-        $login_errors[] = $lang['CAPTCHA_WRONG'];
+        $login_errors[] = __('CAPTCHA_WRONG');
     }
 
     if (!$login_errors) {
-        if ($user->login($_POST, $mod_admin_login)) {
+        if (user()->login($_POST, $mod_admin_login)) {
             $redirect_url = (defined('FIRST_LOGON')) ? config()->get('first_logon_redirect_url') : $redirect_url;
             // Reset when entering the correct login/password combination
             CACHE('bb_login_err')->rm('l_err_' . USER_IP);
@@ -98,7 +98,7 @@ if (isset($_POST['login'])) {
             redirect($redirect_url);
         }
 
-        $login_errors[] = $lang['ERROR_LOGIN'];
+        $login_errors[] = __('ERROR_LOGIN');
     }
 
     if (!$mod_admin_login) {
@@ -114,14 +114,14 @@ if (isset($_POST['login'])) {
 
 // Login page
 if (IS_GUEST || $mod_admin_login) {
-    $template->assign_vars([
+    template()->assign_vars([
         'LOGIN_USERNAME' => htmlCHR($login_username),
         'LOGIN_PASSWORD' => htmlCHR($login_password),
         'ERROR_MESSAGE' => implode('<br />', $login_errors),
         'ADMIN_LOGIN' => $mod_admin_login,
         'REDIRECT_URL' => htmlCHR($redirect_url),
         'CAPTCHA_HTML' => ($need_captcha && !config()->get('captcha.disabled')) ? bb_captcha('get') : '',
-        'PAGE_TITLE' => $lang['LOGIN'],
+        'PAGE_TITLE' => __('LOGIN'),
         'S_LOGIN_ACTION' => LOGIN_URL
     ]);
 

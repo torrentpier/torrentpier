@@ -11,12 +11,12 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$datastore->enqueue([
+datastore()->enqueue([
     'smile_replacements',
     'cat_forums',
 ]);
 
-$page_cfg['include_bbcode_js'] = true;
+page_cfg('include_bbcode_js', true);
 
 //
 // BBCode templates
@@ -123,17 +123,15 @@ function prepare_message($message)
 // Either in a window or inline
 function generate_smilies($mode)
 {
-    global $template, $lang, $user, $datastore;
-
     $inline_columns = 4;
     $inline_rows = 7;
     $window_columns = 8;
 
     if ($mode == 'window') {
-        $user->session_start();
+        user()->session_start();
     }
 
-    $data = $datastore->get('smile_replacements');
+    $data = datastore()->get('smile_replacements');
 
     if (isset($data['smile']) && $sql = $data['smile']) {
         $num_smilies = 0;
@@ -155,10 +153,10 @@ function generate_smilies($mode)
 
             foreach ($rowset as $smile_url => $data) {
                 if (!$col) {
-                    $template->assign_block_vars('smilies_row', []);
+                    template()->assign_block_vars('smilies_row', []);
                 }
 
-                $template->assign_block_vars('smilies_row.smilies_col', [
+                template()->assign_block_vars('smilies_row.smilies_col', [
                     'SMILEY_CODE' => $data['code'],
                     'SMILEY_IMG' => config()->get('smilies_path') . '/' . $smile_url,
                     'SMILEY_DESC' => $data['emoticon'],
@@ -178,15 +176,15 @@ function generate_smilies($mode)
             }
 
             if ($mode == 'inline' && $num_smilies > $inline_rows * $inline_columns) {
-                $template->assign_block_vars('switch_smilies_extra', []);
+                template()->assign_block_vars('switch_smilies_extra', []);
 
-                $template->assign_vars([
+                template()->assign_vars([
                     'U_MORE_SMILIES' => POSTING_URL . "?mode=smilies",
                 ]);
             }
 
-            $template->assign_vars([
-                'PAGE_TITLE' => $lang['EMOTICONS'],
+            template()->assign_vars([
+                'PAGE_TITLE' => __('EMOTICONS'),
                 'S_SMILIES_COLSPAN' => $s_colspan,
             ]);
         }
@@ -402,13 +400,8 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
 
 function bbcode2html($text)
 {
-    global $bbcode;
-
-    if (!isset($bbcode)) {
-        $bbcode = new TorrentPier\Legacy\BBCode();
-    }
     $text = censor()->censorString($text);
-    return $bbcode->bbcode2html($text);
+    return bbcode()->bbcode2html($text);
 }
 
 function get_words_rate($text)

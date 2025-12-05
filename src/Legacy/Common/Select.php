@@ -48,12 +48,10 @@ class Select
      *
      * @return string
      */
-    public static function timezone(string $default, string $select_name = 'timezone'): string
+    public static function timezone(string $default = '', string $select_name = 'timezone'): string
     {
-        global $sys_timezone;
-
-        if (!isset($default)) {
-            $default = $sys_timezone;
+        if ($default === '') {
+            $default = (string)config()->get('board_timezone');
         }
         $tz_select = '<select name="' . $select_name . '">';
 

@@ -14,12 +14,12 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-$datastore->enqueue([
+datastore()->enqueue([
     'moderators',
     'cat_forums',
 ]);
 
-$log_action->init();
+log_action()->init();
 
 $per_page = 50;
 $row_class_1 = 'row1';
@@ -59,25 +59,20 @@ $def_forums = $all_forums;
 $def_sort = $sort_desc;
 
 // Moderators data
-if (!$mod = $datastore->get('moderators')) {
-    $datastore->update('moderators');
-    $mod = $datastore->get('moderators');
+if (!$mod = datastore()->get('moderators')) {
+    datastore()->update('moderators');
+    $mod = datastore()->get('moderators');
 }
 array_deep($mod['moderators'], 'html_entity_decode');
 array_deep($mod['admins'], 'html_entity_decode');
 
-$users = array($lang['ACTS_LOG_ALL_ACTIONS'] => $all_users) + array_flip($mod['moderators']) + array_flip($mod['admins']);
+$users = array(__('ACTS_LOG_ALL_ACTIONS') => $all_users) + array_flip($mod['moderators']) + array_flip($mod['admins']);
 
 unset($mod);
 
 // Forums data
-if (!$forums = $datastore->get('cat_forums')) {
-    $datastore->update('cat_forums');
-    $forums = $datastore->get('cat_forums');
-}
+$forums = forum_tree();
 $f_data = $forums['f'];
-
-unset($forums);
 
 // Start
 $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
@@ -208,7 +203,7 @@ generate_pagination($url, $items_count, $per_page, $start);
 $filter = [];
 
 if ($log_rowset) {
-    $log_type = $log_action->log_type;
+    $log_type = log_action()->log_type;
     $log_type_flip = array_flip($log_type);
 
     foreach ($log_rowset as $row_num => $row) {
@@ -267,8 +262,8 @@ if ($log_rowset) {
         $datetime_href_s = url_arg($url, $datetime_key, date($dt_format, $row['log_time']));
         $datetime_href_s = url_arg($datetime_href_s, $daysback_key, 1);
 
-        $template->assign_block_vars('log', array(
-            'ACTION_DESC' => $lang['LOG_ACTION']['LOG_TYPE'][$log_type_flip[$row['log_type_id']]],
+        template()->assign_block_vars('log', array(
+            'ACTION_DESC' => __('LOG_ACTION')['LOG_TYPE'][$log_type_flip[$row['log_type_id']]],
             'ACTION_HREF_S' => url_arg($url, $type_key, $row['log_type_id']),
 
             'USER_ID' => $row['log_user_id'],
@@ -305,48 +300,48 @@ if ($log_rowset) {
 
         // Topics
         if ($topic_csv && empty($filter['topics'][$row['log_topic_title']])) {
-            $template->assign_block_vars('topics', array(
+            template()->assign_block_vars('topics', array(
                 'TOPIC_TITLE' => $row['log_topic_title'],
             ));
             $filter['topics'][$row['log_topic_title']] = true;
         }
         // Forums
         if ($forum_csv && empty($filter['forums'][$forum_name])) {
-            $template->assign_block_vars('forums', array(
+            template()->assign_block_vars('forums', array(
                 'FORUM_NAME' => htmlCHR($forum_name),
             ));
             $filter['forums'][$forum_name] = true;
         }
         // Users
         if ($user_csv && empty($filter['users'])) {
-            $template->assign_block_vars('users', array(
+            template()->assign_block_vars('users', array(
                 'USERNAME' => profile_url($row, true),
             ));
             $filter['users'] = true;
         }
     }
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'FILTERS' => $topic_csv || $forum_csv || $user_csv,
         'FILTER_TOPICS' => !empty($filter['topics']),
         'FILTER_FORUMS' => !empty($filter['forums']),
         'FILTER_USERS' => !empty($filter['users']),
     ));
 } else {
-    $template->assign_block_vars('log_not_found', []);
+    template()->assign_block_vars('log_not_found', []);
 }
 
 // Select
-$log_type_select = array($lang['ACTS_LOG_ALL_ACTIONS'] => $all_types) + $log_action->log_type_select;
+$log_type_select = array(__('ACTS_LOG_ALL_ACTIONS') => $all_types) + log_action()->log_type_select;
 
-$template->assign_vars(array(
+template()->assign_vars(array(
     'LOG_COLSPAN' => 4,
 
     'DATETIME_NAME' => $datetime_key,
     'DATETIME_VAL' => date('Y-m-d', $datetime_val),
     'DAYSBACK_NAME' => $daysback_key,
     'DAYSBACK_VAL' => $daysback_val,
-    'FIRST_LOG_TIME' => $first_log_time ? date('Y-m-d', $first_log_time) : $lang['ACC_NONE'],
+    'FIRST_LOG_TIME' => $first_log_time ? date('Y-m-d', $first_log_time) : __('ACC_NONE'),
 
     'TITLE_MATCH_MAX' => $title_match_max_len,
     'TITLE_MATCH_NAME' => $title_match_key,

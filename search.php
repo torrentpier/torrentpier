@@ -12,56 +12,55 @@ define('BB_SCRIPT', 'search');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
-$page_cfg['use_tablesorter'] = true;
-$page_cfg['load_tpl_vars'] = [
+use TorrentPier\Search\SearchParams;
+
+page_cfg('use_tablesorter', true);
+page_cfg('load_tpl_vars', [
     'post_buttons',
     'post_icons',
     'topic_icons'
-];
-$page_cfg['allow_robots'] = false;
+]);
+page_cfg('allow_robots', false);
 
 // Start session management
-$user->session_start(array('req_login' => config()->get('disable_search_for_guest')));
+user()->session_start(array('req_login' => config()->get('disable_search_for_guest')));
 
 set_die_append_msg();
 
 if (isset($_POST['del_my_post'])) {
-    $template->assign_var('BB_DIE_APPEND_MSG', '
-		<a href="#" onclick="window.close(); window.opener.focus();">' . $lang['GOTO_MY_MESSAGE'] . '</a>
+    template()->assign_var('BB_DIE_APPEND_MSG', '
+		<a href="#" onclick="window.close(); window.opener.focus();">' . __('GOTO_MY_MESSAGE') . '</a>
 		<br /><br />
-		<a href="index.php">' . $lang['INDEX_RETURN'] . '</a>
+		<a href="index.php">' . __('INDEX_RETURN') . '</a>
 	');
 
     if (empty($_POST['topic_id_list']) or !$topic_csv = get_id_csv($_POST['topic_id_list'])) {
-        bb_die($lang['NONE_SELECTED']);
+        bb_die(__('NONE_SELECTED'));
     }
 
-    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 0 WHERE poster_id = {$user->id} AND topic_id IN($topic_csv)");
+    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 0 WHERE poster_id = " . user()->id . " AND topic_id IN($topic_csv)");
 
     if (DB()->affected_rows()) {
         //bb_die('Выбранные темы ['. count($_POST['topic_id_list']) .' шт.] удалены из списка "Мои сообщения"');
-        bb_die($lang['DEL_MY_MESSAGE']);
+        bb_die(__('DEL_MY_MESSAGE'));
     } else {
-        bb_die($lang['NO_TOPICS_MY_MESSAGE']);
+        bb_die(__('NO_TOPICS_MY_MESSAGE'));
     }
 } elseif (isset($_POST['add_my_post'])) {
-    $template->assign_var('BB_DIE_APPEND_MSG', '
-		<a href="#" onclick="window.close(); window.opener.focus();">' . $lang['GOTO_MY_MESSAGE'] . '</a>
+    template()->assign_var('BB_DIE_APPEND_MSG', '
+		<a href="#" onclick="window.close(); window.opener.focus();">' . __('GOTO_MY_MESSAGE') . '</a>
 		<br /><br />
-		<a href="index.php">' . $lang['INDEX_RETURN'] . '</a>
+		<a href="index.php">' . __('INDEX_RETURN') . '</a>
 	');
 
     if (IS_GUEST) {
         redirect('index.php');
     }
 
-    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = {$user->id}");
+    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = " . user()->id);
 
-    redirect("search.php?" . POST_USERS_URL . "={$user->id}");
+    redirect("search.php?" . POST_USERS_URL . "=" . user()->id);
 }
-
-$tracking_topics = get_tracks('topic');
-$tracking_forums = get_tracks('forum');
 
 if ($mode =& $_REQUEST['mode']) {
     // This handles the simple windowed user search functions called from various other scripts
@@ -72,7 +71,7 @@ if ($mode =& $_REQUEST['mode']) {
     }
 }
 
-$excluded_forums_csv = $user->get_excluded_forums(AUTH_READ);
+$excluded_forums_csv = user()->get_excluded_forums(AUTH_READ);
 
 $search_limit = 500;
 $forum_select_size = 16;   // forum select box max rows
@@ -84,10 +83,10 @@ $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $url = basename(__FILE__);
 
 $anon_id = GUEST_UID;
-$user_id = $userdata['user_id'];
-$lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
+$user_id = userdata('user_id');
+$lastvisit = IS_GUEST ? TIMENOW : userdata('user_lastvisit');
 $search_id = (isset($_GET['id']) && verify_id($_GET['id'], SEARCH_ID_LENGTH)) ? $_GET['id'] : '';
-$session_id = $userdata['session_id'];
+$session_id = userdata('session_id');
 
 $items_found = $items_display = $previous_settings = null;
 $text_match_sql = '';
@@ -105,10 +104,7 @@ $tracker_tbl = BB_BT_TRACKER . ' tr';
 $users_tbl = BB_USERS . ' u';
 
 // Cat/forum data
-if (!$forums = $datastore->get('cat_forums')) {
-    $datastore->update('cat_forums');
-    $forums = $datastore->get('cat_forums');
-}
+$forums = forum_tree();
 $forum_name_html = $forums['forum_name_html'];
 
 //
@@ -136,23 +132,23 @@ $ord_created = 6;
 // Order options
 $order_opt = array(
     $ord_posted => array(
-        'lang' => $lang['SORT_TIME'],
+        'lang' => __('SORT_TIME'),
         'sql' => 'item_id',
     ),
     $ord_last_p => array(
-        'lang' => $lang['BT_LAST_POST'],
+        'lang' => __('BT_LAST_POST'),
         'sql' => 't.topic_last_post_id',
     ),
     $ord_created => array(
-        'lang' => $lang['BT_CREATED'],
+        'lang' => __('BT_CREATED'),
         'sql' => 't.topic_time',
     ),
     $ord_name => array(
-        'lang' => $lang['SORT_TOPIC_TITLE'],
+        'lang' => __('SORT_TOPIC_TITLE'),
         'sql' => 't.topic_title',
     ),
     $ord_repl => array(
-        'lang' => $lang['REPLIES'],
+        'lang' => __('REPLIES'),
         'sql' => 't.topic_replies',
     ),
 );
@@ -164,11 +160,11 @@ foreach ($order_opt as $val => $opt) {
 // Sort direction
 $sort_opt = array(
     $sort_asc => array(
-        'lang' => $lang['ASC'],
+        'lang' => __('ASC'),
         'sql' => ' ASC ',
     ),
     $sort_desc => array(
-        'lang' => $lang['DESC'],
+        'lang' => __('DESC'),
         'sql' => ' DESC ',
     ),
 );
@@ -180,27 +176,27 @@ foreach ($sort_opt as $val => $opt) {
 // Previous days
 $time_opt = array(
     $search_all => array(
-        'lang' => $lang['BT_ALL_DAYS_FOR'],
+        'lang' => __('BT_ALL_DAYS_FOR'),
         'sql' => 0,
     ),
     1 => array(
-        'lang' => $lang['BT_1_DAY_FOR'],
+        'lang' => __('BT_1_DAY_FOR'),
         'sql' => TIMENOW - 86400,
     ),
     3 => array(
-        'lang' => $lang['BT_3_DAY_FOR'],
+        'lang' => __('BT_3_DAY_FOR'),
         'sql' => TIMENOW - 86400 * 3,
     ),
     7 => array(
-        'lang' => $lang['BT_7_DAYS_FOR'],
+        'lang' => __('BT_7_DAYS_FOR'),
         'sql' => TIMENOW - 86400 * 7,
     ),
     14 => array(
-        'lang' => $lang['BT_2_WEEKS_FOR'],
+        'lang' => __('BT_2_WEEKS_FOR'),
         'sql' => TIMENOW - 86400 * 14,
     ),
     30 => array(
-        'lang' => $lang['BT_1_MONTH_FOR'],
+        'lang' => __('BT_1_MONTH_FOR'),
         'sql' => TIMENOW - 86400 * 30,
     ),
 );
@@ -212,10 +208,10 @@ foreach ($time_opt as $val => $opt) {
 // Display as
 $display_as_opt = array(
     $as_topics => array(
-        'lang' => $lang['TOPICS'],
+        'lang' => __('TOPICS'),
     ),
     $as_posts => array(
-        'lang' => $lang['MESSAGE'],
+        'lang' => __('MESSAGE'),
     ),
 );
 $display_as_select = [];
@@ -226,10 +222,10 @@ foreach ($display_as_opt as $val => $opt) {
 // Chars
 $chars_opt = array(
     $show_all => array(
-        'lang' => $lang['ALL_AVAILABLE'],
+        'lang' => __('ALL_AVAILABLE'),
     ),
     $show_briefly => array(
-        'lang' => $lang['BRIEFLY'],
+        'lang' => __('BRIEFLY'),
     ),
 );
 $chars_select = [];
@@ -262,56 +258,53 @@ $GPC = array(
     'topic' => array('t', null, REQUEST),
 );
 
-// Define all GPC vars with default values
-foreach ($GPC as $var_name => $var_options) {
-    $GLOBALS["{$var_name}_key"] = $var_options[KEY_NAME];
-    $GLOBALS["{$var_name}_val"] = $var_options[DEF_VAL];
-}
+// Initialize search parameters container
+$params = new SearchParams($GPC);
 
 // Output basic page
 if (empty($_GET) && empty($_POST)) {
     // Make forum select box
     $forum_select_mode = explode(',', $excluded_forums_csv);
-    $forum_select = get_forum_select($forum_select_mode, "{$forum_key}[]", $search_all, $max_forum_name_len, $forum_select_size, 'style="width: 95%;"', $search_all);
+    $forum_select = get_forum_select($forum_select_mode, $params->key('forum') . '[]', $search_all, $max_forum_name_len, $forum_select_size, 'style="width: 95%;"', $search_all);
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'TPL_SEARCH_MAIN' => true,
-        'PAGE_TITLE' => $lang['SEARCH'],
+        'PAGE_TITLE' => __('SEARCH'),
 
-        'POSTER_ID_KEY' => $poster_id_key,
-        'TEXT_MATCH_KEY' => $text_match_key,
-        'POSTER_NAME_KEY' => $poster_name_key,
+        'POSTER_ID_KEY' => $params->key('poster_id'),
+        'TEXT_MATCH_KEY' => $params->key('text_match'),
+        'POSTER_NAME_KEY' => $params->key('poster_name'),
 
-        'THIS_USER_ID' => $userdata['user_id'],
-        'THIS_USER_NAME' => addslashes($userdata['username']),
+        'THIS_USER_ID' => userdata('user_id'),
+        'THIS_USER_NAME' => addslashes(userdata('username')),
         'SEARCH_ACTION' => 'search.php',
-        'U_SEARCH_USER' => "search.php?mode=searchuser&amp;input_name=$poster_name_key",
+        'U_SEARCH_USER' => 'search.php?mode=searchuser&amp;input_name=' . $params->key('poster_name'),
         'ONLOAD_FOCUS_ID' => 'text_match_input',
 
         'MY_TOPICS_ID' => 'my_topics',
-        'MY_TOPICS_CHBOX' => build_checkbox($my_topics_key, $lang['SEARCH_MY_TOPICS'], $my_topics_val, true, null, 'my_topics'),
-        'TITLE_ONLY_CHBOX' => build_checkbox($title_only_key, $lang['SEARCH_TITLES_ONLY'], true, config()->get('disable_ft_search_in_posts')),
-        'ALL_WORDS_CHBOX' => build_checkbox($all_words_key, $lang['SEARCH_ALL_WORDS'], true),
-        'DL_CANCEL_CHBOX' => build_checkbox($dl_cancel_key, $lang['SEARCH_DL_CANCEL'], $dl_cancel_val, IS_GUEST, $dl_link_css[DL_STATUS_CANCEL]),
-        'DL_COMPL_CHBOX' => build_checkbox($dl_compl_key, $lang['SEARCH_DL_COMPLETE'], $dl_compl_val, IS_GUEST, $dl_link_css[DL_STATUS_COMPLETE]),
-        'DL_DOWN_CHBOX' => build_checkbox($dl_down_key, $lang['SEARCH_DL_DOWN'], $dl_down_val, IS_GUEST, $dl_link_css[DL_STATUS_DOWN]),
-        'DL_WILL_CHBOX' => build_checkbox($dl_will_key, $lang['SEARCH_DL_WILL'], $dl_will_val, IS_GUEST, $dl_link_css[DL_STATUS_WILL]),
-        'ONLY_NEW_CHBOX' => build_checkbox($new_key, $lang['BT_ONLY_NEW'], $new_val, IS_GUEST),
-        'NEW_TOPICS_CHBOX' => build_checkbox($new_topics_key, $lang['NEW_TOPICS'], $new_topics_val, IS_GUEST),
+        'MY_TOPICS_CHBOX' => build_checkbox($params->key('my_topics'), __('SEARCH_MY_TOPICS'), $params->val('my_topics'), true, null, 'my_topics'),
+        'TITLE_ONLY_CHBOX' => build_checkbox($params->key('title_only'), __('SEARCH_TITLES_ONLY'), true, config()->get('disable_ft_search_in_posts')),
+        'ALL_WORDS_CHBOX' => build_checkbox($params->key('all_words'), __('SEARCH_ALL_WORDS'), true),
+        'DL_CANCEL_CHBOX' => build_checkbox($params->key('dl_cancel'), __('SEARCH_DL_CANCEL'), $params->val('dl_cancel'), IS_GUEST, dl_link_css(DL_STATUS_CANCEL)),
+        'DL_COMPL_CHBOX' => build_checkbox($params->key('dl_compl'), __('SEARCH_DL_COMPLETE'), $params->val('dl_compl'), IS_GUEST, dl_link_css(DL_STATUS_COMPLETE)),
+        'DL_DOWN_CHBOX' => build_checkbox($params->key('dl_down'), __('SEARCH_DL_DOWN'), $params->val('dl_down'), IS_GUEST, dl_link_css(DL_STATUS_DOWN)),
+        'DL_WILL_CHBOX' => build_checkbox($params->key('dl_will'), __('SEARCH_DL_WILL'), $params->val('dl_will'), IS_GUEST, dl_link_css(DL_STATUS_WILL)),
+        'ONLY_NEW_CHBOX' => build_checkbox($params->key('new'), __('BT_ONLY_NEW'), $params->val('new'), IS_GUEST),
+        'NEW_TOPICS_CHBOX' => build_checkbox($params->key('new_topics'), __('NEW_TOPICS'), $params->val('new_topics'), IS_GUEST),
 
         'FORUM_SELECT' => $forum_select,
-        'TIME_SELECT' => build_select($time_key, $time_select, $time_val),
-        'ORDER_SELECT' => build_select($order_key, $order_select, $order_val),
-        'SORT_SELECT' => build_select($sort_key, $sort_select, $sort_val),
-        'CHARS_SELECT' => '', # build_select ($chars_key, $chars_select, $chars_val),
-        'DISPLAY_AS_SELECT' => build_select($display_as_key, $display_as_select, $display_as_val),
+        'TIME_SELECT' => build_select($params->key('time'), $time_select, $params->val('time')),
+        'ORDER_SELECT' => build_select($params->key('order'), $order_select, $params->val('order')),
+        'SORT_SELECT' => build_select($params->key('sort'), $sort_select, $params->val('sort')),
+        'CHARS_SELECT' => '', # build_select ($params->key('chars'), $chars_select, $params->val('chars')),
+        'DISPLAY_AS_SELECT' => build_select($params->key('display_as'), $display_as_select, $params->val('display_as')),
     ));
 
     print_page('search.tpl');
 }
 
 unset($forums);
-$datastore->rm('cat_forums');
+datastore()->rm('cat_forums');
 
 // Restore previously found items list and search settings if we have valid $search_id
 if ($search_id) {
@@ -325,7 +318,7 @@ if ($search_id) {
 	");
 
     if (empty($row['search_settings'])) {
-        bb_die($lang['SESSION_EXPIRED']);
+        bb_die(__('SESSION_EXPIRED'));
     }
 
     $previous_settings = unserialize($row['search_settings']);
@@ -333,12 +326,14 @@ if ($search_id) {
 }
 
 // Get simple "CHBOX" and "SELECT" type vars
-foreach ($GPC as $name => $params) {
-    if ($params[GPC_TYPE] == CHBOX) {
-        checkbox_get_val($params[KEY_NAME], ${"{$name}_val"}, $params[DEF_VAL]);
-    } elseif ($params[GPC_TYPE] == SELECT) {
-        select_get_val($params[KEY_NAME], ${"{$name}_val"}, ${"{$name}_opt"}, $params[DEF_VAL]);
+foreach ($GPC as $name => $gpcParams) {
+    $tmpVal = $params->val($name);
+    if ($gpcParams[GPC_TYPE] == CHBOX) {
+        checkbox_get_val($gpcParams[KEY_NAME], $tmpVal, $gpcParams[DEF_VAL], 1, 0, $previous_settings, $search_id);
+    } elseif ($gpcParams[GPC_TYPE] == SELECT) {
+        select_get_val($gpcParams[KEY_NAME], $tmpVal, ${"{$name}_opt"}, $gpcParams[DEF_VAL], true, $previous_settings);
     }
+    $params->setVal($name, $tmpVal);
 }
 
 // Get other "REQUEST" vars
@@ -350,96 +345,97 @@ if (!$items_found) {
         switch ($_REQUEST['search_id']) {
             case 'egosearch':
                 $egosearch = true;
-                $display_as_val = $as_topics;
-                if (empty($_REQUEST[$poster_id_key])) {
-                    $_REQUEST[$poster_id_key] = $user_id;
+                $params->setVal('display_as', $as_topics);
+                if (empty($_REQUEST[$params->key('poster_id')])) {
+                    $_REQUEST[$params->key('poster_id')] = $user_id;
                 }
                 break;
             case 'newposts':
-                $new_val = true;
+                $params->setVal('new', true);
                 break;
         }
     }
 
     // Forum
     $forum_selected = [];
-    if ($var =& $_REQUEST[$forum_key]) {
+    if ($var =& $_REQUEST[$params->key('forum')]) {
         $forum_selected = get_id_ary($var);
 
         if (!in_array($search_all, $forum_selected)) {
-            $forum_val = implode(',', $forum_selected);
+            $params->setVal('forum', implode(',', $forum_selected));
         }
     }
 
     // Topic
-    if ($var =& $_REQUEST[$topic_key]) {
-        $topic_val = implode(',', get_id_ary($var));
+    if ($var =& $_REQUEST[$params->key('topic')]) {
+        $params->setVal('topic', implode(',', get_id_ary($var)));
     }
 
     // Poster id (from requested name or id)
-    if ($var = request_var($poster_id_key, 0)) {
-        $poster_id_val = (int)$var;
+    if ($var = request_var($params->key('poster_id'), 0)) {
+        $params->setVal('poster_id', (int)$var);
 
-        if ($poster_id_val != $user_id && !get_username($poster_id_val)) {
-            bb_die($lang['USER_NOT_EXIST']);
+        if ($params->val('poster_id') != $user_id && !get_username($params->val('poster_id'))) {
+            bb_die(__('USER_NOT_EXIST'));
         }
-    } elseif ($var =& $_POST[$poster_name_key]) {
+    } elseif ($var =& $_POST[$params->key('poster_name')]) {
         $poster_name_sql = str_replace("\\'", "''", clean_username($var));
 
         if (!$poster_id_val = get_user_id($poster_name_sql)) {
-            bb_die($lang['USER_NOT_EXIST']);
+            bb_die(__('USER_NOT_EXIST'));
         }
+        $params->setVal('poster_id', $poster_id_val);
     }
 
     // Search words
-    if ($var =& $_REQUEST[$text_match_key]) {
+    if ($var =& $_REQUEST[$params->key('text_match')]) {
         if ($tmp = mb_substr(trim($var), 0, $text_match_max_len)) {
-            $title_match_val = $tmp;
-            $text_match_sql = clean_text_match($title_match_val, $all_words_val, true);
+            $params->setVal('text_match', $tmp);
+            $text_match_sql = clean_text_match($params->val('text_match'), $params->val('all_words'), true);
         }
     }
 }
 
 $dl_status = [];
-if ($dl_cancel_val) {
+if ($params->val('dl_cancel')) {
     $dl_status[] = DL_STATUS_CANCEL;
 }
-if ($dl_compl_val) {
+if ($params->val('dl_compl')) {
     $dl_status[] = DL_STATUS_COMPLETE;
 }
-if ($dl_down_val) {
+if ($params->val('dl_down')) {
     $dl_status[] = DL_STATUS_DOWN;
 }
-if ($dl_will_val) {
+if ($params->val('dl_will')) {
     $dl_status[] = DL_STATUS_WILL;
 }
 $dl_status_csv = implode(',', $dl_status);
 
 // Switches
 $dl_search = ($dl_status && !IS_GUEST);
-$new_posts = ($new_val && !IS_GUEST);
-$prev_days = ($time_val != $search_all);
-$new_topics = (!IS_GUEST && ($new_topics_val || isset($_GET['newposts'])));
-$my_topics = ($poster_id_val && $my_topics_val);
-$my_posts = ($poster_id_val && !$my_topics_val);
-$title_match = ($text_match_sql && ($title_only_val || config()->get('disable_ft_search_in_posts')));
+$new_posts = ($params->val('new') && !IS_GUEST);
+$prev_days = ($params->val('time') != $search_all);
+$new_topics = (!IS_GUEST && ($params->val('new_topics') || isset($_GET['newposts'])));
+$my_topics = ($params->val('poster_id') && $params->val('my_topics'));
+$my_posts = ($params->val('poster_id') && !$params->val('my_topics'));
+$title_match = ($text_match_sql && ($params->val('title_only') || config()->get('disable_ft_search_in_posts')));
 
 // "Display as" mode (posts or topics)
-$post_mode = (!$dl_search && ($display_as_val == $as_posts || isset($_GET['search_author'])));
+$post_mode = (!$dl_search && ($params->val('display_as') == $as_posts || isset($_GET['search_author'])));
 
 // Start building SQL
 $SQL = DB()->get_empty_sql_array();
 
 // Displaying "as posts" mode
 if ($post_mode) {
-    $order = $order_opt[$order_val]['sql'];
-    $sort = $sort_opt[$sort_val]['sql'];
+    $order = $order_opt[$params->val('order')]['sql'];
+    $sort = $sort_opt[$params->val('sort')]['sql'];
     $per_page = config()->get('posts_per_page');
-    $display_as_val = $as_posts;
+    $params->setVal('display_as', $as_posts);
 
     // Run initial search for post_ids
     if (!$items_found) {
-        $join_t = ($title_match || $my_topics || $new_topics || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl)));
+        $join_t = ($title_match || $my_topics || $new_topics || in_array($params->val('order'), array($ord_last_p, $ord_created, $ord_name, $ord_repl)));
         $join_s = ($text_match_sql && !$title_match);
         $join_p = ($my_posts || $join_s);
 
@@ -471,11 +467,11 @@ if ($post_mode) {
             $SQL['WHERE'][] = "$tbl.forum_id NOT IN($excluded_forums_csv)";
         }
 
-        if ($forum_val) {
-            $SQL['WHERE'][] = "$tbl.forum_id IN($forum_val)";
+        if ($params->val('forum')) {
+            $SQL['WHERE'][] = "$tbl.forum_id IN(" . $params->val('forum') . ")";
         }
-        if ($topic_val) {
-            $SQL['WHERE'][] = "$tbl.topic_id IN($topic_val)";
+        if ($params->val('topic')) {
+            $SQL['WHERE'][] = "$tbl.topic_id IN(" . $params->val('topic') . ")";
         }
         if ($new_posts) {
             $SQL['WHERE'][] = "$tbl.$time_field > $lastvisit";
@@ -484,21 +480,21 @@ if ($post_mode) {
             $SQL['WHERE'][] = "t.topic_time > $lastvisit";
         }
         if ($prev_days) {
-            $SQL['WHERE'][] = "$tbl.$time_field > " . $time_opt[$time_val]['sql'];
+            $SQL['WHERE'][] = "$tbl.$time_field > " . $time_opt[$params->val('time')]['sql'];
         }
         if ($my_posts) {
-            $SQL['WHERE'][] = "p.poster_id = $poster_id_val";
+            $SQL['WHERE'][] = "p.poster_id = " . $params->val('poster_id');
         }
         if ($my_topics) {
-            $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
+            $SQL['WHERE'][] = "t.topic_poster = " . $params->val('poster_id');
         }
 
         if ($text_match_sql) {
             $search_match_topics_csv = '';
-            $title_match_topics = get_title_match_topics($text_match_sql, $forum_selected);
+            $title_match_topics = get_title_match_topics($text_match_sql, $forum_selected, $title_match);
 
             if (!$search_match_topics_csv = implode(',', $title_match_topics)) {
-                bb_die($lang['NO_SEARCH_MATCH']);
+                bb_die(__('NO_SEARCH_MATCH'));
             }
 
             $where_id = ($title_match) ? 'topic_id' : 'post_id';
@@ -516,9 +512,12 @@ if ($post_mode) {
         $SQL['ORDER BY'][] = ($new_posts && $join_p) ? "p.topic_id ASC, MAX(p.post_time) ASC" : "$order $sort";
         $SQL['LIMIT'][] = (string)$search_limit;
 
-        $items_display = fetch_search_ids($SQL);
+        $result = fetch_search_ids($SQL, SEARCH_TYPE_POST, $session_id, $per_page, $params);
+        $search_id = $result['search_id'];
+        $items_found = $result['items_found'];
+        $items_display = $result['items_display'];
     } elseif (!$items_display = array_slice($items_found, $start, $per_page)) {
-        bb_die($lang['NO_SEARCH_MATCH']);
+        bb_die(__('NO_SEARCH_MATCH'));
     }
 
     // Build SQL for displaying posts
@@ -544,7 +543,7 @@ if ($post_mode) {
 
     // Fetch posts data
     if (!$unsorted_rows = DB()->fetch_rowset($sql)) {
-        bb_die($lang['NO_SEARCH_MATCH']);
+        bb_die(__('NO_SEARCH_MATCH'));
     }
     $tmp = $sorted_rows = [];
 
@@ -569,7 +568,7 @@ if ($post_mode) {
         $forum_id = (int)$first_post['forum_id'];
         $is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);
 
-        $template->assign_block_vars('t', array(
+        template()->assign_block_vars('t', array(
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
@@ -590,7 +589,7 @@ if ($post_mode) {
             $message = get_parsed_post($post);
             $message = censor()->censorString($message);
 
-            $template->assign_block_vars('t.p', array(
+            template()->assign_block_vars('t.p', array(
                 'ROW_NUM' => $row_num,
                 'POSTER_ID' => $post['poster_id'],
                 'POSTER' => profile_url($post),
@@ -609,17 +608,18 @@ if ($post_mode) {
             $new_tracks[$topic_id] = max($curr_new_track_val, $post['post_time']);
         }
     }
-    set_tracks(COOKIE_TOPIC, $tracking_topics, $new_tracks);
+    $topics_tracking = &tracking_topics();
+    set_tracks(COOKIE_TOPIC, $topics_tracking, $new_tracks);
 } // Displaying "as topics" mode
 else {
-    $order = $order_opt[$order_val]['sql'];
-    $sort = $sort_opt[$sort_val]['sql'];
+    $order = $order_opt[$params->val('order')]['sql'];
+    $sort = $sort_opt[$params->val('sort')]['sql'];
     $per_page = config()->get('topics_per_page');
-    $display_as_val = $as_topics;
+    $params->setVal('display_as', $as_topics);
 
     // Run initial search for topic_ids
     if (!$items_found) {
-        $join_t = ($title_match || $my_topics || $new_topics || $dl_search || $new_posts || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl)));
+        $join_t = ($title_match || $my_topics || $new_topics || $dl_search || $new_posts || in_array($params->val('order'), array($ord_last_p, $ord_created, $ord_name, $ord_repl)));
         $join_s = ($text_match_sql && !$title_match);
         $join_p = ($my_posts || $join_s);
         $join_dl = ($dl_search);
@@ -659,11 +659,11 @@ else {
         if ($join_t) {
             $SQL['WHERE'][] = "t.topic_status != " . TOPIC_MOVED;
         }
-        if ($forum_val) {
-            $SQL['WHERE'][] = "$tbl.forum_id IN($forum_val)";
+        if ($params->val('forum')) {
+            $SQL['WHERE'][] = "$tbl.forum_id IN(" . $params->val('forum') . ")";
         }
-        if ($topic_val) {
-            $SQL['WHERE'][] = "$tbl.topic_id IN($topic_val)";
+        if ($params->val('topic')) {
+            $SQL['WHERE'][] = "$tbl.topic_id IN(" . $params->val('topic') . ")";
         }
         if ($new_posts) {
             $SQL['WHERE'][] = "$tbl.$time_field > $lastvisit";
@@ -672,34 +672,34 @@ else {
             $SQL['WHERE'][] = "t.topic_time > $lastvisit";
         }
         if ($prev_days) {
-            $SQL['WHERE'][] = "$tbl.$time_field > " . $time_opt[$time_val]['sql'];
+            $SQL['WHERE'][] = "$tbl.$time_field > " . $time_opt[$params->val('time')]['sql'];
         }
         if ($my_posts) {
-            $SQL['WHERE'][] = "p.poster_id = $poster_id_val";
+            $SQL['WHERE'][] = "p.poster_id = " . $params->val('poster_id');
         }
-        if ($my_posts && $user->id == $poster_id_val) {
+        if ($my_posts && user()->id == $params->val('poster_id')) {
             $SQL['WHERE'][] = "p.user_post = 1";
 
-            if ($userdata['user_posts']) {
-                $template->assign_var('BB_DIE_APPEND_MSG', '
+            if (userdata('user_posts')) {
+                template()->assign_var('BB_DIE_APPEND_MSG', '
 					<form id="mod-action" method="POST" action="search.php">
-						<input type="submit" name="add_my_post" value="' . $lang['RESTORE_ALL_POSTS'] . '" class="bold" onclick="if (!window.confirm( this.value +\'?\' )){ return false };" />
+						<input type="submit" name="add_my_post" value="' . __('RESTORE_ALL_POSTS') . '" class="bold" onclick="if (!window.confirm( this.value +\'?\' )){ return false };" />
 					</form>
 					<br /><br />
-					<a href="index.php">' . $lang['INDEX_RETURN'] . '</a>
+					<a href="index.php">' . __('INDEX_RETURN') . '</a>
 				');
             }
         }
         if ($my_topics) {
-            $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
+            $SQL['WHERE'][] = "t.topic_poster = " . $params->val('poster_id');
         }
 
         if ($text_match_sql) {
             $search_match_topics_csv = '';
-            $title_match_topics = get_title_match_topics($text_match_sql, $forum_selected);
+            $title_match_topics = get_title_match_topics($text_match_sql, $forum_selected, $title_match);
 
             if (!$search_match_topics_csv = implode(',', $title_match_topics)) {
-                bb_die($lang['NO_SEARCH_MATCH']);
+                bb_die(__('NO_SEARCH_MATCH'));
             }
 
             $where_id = ($title_match) ? 't.topic_id' : 'p.post_id';
@@ -712,7 +712,7 @@ else {
             $SQL['FROM'][] = $dl_stat_tbl;
         }
         if ($join_dl) {
-            $SQL['WHERE'][] = "dl.topic_id = t.topic_id AND dl.user_id = $dl_user_id_val AND dl.user_status IN($dl_status_csv)";
+            $SQL['WHERE'][] = "dl.topic_id = t.topic_id AND dl.user_id = " . $params->val('dl_user_id') . " AND dl.user_status IN($dl_status_csv)";
         }
 
         if (!$SQL['WHERE']) {
@@ -726,16 +726,19 @@ else {
             $SQL['ORDER BY'][] = 'max_post_time DESC';
         } else {
             // Fix for MySQL only_full_group_by mode: use MAX() when ordering by post_time with GROUP BY
-            if ($order_val == $ord_posted) {
+            if ($params->val('order') == $ord_posted) {
                 $SQL['ORDER BY'][] = "MAX($tbl.$time_field) $sort";
             } else {
                 $SQL['ORDER BY'][] = "$order $sort";
             }
         }
 
-        $items_display = fetch_search_ids($SQL);
+        $result = fetch_search_ids($SQL, SEARCH_TYPE_POST, $session_id, $per_page, $params);
+        $search_id = $result['search_id'];
+        $items_found = $result['items_found'];
+        $items_display = $result['items_display'];
     } elseif (!$items_display = array_slice($items_found, $start, $per_page)) {
-        bb_die($lang['NO_SEARCH_MATCH']);
+        bb_die(__('NO_SEARCH_MATCH'));
     }
 
     // Build SQL for displaying topics
@@ -774,7 +777,7 @@ else {
         $topic_rows[$row['topic_id']] = $row;
     }
     if (!$topic_rows) {
-        bb_die($lang['NO_SEARCH_MATCH']);
+        bb_die(__('NO_SEARCH_MATCH'));
     }
 
     // Output page
@@ -788,7 +791,7 @@ else {
         $is_unread = is_unread($topic['topic_last_post_time'], $topic_id, $forum_id);
         $moved = ($topic['topic_status'] == TOPIC_MOVED);
 
-        $template->assign_block_vars('t', array(
+        template()->assign_block_vars('t', array(
             'ROW_NUM' => $row_num,
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
@@ -804,7 +807,7 @@ else {
             'TYPE' => $topic['topic_type'],
             'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL),
             'POLL' => (bool)$topic['topic_vote'],
-            'DL_CLASS' => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
+            'DL_CLASS' => isset($topic['dl_status']) ? dl_link_css($topic['dl_status']) : '',
 
             'TOPIC_AUTHOR' => profile_url(array('username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank'])),
             'LAST_POSTER' => profile_url(array('username' => $topic['last_username'], 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank'])),
@@ -822,15 +825,15 @@ if ($items_display) {
 
     generate_pagination($url, $items_count, $per_page, $start);
 
-    $template->assign_vars(array(
-        'PAGE_TITLE' => $lang['SEARCH'],
+    template()->assign_vars(array(
+        'PAGE_TITLE' => __('SEARCH'),
 
-        'SEARCH_MATCHES' => ($items_count) ? sprintf($lang['FOUND_SEARCH_MATCHES'], $items_count) : '',
+        'SEARCH_MATCHES' => ($items_count) ? sprintf(__('FOUND_SEARCH_MATCHES'), $items_count) : '',
         'DISPLAY_AS_POSTS' => $post_mode,
 
-        'DL_CONTROLS' => ($dl_search && $dl_user_id_val == $user_id),
+        'DL_CONTROLS' => ($dl_search && $params->val('dl_user_id') == $user_id),
         'DL_ACTION' => 'dl_list.php',
-        'MY_POSTS' => (!$post_mode && $my_posts && $user->id == $poster_id_val),
+        'MY_POSTS' => (!$post_mode && $my_posts && user()->id == $params->val('poster_id')),
     ));
 
     print_page('search_results.tpl');
@@ -841,16 +844,19 @@ redirect(basename(__FILE__));
 // ----------------------------------------------------------- //
 // Functions
 //
-function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
-{
-    global $lang, $search_id, $session_id, $items_found, $per_page;
-
+function fetch_search_ids(
+    $sql,
+    int $search_type,
+    string $session_id,
+    int $per_page,
+    SearchParams $params
+): array {
     $items_found = [];
     foreach (DB()->fetch_rowset($sql) as $row) {
         $items_found[] = $row['item_id'];
     }
     if (!$items_count = count($items_found)) {
-        bb_die($lang['NO_SEARCH_MATCH']);
+        bb_die(__('NO_SEARCH_MATCH'));
     }
 
     // Save results in DB
@@ -865,22 +871,22 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
             'display_as',
             'chars',
         );
-        if ($GLOBALS['dl_cancel_val']) {
+        if ($params->val('dl_cancel')) {
             $save_in_db[] = 'dl_cancel';
         }
-        if ($GLOBALS['dl_compl_val']) {
+        if ($params->val('dl_compl')) {
             $save_in_db[] = 'dl_compl';
         }
-        if ($GLOBALS['dl_down_val']) {
+        if ($params->val('dl_down')) {
             $save_in_db[] = 'dl_down';
         }
-        if ($GLOBALS['dl_will_val']) {
+        if ($params->val('dl_will')) {
             $save_in_db[] = 'dl_will';
         }
 
         $curr_set = [];
         foreach ($save_in_db as $name) {
-            $curr_set[$GLOBALS["{$name}_key"]] = $GLOBALS["{$name}_val"];
+            $curr_set[$params->key($name)] = $params->val($name);
         }
         $search_settings = DB()->escape(serialize($curr_set));
 
@@ -890,7 +896,11 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
         DB()->query("REPLACE INTO " . BB_SEARCH . " ($columns) VALUES ($values)");
     }
 
-    return array_slice($items_found, 0, $per_page);
+    return [
+        'search_id' => $search_id,
+        'items_found' => $items_found,
+        'items_display' => array_slice($items_found, 0, $per_page),
+    ];
 }
 
 function prevent_huge_searches($SQL)
@@ -911,8 +921,6 @@ function prevent_huge_searches($SQL)
 
 function username_search($search_match)
 {
-    global $template, $lang, $gen_simple_header;
-
     $username_list = '';
 
     if (!empty($search_match)) {
@@ -932,16 +940,16 @@ function username_search($search_match)
             $username_list .= '<option value="' . $username . '">' . $username . '</option>';
         }
         if (!$username_list) {
-            $username_list = '<option value="">' . $lang['NO_MATCH'] . '</option>';
+            $username_list = '<option value="">' . __('NO_MATCH') . '</option>';
         }
     }
 
     $input_name = isset($_REQUEST['input_name']) ? htmlCHR($_REQUEST['input_name']) : 'username';
 
-    $template->assign_vars(array(
+    template()->assign_vars(array(
         'TPL_SEARCH_USERNAME' => true,
 
-        'PAGE_TITLE' => $lang['SEARCH'],
+        'PAGE_TITLE' => __('SEARCH'),
         'USERNAME' => !empty($search_match) ? htmlCHR(stripslashes(html_entity_decode($search_match))) : '',
         'INPUT_NAME' => $input_name,
         'USERNAME_OPTIONS' => $username_list,

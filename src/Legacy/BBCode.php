@@ -338,9 +338,7 @@ class BBCode
      */
     private function smilies_pass(string $text): string
     {
-        global $datastore;
-
-        $this->smilies = $datastore->get('smile_replacements');
+        $this->smilies = datastore()->get('smile_replacements');
 
         if (!empty($this->smilies)) {
             if (defined('IN_ADMIN')) {

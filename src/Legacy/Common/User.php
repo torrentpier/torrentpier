@@ -20,6 +20,22 @@ use Exception;
 class User
 {
     /**
+     * Singleton instance
+     */
+    private static ?User $instance = null;
+
+    /**
+     * Get singleton instance
+     */
+    public static function getInstance(): User
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    /**
      * Config
      *
      * @var array
@@ -110,8 +126,6 @@ class User
      */
     public function session_start(array $cfg = [])
     {
-        global $lang;
-
         $update_sessions_table = false;
         $this->cfg = array_merge($this->cfg, $cfg);
 
@@ -226,9 +240,9 @@ class User
         if ($banInfo = getBanInfo((int)$this->id)) {
             $this->session_end();
             if (!empty($banInfo['ban_reason'])) {
-                bb_die($lang['YOU_BEEN_BANNED'] . '<br/><br/>' . $lang['REASON'] . ':&nbsp;' . '<b>' . $banInfo['ban_reason'] . '</b>');
+                bb_die(__('YOU_BEEN_BANNED') . '<br/><br/>' . __('REASON') . ':&nbsp;' . '<b>' . $banInfo['ban_reason'] . '</b>');
             } else {
-                bb_die($lang['YOU_BEEN_BANNED']);
+                bb_die(__('YOU_BEEN_BANNED'));
             }
         }
 
@@ -466,7 +480,6 @@ class User
      */
     public function set_session_cookies($user_id)
     {
-
         $debug_cookies = [
             COOKIE_DBG,
             'explain',
@@ -580,8 +593,6 @@ class User
      */
     public function init_userprefs()
     {
-        global $theme, $DeltaTime;
-
         if (defined('LANG_DIR')) {
             return;
         }  // prevent multiple calling
@@ -624,7 +635,7 @@ class User
         // Initialize Language singleton with user preferences
         lang()->initializeLanguage($this->data['user_lang']);
 
-        $theme = setup_style();
+        setup_style();
 
         // Handle marking posts read
         if (!IS_GUEST && !empty($_COOKIE[COOKIE_MARK])) {
@@ -692,16 +703,11 @@ class User
      */
     public function get_not_auth_forums($auth_type)
     {
-        global $datastore;
-
         if (IS_ADMIN) {
             return '';
         }
 
-        if (!$forums = $datastore->get('cat_forums')) {
-            $datastore->update('cat_forums');
-            $forums = $datastore->get('cat_forums');
-        }
+        $forums = forum_tree();
 
         if ($auth_type == AUTH_VIEW) {
             if (IS_GUEST) {
@@ -759,12 +765,7 @@ class User
         }
 
         if (bf($this->opt, 'user_opt', 'user_porn_forums')) {
-            global $datastore;
-
-            if (!$forums = $datastore->get('cat_forums')) {
-                $datastore->update('cat_forums');
-                $forums = $datastore->get('cat_forums');
-            }
+            $forums = forum_tree();
 
             if (isset($forums['forum'])) {
                 foreach ($forums['forum'] as $key => $row) {

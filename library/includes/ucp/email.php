@@ -21,7 +21,7 @@ set_die_append_msg();
 if (!empty($_GET[POST_USERS_URL]) || !empty($_POST[POST_USERS_URL])) {
     $user_id = (!empty($_GET[POST_USERS_URL])) ? (int)$_GET[POST_USERS_URL] : (int)$_POST[POST_USERS_URL];
 } else {
-    bb_die($lang['NO_USER_SPECIFIED']);
+    bb_die(__('NO_USER_SPECIFIED'));
 }
 
 if (IS_GUEST) {
@@ -45,10 +45,10 @@ if ($row = DB()->fetch_row($sql)) {
         $message = trim(html_entity_decode($_POST['message']));
 
         if (!$subject) {
-            $errors[] = $lang['EMPTY_SUBJECT_EMAIL'];
+            $errors[] = __('EMPTY_SUBJECT_EMAIL');
         }
         if (!$message) {
-            $errors[] = $lang['EMPTY_MESSAGE_EMAIL'];
+            $errors[] = __('EMPTY_MESSAGE_EMAIL');
         }
 
         if (!$errors) {
@@ -60,18 +60,18 @@ if ($row = DB()->fetch_row($sql)) {
 
             $emailer->set_template('profile_send_email', $user_lang);
             $emailer->assign_vars([
-                'FROM_USERNAME' => $userdata['username'],
+                'FROM_USERNAME' => userdata('username'),
                 'TO_USERNAME' => $username,
                 'MESSAGE' => $message
             ]);
 
             $emailer->send();
 
-            bb_die($lang['EMAIL_SENT']);
+            bb_die(__('EMAIL_SENT'));
         }
     }
 
-    $template->assign_vars([
+    template()->assign_vars([
         'USERNAME' => profile_url($row),
         'S_HIDDEN_FIELDS' => '',
         'S_POST_ACTION' => "profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id",
@@ -81,5 +81,5 @@ if ($row = DB()->fetch_row($sql)) {
     print_page('usercp_email.tpl');
 
 } else {
-    bb_die($lang['USER_NOT_EXIST']);
+    bb_die(__('USER_NOT_EXIST'));
 }

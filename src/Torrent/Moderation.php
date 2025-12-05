@@ -24,8 +24,6 @@ class Moderation
      */
     public static function changeStatus(int $topicId, int $newStatus): void
     {
-        global $userdata;
-
         $torrent = self::getTorrentInfo($topicId);
         self::checkAuth($torrent['forum_id'], $torrent['topic_poster']);
 
@@ -33,7 +31,7 @@ class Moderation
             ->where('topic_id', $topicId)
             ->update([
                 'tor_status' => $newStatus,
-                'checked_user_id' => $userdata['user_id'],
+                'checked_user_id' => userdata('user_id'),
                 'checked_time' => TIMENOW,
             ]);
     }
@@ -46,12 +44,10 @@ class Moderation
      */
     public static function changeType(int $topicId, int $torType): void
     {
-        global $lang;
-
         self::getTorrentInfo($topicId); // validates topic exists
 
         if (!IS_AM) {
-            bb_die($lang['ONLY_FOR_MOD']);
+            bb_die(__('ONLY_FOR_MOD'));
         }
 
         DB()->table(BB_BT_TORRENTS)

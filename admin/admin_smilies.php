@@ -58,7 +58,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not delete current smilies');
             }
-            $datastore->update('smile_replacements');
+            datastore()->update('smile_replacements');
         } else {
             $sql = 'SELECT code FROM ' . BB_SMILIES;
             if (!$result = DB()->sql_query($sql)) {
@@ -106,15 +106,15 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
                     if (!$result) {
                         bb_die('Could not update smilies #1');
                     }
-                    $datastore->update('smile_replacements');
+                    datastore()->update('smile_replacements');
                 }
             }
         }
 
-        bb_die($lang['SMILEY_IMPORT_SUCCESS'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die(__('SMILEY_IMPORT_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
     } else {
         // Display the script to get the smile_pak cfg file
-        $smile_paks_select = '<select name="smile_pak"><option value="">' . $lang['SELECT_PAK'] . '</option>';
+        $smile_paks_select = '<select name="smile_pak"><option value="">' . __('SELECT_PAK') . '</option>';
         foreach ($smiley_paks as $key => $value) {
             if (!empty($value)) {
                 $smile_paks_select .= '<option>' . $value . '</option>';
@@ -124,7 +124,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
         $hidden_vars = '<input type="hidden" name="mode" value="import">';
 
-        $template->assign_vars([
+        template()->assign_vars([
             'TPL_SMILE_IMPORT' => true,
 
             'S_SMILEY_ACTION' => 'admin_smilies.php',
@@ -158,7 +158,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
         exit;
     }
 
-    bb_die(sprintf($lang['EXPORT_SMILES'], '<a href="admin_smilies.php?export_pack=send">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+    bb_die(sprintf(__('EXPORT_SMILES'), '<a href="admin_smilies.php?export_pack=send">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
 } elseif (isset($_POST['add']) || isset($_GET['add'])) {
     $filename_list = '';
     for ($i = 0, $iMax = count($smiley_images); $i < $iMax; $i++) {
@@ -167,7 +167,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
     $s_hidden_fields = '<input type="hidden" name="mode" value="savenew" />';
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_SMILE_EDIT' => true,
         'SMILEY_IMG' => $pathToSmilesDir . '/' . $smiley_images[0],
         'S_SMILEY_ACTION' => 'admin_smilies.php',
@@ -189,8 +189,8 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
                     bb_die('Could not delete smiley');
                 }
 
-                $datastore->update('smile_replacements');
-                bb_die($lang['SMILEY_DEL_SUCCESS'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+                datastore()->update('smile_replacements');
+                bb_die(__('SMILEY_DEL_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
             } else {
                 $hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
                 $hidden_fields .= '<input type="hidden" name="id" value="' . $smiley_id . '" />';
@@ -226,7 +226,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             $s_hidden_fields = '<input type="hidden" name="mode" value="save" /><input type="hidden" name="smile_id" value="' . $smile_data['smilies_id'] . '" />';
 
-            $template->assign_vars([
+            template()->assign_vars([
                 'TPL_SMILE_EDIT' => true,
                 'SMILEY_CODE' => $smile_data['code'],
                 'SMILEY_EMOTICON' => $smile_data['emoticon'],
@@ -248,7 +248,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             // If no code was entered complain
             if ($smile_code == '' || $smile_url == '') {
-                bb_die($lang['FIELDS_EMPTY']);
+                bb_die(__('FIELDS_EMPTY'));
             }
 
             // Convert < and > to proper htmlentities for parsing
@@ -261,9 +261,9 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             if (!($result = DB()->sql_query($sql))) {
                 bb_die('Could not update smilies #2');
             }
-            $datastore->update('smile_replacements');
+            datastore()->update('smile_replacements');
 
-            bb_die($lang['SMILEY_EDIT_SUCCESS'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('SMILEY_EDIT_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
             break;
 
         case 'savenew':
@@ -277,7 +277,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             // If no code was entered complain
             if ($smile_code == '' || $smile_url == '') {
-                bb_die($lang['FIELDS_EMPTY']);
+                bb_die(__('FIELDS_EMPTY'));
             }
 
             // Convert < and > to proper htmlentities for parsing
@@ -290,9 +290,9 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             if (!$result) {
                 bb_die('Could not insert new smiley');
             }
-            $datastore->update('smile_replacements');
+            datastore()->update('smile_replacements');
 
-            bb_die($lang['SMILEY_ADD_SUCCESS'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('SMILEY_ADD_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
             break;
     }
 } else {
@@ -304,7 +304,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
     $smilies = DB()->sql_fetchrowset($result);
 
-    $template->assign_vars([
+    template()->assign_vars([
         'TPL_SMILE_MAIN' => true,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_SMILEY_ACTION' => 'admin_smilies.php'
@@ -318,7 +318,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
-        $template->assign_block_vars('smiles', [
+        template()->assign_block_vars('smiles', [
             'ROW_CLASS' => $row_class,
 
             'SMILEY_IMG' => $pathToSmilesDir . '/' . $smilies[$i]['smile_url'],

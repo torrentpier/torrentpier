@@ -96,23 +96,21 @@ class Upload
      */
     public function init(array $cfg = [], array $post_params = [], bool $uploaded_only = true): bool
     {
-        global $lang;
-
         $this->cfg = array_merge($this->cfg, $cfg);
         $this->file = $post_params;
 
         // Check upload allowed
         if (!$this->cfg['up_allowed']) {
-            $this->errors[] = $lang['UPLOAD_ERROR_COMMON_DISABLED'];
+            $this->errors[] = __('UPLOAD_ERROR_COMMON_DISABLED');
             return false;
         }
 
         // Handling errors while uploading
         if (isset($this->file['error']) && ($this->file['error'] !== UPLOAD_ERR_OK)) {
-            if (isset($lang['UPLOAD_ERRORS'][$this->file['error']])) {
-                $this->errors[] = $lang['UPLOAD_ERROR_COMMON'] . '<br/><br/>' . $lang['UPLOAD_ERRORS'][$this->file['error']];
+            if (isset(__('UPLOAD_ERRORS')[$this->file['error']])) {
+                $this->errors[] = __('UPLOAD_ERROR_COMMON') . '<br/><br/>' . __('UPLOAD_ERRORS')[$this->file['error']];
             } else {
-                $this->errors[] = $lang['UPLOAD_ERROR_COMMON'];
+                $this->errors[] = __('UPLOAD_ERROR_COMMON');
             }
             return false;
         }
@@ -148,7 +146,7 @@ class Upload
 
                 // redefine ext
                 if (!$width || !$height || !$type || !isset($this->img_types[$type])) {
-                    $this->errors[] = $lang['UPLOAD_ERROR_FORMAT'];
+                    $this->errors[] = __('UPLOAD_ERROR_FORMAT');
                     return false;
                 }
                 $this->file_ext = $this->img_types[$type];
@@ -171,24 +169,24 @@ class Upload
                         $this->file_size = filesize($this->file['tmp_name']);
                     }
                 } catch (Exception $e) {
-                    $this->errors[] = sprintf($lang['UPLOAD_ERROR_DIMENSIONS'], $this->cfg['max_width'], $this->cfg['max_height']);
+                    $this->errors[] = sprintf(__('UPLOAD_ERROR_DIMENSIONS'), $this->cfg['max_width'], $this->cfg['max_height']);
                     return false;
                 }
             } else {
-                $this->errors[] = $lang['UPLOAD_ERROR_NOT_IMAGE'];
+                $this->errors[] = __('UPLOAD_ERROR_NOT_IMAGE');
                 return false;
             }
         }
 
         // Check file size (after image processing or for non-images)
         if ($this->cfg['max_size'] && $this->file_size > $this->cfg['max_size']) {
-            $this->errors[] = sprintf($lang['UPLOAD_ERROR_SIZE'], humn_size($this->cfg['max_size']));
+            $this->errors[] = sprintf(__('UPLOAD_ERROR_SIZE'), humn_size($this->cfg['max_size']));
             return false;
         }
 
         // Check extension
         if ($uploaded_only && (!isset($this->ext_ids[$this->file_ext]) || !\in_array($this->file_ext, $this->cfg['allowed_ext'], true))) {
-            $this->errors[] = sprintf($lang['UPLOAD_ERROR_NOT_ALLOWED'], htmlCHR($this->file_ext));
+            $this->errors[] = sprintf(__('UPLOAD_ERROR_NOT_ALLOWED'), htmlCHR($this->file_ext));
             return false;
         }
         $this->file_ext_id = $this->ext_ids[$this->file_ext];

@@ -18,9 +18,9 @@ require __DIR__ . '/pagestart.php';
 $mode = $_GET['mode'] ?? '';
 
 $return_links = [
-    'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'),
-    'config' => '<br /><br />' . sprintf($lang['CLICK_RETURN_CONFIG'], '<a href="admin_board.php?mode=config">', '</a>'),
-    'config_mods' => '<br /><br />' . sprintf($lang['CLICK_RETURN_CONFIG_MODS'], '<a href="admin_board.php?mode=config_mods">', '</a>')
+    'index' => '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'),
+    'config' => '<br /><br />' . sprintf(__('CLICK_RETURN_CONFIG'), '<a href="admin_board.php?mode=config">', '</a>'),
+    'config_mods' => '<br /><br />' . sprintf(__('CLICK_RETURN_CONFIG_MODS'), '<a href="admin_board.php?mode=config_mods">', '</a>')
 ];
 
 /**
@@ -50,13 +50,13 @@ if (!$result = DB()->sql_query($sql)) {
     }
 
     if (isset($_POST['submit'])) {
-        bb_die($lang['CONFIG_UPDATED'] . $return_links[$mode] . $return_links['index']);
+        bb_die(__('CONFIG_UPDATED') . $return_links[$mode] . $return_links['index']);
     }
 }
 
 switch ($mode) {
     case 'config_mods':
-        $template->assign_vars([
+        template()->assign_vars([
             'S_CONFIG_ACTION' => 'admin_board.php?mode=config_mods',
             'CONFIG_MODS' => true,
 
@@ -96,7 +96,7 @@ switch ($mode) {
                     continue;
                 }
 
-                $template->assign_block_vars('seed_bonus', [
+                template()->assign_block_vars('seed_bonus', [
                     'RELEASE' => $seed_release[$i],
                     'POINTS' => $row
                 ]);
@@ -112,7 +112,7 @@ switch ($mode) {
                     continue;
                 }
 
-                $template->assign_block_vars('bonus_upload', [
+                template()->assign_block_vars('bonus_upload', [
                     'UP' => $row,
                     'PRICE' => $price_row[$i]
                 ]);
@@ -121,7 +121,7 @@ switch ($mode) {
         break;
 
     default:
-        $template->assign_vars([
+        template()->assign_vars([
             'S_CONFIG_ACTION' => 'admin_board.php?mode=config',
             'CONFIG' => true,
 

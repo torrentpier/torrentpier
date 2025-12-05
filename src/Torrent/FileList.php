@@ -39,8 +39,6 @@ class FileList
      */
     public function get_filelist(): string
     {
-        global $html;
-
         $info = &$this->tor_decoded['info'];
         if (isset($info['meta version'], $info['file tree'])) { //v2
             if (($info['meta version']) === 2 && is_array($info['file tree'])) {
@@ -57,7 +55,7 @@ class FileList
                 }
                 unset($this->files_ary['/']);
             }
-            $filelist = $html->array2html($this->files_ary);
+            $filelist = html()->array2html($this->files_ary);
             return "<div class=\"tor-root-dir\">$this->root_dir</div>$filelist";
         }
 
@@ -115,7 +113,6 @@ class FileList
 
                         if ($j === $subdir_count) {
                             if (is_string($cur_files_ary)) {
-                                $GLOBALS['bnc_error'] = 1;
                                 break;
                             }
                             $cur_files_ary[] = "$name <i>$length</i>";

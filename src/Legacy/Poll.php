@@ -37,8 +37,8 @@ class Poll
         $this->poll_votes = [];
 
         if (!$poll_caption = str_compact($poll_caption)) {
-            global $lang;
-            return $this->err_msg = $lang['EMPTY_POLL_TITLE'];
+            
+            return $this->err_msg = __('EMPTY_POLL_TITLE');
         }
         $this->poll_votes[] = $poll_caption; // header is vote_id = 0
 
@@ -51,8 +51,8 @@ class Poll
 
         // check for "< 3" -- 2 answer variants + header
         if (\count($this->poll_votes) < 3 || \count($this->poll_votes) > $this->max_votes + 1) {
-            global $lang;
-            return $this->err_msg = sprintf($lang['NEW_POLL_VOTES'], $this->max_votes);
+            
+            return $this->err_msg = sprintf(__('NEW_POLL_VOTES'), $this->max_votes);
         }
     }
 

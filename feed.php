@@ -17,7 +17,7 @@ use TorrentPier\Feed\Provider\ForumFeedProvider;
 use TorrentPier\Feed\Provider\UserFeedProvider;
 
 // Init userdata
-$user->session_start(['req_login' => true]);
+user()->session_start(['req_login' => true]);
 
 // Get request parameters
 $type = $_GET['type'] ?? '';

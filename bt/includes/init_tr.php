@@ -35,7 +35,7 @@ function error_exit($msg = '')
 
 function drop_fast_announce($lp_info, $lp_cached_peers = [])
 {
-    global $announce_interval;
+    $announce_interval = config()->get('announce_interval');
 
     if ($lp_info['update_time'] < (TIMENOW - $announce_interval + 60)) {
         return; // if announce interval correct
