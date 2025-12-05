@@ -1,14 +1,14 @@
 User-agent: *
 
 Disallow: /bt/*
-Disallow: /dl.php
-Disallow: /group.php
-Disallow: /login.php
-Disallow: /memberlist.php
-Disallow: /modcp.php
-Disallow: /posting.php
-Disallow: /privmsg.php
-Disallow: /profile.php
+Disallow: /dl
+Disallow: /group
+Disallow: /login
+Disallow: /memberlist
+Disallow: /modcp
+Disallow: /posting
+Disallow: /privmsg
+Disallow: /profile
 
 Host: example.com
 Sitemap: http://example.com/sitemap.xml

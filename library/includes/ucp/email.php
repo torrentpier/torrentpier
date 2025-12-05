@@ -74,7 +74,7 @@ if ($row = DB()->fetch_row($sql)) {
     template()->assign_vars([
         'USERNAME' => profile_url($row),
         'S_HIDDEN_FIELDS' => '',
-        'S_POST_ACTION' => "profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id",
+        'S_POST_ACTION' => "profile?mode=email&amp;" . POST_USERS_URL . "=$user_id",
         'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : ''
     ]);
 

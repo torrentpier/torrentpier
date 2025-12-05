@@ -364,7 +364,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             if (!$post_data['first_post']) {
                 \TorrentPier\Legacy\Post::delete_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id);
             } else {
-                redirect('modcp.php?' . POST_TOPIC_URL . "=$topic_id&mode=delete&sid=" . userdata('session_id'));
+                redirect('modcp?' . POST_TOPIC_URL . "=$topic_id&mode=delete&sid=" . userdata('session_id'));
             }
             break;
     }

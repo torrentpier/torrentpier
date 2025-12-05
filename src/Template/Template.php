@@ -75,7 +75,14 @@ class Template
 
         if (!isset(self::$instances[$key])) {
             self::$instances[$key] = new self($root);
-            self::$defaultInstance ??= self::$instances[$key];
+        }
+
+        // When called with a proper templates directory, make it the default
+        // This allows setup_style() to override any early initialization
+        if ($root !== '.' && str_contains($root, 'styles/templates')) {
+            self::$defaultInstance = self::$instances[$key];
+        } elseif (self::$defaultInstance === null) {
+            self::$defaultInstance = self::$instances[$key];
         }
 
         return self::$instances[$key];

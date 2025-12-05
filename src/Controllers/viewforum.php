@@ -322,9 +322,9 @@ if ($topics_csv = implode(',', $topic_ids)) {
     $topic_rowset = DB()->fetch_rowset("
 		SELECT
 			t.*, t.topic_poster AS first_user_id, u1.user_rank as first_user_rank,
-			IF(t.topic_poster = GUEST_UID, p1.post_username, u1.username) AS first_username,
+			IF(t.topic_poster = " . GUEST_UID . ", p1.post_username, u1.username) AS first_username,
 			p2.poster_id AS last_user_id, u2.user_rank as last_user_rank,
-			IF(p2.poster_id = GUEST_UID, p2.post_username, u2.username) AS last_username
+			IF(p2.poster_id = " . GUEST_UID . ", p2.post_username, u2.username) AS last_username
 				$select_tor_sql
 		FROM      " . BB_TOPICS . " t
 		LEFT JOIN " . BB_POSTS . " p1 ON(t.topic_first_post_id = p1.post_id)

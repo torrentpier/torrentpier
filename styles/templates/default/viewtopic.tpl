@@ -199,7 +199,7 @@ ajax.callback.post_mod_comment = function(data) {
 <!-- IF SHOW_DL_LIST || SHOW_TOR_ACT --><!-- INCLUDE viewtopic_torrent.tpl --><!-- ENDIF -->
 
 <!-- IF TOPIC_HAS_POLL or CAN_MANAGE_POLL -->
-<form id="poll-form" method="post" action="poll.php" style="display: none;">
+<form id="poll-form" method="post" action="poll" style="display: none;">
 <input id="poll-mode" type="hidden" name="mode" value="" />
 <input type="hidden" name="topic_id" value="{TOPIC_ID}" />
 <input type="hidden" name="{TOPIC_HASH}" value="1" />

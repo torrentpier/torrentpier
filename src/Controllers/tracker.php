@@ -861,7 +861,7 @@ template()->assign_vars(array(
     'SHOW_CURSOR' => user()->opt_js['hl_tr'],
     'HIDE_CONTENTS' => user()->opt_js['h_tsp'],
 
-    'U_SEARCH_USER' => "search.php?mode=searchuser&input_name=$poster_name_key",
+    'U_SEARCH_USER' => "search?mode=searchuser&input_name=$poster_name_key",
 ));
 
 // Hidden fields
@@ -910,7 +910,7 @@ template()->assign_vars(array(
     'SHOW_SPEED' => $show_speed_val,
     'MAX_FS' => $max_forums_selected,
     'L_MAX_FS' => sprintf(__('SEL_CHAPTERS_HELP'), $max_forums_selected),
-    'TRACKER_URL' => make_url('tracker.php?'),
+    'TRACKER_URL' => make_url('tracker?'),
 
     'TR_CAT_URL' => "$tracker_url?$cat_key=",
     'TR_FORUM_URL' => "$tracker_url?$forum_key=",

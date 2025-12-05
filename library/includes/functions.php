@@ -757,12 +757,12 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
     $from = !empty($row['user_from']) ? render_flag($row['user_from'], false) : __('NOSELECT');
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
     $user_time = !empty($row['user_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($row['user_time']), humanTime($row['user_time'])) : __('NOSELECT');
-    $posts = '<a href="search.php?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
+    $posts = '<a href="search?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
     $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . __('SEND_PM_SHORT') . '</a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $have_auth || ($row['user_id'] == userdata('user_id'))) {
-        $email_uri = (config()->get('board_email_form')) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
+        $email_uri = (config()->get('board_email_form')) ? ("profile?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
         $email = __('HIDDEN_USER');
@@ -1917,7 +1917,7 @@ function set_pr_die_append_msg($pr_uid)
     template()->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="' . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_RETURN') . '</a>
 		<br /><br />
-		<a href="profile.php?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_EDIT_RETURN') . '</a>
+		<a href="profile?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_EDIT_RETURN') . '</a>
 		<br /><br />
 		<a href="index.php">' . __('INDEX_RETURN') . '</a>
 	');

@@ -189,7 +189,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
             template()->assign_block_vars('torrent', []);
             template()->assign_vars([
                 'TOR_BLOCKED' => true,
-                'TOR_BLOCKED_MSG' => sprintf(__('BT_LOW_RATIO_FOR_DL'), round($user_ratio, 2), "search.php?dlu=$bt_user_id&amp;dlc=1"),
+                'TOR_BLOCKED_MSG' => sprintf(__('BT_LOW_RATIO_FOR_DL'), round($user_ratio, 2), "search?dlu=$bt_user_id&amp;dlc=1"),
             ]);
         } else {
             template()->assign_block_vars('torrent', [

@@ -120,7 +120,7 @@ if ($result = DB()->fetch_rowset($sql)) {
 }
 
 // Pagination
-$paginationurl = "memberlist.php?mode=$mode&amp;order=$sort_order&amp;role=$role";
+$paginationurl = "memberlist?mode=$mode&amp;order=$sort_order&amp;role=$role";
 $paginationurl .= !empty($username) ? "&amp;username=$username" : '';
 
 if ($mode != 'topten') {
@@ -141,7 +141,7 @@ template()->assign_vars([
     'S_MODE_SELECT' => $select_sort_mode,
     'S_ORDER_SELECT' => $select_sort_order,
     'S_ROLE_SELECT' => $select_sort_role,
-    'S_MODE_ACTION' => "memberlist.php?mode=$mode&amp;order=$sort_order&amp;role=$role",
+    'S_MODE_ACTION' => "memberlist?mode=$mode&amp;order=$sort_order&amp;role=$role",
     'S_USERNAME' => $username,
 ]);
 

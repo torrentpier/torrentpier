@@ -377,20 +377,20 @@ $s_auth_can .= (($is_auth['auth_download']) ? __('RULES_DOWNLOAD_CAN') : __('RUL
 $topic_mod = '';
 if ($is_auth['auth_mod']) {
     $s_auth_can .= __('RULES_MODERATE');
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_delete') . '" alt="' . __('DELETE_TOPIC') . '" title="' . __('DELETE_TOPIC') . '" border="0" /></a>&nbsp;';
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . __('MOVE_TOPIC') . '" title="' . __('MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
-    $topic_mod .= ($t_data['topic_status'] == TOPIC_UNLOCKED) ? "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_lock') . '" alt="' . __('LOCK_TOPIC') . '" title="' . __('LOCK_TOPIC') . '" border="0" /></a>&nbsp;' : "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_unlock') . '" alt="' . __('UNLOCK_TOPIC') . '" title="' . __('UNLOCK_TOPIC') . '" border="0" /></a>&nbsp;';
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_split') . '" alt="' . __('SPLIT_TOPIC') . '" title="' . __('SPLIT_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= "<a href=\"modcp?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_delete') . '" alt="' . __('DELETE_TOPIC') . '" title="' . __('DELETE_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= "<a href=\"modcp?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . __('MOVE_TOPIC') . '" title="' . __('MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= ($t_data['topic_status'] == TOPIC_UNLOCKED) ? "<a href=\"modcp?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_lock') . '" alt="' . __('LOCK_TOPIC') . '" title="' . __('LOCK_TOPIC') . '" border="0" /></a>&nbsp;' : "<a href=\"modcp?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_unlock') . '" alt="' . __('UNLOCK_TOPIC') . '" title="' . __('UNLOCK_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= "<a href=\"modcp?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_split') . '" alt="' . __('SPLIT_TOPIC') . '" title="' . __('SPLIT_TOPIC') . '" border="0" /></a>&nbsp;';
 
     if ($t_data['allow_reg_tracker'] || $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL || IS_ADMIN) {
         if ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL) {
-            $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unset_download&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_normal') . '" alt="' . __('UNSET_DL_STATUS') . '" title="' . __('UNSET_DL_STATUS') . '" border="0" /></a>';
+            $topic_mod .= "<a href=\"modcp?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unset_download&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_normal') . '" alt="' . __('UNSET_DL_STATUS') . '" title="' . __('UNSET_DL_STATUS') . '" border="0" /></a>';
         } else {
-            $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=set_download&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_dl') . '" alt="' . __('SET_DL_STATUS') . '" title="' . __('SET_DL_STATUS') . '" border="0" /></a>';
+            $topic_mod .= "<a href=\"modcp?" . POST_TOPIC_URL . "=$topic_id&amp;mode=set_download&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_dl') . '" alt="' . __('SET_DL_STATUS') . '" title="' . __('SET_DL_STATUS') . '" border="0" /></a>';
         }
     }
 } elseif (!IS_GUEST && ($t_data['topic_poster'] == userdata('user_id')) && $t_data['self_moderated']) {
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . __('MOVE_TOPIC') . '" title="' . __('MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= "<a href=\"modcp?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . __('MOVE_TOPIC') . '" title="' . __('MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
 }
 
 // Topic watch information
@@ -467,7 +467,7 @@ template()->assign_vars([
     'HIDE_RANK_IMG_DIS' => !config()->get('show_rank_image'),
 
     'PINNED_FIRST_POST' => $t_data['topic_show_first_post'],
-    'PIN_HREF' => $t_data['topic_show_first_post'] ? "modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=post_unpin" : "modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=post_pin",
+    'PIN_HREF' => $t_data['topic_show_first_post'] ? "modcp?" . POST_TOPIC_URL . "=$topic_id&amp;mode=post_unpin" : "modcp?" . POST_TOPIC_URL . "=$topic_id&amp;mode=post_pin",
     'PIN_TITLE' => $t_data['topic_show_first_post'] ? __('POST_UNPIN') : __('POST_PIN'),
 
     'AUTH_MOD' => $is_auth['auth_mod'],
@@ -486,7 +486,7 @@ template()->assign_vars([
     'U_VIEW_NEWER_TOPIC' => $view_next_topic_url,
     'U_POST_NEW_TOPIC' => $new_topic_url,
     'U_POST_REPLY_TOPIC' => $reply_topic_url,
-    'U_SEARCH_SELF' => "search.php?uid=" . userdata('user_id') . "&" . POST_TOPIC_URL . "=$topic_id&dm=1",
+    'U_SEARCH_SELF' => "search?uid=" . userdata('user_id') . "&" . POST_TOPIC_URL . "=$topic_id&dm=1",
 
     'TOPIC_HAS_POLL' => $topic_has_poll,
     'POLL_IS_EDITABLE' => !$poll_time_expired,
@@ -667,7 +667,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_JOINED' => config()->get('show_poster_joined') ? $poster_longevity : '',
 
         'POSTER_JOINED_DATE' => $poster_joined,
-        'POSTER_POSTS' => (config()->get('show_poster_posts') && $poster_posts) ? '<a href="search.php?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
+        'POSTER_POSTS' => (config()->get('show_poster_posts') && $poster_posts) ? '<a href="search?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
         'POSTER_FROM' => config()->get('show_poster_from') ? render_flag($poster_from, false) : '',
         'POSTER_BOT' => $poster_bot,
         'POSTER_GUEST' => $poster_guest,
@@ -705,7 +705,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'RG_NAME' => $rg_name,
         'RG_DESC' => $rg_desc,
         'RG_URL' => GROUP_URL . $rg_id,
-        'RG_FIND_URL' => 'tracker.php?srg=' . $rg_id,
+        'RG_FIND_URL' => 'tracker?srg=' . $rg_id,
         'RG_SIG' => $rg_signature,
         'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig']
     ]);
@@ -740,7 +740,7 @@ if (defined('SPLIT_FORM_START')) {
     template()->assign_vars([
         'SPLIT_FORM' => true,
         'START' => $start,
-        'S_SPLIT_ACTION' => 'modcp.php',
+        'S_SPLIT_ACTION' => 'modcp',
         'POST_FORUM_URL' => POST_FORUM_URL,
         'POST_TOPIC_URL' => POST_TOPIC_URL,
     ]);

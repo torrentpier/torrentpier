@@ -393,7 +393,7 @@ td.topic_id { cursor: pointer; }
 		<td class="small bold nowrap tRight w100">
 			&nbsp;
 			<!-- IF LOGGED_IN -->
-			<a class="small" href="feed.php?type=f&id={FORUM_ID}" target="_blank">{{ FEED_IMG|raw }} {L_ATOM_SUBSCRIBE}</a>&nbsp;&#0183;
+			<a class="small" href="feed?type=f&id={FORUM_ID}" target="_blank">{{ FEED_IMG|raw }} {L_ATOM_SUBSCRIBE}</a>&nbsp;&#0183;
 			<a class="small" href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a>&nbsp;&#0183;
 			<a class="menu-root" href="#only-new-options">{L_DISPLAYING_OPTIONS}</a>
 			<!-- ENDIF / LOGGED_IN -->

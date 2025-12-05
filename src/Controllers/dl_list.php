@@ -35,10 +35,10 @@ if ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status') {
 $full_url = isset($_POST['full_url']) ? str_replace('&amp;', '&', htmlspecialchars($_POST['full_url'])) : '';
 
 if (isset($_POST['redirect_type']) && $_POST['redirect_type'] == 'search') {
-    $redirect_type = 'search.php';
+    $redirect_type = 'search';
     $redirect = $full_url ?: "$dl_key=1";
 } else {
-    $redirect_type = (!$topic_id) ? 'viewforum.php' : 'viewtopic.php';
+    $redirect_type = (!$topic_id) ? 'viewforum' : 'viewtopic';
     $redirect = $full_url ?: ((!$topic_id) ? POST_FORUM_URL . "=$forum_id" : POST_TOPIC_URL . "=$topic_id");
 }
 
@@ -78,7 +78,7 @@ if ($mode == 'dl_delete' && $topic_id) {
 
         print_confirmation([
             'QUESTION' => __('DL_LIST_DEL_CONFIRM'),
-            'FORM_ACTION' => 'dl_list.php',
+            'FORM_ACTION' => 'dl_list',
             'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
         ]);
     }

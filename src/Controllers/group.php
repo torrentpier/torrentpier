@@ -127,7 +127,7 @@ if (!$group_id) {
         template()->assign_vars([
             'SELECT_GROUP' => true,
             'PAGE_TITLE' => __('GROUP_CONTROL_PANEL'),
-            'S_USERGROUP_ACTION' => 'group.php',
+            'S_USERGROUP_ACTION' => 'group',
             'S_HIDDEN_FIELDS' => $s_hidden_fields
         ]);
     } else {
@@ -387,11 +387,11 @@ if (!$group_id) {
         'MOD_WWW' => $moderator_info['www'],
         'MOD_TIME' => !empty($group_info['mod_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($group_info['mod_time']), humanTime($group_info['mod_time'])) : __('NONE'),
         'MOD_TIME_RAW' => !empty($group_info['mod_time']) ? $group_info['mod_time'] : '',
-        'U_SEARCH_USER' => 'search.php?mode=searchuser',
-        'U_SEARCH_RELEASES' => "tracker.php?srg=$group_id",
+        'U_SEARCH_USER' => 'search?mode=searchuser',
+        'U_SEARCH_RELEASES' => "tracker?srg=$group_id",
         'U_GROUP_RELEASES' => GROUP_URL . $group_id . "&view=releases",
         'U_GROUP_MEMBERS' => GROUP_URL . $group_id . "&view=members",
-        'U_GROUP_CONFIG' => "group_edit.php?" . POST_GROUPS_URL . "=$group_id",
+        'U_GROUP_CONFIG' => "group_edit?" . POST_GROUPS_URL . "=$group_id",
         'RELEASE_GROUP' => (bool)$group_info['release_group'],
         'GROUP_TYPE' => $group_type,
 
