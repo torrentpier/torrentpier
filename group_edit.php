@@ -11,7 +11,7 @@ define('BB_SCRIPT', 'group_edit');
 
 require __DIR__ . '/common.php';
 
-$page_cfg['include_bbcode_js'] = true;
+page_cfg('include_bbcode_js', true);
 
 // Start session management
 user()->session_start(['req_login' => true]);

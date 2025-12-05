@@ -30,6 +30,21 @@ trait HelperTrait
     }
 
     /**
+     * Return message getter/setter (replaces global $return_message)
+     *
+     * @param string|null $message Set message or null to just get
+     * @return string|null Current message
+     */
+    public static function returnMessage(?string $message = null): ?string
+    {
+        static $value = null;
+        if ($message !== null) {
+            $value = $message;
+        }
+        return $value;
+    }
+
+    /**
      * Get torrent info by topic ID.
      *
      * @param int $topicId Topic ID
@@ -80,13 +95,12 @@ trait HelperTrait
      */
     protected static function errorExit(string $message): void
     {
-        global $return_message;
-
         $msg = '';
         $reg_mode = self::regMode();
 
         if ($reg_mode !== null && ($reg_mode == 'request' || $reg_mode == 'newtopic')) {
-            if (isset($return_message)) {
+            $return_message = self::returnMessage();
+            if ($return_message !== null) {
                 $msg .= $return_message . '<br /><br /><hr/><br />';
             }
             $msg .= '<b>' . __('BT_REG_FAIL') . '</b><br /><br />';

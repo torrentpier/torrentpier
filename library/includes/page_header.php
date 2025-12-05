@@ -16,7 +16,6 @@ if (defined('PAGE_HEADER_SENT')) {
 }
 
 // Parse and show the overall page header
-global $page_cfg;
 
 $logged_in = (int)!empty(userdata('session_logged_in'));
 
@@ -123,12 +122,12 @@ template()->assign_vars([
         return (isset($langConfig[$userLang]['rtl']) && $langConfig[$userLang]['rtl'] === true) ? 'rtl' : 'ltr';
     })(),
 
-    'INCLUDE_BBCODE_JS' => !empty($page_cfg['include_bbcode_js']),
+    'INCLUDE_BBCODE_JS' => (bool)page_cfg('include_bbcode_js'),
     'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode(user()->opt_js, JSON_THROW_ON_ERROR),
 
-    'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
-    'ALLOW_ROBOTS' => !config()->get('board_disable') && (!isset($page_cfg['allow_robots']) || $page_cfg['allow_robots'] === true),
-    'META_DESCRIPTION' => (!defined('HAS_DIED') && !empty($page_cfg['meta_description'])) ? trim(htmlCHR($page_cfg['meta_description'])) : '',
+    'USE_TABLESORTER' => (bool)page_cfg('use_tablesorter'),
+    'ALLOW_ROBOTS' => !config()->get('board_disable') && (page_cfg('allow_robots') ?? true),
+    'META_DESCRIPTION' => (!defined('HAS_DIED') && page_cfg('meta_description')) ? trim(htmlCHR(page_cfg('meta_description'))) : '',
 
     'SITENAME' => config()->get('sitename'),
     'U_INDEX' => BB_ROOT . 'index.php',

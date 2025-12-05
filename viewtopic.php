@@ -17,11 +17,11 @@ datastore()->enqueue([
     'cat_forums'
 ]);
 
-$page_cfg['load_tpl_vars'] = [
+page_cfg('load_tpl_vars', [
     'post_buttons',
     'post_icons',
     'topic_icons'
-];
+]);
 
 $newest = $next_topic_id = 0;
 $start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
@@ -214,9 +214,9 @@ make_jumpbox();
 
 // Allow robots indexing
 if ($is_auth['auth_read']) {
-    $page_cfg['allow_robots'] = (bool)$t_data['topic_allow_robots'];
+    page_cfg('allow_robots', (bool)$t_data['topic_allow_robots']);
 } else {
-    $page_cfg['allow_robots'] = false;
+    page_cfg('allow_robots', false);
 }
 
 if ($post_id && !empty($t_data['prev_posts'])) {
@@ -659,7 +659,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     if ($is_first_post || $i == 0) {
         $message_meta = preg_replace('#<br\s*/?>\s*#si', ' ', $message);
         $message_meta = str_replace('&#10;', '', $message_meta);
-        $page_cfg['meta_description'] = str_short(strip_tags($message_meta), 220);
+        page_cfg('meta_description', str_short(strip_tags($message_meta), 220));
     }
 
     template()->assign_block_vars('postrow', [

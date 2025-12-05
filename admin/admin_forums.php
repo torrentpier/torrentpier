@@ -37,8 +37,8 @@ $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 
 $cat_forums = get_cat_forums();
 
-if ($orphan_sf_sql = get_orphan_sf()) {
-    fix_orphan_sf($orphan_sf_sql, true);
+if ($orphan_sf_sql = get_orphan_sf($cat_forums)) {
+    fix_orphan_sf($cat_forums, $orphan_sf_sql, true);
 }
 $forum_parent = $cat_id = 0;
 $forumname = '';
@@ -112,7 +112,7 @@ if ($mode) {
             if (isset($_REQUEST['forum_parent'])) {
                 $forum_parent = (int)$_REQUEST['forum_parent'];
 
-                if ($parent = get_forum_data($forum_parent)) {
+                if ($parent = get_forum_data($forum_parent, $cat_forums)) {
                     $cat_id = $parent['cat_id'];
                 }
             } elseif (isset($_REQUEST[POST_CAT_URL])) {
@@ -134,7 +134,7 @@ if ($mode) {
 
             $s_parent = '<option value="-1">&nbsp;' . __('SF_NO_PARENT') . '</option>\n';
             $sel_forum = ($forum_parent && !isset($_REQUEST['forum_parent'])) ? $forum_id : $forum_parent;
-            $s_parent .= sf_get_list('forum', $forum_id, $sel_forum);
+            $s_parent .= sf_get_list('forum', $cat_forums, $forum_parent, $forum_id, $sel_forum);
 
             template()->assign_vars(array(
                 'TPL_EDIT_FORUM' => true,
@@ -191,7 +191,7 @@ if ($mode) {
             }
 
             if ($forum_parent) {
-                if (!$parent = get_forum_data($forum_parent)) {
+                if (!$parent = get_forum_data($forum_parent, $cat_forums)) {
                     bb_die('Parent forum with id <b>' . $forum_parent . '</b> not found');
                 }
 
@@ -248,7 +248,7 @@ if ($mode) {
             $allow_porno_topic = (int)$_POST['allow_porno_topic'];
             $self_moderated = (int)$_POST['self_moderated'];
 
-            $forum_data = get_forum_data($forum_id);
+            $forum_data = get_forum_data($forum_id, $cat_forums);
             $old_cat_id = $forum_data['cat_id'];
             $forum_order = $forum_data['forum_order'];
 
@@ -257,7 +257,7 @@ if ($mode) {
             }
 
             if ($forum_parent) {
-                if (!$parent = get_forum_data($forum_parent)) {
+                if (!$parent = get_forum_data($forum_parent, $cat_forums)) {
                     bb_die('Parent forum with id <b>' . $forum_parent . '</b> not found');
                 }
 
@@ -306,7 +306,7 @@ if ($mode) {
             renumber_order('forum', $old_cat_id);
 
             $cat_forums = get_cat_forums();
-            $fix = fix_orphan_sf();
+            $fix = fix_orphan_sf($cat_forums);
             forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
@@ -404,7 +404,7 @@ if ($mode) {
             $forum_id = (int)$_GET[POST_FORUM_URL];
 
             $move_to_options = '<option value="-1">' . __('DELETE_ALL_POSTS') . '</option>';
-            $move_to_options .= sf_get_list('forum', $forum_id, 0);
+            $move_to_options .= sf_get_list('forum', $cat_forums, $forum_parent, $forum_id, 0);
 
             $foruminfo = get_info('forum', $forum_id);
 
@@ -475,7 +475,7 @@ if ($mode) {
             DB()->query('DELETE FROM ' . BB_AUTH_ACCESS_SNAP . " WHERE forum_id = $from_id");
 
             $cat_forums = get_cat_forums();
-            fix_orphan_sf();
+            fix_orphan_sf($cat_forums);
             \TorrentPier\Legacy\Group::update_user_level('all');
             forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
@@ -546,7 +546,7 @@ if ($mode) {
 
             renumber_order('forum', $to_id);
             $cat_forums = get_cat_forums();
-            $fix = fix_orphan_sf();
+            $fix = fix_orphan_sf($cat_forums);
             forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
@@ -582,8 +582,8 @@ if ($mode) {
 
                 if ($move_down_forum_id = get_prev_root_forum_id($forums, $forum_order)) {
                     $move_up_forum_id = $forum_id;
-                    $move_down_ord_val = (get_sf_count($forum_id) + 1) * 10;
-                    $move_up_ord_val = ((get_sf_count($move_down_forum_id) + 1) * 10) + $move_down_ord_val;
+                    $move_down_ord_val = (get_sf_count($forum_id, $cat_forums) + 1) * 10;
+                    $move_up_ord_val = ((get_sf_count($move_down_forum_id, $cat_forums) + 1) * 10) + $move_down_ord_val;
                     $move_down_forum_order = $cat_forums[$cat_id]['f'][$move_down_forum_id]['forum_order'];
                 }
             } // move selected forum ($forum_id) DOWN
@@ -596,8 +596,8 @@ if ($mode) {
                 if ($move_up_forum_id = get_next_root_forum_id($forums, $forum_order)) {
                     $move_down_forum_id = $forum_id;
                     $move_down_forum_order = $forum_order;
-                    $move_down_ord_val = (get_sf_count($move_up_forum_id) + 1) * 10;
-                    $move_up_ord_val = ((get_sf_count($move_down_forum_id) + 1) * 10) + $move_down_ord_val;
+                    $move_down_ord_val = (get_sf_count($move_up_forum_id, $cat_forums) + 1) * 10;
+                    $move_up_ord_val = ((get_sf_count($move_down_forum_id, $cat_forums) + 1) * 10) + $move_down_ord_val;
                 }
             } else {
                 $show_main_page = true;
@@ -961,13 +961,12 @@ function get_cat_forums($cat_id = false)
 }
 
 /**
- * @param $forum_id
+ * @param int $forum_id
+ * @param array $cat_forums
  * @return int
  */
-function get_sf_count($forum_id)
+function get_sf_count(int $forum_id, array $cat_forums): int
 {
-    global $cat_forums;
-
     $sf_count = 0;
 
     foreach ($cat_forums as $cid => $c) {
@@ -1021,12 +1020,11 @@ function get_next_root_forum_id($forums, $curr_forum_order)
 }
 
 /**
+ * @param array $cat_forums
  * @return string
  */
-function get_orphan_sf()
+function get_orphan_sf(array $cat_forums): string
 {
-    global $cat_forums;
-
     $last_root = 0;
     $bad_sf_ary = [];
 
@@ -1046,16 +1044,17 @@ function get_orphan_sf()
 }
 
 /**
+ * @param array $cat_forums
  * @param string $orphan_sf_sql
  * @param bool $show_mess
  * @return string
  */
-function fix_orphan_sf($orphan_sf_sql = '', $show_mess = false)
+function fix_orphan_sf(array $cat_forums, string $orphan_sf_sql = '', bool $show_mess = false): string
 {
     $done_mess = '';
 
     if (!$orphan_sf_sql) {
-        $orphan_sf_sql = get_orphan_sf();
+        $orphan_sf_sql = get_orphan_sf($cat_forums);
     }
 
     if ($orphan_sf_sql) {
@@ -1081,15 +1080,15 @@ function fix_orphan_sf($orphan_sf_sql = '', $show_mess = false)
 }
 
 /**
- * @param $mode
+ * @param string $mode
+ * @param array $cat_forums
+ * @param int $forum_parent
  * @param int $exclude
  * @param int $select
  * @return string
  */
-function sf_get_list($mode, $exclude = 0, $select = 0)
+function sf_get_list(string $mode, array $cat_forums, int $forum_parent, int $exclude = 0, int $select = 0): string
 {
-    global $cat_forums, $forum_parent;
-
     $opt = '';
 
     if ($mode == 'forum') {
@@ -1111,13 +1110,12 @@ function sf_get_list($mode, $exclude = 0, $select = 0)
 }
 
 /**
- * @param $forum_id
- * @return bool
+ * @param int $forum_id
+ * @param array $cat_forums
+ * @return array|false
  */
-function get_forum_data($forum_id)
+function get_forum_data(int $forum_id, array $cat_forums): array|false
 {
-    global $cat_forums;
-
     foreach ($cat_forums as $cid => $c) {
         foreach ($c['f'] as $fid => $f) {
             if ($fid == $forum_id) {

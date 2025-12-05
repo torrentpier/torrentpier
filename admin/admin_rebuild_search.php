@@ -65,7 +65,7 @@ $clear_search = isset($_REQUEST['clear_search']) ? (int)$_REQUEST['clear_search'
 
 // get the number of total/session posts already processed
 $total_posts_processed = ($start != 0) ? get_total_posts('before', $last_session_data['end_post_id']) : 0;
-$session_posts_processed = ($mode == 'refresh') ? get_processed_posts('session') : 0;
+$session_posts_processed = ($mode == 'refresh') ? get_processed_posts('session', $last_session_data) : 0;
 
 // find how many posts aren't processed
 $total_posts_processing = $total_posts - $total_posts_processed;
@@ -227,7 +227,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $processing_messages .= ($start == 0 && $clear_search) ? __('CLEARED_SEARCH_TABLES') : '';
 
     // check if we have reached the end of our post processing
-    $session_posts_processed = get_processed_posts('session');
+    $session_posts_processed = get_processed_posts('session', $last_session_data);
     $total_posts_processed = get_total_posts('before', $last_session_data['end_post_id']);
     $total_posts = get_total_posts();
 
@@ -487,16 +487,15 @@ function get_rebuild_session_details($id, $details = 'all')
 // get the number of processed posts in the last session or in all sessions
 // 'total' to get the sum of posts of all sessions
 // 'session' to get the posts of the last session
-function get_processed_posts($mode = 'session')
+function get_processed_posts(string $mode = 'session', array $session_data = [])
 {
-    global $last_session_data;
     $row = [];
 
     if ($mode == 'total') {
         $sql = 'SELECT SUM(session_posts) as posts FROM ' . BB_SEARCH_REBUILD;
         $row = DB()->fetch_row($sql);
     } else {
-        $row['posts'] = $last_session_data['session_posts'];
+        $row['posts'] = $session_data['session_posts'] ?? 0;
     }
 
     return (int)$row['posts'];

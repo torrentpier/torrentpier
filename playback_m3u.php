@@ -25,7 +25,7 @@ $validFormats = [
 user()->session_start(['req_login' => config()->get('torr_server.disable_for_guest')]);
 
 // Disable robots indexing
-$page_cfg['allow_robots'] = false;
+page_cfg('allow_robots', false);
 
 // Check topic_id
 $topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;

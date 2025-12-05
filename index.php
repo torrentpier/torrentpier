@@ -11,11 +11,11 @@ define('BB_SCRIPT', 'index');
 
 require __DIR__ . '/common.php';
 
-$page_cfg['load_tpl_vars'] = [
+page_cfg('load_tpl_vars', [
     'post_icons'
-];
+]);
 
-// Show last topic
+// Show the last topic
 $show_last_topic = true;
 $last_topic_max_len = 28;
 
@@ -46,7 +46,7 @@ if (config()->get('show_network_news')) {
 user()->session_start();
 
 // Set meta description
-$page_cfg['meta_description'] = config()->get('site_desc');
+page_cfg('meta_description', config()->get('site_desc'));
 
 // Init main vars
 $viewcat = isset($_GET[POST_CAT_URL]) ? (int)$_GET[POST_CAT_URL] : 0;

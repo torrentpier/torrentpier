@@ -169,7 +169,7 @@ elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POS
 // Front end (changing permissions)
 //
 if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
-    $page_cfg['quirks_mode'] = true;
+    page_cfg('quirks_mode', true);
 
     if (!empty($_POST['username'])) {
         $this_userdata = get_userdata($_POST['username'], true);
@@ -293,7 +293,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
     ));
 } elseif ($mode == 'group' && $group_id) {
-    $page_cfg['quirks_mode'] = true;
+    page_cfg('quirks_mode', true);
 
     if (!$group_data = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
         bb_die(__('GROUP_NOT_EXIST'));

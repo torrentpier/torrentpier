@@ -12,7 +12,7 @@ define('BB_SCRIPT', 'group');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
-$page_cfg['use_tablesorter'] = true;
+page_cfg('use_tablesorter', true);
 
 $s_member_groups = $s_pending_groups = $s_member_groups_opt = $s_pending_groups_opt = '';
 $select_sort_mode = $select_sort_order = '';

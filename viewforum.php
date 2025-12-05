@@ -11,17 +11,17 @@ define('BB_SCRIPT', 'forum');
 
 require __DIR__ . '/common.php';
 
-$page_cfg['include_bbcode_js'] = true;
+page_cfg('include_bbcode_js', true);
 
 $show_last_topic = true;
 $last_topic_max_len = 40;
 $title_match_key = 'nm';
 $title_match_max_len = 60;
 
-$page_cfg['load_tpl_vars'] = [
+page_cfg('load_tpl_vars', [
     'post_icons',
     'topic_icons'
-];
+]);
 
 // Init request vars
 $forum_id = (int)request_var(POST_FORUM_URL, '');
@@ -50,7 +50,7 @@ if (!$forum_id or !$forum_data = @$forums['forum'][$forum_id]) {
 
 // Set meta description
 if (!empty($forum_data['forum_desc'])) {
-    $page_cfg['meta_description'] = $forum_data['forum_desc'];
+    page_cfg('meta_description', $forum_data['forum_desc']);
 }
 
 // Make jumpbox

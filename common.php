@@ -501,6 +501,34 @@ function forum_tree(bool $refresh = false): array
     return $instance->get();
 }
 
+/**
+ * Page configuration getter/setter (replaces global $page_cfg)
+ *
+ * Usage:
+ *   page_cfg('key', $value)  - set a value
+ *   page_cfg('key')          - get a value
+ *   page_cfg()               - get all config
+ *
+ * @param string|null $key Config key
+ * @param mixed $value Value to set (null to get)
+ * @return mixed Config value or all config array
+ */
+function page_cfg(?string $key = null, mixed $value = null): mixed
+{
+    static $config = [];
+
+    if ($key === null) {
+        return $config;
+    }
+
+    if (func_num_args() === 2) {
+        $config[$key] = $value;
+        return $value;
+    }
+
+    return $config[$key] ?? null;
+}
+
 // Functions
 function utime()
 {

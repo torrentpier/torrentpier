@@ -12,10 +12,10 @@ define('BB_SCRIPT', 'posting');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
-$page_cfg['load_tpl_vars'] = [
+page_cfg('load_tpl_vars', [
     'post_icons'
-];
-$page_cfg['allow_robots'] = false;
+]);
+page_cfg('allow_robots', false);
 
 $submit = (bool)@$_REQUEST['post'];
 $refresh = $preview = (bool)@$_REQUEST['preview'];
@@ -408,6 +408,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
 
         // Auto-register torrent on tracker
         if (\TorrentPier\Attachment::exists($topic_id) && !$error_msg) {
+            \TorrentPier\Torrent\Registry::returnMessage($return_message);
             \TorrentPier\Torrent\Registry::autoRegister(
                 $topic_id,
                 userdata('user_id'),

@@ -15,10 +15,8 @@ require INC_DIR . '/bbcode.php';
 //
 // Functions
 //
-function return_msg_mcp($status_msg)
+function return_msg_mcp(string $status_msg, int $topic_id, array $req_topics, int $forum_id, string $mode): string
 {
-    global $topic_id, $req_topics, $forum_id, $mode;
-
     if (count($req_topics) == 1) {
         $topic_id = reset($req_topics);
     }
@@ -240,7 +238,7 @@ switch ($mode) {
             }
 
             $msg = $result ? __('TOPICS_REMOVED') : __('NO_TOPICS_REMOVED');
-            bb_die(return_msg_mcp($msg));
+            bb_die(return_msg_mcp($msg, $topic_id, $req_topics, $forum_id, $mode));
         } else {
             print_confirmation([
                 'QUESTION' => __('CONFIRM_DELETE_TOPIC'),
@@ -275,7 +273,7 @@ switch ($mode) {
             }
 
             $msg = $result ? __('TOPICS_MOVED') : __('NO_TOPICS_MOVED');
-            bb_die(return_msg_mcp($msg));
+            bb_die(return_msg_mcp($msg, $topic_id, $req_topics, $forum_id, $mode));
         } else {
             if (IS_ADMIN) {
                 $forum_select_mode = 'admin';
@@ -347,7 +345,7 @@ switch ($mode) {
         }
 
         $msg = ($lock) ? __('TOPICS_LOCKED') : __('TOPICS_UNLOCKED');
-        bb_die(return_msg_mcp($msg));
+        bb_die(return_msg_mcp($msg, $topic_id, $req_topics, $forum_id, $mode));
 
         break;
 
@@ -379,7 +377,7 @@ switch ($mode) {
         ]);
 
         $msg = ($set_download) ? __('TOPICS_DOWN_SETS') : __('TOPICS_DOWN_UNSETS');
-        bb_die(return_msg_mcp($msg));
+        bb_die(return_msg_mcp($msg, $topic_id, $req_topics, $forum_id, $mode));
 
         break;
 
@@ -525,7 +523,7 @@ switch ($mode) {
             $result = \TorrentPier\Legacy\Admin\Common::post_delete(explode(',', $post_id_sql));
 
             $msg = $result ? __('DELETE_POSTS_SUCCESFULLY') : __('NO_POSTS_REMOVED');
-            bb_die(return_msg_mcp($msg));
+            bb_die(return_msg_mcp($msg, $topic_id, $req_topics, $forum_id, $mode));
         } else {
             $sql = "SELECT u.username, u.user_rank, p.*, pt.post_text, p.post_username
 				FROM " . BB_POSTS . " p, " . BB_USERS . " u, " . BB_POSTS_TEXT . " pt
@@ -739,7 +737,7 @@ switch ($mode) {
             }
 
             $msg = $pin ? __('POST_PINNED') : __('POST_UNPINNED');
-            bb_die(return_msg_mcp($msg));
+            bb_die(return_msg_mcp($msg, $topic_id, $req_topics, $forum_id, $mode));
         } elseif ($topic_id) {
             $sql = "
 				SELECT topic_id, topic_title
@@ -780,7 +778,7 @@ switch ($mode) {
             }
 
             $msg = $pin ? __('POST_PINNED') : __('POST_UNPINNED');
-            bb_die(return_msg_mcp($msg));
+            bb_die(return_msg_mcp($msg, $topic_id, $req_topics, $forum_id, $mode));
         }
         break;
 

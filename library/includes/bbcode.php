@@ -16,7 +16,7 @@ datastore()->enqueue([
     'cat_forums',
 ]);
 
-$page_cfg['include_bbcode_js'] = true;
+page_cfg('include_bbcode_js', true);
 
 //
 // BBCode templates

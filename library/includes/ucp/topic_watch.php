@@ -16,8 +16,8 @@ if (!config()->get('topic_notify_enabled')) {
 }
 
 // Page config
-$page_cfg['use_tablesorter'] = true;
-$page_cfg['include_bbcode_js'] = true;
+page_cfg('use_tablesorter', true);
+page_cfg('include_bbcode_js', true);
 
 $user_id = userdata('user_id');
 if (isset($_GET[POST_USERS_URL])) {

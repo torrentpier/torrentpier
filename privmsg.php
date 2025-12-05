@@ -16,10 +16,10 @@ require INC_DIR . '/bbcode.php';
 $privmsg_sent_id = $l_box_name = $to_username = $privmsg_subject = $privmsg_message = $error_msg = '';
 
 // Page config
-$page_cfg['use_tablesorter'] = true;
-$page_cfg['load_tpl_vars'] = [
+page_cfg('use_tablesorter', true);
+page_cfg('load_tpl_vars', [
     'pm_icons'
-];
+]);
 
 //
 // Is PM disabled?

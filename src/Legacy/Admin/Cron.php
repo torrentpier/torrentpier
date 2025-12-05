@@ -22,8 +22,6 @@ class Cron
      */
     public static function run_jobs(string $jobs): void
     {
-        global $cron_runtime_log;
-
         \define('IN_CRON', true);
 
         $sql = "SELECT * FROM " . BB_CRON . " WHERE cron_id IN ($jobs)";
