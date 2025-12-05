@@ -529,6 +529,58 @@ function page_cfg(?string $key = null, mixed $value = null): mixed
     return $config[$key] ?? null;
 }
 
+/**
+ * Get CSS class for download link by status
+ *
+ * @param int $status Download status constant (DL_STATUS_*)
+ * @return string CSS class name
+ */
+function dl_link_css(int $status): string
+{
+    static $map = [
+        DL_STATUS_RELEASER => 'genmed',
+        DL_STATUS_WILL => 'dlWill',
+        DL_STATUS_DOWN => 'leechmed',
+        DL_STATUS_COMPLETE => 'seedmed',
+        DL_STATUS_CANCEL => 'dlCancel',
+    ];
+    return $map[$status] ?? 'genmed';
+}
+
+/**
+ * Get CSS class for download status display
+ *
+ * @param int $status Download status constant (DL_STATUS_*)
+ * @return string CSS class name
+ */
+function dl_status_css(int $status): string
+{
+    static $map = [
+        DL_STATUS_RELEASER => 'genmed',
+        DL_STATUS_WILL => 'dlWill',
+        DL_STATUS_DOWN => 'dlDown',
+        DL_STATUS_COMPLETE => 'dlComplete',
+        DL_STATUS_CANCEL => 'dlCancel',
+    ];
+    return $map[$status] ?? 'gen';
+}
+
+/**
+ * Get list of all download status constants
+ *
+ * @return array List of DL_STATUS_* constants
+ */
+function dl_status_list(): array
+{
+    return [
+        DL_STATUS_RELEASER,
+        DL_STATUS_WILL,
+        DL_STATUS_DOWN,
+        DL_STATUS_COMPLETE,
+        DL_STATUS_CANCEL,
+    ];
+}
+
 // Functions
 function utime()
 {

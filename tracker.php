@@ -713,7 +713,7 @@ if ($allowed_forums) {
             $dl_sp = $dl ? humn_size($dl, min: 'KB') . '/s' : '0 KB/s';
             $ul_sp = $ul ? humn_size($ul, min: 'KB') . '/s' : '0 KB/s';
 
-            $dl_class = isset($tor['dl_status']) ? $dl_link_css[$tor['dl_status']] : 'genmed';
+            $dl_class = isset($tor['dl_status']) ? dl_link_css($tor['dl_status']) : 'genmed';
             $row_class = !($row_num & 1) ? $row_class_1 : $row_class_2;
             $row_num++;
 
@@ -850,10 +850,10 @@ template()->assign_vars(array(
     'SEED_EXIST_CHBOX' => build_checkbox($seed_exist_key, __('BT_SEED_EXIST'), $seed_exist),
     'ONLY_NEW_CHBOX' => build_checkbox($new_key, __('BT_ONLY_NEW'), $only_new, IS_GUEST),
 
-    'DL_CANCEL_CHBOX' => build_checkbox($dl_cancel_key, __('SEARCH_DL_CANCEL'), $dl_cancel_val, IS_GUEST, $dl_link_css[DL_STATUS_CANCEL]),
-    'DL_COMPL_CHBOX' => build_checkbox($dl_compl_key, __('SEARCH_DL_COMPLETE'), $dl_compl_val, IS_GUEST, $dl_link_css[DL_STATUS_COMPLETE]),
-    'DL_DOWN_CHBOX' => build_checkbox($dl_down_key, __('SEARCH_DL_DOWN'), $dl_down_val, IS_GUEST, $dl_link_css[DL_STATUS_DOWN]),
-    'DL_WILL_CHBOX' => build_checkbox($dl_will_key, __('SEARCH_DL_WILL'), $dl_will_val, IS_GUEST, $dl_link_css[DL_STATUS_WILL]),
+    'DL_CANCEL_CHBOX' => build_checkbox($dl_cancel_key, __('SEARCH_DL_CANCEL'), $dl_cancel_val, IS_GUEST, dl_link_css(DL_STATUS_CANCEL)),
+    'DL_COMPL_CHBOX' => build_checkbox($dl_compl_key, __('SEARCH_DL_COMPLETE'), $dl_compl_val, IS_GUEST, dl_link_css(DL_STATUS_COMPLETE)),
+    'DL_DOWN_CHBOX' => build_checkbox($dl_down_key, __('SEARCH_DL_DOWN'), $dl_down_val, IS_GUEST, dl_link_css(DL_STATUS_DOWN)),
+    'DL_WILL_CHBOX' => build_checkbox($dl_will_key, __('SEARCH_DL_WILL'), $dl_will_val, IS_GUEST, dl_link_css(DL_STATUS_WILL)),
 
     'POSTER_NAME_NAME' => $poster_name_key,
     'POSTER_NAME_VAL' => htmlCHR($poster_name_val),

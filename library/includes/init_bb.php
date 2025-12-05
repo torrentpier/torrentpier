@@ -156,21 +156,6 @@ define('POLL_FINISHED', 2);
 // Group avatars
 define('GROUP_AVATAR_MASK', 999000);
 
-$dl_link_css = [
-    DL_STATUS_RELEASER => 'genmed',
-    DL_STATUS_WILL => 'dlWill',
-    DL_STATUS_DOWN => 'leechmed',
-    DL_STATUS_COMPLETE => 'seedmed',
-    DL_STATUS_CANCEL => 'dlCancel',
-];
-
-$dl_status_css = [
-    DL_STATUS_RELEASER => 'genmed',
-    DL_STATUS_WILL => 'dlWill',
-    DL_STATUS_DOWN => 'dlDown',
-    DL_STATUS_COMPLETE => 'dlComplete',
-    DL_STATUS_CANCEL => 'dlCancel',
-];
 
 // Table names
 define('BUF_TOPIC_VIEW', 'buf_topic_view');

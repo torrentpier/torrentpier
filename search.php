@@ -286,10 +286,10 @@ if (empty($_GET) && empty($_POST)) {
         'MY_TOPICS_CHBOX' => build_checkbox($my_topics_key, __('SEARCH_MY_TOPICS'), $my_topics_val, true, null, 'my_topics'),
         'TITLE_ONLY_CHBOX' => build_checkbox($title_only_key, __('SEARCH_TITLES_ONLY'), true, config()->get('disable_ft_search_in_posts')),
         'ALL_WORDS_CHBOX' => build_checkbox($all_words_key, __('SEARCH_ALL_WORDS'), true),
-        'DL_CANCEL_CHBOX' => build_checkbox($dl_cancel_key, __('SEARCH_DL_CANCEL'), $dl_cancel_val, IS_GUEST, $dl_link_css[DL_STATUS_CANCEL]),
-        'DL_COMPL_CHBOX' => build_checkbox($dl_compl_key, __('SEARCH_DL_COMPLETE'), $dl_compl_val, IS_GUEST, $dl_link_css[DL_STATUS_COMPLETE]),
-        'DL_DOWN_CHBOX' => build_checkbox($dl_down_key, __('SEARCH_DL_DOWN'), $dl_down_val, IS_GUEST, $dl_link_css[DL_STATUS_DOWN]),
-        'DL_WILL_CHBOX' => build_checkbox($dl_will_key, __('SEARCH_DL_WILL'), $dl_will_val, IS_GUEST, $dl_link_css[DL_STATUS_WILL]),
+        'DL_CANCEL_CHBOX' => build_checkbox($dl_cancel_key, __('SEARCH_DL_CANCEL'), $dl_cancel_val, IS_GUEST, dl_link_css(DL_STATUS_CANCEL)),
+        'DL_COMPL_CHBOX' => build_checkbox($dl_compl_key, __('SEARCH_DL_COMPLETE'), $dl_compl_val, IS_GUEST, dl_link_css(DL_STATUS_COMPLETE)),
+        'DL_DOWN_CHBOX' => build_checkbox($dl_down_key, __('SEARCH_DL_DOWN'), $dl_down_val, IS_GUEST, dl_link_css(DL_STATUS_DOWN)),
+        'DL_WILL_CHBOX' => build_checkbox($dl_will_key, __('SEARCH_DL_WILL'), $dl_will_val, IS_GUEST, dl_link_css(DL_STATUS_WILL)),
         'ONLY_NEW_CHBOX' => build_checkbox($new_key, __('BT_ONLY_NEW'), $new_val, IS_GUEST),
         'NEW_TOPICS_CHBOX' => build_checkbox($new_topics_key, __('NEW_TOPICS'), $new_topics_val, IS_GUEST),
 
@@ -799,7 +799,7 @@ else {
             'TYPE' => $topic['topic_type'],
             'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL),
             'POLL' => (bool)$topic['topic_vote'],
-            'DL_CLASS' => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
+            'DL_CLASS' => isset($topic['dl_status']) ? dl_link_css($topic['dl_status']) : '',
 
             'TOPIC_AUTHOR' => profile_url(array('username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank'])),
             'LAST_POSTER' => profile_url(array('username' => $topic['last_username'], 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank'])),

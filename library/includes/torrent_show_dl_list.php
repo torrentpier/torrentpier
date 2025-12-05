@@ -38,7 +38,7 @@ if (($is_auth['auth_mod']) && ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL)) {
 $dl_cat = $dl_count = [];
 
 if ($show_dl_list) {
-    foreach ($dl_status_css as $i => $desc) {
+    foreach (dl_status_list() as $i) {
         $dl_cat[$i] = '';
         $dl_count[$i] = 0;
     }
@@ -65,7 +65,7 @@ if ($show_dl_list) {
         }
 
         foreach ($dl_info as $rid => $u) {
-            $u_link_class = $dl_status_css[$u['user_status']];
+            $u_link_class = dl_status_css($u['user_status']);
 
             if ($count_mode) {
                 $dl_cat[$u['user_status']] = $u['username'];
@@ -77,7 +77,8 @@ if ($show_dl_list) {
             }
         }
 
-        foreach ($dl_status_css as $i => $desc) {
+        foreach (dl_status_list() as $i) {
+            $desc = dl_status_css($i);
             if ($dl_cat[$i] && !$count_mode) {
                 $dl_users_div_style = ($dl_count[$i] > $max_dl_users_before_overflow) ? $dl_users_div_style_overflow : $dl_users_div_style_normal;
                 $dl_cat[$i][strlen($dl_cat[$i]) - 2] = ' ';

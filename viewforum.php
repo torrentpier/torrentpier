@@ -451,7 +451,7 @@ foreach ($topic_rowset as $topic) {
         'TYPE' => $topic['topic_type'],
         'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL && !$forum_data['allow_reg_tracker']),
         'POLL' => (bool)$topic['topic_vote'],
-        'DL_CLASS' => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
+        'DL_CLASS' => isset($topic['dl_status']) ? dl_link_css($topic['dl_status']) : '',
 
         'TOPIC_AUTHOR' => profile_url(['username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
         'LAST_POSTER' => profile_url(['username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
