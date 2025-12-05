@@ -711,10 +711,7 @@ class User
             return '';
         }
 
-        if (!$forums = datastore()->get('cat_forums')) {
-            datastore()->update('cat_forums');
-            $forums = datastore()->get('cat_forums');
-        }
+        $forums = forum_tree();
 
         if ($auth_type == AUTH_VIEW) {
             if (IS_GUEST) {
@@ -772,11 +769,7 @@ class User
         }
 
         if (bf($this->opt, 'user_opt', 'user_porn_forums')) {
-
-            if (!$forums = datastore()->get('cat_forums')) {
-                datastore()->update('cat_forums');
-                $forums = datastore()->get('cat_forums');
-            }
+            $forums = forum_tree();
 
             if (isset($forums['forum'])) {
                 foreach ($forums['forum'] as $key => $row) {

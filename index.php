@@ -71,11 +71,7 @@ if ($stats === false) {
 }
 
 // Forums data
-$forums = datastore()->get('cat_forums');
-if ($forums === false) {
-    datastore()->update('cat_forums');
-    $forums = datastore()->get('cat_forums');
-}
+$forums = forum_tree();
 $cat_title_html = $forums['cat_title_html'];
 $forum_name_html = $forums['forum_name_html'];
 

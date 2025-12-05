@@ -102,10 +102,7 @@ $tracker_tbl = BB_BT_TRACKER . ' tr';
 $users_tbl = BB_USERS . ' u';
 
 // Cat/forum data
-if (!$forums = datastore()->get('cat_forums')) {
-    datastore()->update('cat_forums');
-    $forums = datastore()->get('cat_forums');
-}
+$forums = forum_tree();
 $forum_name_html = $forums['forum_name_html'];
 
 //

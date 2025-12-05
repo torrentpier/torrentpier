@@ -200,10 +200,7 @@ if ($moderation) {
     template()->assign_vars(['S_FORUM_SELECT' => $forum_select_html]);
 }
 
-if (!$forums = datastore()->get('cat_forums')) {
-    datastore()->update('cat_forums');
-    $forums = datastore()->get('cat_forums');
-}
+$forums = forum_tree();
 
 template()->assign_vars([
     'CAT_TITLE' => $forums['cat_title_html'][$t_data['cat_id']],
@@ -211,8 +208,6 @@ template()->assign_vars([
     'PARENT_FORUM_HREF' => $parent_id ? FORUM_URL . $parent_id : '',
     'PARENT_FORUM_NAME' => $parent_id ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
 ]);
-unset($forums);
-datastore()->rm('cat_forums');
 
 // Make jumpbox
 make_jumpbox();

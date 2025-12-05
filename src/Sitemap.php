@@ -30,10 +30,7 @@ class Sitemap
 
         $forumUrls = [];
 
-        if (!$forums = datastore()->get('cat_forums')) {
-            datastore()->update('cat_forums');
-            $forums = datastore()->get('cat_forums');
-        }
+        $forums = forum_tree();
 
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
         $ignore_forum_sql = $not_forums_id ? "WHERE f.forum_id NOT IN($not_forums_id)" : '';
@@ -74,10 +71,7 @@ class Sitemap
 
         $topicUrls = [];
 
-        if (!$forums = datastore()->get('cat_forums')) {
-            datastore()->update('cat_forums');
-            $forums = datastore()->get('cat_forums');
-        }
+        $forums = forum_tree();
 
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
         $ignore_forum_sql = $not_forums_id ? "WHERE forum_id NOT IN($not_forums_id)" : '';

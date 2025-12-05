@@ -71,13 +71,8 @@ $users = array(__('ACTS_LOG_ALL_ACTIONS') => $all_users) + array_flip($mod['mode
 unset($mod);
 
 // Forums data
-if (!$forums = datastore()->get('cat_forums')) {
-    datastore()->update('cat_forums');
-    $forums = datastore()->get('cat_forums');
-}
+$forums = forum_tree();
 $f_data = $forums['f'];
-
-unset($forums);
 
 // Start
 $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;

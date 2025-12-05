@@ -43,10 +43,7 @@ define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest');
 
 set_die_append_msg();
-if (!$forums = datastore()->get('cat_forums')) {
-    datastore()->update('cat_forums');
-    $forums = datastore()->get('cat_forums');
-}
+$forums = forum_tree();
 if (!$forum_id or !$forum_data = @$forums['forum'][$forum_id]) {
     bb_die(__('FORUM_NOT_EXIST'));
 }
@@ -120,10 +117,7 @@ if ($mark_read && !IS_GUEST) {
 // Subforums
 $show_subforums = config()->get('sf_on_first_page_only') ? !$start : true;
 
-if (!$forums = datastore()->get('cat_forums')) {
-    datastore()->update('cat_forums');
-    $forums = datastore()->get('cat_forums');
-}
+$forums = forum_tree();
 
 if ($forums['forum'][$forum_id]['allow_porno_topic'] && bf(userdata('user_opt'), 'user_opt', 'user_porn_forums')) {
     bb_die(__('ERROR_PORNO_FORUM'));

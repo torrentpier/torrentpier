@@ -181,10 +181,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         bb_die(__('NO_SUCH_USER'));
     }
 
-    if (!$forums = datastore()->get('cat_forums')) {
-        datastore()->update('cat_forums');
-        $forums = datastore()->get('cat_forums');
-    }
+    $forums = forum_tree();
 
     // Check if forums exist
     if (empty($forums['f'])) {
@@ -302,10 +299,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         bb_die(__('GROUP_NOT_EXIST'));
     }
 
-    if (!$forums = datastore()->get('cat_forums')) {
-        datastore()->update('cat_forums');
-        $forums = datastore()->get('cat_forums');
-    }
+    $forums = forum_tree();
 
     // Check if forums exist
     if (empty($forums['f'])) {

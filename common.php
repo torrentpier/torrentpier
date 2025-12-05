@@ -486,6 +486,21 @@ function &tracking_forums(): array
     return read_tracker()->getForums();
 }
 
+/**
+ * Get forum tree data (categories and forums hierarchy)
+ *
+ * @param bool $refresh Refresh cached data before returning
+ * @return array Forum tree data
+ */
+function forum_tree(bool $refresh = false): array
+{
+    $instance = \TorrentPier\Forum\ForumTree::getInstance();
+    if ($refresh) {
+        $instance->refresh();
+    }
+    return $instance->get();
+}
+
 // Functions
 function utime()
 {

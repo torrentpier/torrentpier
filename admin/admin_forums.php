@@ -220,7 +220,7 @@ if ($mode) {
             DB()->query('INSERT INTO ' . BB_FORUMS . " ($columns) VALUES ($values)");
 
             renumber_order('forum', $cat_id);
-            datastore()->update('cat_forums');
+            forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
             bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
@@ -307,7 +307,7 @@ if ($mode) {
 
             $cat_forums = get_cat_forums();
             $fix = fix_orphan_sf();
-            datastore()->update('cat_forums');
+            forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
             $message = __('FORUMS_UPDATED') . '<br /><br />';
@@ -336,7 +336,7 @@ if ($mode) {
 
             DB()->query('INSERT INTO ' . BB_CATEGORIES . $args);
 
-            datastore()->update('cat_forums');
+            forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
             bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
@@ -390,7 +390,7 @@ if ($mode) {
 				");
             }
 
-            datastore()->update('cat_forums');
+            forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
             bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
@@ -477,7 +477,7 @@ if ($mode) {
             $cat_forums = get_cat_forums();
             fix_orphan_sf();
             \TorrentPier\Legacy\Group::update_user_level('all');
-            datastore()->update('cat_forums');
+            forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
             bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
@@ -547,7 +547,7 @@ if ($mode) {
             renumber_order('forum', $to_id);
             $cat_forums = get_cat_forums();
             $fix = fix_orphan_sf();
-            datastore()->update('cat_forums');
+            forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
             $message = __('FORUMS_UPDATED') . '<br /><br />';
@@ -626,7 +626,7 @@ if ($mode) {
             }
 
             renumber_order('forum', $forum_info['cat_id']);
-            datastore()->update('cat_forums');
+            forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
             $show_main_page = true;
@@ -643,7 +643,7 @@ if ($mode) {
 			");
 
             renumber_order('category');
-            datastore()->update('cat_forums');
+            forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
             $show_main_page = true;
@@ -651,7 +651,7 @@ if ($mode) {
 
         case 'forum_sync':
             \TorrentPier\Legacy\Admin\Common::sync('forum', (int)$_GET[POST_FORUM_URL]);
-            datastore()->update('cat_forums');
+            forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
             $show_main_page = true;
