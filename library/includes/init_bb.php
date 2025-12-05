@@ -45,7 +45,7 @@ function compress_output($contents)
 /**
  * Start output buffering
  */
-if (!defined('IN_AJAX')) {
+if (!defined('IN_AJAX') && !defined('FRONT_CONTROLLER')) {
     ob_start('send_page');
 }
 
@@ -230,12 +230,12 @@ define('DL_URL', config()->get('dl_url'));
 define('FORUM_URL', 'viewforum.php?' . POST_FORUM_URL . '=');
 define('GROUP_URL', 'group.php?' . POST_GROUPS_URL . '=');
 define('LOGIN_URL', config()->get('login_url'));
-define('MODCP_URL', 'modcp.php?' . POST_FORUM_URL . '=');
+define('MODCP_URL', 'modcp?' . POST_FORUM_URL . '=');
 define('PM_URL', config()->get('pm_url'));
 define('POST_URL', 'viewtopic.php?' . POST_POST_URL . '=');
 define('POSTING_URL', config()->get('posting_url'));
-define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;' . POST_USERS_URL . '=');
-define('BONUS_URL', 'profile.php?mode=bonus');
+define('PROFILE_URL', 'profile?mode=viewprofile&amp;' . POST_USERS_URL . '=');
+define('BONUS_URL', 'profile?mode=bonus');
 define('TOPIC_URL', 'viewtopic.php?' . POST_TOPIC_URL . '=');
 define('FILELIST_URL', 'filelist.php?' . POST_TOPIC_URL . '=');
 define('PLAYBACK_M3U_URL', 'playback_m3u.php?' . POST_TOPIC_URL . '=');

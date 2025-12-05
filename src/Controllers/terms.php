@@ -7,13 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'terms');
-
-require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
-
-// Start session management
-user()->session_start();
 
 if (!config()->get('terms') && !IS_ADMIN) {
     redirect('index.php');

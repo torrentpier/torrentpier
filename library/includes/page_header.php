@@ -159,20 +159,20 @@ template()->assign_vars([
     'S_LOGIN_ACTION' => LOGIN_URL,
 
     'U_CUR_DOWNLOADS' => PROFILE_URL . userdata('user_id'),
-    'U_FORUM' => 'viewforum.php',
-    'U_GROUPS' => 'group.php',
+    'U_FORUM' => 'viewforum',
+    'U_GROUPS' => 'group',
     'U_LOGIN_LOGOUT' => $u_login_logout,
-    'U_MEMBERLIST' => 'memberlist.php',
-    'U_MODCP' => 'modcp.php',
-    'U_OPTIONS' => 'profile.php?mode=editprofile',
+    'U_MEMBERLIST' => 'memberlist',
+    'U_MODCP' => 'modcp',
+    'U_OPTIONS' => 'profile?mode=editprofile',
     'U_PRIVATEMSGS' => PM_URL . "?folder=inbox",
     'U_PROFILE' => PROFILE_URL . userdata('user_id'),
     'U_READ_PM' => PM_URL . "?folder=inbox" . ((userdata('user_newest_pm_id') && userdata('user_new_privmsg') == 1) ? "&mode=read&" . POST_POST_URL . "=" . userdata('user_newest_pm_id') : ''),
-    'U_REGISTER' => 'profile.php?mode=register',
-    'U_SEARCH' => 'search.php',
-    'U_SEND_PASSWORD' => "profile.php?mode=sendpassword",
+    'U_REGISTER' => 'profile?mode=register',
+    'U_SEARCH' => 'search',
+    'U_SEND_PASSWORD' => "profile?mode=sendpassword",
     'U_TERMS' => config()->get('terms_and_conditions_url'),
-    'U_TRACKER' => 'tracker.php',
+    'U_TRACKER' => 'tracker',
 
     'SHOW_SIDEBAR1' => !empty((config()->get('page.show_sidebar1') ?? [])[BB_SCRIPT]) || config()->get('show_sidebar1_on_every_page'),
     'SHOW_SIDEBAR2' => !empty((config()->get('page.show_sidebar2') ?? [])[BB_SCRIPT]) || config()->get('show_sidebar2_on_every_page'),
@@ -214,8 +214,8 @@ template()->assign_vars([
     'READONLY' => HTML_READONLY,
     'SELECTED' => HTML_SELECTED,
 
-    'U_SEARCH_SELF_BY_LAST' => "search.php?uid=" . userdata('user_id') . "&amp;o=5",
-    'U_WATCHED_TOPICS' => 'profile.php?mode=watch'
+    'U_SEARCH_SELF_BY_LAST' => "search?uid=" . userdata('user_id') . "&amp;o=5",
+    'U_WATCHED_TOPICS' => 'profile?mode=watch'
 ]);
 
 if (!empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty(userdata('torhelp'))) {

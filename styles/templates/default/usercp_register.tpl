@@ -49,7 +49,7 @@
 
 <p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
 
-<form id="prof-form" method="post" action="profile.php<!-- IF IS_ADMIN && PR_USER_ID -->?{#POST_USERS_URL#}={PR_USER_ID}<!-- ENDIF -->"
+<form id="prof-form" method="post" action="profile<!-- IF IS_ADMIN && PR_USER_ID -->?{#POST_USERS_URL#}={PR_USER_ID}<!-- ENDIF -->"
       class="tokenized" enctype="multipart/form-data">
     <input type="hidden" name="mode" value="{MODE}"/>
     <input type="hidden" name="reg_agreed" value="1"/>

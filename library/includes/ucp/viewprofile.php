@@ -120,7 +120,7 @@ template()->assign_vars([
 
     'U_SEARCH_USER' => "search.php?search_author=1&amp;uid={$profiledata['user_id']}",
     'U_SEARCH_TOPICS' => "search.php?uid={$profiledata['user_id']}&amp;myt=1",
-    'U_SEARCH_RELEASES' => "tracker.php?rid={$profiledata['user_id']}#results",
+    'U_SEARCH_RELEASES' => "tracker?rid={$profiledata['user_id']}#results",
 
     'AVATAR_IMG' => get_avatar($profiledata['user_id'], $profiledata['avatar_ext_id'], !bf($profiledata['user_opt'], 'user_opt', 'dis_avatar')),
 

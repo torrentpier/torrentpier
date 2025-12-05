@@ -185,11 +185,11 @@ $bb_cfg['torstat_days_keep'] = 60; // Days to keep user's per-torrent stats
 $bb_cfg['torhelp_enabled'] = false; // Find dead torrents (without seeder) that user might help seeding
 
 // URL's
-$bb_cfg['ajax_url'] = 'ajax.php'; # "http://{$_SERVER['SERVER_NAME']}/ajax.php"
-$bb_cfg['dl_url'] = 'dl.php?t='; # "http://{$domain_name}/dl.php?t="
-$bb_cfg['login_url'] = 'login.php'; # "http://{$domain_name}/login.php"
-$bb_cfg['posting_url'] = 'posting.php'; # "http://{$domain_name}/posting.php"
-$bb_cfg['pm_url'] = 'privmsg.php'; # "http://{$domain_name}/privmsg.php"
+$bb_cfg['ajax_url'] = 'ajax';
+$bb_cfg['dl_url'] = 'dl?t=';
+$bb_cfg['login_url'] = 'login';
+$bb_cfg['posting_url'] = 'posting';
+$bb_cfg['pm_url'] = 'privmsg';
 
 // Language
 $bb_cfg['auto_language_detection'] = true; // Use browser language (auto-detect) as default language for guests
