@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'memberlist');
-
-require __DIR__ . '/common.php';
-
 user()->session_start(['req_login' => true]);
 
 $start = abs((int)request_var('start', 0));

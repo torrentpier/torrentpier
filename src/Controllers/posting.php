@@ -7,9 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'posting');
-
-require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
 page_cfg('load_tpl_vars', [
@@ -40,9 +37,6 @@ if ($mode == 'smilies') {
     generate_smilies('window');
     exit;
 }
-
-// Start session management
-user()->session_start();
 
 set_die_append_msg($forum_id, $topic_id);
 

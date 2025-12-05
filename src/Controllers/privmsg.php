@@ -7,10 +7,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'pm');
 define('IN_PM', true);
 
-require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
 $privmsg_sent_id = $l_box_name = $to_username = $privmsg_subject = $privmsg_message = $error_msg = '';

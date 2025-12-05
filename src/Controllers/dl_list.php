@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'dl_list');
-
-require __DIR__ . '/common.php';
-
 $forum_id = $_REQUEST[POST_FORUM_URL] ?? 0;
 $topic_id = $_REQUEST[POST_TOPIC_URL] ?? 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
@@ -45,9 +41,6 @@ if (isset($_POST['redirect_type']) && $_POST['redirect_type'] == 'search') {
     $redirect_type = (!$topic_id) ? 'viewforum.php' : 'viewtopic.php';
     $redirect = $full_url ?: ((!$topic_id) ? POST_FORUM_URL . "=$forum_id" : POST_TOPIC_URL . "=$topic_id");
 }
-
-// Start session management
-user()->session_start();
 
 set_die_append_msg();
 

@@ -7,16 +7,11 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'dl');
 define('NO_GZIP', true);
-
-require __DIR__ . '/common.php';
 
 $topic_id = (int)request_var('t', 0);
 $m3u = isset($_GET['m3u']) && $_GET['m3u'];
 
-// Start session
-user()->session_start();
 set_die_append_msg();
 
 if (!$topic_id) {

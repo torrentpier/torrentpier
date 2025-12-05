@@ -7,17 +7,11 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'login');
 define('IN_LOGIN', true);
-
-require __DIR__ . '/common.php';
 
 page_cfg('allow_robots', false);
 
 array_deep($_POST, 'trim');
-
-// Start session management
-user()->session_start();
 
 // Logout
 if (!empty($_GET['logout'])) {

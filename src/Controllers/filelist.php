@@ -7,13 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'filelist');
-
-require __DIR__ . '/common.php';
-
-// Start session management
-user()->session_start();
-
 if (config()->get('bt_disable_dht') && IS_GUEST) {
     bb_die(__('BT_PRIVATE_TRACKER'), 403);
 }

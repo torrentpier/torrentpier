@@ -7,9 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'modcp');
-
-require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
 //

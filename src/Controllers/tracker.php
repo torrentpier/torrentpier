@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'tracker');
-
-require __DIR__ . '/common.php';
-
 // Page config
 page_cfg('include_bbcode_js', true);
 page_cfg('use_tablesorter', true);
