@@ -140,8 +140,6 @@ class Cron
         $row = DB()->fetch_row("SELECT cron_title, cron_script FROM " . BB_CRON . " WHERE cron_title = '" . $_POST['cron_title'] . "' or cron_script = '" . $_POST['cron_script'] . "' ");
 
         if ($row) {
-            
-
             if ($_POST['cron_script'] == $row['cron_script']) {
                 $langmode = __('SCRIPT_DUPLICATE');
             } else {

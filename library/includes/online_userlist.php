@@ -11,8 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-
-
 // Obtain user/online information
 $logged_online = $guests_online = 0;
 $time_online = TIMENOW - 300;

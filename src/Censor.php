@@ -65,7 +65,6 @@ class Censor
      */
     private function loadCensoredWords(): void
     {
-
         if (!$this->isEnabled()) {
             return;
         }

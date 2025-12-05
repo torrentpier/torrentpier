@@ -994,7 +994,6 @@ function get_userdata(int|string $u, bool $is_name = false, bool $allow_guest = 
 
 function make_jumpbox(): void
 {
-
     if (!config()->get('show_jumpbox')) {
         return;
     }
@@ -1010,7 +1009,6 @@ function make_jumpbox(): void
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
 function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '', $all_forums_option = null)
 {
-
     if (is_array($mode)) {
         $not_auth_forums_fary = array_flip($mode);
         $mode = 'not_auth_forums';
@@ -1956,7 +1954,6 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
  */
 function profile_url(array $data, bool $target_blank = false, bool $no_link = false): string
 {
-
     if (!$ranks = datastore()->get('ranks')) {
         datastore()->update('ranks');
         $ranks = datastore()->get('ranks');
@@ -2163,7 +2160,6 @@ function user_birthday_icon($user_birthday, $user_id): string
  */
 function getBanInfo(?int $userId = null): ?array
 {
-
     // Get bans info from datastore
     $bans = datastore()->get('ban_list');
 

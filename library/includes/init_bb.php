@@ -374,7 +374,6 @@ require_once INC_DIR . '/functions.php';
 // Merge database configuration with base configuration using singleton
 config()->merge(bb_get_config(BB_CONFIG));
 
-
 /**
  * Cron
  */

@@ -126,8 +126,6 @@ class User
      */
     public function session_start(array $cfg = [])
     {
-
-
         $update_sessions_table = false;
         $this->cfg = array_merge($this->cfg, $cfg);
 
@@ -482,7 +480,6 @@ class User
      */
     public function set_session_cookies($user_id)
     {
-
         $debug_cookies = [
             COOKIE_DBG,
             'explain',
@@ -706,7 +703,6 @@ class User
      */
     public function get_not_auth_forums($auth_type)
     {
-
         if (IS_ADMIN) {
             return '';
         }

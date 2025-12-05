@@ -96,7 +96,6 @@ class Post
      */
     public static function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig, $robots_indexing, bool $allow_reg_tracker = false, bool $is_moderator = false)
     {
-
         $current_time = TIMENOW;
 
         // Flood control
@@ -326,8 +325,6 @@ class Post
      */
     public static function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id, $post_id)
     {
-        
-
         $message = __('DELETED');
         Common::post_delete($post_id);
 
@@ -501,7 +498,6 @@ class Post
      */
     public static function topic_review($topic_id)
     {
-
         // Fetch posts data
         $review_posts = DB()->fetch_rowset("
 		SELECT

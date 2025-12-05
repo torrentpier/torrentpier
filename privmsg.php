@@ -1420,8 +1420,6 @@ require(PAGE_FOOTER);
 //
 function pm_die($msg)
 {
-    
-
     $msg .= '<br /><br />';
     $msg .= sprintf(__('CLICK_RETURN_INBOX'), '<a href="' . PM_URL . "?folder=inbox" . '">', '</a> ');
     $msg .= sprintf(__('CLICK_RETURN_SENTBOX'), '<a href="' . PM_URL . "?folder=sentbox" . '">', '</a> ');

@@ -96,8 +96,6 @@ class Upload
      */
     public function init(array $cfg = [], array $post_params = [], bool $uploaded_only = true): bool
     {
-        
-
         $this->cfg = array_merge($this->cfg, $cfg);
         $this->file = $post_params;
 

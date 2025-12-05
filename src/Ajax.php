@@ -266,8 +266,6 @@ class Ajax
      */
     public function prompt_for_confirm(string $confirm_msg = ''): void
     {
-        
-
         if (empty($confirm_msg)) {
             $confirm_msg = __('QUESTION');
         }

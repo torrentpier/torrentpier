@@ -27,7 +27,6 @@ class Sitemap
      */
     private function getForumUrls(): array
     {
-
         $forumUrls = [];
 
         $forums = forum_tree();
@@ -68,7 +67,6 @@ class Sitemap
      */
     private function getTopicUrls(): array
     {
-
         $topicUrls = [];
 
         $forums = forum_tree();

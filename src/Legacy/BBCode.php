@@ -338,7 +338,6 @@ class BBCode
      */
     private function smilies_pass(string $text): string
     {
-
         $this->smilies = datastore()->get('smile_replacements');
 
         if (!empty($this->smilies)) {

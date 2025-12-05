@@ -44,8 +44,6 @@ class Moderation
      */
     public static function changeType(int $topicId, int $torType): void
     {
-        
-
         self::getTorrentInfo($topicId); // validates topic exists
 
         if (!IS_AM) {

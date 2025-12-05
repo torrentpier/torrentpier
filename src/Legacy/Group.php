@@ -22,7 +22,6 @@ class Group
      */
     public static function update_user_level($user_id)
     {
-
         if (\is_array($user_id)) {
             $user_id = implode(',', $user_id);
         }

@@ -166,8 +166,6 @@ class Registry
             $totallen = (float)$totallen;
         } elseif (isset($bt_v2)) {
             $fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
-                
-
                 $size = 0;
                 foreach ($array as $key => $value) {
                     if (!isset($value[''])) {
@@ -241,8 +239,6 @@ class Registry
      */
     public static function unregister(int $topicId, string $mode = ''): void
     {
-        
-
         $torrent = self::getTorrentInfo($topicId);
 
         if ($mode == 'request') {

@@ -1052,8 +1052,6 @@ function get_orphan_sf()
  */
 function fix_orphan_sf($orphan_sf_sql = '', $show_mess = false)
 {
-    
-
     $done_mess = '';
 
     if (!$orphan_sf_sql) {

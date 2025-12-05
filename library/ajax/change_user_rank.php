@@ -11,7 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-
 if (!$ranks = datastore()->get('ranks')) {
     datastore()->update('ranks');
     $ranks = datastore()->get('ranks');

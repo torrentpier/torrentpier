@@ -26,8 +26,6 @@ class Passkey
      */
     public static function generate(int $userId, bool $forceGenerate = false): string|false
     {
-        
-
         // Check if user can change passkey
         if (!$forceGenerate) {
             $user = DB()->table(BB_USERS)

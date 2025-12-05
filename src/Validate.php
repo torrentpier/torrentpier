@@ -154,8 +154,6 @@ class Validate
      */
     public static function password(string $password, string $password_confirm)
     {
-        
-
         // Check for empty
         if (empty($password) || empty($password_confirm)) {
             return __('CHOOSE_PASS');

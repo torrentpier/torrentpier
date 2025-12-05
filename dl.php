@@ -44,7 +44,6 @@ if (!$t_data['attach_ext_id']) {
 
 $forum_id = $t_data['forum_id'];
 
-
 // Authorization check
 $is_auth = auth(AUTH_ALL, $forum_id, userdata());
 set_die_append_msg($forum_id, $topic_id);
