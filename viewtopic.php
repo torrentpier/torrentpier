@@ -725,7 +725,8 @@ for ($i = 0; $i < $total_posts; $i++) {
         if (IS_GUEST) {
             template()->assign_var('SHOW_GUEST_STUB', ($t_data['attach_ext_id'] == TORRENT_EXT_ID));
         } elseif ($t_data['attach_ext_id'] == TORRENT_EXT_ID) {
-            require(INC_DIR . '/viewtopic_torrent.php');
+            require_once(INC_DIR . '/viewtopic_torrent.php');
+            render_torrent_block($t_data, $poster_id, $is_auth, $post_id);
         }
     }
 

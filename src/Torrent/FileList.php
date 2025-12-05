@@ -113,7 +113,6 @@ class FileList
 
                         if ($j === $subdir_count) {
                             if (is_string($cur_files_ary)) {
-                                $GLOBALS['bnc_error'] = 1;
                                 break;
                             }
                             $cur_files_ary[] = "$name <i>$length</i>";
