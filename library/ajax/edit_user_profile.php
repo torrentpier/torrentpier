@@ -11,8 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-// global removed
-
 if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
     $this->ajax_die(__('NO_USER_ID_SPECIFIED'));
 }

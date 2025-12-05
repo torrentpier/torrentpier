@@ -11,8 +11,6 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-// global removed
-
 if (!config()->get('torr_server.enabled')) {
     $this->ajax_die(__('MODULE_OFF'));
 }
@@ -55,8 +53,6 @@ if (isset($ffpInfo->streams)) {
     });
     // Audio tracks information
     $audioDub = array_map(function ($stream) {
-        // global removed
-
         $result = '<span class="warnColor2">' . sprintf(__('AUDIO_TRACK'), (!isset($stream->index) || $stream->index === 0) ? 1 : $stream->index) . '</span><br/>';
         if (isset($stream->tags->language)) {
             if (isset($stream->tags->title)) {

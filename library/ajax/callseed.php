@@ -69,8 +69,6 @@ DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " 
 
 function topic_info($topic_id)
 {
-    // global removed
-
     $sql = "
 		SELECT
 			tor.poster_id, tor.forum_id, tor.call_seed_time, tor.tor_status,
