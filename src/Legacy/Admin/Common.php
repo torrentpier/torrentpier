@@ -52,7 +52,7 @@ class Common
 					forum_posts        MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
 					forum_topics       MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
 					PRIMARY KEY (forum_id)
-				) ENGINE = MEMORY
+				) ENGINE = InnoDB
 			");
                 DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_sync_forums");
 
@@ -109,7 +109,7 @@ class Common
 					topic_last_post_id   INT UNSIGNED NOT NULL DEFAULT '0',
 					topic_last_post_time INT UNSIGNED NOT NULL DEFAULT '0',
 					PRIMARY KEY (topic_id)
-				) ENGINE = MEMORY
+				) ENGINE = InnoDB
 			");
                 DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_sync_topics");
 
@@ -165,7 +165,7 @@ class Common
 					user_id    INT NOT NULL DEFAULT '0',
 					user_posts MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
 					PRIMARY KEY (user_id)
-				) ENGINE = MEMORY
+				) ENGINE = InnoDB
 			");
                 DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_user_posts");
 
@@ -256,7 +256,7 @@ class Common
 		CREATE TEMPORARY TABLE $tmp_delete_topics (
 			topic_id INT UNSIGNED NOT NULL DEFAULT '0',
 			PRIMARY KEY (topic_id)
-		) ENGINE = MEMORY
+		) ENGINE = InnoDB
 	");
         DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_delete_topics");
 
@@ -298,7 +298,7 @@ class Common
 			user_id    INT NOT NULL DEFAULT '0',
 			user_posts MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
 			PRIMARY KEY (user_id)
-		) ENGINE = MEMORY
+		) ENGINE = InnoDB
 	");
         DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_user_posts");
 
@@ -604,7 +604,7 @@ class Common
 		CREATE TEMPORARY TABLE $tmp_delete_posts (
 			post_id INT UNSIGNED NOT NULL DEFAULT '0',
 			PRIMARY KEY (post_id)
-		) ENGINE = MEMORY
+		) ENGINE = InnoDB
 	");
         DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_delete_posts");
 
