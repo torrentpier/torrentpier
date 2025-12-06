@@ -919,8 +919,8 @@ if (!isset($_REQUEST['dosearch'])) {
             'BAN' => (!isset($banned[$rowset[$i]['user_id']])) ? __('NOT_BANNED') : __('BANNED'),
             'ABLED' => $rowset[$i]['user_active'] ? __('ENABLED') : __('DISABLED'),
 
-            'U_VIEWPOSTS' => "../search.php?search_author=1&amp;uid={$rowset[$i]['user_id']}",
-            'U_MANAGE' => '../profile.php?mode=editprofile&' . POST_USERS_URL . '=' . $rowset[$i]['user_id'] . '&admin=1',
+            'U_VIEWPOSTS' => "../search?search_author=1&amp;uid={$rowset[$i]['user_id']}",
+            'U_MANAGE' => '../profile?mode=editprofile&' . POST_USERS_URL . '=' . $rowset[$i]['user_id'] . '&admin=1',
             'U_PERMISSIONS' => 'admin_ug_auth.php?mode=user&' . POST_USERS_URL . '=' . $rowset[$i]['user_id'],
         ]);
     }

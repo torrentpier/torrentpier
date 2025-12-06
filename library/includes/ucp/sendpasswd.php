@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
             $emailer->assign_vars([
                 'USERNAME' => $username,
                 'PASSWORD' => $user_password,
-                'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)
+                'U_ACTIVATE' => make_url('profile?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)
             ]);
 
             $emailer->send();
@@ -78,7 +78,7 @@ template()->assign_vars([
     'EMAIL' => $email,
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
     'S_HIDDEN_FIELDS' => '',
-    'S_PROFILE_ACTION' => 'profile.php?mode=sendpassword'
+    'S_PROFILE_ACTION' => 'profile?mode=sendpassword'
 ]);
 
 print_page('usercp_sendpasswd.tpl');

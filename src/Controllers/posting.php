@@ -7,9 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'posting');
-
-require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
 page_cfg('load_tpl_vars', [
@@ -40,9 +37,6 @@ if ($mode == 'smilies') {
     generate_smilies('window');
     exit;
 }
-
-// Start session management
-user()->session_start();
 
 set_die_append_msg($forum_id, $topic_id);
 
@@ -370,7 +364,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             if (!$post_data['first_post']) {
                 \TorrentPier\Legacy\Post::delete_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id);
             } else {
-                redirect('modcp.php?' . POST_TOPIC_URL . "=$topic_id&mode=delete&sid=" . userdata('session_id'));
+                redirect('modcp?' . POST_TOPIC_URL . "=$topic_id&mode=delete&sid=" . userdata('session_id'));
             }
             break;
     }

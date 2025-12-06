@@ -7,9 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'search');
-
-require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
 use TorrentPier\Search\SearchParams;
@@ -59,7 +56,7 @@ if (isset($_POST['del_my_post'])) {
 
     DB()->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = " . user()->id);
 
-    redirect("search.php?" . POST_USERS_URL . "=" . user()->id);
+    redirect("search?" . POST_USERS_URL . "=" . user()->id);
 }
 
 if ($mode =& $_REQUEST['mode']) {
@@ -80,7 +77,7 @@ $text_match_max_len = 60;
 $poster_name_max_len = 25;
 
 $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
-$url = basename(__FILE__);
+$url = 'search';
 
 $anon_id = GUEST_UID;
 $user_id = userdata('user_id');
@@ -277,8 +274,8 @@ if (empty($_GET) && empty($_POST)) {
 
         'THIS_USER_ID' => userdata('user_id'),
         'THIS_USER_NAME' => addslashes(userdata('username')),
-        'SEARCH_ACTION' => 'search.php',
-        'U_SEARCH_USER' => 'search.php?mode=searchuser&amp;input_name=' . $params->key('poster_name'),
+        'SEARCH_ACTION' => 'search',
+        'U_SEARCH_USER' => 'search?mode=searchuser&amp;input_name=' . $params->key('poster_name'),
         'ONLOAD_FOCUS_ID' => 'text_match_input',
 
         'MY_TOPICS_ID' => 'my_topics',
@@ -504,7 +501,7 @@ if ($post_mode) {
         }
 
         if (!$SQL['WHERE']) {
-            redirect(basename(__FILE__));
+            redirect($url);
         }
 
         $SQL['GROUP BY'][] = "item_id";
@@ -716,7 +713,7 @@ else {
         }
 
         if (!$SQL['WHERE']) {
-            redirect(basename(__FILE__));
+            redirect($url);
         }
 
         $SQL['GROUP BY'][] = "item_id";
@@ -839,7 +836,7 @@ if ($items_display) {
     print_page('search_results.tpl');
 }
 
-redirect(basename(__FILE__));
+redirect($url);
 
 // ----------------------------------------------------------- //
 // Functions
@@ -953,7 +950,7 @@ function username_search($search_match)
         'USERNAME' => !empty($search_match) ? htmlCHR(stripslashes(html_entity_decode($search_match))) : '',
         'INPUT_NAME' => $input_name,
         'USERNAME_OPTIONS' => $username_list,
-        'SEARCH_ACTION' => "search.php?mode=searchuser&amp;input_name=$input_name",
+        'SEARCH_ACTION' => "search?mode=searchuser&amp;input_name=$input_name",
     ));
 
     print_page('search.tpl', 'simple');

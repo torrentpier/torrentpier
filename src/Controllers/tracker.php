@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'tracker');
-
-require __DIR__ . '/common.php';
-
 // Page config
 page_cfg('include_bbcode_js', true);
 page_cfg('use_tablesorter', true);
@@ -32,7 +28,7 @@ $title_match_max_len = 60;
 $poster_name_max_len = 25;
 $tor_colspan = 12; // torrents table colspan with all columns
 $per_page = config()->get('topics_per_page');
-$tracker_url = basename(__FILE__);
+$tracker_url = 'tracker';
 
 $time_format = 'H:i';
 $date_format = 'j-M-y';
@@ -865,7 +861,7 @@ template()->assign_vars(array(
     'SHOW_CURSOR' => user()->opt_js['hl_tr'],
     'HIDE_CONTENTS' => user()->opt_js['h_tsp'],
 
-    'U_SEARCH_USER' => "search.php?mode=searchuser&input_name=$poster_name_key",
+    'U_SEARCH_USER' => "search?mode=searchuser&input_name=$poster_name_key",
 ));
 
 // Hidden fields
@@ -914,7 +910,7 @@ template()->assign_vars(array(
     'SHOW_SPEED' => $show_speed_val,
     'MAX_FS' => $max_forums_selected,
     'L_MAX_FS' => sprintf(__('SEL_CHAPTERS_HELP'), $max_forums_selected),
-    'TRACKER_URL' => make_url('tracker.php?'),
+    'TRACKER_URL' => make_url('tracker?'),
 
     'TR_CAT_URL' => "$tracker_url?$cat_key=",
     'TR_FORUM_URL' => "$tracker_url?$forum_key=",

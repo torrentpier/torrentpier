@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'memberlist');
-
-require __DIR__ . '/common.php';
-
 user()->session_start(['req_login' => true]);
 
 $start = abs((int)request_var('start', 0));
@@ -124,7 +120,7 @@ if ($result = DB()->fetch_rowset($sql)) {
 }
 
 // Pagination
-$paginationurl = "memberlist.php?mode=$mode&amp;order=$sort_order&amp;role=$role";
+$paginationurl = "memberlist?mode=$mode&amp;order=$sort_order&amp;role=$role";
 $paginationurl .= !empty($username) ? "&amp;username=$username" : '';
 
 if ($mode != 'topten') {
@@ -145,7 +141,7 @@ template()->assign_vars([
     'S_MODE_SELECT' => $select_sort_mode,
     'S_ORDER_SELECT' => $select_sort_order,
     'S_ROLE_SELECT' => $select_sort_role,
-    'S_MODE_ACTION' => "memberlist.php?mode=$mode&amp;order=$sort_order&amp;role=$role",
+    'S_MODE_ACTION' => "memberlist?mode=$mode&amp;order=$sort_order&amp;role=$role",
     'S_USERNAME' => $username,
 ]);
 

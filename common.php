@@ -34,7 +34,7 @@ if (empty($_SERVER['SERVER_ADDR'])) {
 if (!defined('BB_ROOT')) {
     define('BB_ROOT', './');
 }
-if (!defined('BB_SCRIPT')) {
+if (!defined('BB_SCRIPT') && !defined('FRONT_CONTROLLER')) {
     define('BB_SCRIPT', '');
 }
 

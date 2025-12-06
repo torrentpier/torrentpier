@@ -150,10 +150,10 @@ $bb_cfg['ip2country_settings'] = [
 ];
 
 // FAQ url help link
-$bb_cfg['how_to_download_url_help'] = 'viewtopic.php?t=1'; // How to download?
-$bb_cfg['what_is_torrent_url_help'] = 'viewtopic.php?t=2'; // What is a torrent?
-$bb_cfg['ratio_url_help'] = 'viewtopic.php?t=3'; // Rating and limits
-$bb_cfg['search_help_url'] = 'viewtopic.php?t=4'; // Help doc about performing basic searches
+$bb_cfg['how_to_download_url_help'] = 'viewtopic?t=1'; // How to download?
+$bb_cfg['what_is_torrent_url_help'] = 'viewtopic?t=2'; // What is a torrent?
+$bb_cfg['ratio_url_help'] = 'viewtopic?t=3'; // Rating and limits
+$bb_cfg['search_help_url'] = 'viewtopic?t=4'; // Help doc about performing basic searches
 
 // Torrents
 $bb_cfg['bt_min_ratio_allow_dl_tor'] = 0.3; // 0 - disable
@@ -185,11 +185,11 @@ $bb_cfg['torstat_days_keep'] = 60; // Days to keep user's per-torrent stats
 $bb_cfg['torhelp_enabled'] = false; // Find dead torrents (without seeder) that user might help seeding
 
 // URL's
-$bb_cfg['ajax_url'] = 'ajax.php'; # "http://{$_SERVER['SERVER_NAME']}/ajax.php"
-$bb_cfg['dl_url'] = 'dl.php?t='; # "http://{$domain_name}/dl.php?t="
-$bb_cfg['login_url'] = 'login.php'; # "http://{$domain_name}/login.php"
-$bb_cfg['posting_url'] = 'posting.php'; # "http://{$domain_name}/posting.php"
-$bb_cfg['pm_url'] = 'privmsg.php'; # "http://{$domain_name}/privmsg.php"
+$bb_cfg['ajax_url'] = 'ajax';
+$bb_cfg['dl_url'] = 'dl?t=';
+$bb_cfg['login_url'] = 'login';
+$bb_cfg['posting_url'] = 'posting';
+$bb_cfg['pm_url'] = 'privmsg';
 
 // Language
 $bb_cfg['auto_language_detection'] = true; // Use browser language (auto-detect) as default language for guests
@@ -634,13 +634,13 @@ $bb_cfg['allow_change'] = [
 
 $bb_cfg['trash_forum_id'] = 0; // (int) 7
 
-$bb_cfg['first_logon_redirect_url'] = 'index.php'; // Which page should the user be redirected to after registration is completed?
-$bb_cfg['terms_and_conditions_url'] = 'terms.php'; // Link to forum rules page
+$bb_cfg['first_logon_redirect_url'] = '/'; // Which page should the user be redirected to after registration is completed?
+$bb_cfg['terms_and_conditions_url'] = 'terms'; // Link to forum rules page
 $bb_cfg['tor_help_links'] = '<div class="mrg_2"><a target="_blank" class="genmed" href="https://yoursite.com/">See $bb_cfg[\'tor_help_links\'] in config.php</a></div>';
 
-$bb_cfg['user_agreement_url'] = 'info.php?show=user_agreement';
-$bb_cfg['copyright_holders_url'] = 'info.php?show=copyright_holders';
-$bb_cfg['advert_url'] = 'info.php?show=advert';
+$bb_cfg['user_agreement_url'] = 'info?show=user_agreement';
+$bb_cfg['copyright_holders_url'] = 'info?show=copyright_holders';
+$bb_cfg['advert_url'] = 'info?show=advert';
 
 // Extensions
 $bb_cfg['file_id_ext'] = [

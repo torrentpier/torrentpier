@@ -152,7 +152,7 @@ ajax.callback.mod_action = function (data) {
 </script>
 
 <div id="mod-action-content" style="display: none;">
-<form id="mod-action" method="post" action="modcp.php" class="tokenized">
+<form id="mod-action" method="post" action="modcp" class="tokenized">
 	<input type="hidden" name="{#POST_FORUM_URL#}" value="{FORUM_ID}" />
 	<div class="floatL">
 	<input type="checkbox" onclick="$('.topic-chbox').attr({ checked: this.checked }); if(this.checked){$('.tt-text').addClass('hl-tt');}else{$('.tt-text').removeClass('hl-tt');}" />
@@ -393,7 +393,7 @@ td.topic_id { cursor: pointer; }
 		<td class="small bold nowrap tRight w100">
 			&nbsp;
 			<!-- IF LOGGED_IN -->
-			<a class="small" href="feed.php?type=f&id={FORUM_ID}" target="_blank">{{ FEED_IMG|raw }} {L_ATOM_SUBSCRIBE}</a>&nbsp;&#0183;
+			<a class="small" href="feed?type=f&id={FORUM_ID}" target="_blank">{{ FEED_IMG|raw }} {L_ATOM_SUBSCRIBE}</a>&nbsp;&#0183;
 			<a class="small" href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a>&nbsp;&#0183;
 			<a class="menu-root" href="#only-new-options">{L_DISPLAYING_OPTIONS}</a>
 			<!-- ENDIF / LOGGED_IN -->

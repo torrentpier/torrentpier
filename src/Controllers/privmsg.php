@@ -7,10 +7,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'pm');
 define('IN_PM', true);
 
-require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
 $privmsg_sent_id = $l_box_name = $to_username = $privmsg_subject = $privmsg_message = $error_msg = '';
@@ -359,10 +357,10 @@ if ($mode == 'read') {
 
     $post_date = bb_date($privmsg['privmsgs_date']);
 
-    $temp_url = "profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $user_id_from;
+    $temp_url = "profile?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $user_id_from;
     $profile = '<a href="' . $temp_url . '">' . __('READ_PROFILE') . '</a>';
 
-    $temp_url = "search.php?search_author=1&amp;uid=$user_id_from";
+    $temp_url = "search?search_author=1&amp;uid=$user_id_from";
     $search = '<a href="' . $temp_url . '">' . sprintf(__('SEARCH_USER_POSTS'), $username_from) . '</a>';
 
     //
@@ -1123,7 +1121,7 @@ if ($mode == 'read') {
         'S_HIDDEN_FORM_FIELDS' => $s_hidden_fields,
         'S_POST_ACTION' => PM_URL,
 
-        'U_SEARCH_USER' => 'search.php?mode=searchuser',
+        'U_SEARCH_USER' => 'search?mode=searchuser',
         'U_VIEW_FORUM' => PM_URL
     ]);
 } else {

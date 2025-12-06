@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'vote');
-
-require __DIR__ . '/common.php';
-
 // Start session management
 user()->session_start(['req_login' => true]);
 

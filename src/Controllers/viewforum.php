@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'forum');
-
-require __DIR__ . '/common.php';
-
 page_cfg('include_bbcode_js', true);
 
 $show_last_topic = true;
@@ -27,11 +23,6 @@ page_cfg('load_tpl_vars', [
 $forum_id = (int)request_var(POST_FORUM_URL, '');
 $start = abs((int)request_var('start', ''));
 $mark_read = (request_var('mark', '') === 'topics');
-
-$anon = GUEST_UID;
-
-// Start session
-user()->session_start();
 
 $lastvisit = IS_GUEST ? TIMENOW : userdata('user_lastvisit');
 
@@ -115,7 +106,7 @@ if ($mark_read && !IS_GUEST) {
 }
 
 // Subforums
-$show_subforums = config()->get('sf_on_first_page_only') ? !$start : true;
+$show_subforums = !config()->get('sf_on_first_page_only') || !$start;
 
 $forums = forum_tree();
 
@@ -131,7 +122,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		SELECT
 			f.forum_id, f.forum_status, f.forum_last_post_id, f.forum_posts, f.forum_topics,
 			t.topic_last_post_time, t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
-			p.poster_id AS sf_last_user_id, IF(p.poster_id = $anon, p.post_username, u.username) AS sf_last_username, u.user_rank
+			p.poster_id AS sf_last_user_id, IF(p.poster_id = " . GUEST_UID . ", p.post_username, u.username) AS sf_last_username, u.user_rank
 		FROM      " . BB_FORUMS . " f
 		LEFT JOIN " . BB_TOPICS . " t ON(f.forum_last_post_id = t.topic_last_post_id)
 		LEFT JOIN " . BB_POSTS . " p ON(f.forum_last_post_id = p.post_id)
@@ -139,7 +130,6 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		WHERE f.forum_parent = $forum_id
 			$only_new_sql
 			$ignore_forum_sql
-		GROUP BY f.forum_id
 		ORDER BY f.forum_order
 	";
 
@@ -332,9 +322,9 @@ if ($topics_csv = implode(',', $topic_ids)) {
     $topic_rowset = DB()->fetch_rowset("
 		SELECT
 			t.*, t.topic_poster AS first_user_id, u1.user_rank as first_user_rank,
-			IF(t.topic_poster = $anon, p1.post_username, u1.username) AS first_username,
+			IF(t.topic_poster = " . GUEST_UID . ", p1.post_username, u1.username) AS first_username,
 			p2.poster_id AS last_user_id, u2.user_rank as last_user_rank,
-			IF(p2.poster_id = $anon, p2.post_username, u2.username) AS last_username
+			IF(p2.poster_id = " . GUEST_UID . ", p2.post_username, u2.username) AS last_username
 				$select_tor_sql
 		FROM      " . BB_TOPICS . " t
 		LEFT JOIN " . BB_POSTS . " p1 ON(t.topic_first_post_id = p1.post_id)

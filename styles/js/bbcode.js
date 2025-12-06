@@ -340,7 +340,7 @@ function initQuotes(context) {
     var q_title = (name ? '<b>' + name + '</b> ' + bbl['wrote'] + ':' : '<b>' + bbl['quote'] + '</b>');
     if (quoted_pid = $q.children('u.q-post:first').text()) {
       var on_this_page = $('#post_' + quoted_pid).length;
-      var href = (on_this_page) ? '#' + quoted_pid : './viewtopic.php?p=' + quoted_pid + '#' + quoted_pid;
+      var href = (on_this_page) ? '#' + quoted_pid : './viewtopic?p=' + quoted_pid + '#' + quoted_pid;
       q_title += ' <a href="' + href + '" title="' + bbl['quoted_post'] + '"><img src="' + bb_url + 'styles/templates/default/images/icon_latest_reply.gif" class="icon2" alt="" /></a>';
     }
     $q.before('<div class="q-head">' + q_title + '</div>');

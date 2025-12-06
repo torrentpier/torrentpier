@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'group_edit');
-
-require __DIR__ . '/common.php';
-
 page_cfg('include_bbcode_js', true);
 
 // Start session management
@@ -74,7 +70,7 @@ if ($is_moderator) {
         'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? ' checked' : '',
         'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? ' checked' : '',
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
-        'S_GROUP_CONFIG_ACTION' => "group_edit.php?" . POST_GROUPS_URL . "=$group_id",
+        'S_GROUP_CONFIG_ACTION' => "group_edit?" . POST_GROUPS_URL . "=$group_id",
 
         'AVATAR_EXPLAIN' => sprintf(__('AVATAR_EXPLAIN'), config()->get('group_avatars.max_width'), config()->get('group_avatars.max_height'), humn_size(config()->get('group_avatars.max_size'))),
         'AVATAR_IMG' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),

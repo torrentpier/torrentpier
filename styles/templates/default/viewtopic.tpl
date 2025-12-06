@@ -199,7 +199,7 @@ ajax.callback.post_mod_comment = function(data) {
 <!-- IF SHOW_DL_LIST || SHOW_TOR_ACT --><!-- INCLUDE viewtopic_torrent.tpl --><!-- ENDIF -->
 
 <!-- IF TOPIC_HAS_POLL or CAN_MANAGE_POLL -->
-<form id="poll-form" method="post" action="poll.php" style="display: none;">
+<form id="poll-form" method="post" action="poll" style="display: none;">
 <input id="poll-mode" type="hidden" name="mode" value="" />
 <input type="hidden" name="topic_id" value="{TOPIC_ID}" />
 <input type="hidden" name="{TOPIC_HASH}" value="1" />
@@ -527,7 +527,7 @@ function build_poll_add_form (src_el)
 <tr id="del_split_row" class="row5" style="display: none;">
 	<td colspan="2" class="med pad_4 td2">
 	<form method="post" action="{S_SPLIT_ACTION}">
-	<input type="hidden" name="redirect" value="modcp.php?{#POST_TOPIC_URL#}={TOPIC_ID}&amp;mode=split" />
+	<input type="hidden" name="redirect" value="modcp?{#POST_TOPIC_URL#}={TOPIC_ID}&amp;mode=split" />
 	<input type="hidden" name="{#POST_FORUM_URL#}" value="{FORUM_ID}" />
 	<input type="hidden" name="{#POST_TOPIC_URL#}" value="{TOPIC_ID}" />
 	<input type="hidden" name="start" value="{START}" />

@@ -101,8 +101,8 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
             'QUOTE_URL' => POSTING_URL . '?mode=quote&amp;' . POST_POST_URL . '=',
             'EDIT_POST_URL' => POSTING_URL . '?mode=editpost&amp;' . POST_POST_URL . '=',
             'DELETE_POST_URL' => POSTING_URL . '?mode=delete&amp;' . POST_POST_URL . '=',
-            'IP_POST_URL' => 'modcp.php?mode=ip&amp;' . POST_POST_URL . '=',
-            'EMAIL_URL' => 'profile.php?mode=email&amp;' . POST_USERS_URL . '=',
+            'IP_POST_URL' => 'modcp?mode=ip&amp;' . POST_POST_URL . '=',
+            'EMAIL_URL' => 'profile?mode=email&amp;' . POST_USERS_URL . '=',
         ];
     }
 
