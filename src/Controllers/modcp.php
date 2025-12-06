@@ -603,7 +603,7 @@ switch ($mode) {
         }
 
         $no_lookup = false;
-        if (!$ip_this_post = \TorrentPier\Helpers\IPHelper::long2ip_extended($post_row['poster_ip'])) {
+        if (!$ip_this_post = \TorrentPier\Helpers\IPHelper::decode($post_row['poster_ip'])) {
             $ip_this_post = __('NOT_AVAILABLE');
             $no_lookup = true;
         }
@@ -638,7 +638,7 @@ switch ($mode) {
                 }
 
                 $no_lookup = false;
-                if (!$ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($row['poster_ip'])) {
+                if (!$ip = \TorrentPier\Helpers\IPHelper::decode($row['poster_ip'])) {
                     $ip = __('NOT_AVAILABLE');
                     $no_lookup = true;
                 }

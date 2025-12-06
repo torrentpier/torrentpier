@@ -20,6 +20,15 @@ $max_forum_name_length = 50;
 $yes_sign = '&radic;';
 $no_sign = 'x';
 
+// Human-readable names for forum access modes
+$auth_mode_names = [
+    AUTH_ALL => $lang['FORUM_ALL'],
+    AUTH_REG => $lang['FORUM_REG'],
+    AUTH_ACL => $lang['FORUM_PRIVATE'],
+    AUTH_MOD => $lang['FORUM_MOD'],
+    AUTH_ADMIN => $lang['FORUM_ADMIN'],
+];
+
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : 0;
 $user_id = isset($_REQUEST[POST_USERS_URL]) ? (int)$_REQUEST[POST_USERS_URL] : 0;
 $cat_id = isset($_REQUEST[POST_CAT_URL]) ? (int)$_REQUEST[POST_CAT_URL] : 0;
@@ -173,13 +182,13 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     if (!empty($_POST['username'])) {
         $this_userdata = get_userdata($_POST['username'], true);
-        $user_id = $this_userdata['user_id'];
     } else {
         $this_userdata = get_userdata($user_id);
     }
     if (!$this_userdata) {
         bb_die(__('NO_SUCH_USER'));
     }
+    $user_id = $this_userdata['user_id'];
 
     $forums = forum_tree();
 
@@ -230,14 +239,26 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                 $f_perm = $f_data[$auth_type];
                 $auth_via_acl = ($u_access[$f_id][$auth_type] || $g_access[$f_id][$auth_type]);
 
+                // Build tooltip for disabled cells
+                $tooltip = '';
                 if ($f_perm == AUTH_ACL) {
                     $disabled = ($auth_mod || $g_access[$f_id][$auth_type]);
                     $perm_sign = ($auth_via_acl || $auth_mod) ? $yes_sign : $no_sign;
                     $acl_class = ($auth_via_acl || $auth_mod) ? 'yes' : 'no';
+                    if ($disabled) {
+                        if ($auth_mod) {
+                            $tooltip = $lang['AUTH_TOOLTIP_MOD_OVERRIDE'];
+                        } elseif ($g_access[$f_id][$auth_type]) {
+                            $tooltip = $lang['AUTH_TOOLTIP_GROUP_HAS'];
+                        }
+                    }
                 } else {
                     $disabled = true;
                     $perm_sign = $auth_via_acl ? $yes_sign : $no_sign;
                     $acl_class = $auth_via_acl ? 'yes' : 'no';
+                    // Show who has access based on forum mode
+                    $mode_name = $auth_mode_names[$f_perm] ?? '?';
+                    $tooltip = sprintf($lang['AUTH_TOOLTIP_FORUM_MODE'], $mode_name);
                 }
 
                 template()->assign_block_vars('c.f.acl', array(
@@ -247,6 +268,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                     'FORUM_ID' => $f_id,
                     'ACL_TYPE_BF' => $bf_num,
                     'ACL_VAL' => $auth_via_acl ? 1 : 0,
+                    'TOOLTIP' => $tooltip,
                 ));
             }
         }
@@ -344,14 +366,22 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                 $f_perm = $f_data[$auth_type];
                 $auth_via_acl = $u_access[$f_id][$auth_type];
 
+                // Build tooltip for disabled cells
+                $tooltip = '';
                 if ($f_perm == AUTH_ACL) {
                     $disabled = $auth_mod;
                     $perm_sign = ($auth_via_acl || $auth_mod) ? $yes_sign : $no_sign;
                     $acl_class = ($auth_via_acl || $auth_mod) ? 'yes' : 'no';
+                    if ($disabled) {
+                        $tooltip = $lang['AUTH_TOOLTIP_MOD_OVERRIDE'];
+                    }
                 } else {
                     $disabled = true;
                     $perm_sign = $auth_via_acl ? $yes_sign : $no_sign;
                     $acl_class = $auth_via_acl ? 'yes' : 'no';
+                    // Show who has access based on forum mode
+                    $mode_name = $auth_mode_names[$f_perm] ?? '?';
+                    $tooltip = sprintf($lang['AUTH_TOOLTIP_FORUM_MODE'], $mode_name);
                 }
 
                 template()->assign_block_vars('c.f.acl', array(
@@ -361,6 +391,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                     'FORUM_ID' => $f_id,
                     'ACL_TYPE_BF' => $bf_num,
                     'ACL_VAL' => $auth_via_acl ? 1 : 0,
+                    'TOOLTIP' => $tooltip,
                 ));
             }
         }
