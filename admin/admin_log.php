@@ -269,7 +269,7 @@ if ($log_rowset) {
             'USER_ID' => $row['log_user_id'],
             'USERNAME' => profile_url($row, true),
             'USER_HREF_S' => url_arg($url, $user_key, $row['log_user_id']),
-            'USER_IP' => \TorrentPier\Helpers\IPHelper::isValid($row['log_user_ip']) ? \TorrentPier\Helpers\IPHelper::long2ip_extended($row['log_user_ip']) : '127.0.0.1',
+            'USER_IP' => \TorrentPier\Helpers\IPHelper::decode($row['log_user_ip']),
 
             'FORUM_ID' => $row['log_forum_id'],
             'FORUM_HREF' => BB_ROOT . FORUM_URL . $row['log_forum_id'],

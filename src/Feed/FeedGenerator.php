@@ -85,7 +85,7 @@ final class FeedGenerator
             }
 
             // Include the current locale in a cache key to ensure language-specific feeds
-            $locale = lang()->getCurrentLanguage();
+            $locale = lang()->currentLanguage;
             $cacheKey = $provider->getCacheKey() . ':lang=' . $locale;
             $cache = CACHE('bb_cache');
 

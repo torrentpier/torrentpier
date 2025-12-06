@@ -9,6 +9,8 @@
 
 namespace TorrentPier;
 
+use LogicException;
+
 /**
  * Language management class
  *
@@ -20,12 +22,16 @@ class Language
     private static ?Language $instance = null;
     private array $userLanguage = [];
     private array $sourceLanguage = [];
-    private string $currentLanguage = '';
-    private string $sourceLanguageCode = 'source';
+    private(set) string $currentLanguage = '';
     private bool $initialized = false;
+
+    private string $libraryLangDir;
+    private string $vendorLangDir;
 
     private function __construct()
     {
+        $this->libraryLangDir = BB_PATH . '/library/language';
+        $this->vendorLangDir = BB_PATH . '/vendor/torrentpier/translations/languages';
     }
 
     /**
@@ -71,10 +77,28 @@ class Language
         $this->loadUserLanguage($userLang);
 
         // Set locale
-        $locale = config()->get("lang.{$userLang}.locale", 'en_US.UTF-8');
+        $locale = config()->get("lang.$userLang.locale", 'en_US.UTF-8');
         setlocale(LC_ALL, $locale);
 
         $this->initialized = true;
+    }
+
+    /**
+     * Find language file in library or vendor directories
+     */
+    private function findLangFile(string $langCode, string $filename = 'main.php'): ?string
+    {
+        $libraryFile = $this->libraryLangDir . '/' . $langCode . '/' . $filename;
+        if (is_file($libraryFile)) {
+            return $libraryFile;
+        }
+
+        $vendorFile = $this->vendorLangDir . '/' . $langCode . '/' . $filename;
+        if (is_file($vendorFile)) {
+            return $vendorFile;
+        }
+
+        return null;
     }
 
     /**
@@ -82,8 +106,8 @@ class Language
      */
     private function loadSourceLanguage(): void
     {
-        $sourceFile = LANG_ROOT_DIR . '/source/main.php';
-        if (is_file($sourceFile)) {
+        $sourceFile = $this->findLangFile('source');
+        if ($sourceFile) {
             $lang = [];
             require $sourceFile;
             $this->sourceLanguage = $lang;
@@ -95,15 +119,15 @@ class Language
      */
     private function loadUserLanguage(string $userLang): void
     {
-        $userFile = LANG_ROOT_DIR . '/' . $userLang . '/main.php';
-        if (is_file($userFile)) {
+        $userFile = $this->findLangFile($userLang);
+        if ($userFile) {
             $lang = [];
             require $userFile;
             $this->userLanguage = $lang;
         } else {
             // Fall back to default language if user language doesn't exist
-            $defaultFile = LANG_ROOT_DIR . '/' . config()->get('default_lang', 'source') . '/main.php';
-            if (is_file($defaultFile)) {
+            $defaultFile = $this->findLangFile(config()->get('default_lang', 'source'));
+            if ($defaultFile) {
                 $lang = [];
                 require $defaultFile;
                 $this->userLanguage = $lang;
@@ -128,7 +152,7 @@ class Language
     }
 
     /**
-     * Get a language string from source language
+     * Get a language string from the source language
      */
     public function getSource(string $key, mixed $default = null): mixed
     {
@@ -168,14 +192,6 @@ class Language
     }
 
     /**
-     * Get current language code
-     */
-    public function getCurrentLanguage(): string
-    {
-        return $this->currentLanguage;
-    }
-
-    /**
      * Get available languages from config
      */
     public function getAvailableLanguages(): array
@@ -192,11 +208,11 @@ class Language
             $language = $this->currentLanguage;
         }
 
-        $filepath = LANG_ROOT_DIR . '/' . $language . '/' . $filename . '.php';
-        if (!is_file($filepath)) {
-            // Try source language as fallback
-            $filepath = LANG_ROOT_DIR . '/source/' . $filename . '.php';
-            if (!is_file($filepath)) {
+        $filepath = $this->findLangFile($language, $filename . '.php');
+        if (!$filepath) {
+            // Try source language as a fallback
+            $filepath = $this->findLangFile('source', $filename . '.php');
+            if (!$filepath) {
                 return false;
             }
         }
@@ -267,7 +283,7 @@ class Language
             $code = $this->currentLanguage;
         }
 
-        return config()->get("lang.{$code}.name", $code);
+        return config()->get("lang.$code.name", $code);
     }
 
     /**
@@ -279,7 +295,7 @@ class Language
             $code = $this->currentLanguage;
         }
 
-        return config()->get("lang.{$code}.locale", 'en_US.UTF-8');
+        return config()->get("lang.$code.locale", 'en_US.UTF-8');
     }
 
     /**
@@ -299,7 +315,7 @@ class Language
     }
 
     /**
-     * Magic method to check if property exists
+     * Magic method to check if a property exists
      */
     public function __isset(string $key): bool
     {
@@ -318,7 +334,7 @@ class Language
      */
     public function __serialize(): array
     {
-        throw new \LogicException("Cannot serialize a singleton.");
+        throw new LogicException("Cannot serialize a singleton.");
     }
 
     /**
@@ -326,6 +342,6 @@ class Language
      */
     public function __unserialize(array $data): void
     {
-        throw new \LogicException("Cannot unserialize a singleton.");
+        throw new LogicException("Cannot unserialize a singleton.");
     }
 }

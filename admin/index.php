@@ -198,7 +198,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             for ($i = 0, $iMax = count($onlinerow_reg); $i < $iMax; $i++) {
                 $users_count++;
                 $row_class = 'row1';
-                $reg_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($onlinerow_reg[$i]['session_ip']);
+                $reg_ip = \TorrentPier\Helpers\IPHelper::decode($onlinerow_reg[$i]['session_ip']);
 
                 template()->assign_block_vars('reg_user_row', [
                     'ROW_CLASS' => $row_class,
@@ -218,7 +218,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             for ($i = 0, $iMax = count($onlinerow_guest); $i < $iMax; $i++) {
                 $guest_users++;
                 $row_class = 'row2';
-                $guest_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($onlinerow_guest[$i]['session_ip']);
+                $guest_ip = \TorrentPier\Helpers\IPHelper::decode($onlinerow_guest[$i]['session_ip']);
 
                 template()->assign_block_vars('guest_user_row', [
                     'ROW_CLASS' => $row_class,
