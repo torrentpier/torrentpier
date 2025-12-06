@@ -77,7 +77,7 @@ $text_match_max_len = 60;
 $poster_name_max_len = 25;
 
 $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
-$url = basename(__FILE__);
+$url = 'search';
 
 $anon_id = GUEST_UID;
 $user_id = userdata('user_id');
@@ -501,7 +501,7 @@ if ($post_mode) {
         }
 
         if (!$SQL['WHERE']) {
-            redirect(basename(__FILE__));
+            redirect($url);
         }
 
         $SQL['GROUP BY'][] = "item_id";
@@ -713,7 +713,7 @@ else {
         }
 
         if (!$SQL['WHERE']) {
-            redirect(basename(__FILE__));
+            redirect($url);
         }
 
         $SQL['GROUP BY'][] = "item_id";
@@ -836,7 +836,7 @@ if ($items_display) {
     print_page('search_results.tpl');
 }
 
-redirect(basename(__FILE__));
+redirect($url);
 
 // ----------------------------------------------------------- //
 // Functions

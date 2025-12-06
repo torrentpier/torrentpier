@@ -122,7 +122,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		SELECT
 			f.forum_id, f.forum_status, f.forum_last_post_id, f.forum_posts, f.forum_topics,
 			t.topic_last_post_time, t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
-			p.poster_id AS sf_last_user_id, IF(p.poster_id = GUEST_UID, p.post_username, u.username) AS sf_last_username, u.user_rank
+			p.poster_id AS sf_last_user_id, IF(p.poster_id = " . GUEST_UID . ", p.post_username, u.username) AS sf_last_username, u.user_rank
 		FROM      " . BB_FORUMS . " f
 		LEFT JOIN " . BB_TOPICS . " t ON(f.forum_last_post_id = t.topic_last_post_id)
 		LEFT JOIN " . BB_POSTS . " p ON(f.forum_last_post_id = p.post_id)

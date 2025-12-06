@@ -140,10 +140,12 @@ class FrontController
 
         // Check if a route exists for the clean path
         if ($this->routeExists($cleanPath)) {
-            // For POST requests, route directly (redirect would lose POST data)
+            // For POST requests, rewrite to a clean path and route (redirect would lose POST data)
             // For GET requests, redirect for SEO
             $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
             if ($method !== 'GET') {
+                // Rewrite REQUEST_URI to a clean path so the router can match it
+                $_SERVER['REQUEST_URI'] = $cleanPath . ($query ? '?' . $query : '');
                 return ['action' => self::ACTION_ROUTE];
             }
 
@@ -153,7 +155,7 @@ class FrontController
             ];
         }
 
-        // No route - include .php file directly if exists
+        // No route for clean path - include .php file directly if exists
         $filePath = $this->basePath . $path;
         if (is_file($filePath)) {
             return [
@@ -162,8 +164,8 @@ class FrontController
             ];
         }
 
-        // File doesn't exist - fall through to router (404)
-        return null;
+        // File doesn't exist and no route - 404
+        return ['action' => self::ACTION_NOT_FOUND];
     }
 
     /**

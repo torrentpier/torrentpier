@@ -113,8 +113,10 @@ function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW
 
 function get_last_read($topic_id = 0, $forum_id = 0)
 {
-    $t = tracking_topics()[$topic_id] ?? 0;
-    $f = tracking_forums()[$forum_id] ?? 0;
+    $topic_id = (int)$topic_id;
+    $forum_id = (int)$forum_id;
+    $t = $topic_id ? (tracking_topics()[$topic_id] ?? 0) : 0;
+    $f = $forum_id ? (tracking_forums()[$forum_id] ?? 0) : 0;
     return max($t, $f, user()->data['user_lastvisit']);
 }
 

@@ -28,7 +28,7 @@ $title_match_max_len = 60;
 $poster_name_max_len = 25;
 $tor_colspan = 12; // torrents table colspan with all columns
 $per_page = config()->get('topics_per_page');
-$tracker_url = basename(__FILE__);
+$tracker_url = 'tracker';
 
 $time_format = 'H:i';
 $date_format = 'j-M-y';
