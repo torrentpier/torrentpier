@@ -67,8 +67,17 @@ class FrontController
             return ['action' => self::ACTION_STATIC];
         }
 
+        // /index.php -> redirect to /
+        if ($path === '/index.php') {
+            $query = $_SERVER['QUERY_STRING'] ?? '';
+            return [
+                'action' => self::ACTION_REDIRECT,
+                'url' => '/' . ($query ? '?' . $query : '')
+            ];
+        }
+
         // Root path - legacy index
-        if ($path === '/' || $path === '/index.php') {
+        if ($path === '/') {
             return [
                 'action' => self::ACTION_REQUIRE_EXIT,
                 'file' => $this->basePath . '/index_legacy.php'
