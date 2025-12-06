@@ -48,21 +48,4 @@ return function (Router $router): void {
     $router->any('/tracker', new LegacyAdapter($basePath . '/src/Controllers/tracker.php', options: ['manage_session' => true]));
     $router->any('/viewforum', new LegacyAdapter($basePath . '/src/Controllers/viewforum.php', 'forum'));
     $router->any('/viewtopic', new LegacyAdapter($basePath . '/src/Controllers/viewtopic.php', 'topic'));
-
-    // ==============================================================
-    // Legacy files with clean URLs (self-bootstrap)
-    // ==============================================================
-
-    $legacyRoutes = [
-        '/old',
-    ];
-
-    foreach ($legacyRoutes as $path) {
-        $script = ltrim($path, '/');
-        $router->any($path, new LegacyAdapter(
-            $basePath . '/' . $script . '.php',
-            $script,
-            ['self_bootstrap' => true]
-        ));
-    }
 };

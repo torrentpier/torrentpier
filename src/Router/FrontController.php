@@ -96,6 +96,26 @@ class FrontController
         $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
         $path = parse_url($requestUri, PHP_URL_PATH);
 
+        // Handle parse_url failure
+        if ($path === false || $path === null) {
+            return '/';
+        }
+
+        // Normalize a path to prevent directory traversal
+        $path = '/' . ltrim($path, '/');
+
+        // Resolve .. and . components
+        $segments = explode('/', $path);
+        $normalized = [];
+        foreach ($segments as $segment) {
+            if ($segment === '..') {
+                array_pop($normalized);
+            } elseif ($segment !== '' && $segment !== '.') {
+                $normalized[] = $segment;
+            }
+        }
+        $path = '/' . implode('/', $normalized);
+
         if ($path !== '/' && str_ends_with($path, '/')) {
             $path = rtrim($path, '/');
         }
@@ -115,17 +135,25 @@ class FrontController
 
             $file = $this->basePath . $path;
 
-            if (is_file($file)) {
+            // Validate path is within basePath (prevent traversal)
+            $realBase = realpath($this->basePath);
+            $realFile = realpath($file);
+
+            if ($realFile !== false && str_starts_with($realFile, $realBase . DIRECTORY_SEPARATOR)) {
                 return [
                     'action' => self::ACTION_REQUIRE_EXIT,
-                    'file' => $file
+                    'file' => $realFile
                 ];
             }
 
-            if (is_file($file . '/index.php')) {
+            // Check for index.php in the directory
+            $indexFile = $file . '/index.php';
+            $realIndex = realpath($indexFile);
+
+            if ($realIndex !== false && str_starts_with($realIndex, $realBase . DIRECTORY_SEPARATOR)) {
                 return [
                     'action' => self::ACTION_REQUIRE_EXIT,
-                    'file' => $file . '/index.php'
+                    'file' => $realIndex
                 ];
             }
 
@@ -166,10 +194,13 @@ class FrontController
 
         // No route for clean path - include .php file directly if exists
         $filePath = $this->basePath . $path;
-        if (is_file($filePath)) {
+        $realBase = realpath($this->basePath);
+        $realFile = realpath($filePath);
+
+        if ($realFile !== false && str_starts_with($realFile, $realBase . DIRECTORY_SEPARATOR)) {
             return [
                 'action' => self::ACTION_REQUIRE_EXIT,
-                'file' => $filePath
+                'file' => $realFile
             ];
         }
 

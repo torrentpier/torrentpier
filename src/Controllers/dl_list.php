@@ -129,4 +129,4 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
     redirect("$redirect_type?$redirect");
 }
 
-redirect('index.php');
+redirect('/');

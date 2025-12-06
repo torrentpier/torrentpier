@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 // Is send through board enabled? No, return to index
 if (!config()->get('board_email_form')) {
-    redirect('index.php');
+    redirect('/');
 }
 
 set_die_append_msg();
@@ -25,7 +25,7 @@ if (!empty($_GET[POST_USERS_URL]) || !empty($_POST[POST_USERS_URL])) {
 }
 
 if (IS_GUEST) {
-    redirect(LOGIN_URL . "?redirect=profile.php&mode=email&" . POST_USERS_URL . "=$user_id");
+    redirect(LOGIN_URL . "?redirect=profile&mode=email&" . POST_USERS_URL . "=$user_id");
 }
 
 $errors = [];

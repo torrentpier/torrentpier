@@ -225,7 +225,7 @@ define('PASSWORD_MAX_LENGTH', 128);
 define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
 
-define('CAT_URL', 'index.php?' . POST_CAT_URL . '=');
+define('CAT_URL', '?' . POST_CAT_URL . '=');
 define('DL_URL', config()->get('dl_url'));
 define('FORUM_URL', 'viewforum?' . POST_FORUM_URL . '=');
 define('GROUP_URL', 'group?' . POST_GROUPS_URL . '=');

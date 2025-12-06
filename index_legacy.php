@@ -82,7 +82,7 @@ $only_new = user()->opt_js['only_new'];
 
 // Validate requested category id
 if ($viewcat && !($viewcat =& $forums['c'][$viewcat]['cat_id'])) {
-    redirect('index.php');
+    redirect('/');
 }
 
 // Forums
@@ -303,11 +303,11 @@ template()->assign_vars([
     'ONLY_NEW_POSTS_ON' => $only_new == ONLY_NEW_POSTS,
     'ONLY_NEW_TOPICS_ON' => $only_new == ONLY_NEW_TOPICS,
 
-    'U_SEARCH_NEW' => 'search.php?new=1',
-    'U_SEARCH_SELF_BY_MY' => "search.php?uid=" . userdata('user_id') . "&amp;o=1",
-    'U_SEARCH_LATEST' => 'search.php?search_id=latest',
-    'U_SEARCH_UNANSWERED' => 'search.php?search_id=unanswered',
-    'U_ATOM_FEED' => make_url('feed.php?type=f&id=0'),
+    'U_SEARCH_NEW' => 'search?new=1',
+    'U_SEARCH_SELF_BY_MY' => "search?uid=" . userdata('user_id') . "&amp;o=1",
+    'U_SEARCH_LATEST' => 'search?search_id=latest',
+    'U_SEARCH_UNANSWERED' => 'search?search_id=unanswered',
+    'U_ATOM_FEED' => make_url('feed?type=f&id=0'),
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
     'BOARD_START' => config()->get('show_board_start_index') ? (__('BOARD_STARTED') . ':&nbsp;' . '<b>' . bb_date(config()->get('board_startdate')) . '</b>') : false,
