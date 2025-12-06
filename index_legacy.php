@@ -268,7 +268,7 @@ template()->assign_vars([
     'NO_FORUMS_MSG' => $only_new ? __('NO_NEW_POSTS') : __('NO_FORUMS'),
 
     'TOTAL_TOPICS' => sprintf(__('POSTED_TOPICS_TOTAL'), commify($stats['topiccount'])),
-    'TOTAL_POSTS' => sprintf(__('POSTED_ARTICLES_TOTAL'), commify($stats['postcount'])),
+    'TOTAL_POSTS' => sprintf(__('POSTED_POSTS_TOTAL'), commify($stats['postcount'])),
     'TOTAL_USERS' => sprintf(__('REGISTERED_USERS_TOTAL'), commify($stats['usercount'])),
     'TOTAL_GENDER' => config()->get('gender') ? sprintf(
         __('USERS_TOTAL_GENDER'),
