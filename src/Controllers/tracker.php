@@ -273,8 +273,10 @@ $GPC = array(
 
 // Define all GPC vars with default values
 foreach ($GPC as $name => $params) {
-    ${"{$name}_key"} = $params[KEY_NAME];
-    ${"{$name}_val"} = $params[DEF_VAL];
+    $keyVar = "{$name}_key";
+    $valVar = "{$name}_val";
+    $$keyVar = $params[KEY_NAME];
+    $$valVar = $params[DEF_VAL];
 }
 
 if (isset($_GET[$user_releases_key])) {
@@ -286,10 +288,12 @@ if (isset($_GET[$user_releases_key])) {
 } else {
     // Get "checkbox" and "select" vars (previous_settings not loaded yet, using defaults)
     foreach ($GPC as $name => $params) {
+        $valVar = "{$name}_val";
+        $optVar = "{$name}_opt";
         if ($params[GPC_TYPE] == CHBOX) {
-            checkbox_get_val($params[KEY_NAME], ${"{$name}_val"}, $params[DEF_VAL]);
+            checkbox_get_val($params[KEY_NAME], $$valVar, $params[DEF_VAL]);
         } elseif ($params[GPC_TYPE] == SELECT) {
-            select_get_val($params[KEY_NAME], ${"{$name}_val"}, ${"{$name}_opt"}, $params[DEF_VAL]);
+            select_get_val($params[KEY_NAME], $$valVar, $$optVar, $params[DEF_VAL]);
         }
     }
 }
@@ -502,7 +506,9 @@ if ($allowed_forums) {
     );
     $curr_set = [];
     foreach ($save_in_db as $name) {
-        $curr_set[${"{$name}_key"}] = ${"{$name}_val"};
+        $keyVar = "{$name}_key";
+        $valVar = "{$name}_val";
+        $curr_set[$$keyVar] = $$valVar;
     }
     $curr_set_sql = DB()->escape(serialize($curr_set));
 
@@ -883,7 +889,9 @@ $save_through_pages = array(
 );
 $hidden_fields = [];
 foreach ($save_through_pages as $name) {
-    $hidden_fields['prev_' . ${"{$name}_key"}] = ${"{$name}_val"};
+    $keyVar = "{$name}_key";
+    $valVar = "{$name}_val";
+    $hidden_fields['prev_' . $$keyVar] = $$valVar;
 }
 
 // Set colspan

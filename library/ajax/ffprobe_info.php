@@ -36,7 +36,7 @@ if (!$info_hash = (string)$this->request['info_hash'] or !ctype_xdigit($info_has
 $isAudio = isset($this->request['is_audio']) && $this->request['is_audio'];
 
 // Get ffprobe info from TorrServer
-$ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($info_hash, $file_index, $topic_id);
+$ffpInfo = new \TorrentPier\TorrServerAPI()->getFfpInfo($info_hash, $file_index, $topic_id);
 if (!$ffpInfo || !isset($ffpInfo->{$file_index})) {
     $this->ajax_die(__('TORRSERVER_UNAVAILABLE'));
 }

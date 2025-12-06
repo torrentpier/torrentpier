@@ -34,17 +34,17 @@ final class HttpClient
     /**
      * Default timeout for HTTP requests (in seconds)
      */
-    private const DEFAULT_TIMEOUT = 10;
+    private const int DEFAULT_TIMEOUT = 10;
 
     /**
      * Default connection timeout (in seconds)
      */
-    private const DEFAULT_CONNECT_TIMEOUT = 5;
+    private const int DEFAULT_CONNECT_TIMEOUT = 5;
 
     /**
      * Default number of retry attempts
      */
-    private const DEFAULT_MAX_RETRIES = 3;
+    private const int DEFAULT_MAX_RETRIES = 3;
 
 
     /**

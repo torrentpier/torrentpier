@@ -20,7 +20,7 @@ class Template
     private static float $totalRenderTime = 0;
 
     /** Reserved context keys that should not be overwritten */
-    private const RESERVED_KEYS = ['L', '_tpldata', 'V', 'IMG'];
+    private const array RESERVED_KEYS = ['L', '_tpldata', 'V', 'IMG'];
 
     /** @var array<array{variable: string, template: string, source: string, time: float}> */
     private static array $variableConflicts = [];
@@ -350,8 +350,8 @@ class Template
         self::$variableShadowing[] = $shadowing;
 
         // Format values for logging (truncate long values)
-        $oldStr = is_scalar($oldValue) ? (string)$oldValue : gettype($oldValue);
-        $newStr = is_scalar($newValue) ? (string)$newValue : gettype($newValue);
+        $oldStr = is_scalar($oldValue) ? (string)$oldValue : get_debug_type($oldValue);
+        $newStr = is_scalar($newValue) ? (string)$newValue : get_debug_type($newValue);
         if (strlen($oldStr) > 50) {
             $oldStr = substr($oldStr, 0, 47) . '...';
         }

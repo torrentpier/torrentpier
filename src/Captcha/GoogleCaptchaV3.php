@@ -39,6 +39,7 @@ class GoogleCaptchaV3 implements CaptchaInterface
      *
      * @return string
      */
+    #[\Override]
     public function get(): string
     {
         return __('CAPTCHA_OCCURS_BACKGROUND') . "
@@ -58,6 +59,7 @@ class GoogleCaptchaV3 implements CaptchaInterface
      *
      * @return bool
      */
+    #[\Override]
     public function check(): bool
     {
         $reCaptcha = new ReCaptcha($this->settings['secret_key']);

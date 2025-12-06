@@ -65,6 +65,7 @@ class ForumFeedProvider implements FeedProviderInterface
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getCacheKey(): string
     {
         return 'atom:forum:' . $this->forumId;
@@ -73,6 +74,7 @@ class ForumFeedProvider implements FeedProviderInterface
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getMetadata(): FeedMetadata
     {
         $title = $this->forumId === 0
@@ -90,6 +92,7 @@ class ForumFeedProvider implements FeedProviderInterface
      * @inheritDoc
      * @throws Exception
      */
+    #[\Override]
     public function getEntries(): array
     {
         $topics = $this->forumId === 0

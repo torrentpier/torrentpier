@@ -32,7 +32,7 @@ class DebugSelection
      */
     public function __call(string $name, array $arguments)
     {
-        $result = call_user_func_array([$this->selection, $name], $arguments);
+        $result = $this->selection->$name(...$arguments);
 
         // If result is another Selection, wrap it too
         if ($result instanceof Selection) {

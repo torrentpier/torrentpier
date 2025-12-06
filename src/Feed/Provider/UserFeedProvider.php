@@ -37,6 +37,7 @@ class UserFeedProvider implements FeedProviderInterface
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getCacheKey(): string
     {
         return 'atom:user:' . $this->userId;
@@ -45,6 +46,7 @@ class UserFeedProvider implements FeedProviderInterface
     /**
      * @inheritDoc
      */
+    #[\Override]
     public function getMetadata(): FeedMetadata
     {
         return new FeedMetadata(
@@ -58,6 +60,7 @@ class UserFeedProvider implements FeedProviderInterface
      * @inheritDoc
      * @throws Exception
      */
+    #[\Override]
     public function getEntries(): array
     {
         $topics = $this->getUserTopics();

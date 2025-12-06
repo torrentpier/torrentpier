@@ -45,6 +45,7 @@ class TextCaptcha implements CaptchaInterface
      *
      * @return string
      */
+    #[\Override]
     public function get(): string
     {
         $_SESSION['phrase'] = $this->captcha->getPhrase();
@@ -61,6 +62,7 @@ class TextCaptcha implements CaptchaInterface
      *
      * @return bool
      */
+    #[\Override]
     public function check(): bool
     {
         if (!isset($_POST['captcha_phrase']) || !isset($_SESSION['phrase'])) {

@@ -113,11 +113,11 @@ class Dev
 
         $telegramSender = new PlainTextHandler();
         $telegramSender->loggerOnly(true);
-        $telegramSender->setLogger((new Logger(
+        $telegramSender->setLogger(new Logger(
             APP_NAME,
-            [(new TelegramHandler(config()->get('telegram_sender.token'), (int)config()->get('telegram_sender.chat_id'), timeout: (int)config()->get('telegram_sender.timeout')))
+            [new TelegramHandler(config()->get('telegram_sender.token'), (int)config()->get('telegram_sender.chat_id'), timeout: (int)config()->get('telegram_sender.timeout'))
                 ->setFormatter(new TelegramFormatter())]
-        )));
+        ));
         $this->whoops->pushHandler($telegramSender);
     }
 
@@ -144,11 +144,11 @@ class Dev
          */
         $loggingInConsole = new PlainTextHandler();
         $loggingInConsole->loggerOnly(true);
-        $loggingInConsole->setLogger((new Logger(
+        $loggingInConsole->setLogger(new Logger(
             APP_NAME,
-            [(new BrowserConsoleHandler())
-                ->setFormatter((new LineFormatter(null, null, true)))]
-        )));
+            [new BrowserConsoleHandler()
+                ->setFormatter(new LineFormatter(null, null, true))]
+        ));
         $this->whoops->pushHandler($loggingInConsole);
     }
 
@@ -165,11 +165,11 @@ class Dev
 
         $loggingInFile = new PlainTextHandler();
         $loggingInFile->loggerOnly(true);
-        $loggingInFile->setLogger((new Logger(
+        $loggingInFile->setLogger(new Logger(
             APP_NAME,
-            [(new StreamHandler(WHOOPS_LOG_FILE))
-                ->setFormatter((new LineFormatter(null, null, true)))]
-        )));
+            [new StreamHandler(WHOOPS_LOG_FILE)
+                ->setFormatter(new LineFormatter(null, null, true))]
+        ));
         $this->whoops->pushHandler($loggingInFile);
     }
 
@@ -273,8 +273,8 @@ class Dev
         if (!empty($templateShadowing)) {
             $shadowCount = count($templateShadowing);
             $shadowList = array_map(function ($s) {
-                $old = is_scalar($s['old_value']) ? (string)$s['old_value'] : gettype($s['old_value']);
-                $new = is_scalar($s['new_value']) ? (string)$s['new_value'] : gettype($s['new_value']);
+                $old = is_scalar($s['old_value']) ? (string)$s['old_value'] : get_debug_type($s['old_value']);
+                $new = is_scalar($s['new_value']) ? (string)$s['new_value'] : get_debug_type($s['new_value']);
                 if (strlen($old) > 20) {
                     $old = substr($old, 0, 17) . '...';
                 }
