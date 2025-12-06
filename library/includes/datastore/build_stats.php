@@ -12,86 +12,108 @@ if (!defined('BB_ROOT')) {
 }
 
 $data = [];
+$excludedUsers = array_map('intval', explode(',', EXCLUDED_USERS));
 
 // usercount
-$row = DB()->fetch_row("SELECT COUNT(*) AS usercount FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")");
-$data['usercount'] = (int)$row['usercount'];
+$data['usercount'] = DB()->table(BB_USERS)
+    ->where('user_id NOT', $excludedUsers)
+    ->count('*');
 
 // newestuser
-$row = DB()->fetch_row("SELECT user_id, username, user_rank FROM " . BB_USERS . " WHERE user_active = 1 AND user_id NOT IN(" . EXCLUDED_USERS . ") ORDER BY user_id DESC LIMIT 1");
-$data['newestuser'] = $row;
+$data['newestuser'] = DB()->table(BB_USERS)
+    ->select('user_id, username, user_rank')
+    ->where('user_active', 1)
+    ->where('user_id NOT', $excludedUsers)
+    ->order('user_id DESC')
+    ->limit(1)
+    ->fetch()
+    ?->toArray();
 
 // post/topic count
-$row = DB()->fetch_row("SELECT SUM(forum_topics) AS topiccount, SUM(forum_posts) AS postcount FROM " . BB_FORUMS);
-$data['postcount'] = (int)$row['postcount'];
-$data['topiccount'] = (int)$row['topiccount'];
+$row = DB()->table(BB_FORUMS)
+    ->select('SUM(forum_topics) AS topiccount, SUM(forum_posts) AS postcount')
+    ->fetch();
+$data['postcount'] = (int)$row?->postcount;
+$data['topiccount'] = (int)$row?->topiccount;
 
 // Tracker stats
 if (config()->get('tor_stats')) {
-    // torrents stat
-    $row = DB()->fetch_row("SELECT COUNT(topic_id) AS torrentcount, SUM(size) AS size FROM " . BB_BT_TORRENTS);
-    $data['torrentcount'] = commify($row['torrentcount']);
-    $data['size'] = $row['size'];
+    $row = DB()->table(BB_BT_TORRENTS)
+        ->select('COUNT(topic_id) AS torrentcount, SUM(size) AS size')
+        ->fetch();
+    $data['torrentcount'] = commify($row?->torrentcount);
+    $data['size'] = $row?->size;
 
-    // peers stat
-    $row = DB()->fetch_row("SELECT SUM(seeders) AS seeders, SUM(leechers) AS leechers, ((SUM(speed_up) + SUM(speed_down))/2) AS speed FROM " . BB_BT_TRACKER_SNAP);
-    $data['seeders'] = commify($row['seeders']);
-    $data['leechers'] = commify($row['leechers']);
-    $data['peers'] = commify($row['seeders'] + $row['leechers']);
-    $data['speed'] = $row['speed'];
+    $row = DB()->table(BB_BT_TRACKER_SNAP)
+        ->select('SUM(seeders) AS seeders, SUM(leechers) AS leechers, ((SUM(speed_up) + SUM(speed_down))/2) AS speed')
+        ->fetch();
+    $seeders = (int)$row?->seeders;
+    $leechers = (int)$row?->leechers;
+    $data['seeders'] = commify($seeders);
+    $data['leechers'] = commify($leechers);
+    $data['peers'] = commify($seeders + $leechers);
+    $data['speed'] = $row?->speed;
 }
 
 // gender stat
 if (config()->get('gender')) {
-    $male = DB()->fetch_row("SELECT COUNT(user_id) AS male FROM " . BB_USERS . " WHERE user_gender = " . MALE . " AND user_id NOT IN(" . EXCLUDED_USERS . ")");
-    $female = DB()->fetch_row("SELECT COUNT(user_id) AS female FROM " . BB_USERS . " WHERE user_gender = " . FEMALE . " AND user_id NOT IN(" . EXCLUDED_USERS . ")");
-    $unselect = DB()->fetch_row("SELECT COUNT(user_id) AS unselect FROM " . BB_USERS . " WHERE user_gender = 0 AND user_id NOT IN(" . EXCLUDED_USERS . ")");
+    $data['male'] = DB()->table(BB_USERS)
+        ->where('user_gender', MALE)
+        ->where('user_id NOT', $excludedUsers)
+        ->count('*');
 
-    $data['male'] = $male['male'];
-    $data['female'] = $female['female'];
-    $data['unselect'] = $unselect['unselect'];
+    $data['female'] = DB()->table(BB_USERS)
+        ->where('user_gender', FEMALE)
+        ->where('user_id NOT', $excludedUsers)
+        ->count('*');
+
+    $data['unselect'] = DB()->table(BB_USERS)
+        ->where('user_gender', 0)
+        ->where('user_id NOT', $excludedUsers)
+        ->count('*');
 }
 
 // birthday stat
 if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
-    $sql = DB()->fetch_rowset("SELECT user_id, username, user_rank , user_birthday
-		FROM " . BB_USERS . "
-		WHERE user_id NOT IN(" . EXCLUDED_USERS . ")
-			AND user_birthday != '1900-01-01'
-			AND user_birthday IS NOT NULL
-			AND user_active = 1
-		ORDER BY user_level DESC, username
-	");
+    $checkDays = (int)config()->get('birthday_check_day');
+    $dateToday = date('m-d');
+    $dateForward = date('m-d', strtotime("+$checkDays days"));
 
-    $date_today = bb_date(TIMENOW, 'md', false);
-    $date_forward = bb_date(TIMENOW + (config()->get('birthday_check_day') * 86400), 'md', false);
+    // Helper to convert ActiveRow objects to arrays
+    $toArrays = static fn(array $rows): array => array_map(static fn($row) => $row->toArray(), $rows);
 
-    $birthday_today_list = $birthday_week_list = [];
+    // Birthday today - using the indexed user_birthday_md column
+    $data['birthday_today_list'] = $toArrays(DB()->table(BB_USERS)
+        ->select('user_id, username, user_rank, user_birthday')
+        ->where('user_id NOT', $excludedUsers)
+        ->where('user_birthday !=', '1900-01-01')
+        ->where('user_active', 1)
+        ->where('user_birthday_md', $dateToday)
+        ->order('user_level DESC, username')
+        ->fetchAll());
 
-    foreach ($sql as $row) {
-        $user_birthday = bb_date(strtotime($row['user_birthday']), 'md', false);
-
-        if ($user_birthday > $date_today && $user_birthday <= $date_forward) {
-            // user are having birthday within the next days
-            $birthday_week_list[] = [
-                'user_id' => $row['user_id'],
-                'username' => $row['username'],
-                'user_rank' => $row['user_rank'],
-                'user_birthday' => $row['user_birthday']
-            ];
-        } elseif ($user_birthday == $date_today) {
-            //user have birthday today
-            $birthday_today_list[] = [
-                'user_id' => $row['user_id'],
-                'username' => $row['username'],
-                'user_rank' => $row['user_rank'],
-                'user_birthday' => $row['user_birthday']
-            ];
-        }
+    // Birthday in upcoming days - using indexed user_birthday_md column
+    // Handle year wrap-around (e.g., Dec 28 + 7 days = Jan 4)
+    if ($dateForward < $dateToday) {
+        $data['birthday_week_list'] = $toArrays(DB()->table(BB_USERS)
+            ->select('user_id, username, user_rank, user_birthday')
+            ->where('user_id NOT', $excludedUsers)
+            ->where('user_birthday !=', '1900-01-01')
+            ->where('user_active', 1)
+            ->where('(user_birthday_md > ? OR user_birthday_md <= ?)', $dateToday, $dateForward)
+            ->order('user_level DESC, username')
+            ->fetchAll());
+    } else {
+        $data['birthday_week_list'] = $toArrays(DB()->table(BB_USERS)
+            ->select('user_id, username, user_rank, user_birthday')
+            ->where('user_id NOT', $excludedUsers)
+            ->where('user_birthday !=', '1900-01-01')
+            ->where('user_active', 1)
+            ->where('user_birthday_md > ?', $dateToday)
+            ->where('user_birthday_md <= ?', $dateForward)
+            ->order('user_level DESC, username')
+            ->fetchAll());
     }
-
-    $data['birthday_today_list'] = $birthday_today_list;
-    $data['birthday_week_list'] = $birthday_week_list;
 }
 
 $this->store('stats', $data);
