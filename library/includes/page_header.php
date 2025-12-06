@@ -113,7 +113,7 @@ template()->assign_vars([
     'CONTENT_ENCODING' => DEFAULT_CHARSET,
 
     'IN_ADMIN' => defined('IN_ADMIN'),
-    'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
+    'USER_HIDE_CAT' => (defined('BB_SCRIPT') && BB_SCRIPT === 'index'),
 
     'USER_LANG' => userdata('user_lang'),
     'USER_LANG_DIRECTION' => (function() {
@@ -174,8 +174,8 @@ template()->assign_vars([
     'U_TERMS' => config()->get('terms_and_conditions_url'),
     'U_TRACKER' => 'tracker',
 
-    'SHOW_SIDEBAR1' => !empty((config()->get('page.show_sidebar1') ?? [])[BB_SCRIPT]) || config()->get('show_sidebar1_on_every_page'),
-    'SHOW_SIDEBAR2' => !empty((config()->get('page.show_sidebar2') ?? [])[BB_SCRIPT]) || config()->get('show_sidebar2_on_every_page'),
+    'SHOW_SIDEBAR1' => (defined('BB_SCRIPT') && !empty((config()->get('page.show_sidebar1') ?? [])[BB_SCRIPT])) || config()->get('show_sidebar1_on_every_page'),
+    'SHOW_SIDEBAR2' => (defined('BB_SCRIPT') && !empty((config()->get('page.show_sidebar2') ?? [])[BB_SCRIPT])) || config()->get('show_sidebar2_on_every_page'),
 
     'HTML_AGREEMENT' => LANG_DIR . 'html/user_agreement.html',
     'HTML_COPYRIGHT' => LANG_DIR . 'html/copyright_holders.html',
@@ -218,7 +218,7 @@ template()->assign_vars([
     'U_WATCHED_TOPICS' => 'profile?mode=watch'
 ]);
 
-if (!empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty(userdata('torhelp'))) {
+if (defined('BB_SCRIPT') && !empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty(userdata('torhelp'))) {
     $ignore_time = !empty($_COOKIE['torhelp']) ? (int)$_COOKIE['torhelp'] : 0;
 
     if (TIMENOW > $ignore_time) {
