@@ -20,6 +20,11 @@
 - Ensure null-safe check for `$bt_userdata` in ratio handling & improve attachment migration tracking - ([6054770](https://github.com/torrentpier/torrentpier/commit/60547701df245b31c49a754af2fef7876df9d05e))
 - Handle potential null values in cron run times and intervals - ([ffac8ae](https://github.com/torrentpier/torrentpier/commit/ffac8ae0beb696d75d849ee091bc1a08bc00e3dd))
 
+### 📦 Dependencies
+
+- *(deps)* Bump twig/twig from 3.22.0 to 3.22.1 ([#2234](https://github.com/torrentpier/torrentpier/pull/2234)) - ([11c6cb7](https://github.com/torrentpier/torrentpier/commit/11c6cb78c579bbb74eb215d6be9692d00e5a7725))
+- *(deps)* Bump nesbot/carbon from 3.10.3 to 3.11.0 ([#2236](https://github.com/torrentpier/torrentpier/pull/2236)) - ([a5645a2](https://github.com/torrentpier/torrentpier/commit/a5645a245b86822f9b14838a900105b29ed44dd0))
+
 ### 💼 Other
 
 - *(admin)* Remove legacy attachment-related admin files** - ([bf177b7](https://github.com/torrentpier/torrentpier/commit/bf177b7576132d9095f387fb004f1069ecd5fe16))
