@@ -41,8 +41,8 @@ if ($poll_max_days = (int)config()->get('poll_max_days')) {
     }
 }
 
-// Cleaning user_newpasswd
-DB()->query("UPDATE " . BB_USERS . " SET user_newpasswd = '' WHERE user_lastvisit < " . (TIMENOW - 7 * 86400));
+// Cleaning user_newpasswd (only update rows that actually need it)
+DB()->query("UPDATE " . BB_USERS . " SET user_newpasswd = '' WHERE user_newpasswd <> '' AND user_lastvisit < " . (TIMENOW - 7 * 86400));
 
 // Cleaning post cache
 if ($posts_days = (int)config()->get('posts_cache_days_keep')) {

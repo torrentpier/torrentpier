@@ -9,23 +9,21 @@ use Phinx\Migration\AbstractMigration;
  *
  * This migration fixes performance issues with build_stats.php queries:
  * 1. Adds index on user_gender for gender count queries
- * 2. Adds generated column user_birthday_md for birthday queries
+ * 2. Adds a generated column user_birthday_md for birthday queries
  * 3. Adds index on (user_active, user_birthday_md) for efficient birthday lookups
  *
- * Without these indexes, the stats queries scan 600k+ users causing memory exhaustion.
+ * Without these indexes, the stat queries scan all users causing memory exhaustion.
  */
 final class OptimizeUserStatsIndexes extends AbstractMigration
 {
     public function up(): void
     {
-        // 1. Add index on user_gender for gender count queries
-        // Current query: COUNT(*) WHERE user_gender = X
-        // Without index: full table scan of 600k+ rows
-        $this->execute('CREATE INDEX idx_user_gender ON bb_users (user_gender)');
+        $table = $this->table('bb_users');
 
-        // 2. Add generated column for birthday month-day
-        // This allows indexing the MM-DD portion of the birthday
-        // The column is STORED (not VIRTUAL) so it can be indexed
+        // Index on user_gender for gender count queries
+        $table->addIndex(['user_gender'], ['name' => 'idx_user_gender']);
+
+        // Generated column for birthday month-day (Phinx doesn't support generated columns natively)
         $this->execute("
             ALTER TABLE bb_users
             ADD COLUMN user_birthday_md CHAR(5)
@@ -33,16 +31,19 @@ final class OptimizeUserStatsIndexes extends AbstractMigration
             AFTER user_birthday
         ");
 
-        // 3. Add index for birthday queries
-        // Current query: WHERE user_active = 1 AND DATE_FORMAT(user_birthday, '%m-%d') = 'XX-XX'
-        // New query can use: WHERE user_active = 1 AND user_birthday_md = 'XX-XX'
-        $this->execute('CREATE INDEX idx_user_birthday_md ON bb_users (user_active, user_birthday_md)');
+        // Composite index for birthday queries
+        $table->addIndex(['user_active', 'user_birthday_md'], ['name' => 'idx_user_birthday_md']);
+
+        $table->update();
     }
 
     public function down(): void
     {
-        $this->execute('DROP INDEX idx_user_birthday_md ON bb_users');
+        $table = $this->table('bb_users');
+        $table->removeIndexByName('idx_user_birthday_md');
+        $table->removeIndexByName('idx_user_gender');
+        $table->update();
+
         $this->execute('ALTER TABLE bb_users DROP COLUMN user_birthday_md');
-        $this->execute('DROP INDEX idx_user_gender ON bb_users');
     }
 }
