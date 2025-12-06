@@ -19,13 +19,52 @@ use TorrentPier\Legacy\Post;
 class Common
 {
     /**
-     * Run synchronization for all forums
+     * Run synchronization for all forums (batch optimized)
      */
-    public static function sync_all_forums()
+    public static function sync_all_forums(): void
     {
-        foreach (DB()->fetch_rowset("SELECT forum_id FROM " . BB_FORUMS) as $row) {
-            self::sync('forum', $row['forum_id']);
-        }
+        $tmp_sync_forums = 'tmp_sync_all_forums';
+
+        DB()->query("
+            CREATE TEMPORARY TABLE $tmp_sync_forums (
+                forum_id           SMALLINT  UNSIGNED NOT NULL DEFAULT '0',
+                forum_last_post_id INT       UNSIGNED NOT NULL DEFAULT '0',
+                forum_posts        MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
+                forum_topics       MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
+                PRIMARY KEY (forum_id)
+            ) ENGINE = InnoDB
+        ");
+        DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_sync_forums");
+
+        // Initialize all forums with zeros
+        DB()->query("INSERT INTO $tmp_sync_forums (forum_id) SELECT forum_id FROM " . BB_FORUMS);
+
+        // Aggregate topic stats for all forums in one query
+        DB()->query("
+            REPLACE INTO $tmp_sync_forums
+                (forum_id, forum_last_post_id, forum_posts, forum_topics)
+            SELECT
+                forum_id,
+                MAX(topic_last_post_id),
+                SUM(topic_replies) + COUNT(topic_id),
+                COUNT(topic_id)
+            FROM " . BB_TOPICS . "
+            GROUP BY forum_id
+        ");
+
+        // Update all forums from the temp table
+        DB()->query("
+            UPDATE
+                $tmp_sync_forums tmp, " . BB_FORUMS . " f
+            SET
+                f.forum_last_post_id = tmp.forum_last_post_id,
+                f.forum_posts        = tmp.forum_posts,
+                f.forum_topics       = tmp.forum_topics
+            WHERE
+                f.forum_id = tmp.forum_id
+        ");
+
+        DB()->query("DROP TEMPORARY TABLE $tmp_sync_forums");
     }
 
     /**
@@ -34,7 +73,7 @@ class Common
      * @param string $type
      * @param array|string $id
      */
-    public static function sync($type, $id)
+    public static function sync(string $type, array|string $id): void
     {
         switch ($type) {
             case 'forum':
@@ -52,7 +91,7 @@ class Common
 					forum_posts        MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
 					forum_topics       MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
 					PRIMARY KEY (forum_id)
-				) ENGINE = MEMORY
+				) ENGINE = InnoDB
 			");
                 DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_sync_forums");
 
@@ -109,7 +148,7 @@ class Common
 					topic_last_post_id   INT UNSIGNED NOT NULL DEFAULT '0',
 					topic_last_post_time INT UNSIGNED NOT NULL DEFAULT '0',
 					PRIMARY KEY (topic_id)
-				) ENGINE = MEMORY
+				) ENGINE = InnoDB
 			");
                 DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_sync_topics");
 
@@ -165,7 +204,7 @@ class Common
 					user_id    INT NOT NULL DEFAULT '0',
 					user_posts MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
 					PRIMARY KEY (user_id)
-				) ENGINE = MEMORY
+				) ENGINE = InnoDB
 			");
                 DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_user_posts");
 
@@ -256,7 +295,7 @@ class Common
 		CREATE TEMPORARY TABLE $tmp_delete_topics (
 			topic_id INT UNSIGNED NOT NULL DEFAULT '0',
 			PRIMARY KEY (topic_id)
-		) ENGINE = MEMORY
+		) ENGINE = InnoDB
 	");
         DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_delete_topics");
 
@@ -298,7 +337,7 @@ class Common
 			user_id    INT NOT NULL DEFAULT '0',
 			user_posts MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
 			PRIMARY KEY (user_id)
-		) ENGINE = MEMORY
+		) ENGINE = InnoDB
 	");
         DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_user_posts");
 
@@ -604,7 +643,7 @@ class Common
 		CREATE TEMPORARY TABLE $tmp_delete_posts (
 			post_id INT UNSIGNED NOT NULL DEFAULT '0',
 			PRIMARY KEY (post_id)
-		) ENGINE = MEMORY
+		) ENGINE = InnoDB
 	");
         DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_delete_posts");
 

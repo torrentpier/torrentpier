@@ -177,7 +177,9 @@ function go_to_page ()
 {
 	var page_num = (parseInt( $('#pg-page').val() ) > 1) ? $('#pg-page').val() : 1;
 	var pg_start = (page_num - 1) * {PG_PER_PAGE};
-	window.location = '{PG_BASE_URL}&start=' + pg_start;
+	var base_url = '{PG_BASE_URL}';
+	var separator = base_url.indexOf('?') === -1 ? '?' : '&';
+	window.location = base_url + separator + 'start=' + pg_start;
 	return false;
 }
 </script>
