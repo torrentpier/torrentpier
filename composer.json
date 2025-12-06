@@ -46,7 +46,7 @@
     "forum": "https://torrentpier.com"
   },
   "require": {
-    "php": ">=8.2",
+    "php": ">=8.4",
     "arokettu/bencode": "^4.1.0",
     "arokettu/monsterid": "^4.1.0",
     "arokettu/random-polyfill": "1.0.2",
