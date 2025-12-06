@@ -22,24 +22,18 @@ class Updater
 {
     /**
      * Target version of TorrentPier
-     *
-     * @var string
      */
-    public string $targetVersion;
+    public private(set) string $targetVersion;
 
     /**
      * Json response
-     *
-     * @var array
      */
     private array $jsonResponse = [];
 
     /**
      * Save path
-     *
-     * @var string
      */
-    public string $savePath;
+    public private(set) string $savePath;
 
     /**
      * HTTP client instance
