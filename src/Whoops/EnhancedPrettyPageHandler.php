@@ -194,8 +194,8 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
             // Language system
             if (function_exists('lang')) {
                 $env['Language System'] = 'Available';
-                if (isset(lang()->getCurrentLanguage)) {
-                    $env['Current Language'] = lang()->getCurrentLanguage;
+                if (lang()->currentLanguage) {
+                    $env['Current Language'] = lang()->currentLanguage;
                 }
             }
 
