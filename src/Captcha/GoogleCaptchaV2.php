@@ -39,6 +39,7 @@ class GoogleCaptchaV2 implements CaptchaInterface
      *
      * @return string
      */
+    #[\Override]
     public function get(): string
     {
         return "
@@ -59,6 +60,7 @@ class GoogleCaptchaV2 implements CaptchaInterface
      *
      * @return bool
      */
+    #[\Override]
     public function check(): bool
     {
         $reCaptcha = new ReCaptcha($this->settings['secret_key']);

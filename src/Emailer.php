@@ -172,11 +172,11 @@ class Emailer
         if (config()->get('emailer.smtp.enabled')) {
             if (!empty(config()->get('emailer.smtp.host'))) {
                 $sslType = config()->get('emailer.smtp.ssl_type') ?: null;
-                $transport = (new EsmtpTransport(
+                $transport = new EsmtpTransport(
                     config()->get('emailer.smtp.host'),
                     config()->get('emailer.smtp.port'),
                     $sslType
-                ))
+                )
                     ->setUsername(config()->get('emailer.smtp.username'))
                     ->setPassword(config()->get('emailer.smtp.password'));
             } else {
@@ -192,7 +192,7 @@ class Emailer
             throw new Exception('Email recipient is not set');
         }
 
-        $message = (new Email())
+        $message = new Email()
             ->subject($this->subject)
             ->to($this->to)
             ->from(new Address(config()->get('board_email'), config()->get('board_email_sitename')))

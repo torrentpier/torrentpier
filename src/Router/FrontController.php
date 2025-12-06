@@ -19,12 +19,12 @@ namespace TorrentPier\Router;
  */
 class FrontController
 {
-    public const ACTION_REQUIRE = 'require';
-    public const ACTION_REQUIRE_EXIT = 'require_exit';
-    public const ACTION_REDIRECT = 'redirect';
-    public const ACTION_NOT_FOUND = 'not_found';
-    public const ACTION_STATIC = 'static';
-    public const ACTION_ROUTE = 'route';
+    public const string ACTION_REQUIRE = 'require';
+    public const string ACTION_REQUIRE_EXIT = 'require_exit';
+    public const string ACTION_REDIRECT = 'redirect';
+    public const string ACTION_NOT_FOUND = 'not_found';
+    public const string ACTION_STATIC = 'static';
+    public const string ACTION_ROUTE = 'route';
 
     private string $basePath;
     private ?Router $router = null;

@@ -20,7 +20,7 @@ class VersionHelper
      *
      * @var string
      */
-    private const VERSION_PREFIX = 'v';
+    private const string VERSION_PREFIX = 'v';
 
     /**
      * Returns version without prefix (v)

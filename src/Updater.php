@@ -22,24 +22,18 @@ class Updater
 {
     /**
      * Target version of TorrentPier
-     *
-     * @var string
      */
-    public string $targetVersion;
+    public private(set) string $targetVersion;
 
     /**
      * Json response
-     *
-     * @var array
      */
     private array $jsonResponse = [];
 
     /**
      * Save path
-     *
-     * @var string
      */
-    public string $savePath;
+    public private(set) string $savePath;
 
     /**
      * HTTP client instance
@@ -53,7 +47,7 @@ class Updater
      *
      * @var string
      */
-    private const LTS_VERSION_PATTERN = '/^v2\.8\.\d+$/';
+    private const string LTS_VERSION_PATTERN = '/^v2\.8\.\d+$/';
 
     /**
      * Updater constructor
@@ -81,10 +75,14 @@ class Updater
             }
 
             $responseBody = $response->getBody()->getContents();
-            $this->jsonResponse = json_decode(
-                mb_convert_encoding($responseBody, DEFAULT_CHARSET, mb_detect_encoding($responseBody)),
-                true
-            );
+            $encodedBody = mb_convert_encoding($responseBody, DEFAULT_CHARSET, mb_detect_encoding($responseBody));
+
+            // Validate JSON before decoding
+            if (!json_validate($encodedBody)) {
+                throw new Exception('Invalid JSON response from GitHub API');
+            }
+
+            $this->jsonResponse = json_decode($encodedBody, true);
 
             // Empty JSON result
             if (empty($this->jsonResponse)) {
@@ -190,15 +188,14 @@ class Updater
         });
 
         if (!$allowPreReleases) {
-            foreach ($ltsVersions as $release) {
-                if (isset($release['prerelease']) && $release['prerelease']) {
-                    continue;
-                }
-                return $release;
+            // PHP 8.4: Use array_find to get the first non-prerelease version
+            $stableRelease = array_find($ltsVersions, fn($release) => !($release['prerelease'] ?? false));
+
+            if ($stableRelease === null) {
+                throw new Exception('No stable LTS versions (v2.8.*) found');
             }
 
-            // If no stable LTS versions found
-            throw new Exception('No stable LTS versions (v2.8.*) found');
+            return $stableRelease;
         }
 
         return $ltsVersions[0];
