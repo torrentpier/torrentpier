@@ -155,8 +155,8 @@ switch ($mode) {
         } elseif ($profiledata['user_level'] == MOD && !IS_AM) {
             $reg_ip = $last_ip = __('HIDDEN');
         } else {
-            $user_reg_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($profiledata['user_reg_ip']);
-            $user_last_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($profiledata['user_last_ip']);
+            $user_reg_ip = \TorrentPier\Helpers\IPHelper::decode($profiledata['user_reg_ip']);
+            $user_last_ip = \TorrentPier\Helpers\IPHelper::decode($profiledata['user_last_ip']);
             $reg_ip = '<a href="' . config()->get('whois_info') . $user_reg_ip . '" class="gen" target="_blank">' . $user_reg_ip . '</a>';
             $last_ip = '<a href="' . config()->get('whois_info') . $user_last_ip . '" class="gen" target="_blank">' . $user_last_ip . '</a>';
         }

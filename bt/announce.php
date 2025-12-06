@@ -485,11 +485,11 @@ if (!$output) {
 
         foreach ($rowset as $peer) {
             if (!empty($peer['ip'])) {
-                $peer_ipv4 = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']);
+                $peer_ipv4 = \TorrentPier\Helpers\IPHelper::decode($peer['ip']);
                 $peers .= inet_pton($peer_ipv4) . pack('n', $peer['port']);
             }
             if (!empty($peer['ipv6'])) {
-                $peer_ipv6 = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ipv6']);
+                $peer_ipv6 = \TorrentPier\Helpers\IPHelper::decode($peer['ipv6']);
                 $peers6 .= inet_pton($peer_ipv6) . pack('n', $peer['port']);
             }
         }
@@ -498,12 +498,12 @@ if (!$output) {
 
         foreach ($rowset as $peer) {
             if (!empty($peer['ip'])) {
-                $peer_ipv4 = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']);
-                $peers[] = ['ip' => \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']), 'port' => (int)$peer['port']];
+                $peer_ipv4 = \TorrentPier\Helpers\IPHelper::decode($peer['ip']);
+                $peers[] = ['ip' => \TorrentPier\Helpers\IPHelper::decode($peer['ip']), 'port' => (int)$peer['port']];
             }
             if (!empty($peer['ipv6'])) {
-                $peer_ipv6 = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ipv6']);
-                $peers[] = ['ip' => \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ipv6']), 'port' => (int)$peer['port']];
+                $peer_ipv6 = \TorrentPier\Helpers\IPHelper::decode($peer['ipv6']);
+                $peers[] = ['ip' => \TorrentPier\Helpers\IPHelper::decode($peer['ipv6']), 'port' => (int)$peer['port']];
             }
         }
     }

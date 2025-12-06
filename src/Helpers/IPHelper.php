@@ -52,14 +52,27 @@ class IPHelper extends Ip
     }
 
     /**
-     * Long to IP
-     * Decodes long format from both IPv4 & IPv6.
+     * Converts IP from any format (long or string) to readable string format.
+     * Accepts both numeric long format (2130706433) and string IP (127.0.0.1).
      *
-     * @param string $ip
-     * @return string
+     * @param string|int $ip IP in any format
+     * @return string IP in readable format (e.g., "127.0.0.1")
      */
-    public static function long2ip_extended(string $ip): string
+    public static function decode(string|int $ip): string
     {
-        return self::long2ip($ip, $ip > 0xFFFFFFFF);
+        // If it's a valid string IP, return as is
+        if (self::isValid($ip)) {
+            return (string)$ip;
+        }
+
+        // If it's numeric (long format), convert to string IP
+        if (is_numeric($ip)) {
+            $ipLong = (string)$ip;
+            $isIPv6 = bccomp($ipLong, '4294967295') === 1;
+            return self::long2ip($ipLong, $isIPv6);
+        }
+
+        // Fallback - return as is
+        return (string)$ip;
     }
 }

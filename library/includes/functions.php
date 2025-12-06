@@ -558,7 +558,7 @@ function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
 function bt_show_ip($ip, $port = '')
 {
     if (IS_AM) {
-        $ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($ip);
+        $ip = \TorrentPier\Helpers\IPHelper::decode($ip);
 
         if (!empty($port)) {
             if (\TorrentPier\Helpers\IPHelper::isValidv6($ip)) {
@@ -2199,7 +2199,7 @@ function infoByIP(string $ipAddress, int $port = 0): array
         return [];
     }
 
-    $ipAddress = \TorrentPier\Helpers\IPHelper::long2ip_extended($ipAddress);
+    $ipAddress = \TorrentPier\Helpers\IPHelper::decode($ipAddress);
     $cacheName = hash('xxh128', ($ipAddress . '_' . $port));
 
     if (!$data = CACHE('bb_ip2countries')->get($cacheName)) {
