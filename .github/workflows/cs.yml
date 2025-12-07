@@ -1,0 +1,42 @@
+name: Code Style
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - '.php-cs-fixer.php'
+
+jobs:
+  cs-fix:
+    name: PHP CS Fixer
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          tools: composer:v2
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-ansi --prefer-dist
+
+      - name: Run PHP CS Fixer
+        run: ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --diff
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'style: apply PHP CS Fixer changes'
+          file_pattern: '*.php'
+          disable_globbing: true

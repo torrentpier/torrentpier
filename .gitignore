@@ -7,7 +7,7 @@
 install.php_*
 composer-setup.php
 .env
-.php_cs.cache
+.php-cs-fixer.cache
 data/avatars
 data/uploads/*
 !data/uploads/.keep
