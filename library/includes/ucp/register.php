@@ -11,9 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$postData = request()->post->all();
-array_deep($postData, 'trim');
-
 set_die_append_msg();
 
 if (IN_DEMO_MODE) {
@@ -706,7 +703,7 @@ template()->assign_vars([
     'ADM_EDIT' => $adm_edit,
     'SHOW_PASS' => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
     'PASSWORD_LONG' => sprintf(__('PASSWORD_LONG'), PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH),
-    'INVITE_CODE' => request()->query->has('invite') ? htmlCHR(request()->query->get('invite')) : '',
+    'INVITE_CODE' => request()->query->has('invite') ? htmlCHR(trim((string)request()->query->get('invite'))) : '',
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
 
     'LANGUAGE_SELECT' => \TorrentPier\Legacy\Common\Select::language($pr_data['user_lang'], 'user_lang'),

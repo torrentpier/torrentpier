@@ -341,8 +341,9 @@ if (($delete || $mode == 'delete') && !$confirm) {
             $username = request()->post->has('username') ? clean_username(request()->post->get('username')) : '';
             $subject = request()->post->has('subject') ? clean_title(request()->post->get('subject')) : '';
             $message = request()->post->has('message') ? prepare_message(request()->post->get('message')) : '';
-            $attach_rg_sig = (request()->post->has('attach_rg_sig') && request()->post->has('poster_rg') && request()->post->get('poster_rg') != -1) ? 1 : 0;
-            $poster_rg_id = (request()->post->has('poster_rg') && request()->post->get('poster_rg') != -1) ? request()->post->getInt('poster_rg') : 0;
+            $poster_rg_raw = request()->post->getInt('poster_rg', -1);
+            $attach_rg_sig = (request()->post->has('attach_rg_sig') && $poster_rg_raw != -1) ? 1 : 0;
+            $poster_rg_id = ($poster_rg_raw != -1) ? $poster_rg_raw : 0;
 
             \TorrentPier\Legacy\Post::prepare_post($mode, $post_data, $error_msg, $username, $subject, $message);
 
@@ -379,7 +380,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
         $can_upload = $post_info['allow_reg_tracker'] && $is_auth['auth_attachments'] && $is_first_post;
         $file_attached = !empty($post_info['attach_ext_id']);
         $fileData = request()->getFileAsArray('fileupload');
-        $has_file = $fileData && !empty($fileData['name']);
+        $has_file = $fileData && $fileData['error'] === UPLOAD_ERR_OK;
 
         if ($can_upload && $has_file && (!$file_attached || $mode == 'editpost')) {
             $result = \TorrentPier\Attachment::store(

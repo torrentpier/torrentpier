@@ -7,8 +7,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-$forum_id = request()->get(POST_FORUM_URL) ?? 0;
-$topic_id = request()->get(POST_TOPIC_URL) ?? 0;
+$forum_id = request()->getInt(POST_FORUM_URL);
+$topic_id = request()->getInt(POST_TOPIC_URL);
 $mode = request()->has('mode') ? request()->getString('mode') : '';
 $confirmed = request()->post->has('confirm');
 

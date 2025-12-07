@@ -32,7 +32,7 @@ if ($is_moderator) {
     // Avatar
     if ($submit) {
         $avatarData = request()->getFileAsArray('avatar');
-        if ($avatarData && !empty($avatarData['name']) && config()->get('group_avatars.up_allowed')) {
+        if ($avatarData && $avatarData['error'] === UPLOAD_ERR_OK && config()->get('group_avatars.up_allowed')) {
             $upload = new TorrentPier\Legacy\Common\Upload();
 
             if ($upload->init(config()->get('group_avatars'), $avatarData) and $upload->store('avatar', ['user_id' => GROUP_AVATAR_MASK . $group_id, 'avatar_ext_id' => $group_info['avatar_ext_id']])) {

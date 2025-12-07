@@ -35,7 +35,7 @@ $start = abs(request()->query->getInt('start'));
 $per_page = config()->get('topics_per_page');
 
 if (request()->post->has('topic_id_list')) {
-    $topic_ids = implode(",", request()->post->get('topic_id_list'));
+    $topic_ids = implode(",", array_map('intval', request()->post->get('topic_id_list')));
     $sql = "DELETE FROM " . BB_TOPICS_WATCH . "  WHERE topic_id IN(" . $topic_ids . ") AND user_id = $user_id";
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not delete topic watch information #1');

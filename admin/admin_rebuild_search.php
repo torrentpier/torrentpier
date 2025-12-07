@@ -104,8 +104,13 @@ if (request()->has('time_limit')) {
     // check for webserver timeout (IE returns null)
     $webserver_keep_alive = request()->server->get('HTTP_KEEP_ALIVE');
     if ($webserver_keep_alive !== null) {
-        // get webserver timeout
-        $webserver_timeout = (int)$webserver_keep_alive;
+        // get webserver timeout (format: "timeout=5, max=100" or just "5")
+        $webserver_timeout = 0;
+        if (preg_match('/timeout\s*=\s*(\d+)/i', $webserver_keep_alive, $matches)) {
+            $webserver_timeout = (int)$matches[1];
+        } elseif (is_numeric($webserver_keep_alive)) {
+            $webserver_timeout = (int)$webserver_keep_alive;
+        }
         $time_limit_explain .= '<br />' . sprintf(__('TIME_LIMIT_EXPLAIN_WEBSERVER'), $webserver_timeout);
 
         if ($time_limit > $webserver_timeout) {

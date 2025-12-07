@@ -82,7 +82,7 @@ foreach ($m3uData as $entry) {
     // Parse tags
     foreach ($entry->getExtTags() as $extTag) {
         // #EXTINF tag
-        if ($extTag == $extTag instanceof \M3uParser\Tag\ExtInf) {
+        if ($extTag instanceof \M3uParser\Tag\ExtInf) {
             $title = $extTag->getTitle();
         }
     }

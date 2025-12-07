@@ -654,11 +654,11 @@ if ($mode == 'read') {
                 do {
                     switch ($row['privmsgs_type']) {
                         case PRIVMSGS_NEW_MAIL:
-                            ($update_users['new'][$row['privmsgs_to_userid']] ??= 0) + 1;
+                            $update_users['new'][$row['privmsgs_to_userid']] = ($update_users['new'][$row['privmsgs_to_userid']] ?? 0) + 1;
                             break;
 
                         case PRIVMSGS_UNREAD_MAIL:
-                            ($update_users['unread'][$row['privmsgs_to_userid']] ??= 0) + 1;
+                            $update_users['unread'][$row['privmsgs_to_userid']] = ($update_users['unread'][$row['privmsgs_to_userid']] ?? 0) + 1;
                             break;
                     }
                 } while ($row = DB()->sql_fetchrow($result));

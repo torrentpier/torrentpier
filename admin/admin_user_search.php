@@ -14,9 +14,6 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-$post = request()->post->all();
-array_deep($post, 'trim');
-
 $total_sql = '';
 
 if (!request()->get('dosearch')) {

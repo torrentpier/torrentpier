@@ -22,7 +22,7 @@ if (IS_GUEST) {
     redirect(LOGIN_URL . "?redirect=" . request()->server->get('REQUEST_URI'));
 }
 
-$user_id = request()->query->get(POST_USERS_URL) ?: userdata('user_id');
+$user_id = request()->query->getInt(POST_USERS_URL) ?: userdata('user_id');
 
 if (!$profiledata = get_userdata($user_id, profile_view: true)) {
     bb_die(__('NO_USER_ID_SPECIFIED'));
