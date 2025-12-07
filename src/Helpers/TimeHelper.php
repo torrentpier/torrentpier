@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,8 +12,10 @@ namespace TorrentPier\Helpers;
 
 use Carbon\Carbon;
 
-use Exception;
 use function config;
+
+use Exception;
+
 use function is_numeric;
 
 /**
@@ -40,14 +43,14 @@ class TimeHelper
         try {
             // Parse timestamp - handle both numeric strings and date strings
             $time = is_numeric($timestamp)
-                ? Carbon::createFromTimestamp((int)$timestamp)
+                ? Carbon::createFromTimestamp((int) $timestamp)
                 : Carbon::parse($timestamp);
 
             // Parse reference if provided
             $ref = null;
             if ($reference !== null) {
                 $ref = is_numeric($reference)
-                    ? Carbon::createFromTimestamp((int)$reference)
+                    ? Carbon::createFromTimestamp((int) $reference)
                     : Carbon::parse($reference);
             }
 
@@ -76,8 +79,7 @@ class TimeHelper
         float        $timezoneOffset = 0,
         ?string      $locale = null,
         array        $labels = []
-    ): string
-    {
+    ): string {
         if (!$format) {
             $format = function_exists('config')
                 ? config()->get('default_dateformat', 'd-M-Y H:i')

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,9 +10,8 @@
 
 namespace TorrentPier\Legacy\Common;
 
-use TorrentPier\Sessions;
-
 use Exception;
+use TorrentPier\Sessions;
 
 /**
  * Class User
@@ -135,23 +135,23 @@ class User
         if ($session_id || !$this->sessiondata['uk']) {
             $SQL = DB()->get_empty_sql_array();
 
-            $SQL['SELECT'][] = "u.*, s.*";
+            $SQL['SELECT'][] = 'u.*, s.*';
 
-            $SQL['FROM'][] = BB_SESSIONS . " s";
-            $SQL['INNER JOIN'][] = BB_USERS . " u ON(u.user_id = s.session_user_id)";
+            $SQL['FROM'][] = BB_SESSIONS . ' s';
+            $SQL['INNER JOIN'][] = BB_USERS . ' u ON(u.user_id = s.session_user_id)';
 
             if ($session_id) {
                 $SQL['WHERE'][] = "s.session_id = '$session_id'";
 
                 if (config()->get('torhelp_enabled')) {
-                    $SQL['SELECT'][] = "th.topic_id_csv AS torhelp";
-                    $SQL['LEFT JOIN'][] = BB_BT_TORHELP . " th ON(u.user_id = th.user_id)";
+                    $SQL['SELECT'][] = 'th.topic_id_csv AS torhelp';
+                    $SQL['LEFT JOIN'][] = BB_BT_TORHELP . ' th ON(u.user_id = th.user_id)';
                 }
 
                 $userdata_cache_id = $session_id;
             } else {
                 $SQL['WHERE'][] = "s.session_ip = '" . USER_IP . "'";
-                $SQL['WHERE'][] = "s.session_user_id = " . GUEST_UID;
+                $SQL['WHERE'][] = 's.session_user_id = ' . GUEST_UID;
 
                 $userdata_cache_id = USER_IP;
             }
@@ -186,9 +186,9 @@ class User
 
                 // Only update session a minute or so after last update
                 if ($update_sessions_table) {
-                    DB()->query("
-						UPDATE " . BB_SESSIONS . " SET
-							session_time = " . $this->data['session_time'] . "
+                    DB()->query('
+						UPDATE ' . BB_SESSIONS . ' SET
+							session_time = ' . $this->data['session_time'] . "
 						WHERE session_id = '$session_id'
 						LIMIT 1
 					");
@@ -204,14 +204,14 @@ class User
             $login = false;
             $user_id = (config()->get('allow_autologin') && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
 
-            if ($userdata = get_userdata((int)$user_id, false, true)) {
+            if ($userdata = get_userdata((int) $user_id, false, true)) {
                 if ($userdata['user_id'] != GUEST_UID && $userdata['user_active']) {
                     if (verify_id($this->sessiondata['uk'], LOGIN_KEY_LENGTH) && $this->verify_autologin_id($userdata, true, false)) {
                         $login = ($userdata['autologin_id'] && $this->sessiondata['uk'] === $userdata['autologin_id']);
                     }
                 }
             }
-            if (!$userdata || ((int)$userdata['user_id'] !== GUEST_UID && !$login)) {
+            if (!$userdata || ((int) $userdata['user_id'] !== GUEST_UID && !$login)) {
                 $userdata = get_userdata(GUEST_UID, false, true);
             }
 
@@ -219,10 +219,10 @@ class User
         }
 
         define('IS_GUEST', !$this->data['session_logged_in']);
-        define('IS_ADMIN', !IS_GUEST && (int)$this->data['user_level'] === ADMIN);
-        define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
-        define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
-        define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
+        define('IS_ADMIN', !IS_GUEST && (int) $this->data['user_level'] === ADMIN);
+        define('IS_MOD', !IS_GUEST && (int) $this->data['user_level'] === MOD);
+        define('IS_GROUP_MEMBER', !IS_GUEST && (int) $this->data['user_level'] === GROUP_MEMBER);
+        define('IS_USER', !IS_GUEST && (int) $this->data['user_level'] === USER);
         define('IS_SUPER_ADMIN', IS_ADMIN && isset(config()->get('super_admins')[$this->data['user_id']]));
         define('IS_AM', IS_ADMIN || IS_MOD);
         define('IS_PREMIUM', !IS_GUEST && isset(config()->get('premium_users')[$this->data['user_id']]));
@@ -237,7 +237,7 @@ class User
         $this->init_userprefs();
 
         // Initial ban check
-        if ($banInfo = getBanInfo((int)$this->id)) {
+        if ($banInfo = getBanInfo((int) $this->id)) {
             $this->session_end();
             if (!empty($banInfo['ban_reason'])) {
                 bb_die(__('YOU_BEEN_BANNED') . '<br/><br/>' . __('REASON') . ':&nbsp;' . '<b>' . $banInfo['ban_reason'] . '</b>');
@@ -263,24 +263,24 @@ class User
         $this->data = $userdata;
         $session_id = $this->sessiondata['sid'];
 
-        $login = ((int)$this->data['user_id'] !== GUEST_UID);
-        $user_id = (int)$this->data['user_id'];
-        $mod_admin_session = ((int)$this->data['user_level'] === ADMIN || (int)$this->data['user_level'] === MOD);
+        $login = ((int) $this->data['user_id'] !== GUEST_UID);
+        $user_id = (int) $this->data['user_id'];
+        $mod_admin_session = ((int) $this->data['user_level'] === ADMIN || (int) $this->data['user_level'] === MOD);
 
         // Create new session
         for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
             $session_id = make_rand_str(SID_LENGTH);
 
             $args = DB()->build_array('INSERT', [
-                'session_id' => (string)$session_id,
-                'session_user_id' => (int)$user_id,
-                'session_start' => (int)TIMENOW,
-                'session_time' => (int)TIMENOW,
-                'session_ip' => (string)USER_IP,
-                'session_logged_in' => (int)$login,
-                'session_admin' => (int)$mod_admin_session,
+                'session_id' => (string) $session_id,
+                'session_user_id' => (int) $user_id,
+                'session_start' => (int) TIMENOW,
+                'session_time' => (int) TIMENOW,
+                'session_ip' => (string) USER_IP,
+                'session_logged_in' => (int) $login,
+                'session_admin' => (int) $mod_admin_session,
             ]);
-            $sql = "INSERT INTO " . BB_SESSIONS . $args;
+            $sql = 'INSERT INTO ' . BB_SESSIONS . $args;
 
             if (DB()->query($sql)) {
                 break;
@@ -301,9 +301,9 @@ class User
             }
 
             if ($last_visit != $this->data['user_lastvisit']) {
-                DB()->query("
-					UPDATE " . BB_USERS . " SET
-						user_session_time = " . TIMENOW . ",
+                DB()->query('
+					UPDATE ' . BB_USERS . ' SET
+						user_session_time = ' . TIMENOW . ",
 						user_lastvisit = $last_visit,
 						user_last_ip = '" . USER_IP . "',
 						user_reg_ip = IF(user_reg_ip = '', '" . USER_IP . "', user_reg_ip)
@@ -354,18 +354,18 @@ class User
     {
         if ($this->data && is_array($this->data)) {
             Sessions::cache_rm_userdata($this->data);
-            DB()->query("
-                DELETE FROM " . BB_SESSIONS . "
+            DB()->query('
+                DELETE FROM ' . BB_SESSIONS . "
                 WHERE session_id = '{$this->data['session_id']}'
             ");
         }
 
         if (!IS_GUEST) {
             if ($update_lastvisit) {
-                DB()->query("
-					UPDATE " . BB_USERS . " SET
-						user_session_time = " . TIMENOW . ",
-						user_lastvisit = " . TIMENOW . ",
+                DB()->query('
+					UPDATE ' . BB_USERS . ' SET
+						user_session_time = ' . TIMENOW . ',
+						user_lastvisit = ' . TIMENOW . ",
 						user_last_ip = '" . USER_IP . "',
 						user_reg_ip = IF(user_reg_ip = '', '" . USER_IP . "', user_reg_ip)
 					WHERE user_id = {$this->data['user_id']}
@@ -401,14 +401,14 @@ class User
         if ($username && $password) {
             $username_sql = str_replace("\\'", "''", $username);
 
-            $sql = "
+            $sql = '
 				SELECT *
-				FROM " . BB_USERS . "
+				FROM ' . BB_USERS . "
 				WHERE username = '$username_sql'
 				  AND user_active = 1
-				  AND user_id != " . GUEST_UID . "
+				  AND user_id != " . GUEST_UID . '
 				LIMIT 1
-			";
+			';
 
             if ($userdata = DB()->fetch_row($sql)) {
                 if (!$userdata['username'] || !$userdata['user_password'] || ($userdata['user_id'] == GUEST_UID) || !$userdata['user_active']) {
@@ -422,10 +422,10 @@ class User
 
                 // Start mod/admin session
                 if ($mod_admin_login) {
-                    DB()->query("
-						UPDATE " . BB_SESSIONS . " SET
-							session_admin = " . $this->data['user_level'] . "
-						WHERE session_user_id = " . $this->data['user_id'] . "
+                    DB()->query('
+						UPDATE ' . BB_SESSIONS . ' SET
+							session_admin = ' . $this->data['user_level'] . '
+						WHERE session_user_id = ' . $this->data['user_id'] . "
 							AND session_id = '" . $this->data['session_id'] . "'
 					");
                     $this->data['session_admin'] = $this->data['user_level'];
@@ -436,16 +436,16 @@ class User
 
                 if ($new_session_userdata = $this->session_create($userdata, false)) {
                     // Removing guest sessions from this IP
-                    DB()->query("
-						DELETE FROM " . BB_SESSIONS . "
+                    DB()->query('
+						DELETE FROM ' . BB_SESSIONS . "
 						WHERE session_ip = '" . USER_IP . "'
-							AND session_user_id = " . GUEST_UID . "
-					");
+							AND session_user_id = " . GUEST_UID . '
+					');
 
                     return $new_session_userdata;
                 }
 
-                throw new \RuntimeException("Could not start session : login");
+                throw new \RuntimeException('Could not start session : login');
             }
         }
 
@@ -465,7 +465,7 @@ class User
         }
         // user_id
         if (!empty($sd_resv['uid'])) {
-            $this->sessiondata['uid'] = (int)$sd_resv['uid'];
+            $this->sessiondata['uid'] = (int) $sd_resv['uid'];
         }
         // sid
         if (!empty($sd_resv['sid']) && verify_id($sd_resv['sid'], SID_LENGTH)) {
@@ -484,7 +484,7 @@ class User
             COOKIE_DBG,
             'explain',
             'sql_log',
-            'sql_log_full'
+            'sql_log_full',
         ];
 
         if ($user_id == GUEST_UID) {
@@ -563,12 +563,12 @@ class User
     {
         $autologin_id = $create_new ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
-        DB()->query("
-			UPDATE " . BB_USERS . " SET
+        DB()->query('
+			UPDATE ' . BB_USERS . " SET
 				autologin_id = '$autologin_id'
-			WHERE user_id = " . (int)$userdata['user_id'] . "
+			WHERE user_id = " . (int) $userdata['user_id'] . '
 			LIMIT 1
-		");
+		');
 
         return $autologin_id;
     }
@@ -578,13 +578,13 @@ class User
      */
     public function set_shortcuts()
     {
-        $this->id =& $this->data['user_id'];
-        $this->active =& $this->data['user_active'];
-        $this->name =& $this->data['username'];
-        $this->lastvisit =& $this->data['user_lastvisit'];
-        $this->regdate =& $this->data['user_regdate'];
-        $this->level =& $this->data['user_level'];
-        $this->opt =& $this->data['user_opt'];
+        $this->id = & $this->data['user_id'];
+        $this->active = & $this->data['user_active'];
+        $this->name = & $this->data['username'];
+        $this->lastvisit = & $this->data['user_lastvisit'];
+        $this->regdate = & $this->data['user_regdate'];
+        $this->level = & $this->data['user_level'];
+        $this->opt = & $this->data['user_opt'];
         $this->ip = CLIENT_IP;
     }
 
@@ -654,9 +654,9 @@ class User
     {
         if ($type === 'all_forums') {
             // Update session time
-            DB()->query("
-				UPDATE " . BB_SESSIONS . " SET
-					session_time = " . TIMENOW . "
+            DB()->query('
+				UPDATE ' . BB_SESSIONS . ' SET
+					session_time = ' . TIMENOW . "
 				WHERE session_id = '{$this->data['session_id']}'
 				LIMIT 1
 			");
@@ -797,14 +797,14 @@ class User
         if (password_verify($enteredPassword, $userdata['user_password'])) {
             if (password_needs_rehash($userdata['user_password'], config()->get('password_hash_options.algo'), config()->get('password_hash_options.options'))) {
                 // Update password_hash
-                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+                DB()->query('UPDATE ' . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
             }
 
             return true;
         } else {
             if (hash('md5', hash('md5', $enteredPassword)) === $userdata['user_password']) {
                 // Update old md5 password
-                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+                DB()->query('UPDATE ' . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
 
                 return true;
             }

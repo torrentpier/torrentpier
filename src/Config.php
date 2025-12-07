@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -177,7 +178,7 @@ class Config
      */
     public function __serialize(): array
     {
-        throw new \LogicException("Cannot serialize a singleton.");
+        throw new \LogicException('Cannot serialize a singleton.');
     }
 
     /**
@@ -185,6 +186,6 @@ class Config
      */
     public function __unserialize(array $data): void
     {
-        throw new \LogicException("Cannot unserialize a singleton.");
+        throw new \LogicException('Cannot unserialize a singleton.');
     }
 }

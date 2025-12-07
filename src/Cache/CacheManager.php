@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,11 +12,6 @@ namespace TorrentPier\Cache;
 
 use Nette\Caching\Cache;
 use Nette\Caching\Storage;
-use Nette\Caching\Storages\FileStorage;
-use Nette\Caching\Storages\MemcachedStorage;
-use Nette\Caching\Storages\MemoryStorage;
-use Nette\Caching\Storages\SQLiteStorage;
-use TorrentPier\Dev;
 
 /**
  * Unified Cache Manager using Nette Caching internally
@@ -181,7 +177,7 @@ class CacheManager
     {
         if ($name === null) {
             // Remove all items in this namespace
-            $this->cur_query = "cache->clean(all)";
+            $this->cur_query = 'cache->clean(all)';
             $this->debug('start');
 
             $this->cache->clean([Cache::All => true]);
@@ -267,7 +263,7 @@ class CacheManager
      */
     public function clean(array $conditions = []): void
     {
-        $this->cur_query = "cache->clean(" . json_encode($conditions) . ")";
+        $this->cur_query = 'cache->clean(' . json_encode($conditions) . ')';
         $this->debug('start');
 
         $this->cache->clean($conditions);
@@ -288,7 +284,7 @@ class CacheManager
     {
         $prefixedKeys = array_map(fn($key) => $this->prefix . $key, $keys);
 
-        $this->cur_query = "cache->bulkLoad(" . count($keys) . " keys)";
+        $this->cur_query = 'cache->bulkLoad(' . count($keys) . ' keys)';
         $this->debug('start');
 
         $result = $this->cache->bulkLoad($prefixedKeys, $callback);
@@ -309,7 +305,7 @@ class CacheManager
      */
     public function call(callable $function, ...$args): mixed
     {
-        $this->cur_query = "cache->call(" . (is_string($function) ? $function : 'callable') . ")";
+        $this->cur_query = 'cache->call(' . (is_string($function) ? $function : 'callable') . ')';
         $this->debug('start');
 
         $result = $this->cache->call($function, ...$args);
@@ -377,8 +373,8 @@ class CacheManager
             return;
         }
 
-        $id =& $this->dbg_id;
-        $dbg =& $this->dbg[$id];
+        $id = & $this->dbg_id;
+        $dbg = & $this->dbg[$id];
 
         switch ($mode) {
             case 'start':
@@ -418,7 +414,7 @@ class CacheManager
                     case 'file':
                         return $trace['file'];
                     case 'line':
-                        return (string)$trace['line'];
+                        return (string) $trace['line'];
                     case 'all':
                     default:
                         return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
@@ -461,10 +457,10 @@ class CacheManager
             // Legacy cache systems sometimes had a 'db' property for database storage
             // Our unified system doesn't use separate database connections for cache
             // Return an object with empty debug arrays for compatibility
-            return (object)[
+            return (object) [
                 'dbg' => [],
                 'engine' => $this->engine,
-                'sql_timetotal' => 0
+                'sql_timetotal' => 0,
             ];
         }
 

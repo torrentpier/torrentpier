@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -16,7 +17,7 @@ $forum_id = request()->getInt('forum_id');
 $vote_id = request()->getInt('vote_id');
 
 $return_topic_url = TOPIC_URL . $topic_id;
-$return_topic_url .= request()->getInt('start') ? "&amp;start=" . request()->getInt('start') : '';
+$return_topic_url .= request()->getInt('start') ? '&amp;start=' . request()->getInt('start') : '';
 
 set_die_append_msg($forum_id, $topic_id);
 
@@ -83,7 +84,7 @@ switch ($mode) {
             bb_die(__('NO_VOTE_OPTION'));
         }
 
-        if (\TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)userdata('user_id'))) {
+        if (\TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int) userdata('user_id'))) {
             bb_die(__('ALREADY_VOTED'));
         }
 
@@ -102,7 +103,7 @@ switch ($mode) {
                 'topic_id' => $topic_id,
                 'user_id' => userdata('user_id'),
                 'vote_ip' => USER_IP,
-                'vote_dt' => TIMENOW
+                'vote_dt' => TIMENOW,
             ]);
         } catch (\Nette\Database\UniqueConstraintViolationException $e) {
             // Ignore duplicate entry (equivalent to INSERT IGNORE)

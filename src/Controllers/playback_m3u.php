@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -14,7 +15,7 @@ if (!config()->get('torr_server.enabled')) {
 // Valid file formats
 $validFormats = [
     'audio' => ['mp3', 'flac', 'wav', 'm4a'],
-    'video' => ['mp4', 'mkv', 'avi', 'm4v']
+    'video' => ['mp4', 'mkv', 'avi', 'm4v'],
 ];
 
 // Start session management
@@ -106,7 +107,7 @@ foreach ($m3uData as $entry) {
         'FILE_INDEX' => $urlParams['index'],
         'ROW_CLASS' => $rowClass,
         'IS_VALID' => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
-        'IS_AUDIO' => (int)in_array($getExtension, $validFormats['audio']),
+        'IS_AUDIO' => (int) in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $streamLink,
         'M3U_DL_LINK' => DL_URL . $topic_id . '&m3u=1',
         'TITLE' => $title,

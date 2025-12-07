@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,13 +12,13 @@ namespace TorrentPier\Cache;
 
 use Exception;
 use InvalidArgumentException;
-use Throwable;
 use Nette\Caching\Storage;
 use Nette\Caching\Storages\FileStorage;
 use Nette\Caching\Storages\MemcachedStorage;
 use Nette\Caching\Storages\MemoryStorage;
 use Nette\Caching\Storages\SQLiteStorage;
 use RuntimeException;
+use Throwable;
 
 /**
  * Unified Cache System using Nette Caching
@@ -99,7 +100,7 @@ class UnifiedCacheSystem
         $stubStorage = new MemoryStorage();
         $stubConfig = [
             'engine' => 'Memory',
-            'prefix' => $this->cfg['prefix'] ?? 'tp_'
+            'prefix' => $this->cfg['prefix'] ?? 'tp_',
         ];
         $this->stub = CacheManager::getInstance('__stub', $stubStorage, $stubConfig);
     }
@@ -125,7 +126,7 @@ class UnifiedCacheSystem
                         $storage = $this->_buildStorage($cache_type, $cache_name);
                         $config = [
                             'engine' => $this->_getEngineType($cache_type),
-                            'prefix' => $this->cfg['prefix'] ?? 'tp_'
+                            'prefix' => $this->cfg['prefix'] ?? 'tp_',
                         ];
                     } catch (Throwable $e) {
                         // Log error and fallback to file storage
@@ -135,7 +136,7 @@ class UnifiedCacheSystem
                         $storage = $this->_buildStorage('file', $cache_name);
                         $config = [
                             'engine' => 'File (fallback from ' . $cache_type . ')',
-                            'prefix' => $this->cfg['prefix'] ?? 'tp_'
+                            'prefix' => $this->cfg['prefix'] ?? 'tp_',
                         ];
                     }
 
@@ -162,7 +163,7 @@ class UnifiedCacheSystem
                 $storage = $this->_buildDatastoreStorage($datastore_type);
                 $config = [
                     'engine' => $this->_getEngineType($datastore_type),
-                    'prefix' => $this->cfg['prefix'] ?? 'tp_'
+                    'prefix' => $this->cfg['prefix'] ?? 'tp_',
                 ];
             } catch (Exception $e) {
                 // Log error and fallback to file storage
@@ -172,7 +173,7 @@ class UnifiedCacheSystem
                 $storage = $this->_buildDatastoreStorage('file');
                 $config = [
                     'engine' => 'File (fallback from ' . $datastore_type . ')',
-                    'prefix' => $this->cfg['prefix'] ?? 'tp_'
+                    'prefix' => $this->cfg['prefix'] ?? 'tp_',
                 ];
             }
 
@@ -223,7 +224,7 @@ class UnifiedCacheSystem
             case 'memcached':
                 $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
                 $host = $memcachedConfig['host'] ?? '127.0.0.1';
-                $port = (int)($memcachedConfig['port'] ?? 11211);
+                $port = (int) ($memcachedConfig['port'] ?? 11211);
 
                 $storage = new MemcachedStorage($host, $port);
 
@@ -312,7 +313,7 @@ class UnifiedCacheSystem
             case 'memcached':
                 $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
                 $host = $memcachedConfig['host'] ?? '127.0.0.1';
-                $port = (int)($memcachedConfig['port'] ?? 11211);
+                $port = (int) ($memcachedConfig['port'] ?? 11211);
 
                 $storage = new MemcachedStorage($host, $port);
 
@@ -388,7 +389,7 @@ class UnifiedCacheSystem
     {
         $stats = [
             'total_managers' => count($this->managers),
-            'managers' => []
+            'managers' => [],
         ];
 
         foreach ($this->managers as $name => $manager) {
@@ -396,7 +397,7 @@ class UnifiedCacheSystem
                 'engine' => $manager->engine,
                 'num_queries' => $manager->num_queries,
                 'total_time' => $manager->sql_timetotal,
-                'debug_enabled' => $manager->dbg_enabled
+                'debug_enabled' => $manager->dbg_enabled,
             ];
         }
 
@@ -406,7 +407,7 @@ class UnifiedCacheSystem
                 'num_queries' => $this->datastore->num_queries,
                 'total_time' => $this->datastore->sql_timetotal,
                 'queued_items' => count($this->datastore->queued_items),
-                'loaded_items' => count($this->datastore->data)
+                'loaded_items' => count($this->datastore->data),
             ];
         }
 
@@ -459,7 +460,7 @@ class UnifiedCacheSystem
         $storage = $this->_buildStorage($storageType, $namespace);
         $managerConfig = [
             'engine' => $this->_getEngineType($storageType),
-            'prefix' => $fullConfig['prefix']
+            'prefix' => $fullConfig['prefix'],
         ];
 
         return CacheManager::getInstance($namespace, $storage, $managerConfig);
@@ -496,7 +497,7 @@ class UnifiedCacheSystem
         $storage = $this->_buildStorage('sqlite', $namespace);
         $config = [
             'engine' => 'SQLite',
-            'prefix' => $this->cfg['prefix'] ?? 'tp_'
+            'prefix' => $this->cfg['prefix'] ?? 'tp_',
         ];
 
         return CacheManager::getInstance($namespace, $storage, $config);
@@ -505,16 +506,14 @@ class UnifiedCacheSystem
     /**
      * Prevent cloning of the singleton instance
      */
-    private function __clone()
-    {
-    }
+    private function __clone() {}
 
     /**
      * Prevent serialization of the singleton instance
      */
     public function __serialize(): array
     {
-        throw new \LogicException("Cannot serialize a singleton.");
+        throw new \LogicException('Cannot serialize a singleton.');
     }
 
     /**
@@ -522,6 +521,6 @@ class UnifiedCacheSystem
      */
     public function __unserialize(array $data): void
     {
-        throw new \LogicException("Cannot unserialize a singleton.");
+        throw new \LogicException('Cannot unserialize a singleton.');
     }
 }

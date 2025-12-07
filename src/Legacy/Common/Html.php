@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -38,11 +39,11 @@ class Html
         }
 
         $this->options = '';
-        $this->selected = array_flip((array)$selected);
+        $this->selected = array_flip((array) $selected);
         $this->max_length = $max_length;
 
         $this->attr = [];
-        $this->cur_attr =& $this->attr;
+        $this->cur_attr = & $this->attr;
 
         if (isset($params['__attributes'])) {
             $this->attr = $params['__attributes'];
@@ -69,7 +70,7 @@ class Html
             $opt_name = rtrim($opt_name);
 
             if (\is_array($opt_val)) {
-                $this->cur_attr =& $this->cur_attr[$opt_name];
+                $this->cur_attr = & $this->cur_attr[$opt_name];
 
                 $label = str_short(htmlCHR($opt_name), $this->max_length);
 
@@ -77,7 +78,7 @@ class Html
                 $this->_build_select_rec($opt_val);
                 $this->options .= "\t</optgroup>\n";
 
-                $this->cur_attr =& $this->attr;
+                $this->cur_attr = & $this->attr;
             } else {
                 $text = str_short(htmlCHR($opt_name), $this->max_length);
                 $value = ' value="' . htmlCHR($opt_val) . '"';

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -24,7 +25,7 @@ class Cron
     {
         \define('IN_CRON', true);
 
-        $sql = "SELECT * FROM " . BB_CRON . " WHERE cron_id IN ($jobs)";
+        $sql = 'SELECT * FROM ' . BB_CRON . " WHERE cron_id IN ($jobs)";
         if (!$result = DB()->sql_query($sql)) {
             bb_die('Could not obtain cron script');
         }
@@ -52,11 +53,11 @@ class Cron
                 bb_log($cron_runtime_log, CRON_LOG_DIR . '/' . basename($runtime_log_file));
             }
 
-            DB()->query("
-                UPDATE " . BB_CRON . " SET
+            DB()->query('
+                UPDATE ' . BB_CRON . ' SET
                     last_run = NOW(),
                     run_counter = run_counter + 1,
-                    execution_time = " . (float)$execution_time . ",
+                    execution_time = ' . (float) $execution_time . ",
                     next_run =
                 CASE
                     WHEN schedule = 'hourly' THEN
@@ -86,7 +87,7 @@ class Cron
      */
     public static function delete_jobs(string $jobs): void
     {
-        DB()->query("DELETE FROM " . BB_CRON . " WHERE cron_id IN ($jobs)");
+        DB()->query('DELETE FROM ' . BB_CRON . " WHERE cron_id IN ($jobs)");
     }
 
     /**
@@ -98,7 +99,7 @@ class Cron
     public static function toggle_active(string $jobs, string $cron_action): void
     {
         $active = ($cron_action == 'disable') ? 0 : 1;
-        DB()->query("UPDATE " . BB_CRON . " SET cron_active = $active WHERE cron_id IN ($jobs)");
+        DB()->query('UPDATE ' . BB_CRON . " SET cron_active = $active WHERE cron_id IN ($jobs)");
     }
 
     /**
@@ -137,7 +138,7 @@ class Cron
     {
         $cronTitle = request()->post->get('cron_title');
         $cronScript = request()->post->get('cron_script');
-        $row = DB()->fetch_row("SELECT cron_title, cron_script FROM " . BB_CRON . " WHERE cron_title = '" . DB()->escape($cronTitle) . "' or cron_script = '" . DB()->escape($cronScript) . "' ");
+        $row = DB()->fetch_row('SELECT cron_title, cron_script FROM ' . BB_CRON . " WHERE cron_title = '" . DB()->escape($cronTitle) . "' or cron_script = '" . DB()->escape($cronScript) . "' ");
 
         if ($row) {
             if ($cronScript == $row['cron_script']) {
@@ -146,7 +147,7 @@ class Cron
                 $langmode = __('TITLE_DUPLICATE');
             }
 
-            $message = $langmode . "<br /><br />" . sprintf(__('CLICK_RETURN_JOBS_ADDED'), "<a href=\"javascript:history.back(-1)\">", "</a>") . "<br /><br />" . sprintf(__('CLICK_RETURN_JOBS'), "<a href=\"admin_cron.php?mode=list\">", "</a>") . "<br /><br />" . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), "<a href=\"index.php?pane=right\">", "</a>");
+            $message = $langmode . '<br /><br />' . sprintf(__('CLICK_RETURN_JOBS_ADDED'), '<a href="javascript:history.back(-1)">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);
         }
@@ -167,7 +168,7 @@ class Cron
         $disable_board = $cron_arr['disable_board'];
         $run_counter = $cron_arr['run_counter'];
 
-        DB()->query("INSERT INTO " . BB_CRON . " (cron_active, cron_title, cron_script, schedule, run_day, run_time, run_order, last_run, next_run, run_interval, log_enabled, log_file, log_sql_queries, disable_board, run_counter) VALUES (
+        DB()->query('INSERT INTO ' . BB_CRON . " (cron_active, cron_title, cron_script, schedule, run_day, run_time, run_order, last_run, next_run, run_interval, log_enabled, log_file, log_sql_queries, disable_board, run_counter) VALUES (
 	$cron_active, '$cron_title', '$cron_script', '$schedule', '$run_day', '$run_time', '$run_order', '$last_run', '$next_run', '$run_interval', $log_enabled, '$log_file', $log_sql_queries, $disable_board, '$run_counter')");
     }
 
@@ -195,7 +196,7 @@ class Cron
         $disable_board = $cron_arr['disable_board'];
         $run_counter = $cron_arr['run_counter'];
 
-        DB()->query("UPDATE " . BB_CRON . " SET
+        DB()->query('UPDATE ' . BB_CRON . " SET
 		cron_active = '$cron_active',
 		cron_title = '$cron_title',
 		cron_script = '$cron_script',

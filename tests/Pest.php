@@ -111,7 +111,7 @@ function getTestDatabaseConfig(): array
         'dbuser' => 'test_user',
         'dbpasswd' => 'test_password',
         'charset' => 'utf8mb4',
-        'persist' => false
+        'persist' => false,
     ];
 }
 
@@ -124,7 +124,7 @@ function getInvalidDatabaseConfig(): array
         'dbuser' => 'invalid_user',
         'dbpasswd' => 'invalid_password',
         'charset' => 'utf8mb4',
-        'persist' => false
+        'persist' => false,
     ];
 }
 
@@ -242,7 +242,7 @@ function createTestUser(array $overrides = []): array
         'email' => 'test@example.com',
         'active' => 1,
         'created_at' => date('Y-m-d H:i:s'),
-        'updated_at' => date('Y-m-d H:i:s')
+        'updated_at' => date('Y-m-d H:i:s'),
     ], $overrides);
 }
 
@@ -255,7 +255,7 @@ function createTestTorrent(array $overrides = []): array
         'size' => 1048576,
         'seeders' => 5,
         'leechers' => 2,
-        'completed' => 10
+        'completed' => 10,
     ], $overrides);
 }
 
@@ -265,7 +265,7 @@ function createTestCacheConfig(): array
         'prefix' => 'test_',
         'engine' => 'Memory',
         'enabled' => true,
-        'ttl' => 3600
+        'ttl' => 3600,
     ];
 }
 
@@ -311,7 +311,7 @@ function createSelectQuery(array $options = []): array
         'FROM' => 'test_table',
         'WHERE' => '1=1',
         'ORDER BY' => 'id ASC',
-        'LIMIT' => '10'
+        'LIMIT' => '10',
     ], $options);
 }
 
@@ -320,7 +320,7 @@ function createInsertQuery(array $data = []): array
     $defaultData = ['name' => 'test', 'value' => 'test_value'];
     return [
         'INSERT' => 'test_table',
-        'VALUES' => array_merge($defaultData, $data)
+        'VALUES' => array_merge($defaultData, $data),
     ];
 }
 
@@ -330,7 +330,7 @@ function createUpdateQuery(array $data = [], string $where = 'id = 1'): array
     return [
         'UPDATE' => 'test_table',
         'SET' => array_merge($defaultData, $data),
-        'WHERE' => $where
+        'WHERE' => $where,
     ];
 }
 
@@ -338,7 +338,7 @@ function createDeleteQuery(string $where = 'id = 1'): array
 {
     return [
         'DELETE' => 'test_table',
-        'WHERE' => $where
+        'WHERE' => $where,
     ];
 }
 
@@ -355,7 +355,7 @@ function createTestCacheValue(array $data = []): array
     return array_merge([
         'data' => 'test_value',
         'timestamp' => time(),
-        'version' => '1.0'
+        'version' => '1.0',
     ], $data);
 }
 
@@ -372,7 +372,7 @@ function createDebugEntry(array $overrides = []): array
         'time' => 0.001,
         'info' => 'Test query',
         'mem_before' => 1024,
-        'mem_after' => 1024
+        'mem_after' => 1024,
     ], $overrides);
 }
 
@@ -438,7 +438,7 @@ function removeTempDirectory(string $dir): void
 function mockGlobalFunction(string $functionName, $returnValue): void
 {
     if (!function_exists($functionName)) {
-        eval("function $functionName() { return " . var_export($returnValue, true) . "; }");
+        eval("function $functionName() { return " . var_export($returnValue, true) . '; }');
     }
 }
 

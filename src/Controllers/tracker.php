@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,12 +12,12 @@
 page_cfg('include_bbcode_js', true);
 page_cfg('use_tablesorter', true);
 page_cfg('load_tpl_vars', [
-    'post_icons'
+    'post_icons',
 ]);
 page_cfg('allow_robots', false);
 
 // Session start
-user()->session_start(array('req_login' => config()->get('bt_tor_browse_only_reg')));
+user()->session_start(['req_login' => config()->get('bt_tor_browse_only_reg')]);
 
 set_die_append_msg();
 
@@ -84,153 +85,153 @@ $ord_sp_up = 12;
 $ord_sp_down = 13;
 
 // Order options
-$order_opt = array(
-    $ord_posted => array(
+$order_opt = [
+    $ord_posted => [
         'lang' => __('IS_REGISTERED'),
         'sql' => 'tor.reg_time',
-    ),
-    $ord_name => array(
+    ],
+    $ord_name => [
         'lang' => __('BT_TOPIC_TITLE'),
         'sql' => 't.topic_title',
-    ),
-    $ord_compl => array(
+    ],
+    $ord_compl => [
         'lang' => __('COMPLETED'),
         'sql' => 'tor.complete_count',
-    ),
-    $ord_seeders => array(
+    ],
+    $ord_seeders => [
         'lang' => __('SEEDS'),
         'sql' => 'sn.seeders',
-    ),
-    $ord_leechers => array(
+    ],
+    $ord_leechers => [
         'lang' => __('LEECHS'),
         'sql' => 'sn.leechers',
-    ),
-    $ord_sp_up => array(
+    ],
+    $ord_sp_up => [
         'lang' => __('SPEED_UP'),
         'sql' => 'sn.speed_up',
-    ),
-    $ord_sp_down => array(
+    ],
+    $ord_sp_down => [
         'lang' => __('SPEED_DOWN'),
         'sql' => 'sn.speed_down',
-    ),
-    $ord_repl => array(
+    ],
+    $ord_repl => [
         'lang' => __('BT_REPLIES'),
         'sql' => 't.topic_replies',
-    ),
-    $ord_views => array(
+    ],
+    $ord_views => [
         'lang' => __('BT_VIEWS'),
         'sql' => 't.topic_views',
-    ),
-    $ord_size => array(
+    ],
+    $ord_size => [
         'lang' => __('SIZE'),
         'sql' => 'tor.size',
-    ),
-    $ord_last_p => array(
+    ],
+    $ord_last_p => [
         'lang' => __('BT_LAST_POST'),
         'sql' => 't.topic_last_post_id',
-    ),
-    $ord_last_s => array(
+    ],
+    $ord_last_s => [
         'lang' => __('BT_SEEDER_LAST_SEEN'),
         'sql' => 'tor.seeder_last_seen',
-    ),
-);
+    ],
+];
 $order_select = [];
 foreach ($order_opt as $val => $opt) {
     $order_select[$opt['lang']] = $val;
 }
 
 // Sort direction
-$sort_opt = array(
-    $sort_asc => array(
+$sort_opt = [
+    $sort_asc => [
         'lang' => __('ASC'),
         'sql' => 'ASC',
-    ),
-    $sort_desc => array(
+    ],
+    $sort_desc => [
         'lang' => __('DESC'),
         'sql' => 'DESC',
-    ),
-);
+    ],
+];
 
 // Previous days
-$time_opt = array(
-    $search_all => array(
+$time_opt = [
+    $search_all => [
         'lang' => __('BT_ALL_DAYS_FOR'),
         'sql' => 0,
-    ),
-    1 => array(
+    ],
+    1 => [
         'lang' => __('BT_1_DAY_FOR'),
         'sql' => TIMENOW - 86400,
-    ),
-    3 => array(
+    ],
+    3 => [
         'lang' => __('BT_3_DAY_FOR'),
         'sql' => TIMENOW - 86400 * 3,
-    ),
-    7 => array(
+    ],
+    7 => [
         'lang' => __('BT_7_DAYS_FOR'),
         'sql' => TIMENOW - 86400 * 7,
-    ),
-    14 => array(
+    ],
+    14 => [
         'lang' => __('BT_2_WEEKS_FOR'),
         'sql' => TIMENOW - 86400 * 14,
-    ),
-    30 => array(
+    ],
+    30 => [
         'lang' => __('BT_1_MONTH_FOR'),
         'sql' => TIMENOW - 86400 * 30,
-    ),
-);
+    ],
+];
 $time_select = [];
 foreach ($time_opt as $val => $opt) {
     $time_select[$opt['lang']] = $val;
 }
 
 // Seeder not seen
-$s_not_seen_opt = array(
-    $search_all => array(
+$s_not_seen_opt = [
+    $search_all => [
         'lang' => __('BT_DISREGARD'),
         'sql' => 0,
-    ),
-    1 => array(
+    ],
+    1 => [
         'lang' => __('BT_1_DAY'),
         'sql' => TIMENOW - 86400,
-    ),
-    3 => array(
+    ],
+    3 => [
         'lang' => __('BT_3_DAYS'),
         'sql' => TIMENOW - 86400 * 3,
-    ),
-    7 => array(
+    ],
+    7 => [
         'lang' => __('BT_7_DAYS'),
         'sql' => TIMENOW - 86400 * 7,
-    ),
-    14 => array(
+    ],
+    14 => [
         'lang' => __('BT_2_WEEKS'),
         'sql' => TIMENOW - 86400 * 14,
-    ),
-    30 => array(
+    ],
+    30 => [
         'lang' => __('BT_1_MONTH'),
         'sql' => TIMENOW - 86400 * 30,
-    ),
-    $never => array(
+    ],
+    $never => [
         'lang' => __('BT_NEVER'),
         'sql' => 0,
-    ),
-);
+    ],
+];
 $s_not_seen_select = [];
 foreach ($s_not_seen_opt as $val => $opt) {
     $s_not_seen_select[$opt['lang']] = $val;
 }
 
 if ($release_groups = \TorrentPier\Legacy\Group::get_group_data('all')) {
-    $s_rg_opt = array(
-        $search_all => array(
+    $s_rg_opt = [
+        $search_all => [
             'lang' => __('CHOOSE_RELEASE_GROUP'),
             'sql' => 0,
-        ));
+        ]];
     foreach ($release_groups as $rg) {
         if ($rg['release_group']) {
-            $s_rg_opt[$rg['group_id']] = array(
+            $s_rg_opt[$rg['group_id']] = [
                 'lang' => $rg['group_name'],
                 'sql' => $rg['group_id'],
-            );
+            ];
         }
     }
     foreach ($s_rg_opt as $val => $opt) {
@@ -238,38 +239,38 @@ if ($release_groups = \TorrentPier\Legacy\Group::get_group_data('all')) {
     }
 } else {
     $s_rg_opt = '';
-    $s_release_group_select = array(__('CHOOSE_RELEASE_GROUP') => 0);
+    $s_release_group_select = [__('CHOOSE_RELEASE_GROUP') => 0];
 }
 
-$GPC = array(
-#	var_name                 key_name    def_value    GPC type
-    'all_words' => array('allw', 1, CHBOX),
-    'active' => array('a', 0, CHBOX),
-    'cat' => array('c', null, REQUEST),
-    'dl_cancel' => array('dla', 0, CHBOX),
-    'dl_compl' => array('dlc', 0, CHBOX),
-    'dl_down' => array('dld', 0, CHBOX),
-    'dl_will' => array('dlw', 0, CHBOX),
-    'forum' => array('f', $search_all, REQUEST),
-    'my' => array('my', 0, CHBOX),
-    'new' => array('new', 0, CHBOX),
-    'title_match' => array('nm', null, REQUEST),
-    'order' => array('o', $ord_posted, SELECT),
-    'poster_id' => array('pid', null, GET),
-    'poster_name' => array('pn', null, REQUEST),
-    'user_releases' => array('rid', null, GET),
-    'sort' => array('s', $sort_desc, SELECT),
-    'seed_exist' => array('sd', 0, CHBOX),
-    'show_author' => array('da', 1, CHBOX),
-    'show_cat' => array('dc', 0, CHBOX),
-    'show_forum' => array('df', 1, CHBOX),
-    'show_speed' => array('ds', 0, CHBOX),
-    's_rg' => array('srg', $search_all, SELECT),
-    's_not_seen' => array('sns', $search_all, SELECT),
-    'time' => array('tm', $search_all, SELECT),
-    'tor_type' => array('tor_type', 0, CHBOX),
-    'hash' => array('hash', null, REQUEST),
-);
+$GPC = [
+    #	var_name                 key_name    def_value    GPC type
+    'all_words' => ['allw', 1, CHBOX],
+    'active' => ['a', 0, CHBOX],
+    'cat' => ['c', null, REQUEST],
+    'dl_cancel' => ['dla', 0, CHBOX],
+    'dl_compl' => ['dlc', 0, CHBOX],
+    'dl_down' => ['dld', 0, CHBOX],
+    'dl_will' => ['dlw', 0, CHBOX],
+    'forum' => ['f', $search_all, REQUEST],
+    'my' => ['my', 0, CHBOX],
+    'new' => ['new', 0, CHBOX],
+    'title_match' => ['nm', null, REQUEST],
+    'order' => ['o', $ord_posted, SELECT],
+    'poster_id' => ['pid', null, GET],
+    'poster_name' => ['pn', null, REQUEST],
+    'user_releases' => ['rid', null, GET],
+    'sort' => ['s', $sort_desc, SELECT],
+    'seed_exist' => ['sd', 0, CHBOX],
+    'show_author' => ['da', 1, CHBOX],
+    'show_cat' => ['dc', 0, CHBOX],
+    'show_forum' => ['df', 1, CHBOX],
+    'show_speed' => ['ds', 0, CHBOX],
+    's_rg' => ['srg', $search_all, SELECT],
+    's_not_seen' => ['sns', $search_all, SELECT],
+    'time' => ['tm', $search_all, SELECT],
+    'tor_type' => ['tor_type', 0, CHBOX],
+    'hash' => ['hash', null, REQUEST],
+];
 
 // Define all GPC vars with default values
 foreach ($GPC as $name => $params) {
@@ -300,7 +301,7 @@ if (request()->query->has($user_releases_key)) {
 
 // Random release
 if (config()->get('tracker.random_release_button') && request()->query->has('random_release')) {
-    if ($random_release = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE tor_status NOT IN(" . implode(', ', array_keys(config()->get('tor_frozen'))) . ") ORDER BY RAND() LIMIT 1")) {
+    if ($random_release = DB()->fetch_row('SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE tor_status NOT IN(' . implode(', ', array_keys(config()->get('tor_frozen'))) . ') ORDER BY RAND() LIMIT 1')) {
         redirect(TOPIC_URL . $random_release['topic_id']);
     } else {
         bb_die(__('NO_MATCH'));
@@ -312,9 +313,9 @@ $tor_list_ary = [];
 $tor_list_sql = '';
 
 if ($search_id) {
-    $row = DB()->fetch_row("
+    $row = DB()->fetch_row('
 		SELECT search_array, search_settings
-		FROM " . BB_SEARCH . "
+		FROM ' . BB_SEARCH . "
 		WHERE session_id = '$session_id'
 			AND search_type = " . SEARCH_TYPE_TRACKER . "
 			AND search_id = '" . DB()->escape($search_id) . "'
@@ -371,7 +372,7 @@ if (!$set_default) {
                 $req_forums = implode(',', $req_forums);
             }
             foreach (explode(',', $req_forums) as $req_forum) {
-                $clean_forums[] = (int)$req_forum;
+                $clean_forums[] = (int) $req_forum;
             }
             $forum_val = implode(',', array_intersect($clean_forums, $allowed_forums));
         }
@@ -408,7 +409,7 @@ if (!$set_default) {
                 }
             }
         } elseif ($search_id && $previous_settings[$poster_id_key]) {
-            $poster_id_val = (int)$previous_settings[$poster_id_key];
+            $poster_id_val = (int) $previous_settings[$poster_id_key];
             $poster_name_val = $previous_settings[$poster_name_key] ?: '';
         }
 
@@ -451,15 +452,15 @@ if ($dl_will_val) {
 $dl_status_csv = implode(',', $dl_status);
 
 // Switches
-$seed_exist = (bool)$seed_exist_val;
-$poster_id = (bool)$poster_id_val;
-$title_match = (bool)$title_match_sql;
-$tor_type = (bool)$tor_type_val;
+$seed_exist = (bool) $seed_exist_val;
+$poster_id = (bool) $poster_id_val;
+$title_match = (bool) $title_match_sql;
+$tor_type = (bool) $tor_type_val;
 
-$hide_cat = (int)(!$show_cat_val);
-$hide_forum = (int)(!$show_forum_val);
-$hide_author = (int)(!$show_author_val);
-$hide_speed = (int)(!$show_speed_val);
+$hide_cat = (int) (!$show_cat_val);
+$hide_forum = (int) (!$show_forum_val);
+$hide_author = (int) (!$show_author_val);
+$hide_speed = (int) (!$show_speed_val);
 
 $only_new = ($new_val && !IS_GUEST);
 $only_active = ($active_val || $seed_exist);
@@ -481,7 +482,7 @@ if ($dl_search) {
 
 if ($allowed_forums) {
     // Save current search settings
-    $save_in_db = array(
+    $save_in_db = [
         'all_words',
         'active',
         'dl_cancel',
@@ -503,7 +504,7 @@ if ($allowed_forums) {
         'show_speed',
         'sort',
         'time',
-    );
+    ];
     $curr_set = [];
     foreach ($save_in_db as $name) {
         $keyVar = "{$name}_key";
@@ -528,15 +529,15 @@ if ($allowed_forums) {
     // Get torrents list
     if (!$tr_error && !$tor_list_sql) {
         $reg_time = $time_opt[$time_val]['sql'];
-        $poster_id_sql = (int)$poster_id_val;
-        $rg_id_sql = (int)$s_rg_val;
+        $poster_id_sql = (int) $poster_id_val;
+        $rg_id_sql = (int) $s_rg_val;
         $s_seen_time = $s_not_seen_opt[$s_not_seen_val]['sql'];
         $s_seen_sign = ($s_not_seen_val == $never) ? '=' : '<';
-        $s_seen_exclude = ($s_not_seen_val == $never) ? '' : "AND tor.seeder_last_seen != 0";
+        $s_seen_exclude = ($s_not_seen_val == $never) ? '' : 'AND tor.seeder_last_seen != 0';
         $order_by_peers = ($order_val == $ord_seeders || $order_val == $ord_leechers);
         $order_by_speed = ($order_val == $ord_sp_up || $order_val == $ord_sp_down);
 
-        $join_t = in_array($order_val, array($ord_name, $ord_repl, $ord_views, $ord_last_p, $title_match));
+        $join_t = in_array($order_val, [$ord_name, $ord_repl, $ord_views, $ord_last_p, $title_match]);
         $join_sn = ($only_active || $order_by_peers || $order_by_speed);
         $join_dl = $dl_search;
 
@@ -544,7 +545,7 @@ if ($allowed_forums) {
         $SQL = DB()->get_empty_sql_array();
 
         // SELECT
-        $SQL['SELECT'][] = "tor.topic_id";
+        $SQL['SELECT'][] = 'tor.topic_id';
 
         // FROM
         $SQL['FROM'][] = $torrents_tbl;
@@ -596,16 +597,16 @@ if ($allowed_forums) {
             $SQL['WHERE'][] = "tor.poster_id = $user_id";
         }
         if ($only_active) {
-            $SQL['WHERE'][] = "sn.topic_id IS NOT NULL";
+            $SQL['WHERE'][] = 'sn.topic_id IS NOT NULL';
         }
         if ($seed_exist) {
-            $SQL['WHERE'][] = "sn.seeders >= 1";
+            $SQL['WHERE'][] = 'sn.seeders >= 1';
         }
         if ($tor_type) {
-            $SQL['WHERE'][] = "tor.tor_type IN(" . TOR_TYPE_GOLD . "," . TOR_TYPE_SILVER . ")";
+            $SQL['WHERE'][] = 'tor.tor_type IN(' . TOR_TYPE_GOLD . ',' . TOR_TYPE_SILVER . ')';
         }
         if (!empty($status)) {
-            $SQL['WHERE'][] = "tor.tor_status IN(" . implode(', ', $status) . ")";
+            $SQL['WHERE'][] = 'tor.tor_status IN(' . implode(', ', $status) . ')';
         }
 
         // ORDER
@@ -627,10 +628,10 @@ if ($allowed_forums) {
     }
 
     if (!$tor_list_sql || $start > $tor_count) {
-        template()->assign_vars(array(
+        template()->assign_vars([
             'TOR_NOT_FOUND' => true,
             'NO_MATCH_MSG' => __('NO_MATCH'),
-        ));
+        ]);
     } else {
         // Save result in DB
         if ($tor_count > $per_page && !$search_id) {
@@ -640,7 +641,7 @@ if ($allowed_forums) {
             $columns = 'session_id,   search_type,   search_id,   search_time,   search_settings,  search_array';
             $values = "'$session_id', $search_type, '$search_id', " . TIMENOW . ", '$curr_set_sql', '$tor_list_sql'";
 
-            DB()->query("REPLACE INTO " . BB_SEARCH . " ($columns) VALUES ($values)");
+            DB()->query('REPLACE INTO ' . BB_SEARCH . " ($columns) VALUES ($values)");
         }
         unset($columns, $values, $curr_set_sql, $tor_list_sql);
 
@@ -651,16 +652,16 @@ if ($allowed_forums) {
         }
 
         // SELECT
-        $select = "
+        $select = '
 			SELECT
 				tor.topic_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
 				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, t.topic_vote, sn.seeders, sn.leechers, tor.info_hash, tor.info_hash_v2
-		";
-        $select .= (!$hide_speed) ? ", sn.speed_up, sn.speed_down" : '';
-        $select .= (!$hide_forum) ? ", tor.forum_id" : '';
-        $select .= (!$hide_cat) ? ", f.cat_id" : '';
-        $select .= (!$hide_author) ? ", tor.poster_id, u.username, u.user_rank" : '';
-        $select .= (!IS_GUEST) ? ", dl.user_status AS dl_status" : '';
+		';
+        $select .= (!$hide_speed) ? ', sn.speed_up, sn.speed_down' : '';
+        $select .= (!$hide_forum) ? ', tor.forum_id' : '';
+        $select .= (!$hide_cat) ? ', f.cat_id' : '';
+        $select .= (!$hide_author) ? ', tor.poster_id, u.username, u.user_rank' : '';
+        $select .= (!IS_GUEST) ? ', dl.user_status AS dl_status' : '';
 
         // FROM
         $from = "
@@ -684,7 +685,7 @@ if ($allowed_forums) {
 		";
 
         // ORDER
-        $order = "ORDER BY " . $order_opt[$order_val]['sql'];
+        $order = 'ORDER BY ' . $order_opt[$order_val]['sql'];
 
         // SORT
         $sort = $sort_opt[$sort_val]['sql'];
@@ -723,7 +724,7 @@ if ($allowed_forums) {
             $forum_id = (!$hide_forum && isset($tor['forum_id'])) ? $tor['forum_id'] : '';
             $poster_id = (!$hide_author && isset($tor['poster_id'])) ? $tor['poster_id'] : '';
 
-            template()->assign_block_vars('tor', array(
+            template()->assign_block_vars('tor', [
                 'CAT_ID' => $cat_id,
                 'CAT_TITLE' => $cat_id ? $cat_title_html[$cat_id] : '',
                 'FORUM_ID' => $forum_id,
@@ -732,13 +733,13 @@ if ($allowed_forums) {
                 'TOPIC_TITLE' => $tor['topic_title'],
                 'TOPIC_TIME' => bb_date($tor['topic_time'], 'd-M-y') . ' <b>&middot;</b> ' . humanTime($tor['topic_time']),
                 'POSTER_ID' => $poster_id,
-                'USERNAME' => $hide_author ? '' : profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
+                'USERNAME' => $hide_author ? '' : profile_url(['username' => $tor['username'], 'user_rank' => $tor['user_rank']]),
 
                 'ROW_CLASS' => $row_class,
                 'ROW_NUM' => $row_num,
                 'DL_CLASS' => $dl_class,
                 'IS_NEW' => (!IS_GUEST && $tor['reg_time'] > $lastvisit),
-                'POLL' => (bool)$tor['topic_vote'],
+                'POLL' => (bool) $tor['topic_vote'],
                 'USER_AUTHOR' => (!IS_GUEST && $poster_id == $user_id),
 
                 'MAGNET' => $tor_magnet,
@@ -762,14 +763,14 @@ if ($allowed_forums) {
                 'ADDED_RAW' => $tor['reg_time'],
                 'ADDED_TIME' => bb_date($tor['reg_time'], $time_format),
                 'ADDED_DATE' => bb_date($tor['reg_time'], $date_format, false),
-            ));
+            ]);
         }
     }
 } else {
-    template()->assign_vars(array(
+    template()->assign_vars([
         'TOR_NOT_FOUND' => true,
         'NO_MATCH_MSG' => __('BT_NO_SEARCHABLE_FORUMS'),
-    ));
+    ]);
 }
 
 // Pagination
@@ -780,10 +781,10 @@ if ($tor_count) {
 
     generate_pagination($base_url, $tor_count, $per_page, $start);
 
-    template()->assign_vars(array(
+    template()->assign_vars([
         'MATCHES' => $search_matches,
         'SERACH_MAX' => $search_max,
-    ));
+    ]);
 }
 
 if (empty($cat_forum)) {
@@ -828,18 +829,18 @@ if (config()->get('tracker.search_by_tor_status')) {
 }
 
 // Sort dir
-template()->assign_vars(array(
+template()->assign_vars([
     'SORT_NAME' => $sort_key,
     'SORT_ASC' => $sort_asc,
     'SORT_DESC' => $sort_desc,
     'SORT_ASC_CHECKED' => ($sort_val == $sort_asc) ? HTML_CHECKED : '',
     'SORT_DESC_CHECKED' => ($sort_val == $sort_desc) ? HTML_CHECKED : '',
-));
+]);
 
 // Displaying options
 $tor_type_lang = __('GOLD') . ' / ' . __('SILVER');
 
-template()->assign_vars(array(
+template()->assign_vars([
     'SHOW_CAT_CHBOX' => build_checkbox($show_cat_key, __('BT_SHOW_CAT'), $show_cat_val),
     'SHOW_FORUM_CHBOX' => build_checkbox($show_forum_key, __('BT_SHOW_FORUM'), $show_forum_val),
     'SHOW_AUTHOR_CHBOX' => build_checkbox($show_author_key, __('BT_SHOW_AUTHOR'), $show_author_val),
@@ -868,10 +869,10 @@ template()->assign_vars(array(
     'HIDE_CONTENTS' => user()->opt_js['h_tsp'],
 
     'U_SEARCH_USER' => "search?mode=searchuser&input_name=$poster_name_key",
-));
+]);
 
 // Hidden fields
-$save_through_pages = array(
+$save_through_pages = [
     'all_words',
     'active',
     'dl_cancel',
@@ -886,7 +887,7 @@ $save_through_pages = array(
     'show_forum',
     'show_speed',
     'tor_type',
-);
+];
 $hidden_fields = [];
 foreach ($save_through_pages as $name) {
     $keyVar = "{$name}_key";
@@ -897,7 +898,7 @@ foreach ($save_through_pages as $name) {
 // Set colspan
 $tor_colspan = $tor_colspan - $hide_cat - $hide_forum - $hide_author - $hide_speed;
 
-template()->assign_vars(array(
+template()->assign_vars([
     'PAGE_TITLE' => __('TRACKER'),
     'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
     'CAT_FORUM_SELECT' => $cat_forum_select,
@@ -911,7 +912,7 @@ template()->assign_vars(array(
     'TITLE_MATCH_MAX' => $title_match_max_len,
     'POSTER_NAME_MAX' => $poster_name_max_len,
     'POSTER_ERROR' => $poster_error,
-    'SHOW_SEARCH_OPT' => (bool)$allowed_forums,
+    'SHOW_SEARCH_OPT' => (bool) $allowed_forums,
     'SHOW_CAT' => $show_cat_val,
     'SHOW_FORUM' => $show_forum_val,
     'SHOW_AUTHOR' => $show_author_val,
@@ -923,6 +924,6 @@ template()->assign_vars(array(
     'TR_CAT_URL' => "$tracker_url?$cat_key=",
     'TR_FORUM_URL' => "$tracker_url?$forum_key=",
     'TR_POSTER_URL' => "$tracker_url?$poster_id_key=",
-));
+]);
 
 print_page('tracker.tpl');

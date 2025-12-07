@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -16,7 +17,7 @@ class FileList
 {
     public array $tor_decoded = [];
     public array $files_ary = [
-        '/' => []
+        '/' => [],
     ];
 
     public bool $multiple = false;
@@ -72,7 +73,7 @@ class FileList
         $info = &$this->tor_decoded['info'];
 
         if (isset($info['name.utf-8'])) {
-            $info['name'] =& $info['name.utf-8'];
+            $info['name'] = & $info['name.utf-8'];
         }
 
         if (isset($info['files']) && is_array($info['files'])) {
@@ -81,7 +82,7 @@ class FileList
 
             foreach ($info['files'] as $f) {
                 if (isset($f['path.utf-8'])) {
-                    $f['path'] =& $f['path.utf-8'];
+                    $f['path'] = & $f['path.utf-8'];
                 }
                 if (!isset($f['path']) || !is_array($f['path'])) {
                     continue;
@@ -96,12 +97,12 @@ class FileList
                     bb_die("Timeout, too many nested files/directories for file listing, aborting after \n{$structure['recs']} recursive calls.\nNesting level: " . count($info['files'], COUNT_RECURSIVE));
                 }
 
-                $length = isset($f['length']) ? (float)$f['length'] : 0;
+                $length = isset($f['length']) ? (float) $f['length'] : 0;
                 $subdir_count = count($f['path']) - 1;
 
                 if ($subdir_count > 0) {
                     $name = array_pop($f['path']);
-                    $cur_files_ary =& $this->files_ary;
+                    $cur_files_ary = & $this->files_ary;
 
                     for ($i = 0, $j = 1; $i < $subdir_count; $i++, $j++) {
                         $subdir = $f['path'][$i];
@@ -109,7 +110,7 @@ class FileList
                         if (!isset($cur_files_ary[$subdir]) || !is_array($cur_files_ary[$subdir])) {
                             $cur_files_ary[$subdir] = [];
                         }
-                        $cur_files_ary =& $cur_files_ary[$subdir];
+                        $cur_files_ary = & $cur_files_ary[$subdir];
 
                         if ($j === $subdir_count) {
                             if (is_string($cur_files_ary)) {
@@ -127,7 +128,7 @@ class FileList
             }
         } else {
             $name = clean_tor_dirname($info['name']);
-            $length = (float)$info['length'];
+            $length = (float) $info['length'];
             $this->files_ary['/'][] = "$name <i>$length</i>";
             natsort($this->files_ary['/']);
         }

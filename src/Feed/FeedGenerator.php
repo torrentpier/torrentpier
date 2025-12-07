@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -100,7 +101,7 @@ final class FeedGenerator
             return $cached;
         } catch (Throwable $e) {
             throw new FeedGenerationException(
-                "Failed to generate feed: " . $e->getMessage(),
+                'Failed to generate feed: ' . $e->getMessage(),
                 0,
                 $e
             );
@@ -149,9 +150,7 @@ final class FeedGenerator
     /**
      * Prevent cloning
      */
-    private function __clone()
-    {
-    }
+    private function __clone() {}
 
     /**
      * Prevent serialization of the singleton instance

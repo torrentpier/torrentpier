@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -16,11 +17,13 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use LogicException;
+
+use const PHP_ROUND_HALF_UP;
+
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 use TorrentPier\Http\Exception\HttpClientException;
-use const PHP_ROUND_HALF_UP;
 
 /**
  * HTTP Client (singleton)
@@ -299,8 +302,7 @@ final class HttpClient
         string    $savePath,
         ?callable $progressCallback = null,
         array     $options = []
-    ): bool
-    {
+    ): bool {
         // Add a progress callback if provided
         if ($progressCallback !== null) {
             $options['progress'] = function (
@@ -311,7 +313,7 @@ final class HttpClient
             ) use ($progressCallback): void {
                 if ($downloadTotal > 0) {
                     $percent = round(($downloadedBytes / $downloadTotal) * 100, 2, PHP_ROUND_HALF_UP);
-                    $progressCallback($percent, (int)$downloadedBytes, (int)$downloadTotal);
+                    $progressCallback($percent, (int) $downloadedBytes, (int) $downloadTotal);
                 }
             };
         }
@@ -371,18 +373,18 @@ final class HttpClient
             if ($response && $response->hasHeader('Retry-After')) {
                 $retryAfter = $response->getHeaderLine('Retry-After');
                 if (is_numeric($retryAfter)) {
-                    return (int)$retryAfter * 1000; // seconds -> ms
+                    return (int) $retryAfter * 1000; // seconds -> ms
                 }
                 // Support http-date format
                 $ts = strtotime($retryAfter);
                 if ($ts !== false) {
                     $delay = max(0, $ts - time());
-                    return (int)($delay * 1000);
+                    return (int) ($delay * 1000);
                 }
             }
 
             // Exponential backoff: 2s, 4s, 8s, etc.
-            return (int)(1000 * (2 ** $retries));
+            return (int) (1000 * (2 ** $retries));
         };
     }
 
@@ -423,7 +425,7 @@ final class HttpClient
     private function logRequest(RequestInterface $request): void
     {
         $message = sprintf(
-            "[HTTP] Request: %s %s",
+            '[HTTP] Request: %s %s',
             $request->getMethod(),
             $request->getUri()
         );
@@ -441,7 +443,7 @@ final class HttpClient
     private function logResponse(RequestInterface $request, ResponseInterface $response): void
     {
         $message = sprintf(
-            "[HTTP] Response: %s %s - Status: %d - Size: %d bytes",
+            '[HTTP] Response: %s %s - Status: %d - Size: %d bytes',
             $request->getMethod(),
             $request->getUri(),
             $response->getStatusCode(),
@@ -454,9 +456,7 @@ final class HttpClient
     /**
      * Prevent cloning
      */
-    private function __clone()
-    {
-    }
+    private function __clone() {}
 
     /**
      * Prevent serialization of the singleton instance

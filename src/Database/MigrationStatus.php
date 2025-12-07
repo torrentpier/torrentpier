@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -21,7 +22,7 @@ class MigrationStatus
     private string $migrationPath;
     private array $initialMigrations = [
         '20250619000001',
-        '20250619000002'
+        '20250619000002',
     ];
 
     public function __construct()
@@ -49,7 +50,7 @@ class MigrationStatus
                     'applied_migrations' => [],
                     'pending_migrations' => $this->getAvailableMigrations(),
                     'setup_status' => $setupStatus,
-                    'requires_setup' => $setupStatus['needs_setup']
+                    'requires_setup' => $setupStatus['needs_setup'],
                 ];
             }
 
@@ -67,7 +68,7 @@ class MigrationStatus
                     'version' => $migration->version,
                     'migration_name' => $migration->migration_name,
                     'start_time' => $migration->start_time,
-                    'end_time' => $migration->end_time
+                    'end_time' => $migration->end_time,
                 ];
             }
 
@@ -90,7 +91,7 @@ class MigrationStatus
                 'applied_migrations' => $appliedMigrationsArray,
                 'pending_migrations' => array_values($pendingMigrations),
                 'setup_status' => $setupStatus,
-                'requires_setup' => $setupStatus['needs_setup']
+                'requires_setup' => $setupStatus['needs_setup'],
             ];
 
         } catch (\Exception $e) {
@@ -116,7 +117,7 @@ class MigrationStatus
                     'type' => 'fresh',
                     'needs_setup' => false,
                     'message' => 'Fresh installation - migrations will run normally',
-                    'action_required' => false
+                    'action_required' => false,
                 ];
             }
 
@@ -127,7 +128,7 @@ class MigrationStatus
                     'needs_setup' => true,
                     'message' => 'Existing installation detected - migration setup required',
                     'action_required' => true,
-                    'instructions' => 'Mark initial migrations as applied using --fake flag'
+                    'instructions' => 'Mark initial migrations as applied using --fake flag',
                 ];
             }
 
@@ -140,7 +141,7 @@ class MigrationStatus
                     'needs_setup' => true,
                     'message' => 'Migration table exists but initial migrations not marked as applied',
                     'action_required' => true,
-                    'instructions' => 'Run: php vendor/bin/phinx migrate --fake --target=20250619000002'
+                    'instructions' => 'Run: php vendor/bin/phinx migrate --fake --target=20250619000002',
                 ];
             }
 
@@ -149,7 +150,7 @@ class MigrationStatus
                 'type' => 'fully_setup',
                 'needs_setup' => false,
                 'message' => 'Migration system fully configured',
-                'action_required' => false
+                'action_required' => false,
             ];
 
         } catch (\Exception $e) {
@@ -157,7 +158,7 @@ class MigrationStatus
                 'type' => 'error',
                 'needs_setup' => false,
                 'message' => 'Error detecting setup status: ' . $e->getMessage(),
-                'action_required' => false
+                'action_required' => false,
             ];
         }
     }
@@ -247,7 +248,7 @@ class MigrationStatus
                         'version' => $matches[1],
                         'name' => $matches[2],
                         'filename' => $filename,
-                        'file_path' => $file
+                        'file_path' => $file,
                     ];
                 }
             }
@@ -270,27 +271,27 @@ class MigrationStatus
     {
         try {
             // Get database name using Nette Database Explorer
-            $dbInfo = DB()->query("SELECT DATABASE() as db_name")->fetch();
+            $dbInfo = DB()->query('SELECT DATABASE() as db_name')->fetch();
 
             // Get table count using Nette Database Explorer
-            $tableInfo = DB()->query("
+            $tableInfo = DB()->query('
                 SELECT COUNT(*) as table_count
                 FROM information_schema.tables
                 WHERE table_schema = DATABASE()
-            ")->fetch();
+            ')->fetch();
 
             // Get database size using Nette Database Explorer
-            $sizeInfo = DB()->query("
+            $sizeInfo = DB()->query('
                 SELECT
                     ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) as size_mb
                 FROM information_schema.tables
                 WHERE table_schema = DATABASE()
-            ")->fetch();
+            ')->fetch();
 
             return [
                 'database_name' => $dbInfo->db_name ?? 'Unknown',
                 'table_count' => $tableInfo->table_count ?? 0,
-                'size_mb' => $sizeInfo->size_mb ?? 0
+                'size_mb' => $sizeInfo->size_mb ?? 0,
             ];
 
         } catch (\Exception $e) {
@@ -298,7 +299,7 @@ class MigrationStatus
                 'database_name' => 'Unknown',
                 'table_count' => 0,
                 'size_mb' => 0,
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ];
         }
     }

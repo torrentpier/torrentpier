@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -36,8 +37,8 @@ if ($is_moderator) {
             $upload = new TorrentPier\Legacy\Common\Upload();
 
             if ($upload->init(config()->get('group_avatars'), $avatarData) and $upload->store('avatar', ['user_id' => GROUP_AVATAR_MASK . $group_id, 'avatar_ext_id' => $group_info['avatar_ext_id']])) {
-                $avatar_ext_id = (int)$upload->file_ext_id;
-                DB()->query("UPDATE " . BB_GROUPS . " SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id LIMIT 1");
+                $avatar_ext_id = (int) $upload->file_ext_id;
+                DB()->query('UPDATE ' . BB_GROUPS . " SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id LIMIT 1");
             } else {
                 bb_die(implode($upload->errors));
             }
@@ -62,7 +63,7 @@ if ($is_moderator) {
         'GROUP_DESCRIPTION' => htmlCHR($group_info['group_description']),
         'GROUP_SIGNATURE' => htmlCHR($group_info['group_signature']),
         'U_GROUP_URL' => GROUP_URL . $group_id,
-        'RELEASE_GROUP' => (bool)$group_info['release_group'],
+        'RELEASE_GROUP' => (bool) $group_info['release_group'],
         'GROUP_TYPE' => $group_type,
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
         'S_GROUP_CLOSED_TYPE' => GROUP_CLOSED,
@@ -71,7 +72,7 @@ if ($is_moderator) {
         'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? ' checked' : '',
         'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? ' checked' : '',
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
-        'S_GROUP_CONFIG_ACTION' => "group_edit?" . POST_GROUPS_URL . "=$group_id",
+        'S_GROUP_CONFIG_ACTION' => 'group_edit?' . POST_GROUPS_URL . "=$group_id",
 
         'AVATAR_EXPLAIN' => sprintf(__('AVATAR_EXPLAIN'), config()->get('group_avatars.max_width'), config()->get('group_avatars.max_height'), humn_size(config()->get('group_avatars.max_size'))),
         'AVATAR_IMG' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -62,8 +63,8 @@ class DatabaseDebugger
      */
     public function debug(string $mode): void
     {
-        $id =& $this->dbg_id;
-        $dbg =& $this->dbg[$id];
+        $id = & $this->dbg_id;
+        $dbg = & $this->dbg[$id];
 
         if ($mode === 'start') {
             // Always update timing if required constants are defined
@@ -167,7 +168,7 @@ class DatabaseDebugger
                     case 'file':
                         return $frame['file'];
                     case 'line':
-                        return (string)($frame['line'] ?? '?');
+                        return (string) ($frame['line'] ?? '?');
                     case 'all':
                     default:
                         $file = function_exists('hide_bb_path') ? hide_bb_path($frame['file']) : basename($frame['file']);
@@ -252,7 +253,7 @@ class DatabaseDebugger
         $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.3f', $this->cur_query_time);
         $msg = [];
         $msg[] = round($this->sql_starttime);
-        $msg[] = date('m-d H:i:s', (int)$this->sql_starttime);
+        $msg[] = date('m-d H:i:s', (int) $this->sql_starttime);
         $msg[] = sprintf('%-6s', $q_time);
         $msg[] = sprintf('%05d', getmypid());
         $msg[] = $this->db->db_server;
@@ -292,21 +293,21 @@ class DatabaseDebugger
 
         if ($exception) {
             // Use the actual exception information which is more reliable
-            $error_msg = "Database Error: " . $exception->getMessage();
+            $error_msg = 'Database Error: ' . $exception->getMessage();
             $error_code = $exception->getCode();
             if ($error_code) {
                 $error_msg = "Database Error ({$error_code}): " . $exception->getMessage();
             }
 
             // Collect detailed error information
-            $error_details[] = "Exception: " . get_class($exception);
-            $error_details[] = "Message: " . $exception->getMessage();
-            $error_details[] = "Code: " . $exception->getCode();
-            $error_details[] = "File: " . $exception->getFile() . ":" . $exception->getLine();
+            $error_details[] = 'Exception: ' . get_class($exception);
+            $error_details[] = 'Message: ' . $exception->getMessage();
+            $error_details[] = 'Code: ' . $exception->getCode();
+            $error_details[] = 'File: ' . $exception->getFile() . ':' . $exception->getLine();
 
             // Add PDO-specific details if it's a PDO exception
             if ($exception instanceof \PDOException) {
-                $error_details[] = "PDO Error Info: " . json_encode($exception->errorInfo ?? []);
+                $error_details[] = 'PDO Error Info: ' . json_encode($exception->errorInfo ?? []);
             }
         } else {
             // Fallback to PDO error state (legacy behavior)
@@ -318,34 +319,34 @@ class DatabaseDebugger
             }
 
             $error_msg = "Database Error ({$error['code']}): " . $error['message'];
-            $error_details[] = "PDO Error Code: " . $error['code'];
-            $error_details[] = "PDO Error Message: " . $error['message'];
+            $error_details[] = 'PDO Error Code: ' . $error['code'];
+            $error_details[] = 'PDO Error Message: ' . $error['message'];
         }
 
         // Add comprehensive context for debugging
-        $error_details[] = "Query: " . ($this->db->cur_query ?: 'None');
-        $error_details[] = "Source: " . $this->debug_find_source();
-        $error_details[] = "Database: " . ($this->db->selected_db ?: 'None');
-        $error_details[] = "Server: " . $this->db->db_server;
-        $error_details[] = "Timestamp: " . date('Y-m-d H:i:s');
-        $error_details[] = "Request URI: " . ($_SERVER['REQUEST_URI'] ?? 'CLI');
-        $error_details[] = "User IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown');
+        $error_details[] = 'Query: ' . ($this->db->cur_query ?: 'None');
+        $error_details[] = 'Source: ' . $this->debug_find_source();
+        $error_details[] = 'Database: ' . ($this->db->selected_db ?: 'None');
+        $error_details[] = 'Server: ' . $this->db->db_server;
+        $error_details[] = 'Timestamp: ' . date('Y-m-d H:i:s');
+        $error_details[] = 'Request URI: ' . ($_SERVER['REQUEST_URI'] ?? 'CLI');
+        $error_details[] = 'User IP: ' . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown');
 
         // Check connection status
         try {
             if ($this->db->connection) {
-                $error_details[] = "Connection Status: Active";
+                $error_details[] = 'Connection Status: Active';
                 $pdo = $this->db->connection->getPdo();
-                $error_details[] = "PDO Connection: " . ($pdo ? 'Available' : 'Null');
+                $error_details[] = 'PDO Connection: ' . ($pdo ? 'Available' : 'Null');
                 if ($pdo) {
                     $errorInfo = $pdo->errorInfo();
-                    $error_details[] = "Current PDO Error Info: " . json_encode($errorInfo);
+                    $error_details[] = 'Current PDO Error Info: ' . json_encode($errorInfo);
                 }
             } else {
-                $error_details[] = "Connection Status: No connection";
+                $error_details[] = 'Connection Status: No connection';
             }
         } catch (\Exception $e) {
-            $error_details[] = "Connection Check Failed: " . $e->getMessage();
+            $error_details[] = 'Connection Check Failed: ' . $e->getMessage();
         }
 
         // Build comprehensive log message
@@ -360,7 +361,7 @@ class DatabaseDebugger
         }
 
         // Also log to PHP error log for immediate access
-        error_log("DETAILED: " . $log_message);
+        error_log('DETAILED: ' . $log_message);
     }
 
     /**
@@ -374,7 +375,7 @@ class DatabaseDebugger
             'source' => $this->debug_find_source(),
             'file' => $this->debug_find_source('file'),
             'line' => $this->debug_find_source('line'),
-            'time' => microtime(true)
+            'time' => microtime(true),
         ];
 
         $this->legacy_queries[] = $legacy_entry;
@@ -402,7 +403,7 @@ class DatabaseDebugger
         $msg .= 'Query:  ' . $query . LOG_LF;
         $msg .= 'Error:  ' . $error . LOG_LF;
         $msg .= 'Source: ' . $legacy_entry['source'] . LOG_LF;
-        $msg .= 'Time:   ' . date('Y-m-d H:i:s', (int)$legacy_entry['time']) . LOG_LF;
+        $msg .= 'Time:   ' . date('Y-m-d H:i:s', (int) $legacy_entry['time']) . LOG_LF;
 
         bb_log($msg, 'legacy_queries', false);
     }
@@ -451,14 +452,14 @@ class DatabaseDebugger
                     $query = "SELECT * FROM $m[1] WHERE $m[2]";
                 }
 
-                if (str_starts_with($query, "SELECT")) {
+                if (str_starts_with($query, 'SELECT')) {
                     $html_table = false;
 
                     try {
                         $result = $this->db->connection->query("EXPLAIN $query");
                         while ($row = $result->fetch()) {
                             // Convert row to array regardless of type
-                            $rowArray = (array)$row;
+                            $rowArray = (array) $row;
                             $html_table = $this->explain('add_explain_row', $html_table, $rowArray);
                         }
                     } catch (\Exception $e) {
@@ -486,7 +487,7 @@ class DatabaseDebugger
                     'sql' => $this->db->cur_query ?? '',
                     'query' => $this->db->cur_query ?? '',
                     'src' => $this->debug_find_source(),
-                    'trace' => $this->debug_find_source()  // Backup for compatibility
+                    'trace' => $this->debug_find_source(),  // Backup for compatibility
                 ], $dbg);
 
                 $this->explain_out .= '
@@ -536,7 +537,7 @@ class DatabaseDebugger
             'num_queries' => count($this->dbg),
             'sql_timetotal' => $this->db->sql_timetotal,
             'queries' => $this->dbg,
-            'explain_out' => $this->explain_out
+            'explain_out' => $this->explain_out,
         ];
     }
 

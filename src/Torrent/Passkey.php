@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -43,10 +44,10 @@ class Passkey
 
         if (!$old_passkey) {
             // Create the first passkey
-            DB()->query("INSERT IGNORE INTO " . BB_BT_USERS . " (user_id, auth_key) VALUES ($userId, '$passkey_val')");
+            DB()->query('INSERT IGNORE INTO ' . BB_BT_USERS . " (user_id, auth_key) VALUES ($userId, '$passkey_val')");
         } else {
             // Update exists passkey
-            DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $userId LIMIT 1");
+            DB()->query('UPDATE IGNORE ' . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $userId LIMIT 1");
         }
 
         if (DB()->affected_rows() == 1) {

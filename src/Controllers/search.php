@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -15,12 +16,12 @@ page_cfg('use_tablesorter', true);
 page_cfg('load_tpl_vars', [
     'post_buttons',
     'post_icons',
-    'topic_icons'
+    'topic_icons',
 ]);
 page_cfg('allow_robots', false);
 
 // Start session management
-user()->session_start(array('req_login' => config()->get('disable_search_for_guest')));
+user()->session_start(['req_login' => config()->get('disable_search_for_guest')]);
 
 set_die_append_msg();
 
@@ -35,7 +36,7 @@ if (request()->post->has('del_my_post')) {
         bb_die(__('NONE_SELECTED'));
     }
 
-    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 0 WHERE poster_id = " . user()->id . " AND topic_id IN($topic_csv)");
+    DB()->query('UPDATE ' . BB_POSTS . ' SET user_post = 0 WHERE poster_id = ' . user()->id . " AND topic_id IN($topic_csv)");
 
     if (DB()->affected_rows()) {
         //bb_die('Выбранные темы ['. count(request()->post->get('topic_id_list')) .' шт.] удалены из списка "Мои сообщения"');
@@ -54,9 +55,9 @@ if (request()->post->has('del_my_post')) {
         redirect('index.php');
     }
 
-    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = " . user()->id);
+    DB()->query('UPDATE ' . BB_POSTS . ' SET user_post = 1 WHERE poster_id = ' . user()->id);
 
-    redirect("search?" . POST_USERS_URL . "=" . user()->id);
+    redirect('search?' . POST_USERS_URL . '=' . user()->id);
 }
 
 if ($mode = request()->get('mode')) {
@@ -127,133 +128,133 @@ $ord_last_p = 5;
 $ord_created = 6;
 
 // Order options
-$order_opt = array(
-    $ord_posted => array(
+$order_opt = [
+    $ord_posted => [
         'lang' => __('SORT_TIME'),
         'sql' => 'item_id',
-    ),
-    $ord_last_p => array(
+    ],
+    $ord_last_p => [
         'lang' => __('BT_LAST_POST'),
         'sql' => 't.topic_last_post_id',
-    ),
-    $ord_created => array(
+    ],
+    $ord_created => [
         'lang' => __('BT_CREATED'),
         'sql' => 't.topic_time',
-    ),
-    $ord_name => array(
+    ],
+    $ord_name => [
         'lang' => __('SORT_TOPIC_TITLE'),
         'sql' => 't.topic_title',
-    ),
-    $ord_repl => array(
+    ],
+    $ord_repl => [
         'lang' => __('REPLIES'),
         'sql' => 't.topic_replies',
-    ),
-);
+    ],
+];
 $order_select = [];
 foreach ($order_opt as $val => $opt) {
     $order_select[$opt['lang']] = $val;
 }
 
 // Sort direction
-$sort_opt = array(
-    $sort_asc => array(
+$sort_opt = [
+    $sort_asc => [
         'lang' => __('ASC'),
         'sql' => ' ASC ',
-    ),
-    $sort_desc => array(
+    ],
+    $sort_desc => [
         'lang' => __('DESC'),
         'sql' => ' DESC ',
-    ),
-);
+    ],
+];
 $sort_select = [];
 foreach ($sort_opt as $val => $opt) {
     $sort_select[$opt['lang']] = $val;
 }
 
 // Previous days
-$time_opt = array(
-    $search_all => array(
+$time_opt = [
+    $search_all => [
         'lang' => __('BT_ALL_DAYS_FOR'),
         'sql' => 0,
-    ),
-    1 => array(
+    ],
+    1 => [
         'lang' => __('BT_1_DAY_FOR'),
         'sql' => TIMENOW - 86400,
-    ),
-    3 => array(
+    ],
+    3 => [
         'lang' => __('BT_3_DAY_FOR'),
         'sql' => TIMENOW - 86400 * 3,
-    ),
-    7 => array(
+    ],
+    7 => [
         'lang' => __('BT_7_DAYS_FOR'),
         'sql' => TIMENOW - 86400 * 7,
-    ),
-    14 => array(
+    ],
+    14 => [
         'lang' => __('BT_2_WEEKS_FOR'),
         'sql' => TIMENOW - 86400 * 14,
-    ),
-    30 => array(
+    ],
+    30 => [
         'lang' => __('BT_1_MONTH_FOR'),
         'sql' => TIMENOW - 86400 * 30,
-    ),
-);
+    ],
+];
 $time_select = [];
 foreach ($time_opt as $val => $opt) {
     $time_select[$opt['lang']] = $val;
 }
 
 // Display as
-$display_as_opt = array(
-    $as_topics => array(
+$display_as_opt = [
+    $as_topics => [
         'lang' => __('TOPICS'),
-    ),
-    $as_posts => array(
+    ],
+    $as_posts => [
         'lang' => __('MESSAGE'),
-    ),
-);
+    ],
+];
 $display_as_select = [];
 foreach ($display_as_opt as $val => $opt) {
     $display_as_select[$opt['lang']] = $val;
 }
 
 // Chars
-$chars_opt = array(
-    $show_all => array(
+$chars_opt = [
+    $show_all => [
         'lang' => __('ALL_AVAILABLE'),
-    ),
-    $show_briefly => array(
+    ],
+    $show_briefly => [
         'lang' => __('BRIEFLY'),
-    ),
-);
+    ],
+];
 $chars_select = [];
 foreach ($chars_opt as $val => $opt) {
     $chars_select[$opt['lang']] = $val;
 }
 
-$GPC = array(
-#	  var_name              key_name  def_value    GPC type
-    'all_words' => array('allw', 1, CHBOX),
-    'cat' => array('c', null, REQUEST),
-    'chars' => array('ch', $show_all, SELECT),
-    'display_as' => array('dm', $as_topics, SELECT),
-    'dl_cancel' => array('dla', 0, CHBOX),
-    'dl_compl' => array('dlc', 0, CHBOX),
-    'dl_down' => array('dld', 0, CHBOX),
-    'dl_user_id' => array('dlu', $user_id, CHBOX),
-    'dl_will' => array('dlw', 0, CHBOX),
-    'forum' => array('f', $search_all, REQUEST),
-    'my_topics' => array('myt', 0, CHBOX),
-    'new' => array('new', 0, CHBOX),
-    'new_topics' => array('nt', 0, CHBOX),
-    'order' => array('o', $ord_posted, SELECT),
-    'poster_id' => array('uid', null, REQUEST),
-    'poster_name' => array('pn', null, REQUEST),
-    'sort' => array('s', $sort_desc, SELECT),
-    'text_match' => array('nm', null, REQUEST),
-    'time' => array('tm', $search_all, SELECT),
-    'title_only' => array('to', 0, CHBOX),
-    'topic' => array('t', null, REQUEST),
-);
+$GPC = [
+    #	  var_name              key_name  def_value    GPC type
+    'all_words' => ['allw', 1, CHBOX],
+    'cat' => ['c', null, REQUEST],
+    'chars' => ['ch', $show_all, SELECT],
+    'display_as' => ['dm', $as_topics, SELECT],
+    'dl_cancel' => ['dla', 0, CHBOX],
+    'dl_compl' => ['dlc', 0, CHBOX],
+    'dl_down' => ['dld', 0, CHBOX],
+    'dl_user_id' => ['dlu', $user_id, CHBOX],
+    'dl_will' => ['dlw', 0, CHBOX],
+    'forum' => ['f', $search_all, REQUEST],
+    'my_topics' => ['myt', 0, CHBOX],
+    'new' => ['new', 0, CHBOX],
+    'new_topics' => ['nt', 0, CHBOX],
+    'order' => ['o', $ord_posted, SELECT],
+    'poster_id' => ['uid', null, REQUEST],
+    'poster_name' => ['pn', null, REQUEST],
+    'sort' => ['s', $sort_desc, SELECT],
+    'text_match' => ['nm', null, REQUEST],
+    'time' => ['tm', $search_all, SELECT],
+    'title_only' => ['to', 0, CHBOX],
+    'topic' => ['t', null, REQUEST],
+];
 
 // Initialize search parameters container
 $params = new SearchParams($GPC);
@@ -264,7 +265,7 @@ if (empty(request()->query->all()) && empty(request()->post->all())) {
     $forum_select_mode = explode(',', $excluded_forums_csv);
     $forum_select = get_forum_select($forum_select_mode, $params->key('forum') . '[]', $search_all, $max_forum_name_len, $forum_select_size, 'style="width: 95%;"', $search_all);
 
-    template()->assign_vars(array(
+    template()->assign_vars([
         'TPL_SEARCH_MAIN' => true,
         'PAGE_TITLE' => __('SEARCH'),
 
@@ -295,7 +296,7 @@ if (empty(request()->query->all()) && empty(request()->post->all())) {
         'SORT_SELECT' => build_select($params->key('sort'), $sort_select, $params->val('sort')),
         'CHARS_SELECT' => '', # build_select ($params->key('chars'), $chars_select, $params->val('chars')),
         'DISPLAY_AS_SELECT' => build_select($params->key('display_as'), $display_as_select, $params->val('display_as')),
-    ));
+    ]);
 
     print_page('search.tpl');
 }
@@ -305,9 +306,9 @@ datastore()->rm('cat_forums');
 
 // Restore previously found items list and search settings if we have valid $search_id
 if ($search_id) {
-    $row = DB()->fetch_row("
+    $row = DB()->fetch_row('
 		SELECT search_array, search_settings
-		FROM " . BB_SEARCH . "
+		FROM ' . BB_SEARCH . "
 		WHERE session_id = '$session_id'
 			AND search_type = " . SEARCH_TYPE_POST . "
 			AND search_id = '" . DB()->escape($search_id) . "'
@@ -433,7 +434,7 @@ if ($post_mode) {
 
     // Run initial search for post_ids
     if (!$items_found) {
-        $join_t = ($title_match || $my_topics || $new_topics || in_array($params->val('order'), array($ord_last_p, $ord_created, $ord_name, $ord_repl)));
+        $join_t = ($title_match || $my_topics || $new_topics || in_array($params->val('order'), [$ord_last_p, $ord_created, $ord_name, $ord_repl]));
         $join_s = ($text_match_sql && !$title_match);
         $join_p = ($my_posts || $join_s);
 
@@ -458,7 +459,7 @@ if ($post_mode) {
 
         // WHERE
         if ($join_p && $join_t) {
-            $SQL['WHERE'][] = "t.topic_id = p.topic_id";
+            $SQL['WHERE'][] = 't.topic_id = p.topic_id';
         }
 
         if ($excluded_forums_csv) {
@@ -466,10 +467,10 @@ if ($post_mode) {
         }
 
         if ($params->val('forum')) {
-            $SQL['WHERE'][] = "$tbl.forum_id IN(" . $params->val('forum') . ")";
+            $SQL['WHERE'][] = "$tbl.forum_id IN(" . $params->val('forum') . ')';
         }
         if ($params->val('topic')) {
-            $SQL['WHERE'][] = "$tbl.topic_id IN(" . $params->val('topic') . ")";
+            $SQL['WHERE'][] = "$tbl.topic_id IN(" . $params->val('topic') . ')';
         }
         if ($new_posts) {
             $SQL['WHERE'][] = "$tbl.$time_field > $lastvisit";
@@ -481,10 +482,10 @@ if ($post_mode) {
             $SQL['WHERE'][] = "$tbl.$time_field > " . $time_opt[$params->val('time')]['sql'];
         }
         if ($my_posts) {
-            $SQL['WHERE'][] = "p.poster_id = " . $params->val('poster_id');
+            $SQL['WHERE'][] = 'p.poster_id = ' . $params->val('poster_id');
         }
         if ($my_topics) {
-            $SQL['WHERE'][] = "t.topic_poster = " . $params->val('poster_id');
+            $SQL['WHERE'][] = 't.topic_poster = ' . $params->val('poster_id');
         }
 
         if ($text_match_sql) {
@@ -505,10 +506,10 @@ if ($post_mode) {
             redirect($url);
         }
 
-        $SQL['GROUP BY'][] = "item_id";
+        $SQL['GROUP BY'][] = 'item_id';
         // Fix for MySQL only_full_group_by mode: use MAX() when ordering by post_time with GROUP BY
-        $SQL['ORDER BY'][] = ($new_posts && $join_p) ? "p.topic_id ASC, MAX(p.post_time) ASC" : "$order $sort";
-        $SQL['LIMIT'][] = (string)$search_limit;
+        $SQL['ORDER BY'][] = ($new_posts && $join_p) ? 'p.topic_id ASC, MAX(p.post_time) ASC' : "$order $sort";
+        $SQL['LIMIT'][] = (string) $search_limit;
 
         $result = fetch_search_ids($SQL, SEARCH_TYPE_POST, $session_id, $per_page, $params);
         $search_id = $result['search_id'];
@@ -562,17 +563,17 @@ if ($post_mode) {
     foreach ($sorted_rows as $topic_id => $topic_posts) {
         // Topic title block
         $first_post = reset($topic_posts);
-        $topic_id = (int)$topic_id;
-        $forum_id = (int)$first_post['forum_id'];
+        $topic_id = (int) $topic_id;
+        $forum_id = (int) $first_post['forum_id'];
         $is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);
 
-        template()->assign_block_vars('t', array(
+        template()->assign_block_vars('t', [
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
             'TOPIC_TITLE' => censor()->censorString($first_post['topic_title']),
             'TOPIC_ICON' => get_topic_icon($first_post, $is_unread_t),
-        ));
+        ]);
 
         $quote_btn = $edit_btn = $ip_btn = '';
         $delpost_btn = IS_AM;
@@ -587,7 +588,7 @@ if ($post_mode) {
             $message = get_parsed_post($post);
             $message = censor()->censorString($message);
 
-            template()->assign_block_vars('t.p', array(
+            template()->assign_block_vars('t.p', [
                 'ROW_NUM' => $row_num,
                 'POSTER_ID' => $post['poster_id'],
                 'POSTER' => profile_url($post),
@@ -600,7 +601,7 @@ if ($post_mode) {
                 'EDIT' => $edit_btn,
                 'DELETE' => $delpost_btn,
                 'IP' => $ip_btn,
-            ));
+            ]);
 
             $curr_new_track_val = !empty($new_tracks[$topic_id]) ? $new_tracks[$topic_id] : 0;
             $new_tracks[$topic_id] = max($curr_new_track_val, $post['post_time']);
@@ -617,7 +618,7 @@ else {
 
     // Run initial search for topic_ids
     if (!$items_found) {
-        $join_t = ($title_match || $my_topics || $new_topics || $dl_search || $new_posts || in_array($params->val('order'), array($ord_last_p, $ord_created, $ord_name, $ord_repl)));
+        $join_t = ($title_match || $my_topics || $new_topics || $dl_search || $new_posts || in_array($params->val('order'), [$ord_last_p, $ord_created, $ord_name, $ord_repl]));
         $join_s = ($text_match_sql && !$title_match);
         $join_p = ($my_posts || $join_s);
         $join_dl = ($dl_search);
@@ -647,7 +648,7 @@ else {
 
         // WHERE
         if ($join_p && $join_t) {
-            $SQL['WHERE'][] = "t.topic_id = p.topic_id";
+            $SQL['WHERE'][] = 't.topic_id = p.topic_id';
         }
 
         if ($excluded_forums_csv) {
@@ -655,13 +656,13 @@ else {
         }
 
         if ($join_t) {
-            $SQL['WHERE'][] = "t.topic_status != " . TOPIC_MOVED;
+            $SQL['WHERE'][] = 't.topic_status != ' . TOPIC_MOVED;
         }
         if ($params->val('forum')) {
-            $SQL['WHERE'][] = "$tbl.forum_id IN(" . $params->val('forum') . ")";
+            $SQL['WHERE'][] = "$tbl.forum_id IN(" . $params->val('forum') . ')';
         }
         if ($params->val('topic')) {
-            $SQL['WHERE'][] = "$tbl.topic_id IN(" . $params->val('topic') . ")";
+            $SQL['WHERE'][] = "$tbl.topic_id IN(" . $params->val('topic') . ')';
         }
         if ($new_posts) {
             $SQL['WHERE'][] = "$tbl.$time_field > $lastvisit";
@@ -673,10 +674,10 @@ else {
             $SQL['WHERE'][] = "$tbl.$time_field > " . $time_opt[$params->val('time')]['sql'];
         }
         if ($my_posts) {
-            $SQL['WHERE'][] = "p.poster_id = " . $params->val('poster_id');
+            $SQL['WHERE'][] = 'p.poster_id = ' . $params->val('poster_id');
         }
         if ($my_posts && user()->id == $params->val('poster_id')) {
-            $SQL['WHERE'][] = "p.user_post = 1";
+            $SQL['WHERE'][] = 'p.user_post = 1';
 
             if (userdata('user_posts')) {
                 template()->assign_var('BB_DIE_APPEND_MSG', '
@@ -689,7 +690,7 @@ else {
             }
         }
         if ($my_topics) {
-            $SQL['WHERE'][] = "t.topic_poster = " . $params->val('poster_id');
+            $SQL['WHERE'][] = 't.topic_poster = ' . $params->val('poster_id');
         }
 
         if ($text_match_sql) {
@@ -710,15 +711,15 @@ else {
             $SQL['FROM'][] = $dl_stat_tbl;
         }
         if ($join_dl) {
-            $SQL['WHERE'][] = "dl.topic_id = t.topic_id AND dl.user_id = " . $params->val('dl_user_id') . " AND dl.user_status IN($dl_status_csv)";
+            $SQL['WHERE'][] = 'dl.topic_id = t.topic_id AND dl.user_id = ' . $params->val('dl_user_id') . " AND dl.user_status IN($dl_status_csv)";
         }
 
         if (!$SQL['WHERE']) {
             redirect($url);
         }
 
-        $SQL['GROUP BY'][] = "item_id";
-        $SQL['LIMIT'][] = (string)$search_limit;
+        $SQL['GROUP BY'][] = 'item_id';
+        $SQL['LIMIT'][] = (string) $search_limit;
 
         if ($egosearch) {
             $SQL['ORDER BY'][] = 'max_post_time DESC';
@@ -750,24 +751,24 @@ else {
 		IF(p2.poster_id = $anon_id, p2.post_username, u2.username) AS last_username
 	";
     if ($join_dl) {
-        $SQL['SELECT'][] = "dl.user_status AS dl_status";
+        $SQL['SELECT'][] = 'dl.user_status AS dl_status';
     }
 
-    $SQL['FROM'][] = BB_TOPICS . " t";
-    $SQL['LEFT JOIN'][] = BB_POSTS . " p1 ON(t.topic_first_post_id = p1.post_id)";
-    $SQL['LEFT JOIN'][] = BB_USERS . " u1 ON(t.topic_poster = u1.user_id)";
-    $SQL['LEFT JOIN'][] = BB_POSTS . " p2 ON(t.topic_last_post_id = p2.post_id)";
-    $SQL['LEFT JOIN'][] = BB_USERS . " u2 ON(p2.poster_id = u2.user_id)";
+    $SQL['FROM'][] = BB_TOPICS . ' t';
+    $SQL['LEFT JOIN'][] = BB_POSTS . ' p1 ON(t.topic_first_post_id = p1.post_id)';
+    $SQL['LEFT JOIN'][] = BB_USERS . ' u1 ON(t.topic_poster = u1.user_id)';
+    $SQL['LEFT JOIN'][] = BB_POSTS . ' p2 ON(t.topic_last_post_id = p2.post_id)';
+    $SQL['LEFT JOIN'][] = BB_USERS . ' u2 ON(p2.poster_id = u2.user_id)';
     if ($join_dl) {
         $SQL['LEFT JOIN'][] = BB_BT_DLSTATUS . " dl ON(dl.user_id = $user_id AND dl.topic_id = t.topic_id)";
     }
 
-    $SQL['WHERE'][] = "t.topic_id IN(" . implode(',', $items_display) . ")";
+    $SQL['WHERE'][] = 't.topic_id IN(' . implode(',', $items_display) . ')';
     if ($excluded_forums_csv) {
         $SQL['WHERE'][] = "t.forum_id NOT IN($excluded_forums_csv)";
     }
 
-    $SQL['LIMIT'][] = (string)$per_page;
+    $SQL['LIMIT'][] = (string) $per_page;
 
     // Fetch topics data
     $topic_rows = [];
@@ -789,7 +790,7 @@ else {
         $is_unread = is_unread($topic['topic_last_post_time'], $topic_id, $forum_id);
         $moved = ($topic['topic_status'] == TOPIC_MOVED);
 
-        template()->assign_block_vars('t', array(
+        template()->assign_block_vars('t', [
             'ROW_NUM' => $row_num,
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
@@ -804,15 +805,15 @@ else {
             'STATUS' => $topic['topic_status'],
             'TYPE' => $topic['topic_type'],
             'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL),
-            'POLL' => (bool)$topic['topic_vote'],
+            'POLL' => (bool) $topic['topic_vote'],
             'DL_CLASS' => isset($topic['dl_status']) ? dl_link_css($topic['dl_status']) : '',
 
-            'TOPIC_AUTHOR' => profile_url(array('username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank'])),
-            'LAST_POSTER' => profile_url(array('username' => $topic['last_username'], 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank'])),
+            'TOPIC_AUTHOR' => profile_url(['username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
+            'LAST_POSTER' => profile_url(['username' => $topic['last_username'], 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
             'LAST_POST_TIME' => bb_date($topic['topic_last_post_time']),
             'LAST_POST_TIME_RAW' => $topic['topic_last_post_time'],
             'LAST_POST_ID' => $topic['topic_last_post_id'],
-        ));
+        ]);
     }
 }
 
@@ -823,7 +824,7 @@ if ($items_display) {
 
     generate_pagination($url, $items_count, $per_page, $start);
 
-    template()->assign_vars(array(
+    template()->assign_vars([
         'PAGE_TITLE' => __('SEARCH'),
 
         'SEARCH_MATCHES' => ($items_count) ? sprintf(__('FOUND_SEARCH_MATCHES'), $items_count) : '',
@@ -832,7 +833,7 @@ if ($items_display) {
         'DL_CONTROLS' => ($dl_search && $params->val('dl_user_id') == $user_id),
         'DL_ACTION' => 'dl_list.php',
         'MY_POSTS' => (!$post_mode && $my_posts && user()->id == $params->val('poster_id')),
-    ));
+    ]);
 
     print_page('search_results.tpl');
 }
@@ -863,12 +864,12 @@ function fetch_search_ids(
     if ($items_count > $per_page) {
         $search_array = implode(',', $items_found);
 
-        $save_in_db = array(
+        $save_in_db = [
             'order',
             'sort',
             'display_as',
             'chars',
-        );
+        ];
         if ($params->val('dl_cancel')) {
             $save_in_db[] = 'dl_cancel';
         }
@@ -891,7 +892,7 @@ function fetch_search_ids(
         $columns = 'session_id,   search_type,   search_id,   search_time,    search_settings,    search_array';
         $values = "'$session_id', $search_type, '$search_id', " . TIMENOW . ", '$search_settings', '$search_array'";
 
-        DB()->query("REPLACE INTO " . BB_SEARCH . " ($columns) VALUES ($values)");
+        DB()->query('REPLACE INTO ' . BB_SEARCH . " ($columns) VALUES ($values)");
     }
 
     return [
@@ -906,9 +907,9 @@ function prevent_huge_searches($SQL)
     if (config()->get('limit_max_search_results')) {
         $SQL['select_options'][] = 'SQL_CALC_FOUND_ROWS';
         $SQL['ORDER BY'] = [];
-        $SQL['LIMIT'] = array('0');
+        $SQL['LIMIT'] = ['0'];
 
-        if (DB()->query($SQL) and $row = DB()->fetch_row("SELECT FOUND_ROWS() AS rows_count")) {
+        if (DB()->query($SQL) and $row = DB()->fetch_row('SELECT FOUND_ROWS() AS rows_count')) {
             if ($row['rows_count'] > config()->get('limit_max_search_results')) {
                 #				bb_log(str_compact(DB()->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
                 bb_die('Too_many_search_results');
@@ -924,14 +925,14 @@ function username_search($search_match)
     if (!empty($search_match)) {
         $username_search = str_replace('*', '%', clean_username($search_match));
 
-        $sql = "
+        $sql = '
 			SELECT username
-			FROM " . BB_USERS . "
+			FROM ' . BB_USERS . "
 			WHERE username LIKE '" . DB()->escape($username_search) . "'
-				AND user_id <> " . GUEST_UID . "
+				AND user_id <> " . GUEST_UID . '
 			ORDER BY username
 			LIMIT 200
-		";
+		';
 
         foreach (DB()->fetch_rowset($sql) as $row) {
             $username = htmlCHR(stripslashes(html_entity_decode($row['username'])));
@@ -944,7 +945,7 @@ function username_search($search_match)
 
     $input_name = request()->has('input_name') ? htmlCHR(request()->get('input_name')) : 'username';
 
-    template()->assign_vars(array(
+    template()->assign_vars([
         'TPL_SEARCH_USERNAME' => true,
 
         'PAGE_TITLE' => __('SEARCH'),
@@ -952,7 +953,7 @@ function username_search($search_match)
         'INPUT_NAME' => $input_name,
         'USERNAME_OPTIONS' => $username_list,
         'SEARCH_ACTION' => "search?mode=searchuser&amp;input_name=$input_name",
-    ));
+    ]);
 
     print_page('search.tpl', 'simple');
 }

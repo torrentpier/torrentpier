@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,15 +10,13 @@
 
 namespace TorrentPier\Torrent;
 
-use TorrentPier\Attachment;
-use TorrentPier\TorrServerAPI;
-
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
-
 use Exception;
 use Nette\Database\DriverException;
 use Nette\Database\UniqueConstraintViolationException;
+use TorrentPier\Attachment;
+use TorrentPier\TorrServerAPI;
 
 /**
  * Torrent registration on the tracker.
@@ -71,7 +70,7 @@ class Registry
         try {
             $tor = Bencode::decode($file_contents, dictType: Collection::ARRAY);
         } catch (Exception $e) {
-            self::errorExit(htmlCHR(__('TORFILE_INVALID') . ": " . $e->getMessage()));
+            self::errorExit(htmlCHR(__('TORFILE_INVALID') . ': ' . $e->getMessage()));
         }
 
         if (config()->get('bt_disable_dht')) {
@@ -142,7 +141,7 @@ class Registry
             }
         }
 
-        if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where LIMIT 1")) {
+        if ($row = DB()->fetch_row('SELECT topic_id FROM ' . BB_BT_TORRENTS . " $info_hash_where LIMIT 1")) {
             $msg = sprintf(__('BT_REG_FAIL_SAME_HASH'), TOPIC_URL . $row['topic_id']);
             set_die_append_msg($forum_id, $topic_id);
             bb_die($msg);
@@ -151,7 +150,7 @@ class Registry
         $totallen = 0;
 
         if (isset($info['length'])) {
-            $totallen = (float)$info['length'];
+            $totallen = (float) $info['length'];
         } elseif (isset($bt_v1, $info['files']) && !isset($bt_v2) && is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
                 // Exclude padding files
@@ -163,7 +162,7 @@ class Registry
                     }
                 }
             }
-            $totallen = (float)$totallen;
+            $totallen = (float) $totallen;
         } elseif (isset($bt_v2)) {
             $fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
                 $size = 0;
@@ -182,12 +181,12 @@ class Registry
                 return $size;
             };
 
-            $totallen = (float)$fileTreeSize($info['file tree']);
+            $totallen = (float) $fileTreeSize($info['file tree']);
         } else {
             self::errorExit(__('TORFILE_INVALID'));
         }
 
-        $size = sprintf('%.0f', (float)$totallen);
+        $size = sprintf('%.0f', (float) $totallen);
 
         try {
             DB()->table(BB_BT_TORRENTS)->insert([
@@ -220,7 +219,7 @@ class Registry
 
         // Bump topic
         if (config()->get('tracker.tor_topic_up')) {
-            DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id");
+            DB()->query('UPDATE ' . BB_TOPICS . ' SET topic_last_post_time = GREATEST(topic_last_post_time, ' . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id");
         }
 
         $reg_mode = self::regMode();

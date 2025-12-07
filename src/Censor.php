@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -142,7 +143,7 @@ class Censor
      */
     public function __serialize(): array
     {
-        throw new \LogicException("Cannot serialize a singleton.");
+        throw new \LogicException('Cannot serialize a singleton.');
     }
 
     /**
@@ -150,6 +151,6 @@ class Censor
      */
     public function __unserialize(array $data): void
     {
-        throw new \LogicException("Cannot unserialize a singleton.");
+        throw new \LogicException('Cannot unserialize a singleton.');
     }
 }

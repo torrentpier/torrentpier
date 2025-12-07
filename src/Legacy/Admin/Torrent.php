@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -40,7 +41,7 @@ class Torrent
             $in_sql = [];
 
             foreach ($fieldValues as $val) {
-                $in_sql[] = (int)$val;
+                $in_sql[] = (int) $val;
             }
 
             // Update status
@@ -109,7 +110,7 @@ class Torrent
                 } elseif ($type == 'bool') {
                     $config_value = ($postValue) ? 1 : 0;
                 } elseif ($type == 'num') {
-                    $config_value = abs((int)$postValue);
+                    $config_value = abs((int) $postValue);
                 } else {
                     return;
                 }

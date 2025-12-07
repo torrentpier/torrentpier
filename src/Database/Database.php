@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -71,7 +72,7 @@ class Database
             'log_counter' => 0,
             'num_queries' => 0,
             'sql_inittime' => 0,
-            'sql_timetotal' => 0
+            'sql_timetotal' => 0,
         ];
     }
 
@@ -254,7 +255,7 @@ class Database
 
             // Convert Row to array for backward compatibility
             // Nette Database Row extends ArrayHash, so we can cast it to array
-            $rowArray = (array)$row;
+            $rowArray = (array) $row;
 
             if ($field_name) {
                 return $rowArray[$field_name] ?? false;
@@ -333,7 +334,7 @@ class Database
         } catch (\Exception $e) {
             // Enhance the exception with query information
             $enhancedException = new \RuntimeException(
-                "Database error during fetch_row: " . $e->getMessage() .
+                'Database error during fetch_row: ' . $e->getMessage() .
                 "\nProblematic Query: " . ($this->cur_query ?: $this->last_query ?: 'Unknown'),
                 $e->getCode(),
                 $e
@@ -361,7 +362,7 @@ class Database
             while ($row = $result->fetch()) {
                 // Convert Row to array for backward compatibility
                 // Nette Database Row extends ArrayHash, so we can cast it to array
-                $rowArray = (array)$row;
+                $rowArray = (array) $row;
                 $rowset[] = $field_name ? ($rowArray[$field_name] ?? null) : $rowArray;
             }
         } catch (\Exception $e) {
@@ -476,18 +477,18 @@ class Database
     public function escape($v, bool $check_type = false, bool $dont_escape = false): string
     {
         if ($dont_escape) {
-            return (string)$v;
+            return (string) $v;
         }
 
         if (!$check_type) {
-            return $this->escape_string((string)$v);
+            return $this->escape_string((string) $v);
         }
 
         switch (true) {
             case is_string($v):
                 return "'" . $this->escape_string($v) . "'";
             case is_int($v):
-                return (string)$v;
+                return (string) $v;
             case is_bool($v):
                 return $v ? '1' : '0';
             case is_float($v):
@@ -663,14 +664,14 @@ class Database
                 if (isset($errorInfo[2]) && $errorInfo[2]) {
                     $message = $errorInfo[2]; // Driver-specific error message is most informative
                 } elseif (isset($errorInfo[1]) && $errorInfo[1]) {
-                    $message = "Error code: " . $errorInfo[1];
+                    $message = 'Error code: ' . $errorInfo[1];
                 } else {
-                    $message = "SQLSTATE: " . $errorCode;
+                    $message = 'SQLSTATE: ' . $errorCode;
                 }
 
                 return [
                     'code' => $errorCode,
-                    'message' => $message
+                    'message' => $message,
                 ];
             } catch (\Exception $e) {
                 return ['code' => $e->getCode(), 'message' => $e->getMessage()];
@@ -720,7 +721,7 @@ class Database
 
         if (!empty($this->shutdown['post_html'])) {
             $post_html_sql = $this->build_array('MULTI_INSERT', $this->shutdown['post_html']);
-            $this->query("REPLACE INTO " . (defined('BB_POSTS_HTML') ? BB_POSTS_HTML : 'bb_posts_html') . " $post_html_sql");
+            $this->query('REPLACE INTO ' . (defined('BB_POSTS_HTML') ? BB_POSTS_HTML : 'bb_posts_html') . " $post_html_sql");
         }
 
         if (!empty($this->shutdown['__sql'])) {
@@ -737,12 +738,12 @@ class Database
     {
         $tables_sql = [];
 
-        foreach ((array)$tables as $table_name) {
+        foreach ((array) $tables as $table_name) {
             $tables_sql[] = "$table_name $lock_type";
         }
 
         if ($tables_sql = implode(', ', $tables_sql)) {
-            $this->locked = (bool)$this->sql_query("LOCK TABLES $tables_sql");
+            $this->locked = (bool) $this->sql_query("LOCK TABLES $tables_sql");
         }
 
         return $this->locked ? $this->result : null;
@@ -753,7 +754,7 @@ class Database
      */
     public function unlock(): bool
     {
-        if ($this->locked && $this->sql_query("UNLOCK TABLES")) {
+        if ($this->locked && $this->sql_query('UNLOCK TABLES')) {
             $this->locked = false;
         }
 
@@ -766,7 +767,7 @@ class Database
     public function get_lock(string $name, int $timeout = 0): mixed
     {
         $lock_name = $this->get_lock_name($name);
-        $timeout = (int)$timeout;
+        $timeout = (int) $timeout;
         $row = $this->fetch_row("SELECT GET_LOCK('$lock_name', $timeout) AS lock_result");
 
         if ($row && $row['lock_result']) {
@@ -892,48 +893,48 @@ class Database
 
                 // Connection status
                 if ($this->connection) {
-                    $debug_info[] = "Connection: Active";
+                    $debug_info[] = 'Connection: Active';
                     try {
                         $pdo = $this->connection->getPdo();
                         if ($pdo) {
-                            $debug_info[] = "PDO: Available";
+                            $debug_info[] = 'PDO: Available';
                             $errorInfo = $pdo->errorInfo();
                             if ($errorInfo && count($errorInfo) >= 3) {
-                                $debug_info[] = "PDO ErrorInfo: " . json_encode($errorInfo);
+                                $debug_info[] = 'PDO ErrorInfo: ' . json_encode($errorInfo);
                             }
-                            $debug_info[] = "PDO ErrorCode: " . $pdo->errorCode();
+                            $debug_info[] = 'PDO ErrorCode: ' . $pdo->errorCode();
                         } else {
-                            $debug_info[] = "PDO: Null";
+                            $debug_info[] = 'PDO: Null';
                         }
                     } catch (\Exception $e) {
-                        $debug_info[] = "PDO Check Failed: " . $e->getMessage();
+                        $debug_info[] = 'PDO Check Failed: ' . $e->getMessage();
                     }
                 } else {
-                    $debug_info[] = "Connection: None";
+                    $debug_info[] = 'Connection: None';
                 }
 
                 // Query information
                 if ($this->cur_query) {
-                    $debug_info[] = "Last Query: " . substr($this->cur_query, 0, 200) . (strlen($this->cur_query) > 200 ? '...' : '');
+                    $debug_info[] = 'Last Query: ' . substr($this->cur_query, 0, 200) . (strlen($this->cur_query) > 200 ? '...' : '');
                 } else {
-                    $debug_info[] = "Last Query: None";
+                    $debug_info[] = 'Last Query: None';
                 }
 
                 // Database information
-                $debug_info[] = "Database: " . ($this->selected_db ?: 'None');
-                $debug_info[] = "Server: " . $this->db_server;
+                $debug_info[] = 'Database: ' . ($this->selected_db ?: 'None');
+                $debug_info[] = 'Server: ' . $this->db_server;
 
                 // Recent queries from debug log (if available)
                 if (isset($this->debugger->dbg) && !empty($this->debugger->dbg)) {
                     $recent_queries = array_slice($this->debugger->dbg, -3); // Last 3 queries
-                    $debug_info[] = "Recent Queries Count: " . count($recent_queries);
+                    $debug_info[] = 'Recent Queries Count: ' . count($recent_queries);
                     foreach ($recent_queries as $i => $query_info) {
-                        $debug_info[] = "Query " . ($i + 1) . ": " . substr($query_info['sql'] ?? 'Unknown', 0, 100) . (strlen($query_info['sql'] ?? '') > 100 ? '...' : '');
+                        $debug_info[] = 'Query ' . ($i + 1) . ': ' . substr($query_info['sql'] ?? 'Unknown', 0, 100) . (strlen($query_info['sql'] ?? '') > 100 ? '...' : '');
                     }
                 }
 
                 if ($debug_info) {
-                    $error_msg .= " [DEBUG: " . implode("; ", $debug_info) . "]";
+                    $error_msg .= ' [DEBUG: ' . implode('; ', $debug_info) . ']';
                 }
 
                 // Log this for investigation

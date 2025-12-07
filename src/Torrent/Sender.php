@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,10 +12,9 @@ namespace TorrentPier\Torrent;
 
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
+use Exception;
 use TorrentPier\Attachment;
 use TorrentPier\Http\Response;
-
-use Exception;
 
 /**
  * Torrent file sender with passkey injection.
@@ -77,7 +77,7 @@ class Sender
         try {
             $tor = Bencode::decode($file_contents, dictType: Collection::ARRAY);
         } catch (Exception $e) {
-            bb_die(htmlCHR(__('TORFILE_INVALID') . ": " . $e->getMessage()));
+            bb_die(htmlCHR(__('TORFILE_INVALID') . ': ' . $e->getMessage()));
         }
 
         // Get tracker announcer

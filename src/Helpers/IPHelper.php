@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -62,17 +63,17 @@ class IPHelper extends Ip
     {
         // If it's a valid string IP, return as is
         if (self::isValid($ip)) {
-            return (string)$ip;
+            return (string) $ip;
         }
 
         // If it's numeric (long format), convert to string IP
         if (is_numeric($ip)) {
-            $ipLong = (string)$ip;
+            $ipLong = (string) $ip;
             $isIPv6 = bccomp($ipLong, '4294967295') === 1;
             return self::long2ip($ipLong, $isIPv6);
         }
 
         // Fallback - return as is
-        return (string)$ip;
+        return (string) $ip;
     }
 }

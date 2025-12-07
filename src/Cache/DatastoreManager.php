@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,7 +12,6 @@ namespace TorrentPier\Cache;
 
 use Nette\Caching\Cache;
 use Nette\Caching\Storage;
-use TorrentPier\Dev;
 
 /**
  * Datastore Manager using unified CacheManager internally
@@ -184,7 +184,7 @@ class DatastoreManager
      */
     public function rm(array|string $items): void
     {
-        foreach ((array)$items as $item) {
+        foreach ((array) $items as $item) {
             unset($this->data[$item]);
         }
     }
@@ -200,7 +200,7 @@ class DatastoreManager
         if ($items == 'all') {
             $items = array_keys(array_unique($this->known_items));
         }
-        foreach ((array)$items as $item) {
+        foreach ((array) $items as $item) {
             $this->_build_item($item);
         }
     }
@@ -441,10 +441,10 @@ class DatastoreManager
             // Legacy cache systems sometimes had a 'db' property for database storage
             // Our unified system doesn't use separate database connections for cache
             // Return an object with empty debug arrays for compatibility
-            return (object)[
+            return (object) [
                 'dbg' => [],
                 'engine' => $this->engine,
-                'sql_timetotal' => 0
+                'sql_timetotal' => 0,
             ];
         }
 

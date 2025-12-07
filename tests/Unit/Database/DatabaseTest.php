@@ -279,7 +279,7 @@ describe('Database Class', function () {
         it('fetches multiple rows as rowset', function () {
             $expectedRows = [
                 ['id' => 1, 'name' => 'test1'],
-                ['id' => 2, 'name' => 'test2']
+                ['id' => 2, 'name' => 'test2'],
             ];
 
             $this->db->shouldReceive('sql_fetchrowset')->with($this->mockResult)
@@ -313,7 +313,7 @@ describe('Database Class', function () {
             $sqlArray = [
                 'SELECT' => ['*'],
                 'FROM' => ['users'],
-                'WHERE' => ['active = 1']
+                'WHERE' => ['active = 1'],
             ];
 
             $this->db->shouldReceive('build_sql')->with($sqlArray)
@@ -329,7 +329,7 @@ describe('Database Class', function () {
         it('builds INSERT queries correctly', function () {
             $sqlArray = [
                 'INSERT' => 'test_table',
-                'VALUES' => ['name' => 'John', 'email' => 'john@test.com']
+                'VALUES' => ['name' => 'John', 'email' => 'john@test.com'],
             ];
 
             $this->db->shouldReceive('build_sql')->with($sqlArray)
@@ -346,7 +346,7 @@ describe('Database Class', function () {
             $sqlArray = [
                 'UPDATE' => 'test_table',
                 'SET' => ['name' => 'Jane'],
-                'WHERE' => ['id = 1']
+                'WHERE' => ['id = 1'],
             ];
 
             $this->db->shouldReceive('build_sql')->with($sqlArray)
@@ -361,7 +361,7 @@ describe('Database Class', function () {
         it('builds DELETE queries correctly', function () {
             $sqlArray = [
                 'DELETE' => 'test_table',
-                'WHERE' => ['id = 1']
+                'WHERE' => ['id = 1'],
             ];
 
             $this->db->shouldReceive('build_sql')->with($sqlArray)
@@ -494,7 +494,7 @@ describe('Database Class', function () {
         it('handles database errors', function () {
             $expectedError = [
                 'code' => '42000',
-                'message' => 'Syntax error or access violation'
+                'message' => 'Syntax error or access violation',
             ];
 
             $this->db->shouldReceive('sql_error')->andReturn($expectedError);

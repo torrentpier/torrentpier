@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -10,9 +11,8 @@
 namespace TorrentPier;
 
 use InvalidArgumentException;
-
-use samdark\sitemap\Sitemap as STM;
 use samdark\sitemap\Index as IDX;
+use samdark\sitemap\Sitemap as STM;
 
 /**
  * Class Sitemap
@@ -34,17 +34,17 @@ class Sitemap
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
         $ignore_forum_sql = $not_forums_id ? "WHERE f.forum_id NOT IN($not_forums_id)" : '';
 
-        $sql = DB()->sql_query("
+        $sql = DB()->sql_query('
             SELECT
                 f.forum_id,
                 f.forum_name,
                 MAX(t.topic_time) AS last_topic_time
-            FROM " . BB_FORUMS . " f
-            LEFT JOIN " . BB_TOPICS . " t ON f.forum_id = t.forum_id
-            " . $ignore_forum_sql . "
+            FROM ' . BB_FORUMS . ' f
+            LEFT JOIN ' . BB_TOPICS . ' t ON f.forum_id = t.forum_id
+            ' . $ignore_forum_sql . '
             GROUP BY f.forum_id, f.forum_name
             ORDER BY f.forum_id ASC
-        ");
+        ');
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $forum_url = FORUM_URL . $row['forum_id'];
@@ -53,7 +53,7 @@ class Sitemap
             };
             $forumUrls[] = [
                 'url' => $forum_url,
-                'time' => $row['last_topic_time']
+                'time' => $row['last_topic_time'],
             ];
         }
 
@@ -74,7 +74,7 @@ class Sitemap
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
         $ignore_forum_sql = $not_forums_id ? "WHERE forum_id NOT IN($not_forums_id)" : '';
 
-        $sql = DB()->sql_query("SELECT topic_id, topic_title, topic_last_post_time FROM " . BB_TOPICS . " " . $ignore_forum_sql . " ORDER BY topic_last_post_time ASC");
+        $sql = DB()->sql_query('SELECT topic_id, topic_title, topic_last_post_time FROM ' . BB_TOPICS . ' ' . $ignore_forum_sql . ' ORDER BY topic_last_post_time ASC');
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $topic_url = TOPIC_URL . $row['topic_id'];

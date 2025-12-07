@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -64,7 +65,7 @@ if (config()->get('flist_max_files')) {
 try {
     $torrent = \Arokettu\Torrent\TorrentFile::loadFromString($file_contents);
 } catch (\Exception $e) {
-    bb_die(htmlCHR(__('TORFILE_INVALID') . ": " . $e->getMessage()), 410);
+    bb_die(htmlCHR(__('TORFILE_INVALID') . ': ' . $e->getMessage()), 410);
 }
 
 if (IS_GUEST && $torrent->isPrivate()) {
@@ -86,7 +87,7 @@ foreach ($files as $file) {
         'ROW_CLASS' => $row_class,
         'FILE_PATH' => clean_tor_dirname(implode('/', $file->path)),
         'FILE_LENGTH' => humn_size($file->length, 2),
-        'FILE_HASH' => $file->$t_hash_field ?? '-'
+        'FILE_HASH' => $file->$t_hash_field ?? '-',
     ]);
 }
 
@@ -95,7 +96,7 @@ $torrent_size = humn_size($row['size'], 2);
 
 // Output page
 template()->assign_vars([
-    'PAGE_TITLE' => "$torrent_name (" . $torrent_size . ")",
+    'PAGE_TITLE' => "$torrent_name (" . $torrent_size . ')',
     'FILES_COUNT' => sprintf(__('BT_FLIST_FILE_PATH'), declension(iterator_count($files), 'files')),
     'TORRENT_CREATION_DATE' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : __('UNKNOWN'),
     'TORRENT_CLIENT' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR($creator) : __('UNKNOWN'),

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -39,7 +40,7 @@ $role_select = [
     'all' => __('ALL'),
     'user' => __('AUTH_USER'),
     'admin' => __('AUTH_ADMIN'),
-    'moderator' => __('MODERATOR')
+    'moderator' => __('MODERATOR'),
 ];
 $select_sort_role = '<select name="role">';
 foreach ($role_select as $key => $value) {
@@ -94,7 +95,7 @@ if (!empty($username)) {
 }
 
 // Generate user information
-$sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email, avatar_ext_id FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ") $where_sql ORDER BY $order_by";
+$sql = 'SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email, avatar_ext_id FROM ' . BB_USERS . ' WHERE user_id NOT IN(' . EXCLUDED_USERS . ") $where_sql ORDER BY $order_by";
 if ($result = DB()->fetch_rowset($sql)) {
     foreach ($result as $i => $row) {
         $user_id = $row['user_id'];
@@ -112,7 +113,7 @@ if ($result = DB()->fetch_rowset($sql)) {
             'PM' => $user_info['pm'],
             'EMAIL' => $user_info['email'],
             'WWW' => $user_info['www'],
-            'U_VIEWPROFILE' => PROFILE_URL . $user_id
+            'U_VIEWPROFILE' => PROFILE_URL . $user_id,
         ]);
     }
 } else {
@@ -124,7 +125,7 @@ $paginationurl = "memberlist?mode=$mode&amp;order=$sort_order&amp;role=$role";
 $paginationurl .= !empty($username) ? "&amp;username=$username" : '';
 
 if ($mode != 'topten') {
-    $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ") $where_sql";
+    $sql = 'SELECT COUNT(*) AS total FROM ' . BB_USERS . ' WHERE user_id NOT IN(' . EXCLUDED_USERS . ") $where_sql";
     if (!$result = DB()->sql_query($sql)) {
         bb_die('Error getting total users');
     }

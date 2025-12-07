@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -77,7 +78,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                                 $errorInfo = $pdo->errorInfo();
                                 $info['PDO Error State'] = [
                                     'Code' => $errorCode,
-                                    'Info' => $errorInfo[2] ?? 'Unknown'
+                                    'Info' => $errorInfo[2] ?? 'Unknown',
                                 ];
                             }
                         }
@@ -238,7 +239,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
 
         // Truncate very long queries but keep them readable
         if (strlen($query) > 1000) {
-            return substr($query, 0, 1000) . "\n... [Query truncated - " . (strlen($query) - 1000) . " more characters]";
+            return substr($query, 0, 1000) . "\n... [Query truncated - " . (strlen($query) - 1000) . ' more characters]';
         }
 
         return $query;

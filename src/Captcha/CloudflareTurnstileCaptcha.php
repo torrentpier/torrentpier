@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -85,9 +86,9 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
             }
 
             // Safely decode JSON with error checking
-            $responseBody = (string)$response->getBody();
+            $responseBody = (string) $response->getBody();
             if (!json_validate($responseBody)) {
-                bb_log("Cloudflare Turnstile verification failed: Invalid JSON response" . LOG_LF);
+                bb_log('Cloudflare Turnstile verification failed: Invalid JSON response' . LOG_LF);
                 return false;
             }
             $responseData = json_decode($responseBody, false);

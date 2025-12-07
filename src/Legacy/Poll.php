@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -32,12 +33,12 @@ class Poll
      */
     public function build_poll_data($posted_data)
     {
-        $poll_caption = (string)@$posted_data['poll_caption'];
-        $poll_votes = (string)@$posted_data['poll_votes'];
+        $poll_caption = (string) @$posted_data['poll_caption'];
+        $poll_votes = (string) @$posted_data['poll_votes'];
         $this->poll_votes = [];
 
         if (!$poll_caption = str_compact($poll_caption)) {
-            
+
             return $this->err_msg = __('EMPTY_POLL_TITLE');
         }
         $this->poll_votes[] = $poll_caption; // header is vote_id = 0
@@ -51,7 +52,7 @@ class Poll
 
         // check for "< 3" -- 2 answer variants + header
         if (\count($this->poll_votes) < 3 || \count($this->poll_votes) > $this->max_votes + 1) {
-            
+
             return $this->err_msg = sprintf(__('NEW_POLL_VOTES'), $this->max_votes);
         }
     }
@@ -68,10 +69,10 @@ class Poll
         $sql_ary = [];
         foreach ($this->poll_votes as $vote_id => $vote_text) {
             $sql_ary[] = [
-                'topic_id' => (int)$topic_id,
-                'vote_id' => (int)$vote_id,
-                'vote_text' => (string)$vote_text,
-                'vote_result' => (int)0,
+                'topic_id' => (int) $topic_id,
+                'vote_id' => (int) $vote_id,
+                'vote_text' => (string) $vote_text,
+                'vote_result' => (int) 0,
             ];
         }
         // Delete existing poll data first, then insert new data
@@ -138,7 +139,7 @@ class Poll
 
         foreach ($poll_data as $row) {
             $opt_text_for_js = htmlCHR($row['vote_text']);
-            $opt_result_for_js = (int)$row['vote_result'];
+            $opt_result_for_js = (int) $row['vote_result'];
 
             $items[$row['topic_id']][$row['vote_id']] = [$opt_text_for_js, $opt_result_for_js];
         }
@@ -158,7 +159,7 @@ class Poll
      */
     public static function userIsAlreadyVoted(int $topic_id, int $user_id): bool
     {
-        return (bool)DB()->table(BB_POLL_USERS)
+        return (bool) DB()->table(BB_POLL_USERS)
             ->where('topic_id', $topic_id)
             ->where('user_id', $user_id)
             ->fetch();

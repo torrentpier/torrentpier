@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -43,7 +44,7 @@ trait TopicVisibilityFilterTrait
         // Filter out topics from forbidden forums
         return array_filter($topics, function ($topic) use ($notForumsId) {
             // Get forum_id as int, default to 0 if missing
-            $forumId = isset($topic['forum_id']) ? (int)$topic['forum_id'] : 0;
+            $forumId = isset($topic['forum_id']) ? (int) $topic['forum_id'] : 0;
 
             // Keep a topic if its forum is NOT in a forbidden list (strict comparison)
             return !in_array($forumId, $notForumsId, true);

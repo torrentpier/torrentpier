@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -41,7 +42,8 @@ class ManticoreSearch
 
         $this->pdo = new PDO(
             "mysql:host={$host};port={$port};charset=utf8mb4",
-            '', '',
+            '',
+            '',
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
         );
     }
@@ -55,24 +57,24 @@ class ManticoreSearch
     public function createIndexes(): bool
     {
         $indexes = [
-            'topics_rt' => "CREATE TABLE IF NOT EXISTS topics_rt (
+            'topics_rt' => 'CREATE TABLE IF NOT EXISTS topics_rt (
                 id bigint,
                 topic_title text indexed,
                 forum_id int
-            )",
+            )',
 
-            'posts_rt' => "CREATE TABLE IF NOT EXISTS posts_rt (
+            'posts_rt' => 'CREATE TABLE IF NOT EXISTS posts_rt (
                 id bigint,
                 post_text text indexed,
                 topic_title text indexed,
                 topic_id int,
                 forum_id int
-            )",
+            )',
 
-            'users_rt' => "CREATE TABLE IF NOT EXISTS users_rt (
+            'users_rt' => 'CREATE TABLE IF NOT EXISTS users_rt (
                 id bigint,
                 username string attribute indexed
-            )"
+            )',
         ];
 
         foreach ($indexes as $name => $sql) {
@@ -126,7 +128,7 @@ class ManticoreSearch
             // Escape special characters in the query
             $escapedQuery = $this->escapeMatch($query);
 
-            $where = ["MATCH(?)"];
+            $where = ['MATCH(?)'];
             $params = [$escapedQuery];
 
             if (!empty($forum_ids) && $index !== 'users_rt') {
@@ -183,7 +185,7 @@ class ManticoreSearch
                 // If updating text field (topic_title is text), must use REPLACE with all fields
                 // Text/string fields cannot be updated with UPDATE in Manticore
                 else {
-                    $sql = "REPLACE INTO topics_rt (id, topic_title, forum_id) VALUES (?, ?, ?)";
+                    $sql = 'REPLACE INTO topics_rt (id, topic_title, forum_id) VALUES (?, ?, ?)';
                     $stmt = $this->pdo->prepare($sql);
                     $stmt->execute([
                         $topic_id,
@@ -207,7 +209,7 @@ class ManticoreSearch
                 }
 
                 $placeholders = str_repeat('?,', count($columns) - 1) . '?';
-                $sql = "REPLACE INTO topics_rt (" . implode(', ', $columns) . ") VALUES (" . $placeholders . ")";
+                $sql = 'REPLACE INTO topics_rt (' . implode(', ', $columns) . ') VALUES (' . $placeholders . ')';
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->execute($params);
             }
@@ -256,14 +258,14 @@ class ManticoreSearch
                     }
 
                     if ($updates) {
-                        $sql = "UPDATE posts_rt SET " . implode(', ', $updates) . " WHERE id = {$post_id}";
+                        $sql = 'UPDATE posts_rt SET ' . implode(', ', $updates) . " WHERE id = {$post_id}";
                         $this->pdo->exec($sql);
                     }
                 }
                 // If updating text fields (post_text or topic_title are text), must use REPLACE with all fields
                 // Text/string fields cannot be updated with UPDATE in Manticore
                 else {
-                    $sql = "REPLACE INTO posts_rt (id, post_text, topic_title, topic_id, forum_id) VALUES (?, ?, ?, ?, ?)";
+                    $sql = 'REPLACE INTO posts_rt (id, post_text, topic_title, topic_id, forum_id) VALUES (?, ?, ?, ?, ?)';
                     $stmt = $this->pdo->prepare($sql);
                     $stmt->execute([
                         $post_id,
@@ -299,7 +301,7 @@ class ManticoreSearch
                 }
 
                 $placeholders = str_repeat('?,', count($columns) - 1) . '?';
-                $sql = "REPLACE INTO posts_rt (" . implode(', ', $columns) . ") VALUES (" . $placeholders . ")";
+                $sql = 'REPLACE INTO posts_rt (' . implode(', ', $columns) . ') VALUES (' . $placeholders . ')';
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->execute($params);
             }
@@ -334,7 +336,7 @@ class ManticoreSearch
                 $stmt->execute([$username]);
             } else {
                 // INSERT new record
-                $sql = "REPLACE INTO users_rt (id, username) VALUES (?, ?)";
+                $sql = 'REPLACE INTO users_rt (id, username) VALUES (?, ?)';
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->execute([$user_id, $username]);
             }
@@ -401,37 +403,37 @@ class ManticoreSearch
     {
         $log_message = [];
         $log_message[] = str_repeat('=', 10) . ' ' . date('Y-m-d H:i:s') . ' ' . str_repeat('=', 10);
-        $log_message[] = "Starting initial indexing...";
+        $log_message[] = 'Starting initial indexing...';
 
         // Ensure indexes exist before loading data
         if (!$this->createIndexes()) {
-            $log_message[] = "[ERROR] Failed to create indexes";
+            $log_message[] = '[ERROR] Failed to create indexes';
             bb_log($log_message, 'manticore_index');
             return false;
         }
-        $log_message[] = "[OK] Indexes created/verified";
+        $log_message[] = '[OK] Indexes created/verified';
 
         try {
             // Clear indexes
-            $this->pdo->exec("TRUNCATE RTINDEX topics_rt");
-            $this->pdo->exec("TRUNCATE RTINDEX posts_rt");
-            $this->pdo->exec("TRUNCATE RTINDEX users_rt");
-            $log_message[] = "[OK] Indexes truncated";
+            $this->pdo->exec('TRUNCATE RTINDEX topics_rt');
+            $this->pdo->exec('TRUNCATE RTINDEX posts_rt');
+            $this->pdo->exec('TRUNCATE RTINDEX users_rt');
+            $log_message[] = '[OK] Indexes truncated';
         } catch (PDOException $e) {
-            $log_message[] = "[ERROR] Failed to truncate indexes: " . $e->getMessage();
+            $log_message[] = '[ERROR] Failed to truncate indexes: ' . $e->getMessage();
             bb_log($log_message, 'manticore_index');
             return false;
         }
 
         // --- TOPICS ---
-        $totalTopics = (int)DB()->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_TOPICS)['cnt'];
+        $totalTopics = (int) DB()->fetch_row('SELECT COUNT(*) AS cnt FROM ' . BB_TOPICS)['cnt'];
         $log_message[] = "Indexing topics: total {$totalTopics}";
         $topicsErrors = 0;
 
         for ($offset = 0; $offset < $totalTopics; $offset += $batchSize) {
-            $topics = DB()->fetch_rowset("
+            $topics = DB()->fetch_rowset('
                 SELECT topic_id, topic_title, forum_id
-                FROM " . BB_TOPICS . "
+                FROM ' . BB_TOPICS . "
                 LIMIT {$batchSize} OFFSET {$offset}");
 
             foreach ($topics as $topic) {
@@ -444,19 +446,19 @@ class ManticoreSearch
                     }
                 }
             }
-            $log_message[] = "  [OK] Indexed " . min($offset + $batchSize, $totalTopics) . " / {$totalTopics} topics" . ($topicsErrors > 0 ? " (errors: {$topicsErrors})" : "");
+            $log_message[] = '  [OK] Indexed ' . min($offset + $batchSize, $totalTopics) . " / {$totalTopics} topics" . ($topicsErrors > 0 ? " (errors: {$topicsErrors})" : '');
         }
 
         // --- POSTS ---
-        $totalPosts = (int)DB()->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_POSTS_TEXT)['cnt'];
+        $totalPosts = (int) DB()->fetch_row('SELECT COUNT(*) AS cnt FROM ' . BB_POSTS_TEXT)['cnt'];
         $log_message[] = "Indexing posts: total {$totalPosts}";
         $postsErrors = 0;
 
         for ($offset = 0; $offset < $totalPosts; $offset += $batchSize) {
-            $posts = DB()->fetch_rowset("
+            $posts = DB()->fetch_rowset('
                 SELECT pt.post_id, pt.post_text, t.topic_title, t.topic_id, t.forum_id
-                FROM " . BB_POSTS_TEXT . " pt
-                LEFT JOIN " . BB_TOPICS . " t ON pt.post_id = t.topic_first_post_id
+                FROM ' . BB_POSTS_TEXT . ' pt
+                LEFT JOIN ' . BB_TOPICS . " t ON pt.post_id = t.topic_first_post_id
                 LIMIT {$batchSize} OFFSET {$offset}");
 
             foreach ($posts as $post) {
@@ -475,19 +477,19 @@ class ManticoreSearch
                     }
                 }
             }
-            $log_message[] = "  [OK] Indexed " . min($offset + $batchSize, $totalPosts) . " / {$totalPosts} posts" . ($postsErrors > 0 ? " (errors: {$postsErrors})" : "");
+            $log_message[] = '  [OK] Indexed ' . min($offset + $batchSize, $totalPosts) . " / {$totalPosts} posts" . ($postsErrors > 0 ? " (errors: {$postsErrors})" : '');
         }
 
         // --- USERS ---
-        $totalUsers = (int)DB()->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")")['cnt'];
+        $totalUsers = (int) DB()->fetch_row('SELECT COUNT(*) AS cnt FROM ' . BB_USERS . ' WHERE user_id NOT IN(' . EXCLUDED_USERS . ')')['cnt'];
         $log_message[] = "Indexing users: total {$totalUsers}";
         $usersErrors = 0;
 
         for ($offset = 0; $offset < $totalUsers; $offset += $batchSize) {
-            $users = DB()->fetch_rowset("
+            $users = DB()->fetch_rowset('
                 SELECT user_id, username
-                FROM " . BB_USERS . "
-                WHERE user_id NOT IN(" . EXCLUDED_USERS . ")
+                FROM ' . BB_USERS . '
+                WHERE user_id NOT IN(' . EXCLUDED_USERS . ")
                 LIMIT {$batchSize} OFFSET {$offset}");
 
             foreach ($users as $user) {
@@ -501,12 +503,12 @@ class ManticoreSearch
                 }
             }
 
-            $log_message[] = "  [OK] Indexed " . min($offset + $batchSize, $totalUsers) . " / {$totalUsers} users" . ($usersErrors > 0 ? " (errors: {$usersErrors})" : "");
+            $log_message[] = '  [OK] Indexed ' . min($offset + $batchSize, $totalUsers) . " / {$totalUsers} users" . ($usersErrors > 0 ? " (errors: {$usersErrors})" : '');
         }
 
         $totalErrors = $topicsErrors + $postsErrors + $usersErrors;
-        $log_message[] = "Initial indexing completed!" . ($totalErrors > 0 ? " Total errors: {$totalErrors}" : " No errors.");
-        $log_message[] = "";
+        $log_message[] = 'Initial indexing completed!' . ($totalErrors > 0 ? " Total errors: {$totalErrors}" : ' No errors.');
+        $log_message[] = '';
 
         bb_log($log_message, 'manticore_index');
         return true;
