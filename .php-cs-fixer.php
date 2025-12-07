@@ -26,7 +26,6 @@ return new Config()
         '@PER-CS2.0' => true,
         'no_unused_imports' => true,
         'ordered_imports' => ['sort_algorithm' => 'alpha'],
-        'single_quote' => true,
         'trailing_comma_in_multiline' => true,
     ])
     ->setFinder($finder);
