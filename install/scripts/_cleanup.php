@@ -8,7 +8,7 @@
  */
 
 if (!defined('BB_ROOT')) {
-    define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+    define('BB_ROOT', dirname(__DIR__, 2) . DIRECTORY_SEPARATOR);
     define('BB_PATH', BB_ROOT);
 }
 
@@ -31,8 +31,8 @@ $items = [
     '.editorconfig',
     '.gitattributes',
     '.gitignore',
-    '.styleci.yml',
-    '_release.php',
+    '.php-cs-fixer.php',
+    'install/scripts/_release.php',
     'CHANGELOG.md',
     'CLAUDE.md',
     'cliff.toml',
