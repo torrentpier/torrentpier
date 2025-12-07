@@ -15,18 +15,18 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 require INC_DIR . '/bbcode.php';
 
-$preview = isset($_POST['preview']);
+$preview = request()->post->has('preview');
 
-if (isset($_POST['post']) && (config()->get('terms') !== $_POST['message'])) {
-    bb_update_config(['terms' => $_POST['message']]);
+if (request()->post->has('post') && (config()->get('terms') !== request()->post->get('message'))) {
+    bb_update_config(['terms' => request()->post->get('message')]);
     bb_die(__('TERMS_UPDATED_SUCCESSFULLY') . '<br /><br />' . sprintf(__('CLICK_RETURN_TERMS_CONFIG'), '<a href="admin_terms.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
 }
 
 template()->assign_vars([
     'S_ACTION' => 'admin_terms.php',
     'EXT_LINK_NW' => config()->get('ext_link_new_win'),
-    'MESSAGE' => $preview ? $_POST['message'] : config()->get('terms'),
-    'PREVIEW_HTML' => $preview ? bbcode2html($_POST['message']) : '',
+    'MESSAGE' => $preview ? request()->post->get('message') : config()->get('terms'),
+    'PREVIEW_HTML' => $preview ? bbcode2html(request()->post->get('message')) : '',
 ]);
 
 print_page('admin_terms.tpl', 'admin');

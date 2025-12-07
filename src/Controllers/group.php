@@ -19,10 +19,10 @@ user()->session_start(['req_login' => true]);
 
 set_die_append_msg();
 
-$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : null;
-$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
+$group_id = request()->query->has(POST_GROUPS_URL) ? request()->query->getInt(POST_GROUPS_URL) : null;
+$start = request()->query->has('start') ? abs(request()->query->getInt('start')) : 0;
 $per_page = config()->get('group_members_per_page');
-$view_mode = isset($_REQUEST['view']) ? (string)$_REQUEST['view'] : null;
+$view_mode = request()->query->has('view') ? (string)request()->query->get('view') : null;
 $rel_limit = 50;
 
 $group_info = [];
@@ -137,7 +137,7 @@ if (!$group_id) {
             bb_die(__('NO_GROUPS_EXIST'));
         }
     }
-} elseif (isset($_POST['joingroup']) && $_POST['joingroup']) {
+} elseif (request()->post->has('joingroup') && request()->post->get('joingroup')) {
     if ($group_info['group_type'] != GROUP_OPEN) {
         bb_die(__('THIS_CLOSED_GROUP'));
     }
@@ -182,7 +182,7 @@ if (!$group_id) {
 
     set_die_append_msg(group_id: $group_id);
     bb_die(__('GROUP_JOINED'));
-} elseif (!empty($_POST['unsub']) || !empty($_POST['unsubpending'])) {
+} elseif (request()->post->has('unsub') || request()->post->has('unsubpending')) {
     \TorrentPier\Legacy\Group::delete_user_group($group_id, userdata('user_id'));
 
     set_die_append_msg(group_id: $group_id);
@@ -191,14 +191,14 @@ if (!$group_id) {
     // Handle Additions, removals, approvals and denials
     $group_moderator = $group_info['group_moderator'];
 
-    if (!empty($_POST['add']) || !empty($_POST['remove']) || !empty($_POST['approve']) || !empty($_POST['deny'])) {
+    if (request()->post->has('add') || request()->post->has('remove') || request()->post->has('approve') || request()->post->has('deny')) {
         if (!$is_moderator) {
             set_die_append_msg(group_id: $group_id);
             bb_die(__('NOT_GROUP_MODERATOR'));
         }
 
-        if (!empty($_POST['add'])) {
-            if (isset($_POST['username']) && !($row = get_userdata($_POST['username'], true))) {
+        if (request()->post->has('add')) {
+            if (request()->post->has('username') && !($row = get_userdata(request()->post->get('username'), true))) {
                 set_die_append_msg(group_id: $group_id);
                 bb_die(__('COULD_NOT_ADD_USER'));
             }
@@ -235,8 +235,8 @@ if (!$group_id) {
                 $emailer->send();
             }
         } else {
-            if (((!empty($_POST['approve']) || !empty($_POST['deny'])) && !empty($_POST['pending_members'])) || (!empty($_POST['remove']) && !empty($_POST['members']))) {
-                $members = (!empty($_POST['approve']) || !empty($_POST['deny'])) ? $_POST['pending_members'] : $_POST['members'];
+            if (((request()->post->has('approve') || request()->post->has('deny')) && request()->post->has('pending_members')) || (request()->post->has('remove') && request()->post->has('members'))) {
+                $members = (request()->post->has('approve') || request()->post->has('deny')) ? request()->post->get('pending_members') : request()->post->get('members');
 
                 $sql_in = [];
                 foreach ($members as $members_id) {
@@ -247,7 +247,7 @@ if (!$group_id) {
                     bb_die(__('NONE_SELECTED'));
                 }
 
-                if (!empty($_POST['approve'])) {
+                if (request()->post->has('approve')) {
                     DB()->query("
 						UPDATE " . BB_USER_GROUP . " SET
 							user_pending = 0
@@ -256,19 +256,19 @@ if (!$group_id) {
 					");
 
                     \TorrentPier\Legacy\Group::update_user_level($sql_in);
-                } elseif (!empty($_POST['deny']) || !empty($_POST['remove'])) {
+                } elseif (request()->post->has('deny') || request()->post->has('remove')) {
                     DB()->query("
 						DELETE FROM " . BB_USER_GROUP . "
 						WHERE user_id IN($sql_in)
 							AND group_id = $group_id
 					");
 
-                    if (!empty($_POST['remove'])) {
+                    if (request()->post->has('remove')) {
                         \TorrentPier\Legacy\Group::update_user_level($sql_in);
                     }
                 }
                 // Email users when they are approved
-                if (!empty($_POST['approve']) && config()->get('group_send_email')) {
+                if (request()->post->has('approve') && config()->get('group_send_email')) {
                     $sql_select = "SELECT username, user_email, user_lang
                         FROM " . BB_USERS . "
                         WHERE user_id IN($sql_in)";

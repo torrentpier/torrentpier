@@ -12,7 +12,7 @@ define('BB_ROOT', './../');
 require dirname(__DIR__) . '/common.php';
 
 // Check User-Agent for existence
-$userAgent = (string)$_SERVER['HTTP_USER_AGENT'];
+$userAgent = (string)request()->server->get('HTTP_USER_AGENT');
 if (empty($userAgent)) {
     header('Location: http://127.0.0.1', true, 301);
     die;
@@ -22,16 +22,16 @@ $announce_interval = config()->get('announce_interval');
 $passkey_key = config()->get('passkey_key');
 
 // Recover info_hash
-if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
-    $_GET['info_hash'] = $_GET['?info_hash'];
+if (request()->query->has('?info_hash') && !request()->query->has('info_hash')) {
+    request()->query->set('info_hash', request()->query->get('?info_hash'));
 }
 
 // Initial request verification
-if (str_contains($_SERVER['REQUEST_URI'], 'scrape')) {
+if (str_contains(request()->server->get('REQUEST_URI'), 'scrape')) {
     msg_die('Please disable SCRAPE!');
 }
 
-if (!isset($_GET[$passkey_key]) || !is_string($_GET[$passkey_key])) {
+if (!request()->query->has($passkey_key) || !is_string(request()->query->get($passkey_key))) {
     msg_die('Please LOG IN and RE-DOWNLOAD this torrent (passkey not found)');
 }
 
@@ -44,12 +44,12 @@ $input_vars_num = ['port', 'uploaded', 'downloaded', 'left', 'numwant', 'compact
 // Init received data
 // String
 foreach ($input_vars_str as $var_name) {
-    $$var_name = isset($_GET[$var_name]) ? (string)$_GET[$var_name] : null;
+    $$var_name = request()->query->has($var_name) ? (string)request()->query->get($var_name) : null;
 }
 
 // Numeric
 foreach ($input_vars_num as $var_name) {
-    $$var_name = isset($_GET[$var_name]) ? (float)$_GET[$var_name] : null;
+    $$var_name = request()->query->has($var_name) ? (float)request()->query->get($var_name) : null;
 }
 
 // Passkey
@@ -165,14 +165,14 @@ if (preg_match('/(Mozilla|Browser|Chrome|Safari|AppleWebKit|Opera|Links|Lynx|Bot
 }
 
 // IP
-$ip = $_SERVER['REMOTE_ADDR'];
+$ip = request()->server->get('REMOTE_ADDR');
 
 // 'ip' query handling
-if (!config()->get('ignore_reported_ip') && isset($_GET['ip']) && $ip !== $_GET['ip']) {
-    if (!config()->get('verify_reported_ip') && isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $x_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+if (!config()->get('ignore_reported_ip') && request()->query->has('ip') && $ip !== request()->query->get('ip')) {
+    if (!config()->get('verify_reported_ip') && request()->server->has('HTTP_X_FORWARDED_FOR')) {
+        $x_ip = request()->server->get('HTTP_X_FORWARDED_FOR');
 
-        if ($x_ip === $_GET['ip']) {
+        if ($x_ip === request()->query->get('ip')) {
             $filteredIp = filter_var($x_ip, FILTER_VALIDATE_IP);
             if ($filteredIp !== false && (config()->get('allow_internal_ip') || !filter_var($filteredIp, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE))) {
                 $ip = $filteredIp;

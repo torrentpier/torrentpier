@@ -63,7 +63,7 @@ class YandexSmartCaptcha implements CaptchaInterface
     public function check(): bool
     {
         // Require token present
-        $token = $_POST['smart-token'] ?? null;
+        $token = request()->post->get('smart-token');
         if (!$token) {
             return false;
         }

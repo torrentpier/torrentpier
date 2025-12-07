@@ -18,8 +18,8 @@ if (!config()->get('board_email_form')) {
 
 set_die_append_msg();
 
-if (!empty($_GET[POST_USERS_URL]) || !empty($_POST[POST_USERS_URL])) {
-    $user_id = (!empty($_GET[POST_USERS_URL])) ? (int)$_GET[POST_USERS_URL] : (int)$_POST[POST_USERS_URL];
+if (request()->query->has(POST_USERS_URL) || request()->post->has(POST_USERS_URL)) {
+    $user_id = request()->query->has(POST_USERS_URL) ? request()->query->getInt(POST_USERS_URL) : request()->post->getInt(POST_USERS_URL);
 } else {
     bb_die(__('NO_USER_SPECIFIED'));
 }
@@ -40,9 +40,9 @@ if ($row = DB()->fetch_row($sql)) {
     $user_email = $row['user_email'];
     $user_lang = $row['user_lang'];
 
-    if (isset($_POST['submit'])) {
-        $subject = trim(html_entity_decode($_POST['subject']));
-        $message = trim(html_entity_decode($_POST['message']));
+    if (request()->post->has('submit')) {
+        $subject = trim(html_entity_decode(request()->post->get('subject')));
+        $message = trim(html_entity_decode(request()->post->get('message')));
 
         if (!$subject) {
             $errors[] = __('EMPTY_SUBJECT_EMAIL');

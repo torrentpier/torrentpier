@@ -22,7 +22,7 @@ if (!$update_data = datastore()->get('check_updates')) {
 }
 
 // Generate relevant output
-if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
+if (request()->query->get('pane') === 'left') {
     $module = [];
 
     // Scan modules
@@ -75,7 +75,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             $row_count++;
         }
     }
-} elseif (isset($_GET['pane']) && $_GET['pane'] == 'right') {
+} elseif (request()->query->get('pane') === 'right') {
     template()->assign_vars([
         'TPL_ADMIN_MAIN' => true,
         'ADMIN_LOCK' => (bool)config()->get('board_disable'),
@@ -162,7 +162,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'SERVER_DISK_SPACE_INFO' => htmlCHR(sprintf(__('ADMIN_SYSTEM_DISK_SPACE_INFO'), $getDiskSpaceInfo['total'], $getDiskSpaceInfo['used'], $getDiskSpaceInfo['free'])),
     ]);
 
-    if (isset($_GET['users_online'])) {
+    if (request()->query->has('users_online')) {
         template()->assign_vars([
             'SHOW_USERS_ONLINE' => true,
         ]);

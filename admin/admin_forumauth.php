@@ -58,21 +58,21 @@ foreach ($forum_auth_fields as $auth_type) {
 $forum_auth_levels = ['ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN'];
 $forum_auth_const = [AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN];
 
-if (isset($_REQUEST[POST_FORUM_URL])) {
-    $forum_id = (int)$_REQUEST[POST_FORUM_URL];
+if (request()->has(POST_FORUM_URL)) {
+    $forum_id = request()->getInt(POST_FORUM_URL);
     $forum_sql = "WHERE forum_id = $forum_id";
 } else {
     unset($forum_id);
     $forum_sql = '';
 }
 
-if (isset($_GET['adv'])) {
-    $adv = (int)$_GET['adv'];
+if (request()->query->has('adv')) {
+    $adv = request()->query->getInt('adv');
 } else {
     unset($adv);
 }
 
-$submit = isset($_POST['submit']);
+$submit = request()->post->has('submit');
 
 // Check for demo mode
 if (IN_DEMO_MODE && $submit) {
@@ -86,8 +86,8 @@ if ($submit) {
     $sql = '';
 
     if (!empty($forum_id)) {
-        if (isset($_POST['simpleauth'])) {
-            $simple_ary = $simple_auth_ary[(int)$_POST['simpleauth']];
+        if (request()->post->has('simpleauth')) {
+            $simple_ary = $simple_auth_ary[request()->post->getInt('simpleauth')];
 
             for ($i = 0, $iMax = count($simple_ary); $i < $iMax; $i++) {
                 $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $simple_ary[$i];
@@ -98,10 +98,10 @@ if ($submit) {
             }
         } else {
             for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
-                $value = (int)$_POST[$forum_auth_fields[$i]];
+                $value = (int)request()->post->get($forum_auth_fields[$i]);
 
                 if ($forum_auth_fields[$i] == 'auth_vote') {
-                    if ($_POST['auth_vote'] == AUTH_ALL) {
+                    if (request()->post->get('auth_vote') == AUTH_ALL) {
                         $value = AUTH_REG;
                     }
                 }
@@ -114,7 +114,7 @@ if ($submit) {
 
         if ($sql != '') {
             $query = $sql;
-            if (!empty($_POST['apply_to_subforums'])) {
+            if (!empty(request()->post->get('apply_to_subforums'))) {
                 // Apply to subforums if checkbox is checked
                 $query .= " OR forum_parent = $forum_id";
             }

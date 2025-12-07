@@ -29,22 +29,22 @@ if (config()->get('privmsg_disable')) {
 //
 // Parameters
 //
-$submit = (bool)request_var('post', false);
-$submit_search = (isset($_POST['usersubmit'])) ? true : 0;
-$submit_msgdays = (isset($_POST['submit_msgdays'])) ? true : 0;
-$cancel = (isset($_POST['cancel'])) ? true : 0;
-$preview = (isset($_POST['preview'])) ? true : 0;
-$confirmed = (isset($_POST['confirm'])) ? true : 0;
-$delete = (isset($_POST['delete'])) ? true : 0;
-$delete_all = (isset($_POST['deleteall'])) ? true : 0;
-$save = (isset($_POST['save'])) ? true : 0;
-$mode = isset($_REQUEST['mode']) ? htmlCHR($_REQUEST['mode']) : '';
+$submit = request()->post->has('post');
+$submit_search = request()->post->has('usersubmit');
+$submit_msgdays = request()->post->has('submit_msgdays');
+$cancel = request()->post->has('cancel');
+$preview = request()->post->has('preview');
+$confirmed = request()->post->has('confirm');
+$delete = request()->post->has('delete');
+$delete_all = request()->post->has('deleteall');
+$save = request()->post->has('save');
+$mode = htmlCHR(request()->getString('mode'));
 
 $refresh = $preview || $submit_search;
 
-$mark_list = (!empty($_POST['mark'])) ? $_POST['mark'] : 0;
+$mark_list = request()->post->all('mark') ?: 0;
 
-if ($folder =& $_REQUEST['folder']) {
+if ($folder = request()->getString('folder')) {
     if ($folder != 'inbox' && $folder != 'outbox' && $folder != 'sentbox' && $folder != 'savebox') {
         $folder = 'inbox';
     }
@@ -77,10 +77,10 @@ if ($cancel) {
 //
 // Var definitions
 //
-$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
+$start = request()->has('start') ? abs(request()->getInt('start')) : 0;
 
-if (isset($_POST[POST_POST_URL]) || isset($_GET[POST_POST_URL])) {
-    $privmsg_id = isset($_POST[POST_POST_URL]) ? (int)$_POST[POST_POST_URL] : (int)$_GET[POST_POST_URL];
+if (request()->post->has(POST_POST_URL) || request()->query->has(POST_POST_URL)) {
+    $privmsg_id = request()->post->has(POST_POST_URL) ? request()->post->getInt(POST_POST_URL) : request()->query->getInt(POST_POST_URL);
 } else {
     $privmsg_id = '';
 }
@@ -101,8 +101,8 @@ $savebox_url = ($folder != 'savebox' || $mode != '') ? '<a href="' . PM_URL . "?
 template()->assign_var('POSTING_SUBJECT');
 
 if ($mode == 'read') {
-    if (!empty($_GET[POST_POST_URL])) {
-        $privmsgs_id = (int)$_GET[POST_POST_URL];
+    if (request()->query->has(POST_POST_URL)) {
+        $privmsgs_id = request()->query->getInt(POST_POST_URL);
     } else {
         bb_die(__('NO_PM_ID'));
     }
@@ -399,7 +399,7 @@ if ($mode == 'read') {
     }
 
     if (!$confirmed) {
-        $delete = isset($_POST['delete']) ? 'delete' : 'deleteall';
+        $delete = request()->post->has('delete') ? 'delete' : 'deleteall';
 
         $hidden_fields = [
             'mode' => $mode,
@@ -654,11 +654,11 @@ if ($mode == 'read') {
                 do {
                     switch ($row['privmsgs_type']) {
                         case PRIVMSGS_NEW_MAIL:
-                            ($update_users['new'][$row['privmsgs_to_userid']] ??= 0) + 1;
+                            $update_users['new'][$row['privmsgs_to_userid']] = ($update_users['new'][$row['privmsgs_to_userid']] ?? 0) + 1;
                             break;
 
                         case PRIVMSGS_UNREAD_MAIL:
-                            ($update_users['unread'][$row['privmsgs_to_userid']] ??= 0) + 1;
+                            $update_users['unread'][$row['privmsgs_to_userid']] = ($update_users['unread'][$row['privmsgs_to_userid']] ?? 0) + 1;
                             break;
                     }
                 } while ($row = DB()->sql_fetchrow($result));
@@ -763,8 +763,8 @@ if ($mode == 'read') {
     }
 
     if ($submit) {
-        if (!empty($_POST['username'])) {
-            $to_userdata = get_userdata($_POST['username'], true);
+        if (request()->post->has('username')) {
+            $to_userdata = get_userdata(request()->post->get('username'), true);
 
             if (!$to_userdata || $to_userdata['user_id'] == GUEST_UID) {
                 $error = true;
@@ -775,15 +775,15 @@ if ($mode == 'read') {
             $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . __('NO_TO_USER');
         }
 
-        $privmsg_subject = htmlCHR($_POST['subject']);
+        $privmsg_subject = htmlCHR(request()->post->get('subject', ''));
         if (empty($privmsg_subject)) {
             $error = true;
             $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . __('EMPTY_SUBJECT');
         }
 
-        if (!empty($_POST['message'])) {
+        if (request()->post->has('message')) {
             if (!$error) {
-                $privmsg_message = prepare_message($_POST['message']);
+                $privmsg_message = prepare_message(request()->post->get('message'));
             }
         } else {
             $error = true;
@@ -917,10 +917,10 @@ if ($mode == 'read') {
         // passed to the script, process it a little, do some checks
         // where neccessary, etc.
         //
-        $to_username = (isset($_POST['username'])) ? clean_username($_POST['username']) : '';
+        $to_username = request()->post->has('username') ? clean_username(request()->post->get('username')) : '';
 
-        $privmsg_subject = (isset($_POST['subject'])) ? clean_title($_POST['subject']) : '';
-        $privmsg_message = (isset($_POST['message'])) ? prepare_message($_POST['message']) : '';
+        $privmsg_subject = request()->post->has('subject') ? clean_title(request()->post->get('subject')) : '';
+        $privmsg_message = request()->post->has('message') ? prepare_message(request()->post->get('message')) : '';
 
         //
         // Do mode specific things
@@ -947,8 +947,8 @@ if ($mode == 'read') {
             bb_die(__('NO_POST_ID'));
         }
 
-        if (!empty($_GET[POST_USERS_URL])) {
-            $user_id = (int)$_GET[POST_USERS_URL];
+        if (request()->query->has(POST_USERS_URL)) {
+            $user_id = request()->query->getInt(POST_USERS_URL);
 
             $sql = "SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id AND user_id <> " . GUEST_UID;
             if (!($result = DB()->sql_query($sql))) {
@@ -1226,14 +1226,14 @@ if ($mode == 'read') {
     //
     // Show messages over previous x days/months
     //
-    if ($submit_msgdays && (!empty($_POST['msgdays']) || !empty($_GET['msgdays']))) {
-        $msg_days = (!empty($_POST['msgdays'])) ? (int)$_POST['msgdays'] : (int)$_GET['msgdays'];
+    if ($submit_msgdays && (request()->post->has('msgdays') || request()->query->has('msgdays'))) {
+        $msg_days = request()->post->has('msgdays') ? request()->post->getInt('msgdays') : request()->query->getInt('msgdays');
         $min_msg_time = TIMENOW - ($msg_days * 86400);
 
         $limit_msg_time_total = " AND privmsgs_date > $min_msg_time";
         $limit_msg_time = " AND pm.privmsgs_date > $min_msg_time ";
 
-        if (!empty($_POST['msgdays'])) {
+        if (request()->post->has('msgdays')) {
             $start = 0;
         }
     } else {

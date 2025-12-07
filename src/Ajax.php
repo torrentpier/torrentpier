@@ -238,7 +238,7 @@ class Ajax
             } else {
                 $login_args = [
                     'login_username' => userdata('username'),
-                    'login_password' => $_POST['user_password'],
+                    'login_password' => request()->post->get('user_password'),
                 ];
                 if (!user()->login($login_args, true)) {
                     $this->ajax_die(__('ERROR_LOGIN'));

@@ -17,13 +17,13 @@ if (!config()->get('emailer.enabled')) {
     bb_die(__('EMAILER_DISABLED'));
 }
 
-$need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN && !config()->get('captcha.disabled'));
+$need_captcha = (request()->query->get('mode') == 'sendpassword' && !IS_ADMIN && !config()->get('captcha.disabled'));
 
-if (isset($_POST['submit'])) {
+if (request()->post->has('submit')) {
     if ($need_captcha && !bb_captcha('check')) {
         bb_die(__('CAPTCHA_WRONG'));
     }
-    $email = (!empty($_POST['email'])) ? trim(strip_tags(htmlspecialchars($_POST['email']))) : '';
+    $email = (!empty(request()->post->get('email'))) ? trim(strip_tags(htmlspecialchars(request()->post->get('email')))) : '';
     $sql = "SELECT * FROM " . BB_USERS . " WHERE user_email = '" . DB()->escape($email) . "'";
     if ($result = DB()->sql_query($sql)) {
         if ($row = DB()->sql_fetchrow($result)) {

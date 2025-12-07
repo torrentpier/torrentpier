@@ -65,10 +65,10 @@ class TextCaptcha implements CaptchaInterface
     #[\Override]
     public function check(): bool
     {
-        if (!isset($_POST['captcha_phrase']) || !isset($_SESSION['phrase'])) {
+        if (!request()->post->has('captcha_phrase') || !isset($_SESSION['phrase'])) {
             return false;
         }
 
-        return PhraseBuilder::comparePhrases($_SESSION['phrase'], $_POST['captcha_phrase']);
+        return PhraseBuilder::comparePhrases($_SESSION['phrase'], request()->post->get('captcha_phrase'));
     }
 }

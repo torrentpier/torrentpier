@@ -11,13 +11,14 @@ use TorrentPier\Feed\Exception\FeedGenerationException;
 use TorrentPier\Feed\FeedGenerator;
 use TorrentPier\Feed\Provider\ForumFeedProvider;
 use TorrentPier\Feed\Provider\UserFeedProvider;
+use TorrentPier\Http\Response;
 
 // Init userdata
 user()->session_start(['req_login' => true]);
 
 // Get request parameters
-$type = $_GET['type'] ?? '';
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$type = request()->query->get('type', '');
+$id = request()->getInt('id');
 
 // Validate type and ID
 if (!in_array($type, ['f', 'u'], true) || $id < 0) {
@@ -49,11 +50,8 @@ try {
 
     // Output Atom feed with proper headers
     $cacheTtl = config()->get('atom.cache_ttl') ?? 600;
-    header('Content-Type: application/atom+xml; charset=UTF-8');
-    header('Cache-Control: public, max-age=' . $cacheTtl);
-    header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $cacheTtl) . ' GMT');
-
-    echo $atomContent;
+    Response::atom($atomContent, $cacheTtl)->send();
+    exit;
 } catch (FeedGenerationException $e) {
     // Show detailed error only to super admins
     if (IS_SUPER_ADMIN) {

@@ -18,11 +18,11 @@ $all_forums = -1;
 $pruned_total = 0;
 $prune_performed = false;
 
-if (isset($_REQUEST['submit'])) {
-    if (!$var =& $_REQUEST['f'] or !$f_selected = get_id_ary($var)) {
+if (request()->has('submit')) {
+    if (!$var = request()->get('f') or !$f_selected = get_id_ary($var)) {
         bb_die(__('SELECT_FORUM'));
     }
-    if (!$var =& $_REQUEST['prunedays'] or !$prunedays = abs((int)$var)) {
+    if (!$var = request()->get('prunedays') or !$prunedays = abs((int)$var)) {
         bb_die(__('NOT_DAYS'));
     }
 
@@ -34,7 +34,7 @@ if (isset($_REQUEST['submit'])) {
     $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS . " $where_sql";
 
     foreach (DB()->fetch_rowset($sql) as $i => $row) {
-        $pruned_topics = \TorrentPier\Legacy\Admin\Common::topic_delete('prune', $row['forum_id'], $prunetime, !empty($_POST['prune_all_topic_types']));
+        $pruned_topics = \TorrentPier\Legacy\Admin\Common::topic_delete('prune', $row['forum_id'], $prunetime, request()->post->has('prune_all_topic_types'));
         $pruned_total += $pruned_topics;
         $prune_performed = true;
 

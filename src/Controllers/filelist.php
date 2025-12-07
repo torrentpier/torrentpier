@@ -11,7 +11,7 @@ if (config()->get('bt_disable_dht') && IS_GUEST) {
     bb_die(__('BT_PRIVATE_TRACKER'), 403);
 }
 
-$topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
+$topic_id = request()->getInt(POST_TOPIC_URL);
 if (!$topic_id) {
     bb_die(__('INVALID_TOPIC_ID'), 404);
 }

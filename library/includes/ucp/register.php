@@ -11,8 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-array_deep($_POST, 'trim');
-
 set_die_append_msg();
 
 if (IN_DEMO_MODE) {
@@ -22,7 +20,7 @@ if (IN_DEMO_MODE) {
 if (IS_ADMIN) {
     config()->set('reg_email_activation', false);
 
-    $new_user = (int)request_var('admin', '');
+    $new_user = request()->getInt('admin');
     if ($new_user) {
         simple_header(true);
     }
@@ -32,7 +30,7 @@ if (IS_ADMIN) {
 
 $can_register = (IS_GUEST || IS_ADMIN);
 
-$submit = !empty($_POST['submit']);
+$submit = request()->post->has('submit');
 $errors = [];
 $adm_edit = false; // editing someone else's profile by an admin
 
@@ -132,8 +130,8 @@ switch ($mode) {
         ];
 
         // Select a profile: your own for the user, any for the admin
-        if (IS_ADMIN && !empty($_REQUEST[POST_USERS_URL])) {
-            $pr_user_id = (int)$_REQUEST[POST_USERS_URL];
+        if (IS_ADMIN && request()->has(POST_USERS_URL)) {
+            $pr_user_id = request()->getInt(POST_USERS_URL);
             $adm_edit = ($pr_user_id != userdata('user_id'));
         } else {
             $pr_user_id = userdata('user_id');
@@ -181,7 +179,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Активация (edit)
          */
         case 'user_active':
-            $active = isset($_POST['user_active']) ? (int)$_POST['user_active'] : $pr_data['user_active'];
+            $active = request()->post->has('user_active') ? request()->post->getInt('user_active') : $pr_data['user_active'];
             if ($submit && $adm_edit) {
                 $pr_data['user_active'] = $active;
                 $db_data['user_active'] = $active;
@@ -192,7 +190,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Имя (edit, reg)
          */
         case 'username':
-            $username = !empty($_POST['username']) ? clean_username($_POST['username']) : $pr_data['username'];
+            $username = request()->post->has('username') ? clean_username(request()->post->get('username')) : $pr_data['username'];
 
             if ($submit && $can_edit) {
                 $err = \TorrentPier\Validate::username($username);
@@ -212,7 +210,7 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'invite_code':
             if (config()->get('invites_system.enabled')) {
-                $invite_code = $_POST['invite_code'] ?? '';
+                $invite_code = request()->post->get('invite_code', '');
                 if ($submit) {
                     $inviteCodes = config()->get('invites_system.codes');
                     if (isset($inviteCodes[$invite_code])) {
@@ -233,9 +231,9 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'user_password':
             if ($submit && $can_edit) {
-                $cur_pass = (string)@$_POST['cur_pass'];
-                $new_pass = (string)@$_POST['new_pass'];
-                $cfm_pass = (string)@$_POST['cfm_pass'];
+                $cur_pass = (string)request()->post->get('cur_pass', '');
+                $new_pass = (string)request()->post->get('new_pass', '');
+                $cfm_pass = (string)request()->post->get('cfm_pass', '');
 
                 // password for the guest (while registering) and when the user changes the password
                 if (!empty($new_pass)) {
@@ -265,7 +263,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  E-mail (edit, reg)
          */
         case 'user_email':
-            $email = !empty($_POST['user_email']) ? (string)$_POST['user_email'] : $pr_data['user_email'];
+            $email = request()->post->has('user_email') ? (string)request()->post->get('user_email') : $pr_data['user_email'];
             if ($submit && $can_edit) {
                 if ($mode == 'register') {
                     if (!$errors and $err = \TorrentPier\Validate::email($email)) {
@@ -297,7 +295,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Язык (edit, reg)
          */
         case 'user_lang':
-            $user_lang = isset($_POST['user_lang']) ? (string)$_POST['user_lang'] : $pr_data['user_lang'];
+            $user_lang = request()->post->has('user_lang') ? (string)request()->post->get('user_lang') : $pr_data['user_lang'];
             if ($submit && ($user_lang != $pr_data['user_lang'] || $mode == 'register')) {
                 $pr_data['user_lang'] = $user_lang;
                 $db_data['user_lang'] = $user_lang;
@@ -308,7 +306,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Часовой пояс (edit, reg)
          */
         case 'user_timezone':
-            $user_timezone = isset($_POST['user_timezone']) ? (float)$_POST['user_timezone'] : (float)$pr_data['user_timezone'];
+            $user_timezone = request()->post->has('user_timezone') ? (float)request()->post->get('user_timezone') : (float)$pr_data['user_timezone'];
             if ($submit && ($user_timezone != $pr_data['user_timezone'] || $mode == 'register')) {
                 if (isset(config()->get('timezones')[str_replace(',', '.', $user_timezone)])) {
                     $pr_data['user_timezone'] = $user_timezone;
@@ -321,7 +319,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Пол (edit)
          */
         case 'user_gender':
-            $user_gender = isset($_POST['user_gender']) ? (int)$_POST['user_gender'] : $pr_data['user_gender'];
+            $user_gender = request()->post->has('user_gender') ? request()->post->getInt('user_gender') : $pr_data['user_gender'];
             if ($submit && $user_gender != $pr_data['user_gender']) {
                 $pr_data['user_gender'] = $user_gender;
                 $db_data['user_gender'] = $user_gender;
@@ -333,7 +331,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Возраст (edit)
          */
         case 'user_birthday':
-            $user_birthday = !empty($_POST['user_birthday']) ? (string)$_POST['user_birthday'] : $pr_data['user_birthday'];
+            $user_birthday = request()->post->has('user_birthday') ? (string)request()->post->get('user_birthday') : $pr_data['user_birthday'];
 
             if ($submit && $user_birthday !== $pr_data['user_birthday']) {
                 $birthday_date = date_parse($user_birthday);
@@ -376,8 +374,8 @@ foreach ($profile_fields as $field => $can_edit) {
             ];
 
             foreach ($update_user_opt as $opt => $can_change_opt) {
-                if ($submit && (isset($_POST[$opt]) && $can_change_opt || $reg_mode)) {
-                    $change_opt = ($reg_mode) ? $can_change_opt : !empty($_POST[$opt]);
+                if ($submit && (request()->post->has($opt) && $can_change_opt || $reg_mode)) {
+                    $change_opt = ($reg_mode) ? $can_change_opt : request()->post->has($opt);
                     setbit($user_opt, bitfields('user_opt')[$opt], $change_opt);
                 }
                 $tp_data[strtoupper($opt)] = bf($user_opt, 'user_opt', $opt);
@@ -393,17 +391,18 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'avatar_ext_id':
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
+                $avatarFile = request()->getFileAsArray('avatar');
+
                 // Integration with MonsterID
-                if (empty($_FILES['avatar']['name']) && !isset($_POST['delete_avatar']) && isset($_POST['use_monster_avatar'])) {
+                if (empty($avatarFile['name']) && !request()->post->has('delete_avatar') && request()->post->has('use_monster_avatar')) {
                     $monsterAvatar = new Arokettu\MonsterID\Monster($pr_data['user_email'], config()->get('avatars.max_height'));
                     $tempAvatar = tmpfile();
                     $tempAvatarPath = stream_get_meta_data($tempAvatar)['uri'];
                     $monsterAvatar->writeToStream($tempAvatar);
 
-                    // Manual filling $_FILES['avatar']
-                    $_FILES['avatar'] = array();
+                    // Create avatar file array for MonsterID
                     if (is_file($tempAvatarPath)) {
-                        $_FILES['avatar'] = [
+                        $avatarFile = [
                             'name' => "MonsterID_{$pr_data['user_id']}.png",
                             'type' => mime_content_type($tempAvatarPath),
                             'tmp_name' => $tempAvatarPath,
@@ -413,14 +412,14 @@ foreach ($profile_fields as $field => $can_edit) {
                     }
                 }
 
-                if (isset($_POST['delete_avatar'])) {
+                if (request()->post->has('delete_avatar')) {
                     delete_avatar($pr_data['user_id'], $pr_data['avatar_ext_id']);
                     $pr_data['avatar_ext_id'] = 0;
                     $db_data['avatar_ext_id'] = 0;
-                } elseif (!empty($_FILES['avatar']['name']) && config()->get('avatars.up_allowed')) {
+                } elseif (!empty($avatarFile['name']) && config()->get('avatars.up_allowed')) {
                     $upload = new TorrentPier\Legacy\Common\Upload();
 
-                    if ($upload->init(config()->getSection('avatars'), $_FILES['avatar'], !isset($_POST['use_monster_avatar'])) and $upload->store('avatar', $pr_data)) {
+                    if ($upload->init(config()->getSection('avatars'), $avatarFile, !request()->post->has('use_monster_avatar')) and $upload->store('avatar', $pr_data)) {
                         $pr_data['avatar_ext_id'] = $upload->file_ext_id;
                         $db_data['avatar_ext_id'] = (int)$upload->file_ext_id;
                     } else {
@@ -435,7 +434,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Сайт (edit)
          */
         case 'user_website':
-            $website = isset($_POST['user_website']) ? (string)$_POST['user_website'] : $pr_data['user_website'];
+            $website = request()->post->has('user_website') ? (string)request()->post->get('user_website') : $pr_data['user_website'];
             $website = htmlCHR($website);
             if ($submit && $website != $pr_data['user_website']) {
                 if ($website == '' || preg_match('#^https?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+$#iu', $website)) {
@@ -453,7 +452,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Откуда (edit)
          */
         case 'user_from':
-            $from = isset($_POST['user_from']) ? (string)$_POST['user_from'] : $pr_data['user_from'];
+            $from = request()->post->has('user_from') ? (string)request()->post->get('user_from') : $pr_data['user_from'];
             if ($submit && $from != $pr_data['user_from']) {
                 $pr_data['user_from'] = $from;
                 $db_data['user_from'] = (string)$from;
@@ -468,7 +467,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Подпись (edit)
          */
         case 'user_sig':
-            $sig = isset($_POST['user_sig']) ? (string)$_POST['user_sig'] : $pr_data['user_sig'];
+            $sig = request()->post->has('user_sig') ? (string)request()->post->get('user_sig') : $pr_data['user_sig'];
             if ($submit && $sig != $pr_data['user_sig']) {
                 $sig = prepare_message($sig);
 
@@ -488,7 +487,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Род занятий (edit)
          */
         case 'user_occ':
-            $occ = isset($_POST['user_occ']) ? (string)$_POST['user_occ'] : $pr_data['user_occ'];
+            $occ = request()->post->has('user_occ') ? (string)request()->post->get('user_occ') : $pr_data['user_occ'];
             $occ = htmlCHR($occ);
             if ($submit && $occ != $pr_data['user_occ']) {
                 $pr_data['user_occ'] = $occ;
@@ -501,7 +500,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Интересы (edit)
          */
         case 'user_interests':
-            $interests = isset($_POST['user_interests']) ? (string)$_POST['user_interests'] : $pr_data['user_interests'];
+            $interests = request()->post->has('user_interests') ? (string)request()->post->get('user_interests') : $pr_data['user_interests'];
             $interests = htmlCHR($interests);
             if ($submit && $interests != $pr_data['user_interests']) {
                 $pr_data['user_interests'] = $interests;
@@ -514,7 +513,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Twitter (edit)
          */
         case 'user_twitter':
-            $twitter = isset($_POST['user_twitter']) ? (string)$_POST['user_twitter'] : $pr_data['user_twitter'];
+            $twitter = request()->post->has('user_twitter') ? (string)request()->post->get('user_twitter') : $pr_data['user_twitter'];
             if ($submit && $twitter != $pr_data['user_twitter']) {
                 if ($twitter != '' && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $twitter)) {
                     $errors[] = __('TWITTER_ERROR');
@@ -529,7 +528,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Выбор шаблона (edit)
          */
         case 'tpl_name':
-            $templates = isset($_POST['tpl_name']) ? (string)$_POST['tpl_name'] : $pr_data['tpl_name'];
+            $templates = request()->post->has('tpl_name') ? (string)request()->post->get('tpl_name') : $pr_data['tpl_name'];
             $templates = htmlCHR($templates);
             if ($submit && $templates != $pr_data['tpl_name']) {
                 $pr_data['tpl_name'] = config()->get('tpl_name');
@@ -704,7 +703,7 @@ template()->assign_vars([
     'ADM_EDIT' => $adm_edit,
     'SHOW_PASS' => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
     'PASSWORD_LONG' => sprintf(__('PASSWORD_LONG'), PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH),
-    'INVITE_CODE' => !empty($_GET['invite']) ? htmlCHR($_GET['invite']) : '',
+    'INVITE_CODE' => request()->query->has('invite') ? htmlCHR(trim((string)request()->query->get('invite'))) : '',
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
 
     'LANGUAGE_SELECT' => \TorrentPier\Legacy\Common\Select::language($pr_data['user_lang'], 'user_lang'),

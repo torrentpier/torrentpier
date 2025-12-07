@@ -14,11 +14,9 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-array_deep($_POST, 'trim');
-
 $total_sql = '';
 
-if (!isset($_REQUEST['dosearch'])) {
+if (!request()->get('dosearch')) {
     $sql = 'SELECT group_id, group_name
 				FROM ' . BB_GROUPS . '
 					WHERE group_single_user = 0
@@ -107,128 +105,128 @@ if (!isset($_REQUEST['dosearch'])) {
     $mode = '';
 
     // validate mode
-    if (isset($_REQUEST['search_username'])) {
+    if (request()->get('search_username')) {
         $mode = 'search_username';
-    } elseif (isset($_REQUEST['search_email'])) {
+    } elseif (request()->get('search_email')) {
         $mode = 'search_email';
-    } elseif (isset($_REQUEST['search_ip'])) {
+    } elseif (request()->get('search_ip')) {
         $mode = 'search_ip';
-    } elseif (isset($_REQUEST['search_joindate'])) {
+    } elseif (request()->get('search_joindate')) {
         $mode = 'search_joindate';
-    } elseif (isset($_REQUEST['search_group'])) {
+    } elseif (request()->get('search_group')) {
         $mode = 'search_group';
-    } elseif (isset($_REQUEST['search_rank'])) {
+    } elseif (request()->get('search_rank')) {
         $mode = 'search_rank';
-    } elseif (isset($_REQUEST['search_postcount'])) {
+    } elseif (request()->get('search_postcount')) {
         $mode = 'search_postcount';
-    } elseif (isset($_REQUEST['search_userfield'])) {
+    } elseif (request()->get('search_userfield')) {
         $mode = 'search_userfield';
-    } elseif (isset($_REQUEST['search_lastvisited'])) {
+    } elseif (request()->get('search_lastvisited')) {
         $mode = 'search_lastvisited';
-    } elseif (isset($_REQUEST['search_language'])) {
+    } elseif (request()->get('search_language')) {
         $mode = 'search_language';
-    } elseif (isset($_REQUEST['search_timezone'])) {
+    } elseif (request()->get('search_timezone')) {
         $mode = 'search_timezone';
-    } elseif (isset($_REQUEST['search_moderators'])) {
+    } elseif (request()->get('search_moderators')) {
         $mode = 'search_moderators';
-    } elseif (isset($_REQUEST['search_misc'])) {
+    } elseif (request()->get('search_misc')) {
         $mode = 'search_misc';
     }
 
     // validate fields (that they exist)
     switch ($mode) {
         case 'search_username':
-            $username = $_REQUEST['username'];
+            $username = request()->get('username');
             if (!$username) {
                 bb_die(__('SEARCH_INVALID_USERNAME'));
             }
             break;
 
         case 'search_email':
-            $email = $_REQUEST['email'];
+            $email = request()->get('email');
             if (!$email) {
                 bb_die(__('SEARCH_INVALID_EMAIL'));
             }
             break;
 
         case 'search_ip':
-            $ip_address = $_REQUEST['ip_address'];
+            $ip_address = request()->get('ip_address');
             if (!$ip_address) {
                 bb_die(__('SEARCH_INVALID_IP'));
             }
             break;
 
         case 'search_joindate':
-            $date_type = $_REQUEST['date_type'];
-            $date_day = $_REQUEST['date_day'];
-            $date_month = $_REQUEST['date_month'];
-            $date_year = $_REQUEST['date_year'];
+            $date_type = request()->get('date_type');
+            $date_day = request()->get('date_day');
+            $date_month = request()->get('date_month');
+            $date_year = request()->get('date_year');
             if (!($date_type || $date_day || $date_month || $date_year)) {
                 bb_die(__('SEARCH_INVALID_DATE'));
             }
             break;
 
         case 'search_group':
-            $group_id = $_REQUEST['group_id'];
+            $group_id = request()->get('group_id');
             if (!$group_id) {
                 bb_die(__('SEARCH_INVALID_GROUP'));
             }
             break;
 
         case 'search_rank':
-            $rank_id = $_REQUEST['rank_id'];
+            $rank_id = request()->get('rank_id');
             if (!$rank_id) {
                 bb_die(__('SEARCH_INVALID_RANK'));
             }
             break;
 
         case 'search_postcount':
-            $postcount_type = $_REQUEST['postcount_type'];
-            $postcount_value = $_REQUEST['postcount_value'];
+            $postcount_type = request()->get('postcount_type');
+            $postcount_value = request()->get('postcount_value');
             if (!$postcount_type || (!$postcount_value && $postcount_value != 0)) {
                 bb_die(__('SEARCH_INVALID_POSTCOUNT'));
             }
             break;
 
         case 'search_userfield':
-            $userfield_type = $_REQUEST['userfield_type'];
-            $userfield_value = $_REQUEST['userfield_value'];
+            $userfield_type = request()->get('userfield_type');
+            $userfield_value = request()->get('userfield_value');
             if (!$userfield_type || !$userfield_value) {
                 bb_die(__('SEARCH_INVALID_USERFIELD'));
             }
             break;
 
         case 'search_lastvisited':
-            $lastvisited_days = $_REQUEST['lastvisited_days'];
-            $lastvisited_type = $_REQUEST['lastvisited_type'];
+            $lastvisited_days = request()->get('lastvisited_days');
+            $lastvisited_type = request()->get('lastvisited_type');
             if (!$lastvisited_days || !$lastvisited_type) {
                 bb_die(__('SEARCH_INVALID_LASTVISITED'));
             }
             break;
 
         case 'search_language':
-            $language_type = $_REQUEST['language_type'];
+            $language_type = request()->get('language_type');
             if (!$language_type) {
                 bb_die(__('SEARCH_INVALID_LANGUAGE'));
             }
             break;
 
         case 'search_timezone':
-            $timezone_type = $_REQUEST['timezone_type'];
+            $timezone_type = request()->get('timezone_type');
             if (!$timezone_type && $timezone_type != 0) {
                 bb_die(__('SEARCH_INVALID_TIMEZONE'));
             }
             break;
 
         case 'search_moderators':
-            $moderators_forum = $_REQUEST['moderators_forum'];
+            $moderators_forum = request()->get('moderators_forum');
             if (!$moderators_forum) {
                 bb_die(__('SEARCH_INVALID_MODERATORS'));
             }
             break;
 
         case 'search_misc':
-            $misc = $_REQUEST['misc'];
+            $misc = request()->get('misc');
             if (!$misc) {
                 bb_die(__('SEARCH_INVALID'));
             }
@@ -783,8 +781,8 @@ if (!isset($_REQUEST['dosearch'])) {
 
     $select_sql .= '	ORDER BY ';
 
-    if (isset($_GET['sort'])) {
-        switch (strtolower($_GET['sort'])) {
+    if (request()->get('sort')) {
+        switch (strtolower(request()->get('sort'))) {
             case 'regdate':
                 $sort = 'regdate';
                 $select_sql .= 'u.user_regdate';
@@ -814,7 +812,7 @@ if (!isset($_REQUEST['dosearch'])) {
         $select_sql .= 'u.username';
     }
 
-    if (isset($_GET['order'])) {
+    if (request()->get('order')) {
         $o_order = 'ASC';
         $order = 'DESC';
     } else {
@@ -824,7 +822,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
     $select_sql .= " $order";
 
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 0;
+    $page = request()->getInt('page');
 
     if ($page < 1) {
         $page = 1;

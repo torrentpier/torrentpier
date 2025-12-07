@@ -9,7 +9,7 @@
 
 $info = [];
 $htmlDir = LANG_DIR . 'html/';
-$show = isset($_REQUEST['show']) ? (string)$_REQUEST['show'] : '';
+$show = request()->getString('show');
 
 switch ($show) {
     case 'advert':

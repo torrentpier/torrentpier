@@ -586,9 +586,10 @@ function bt_show_port($port)
 
 function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0, ?array $previous_settings = null, $search_id = null)
 {
-    if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
-        $val = (int)$_REQUEST[$key];
-    } elseif (!isset($_REQUEST[$key]) && isset($_REQUEST['prev_' . $key])) {
+    $requestValue = request()->get($key);
+    if (is_string($requestValue)) {
+        $val = (int)$requestValue;
+    } elseif (!request()->has($key) && request()->has('prev_' . $key)) {
         $val = $off;
     } elseif (isset($previous_settings[$key]) && (!IS_GUEST || !empty($search_id))) {
         $val = ($previous_settings[$key]) ? $on : $off;
@@ -599,106 +600,16 @@ function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0, ?array 
 
 function select_get_val($key, &$val, $options_ary, $default, $num = true, ?array $previous_settings = null)
 {
-    if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
-        if (isset($options_ary[$_REQUEST[$key]])) {
-            $val = ($num) ? (int)$_REQUEST[$key] : $_REQUEST[$key];
+    $requestValue = request()->get($key);
+    if (is_string($requestValue)) {
+        if (isset($options_ary[$requestValue])) {
+            $val = ($num) ? (int)$requestValue : $requestValue;
         }
     } elseif (isset($previous_settings[$key])) {
         $val = $previous_settings[$key];
     } else {
         $val = $default;
     }
-}
-
-/**
- * set_var
- *
- * Set variable, used by {@link request_var the request_var function}
- *
- * @access private
- */
-function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
-{
-    settype($var, $type);
-    $result = $var;
-
-    if ($type == 'string') {
-        $result = trim(htmlspecialchars(str_replace(["\r\n", "\r"], ["\n", "\n"], $result)));
-
-        if (!empty($result)) {
-            // Make sure multibyte characters are wellformed
-            if ($multibyte) {
-                if (!preg_match('/^./u', $result)) {
-                    $result = '';
-                }
-            }
-        }
-
-        $result = ($strip) ? stripslashes($result) : $result;
-    }
-}
-
-/**
- * request_var
- *
- * Used to get passed variable
- */
-function request_var($var_name, $default, $multibyte = false, $cookie = false)
-{
-    if (!$cookie && isset($_COOKIE[$var_name])) {
-        if (!isset($_GET[$var_name], $_POST[$var_name])) {
-            return (is_array($default)) ? [] : $default;
-        }
-        $_REQUEST[$var_name] = $_POST[$var_name] ?? $_GET[$var_name];
-    }
-
-    if (!isset($_REQUEST[$var_name]) || (is_array($_REQUEST[$var_name]) && !is_array($default)) || (is_array($default) && !is_array($_REQUEST[$var_name]))) {
-        return (is_array($default)) ? [] : $default;
-    }
-
-    $var = $_REQUEST[$var_name];
-    if (!is_array($default)) {
-        $type = gettype($default);
-    } else {
-        [$key_type, $type] = $default;
-        $type = gettype($type);
-        $key_type = gettype($key_type);
-        if ($type == 'array') {
-            reset($default);
-            $default = current($default);
-            [$sub_key_type, $sub_type] = $default;
-            $sub_type = gettype($sub_type);
-            $sub_type = ($sub_type == 'array') ? 'NULL' : $sub_type;
-            $sub_key_type = gettype($sub_key_type);
-        }
-    }
-
-    if (is_array($var)) {
-        $_var = $var;
-        $var = [];
-
-        foreach ($_var as $k => $v) {
-            set_var($k, $k, $key_type);
-            if ($type == 'array' && is_array($v)) {
-                foreach ($v as $_k => $_v) {
-                    if (is_array($_v)) {
-                        $_v = null;
-                    }
-                    set_var($_k, $_k, $sub_key_type);
-                    set_var($var[$k][$_k], $_v, $sub_type, $multibyte);
-                }
-            } else {
-                if ($type == 'array' || is_array($v)) {
-                    $v = null;
-                }
-                set_var($var[$k], $v, $type, $multibyte);
-            }
-        }
-    } else {
-        set_var($var, $var, $type, $multibyte);
-    }
-
-    return $var;
 }
 
 function get_username($user_id)
@@ -1413,17 +1324,12 @@ function bb_die($msg_text, $status_code = null)
 
 function bb_simple_die($txt, $status_code = null)
 {
-    header('Content-Type: text/plain; charset=' . DEFAULT_CHARSET);
-
-    if (isset($status_code)) {
-        http_response_code($status_code);
-    }
-
     if (!empty($_COOKIE['explain'])) {
         bb_die("bb_simple_die:<br /><br />$txt");
     }
 
-    die($txt);
+    \TorrentPier\Http\Response::text($txt, $status_code ?? 200)->send();
+    exit;
 }
 
 function bb_realpath($path)
@@ -1465,11 +1371,9 @@ function redirect($url)
 
     $redirect_url = $server_protocol . $server_name . $server_port . $script_name . preg_replace('#^\/?(.*?)\/?$#', '/\1', $url);
 
-    // Send no-cache headers to prevent browsers from caching redirects
-    send_no_cache_headers();
-
-    // Behave as per HTTP/1.1 spec for others
-    header('Location: ' . $redirect_url, response_code: 301);
+    // Send redirect response with no-cache headers
+    $response = \TorrentPier\Http\Response::permanentRedirect($redirect_url);
+    \TorrentPier\Http\Response::noCache($response)->send();
     exit;
 }
 

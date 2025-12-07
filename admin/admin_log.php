@@ -75,13 +75,16 @@ $forums = forum_tree();
 $f_data = $forums['f'];
 
 // Start
-$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
+$start = request()->getInt('start');
+if ($start < 0) {
+    $start = abs($start);
+}
 
 // Type
 $type_selected = array($def_types);
 $type_csv = '';
 
-if ($var =& $_REQUEST[$type_key]) {
+if ($var = request()->get($type_key)) {
     $type_selected = get_id_ary($var);
 
     if (in_array($all_types, $type_selected)) {
@@ -95,7 +98,7 @@ if ($var =& $_REQUEST[$type_key]) {
 $user_selected = array($def_users);
 $user_csv = '';
 
-if ($var =& $_REQUEST[$user_key]) {
+if ($var = request()->get($user_key)) {
     $user_selected = get_id_ary($var);
 
     if (in_array($all_users, $user_selected)) {
@@ -109,7 +112,7 @@ if ($var =& $_REQUEST[$user_key]) {
 $forum_selected = array($def_forums);
 $forum_csv = '';
 
-if ($var =& $_REQUEST[$forum_key]) {
+if ($var = request()->get($forum_key)) {
     $forum_selected = get_id_ary($var);
 
     if (in_array($all_forums, $forum_selected)) {
@@ -123,7 +126,7 @@ if ($var =& $_REQUEST[$forum_key]) {
 $topic_selected = null;
 $topic_csv = '';
 
-if ($var =& $_REQUEST[$topic_key]) {
+if ($var = request()->get($topic_key)) {
     $topic_selected = get_id_ary($var);
     $topic_csv = implode(',', $topic_selected);
     $url = $topic_csv ? url_arg($url, $topic_key, $topic_csv) : $url;
@@ -132,7 +135,7 @@ if ($var =& $_REQUEST[$topic_key]) {
 // Sort
 $sort_val = $def_sort;
 
-if ($var =& $_REQUEST[$sort_key] && $var != $def_sort) {
+if (($var = request()->get($sort_key)) && $var != $def_sort) {
     $sort_val = ($var == $sort_asc) ? $sort_asc : $sort_desc;
     $url = url_arg($url, $sort_key, $sort_val);
 }
@@ -141,11 +144,11 @@ if ($var =& $_REQUEST[$sort_key] && $var != $def_sort) {
 $datetime_val = $def_datetime;
 $daysback_val = $def_days;
 
-if ($var =& $_REQUEST[$daysback_key] && $var != $def_days) {
+if (($var = request()->get($daysback_key)) && $var != $def_days) {
     $daysback_val = max((int)$var, 1);
     $url = url_arg($url, $daysback_key, $daysback_val);
 }
-if ($var =& $_REQUEST[$datetime_key] && $var != $def_datetime) {
+if (($var = request()->get($datetime_key)) && $var != $def_datetime) {
     $tz = TIMENOW + (3600 * config()->get('board_timezone'));
     if (($tmp_timestamp = strtotime($var, $tz)) > 0) {
         $datetime_val = $tmp_timestamp;
@@ -163,7 +166,7 @@ $first_log_time = (int)$row['first_log_time'];
 // Title match
 $title_match_val = $title_match_sql = '';
 
-if ($var =& $_REQUEST[$title_match_key]) {
+if ($var = request()->get($title_match_key)) {
     if ($tmp_title_match = substr(urldecode(trim($var)), 0, $title_match_max_len)) {
         $title_match_sql = DB()->escape($tmp_title_match);
         $url = url_arg($url, $title_match_key, urlencode($tmp_title_match));

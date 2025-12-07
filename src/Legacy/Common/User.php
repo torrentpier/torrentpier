@@ -316,7 +316,7 @@ class User
 
                 $this->data['user_lastvisit'] = $last_visit;
             }
-            if (!empty($_POST['autologin']) && config()->get('allow_autologin')) {
+            if (request()->post->has('autologin') && config()->get('allow_autologin')) {
                 if (!$auto_created) {
                     $this->verify_autologin_id($this->data, true, true);
                 }
@@ -373,7 +373,7 @@ class User
 				");
             }
 
-            if (isset($_REQUEST['reset_autologin'])) {
+            if (request()->has('reset_autologin')) {
                 $this->create_autologin_id($this->data, false);
 
                 Sessions::delete_user_sessions($this->data['user_id']);

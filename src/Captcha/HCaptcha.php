@@ -63,7 +63,7 @@ class HCaptcha implements CaptchaInterface
     public function check(): bool
     {
         // Require token present - fail closed
-        $hcaptchaResponse = $_POST['h-captcha-response'] ?? '';
+        $hcaptchaResponse = request()->post->get('h-captcha-response', '');
         if (empty($hcaptchaResponse)) {
             return false;
         }

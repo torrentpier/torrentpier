@@ -88,11 +88,11 @@ function build_acl_cell(int $f_perm, bool $auth_via_acl, bool $auth_mod, bool $h
     ];
 }
 
-$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : 0;
-$user_id = isset($_REQUEST[POST_USERS_URL]) ? (int)$_REQUEST[POST_USERS_URL] : 0;
-$cat_id = isset($_REQUEST[POST_CAT_URL]) ? (int)$_REQUEST[POST_CAT_URL] : 0;
-$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
-$submit = isset($_REQUEST['submit']);
+$group_id = request()->getInt(POST_GROUPS_URL, 0);
+$user_id = request()->getInt(POST_USERS_URL, 0);
+$cat_id = request()->getInt(POST_CAT_URL, 0);
+$mode = request()->getString('mode');
+$submit = request()->has('submit');
 
 // Check for demo mode
 if (IN_DEMO_MODE && $submit) {
@@ -143,8 +143,8 @@ if ($submit && $mode == 'user') {
     }
 
     // Make a user an admin (if already a user)
-    if (isset($_POST['userlevel'])) {
-        if ($_POST['userlevel'] === 'admin') {
+    if (request()->post->has('userlevel')) {
+        if (request()->post->get('userlevel') === 'admin') {
             if (userdata('user_id') == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID) {
                 bb_die(__('AUTH_GENERAL_ERROR'));
             }
@@ -156,7 +156,7 @@ if ($submit && $mode == 'user') {
 
             auth_updated_redirect('CLICK_RETURN_USERAUTH', $mode, POST_USERS_URL, $user_id);
         } // Make admin a user (if already admin)
-        elseif ($_POST['userlevel'] === 'user') {
+        elseif (request()->post->get('userlevel') === 'user') {
             // ignore if you're trying to change yourself from an admin to user!
             if (userdata('user_id') == $user_id) {
                 bb_die(__('AUTH_SELF_ERROR'));
@@ -175,10 +175,11 @@ if ($submit && $mode == 'user') {
     //
     $auth = [];
 
-    if (!empty($_POST['auth']) && is_array($_POST['auth'])) {
-        array_deep($_POST['auth'], 'intval');
+    $post_auth = request()->getArray('auth', []);
+    if (!empty($post_auth)) {
+        array_deep($post_auth, 'intval');
 
-        foreach ($_POST['auth'] as $f_id => $bf_ary) {
+        foreach ($post_auth as $f_id => $bf_ary) {
             if (array_sum($bf_ary)) {
                 $auth[$f_id] = bit2dec(array_keys($bf_ary, 1));
             }
@@ -194,35 +195,41 @@ if ($submit && $mode == 'user') {
 //
 // Submit new GROUP permissions
 //
-elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POST['auth']))) {
-    if (!$group_data = Group::get_group_data($group_id)) {
-        bb_die(__('GROUP_NOT_EXIST'));
-    }
-
-    $auth = [];
-    array_deep($_POST['auth'], 'intval');
-
-    foreach ($_POST['auth'] as $f_id => $bf_ary) {
-        if (array_sum($bf_ary)) {
-            $auth[$f_id] = bit2dec(array_keys($bf_ary, 1));
+elseif ($submit && $mode == 'group') {
+    $post_auth = request()->getArray('auth', []);
+    if (empty($post_auth)) {
+        // Skip if no auth data submitted
+    } else {
+        if (!$group_data = Group::get_group_data($group_id)) {
+            bb_die(__('GROUP_NOT_EXIST'));
         }
+
+        $auth = [];
+        array_deep($post_auth, 'intval');
+
+        foreach ($post_auth as $f_id => $bf_ary) {
+            if (array_sum($bf_ary)) {
+                $auth[$f_id] = bit2dec(array_keys($bf_ary, 1));
+            }
+        }
+
+        Group::delete_permissions($group_id, null, $cat_id);
+        Group::store_permissions($group_id, $auth);
+        Group::update_user_level('all');
+
+        auth_updated_redirect('CLICK_RETURN_GROUPAUTH', $mode, POST_GROUPS_URL, $group_id);
     }
-
-    Group::delete_permissions($group_id, null, $cat_id);
-    Group::store_permissions($group_id, $auth);
-    Group::update_user_level('all');
-
-    auth_updated_redirect('CLICK_RETURN_GROUPAUTH', $mode, POST_GROUPS_URL, $group_id);
 }
 
 //
 // Front end (changing permissions)
 //
-if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
+if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
     page_cfg('quirks_mode', true);
 
-    if (!empty($_POST['username'])) {
-        $this_userdata = get_userdata($_POST['username'], true);
+    $username = request()->post->get('username', '');
+    if ($username) {
+        $this_userdata = get_userdata($username, true);
     } else {
         $this_userdata = get_userdata($user_id);
     }
@@ -255,7 +262,8 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
             'CAT_HREF' => "$base_url&amp;" . POST_CAT_URL . "=$c_id",
         ));
 
-        if (!$c =& $_REQUEST[POST_CAT_URL] or !in_array($c, array('all', $c_id)) or empty($c_data['forums'])) {
+        $c = request()->get(POST_CAT_URL, '');
+        if (!$c || !in_array($c, array('all', $c_id)) || empty($c_data['forums'])) {
             continue;
         }
 
@@ -351,7 +359,8 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
             'CAT_HREF' => "$base_url&amp;" . POST_CAT_URL . "=$c_id",
         ));
 
-        if (!($c =& $_REQUEST[POST_CAT_URL]) || !in_array($c, array('all', $c_id)) || empty($c_data['forums'])) {
+        $c = request()->get(POST_CAT_URL, '');
+        if (!$c || !in_array($c, array('all', $c_id)) || empty($c_data['forums'])) {
             continue;
         }
 
@@ -434,7 +443,7 @@ template()->assign_vars(array(
     'YES_SIGN' => $yes_sign,
     'NO_SIGN' => $no_sign,
     'S_AUTH_ACTION' => 'admin_ug_auth.php',
-    'SELECTED_CAT' => !empty($_REQUEST[POST_CAT_URL]) ? $_REQUEST[POST_CAT_URL] : '',
+    'SELECTED_CAT' => request()->get(POST_CAT_URL, ''),
     'U_ALL_FORUMS' => !empty($base_url) ? "$base_url&amp;" . POST_CAT_URL . "=all" : '',
 ));
 

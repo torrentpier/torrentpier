@@ -14,7 +14,7 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-$submit = isset($_POST['submit']);
+$submit = request()->post->has('submit');
 
 // Check for demo mode
 if (IN_DEMO_MODE && $submit) {
@@ -23,15 +23,15 @@ if (IN_DEMO_MODE && $submit) {
 
 if ($submit) {
     // Ban action
-    if (!empty($_POST['username'])) {
-        if (!$this_userdata = get_userdata($_POST['username'], true)) {
+    if (!empty(request()->post->get('username'))) {
+        if (!$this_userdata = get_userdata(request()->post->get('username'), true)) {
             bb_die(__('NO_USER_ID_SPECIFIED') . '<br /><br />' . sprintf(__('CLICK_RETURN_BANADMIN'), '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
         }
 
         if (!getBanInfo((int)$this_userdata['user_id'])) {
             $ban_reason = '';
-            if (!empty($_POST['ban_reason'])) {
-                $ban_reason = trim($_POST['ban_reason']);
+            if (!empty(request()->post->get('ban_reason'))) {
+                $ban_reason = trim(request()->post->get('ban_reason'));
             }
             $sql = 'INSERT INTO ' . BB_BANLIST . ' (ban_userid, ban_reason) VALUES (' . $this_userdata['user_id'] . ', "' . DB()->escape($ban_reason) . '")';
             if (!DB()->sql_query($sql)) {
@@ -43,8 +43,8 @@ if ($submit) {
     // Unban action
     $where_sql = '';
 
-    if (!empty($_POST['unban_user'])) {
-        $user_list = $_POST['unban_user'];
+    if (!empty(request()->post->get('unban_user'))) {
+        $user_list = request()->getArray('unban_user');
 
         for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
             if ($user_list[$i] != -1) {

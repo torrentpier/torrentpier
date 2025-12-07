@@ -14,22 +14,22 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-if (isset($_GET['mode']) || isset($_POST['mode'])) {
-    $mode = $_GET['mode'] ?? $_POST['mode'];
+if (request()->has('mode')) {
+    $mode = request()->getString('mode');
 } else {
     //
     // These could be entered via a form button
     //
-    if (isset($_POST['add'])) {
+    if (request()->post->has('add')) {
         $mode = 'add';
-    } elseif (isset($_POST['save'])) {
+    } elseif (request()->post->has('save')) {
         $mode = 'save';
     } else {
         $mode = '';
     }
 }
 
-if ($mode == 'delete' && isset($_POST['cancel'])) {
+if ($mode == 'delete' && request()->post->has('cancel')) {
     $mode = '';
 }
 
@@ -38,7 +38,7 @@ if ($mode != '') {
         //
         // They want to add a new rank, show the form.
         //
-        $rank_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        $rank_id = request()->getInt('id');
 
         $s_hidden_fields = '';
 
@@ -105,10 +105,10 @@ if ($mode != '') {
         // Ok, they sent us our info, let's update it.
         //
 
-        $rank_id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
-        $rank_title = isset($_POST['title']) ? trim($_POST['title']) : '';
-        $rank_style = isset($_POST['style']) ? trim($_POST['style']) : '';
-        $rank_image = isset($_POST['rank_image']) ? trim($_POST['rank_image']) : '';
+        $rank_id = request()->post->getInt('id');
+        $rank_title = trim(request()->post->getString('title'));
+        $rank_style = trim(request()->post->getString('style'));
+        $rank_image = trim(request()->post->getString('rank_image'));
 
         if ($rank_title == '') {
             bb_die(__('MUST_SELECT_RANK'));
@@ -152,12 +152,8 @@ if ($mode != '') {
         // Ok, they want to delete their rank
         //
 
-        $confirmed = isset($_POST['confirm']);
-        if (isset($_POST['id']) || isset($_GET['id'])) {
-            $rank_id = isset($_POST['id']) ? (int)$_POST['id'] : (int)$_GET['id'];
-        } else {
-            $rank_id = 0;
-        }
+        $confirmed = request()->post->has('confirm');
+        $rank_id = request()->getInt('id');
 
         if ($confirmed) {
             if ($rank_id) {

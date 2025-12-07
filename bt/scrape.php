@@ -16,11 +16,12 @@ if (!config()->get('tracker.scrape')) {
 }
 
 // Recover info_hash
-if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
-    $_GET['info_hash'] = $_GET['?info_hash'];
+$info_hash = null;
+if (request()->query->has('?info_hash') && !request()->query->has('info_hash')) {
+    $info_hash = (string)request()->query->get('?info_hash');
+} elseif (request()->query->has('info_hash')) {
+    $info_hash = (string)request()->query->get('info_hash');
 }
-
-$info_hash = isset($_GET['info_hash']) ? (string)$_GET['info_hash'] : null;
 
 // Verify info_hash
 if (!isset($info_hash)) {
@@ -36,7 +37,7 @@ if (strlen($info_hash) !== 20) {
 }
 
 // Handle multiple hashes
-preg_match_all('/info_hash=([^&]*)/i', $_SERVER['QUERY_STRING'], $info_hash_array);
+preg_match_all('/info_hash=([^&]*)/i', request()->server->get('QUERY_STRING', ''), $info_hash_array);
 
 $torrents = [];
 $info_hashes = [];

@@ -15,14 +15,10 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 // Check to see what mode we should operate in
-if (isset($_POST['mode']) || isset($_GET['mode'])) {
-    $mode = $_POST['mode'] ?? $_GET['mode'];
-    $mode = htmlspecialchars($mode);
-} else {
-    $mode = '';
-}
+$mode = request()->getString('mode');
+$mode = htmlspecialchars($mode);
 
-if ($mode == 'delete' && isset($_POST['cancel'])) {
+if ($mode == 'delete' && request()->has('cancel')) {
     $mode = '';
 }
 
@@ -46,10 +42,10 @@ foreach ($smilesDirectory as $files) {
 }
 
 // Select main mode
-if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
-    $smile_pak = (string)request_var('smile_pak', '');
-    $clear_current = (int)request_var('clear_current', '');
-    $replace_existing = (int)request_var('replace', '');
+if (request()->has('import_pack')) {
+    $smile_pak = request()->getString('smile_pak');
+    $clear_current = request()->getInt('clear_current');
+    $replace_existing = request()->getInt('replace');
 
     if (!empty($smile_pak)) {
         // The user has already selected a smile_pak file.. Import it
@@ -132,8 +128,8 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             'S_HIDDEN_FIELDS' => $hidden_vars
         ]);
     }
-} elseif (isset($_POST['export_pack']) || isset($_GET['export_pack'])) {
-    $export_pack = (string)request_var('export_pack', '');
+} elseif (request()->has('export_pack')) {
+    $export_pack = request()->getString('export_pack');
 
     if ($export_pack == 'send') {
         $sql = 'SELECT * FROM ' . BB_SMILIES;
@@ -150,16 +146,15 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $smile_pak .= $resultset[$i]['code'] . "\n";
         }
 
-        header('Content-Type: text/x-delimtext; name="smiles.pak"');
-        header('Content-disposition: attachment; filename=smiles.pak');
-
-        echo $smile_pak;
-
+        $response = \TorrentPier\Http\Response::text($smile_pak);
+        $response->headers->set('Content-Type', 'text/x-delimtext; name="smiles.pak"');
+        $response->headers->set('Content-Disposition', 'attachment; filename=smiles.pak');
+        $response->send();
         exit;
     }
 
     bb_die(sprintf(__('EXPORT_SMILES'), '<a href="admin_smilies.php?export_pack=send">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
-} elseif (isset($_POST['add']) || isset($_GET['add'])) {
+} elseif (request()->has('add')) {
     $filename_list = '';
     for ($i = 0, $iMax = count($smiley_images); $i < $iMax; $i++) {
         $filename_list .= '<option value="' . $smiley_images[$i] . '">' . $smiley_images[$i] . '</option>';
@@ -178,9 +173,8 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 } elseif ($mode != '') {
     switch ($mode) {
         case 'delete':
-            $confirmed = isset($_POST['confirm']);
-            $smiley_id = (!empty($_POST['id'])) ? $_POST['id'] : $_GET['id'];
-            $smiley_id = (int)$smiley_id;
+            $confirmed = request()->has('confirm');
+            $smiley_id = request()->getInt('id');
 
             if ($confirmed) {
                 $sql = 'DELETE FROM ' . BB_SMILIES . ' WHERE smilies_id = ' . $smiley_id;
@@ -203,8 +197,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             break;
 
         case 'edit':
-            $smiley_id = (!empty($_POST['id'])) ? $_POST['id'] : $_GET['id'];
-            $smiley_id = (int)$smiley_id;
+            $smiley_id = request()->getInt('id');
 
             $sql = 'SELECT * FROM ' . BB_SMILIES . ' WHERE smilies_id = ' . $smiley_id;
             $result = DB()->sql_query($sql);
@@ -240,11 +233,11 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             break;
 
         case 'save':
-            $smile_code = isset($_POST['smile_code']) ? trim($_POST['smile_code']) : trim($_GET['smile_code']);
-            $smile_url = isset($_POST['smile_url']) ? trim($_POST['smile_url']) : trim($_GET['smile_url']);
+            $smile_code = trim(request()->getString('smile_code'));
+            $smile_url = trim(request()->getString('smile_url'));
             $smile_url = ltrim(basename($smile_url), "'");
-            $smile_emotion = isset($_POST['smile_emotion']) ? trim($_POST['smile_emotion']) : trim($_GET['smile_emotion']);
-            $smile_id = isset($_POST['smile_id']) ? (int)$_POST['smile_id'] : (int)$_GET['smile_id'];
+            $smile_emotion = trim(request()->getString('smile_emotion'));
+            $smile_id = request()->getInt('smile_id');
 
             // If no code was entered complain
             if ($smile_code == '' || $smile_url == '') {
@@ -267,13 +260,10 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             break;
 
         case 'savenew':
-            $smile_code = $_POST['smile_code'] ?? $_GET['smile_code'];
-            $smile_url = $_POST['smile_url'] ?? $_GET['smile_url'];
+            $smile_code = trim(request()->getString('smile_code'));
+            $smile_url = trim(request()->getString('smile_url'));
             $smile_url = ltrim(basename($smile_url), "'");
-            $smile_emotion = $_POST['smile_emotion'] ?? $_GET['smile_emotion'];
-            $smile_code = trim($smile_code);
-            $smile_url = trim($smile_url);
-            $smile_emotion = trim($smile_emotion);
+            $smile_emotion = trim(request()->getString('smile_emotion'));
 
             // If no code was entered complain
             if ($smile_code == '' || $smile_url == '') {

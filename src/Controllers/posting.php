@@ -14,19 +14,19 @@ page_cfg('load_tpl_vars', [
 ]);
 page_cfg('allow_robots', false);
 
-$submit = (bool)@$_REQUEST['post'];
-$refresh = $preview = (bool)@$_REQUEST['preview'];
-$delete = (bool)@$_REQUEST['delete'];
-$mode = (string)@$_REQUEST['mode'];
-$del_attachment = !empty($_POST['del_attachment']);
-$confirm = isset($_POST['confirm']);
+$submit = (bool)request()->get('post');
+$refresh = $preview = (bool)request()->get('preview');
+$delete = (bool)request()->get('delete');
+$mode = (string)request()->get('mode');
+$del_attachment = request()->post->has('del_attachment');
+$confirm = request()->post->has('confirm');
 
-$forum_id = (int)@$_REQUEST[POST_FORUM_URL];
-$topic_id = (int)@$_REQUEST[POST_TOPIC_URL];
-$post_id = (int)@$_REQUEST[POST_POST_URL];
+$forum_id = request()->getInt(POST_FORUM_URL);
+$topic_id = request()->getInt(POST_TOPIC_URL);
+$post_id = request()->getInt(POST_POST_URL);
 
 // Set topic type
-$topic_type = (@$_POST['topictype']) ? (int)$_POST['topictype'] : POST_NORMAL;
+$topic_type = request()->post->has('topictype') ? request()->post->getInt('topictype') : POST_NORMAL;
 $topic_type = in_array($topic_type, [POST_NORMAL, POST_STICKY, POST_ANNOUNCE]) ? $topic_type : POST_NORMAL;
 
 $selected_rg = 0;
@@ -226,7 +226,7 @@ if ($mode == 'new_rel') {
         foreach ($sql as $row) {
             $topics .= config()->get('tor_icons')[$row['tor_status']] . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
         }
-        if ($topics && !(IS_SUPER_ADMIN && !empty($_REQUEST['edit_tpl']))) {
+        if ($topics && !(IS_SUPER_ADMIN && request()->query->has('edit_tpl'))) {
             bb_die($topics . __('UNEXECUTED_RELEASE'));
         }
     }
@@ -261,12 +261,12 @@ $robots_indexing = $post_info['topic_allow_robots'] ?? true;
 if ($submit || $refresh) {
     if ($is_auth['auth_mod']) {
         if ($post_info['auth_read'] == AUTH_ALL) {
-            $robots_indexing = !empty($_POST['robots']);
+            $robots_indexing = request()->post->has('robots');
         } else {
             $robots_indexing = true;
         }
     }
-    $notify_user = (int)!empty($_POST['notify']);
+    $notify_user = (int)request()->post->has('notify');
 } else {
     $notify_user = bf(userdata('user_opt'), 'user_opt', 'user_notify');
 
@@ -275,13 +275,13 @@ if ($submit || $refresh) {
     }
 }
 
-$update_post_time = !empty($_POST['update_post_time']);
+$update_post_time = request()->post->has('update_post_time');
 
 // If while you were writing a response, new messages appeared in the topic,
 // before your message is sent, a warning is displayed with an overview of these messages
 $topic_has_new_posts = false;
 
-if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && isset($_COOKIE[COOKIE_TOPIC])) {
+if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && request()->cookies->has(COOKIE_TOPIC)) {
     if ($topic_last_read = max((int)(tracking_topics()[$topic_id] ?? 0), (int)(tracking_forums()[$forum_id] ?? 0))) {
         $sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
 			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u
@@ -315,7 +315,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 
 // Confirm deletion
 if (($delete || $mode == 'delete') && !$confirm) {
-    if (isset($_POST['cancel'])) {
+    if (request()->post->has('cancel')) {
         redirect(POST_URL . "$post_id#$post_id");
     }
     $hidden_fields = [
@@ -338,11 +338,12 @@ if (($delete || $mode == 'delete') && !$confirm) {
         case 'editpost':
         case 'newtopic':
         case 'reply':
-            $username = (!empty($_POST['username'])) ? clean_username($_POST['username']) : '';
-            $subject = (!empty($_POST['subject'])) ? clean_title($_POST['subject']) : '';
-            $message = (!empty($_POST['message'])) ? prepare_message($_POST['message']) : '';
-            $attach_rg_sig = (isset($_POST['attach_rg_sig'], $_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? 1 : 0;
-            $poster_rg_id = (isset($_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? (int)$_POST['poster_rg'] : 0;
+            $username = request()->post->has('username') ? clean_username(request()->post->get('username')) : '';
+            $subject = request()->post->has('subject') ? clean_title(request()->post->get('subject')) : '';
+            $message = request()->post->has('message') ? prepare_message(request()->post->get('message')) : '';
+            $poster_rg_raw = request()->post->getInt('poster_rg', -1);
+            $attach_rg_sig = (request()->post->has('attach_rg_sig') && $poster_rg_raw != -1) ? 1 : 0;
+            $poster_rg_id = ($poster_rg_raw != -1) ? $poster_rg_raw : 0;
 
             \TorrentPier\Legacy\Post::prepare_post($mode, $post_data, $error_msg, $username, $subject, $message);
 
@@ -378,12 +379,13 @@ if (($delete || $mode == 'delete') && !$confirm) {
         $is_first_post = $mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']);
         $can_upload = $post_info['allow_reg_tracker'] && $is_auth['auth_attachments'] && $is_first_post;
         $file_attached = !empty($post_info['attach_ext_id']);
-        $has_file = !empty($_FILES['fileupload']['name']);
+        $fileData = request()->getFileAsArray('fileupload');
+        $has_file = $fileData && $fileData['error'] === UPLOAD_ERR_OK;
 
         if ($can_upload && $has_file && (!$file_attached || $mode == 'editpost')) {
             $result = \TorrentPier\Attachment::store(
                 $topic_id,
-                $_FILES['fileupload'],
+                $fileData,
                 !empty($post_info['tracker_status'])
             );
             if (!$result['success']) {
@@ -426,9 +428,9 @@ if (($delete || $mode == 'delete') && !$confirm) {
 }
 
 if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
-    $username = (!empty($_POST['username'])) ? clean_username($_POST['username']) : '';
-    $subject = (!empty($_POST['subject'])) ? clean_title($_POST['subject']) : '';
-    $message = (!empty($_POST['message'])) ? prepare_message($_POST['message']) : '';
+    $username = request()->post->has('username') ? clean_username(request()->post->get('username')) : '';
+    $subject = request()->post->has('subject') ? clean_title(request()->post->get('subject')) : '';
+    $message = request()->post->has('message') ? prepare_message(request()->post->get('message')) : '';
 
     if ($preview) {
         $preview_subject = $subject;

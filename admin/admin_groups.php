@@ -14,11 +14,11 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : 0;
-$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
+$group_id = request()->getInt(POST_GROUPS_URL);
+$mode = request()->getString('mode');
 
-if (!empty($_POST['edit']) || !empty($_POST['new'])) {
-    if (!empty($_POST['edit'])) {
+if (request()->post->get('edit') || request()->post->get('new')) {
+    if (request()->post->get('edit')) {
         if (!$row = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
             bb_die(__('GROUP_NOT_EXIST'));
         }
@@ -32,7 +32,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         ];
         $mode = 'editgroup';
         template()->assign_block_vars('group_edit', []);
-    } elseif (!empty($_POST['new'])) {
+    } elseif (request()->post->get('new')) {
         $group_info = [
             'group_name' => '',
             'group_description' => '',
@@ -68,8 +68,8 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         'S_GROUP_ACTION' => 'admin_groups.php',
         'S_HIDDEN_FIELDS' => $s_hidden_fields
     ]);
-} elseif (!empty($_POST['group_update'])) {
-    if (!empty($_POST['group_delete'])) {
+} elseif (request()->post->get('group_update')) {
+    if (request()->post->get('group_delete')) {
         if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
             bb_die(__('GROUP_NOT_EXIST'));
         }
@@ -82,11 +82,11 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
 
         bb_die($message);
     } else {
-        $group_type = isset($_POST['group_type']) ? (int)$_POST['group_type'] : GROUP_OPEN;
-        $release_group = isset($_POST['release_group']) ? (int)$_POST['release_group'] : 0;
-        $group_name = isset($_POST['group_name']) ? trim($_POST['group_name']) : '';
-        $group_desc = isset($_POST['group_description']) ? trim($_POST['group_description']) : '';
-        $group_moderator = $_POST['username'] ?? '';
+        $group_type = request()->getInt('group_type', GROUP_OPEN);
+        $release_group = request()->getInt('release_group');
+        $group_name = trim(request()->getString('group_name'));
+        $group_desc = trim(request()->getString('group_description'));
+        $group_moderator = request()->getString('username');
 
         if ($group_name === '') {
             bb_die(__('NO_GROUP_NAME'));
@@ -119,7 +119,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
                 $sql_ary['mod_time'] = TIMENOW;
 
                 // Delete old moderator's user_group
-                if (isset($_POST['delete_old_moderator'])) {
+                if (request()->post->get('delete_old_moderator')) {
                     \TorrentPier\Legacy\Group::delete_user_group($group_id, $group_info['group_moderator']);
                 }
             }
