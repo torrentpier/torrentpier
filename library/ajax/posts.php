@@ -106,8 +106,15 @@ switch ($this->request['type']) {
         if (bf(userdata('user_opt'), 'user_opt', 'dis_post_edit')) {
             $this->ajax_die(__('POST_EDIT_CANNOT'));
         }
-        if ($post['poster_id'] != userdata('user_id') && !$is_auth['auth_mod']) {
+        if ($post['poster_id'] == userdata('user_id')) {
+            if (!$is_auth['auth_edit']) {
+                $this->ajax_die(sprintf(__('SORRY_AUTH_EDIT'), strip_tags($is_auth['auth_edit_type'])));
+            }
+        } elseif (!$is_auth['auth_mod']) {
             $this->ajax_die(__('EDIT_OWN_POSTS'));
+        }
+        if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
+            $this->ajax_die(__('TOPIC_LOCKED'));
         }
         if ((mb_strlen($post['post_text'], DEFAULT_CHARSET) > 1000) || ($post['topic_first_post_id'] == $post_id)) {
             $this->response['redirect'] = make_url(POSTING_URL . '?mode=editpost&' . POST_POST_URL . '=' . $post_id);
@@ -144,13 +151,6 @@ switch ($this->request['type']) {
 
             $this->response['html'] = bbcode2html($text);
         } else {
-            $is_auth = auth(AUTH_ALL, $post['forum_id'], userdata());
-            if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
-                $this->ajax_die(__('TOPIC_LOCKED'));
-            } elseif (!$is_auth['auth_edit']) {
-                $this->ajax_die(sprintf(__('SORRY_AUTH_EDIT'), strip_tags($is_auth['auth_edit_type'])));
-            }
-
             $hidden_form = '<input type="hidden" name="mode" value="editpost" />';
             $hidden_form .= '<input type="hidden" name="' . POST_POST_URL . '" value="' . $post_id . '" />';
             $hidden_form .= '<input type="hidden" name="subject" value="' . $post['topic_title'] . '" />';
