@@ -1,3 +1,5 @@
+# Commits to skip in changelog generation (git-cliff)
+# https://git-cliff.org/docs/usage/skipping-commits/
 9766c534bddad8e82e6d19f9bad5cf70b9887f9a
 92ce77ec0ec703c08a659419087a373f76e711f7
 2d53efc945c7747be1755d0b66557a86bdc12cbd

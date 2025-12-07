@@ -1,0 +1,23 @@
+torrentpier:
+  name: TorrentPier Team
+  title: Core Development Team
+  url: https://github.com/torrentpier
+  image_url: https://github.com/torrentpier.png
+  socials:
+    github: torrentpier
+
+exileum:
+  name: Yury Pikhtarev
+  title: Core Development Team
+  url: https://github.com/exileum
+  image_url: https://github.com/exileum.png
+  socials:
+    github: exileum
+
+belomaxorka:
+  name: Roman Kelesidis
+  title: Core Development Team
+  url: https://github.com/belomaxorka
+  image_url: https://github.com/belomaxorka.png
+  socials:
+    github: belomaxorka
