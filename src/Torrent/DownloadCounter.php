@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -84,7 +85,7 @@ class DownloadCounter
         $row = DB()->table(BB_USER_DL_DAY)
             ->where('user_id', $userId)
             ->fetch();
-        return (int)($row?->cnt ?? 0);
+        return (int) ($row?->cnt ?? 0);
     }
 
     /**
@@ -96,7 +97,7 @@ class DownloadCounter
      */
     public function hasDownloaded(int $topicId, int $userId): bool
     {
-        return (bool)DB()->table(BB_TORRENT_DL)
+        return (bool) DB()->table(BB_TORRENT_DL)
             ->where('topic_id', $topicId)
             ->where('user_id', $userId)
             ->fetch();

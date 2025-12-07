@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -12,8 +13,8 @@ declare(strict_types=1);
 namespace TorrentPier\Router;
 
 use League\Route\Route;
-use League\Route\Router as LeagueRouter;
 use League\Route\RouteGroup;
+use League\Route\Router as LeagueRouter;
 use League\Route\Strategy\ApplicationStrategy;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

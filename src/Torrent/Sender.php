@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,10 +12,9 @@ namespace TorrentPier\Torrent;
 
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
+use Exception;
 use TorrentPier\Attachment;
 use TorrentPier\Http\Response;
-
-use Exception;
 
 /**
  * Torrent file sender with passkey injection.

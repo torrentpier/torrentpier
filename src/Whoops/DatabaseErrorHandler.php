@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -290,7 +291,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
 
                     } catch (\Exception $e) {
                         $info['databases'][$serverName] = [
-                            'error' => 'Could not retrieve info: ' . $e->getMessage()
+                            'error' => 'Could not retrieve info: ' . $e->getMessage(),
                         ];
                     }
                 }

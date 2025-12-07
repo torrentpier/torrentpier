@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,8 +12,8 @@ namespace TorrentPier;
 
 use Exception;
 use Psr\Http\Message\ResponseInterface;
-use TorrentPier\Http\HttpClient;
 use TorrentPier\Http\Exception\HttpClientException;
+use TorrentPier\Http\HttpClient;
 
 /**
  * Class Updater
@@ -58,14 +59,14 @@ class Updater
     {
         // Initialize HTTP client with 10-second timeout
         $this->httpClient = HttpClient::getInstance([
-            'timeout' => 10
+            'timeout' => 10,
         ]);
 
         try {
             $response = $this->httpClient->get(UPDATER_URL, [
                 'headers' => [
-                    'Accept' => 'application/json'
-                ]
+                    'Accept' => 'application/json',
+                ],
             ]);
 
             // Check response status
@@ -113,8 +114,7 @@ class Updater
         string    $targetVersion = 'latest',
         bool      $force = false,
         ?callable $progressCallback = null
-    ): bool
-    {
+    ): bool {
         $this->targetVersion = $targetVersion;
 
         if ($this->targetVersion === 'latest') {
@@ -247,7 +247,7 @@ class Updater
                 // Check if it's rate limiting
                 if (isset($data['documentation_url']) && str_contains($data['documentation_url'], 'rate-limiting')) {
                     $resetTime = $response->getHeader('X-RateLimit-Reset')[0] ?? null;
-                    $resetMsg = $resetTime ? ' (resets at ' . date('Y-m-d H:i:s', (int)$resetTime) . ')' : '';
+                    $resetMsg = $resetTime ? ' (resets at ' . date('Y-m-d H:i:s', (int) $resetTime) . ')' : '';
                     throw new Exception("GitHub API rate limit exceeded$resetMsg: $message");
                 }
                 throw new Exception("GitHub API access forbidden: $message");

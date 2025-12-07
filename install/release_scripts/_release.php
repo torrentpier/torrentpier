@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+define('BB_ROOT', dirname(__DIR__, 2) . DIRECTORY_SEPARATOR);
 define('BB_PATH', BB_ROOT);
 
 // Check CLI mode
@@ -114,7 +114,7 @@ if ($bytesWritten === 0) {
 out("\n- Config file has been updated!", 'success');
 
 // Update CHANGELOG.md
-runProcess('npx git-cliff v2.4.6-alpha.4.. --config cliff.toml --tag "' . $version . '" > CHANGELOG.md');
+runProcess('npx git-cliff v2.4.6-alpha.4.. --config install/release_scripts/cliff.toml --tag "' . $version . '" > CHANGELOG.md');
 
 // Git add & commit
 runProcess('git add -A && git commit -m "release: ' . escapeshellarg($version) . (!empty($versionEmoji) ? (' ' . $versionEmoji) : '') . '"');

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,12 +12,12 @@ declare(strict_types=1);
 
 namespace TorrentPier\Http;
 
-use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * HTTP Response Factory class for creating various HTTP responses
@@ -105,8 +106,7 @@ final class Response
         ?string $filename = null,
         string  $disposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT,
         bool    $deleteFile = false
-    ): BinaryFileResponse
-    {
+    ): BinaryFileResponse {
         $response = new BinaryFileResponse($path);
 
         if ($filename !== null) {
@@ -257,8 +257,7 @@ final class Response
         string          $origin = '*',
         array           $methods = ['GET', 'POST', 'OPTIONS'],
         array           $headers = ['Content-Type', 'Authorization']
-    ): SymfonyResponse
-    {
+    ): SymfonyResponse {
         $response->headers->set('Access-Control-Allow-Origin', $origin);
         $response->headers->set('Access-Control-Allow-Methods', implode(', ', $methods));
         $response->headers->set('Access-Control-Allow-Headers', implode(', ', $headers));

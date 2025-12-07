@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -43,7 +44,7 @@ class TorrServerAPI
         'playlist' => 'playlist',
         'upload' => 'torrent/upload',
         'stream' => 'stream',
-        'ffprobe' => 'ffp'
+        'ffprobe' => 'ffp',
     ];
 
 
@@ -74,20 +75,20 @@ class TorrServerAPI
 
         $cacheKey = 'torrserver_available';
         if (($cached = CACHE('bb_cache')->get($cacheKey)) !== false) {
-            return $checked = (bool)$cached;
+            return $checked = (bool) $cached;
         }
 
         try {
             $response = $this->client->get($this->url . 'echo', [
                 'timeout' => 2,
-                'connect_timeout' => 1
+                'connect_timeout' => 1,
             ]);
             $checked = $response->getStatusCode() === 200;
         } catch (GuzzleException) {
             $checked = false;
         }
 
-        CACHE('bb_cache')->set($cacheKey, (int)$checked, 30);
+        CACHE('bb_cache')->set($cacheKey, (int) $checked, 30);
         return $checked;
     }
 
@@ -114,16 +115,16 @@ class TorrServerAPI
             $response = $this->client->post($this->url . $this->endpoints['upload'], [
                 'timeout' => config()->get('torr_server.timeout'),
                 'headers' => [
-                    'Accept' => 'application/json'
+                    'Accept' => 'application/json',
                 ],
                 'multipart' => [
                     [
                         'name' => 'file',
                         'contents' => fopen($path, 'r'),
                         'filename' => basename($path),
-                        'headers' => ['Content-Type' => $mimetype]
-                    ]
-                ]
+                        'headers' => ['Content-Type' => $mimetype],
+                    ],
+                ],
             ]);
 
             $isSuccess = $response->getStatusCode() === 200;
@@ -162,9 +163,9 @@ class TorrServerAPI
             $response = $this->client->get($this->url . $this->endpoints['playlist'], [
                 'timeout' => config()->get('torr_server.timeout'),
                 'headers' => [
-                    'Accept' => 'audio/x-mpegurl'
+                    'Accept' => 'audio/x-mpegurl',
                 ],
-                'query' => ['hash' => $hash]
+                'query' => ['hash' => $hash],
             ]);
 
             $responseBody = $response->getBody()->getContents();
@@ -195,7 +196,7 @@ class TorrServerAPI
             bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
         }
 
-        return is_file($m3uFile) && (int)filesize($m3uFile) > 0;
+        return is_file($m3uFile) && (int) filesize($m3uFile) > 0;
     }
 
     /**
@@ -265,8 +266,8 @@ class TorrServerAPI
                 $httpResponse = $this->client->get($this->url . $this->endpoints['ffprobe'] . '/' . $hash . '/' . $index, [
                     'timeout' => config()->get('torr_server.timeout'),
                     'headers' => [
-                        'Accept' => 'application/json'
-                    ]
+                        'Accept' => 'application/json',
+                    ],
                 ]);
 
                 $response->{$index} = $httpResponse->getBody()->getContents();
@@ -295,9 +296,9 @@ class TorrServerAPI
             $response = $this->client->get($this->url . $this->endpoints['stream'], [
                 'timeout' => config()->get('torr_server.timeout'),
                 'headers' => [
-                    'Accept' => 'application/octet-stream'
+                    'Accept' => 'application/octet-stream',
                 ],
-                'query' => ['link' => $hash]
+                'query' => ['link' => $hash],
             ]);
 
             $isSuccess = $response->getStatusCode() === 200;

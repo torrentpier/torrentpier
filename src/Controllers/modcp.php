@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -196,7 +197,7 @@ switch ($mode) {
             'sid' => userdata('session_id'),
             'mode' => $mode,
             POST_FORUM_URL => $forum_id,
-            POST_TOPIC_URL => $topic_id
+            POST_TOPIC_URL => $topic_id,
         ];
         foreach ($req_topics as $req_topic_id) {
             $hidden_fields['topic_id_list'][] = $req_topic_id;
@@ -222,7 +223,7 @@ switch ($mode) {
             $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
             if (isset($news_forums[$forum_id]) && config()->get('show_latest_news') && $result) {
                 datastore()->enqueue([
-                    'latest_news'
+                    'latest_news',
                 ]);
                 datastore()->update('latest_news');
             }
@@ -230,7 +231,7 @@ switch ($mode) {
             $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
             if (isset($net_forums[$forum_id]) && config()->get('show_network_news') && $result) {
                 datastore()->enqueue([
-                    'network_news'
+                    'network_news',
                 ]);
                 datastore()->update('network_news');
             }
@@ -242,7 +243,7 @@ switch ($mode) {
                 'QUESTION' => __('CONFIRM_DELETE_TOPIC'),
                 'ITEMS_LIST' => implode("\n</li>\n<li>\n", $topic_titles),
                 'FORM_ACTION' => 'modcp',
-                'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields)
+                'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
             ]);
         }
         break;
@@ -257,7 +258,7 @@ switch ($mode) {
             $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
             if ((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && config()->get('show_latest_news') && $result) {
                 datastore()->enqueue([
-                    'latest_news'
+                    'latest_news',
                 ]);
                 datastore()->update('latest_news');
             }
@@ -265,7 +266,7 @@ switch ($mode) {
             $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
             if ((isset($net_forums[$forum_id]) || isset($net_forums[$new_forum_id])) && config()->get('show_network_news') && $result) {
                 datastore()->enqueue([
-                    'network_news'
+                    'network_news',
                 ]);
                 datastore()->update('network_news');
             }
@@ -338,7 +339,7 @@ switch ($mode) {
             log_action()->mod($type, [
                 'forum_id' => $forum_id,
                 'topic_id' => $topic_id,
-                'topic_title' => $topic_title
+                'topic_title' => $topic_title,
             ]);
         }
 
@@ -347,7 +348,7 @@ switch ($mode) {
 
         break;
 
-    // Set or unset topics DL-type
+        // Set or unset topics DL-type
     case 'set_download':
     case 'unset_download':
         $set_download = ($mode == 'set_download');
@@ -371,7 +372,7 @@ switch ($mode) {
         log_action()->mod($type, [
             'forum_id' => $forum_id,
             'topic_id' => $topic_id,
-            'topic_title' => get_topic_title($topic_id)
+            'topic_title' => get_topic_title($topic_id),
         ]);
 
         $msg = ($set_download) ? __('TOPICS_DOWN_SETS') : __('TOPICS_DOWN_UNSETS');
@@ -391,7 +392,7 @@ switch ($mode) {
 
         if (($split || $delete_posts) && ($posts && $topic_id && $forum_id && $topic_first_post_id) && $confirmed) {
             foreach ($posts as $post_id) {
-                if ($pid = (int)$post_id) {
+                if ($pid = (int) $post_id) {
                     $req_post_id_sql[] = $pid;
                 }
             }
@@ -434,8 +435,8 @@ switch ($mode) {
                 $user_id_sql = '';
                 $post_id_sql = '';
                 do {
-                    $user_id_sql .= (($user_id_sql != '') ? ', ' : '') . (int)$row['poster_id'];
-                    $post_id_sql .= (($post_id_sql != '') ? ', ' : '') . (int)$row['post_id'];
+                    $user_id_sql .= (($user_id_sql != '') ? ', ' : '') . (int) $row['poster_id'];
+                    $post_id_sql .= (($post_id_sql != '') ? ', ' : '') . (int) $row['post_id'];
                 } while ($row = DB()->sql_fetchrow($result));
 
                 $post_subject = clean_title(request()->post->get('subject'));
@@ -506,7 +507,7 @@ switch ($mode) {
                     'topic_id' => $topic_id,
                     'topic_title' => get_topic_title($topic_id),
                     'topic_id_new' => $new_topic_id,
-                    'topic_title_new' => htmlCHR(request()->post->get('subject'))
+                    'topic_title_new' => htmlCHR(request()->post->get('subject')),
                 ]);
 
                 bb_die($message);
@@ -571,7 +572,7 @@ switch ($mode) {
                         'CHECKBOX' => defined('BEGIN_CHECKBOX'),
                         'POST_ID' => $post_id,
                         'ROW_ID' => $i,
-                        'CB_ID' => 'cb_' . $i
+                        'CB_ID' => 'cb_' . $i,
                     ]);
 
                     if ($post_id == $topic_first_post_id) {
@@ -695,7 +696,7 @@ switch ($mode) {
         $pin = ($mode == 'post_pin');
         $new_topic_status = $pin ? 1 : 0;
 
-        if (count((array)$topic_csv)) {
+        if (count((array) $topic_csv)) {
             $sql = "
 				SELECT topic_id, topic_title
 				FROM " . BB_TOPICS . "
@@ -729,7 +730,7 @@ switch ($mode) {
                 log_action()->mod($type, [
                     'forum_id' => $forum_id,
                     'topic_id' => $topic_id,
-                    'topic_title' => $topic_title
+                    'topic_title' => $topic_title,
                 ]);
             }
 

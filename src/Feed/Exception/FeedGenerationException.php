@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -16,6 +17,4 @@ use RuntimeException;
 /**
  * Exception thrown when feed generation fails
  */
-class FeedGenerationException extends RuntimeException
-{
-}
+class FeedGenerationException extends RuntimeException {}

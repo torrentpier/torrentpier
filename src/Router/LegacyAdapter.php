@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -35,8 +36,7 @@ class LegacyAdapter
         private readonly string $controllerPath,
         private ?string         $scriptName = null,
         private readonly array  $options = []
-    )
-    {
+    ) {
         $this->scriptName ??= pathinfo($controllerPath, PATHINFO_FILENAME);
     }
 

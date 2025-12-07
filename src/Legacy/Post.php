@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -120,7 +121,7 @@ class Post
 			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt
 			WHERE
 					$where_sql
-				AND p.post_time = " . (int)$row['last_post_time'] . "
+				AND p.post_time = " . (int) $row['last_post_time'] . "
 				AND pt.post_id = p.post_id
 			LIMIT 1
 		";
@@ -205,7 +206,7 @@ class Post
             $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
             if (isset($news_forums[$forum_id]) && config()->get('show_latest_news') && $mode == 'newtopic') {
                 datastore()->enqueue([
-                    'latest_news'
+                    'latest_news',
                 ]);
                 datastore()->update('latest_news');
             }
@@ -215,7 +216,7 @@ class Post
             $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
             if (isset($net_forums[$forum_id]) && config()->get('show_network_news') && $mode == 'newtopic') {
                 datastore()->enqueue([
-                    'network_news'
+                    'network_news',
                 ]);
                 datastore()->update('network_news');
             }
@@ -507,7 +508,7 @@ class Post
 		LEFT JOIN " . BB_USERS . " u  ON(u.user_id = p.poster_id)
 		LEFT JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
 		LEFT JOIN " . BB_POSTS_HTML . " h  ON(h.post_id = p.post_id)
-		WHERE p.topic_id = " . (int)$topic_id . "
+		WHERE p.topic_id = " . (int) $topic_id . "
 		ORDER BY p.post_time DESC
 		LIMIT " . config()->get('posts_per_page') . "
 	");
@@ -526,7 +527,7 @@ class Post
         }
 
         template()->assign_vars([
-            'TPL_TOPIC_REVIEW' => (bool)$review_posts,
+            'TPL_TOPIC_REVIEW' => (bool) $review_posts,
         ]);
     }
 }

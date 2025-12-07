@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -62,8 +63,8 @@ class DatabaseDebugger
      */
     public function debug(string $mode): void
     {
-        $id =& $this->dbg_id;
-        $dbg =& $this->dbg[$id];
+        $id = & $this->dbg_id;
+        $dbg = & $this->dbg[$id];
 
         if ($mode === 'start') {
             // Always update timing if required constants are defined
@@ -167,7 +168,7 @@ class DatabaseDebugger
                     case 'file':
                         return $frame['file'];
                     case 'line':
-                        return (string)($frame['line'] ?? '?');
+                        return (string) ($frame['line'] ?? '?');
                     case 'all':
                     default:
                         $file = function_exists('hide_bb_path') ? hide_bb_path($frame['file']) : basename($frame['file']);
@@ -252,7 +253,7 @@ class DatabaseDebugger
         $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.3f', $this->cur_query_time);
         $msg = [];
         $msg[] = round($this->sql_starttime);
-        $msg[] = date('m-d H:i:s', (int)$this->sql_starttime);
+        $msg[] = date('m-d H:i:s', (int) $this->sql_starttime);
         $msg[] = sprintf('%-6s', $q_time);
         $msg[] = sprintf('%05d', getmypid());
         $msg[] = $this->db->db_server;
@@ -374,7 +375,7 @@ class DatabaseDebugger
             'source' => $this->debug_find_source(),
             'file' => $this->debug_find_source('file'),
             'line' => $this->debug_find_source('line'),
-            'time' => microtime(true)
+            'time' => microtime(true),
         ];
 
         $this->legacy_queries[] = $legacy_entry;
@@ -402,7 +403,7 @@ class DatabaseDebugger
         $msg .= 'Query:  ' . $query . LOG_LF;
         $msg .= 'Error:  ' . $error . LOG_LF;
         $msg .= 'Source: ' . $legacy_entry['source'] . LOG_LF;
-        $msg .= 'Time:   ' . date('Y-m-d H:i:s', (int)$legacy_entry['time']) . LOG_LF;
+        $msg .= 'Time:   ' . date('Y-m-d H:i:s', (int) $legacy_entry['time']) . LOG_LF;
 
         bb_log($msg, 'legacy_queries', false);
     }
@@ -458,7 +459,7 @@ class DatabaseDebugger
                         $result = $this->db->connection->query("EXPLAIN $query");
                         while ($row = $result->fetch()) {
                             // Convert row to array regardless of type
-                            $rowArray = (array)$row;
+                            $rowArray = (array) $row;
                             $html_table = $this->explain('add_explain_row', $html_table, $rowArray);
                         }
                     } catch (\Exception $e) {
@@ -486,7 +487,7 @@ class DatabaseDebugger
                     'sql' => $this->db->cur_query ?? '',
                     'query' => $this->db->cur_query ?? '',
                     'src' => $this->debug_find_source(),
-                    'trace' => $this->debug_find_source()  // Backup for compatibility
+                    'trace' => $this->debug_find_source(),  // Backup for compatibility
                 ], $dbg);
 
                 $this->explain_out .= '
@@ -536,7 +537,7 @@ class DatabaseDebugger
             'num_queries' => count($this->dbg),
             'sql_timetotal' => $this->db->sql_timetotal,
             'queries' => $this->dbg,
-            'explain_out' => $this->explain_out
+            'explain_out' => $this->explain_out,
         ];
     }
 

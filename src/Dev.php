@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -10,20 +11,15 @@
 namespace TorrentPier;
 
 use Bugsnag\Client;
-
+use Exception;
+use jacklul\MonologTelegramHandler\TelegramFormatter;
+use jacklul\MonologTelegramHandler\TelegramHandler;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\BrowserConsoleHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-
 use Whoops\Handler\PlainTextHandler;
-use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
-
-use jacklul\MonologTelegramHandler\TelegramHandler;
-use jacklul\MonologTelegramHandler\TelegramFormatter;
-
-use Exception;
 
 /**
  * Development and Debugging System
@@ -47,7 +43,7 @@ class Dev
      */
     private function __construct()
     {
-        $this->whoops = new Run;
+        $this->whoops = new Run();
 
         if ($this->isDebugEnabled()) {
             $this->getWhoopsOnPage();
@@ -115,7 +111,7 @@ class Dev
         $telegramSender->loggerOnly(true);
         $telegramSender->setLogger(new Logger(
             APP_NAME,
-            [new TelegramHandler(config()->get('telegram_sender.token'), (int)config()->get('telegram_sender.chat_id'), timeout: (int)config()->get('telegram_sender.timeout'))
+            [new TelegramHandler(config()->get('telegram_sender.token'), (int) config()->get('telegram_sender.chat_id'), timeout: (int) config()->get('telegram_sender.timeout'))
                 ->setFormatter(new TelegramFormatter())]
         ));
         $this->whoops->pushHandler($telegramSender);
@@ -159,7 +155,7 @@ class Dev
      */
     private function getWhoopsLogger(): void
     {
-        if ((int)ini_get('log_errors') !== 1) {
+        if ((int) ini_get('log_errors') !== 1) {
             return;
         }
 
@@ -273,8 +269,8 @@ class Dev
         if (!empty($templateShadowing)) {
             $shadowCount = count($templateShadowing);
             $shadowList = array_map(function ($s) {
-                $old = is_scalar($s['old_value']) ? (string)$s['old_value'] : get_debug_type($s['old_value']);
-                $new = is_scalar($s['new_value']) ? (string)$s['new_value'] : get_debug_type($s['new_value']);
+                $old = is_scalar($s['old_value']) ? (string) $s['old_value'] : get_debug_type($s['old_value']);
+                $new = is_scalar($s['new_value']) ? (string) $s['new_value'] : get_debug_type($s['new_value']);
                 if (strlen($old) > 20) {
                     $old = substr($old, 0, 17) . '...';
                 }
@@ -499,9 +495,7 @@ class Dev
     /**
      * Prevent cloning of the singleton instance
      */
-    private function __clone()
-    {
-    }
+    private function __clone() {}
 
     /**
      * Prevent serialization of the singleton instance

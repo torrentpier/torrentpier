@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -31,8 +32,7 @@ class UserFeedProvider implements FeedProviderInterface
     public function __construct(
         private readonly int $userId,
         private readonly string $username
-    ) {
-    }
+    ) {}
 
     /**
      * @inheritDoc

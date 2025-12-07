@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -35,7 +36,7 @@ class FrontController
     /** @var string[] Static file extensions (let web server handle) */
     private array $staticExtensions = [
         'css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'ico', 'svg',
-        'woff', 'woff2', 'ttf', 'eot', 'map'
+        'woff', 'woff2', 'ttf', 'eot', 'map',
     ];
 
     public function __construct(string $basePath)
@@ -72,7 +73,7 @@ class FrontController
             $query = $_SERVER['QUERY_STRING'] ?? '';
             return [
                 'action' => self::ACTION_REDIRECT,
-                'url' => '/' . ($query ? '?' . $query : '')
+                'url' => '/' . ($query ? '?' . $query : ''),
             ];
         }
 
@@ -134,7 +135,7 @@ class FrontController
             if ($realFile !== false && str_starts_with($realFile, $realBase . DIRECTORY_SEPARATOR)) {
                 return [
                     'action' => self::ACTION_REQUIRE_EXIT,
-                    'file' => $realFile
+                    'file' => $realFile,
                 ];
             }
 
@@ -145,7 +146,7 @@ class FrontController
             if ($realIndex !== false && str_starts_with($realIndex, $realBase . DIRECTORY_SEPARATOR)) {
                 return [
                     'action' => self::ACTION_REQUIRE_EXIT,
-                    'file' => $realIndex
+                    'file' => $realIndex,
                 ];
             }
 
@@ -180,7 +181,7 @@ class FrontController
 
             return [
                 'action' => self::ACTION_REDIRECT,
-                'url' => $cleanPath . ($query ? '?' . $query : '')
+                'url' => $cleanPath . ($query ? '?' . $query : ''),
             ];
         }
 
@@ -192,7 +193,7 @@ class FrontController
         if ($realFile !== false && str_starts_with($realFile, $realBase . DIRECTORY_SEPARATOR)) {
             return [
                 'action' => self::ACTION_REQUIRE_EXIT,
-                'file' => $realFile
+                'file' => $realFile,
             ];
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -115,7 +116,7 @@ if (IS_GUEST || $mod_admin_login) {
         'REDIRECT_URL' => htmlCHR($redirect_url),
         'CAPTCHA_HTML' => ($need_captcha && !config()->get('captcha.disabled')) ? bb_captcha('get') : '',
         'PAGE_TITLE' => __('LOGIN'),
-        'S_LOGIN_ACTION' => LOGIN_URL
+        'S_LOGIN_ACTION' => LOGIN_URL,
     ]);
 
     print_page('login.tpl');

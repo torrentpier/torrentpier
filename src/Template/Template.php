@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -289,7 +290,7 @@ class Template
             'variable' => $variable,
             'template' => $template,
             'source' => $source,
-            'time' => microtime(true)
+            'time' => microtime(true),
         ];
 
         self::$variableConflicts[] = $conflict;
@@ -348,14 +349,14 @@ class Template
             'old_value' => $oldValue,
             'new_value' => $newValue,
             'source' => $source,
-            'time' => microtime(true)
+            'time' => microtime(true),
         ];
 
         self::$variableShadowing[] = $shadowing;
 
         // Format values for logging (truncate long values)
-        $oldStr = is_scalar($oldValue) ? (string)$oldValue : get_debug_type($oldValue);
-        $newStr = is_scalar($newValue) ? (string)$newValue : get_debug_type($newValue);
+        $oldStr = is_scalar($oldValue) ? (string) $oldValue : get_debug_type($oldValue);
+        $newStr = is_scalar($newValue) ? (string) $newValue : get_debug_type($newValue);
         if (strlen($oldStr) > 50) {
             $oldStr = substr($oldStr, 0, 47) . '...';
         }
@@ -400,7 +401,7 @@ class Template
      */
     private function initializeTwig(): void
     {
-        $useCache = (bool)config()->get('twig.cache_enabled', true);
+        $useCache = (bool) config()->get('twig.cache_enabled', true);
         $factory = new TwigEnvironmentFactory();
         $this->twig = $factory->create($this->rootDir, $this->cacheDir, $useCache);
 

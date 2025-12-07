@@ -58,7 +58,7 @@ describe('DatastoreManager Class', function () {
                 'stats',
                 'ranks',
                 'ban_list',
-                'smile_replacements'
+                'smile_replacements',
             ];
 
             foreach ($essentialItems as $item) {
@@ -92,7 +92,7 @@ describe('DatastoreManager Class', function () {
                 ['float_item', 3.14],
                 ['bool_item', true],
                 ['array_item', ['nested' => ['data' => 'value']]],
-                ['object_item', (object)['property' => 'value']]
+                ['object_item', (object) ['property' => 'value']],
             ];
 
             foreach ($testCases as [$key, $value]) {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -77,7 +78,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                                 $errorInfo = $pdo->errorInfo();
                                 $info['PDO Error State'] = [
                                     'Code' => $errorCode,
-                                    'Info' => $errorInfo[2] ?? 'Unknown'
+                                    'Info' => $errorInfo[2] ?? 'Unknown',
                                 ];
                             }
                         }

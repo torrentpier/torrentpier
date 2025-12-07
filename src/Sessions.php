@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -83,7 +84,7 @@ class Sessions
      */
     public static function cache_rm_user_sessions(int|string $user_id): void
     {
-        $user_id = get_id_csv(explode(',', (string)$user_id));
+        $user_id = get_id_csv(explode(',', (string) $user_id));
 
         $rowset = DB()->fetch_rowset("SELECT session_id FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
 
@@ -138,7 +139,7 @@ class Sessions
     {
         self::cache_rm_user_sessions($user_id);
 
-        $user_id = get_id_csv(explode(',', (string)$user_id));
+        $user_id = get_id_csv(explode(',', (string) $user_id));
         DB()->query("DELETE FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -17,6 +18,4 @@ use Exception;
  * HTTP Client Exception
  * Thrown when HTTP requests fail or encounter errors
  */
-class HttpClientException extends Exception
-{
-}
+class HttpClientException extends Exception {}

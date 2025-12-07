@@ -8,7 +8,7 @@
  */
 
 if (!defined('BB_ROOT')) {
-    define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+    define('BB_ROOT', dirname(__DIR__, 2) . DIRECTORY_SEPARATOR);
     define('BB_PATH', BB_ROOT);
 }
 
@@ -27,19 +27,16 @@ if (!function_exists('removeFile')) {
 
 $items = [
     '.github',
-    '.cliffignore',
     '.editorconfig',
     '.gitattributes',
     '.gitignore',
-    '.styleci.yml',
-    '_release.php',
+    '.php-cs-fixer.php',
     'CHANGELOG.md',
     'CLAUDE.md',
-    'cliff.toml',
     'phpunit.xml',
     'README.md',
     'tests',
-    'UPGRADE_GUIDE.md'
+    'UPGRADE_GUIDE.md',
 ];
 
 foreach ($items as $item) {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -16,7 +17,7 @@ $privmsg_sent_id = $l_box_name = $to_username = $privmsg_subject = $privmsg_mess
 // Page config
 page_cfg('use_tablesorter', true);
 page_cfg('load_tpl_vars', [
-    'pm_icons'
+    'pm_icons',
 ]);
 
 //
@@ -213,7 +214,7 @@ if ($mode == 'read') {
                     bb_die('Could not find oldest privmsgs');
                 }
                 $old_privmsgs_id = DB()->sql_fetchrow($result);
-                $old_privmsgs_id = (int)$old_privmsgs_id['privmsgs_id'];
+                $old_privmsgs_id = (int) $old_privmsgs_id['privmsgs_id'];
 
                 $sql = "DELETE FROM " . BB_PRIVMSGS . " WHERE privmsgs_id = $old_privmsgs_id";
                 if (!DB()->sql_query($sql)) {
@@ -254,7 +255,7 @@ if ($mode == 'read') {
         'post' => PM_URL . '?mode=post',
         'reply' => PM_URL . '?mode=reply&amp;' . POST_POST_URL . "=$privmsg_id",
         'quote' => PM_URL . '?mode=quote&amp;' . POST_POST_URL . "=$privmsg_id",
-        'edit' => PM_URL . '?mode=edit&amp;' . POST_POST_URL . "=$privmsg_id"
+        'edit' => PM_URL . '?mode=edit&amp;' . POST_POST_URL . "=$privmsg_id",
     ];
     $post_icons = [
         'post_img' => '<a href="' . $post_urls['post'] . '" class="btn-post-topic">' . __('POST_NEW_PM') . '</a>',
@@ -264,7 +265,7 @@ if ($mode == 'read') {
         'quote_img' => '<a href="' . $post_urls['quote'] . '" class="btn-post-topic">' . __('POST_QUOTE_PM') . '</a>',
         'quote' => '<a href="' . $post_urls['quote'] . '">' . __('POST_QUOTE_PM') . '</a>',
         'edit_img' => '<a href="' . $post_urls['edit'] . '" class="btn-post-topic">' . __('EDIT_PM') . '</a>',
-        'edit' => '<a href="' . $post_urls['edit'] . '">' . __('EDIT_PM') . '</a>'
+        'edit' => '<a href="' . $post_urls['edit'] . '">' . __('EDIT_PM') . '</a>',
     ];
 
     if ($folder == 'inbox') {
@@ -347,7 +348,7 @@ if ($mode == 'read') {
         'BOX_NAME' => $l_box_name,
 
         'S_PRIVMSGS_ACTION' => PM_URL . "?folder=$folder",
-        'S_HIDDEN_FIELDS' => $s_hidden_fields
+        'S_HIDDEN_FIELDS' => $s_hidden_fields,
     ]);
 
     $username_from = $privmsg['username'];
@@ -390,7 +391,7 @@ if ($mode == 'read') {
         'POST_DATE' => $post_date,
         'PM_MESSAGE' => $private_message,
         'PROFILE' => $profile,
-        'SEARCH' => $search
+        'SEARCH' => $search,
     ]);
 } elseif (($delete && $mark_list) || $delete_all) {
     if (isset($mark_list) && !is_array($mark_list)) {
@@ -403,23 +404,23 @@ if ($mode == 'read') {
 
         $hidden_fields = [
             'mode' => $mode,
-            $delete => 1
+            $delete => 1,
         ];
         foreach ($mark_list as $pm_id) {
-            $hidden_fields['mark'][] = (int)$pm_id;
+            $hidden_fields['mark'][] = (int) $pm_id;
         }
 
         print_confirmation([
             'QUESTION' => (count($mark_list) == 1) ? __('CONFIRM_DELETE_PM') : __('CONFIRM_DELETE_PMS'),
             'FORM_ACTION' => PM_URL . "?folder=$folder",
-            'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields)
+            'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
         ]);
     } elseif ($confirmed) {
         $delete_sql_id = '';
 
         if (!$delete_all) {
             for ($i = 0, $iMax = count($mark_list); $i < $iMax; $i++) {
-                $delete_sql_id .= (($delete_sql_id != '') ? ', ' : '') . (int)$mark_list[$i];
+                $delete_sql_id .= (($delete_sql_id != '') ? ', ' : '') . (int) $mark_list[$i];
             }
             $delete_sql_id = "AND privmsgs_id IN ($delete_sql_id)";
         }
@@ -461,7 +462,7 @@ if ($mode == 'read') {
         if (count($mark_list)) {
             $delete_sql_id = '';
             for ($i = 0, $iMax = count($mark_list); $i < $iMax; $i++) {
-                $delete_sql_id .= (($delete_sql_id != '') ? ', ' : '') . (int)$mark_list[$i];
+                $delete_sql_id .= (($delete_sql_id != '') ? ', ' : '') . (int) $mark_list[$i];
             }
 
             if ($folder == 'inbox' || $folder == 'outbox') {
@@ -604,7 +605,7 @@ if ($mode == 'read') {
                     bb_die('Could not find oldest privmsgs (save)');
                 }
                 $old_privmsgs_id = DB()->sql_fetchrow($result);
-                $old_privmsgs_id = (int)$old_privmsgs_id['privmsgs_id'];
+                $old_privmsgs_id = (int) $old_privmsgs_id['privmsgs_id'];
 
                 $sql = "DELETE FROM " . BB_PRIVMSGS . " WHERE privmsgs_id = $old_privmsgs_id";
                 if (!DB()->sql_query($sql)) {
@@ -620,7 +621,7 @@ if ($mode == 'read') {
 
         $saved_sql_id = '';
         for ($i = 0, $iMax = count($mark_list); $i < $iMax; $i++) {
-            $saved_sql_id .= (($saved_sql_id != '') ? ', ' : '') . (int)$mark_list[$i];
+            $saved_sql_id .= (($saved_sql_id != '') ? ', ' : '') . (int) $mark_list[$i];
         }
 
         // Process request
@@ -747,7 +748,7 @@ if ($mode == 'read') {
     if ($submit && $mode == 'edit') {
         $sql = 'SELECT privmsgs_from_userid
 			FROM ' . BB_PRIVMSGS . '
-			WHERE privmsgs_id = ' . (int)$privmsg_id . '
+			WHERE privmsgs_id = ' . (int) $privmsg_id . '
 				AND privmsgs_from_userid = ' . userdata('user_id');
 
         if (!($result = DB()->sql_query($sql))) {
@@ -834,7 +835,7 @@ if ($mode == 'read') {
                         bb_die('Could not find oldest privmsgs (inbox)');
                     }
                     $old_privmsgs_id = DB()->sql_fetchrow($result);
-                    $old_privmsgs_id = (int)$old_privmsgs_id['privmsgs_id'];
+                    $old_privmsgs_id = (int) $old_privmsgs_id['privmsgs_id'];
 
                     $sql = "DELETE FROM " . BB_PRIVMSGS . " WHERE privmsgs_id = $old_privmsgs_id";
                     if (!DB()->sql_query($sql)) {
@@ -1052,7 +1053,7 @@ if ($mode == 'read') {
             'POST_DATE' => bb_date(TIMENOW),
             'PREVIEW_MSG' => $preview_message,
 
-            'S_HIDDEN_FIELDS' => $s_hidden_fields
+            'S_HIDDEN_FIELDS' => $s_hidden_fields,
         ]);
     }
 
@@ -1122,7 +1123,7 @@ if ($mode == 'read') {
         'S_POST_ACTION' => PM_URL,
 
         'U_SEARCH_USER' => 'search?mode=searchuser',
-        'U_VIEW_FORUM' => PM_URL
+        'U_VIEW_FORUM' => PM_URL,
     ]);
 } else {
     //
@@ -1138,7 +1139,7 @@ if ($mode == 'read') {
     \TorrentPier\Sessions::db_update_userdata(userdata(), [
         'user_unread_privmsg' => 'user_unread_privmsg + user_new_privmsg',
         'user_new_privmsg' => 0,
-        'user_last_privmsg' => userdata('session_start')
+        'user_last_privmsg' => userdata('session_start'),
     ]);
 
     $sql = "UPDATE " . BB_PRIVMSGS . "
@@ -1348,7 +1349,7 @@ if ($mode == 'read') {
         'S_POST_NEW_MSG' => $post_new_mesg_url,
         'S_SELECT_MSG_DAYS' => $select_msg_days,
 
-        'U_POST_NEW_TOPIC' => PM_URL . '?mode=post'
+        'U_POST_NEW_TOPIC' => PM_URL . '?mode=post',
     ]);
 
     //
@@ -1395,7 +1396,7 @@ if ($mode == 'read') {
                 'PRIVMSG_FOLDER_IMG' => $icon_flag,
                 'L_PRIVMSG_FOLDER_ALT' => $icon_flag_alt,
                 'S_MARK_ID' => $privmsg_id,
-                'U_READ' => $u_subject
+                'U_READ' => $u_subject,
             ]);
         } while ($row = DB()->sql_fetchrow($result));
 

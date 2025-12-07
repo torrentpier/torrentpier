@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -71,7 +72,7 @@ class Database
             'log_counter' => 0,
             'num_queries' => 0,
             'sql_inittime' => 0,
-            'sql_timetotal' => 0
+            'sql_timetotal' => 0,
         ];
     }
 
@@ -254,7 +255,7 @@ class Database
 
             // Convert Row to array for backward compatibility
             // Nette Database Row extends ArrayHash, so we can cast it to array
-            $rowArray = (array)$row;
+            $rowArray = (array) $row;
 
             if ($field_name) {
                 return $rowArray[$field_name] ?? false;
@@ -361,7 +362,7 @@ class Database
             while ($row = $result->fetch()) {
                 // Convert Row to array for backward compatibility
                 // Nette Database Row extends ArrayHash, so we can cast it to array
-                $rowArray = (array)$row;
+                $rowArray = (array) $row;
                 $rowset[] = $field_name ? ($rowArray[$field_name] ?? null) : $rowArray;
             }
         } catch (\Exception $e) {
@@ -476,18 +477,18 @@ class Database
     public function escape($v, bool $check_type = false, bool $dont_escape = false): string
     {
         if ($dont_escape) {
-            return (string)$v;
+            return (string) $v;
         }
 
         if (!$check_type) {
-            return $this->escape_string((string)$v);
+            return $this->escape_string((string) $v);
         }
 
         switch (true) {
             case is_string($v):
                 return "'" . $this->escape_string($v) . "'";
             case is_int($v):
-                return (string)$v;
+                return (string) $v;
             case is_bool($v):
                 return $v ? '1' : '0';
             case is_float($v):
@@ -670,7 +671,7 @@ class Database
 
                 return [
                     'code' => $errorCode,
-                    'message' => $message
+                    'message' => $message,
                 ];
             } catch (\Exception $e) {
                 return ['code' => $e->getCode(), 'message' => $e->getMessage()];
@@ -737,12 +738,12 @@ class Database
     {
         $tables_sql = [];
 
-        foreach ((array)$tables as $table_name) {
+        foreach ((array) $tables as $table_name) {
             $tables_sql[] = "$table_name $lock_type";
         }
 
         if ($tables_sql = implode(', ', $tables_sql)) {
-            $this->locked = (bool)$this->sql_query("LOCK TABLES $tables_sql");
+            $this->locked = (bool) $this->sql_query("LOCK TABLES $tables_sql");
         }
 
         return $this->locked ? $this->result : null;
@@ -766,7 +767,7 @@ class Database
     public function get_lock(string $name, int $timeout = 0): mixed
     {
         $lock_name = $this->get_lock_name($name);
-        $timeout = (int)$timeout;
+        $timeout = (int) $timeout;
         $row = $this->fetch_row("SELECT GET_LOCK('$lock_name', $timeout) AS lock_result");
 
         if ($row && $row['lock_result']) {

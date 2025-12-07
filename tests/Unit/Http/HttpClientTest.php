@@ -118,40 +118,40 @@ describe('HttpClient Class', function () {
             $response = $this->httpClient->get('https://example.com/api');
 
             expect($response->getStatusCode())->toBe(200)
-                ->and((string)$response->getBody())->toBe('GET response');
+                ->and((string) $response->getBody())->toBe('GET response');
         });
 
         it('performs POST request successfully', function () {
             $this->mockHandler->append(new Response(201, [], 'POST response'));
 
             $response = $this->httpClient->post('https://example.com/api', [
-                'json' => ['key' => 'value']
+                'json' => ['key' => 'value'],
             ]);
 
             expect($response->getStatusCode())->toBe(201)
-                ->and((string)$response->getBody())->toBe('POST response');
+                ->and((string) $response->getBody())->toBe('POST response');
         });
 
         it('performs PUT request successfully', function () {
             $this->mockHandler->append(new Response(200, [], 'PUT response'));
 
             $response = $this->httpClient->put('https://example.com/api/1', [
-                'json' => ['key' => 'updated']
+                'json' => ['key' => 'updated'],
             ]);
 
             expect($response->getStatusCode())->toBe(200)
-                ->and((string)$response->getBody())->toBe('PUT response');
+                ->and((string) $response->getBody())->toBe('PUT response');
         });
 
         it('performs PATCH request successfully', function () {
             $this->mockHandler->append(new Response(200, [], 'PATCH response'));
 
             $response = $this->httpClient->patch('https://example.com/api/1', [
-                'json' => ['key' => 'patched']
+                'json' => ['key' => 'patched'],
             ]);
 
             expect($response->getStatusCode())->toBe(200)
-                ->and((string)$response->getBody())->toBe('PATCH response');
+                ->and((string) $response->getBody())->toBe('PATCH response');
         });
 
         it('performs DELETE request successfully', function () {
@@ -180,8 +180,8 @@ describe('HttpClient Class', function () {
             $this->httpClient->get('https://example.com/api', [
                 'headers' => [
                     'X-Custom-Header' => 'test-value',
-                    'Authorization' => 'Bearer token123'
-                ]
+                    'Authorization' => 'Bearer token123',
+                ],
             ]);
 
             expect($container)->toHaveCount(1);
@@ -217,7 +217,7 @@ describe('HttpClient Class', function () {
             $response = $this->httpClient->get('https://example.com/notfound');
 
             expect($response->getStatusCode())->toBe(404)
-                ->and((string)$response->getBody())->toBe('Not Found');
+                ->and((string) $response->getBody())->toBe('Not Found');
         });
 
         it('does not throw on 5xx responses by default', function () {
@@ -226,7 +226,7 @@ describe('HttpClient Class', function () {
             $response = $this->httpClient->get('https://example.com/error');
 
             expect($response->getStatusCode())->toBe(500)
-                ->and((string)$response->getBody())->toBe('Internal Server Error');
+                ->and((string) $response->getBody())->toBe('Internal Server Error');
         });
 
         it('wraps GuzzleException in HttpClientException', function () {
@@ -298,7 +298,7 @@ describe('HttpClient Class', function () {
         it('handles connection exceptions', function () {
             $request = new Request('GET', 'https://example.com');
             $mockHandler = new MockHandler([
-                new ConnectException('Connection failed', $request)
+                new ConnectException('Connection failed', $request),
             ]);
             $handlerStack = HandlerStack::create($mockHandler);
             $httpClient = HttpClient::getInstance(['handler' => $handlerStack]);
@@ -321,7 +321,7 @@ describe('HttpClient Class', function () {
         it('handles Retry-After header in responses', function () {
             // Test that responses with Retry-After header are handled
             $mockHandler = new MockHandler([
-                new Response(429, ['Retry-After' => '5'], 'Too Many Requests')
+                new Response(429, ['Retry-After' => '5'], 'Too Many Requests'),
             ]);
             $handlerStack = HandlerStack::create($mockHandler);
             $httpClient = HttpClient::getInstance(['handler' => $handlerStack]);
@@ -443,7 +443,7 @@ describe('HttpClient Class', function () {
         it('accepts custom timeout configuration', function () {
             $httpClient = HttpClient::getInstance([
                 'timeout' => 30,
-                'connect_timeout' => 10
+                'connect_timeout' => 10,
             ]);
 
             expect($httpClient)->toBeInstanceOf(HttpClient::class);
@@ -459,8 +459,8 @@ describe('HttpClient Class', function () {
             $httpClient = HttpClient::getInstance([
                 'handler' => $handlerStack,
                 'headers' => [
-                    'X-Custom-Global' => 'global-value'
-                ]
+                    'X-Custom-Global' => 'global-value',
+                ],
             ]);
 
             $httpClient->get('https://example.com/api');
@@ -495,14 +495,14 @@ describe('HttpClient Class', function () {
             $this->httpClient->get('https://example.com/api', [
                 'query' => [
                     'page' => 1,
-                    'limit' => 10
-                ]
+                    'limit' => 10,
+                ],
             ]);
 
             expect($this->container)->toHaveCount(1);
             $request = $this->container[0]['request'];
-            expect((string)$request->getUri())->toContain('page=1')
-                ->and((string)$request->getUri())->toContain('limit=10');
+            expect((string) $request->getUri())->toContain('page=1')
+                ->and((string) $request->getUri())->toContain('limit=10');
         });
 
         it('handles JSON body', function () {
@@ -511,8 +511,8 @@ describe('HttpClient Class', function () {
             $this->httpClient->post('https://example.com/api', [
                 'json' => [
                     'name' => 'Test',
-                    'email' => 'test@example.com'
-                ]
+                    'email' => 'test@example.com',
+                ],
             ]);
 
             expect($this->container)->toHaveCount(1);
@@ -526,8 +526,8 @@ describe('HttpClient Class', function () {
             $this->httpClient->post('https://example.com/api', [
                 'form_params' => [
                     'username' => 'testuser',
-                    'password' => 'secret'
-                ]
+                    'password' => 'secret',
+                ],
             ]);
 
             expect($this->container)->toHaveCount(1);

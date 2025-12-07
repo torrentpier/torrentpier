@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -41,7 +42,8 @@ class ManticoreSearch
 
         $this->pdo = new PDO(
             "mysql:host={$host};port={$port};charset=utf8mb4",
-            '', '',
+            '',
+            '',
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
         );
     }
@@ -72,7 +74,7 @@ class ManticoreSearch
             'users_rt' => "CREATE TABLE IF NOT EXISTS users_rt (
                 id bigint,
                 username string attribute indexed
-            )"
+            )",
         ];
 
         foreach ($indexes as $name => $sql) {
@@ -424,7 +426,7 @@ class ManticoreSearch
         }
 
         // --- TOPICS ---
-        $totalTopics = (int)DB()->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_TOPICS)['cnt'];
+        $totalTopics = (int) DB()->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_TOPICS)['cnt'];
         $log_message[] = "Indexing topics: total {$totalTopics}";
         $topicsErrors = 0;
 
@@ -448,7 +450,7 @@ class ManticoreSearch
         }
 
         // --- POSTS ---
-        $totalPosts = (int)DB()->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_POSTS_TEXT)['cnt'];
+        $totalPosts = (int) DB()->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_POSTS_TEXT)['cnt'];
         $log_message[] = "Indexing posts: total {$totalPosts}";
         $postsErrors = 0;
 
@@ -479,7 +481,7 @@ class ManticoreSearch
         }
 
         // --- USERS ---
-        $totalUsers = (int)DB()->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")")['cnt'];
+        $totalUsers = (int) DB()->fetch_row("SELECT COUNT(*) AS cnt FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")")['cnt'];
         $log_message[] = "Indexing users: total {$totalUsers}";
         $usersErrors = 0;
 

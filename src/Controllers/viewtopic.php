@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,19 +12,19 @@ require INC_DIR . '/bbcode.php';
 
 datastore()->enqueue([
     'ranks',
-    'cat_forums'
+    'cat_forums',
 ]);
 
 page_cfg('load_tpl_vars', [
     'post_buttons',
     'post_icons',
-    'topic_icons'
+    'topic_icons',
 ]);
 
 $newest = $next_topic_id = 0;
-$start = request()->query->get('start') ? abs((int)request()->query->get('start')) : 0;
-$topic_id = request()->query->get(POST_TOPIC_URL) ? (int)request()->query->get(POST_TOPIC_URL) : 0;
-$post_id = (!$topic_id && request()->query->get(POST_POST_URL)) ? (int)request()->query->get(POST_POST_URL) : 0;
+$start = request()->query->get('start') ? abs((int) request()->query->get('start')) : 0;
+$topic_id = request()->query->get(POST_TOPIC_URL) ? (int) request()->query->get(POST_TOPIC_URL) : 0;
+$post_id = (!$topic_id && request()->query->get(POST_POST_URL)) ? (int) request()->query->get(POST_POST_URL) : 0;
 
 set_die_append_msg();
 
@@ -32,7 +33,7 @@ $posts_per_page = config()->get('posts_per_page');
 $select_ppp = '';
 
 if (userdata('session_admin')) {
-    if ($req_ppp = abs((int)(request()->get('ppp') ?? 0)) and in_array($req_ppp, config()->get('allowed_posts_per_page'))) {
+    if ($req_ppp = abs((int) (request()->get('ppp') ?? 0)) and in_array($req_ppp, config()->get('allowed_posts_per_page'))) {
         $posts_per_page = $req_ppp;
     }
 
@@ -99,7 +100,7 @@ if (!$t_data = DB()->fetch_row($sql)) {
     bb_die(__('TOPIC_POST_NOT_EXIST'), 404);
 }
 
-$forum_topic_data =& $t_data;
+$forum_topic_data = & $t_data;
 $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
 
@@ -110,7 +111,7 @@ if ($t_data['allow_porno_topic'] && bf(userdata('user_opt'), 'user_opt', 'user_p
 if (userdata('session_admin') && request()->has('mod')) {
     if (IS_ADMIN) {
         datastore()->enqueue([
-            'viewtopic_forum_select'
+            'viewtopic_forum_select',
         ]);
     }
 }
@@ -208,7 +209,7 @@ make_jumpbox();
 
 // Allow robots indexing
 if ($is_auth['auth_read']) {
-    page_cfg('allow_robots', (bool)$t_data['topic_allow_robots']);
+    page_cfg('allow_robots', (bool) $t_data['topic_allow_robots']);
 } else {
     page_cfg('allow_robots', false);
 }
@@ -264,7 +265,7 @@ $limit_posts_time = '';
 $total_replies = $t_data['topic_replies'] + 1;
 
 if (request()->has('postdays')) {
-    if ($post_days = (int)request()->get('postdays')) {
+    if ($post_days = (int) request()->get('postdays')) {
         if (request()->post->has('postdays')) {
             $start = 0;
         }
@@ -422,12 +423,12 @@ $sel_previous_days = [
     30 => __('1_MONTH'),
     90 => __('3_MONTHS'),
     180 => __('6_MONTHS'),
-    364 => __('1_YEAR')
+    364 => __('1_YEAR'),
 ];
 
 $sel_post_order_ary = [
     __('OLDEST_FIRST') => 'asc',
-    __('NEWEST_FIRST') => 'desc'
+    __('NEWEST_FIRST') => 'desc',
 ];
 
 $topic_has_poll = $t_data['topic_vote'];
@@ -435,7 +436,7 @@ $poll_time_expired = ($t_data['topic_time'] < TIMENOW - config()->get('poll_max_
 $can_manage_poll = ($t_data['topic_poster'] == userdata('user_id') || $is_auth['auth_mod']);
 $can_add_poll = ($can_manage_poll && $is_auth['auth_pollcreate'] && !$topic_has_poll && !$poll_time_expired && !$start);
 
-$page_title = ((int)($start / $posts_per_page) === 0) ? $topic_title :
+$page_title = ((int) ($start / $posts_per_page) === 0) ? $topic_title :
     $topic_title . ' - ' . __('SHORT_PAGE') . ' ' . (floor($start / $posts_per_page) + 1);
 
 //
@@ -492,7 +493,7 @@ template()->assign_vars([
     'POLL_IS_EDITABLE' => !$poll_time_expired,
     'POLL_IS_FINISHED' => ($topic_has_poll == POLL_FINISHED),
     'CAN_MANAGE_POLL' => $can_manage_poll,
-    'CAN_ADD_POLL' => $can_add_poll
+    'CAN_ADD_POLL' => $can_add_poll,
 ]);
 
 // Does this topic contain DL-List?
@@ -522,8 +523,8 @@ if ($topic_has_poll) {
     } else {
         template()->assign_vars([
             'SHOW_VOTE_BTN' => \TorrentPier\Legacy\Poll::pollIsActive($t_data) && $is_auth['auth_vote'],
-            'POLL_ALREADY_VOTED' => \TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)userdata('user_id')),
-            'POLL_VOTES_JS' => $poll_votes_js
+            'POLL_ALREADY_VOTED' => \TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int) userdata('user_id')),
+            'POLL_VOTES_JS' => $poll_votes_js,
         ]);
     }
 }
@@ -544,7 +545,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $poster_longevity = !$poster_guest ? humanTime($postrow[$i]['user_regdate']) : '';
     $poster_birthday = $postrow[$i]['user_birthday']->format('Y-m-d');
     $post_id = $postrow[$i]['post_id'];
-    $mc_type = (int)$postrow[$i]['mc_type'];
+    $mc_type = (int) $postrow[$i]['mc_type'];
     $mc_comment = $postrow[$i]['mc_comment'];
     $mc_user_id = profile_url(['username' => $postrow[$i]['mc_username'], 'user_id' => $postrow[$i]['mc_user_id'], 'user_rank' => $postrow[$i]['mc_user_rank']]);
 
@@ -600,21 +601,27 @@ for ($i = 0; $i < $total_posts; $i++) {
     // Replace naughty words
     if ($user_sig) {
         $user_sig = str_replace(
-            '\"', '"',
+            '\"',
+            '"',
             substr(
                 preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) {
                     return censor()->censorString(reset($matches));
-                }, '>' . $user_sig . '<'), 1, -1
+                }, '>' . $user_sig . '<'),
+                1,
+                -1
             )
         );
     }
 
     $message = str_replace(
-        '\"', '"',
+        '\"',
+        '"',
         substr(
             preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) {
                 return censor()->censorString(reset($matches));
-            }, '>' . $message . '<'), 1, -1
+            }, '>' . $message . '<'),
+            1,
+            -1
         )
     );
 
@@ -673,7 +680,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_GUEST' => $poster_guest,
         'POSTER_ID' => $poster_id,
         'POSTER_AUTHOR' => ($poster_id == $t_data['topic_poster']),
-        'POSTER_GENDER' => !$poster_guest ? genderImage((int)$postrow[$i]['user_gender']) : '',
+        'POSTER_GENDER' => !$poster_guest ? genderImage((int) $postrow[$i]['user_gender']) : '',
         'POSTED_AFTER' => $prev_post_time ? humanTime($postrow[$i]['post_time'], $prev_post_time) : '',
         'IS_UNREAD' => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
         'IS_FIRST_POST' => (!$start && $is_first_post),
@@ -707,11 +714,11 @@ for ($i = 0; $i < $total_posts; $i++) {
         'RG_URL' => GROUP_URL . $rg_id,
         'RG_FIND_URL' => 'tracker?srg=' . $rg_id,
         'RG_SIG' => $rg_signature,
-        'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig']
+        'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig'],
     ]);
 
     // Ban information
-    if ($banInfo = getBanInfo((int)$poster_id)) {
+    if ($banInfo = getBanInfo((int) $poster_id)) {
         template()->assign_block_vars('postrow.ban', ['IS_BANNED' => true]);
     }
 
@@ -753,7 +760,7 @@ if (config()->get('show_quick_reply')) {
             'QUICK_REPLY' => true,
             'QR_POST_ACTION' => POSTING_URL,
             'QR_TOPIC_ID' => $topic_id,
-            'CAPTCHA_HTML' => (IS_GUEST && !config()->get('captcha.disabled')) ? bb_captcha('get') : ''
+            'CAPTCHA_HTML' => (IS_GUEST && !config()->get('captcha.disabled')) ? bb_captcha('get') : '',
         ]);
 
         if (!IS_GUEST) {

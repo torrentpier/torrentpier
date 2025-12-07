@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,9 +10,9 @@
 
 namespace TorrentPier\Template\Loaders;
 
+use TorrentPier\Template\Extensions\LegacySyntaxExtension;
 use Twig\Loader\LoaderInterface;
 use Twig\Source;
-use TorrentPier\Template\Extensions\LegacySyntaxExtension;
 
 /**
  * Template loader that converts legacy TorrentPier template syntax to Twig syntax

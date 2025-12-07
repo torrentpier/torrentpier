@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,9 +10,9 @@
 
 namespace TorrentPier\Database;
 
+use Exception;
 use Nette\Database\Table\Selection;
 use ReflectionClass;
-use Exception;
 
 /**
  * DebugSelection - Wraps Nette Database Selection to provide debug logging and explain functionality
@@ -216,7 +217,7 @@ class DebugSelection
                 $sql = $getSqlMethod->invoke($this->selection);
             } else {
                 // Try __toString() method as fallback
-                $sql = (string)$this->selection;
+                $sql = (string) $this->selection;
             }
 
             // For EXPLAIN to work, we need to replace ? with actual values

@@ -75,7 +75,7 @@ describe('CacheManager Class', function () {
                 ['float_key', 3.14],
                 ['bool_key', true],
                 ['array_key', ['nested' => ['data' => 'value']]],
-                ['object_key', (object)['property' => 'value']]
+                ['object_key', (object) ['property' => 'value']],
             ];
 
             foreach ($testCases as [$key, $value]) {
@@ -170,7 +170,7 @@ describe('CacheManager Class', function () {
             $value = 'dependent_value';
             $dependencies = [
                 Cache::Expire => '1 hour',
-                Cache::Tags => ['user', 'data']
+                Cache::Tags => ['user', 'data'],
             ];
 
             expect(fn() => $this->cacheManager->save($key, $value, $dependencies))->not->toThrow(Exception::class);
