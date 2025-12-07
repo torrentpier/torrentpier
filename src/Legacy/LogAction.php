@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -46,7 +47,7 @@ class LogAction
         'mod_topic_poll_finished' => 21,
         'mod_topic_poll_deleted' => 22,
         'mod_topic_poll_added' => 23,
-        'mod_topic_poll_edited' => 24
+        'mod_topic_poll_edited' => 24,
     ];
 
     /**
@@ -99,29 +100,29 @@ class LogAction
             return;
         }
 
-        $forum_id =& $args['forum_id'];
-        $forum_id_new =& $args['forum_id_new'];
-        $topic_id =& $args['topic_id'];
-        $topic_id_new =& $args['topic_id_new'];
-        $topic_title =& $args['topic_title'];
-        $topic_title_new =& $args['topic_title_new'];
-        $log_msg =& $args['log_msg'];
+        $forum_id = & $args['forum_id'];
+        $forum_id_new = & $args['forum_id_new'];
+        $topic_id = & $args['topic_id'];
+        $topic_id_new = & $args['topic_id_new'];
+        $topic_title = & $args['topic_title'];
+        $topic_title_new = & $args['topic_title_new'];
+        $log_msg = & $args['log_msg'];
 
         $user_id = userdata('user_id') ?: '';
         $session_ip = userdata('session_ip') ?: '';
 
         $sql_ary = [
-            'log_type_id' => (int)$this->log_type[(string)$type_name],
-            'log_user_id' => (int)$user_id,
-            'log_user_ip' => (string)$session_ip,
-            'log_forum_id' => (int)$forum_id,
-            'log_forum_id_new' => (int)$forum_id_new,
-            'log_topic_id' => (int)$topic_id,
-            'log_topic_id_new' => (int)$topic_id_new,
-            'log_topic_title' => (string)$topic_title,
-            'log_topic_title_new' => (string)$topic_title_new,
-            'log_time' => (int)TIMENOW,
-            'log_msg' => (string)$log_msg,
+            'log_type_id' => (int) $this->log_type[(string) $type_name],
+            'log_user_id' => (int) $user_id,
+            'log_user_ip' => (string) $session_ip,
+            'log_forum_id' => (int) $forum_id,
+            'log_forum_id_new' => (int) $forum_id_new,
+            'log_topic_id' => (int) $topic_id,
+            'log_topic_id_new' => (int) $topic_id_new,
+            'log_topic_title' => (string) $topic_title,
+            'log_topic_title_new' => (string) $topic_title_new,
+            'log_time' => (int) TIMENOW,
+            'log_msg' => (string) $log_msg,
         ];
         $sql_args = DB()->build_array('INSERT', $sql_ary);
 

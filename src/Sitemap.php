@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -10,9 +11,8 @@
 namespace TorrentPier;
 
 use InvalidArgumentException;
-
-use samdark\sitemap\Sitemap as STM;
 use samdark\sitemap\Index as IDX;
+use samdark\sitemap\Sitemap as STM;
 
 /**
  * Class Sitemap
@@ -53,7 +53,7 @@ class Sitemap
             };
             $forumUrls[] = [
                 'url' => $forum_url,
-                'time' => $row['last_topic_time']
+                'time' => $row['last_topic_time'],
             ];
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -97,10 +98,10 @@ if ($mode == 'set_topics_dl_status') {
     }
 
     foreach (request()->post->get('dl_topics_id_list') as $topic_id) {
-        $req_topics_ary[] = (int)$topic_id;
+        $req_topics_ary[] = (int) $topic_id;
     }
 } elseif ($mode == 'set_dl_status') {
-    $req_topics_ary[] = (int)$topic_id;
+    $req_topics_ary[] = (int) $topic_id;
 }
 
 // Get existing topics
@@ -117,9 +118,9 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
 
     foreach ($topics_ary as $topic_id) {
         $new_dlstatus_ary[] = [
-            'user_id' => (int)user()->id,
-            'topic_id' => (int)$topic_id,
-            'user_status' => (int)$new_dl_status,
+            'user_id' => (int) user()->id,
+            'topic_id' => (int) $topic_id,
+            'user_status' => (int) $new_dl_status,
         ];
     }
     $new_dlstatus_sql = DB()->build_array('MULTI_INSERT', $new_dlstatus_ary);

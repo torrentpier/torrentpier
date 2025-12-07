@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -83,7 +84,7 @@ switch ($mode) {
             bb_die(__('NO_VOTE_OPTION'));
         }
 
-        if (\TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)userdata('user_id'))) {
+        if (\TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int) userdata('user_id'))) {
             bb_die(__('ALREADY_VOTED'));
         }
 
@@ -102,7 +103,7 @@ switch ($mode) {
                 'topic_id' => $topic_id,
                 'user_id' => userdata('user_id'),
                 'vote_ip' => USER_IP,
-                'vote_dt' => TIMENOW
+                'vote_dt' => TIMENOW,
             ]);
         } catch (\Nette\Database\UniqueConstraintViolationException $e) {
             // Ignore duplicate entry (equivalent to INSERT IGNORE)

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -10,14 +11,14 @@
 require INC_DIR . '/bbcode.php';
 
 page_cfg('load_tpl_vars', [
-    'post_icons'
+    'post_icons',
 ]);
 page_cfg('allow_robots', false);
 
-$submit = (bool)request()->get('post');
-$refresh = $preview = (bool)request()->get('preview');
-$delete = (bool)request()->get('delete');
-$mode = (string)request()->get('mode');
+$submit = (bool) request()->get('post');
+$refresh = $preview = (bool) request()->get('preview');
+$delete = (bool) request()->get('delete');
+$mode = (string) request()->get('mode');
 $del_attachment = request()->post->has('del_attachment');
 $confirm = request()->post->has('confirm');
 
@@ -159,7 +160,7 @@ if ($post_info = DB()->fetch_row($sql)) {
         $post_data['poster_id'] = $post_info['poster_id'];
 
         $selected_rg = $post_info['poster_rg_id'];
-        $switch_rg_sig = (bool)$post_info['attach_rg_sig'];
+        $switch_rg_sig = (bool) $post_info['attach_rg_sig'];
 
         // Can this user edit/delete the post?
         if ($post_info['poster_id'] != userdata('user_id') && !$is_auth['auth_mod']) {
@@ -266,12 +267,12 @@ if ($submit || $refresh) {
             $robots_indexing = true;
         }
     }
-    $notify_user = (int)request()->post->has('notify');
+    $notify_user = (int) request()->post->has('notify');
 } else {
     $notify_user = bf(userdata('user_opt'), 'user_opt', 'user_notify');
 
     if (!IS_GUEST && $mode != 'newtopic' && !$notify_user) {
-        $notify_user = (int)DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . userdata('user_id'));
+        $notify_user = (int) DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . userdata('user_id'));
     }
 }
 
@@ -282,10 +283,10 @@ $update_post_time = request()->post->has('update_post_time');
 $topic_has_new_posts = false;
 
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && request()->cookies->has(COOKIE_TOPIC)) {
-    if ($topic_last_read = max((int)(tracking_topics()[$topic_id] ?? 0), (int)(tracking_forums()[$forum_id] ?? 0))) {
+    if ($topic_last_read = max((int) (tracking_topics()[$topic_id] ?? 0), (int) (tracking_forums()[$forum_id] ?? 0))) {
         $sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
 			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u
-			WHERE p.topic_id = " . (int)$topic_id . "
+			WHERE p.topic_id = " . (int) $topic_id . "
 				AND u.user_id = p.poster_id
 				AND pt.post_id = p.post_id
 				AND p.post_time > $topic_last_read
@@ -301,7 +302,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
                     'POSTER' => profile_url($row),
                     'POSTER_NAME_JS' => addslashes($row['username']),
                     'POST_DATE' => '<a class="small" href="' . POST_URL . $row['post_id'] . '#' . $row['post_id'] . '" title="' . __('POST_LINK') . '">' . bb_date($row['post_time'], config()->get('post_date_format')) . '</a>',
-                    'MESSAGE' => get_parsed_post($row)
+                    'MESSAGE' => get_parsed_post($row),
                 ]);
             }
             template()->assign_vars(['TPL_SHOW_NEW_POSTS' => true]);
@@ -320,12 +321,12 @@ if (($delete || $mode == 'delete') && !$confirm) {
     }
     $hidden_fields = [
         POST_POST_URL => $post_id,
-        'mode' => 'delete'
+        'mode' => 'delete',
     ];
     print_confirmation([
         'QUESTION' => __('CONFIRM_DELETE'),
         'FORM_ACTION' => POSTING_URL,
-        'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields)
+        'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
     ]);
 } elseif (($submit || $confirm) && !$topic_has_new_posts) {
     //
@@ -350,7 +351,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             if (!$error_msg) {
                 $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
 
-                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing, (bool)$post_info['allow_reg_tracker'], (bool)$is_auth['auth_mod']);
+                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int) $robots_indexing, (bool) $post_info['allow_reg_tracker'], (bool) $is_auth['auth_mod']);
 
                 $post_url = POST_URL . "$post_id#$post_id";
                 $post_msg = ($mode == 'editpost') ? __('EDITED') : __('STORED');
@@ -444,7 +445,7 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
             'POST_SUBJECT' => $preview_subject,
             'POSTER_NAME' => $preview_username,
             'POST_DATE' => bb_date(TIMENOW),
-            'PREVIEW_MSG' => $preview_message
+            'PREVIEW_MSG' => $preview_message,
         ]);
     }
 } else {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,11 +12,10 @@ namespace TorrentPier;
 
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
+use Egulias\EmailValidator\Validation\Extra\SpoofCheckValidation;
+use Egulias\EmailValidator\Validation\MessageIDValidation;
 use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 use Egulias\EmailValidator\Validation\RFCValidation;
-use Egulias\EmailValidator\Validation\MessageIDValidation;
-use Egulias\EmailValidator\Validation\Extra\SpoofCheckValidation;
-
 use TorrentPier\Helpers\StringHelper;
 
 /**
@@ -121,7 +121,7 @@ class Validate
                 new RFCValidation(), // Standard RFC-like email validation.
                 new DNSCheckValidation(), // Will check if there are DNS records that signal that the server accepts emails. This does not entail that the email exists.
                 new MessageIDValidation(), // Follows RFC2822 for message-id to validate that field, that has some differences in the domain part.
-                new SpoofCheckValidation() // Will check for multi-utf-8 chars that can signal an erroneous email name.
+                new SpoofCheckValidation(), // Will check for multi-utf-8 chars that can signal an erroneous email name.
             ]);
 
             if (!$validator->isValid($email, $multipleValidations)) {

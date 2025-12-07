@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -16,7 +17,7 @@ $title_match_max_len = 60;
 
 page_cfg('load_tpl_vars', [
     'post_icons',
-    'topic_icons'
+    'topic_icons',
 ]);
 
 // Init request vars
@@ -140,7 +141,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
             'SHOW_SUBFORUMS' => true,
             'FORUM_IMG' => theme_images('forum'),
             'FORUM_NEW_IMG' => theme_images('forum_new'),
-            'FORUM_LOCKED_IMG' => theme_images('forum_locked')
+            'FORUM_LOCKED_IMG' => theme_images('forum_locked'),
         ]);
     }
     foreach ($rowset as $sf_data) {
@@ -149,7 +150,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
         $folder_image = theme_images('forum');
         $last_post = __('NO_POSTS');
 
-        if (!$fname_html =& $forums['forum_name_html'][$sf_forum_id]) {
+        if (!$fname_html = & $forums['forum_name_html'][$sf_forum_id]) {
             continue;
         }
 
@@ -176,7 +177,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
             'U_VIEWFORUM' => FORUM_URL . $sf_forum_id,
             'TOPICS' => commify($sf_data['forum_topics']),
             'POSTS' => commify($sf_data['forum_posts']),
-            'LAST_POST' => $last_post
+            'LAST_POST' => $last_post,
         ]);
 
         if ($sf_data['forum_last_post_id']) {
@@ -189,7 +190,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
                 'LAST_POST_TIME' => bb_date($sf_data['topic_last_post_time'], config()->get('last_post_date_format')),
                 'LAST_POST_ID' => $sf_data['forum_last_post_id'],
                 'LAST_POST_USER' => $last_post_user,
-                'ICON_LATEST_REPLY' => theme_images('icon_latest_reply')
+                'ICON_LATEST_REPLY' => theme_images('icon_latest_reply'),
             ]);
         } else {
             template()->assign_block_vars('f.last', ['FORUM_LAST_POST' => false]);
@@ -226,7 +227,7 @@ $sel_previous_days = [
     30 => __('1_MONTH'),
     90 => __('3_MONTHS'),
     180 => __('6_MONTHS'),
-    364 => __('1_YEAR')
+    364 => __('1_YEAR'),
 ];
 
 if (request()->has('topicdays')) {
@@ -443,7 +444,7 @@ foreach ($topic_rowset as $topic) {
         'STATUS' => $topic['topic_status'],
         'TYPE' => $topic['topic_type'],
         'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL && !$forum_data['allow_reg_tracker']),
-        'POLL' => (bool)$topic['topic_vote'],
+        'POLL' => (bool) $topic['topic_vote'],
         'DL_CLASS' => isset($topic['dl_status']) ? dl_link_css($topic['dl_status']) : '',
 
         'TOPIC_AUTHOR' => profile_url(['username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
@@ -456,11 +457,11 @@ foreach ($topic_rowset as $topic) {
         $tor_magnet = create_magnet($topic['info_hash'], $topic['info_hash_v2'], $topic['auth_key'], html_ent_decode($topic['topic_title']), $topic['tor_size']);
 
         template()->assign_block_vars('t.tor', [
-            'SEEDERS' => (int)$topic['seeders'],
-            'LEECHERS' => (int)$topic['leechers'],
+            'SEEDERS' => (int) $topic['seeders'],
+            'LEECHERS' => (int) $topic['leechers'],
             'TOR_SIZE' => humn_size($topic['tor_size'], 1),
-            'COMPL_CNT' => declension((int)$topic['complete_count'], 'times'),
-            'DOWNLOADED' => (int)$topic['complete_count'],
+            'COMPL_CNT' => declension((int) $topic['complete_count'], 'times'),
+            'DOWNLOADED' => (int) $topic['complete_count'],
             'MAGNET' => $tor_magnet,
         ]);
     }

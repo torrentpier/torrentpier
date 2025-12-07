@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -82,7 +83,7 @@ class Ajax
         // Actions check
         if (!$action) {
             $this->ajax_die('no action specified');
-        } elseif (!$action_params =& $this->valid_actions[$action]) {
+        } elseif (!$action_params = & $this->valid_actions[$action]) {
             $this->ajax_die('invalid action: ' . $action);
         }
 
@@ -161,7 +162,7 @@ class Ajax
     public function init()
     {
         $this->request = $_POST;
-        $this->action =& $this->request['action'];
+        $this->action = & $this->request['action'];
     }
 
     /**

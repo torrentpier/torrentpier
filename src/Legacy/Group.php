@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -82,7 +83,7 @@ class Group
      */
     public static function delete_group($group_id)
     {
-        $group_id = (int)$group_id;
+        $group_id = (int) $group_id;
 
         DB()->query("
 		DELETE ug, g, aa
@@ -108,10 +109,10 @@ class Group
     public static function add_user_into_group($group_id, $user_id, $user_pending = 0, $user_time = TIMENOW)
     {
         $args = DB()->build_array('INSERT', [
-            'group_id' => (int)$group_id,
-            'user_id' => (int)$user_id,
-            'user_pending' => (int)$user_pending,
-            'user_time' => (int)$user_time,
+            'group_id' => (int) $group_id,
+            'user_id' => (int) $user_id,
+            'user_pending' => (int) $user_pending,
+            'user_time' => (int) $user_time,
         ]);
         DB()->query("REPLACE INTO " . BB_USER_GROUP . $args);
 
@@ -130,8 +131,8 @@ class Group
     {
         DB()->query("
 		DELETE FROM " . BB_USER_GROUP . "
-		WHERE user_id = " . (int)$user_id . "
-			AND group_id = " . (int)$group_id . "
+		WHERE user_id = " . (int) $user_id . "
+			AND group_id = " . (int) $group_id . "
 	");
 
         self::update_user_level($user_id);
@@ -147,8 +148,8 @@ class Group
     {
         DB()->query("INSERT INTO " . BB_GROUPS . " (group_single_user) VALUES (1)");
 
-        $group_id = (int)DB()->sql_nextid();
-        $user_id = (int)$user_id;
+        $group_id = (int) DB()->sql_nextid();
+        $user_id = (int) $user_id;
 
         DB()->query("INSERT INTO " . BB_USER_GROUP . " (user_id, group_id, user_time) VALUES ($user_id, $group_id, " . TIMENOW . ")");
 
@@ -176,7 +177,7 @@ class Group
 			FROM " . BB_GROUPS . " g
 			LEFT JOIN " . BB_USERS . " u ON(g.group_moderator = u.user_id)
 			LEFT JOIN " . BB_AUTH_ACCESS . " aa ON(aa.group_id = g.group_id AND aa.forum_perm & " . BF_AUTH_MOD . ")
-			WHERE g.group_id = " . (int)$group_id . "
+			WHERE g.group_id = " . (int) $group_id . "
 				AND g.group_single_user = 0
 			LIMIT 1";
         }
@@ -225,9 +226,9 @@ class Group
 
         foreach ($auth_ary as $forum_id => $permission) {
             $values[] = [
-                'group_id' => (int)$group_id,
-                'forum_id' => (int)$forum_id,
-                'forum_perm' => (int)$permission,
+                'group_id' => (int) $group_id,
+                'forum_id' => (int) $forum_id,
+                'forum_perm' => (int) $permission,
             ];
         }
         $values = DB()->build_array('MULTI_INSERT', $values);

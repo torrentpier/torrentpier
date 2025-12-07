@@ -195,7 +195,7 @@ describe('DatabaseDebugger Class', function () {
             $trace = [
                 ['class' => 'Nette\\Database\\Table\\Selection', 'function' => 'select'],
                 ['class' => 'TorrentPier\\Database\\DebugSelection', 'function' => 'where'],
-                ['file' => '/path/to/DatabaseTest.php', 'function' => 'testMethod']
+                ['file' => '/path/to/DatabaseTest.php', 'function' => 'testMethod'],
             ];
 
             $result = $this->debugger->detectNetteExplorerInTrace($trace);
@@ -429,7 +429,7 @@ describe('DatabaseDebugger Class', function () {
             $row = [
                 'table' => 'users',
                 'type' => 'ALL',
-                'rows' => '1000'
+                'rows' => '1000',
             ];
 
             // Test that the explain method exists and can process row data

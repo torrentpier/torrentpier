@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -31,6 +32,5 @@ readonly class FeedEntry
         public DateTimeImmutable $lastModified,
         public string $author,
         public ?string $description = null
-    ) {
-    }
+    ) {}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -83,7 +84,7 @@ class Upload
         IMAGETYPE_PNG => 'png',
         IMAGETYPE_BMP => 'bmp',
         IMAGETYPE_WEBP => 'webp',
-        IMAGETYPE_AVIF => 'avif'
+        IMAGETYPE_AVIF => 'avif',
     ];
 
     /**

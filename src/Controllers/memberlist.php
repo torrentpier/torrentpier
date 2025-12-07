@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -39,7 +40,7 @@ $role_select = [
     'all' => __('ALL'),
     'user' => __('AUTH_USER'),
     'admin' => __('AUTH_ADMIN'),
-    'moderator' => __('MODERATOR')
+    'moderator' => __('MODERATOR'),
 ];
 $select_sort_role = '<select name="role">';
 foreach ($role_select as $key => $value) {
@@ -112,7 +113,7 @@ if ($result = DB()->fetch_rowset($sql)) {
             'PM' => $user_info['pm'],
             'EMAIL' => $user_info['email'],
             'WWW' => $user_info['www'],
-            'U_VIEWPROFILE' => PROFILE_URL . $user_id
+            'U_VIEWPROFILE' => PROFILE_URL . $user_id,
         ]);
     }
 } else {

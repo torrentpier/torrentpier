@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -36,7 +37,7 @@ class TextCaptcha implements CaptchaInterface
             session_start();
         }
 
-        $this->captcha = new CaptchaBuilder;
+        $this->captcha = new CaptchaBuilder();
         $this->captcha->setScatterEffect(false);
     }
 

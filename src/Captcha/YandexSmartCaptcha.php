@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -84,7 +85,7 @@ class YandexSmartCaptcha implements CaptchaInterface
             }
 
             // Safely decode JSON with error checking
-            $responseBody = (string)$response->getBody();
+            $responseBody = (string) $response->getBody();
             if (!json_validate($responseBody)) {
                 bb_log("Yandex SmartCaptcha verification failed: Invalid JSON response" . LOG_LF);
                 return false;

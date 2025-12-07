@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -586,7 +587,7 @@ class LegacySyntaxExtension extends AbstractExtension
     {
         // If we have a valid value, return it
         if ($value !== null && $value !== '') {
-            return (string)$value;
+            return (string) $value;
         }
 
         // Fallback: show the variable name, with red highlight in debug mode

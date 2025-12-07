@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,9 +10,8 @@
 
 namespace TorrentPier\Legacy\Common;
 
-use TorrentPier\Sessions;
-
 use Exception;
+use TorrentPier\Sessions;
 
 /**
  * Class User
@@ -204,14 +204,14 @@ class User
             $login = false;
             $user_id = (config()->get('allow_autologin') && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
 
-            if ($userdata = get_userdata((int)$user_id, false, true)) {
+            if ($userdata = get_userdata((int) $user_id, false, true)) {
                 if ($userdata['user_id'] != GUEST_UID && $userdata['user_active']) {
                     if (verify_id($this->sessiondata['uk'], LOGIN_KEY_LENGTH) && $this->verify_autologin_id($userdata, true, false)) {
                         $login = ($userdata['autologin_id'] && $this->sessiondata['uk'] === $userdata['autologin_id']);
                     }
                 }
             }
-            if (!$userdata || ((int)$userdata['user_id'] !== GUEST_UID && !$login)) {
+            if (!$userdata || ((int) $userdata['user_id'] !== GUEST_UID && !$login)) {
                 $userdata = get_userdata(GUEST_UID, false, true);
             }
 
@@ -219,10 +219,10 @@ class User
         }
 
         define('IS_GUEST', !$this->data['session_logged_in']);
-        define('IS_ADMIN', !IS_GUEST && (int)$this->data['user_level'] === ADMIN);
-        define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
-        define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
-        define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
+        define('IS_ADMIN', !IS_GUEST && (int) $this->data['user_level'] === ADMIN);
+        define('IS_MOD', !IS_GUEST && (int) $this->data['user_level'] === MOD);
+        define('IS_GROUP_MEMBER', !IS_GUEST && (int) $this->data['user_level'] === GROUP_MEMBER);
+        define('IS_USER', !IS_GUEST && (int) $this->data['user_level'] === USER);
         define('IS_SUPER_ADMIN', IS_ADMIN && isset(config()->get('super_admins')[$this->data['user_id']]));
         define('IS_AM', IS_ADMIN || IS_MOD);
         define('IS_PREMIUM', !IS_GUEST && isset(config()->get('premium_users')[$this->data['user_id']]));
@@ -237,7 +237,7 @@ class User
         $this->init_userprefs();
 
         // Initial ban check
-        if ($banInfo = getBanInfo((int)$this->id)) {
+        if ($banInfo = getBanInfo((int) $this->id)) {
             $this->session_end();
             if (!empty($banInfo['ban_reason'])) {
                 bb_die(__('YOU_BEEN_BANNED') . '<br/><br/>' . __('REASON') . ':&nbsp;' . '<b>' . $banInfo['ban_reason'] . '</b>');
@@ -263,22 +263,22 @@ class User
         $this->data = $userdata;
         $session_id = $this->sessiondata['sid'];
 
-        $login = ((int)$this->data['user_id'] !== GUEST_UID);
-        $user_id = (int)$this->data['user_id'];
-        $mod_admin_session = ((int)$this->data['user_level'] === ADMIN || (int)$this->data['user_level'] === MOD);
+        $login = ((int) $this->data['user_id'] !== GUEST_UID);
+        $user_id = (int) $this->data['user_id'];
+        $mod_admin_session = ((int) $this->data['user_level'] === ADMIN || (int) $this->data['user_level'] === MOD);
 
         // Create new session
         for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
             $session_id = make_rand_str(SID_LENGTH);
 
             $args = DB()->build_array('INSERT', [
-                'session_id' => (string)$session_id,
-                'session_user_id' => (int)$user_id,
-                'session_start' => (int)TIMENOW,
-                'session_time' => (int)TIMENOW,
-                'session_ip' => (string)USER_IP,
-                'session_logged_in' => (int)$login,
-                'session_admin' => (int)$mod_admin_session,
+                'session_id' => (string) $session_id,
+                'session_user_id' => (int) $user_id,
+                'session_start' => (int) TIMENOW,
+                'session_time' => (int) TIMENOW,
+                'session_ip' => (string) USER_IP,
+                'session_logged_in' => (int) $login,
+                'session_admin' => (int) $mod_admin_session,
             ]);
             $sql = "INSERT INTO " . BB_SESSIONS . $args;
 
@@ -465,7 +465,7 @@ class User
         }
         // user_id
         if (!empty($sd_resv['uid'])) {
-            $this->sessiondata['uid'] = (int)$sd_resv['uid'];
+            $this->sessiondata['uid'] = (int) $sd_resv['uid'];
         }
         // sid
         if (!empty($sd_resv['sid']) && verify_id($sd_resv['sid'], SID_LENGTH)) {
@@ -484,7 +484,7 @@ class User
             COOKIE_DBG,
             'explain',
             'sql_log',
-            'sql_log_full'
+            'sql_log_full',
         ];
 
         if ($user_id == GUEST_UID) {
@@ -566,7 +566,7 @@ class User
         DB()->query("
 			UPDATE " . BB_USERS . " SET
 				autologin_id = '$autologin_id'
-			WHERE user_id = " . (int)$userdata['user_id'] . "
+			WHERE user_id = " . (int) $userdata['user_id'] . "
 			LIMIT 1
 		");
 
@@ -578,13 +578,13 @@ class User
      */
     public function set_shortcuts()
     {
-        $this->id =& $this->data['user_id'];
-        $this->active =& $this->data['user_active'];
-        $this->name =& $this->data['username'];
-        $this->lastvisit =& $this->data['user_lastvisit'];
-        $this->regdate =& $this->data['user_regdate'];
-        $this->level =& $this->data['user_level'];
-        $this->opt =& $this->data['user_opt'];
+        $this->id = & $this->data['user_id'];
+        $this->active = & $this->data['user_active'];
+        $this->name = & $this->data['username'];
+        $this->lastvisit = & $this->data['user_lastvisit'];
+        $this->regdate = & $this->data['user_regdate'];
+        $this->level = & $this->data['user_level'];
+        $this->opt = & $this->data['user_opt'];
         $this->ip = CLIENT_IP;
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -56,7 +57,7 @@ class Cron
                 UPDATE " . BB_CRON . " SET
                     last_run = NOW(),
                     run_counter = run_counter + 1,
-                    execution_time = " . (float)$execution_time . ",
+                    execution_time = " . (float) $execution_time . ",
                     next_run =
                 CASE
                     WHEN schedule = 'hourly' THEN

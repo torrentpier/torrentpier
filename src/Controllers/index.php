@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -8,7 +9,7 @@
  */
 
 page_cfg('load_tpl_vars', [
-    'post_icons'
+    'post_icons',
 ]);
 
 // Show the last topic
@@ -24,17 +25,17 @@ $show_subforums = true;
 datastore()->enqueue([
     'stats',
     'moderators',
-    'cat_forums'
+    'cat_forums',
 ]);
 
 if (config()->get('show_latest_news')) {
     datastore()->enqueue([
-        'latest_news'
+        'latest_news',
     ]);
 }
 if (config()->get('show_network_news')) {
     datastore()->enqueue([
-        'network_news'
+        'network_news',
     ]);
 }
 
@@ -55,7 +56,7 @@ $req_page .= $viewcat ? "_c{$viewcat}" : '';
 define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . config()->get('default_lang'));
 
-$hide_cat_opt = isset(user()->opt_js['h_cat']) ? (string)user()->opt_js['h_cat'] : 0;
+$hide_cat_opt = isset(user()->opt_js['h_cat']) ? (string) user()->opt_js['h_cat'] : 0;
 $hide_cat_user = array_flip(explode('-', $hide_cat_opt));
 $showhide = request()->query->getInt('sh');
 
@@ -77,7 +78,7 @@ $excluded_forums_array = $excluded_forums_csv ? explode(',', $excluded_forums_cs
 $only_new = user()->opt_js['only_new'];
 
 // Validate requested category id
-if ($viewcat && !($viewcat =& $forums['c'][$viewcat]['cat_id'])) {
+if ($viewcat && !($viewcat = & $forums['c'][$viewcat]['cat_id'])) {
     redirect('/');
 }
 
@@ -126,7 +127,7 @@ $replace_in_parent = [
     'last_post_username',
     'last_post_user_rank',
     'last_topic_title',
-    'last_topic_id'
+    'last_topic_id',
 ];
 
 $cache_name = 'index_sql_' . hash('xxh128', $sql);
@@ -138,7 +139,7 @@ if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
         }
 
         if ($parent_id = $row['forum_parent']) {
-            if (!$parent =& $cat_forums[$cat_id]['f'][$parent_id]) {
+            if (!$parent = & $cat_forums[$cat_id]['f'][$parent_id]) {
                 $parent = $forums['f'][$parent_id];
                 $parent['last_post_time'] = 0;
             }
@@ -153,7 +154,7 @@ if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
                 continue;
             }
         } else {
-            $f =& $forums['f'][$forum_id];
+            $f = & $forums['f'][$forum_id];
             $row['forum_desc'] = $f['forum_desc'];
             $row['forum_posts'] = $f['forum_posts'];
             $row['forum_topics'] = $f['forum_topics'];
@@ -211,7 +212,7 @@ foreach ($cat_forums as $cid => $c) {
     ]);
 
     foreach ($c['f'] as $fid => $f) {
-        if (!$fname_html =& $forum_name_html[$fid]) {
+        if (!$fname_html = & $forum_name_html[$fid]) {
             continue;
         }
         $is_sf = $f['forum_parent'];
@@ -228,7 +229,7 @@ foreach ($cat_forums as $cid => $c) {
             template()->assign_block_vars('c.f.sf', [
                 'SF_ID' => $fid,
                 'SF_NAME' => $fname_html,
-                'SF_NEW' => $new ? ' new' : ''
+                'SF_NEW' => $new ? ' new' : '',
             ]);
             continue;
         }
@@ -242,7 +243,7 @@ foreach ($cat_forums as $cid => $c) {
             'TOPICS' => commify($f['forum_topics']),
             'LAST_SF_ID' => $f['last_sf_id'] ?? null,
             'MODERATORS' => isset($moderators[$fid]) ? implode(', ', $moderators[$fid]) : '',
-            'FORUM_FOLDER_ALT' => $new ? __('NEW') : __('OLD')
+            'FORUM_FOLDER_ALT' => $new ? __('NEW') : __('OLD'),
         ]);
 
         if ($f['last_post_id']) {
@@ -398,7 +399,7 @@ if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
 
     template()->assign_vars([
         'WHOSBIRTHDAY_WEEK' => $week_list,
-        'WHOSBIRTHDAY_TODAY' => $today_list
+        'WHOSBIRTHDAY_TODAY' => $today_list,
     ]);
 }
 

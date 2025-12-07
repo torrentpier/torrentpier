@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,15 +10,13 @@
 
 namespace TorrentPier\Torrent;
 
-use TorrentPier\Attachment;
-use TorrentPier\TorrServerAPI;
-
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
-
 use Exception;
 use Nette\Database\DriverException;
 use Nette\Database\UniqueConstraintViolationException;
+use TorrentPier\Attachment;
+use TorrentPier\TorrServerAPI;
 
 /**
  * Torrent registration on the tracker.
@@ -151,7 +150,7 @@ class Registry
         $totallen = 0;
 
         if (isset($info['length'])) {
-            $totallen = (float)$info['length'];
+            $totallen = (float) $info['length'];
         } elseif (isset($bt_v1, $info['files']) && !isset($bt_v2) && is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
                 // Exclude padding files
@@ -163,7 +162,7 @@ class Registry
                     }
                 }
             }
-            $totallen = (float)$totallen;
+            $totallen = (float) $totallen;
         } elseif (isset($bt_v2)) {
             $fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
                 $size = 0;
@@ -182,12 +181,12 @@ class Registry
                 return $size;
             };
 
-            $totallen = (float)$fileTreeSize($info['file tree']);
+            $totallen = (float) $fileTreeSize($info['file tree']);
         } else {
             self::errorExit(__('TORFILE_INVALID'));
         }
 
-        $size = sprintf('%.0f', (float)$totallen);
+        $size = sprintf('%.0f', (float) $totallen);
 
         try {
             DB()->table(BB_BT_TORRENTS)->insert([

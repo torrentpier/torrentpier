@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -10,11 +11,9 @@
 namespace TorrentPier;
 
 use Closure;
-
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\RepositoryBuilder;
 use Dotenv\Repository\RepositoryInterface;
-
 use PhpOption\Option;
 
 /**
@@ -111,6 +110,6 @@ class Env
 
                 return $value;
             })
-            ->getOrCall(fn () => $default instanceof Closure ? $default() : $default);
+            ->getOrCall(fn() => $default instanceof Closure ? $default() : $default);
     }
 }

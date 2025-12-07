@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -22,7 +23,7 @@ set_die_append_msg();
 $group_id = request()->query->has(POST_GROUPS_URL) ? request()->query->getInt(POST_GROUPS_URL) : null;
 $start = request()->query->has('start') ? abs(request()->query->getInt('start')) : 0;
 $per_page = config()->get('group_members_per_page');
-$view_mode = request()->query->has('view') ? (string)request()->query->get('view') : null;
+$view_mode = request()->query->has('view') ? (string) request()->query->get('view') : null;
 $rel_limit = 50;
 
 $group_info = [];
@@ -120,7 +121,7 @@ if (!$group_id) {
         foreach ($groups as $type => $grp) {
             template()->assign_block_vars('groups', [
                 'MEMBERSHIP' => __('GROUP_MEMBER_' . strtoupper($type)),
-                'GROUP_SELECT' => build_group($grp)
+                'GROUP_SELECT' => build_group($grp),
             ]);
         }
 
@@ -128,7 +129,7 @@ if (!$group_id) {
             'SELECT_GROUP' => true,
             'PAGE_TITLE' => __('GROUP_CONTROL_PANEL'),
             'S_USERGROUP_ACTION' => 'group',
-            'S_HIDDEN_FIELDS' => $s_hidden_fields
+            'S_HIDDEN_FIELDS' => $s_hidden_fields,
         ]);
     } else {
         if (IS_ADMIN) {
@@ -174,7 +175,7 @@ if (!$group_id) {
         $emailer->assign_vars([
             'USER' => userdata('username'),
             'GROUP_MODERATOR' => $moderator['username'],
-            'U_GROUP' => make_url(GROUP_URL . $group_id)
+            'U_GROUP' => make_url(GROUP_URL . $group_id),
         ]);
 
         $emailer->send();
@@ -229,7 +230,7 @@ if (!$group_id) {
                 $emailer->set_template('group_added', $row['user_lang']);
                 $emailer->assign_vars([
                     'GROUP_NAME' => $group_info['group_name'],
-                    'U_GROUP' => make_url(GROUP_URL . $group_id)
+                    'U_GROUP' => make_url(GROUP_URL . $group_id),
                 ]);
 
                 $emailer->send();
@@ -240,7 +241,7 @@ if (!$group_id) {
 
                 $sql_in = [];
                 foreach ($members as $members_id) {
-                    $sql_in[] = (int)$members_id;
+                    $sql_in[] = (int) $members_id;
                 }
                 if (!$sql_in = implode(',', $sql_in)) {
                     set_die_append_msg(group_id: $group_id);
@@ -287,7 +288,7 @@ if (!$group_id) {
                         $emailer->set_template('group_approved', $row['user_lang']);
                         $emailer->assign_vars([
                             'GROUP_NAME' => $group_info['group_name'],
-                            'U_GROUP' => make_url(GROUP_URL . $group_id)
+                            'U_GROUP' => make_url(GROUP_URL . $group_id),
                         ]);
 
                         $emailer->send();
@@ -392,7 +393,7 @@ if (!$group_id) {
         'U_GROUP_RELEASES' => GROUP_URL . $group_id . "&view=releases",
         'U_GROUP_MEMBERS' => GROUP_URL . $group_id . "&view=members",
         'U_GROUP_CONFIG' => "group_edit?" . POST_GROUPS_URL . "=$group_id",
-        'RELEASE_GROUP' => (bool)$group_info['release_group'],
+        'RELEASE_GROUP' => (bool) $group_info['release_group'],
         'GROUP_TYPE' => $group_type,
 
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
@@ -522,7 +523,7 @@ if (!$group_id) {
                         'EMAIL' => $member_info['email'],
                         'WWW' => $member_info['www'],
                         'TIME' => $member_info['user_time'],
-                        'TIME_RAW' => $member_info['user_time_raw']
+                        'TIME_RAW' => $member_info['user_time_raw'],
                     ]);
 
                     if ($is_moderator) {
@@ -576,7 +577,7 @@ if (!$group_id) {
                         'USER_ID' => $user_id,
                         'PM' => $pending_info['pm'],
                         'EMAIL' => $pending_info['email'],
-                        'WWW' => $pending_info['www']
+                        'WWW' => $pending_info['www'],
                     ]);
                 }
 

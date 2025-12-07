@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -22,7 +23,7 @@ class Language
     private static ?Language $instance = null;
     private array $userLanguage = [];
     private array $sourceLanguage = [];
-    private(set) string $currentLanguage = '';
+    public private(set) string $currentLanguage = '';
     private bool $initialized = false;
 
     private string $libraryLangDir;
@@ -325,9 +326,7 @@ class Language
     /**
      * Prevent cloning of the singleton instance
      */
-    private function __clone()
-    {
-    }
+    private function __clone() {}
 
     /**
      * Prevent serialization of the singleton instance

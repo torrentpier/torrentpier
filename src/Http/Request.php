@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,14 +12,14 @@ declare(strict_types=1);
 
 namespace TorrentPier\Http;
 
-use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\ServerBag;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * HTTP Request (singleton)
@@ -190,7 +191,7 @@ final class Request
     public function getFloat(string $key, float $default = 0.0): float
     {
         $value = $this->get($key, $default);
-        return \is_numeric($value) ? (float)$value : $default;
+        return \is_numeric($value) ? (float) $value : $default;
     }
 
     /**

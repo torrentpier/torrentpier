@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -468,7 +469,7 @@ class Common
      */
     public static function topic_move($topic_id, $to_forum_id, $from_forum_id = null, bool $leave_shadow = false, bool $insert_bot_msg = false, string $reason_move = ''): bool
     {
-        $to_forum_id = (int)$to_forum_id;
+        $to_forum_id = (int) $to_forum_id;
 
         // Verify input params
         if (!$topic_csv = get_id_csv($topic_id)) {
