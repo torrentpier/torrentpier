@@ -361,52 +361,12 @@ config()->merge(bb_get_config(BB_CONFIG));
 
 /**
  * Cron
+ * Run cron if enabled or forced via START_CRON constant
  */
-if (
-    empty($_POST) &&
-    !defined('IN_ADMIN') && !defined('IN_AJAX') &&
-    !is_file(CRON_RUNNING) &&
-    (TorrentPier\Helpers\CronHelper::isEnabled() || defined('START_CRON'))
-) {
-    if (TIMENOW - config()->get('cron_last_check') > config()->get('cron_check_interval')) {
-
-        /** Update cron_last_check */
-        bb_update_config(['cron_last_check' => TIMENOW + 10]);
-        bb_log(date('H:i:s - ') . getmypid() . ' -x-- DB-LOCK try' . LOG_LF, CRON_LOG_DIR . '/cron_check');
-
-        if (DB()->get_lock('cron', 1)) {
-            bb_log(date('H:i:s - ') . getmypid() . ' --x- DB-LOCK OBTAINED !!!!!!!!!!!!!!!!!' . LOG_LF, CRON_LOG_DIR . '/cron_check');
-
-            /** Run cron */
-            if (TorrentPier\Helpers\CronHelper::hasFileLock()) {
-                /** снятие файловой блокировки */
-                register_shutdown_function(function () {
-                    TorrentPier\Helpers\CronHelper::releaseLockFile();
-                });
-
-                /** разблокировка форума */
-                register_shutdown_function(function () {
-                    TorrentPier\Helpers\CronHelper::enableBoard();
-                });
-
-                TorrentPier\Helpers\CronHelper::trackRunning('start');
-
-                require(CRON_DIR . 'cron_check.php');
-
-                TorrentPier\Helpers\CronHelper::trackRunning('end');
-            }
-
-            if (defined('IN_CRON')) {
-                bb_log(date('H:i:s - ') . getmypid() . ' --x- ALL jobs FINISHED *************************************************' . LOG_LF, CRON_LOG_DIR . '/cron_check');
-            }
-
-            DB()->release_lock('cron');
-        }
-    }
-}
+TorrentPier\Helpers\CronHelper::run(defined('START_CRON'));
 
 /**
- * Exit if board is disabled via trigger
+ * Exit if the board is disabled via trigger
  */
 if ((config()->get('board_disable') || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
     if (config()->get('board_disable')) {
