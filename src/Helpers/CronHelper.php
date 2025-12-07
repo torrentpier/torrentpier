@@ -135,4 +135,72 @@ class CronHelper
                 bb_simple_die("Invalid cron track mode: $mode");
         }
     }
+
+    /**
+     * Run cron jobs
+     *
+     * @param bool $force Force run even if an interval not passed
+     * @return bool Whether cron was executed
+     */
+    public static function run(bool $force = false): bool
+    {
+        // Check conditions
+        if (!empty($_POST)) {
+            return false;
+        }
+
+        if (defined('IN_ADMIN') || defined('IN_AJAX')) {
+            return false;
+        }
+
+        if (is_file(CRON_RUNNING)) {
+            return false;
+        }
+
+        if (!self::isEnabled() && !$force) {
+            return false;
+        }
+
+        // Check interval
+        if (!$force && (TIMENOW - config()->get('cron_last_check') <= config()->get('cron_check_interval'))) {
+            return false;
+        }
+
+        // Update cron_last_check
+        bb_update_config(['cron_last_check' => TIMENOW + 10]);
+        bb_log(date('H:i:s - ') . getmypid() . ' -x-- DB-LOCK try' . LOG_LF, CRON_LOG_DIR . '/cron_check');
+
+        if (!DB()->get_lock('cron', 1)) {
+            return false;
+        }
+
+        bb_log(date('H:i:s - ') . getmypid() . ' --x- DB-LOCK OBTAINED !!!!!!!!!!!!!!!!!' . LOG_LF, CRON_LOG_DIR . '/cron_check');
+
+        // Run cron
+        if (self::hasFileLock()) {
+            // Release file lock on shutdown
+            register_shutdown_function(function () {
+                self::releaseLockFile();
+            });
+
+            // Enable board on shutdown
+            register_shutdown_function(function () {
+                self::enableBoard();
+            });
+
+            self::trackRunning('start');
+
+            require(CRON_DIR . 'cron_check.php');
+
+            self::trackRunning('end');
+        }
+
+        if (defined('IN_CRON')) {
+            bb_log(date('H:i:s - ') . getmypid() . ' --x- ALL jobs FINISHED *************************************************' . LOG_LF, CRON_LOG_DIR . '/cron_check');
+        }
+
+        DB()->release_lock('cron');
+
+        return true;
+    }
 }
