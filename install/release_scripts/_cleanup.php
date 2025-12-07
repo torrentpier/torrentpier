@@ -27,19 +27,16 @@ if (!function_exists('removeFile')) {
 
 $items = [
     '.github',
-    '.cliffignore',
     '.editorconfig',
     '.gitattributes',
     '.gitignore',
     '.php-cs-fixer.php',
-    'install/scripts/_release.php',
     'CHANGELOG.md',
     'CLAUDE.md',
-    'cliff.toml',
     'phpunit.xml',
     'README.md',
     'tests',
-    'UPGRADE_GUIDE.md'
+    'UPGRADE_GUIDE.md',
 ];
 
 foreach ($items as $item) {

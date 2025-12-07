@@ -21,7 +21,7 @@ jobs:
         uses: orhun/git-cliff-action@v4
         id: git-cliff
         with:
-          config: cliff.toml
+          config: install/release_scripts/cliff.toml
           args: v2.4.6-alpha.4.. --verbose
         env:
           OUTPUT: CHANGELOG.md

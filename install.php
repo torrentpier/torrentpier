@@ -349,7 +349,8 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     }
 
     // Cleanup...
-    if (is_file(BB_ROOT . '_cleanup.php')) {
+    $cleanupScript = BB_ROOT . 'install/release_scripts/_cleanup.php';
+    if (is_file($cleanupScript)) {
         out("\n--- Finishing installation (Cleanup) ---\n", 'info');
         out('The cleanup process will remove:');
         out('- Development documentation (README, CHANGELOG)', 'debug');
@@ -359,8 +360,8 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
         echo 'Do you want to delete these files permanently? [y/N]: ';
         if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
             out("\n- Cleanup...", 'info');
-            require_once BB_ROOT . '_cleanup.php';
-            unlink(BB_ROOT . '_cleanup.php');
+            require_once $cleanupScript;
+            removeDir(BB_ROOT . 'install/release_scripts');
         } else {
             out('- Skipping...', 'info');
         }

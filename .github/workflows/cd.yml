@@ -22,7 +22,7 @@ jobs:
         uses: orhun/git-cliff-action@v4
         id: git-cliff
         with:
-          config: cliff.toml
+          config: install/release_scripts/cliff.toml
           args: -vv --latest --no-exec --github-repo ${{ github.repository }}
 
       - name: Print the changelog
@@ -53,7 +53,7 @@ jobs:
         run: composer install --no-dev --no-interaction --no-ansi --prefer-dist --optimize-autoloader
 
       - name: Cleanup
-        run: php _cleanup.php && rm _cleanup.php
+        run: php install/release_scripts/_cleanup.php && rm -rf install/release_scripts
 
       - name: Create archive
         id: create-zip
