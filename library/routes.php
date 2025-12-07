@@ -29,6 +29,9 @@ return function (Router $router): void {
     // Migrated controllers (in src/Controllers/)
     // ==============================================================
 
+    // Index (homepage)
+    $router->any('/', new LegacyAdapter($basePath . '/src/Controllers/index.php', options: ['manage_session' => true]));
+
     // GET
     $router->get('/dl', new LegacyAdapter($basePath . '/src/Controllers/dl.php'));
     $router->get('/feed', new LegacyAdapter($basePath . '/src/Controllers/feed.php', options: ['manage_session' => true]));

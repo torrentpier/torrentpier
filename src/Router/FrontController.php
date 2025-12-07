@@ -76,14 +76,6 @@ class FrontController
             ];
         }
 
-        // Root path - legacy index
-        if ($path === '/') {
-            return [
-                'action' => self::ACTION_REQUIRE_EXIT,
-                'file' => $this->basePath . '/index_legacy.php'
-            ];
-        }
-
         // Route through router
         return ['action' => self::ACTION_ROUTE];
     }

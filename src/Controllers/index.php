@@ -7,10 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'index');
-
-require __DIR__ . '/common.php';
-
 page_cfg('load_tpl_vars', [
     'post_icons'
 ]);
