@@ -7,6 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use TorrentPier\Controllers\RobotsController;
 use TorrentPier\Router\Router;
 use TorrentPier\Router\LegacyAdapter;
 
@@ -17,6 +18,12 @@ use TorrentPier\Router\LegacyAdapter;
  */
 return function (Router $router): void {
     $basePath = dirname(__DIR__);
+
+    // ==============================================================
+    // Modern PSR-7 controllers (in src/Controllers/)
+    // ==============================================================
+
+    $router->get('/robots.txt', new RobotsController());
 
     // ==============================================================
     // Migrated controllers (in src/Controllers/)

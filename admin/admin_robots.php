@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-$robots_file = BB_ROOT . 'robots.txt';
-
 if (request()->post->has('save')) {
     // Check for demo mode
     if (IN_DEMO_MODE) {
@@ -24,22 +22,12 @@ if (request()->post->has('save')) {
 
     $robots_txt = request()->post->get('robots_txt', '');
 
-    if (!is_writable($robots_file) && is_file($robots_file)) {
-        bb_die('File robots.txt is not writable #1');
-    }
-
-    $bytes = file_put_contents($robots_file, $robots_txt);
-    if ($bytes === false) {
-        bb_die('Could not write robots.txt #2');
-    }
+    bb_update_config(['robots_txt' => $robots_txt]);
 
     bb_die(__('ROBOTS_TXT_UPDATED_SUCCESSFULLY') . '<br /><br />' . sprintf(__('CLICK_RETURN_ROBOTS_TXT_CONFIG'), '<a href="admin_robots.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
 }
 
-$current_content = '';
-if (is_file($robots_file)) {
-    $current_content = file_get_contents($robots_file);
-}
+$current_content = config()->get('robots_txt') ?? '';
 
 template()->assign_vars([
     'S_ACTION' => 'admin_robots.php',
