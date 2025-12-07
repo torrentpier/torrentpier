@@ -16,6 +16,7 @@
 
 ### 🐛 Bug Fixes
 
+- *(ip)* Add universal IP decode method for mixed format handling ([#2241](https://github.com/torrentpier/torrentpier/pull/2241)) - ([094926f](https://github.com/torrentpier/torrentpier/commit/094926fec072aa1aef61c1650cc5624cdc533acc))
 - Add exception handling to `Registry::unregister` to ensure cron job continuity - ([cbf980a](https://github.com/torrentpier/torrentpier/commit/cbf980ada8e1b44bc2473be2000d27b96cfdff1a))
 - Ensure null-safe check for `$bt_userdata` in ratio handling & improve attachment migration tracking - ([6054770](https://github.com/torrentpier/torrentpier/commit/60547701df245b31c49a754af2fef7876df9d05e))
 - Handle potential null values in cron run times and intervals - ([ffac8ae](https://github.com/torrentpier/torrentpier/commit/ffac8ae0beb696d75d849ee091bc1a08bc00e3dd))
@@ -30,6 +31,7 @@
 - *(admin)* Remove legacy attachment-related admin files** - ([bf177b7](https://github.com/torrentpier/torrentpier/commit/bf177b7576132d9095f387fb004f1069ecd5fe16))
 - *(attachments)* Remove legacy attachment-mod components and maintenance cron** - ([0ea2a4a](https://github.com/torrentpier/torrentpier/commit/0ea2a4a3668ec216797e7c3c4f2d26cd138ce352))
 - *(tracker)* Remove legacy attachment dependency and update queries** - ([0f572d6](https://github.com/torrentpier/torrentpier/commit/0f572d638a164e0212cca7c9eb5aee8f84cf3f52))
+- Update minimum PHP version to 8.4 across workflows, dependencies, and documentation ([#2239](https://github.com/torrentpier/torrentpier/pull/2239)) - ([b49cd41](https://github.com/torrentpier/torrentpier/commit/b49cd41789f16a39792da790d0247a8334b2fe49))
 - Enhance TorrServer integration and streamline validation logic** - ([55391f5](https://github.com/torrentpier/torrentpier/commit/55391f5beea4d9bc9e16e5cad0ea8d7b57074c06))
 - Enhance language variable handling and streamline template logic** - ([045660f](https://github.com/torrentpier/torrentpier/commit/045660f1cdd51e5a83f4af23357fc5d98d0836f0))
 - Remove legacy attachment deletion logic and optimize M3U handling** - ([e7a6359](https://github.com/torrentpier/torrentpier/commit/e7a6359055b433fc3b4ab000f64d5c400e474dbb))
