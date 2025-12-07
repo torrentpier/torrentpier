@@ -35,21 +35,35 @@ if (!$result = DB()->sql_query($sql)) {
         $config_value = $row['config_value'];
         $default_config[$config_name] = $config_value;
 
-        $new[$config_name] = request()->post->get($config_name, $default_config[$config_name]);
+        // These config values are arrays in the form (stored serialized in DB)
+        $arrayConfigs = ['seed_bonus_points', 'seed_bonus_release', 'bonus_upload', 'bonus_upload_price'];
 
-        if (request()->post->get('submit') !== null && $row['config_value'] != $new[$config_name]) {
-            if ($config_name == 'seed_bonus_points' ||
-                $config_name == 'seed_bonus_release' ||
-                $config_name == 'bonus_upload' ||
-                $config_name == 'bonus_upload_price'
-            ) {
-                $new[$config_name] = serialize(str_replace(',', '.', $new[$config_name]));
+        if (in_array($config_name, $arrayConfigs)) {
+            // Unserialize DB value for display, use POST array on submit
+            $dbValue = [];
+            if ($config_value !== '' && is_string($config_value) && str_starts_with($config_value, 'a:')) {
+                $unserialized = unserialize($config_value, ['allowed_classes' => false]);
+                if (is_array($unserialized)) {
+                    $dbValue = $unserialized;
+                }
             }
-            bb_update_config([$config_name => $new[$config_name]]);
+            $new[$config_name] = request()->post->has('submit')
+                ? request()->getArray($config_name, $dbValue)
+                : $dbValue;
+        } else {
+            $new[$config_name] = request()->post->get($config_name, $default_config[$config_name]);
+        }
+
+        if (request()->post->has('submit') && $row['config_value'] != $new[$config_name]) {
+            $valueToSave = $new[$config_name];
+            if (in_array($config_name, $arrayConfigs)) {
+                $valueToSave = serialize(str_replace(',', '.', $new[$config_name]));
+            }
+            bb_update_config([$config_name => $valueToSave]);
         }
     }
 
-    if (request()->post->get('submit') !== null) {
+    if (request()->post->has('submit')) {
         bb_die(__('CONFIG_UPDATED') . $return_links[$mode] . $return_links['index']);
     }
 }
@@ -88,33 +102,27 @@ switch ($mode) {
         ]);
 
         if ($new['seed_bonus_points'] && $new['seed_bonus_release']) {
-            $seed_bonus = unserialize($new['seed_bonus_points']);
-            $seed_release = unserialize($new['seed_bonus_release']);
-
-            foreach ($seed_bonus as $i => $row) {
-                if (!$row || !$seed_release[$i]) {
+            foreach ($new['seed_bonus_points'] as $i => $row) {
+                if (!$row || empty($new['seed_bonus_release'][$i])) {
                     continue;
                 }
 
                 template()->assign_block_vars('seed_bonus', [
-                    'RELEASE' => $seed_release[$i],
+                    'RELEASE' => $new['seed_bonus_release'][$i],
                     'POINTS' => $row
                 ]);
             }
         }
 
         if ($new['bonus_upload'] && $new['bonus_upload_price']) {
-            $upload_row = unserialize($new['bonus_upload']);
-            $price_row = unserialize($new['bonus_upload_price']);
-
-            foreach ($upload_row as $i => $row) {
-                if (!$row || !$price_row[$i]) {
+            foreach ($new['bonus_upload'] as $i => $row) {
+                if (!$row || empty($new['bonus_upload_price'][$i])) {
                     continue;
                 }
 
                 template()->assign_block_vars('bonus_upload', [
                     'UP' => $row,
-                    'PRICE' => $price_row[$i]
+                    'PRICE' => $new['bonus_upload_price'][$i]
                 ]);
             }
         }

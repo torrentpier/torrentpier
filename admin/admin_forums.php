@@ -112,14 +112,14 @@ if ($mode) {
                 $self_moderated = 0;
             }
 
-            if (request()->get('forum_parent') !== null) {
-                $forum_parent = (int)request()->get('forum_parent');
+            if (request()->has('forum_parent')) {
+                $forum_parent = request()->getInt('forum_parent');
 
                 if ($parent = get_forum_data($forum_parent, $cat_forums)) {
                     $cat_id = $parent['cat_id'];
                 }
-            } elseif (request()->get(POST_CAT_URL) !== null) {
-                $cat_id = (int)request()->get(POST_CAT_URL);
+            } elseif (request()->has(POST_CAT_URL)) {
+                $cat_id = request()->getInt(POST_CAT_URL);
             }
 
             $catlist = get_list('category', $cat_id, true);

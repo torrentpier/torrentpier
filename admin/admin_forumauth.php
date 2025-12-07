@@ -58,7 +58,7 @@ foreach ($forum_auth_fields as $auth_type) {
 $forum_auth_levels = ['ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN'];
 $forum_auth_const = [AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN];
 
-if (request()->get(POST_FORUM_URL) !== null) {
+if (request()->has(POST_FORUM_URL)) {
     $forum_id = request()->getInt(POST_FORUM_URL);
     $forum_sql = "WHERE forum_id = $forum_id";
 } else {
@@ -66,13 +66,13 @@ if (request()->get(POST_FORUM_URL) !== null) {
     $forum_sql = '';
 }
 
-if (request()->query->get('adv') !== null) {
-    $adv = (int)request()->query->get('adv');
+if (request()->query->has('adv')) {
+    $adv = request()->query->getInt('adv');
 } else {
     unset($adv);
 }
 
-$submit = request()->post->get('submit') !== null;
+$submit = request()->post->has('submit');
 
 // Check for demo mode
 if (IN_DEMO_MODE && $submit) {
@@ -86,8 +86,8 @@ if ($submit) {
     $sql = '';
 
     if (!empty($forum_id)) {
-        if (request()->post->get('simpleauth') !== null) {
-            $simple_ary = $simple_auth_ary[(int)request()->post->get('simpleauth')];
+        if (request()->post->has('simpleauth')) {
+            $simple_ary = $simple_auth_ary[request()->post->getInt('simpleauth')];
 
             for ($i = 0, $iMax = count($simple_ary); $i < $iMax; $i++) {
                 $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $simple_ary[$i];

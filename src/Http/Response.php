@@ -321,29 +321,4 @@ final class Response
         );
         return $response;
     }
-
-    /**
-     * Create an M3U playlist response
-     *
-     * @param string $content M3U content
-     * @param string $filename Download filename
-     */
-    public static function m3u(string $content, string $filename = 'playlist.m3u'): SymfonyResponse
-    {
-        $response = new SymfonyResponse($content, 200, [
-            'Content-Type' => 'audio/x-mpegurl',
-        ]);
-
-        // Create ASCII fallback for non-ASCII filenames
-        $fallback = preg_replace('/[^\x20-\x7E]/', '_', $filename);
-        if ($fallback === '' || $fallback === null) {
-            $fallback = 'playlist.m3u';
-        }
-
-        $response->headers->set(
-            'Content-Disposition',
-            $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename, $fallback)
-        );
-        return $response;
-    }
 }
