@@ -9,8 +9,8 @@
 
 define('NO_GZIP', true);
 
-$topic_id = (int)request_var('t', 0);
-$m3u = isset($_GET['m3u']) && $_GET['m3u'];
+$topic_id = request()->getInt('t');
+$m3u = request()->getBool('m3u');
 
 set_die_append_msg();
 
@@ -77,7 +77,7 @@ if (!$dlCounter->recordDownload($topic_id, userdata('user_id'), IS_PREMIUM)) {
 // For torrents - add a passkey and send
 if ($t_data['attach_ext_id'] == TORRENT_EXT_ID) {
     // Admins and topic author can download the original unmodified torrent file
-    if (!(isset($_GET['original']) && (IS_ADMIN || \TorrentPier\Topic\Guard::isAuthor($t_data['topic_poster'])))) {
+    if (!(request()->query->has('original') && (IS_ADMIN || \TorrentPier\Topic\Guard::isAuthor($t_data['topic_poster'])))) {
         \TorrentPier\Torrent\Sender::sendWithPasskey($t_data);
     }
 }

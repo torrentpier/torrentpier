@@ -61,24 +61,24 @@ function validate_mode_condition($request_index, $mod_action = '')
     if (!$mod_action) {
         $mod_action = $request_index;
     }
-    return (isset($_REQUEST[$request_index]) || (isset($_POST['mod_action']) && $_POST['mod_action'] === $mod_action));
+    return (request()->has($request_index) || (request()->post->has('mod_action') && request()->post->get('mod_action') === $mod_action));
 }
 
 // Start session management
 user()->session_start(['req_login' => true]);
 
 // Obtain initial vars
-$forum_id = isset($_REQUEST[POST_FORUM_URL]) ? (int)$_REQUEST[POST_FORUM_URL] : 0;
-$topic_id = isset($_REQUEST[POST_TOPIC_URL]) ? (int)$_REQUEST[POST_TOPIC_URL] : 0;
-$post_id = isset($_REQUEST[POST_POST_URL]) ? (int)$_REQUEST[POST_POST_URL] : 0;
+$forum_id = request()->getInt(POST_FORUM_URL, 0);
+$topic_id = request()->getInt(POST_TOPIC_URL, 0);
+$post_id = request()->getInt(POST_POST_URL, 0);
 
-$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
-$confirmed = isset($_POST['confirm']);
+$start = request()->has('start') ? abs(request()->getInt('start')) : 0;
+$confirmed = request()->post->has('confirm');
 
 $mode = $topic_title = '';
 
-if (isset($_REQUEST['mode'])) {
-    $mode = (string)$_REQUEST['mode'];
+if (request()->has('mode')) {
+    $mode = request()->getString('mode');
 } else {
     if (validate_mode_condition('delete', 'topic_delete')) {
         $mode = 'delete';
@@ -128,7 +128,7 @@ if ($topic_id) {
 }
 
 // Check if user did or did not confirm. If they did not, forward them to the last page they were on
-if (isset($_POST['cancel']) || IS_GUEST) {
+if (request()->post->has('cancel') || IS_GUEST) {
     $redirect = 'index.php';
 
     if ($topic_id || $forum_id) {
@@ -149,8 +149,9 @@ if ($mode == 'ip') {
     if ($topic_id && $topic_row['self_moderated'] && $topic_row['topic_poster'] == userdata('user_id')) {
         $is_auth['auth_mod'] = true;
 
-        $_POST['insert_bot_msg'] = 1;
-        unset($_POST['topic_id_list'], $_POST['move_leave_shadow']);
+        request()->post->set('insert_bot_msg', 1);
+        request()->post->remove('topic_id_list');
+        request()->post->remove('move_leave_shadow');
     }
 }
 
@@ -161,7 +162,7 @@ if (!$is_auth['auth_mod']) {
 
 // Redirect to login page if not admin session
 if ($is_moderator && !userdata('session_admin')) {
-    $redirect = $_POST['redirect'] ?? $_SERVER['REQUEST_URI'];
+    $redirect = request()->post->get('redirect') ?? request()->getRequestUri();
     redirect(LOGIN_URL . "?redirect=$redirect&admin=1");
 }
 
@@ -180,11 +181,11 @@ switch ($mode) {
     case 'post_pin':
     case 'post_unpin':
 
-        if (empty($_POST['topic_id_list']) && empty($topic_id)) {
+        if (!request()->post->has('topic_id_list') && empty($topic_id)) {
             bb_die(__('NONE_SELECTED'));
         }
 
-        $req_topics = $_POST['topic_id_list'] ?? $topic_id;
+        $req_topics = request()->post->get('topic_id_list') ?? $topic_id;
         validate_topics($forum_id, $req_topics, $topic_titles);
 
         if (!$req_topics || !($topic_csv = get_id_csv($req_topics))) {
@@ -249,8 +250,8 @@ switch ($mode) {
     case 'move':
 
         if ($confirmed) {
-            $new_forum_id = (int)$_POST['new_forum'];
-            $result = \TorrentPier\Legacy\Admin\Common::topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']), $_POST['reason_move_bot']);
+            $new_forum_id = request()->post->getInt('new_forum');
+            $result = \TorrentPier\Legacy\Admin\Common::topic_move($req_topics, $new_forum_id, $forum_id, request()->post->has('move_leave_shadow'), request()->post->has('insert_bot_msg'), request()->post->get('reason_move_bot'));
 
             //Обновление кеша новостей на главной
             $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
@@ -380,11 +381,10 @@ switch ($mode) {
 
     case 'split':
         //mpd
-        $delete_posts = isset($_POST['delete_posts']);
-        $split = (isset($_POST['split_type_all']) || isset($_POST['split_type_beyond']));
-        $posts = $_POST['post_id_list'] ?? [];
-        $start = /* (isset($_POST['start'])) ? intval($_POST['start']) : */
-            0;
+        $delete_posts = request()->post->has('delete_posts');
+        $split = (request()->post->has('split_type_all') || request()->post->has('split_type_beyond'));
+        $posts = request()->post->get('post_id_list', []);
+        $start = 0;
         $topic_first_post_id = $topic_row['topic_first_post_id'] ?? '';
 
         $post_id_sql = $req_post_id_sql = [];
@@ -438,12 +438,12 @@ switch ($mode) {
                     $post_id_sql .= (($post_id_sql != '') ? ', ' : '') . (int)$row['post_id'];
                 } while ($row = DB()->sql_fetchrow($result));
 
-                $post_subject = clean_title($_POST['subject']);
+                $post_subject = clean_title(request()->post->get('subject'));
                 if (empty($post_subject)) {
                     bb_die(__('EMPTY_SUBJECT'));
                 }
 
-                $new_forum_id = (int)$_POST['new_forum_id'];
+                $new_forum_id = request()->post->getInt('new_forum_id');
                 $topic_time = TIMENOW;
 
                 $sql = 'SELECT forum_id FROM ' . BB_FORUMS . ' WHERE forum_id = ' . $new_forum_id;
@@ -477,7 +477,7 @@ switch ($mode) {
                     bb_die('Could not update topics watch table');
                 }
 
-                $sql_where = (!empty($_POST['split_type_beyond'])) ? " post_time >= $post_time AND topic_id = $topic_id" : "post_id IN ($post_id_sql)";
+                $sql_where = (request()->post->has('split_type_beyond')) ? " post_time >= $post_time AND topic_id = $topic_id" : "post_id IN ($post_id_sql)";
 
                 $sql = "UPDATE " . BB_POSTS . " SET topic_id = $new_topic_id, forum_id = $new_forum_id WHERE $sql_where";
                 if (!DB()->sql_query($sql)) {
@@ -485,10 +485,10 @@ switch ($mode) {
                 }
 
                 //bot
-                if (isset($_POST['after_split_to_old'])) {
-                    \TorrentPier\Legacy\Post::insert_post('after_split_to_old', $topic_id, $forum_id, '', $new_topic_id, trim($_POST['subject']));
+                if (request()->post->has('after_split_to_old')) {
+                    \TorrentPier\Legacy\Post::insert_post('after_split_to_old', $topic_id, $forum_id, '', $new_topic_id, trim(request()->post->get('subject')));
                 }
-                if (isset($_POST['after_split_to_new'])) {
+                if (request()->post->has('after_split_to_new')) {
                     \TorrentPier\Legacy\Post::insert_post('after_split_to_new', $new_topic_id, $new_forum_id, $forum_id, $new_topic_id, '', $topic_id);
                 }
 
@@ -506,7 +506,7 @@ switch ($mode) {
                     'topic_id' => $topic_id,
                     'topic_title' => get_topic_title($topic_id),
                     'topic_id_new' => $new_topic_id,
-                    'topic_title_new' => htmlCHR($_POST['subject'])
+                    'topic_title_new' => htmlCHR(request()->post->get('subject'))
                 ]);
 
                 bb_die($message);
@@ -586,7 +586,7 @@ switch ($mode) {
     case 'ip':
         $anon = GUEST_UID;
 
-        $rdns_ip_num = (isset($_GET['rdns'])) ? $_GET['rdns'] : '';
+        $rdns_ip_num = request()->query->get('rdns', '');
 
         if (!$post_id) {
             bb_die(__('NO_SUCH_POST'));

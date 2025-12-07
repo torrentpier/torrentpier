@@ -14,7 +14,8 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-array_deep($_POST, 'trim');
+$post = request()->post->all();
+array_deep($post, 'trim');
 
 $s = '';
 
@@ -33,7 +34,7 @@ $default_forum_auth = [
     'auth_download' => AUTH_REG,
 ];
 
-$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
+$mode = (string)request()->get('mode', '');
 
 $cat_forums = get_cat_forums();
 
@@ -43,13 +44,15 @@ if ($orphan_sf_sql = get_orphan_sf($cat_forums)) {
 $forum_parent = $cat_id = 0;
 $forumname = '';
 
-if (isset($_REQUEST['addforum']) || isset($_REQUEST['addcategory'])) {
-    $mode = isset($_REQUEST['addforum']) ? 'addforum' : 'addcat';
+if (request()->get('addforum') || request()->get('addcategory')) {
+    $mode = request()->get('addforum') ? 'addforum' : 'addcat';
 
-    if (isset($_POST['addforum'], $_POST['forumname']) && $mode == 'addforum' && is_array($_POST['addforum'])) {
-        $req_cat_id = array_keys($_POST['addforum']);
+    $addforum = request()->post->all('addforum');
+    $forumname_arr = request()->post->all('forumname');
+    if ($addforum && $forumname_arr && $mode == 'addforum' && is_array($addforum)) {
+        $req_cat_id = array_keys($addforum);
         $cat_id = reset($req_cat_id);
-        $forumname = stripslashes($_POST['forumname'][$cat_id]);
+        $forumname = stripslashes($forumname_arr[$cat_id]);
     }
 }
 
@@ -74,7 +77,7 @@ if ($mode) {
                 $newmode = 'modforum';
                 $buttonvalue = __('UPDATE');
 
-                $forum_id = (int)$_GET[POST_FORUM_URL];
+                $forum_id = (int)request()->query->get(POST_FORUM_URL, 0);
 
                 $row = get_info('forum', $forum_id);
 
@@ -109,14 +112,14 @@ if ($mode) {
                 $self_moderated = 0;
             }
 
-            if (isset($_REQUEST['forum_parent'])) {
-                $forum_parent = (int)$_REQUEST['forum_parent'];
+            if (request()->get('forum_parent') !== null) {
+                $forum_parent = (int)request()->get('forum_parent');
 
                 if ($parent = get_forum_data($forum_parent, $cat_forums)) {
                     $cat_id = $parent['cat_id'];
                 }
-            } elseif (isset($_REQUEST[POST_CAT_URL])) {
-                $cat_id = (int)$_REQUEST[POST_CAT_URL];
+            } elseif (request()->get(POST_CAT_URL) !== null) {
+                $cat_id = (int)request()->get(POST_CAT_URL);
             }
 
             $catlist = get_list('category', $cat_id, true);
@@ -133,7 +136,7 @@ if ($mode) {
             $s_hidden_fields = '<input type="hidden" name="mode" value="' . $newmode . '" /><input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '" />';
 
             $s_parent = '<option value="-1">&nbsp;' . __('SF_NO_PARENT') . '</option>\n';
-            $sel_forum = ($forum_parent && !isset($_REQUEST['forum_parent'])) ? $forum_id : $forum_parent;
+            $sel_forum = ($forum_parent && request()->get('forum_parent') === null) ? $forum_id : $forum_parent;
             $s_parent .= sf_get_list('forum', $cat_forums, $forum_parent, $forum_id, $sel_forum);
 
             template()->assign_vars(array(
@@ -168,23 +171,23 @@ if ($mode) {
             //
             // Create a forum in the DB
             //
-            $cat_id = (int)$_POST[POST_CAT_URL];
-            $forum_name = (string)$_POST['forumname'];
-            $forum_desc = (string)$_POST['forumdesc'];
-            $forum_status = (int)$_POST['forumstatus'];
+            $cat_id = (int)request()->post->get(POST_CAT_URL, 0);
+            $forum_name = (string)request()->post->get('forumname', '');
+            $forum_desc = (string)request()->post->get('forumdesc', '');
+            $forum_status = (int)request()->post->get('forumstatus', 0);
 
-            $prune_days = (int)$_POST['prune_days'];
+            $prune_days = (int)request()->post->get('prune_days', 0);
 
-            $forum_parent = ($_POST['forum_parent'] != -1) ? (int)$_POST['forum_parent'] : 0;
-            $show_on_index = $forum_parent ? (int)$_POST['show_on_index'] : 1;
+            $forum_parent = (request()->post->get('forum_parent', -1) != -1) ? (int)request()->post->get('forum_parent', -1) : 0;
+            $show_on_index = $forum_parent ? (int)request()->post->get('show_on_index', 0) : 1;
 
-            $forum_display_sort = (int)$_POST['forum_display_sort'];
-            $forum_display_order = (int)$_POST['forum_display_order'];
+            $forum_display_sort = (int)request()->post->get('forum_display_sort', 0);
+            $forum_display_order = (int)request()->post->get('forum_display_order', 0);
 
-            $forum_tpl_id = (int)$_POST['forum_tpl_select'];
-            $allow_reg_tracker = (int)$_POST['allow_reg_tracker'];
-            $allow_porno_topic = (int)$_POST['allow_porno_topic'];
-            $self_moderated = (int)$_POST['self_moderated'];
+            $forum_tpl_id = (int)request()->post->get('forum_tpl_select', 0);
+            $allow_reg_tracker = (int)request()->post->get('allow_reg_tracker', 0);
+            $allow_porno_topic = (int)request()->post->get('allow_porno_topic', 0);
+            $self_moderated = (int)request()->post->get('self_moderated', 0);
 
             if (!$forum_name) {
                 bb_die('Can not create a forum without a name');
@@ -231,22 +234,22 @@ if ($mode) {
             //
             // Modify a forum in the DB
             //
-            $cat_id = (int)$_POST[POST_CAT_URL];
-            $forum_id = (int)$_POST[POST_FORUM_URL];
-            $forum_name = (string)$_POST['forumname'];
-            $forum_desc = (string)$_POST['forumdesc'];
-            $forum_status = (int)$_POST['forumstatus'];
-            $prune_days = (int)$_POST['prune_days'];
+            $cat_id = (int)request()->post->get(POST_CAT_URL, 0);
+            $forum_id = (int)request()->post->get(POST_FORUM_URL, 0);
+            $forum_name = (string)request()->post->get('forumname', '');
+            $forum_desc = (string)request()->post->get('forumdesc', '');
+            $forum_status = (int)request()->post->get('forumstatus', 0);
+            $prune_days = (int)request()->post->get('prune_days', 0);
 
-            $forum_parent = ($_POST['forum_parent'] != -1) ? (int)$_POST['forum_parent'] : 0;
-            $show_on_index = $forum_parent ? (int)$_POST['show_on_index'] : 1;
+            $forum_parent = (request()->post->get('forum_parent', -1) != -1) ? (int)request()->post->get('forum_parent', -1) : 0;
+            $show_on_index = $forum_parent ? (int)request()->post->get('show_on_index', 0) : 1;
 
-            $forum_display_order = (int)$_POST['forum_display_order'];
-            $forum_display_sort = (int)$_POST['forum_display_sort'];
-            $forum_tpl_id = (int)$_POST['forum_tpl_select'];
-            $allow_reg_tracker = (int)$_POST['allow_reg_tracker'];
-            $allow_porno_topic = (int)$_POST['allow_porno_topic'];
-            $self_moderated = (int)$_POST['self_moderated'];
+            $forum_display_order = (int)request()->post->get('forum_display_order', 0);
+            $forum_display_sort = (int)request()->post->get('forum_display_sort', 0);
+            $forum_tpl_id = (int)request()->post->get('forum_tpl_select', 0);
+            $allow_reg_tracker = (int)request()->post->get('allow_reg_tracker', 0);
+            $allow_porno_topic = (int)request()->post->get('allow_porno_topic', 0);
+            $self_moderated = (int)request()->post->get('self_moderated', 0);
 
             $forum_data = get_forum_data($forum_id, $cat_forums);
             $old_cat_id = $forum_data['cat_id'];
@@ -321,7 +324,7 @@ if ($mode) {
             //
             // Create a category in the DB
             //
-            if (!$new_cat_title = trim($_POST['categoryname'])) {
+            if (!$new_cat_title = trim(request()->post->get('categoryname', ''))) {
                 bb_die(__('CATEGORY_NAME_EMPTY'));
             }
 
@@ -347,7 +350,7 @@ if ($mode) {
             //
             // Show form to edit a category
             //
-            $cat_id = (int)$_GET[POST_CAT_URL];
+            $cat_id = (int)request()->query->get(POST_CAT_URL, 0);
             $cat_info = get_info('category', $cat_id);
 
             $hidden_fields = array(
@@ -369,11 +372,11 @@ if ($mode) {
             //
             // Modify a category in the DB
             //
-            if (!$new_cat_title = trim($_POST['cat_title'])) {
+            if (!$new_cat_title = trim(request()->post->get('cat_title', ''))) {
                 bb_die(__('CATEGORY_NAME_EMPTY'));
             }
 
-            $cat_id = (int)$_POST[POST_CAT_URL];
+            $cat_id = (int)request()->post->get(POST_CAT_URL, 0);
 
             $row = get_info('category', $cat_id);
             $cur_cat_title = $row['cat_title'];
@@ -401,7 +404,7 @@ if ($mode) {
             //
             // Show form to delete a forum
             //
-            $forum_id = (int)$_GET[POST_FORUM_URL];
+            $forum_id = (int)request()->query->get(POST_FORUM_URL, 0);
 
             $move_to_options = '<option value="-1">' . __('DELETE_ALL_POSTS') . '</option>';
             $move_to_options .= sf_get_list('forum', $cat_forums, $forum_parent, $forum_id, 0);
@@ -432,8 +435,8 @@ if ($mode) {
             //
             // Move or delete a forum in the DB
             //
-            $from_id = (int)$_POST['from_id'];
-            $to_id = (int)$_POST['to_id'];
+            $from_id = (int)request()->post->get('from_id', 0);
+            $to_id = (int)request()->post->get('to_id', 0);
 
             if ($to_id == -1) {
                 // Delete everything from forum
@@ -486,7 +489,7 @@ if ($mode) {
 
         case 'deletecat':
             // Show form to delete a category
-            $cat_id = (int)$_GET[POST_CAT_URL];
+            $cat_id = (int)request()->query->get(POST_CAT_URL, 0);
             $catinfo = get_info('category', $cat_id);
             $categories_count = $catinfo['number'];
 
@@ -522,8 +525,8 @@ if ($mode) {
 
         case 'movedelcat':
             // Move or delete a category in the DB
-            $from_id = (int)$_POST['from_id'];
-            $to_id = (int)$_POST['to_id'] ?? -1;
+            $from_id = (int)request()->post->get('from_id', 0);
+            $to_id = (int)request()->post->get('to_id', -1);
 
             if ($to_id === -1) {
                 bb_die(__('NOWHERE_TO_MOVE'));
@@ -559,8 +562,8 @@ if ($mode) {
 
         case 'forum_order':
             // Change order of forums
-            $move = (int)$_GET['move'];
-            $forum_id = (int)$_GET[POST_FORUM_URL];
+            $move = (int)request()->query->get('move', 0);
+            $forum_id = (int)request()->query->get(POST_FORUM_URL, 0);
 
             $forum_info = get_info('forum', $forum_id);
             renumber_order('forum', $forum_info['cat_id']);
@@ -633,8 +636,8 @@ if ($mode) {
             break;
 
         case 'cat_order':
-            $move = (int)$_GET['move'];
-            $cat_id = (int)$_GET[POST_CAT_URL];
+            $move = (int)request()->query->get('move', 0);
+            $cat_id = (int)request()->query->get(POST_CAT_URL, 0);
 
             DB()->query('
 				UPDATE ' . BB_CATEGORIES . " SET
@@ -650,7 +653,7 @@ if ($mode) {
             break;
 
         case 'forum_sync':
-            \TorrentPier\Legacy\Admin\Common::sync('forum', (int)$_GET[POST_FORUM_URL]);
+            \TorrentPier\Legacy\Admin\Common::sync('forum', (int)request()->query->get(POST_FORUM_URL, 0));
             forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
@@ -681,7 +684,8 @@ if (!$mode || $show_main_page) {
 
         $where_cat_sql = $req_cat_id = '';
 
-        if ($c =& $_REQUEST[POST_CAT_URL]) {
+        $c = request()->get(POST_CAT_URL);
+        if ($c !== null) {
             if ($c !== 'all') {
                 $req_cat_id = (int)$c;
                 $where_cat_sql = "WHERE cat_id = $req_cat_id";

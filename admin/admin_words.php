@@ -18,18 +18,17 @@ if (!config()->get('use_word_censor')) {
     bb_die('Word censor disabled <br /><br /> (use_word_censor in config.php)');
 }
 
-$mode = request_var('mode', '');
-$mode = htmlspecialchars($mode);
+$mode = htmlspecialchars(request()->getString('mode'));
 
-if (isset($_POST['add'])) {
+if (request()->has('add')) {
     $mode = 'add';
-} elseif (isset($_POST['save'])) {
+} elseif (request()->has('save')) {
     $mode = 'save';
 }
 
 if ($mode != '') {
     if ($mode == 'edit' || $mode == 'add') {
-        $word_id = (int)request_var('id', 0);
+        $word_id = request()->getInt('id');
 
         $s_hidden_fields = $word = $replacement = '';
 
@@ -57,9 +56,9 @@ if ($mode != '') {
             'S_HIDDEN_FIELDS' => $s_hidden_fields,
         ]);
     } elseif ($mode == 'save') {
-        $word_id = (int)request_var('id', 0);
-        $word = trim(request_var('word', ''));
-        $replacement = trim(request_var('replacement', ''));
+        $word_id = request()->getInt('id');
+        $word = trim(request()->getString('word'));
+        $replacement = trim(request()->getString('replacement'));
 
         if ($word == '' || $replacement == '') {
             bb_die(__('MUST_ENTER_WORD'));
@@ -86,7 +85,7 @@ if ($mode != '') {
 
         bb_die($message);
     } elseif ($mode == 'delete') {
-        $word_id = (int)request_var('id', 0);
+        $word_id = request()->getInt('id');
 
         if ($word_id) {
             $sql = 'DELETE FROM ' . BB_WORDS . " WHERE word_id = $word_id";

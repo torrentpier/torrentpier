@@ -35,15 +35,15 @@ $date_format = 'j-M-y';
 $row_class_1 = 'row1';
 $row_class_2 = 'row2';
 
-$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
+$start = request()->get('start') ? abs(request()->getInt('start')) : 0;
 
-$set_default = isset($_GET['def']);
+$set_default = request()->query->has('def');
 $user_id = userdata('user_id');
 $lastvisit = (!IS_GUEST) ? userdata('user_lastvisit') : '';
-$search_id = (isset($_GET['search_id']) && verify_id($_GET['search_id'], SEARCH_ID_LENGTH)) ? $_GET['search_id'] : '';
+$search_id = (request()->query->has('search_id') && verify_id(request()->query->get('search_id'), SEARCH_ID_LENGTH)) ? request()->query->get('search_id') : '';
 $session_id = userdata('session_id');
 
-$status = (isset($_POST['status']) && is_array($_POST['status'])) ? $_POST['status'] : [];
+$status = (request()->post->has('status') && is_array(request()->post->get('status'))) ? request()->post->get('status') : [];
 
 $cat_forum = $tor_to_show = $search_in_forums_ary = [];
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';
@@ -279,12 +279,12 @@ foreach ($GPC as $name => $params) {
     $$valVar = $params[DEF_VAL];
 }
 
-if (isset($_GET[$user_releases_key])) {
+if (request()->query->has($user_releases_key)) {
     // Search releases by user
-    $_GET[$poster_id_key] = (int)$_GET[$user_releases_key];
-    $_REQUEST[$forum_key] = $search_all;
-} elseif (!empty($_REQUEST['max'])) {
-    $_REQUEST[$forum_key] = $search_all;
+    request()->query->set($poster_id_key, request()->query->getInt($user_releases_key));
+    request()->post->set($forum_key, $search_all);
+} elseif (request()->get('max')) {
+    request()->post->set($forum_key, $search_all);
 } else {
     // Get "checkbox" and "select" vars (previous_settings not loaded yet, using defaults)
     foreach ($GPC as $name => $params) {
@@ -299,7 +299,7 @@ if (isset($_GET[$user_releases_key])) {
 }
 
 // Random release
-if (config()->get('tracker.random_release_button') && isset($_GET['random_release'])) {
+if (config()->get('tracker.random_release_button') && request()->query->has('random_release')) {
     if ($random_release = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE tor_status NOT IN(" . implode(', ', array_keys(config()->get('tor_frozen'))) . ") ORDER BY RAND() LIMIT 1")) {
         redirect(TOPIC_URL . $random_release['topic_id']);
     } else {
@@ -358,13 +358,13 @@ if (!$set_default) {
     // Get requested cat_id
     $search_in_forums_fary = [];
 
-    if ($req_cat_id =& $_REQUEST[$cat_key]) {
+    if ($req_cat_id = request()->get($cat_key)) {
         if (isset($cat_forum['c'][$req_cat_id])) {
             $valid_forums = $cat_forum['c'][$req_cat_id];
             $forum_val = implode(',', $valid_forums);
         }
     } // Get requested forum_id(s)
-    elseif ($req_forums =& $_REQUEST[$forum_key]) {
+    elseif ($req_forums = request()->get($forum_key)) {
         if ($req_forums != $search_all) {
             $clean_forums = [];
             if (is_array($req_forums)) {
@@ -393,10 +393,10 @@ if (!$set_default) {
     if (!$my_val) {
         $req_poster_id = '';
 
-        if (isset($_GET[$poster_id_key]) && !$search_id) {
-            $req_poster_id = (int)$_GET[$poster_id_key];
-        } elseif (isset($_POST[$poster_name_key]) && !$search_id) {
-            if ($req_poster_name = clean_username($_POST[$poster_name_key])) {
+        if (request()->query->has($poster_id_key) && !$search_id) {
+            $req_poster_id = request()->query->getInt($poster_id_key);
+        } elseif (request()->post->has($poster_name_key) && !$search_id) {
+            if ($req_poster_name = clean_username(request()->post->get($poster_name_key))) {
                 $poster_name_sql = str_replace("\\'", "''", $req_poster_name);
 
                 if ($poster_id = get_user_id($poster_name_sql)) {
@@ -423,11 +423,11 @@ if (!$set_default) {
         }
     }
 
-    if (isset($_REQUEST[$hash_key])) {
-        hash_search($_REQUEST[$hash_key]);
+    if (request()->has($hash_key)) {
+        hash_search(request()->get($hash_key));
     }
 
-    if (($tm =& $_REQUEST[$title_match_key]) && is_string($tm)) {
+    if (($tm = request()->get($title_match_key)) && is_string($tm)) {
         if ($tmp = mb_substr(trim($tm), 0, $title_match_max_len)) {
             $title_match_val = $tmp;
             $title_match_sql = clean_text_match($title_match_val, true, false);

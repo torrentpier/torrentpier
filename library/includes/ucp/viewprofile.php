@@ -19,14 +19,12 @@ datastore()->enqueue([
 ]);
 
 if (IS_GUEST) {
-    redirect(LOGIN_URL . "?redirect={$_SERVER['REQUEST_URI']}");
-} else {
-    if (empty($_GET[POST_USERS_URL])) {
-        $_GET[POST_USERS_URL] = userdata('user_id');
-    }
+    redirect(LOGIN_URL . "?redirect=" . request()->server->get('REQUEST_URI'));
 }
 
-if (!$profiledata = get_userdata($_GET[POST_USERS_URL], profile_view: true)) {
+$user_id = request()->query->get(POST_USERS_URL) ?: userdata('user_id');
+
+if (!$profiledata = get_userdata($user_id, profile_view: true)) {
     bb_die(__('NO_USER_ID_SPECIFIED'));
 }
 

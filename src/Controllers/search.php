@@ -24,26 +24,26 @@ user()->session_start(array('req_login' => config()->get('disable_search_for_gue
 
 set_die_append_msg();
 
-if (isset($_POST['del_my_post'])) {
+if (request()->post->has('del_my_post')) {
     template()->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="#" onclick="window.close(); window.opener.focus();">' . __('GOTO_MY_MESSAGE') . '</a>
 		<br /><br />
 		<a href="index.php">' . __('INDEX_RETURN') . '</a>
 	');
 
-    if (empty($_POST['topic_id_list']) or !$topic_csv = get_id_csv($_POST['topic_id_list'])) {
+    if (empty(request()->post->get('topic_id_list')) or !$topic_csv = get_id_csv(request()->post->get('topic_id_list'))) {
         bb_die(__('NONE_SELECTED'));
     }
 
     DB()->query("UPDATE " . BB_POSTS . " SET user_post = 0 WHERE poster_id = " . user()->id . " AND topic_id IN($topic_csv)");
 
     if (DB()->affected_rows()) {
-        //bb_die('Выбранные темы ['. count($_POST['topic_id_list']) .' шт.] удалены из списка "Мои сообщения"');
+        //bb_die('Выбранные темы ['. count(request()->post->get('topic_id_list')) .' шт.] удалены из списка "Мои сообщения"');
         bb_die(__('DEL_MY_MESSAGE'));
     } else {
         bb_die(__('NO_TOPICS_MY_MESSAGE'));
     }
-} elseif (isset($_POST['add_my_post'])) {
+} elseif (request()->post->has('add_my_post')) {
     template()->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="#" onclick="window.close(); window.opener.focus();">' . __('GOTO_MY_MESSAGE') . '</a>
 		<br /><br />
@@ -59,10 +59,10 @@ if (isset($_POST['del_my_post'])) {
     redirect("search?" . POST_USERS_URL . "=" . user()->id);
 }
 
-if ($mode =& $_REQUEST['mode']) {
+if ($mode = request()->get('mode')) {
     // This handles the simple windowed user search functions called from various other scripts
     if ($mode == 'searchuser') {
-        $username = $_POST['search_username'] ?? '';
+        $username = request()->post->get('search_username') ?? '';
         username_search($username);
         exit;
     }
@@ -76,13 +76,13 @@ $max_forum_name_len = 60;   // inside forum select box
 $text_match_max_len = 60;
 $poster_name_max_len = 25;
 
-$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
+$start = request()->has('start') ? abs(request()->getInt('start')) : 0;
 $url = 'search';
 
 $anon_id = GUEST_UID;
 $user_id = userdata('user_id');
 $lastvisit = IS_GUEST ? TIMENOW : userdata('user_lastvisit');
-$search_id = (isset($_GET['id']) && verify_id($_GET['id'], SEARCH_ID_LENGTH)) ? $_GET['id'] : '';
+$search_id = (request()->query->has('id') && verify_id(request()->query->get('id'), SEARCH_ID_LENGTH)) ? request()->query->get('id') : '';
 $session_id = userdata('session_id');
 
 $items_found = $items_display = $previous_settings = null;
@@ -259,7 +259,7 @@ $GPC = array(
 $params = new SearchParams($GPC);
 
 // Output basic page
-if (empty($_GET) && empty($_POST)) {
+if (empty(request()->query->all()) && empty(request()->post->all())) {
     // Make forum select box
     $forum_select_mode = explode(',', $excluded_forums_csv);
     $forum_select = get_forum_select($forum_select_mode, $params->key('forum') . '[]', $search_all, $max_forum_name_len, $forum_select_size, 'style="width: 95%;"', $search_all);
@@ -339,13 +339,13 @@ $egosearch = false;
 
 if (!$items_found) {
     // For compatibility with old-style params
-    if (isset($_REQUEST['search_id'])) {
-        switch ($_REQUEST['search_id']) {
+    if (request()->has('search_id')) {
+        switch (request()->get('search_id')) {
             case 'egosearch':
                 $egosearch = true;
                 $params->setVal('display_as', $as_topics);
-                if (empty($_REQUEST[$params->key('poster_id')])) {
-                    $_REQUEST[$params->key('poster_id')] = $user_id;
+                if (empty(request()->get($params->key('poster_id')))) {
+                    $params->setVal('poster_id', $user_id);
                 }
                 break;
             case 'newposts':
@@ -356,7 +356,7 @@ if (!$items_found) {
 
     // Forum
     $forum_selected = [];
-    if ($var =& $_REQUEST[$params->key('forum')]) {
+    if ($var = request()->get($params->key('forum'))) {
         $forum_selected = get_id_ary($var);
 
         if (!in_array($search_all, $forum_selected)) {
@@ -365,18 +365,18 @@ if (!$items_found) {
     }
 
     // Topic
-    if ($var =& $_REQUEST[$params->key('topic')]) {
+    if ($var = request()->get($params->key('topic'))) {
         $params->setVal('topic', implode(',', get_id_ary($var)));
     }
 
     // Poster id (from requested name or id)
-    if ($var = request_var($params->key('poster_id'), 0)) {
-        $params->setVal('poster_id', (int)$var);
+    if ($var = request()->getInt($params->key('poster_id'))) {
+        $params->setVal('poster_id', $var);
 
         if ($params->val('poster_id') != $user_id && !get_username($params->val('poster_id'))) {
             bb_die(__('USER_NOT_EXIST'));
         }
-    } elseif ($var =& $_POST[$params->key('poster_name')]) {
+    } elseif ($var = request()->post->get($params->key('poster_name'))) {
         $poster_name_sql = str_replace("\\'", "''", clean_username($var));
 
         if (!$poster_id_val = get_user_id($poster_name_sql)) {
@@ -386,7 +386,7 @@ if (!$items_found) {
     }
 
     // Search words
-    if ($var =& $_REQUEST[$params->key('text_match')]) {
+    if ($var = request()->get($params->key('text_match'))) {
         if ($tmp = mb_substr(trim($var), 0, $text_match_max_len)) {
             $params->setVal('text_match', $tmp);
             $text_match_sql = clean_text_match($params->val('text_match'), $params->val('all_words'), true);
@@ -413,13 +413,13 @@ $dl_status_csv = implode(',', $dl_status);
 $dl_search = ($dl_status && !IS_GUEST);
 $new_posts = ($params->val('new') && !IS_GUEST);
 $prev_days = ($params->val('time') != $search_all);
-$new_topics = (!IS_GUEST && ($params->val('new_topics') || isset($_GET['newposts'])));
+$new_topics = (!IS_GUEST && ($params->val('new_topics') || request()->query->has('newposts')));
 $my_topics = ($params->val('poster_id') && $params->val('my_topics'));
 $my_posts = ($params->val('poster_id') && !$params->val('my_topics'));
 $title_match = ($text_match_sql && ($params->val('title_only') || config()->get('disable_ft_search_in_posts')));
 
 // "Display as" mode (posts or topics)
-$post_mode = (!$dl_search && ($params->val('display_as') == $as_posts || isset($_GET['search_author'])));
+$post_mode = (!$dl_search && ($params->val('display_as') == $as_posts || request()->query->has('search_author')));
 
 // Start building SQL
 $SQL = DB()->get_empty_sql_array();
@@ -942,7 +942,7 @@ function username_search($search_match)
         }
     }
 
-    $input_name = isset($_REQUEST['input_name']) ? htmlCHR($_REQUEST['input_name']) : 'username';
+    $input_name = request()->has('input_name') ? htmlCHR(request()->get('input_name')) : 'username';
 
     template()->assign_vars(array(
         'TPL_SEARCH_USERNAME' => true,

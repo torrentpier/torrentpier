@@ -15,7 +15,7 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-$mode = $_GET['mode'] ?? '';
+$mode = request()->query->get('mode', '');
 
 $return_links = [
     'index' => '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'),
@@ -35,9 +35,9 @@ if (!$result = DB()->sql_query($sql)) {
         $config_value = $row['config_value'];
         $default_config[$config_name] = $config_value;
 
-        $new[$config_name] = $_POST[$config_name] ?? $default_config[$config_name];
+        $new[$config_name] = request()->post->get($config_name, $default_config[$config_name]);
 
-        if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name]) {
+        if (request()->post->get('submit') !== null && $row['config_value'] != $new[$config_name]) {
             if ($config_name == 'seed_bonus_points' ||
                 $config_name == 'seed_bonus_release' ||
                 $config_name == 'bonus_upload' ||
@@ -49,7 +49,7 @@ if (!$result = DB()->sql_query($sql)) {
         }
     }
 
-    if (isset($_POST['submit'])) {
+    if (request()->post->get('submit') !== null) {
         bb_die(__('CONFIG_UPDATED') . $return_links[$mode] . $return_links['index']);
     }
 }

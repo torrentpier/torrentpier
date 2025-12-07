@@ -38,10 +38,10 @@ $last_session_id = (int)$last_session_data['rebuild_session_id'];
 $max_post_id = get_latest_post_id();
 $start_time = TIMENOW;
 
-$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
+$mode = request()->getString('mode');
 
 // check if the user has choosen to stop processing
-if (isset($_REQUEST['cancel_button'])) {
+if (request()->has('cancel_button')) {
     // update the rebuild_status
     if ($last_session_id) {
         DB()->query('
@@ -55,13 +55,13 @@ if (isset($_REQUEST['cancel_button'])) {
 }
 
 // from which post to start processing
-$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
+$start = abs(request()->getInt('start'));
 
 // get the total number of posts in the db
 $total_posts = get_total_posts();
 
 // clear the search tables and clear mode (delete or truncate)
-$clear_search = isset($_REQUEST['clear_search']) ? (int)$_REQUEST['clear_search'] : 0;
+$clear_search = request()->getInt('clear_search');
 
 // get the number of total/session posts already processed
 $total_posts_processed = ($start != 0) ? get_total_posts('before', $last_session_data['end_post_id']) : 0;
@@ -71,7 +71,7 @@ $session_posts_processed = ($mode == 'refresh') ? get_processed_posts('session',
 $total_posts_processing = $total_posts - $total_posts_processed;
 
 // how many posts to process in this session
-$session_posts_processing = isset($_REQUEST['session_posts_processing']) ? (int)$_REQUEST['session_posts_processing'] : null;
+$session_posts_processing = request()->has('session_posts_processing') ? request()->getInt('session_posts_processing') : null;
 if (null !== $session_posts_processing) {
     if ($mode == 'submit') {
         // check if we passed over total_posts just after submitting
@@ -87,7 +87,7 @@ if (null !== $session_posts_processing) {
 }
 
 // how many posts to process per cycle
-$post_limit = isset($_REQUEST['post_limit']) ? (int)$_REQUEST['post_limit'] : $def_post_limit;
+$post_limit = request()->getInt('post_limit', $def_post_limit);
 
 // correct the post_limit when we pass over it
 if ($session_posts_processed + $post_limit > $session_posts_processing) {
@@ -95,16 +95,17 @@ if ($session_posts_processed + $post_limit > $session_posts_processing) {
 }
 
 // how much time to wait per cycle
-if (isset($_REQUEST['time_limit'])) {
-    $time_limit = (int)$_REQUEST['time_limit'];
+if (request()->has('time_limit')) {
+    $time_limit = request()->getInt('time_limit');
 } else {
     $time_limit = $def_time_limit;
     $time_limit_explain = __('TIME_LIMIT_EXPLAIN');
 
     // check for webserver timeout (IE returns null)
-    if (isset($_SERVER['HTTP_KEEP_ALIVE'])) {
+    $webserver_keep_alive = request()->server->get('HTTP_KEEP_ALIVE');
+    if ($webserver_keep_alive !== null) {
         // get webserver timeout
-        $webserver_timeout = (int)$_SERVER['HTTP_KEEP_ALIVE'];
+        $webserver_timeout = (int)$webserver_keep_alive;
         $time_limit_explain .= '<br />' . sprintf(__('TIME_LIMIT_EXPLAIN_WEBSERVER'), $webserver_timeout);
 
         if ($time_limit > $webserver_timeout) {
@@ -114,7 +115,7 @@ if (isset($_REQUEST['time_limit'])) {
 }
 
 // how much time to wait between page refreshes
-$refresh_rate = isset($_REQUEST['refresh_rate']) ? (int)$_REQUEST['refresh_rate'] : $def_refresh_rate;
+$refresh_rate = request()->getInt('refresh_rate', $def_refresh_rate);
 
 // check if the user gave wrong input
 if ($mode == 'submit') {

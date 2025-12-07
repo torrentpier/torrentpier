@@ -16,8 +16,8 @@ require __DIR__ . '/pagestart.php';
 
 $message = '';
 
-if (isset($_POST['add_name'])) {
-    $disallowed_user = isset($_POST['disallowed_user']) ? trim($_POST['disallowed_user']) : trim($_GET['disallowed_user']);
+if (request()->post->has('add_name')) {
+    $disallowed_user = trim(request()->get('disallowed_user', ''));
 
     if ($disallowed_user == '') {
         bb_die(__('FIELDS_EMPTY'));
@@ -36,8 +36,8 @@ if (isset($_POST['add_name'])) {
     $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_DISALLOWADMIN'), '<a href="admin_disallow.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
     bb_die($message);
-} elseif (isset($_POST['delete_name'])) {
-    $disallowed_id = isset($_POST['disallowed_id']) ? (int)$_POST['disallowed_id'] : (int)$_GET['disallowed_id'];
+} elseif (request()->post->has('delete_name')) {
+    $disallowed_id = request()->getInt('disallowed_id');
 
     if (!empty($disallowed_id)) {
         $sql = 'DELETE FROM ' . BB_DISALLOW . " WHERE disallow_id = $disallowed_id";

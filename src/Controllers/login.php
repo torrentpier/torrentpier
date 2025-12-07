@@ -11,10 +11,8 @@ define('IN_LOGIN', true);
 
 page_cfg('allow_robots', false);
 
-array_deep($_POST, 'trim');
-
 // Logout
-if (!empty($_GET['logout'])) {
+if (request()->getBool('logout')) {
     if (!IS_GUEST) {
         user()->session_end();
     }
@@ -25,15 +23,16 @@ $redirect_url = 'index.php';
 $login_errors = [];
 
 // Requested redirect
-if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $_SERVER['QUERY_STRING'], $matches)) {
+$queryString = request()->getQueryString() ?? '';
+if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $queryString, $matches)) {
     $redirect_url = $matches[1];
 
     if (!str_contains($redirect_url, '?') && $first_amp = strpos($redirect_url, '&')) {
         $redirect_url[$first_amp] = '?';
     }
-} elseif (!empty($_POST['redirect'])) {
-    $redirect_url = str_replace('&amp;', '&', htmlspecialchars($_POST['redirect']));
-} elseif (!empty($_SERVER['HTTP_REFERER']) && ($parts = @parse_url($_SERVER['HTTP_REFERER']))) {
+} elseif ($postRedirect = request()->post->get('redirect')) {
+    $redirect_url = str_replace('&amp;', '&', htmlspecialchars($postRedirect));
+} elseif (($referer = request()->getReferer()) && ($parts = @parse_url($referer))) {
     $redirect_url = ($parts['path'] ?? 'index.php') . (isset($parts['query']) ? '?' . $parts['query'] : '');
 }
 
@@ -45,15 +44,15 @@ if (!$redirect_url || str_contains(urldecode($redirect_url), "\n") || str_contai
 
 $redirect_url = str_replace("&sid=" . user()->data['session_id'], '', $redirect_url);
 
-if (isset($_REQUEST['admin']) && !IS_AM) {
+if (request()->has('admin') && !IS_AM) {
     bb_die(__('NOT_ADMIN'));
 }
 
 $mod_admin_login = (IS_AM && !userdata('session_admin'));
 
 // login username & password
-$login_username = ($mod_admin_login) ? userdata('username') : ($_POST['login_username'] ?? '');
-$login_password = $_POST['login_password'] ?? '';
+$login_username = ($mod_admin_login) ? userdata('username') : request()->post->get('login_username', '');
+$login_password = request()->post->get('login_password', '');
 
 // Checking for incorrect login/password combination
 $need_captcha = false;
@@ -65,7 +64,7 @@ if (!$mod_admin_login) {
 }
 
 // login
-if (isset($_POST['login'])) {
+if (request()->post->has('login')) {
     if (!$mod_admin_login) {
         if (!IS_GUEST) {
             redirect('index.php');
@@ -81,7 +80,7 @@ if (isset($_POST['login'])) {
     }
 
     if (!$login_errors) {
-        if (user()->login($_POST, $mod_admin_login)) {
+        if (user()->login(request()->post->all(), $mod_admin_login)) {
             $redirect_url = (defined('FIRST_LOGON')) ? config()->get('first_logon_redirect_url') : $redirect_url;
             // Reset when entering the correct login/password combination
             CACHE('bb_login_err')->rm('l_err_' . USER_IP);

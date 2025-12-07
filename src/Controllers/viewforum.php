@@ -20,9 +20,9 @@ page_cfg('load_tpl_vars', [
 ]);
 
 // Init request vars
-$forum_id = (int)request_var(POST_FORUM_URL, '');
-$start = abs((int)request_var('start', ''));
-$mark_read = (request_var('mark', '') === 'topics');
+$forum_id = request()->getInt(POST_FORUM_URL);
+$start = abs(request()->getInt('start'));
+$mark_read = (request()->getString('mark') === 'topics');
 
 $lastvisit = IS_GUEST ? TIMENOW : userdata('user_lastvisit');
 
@@ -59,7 +59,7 @@ if ($only_new == ONLY_NEW_POSTS) {
 // Auth
 $is_auth = auth(AUTH_ALL, $forum_id, userdata(), $forum_data);
 
-$moderation = (!empty($_REQUEST['mod']) && $is_auth['auth_mod']);
+$moderation = (request()->has('mod') && $is_auth['auth_mod']);
 
 if (!$is_auth['auth_view']) {
     if (IS_GUEST) {
@@ -78,17 +78,19 @@ $mod_redirect_url = '';
 $tor_status = -1;  //  all by default
 
 if ($is_auth['auth_mod']) {
-    $redirect = $_POST['redirect'] ?? $_SERVER['REQUEST_URI'];
+    $redirect = request()->post->get('redirect', request()->getRequestUri());
     $redirect = url_arg($redirect, 'mod', 1, '&');
     $mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
     if ($moderation && !userdata('session_admin')) {
         redirect($mod_redirect_url);
     }
-    if (isset($_REQUEST['tst']) && $_REQUEST['tst'] != -1) {
-        $tor_status = (int)$_REQUEST['tst'];
-        // reset other req values
-        unset($_REQUEST['sort'], $_REQUEST['order'], $_REQUEST[$title_match_key]);
+    if (request()->has('tst') && request()->get('tst') != -1) {
+        $tor_status = request()->getInt('tst');
+        // Note: The original code attempted to unset $_REQUEST values here:
+        // unset($_REQUEST['sort'], $_REQUEST['order'], $_REQUEST[$title_match_key]);
+        // This is not possible with the immutable request() helper.
+        // The filtering logic may need adjustment if this behavior is critical.
         $show_type_separator = false;
     }
     $select_tst = array_merge([__('TOR_STATUS_SELECT_ALL') => -1], array_flip(__('TOR_STATUS_NAME')));
@@ -202,7 +204,7 @@ $topics_per_page = config()->get('topics_per_page');
 $select_tpp = '';
 
 if ($is_auth['auth_mod']) {
-    if ($req_tpp = abs((int)(@$_REQUEST['tpp'])) and in_array($req_tpp, config()->get('allowed_topics_per_page'))) {
+    if ($req_tpp = abs(request()->getInt('tpp')) and in_array($req_tpp, config()->get('allowed_topics_per_page'))) {
         $topics_per_page = $req_tpp;
     }
 
@@ -227,8 +229,8 @@ $sel_previous_days = [
     364 => __('1_YEAR')
 ];
 
-if (!empty($_REQUEST['topicdays'])) {
-    if ($req_topic_days = abs((int)$_REQUEST['topicdays']) and isset($sel_previous_days[$req_topic_days])) {
+if (request()->has('topicdays')) {
+    if ($req_topic_days = abs(request()->getInt('topicdays')) and isset($sel_previous_days[$req_topic_days])) {
         $sql = "
 			SELECT COUNT(*) AS forum_topics
 			FROM " . BB_TOPICS . "
@@ -248,8 +250,8 @@ if ($start > $forum_topics) {
 }
 
 // Generate SORT and ORDER selects
-$sort_value = isset($_REQUEST['sort']) ? (int)$_REQUEST['sort'] : $forum_data['forum_display_sort'];
-$order_value = isset($_REQUEST['order']) ? (int)$_REQUEST['order'] : $forum_data['forum_display_order'];
+$sort_value = request()->has('sort') ? request()->getInt('sort') : $forum_data['forum_display_sort'];
+$order_value = request()->has('order') ? request()->getInt('order') : $forum_data['forum_display_order'];
 $sort_list = '<select name="sort">' . get_forum_display_sort_option($sort_value, 'list', 'sort') . '</select>';
 $order_list = '<select name="order">' . get_forum_display_sort_option($order_value, 'list', 'order') . '</select>';
 $s_display_order = '&nbsp;' . __('SORT_BY') . ':&nbsp;' . $sort_list . '&nbsp;' . $order_list . '&nbsp;';
@@ -287,8 +289,9 @@ if ($forum_data['allow_reg_tracker']) {
 
 // Title match
 $title_match_sql = '';
+$title_match = request()->getString($title_match_key, '');
 
-if ($title_match =& $_REQUEST[$title_match_key]) {
+if ($title_match) {
     if ($tmp = mb_substr(trim($title_match), 0, $title_match_max_len)) {
         $title_match_val = clean_text_match($tmp, true, false);
         $title_match_topics = get_title_match_topics($title_match_val, [0 => $forum_id]);

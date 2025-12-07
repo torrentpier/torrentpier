@@ -14,19 +14,16 @@ if (!empty($setmodules)) {
     return;
 }
 
-$mode = $_GET['mode'] ?? '';
-$job_id = isset($_GET['id']) ? (int)$_GET['id'] : '';
-$submit = isset($_POST['submit']);
-$jobs = isset($_POST['select']) ? implode(',', $_POST['select']) : '';
-$cron_action = $_POST['cron_action'] ?? '';
+require __DIR__ . '/pagestart.php';
+
+$mode = request()->query->get('mode', '');
+$job_id = request()->query->getInt('id');
+$submit = request()->post->has('submit');
+$jobs = request()->post->has('select') ? implode(',', request()->getArray('select')) : '';
+$cron_action = request()->post->get('cron_action', '');
 
 if ($mode == 'run' && !$job_id) {
-    define('BB_ROOT', './../');
-    require BB_ROOT . 'common.php';
-    user()->session_start();
     redirect('admin/' . basename(__FILE__) . '?mode=list');
-} else {
-    require __DIR__ . '/pagestart.php';
 }
 
 // Check for demo mode
@@ -45,9 +42,9 @@ foreach ($sql as $row) {
     $config_value = $row['config_value'];
     $default_config[$config_name] = $config_value;
 
-    $new[$config_name] = $_POST[$config_name] ?? $default_config[$config_name];
+    $new[$config_name] = request()->post->get($config_name, $default_config[$config_name]);
 
-    if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name]) {
+    if (request()->post->has('submit') && $row['config_value'] != $new[$config_name]) {
         bb_update_config(array($config_name => $new[$config_name]));
     }
 }
@@ -207,7 +204,7 @@ switch ($mode) {
 }
 
 if ($submit) {
-    $mode2 = $_POST['mode'] ?? '';
+    $mode2 = request()->post->get('mode', '');
     if ($mode2 == 'list') {
         if ($cron_action == 'run' && $jobs) {
             \TorrentPier\Legacy\Admin\Cron::run_jobs($jobs);
@@ -217,18 +214,18 @@ if ($submit) {
             \TorrentPier\Legacy\Admin\Cron::toggle_active($jobs, $cron_action);
         }
         redirect('admin/' . basename(__FILE__) . '?mode=list');
-    } elseif (\TorrentPier\Legacy\Admin\Cron::validate_cron_post($_POST) == 1) {
+    } elseif (\TorrentPier\Legacy\Admin\Cron::validate_cron_post(request()->post->all()) == 1) {
         if ($mode2 == 'edit') {
-            \TorrentPier\Legacy\Admin\Cron::update_cron_job($_POST);
+            \TorrentPier\Legacy\Admin\Cron::update_cron_job(request()->post->all());
         } elseif ($mode2 == 'add') {
-            \TorrentPier\Legacy\Admin\Cron::insert_cron_job($_POST);
+            \TorrentPier\Legacy\Admin\Cron::insert_cron_job(request()->post->all());
         } else {
             bb_die("Invalid mode: $mode2");
         }
 
         redirect('admin/' . basename(__FILE__) . '?mode=list');
     } else {
-        bb_die(\TorrentPier\Legacy\Admin\Cron::validate_cron_post($_POST));
+        bb_die(\TorrentPier\Legacy\Admin\Cron::validate_cron_post(request()->post->all()));
     }
 }
 

@@ -12,11 +12,11 @@ page_cfg('include_bbcode_js', true);
 // Start session management
 user()->session_start(['req_login' => true]);
 
-$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : null;
+$group_id = request()->getInt(POST_GROUPS_URL) ?: null;
 $group_info = [];
 $is_moderator = false;
 
-$submit = !empty($_POST['submit']);
+$submit = request()->post->has('submit');
 
 if ($group_id) {
     if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
@@ -31,10 +31,19 @@ if ($group_id) {
 if ($is_moderator) {
     // Avatar
     if ($submit) {
-        if (!empty($_FILES['avatar']['name']) && config()->get('group_avatars.up_allowed')) {
+        $avatarFile = request()->files->get('avatar');
+        if ($avatarFile && $avatarFile->getClientOriginalName() && config()->get('group_avatars.up_allowed')) {
             $upload = new TorrentPier\Legacy\Common\Upload();
 
-            if ($upload->init(config()->get('group_avatars'), $_FILES['avatar']) and $upload->store('avatar', ['user_id' => GROUP_AVATAR_MASK . $group_id, 'avatar_ext_id' => $group_info['avatar_ext_id']])) {
+            // Convert UploadedFile to array for legacy Upload class
+            $avatarData = [
+                'name' => $avatarFile->getClientOriginalName(),
+                'type' => $avatarFile->getClientMimeType(),
+                'tmp_name' => $avatarFile->getPathname(),
+                'error' => $avatarFile->getError(),
+                'size' => $avatarFile->getSize(),
+            ];
+            if ($upload->init(config()->get('group_avatars'), $avatarData) and $upload->store('avatar', ['user_id' => GROUP_AVATAR_MASK . $group_id, 'avatar_ext_id' => $group_info['avatar_ext_id']])) {
                 $avatar_ext_id = (int)$upload->file_ext_id;
                 DB()->query("UPDATE " . BB_GROUPS . " SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id LIMIT 1");
             } else {

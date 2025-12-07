@@ -20,15 +20,15 @@ if (!config()->get('emailer.enabled')) {
 
 set_time_limit(1200);
 
-$subject = trim(request_var('subject', ''));
-$message = (string)request_var('message', '');
-$group_id = (int)request_var(POST_GROUPS_URL, 0);
-$reply_to = (string)request_var('reply_to', config()->get('board_email'));
-$message_type = (string)request_var('message_type', '');
+$subject = trim(request()->getString('subject'));
+$message = request()->getString('message');
+$group_id = request()->getInt(POST_GROUPS_URL);
+$reply_to = request()->getString('reply_to', config()->get('board_email'));
+$message_type = request()->getString('message_type');
 
 $errors = $user_id_sql = [];
 
-if (isset($_POST['submit'])) {
+if (request()->has('submit')) {
     if (!$subject) {
         $errors[] = __('EMPTY_SUBJECT');
     }

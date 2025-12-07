@@ -20,10 +20,10 @@ page_cfg('use_tablesorter', true);
 page_cfg('include_bbcode_js', true);
 
 $user_id = userdata('user_id');
-if (isset($_GET[POST_USERS_URL])) {
-    if (get_username($_GET[POST_USERS_URL])) {
-        if ($_GET[POST_USERS_URL] == userdata('user_id') || IS_ADMIN) {
-            $user_id = DB()->escape($_GET[POST_USERS_URL]);
+if (request()->query->has(POST_USERS_URL)) {
+    if (get_username(request()->query->get(POST_USERS_URL))) {
+        if (request()->query->get(POST_USERS_URL) == userdata('user_id') || IS_ADMIN) {
+            $user_id = DB()->escape(request()->query->get(POST_USERS_URL));
         } else {
             bb_die(__('NOT_AUTHORISED'));
         }
@@ -31,11 +31,11 @@ if (isset($_GET[POST_USERS_URL])) {
         bb_die(__('USER_NOT_EXIST'));
     }
 }
-$start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
+$start = abs(request()->query->getInt('start'));
 $per_page = config()->get('topics_per_page');
 
-if (isset($_POST['topic_id_list'])) {
-    $topic_ids = implode(",", $_POST['topic_id_list']);
+if (request()->post->has('topic_id_list')) {
+    $topic_ids = implode(",", request()->post->get('topic_id_list'));
     $sql = "DELETE FROM " . BB_TOPICS_WATCH . "  WHERE topic_id IN(" . $topic_ids . ") AND user_id = $user_id";
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not delete topic watch information #1');

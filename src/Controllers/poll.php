@@ -10,13 +10,13 @@
 // Start session management
 user()->session_start(['req_login' => true]);
 
-$mode = (string)$_POST['mode'];
-$topic_id = (int)$_POST['topic_id'];
-$forum_id = (int)$_POST['forum_id'];
-$vote_id = (int)$_POST['vote_id'];
+$mode = request()->post->get('mode', '');
+$topic_id = request()->getInt('topic_id');
+$forum_id = request()->getInt('forum_id');
+$vote_id = request()->getInt('vote_id');
 
 $return_topic_url = TOPIC_URL . $topic_id;
-$return_topic_url .= !empty($_POST['start']) ? "&amp;start=" . (int)$_POST['start'] : '';
+$return_topic_url .= request()->getInt('start') ? "&amp;start=" . request()->getInt('start') : '';
 
 set_die_append_msg($forum_id, $topic_id);
 
@@ -171,8 +171,8 @@ switch ($mode) {
             bb_die(__('NEW_POLL_ALREADY'));
         }
 
-        // Make a poll from $_POST data
-        $poll->build_poll_data($_POST);
+        // Make a poll from POST data
+        $poll->build_poll_data(request()->post->all());
 
         // Showing errors if present
         if ($poll->err_msg) {
@@ -196,8 +196,8 @@ switch ($mode) {
             bb_die(__('POST_HAS_NO_POLL'));
         }
 
-        // Make a poll from $_POST data
-        $poll->build_poll_data($_POST);
+        // Make a poll from POST data
+        $poll->build_poll_data(request()->post->all());
 
         // Showing errors if present
         if ($poll->err_msg) {

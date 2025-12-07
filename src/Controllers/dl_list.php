@@ -7,23 +7,23 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-$forum_id = $_REQUEST[POST_FORUM_URL] ?? 0;
-$topic_id = $_REQUEST[POST_TOPIC_URL] ?? 0;
-$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
-$confirmed = isset($_POST['confirm']);
+$forum_id = request()->get(POST_FORUM_URL) ?? 0;
+$topic_id = request()->get(POST_TOPIC_URL) ?? 0;
+$mode = request()->has('mode') ? request()->getString('mode') : '';
+$confirmed = request()->post->has('confirm');
 
 // Get new DL-status
 if ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status') {
-    if (isset($_POST['dl_set_will'])) {
+    if (request()->post->has('dl_set_will')) {
         $new_dl_status = DL_STATUS_WILL;
         $dl_key = 'dlw';
-    } elseif (isset($_POST['dl_set_down'])) {
+    } elseif (request()->post->has('dl_set_down')) {
         $new_dl_status = DL_STATUS_DOWN;
         $dl_key = 'dld';
-    } elseif (isset($_POST['dl_set_complete'])) {
+    } elseif (request()->post->has('dl_set_complete')) {
         $new_dl_status = DL_STATUS_COMPLETE;
         $dl_key = 'dlc';
-    } elseif (isset($_POST['dl_set_cancel'])) {
+    } elseif (request()->post->has('dl_set_cancel')) {
         $new_dl_status = DL_STATUS_CANCEL;
         $dl_key = 'dla';
     } else {
@@ -32,9 +32,9 @@ if ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status') {
 }
 
 // Define redirect URL
-$full_url = isset($_POST['full_url']) ? str_replace('&amp;', '&', htmlspecialchars($_POST['full_url'])) : '';
+$full_url = request()->post->has('full_url') ? str_replace('&amp;', '&', htmlspecialchars(request()->post->get('full_url'))) : '';
 
-if (isset($_POST['redirect_type']) && $_POST['redirect_type'] == 'search') {
+if (request()->post->has('redirect_type') && request()->post->get('redirect_type') == 'search') {
     $redirect_type = 'search';
     $redirect = $full_url ?: "$dl_key=1";
 } else {
@@ -50,7 +50,7 @@ if (IS_GUEST) {
 }
 
 // Check if user did not confirm
-if (isset($_POST['cancel']) && $_POST['cancel']) {
+if (request()->post->has('cancel') && request()->post->get('cancel')) {
     redirect("$redirect_type?$redirect");
 }
 
@@ -92,11 +92,11 @@ $req_topics_ary = $topics_ary = [];
 
 // Get topics selected by user
 if ($mode == 'set_topics_dl_status') {
-    if (!isset($_POST['dl_topics_id_list']) || !is_array($_POST['dl_topics_id_list'])) {
+    if (!request()->post->has('dl_topics_id_list') || !is_array(request()->post->get('dl_topics_id_list'))) {
         bb_die(__('NONE_SELECTED'));
     }
 
-    foreach ($_POST['dl_topics_id_list'] as $topic_id) {
+    foreach (request()->post->get('dl_topics_id_list') as $topic_id) {
         $req_topics_ary[] = (int)$topic_id;
     }
 } elseif ($mode == 'set_dl_status') {

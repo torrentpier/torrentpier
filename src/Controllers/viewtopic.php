@@ -21,9 +21,9 @@ page_cfg('load_tpl_vars', [
 ]);
 
 $newest = $next_topic_id = 0;
-$start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
-$topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
-$post_id = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int)$_GET[POST_POST_URL] : 0;
+$start = request()->query->get('start') ? abs((int)request()->query->get('start')) : 0;
+$topic_id = request()->query->get(POST_TOPIC_URL) ? (int)request()->query->get(POST_TOPIC_URL) : 0;
+$post_id = (!$topic_id && request()->query->get(POST_POST_URL)) ? (int)request()->query->get(POST_POST_URL) : 0;
 
 set_die_append_msg();
 
@@ -32,7 +32,7 @@ $posts_per_page = config()->get('posts_per_page');
 $select_ppp = '';
 
 if (userdata('session_admin')) {
-    if ($req_ppp = abs((int)(@$_REQUEST['ppp'])) and in_array($req_ppp, config()->get('allowed_posts_per_page'))) {
+    if ($req_ppp = abs((int)(request()->get('ppp') ?? 0)) and in_array($req_ppp, config()->get('allowed_posts_per_page'))) {
         $posts_per_page = $req_ppp;
     }
 
@@ -42,7 +42,7 @@ if (userdata('session_admin')) {
     }
 }
 
-if (isset($_REQUEST['single'])) {
+if (request()->has('single')) {
     $posts_per_page = 1;
 } else {
     $start = floor($start / $posts_per_page) * $posts_per_page;
@@ -53,9 +53,9 @@ if (!$topic_id && !$post_id) {
 }
 
 // Find topic id if user requested a newer or older topic
-if ($topic_id && isset($_GET['view']) && ($_GET['view'] == 'next' || $_GET['view'] == 'previous')) {
-    $sql_condition = ($_GET['view'] == 'next') ? '>' : '<';
-    $sql_ordering = ($_GET['view'] == 'next') ? 'ASC' : 'DESC';
+if ($topic_id && request()->query->has('view') && (request()->query->get('view') == 'next' || request()->query->get('view') == 'previous')) {
+    $sql_condition = (request()->query->get('view') == 'next') ? '>' : '<';
+    $sql_ordering = (request()->query->get('view') == 'next') ? 'ASC' : 'DESC';
 
     $sql = "SELECT t.topic_id
 		FROM " . BB_TOPICS . " t, " . BB_TOPICS . " t2
@@ -69,7 +69,7 @@ if ($topic_id && isset($_GET['view']) && ($_GET['view'] == 'next' || $_GET['view
     if ($row = DB()->fetch_row($sql)) {
         $next_topic_id = $topic_id = $row['topic_id'];
     } else {
-        $message = ($_GET['view'] == 'next') ? __('NO_NEWER_TOPICS') : __('NO_OLDER_TOPICS');
+        $message = (request()->query->get('view') == 'next') ? __('NO_NEWER_TOPICS') : __('NO_OLDER_TOPICS');
         bb_die($message);
     }
 }
@@ -107,7 +107,7 @@ if ($t_data['allow_porno_topic'] && bf(userdata('user_opt'), 'user_opt', 'user_p
     bb_die(__('ERROR_PORNO_FORUM'));
 }
 
-if (userdata('session_admin') && !empty($_REQUEST['mod'])) {
+if (userdata('session_admin') && request()->has('mod')) {
     if (IS_ADMIN) {
         datastore()->enqueue([
             'viewtopic_forum_select'
@@ -118,7 +118,7 @@ if (userdata('session_admin') && !empty($_REQUEST['mod'])) {
 set_die_append_msg($forum_id);
 
 // Find newest post
-if (($next_topic_id || @$_GET['view'] === 'newest') && !IS_GUEST && $topic_id) {
+if (($next_topic_id || request()->query->get('view') === 'newest') && !IS_GUEST && $topic_id) {
     $post_time = 'post_time >= ' . get_last_read($topic_id, $forum_id);
     $post_id_altern = ($next_topic_id) ? '' : ' OR post_id = ' . $t_data['topic_last_post_id'];
 
@@ -165,13 +165,13 @@ $topic_id = $t_data['topic_id'];
 $topic_time = $t_data['topic_time'];
 $locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
 
-$moderation = (!empty($_REQUEST['mod']) && $is_auth['auth_mod']);
+$moderation = (request()->has('mod') && $is_auth['auth_mod']);
 
 // Redirect to login page if not admin session
 $mod_redirect_url = '';
 
 if ($is_auth['auth_mod']) {
-    $redirect = $_POST['redirect'] ?? @$_SERVER['REQUEST_URI'];
+    $redirect = request()->post->get('redirect') ?? request()->server->get('REQUEST_URI');
     $redirect = url_arg($redirect, 'mod', 1, '&');
     $mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
@@ -226,8 +226,8 @@ if (config()->get('topic_notify_enabled')) {
 
         if ($t_data['notify_status'] == TOPIC_WATCH_NOTIFIED) {
             $is_watching_topic = true;
-            if (isset($_GET['unwatch'])) {
-                if ($_GET['unwatch'] == 'topic') {
+            if (request()->query->has('unwatch')) {
+                if (request()->query->get('unwatch') == 'topic') {
                     DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . userdata('user_id'));
                 }
 
@@ -235,8 +235,8 @@ if (config()->get('topic_notify_enabled')) {
                 bb_die(__('NO_LONGER_WATCHING'));
             }
         } elseif ($t_data['notify_status'] == TOPIC_WATCH_UNNOTIFIED) {
-            if (isset($_GET['watch'])) {
-                if ($_GET['watch'] == 'topic') {
+            if (request()->query->has('watch')) {
+                if (request()->query->get('watch') == 'topic') {
                     DB()->query("
 						INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
 						VALUES (" . userdata('user_id') . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
@@ -248,8 +248,8 @@ if (config()->get('topic_notify_enabled')) {
             }
         }
     } else {
-        if (isset($_GET['unwatch'])) {
-            if ($_GET['unwatch'] == 'topic') {
+        if (request()->query->has('unwatch')) {
+            if (request()->query->get('unwatch') == 'topic') {
                 redirect(LOGIN_URL . "?redirect=" . TOPIC_URL . "$topic_id&unwatch=topic");
             }
         }
@@ -263,9 +263,9 @@ $post_days = 0;
 $limit_posts_time = '';
 $total_replies = $t_data['topic_replies'] + 1;
 
-if (!empty($_REQUEST['postdays'])) {
-    if ($post_days = (int)$_REQUEST['postdays']) {
-        if (!empty($_POST['postdays'])) {
+if (request()->has('postdays')) {
+    if ($post_days = (int)request()->get('postdays')) {
+        if (request()->post->has('postdays')) {
             $start = 0;
         }
         $min_post_time = TIMENOW - ($post_days * 86400);
@@ -282,7 +282,7 @@ if (!empty($_REQUEST['postdays'])) {
 }
 
 // Decide how to order the post display
-$post_order = (isset($_POST['postorder']) && $_POST['postorder'] !== 'asc') ? 'desc' : 'asc';
+$post_order = (request()->post->has('postorder') && request()->post->get('postorder') !== 'asc') ? 'desc' : 'asc';
 
 //
 // Go ahead and pull all data for this topic
@@ -407,7 +407,7 @@ if ($can_watch_topic) {
 $pg_url = TOPIC_URL . $topic_id;
 $pg_url .= $post_days ? "&amp;postdays=$post_days" : '';
 $pg_url .= ($post_order != 'asc') ? "&amp;postorder=$post_order" : '';
-$pg_url .= isset($_REQUEST['single']) ? "&amp;single=1" : '';
+$pg_url .= request()->has('single') ? "&amp;single=1" : '';
 $pg_url .= $moderation ? "&amp;mod=1" : '';
 $pg_url .= ($posts_per_page != config()->get('posts_per_page')) ? "&amp;ppp=$posts_per_page" : '';
 

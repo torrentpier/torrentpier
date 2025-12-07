@@ -58,29 +58,29 @@ foreach ($forum_auth_fields as $auth_type) {
 $forum_auth_levels = ['ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN'];
 $forum_auth_const = [AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN];
 
-if (isset($_GET[POST_FORUM_URL]) || isset($_POST[POST_FORUM_URL])) {
-    $forum_id = isset($_POST[POST_FORUM_URL]) ? (int)$_POST[POST_FORUM_URL] : (int)$_GET[POST_FORUM_URL];
+if (request()->query->has(POST_FORUM_URL) || request()->post->has(POST_FORUM_URL)) {
+    $forum_id = request()->getInt(POST_FORUM_URL, 0);
     $forum_sql = "AND forum_id = $forum_id";
 } else {
     unset($forum_id);
     $forum_sql = '';
 }
 
-if (isset($_GET[POST_CAT_URL]) || isset($_POST[POST_CAT_URL])) {
-    $cat_id = isset($_POST[POST_CAT_URL]) ? (int)$_POST[POST_CAT_URL] : (int)$_GET[POST_CAT_URL];
+if (request()->query->has(POST_CAT_URL) || request()->post->has(POST_CAT_URL)) {
+    $cat_id = request()->getInt(POST_CAT_URL, 0);
     $cat_sql = "AND c.cat_id = $cat_id";
 } else {
     unset($cat_id);
     $cat_sql = '';
 }
 
-if (isset($_GET['adv'])) {
-    $adv = (int)$_GET['adv'];
+if (request()->query->has('adv')) {
+    $adv = request()->getInt('adv');
 } else {
     unset($adv);
 }
 
-$submit = isset($_POST['submit']);
+$submit = request()->post->has('submit');
 
 // Check for demo mode
 if (IN_DEMO_MODE && $submit) {
@@ -94,8 +94,8 @@ if ($submit) {
     $sql = '';
 
     if (!empty($forum_id)) {
-        if (isset($_POST['simpleauth'])) {
-            $simple_ary = $simple_auth_ary[(int)$_POST['simpleauth']];
+        if (request()->post->has('simpleauth')) {
+            $simple_ary = $simple_auth_ary[request()->getInt('simpleauth')];
 
             for ($i = 0, $iMax = count($simple_ary); $i < $iMax; $i++) {
                 $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $simple_ary[$i];
@@ -106,10 +106,10 @@ if ($submit) {
             }
         } else {
             for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
-                $value = (int)$_POST[$forum_auth_fields[$i]];
+                $value = request()->getInt($forum_auth_fields[$i], 0);
 
                 if ($forum_auth_fields[$i] == 'auth_vote') {
-                    if ($_POST['auth_vote'] == AUTH_ALL) {
+                    if (request()->post->get($forum_auth_fields[$i], 0) == AUTH_ALL) {
                         $value = AUTH_REG;
                     }
                 }
@@ -130,10 +130,10 @@ if ($submit) {
         $adv = 0;
     } elseif (!empty($cat_id)) {
         for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
-            $value = (int)$_POST[$forum_auth_fields[$i]];
+            $value = request()->getInt($forum_auth_fields[$i], 0);
 
             if ($forum_auth_fields[$i] == 'auth_vote') {
-                if ($_POST['auth_vote'] == AUTH_ALL) {
+                if (request()->post->get($forum_auth_fields[$i], 0) == AUTH_ALL) {
                     $value = AUTH_REG;
                 }
             }

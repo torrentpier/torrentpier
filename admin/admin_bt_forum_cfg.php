@@ -17,8 +17,8 @@ require __DIR__ . '/pagestart.php';
 $max_forum_name_len = 30;
 $max_forum_rows = 25;
 
-$submit = isset($_POST['submit']);
-$confirm = isset($_POST['confirm']);
+$submit = request()->getBool('submit');
+$confirm = request()->getBool('confirm');
 
 $cfg = [];
 

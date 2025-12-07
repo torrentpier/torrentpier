@@ -16,8 +16,8 @@ use TorrentPier\Feed\Provider\UserFeedProvider;
 user()->session_start(['req_login' => true]);
 
 // Get request parameters
-$type = $_GET['type'] ?? '';
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$type = request()->query->get('type', '');
+$id = request()->getInt('id');
 
 // Validate type and ID
 if (!in_array($type, ['f', 'u'], true) || $id < 0) {

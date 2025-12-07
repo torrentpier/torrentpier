@@ -23,6 +23,6 @@ if (!IS_ADMIN) {
 }
 
 if (!userdata('session_admin')) {
-    $redirect = url_arg($_SERVER['REQUEST_URI'], 'admin', 1);
+    $redirect = url_arg(request()->getRequestUri(), 'admin', 1);
     redirect(LOGIN_URL . "?redirect=$redirect");
 }

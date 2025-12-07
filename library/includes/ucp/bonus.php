@@ -21,8 +21,8 @@ if (config()->get('seed_bonus_enabled') && config()->get('bonus_upload') && conf
     bb_die(__('EXCHANGE_NOT'));
 }
 
-if (isset($_POST['bonus_id'])) {
-    $id = (int)$_POST['bonus_id'];
+if (request()->post->has('bonus_id')) {
+    $id = request()->post->getInt('bonus_id');
 
     $btu = get_bt_userdata($user_id);
 

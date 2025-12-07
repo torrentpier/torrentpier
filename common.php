@@ -142,6 +142,55 @@ function httpClient(): \TorrentPier\Http\HttpClient
 }
 
 /**
+ * Get the HTTP Request instance
+ *
+ * Provides typed access to request parameters ($_GET, $_POST, $_COOKIE, $_SERVER, $_FILES)
+ *
+ * Usage:
+ *   // Typed getters (POST priority over GET)
+ *   request()->get('key')                   // mixed, from POST or GET
+ *   request()->has('key')                   // bool, check if parameter exists
+ *   request()->all()                        // array, all merged parameters
+ *   request()->getInt('topic_id')           // int
+ *   request()->getString('mode')            // string
+ *   request()->getBool('flag')              // bool
+ *   request()->getFloat('ratio')            // float
+ *   request()->getArray('ids')              // array
+ *
+ *   // Specific source via properties (Symfony InputBag)
+ *   request()->query->get('f')              // GET parameter
+ *   request()->post->get('message')         // POST parameter
+ *   request()->cookies->get('session_id')   // Cookie
+ *   request()->server->get('REQUEST_URI')   // Server var
+ *   request()->headers->get('User-Agent')   // Header
+ *   request()->files->get('upload')         // Uploaded file
+ *
+ *   // Request metadata
+ *   request()->getMethod()                  // HTTP method (GET, POST, etc.)
+ *   request()->isPost()                     // Check if POST
+ *   request()->isGet()                      // Check if GET
+ *   request()->isAjax()                     // Check if AJAX/XHR
+ *   request()->isSecure()                   // Check if HTTPS
+ *   request()->getClientIp()                // Client IP address
+ *   request()->getRequestUri()              // URI with query string
+ *   request()->getPathInfo()                // Path without query string
+ *   request()->getQueryString()             // Query string only
+ *   request()->getHost()                    // Host name
+ *   request()->getScheme()                  // http or https
+ *   request()->getUserAgent()               // User-Agent header
+ *   request()->getReferer()                 // Referer header
+ *   request()->getContentType()             // Content-Type
+ *   request()->getContent()                 // Raw request body
+ *   request()->getSymfonyRequest()          // Underlying Symfony Request
+ *
+ * @return \TorrentPier\Http\Request
+ */
+function request(): \TorrentPier\Http\Request
+{
+    return \TorrentPier\Http\Request::getInstance();
+}
+
+/**
  * Format time difference in human-readable format
  *
  * @see \TorrentPier\Helpers\TimeHelper::humanTime()

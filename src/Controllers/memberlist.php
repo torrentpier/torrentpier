@@ -9,11 +9,11 @@
 
 user()->session_start(['req_login' => true]);
 
-$start = abs((int)request_var('start', 0));
-$mode = (string)request_var('mode', 'joined');
-$sort_order = (request_var('order', 'ASC') == 'ASC') ? 'ASC' : 'DESC';
-$username = trim(request_var('username', ''));
-$role = (string)request_var('role', 'all');
+$start = abs(request()->getInt('start'));
+$mode = request()->getString('mode', 'joined');
+$sort_order = (request()->getString('order', 'ASC') === 'ASC') ? 'ASC' : 'DESC';
+$username = trim(request()->getString('username'));
+$role = request()->getString('role', 'all');
 
 // Memberlist sorting
 $mode_types_text = [__('SORT_JOINED'), __('SORT_USERNAME'), __('SORT_LOCATION'), __('SORT_POSTS'), __('SORT_EMAIL'), __('SORT_WEBSITE'), __('SORT_TOP_TEN')];
