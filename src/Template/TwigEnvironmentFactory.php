@@ -31,17 +31,20 @@ class TwigEnvironmentFactory
      */
     public function create(string $templateDir, string $cacheDir, bool $useCache = true): Environment
     {
+        // Normalize path separators for cross-platform compatibility
+        $templateDir = self::normalizePath($templateDir);
+
         // Create a filesystem loader with the main template directory
         $loader = new FilesystemLoader($templateDir);
 
         // Add an admin template directory with @admin namespace
-        $adminTemplateDir = dirname($templateDir) . '/admin';
+        $adminTemplateDir = self::normalizePath(dirname($templateDir) . '/admin');
         if (is_dir($adminTemplateDir) && $adminTemplateDir !== $templateDir) {
             $loader->addPath($adminTemplateDir, 'admin');
         }
 
         // Add the default template directory as fallback if the current dir is not default
-        $defaultTemplateDir = dirname($templateDir) . '/default';
+        $defaultTemplateDir = self::normalizePath(dirname($templateDir) . '/default');
         if (is_dir($defaultTemplateDir) && $defaultTemplateDir !== $templateDir) {
             $loader->addPath($defaultTemplateDir);
         }
@@ -112,5 +115,14 @@ class TwigEnvironmentFactory
         $twig->addFilter(new TwigFilter('clean_filename', 'clean_filename'));
         $twig->addFilter(new TwigFilter('hide_bb_path', 'hide_bb_path'));
         $twig->addFilter(new TwigFilter('str_short', 'str_short'));
+    }
+
+    /**
+     * Normalize path separators for cross-platform compatibility
+     * PHP handles forward slashes on all platforms including Windows
+     */
+    public static function normalizePath(string $path): string
+    {
+        return str_replace('\\', '/', $path);
     }
 }

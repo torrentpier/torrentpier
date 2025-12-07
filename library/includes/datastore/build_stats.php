@@ -76,23 +76,28 @@ if (config()->get('gender')) {
 // birthday stat
 if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
     $checkDays = (int)config()->get('birthday_check_day');
-    $dateToday = date('m-d');
-    $dateForward = date('m-d', strtotime("+$checkDays days"));
+
+    // Use numeric MMDD format to leverage functional index: MONTH(user_birthday) * 100 + DAYOFMONTH(user_birthday)
+    $dateToday = (int)date('n') * 100 + (int)date('j'); // e.g., 1207 for Dec 7
+    $dateForward = (int)date('n', strtotime("+$checkDays days")) * 100 + (int)date('j', strtotime("+$checkDays days"));
+
+    // Expression that matches the functional index
+    $birthdayExpr = 'MONTH(user_birthday) * 100 + DAYOFMONTH(user_birthday)';
 
     // Helper to convert ActiveRow objects to arrays
     $toArrays = static fn(array $rows): array => array_map(static fn($row) => $row->toArray(), $rows);
 
-    // Birthday today - using the indexed user_birthday_md column
+    // Birthday today - using the functional index
     $data['birthday_today_list'] = $toArrays(DB()->table(BB_USERS)
         ->select('user_id, username, user_rank, user_birthday')
         ->where('user_id NOT', $excludedUsers)
         ->where('user_birthday !=', '1900-01-01')
         ->where('user_active', 1)
-        ->where('user_birthday_md', $dateToday)
+        ->where("$birthdayExpr = ?", $dateToday)
         ->order('user_level DESC, username')
         ->fetchAll());
 
-    // Birthday in upcoming days - using indexed user_birthday_md column
+    // Birthday in upcoming days - using functional index
     // Handle year wrap-around (e.g., Dec 28 + 7 days = Jan 4)
     if ($dateForward < $dateToday) {
         $data['birthday_week_list'] = $toArrays(DB()->table(BB_USERS)
@@ -100,7 +105,7 @@ if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
             ->where('user_id NOT', $excludedUsers)
             ->where('user_birthday !=', '1900-01-01')
             ->where('user_active', 1)
-            ->where('(user_birthday_md > ? OR user_birthday_md <= ?)', $dateToday, $dateForward)
+            ->where("($birthdayExpr > ? OR $birthdayExpr <= ?)", $dateToday, $dateForward)
             ->order('user_level DESC, username')
             ->fetchAll());
     } else {
@@ -109,8 +114,8 @@ if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
             ->where('user_id NOT', $excludedUsers)
             ->where('user_birthday !=', '1900-01-01')
             ->where('user_active', 1)
-            ->where('user_birthday_md > ?', $dateToday)
-            ->where('user_birthday_md <= ?', $dateForward)
+            ->where("$birthdayExpr > ?", $dateToday)
+            ->where("$birthdayExpr <= ?", $dateForward)
             ->order('user_level DESC, username')
             ->fetchAll());
     }

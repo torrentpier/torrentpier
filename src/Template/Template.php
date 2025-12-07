@@ -51,9 +51,9 @@ class Template
     private function __construct(string $root = '.')
     {
         $this->variables = &$this->blockData['.'][0];
-        $this->rootDir = $root;
+        $this->rootDir = TwigEnvironmentFactory::normalizePath($root);
         $this->templateName = basename($root);
-        $this->cacheDir = CACHE_DIR . '/';
+        $this->cacheDir = TwigEnvironmentFactory::normalizePath(CACHE_DIR . '/');
 
         if (!is_dir($this->rootDir)) {
             throw new \RuntimeException("Template directory not found: $this->templateName");
@@ -79,7 +79,8 @@ class Template
 
         // When called with a proper templates directory, make it the default
         // This allows setup_style() to override any early initialization
-        if ($root !== '.' && str_contains($root, 'styles/templates')) {
+        $normalizedRoot = TwigEnvironmentFactory::normalizePath($root);
+        if ($root !== '.' && str_contains($normalizedRoot, 'styles/templates')) {
             self::$defaultInstance = self::$instances[$key];
         } elseif (self::$defaultInstance === null) {
             self::$defaultInstance = self::$instances[$key];
@@ -278,7 +279,7 @@ class Template
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5);
         $source = 'unknown';
         foreach ($backtrace as $frame) {
-            if (isset($frame['file']) && !str_contains($frame['file'], '/src/Template/')) {
+            if (isset($frame['file']) && !str_contains(TwigEnvironmentFactory::normalizePath($frame['file']), 'src/Template/')) {
                 $source = basename($frame['file']) . ':' . ($frame['line'] ?? '?');
                 break;
             }
@@ -333,9 +334,12 @@ class Template
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10);
         $source = 'unknown';
         foreach ($backtrace as $frame) {
-            if (isset($frame['file']) && !str_contains($frame['file'], '/src/Template/') && !str_contains($frame['file'], '/library/includes/functions.php')) {
-                $source = basename($frame['file']) . ':' . ($frame['line'] ?? '?');
-                break;
+            if (isset($frame['file'])) {
+                $file = TwigEnvironmentFactory::normalizePath($frame['file']);
+                if (!str_contains($file, 'src/Template/') && !str_contains($file, 'library/includes/functions.php')) {
+                    $source = basename($frame['file']) . ':' . ($frame['line'] ?? '?');
+                    break;
+                }
             }
         }
 
@@ -426,9 +430,12 @@ class Template
      */
     private function buildTemplatePath(string $filename): string
     {
+        // Normalize filename separators
+        $filename = TwigEnvironmentFactory::normalizePath($filename);
+
         // Handle admin templates
         if (str_starts_with($filename, 'admin/')) {
-            $adminDir = dirname($this->rootDir) . '/admin';
+            $adminDir = TwigEnvironmentFactory::normalizePath(dirname($this->rootDir) . '/admin');
             if (is_dir($adminDir)) {
                 return $adminDir . '/' . substr($filename, 6);
             }
@@ -464,24 +471,34 @@ class Template
      */
     private function getRelativeTemplateName(string $fullPath): string
     {
-        $fullPath = realpath($fullPath) ?: $fullPath;
+        // Normalize all paths to forward slashes for consistent comparison
+        $fullPath = TwigEnvironmentFactory::normalizePath(realpath($fullPath) ?: $fullPath);
 
         // Admin template - use @admin namespace
         $adminDir = realpath(dirname($this->rootDir) . '/admin');
-        if ($adminDir && str_starts_with($fullPath, $adminDir . '/')) {
-            return '@admin/' . str_replace($adminDir . '/', '', $fullPath);
+        if ($adminDir) {
+            $adminDir = TwigEnvironmentFactory::normalizePath($adminDir);
+            if (str_starts_with($fullPath, $adminDir . '/')) {
+                return '@admin/' . substr($fullPath, strlen($adminDir) + 1);
+            }
         }
 
         // Current theme directory
         $rootDir = realpath($this->rootDir);
-        if ($rootDir && str_starts_with($fullPath, $rootDir . '/')) {
-            return str_replace($rootDir . '/', '', $fullPath);
+        if ($rootDir) {
+            $rootDir = TwigEnvironmentFactory::normalizePath($rootDir);
+            if (str_starts_with($fullPath, $rootDir . '/')) {
+                return substr($fullPath, strlen($rootDir) + 1);
+            }
         }
 
         // Default theme fallback
         $defaultDir = realpath(dirname($this->rootDir) . '/default');
-        if ($defaultDir && str_starts_with($fullPath, $defaultDir . '/')) {
-            return str_replace($defaultDir . '/', '', $fullPath);
+        if ($defaultDir) {
+            $defaultDir = TwigEnvironmentFactory::normalizePath($defaultDir);
+            if (str_starts_with($fullPath, $defaultDir . '/')) {
+                return substr($fullPath, strlen($defaultDir) + 1);
+            }
         }
 
         return basename($fullPath);

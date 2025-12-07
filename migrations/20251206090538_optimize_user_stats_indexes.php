@@ -9,10 +9,10 @@ use Phinx\Migration\AbstractMigration;
  *
  * This migration fixes performance issues with build_stats.php queries:
  * 1. Adds index on user_gender for gender count queries
- * 2. Adds a generated column user_birthday_md for birthday queries
- * 3. Adds index on (user_active, user_birthday_md) for efficient birthday lookups
+ * 2. Adds functional index on birthday month-day for efficient birthday lookups
  *
- * Without these indexes, the stat queries scan all users causing memory exhaustion.
+ * Uses functional indexes (MySQL 8.0+ / MariaDB 10.5+) instead of generated columns
+ * for better cross-database compatibility.
  */
 final class OptimizeUserStatsIndexes extends AbstractMigration
 {
@@ -22,28 +22,24 @@ final class OptimizeUserStatsIndexes extends AbstractMigration
 
         // Index on user_gender for gender count queries
         $table->addIndex(['user_gender'], ['name' => 'idx_user_gender']);
+        $table->update();
 
-        // Generated column for birthday month-day (Phinx doesn't support generated columns natively)
+        // Functional index for birthday queries (month-day as integer MMDD)
+        // Works in MySQL 8.0+ and MariaDB 10.5+
         $this->execute("
             ALTER TABLE bb_users
-            ADD COLUMN user_birthday_md CHAR(5)
-            GENERATED ALWAYS AS (DATE_FORMAT(user_birthday, '%m-%d')) STORED
-            AFTER user_birthday
+            ADD INDEX idx_user_birthday_md ((
+                MONTH(user_birthday) * 100 + DAYOFMONTH(user_birthday)
+            ))
         ");
-
-        // Composite index for birthday queries
-        $table->addIndex(['user_active', 'user_birthday_md'], ['name' => 'idx_user_birthday_md']);
-
-        $table->update();
     }
 
     public function down(): void
     {
+        $this->execute('ALTER TABLE bb_users DROP INDEX idx_user_birthday_md');
+
         $table = $this->table('bb_users');
-        $table->removeIndexByName('idx_user_birthday_md');
         $table->removeIndexByName('idx_user_gender');
         $table->update();
-
-        $this->execute('ALTER TABLE bb_users DROP COLUMN user_birthday_md');
     }
 }
