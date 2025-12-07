@@ -185,14 +185,14 @@
                 <p style="margin-top: 4px;">{BOARD_START}</p>
                 <!-- ENDIF -->
 
-				<!-- IF $bb_cfg['tor_stats'] -->
+				<!-- IF config('tor_stats') -->
 				<div class="hr1" style="margin: 5px 0 4px;"></div>
 				<p>{TORRENTS_STAT}</p>
 				<p>{PEERS_STAT}</p>
 				<p>{SPEED_STAT}</p>
 				<!-- ENDIF -->
 
-				<!-- IF $bb_cfg['birthday_enabled'] -->
+				<!-- IF config('birthday_enabled') -->
 				<script type="text/javascript">
 				ajax.callback.index_data = function(data) {
 					$('#'+ data.mode).html(data.html);

@@ -73,8 +73,8 @@
             <td><!-- IF CAN_EDIT_USERNAME --><input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{USERNAME}"/><!-- ELSE --><b>{USERNAME}</b><!-- ENDIF -->&nbsp;<span id="check_name"></span></td>
         </tr>
         <tr>
-            <td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><br/><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
-            <td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}"<!-- IF EDIT_PROFILE and not ADM_EDIT and not IS_ADMIN --><!-- IF !$bb_cfg['emailer']['enabled'] or $bb_cfg['email_change_disabled'] --> readonly style="color: gray;"<!-- ENDIF --><!-- ENDIF --> />&nbsp;<span id="check_email"></span></td>
+            <td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF config('reg_email_activation') --><br/><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
+            <td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}"<!-- IF EDIT_PROFILE and not ADM_EDIT and not IS_ADMIN --><!-- IF !config('emailer.enabled') or config('email_change_disabled') --> readonly style="color: gray;"<!-- ENDIF --><!-- ENDIF --> />&nbsp;<span id="check_email"></span></td>
         </tr>
         <!-- IF EDIT_PROFILE and not ADM_EDIT -->
         <tr>
@@ -95,7 +95,7 @@
                 <input id="pass_confirm" onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('#pass').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="cfm_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="check_pass"></span>
             </td>
         </tr>
-        <!-- IF $bb_cfg['invites_system']['enabled'] and not EDIT_PROFILE -->
+        <!-- IF config('invites_system.enabled') and not EDIT_PROFILE -->
         <tr>
             <td class="prof-title">{L_INVITE_CODE}: *</td>
             <td><input type="text" name="invite_code" size="35" value="{INVITE_CODE}"/></td>
@@ -117,13 +117,13 @@
         <tr>
             <th colspan="2">{L_PROFILE_INFO}</th>
         </tr>
-        <!-- IF $bb_cfg['gender'] -->
+        <!-- IF config('gender') -->
         <tr>
             <td class="prof-title">{L_GENDER}:</td>
             <td>{USER_GENDER}</td>
         </tr>
         <!-- ENDIF -->
-        <!-- IF $bb_cfg['birthday_enabled'] -->
+        <!-- IF config('birthday_enabled') -->
         <tr>
             <td class="prof-title">{L_BIRTHDAY}:</td>
             <td><input type="date" name="user_birthday" value="{USER_BIRTHDAY}"/></td>
@@ -189,13 +189,13 @@
             </script>
         </tr>
         <!-- ENDIF -->
-        <!-- IF $bb_cfg['allow_change']['language'] -->
+        <!-- IF config('allow_change.language') -->
         <tr>
             <td class="prof-title">{L_BOARD_LANG}:</td>
             <td>{LANGUAGE_SELECT}</td>
         </tr>
         <!-- ENDIF -->
-        <!-- IF $bb_cfg['allow_change']['timezone'] -->
+        <!-- IF config('allow_change.timezone') -->
         <tr>
             <td class="prof-title">{L_SYSTEM_TIMEZONE}:</td>
             <td>{TIMEZONE_SELECT}</td>
@@ -242,7 +242,7 @@
             <!-- ENDIF -->
         </tr>
 
-        <!-- IF IS_ADMIN || $bb_cfg['show_email_visibility_settings'] -->
+        <!-- IF IS_ADMIN || config('show_email_visibility_settings') -->
         <tr>
             <td class="prof-title">{L_PUBLIC_VIEW_EMAIL}:</td>
             <td>
@@ -265,7 +265,7 @@
                 <label><input type="radio" name="user_notify" value="0" <!-- IF not USER_NOTIFY -->checked<!-- ENDIF --> />{L_NO}</label>
             </td>
         </tr>
-        <!-- IF $bb_cfg['pm_notify_enabled'] -->
+        <!-- IF config('pm_notify_enabled') -->
         <tr>
             <td class="prof-title">{L_NOTIFY_ON_PRIVMSG}:</td>
             <td>
@@ -318,7 +318,7 @@
                 <label><input type="radio" name="user_hide_torrent_client" value="0" <!-- IF not USER_HIDE_TORRENT_CLIENT -->checked<!-- ENDIF --> />{L_NO}</label>
             </td>
         </tr>
-        <!-- IF $bb_cfg['ip2country_settings']['enabled'] -->
+        <!-- IF config('ip2country_settings.enabled') -->
         <tr>
             <td class="prof-title">{L_HIDE_PEER_COUNTRY_NAME}:</td>
             <td>
@@ -350,7 +350,7 @@
                     <tr>
                         <td>
                             {AVATAR_EXPLAIN}
-                            <!-- IF $bb_cfg['avatars']['up_allowed'] -->
+                            <!-- IF config('avatars.up_allowed') -->
                             <div class="spacer_4"></div>
                             {L_UPLOAD_AVATAR_FILE}:
                             <input type="hidden" name="MAX_FILE_SIZE" value="{{ config('avatars.max_size') }}"/>

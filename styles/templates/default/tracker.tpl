@@ -67,7 +67,7 @@ ajax.callback.view_post = function(data) {
 
 <div class="nav">
 	<p class="floatL"><a href="{U_INDEX}">{T_INDEX}</a></p>
-	<p class="floatR"><!-- IF $bb_cfg['tracker']['random_release_button'] --><a href="{U_TRACKER}?random_release=1">{L_RANDOM_RELEASE}</a><!-- ENDIF --><!-- IF MATCHES -->&nbsp;&middot;&nbsp;{MATCHES}{SERACH_MAX}<!-- ENDIF --></p>
+	<p class="floatR"><!-- IF config('tracker.random_release_button') --><a href="{U_TRACKER}?random_release=1">{L_RANDOM_RELEASE}</a><!-- ENDIF --><!-- IF MATCHES -->&nbsp;&middot;&nbsp;{MATCHES}{SERACH_MAX}<!-- ENDIF --></p>
 	<div class="clear"></div>
 </div>
 
@@ -226,7 +226,7 @@ ajax.callback.view_post = function(data) {
 							/>&nbsp;{L_HIDE_CONTENTS}
 						</label>
 					</p>
-					<!-- IF $bb_cfg['tracker']['gold_silver_enabled'] --><p class="chbox">{TOR_TYPE_CHBOX}</p><!-- ENDIF -->
+					<!-- IF config('tracker.gold_silver_enabled') --><p class="chbox">{TOR_TYPE_CHBOX}</p><!-- ENDIF -->
 				</div>
 				</fieldset>
 				<fieldset>
@@ -279,7 +279,7 @@ ajax.callback.view_post = function(data) {
 					<p class="chbox med">
 						{ALL_WORDS_CHBOX}
 						&middot; <a class="med" href="#" onclick="return get_fs_link();">{L_SEL_CHAPTERS}</a>
-						<!-- IF $bb_cfg['search_help_url'] --> &middot; <a class="med" href="{{ config('search_help_url') }}">{L_SEARCH_HELP_URL}</a><!-- ENDIF -->
+						<!-- IF config('search_help_url') --> &middot; <a class="med" href="{{ config('search_help_url') }}">{L_SEARCH_HELP_URL}</a><!-- ENDIF -->
 					</p>
 				</div>
 				</fieldset>
