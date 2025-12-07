@@ -394,7 +394,7 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'avatar_ext_id':
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
-                $avatarFile = request()->files->get('avatar');
+                $avatarFile = request()->getFileAsArray('avatar');
 
                 // Integration with MonsterID
                 if (empty($avatarFile['name']) && !request()->post->has('delete_avatar') && request()->post->has('use_monster_avatar')) {

@@ -378,12 +378,13 @@ if (($delete || $mode == 'delete') && !$confirm) {
         $is_first_post = $mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']);
         $can_upload = $post_info['allow_reg_tracker'] && $is_auth['auth_attachments'] && $is_first_post;
         $file_attached = !empty($post_info['attach_ext_id']);
-        $has_file = request()->files->get('fileupload') && request()->files->get('fileupload')->getClientOriginalName();
+        $fileData = request()->getFileAsArray('fileupload');
+        $has_file = $fileData && !empty($fileData['name']);
 
         if ($can_upload && $has_file && (!$file_attached || $mode == 'editpost')) {
             $result = \TorrentPier\Attachment::store(
                 $topic_id,
-                request()->files->get('fileupload'),
+                $fileData,
                 !empty($post_info['tracker_status'])
             );
             if (!$result['success']) {

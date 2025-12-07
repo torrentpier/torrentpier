@@ -65,7 +65,11 @@ final class Response
      */
     public static function json(mixed $data, int $status = 200, array $headers = [], int $encodingOptions = 0): JsonResponse
     {
-        return new JsonResponse($data, $status, $headers, false, $encodingOptions);
+        $response = new JsonResponse($data, $status, $headers);
+        if ($encodingOptions !== 0) {
+            $response->setEncodingOptions($encodingOptions);
+        }
+        return $response;
     }
 
     /**
@@ -106,13 +110,18 @@ final class Response
         $response = new BinaryFileResponse($path);
 
         if ($filename !== null) {
-            $response->setContentDisposition($disposition, $filename);
+            // Create ASCII fallback for non-ASCII filenames
+            $fallback = preg_replace('/[^\x20-\x7E]/', '_', $filename);
+            if ($fallback === '' || $fallback === null) {
+                $fallback = 'download';
+            }
+            $response->setContentDisposition($disposition, $filename, $fallback);
         } else {
             $response->setContentDisposition($disposition);
         }
 
         if ($deleteFile) {
-            $response->deleteFileAfterSend(true);
+            $response->deleteFileAfterSend();
         }
 
         return $response;
@@ -271,7 +280,7 @@ final class Response
         $response = new SymfonyResponse($content, 200, [
             'Content-Type' => 'application/atom+xml; charset=UTF-8',
         ]);
-        return self::cache($response, $cacheTtl, true);
+        return self::cache($response, $cacheTtl);
     }
 
     /**
@@ -289,6 +298,31 @@ final class Response
     }
 
     /**
+     * Create a torrent content download response (for dynamically generated torrents)
+     *
+     * @param string $content Torrent file content (bencoded)
+     * @param string $filename Download filename
+     */
+    public static function torrentContent(string $content, string $filename): SymfonyResponse
+    {
+        $response = new SymfonyResponse($content, 200, [
+            'Content-Type' => 'application/x-bittorrent',
+        ]);
+
+        // Create ASCII fallback for non-ASCII filenames
+        $fallback = preg_replace('/[^\x20-\x7E]/', '_', $filename);
+        if ($fallback === '' || $fallback === null) {
+            $fallback = 'download.torrent';
+        }
+
+        $response->headers->set(
+            'Content-Disposition',
+            $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename, $fallback)
+        );
+        return $response;
+    }
+
+    /**
      * Create an M3U playlist response
      *
      * @param string $content M3U content
@@ -299,9 +333,16 @@ final class Response
         $response = new SymfonyResponse($content, 200, [
             'Content-Type' => 'audio/x-mpegurl',
         ]);
+
+        // Create ASCII fallback for non-ASCII filenames
+        $fallback = preg_replace('/[^\x20-\x7E]/', '_', $filename);
+        if ($fallback === '' || $fallback === null) {
+            $fallback = 'playlist.m3u';
+        }
+
         $response->headers->set(
             'Content-Disposition',
-            $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename)
+            $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename, $fallback)
         );
         return $response;
     }

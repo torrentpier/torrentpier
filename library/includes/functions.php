@@ -1324,17 +1324,12 @@ function bb_die($msg_text, $status_code = null)
 
 function bb_simple_die($txt, $status_code = null)
 {
-    header('Content-Type: text/plain; charset=' . DEFAULT_CHARSET);
-
-    if (isset($status_code)) {
-        http_response_code($status_code);
-    }
-
     if (!empty($_COOKIE['explain'])) {
         bb_die("bb_simple_die:<br /><br />$txt");
     }
 
-    die($txt);
+    \TorrentPier\Http\Response::text($txt, $status_code ?? 200)->send();
+    exit;
 }
 
 function bb_realpath($path)
@@ -1376,11 +1371,9 @@ function redirect($url)
 
     $redirect_url = $server_protocol . $server_name . $server_port . $script_name . preg_replace('#^\/?(.*?)\/?$#', '/\1', $url);
 
-    // Send no-cache headers to prevent browsers from caching redirects
-    send_no_cache_headers();
-
-    // Behave as per HTTP/1.1 spec for others
-    header('Location: ' . $redirect_url, response_code: 301);
+    // Send redirect response with no-cache headers
+    $response = \TorrentPier\Http\Response::permanentRedirect($redirect_url);
+    \TorrentPier\Http\Response::noCache($response)->send();
     exit;
 }
 

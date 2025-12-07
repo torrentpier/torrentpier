@@ -338,6 +338,36 @@ final class Request
     }
 
     // ========================================
+    // File uploads
+    // ========================================
+
+    /**
+     * Get uploaded file as legacy array format (like $_FILES)
+     *
+     * Returns an array with keys: name, type, tmp_name, error, size
+     * Returns null if a file was not uploaded
+     *
+     * @param string $key The form field name
+     * @return array<string, mixed>|null Legacy file array or null
+     */
+    public function getFileAsArray(string $key): ?array
+    {
+        $file = $this->request->files->get($key);
+
+        if (!$file instanceof UploadedFile) {
+            return null;
+        }
+
+        return [
+            'name' => $file->getClientOriginalName(),
+            'type' => $file->getClientMimeType(),
+            'tmp_name' => $file->getPathname(),
+            'error' => $file->getError(),
+            'size' => $file->getSize(),
+        ];
+    }
+
+    // ========================================
     // Backward compatibility
     // ========================================
 

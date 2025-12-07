@@ -146,11 +146,10 @@ if (request()->has('import_pack')) {
             $smile_pak .= $resultset[$i]['code'] . "\n";
         }
 
-        header('Content-Type: text/x-delimtext; name="smiles.pak"');
-        header('Content-disposition: attachment; filename=smiles.pak');
-
-        echo $smile_pak;
-
+        $response = \TorrentPier\Http\Response::text($smile_pak);
+        $response->headers->set('Content-Type', 'text/x-delimtext; name="smiles.pak"');
+        $response->headers->set('Content-Disposition', 'attachment; filename=smiles.pak');
+        $response->send();
         exit;
     }
 

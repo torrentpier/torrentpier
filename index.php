@@ -23,11 +23,11 @@ switch ($result['action']) {
         exit;
 
     case FrontController::ACTION_REDIRECT:
-        header('Location: ' . $result['url'], true, 301);
+        \TorrentPier\Http\Response::permanentRedirect($result['url'])->send();
         exit;
 
     case FrontController::ACTION_NOT_FOUND:
-        http_response_code(404);
+        \TorrentPier\Http\Response::notFound()->send();
         exit;
 
     case FrontController::ACTION_STATIC:
@@ -72,11 +72,7 @@ switch ($result['action']) {
             bb_die('PAGE_NOT_FOUND', 404);
 
         } catch (\League\Route\Http\Exception\MethodNotAllowedException $e) {
-            http_response_code(405);
-            foreach ($e->getHeaders() as $name => $value) {
-                header("$name: $value");
-            }
-            echo 'Method Not Allowed';
+            \TorrentPier\Http\Response::error('Method Not Allowed', 405)->send();
 
         } catch (\Throwable $e) {
             dev()->getWhoops()->handleException($e);

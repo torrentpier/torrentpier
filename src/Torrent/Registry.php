@@ -223,7 +223,8 @@ class Registry
             DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id");
         }
 
-        if ($reg_mode == 'request' || $reg_mode == 'newtopic') {
+        $reg_mode = self::regMode();
+        if ($reg_mode === 'request' || $reg_mode === 'newtopic') {
             set_die_append_msg($forum_id, $topic_id);
             bb_die(sprintf(__('BT_REGISTERED'), DL_URL . $topic_id));
         }

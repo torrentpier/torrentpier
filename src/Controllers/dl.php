@@ -7,6 +7,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use TorrentPier\Http\Response;
+
 define('NO_GZIP', true);
 
 $topic_id = request()->getInt('t');
@@ -54,10 +56,9 @@ if ($m3u) {
         bb_die(__('ERROR_NO_ATTACHMENT') . '[M3U]');
     }
 
-    $filename = basename($m3uFile);
-    header('Content-Type: ' . mime_content_type($m3uFile));
-    header("Content-Disposition: attachment; filename=\"$filename\"");
-    readfile($m3uFile);
+    $response = Response::download($m3uFile, basename($m3uFile));
+    $response->headers->set('Content-Type', 'audio/x-mpegurl');
+    $response->send();
     exit;
 }
 
@@ -92,9 +93,5 @@ if (!is_file($file_path)) {
 $ext = config()->get('file_id_ext')[$t_data['attach_ext_id']] ?? '';
 $send_filename = \TorrentPier\Attachment::getDownloadFilename($topic_id, $t_data['topic_title'], $ext);
 
-header('Content-Type: application/octet-stream');
-header("Content-Disposition: attachment; filename*=UTF-8''" . rawurlencode($send_filename));
-header('Content-Length: ' . filesize($file_path));
-
-readfile($file_path);
+Response::download($file_path, $send_filename)->send();
 exit;

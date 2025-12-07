@@ -12,6 +12,7 @@ namespace TorrentPier\Torrent;
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
 use TorrentPier\Attachment;
+use TorrentPier\Http\Response;
 
 use Exception;
 
@@ -163,9 +164,7 @@ class Sender
             bb_die("<pre>$out</pre>");
         }
 
-        header("Content-Type: " . TORRENT_MIMETYPE . "; name=\"$dl_fname\"");
-        header("Content-Disposition: attachment; filename=\"$dl_fname\"");
-
-        bb_exit($output);
+        Response::torrentContent($output, $dl_fname)->send();
+        exit;
     }
 }
