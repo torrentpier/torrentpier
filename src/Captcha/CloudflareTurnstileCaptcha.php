@@ -64,7 +64,7 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
     public function check(): bool
     {
         // Require token present - fail closed
-        $turnstileResponse = $_POST['cf-turnstile-response'] ?? '';
+        $turnstileResponse = request()->post->get('cf-turnstile-response', '');
         if (empty($turnstileResponse)) {
             return false;
         }

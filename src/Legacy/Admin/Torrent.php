@@ -34,11 +34,11 @@ class Torrent
             bb_die('Could not update ' . $table_name);
         }
 
-        if (isset($_POST[$field_name])) {
+        if (request()->post->has($field_name)) {
             // Get new status
             $in_sql = [];
 
-            foreach ($_POST[$field_name] as $i => $val) {
+            foreach (request()->post->all($field_name) as $i => $val) {
                 $in_sql[] = (int)$val;
             }
 
@@ -101,13 +101,14 @@ class Torrent
     public static function update_config_table($table_name, $default_cfg, $cfg, $type)
     {
         foreach ($default_cfg as $config_name => $config_value) {
-            if (isset($_POST[$config_name]) && $_POST[$config_name] != $cfg[$config_name]) {
+            $postValue = request()->post->get($config_name);
+            if ($postValue !== null && $postValue != $cfg[$config_name]) {
                 if ($type == 'str') {
-                    $config_value = $_POST[$config_name];
+                    $config_value = $postValue;
                 } elseif ($type == 'bool') {
-                    $config_value = ($_POST[$config_name]) ? 1 : 0;
+                    $config_value = ($postValue) ? 1 : 0;
                 } elseif ($type == 'num') {
-                    $config_value = abs((int)$_POST[$config_name]);
+                    $config_value = abs((int)$postValue);
                 } else {
                     return;
                 }

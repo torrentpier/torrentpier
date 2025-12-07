@@ -64,7 +64,7 @@ class GoogleCaptchaV2 implements CaptchaInterface
     public function check(): bool
     {
         $reCaptcha = new ReCaptcha($this->settings['secret_key']);
-        $resp = $reCaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+        $resp = $reCaptcha->verify(request()->post->get('g-recaptcha-response', ''), request()->getClientIp());
 
         return $resp->isSuccess();
     }

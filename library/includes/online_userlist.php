@@ -108,7 +108,7 @@ if ($ulist) {
 
 if (!$online['userlist']) {
     $online['userlist'] = $online_short['userlist'] = __('NONE');
-} elseif (isset($_REQUEST['f'])) {
+} elseif (request()->has('f')) {
     $online['userlist'] = $online_short['userlist'] = __('BROWSING_FORUM') . ' ' . $online['userlist'];
 }
 

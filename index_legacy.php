@@ -49,7 +49,7 @@ user()->session_start();
 page_cfg('meta_description', config()->get('site_desc'));
 
 // Init main vars
-$viewcat = isset($_GET[POST_CAT_URL]) ? (int)$_GET[POST_CAT_URL] : 0;
+$viewcat = request()->query->getInt(POST_CAT_URL);
 $lastvisit = IS_GUEST ? TIMENOW : userdata('user_lastvisit');
 
 // Caching output
@@ -61,7 +61,7 @@ caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . config()->get('def
 
 $hide_cat_opt = isset(user()->opt_js['h_cat']) ? (string)user()->opt_js['h_cat'] : 0;
 $hide_cat_user = array_flip(explode('-', $hide_cat_opt));
-$showhide = isset($_GET['sh']) ? (int)$_GET['sh'] : 0;
+$showhide = request()->query->getInt('sh');
 
 // Statistics
 $stats = datastore()->get('stats');
@@ -263,7 +263,7 @@ foreach ($cat_forums as $cid => $c) {
 
 template()->assign_vars([
     'SHOW_FORUMS' => $forums_count,
-    'SHOW_MAP' => isset($_GET['map']) && !IS_GUEST,
+    'SHOW_MAP' => request()->query->has('map') && !IS_GUEST,
     'PAGE_TITLE' => $viewcat ? $cat_title_html[$viewcat] : __('HOME'),
     'NO_FORUMS_MSG' => $only_new ? __('NO_NEW_POSTS') : __('NO_FORUMS'),
 
@@ -419,7 +419,7 @@ if (IS_AM) {
 // Display page
 define('SHOW_ONLINE', $show_online_users);
 
-if (isset($_GET['map'])) {
+if (request()->query->has('map')) {
     template()->assign_vars(['PAGE_TITLE' => __('FORUM_MAP')]);
 }
 

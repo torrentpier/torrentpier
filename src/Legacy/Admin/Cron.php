@@ -135,10 +135,12 @@ class Cron
      */
     public static function insert_cron_job(array $cron_arr): void
     {
-        $row = DB()->fetch_row("SELECT cron_title, cron_script FROM " . BB_CRON . " WHERE cron_title = '" . $_POST['cron_title'] . "' or cron_script = '" . $_POST['cron_script'] . "' ");
+        $cronTitle = request()->post->get('cron_title');
+        $cronScript = request()->post->get('cron_script');
+        $row = DB()->fetch_row("SELECT cron_title, cron_script FROM " . BB_CRON . " WHERE cron_title = '" . DB()->escape($cronTitle) . "' or cron_script = '" . DB()->escape($cronScript) . "' ");
 
         if ($row) {
-            if ($_POST['cron_script'] == $row['cron_script']) {
+            if ($cronScript == $row['cron_script']) {
                 $langmode = __('SCRIPT_DUPLICATE');
             } else {
                 $langmode = __('TITLE_DUPLICATE');

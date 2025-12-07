@@ -135,7 +135,7 @@ class Post
         }
 
         if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
-            $topic_dl_type = (isset($_POST['topic_dl_type']) && ($allow_reg_tracker || $is_moderator)) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
+            $topic_dl_type = (request()->post->has('topic_dl_type') && ($allow_reg_tracker || $is_moderator)) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
 
             $sql_insert = "
 			INSERT INTO

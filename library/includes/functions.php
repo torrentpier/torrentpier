@@ -586,9 +586,10 @@ function bt_show_port($port)
 
 function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0, ?array $previous_settings = null, $search_id = null)
 {
-    if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
-        $val = (int)$_REQUEST[$key];
-    } elseif (!isset($_REQUEST[$key]) && isset($_REQUEST['prev_' . $key])) {
+    $requestValue = request()->get($key);
+    if (is_string($requestValue)) {
+        $val = (int)$requestValue;
+    } elseif (!request()->has($key) && request()->has('prev_' . $key)) {
         $val = $off;
     } elseif (isset($previous_settings[$key]) && (!IS_GUEST || !empty($search_id))) {
         $val = ($previous_settings[$key]) ? $on : $off;
@@ -599,9 +600,10 @@ function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0, ?array 
 
 function select_get_val($key, &$val, $options_ary, $default, $num = true, ?array $previous_settings = null)
 {
-    if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
-        if (isset($options_ary[$_REQUEST[$key]])) {
-            $val = ($num) ? (int)$_REQUEST[$key] : $_REQUEST[$key];
+    $requestValue = request()->get($key);
+    if (is_string($requestValue)) {
+        if (isset($options_ary[$requestValue])) {
+            $val = ($num) ? (int)$requestValue : $requestValue;
         }
     } elseif (isset($previous_settings[$key])) {
         $val = $previous_settings[$key];

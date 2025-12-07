@@ -25,7 +25,7 @@ if (defined('PAGE_HEADER_SENT')) {
     template()->pparse('page_footer');
 }
 
-$show_dbg_info = (DBG_USER && !(isset($_GET['pane']) && $_GET['pane'] == 'left'));
+$show_dbg_info = (DBG_USER && request()->query->get('pane') !== 'left');
 
 if (!config()->get('gzip_compress')) {
     flush();

@@ -875,7 +875,7 @@ if (!defined('IN_TRACKER')) {
     // Init board
     require_once INC_DIR . '/init_bb.php';
 } else {
-    define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
+    define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long(request()->server->get('REMOTE_ADDR')), request()->query->getInt('port') ?: random_int(1000, 65000)));
 
     define('PEER_HASH_EXPIRE', round(config()->get('announce_interval') * (0.85 * config()->get('tracker.expire_factor'))));
     define('PEERS_LIST_EXPIRE', round(config()->get('announce_interval') * 0.7));

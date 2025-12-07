@@ -49,7 +49,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
 
 // Define show peers mode (count only || user names with complete % || full details)
     $cfg_sp_mode = config()->get('bt_show_peers_mode');
-    $get_sp_mode = $_GET['spmode'] ?? '';
+    $get_sp_mode = request()->query->get('spmode', '');
 
     $s_mode = 'count';
 
@@ -251,11 +251,11 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                 $full_mode_order = 'tr.remain';
                 $full_mode_sort_dir = 'ASC';
 
-                if (isset($_REQUEST['psortdesc'])) {
+                if (request()->has('psortdesc')) {
                     $full_mode_sort_dir = 'DESC';
                 }
 
-                if (isset($_REQUEST['porder'])) {
+                if (request()->has('porder')) {
                     $peer_orders = [
                         'name' => 'u.username',
                         'ip' => 'tr.ip',
@@ -269,8 +269,9 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                         'peer_id' => 'tr.peer_id',
                     ];
 
+                    $porder = request()->getString('porder');
                     foreach ($peer_orders as $get_key => $order_by_value) {
-                        if ($_REQUEST['porder'] == $get_key) {
+                        if ($porder == $get_key) {
                             $full_mode_order = $order_by_value;
                             break;
                         }
