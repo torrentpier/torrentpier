@@ -1,0 +1,19 @@
+announcement:
+  label: Announcement
+  permalink: /announcement
+  description: Project announcements and news
+
+development:
+  label: Development
+  permalink: /development
+  description: Development updates and progress
+
+v3:
+  label: v3.0
+  permalink: /v3
+  description: TorrentPier 3.0 related
+
+templates:
+  label: Templates
+  permalink: /templates
+  description: Template engine and theming

@@ -1,0 +1,10 @@
+{
+  "label": "Legacy System",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "title": "Legacy System Documentation",
+    "description": "Documentation and analysis of the legacy TorrentPier v2.x system that is being modernized with Laravel.",
+    "keywords": ["legacy", "torrentpier", "migration"]
+  }
+}

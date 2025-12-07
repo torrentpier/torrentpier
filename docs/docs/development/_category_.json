@@ -1,0 +1,8 @@
+{
+  "label": "Development",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Development guides and best practices for TorrentPier."
+  }
+}

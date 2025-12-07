@@ -45,10 +45,27 @@ $RECYCLE.BIN/
 .DS_Store
 .AppleDouble
 .LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
 ._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
 .Spotlight-V100
+.TemporaryItems
 .Trashes
 *.orig
 *.rej
 
 docker-compose.local.yml
+
+# Docusaurus
+/docs/.docusaurus
+/docs/.cache-loader
+/docs/build
+/docs/node_modules

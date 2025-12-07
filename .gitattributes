@@ -2,6 +2,7 @@
 
 *.css diff=css
 *.tpl diff=html
+*.twig diff=html
 *.md diff=markdown
 *.php diff=php
 
