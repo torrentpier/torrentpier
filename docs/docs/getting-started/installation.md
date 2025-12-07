@@ -4,21 +4,19 @@ sidebar_position: 1
 
 # Installation
 
-This guide will help you install and set up TorrentPier on your server.
+This guide will help you install TorrentPier on your server.
 
 ## Requirements
 
-Before installing TorrentPier, ensure your server meets these requirements:
-
 - **PHP** 8.4 or higher
-- **MySQL** 8.0+ / PostgreSQL 15+ / SQLite 3.8.8+ / SQL Server 2017+
-- **Node.js** 22.0 or higher
+- **MySQL** 8.0+ / MariaDB 10.5+ / Percona Server
 - **Composer** 2.0 or higher
-- **Redis** (optional, for caching and queues)
+- **Web server**: Apache or Nginx
 
-### PHP Extensions
+### PHP extensions
 
-Ensure the following PHP extensions are installed:
+Ensure these PHP extensions are installed:
+
 - BCMath
 - Ctype
 - cURL
@@ -27,105 +25,72 @@ Ensure the following PHP extensions are installed:
 - JSON
 - Mbstring
 - OpenSSL
-- PCRE
-- PDO
+- PDO + pdo_mysql
 - Tokenizer
 - XML
+- Zlib
 
-## Installation Steps
+## Installation methods
 
-### 1. Clone the Repository
+### Method 1: Automated installer (recommended)
 
 ```bash
-git clone https://github.com/torrentpier/torrentpier.git torrentpier
+git clone https://github.com/torrentpier/torrentpier.git
 cd torrentpier
-```
-
-### 2. Install Dependencies
-
-Install PHP dependencies:
-
-```bash
 composer install
+php install.php
 ```
 
-Install JavaScript dependencies:
+The installer will guide you through:
+- Database configuration
+- Admin account creation
+- Initial settings
+
+### Method 2: Composer create-project
 
 ```bash
-npm install
+composer create-project torrentpier/torrentpier
+cd torrentpier
+php install.php
 ```
 
-### 3. Environment Configuration
+### Method 3: Manual installation
 
-Copy the example environment file:
+1. Clone or download the repository
+2. Run `composer install`
+3. Copy `.env.example` to `.env`
+4. Configure database settings in `.env`
+5. Run migrations: `php vendor/bin/phinx migrate`
+6. Configure your web server
 
-```bash
-cp .env.example .env
-```
+## Environment configuration
 
-Generate application key:
-
-```bash
-php artisan key:generate
-```
-
-### 4. Configure Database
-
-Edit your `.env` file with your database credentials:
+Edit `.env` file with your settings:
 
 ```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
+# Database
+DB_HOST=localhost
 DB_PORT=3306
 DB_DATABASE=torrentpier
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
+
+# Site
+SITE_URL=https://your-domain.com
+
+# Cache (optional)
+CACHE_DRIVER=file
 ```
 
-### 5. Run Migrations
+## Web server configuration
 
-Create the database tables:
-
-```bash
-php artisan migrate
-```
-
-Optionally, seed the database with sample data:
-
-```bash
-php artisan db:seed
-```
-
-### 6. Build Frontend Assets
-
-For development:
-
-```bash
-npm run dev
-```
-
-For production:
-
-```bash
-npm run build
-```
-
-### 7. Configure Web Server
-
-#### Apache
-
-Ensure `mod_rewrite` is enabled and point your document root to the `public` directory.
-
-#### Nginx
-
-Example configuration:
+### Nginx
 
 ```nginx
 server {
     listen 80;
-    server_name torrentpier.local;
-    root /path/to/torrentpier/public;
-
+    server_name your-domain.com;
+    root /path/to/torrentpier;
     index index.php;
 
     location / {
@@ -134,55 +99,57 @@ server {
 
     location ~ \.php$ {
         fastcgi_pass unix:/var/run/php/php8.4-fpm.sock;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
+    }
+
+    location ~ /\.(ht|git|env) {
+        deny all;
     }
 }
 ```
 
-## Post-Installation
+### Apache
 
-### Set Up Cron Jobs
+Ensure `mod_rewrite` is enabled. The `.htaccess` file is included in the repository.
 
-Add the Laravel scheduler to your crontab:
+## Post-installation
+
+### Set up cron jobs
+
+Add to your crontab:
 
 ```bash
-* * * * * cd /path/to/torrentpier && php artisan schedule:run >> /dev/null 2>&1
+# Run maintenance tasks every minute
+* * * * * php /path/to/torrentpier/cron.php >> /dev/null 2>&1
 ```
 
-### Configure Queue Workers
+### Directory permissions
 
-If using queues, set up a supervisor configuration:
+Ensure the web server can write to:
 
-```ini
-[program:torrentpier-worker]
-process_name=%(program_name)s_%(process_num)02d
-command=php /path/to/torrentpier/artisan queue:work --sleep=3 --tries=3 --max-time=3600
-autostart=true
-autorestart=true
-stopasgroup=true
-killasgroup=true
-user=www-data
-numprocs=8
-redirect_stderr=true
-stdout_logfile=/path/to/torrentpier/storage/logs/worker.log
+```bash
+chmod -R 775 internal_data
+chown -R www-data:www-data internal_data
 ```
 
 ## Troubleshooting
 
-### Permission Issues
-
-Ensure proper permissions for storage and cache directories:
+### Permission issues
 
 ```bash
-chmod -R 775 storage bootstrap/cache
-chown -R www-data:www-data storage bootstrap/cache
+chmod -R 775 internal_data
+chmod 644 .env
 ```
 
-### Clear Caches
+### Database connection errors
 
-If you encounter issues, try clearing all caches:
+- Verify credentials in `.env`
+- Check MySQL is running
+- Ensure database exists
 
-```bash
-php artisan optimize:clear
-```
+### Blank page / 500 error
+
+- Check PHP error log
+- Verify all PHP extensions are installed
+- Run `composer install` again

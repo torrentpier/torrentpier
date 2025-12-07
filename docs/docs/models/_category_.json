@@ -1,8 +1,0 @@
-{
-  "label": "Models",
-  "position": 5,
-  "link": {
-    "type": "generated-index",
-    "description": "Eloquent Models documentation for the application"
-  }
-}

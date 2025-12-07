@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'TorrentPier Documentation',
-  tagline: 'Modern Laravel-based BitTorrent tracker',
+  tagline: 'Bull-powered BitTorrent tracker engine',
   favicon: 'img/favicon.ico',
 
   future: {
