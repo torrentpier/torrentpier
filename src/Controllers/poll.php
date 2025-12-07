@@ -33,11 +33,22 @@ if (!$t_data = DB()->table(BB_TOPICS)->where('topic_id', $topic_id)->fetch()?->t
 }
 
 // Checking the rights
-if ($mode != 'poll_vote') {
-    if ($t_data['topic_poster'] != userdata('user_id')) {
-        if (!IS_AM) {
+$is_auth = auth(AUTH_ALL, $forum_id, userdata());
+
+if ($mode == 'poll_vote') {
+    if (!$is_auth['auth_vote']) {
+        bb_die(__('RULES_VOTE_CANNOT'));
+    }
+} else {
+    $is_topic_author = ($t_data['topic_poster'] == userdata('user_id'));
+    $can_manage_poll = ($is_topic_author || $is_auth['auth_mod']);
+
+    if ($mode == 'poll_add') {
+        if (!$can_manage_poll || !$is_auth['auth_pollcreate']) {
             bb_die(__('NOT_AUTHORISED'));
         }
+    } elseif (!$can_manage_poll) {
+        bb_die(__('NOT_AUTHORISED'));
     }
 }
 
