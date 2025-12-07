@@ -43,7 +43,7 @@ $lastvisit = (!IS_GUEST) ? userdata('user_lastvisit') : '';
 $search_id = (request()->query->has('search_id') && verify_id(request()->query->get('search_id'), SEARCH_ID_LENGTH)) ? request()->query->get('search_id') : '';
 $session_id = userdata('session_id');
 
-$status = (request()->post->has('status') && is_array(request()->post->get('status'))) ? request()->post->get('status') : [];
+$status = request()->getArray('status');
 
 $cat_forum = $tor_to_show = $search_in_forums_ary = [];
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';
@@ -280,11 +280,11 @@ foreach ($GPC as $name => $params) {
 }
 
 if (request()->query->has($user_releases_key)) {
-    // Search releases by user
-    request()->query->set($poster_id_key, request()->query->getInt($user_releases_key));
-    request()->post->set($forum_key, $search_all);
+    // Search releases by user - set values directly instead of modifying the request
+    $pid_val = request()->query->getInt($user_releases_key);
+    $forum_val = $search_all;
 } elseif (request()->get('max')) {
-    request()->post->set($forum_key, $search_all);
+    $forum_val = $search_all;
 } else {
     // Get "checkbox" and "select" vars (previous_settings not loaded yet, using defaults)
     foreach ($GPC as $name => $params) {

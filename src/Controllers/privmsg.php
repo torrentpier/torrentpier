@@ -29,7 +29,7 @@ if (config()->get('privmsg_disable')) {
 //
 // Parameters
 //
-$submit = request()->getBool('post');
+$submit = request()->post->has('post');
 $submit_search = request()->post->has('usersubmit');
 $submit_msgdays = request()->post->has('submit_msgdays');
 $cancel = request()->post->has('cancel');

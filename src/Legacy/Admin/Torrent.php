@@ -34,11 +34,12 @@ class Torrent
             bb_die('Could not update ' . $table_name);
         }
 
-        if (request()->post->has($field_name)) {
+        $fieldValues = request()->getArray($field_name);
+        if (!empty($fieldValues)) {
             // Get new status
             $in_sql = [];
 
-            foreach (request()->post->all($field_name) as $i => $val) {
+            foreach ($fieldValues as $val) {
                 $in_sql[] = (int)$val;
             }
 

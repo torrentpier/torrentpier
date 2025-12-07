@@ -91,22 +91,25 @@ final class Request
      * Handles both scalar and array values safely
      *
      * @param string $key Parameter name
-     * @param mixed $default Default value if parameter not found
+     * @param mixed $default Default value if parameter not found (must be scalar for InputBag compatibility)
      */
     public function get(string $key, mixed $default = null): mixed
     {
+        // Ensure default is scalar (InputBag requirement)
+        $scalarDefault = \is_scalar($default) || $default === null ? $default : null;
+
         // POST takes priority over GET
         if ($this->request->request->has($key)) {
             try {
-                return $this->request->request->get($key, $default);
-            } catch (BadRequestException) {
+                return $this->request->request->get($key, $scalarDefault);
+            } catch (BadRequestException|\InvalidArgumentException) {
                 // Value is an array, use all() to get it
                 return $this->request->request->all($key) ?: $default;
             }
         }
         try {
-            return $this->request->query->get($key, $default);
-        } catch (BadRequestException) {
+            return $this->request->query->get($key, $scalarDefault);
+        } catch (BadRequestException|\InvalidArgumentException) {
             // Value is an array, use all() to get it
             return $this->request->query->all($key) ?: $default;
         }
@@ -195,8 +198,18 @@ final class Request
      */
     public function getArray(string $key, array $default = []): array
     {
-        $value = $this->get($key, $default);
-        return \is_array($value) ? $value : $default;
+        // Get all parameters and extract the key - more reliable than all($key)
+        $postData = $this->request->request->all();
+        if (isset($postData[$key]) && \is_array($postData[$key])) {
+            return $postData[$key];
+        }
+
+        $queryData = $this->request->query->all();
+        if (isset($queryData[$key]) && \is_array($queryData[$key])) {
+            return $queryData[$key];
+        }
+
+        return $default;
     }
 
     // ========================================
