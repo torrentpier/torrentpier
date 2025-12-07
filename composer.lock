@@ -5566,12 +5566,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/torrentpier/translations.git",
-                "reference": "3e5e2316edd8bb50ca78bd08fccb74a498f357a2"
+                "reference": "5678f6ea41407a68a99bf244071dceb0f064e5f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/torrentpier/translations/zipball/3e5e2316edd8bb50ca78bd08fccb74a498f357a2",
-                "reference": "3e5e2316edd8bb50ca78bd08fccb74a498f357a2",
+                "url": "https://api.github.com/repos/torrentpier/translations/zipball/5678f6ea41407a68a99bf244071dceb0f064e5f2",
+                "reference": "5678f6ea41407a68a99bf244071dceb0f064e5f2",
                 "shasum": ""
             },
             "require": {
@@ -5617,7 +5617,7 @@
                 "issues": "https://github.com/torrentpier/torrentpier/issues",
                 "source": "https://github.com/torrentpier/translations/tree/main"
             },
-            "time": "2025-12-06T08:14:43+00:00"
+            "time": "2025-12-07T08:49:15+00:00"
         },
         {
             "name": "twig/twig",
@@ -6359,16 +6359,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.6.2",
+            "version": "v5.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "3a454ca033b9e06b63282ce19562e892747449bb"
+                "reference": "dca41cd15c2ac9d055ad70dbfd011130757d1f82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/3a454ca033b9e06b63282ce19562e892747449bb",
-                "reference": "3a454ca033b9e06b63282ce19562e892747449bb",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/dca41cd15c2ac9d055ad70dbfd011130757d1f82",
+                "reference": "dca41cd15c2ac9d055ad70dbfd011130757d1f82",
                 "shasum": ""
             },
             "require": {
@@ -6411,9 +6411,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.6.2"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.7.0"
             },
-            "time": "2025-10-21T19:32:17+00:00"
+            "time": "2025-12-06T11:56:16+00:00"
         },
         {
             "name": "nunomaduro/collision",

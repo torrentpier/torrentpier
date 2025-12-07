@@ -101,7 +101,7 @@
         </td>
         <td valign="top">
             <div id="avatar_explain" class="med">{AVATAR_EXPLAIN}</div>
-            <!-- IF $bb_cfg['group_avatars']['up_allowed'] -->
+            <!-- IF config('group_avatars.up_allowed') -->
             <br/>
             <form action="{S_GROUP_CONFIG_ACTION}" method="post" enctype="multipart/form-data">
                 {S_HIDDEN_FIELDS}

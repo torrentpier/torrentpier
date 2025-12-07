@@ -407,7 +407,7 @@ function go_to_page ()
 					<tr><td>{L_UPLOADED}</td><td class="seedmed"><b>{UP_TOTAL}</b></td></tr>
 					<tr><td>{L_RELEASED}</td><td class="seedmed">{RELEASED}</td></tr>
 					<tr><td>{L_BONUS}</td><td class="seedmed">{UP_BONUS}</td></tr>
-					<!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="{BONUS_URL}"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
+					<!-- IF config('seed_bonus_enabled') --><tr><td>{L_SEED_BONUS}</td><td><a href="{BONUS_URL}"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
 				</table>
 			</div><!-- ENDIF -->
 			<!-- IF HTML_SIDEBAR_1 -->

@@ -16,7 +16,7 @@
 <!-- ENDIF -->
 <!-- ENDIF / LOGGED_IN -->
 
-<!-- IF $bb_cfg['show_post_bbcode_button']['enabled'] -->
+<!-- IF config('show_post_bbcode_button.enabled') -->
 <script type="text/javascript">
     let loadedText = [];
 
@@ -40,7 +40,7 @@
 </script>
 <!-- ENDIF -->
 
-<!-- IF $bb_cfg['use_ajax_posts'] && (AUTH_DELETE || AUTH_REPLY || AUTH_EDIT) -->
+<!-- IF config('use_ajax_posts') && (AUTH_DELETE || AUTH_REPLY || AUTH_EDIT) -->
 <script type="text/javascript">
 ajax.open_edit = false;
 function edit_post(post_id, type, text) {
@@ -427,10 +427,10 @@ function build_poll_add_form (src_el)
 
 			<p style="float: right; padding: 3px 2px 4px;" class="post_btn_1">
 				<!-- IF postrow.IS_FIRST_POST and CAN_ADD_POLL --><a href="#" onclick="return build_poll_add_form(this);" class="txtb">[ {L_POLL} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">[ {L_QUOTE} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">[ {L_EDIT} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, topic_id : {TOPIC_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">[ {L_DELETE} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF $bb_cfg['show_post_bbcode_button']['enabled'] --><!-- IF postrow.IS_FIRST_POST || !$bb_cfg['show_post_bbcode_button']['only_for_first_post'] --><a href="#" class="txtb" onclick="ajax.view_post('{postrow.POST_ID}'); return false;">[ {L_CODE} ]</a>{POST_BTN_SPACER}<!-- ENDIF --><!-- ENDIF -->
+				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF config('use_ajax_posts') -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">[ {L_QUOTE} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF config('use_ajax_posts') -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">[ {L_EDIT} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF config('use_ajax_posts') -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, topic_id : {TOPIC_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">[ {L_DELETE} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF config('show_post_bbcode_button.enabled') --><!-- IF postrow.IS_FIRST_POST || !config('show_post_bbcode_button.only_for_first_post') --><a href="#" class="txtb" onclick="ajax.view_post('{postrow.POST_ID}'); return false;">[ {L_CODE} ]</a>{POST_BTN_SPACER}<!-- ENDIF --><!-- ENDIF -->
 				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;{#POST_TOPIC_URL#}={TOPIC_ID}">[ {L_IP} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
 					<a class="menu-root menu-alt1 txtb" href="#mc_{postrow.POST_ID}">[ {L_COMMENT} ]</a>{POST_BTN_SPACER}

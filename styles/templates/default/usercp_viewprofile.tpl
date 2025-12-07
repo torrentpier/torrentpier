@@ -167,7 +167,7 @@ ajax.callback.group_membership = function(data) {
 <style>
 #traf-stats-tbl { width: 468px; background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate; }
 #traf-stats-tbl th, #traf-stats-tbl td { padding: 2px 10px 3px; text-align: center; white-space: nowrap; font-size: 11px; }
-#traf-stats-tbl th { padding: 2px <!-- IF $bb_cfg['seed_bonus_enabled'] -->11<!-- ELSE -->22<!-- ENDIF -->px 3px; }
+#traf-stats-tbl th { padding: 2px <!-- IF config('seed_bonus_enabled') -->11<!-- ELSE -->22<!-- ENDIF -->px 3px; }
 <!-- IF TRAF_STATS -->
 #traf-stats-tbl th { padding: 2px 30px 3px; }
 <!-- ENDIF -->
@@ -373,7 +373,7 @@ ajax.callback.group_membership = function(data) {
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
 						[ <a href="{U_SEARCH_RELEASES}" class="med">{L_SEARCH_RELEASES}</a> ]
-						<!-- IF $bb_cfg['topic_notify_enabled'] --><!-- IF PROFILE_USER || IS_ADMIN -->[ <a href="{U_WATCHED_TOPICS}&{#POST_USERS_URL#}={PROFILE_USER_ID}" class="med">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF --><!-- ENDIF -->
+						<!-- IF config('topic_notify_enabled') --><!-- IF PROFILE_USER || IS_ADMIN -->[ <a href="{U_WATCHED_TOPICS}&{#POST_USERS_URL#}={PROFILE_USER_ID}" class="med">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF --><!-- ENDIF -->
 						[ <a title="{L_ATOM_SUBSCRIBE}" href="feed?type=u&id={PROFILE_USER_ID}" target="_blank">{{ FEED_IMG|raw }}</a> ]
 					</p>
 				</td>
@@ -396,7 +396,7 @@ ajax.callback.group_membership = function(data) {
 						<b id="passkey" class="med bold"><!-- IF AUTH_KEY -->{AUTH_KEY}<!-- ELSE -->{L_NOSELECT}<!-- ENDIF --></b>&nbsp;|&nbsp;<a href="#" onclick="ajax.exec({ action: 'passkey', mode: 'generate', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
 					</span> ]
 					<!-- ENDIF -->
-					<!-- IF PROFILE_USER || IS_ADMIN --><!-- IF $bb_cfg['ratio_null_enabled'] --><!-- IF not NULLED_RATIO or IS_ADMIN -->
+					<!-- IF PROFILE_USER || IS_ADMIN --><!-- IF config('ratio_null_enabled') --><!-- IF not NULLED_RATIO or IS_ADMIN -->
 					[ <a class="med" href="#" onclick="ajax.index_data('null_ratio'); return false;">{L_BT_NULL_RATIO}</a> ]
 					<!-- ENDIF --><!-- ENDIF --><!-- ENDIF -->
 				</td>
@@ -474,7 +474,7 @@ ajax.callback.group_membership = function(data) {
 							<th>{L_UPLOADED}</th>
 							<th>{L_RELEASED}</th>
 							<th>{L_BONUS}</th>
-							<!-- IF $bb_cfg['seed_bonus_enabled'] --><th>{L_SEED_BONUS}</th><!-- ENDIF -->
+							<!-- IF config('seed_bonus_enabled') --><th>{L_SEED_BONUS}</th><!-- ENDIF -->
 						</tr>
 						<tr class="row1">
 							<td>{L_TD_TRAF}</td>
@@ -482,7 +482,7 @@ ajax.callback.group_membership = function(data) {
 							<td class="seed">{TD_UL}</td>
 							<td class="seed">{TD_REL}</td>
 							<td class="seed">{TD_BONUS}</td>
-							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td class="points">{TD_POINTS}</td><!-- ENDIF -->
+							<!-- IF config('seed_bonus_enabled') --><td class="points">{TD_POINTS}</td><!-- ENDIF -->
 						</tr>
 						<tr class="row5">
 							<td>{L_YS_TRAF}</td>
@@ -490,7 +490,7 @@ ajax.callback.group_membership = function(data) {
 							<td class="seed">{YS_UL}</td>
 							<td class="seed">{YS_REL}</td>
 							<td class="seed">{YS_BONUS}</td>
-							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td class="points">{YS_POINTS}</td><!-- ENDIF -->
+							<!-- IF config('seed_bonus_enabled') --><td class="points">{YS_POINTS}</td><!-- ENDIF -->
 						</tr>
 						<tr class="row1">
 							<td>{L_TOTAL_TRAF}</td>
@@ -498,13 +498,13 @@ ajax.callback.group_membership = function(data) {
 							<td id="u_up_total"><span class="editable bold seedmed">{UP_TOTAL}</span></td>
 							<td id="u_up_release"><span class="editable bold seedmed">{RELEASED}</span></td>
 							<td id="u_up_bonus"><span class="editable bold seedmed">{UP_BONUS}</span></td>
-							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td id="user_points"><span class="editable bold points">{USER_POINTS}</span></td><!-- ENDIF -->
+							<!-- IF config('seed_bonus_enabled') --><td id="user_points"><span class="editable bold points">{USER_POINTS}</span></td><!-- ENDIF -->
 						</tr>
 						<tr class="row5">
 							<td colspan="1">{L_MAX_SPEED}</td>
 							<td colspan="2">{L_DL_DL_SPEED}: {SPEED_DOWN}</td>
 							<td colspan="2">{L_DL_UL_SPEED}: {SPEED_UP}</td>
-							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td colspan="1"><!-- IF PROFILE_USER --><a href="{BONUS_URL}">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->
+							<!-- IF config('seed_bonus_enabled') --><td colspan="1"><!-- IF PROFILE_USER --><a href="{BONUS_URL}">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->
 						</tr>
 					</table>
 				</td>

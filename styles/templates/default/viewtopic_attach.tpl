@@ -144,7 +144,7 @@
 			</script>
 
 			<span id="tor_comment">
-			<!-- IF $bb_cfg['tor_comment'] -->
+			<!-- IF config('tor_comment') -->
 			<input type="text" id="comment" placeholder="{L_COMMENT}" />
 			<!-- ENDIF -->
 
@@ -190,7 +190,7 @@
                 <option value="del_torrent">{L_DELETE_TORRENT}</option>
                 <option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
                 <!-- IF AUTH_MOD -->
-                <!-- IF $bb_cfg['tracker']['gold_silver_enabled'] -->
+                <!-- IF config('tracker.gold_silver_enabled') -->
                 <!-- IF torrent.TOR_SILVER_GOLD == 1 -->
                 <option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
                 <option value="set_silver">{L_SET_SILVER_TORRENT}</option>
@@ -315,7 +315,7 @@ $('#tor-filelist-btn').click(function () {
 </div>
 </div>
 
-<!-- IF $bb_cfg['tor_thank'] -->
+<!-- IF config('tor_thank') -->
 <style type="text/css">
     #thx-block {
         width: 95%;
@@ -405,7 +405,7 @@ $('#tor-filelist-btn').click(function () {
         <input id="thx-btn" type="button" class="bold" style="width: 200px;" value="{L_THANK_TOPIC}">
     </div>
     <!-- ENDIF -->
-    <!-- IF not IS_GUEST or $bb_cfg['tor_thanks_list_guests'] -->
+    <!-- IF not IS_GUEST or config('tor_thanks_list_guests') -->
     <div class="sp-wrap">
         <div id="thx-list" class="sp-body" data-no-sp-open="true" title="{L_LAST_LIKES}"></div>
     </div>

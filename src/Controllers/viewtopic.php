@@ -433,7 +433,7 @@ $sel_post_order_ary = [
 $topic_has_poll = $t_data['topic_vote'];
 $poll_time_expired = ($t_data['topic_time'] < TIMENOW - config()->get('poll_max_days') * 86400);
 $can_manage_poll = ($t_data['topic_poster'] == userdata('user_id') || $is_auth['auth_mod']);
-$can_add_poll = ($can_manage_poll && !$topic_has_poll && !$poll_time_expired && !$start);
+$can_add_poll = ($can_manage_poll && $is_auth['auth_pollcreate'] && !$topic_has_poll && !$poll_time_expired && !$start);
 
 $page_title = ((int)($start / $posts_per_page) === 0) ? $topic_title :
     $topic_title . ' - ' . __('SHORT_PAGE') . ' ' . (floor($start / $posts_per_page) + 1);
@@ -521,7 +521,7 @@ if ($topic_has_poll) {
         template()->assign_vars(['TOPIC_HAS_POLL' => false]);
     } else {
         template()->assign_vars([
-            'SHOW_VOTE_BTN' => \TorrentPier\Legacy\Poll::pollIsActive($t_data),
+            'SHOW_VOTE_BTN' => \TorrentPier\Legacy\Poll::pollIsActive($t_data) && $is_auth['auth_vote'],
             'POLL_ALREADY_VOTED' => \TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)userdata('user_id')),
             'POLL_VOTES_JS' => $poll_votes_js
         ]);
