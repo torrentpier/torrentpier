@@ -386,22 +386,6 @@ function auth_check($bf_ary, $bf_key, $perm_ary, $perm_key, $is_admin = false)
     return bf($perm_ary[$perm_key], $bf_ary, $bf_key);
 }
 
-/**
- * Format time difference in human-readable format
- *
- * @param int|string $timestamp_1 First timestamp
- * @param int|string $timestamp_2 Second timestamp (defaults to now)
- * @param string $granularity Ignored (kept for backward compatibility)
- * @return string Human-readable time difference
- * @deprecated Use humanTime() instead
- * @see humanTime()
- *
- */
-function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
-{
-    return humanTime($timestamp_1, $timestamp_2);
-}
-
 function get_select($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
 {
     $select_name = null;
@@ -437,17 +421,6 @@ function build_select($name, $params, $selected = null, $max_length = HTML_SELEC
 function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
 {
     return html()->build_checkbox($name, $title, $checked, $disabled, $class, $id, $value);
-}
-
-function replace_quote($str, $double = true, $single = true)
-{
-    if ($double) {
-        $str = str_replace('"', '&quot;', $str);
-    }
-    if ($single) {
-        $str = str_replace("'", '&#039;', $str);
-    }
-    return $str;
 }
 
 /**
@@ -660,11 +633,6 @@ function str_short($text, $max_length, $space = ' ')
     return $text ?? '';
 }
 
-function wbr($text, $max_word_length = HTML_WBR_LENGTH)
-{
-    return preg_replace("/([\w\->;:.,~!?(){}@#$%^*\/\\\\]{" . $max_word_length . "})/ui", '$1<wbr>', $text);
-}
-
 function generate_user_info($row, bool $have_auth = IS_ADMIN): array
 {
     $from = !empty($row['user_from']) ? render_flag($row['user_from'], false) : __('NOSELECT');
@@ -788,47 +756,6 @@ function bb_update_config($params, $table = BB_CONFIG)
     bb_get_config($table, true, true);
 }
 
-function get_db_stat($mode)
-{
-    switch ($mode) {
-        case 'usercount':
-            $sql = "SELECT COUNT(user_id) AS total FROM " . BB_USERS;
-            break;
-
-        case 'newestuser':
-            $sql = "SELECT user_id, username FROM " . BB_USERS . " WHERE user_id <> " . GUEST_UID . " ORDER BY user_id DESC LIMIT 1";
-            break;
-
-        case 'postcount':
-        case 'topiccount':
-            $sql = "SELECT SUM(forum_topics) AS topic_total, SUM(forum_posts) AS post_total FROM " . BB_FORUMS;
-            break;
-    }
-
-    if (!($result = DB()->sql_query($sql))) {
-        return false;
-    }
-
-    $row = DB()->sql_fetchrow($result);
-
-    switch ($mode) {
-        case 'usercount':
-            return $row['total'];
-            break;
-        case 'newestuser':
-            return $row;
-            break;
-        case 'postcount':
-            return $row['post_total'];
-            break;
-        case 'topiccount':
-            return $row['topic_total'];
-            break;
-    }
-
-    return false;
-}
-
 function clean_username($username)
 {
     $username = mb_substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25, DEFAULT_CHARSET);
@@ -836,28 +763,6 @@ function clean_username($username)
     $username = str_replace("'", "\'", $username);
 
     return $username;
-}
-
-function bb_ltrim($str, $charlist = false)
-{
-    if ($charlist === false) {
-        return ltrim($str);
-    }
-
-    $str = ltrim($str, $charlist);
-
-    return $str;
-}
-
-function bb_rtrim($str, $charlist = false)
-{
-    if ($charlist === false) {
-        return rtrim($str);
-    }
-
-    $str = rtrim($str, $charlist);
-
-    return $str;
 }
 
 /**
@@ -1261,18 +1166,6 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
     return $pagination;
 }
 
-//
-// This does exactly what preg_quote() does in PHP 4-ish
-// If you just need the 1-parameter preg_quote call, then don't bother using this.
-//
-function bb_preg_quote($str, $delimiter)
-{
-    $text = preg_quote($str);
-    $text = str_replace($delimiter, '\\' . $delimiter, $text);
-
-    return $text;
-}
-
 function bb_die($msg_text, $status_code = null)
 {
     if (isset($status_code)) {
@@ -1330,11 +1223,6 @@ function bb_simple_die($txt, $status_code = null)
 
     \TorrentPier\Http\Response::text($txt, $status_code ?? 200)->send();
     exit;
-}
-
-function bb_realpath($path)
-{
-    return realpath($path);
 }
 
 function login_redirect($url = '')
