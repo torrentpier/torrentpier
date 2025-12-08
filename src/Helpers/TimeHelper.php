@@ -116,4 +116,23 @@ class TimeHelper
             return '';
         }
     }
+
+    /**
+     * Calculate age from a birthday and return a human-readable format
+     *
+     * @param string|null $date Birthday date string
+     * @param float|null $timezoneOffset Timezone offset in hours (null = use board default)
+     * @return string Human-readable age or empty string
+     */
+    public static function birthdayAge(?string $date, ?float $timezoneOffset = null): string
+    {
+        if (empty($date)) {
+            return '';
+        }
+
+        $timezoneOffset ??= (float) config()->get('board_timezone', 0);
+        $now = defined('TIMENOW') ? TIMENOW : time();
+
+        return self::humanTime(strtotime($date, $now + (3600 * $timezoneOffset)));
+    }
 }

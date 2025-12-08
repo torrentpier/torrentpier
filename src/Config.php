@@ -137,6 +137,58 @@ class Config
     }
 
     /**
+     * Load configuration from the database table
+     *
+     * @param string $table Database table name
+     * @param bool $fromDb Force load from database (skip cache)
+     * @param bool $updateCache Update cache after loading
+     * @return array Configuration array
+     */
+    public function loadFromDatabase(string $table, bool $fromDb = false, bool $updateCache = true): array
+    {
+        if (!$fromDb) {
+            $cached = \CACHE('bb_config')->get("config_{$table}");
+            if ($cached) {
+                return $cached;
+            }
+        }
+
+        $cfg = [];
+        foreach (\DB()->fetch_rowset("SELECT * FROM $table") as $row) {
+            $cfg[$row['config_name']] = $row['config_value'];
+        }
+
+        if ($updateCache) {
+            \CACHE('bb_config')->set("config_{$table}", $cfg);
+        }
+
+        return $cfg;
+    }
+
+    /**
+     * Update configuration in database table
+     *
+     * @param array $params Key-value pairs to update
+     * @param string $table Database table name (defaults to BB_CONFIG)
+     */
+    public function updateDatabase(array $params, string $table = BB_CONFIG): void
+    {
+        $updates = [];
+        foreach ($params as $name => $val) {
+            $updates[] = [
+                'config_name' => $name,
+                'config_value' => $val,
+            ];
+        }
+        $updates = \DB()->build_array('MULTI_INSERT', $updates);
+
+        \DB()->query("REPLACE INTO $table $updates");
+
+        // Update cache
+        $this->loadFromDatabase($table, true, true);
+    }
+
+    /**
      * Get a section of the configuration
      */
     public function getSection(string $section): array

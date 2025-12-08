@@ -139,7 +139,23 @@ class ReadTracker
      */
     private function loadTracks(string $type): array
     {
-        return get_tracks($type);
+        $cookieName = match ($type) {
+            'topic' => COOKIE_TOPIC,
+            'forum' => COOKIE_FORUM,
+            'pm' => COOKIE_PM,
+            default => throw new \RuntimeException("ReadTracker::loadTracks(): invalid type '$type'"),
+        };
+
+        $tracks = !empty($_COOKIE[$cookieName]) ? json_decode($_COOKIE[$cookieName], true) : false;
+        return $tracks ?: [];
+    }
+
+    /**
+     * Get tracking data by type (public wrapper for loadTracks)
+     */
+    public function getTracks(string $type): array
+    {
+        return $this->loadTracks($type);
     }
 
     /**

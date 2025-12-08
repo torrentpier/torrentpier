@@ -38,21 +38,7 @@ function delete_avatar($user_id, $avatar_ext_id)
 
 function get_tracks($type)
 {
-    switch ($type) {
-        case 'topic':
-            $c_name = COOKIE_TOPIC;
-            break;
-        case 'forum':
-            $c_name = COOKIE_FORUM;
-            break;
-        case 'pm':
-            $c_name = COOKIE_PM;
-            break;
-        default:
-            throw new \RuntimeException(__FUNCTION__ . ": invalid type '$type'");
-    }
-    $tracks = !empty($_COOKIE[$c_name]) ? json_decode($_COOKIE[$c_name], true) : false;
-    return $tracks ?: [];
+    return read_tracker()->getTracks($type);
 }
 
 /**
@@ -724,36 +710,12 @@ function show_bt_userdata($user_id): void
 
 function bb_get_config($table, $from_db = false, $update_cache = true)
 {
-    if ($from_db or !$cfg = CACHE('bb_config')->get("config_{$table}")) {
-        $cfg = [];
-
-        foreach (DB()->fetch_rowset("SELECT * FROM $table") as $row) {
-            $cfg[$row['config_name']] = $row['config_value'];
-        }
-
-        if ($update_cache) {
-            CACHE('bb_config')->set("config_{$table}", $cfg);
-        }
-    }
-
-    return $cfg;
+    return config()->loadFromDatabase($table, $from_db, $update_cache);
 }
 
 function bb_update_config($params, $table = BB_CONFIG)
 {
-    $updates = [];
-    foreach ($params as $name => $val) {
-        $updates[] = [
-            'config_name' => $name,
-            'config_value' => $val
-        ];
-    }
-    $updates = DB()->build_array('MULTI_INSERT', $updates);
-
-    DB()->query("REPLACE INTO $table $updates");
-
-    // Update cache
-    bb_get_config($table, true, true);
+    config()->updateDatabase($params, $table);
 }
 
 function clean_username($username)
@@ -1012,12 +974,7 @@ function render_flag(string $code, bool $showName = true): string
 
 function birthday_age($date)
 {
-    if (!$date) {
-        return '';
-    }
-
-    $tz = TIMENOW + (3600 * config()->get('board_timezone'));
-    return humanTime(strtotime($date, $tz));
+    return \TorrentPier\Helpers\TimeHelper::birthdayAge($date);
 }
 
 /**
