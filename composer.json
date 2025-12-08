@@ -75,7 +75,7 @@
     "samdark/sitemap": "2.4.1",
     "symfony/config": "^7.3",
     "symfony/event-dispatcher": "^8.0",
-    "symfony/filesystem": "^7.3",
+    "symfony/filesystem": "^8.0",
     "symfony/http-foundation": "^8.0",
     "symfony/mailer": "^7.3",
     "symfony/mime": "^7.3",
