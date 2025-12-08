@@ -55,7 +55,7 @@ if (request()->post->get('edit') || request()->post->get('new')) {
 
         'GROUP_NAME' => stripslashes(htmlspecialchars($group_info['group_name'])),
         'GROUP_DESCRIPTION' => stripslashes(htmlspecialchars($group_info['group_description'])),
-        'GROUP_MODERATOR' => replace_quote($group_info['group_mod_name']),
+        'GROUP_MODERATOR' => htmlspecialchars($group_info['group_mod_name'], ENT_QUOTES),
         'T_GROUP_EDIT_DELETE' => ($mode == 'newgroup') ? __('CREATE_NEW_GROUP') : __('EDIT_GROUP'),
         'U_SEARCH_USER' => BB_ROOT . 'search.php?mode=searchuser',
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
