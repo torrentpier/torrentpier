@@ -151,11 +151,15 @@ class ReadTracker
     }
 
     /**
-     * Get tracking data by type (public wrapper for loadTracks)
+     * Get tracking data by type (uses cached methods for topic/forum)
      */
     public function getTracks(string $type): array
     {
-        return $this->loadTracks($type);
+        return match ($type) {
+            'topic' => $this->getTopics(),
+            'forum' => $this->getForums(),
+            default => $this->loadTracks($type),
+        };
     }
 
     /**

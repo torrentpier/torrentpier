@@ -146,6 +146,8 @@ class Config
      */
     public function loadFromDatabase(string $table, bool $fromDb = false, bool $updateCache = true): array
     {
+        $this->validateTableName($table);
+
         if (!$fromDb) {
             $cached = \CACHE('bb_config')->get("config_{$table}");
             if ($cached) {
@@ -169,10 +171,12 @@ class Config
      * Update configuration in database table
      *
      * @param array $params Key-value pairs to update
-     * @param string $table Database table name (defaults to BB_CONFIG)
+     * @param string $table Database table name
      */
-    public function updateDatabase(array $params, string $table = BB_CONFIG): void
+    public function updateDatabase(array $params, string $table): void
     {
+        $this->validateTableName($table);
+
         $updates = [];
         foreach ($params as $name => $val) {
             $updates[] = [
@@ -218,6 +222,16 @@ class Config
     public function __isset(string $key): bool
     {
         return $this->has($key);
+    }
+
+    /**
+     * Validate table name to prevent SQL injection
+     */
+    private function validateTableName(string $table): void
+    {
+        if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $table)) {
+            throw new \InvalidArgumentException("Invalid table name: $table");
+        }
     }
 
     /**
