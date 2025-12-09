@@ -158,7 +158,7 @@ class DatabaseCollector
             $sql = trim($sql);
 
             // Convert UPDATE/DELETE to SELECT for EXPLAIN
-            if (preg_match('#UPDATE ([a-z0-9_]+).*?WHERE(.*)/#i', $sql, $m)) {
+            if (preg_match('#UPDATE ([a-z0-9_]+).*?WHERE(.*)#si', $sql, $m)) {
                 $sql = "SELECT * FROM $m[1] WHERE $m[2]";
             } elseif (preg_match('#DELETE FROM ([a-z0-9_]+).*?WHERE(.*)#si', $sql, $m)) {
                 $sql = "SELECT * FROM $m[1] WHERE $m[2]";
