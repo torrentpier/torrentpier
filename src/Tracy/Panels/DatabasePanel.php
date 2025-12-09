@@ -210,10 +210,11 @@ class DatabasePanel implements IBarPanel
         }
 
         // SQL text
-        $sql = $this->formatSql($query['sql']);
+        $fullSql = $this->cleanSql($query['sql']);
+        $displaySql = $this->formatSql($query['sql']);
         $queryId = 'tp-sql-' . md5($query['sql'] . $num);
         $html .= '<div class="tp-sql-wrapper">';
-        $html .= '<code id="' . $queryId . '" class="tp-sql-code">' . htmlspecialchars($sql) . '</code>';
+        $html .= '<code id="' . $queryId . '" class="tp-sql-code" data-full-sql="' . htmlspecialchars($fullSql, ENT_QUOTES) . '">' . htmlspecialchars($displaySql) . '</code>';
         $html .= '</div>';
 
         // Actions and EXPLAIN data
@@ -280,15 +281,22 @@ class DatabasePanel implements IBarPanel
     }
 
     /**
-     * Format SQL for display
+     * Clean SQL (remove debug comments only)
+     */
+    private function cleanSql(string $sql): string
+    {
+        $sql = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $sql);
+        return trim($sql);
+    }
+
+    /**
+     * Format SQL for display (clean + truncate)
      */
     private function formatSql(string $sql): string
     {
-        // Remove debug comments
-        $sql = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $sql);
-        $sql = trim($sql);
+        $sql = $this->cleanSql($sql);
 
-        // Truncate very long queries
+        // Truncate very long queries for display
         $maxLen = (int) config()->get('debug.max_query_length', 1000);
         if (strlen($sql) > $maxLen) {
             $sql = substr($sql, 0, $maxLen) . '... [truncated]';
@@ -354,7 +362,8 @@ class DatabasePanel implements IBarPanel
             function tpCopyToClipboard(elementId) {
                 const el = document.getElementById(elementId);
                 if (el) {
-                    navigator.clipboard.writeText(el.textContent).then(function() {
+                    const sql = el.dataset.fullSql || el.textContent;
+                    navigator.clipboard.writeText(sql).then(function() {
                         el.style.background = "#d4edda";
                         setTimeout(function() { el.style.background = ""; }, 500);
                     });
