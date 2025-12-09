@@ -63,7 +63,7 @@
         "symfony/event-dispatcher": "^8.0",
         "symfony/filesystem": "^8.0",
         "symfony/http-foundation": "^8.0",
-        "symfony/mailer": "^7.3",
+        "symfony/mailer": "^8.0",
         "symfony/mime": "^8.0",
         "symfony/polyfill": "v1.33.0",
         "symfony/string": "^8.0",
