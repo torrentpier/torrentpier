@@ -308,12 +308,7 @@ if (APP_ENV === 'development') {
     define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 }
 (\TorrentPier\Dev::init());
-
-// Initialize Tracy Debug Bar (if enabled)
-// Tracy bar provides modern debugging UI while Whoops handles error pages
-if (in_array(config()->get('debug.panel'), ['tracy', 'both'], true)) {
-    \TorrentPier\Tracy\TracyBarManager::getInstance()->init();
-}
+tracy()->init();
 
 /**
  * Server variables initialize
@@ -534,7 +529,7 @@ function read_tracker(): \TorrentPier\ReadTracker
 /**
  * Get topic tracking data
  *
- * @return array Reference to tracking array
+ * @return array Reference to a tracking array
  */
 function &tracking_topics(): array
 {
@@ -544,7 +539,7 @@ function &tracking_topics(): array
 /**
  * Get forum tracking data
  *
- * @return array Reference to tracking array
+ * @return array Reference to a tracking array
  */
 function &tracking_forums(): array
 {
@@ -771,16 +766,6 @@ function make_rand_str(int $length = 10): string
     return $randomString;
 }
 
-function bb_crc32($str)
-{
-    return (float)sprintf('%u', crc32($str));
-}
-
-function hexhex($value)
-{
-    return dechex(hexdec($value));
-}
-
 /**
  * Calculates user ratio
  *
@@ -908,7 +893,7 @@ if (!defined('IN_TRACKER')) {
     header('Pragma: no-cache');
 
     if (!defined('IN_ADMIN')) {
-        // Exit if tracker is disabled via ON/OFF trigger
+        // Exit if the tracker is disabled via ON/OFF trigger
         if (is_file(BB_DISABLED)) {
             dummy_exit(random_int(60, 2400));
         }

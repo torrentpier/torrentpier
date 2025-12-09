@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -29,14 +30,14 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 // Settings for database ['db']['srv_name'] => (array) srv_cfg;
 $bb_cfg['db'] = [
     'db' => [
-        // Don't change the settings here!!! Go to .env file
+        // Don't change the settings here!!! Go to the .env file
         env('DB_HOST', 'localhost'),
         env('DB_PORT', 3306),
         env('DB_DATABASE', 'torrentpier'),
         env('DB_USERNAME', 'root'),
         env('DB_PASSWORD'),
         'utf8mb4',
-        false
+        false,
     ],
 ];
 
@@ -91,9 +92,9 @@ $bb_cfg['gzip_compress'] = false; // Compress output
 $bb_cfg['announce_interval'] = 1800; // Announce interval (default: 1800)
 $bb_cfg['scrape_interval'] = 300; // Scrape interval (default: 300)
 $bb_cfg['max_scrapes'] = 150; // Allowed number of info-hashes for simultaneous scraping, only not cached info-hashes will abide by these limits (default: 150)
-$bb_cfg['passkey_key'] = 'uk'; // Passkey key name in GET request
-$bb_cfg['ignore_reported_ip'] = false; // Ignore IP reported by client
-$bb_cfg['verify_reported_ip'] = true; // Verify IP reported by client against $_SERVER['HTTP_X_FORWARDED_FOR']
+$bb_cfg['passkey_key'] = 'uk'; // Passkey key name in the GET request
+$bb_cfg['ignore_reported_ip'] = false; // Ignore IP reported by a client
+$bb_cfg['verify_reported_ip'] = true; // Verify IP reported by a client against $_SERVER['HTTP_X_FORWARDED_FOR']
 $bb_cfg['allow_internal_ip'] = false; // Allow internal IP (10.xx.. etc.)
 $bb_cfg['disallowed_ports'] = [
     // https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L53
@@ -123,13 +124,13 @@ $bb_cfg['client_ban'] = [
         '-UT' => 'uTorrent — NOT ad-free and open-source',
         '-MG' => 'Mostly leeching client',
         '-ZO' => '',
-    ]
+    ],
 ];
 
 // TorrentPier updater settings
 $bb_cfg['tp_updater_settings'] = [
     'enabled' => true,
-    'allow_pre_releases' => false
+    'allow_pre_releases' => false,
 ];
 
 // TorrServer integration
@@ -138,7 +139,7 @@ $bb_cfg['torr_server'] = [
     'enabled' => false,
     'url' => "http://$domain_name:8090",
     'timeout' => 3,
-    'disable_for_guest' => true
+    'disable_for_guest' => true,
 ];
 
 // FreeIPAPI settings
@@ -182,7 +183,7 @@ $bb_cfg['dl_cancel_days_keep'] = 30;
 $bb_cfg['torstat_days_keep'] = 60; // Days to keep user's per-torrent stats
 
 // Tor-Help
-$bb_cfg['torhelp_enabled'] = false; // Find dead torrents (without seeder) that user might help seeding
+$bb_cfg['torhelp_enabled'] = false; // Find dead torrents (without seeder) that user might help with seeding
 
 // URL's
 $bb_cfg['ajax_url'] = 'ajax';
@@ -192,7 +193,7 @@ $bb_cfg['posting_url'] = 'posting';
 $bb_cfg['pm_url'] = 'privmsg';
 
 // Language
-$bb_cfg['auto_language_detection'] = true; // Use browser language (auto-detect) as default language for guests
+$bb_cfg['auto_language_detection'] = true; // Use browser language (auto-detect) as the default language for guests
 $bb_cfg['lang'] = [
     // Languages available for selecting
     'af' => [
@@ -390,7 +391,6 @@ $bb_cfg['lang'] = [
 // Twig template engine
 $bb_cfg['twig'] = [
     'cache_enabled' => true,
-    'debug_bar' => false,
 ];
 
 // Templates
@@ -415,7 +415,7 @@ $bb_cfg['cookie_same_site'] = 'Lax'; // Lax, None, Strict | https://developer.mo
 $bb_cfg['session_update_intrv'] = 180; // sec
 $bb_cfg['user_session_duration'] = 1800; // sec
 $bb_cfg['admin_session_duration'] = 6 * 3600; // sec
-$bb_cfg['user_session_gc_ttl'] = 1800; // number of seconds that a staled session entry may remain in sessions table
+$bb_cfg['user_session_gc_ttl'] = 1800; // number of seconds that a staled session entry may remain in the session table
 $bb_cfg['session_cache_gc_ttl'] = 1200; // sec
 $bb_cfg['max_last_visit_days'] = 14; // days
 $bb_cfg['last_visit_update_intrv'] = 3600; // sec
@@ -424,9 +424,9 @@ $bb_cfg['last_visit_update_intrv'] = 3600; // sec
 $bb_cfg['invalid_logins'] = 5; // Max incorrect password submits before showing captcha
 $bb_cfg['new_user_reg_disabled'] = false; // Disable registration of new users
 $bb_cfg['unique_ip'] = false; // Disallow registration from multiple IP addresses
-$bb_cfg['new_user_reg_restricted'] = false; // Disallow registration in below hours
+$bb_cfg['new_user_reg_restricted'] = false; // Disallow registration in the below hours
 $bb_cfg['new_user_reg_interval'] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]; // Available hours
-$bb_cfg['reg_email_activation'] = true; // Demand to activate profile by email confirmation
+$bb_cfg['reg_email_activation'] = true; // Demand to activate a profile by email confirmation
 $bb_cfg['invites_system'] = [
     'enabled' => false,
     'codes' => [
@@ -437,8 +437,8 @@ $bb_cfg['invites_system'] = [
         'new_year2023' => '2022-12-31 00:00:01',
         '340c4bb6ea2d284c13e085b60b990a8a' => '12 April 1961',
         'tp_birthday' => '2005-04-04',
-        'endless' => 'permanent'
-    ]
+        'endless' => 'permanent',
+    ],
 ];
 $bb_cfg['password_symbols'] = [
     // What symbols should be required in the password
@@ -446,13 +446,13 @@ $bb_cfg['password_symbols'] = [
     'spec_symbols' => false,
     'letters' => [
         'uppercase' => false,
-        'lowercase' => true
-    ]
+        'lowercase' => true,
+    ],
 ];
 $bb_cfg['password_hash_options'] = [
     // https://www.php.net/manual/ru/password.constants.php
     'algo' => PASSWORD_BCRYPT,
-    'options' => ['cost' => 12]
+    'options' => ['cost' => 12],
 ];
 
 // Email
@@ -463,8 +463,8 @@ $bb_cfg['emailer'] = [
         'enabled' => false, // send email via external SMTP server
         'host' => 'localhost', // SMTP server host
         'port' => 25, // SMTP server port
-        'username' => '', // SMTP username (if server requires it)
-        'password' => '', // SMTP password (if server requires it)
+        'username' => '', // SMTP username (if the server requires it)
+        'password' => '', // SMTP password (if the server requires it)
         'ssl_type' => '', // SMTP ssl type (ssl or tls)
     ],
 ];
@@ -477,9 +477,9 @@ $bb_cfg['board_email_sitename'] = $domain_name; // sitename used in all emails h
 
 $bb_cfg['topic_notify_enabled'] = true; // Send emails to users if subscribed to the topic
 $bb_cfg['pm_notify_enabled'] = true; // Send emails to users if there's a new message in inbox
-$bb_cfg['group_send_email'] = true; // Send emails to users if user was invited/added to a group
+$bb_cfg['group_send_email'] = true; // Send emails to users if a user was invited/added to a group
 $bb_cfg['email_change_disabled'] = false; // Allow changing emails for users
-$bb_cfg['show_email_visibility_settings'] = true; // Allow changing privacy status of profile for users (e.g. last time seen)
+$bb_cfg['show_email_visibility_settings'] = true; // Allow changing the privacy status of profile for users (e.g. last time seen)
 
 $bb_cfg['bounce_email'] = "bounce@$domain_name"; // bounce email address
 $bb_cfg['tech_admin_email'] = "admin@$domain_name"; // email for sending error reports
@@ -494,22 +494,19 @@ $bb_cfg['whoops'] = [
         '_COOKIE' => array_keys($_COOKIE),
         '_SERVER' => array_keys($_SERVER),
         '_ENV' => array_keys($_ENV),
-    ]
+    ],
 ];
 
-// Debug panel configuration
-// Available options: 'tracy' (modern), 'legacy' (old style), 'both' (for testing), false (disabled)
+// Tracy debug bar configuration
 $bb_cfg['debug'] = [
-    'panel' => 'both', // 'tracy' | 'legacy' | 'both' | false
-    'tracy' => [
-        'panels' => [
-            'performance' => true,  // Timing, memory, GZIP
-            'database' => true,     // SQL queries with EXPLAIN
-            'template' => true,     // Twig debugging
-            'cache' => true,        // Cache/Datastore operations
-        ],
-        'max_query_length' => 500,  // Truncate long queries in panel
+    'enable' => true, // requires DBG_USER cookie
+    'panels' => [
+        'performance' => true,
+        'database' => true,
+        'cache' => true,
+        'template' => true,
     ],
+    'max_query_length' => 1000, // Truncate long queries in panel
 ];
 
 $bb_cfg['bugsnag'] = [
@@ -522,7 +519,7 @@ $bb_cfg['telegram_sender'] = [
     'enabled' => false,
     'token' => '', // Bot token
     'chat_id' => '', // Bot chat_id
-    'timeout' => 10 // Timeout for responses
+    'timeout' => 10, // Timeout for responses
 ];
 
 // Special users
@@ -558,21 +555,21 @@ $bb_cfg['sf_on_first_page_only'] = true; // Show subforums only on the first pag
 $bb_cfg['allowed_topics_per_page'] = [50, 100, 150, 200, 250, 300]; // Allowed number of topics per page
 
 // Topics
-$bb_cfg['show_post_bbcode_button'] = [ // Show "Code" button in topic to display BBCode of topic
+$bb_cfg['show_post_bbcode_button'] = [ // Show the "Code" button in a topic to display BBCode of a topic
     'enabled' => true,
     'only_for_first_post' => true,
 ];
-$bb_cfg['show_quick_reply'] = true; // Show quick reply forim
+$bb_cfg['show_quick_reply'] = true; // Show a quick reply forim
 $bb_cfg['show_rank_text'] = false; // Show user rank name in topics
 $bb_cfg['show_rank_image'] = true; // Show user rank image in topics
-$bb_cfg['show_poster_joined'] = true; // Show user's registration date in topics
-$bb_cfg['show_poster_posts'] = true; // Show user's post count in topics
-$bb_cfg['show_poster_from'] = true; // Show user's country in topics
+$bb_cfg['show_poster_joined'] = true; // Show a user's registration date in topics
+$bb_cfg['show_poster_posts'] = true; // Show a user's post count in topics
+$bb_cfg['show_poster_from'] = true; // Show a user's country in topics
 $bb_cfg['show_bot_nick'] = true; // Show bot's nickname
 $bb_cfg['post_date_format'] = 'd-M-Y H:i'; // Date format for topics
-$bb_cfg['ext_link_new_win'] = true; // open external links in new window
+$bb_cfg['ext_link_new_win'] = true; // open external links in a new window
 
-$bb_cfg['topic_moved_days_keep'] = 7; // remove topic moved links after xx days (or FALSE to disable)
+$bb_cfg['topic_moved_days_keep'] = 7; // remove topic-moved links after xx days (or FALSE to disable)
 $bb_cfg['allowed_posts_per_page'] = [15, 30, 50, 100];
 $bb_cfg['user_signature_start'] = '<div class="signature"><br />_________________<br />';
 $bb_cfg['user_signature_end'] = '</div>'; // It allows user signatures to have closings "<>"
@@ -589,7 +586,7 @@ $bb_cfg['manticore_host'] = '127.0.0.1';
 $bb_cfg['manticore_port'] = 9306;
 $bb_cfg['search_fallback_to_mysql'] = true;
 
-$bb_cfg['disable_ft_search_in_posts'] = false; // disable searching in post bodies
+$bb_cfg['disable_ft_search_in_posts'] = false; // disable searching in post-bodies
 $bb_cfg['disable_search_for_guest'] = true; // Disable search for guests
 $bb_cfg['allow_search_in_bool_mode'] = true;
 $bb_cfg['max_search_words_per_post'] = 200; // Max word count for a post
@@ -644,7 +641,7 @@ $bb_cfg['poll_max_days'] = 180; // How many days will the poll be active
 
 $bb_cfg['allow_change'] = [
     'language' => true, // Allow user to change language
-    'timezone' => true // Allow user to change time zone
+    'timezone' => true, // Allow user to change time zone
 ];
 
 $bb_cfg['trash_forum_id'] = 0; // (int) 7
@@ -744,7 +741,7 @@ $bb_cfg['page'] = [
     'show_sidebar2' => [
         #BB_SCRIPT => true
         'index' => true,
-    ]
+    ],
 ];
 
 // Tracker settings
@@ -1103,7 +1100,7 @@ $bb_cfg['countries'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
 ];
 
 // Timezones list

@@ -25,85 +25,24 @@ if (defined('PAGE_HEADER_SENT')) {
     template()->pparse('page_footer');
 }
 
-$show_dbg_info = (DBG_USER && request()->query->get('pane') !== 'left');
-$debug_panel = config()->get('debug.panel');
-$use_tracy = in_array($debug_panel, ['tracy', 'both'], true);
-$use_legacy = in_array($debug_panel, ['legacy', 'both'], true);
-
-// Capture timing NOW for both legacy and Tracy panels
-// This is the correct measurement point - after all business logic, before output
-if ($show_dbg_info) {
+// Capture timing for Tracy debug bar
+if (tracy()->isEnabled()) {
     $captured_exec_time = utime() - TIMESTART;
     $captured_sql_time = 0;
     try {
-        $main_db = \TorrentPier\Database\DatabaseFactory::getInstance('db');
-        $captured_sql_time = $main_db->sql_timetotal;
+        $captured_sql_time = DB()->sql_timetotal;
     } catch (\Exception $e) {
     }
 
-    // Pass captured timing to Tracy if enabled
-    if ($use_tracy) {
-        \TorrentPier\Tracy\TracyBarManager::getInstance()->capturePerformanceData(
-            $captured_exec_time,
-            $captured_sql_time
-        );
-    }
+    tracy()->capturePerformanceData($captured_exec_time, $captured_sql_time);
 }
 
 if (!config()->get('gzip_compress')) {
     flush();
 }
 
-// Show legacy debug bar if enabled
-if ($show_dbg_info && $use_legacy) {
-    $gen_time = utime() - TIMESTART;
-    $gen_time_txt = sprintf('%.3f', $gen_time);
-    $gzip_text = UA_GZIP_SUPPORTED ? __('GZIP_COMPRESSION') . ": " : "<s>" . __('GZIP_COMPRESSION') . ":</s> ";
-    $gzip_text .= config()->get('gzip_compress') ? __('ON') : __('OFF');
-
-    $stat = '[&nbsp; ' . __('EXECUTION_TIME') . " $gen_time_txt " . __('SEC');
-
-    // Get database statistics from the new system
-    try {
-        $main_db = \TorrentPier\Database\DatabaseFactory::getInstance('db');
-        $sql_t = $main_db->sql_timetotal;
-        $sql_time_txt = ($sql_t) ? sprintf('%.3f ' . __('SEC') . ' (%d%%) &middot; ', $sql_t, round($sql_t * 100 / $gen_time)) : '';
-        $num_q = $main_db->num_queries;
-        $stat .= " &nbsp;|&nbsp; {$main_db->engine}: {$sql_time_txt}{$num_q} " . __('QUERIES');
-    } catch (\Exception $e) {
-        // Skip database stats if not available
-    }
-
-    $stat .= " &nbsp;|&nbsp; $gzip_text";
-
-    $stat .= ' &nbsp;|&nbsp; ' . __('MEMORY');
-    $stat .= humn_size(config()->get('mem_on_start'), 2) . ' / ';
-    $stat .= humn_size(sys('mem_peak'), 2) . ' / ';
-    $stat .= humn_size(sys('mem'), 2);
-
-    $stat .= ' &nbsp;]';
-
-    if (SQL_DEBUG) {
-        $stat .= '&nbsp;|';
-        $stat .= !empty($_COOKIE['sql_log']) ? '&nbsp;[ <a href="#" class="med" onclick="$p(\'sqlLog\').className=\'sqlLog sqlLogWrapped\'; return false;">wrap</a> &middot; <a href="#sqlLog" class="med" onclick="$(\'#sqlLog\').css({ height: $(window).height()-50 }); return false;">max</a> ]&nbsp;|' : '';
-        $stat .= '&nbsp;<label title="' . __('SHOW_LOG') . '"><input type="checkbox" onclick="setCookie(\'sql_log\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['sql_log']) ? HTML_CHECKED : '') . ' />' . __('SHOW_LOG') . '</label>&nbsp;|
-                        <label title="' . __('CUT_LOG') . '"><input type="checkbox" onclick="setCookie(\'sql_log_full\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['sql_log_full']) ? HTML_CHECKED : '') . ' />' . __('CUT_LOG') . '</label>&nbsp;|
-                        <label title="' . __('EXPLAINED_LOG') . '"><input type="checkbox" onclick="setCookie(\'explain\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['explain']) ? HTML_CHECKED : '') . ' />' . __('EXPLAINED_LOG') . '</label>';
-    }
-
-    echo '<div style="margin: 6px; font-size:10px; color: #444444; letter-spacing: -1px; text-align: center;">' . $stat . '</div>';
-}
-
 echo '
 	</div><!--/body_container-->
-';
-
-// Show legacy SQL debug panel if enabled
-if ($show_dbg_info && SQL_DEBUG && $use_legacy) {
-    require INC_DIR . '/page_footer_dev.php';
-}
-
-echo '
 	</body>
 	</html>
 ';

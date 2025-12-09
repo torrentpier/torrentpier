@@ -11,7 +11,6 @@
 namespace TorrentPier;
 
 use Bugsnag\Client;
-use Exception;
 use jacklul\MonologTelegramHandler\TelegramFormatter;
 use jacklul\MonologTelegramHandler\TelegramHandler;
 use Monolog\Formatter\LineFormatter;
@@ -218,248 +217,21 @@ class Dev
     }
 
     /**
-     * Get SQL debug log (instance method)
-     *
-     * @return string
-     * @throws Exception
-     */
-    public function getSqlLogInstance(): string
-    {
-        $log = '';
-        $totalLegacyQueries = 0;
-
-        // Check for legacy queries across all database instances
-        $server_names = \TorrentPier\Database\DatabaseFactory::getServerNames();
-        foreach ($server_names as $srv_name) {
-            try {
-                $db_obj = \TorrentPier\Database\DatabaseFactory::getInstance($srv_name);
-                if (!empty($db_obj->debugger->legacy_queries)) {
-                    $totalLegacyQueries += count($db_obj->debugger->legacy_queries);
-                }
-            } catch (\Exception $e) {
-                // Skip if server not available
-            }
-        }
-
-        // Add a warning banner if legacy queries were detected
-        if ($totalLegacyQueries > 0) {
-            $log .= '<div style="background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 10px; margin-bottom: 10px; border-radius: 4px;">'
-                . '<strong>⚠️ Legacy Query Warning:</strong> '
-                . $totalLegacyQueries . ' quer' . ($totalLegacyQueries > 1 ? 'ies' : 'y') . ' with duplicate columns detected and automatically fixed. '
-                . 'These queries should be updated to explicitly select columns. '
-                . 'Check the legacy_queries.log file for details.'
-                . '</div>';
-        }
-
-        // Check for template variable conflicts
-        $templateConflicts = \TorrentPier\Template\Template::getVariableConflicts();
-        if (!empty($templateConflicts)) {
-            $conflictCount = count($templateConflicts);
-            $conflictList = array_map(fn($c) => $c['variable'] . ' in ' . $c['template'], $templateConflicts);
-            $log .= '<div style="background-color: #fff3cd; border: 1px solid #ffc107; color: #856404; padding: 10px; margin-bottom: 10px; border-radius: 4px;">'
-                . '<strong>⚠️ Template Variable Conflict:</strong> '
-                . $conflictCount . ' variable' . ($conflictCount > 1 ? 's' : '') . ' conflict with reserved keys. '
-                . 'Details: ' . implode(', ', $conflictList) . '. '
-                . 'Check the template_conflicts.log file for details.'
-                . '</div>';
-        }
-
-        // Check for template variable shadowing (variables overwritten with different values)
-        $templateShadowing = \TorrentPier\Template\Template::getVariableShadowing();
-        if (!empty($templateShadowing)) {
-            $shadowCount = count($templateShadowing);
-            $shadowList = array_map(function ($s) {
-                $old = is_scalar($s['old_value']) ? (string) $s['old_value'] : get_debug_type($s['old_value']);
-                $new = is_scalar($s['new_value']) ? (string) $s['new_value'] : get_debug_type($s['new_value']);
-                if (strlen($old) > 20) {
-                    $old = substr($old, 0, 17) . '...';
-                }
-                if (strlen($new) > 20) {
-                    $new = substr($new, 0, 17) . '...';
-                }
-                return $s['variable'] . " ({$old} → {$new})";
-            }, $templateShadowing);
-            $log .= '<div style="background-color: #fff0e6; border: 1px solid #ffcc99; color: #cc5500; padding: 10px; margin-bottom: 10px; border-radius: 4px;">'
-                . '<strong>🔄 Template Variable Shadowing:</strong> '
-                . $shadowCount . ' variable' . ($shadowCount > 1 ? 's were' : ' was') . ' overwritten during render. '
-                . 'Details: ' . implode(', ', $shadowList) . '. '
-                . 'Check the template_shadowing.log file for details.'
-                . '</div>';
-        }
-
-        // Get debug information from a new database system
-        foreach ($server_names as $srv_name) {
-            try {
-                $db_obj = \TorrentPier\Database\DatabaseFactory::getInstance($srv_name);
-                $log .= !empty($db_obj->dbg) ? $this->getSqlLogHtml($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
-            } catch (\Exception $e) {
-                // Skip if server not available
-            }
-        }
-
-        // Get cache system debug information
-        $cacheSystem = \TorrentPier\Cache\UnifiedCacheSystem::getInstance();
-        $cacheObjects = $cacheSystem->obj; // Uses magic __get method for backward compatibility
-
-        foreach ($cacheObjects as $cache_name => $cache_obj) {
-            if (!empty($cache_obj->db->dbg)) {
-                $log .= $this->getSqlLogHtml($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
-            } elseif (!empty($cache_obj->dbg)) {
-                $log .= $this->getSqlLogHtml($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
-            }
-        }
-
-        // Get datastore debug information
-        $datastore = datastore();
-        if (!empty($datastore->db->dbg)) {
-            $log .= $this->getSqlLogHtml($datastore->db, "cache: datastore [{$datastore->db->engine}]");
-        } elseif (!empty($datastore->dbg)) {
-            $log .= $this->getSqlLogHtml($datastore, "cache: datastore [{$datastore->engine}]");
-        }
-
-        return $log;
-    }
-
-    /**
-     * Sql debug status (instance method)
-     *
-     * @return bool
-     */
-    public function sqlDebugAllowedInstance(): bool
-    {
-        return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
-    }
-
-    /**
-     * Get SQL query html log
-     *
-     * @param object $db_obj
-     * @param string $log_name
-     *
-     * @return string
-     * @throws Exception
-     */
-    private function getSqlLogHtml(object $db_obj, string $log_name): string
-    {
-        $log = '';
-
-        foreach ($db_obj->dbg as $i => $dbg) {
-            $id = "sql_{$i}_" . random_int(0, mt_getrandmax());
-            $sql = $this->shortQueryInstance($dbg['sql'], true);
-            $time = sprintf('%.3f', $dbg['time']);
-            $perc = '[' . round($dbg['time'] * 100 / $db_obj->sql_timetotal) . '%]';
-            // Use plain text version for title attribute to avoid HTML issues
-            $info_plain = !empty($dbg['info_plain']) ? $dbg['info_plain'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
-            $info = !empty($dbg['info']) ? $dbg['info'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
-
-            // Check if this is a legacy query that needed compatibility fix
-            $isLegacyQuery = !empty($dbg['is_legacy_query']);
-            $rowClass = $isLegacyQuery ? 'sqlLogRow sqlLegacyRow' : 'sqlLogRow';
-            $rowStyle = $isLegacyQuery ? ' style="background-color: #ffe6e6; border-left: 4px solid #dc3545; color: #721c24;"' : '';
-            $legacyWarning = $isLegacyQuery ? '<span style="color: #dc3545; font-weight: bold; margin-right: 8px;">[LEGACY]</span>' : '';
-
-            $log .= '<div onclick="$(this).toggleClass(\'sqlHighlight\');" class="' . $rowClass . '" title="' . htmlspecialchars($info_plain) . '"' . $rowStyle . '>'
-                . $legacyWarning
-                . '<span style="letter-spacing: -1px;">' . $time . ' </span>'
-                . '<span class="copyElement" data-clipboard-target="#' . $id . '" title="Copy to clipboard" style="color: rgb(128,128,128); letter-spacing: -1px;">' . $perc . '</span>&nbsp;'
-                . '<span style="letter-spacing: 0;" id="' . $id . '">' . $sql . '</span>'
-                . '<span style="color: rgb(128,128,128);"> # ' . $info . ' </span>'
-                . '</div>';
-        }
-
-        return '<div class="sqlLogTitle">' . $log_name . '</div>' . $log;
-    }
-
-    /**
-     * Short query (instance method)
-     *
-     * @param string $sql
-     * @param bool $esc_html
-     * @return string
-     */
-    public function shortQueryInstance(string $sql, bool $esc_html = false): string
-    {
-        $max_len = 100;
-        $sql = str_compact($sql);
-
-        if (!empty($_COOKIE['sql_log_full'])) {
-            if (mb_strlen($sql, DEFAULT_CHARSET) > $max_len) {
-                $sql = mb_substr($sql, 0, 50) . ' [...cut...] ' . mb_substr($sql, -50);
-            }
-        }
-
-        return $esc_html ? htmlCHR($sql, true) : $sql;
-    }
-
-    // Static methods for backward compatibility (proxy to instance methods)
-
-    /**
-     * Get SQL debug log (static)
-     *
-     * @return string
-     * @throws Exception
-     * @deprecated Use dev()->getSqlLog() instead
-     */
-    public static function getSqlLog(): string
-    {
-        return self::getInstance()->getSqlLogInstance();
-    }
-
-    /**
-     * Sql debug status (static)
-     *
-     * @return bool
-     * @deprecated Use dev()->sqlDebugAllowed() instead
-     */
-    public static function sqlDebugAllowed(): bool
-    {
-        return self::getInstance()->sqlDebugAllowedInstance();
-    }
-
-    /**
-     * Short query (static)
-     *
-     * @param string $sql
-     * @param bool $esc_html
-     * @return string
-     * @deprecated Use dev()->shortQuery() instead
-     */
-    public static function shortQuery(string $sql, bool $esc_html = false): string
-    {
-        return self::getInstance()->shortQueryInstance($sql, $esc_html);
-    }
-
-    /**
-     * Get SQL debug log (for dev() singleton usage)
-     *
-     * @return string
-     * @throws Exception
-     */
-    public function getSqlDebugLog(): string
-    {
-        return $this->getSqlLogInstance();
-    }
-
-    /**
-     * Check if SQL debugging is allowed (for dev() singleton usage)
-     *
-     * @return bool
+     * Check if SQL debugging is allowed
+     * Used by DatabaseDebugger, CacheManager, DatastoreManager to enable debug data collection
      */
     public function checkSqlDebugAllowed(): bool
     {
-        return $this->sqlDebugAllowedInstance();
+        return SQL_DEBUG && DBG_USER;
     }
 
     /**
-     * Format SQL query for display (for dev() singleton usage)
-     *
-     * @param string $sql
-     * @param bool $esc_html
-     * @return string
+     * Format SQL query for display
      */
     public function formatShortQuery(string $sql, bool $esc_html = false): string
     {
-        return $this->shortQueryInstance($sql, $esc_html);
+        $sql = str_compact($sql);
+        return $esc_html ? htmlCHR($sql, true) : $sql;
     }
 
     /**

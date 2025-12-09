@@ -91,12 +91,12 @@ class TracyBarManager
      */
     public function isEnabled(): bool
     {
-        // Only enable for debug users, in web context, with tracy panel selected
-        $debugPanel = config()->get('debug.panel');
+        // Only enable for debug users in web context, excluding admin left pane
         return defined('DBG_USER')
             && DBG_USER
             && php_sapi_name() !== 'cli'
-            && in_array($debugPanel, ['tracy', 'both'], true);
+            && request()->query->get('pane') !== 'left'
+            && config()->get('debug.enable');
     }
 
     /**
@@ -105,7 +105,7 @@ class TracyBarManager
     private function registerPanels(): void
     {
         $bar = Debugger::getBar();
-        $panelConfig = config()->get('debug.tracy.panels', []);
+        $panelConfig = config()->get('debug.panels', []);
 
         // Performance panel - always first (shows timing)
         if ($panelConfig['performance'] ?? true) {
