@@ -36,7 +36,6 @@
 
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="{SITE_URL}styles/js/libs/oldbrowserdetector.min.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/clipboard.min.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/printThis.min.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/legacy.js"></script>
@@ -77,7 +76,7 @@ var user = {
 
 	set: function (opt, val, days, reload) {
 		this.opt_js[opt] = val;
-		setCookie('opt_js', $.toJSON(this.opt_js), days);
+		setCookie('opt_js', JSON.stringify(this.opt_js), days);
 		if (reload) {
 			window.location.reload();
 		}
@@ -210,17 +209,6 @@ function go_to_page ()
 
 <!--page_header-->
 <div id="page_header">
-
-<div id="old-browser-warn" style="background: #FFF227; padding: 8px 0 10px; text-align: center; font-size: 14px; display: none; ">
-	<b>{L_OLD_BROWSER}</b>
-</div>
-<script>
-  var Detector = new oldBrowserDetector(null, function () {
-    $('#old-browser-warn').show();
-  });
-
-  Detector.detect();
-</script>
 
 <!--main_nav-->
 <div id="main-nav"<!-- IF HAVE_NEW_PM --> class="new-pm"<!-- ENDIF -->>

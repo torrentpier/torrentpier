@@ -40,10 +40,10 @@ BBCode.prototype = {
     // Init events
     var th = this;
     addEvent(textarea, 'keydown', function (e) {
-      return th.onKeyPress(e, window.HTMLElement ? 'down' : 'press')
+      return th.onKeyPress(e, 'down');
     });
     addEvent(textarea, 'keypress', function (e) {
-      return th.onKeyPress(e, 'press')
+      return th.onKeyPress(e, 'press');
     });
   },
 
@@ -67,7 +67,7 @@ BBCode.prototype = {
     if (sel) {
       this.insertAtCursor('[quote]' + sel + '[/quote]\n');
     } else {
-      alert('Вы не выбрали текст');
+      alert(typeof bbl !== 'undefined' && bbl.no_text_selected ? bbl.no_text_selected : 'No text selected');
     }
     return false;
   },
@@ -82,45 +82,27 @@ BBCode.prototype = {
     return false;
   },
 
-  // Return current selection and range (if exists)
+  // Return current selection text
   getSelection: function () {
-    var w = window;
-    var text = '', range;
-    if (w.getSelection) {
-      text = w.getSelection();
-    } else {
-      return [null, null];
+    var text = '';
+    if (window.getSelection) {
+      text = '' + window.getSelection();
     }
     if (text === '') text = this.stext;
-    text = "" + text;
-    text = text.replace("/^\s+|\s+$/g", "");
-    return [text, range];
+    text = text.replace(/^\s+|\s+$/g, '');
+    return [text, null];
   },
 
   // Insert string at cursor position of textarea
   insertAtCursor: function (text) {
-    // Focus is placed to textarea
     var t = this.textarea;
     t.focus();
-    // Insert the string
-    if (document.selection && document.selection.createRange) {
-      var r = document.selection.createRange();
-      if (!this.replaceOnInsert) r.collapse();
-      r.text = text;
-    } else if (t.setSelectionRange) {
-      var start = this.replaceOnInsert ? t.selectionStart : t.selectionEnd;
-      var end = t.selectionEnd;
-      var sel1 = t.value.substr(0, start);
-      var sel2 = t.value.substr(end);
-      t.value = sel1 + text + sel2;
-      t.setSelectionRange(start + text.length, start + text.length);
-    } else {
-      t.value += text;
-    }
-    // For IE
-    setTimeout(function () {
-      t.focus()
-    }, 100);
+    var start = this.replaceOnInsert ? t.selectionStart : t.selectionEnd;
+    var end = t.selectionEnd;
+    var sel1 = t.value.substr(0, start);
+    var sel2 = t.value.substr(end);
+    t.value = sel1 + text + sel2;
+    t.setSelectionRange(start + text.length, start + text.length);
   },
 
   // Surround piece of textarea text with tags
@@ -131,49 +113,27 @@ BBCode.prototype = {
       return t;
     };
 
-    var rt = this.getSelection();
-    var text = rt[0];
-    var range = rt[1];
+    var text = this.getSelection()[0];
     if (text === null) return false;
 
-    var notEmpty = text !== null && text !== '';
-
-    // Surround
-    if (range) {
-      var newText = open + fTrans(text) + (close ? close : '');
-      range.text = newText;
-      range.collapse();
-      if (text !== '') {
-        // Correction for stupid IE: \r for moveStart is 0 character
-        var delta = 0;
-        for (var i = 0; i < newText.length; i++) if (newText.charAt(i) === '\r') delta++;
-        range.moveStart("character", -close.length - text.length - open.length + delta);
-        range.moveEnd("character", -0);
-      } else {
-        range.moveEnd("character", -close.length);
-      }
-      if (!this.collapseAfterInsert) range.select();
-    } else if (t.setSelectionRange) {
-      var start = t.selectionStart;
-      var end = t.selectionEnd;
-      var top = t.scrollTop;
-      var sel1 = t.value.substr(0, start);
-      var sel2 = t.value.substr(end);
-      var sel = fTrans(t.value.substr(start, end - start));
-      var inner = open + sel + close;
-      t.value = sel1 + inner + sel2;
-      if (sel !== '') {
-        t.setSelectionRange(start, start + inner.length);
-        notEmpty = true;
-      } else {
-        t.setSelectionRange(start + open.length, start + open.length);
-        notEmpty = false;
-      }
-      t.scrollTop = top;
-      if (this.collapseAfterInsert) t.setSelectionRange(start + inner.length, start + inner.length);
+    var notEmpty = text !== '';
+    var start = t.selectionStart;
+    var end = t.selectionEnd;
+    var top = t.scrollTop;
+    var sel1 = t.value.substr(0, start);
+    var sel2 = t.value.substr(end);
+    var sel = fTrans(t.value.substr(start, end - start));
+    var inner = open + sel + close;
+    t.value = sel1 + inner + sel2;
+    if (sel !== '') {
+      t.setSelectionRange(start, start + inner.length);
+      notEmpty = true;
     } else {
-      t.value += open + text + close;
+      t.setSelectionRange(start + open.length, start + open.length);
+      notEmpty = false;
     }
+    t.scrollTop = top;
+    if (this.collapseAfterInsert) t.setSelectionRange(start + inner.length, start + inner.length);
     this.collapseAfterInsert = false;
     return notEmpty;
   },
@@ -290,31 +250,6 @@ BBCode.prototype = {
     return text;
   }
 };
-
-// Emulation of innerText for Mozilla.
-if (window.HTMLElement && window.HTMLElement.prototype.__defineSetter__) {
-  HTMLElement.prototype.__defineSetter__("innerText", function (sText) {
-    this.innerHTML = sText.replace(/\&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  });
-  HTMLElement.prototype.__defineGetter__("innerText", function () {
-    var r = this.ownerDocument.createRange();
-    r.selectNodeContents(this);
-    return r.toString();
-  });
-}
-
-function AddSelectedText(BBOpen, BBClose) {
-  if (document.post.message.caretPos) document.post.message.caretPos.text = BBOpen + document.post.message.caretPos.text + BBClose; else document.post.message.value += BBOpen + BBClose;
-  document.post.message.focus()
-}
-
-function InsertBBCode(BBcode) {
-  AddSelectedText('[' + BBcode + ']', '[/' + BBcode + ']');
-}
-
-function storeCaret(textEl) {
-  if (textEl.createTextRange) textEl.caretPos = document.selection.createRange().duplicate();
-}
 
 function initPostBBCode(context) {
   $('span.post-hr', context).html('<hr align="left" />');
