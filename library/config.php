@@ -497,6 +497,21 @@ $bb_cfg['whoops'] = [
     ]
 ];
 
+// Debug panel configuration
+// Available options: 'tracy' (modern), 'legacy' (old style), 'both' (for testing), false (disabled)
+$bb_cfg['debug'] = [
+    'panel' => 'both', // 'tracy' | 'legacy' | 'both' | false
+    'tracy' => [
+        'panels' => [
+            'performance' => true,  // Timing, memory, GZIP
+            'database' => true,     // SQL queries with EXPLAIN
+            'template' => true,     // Twig debugging
+            'cache' => true,        // Cache/Datastore operations
+        ],
+        'max_query_length' => 500,  // Truncate long queries in panel
+    ],
+];
+
 $bb_cfg['bugsnag'] = [
     'enabled' => true,
     'api_key' => '33b3ed0102946bab71341f9edc125e21', // Don't change this if you want to help us find bugs

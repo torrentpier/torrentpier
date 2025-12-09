@@ -26,12 +26,16 @@ if (defined('PAGE_HEADER_SENT')) {
 }
 
 $show_dbg_info = (DBG_USER && request()->query->get('pane') !== 'left');
+$debug_panel = config()->get('debug.panel');
+$use_tracy = in_array($debug_panel, ['tracy', 'both'], true);
+$use_legacy = in_array($debug_panel, ['legacy', 'both'], true);
 
 if (!config()->get('gzip_compress')) {
     flush();
 }
 
-if ($show_dbg_info) {
+// Show legacy debug bar if enabled
+if ($show_dbg_info && $use_legacy) {
     $gen_time = utime() - TIMESTART;
     $gen_time_txt = sprintf('%.3f', $gen_time);
     $gzip_text = UA_GZIP_SUPPORTED ? __('GZIP_COMPRESSION') . ": " : "<s>" . __('GZIP_COMPRESSION') . ":</s> ";
@@ -74,7 +78,8 @@ echo '
 	</div><!--/body_container-->
 ';
 
-if ($show_dbg_info && SQL_DEBUG) {
+// Show legacy SQL debug panel if enabled
+if ($show_dbg_info && SQL_DEBUG && $use_legacy) {
     require INC_DIR . '/page_footer_dev.php';
 }
 

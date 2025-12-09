@@ -221,6 +221,16 @@ function dev(): \TorrentPier\Dev
 }
 
 /**
+ * Tracy debug bar singleton
+ *
+ * @return \TorrentPier\Tracy\TracyBarManager
+ */
+function tracy(): \TorrentPier\Tracy\TracyBarManager
+{
+    return \TorrentPier\Tracy\TracyBarManager::getInstance();
+}
+
+/**
  * Get the Language instance
  *
  * @return \TorrentPier\Language
@@ -298,6 +308,12 @@ if (APP_ENV === 'development') {
     define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 }
 (\TorrentPier\Dev::init());
+
+// Initialize Tracy Debug Bar (if enabled)
+// Tracy bar provides modern debugging UI while Whoops handles error pages
+if (in_array(config()->get('debug.panel'), ['tracy', 'both'], true)) {
+    \TorrentPier\Tracy\TracyBarManager::getInstance()->init();
+}
 
 /**
  * Server variables initialize

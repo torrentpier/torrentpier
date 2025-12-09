@@ -299,7 +299,9 @@ Ajax.prototype = {
     }
     if (response.sql_log) {
       $('#sqlLog').prepend(response.sql_log + '<hr/>');
-      fixSqlLog();
+      if (typeof fixSqlLog === 'function') {
+        fixSqlLog();
+      }
     }
     if (response.update_ids) {
       for (id in response.update_ids) {

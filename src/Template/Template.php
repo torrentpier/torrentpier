@@ -397,6 +397,14 @@ class Template
     }
 
     /**
+     * Get total render time in milliseconds
+     */
+    public static function getTotalRenderTime(): float
+    {
+        return self::$totalRenderTime;
+    }
+
+    /**
      * Initialize Twig environment
      */
     private function initializeTwig(): void
@@ -516,6 +524,11 @@ class Template
      */
     private function injectDebugBar(string $handle, string $output, float $renderTime): string
     {
+        // Skip Twig debug bar if Tracy is handling debugging
+        if (config()->get('debug.panel') === 'tracy') {
+            return $output;
+        }
+
         $showDebugBar = config()->get('twig.debug_bar', false);
 
         if (!$showDebugBar) {
