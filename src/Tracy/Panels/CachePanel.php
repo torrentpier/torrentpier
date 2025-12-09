@@ -10,8 +10,8 @@
 
 namespace TorrentPier\Tracy\Panels;
 
-use Tracy\IBarPanel;
 use TorrentPier\Tracy\Collectors\CacheCollector;
+use Tracy\IBarPanel;
 
 /**
  * Cache Panel for Tracy Debug Bar

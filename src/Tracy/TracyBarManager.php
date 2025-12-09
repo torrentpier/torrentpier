@@ -22,13 +22,13 @@ use Tracy\Debugger;
 class TracyBarManager
 {
     private static ?self $instance = null;
-    private(set) bool $initialized = false;
+    public private(set) bool $initialized = false;
 
     /** @var float|null Captured execution time from page_footer */
-    private(set) ?float $capturedExecTime = null;
+    public private(set) ?float $capturedExecTime = null;
 
     /** @var float|null Captured SQL time from page_footer */
-    private(set) ?float $capturedSqlTime = null;
+    public private(set) ?float $capturedSqlTime = null;
 
     private function __construct() {}
 

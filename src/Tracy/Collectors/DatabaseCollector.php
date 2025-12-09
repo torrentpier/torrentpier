@@ -61,7 +61,7 @@ class DatabaseCollector
                     ];
 
                     // Check if EXPLAIN collection is enabled via cookie
-                    $collectExplain = (bool)request()->cookies->get('tracy_explain');
+                    $collectExplain = (bool) request()->cookies->get('tracy_explain');
 
                     // Process individual queries
                     foreach ($debugger->dbg ?? [] as $idx => $query) {
@@ -129,7 +129,7 @@ class DatabaseCollector
             'slow_count' => $data['slow_count'],
             'nette_count' => $data['nette_count'],
             'server_count' => count($data['servers']),
-            'explain_enabled' => (bool)request()->cookies->get('tracy_explain'),
+            'explain_enabled' => (bool) request()->cookies->get('tracy_explain'),
         ];
     }
 
@@ -172,7 +172,7 @@ class DatabaseCollector
             $result = $db->connection->query("EXPLAIN $sql");
             $rows = [];
             while ($row = $result->fetch()) {
-                $rows[] = (array)$row;
+                $rows[] = (array) $row;
             }
 
             return $rows;
