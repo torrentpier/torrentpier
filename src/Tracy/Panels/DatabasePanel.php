@@ -68,19 +68,46 @@ class DatabasePanel implements IBarPanel
 
         $html = '<h1>Database Queries</h1>';
         $html .= '<div class="tracy-inner tp-database-panel">';
+        $html .= '<div class="tracy-inner-container">';
 
         // Add custom styles
         $html .= $this->getStyles();
 
         // Summary stats
-        $html .= '<div class="tp-db-summary">';
-        $html .= '<span><b>' . $data['total_queries'] . '</b> queries</span>';
-        $html .= '<span><b>' . sprintf('%.3f', $data['total_time']) . '</b> s total</span>';
+        $stats = $this->collector->getStats();
+        $explainEnabled = $stats['explain_enabled'];
+
+        // Get first server engine and version for header
+        $mainEngine = 'MySQL';
+        $mainVersion = '';
+        if (!empty($data['servers'])) {
+            $firstServer = reset($data['servers']);
+            $mainEngine = $firstServer['engine'] ?? 'MySQL';
+            $mainVersion = $firstServer['version'] ?? '';
+        }
+
+        // Header with EXPLAIN toggle
+        $html .= '<div class="tp-db-header">';
+        $html .= '<span class="tp-db-engine">' . htmlspecialchars($mainEngine);
+        if ($mainVersion) {
+            $html .= ' <span class="tp-db-version">v' . htmlspecialchars($mainVersion) . '</span>';
+        }
+        $html .= '</span>';
+        $html .= '<label class="tp-db-explain-toggle" title="Collect EXPLAIN data for all queries (reload required)">';
+        $html .= '<input type="checkbox" onchange="tpToggleExplainCookie(this.checked)" ' . ($explainEnabled ? 'checked' : '') . ' />';
+        $html .= '<span>EXPLAIN</span>';
+        $html .= '</label>';
+        $html .= '</div>';
+
+        // Stats bar
+        $html .= '<div class="tp-db-stats">';
+        $html .= '<div class="tp-stat"><span class="tp-stat-value">' . $data['total_queries'] . '</span><span class="tp-stat-label">Queries</span></div>';
+        $html .= '<div class="tp-stat"><span class="tp-stat-value">' . sprintf('%.3f', $data['total_time']) . 's</span><span class="tp-stat-label">Total Time</span></div>';
         if ($data['legacy_count'] > 0) {
-            $html .= '<span class="tp-warning"><b>' . $data['legacy_count'] . '</b> legacy</span>';
+            $html .= '<div class="tp-stat tp-stat-warning"><span class="tp-stat-value">' . $data['legacy_count'] . '</span><span class="tp-stat-label">Legacy</span></div>';
         }
         if ($data['slow_count'] > 0) {
-            $html .= '<span class="tp-warning"><b>' . $data['slow_count'] . '</b> slow</span>';
+            $html .= '<div class="tp-stat tp-stat-warning"><span class="tp-stat-value">' . $data['slow_count'] . '</span><span class="tp-stat-label">Slow</span></div>';
         }
         $html .= '</div>';
 
@@ -99,7 +126,8 @@ class DatabasePanel implements IBarPanel
             $html .= $this->renderServerSection($serverName, $serverData, $data['total_time']);
         }
 
-        $html .= '</div>';
+        $html .= '</div>'; // tracy-inner-container
+        $html .= '</div>'; // tracy-inner
 
         return $html;
     }
@@ -187,14 +215,14 @@ class DatabasePanel implements IBarPanel
         $html .= '<code id="' . $queryId . '" class="tp-sql-code">' . htmlspecialchars($sql) . '</code>';
         $html .= '</div>';
 
-        // Actions (EXPLAIN button)
-        if ($this->canExplain($query['sql'])) {
-            $explainId = 'explain-' . $queryId;
-            $html .= '<div class="tp-query-actions">';
-            $html .= '<button class="tp-btn tp-btn-explain" onclick="tpToggleExplain(\'' . $explainId . '\', \'' . htmlspecialchars(addslashes($query['sql'])) . '\', \'' . $serverName . '\')" title="Show EXPLAIN">EXPLAIN</button>';
-            $html .= '<button class="tp-btn tp-btn-copy" onclick="tpCopyToClipboard(\'' . $queryId . '\')" title="Copy SQL">Copy</button>';
-            $html .= '</div>';
-            $html .= '<div id="' . $explainId . '" class="tp-explain-output" style="display:none"></div>';
+        // Actions and EXPLAIN data
+        $html .= '<div class="tp-query-actions">';
+        $html .= '<button class="tp-btn tp-btn-copy" onclick="tpCopyToClipboard(\'' . $queryId . '\')" title="Copy SQL">Copy</button>';
+        $html .= '</div>';
+
+        // Show EXPLAIN data if collected
+        if (!empty($query['explain'])) {
+            $html .= $this->renderExplainTable($query['explain']);
         }
 
         $html .= '</td>';
@@ -215,14 +243,39 @@ class DatabasePanel implements IBarPanel
     }
 
     /**
-     * Check if query can be explained
+     * Render EXPLAIN results as a table
      */
-    private function canExplain(string $sql): bool
+    private function renderExplainTable(array $explainData): string
     {
-        $sql = trim(preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $sql));
-        return str_starts_with(strtoupper($sql), 'SELECT')
-            || str_starts_with(strtoupper($sql), 'UPDATE')
-            || str_starts_with(strtoupper($sql), 'DELETE');
+        if (empty($explainData)) {
+            return '';
+        }
+
+        $html = '<div class="tp-explain-output">';
+        $html .= '<table class="tp-explain-table">';
+
+        // Header
+        $html .= '<thead><tr>';
+        foreach (array_keys($explainData[0]) as $col) {
+            $html .= '<th>' . htmlspecialchars($col) . '</th>';
+        }
+        $html .= '</tr></thead>';
+
+        // Rows
+        $html .= '<tbody>';
+        foreach ($explainData as $row) {
+            $html .= '<tr>';
+            foreach ($row as $value) {
+                $html .= '<td>' . htmlspecialchars($value ?? 'NULL') . '</td>';
+            }
+            $html .= '</tr>';
+        }
+        $html .= '</tbody>';
+
+        $html .= '</table>';
+        $html .= '</div>';
+
+        return $html;
     }
 
     /**
@@ -250,8 +303,20 @@ class DatabasePanel implements IBarPanel
     {
         return '<style>
             .tp-database-panel { font-size: 13px; }
-            .tp-db-summary { display: flex; gap: 20px; padding: 10px; background: #f8f8f8; border-radius: 4px; margin-bottom: 15px; }
-            .tp-db-summary .tp-warning { color: #B00; }
+            .tp-db-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: linear-gradient(90deg, #1a365d, #2c5282) !important; color: #90cdf4 !important; border-radius: 4px; margin-bottom: 15px; }
+            .tp-db-header:hover { background: linear-gradient(90deg, #1a365d, #2c5282) !important; }
+            .tp-db-header *, .tp-db-header *:hover { background: transparent !important; color: inherit !important; }
+            .tp-db-engine { font-size: 18px; font-weight: bold; }
+            .tp-db-version { font-size: 14px; font-weight: normal; opacity: 0.8; }
+            .tp-db-explain-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 12px; background: rgba(255,255,255,0.15) !important; border-radius: 4px; font-size: 12px; font-weight: bold; transition: background 0.2s; }
+            .tp-db-explain-toggle:hover { background: rgba(255,255,255,0.25) !important; }
+            .tp-db-explain-toggle input { margin: 0; cursor: pointer; }
+            .tp-db-explain-toggle:has(input:checked) { background: rgba(72, 187, 120, 0.4) !important; }
+            .tp-db-stats { display: flex; gap: 30px; padding: 15px; background: #f8f8f8; border-radius: 4px; margin-bottom: 15px; }
+            .tp-stat { text-align: center; }
+            .tp-stat-value { display: block; font-size: 24px; font-weight: bold; color: #333; }
+            .tp-stat-label { font-size: 11px; color: #666; text-transform: uppercase; }
+            .tp-stat-warning .tp-stat-value { color: #B00; }
             .tp-alert { padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; }
             .tp-alert-danger { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
             .tp-db-server { margin-bottom: 20px; }
@@ -275,11 +340,10 @@ class DatabasePanel implements IBarPanel
             .tp-query-actions { margin-top: 5px; }
             .tp-btn { padding: 3px 8px; font-size: 10px; border: 1px solid #ccc; background: #fff; border-radius: 3px; cursor: pointer; margin-right: 5px; }
             .tp-btn:hover { background: #f0f0f0; }
-            .tp-btn-explain { border-color: #007bff; color: #007bff; }
-            .tp-explain-output { margin-top: 10px; padding: 10px; background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; overflow-x: auto; }
-            .tp-explain-output table { width: 100%; font-size: 11px; border-collapse: collapse; }
-            .tp-explain-output th, .tp-explain-output td { padding: 4px 8px; border: 1px solid #ddd; }
-            .tp-explain-output th { background: #e9ecef; }
+            .tp-explain-output { margin-top: 8px; padding: 8px; background: #fff8e6; border: 1px solid #ffc107; border-radius: 4px; overflow-x: auto; }
+            .tp-explain-table { width: 100%; font-size: 10px; border-collapse: collapse; }
+            .tp-explain-table th, .tp-explain-table td { padding: 3px 6px; border: 1px solid #ddd; white-space: nowrap; }
+            .tp-explain-table th { background: #fff3cd; font-weight: bold; }
             .tp-query-source { font-size: 11px; color: #666; }
             .tp-query-info { color: #999; }
             .tp-no-queries { color: #999; font-style: italic; padding: 10px; }
@@ -289,20 +353,18 @@ class DatabasePanel implements IBarPanel
                 var el = document.getElementById(elementId);
                 if (el) {
                     navigator.clipboard.writeText(el.textContent).then(function() {
-                        // Visual feedback
                         el.style.background = "#d4edda";
                         setTimeout(function() { el.style.background = ""; }, 500);
                     });
                 }
             }
-            function tpToggleExplain(explainId, sql, server) {
-                var el = document.getElementById(explainId);
-                if (el.style.display === "none") {
-                    el.style.display = "block";
-                    el.innerHTML = "<em>EXPLAIN data would be loaded here...</em><br><small>Note: Real-time EXPLAIN requires AJAX endpoint</small>";
+            function tpToggleExplainCookie(enabled) {
+                if (enabled) {
+                    document.cookie = "tracy_explain=1; path=/; max-age=31536000";
                 } else {
-                    el.style.display = "none";
+                    document.cookie = "tracy_explain=; path=/; max-age=0";
                 }
+                window.location.reload();
             }
         </script>';
     }

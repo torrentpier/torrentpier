@@ -40,6 +40,11 @@ class CacheCollector
             $cacheObjects = $cacheSystem->obj; // Uses magic __get method
 
             foreach ($cacheObjects as $cacheName => $cacheObj) {
+                // Skip internal stub cache
+                if ($cacheName === '__stub') {
+                    continue;
+                }
+
                 $cacheData = [
                     'name' => $cacheName,
                     'engine' => $cacheObj->engine ?? 'unknown',
@@ -57,6 +62,11 @@ class CacheCollector
                     $cacheData['queries'] = $this->processQueries($cacheObj->dbg);
                     $cacheData['num_queries'] = count($cacheObj->dbg);
                     $cacheData['total_time'] = $cacheObj->sql_timetotal ?? 0;
+                }
+
+                // Skip caches with no operations
+                if ($cacheData['num_queries'] === 0) {
+                    continue;
                 }
 
                 $data['caches'][$cacheName] = $cacheData;
@@ -130,10 +140,16 @@ class CacheCollector
     {
         $data = $this->collect();
 
+        // Count cache engines: caches + datastore (if it has operations)
+        $engineCount = count($data['caches']);
+        if ($data['datastore'] !== null && $data['datastore']['num_queries'] > 0) {
+            $engineCount++;
+        }
+
         return [
             'total_queries' => $data['total_queries'],
             'total_time' => $data['total_time'],
-            'cache_count' => count($data['caches']),
+            'cache_count' => $engineCount,
             'has_datastore' => $data['datastore'] !== null,
         ];
     }

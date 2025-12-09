@@ -23,6 +23,12 @@ class TracyBarManager
     private static ?self $instance = null;
     private bool $initialized = false;
 
+    /** @var float|null Captured execution time from page_footer */
+    private ?float $capturedExecTime = null;
+
+    /** @var float|null Captured SQL time from page_footer */
+    private ?float $capturedSqlTime = null;
+
     private function __construct()
     {
     }
@@ -128,6 +134,32 @@ class TracyBarManager
     public function isInitialized(): bool
     {
         return $this->initialized;
+    }
+
+    /**
+     * Capture performance data at the correct measurement point (page_footer)
+     * This ensures Tracy shows the same timing as legacy debug bar
+     */
+    public function capturePerformanceData(float $execTime, float $sqlTime): void
+    {
+        $this->capturedExecTime = $execTime;
+        $this->capturedSqlTime = $sqlTime;
+    }
+
+    /**
+     * Get captured execution time (in seconds)
+     */
+    public function getCapturedExecTime(): ?float
+    {
+        return $this->capturedExecTime;
+    }
+
+    /**
+     * Get captured SQL time (in seconds)
+     */
+    public function getCapturedSqlTime(): ?float
+    {
+        return $this->capturedSqlTime;
     }
 
     /**

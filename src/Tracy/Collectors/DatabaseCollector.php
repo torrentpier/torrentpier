@@ -49,6 +49,7 @@ class DatabaseCollector
                     $serverData = [
                         'name' => $serverName,
                         'engine' => $db->engine,
+                        'version' => $db->server_version(),
                         'database' => $db->selected_db,
                         'host' => $db->db_server,
                         'num_queries' => $db->num_queries,
@@ -56,6 +57,9 @@ class DatabaseCollector
                         'queries' => [],
                         'legacy_queries' => $debugger->legacy_queries ?? [],
                     ];
+
+                    // Check if EXPLAIN collection is enabled via cookie
+                    $collectExplain = (bool) request()->cookies->get('tracy_explain');
 
                     // Process individual queries
                     foreach ($debugger->dbg ?? [] as $idx => $query) {
@@ -72,7 +76,13 @@ class DatabaseCollector
                             'mem_before' => $query['mem_before'] ?? 0,
                             'mem_after' => $query['mem_after'] ?? 0,
                             'is_slow' => ($query['time'] ?? 0) > $slowThreshold,
+                            'explain' => null,
                         ];
+
+                        // Collect EXPLAIN if enabled
+                        if ($collectExplain && $this->canExplain($queryData['sql'])) {
+                            $queryData['explain'] = $this->explainQuery($queryData['sql'], $serverName);
+                        }
 
                         $serverData['queries'][] = $queryData;
 
@@ -113,7 +123,20 @@ class DatabaseCollector
             'legacy_count' => $data['legacy_count'],
             'slow_count' => $data['slow_count'],
             'server_count' => count($data['servers']),
+            'explain_enabled' => (bool) request()->cookies->get('tracy_explain'),
         ];
+    }
+
+    /**
+     * Check if query can be explained
+     */
+    private function canExplain(string $sql): bool
+    {
+        $sql = trim(preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $sql));
+        $upper = strtoupper($sql);
+        return str_starts_with($upper, 'SELECT')
+            || str_starts_with($upper, 'UPDATE')
+            || str_starts_with($upper, 'DELETE');
     }
 
     /**

@@ -30,6 +30,26 @@ $debug_panel = config()->get('debug.panel');
 $use_tracy = in_array($debug_panel, ['tracy', 'both'], true);
 $use_legacy = in_array($debug_panel, ['legacy', 'both'], true);
 
+// Capture timing NOW for both legacy and Tracy panels
+// This is the correct measurement point - after all business logic, before output
+if ($show_dbg_info) {
+    $captured_exec_time = utime() - TIMESTART;
+    $captured_sql_time = 0;
+    try {
+        $main_db = \TorrentPier\Database\DatabaseFactory::getInstance('db');
+        $captured_sql_time = $main_db->sql_timetotal;
+    } catch (\Exception $e) {
+    }
+
+    // Pass captured timing to Tracy if enabled
+    if ($use_tracy) {
+        \TorrentPier\Tracy\TracyBarManager::getInstance()->capturePerformanceData(
+            $captured_exec_time,
+            $captured_sql_time
+        );
+    }
+}
+
 if (!config()->get('gzip_compress')) {
     flush();
 }

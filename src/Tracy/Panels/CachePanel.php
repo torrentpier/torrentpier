@@ -58,20 +58,30 @@ class CachePanel implements IBarPanel
         // Add custom styles
         $html .= $this->getStyles();
 
-        // Summary
-        $html .= '<div class="tp-cache-summary">';
-        $html .= '<div class="tp-cache-stat">';
-        $html .= '<span class="tp-value">' . $data['total_queries'] . '</span>';
-        $html .= '<span class="tp-label">Operations</span>';
+        // Collect unique engines for display
+        $engines = [];
+        foreach ($data['caches'] as $cache) {
+            $engines[$cache['engine']] = true;
+        }
+        if ($data['datastore']) {
+            $engines[$data['datastore']['engine']] = true;
+        }
+        $engineList = implode(', ', array_keys($engines));
+
+        // Header
+        $html .= '<div class="tp-cache-header">';
+        $html .= '<span class="tp-cache-title-main">Cache & Datastore</span>';
+        if ($engineList) {
+            $html .= '<span class="tp-cache-engines">' . htmlspecialchars($engineList) . '</span>';
+        }
         $html .= '</div>';
-        $html .= '<div class="tp-cache-stat">';
-        $html .= '<span class="tp-value">' . sprintf('%.3f', $data['total_time']) . 's</span>';
-        $html .= '<span class="tp-label">Total Time</span>';
-        $html .= '</div>';
-        $html .= '<div class="tp-cache-stat">';
-        $html .= '<span class="tp-value">' . count($data['caches']) . '</span>';
-        $html .= '<span class="tp-label">Cache Engines</span>';
-        $html .= '</div>';
+
+        // Stats bar
+        $stats = $this->collector->getStats();
+        $html .= '<div class="tp-cache-stats">';
+        $html .= '<div class="tp-stat"><span class="tp-stat-value">' . $data['total_queries'] . '</span><span class="tp-stat-label">Operations</span></div>';
+        $html .= '<div class="tp-stat"><span class="tp-stat-value">' . sprintf('%.3f', $data['total_time']) . 's</span><span class="tp-stat-label">Total Time</span></div>';
+        $html .= '<div class="tp-stat"><span class="tp-stat-value">' . $stats['cache_count'] . '</span><span class="tp-stat-label">Engines</span></div>';
         $html .= '</div>';
 
         // Cache instances
@@ -195,10 +205,15 @@ class CachePanel implements IBarPanel
     {
         return '<style>
             .tp-cache-panel { font-size: 13px; }
-            .tp-cache-summary { display: flex; gap: 30px; padding: 15px; background: #f8f8f8; border-radius: 4px; margin-bottom: 15px; }
-            .tp-cache-stat { text-align: center; }
-            .tp-cache-stat .tp-value { display: block; font-size: 24px; font-weight: bold; color: #333; }
-            .tp-cache-stat .tp-label { font-size: 11px; color: #666; text-transform: uppercase; }
+            .tp-cache-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: linear-gradient(90deg, #92400e, #b45309) !important; color: #fef3c7 !important; border-radius: 4px; margin-bottom: 15px; }
+            .tp-cache-header:hover { background: linear-gradient(90deg, #92400e, #b45309) !important; }
+            .tp-cache-title-main { font-size: 18px; font-weight: bold; }
+            .tp-cache-title-main:hover { background: transparent !important; }
+            .tp-cache-engines, .tp-cache-engines:hover { font-size: 13px; opacity: 0.9; padding: 4px 10px; background: rgba(255,255,255,0.15) !important; border-radius: 4px; color: inherit !important; }
+            .tp-cache-stats { display: flex; gap: 30px; padding: 15px; background: #f8f8f8; border-radius: 4px; margin-bottom: 15px; }
+            .tp-stat { text-align: center; }
+            .tp-stat-value { display: block; font-size: 24px; font-weight: bold; color: #333; }
+            .tp-stat-label { font-size: 11px; color: #666; text-transform: uppercase; }
             .tp-cache-section { margin-bottom: 20px; }
             .tp-cache-title { font-size: 14px; margin: 0 0 10px 0; padding: 8px; background: #e9ecef; border-radius: 4px; }
             .tp-datastore .tp-cache-title { background: #e7f1ff; }

@@ -63,7 +63,6 @@ class TemplatePanel implements IBarPanel
         // Summary header
         $html .= '<div class="tp-tpl-header">';
         $html .= '<div class="tp-tpl-version">';
-        $html .= '<svg viewBox="0 0 24 24" style="width:24px;height:24px;vertical-align:middle;margin-right:8px"><path fill="#1a472a" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6"/></svg>';
         $html .= '<span class="tp-twig-version">Twig v' . htmlspecialchars($data['twig_version']) . '</span>';
         $html .= '</div>';
         $html .= '<div class="tp-tpl-theme">Theme: <b>' . htmlspecialchars($data['theme_name']) . '</b></div>';
@@ -191,7 +190,9 @@ class TemplatePanel implements IBarPanel
     {
         return '<style>
             .tp-template-panel { font-size: 13px; }
-            .tp-tpl-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: linear-gradient(90deg, #1a472a, #2d5a3d); color: #90EE90; border-radius: 4px; margin-bottom: 15px; }
+            .tp-tpl-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: linear-gradient(90deg, #1a472a, #2d5a3d) !important; color: #90EE90 !important; border-radius: 4px; margin-bottom: 15px; }
+            .tp-tpl-header:hover { background: linear-gradient(90deg, #1a472a, #2d5a3d) !important; }
+            .tp-tpl-header *, .tp-tpl-header *:hover { background: transparent !important; color: inherit !important; }
             .tp-tpl-version { display: flex; align-items: center; }
             .tp-twig-version { font-size: 16px; font-weight: bold; }
             .tp-tpl-theme { font-size: 14px; }

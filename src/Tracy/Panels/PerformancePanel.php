@@ -12,6 +12,7 @@ namespace TorrentPier\Tracy\Panels;
 
 use Tracy\IBarPanel;
 use TorrentPier\Database\DatabaseFactory;
+use TorrentPier\Tracy\TracyBarManager;
 
 /**
  * Performance Panel for Tracy Debug Bar
@@ -116,10 +117,17 @@ class PerformancePanel implements IBarPanel
 
     /**
      * Get total execution time in seconds
-     * Uses TIMESTART constant set at the beginning of request processing
+     * Uses captured time from page_footer for accurate measurement
      */
     private function getExecutionTime(): float
     {
+        // Use captured time if available (set in page_footer.php)
+        $captured = TracyBarManager::getInstance()->getCapturedExecTime();
+        if ($captured !== null) {
+            return $captured;
+        }
+
+        // Fallback to current time (less accurate, includes Tracy overhead)
         if (!defined('TIMESTART')) {
             return 0;
         }
@@ -128,9 +136,17 @@ class PerformancePanel implements IBarPanel
 
     /**
      * Get total SQL query time in seconds
+     * Uses captured time from page_footer for accurate measurement
      */
     private function getSqlTime(): float
     {
+        // Use captured time if available (set in page_footer.php)
+        $captured = TracyBarManager::getInstance()->getCapturedSqlTime();
+        if ($captured !== null) {
+            return $captured;
+        }
+
+        // Fallback to current DB stats
         try {
             $db = DatabaseFactory::getInstance('db');
             return $db->sql_timetotal ?? 0;
