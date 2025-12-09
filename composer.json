@@ -1,116 +1,102 @@
 {
-  "name": "torrentpier/torrentpier",
-  "description": "TorrentPier. Bull-powered BitTorrent tracker engine",
-  "type": "project",
-  "keywords": [
-    "bittorrent",
-    "forum",
-    "torrent",
-    "tracker"
-  ],
-  "homepage": "https://github.com/torrentpier",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Exile",
-      "email": "admin@torrentpier.com",
-      "homepage": "https://github.com/Exileum",
-      "role": "Developer"
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "torrentpier/torrentpier",
+    "description": "TorrentPier. Bull-powered BitTorrent tracker engine",
+    "type": "project",
+    "keywords": [
+        "bittorrent",
+        "forum",
+        "torrent",
+        "tracker"
+    ],
+    "homepage": "https://github.com/torrentpier",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Exile",
+            "email": "admin@torrentpier.com",
+            "homepage": "https://github.com/exileum",
+            "role": "Developer"
+        },
+        {
+            "name": "belomaxorka",
+            "email": "roman25052006.kelesh@gmail.com",
+            "homepage": "https://github.com/belomaxorka",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "support@torrentpier.com",
+        "issues": "https://github.com/torrentpier/torrentpier/issues",
+        "forum": "https://torrentpier.com",
+        "docs": "https://docs.torrentpier.com"
     },
-    {
-      "name": "Diolektor",
-      "homepage": "https://github.com/diolektor",
-      "role": "Developer"
+    "require": {
+        "php": ">=8.4",
+        "arokettu/bencode": "^4.1.0",
+        "arokettu/monsterid": "^4.1.0",
+        "arokettu/random-polyfill": "1.0.2",
+        "arokettu/torrent-file": "^5.2.1",
+        "bugsnag/bugsnag": "^v3.29.1",
+        "egulias/email-validator": "^4.0.1",
+        "filp/whoops": "^2.15",
+        "gemorroj/m3u-parser": "^6.0",
+        "google/recaptcha": "^1.3",
+        "gregwar/captcha": "1.*",
+        "guzzlehttp/guzzle": "^7.10",
+        "intervention/image": "^3.0",
+        "jacklul/monolog-telegram": "^3.1",
+        "laminas/laminas-diactoros": "^3.5",
+        "laminas/laminas-httphandlerrunner": "^2.11",
+        "league/flysystem": "^3.28",
+        "league/route": "^6.2",
+        "longman/ip-tools": "1.2.1",
+        "monolog/monolog": "^3.4",
+        "nesbot/carbon": "^3.10",
+        "nette/caching": "^3.3",
+        "nette/database": "^3.2",
+        "php-feed-io/feed-io": "^6.1",
+        "php-http/guzzle7-adapter": "^1.1",
+        "robmorgan/phinx": "^0.16.9",
+        "samdark/sitemap": "2.4.1",
+        "symfony/config": "^7.3",
+        "symfony/event-dispatcher": "^8.0",
+        "symfony/filesystem": "^8.0",
+        "symfony/http-foundation": "^8.0",
+        "symfony/mailer": "^7.3",
+        "symfony/mime": "^8.0",
+        "symfony/polyfill": "v1.33.0",
+        "symfony/string": "^8.0",
+        "torrentpier/translations": "dev-main",
+        "twig/twig": "^3.21",
+        "vlucas/phpdotenv": "^5.5",
+        "z4kn4fein/php-semver": "^v3.0.0"
     },
-    {
-      "name": "PheRum",
-      "homepage": "https://github.com/PheRum",
-      "role": "Developer"
+    "require-dev": {
+        "fakerphp/faker": "^1.24",
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "^4.0",
+        "symfony/var-dumper": "^8.0"
     },
-    {
-      "name": "belomaxorka",
-      "email": "roman25052006.kelesh@gmail.com",
-      "homepage": "https://github.com/belomaxorka",
-      "role": "Developer"
+    "autoload": {
+        "psr-4": {
+            "TorrentPier\\": "src/"
+        }
     },
-    {
-      "name": "kovalensky",
-      "email": "kovalensky@evergarden.ru",
-      "homepage": "https://github.com/kovalensky",
-      "role": "Developer"
-    }
-  ],
-  "support": {
-    "email": "support@torrentpier.com",
-    "issues": "https://github.com/torrentpier/torrentpier/issues",
-    "forum": "https://torrentpier.com"
-  },
-  "require": {
-    "php": ">=8.4",
-    "arokettu/bencode": "^4.1.0",
-    "arokettu/monsterid": "^4.1.0",
-    "arokettu/random-polyfill": "1.0.2",
-    "arokettu/torrent-file": "^5.2.1",
-    "bugsnag/bugsnag": "^v3.29.1",
-    "egulias/email-validator": "^4.0.1",
-    "filp/whoops": "^2.15",
-    "gemorroj/m3u-parser": "^6.0",
-    "google/recaptcha": "^1.3",
-    "gregwar/captcha": "1.*",
-    "guzzlehttp/guzzle": "^7.10",
-    "intervention/image": "^3.0",
-    "jacklul/monolog-telegram": "^3.1",
-    "laminas/laminas-diactoros": "^3.5",
-    "laminas/laminas-httphandlerrunner": "^2.11",
-    "league/flysystem": "^3.28",
-    "league/route": "^6.2",
-    "longman/ip-tools": "1.2.1",
-    "monolog/monolog": "^3.4",
-    "nesbot/carbon": "^3.10",
-    "nette/caching": "^3.3",
-    "nette/database": "^3.2",
-    "php-feed-io/feed-io": "^6.1",
-    "php-http/guzzle7-adapter": "^1.1",
-    "robmorgan/phinx": "^0.16.9",
-    "samdark/sitemap": "2.4.1",
-    "symfony/config": "^7.3",
-    "symfony/event-dispatcher": "^8.0",
-    "symfony/filesystem": "^8.0",
-    "symfony/http-foundation": "^8.0",
-    "symfony/mailer": "^7.3",
-    "symfony/mime": "^8.0",
-    "symfony/polyfill": "v1.33.0",
-    "symfony/string": "^8.0",
-    "torrentpier/translations": "dev-main",
-    "twig/twig": "^3.21",
-    "vlucas/phpdotenv": "^5.5",
-    "z4kn4fein/php-semver": "^v3.0.0"
-  },
-  "require-dev": {
-    "fakerphp/faker": "^1.24",
-    "friendsofphp/php-cs-fixer": "^3.75",
-    "mockery/mockery": "^1.6",
-    "pestphp/pest": "^4.0",
-    "symfony/var-dumper": "^8.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "TorrentPier\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Tests\\": "tests/"
-    }
-  },
-  "config": {
-    "sort-packages": true,
-    "optimize-autoloader": true,
-    "allow-plugins": {
-      "pestphp/pest-plugin": true,
-      "php-http/discovery": true
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
