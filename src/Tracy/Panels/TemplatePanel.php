@@ -37,13 +37,15 @@ class TemplatePanel implements IBarPanel
 
         $hasWarnings = $stats['has_warnings'];
         $color = $hasWarnings ? '#D80' : '#4A4';
-        $warning = $hasWarnings ? ' !' : '';
+        $warningIcon = $hasWarnings ? ' <svg viewBox="0 0 24 24" style="width:14px;height:14px;vertical-align:middle"><path fill="' . $color . '" d="M1,21H23L12,2L1,21M13,18H11V16H13V18M13,14H11V10H13V14Z"/></svg>' : '';
+
+        $renderTime = $stats['render_time'] ?? 0;
 
         return '<span title="Templates (Twig ' . $stats['twig_version'] . ')">
             <svg viewBox="0 0 24 24" style="width:16px;height:16px;vertical-align:middle">
-                <path fill="' . $color . '" d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z"/>
+                <path fill="' . $color . '" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M9.54,15.65L11.63,17.74L10.35,19L7,15.65L10.35,12.3L11.63,13.56L9.54,15.65M17,15.65L13.65,19L12.38,17.74L14.47,15.65L12.38,13.56L13.65,12.3L17,15.65Z"/>
             </svg>
-            <span class="tracy-label" style="color:' . $color . '">Twig ' . $stats['total_count'] . $warning . '</span>
+            <span class="tracy-label" style="color:' . $color . '">' . number_format($stats['total_count'], 0, '', ' ') . ' / ' . number_format($renderTime, 1, '.', ' ') . ' ms' . $warningIcon . '</span>
         </span>';
     }
 
@@ -203,8 +205,10 @@ class TemplatePanel implements IBarPanel
             .tp-stat-value.tp-native { color: #4A4; }
             .tp-stat-label { font-size: 11px; color: #666; text-transform: uppercase; }
             .tp-alert { padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; }
-            .tp-alert-warning { background: #fff3cd; border: 1px solid #ffc107; color: #856404; }
-            .tp-alert-info { background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+            .tp-alert-warning, .tp-alert-warning:hover { background: #fff3cd !important; border: 1px solid #ffc107 !important; color: #856404 !important; }
+            .tp-alert-warning *, .tp-alert-warning *:hover { background: transparent !important; color: inherit !important; }
+            .tp-alert-info, .tp-alert-info:hover { background: #d1ecf1 !important; border: 1px solid #bee5eb !important; color: #0c5460 !important; }
+            .tp-alert-info *, .tp-alert-info *:hover { background: transparent !important; color: inherit !important; }
             .tp-conflicts-table, .tp-shadowing-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; font-size: 12px; }
             .tp-conflicts-table th, .tp-conflicts-table td,
             .tp-shadowing-table th, .tp-shadowing-table td { padding: 8px; border: 1px solid #ddd; text-align: left; }

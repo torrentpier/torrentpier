@@ -117,14 +117,14 @@ class TracyBarManager
             $bar->addPanel(new Panels\DatabasePanel(), 'tp-database');
         }
 
-        // Template panel - Twig debugging
-        if ($panelConfig['template'] ?? true) {
-            $bar->addPanel(new Panels\TemplatePanel(), 'tp-template');
-        }
-
         // Cache panel - Cache/Datastore operations
         if ($panelConfig['cache'] ?? true) {
             $bar->addPanel(new Panels\CachePanel(), 'tp-cache');
+        }
+
+        // Template panel - Twig debugging
+        if ($panelConfig['template'] ?? true) {
+            $bar->addPanel(new Panels\TemplatePanel(), 'tp-template');
         }
     }
 

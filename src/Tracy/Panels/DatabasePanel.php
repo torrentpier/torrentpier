@@ -49,13 +49,13 @@ class DatabasePanel implements IBarPanel
             $color = '#4A4';
         }
 
-        $warning = ($hasLegacy || $hasSlow) ? ' !' : '';
+        $warningIcon = ($hasLegacy || $hasSlow) ? ' <svg viewBox="0 0 24 24" style="width:14px;height:14px;vertical-align:middle"><path fill="' . $color . '" d="M1,21H23L12,2L1,21M13,18H11V16H13V18M13,14H11V10H13V14Z"/></svg>' : '';
 
         return '<span title="Database Queries">
             <svg viewBox="0 0 24 24" style="width:16px;height:16px;vertical-align:middle">
                 <path fill="' . $color . '" d="M12,3C7.58,3 4,4.79 4,7C4,9.21 7.58,11 12,11C16.42,11 20,9.21 20,7C20,4.79 16.42,3 12,3M4,9V12C4,14.21 7.58,16 12,16C16.42,16 20,14.21 20,12V9C20,11.21 16.42,13 12,13C7.58,13 4,11.21 4,9M4,14V17C4,19.21 7.58,21 12,21C16.42,21 20,19.21 20,17V14C20,16.21 16.42,18 12,18C7.58,18 4,16.21 4,14Z"/>
             </svg>
-            <span class="tracy-label" style="color:' . $color . '">' . $queryCount . ' / ' . sprintf('%.1f', $totalTime) . ' ms' . $warning . '</span>
+            <span class="tracy-label" style="color:' . $color . '">' . number_format($queryCount, 0, '', ' ') . ' / ' . number_format($totalTime, 1, '.', ' ') . ' ms' . $warningIcon . '</span>
         </span>';
     }
 
@@ -68,7 +68,6 @@ class DatabasePanel implements IBarPanel
 
         $html = '<h1>Database Queries</h1>';
         $html .= '<div class="tracy-inner tp-database-panel">';
-        $html .= '<div class="tracy-inner-container">';
 
         // Add custom styles
         $html .= $this->getStyles();
@@ -102,13 +101,16 @@ class DatabasePanel implements IBarPanel
         // Stats bar
         $html .= '<div class="tp-db-stats">';
         $html .= '<div class="tp-stat"><span class="tp-stat-value">' . $data['total_queries'] . '</span><span class="tp-stat-label">Queries</span></div>';
-        $html .= '<div class="tp-stat"><span class="tp-stat-value">' . sprintf('%.3f', $data['total_time']) . 's</span><span class="tp-stat-label">Total Time</span></div>';
+        if ($data['nette_count'] > 0) {
+            $html .= '<div class="tp-stat tp-stat-nette"><span class="tp-stat-value">' . $data['nette_count'] . '</span><span class="tp-stat-label">Nette Explorer</span></div>';
+        }
         if ($data['legacy_count'] > 0) {
             $html .= '<div class="tp-stat tp-stat-warning"><span class="tp-stat-value">' . $data['legacy_count'] . '</span><span class="tp-stat-label">Legacy</span></div>';
         }
         if ($data['slow_count'] > 0) {
             $html .= '<div class="tp-stat tp-stat-warning"><span class="tp-stat-value">' . $data['slow_count'] . '</span><span class="tp-stat-label">Slow</span></div>';
         }
+        $html .= '<div class="tp-stat"><span class="tp-stat-value">' . sprintf('%.3f', $data['total_time']) . 's</span><span class="tp-stat-label">Total Time</span></div>';
         $html .= '</div>';
 
         // Legacy query warning banner
@@ -126,7 +128,6 @@ class DatabasePanel implements IBarPanel
             $html .= $this->renderServerSection($serverName, $serverData, $data['total_time']);
         }
 
-        $html .= '</div>'; // tracy-inner-container
         $html .= '</div>'; // tracy-inner
 
         return $html;
@@ -317,8 +318,9 @@ class DatabasePanel implements IBarPanel
             .tp-stat-value { display: block; font-size: 24px; font-weight: bold; color: #333; }
             .tp-stat-label { font-size: 11px; color: #666; text-transform: uppercase; }
             .tp-stat-warning .tp-stat-value { color: #B00; }
+            .tp-stat-nette .tp-stat-value { color: #155724; }
             .tp-alert { padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; }
-            .tp-alert-danger { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+            .tp-alert-danger, .tp-alert-danger:hover { background: #f8d7da !important; border: 1px solid #f5c6cb; color: #721c24 !important; }
             .tp-db-server { margin-bottom: 20px; }
             .tp-db-server-title { font-size: 14px; margin: 0 0 10px 0; padding: 8px; background: #e9ecef; border-radius: 4px; }
             .tp-engine { color: #666; font-weight: normal; }
@@ -335,8 +337,8 @@ class DatabasePanel implements IBarPanel
             .tp-sql-wrapper { max-height: 100px; overflow-y: auto; }
             .tp-sql-code { display: block; font-size: 11px; word-break: break-all; white-space: pre-wrap; }
             .tp-badge { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-right: 5px; }
-            .tp-badge-legacy { background: #f8d7da; color: #721c24; }
-            .tp-badge-nette { background: #d4edda; color: #155724; }
+            .tp-badge-legacy, .tp-badge-legacy:hover { background: #f8d7da !important; color: #721c24 !important; }
+            .tp-badge-nette, .tp-badge-nette:hover { background: #d4edda !important; color: #155724 !important; }
             .tp-query-actions { margin-top: 5px; }
             .tp-btn { padding: 3px 8px; font-size: 10px; border: 1px solid #ccc; background: #fff; border-radius: 3px; cursor: pointer; margin-right: 5px; }
             .tp-btn:hover { background: #f0f0f0; }

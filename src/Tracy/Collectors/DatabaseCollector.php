@@ -34,6 +34,7 @@ class DatabaseCollector
             'total_time' => 0.0,
             'legacy_count' => 0,
             'slow_count' => 0,
+            'nette_count' => 0,
         ];
 
         $slowThreshold = defined('SQL_SLOW_QUERY_TIME') ? SQL_SLOW_QUERY_TIME : 3.0;
@@ -92,6 +93,9 @@ class DatabaseCollector
                         if ($queryData['is_slow']) {
                             $data['slow_count']++;
                         }
+                        if ($queryData['is_nette']) {
+                            $data['nette_count']++;
+                        }
                     }
 
                     $data['servers'][$serverName] = $serverData;
@@ -122,6 +126,7 @@ class DatabaseCollector
             'total_time' => $data['total_time'],
             'legacy_count' => $data['legacy_count'],
             'slow_count' => $data['slow_count'],
+            'nette_count' => $data['nette_count'],
             'server_count' => count($data['servers']),
             'explain_enabled' => (bool) request()->cookies->get('tracy_explain'),
         ];

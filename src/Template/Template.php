@@ -225,6 +225,9 @@ class Template
             'V' => $this->variables,
         ];
 
+        // Check for variable conflicts with reserved keys
+        $this->checkVariableConflicts($templateName);
+
         // For native Twig templates, expose V variables at root level for cleaner syntax
         if ($isNativeTwig) {
             $context = $this->exposeVariablesToRoot($context, $templateName);
@@ -256,14 +259,24 @@ class Template
     }
 
     /**
+     * Check for variable conflicts with reserved keys
+     */
+    private function checkVariableConflicts(string $templateName): void
+    {
+        foreach ($this->variables as $key => $value) {
+            if (in_array($key, self::RESERVED_KEYS, true)) {
+                $this->logVariableConflict($key, $templateName);
+            }
+        }
+    }
+
+    /**
      * Expose V variables to root context for cleaner template syntax
-     * Logs conflicts when variables would override reserved keys
      */
     private function exposeVariablesToRoot(array $context, string $templateName): array
     {
         foreach ($this->variables as $key => $value) {
             if (in_array($key, self::RESERVED_KEYS, true)) {
-                $this->logVariableConflict($key, $templateName);
                 continue;
             }
             $context[$key] = $value;

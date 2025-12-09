@@ -92,6 +92,7 @@ class TemplateCollector
             'native_count' => $data['native_count'],
             'has_warnings' => $data['has_warnings'],
             'warning_count' => $data['conflict_count'] + $data['shadowing_count'],
+            'render_time' => $data['render_time'],
         ];
     }
 }
