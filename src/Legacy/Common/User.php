@@ -482,9 +482,7 @@ class User
     {
         $debug_cookies = [
             COOKIE_DBG,
-            'explain',
-            'sql_log',
-            'sql_log_full',
+            'tracy_explain',
         ];
 
         if ($user_id == GUEST_UID) {

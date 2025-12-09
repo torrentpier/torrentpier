@@ -68,6 +68,7 @@
         "symfony/polyfill": "v1.33.0",
         "symfony/string": "^8.0",
         "torrentpier/translations": "dev-main",
+        "tracy/tracy": "^2.10",
         "twig/twig": "^3.21",
         "vlucas/phpdotenv": "^5.5",
         "z4kn4fein/php-semver": "^v3.0.0"

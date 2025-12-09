@@ -225,6 +225,9 @@ class Template
             'V' => $this->variables,
         ];
 
+        // Check for variable conflicts with reserved keys
+        $this->checkVariableConflicts($templateName);
+
         // For native Twig templates, expose V variables at root level for cleaner syntax
         if ($isNativeTwig) {
             $context = $this->exposeVariablesToRoot($context, $templateName);
@@ -249,21 +252,29 @@ class Template
         $renderTime = (microtime(true) - $renderStart) * 1000;
         self::$totalRenderTime += $renderTime;
 
-        $output = $this->injectDebugBar($handle, $output, $renderTime);
-
         echo $output;
         return true;
     }
 
     /**
+     * Check for variable conflicts with reserved keys
+     */
+    private function checkVariableConflicts(string $templateName): void
+    {
+        foreach ($this->variables as $key => $value) {
+            if (in_array($key, self::RESERVED_KEYS, true)) {
+                $this->logVariableConflict($key, $templateName);
+            }
+        }
+    }
+
+    /**
      * Expose V variables to root context for cleaner template syntax
-     * Logs conflicts when variables would override reserved keys
      */
     private function exposeVariablesToRoot(array $context, string $templateName): array
     {
         foreach ($this->variables as $key => $value) {
             if (in_array($key, self::RESERVED_KEYS, true)) {
-                $this->logVariableConflict($key, $templateName);
                 continue;
             }
             $context[$key] = $value;
@@ -397,6 +408,14 @@ class Template
     }
 
     /**
+     * Get total render time in milliseconds
+     */
+    public static function getTotalRenderTime(): float
+    {
+        return self::$totalRenderTime;
+    }
+
+    /**
      * Initialize Twig environment
      */
     private function initializeTwig(): void
@@ -503,69 +522,5 @@ class Template
         }
 
         return basename($fullPath);
-    }
-
-    /**
-     * Injects the debug bar into the given output for debugging purposes.
-     *
-     * @param string $handle The handle representing the section of the page being rendered (e.g., 'page_header', 'page_footer').
-     * @param string $output The current HTML output of the section being rendered.
-     * @param float $renderTime The time taken to render the section, in milliseconds.
-     *
-     * @return string The modified HTML output with the debug bar included, if enabled, or the original output if the debug bar is disabled.
-     */
-    private function injectDebugBar(string $handle, string $output, float $renderTime): string
-    {
-        $showDebugBar = config()->get('twig.debug_bar', false);
-
-        if (!$showDebugBar) {
-            return $output;
-        }
-
-        if ($handle === 'page_header' && stripos($output, '<body') !== false) {
-            $debugBar = sprintf(
-                '<div id="twig-debug-bar" style="position:fixed;top:0;left:0;right:0;z-index:99999;' .
-                'background:linear-gradient(90deg,#1a472a,#2d5a3d);color:#90EE90;font-family:monospace;' .
-                'font-size:11px;padding:4px 12px;display:flex;gap:20px;align-items:center;box-shadow:0 2px 4px rgba(0,0,0,0.3);">' .
-                '<span style="font-weight:bold;">🌿 TWIG v%s</span>' .
-                '<span>Theme: <b>%s</b></span>' .
-                '<span id="twig-templates">Templates: <b>loading...</b></span>' .
-                '<span id="twig-render-time">Render: <b>%.2fms</b></span>' .
-                '<span style="margin-left:auto;opacity:0.7;">TorrentPier Twig Engine</span>' .
-                '</div><style>body{padding-top:28px !important;}</style>',
-                Environment::VERSION,
-                $this->templateName,
-                $renderTime
-            );
-            $output = preg_replace('/(<body[^>]*>)/i', '$1' . $debugBar, $output, 1);
-        }
-
-        if ($handle === 'page_footer') {
-            $legacyTemplates = Loaders\LegacyTemplateLoader::getLegacyTemplates();
-            $nativeTemplates = Loaders\LegacyTemplateLoader::getNativeTemplates();
-            $legacyCount = count($legacyTemplates);
-            $nativeCount = count($nativeTemplates);
-            $totalCount = $legacyCount + $nativeCount;
-
-            if ($totalCount > 0) {
-                $legacyList = $legacyCount > 0 ? implode(', ', $legacyTemplates) : '';
-                $nativeList = $nativeCount > 0 ? implode(', ', $nativeTemplates) : '';
-                $label = "Legacy: $legacyCount, Native: $nativeCount";
-                $list = $legacyList . ($legacyList && $nativeList ? ' | ' : '') . $nativeList;
-            } else {
-                $label = 'Templates';
-                $list = '(from cache)';
-            }
-
-            $output .= sprintf(
-                '<script>document.getElementById("twig-templates").innerHTML = "%s: <b>%s</b>";' .
-                'document.getElementById("twig-render-time").innerHTML = "Total render: <b>%.2fms</b>";</script>',
-                $label,
-                addslashes($list),
-                self::$totalRenderTime
-            );
-        }
-
-        return $output;
     }
 }

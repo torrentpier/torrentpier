@@ -442,14 +442,14 @@ function mockGlobalFunction(string $functionName, $returnValue): void
     }
 }
 
-function mockDevFunction(): void
+function mockTracyFunction(): void
 {
-    if (!function_exists('dev')) {
+    if (!function_exists('tracy')) {
         eval('
-            function dev() {
+            function tracy() {
                 return new class {
-                    public function checkSqlDebugAllowed() { return true; }
-                    public function formatShortQuery($query, $escape = false) { return $query; }
+                    public function isDebugAllowed() { return true; }
+                    public function formatQuery($query, $escape = false) { return $query; }
                 };
             }
         ');
@@ -477,9 +477,30 @@ function mockUtimeFunction(): void
     }
 }
 
+function mockRequestFunction(): void
+{
+    if (!function_exists('request')) {
+        eval('
+            function request() {
+                return new class {
+                    public object $cookies;
+                    public function __construct() {
+                        $this->cookies = new class {
+                            public function get(string $key, $default = null) {
+                                return $_COOKIE[$key] ?? $default;
+                            }
+                        };
+                    }
+                };
+            }
+        ');
+    }
+}
+
 // Initialize test environment when Pest loads
 setupTestEnvironment();
-mockDevFunction();
+mockTracyFunction();
 mockBbLogFunction();
 mockHideBbPathFunction();
 mockUtimeFunction();
+mockRequestFunction();

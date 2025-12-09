@@ -87,7 +87,7 @@ class CacheManager
         $this->cache = new Cache($this->storage, $namespace);
 
         // Enable debug if allowed
-        $this->dbg_enabled = dev()->checkSqlDebugAllowed();
+        $this->dbg_enabled = tracy()->isDebugAllowed();
     }
 
     /**
@@ -379,7 +379,7 @@ class CacheManager
         switch ($mode) {
             case 'start':
                 $this->sql_starttime = utime();
-                $dbg['sql'] = dev()->formatShortQuery($cur_query ?? $this->cur_query);
+                $dbg['sql'] = tracy()->formatQuery($cur_query ?? $this->cur_query);
                 $dbg['src'] = $this->debug_find_source();
                 $dbg['file'] = $this->debug_find_source('file');
                 $dbg['line'] = $this->debug_find_source('line');

@@ -480,7 +480,7 @@ beforeEach(function () {
     resetGlobalState();
 
     // Mock required functions for testing
-    mockDevFunction();
+    mockTracyFunction();
     mockBbLogFunction();
     mockHideBbPathFunction();
     mockUtimeFunction();

@@ -15,7 +15,7 @@ describe('Database Class', function () {
         resetGlobalState();
 
         // Mock required functions that might not exist in test environment
-        mockDevFunction();
+        mockTracyFunction();
         mockBbLogFunction();
         mockHideBbPathFunction();
     });

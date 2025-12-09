@@ -55,7 +55,7 @@ class TwigEnvironmentFactory
 
         // Configure Twig environment
         $options = [
-            'debug' => dev()->isDebugEnabled(),
+            'debug' => whoops()->isDebugEnabled(),
             'auto_reload' => true,
             'strict_variables' => false, // Allow undefined variables for backward compatibility
             'autoescape' => false, // Disable auto-escaping for backward compatibility

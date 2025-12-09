@@ -9,7 +9,7 @@ use TorrentPier\Cache\DatastoreManager;
 describe('DatastoreManager Class', function () {
     beforeEach(function () {
         resetGlobalState();
-        mockDevFunction();
+        mockTracyFunction();
         mockBbLogFunction();
         mockHideBbPathFunction();
         mockUtimeFunction();
