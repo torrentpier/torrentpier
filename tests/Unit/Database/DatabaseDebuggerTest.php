@@ -7,7 +7,7 @@ describe('DatabaseDebugger Class', function () {
     beforeEach(function () {
         Database::destroyInstances();
         resetGlobalState();
-        mockDevFunction();
+        mockTracyFunction();
         mockBbLogFunction();
         mockHideBbPathFunction();
 
@@ -60,13 +60,13 @@ describe('DatabaseDebugger Class', function () {
         });
 
         it('enables explain based on cookie', function () {
-            $_COOKIE['explain'] = '1';
+            $_COOKIE['tracy_explain'] = '1';
 
             // Test that explain functionality can be configured
             expect(property_exists($this->debugger, 'do_explain'))->toBe(true);
             expect($this->debugger->do_explain)->toBeBool();
 
-            unset($_COOKIE['explain']);
+            unset($_COOKIE['tracy_explain']);
         });
 
         it('respects slow query time constants', function () {
@@ -379,69 +379,6 @@ describe('DatabaseDebugger Class', function () {
             expect($entry)->toHaveKey('file');
             expect($entry)->toHaveKey('line');
             expect($entry)->toHaveKey('time');
-        });
-    });
-
-    describe('Explain Functionality', function () {
-        beforeEach(function () {
-            $this->debugger->do_explain = true;
-            $this->db->cur_query = 'SELECT * FROM users WHERE active = 1';
-        });
-
-        it('starts explain capture for SELECT queries', function () {
-            expect(fn() => $this->debugger->explain('start'))->not->toThrow(Exception::class);
-        });
-
-        it('converts UPDATE queries to SELECT for explain', function () {
-            $this->db->cur_query = 'UPDATE users SET status = 1 WHERE id = 5';
-
-            expect(fn() => $this->debugger->explain('start'))->not->toThrow(Exception::class);
-        });
-
-        it('converts DELETE queries to SELECT for explain', function () {
-            $this->db->cur_query = 'DELETE FROM users WHERE status = 0';
-
-            expect(fn() => $this->debugger->explain('start'))->not->toThrow(Exception::class);
-        });
-
-        it('generates explain output on stop', function () {
-            $this->debugger->explain_hold = '<table><tr><td>explain data</td></tr>';
-            $this->debugger->dbg_enabled = true;
-
-            // Create debug entry
-            $this->debugger->debug('start');
-            $this->debugger->debug('stop');
-
-            // Test that explain functionality works without throwing exceptions
-            expect(fn() => $this->debugger->explain('stop'))->not->toThrow(Exception::class);
-
-            // Verify that explain_out is a string (the explain functionality ran)
-            expect($this->debugger->explain_out)->toBeString();
-
-            // If there's any output, it should contain some HTML structure
-            if (!empty($this->debugger->explain_out)) {
-                expect($this->debugger->explain_out)->toContain('<table');
-            }
-        });
-
-        it('adds explain row formatting', function () {
-            // Test the explain row formatting functionality
-            $row = [
-                'table' => 'users',
-                'type' => 'ALL',
-                'rows' => '1000',
-            ];
-
-            // Test that the explain method exists and can process row data
-            if (method_exists($this->debugger, 'explain')) {
-                expect(fn() => $this->debugger->explain('add_explain_row', false, $row))
-                    ->not->toThrow(Exception::class);
-            } else {
-                // If method doesn't exist, just verify our data structure
-                expect($row)->toHaveKey('table');
-                expect($row)->toHaveKey('type');
-                expect($row)->toHaveKey('rows');
-            }
         });
     });
 

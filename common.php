@@ -211,13 +211,13 @@ function censor(): \TorrentPier\Censor
 }
 
 /**
- * Get the Dev instance
+ * Whoops error handler singleton
  *
- * @return \TorrentPier\Dev
+ * @return \TorrentPier\Whoops\WhoopsManager
  */
-function dev(): \TorrentPier\Dev
+function whoops(): \TorrentPier\Whoops\WhoopsManager
 {
-    return \TorrentPier\Dev::getInstance();
+    return \TorrentPier\Whoops\WhoopsManager::getInstance();
 }
 
 /**
@@ -307,7 +307,7 @@ if (APP_ENV === 'development') {
 } else {
     define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 }
-(\TorrentPier\Dev::init());
+whoops()->init();
 tracy()->init();
 
 /**

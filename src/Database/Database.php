@@ -1027,10 +1027,6 @@ class Database
                 return $this->debugger->dbg_enabled ?? false;
             case 'do_explain':
                 return $this->debugger->do_explain ?? false;
-            case 'explain_hold':
-                return $this->debugger->explain_hold ?? '';
-            case 'explain_out':
-                return $this->debugger->explain_out ?? '';
             case 'slow_time':
                 return $this->debugger->slow_time ?? 3.0;
             case 'sql_timetotal':
@@ -1050,8 +1046,6 @@ class Database
             case 'dbg_id':
             case 'dbg_enabled':
             case 'do_explain':
-            case 'explain_hold':
-            case 'explain_out':
             case 'slow_time':
             case 'sql_timetotal':
                 return true;

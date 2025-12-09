@@ -101,7 +101,7 @@ class DatastoreManager
         // Create unified cache manager for datastore with pre-built storage
         $this->cacheManager = CacheManager::getInstance('datastore', $storage, $config);
         $this->engine = $this->cacheManager->engine;
-        $this->dbg_enabled = dev()->checkSqlDebugAllowed();
+        $this->dbg_enabled = tracy()->isDebugAllowed();
     }
 
     /**

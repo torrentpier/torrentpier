@@ -137,6 +137,24 @@ class TracyBarManager
         $this->capturedSqlTime = $sqlTime;
     }
 
+    /**
+     * Check if SQL/debug data collection is allowed
+     * Used by DatabaseDebugger, CacheManager, DatastoreManager
+     */
+    public function isDebugAllowed(): bool
+    {
+        return defined('SQL_DEBUG') && SQL_DEBUG && defined('DBG_USER') && DBG_USER;
+    }
+
+    /**
+     * Format SQL query for display (compact whitespace)
+     */
+    public function formatQuery(string $sql, bool $escapeHtml = false): string
+    {
+        $sql = str_compact($sql);
+        return $escapeHtml ? htmlCHR($sql, true) : $sql;
+    }
+
     private function __clone() {}
 
     public function __wakeup(): void

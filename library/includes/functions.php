@@ -1174,10 +1174,6 @@ function bb_die($msg_text, $status_code = null)
 
 function bb_simple_die($txt, $status_code = null)
 {
-    if (!empty($_COOKIE['explain'])) {
-        bb_die("bb_simple_die:<br /><br />$txt");
-    }
-
     \TorrentPier\Http\Response::text($txt, $status_code ?? 200)->send();
     exit;
 }

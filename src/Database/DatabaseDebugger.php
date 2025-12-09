@@ -32,10 +32,6 @@ class DatabaseDebugger
     public int $dbg_id = 0;
     public array $legacy_queries = []; // Track queries that needed legacy compatibility fixes
 
-    // Explain functionality
-    public string $explain_hold = '';
-    public string $explain_out = '';
-
     // Nette Explorer tracking
     public bool $is_nette_explorer_query = false;
 
@@ -53,9 +49,9 @@ class DatabaseDebugger
      */
     private function initializeDebugSettings(): void
     {
-        // Use the EXACT same logic as the original DB class
-        $this->dbg_enabled = (dev()->checkSqlDebugAllowed() || !empty($_COOKIE['explain']));
-        $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));
+        $tracyExplain = (bool) request()->cookies->get('tracy_explain');
+        $this->dbg_enabled = tracy()->isDebugAllowed() || $tracyExplain;
+        $this->do_explain = $this->dbg_enabled && $tracyExplain;
     }
 
     /**
@@ -90,9 +86,6 @@ class DatabaseDebugger
                 $dbg['mem_before'] = function_exists('sys') ? sys('mem') : 0;
             }
 
-            if ($this->do_explain) {
-                $this->explain('start');
-            }
         } elseif ($mode === 'stop') {
             if (defined('SQL_CALC_QUERY_TIME') && SQL_CALC_QUERY_TIME || defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES) {
                 $this->cur_query_time = microtime(true) - $this->sql_starttime;
@@ -121,10 +114,6 @@ class DatabaseDebugger
                 }
 
                 $id++;
-            }
-
-            if ($this->do_explain) {
-                $this->explain('stop');
             }
 
             // Check for logging
@@ -257,7 +246,7 @@ class DatabaseDebugger
         $msg[] = sprintf('%-6s', $q_time);
         $msg[] = sprintf('%05d', getmypid());
         $msg[] = $this->db->db_server;
-        $msg[] = function_exists('dev') ? dev()->formatShortQuery($this->db->cur_query) : $this->db->cur_query;
+        $msg[] = tracy()->formatQuery($this->db->cur_query);
         $msg = implode(defined('LOG_SEPR') ? LOG_SEPR : ' | ', $msg);
         $msg .= ($info = $this->db->query_info()) ? ' # ' . $info : '';
         $msg .= ' # ' . $this->debug_find_source() . ' ';
@@ -430,105 +419,6 @@ class DatabaseDebugger
     }
 
     /**
-     * Explain queries - maintains compatibility with legacy SqlDb
-     */
-    public function explain($mode, $html_table = '', array $row = []): mixed
-    {
-        if (!$this->do_explain) {
-            return false;
-        }
-
-        $query = $this->db->cur_query ?? '';
-        // Remove comments
-        $query = preg_replace('#(\s*)(/\*)(.*)(\*/)(\s*)#', '', $query);
-
-        switch ($mode) {
-            case 'start':
-                $this->explain_hold = '';
-
-                if (preg_match('#UPDATE ([a-z0-9_]+).*?WHERE(.*)/#', $query, $m)) {
-                    $query = "SELECT * FROM $m[1] WHERE $m[2]";
-                } elseif (preg_match('#DELETE FROM ([a-z0-9_]+).*?WHERE(.*)#s', $query, $m)) {
-                    $query = "SELECT * FROM $m[1] WHERE $m[2]";
-                }
-
-                if (str_starts_with($query, "SELECT")) {
-                    $html_table = false;
-
-                    try {
-                        $result = $this->db->connection->query("EXPLAIN $query");
-                        while ($row = $result->fetch()) {
-                            // Convert row to array regardless of type
-                            $rowArray = (array) $row;
-                            $html_table = $this->explain('add_explain_row', $html_table, $rowArray);
-                        }
-                    } catch (\Exception $e) {
-                        // Skip if explain fails
-                    }
-
-                    if ($html_table) {
-                        $this->explain_hold .= '</table>';
-                    }
-                }
-                break;
-
-            case 'stop':
-                if (!$this->explain_hold) {
-                    break;
-                }
-
-                $id = $this->dbg_id - 1;
-                $htid = 'expl-' . spl_object_hash($this->db->connection) . '-' . $id;
-                $dbg = $this->dbg[$id] ?? [];
-
-                // Ensure required keys exist with defaults
-                $dbg = array_merge([
-                    'time' => $this->cur_query_time ?? 0,
-                    'sql' => $this->db->cur_query ?? '',
-                    'query' => $this->db->cur_query ?? '',
-                    'src' => $this->debug_find_source(),
-                    'trace' => $this->debug_find_source(),  // Backup for compatibility
-                ], $dbg);
-
-                $this->explain_out .= '
-                <table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0;">
-                <tr>
-                    <th style="height: 22px;" align="left">&nbsp;' . ($dbg['src'] ?? $dbg['trace']) . '&nbsp; [' . sprintf('%.3f', $dbg['time']) . ' s]&nbsp; <i>' . $this->db->query_info() . '</i></th>
-                    <th class="copyElement" data-clipboard-target="#' . $htid . '" style="height: 22px;" align="right" title="Copy to clipboard">' . "[{$this->db->engine}] {$this->db->db_server}.{$this->db->selected_db}" . ' :: Query #' . ($this->db->num_queries + 1) . '&nbsp;</th>
-                </tr>
-                <tr><td colspan="2">' . $this->explain_hold . '</td></tr>
-                </table>
-                <div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . (function_exists('dev') ? dev()->formatShortQuery($dbg['sql'] ?? $dbg['query'], true) : htmlspecialchars($dbg['sql'] ?? $dbg['query'])) . '&nbsp;&nbsp;</div></div>
-                <br />';
-                break;
-
-            case 'add_explain_row':
-                if (!$html_table && $row) {
-                    $html_table = true;
-                    $this->explain_hold .= '<table width="100%" cellpadding="3" cellspacing="1" class="bodyline" style="border-width: 0;"><tr>';
-                    foreach (array_keys($row) as $val) {
-                        $this->explain_hold .= '<td class="row3 gensmall" align="center"><b>' . htmlspecialchars($val) . '</b></td>';
-                    }
-                    $this->explain_hold .= '</tr>';
-                }
-                $this->explain_hold .= '<tr>';
-                foreach (array_values($row) as $i => $val) {
-                    $class = !($i % 2) ? 'row1' : 'row2';
-                    $this->explain_hold .= '<td class="' . $class . ' gen">' . str_replace(["{$this->db->selected_db}.", ',', ';'], ['', ', ', ';<br />'], htmlspecialchars($val ?? '')) . '</td>';
-                }
-                $this->explain_hold .= '</tr>';
-
-                return $html_table;
-
-            case 'display':
-                echo '<a name="explain"></a><div class="med">' . $this->explain_out . '</div>';
-                break;
-        }
-
-        return false;
-    }
-
-    /**
      * Get debug statistics for display
      */
     public function getDebugStats(): array
@@ -537,7 +427,6 @@ class DatabaseDebugger
             'num_queries' => count($this->dbg),
             'sql_timetotal' => $this->db->sql_timetotal,
             'queries' => $this->dbg,
-            'explain_out' => $this->explain_out,
         ];
     }
 
@@ -548,8 +437,6 @@ class DatabaseDebugger
     {
         $this->dbg = [];
         $this->dbg_id = 0;
-        $this->explain_hold = '';
-        $this->explain_out = '';
     }
 
     /**

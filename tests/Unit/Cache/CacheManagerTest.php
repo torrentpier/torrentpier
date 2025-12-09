@@ -9,7 +9,7 @@ use TorrentPier\Cache\CacheManager;
 describe('CacheManager Class', function () {
     beforeEach(function () {
         resetGlobalState();
-        mockDevFunction();
+        mockTracyFunction();
         mockBbLogFunction();
         mockHideBbPathFunction();
         mockUtimeFunction();

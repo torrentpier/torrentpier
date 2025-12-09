@@ -297,12 +297,6 @@ Ajax.prototype = {
     if (response.raw_output) {
       $('body').prepend(response.raw_output);
     }
-    if (response.sql_log) {
-      $('#sqlLog').prepend(response.sql_log + '<hr/>');
-      if (typeof fixSqlLog === 'function') {
-        fixSqlLog();
-      }
-    }
     if (response.update_ids) {
       for (id in response.update_ids) {
         $('#' + id).html(response.update_ids[id]);

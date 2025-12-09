@@ -75,7 +75,7 @@ switch ($result['action']) {
             \TorrentPier\Http\Response::error('Method Not Allowed', 405)->send();
 
         } catch (\Throwable $e) {
-            dev()->getWhoops()->handleException($e);
+            whoops()->whoops->handleException($e);
         }
         break;
 }

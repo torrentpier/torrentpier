@@ -440,9 +440,9 @@ DB()->debug('start');
 // ... run queries ...
 DB()->debug('stop');
 
-// ✅ Explain functionality unchanged
-DB()->explain('start');
-DB()->explain('display');
+// ✅ EXPLAIN functionality via Tracy debug bar
+// Set tracy_explain cookie to enable EXPLAIN for queries
+// Tracy DatabasePanel shows EXPLAIN results inline
 ```
 
 ### Performance Benefits
@@ -1065,40 +1065,46 @@ use TorrentPier\Legacy\Common\Select;
 
 ## 🛠️ Development System Migration
 
-The development and debugging system has been refactored to use a singleton pattern, providing better resource management and consistency across the application.
+The development and debugging system has been refactored to use a singleton pattern with Tracy debug bar integration, replacing the legacy HTML-based debug panel.
 
 ### Quick Migration Overview
 
 ```php
-// ❌ Old way (still works, but not recommended)
-$sqlLog = \TorrentPier\Dev::getSqlLog();
-$isDebugAllowed = \TorrentPier\Dev::sqlDebugAllowed();
-$shortQuery = \TorrentPier\Dev::shortQuery($sql);
+// ❌ Removed methods (use Tracy debug bar instead)
+// \TorrentPier\Dev::getSqlLog();      // Removed - use Tracy DatabasePanel
+// \TorrentPier\Dev::getSqlLogHtml();  // Removed - use Tracy DatabasePanel
 
-// ✅ New way (recommended)
-$sqlLog = dev()->getSqlDebugLog();
+// ✅ Still available
 $isDebugAllowed = dev()->checkSqlDebugAllowed();
 $shortQuery = dev()->formatShortQuery($sql);
 ```
 
 ### Key Development System Changes
 
-#### Basic Usage
+#### Tracy Debug Bar Integration
+SQL query debugging is now handled by Tracy debug bar panels:
+- **DatabasePanel** - Shows all SQL queries with timing, EXPLAIN support
+- **PerformancePanel** - Execution time, memory usage
+- **CachePanel** - Cache/datastore operations
+- **TemplatePanel** - Twig template info
+
 ```php
-// Get SQL debug log
-$sqlLog = dev()->getSqlDebugLog();
+// Enable Tracy debug bar in config
+$bb_cfg['debug'] = [
+    'enable' => true,
+    'panels' => [
+        'performance' => true,
+        'database' => true,
+        'cache' => true,
+        'template' => true,
+    ],
+];
 
-// Check if SQL debugging is allowed
-if (dev()->checkSqlDebugAllowed()) {
-    $debugInfo = dev()->getSqlDebugLog();
-}
-
-// Format SQL queries for display
-$formattedQuery = dev()->formatShortQuery($sql, true); // HTML escaped
-$plainQuery = dev()->formatShortQuery($sql, false);   // Plain text
+// Enable EXPLAIN for queries via cookie
+// Set tracy_explain=1 cookie
 ```
 
-#### New Instance Methods
+#### Available Instance Methods
 ```php
 // Access Whoops instance directly
 $whoops = dev()->getWhoops();
@@ -1112,23 +1118,21 @@ if (dev()->isDebugEnabled()) {
 if (dev()->isLocalEnvironment()) {
     // Running in local development
 }
+
+// Format SQL queries for display
+$formattedQuery = dev()->formatShortQuery($sql, true); // HTML escaped
+$plainQuery = dev()->formatShortQuery($sql, false);   // Plain text
 ```
 
-### Backward Compatibility
+### Breaking Changes
 
-All existing static method calls continue to work exactly as before:
-
-```php
-// This still works - backward compatibility maintained
-$sqlLog = \TorrentPier\Dev::getSqlLog();
-$isDebugAllowed = \TorrentPier\Dev::sqlDebugAllowed();
-$shortQuery = \TorrentPier\Dev::shortQuery($sql);
-
-// But this is now preferred
-$sqlLog = dev()->getSqlDebugLog();
-$isDebugAllowed = dev()->checkSqlDebugAllowed();
-$shortQuery = dev()->formatShortQuery($sql);
-```
+The following methods were removed (replaced by Tracy debug bar):
+- `\TorrentPier\Dev::getSqlLog()` - use Tracy DatabasePanel
+- `\TorrentPier\Dev::getSqlLogHtml()` - use Tracy DatabasePanel
+- `\TorrentPier\Dev::getSqlLogInstance()` - use Tracy DatabasePanel
+- `\TorrentPier\Dev::sqlDebugAllowedInstance()` - use `dev()->checkSqlDebugAllowed()`
+- `\TorrentPier\Dev::shortQueryInstance()` - use `dev()->formatShortQuery()`
+- `DB()->explain()` method - use Tracy DatabasePanel with tracy_explain cookie
 
 ### Performance Benefits
 
@@ -1150,7 +1154,7 @@ $devInstance = \TorrentPier\Dev::getInstance();
 $environment = [
     'debug_enabled' => dev()->isDebugEnabled(),
     'local_environment' => dev()->isLocalEnvironment(),
-    'sql_debug_allowed' => dev()->sqlDebugAllowed(),
+    'sql_debug_allowed' => dev()->checkSqlDebugAllowed(),
 ];
 ```
 

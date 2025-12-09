@@ -157,13 +157,6 @@ class Sender
 
         $dl_fname = Attachment::getDownloadFilename($topic_id, $topic_title);
 
-        if (!empty($_COOKIE['explain'])) {
-            $out = "attachment path: $filename<br /><br />";
-            $tor['info']['pieces'] = '[...] ' . strlen($tor['info']['pieces']) . ' bytes';
-            $out .= print_r($tor, true);
-            bb_die("<pre>$out</pre>");
-        }
-
         Response::torrentContent($output, $dl_fname)->send();
         exit;
     }
