@@ -10,8 +10,8 @@
 
 namespace TorrentPier\Tracy\Panels;
 
-use Tracy\IBarPanel;
 use TorrentPier\Tracy\Collectors\DatabaseCollector;
+use Tracy\IBarPanel;
 
 /**
  * Database Panel for Tracy Debug Bar
@@ -98,7 +98,7 @@ class DatabasePanel implements IBarPanel
         $html .= '</label>';
         $html .= '</div>';
 
-        // Stats bar
+        // Stat bar
         $html .= '<div class="tp-db-stats">';
         $html .= '<div class="tp-stat"><span class="tp-stat-value">' . $data['total_queries'] . '</span><span class="tp-stat-label">Queries</span></div>';
         if ($data['nette_count'] > 0) {
@@ -113,7 +113,7 @@ class DatabasePanel implements IBarPanel
         $html .= '<div class="tp-stat"><span class="tp-stat-value">' . sprintf('%.3f', $data['total_time']) . 's</span><span class="tp-stat-label">Total Time</span></div>';
         $html .= '</div>';
 
-        // Legacy query warning banner
+        // Legacy queries warning banner
         if ($data['legacy_count'] > 0) {
             $html .= '<div class="tp-alert tp-alert-danger">';
             $html .= '<strong>Legacy Query Warning:</strong> ';
@@ -125,7 +125,7 @@ class DatabasePanel implements IBarPanel
 
         // Queries by server
         foreach ($data['servers'] as $serverName => $serverData) {
-            $html .= $this->renderServerSection($serverName, $serverData, $data['total_time']);
+            $html .= $this->renderServerSection($serverName, $serverData);
         }
 
         $html .= '</div>'; // tracy-inner
@@ -136,7 +136,7 @@ class DatabasePanel implements IBarPanel
     /**
      * Render queries for a specific database server
      */
-    private function renderServerSection(string $serverName, array $serverData, float $totalTime): string
+    private function renderServerSection(string $serverName, array $serverData): string
     {
         $html = '<div class="tp-db-server">';
         $html .= '<h3 class="tp-db-server-title">';
@@ -161,7 +161,7 @@ class DatabasePanel implements IBarPanel
         $html .= '<tbody>';
 
         foreach ($serverData['queries'] as $idx => $query) {
-            $html .= $this->renderQueryRow($idx + 1, $query, $serverData['total_time'], $serverName);
+            $html .= $this->renderQueryRow($idx + 1, $query, $serverData['total_time']);
         }
 
         $html .= '</tbody></table>';
@@ -173,7 +173,7 @@ class DatabasePanel implements IBarPanel
     /**
      * Render a single query row
      */
-    private function renderQueryRow(int $num, array $query, float $serverTime, string $serverName): string
+    private function renderQueryRow(int $num, array $query, float $serverTime): string
     {
         $rowClass = 'tp-query-row';
         if ($query['is_legacy']) {
@@ -289,7 +289,7 @@ class DatabasePanel implements IBarPanel
         $sql = trim($sql);
 
         // Truncate very long queries
-        $maxLen = (int)config()->get('debug.tracy.max_query_length', 500);
+        $maxLen = (int) config()->get('debug.max_query_length', 1000);
         if (strlen($sql) > $maxLen) {
             $sql = substr($sql, 0, $maxLen) . '... [truncated]';
         }
@@ -352,7 +352,7 @@ class DatabasePanel implements IBarPanel
         </style>
         <script>
             function tpCopyToClipboard(elementId) {
-                var el = document.getElementById(elementId);
+                const el = document.getElementById(elementId);
                 if (el) {
                     navigator.clipboard.writeText(el.textContent).then(function() {
                         el.style.background = "#d4edda";

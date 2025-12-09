@@ -10,8 +10,9 @@
 
 namespace TorrentPier\Tracy\Collectors;
 
-use TorrentPier\Template\Template;
+use Exception;
 use TorrentPier\Template\Loaders\LegacyTemplateLoader;
+use TorrentPier\Template\Template;
 use Twig\Environment;
 
 /**
@@ -30,7 +31,7 @@ class TemplateCollector
         try {
             $legacyTemplates = LegacyTemplateLoader::getLegacyTemplates();
             $nativeTemplates = LegacyTemplateLoader::getNativeTemplates();
-        } catch (\Exception $e) {
+        } catch (Exception) {
             // Loader not available
         }
 
@@ -40,24 +41,21 @@ class TemplateCollector
         try {
             $conflicts = Template::getVariableConflicts();
             $shadowing = Template::getVariableShadowing();
-        } catch (\Exception $e) {
+        } catch (Exception) {
             // Template not available
         }
 
         $themeName = 'unknown';
         try {
-            $template = template();
-            if ($template) {
-                $themeName = $template->getVar('TEMPLATE_NAME') ?? 'unknown';
-            }
-        } catch (\Exception $e) {
+            $themeName = template()->getVar('TEMPLATE_NAME') ?? 'unknown';
+        } catch (Exception) {
             // Template not initialized
         }
 
         $renderTime = 0;
         try {
             $renderTime = Template::getTotalRenderTime();
-        } catch (\Exception $e) {
+        } catch (Exception) {
             // Template not available
         }
 

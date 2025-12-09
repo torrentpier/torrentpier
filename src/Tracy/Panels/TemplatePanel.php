@@ -10,8 +10,8 @@
 
 namespace TorrentPier\Tracy\Panels;
 
-use Tracy\IBarPanel;
 use TorrentPier\Tracy\Collectors\TemplateCollector;
+use Tracy\IBarPanel;
 
 /**
  * Template Panel for Tracy Debug Bar
@@ -70,7 +70,7 @@ class TemplatePanel implements IBarPanel
         $html .= '<div class="tp-tpl-theme">Theme: <b>' . htmlspecialchars($data['theme_name']) . '</b></div>';
         $html .= '</div>';
 
-        // Stats bar
+        // Stat bar
         $html .= '<div class="tp-tpl-stats">';
         $html .= '<div class="tp-stat">';
         $html .= '<span class="tp-stat-value">' . $data['total_count'] . '</span>';
@@ -175,7 +175,7 @@ class TemplatePanel implements IBarPanel
     private function formatValue(mixed $value): string
     {
         if (is_scalar($value)) {
-            $str = (string)$value;
+            $str = (string) $value;
             if (strlen($str) > 30) {
                 return substr($str, 0, 27) . '...';
             }

@@ -506,7 +506,7 @@ $bb_cfg['debug'] = [
         'cache' => true,
         'template' => true,
     ],
-    'max_query_length' => 1000, // Truncate long queries in panel
+    'max_query_length' => 500, // Truncate long queries in panel
 ];
 
 $bb_cfg['bugsnag'] = [

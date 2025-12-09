@@ -76,7 +76,7 @@ class CachePanel implements IBarPanel
         }
         $html .= '</div>';
 
-        // Stats bar
+        // Stat bar
         $stats = $this->collector->getStats();
         $html .= '<div class="tp-cache-stats">';
         $html .= '<div class="tp-stat"><span class="tp-stat-value">' . $data['total_queries'] . '</span><span class="tp-stat-label">Operations</span></div>';
@@ -124,7 +124,7 @@ class CachePanel implements IBarPanel
         if (!empty($data['queries'])) {
             $html .= $this->renderQueriesTable($data['queries']);
         } else {
-            $html .= '<p class="tp-no-queries">No operations recorded for this cache</p>';
+            $html .= '<p class="tp-no-queries">No operations are recorded for this cache</p>';
         }
 
         $html .= '</div>';
@@ -177,7 +177,7 @@ class CachePanel implements IBarPanel
             $html .= '<tr>';
             $html .= '<td class="tp-num">' . ($idx + 1) . '</td>';
             $html .= '<td class="tp-time">' . sprintf('%.3f', $query['time']) . 's</td>';
-            $html .= '<td class="tp-sql"><code>' . htmlspecialchars($this->truncate($query['sql'], 200)) . '</code></td>';
+            $html .= '<td class="tp-sql"><code>' . htmlspecialchars($this->truncate($query['sql'])) . '</code></td>';
             $html .= '<td class="tp-source">' . htmlspecialchars($query['source']) . '</td>';
             $html .= '</tr>';
         }
@@ -188,10 +188,11 @@ class CachePanel implements IBarPanel
     }
 
     /**
-     * Truncate string
+     * Truncate string to max query length from config
      */
-    private function truncate(string $str, int $maxLen): string
+    private function truncate(string $str): string
     {
+        $maxLen = (int) config()->get('debug.max_query_length', 1000);
         if (strlen($str) > $maxLen) {
             return substr($str, 0, $maxLen - 3) . '...';
         }

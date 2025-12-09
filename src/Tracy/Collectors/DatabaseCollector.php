@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Tracy\Collectors;
 
+use Exception;
 use TorrentPier\Database\DatabaseFactory;
 
 /**
@@ -60,7 +61,7 @@ class DatabaseCollector
                     ];
 
                     // Check if EXPLAIN collection is enabled via cookie
-                    $collectExplain = (bool) request()->cookies->get('tracy_explain');
+                    $collectExplain = (bool)request()->cookies->get('tracy_explain');
 
                     // Process individual queries
                     foreach ($debugger->dbg ?? [] as $idx => $query) {
@@ -102,11 +103,11 @@ class DatabaseCollector
                     $data['total_queries'] += $db->num_queries;
                     $data['total_time'] += $db->sql_timetotal;
 
-                } catch (\Exception $e) {
+                } catch (Exception) {
                     // Server not available, skip
                 }
             }
-        } catch (\Exception $e) {
+        } catch (Exception) {
             // DatabaseFactory not available
         }
 
@@ -128,7 +129,7 @@ class DatabaseCollector
             'slow_count' => $data['slow_count'],
             'nette_count' => $data['nette_count'],
             'server_count' => count($data['servers']),
-            'explain_enabled' => (bool) request()->cookies->get('tracy_explain'),
+            'explain_enabled' => (bool)request()->cookies->get('tracy_explain'),
         ];
     }
 
@@ -176,7 +177,7 @@ class DatabaseCollector
 
             return $rows;
 
-        } catch (\Exception $e) {
+        } catch (Exception) {
             return null;
         }
     }

@@ -10,9 +10,10 @@
 
 namespace TorrentPier\Tracy\Panels;
 
-use Tracy\IBarPanel;
+use Exception;
 use TorrentPier\Database\DatabaseFactory;
 use TorrentPier\Tracy\TracyBarManager;
+use Tracy\IBarPanel;
 
 /**
  * Performance Panel for Tracy Debug Bar
@@ -95,7 +96,6 @@ class PerformancePanel implements IBarPanel
         // GZIP section
         $html .= '<tr><th colspan="2" style="background:#f5f5f5;text-align:left;padding:8px">Compression</th></tr>';
 
-        $gzipStatus = '';
         if (!$gzipSupported) {
             $gzipStatus = '<span style="color:#999">Not supported by client</span>';
         } elseif ($gzipEnabled) {
@@ -122,7 +122,7 @@ class PerformancePanel implements IBarPanel
     private function getExecutionTime(): float
     {
         // Use captured time if available (set in page_footer.php)
-        $captured = TracyBarManager::getInstance()->getCapturedExecTime();
+        $captured = TracyBarManager::getInstance()->capturedExecTime;
         if ($captured !== null) {
             return $captured;
         }
@@ -141,16 +141,16 @@ class PerformancePanel implements IBarPanel
     private function getSqlTime(): float
     {
         // Use captured time if available (set in page_footer.php)
-        $captured = TracyBarManager::getInstance()->getCapturedSqlTime();
+        $captured = TracyBarManager::getInstance()->capturedSqlTime;
         if ($captured !== null) {
             return $captured;
         }
 
         // Fallback to current DB stats
         try {
-            $db = DatabaseFactory::getInstance('db');
+            $db = DatabaseFactory::getInstance();
             return $db->sql_timetotal ?? 0;
-        } catch (\Exception $e) {
+        } catch (Exception) {
             return 0;
         }
     }
@@ -163,7 +163,7 @@ class PerformancePanel implements IBarPanel
         return match ($type) {
             'current' => function_exists('sys') ? sys('mem') : memory_get_usage(),
             'peak' => function_exists('sys') ? sys('mem_peak') : memory_get_peak_usage(),
-            'start' => (int)(config()->get('mem_on_start') ?? 0),
+            'start' => (int) (config()->get('mem_on_start') ?? 0),
             default => 0,
         };
     }
@@ -179,7 +179,7 @@ class PerformancePanel implements IBarPanel
         }
 
         $unit = strtolower(substr($limit, -1));
-        $value = (int)$limit;
+        $value = (int) $limit;
 
         return match ($unit) {
             'g' => $value * 1024 * 1024 * 1024,
@@ -194,7 +194,7 @@ class PerformancePanel implements IBarPanel
      */
     private function isGzipEnabled(): bool
     {
-        return (bool)config()->get('gzip_compress', false);
+        return (bool) config()->get('gzip_compress', false);
     }
 
     /**

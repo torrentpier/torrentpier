@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Tracy\Collectors;
 
+use Exception;
 use TorrentPier\Cache\UnifiedCacheSystem;
 
 /**
@@ -53,16 +54,11 @@ class CacheCollector
                     'total_time' => 0.0,
                 ];
 
-                // Check if cache has database backend with debug info
-                if (!empty($cacheObj->db->dbg)) {
-                    $cacheData['queries'] = $this->processQueries($cacheObj->db->dbg);
-                    $cacheData['num_queries'] = count($cacheObj->db->dbg);
-                    $cacheData['total_time'] = $cacheObj->db->sql_timetotal ?? 0;
-                } elseif (!empty($cacheObj->dbg)) {
-                    $cacheData['queries'] = $this->processQueries($cacheObj->dbg);
-                    $cacheData['num_queries'] = count($cacheObj->dbg);
-                    $cacheData['total_time'] = $cacheObj->sql_timetotal ?? 0;
-                }
+                // Extract debug info from a cache object
+                $debugInfo = $this->extractDebugInfo($cacheObj);
+                $cacheData['queries'] = $debugInfo['queries'];
+                $cacheData['num_queries'] = $debugInfo['num_queries'];
+                $cacheData['total_time'] = $debugInfo['total_time'];
 
                 // Skip caches with no operations
                 if ($cacheData['num_queries'] === 0) {
@@ -74,43 +70,58 @@ class CacheCollector
                 $data['total_time'] += $cacheData['total_time'];
             }
 
-        } catch (\Exception $e) {
+        } catch (Exception) {
             // Cache system not available
         }
 
         // Collect datastore info
         try {
             $datastore = datastore();
+            $datastoreData = [
+                'engine' => $datastore->engine ?? 'unknown',
+                'queries' => [],
+                'num_queries' => 0,
+                'total_time' => 0.0,
+            ];
 
-            if ($datastore) {
-                $datastoreData = [
-                    'engine' => $datastore->engine ?? 'unknown',
-                    'queries' => [],
-                    'num_queries' => 0,
-                    'total_time' => 0.0,
-                ];
+            $debugInfo = $this->extractDebugInfo($datastore);
+            $datastoreData['queries'] = $debugInfo['queries'];
+            $datastoreData['num_queries'] = $debugInfo['num_queries'];
+            $datastoreData['total_time'] = $debugInfo['total_time'];
 
-                if (!empty($datastore->db->dbg)) {
-                    $datastoreData['queries'] = $this->processQueries($datastore->db->dbg);
-                    $datastoreData['num_queries'] = count($datastore->db->dbg);
-                    $datastoreData['total_time'] = $datastore->db->sql_timetotal ?? 0;
-                } elseif (!empty($datastore->dbg)) {
-                    $datastoreData['queries'] = $this->processQueries($datastore->dbg);
-                    $datastoreData['num_queries'] = count($datastore->dbg);
-                    $datastoreData['total_time'] = $datastore->sql_timetotal ?? 0;
-                }
-
-                $data['datastore'] = $datastoreData;
-                $data['total_queries'] += $datastoreData['num_queries'];
-                $data['total_time'] += $datastoreData['total_time'];
-            }
-
-        } catch (\Exception $e) {
+            $data['datastore'] = $datastoreData;
+            $data['total_queries'] += $datastoreData['num_queries'];
+            $data['total_time'] += $datastoreData['total_time'];
+        } catch (Exception) {
             // Datastore not available
         }
 
         $this->cachedData = $data;
         return $data;
+    }
+
+    /**
+     * Extract debug info from a cache/datastore object
+     */
+    private function extractDebugInfo(object $obj): array
+    {
+        if (!empty($obj->db->dbg)) {
+            return [
+                'queries' => $this->processQueries($obj->db->dbg),
+                'num_queries' => count($obj->db->dbg),
+                'total_time' => $obj->db->sql_timetotal ?? 0,
+            ];
+        }
+
+        if (!empty($obj->dbg)) {
+            return [
+                'queries' => $this->processQueries($obj->dbg),
+                'num_queries' => count($obj->dbg),
+                'total_time' => $obj->sql_timetotal ?? 0,
+            ];
+        }
+
+        return ['queries' => [], 'num_queries' => 0, 'total_time' => 0.0];
     }
 
     /**
@@ -134,7 +145,7 @@ class CacheCollector
     }
 
     /**
-     * Get summary statistics for tab display
+     * Get summary statistics for the tab display
      */
     public function getStats(): array
     {

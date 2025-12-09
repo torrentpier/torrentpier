@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Tracy;
 
+use LogicException;
 use Tracy\Debugger;
 
 /**
@@ -21,20 +22,18 @@ use Tracy\Debugger;
 class TracyBarManager
 {
     private static ?self $instance = null;
-    private bool $initialized = false;
+    private(set) bool $initialized = false;
 
     /** @var float|null Captured execution time from page_footer */
-    private ?float $capturedExecTime = null;
+    private(set) ?float $capturedExecTime = null;
 
     /** @var float|null Captured SQL time from page_footer */
-    private ?float $capturedSqlTime = null;
+    private(set) ?float $capturedSqlTime = null;
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 
     /**
-     * Get singleton instance
+     * Get a singleton instance
      */
     public static function getInstance(): self
     {
@@ -129,14 +128,6 @@ class TracyBarManager
     }
 
     /**
-     * Check if Tracy is currently initialized
-     */
-    public function isInitialized(): bool
-    {
-        return $this->initialized;
-    }
-
-    /**
      * Capture performance data at the correct measurement point (page_footer)
      * This ensures Tracy shows the same timing as legacy debug bar
      */
@@ -146,34 +137,10 @@ class TracyBarManager
         $this->capturedSqlTime = $sqlTime;
     }
 
-    /**
-     * Get captured execution time (in seconds)
-     */
-    public function getCapturedExecTime(): ?float
-    {
-        return $this->capturedExecTime;
-    }
+    private function __clone() {}
 
-    /**
-     * Get captured SQL time (in seconds)
-     */
-    public function getCapturedSqlTime(): ?float
+    public function __wakeup(): void
     {
-        return $this->capturedSqlTime;
-    }
-
-    /**
-     * Prevent cloning
-     */
-    private function __clone()
-    {
-    }
-
-    /**
-     * Prevent unserialization
-     */
-    public function __wakeup()
-    {
-        throw new \LogicException('Cannot unserialize a singleton.');
+        throw new LogicException('Cannot unserialize a singleton.');
     }
 }
