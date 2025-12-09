@@ -40,7 +40,7 @@
         ajax.exec({
             action: 'change_user_opt',
             user_id: {PROFILE_USER_ID},
-            user_opt: $.toJSON(ajax.user_opt)
+            user_opt: JSON.stringify(ajax.user_opt)
         });
     };
     ajax.callback.change_user_opt = function (data) {

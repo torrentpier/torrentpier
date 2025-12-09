@@ -820,11 +820,6 @@ body.dark-mode .hl_only_new {
   color: #FF9D5C;
 }
 
-body.dark-mode #old-browser-warn {
-  background: #5a5a00;
-  color: #d4d4d4;
-}
-
 body.dark-mode .gen_btn,
 body.dark-mode .ajax_dropdown,
 body.dark-mode .ajax-call-form {
