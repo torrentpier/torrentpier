@@ -101,13 +101,7 @@ ajax.callback.posts = function(data) {
 	<input type="button" value="{L_QUOTE_SEL}" name="quoteselected" title="{L_QUOTE_SELECTED}" onclick="bbcode.onclickQuoteSel();" />
 </div>
 
-<textarea
-	class="editor mrg_4" name="message" id="message" rows="18" cols="92"
-	onfocus  = "storeCaret(this);"
-	onselect = "storeCaret(this);"
-	onclick  = "storeCaret(this);"
-	onkeyup  = "storeCaret(this);"
->{MESSAGE}</textarea>
+<textarea class="editor mrg_4" name="message" id="message" rows="18" cols="92">{MESSAGE}</textarea>
 
 <div class="mrg_8 tCenter">
 	<div id="post-buttons-block" style="display: none;">

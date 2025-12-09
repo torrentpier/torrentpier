@@ -19,54 +19,28 @@ function $p() {
 }
 
 function addEvent(obj, type, fn) {
-  if (obj.addEventListener) {
-    obj.addEventListener(type, fn, false);
-    EventCache.add(obj, type, fn);
-  } else if (obj.attachEvent) {
-    obj["e" + type + fn] = fn;
-    obj[type + fn] = function () {
-      obj["e" + type + fn](window.event);
-    };
-    obj.attachEvent("on" + type, obj[type + fn]);
-    EventCache.add(obj, type, fn);
-  } else {
-    obj["on" + type] = obj["e" + type + fn];
-  }
+  obj.addEventListener(type, fn, false);
+  EventCache.add(obj, type, fn);
 }
 
 var EventCache = function () {
   var listEvents = [];
   return {
-    listEvents: listEvents, add: function (node, sEventName, fHandler) {
+    listEvents: listEvents,
+    add: function (node, sEventName, fHandler) {
       listEvents.push(arguments);
-    }, flush: function () {
-      var i, item;
-      for (i = listEvents.length - 1; i >= 0; i = i - 1) {
-        item = listEvents[i];
-        if (item[0].removeEventListener) {
-          item[0].removeEventListener(item[1], item[2], item[3]);
-        }
-        if (item[1].substring(0, 2) !== "on") {
-          item[1] = "on" + item[1];
-        }
-        if (item[0].detachEvent) {
-          item[0].detachEvent(item[1], item[2]);
-        }
-        item[0][item[1]] = null;
+    },
+    flush: function () {
+      for (var i = listEvents.length - 1; i >= 0; i--) {
+        var item = listEvents[i];
+        item[0].removeEventListener(item[1], item[2], item[3]);
       }
     }
   };
 }();
-if (document.all) {
-  addEvent(window, 'unload', EventCache.flush);
-}
 
 function imgFit(img, maxW) {
   img.title = 'Image Dimensions: ' + img.width + ' x ' + img.height;
-  if (typeof (img.naturalHeight) === 'undefined') {
-    img.naturalHeight = img.height;
-    img.naturalWidth = img.width;
-  }
   if (img.width > maxW) {
     img.height = Math.round((maxW / img.width) * img.height);
     img.width = maxW;
@@ -404,7 +378,7 @@ Ajax.prototype = {
     $('input.editable-submit', $inputs).click(function () {
       var params = ajax.params[rootElementId];
       var $val = $('.editable-value', '#' + rootElementId);
-      params.value = ($val.size() === 1) ? $val.val() : $val.filter(':checked').val();
+      params.value = ($val.length === 1) ? $val.val() : $val.filter(':checked').val();
       params.submit = true;
       ajax.init[params.action](params);
     });
@@ -458,7 +432,9 @@ $(document).ready(function () {
 
   // Bind ajax events
   $('var.ajax-params').each(function () {
-    var params = $.evalJSON($(this).html());
+    // Convert JS object literal to valid JSON (quote unquoted keys)
+    var jsonStr = $(this).html().replace(/(\w+):/g, '"$1":');
+    var params = JSON.parse(jsonStr);
     params.event = params.event || 'dblclick';
     ajax.params[params.id] = params;
     $("#" + params.id).bind(params.event, ajax.callInitFn);
