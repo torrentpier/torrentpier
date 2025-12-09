@@ -30,7 +30,7 @@ use Whoops\Run;
 class WhoopsManager
 {
     private static ?self $instance = null;
-    private(set) Run $whoops;
+    public private(set) Run $whoops;
     private bool $initialized = false;
 
     private function __construct()
