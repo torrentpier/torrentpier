@@ -51,39 +51,48 @@ class UrlBuilder
     /**
      * Generate a topic URL
      *
-     * @param int $id Topic ID
+     * @param int|null $id Topic ID
      * @param string $title Topic title (will be slugified)
      * @param array $params Additional query parameters (e.g., ['start' => 20])
      * @return string Full URL path
      */
-    public static function topic(int $id, string $title = '', array $params = []): string
+    public static function topic(?int $id, string $title = '', array $params = []): string
     {
+        if ($id === null || $id <= 0) {
+            return '#';
+        }
         return self::buildUrl('topic', $id, $title, $params);
     }
 
     /**
      * Generate a forum URL
      *
-     * @param int $id Forum ID
+     * @param int|null $id Forum ID
      * @param string $name Forum name (will be slugified)
      * @param array $params Additional query parameters
      * @return string Full URL path
      */
-    public static function forum(int $id, string $name = '', array $params = []): string
+    public static function forum(?int $id, string $name = '', array $params = []): string
     {
+        if ($id === null || $id <= 0) {
+            return '#';
+        }
         return self::buildUrl('forum', $id, $name, $params);
     }
 
     /**
      * Generate a user profile URL
      *
-     * @param int $id User ID
+     * @param int|null $id User ID
      * @param string $username Username (will be slugified)
      * @param array $params Additional query parameters
      * @return string Full URL path
      */
-    public static function profile(int $id, string $username = '', array $params = []): string
+    public static function profile(?int $id, string $username = '', array $params = []): string
     {
+        if ($id === null || $id <= 0) {
+            return '#';
+        }
         return self::buildUrl('profile', $id, $username, $params);
     }
 
@@ -149,12 +158,19 @@ class UrlBuilder
      * @param string $type Entity type (topic, forum, profile)
      * @param int $id Entity ID
      * @param string $title Title/name to slugify
-     * @param array $params Additional query parameters
+     * @param array $params Additional query parameters (use '_fragment' for #anchor)
      * @return string URL path
      */
     private static function buildUrl(string $type, int $id, string $title, array $params): string
     {
         $slug = Slug::generate($title);
+
+        // Extract fragment (anchor) if present
+        $fragment = '';
+        if (isset($params['_fragment'])) {
+            $fragment = '#' . $params['_fragment'];
+            unset($params['_fragment']);
+        }
 
         // Build base path: /type/slug.id/
         $path = '/' . $type . '/' . $slug . '.' . $id . '/';
@@ -166,6 +182,9 @@ class UrlBuilder
                 $path .= '?' . $queryString;
             }
         }
+
+        // Append a fragment at the end
+        $path .= $fragment;
 
         return $path;
     }

@@ -733,6 +733,7 @@ if ($allowed_forums) {
                 'TOPIC_TITLE' => $tor['topic_title'],
                 'TOPIC_TIME' => bb_date($tor['topic_time'], 'd-M-y') . ' <b>&middot;</b> ' . humanTime($tor['topic_time']),
                 'POSTER_ID' => $poster_id,
+                'POSTER_NAME' => $hide_author ? '' : $tor['username'],
                 'USERNAME' => $hide_author ? '' : profile_url(['username' => $tor['username'], 'user_rank' => $tor['user_rank']]),
 
                 'ROW_CLASS' => $row_class,

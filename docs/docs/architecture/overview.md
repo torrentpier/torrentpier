@@ -29,6 +29,8 @@ torrentpier/
 ├── src/                    # Modern PHP classes (PSR-4)
 │   ├── Cache/             # Caching system
 │   ├── Database/          # Database layer
+│   ├── Helpers/           # Utility classes (Slug, etc.)
+│   ├── Router/            # Routing and URL handling
 │   ├── Template/          # Twig integration
 │   └── Tracker/           # BitTorrent tracker
 ├── library/               # Core application logic
@@ -134,7 +136,21 @@ $value = config('site.name');
 
 ### Adding routes
 
-Routes are defined using League/Route in the routing configuration.
+Routes are defined using League/Route in `library/routes.php`. TorrentPier supports SEO-friendly semantic URLs:
+
+```php
+// Generate URLs in PHP
+url()->topic($id, $title);     // /topic/my-topic.123/
+url()->forum($id, $name);      // /forum/hd-video.5/
+url()->profile($id, $username); // /profile/admin.2/
+```
+
+```twig
+{# Generate URLs in templates #}
+{{ url.topic(t.TOPIC_ID, t.TOPIC_TITLE) }}
+```
+
+See [Semantic URLs](./semantic-urls.md) for detailed documentation.
 
 ### Creating templates
 

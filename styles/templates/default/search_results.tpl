@@ -25,9 +25,9 @@
 <tr>
 	<td colspan="2" class="td2	cat nav pad_4">
 		&nbsp;<img class="topic_icon" src="{t.TOPIC_ICON}" align="absmiddle" />&nbsp;
-		<a href="{FORUM_URL}{t.FORUM_ID}" class="med normal"><i>{t.FORUM_NAME}</i></a>
+		<a href="{{ url.forum(t_item.FORUM_ID, t_item.FORUM_NAME) }}" class="med normal"><i>{t.FORUM_NAME}</i></a>
 		<em>&raquo;</em>
-		<a href="{TOPIC_URL}{t.TOPIC_ID}" class="med">{t.TOPIC_TITLE}</a>
+		<a href="{{ url.topic(t_item.TOPIC_ID, t_item.TOPIC_TITLE) }}" class="med">{t.TOPIC_TITLE}</a>
 	</td>
 </tr>
 <!-- BEGIN p -->
@@ -162,7 +162,7 @@ function show_edit_options ()
 			<img class="topic_icon" src="{t.TOPIC_ICON}" />
 		<!-- ENDIF -->
 	</td>
-	<td><a href="{FORUM_URL}{t.FORUM_ID}" class="gen">{t.FORUM_NAME}</a></td>
+	<td><a href="{{ url.forum(t_item.FORUM_ID, t_item.FORUM_NAME) }}" class="gen">{t.FORUM_NAME}</a></td>
 		<td class="tLeft" style="padding: 2px 5px 3px 4px;">
 		<div class="topictitle" onmousedown="$p('tid_{t.TOPIC_ID}').className='opened'">
 			<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
@@ -172,7 +172,7 @@ function show_edit_options ()
 				<!-- ELSEIF t.ATTACH and not t.DL -->{TOPIC_ATTACH_ICON}
 			<!-- ENDIF -->
 			<!-- IF t.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span><!-- ENDIF -->
-			<a href="{TOPIC_URL}{t.TOPIC_ID}" class="topictitle"><span id="tid_{t.TOPIC_ID}">{t.TOPIC_TITLE}</span></a>
+			<a href="{{ url.topic(t_item.TOPIC_ID, t_item.TOPIC_TITLE) }}" class="topictitle"><span id="tid_{t.TOPIC_ID}">{t.TOPIC_TITLE}</span></a>
 		<!-- IF t.PAGINATION --><span class="topicPG">[{ICON_GOTOPOST}{L_GOTO_SHORT} {t.PAGINATION} ]</span><!-- ENDIF -->
 		</div>
 	</td>

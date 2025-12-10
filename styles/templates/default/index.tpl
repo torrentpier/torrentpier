@@ -89,7 +89,7 @@
 			</td>
 			<td class="row1 f_titles">
 
-				<h4 class="forumlink"><a href="{FORUM_URL}{c.f.FORUM_ID}">{c.f.FORUM_NAME}</a></h4>
+				<h4 class="forumlink"><a href="{{ url.forum(f_item.FORUM_ID, f_item.FORUM_NAME) }}">{c.f.FORUM_NAME}</a></h4>
 
 				<!-- IF c.f.FORUM_DESC -->
 				<p class="forum_desc">{c.f.FORUM_DESC}</p>
@@ -99,7 +99,7 @@
 				<p class="subforums">
 					<em>{L_SUBFORUMS}:</em>
 					<!-- BEGIN sf -->
-					<span class="sf_title{c.f.sf.SF_NEW}"><a href="{U_SEARCH}?{#POST_FORUM_URL#}={c.f.sf.SF_ID}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1" class="dot-sf">&#9658;</a><a href="{FORUM_URL}{c.f.sf.SF_ID}" class="dot-sf">{c.f.sf.SF_NAME}</a></span><span class="sf_separator"></span>
+					<span class="sf_title{c.f.sf.SF_NEW}"><a href="{U_SEARCH}?{#POST_FORUM_URL#}={c.f.sf.SF_ID}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1" class="dot-sf">&#9658;</a><a href="{{ url.forum(sf_item.SF_ID, sf_item.SF_NAME) }}" class="dot-sf">{c.f.sf.SF_NAME}</a></span><span class="sf_separator"></span>
 					<!-- END sf -->
 				</p>
 				<!-- ENDIF -->
@@ -117,7 +117,7 @@
 				<!-- BEGIN last -->
 					<!-- IF SHOW_LAST_TOPIC -->
 					<h6 class="last_topic">
-						<a href="{TOPIC_URL}{c.f.last.LAST_TOPIC_ID}{NEWEST_URL}" title="{c.f.last.LAST_TOPIC_TIP}">{c.f.last.LAST_TOPIC_TITLE}</a>
+						<a href="{{ url.topic(last_item.LAST_TOPIC_ID, last_item.LAST_TOPIC_TIP, {view: 'newest', _fragment: 'newest'}) }}" title="{c.f.last.LAST_TOPIC_TIP}">{c.f.last.LAST_TOPIC_TITLE}</a>
 					</h6>
 					<!-- ENDIF / SHOW_LAST_TOPIC -->
 
