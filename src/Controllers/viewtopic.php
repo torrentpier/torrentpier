@@ -223,6 +223,16 @@ if ($post_id && !empty($t_data['prev_posts'])) {
     $start = floor(($t_data['prev_posts'] - 1) / $posts_per_page) * $posts_per_page;
 }
 
+// Redirect legacy ?p= requests to semantic URL with anchor
+if ($post_id && !defined('SEMANTIC_ROUTE') && request()->isGet()) {
+    $params = $start > 0 ? ['start' => $start] : [];
+    $params['_fragment'] = $post_id;
+
+    $redirectUrl = url()->topic($topic_id, $topic_title, $params);
+    \TorrentPier\Http\Response::permanentRedirect(make_url($redirectUrl))->send();
+    exit;
+}
+
 // Is user watching this thread?
 $can_watch_topic = $is_watching_topic = false;
 

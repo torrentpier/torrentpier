@@ -101,22 +101,19 @@ return function (Router $router): void {
     // viewtopic?t=123 -> /topic/slug.123/
     $router->any('/viewtopic', new LegacyRedirect(
         'topic',
-        $basePath . '/src/Controllers/viewtopic.php',
-        ['manage_session' => true]
+        $basePath . '/src/Controllers/viewtopic.php'
     ));
 
     // viewforum?f=123 -> /forum/slug.123/
     $router->any('/viewforum', new LegacyRedirect(
         'forum',
-        $basePath . '/src/Controllers/viewforum.php',
-        ['manage_session' => true]
+        $basePath . '/src/Controllers/viewforum.php'
     ));
 
     // profile?mode=viewprofile&u=123 -> /profile/slug.123/
     // Note: Only redirects for mode=viewprofile, other modes use fallback controller
     $router->any('/profile', new LegacyRedirect(
         'profile',
-        $basePath . '/src/Controllers/profile.php',
-        ['manage_session' => true]
+        $basePath . '/src/Controllers/profile.php'
     ));
 };
