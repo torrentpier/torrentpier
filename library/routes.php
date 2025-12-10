@@ -42,35 +42,35 @@ return function (Router $router): void {
     $router->get('/forum/{params}', new TrailingSlashRedirect());
 
     // Groups: /groups/ (list), /groups/slug.123/, /groups/slug.123/edit/
-    $router->any('/groups/', new LegacyAdapter($basePath . '/src/Controllers/group.php', 'group', ['manage_session' => true]));
+    $router->any('/groups/', new LegacyAdapter($basePath . '/src/Controllers/group.php', 'group', options: ['manage_session' => true]));
     $router->get('/groups', new TrailingSlashRedirect());
-    $router->any('/groups/{params}/edit/', new RouteAdapter('groups_edit', ['manage_session' => true]));
+    $router->any('/groups/{params}/edit/', new RouteAdapter('groups_edit', options: ['manage_session' => true]));
     $router->get('/groups/{params}/edit', new TrailingSlashRedirect());
-    $router->any('/groups/{params}/', new RouteAdapter('groups', ['manage_session' => true]));
+    $router->any('/groups/{params}/', new RouteAdapter('groups', options: ['manage_session' => true]));
     $router->get('/groups/{params}', new TrailingSlashRedirect());
 
     // Profile standalone pages (static routes MUST come before variable routes)
-    $router->any('/profile/bonus/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', ['mode' => 'bonus']));
+    $router->any('/profile/bonus/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', options: ['mode' => 'bonus']));
     $router->get('/profile/bonus', new TrailingSlashRedirect());
-    $router->any('/profile/watchlist/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', ['mode' => 'watch']));
+    $router->any('/profile/watchlist/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', options: ['mode' => 'watch']));
     $router->get('/profile/watchlist', new TrailingSlashRedirect());
 
     // Members: /members/ (list), /members/slug.123/ (profile), /members/slug.123/email/
     $router->any('/members/', new LegacyAdapter($basePath . '/src/Controllers/memberlist.php', options: ['manage_session' => true]));
     $router->get('/members', new TrailingSlashRedirect());
-    $router->any('/members/{params}/email/', new RouteAdapter('members', ['action' => 'email']));
+    $router->any('/members/{params}/email/', new RouteAdapter('members', options: ['action' => 'email']));
     $router->get('/members/{params}/email', new TrailingSlashRedirect());
     $router->any('/members/{params}/', new RouteAdapter('members'));
     $router->get('/members/{params}', new TrailingSlashRedirect());
 
     // Standalone auth/account pages
-    $router->any('/register/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', ['mode' => 'register']));
+    $router->any('/register/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', options: ['mode' => 'register']));
     $router->get('/register', new TrailingSlashRedirect());
-    $router->any('/settings/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', ['mode' => 'editprofile']));
+    $router->any('/settings/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', options: ['mode' => 'editprofile']));
     $router->get('/settings', new TrailingSlashRedirect());
-    $router->any('/password-recovery/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', ['mode' => 'sendpassword']));
+    $router->any('/password-recovery/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', options: ['mode' => 'sendpassword']));
     $router->get('/password-recovery', new TrailingSlashRedirect());
-    $router->any('/activate/{key}/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', ['mode' => 'activate']));
+    $router->any('/activate/{key}/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', options: ['mode' => 'activate']));
     $router->get('/activate/{key}', new TrailingSlashRedirect());
 
     // ==============================================================

@@ -94,6 +94,7 @@ if ($banInfo = getBanInfo((int)$profiledata['user_id'])) {
 
 template()->assign_vars([
     'PAGE_TITLE' => sprintf(__('VIEWING_USER_PROFILE'), $profiledata['username']),
+    'CANONICAL_URL' => make_url(url()->member($profiledata['user_id'], $profiledata['username'])),
     'USERNAME' => $profiledata['username'],
     'PROFILE_USER_ID' => $profiledata['user_id'],
     'PROFILE_USER' => $profile_user_id,

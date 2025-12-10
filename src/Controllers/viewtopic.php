@@ -485,6 +485,7 @@ template()->assign_vars([
     'TOPIC_ID' => $topic_id,
     'PAGE_TITLE' => $page_title,
     'TOPIC_TITLE' => $topic_title,
+    'CANONICAL_URL' => make_url(url()->topic($topic_id, $topic_title)),
     'PORNO_FORUM' => $t_data['allow_porno_topic'],
     'SHOW_BOT_NICK' => config()->get('show_bot_nick'),
     'T_POST_REPLY' => $reply_alt,

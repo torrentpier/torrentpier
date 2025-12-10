@@ -376,6 +376,7 @@ if (!$group_id) {
         'ROW_NUMBER' => $i + ($start + 1),
         'GROUP_INFO' => true,
         'PAGE_TITLE' => __('GROUP_CONTROL_PANEL'),
+        'CANONICAL_URL' => make_url(url()->group($group_id, $group_info['group_name'])),
         'GROUP_NAME' => htmlCHR($group_info['group_name']),
         'GROUP_DESCRIPTION' => bbcode2html($group_info['group_description']),
         'GROUP_SIGNATURE' => bbcode2html($group_info['group_signature']),

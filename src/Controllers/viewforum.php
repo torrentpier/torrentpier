@@ -387,6 +387,7 @@ $u_auth = implode("<br />\n", $u_auth);
 
 template()->assign_vars([
     'PAGE_TITLE' => htmlCHR($forum_data['forum_name']),
+    'CANONICAL_URL' => make_url(url()->forum($forum_id, $forum_data['forum_name'])),
     'FORUM_ID' => $forum_id,
     'FORUM_NAME' => htmlCHR($forum_data['forum_name']),
     'FORUM_DESC' => htmlCHR($forum_data['forum_desc']),

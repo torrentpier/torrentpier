@@ -29,6 +29,9 @@
 <!-- IF META_NEXT_PAGE -->
 <link rel="next" href="{META_NEXT_PAGE}">
 <!-- ENDIF / META_NEXT_PAGE -->
+<!-- IF CANONICAL_URL -->
+<link rel="canonical" href="{CANONICAL_URL}">
+<!-- ENDIF / CANONICAL_URL -->
 {META}
 <link rel="stylesheet" href="{STYLESHEET}?v={{ config('css_ver') }}" type="text/css">
 <link rel="stylesheet" href="{SITE_URL}styles/templates/default/css/dark-mode.css?v={{ config('css_ver') }}" type="text/css">
