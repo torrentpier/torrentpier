@@ -12,8 +12,11 @@ declare(strict_types=1);
 
 namespace TorrentPier\Router\SemanticUrl;
 
+use BadMethodCallException;
 use TorrentPier\Helpers\Slug;
-use TorrentPier\Http\Response;
+use TorrentPier\Router\SemanticUrl\Traits\CanonicalUrls;
+use TorrentPier\Router\SemanticUrl\Traits\EntityUrls;
+use TorrentPier\Router\SemanticUrl\Traits\StaticUrls;
 
 /**
  * Central URL builder for SEO-friendly URLs
@@ -22,14 +25,38 @@ use TorrentPier\Http\Response;
  * Examples:
  *   - /topic/bugonia.5/
  *   - /forum/hd-video.1/
- *   - /profile/admin.2/
+ *   - /members/admin.2/
+ *
+ * @method static string topic(?int $id, string $title = '', array $params = [])
+ * @method static string topicPost(int $topicId, string $title, int $postId)
+ * @method static string topicNewest(int $topicId, string $title)
+ * @method static string forum(?int $id, string $name = '', array $params = [])
+ * @method static string member(?int $id, string $username = '', array $params = [])
+ * @method static string memberEmail(int $id, string $username = '')
+ * @method static string group(?int $id, string $name = '', array $params = [])
+ * @method static string groupEdit(int $id, string $name = '', array $params = [])
+ * @method static string members()
+ * @method static string groups()
+ * @method static string register()
+ * @method static string settings()
+ * @method static string passwordRecovery()
+ * @method static string profileBonus()
+ * @method static string profileWatchlist()
+ * @method static string activate(string $key)
+ * @method static string legacy(string $type, int $id)
+ * @method static void assertCanonical(string $type, int $id, string $title, ?string $requestedSlug = null)
+ * @method static array|null parseParams(string $params)
  */
 class UrlBuilder
 {
+    use EntityUrls;
+    use StaticUrls;
+    use CanonicalUrls;
+
     private static ?self $instance = null;
 
     /**
-     * Get singleton instance for use in templates
+     * Get a singleton instance for use in templates
      */
     public static function instance(): self
     {
@@ -41,191 +68,21 @@ class UrlBuilder
      *
      * @param string $name Method name
      * @param array $args Method arguments
-     * @return string URL
-     * @throws \BadMethodCallException If method doesn't exist
+     * @return mixed
+     * @throws BadMethodCallException If the method doesn't exist
      */
-    public function __call(string $name, array $args): string
+    public function __call(string $name, array $args): mixed
     {
         if (!method_exists(self::class, $name)) {
-            throw new \BadMethodCallException("Method UrlBuilder::$name() does not exist");
+            throw new BadMethodCallException("Method UrlBuilder::$name() does not exist");
         }
         return self::$name(...$args);
     }
 
     /**
-     * Generate a topic URL
-     *
-     * @param int|null $id Topic ID
-     * @param string $title Topic title (will be slugified)
-     * @param array $params Additional query parameters (e.g., ['start' => 20])
-     * @return string Full URL path
-     */
-    public static function topic(?int $id, string $title = '', array $params = []): string
-    {
-        if ($id === null || $id <= 0) {
-            return '#';
-        }
-        return self::buildUrl('topic', $id, $title, $params);
-    }
-
-    /**
-     * Generate a topic URL with anchor to a specific post
-     *
-     * @param int $topicId Topic ID
-     * @param string $title Topic title (will be slugified)
-     * @param int $postId Post ID to anchor to
-     * @return string Full URL path with #post_id anchor
-     */
-    public static function topicPost(int $topicId, string $title, int $postId): string
-    {
-        return self::topic($topicId, $title, ['_fragment' => (string)$postId]);
-    }
-
-    /**
-     * Generate a topic URL for viewing newest posts
-     *
-     * @param int $topicId Topic ID
-     * @param string $title Topic title (will be slugified)
-     * @return string Full URL path with view=newest#newest
-     */
-    public static function topicNewest(int $topicId, string $title): string
-    {
-        return self::topic($topicId, $title, ['view' => 'newest', '_fragment' => 'newest']);
-    }
-
-    /**
-     * Generate a forum URL
-     *
-     * @param int|null $id Forum ID
-     * @param string $name Forum name (will be slugified)
-     * @param array $params Additional query parameters
-     * @return string Full URL path
-     */
-    public static function forum(?int $id, string $name = '', array $params = []): string
-    {
-        if ($id === null || $id <= 0) {
-            return '#';
-        }
-        return self::buildUrl('forum', $id, $name, $params);
-    }
-
-    /**
-     * Generate a member profile URL
-     *
-     * @param int|null $id User ID
-     * @param string $username Username (will be slugified)
-     * @param array $params Additional query parameters
-     * @return string Full URL path
-     */
-    public static function member(?int $id, string $username = '', array $params = []): string
-    {
-        if ($id === null || $id <= 0) {
-            return '#';
-        }
-        return self::buildUrl('members', $id, $username, $params);
-    }
-
-    /**
-     * Generate a group URL
-     *
-     * @param int|null $id Group ID
-     * @param string $name Group name (will be slugified)
-     * @param array $params Additional query parameters
-     * @return string Full URL path
-     */
-    public static function group(?int $id, string $name = '', array $params = []): string
-    {
-        if ($id === null || $id <= 0) {
-            return '#';
-        }
-        return self::buildUrl('groups', $id, $name, $params);
-    }
-
-    /**
-     * Generate a group edit URL (/groups/slug.id/edit/)
-     */
-    public static function groupEdit(int $id, string $name = '', array $params = []): string
-    {
-        $url = rtrim(self::group($id, $name), '/') . '/edit/';
-        return self::appendParams($url, $params);
-    }
-
-    /**
-     * Generate a member email URL (/members/slug.id/email/)
-     */
-    public static function memberEmail(int $id, string $username = ''): string
-    {
-        return rtrim(self::member($id, $username), '/') . '/email/';
-    }
-
-    /**
-     * Generate a members list URL (/members/)
-     */
-    public static function members(): string
-    {
-        return '/members/';
-    }
-
-    /**
-     * Generate a groups list URL (/groups/)
-     */
-    public static function groups(): string
-    {
-        return '/groups/';
-    }
-
-    /**
-     * Generate a registration URL (/register/)
-     */
-    public static function register(): string
-    {
-        return '/register/';
-    }
-
-    /**
-     * Generate a settings/edit profile URL (/settings/)
-     */
-    public static function settings(): string
-    {
-        return '/settings/';
-    }
-
-    /**
-     * Generate a password recovery URL (/password-recovery/)
-     */
-    public static function passwordRecovery(): string
-    {
-        return '/password-recovery/';
-    }
-
-    /**
-     * Generate a profile bonus URL (/profile/bonus/)
-     */
-    public static function profileBonus(): string
-    {
-        return '/profile/bonus/';
-    }
-
-    /**
-     * Generate a profile watchlist URL (/profile/watchlist/)
-     */
-    public static function profileWatchlist(): string
-    {
-        return '/profile/watchlist/';
-    }
-
-    /**
-     * Generate an activation URL (/activate/{key}/)
-     */
-    public static function activate(string $key): string
-    {
-        return '/activate/' . urlencode($key) . '/';
-    }
-
-    /**
      * Build the URL with the format: /type/slug.id/
      *
-     * @param string $type Entity type (topic, forum, profile)
+     * @param string $type Entity type (topic, forum, members, groups)
      * @param int $id Entity ID
      * @param string $title Title/name to slugify
      * @param array $params Additional query parameters (use '_fragment' for #anchor)
@@ -279,7 +136,7 @@ class UrlBuilder
             unset($params['_fragment']);
         }
 
-        // Append query string if there are parameters
+        // Append a query string if there are parameters
         if (!empty($params)) {
             $queryString = http_build_query($params, '', '&');
             if ($queryString !== '') {
@@ -287,146 +144,9 @@ class UrlBuilder
             }
         }
 
-        // Append fragment at the end
+        // Append a fragment at the end
         $url .= $fragment;
 
         return $url;
-    }
-
-    /**
-     * Assert that the current URL matches the canonical URL
-     *
-     * If the URL slug doesn't match the expected slug from the title,
-     * performs a 301 redirect to the canonical URL.
-     *
-     * @param string $type Entity type (topic, forum, profile)
-     * @param int $id Entity ID
-     * @param string $title Current title/name of the entity
-     * @param string|null $requestedSlug The slug from the current URL (null to parse from REQUEST_URI)
-     */
-    public static function assertCanonical(string $type, int $id, string $title, ?string $requestedSlug = null): void
-    {
-        // Parse the requested slug from the URL if not provided
-        if ($requestedSlug === null) {
-            $requestedSlug = self::parseSlugFromRequest($type);
-        }
-
-        // Generate the expected slug from the current title
-        $expectedSlug = Slug::generate($title);
-
-        // If slugs don't match, redirect to canonical URL
-        if ($requestedSlug !== $expectedSlug) {
-            $canonicalUrl = self::buildCanonicalUrl($type, $id, $title);
-            self::redirectToCanonical($canonicalUrl);
-        }
-    }
-
-    /**
-     * Parse the slug from the current request URI
-     *
-     * Expected format: /type/slug.id/ or /type/slug.id
-     *
-     * @param string $type Entity type to match
-     * @return string Extracted slug (empty string if not found)
-     */
-    private static function parseSlugFromRequest(string $type): string
-    {
-        $requestUri = $_SERVER['REQUEST_URI'] ?? '';
-
-        // Remove query string
-        $path = parse_url($requestUri, PHP_URL_PATH) ?? '';
-
-        // Handle special URL patterns
-        $pattern = match ($type) {
-            // /groups/slug.id/edit/
-            'groups_edit' => '#^/groups/([^/]*?)\.(\d+)/edit/?$#',
-            // Standard pattern: /type/slug.id/ or /type/slug.id
-            default => '#^/' . preg_quote($type, '#') . '/([^/]*?)\.(\d+)/?$#',
-        };
-
-        if (preg_match($pattern, $path, $matches)) {
-            return $matches[1];
-        }
-
-        return '';
-    }
-
-    /**
-     * Build the full canonical URL with current query parameters preserved
-     *
-     * @param string $type Entity type
-     * @param int $id Entity ID
-     * @param string $title Title to slugify
-     * @return string Full canonical URL
-     */
-    private static function buildCanonicalUrl(string $type, int $id, string $title): string
-    {
-        // Get current query parameters (excluding slug-related ones)
-        $params = [];
-        $queryString = $_SERVER['QUERY_STRING'] ?? '';
-        if ($queryString !== '') {
-            parse_str($queryString, $params);
-        }
-
-        // Build the URL using the appropriate method
-        return match ($type) {
-            'topic' => self::topic($id, $title, $params),
-            'forum' => self::forum($id, $title, $params),
-            'members' => self::member($id, $title, $params),
-            'groups' => self::group($id, $title, $params),
-            'groups_edit' => self::groupEdit($id, $title, $params),
-            default => '/',
-        };
-    }
-
-    /**
-     * Perform a 301 redirect to the canonical URL
-     *
-     * @param string $url Target URL
-     */
-    private static function redirectToCanonical(string $url): void
-    {
-        // Build full URL with base
-        $fullUrl = make_url($url);
-
-        // Send 301 redirect and exit
-        Response::permanentRedirect($fullUrl)->send();
-        exit;
-    }
-
-    /**
-     * Parse a semantic URL and extract slug and ID
-     *
-     * @param string $params The URL segment containing "slug.id"
-     * @return array{slug: string, id: int}|null Parsed data or null if invalid
-     */
-    public static function parseParams(string $params): ?array
-    {
-        // Match pattern: anything.number (slug can be empty)
-        if (preg_match('/^(.*?)\.(\d+)$/', $params, $matches)) {
-            return [
-                'slug' => $matches[1],
-                'id' => (int) $matches[2],
-            ];
-        }
-
-        return null;
-    }
-
-    /**
-     * Generate a legacy-style URL (for backward compatibility)
-     *
-     * @param string $type Entity type
-     * @param int $id Entity ID
-     * @return string Legacy URL format
-     */
-    public static function legacy(string $type, int $id): string
-    {
-        return match ($type) {
-            'topic' => 'viewtopic?t=' . $id,
-            'forum' => 'viewforum?f=' . $id,
-            'members' => 'profile?mode=viewprofile&u=' . $id,
-            default => '/',
-        };
     }
 }
