@@ -111,6 +111,9 @@ class TwigEnvironmentFactory
         $twig->addFunction(new TwigFunction('profile_url', 'profile_url'));
         $twig->addFunction(new TwigFunction('render_flag', 'render_flag'));
 
+        // SEO-friendly URL builder (use as: url.topic(id, title), url.forum(id, name), etc.)
+        $twig->addGlobal('url', url());
+
         // Add filters for backward compatibility
         $twig->addFilter(new TwigFilter('htmlspecialchars', 'htmlspecialchars'));
         $twig->addFilter(new TwigFilter('clean_filename', 'clean_filename'));

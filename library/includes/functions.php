@@ -1202,7 +1202,8 @@ function redirect($url)
     $server_protocol = (config()->get('cookie_secure')) ? 'https://' : 'http://';
 
     $server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('server_name')));
-    $server_port = (config()->get('server_port') <> 80) ? ':' . trim(config()->get('server_port')) : '';
+    $port = (int) config()->get('server_port');
+    $server_port = in_array($port, [80, 443], true) ? '' : ':' . $port;
     $script_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('script_path')));
 
     if ($script_name) {

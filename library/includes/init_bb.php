@@ -347,7 +347,26 @@ function html_ent_decode(string $string, int $flags = ENT_QUOTES, string $encodi
  */
 function make_url(string $path = ''): string
 {
-    return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
+    // Remove leading slash only, preserve trailing slash for SEO-friendly URLs
+    return FULL_URL . ltrim($path, '/');
+}
+
+/**
+ * Get URL builder instance for generating SEO-friendly URLs
+ *
+ * Usage:
+ *   url()->topic($id, $title)
+ *   url()->forum($id, $name)
+ *   url()->profile($id, $username)
+ *   url()->register()
+ *   url()->settings()
+ *   url()->passwordRecovery()
+ *
+ * @return \TorrentPier\Router\SemanticUrl\UrlBuilder
+ */
+function url(): \TorrentPier\Router\SemanticUrl\UrlBuilder
+{
+    return \TorrentPier\Router\SemanticUrl\UrlBuilder::instance();
 }
 
 /**
