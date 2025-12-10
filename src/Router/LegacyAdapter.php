@@ -49,8 +49,17 @@ class LegacyAdapter
 
         // Make route parameters available to the controller
         foreach ($args as $key => $value) {
-            $_GET[$key] = $value;
-            $_REQUEST[$key] = $value;
+            request()->query->set($key, $value);
+        }
+
+        // Set mode from options (for profile routes like /register/, /settings/, etc.)
+        if (isset($this->options['mode'])) {
+            request()->query->set('mode', $this->options['mode']);
+
+            // For the activate route, set the activation key from route args
+            if ($this->options['mode'] === 'activate' && isset($args['key'])) {
+                request()->query->set('act_key', $args['key']);
+            }
         }
 
         // For self_bootstrap files: return marker response, execution happens in global scope

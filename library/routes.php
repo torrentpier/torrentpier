@@ -10,6 +10,9 @@
 use TorrentPier\Controllers\RobotsController;
 use TorrentPier\Router\Router;
 use TorrentPier\Router\LegacyAdapter;
+use TorrentPier\Router\SemanticUrl\LegacyRedirect;
+use TorrentPier\Router\SemanticUrl\RouteAdapter;
+use TorrentPier\Http\Middleware\TrailingSlashRedirect;
 
 /**
  * Route definitions for TorrentPier
@@ -24,6 +27,41 @@ return function (Router $router): void {
     // ==============================================================
 
     $router->get('/robots.txt', new RobotsController());
+
+    // ==============================================================
+    // SEO-friendly semantic routes (must be defined before legacy routes)
+    // Format: /type/slug.id/
+    // ==============================================================
+
+    // Topics: /topic/slug.123/
+    $router->any('/topic/{params}/', new RouteAdapter('topic'));
+    $router->get('/topic/{params}', new TrailingSlashRedirect());
+
+    // Forums: /forum/slug.123/
+    $router->any('/forum/{params}/', new RouteAdapter('forum'));
+    $router->get('/forum/{params}', new TrailingSlashRedirect());
+
+    // Profile standalone pages (static routes MUST come before variable routes)
+    $router->any('/profile/bonus/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', ['mode' => 'bonus']));
+    $router->get('/profile/bonus', new TrailingSlashRedirect());
+    $router->any('/profile/watchlist/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', ['mode' => 'watch']));
+    $router->get('/profile/watchlist', new TrailingSlashRedirect());
+
+    // Profiles: /profile/slug.123/ and /profile/slug.123/email/
+    $router->any('/profile/{params}/email/', new RouteAdapter('profile', ['action' => 'email']));
+    $router->get('/profile/{params}/email', new TrailingSlashRedirect());
+    $router->any('/profile/{params}/', new RouteAdapter('profile'));
+    $router->get('/profile/{params}', new TrailingSlashRedirect());
+
+    // Standalone auth/account pages
+    $router->any('/register/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', ['mode' => 'register']));
+    $router->get('/register', new TrailingSlashRedirect());
+    $router->any('/settings/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', ['mode' => 'editprofile']));
+    $router->get('/settings', new TrailingSlashRedirect());
+    $router->any('/password-recovery/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', ['mode' => 'sendpassword']));
+    $router->get('/password-recovery', new TrailingSlashRedirect());
+    $router->any('/activate/{key}/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', ['mode' => 'activate']));
+    $router->get('/activate/{key}', new TrailingSlashRedirect());
 
     // ==============================================================
     // Migrated controllers (in src/Controllers/)
@@ -53,9 +91,32 @@ return function (Router $router): void {
     $router->any('/modcp', new LegacyAdapter($basePath . '/src/Controllers/modcp.php', options: ['manage_session' => true]));
     $router->any('/posting', new LegacyAdapter($basePath . '/src/Controllers/posting.php'));
     $router->any('/privmsg', new LegacyAdapter($basePath . '/src/Controllers/privmsg.php', 'pm', ['manage_session' => true]));
-    $router->any('/profile', new LegacyAdapter($basePath . '/src/Controllers/profile.php'));
     $router->any('/search', new LegacyAdapter($basePath . '/src/Controllers/search.php', options: ['manage_session' => true]));
     $router->any('/tracker', new LegacyAdapter($basePath . '/src/Controllers/tracker.php', options: ['manage_session' => true]));
-    $router->any('/viewforum', new LegacyAdapter($basePath . '/src/Controllers/viewforum.php', 'forum'));
-    $router->any('/viewtopic', new LegacyAdapter($basePath . '/src/Controllers/viewtopic.php', 'topic'));
+
+    // ==============================================================
+    // Legacy routes with redirects to SEO-friendly URLs
+    // ==============================================================
+
+    // viewtopic?t=123 -> /topic/slug.123/
+    $router->any('/viewtopic', new LegacyRedirect(
+        'topic',
+        $basePath . '/src/Controllers/viewtopic.php',
+        ['manage_session' => true]
+    ));
+
+    // viewforum?f=123 -> /forum/slug.123/
+    $router->any('/viewforum', new LegacyRedirect(
+        'forum',
+        $basePath . '/src/Controllers/viewforum.php',
+        ['manage_session' => true]
+    ));
+
+    // profile?mode=viewprofile&u=123 -> /profile/slug.123/
+    // Note: Only redirects for mode=viewprofile, other modes use fallback controller
+    $router->any('/profile', new LegacyRedirect(
+        'profile',
+        $basePath . '/src/Controllers/profile.php',
+        ['manage_session' => true]
+    ));
 };
