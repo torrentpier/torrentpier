@@ -512,7 +512,7 @@ function build_poll_add_form (src_el)
 		&nbsp;
 	<!-- ELSE -->
 		<div style="padding: 2px 6px 4px;" class="post_btn_2">
-			<a class="txtb" href="{PROFILE_URL}{postrow.POSTER_ID}">[ {L_PROFILE} ]</a>{POST_BTN_SPACER}
+			<a class="txtb" href="{postrow.POSTER_URL}">[ {L_PROFILE} ]</a>{POST_BTN_SPACER}
 			<a class="txtb" href="{PM_URL}?mode=post&amp;{#POST_USERS_URL#}={postrow.POSTER_ID}">[ {L_SEND_PM_SHORT} ]</a>{POST_BTN_SPACER}
 		</div>
 	<!-- ENDIF -->

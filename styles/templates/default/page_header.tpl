@@ -420,7 +420,7 @@ function go_to_page ()
 							<tr>
 								<td><div class="news_date">{news.NEWS_TIME}</div></td>
 								<td width="100%">
-									<div class="news_title<!-- IF news.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{TOPIC_URL}{news.NEWS_TOPIC_ID}">{news.NEWS_TITLE}</a></div>
+									<div class="news_title<!-- IF news.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{news.NEWS_URL}">{news.NEWS_TITLE}</a></div>
 								</td>
 							</tr>
 							<!-- END news -->
@@ -436,7 +436,7 @@ function go_to_page ()
 							<tr>
 								<td><div class="news_date">{net.NEWS_TIME}</div></td>
 								<td width="100%">
-									<div class="news_title<!-- IF net.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{TOPIC_URL}{net.NEWS_TOPIC_ID}">{net.NEWS_TITLE}</a></div>
+									<div class="news_title<!-- IF net.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{net.NEWS_URL}">{net.NEWS_TITLE}</a></div>
 								</td>
 							</tr>
 							<!-- END net -->

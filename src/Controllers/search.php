@@ -790,16 +790,22 @@ else {
         $is_unread = is_unread($topic['topic_last_post_time'], $topic_id, $forum_id);
         $moved = ($topic['topic_status'] == TOPIC_MOVED);
 
+        $topicTitle = $topic['topic_title'];
+        $hrefTopicId = $moved ? $topic['topic_moved_id'] : $topic_id;
+        $topicUrl = url()->topic($hrefTopicId, $topicTitle);
+
         template()->assign_block_vars('t', [
             'ROW_NUM' => $row_num,
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
-            'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
-            'TOPIC_TITLE' => censor()->censorString($topic['topic_title']),
+            'TOPIC_URL' => $topicUrl,
+            'TOPIC_NEWEST_URL' => url()->topicNewest($hrefTopicId, $topicTitle),
+            'LAST_POST_URL' => url()->topicPost($hrefTopicId, $topicTitle, $topic['topic_last_post_id']),
+            'TOPIC_TITLE' => censor()->censorString($topicTitle),
             'IS_UNREAD' => $is_unread,
             'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
-            'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], config()->get('posts_per_page')),
+            'PAGINATION' => $moved ? '' : build_topic_pagination($topicUrl, $topic['topic_replies'], config()->get('posts_per_page')),
             'REPLIES' => $moved ? '' : $topic['topic_replies'],
             'ATTACH' => !empty($topic['attach_ext_id']),
             'STATUS' => $topic['topic_status'],

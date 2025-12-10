@@ -332,7 +332,7 @@ if (config()->get('show_latest_news')) {
         }
 
         template()->assign_block_vars('news', [
-            'NEWS_TOPIC_ID' => $news['topic_id'],
+            'NEWS_URL' => url()->topic($news['topic_id'], $news['topic_title']),
             'NEWS_TITLE' => str_short(censor()->censorString($news['topic_title']), config()->get('max_news_title')),
             'NEWS_TIME' => bb_date($news['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($news['topic_time'], $news['topic_id'], $news['forum_id']),
@@ -356,7 +356,7 @@ if (config()->get('show_network_news')) {
         }
 
         template()->assign_block_vars('net', [
-            'NEWS_TOPIC_ID' => $net['topic_id'],
+            'NEWS_URL' => url()->topic($net['topic_id'], $net['topic_title']),
             'NEWS_TITLE' => str_short(censor()->censorString($net['topic_title']), config()->get('max_net_title')),
             'NEWS_TIME' => bb_date($net['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($net['topic_time'], $net['topic_id'], $net['forum_id']),

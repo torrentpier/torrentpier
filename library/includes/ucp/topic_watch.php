@@ -76,15 +76,21 @@ if ($watch_count > 0) {
         for ($i = 0, $iMax = count($watch); $i < $iMax; $i++) {
             $is_unread = is_unread($watch[$i]['topic_last_post_time'], $watch[$i]['topic_id'], $watch[$i]['forum_id']);
 
+            $topicId = $watch[$i]['topic_id'];
+            $topicTitle = $watch[$i]['topic_title'];
+            $topicUrl = url()->topic($topicId, $topicTitle);
+
             template()->assign_block_vars('watch', [
                 'ROW_CLASS' => (!($i % 2)) ? 'row1' : 'row2',
                 'POST_ID' => $watch[$i]['topic_first_post_id'],
-                'TOPIC_ID' => $watch[$i]['topic_id'],
-                'TOPIC_TITLE' => str_short(censor()->censorString($watch[$i]['topic_title']), 70),
-                'FULL_TOPIC_TITLE' => $watch[$i]['topic_title'],
-                'U_TOPIC' => TOPIC_URL . $watch[$i]['topic_id'],
+                'TOPIC_ID' => $topicId,
+                'TOPIC_TITLE' => str_short(censor()->censorString($topicTitle), 70),
+                'FULL_TOPIC_TITLE' => $topicTitle,
+                'U_TOPIC' => $topicUrl,
+                'U_TOPIC_NEWEST' => url()->topicNewest($topicId, $topicTitle),
+                'U_LAST_POST' => url()->topicPost($topicId, $topicTitle, $watch[$i]['topic_last_post_id']),
                 'FORUM_TITLE' => $watch[$i]['forum_name'],
-                'U_FORUM' => FORUM_URL . $watch[$i]['forum_id'],
+                'U_FORUM' => url()->forum($watch[$i]['forum_id'], $watch[$i]['forum_name']),
                 'REPLIES' => $watch[$i]['topic_replies'],
                 'AUTHOR' => profile_url($watch[$i]),
                 'LAST_POST' => bb_date($watch[$i]['topic_last_post_time']) . '<br />' . profile_url(['user_id' => $watch[$i]['last_user_id'], 'username' => $watch[$i]['last_username'], 'user_rank' => $watch[$i]['last_user_rank']]),
@@ -93,7 +99,7 @@ if ($watch_count > 0) {
                 'IS_UNREAD' => $is_unread,
                 'POLL' => (bool)$watch[$i]['topic_vote'],
                 'TOPIC_ICON' => get_topic_icon($watch[$i], $is_unread),
-                'PAGINATION' => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination(TOPIC_URL . $watch[$i]['topic_id'], $watch[$i]['topic_replies'], config()->get('posts_per_page'))
+                'PAGINATION' => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination($topicUrl, $watch[$i]['topic_replies'], config()->get('posts_per_page'))
             ]);
         }
 

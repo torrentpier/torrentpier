@@ -165,7 +165,7 @@ function show_edit_options ()
 	<td><a href="{{ url.forum(t_item.FORUM_ID, t_item.FORUM_NAME) }}" class="gen">{t.FORUM_NAME}</a></td>
 		<td class="tLeft" style="padding: 2px 5px 3px 4px;">
 		<div class="topictitle" onmousedown="$p('tid_{t.TOPIC_ID}').className='opened'">
-			<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
+			<!-- IF t.IS_UNREAD --><a href="{t.TOPIC_NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
 			<!-- IF t.STATUS == 2 --><span class="topicMoved">{L_TOPIC_MOVED}</span>
 				<!-- ELSEIF t.TYPE == 2 --><span class="topicAnnounce">{L_TOPIC_ANNOUNCEMENT}</span>
 				<!-- ELSEIF t.DL_CLASS --><span class="{t.DL_CLASS} iconDL">{L_TOPIC_DL}</span>
@@ -183,7 +183,7 @@ function show_edit_options ()
 		<p>{t.LAST_POST_TIME}</p>
 		<p>
 			{t.LAST_POSTER}
-			<span onmousedown="$p('tid_{t.TOPIC_ID}').className='opened'"><a href="{POST_URL}{t.LAST_POST_ID}#{t.LAST_POST_ID}">{ICON_LATEST_REPLY}</a></span>
+			<span onmousedown="$p('tid_{t.TOPIC_ID}').className='opened'"><a href="{t.LAST_POST_URL}">{ICON_LATEST_REPLY}</a></span>
 		</p>
 	</td>
 </tr>
