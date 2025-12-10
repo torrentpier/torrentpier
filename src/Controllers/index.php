@@ -182,7 +182,8 @@ if (!empty($mod)) {
     }
     foreach ($mod['mod_groups'] as $forum_id => $group_ids) {
         foreach ($group_ids as $group_id) {
-            $moderators[$forum_id][] = '<a href="' . GROUP_URL . $group_id . '">' . $mod['name_groups'][$group_id] . '</a>';
+            $groupName = $mod['name_groups'][$group_id];
+            $moderators[$forum_id][] = '<a href="' . url()->group($group_id, $groupName) . '">' . $groupName . '</a>';
         }
     }
 }

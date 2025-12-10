@@ -726,7 +726,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'RG_AVATAR' => $rg_avatar,
         'RG_NAME' => $rg_name,
         'RG_DESC' => $rg_desc,
-        'RG_URL' => GROUP_URL . $rg_id,
+        'RG_URL' => url()->group($rg_id, $postrow[$i]['group_name'] ?? ''),
         'RG_FIND_URL' => FORUM_PATH . 'tracker?srg=' . $rg_id,
         'RG_SIG' => $rg_signature,
         'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig'],

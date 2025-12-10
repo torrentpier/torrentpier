@@ -228,7 +228,6 @@ define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
 define('CAT_URL', '?' . POST_CAT_URL . '=');
 define('DL_URL', config()->get('dl_url'));
 define('FORUM_URL', 'viewforum?' . POST_FORUM_URL . '=');
-define('GROUP_URL', 'group?' . POST_GROUPS_URL . '=');
 define('LOGIN_URL', config()->get('login_url'));
 define('MODCP_URL', 'modcp?' . POST_FORUM_URL . '=');
 define('PM_URL', config()->get('pm_url'));

@@ -41,23 +41,35 @@ class LegacyRedirect
             'id_col' => 'forum_id',
             'title_col' => 'forum_name',
         ],
-        'profile' => [
+        'members' => [
             'param' => 'u',
             'table' => 'bb_users',
             'id_col' => 'user_id',
             'title_col' => 'username',
         ],
+        'groups' => [
+            'param' => 'g',
+            'table' => 'bb_groups',
+            'id_col' => 'group_id',
+            'title_col' => 'group_name',
+        ],
+        'groups_edit' => [
+            'param' => 'g',
+            'table' => 'bb_groups',
+            'id_col' => 'group_id',
+            'title_col' => 'group_name',
+        ],
     ];
 
     /**
-     * Profile mode redirects mapping
-     * Modes with user ID: redirect to /profile/slug.id/ or /profile/slug.id/action/
+     * Member mode redirects mapping
+     * Modes with user ID: redirect to /members/slug.id/ or /members/slug.id/action/
      * Modes without user ID: redirect to standalone URLs
      */
-    private const array PROFILE_MODE_REDIRECTS = [
-        // Modes that require user ID → /profile/slug.id/[action/]
-        'viewprofile' => ['needs_id' => true, 'path' => null],      // /profile/slug.id/
-        'email' => ['needs_id' => true, 'path' => 'email'],   // /profile/slug.id/email/
+    private const array MEMBER_MODE_REDIRECTS = [
+        // Modes that require user ID → /members/slug.id/[action/]
+        'viewprofile' => ['needs_id' => true, 'path' => null],      // /members/slug.id/
+        'email' => ['needs_id' => true, 'path' => 'email'],   // /members/slug.id/email/
 
         // Standalone modes → fixed URLs
         'register' => ['needs_id' => false, 'url' => '/register/'],
@@ -93,9 +105,9 @@ class LegacyRedirect
         // Get query parameters from the PSR-7 request
         $queryParams = $request->getQueryParams();
 
-        // Handle profile modes specially
-        if ($this->type === 'profile') {
-            return $this->handleProfileRedirect($request, $args, $config, $queryParams);
+        // Handle members modes specially
+        if ($this->type === 'members') {
+            return $this->handleMemberRedirect($request, $args, $config, $queryParams);
         }
 
         // Get the entity ID from query parameters
@@ -128,10 +140,10 @@ class LegacyRedirect
     }
 
     /**
-     * Handle profile mode redirects
+     * Handle member mode redirects
      * @throws Throwable
      */
-    private function handleProfileRedirect(
+    private function handleMemberRedirect(
         ServerRequestInterface $request,
         array                  $args,
         array                  $config,
@@ -140,7 +152,7 @@ class LegacyRedirect
         $mode = $queryParams['mode'] ?? null;
 
         // Check if this mode has a redirect defined
-        $modeConfig = self::PROFILE_MODE_REDIRECTS[$mode] ?? null;
+        $modeConfig = self::MEMBER_MODE_REDIRECTS[$mode] ?? null;
         if ($modeConfig === null) {
             // Unknown mode, use fallback controller
             return $this->fallbackToLegacy($request, $args);
@@ -178,7 +190,7 @@ class LegacyRedirect
 
         // Fetch username and build URL
         $title = $this->fetchTitle($id, $config);
-        $semanticUrl = UrlBuilder::profile($id, $title);
+        $semanticUrl = UrlBuilder::member($id, $title);
 
         // Append an action path if needed (e.g., /email/)
         if (!empty($modeConfig['path'])) {
@@ -212,13 +224,15 @@ class LegacyRedirect
         return match ($this->type) {
             'topic' => UrlBuilder::topic($id, $title),
             'forum' => UrlBuilder::forum($id, $title),
-            'profile' => UrlBuilder::profile($id, $title),
+            'members' => UrlBuilder::member($id, $title),
+            'groups' => UrlBuilder::group($id, $title),
+            'groups_edit' => UrlBuilder::groupEdit($id, $title),
             default => '/',
         };
     }
 
     /**
-     * Get extra query parameters (excluding the ID param and mode for profile)
+     * Get extra query parameters (excluding the ID param and mode for members)
      */
     private function getExtraQueryParams(array $config, array $queryParams): array
     {
@@ -227,8 +241,8 @@ class LegacyRedirect
         // Remove the main ID parameter
         unset($params[$config['param']]);
 
-        // For profile, also remove the mode parameter
-        if ($this->type === 'profile') {
+        // For members, also remove the mode parameter
+        if ($this->type === 'members') {
             unset($params['mode']);
         }
 

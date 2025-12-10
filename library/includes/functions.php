@@ -1655,7 +1655,10 @@ function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null
     $msg = '';
     $msg .= $topic_id ? '<p class="mrg_10"><a href="' . FORUM_PATH . TOPIC_URL . $topic_id . '">' . __('TOPIC_RETURN') . '</a></p>' : '';
     $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_PATH . FORUM_URL . $forum_id . '">' . __('FORUM_RETURN') . '</a></p>' : '';
-    $msg .= $group_id ? '<p class="mrg_10"><a href="' . FORUM_PATH . GROUP_URL . $group_id . '">' . __('GROUP_RETURN') . '</a></p>' : '';
+    if ($group_id) {
+        $groupName = DB()->table('bb_groups')->get($group_id)?->group_name ?? '';
+        $msg .= '<p class="mrg_10"><a href="' . url()->group($group_id, $groupName) . '">' . __('GROUP_RETURN') . '</a></p>';
+    }
     $msg .= '<p class="mrg_10"><a href="' . FORUM_PATH . '">' . __('INDEX_RETURN') . '</a></p>';
     template()->assign_var('BB_DIE_APPEND_MSG', $msg);
 }

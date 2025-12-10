@@ -29,8 +29,8 @@ if (!$profiledata = get_userdata($user_id, profile_view: true)) {
 }
 
 // Assert canonical URL for SEO-friendly routing
-if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'profile') {
-    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('profile', $user_id, $profiledata['username']);
+if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'members') {
+    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('members', $user_id, $profiledata['username']);
 }
 
 $profiledata['user_birthday'] = $profiledata['user_birthday']->format('Y-m-d');

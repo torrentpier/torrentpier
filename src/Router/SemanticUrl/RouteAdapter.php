@@ -37,11 +37,21 @@ class RouteAdapter
             'script' => 'forum',
             'param' => 'f',  // POST_FORUM_URL
         ],
-        'profile' => [
+        'members' => [
             'controller' => 'profile.php',
             'script' => 'profile',
             'param' => 'u',  // POST_USERS_URL
             'extra' => ['mode' => 'viewprofile'],
+        ],
+        'groups' => [
+            'controller' => 'group.php',
+            'script' => 'group',
+            'param' => 'g',  // POST_GROUPS_URL
+        ],
+        'groups_edit' => [
+            'controller' => 'group_edit.php',
+            'script' => 'group_edit',
+            'param' => 'g',  // POST_GROUPS_URL
         ],
     ];
 
@@ -153,7 +163,9 @@ class RouteAdapter
         $canonicalUrl = match ($this->type) {
             'topic' => UrlBuilder::topic($id, $title),
             'forum' => UrlBuilder::forum($id, $title),
-            'profile' => UrlBuilder::profile($id, $title),
+            'members' => UrlBuilder::member($id, $title),
+            'groups' => UrlBuilder::group($id, $title),
+            'groups_edit' => UrlBuilder::groupEdit($id, $title),
             default => '/',
         };
 
@@ -172,7 +184,8 @@ class RouteAdapter
         [$table, $titleCol] = match ($this->type) {
             'topic' => ['bb_topics', 'topic_title'],
             'forum' => ['bb_forums', 'forum_name'],
-            'profile' => ['bb_users', 'username'],
+            'members' => ['bb_users', 'username'],
+            'groups', 'groups_edit' => ['bb_groups', 'group_name'],
             default => [null, null],
         };
 

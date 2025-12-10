@@ -42,9 +42,13 @@ class UrlBuilder
      * @param string $name Method name
      * @param array $args Method arguments
      * @return string URL
+     * @throws \BadMethodCallException If method doesn't exist
      */
     public function __call(string $name, array $args): string
     {
+        if (!method_exists(self::class, $name)) {
+            throw new \BadMethodCallException("Method UrlBuilder::$name() does not exist");
+        }
         return self::$name(...$args);
     }
 
@@ -81,27 +85,68 @@ class UrlBuilder
     }
 
     /**
-     * Generate a user profile URL
+     * Generate a member profile URL
      *
      * @param int|null $id User ID
      * @param string $username Username (will be slugified)
      * @param array $params Additional query parameters
      * @return string Full URL path
      */
-    public static function profile(?int $id, string $username = '', array $params = []): string
+    public static function member(?int $id, string $username = '', array $params = []): string
     {
         if ($id === null || $id <= 0) {
             return '#';
         }
-        return self::buildUrl('profile', $id, $username, $params);
+        return self::buildUrl('members', $id, $username, $params);
     }
 
     /**
-     * Generate a profile email URL (/profile/slug.id/email/)
+     * Generate a group URL
+     *
+     * @param int|null $id Group ID
+     * @param string $name Group name (will be slugified)
+     * @param array $params Additional query parameters
+     * @return string Full URL path
      */
-    public static function profileEmail(int $id, string $username = ''): string
+    public static function group(?int $id, string $name = '', array $params = []): string
     {
-        return rtrim(self::profile($id, $username), '/') . '/email/';
+        if ($id === null || $id <= 0) {
+            return '#';
+        }
+        return self::buildUrl('groups', $id, $name, $params);
+    }
+
+    /**
+     * Generate a group edit URL (/groups/slug.id/edit/)
+     */
+    public static function groupEdit(int $id, string $name = '', array $params = []): string
+    {
+        $url = rtrim(self::group($id, $name), '/') . '/edit/';
+        return self::appendParams($url, $params);
+    }
+
+    /**
+     * Generate a member email URL (/members/slug.id/email/)
+     */
+    public static function memberEmail(int $id, string $username = ''): string
+    {
+        return rtrim(self::member($id, $username), '/') . '/email/';
+    }
+
+    /**
+     * Generate a members list URL (/members/)
+     */
+    public static function members(): string
+    {
+        return '/members/';
+    }
+
+    /**
+     * Generate a groups list URL (/groups/)
+     */
+    public static function groups(): string
+    {
+        return '/groups/';
     }
 
     /**
@@ -190,6 +235,40 @@ class UrlBuilder
     }
 
     /**
+     * Append query parameters to a URL
+     *
+     * @param string $url Base URL
+     * @param array $params Query parameters (use '_fragment' for #anchor)
+     * @return string URL with parameters
+     */
+    private static function appendParams(string $url, array $params): string
+    {
+        if (empty($params)) {
+            return $url;
+        }
+
+        // Extract fragment (anchor) if present
+        $fragment = '';
+        if (isset($params['_fragment'])) {
+            $fragment = '#' . $params['_fragment'];
+            unset($params['_fragment']);
+        }
+
+        // Append query string if there are parameters
+        if (!empty($params)) {
+            $queryString = http_build_query($params, '', '&');
+            if ($queryString !== '') {
+                $url .= '?' . $queryString;
+            }
+        }
+
+        // Append fragment at the end
+        $url .= $fragment;
+
+        return $url;
+    }
+
+    /**
      * Assert that the current URL matches the canonical URL
      *
      * If the URL slug doesn't match the expected slug from the title,
@@ -232,8 +311,13 @@ class UrlBuilder
         // Remove query string
         $path = parse_url($requestUri, PHP_URL_PATH) ?? '';
 
-        // Match pattern: /type/slug.id/ or /type/slug.id
-        $pattern = '#^/' . preg_quote($type, '#') . '/([^/]*?)\.(\d+)/?$#';
+        // Handle special URL patterns
+        $pattern = match ($type) {
+            // /groups/slug.id/edit/
+            'groups_edit' => '#^/groups/([^/]*?)\.(\d+)/edit/?$#',
+            // Standard pattern: /type/slug.id/ or /type/slug.id
+            default => '#^/' . preg_quote($type, '#') . '/([^/]*?)\.(\d+)/?$#',
+        };
 
         if (preg_match($pattern, $path, $matches)) {
             return $matches[1];
@@ -263,7 +347,9 @@ class UrlBuilder
         return match ($type) {
             'topic' => self::topic($id, $title, $params),
             'forum' => self::forum($id, $title, $params),
-            'profile' => self::profile($id, $title, $params),
+            'members' => self::member($id, $title, $params),
+            'groups' => self::group($id, $title, $params),
+            'groups_edit' => self::groupEdit($id, $title, $params),
             default => '/',
         };
     }
@@ -314,7 +400,7 @@ class UrlBuilder
         return match ($type) {
             'topic' => 'viewtopic?t=' . $id,
             'forum' => 'viewforum?f=' . $id,
-            'profile' => 'profile?mode=viewprofile&u=' . $id,
+            'members' => 'profile?mode=viewprofile&u=' . $id,
             default => '/',
         };
     }

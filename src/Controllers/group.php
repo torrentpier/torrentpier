@@ -37,6 +37,11 @@ if ($group_id) {
         bb_die("Invalid group data [group_id: $group_id]");
     }
     $is_moderator = (userdata('user_id') == $group_info['group_moderator'] || IS_ADMIN);
+
+    // Assert canonical URL for SEO-friendly routing
+    if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'groups') {
+        \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('groups', $group_id, $group_info['group_name']);
+    }
 }
 
 if (!$group_id) {
@@ -104,7 +109,7 @@ if (!$group_id) {
             $members = ($data['m']) ? __('MEMBERS_IN_GROUP') . ': ' . $data['m'] : __('NO_GROUP_MEMBERS');
             $candidates = ($data['c']) ? __('PENDING_MEMBERS') . ': ' . $data['c'] : __('NO_PENDING_GROUP_MEMBERS');
 
-            $options .= '<li class="pad_2"><a href="' . GROUP_URL . $data['id'] . '" class="med bold">' . $text . '</a></li>';
+            $options .= '<li class="pad_2"><a href="' . url()->group($data['id'], $name) . '" class="med bold">' . $text . '</a></li>';
             $options .= ($data['rg']) ? '<ul><li class="med">' . __('RELEASE_GROUP') . '</li>' : '<ul>';
             $options .= '<li class="seedmed">' . $members . '</li>';
             if (IS_AM) {
@@ -128,7 +133,7 @@ if (!$group_id) {
         template()->assign_vars([
             'SELECT_GROUP' => true,
             'PAGE_TITLE' => __('GROUP_CONTROL_PANEL'),
-            'S_USERGROUP_ACTION' => FORUM_PATH . 'group',
+            'S_USERGROUP_ACTION' => url()->groups(),
             'S_HIDDEN_FIELDS' => $s_hidden_fields,
         ]);
     } else {
@@ -175,7 +180,7 @@ if (!$group_id) {
         $emailer->assign_vars([
             'USER' => userdata('username'),
             'GROUP_MODERATOR' => $moderator['username'],
-            'U_GROUP' => make_url(GROUP_URL . $group_id),
+            'U_GROUP' => make_url(url()->group($group_id, $group_info['group_name'])),
         ]);
 
         $emailer->send();
@@ -230,7 +235,7 @@ if (!$group_id) {
                 $emailer->set_template('group_added', $row['user_lang']);
                 $emailer->assign_vars([
                     'GROUP_NAME' => $group_info['group_name'],
-                    'U_GROUP' => make_url(GROUP_URL . $group_id),
+                    'U_GROUP' => make_url(url()->group($group_id, $group_info['group_name'])),
                 ]);
 
                 $emailer->send();
@@ -288,7 +293,7 @@ if (!$group_id) {
                         $emailer->set_template('group_approved', $row['user_lang']);
                         $emailer->assign_vars([
                             'GROUP_NAME' => $group_info['group_name'],
-                            'U_GROUP' => make_url(GROUP_URL . $group_id),
+                            'U_GROUP' => make_url(url()->group($group_id, $group_info['group_name'])),
                         ]);
 
                         $emailer->send();
@@ -390,9 +395,9 @@ if (!$group_id) {
         'MOD_TIME_RAW' => !empty($group_info['mod_time']) ? $group_info['mod_time'] : '',
         'U_SEARCH_USER' => FORUM_PATH . 'search?mode=searchuser',
         'U_SEARCH_RELEASES' => FORUM_PATH . "tracker?srg=$group_id",
-        'U_GROUP_RELEASES' => FORUM_PATH . GROUP_URL . $group_id . "&view=releases",
-        'U_GROUP_MEMBERS' => FORUM_PATH . GROUP_URL . $group_id . "&view=members",
-        'U_GROUP_CONFIG' => FORUM_PATH . "group_edit?" . POST_GROUPS_URL . "=$group_id",
+        'U_GROUP_RELEASES' => url()->group($group_id, $group_info['group_name'], ['view' => 'releases']),
+        'U_GROUP_MEMBERS' => url()->group($group_id, $group_info['group_name'], ['view' => 'members']),
+        'U_GROUP_CONFIG' => url()->groupEdit($group_id, $group_info['group_name']),
         'RELEASE_GROUP' => (bool) $group_info['release_group'],
         'GROUP_TYPE' => $group_type,
 
@@ -406,7 +411,7 @@ if (!$group_id) {
         'S_MODE_SELECT' => $select_sort_mode,
         'S_ORDER_SELECT' => $select_sort_order,
 
-        'S_GROUP_ACTION' => GROUP_URL . $group_id,
+        'S_GROUP_ACTION' => url()->group($group_id, $group_info['group_name']),
     ]);
 
     switch ($view_mode) {
@@ -431,7 +436,7 @@ if (!$group_id) {
 			");
             $count_releases = count($all_releases);
 
-            generate_pagination(GROUP_URL . $group_id . "&amp;view=releases", $count_releases, $per_page, $start);
+            generate_pagination(url()->group($group_id, $group_info['group_name'], ['view' => 'releases']), $count_releases, $per_page, $start);
 
             $sql = "
 				SELECT p.topic_id, p.forum_id, p.poster_id, t.topic_title, t.topic_time, f.forum_name, u.username, u.avatar_ext_id, u.user_opt, u.user_rank
@@ -498,7 +503,7 @@ if (!$group_id) {
 			");
             $members_count = count($group_members);
 
-            generate_pagination(GROUP_URL . $group_id, $count_members, $per_page, $start);
+            generate_pagination(url()->group($group_id, $group_info['group_name']), $count_members, $per_page, $start);
 
             // Dump out the remaining users
             foreach ($group_members as $i => $member) {

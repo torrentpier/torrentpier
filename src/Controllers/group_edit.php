@@ -27,6 +27,11 @@ if ($group_id) {
         bb_die("Invalid group data [group_id: $group_id]");
     }
     $is_moderator = (userdata('user_id') == $group_info['group_moderator'] || IS_ADMIN);
+
+    // Assert canonical URL for SEO-friendly routing
+    if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'groups_edit') {
+        \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('groups_edit', $group_id, $group_info['group_name']);
+    }
 }
 
 if ($is_moderator) {
@@ -62,7 +67,7 @@ if ($is_moderator) {
         'GROUP_ID' => $group_id,
         'GROUP_DESCRIPTION' => htmlCHR($group_info['group_description']),
         'GROUP_SIGNATURE' => htmlCHR($group_info['group_signature']),
-        'U_GROUP_URL' => GROUP_URL . $group_id,
+        'U_GROUP_URL' => url()->group($group_id, $group_info['group_name']),
         'RELEASE_GROUP' => (bool) $group_info['release_group'],
         'GROUP_TYPE' => $group_type,
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
@@ -72,7 +77,7 @@ if ($is_moderator) {
         'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? ' checked' : '',
         'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? ' checked' : '',
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
-        'S_GROUP_CONFIG_ACTION' => FORUM_PATH . "group_edit?" . POST_GROUPS_URL . "=$group_id",
+        'S_GROUP_CONFIG_ACTION' => url()->groupEdit($group_id, $group_info['group_name']),
 
         'AVATAR_EXPLAIN' => sprintf(__('AVATAR_EXPLAIN'), config()->get('group_avatars.max_width'), config()->get('group_avatars.max_height'), humn_size(config()->get('group_avatars.max_size'))),
         'AVATAR_IMG' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),
@@ -90,7 +95,7 @@ if ($is_moderator) {
     $redirect = 'index.php';
 
     if ($group_id) {
-        $redirect = GROUP_URL . $group_id;
+        $redirect = url()->group($group_id, $group_info['group_name']);
     }
     redirect($redirect);
 }
