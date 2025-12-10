@@ -264,7 +264,7 @@ function build_poll_add_form (src_el)
 	<tr>
 		<!-- IF AUTH_MOD -->
 		<td class="small bold nowrap" style="padding: 0 0 0 4px;">
-			<!-- IF IN_MODERATION -->{L_MODERATE_TOPIC}<!-- ELSE --><a href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}" class="small bold">{L_MODERATE_TOPIC}</a><!-- ENDIF -->
+			<!-- IF IN_MODERATION -->{L_MODERATE_TOPIC}<!-- ELSE --><a href="{PAGE_URL}{PAGE_URL_SEP}mod=1&amp;start={PAGE_START}" class="small bold">{L_MODERATE_TOPIC}</a><!-- ENDIF -->
 			&nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
 			<a class="small bold" href="{PIN_HREF}">{PIN_TITLE}</a>
             &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
@@ -434,7 +434,7 @@ function build_poll_add_form (src_el)
 				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;{#POST_TOPIC_URL#}={TOPIC_ID}">[ {L_IP} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
 					<a class="menu-root menu-alt1 txtb" href="#mc_{postrow.POST_ID}">[ {L_COMMENT} ]</a>{POST_BTN_SPACER}
-					<!-- IF not IN_MODERATION --><a class="txtb" href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}#{postrow.POST_ID}">[ {L_MODERATE} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
+					<!-- IF not IN_MODERATION --><a class="txtb" href="{PAGE_URL}{PAGE_URL_SEP}mod=1&amp;start={PAGE_START}#{postrow.POST_ID}">[ {L_MODERATE} ]</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- ENDIF -->
 			</p>
 			<div class="clear"></div>

@@ -205,7 +205,7 @@ $forums = forum_tree();
 template()->assign_vars([
     'CAT_TITLE' => $forums['cat_title_html'][$t_data['cat_id']],
     'U_VIEWCAT' => CAT_URL . $t_data['cat_id'],
-    'PARENT_FORUM_HREF' => $parent_id ? FORUM_URL . $parent_id : '',
+    'PARENT_FORUM_HREF' => $parent_id ? url()->forum($parent_id, $forums['forum'][$parent_id]['forum_name'] ?? '') : '',
     'PARENT_FORUM_NAME' => $parent_id ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
 ]);
 
@@ -266,7 +266,8 @@ if (config()->get('topic_notify_enabled')) {
     } else {
         if (request()->query->has('unwatch')) {
             if (request()->query->get('unwatch') == 'topic') {
-                redirect(LOGIN_URL . "?redirect=" . TOPIC_URL . "$topic_id&unwatch=topic");
+                $unwatchUrl = url()->topic($topic_id, $topic_title, ['unwatch' => 'topic']);
+                redirect(LOGIN_URL . "?redirect=" . urlencode($unwatchUrl));
             }
         }
     }
@@ -369,9 +370,9 @@ $topic_title = censor()->censorString($topic_title);
 // Post, reply and other URL generation for templating vars
 $new_topic_url = POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id";
 $reply_topic_url = POSTING_URL . "?mode=reply&amp;" . POST_TOPIC_URL . "=$topic_id";
-$view_forum_url = FORUM_URL . $forum_id;
-$view_prev_topic_url = TOPIC_URL . $topic_id . "&amp;view=previous#newest";
-$view_next_topic_url = TOPIC_URL . $topic_id . "&amp;view=next#newest";
+$view_forum_url = url()->forum($forum_id, $t_data['forum_name']);
+$view_prev_topic_url = url()->topic($topic_id, $topic_title, ['view' => 'previous', '_fragment' => 'newest']);
+$view_next_topic_url = url()->topic($topic_id, $topic_title, ['view' => 'next', '_fragment' => 'newest']);
 
 $reply_alt = $locked ? __('TOPIC_LOCKED_SHORT') : __('REPLY_TO_TOPIC');
 
@@ -412,20 +413,36 @@ if ($is_auth['auth_mod']) {
 // Topic watch information
 $s_watching_topic = '';
 if ($can_watch_topic) {
+    $watchParams = ['start' => $start, 'sid' => userdata('session_id')];
     if ($is_watching_topic) {
-        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;unwatch=topic&amp;start=$start&amp;sid=" . userdata('session_id') . '">' . __('STOP_WATCHING_TOPIC') . '</a>';
+        $watchParams['unwatch'] = 'topic';
+        $s_watching_topic = '<a href="' . url()->topic($topic_id, $topic_title, $watchParams) . '">' . __('STOP_WATCHING_TOPIC') . '</a>';
     } else {
-        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;watch=topic&amp;start=$start&amp;sid=" . userdata('session_id') . '">' . __('START_WATCHING_TOPIC') . '</a>';
+        $watchParams['watch'] = 'topic';
+        $s_watching_topic = '<a href="' . url()->topic($topic_id, $topic_title, $watchParams) . '">' . __('START_WATCHING_TOPIC') . '</a>';
     }
 }
 
-// If we've got a highlight set pass it on to pagination,
-$pg_url = TOPIC_URL . $topic_id;
-$pg_url .= $post_days ? "&amp;postdays=$post_days" : '';
-$pg_url .= ($post_order != 'asc') ? "&amp;postorder=$post_order" : '';
-$pg_url .= request()->has('single') ? "&amp;single=1" : '';
-$pg_url .= $moderation ? "&amp;mod=1" : '';
-$pg_url .= ($posts_per_page != config()->get('posts_per_page')) ? "&amp;ppp=$posts_per_page" : '';
+// Build pagination URL with semantic URL base
+$topicBaseUrl = url()->topic($topic_id, $topic_title);
+$pg_params = [];
+if ($post_days) {
+    $pg_params['postdays'] = $post_days;
+}
+if ($post_order != 'asc') {
+    $pg_params['postorder'] = $post_order;
+}
+if (request()->has('single')) {
+    $pg_params['single'] = 1;
+}
+if ($moderation) {
+    $pg_params['mod'] = 1;
+}
+if ($posts_per_page != config()->get('posts_per_page')) {
+    $pg_params['ppp'] = $posts_per_page;
+}
+$pg_url = $topicBaseUrl . (!empty($pg_params) ? '?' . http_build_query($pg_params, '', '&amp;') : '');
+$pg_url_sep = !empty($pg_params) ? '&amp;' : '?';
 
 generate_pagination($pg_url, $total_replies, $posts_per_page, $start);
 
@@ -459,6 +476,7 @@ $page_title = ((int) ($start / $posts_per_page) === 0) ? $topic_title :
 //
 template()->assign_vars([
     'PAGE_URL' => $pg_url,
+    'PAGE_URL_SEP' => $pg_url_sep,
     'PAGE_URL_PPP' => url_arg($pg_url, 'ppp', null),
     'PAGE_START' => $start,
 
@@ -492,11 +510,11 @@ template()->assign_vars([
 
     'S_SELECT_POST_DAYS' => build_select('postdays', array_flip($sel_previous_days), $post_days),
     'S_SELECT_POST_ORDER' => build_select('postorder', $sel_post_order_ary, $post_order),
-    'S_POST_DAYS_ACTION' => TOPIC_URL . $topic_id . "&amp;start=$start",
+    'S_POST_DAYS_ACTION' => url()->topic($topic_id, $topic_title, $start ? ['start' => $start] : []),
     'S_AUTH_LIST' => $s_auth_can,
     'S_TOPIC_ADMIN' => $topic_mod,
     'S_WATCH_TOPIC' => $s_watching_topic,
-    'U_VIEW_TOPIC' => TOPIC_URL . $topic_id,
+    'U_VIEW_TOPIC' => $topicBaseUrl,
     'U_VIEW_FORUM' => $view_forum_url,
     'U_VIEW_OLDER_TOPIC' => $view_prev_topic_url,
     'U_VIEW_NEWER_TOPIC' => $view_next_topic_url,
@@ -515,7 +533,7 @@ template()->assign_vars([
 template()->assign_vars([
     'SHOW_TOR_ACT' => false,
     'PEERS_FULL_LINK' => false,
-    'DL_LIST_HREF' => TOPIC_URL . "$topic_id&amp;dl=names&amp;spmode=full",
+    'DL_LIST_HREF' => url()->topic($topic_id, $topic_title, ['dl' => 'names', 'spmode' => 'full']),
 ]);
 require INC_DIR . '/torrent_show_dl_list.php';
 

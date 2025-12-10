@@ -1338,9 +1338,11 @@ function build_topic_pagination($url, $replies, $per_page)
 
     if (++$replies > $per_page) {
         $total_pages = ceil($replies / $per_page);
+        // Use ? or & depending on whether URL already has query string
+        $separator = str_contains($url, '?') ? '&amp;' : '?';
 
         for ($j = 0, $page = 1; $j < $replies; $j += $per_page, $page++) {
-            $href = ($j) ? "$url&amp;start=$j" : $url;
+            $href = ($j) ? "{$url}{$separator}start=$j" : $url;
             $pg .= '<a href="' . $href . '" class="topicPG">' . $page . '</a>';
 
             if ($page == 1 && $total_pages > 3) {
@@ -1734,7 +1736,7 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
     $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
     if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && !$no_link) {
         $target_blank = $target_blank ? ' target="_blank" ' : '';
-        $profile = '<a ' . $target_blank . ' href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
+        $profile = '<a ' . $target_blank . ' href="' . make_url(url()->member($user_id, $username)) . '">' . $profile . '</a>';
     }
 
     if (getBanInfo($user_id)) {

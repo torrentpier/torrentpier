@@ -69,6 +69,31 @@ class UrlBuilder
     }
 
     /**
+     * Generate a topic URL with anchor to a specific post
+     *
+     * @param int $topicId Topic ID
+     * @param string $title Topic title (will be slugified)
+     * @param int $postId Post ID to anchor to
+     * @return string Full URL path with #post_id anchor
+     */
+    public static function topicPost(int $topicId, string $title, int $postId): string
+    {
+        return self::topic($topicId, $title, ['_fragment' => (string)$postId]);
+    }
+
+    /**
+     * Generate a topic URL for viewing newest posts
+     *
+     * @param int $topicId Topic ID
+     * @param string $title Topic title (will be slugified)
+     * @return string Full URL path with view=newest#newest
+     */
+    public static function topicNewest(int $topicId, string $title): string
+    {
+        return self::topic($topicId, $title, ['view' => 'newest', '_fragment' => 'newest']);
+    }
+
+    /**
      * Generate a forum URL
      *
      * @param int|null $id Forum ID
