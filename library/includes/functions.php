@@ -624,7 +624,7 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
     $from = !empty($row['user_from']) ? render_flag($row['user_from'], false) : __('NOSELECT');
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
     $user_time = !empty($row['user_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($row['user_time']), humanTime($row['user_time'])) : __('NOSELECT');
-    $posts = '<a href="search?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
+    $posts = '<a href="' . FORUM_PATH . 'search?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
     $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . __('SEND_PM_SHORT') . '</a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
@@ -1652,21 +1652,21 @@ function create_magnet(?string $infohash, ?string $infohash_v2, string $auth_key
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
 {
     $msg = '';
-    $msg .= $topic_id ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . __('TOPIC_RETURN') . '</a></p>' : '';
-    $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . __('FORUM_RETURN') . '</a></p>' : '';
-    $msg .= $group_id ? '<p class="mrg_10"><a href="' . GROUP_URL . $group_id . '">' . __('GROUP_RETURN') . '</a></p>' : '';
-    $msg .= '<p class="mrg_10"><a href="index.php">' . __('INDEX_RETURN') . '</a></p>';
+    $msg .= $topic_id ? '<p class="mrg_10"><a href="' . FORUM_PATH . TOPIC_URL . $topic_id . '">' . __('TOPIC_RETURN') . '</a></p>' : '';
+    $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_PATH . FORUM_URL . $forum_id . '">' . __('FORUM_RETURN') . '</a></p>' : '';
+    $msg .= $group_id ? '<p class="mrg_10"><a href="' . FORUM_PATH . GROUP_URL . $group_id . '">' . __('GROUP_RETURN') . '</a></p>' : '';
+    $msg .= '<p class="mrg_10"><a href="' . FORUM_PATH . '">' . __('INDEX_RETURN') . '</a></p>';
     template()->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
 
 function set_pr_die_append_msg($pr_uid)
 {
     template()->assign_var('BB_DIE_APPEND_MSG', '
-		<a href="' . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_RETURN') . '</a>
+		<a href="' . FORUM_PATH . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_RETURN') . '</a>
 		<br /><br />
-		<a href="profile?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_EDIT_RETURN') . '</a>
+		<a href="' . FORUM_PATH . 'profile?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_EDIT_RETURN') . '</a>
 		<br /><br />
-		<a href="index.php">' . __('INDEX_RETURN') . '</a>
+		<a href="' . FORUM_PATH . '">' . __('INDEX_RETURN') . '</a>
 	');
 }
 

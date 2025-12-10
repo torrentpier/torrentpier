@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -62,7 +63,7 @@ if ($row = DB()->fetch_row($sql)) {
             $emailer->assign_vars([
                 'FROM_USERNAME' => userdata('username'),
                 'TO_USERNAME' => $username,
-                'MESSAGE' => $message
+                'MESSAGE' => $message,
             ]);
 
             $emailer->send();
@@ -74,8 +75,8 @@ if ($row = DB()->fetch_row($sql)) {
     template()->assign_vars([
         'USERNAME' => profile_url($row),
         'S_HIDDEN_FIELDS' => '',
-        'S_POST_ACTION' => "profile?mode=email&amp;" . POST_USERS_URL . "=$user_id",
-        'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : ''
+        'S_POST_ACTION' => FORUM_PATH . "profile?mode=email&amp;" . POST_USERS_URL . "=$user_id",
+        'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
     ]);
 
     print_page('usercp_email.tpl');

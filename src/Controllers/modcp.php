@@ -293,7 +293,7 @@ switch ($mode) {
                 'TOPIC_TITLES' => implode("\n</li>\n<li>\n", $topic_titles),
 
                 'S_FORUM_SELECT' => $forum_select,
-                'S_MODCP_ACTION' => 'modcp',
+                'S_MODCP_ACTION' => FORUM_PATH . 'modcp',
                 'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
             ]);
 
@@ -541,8 +541,8 @@ switch ($mode) {
 
                 template()->assign_vars([
                     'FORUM_NAME' => htmlCHR($forum_name),
-                    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
-                    'S_SPLIT_ACTION' => 'modcp',
+                    'U_VIEW_FORUM' => FORUM_PATH . FORUM_URL . $forum_id,
+                    'S_SPLIT_ACTION' => FORUM_PATH . 'modcp',
                     'S_HIDDEN_FIELDS' => $s_hidden_fields,
                     'S_FORUM_SELECT' => get_forum_select('admin', 'new_forum_id', $forum_id),
                 ]);
@@ -681,7 +681,7 @@ switch ($mode) {
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'USERNAME' => profile_url($row),
                     'POSTS' => $row['postings'],
-                    'U_SEARCHPOSTS' => "search?search_author=1&amp;uid={$row['user_id']}",
+                    'U_SEARCHPOSTS' => FORUM_PATH . "search?search_author=1&amp;uid={$row['user_id']}",
                 ]);
 
                 $i++;

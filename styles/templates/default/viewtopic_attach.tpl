@@ -287,8 +287,8 @@ $('#tor-filelist-btn').click(function () {
 #tor-filelist i { color: #7A7A7A; padding-left: 4px; }
 #tor-filelist s { color: #0000FF; text-decoration: none; }
 #tor-filelist .b > s { color: #800000; }
-#tor-filelist .b { font-weight: bold; padding-left: 20px; background: transparent url('styles/images/folder.gif') no-repeat 3px 50%;}
-#tor-filelist ul li span { padding-left: 20px; background: transparent url('styles/images/page.gif') no-repeat 3px 50%;}
+#tor-filelist .b { font-weight: bold; padding-left: 20px; background: transparent url('{FORUM_PATH}styles/images/folder.gif') no-repeat 3px 50%;}
+#tor-filelist ul li span { padding-left: 20px; background: transparent url('{FORUM_PATH}styles/images/page.gif') no-repeat 3px 50%;}
 #tor-filelist .tor-root-dir { font-size: 13px; font-weight: bold; line-height: 12px; padding-left: 4px; }
 #tor-fl-treecontrol { padding: 2px 0 4px; }
 #tor-fl-treecontrol a { padding: 0 8px; font-size: 11px; text-decoration: none; }

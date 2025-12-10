@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -89,7 +90,7 @@ if ($show_dl_list) {
                     'DL_OPTION_NAME' => __(strtoupper($desc)),
                     'DL_OPTION_USERS' => $dl_cat[$i],
                     'DL_COUNT' => $dl_count[$i],
-                    'DL_USERS_DIV_STYLE' => $dl_users_div_style
+                    'DL_USERS_DIV_STYLE' => $dl_users_div_style,
                 ]);
             } elseif ($dl_count[$i] && $count_mode) {
                 if ($i == DL_STATUS_CANCEL && !$show_canceled_in_count_mode) {
@@ -97,7 +98,7 @@ if ($show_dl_list) {
                 }
                 template()->assign_block_vars('dl_counts.count_row', [
                     'DL_OPTION_NAME' => __(strtoupper($desc)),
-                    'DL_OPTION_USERS' => $dl_count[$i]
+                    'DL_OPTION_USERS' => $dl_count[$i],
                 ]);
             }
         }
@@ -112,7 +113,7 @@ if ($show_dl_buttons) {
         'DL_BUT_WILL' => config()->get('bt_show_dl_but_will'),
         'DL_BUT_DOWN' => config()->get('bt_show_dl_but_down'),
         'DL_BUT_COMPL' => config()->get('bt_show_dl_but_compl'),
-        'DL_BUT_CANCEL' => config()->get('bt_show_dl_but_cancel')
+        'DL_BUT_CANCEL' => config()->get('bt_show_dl_but_cancel'),
     ]);
 
     $dl_hidden_fields = '
@@ -124,7 +125,7 @@ if ($show_dl_buttons) {
 
     template()->assign_vars([
         'DL_HIDDEN_FIELDS' => $dl_hidden_fields,
-        'S_DL_ACTION' => 'dl_list?' . POST_TOPIC_URL . "=$topic_id"
+        'S_DL_ACTION' => FORUM_PATH . 'dl_list?' . POST_TOPIC_URL . "=$topic_id",
     ]);
 }
 

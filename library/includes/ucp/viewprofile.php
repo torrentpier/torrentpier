@@ -28,6 +28,11 @@ if (!$profiledata = get_userdata($user_id, profile_view: true)) {
     bb_die(__('NO_USER_ID_SPECIFIED'));
 }
 
+// Assert canonical URL for SEO-friendly routing
+if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'profile') {
+    \TorrentPier\Router\UrlBuilder::assertCanonical('profile', $user_id, $profiledata['username']);
+}
+
 $profiledata['user_birthday'] = $profiledata['user_birthday']->format('Y-m-d');
 
 if (!$ranks = datastore()->get('ranks')) {
@@ -50,7 +55,7 @@ if (IS_ADMIN) {
 }
 
 if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == userdata('user_id') || IS_ADMIN) {
-    $email_uri = (config()->get('board_email_form')) ? 'profile?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
+    $email_uri = (config()->get('board_email_form')) ? FORUM_PATH . 'profile?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
     $email = '<a class="editable" href="' . $email_uri . '">' . $profiledata['user_email'] . '</a>';
 } else {
     $email = '';
@@ -114,11 +119,11 @@ template()->assign_vars([
     'AGE' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? birthday_age($profiledata['user_birthday']) : '',
 
     'L_VIEWING_PROFILE' => sprintf(__('VIEWING_USER_PROFILE'), $profiledata['username']),
-    'L_MY_PROFILE' => sprintf(__('VIEWING_MY_PROFILE'), 'profile?mode=editprofile'),
+    'L_MY_PROFILE' => sprintf(__('VIEWING_MY_PROFILE'), FORUM_PATH . 'profile?mode=editprofile'),
 
-    'U_SEARCH_USER' => "search?search_author=1&amp;uid={$profiledata['user_id']}",
-    'U_SEARCH_TOPICS' => "search?uid={$profiledata['user_id']}&amp;myt=1",
-    'U_SEARCH_RELEASES' => "tracker?rid={$profiledata['user_id']}#results",
+    'U_SEARCH_USER' => FORUM_PATH . "search?search_author=1&amp;uid={$profiledata['user_id']}",
+    'U_SEARCH_TOPICS' => FORUM_PATH . "search?uid={$profiledata['user_id']}&amp;myt=1",
+    'U_SEARCH_RELEASES' => FORUM_PATH . "tracker?rid={$profiledata['user_id']}#results",
 
     'AVATAR_IMG' => get_avatar($profiledata['user_id'], $profiledata['avatar_ext_id'], !bf($profiledata['user_opt'], 'user_opt', 'dis_avatar')),
 
@@ -196,8 +201,8 @@ if (IS_ADMIN) {
     template()->assign_vars([
         'EDITABLE_TPLS' => true,
         'AJAX_USER_OPT' => $ajax_user_opt,
-        'U_MANAGE' => "profile?mode=editprofile&amp;" . POST_USERS_URL . "={$profiledata['user_id']}",
-        'U_PERMISSIONS' => "admin/admin_ug_auth.php?mode=user&amp;" . POST_USERS_URL . "={$profiledata['user_id']}",
+        'U_MANAGE' => FORUM_PATH . "profile?mode=editprofile&amp;" . POST_USERS_URL . "={$profiledata['user_id']}",
+        'U_PERMISSIONS' => FORUM_PATH . "admin/admin_ug_auth.php?mode=user&amp;" . POST_USERS_URL . "={$profiledata['user_id']}",
     ]);
 }
 

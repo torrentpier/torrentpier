@@ -868,7 +868,7 @@ template()->assign_vars([
     'SHOW_CURSOR' => user()->opt_js['hl_tr'],
     'HIDE_CONTENTS' => user()->opt_js['h_tsp'],
 
-    'U_SEARCH_USER' => "search?mode=searchuser&input_name=$poster_name_key",
+    'U_SEARCH_USER' => FORUM_PATH . "search?mode=searchuser&input_name=$poster_name_key",
 ]);
 
 // Hidden fields
