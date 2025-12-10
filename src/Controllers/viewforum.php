@@ -45,6 +45,11 @@ if (!empty($forum_data['forum_desc'])) {
     page_cfg('meta_description', $forum_data['forum_desc']);
 }
 
+// Assert canonical URL for SEO-friendly routing
+if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'forum') {
+    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('forum', $forum_id, $forum_data['forum_name']);
+}
+
 // Make jumpbox
 make_jumpbox();
 
@@ -395,7 +400,7 @@ template()->assign_vars([
     'S_AUTH_LIST' => $u_auth,
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
     'U_MARK_READ' => FORUM_URL . $forum_id . "&amp;mark=topics",
-    'U_SEARCH_SELF' => "search.php?uid=" . userdata('user_id') . "&" . POST_FORUM_URL . "=$forum_id",
+    'U_SEARCH_SELF' => FORUM_PATH . "search?uid=" . userdata('user_id') . "&" . POST_FORUM_URL . "=$forum_id",
 ]);
 
 // Okay, lets dump out the page ...

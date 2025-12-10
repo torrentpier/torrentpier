@@ -166,6 +166,11 @@ $topic_id = $t_data['topic_id'];
 $topic_time = $t_data['topic_time'];
 $locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
 
+// Assert canonical URL for SEO-friendly routing
+if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'topic') {
+    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('topic', $topic_id, $topic_title);
+}
+
 $moderation = (request()->has('mod') && $is_auth['auth_mod']);
 
 // Redirect to login page if not admin session
@@ -487,7 +492,7 @@ template()->assign_vars([
     'U_VIEW_NEWER_TOPIC' => $view_next_topic_url,
     'U_POST_NEW_TOPIC' => $new_topic_url,
     'U_POST_REPLY_TOPIC' => $reply_topic_url,
-    'U_SEARCH_SELF' => "search?uid=" . userdata('user_id') . "&" . POST_TOPIC_URL . "=$topic_id&dm=1",
+    'U_SEARCH_SELF' => FORUM_PATH . "search?uid=" . userdata('user_id') . "&" . POST_TOPIC_URL . "=$topic_id&dm=1",
 
     'TOPIC_HAS_POLL' => $topic_has_poll,
     'POLL_IS_EDITABLE' => !$poll_time_expired,
@@ -674,7 +679,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_JOINED' => config()->get('show_poster_joined') ? $poster_longevity : '',
 
         'POSTER_JOINED_DATE' => $poster_joined,
-        'POSTER_POSTS' => (config()->get('show_poster_posts') && $poster_posts) ? '<a href="search?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
+        'POSTER_POSTS' => (config()->get('show_poster_posts') && $poster_posts) ? '<a href="' . FORUM_PATH . 'search?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
         'POSTER_FROM' => config()->get('show_poster_from') ? render_flag($poster_from, false) : '',
         'POSTER_BOT' => $poster_bot,
         'POSTER_GUEST' => $poster_guest,
@@ -712,7 +717,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'RG_NAME' => $rg_name,
         'RG_DESC' => $rg_desc,
         'RG_URL' => GROUP_URL . $rg_id,
-        'RG_FIND_URL' => 'tracker?srg=' . $rg_id,
+        'RG_FIND_URL' => FORUM_PATH . 'tracker?srg=' . $rg_id,
         'RG_SIG' => $rg_signature,
         'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig'],
     ]);
@@ -747,7 +752,7 @@ if (defined('SPLIT_FORM_START')) {
     template()->assign_vars([
         'SPLIT_FORM' => true,
         'START' => $start,
-        'S_SPLIT_ACTION' => 'modcp',
+        'S_SPLIT_ACTION' => FORUM_PATH . 'modcp',
         'POST_FORUM_URL' => POST_FORUM_URL,
         'POST_TOPIC_URL' => POST_TOPIC_URL,
     ]);
@@ -778,7 +783,7 @@ foreach ($is_auth as $name => $is) {
 template()->assign_vars(['PG_ROW_CLASS' => $pg_row_class ?? 'row1']);
 
 if (IS_ADMIN) {
-    template()->assign_vars(['U_LOGS' => "admin/admin_log.php?" . POST_TOPIC_URL . "=$topic_id&amp;db=" . config()->get('log_days_keep')]);
+    template()->assign_vars(['U_LOGS' => FORUM_PATH . "admin/admin_log.php?" . POST_TOPIC_URL . "=$topic_id&amp;db=" . config()->get('log_days_keep')]);
 }
 
 print_page('viewtopic.tpl');

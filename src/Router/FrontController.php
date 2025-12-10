@@ -109,8 +109,11 @@ class FrontController
         }
         $path = '/' . implode('/', $normalized);
 
-        if ($path !== '/' && str_ends_with($path, '/')) {
-            $path = rtrim($path, '/');
+        // Preserve trailing slash for SEO-friendly routes
+        // The router will handle trailing slash redirects when needed
+        $originalPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+        if (str_ends_with($originalPath, '/') && $path !== '/') {
+            $path .= '/';
         }
 
         return $path;

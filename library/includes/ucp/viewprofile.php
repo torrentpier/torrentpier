@@ -30,7 +30,7 @@ if (!$profiledata = get_userdata($user_id, profile_view: true)) {
 
 // Assert canonical URL for SEO-friendly routing
 if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'profile') {
-    \TorrentPier\Router\UrlBuilder::assertCanonical('profile', $user_id, $profiledata['username']);
+    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('profile', $user_id, $profiledata['username']);
 }
 
 $profiledata['user_birthday'] = $profiledata['user_birthday']->format('Y-m-d');
