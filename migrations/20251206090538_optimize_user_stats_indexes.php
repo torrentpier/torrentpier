@@ -9,10 +9,15 @@ use Phinx\Migration\AbstractMigration;
  *
  * This migration fixes performance issues with build_stats.php queries:
  * 1. Adds index on user_gender for gender count queries
- * 2. Adds functional index on birthday month-day for efficient birthday lookups
+ * 2. Adds STORED generated column + index for efficient birthday lookups (MMDD format)
  *
- * Uses functional indexes (MySQL 8.0+ / MariaDB 10.5+) instead of generated columns
- * for better cross-database compatibility.
+ * Why STORED instead of VIRTUAL or functional index:
+ * - Functional indexes ((expr)) are MySQL 8.0+ only, MariaDB doesn't support them
+ * - VIRTUAL columns can be indexed in MySQL 5.7+, but MariaDB requires PERSISTENT/STORED
+ * - STORED works everywhere: MySQL 5.7+, MySQL 8.0+, MariaDB 10.2.1+
+ *
+ * @see https://www.percona.com/blog/virtual-columns-in-mysql-and-mariadb/
+ * @see https://mariadb.com/kb/en/generated-columns/
  */
 final class OptimizeUserStatsIndexes extends AbstractMigration
 {
@@ -24,19 +29,20 @@ final class OptimizeUserStatsIndexes extends AbstractMigration
         $table->addIndex(['user_gender'], ['name' => 'idx_user_gender']);
         $table->update();
 
-        // Functional index for birthday queries (month-day as integer MMDD)
-        // Works in MySQL 8.0+ and MariaDB 10.5+
+        // STORED generated column for birthday MMDD + index
+        // STORED keyword works as alias for PERSISTENT in MariaDB 10.2.1+
         $this->execute("
             ALTER TABLE bb_users
-            ADD INDEX idx_user_birthday_md ((
-                MONTH(user_birthday) * 100 + DAYOFMONTH(user_birthday)
-            ))
+            ADD COLUMN birthday_md SMALLINT UNSIGNED
+                GENERATED ALWAYS AS (MONTH(user_birthday) * 100 + DAYOFMONTH(user_birthday)) STORED,
+            ADD INDEX idx_user_birthday_md (birthday_md)
         ");
     }
 
     public function down(): void
     {
         $this->execute('ALTER TABLE bb_users DROP INDEX idx_user_birthday_md');
+        $this->execute('ALTER TABLE bb_users DROP COLUMN birthday_md');
 
         $table = $this->table('bb_users');
         $table->removeIndexByName('idx_user_gender');

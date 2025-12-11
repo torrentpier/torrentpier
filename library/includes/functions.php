@@ -1133,19 +1133,23 @@ function bb_die($msg_text, $status_code = null)
         ajax()->ajax_die($msg_text);
     }
 
-    // Check
+    // Check for recursive calls - fall back to simple output
     if (defined('HAS_DIED')) {
-        throw new \RuntimeException(__FUNCTION__ . ' was called multiple times');
+        bb_simple_die($msg_text, $status_code ?? 500);
     }
     define('HAS_DIED', 1);
     define('DISABLE_CACHING_OUTPUT', true);
 
-    // Ensure language is initialized
-    lang()->initializeLanguage();
+    // Try to initialize session/language, but don't fail if DB is broken
+    try {
+        lang()->initializeLanguage();
 
-    // If empty session
-    if (empty(userdata())) {
-        user()->session_start();
+        if (empty(userdata())) {
+            user()->session_start();
+        }
+    } catch (\Throwable $e) {
+        // DB or other critical failure - fall back to simple output
+        bb_simple_die($msg_text, $status_code ?? 500);
     }
 
     // If the header hasn't been output then do it
