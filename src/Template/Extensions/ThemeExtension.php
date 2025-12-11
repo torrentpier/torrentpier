@@ -103,7 +103,6 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
             'EDIT_POST_URL' => POSTING_URL . '?mode=editpost&amp;' . POST_POST_URL . '=',
             'DELETE_POST_URL' => POSTING_URL . '?mode=delete&amp;' . POST_POST_URL . '=',
             'IP_POST_URL' => FORUM_PATH . 'modcp?mode=ip&amp;' . POST_POST_URL . '=',
-            'EMAIL_URL' => PROFILE_URL,  // Usage: EMAIL_URL ~ user_id ~ '/email/'
         ];
     }
 

@@ -48,7 +48,7 @@ trait CanonicalUrls
         if ($requestedSlug !== $expectedSlug) {
             $canonicalUrl = self::buildCanonicalUrl($type, $id, $title);
             $targetUrl = make_url($canonicalUrl);
-            $requestUri = $_SERVER['REQUEST_URI'] ?? '';
+            $requestUri = \request()->server->get('REQUEST_URI', '');
             RedirectLogger::slugMismatch($requestUri, $targetUrl, "CanonicalUrls::{$type}");
             throw RedirectException::permanent($targetUrl);
         }
@@ -83,7 +83,7 @@ trait CanonicalUrls
      */
     private static function parseSlugFromRequest(string $type): string
     {
-        $requestUri = $_SERVER['REQUEST_URI'] ?? '';
+        $requestUri = \request()->server->get('REQUEST_URI', '');
 
         // Remove query string
         $path = parse_url($requestUri, PHP_URL_PATH) ?? '';
@@ -115,7 +115,7 @@ trait CanonicalUrls
     {
         // Get current query parameters (excluding slug-related ones)
         $params = [];
-        $queryString = $_SERVER['QUERY_STRING'] ?? '';
+        $queryString = \request()->server->get('QUERY_STRING', '');
         if ($queryString !== '') {
             parse_str($queryString, $params);
         }

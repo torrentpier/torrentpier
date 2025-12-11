@@ -26,7 +26,7 @@ if (request()->query->has(POST_USERS_URL) || request()->post->has(POST_USERS_URL
 }
 
 if (IS_GUEST) {
-    redirect(LOGIN_URL . "?redirect=members/$user_id/email/");
+    redirect(LOGIN_URL . '?redirect=' . url()->memberEmail($user_id));
 }
 
 $errors = [];
@@ -75,7 +75,7 @@ if ($row = DB()->fetch_row($sql)) {
     template()->assign_vars([
         'USERNAME' => profile_url($row),
         'S_HIDDEN_FIELDS' => '',
-        'S_POST_ACTION' => PROFILE_URL . "$user_id/email/",
+        'S_POST_ACTION' => url()->memberEmail($user_id, $username),
         'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
     ]);
 

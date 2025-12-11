@@ -624,12 +624,12 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
     $from = !empty($row['user_from']) ? render_flag($row['user_from'], false) : __('NOSELECT');
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
     $user_time = !empty($row['user_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($row['user_time']), humanTime($row['user_time'])) : __('NOSELECT');
-    $posts = '<a href="' . FORUM_PATH . 'search?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
+    $posts = '<a href="' . FORUM_PATH . 'search?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . ($row['user_posts'] ?: 0) . '</a>';
     $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . __('SEND_PM_SHORT') . '</a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $have_auth || ($row['user_id'] == userdata('user_id'))) {
-        $email_uri = (config()->get('board_email_form')) ? (url()->member($row['user_id'], $row['username']) . 'email/') : 'mailto:' . $row['user_email'];
+        $email_uri = (config()->get('board_email_form')) ? url()->memberEmail($row['user_id'], $row['username']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
         $email = __('HIDDEN_USER');
@@ -1207,7 +1207,7 @@ function redirect($url)
 
     $server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('server_name')));
     $port = (int) config()->get('server_port');
-    $server_port = in_array($port, [80, 443], true) ? '' : ':' . $port;
+    $server_port = ($port > 0 && !in_array($port, [80, 443], true)) ? ':' . $port : '';
     $script_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('script_path')));
 
     if ($script_name) {

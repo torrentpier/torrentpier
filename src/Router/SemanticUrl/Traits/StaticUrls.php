@@ -78,7 +78,7 @@ trait StaticUrls
      */
     public static function activate(int $userId, string $key): string
     {
-        return '/activate/' . $userId . '/' . urlencode($key) . '/';
+        return '/activate/' . $userId . '/' . rawurlencode($key) . '/';
     }
 
     /**

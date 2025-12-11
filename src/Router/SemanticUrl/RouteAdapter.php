@@ -70,7 +70,7 @@ class RouteAdapter
                 // Try to redirect to canonical URL if the entity exists
                 $title = EntityConfig::fetchTitle($this->type, $id);
                 if ($title !== null) {
-                    return $this->redirectToCanonical($id, $title);
+                    return $this->redirectToCanonical($id, $title, $request);
                 }
                 // Entity doesn't exist - let controller show proper error
                 $parsed = ['slug' => '', 'id' => $id];
@@ -128,12 +128,12 @@ class RouteAdapter
      * Redirect to canonical URL with slug
      * e.g., /threads/5/ → /threads/some-title.5/
      */
-    private function redirectToCanonical(int $id, string $title): ResponseInterface
+    private function redirectToCanonical(int $id, string $title, ServerRequestInterface $request): ResponseInterface
     {
         $canonicalUrl = EntityConfig::buildUrl($this->type, $id, $title);
         $targetUrl = make_url($canonicalUrl);
 
-        $requestUri = $_SERVER['REQUEST_URI'] ?? "/{$this->type}/{$id}/";
+        $requestUri = (string) $request->getUri();
         RedirectLogger::canonical($requestUri, $targetUrl, "RouteAdapter::{$this->type}");
 
         return $this->permanentRedirect($targetUrl);

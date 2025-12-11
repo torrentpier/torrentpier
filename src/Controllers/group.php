@@ -463,9 +463,9 @@ if (!$group_id) {
                     'ROW_CLASS' => $row_class,
                     'RELEASER' => profile_url(['user_id' => $release['poster_id'], 'username' => $release['username'], 'user_rank' => $release['user_rank']]),
                     'AVATAR_IMG' => get_avatar($release['poster_id'], $release['avatar_ext_id'], !bf($release['user_opt'], 'user_opt', 'dis_avatar'), 50, 50),
-                    'RELEASE_NAME' => sprintf('<a href="%s">%s</a>', TOPIC_URL . $release['topic_id'], htmlCHR($release['topic_title'])),
+                    'RELEASE_NAME' => sprintf('<a href="%s">%s</a>', url()->topic($release['topic_id'], $release['topic_title']), htmlCHR($release['topic_title'])),
                     'RELEASE_TIME' => bb_date($release['topic_time']),
-                    'RELEASE_FORUM' => sprintf('<a href="%s">%s</a>', FORUM_URL . $release['forum_id'], htmlCHR($release['forum_name'])),
+                    'RELEASE_FORUM' => sprintf('<a href="%s">%s</a>', url()->forum($release['forum_id'], $release['forum_name']), htmlCHR($release['forum_name'])),
                 ]);
             }
 
