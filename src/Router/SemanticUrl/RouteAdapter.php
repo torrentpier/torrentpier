@@ -36,9 +36,7 @@ class RouteAdapter
     public function __construct(
         private readonly string $type,
         private readonly array  $options = []
-    )
-    {
-    }
+    ) {}
 
     /**
      * Get the action/mode for this route
@@ -67,8 +65,8 @@ class RouteAdapter
 
         // If no slug.id format, try bare ID
         if ($parsed === null) {
-            if (ctype_digit($params) && (int)$params > 0) {
-                $id = (int)$params;
+            if (ctype_digit($params) && (int) $params > 0) {
+                $id = (int) $params;
                 // Try to redirect to canonical URL if the entity exists
                 $title = EntityConfig::fetchTitle($this->type, $id);
                 if ($title !== null) {
@@ -86,7 +84,7 @@ class RouteAdapter
         $args['id'] = $parsed['id'];
 
         // Set the ID via Request singleton
-        request()->query->set($config['param'], (string)$parsed['id']);
+        request()->query->set($config['param'], (string) $parsed['id']);
 
         // Set any extra parameters (e.g., mode=viewprofile for profile)
         // An action option can override the default mode (e.g., action=email for /profile/slug.id/email/)

@@ -190,8 +190,8 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 
         if ($sf_data['forum_last_post_id']) {
             $lastTopicTitle = $sf_data['last_topic_title'] ?? '';
-            $lastTopicId = (int)$sf_data['last_topic_id'];
-            $lastPostId = (int)$sf_data['forum_last_post_id'];
+            $lastTopicId = (int) $sf_data['last_topic_id'];
+            $lastPostId = (int) $sf_data['forum_last_post_id'];
 
             template()->assign_block_vars('f.last', [
                 'FORUM_LAST_POST' => true,
@@ -441,7 +441,7 @@ foreach ($topic_rowset as $topic) {
     $topicTitle = $topic['topic_title'];
     $hrefTopicId = $moved ? $topic['topic_moved_id'] : $topic_id;
     $topicUrl = url()->topic($hrefTopicId, $topicTitle);
-    $lastPostId = (int)$topic['topic_last_post_id'];
+    $lastPostId = (int) $topic['topic_last_post_id'];
 
     template()->assign_block_vars('t', [
         'FORUM_ID' => $forum_id,
