@@ -234,6 +234,11 @@ define('PM_URL', FORUM_PATH . 'privmsg');
 define('POST_URL', FORUM_PATH . 'viewtopic?' . POST_POST_URL . '=');
 define('POSTING_URL', FORUM_PATH . 'posting');
 define('PROFILE_URL', FORUM_PATH . 'members/');
+define('SETTINGS_URL', FORUM_PATH . 'settings/');
+define('REGISTER_URL', FORUM_PATH . 'register/');
+define('PASSWORD_RECOVERY_URL', FORUM_PATH . 'password-recovery/');
+define('WATCHLIST_URL', FORUM_PATH . 'profile/watchlist/');
+define('ACTIVATE_URL', FORUM_PATH . 'activate/');  // Usage: ACTIVATE_URL . $key . '/'
 define('BONUS_URL', FORUM_PATH . 'profile/bonus/');
 define('TOPIC_URL', FORUM_PATH . 'threads/');
 define('FILELIST_URL', FORUM_PATH . 'dl/');  // Usage: FILELIST_URL . $id . '/files/'

@@ -585,7 +585,7 @@ function get_username($user_id)
     }
 
     $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = '" . DB()->escape($user_id) . "' LIMIT 1");
-    return $row['username'];
+    return $row ? $row['username'] : false;
 }
 
 function get_user_id($username)
@@ -629,7 +629,7 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $have_auth || ($row['user_id'] == userdata('user_id'))) {
-        $email_uri = (config()->get('board_email_form')) ? ("profile?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
+        $email_uri = (config()->get('board_email_form')) ? (PROFILE_URL . $row['user_id'] . '/email/') : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
         $email = __('HIDDEN_USER');
@@ -1670,7 +1670,7 @@ function set_pr_die_append_msg($pr_uid)
     template()->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="' . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_RETURN') . '</a>
 		<br /><br />
-		<a href="' . FORUM_PATH . 'profile?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_EDIT_RETURN') . '</a>
+		<a href="' . SETTINGS_URL . (IS_ADMIN ? "?" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_EDIT_RETURN') . '</a>
 		<br /><br />
 		<a href="' . FORUM_PATH . '">' . __('INDEX_RETURN') . '</a>
 	');

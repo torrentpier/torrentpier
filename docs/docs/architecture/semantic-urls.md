@@ -27,7 +27,7 @@ URLs follow the pattern: `/{type}/{slug}.{id}/`
 | `/register/`                  | Registration page  |
 | `/settings/`                  | Profile settings   |
 | `/password-recovery/`         | Password recovery  |
-| `/activate/{key}/`            | Account activation |
+| `/activate/{user_id}/{key}/`  | Account activation |
 
 ## Generating URLs
 
@@ -63,7 +63,7 @@ url()->passwordRecovery();  // /password-recovery/
 url()->profileBonus();  // /profile/bonus/
 url()->profileWatchlist();  // /profile/watchlist/
 url()->profileEmail($id, $username);  // /profile/username.123/email/
-url()->activate($key);  // /activate/abc123/
+url()->activate($userId, $key);  // /activate/123/abc123/
 ```
 
 ### Twig templates

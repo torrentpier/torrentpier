@@ -619,7 +619,7 @@ if ($submit && !$errors) {
                 'WELCOME_MSG' => sprintf(__('WELCOME_SUBJECT'), config()->get('sitename')),
                 'USERNAME' => html_entity_decode($username),
                 'PASSWORD' => $new_pass,
-                'U_ACTIVATE' => make_url('profile?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
+                'U_ACTIVATE' => make_url(ACTIVATE_URL . $new_user_id . '/' . $db_data['user_actkey'] . '/')
             ]);
 
             $emailer->send();
@@ -648,7 +648,7 @@ if ($submit && !$errors) {
                 $emailer->set_template('user_activate', $pr_data['user_lang']);
                 $emailer->assign_vars([
                     'USERNAME' => html_entity_decode($username),
-                    'U_ACTIVATE' => make_url("profile?mode=activate&" . POST_USERS_URL . "={$pr_data['user_id']}&act_key=$user_actkey"),
+                    'U_ACTIVATE' => make_url(ACTIVATE_URL . $pr_data['user_id'] . '/' . $user_actkey . '/'),
                 ]);
 
                 $emailer->send();

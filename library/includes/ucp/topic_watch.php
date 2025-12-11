@@ -44,7 +44,7 @@ if (request()->post->has('topic_id_list')) {
 
 template()->assign_vars([
     'PAGE_TITLE' => __('WATCHED_TOPICS'),
-    'S_FORM_ACTION' => BB_ROOT . 'profile?mode=watch'
+    'S_FORM_ACTION' => WATCHLIST_URL
 ]);
 
 $sql = "SELECT COUNT(topic_id) as watch_count FROM " . BB_TOPICS_WATCH . " WHERE user_id = $user_id";
@@ -105,9 +105,9 @@ if ($watch_count > 0) {
 
         template()->assign_vars([
             'MATCHES' => (count($watch) == 1) ? sprintf(__('FOUND_SEARCH_MATCH'), count($watch)) : sprintf(__('FOUND_SEARCH_MATCHES'), count($watch)),
-            'PAGINATION' => generate_pagination(BB_ROOT . 'profile?mode=watch', $watch_count, $per_page, $start),
+            'PAGINATION' => generate_pagination(WATCHLIST_URL, $watch_count, $per_page, $start),
             'PAGE_NUMBER' => sprintf(__('PAGE_OF'), (floor($start / $per_page) + 1), ceil($watch_count / $per_page)),
-            'U_PER_PAGE' => BB_ROOT . 'profile?mode=watch',
+            'U_PER_PAGE' => WATCHLIST_URL,
             'PER_PAGE' => $per_page
         ]);
     }

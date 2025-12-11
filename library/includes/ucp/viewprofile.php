@@ -55,7 +55,7 @@ if (IS_ADMIN) {
 }
 
 if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == userdata('user_id') || IS_ADMIN) {
-    $email_uri = (config()->get('board_email_form')) ? FORUM_PATH . 'profile?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
+    $email_uri = (config()->get('board_email_form')) ? PROFILE_URL . $profiledata['user_id'] . '/email/' : 'mailto:' . $profiledata['user_email'];
     $email = '<a class="editable" href="' . $email_uri . '">' . $profiledata['user_email'] . '</a>';
 } else {
     $email = '';
@@ -120,7 +120,7 @@ template()->assign_vars([
     'AGE' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? birthday_age($profiledata['user_birthday']) : '',
 
     'L_VIEWING_PROFILE' => sprintf(__('VIEWING_USER_PROFILE'), $profiledata['username']),
-    'L_MY_PROFILE' => sprintf(__('VIEWING_MY_PROFILE'), FORUM_PATH . 'profile?mode=editprofile'),
+    'L_MY_PROFILE' => sprintf(__('VIEWING_MY_PROFILE'), SETTINGS_URL),
 
     'U_SEARCH_USER' => FORUM_PATH . "search?search_author=1&amp;uid={$profiledata['user_id']}",
     'U_SEARCH_TOPICS' => FORUM_PATH . "search?uid={$profiledata['user_id']}&amp;myt=1",
@@ -202,7 +202,7 @@ if (IS_ADMIN) {
     template()->assign_vars([
         'EDITABLE_TPLS' => true,
         'AJAX_USER_OPT' => $ajax_user_opt,
-        'U_MANAGE' => FORUM_PATH . "profile?mode=editprofile&amp;" . POST_USERS_URL . "={$profiledata['user_id']}",
+        'U_MANAGE' => SETTINGS_URL . "?" . POST_USERS_URL . "={$profiledata['user_id']}",
         'U_PERMISSIONS' => FORUM_PATH . "admin/admin_ug_auth.php?mode=user&amp;" . POST_USERS_URL . "={$profiledata['user_id']}",
     ]);
 }

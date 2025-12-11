@@ -165,13 +165,13 @@ template()->assign_vars([
     'U_LOGIN_LOGOUT' => FORUM_PATH . ltrim($u_login_logout, './'),
     'U_MEMBERLIST' => url()->members(),
     'U_MODCP' => FORUM_PATH . 'modcp',
-    'U_OPTIONS' => FORUM_PATH . 'profile?mode=editprofile',
+    'U_OPTIONS' => SETTINGS_URL,
     'U_PRIVATEMSGS' => PM_URL . "?folder=inbox",
     'U_PROFILE' => PROFILE_URL . userdata('user_id'),
     'U_READ_PM' => PM_URL . "?folder=inbox" . ((userdata('user_newest_pm_id') && userdata('user_new_privmsg') == 1) ? "&mode=read&" . POST_POST_URL . "=" . userdata('user_newest_pm_id') : ''),
-    'U_REGISTER' => FORUM_PATH . 'profile?mode=register',
+    'U_REGISTER' => REGISTER_URL,
     'U_SEARCH' => FORUM_PATH . 'search',
-    'U_SEND_PASSWORD' => FORUM_PATH . "profile?mode=sendpassword",
+    'U_SEND_PASSWORD' => PASSWORD_RECOVERY_URL,
     'U_TERMS' => FORUM_PATH . ltrim(config()->get('terms_and_conditions_url'), './'),
     'U_TRACKER' => FORUM_PATH . 'tracker',
 
@@ -215,7 +215,7 @@ template()->assign_vars([
     'SELECTED' => HTML_SELECTED,
 
     'U_SEARCH_SELF_BY_LAST' => FORUM_PATH . "search?uid=" . userdata('user_id') . "&amp;o=5",
-    'U_WATCHED_TOPICS' => FORUM_PATH . 'profile?mode=watch',
+    'U_WATCHED_TOPICS' => WATCHLIST_URL,
 ]);
 
 if (defined('BB_SCRIPT') && !empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty(userdata('torhelp'))) {

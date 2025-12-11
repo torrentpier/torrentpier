@@ -74,11 +74,11 @@ trait StaticUrls
     }
 
     /**
-     * Generate an activation URL (/activate/{key}/)
+     * Generate an activation URL (/activate/{user_id}/{key}/)
      */
-    public static function activate(string $key): string
+    public static function activate(int $userId, string $key): string
     {
-        return '/activate/' . urlencode($key) . '/';
+        return '/activate/' . $userId . '/' . urlencode($key) . '/';
     }
 
     /**
@@ -93,7 +93,6 @@ trait StaticUrls
         return match ($type) {
             'threads' => 'viewtopic?t=' . $id,
             'forums' => 'viewforum?f=' . $id,
-            'members' => 'profile?mode=viewprofile&u=' . $id,
             default => '/',
         };
     }

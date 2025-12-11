@@ -75,8 +75,8 @@ return function (Router $router): void {
     $router->get('/settings', new TrailingSlashRedirect());
     $router->any('/password-recovery/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', options: ['mode' => 'sendpassword']));
     $router->get('/password-recovery', new TrailingSlashRedirect());
-    $router->any('/activate/{key}/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', options: ['mode' => 'activate']));
-    $router->get('/activate/{key}', new TrailingSlashRedirect());
+    $router->any('/activate/{u}/{key}/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', options: ['mode' => 'activate']));
+    $router->get('/activate/{u}/{key}', new TrailingSlashRedirect());
 
     // ==============================================================
     // Migrated controllers (in src/Controllers/)
@@ -133,12 +133,5 @@ return function (Router $router): void {
     $router->any('/viewforum', new LegacyRedirect(
         'forums',
         $basePath . '/src/Controllers/viewforum.php'
-    ));
-
-    // profile?mode=viewprofile&u=123 -> /members/slug.123/
-    // Note: Only redirects for mode=viewprofile, other modes use fallback controller
-    $router->any('/profile', new LegacyRedirect(
-        'members',
-        $basePath . '/src/Controllers/profile.php'
     ));
 };
