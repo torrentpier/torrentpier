@@ -40,6 +40,10 @@ class Slug
      */
     public static function generate(string $title, int $maxLength = 50): string
     {
+        // Decode HTML entities (e.g., &amp; → &, &quot; → ")
+        // This handles cases where HTML-escaped strings are passed
+        $title = html_entity_decode($title, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
         $title = trim($title);
 
         if ($title === '') {

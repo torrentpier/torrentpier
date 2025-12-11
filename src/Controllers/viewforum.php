@@ -471,8 +471,8 @@ foreach ($topic_rowset as $topic) {
         'POLL' => (bool) $topic['topic_vote'],
         'DL_CLASS' => isset($topic['dl_status']) ? dl_link_css($topic['dl_status']) : '',
 
-        'TOPIC_AUTHOR' => profile_url(['username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
-        'LAST_POSTER' => profile_url(['username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
+        'TOPIC_AUTHOR' => profile_url(['username' => $topic['first_username'], 'display_username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
+        'LAST_POSTER' => profile_url(['username' => $topic['last_username'], 'display_username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
         'LAST_POST_TIME' => bb_date($topic['topic_last_post_time'], config()->get('last_post_date_format')),
         'LAST_POST_ID' => $lastPostId,
     ]);

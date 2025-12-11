@@ -1718,6 +1718,8 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
     }
 
     $username = !empty($data['username']) ? $data['username'] : __('GUEST');
+    // Use display_username for display, username for URL (allows truncated display with correct URL)
+    $display_username = !empty($data['display_username']) ? $data['display_username'] : $username;
     $user_id = !empty($data['user_id']) ? (int)$data['user_id'] : GUEST_UID;
     $user_rank = !empty($data['user_rank']) ? $data['user_rank'] : 0;
 
@@ -1733,12 +1735,12 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
     if (empty($title)) {
         $title = match ($user_id) {
             GUEST_UID => __('GUEST'),
-            BOT_UID => $username,
+            BOT_UID => $display_username,
             default => __('USER'),
         };
     }
 
-    $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
+    $profile = '<span title="' . $title . '" class="' . $style . '">' . $display_username . '</span>';
     if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && !$no_link) {
         $target_blank = $target_blank ? ' target="_blank" ' : '';
         $profile = '<a ' . $target_blank . ' href="' . make_url(url()->member($user_id, $username)) . '">' . $profile . '</a>';
