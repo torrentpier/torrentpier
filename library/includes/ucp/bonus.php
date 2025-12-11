@@ -33,7 +33,7 @@ if (request()->post->has('bonus_id')) {
     if (userdata('user_points') < $points) {
         meta_refresh(FORUM_PATH, 10);
 
-        $message = __('BONUS_NOT_SUCCES') . '<br /><br /><a href="' . BONUS_URL . '">' . __('BONUS_RETURN') . '</a><br /><br /><a href="' . PROFILE_URL . userdata('user_id') . '">' . __('RETURN_PROFILE') . '</a><br /><br />' . sprintf(__('CLICK_RETURN_INDEX'), '<a href="' . FORUM_PATH . '">', '</a>');
+        $message = __('BONUS_NOT_SUCCES') . '<br /><br /><a href="' . BONUS_URL . '">' . __('BONUS_RETURN') . '</a><br /><br /><a href="' . url()->member(userdata('user_id'), userdata('username')) . '">' . __('RETURN_PROFILE') . '</a><br /><br />' . sprintf(__('CLICK_RETURN_INDEX'), '<a href="' . FORUM_PATH . '">', '</a>');
 
         bb_die($message);
     }
@@ -51,12 +51,12 @@ if (request()->post->has('bonus_id')) {
     meta_refresh(BONUS_URL, 10);
 
     $message = sprintf(__('BONUS_SUCCES'), humn_size($upload_row[$id] * 1024 * 1024 * 1024));
-    $message .= '<br /><br /><a href="' . BONUS_URL . '">' . __('BONUS_RETURN') . '</a><br /><br /><a href="' . PROFILE_URL . userdata('user_id') . '">' . __('RETURN_PROFILE') . '</a><br /><br />' . sprintf(__('CLICK_RETURN_INDEX'), '<a href="' . FORUM_PATH . '">', '</a>');
+    $message .= '<br /><br /><a href="' . BONUS_URL . '">' . __('BONUS_RETURN') . '</a><br /><br /><a href="' . url()->member(userdata('user_id'), userdata('username')) . '">' . __('RETURN_PROFILE') . '</a><br /><br />' . sprintf(__('CLICK_RETURN_INDEX'), '<a href="' . FORUM_PATH . '">', '</a>');
 
     bb_die($message);
 } else {
     template()->assign_vars([
-        'U_USER_PROFILE' => PROFILE_URL . $user_id,
+        'U_USER_PROFILE' => url()->member(userdata('user_id'), userdata('username')),
         'S_MODE_ACTION' => BONUS_URL,
         'PAGE_TITLE' => __('EXCHANGE_BONUS'),
         'MY_BONUS' => sprintf(__('MY_BONUS'), $user_points),

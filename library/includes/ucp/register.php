@@ -54,7 +54,7 @@ switch ($mode) {
             // IP limit
             if (config()->get('unique_ip')) {
                 if ($users = DB()->fetch_row("SELECT user_id, username FROM " . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
-                    bb_die(sprintf(__('ALREADY_REG_IP'), '<a href="' . PROFILE_URL . $users['user_id'] . '"><b>' . $users['username'] . '</b></a>', config()->get('tech_admin_email')));
+                    bb_die(sprintf(__('ALREADY_REG_IP'), '<a href="' . url()->member($users['user_id'], $users['username']) . '"><b>' . $users['username'] . '</b></a>', config()->get('tech_admin_email')));
                 }
             }
             // Disabling registration

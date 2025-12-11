@@ -55,7 +55,7 @@ if (IS_ADMIN) {
 }
 
 if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == userdata('user_id') || IS_ADMIN) {
-    $email_uri = (config()->get('board_email_form')) ? PROFILE_URL . $profiledata['user_id'] . '/email/' : 'mailto:' . $profiledata['user_email'];
+    $email_uri = (config()->get('board_email_form')) ? url()->member($profiledata['user_id'], $profiledata['username']) . 'email/' : 'mailto:' . $profiledata['user_email'];
     $email = '<a class="editable" href="' . $email_uri . '">' . $profiledata['user_email'] . '</a>';
 } else {
     $email = '';

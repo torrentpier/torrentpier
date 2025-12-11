@@ -358,7 +358,7 @@ if ($mode == 'read') {
 
     $post_date = bb_date($privmsg['privmsgs_date']);
 
-    $temp_url = PROFILE_URL . $user_id_from . '/';
+    $temp_url = url()->member($user_id_from, $username_from);
     $profile = '<a href="' . $temp_url . '">' . __('READ_PROFILE') . '</a>';
 
     $temp_url = FORUM_PATH . "search?search_author=1&amp;uid=$user_id_from";

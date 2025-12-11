@@ -159,7 +159,7 @@ template()->assign_vars([
     'AUTOLOGIN_DISABLED' => !config()->get('allow_autologin'),
     'S_LOGIN_ACTION' => LOGIN_URL,
 
-    'U_CUR_DOWNLOADS' => PROFILE_URL . userdata('user_id'),
+    'U_CUR_DOWNLOADS' => url()->member(userdata('user_id'), userdata('username')),
     'U_FORUM' => FORUM_PATH . 'viewforum',
     'U_GROUPS' => url()->groups(),
     'U_LOGIN_LOGOUT' => FORUM_PATH . ltrim($u_login_logout, './'),
@@ -167,7 +167,7 @@ template()->assign_vars([
     'U_MODCP' => FORUM_PATH . 'modcp',
     'U_OPTIONS' => SETTINGS_URL,
     'U_PRIVATEMSGS' => PM_URL . "?folder=inbox",
-    'U_PROFILE' => PROFILE_URL . userdata('user_id'),
+    'U_PROFILE' => url()->member(userdata('user_id'), userdata('username')),
     'U_READ_PM' => PM_URL . "?folder=inbox" . ((userdata('user_newest_pm_id') && userdata('user_new_privmsg') == 1) ? "&mode=read&" . POST_POST_URL . "=" . userdata('user_newest_pm_id') : ''),
     'U_REGISTER' => REGISTER_URL,
     'U_SEARCH' => FORUM_PATH . 'search',

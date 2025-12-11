@@ -629,7 +629,7 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $have_auth || ($row['user_id'] == userdata('user_id'))) {
-        $email_uri = (config()->get('board_email_form')) ? (PROFILE_URL . $row['user_id'] . '/email/') : 'mailto:' . $row['user_email'];
+        $email_uri = (config()->get('board_email_form')) ? (url()->member($row['user_id'], $row['username']) . 'email/') : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
         $email = __('HIDDEN_USER');
@@ -1665,10 +1665,11 @@ function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null
     template()->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
 
-function set_pr_die_append_msg($pr_uid)
+function set_pr_die_append_msg($pr_uid, $pr_username = null)
 {
+    $pr_username ??= get_username($pr_uid);
     template()->assign_var('BB_DIE_APPEND_MSG', '
-		<a href="' . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_RETURN') . '</a>
+		<a href="' . url()->member($pr_uid, $pr_username) . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_RETURN') . '</a>
 		<br /><br />
 		<a href="' . SETTINGS_URL . (IS_ADMIN ? "?" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_EDIT_RETURN') . '</a>
 		<br /><br />

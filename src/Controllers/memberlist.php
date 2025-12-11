@@ -113,7 +113,7 @@ if ($result = DB()->fetch_rowset($sql)) {
             'PM' => $user_info['pm'],
             'EMAIL' => $user_info['email'],
             'WWW' => $user_info['www'],
-            'U_VIEWPROFILE' => PROFILE_URL . $user_id,
+            'U_VIEWPROFILE' => url()->member($user_id, $row['username']),
         ]);
     }
 } else {

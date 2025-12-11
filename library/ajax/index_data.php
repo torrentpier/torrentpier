@@ -65,7 +65,8 @@ switch ($mode) {
 
         if (isset($mod['mod_users'][$forum_id])) {
             foreach ($mod['mod_users'][$forum_id] as $user_id) {
-                $moderators[] = '<a href="' . PROFILE_URL . $user_id . '">' . $mod['name_users'][$user_id] . '</a>';
+                $username = $mod['name_users'][$user_id];
+                $moderators[] = '<a href="' . url()->member($user_id, $username) . '">' . $username . '</a>';
             }
         }
 

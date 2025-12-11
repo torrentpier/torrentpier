@@ -207,7 +207,8 @@ if ($mod === false) {
 if (!empty($mod)) {
     foreach ($mod['mod_users'] as $forum_id => $user_ids) {
         foreach ($user_ids as $user_id) {
-            $moderators[$forum_id][] = '<a href="' . PROFILE_URL . $user_id . '">' . $mod['name_users'][$user_id] . '</a>';
+            $username = $mod['name_users'][$user_id];
+            $moderators[$forum_id][] = '<a href="' . url()->member($user_id, $username) . '">' . $username . '</a>';
         }
     }
     foreach ($mod['mod_groups'] as $forum_id => $group_ids) {

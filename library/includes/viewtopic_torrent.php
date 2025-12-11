@@ -372,7 +372,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                 }
 
                 foreach ($peers as $pid => $peer) {
-                    $u_prof_href = ($s_mode == 'count') ? '#' : PROFILE_URL . $peer['user_id'] . "#torrent";
+                    $u_prof_href = ($s_mode == 'count') ? '#' : url()->member($peer['user_id'], $peer['username'] ?? '') . "#torrent";
 
                     // Full details mode
                     if ($s_mode == 'full') {
