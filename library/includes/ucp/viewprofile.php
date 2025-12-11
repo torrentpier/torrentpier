@@ -29,7 +29,7 @@ if (!$profiledata = get_userdata($user_id, profile_view: true)) {
 }
 
 // Assert canonical URL for SEO-friendly routing
-if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'members') {
+if (request()->attributes->get('semantic_route') && request()->attributes->get('semantic_route_type') === 'members') {
     \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('members', $user_id, $profiledata['username']);
 }
 

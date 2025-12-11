@@ -46,7 +46,7 @@ if (!empty($forum_data['forum_desc'])) {
 }
 
 // Assert canonical URL for SEO-friendly routing
-if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'forums') {
+if (request()->attributes->get('semantic_route') && request()->attributes->get('semantic_route_type') === 'forums') {
     \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('forums', $forum_id, $forum_data['forum_name']);
 }
 

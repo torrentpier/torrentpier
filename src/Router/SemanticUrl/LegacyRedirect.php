@@ -12,11 +12,11 @@ declare(strict_types=1);
 
 namespace TorrentPier\Router\SemanticUrl;
 
-use Laminas\Diactoros\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
 use TorrentPier\Router\LegacyAdapter;
+use TorrentPier\Router\ResponseTrait;
 
 /**
  * Redirect handler for legacy URLs
@@ -28,44 +28,7 @@ use TorrentPier\Router\LegacyAdapter;
  */
 class LegacyRedirect
 {
-    private const array TYPE_CONFIG = [
-        'threads' => [
-            'param' => 't',
-            'table' => 'bb_topics',
-            'id_col' => 'topic_id',
-            'title_col' => 'topic_title',
-        ],
-        'forums' => [
-            'param' => 'f',
-            'table' => 'bb_forums',
-            'id_col' => 'forum_id',
-            'title_col' => 'forum_name',
-        ],
-        'members' => [
-            'param' => 'u',
-            'table' => 'bb_users',
-            'id_col' => 'user_id',
-            'title_col' => 'username',
-        ],
-        'groups' => [
-            'param' => 'g',
-            'table' => 'bb_groups',
-            'id_col' => 'group_id',
-            'title_col' => 'group_name',
-        ],
-        'groups_edit' => [
-            'param' => 'g',
-            'table' => 'bb_groups',
-            'id_col' => 'group_id',
-            'title_col' => 'group_name',
-        ],
-        'categories' => [
-            'param' => 'c',
-            'table' => 'bb_categories',
-            'id_col' => 'cat_id',
-            'title_col' => 'cat_title',
-        ],
-    ];
+    use ResponseTrait;
 
     /**
      * Member mode redirects mapping
@@ -87,7 +50,7 @@ class LegacyRedirect
     ];
 
     /**
-     * @param string $type Entity type (topic, forum, profile)
+     * @param string $type Entity type (threads, forums, members, groups, groups_edit, categories)
      * @param string|null $fallbackController Path to fallback controller (for non-redirectable requests)
      * @param array $options Options for the fallback adapter
      */
@@ -103,7 +66,7 @@ class LegacyRedirect
      */
     public function __invoke(ServerRequestInterface $request, array $args = []): ResponseInterface
     {
-        $config = self::TYPE_CONFIG[$this->type] ?? null;
+        $config = EntityConfig::get($this->type);
         if ($config === null) {
             return $this->notFoundResponse('Invalid route type');
         }
@@ -111,7 +74,7 @@ class LegacyRedirect
         // Get query parameters from the PSR-7 request
         $queryParams = $request->getQueryParams();
 
-        // Handle members modes specially
+        // Handle member modes specially
         if ($this->type === 'members') {
             return $this->handleMemberRedirect($request, $args, $config, $queryParams);
         }
@@ -126,14 +89,14 @@ class LegacyRedirect
         // Only redirect GET requests (POST would lose form data)
         if ($request->getMethod() !== 'GET') {
             // For POST requests, add a Link header with canonical URL and process normally
-            return $this->processWithCanonicalHeader($request, $args, $id, $config);
+            return $this->processWithCanonicalHeader($request, $args, $id);
         }
 
         // Fetch the title from the database to generate the slug
-        $title = $this->fetchTitle($id, $config);
+        $title = EntityConfig::fetchTitle($this->type, $id) ?? '';
 
         // Build the semantic URL
-        $semanticUrl = $this->buildSemanticUrl($id, $title);
+        $semanticUrl = EntityConfig::buildUrl($this->type, $id, $title);
 
         // Preserve additional query parameters (except the ID param and mode for profile)
         $extraParams = $this->getExtraQueryParams($config, $queryParams);
@@ -141,8 +104,8 @@ class LegacyRedirect
             $semanticUrl .= '?' . http_build_query($extraParams, '', '&');
         }
 
-        // 301 Permanent Redirect
-        return $this->redirectResponse(make_url($semanticUrl));
+        // 301 Permanent redirect
+        return $this->permanentRedirect(make_url($semanticUrl));
     }
 
     /**
@@ -168,7 +131,7 @@ class LegacyRedirect
         if ($request->getMethod() !== 'GET') {
             $id = (int) ($queryParams[$config['param']] ?? 0);
             if ($id > 0) {
-                return $this->processWithCanonicalHeader($request, $args, $id, $config);
+                return $this->processWithCanonicalHeader($request, $args, $id);
             }
             return $this->fallbackToLegacy($request, $args);
         }
@@ -185,7 +148,7 @@ class LegacyRedirect
                 }
             }
 
-            return $this->redirectResponse(make_url($url));
+            return $this->permanentRedirect(make_url($url));
         }
 
         // Handle modes that require user ID
@@ -195,7 +158,7 @@ class LegacyRedirect
         }
 
         // Fetch username and build URL
-        $title = $this->fetchTitle($id, $config);
+        $title = EntityConfig::fetchTitle($this->type, $id) ?? '';
         $semanticUrl = UrlBuilder::member($id, $title);
 
         // Append an action path if needed (e.g., /email/)
@@ -209,33 +172,7 @@ class LegacyRedirect
             $semanticUrl .= '?' . http_build_query($extraParams, '', '&');
         }
 
-        return $this->redirectResponse(make_url($semanticUrl));
-    }
-
-    /**
-     * Fetch the title/name from the database
-     */
-    private function fetchTitle(int $id, array $config): string
-    {
-        $row = DB()->table($config['table'])->get($id);
-
-        return $row ? ($row->{$config['title_col']} ?? '') : '';
-    }
-
-    /**
-     * Build the semantic URL for this entity type
-     */
-    private function buildSemanticUrl(int $id, string $title): string
-    {
-        return match ($this->type) {
-            'threads' => UrlBuilder::topic($id, $title),
-            'forums' => UrlBuilder::forum($id, $title),
-            'members' => UrlBuilder::member($id, $title),
-            'groups' => UrlBuilder::group($id, $title),
-            'groups_edit' => UrlBuilder::groupEdit($id, $title),
-            'categories' => UrlBuilder::category($id, $title),
-            default => '/',
-        };
+        return $this->permanentRedirect(make_url($semanticUrl));
     }
 
     /**
@@ -276,31 +213,6 @@ class LegacyRedirect
     }
 
     /**
-     * Create a PSR-7 redirect response (301 Permanent)
-     */
-    private function redirectResponse(string $url): ResponseInterface
-    {
-        $response = new Response();
-        return $response
-            ->withStatus(301)
-            ->withHeader('Location', $url);
-    }
-
-    /**
-     * Create a PSR-7 not found response (404)
-     */
-    private function notFoundResponse(string $message): ResponseInterface
-    {
-        $response = new Response();
-        $body = $response->getBody();
-        $body->write($message);
-
-        return $response
-            ->withStatus(404)
-            ->withHeader('Content-Type', 'text/plain');
-    }
-
-    /**
      * Process request normally but add a Link header with canonical URL
      *
      * Used for POST requests that can't be redirected
@@ -309,12 +221,11 @@ class LegacyRedirect
     private function processWithCanonicalHeader(
         ServerRequestInterface $request,
         array                  $args,
-        int                    $id,
-        array                  $config
+        int                    $id
     ): ResponseInterface {
         // Fetch title and build canonical URL
-        $title = $this->fetchTitle($id, $config);
-        $canonicalUrl = make_url($this->buildSemanticUrl($id, $title));
+        $title = EntityConfig::fetchTitle($this->type, $id) ?? '';
+        $canonicalUrl = make_url(EntityConfig::buildUrl($this->type, $id, $title));
 
         // Process the request with the fallback controller
         $response = $this->fallbackToLegacy($request, $args);

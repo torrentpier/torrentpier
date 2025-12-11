@@ -28,12 +28,13 @@ use Symfony\Component\HttpFoundation\ServerBag;
  * Provides typed access to request parameters with fallback defaults.
  * Use instead of direct $_GET, $_POST, $_REQUEST, $_COOKIE, $_SERVER, $_FILES access.
  *
- * @property-read InputBag $query    GET parameters ($_GET equivalent)
- * @property-read InputBag $post     POST parameters ($_POST equivalent)
- * @property-read InputBag $cookies  Cookies ($_COOKIE equivalent)
- * @property-read ServerBag $server  Server parameters ($_SERVER equivalent)
- * @property-read FileBag $files     Uploaded files ($_FILES equivalent)
- * @property-read HeaderBag $headers HTTP headers
+ * @property-read InputBag $query       GET parameters ($_GET equivalent)
+ * @property-read InputBag $post        POST parameters ($_POST equivalent)
+ * @property-read InputBag $cookies     Cookies ($_COOKIE equivalent)
+ * @property-read ServerBag $server     Server parameters ($_SERVER equivalent)
+ * @property-read FileBag $files        Uploaded files ($_FILES equivalent)
+ * @property-read HeaderBag $headers    HTTP headers
+ * @property-read ParameterBag $attributes Custom request attributes (for routing data)
  */
 final class Request
 {
@@ -67,7 +68,7 @@ final class Request
     /**
      * Magic getter for direct access to Symfony Request bags
      *
-     * @param string $name Property name (query, post, cookies, server, files, headers)
+     * @param string $name Property name (query, post, cookies, server, files, headers, attributes)
      * @return InputBag|ServerBag|FileBag|HeaderBag|ParameterBag|null
      */
     public function __get(string $name): InputBag|ServerBag|FileBag|HeaderBag|ParameterBag|null
@@ -79,6 +80,7 @@ final class Request
             'server' => $this->request->server,
             'files' => $this->request->files,
             'headers' => $this->request->headers,
+            'attributes' => $this->request->attributes,
             default => null,
         };
     }

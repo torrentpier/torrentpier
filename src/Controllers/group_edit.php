@@ -29,7 +29,7 @@ if ($group_id) {
     $is_moderator = (userdata('user_id') == $group_info['group_moderator'] || IS_ADMIN);
 
     // Assert canonical URL for SEO-friendly routing
-    if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'groups_edit') {
+    if (request()->attributes->get('semantic_route') && request()->attributes->get('semantic_route_type') === 'groups_edit') {
         \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('groups_edit', $group_id, $group_info['group_name']);
     }
 }

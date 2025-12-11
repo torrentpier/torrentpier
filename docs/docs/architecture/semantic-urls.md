@@ -212,11 +212,11 @@ $router->any('/viewforum', new LegacyRedirect('forum', $fallbackController));
 
 1. Request arrives at `/topic/my-topic.123/`
 2. `RouteAdapter` extracts ID (123) and slug (my-topic)
-3. Sets `$_GET['t']` for legacy controller compatibility
-4. Defines `SEMANTIC_ROUTE` constant for canonical checking
+3. Sets query parameters for legacy controller compatibility
+4. Stores semantic route info in request attributes (`semantic_route`, `semantic_route_type`, `semantic_route_slug`)
 5. Delegates to legacy controller via `LegacyAdapter`
 6. Controller calls `UrlBuilder::assertCanonical()` after loading data
-7. If the slug doesn't match the current title, 301 redirect occurs
+7. If the slug doesn't match the current title, `RedirectException` is thrown and converted to 301 redirect
 
 ## Migration guide
 
@@ -237,14 +237,16 @@ Replace old URL patterns with the new helper:
 After loading entity data, add:
 
 ```php
-if (defined('SEMANTIC_ROUTE')) {
+if (request()->attributes->get('semantic_route')) {
     \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical(
-        SEMANTIC_ROUTE_TYPE,
+        request()->attributes->get('semantic_route_type'),
         $id,
         $title
     );
 }
 ```
+
+Note: `assertCanonical()` throws `RedirectException` if the slug doesn't match. This is caught by `LegacyAdapter` and converted to a 301 redirect response.
 
 ## SEO benefits
 

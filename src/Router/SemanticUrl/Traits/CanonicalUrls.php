@@ -12,9 +12,9 @@ declare(strict_types=1);
 
 namespace TorrentPier\Router\SemanticUrl\Traits;
 
-use JetBrains\PhpStorm\NoReturn;
 use TorrentPier\Helpers\Slug;
-use TorrentPier\Http\Response;
+use TorrentPier\Router\Exception\RedirectException;
+use TorrentPier\Router\SemanticUrl\EntityConfig;
 
 /**
  * Canonical URL handling: assertions, parsing, redirects
@@ -25,12 +25,13 @@ trait CanonicalUrls
      * Assert that the current URL matches the canonical URL
      *
      * If the URL slug doesn't match the expected slug from the title,
-     * performs a 301 redirect to the canonical URL.
+     * throws a RedirectException to the canonical URL.
      *
-     * @param string $type Entity type (topic, forum, profile)
+     * @param string $type Entity type (threads, forums, members, groups, groups_edit, categories)
      * @param int $id Entity ID
      * @param string $title Current title/name of the entity
      * @param string|null $requestedSlug The slug from the current URL (null to parse from REQUEST_URI)
+     * @throws RedirectException If the slug doesn't match and redirect is needed
      */
     public static function assertCanonical(string $type, int $id, string $title, ?string $requestedSlug = null): void
     {
@@ -42,10 +43,10 @@ trait CanonicalUrls
         // Generate the expected slug from the current title
         $expectedSlug = Slug::generate($title);
 
-        // If slugs don't match, redirect to canonical URL
+        // If slugs don't match, throw a redirect exception to canonical URL
         if ($requestedSlug !== $expectedSlug) {
             $canonicalUrl = self::buildCanonicalUrl($type, $id, $title);
-            self::redirectToCanonical($canonicalUrl);
+            throw RedirectException::permanent(make_url($canonicalUrl));
         }
     }
 
@@ -115,31 +116,7 @@ trait CanonicalUrls
             parse_str($queryString, $params);
         }
 
-        // Build the URL using the appropriate method
-        return match ($type) {
-            'threads' => self::topic($id, $title, $params),
-            'forums' => self::forum($id, $title, $params),
-            'members' => self::member($id, $title, $params),
-            'groups' => self::group($id, $title, $params),
-            'groups_edit' => self::groupEdit($id, $title, $params),
-            'categories' => self::category($id, $title, $params),
-            default => '/',
-        };
-    }
-
-    /**
-     * Perform a 301 redirect to the canonical URL
-     *
-     * @param string $url Target URL
-     */
-    #[NoReturn]
-    private static function redirectToCanonical(string $url): void
-    {
-        // Build full URL with base
-        $fullUrl = make_url($url);
-
-        // Send redirect 301 and exit
-        Response::permanentRedirect($fullUrl)->send();
-        exit;
+        // Build the URL using EntityConfig
+        return EntityConfig::buildUrl($type, $id, $title, $params);
     }
 }

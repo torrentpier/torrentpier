@@ -15,6 +15,8 @@ namespace TorrentPier\Router;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Throwable;
+use TorrentPier\Router\Exception\RedirectException;
 
 /**
  * Adapter for running legacy TorrentPier controllers through the router
@@ -36,12 +38,14 @@ class LegacyAdapter
         private readonly string $controllerPath,
         private ?string         $scriptName = null,
         private readonly array  $options = []
-    ) {
+    )
+    {
         $this->scriptName ??= pathinfo($controllerPath, PATHINFO_FILENAME);
     }
 
     /**
      * Handle the request by executing the legacy controller
+     * @throws Throwable
      */
     public function __invoke(ServerRequestInterface $request, array $args = []): ResponseInterface
     {
@@ -98,7 +102,14 @@ class LegacyAdapter
             while (ob_get_level() > $existingLevel) {
                 $content .= ob_get_clean();
             }
-        } catch (\Throwable $e) {
+        } catch (RedirectException $e) {
+            // Clean up output buffers
+            while (ob_get_level() > $existingLevel) {
+                ob_end_clean();
+            }
+            // Return the redirect response
+            return $e->toResponse();
+        } catch (Throwable $e) {
             // Clean up output buffers on error
             while (ob_get_level() > $existingLevel) {
                 ob_end_clean();

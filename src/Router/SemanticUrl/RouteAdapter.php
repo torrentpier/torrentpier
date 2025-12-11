@@ -12,11 +12,11 @@ declare(strict_types=1);
 
 namespace TorrentPier\Router\SemanticUrl;
 
-use Laminas\Diactoros\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
 use TorrentPier\Router\LegacyAdapter;
+use TorrentPier\Router\ResponseTrait;
 
 /**
  * Adapter for handling SEO-friendly semantic URLs
@@ -26,48 +26,18 @@ use TorrentPier\Router\LegacyAdapter;
  */
 class RouteAdapter
 {
-    private const array TYPE_MAP = [
-        'threads' => [
-            'controller' => 'viewtopic.php',
-            'script' => 'topic',
-            'param' => 't',  // POST_TOPIC_URL
-        ],
-        'forums' => [
-            'controller' => 'viewforum.php',
-            'script' => 'forum',
-            'param' => 'f',  // POST_FORUM_URL
-        ],
-        'members' => [
-            'controller' => 'profile.php',
-            'script' => 'profile',
-            'param' => 'u',  // POST_USERS_URL
-            'extra' => ['mode' => 'viewprofile'],
-        ],
-        'groups' => [
-            'controller' => 'group.php',
-            'script' => 'group',
-            'param' => 'g',  // POST_GROUPS_URL
-        ],
-        'groups_edit' => [
-            'controller' => 'group_edit.php',
-            'script' => 'group_edit',
-            'param' => 'g',  // POST_GROUPS_URL
-        ],
-        'categories' => [
-            'controller' => 'index.php',
-            'script' => 'index',
-            'param' => 'c',  // POST_CAT_URL
-        ],
-    ];
+    use ResponseTrait;
 
     /**
-     * @param string $type Entity type (topic, forum, profile)
+     * @param string $type Entity type (threads, forums, members, groups, groups_edit, categories)
      * @param array $options Additional options (action, LegacyAdapter options)
      */
     public function __construct(
         private readonly string $type,
         private readonly array  $options = []
-    ) {}
+    )
+    {
+    }
 
     /**
      * Get the action/mode for this route
@@ -83,7 +53,7 @@ class RouteAdapter
      */
     public function __invoke(ServerRequestInterface $request, array $args = []): ResponseInterface
     {
-        $config = self::TYPE_MAP[$this->type] ?? null;
+        $config = EntityConfig::get($this->type);
         if ($config === null) {
             return $this->notFoundResponse('Invalid route type');
         }
@@ -96,10 +66,10 @@ class RouteAdapter
 
         // If no slug.id format, try bare ID
         if ($parsed === null) {
-            if (ctype_digit($params) && (int) $params > 0) {
-                $id = (int) $params;
+            if (ctype_digit($params) && (int)$params > 0) {
+                $id = (int)$params;
                 // Try to redirect to canonical URL if the entity exists
-                $title = $this->fetchTitle($id, $config);
+                $title = EntityConfig::fetchTitle($this->type, $id);
                 if ($title !== null) {
                     return $this->redirectToCanonical($id, $title);
                 }
@@ -115,31 +85,27 @@ class RouteAdapter
         $args['id'] = $parsed['id'];
 
         // Set the ID via Request singleton
-        request()->query->set($config['param'], (string) $parsed['id']);
+        request()->query->set($config['param'], (string)$parsed['id']);
 
         // Set any extra parameters (e.g., mode=viewprofile for profile)
         // An action option can override the default mode (e.g., action=email for /profile/slug.id/email/)
         $action = $this->getAction();
-        if (isset($config['extra'])) {
-            foreach ($config['extra'] as $key => $value) {
-                // Override mode if action is specified
-                if ($key === 'mode' && $action !== null) {
-                    $value = $action;
-                }
-                request()->query->set($key, $value);
+        $extraParams = EntityConfig::getExtraParams($this->type);
+        foreach ($extraParams as $key => $value) {
+            // Override mode if action is specified
+            if ($key === 'mode' && $action !== null) {
+                $value = $action;
             }
+            request()->query->set($key, $value);
         }
 
-        // Define constant to signal a semantic route is active (for canonical checking)
-        if (!defined('SEMANTIC_ROUTE')) {
-            define('SEMANTIC_ROUTE', true);
-            define('SEMANTIC_ROUTE_TYPE', $this->type);
-            define('SEMANTIC_ROUTE_SLUG', $parsed['slug']);
-        }
+        // Store semantic route info in request attributes (replaces global constants)
+        request()->attributes->set('semantic_route', true);
+        request()->attributes->set('semantic_route_type', $this->type);
+        request()->attributes->set('semantic_route_slug', $parsed['slug']);
 
         // Build controller path
-        $basePath = dirname(__DIR__, 3);
-        $controllerPath = $basePath . '/src/Controllers/' . $config['controller'];
+        $controllerPath = EntityConfig::getControllerPath($this->type);
 
         // Create legacy adapter and delegate
         $adapter = new LegacyAdapter(
@@ -165,55 +131,8 @@ class RouteAdapter
      */
     private function redirectToCanonical(int $id, string $title): ResponseInterface
     {
-        $canonicalUrl = match ($this->type) {
-            'threads' => UrlBuilder::topic($id, $title),
-            'forums' => UrlBuilder::forum($id, $title),
-            'members' => UrlBuilder::member($id, $title),
-            'groups' => UrlBuilder::group($id, $title),
-            'groups_edit' => UrlBuilder::groupEdit($id, $title),
-            'categories' => UrlBuilder::category($id, $title),
-            default => '/',
-        };
+        $canonicalUrl = EntityConfig::buildUrl($this->type, $id, $title);
 
-        $response = new Response();
-        return $response
-            ->withStatus(301)
-            ->withHeader('Location', make_url($canonicalUrl));
-    }
-
-    /**
-     * Fetch the title/name from the database
-     * Returns null if the entity doesn't exist
-     */
-    private function fetchTitle(int $id, array $config): ?string
-    {
-        [$table, $titleCol] = match ($this->type) {
-            'threads' => ['bb_topics', 'topic_title'],
-            'forums' => ['bb_forums', 'forum_name'],
-            'members' => ['bb_users', 'username'],
-            'groups', 'groups_edit' => ['bb_groups', 'group_name'],
-            'categories' => ['bb_categories', 'cat_title'],
-            default => [null, null],
-        };
-
-        if ($table === null) {
-            return null;
-        }
-
-        $row = DB()->table($table)->get($id);
-
-        return $row ? ($row->$titleCol ?? '') : null;
-    }
-
-    /**
-     * Create a PSR-7 not found response
-     */
-    private function notFoundResponse(string $message): ResponseInterface
-    {
-        $response = new Response();
-        $response->getBody()->write($message);
-        return $response
-            ->withStatus(404)
-            ->withHeader('Content-Type', 'text/plain');
+        return $this->permanentRedirect(make_url($canonicalUrl));
     }
 }

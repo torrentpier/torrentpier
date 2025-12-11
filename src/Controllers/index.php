@@ -43,7 +43,7 @@ if (config()->get('show_network_news')) {
 user()->session_start();
 
 // Redirect legacy category URL (?c=1) to semantic URL (/category/kino.1/)
-if (!defined('SEMANTIC_ROUTE') && request()->getMethod() === 'GET') {
+if (!request()->attributes->get('semantic_route') && request()->getMethod() === 'GET') {
     $legacyCatId = request()->query->getInt(POST_CAT_URL);
     if ($legacyCatId > 0) {
         $forums = forum_tree();
@@ -99,12 +99,12 @@ if ($viewcat && !($viewcat = & $forums['c'][$viewcat]['cat_id'])) {
 }
 
 // Assert canonical URL for category (redirect if slug doesn't match)
-if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'categories' && $viewcat) {
+if (request()->attributes->get('semantic_route') && request()->attributes->get('semantic_route_type') === 'categories' && $viewcat) {
     \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical(
         'categories',
         $viewcat,
         $cat_data[$viewcat]['cat_title'],
-        SEMANTIC_ROUTE_SLUG
+        request()->attributes->get('semantic_route_slug')
     );
     // Set canonical URL for the category page
     template()->assign_vars([

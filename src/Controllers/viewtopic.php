@@ -167,7 +167,7 @@ $topic_time = $t_data['topic_time'];
 $locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
 
 // Assert canonical URL for SEO-friendly routing
-if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'threads') {
+if (request()->attributes->get('semantic_route') && request()->attributes->get('semantic_route_type') === 'threads') {
     \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('threads', $topic_id, $topic_title);
 }
 
@@ -224,7 +224,7 @@ if ($post_id && !empty($t_data['prev_posts'])) {
 }
 
 // Redirect legacy ?p= requests to semantic URL with anchor
-if ($post_id && !defined('SEMANTIC_ROUTE') && request()->isGet()) {
+if ($post_id && !request()->attributes->get('semantic_route') && request()->isGet()) {
     $params = $start > 0 ? ['start' => $start] : [];
     $params['_fragment'] = $post_id;
 
