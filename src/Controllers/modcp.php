@@ -541,7 +541,7 @@ switch ($mode) {
 
                 template()->assign_vars([
                     'FORUM_NAME' => htmlCHR($forum_name),
-                    'U_VIEW_FORUM' => FORUM_PATH . FORUM_URL . $forum_id,
+                    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
                     'S_SPLIT_ACTION' => FORUM_PATH . 'modcp',
                     'S_HIDDEN_FIELDS' => $s_hidden_fields,
                     'S_FORUM_SELECT' => get_forum_select('admin', 'new_forum_id', $forum_id),

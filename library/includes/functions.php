@@ -1655,8 +1655,8 @@ function create_magnet(?string $infohash, ?string $infohash_v2, string $auth_key
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
 {
     $msg = '';
-    $msg .= $topic_id ? '<p class="mrg_10"><a href="' . FORUM_PATH . TOPIC_URL . $topic_id . '">' . __('TOPIC_RETURN') . '</a></p>' : '';
-    $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_PATH . FORUM_URL . $forum_id . '">' . __('FORUM_RETURN') . '</a></p>' : '';
+    $msg .= $topic_id ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . __('TOPIC_RETURN') . '</a></p>' : '';
+    $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . __('FORUM_RETURN') . '</a></p>' : '';
     if ($group_id) {
         $groupName = DB()->table('bb_groups')->get($group_id)?->group_name ?? '';
         $msg .= '<p class="mrg_10"><a href="' . url()->group($group_id, $groupName) . '">' . __('GROUP_RETURN') . '</a></p>';
@@ -1668,7 +1668,7 @@ function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null
 function set_pr_die_append_msg($pr_uid)
 {
     template()->assign_var('BB_DIE_APPEND_MSG', '
-		<a href="' . FORUM_PATH . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_RETURN') . '</a>
+		<a href="' . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_RETURN') . '</a>
 		<br /><br />
 		<a href="' . FORUM_PATH . 'profile?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_EDIT_RETURN') . '</a>
 		<br /><br />

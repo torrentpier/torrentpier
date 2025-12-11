@@ -368,8 +368,8 @@ if (!$ranks = datastore()->get('ranks')) {
 $topic_title = censor()->censorString($topic_title);
 
 // Post, reply and other URL generation for templating vars
-$new_topic_url = FORUM_PATH . POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id";
-$reply_topic_url = FORUM_PATH . POSTING_URL . "?mode=reply&amp;" . POST_TOPIC_URL . "=$topic_id";
+$new_topic_url = POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id";
+$reply_topic_url = POSTING_URL . "?mode=reply&amp;" . POST_TOPIC_URL . "=$topic_id";
 $view_forum_url = url()->forum($forum_id, $t_data['forum_name']);
 $view_prev_topic_url = url()->topic($topic_id, $topic_title, ['view' => 'previous', '_fragment' => 'newest']);
 $view_next_topic_url = url()->topic($topic_id, $topic_title, ['view' => 'next', '_fragment' => 'newest']);
@@ -793,7 +793,7 @@ if (config()->get('show_quick_reply')) {
     if ($is_auth['auth_reply'] && !$locked) {
         template()->assign_vars([
             'QUICK_REPLY' => true,
-            'QR_POST_ACTION' => FORUM_PATH . POSTING_URL,
+            'QR_POST_ACTION' => POSTING_URL,
             'QR_TOPIC_ID' => $topic_id,
             'CAPTCHA_HTML' => (IS_GUEST && !config()->get('captcha.disabled')) ? bb_captcha('get') : '',
         ]);
