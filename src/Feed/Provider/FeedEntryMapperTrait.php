@@ -114,8 +114,8 @@ trait FeedEntryMapperTrait
             return DL_URL . $topic['topic_id'];
         }
 
-        // Default to topic view
-        return TOPIC_URL . $topic['topic_id'];
+        // Default to topic view with semantic URL
+        return make_url(url()->topic((int) $topic['topic_id'], $topic['topic_title']));
     }
 
     /**
@@ -130,7 +130,8 @@ trait FeedEntryMapperTrait
             return null;
         }
 
-        return $topic['post_html'] . "\n\nTopic: " . FULL_URL . TOPIC_URL . $topic['topic_id'];
+        $topicUrl = make_url(url()->topic((int) $topic['topic_id'], $topic['topic_title']));
+        return $topic['post_html'] . "\n\nTopic: " . $topicUrl;
     }
 
     /**
