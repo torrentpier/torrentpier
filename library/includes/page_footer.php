@@ -18,7 +18,7 @@ if (defined('PAGE_HEADER_SENT')) {
         'SIMPLE_FOOTER' => simple_header(),
         'POWERED' => 'Fueled by <a target="_blank" referrerpolicy="origin" href="https://github.com/torrentpier/torrentpier">TorrentPier</a> &copy; 2005-' . date('Y') . $birthday_tp,
         'SHOW_ADMIN_LINK' => (IS_ADMIN && !defined('IN_ADMIN')),
-        'ADMIN_LINK_HREF' => 'admin/index.php',
+        'ADMIN_LINK_HREF' => FORUM_PATH . 'admin/index.php',
     ]);
 
     template()->set_filenames(['page_footer' => 'page_footer.tpl']);
