@@ -16,6 +16,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
 use TorrentPier\Router\LegacyAdapter;
+use TorrentPier\Router\RedirectLogger;
 use TorrentPier\Router\ResponseTrait;
 
 /**
@@ -104,8 +105,10 @@ class LegacyRedirect
             $semanticUrl .= '?' . http_build_query($extraParams, '', '&');
         }
 
-        // 301 Permanent redirect
-        return $this->permanentRedirect(make_url($semanticUrl));
+        // Log and 301 Permanent redirect
+        $targetUrl = make_url($semanticUrl);
+        RedirectLogger::legacy($request->getUri()->getPath(), $targetUrl, "LegacyRedirect::{$this->type}");
+        return $this->permanentRedirect($targetUrl);
     }
 
     /**
@@ -148,7 +151,9 @@ class LegacyRedirect
                 }
             }
 
-            return $this->permanentRedirect(make_url($url));
+            $targetUrl = make_url($url);
+            RedirectLogger::legacy($request->getUri()->getPath(), $targetUrl, "LegacyRedirect::members::{$mode}");
+            return $this->permanentRedirect($targetUrl);
         }
 
         // Handle modes that require user ID
@@ -172,7 +177,9 @@ class LegacyRedirect
             $semanticUrl .= '?' . http_build_query($extraParams, '', '&');
         }
 
-        return $this->permanentRedirect(make_url($semanticUrl));
+        $targetUrl = make_url($semanticUrl);
+        RedirectLogger::legacy($request->getUri()->getPath(), $targetUrl, "LegacyRedirect::members::{$mode}");
+        return $this->permanentRedirect($targetUrl);
     }
 
     /**

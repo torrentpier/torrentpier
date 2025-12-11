@@ -14,6 +14,7 @@ namespace TorrentPier\Router\SemanticUrl\Traits;
 
 use TorrentPier\Helpers\Slug;
 use TorrentPier\Router\Exception\RedirectException;
+use TorrentPier\Router\RedirectLogger;
 use TorrentPier\Router\SemanticUrl\EntityConfig;
 
 /**
@@ -46,7 +47,10 @@ trait CanonicalUrls
         // If slugs don't match, throw a redirect exception to canonical URL
         if ($requestedSlug !== $expectedSlug) {
             $canonicalUrl = self::buildCanonicalUrl($type, $id, $title);
-            throw RedirectException::permanent(make_url($canonicalUrl));
+            $targetUrl = make_url($canonicalUrl);
+            $requestUri = $_SERVER['REQUEST_URI'] ?? '';
+            RedirectLogger::slugMismatch($requestUri, $targetUrl, "CanonicalUrls::{$type}");
+            throw RedirectException::permanent($targetUrl);
         }
     }
 

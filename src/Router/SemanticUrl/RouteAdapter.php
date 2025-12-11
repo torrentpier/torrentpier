@@ -16,6 +16,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
 use TorrentPier\Router\LegacyAdapter;
+use TorrentPier\Router\RedirectLogger;
 use TorrentPier\Router\ResponseTrait;
 
 /**
@@ -132,7 +133,11 @@ class RouteAdapter
     private function redirectToCanonical(int $id, string $title): ResponseInterface
     {
         $canonicalUrl = EntityConfig::buildUrl($this->type, $id, $title);
+        $targetUrl = make_url($canonicalUrl);
 
-        return $this->permanentRedirect(make_url($canonicalUrl));
+        $requestUri = $_SERVER['REQUEST_URI'] ?? "/{$this->type}/{$id}/";
+        RedirectLogger::canonical($requestUri, $targetUrl, "RouteAdapter::{$this->type}");
+
+        return $this->permanentRedirect($targetUrl);
     }
 }
