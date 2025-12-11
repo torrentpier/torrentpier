@@ -42,6 +42,21 @@ if (config()->get('show_network_news')) {
 // Init userdata
 user()->session_start();
 
+// Redirect legacy category URL (?c=1) to semantic URL (/category/kino.1/)
+if (!defined('SEMANTIC_ROUTE') && request()->getMethod() === 'GET') {
+    $legacyCatId = request()->query->getInt(POST_CAT_URL);
+    if ($legacyCatId > 0) {
+        $forums = forum_tree();
+        if (isset($forums['c'][$legacyCatId])) {
+            $catTitle = $forums['c'][$legacyCatId]['cat_title'];
+            \TorrentPier\Http\Response::permanentRedirect(
+                make_url(url()->category($legacyCatId, $catTitle))
+            )->send();
+            exit;
+        }
+    }
+}
+
 // Set meta description
 page_cfg('meta_description', config()->get('site_desc'));
 
@@ -71,6 +86,7 @@ if ($stats === false) {
 $forums = forum_tree();
 $cat_title_html = $forums['cat_title_html'];
 $forum_name_html = $forums['forum_name_html'];
+$cat_data = $forums['c']; // Save category data for URL generation
 
 $anon = GUEST_UID;
 $excluded_forums_csv = user()->get_excluded_forums(AUTH_VIEW);
@@ -80,6 +96,20 @@ $only_new = user()->opt_js['only_new'];
 // Validate requested category id
 if ($viewcat && !($viewcat = & $forums['c'][$viewcat]['cat_id'])) {
     redirect('/');
+}
+
+// Assert canonical URL for category (redirect if slug doesn't match)
+if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'category' && $viewcat) {
+    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical(
+        'category',
+        $viewcat,
+        $cat_data[$viewcat]['cat_title'],
+        SEMANTIC_ROUTE_SLUG
+    );
+    // Set canonical URL for the category page
+    template()->assign_vars([
+        'CANONICAL_URL' => make_url(url()->category($viewcat, $cat_data[$viewcat]['cat_title'])),
+    ]);
 }
 
 // Forums
@@ -209,7 +239,7 @@ foreach ($cat_forums as $cid => $c) {
     template()->assign_block_vars('c', [
         'CAT_ID' => $cid,
         'CAT_TITLE' => $cat_title_html[$cid],
-        'U_VIEWCAT' => CAT_URL . $cid,
+        'U_VIEWCAT' => url()->category($cid, $cat_data[$cid]['cat_title']),
     ]);
 
     foreach ($c['f'] as $fid => $f) {

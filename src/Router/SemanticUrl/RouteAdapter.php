@@ -53,6 +53,11 @@ class RouteAdapter
             'script' => 'group_edit',
             'param' => 'g',  // POST_GROUPS_URL
         ],
+        'category' => [
+            'controller' => 'index.php',
+            'script' => 'index',
+            'param' => 'c',  // POST_CAT_URL
+        ],
     ];
 
     /**
@@ -166,6 +171,7 @@ class RouteAdapter
             'members' => UrlBuilder::member($id, $title),
             'groups' => UrlBuilder::group($id, $title),
             'groups_edit' => UrlBuilder::groupEdit($id, $title),
+            'category' => UrlBuilder::category($id, $title),
             default => '/',
         };
 
@@ -186,6 +192,7 @@ class RouteAdapter
             'forum' => ['bb_forums', 'forum_name'],
             'members' => ['bb_users', 'username'],
             'groups', 'groups_edit' => ['bb_groups', 'group_name'],
+            'category' => ['bb_categories', 'cat_title'],
             default => [null, null],
         };
 

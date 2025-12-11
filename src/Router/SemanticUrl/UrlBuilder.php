@@ -35,6 +35,7 @@ use TorrentPier\Router\SemanticUrl\Traits\StaticUrls;
  * @method static string memberEmail(int $id, string $username = '')
  * @method static string group(?int $id, string $name = '', array $params = [])
  * @method static string groupEdit(int $id, string $name = '', array $params = [])
+ * @method static string category(?int $id, string $name = '', array $params = [])
  * @method static string members()
  * @method static string groups()
  * @method static string register()

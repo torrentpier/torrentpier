@@ -124,4 +124,20 @@ trait EntityUrls
         $url = rtrim(self::group($id, $name), '/') . '/edit/';
         return self::appendParams($url, $params);
     }
+
+    /**
+     * Generate a category URL
+     *
+     * @param int|null $id Category ID
+     * @param string $name Category name (will be slugified)
+     * @param array $params Additional query parameters
+     * @return string Full URL path
+     */
+    public static function category(?int $id, string $name = '', array $params = []): string
+    {
+        if ($id === null || $id <= 0) {
+            return '/';
+        }
+        return self::buildUrl('category', $id, $name, $params);
+    }
 }

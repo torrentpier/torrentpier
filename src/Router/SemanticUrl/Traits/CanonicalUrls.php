@@ -122,6 +122,7 @@ trait CanonicalUrls
             'members' => self::member($id, $title, $params),
             'groups' => self::group($id, $title, $params),
             'groups_edit' => self::groupEdit($id, $title, $params),
+            'category' => self::category($id, $title, $params),
             default => '/',
         };
     }

@@ -204,7 +204,7 @@ $forums = forum_tree();
 
 template()->assign_vars([
     'CAT_TITLE' => $forums['cat_title_html'][$t_data['cat_id']],
-    'U_VIEWCAT' => CAT_URL . $t_data['cat_id'],
+    'U_VIEWCAT' => url()->category($t_data['cat_id'], $forums['c'][$t_data['cat_id']]['cat_title']),
     'PARENT_FORUM_HREF' => $parent_id ? url()->forum($parent_id, $forums['forum'][$parent_id]['forum_name'] ?? '') : '',
     'PARENT_FORUM_NAME' => $parent_id ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
 ]);

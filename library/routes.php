@@ -49,6 +49,10 @@ return function (Router $router): void {
     $router->any('/groups/{params}/', new RouteAdapter('groups', options: ['manage_session' => true]));
     $router->get('/groups/{params}', new TrailingSlashRedirect());
 
+    // Categories: /category/slug.123/
+    $router->any('/category/{params}/', new RouteAdapter('category', options: ['manage_session' => true]));
+    $router->get('/category/{params}', new TrailingSlashRedirect());
+
     // Profile standalone pages (static routes MUST come before variable routes)
     $router->any('/profile/bonus/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', options: ['mode' => 'bonus']));
     $router->get('/profile/bonus', new TrailingSlashRedirect());

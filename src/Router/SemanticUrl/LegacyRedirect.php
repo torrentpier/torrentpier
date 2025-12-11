@@ -59,6 +59,12 @@ class LegacyRedirect
             'id_col' => 'group_id',
             'title_col' => 'group_name',
         ],
+        'category' => [
+            'param' => 'c',
+            'table' => 'bb_categories',
+            'id_col' => 'cat_id',
+            'title_col' => 'cat_title',
+        ],
     ];
 
     /**
@@ -227,6 +233,7 @@ class LegacyRedirect
             'members' => UrlBuilder::member($id, $title),
             'groups' => UrlBuilder::group($id, $title),
             'groups_edit' => UrlBuilder::groupEdit($id, $title),
+            'category' => UrlBuilder::category($id, $title),
             default => '/',
         };
     }
