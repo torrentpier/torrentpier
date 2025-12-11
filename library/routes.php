@@ -33,9 +33,9 @@ return function (Router $router): void {
     // Format: /type/slug.id/
     // ==============================================================
 
-    // Topics: /topic/slug.123/
-    $router->any('/topic/{params}/', new RouteAdapter('topic'));
-    $router->get('/topic/{params}', new TrailingSlashRedirect());
+    // Threads: /threads/slug.123/
+    $router->any('/threads/{params}/', new RouteAdapter('threads'));
+    $router->get('/threads/{params}', new TrailingSlashRedirect());
 
     // Forums: /forum/slug.123/
     $router->any('/forum/{params}/', new RouteAdapter('forum'));
@@ -109,9 +109,9 @@ return function (Router $router): void {
     // Legacy routes with redirects to SEO-friendly URLs
     // ==============================================================
 
-    // viewtopic?t=123 -> /topic/slug.123/
+    // viewtopic?t=123 -> /threads/slug.123/
     $router->any('/viewtopic', new LegacyRedirect(
-        'topic',
+        'threads',
         $basePath . '/src/Controllers/viewtopic.php'
     ));
 

@@ -91,7 +91,7 @@ trait StaticUrls
     public static function legacy(string $type, int $id): string
     {
         return match ($type) {
-            'topic' => 'viewtopic?t=' . $id,
+            'threads' => 'viewtopic?t=' . $id,
             'forum' => 'viewforum?f=' . $id,
             'members' => 'profile?mode=viewprofile&u=' . $id,
             default => '/',

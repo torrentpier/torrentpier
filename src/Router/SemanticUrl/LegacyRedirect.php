@@ -21,7 +21,7 @@ use TorrentPier\Router\LegacyAdapter;
 /**
  * Redirect handler for legacy URLs
  *
- * Redirects old-style URLs (e.g., /viewtopic?t=5) to new semantic URLs (/topic/slug.5/)
+ * Redirects old-style URLs (e.g., /viewtopic?t=5) to new semantic URLs (/threads/slug.5/)
  *
  * GET requests: 301 redirect to semantic URL
  * POST requests: Process normally (can't redirect POST without losing data)
@@ -29,7 +29,7 @@ use TorrentPier\Router\LegacyAdapter;
 class LegacyRedirect
 {
     private const array TYPE_CONFIG = [
-        'topic' => [
+        'threads' => [
             'param' => 't',
             'table' => 'bb_topics',
             'id_col' => 'topic_id',
@@ -228,7 +228,7 @@ class LegacyRedirect
     private function buildSemanticUrl(int $id, string $title): string
     {
         return match ($this->type) {
-            'topic' => UrlBuilder::topic($id, $title),
+            'threads' => UrlBuilder::topic($id, $title),
             'forum' => UrlBuilder::forum($id, $title),
             'members' => UrlBuilder::member($id, $title),
             'groups' => UrlBuilder::group($id, $title),

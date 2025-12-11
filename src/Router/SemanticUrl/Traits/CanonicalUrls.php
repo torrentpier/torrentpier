@@ -117,7 +117,7 @@ trait CanonicalUrls
 
         // Build the URL using the appropriate method
         return match ($type) {
-            'topic' => self::topic($id, $title, $params),
+            'threads' => self::topic($id, $title, $params),
             'forum' => self::forum($id, $title, $params),
             'members' => self::member($id, $title, $params),
             'groups' => self::group($id, $title, $params),

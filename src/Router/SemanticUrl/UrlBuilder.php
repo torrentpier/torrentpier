@@ -23,7 +23,7 @@ use TorrentPier\Router\SemanticUrl\Traits\StaticUrls;
  *
  * Generates URLs in the format: /type/slug.id/
  * Examples:
- *   - /topic/bugonia.5/
+ *   - /threads/bugonia.5/
  *   - /forum/hd-video.1/
  *   - /members/admin.2/
  *

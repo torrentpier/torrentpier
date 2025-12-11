@@ -27,7 +27,7 @@ use TorrentPier\Router\LegacyAdapter;
 class RouteAdapter
 {
     private const array TYPE_MAP = [
-        'topic' => [
+        'threads' => [
             'controller' => 'viewtopic.php',
             'script' => 'topic',
             'param' => 't',  // POST_TOPIC_URL
@@ -161,12 +161,12 @@ class RouteAdapter
 
     /**
      * Redirect to canonical URL with slug
-     * e.g., /topic/5/ → /topic/some-title.5/
+     * e.g., /threads/5/ → /threads/some-title.5/
      */
     private function redirectToCanonical(int $id, string $title): ResponseInterface
     {
         $canonicalUrl = match ($this->type) {
-            'topic' => UrlBuilder::topic($id, $title),
+            'threads' => UrlBuilder::topic($id, $title),
             'forum' => UrlBuilder::forum($id, $title),
             'members' => UrlBuilder::member($id, $title),
             'groups' => UrlBuilder::group($id, $title),
@@ -188,7 +188,7 @@ class RouteAdapter
     private function fetchTitle(int $id, array $config): ?string
     {
         [$table, $titleCol] = match ($this->type) {
-            'topic' => ['bb_topics', 'topic_title'],
+            'threads' => ['bb_topics', 'topic_title'],
             'forum' => ['bb_forums', 'forum_name'],
             'members' => ['bb_users', 'username'],
             'groups', 'groups_edit' => ['bb_groups', 'group_name'],

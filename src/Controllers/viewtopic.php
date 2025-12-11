@@ -167,8 +167,8 @@ $topic_time = $t_data['topic_time'];
 $locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
 
 // Assert canonical URL for SEO-friendly routing
-if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'topic') {
-    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('topic', $topic_id, $topic_title);
+if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'threads') {
+    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('threads', $topic_id, $topic_title);
 }
 
 $moderation = (request()->has('mod') && $is_auth['auth_mod']);

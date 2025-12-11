@@ -32,7 +32,7 @@ trait EntityUrls
         if ($id === null || $id <= 0) {
             return '#';
         }
-        return self::buildUrl('topic', $id, $title, $params);
+        return self::buildUrl('threads', $id, $title, $params);
     }
 
     /**
