@@ -358,10 +358,10 @@ if ($topics_csv = implode(',', $topic_ids)) {
 }
 
 if ($forum_data['allow_reg_tracker']) {
-    $post_new_topic_url = POSTING_URL . "?mode=new_rel&amp;" . POST_FORUM_URL . "=$forum_id";
+    $post_new_topic_url = FORUM_PATH . POSTING_URL . "?mode=new_rel&amp;" . POST_FORUM_URL . "=$forum_id";
     $post_new_topic = __('POST_NEW_RELEASE');
 } else {
-    $post_new_topic_url = POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id";
+    $post_new_topic_url = FORUM_PATH . POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id";
     $post_new_topic = __('POST_NEW_TOPIC');
 }
 
