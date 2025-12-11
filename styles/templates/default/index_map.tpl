@@ -29,8 +29,7 @@ function qs_highlight_found ()
 }
 function open_feed (f_id)
 {
-	$('#feed-id').val(f_id);
-	$('#feed-form').submit();
+	window.open('/feed/f/' + f_id + '/', '_blank');
 }
 $(function(){
 	$('#q-search').focus().quicksearch('#f-map li', {
@@ -50,10 +49,6 @@ $(function(){
 });
 </script>
 
-<form id="feed-form" method="get" action="feed" target="_blank" style="display: none;">
-	<input type="hidden" name="type" value="{#POST_FORUM_URL#}">
-	<input id="feed-id" type="hidden" name="id" value="">
-</form>
 
 <div class="f-map-wrap row1 pad_8">
 	<div style="margin: 20px 56px;">

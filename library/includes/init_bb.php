@@ -226,7 +226,7 @@ define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
 
 define('CAT_URL', FORUM_PATH . 'categories/');
-define('DL_URL', FORUM_PATH . 'dl?' . POST_TOPIC_URL . '=');
+define('DL_URL', FORUM_PATH . 'dl/');
 define('FORUM_URL', FORUM_PATH . 'forums/');
 define('LOGIN_URL', FORUM_PATH . 'login');
 define('MODCP_URL', FORUM_PATH . 'modcp?' . POST_FORUM_URL . '=');
@@ -236,8 +236,8 @@ define('POSTING_URL', FORUM_PATH . 'posting');
 define('PROFILE_URL', FORUM_PATH . 'members/');
 define('BONUS_URL', FORUM_PATH . 'profile/bonus/');
 define('TOPIC_URL', FORUM_PATH . 'threads/');
-define('FILELIST_URL', FORUM_PATH . 'filelist?' . POST_TOPIC_URL . '=');
-define('PLAYBACK_M3U_URL', FORUM_PATH . 'playback_m3u?' . POST_TOPIC_URL . '=');
+define('FILELIST_URL', FORUM_PATH . 'dl/');  // Usage: FILELIST_URL . $id . '/files/'
+define('PLAYBACK_M3U_URL', FORUM_PATH . 'playback/');
 
 define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 

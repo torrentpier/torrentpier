@@ -33,7 +33,7 @@ $show_dl_buttons = (!IS_GUEST && $dl_topic && config()->get('bt_show_dl_list_but
 // link to clear DL-List
 template()->assign_vars(['S_DL_DELETE' => false]);
 if (($is_auth['auth_mod']) && ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL)) {
-    $s_dl_delete = "<br /><a href=\"dl_list?mode=dl_delete&amp;" . POST_TOPIC_URL . "=$topic_id&amp;sid=" . userdata('session_id') . '">' . __('DL_LIST_DEL') . '</a>';
+    $s_dl_delete = "<br /><a href=\"" . DL_URL . $topic_id . "/list/?mode=dl_delete&amp;sid=" . userdata('session_id') . '">' . __('DL_LIST_DEL') . '</a>';
     template()->assign_vars(['S_DL_DELETE' => $s_dl_delete]);
 }
 
@@ -125,7 +125,7 @@ if ($show_dl_buttons) {
 
     template()->assign_vars([
         'DL_HIDDEN_FIELDS' => $dl_hidden_fields,
-        'S_DL_ACTION' => FORUM_PATH . 'dl_list?' . POST_TOPIC_URL . "=$topic_id",
+        'S_DL_ACTION' => DL_URL . $topic_id . '/list/',
     ]);
 }
 

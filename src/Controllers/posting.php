@@ -647,9 +647,9 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
 
         if ($file_attached && $mode == 'editpost') {
             // Author can download the original torrent (without a passkey)
-            $dl_url = DL_URL . $topic_id;
+            $dl_url = DL_URL . $topic_id . '/';
             if ($attach_ext_id == TORRENT_EXT_ID && \TorrentPier\Topic\Guard::isAuthor($post_info['topic_poster'])) {
-                $dl_url .= '&original';
+                $dl_url .= '?original';
             }
 
             template()->assign_vars([

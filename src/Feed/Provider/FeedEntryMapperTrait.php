@@ -111,7 +111,7 @@ trait FeedEntryMapperTrait
     {
         // Direct download link if enabled and torrent is registered
         if (config()->get('atom.direct_down') && !empty($topic['tracker_status'])) {
-            return DL_URL . $topic['topic_id'];
+            return make_url(DL_URL . $topic['topic_id'] . '/');
         }
 
         // Default to topic view with semantic URL

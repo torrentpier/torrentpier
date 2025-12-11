@@ -52,14 +52,16 @@ class LegacyAdapter
             request()->query->set($key, $value);
         }
 
-        // Set mode from options (for profile routes like /register/, /settings/, etc.)
-        if (isset($this->options['mode'])) {
-            request()->query->set('mode', $this->options['mode']);
-
-            // For the activate route, set the activation key from route args
-            if ($this->options['mode'] === 'activate' && isset($args['key'])) {
-                request()->query->set('act_key', $args['key']);
+        // Set options as query parameters (for routes that need specific params)
+        foreach (['mode', 'map', 'action'] as $param) {
+            if (isset($this->options[$param])) {
+                request()->query->set($param, $this->options[$param]);
             }
+        }
+
+        // For the activate route, set the activation key from route args
+        if (isset($this->options['mode']) && $this->options['mode'] === 'activate' && isset($args['key'])) {
+            request()->query->set('act_key', $args['key']);
         }
 
         // For self_bootstrap files: return marker response, execution happens in global scope

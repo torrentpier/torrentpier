@@ -88,7 +88,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
 
     $tracker_link = ($tor_reged) ? __('BT_REG_YES') : __('BT_REG_NO');
 
-    $download_link = DL_URL . $topic_id;
+    $download_link = DL_URL . $topic_id . '/';
 
     if ($tor_auth_reg || $tor_auth_del) {
         $reg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', topic_id : ' . $topic_id . ', type: \'reg\'}); return false;">' . __('BT_REG_ON_TRACKER') . '</a>';
@@ -226,7 +226,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
             // TorrServer integration
             if (config()->get('torr_server.enabled') && (!IS_GUEST || !config()->get('torr_server.disable_for_guest')) && \TorrentPier\Attachment::m3uExists($topic_id)) {
                 template()->assign_block_vars('torrent.tor_server', [
-                    'TORR_SERVER_M3U_LINK' => PLAYBACK_M3U_URL . $bt_topic_id,
+                    'TORR_SERVER_M3U_LINK' => PLAYBACK_M3U_URL . $bt_topic_id . '/',
                     'TORR_SERVER_M3U_ICON' => theme_images('icon_tor_m3u_icon'),
                 ]);
             }
@@ -398,7 +398,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
 
                             if (!defined('SEEDER_EXIST')) {
                                 define('SEEDER_EXIST', true);
-                                $seed_order_action = TOPIC_URL . "$bt_topic_id&amp;spmode=full#seeders";
+                                $seed_order_action = TOPIC_URL . "$bt_topic_id/?spmode=full#seeders";
 
                                 template()->assign_block_vars((string)$x_full, [
                                     'SEED_ORD_ACT' => $seed_order_action,
@@ -420,7 +420,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
 
                             if (!defined('LEECHER_EXIST')) {
                                 define('LEECHER_EXIST', true);
-                                $leech_order_action = TOPIC_URL . "$bt_topic_id&amp;spmode=full#leechers";
+                                $leech_order_action = TOPIC_URL . "$bt_topic_id/?spmode=full#leechers";
 
                                 template()->assign_block_vars((string)$x_full, [
                                     'LEECH_ORD_ACT' => $leech_order_action,
@@ -562,7 +562,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
     if (config()->get('bt_allow_spmode_change') && $s_mode != 'full') {
         template()->assign_vars([
             'PEERS_FULL_LINK' => true,
-            'SPMODE_FULL_HREF' => TOPIC_URL . "$topic_id&amp;spmode=full#seeders"
+            'SPMODE_FULL_HREF' => TOPIC_URL . "$topic_id/?spmode=full#seeders"
         ]);
     }
 

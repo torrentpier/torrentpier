@@ -335,7 +335,7 @@ template()->assign_vars([
     'U_SEARCH_SELF_BY_MY' => FORUM_PATH . "search?uid=" . userdata('user_id') . "&amp;o=1",
     'U_SEARCH_LATEST' => FORUM_PATH . 'search?search_id=latest',
     'U_SEARCH_UNANSWERED' => FORUM_PATH . 'search?search_id=unanswered',
-    'U_ATOM_FEED' => make_url('feed?type=f&id=0'),
+    'U_ATOM_FEED' => make_url('feed/f/0/'),
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
     'BOARD_START' => config()->get('show_board_start_index') ? (__('BOARD_STARTED') . ':&nbsp;' . '<b>' . bb_date(config()->get('board_startdate')) . '</b>') : false,

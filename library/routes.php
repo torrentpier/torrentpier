@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -8,11 +9,11 @@
  */
 
 use TorrentPier\Controllers\RobotsController;
-use TorrentPier\Router\Router;
+use TorrentPier\Http\Middleware\TrailingSlashRedirect;
 use TorrentPier\Router\LegacyAdapter;
+use TorrentPier\Router\Router;
 use TorrentPier\Router\SemanticUrl\LegacyRedirect;
 use TorrentPier\Router\SemanticUrl\RouteAdapter;
-use TorrentPier\Http\Middleware\TrailingSlashRedirect;
 
 /**
  * Route definitions for TorrentPier
@@ -81,15 +82,29 @@ return function (Router $router): void {
     // Migrated controllers (in src/Controllers/)
     // ==============================================================
 
-    // Index (homepage)
+    // Index (homepage) and forum map
     $router->any('/', new LegacyAdapter($basePath . '/src/Controllers/index.php', options: ['manage_session' => true]));
+    $router->get('/map/', new LegacyAdapter($basePath . '/src/Controllers/index.php', options: ['manage_session' => true, 'map' => 1]));
+    $router->get('/map', new TrailingSlashRedirect());
+
+    // Downloads: /dl/123/, /dl/123/files/, /dl/123/list/
+    $router->get('/dl/{t}/', new LegacyAdapter($basePath . '/src/Controllers/dl.php'));
+    $router->get('/dl/{t}', new TrailingSlashRedirect());
+    $router->get('/dl/{t}/files/', new LegacyAdapter($basePath . '/src/Controllers/filelist.php'));
+    $router->get('/dl/{t}/files', new TrailingSlashRedirect());
+    $router->any('/dl/{t}/list/', new LegacyAdapter($basePath . '/src/Controllers/dl_list.php'));
+    $router->get('/dl/{t}/list', new TrailingSlashRedirect());
+
+    // Feed: /feed/f/123/ (forum), /feed/u/123/ (user)
+    $router->get('/feed/{type}/{id}/', new LegacyAdapter($basePath . '/src/Controllers/feed.php', options: ['manage_session' => true]));
+    $router->get('/feed/{type}/{id}', new TrailingSlashRedirect());
+
+    // Playback: /playback/123/
+    $router->get('/playback/{t}/', new LegacyAdapter($basePath . '/src/Controllers/playback_m3u.php', options: ['manage_session' => true]));
+    $router->get('/playback/{t}', new TrailingSlashRedirect());
 
     // GET
-    $router->get('/dl', new LegacyAdapter($basePath . '/src/Controllers/dl.php'));
-    $router->get('/feed', new LegacyAdapter($basePath . '/src/Controllers/feed.php', options: ['manage_session' => true]));
-    $router->get('/filelist', new LegacyAdapter($basePath . '/src/Controllers/filelist.php'));
     $router->get('/info', new LegacyAdapter($basePath . '/src/Controllers/info.php'));
-    $router->get('/playback_m3u', new LegacyAdapter($basePath . '/src/Controllers/playback_m3u.php', options: ['manage_session' => true]));
     $router->get('/terms', new LegacyAdapter($basePath . '/src/Controllers/terms.php'));
 
     // POST
@@ -97,7 +112,6 @@ return function (Router $router): void {
 
     // ANY (GET + POST)
     $router->any('/ajax', new LegacyAdapter($basePath . '/src/Controllers/ajax.php'));
-    $router->any('/dl_list', new LegacyAdapter($basePath . '/src/Controllers/dl_list.php'));
     $router->any('/login', new LegacyAdapter($basePath . '/src/Controllers/login.php'));
     $router->any('/modcp', new LegacyAdapter($basePath . '/src/Controllers/modcp.php', options: ['manage_session' => true]));
     $router->any('/posting', new LegacyAdapter($basePath . '/src/Controllers/posting.php'));
