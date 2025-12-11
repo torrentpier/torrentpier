@@ -46,8 +46,8 @@ if (!empty($forum_data['forum_desc'])) {
 }
 
 // Assert canonical URL for SEO-friendly routing
-if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'forum') {
-    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('forum', $forum_id, $forum_data['forum_name']);
+if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'forums') {
+    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('forums', $forum_id, $forum_data['forum_name']);
 }
 
 // Make jumpbox

@@ -32,7 +32,7 @@ class RouteAdapter
             'script' => 'topic',
             'param' => 't',  // POST_TOPIC_URL
         ],
-        'forum' => [
+        'forums' => [
             'controller' => 'viewforum.php',
             'script' => 'forum',
             'param' => 'f',  // POST_FORUM_URL
@@ -53,7 +53,7 @@ class RouteAdapter
             'script' => 'group_edit',
             'param' => 'g',  // POST_GROUPS_URL
         ],
-        'category' => [
+        'categories' => [
             'controller' => 'index.php',
             'script' => 'index',
             'param' => 'c',  // POST_CAT_URL
@@ -167,11 +167,11 @@ class RouteAdapter
     {
         $canonicalUrl = match ($this->type) {
             'threads' => UrlBuilder::topic($id, $title),
-            'forum' => UrlBuilder::forum($id, $title),
+            'forums' => UrlBuilder::forum($id, $title),
             'members' => UrlBuilder::member($id, $title),
             'groups' => UrlBuilder::group($id, $title),
             'groups_edit' => UrlBuilder::groupEdit($id, $title),
-            'category' => UrlBuilder::category($id, $title),
+            'categories' => UrlBuilder::category($id, $title),
             default => '/',
         };
 
@@ -189,10 +189,10 @@ class RouteAdapter
     {
         [$table, $titleCol] = match ($this->type) {
             'threads' => ['bb_topics', 'topic_title'],
-            'forum' => ['bb_forums', 'forum_name'],
+            'forums' => ['bb_forums', 'forum_name'],
             'members' => ['bb_users', 'username'],
             'groups', 'groups_edit' => ['bb_groups', 'group_name'],
-            'category' => ['bb_categories', 'cat_title'],
+            'categories' => ['bb_categories', 'cat_title'],
             default => [null, null],
         };
 

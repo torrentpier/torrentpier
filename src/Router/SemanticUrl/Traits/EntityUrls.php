@@ -73,7 +73,7 @@ trait EntityUrls
         if ($id === null || $id <= 0) {
             return '#';
         }
-        return self::buildUrl('forum', $id, $name, $params);
+        return self::buildUrl('forums', $id, $name, $params);
     }
 
     /**
@@ -138,6 +138,6 @@ trait EntityUrls
         if ($id === null || $id <= 0) {
             return '/';
         }
-        return self::buildUrl('category', $id, $name, $params);
+        return self::buildUrl('categories', $id, $name, $params);
     }
 }

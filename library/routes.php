@@ -37,9 +37,9 @@ return function (Router $router): void {
     $router->any('/threads/{params}/', new RouteAdapter('threads'));
     $router->get('/threads/{params}', new TrailingSlashRedirect());
 
-    // Forums: /forum/slug.123/
-    $router->any('/forum/{params}/', new RouteAdapter('forum'));
-    $router->get('/forum/{params}', new TrailingSlashRedirect());
+    // Forums: /forums/slug.123/
+    $router->any('/forums/{params}/', new RouteAdapter('forums'));
+    $router->get('/forums/{params}', new TrailingSlashRedirect());
 
     // Groups: /groups/ (list), /groups/slug.123/, /groups/slug.123/edit/
     $router->any('/groups/', new LegacyAdapter($basePath . '/src/Controllers/group.php', 'group', options: ['manage_session' => true]));
@@ -49,9 +49,9 @@ return function (Router $router): void {
     $router->any('/groups/{params}/', new RouteAdapter('groups', options: ['manage_session' => true]));
     $router->get('/groups/{params}', new TrailingSlashRedirect());
 
-    // Categories: /category/slug.123/
-    $router->any('/category/{params}/', new RouteAdapter('category', options: ['manage_session' => true]));
-    $router->get('/category/{params}', new TrailingSlashRedirect());
+    // Categories: /categories/slug.123/
+    $router->any('/categories/{params}/', new RouteAdapter('categories', options: ['manage_session' => true]));
+    $router->get('/categories/{params}', new TrailingSlashRedirect());
 
     // Profile standalone pages (static routes MUST come before variable routes)
     $router->any('/profile/bonus/', new LegacyAdapter($basePath . '/src/Controllers/profile.php', 'profile', options: ['mode' => 'bonus']));
@@ -115,9 +115,9 @@ return function (Router $router): void {
         $basePath . '/src/Controllers/viewtopic.php'
     ));
 
-    // viewforum?f=123 -> /forum/slug.123/
+    // viewforum?f=123 -> /forums/slug.123/
     $router->any('/viewforum', new LegacyRedirect(
-        'forum',
+        'forums',
         $basePath . '/src/Controllers/viewforum.php'
     ));
 

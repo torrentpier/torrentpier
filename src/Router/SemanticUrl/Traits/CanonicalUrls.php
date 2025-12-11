@@ -118,11 +118,11 @@ trait CanonicalUrls
         // Build the URL using the appropriate method
         return match ($type) {
             'threads' => self::topic($id, $title, $params),
-            'forum' => self::forum($id, $title, $params),
+            'forums' => self::forum($id, $title, $params),
             'members' => self::member($id, $title, $params),
             'groups' => self::group($id, $title, $params),
             'groups_edit' => self::groupEdit($id, $title, $params),
-            'category' => self::category($id, $title, $params),
+            'categories' => self::category($id, $title, $params),
             default => '/',
         };
     }

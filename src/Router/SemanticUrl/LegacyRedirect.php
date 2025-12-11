@@ -35,7 +35,7 @@ class LegacyRedirect
             'id_col' => 'topic_id',
             'title_col' => 'topic_title',
         ],
-        'forum' => [
+        'forums' => [
             'param' => 'f',
             'table' => 'bb_forums',
             'id_col' => 'forum_id',
@@ -59,7 +59,7 @@ class LegacyRedirect
             'id_col' => 'group_id',
             'title_col' => 'group_name',
         ],
-        'category' => [
+        'categories' => [
             'param' => 'c',
             'table' => 'bb_categories',
             'id_col' => 'cat_id',
@@ -229,11 +229,11 @@ class LegacyRedirect
     {
         return match ($this->type) {
             'threads' => UrlBuilder::topic($id, $title),
-            'forum' => UrlBuilder::forum($id, $title),
+            'forums' => UrlBuilder::forum($id, $title),
             'members' => UrlBuilder::member($id, $title),
             'groups' => UrlBuilder::group($id, $title),
             'groups_edit' => UrlBuilder::groupEdit($id, $title),
-            'category' => UrlBuilder::category($id, $title),
+            'categories' => UrlBuilder::category($id, $title),
             default => '/',
         };
     }

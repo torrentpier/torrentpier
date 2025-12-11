@@ -99,9 +99,9 @@ if ($viewcat && !($viewcat = & $forums['c'][$viewcat]['cat_id'])) {
 }
 
 // Assert canonical URL for category (redirect if slug doesn't match)
-if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'category' && $viewcat) {
+if (defined('SEMANTIC_ROUTE') && SEMANTIC_ROUTE_TYPE === 'categories' && $viewcat) {
     \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical(
-        'category',
+        'categories',
         $viewcat,
         $cat_data[$viewcat]['cat_title'],
         SEMANTIC_ROUTE_SLUG

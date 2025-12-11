@@ -24,7 +24,7 @@ use TorrentPier\Router\SemanticUrl\Traits\StaticUrls;
  * Generates URLs in the format: /type/slug.id/
  * Examples:
  *   - /threads/bugonia.5/
- *   - /forum/hd-video.1/
+ *   - /forums/hd-video.1/
  *   - /members/admin.2/
  *
  * @method static string topic(?int $id, string $title = '', array $params = [])

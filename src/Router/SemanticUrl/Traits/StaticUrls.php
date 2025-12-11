@@ -92,7 +92,7 @@ trait StaticUrls
     {
         return match ($type) {
             'threads' => 'viewtopic?t=' . $id,
-            'forum' => 'viewforum?f=' . $id,
+            'forums' => 'viewforum?f=' . $id,
             'members' => 'profile?mode=viewprofile&u=' . $id,
             default => '/',
         };
