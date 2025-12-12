@@ -163,9 +163,6 @@ Add to your crontab:
 
 ```bash
 # Run maintenance tasks every minute
-* * * * * php /path/to/torrentpier/cron.php >> /dev/null 2>&1
-
-# Or use Bull CLI
 * * * * * php /path/to/torrentpier/bull cron:run >> /dev/null 2>&1
 ```
 

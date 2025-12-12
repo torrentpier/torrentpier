@@ -168,7 +168,7 @@ For detailed testing documentation, see [tests/README.md](tests/README.md).
 
 ## 📌 Our recommendations
 
-* *It's recommended to run `cron.php`.* - For significant tracker speed increase it may be required to replace the built-in cron.php with an operating system daemon.
+* *Set up cron jobs.* - Run `php bull cron:run` every minute for maintenance tasks. For high-traffic trackers, consider running it more frequently or as a daemon.
 * *Local configuration copy.* - You can override the settings using the local configuration file `library/config.local.php`.
 
 ## 💚 Contributing / Contributors

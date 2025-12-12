@@ -639,7 +639,7 @@ class InstallCommand extends Command
             'Configure your web server using the provided templates',
             'Login to admin panel and change the default password',
             'Configure site settings in the admin panel',
-            'Setup cron job: <comment>* * * * * php ' . BB_ROOT . 'cron.php</comment>',
+            'Setup cron job: <comment>* * * * * php ' . BB_ROOT . 'bull cron:run</comment>',
         ]);
 
         $this->line('<fg=cyan>Good luck & have fun! 🚀</>');
