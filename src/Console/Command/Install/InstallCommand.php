@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -13,7 +14,6 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
 use TorrentPier\Console\Command\Command;
 use TorrentPier\Console\Helpers\FileSystemHelper;
 use TorrentPier\Console\Helpers\PhinxManager;
@@ -30,8 +30,8 @@ class InstallCommand extends Command
     /**
      * System requirements
      */
-    private const PHP_MIN_VERSION = '8.4.0';
-    private const REQUIRED_EXTENSIONS = [
+    private const string PHP_MIN_VERSION = '8.4.0';
+    private const array REQUIRED_EXTENSIONS = [
         'json',
         'curl',
         'readline',
@@ -50,7 +50,7 @@ class InstallCommand extends Command
     /**
      * Writable directories
      */
-    private const WRITABLE_DIRS = [
+    private const array WRITABLE_DIRS = [
         'data',
         'internal_data',
         'sitemap',
@@ -417,7 +417,7 @@ class InstallCommand extends Command
         $this->section('Database Setup');
 
         $host = $this->config['DB_HOST'];
-        $port = (int)$this->config['DB_PORT'];
+        $port = (int) $this->config['DB_PORT'];
         $database = $this->config['DB_DATABASE'];
         $username = $this->config['DB_USERNAME'];
         $password = $this->config['DB_PASSWORD'];
@@ -646,4 +646,3 @@ class InstallCommand extends Command
         $this->line('');
     }
 }
-

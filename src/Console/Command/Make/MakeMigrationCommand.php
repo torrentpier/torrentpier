@@ -13,6 +13,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 use TorrentPier\Console\Command\Command;
 use TorrentPier\Console\Helpers\PhinxManager;
 
@@ -53,16 +54,16 @@ class MakeMigrationCommand extends Command
             $filePath = $phinx->createMigration($name);
 
             $this->success('Migration created successfully!');
-            $this->line('');
+            $this->line();
             $this->definitionList(
                 ['File' => $filePath],
             );
 
-            $this->line('');
+            $this->line();
             $this->comment('Edit the migration file and run "php bull migrate" to apply it.');
 
             return self::SUCCESS;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->error('Failed to create migration: ' . $e->getMessage());
 
             if ($this->isVerbose()) {

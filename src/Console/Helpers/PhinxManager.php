@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -46,7 +47,7 @@ class PhinxManager
         $dbConfig = [
             'adapter' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),
-            'port' => (int)env('DB_PORT', 3306),
+            'port' => (int) env('DB_PORT', 3306),
             'name' => env('DB_DATABASE'),
             'user' => env('DB_USERNAME'),
             'pass' => env('DB_PASSWORD', ''),

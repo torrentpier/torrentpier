@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -73,10 +74,10 @@ class MigrateRollbackCommand extends Command
                 $this->warning('This will rollback ALL migrations!');
                 $affectedCount = count($ranMigrations);
             } elseif ($target !== null) {
-                $targetVersion = (int)$target;
+                $targetVersion = (int) $target;
                 $affectedCount = count(array_filter(
                     $ranMigrations,
-                    fn($m) => (int)$m['version'] > $targetVersion
+                    fn($m) => (int) $m['version'] > $targetVersion
                 ));
                 $this->info(sprintf('Rolling back to version %d (%d migration(s))', $targetVersion, $affectedCount));
             } else {
@@ -98,7 +99,7 @@ class MigrateRollbackCommand extends Command
 
             $this->section('Rolling Back');
 
-            $targetVersion = $target !== null ? (int)$target : null;
+            $targetVersion = $target !== null ? (int) $target : null;
             $phinx->rollback($targetVersion);
 
             $this->line('');

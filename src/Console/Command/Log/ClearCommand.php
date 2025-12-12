@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,6 +10,9 @@
 
 namespace TorrentPier\Console\Command\Log;
 
+use FilesystemIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -69,12 +73,12 @@ class ClearCommand extends Command
         }
 
         $this->table(['File', 'Size', 'Modified'], $rows);
-        $this->line('');
+        $this->line();
         $this->line(sprintf('  <comment>Total: %d file(s), %s</comment>', count($files), FileSystemHelper::formatBytes($totalSize)));
-        $this->line('');
+        $this->line();
 
         // Confirm
-        if (!$force && !$this->confirm('Delete these log files?', false)) {
+        if (!$force && !$this->confirm('Delete these log files?')) {
             $this->comment('Operation cancelled.');
             return self::SUCCESS;
         }
@@ -91,7 +95,7 @@ class ClearCommand extends Command
             }
         }
 
-        $this->line('');
+        $this->line();
         if ($failed === 0) {
             $this->success("Cleared {$deleted} log file(s)!");
         } else {
@@ -102,7 +106,7 @@ class ClearCommand extends Command
     }
 
     /**
-     * Find log files in directory
+     * Find log files in the directory
      */
     private function findLogFiles(string $dir, ?string $olderThan): array
     {
@@ -110,12 +114,12 @@ class ClearCommand extends Command
         $cutoffTime = null;
 
         if ($olderThan !== null) {
-            $days = (int)$olderThan;
+            $days = (int) $olderThan;
             $cutoffTime = strtotime("-{$days} days");
         }
 
-        $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS)
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS)
         );
 
         foreach ($iterator as $file) {
@@ -140,4 +144,3 @@ class ClearCommand extends Command
         return $files;
     }
 }
-

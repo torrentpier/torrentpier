@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Console\Helpers;
 
+use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -22,7 +23,7 @@ class FileSystemHelper
      *
      * @param string $dir Directory path to remove
      * @param bool $removeRoot Whether to remove the root directory itself (default: true)
-     * @return bool True if operation succeeded, false otherwise
+     * @return bool True if the operation succeeded, false otherwise
      */
     public static function removeDirectory(string $dir, bool $removeRoot = true): bool
     {
@@ -63,7 +64,7 @@ class FileSystemHelper
      * Clear directory contents without removing the directory itself
      *
      * @param string $dir Directory path to clear
-     * @return bool True if operation succeeded, false otherwise
+     * @return bool True if the operation succeeded, false otherwise
      */
     public static function clearDirectory(string $dir): bool
     {
@@ -86,7 +87,7 @@ class FileSystemHelper
 
         try {
             $iterator = new RecursiveIteratorIterator(
-                new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS)
+                new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS)
             );
 
             foreach ($iterator as $item) {
@@ -102,7 +103,7 @@ class FileSystemHelper
     }
 
     /**
-     * Count files in directory recursively
+     * Count files in the directory recursively
      *
      * @param string $dir Directory path
      * @return int Number of files
@@ -117,7 +118,7 @@ class FileSystemHelper
 
         try {
             $iterator = new RecursiveIteratorIterator(
-                new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS)
+                new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS)
             );
 
             foreach ($iterator as $item) {
@@ -133,7 +134,7 @@ class FileSystemHelper
     }
 
     /**
-     * Clear directory contents and return count of deleted files
+     * Clear directory contents and return a count of deleted files
      *
      * @param string $dir Directory path to clear
      * @return int Number of files deleted
@@ -148,7 +149,7 @@ class FileSystemHelper
 
         try {
             $iterator = new RecursiveIteratorIterator(
-                new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS),
+                new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS),
                 RecursiveIteratorIterator::CHILD_FIRST
             );
 

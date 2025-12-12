@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -136,8 +137,7 @@ class MakeCommandCommand extends Command
         string $className,
         string $commandName,
         string $description
-    ): string
-    {
+    ): string {
         return <<<PHP
 <?php
 /**
@@ -185,4 +185,3 @@ class {$className} extends Command
 PHP;
     }
 }
-

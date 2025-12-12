@@ -13,6 +13,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 use TorrentPier\Console\Command\Command;
 use TorrentPier\Helpers\CronHelper;
 
@@ -48,7 +49,7 @@ class CronRunCommand extends Command
         }
 
         $this->info('Starting cron jobs...');
-        $this->line('');
+        $this->line();
 
         $startTime = microtime(true);
 
@@ -66,7 +67,7 @@ class CronRunCommand extends Command
             }
 
             return self::SUCCESS;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->error('Cron execution failed: ' . $e->getMessage());
 
             if ($this->isVerbose()) {

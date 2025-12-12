@@ -12,6 +12,7 @@ namespace TorrentPier\Console\Command\Env;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 use TorrentPier\Console\Command\Command;
 
 /**
@@ -26,7 +27,7 @@ class CheckCommand extends Command
     /**
      * Required environment variables
      */
-    private const REQUIRED_VARS = [
+    private const array REQUIRED_VARS = [
         'APP_ENV' => 'Application environment (development/production)',
         'DB_HOST' => 'Database host',
         'DB_DATABASE' => 'Database name',
@@ -37,7 +38,7 @@ class CheckCommand extends Command
     /**
      * Optional but recommended variables
      */
-    private const RECOMMENDED_VARS = [
+    private const array RECOMMENDED_VARS = [
         'DB_PORT' => ['default' => '3306', 'description' => 'Database port'],
     ];
 
@@ -126,7 +127,7 @@ class CheckCommand extends Command
                     $this->line("  <info>✓</info> MySQL version: {$version['version']}");
                 }
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $errors[] = 'Database connection failed: ' . $e->getMessage();
             $this->line('  <error>✗</error> Database connection failed');
             if ($this->isVerbose()) {
@@ -159,7 +160,7 @@ class CheckCommand extends Command
         }
 
         // Summary
-        $this->line('');
+        $this->line();
         $this->section('Summary');
 
         if (empty($errors) && empty($warnings)) {
@@ -175,7 +176,7 @@ class CheckCommand extends Command
         }
 
         if (!empty($warnings)) {
-            $this->line('');
+            $this->line();
             $this->warning(count($warnings) . ' warning(s):');
             foreach ($warnings as $warning) {
                 $this->line("  • {$warning}");
