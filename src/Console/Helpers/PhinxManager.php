@@ -12,6 +12,7 @@ namespace TorrentPier\Console\Helpers;
 
 use Phinx\Config\Config;
 use Phinx\Migration\Manager;
+use RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -165,6 +166,8 @@ class PhinxManager
 
     /**
      * Generate a new migration file
+     *
+     * @throws RuntimeException If a file cannot be written
      */
     public function createMigration(string $name): string
     {
@@ -174,7 +177,10 @@ class PhinxManager
         $filePath = $this->getMigrationsPath() . DIRECTORY_SEPARATOR . $fileName;
 
         $template = $this->getMigrationTemplate($className);
-        file_put_contents($filePath, $template);
+
+        if (file_put_contents($filePath, $template) === false) {
+            throw new RuntimeException("Failed to write migration file: $filePath");
+        }
 
         return $filePath;
     }

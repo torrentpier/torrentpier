@@ -79,7 +79,7 @@ class CheckCommand extends Command
         foreach (self::REQUIRED_VARS as $var => $description) {
             $value = env($var);
 
-            if (empty($value)) {
+            if ($value === null || $value === '') {
                 $errors[] = "$var is not set";
                 $this->line("  <error>✗</error> $var - <comment>$description</comment>");
             } else {

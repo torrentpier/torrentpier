@@ -14,8 +14,8 @@ use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ReflectionClass;
-use ReflectionException;
 use Symfony\Component\Console\Application as SymfonyApplication;
+use Throwable;
 use Symfony\Component\Console\Command\Command;
 use TorrentPier\Console\Command\Command as BaseCommand;
 
@@ -100,12 +100,17 @@ class Application extends SymfonyApplication
                 continue;
             }
 
+            // Must be instantiable (has a public constructor without required params)
+            if (!$reflection->isInstantiable()) {
+                continue;
+            }
+
             // Register the command
             try {
                 /** @var Command $command */
                 $command = $reflection->newInstance();
                 $this->add($command);
-            } catch (ReflectionException) {
+            } catch (Throwable) {
                 // Skip commands that cannot be instantiated
             }
         }

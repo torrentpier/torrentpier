@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Console\Command\Release;
 
+use DateTime;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -101,7 +102,7 @@ class CreateCommand extends Command
             $date = date('d-m-Y');
         } else {
             // Validate date
-            $dateObj = \DateTime::createFromFormat('d-m-Y', $date);
+            $dateObj = DateTime::createFromFormat('d-m-Y', $date);
             if (!$dateObj || $dateObj->format('d-m-Y') !== $date) {
                 $this->error('Invalid date format. Use DD-MM-YYYY');
                 return self::FAILURE;
@@ -114,7 +115,7 @@ class CreateCommand extends Command
         // Show summary
         $this->section('Release Configuration');
         $this->definitionList(
-            ['Version' => "<info>{$version}</info>"],
+            ['Version' => "<info>$version</info>"],
             ['Release Date' => $date],
             ['Emoji' => $emoji ?: '<comment>(none)</comment>'],
             ['Generate Changelog' => $noChangelog ? '<comment>No</comment>' : '<info>Yes</info>'],
@@ -151,27 +152,42 @@ class CreateCommand extends Command
             $this->section('Git Operations');
 
             // Commit
-            $commitMsg = "release: {$version}" . ($emoji ? " {$emoji}" : '');
-            $this->runGitCommand('git add -A');
-            $this->runGitCommand('git commit -m ' . escapeshellarg($commitMsg));
+            $commitMsg = "release: $version" . ($emoji ? " $emoji" : '');
+            if ($this->runGitCommand('git add -A') !== 0) {
+                $this->error('Failed to stage files');
+                return self::FAILURE;
+            }
+            if ($this->runGitCommand('git commit -m ' . escapeshellarg($commitMsg)) !== 0) {
+                $this->error('Failed to create commit');
+                return self::FAILURE;
+            }
             $this->line('  <info>✓</info> Created commit');
 
             // Tag
-            $this->runGitCommand("git tag -a \"{$version}\" -m \"Release {$version}\"");
-            $this->line("  <info>✓</info> Created tag {$version}");
+            if ($this->runGitCommand("git tag -a \"$version\" -m \"Release $version\"") !== 0) {
+                $this->error('Failed to create tag');
+                return self::FAILURE;
+            }
+            $this->line("  <info>✓</info> Created tag $version");
 
             // Push
             $this->line('  Pushing to origin...');
-            $this->runGitCommand('git push origin master');
-            $this->runGitCommand("git push origin {$version}");
+            if ($this->runGitCommand('git push origin master') !== 0) {
+                $this->error('Failed to push to origin');
+                return self::FAILURE;
+            }
+            if ($this->runGitCommand("git push origin $version") !== 0) {
+                $this->error('Failed to push tag');
+                return self::FAILURE;
+            }
             $this->line('  <info>✓</info> Pushed to origin');
         }
 
-        $this->line('');
-        $this->success("Release {$version} created successfully!");
+        $this->line();
+        $this->success("Release $version created successfully!");
 
         if (!$noGit) {
-            $this->line('');
+            $this->line();
             $this->comment('GitHub Actions will now:');
             $this->listing([
                 'Generate release notes',
@@ -204,15 +220,15 @@ class CreateCommand extends Command
 
         // Update version
         $content = preg_replace(
-            "/(\\\$bb_cfg\['tp_version'\]\s*=\s*')[^']*';/",
-            "\${1}{$version}';",
+            "/(\\\$bb_cfg\['tp_version']\s*=\s*')[^']*';/",
+            "\${1}$version';",
             $content
         );
 
         // Update release date
         $content = preg_replace(
-            "/(\\\$bb_cfg\['tp_release_date'\]\s*=\s*')[^']*';/",
-            "\${1}{$date}';",
+            "/(\\\$bb_cfg\['tp_release_date']\s*=\s*')[^']*';/",
+            "\${1}$date';",
             $content
         );
 
@@ -252,14 +268,14 @@ class CreateCommand extends Command
     private function runGitCommand(string $command): int
     {
         if ($this->isVerbose()) {
-            $this->line("  <comment>\$ {$command}</comment>");
+            $this->line("  <comment>\$ $command</comment>");
         }
 
-        exec($command . ' 2>&1', $output, $exitCode);
+        exec($command . ' 2>&1', $gitOutput, $exitCode);
 
-        if ($this->isVeryVerbose() && !empty($output)) {
-            foreach ($output as $line) {
-                $this->line("    {$line}");
+        if ($this->isVeryVerbose() && !empty($gitOutput)) {
+            foreach ($gitOutput as $line) {
+                $this->line("    $line");
             }
         }
 

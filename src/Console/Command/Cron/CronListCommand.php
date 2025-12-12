@@ -49,7 +49,7 @@ class CronListCommand extends Command
                 $nextRun = $job['next_run']
                     ? ($job['next_run'] instanceof DateTimeInterface ? $job['next_run']->format('Y-m-d H:i:s') : date('Y-m-d H:i:s', $job['next_run']))
                     : 'N/A';
-                $execTime = isset($job['execution_time']) ? round($job['execution_time'], 3) . 's' : 'N/A';
+                $execTime = $this->formatExecTime($job['execution_time'] ?? null);
 
                 $rows[] = [
                     $job['cron_id'],
@@ -84,5 +84,23 @@ class CronListCommand extends Command
         }
 
         return self::SUCCESS;
+    }
+
+    /**
+     * Format execution time with color coding
+     */
+    private function formatExecTime(float|int|null $time): string
+    {
+        if ($time === null || $time <= 0) {
+            return '<fg=gray>—</>';
+        }
+
+        $formatted = round($time, 3) . 's';
+
+        return match (true) {
+            $time < 1 => "<fg=green>$formatted</>",
+            $time < 10 => "<fg=yellow>$formatted</>",
+            default => "<fg=red>$formatted</>",
+        };
     }
 }
