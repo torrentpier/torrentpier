@@ -41,7 +41,7 @@ class Application extends SymfonyApplication
      */
     private function detectVersion(): string
     {
-        // Try to get a version from config (set by config.php)
+        // Get a version from config (set by config.php)
         if (function_exists('config')) {
             $version = config()->get('tp_version');
             if ($version) {
@@ -49,16 +49,6 @@ class Application extends SymfonyApplication
             }
         }
 
-        // Fallback: try to read from composer.json
-        $composerPath = BB_ROOT . 'composer.json';
-        if (file_exists($composerPath)) {
-            $composer = json_decode(file_get_contents($composerPath), true);
-            if (isset($composer['version'])) {
-                return $composer['version'];
-            }
-        }
-
-        // Final fallback
         return 'dev';
     }
 
@@ -157,17 +147,28 @@ class Application extends SymfonyApplication
      */
     public function getHelp(): string
     {
+        $version = $this->getVersion();
+        $cwd = $this->shortenPath(getcwd() ?: '.');
+
         return <<<HELP
 
-  ____        _ _    ____ _     ___
- | __ ) _   _| | |  / ___| |   |_ _|
- |  _ \| | | | | | | |   | |    | |
- | |_) | |_| | | | | |___| |___ | |
- |____/ \__,_|_|_|  \____|_____|___|
-
- TorrentPier – Bull-powered BitTorrent tracker engine
+  <fg=#b5651d>∩ ▄███▄ ∩</>    <options=bold>Bull CLI</> {$version}
+  <fg=#b5651d> ▐◉ █ ◉▌</>     TorrentPier Console
+  <fg=#b5651d>  ▐▄◎▄▌</>      {$cwd}
 
 HELP;
+    }
+
+    /**
+     * Shorten path for display (replace home dir with ~)
+     */
+    private function shortenPath(string $path): string
+    {
+        $home = getenv('HOME') ?: getenv('USERPROFILE') ?: '';
+        if ($home && str_starts_with($path, $home)) {
+            return '~' . substr($path, strlen($home));
+        }
+        return $path;
     }
 
     /**
