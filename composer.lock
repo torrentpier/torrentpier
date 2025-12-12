@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ec6afbe133182e97bcb651485ee9d2a",
+    "content-hash": "21b3e415ac79aa8fb396fd125b64f83b",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -5638,12 +5638,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/torrentpier/translations.git",
-                "reference": "f4a8b5390e8afe4c5897db77179ce6b6401bd893"
+                "reference": "676dc3a2427a915bd1968a0402fffd0984f1b523"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/torrentpier/translations/zipball/f4a8b5390e8afe4c5897db77179ce6b6401bd893",
-                "reference": "f4a8b5390e8afe4c5897db77179ce6b6401bd893",
+                "url": "https://api.github.com/repos/torrentpier/translations/zipball/676dc3a2427a915bd1968a0402fffd0984f1b523",
+                "reference": "676dc3a2427a915bd1968a0402fffd0984f1b523",
                 "shasum": ""
             },
             "require": {
@@ -5689,7 +5689,7 @@
                 "issues": "https://github.com/torrentpier/torrentpier/issues",
                 "source": "https://github.com/torrentpier/translations/tree/main"
             },
-            "time": "2025-12-07T12:32:25+00:00"
+            "time": "2025-12-11T22:27:26+00:00"
         },
         {
             "name": "tracy/tracy",
@@ -6588,16 +6588,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.91.3",
+            "version": "v3.92.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "9f10aa6390cea91da175ea608880e942d7c0226e"
+                "reference": "5646c2cd99b7cb4b658ff681fe27069ba86c7280"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/9f10aa6390cea91da175ea608880e942d7c0226e",
-                "reference": "9f10aa6390cea91da175ea608880e942d7c0226e",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/5646c2cd99b7cb4b658ff681fe27069ba86c7280",
+                "reference": "5646c2cd99b7cb4b658ff681fe27069ba86c7280",
                 "shasum": ""
             },
             "require": {
@@ -6679,7 +6679,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.91.3"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.92.0"
             },
             "funding": [
                 {
@@ -6687,7 +6687,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-05T19:45:37+00:00"
+            "time": "2025-12-12T10:29:19+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
