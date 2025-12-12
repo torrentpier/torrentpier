@@ -185,13 +185,6 @@ $bb_cfg['torstat_days_keep'] = 60; // Days to keep user's per-torrent stats
 // Tor-Help
 $bb_cfg['torhelp_enabled'] = false; // Find dead torrents (without seeder) that user might help with seeding
 
-// URL's
-$bb_cfg['ajax_url'] = 'ajax';
-$bb_cfg['dl_url'] = 'dl/';
-$bb_cfg['login_url'] = 'login';
-$bb_cfg['posting_url'] = 'posting';
-$bb_cfg['pm_url'] = 'privmsg';
-
 // Language
 $bb_cfg['auto_language_detection'] = true; // Use browser language (auto-detect) as the default language for guests
 $bb_cfg['lang'] = [
