@@ -4,10 +4,9 @@ AddDefaultCharset UTF-8
 ## folder listing access control
 Options All -Indexes
 
-## sitemap and atom rewrite
+## sitemap rewrite (sitemap is in parent directory)
 RewriteEngine On
-RewriteRule ^sitemap.xml$ sitemap/sitemap.xml [L]
-RewriteRule ^/internal_data/atom/(.*) /atom$1 [L]
+RewriteRule ^sitemap.xml$ ../sitemap/sitemap.xml [L]
 
 ## front controller - route all non-file requests through index.php
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -17,7 +16,7 @@ RewriteRule ^ index.php [L]
 ## deny access to git folder
 RedirectMatch 404 /\\.git(/|$)
 
-## deny access to system files
-<FilesMatch "\.(.*sql|tpl|db|inc|log|md|env)|(config|common).php$">
+## deny access to hidden files
+<FilesMatch "^\.">
 Require all denied
 </FilesMatch>

@@ -12,9 +12,9 @@
 use TorrentPier\Router\FrontController;
 
 // Load autoloader (provides all classes including TorrentPier\Router\*)
-require __DIR__ . '/vendor/autoload.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
 
-$fc = new FrontController(__DIR__);
+$fc = new FrontController(dirname(__DIR__), __DIR__);
 $result = $fc->resolve();
 
 switch ($result['action']) {
@@ -37,13 +37,13 @@ switch ($result['action']) {
         // Bootstrap and route
         define('BB_ROOT', './');
         define('FRONT_CONTROLLER', true);
-        require_once __DIR__ . '/common.php';
+        require_once dirname(__DIR__) . '/common.php';
 
         $router = \TorrentPier\Router\Router::getInstance();
 
         // Load routes only if not already loaded (FrontController may have loaded them)
         if (!$router->areRoutesLoaded()) {
-            $routes = require __DIR__ . '/library/routes.php';
+            $routes = require dirname(__DIR__) . '/library/routes.php';
             $routes($router);
             $router->setRoutesLoaded();
         }
