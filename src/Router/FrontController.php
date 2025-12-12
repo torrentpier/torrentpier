@@ -37,7 +37,7 @@ class FrontController
     /** @var string[] Static file extensions (let web server handle) */
     private array $staticExtensions = [
         'css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'ico', 'svg',
-        'woff', 'woff2', 'ttf', 'eot', 'map',
+        'woff', 'woff2', 'ttf', 'eot', 'map', 'xml',
     ];
 
     public function __construct(string $appPath, string $publicPath)

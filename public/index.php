@@ -31,7 +31,38 @@ switch ($result['action']) {
         exit;
 
     case FrontController::ACTION_STATIC:
-        return false; // Let web server handle
+        // For PHP built-in server, return false lets the server handle static files
+        // For nginx/php-fpm (like Herd), we need to serve the file ourselves
+        if (PHP_SAPI === 'cli-server') {
+            return false;
+        }
+
+        $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+        // Sitemap rewrite: /sitemap.xml -> /storage/sitemap/sitemap.xml
+        if ($requestPath === '/sitemap.xml') {
+            $requestPath = '/storage/sitemap/sitemap.xml';
+        }
+
+        // Check if a file exists and serve it
+        $staticFile = __DIR__ . $requestPath;
+        if (is_file($staticFile)) {
+            $mimeTypes = [
+                'xml' => 'application/xml',
+                'css' => 'text/css',
+                'js' => 'application/javascript',
+                'json' => 'application/json',
+            ];
+            $ext = strtolower(pathinfo($staticFile, PATHINFO_EXTENSION));
+            $contentType = $mimeTypes[$ext] ?? mime_content_type($staticFile) ?: 'application/octet-stream';
+            header('Content-Type: ' . $contentType);
+            header('Content-Length: ' . filesize($staticFile));
+            readfile($staticFile);
+            exit;
+        }
+        // File not found - fall through to 404
+        \TorrentPier\Http\Response::notFound()->send();
+        exit;
 
     case FrontController::ACTION_ROUTE:
         // Bootstrap and route
