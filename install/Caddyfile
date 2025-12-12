@@ -1,26 +1,34 @@
 # Example Caddy configuration for TorrentPier
+# Web root is now /path/to/torrentpier/public
 
 example.com {
-    root * /path/to/www
+    root * /path/to/torrentpier/public
     encode gzip zstd
     php_fastcgi unix//run/php/php-fpm.sock
     try_files {path} {path}/ /index.php?{query}
     file_server
 
+    # Block access to parent directories and hidden files
     @blocked {
-        path /install/* /internal_data/* /library/*
+        path /..
         path /.ht* /.en*
         path /.git/*
-        path *.sql *.tpl *.db *.inc *.log *.md
     }
     respond @blocked 404
 
-    redir /sitemap.xml /sitemap/sitemap.xml
+    # Sitemap is in parent directory
+    redir /sitemap.xml ../sitemap/sitemap.xml
 
     @html_css_js {
         path *.html *.css *.js *.json *.xml *.txt
     }
     header @html_css_js Content-Type "{mime}; charset=utf-8"
+
+    # Static file caching
+    @static {
+        path *.css *.js *.png *.jpg *.jpeg *.gif *.ico *.svg *.woff *.woff2
+    }
+    header @static Cache-Control "public, max-age=2592000, immutable"
 }
 
 # Refer to the Caddy docs for more information:

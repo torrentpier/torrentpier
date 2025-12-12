@@ -12,7 +12,7 @@ if (!defined('BB_ROOT')) {
 }
 
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
-define('ADMIN_DIR', BB_PATH . '/admin');
+define('ADMIN_DIR', BB_PATH . '/public/admin');
 define('DATA_DIR', BB_PATH . '/data');
 define('INT_DATA_DIR', BB_PATH . '/internal_data');
 define('AJAX_HTML_DIR', BB_ROOT . '/internal_data/ajax_html/');
@@ -24,8 +24,15 @@ define('CFG_DIR', BB_PATH . '/library/config');
 define('INC_DIR', BB_PATH . '/library/includes');
 define('UCP_DIR', BB_PATH . '/library/includes/ucp');
 define('SITEMAP_DIR', BB_PATH . '/sitemap');
-define('IMAGES_DIR', BB_PATH . '/styles/images');
-define('TEMPLATES_DIR', BB_PATH . '/styles/templates');
+
+// Assets (public web root)
+define('PUBLIC_DIR', BB_PATH . '/public');
+define('ASSETS_DIR', PUBLIC_DIR . '/assets');
+define('ASSETS_PATH', '/assets');  // URL path for assets
+
+// Updated paths for the new structure
+define('IMAGES_DIR', ASSETS_DIR . '/images');
+define('TEMPLATES_DIR', BB_PATH . '/templates');
 
 // Languages
 define('LANG_ROOT_DIR',

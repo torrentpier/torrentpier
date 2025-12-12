@@ -81,7 +81,7 @@ switch ($mode) {
                 'ROW_CLASS' => !($i % 2) ? 'row2' : 'row1',
                 'JOB_ID' => $i + 1,
                 'CRON_ID' => $row['cron_id'],
-                'CRON_ACTIVE' => $row['cron_active'] ? '<img src="../styles/images/icon_run.gif" alt="' . __('YES') . '" />' : '<img src="../styles/images/icon_delete.gif" alt="' . __('NO') . '" />',
+                'CRON_ACTIVE' => $row['cron_active'] ? '<img src="/assets/images/icon_run.gif" alt="' . __('YES') . '" />' : '<img src="/assets/images/icon_delete.gif" alt="' . __('NO') . '" />',
                 'CRON_TITLE' => $row['cron_title'],
                 'CRON_SCRIPT' => $row['cron_script'],
                 'SCHEDULE' => $row['schedule'] ? __('SCHEDULE')[$row['schedule']] : '<b class="leech">' . __('NOSELECT') . '</b>',

@@ -119,8 +119,8 @@ var TPL = {
 		// значения для автозаполнителя формы. если не определено, то заполняется названием
 
 		year        : 2011,
-		poster      : 'https://torrentpier.duckdns.org/styles/images/logo/logo.png',
-		screenshots : '[img]https://torrentpier.duckdns.org/styles/images/logo/logo.png[/img]',
+		poster      : 'https://torrentpier.duckdns.org/assets/images/logo/logo.png',
+		screenshots : '[img]https://torrentpier.duckdns.org/assets/images/logo/logo.png[/img]',
 
 		// dummy
 		dummy : ''

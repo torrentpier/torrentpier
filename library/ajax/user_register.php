@@ -15,13 +15,13 @@ if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
 }
 
-$html = '<img src="./styles/images/good.gif">';
+$html = '<img src="/assets/images/good.gif">';
 switch ($mode) {
     case 'check_name':
         $username = clean_username($this->request['username']);
 
         if ($err = \TorrentPier\Validate::username($username)) {
-            $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
+            $html = '<img src="/assets/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         }
         break;
 
@@ -29,7 +29,7 @@ switch ($mode) {
         $email = (string)$this->request['email'];
 
         if ($err = \TorrentPier\Validate::email($email)) {
-            $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
+            $html = '<img src="/assets/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         }
         break;
 
@@ -38,10 +38,10 @@ switch ($mode) {
         $pass_confirm = (string)$this->request['pass_confirm'];
 
         if ($err = \TorrentPier\Validate::password($pass, $pass_confirm)) {
-            $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
+            $html = '<img src="/assets/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         } else {
             $text = IS_GUEST ? __('CHOOSE_PASS_REG_OK') : __('CHOOSE_PASS_OK');
-            $html = '<img src="./styles/images/good.gif"> <span class="seedmed bold">' . $text . '</span>';
+            $html = '<img src="/assets/images/good.gif"> <span class="seedmed bold">' . $text . '</span>';
         }
         break;
 

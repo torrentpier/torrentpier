@@ -81,7 +81,7 @@ class Template
         // When called with a proper templates directory, make it the default
         // This allows setup_style() to override any early initialization
         $normalizedRoot = TwigEnvironmentFactory::normalizePath($root);
-        if ($root !== '.' && str_contains($normalizedRoot, 'styles/templates')) {
+        if ($root !== '.' && (str_contains($normalizedRoot, '/templates/') || str_contains($normalizedRoot, 'templates/'))) {
             self::$defaultInstance = self::$instances[$key];
         } elseif (self::$defaultInstance === null) {
             self::$defaultInstance = self::$instances[$key];

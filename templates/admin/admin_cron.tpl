@@ -94,9 +94,9 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 	<td class="nowrap tCenter"><span style="color: #505050;" class="leechmed"><b>{list.RUN_COUNT}</b></span></td>
 	<td class="nowrap tCenter">{list.EXECUTION_TIME}</td>
 	<td class="nowrap tCenter">
-		<a href="admin_cron.php?mode=run&id={list.CRON_ID}"><img src="{SITE_URL}styles/images/icon_sync.gif" alt="[Run]" title="{L_CRON_RUN}" /></a>
-		<a href="admin_cron.php?mode=edit&id={list.CRON_ID}"><img src="{SITE_URL}styles/images/icon_edit.gif" alt="[Edit]" title="{L_CRON_EDIT_HEAD_EDIT}" /></a>
-		<a href="admin_cron.php?mode=delete&id={list.CRON_ID}"><img src="{SITE_URL}styles/images/icon_delete.gif" alt="[Del]" title="{L_CRON_DEL}" onclick="return cfm('{L_DELETE_JOB}');" /></a>
+		<a href="admin_cron.php?mode=run&id={list.CRON_ID}"><img src="{SITE_URL}assets/images/icon_sync.gif" alt="[Run]" title="{L_CRON_RUN}" /></a>
+		<a href="admin_cron.php?mode=edit&id={list.CRON_ID}"><img src="{SITE_URL}assets/images/icon_edit.gif" alt="[Edit]" title="{L_CRON_EDIT_HEAD_EDIT}" /></a>
+		<a href="admin_cron.php?mode=delete&id={list.CRON_ID}"><img src="{SITE_URL}assets/images/icon_delete.gif" alt="[Del]" title="{L_CRON_DEL}" onclick="return cfm('{L_DELETE_JOB}');" /></a>
 	</td>
 </tr>
 <!-- END list -->

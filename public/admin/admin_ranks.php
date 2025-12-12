@@ -59,7 +59,7 @@ if ($mode != '') {
         $s_hidden_fields .= '<input type="hidden" name="mode" value="save" />';
 
         // Scan the ranks images folder
-        $ranks_dir = '../styles/images/ranks/';
+        $ranks_dir = 'assets/images/ranks/';
         $rank_images = [];
 
         if (is_dir($ranks_dir)) {
@@ -81,9 +81,9 @@ if ($mode != '') {
             'TPL_RANKS_EDIT' => true,
 
             'RANK' => !empty($rank_info['rank_title']) ? $rank_info['rank_title'] : '',
-            'IMAGE' => !empty($rank_info['rank_image']) ? $rank_info['rank_image'] : 'styles/images/ranks/rank_image.png',
+            'IMAGE' => !empty($rank_info['rank_image']) ? $rank_info['rank_image'] : 'assets/images/ranks/rank_image.png',
             'STYLE' => !empty($rank_info['rank_style']) ? $rank_info['rank_style'] : '',
-            'IMAGE_DISPLAY' => !empty($rank_info['rank_image']) ? '<img src="../' . $rank_info['rank_image'] . '" />' : '',
+            'IMAGE_DISPLAY' => !empty($rank_info['rank_image']) ? '<img src="/' . $rank_info['rank_image'] . '" />' : '',
 
             'S_RANK_ACTION' => 'admin_ranks.php',
             'S_HIDDEN_FIELDS' => $s_hidden_fields
@@ -91,7 +91,7 @@ if ($mode != '') {
 
         // Pass the list of images to the template
         foreach ($rank_images as $img) {
-            $img_path = 'styles/images/ranks/' . $img;
+            $img_path = 'assets/images/ranks/' . $img;
             $selected = !empty($rank_info['rank_image']) && $rank_info['rank_image'] == $img_path;
 
             template()->assign_block_vars('rank_images', [
@@ -212,7 +212,7 @@ if ($mode != '') {
             'ROW_CLASS' => $row_class,
             'RANK' => $rank,
             'STYLE' => $rank_rows[$i]['rank_style'],
-            'IMAGE_DISPLAY' => $rank_rows[$i]['rank_image'] ? '<img src="../' . $rank_rows[$i]['rank_image'] . '" />' : '',
+            'IMAGE_DISPLAY' => $rank_rows[$i]['rank_image'] ? '<img src="/' . $rank_rows[$i]['rank_image'] . '" />' : '',
 
             'U_RANK_EDIT' => "admin_ranks.php?mode=edit&amp;id=$rank_id",
             'U_RANK_DELETE' => "admin_ranks.php?mode=delete&amp;id=$rank_id"

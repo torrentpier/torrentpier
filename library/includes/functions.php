@@ -861,15 +861,15 @@ function setup_style()
     }
 
     template(TEMPLATES_DIR . '/' . $tpl_dir_name);
-    $css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
     template()->assign_vars([
         'BB_ROOT' => BB_ROOT,
-        'SPACER' => make_url('styles/images/spacer.gif'),
-        'STYLESHEET' => make_url($css_dir . $stylesheet),
+        'SPACER' => make_url('assets/images/spacer.gif'),
+        'STYLESHEET' => asset_url('css/' . $stylesheet, 'css'),
         'EXT_LINK_NEW_WIN' => config()->get('ext_link_new_win'),
-        'TPL_DIR' => make_url($css_dir),
-        'SITE_URL' => make_url('/')
+        'TPL_DIR' => make_url('assets/css/'),
+        'SITE_URL' => make_url('/'),
+        'ASSETS_URL' => make_url('assets/'),
     ]);
 }
 
@@ -929,9 +929,10 @@ function get_user_torrent_client(string $peer_id): string
         }
     }
 
-    $clientIconPath = BB_ROOT . 'styles/images/clients/' . $bestMatch . $iconExtension;
-    if (!empty($bestMatch) && is_file($clientIconPath)) {
-        return '<img class="client_icon" src="' . $clientIconPath . '" alt="' . $bestMatch . '" title="' . $peer_id . '">';
+    $clientIconFile = IMAGES_DIR . '/clients/' . $bestMatch . $iconExtension;
+    if (!empty($bestMatch) && is_file($clientIconFile)) {
+        $clientIconUrl = image_url('clients/' . $bestMatch . $iconExtension);
+        return '<img class="client_icon" src="' . $clientIconUrl . '" alt="' . $bestMatch . '" title="' . $peer_id . '">';
     }
 
     return $peer_id;
@@ -957,14 +958,15 @@ function render_flag(string $code, bool $showName = true): string
         return $code;
     }
 
-    $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
-    if (!is_file($flagIconPath)) {
+    $flagIconFile = IMAGES_DIR . '/flags/' . $code . $iconExtension;
+    if (!is_file($flagIconFile)) {
         return $code;
     }
 
+    $flagIconUrl = image_url('flags/' . $code . $iconExtension);
     $langName = $countries[$code];
     $countryName = $showName ? '&nbsp;' . str_short($langName, 20) : '';
-    return '<span title="' . $langName . '"><img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '">' . $countryName . '</span>';
+    return '<span title="' . $langName . '"><img src="' . $flagIconUrl . '" class="poster-flag" alt="' . $code . '">' . $countryName . '</span>';
 }
 
 function birthday_age($date)

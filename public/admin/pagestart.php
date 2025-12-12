@@ -10,7 +10,7 @@
 define('BB_ROOT', './../');
 define('IN_ADMIN', true);
 
-require dirname(__DIR__) . '/common.php';
+require dirname(__DIR__, 2) . '/common.php';
 
 user()->session_start();
 

@@ -33,7 +33,7 @@ echo "Database is ready!"
 
 # Run migrations
 echo "Running database migrations..."
-cd /app/public
+cd /app
 php vendor/bin/phinx migrate --configuration=phinx.php
 
 if [ $? -eq 0 ]; then

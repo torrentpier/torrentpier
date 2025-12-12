@@ -14,9 +14,9 @@
 <meta name="apple-mobile-web-app-title" content="{SITENAME}">
 <meta name="application-name" content="{SITENAME}"/>
 <meta property="og:site_name" content="{SITENAME}">
-<meta property="og:image" content="{SITE_URL}styles/images/logo/logo.png" />
+<meta property="og:image" content="{SITE_URL}assets/images/logo/logo.png" />
 <meta property="og:type" content="website">
-<meta property="twitter:image" content="{SITE_URL}styles/images/logo/logo.png">
+<meta property="twitter:image" content="{SITE_URL}assets/images/logo/logo.png">
 <meta property="og:title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
 <meta property="twitter:title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
 <meta property="twitter:card" content="summary">
@@ -33,19 +33,19 @@
 <link rel="canonical" href="{CANONICAL_URL}">
 <!-- ENDIF / CANONICAL_URL -->
 {META}
-<link rel="stylesheet" href="{STYLESHEET}?v={{ config('css_ver') }}" type="text/css">
-<link rel="stylesheet" href="{SITE_URL}styles/templates/default/css/dark-mode.css?v={{ config('css_ver') }}" type="text/css">
+<link rel="stylesheet" href="{STYLESHEET}" type="text/css">
+<link rel="stylesheet" href="{SITE_URL}assets/css/dark-mode.css?v={{ config('css_ver') }}" type="text/css">
 <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
 
-<script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="{SITE_URL}styles/js/libs/clipboard.min.js"></script>
-<script type="text/javascript" src="{SITE_URL}styles/js/libs/printThis.min.js"></script>
-<script type="text/javascript" src="{SITE_URL}styles/js/libs/legacy.js"></script>
-<script type="text/javascript" src="{SITE_URL}styles/js/main.js?v={{ config('js_ver') }}"></script>
+<script type="text/javascript" src="{SITE_URL}assets/js/libs/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}assets/js/libs/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}assets/js/libs/clipboard.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}assets/js/libs/printThis.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}assets/js/libs/legacy.js"></script>
+<script type="text/javascript" src="{SITE_URL}assets/js/main.js?v={{ config('js_ver') }}"></script>
 
 <!-- IF INCLUDE_BBCODE_JS -->
-<script type="text/javascript" src="{SITE_URL}styles/js/bbcode.js?v={{ config('js_ver') }}"></script>
+<script type="text/javascript" src="{SITE_URL}assets/js/bbcode.js?v={{ config('js_ver') }}"></script>
 <script type="text/javascript">
 	window.BB = {};
 	window.encURL = encodeURIComponent;
@@ -243,7 +243,7 @@ function go_to_page ()
 <div id="logo">
 	<!--<h1>{SITENAME}</h1>
 	<h6>{SITE_DESCRIPTION}</h6> -->
-	<a href="{U_INDEX}"><img src="{FORUM_PATH}styles/images/logo/logo.png" title="{SITENAME}" alt="{SITENAME}" /></a>
+	<a href="{U_INDEX}"><img src="{FORUM_PATH}assets/images/logo/logo.png" title="{SITENAME}" alt="{SITENAME}" /></a>
 </div>
 <!--/logo-->
 
