@@ -136,7 +136,8 @@ class MakeCommandCommand extends Command
         string $className,
         string $commandName,
         string $description
-    ): string {
+    ): string
+    {
         return <<<PHP
 <?php
 /**

@@ -183,8 +183,8 @@ class CreateCommand extends Command
     private function usernameExists(string $username): bool
     {
         return DB()->table(BB_USERS)
-            ->where('username', $username)
-            ->count() > 0;
+                ->where('username', $username)
+                ->count() > 0;
     }
 
     /**
@@ -193,8 +193,8 @@ class CreateCommand extends Command
     private function emailExists(string $email): bool
     {
         return DB()->table(BB_USERS)
-            ->where('user_email', $email)
-            ->count() > 0;
+                ->where('user_email', $email)
+                ->count() > 0;
     }
 
     /**
