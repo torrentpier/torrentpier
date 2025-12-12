@@ -13,6 +13,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 use TorrentPier\Console\Command\Command;
 use TorrentPier\Console\Helpers\FileSystemHelper;
 
@@ -50,7 +51,7 @@ class CacheClearCommand extends Command
 
         $this->title('Cache Clear');
 
-        if (!$force && !$this->confirm('Are you sure you want to clear the cache?', false)) {
+        if (!$force && !$this->confirm('Are you sure you want to clear the cache?')) {
             $this->comment('Operation cancelled.');
             return self::SUCCESS;
         }
@@ -85,7 +86,7 @@ class CacheClearCommand extends Command
             $this->listing($cleared);
 
             return self::SUCCESS;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->error('Failed to clear cache: ' . $e->getMessage());
 
             if ($this->isVerbose()) {
@@ -111,8 +112,8 @@ class CacheClearCommand extends Command
         if (function_exists('CACHE')) {
             try {
                 CACHE('bb_cache')->clean();
-            } catch (\Throwable) {
-                // Ignore if cache is not available
+            } catch (Throwable) {
+                // Ignore if the cache is not available
             }
         }
     }

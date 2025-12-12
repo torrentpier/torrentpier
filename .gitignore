@@ -2,6 +2,9 @@
 .idea
 .vscode
 
+### Claude ###
+CLAUDE.local.md
+
 ### TorrentPier ###
 *.log
 install.php_*
