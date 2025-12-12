@@ -58,7 +58,7 @@ class OptimizeCommand extends Command
         $steps['opcache'] = $this->clearOpcache();
 
         // Summary
-        $this->line('');
+        $this->line();
         $this->section('Summary');
 
         $allSuccess = true;
@@ -70,7 +70,7 @@ class OptimizeCommand extends Command
             }
         }
 
-        $this->line('');
+        $this->line();
 
         if ($allSuccess) {
             $this->success('Application optimized successfully!');

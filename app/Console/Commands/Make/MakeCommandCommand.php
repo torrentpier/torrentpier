@@ -95,14 +95,14 @@ class MakeCommandCommand extends Command
         }
 
         $this->success('Command created successfully!');
-        $this->line('');
+        $this->line();
         $this->definitionList(
             ['Command' => $name],
             ['Class' => $namespace . '\\' . $className],
             ['File' => $filePath],
         );
 
-        $this->line('');
+        $this->line();
         $this->comment('The command is automatically registered and ready to use.');
         $this->line('Run "php bull ' . $name . '" to test it.');
 

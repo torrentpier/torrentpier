@@ -217,7 +217,7 @@ class InstallCommand extends Command
         }
 
         // Check extensions
-        $this->line('');
+        $this->line();
         $this->line('  <comment>Extensions:</comment>');
 
         foreach (self::REQUIRED_EXTENSIONS as $ext) {
@@ -233,7 +233,7 @@ class InstallCommand extends Command
             }
         }
 
-        $this->line('');
+        $this->line();
 
         if ($allPassed) {
             $this->success('All requirements satisfied!');
@@ -261,7 +261,7 @@ class InstallCommand extends Command
             }
         }
 
-        $this->line('');
+        $this->line();
     }
 
     /**
@@ -298,11 +298,11 @@ class InstallCommand extends Command
         }
 
         $this->warning('Composer dependencies not found.');
-        $this->line('');
+        $this->line();
         $this->line('Please run one of the following commands:');
         $this->line('  <comment>composer install</comment>');
         $this->line('  <comment>php composer.phar install</comment>');
-        $this->line('');
+        $this->line();
 
         return false;
     }
@@ -325,9 +325,9 @@ class InstallCommand extends Command
             $this->line('  <info>✓</info> Created .env file from template');
         }
 
-        $this->line('');
+        $this->line();
         $this->line('  <comment>Please configure the following settings:</comment>');
-        $this->line('');
+        $this->line();
 
         // Application settings
         $this->config['APP_ENV'] = $this->choice(
@@ -349,9 +349,9 @@ class InstallCommand extends Command
         }
         $this->config['TP_HOST'] = $host;
 
-        $this->line('');
+        $this->line();
         $this->line('  <comment>Database configuration:</comment>');
-        $this->line('');
+        $this->line();
 
         // Database settings
         $this->config['DB_HOST'] = $this->ask('Database host', 'localhost');
@@ -371,7 +371,7 @@ class InstallCommand extends Command
         // Write to .env
         $this->writeEnvFile();
 
-        $this->line('');
+        $this->line();
         $this->success('Environment configured!');
 
         return true;
@@ -497,11 +497,11 @@ class InstallCommand extends Command
             }
 
             $this->line(sprintf('  Running %d migration(s)...', $status['pending']));
-            $this->line('');
+            $this->line();
 
             $phinx->migrate();
 
-            $this->line('');
+            $this->line();
             $this->success('Migrations completed!');
 
             return true;
@@ -544,7 +544,7 @@ class InstallCommand extends Command
             }
         }
 
-        $this->line('');
+        $this->line();
     }
 
     /**
@@ -584,19 +584,19 @@ class InstallCommand extends Command
         if (isset($configFiles[$webserver])) {
             $configPath = BB_ROOT . $configFiles[$webserver];
             if (file_exists($configPath)) {
-                $this->line('');
+                $this->line();
                 $this->line("  <info>Configuration template:</info> {$configPath}");
-                $this->line('');
+                $this->line();
                 $this->comment('  Copy and adapt this configuration to your web server.');
                 $this->comment('  It includes URL rewriting, security headers, and PHP settings.');
             }
         } elseif ($webserver === 'apache') {
-            $this->line('');
+            $this->line();
             $this->comment('  For Apache, ensure mod_rewrite is enabled.');
             $this->comment('  Use the provided .htaccess file in the project root.');
         }
 
-        $this->line('');
+        $this->line();
     }
 
     /**
@@ -619,7 +619,7 @@ class InstallCommand extends Command
         $this->line('  - Development documentation (README, CHANGELOG)');
         $this->line('  - Git configuration files');
         $this->line('  - CI/CD pipelines');
-        $this->line('');
+        $this->line();
 
         if ($this->confirm('Remove development files?', false)) {
             require_once $cleanupScript;
@@ -635,7 +635,7 @@ class InstallCommand extends Command
             $this->comment('  Skipped cleanup');
         }
 
-        $this->line('');
+        $this->line();
     }
 
     /**
@@ -657,7 +657,7 @@ class InstallCommand extends Command
             ['Default Admin' => 'admin / admin (change immediately!)'],
         );
 
-        $this->line('');
+        $this->line();
         $this->comment('Next steps:');
         $this->listing([
             'Configure your web server using the provided templates',
@@ -667,6 +667,6 @@ class InstallCommand extends Command
         ]);
 
         $this->line('<fg=cyan>Good luck & have fun! 🚀</>');
-        $this->line('');
+        $this->line();
     }
 }

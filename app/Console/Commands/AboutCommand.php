@@ -65,7 +65,7 @@ class AboutCommand extends Command
         $this->line('  Website:  <comment>https://torrentpier.com</comment>');
         $this->line('  Docs:     <comment>https://docs.torrentpier.com</comment>');
         $this->line('  GitHub:   <comment>https://github.com/torrentpier/torrentpier</comment>');
-        $this->line('');
+        $this->line();
 
         return self::SUCCESS;
     }

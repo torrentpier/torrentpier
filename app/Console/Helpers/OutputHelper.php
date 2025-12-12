@@ -63,4 +63,21 @@ class OutputHelper
         $minutes = floor(($seconds % 3600) / 60);
         return "{$hours}h {$minutes}m";
     }
+
+    /**
+     * Format a large number with suffix (K, M)
+     *
+     * @param int $number Number to format
+     * @return string Formatted string (e.g., "1.5M", "250K")
+     */
+    public static function formatNumber(int $number): string
+    {
+        if ($number >= 1000000) {
+            return round($number / 1000000, 1) . 'M';
+        }
+        if ($number >= 1000) {
+            return round($number / 1000, 1) . 'K';
+        }
+        return (string) $number;
+    }
 }
