@@ -733,29 +733,24 @@ function clean_username($username)
  * @param int|string $u
  * @param bool $is_name
  * @param bool $allow_guest
- * @return mixed
+ * @return array|bool
  */
-function get_userdata(int|string $u, bool $is_name = false, bool $allow_guest = false, bool $profile_view = false)
+function get_userdata(int|string $u, bool $is_name = false, bool $allow_guest = false)
 {
     if (empty($u)) {
         return false;
     }
 
     if (!$is_name) {
-        $u = (int)$u;
-        if ($u === GUEST_UID && $allow_guest) {
+        if ((int)$u === GUEST_UID && $allow_guest) {
             if ($u_data = CACHE('bb_cache')->get('guest_userdata')) {
                 return $u_data;
             }
         }
 
-        $where_sql = "WHERE user_id = " . $u;
+        $where_sql = "WHERE user_id = " . (int)$u;
     } else {
         $where_sql = "WHERE username = '" . DB()->escape(clean_username($u)) . "'";
-    }
-
-    if ($profile_view) {
-        $where_sql = "WHERE user_id = " . (int)$u . " OR username = '" . DB()->escape(clean_username($u)) . "'";
     }
 
     $exclude_anon_sql = (!$allow_guest) ? "AND user_id != " . GUEST_UID : '';
@@ -1206,7 +1201,7 @@ function redirect($url)
     $server_protocol = (config()->get('cookie_secure')) ? 'https://' : 'http://';
 
     $server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('server_name')));
-    $port = (int) config()->get('server_port');
+    $port = (int)config()->get('server_port');
     $server_port = ($port > 0 && !in_array($port, [80, 443], true)) ? ':' . $port : '';
     $script_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('script_path')));
 
