@@ -11,13 +11,13 @@
   top: 50%;
   left: 50%;
   background-attachment: fixed, scroll;
-  background: url(../images/aerobg.png), -moz-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
-  background: url(../images/aerobg.png), -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(200, 200, 200, 0.4)), color-stop(100%, rgba(255, 255, 255, 1)));
-  background: url(../images/aerobg.png), -webkit-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
-  background: url(../images/aerobg.png), -o-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
-  background: url(../images/aerobg.png), -ms-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
+  background: url(../images/theme/aerobg.png), -moz-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
+  background: url(../images/theme/aerobg.png), -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(200, 200, 200, 0.4)), color-stop(100%, rgba(255, 255, 255, 1)));
+  background: url(../images/theme/aerobg.png), -webkit-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
+  background: url(../images/theme/aerobg.png), -o-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
+  background: url(../images/theme/aerobg.png), -ms-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66c8c8c8', endColorstr='#ffffff', GradientType=0);
-  background: url(../images/aerobg.png), linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
+  background: url(../images/theme/aerobg.png), linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
   background-size: cover;
   -moz-background-size: cover;
   -webkit-background-size: cover;
@@ -113,11 +113,11 @@
 }
 
 span.button {
-  background-image: url(../images/def_button.png);
+  background-image: url(../images/theme/def_button.png);
 }
 
 span.button:hover {
-  background-image: url(../images/def_button_light.png);
+  background-image: url(../images/theme/def_button_light.png);
 }
 
 span.YTLink {
@@ -146,7 +146,7 @@ span.YTLinkButton {
   -moz-border-radius-bottomright: 3px;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  cursor: url(../images/link_help.cur), pointer;
+  cursor: url(../images/theme/link_help.cur), pointer;
 }
 
 span.YTLink a.postLink {
@@ -195,7 +195,7 @@ div#autocomplete_popup div.close {
   font-weight: bold;
   width: 12px;
   height: 12px;
-  background: url("../../../images/bad.gif") transparent no-repeat;
+  background: url("../images/bad.gif") transparent no-repeat;
 }
 
 div#autocomplete_popup input {
@@ -208,7 +208,7 @@ div#autocomplete_popup span.regenerate {
   width: 16px;
   height: 16px;
   margin: 24px 0 0 8px;
-  background: url("../../../images/pic_loading.gif") transparent no-repeat;
+  background: url("../images/pic_loading.gif") transparent no-repeat;
   cursor: pointer;
   display: inline-block;
 }

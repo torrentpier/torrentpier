@@ -8,11 +8,12 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Console\Commands;
+namespace TorrentPier\Console\Commands\System;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Console\Commands\Command;
 
 /**
  * Displays information about the TorrentPier installation
@@ -65,7 +66,7 @@ class AboutCommand extends Command
         $this->line('  Website:  <comment>https://torrentpier.com</comment>');
         $this->line('  Docs:     <comment>https://docs.torrentpier.com</comment>');
         $this->line('  GitHub:   <comment>https://github.com/torrentpier/torrentpier</comment>');
-        $this->line('');
+        $this->line();
 
         return self::SUCCESS;
     }

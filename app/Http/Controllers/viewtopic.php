@@ -597,7 +597,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $poster_rank = $rank_image = '';
     $user_rank = $postrow[$i]['user_rank'];
     if (!user()->opt_js['h_rnk_i'] and isset($ranks[$user_rank])) {
-        $rank_image = (config()->get('show_rank_image') && $ranks[$user_rank]['rank_image']) ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
+        $rank_image = (config()->get('show_rank_image') && $ranks[$user_rank]['rank_image']) ? '<img src="' . make_url($ranks[$user_rank]['rank_image']) . '" alt="" title="" border="0" />' : '';
         $poster_rank = config()->get('show_rank_text') ? $ranks[$user_rank]['rank_title'] : '';
     }
 

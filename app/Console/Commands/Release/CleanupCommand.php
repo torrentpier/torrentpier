@@ -107,9 +107,9 @@ class CleanupCommand extends Command
             $this->line("  {$type} {$item}");
         }
 
-        $this->line('');
+        $this->line();
         $this->line(sprintf('  <comment>Total: %d item(s)</comment>', count($toDelete)));
-        $this->line('');
+        $this->line();
 
         if ($dryRun) {
             $this->warning('Dry run mode - no files were deleted.');
@@ -150,7 +150,7 @@ class CleanupCommand extends Command
             }
         }
 
-        $this->line('');
+        $this->line();
 
         if ($failed === 0) {
             $this->success("Cleanup completed! Removed {$deleted} item(s).");

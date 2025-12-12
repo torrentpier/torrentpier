@@ -62,22 +62,22 @@ pre, .pre {
 
 .folded, .folded2 {
   display: block;
-  background: transparent url(../images/icon_plus_1.gif) no-repeat left center;
+  background: transparent url(../images/theme/icon_plus_1.gif) no-repeat left center;
   padding-left: 14px;
 }
 
 .unfolded, .unfolded2 {
   display: block;
-  background: transparent url(../images/icon_minus_1.gif) no-repeat left center;
+  background: transparent url(../images/theme/icon_minus_1.gif) no-repeat left center;
   padding-left: 14px;
 }
 
 .folded2 {
-  background-image: url(../images/icon_plus_2.gif);
+  background-image: url(../images/theme/icon_plus_2.gif);
 }
 
 .unfolded2 {
-  background-image: url(../images/icon_minus_2.gif);
+  background-image: url(../images/theme/icon_minus_2.gif);
 }
 
 .warnColor1 {

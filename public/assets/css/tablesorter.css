@@ -19,7 +19,7 @@
 }
 
 .treeview .hitarea {
-  background: url(../images/treeview/treeview-default.gif) -64px -25px no-repeat;
+  background: url(../images/theme/treeview/treeview-default.gif) -64px -25px no-repeat;
   width: 16px;
   height: 16px;
   margin-left: -16px;
@@ -57,7 +57,7 @@
 }
 
 .treeview li {
-  background: url(../images/treeview/treeview-default-line.gif) 0 0 no-repeat;
+  background: url(../images/theme/treeview/treeview-default-line.gif) 0 0 no-repeat;
 }
 
 .treeview li.collapsable, .treeview li.expandable {
@@ -73,7 +73,7 @@
 }
 
 .treeview li.lastCollapsable, .treeview li.lastExpandable {
-  background-image: url(../images/treeview/treeview-default.gif);
+  background-image: url(../images/theme/treeview/treeview-default.gif);
 }
 
 .treeview li.lastCollapsable {
@@ -107,13 +107,13 @@
 
 .tbs-icon {
   padding-left: 8px;
-  background: url(../images/tbl_sort_bg.gif) no-repeat 0 50%;
+  background: url(../images/theme/tbl_sort_bg.gif) no-repeat 0 50%;
 }
 
 .headerSortUp .tbs-icon {
-  background-image: url(../images/tbl_sort_asc.gif);
+  background-image: url(../images/theme/tbl_sort_asc.gif);
 }
 
 .headerSortDown .tbs-icon {
-  background-image: url(../images/tbl_sort_desc.gif);
+  background-image: url(../images/theme/tbl_sort_desc.gif);
 }
