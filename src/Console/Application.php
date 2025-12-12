@@ -15,8 +15,8 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ReflectionClass;
 use Symfony\Component\Console\Application as SymfonyApplication;
-use Throwable;
 use Symfony\Component\Console\Command\Command;
+use Throwable;
 use TorrentPier\Console\Command\Command as BaseCommand;
 
 /**
