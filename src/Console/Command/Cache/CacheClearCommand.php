@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use TorrentPier\Console\Command\Command;
+use TorrentPier\Console\Helpers\FileSystemHelper;
 
 /**
  * Clears the application cache
@@ -103,7 +104,7 @@ class CacheClearCommand extends Command
         $cacheDir = BB_ROOT . 'internal_data/cache';
 
         if (is_dir($cacheDir)) {
-            $this->clearDirectory($cacheDir);
+            FileSystemHelper::clearDirectory($cacheDir);
         }
 
         // Clear runtime cache if available
@@ -124,26 +125,7 @@ class CacheClearCommand extends Command
         $templateCacheDir = BB_ROOT . 'internal_data/cache/twig';
 
         if (is_dir($templateCacheDir)) {
-            $this->clearDirectory($templateCacheDir);
-        }
-    }
-
-    /**
-     * Recursively clear directory contents
-     */
-    private function clearDirectory(string $dir): void
-    {
-        $items = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST
-        );
-
-        foreach ($items as $item) {
-            if ($item->isDir()) {
-                @rmdir($item->getRealPath());
-            } else {
-                @unlink($item->getRealPath());
-            }
+            FileSystemHelper::clearDirectory($templateCacheDir);
         }
     }
 }

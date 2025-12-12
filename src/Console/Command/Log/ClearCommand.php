@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use TorrentPier\Console\Command\Command;
+use TorrentPier\Console\Helpers\FileSystemHelper;
 
 /**
  * Clear application logs
@@ -62,14 +63,14 @@ class ClearCommand extends Command
             $totalSize += $size;
             $rows[] = [
                 basename($file),
-                $this->formatBytes($size),
+                FileSystemHelper::formatBytes($size),
                 date('Y-m-d H:i', filemtime($file)),
             ];
         }
 
         $this->table(['File', 'Size', 'Modified'], $rows);
         $this->line('');
-        $this->line(sprintf('  <comment>Total: %d file(s), %s</comment>', count($files), $this->formatBytes($totalSize)));
+        $this->line(sprintf('  <comment>Total: %d file(s), %s</comment>', count($files), FileSystemHelper::formatBytes($totalSize)));
         $this->line('');
 
         // Confirm
@@ -137,22 +138,6 @@ class ClearCommand extends Command
         }
 
         return $files;
-    }
-
-    /**
-     * Format bytes to human readable
-     */
-    private function formatBytes(int $bytes): string
-    {
-        $units = ['B', 'KB', 'MB', 'GB'];
-        $i = 0;
-
-        while ($bytes >= 1024 && $i < count($units) - 1) {
-            $bytes /= 1024;
-            $i++;
-        }
-
-        return round($bytes, 2) . ' ' . $units[$i];
     }
 }
 

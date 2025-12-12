@@ -15,6 +15,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use TorrentPier\Console\Command\Command;
+use TorrentPier\Console\Helpers\FileSystemHelper;
 use TorrentPier\Console\Helpers\PhinxManager;
 
 /**
@@ -421,6 +422,13 @@ class InstallCommand extends Command
         $username = $this->config['DB_USERNAME'];
         $password = $this->config['DB_PASSWORD'];
 
+        // Validate database name (whitelist: alphanumeric and underscore only)
+        // DDL statements like CREATE DATABASE don't support prepared statements
+        if (!preg_match('/^[a-zA-Z0-9_]+$/', $database)) {
+            $this->error('Invalid database name. Only alphanumeric characters and underscores are allowed.');
+            return false;
+        }
+
         // Test connection
         $this->line('  Connecting to MySQL server...');
 
@@ -595,7 +603,7 @@ class InstallCommand extends Command
             // Remove release scripts directory
             $releaseDir = BB_ROOT . 'install/release_scripts';
             if (is_dir($releaseDir)) {
-                $this->removeDirectory($releaseDir);
+                FileSystemHelper::removeDirectory($releaseDir);
             }
 
             $this->line('  <info>✓</info> Cleanup completed');
@@ -604,31 +612,6 @@ class InstallCommand extends Command
         }
 
         $this->line('');
-    }
-
-    /**
-     * Remove directory recursively
-     */
-    private function removeDirectory(string $dir): void
-    {
-        if (!is_dir($dir)) {
-            return;
-        }
-
-        $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST
-        );
-
-        foreach ($iterator as $item) {
-            if ($item->isDir()) {
-                @rmdir($item->getPathname());
-            } else {
-                @unlink($item->getPathname());
-            }
-        }
-
-        @rmdir($dir);
     }
 
     /**

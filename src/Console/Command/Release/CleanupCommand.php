@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use TorrentPier\Console\Command\Command;
+use TorrentPier\Console\Helpers\FileSystemHelper;
 
 /**
  * Remove development files for production release
@@ -130,7 +131,7 @@ class CleanupCommand extends Command
 
             try {
                 if (is_dir($path)) {
-                    $this->removeDirectory($path);
+                    FileSystemHelper::removeDirectory($path);
                 } else {
                     @unlink($path);
                 }
@@ -157,31 +158,6 @@ class CleanupCommand extends Command
         }
 
         return $failed === 0 ? self::SUCCESS : self::FAILURE;
-    }
-
-    /**
-     * Remove directory recursively
-     */
-    private function removeDirectory(string $dir): void
-    {
-        if (!is_dir($dir)) {
-            return;
-        }
-
-        $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST
-        );
-
-        foreach ($iterator as $item) {
-            if ($item->isDir()) {
-                @rmdir($item->getPathname());
-            } else {
-                @unlink($item->getPathname());
-            }
-        }
-
-        @rmdir($dir);
     }
 }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -54,7 +55,7 @@ class AboutCommand extends Command
             $loaded = extension_loaded($ext);
             $extensionStatus[] = [
                 $ext,
-                $loaded ? '<info>✓ Loaded</info>' : '<error>✗ Not loaded</error>'
+                $loaded ? '<info>✓ Loaded</info>' : '<error>✗ Not loaded</error>',
             ];
         }
 
@@ -69,4 +70,3 @@ class AboutCommand extends Command
         return self::SUCCESS;
     }
 }
-

@@ -13,6 +13,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Console\Helpers\FileSystemHelper;
 
 /**
  * Optimize the application for production
@@ -92,22 +93,7 @@ class OptimizeCommand extends Command
         }
 
         try {
-            $count = 0;
-            $iterator = new \RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator($cacheDir, \RecursiveDirectoryIterator::SKIP_DOTS),
-                \RecursiveIteratorIterator::CHILD_FIRST
-            );
-
-            foreach ($iterator as $item) {
-                if ($item->isDir()) {
-                    @rmdir($item->getPathname());
-                } else {
-                    if (@unlink($item->getPathname())) {
-                        $count++;
-                    }
-                }
-            }
-
+            $count = FileSystemHelper::clearDirectoryWithCount($cacheDir);
             $this->line("  <info>✓</info> Cleared {$count} cache file(s)");
 
             // Clear runtime cache
