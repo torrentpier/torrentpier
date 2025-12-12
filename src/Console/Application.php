@@ -9,15 +9,12 @@
 
 namespace TorrentPier\Console;
 
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use ReflectionClass;
 use Symfony\Component\Console\Application as SymfonyApplication;
-use TorrentPier\Console\Command\AboutCommand;
-use TorrentPier\Console\Command\Cache\CacheClearCommand;
-use TorrentPier\Console\Command\Cache\CacheStatusCommand;
-use TorrentPier\Console\Command\Cron\CronRunCommand;
-use TorrentPier\Console\Command\Cron\CronListCommand;
-use TorrentPier\Console\Command\Migrate\MigrateCommand;
-use TorrentPier\Console\Command\Migrate\MigrateStatusCommand;
-use TorrentPier\Console\Command\Migrate\MigrateRollbackCommand;
+use Symfony\Component\Console\Command\Command;
+use TorrentPier\Console\Command\Command as BaseCommand;
 
 /**
  * Bull Console Application
@@ -26,35 +23,122 @@ use TorrentPier\Console\Command\Migrate\MigrateRollbackCommand;
  */
 class Application extends SymfonyApplication
 {
-    public const VERSION = '1.0.0';
-
+    /**
+     * Create a new console application
+     */
     public function __construct()
     {
-        parent::__construct('Bull CLI', self::VERSION);
+        parent::__construct('Bull CLI', $this->detectVersion());
 
-        $this->registerCommands();
+        $this->discoverCommands();
     }
 
     /**
-     * Register all available commands
+     * Detect application version from composer.json or config
      */
-    private function registerCommands(): void
+    private function detectVersion(): string
     {
-        // System commands
-        $this->add(new AboutCommand());
+        // Try to get version from bb_cfg (set by config.php)
+        global $bb_cfg;
+        if (isset($bb_cfg['tp_version'])) {
+            return $bb_cfg['tp_version'];
+        }
 
-        // Cache commands
-        $this->add(new CacheClearCommand());
-        $this->add(new CacheStatusCommand());
+        // Fallback: try to read from composer.json
+        $composerPath = BB_ROOT . 'composer.json';
+        if (file_exists($composerPath)) {
+            $composer = json_decode(file_get_contents($composerPath), true);
+            if (isset($composer['version'])) {
+                return $composer['version'];
+            }
+        }
 
-        // Cron commands
-        $this->add(new CronRunCommand());
-        $this->add(new CronListCommand());
+        // Final fallback
+        return 'dev';
+    }
 
-        // Migration commands
-        $this->add(new MigrateCommand());
-        $this->add(new MigrateStatusCommand());
-        $this->add(new MigrateRollbackCommand());
+    /**
+     * Auto-discover and register all commands from the Command directory
+     */
+    private function discoverCommands(): void
+    {
+        $commandDir = __DIR__ . '/Command';
+
+        if (!is_dir($commandDir)) {
+            return;
+        }
+
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($commandDir, RecursiveDirectoryIterator::SKIP_DOTS)
+        );
+
+        foreach ($iterator as $file) {
+            if ($file->getExtension() !== 'php') {
+                continue;
+            }
+
+            $className = $this->getClassNameFromFile($file->getPathname());
+
+            if ($className === null) {
+                continue;
+            }
+
+            // Skip the base Command class
+            if ($className === BaseCommand::class) {
+                continue;
+            }
+
+            // Check if class exists and is a valid command
+            if (!class_exists($className)) {
+                continue;
+            }
+
+            $reflection = new ReflectionClass($className);
+
+            // Skip abstract classes and interfaces
+            if ($reflection->isAbstract() || $reflection->isInterface()) {
+                continue;
+            }
+
+            // Must extend Symfony Command
+            if (!$reflection->isSubclassOf(Command::class)) {
+                continue;
+            }
+
+            // Register the command
+            $this->add($reflection->newInstance());
+        }
+    }
+
+    /**
+     * Extract fully qualified class name from a PHP file
+     */
+    private function getClassNameFromFile(string $filePath): ?string
+    {
+        $contents = file_get_contents($filePath);
+
+        if ($contents === false) {
+            return null;
+        }
+
+        $namespace = null;
+        $class = null;
+
+        // Extract namespace
+        if (preg_match('/namespace\s+([^;]+);/', $contents, $matches)) {
+            $namespace = $matches[1];
+        }
+
+        // Extract class name
+        if (preg_match('/class\s+(\w+)/', $contents, $matches)) {
+            $class = $matches[1];
+        }
+
+        if ($namespace === null || $class === null) {
+            return null;
+        }
+
+        return $namespace . '\\' . $class;
     }
 
     /**
@@ -87,4 +171,3 @@ HELP;
         );
     }
 }
-

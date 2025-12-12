@@ -49,6 +49,29 @@ composer install
 composer update
 ```
 
+### Bull CLI (Command Line Interface)
+```bash
+# List all available commands
+php bull list
+
+# Show system information
+php bull about
+
+# Cache management
+php bull cache:status
+php bull cache:clear
+
+# Cron jobs
+php bull cron:list
+php bull cron:run
+
+# Create new console command
+php bull make:command user:create
+
+# Shell completion (bash/zsh/fish)
+php bull completion bash > /etc/bash_completion.d/bull
+```
+
 ### Maintenance & Operations
 ```bash
 # Run background maintenance tasks
@@ -104,16 +127,22 @@ The project uses **StyleCI** with PSR-2 preset for code style enforcement. Style
 - UTF-8 (utf8mb4) character set required
 - Multiple database alias support for different components
 
-### Migration Commands
+### Migration Commands (Bull CLI)
 ```bash
 # Run all pending migrations
-php vendor/bin/phinx migrate --configuration=phinx.php
+php bull migrate
 
 # Check migration status
-php vendor/bin/phinx status --configuration=phinx.php
+php bull migrate:status
 
-# Mark migrations as applied (for existing installations)
-php vendor/bin/phinx migrate --fake --configuration=phinx.php
+# Rollback last migration
+php bull migrate:rollback
+
+# Mark migrations as applied without running (for existing installations)
+php bull migrate --fake
+
+# Create a new migration file
+php bull make:migration add_column_to_users
 ```
 
 ## Legacy Compatibility Strategy

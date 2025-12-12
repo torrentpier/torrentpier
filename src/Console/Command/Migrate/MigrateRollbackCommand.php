@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use TorrentPier\Console\Command\Command;
+use TorrentPier\Console\Helpers\PhinxManager;
 
 /**
  * Rollback database migrations
@@ -31,7 +32,7 @@ class MigrateRollbackCommand extends Command
                 'target',
                 't',
                 InputOption::VALUE_OPTIONAL,
-                'Target migration version to rollback to'
+                'Target migration version to rollback to (0 = rollback all)'
             )
             ->addOption(
                 'force',
@@ -48,47 +49,70 @@ class MigrateRollbackCommand extends Command
         $target = $input->getOption('target');
         $force = $input->getOption('force');
 
-        if (!$force) {
-            $this->warning('This will rollback database migrations. Data may be lost!');
-            if (!$this->confirm('Are you sure you want to continue?', false)) {
-                $this->comment('Operation cancelled.');
+        try {
+            $phinx = new PhinxManager($input, $output);
+            $status = $phinx->getStatus();
+
+            if ($status['ran'] === 0) {
+                $this->warning('No migrations to rollback.');
                 return self::SUCCESS;
             }
-        }
 
-        $phinxPath = BB_ROOT . 'vendor/bin/phinx';
-        $configPath = BB_ROOT . 'phinx.php';
+            // Show what will be rolled back
+            $ranMigrations = array_filter(
+                $status['migrations'],
+                fn($m) => $m['status'] === 'up'
+            );
 
-        if (!file_exists($phinxPath)) {
-            $this->error('Phinx not found. Please run: composer install');
+            if (empty($ranMigrations)) {
+                $this->warning('No migrations to rollback.');
+                return self::SUCCESS;
+            }
+
+            if ($target === '0') {
+                $this->warning('This will rollback ALL migrations!');
+                $affectedCount = count($ranMigrations);
+            } elseif ($target !== null) {
+                $targetVersion = (int)$target;
+                $affectedCount = count(array_filter(
+                    $ranMigrations,
+                    fn($m) => (int)$m['version'] > $targetVersion
+                ));
+                $this->info(sprintf('Rolling back to version %d (%d migration(s))', $targetVersion, $affectedCount));
+            } else {
+                $affectedCount = 1;
+                $lastMigration = end($ranMigrations);
+                $this->info(sprintf('Rolling back: %s', $lastMigration['name']));
+            }
+
+            if (!$force) {
+                $this->line('');
+                $this->warning('⚠ This operation may cause data loss!');
+                $this->line('');
+
+                if (!$this->confirm('Are you sure you want to rollback?', false)) {
+                    $this->comment('Operation cancelled.');
+                    return self::SUCCESS;
+                }
+            }
+
+            $this->section('Rolling Back');
+
+            $targetVersion = $target !== null ? (int)$target : null;
+            $phinx->rollback($targetVersion);
+
+            $this->line('');
+            $this->success('Rollback completed successfully!');
+
+            return self::SUCCESS;
+        } catch (\Throwable $e) {
+            $this->error('Rollback failed: ' . $e->getMessage());
+
+            if ($this->isVerbose()) {
+                $this->line('<error>' . $e->getTraceAsString() . '</error>');
+            }
+
             return self::FAILURE;
         }
-
-        $command = sprintf(
-            '%s rollback --configuration=%s',
-            escapeshellarg($phinxPath),
-            escapeshellarg($configPath)
-        );
-
-        if ($target) {
-            $command .= sprintf(' --target=%s', escapeshellarg($target));
-        }
-
-        $this->info('Rolling back migrations...');
-        $this->line('');
-
-        // Pass through to phinx
-        passthru($command, $exitCode);
-
-        $this->line('');
-
-        if ($exitCode === 0) {
-            $this->success('Rollback completed successfully!');
-        } else {
-            $this->error('Rollback failed with exit code: ' . $exitCode);
-        }
-
-        return $exitCode === 0 ? self::SUCCESS : self::FAILURE;
     }
 }
-

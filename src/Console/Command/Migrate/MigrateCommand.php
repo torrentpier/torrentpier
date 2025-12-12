@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use TorrentPier\Console\Command\Command;
+use TorrentPier\Console\Helpers\PhinxManager;
 
 /**
  * Run database migrations
@@ -38,6 +39,12 @@ class MigrateCommand extends Command
                 null,
                 InputOption::VALUE_NONE,
                 'Mark migrations as run without actually running them'
+            )
+            ->addOption(
+                'force',
+                'f',
+                InputOption::VALUE_NONE,
+                'Force run without confirmation (for automated scripts)'
             );
     }
 
@@ -48,43 +55,43 @@ class MigrateCommand extends Command
         $target = $input->getOption('target');
         $fake = $input->getOption('fake');
 
-        $phinxPath = BB_ROOT . 'vendor/bin/phinx';
-        $configPath = BB_ROOT . 'phinx.php';
+        try {
+            $phinx = new PhinxManager($input, $output);
 
-        if (!file_exists($phinxPath)) {
-            $this->error('Phinx not found. Please run: composer install');
+            // Show current status first
+            $status = $phinx->getStatus();
+
+            if ($status['pending'] === 0) {
+                $this->success('Database is up to date. No migrations to run.');
+                return self::SUCCESS;
+            }
+
+            $this->info(sprintf('Found %d pending migration(s)', $status['pending']));
+            $this->line('');
+
+            if ($fake) {
+                $this->warning('Running in FAKE mode - migrations will be marked as run without executing');
+                $this->line('');
+            }
+
+            $this->section('Running Migrations');
+
+            $targetVersion = $target !== null ? (int)$target : null;
+            $phinx->migrate($targetVersion, $fake);
+
+            $this->line('');
+            $this->success('Migrations completed successfully!');
+
+            return self::SUCCESS;
+        } catch (\Throwable $e) {
+            $this->error('Migration failed: ' . $e->getMessage());
+
+            if ($this->isVerbose()) {
+                $this->line('');
+                $this->line('<error>' . $e->getTraceAsString() . '</error>');
+            }
+
             return self::FAILURE;
         }
-
-        $command = sprintf(
-            '%s migrate --configuration=%s',
-            escapeshellarg($phinxPath),
-            escapeshellarg($configPath)
-        );
-
-        if ($target) {
-            $command .= sprintf(' --target=%s', escapeshellarg($target));
-        }
-
-        if ($fake) {
-            $command .= ' --fake';
-        }
-
-        $this->info('Running migrations...');
-        $this->line('');
-
-        // Pass through to phinx
-        passthru($command, $exitCode);
-
-        $this->line('');
-
-        if ($exitCode === 0) {
-            $this->success('Migrations completed successfully!');
-        } else {
-            $this->error('Migration failed with exit code: ' . $exitCode);
-        }
-
-        return $exitCode === 0 ? self::SUCCESS : self::FAILURE;
     }
 }
-

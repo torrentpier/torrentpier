@@ -292,14 +292,8 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     // Run database migrations
     out('- Setting up database using migrations...', 'info');
 
-    // Check if phinx.php exists
-    if (!is_file(BB_ROOT . 'phinx.php')) {
-        out('- Migration configuration (phinx.php) not found', 'error');
-        exit;
-    }
-
-    // Run migrations
-    $migrationResult = runProcess('php vendor/bin/phinx migrate --configuration=' . BB_ROOT . 'phinx.php');
+    // Run migrations using Bull CLI
+    $migrationResult = runProcess('php ' . BB_ROOT . 'bull migrate --force --no-interaction');
     if ($migrationResult !== 0) {
         out('- Database migration failed', 'error');
         exit;
