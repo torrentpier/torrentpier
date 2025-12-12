@@ -24,7 +24,7 @@ if (IS_GUEST) {
 
 $user_id = request()->query->getInt(POST_USERS_URL) ?: userdata('user_id');
 
-if (!$profiledata = get_userdata($user_id, profile_view: true)) {
+if (!$profiledata = get_userdata($user_id)) {
     bb_die(__('NO_USER_ID_SPECIFIED'));
 }
 
