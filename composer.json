@@ -60,6 +60,7 @@
         "robmorgan/phinx": "^0.16.9",
         "samdark/sitemap": "2.4.1",
         "symfony/config": "^7.3",
+        "symfony/console": "^8.0",
         "symfony/event-dispatcher": "^8.0",
         "symfony/filesystem": "^8.0",
         "symfony/http-foundation": "^8.0",

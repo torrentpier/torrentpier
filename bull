@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+/**
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * Bull CLI - Command Line Interface for TorrentPier
+ * Usage: php bull <command> [options] [arguments]
+ *
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
+
+if (PHP_SAPI !== 'cli') {
+    die('Bull CLI must be run from the command line.');
+}
+
+define('BB_ROOT', __DIR__ . '/');
+
+// Bootstrap the application
+require __DIR__ . '/common.php';
+
+// Run the console application
+$application = new TorrentPier\Console\Application();
+$application->run();
+
