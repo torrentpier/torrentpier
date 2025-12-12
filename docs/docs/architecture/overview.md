@@ -40,8 +40,12 @@ torrentpier/
 ├── bt/                    # Tracker endpoints
 │   ├── announce.php       # Announce endpoint
 │   └── scrape.php         # Scrape endpoint
-├── styles/                # Templates and assets
-├── internal_data/         # Cache, logs, compiled templates
+├── templates/             # Template files
+├── storage/               # Runtime data (Laravel-style)
+│   ├── public/            # Web-accessible (avatars, sitemap)
+│   ├── private/           # Protected files (uploads)
+│   ├── logs/              # Application logs
+│   └── framework/         # Cache, templates, triggers
 ├── migrations/            # Phinx database migrations
 └── install/               # Installation scripts
 ```

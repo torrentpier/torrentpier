@@ -11,6 +11,7 @@
 namespace TorrentPier\Console\Command\Install;
 
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -48,12 +49,16 @@ class InstallCommand extends Command
     ];
 
     /**
-     * Writable directories
+     * Writable directories (storage structure)
      */
     private const array WRITABLE_DIRS = [
-        'data',
-        'internal_data',
-        'sitemap',
+        'storage/public/avatars',
+        'storage/public/sitemap',
+        'storage/private/uploads',
+        'storage/logs',
+        'storage/framework/cache',
+        'storage/framework/templates',
+        'storage/framework/triggers',
     ];
 
     /**
@@ -518,6 +523,9 @@ class InstallCommand extends Command
     {
         $this->section('Post-Installation Tasks');
 
+        // Create storage symlink
+        $this->createStorageLink();
+
         // Update robots.txt
         $robotsFile = BB_ROOT . 'robots.txt';
         if (file_exists($robotsFile) && is_writable($robotsFile)) {
@@ -537,6 +545,22 @@ class InstallCommand extends Command
         }
 
         $this->line('');
+    }
+
+    /**
+     * Create storage symlink (public/storage -> ../storage/public)
+     */
+    private function createStorageLink(): void
+    {
+        $command = $this->getApplication()->find('storage:link');
+        $arguments = new ArrayInput([]);
+
+        try {
+            $command->run($arguments, $this->output);
+        } catch (\Throwable $e) {
+            $this->warning('Could not create storage symlink: ' . $e->getMessage());
+            $this->comment('  Run manually: php bull storage:link');
+        }
     }
 
     /**

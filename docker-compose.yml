@@ -9,9 +9,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./data:/var/www/data
-      - ./internal_data:/var/www/internal_data
-      - ./sitemap:/var/www/sitemap
+      - ./storage:/var/www/storage
       - ./library/config.php:/var/www/library/config.php
       - ./library/defines.php:/var/www/library/defines.php
       - ./install/docker/Caddyfile:/etc/frankenphp/Caddyfile

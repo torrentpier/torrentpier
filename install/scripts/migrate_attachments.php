@@ -60,7 +60,7 @@ const BB_BT_TORRENTS = 'bb_bt_torrents';
 
 // Paths (relative to project root)
 const OLD_UPLOAD_DIR = 'data/uploads'; // Old attach_mod directory
-const NEW_UPLOAD_DIR = 'data/uploads'; // New topic-based directory
+const NEW_UPLOAD_DIR = 'storage/private/uploads'; // New topic-based directory
 
 // Torrent extension ID in bb_topics.attach_ext_id
 const TORRENT_EXT_ID = 8;

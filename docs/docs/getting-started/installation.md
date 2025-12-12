@@ -171,8 +171,8 @@ Add to your crontab:
 The installer sets permissions automatically, but if needed:
 
 ```bash
-chmod -R 755 internal_data data sitemap
-chown -R www-data:www-data internal_data data sitemap
+chmod -R 755 storage
+chown -R www-data:www-data storage
 ```
 
 ## Troubleshooting
@@ -180,7 +180,7 @@ chown -R www-data:www-data internal_data data sitemap
 ### Permission issues
 
 ```bash
-chmod -R 755 internal_data
+chmod -R 755 storage
 chmod 644 .env
 ```
 

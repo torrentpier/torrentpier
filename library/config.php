@@ -502,7 +502,7 @@ $bb_cfg['debug'] = [
     'max_query_length' => 500, // Truncate long queries in panel
 ];
 
-// Log URL redirects to internal_data/log/redirects.log (for migration debugging)
+// Log URL redirects to storage/logs/redirects.log (for migration debugging)
 $bb_cfg['log_redirects'] = true;
 
 $bb_cfg['bugsnag'] = [
