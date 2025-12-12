@@ -33,20 +33,22 @@ TorrentPier is a BitTorrent tracker engine written in PHP, designed for hosting 
 - `bt/scrape.php` - BitTorrent scrape endpoint
 - `admin/index.php` - Administrative panel
 - `cron.php` - Background task runner (CLI only)
-- `install.php` - Installation script (CLI only)
+- `bull` - CLI tool (installation, migrations, cache, cron, releases)
 
 ## Development Commands
 
 ### Installation & Setup
 ```bash
-# Automated installation (downloads Composer if needed, then runs wizard)
-php install.php
-
-# Or if Composer is already installed, use Bull CLI directly
+# Quick install via Composer
+composer create-project torrentpier/torrentpier
+cd torrentpier
 php bull app:install
 
-# Manual dependency installation
+# Or manual clone
+git clone https://github.com/torrentpier/torrentpier.git
+cd torrentpier
 composer install
+php bull app:install
 
 # Force reinstallation
 php bull app:install --force
@@ -70,6 +72,12 @@ php bull cron:run
 
 # Create new console command
 php bull make:command user:create
+
+# Release management
+php bull release:create v3.1.0              # Create new release
+php bull release:create v3.1.0 --dry-run    # Preview release
+php bull release:cleanup --dry-run          # Preview cleanup
+php bull release:cleanup --force            # Production cleanup
 
 # Shell completion (bash/zsh/fish)
 php bull completion bash > /etc/bash_completion.d/bull
@@ -118,9 +126,9 @@ The project uses **StyleCI** with PSR-2 preset for code style enforcement. Style
 - **FTP deployment** to demo environment
 
 ### Installation Methods
-1. **Automated**: `php install.php` (recommended)
-2. **Composer**: `composer create-project torrentpier/torrentpier`
-3. **Manual**: Git clone + `composer install` + database setup
+1. **Composer**: `composer create-project torrentpier/torrentpier` + `php bull app:install`
+2. **Manual**: Git clone + `composer install` + `php bull app:install`
+3. **Docker**: Use provided `docker-compose.yml`
 
 ## Database & Schema
 

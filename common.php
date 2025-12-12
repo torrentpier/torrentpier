@@ -85,7 +85,7 @@ require_once BB_PATH . '/library/defines.php';
 
 // Composer
 if (!is_file(BB_PATH . '/vendor/autoload.php')) {
-    die('🔩 Manual install: <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">Install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>.<br/>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
+    die('🔩 Install: <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">Install Composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>, then <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php bull app:install</code>');
 }
 require_once BB_PATH . '/vendor/autoload.php';
 
@@ -106,7 +106,7 @@ try {
     $dotenv = Dotenv\Dotenv::createMutable(BB_PATH);
     $dotenv->load();
 } catch (\Dotenv\Exception\InvalidPathException $pathException) {
-    die('🔩 Manual install: Rename from <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env.example</code> to <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env</code>, and configure it.<br/>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
+    die('🔩 Setup required: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php bull app:install</code> to configure TorrentPier');
 }
 
 // Load config

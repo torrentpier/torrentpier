@@ -51,8 +51,9 @@ TorrentPier now includes a modern database migration system using **Phinx** (fro
 New installations automatically use migrations instead of the legacy SQL dump:
 
 ```bash
-# Fresh installation now uses migrations
-php install.php
+# Fresh installation now uses Bull CLI
+composer install
+php bull app:install
 ```
 
 The installer will:

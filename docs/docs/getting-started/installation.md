@@ -32,26 +32,28 @@ Ensure these PHP extensions are installed:
 
 ## Installation methods
 
-### Method 1: Automated installer (recommended)
+### Method 1: Quick install (recommended)
 
 ```bash
 git clone https://github.com/torrentpier/torrentpier.git
 cd torrentpier
 composer install
-php install.php
+php bull app:install
 ```
 
-The installer will guide you through:
+The installation wizard will guide you through:
+- System requirements check
 - Database configuration
-- Admin account creation
-- Initial settings
+- Environment setup
+- Running migrations
+- Web server hints
 
 ### Method 2: Composer create-project
 
 ```bash
 composer create-project torrentpier/torrentpier
 cd torrentpier
-php install.php
+php bull app:install
 ```
 
 ### Method 3: Manual installation
@@ -60,14 +62,41 @@ php install.php
 2. Run `composer install`
 3. Copy `.env.example` to `.env`
 4. Configure database settings in `.env`
-5. Run migrations: `php vendor/bin/phinx migrate`
+5. Run migrations: `php bull migrate`
 6. Configure your web server
+
+## Bull CLI
+
+TorrentPier includes a powerful CLI tool for management:
+
+```bash
+# List all available commands
+php bull list
+
+# Run installation wizard
+php bull app:install
+
+# Check migration status
+php bull migrate:status
+
+# Run pending migrations
+php bull migrate
+
+# Clear cache
+php bull cache:clear
+
+# View system info
+php bull about
+```
 
 ## Environment configuration
 
 Edit `.env` file with your settings:
 
 ```env
+# Application
+APP_ENV=production
+
 # Database
 DB_HOST=localhost
 DB_PORT=3306
@@ -76,15 +105,20 @@ DB_USERNAME=your_username
 DB_PASSWORD=your_password
 
 # Site
-SITE_URL=https://your-domain.com
-
-# Cache (optional)
-CACHE_DRIVER=file
+TP_HOST=your-domain.com
 ```
 
 ## Web server configuration
 
 ### Nginx
+
+Use the provided configuration template:
+
+```bash
+cp install/nginx.conf /etc/nginx/sites-available/torrentpier
+```
+
+Or use this basic configuration:
 
 ```nginx
 server {
@@ -113,6 +147,14 @@ server {
 
 Ensure `mod_rewrite` is enabled. The `.htaccess` file is included in the repository.
 
+### Caddy
+
+Use the provided Caddyfile:
+
+```bash
+cp install/Caddyfile /etc/caddy/Caddyfile
+```
+
 ## Post-installation
 
 ### Set up cron jobs
@@ -122,15 +164,18 @@ Add to your crontab:
 ```bash
 # Run maintenance tasks every minute
 * * * * * php /path/to/torrentpier/cron.php >> /dev/null 2>&1
+
+# Or use Bull CLI
+* * * * * php /path/to/torrentpier/bull cron:run >> /dev/null 2>&1
 ```
 
 ### Directory permissions
 
-Ensure the web server can write to:
+The installer sets permissions automatically, but if needed:
 
 ```bash
-chmod -R 775 internal_data
-chown -R www-data:www-data internal_data
+chmod -R 755 internal_data data sitemap
+chown -R www-data:www-data internal_data data sitemap
 ```
 
 ## Troubleshooting
@@ -138,7 +183,7 @@ chown -R www-data:www-data internal_data
 ### Permission issues
 
 ```bash
-chmod -R 775 internal_data
+chmod -R 755 internal_data
 chmod 644 .env
 ```
 
@@ -153,3 +198,13 @@ chmod 644 .env
 - Check PHP error log
 - Verify all PHP extensions are installed
 - Run `composer install` again
+
+### Migration issues
+
+```bash
+# Check migration status
+php bull migrate:status
+
+# Run migrations with verbose output
+php bull migrate -v
+```
