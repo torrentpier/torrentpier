@@ -11,17 +11,30 @@ install.php_*
 composer-setup.php
 .env
 .php-cs-fixer.cache
-data/avatars
-data/uploads/*
-!data/uploads/.keep
-internal_data/atom
-internal_data/cache
-internal_data/log
-internal_data/updater.json
-sitemap
-internal_data/triggers
 library/config.local.php
 vendor
+
+# Storage directories
+storage/public/avatars/*
+!storage/public/avatars/.keep
+!storage/public/avatars/gallery
+storage/public/sitemap/*
+!storage/public/sitemap/.keep
+storage/private/uploads/*
+!storage/private/uploads/.keep
+storage/logs/*
+!storage/logs/.keep
+storage/framework/cache/*
+!storage/framework/cache/.keep
+storage/framework/templates/*
+!storage/framework/templates/.keep
+storage/framework/triggers/*
+!storage/framework/triggers/.keep
+storage/framework/updater.json
+
+# Public storage symlink
+public/storage
+
 # Exclude all translations except source
 # Translations are now managed via Composer
 library/language/*

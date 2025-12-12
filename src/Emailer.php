@@ -72,7 +72,7 @@ class Emailer
             }
 
             // Ensure the cache directory exists
-            $cacheDir = CACHE_DIR . '/twig';
+            $cacheDir = TEMPLATES_CACHE_DIR;
             if (!is_dir($cacheDir)) {
                 @mkdir($cacheDir, 0775, true);
             }

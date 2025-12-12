@@ -54,7 +54,7 @@ class Template
         $this->variables = &$this->blockData['.'][0];
         $this->rootDir = TwigEnvironmentFactory::normalizePath($root);
         $this->templateName = basename($root);
-        $this->cacheDir = TwigEnvironmentFactory::normalizePath(CACHE_DIR . '/');
+        $this->cacheDir = TwigEnvironmentFactory::normalizePath(TEMPLATES_CACHE_DIR . '/');
 
         if (!is_dir($this->rootDir)) {
             throw new \RuntimeException("Template directory not found: $this->templateName");

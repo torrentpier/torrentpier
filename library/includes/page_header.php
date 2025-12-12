@@ -185,7 +185,7 @@ template()->assign_vars([
     'HTML_SIDEBAR_2' => LANG_DIR . 'html/sidebar2.html',
 
     // Common urls (absolute paths for SEO-friendly routing)
-    'AVATARS_URL' => FORUM_PATH . 'data/avatars',
+    'AVATARS_URL' => FORUM_PATH . 'storage/avatars',
     'CAT_URL' => CAT_URL,
     'DOWNLOAD_URL' => DL_URL,
     'FORUM_URL' => FORUM_URL,

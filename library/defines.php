@@ -13,17 +13,34 @@ if (!defined('BB_ROOT')) {
 
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
 define('ADMIN_DIR', BB_PATH . '/public/admin');
-define('DATA_DIR', BB_PATH . '/data');
-define('INT_DATA_DIR', BB_PATH . '/internal_data');
-define('AJAX_HTML_DIR', BB_PATH . '/internal_data/ajax_html/');
-define('CACHE_DIR', BB_PATH . '/internal_data/cache');
-define('LOG_DIR', BB_PATH . '/internal_data/log');
-define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers');
+
+// Storage paths
+define('STORAGE_DIR', BB_PATH . '/storage');
+define('STORAGE_PUBLIC_DIR', STORAGE_DIR . '/public');
+define('STORAGE_PRIVATE_DIR', STORAGE_DIR . '/private');
+
+// Public storage (web-accessible via symlink public/storage)
+define('AVATARS_DIR', STORAGE_PUBLIC_DIR . '/avatars');
+define('SITEMAP_DIR', STORAGE_PUBLIC_DIR . '/sitemap');
+
+// Private storage (not web-accessible)
+define('UPLOADS_DIR', STORAGE_PRIVATE_DIR . '/uploads');
+
+// Framework storage (cache, templates, triggers)
+define('FRAMEWORK_DIR', STORAGE_DIR . '/framework');
+define('CACHE_DIR', FRAMEWORK_DIR . '/cache');
+define('TEMPLATES_CACHE_DIR', FRAMEWORK_DIR . '/templates');
+define('TRIGGERS_DIR', FRAMEWORK_DIR . '/triggers');
+define('AJAX_HTML_DIR', FRAMEWORK_DIR . '/cache/ajax_html/');
+
+// Logs
+define('LOG_DIR', STORAGE_DIR . '/logs');
+
+// Library paths
 define('AJAX_DIR', BB_PATH . '/library/ajax');
 define('CFG_DIR', BB_PATH . '/library/config');
 define('INC_DIR', BB_PATH . '/library/includes');
 define('UCP_DIR', BB_PATH . '/library/includes/ucp');
-define('SITEMAP_DIR', BB_PATH . '/sitemap');
 
 // Assets (public web root)
 define('PUBLIC_DIR', BB_PATH . '/public');
@@ -45,7 +62,7 @@ define('LANG_ROOT_DIR',
 define('APP_NAME', 'TorrentPier');
 define('DEFAULT_CHARSET', 'UTF-8');
 define('UPDATER_URL', 'https://api.github.com/repos/torrentpier/torrentpier/releases');
-define('UPDATER_FILE', INT_DATA_DIR . '/updater.json');
+define('UPDATER_FILE', FRAMEWORK_DIR . '/updater.json');
 define('COOKIE_DBG', 'bb_dbg');
 
 // Templates

@@ -30,7 +30,7 @@ class CacheStatusCommand extends Command
         $this->title('Cache Status');
 
         $cacheDir = CACHE_DIR;
-        $templateCacheDir = CACHE_DIR . '/twig';
+        $templateCacheDir = TEMPLATES_CACHE_DIR;
 
         $stats = [];
 

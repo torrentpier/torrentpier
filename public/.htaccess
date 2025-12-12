@@ -4,9 +4,9 @@ AddDefaultCharset UTF-8
 ## folder listing access control
 Options All -Indexes
 
-## sitemap rewrite (sitemap is in parent directory)
+## sitemap rewrite (via storage symlink)
 RewriteEngine On
-RewriteRule ^sitemap.xml$ ../sitemap/sitemap.xml [L]
+RewriteRule ^sitemap.xml$ storage/sitemap/sitemap.xml [L]
 
 ## front controller - route all non-file requests through index.php
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -124,7 +124,7 @@ class CacheClearCommand extends Command
      */
     private function clearTemplateCache(): void
     {
-        $templateCacheDir = CACHE_DIR . '/twig';
+        $templateCacheDir = TEMPLATES_CACHE_DIR;
 
         if (is_dir($templateCacheDir)) {
             FileSystemHelper::clearDirectory($templateCacheDir);

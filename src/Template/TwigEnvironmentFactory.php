@@ -63,8 +63,8 @@ class TwigEnvironmentFactory
 
         // Add cache if enabled
         if ($useCache && $cacheDir) {
-            $twigCacheDir = rtrim($cacheDir, '/\\') . DIRECTORY_SEPARATOR . 'twig';
-            $options['cache'] = new FilesystemCache($twigCacheDir);
+            $cacheDir = rtrim($cacheDir, '/\\');
+            $options['cache'] = new FilesystemCache($cacheDir);
         }
 
         $twig = new Environment($legacyLoader, $options);

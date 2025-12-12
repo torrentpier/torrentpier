@@ -145,12 +145,13 @@ class CheckCommand extends Command
         $this->line();
         $this->section('Directory Permissions');
         $dirs = [
-            'internal_data/cache' => CACHE_DIR,
-            'internal_data/log' => LOG_DIR,
-            'internal_data/triggers' => TRIGGERS_DIR,
-            'data/avatars' => DATA_DIR . '/avatars',
-            'data/uploads' => DATA_DIR . '/uploads',
-            'sitemap' => SITEMAP_DIR,
+            'storage/framework/cache' => CACHE_DIR,
+            'storage/framework/templates' => TEMPLATES_CACHE_DIR,
+            'storage/framework/triggers' => TRIGGERS_DIR,
+            'storage/logs' => LOG_DIR,
+            'storage/public/avatars' => AVATARS_DIR,
+            'storage/public/sitemap' => SITEMAP_DIR,
+            'storage/private/uploads' => UPLOADS_DIR,
         ];
 
         foreach ($dirs as $name => $path) {
