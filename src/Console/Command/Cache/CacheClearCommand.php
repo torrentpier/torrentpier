@@ -103,7 +103,7 @@ class CacheClearCommand extends Command
      */
     private function clearSystemCache(): void
     {
-        $cacheDir = BB_ROOT . 'internal_data/cache';
+        $cacheDir = CACHE_DIR;
 
         if (is_dir($cacheDir)) {
             FileSystemHelper::clearDirectory($cacheDir);
@@ -124,7 +124,7 @@ class CacheClearCommand extends Command
      */
     private function clearTemplateCache(): void
     {
-        $templateCacheDir = BB_ROOT . 'internal_data/cache/twig';
+        $templateCacheDir = CACHE_DIR . '/twig';
 
         if (is_dir($templateCacheDir)) {
             FileSystemHelper::clearDirectory($templateCacheDir);

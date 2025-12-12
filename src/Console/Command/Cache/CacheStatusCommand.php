@@ -29,8 +29,8 @@ class CacheStatusCommand extends Command
     {
         $this->title('Cache Status');
 
-        $cacheDir = BB_ROOT . 'internal_data/cache';
-        $templateCacheDir = BB_ROOT . 'internal_data/cache/twig';
+        $cacheDir = CACHE_DIR;
+        $templateCacheDir = CACHE_DIR . '/twig';
 
         $stats = [];
 
