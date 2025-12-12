@@ -115,11 +115,12 @@ class CheckCommand extends Command
         $this->section('Database Connection');
 
         try {
-            $result = DB()->fetch_row("SELECT 1 as test");
-            if ($result) {
+            // Test connection using ORM
+            $count = DB()->table(BB_CONFIG)->count();
+            if ($count >= 0) {
                 $this->line('  <info>✓</info> Database connection successful');
 
-                // Show database info
+                // Show database info using raw query for VERSION()
                 $version = DB()->fetch_row("SELECT VERSION() as version");
                 if ($version) {
                     $this->line("  <info>✓</info> MySQL version: {$version['version']}");

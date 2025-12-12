@@ -49,7 +49,7 @@ class PasswordCommand extends Command
             return self::FAILURE;
         }
 
-        // Find user
+        // Find user using ORM
         $user = $this->findUser($identifier);
         if (!$user) {
             $this->error("User '{$identifier}' not found.");
@@ -105,7 +105,7 @@ class PasswordCommand extends Command
             }
         }
 
-        // Update password
+        // Update password using ORM
         try {
             $this->updatePassword($user['user_id'], $password);
 
@@ -126,39 +126,32 @@ class PasswordCommand extends Command
     }
 
     /**
-     * Find user by username or email
+     * Find user by username or email using ORM
      */
     private function findUser(string $identifier): ?array
     {
-        $escaped = DB()->escape($identifier);
+        $user = DB()->table(BB_USERS)
+            ->select('user_id, username, user_email, user_active, user_level')
+            ->where('username = ? OR user_email = ?', $identifier, $identifier)
+            ->fetch();
 
-        $result = DB()->fetch_row(
-            "SELECT user_id, username, user_email, user_active, user_level 
-             FROM " . BB_USERS . " 
-             WHERE username = '{$escaped}' OR user_email = '{$escaped}'
-             LIMIT 1"
-        );
-
-        return $result ?: null;
+        return $user ? $user->toArray() : null;
     }
 
     /**
-     * Update user password
+     * Update user password using ORM
      */
     private function updatePassword(int $userId, string $password): void
     {
-        $passwordHash = $this->hashPassword($password);
+        $affected = DB()->table(BB_USERS)
+            ->where('user_id', $userId)
+            ->update([
+                'user_password' => $this->hashPassword($password),
+                'user_newpasswd' => '',
+                'user_actkey' => '',
+            ]);
 
-        DB()->query(
-            "UPDATE " . BB_USERS . " 
-             SET user_password = '{$passwordHash}', 
-                 user_newpasswd = '',
-                 user_actkey = ''
-             WHERE user_id = {$userId} 
-             LIMIT 1"
-        );
-
-        if (DB()->affected_rows() === 0) {
+        if ($affected === 0) {
             throw new \RuntimeException('No rows updated');
         }
     }
@@ -189,4 +182,3 @@ class PasswordCommand extends Command
         return $password;
     }
 }
-

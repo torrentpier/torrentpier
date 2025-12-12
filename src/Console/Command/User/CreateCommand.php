@@ -26,15 +26,6 @@ use TorrentPier\Torrent\Passkey;
 )]
 class CreateCommand extends Command
 {
-    /**
-     * User levels
-     */
-    private const LEVELS = [
-        'user' => USER,
-        'admin' => ADMIN,
-        'mod' => MOD,
-    ];
-
     protected function configure(): void
     {
         $this
@@ -68,7 +59,7 @@ class CreateCommand extends Command
             return self::FAILURE;
         }
 
-        // Check if username exists
+        // Check if username exists using ORM
         if ($this->usernameExists($username)) {
             $this->error("Username '{$username}' already exists.");
             return self::FAILURE;
@@ -85,7 +76,7 @@ class CreateCommand extends Command
             return self::FAILURE;
         }
 
-        // Check if email exists
+        // Check if email exists using ORM
         if ($this->emailExists($email)) {
             $this->error("Email '{$email}' already registered.");
             return self::FAILURE;
@@ -182,45 +173,38 @@ class CreateCommand extends Command
      */
     private function cleanUsername(string $username): string
     {
-        // Remove extra spaces
         $username = preg_replace('#\s+#u', ' ', $username);
         return trim($username);
     }
 
     /**
-     * Check if username exists
+     * Check if username exists using ORM
      */
     private function usernameExists(string $username): bool
     {
-        $result = DB()->fetch_row(
-            "SELECT user_id FROM " . BB_USERS . " WHERE username = '" . DB()->escape($username) . "' LIMIT 1"
-        );
-
-        return !empty($result);
+        return DB()->table(BB_USERS)
+            ->where('username', $username)
+            ->count() > 0;
     }
 
     /**
-     * Check if email exists
+     * Check if email exists using ORM
      */
     private function emailExists(string $email): bool
     {
-        $result = DB()->fetch_row(
-            "SELECT user_id FROM " . BB_USERS . " WHERE user_email = '" . DB()->escape($email) . "' LIMIT 1"
-        );
-
-        return !empty($result);
+        return DB()->table(BB_USERS)
+            ->where('user_email', $email)
+            ->count() > 0;
     }
 
     /**
-     * Create user in database
+     * Create user in database using ORM
      */
     private function createUser(string $username, string $email, string $password, int $level): int|false
     {
-        $passwordHash = $this->hashPassword($password);
-
-        $data = [
+        $row = DB()->table(BB_USERS)->insert([
             'username' => $username,
-            'user_password' => $passwordHash,
+            'user_password' => $this->hashPassword($password),
             'user_email' => $email,
             'user_level' => $level,
             'user_active' => 1,
@@ -228,12 +212,9 @@ class CreateCommand extends Command
             'user_reg_ip' => '127.0.0.1',
             'user_lang' => config()->get('default_lang', 'en'),
             'tpl_name' => config()->get('tpl_name', 'default'),
-        ];
+        ]);
 
-        $sql = DB()->build_array('INSERT', $data);
-        DB()->query("INSERT INTO " . BB_USERS . " " . $sql);
-
-        return DB()->sql_nextid() ?: false;
+        return $row ? $row->user_id : false;
     }
 
     /**
@@ -259,4 +240,3 @@ class CreateCommand extends Command
         }
     }
 }
-
