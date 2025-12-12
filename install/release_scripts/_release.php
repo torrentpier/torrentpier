@@ -2,6 +2,8 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
+ * Release creation tool - creates a new version release
+ *
  * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
@@ -11,32 +13,54 @@ define('BB_ROOT', dirname(__DIR__, 2) . DIRECTORY_SEPARATOR);
 define('BB_PATH', BB_ROOT);
 
 // Check CLI mode
-if (PHP_SAPI != 'cli') {
-    die('Please run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php ' . basename(__FILE__) . '</code> in CLI mode');
+if (PHP_SAPI !== 'cli') {
+    die('This script must be run from the command line.');
 }
 
-// Get all constants
-require_once BB_ROOT . 'library/defines.php';
+// ==============================================================================
+// Standalone CLI helpers (no external dependencies)
+// ==============================================================================
 
-// Include CLI functions
-require INC_DIR . '/functions_cli.php';
+function out(string $message, string $type = ''): void
+{
+    $colors = [
+        'error' => "\033[31m",
+        'success' => "\033[32m",
+        'warning' => "\033[33m",
+        'info' => "\033[36m",
+        'debug' => "\033[90m",
+    ];
+    $reset = "\033[0m";
 
-// Welcoming message
-out("--- Release creation tool ---\n", 'info');
+    $prefix = $colors[$type] ?? '';
+    echo $prefix . $message . ($prefix ? $reset : '') . PHP_EOL;
+}
+
+function runProcess(string $cmd): int
+{
+    passthru($cmd, $exitCode);
+    return $exitCode;
+}
+
+// ==============================================================================
+// Release Tool
+// ==============================================================================
+
+out("--- Release Creation Tool ---\n", 'info');
 
 $configFile = BB_PATH . '/library/config.php';
 
 if (!is_file($configFile)) {
     out('- Config file ' . basename($configFile) . ' not found', 'error');
-    exit;
+    exit(1);
 }
 if (!is_readable($configFile)) {
     out('- Config file ' . basename($configFile) . ' is not readable', 'error');
-    exit;
+    exit(1);
 }
 if (!is_writable($configFile)) {
     out('- Config file ' . basename($configFile) . ' is not writable', 'error');
-    exit;
+    exit(1);
 }
 
 // Ask for version
@@ -45,15 +69,14 @@ $version = trim(fgets(STDIN));
 
 if (empty($version)) {
     out("- Version cannot be empty. Please enter a valid version number", 'error');
-    exit;
-} else {
-    // Add 'v' prefix if missing
-    if (!str_starts_with($version, 'v')) {
-        $version = 'v' . $version;
-    }
-
-    out("- Using version: $version", 'info');
+    exit(1);
 }
+
+// Add 'v' prefix if missing
+if (!str_starts_with($version, 'v')) {
+    $version = 'v' . $version;
+}
+out("- Using version: $version", 'info');
 
 // Ask for version emoji
 fwrite(STDOUT, 'Enter version emoji: ');
@@ -75,9 +98,8 @@ if (empty($date)) {
     $dateObj = DateTime::createFromFormat('d-m-Y', $date);
     if (!$dateObj || $dateObj->format('d-m-Y') !== $date) {
         out("- Invalid date format. Expected format: DD-MM-YYYY", 'error');
-        exit;
+        exit(1);
     }
-
     out("- Using date: $date", 'info');
 }
 
@@ -103,12 +125,12 @@ $bytesWritten = file_put_contents($configFile, $content);
 
 if ($bytesWritten === false) {
     out("- Failed to write to config file", 'error');
-    exit;
+    exit(1);
 }
 
 if ($bytesWritten === 0) {
     out("- Config file was not updated (0 bytes written)", 'error');
-    exit;
+    exit(1);
 }
 
 out("\n- Config file has been updated!", 'success');
@@ -117,7 +139,8 @@ out("\n- Config file has been updated!", 'success');
 runProcess('npx git-cliff v2.4.6-alpha.4.. --config install/release_scripts/cliff.toml --tag "' . $version . '" > CHANGELOG.md');
 
 // Git add & commit
-runProcess('git add -A && git commit -m "release: ' . escapeshellarg($version) . (!empty($versionEmoji) ? (' ' . $versionEmoji) : '') . '"');
+$commitMsg = 'release: ' . $version . (!empty($versionEmoji) ? ' ' . $versionEmoji : '');
+runProcess('git add -A && git commit -m ' . escapeshellarg($commitMsg));
 
 // Git tag
 runProcess("git tag -a \"$version\" -m \"Release $version\"");

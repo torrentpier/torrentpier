@@ -39,14 +39,17 @@ TorrentPier is a BitTorrent tracker engine written in PHP, designed for hosting 
 
 ### Installation & Setup
 ```bash
-# Automated installation (CLI)
+# Automated installation (downloads Composer if needed, then runs wizard)
 php install.php
 
-# Install dependencies
+# Or if Composer is already installed, use Bull CLI directly
+php bull app:install
+
+# Manual dependency installation
 composer install
 
-# Update dependencies
-composer update
+# Force reinstallation
+php bull app:install --force
 ```
 
 ### Bull CLI (Command Line Interface)
