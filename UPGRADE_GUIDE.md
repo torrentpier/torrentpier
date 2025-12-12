@@ -39,11 +39,12 @@ TorrentPier now includes a modern database migration system using **Phinx** (fro
 
 #### Directory Structure
 ```
-/migrations/
-  ├── 20250619000001_initial_schema.php    # Complete database schema
-  ├── 20250619000002_seed_initial_data.php # Essential data seeding
-  └── future_migrations...                 # Your custom migrations
-/phinx.php                                 # Migration configuration
+/database/
+  └── migrations/
+        ├── 20250619000001_initial_schema.php    # Complete database schema
+        ├── 20250619000002_seed_initial_data.php # Essential data seeding
+        └── future_migrations...                 # Your custom migrations
+/phinx.php                                       # Migration configuration
 ```
 
 ### For New Installations
@@ -703,7 +704,7 @@ $bb_cfg['search_fallback_to_mysql'] = true;
 
 ### Migration Steps
 1. Install and run Manticore Search
-2. Enable Manticore in `library/config.php`
+2. Enable Manticore in `config/config.php`
 3. Reindex existing posts and topics:
    1. Go to the `Admin Control Panel`
    2. On the main page, in the `Update` section, click `Reindex search`

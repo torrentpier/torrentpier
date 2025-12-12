@@ -537,9 +537,9 @@ class InstallCommand extends Command
 
         // Create local config for development
         if ($this->config['APP_ENV'] === 'development') {
-            $localConfig = BB_ROOT . 'library/config.local.php';
+            $localConfig = BB_ROOT . 'config/config.local.php';
             if (!file_exists($localConfig)) {
-                copy(BB_ROOT . 'library/config.php', $localConfig);
+                copy(BB_ROOT . 'config/config.php', $localConfig);
                 $this->line('  <info>✓</info> Created config.local.php for development');
             }
         }

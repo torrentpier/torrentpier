@@ -34,19 +34,23 @@ torrentpier/
 │   ├── Template/          # Twig integration
 │   └── Tracker/           # BitTorrent tracker
 ├── library/               # Core application logic
-│   ├── config.php         # Main configuration
 │   └── includes/          # Legacy includes
-├── admin/                 # Admin panel
-├── bt/                    # Tracker endpoints
-│   ├── announce.php       # Announce endpoint
-│   └── scrape.php         # Scrape endpoint
+├── config/                # Configuration files
+│   ├── config.php         # Main configuration
+│   └── config.local.php   # Local overrides (gitignored)
+├── database/              # Database files
+│   └── migrations/        # Phinx migrations
+├── routes/                # Route definitions
+│   └── web.php            # Web routes
+├── public/                # Web root
+│   ├── admin/             # Admin panel
+│   └── bt/                # Tracker endpoints
 ├── templates/             # Template files
 ├── storage/               # Runtime data (Laravel-style)
 │   ├── public/            # Web-accessible (avatars, sitemap)
 │   ├── private/           # Protected files (uploads)
 │   ├── logs/              # Application logs
 │   └── framework/         # Cache, templates, triggers
-├── migrations/            # Phinx database migrations
 └── install/               # Installation scripts
 ```
 
@@ -129,7 +133,7 @@ $data = CACHE('my_key', function() {
 
 ## Configuration
 
-Main configuration in `library/config.php` with environment overrides via `.env`:
+Main configuration in `config/config.php` with environment overrides via `.env`:
 
 ```php
 // Access configuration
@@ -140,7 +144,7 @@ $value = config('site.name');
 
 ### Adding routes
 
-Routes are defined using League/Route in `library/routes.php`. TorrentPier supports SEO-friendly semantic URLs:
+Routes are defined using League/Route in `routes/web.php`. TorrentPier supports SEO-friendly semantic URLs:
 
 ```php
 // Generate URLs in PHP
@@ -162,4 +166,4 @@ Place Twig templates in `styles/{style_name}/templates/`.
 
 ### Database changes
 
-Use Phinx migrations in the `migrations/` directory.
+Use Phinx migrations in the `database/migrations/` directory.

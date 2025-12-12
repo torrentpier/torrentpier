@@ -65,7 +65,7 @@ This records the migrations as applied without actually running them.
 php vendor/bin/phinx create MyNewMigration -c phinx.php
 ```
 
-This creates a file in `migrations/` with a timestamp prefix.
+This creates a file in `database/migrations/` with a timestamp prefix.
 
 ### Migration structure
 
@@ -157,8 +157,8 @@ Migration settings are in `phinx.php`:
 ```php
 return [
     'paths' => [
-        'migrations' => 'migrations',
-        'seeds' => 'migrations/seeds'
+        'migrations' => 'database/migrations',
+        'seeds' => 'database/migrations/seeds'
     ],
     'environments' => [
         'default_migration_table' => 'phinxlog',

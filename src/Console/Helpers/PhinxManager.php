@@ -63,7 +63,7 @@ class PhinxManager
 
         return [
             'paths' => [
-                'migrations' => BB_ROOT . 'migrations',
+                'migrations' => BB_ROOT . 'database/migrations',
             ],
             'environments' => [
                 'default_migration_table' => defined('BB_MIGRATIONS') ? BB_MIGRATIONS : 'bb_migrations',

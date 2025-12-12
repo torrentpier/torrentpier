@@ -38,7 +38,7 @@ define('LOG_DIR', STORAGE_DIR . '/logs');
 
 // Library paths
 define('AJAX_DIR', BB_PATH . '/library/ajax');
-define('CFG_DIR', BB_PATH . '/library/config');
+define('CFG_DIR', BB_PATH . '/config');
 define('INC_DIR', BB_PATH . '/library/includes');
 define('UCP_DIR', BB_PATH . '/library/includes/ucp');
 

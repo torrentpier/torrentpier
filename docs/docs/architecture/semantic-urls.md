@@ -180,7 +180,7 @@ Link: </topic/my-topic.123/>; rel="canonical"
 
 ## Route configuration
 
-Routes are defined in `library/routes.php`:
+Routes are defined in `routes/web.php`:
 
 ```php
 // Semantic routes (must come before legacy routes)

@@ -169,7 +169,7 @@ For detailed testing documentation, see [tests/README.md](tests/README.md).
 ## 📌 Our recommendations
 
 * *Set up cron jobs.* - Run `php bull cron:run` every minute for maintenance tasks. For high-traffic trackers, consider running it more frequently or as a daemon.
-* *Local configuration copy.* - You can override the settings using the local configuration file `library/config.local.php`.
+* *Local configuration copy.* - You can override the settings using the local configuration file `config/config.local.php`.
 
 ## 💚 Contributing / Contributors
 

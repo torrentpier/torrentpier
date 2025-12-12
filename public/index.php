@@ -74,7 +74,7 @@ switch ($result['action']) {
 
         // Load routes only if not already loaded (FrontController may have loaded them)
         if (!$router->areRoutesLoaded()) {
-            $routes = require dirname(__DIR__) . '/library/routes.php';
+            $routes = require dirname(__DIR__) . '/routes/web.php';
             $routes($router);
             $router->setRoutesLoaded();
         }

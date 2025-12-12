@@ -49,10 +49,10 @@ class ListCommand extends Command
 
         // Load routes
         $router = Router::getInstance();
-        $routesFile = BB_ROOT . 'library/routes.php';
+        $routesFile = BB_ROOT . 'routes/web.php';
 
         if (!is_file($routesFile)) {
-            $this->error('Routes file not found: library/routes.php');
+            $this->error('Routes file not found: routes/web.php');
             return self::FAILURE;
         }
 

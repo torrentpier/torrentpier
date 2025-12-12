@@ -215,7 +215,7 @@ class FrontController
             $this->router = Router::getInstance();
 
             if (!$this->router->areRoutesLoaded()) {
-                $routes = require $this->appPath . '/library/routes.php';
+                $routes = require $this->appPath . '/routes/web.php';
                 $routes($this->router);
                 $this->router->setRoutesLoaded();
             }

@@ -11,7 +11,7 @@ install.php_*
 composer-setup.php
 .env
 .php-cs-fixer.cache
-library/config.local.php
+config/config.local.php
 vendor
 
 # Storage directories

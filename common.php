@@ -110,11 +110,11 @@ try {
 }
 
 // Load config
-require_once BB_PATH . '/library/config.php';
+require_once BB_PATH . '/config/config.php';
 
 // Local config
-if (is_file(BB_PATH . '/library/config.local.php')) {
-    require_once BB_PATH . '/library/config.local.php';
+if (is_file(BB_PATH . '/config/config.local.php')) {
+    require_once BB_PATH . '/config/config.local.php';
 }
 
 /** @noinspection PhpUndefinedVariableInspection */

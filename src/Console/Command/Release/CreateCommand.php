@@ -138,7 +138,7 @@ class CreateCommand extends Command
         if (!$this->updateConfig($version, $date)) {
             return self::FAILURE;
         }
-        $this->line('  <info>✓</info> Updated library/config.php');
+        $this->line('  <info>✓</info> Updated config/config.php');
 
         // Step 2: Generate changelog
         if (!$noChangelog) {
@@ -204,10 +204,10 @@ class CreateCommand extends Command
      */
     private function updateConfig(string $version, string $date): bool
     {
-        $configFile = BB_ROOT . 'library/config.php';
+        $configFile = BB_ROOT . 'config/config.php';
 
         if (!is_file($configFile)) {
-            $this->error('Config file not found: library/config.php');
+            $this->error('Config file not found: config/config.php');
             return false;
         }
 
