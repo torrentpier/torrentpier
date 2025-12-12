@@ -32,7 +32,7 @@ class CronListCommand extends Command
 
         // Get cron jobs from a database
         try {
-            $jobs = DB()->fetch_rowset("SELECT * FROM " . BB_CRON . " ORDER BY cron_active DESC, run_order ASC");
+            $jobs = DB()->fetch_rowset("SELECT * FROM " . BB_CRON . " ORDER BY cron_active DESC, run_order");
 
             if (empty($jobs)) {
                 $this->warning('No cron jobs found in the database.');

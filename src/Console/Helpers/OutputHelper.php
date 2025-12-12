@@ -39,4 +39,27 @@ class OutputHelper
 
         return $value;
     }
+
+    /**
+     * Format duration in seconds to human-readable string
+     *
+     * @param int $seconds Duration in seconds
+     * @return string Formatted string (e.g., "1h 30m", "45s")
+     */
+    public static function formatDuration(int $seconds): string
+    {
+        if ($seconds < 60) {
+            return "{$seconds}s";
+        }
+
+        if ($seconds < 3600) {
+            $minutes = floor($seconds / 60);
+            $secs = $seconds % 60;
+            return "{$minutes}m {$secs}s";
+        }
+
+        $hours = floor($seconds / 3600);
+        $minutes = floor(($seconds % 3600) / 60);
+        return "{$hours}h {$minutes}m";
+    }
 }

@@ -22,7 +22,7 @@ use TorrentPier\Helpers\CronHelper;
  */
 #[AsCommand(
     name: 'cron:run',
-    description: 'Run cron jobs'
+    description: 'Run all active cron jobs'
 )]
 class CronRunCommand extends Command
 {
