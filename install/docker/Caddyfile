@@ -1,4 +1,5 @@
 # Caddy configuration for TorrentPier (Docker)
+# Web root is /app/public
 
 {$TP_HOST} {
     root * /app/public
@@ -7,20 +8,21 @@
     try_files {path} {path}/ /index.php?{query}
     file_server
 
+    # Block access to parent directories and hidden files
     @blocked {
-        path /install/* /internal_data/* /library/*
+        path /..
         path /.ht* /.en* /.git* /.docker*
-        path *.sql *.tpl *.db *.inc *.log *.md
-        path /docker-compose.yml /Dockerfile /.env*
     }
     respond @blocked 404
 
-    redir /sitemap.xml /sitemap/sitemap.xml 301
+    # Sitemap is in parent directory
+    redir /sitemap.xml ../sitemap/sitemap.xml 301
 
+    # Static file caching
     @static {
-        path *.html *.css *.js *.json *.xml *.txt *.png *.jpg *.jpeg *.gif *.svg *.webp *.avif
+        path *.css *.js *.png *.jpg *.jpeg *.gif *.ico *.svg *.woff *.woff2 *.webp *.avif
     }
-    header @static Content-Type "{mime}; charset=utf-8"
+    header @static Cache-Control "public, max-age=2592000, immutable"
 
     log {
         output stdout

@@ -559,10 +559,11 @@ class LegacySyntaxExtension extends AbstractExtension
             return "<!-- include_file: file not found: $path -->";
         }
 
-        // Check if a file is within BB_ROOT (with trailing separator to prevent prefix attacks)
-        $bbRoot = defined('BB_ROOT') ? realpath(BB_ROOT) : realpath('.');
-        $bbRootWithSeparator = rtrim($bbRoot, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-        if (!str_starts_with($realPath, $bbRootWithSeparator) && $realPath !== $bbRoot) {
+        // Check if a file is within BB_PATH (the application root, not public/)
+        // BB_PATH is the actual app root, BB_ROOT is the public web root
+        $appRoot = defined('BB_PATH') ? realpath(BB_PATH) : (defined('BB_ROOT') ? realpath(BB_ROOT . '/..') : realpath('.'));
+        $appRootWithSeparator = rtrim($appRoot, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (!str_starts_with($realPath, $appRootWithSeparator) && $realPath !== $appRoot) {
             return "<!-- include_file: access denied: $path -->";
         }
 

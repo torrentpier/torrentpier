@@ -356,6 +356,52 @@ function make_url(string $path = ''): string
 }
 
 /**
+ * Get asset URL with cache busting
+ *
+ * @param string $path Asset path relative to assets/ (e.g., 'js/main.js', 'images/logo.png')
+ * @param string|null $type Optional asset type for version lookup ('js' or 'css')
+ * @return string Full URL to asset
+ */
+function asset_url(string $path, ?string $type = null): string
+{
+    // Determine a version based on asset type or extension
+    if ($type === null) {
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        $type = match ($ext) {
+            'js' => 'js',
+            'css' => 'css',
+            default => null,
+        };
+    }
+
+    $version = match ($type) {
+        'js' => config()->get('js_ver', 1),
+        'css' => config()->get('css_ver', 1),
+        default => null,
+    };
+
+    $url = FULL_URL . 'assets/' . ltrim($path, '/');
+
+    // Add a cache-busting version for JS/CSS
+    if ($version !== null) {
+        $url .= '?v=' . $version;
+    }
+
+    return $url;
+}
+
+/**
+ * Get image URL from assets/images/
+ *
+ * @param string $path Image path relative to assets/images/ (e.g., 'logo/logo.png')
+ * @return string Full URL to image
+ */
+function image_url(string $path): string
+{
+    return FULL_URL . 'assets/images/' . ltrim($path, '/');
+}
+
+/**
  * Get URL builder instance for generating SEO-friendly URLs
  *
  * Usage:

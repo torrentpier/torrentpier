@@ -27,7 +27,8 @@ class FrontController
     public const string ACTION_STATIC = 'static';
     public const string ACTION_ROUTE = 'route';
 
-    private string $basePath;
+    private string $appPath;
+    private string $publicPath;
     private ?Router $router = null;
 
     /** @var string[] Paths that bypass the router entirely */
@@ -36,12 +37,13 @@ class FrontController
     /** @var string[] Static file extensions (let web server handle) */
     private array $staticExtensions = [
         'css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'ico', 'svg',
-        'woff', 'woff2', 'ttf', 'eot', 'map',
+        'woff', 'woff2', 'ttf', 'eot', 'map', 'xml',
     ];
 
-    public function __construct(string $basePath)
+    public function __construct(string $appPath, string $publicPath)
     {
-        $this->basePath = $basePath;
+        $this->appPath = $appPath;
+        $this->publicPath = $publicPath;
     }
 
     /**
@@ -128,10 +130,11 @@ class FrontController
                 continue;
             }
 
-            $file = $this->basePath . $path;
+            // Entry points are in publicPath (public/admin/, public/bt/)
+            $file = $this->publicPath . $path;
 
-            // Validate path is within basePath (prevent traversal)
-            $realBase = realpath($this->basePath);
+            // Validate path is within publicPath (prevent traversal)
+            $realBase = realpath($this->publicPath);
             $realFile = realpath($file);
 
             if ($realFile !== false && str_starts_with($realFile, $realBase . DIRECTORY_SEPARATOR)) {
@@ -187,9 +190,9 @@ class FrontController
             ];
         }
 
-        // No route for clean path - include .php file directly if exists
-        $filePath = $this->basePath . $path;
-        $realBase = realpath($this->basePath);
+        // No route for clean path - include .php file directly if exists in public/
+        $filePath = $this->publicPath . $path;
+        $realBase = realpath($this->publicPath);
         $realFile = realpath($filePath);
 
         if ($realFile !== false && str_starts_with($realFile, $realBase . DIRECTORY_SEPARATOR)) {
@@ -212,7 +215,7 @@ class FrontController
             $this->router = Router::getInstance();
 
             if (!$this->router->areRoutesLoaded()) {
-                $routes = require $this->basePath . '/library/routes.php';
+                $routes = require $this->appPath . '/routes/web.php';
                 $routes($this->router);
                 $this->router->setRoutesLoaded();
             }
@@ -231,11 +234,19 @@ class FrontController
     }
 
     /**
-     * Get the base path
+     * Get the application path
      */
-    public function getBasePath(): string
+    public function getAppPath(): string
     {
-        return $this->basePath;
+        return $this->appPath;
+    }
+
+    /**
+     * Get the public path
+     */
+    public function getPublicPath(): string
+    {
+        return $this->publicPath;
     }
 
     /**

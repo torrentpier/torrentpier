@@ -26,23 +26,38 @@ TorrentPier follows a modular architecture combining legacy compatibility with m
 
 ```
 torrentpier/
-├── src/                    # Modern PHP classes (PSR-4)
+├── app/                    # Application code
+│   ├── Http/
+│   │   └── Controllers/   # Web controllers
+│   └── Console/
+│       └── Commands/      # CLI commands
+├── src/                    # Core library classes (PSR-4)
 │   ├── Cache/             # Caching system
 │   ├── Database/          # Database layer
 │   ├── Helpers/           # Utility classes (Slug, etc.)
 │   ├── Router/            # Routing and URL handling
 │   ├── Template/          # Twig integration
 │   └── Tracker/           # BitTorrent tracker
-├── library/               # Core application logic
-│   ├── config.php         # Main configuration
+├── library/               # Legacy application logic
 │   └── includes/          # Legacy includes
-├── admin/                 # Admin panel
-├── bt/                    # Tracker endpoints
-│   ├── announce.php       # Announce endpoint
-│   └── scrape.php         # Scrape endpoint
-├── styles/                # Templates and assets
-├── internal_data/         # Cache, logs, compiled templates
-├── migrations/            # Phinx database migrations
+├── config/                # Configuration files
+│   ├── config.php         # Main configuration
+│   └── config.local.php   # Local overrides (gitignored)
+├── database/              # Database files
+│   └── migrations/        # Phinx migrations
+├── routes/                # Route definitions
+│   └── web.php            # Web routes
+├── resources/
+│   └── views/             # Twig templates
+├── public/                # Web root
+│   ├── admin/             # Admin panel
+│   └── bt/                # Tracker endpoints
+├── storage/               # Runtime data
+│   ├── app/
+│   │   ├── public/        # Web-accessible (avatars, sitemap)
+│   │   └── private/       # Protected files (uploads)
+│   ├── logs/              # Application logs
+│   └── framework/         # Cache, templates, triggers
 └── install/               # Installation scripts
 ```
 
@@ -125,7 +140,7 @@ $data = CACHE('my_key', function() {
 
 ## Configuration
 
-Main configuration in `library/config.php` with environment overrides via `.env`:
+Main configuration in `config/config.php` with environment overrides via `.env`:
 
 ```php
 // Access configuration
@@ -136,7 +151,7 @@ $value = config('site.name');
 
 ### Adding routes
 
-Routes are defined using League/Route in `library/routes.php`. TorrentPier supports SEO-friendly semantic URLs:
+Routes are defined using League/Route in `routes/web.php`. TorrentPier supports SEO-friendly semantic URLs:
 
 ```php
 // Generate URLs in PHP
@@ -154,8 +169,8 @@ See [Semantic URLs](./semantic-urls.md) for detailed documentation.
 
 ### Creating templates
 
-Place Twig templates in `styles/{style_name}/templates/`.
+Place Twig templates in `resources/views/{style_name}/` (e.g., `resources/views/default/`, `resources/views/momo/`).
 
 ### Database changes
 
-Use Phinx migrations in the `migrations/` directory.
+Use Phinx migrations in the `database/migrations/` directory.

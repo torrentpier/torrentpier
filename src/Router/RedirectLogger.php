@@ -58,7 +58,7 @@ class RedirectLogger
             $source ?? 'unknown'
         );
 
-        // Use bb_log to write to internal_data/log/redirects.log
+        // Use bb_log to write to storage/logs/redirects.log
         bb_log($entry . LOG_LF, 'redirects', false);
     }
 

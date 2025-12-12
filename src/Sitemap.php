@@ -136,7 +136,7 @@ class Sitemap
 
         $sitemap->write();
 
-        return $sitemap->getSitemapUrls(make_url('/sitemap') . '/');
+        return $sitemap->getSitemapUrls(make_url('/storage/sitemap') . '/');
     }
 
     /**
@@ -156,7 +156,7 @@ class Sitemap
 
         $staticSitemap->write();
 
-        return $staticSitemap->getSitemapUrls(make_url('/sitemap') . '/');
+        return $staticSitemap->getSitemapUrls(make_url('/storage/sitemap') . '/');
     }
 
     /**

@@ -27,9 +27,8 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
 
     public function setTemplatePath(string $templateDir): void
     {
-        $templateName = basename($templateDir);
-        $this->imgPath = '/styles/templates/' . $templateName . '/images/';
-        $this->sharedImgPath = '/styles/images/';
+        $this->imgPath = '/assets/images/theme/';
+        $this->sharedImgPath = '/assets/images/';
     }
 
     public function getGlobals(): array

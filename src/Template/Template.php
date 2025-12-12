@@ -54,7 +54,7 @@ class Template
         $this->variables = &$this->blockData['.'][0];
         $this->rootDir = TwigEnvironmentFactory::normalizePath($root);
         $this->templateName = basename($root);
-        $this->cacheDir = TwigEnvironmentFactory::normalizePath(CACHE_DIR . '/');
+        $this->cacheDir = TwigEnvironmentFactory::normalizePath(TEMPLATES_CACHE_DIR . '/');
 
         if (!is_dir($this->rootDir)) {
             throw new \RuntimeException("Template directory not found: $this->templateName");
@@ -81,7 +81,7 @@ class Template
         // When called with a proper templates directory, make it the default
         // This allows setup_style() to override any early initialization
         $normalizedRoot = TwigEnvironmentFactory::normalizePath($root);
-        if ($root !== '.' && str_contains($normalizedRoot, 'styles/templates')) {
+        if ($root !== '.' && (str_contains($normalizedRoot, '/views/') || str_contains($normalizedRoot, '/templates/'))) {
             self::$defaultInstance = self::$instances[$key];
         } elseif (self::$defaultInstance === null) {
             self::$defaultInstance = self::$instances[$key];

@@ -18,7 +18,7 @@ if (PHP_SAPI !== 'cli') {
 const BB_ROOT = __DIR__ . '/';
 
 // Bootstrap the application
-require __DIR__ . '/common.php';
+require __DIR__ . '/library/common.php';
 
 // Run the console application
 $application = new TorrentPier\Console\Application();

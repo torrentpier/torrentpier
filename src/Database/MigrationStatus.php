@@ -28,7 +28,7 @@ class MigrationStatus
     public function __construct()
     {
         $this->migrationTable = BB_MIGRATIONS;
-        $this->migrationPath = BB_ROOT . 'migrations';
+        $this->migrationPath = BB_ROOT . 'database/migrations';
     }
 
     /**

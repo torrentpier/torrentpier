@@ -83,7 +83,10 @@
     },
     "autoload": {
         "psr-4": {
-            "TorrentPier\\": "src/"
+            "TorrentPier\\": "src/",
+            "TorrentPier\\Http\\": "app/Http/",
+            "TorrentPier\\Console\\": "app/Console/",
+            "App\\": "app/"
         }
     },
     "autoload-dev": {
