@@ -40,8 +40,12 @@ class CronListCommand extends Command
             $rows = [];
             foreach ($jobs as $job) {
                 $status = $job['cron_active'] ? '<info>Active</info>' : '<comment>Inactive</comment>';
-                $lastRun = $job['last_run'] ? date('Y-m-d H:i:s', $job['last_run']) : 'Never';
-                $nextRun = $job['next_run'] ? date('Y-m-d H:i:s', $job['next_run']) : 'N/A';
+                $lastRun = $job['last_run']
+                    ? ($job['last_run'] instanceof \DateTimeInterface ? $job['last_run']->format('Y-m-d H:i:s') : date('Y-m-d H:i:s', $job['last_run']))
+                    : 'Never';
+                $nextRun = $job['next_run']
+                    ? ($job['next_run'] instanceof \DateTimeInterface ? $job['next_run']->format('Y-m-d H:i:s') : date('Y-m-d H:i:s', $job['next_run']))
+                    : 'N/A';
                 $execTime = isset($job['execution_time']) ? round($job['execution_time'], 3) . 's' : 'N/A';
 
                 $rows[] = [
