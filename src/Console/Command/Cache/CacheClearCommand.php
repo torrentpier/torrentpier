@@ -130,4 +130,3 @@ class CacheClearCommand extends Command
         }
     }
 }
-

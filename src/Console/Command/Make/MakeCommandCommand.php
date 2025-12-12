@@ -181,7 +181,6 @@ class {$className} extends Command
         return self::SUCCESS;
     }
 }
-
 PHP;
     }
 }

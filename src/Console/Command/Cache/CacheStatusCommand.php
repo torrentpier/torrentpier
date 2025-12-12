@@ -62,4 +62,3 @@ class CacheStatusCommand extends Command
         return self::SUCCESS;
     }
 }
-
