@@ -240,8 +240,6 @@ if (!request()->get('dosearch')) {
 
     $select_sql = 'SELECT u.user_id, u.username, u.user_rank, u.user_email, u.user_posts, u.user_regdate, u.user_level, u.user_active, u.user_lastvisit FROM ' . BB_USERS . ' AS u';
 
-    $lower_b = 'LOWER(';
-    $lower_e = ')';
 
     // validate data & prepare sql
     switch ($mode) {
@@ -261,8 +259,8 @@ if (!request()->get('dosearch')) {
                 bb_die(__('SEARCH_INVALID_USERNAME'));
             }
 
-            $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE {$lower_b}username{$lower_e} $op '" . DB()->escape($username) . "' AND user_id <> " . GUEST_UID;
-            $select_sql .= "	WHERE {$lower_b}u.username{$lower_e} $op '" . DB()->escape($username) . "' AND u.user_id <> " . GUEST_UID;
+            $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE username $op '" . DB()->escape($username) . "' AND user_id <> " . GUEST_UID;
+            $select_sql .= "	WHERE u.username $op '" . DB()->escape($username) . "' AND u.user_id <> " . GUEST_UID;
             break;
 
         case 'search_email':
@@ -281,8 +279,8 @@ if (!request()->get('dosearch')) {
                 bb_die(__('SEARCH_INVALID_EMAIL'));
             }
 
-            $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE {$lower_b}user_email{$lower_e} $op '" . DB()->escape($email) . "' AND user_id <> " . GUEST_UID;
-            $select_sql .= "	WHERE {$lower_b}u.user_email{$lower_e} $op '" . DB()->escape($email) . "' AND u.user_id <> " . GUEST_UID;
+            $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE user_email $op '" . DB()->escape($email) . "' AND user_id <> " . GUEST_UID;
+            $select_sql .= "	WHERE u.user_email $op '" . DB()->escape($email) . "' AND u.user_id <> " . GUEST_UID;
             break;
 
         case 'search_ip':
@@ -604,10 +602,10 @@ if (!request()->get('dosearch')) {
 
             $total_sql .= 'SELECT COUNT(user_id) AS total
 							FROM ' . BB_USERS . "
-								WHERE {$lower_b}$field{$lower_e} $op '" . DB()->escape($userfield_value) . "'
+								WHERE $field $op '" . DB()->escape($userfield_value) . "'
 									AND user_id <> " . GUEST_UID;
 
-            $select_sql .= "	WHERE {$lower_b}u.$field{$lower_e} $op '" . DB()->escape($userfield_value) . "'
+            $select_sql .= "	WHERE u.$field $op '" . DB()->escape($userfield_value) . "'
 									AND u.user_id <> " . GUEST_UID;
             break;
 
@@ -918,7 +916,7 @@ if (!request()->get('dosearch')) {
             'ABLED' => $rowset[$i]['user_active'] ? __('ENABLED') : __('DISABLED'),
 
             'U_VIEWPOSTS' => "../search?search_author=1&amp;uid={$rowset[$i]['user_id']}",
-            'U_MANAGE' => '../profile?mode=editprofile&' . POST_USERS_URL . '=' . $rowset[$i]['user_id'] . '&admin=1',
+            'U_MANAGE' => SETTINGS_URL . '?' . POST_USERS_URL . '=' . $rowset[$i]['user_id'],
             'U_PERMISSIONS' => 'admin_ug_auth.php?mode=user&' . POST_USERS_URL . '=' . $rowset[$i]['user_id'],
         ]);
     }

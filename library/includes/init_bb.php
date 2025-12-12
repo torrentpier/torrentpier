@@ -225,20 +225,24 @@ define('PASSWORD_MAX_LENGTH', 128);
 define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
 
-define('CAT_URL', '?' . POST_CAT_URL . '=');
-define('DL_URL', config()->get('dl_url'));
-define('FORUM_URL', 'viewforum?' . POST_FORUM_URL . '=');
-define('GROUP_URL', 'group?' . POST_GROUPS_URL . '=');
-define('LOGIN_URL', config()->get('login_url'));
-define('MODCP_URL', 'modcp?' . POST_FORUM_URL . '=');
-define('PM_URL', config()->get('pm_url'));
-define('POST_URL', 'viewtopic?' . POST_POST_URL . '=');
-define('POSTING_URL', config()->get('posting_url'));
-define('PROFILE_URL', 'profile?mode=viewprofile&amp;' . POST_USERS_URL . '=');
-define('BONUS_URL', 'profile?mode=bonus');
-define('TOPIC_URL', 'viewtopic?' . POST_TOPIC_URL . '=');
-define('FILELIST_URL', 'filelist?' . POST_TOPIC_URL . '=');
-define('PLAYBACK_M3U_URL', 'playback_m3u?' . POST_TOPIC_URL . '=');
+define('CAT_URL', FORUM_PATH . 'categories/');
+define('DL_URL', FORUM_PATH . 'dl/');
+define('FORUM_URL', FORUM_PATH . 'forums/');
+define('LOGIN_URL', FORUM_PATH . 'login');
+define('MODCP_URL', FORUM_PATH . 'modcp?' . POST_FORUM_URL . '=');
+define('PM_URL', FORUM_PATH . 'privmsg');
+define('POST_URL', FORUM_PATH . 'viewtopic?' . POST_POST_URL . '=');
+define('POSTING_URL', FORUM_PATH . 'posting');
+define('PROFILE_URL', FORUM_PATH . 'members/');
+define('SETTINGS_URL', FORUM_PATH . 'settings/');
+define('REGISTER_URL', FORUM_PATH . 'register/');
+define('PASSWORD_RECOVERY_URL', FORUM_PATH . 'password-recovery/');
+define('WATCHLIST_URL', FORUM_PATH . 'profile/watchlist/');
+define('ACTIVATE_URL', FORUM_PATH . 'activate/');  // Usage: ACTIVATE_URL . $key . '/'
+define('BONUS_URL', FORUM_PATH . 'profile/bonus/');
+define('TOPIC_URL', FORUM_PATH . 'threads/');
+define('FILELIST_URL', FORUM_PATH . 'dl/');  // Usage: FILELIST_URL . $id . '/files/'
+define('PLAYBACK_M3U_URL', FORUM_PATH . 'playback/');
 
 define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 
@@ -347,7 +351,26 @@ function html_ent_decode(string $string, int $flags = ENT_QUOTES, string $encodi
  */
 function make_url(string $path = ''): string
 {
-    return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
+    // Remove leading slash only, preserve trailing slash for SEO-friendly URLs
+    return FULL_URL . ltrim($path, '/');
+}
+
+/**
+ * Get URL builder instance for generating SEO-friendly URLs
+ *
+ * Usage:
+ *   url()->topic($id, $title)
+ *   url()->forum($id, $name)
+ *   url()->profile($id, $username)
+ *   url()->register()
+ *   url()->settings()
+ *   url()->passwordRecovery()
+ *
+ * @return \TorrentPier\Router\SemanticUrl\UrlBuilder
+ */
+function url(): \TorrentPier\Router\SemanticUrl\UrlBuilder
+{
+    return \TorrentPier\Router\SemanticUrl\UrlBuilder::instance();
 }
 
 /**

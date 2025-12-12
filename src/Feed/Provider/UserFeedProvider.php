@@ -51,7 +51,7 @@ class UserFeedProvider implements FeedProviderInterface
     {
         return new FeedMetadata(
             title: $this->username,
-            link: FULL_URL,
+            link: make_url(url()->member($this->userId, $this->username)),
             lastModified: new DateTimeImmutable()
         );
     }

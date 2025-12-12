@@ -29,7 +29,7 @@ if (request()->post->has('del_my_post')) {
     template()->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="#" onclick="window.close(); window.opener.focus();">' . __('GOTO_MY_MESSAGE') . '</a>
 		<br /><br />
-		<a href="index.php">' . __('INDEX_RETURN') . '</a>
+		<a href="' . FORUM_PATH . '">' . __('INDEX_RETURN') . '</a>
 	');
 
     if (empty(request()->post->get('topic_id_list')) or !$topic_csv = get_id_csv(request()->post->get('topic_id_list'))) {
@@ -48,11 +48,11 @@ if (request()->post->has('del_my_post')) {
     template()->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="#" onclick="window.close(); window.opener.focus();">' . __('GOTO_MY_MESSAGE') . '</a>
 		<br /><br />
-		<a href="index.php">' . __('INDEX_RETURN') . '</a>
+		<a href="' . FORUM_PATH . '">' . __('INDEX_RETURN') . '</a>
 	');
 
     if (IS_GUEST) {
-        redirect('index.php');
+        redirect(FORUM_PATH);
     }
 
     DB()->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = " . user()->id);
@@ -275,8 +275,8 @@ if (empty(request()->query->all()) && empty(request()->post->all())) {
 
         'THIS_USER_ID' => userdata('user_id'),
         'THIS_USER_NAME' => addslashes(userdata('username')),
-        'SEARCH_ACTION' => 'search',
-        'U_SEARCH_USER' => 'search?mode=searchuser&amp;input_name=' . $params->key('poster_name'),
+        'SEARCH_ACTION' => FORUM_PATH . 'search',
+        'U_SEARCH_USER' => FORUM_PATH . 'search?mode=searchuser&amp;input_name=' . $params->key('poster_name'),
         'ONLOAD_FOCUS_ID' => 'text_match_input',
 
         'MY_TOPICS_ID' => 'my_topics',
@@ -681,11 +681,11 @@ else {
 
             if (userdata('user_posts')) {
                 template()->assign_var('BB_DIE_APPEND_MSG', '
-					<form id="mod-action" method="POST" action="search.php">
+					<form id="mod-action" method="POST" action="' . FORUM_PATH . 'search">
 						<input type="submit" name="add_my_post" value="' . __('RESTORE_ALL_POSTS') . '" class="bold" onclick="if (!window.confirm( this.value +\'?\' )){ return false };" />
 					</form>
 					<br /><br />
-					<a href="index.php">' . __('INDEX_RETURN') . '</a>
+					<a href="' . FORUM_PATH . '">' . __('INDEX_RETURN') . '</a>
 				');
             }
         }
@@ -790,16 +790,22 @@ else {
         $is_unread = is_unread($topic['topic_last_post_time'], $topic_id, $forum_id);
         $moved = ($topic['topic_status'] == TOPIC_MOVED);
 
+        $topicTitle = $topic['topic_title'];
+        $hrefTopicId = $moved ? $topic['topic_moved_id'] : $topic_id;
+        $topicUrl = url()->topic($hrefTopicId, $topicTitle);
+
         template()->assign_block_vars('t', [
             'ROW_NUM' => $row_num,
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
-            'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
-            'TOPIC_TITLE' => censor()->censorString($topic['topic_title']),
+            'TOPIC_URL' => $topicUrl,
+            'TOPIC_NEWEST_URL' => url()->topicNewest($hrefTopicId, $topicTitle),
+            'LAST_POST_URL' => url()->topicPost($hrefTopicId, $topicTitle, $topic['topic_last_post_id']),
+            'TOPIC_TITLE' => censor()->censorString($topicTitle),
             'IS_UNREAD' => $is_unread,
             'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
-            'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], config()->get('posts_per_page')),
+            'PAGINATION' => $moved ? '' : build_topic_pagination($topicUrl, $topic['topic_replies'], config()->get('posts_per_page')),
             'REPLIES' => $moved ? '' : $topic['topic_replies'],
             'ATTACH' => !empty($topic['attach_ext_id']),
             'STATUS' => $topic['topic_status'],

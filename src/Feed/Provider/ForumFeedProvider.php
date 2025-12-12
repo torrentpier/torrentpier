@@ -82,9 +82,14 @@ class ForumFeedProvider implements FeedProviderInterface
             ? (__('ATOM_GLOBAL_FEED') ?: config()->get('server_name'))
             : htmlCHR($this->forumName);
 
+        // Link to forum with semantic URL, or homepage for global feed
+        $link = $this->forumId === 0
+            ? FULL_URL
+            : make_url(url()->forum($this->forumId, $this->forumName ?? ''));
+
         return new FeedMetadata(
             title: $title,
-            link: FULL_URL,
+            link: $link,
             lastModified: new DateTimeImmutable()
         );
     }

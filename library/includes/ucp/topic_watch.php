@@ -44,7 +44,7 @@ if (request()->post->has('topic_id_list')) {
 
 template()->assign_vars([
     'PAGE_TITLE' => __('WATCHED_TOPICS'),
-    'S_FORM_ACTION' => BB_ROOT . 'profile?mode=watch'
+    'S_FORM_ACTION' => WATCHLIST_URL
 ]);
 
 $sql = "SELECT COUNT(topic_id) as watch_count FROM " . BB_TOPICS_WATCH . " WHERE user_id = $user_id";
@@ -76,15 +76,21 @@ if ($watch_count > 0) {
         for ($i = 0, $iMax = count($watch); $i < $iMax; $i++) {
             $is_unread = is_unread($watch[$i]['topic_last_post_time'], $watch[$i]['topic_id'], $watch[$i]['forum_id']);
 
+            $topicId = $watch[$i]['topic_id'];
+            $topicTitle = $watch[$i]['topic_title'];
+            $topicUrl = url()->topic($topicId, $topicTitle);
+
             template()->assign_block_vars('watch', [
                 'ROW_CLASS' => (!($i % 2)) ? 'row1' : 'row2',
                 'POST_ID' => $watch[$i]['topic_first_post_id'],
-                'TOPIC_ID' => $watch[$i]['topic_id'],
-                'TOPIC_TITLE' => str_short(censor()->censorString($watch[$i]['topic_title']), 70),
-                'FULL_TOPIC_TITLE' => $watch[$i]['topic_title'],
-                'U_TOPIC' => TOPIC_URL . $watch[$i]['topic_id'],
+                'TOPIC_ID' => $topicId,
+                'TOPIC_TITLE' => str_short(censor()->censorString($topicTitle), 70),
+                'FULL_TOPIC_TITLE' => $topicTitle,
+                'U_TOPIC' => $topicUrl,
+                'U_TOPIC_NEWEST' => url()->topicNewest($topicId, $topicTitle),
+                'U_LAST_POST' => url()->topicPost($topicId, $topicTitle, $watch[$i]['topic_last_post_id']),
                 'FORUM_TITLE' => $watch[$i]['forum_name'],
-                'U_FORUM' => FORUM_URL . $watch[$i]['forum_id'],
+                'U_FORUM' => url()->forum($watch[$i]['forum_id'], $watch[$i]['forum_name']),
                 'REPLIES' => $watch[$i]['topic_replies'],
                 'AUTHOR' => profile_url($watch[$i]),
                 'LAST_POST' => bb_date($watch[$i]['topic_last_post_time']) . '<br />' . profile_url(['user_id' => $watch[$i]['last_user_id'], 'username' => $watch[$i]['last_username'], 'user_rank' => $watch[$i]['last_user_rank']]),
@@ -93,15 +99,15 @@ if ($watch_count > 0) {
                 'IS_UNREAD' => $is_unread,
                 'POLL' => (bool)$watch[$i]['topic_vote'],
                 'TOPIC_ICON' => get_topic_icon($watch[$i], $is_unread),
-                'PAGINATION' => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination(TOPIC_URL . $watch[$i]['topic_id'], $watch[$i]['topic_replies'], config()->get('posts_per_page'))
+                'PAGINATION' => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination($topicUrl, $watch[$i]['topic_replies'], config()->get('posts_per_page'))
             ]);
         }
 
         template()->assign_vars([
             'MATCHES' => (count($watch) == 1) ? sprintf(__('FOUND_SEARCH_MATCH'), count($watch)) : sprintf(__('FOUND_SEARCH_MATCHES'), count($watch)),
-            'PAGINATION' => generate_pagination(BB_ROOT . 'profile?mode=watch', $watch_count, $per_page, $start),
+            'PAGINATION' => generate_pagination(WATCHLIST_URL, $watch_count, $per_page, $start),
             'PAGE_NUMBER' => sprintf(__('PAGE_OF'), (floor($start / $per_page) + 1), ceil($watch_count / $per_page)),
-            'U_PER_PAGE' => BB_ROOT . 'profile?mode=watch',
+            'U_PER_PAGE' => WATCHLIST_URL,
             'PER_PAGE' => $per_page
         ]);
     }

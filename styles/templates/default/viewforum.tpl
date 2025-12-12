@@ -330,8 +330,8 @@ td.topic_id { cursor: pointer; }
 				<!-- IF f.last.SHOW_LAST_TOPIC -->
 
 				<h6 class="last_topic">
-					<a title="{f.last.LAST_TOPIC_TIP}" href="{TOPIC_URL}{f.last.LAST_TOPIC_ID}{NEWEST_URL}">{f.last.LAST_TOPIC_TITLE}</a>
-					<a href="{POST_URL}{f.last.LAST_POST_ID}#{f.last.LAST_POST_ID}">{ICON_LATEST_REPLY}</a>
+					<a title="{f.last.LAST_TOPIC_TIP}" href="{f.last.LAST_TOPIC_URL}">{f.last.LAST_TOPIC_TITLE}</a>
+					<a href="{f.last.LAST_POST_URL}">{ICON_LATEST_REPLY}</a>
 				</h6>
 				<p class="small" style="margin-top:4px;">
 					{f.last.LAST_POST_TIME}
@@ -344,7 +344,7 @@ td.topic_id { cursor: pointer; }
 				<p class="small">{f.last.LAST_POST_TIME}</p>
 				<p class="small" style="margin-top:3px;">
 					{f.last.LAST_POST_USER}
-					<a href="{POST_URL}{f.last.LAST_POST_ID}#{f.last.LAST_POST_ID}">{ICON_LATEST_REPLY}</a>
+					<a href="{f.last.LAST_POST_URL}">{ICON_LATEST_REPLY}</a>
 				</p>
 
 				<!-- ENDIF / !f.last.SHOW_LAST_TOPIC -->
@@ -393,7 +393,7 @@ td.topic_id { cursor: pointer; }
 		<td class="small bold nowrap tRight w100">
 			&nbsp;
 			<!-- IF LOGGED_IN -->
-			<a class="small" href="feed?type=f&id={FORUM_ID}" target="_blank">{{ FEED_IMG|raw }} {L_ATOM_SUBSCRIBE}</a>&nbsp;&#0183;
+			<a class="small" href="/feed/f/{FORUM_ID}/" target="_blank">{{ FEED_IMG|raw }} {L_ATOM_SUBSCRIBE}</a>&nbsp;&#0183;
 			<a class="small" href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a>&nbsp;&#0183;
 			<a class="menu-root" href="#only-new-options">{L_DISPLAYING_OPTIONS}</a>
 			<!-- ENDIF / LOGGED_IN -->
@@ -444,16 +444,16 @@ td.topic_id { cursor: pointer; }
 	<td style="padding: 2px 5px 3px 3px;" class="tt">
 	<div class="torTopic">
 		<!-- IF t.TOR_STATUS_ICON --><span id="status-{t.TOPIC_ID}" title="{t.TOR_STATUS_TEXT}">{t.TOR_STATUS_ICON}</span>&#0183;<!-- ENDIF -->
-		<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
+		<!-- IF t.IS_UNREAD --><a href="{t.TOPIC_NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
 		<!-- IF t.STATUS == 2 --><span class="topicMoved">{L_TOPIC_MOVED}</span>
 			<!-- ELSEIF t.DL_CLASS --><span class="{t.DL_CLASS} iconDL"><b>{L_TOPIC_DL}</b></span>
 		<!-- ENDIF -->
 		<!-- IF t.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span><!-- ENDIF -->
 		<!-- IF t.TOR_STALED || t.TOR_FROZEN -->
 			<!-- IF t.ATTACH --><span>{TOPIC_ATTACH_ICON}</span><!-- ENDIF -->
-			<a id="tt-{t.TOPIC_ID}" href="{TOPIC_URL}{t.HREF_TOPIC_ID}" class="gen tt-text">{t.TOPIC_TITLE}</a>
+			<a id="tt-{t.TOPIC_ID}" href="{t.TOPIC_URL}" class="gen tt-text">{t.TOPIC_TITLE}</a>
 		<!-- ELSE -->
-			{t.TOR_TYPE}<a id="tt-{t.TOPIC_ID}" href="{TOPIC_URL}{t.HREF_TOPIC_ID}" class="torTopic tt-text"><b>{t.TOPIC_TITLE}</b></a>
+			{t.TOR_TYPE}<a id="tt-{t.TOPIC_ID}" href="{t.TOPIC_URL}" class="torTopic tt-text"><b>{t.TOPIC_TITLE}</b></a>
 		<!-- ENDIF -->
 		<!-- IF t.PAGINATION --><span class="topicPG">[{ICON_GOTOPOST}{L_GOTO_SHORT} {t.PAGINATION} ]</span><!-- ENDIF -->
 	</div>
@@ -488,7 +488,7 @@ td.topic_id { cursor: pointer; }
 		<p>{t.LAST_POST_TIME}</p>
 		<p style="padding-top: 2px">
 			{t.LAST_POSTER}
-			<a href="{POST_URL}{t.LAST_POST_ID}#{t.LAST_POST_ID}">{ICON_LATEST_REPLY}</a>
+			<a href="{t.LAST_POST_URL}">{ICON_LATEST_REPLY}</a>
 		</p>
 	</td>
 </tr>
@@ -544,13 +544,13 @@ td.topic_id { cursor: pointer; }
 	<td colspan="2" id="{t.TOPIC_ID}" class="topic_id"><img class="topic_icon" src="{t.TOPIC_ICON}" /></td>
 	<td class="tt">
 		<span class="topictitle">
-			<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
+			<!-- IF t.IS_UNREAD --><a href="{t.TOPIC_NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
 			<!-- IF t.STATUS == 2 --><span class="topicMoved">{L_TOPIC_MOVED}</span>
 				<!-- ELSEIF t.DL --><span class="">{L_TOPIC_DL}</span>
 				<!-- ELSEIF t.ATTACH -->{TOPIC_ATTACH_ICON}
 			<!-- ENDIF -->
 			<!-- IF t.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span><!-- ENDIF -->
-			<a id="tt-{t.TOPIC_ID}" href="{TOPIC_URL}{t.HREF_TOPIC_ID}" class="topictitle tt-text">{t.TOPIC_TITLE}</a>
+			<a id="tt-{t.TOPIC_ID}" href="{t.TOPIC_URL}" class="topictitle tt-text">{t.TOPIC_TITLE}</a>
 		</span>
 		<!-- IF t.PAGINATION --><span class="topicPG">[{ICON_GOTOPOST}{L_GOTO_SHORT} {t.PAGINATION} ]</span><!-- ENDIF -->
 	</td>
@@ -561,7 +561,7 @@ td.topic_id { cursor: pointer; }
 		<p>{t.LAST_POST_TIME}</p>
 		<p>
 			{t.LAST_POSTER}
-			<a href="{POST_URL}{t.LAST_POST_ID}#{t.LAST_POST_ID}">{ICON_LATEST_REPLY}</a>
+			<a href="{t.LAST_POST_URL}">{ICON_LATEST_REPLY}</a>
 		</p>
 	</td>
 </tr>

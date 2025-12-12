@@ -79,7 +79,7 @@
 <table class="attach bordered med">
 	<tr class="row3">
 		<th colspan="3" class="{torrent.DL_LINK_CLASS}">{torrent.DOWNLOAD_NAME}
-		<a href="{#FILELIST_URL#}{TOPIC_ID}" title="{L_BT_FLIST_LINK_TITLE}" target="_blank"><img alt="{L_BT_FLIST_LINK_TITLE}" src="{torrent.FILELIST_ICON}" width="12" height="12" border="0"></a>
+		<a href="{#FILELIST_URL#}{TOPIC_ID}/files/" title="{L_BT_FLIST_LINK_TITLE}" target="_blank"><img alt="{L_BT_FLIST_LINK_TITLE}" src="{torrent.FILELIST_ICON}" width="12" height="12" border="0"></a>
 		<!-- IF torrent.MAGNET and not torrent.TOR_FROZEN -->&nbsp;{torrent.MAGNET}<!-- ENDIF --></th>
 	</tr>
     <!-- IF torrent.TOR_TYPE -->
@@ -287,8 +287,8 @@ $('#tor-filelist-btn').click(function () {
 #tor-filelist i { color: #7A7A7A; padding-left: 4px; }
 #tor-filelist s { color: #0000FF; text-decoration: none; }
 #tor-filelist .b > s { color: #800000; }
-#tor-filelist .b { font-weight: bold; padding-left: 20px; background: transparent url('styles/images/folder.gif') no-repeat 3px 50%;}
-#tor-filelist ul li span { padding-left: 20px; background: transparent url('styles/images/page.gif') no-repeat 3px 50%;}
+#tor-filelist .b { font-weight: bold; padding-left: 20px; background: transparent url('{FORUM_PATH}styles/images/folder.gif') no-repeat 3px 50%;}
+#tor-filelist ul li span { padding-left: 20px; background: transparent url('{FORUM_PATH}styles/images/page.gif') no-repeat 3px 50%;}
 #tor-filelist .tor-root-dir { font-size: 13px; font-weight: bold; line-height: 12px; padding-left: 4px; }
 #tor-fl-treecontrol { padding: 2px 0 4px; }
 #tor-fl-treecontrol a { padding: 0 8px; font-size: 11px; text-decoration: none; }

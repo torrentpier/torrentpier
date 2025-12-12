@@ -29,8 +29,7 @@ function qs_highlight_found ()
 }
 function open_feed (f_id)
 {
-	$('#feed-id').val(f_id);
-	$('#feed-form').submit();
+	window.open('/feed/f/' + f_id + '/', '_blank');
 }
 $(function(){
 	$('#q-search').focus().quicksearch('#f-map li', {
@@ -39,12 +38,9 @@ $(function(){
 		show      : qs_highlight_found,
 		onAfter   : function(){ $('#f-load').hide(); $('#f-map').show(); }
 	});
-	$.each($('#f-map a'), function(i,a) {
-		var f_id = $(a).attr('href');
-		$(a)
-			.attr('href', '{U_FORUM}?{#POST_FORUM_URL#}='+ f_id)
-			.before('<img class="feed-small" src="{{ IMG }}feed.png" alt="feed" onclick="open_feed('+ f_id +')">')
-		;
+	$.each($('#f-map a[data-forum-id]'), function(i,a) {
+		var f_id = $(a).data('forum-id');
+		$(a).before('<img class="feed-small" src="{{ IMG }}feed.png" alt="feed" onclick="open_feed('+ f_id +')">');
 	});
 	$.each($('span.c_title'), function(i,el) {
 		$(el).text( this.title );
@@ -53,10 +49,6 @@ $(function(){
 });
 </script>
 
-<form id="feed-form" method="get" action="feed" target="_blank" style="display: none;">
-	<input type="hidden" name="type" value="{#POST_FORUM_URL#}">
-	<input id="feed-id" type="hidden" name="id" value="">
-</form>
 
 <div class="f-map-wrap row1 pad_8">
 	<div style="margin: 20px 56px;">
@@ -78,13 +70,13 @@ $(function(){
 					<ul>
 						<li>
 							<span class="b">
-								<a href="{c.f.FORUM_ID}">{c.f.FORUM_NAME}</a>
+								<a href="{{ url.forum(f_item.FORUM_ID, f_item.FORUM_NAME) }}" data-forum-id="{c.f.FORUM_ID}">{c.f.FORUM_NAME}</a>
 							</span>
 							<!-- IF c.f.LAST_SF_ID -->
 							<ul>
 								<!-- BEGIN sf -->
 								<li>
-									<span><a href="{c.f.sf.SF_ID}">{c.f.sf.SF_NAME}</a></span>
+									<span><a href="{{ url.forum(sf_item.SF_ID, sf_item.SF_NAME) }}" data-forum-id="{c.f.sf.SF_ID}">{c.f.sf.SF_NAME}</a></span>
 								</li>
 								<!-- END sf -->
 							</ul>

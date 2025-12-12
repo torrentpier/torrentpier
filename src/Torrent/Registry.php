@@ -225,7 +225,7 @@ class Registry
         $reg_mode = self::regMode();
         if ($reg_mode === 'request' || $reg_mode === 'newtopic') {
             set_die_append_msg($forum_id, $topic_id);
-            bb_die(sprintf(__('BT_REGISTERED'), DL_URL . $topic_id));
+            bb_die(sprintf(__('BT_REGISTERED'), DL_URL . $topic_id . '/'));
         }
 
         return true;

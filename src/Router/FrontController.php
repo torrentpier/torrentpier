@@ -86,16 +86,17 @@ class FrontController
      */
     private function normalizePath(): string
     {
+        // Note: $_SERVER used here because FrontController runs before common.php bootstrap
         $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-        $path = parse_url($requestUri, PHP_URL_PATH);
+        $originalPath = parse_url($requestUri, PHP_URL_PATH) ?? '/';
 
         // Handle parse_url failure
-        if ($path === false || $path === null) {
+        if ($originalPath === false) {
             return '/';
         }
 
         // Normalize a path to prevent directory traversal
-        $path = '/' . ltrim($path, '/');
+        $path = '/' . ltrim($originalPath, '/');
 
         // Resolve .. and . components
         $segments = explode('/', $path);
@@ -109,8 +110,9 @@ class FrontController
         }
         $path = '/' . implode('/', $normalized);
 
-        if ($path !== '/' && str_ends_with($path, '/')) {
-            $path = rtrim($path, '/');
+        // Preserve trailing slash for SEO-friendly routes
+        if (str_ends_with($originalPath, '/') && $path !== '/') {
+            $path .= '/';
         }
 
         return $path;

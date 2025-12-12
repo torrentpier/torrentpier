@@ -127,6 +127,32 @@ class Router
     }
 
     /**
+     * Get all registered routes
+     *
+     * @return array<array{methods: string, path: string, handler: string}>
+     */
+    public function getRoutes(): array
+    {
+        $reflection = new \ReflectionClass($this->router);
+        $prop = $reflection->getProperty('routes');
+        $routes = $prop->getValue($this->router);
+
+        $result = [];
+        foreach ($routes as $route) {
+            $methods = $route->getMethod();
+            $handler = $route->getCallable();
+
+            $result[] = [
+                'methods' => is_array($methods) ? implode('|', $methods) : $methods,
+                'path' => $route->getPath(),
+                'handler' => is_object($handler) ? get_class($handler) : (is_string($handler) ? $handler : gettype($handler)),
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
      * Check if a route exists for the given path
      */
     public function hasRoute(string $path, string $method = 'GET'): bool

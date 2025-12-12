@@ -113,7 +113,7 @@ if ($result = DB()->fetch_rowset($sql)) {
             'PM' => $user_info['pm'],
             'EMAIL' => $user_info['email'],
             'WWW' => $user_info['www'],
-            'U_VIEWPROFILE' => PROFILE_URL . $user_id,
+            'U_VIEWPROFILE' => url()->member($user_id, $row['username']),
         ]);
     }
 } else {
@@ -142,7 +142,7 @@ template()->assign_vars([
     'S_MODE_SELECT' => $select_sort_mode,
     'S_ORDER_SELECT' => $select_sort_order,
     'S_ROLE_SELECT' => $select_sort_role,
-    'S_MODE_ACTION' => "memberlist?mode=$mode&amp;order=$sort_order&amp;role=$role",
+    'S_MODE_ACTION' => FORUM_PATH . "memberlist?mode=$mode&amp;order=$sort_order&amp;role=$role",
     'S_USERNAME' => $username,
 ]);
 

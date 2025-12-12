@@ -158,7 +158,7 @@ function generate_smilies($mode)
 
                 template()->assign_block_vars('smilies_row.smilies_col', [
                     'SMILEY_CODE' => $data['code'],
-                    'SMILEY_IMG' => config()->get('smilies_path') . '/' . $smile_url,
+                    'SMILEY_IMG' => FORUM_PATH . config()->get('smilies_path') . '/' . $smile_url,
                     'SMILEY_DESC' => $data['emoticon'],
                 ]);
 

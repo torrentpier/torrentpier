@@ -92,4 +92,4 @@ switch ($mode) {
 }
 
 $this->response['mode'] = $mode;
-$this->response['url'] = html_entity_decode(make_url('/') . PROFILE_URL . $user_id);
+$this->response['url'] = html_entity_decode(make_url(url()->member($user_id, get_username($user_id))));

@@ -585,7 +585,7 @@ function get_username($user_id)
     }
 
     $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = '" . DB()->escape($user_id) . "' LIMIT 1");
-    return $row['username'];
+    return $row ? $row['username'] : false;
 }
 
 function get_user_id($username)
@@ -624,12 +624,12 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
     $from = !empty($row['user_from']) ? render_flag($row['user_from'], false) : __('NOSELECT');
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
     $user_time = !empty($row['user_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($row['user_time']), humanTime($row['user_time'])) : __('NOSELECT');
-    $posts = '<a href="search?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
+    $posts = '<a href="' . FORUM_PATH . 'search?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . ($row['user_posts'] ?: 0) . '</a>';
     $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . __('SEND_PM_SHORT') . '</a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $have_auth || ($row['user_id'] == userdata('user_id'))) {
-        $email_uri = (config()->get('board_email_form')) ? ("profile?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
+        $email_uri = (config()->get('board_email_form')) ? url()->memberEmail($row['user_id'], $row['username']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
         $email = __('HIDDEN_USER');
@@ -1133,19 +1133,23 @@ function bb_die($msg_text, $status_code = null)
         ajax()->ajax_die($msg_text);
     }
 
-    // Check
+    // Check for recursive calls - fall back to simple output
     if (defined('HAS_DIED')) {
-        throw new \RuntimeException(__FUNCTION__ . ' was called multiple times');
+        bb_simple_die($msg_text, $status_code ?? 500);
     }
     define('HAS_DIED', 1);
     define('DISABLE_CACHING_OUTPUT', true);
 
-    // Ensure language is initialized
-    lang()->initializeLanguage();
+    // Try to initialize session/language, but don't fail if DB is broken
+    try {
+        lang()->initializeLanguage();
 
-    // If empty session
-    if (empty(userdata())) {
-        user()->session_start();
+        if (empty(userdata())) {
+            user()->session_start();
+        }
+    } catch (\Throwable $e) {
+        // DB or other critical failure - fall back to simple output
+        bb_simple_die($msg_text, $status_code ?? 500);
     }
 
     // If the header hasn't been output then do it
@@ -1202,7 +1206,8 @@ function redirect($url)
     $server_protocol = (config()->get('cookie_secure')) ? 'https://' : 'http://';
 
     $server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('server_name')));
-    $server_port = (config()->get('server_port') <> 80) ? ':' . trim(config()->get('server_port')) : '';
+    $port = (int) config()->get('server_port');
+    $server_port = ($port > 0 && !in_array($port, [80, 443], true)) ? ':' . $port : '';
     $script_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('script_path')));
 
     if ($script_name) {
@@ -1337,9 +1342,11 @@ function build_topic_pagination($url, $replies, $per_page)
 
     if (++$replies > $per_page) {
         $total_pages = ceil($replies / $per_page);
+        // Use ? or & depending on whether URL already has query string
+        $separator = str_contains($url, '?') ? '&amp;' : '?';
 
         for ($j = 0, $page = 1; $j < $replies; $j += $per_page, $page++) {
-            $href = ($j) ? "$url&amp;start=$j" : $url;
+            $href = ($j) ? "{$url}{$separator}start=$j" : $url;
             $pg .= '<a href="' . $href . '" class="topicPG">' . $page . '</a>';
 
             if ($page == 1 && $total_pages > 3) {
@@ -1654,19 +1661,23 @@ function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null
     $msg = '';
     $msg .= $topic_id ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . __('TOPIC_RETURN') . '</a></p>' : '';
     $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . __('FORUM_RETURN') . '</a></p>' : '';
-    $msg .= $group_id ? '<p class="mrg_10"><a href="' . GROUP_URL . $group_id . '">' . __('GROUP_RETURN') . '</a></p>' : '';
-    $msg .= '<p class="mrg_10"><a href="index.php">' . __('INDEX_RETURN') . '</a></p>';
+    if ($group_id) {
+        $groupName = DB()->table('bb_groups')->get($group_id)?->group_name ?? '';
+        $msg .= '<p class="mrg_10"><a href="' . url()->group($group_id, $groupName) . '">' . __('GROUP_RETURN') . '</a></p>';
+    }
+    $msg .= '<p class="mrg_10"><a href="' . FORUM_PATH . '">' . __('INDEX_RETURN') . '</a></p>';
     template()->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
 
-function set_pr_die_append_msg($pr_uid)
+function set_pr_die_append_msg($pr_uid, $pr_username = null)
 {
+    $pr_username ??= get_username($pr_uid);
     template()->assign_var('BB_DIE_APPEND_MSG', '
-		<a href="' . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_RETURN') . '</a>
+		<a href="' . url()->member($pr_uid, $pr_username) . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_RETURN') . '</a>
 		<br /><br />
-		<a href="profile?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_EDIT_RETURN') . '</a>
+		<a href="' . SETTINGS_URL . (IS_ADMIN ? "?" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . __('PROFILE_EDIT_RETURN') . '</a>
 		<br /><br />
-		<a href="index.php">' . __('INDEX_RETURN') . '</a>
+		<a href="' . FORUM_PATH . '">' . __('INDEX_RETURN') . '</a>
 	');
 }
 
@@ -1707,6 +1718,8 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
     }
 
     $username = !empty($data['username']) ? $data['username'] : __('GUEST');
+    // Use display_username for display, username for URL (allows truncated display with correct URL)
+    $display_username = !empty($data['display_username']) ? $data['display_username'] : $username;
     $user_id = !empty($data['user_id']) ? (int)$data['user_id'] : GUEST_UID;
     $user_rank = !empty($data['user_rank']) ? $data['user_rank'] : 0;
 
@@ -1722,15 +1735,15 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
     if (empty($title)) {
         $title = match ($user_id) {
             GUEST_UID => __('GUEST'),
-            BOT_UID => $username,
+            BOT_UID => $display_username,
             default => __('USER'),
         };
     }
 
-    $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
+    $profile = '<span title="' . $title . '" class="' . $style . '">' . $display_username . '</span>';
     if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && !$no_link) {
         $target_blank = $target_blank ? ' target="_blank" ' : '';
-        $profile = '<a ' . $target_blank . ' href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
+        $profile = '<a ' . $target_blank . ' href="' . make_url(url()->member($user_id, $username)) . '">' . $profile . '</a>';
     }
 
     if (getBanInfo($user_id)) {

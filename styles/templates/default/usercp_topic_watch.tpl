@@ -116,8 +116,8 @@
         <td class="gensmall">{watch.REPLIES}</td>
         <td class="gensmall nowrap">
             <u>{watch.LAST_POST_RAW}</u>
-            {watch.LAST_POST}<!-- IF watch.IS_UNREAD --><a href="{TOPIC_URL}{watch.TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ELSE -->
-            <a href="{POST_URL}{watch.LAST_POST_ID}#{watch.LAST_POST_ID}">{ICON_LATEST_REPLY}</a><!-- ENDIF -->
+            {watch.LAST_POST}<!-- IF watch.IS_UNREAD --><a href="{watch.U_TOPIC_NEWEST}">{ICON_NEWEST_REPLY}</a><!-- ELSE -->
+            <a href="{watch.U_LAST_POST}">{ICON_LATEST_REPLY}</a><!-- ENDIF -->
         </td>
     </tr>
     <!-- END watch -->

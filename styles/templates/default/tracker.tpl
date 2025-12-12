@@ -394,14 +394,14 @@ ajax.callback.view_post = function(data) {
 	<td class="row1"><a class="gen" href="{TR_CAT_URL}{tor.CAT_ID}">{tor.CAT_TITLE}</a></td>
 	<!-- ENDIF -->
 	<!-- IF SHOW_FORUM -->
-	<td class="row1"><a class="gen" href="{TR_FORUM_URL}{tor.FORUM_ID}">{tor.FORUM_NAME}</a></td>
+	<td class="row1"><a class="gen" href="{{ url.forum(tor_item.FORUM_ID, tor_item.FORUM_NAME) }}">{tor.FORUM_NAME}</a></td>
 	<!-- ENDIF -->
 	<td class="row4 med tLeft">
-		<a class="{tor.DL_CLASS}<!-- IF AJAX_TOPICS --> folded2<!-- ENDIF --> tLink" <!-- IF AJAX_TOPICS -->onclick="ajax.view_post({tor.TOPIC_ID}, this); return false;"<!-- ENDIF --> href="{TOPIC_URL}{tor.TOPIC_ID}"><!-- IF tor.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span>&nbsp;<!-- ENDIF --><!-- IF tor.TOR_FROZEN -->{tor.TOPIC_TITLE}<!-- ELSE -->{tor.TOR_TYPE}<b>{tor.TOPIC_TITLE}</b><!-- ENDIF --></a>
+		<a class="{tor.DL_CLASS}<!-- IF AJAX_TOPICS --> folded2<!-- ENDIF --> tLink" <!-- IF AJAX_TOPICS -->onclick="ajax.view_post({tor.TOPIC_ID}, this); return false;"<!-- ENDIF --> href="{{ url.topic(tor_item.TOPIC_ID, tor_item.TOPIC_TITLE) }}"><!-- IF tor.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span>&nbsp;<!-- ENDIF --><!-- IF tor.TOR_FROZEN -->{tor.TOPIC_TITLE}<!-- ELSE -->{tor.TOR_TYPE}<b>{tor.TOPIC_TITLE}</b><!-- ENDIF --></a>
 	    <!-- IF SHOW_TIME_TOPICS --><div class="tr_tm">{tor.TOPIC_TIME}</div><!-- ENDIF -->
 	</td>
 	<!-- IF SHOW_AUTHOR -->
-	<td class="row1"><a class="med" href="{TR_POSTER_URL}{tor.POSTER_ID}">{tor.USERNAME}</a></td>
+	<td class="row1"><a class="med" href="{{ url.profile(tor_item.POSTER_ID, tor_item.POSTER_NAME) }}">{tor.USERNAME}</a></td>
 	<!-- ENDIF -->
 	<td class="row4 small nowrap">
 		<u>{tor.TOR_SIZE_RAW}</u>

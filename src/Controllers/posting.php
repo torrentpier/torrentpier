@@ -606,9 +606,9 @@ template()->assign_vars([
     'FORUM_NAME' => htmlCHR($forum_name),
     'PAGE_TITLE' => $page_title,
     'POSTING_TYPE_TITLE' => $page_title,
-    'POSTING_TOPIC_ID' => ($mode != 'newtopic') ? $topic_id : '',
+    'POSTING_TOPIC_URL' => ($mode != 'newtopic') ? url()->topic($topic_id, $post_info['topic_title']) : '',
     'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? $post_info['topic_title'] : '',
-    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
+    'U_VIEW_FORUM' => url()->forum($forum_id, $forum_name),
 
     'USERNAME' => @$username,
     'CAPTCHA_HTML' => (IS_GUEST && !config()->get('captcha.disabled')) ? bb_captcha('get') : '',
@@ -618,7 +618,7 @@ template()->assign_vars([
     'POSTER_RGROUPS' => !empty($poster_rgroups) ? $poster_rgroups : '',
     'ATTACH_RG_SIG' => $switch_rg_sig ?: false,
 
-    'U_VIEWTOPIC' => ($mode == 'reply') ? TOPIC_URL . "$topic_id&amp;postorder=desc" : '',
+    'U_VIEWTOPIC' => ($mode == 'reply') ? url()->topic($topic_id, $post_info['topic_title'], ['postorder' => 'desc']) : '',
 
     'S_NOTIFY_CHECKED' => $notify_user ? 'checked' : '',
     'S_ROBOTS_CHECKED' => $robots_indexing ? 'checked' : '',
@@ -647,9 +647,9 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
 
         if ($file_attached && $mode == 'editpost') {
             // Author can download the original torrent (without a passkey)
-            $dl_url = DL_URL . $topic_id;
+            $dl_url = DL_URL . $topic_id . '/';
             if ($attach_ext_id == TORRENT_EXT_ID && \TorrentPier\Topic\Guard::isAuthor($post_info['topic_poster'])) {
-                $dl_url .= '&original';
+                $dl_url .= '?original';
             }
 
             template()->assign_vars([

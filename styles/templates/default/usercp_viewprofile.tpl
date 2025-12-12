@@ -373,8 +373,8 @@ ajax.callback.group_membership = function(data) {
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
 						[ <a href="{U_SEARCH_RELEASES}" class="med">{L_SEARCH_RELEASES}</a> ]
-						<!-- IF config('topic_notify_enabled') --><!-- IF PROFILE_USER || IS_ADMIN -->[ <a href="{U_WATCHED_TOPICS}&{#POST_USERS_URL#}={PROFILE_USER_ID}" class="med">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF --><!-- ENDIF -->
-						[ <a title="{L_ATOM_SUBSCRIBE}" href="feed?type=u&id={PROFILE_USER_ID}" target="_blank">{{ FEED_IMG|raw }}</a> ]
+						<!-- IF config('topic_notify_enabled') --><!-- IF PROFILE_USER -->[ <a href="{U_WATCHED_TOPICS}" class="med">{L_WATCHED_TOPICS}</a> ]<!-- ELSEIF IS_ADMIN -->[ <a href="{U_WATCHED_TOPICS}?{#POST_USERS_URL#}={PROFILE_USER_ID}" class="med">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF --><!-- ENDIF -->
+						[ <a title="{L_ATOM_SUBSCRIBE}" href="/feed/u/{PROFILE_USER_ID}/" target="_blank">{{ FEED_IMG|raw }}</a> ]
 					</p>
 				</td>
 			</tr>

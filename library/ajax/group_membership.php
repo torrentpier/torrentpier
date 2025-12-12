@@ -33,23 +33,25 @@ switch ($mode) {
         foreach (DB()->fetch_rowset($sql) as $row) {
             $class = ($row['user_pending']) ? 'med' : 'med bold';
             $class .= ($row['group_moderator'] == $user_id) ? ' colorMod' : '';
-            $href = GROUP_URL . $row['group_id'];
+            $groupName = $row['group_name'];
 
             if (IS_ADMIN) {
-                $href .= "&amp;" . POST_USERS_URL . "=$user_id";
-                $link = '<a href="' . $href . '" class="' . $class . '" target="_blank">' . htmlCHR($row['group_name']) . '</a>';
+                $href = url()->group($row['group_id'], $groupName, [POST_USERS_URL => $user_id]);
+                $link = '<a href="' . $href . '" class="' . $class . '" target="_blank">' . htmlCHR($groupName) . '</a>';
                 $html[] = $link;
             } else {
                 // hidden group and the user himself is not a member of it
                 if ($row['group_type'] == GROUP_HIDDEN && !$row['can_view']) {
                     continue;
                 }
+                $params = [];
                 if ($row['group_moderator'] == user()->id) {
                     // the user himself is the moderator of this group
                     $class .= ' selfMod';
-                    $href .= "&amp;" . POST_USERS_URL . "=$user_id";
+                    $params[POST_USERS_URL] = $user_id;
                 }
-                $link = '<a href="' . $href . '" class="' . $class . '" target="_blank">' . htmlCHR($row['group_name']) . '</a>';
+                $href = url()->group($row['group_id'], $groupName, $params);
+                $link = '<a href="' . $href . '" class="' . $class . '" target="_blank">' . htmlCHR($groupName) . '</a>';
                 $html[] = $link;
             }
         }

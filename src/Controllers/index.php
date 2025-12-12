@@ -42,6 +42,21 @@ if (config()->get('show_network_news')) {
 // Init userdata
 user()->session_start();
 
+// Redirect legacy category URL (?c=1) to semantic URL (/category/kino.1/)
+if (!request()->attributes->get('semantic_route') && request()->getMethod() === 'GET') {
+    $legacyCatId = request()->query->getInt(POST_CAT_URL);
+    if ($legacyCatId > 0) {
+        $forums = forum_tree();
+        if (isset($forums['c'][$legacyCatId])) {
+            $catTitle = $forums['c'][$legacyCatId]['cat_title'];
+            \TorrentPier\Http\Response::permanentRedirect(
+                make_url(url()->category($legacyCatId, $catTitle))
+            )->send();
+            exit;
+        }
+    }
+}
+
 // Set meta description
 page_cfg('meta_description', config()->get('site_desc'));
 
@@ -71,6 +86,7 @@ if ($stats === false) {
 $forums = forum_tree();
 $cat_title_html = $forums['cat_title_html'];
 $forum_name_html = $forums['forum_name_html'];
+$cat_data = $forums['c']; // Save category data for URL generation
 
 $anon = GUEST_UID;
 $excluded_forums_csv = user()->get_excluded_forums(AUTH_VIEW);
@@ -80,6 +96,20 @@ $only_new = user()->opt_js['only_new'];
 // Validate requested category id
 if ($viewcat && !($viewcat = & $forums['c'][$viewcat]['cat_id'])) {
     redirect('/');
+}
+
+// Assert canonical URL for category (redirect if slug doesn't match)
+if (request()->attributes->get('semantic_route') && request()->attributes->get('semantic_route_type') === 'categories' && $viewcat) {
+    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical(
+        'categories',
+        $viewcat,
+        $cat_data[$viewcat]['cat_title'],
+        request()->attributes->get('semantic_route_slug')
+    );
+    // Set canonical URL for the category page
+    template()->assign_vars([
+        'CANONICAL_URL' => make_url(url()->category($viewcat, $cat_data[$viewcat]['cat_title'])),
+    ]);
 }
 
 // Forums
@@ -177,12 +207,14 @@ if ($mod === false) {
 if (!empty($mod)) {
     foreach ($mod['mod_users'] as $forum_id => $user_ids) {
         foreach ($user_ids as $user_id) {
-            $moderators[$forum_id][] = '<a href="' . PROFILE_URL . $user_id . '">' . $mod['name_users'][$user_id] . '</a>';
+            $username = $mod['name_users'][$user_id];
+            $moderators[$forum_id][] = '<a href="' . url()->member($user_id, $username) . '">' . $username . '</a>';
         }
     }
     foreach ($mod['mod_groups'] as $forum_id => $group_ids) {
         foreach ($group_ids as $group_id) {
-            $moderators[$forum_id][] = '<a href="' . GROUP_URL . $group_id . '">' . $mod['name_groups'][$group_id] . '</a>';
+            $groupName = $mod['name_groups'][$group_id];
+            $moderators[$forum_id][] = '<a href="' . url()->group($group_id, $groupName) . '">' . $groupName . '</a>';
         }
     }
 }
@@ -208,7 +240,7 @@ foreach ($cat_forums as $cid => $c) {
     template()->assign_block_vars('c', [
         'CAT_ID' => $cid,
         'CAT_TITLE' => $cat_title_html[$cid],
-        'U_VIEWCAT' => CAT_URL . $cid,
+        'U_VIEWCAT' => url()->category($cid, $cat_data[$cid]['cat_title']),
     ]);
 
     foreach ($c['f'] as $fid => $f) {
@@ -252,7 +284,7 @@ foreach ($cat_forums as $cid => $c) {
                 'LAST_TOPIC_TIP' => $f['last_topic_title'],
                 'LAST_TOPIC_TITLE' => str_short($f['last_topic_title'], $last_topic_max_len),
                 'LAST_POST_TIME' => bb_date($f['last_post_time'], config()->get('last_post_date_format')),
-                'LAST_POST_USER' => profile_url(['username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank']]),
+                'LAST_POST_USER' => profile_url(['username' => $f['last_post_username'], 'display_username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank']]),
             ]);
         }
     }
@@ -300,11 +332,11 @@ template()->assign_vars([
     'ONLY_NEW_POSTS_ON' => $only_new == ONLY_NEW_POSTS,
     'ONLY_NEW_TOPICS_ON' => $only_new == ONLY_NEW_TOPICS,
 
-    'U_SEARCH_NEW' => 'search?new=1',
-    'U_SEARCH_SELF_BY_MY' => "search?uid=" . userdata('user_id') . "&amp;o=1",
-    'U_SEARCH_LATEST' => 'search?search_id=latest',
-    'U_SEARCH_UNANSWERED' => 'search?search_id=unanswered',
-    'U_ATOM_FEED' => make_url('feed?type=f&id=0'),
+    'U_SEARCH_NEW' => FORUM_PATH . 'search?new=1',
+    'U_SEARCH_SELF_BY_MY' => FORUM_PATH . "search?uid=" . userdata('user_id') . "&amp;o=1",
+    'U_SEARCH_LATEST' => FORUM_PATH . 'search?search_id=latest',
+    'U_SEARCH_UNANSWERED' => FORUM_PATH . 'search?search_id=unanswered',
+    'U_ATOM_FEED' => make_url('feed/f/0/'),
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
     'BOARD_START' => config()->get('show_board_start_index') ? (__('BOARD_STARTED') . ':&nbsp;' . '<b>' . bb_date(config()->get('board_startdate')) . '</b>') : false,
@@ -331,7 +363,7 @@ if (config()->get('show_latest_news')) {
         }
 
         template()->assign_block_vars('news', [
-            'NEWS_TOPIC_ID' => $news['topic_id'],
+            'NEWS_URL' => url()->topic($news['topic_id'], $news['topic_title']),
             'NEWS_TITLE' => str_short(censor()->censorString($news['topic_title']), config()->get('max_news_title')),
             'NEWS_TIME' => bb_date($news['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($news['topic_time'], $news['topic_id'], $news['forum_id']),
@@ -355,7 +387,7 @@ if (config()->get('show_network_news')) {
         }
 
         template()->assign_block_vars('net', [
-            'NEWS_TOPIC_ID' => $net['topic_id'],
+            'NEWS_URL' => url()->topic($net['topic_id'], $net['topic_title']),
             'NEWS_TITLE' => str_short(censor()->censorString($net['topic_title']), config()->get('max_net_title')),
             'NEWS_TIME' => bb_date($net['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($net['topic_time'], $net['topic_id'], $net['forum_id']),

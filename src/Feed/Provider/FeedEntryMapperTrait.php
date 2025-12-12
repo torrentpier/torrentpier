@@ -111,11 +111,11 @@ trait FeedEntryMapperTrait
     {
         // Direct download link if enabled and torrent is registered
         if (config()->get('atom.direct_down') && !empty($topic['tracker_status'])) {
-            return DL_URL . $topic['topic_id'];
+            return make_url(DL_URL . $topic['topic_id'] . '/');
         }
 
-        // Default to topic view
-        return TOPIC_URL . $topic['topic_id'];
+        // Default to topic view with semantic URL
+        return make_url(url()->topic((int) $topic['topic_id'], $topic['topic_title']));
     }
 
     /**
@@ -130,7 +130,8 @@ trait FeedEntryMapperTrait
             return null;
         }
 
-        return $topic['post_html'] . "\n\nTopic: " . FULL_URL . TOPIC_URL . $topic['topic_id'];
+        $topicUrl = make_url(url()->topic((int) $topic['topic_id'], $topic['topic_title']));
+        return $topic['post_html'] . "\n\nTopic: " . $topicUrl;
     }
 
     /**

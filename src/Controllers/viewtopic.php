@@ -166,6 +166,11 @@ $topic_id = $t_data['topic_id'];
 $topic_time = $t_data['topic_time'];
 $locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
 
+// Assert canonical URL for SEO-friendly routing
+if (request()->attributes->get('semantic_route') && request()->attributes->get('semantic_route_type') === 'threads') {
+    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('threads', $topic_id, $topic_title);
+}
+
 $moderation = (request()->has('mod') && $is_auth['auth_mod']);
 
 // Redirect to login page if not admin session
@@ -199,8 +204,8 @@ $forums = forum_tree();
 
 template()->assign_vars([
     'CAT_TITLE' => $forums['cat_title_html'][$t_data['cat_id']],
-    'U_VIEWCAT' => CAT_URL . $t_data['cat_id'],
-    'PARENT_FORUM_HREF' => $parent_id ? FORUM_URL . $parent_id : '',
+    'U_VIEWCAT' => url()->category($t_data['cat_id'], $forums['c'][$t_data['cat_id']]['cat_title']),
+    'PARENT_FORUM_HREF' => $parent_id ? url()->forum($parent_id, $forums['forum'][$parent_id]['forum_name'] ?? '') : '',
     'PARENT_FORUM_NAME' => $parent_id ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
 ]);
 
@@ -216,6 +221,16 @@ if ($is_auth['auth_read']) {
 
 if ($post_id && !empty($t_data['prev_posts'])) {
     $start = floor(($t_data['prev_posts'] - 1) / $posts_per_page) * $posts_per_page;
+}
+
+// Redirect legacy ?p= requests to semantic URL with anchor
+if ($post_id && !request()->attributes->get('semantic_route') && request()->isGet()) {
+    $params = $start > 0 ? ['start' => $start] : [];
+    $params['_fragment'] = $post_id;
+
+    $redirectUrl = url()->topic($topic_id, $topic_title, $params);
+    \TorrentPier\Http\Response::permanentRedirect(make_url($redirectUrl))->send();
+    exit;
 }
 
 // Is user watching this thread?
@@ -251,7 +266,8 @@ if (config()->get('topic_notify_enabled')) {
     } else {
         if (request()->query->has('unwatch')) {
             if (request()->query->get('unwatch') == 'topic') {
-                redirect(LOGIN_URL . "?redirect=" . TOPIC_URL . "$topic_id&unwatch=topic");
+                $unwatchUrl = url()->topic($topic_id, $topic_title, ['unwatch' => 'topic']);
+                redirect(LOGIN_URL . "?redirect=" . urlencode($unwatchUrl));
             }
         }
     }
@@ -354,9 +370,9 @@ $topic_title = censor()->censorString($topic_title);
 // Post, reply and other URL generation for templating vars
 $new_topic_url = POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id";
 $reply_topic_url = POSTING_URL . "?mode=reply&amp;" . POST_TOPIC_URL . "=$topic_id";
-$view_forum_url = FORUM_URL . $forum_id;
-$view_prev_topic_url = TOPIC_URL . $topic_id . "&amp;view=previous#newest";
-$view_next_topic_url = TOPIC_URL . $topic_id . "&amp;view=next#newest";
+$view_forum_url = url()->forum($forum_id, $t_data['forum_name']);
+$view_prev_topic_url = url()->topic($topic_id, $topic_title, ['view' => 'previous', '_fragment' => 'newest']);
+$view_next_topic_url = url()->topic($topic_id, $topic_title, ['view' => 'next', '_fragment' => 'newest']);
 
 $reply_alt = $locked ? __('TOPIC_LOCKED_SHORT') : __('REPLY_TO_TOPIC');
 
@@ -397,20 +413,36 @@ if ($is_auth['auth_mod']) {
 // Topic watch information
 $s_watching_topic = '';
 if ($can_watch_topic) {
+    $watchParams = ['start' => $start, 'sid' => userdata('session_id')];
     if ($is_watching_topic) {
-        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;unwatch=topic&amp;start=$start&amp;sid=" . userdata('session_id') . '">' . __('STOP_WATCHING_TOPIC') . '</a>';
+        $watchParams['unwatch'] = 'topic';
+        $s_watching_topic = '<a href="' . url()->topic($topic_id, $topic_title, $watchParams) . '">' . __('STOP_WATCHING_TOPIC') . '</a>';
     } else {
-        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;watch=topic&amp;start=$start&amp;sid=" . userdata('session_id') . '">' . __('START_WATCHING_TOPIC') . '</a>';
+        $watchParams['watch'] = 'topic';
+        $s_watching_topic = '<a href="' . url()->topic($topic_id, $topic_title, $watchParams) . '">' . __('START_WATCHING_TOPIC') . '</a>';
     }
 }
 
-// If we've got a highlight set pass it on to pagination,
-$pg_url = TOPIC_URL . $topic_id;
-$pg_url .= $post_days ? "&amp;postdays=$post_days" : '';
-$pg_url .= ($post_order != 'asc') ? "&amp;postorder=$post_order" : '';
-$pg_url .= request()->has('single') ? "&amp;single=1" : '';
-$pg_url .= $moderation ? "&amp;mod=1" : '';
-$pg_url .= ($posts_per_page != config()->get('posts_per_page')) ? "&amp;ppp=$posts_per_page" : '';
+// Build pagination URL with semantic URL base
+$topicBaseUrl = url()->topic($topic_id, $topic_title);
+$pg_params = [];
+if ($post_days) {
+    $pg_params['postdays'] = $post_days;
+}
+if ($post_order != 'asc') {
+    $pg_params['postorder'] = $post_order;
+}
+if (request()->has('single')) {
+    $pg_params['single'] = 1;
+}
+if ($moderation) {
+    $pg_params['mod'] = 1;
+}
+if ($posts_per_page != config()->get('posts_per_page')) {
+    $pg_params['ppp'] = $posts_per_page;
+}
+$pg_url = $topicBaseUrl . (!empty($pg_params) ? '?' . http_build_query($pg_params, '', '&amp;') : '');
+$pg_url_sep = !empty($pg_params) ? '&amp;' : '?';
 
 generate_pagination($pg_url, $total_replies, $posts_per_page, $start);
 
@@ -444,6 +476,7 @@ $page_title = ((int) ($start / $posts_per_page) === 0) ? $topic_title :
 //
 template()->assign_vars([
     'PAGE_URL' => $pg_url,
+    'PAGE_URL_SEP' => $pg_url_sep,
     'PAGE_URL_PPP' => url_arg($pg_url, 'ppp', null),
     'PAGE_START' => $start,
 
@@ -452,6 +485,7 @@ template()->assign_vars([
     'TOPIC_ID' => $topic_id,
     'PAGE_TITLE' => $page_title,
     'TOPIC_TITLE' => $topic_title,
+    'CANONICAL_URL' => make_url(url()->topic($topic_id, $topic_title)),
     'PORNO_FORUM' => $t_data['allow_porno_topic'],
     'SHOW_BOT_NICK' => config()->get('show_bot_nick'),
     'T_POST_REPLY' => $reply_alt,
@@ -477,17 +511,17 @@ template()->assign_vars([
 
     'S_SELECT_POST_DAYS' => build_select('postdays', array_flip($sel_previous_days), $post_days),
     'S_SELECT_POST_ORDER' => build_select('postorder', $sel_post_order_ary, $post_order),
-    'S_POST_DAYS_ACTION' => TOPIC_URL . $topic_id . "&amp;start=$start",
+    'S_POST_DAYS_ACTION' => url()->topic($topic_id, $topic_title, $start ? ['start' => $start] : []),
     'S_AUTH_LIST' => $s_auth_can,
     'S_TOPIC_ADMIN' => $topic_mod,
     'S_WATCH_TOPIC' => $s_watching_topic,
-    'U_VIEW_TOPIC' => TOPIC_URL . $topic_id,
+    'U_VIEW_TOPIC' => $topicBaseUrl,
     'U_VIEW_FORUM' => $view_forum_url,
     'U_VIEW_OLDER_TOPIC' => $view_prev_topic_url,
     'U_VIEW_NEWER_TOPIC' => $view_next_topic_url,
     'U_POST_NEW_TOPIC' => $new_topic_url,
     'U_POST_REPLY_TOPIC' => $reply_topic_url,
-    'U_SEARCH_SELF' => "search?uid=" . userdata('user_id') . "&" . POST_TOPIC_URL . "=$topic_id&dm=1",
+    'U_SEARCH_SELF' => FORUM_PATH . "search?uid=" . userdata('user_id') . "&" . POST_TOPIC_URL . "=$topic_id&dm=1",
 
     'TOPIC_HAS_POLL' => $topic_has_poll,
     'POLL_IS_EDITABLE' => !$poll_time_expired,
@@ -500,7 +534,7 @@ template()->assign_vars([
 template()->assign_vars([
     'SHOW_TOR_ACT' => false,
     'PEERS_FULL_LINK' => false,
-    'DL_LIST_HREF' => TOPIC_URL . "$topic_id&amp;dl=names&amp;spmode=full",
+    'DL_LIST_HREF' => url()->topic($topic_id, $topic_title, ['dl' => 'names', 'spmode' => 'full']),
 ]);
 require INC_DIR . '/torrent_show_dl_list.php';
 
@@ -674,11 +708,12 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_JOINED' => config()->get('show_poster_joined') ? $poster_longevity : '',
 
         'POSTER_JOINED_DATE' => $poster_joined,
-        'POSTER_POSTS' => (config()->get('show_poster_posts') && $poster_posts) ? '<a href="search?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
+        'POSTER_POSTS' => (config()->get('show_poster_posts') && $poster_posts) ? '<a href="' . FORUM_PATH . 'search?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
         'POSTER_FROM' => config()->get('show_poster_from') ? render_flag($poster_from, false) : '',
         'POSTER_BOT' => $poster_bot,
         'POSTER_GUEST' => $poster_guest,
         'POSTER_ID' => $poster_id,
+        'POSTER_URL' => url()->member($poster_id, $poster),
         'POSTER_AUTHOR' => ($poster_id == $t_data['topic_poster']),
         'POSTER_GENDER' => !$poster_guest ? genderImage((int) $postrow[$i]['user_gender']) : '',
         'POSTED_AFTER' => $prev_post_time ? humanTime($postrow[$i]['post_time'], $prev_post_time) : '',
@@ -711,8 +746,8 @@ for ($i = 0; $i < $total_posts; $i++) {
         'RG_AVATAR' => $rg_avatar,
         'RG_NAME' => $rg_name,
         'RG_DESC' => $rg_desc,
-        'RG_URL' => GROUP_URL . $rg_id,
-        'RG_FIND_URL' => 'tracker?srg=' . $rg_id,
+        'RG_URL' => url()->group($rg_id, $postrow[$i]['group_name'] ?? ''),
+        'RG_FIND_URL' => FORUM_PATH . 'tracker?srg=' . $rg_id,
         'RG_SIG' => $rg_signature,
         'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig'],
     ]);
@@ -747,7 +782,7 @@ if (defined('SPLIT_FORM_START')) {
     template()->assign_vars([
         'SPLIT_FORM' => true,
         'START' => $start,
-        'S_SPLIT_ACTION' => 'modcp',
+        'S_SPLIT_ACTION' => FORUM_PATH . 'modcp',
         'POST_FORUM_URL' => POST_FORUM_URL,
         'POST_TOPIC_URL' => POST_TOPIC_URL,
     ]);
@@ -778,7 +813,7 @@ foreach ($is_auth as $name => $is) {
 template()->assign_vars(['PG_ROW_CLASS' => $pg_row_class ?? 'row1']);
 
 if (IS_ADMIN) {
-    template()->assign_vars(['U_LOGS' => "admin/admin_log.php?" . POST_TOPIC_URL . "=$topic_id&amp;db=" . config()->get('log_days_keep')]);
+    template()->assign_vars(['U_LOGS' => FORUM_PATH . "admin/admin_log.php?" . POST_TOPIC_URL . "=$topic_id&amp;db=" . config()->get('log_days_keep')]);
 }
 
 print_page('viewtopic.tpl');

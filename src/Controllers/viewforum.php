@@ -45,6 +45,11 @@ if (!empty($forum_data['forum_desc'])) {
     page_cfg('meta_description', $forum_data['forum_desc']);
 }
 
+// Assert canonical URL for SEO-friendly routing
+if (request()->attributes->get('semantic_route') && request()->attributes->get('semantic_route_type') === 'forums') {
+    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('forums', $forum_id, $forum_data['forum_name']);
+}
+
 // Make jumpbox
 make_jumpbox();
 
@@ -64,8 +69,8 @@ $moderation = (request()->has('mod') && $is_auth['auth_mod']);
 
 if (!$is_auth['auth_view']) {
     if (IS_GUEST) {
-        $redirect = ($start) ? "&start=$start" : '';
-        redirect(LOGIN_URL . "?redirect=" . FORUM_URL . $forum_id . $redirect);
+        $forumUrl = url()->forum($forum_id, $forum_data['forum_name'], $start ? ['start' => $start] : []);
+        redirect(LOGIN_URL . "?redirect=" . urlencode($forumUrl));
     }
     // The user is not authed to read this forum ...
     $message = sprintf(__('SORRY_AUTH_VIEW'), $is_auth['auth_view_type']);
@@ -168,27 +173,36 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
             $last_post .= '<a href="' . POST_URL . $sf_data['forum_last_post_id'] . '#' . $sf_data['forum_last_post_id'] . '"><img src="' . theme_images('icon_latest_reply') . '" class="icon2" alt="latest" title="' . __('VIEW_LATEST_POST') . '" /></a>';
         }
 
+        // Get raw forum name for URL slug (fname_html is HTML-encoded)
+        $sf_forum_name = $forums['forum'][$sf_forum_id]['forum_name'] ?? '';
+
         template()->assign_block_vars('f', [
             'FORUM_FOLDER_IMG' => $folder_image,
 
             'FORUM_ID' => $sf_forum_id,
             'FORUM_NAME' => $fname_html,
             'FORUM_DESC' => $forums['f'][$sf_forum_id]['forum_desc'],
-            'U_VIEWFORUM' => FORUM_URL . $sf_forum_id,
+            'U_VIEWFORUM' => url()->forum($sf_forum_id, $sf_forum_name),
             'TOPICS' => commify($sf_data['forum_topics']),
             'POSTS' => commify($sf_data['forum_posts']),
             'LAST_POST' => $last_post,
         ]);
 
         if ($sf_data['forum_last_post_id']) {
+            $lastTopicTitle = $sf_data['last_topic_title'] ?? '';
+            $lastTopicId = (int) $sf_data['last_topic_id'];
+            $lastPostId = (int) $sf_data['forum_last_post_id'];
+
             template()->assign_block_vars('f.last', [
                 'FORUM_LAST_POST' => true,
                 'SHOW_LAST_TOPIC' => $show_last_topic,
-                'LAST_TOPIC_ID' => $sf_data['last_topic_id'],
-                'LAST_TOPIC_TIP' => $sf_data['last_topic_title'],
-                'LAST_TOPIC_TITLE' => str_short($sf_data['last_topic_title'], $last_topic_max_len),
+                'LAST_TOPIC_ID' => $lastTopicId,
+                'LAST_TOPIC_TIP' => $lastTopicTitle,
+                'LAST_TOPIC_TITLE' => str_short($lastTopicTitle, $last_topic_max_len),
+                'LAST_TOPIC_URL' => url()->topicNewest($lastTopicId, $lastTopicTitle),
+                'LAST_POST_URL' => url()->topicPost($lastTopicId, $lastTopicTitle, $lastPostId),
                 'LAST_POST_TIME' => bb_date($sf_data['topic_last_post_time'], config()->get('last_post_date_format')),
-                'LAST_POST_ID' => $sf_data['forum_last_post_id'],
+                'LAST_POST_ID' => $lastPostId,
                 'LAST_POST_USER' => $last_post_user,
                 'ICON_LATEST_REPLY' => theme_images('icon_latest_reply'),
             ]);
@@ -247,7 +261,7 @@ if (request()->has('topicdays')) {
 }
 // Correct $start value
 if ($start > $forum_topics) {
-    redirect(FORUM_URL . $forum_id);
+    redirect(url()->forum($forum_id, $forum_data['forum_name']));
 }
 
 // Generate SORT and ORDER selects
@@ -355,7 +369,7 @@ if ($forum_data['allow_reg_tracker']) {
 template()->assign_vars([
     'U_POST_NEW_TOPIC' => $post_new_topic_url,
     'S_SELECT_TOPIC_DAYS' => build_select('topicdays', array_flip($sel_previous_days), $topic_days),
-    'S_POST_DAYS_ACTION' => FORUM_URL . "$forum_id&amp;start=$start",
+    'S_POST_DAYS_ACTION' => url()->forum($forum_id, $forum_data['forum_name'], $start ? ['start' => $start] : []),
     'S_DISPLAY_ORDER' => $s_display_order,
 ]);
 
@@ -373,6 +387,7 @@ $u_auth = implode("<br />\n", $u_auth);
 
 template()->assign_vars([
     'PAGE_TITLE' => htmlCHR($forum_data['forum_name']),
+    'CANONICAL_URL' => make_url(url()->forum($forum_id, $forum_data['forum_name'])),
     'FORUM_ID' => $forum_id,
     'FORUM_NAME' => htmlCHR($forum_data['forum_name']),
     'FORUM_DESC' => htmlCHR($forum_data['forum_desc']),
@@ -393,9 +408,9 @@ template()->assign_vars([
     'SELECT_TPP' => $select_tpp ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
     'T_POST_NEW_TOPIC' => ($forum_data['forum_status'] == FORUM_LOCKED) ? __('FORUM_LOCKED') : $post_new_topic,
     'S_AUTH_LIST' => $u_auth,
-    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
-    'U_MARK_READ' => FORUM_URL . $forum_id . "&amp;mark=topics",
-    'U_SEARCH_SELF' => "search.php?uid=" . userdata('user_id') . "&" . POST_FORUM_URL . "=$forum_id",
+    'U_VIEW_FORUM' => url()->forum($forum_id, $forum_data['forum_name']),
+    'U_MARK_READ' => url()->forum($forum_id, $forum_data['forum_name'], ['mark' => 'topics']),
+    'U_SEARCH_SELF' => FORUM_PATH . "search?uid=" . userdata('user_id') . "&" . POST_FORUM_URL . "=$forum_id",
 ]);
 
 // Okay, lets dump out the page ...
@@ -422,15 +437,24 @@ foreach ($topic_rowset as $topic) {
         }
     }
 
+    // Generate semantic URLs for this topic
+    $topicTitle = $topic['topic_title'];
+    $hrefTopicId = $moved ? $topic['topic_moved_id'] : $topic_id;
+    $topicUrl = url()->topic($hrefTopicId, $topicTitle);
+    $lastPostId = (int) $topic['topic_last_post_id'];
+
     template()->assign_block_vars('t', [
         'FORUM_ID' => $forum_id,
         'TOPIC_ID' => $topic_id,
-        'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
-        'TOPIC_TITLE' => censor()->censorString($topic['topic_title']),
+        'HREF_TOPIC_ID' => $hrefTopicId,
+        'TOPIC_TITLE' => censor()->censorString($topicTitle),
+        'TOPIC_URL' => $topicUrl,
+        'TOPIC_NEWEST_URL' => url()->topicNewest($hrefTopicId, $topicTitle),
+        'LAST_POST_URL' => url()->topicPost($hrefTopicId, $topicTitle, $lastPostId),
         'TOPICS_SEPARATOR' => $separator,
         'IS_UNREAD' => $is_unread,
         'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
-        'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $replies, config()->get('posts_per_page')),
+        'PAGINATION' => $moved ? '' : build_topic_pagination($topicUrl, $replies, config()->get('posts_per_page')),
         'REPLIES' => $moved ? '' : $replies,
         'VIEWS' => $moved ? '' : $topic['topic_views'],
         'TOR_STALED' => ($forum_data['allow_reg_tracker'] && !($t_type == POST_ANNOUNCE || $t_type == POST_STICKY || $topic['tor_size'])),
@@ -447,10 +471,10 @@ foreach ($topic_rowset as $topic) {
         'POLL' => (bool) $topic['topic_vote'],
         'DL_CLASS' => isset($topic['dl_status']) ? dl_link_css($topic['dl_status']) : '',
 
-        'TOPIC_AUTHOR' => profile_url(['username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
-        'LAST_POSTER' => profile_url(['username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
+        'TOPIC_AUTHOR' => profile_url(['username' => $topic['first_username'], 'display_username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
+        'LAST_POSTER' => profile_url(['username' => $topic['last_username'], 'display_username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
         'LAST_POST_TIME' => bb_date($topic['topic_last_post_time'], config()->get('last_post_date_format')),
-        'LAST_POST_ID' => $topic['topic_last_post_id'],
+        'LAST_POST_ID' => $lastPostId,
     ]);
 
     if (isset($topic['tor_size'])) {
@@ -469,16 +493,33 @@ foreach ($topic_rowset as $topic) {
 }
 unset($topic_rowset);
 
-$pg_url = FORUM_URL . $forum_id;
-$pg_url .= $sort_value ? "&sort=$sort_value" : '';
-$pg_url .= $order_value ? "&order=$order_value" : '';
-template()->assign_var('MOD_URL', $pg_url);
-$pg_url = FORUM_URL . $forum_id;
-$pg_url .= $topic_days ? "&amp;topicdays=$topic_days" : '';
-$pg_url .= $sort_value ? "&amp;sort=$sort_value" : '';
-$pg_url .= $order_value ? "&amp;order=$order_value" : '';
-$pg_url .= $moderation ? "&amp;mod=1" : '';
-$pg_url .= ($topics_per_page != config()->get('topics_per_page')) ? "&amp;tpp=$topics_per_page" : '';
+// Build pagination URL with query parameters
+$forumBaseUrl = url()->forum($forum_id, $forum_data['forum_name']);
+
+// MOD_URL for JavaScript (no HTML encoding)
+$mod_url = $forumBaseUrl;
+$mod_url .= $sort_value ? "?sort=$sort_value" : '';
+$mod_url .= $order_value ? ($sort_value ? "&order=$order_value" : "?order=$order_value") : '';
+template()->assign_var('MOD_URL', $mod_url);
+
+// Pagination URL (HTML encoded)
+$pg_params = [];
+if ($topic_days) {
+    $pg_params['topicdays'] = $topic_days;
+}
+if ($sort_value) {
+    $pg_params['sort'] = $sort_value;
+}
+if ($order_value) {
+    $pg_params['order'] = $order_value;
+}
+if ($moderation) {
+    $pg_params['mod'] = 1;
+}
+if ($topics_per_page != config()->get('topics_per_page')) {
+    $pg_params['tpp'] = $topics_per_page;
+}
+$pg_url = $forumBaseUrl . (!empty($pg_params) ? '?' . http_build_query($pg_params, '', '&amp;') : '');
 
 if ($found_topics) {
     generate_pagination($pg_url, $forum_topics, $topics_per_page, $start);
@@ -506,8 +547,8 @@ template()->assign_vars([
 
     'CAT_ID' => $forum_data['cat_id'],
     'CAT_TITLE' => $forums['cat_title_html'][$forum_data['cat_id']],
-    'U_VIEWCAT' => CAT_URL . $forum_data['cat_id'],
-    'PARENT_FORUM_HREF' => ($parent_id = $forum_data['forum_parent']) ? FORUM_URL . $forum_data['forum_parent'] : '',
+    'U_VIEWCAT' => url()->category($forum_data['cat_id'], $forums['c'][$forum_data['cat_id']]['cat_title']),
+    'PARENT_FORUM_HREF' => ($parent_id = $forum_data['forum_parent']) ? url()->forum($parent_id, $forums['forum'][$parent_id]['forum_name'] ?? '') : '',
     'PARENT_FORUM_NAME' => ($parent_id = $forum_data['forum_parent']) ? $forums['forum_name_html'][$parent_id] : '',
 ]);
 

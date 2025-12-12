@@ -54,7 +54,7 @@ switch ($mode) {
             // IP limit
             if (config()->get('unique_ip')) {
                 if ($users = DB()->fetch_row("SELECT user_id, username FROM " . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
-                    bb_die(sprintf(__('ALREADY_REG_IP'), '<a href="' . PROFILE_URL . $users['user_id'] . '"><b>' . $users['username'] . '</b></a>', config()->get('tech_admin_email')));
+                    bb_die(sprintf(__('ALREADY_REG_IP'), '<a href="' . url()->member($users['user_id'], $users['username']) . '"><b>' . $users['username'] . '</b></a>', config()->get('tech_admin_email')));
                 }
             }
             // Disabling registration
@@ -619,7 +619,7 @@ if ($submit && !$errors) {
                 'WELCOME_MSG' => sprintf(__('WELCOME_SUBJECT'), config()->get('sitename')),
                 'USERNAME' => html_entity_decode($username),
                 'PASSWORD' => $new_pass,
-                'U_ACTIVATE' => make_url('profile?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
+                'U_ACTIVATE' => make_url(ACTIVATE_URL . $new_user_id . '/' . $db_data['user_actkey'] . '/')
             ]);
 
             $emailer->send();
@@ -648,7 +648,7 @@ if ($submit && !$errors) {
                 $emailer->set_template('user_activate', $pr_data['user_lang']);
                 $emailer->assign_vars([
                     'USERNAME' => html_entity_decode($username),
-                    'U_ACTIVATE' => make_url("profile?mode=activate&" . POST_USERS_URL . "={$pr_data['user_id']}&act_key=$user_actkey"),
+                    'U_ACTIVATE' => make_url(ACTIVATE_URL . $pr_data['user_id'] . '/' . $user_actkey . '/'),
                 ]);
 
                 $emailer->send();

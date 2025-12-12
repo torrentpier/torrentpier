@@ -16,14 +16,14 @@ $excludedUsers = array_map('intval', explode(',', EXCLUDED_USERS));
 
 // usercount
 $data['usercount'] = DB()->table(BB_USERS)
-    ->where('user_id NOT', $excludedUsers)
+    ->where('user_id NOT IN ?', $excludedUsers)
     ->count('*');
 
 // newestuser
 $data['newestuser'] = DB()->table(BB_USERS)
     ->select('user_id, username, user_rank')
     ->where('user_active', 1)
-    ->where('user_id NOT', $excludedUsers)
+    ->where('user_id NOT IN ?', $excludedUsers)
     ->order('user_id DESC')
     ->limit(1)
     ->fetch()
@@ -59,17 +59,17 @@ if (config()->get('tor_stats')) {
 if (config()->get('gender')) {
     $data['male'] = DB()->table(BB_USERS)
         ->where('user_gender', MALE)
-        ->where('user_id NOT', $excludedUsers)
+        ->where('user_id NOT IN ?', $excludedUsers)
         ->count('*');
 
     $data['female'] = DB()->table(BB_USERS)
         ->where('user_gender', FEMALE)
-        ->where('user_id NOT', $excludedUsers)
+        ->where('user_id NOT IN ?', $excludedUsers)
         ->count('*');
 
     $data['unselect'] = DB()->table(BB_USERS)
         ->where('user_gender', 0)
-        ->where('user_id NOT', $excludedUsers)
+        ->where('user_id NOT IN ?', $excludedUsers)
         ->count('*');
 }
 
@@ -77,45 +77,42 @@ if (config()->get('gender')) {
 if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
     $checkDays = (int)config()->get('birthday_check_day');
 
-    // Use numeric MMDD format to leverage functional index: MONTH(user_birthday) * 100 + DAYOFMONTH(user_birthday)
+    // Use numeric MMDD format with birthday_md generated column
     $dateToday = (int)date('n') * 100 + (int)date('j'); // e.g., 1207 for Dec 7
     $dateForward = (int)date('n', strtotime("+$checkDays days")) * 100 + (int)date('j', strtotime("+$checkDays days"));
-
-    // Expression that matches the functional index
-    $birthdayExpr = 'MONTH(user_birthday) * 100 + DAYOFMONTH(user_birthday)';
 
     // Helper to convert ActiveRow objects to arrays
     $toArrays = static fn(array $rows): array => array_map(static fn($row) => $row->toArray(), $rows);
 
-    // Birthday today - using the functional index
+    // Birthday today - using the birthday_md indexed column
     $data['birthday_today_list'] = $toArrays(DB()->table(BB_USERS)
         ->select('user_id, username, user_rank, user_birthday')
-        ->where('user_id NOT', $excludedUsers)
+        ->where('user_id NOT IN ?', $excludedUsers)
         ->where('user_birthday !=', '1900-01-01')
         ->where('user_active', 1)
-        ->where("$birthdayExpr = ?", $dateToday)
+        ->where('birthday_md', $dateToday)
         ->order('user_level DESC, username')
         ->fetchAll());
 
-    // Birthday in upcoming days - using functional index
+    // Birthday in upcoming days - using birthday_md indexed column
     // Handle year wrap-around (e.g., Dec 28 + 7 days = Jan 4)
     if ($dateForward < $dateToday) {
         $data['birthday_week_list'] = $toArrays(DB()->table(BB_USERS)
             ->select('user_id, username, user_rank, user_birthday')
-            ->where('user_id NOT', $excludedUsers)
+            ->where('user_id NOT IN ?', $excludedUsers)
             ->where('user_birthday !=', '1900-01-01')
             ->where('user_active', 1)
-            ->where("($birthdayExpr > ? OR $birthdayExpr <= ?)", $dateToday, $dateForward)
+            ->where('(birthday_md > ? OR birthday_md <= ?)', $dateToday, $dateForward)
             ->order('user_level DESC, username')
             ->fetchAll());
     } else {
         $data['birthday_week_list'] = $toArrays(DB()->table(BB_USERS)
             ->select('user_id, username, user_rank, user_birthday')
-            ->where('user_id NOT', $excludedUsers)
+            ->where('user_id NOT IN ?', $excludedUsers)
             ->where('user_birthday !=', '1900-01-01')
             ->where('user_active', 1)
-            ->where("$birthdayExpr > ?", $dateToday)
-            ->where("$birthdayExpr <= ?", $dateForward)
+            ->where('birthday_md > ?', $dateToday)
+            ->where('birthday_md <= ?', $dateForward)
             ->order('user_level DESC, username')
             ->fetchAll());
     }

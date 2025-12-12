@@ -15,6 +15,8 @@ namespace TorrentPier\Router;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Throwable;
+use TorrentPier\Router\Exception\RedirectException;
 
 /**
  * Adapter for running legacy TorrentPier controllers through the router
@@ -42,6 +44,7 @@ class LegacyAdapter
 
     /**
      * Handle the request by executing the legacy controller
+     * @throws Throwable
      */
     public function __invoke(ServerRequestInterface $request, array $args = []): ResponseInterface
     {
@@ -49,8 +52,19 @@ class LegacyAdapter
 
         // Make route parameters available to the controller
         foreach ($args as $key => $value) {
-            $_GET[$key] = $value;
-            $_REQUEST[$key] = $value;
+            request()->query->set($key, $value);
+        }
+
+        // Set options as query parameters (for routes that need specific params)
+        foreach (['mode', 'map', 'action'] as $param) {
+            if (isset($this->options[$param])) {
+                request()->query->set($param, $this->options[$param]);
+            }
+        }
+
+        // For the activate route, set the activation key from route args
+        if (isset($this->options['mode']) && $this->options['mode'] === 'activate' && isset($args['key'])) {
+            request()->query->set('act_key', $args['key']);
         }
 
         // For self_bootstrap files: return marker response, execution happens in global scope
@@ -87,7 +101,14 @@ class LegacyAdapter
             while (ob_get_level() > $existingLevel) {
                 $content .= ob_get_clean();
             }
-        } catch (\Throwable $e) {
+        } catch (RedirectException $e) {
+            // Clean up output buffers
+            while (ob_get_level() > $existingLevel) {
+                ob_end_clean();
+            }
+            // Return the redirect response
+            return $e->toResponse();
+        } catch (Throwable $e) {
             // Clean up output buffers on error
             while (ob_get_level() > $existingLevel) {
                 ob_end_clean();

@@ -19,9 +19,9 @@ $reserved_port = env('TP_PORT', 80);
 $bb_cfg = [];
 
 // Version info
-$bb_cfg['tp_version'] = 'v2.8.9';
-$bb_cfg['tp_release_date'] = '28-11-2025';
-$bb_cfg['tp_release_codename'] = 'Cattle';
+$bb_cfg['tp_version'] = 'v3.0.0';
+$bb_cfg['tp_release_date'] = 'xx-02-2026';
+$bb_cfg['tp_release_codename'] = 'Dexter';
 
 // Increase version number after changing JS or CSS
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
@@ -184,13 +184,6 @@ $bb_cfg['torstat_days_keep'] = 60; // Days to keep user's per-torrent stats
 
 // Tor-Help
 $bb_cfg['torhelp_enabled'] = false; // Find dead torrents (without seeder) that user might help with seeding
-
-// URL's
-$bb_cfg['ajax_url'] = 'ajax';
-$bb_cfg['dl_url'] = 'dl?t=';
-$bb_cfg['login_url'] = 'login';
-$bb_cfg['posting_url'] = 'posting';
-$bb_cfg['pm_url'] = 'privmsg';
 
 // Language
 $bb_cfg['auto_language_detection'] = true; // Use browser language (auto-detect) as the default language for guests
@@ -508,6 +501,9 @@ $bb_cfg['debug'] = [
     ],
     'max_query_length' => 500, // Truncate long queries in panel
 ];
+
+// Log URL redirects to internal_data/log/redirects.log (for migration debugging)
+$bb_cfg['log_redirects'] = true;
 
 $bb_cfg['bugsnag'] = [
     'enabled' => true,

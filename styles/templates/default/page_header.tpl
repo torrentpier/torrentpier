@@ -29,6 +29,9 @@
 <!-- IF META_NEXT_PAGE -->
 <link rel="next" href="{META_NEXT_PAGE}">
 <!-- ENDIF / META_NEXT_PAGE -->
+<!-- IF CANONICAL_URL -->
+<link rel="canonical" href="{CANONICAL_URL}">
+<!-- ENDIF / CANONICAL_URL -->
 {META}
 <link rel="stylesheet" href="{STYLESHEET}?v={{ config('css_ver') }}" type="text/css">
 <link rel="stylesheet" href="{SITE_URL}styles/templates/default/css/dark-mode.css?v={{ config('css_ver') }}" type="text/css">
@@ -240,7 +243,7 @@ function go_to_page ()
 <div id="logo">
 	<!--<h1>{SITENAME}</h1>
 	<h6>{SITE_DESCRIPTION}</h6> -->
-	<a href="{U_INDEX}"><img src="styles/images/logo/logo.png" title="{SITENAME}" alt="{SITENAME}" /></a>
+	<a href="{U_INDEX}"><img src="{FORUM_PATH}styles/images/logo/logo.png" title="{SITENAME}" alt="{SITENAME}" /></a>
 </div>
 <!--/logo-->
 
@@ -420,7 +423,7 @@ function go_to_page ()
 							<tr>
 								<td><div class="news_date">{news.NEWS_TIME}</div></td>
 								<td width="100%">
-									<div class="news_title<!-- IF news.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{TOPIC_URL}{news.NEWS_TOPIC_ID}">{news.NEWS_TITLE}</a></div>
+									<div class="news_title<!-- IF news.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{news.NEWS_URL}">{news.NEWS_TITLE}</a></div>
 								</td>
 							</tr>
 							<!-- END news -->
@@ -436,7 +439,7 @@ function go_to_page ()
 							<tr>
 								<td><div class="news_date">{net.NEWS_TIME}</div></td>
 								<td width="100%">
-									<div class="news_title<!-- IF net.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{TOPIC_URL}{net.NEWS_TOPIC_ID}">{net.NEWS_TITLE}</a></div>
+									<div class="news_title<!-- IF net.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{net.NEWS_URL}">{net.NEWS_TITLE}</a></div>
 								</td>
 							</tr>
 							<!-- END net -->

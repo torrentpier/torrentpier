@@ -54,7 +54,7 @@
 <p class="nav">
     <a href="{U_INDEX}">{T_INDEX}</a>
     <!-- IF U_VIEW_FORUM --><em>&raquo;</em> <a href="{U_VIEW_FORUM}">{FORUM_NAME}</a><!-- ENDIF -->
-    <!-- IF POSTING_TOPIC_ID --><em>&raquo;</em> <a class="normal" href="{TOPIC_URL}{POSTING_TOPIC_ID}">{POSTING_TOPIC_TITLE}</a><!-- ENDIF -->
+    <!-- IF POSTING_TOPIC_URL --><em>&raquo;</em> <a class="normal" href="{POSTING_TOPIC_URL}">{POSTING_TOPIC_TITLE}</a><!-- ENDIF -->
 </p>
 
 <form action="{S_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }" {S_FORM_ENCTYPE}>

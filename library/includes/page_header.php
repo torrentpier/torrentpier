@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -17,7 +18,7 @@ if (defined('PAGE_HEADER_SENT')) {
 
 // Parse and show the overall page header
 
-$logged_in = (int)!empty(userdata('session_logged_in'));
+$logged_in = (int) !empty(userdata('session_logged_in'));
 
 // Generate logged in/logged out status
 if ($logged_in) {
@@ -34,7 +35,7 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
     ${$online_list} = [
         'stat' => '',
         'userlist' => '',
-        'cnt' => ''
+        'cnt' => '',
     ];
 
     if (defined('IS_GUEST') && !(IS_GUEST || IS_USER)) {
@@ -70,7 +71,7 @@ if ($logged_in && !simple_header() && !defined('IN_ADMIN')) {
             user()->data['user_last_privmsg'] = userdata('user_lastvisit');
 
             \TorrentPier\Sessions::db_update_userdata(userdata(), [
-                'user_last_privmsg' => userdata('user_lastvisit')
+                'user_last_privmsg' => userdata('user_lastvisit'),
             ]);
 
             $have_new_pm = (userdata('user_new_privmsg') > 1);
@@ -87,13 +88,13 @@ if ($logged_in && !simple_header() && !defined('IN_ADMIN')) {
 				GROUP BY privmsgs_to_userid
 			");
 
-            $real_unread_pm_count = (int)($row['pm_count'] ?? 0);
+            $real_unread_pm_count = (int) ($row['pm_count'] ?? 0);
 
             if (userdata('user_unread_privmsg') != $real_unread_pm_count) {
                 user()->data['user_unread_privmsg'] = $real_unread_pm_count;
 
                 \TorrentPier\Sessions::db_update_userdata(userdata(), [
-                    'user_unread_privmsg' => $real_unread_pm_count
+                    'user_unread_privmsg' => $real_unread_pm_count,
                 ]);
             }
         }
@@ -104,7 +105,7 @@ if ($logged_in && !simple_header() && !defined('IN_ADMIN')) {
 }
 template()->assign_vars([
     'HAVE_NEW_PM' => $have_new_pm,
-    'HAVE_UNREAD_PM' => $have_unread_pm
+    'HAVE_UNREAD_PM' => $have_unread_pm,
 ]);
 
 // The following assigns all _common_ variables that may be used at any point in a template
@@ -116,21 +117,21 @@ template()->assign_vars([
     'USER_HIDE_CAT' => (defined('BB_SCRIPT') && BB_SCRIPT === 'index'),
 
     'USER_LANG' => userdata('user_lang'),
-    'USER_LANG_DIRECTION' => (function() {
+    'USER_LANG_DIRECTION' => (function () {
         $langConfig = config()->get('lang') ?? [];
         $userLang = userdata('user_lang');
         return (isset($langConfig[$userLang]['rtl']) && $langConfig[$userLang]['rtl'] === true) ? 'rtl' : 'ltr';
     })(),
 
-    'INCLUDE_BBCODE_JS' => (bool)page_cfg('include_bbcode_js'),
+    'INCLUDE_BBCODE_JS' => (bool) page_cfg('include_bbcode_js'),
     'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode(user()->opt_js, JSON_THROW_ON_ERROR),
 
-    'USE_TABLESORTER' => (bool)page_cfg('use_tablesorter'),
+    'USE_TABLESORTER' => (bool) page_cfg('use_tablesorter'),
     'ALLOW_ROBOTS' => !config()->get('board_disable') && (page_cfg('allow_robots') ?? true),
     'META_DESCRIPTION' => (!defined('HAS_DIED') && page_cfg('meta_description')) ? trim(htmlCHR(page_cfg('meta_description'))) : '',
 
     'SITENAME' => config()->get('sitename'),
-    'U_INDEX' => BB_ROOT . 'index.php',
+    'U_INDEX' => FORUM_PATH,
     'T_INDEX' => sprintf(__('FORUM_INDEX'), config()->get('sitename')),
 
     'IS_GUEST' => IS_GUEST,
@@ -143,7 +144,7 @@ template()->assign_vars([
     'FULL_URL' => FULL_URL,
 
     'CURRENT_TIME' => sprintf(__('CURRENT_TIME'), bb_date(TIMENOW, config()->get('last_visit_date_format'), false)),
-    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf(__('ALL_TIMES'), config()->get('timezones')[str_replace(',', '.', (float)config()->get('board_timezone'))])),
+    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf(__('ALL_TIMES'), config()->get('timezones')[str_replace(',', '.', (float) config()->get('board_timezone'))])),
     'BOARD_TIMEZONE' => config()->get('board_timezone'),
 
     'PM_INFO' => $pm_info,
@@ -158,21 +159,21 @@ template()->assign_vars([
     'AUTOLOGIN_DISABLED' => !config()->get('allow_autologin'),
     'S_LOGIN_ACTION' => LOGIN_URL,
 
-    'U_CUR_DOWNLOADS' => PROFILE_URL . userdata('user_id'),
-    'U_FORUM' => 'viewforum',
-    'U_GROUPS' => 'group',
-    'U_LOGIN_LOGOUT' => $u_login_logout,
-    'U_MEMBERLIST' => 'memberlist',
-    'U_MODCP' => 'modcp',
-    'U_OPTIONS' => 'profile?mode=editprofile',
+    'U_CUR_DOWNLOADS' => url()->member(userdata('user_id'), userdata('username')),
+    'U_FORUM' => FORUM_PATH . 'viewforum',
+    'U_GROUPS' => url()->groups(),
+    'U_LOGIN_LOGOUT' => FORUM_PATH . ltrim($u_login_logout, './'),
+    'U_MEMBERLIST' => url()->members(),
+    'U_MODCP' => FORUM_PATH . 'modcp',
+    'U_OPTIONS' => SETTINGS_URL,
     'U_PRIVATEMSGS' => PM_URL . "?folder=inbox",
-    'U_PROFILE' => PROFILE_URL . userdata('user_id'),
+    'U_PROFILE' => url()->member(userdata('user_id'), userdata('username')),
     'U_READ_PM' => PM_URL . "?folder=inbox" . ((userdata('user_newest_pm_id') && userdata('user_new_privmsg') == 1) ? "&mode=read&" . POST_POST_URL . "=" . userdata('user_newest_pm_id') : ''),
-    'U_REGISTER' => 'profile?mode=register',
-    'U_SEARCH' => 'search',
-    'U_SEND_PASSWORD' => "profile?mode=sendpassword",
-    'U_TERMS' => config()->get('terms_and_conditions_url'),
-    'U_TRACKER' => 'tracker',
+    'U_REGISTER' => REGISTER_URL,
+    'U_SEARCH' => FORUM_PATH . 'search',
+    'U_SEND_PASSWORD' => PASSWORD_RECOVERY_URL,
+    'U_TERMS' => FORUM_PATH . ltrim(config()->get('terms_and_conditions_url'), './'),
+    'U_TRACKER' => FORUM_PATH . 'tracker',
 
     'SHOW_SIDEBAR1' => (defined('BB_SCRIPT') && !empty((config()->get('page.show_sidebar1') ?? [])[BB_SCRIPT])) || config()->get('show_sidebar1_on_every_page'),
     'SHOW_SIDEBAR2' => (defined('BB_SCRIPT') && !empty((config()->get('page.show_sidebar2') ?? [])[BB_SCRIPT])) || config()->get('show_sidebar2_on_every_page'),
@@ -183,20 +184,19 @@ template()->assign_vars([
     'HTML_SIDEBAR_1' => LANG_DIR . 'html/sidebar1.html',
     'HTML_SIDEBAR_2' => LANG_DIR . 'html/sidebar2.html',
 
-    // Common urls
-    'AVATARS_URL' => 'data/avatars',
-    'CAT_URL' => BB_ROOT . CAT_URL,
-    'DOWNLOAD_URL' => BB_ROOT . DL_URL,
-    'FORUM_URL' => BB_ROOT . FORUM_URL,
-    'GROUP_URL' => BB_ROOT . GROUP_URL,
-    'LOGIN_URL' => config()->get('login_url'),
+    // Common urls (absolute paths for SEO-friendly routing)
+    'AVATARS_URL' => FORUM_PATH . 'data/avatars',
+    'CAT_URL' => CAT_URL,
+    'DOWNLOAD_URL' => DL_URL,
+    'FORUM_URL' => FORUM_URL,
+    'LOGIN_URL' => LOGIN_URL,
     'NEWEST_URL' => '&amp;view=newest#newest',
-    'PM_URL' => config()->get('pm_url'),
-    'POST_URL' => BB_ROOT . POST_URL,
-    'POSTING_URL' => config()->get('posting_url'),
-    'PROFILE_URL' => BB_ROOT . PROFILE_URL,
-    'BONUS_URL' => BB_ROOT . BONUS_URL,
-    'TOPIC_URL' => BB_ROOT . TOPIC_URL,
+    'PM_URL' => PM_URL,
+    'POST_URL' => POST_URL,
+    'POSTING_URL' => POSTING_URL,
+    'PROFILE_URL' => PROFILE_URL,
+    'BONUS_URL' => BONUS_URL,
+    'TOPIC_URL' => TOPIC_URL,
 
     'AJAX_HTML_DIR' => AJAX_HTML_DIR,
 
@@ -214,12 +214,12 @@ template()->assign_vars([
     'READONLY' => HTML_READONLY,
     'SELECTED' => HTML_SELECTED,
 
-    'U_SEARCH_SELF_BY_LAST' => "search?uid=" . userdata('user_id') . "&amp;o=5",
-    'U_WATCHED_TOPICS' => 'profile?mode=watch'
+    'U_SEARCH_SELF_BY_LAST' => FORUM_PATH . "search?uid=" . userdata('user_id') . "&amp;o=5",
+    'U_WATCHED_TOPICS' => WATCHLIST_URL,
 ]);
 
 if (defined('BB_SCRIPT') && !empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty(userdata('torhelp'))) {
-    $ignore_time = !empty($_COOKIE['torhelp']) ? (int)$_COOKIE['torhelp'] : 0;
+    $ignore_time = !empty($_COOKIE['torhelp']) ? (int) $_COOKIE['torhelp'] : 0;
 
     if (TIMENOW > $ignore_time) {
         if ($ignore_time) {
@@ -239,7 +239,7 @@ if (defined('BB_SCRIPT') && !empty((config()->get('page.show_torhelp') ?? [])[BB
         }
 
         template()->assign_vars([
-            'TORHELP_TOPICS' => implode("</li>\n<li>", $torhelp_topics)
+            'TORHELP_TOPICS' => implode("</li>\n<li>", $torhelp_topics),
         ]);
     }
 }
