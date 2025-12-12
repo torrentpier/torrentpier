@@ -97,9 +97,9 @@ class ClearCommand extends Command
 
         $this->line();
         if ($failed === 0) {
-            $this->success("Cleared {$deleted} log file(s)!");
+            $this->success("Cleared $deleted log file(s)!");
         } else {
-            $this->warning("Cleared {$deleted} file(s), failed to delete {$failed} file(s).");
+            $this->warning("Cleared $deleted file(s), failed to delete $failed file(s).");
         }
 
         return $failed === 0 ? self::SUCCESS : self::FAILURE;
@@ -115,7 +115,7 @@ class ClearCommand extends Command
 
         if ($olderThan !== null) {
             $days = (int) $olderThan;
-            $cutoffTime = strtotime("-{$days} days");
+            $cutoffTime = strtotime("-$days days");
         }
 
         $iterator = new RecursiveIteratorIterator(
