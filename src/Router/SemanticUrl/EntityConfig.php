@@ -21,7 +21,7 @@ class EntityConfig
      * Entity type configurations
      *
      * Each type defines:
-     * - controller: PHP controller filename in src/Controllers/
+     * - controller: PHP controller filename in app/Http/Controllers/
      * - script: BB_SCRIPT value for the controller
      * - param: Query parameter name (POST_*_URL constant equivalent)
      * - table: Database table name
@@ -171,7 +171,7 @@ class EntityConfig
         }
 
         $basePath = dirname(__DIR__, 3);
-        return $basePath . '/src/Controllers/' . $config['controller'];
+        return $basePath . '/app/Http/Controllers/' . $config['controller'];
     }
 
     /**

@@ -16,8 +16,8 @@ define('ADMIN_DIR', BB_PATH . '/public/admin');
 
 // Storage paths
 define('STORAGE_DIR', BB_PATH . '/storage');
-define('STORAGE_PUBLIC_DIR', STORAGE_DIR . '/public');
-define('STORAGE_PRIVATE_DIR', STORAGE_DIR . '/private');
+define('STORAGE_PUBLIC_DIR', STORAGE_DIR . '/app/public');
+define('STORAGE_PRIVATE_DIR', STORAGE_DIR . '/app/private');
 
 // Public storage (web-accessible via symlink public/storage)
 define('AVATARS_DIR', STORAGE_PUBLIC_DIR . '/avatars');
@@ -49,7 +49,7 @@ define('ASSETS_PATH', '/assets');  // URL path for assets
 
 // Updated paths for the new structure
 define('IMAGES_DIR', ASSETS_DIR . '/images');
-define('TEMPLATES_DIR', BB_PATH . '/templates');
+define('TEMPLATES_DIR', BB_PATH . '/resources/views');
 
 // Languages
 define('LANG_ROOT_DIR',

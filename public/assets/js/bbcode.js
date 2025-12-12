@@ -276,7 +276,7 @@ function initQuotes(context) {
     if (quoted_pid = $q.children('u.q-post:first').text()) {
       var on_this_page = $('#post_' + quoted_pid).length;
       var href = (on_this_page) ? '#' + quoted_pid : './viewtopic?p=' + quoted_pid + '#' + quoted_pid;
-      q_title += ' <a href="' + href + '" title="' + bbl['quoted_post'] + '"><img src="' + bb_url + 'styles/templates/default/images/icon_latest_reply.gif" class="icon2" alt="" /></a>';
+      q_title += ' <a href="' + href + '" title="' + bbl['quoted_post'] + '"><img src="' + bb_url + 'assets/images/theme/icon_latest_reply.gif" class="icon2" alt="" /></a>';
     }
     $q.before('<div class="q-head">' + q_title + '</div>');
   });
@@ -296,7 +296,7 @@ function initPostImages(context) {
     });
     if (user.opt_js.i_aft_l) {
       $('#preload').append($img);
-      var loading_icon = '<a href="' + src + '" target="_blank"><img src="' + bb_url + 'styles/images/pic_loading.gif" alt="" /></a>';
+      var loading_icon = '<a href="' + src + '" target="_blank"><img src="' + bb_url + 'assets/images/pic_loading.gif" alt="" /></a>';
       $v.html(loading_icon);
       $img.one('load', function () {
         imgFit(this, maxW);
@@ -354,7 +354,7 @@ function fixPostImage($img) {
   var src = $img[0].src;
   if (src.match(banned_image_hosts)) {
     $img.wrap('<a href="' + this.src + '" target="_blank"></a>').attr({
-      src: "" + bb_url + "styles/images/smiles/tr_oops.gif", title: "" + bbl['scr_rules'] + ""
+      src: "" + bb_url + "assets/images/smiles/tr_oops.gif", title: "" + bbl['scr_rules'] + ""
     });
   }
   return $img;

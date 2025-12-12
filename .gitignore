@@ -15,13 +15,13 @@ config/config.local.php
 vendor
 
 # Storage directories
-storage/public/avatars/*
-!storage/public/avatars/.keep
-!storage/public/avatars/gallery
-storage/public/sitemap/*
-!storage/public/sitemap/.keep
-storage/private/uploads/*
-!storage/private/uploads/.keep
+storage/app/public/avatars/*
+!storage/app/public/avatars/.keep
+!storage/app/public/avatars/gallery
+storage/app/public/sitemap/*
+!storage/app/public/sitemap/.keep
+storage/app/private/uploads/*
+!storage/app/private/uploads/.keep
 storage/logs/*
 !storage/logs/.keep
 storage/framework/cache/*

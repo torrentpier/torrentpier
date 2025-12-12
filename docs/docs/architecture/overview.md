@@ -26,14 +26,19 @@ TorrentPier follows a modular architecture combining legacy compatibility with m
 
 ```
 torrentpier/
-├── src/                    # Modern PHP classes (PSR-4)
+├── app/                    # Application code
+│   ├── Http/
+│   │   └── Controllers/   # Web controllers
+│   └── Console/
+│       └── Commands/      # CLI commands
+├── src/                    # Core library classes (PSR-4)
 │   ├── Cache/             # Caching system
 │   ├── Database/          # Database layer
 │   ├── Helpers/           # Utility classes (Slug, etc.)
 │   ├── Router/            # Routing and URL handling
 │   ├── Template/          # Twig integration
 │   └── Tracker/           # BitTorrent tracker
-├── library/               # Core application logic
+├── library/               # Legacy application logic
 │   └── includes/          # Legacy includes
 ├── config/                # Configuration files
 │   ├── config.php         # Main configuration
@@ -42,13 +47,15 @@ torrentpier/
 │   └── migrations/        # Phinx migrations
 ├── routes/                # Route definitions
 │   └── web.php            # Web routes
+├── resources/
+│   └── views/             # Twig templates
 ├── public/                # Web root
 │   ├── admin/             # Admin panel
 │   └── bt/                # Tracker endpoints
-├── templates/             # Template files
-├── storage/               # Runtime data (Laravel-style)
-│   ├── public/            # Web-accessible (avatars, sitemap)
-│   ├── private/           # Protected files (uploads)
+├── storage/               # Runtime data
+│   ├── app/
+│   │   ├── public/        # Web-accessible (avatars, sitemap)
+│   │   └── private/       # Protected files (uploads)
 │   ├── logs/              # Application logs
 │   └── framework/         # Cache, templates, triggers
 └── install/               # Installation scripts
@@ -162,7 +169,7 @@ See [Semantic URLs](./semantic-urls.md) for detailed documentation.
 
 ### Creating templates
 
-Place Twig templates in `styles/{style_name}/templates/`.
+Place Twig templates in `resources/views/{style_name}/` (e.g., `resources/views/default/`, `resources/views/momo/`).
 
 ### Database changes
 
