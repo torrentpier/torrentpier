@@ -12,6 +12,7 @@ namespace TorrentPier\Console\Command\Migrate;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 use TorrentPier\Console\Command\Command;
 use TorrentPier\Console\Helpers\PhinxManager;
 
@@ -65,7 +66,7 @@ class MigrateStatusCommand extends Command
             // Summary
             $this->section('Summary');
             $this->definitionList(
-                ['Environment' => $phinx->getEnvironment()],
+                ['Environment' => $phinx->environment],
                 ['Total Migrations' => count($status['migrations'])],
                 ['Pending' => $status['pending'] > 0
                     ? '<comment>' . $status['pending'] . '</comment>'
@@ -77,17 +78,17 @@ class MigrateStatusCommand extends Command
             );
 
             if ($status['pending'] > 0) {
-                $this->line('');
+                $this->line();
                 $this->comment('Run "php bull migrate" to apply pending migrations.');
             }
 
             if ($status['missing'] > 0) {
-                $this->line('');
+                $this->line();
                 $this->warning('Some migrations are missing their source files!');
             }
 
             return self::SUCCESS;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->error('Failed to get migration status: ' . $e->getMessage());
 
             if ($this->isVerbose()) {

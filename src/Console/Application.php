@@ -9,9 +9,11 @@
 
 namespace TorrentPier\Console;
 
+use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ReflectionClass;
+use ReflectionException;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command;
 use TorrentPier\Console\Command\Command as BaseCommand;
@@ -34,11 +36,11 @@ class Application extends SymfonyApplication
     }
 
     /**
-     * Detect application version from config
+     * Detect an application version from config
      */
     private function detectVersion(): string
     {
-        // Try to get version from config (set by config.php)
+        // Try to get a version from config (set by config.php)
         if (function_exists('config')) {
             $version = config()->get('tp_version');
             if ($version) {
@@ -71,7 +73,7 @@ class Application extends SymfonyApplication
         }
 
         $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($commandDir, RecursiveDirectoryIterator::SKIP_DOTS)
+            new RecursiveDirectoryIterator($commandDir, FilesystemIterator::SKIP_DOTS)
         );
 
         foreach ($iterator as $file) {
@@ -90,7 +92,7 @@ class Application extends SymfonyApplication
                 continue;
             }
 
-            // Check if class exists and is a valid command
+            // Check if a class exists and is a valid command
             if (!class_exists($className)) {
                 continue;
             }
@@ -108,12 +110,18 @@ class Application extends SymfonyApplication
             }
 
             // Register the command
-            $this->add($reflection->newInstance());
+            try {
+                /** @var Command $command */
+                $command = $reflection->newInstance();
+                $this->add($command);
+            } catch (ReflectionException) {
+                // Skip commands that cannot be instantiated
+            }
         }
     }
 
     /**
-     * Extract fully qualified class name from a PHP file
+     * Extract a fully qualified class name from a PHP file
      */
     private function getClassNameFromFile(string $filePath): ?string
     {

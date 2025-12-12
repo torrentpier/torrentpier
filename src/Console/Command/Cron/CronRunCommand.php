@@ -78,4 +78,3 @@ class CronRunCommand extends Command
         }
     }
 }
-

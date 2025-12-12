@@ -185,4 +185,3 @@ class OptimizeCommand extends Command
         return true; // Not a critical failure
     }
 }
-

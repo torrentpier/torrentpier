@@ -32,7 +32,7 @@ class MakeMigrationCommand extends Command
             ->addArgument(
                 'name',
                 InputArgument::REQUIRED,
-                'The name of the migration (e.g., "add_email_to_users" or "CreatePostsTable")'
+                'Migration name in CamelCase (e.g., CreateUsersTable, AddEmailColumn)'
             );
     }
 
@@ -42,10 +42,10 @@ class MakeMigrationCommand extends Command
 
         $this->title('Create Migration');
 
-        // Validate name
-        if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $name)) {
-            $this->error('Invalid migration name. Use only letters, numbers, and underscores.');
-            $this->line('Example: add_email_to_users, CreatePostsTable');
+        // Validate name - require CamelCase
+        if (!preg_match('/^[A-Z][a-zA-Z0-9]*$/', $name)) {
+            $this->error('Invalid migration name. Use CamelCase starting with uppercase.');
+            $this->line('Example: CreateUsersTable, AddEmailColumn, DropLegacyFields');
             return self::FAILURE;
         }
 
@@ -74,4 +74,3 @@ class MakeMigrationCommand extends Command
         }
     }
 }
-

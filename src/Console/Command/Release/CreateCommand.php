@@ -265,4 +265,3 @@ class CreateCommand extends Command
         return $exitCode;
     }
 }
-

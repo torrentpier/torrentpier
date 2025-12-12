@@ -172,11 +172,10 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
-     * Check if debug output is enabled
+     * Check if the debug output is enabled
      */
     protected function isDebug(): bool
     {
         return $this->output->isDebug();
     }
 }
-

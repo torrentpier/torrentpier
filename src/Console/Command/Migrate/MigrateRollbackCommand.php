@@ -14,6 +14,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 use TorrentPier\Console\Command\Command;
 use TorrentPier\Console\Helpers\PhinxManager;
 
@@ -36,10 +37,10 @@ class MigrateRollbackCommand extends Command
                 'Target migration version to rollback to (0 = rollback all)'
             )
             ->addOption(
-                'force',
-                'f',
+                'yes',
+                'y',
                 InputOption::VALUE_NONE,
-                'Force rollback without confirmation'
+                'Skip confirmation prompt'
             );
     }
 
@@ -48,7 +49,7 @@ class MigrateRollbackCommand extends Command
         $this->title('Migration Rollback');
 
         $target = $input->getOption('target');
-        $force = $input->getOption('force');
+        $skipConfirm = $input->getOption('yes');
 
         try {
             $phinx = new PhinxManager($input, $output);
@@ -72,7 +73,6 @@ class MigrateRollbackCommand extends Command
 
             if ($target === '0') {
                 $this->warning('This will rollback ALL migrations!');
-                $affectedCount = count($ranMigrations);
             } elseif ($target !== null) {
                 $targetVersion = (int) $target;
                 $affectedCount = count(array_filter(
@@ -81,17 +81,16 @@ class MigrateRollbackCommand extends Command
                 ));
                 $this->info(sprintf('Rolling back to version %d (%d migration(s))', $targetVersion, $affectedCount));
             } else {
-                $affectedCount = 1;
                 $lastMigration = end($ranMigrations);
                 $this->info(sprintf('Rolling back: %s', $lastMigration['name']));
             }
 
-            if (!$force) {
-                $this->line('');
-                $this->warning('⚠ This operation may cause data loss!');
-                $this->line('');
+            if (!$skipConfirm) {
+                $this->line();
+                $this->warning('This operation may cause data loss!');
+                $this->line();
 
-                if (!$this->confirm('Are you sure you want to rollback?', false)) {
+                if (!$this->confirm('Are you sure you want to rollback?')) {
                     $this->comment('Operation cancelled.');
                     return self::SUCCESS;
                 }
@@ -102,11 +101,11 @@ class MigrateRollbackCommand extends Command
             $targetVersion = $target !== null ? (int) $target : null;
             $phinx->rollback($targetVersion);
 
-            $this->line('');
+            $this->line();
             $this->success('Rollback completed successfully!');
 
             return self::SUCCESS;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->error('Rollback failed: ' . $e->getMessage());
 
             if ($this->isVerbose()) {

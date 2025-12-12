@@ -25,7 +25,7 @@ class PhinxManager
 {
     private Config $config;
     private Manager $manager;
-    private string $environment;
+    public private(set) string $environment;
 
     public function __construct(InputInterface $input, OutputInterface $output)
     {
@@ -75,30 +75,6 @@ class PhinxManager
     }
 
     /**
-     * Get current environment name
-     */
-    public function getEnvironment(): string
-    {
-        return $this->environment;
-    }
-
-    /**
-     * Get the Phinx Config
-     */
-    public function getConfig(): Config
-    {
-        return $this->config;
-    }
-
-    /**
-     * Get the Phinx Manager
-     */
-    public function getManager(): Manager
-    {
-        return $this->manager;
-    }
-
-    /**
      * Run all pending migrations
      */
     public function migrate(?int $target = null, bool $fake = false): void
@@ -109,7 +85,7 @@ class PhinxManager
     /**
      * Rollback migrations
      *
-     * @param int|null $target Target version to rollback to (null = rollback last)
+     * @param int|null $target Target version to roll back to (null = rollback last)
      */
     public function rollback(?int $target = null): void
     {
@@ -129,12 +105,10 @@ class PhinxManager
 
         $pending = 0;
         $ran = 0;
-        $missing = 0;
         $migrationList = [];
 
-        // Find missing migrations (in version log but file doesn't exist)
+        // Find missing migrations (in version log but a file doesn't exist)
         $missingVersions = array_diff_key($versions, $migrations);
-        $missing = count($missingVersions);
 
         foreach ($missingVersions as $version => $versionInfo) {
             $migrationList[] = [
@@ -175,7 +149,7 @@ class PhinxManager
         return [
             'pending' => $pending,
             'ran' => $ran,
-            'missing' => $missing,
+            'missing' => count($missingVersions),
             'migrations' => $migrationList,
         ];
     }
@@ -217,7 +191,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class {$className} extends AbstractMigration
+final class $className extends AbstractMigration
 {
     /**
      * Change Method.

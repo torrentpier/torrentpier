@@ -85,4 +85,3 @@ class CronListCommand extends Command
         return self::SUCCESS;
     }
 }
-

@@ -160,4 +160,3 @@ class CleanupCommand extends Command
         return $failed === 0 ? self::SUCCESS : self::FAILURE;
     }
 }
-
