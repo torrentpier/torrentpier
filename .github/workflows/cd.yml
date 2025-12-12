@@ -53,7 +53,7 @@ jobs:
         run: composer install --no-dev --no-interaction --no-ansi --prefer-dist --optimize-autoloader
 
       - name: Cleanup
-        run: php install/release_scripts/_cleanup.php && rm -rf install/release_scripts
+        run: php bull release:cleanup --force --no-interaction
 
       - name: Create archive
         id: create-zip
