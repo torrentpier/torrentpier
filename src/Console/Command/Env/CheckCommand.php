@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 use TorrentPier\Console\Command\Command;
+use TorrentPier\Console\Helpers\OutputHelper;
 
 /**
  * Check environment configuration
@@ -39,7 +40,10 @@ class CheckCommand extends Command
      * Optional but recommended variables
      */
     private const array RECOMMENDED_VARS = [
-        'DB_PORT' => ['default' => '3306', 'description' => 'Database port'],
+        'APP_DEBUG_MODE' => ['default' => false, 'description' => 'Enable debug mode'],
+        'APP_DEMO_MODE' => ['default' => false, 'description' => 'Enable demo mode'],
+        'DB_PORT' => ['default' => 3306, 'description' => 'Database port'],
+        'TP_PORT' => ['default' => 443, 'description' => 'Site port'],
     ];
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -49,7 +53,7 @@ class CheckCommand extends Command
         $errors = [];
         $warnings = [];
 
-        // Check .env file exists
+        // Check .env file (optional - env vars can come from system environment)
         $this->section('.env File');
         $envFile = BB_ROOT . '.env';
 
@@ -59,72 +63,73 @@ class CheckCommand extends Command
             // Check permissions
             $perms = substr(sprintf('%o', fileperms($envFile)), -4);
             if ($perms === '0644' || $perms === '0640' || $perms === '0600') {
-                $this->line("  <info>✓</info> Permissions are secure ({$perms})");
+                $this->line("  <info>✓</info> Permissions are secure ($perms)");
             } else {
-                $warnings[] = ".env has insecure permissions ({$perms}), recommended: 0644";
-                $this->line("  <comment>!</comment> Permissions: {$perms} (recommended: 0644)");
+                $warnings[] = ".env has insecure permissions ($perms), recommended: 0644";
+                $this->line("  <comment>!</comment> Permissions: $perms (recommended: 0644)");
             }
         } else {
-            $errors[] = '.env file not found';
-            $this->line('  <error>✗</error> .env file not found');
+            $this->line('  <comment>-</comment> .env file is not found (using system environment)');
         }
 
         // Check required variables
+        $this->line();
         $this->section('Required Variables');
-
         foreach (self::REQUIRED_VARS as $var => $description) {
             $value = env($var);
 
             if (empty($value)) {
-                $errors[] = "{$var} is not set";
-                $this->line("  <error>✗</error> {$var} - <comment>{$description}</comment>");
+                $errors[] = "$var is not set";
+                $this->line("  <error>✗</error> $var - <comment>$description</comment>");
             } else {
-                $displayValue = $this->maskSensitive($var, $value);
-                $this->line("  <info>✓</info> {$var} = {$displayValue}");
+                $displayValue = OutputHelper::maskSensitive($var, $value);
+                $this->line("  <info>✓</info> $var = $displayValue");
             }
         }
 
         // Check recommended variables
+        $this->line();
         $this->section('Optional Variables');
-
         foreach (self::RECOMMENDED_VARS as $var => $config) {
             $value = env($var);
             $default = $config['default'];
 
-            if (empty($value)) {
-                $this->line("  <comment>-</comment> {$var} not set (using default: {$default})");
+            if ($value === null) {
+                $defaultDisplay = is_bool($default) ? ($default ? 'true' : 'false') : $default;
+                $this->line("  <comment>-</comment> $var isn't set (using default: $defaultDisplay)");
             } else {
-                $this->line("  <info>✓</info> {$var} = {$value}");
+                $valueDisplay = is_bool($value) ? ($value ? 'true' : 'false') : $value;
+                $this->line("  <info>✓</info> $var = $valueDisplay");
             }
         }
 
         // Check APP_ENV value
+        $this->line();
         $this->section('Environment Mode');
-
-        $appEnv = env('APP_ENV', 'production');
+        $appEnv = env('APP_ENV');
         if ($appEnv === 'production') {
             $this->line('  <info>✓</info> Running in <info>production</info> mode');
         } elseif ($appEnv === 'development') {
             $this->line('  <comment>!</comment> Running in <comment>development</comment> mode');
             $warnings[] = 'Development mode is enabled - not recommended for production';
         } else {
-            $this->line("  <error>!</error> Unknown environment: {$appEnv}");
-            $warnings[] = "Unknown APP_ENV value: {$appEnv}";
+            $this->line("  <error>!</error> Unknown environment: $appEnv");
+            $warnings[] = "Unknown APP_ENV value: $appEnv";
         }
 
         // Database connection test
+        $this->line();
         $this->section('Database Connection');
-
         try {
             // Test connection using ORM
             $count = DB()->table(BB_CONFIG)->count();
             if ($count >= 0) {
                 $this->line('  <info>✓</info> Database connection successful');
 
-                // Show database info using raw query for VERSION()
+                // Show database version
                 $version = DB()->fetch_row("SELECT VERSION() as version");
                 if ($version) {
-                    $this->line("  <info>✓</info> MySQL version: {$version['version']}");
+                    $this->line("  <info>✓</info> Server version: {$version['version']}");
                 }
             }
         } catch (Throwable $e) {
@@ -136,8 +141,8 @@ class CheckCommand extends Command
         }
 
         // Check writable directories
+        $this->line();
         $this->section('Directory Permissions');
-
         $dirs = [
             'internal_data/cache' => CACHE_DIR,
             'internal_data/log' => LOG_DIR,
@@ -149,60 +154,38 @@ class CheckCommand extends Command
 
         foreach ($dirs as $name => $path) {
             if (!is_dir($path)) {
-                $warnings[] = "Directory not found: {$name}";
-                $this->line("  <comment>-</comment> {$name} (not found)");
+                $warnings[] = "Directory not found: $name";
+                $this->line("  <comment>-</comment> $name (not found)");
             } elseif (!is_writable($path)) {
-                $errors[] = "Directory not writable: {$name}";
-                $this->line("  <error>✗</error> {$name} (not writable)");
+                $errors[] = "Directory not writable: $name";
+                $this->line("  <error>✗</error> $name (not writable)");
             } else {
-                $this->line("  <info>✓</info> {$name}");
+                $this->line("  <info>✓</info> $name");
             }
         }
 
         // Summary
         $this->line();
         $this->section('Summary');
-
         if (empty($errors) && empty($warnings)) {
             $this->success('All checks passed!');
             return self::SUCCESS;
         }
 
         if (!empty($errors)) {
-            $this->error(count($errors) . ' error(s) found:');
-            foreach ($errors as $error) {
-                $this->line("  • {$error}");
-            }
+            $this->error([
+                count($errors) . ' error(s):',
+                ...array_map(fn($e) => "• $e", $errors),
+            ]);
         }
 
         if (!empty($warnings)) {
-            $this->line();
-            $this->warning(count($warnings) . ' warning(s):');
-            foreach ($warnings as $warning) {
-                $this->line("  • {$warning}");
-            }
+            $this->warning([
+                count($warnings) . ' warning(s):',
+                ...array_map(fn($w) => "• $w", $warnings),
+            ]);
         }
 
         return empty($errors) ? self::SUCCESS : self::FAILURE;
     }
-
-    /**
-     * Mask sensitive values for display
-     */
-    private function maskSensitive(string $var, string $value): string
-    {
-        $sensitive = ['PASSWORD', 'SECRET', 'KEY', 'TOKEN'];
-
-        foreach ($sensitive as $keyword) {
-            if (stripos($var, $keyword) !== false) {
-                if (strlen($value) <= 4) {
-                    return '****';
-                }
-                return substr($value, 0, 2) . str_repeat('*', strlen($value) - 4) . substr($value, -2);
-            }
-        }
-
-        return $value;
-    }
 }
-

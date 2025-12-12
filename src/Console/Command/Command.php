@@ -38,7 +38,7 @@ abstract class Command extends SymfonyCommand
     /**
      * Display a success message
      */
-    protected function success(string $message): void
+    protected function success(string|array $message): void
     {
         $this->io->success($message);
     }
@@ -46,7 +46,7 @@ abstract class Command extends SymfonyCommand
     /**
      * Display an error message
      */
-    protected function error(string $message): void
+    protected function error(string|array $message): void
     {
         $this->io->error($message);
     }
@@ -54,7 +54,7 @@ abstract class Command extends SymfonyCommand
     /**
      * Display a warning message
      */
-    protected function warning(string $message): void
+    protected function warning(string|array $message): void
     {
         $this->io->warning($message);
     }
