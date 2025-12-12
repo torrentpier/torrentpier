@@ -5638,12 +5638,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/torrentpier/translations.git",
-                "reference": "676dc3a2427a915bd1968a0402fffd0984f1b523"
+                "reference": "7f2a21fd5e3ebfe3b1fc31a60b2b41397c74a3e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/torrentpier/translations/zipball/676dc3a2427a915bd1968a0402fffd0984f1b523",
-                "reference": "676dc3a2427a915bd1968a0402fffd0984f1b523",
+                "url": "https://api.github.com/repos/torrentpier/translations/zipball/7f2a21fd5e3ebfe3b1fc31a60b2b41397c74a3e8",
+                "reference": "7f2a21fd5e3ebfe3b1fc31a60b2b41397c74a3e8",
                 "shasum": ""
             },
             "require": {
@@ -5689,7 +5689,7 @@
                 "issues": "https://github.com/torrentpier/torrentpier/issues",
                 "source": "https://github.com/torrentpier/translations/tree/main"
             },
-            "time": "2025-12-11T22:27:26+00:00"
+            "time": "2025-12-12T23:31:35+00:00"
         },
         {
             "name": "tracy/tracy",
