@@ -34,14 +34,16 @@ class Application extends SymfonyApplication
     }
 
     /**
-     * Detect application version from composer.json or config
+     * Detect application version from config
      */
     private function detectVersion(): string
     {
-        // Try to get version from bb_cfg (set by config.php)
-        global $bb_cfg;
-        if (isset($bb_cfg['tp_version'])) {
-            return $bb_cfg['tp_version'];
+        // Try to get version from config (set by config.php)
+        if (function_exists('config')) {
+            $version = config()->get('tp_version');
+            if ($version) {
+                return $version;
+            }
         }
 
         // Fallback: try to read from composer.json
