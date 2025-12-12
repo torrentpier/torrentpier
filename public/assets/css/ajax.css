@@ -28,7 +28,7 @@ var.ajax-params {
 }
 
 #ajax-loading {
-  background: rgba(0, 0, 0, 0.5) url(../images/loading.gif) no-repeat center center;
+  background: rgba(0, 0, 0, 0.5) url(../images/theme/loading.gif) no-repeat center center;
 }
 
 #ajax-error {
@@ -44,7 +44,7 @@ var.ajax-params {
 }
 
 .loading-1 {
-  background: transparent url(../images/loading.gif) no-repeat left center;
+  background: transparent url(../images/theme/loading.gif) no-repeat left center;
   padding-left: 22px;
   padding-block: inherit;
 }

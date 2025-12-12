@@ -9,7 +9,7 @@
 .menu-root {
   padding-right: 13px;
   white-space: nowrap;
-  background: transparent url(../images/menu_open.gif) no-repeat right;
+  background: transparent url(../images/theme/menu_open.gif) no-repeat right;
 }
 
 .menu-alt1 {

@@ -21,7 +21,7 @@
   margin: 8px 0 2px 0;
   color: #333333;
   text-indent: 0.5em;
-  background: transparent url(../images/hr200_ltr_gradient.jpg) no-repeat left bottom;
+  background: transparent url(../images/theme/hr200_ltr_gradient.jpg) no-repeat left bottom;
 }
 
 #sidebar1 h3 a {
@@ -61,7 +61,7 @@
   margin: 0 0 2px 0;
   color: #333333;
   text-indent: 0.5em;
-  background: transparent url(../images/hr200_ltr_gradient.jpg) no-repeat left bottom;
+  background: transparent url(../images/theme/hr200_ltr_gradient.jpg) no-repeat left bottom;
 }
 
 #sidebar2 h3 a {
@@ -102,7 +102,7 @@
 
 /* Main tracker categories list */
 #tr_main_cats ul {
-  list-style-image: url(../images/arrow1.gif);
+  list-style-image: url(../images/theme/arrow1.gif);
 }
 
 #tr_main_cats li {
