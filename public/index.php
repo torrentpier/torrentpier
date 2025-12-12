@@ -68,7 +68,7 @@ switch ($result['action']) {
         // Bootstrap and route
         define('BB_ROOT', './');
         define('FRONT_CONTROLLER', true);
-        require_once dirname(__DIR__) . '/common.php';
+        require_once dirname(__DIR__) . '/library/common.php';
 
         $router = \TorrentPier\Router\Router::getInstance();
 

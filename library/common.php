@@ -13,7 +13,7 @@ if (isset($_REQUEST['GLOBALS'])) {
 
 define('TIMESTART', utime());
 define('TIMENOW', time());
-define('BB_PATH', __DIR__);
+define('BB_PATH', dirname(__DIR__));
 
 if (empty($_SERVER['REMOTE_ADDR'])) {
     $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
