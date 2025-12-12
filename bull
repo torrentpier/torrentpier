@@ -22,5 +22,12 @@ require __DIR__ . '/common.php';
 
 // Run the console application
 $application = new TorrentPier\Console\Application();
-$application->run();
 
+try {
+    $exitCode = $application->run();
+} catch (Exception $e) {
+    fwrite(STDERR, "Error: {$e->getMessage()}\n");
+    $exitCode = 1;
+}
+
+exit($exitCode);
