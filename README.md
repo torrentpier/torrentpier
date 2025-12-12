@@ -81,9 +81,10 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
    ```shell
    git clone --branch master --depth 1 https://github.com/torrentpier/torrentpier.git .
    ```
-3. After completing, execute the command below and follow the instructions
+3. Install dependencies and run the installation wizard
    ```shell
-   php install.php
+   composer install
+   php bull app:install
    ```
 4. Voila! ✨
 
@@ -98,23 +99,18 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
    ```shell
    git clone --branch master --depth 1 https://github.com/torrentpier/torrentpier.git .
    ```
-4. After, run this command in the project directory to install Composer dependencies
+4. Install Composer dependencies
    ```shell
    composer install --no-dev --prefer-dist --optimize-autoloader
    ```
-5. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
-6. Create a database and run migrations to set up the schema
+5. Run the installation wizard (configures `.env`, creates database, runs migrations)
    ```shell
-   php vendor/bin/phinx migrate --configuration=phinx.php
+   php bull app:install
    ```
-7. Provide write permissions to the specified folders:
-   * `data/avatars`, `data/uploads`, `data/uploads/thumbs`
-   * `internal_data/cache`, `internal_data/log`, `internal_data/triggers`
-   * `sitemap`
-8. Voila! ✨
+6. Voila! ✨
 
 > [!TIP]
-> You can automate steps 4-7 by running `php install.php` instead, which will guide you through the setup process interactively.
+> The `php bull app:install` wizard handles all configuration: environment setup, database creation, migrations, and permissions.
 
 ### Using Docker 🐳
 
@@ -172,7 +168,7 @@ For detailed testing documentation, see [tests/README.md](tests/README.md).
 
 ## 📌 Our recommendations
 
-* *It's recommended to run `cron.php`.* - For significant tracker speed increase it may be required to replace the built-in cron.php with an operating system daemon.
+* *Set up cron jobs.* - Run `php bull cron:run` every minute for maintenance tasks. For high-traffic trackers, consider running it more frequently or as a daemon.
 * *Local configuration copy.* - You can override the settings using the local configuration file `library/config.local.php`.
 
 ## 💚 Contributing / Contributors

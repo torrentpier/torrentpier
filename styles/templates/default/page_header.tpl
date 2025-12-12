@@ -106,7 +106,7 @@ $(document).ready(function () {
 });
 <!-- ENDIF -->
 
-var ajax = new Ajax('{SITE_URL}{{ config('ajax_url') }}', 'POST', 'json');
+var ajax = new Ajax('{SITE_URL}ajax', 'POST', 'json');
 
 function getElText (e)
 {

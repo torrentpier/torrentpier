@@ -18,12 +18,14 @@ RUN install-php-extensions \
     xmlwriter
 
 RUN apk add --no-cache dcron && \
-    echo "*/10 * * * * cd /app/public && php cron.php >> /proc/1/fd/1 2>&1" > /etc/crontabs/root
+    echo "*/10 * * * * cd /app/public && php bull cron:run >> /proc/1/fd/1 2>&1" > /etc/crontabs/root
 
 WORKDIR /app/public
 COPY . /app/public
 RUN php install/release_scripts/_cleanup.php && rm -rf install/release_scripts
-RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader && chmod +x ./install/docker/docker-entrypoint.sh && \
+RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader && \
+    chmod +x ./bull ./install/docker/docker-entrypoint.sh && \
+    ln -s /app/public/bull /usr/local/bin/bull && \
     cp ./install/docker/php.ini /usr/local/etc/php/php.ini
 
 ENTRYPOINT "/app/public/install/docker/docker-entrypoint.sh"
