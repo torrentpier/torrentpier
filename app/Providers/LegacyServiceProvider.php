@@ -48,7 +48,7 @@ class LegacyServiceProvider extends ServiceProvider
 
         // User session (legacy)
         $this->app->singleton(User::class, function () {
-            return User::getInstance();
+            return new User;
         });
 
         // Register aliases
