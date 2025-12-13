@@ -10,9 +10,12 @@
 
 namespace TorrentPier\Console\Commands\System;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Application;
+use TorrentPier\Config;
 use TorrentPier\Console\Commands\Command;
 
 /**
@@ -24,15 +27,34 @@ use TorrentPier\Console\Commands\Command;
 )]
 class AboutCommand extends Command
 {
+    /**
+     * Create a new about command
+     *
+     * @param Config $config The configuration instance
+     * @param Application|null $app The application container (optional)
+     * @throws BindingResolutionException
+     */
+    public function __construct(
+        private readonly Config $config,
+        ?Application $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('TorrentPier - Bull-powered BitTorrent tracker engine');
 
+        // Use injected config or fall back to constant
+        $rootPath = \defined('BB_ROOT') ? BB_ROOT : $this->app->basePath();
+        $version = $this->config->get('tp_version', 'dev');
+
         $this->definitionList(
+            ['Version' => $version],
             ['PHP Version' => PHP_VERSION],
             ['PHP SAPI' => PHP_SAPI],
             ['Operating System' => PHP_OS],
-            ['TorrentPier Root' => BB_ROOT],
+            ['TorrentPier Root' => $rootPath],
         );
 
         $this->section('Environment');

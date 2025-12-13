@@ -10,21 +10,41 @@
 
 namespace TorrentPier\Console\Commands;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use TorrentPier\Application;
 
 /**
  * Base command class for TorrentPier CLI commands
  *
- * Provides common functionality and helper methods for all commands
+ * Provides common functionality and helper methods for all commands.
+ * Supports dependency injection via the Application container.
  */
 abstract class Command extends SymfonyCommand
 {
+    /**
+     * The application container instance
+     */
+    protected Application $app;
+
     protected SymfonyStyle $io;
     protected InputInterface $input;
     protected OutputInterface $output;
+
+    /**
+     * Create a new command instance
+     *
+     * @param Application|null $app The application container (optional for backward compatibility)
+     * @throws BindingResolutionException
+     */
+    public function __construct(?Application $app = null)
+    {
+        $this->app = $app ?? app();
+        parent::__construct();
+    }
 
     /**
      * Initialize the command
@@ -165,7 +185,7 @@ abstract class Command extends SymfonyCommand
     }
 
     /**
-     * Check if very verbose output is enabled
+     * Check if a very verbose output is enabled
      */
     protected function isVeryVerbose(): bool
     {

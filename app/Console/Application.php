@@ -14,26 +14,54 @@ use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ReflectionClass;
+use ReflectionException;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command;
 use Throwable;
+use TorrentPier\Application as Container;
 use TorrentPier\Console\Commands\Command as BaseCommand;
 
 /**
  * Bull Console Application
  *
- * Main entry point for all TorrentPier CLI commands
+ * Main entry point for all TorrentPier CLI commands.
+ * Supports dependency injection via the Application container.
  */
 class Application extends SymfonyApplication
 {
     /**
-     * Create a new console application
+     * The DI container instance
      */
-    public function __construct()
+    protected ?Container $container = null;
+
+    /**
+     * Create a new console application
+     *
+     * @param Container|null $container The DI container (optional for backward compatibility)
+     */
+    public function __construct(?Container $container = null)
     {
+        $this->container = $container;
+
         parent::__construct('Bull CLI', $this->detectVersion());
 
         $this->discoverCommands();
+    }
+
+    /**
+     * Get the DI container instance
+     */
+    public function getContainer(): ?Container
+    {
+        return $this->container;
+    }
+
+    /**
+     * Set the DI container instance
+     */
+    public function setContainer(Container $container): void
+    {
+        $this->container = $container;
     }
 
     /**
@@ -129,20 +157,54 @@ class Application extends SymfonyApplication
                 continue;
             }
 
-            // Must be instantiable (has a public constructor without required params)
-            if (!$reflection->isInstantiable()) {
-                continue;
-            }
-
-            // Register the command
+            // Register the command (using container if available)
             try {
-                /** @var Command $command */
-                $command = $reflection->newInstance();
-                $this->add($command);
+                $command = $this->resolveCommand($className, $reflection);
+                if ($command !== null) {
+                    $this->add($command);
+                }
             } catch (Throwable) {
                 // Skip commands that cannot be instantiated
             }
         }
+    }
+
+    /**
+     * Resolve a command instance, using the DI container if available
+     * @throws ReflectionException
+     */
+    private function resolveCommand(string $className, ReflectionClass $reflection): ?Command
+    {
+        // Try to resolve via container first (enables constructor injection)
+        if ($this->container !== null) {
+            try {
+                /** @var Command $command */
+                $command = $this->container->make($className);
+
+                return $command;
+            } catch (Throwable) {
+                // Container couldn't resolve - fall through to direct instantiation
+            }
+        }
+
+        // Fall back to direct instantiation (requires no constructor params)
+        if (!$reflection->isInstantiable()) {
+            return null;
+        }
+
+        // Check if the constructor has required parameters
+        $constructor = $reflection->getConstructor();
+        if ($constructor !== null) {
+            // If there's a required parameter without a default, skip this command (it needs DI, but no container is available)
+            if (array_any($constructor->getParameters(), fn ($param) => !$param->isOptional() && !$param->isDefaultValueAvailable())) {
+                return null;
+            }
+        }
+
+        /** @var Command $command */
+        $command = $reflection->newInstance();
+
+        return $command;
     }
 
     /**
