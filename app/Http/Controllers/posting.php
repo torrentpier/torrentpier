@@ -8,6 +8,34 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+/*
+ * ===========================================================================
+ * Refactor to Modern Controller
+ * ===========================================================================
+ * Target: Convert to PSR-7 controller with constructor dependency injection
+ *
+ * Dependencies to inject:
+ * - TorrentPier\Config (configuration access)
+ * - TorrentPier\Database\Database (database operations)
+ * - TorrentPier\Legacy\User (user session and permissions)
+ * - TorrentPier\Http\Request (HTTP request handling)
+ * - TorrentPier\Legacy\Templates (template rendering)
+ * - TorrentPier\Legacy\Language (translations)
+ * - TorrentPier\Legacy\BBCode (BBCode parsing)
+ *
+ * Target namespace: TorrentPier\Http\Controllers
+ * Target class: PostingController
+ *
+ * Key refactoring tasks:
+ * 1. Extract procedural code into controller methods
+ * 2. Replace global function calls with injected dependencies
+ * 3. Implement PSR-7 request/response handling
+ * 4. Add proper validation using dedicated validator classes
+ * 5. Extract business logic into PostService
+ * 6. Add proper error handling with exceptions
+ * ===========================================================================
+ */
+
 require INC_DIR . '/bbcode.php';
 
 page_cfg('load_tpl_vars', [

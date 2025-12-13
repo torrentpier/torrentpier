@@ -8,6 +8,34 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+/*
+ * ===========================================================================
+ * Refactor to Modern Controller
+ * ===========================================================================
+ * Target: Convert to PSR-7 controller with constructor dependency injection
+ *
+ * Dependencies to inject:
+ * - TorrentPier\Config (configuration access)
+ * - TorrentPier\Database\Database (database operations)
+ * - TorrentPier\Search\SearchParams (already exists, good!)
+ * - TorrentPier\Legacy\User (user session and permissions)
+ * - TorrentPier\Http\Request (HTTP request handling)
+ * - TorrentPier\Legacy\Templates (template rendering)
+ * - TorrentPier\Cache\UnifiedCacheSystem (search results caching)
+ *
+ * Target namespace: TorrentPier\Http\Controllers
+ * Target class: SearchController
+ *
+ * Key refactoring tasks:
+ * 1. Extract procedural code into controller methods (form, results, etc.)
+ * 2. Replace global function calls with injected dependencies
+ * 3. Implement PSR-7 request/response handling
+ * 4. Extract business logic into SearchService
+ * 5. Add proper validation for search parameters
+ * 6. Implement search result caching with cache tags
+ * ===========================================================================
+ */
+
 require INC_DIR . '/bbcode.php';
 
 use TorrentPier\Search\SearchParams;

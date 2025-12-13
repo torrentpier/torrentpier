@@ -8,6 +8,32 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+/*
+ * ===========================================================================
+ * Refactor to Modern Controller
+ * ===========================================================================
+ * Target: Convert to PSR-7 controller with constructor dependency injection
+ *
+ * Dependencies to inject:
+ * - TorrentPier\Config (configuration access)
+ * - TorrentPier\Database\Database (database operations)
+ * - TorrentPier\Legacy\User (user session and permissions)
+ * - TorrentPier\Http\Request (HTTP request handling)
+ * - TorrentPier\Legacy\Templates (template rendering)
+ *
+ * Target namespace: TorrentPier\Http\Controllers
+ * Target class: MemberListController
+ *
+ * Key refactoring tasks:
+ * 1. Extract procedural code into controller method (index)
+ * 2. Replace global function calls with injected dependencies
+ * 3. Implement PSR-7 request/response handling
+ * 4. Extract business logic into UserService
+ * 5. Add proper pagination via PaginationService
+ * 6. Add sorting and filtering options
+ * ===========================================================================
+ */
+
 user()->session_start(['req_login' => true]);
 
 $start = abs(request()->getInt('start'));

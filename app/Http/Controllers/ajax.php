@@ -8,6 +8,32 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+/*
+ * ===========================================================================
+ * Refactor to Modern Controller
+ * ===========================================================================
+ * Target: Convert to PSR-7 controller with constructor dependency injection
+ *
+ * Dependencies to inject:
+ * - TorrentPier\Config (configuration access)
+ * - TorrentPier\Database\Database (database operations)
+ * - TorrentPier\Legacy\User (user session and permissions)
+ * - TorrentPier\Http\Request (HTTP request handling)
+ * - TorrentPier\Legacy\Ajax (AJAX response handling)
+ *
+ * Target namespace: TorrentPier\Http\Controllers\Api
+ * Target class: AjaxController
+ *
+ * Key refactoring tasks:
+ * 1. Split into multiple API controllers based on functionality
+ * 2. Implement proper JSON responses with PSR-7
+ * 3. Add proper API authentication and rate limiting
+ * 4. Extract business logic into dedicated services
+ * 5. Add request validation middleware
+ * 6. Implement proper error handling with JSON responses
+ * ===========================================================================
+ */
+
 define('IN_AJAX', true);
 
 // Init Ajax class
