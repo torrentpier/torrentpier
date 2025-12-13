@@ -18,22 +18,16 @@ interface CaptchaInterface
 {
     /**
      * Constructor
-     *
-     * @param array $settings
      */
     public function __construct(array $settings);
 
     /**
      * Returns captcha widget
-     *
-     * @return string
      */
     public function get(): string;
 
     /**
      * Checking captcha answer
-     *
-     * @return bool
      */
     public function check(): bool;
 }

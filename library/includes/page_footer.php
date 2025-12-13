@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -29,9 +30,10 @@ if (defined('PAGE_HEADER_SENT')) {
 if (tracy()->isEnabled()) {
     $captured_exec_time = utime() - TIMESTART;
     $captured_sql_time = 0;
+
     try {
         $captured_sql_time = DB()->sql_timetotal;
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
     }
 
     tracy()->capturePerformanceData($captured_exec_time, $captured_sql_time);

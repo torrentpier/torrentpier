@@ -21,7 +21,7 @@ use TorrentPier\Console\Commands\Command;
  */
 #[AsCommand(
     name: 'storage:link',
-    description: 'Create a symbolic link from "public/storage" to "storage/app/public"'
+    description: 'Create a symbolic link from "public/storage" to "storage/app/public"',
 )]
 class LinkCommand extends Command
 {
@@ -32,13 +32,13 @@ class LinkCommand extends Command
                 'force',
                 'f',
                 InputOption::VALUE_NONE,
-                'Overwrite existing symlink'
+                'Overwrite existing symlink',
             )
             ->addOption(
                 'relative',
                 'r',
                 InputOption::VALUE_NONE,
-                'Create a relative symlink (default behavior)'
+                'Create a relative symlink (default behavior)',
             );
     }
 
@@ -52,8 +52,9 @@ class LinkCommand extends Command
 
         // Check if the target directory exists
         if (!is_dir($target)) {
-            $this->error("Target directory does not exist: $target");
+            $this->error("Target directory does not exist: {$target}");
             $this->comment('Run the application installation first.');
+
             return self::FAILURE;
         }
 
@@ -69,11 +70,13 @@ class LinkCommand extends Command
                         ['Link' => $link],
                         ['Target' => $relativePath],
                     );
+
                     return self::SUCCESS;
                 }
 
                 $this->warning('Symlink exists but points to a different location: ' . $currentTarget);
                 $this->comment('Use --force to overwrite.');
+
                 return self::FAILURE;
             }
 
@@ -82,8 +85,9 @@ class LinkCommand extends Command
                 ? 'Existing symlink removed.'
                 : 'Existing symlink removed (was pointing to: ' . $currentTarget . ')');
         } elseif (file_exists($link)) {
-            $this->error("Path exists and is not a symlink: $link");
+            $this->error("Path exists and is not a symlink: {$link}");
             $this->comment('Remove or rename this file/directory manually before creating the symlink.');
+
             return self::FAILURE;
         }
 
@@ -100,6 +104,7 @@ class LinkCommand extends Command
                 ['Link' => $link],
                 ['Target' => $relativePath],
             );
+
             return self::SUCCESS;
         }
 

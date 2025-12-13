@@ -15,10 +15,10 @@ page_cfg('load_tpl_vars', [
 ]);
 page_cfg('allow_robots', false);
 
-$submit = (bool) request()->get('post');
-$refresh = $preview = (bool) request()->get('preview');
-$delete = (bool) request()->get('delete');
-$mode = (string) request()->get('mode');
+$submit = (bool)request()->get('post');
+$refresh = $preview = (bool)request()->get('preview');
+$delete = (bool)request()->get('delete');
+$mode = (string)request()->get('mode');
 $del_attachment = request()->post->has('del_attachment');
 $confirm = request()->post->has('confirm');
 
@@ -91,16 +91,16 @@ switch ($mode) {
         if (!$forum_id) {
             bb_simple_die(__('FORUM_NOT_EXIST'));
         }
-        $sql = "SELECT * FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
+        $sql = 'SELECT * FROM ' . BB_FORUMS . " WHERE forum_id = {$forum_id} LIMIT 1";
         break;
 
     case 'reply':
         if (!$topic_id) {
             bb_die(__('NO_TOPIC_ID'));
         }
-        $sql = "SELECT f.*, t.*
-			FROM " . BB_FORUMS . " f, " . BB_TOPICS . " t
-			WHERE t.topic_id = $topic_id
+        $sql = 'SELECT f.*, t.*
+			FROM ' . BB_FORUMS . ' f, ' . BB_TOPICS . " t
+			WHERE t.topic_id = {$topic_id}
 				AND f.forum_id = t.forum_id
 			LIMIT 1";
         break;
@@ -115,20 +115,20 @@ switch ($mode) {
         $select_sql = 'SELECT f.*, t.*, p.*';
         $select_sql .= !$submit ? ', pt.*, u.username, u.user_id' : '';
 
-        $from_sql = "FROM " . BB_POSTS . " p, " . BB_TOPICS . " t, " . BB_FORUMS . " f";
-        $from_sql .= !$submit ? ", " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u" : '';
+        $from_sql = 'FROM ' . BB_POSTS . ' p, ' . BB_TOPICS . ' t, ' . BB_FORUMS . ' f';
+        $from_sql .= !$submit ? ', ' . BB_POSTS_TEXT . ' pt, ' . BB_USERS . ' u' : '';
 
         $where_sql = "
-			WHERE p.post_id = $post_id
+			WHERE p.post_id = {$post_id}
 			AND t.topic_id = p.topic_id
 			AND f.forum_id = p.forum_id
 		";
-        $where_sql .= (!$submit) ? "
+        $where_sql .= (!$submit) ? '
 			AND pt.post_id = p.post_id
 			AND u.user_id = p.poster_id
-		" : '';
+		' : '';
 
-        $sql = "$select_sql $from_sql $where_sql LIMIT 1";
+        $sql = "{$select_sql} {$from_sql} {$where_sql} LIMIT 1";
         break;
 
     default:
@@ -160,7 +160,7 @@ if ($post_info = DB()->fetch_row($sql)) {
         $post_data['poster_id'] = $post_info['poster_id'];
 
         $selected_rg = $post_info['poster_rg_id'];
-        $switch_rg_sig = (bool) $post_info['attach_rg_sig'];
+        $switch_rg_sig = (bool)$post_info['attach_rg_sig'];
 
         // Can this user edit/delete the post?
         if ($post_info['poster_id'] != userdata('user_id') && !$is_auth['auth_mod']) {
@@ -195,31 +195,31 @@ if (!$is_auth[$is_auth_type]) {
 
     switch ($mode) {
         case 'newtopic':
-            $redirect = "mode=newtopic&" . POST_FORUM_URL . "=$forum_id";
+            $redirect = 'mode=newtopic&' . POST_FORUM_URL . "={$forum_id}";
             break;
         case 'new_rel':
-            $redirect = "mode=new_rel&" . POST_FORUM_URL . "=$forum_id";
+            $redirect = 'mode=new_rel&' . POST_FORUM_URL . "={$forum_id}";
             break;
         case 'reply':
-            $redirect = "mode=reply&" . POST_TOPIC_URL . "=$topic_id";
+            $redirect = 'mode=reply&' . POST_TOPIC_URL . "={$topic_id}";
             break;
         case 'quote':
         case 'editpost':
-            $redirect = "mode=quote&" . POST_POST_URL . "=$post_id";
+            $redirect = 'mode=quote&' . POST_POST_URL . "={$post_id}";
             break;
         default:
             $redirect = '';
     }
-    redirect(LOGIN_URL . "?redirect=/" . POSTING_URL . "?$redirect");
+    redirect(LOGIN_URL . '?redirect=/' . POSTING_URL . "?{$redirect}");
 }
 
 if ($mode == 'new_rel') {
     if ($tor_status = implode(',', config()->get('tor_cannot_new'))) {
-        $sql = DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
-			FROM " . BB_BT_TORRENTS . " tor, " . BB_TOPICS . " t
-			WHERE poster_id = " . userdata('user_id') . "
+        $sql = DB()->fetch_rowset('SELECT t.topic_title, t.topic_id, tor.tor_status
+			FROM ' . BB_BT_TORRENTS . ' tor, ' . BB_TOPICS . ' t
+			WHERE poster_id = ' . userdata('user_id') . "
 				AND tor.topic_id = t.topic_id
-				AND tor.tor_status IN ($tor_status)
+				AND tor.tor_status IN ({$tor_status})
 			ORDER BY tor.reg_time
 		");
 
@@ -237,7 +237,7 @@ if ($mode == 'new_rel') {
 
 // Disallowed release editing with a certain status
 if (!empty(config()->get('tor_cannot_edit')) && $post_info['allow_reg_tracker'] && $post_data['first_post'] && !IS_AM) {
-    if ($tor_status = DB()->fetch_row("SELECT tor_status FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id AND forum_id = $forum_id AND tor_status IN(" . implode(',', config()->get('tor_cannot_edit')) . ") LIMIT 1")) {
+    if ($tor_status = DB()->fetch_row('SELECT tor_status FROM ' . BB_BT_TORRENTS . " WHERE topic_id = {$topic_id} AND forum_id = {$forum_id} AND tor_status IN(" . implode(',', config()->get('tor_cannot_edit')) . ') LIMIT 1')) {
         bb_die(__('NOT_EDIT_TOR_STATUS') . ':&nbsp;<span title="' . __('TOR_STATUS_NAME')[$tor_status['tor_status']] . '">' . config()->get('tor_icons')[$tor_status['tor_status']] . '&nbsp;' . __('TOR_STATUS_NAME')[$tor_status['tor_status']] . '</span>.');
     }
 }
@@ -247,7 +247,7 @@ if ($del_attachment && $mode == 'editpost' && $post_data['first_post']) {
     $can_delete = $post_data['poster_post'] || $is_auth['auth_mod'];
 
     if ($can_delete && $post_info['attach_ext_id']) {
-        \TorrentPier\Attachment::delete($topic_id);
+        TorrentPier\Attachment::delete($topic_id);
 
         // Refresh post_info
         $post_info['attach_ext_id'] = 0;
@@ -267,12 +267,12 @@ if ($submit || $refresh) {
             $robots_indexing = true;
         }
     }
-    $notify_user = (int) request()->post->has('notify');
+    $notify_user = (int)request()->post->has('notify');
 } else {
     $notify_user = bf(userdata('user_opt'), 'user_opt', 'user_notify');
 
     if (!IS_GUEST && $mode != 'newtopic' && !$notify_user) {
-        $notify_user = (int) DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . userdata('user_id'));
+        $notify_user = (int)DB()->fetch_row('SELECT topic_id FROM ' . BB_TOPICS_WATCH . " WHERE topic_id = {$topic_id} AND user_id = " . userdata('user_id'));
     }
 }
 
@@ -283,13 +283,13 @@ $update_post_time = request()->post->has('update_post_time');
 $topic_has_new_posts = false;
 
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && request()->cookies->has(COOKIE_TOPIC)) {
-    if ($topic_last_read = max((int) (tracking_topics()[$topic_id] ?? 0), (int) (tracking_forums()[$forum_id] ?? 0))) {
-        $sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
-			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u
-			WHERE p.topic_id = " . (int) $topic_id . "
+    if ($topic_last_read = max((int)(tracking_topics()[$topic_id] ?? 0), (int)(tracking_forums()[$forum_id] ?? 0))) {
+        $sql = 'SELECT p.*, pt.post_text, u.username, u.user_rank
+			FROM ' . BB_POSTS . ' p, ' . BB_POSTS_TEXT . ' pt, ' . BB_USERS . ' u
+			WHERE p.topic_id = ' . (int)$topic_id . "
 				AND u.user_id = p.poster_id
 				AND pt.post_id = p.post_id
-				AND p.post_time > $topic_last_read
+				AND p.post_time > {$topic_last_read}
 			ORDER BY p.post_time
 			LIMIT " . config()->get('posts_per_page');
 
@@ -317,7 +317,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 // Confirm deletion
 if (($delete || $mode == 'delete') && !$confirm) {
     if (request()->post->has('cancel')) {
-        redirect(POST_URL . "$post_id#$post_id");
+        redirect(POST_URL . "{$post_id}#{$post_id}");
     }
     $hidden_fields = [
         POST_POST_URL => $post_id,
@@ -346,14 +346,14 @@ if (($delete || $mode == 'delete') && !$confirm) {
             $attach_rg_sig = (request()->post->has('attach_rg_sig') && $poster_rg_raw != -1) ? 1 : 0;
             $poster_rg_id = ($poster_rg_raw != -1) ? $poster_rg_raw : 0;
 
-            \TorrentPier\Legacy\Post::prepare_post($mode, $post_data, $error_msg, $username, $subject, $message);
+            TorrentPier\Legacy\Post::prepare_post($mode, $post_data, $error_msg, $username, $subject, $message);
 
             if (!$error_msg) {
                 $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
 
-                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int) $robots_indexing, (bool) $post_info['allow_reg_tracker'], (bool) $is_auth['auth_mod']);
+                TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing, (bool)$post_info['allow_reg_tracker'], (bool)$is_auth['auth_mod']);
 
-                $post_url = POST_URL . "$post_id#$post_id";
+                $post_url = POST_URL . "{$post_id}#{$post_id}";
                 $post_msg = ($mode == 'editpost') ? __('EDITED') : __('STORED');
                 $onclick = ($mode == 'editpost') ? 'onclick="return post2url(this.href);"' : '';
                 $return_message .= $post_msg . '<br /><br />
@@ -364,9 +364,9 @@ if (($delete || $mode == 'delete') && !$confirm) {
 
         case 'delete':
             if (!$post_data['first_post']) {
-                \TorrentPier\Legacy\Post::delete_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id);
+                TorrentPier\Legacy\Post::delete_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id);
             } else {
-                redirect('modcp?' . POST_TOPIC_URL . "=$topic_id&mode=delete&sid=" . userdata('session_id'));
+                redirect('modcp?' . POST_TOPIC_URL . "={$topic_id}&mode=delete&sid=" . userdata('session_id'));
             }
             break;
     }
@@ -374,7 +374,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
     if (!$error_msg) {
         if (!in_array($mode, ['editpost', 'delete'])) {
             $user_id = ($mode == 'reply' || $mode == 'newtopic') ? userdata('user_id') : $post_data['poster_id'];
-            \TorrentPier\Legacy\Post::update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
+            TorrentPier\Legacy\Post::update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
         }
         // Handle file upload for the first post in tracker forums
         $is_first_post = $mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']);
@@ -384,10 +384,10 @@ if (($delete || $mode == 'delete') && !$confirm) {
         $has_file = $fileData && $fileData['error'] === UPLOAD_ERR_OK;
 
         if ($can_upload && $has_file && (!$file_attached || $mode == 'editpost')) {
-            $result = \TorrentPier\Attachment::store(
+            $result = TorrentPier\Attachment::store(
                 $topic_id,
                 $fileData,
-                !empty($post_info['tracker_status'])
+                !empty($post_info['tracker_status']),
             );
             if (!$result['success']) {
                 $error_msg = $result['error'];
@@ -395,7 +395,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
         }
 
         if (!$error_msg) {
-            \TorrentPier\Legacy\Post::user_notification($mode, $post_data, $post_info['topic_title'], $forum_id, $topic_id, $notify_user);
+            TorrentPier\Legacy\Post::user_notification($mode, $post_data, $post_info['topic_title'], $forum_id, $topic_id, $notify_user);
         }
 
         if ($mode == 'newtopic' || $mode == 'reply') {
@@ -404,13 +404,13 @@ if (($delete || $mode == 'delete') && !$confirm) {
         }
 
         // Auto-register torrent on tracker
-        if (\TorrentPier\Attachment::exists($topic_id) && !$error_msg) {
-            \TorrentPier\Torrent\Registry::returnMessage($return_message);
-            \TorrentPier\Torrent\Registry::autoRegister(
+        if (TorrentPier\Attachment::exists($topic_id) && !$error_msg) {
+            TorrentPier\Torrent\Registry::returnMessage($return_message);
+            TorrentPier\Torrent\Registry::autoRegister(
                 $topic_id,
                 userdata('user_id'),
                 $forum_id,
-                $post_info['forum_parent'] ?? null
+                $post_info['forum_parent'] ?? null,
             );
         }
 
@@ -562,12 +562,12 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
 if (userdata('user_level') == GROUP_MEMBER || IS_AM) {
     $poster_rgroups = '';
 
-    $sql = "SELECT ug.group_id, g.group_name, g.release_group
-		FROM " . BB_USER_GROUP . " ug
-		INNER JOIN " . BB_GROUPS . " g ON(g.group_id = ug.group_id)
-		WHERE ug.user_id = " . userdata('user_id') . "
+    $sql = 'SELECT ug.group_id, g.group_name, g.release_group
+		FROM ' . BB_USER_GROUP . ' ug
+		INNER JOIN ' . BB_GROUPS . ' g ON(g.group_id = ug.group_id)
+		WHERE ug.user_id = ' . userdata('user_id') . '
 			AND g.release_group = 1
-		ORDER BY g.group_name";
+		ORDER BY g.group_name';
 
     foreach (DB()->fetch_rowset($sql) as $row) {
         $selected_opt = ($row['group_id'] == $selected_rg) ? 'selected' : '';
@@ -648,7 +648,7 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
         if ($file_attached && $mode == 'editpost') {
             // Author can download the original torrent (without a passkey)
             $dl_url = DL_URL . $topic_id . '/';
-            if ($attach_ext_id == TORRENT_EXT_ID && \TorrentPier\Topic\Guard::isAuthor($post_info['topic_poster'])) {
+            if ($attach_ext_id == TORRENT_EXT_ID && TorrentPier\Topic\Guard::isAuthor($post_info['topic_poster'])) {
                 $dl_url .= '?original';
             }
 
@@ -657,7 +657,7 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
             ]);
 
             template()->assign_block_vars('attach_row', [
-                'FILE_NAME' => \TorrentPier\Attachment::getDownloadFilename($topic_id, $post_info['topic_title']),
+                'FILE_NAME' => TorrentPier\Attachment::getDownloadFilename($topic_id, $post_info['topic_title']),
                 'ATTACH_FILENAME' => $topic_id,
                 'U_VIEW_ATTACHMENT' => $dl_url,
             ]);
@@ -675,11 +675,11 @@ if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post'])
 
 // Topic review
 if ($mode == 'reply' && $is_auth['auth_read']) {
-    \TorrentPier\Legacy\Post::topic_review($topic_id);
+    TorrentPier\Legacy\Post::topic_review($topic_id);
 }
 
-require(PAGE_HEADER);
+require PAGE_HEADER;
 
 template()->pparse('body');
 
-require(PAGE_FOOTER);
+require PAGE_FOOTER;

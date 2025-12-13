@@ -33,7 +33,7 @@ class Attachment
             Registry::unregister($topicId);
         }
 
-        $upload = new Upload();
+        $upload = new Upload;
 
         if (!$upload->init(config()->getSection('attach'), $fileData)) {
             return ['success' => false, 'error' => implode('<br />', $upload->errors), 'ext_id' => null];
@@ -109,6 +109,7 @@ class Attachment
     public static function getSize(int $topicId): int
     {
         $path = self::getPath($topicId);
+
         return is_file($path) ? (filesize($path) ?: 0) : 0;
     }
 

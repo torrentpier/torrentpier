@@ -11,12 +11,7 @@
 namespace TorrentPier\Helpers;
 
 use Carbon\Carbon;
-
-use function config;
-
 use Exception;
-
-use function is_numeric;
 
 /**
  * Time formatting helper using a Carbon library
@@ -38,19 +33,19 @@ class TimeHelper
      */
     public static function humanTime(int|string $timestamp, int|string|null $reference = null): string
     {
-        $locale = config()->get('default_lang', 'en');
+        $locale = \config()->get('default_lang', 'en');
 
         try {
             // Parse timestamp - handle both numeric strings and date strings
-            $time = is_numeric($timestamp)
-                ? Carbon::createFromTimestamp((int) $timestamp)
+            $time = \is_numeric($timestamp)
+                ? Carbon::createFromTimestamp((int)$timestamp)
                 : Carbon::parse($timestamp);
 
             // Parse reference if provided
             $ref = null;
             if ($reference !== null) {
-                $ref = is_numeric($reference)
-                    ? Carbon::createFromTimestamp((int) $reference)
+                $ref = \is_numeric($reference)
+                    ? Carbon::createFromTimestamp((int)$reference)
                     : Carbon::parse($reference);
             }
 
@@ -78,16 +73,16 @@ class TimeHelper
         bool         $friendlyDate = true,
         float        $timezoneOffset = 0,
         ?string      $locale = null,
-        array        $labels = []
+        array        $labels = [],
     ): string {
         if (!$format) {
-            $format = function_exists('config')
-                ? config()->get('default_dateformat', 'd-M-Y H:i')
+            $format = \function_exists('config')
+                ? \config()->get('default_dateformat', 'd-M-Y H:i')
                 : 'd-M-Y H:i';
         }
 
-        $locale = $locale ?? (function_exists('config') ? config()->get('default_lang', 'en') : 'en');
-        $translateDates = function_exists('config') ? config()->get('translate_dates', true) : true;
+        $locale = $locale ?? (\function_exists('config') ? \config()->get('default_lang', 'en') : 'en');
+        $translateDates = \function_exists('config') ? \config()->get('translate_dates', true) : true;
 
         try {
             // Create Carbon instance with timezone offset
@@ -98,11 +93,13 @@ class TimeHelper
                 // Check if the date is today
                 if ($carbon->isSameDay($now)) {
                     $todayLabel = $labels['today'] ?? 'Today';
+
                     return $todayLabel . ' ' . $carbon->format('H:i');
                 }
                 // Check if the date is yesterday
                 if ($carbon->isSameDay($now->copy()->subDay())) {
                     $yesterdayLabel = $labels['yesterday'] ?? 'Yesterday';
+
                     return $yesterdayLabel . ' ' . $carbon->format('H:i');
                 }
             }
@@ -113,6 +110,7 @@ class TimeHelper
                 : $carbon->format($format);
         } catch (Exception $e) {
             error_log('TimeHelper::formatDate error: ' . $e->getMessage());
+
             return '';
         }
     }
@@ -130,8 +128,8 @@ class TimeHelper
             return '';
         }
 
-        $timezoneOffset ??= (float) config()->get('board_timezone', 0);
-        $now = defined('TIMENOW') ? TIMENOW : time();
+        $timezoneOffset ??= (float)\config()->get('board_timezone', 0);
+        $now = \defined('TIMENOW') ? TIMENOW : time();
 
         return self::humanTime(strtotime($date, $now + (3600 * $timezoneOffset)));
     }

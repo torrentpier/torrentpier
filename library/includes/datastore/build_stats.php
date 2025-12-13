@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -79,10 +80,10 @@ if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
 
     // Use numeric MMDD format with birthday_md generated column
     $dateToday = (int)date('n') * 100 + (int)date('j'); // e.g., 1207 for Dec 7
-    $dateForward = (int)date('n', strtotime("+$checkDays days")) * 100 + (int)date('j', strtotime("+$checkDays days"));
+    $dateForward = (int)date('n', strtotime("+{$checkDays} days")) * 100 + (int)date('j', strtotime("+{$checkDays} days"));
 
     // Helper to convert ActiveRow objects to arrays
-    $toArrays = static fn(array $rows): array => array_map(static fn($row) => $row->toArray(), $rows);
+    $toArrays = static fn (array $rows): array => array_map(static fn ($row) => $row->toArray(), $rows);
 
     // Birthday today - using the birthday_md indexed column
     $data['birthday_today_list'] = $toArrays(DB()->table(BB_USERS)

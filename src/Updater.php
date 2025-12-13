@@ -22,14 +22,16 @@ use TorrentPier\Http\HttpClient;
 class Updater
 {
     /**
+     * LTS version pattern (v2.8.*)
+     *
+     * @var string
+     */
+    private const string LTS_VERSION_PATTERN = '/^v2\.8\.\d+$/';
+
+    /**
      * Target version of TorrentPier
      */
     public private(set) string $targetVersion;
-
-    /**
-     * Json response
-     */
-    private array $jsonResponse = [];
 
     /**
      * Save path
@@ -37,18 +39,14 @@ class Updater
     public private(set) string $savePath;
 
     /**
-     * HTTP client instance
-     *
-     * @var HttpClient
+     * Json response
      */
-    private HttpClient $httpClient;
+    private array $jsonResponse = [];
 
     /**
-     * LTS version pattern (v2.8.*)
-     *
-     * @var string
+     * HTTP client instance
      */
-    private const string LTS_VERSION_PATTERN = '/^v2\.8\.\d+$/';
+    private HttpClient $httpClient;
 
     /**
      * Updater constructor
@@ -106,14 +104,13 @@ class Updater
      * @param string $targetVersion Version to download ('latest' or specific version tag)
      * @param bool $force Force re-download even if a file exists
      * @param callable|null $progressCallback Progress callback function (float $percent, int $downloaded, int $total)
-     * @return bool
      * @throws Exception
      */
     public function download(
         string    $path,
         string    $targetVersion = 'latest',
         bool      $force = false,
-        ?callable $progressCallback = null
+        ?callable $progressCallback = null,
     ): bool {
         $this->targetVersion = $targetVersion;
 
@@ -141,24 +138,25 @@ class Updater
                 $success = $this->httpClient->downloadWithProgress(
                     $downloadLink,
                     $this->savePath,
-                    $progressCallback
+                    $progressCallback,
                 );
 
                 if (!$success || !is_file($this->savePath)) {
-                    throw new Exception("Failed to save TorrentPier build file to: $this->savePath");
+                    throw new Exception("Failed to save TorrentPier build file to: {$this->savePath}");
                 }
             } catch (HttpClientException $e) {
                 // Clean up failed download
                 if (is_file($this->savePath)) {
                     @unlink($this->savePath);
                 }
+
                 throw new Exception("Failed to download release: {$e->getMessage()}", 0, $e);
             }
         }
 
         // Verify a file exists and has content
         if (!is_file($this->savePath) || filesize($this->savePath) === 0) {
-            throw new Exception("Downloaded file is empty or does not exist: $this->savePath");
+            throw new Exception("Downloaded file is empty or does not exist: {$this->savePath}");
         }
 
         return true;
@@ -167,8 +165,6 @@ class Updater
     /**
      * Returns information of latest TorrentPier LTS version (v2.8.*) available
      *
-     * @param bool $allowPreReleases
-     * @return array
      * @throws Exception
      */
     public function getLastVersion(bool $allowPreReleases = true): array
@@ -189,7 +185,7 @@ class Updater
 
         if (!$allowPreReleases) {
             // PHP 8.4: Use array_find to get the first non-prerelease version
-            $stableRelease = array_find($ltsVersions, fn($release) => !($release['prerelease'] ?? false));
+            $stableRelease = array_find($ltsVersions, fn ($release) => !($release['prerelease'] ?? false));
 
             if ($stableRelease === null) {
                 throw new Exception('No stable LTS versions (v2.8.*) found');
@@ -203,9 +199,6 @@ class Updater
 
     /**
      * Get all available LTS versions (v2.8.*)
-     *
-     * @param bool $allowPreReleases
-     * @return array
      */
     public function getAllLTSVersions(bool $allowPreReleases = true): array
     {
@@ -231,8 +224,6 @@ class Updater
     /**
      * Handle GitHub API errors based on the response status code
      *
-     * @param ResponseInterface $response
-     * @return void
      * @throws Exception
      */
     private function handleGitHubError(ResponseInterface $response): void
@@ -247,21 +238,20 @@ class Updater
                 // Check if it's rate limiting
                 if (isset($data['documentation_url']) && str_contains($data['documentation_url'], 'rate-limiting')) {
                     $resetTime = $response->getHeader('X-RateLimit-Reset')[0] ?? null;
-                    $resetMsg = $resetTime ? ' (resets at ' . date('Y-m-d H:i:s', (int) $resetTime) . ')' : '';
-                    throw new Exception("GitHub API rate limit exceeded$resetMsg: $message");
+                    $resetMsg = $resetTime ? ' (resets at ' . date('Y-m-d H:i:s', (int)$resetTime) . ')' : '';
+
+                    throw new Exception("GitHub API rate limit exceeded{$resetMsg}: {$message}");
                 }
-                throw new Exception("GitHub API access forbidden: $message");
 
+                throw new Exception("GitHub API access forbidden: {$message}");
             case 404:
-                throw new Exception("GitHub API resource not found: $message");
-
+                throw new Exception("GitHub API resource not found: {$message}");
             case 500:
             case 502:
             case 503:
-                throw new Exception("GitHub API server error ($statusCode): $message");
-
+                throw new Exception("GitHub API server error ({$statusCode}): {$message}");
             default:
-                throw new Exception("GitHub API error ($statusCode): $message");
+                throw new Exception("GitHub API error ({$statusCode}): {$message}");
         }
     }
 }

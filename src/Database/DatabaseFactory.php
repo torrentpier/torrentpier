@@ -10,6 +10,8 @@
 
 namespace TorrentPier\Database;
 
+use RuntimeException;
+
 /**
  * Database Factory - maintains compatibility with existing DB() function calls
  *
@@ -42,32 +44,13 @@ class DatabaseFactory
             // Get configuration for this server
             $cfg_values = self::$server_configs[$srv_name] ?? null;
             if (!$cfg_values) {
-                throw new \RuntimeException("Database configuration not found for server: $srv_name");
+                throw new RuntimeException("Database configuration not found for server: {$srv_name}");
             }
 
             self::$instances[$srv_name] = Database::getInstance($cfg_values, $srv_name);
         }
 
         return self::$instances[$srv_name];
-    }
-
-    /**
-     * Resolve server name using alias system
-     */
-    private static function resolveSrvName(string $name): string
-    {
-        // Check if it's an alias
-        if (isset(self::$server_aliases[$name])) {
-            return self::$server_aliases[$name];
-        }
-
-        // Check if it's a direct server name
-        if (isset(self::$server_configs[$name])) {
-            return $name;
-        }
-
-        // Default to 'db'
-        return 'db';
     }
 
     /**
@@ -98,5 +81,24 @@ class DatabaseFactory
         }
         self::$instances = [];
         Database::destroyInstances();
+    }
+
+    /**
+     * Resolve server name using alias system
+     */
+    private static function resolveSrvName(string $name): string
+    {
+        // Check if it's an alias
+        if (isset(self::$server_aliases[$name])) {
+            return self::$server_aliases[$name];
+        }
+
+        // Check if it's a direct server name
+        if (isset(self::$server_configs[$name])) {
+            return $name;
+        }
+
+        // Default to 'db'
+        return 'db';
     }
 }

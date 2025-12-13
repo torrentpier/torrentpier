@@ -19,7 +19,6 @@ class Guard
      * Check if the current user is the topic author.
      *
      * @param int $posterId Topic poster user ID
-     * @return bool
      */
     public static function isAuthor(int $posterId): bool
     {

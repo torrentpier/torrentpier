@@ -18,6 +18,8 @@ use League\Route\Router as LeagueRouter;
 use League\Route\Strategy\ApplicationStrategy;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use ReflectionClass;
+use Throwable;
 
 /**
  * Router wrapper for TorrentPier
@@ -32,10 +34,10 @@ class Router
 
     private function __construct()
     {
-        $this->router = new LeagueRouter();
+        $this->router = new LeagueRouter;
 
         // Use ApplicationStrategy for standard request handling
-        $strategy = new ApplicationStrategy();
+        $strategy = new ApplicationStrategy;
         $this->router->setStrategy($strategy);
     }
 
@@ -45,10 +47,18 @@ class Router
     public static function getInstance(): self
     {
         if (self::$instance === null) {
-            self::$instance = new self();
+            self::$instance = new self;
         }
 
         return self::$instance;
+    }
+
+    /**
+     * Reset the singleton (useful for testing)
+     */
+    public static function reset(): void
+    {
+        self::$instance = null;
     }
 
     /**
@@ -57,7 +67,6 @@ class Router
      * @param string|array $method HTTP method (GET, POST, etc.) or '*' for any
      * @param string $path Route path (e.g., '/terms', '/viewtopic/{id}')
      * @param callable|string $handler Route handler
-     * @return Route
      */
     public function map(string|array $method, string $path, callable|string $handler): Route
     {
@@ -101,9 +110,6 @@ class Router
 
     /**
      * Dispatch a request and return a response
-     *
-     * @param ServerRequestInterface $request
-     * @return ResponseInterface
      */
     public function dispatch(ServerRequestInterface $request): ResponseInterface
     {
@@ -119,21 +125,13 @@ class Router
     }
 
     /**
-     * Reset the singleton (useful for testing)
-     */
-    public static function reset(): void
-    {
-        self::$instance = null;
-    }
-
-    /**
      * Get all registered routes
      *
      * @return array<array{methods: string, path: string, handler: string}>
      */
     public function getRoutes(): array
     {
-        $reflection = new \ReflectionClass($this->router);
+        $reflection = new ReflectionClass($this->router);
         $prop = $reflection->getProperty('routes');
         $routes = $prop->getValue($this->router);
 
@@ -143,9 +141,9 @@ class Router
             $handler = $route->getCallable();
 
             $result[] = [
-                'methods' => is_array($methods) ? implode('|', $methods) : $methods,
+                'methods' => \is_array($methods) ? implode('|', $methods) : $methods,
                 'path' => $route->getPath(),
-                'handler' => is_object($handler) ? get_class($handler) : (is_string($handler) ? $handler : gettype($handler)),
+                'handler' => \is_object($handler) ? \get_class($handler) : (\is_string($handler) ? $handler : \gettype($handler)),
             ];
         }
 
@@ -161,15 +159,16 @@ class Router
         $request = new \Laminas\Diactoros\ServerRequest(
             serverParams: ['REQUEST_METHOD' => $method],
             uri: $path,
-            method: $method
+            method: $method,
         );
 
         try {
             $this->router->dispatch($request);
+
             return true;
         } catch (\League\Route\Http\Exception\NotFoundException) {
             return false;
-        } catch (\Throwable) {
+        } catch (Throwable) {
             // Route exists, but the handler failed - that's OK, route still exists
             return true;
         }

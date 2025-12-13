@@ -136,7 +136,7 @@ describe('Database Class', function () {
             $db = Database::getInstance($invalidConfig);
 
             // Connection should fail with invalid config
-            expect(fn() => $db->connect())->toThrow(Exception::class);
+            expect(fn () => $db->connect())->toThrow(Exception::class);
         });
     });
 
@@ -147,7 +147,7 @@ describe('Database Class', function () {
             $this->db->num_queries = 0;
 
             // Mock the debugger to prevent null pointer errors
-            $mockDebugger = Mockery::mock(\TorrentPier\Database\DatabaseDebugger::class);
+            $mockDebugger = Mockery::mock(DatabaseDebugger::class);
             $mockDebugger->shouldReceive('debug_find_source')->andReturn('test.php:123');
             $mockDebugger->shouldReceive('debug')->andReturnNull();
             $this->db->debugger = $mockDebugger;
@@ -244,7 +244,7 @@ describe('Database Class', function () {
         });
 
         it('fetches single row correctly', function () {
-            $mockRow = Mockery::mock(\Nette\Database\Row::class);
+            $mockRow = Mockery::mock(Nette\Database\Row::class);
             $mockRow->shouldReceive('toArray')->andReturn(['id' => 1, 'name' => 'test']);
 
             $this->mockResult->shouldReceive('fetch')->andReturn($mockRow);
@@ -427,31 +427,31 @@ describe('Database Class', function () {
         beforeEach(function () {
             $this->db = Mockery::mock(Database::class)->makePartial();
             $mockExplorer = Mockery::mock(Explorer::class);
-            $mockSelection = Mockery::mock(\Nette\Database\Table\Selection::class);
+            $mockSelection = Mockery::mock(Nette\Database\Table\Selection::class);
             $mockExplorer->shouldReceive('table')->andReturn($mockSelection);
 
             $this->db->shouldReceive('getExplorer')->andReturn($mockExplorer);
         });
 
         it('provides table access through explorer', function () {
-            $mockSelection = Mockery::mock(\TorrentPier\Database\DebugSelection::class);
+            $mockSelection = Mockery::mock(TorrentPier\Database\DebugSelection::class);
             $this->db->shouldReceive('table')->with('users')->andReturn($mockSelection);
 
             $selection = $this->db->table('users');
 
-            expect($selection)->toBeInstanceOf(\TorrentPier\Database\DebugSelection::class);
+            expect($selection)->toBeInstanceOf(TorrentPier\Database\DebugSelection::class);
         });
 
         it('initializes explorer lazily', function () {
-            $mockSelection = Mockery::mock(\TorrentPier\Database\DebugSelection::class);
+            $mockSelection = Mockery::mock(TorrentPier\Database\DebugSelection::class);
             $this->db->shouldReceive('table')->with('posts')->andReturn($mockSelection);
 
             // First access should initialize explorer
             $selection1 = $this->db->table('posts');
             $selection2 = $this->db->table('posts');
 
-            expect($selection1)->toBeInstanceOf(\TorrentPier\Database\DebugSelection::class);
-            expect($selection2)->toBeInstanceOf(\TorrentPier\Database\DebugSelection::class);
+            expect($selection1)->toBeInstanceOf(TorrentPier\Database\DebugSelection::class);
+            expect($selection2)->toBeInstanceOf(TorrentPier\Database\DebugSelection::class);
         });
     });
 
@@ -623,7 +623,7 @@ describe('Database Class', function () {
         });
 
         it('throws exception for invalid property access', function () {
-            expect(fn() => $this->db->__get('invalid_property'))
+            expect(fn () => $this->db->__get('invalid_property'))
                 ->toThrow(InvalidArgumentException::class);
         });
     });
@@ -643,7 +643,7 @@ describe('Database Class', function () {
         it('handles multiple concurrent queries efficiently', function () {
             expectExecutionTimeUnder(function () {
                 for ($i = 0; $i < 100; $i++) {
-                    $this->db->sql_query("SELECT $i");
+                    $this->db->sql_query("SELECT {$i}");
                 }
             }, 0.1); // 100ms for 100 queries
         });
@@ -658,7 +658,7 @@ describe('Database Class', function () {
             $invalidConfig = getInvalidDatabaseConfig();
             $db = Database::getInstance($invalidConfig);
 
-            expect(fn() => $db->connect())->toThrow(Exception::class);
+            expect(fn () => $db->connect())->toThrow(Exception::class);
         });
 
         it('triggers error for query failures when using wrapper', function () {
@@ -666,10 +666,10 @@ describe('Database Class', function () {
             $this->db->shouldReceive('sql_query')->andReturn(null);
 
             // Mock trigger_error to throw RuntimeException instead of calling bb_die
-            $this->db->shouldReceive('trigger_error')->andThrow(new \RuntimeException('Database Error'));
+            $this->db->shouldReceive('trigger_error')->andThrow(new RuntimeException('Database Error'));
 
-            expect(fn() => $this->db->query('INVALID'))
-                ->toThrow(\RuntimeException::class);
+            expect(fn () => $this->db->query('INVALID'))
+                ->toThrow(RuntimeException::class);
         });
 
         it('logs errors appropriately', function () {
@@ -678,7 +678,7 @@ describe('Database Class', function () {
             // Should not throw when logging errors
             $this->db->shouldReceive('logError')->with($exception)->andReturn(true);
 
-            expect(fn() => $this->db->logError($exception))
+            expect(fn () => $this->db->logError($exception))
                 ->not->toThrow(Exception::class);
         });
     });
@@ -718,13 +718,13 @@ describe('Database Performance', function () {
     it('maintains singleton instance creation performance')
         ->group('performance')
         ->repeat(1000)
-        ->expect(fn() => Database::getInstance())
+        ->expect(fn () => Database::getInstance())
         ->toBeInstanceOf(Database::class);
 
     it('executes simple queries efficiently')
         ->group('performance')
         ->expect(function () {
-            return measureExecutionTime(fn() => $this->db->sql_query('SELECT 1'));
+            return measureExecutionTime(fn () => $this->db->sql_query('SELECT 1'));
         })
         ->toBeLessThan(0.001); // 1ms
 });

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,6 +10,7 @@
 
 if (!empty($setmodules)) {
     $module[APP_NAME]['FORUM_CONFIG'] = basename(__FILE__);
+
     return;
 }
 
@@ -25,11 +27,11 @@ $cfg = [];
 /**
  * All config names with default values
  */
-$default_cfg_str = array(
+$default_cfg_str = [
     'bt_announce_url' => 'https://torrentpier.duckdns.org/bt/',
-);
+];
 
-$default_cfg_bool = array(
+$default_cfg_bool = [
     'bt_disable_dht' => 1,
     'bt_show_peers' => 1,
     'bt_add_auth_key' => 1,
@@ -53,19 +55,19 @@ $default_cfg_bool = array(
     'bt_del_addit_ann_urls' => 1,
     'bt_set_dltype_on_tor_reg' => 1,
     'bt_unset_dltype_on_tor_unreg' => 1,
-);
+];
 
-$default_cfg_num = array(
+$default_cfg_num = [
     'bt_show_peers_mode' => SHOW_PEERS_COUNT,
-);
+];
 
 $default_cfg = array_merge($default_cfg_str, $default_cfg_bool, $default_cfg_num);
 
-$db_fields_bool = array(
+$db_fields_bool = [
     'allow_reg_tracker' => 0,  // Allowed forums for registering torrents on tracker
     'allow_porno_topic' => 0,  // Allowed forums for porno topics
     'self_moderated' => 0,  // Users can move theirs topic to another forum
-);
+];
 
 /**
  * Get config
@@ -77,12 +79,12 @@ $cfg = bb_get_config(BB_CONFIG, true, false);
  */
 if ($submit && $confirm) {
     foreach ($db_fields_bool as $field_name => $field_def_val) {
-        \TorrentPier\Legacy\Admin\Torrent::update_table_bool(BB_FORUMS, 'forum_id', $field_name, $field_def_val);
+        TorrentPier\Legacy\Admin\Torrent::update_table_bool(BB_FORUMS, 'forum_id', $field_name, $field_def_val);
     }
 
-    \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_str, $cfg, 'str');
-    \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_bool, $cfg, 'bool');
-    \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_num, $cfg, 'num');
+    TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_str, $cfg, 'str');
+    TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_bool, $cfg, 'bool');
+    TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_num, $cfg, 'num');
 
     forum_tree(refresh: true);
 
@@ -90,9 +92,9 @@ if ($submit && $confirm) {
 }
 
 // Set template vars
-\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars($default_cfg_str, $cfg);
-\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_bool($default_cfg_bool, $cfg);
-\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars($default_cfg_num, $cfg);
+TorrentPier\Legacy\Admin\Torrent::set_tpl_vars($default_cfg_str, $cfg);
+TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_bool($default_cfg_bool, $cfg);
+TorrentPier\Legacy\Admin\Torrent::set_tpl_vars($default_cfg_num, $cfg);
 
 // Get Forums list
 $sql = 'SELECT f.*
@@ -108,7 +110,7 @@ $rowset = DB()->sql_fetchrowset($result);
 $forum_rows = min($max_forum_rows, count($rowset));
 
 foreach ($db_fields_bool as $field_name => $field_def_val) {
-    $$field_name = '';
+    ${$field_name} = '';
 }
 
 foreach ($rowset as $rid => $forum) {
@@ -118,16 +120,16 @@ foreach ($rowset as $rid => $forum) {
 
         $forum_name = str_short($forum_name, $max_forum_name_len);
 
-        $$field_name .= '<option value="' . $forum['forum_id'] . '" ' . $selected . '>&nbsp;' . ($forum['forum_parent'] ? HTML_SF_SPACER : '') . htmlCHR($forum_name) . "</option>\n";
+        ${$field_name} .= '<option value="' . $forum['forum_id'] . '" ' . $selected . '>&nbsp;' . ($forum['forum_parent'] ? HTML_SF_SPACER : '') . htmlCHR($forum_name) . "</option>\n";
     }
 }
 
 foreach ($db_fields_bool as $field_name => $field_def_val) {
-    $$field_name = '<select name="' . $field_name . "[]\" multiple size=\"$forum_rows\">" . $$field_name . '</select>';
-    template()->assign_vars(array('S_' . strtoupper($field_name) => $$field_name));
+    ${$field_name} = '<select name="' . $field_name . "[]\" multiple size=\"{$forum_rows}\">" . ${$field_name} . '</select>';
+    template()->assign_vars(['S_' . strtoupper($field_name) => ${$field_name}]);
 }
 
-template()->assign_vars(array(
+template()->assign_vars([
     'L_BT_SHOW_PEERS_MODE_COUNT' => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_COUNT) ? '<u>' . __('BT_SHOW_PEERS_MODE_COUNT') . '</u>' : __('BT_SHOW_PEERS_MODE_COUNT'),
     'L_BT_SHOW_PEERS_MODE_NAMES' => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_NAMES) ? '<u>' . __('BT_SHOW_PEERS_MODE_NAMES') . '</u>' : __('BT_SHOW_PEERS_MODE_NAMES'),
     'L_BT_SHOW_PEERS_MODE_FULL' => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_FULL) ? '<u>' . __('BT_SHOW_PEERS_MODE_FULL') . '</u>' : __('BT_SHOW_PEERS_MODE_FULL'),
@@ -142,6 +144,6 @@ template()->assign_vars(array(
 
     'S_HIDDEN_FIELDS' => '',
     'S_CONFIG_ACTION' => 'admin_bt_forum_cfg.php',
-));
+]);
 
 print_page('admin_bt_forum_cfg.tpl', 'admin');

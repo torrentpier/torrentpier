@@ -25,7 +25,7 @@ if (request()->post->has('submit')) {
         bb_die(__('CAPTCHA_WRONG'));
     }
     $email = (!empty(request()->post->get('email'))) ? trim(strip_tags(htmlspecialchars(request()->post->get('email')))) : '';
-    $sql = "SELECT * FROM " . BB_USERS . " WHERE user_email = '" . DB()->escape($email) . "'";
+    $sql = 'SELECT * FROM ' . BB_USERS . " WHERE user_email = '" . DB()->escape($email) . "'";
     if ($result = DB()->sql_query($sql)) {
         if ($row = DB()->sql_fetchrow($result)) {
             if (!$row['user_active']) {
@@ -41,15 +41,15 @@ if (request()->post->has('submit')) {
             $user_actkey = make_rand_str(ACTKEY_LENGTH);
             $user_password = make_rand_str(PASSWORD_MIN_LENGTH);
 
-            $sql = "UPDATE " . BB_USERS . "
-				SET user_newpasswd = '$user_password', user_actkey = '$user_actkey'
+            $sql = 'UPDATE ' . BB_USERS . "
+				SET user_newpasswd = '{$user_password}', user_actkey = '{$user_actkey}'
 				WHERE user_id = " . $row['user_id'];
             if (!DB()->sql_query($sql)) {
                 bb_die('Could not update new password information');
             }
 
             // Sending email
-            $emailer = new TorrentPier\Emailer();
+            $emailer = new TorrentPier\Emailer;
 
             $emailer->set_to($row['user_email'], $username);
             $emailer->set_subject(__('EMAILER_SUBJECT')['USER_ACTIVATE_PASSWD']);

@@ -25,7 +25,7 @@ class DatabasePanel implements IBarPanel
 
     public function __construct()
     {
-        $this->collector = new DatabaseCollector();
+        $this->collector = new DatabaseCollector;
     }
 
     /**
@@ -110,7 +110,7 @@ class DatabasePanel implements IBarPanel
         if ($data['slow_count'] > 0) {
             $html .= '<div class="tp-stat tp-stat-warning"><span class="tp-stat-value">' . $data['slow_count'] . '</span><span class="tp-stat-label">Slow</span></div>';
         }
-        $html .= '<div class="tp-stat"><span class="tp-stat-value">' . sprintf('%.3f', $data['total_time']) . 's</span><span class="tp-stat-label">Total Time</span></div>';
+        $html .= '<div class="tp-stat"><span class="tp-stat-value">' . \sprintf('%.3f', $data['total_time']) . 's</span><span class="tp-stat-label">Total Time</span></div>';
         $html .= '</div>';
 
         // Legacy queries warning banner
@@ -142,12 +142,13 @@ class DatabasePanel implements IBarPanel
         $html .= '<h3 class="tp-db-server-title">';
         $html .= '<span class="tp-engine">[' . htmlspecialchars($serverData['engine']) . ']</span> ';
         $html .= htmlspecialchars($serverName);
-        $html .= ' <small>(' . $serverData['num_queries'] . ' queries, ' . sprintf('%.3f', $serverData['total_time']) . 's)</small>';
+        $html .= ' <small>(' . $serverData['num_queries'] . ' queries, ' . \sprintf('%.3f', $serverData['total_time']) . 's)</small>';
         $html .= '</h3>';
 
         if (empty($serverData['queries'])) {
             $html .= '<p class="tp-no-queries">No queries recorded</p>';
             $html .= '</div>';
+
             return $html;
         }
 
@@ -194,7 +195,7 @@ class DatabasePanel implements IBarPanel
         // Time
         $timeClass = $query['is_slow'] ? 'tp-time-slow' : '';
         $html .= '<td class="tp-query-time ' . $timeClass . '">';
-        $html .= sprintf('%.3f', $time) . 's';
+        $html .= \sprintf('%.3f', $time) . 's';
         $html .= ' <span class="tp-percent">(' . $timePercent . '%)</span>';
         $html .= '</td>';
 
@@ -286,6 +287,7 @@ class DatabasePanel implements IBarPanel
     private function cleanSql(string $sql): string
     {
         $sql = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $sql);
+
         return trim($sql);
     }
 
@@ -297,8 +299,8 @@ class DatabasePanel implements IBarPanel
         $sql = $this->cleanSql($sql);
 
         // Truncate very long queries for display
-        $maxLen = (int) config()->get('debug.max_query_length', 1000);
-        if (strlen($sql) > $maxLen) {
+        $maxLen = (int)config()->get('debug.max_query_length', 1000);
+        if (\strlen($sql) > $maxLen) {
             $sql = substr($sql, 0, $maxLen) . '... [truncated]';
         }
 

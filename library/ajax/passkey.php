@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -29,11 +30,11 @@ switch ($mode) {
             $this->prompt_for_confirm(__('BT_GEN_PASSKEY_NEW'));
         }
 
-        if (!$passkey = \TorrentPier\Torrent\Passkey::generate($req_uid, IS_ADMIN)) {
+        if (!$passkey = TorrentPier\Torrent\Passkey::generate($req_uid, IS_ADMIN)) {
             $this->ajax_die('Could not insert passkey');
         }
 
-        \TorrentPier\Tracker\Peers::removeByUser($req_uid);
+        TorrentPier\Tracker\Peers::removeByUser($req_uid);
         $this->response['passkey'] = $passkey;
         break;
     default:

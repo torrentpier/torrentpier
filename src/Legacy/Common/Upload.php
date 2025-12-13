@@ -11,6 +11,7 @@
 namespace TorrentPier\Legacy\Common;
 
 use Exception;
+use RuntimeException;
 use TorrentPier\Attachment;
 use TorrentPier\Image\ImageService;
 
@@ -22,8 +23,6 @@ class Upload
 {
     /**
      * Default config pattern
-     *
-     * @var array
      */
     public array $cfg = [
         'max_size' => 0,
@@ -36,8 +35,6 @@ class Upload
 
     /**
      * File params pattern
-     *
-     * @var array
      */
     public array $file = [
         'name' => '',
@@ -53,22 +50,16 @@ class Upload
 
     /**
      * File size
-     *
-     * @var int
      */
     public int $file_size = 0;
 
     /**
      * All allowed extensions to upload
-     *
-     * @var array
      */
     public array $ext_ids = [];
 
     /**
      * Store caught errors while uploading
-     *
-     * @var array
      */
     public array $errors = [];
 
@@ -89,11 +80,6 @@ class Upload
 
     /**
      * Initialize uploader
-     *
-     * @param array $cfg
-     * @param array $post_params
-     * @param bool $uploaded_only
-     * @return bool
      */
     public function init(array $cfg = [], array $post_params = [], bool $uploaded_only = true): bool
     {
@@ -103,6 +89,7 @@ class Upload
         // Check upload allowed
         if (!$this->cfg['up_allowed']) {
             $this->errors[] = __('UPLOAD_ERROR_COMMON_DISABLED');
+
             return false;
         }
 
@@ -113,24 +100,28 @@ class Upload
             } else {
                 $this->errors[] = __('UPLOAD_ERROR_COMMON');
             }
+
             return false;
         }
 
         // Check file exists
         if (!file_exists($this->file['tmp_name'])) {
             $this->errors[] = "Uploaded file not exists: {$this->file['tmp_name']}";
+
             return false;
         }
 
         // Check file is not empty
         if (!$this->file_size = filesize($this->file['tmp_name'])) {
             $this->errors[] = "Uploaded file is empty: {$this->file['tmp_name']}";
+
             return false;
         }
 
         // is_uploaded_file
         if ($uploaded_only && !is_uploaded_file($this->file['tmp_name'])) {
             $this->errors[] = "Not uploaded file: {$this->file['tmp_name']}";
+
             return false;
         }
 
@@ -148,6 +139,7 @@ class Upload
                 // redefine ext
                 if (!$width || !$height || !$type || !isset($this->img_types[$type])) {
                     $this->errors[] = __('UPLOAD_ERROR_FORMAT');
+
                     return false;
                 }
                 $this->file_ext = $this->img_types[$type];
@@ -170,24 +162,28 @@ class Upload
                         $this->file_size = filesize($this->file['tmp_name']);
                     }
                 } catch (Exception $e) {
-                    $this->errors[] = sprintf(__('UPLOAD_ERROR_DIMENSIONS'), $this->cfg['max_width'], $this->cfg['max_height']);
+                    $this->errors[] = \sprintf(__('UPLOAD_ERROR_DIMENSIONS'), $this->cfg['max_width'], $this->cfg['max_height']);
+
                     return false;
                 }
             } else {
                 $this->errors[] = __('UPLOAD_ERROR_NOT_IMAGE');
+
                 return false;
             }
         }
 
         // Check file size (after image processing or for non-images)
         if ($this->cfg['max_size'] && $this->file_size > $this->cfg['max_size']) {
-            $this->errors[] = sprintf(__('UPLOAD_ERROR_SIZE'), humn_size($this->cfg['max_size']));
+            $this->errors[] = \sprintf(__('UPLOAD_ERROR_SIZE'), humn_size($this->cfg['max_size']));
+
             return false;
         }
 
         // Check extension
         if ($uploaded_only && (!isset($this->ext_ids[$this->file_ext]) || !\in_array($this->file_ext, $this->cfg['allowed_ext'], true))) {
-            $this->errors[] = sprintf(__('UPLOAD_ERROR_NOT_ALLOWED'), htmlCHR($this->file_ext));
+            $this->errors[] = \sprintf(__('UPLOAD_ERROR_NOT_ALLOWED'), htmlCHR($this->file_ext));
+
             return false;
         }
         $this->file_ext_id = $this->ext_ids[$this->file_ext];
@@ -197,10 +193,6 @@ class Upload
 
     /**
      * Store uploaded file
-     *
-     * @param string $mode
-     * @param array $params
-     * @return bool
      */
     public function store(string $mode, array $params = []): bool
     {
@@ -213,7 +205,7 @@ class Upload
                 $file_path = Attachment::getPath($params['topic_id']);
                 break;
             default:
-                throw new \RuntimeException("Invalid upload mode: $mode");
+                throw new RuntimeException("Invalid upload mode: {$mode}");
         }
 
         return $this->_move($file_path);
@@ -222,7 +214,6 @@ class Upload
     /**
      * Move file to target path
      *
-     * @param $file_path
      * @return bool
      */
     public function _move($file_path)
@@ -230,13 +221,15 @@ class Upload
         $dir = \dirname($file_path);
         if (!file_exists($dir)) {
             if (!bb_mkdir($dir)) {
-                $this->errors[] = "Cannot create dir: $dir";
+                $this->errors[] = "Cannot create dir: {$dir}";
+
                 return false;
             }
         }
         if (!@rename($this->file['tmp_name'], $file_path)) {
             if (!@copy($this->file['tmp_name'], $file_path)) {
                 $this->errors[] = 'Cannot copy tmp file';
+
                 return false;
             }
             @unlink($this->file['tmp_name']);
@@ -248,10 +241,6 @@ class Upload
 
     /**
      * Compress image to fit max file size by reducing quality
-     *
-     * @param string $path
-     * @param int $maxSize
-     * @return void
      */
     private function compressToMaxSize(string $path, int $maxSize): void
     {

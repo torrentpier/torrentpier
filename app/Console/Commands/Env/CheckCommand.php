@@ -22,7 +22,7 @@ use TorrentPier\Console\Helpers\OutputHelper;
  */
 #[AsCommand(
     name: 'env:check',
-    description: 'Verify environment configuration and show issues'
+    description: 'Verify environment configuration and show issues',
 )]
 class CheckCommand extends Command
 {
@@ -62,12 +62,12 @@ class CheckCommand extends Command
             $this->line('  <info>✓</info> .env file exists');
 
             // Check permissions
-            $perms = substr(sprintf('%o', fileperms($envFile)), -4);
+            $perms = substr(\sprintf('%o', fileperms($envFile)), -4);
             if ($perms === '0644' || $perms === '0640' || $perms === '0600') {
-                $this->line("  <info>✓</info> Permissions are secure ($perms)");
+                $this->line("  <info>✓</info> Permissions are secure ({$perms})");
             } else {
-                $warnings[] = ".env has insecure permissions ($perms), recommended: 0644";
-                $this->line("  <comment>!</comment> Permissions: $perms (recommended: 0644)");
+                $warnings[] = ".env has insecure permissions ({$perms}), recommended: 0644";
+                $this->line("  <comment>!</comment> Permissions: {$perms} (recommended: 0644)");
             }
         } else {
             $this->line('  <comment>-</comment> .env file is not found (using system environment)');
@@ -80,11 +80,11 @@ class CheckCommand extends Command
             $value = env($var);
 
             if ($value === null || $value === '') {
-                $errors[] = "$var is not set";
-                $this->line("  <error>✗</error> $var - <comment>$description</comment>");
+                $errors[] = "{$var} is not set";
+                $this->line("  <error>✗</error> {$var} - <comment>{$description}</comment>");
             } else {
                 $displayValue = OutputHelper::maskSensitive($var, $value);
-                $this->line("  <info>✓</info> $var = $displayValue");
+                $this->line("  <info>✓</info> {$var} = {$displayValue}");
             }
         }
 
@@ -96,11 +96,11 @@ class CheckCommand extends Command
             $default = $config['default'];
 
             if ($value === null) {
-                $defaultDisplay = is_bool($default) ? ($default ? 'true' : 'false') : $default;
-                $this->line("  <comment>-</comment> $var isn't set (using default: $defaultDisplay)");
+                $defaultDisplay = \is_bool($default) ? ($default ? 'true' : 'false') : $default;
+                $this->line("  <comment>-</comment> {$var} isn't set (using default: {$defaultDisplay})");
             } else {
-                $valueDisplay = is_bool($value) ? ($value ? 'true' : 'false') : $value;
-                $this->line("  <info>✓</info> $var = $valueDisplay");
+                $valueDisplay = \is_bool($value) ? ($value ? 'true' : 'false') : $value;
+                $this->line("  <info>✓</info> {$var} = {$valueDisplay}");
             }
         }
 
@@ -114,13 +114,14 @@ class CheckCommand extends Command
             $this->line('  <comment>!</comment> Running in <comment>development</comment> mode');
             $warnings[] = 'Development mode is enabled - not recommended for production';
         } else {
-            $this->line("  <error>!</error> Unknown environment: $appEnv");
-            $warnings[] = "Unknown APP_ENV value: $appEnv";
+            $this->line("  <error>!</error> Unknown environment: {$appEnv}");
+            $warnings[] = "Unknown APP_ENV value: {$appEnv}";
         }
 
         // Database connection test
         $this->line();
         $this->section('Database Connection');
+
         try {
             // Test connection using ORM
             $count = DB()->table(BB_CONFIG)->count();
@@ -128,7 +129,7 @@ class CheckCommand extends Command
                 $this->line('  <info>✓</info> Database connection successful');
 
                 // Show database version
-                $version = DB()->fetch_row("SELECT VERSION() as version");
+                $version = DB()->fetch_row('SELECT VERSION() as version');
                 if ($version) {
                     $this->line("  <info>✓</info> Server version: {$version['version']}");
                 }
@@ -156,13 +157,13 @@ class CheckCommand extends Command
 
         foreach ($dirs as $name => $path) {
             if (!is_dir($path)) {
-                $warnings[] = "Directory not found: $name";
-                $this->line("  <comment>-</comment> $name (not found)");
+                $warnings[] = "Directory not found: {$name}";
+                $this->line("  <comment>-</comment> {$name} (not found)");
             } elseif (!is_writable($path)) {
-                $errors[] = "Directory not writable: $name";
-                $this->line("  <error>✗</error> $name (not writable)");
+                $errors[] = "Directory not writable: {$name}";
+                $this->line("  <error>✗</error> {$name} (not writable)");
             } else {
-                $this->line("  <info>✓</info> $name");
+                $this->line("  <info>✓</info> {$name}");
             }
         }
 
@@ -171,20 +172,21 @@ class CheckCommand extends Command
         $this->section('Summary');
         if (empty($errors) && empty($warnings)) {
             $this->success('All checks passed!');
+
             return self::SUCCESS;
         }
 
         if (!empty($errors)) {
             $this->error([
-                count($errors) . ' error(s):',
-                ...array_map(fn($e) => "• $e", $errors),
+                \count($errors) . ' error(s):',
+                ...array_map(fn ($e) => "• {$e}", $errors),
             ]);
         }
 
         if (!empty($warnings)) {
             $this->warning([
-                count($warnings) . ' warning(s):',
-                ...array_map(fn($w) => "• $w", $warnings),
+                \count($warnings) . ' warning(s):',
+                ...array_map(fn ($w) => "• {$w}", $warnings),
             ]);
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -12,12 +13,12 @@ if (!defined('BB_ROOT')) {
 }
 
 // Update TORRENT "completed" counters
-DB()->query("
+DB()->query('
 	UPDATE
-		" . BB_BT_TORRENTS . " tor,
-		" . BB_BT_TRACKER_SNAP . " snap
+		' . BB_BT_TORRENTS . ' tor,
+		' . BB_BT_TRACKER_SNAP . ' snap
 	SET
 		tor.complete_count = snap.completed
 	WHERE
 		tor.topic_id = snap.topic_id
-");
+');

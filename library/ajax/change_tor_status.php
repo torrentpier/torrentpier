@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -24,13 +25,13 @@ if (config()->get('tor_comment')) {
     $comment = (string)($this->request['comment'] ?? '');
 }
 
-$tor = DB()->fetch_row("
+$tor = DB()->fetch_row('
 	SELECT
 		tor.poster_id, tor.forum_id, tor.topic_id, tor.tor_status, tor.checked_time, tor.checked_user_id, f.cat_id, t.topic_title
-	FROM       " . BB_BT_TORRENTS . " tor
-	INNER JOIN " . BB_FORUMS . " f ON(f.forum_id = tor.forum_id)
-	INNER JOIN " . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
-	WHERE tor.topic_id = $topic_id
+	FROM       ' . BB_BT_TORRENTS . ' tor
+	INNER JOIN ' . BB_FORUMS . ' f ON(f.forum_id = tor.forum_id)
+	INNER JOIN ' . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
+	WHERE tor.topic_id = {$topic_id}
 	LIMIT 1
 ");
 
@@ -68,7 +69,7 @@ switch ($mode) {
             if (!IS_ADMIN) {
                 $this->verify_mod_rights($tor['forum_id']);
             }
-            DB()->query("UPDATE " . BB_TOPICS . " SET topic_status = " . TOPIC_UNLOCKED . " WHERE topic_id = {$tor['topic_id']} LIMIT 1");
+            DB()->query('UPDATE ' . BB_TOPICS . ' SET topic_status = ' . TOPIC_UNLOCKED . " WHERE topic_id = {$tor['topic_id']} LIMIT 1");
         } else {
             $this->verify_mod_rights($tor['forum_id']);
         }
@@ -76,19 +77,19 @@ switch ($mode) {
         // Confirmation of status change set by another moderator
         if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != userdata('user_id') && $tor['checked_time'] + 2 * 3600 > TIMENOW) {
             if (empty($this->request['confirmed'])) {
-                $msg = __('TOR_STATUS_OF') . " " . __('TOR_STATUS_NAME')[$tor['tor_status']] . "\n\n";
-                $msg .= ($username = get_username($tor['checked_user_id'])) ? __('TOR_STATUS_CHANGED') . html_entity_decode($username) . ", " . humanTime($tor['checked_time']) . __('TOR_BACK') . "\n\n" : "";
+                $msg = __('TOR_STATUS_OF') . ' ' . __('TOR_STATUS_NAME')[$tor['tor_status']] . "\n\n";
+                $msg .= ($username = get_username($tor['checked_user_id'])) ? __('TOR_STATUS_CHANGED') . html_entity_decode($username) . ', ' . humanTime($tor['checked_time']) . __('TOR_BACK') . "\n\n" : '';
                 $msg .= __('PROCEED') . '?';
                 $this->prompt_for_confirm($msg);
             }
         }
 
-        \TorrentPier\Torrent\Moderation::changeStatus($topic_id, $new_status);
+        TorrentPier\Torrent\Moderation::changeStatus($topic_id, $new_status);
 
         // Log action
         $log_msg = sprintf(__('TOR_STATUS_LOG_ACTION'), config()->get('tor_icons')[$new_status] . ' <b> ' . __('TOR_STATUS_NAME')[$new_status] . '</b>', config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . __('TOR_STATUS_NAME')[$tor['tor_status']] . '</b>');
         if ($comment && $comment != __('COMMENT')) {
-            $log_msg .= "<br/>{__('COMMENT')}: <b>$comment</b>.";
+            $log_msg .= "<br/>{__('COMMENT')}: <b>{$comment}</b>.";
         }
         log_action()->mod('mod_topic_change_tor_status', [
             'forum_id' => $tor['forum_id'],
@@ -109,7 +110,7 @@ switch ($mode) {
                 }
 
                 send_pm($tor['poster_id'], $subject, $message, userdata('user_id'));
-                \TorrentPier\Sessions::cache_rm_user_sessions($tor['poster_id']);
+                TorrentPier\Sessions::cache_rm_user_sessions($tor['poster_id']);
             }
         }
         break;
@@ -127,7 +128,7 @@ switch ($mode) {
         }
 
         send_pm($tor['checked_user_id'], $subject, $message, userdata('user_id'));
-        \TorrentPier\Sessions::cache_rm_user_sessions($tor['checked_user_id']);
+        TorrentPier\Sessions::cache_rm_user_sessions($tor['checked_user_id']);
         break;
 
     default:

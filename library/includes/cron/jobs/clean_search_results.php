@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -13,7 +14,7 @@ if (!defined('BB_ROOT')) {
 
 $search_results_expire = TIMENOW - 3 * 3600;
 
-DB()->query("
-	DELETE FROM " . BB_SEARCH . "
-	WHERE search_time < $search_results_expire
+DB()->query('
+	DELETE FROM ' . BB_SEARCH . "
+	WHERE search_time < {$search_results_expire}
 ");

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -15,11 +16,11 @@ require INC_DIR . '/bbcode.php';
 
 datastore()->enqueue([
     'ranks',
-    'cat_forums'
+    'cat_forums',
 ]);
 
 if (IS_GUEST) {
-    redirect(LOGIN_URL . "?redirect=" . request()->server->get('REQUEST_URI'));
+    redirect(LOGIN_URL . '?redirect=' . request()->server->get('REQUEST_URI'));
 }
 
 $user_id = request()->query->getInt(POST_USERS_URL) ?: userdata('user_id');
@@ -30,7 +31,7 @@ if (!$profiledata = get_userdata($user_id)) {
 
 // Assert canonical URL for SEO-friendly routing
 if (request()->attributes->get('semantic_route') && request()->attributes->get('semantic_route_type') === 'members') {
-    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('members', $user_id, $profiledata['username']);
+    TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('members', $user_id, $profiledata['username']);
 }
 
 $profiledata['user_birthday'] = $profiledata['user_birthday']->format('Y-m-d');
@@ -41,7 +42,7 @@ if (!$ranks = datastore()->get('ranks')) {
 }
 
 $poster_rank = $rank_image = $rank_style = $rank_select = '';
-if ($user_rank = $profiledata['user_rank'] and isset($ranks[$user_rank])) {
+if ($user_rank = $profiledata['user_rank'] && isset($ranks[$user_rank])) {
     $rank_image = ($ranks[$user_rank]['rank_image']) ? '<img src="' . make_url($ranks[$user_rank]['rank_image']) . '" alt="" title="" border="0" />' : '';
     $poster_rank = $ranks[$user_rank]['rank_title'];
     $rank_style = $ranks[$user_rank]['rank_style'];
@@ -99,7 +100,7 @@ template()->assign_vars([
     'PROFILE_USER_ID' => $profiledata['user_id'],
     'PROFILE_USER' => $profile_user_id,
     'USER_REGDATE' => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', false),
-    'POSTER_RANK' => $poster_rank ? "<span class=\"$rank_style\">" . $poster_rank . "</span>" : __('USER'),
+    'POSTER_RANK' => $poster_rank ? "<span class=\"{$rank_style}\">" . $poster_rank . '</span>' : __('USER'),
     'RANK_IMAGE' => $rank_image,
     'RANK_SELECT' => $rank_select,
     'POSTS' => $profiledata['user_posts'],
@@ -137,10 +138,10 @@ template()->assign_vars([
 
 if (IS_AM) {
     $group_membership = [];
-    $sql = "
+    $sql = '
 		SELECT COUNT(g.group_id) AS groups_cnt, g.group_single_user, ug.user_pending
-		FROM " . BB_USER_GROUP . " ug
-		LEFT JOIN " . BB_GROUPS . " g USING(group_id)
+		FROM ' . BB_USER_GROUP . ' ug
+		LEFT JOIN ' . BB_GROUPS . " g USING(group_id)
 		WHERE ug.user_id = {$profiledata['user_id']}
 		GROUP BY ug.user_id, g.group_single_user, ug.user_pending
 		ORDER BY NULL
@@ -157,10 +158,10 @@ if (IS_AM) {
             }
         }
         if ($member) {
-            $group_membership[] = __('PARTY') . " <b>$member</b>";
+            $group_membership[] = __('PARTY') . " <b>{$member}</b>";
         }
         if ($pending) {
-            $group_membership[] = __('CANDIDATE') . " <b>$pending</b>";
+            $group_membership[] = __('CANDIDATE') . " <b>{$pending}</b>";
         }
         if ($single) {
             $group_membership[] = __('INDIVIDUAL');
@@ -169,7 +170,7 @@ if (IS_AM) {
     }
     template()->assign_vars([
         'GROUP_MEMBERSHIP' => (bool)$group_membership,
-        'GROUP_MEMBERSHIP_TXT' => $group_membership
+        'GROUP_MEMBERSHIP_TXT' => $group_membership,
     ]);
 }
 
@@ -202,8 +203,8 @@ if (IS_ADMIN) {
     template()->assign_vars([
         'EDITABLE_TPLS' => true,
         'AJAX_USER_OPT' => $ajax_user_opt,
-        'U_MANAGE' => SETTINGS_URL . "?" . POST_USERS_URL . "={$profiledata['user_id']}",
-        'U_PERMISSIONS' => FORUM_PATH . "admin/admin_ug_auth.php?mode=user&amp;" . POST_USERS_URL . "={$profiledata['user_id']}",
+        'U_MANAGE' => SETTINGS_URL . '?' . POST_USERS_URL . "={$profiledata['user_id']}",
+        'U_PERMISSIONS' => FORUM_PATH . 'admin/admin_ug_auth.php?mode=user&amp;' . POST_USERS_URL . "={$profiledata['user_id']}",
     ]);
 }
 

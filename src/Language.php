@@ -21,11 +21,10 @@ use LogicException;
 class Language
 {
     private static ?Language $instance = null;
+    public private(set) string $currentLanguage = '';
     private array $userLanguage = [];
     private array $sourceLanguage = [];
-    public private(set) string $currentLanguage = '';
     private bool $initialized = false;
-
     private string $libraryLangDir;
     private string $vendorLangDir;
 
@@ -36,13 +35,59 @@ class Language
     }
 
     /**
+     * Magic method to allow property access for backward compatibility
+     */
+    public function __get(string $key): mixed
+    {
+        return $this->get($key);
+    }
+
+    /**
+     * Magic method to allow property setting for backward compatibility
+     */
+    public function __set(string $key, mixed $value): void
+    {
+        $this->set($key, $value);
+    }
+
+    /**
+     * Magic method to check if a property exists
+     */
+    public function __isset(string $key): bool
+    {
+        return $this->has($key);
+    }
+
+    /**
+     * Prevent cloning of the singleton instance
+     */
+    private function __clone() {}
+
+    /**
+     * Prevent serialization of the singleton instance
+     */
+    public function __serialize(): array
+    {
+        throw new LogicException('Cannot serialize a singleton.');
+    }
+
+    /**
+     * Prevent unserialization of the singleton instance
+     */
+    public function __unserialize(array $data): void
+    {
+        throw new LogicException('Cannot unserialize a singleton.');
+    }
+
+    /**
      * Get the singleton instance of Language
      */
     public static function getInstance(): Language
     {
         if (self::$instance === null) {
-            self::$instance = new self();
+            self::$instance = new self;
         }
+
         return self::$instance;
     }
 
@@ -78,65 +123,10 @@ class Language
         $this->loadUserLanguage($userLang);
 
         // Set locale
-        $locale = config()->get("lang.$userLang.locale", 'en_US.UTF-8');
+        $locale = config()->get("lang.{$userLang}.locale", 'en_US.UTF-8');
         setlocale(LC_ALL, $locale);
 
         $this->initialized = true;
-    }
-
-    /**
-     * Find language file in library or vendor directories
-     */
-    private function findLangFile(string $langCode, string $filename = 'main.php'): ?string
-    {
-        $libraryFile = $this->libraryLangDir . '/' . $langCode . '/' . $filename;
-        if (is_file($libraryFile)) {
-            return $libraryFile;
-        }
-
-        $vendorFile = $this->vendorLangDir . '/' . $langCode . '/' . $filename;
-        if (is_file($vendorFile)) {
-            return $vendorFile;
-        }
-
-        return null;
-    }
-
-    /**
-     * Load source language (fallback)
-     */
-    private function loadSourceLanguage(): void
-    {
-        $sourceFile = $this->findLangFile('source');
-        if ($sourceFile) {
-            $lang = [];
-            require $sourceFile;
-            $this->sourceLanguage = $lang;
-        }
-    }
-
-    /**
-     * Load user language
-     */
-    private function loadUserLanguage(string $userLang): void
-    {
-        $userFile = $this->findLangFile($userLang);
-        if ($userFile) {
-            $lang = [];
-            require $userFile;
-            $this->userLanguage = $lang;
-        } else {
-            // Fall back to default language if user language doesn't exist
-            $defaultFile = $this->findLangFile(config()->get('default_lang', 'source'));
-            if ($defaultFile) {
-                $lang = [];
-                require $defaultFile;
-                $this->userLanguage = $lang;
-            }
-        }
-
-        // Merge with source language as fallback
-        $this->userLanguage = array_deep_merge($this->sourceLanguage, $this->userLanguage);
     }
 
     /**
@@ -173,7 +163,7 @@ class Language
             return $this->getNestedValue($this->userLanguage, $key) !== null;
         }
 
-        return array_key_exists($key, $this->userLanguage);
+        return \array_key_exists($key, $this->userLanguage);
     }
 
     /**
@@ -240,6 +230,85 @@ class Language
     }
 
     /**
+     * Get language name for display
+     */
+    public function getLanguageName(string $code = ''): string
+    {
+        if (empty($code)) {
+            $code = $this->currentLanguage;
+        }
+
+        return config()->get("lang.{$code}.name", $code);
+    }
+
+    /**
+     * Get language locale
+     */
+    public function getLanguageLocale(string $code = ''): string
+    {
+        if (empty($code)) {
+            $code = $this->currentLanguage;
+        }
+
+        return config()->get("lang.{$code}.locale", 'en_US.UTF-8');
+    }
+
+    /**
+     * Find language file in library or vendor directories
+     */
+    private function findLangFile(string $langCode, string $filename = 'main.php'): ?string
+    {
+        $libraryFile = $this->libraryLangDir . '/' . $langCode . '/' . $filename;
+        if (is_file($libraryFile)) {
+            return $libraryFile;
+        }
+
+        $vendorFile = $this->vendorLangDir . '/' . $langCode . '/' . $filename;
+        if (is_file($vendorFile)) {
+            return $vendorFile;
+        }
+
+        return null;
+    }
+
+    /**
+     * Load source language (fallback)
+     */
+    private function loadSourceLanguage(): void
+    {
+        $sourceFile = $this->findLangFile('source');
+        if ($sourceFile) {
+            $lang = [];
+            require $sourceFile;
+            $this->sourceLanguage = $lang;
+        }
+    }
+
+    /**
+     * Load user language
+     */
+    private function loadUserLanguage(string $userLang): void
+    {
+        $userFile = $this->findLangFile($userLang);
+        if ($userFile) {
+            $lang = [];
+            require $userFile;
+            $this->userLanguage = $lang;
+        } else {
+            // Fall back to default language if user language doesn't exist
+            $defaultFile = $this->findLangFile(config()->get('default_lang', 'source'));
+            if ($defaultFile) {
+                $lang = [];
+                require $defaultFile;
+                $this->userLanguage = $lang;
+            }
+        }
+
+        // Merge with source language as fallback
+        $this->userLanguage = array_deep_merge($this->sourceLanguage, $this->userLanguage);
+    }
+
+    /**
      * Get nested value using dot notation
      */
     private function getNestedValue(array $array, string $key, mixed $default = null): mixed
@@ -248,7 +317,7 @@ class Language
         $value = $array;
 
         foreach ($keys as $k) {
-            if (!is_array($value) || !array_key_exists($k, $value)) {
+            if (!\is_array($value) || !\array_key_exists($k, $value)) {
                 return $default;
             }
             $value = $value[$k];
@@ -266,81 +335,12 @@ class Language
         $target = &$array;
 
         foreach ($keys as $k) {
-            if (!isset($target[$k]) || !is_array($target[$k])) {
+            if (!isset($target[$k]) || !\is_array($target[$k])) {
                 $target[$k] = [];
             }
             $target = &$target[$k];
         }
 
         $target = $value;
-    }
-
-    /**
-     * Get language name for display
-     */
-    public function getLanguageName(string $code = ''): string
-    {
-        if (empty($code)) {
-            $code = $this->currentLanguage;
-        }
-
-        return config()->get("lang.$code.name", $code);
-    }
-
-    /**
-     * Get language locale
-     */
-    public function getLanguageLocale(string $code = ''): string
-    {
-        if (empty($code)) {
-            $code = $this->currentLanguage;
-        }
-
-        return config()->get("lang.$code.locale", 'en_US.UTF-8');
-    }
-
-    /**
-     * Magic method to allow property access for backward compatibility
-     */
-    public function __get(string $key): mixed
-    {
-        return $this->get($key);
-    }
-
-    /**
-     * Magic method to allow property setting for backward compatibility
-     */
-    public function __set(string $key, mixed $value): void
-    {
-        $this->set($key, $value);
-    }
-
-    /**
-     * Magic method to check if a property exists
-     */
-    public function __isset(string $key): bool
-    {
-        return $this->has($key);
-    }
-
-    /**
-     * Prevent cloning of the singleton instance
-     */
-    private function __clone() {}
-
-    /**
-     * Prevent serialization of the singleton instance
-     */
-    public function __serialize(): array
-    {
-        throw new LogicException("Cannot serialize a singleton.");
-    }
-
-    /**
-     * Prevent unserialization of the singleton instance
-     */
-    public function __unserialize(array $data): void
-    {
-        throw new LogicException("Cannot unserialize a singleton.");
     }
 }

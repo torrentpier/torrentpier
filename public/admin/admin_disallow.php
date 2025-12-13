@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,6 +10,7 @@
 
 if (!empty($setmodules)) {
     $module['USERS']['DISALLOW'] = basename(__FILE__);
+
     return;
 }
 
@@ -22,7 +24,7 @@ if (request()->post->has('add_name')) {
     if ($disallowed_user == '') {
         bb_die(__('FIELDS_EMPTY'));
     }
-    if (\TorrentPier\Validate::username($disallowed_user)) {
+    if (TorrentPier\Validate::username($disallowed_user)) {
         $message = __('DISALLOWED_ALREADY');
     } else {
         $sql = 'INSERT INTO ' . BB_DISALLOW . " (disallow_username) VALUES('" . DB()->escape($disallowed_user) . "')";
@@ -40,7 +42,7 @@ if (request()->post->has('add_name')) {
     $disallowed_id = request()->getInt('disallowed_id');
 
     if (!empty($disallowed_id)) {
-        $sql = 'DELETE FROM ' . BB_DISALLOW . " WHERE disallow_id = $disallowed_id";
+        $sql = 'DELETE FROM ' . BB_DISALLOW . " WHERE disallow_id = {$disallowed_id}";
         $result = DB()->sql_query($sql);
         if (!$result) {
             bb_die('Could not removed disallowed user');

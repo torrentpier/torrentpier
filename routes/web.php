@@ -27,7 +27,7 @@ return function (Router $router): void {
     // Modern PSR-7 controllers (in app/Http/Controllers/)
     // ==============================================================
 
-    $router->get('/robots.txt', new RobotsController());
+    $router->get('/robots.txt', new RobotsController);
 
     // ==============================================================
     // SEO-friendly semantic routes (must be defined before legacy routes)
@@ -36,47 +36,47 @@ return function (Router $router): void {
 
     // Threads: /threads/slug.123/
     $router->any('/threads/{params}/', new RouteAdapter('threads'));
-    $router->get('/threads/{params}', new TrailingSlashRedirect());
+    $router->get('/threads/{params}', new TrailingSlashRedirect);
 
     // Forums: /forums/slug.123/
     $router->any('/forums/{params}/', new RouteAdapter('forums'));
-    $router->get('/forums/{params}', new TrailingSlashRedirect());
+    $router->get('/forums/{params}', new TrailingSlashRedirect);
 
     // Groups: /groups/ (list), /groups/slug.123/, /groups/slug.123/edit/
     $router->any('/groups/', new LegacyAdapter($basePath . '/app/Http/Controllers/group.php', 'group', options: ['manage_session' => true]));
-    $router->get('/groups', new TrailingSlashRedirect());
+    $router->get('/groups', new TrailingSlashRedirect);
     $router->any('/groups/{params}/edit/', new RouteAdapter('groups_edit', options: ['manage_session' => true]));
-    $router->get('/groups/{params}/edit', new TrailingSlashRedirect());
+    $router->get('/groups/{params}/edit', new TrailingSlashRedirect);
     $router->any('/groups/{params}/', new RouteAdapter('groups', options: ['manage_session' => true]));
-    $router->get('/groups/{params}', new TrailingSlashRedirect());
+    $router->get('/groups/{params}', new TrailingSlashRedirect);
 
     // Categories: /categories/slug.123/
     $router->any('/categories/{params}/', new RouteAdapter('categories', options: ['manage_session' => true]));
-    $router->get('/categories/{params}', new TrailingSlashRedirect());
+    $router->get('/categories/{params}', new TrailingSlashRedirect);
 
     // Profile standalone pages (static routes MUST come before variable routes)
     $router->any('/profile/bonus/', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'bonus']));
-    $router->get('/profile/bonus', new TrailingSlashRedirect());
+    $router->get('/profile/bonus', new TrailingSlashRedirect);
     $router->any('/profile/watchlist/', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'watch']));
-    $router->get('/profile/watchlist', new TrailingSlashRedirect());
+    $router->get('/profile/watchlist', new TrailingSlashRedirect);
 
     // Members: /members/ (list), /members/slug.123/ (profile), /members/slug.123/email/
     $router->any('/members/', new LegacyAdapter($basePath . '/app/Http/Controllers/memberlist.php', options: ['manage_session' => true]));
-    $router->get('/members', new TrailingSlashRedirect());
+    $router->get('/members', new TrailingSlashRedirect);
     $router->any('/members/{params}/email/', new RouteAdapter('members', options: ['action' => 'email']));
-    $router->get('/members/{params}/email', new TrailingSlashRedirect());
+    $router->get('/members/{params}/email', new TrailingSlashRedirect);
     $router->any('/members/{params}/', new RouteAdapter('members'));
-    $router->get('/members/{params}', new TrailingSlashRedirect());
+    $router->get('/members/{params}', new TrailingSlashRedirect);
 
     // Standalone auth/account pages
     $router->any('/register/', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'register']));
-    $router->get('/register', new TrailingSlashRedirect());
+    $router->get('/register', new TrailingSlashRedirect);
     $router->any('/settings/', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'editprofile']));
-    $router->get('/settings', new TrailingSlashRedirect());
+    $router->get('/settings', new TrailingSlashRedirect);
     $router->any('/password-recovery/', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'sendpassword']));
-    $router->get('/password-recovery', new TrailingSlashRedirect());
+    $router->get('/password-recovery', new TrailingSlashRedirect);
     $router->any('/activate/{u}/{key}/', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'activate']));
-    $router->get('/activate/{u}/{key}', new TrailingSlashRedirect());
+    $router->get('/activate/{u}/{key}', new TrailingSlashRedirect);
 
     // ==============================================================
     // Migrated controllers (in app/Http/Controllers/)
@@ -85,23 +85,23 @@ return function (Router $router): void {
     // Index (homepage) and forum map
     $router->any('/', new LegacyAdapter($basePath . '/app/Http/Controllers/index.php', options: ['manage_session' => true]));
     $router->get('/map/', new LegacyAdapter($basePath . '/app/Http/Controllers/index.php', options: ['manage_session' => true, 'map' => 1]));
-    $router->get('/map', new TrailingSlashRedirect());
+    $router->get('/map', new TrailingSlashRedirect);
 
     // Downloads: /dl/123/, /dl/123/files/, /dl/123/list/
     $router->get('/dl/{t}/', new LegacyAdapter($basePath . '/app/Http/Controllers/dl.php'));
-    $router->get('/dl/{t}', new TrailingSlashRedirect());
+    $router->get('/dl/{t}', new TrailingSlashRedirect);
     $router->get('/dl/{t}/files/', new LegacyAdapter($basePath . '/app/Http/Controllers/filelist.php'));
-    $router->get('/dl/{t}/files', new TrailingSlashRedirect());
+    $router->get('/dl/{t}/files', new TrailingSlashRedirect);
     $router->any('/dl/{t}/list/', new LegacyAdapter($basePath . '/app/Http/Controllers/dl_list.php'));
-    $router->get('/dl/{t}/list', new TrailingSlashRedirect());
+    $router->get('/dl/{t}/list', new TrailingSlashRedirect);
 
     // Feed: /feed/f/123/ (forum), /feed/u/123/ (user)
     $router->get('/feed/{type}/{id}/', new LegacyAdapter($basePath . '/app/Http/Controllers/feed.php', options: ['manage_session' => true]));
-    $router->get('/feed/{type}/{id}', new TrailingSlashRedirect());
+    $router->get('/feed/{type}/{id}', new TrailingSlashRedirect);
 
     // Playback: /playback/123/
     $router->get('/playback/{t}/', new LegacyAdapter($basePath . '/app/Http/Controllers/playback_m3u.php', options: ['manage_session' => true]));
-    $router->get('/playback/{t}', new TrailingSlashRedirect());
+    $router->get('/playback/{t}', new TrailingSlashRedirect);
 
     // GET
     $router->get('/info', new LegacyAdapter($basePath . '/app/Http/Controllers/info.php'));
@@ -126,12 +126,12 @@ return function (Router $router): void {
     // viewtopic?t=123 -> /threads/slug.123/
     $router->any('/viewtopic', new LegacyRedirect(
         'threads',
-        $basePath . '/app/Http/Controllers/viewtopic.php'
+        $basePath . '/app/Http/Controllers/viewtopic.php',
     ));
 
     // viewforum?f=123 -> /forums/slug.123/
     $router->any('/viewforum', new LegacyRedirect(
         'forums',
-        $basePath . '/app/Http/Controllers/viewforum.php'
+        $basePath . '/app/Http/Controllers/viewforum.php',
     ));
 };

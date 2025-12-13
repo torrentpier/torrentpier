@@ -23,7 +23,7 @@ use TorrentPier\Helpers\CronHelper;
  */
 #[AsCommand(
     name: 'cron:list',
-    description: 'List all registered cron jobs and their status'
+    description: 'List all registered cron jobs and their status',
 )]
 class CronListCommand extends Command
 {
@@ -33,10 +33,11 @@ class CronListCommand extends Command
 
         // Get cron jobs from a database
         try {
-            $jobs = DB()->fetch_rowset("SELECT * FROM " . BB_CRON . " ORDER BY cron_active DESC, run_order");
+            $jobs = DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . ' ORDER BY cron_active DESC, run_order');
 
             if (empty($jobs)) {
                 $this->warning('No cron jobs found in the database.');
+
                 return self::SUCCESS;
             }
 
@@ -64,7 +65,7 @@ class CronListCommand extends Command
 
             $this->table(
                 ['ID', 'Title', 'Status', 'Last Run', 'Next Run', 'Exec Time', 'Order'],
-                $rows
+                $rows,
             );
 
             $this->section('Status');
@@ -72,7 +73,6 @@ class CronListCommand extends Command
                 ['Cron Enabled' => CronHelper::isEnabled() ? '<info>Yes</info>' : '<comment>No</comment>'],
                 ['Lock File' => is_file(CRON_RUNNING) ? '<comment>Locked</comment>' : '<info>Free</info>'],
             );
-
         } catch (Throwable $e) {
             $this->error('Failed to fetch cron jobs: ' . $e->getMessage());
 
@@ -98,9 +98,9 @@ class CronListCommand extends Command
         $formatted = round($time, 3) . 's';
 
         return match (true) {
-            $time < 1 => "<fg=green>$formatted</>",
-            $time < 10 => "<fg=yellow>$formatted</>",
-            default => "<fg=red>$formatted</>",
+            $time < 1 => "<fg=green>{$formatted}</>",
+            $time < 10 => "<fg=yellow>{$formatted}</>",
+            default => "<fg=red>{$formatted}</>",
         };
     }
 }

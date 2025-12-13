@@ -18,7 +18,7 @@ $dl_list_sql_limit = 300;     // DL-List overall limit
 $max_dl_users_before_overflow = 100;     // for each dl-status
 $dl_users_overflow_div_height = '120px';
 $dl_users_div_style_normal = 'padding: 0px;';
-$dl_users_div_style_overflow = "padding: 6px; height: $dl_users_overflow_div_height; overflow: auto; border: 1px inset;";
+$dl_users_div_style_overflow = "padding: 6px; height: {$dl_users_overflow_div_height}; overflow: auto; border: 1px inset;";
 
 template()->assign_vars(['DL_BUTTONS' => false]);
 
@@ -33,7 +33,7 @@ $show_dl_buttons = (!IS_GUEST && $dl_topic && config()->get('bt_show_dl_list_but
 // link to clear DL-List
 template()->assign_vars(['S_DL_DELETE' => false]);
 if (($is_auth['auth_mod']) && ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL)) {
-    $s_dl_delete = "<br /><a href=\"" . DL_URL . $topic_id . "/list/?mode=dl_delete&amp;sid=" . userdata('session_id') . '">' . __('DL_LIST_DEL') . '</a>';
+    $s_dl_delete = '<br /><a href="' . DL_URL . $topic_id . '/list/?mode=dl_delete&amp;sid=' . userdata('session_id') . '">' . __('DL_LIST_DEL') . '</a>';
     template()->assign_vars(['S_DL_DELETE' => $s_dl_delete]);
 }
 
@@ -46,17 +46,17 @@ if ($show_dl_list) {
     }
 
     if ($count_mode) {
-        $sql = "SELECT dl_status AS user_status, users_count AS username
-			FROM " . BB_BT_DLSTATUS_SNAP . "
-			WHERE topic_id = $topic_id";
+        $sql = 'SELECT dl_status AS user_status, users_count AS username
+			FROM ' . BB_BT_DLSTATUS_SNAP . "
+			WHERE topic_id = {$topic_id}";
     } else {
         $sql = "SELECT d.user_status, d.user_id, DATE_FORMAT(d.last_modified_dlstatus, '%Y-%m-%d') AS last_modified_dlstatus, u.username, u.user_rank
-			FROM " . BB_BT_DLSTATUS . " d, " . BB_USERS . " u
-			WHERE d.topic_id = $topic_id
+			FROM " . BB_BT_DLSTATUS . ' d, ' . BB_USERS . " u
+			WHERE d.topic_id = {$topic_id}
 				AND d.user_id = u.user_id
 				AND d.user_status != " . DL_STATUS_RELEASER . "
 			ORDER BY d.user_status /* ASC, d.last_modified_dlstatus DESC */
-			LIMIT $dl_list_sql_limit";
+			LIMIT {$dl_list_sql_limit}";
     }
 
     if ($dl_info = DB()->fetch_rowset($sql)) {
@@ -84,7 +84,7 @@ if ($show_dl_list) {
             if ($dl_cat[$i] && !$count_mode) {
                 $dl_users_div_style = ($dl_count[$i] > $max_dl_users_before_overflow) ? $dl_users_div_style_overflow : $dl_users_div_style_normal;
                 $dl_cat[$i][strlen($dl_cat[$i]) - 2] = ' ';
-                $dl_cat[$i] = "<span class=$desc>" . $dl_cat[$i] . '</span>';
+                $dl_cat[$i] = "<span class={$desc}>" . $dl_cat[$i] . '</span>';
 
                 template()->assign_block_vars('dl_users.users_row', [
                     'DL_OPTION_NAME' => __(strtoupper($desc)),

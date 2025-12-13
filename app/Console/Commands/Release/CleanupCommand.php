@@ -14,6 +14,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 use TorrentPier\Console\Commands\Command;
 use TorrentPier\Console\Helpers\FileSystemHelper;
 
@@ -22,7 +23,7 @@ use TorrentPier\Console\Helpers\FileSystemHelper;
  */
 #[AsCommand(
     name: 'release:cleanup',
-    description: 'Remove development files for production release'
+    description: 'Remove development files for production release',
 )]
 class CleanupCommand extends Command
 {
@@ -68,13 +69,13 @@ class CleanupCommand extends Command
                 'dry-run',
                 null,
                 InputOption::VALUE_NONE,
-                'Show what would be deleted without actually deleting'
+                'Show what would be deleted without actually deleting',
             )
             ->addOption(
                 'force',
                 'f',
                 InputOption::VALUE_NONE,
-                'Skip confirmation prompt'
+                'Skip confirmation prompt',
             );
     }
 
@@ -96,6 +97,7 @@ class CleanupCommand extends Command
 
         if (empty($toDelete)) {
             $this->success('Nothing to clean up. Already clean!');
+
             return self::SUCCESS;
         }
 
@@ -108,17 +110,19 @@ class CleanupCommand extends Command
         }
 
         $this->line();
-        $this->line(sprintf('  <comment>Total: %d item(s)</comment>', count($toDelete)));
+        $this->line(\sprintf('  <comment>Total: %d item(s)</comment>', \count($toDelete)));
         $this->line();
 
         if ($dryRun) {
             $this->warning('Dry run mode - no files were deleted.');
+
             return self::SUCCESS;
         }
 
         // Confirm
         if (!$force && !$this->confirm('Delete these files permanently?', false)) {
             $this->comment('Operation cancelled.');
+
             return self::SUCCESS;
         }
 
@@ -144,7 +148,7 @@ class CleanupCommand extends Command
                     $this->line("  <error>✗</error> {$item} (failed)");
                     $failed++;
                 }
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 $this->line("  <error>✗</error> {$item} ({$e->getMessage()})");
                 $failed++;
             }

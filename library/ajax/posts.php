@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -16,12 +17,12 @@ if (!isset($this->request['type'])) {
 }
 if (isset($this->request['post_id'])) {
     $post_id = (int)$this->request['post_id'];
-    $post = DB()->fetch_row("SELECT
+    $post = DB()->fetch_row('SELECT
             t.topic_id, t.topic_title, t.topic_status, t.topic_first_post_id, t.topic_last_post_id, t.forum_id,
             p.post_id, p.poster_id, p.post_time, p.post_username,
             pt.post_text
-		FROM " . BB_TOPICS . " t, " . BB_FORUMS . " f, " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt
-		WHERE p.post_id = $post_id
+		FROM ' . BB_TOPICS . ' t, ' . BB_FORUMS . ' f, ' . BB_POSTS . ' p, ' . BB_POSTS_TEXT . " pt
+		WHERE p.post_id = {$post_id}
 			AND t.topic_id = p.topic_id
 			AND f.forum_id = t.forum_id
 			AND p.post_id  = pt.post_id
@@ -36,9 +37,9 @@ if (isset($this->request['post_id'])) {
     }
 } elseif (isset($this->request['topic_id'])) {
     $topic_id = (int)$this->request['topic_id'];
-    $post = DB()->fetch_row("SELECT t.topic_id, t.topic_title, t.topic_status, t.forum_id
-			FROM " . BB_TOPICS . " t
-			WHERE t.topic_id = $topic_id
+    $post = DB()->fetch_row('SELECT t.topic_id, t.topic_title, t.topic_status, t.forum_id
+			FROM ' . BB_TOPICS . " t
+			WHERE t.topic_id = {$topic_id}
 			LIMIT 1");
     if (!$post) {
         $this->ajax_die(__('INVALID_TOPIC_ID_DB'));
@@ -49,11 +50,11 @@ if (isset($this->request['post_id'])) {
 
 switch ($this->request['type']) {
     case 'delete':
-        if ($post['post_id'] != $post['topic_first_post_id'] && $is_auth['auth_delete'] && ($is_auth['auth_mod'] || (\TorrentPier\Topic\Guard::isAuthor($post['poster_id']) && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600 * 3 > TIMENOW))) {
+        if ($post['post_id'] != $post['topic_first_post_id'] && $is_auth['auth_delete'] && ($is_auth['auth_mod'] || (TorrentPier\Topic\Guard::isAuthor($post['poster_id']) && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600 * 3 > TIMENOW))) {
             if (empty($this->request['confirmed'])) {
                 $this->prompt_for_confirm(__('CONFIRM_DELETE'));
             }
-            \TorrentPier\Legacy\Admin\Common::post_delete($post_id);
+            TorrentPier\Legacy\Admin\Common::post_delete($post_id);
 
             $this->response['hide'] = true;
             $this->response['post_id'] = $post_id;
@@ -70,7 +71,7 @@ switch ($this->request['type']) {
         }
 
         $quote_username = ($post['post_username'] != '') ? $post['post_username'] : get_username($post['poster_id']);
-        $message = "[quote=\"" . $quote_username . "\"][qpost=" . $post['post_id'] . "]" . $post['post_text'] . "[/quote]\r";
+        $message = '[quote="' . $quote_username . '"][qpost=' . $post['post_id'] . ']' . $post['post_text'] . "[/quote]\r";
 
         // hide user passkey
         $message = preg_replace('#(?<=[\?&;]' . config()->get('passkey_key') . '=)[a-zA-Z0-9]#', 'passkey', $message);
@@ -80,7 +81,7 @@ switch ($this->request['type']) {
         $message = censor()->censorString($message);
 
         if ($post['post_id'] == $post['topic_first_post_id']) {
-            $message = "[quote]" . $post['topic_title'] . "[/quote]\r";
+            $message = '[quote]' . $post['topic_title'] . "[/quote]\r";
         }
         if (mb_strlen($message, DEFAULT_CHARSET) > 1000) {
             $this->response['redirect'] = make_url(POSTING_URL . '?mode=quote&' . POST_POST_URL . '=' . $post_id);
@@ -130,16 +131,16 @@ switch ($this->request['type']) {
                             $this->ajax_die(sprintf(__('MAX_SMILIES_PER_POST'), config()->get('max_smilies')));
                         }
                     }
-                    DB()->query("UPDATE " . BB_POSTS_TEXT . " SET post_text = '" . DB()->escape($text) . "' WHERE post_id = $post_id LIMIT 1");
-                    if ($post['topic_last_post_id'] != $post['post_id'] && \TorrentPier\Topic\Guard::isAuthor($post['poster_id'])) {
-                        DB()->query("UPDATE " . BB_POSTS . " SET post_edit_time = '" . TIMENOW . "', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id LIMIT 1");
+                    DB()->query('UPDATE ' . BB_POSTS_TEXT . " SET post_text = '" . DB()->escape($text) . "' WHERE post_id = {$post_id} LIMIT 1");
+                    if ($post['topic_last_post_id'] != $post['post_id'] && TorrentPier\Topic\Guard::isAuthor($post['poster_id'])) {
+                        DB()->query('UPDATE ' . BB_POSTS . " SET post_edit_time = '" . TIMENOW . "', post_edit_count = post_edit_count + 1 WHERE post_id = {$post_id} LIMIT 1");
                     }
                     $s_text = str_replace('\n', "\n", $text);
                     $s_topic_title = str_replace('\n', "\n", $post['topic_title']);
                     add_search_words($post_id, stripslashes($s_text), stripslashes($s_topic_title));
                     update_post_html([
                         'post_id' => $post_id,
-                        'post_text' => $text
+                        'post_text' => $text,
                     ]);
 
                     // Manticore [Post update]
@@ -217,10 +218,10 @@ switch ($this->request['type']) {
         $message = prepare_message($message);
 
         // Flood control
-        $where_sql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = " . userdata('user_id');
+        $where_sql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : 'p.poster_id = ' . userdata('user_id');
 
-        $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
-        if ($row = DB()->fetch_row($sql) and $row['last_post_time']) {
+        $sql = 'SELECT MAX(p.post_time) AS last_post_time FROM ' . BB_POSTS . " p WHERE {$where_sql}";
+        if ($row = DB()->fetch_row($sql) && $row['last_post_time']) {
             if (userdata('user_level') == USER) {
                 if ((TIMENOW - $row['last_post_time']) < config()->get('flood_interval')) {
                     $this->ajax_die(__('FLOOD_ERROR'));
@@ -230,14 +231,14 @@ switch ($this->request['type']) {
 
         // Double Post Control
         if (!empty($row['last_post_time']) && !IS_AM) {
-            $sql = "
+            $sql = '
 				SELECT pt.post_text
-				FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt
-				WHERE $where_sql
-					AND p.post_time = " . (int)$row['last_post_time'] . "
+				FROM ' . BB_POSTS . ' p, ' . BB_POSTS_TEXT . " pt
+				WHERE {$where_sql}
+					AND p.post_time = " . (int)$row['last_post_time'] . '
 					AND pt.post_id = p.post_id
 				LIMIT 1
-			";
+			';
 
             if ($row = DB()->fetch_row($sql)) {
                 $last_msg = DB()->escape($row['post_text']);
@@ -255,29 +256,29 @@ switch ($this->request['type']) {
             }
         }
 
-        DB()->sql_query("INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ($topic_id, " . $post['forum_id'] . ", " . userdata('user_id') . ", '" . TIMENOW . "', '" . USER_IP . "')");
+        DB()->sql_query('INSERT INTO ' . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ({$topic_id}, " . $post['forum_id'] . ', ' . userdata('user_id') . ", '" . TIMENOW . "', '" . USER_IP . "')");
         $post_id = DB()->sql_nextid();
-        DB()->sql_query("INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '" . DB()->escape($message) . "')");
+        DB()->sql_query('INSERT INTO ' . BB_POSTS_TEXT . " (post_id, post_text) VALUES ({$post_id}, '" . DB()->escape($message) . "')");
 
-        \TorrentPier\Legacy\Post::update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, userdata('user_id'));
+        TorrentPier\Legacy\Post::update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, userdata('user_id'));
 
         $s_message = str_replace('\n', "\n", $message);
         $s_topic_title = str_replace('\n', "\n", $post['topic_title']);
         add_search_words($post_id, stripslashes($s_message), stripslashes($s_topic_title));
         update_post_html([
             'post_id' => $post_id,
-            'post_text' => $message
+            'post_text' => $message,
         ]);
 
         if (config()->get('topic_notify_enabled')) {
             $notify = !empty($this->request['notify']);
-            \TorrentPier\Legacy\Post::user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
+            TorrentPier\Legacy\Post::user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
         }
 
         // Manticore [Post create]
         sync_post_to_manticore($post_id, $message, $post['topic_title'], $topic_id, $post['forum_id']);
 
-        $this->response['redirect'] = make_url(POST_URL . "$post_id#$post_id");
+        $this->response['redirect'] = make_url(POST_URL . "{$post_id}#{$post_id}");
         break;
 
     default:

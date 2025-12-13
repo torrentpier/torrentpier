@@ -23,7 +23,7 @@ use TorrentPier\Console\Helpers\PhinxManager;
  */
 #[AsCommand(
     name: 'make:migration',
-    description: 'Create a new database migration file'
+    description: 'Create a new database migration file',
 )]
 class MakeMigrationCommand extends Command
 {
@@ -33,7 +33,7 @@ class MakeMigrationCommand extends Command
             ->addArgument(
                 'name',
                 InputArgument::REQUIRED,
-                'Migration name in CamelCase (e.g., CreateUsersTable, AddEmailColumn)'
+                'Migration name in CamelCase (e.g., CreateUsersTable, AddEmailColumn)',
             );
     }
 
@@ -47,6 +47,7 @@ class MakeMigrationCommand extends Command
         if (!preg_match('/^[A-Z][a-zA-Z0-9]*$/', $name)) {
             $this->error('Invalid migration name. Use CamelCase starting with uppercase.');
             $this->line('Example: CreateUsersTable, AddEmailColumn, DropLegacyFields');
+
             return self::FAILURE;
         }
 

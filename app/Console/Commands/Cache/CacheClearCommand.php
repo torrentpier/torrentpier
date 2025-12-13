@@ -23,7 +23,7 @@ use TorrentPier\Console\Helpers\FileSystemHelper;
  */
 #[AsCommand(
     name: 'cache:clear',
-    description: 'Clear the application cache'
+    description: 'Clear the application cache',
 )]
 class CacheClearCommand extends Command
 {
@@ -35,13 +35,13 @@ class CacheClearCommand extends Command
                 't',
                 InputOption::VALUE_OPTIONAL,
                 'Cache type to clear (all, system, templates)',
-                'all'
+                'all',
             )
             ->addOption(
                 'force',
                 'f',
                 InputOption::VALUE_NONE,
-                'Force clear without confirmation'
+                'Force clear without confirmation',
             );
     }
 
@@ -54,6 +54,7 @@ class CacheClearCommand extends Command
 
         if (!$force && !$this->confirm('Are you sure you want to clear the cache?')) {
             $this->comment('Operation cancelled.');
+
             return self::SUCCESS;
         }
 
@@ -79,7 +80,8 @@ class CacheClearCommand extends Command
                     break;
 
                 default:
-                    $this->error("Unknown cache type: $type");
+                    $this->error("Unknown cache type: {$type}");
+
                     return self::FAILURE;
             }
 
@@ -110,7 +112,7 @@ class CacheClearCommand extends Command
         }
 
         // Clear runtime cache if available
-        if (function_exists('CACHE')) {
+        if (\function_exists('CACHE')) {
             try {
                 CACHE('bb_cache')->clean();
             } catch (Throwable) {

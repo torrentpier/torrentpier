@@ -69,7 +69,6 @@ class CacheCollector
                 $data['total_queries'] += $cacheData['num_queries'];
                 $data['total_time'] += $cacheData['total_time'];
             }
-
         } catch (Exception) {
             // Cache system not available
         }
@@ -97,7 +96,37 @@ class CacheCollector
         }
 
         $this->cachedData = $data;
+
         return $data;
+    }
+
+    /**
+     * Get summary statistics for the tab display
+     */
+    public function getStats(): array
+    {
+        $data = $this->collect();
+
+        // Count cache engines: caches + datastore (if it has operations)
+        $engineCount = \count($data['caches']);
+        if ($data['datastore'] !== null && $data['datastore']['num_queries'] > 0) {
+            $engineCount++;
+        }
+
+        return [
+            'total_queries' => $data['total_queries'],
+            'total_time' => $data['total_time'],
+            'cache_count' => $engineCount,
+            'has_datastore' => $data['datastore'] !== null,
+        ];
+    }
+
+    /**
+     * Reset cached data
+     */
+    public function reset(): void
+    {
+        $this->cachedData = null;
     }
 
     /**
@@ -108,7 +137,7 @@ class CacheCollector
         if (!empty($obj->db->dbg)) {
             return [
                 'queries' => $this->processQueries($obj->db->dbg),
-                'num_queries' => count($obj->db->dbg),
+                'num_queries' => \count($obj->db->dbg),
                 'total_time' => $obj->db->sql_timetotal ?? 0,
             ];
         }
@@ -116,7 +145,7 @@ class CacheCollector
         if (!empty($obj->dbg)) {
             return [
                 'queries' => $this->processQueries($obj->dbg),
-                'num_queries' => count($obj->dbg),
+                'num_queries' => \count($obj->dbg),
                 'total_time' => $obj->sql_timetotal ?? 0,
             ];
         }
@@ -142,34 +171,5 @@ class CacheCollector
         }
 
         return $queries;
-    }
-
-    /**
-     * Get summary statistics for the tab display
-     */
-    public function getStats(): array
-    {
-        $data = $this->collect();
-
-        // Count cache engines: caches + datastore (if it has operations)
-        $engineCount = count($data['caches']);
-        if ($data['datastore'] !== null && $data['datastore']['num_queries'] > 0) {
-            $engineCount++;
-        }
-
-        return [
-            'total_queries' => $data['total_queries'],
-            'total_time' => $data['total_time'],
-            'cache_count' => $engineCount,
-            'has_datastore' => $data['datastore'] !== null,
-        ];
-    }
-
-    /**
-     * Reset cached data
-     */
-    public function reset(): void
-    {
-        $this->cachedData = null;
     }
 }

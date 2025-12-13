@@ -22,15 +22,11 @@ interface FeedProviderInterface
 {
     /**
      * Get a unique cache key for this feed
-     *
-     * @return string
      */
     public function getCacheKey(): string;
 
     /**
      * Get feed metadata (title, link, last modified)
-     *
-     * @return FeedMetadata
      */
     public function getMetadata(): FeedMetadata;
 

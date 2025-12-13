@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Captcha;
 
+use Override;
 use Throwable;
 
 /**
@@ -20,22 +21,16 @@ class YandexSmartCaptcha implements CaptchaInterface
 {
     /**
      * Captcha service settings
-     *
-     * @var array
      */
     private array $settings;
 
     /**
      * Service verification endpoint
-     *
-     * @var string
      */
     private string $verifyEndpoint = 'https://smartcaptcha.yandexcloud.net/validate';
 
     /**
      * Constructor
-     *
-     * @param array $settings
      */
     public function __construct(array $settings)
     {
@@ -44,10 +39,8 @@ class YandexSmartCaptcha implements CaptchaInterface
 
     /**
      * Returns captcha widget
-     *
-     * @return string
      */
-    #[\Override]
+    #[Override]
     public function get(): string
     {
         return "
@@ -57,10 +50,8 @@ class YandexSmartCaptcha implements CaptchaInterface
 
     /**
      * Checking captcha answer
-     *
-     * @return bool
      */
-    #[\Override]
+    #[Override]
     public function check(): bool
     {
         // Require token present
@@ -85,9 +76,10 @@ class YandexSmartCaptcha implements CaptchaInterface
             }
 
             // Safely decode JSON with error checking
-            $responseBody = (string) $response->getBody();
+            $responseBody = (string)$response->getBody();
             if (!json_validate($responseBody)) {
-                bb_log("Yandex SmartCaptcha verification failed: Invalid JSON response" . LOG_LF);
+                bb_log('Yandex SmartCaptcha verification failed: Invalid JSON response' . LOG_LF);
+
                 return false;
             }
             $responseData = json_decode($responseBody, false);
@@ -95,12 +87,14 @@ class YandexSmartCaptcha implements CaptchaInterface
             // Validate that the response contains the expected 'status' field
             if (!isset($responseData->status)) {
                 bb_log("Yandex SmartCaptcha verification failed: Missing 'status' field in response" . LOG_LF);
+
                 return false;
             }
 
             return $responseData->status === 'ok';
         } catch (Throwable $e) {
             bb_log("Yandex SmartCaptcha verification failed: {$e->getMessage()}" . LOG_LF);
+
             return false;
         }
     }

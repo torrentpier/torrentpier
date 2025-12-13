@@ -10,6 +10,8 @@
 
 namespace TorrentPier;
 
+use LogicException;
+
 /**
  * Word Censoring System
  *
@@ -22,15 +24,11 @@ class Censor
 
     /**
      * Word replacements
-     *
-     * @var array
      */
     public array $replacements = [];
 
     /**
      * All censored words (RegEx)
-     *
-     * @var array
      */
     public array $words = [];
 
@@ -43,13 +41,35 @@ class Censor
     }
 
     /**
+     * Prevent cloning of the singleton instance
+     */
+    private function __clone() {}
+
+    /**
+     * Prevent serialization of the singleton instance
+     */
+    public function __serialize(): array
+    {
+        throw new LogicException('Cannot serialize a singleton.');
+    }
+
+    /**
+     * Prevent unserialization of the singleton instance
+     */
+    public function __unserialize(array $data): void
+    {
+        throw new LogicException('Cannot unserialize a singleton.');
+    }
+
+    /**
      * Get the singleton instance of Censor
      */
     public static function getInstance(): Censor
     {
         if (self::$instance === null) {
-            self::$instance = new self();
+            self::$instance = new self;
         }
+
         return self::$instance;
     }
 
@@ -62,28 +82,7 @@ class Censor
     }
 
     /**
-     * Load censored words from datastore
-     */
-    private function loadCensoredWords(): void
-    {
-        if (!$this->isEnabled()) {
-            return;
-        }
-
-        // Get censored words
-        $censoredWords = datastore()->get('censor');
-
-        foreach ($censoredWords as $word) {
-            $this->words[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($word['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
-            $this->replacements[] = $word['replacement'];
-        }
-    }
-
-    /**
      * Word censor
-     *
-     * @param string $word
-     * @return string
      */
     public function censorString(string $word): string
     {
@@ -115,9 +114,6 @@ class Censor
 
     /**
      * Add a censored word (runtime only)
-     *
-     * @param string $word
-     * @param string $replacement
      */
     public function addWord(string $word, string $replacement): void
     {
@@ -130,27 +126,24 @@ class Censor
      */
     public function getWordsCount(): int
     {
-        return count($this->words);
+        return \count($this->words);
     }
 
     /**
-     * Prevent cloning of the singleton instance
+     * Load censored words from datastore
      */
-    private function __clone() {}
-
-    /**
-     * Prevent serialization of the singleton instance
-     */
-    public function __serialize(): array
+    private function loadCensoredWords(): void
     {
-        throw new \LogicException("Cannot serialize a singleton.");
-    }
+        if (!$this->isEnabled()) {
+            return;
+        }
 
-    /**
-     * Prevent unserialization of the singleton instance
-     */
-    public function __unserialize(array $data): void
-    {
-        throw new \LogicException("Cannot unserialize a singleton.");
+        // Get censored words
+        $censoredWords = datastore()->get('censor');
+
+        foreach ($censoredWords as $word) {
+            $this->words[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($word['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
+            $this->replacements[] = $word['replacement'];
+        }
     }
 }

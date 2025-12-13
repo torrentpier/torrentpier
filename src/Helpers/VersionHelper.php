@@ -25,22 +25,17 @@ class VersionHelper
 
     /**
      * Returns version without prefix (v)
-     *
-     * @param string $version
-     * @return string
      */
     public static function removerPrefix(string $version): string
     {
         $version = trim($version);
         $version = mb_strtolower($version, DEFAULT_CHARSET);
+
         return str_replace(self::VERSION_PREFIX, '', $version);
     }
 
     /**
      * Returns version with prefix (v)
-     *
-     * @param string $version
-     * @return string
      */
     public static function addPrefix(string $version): string
     {

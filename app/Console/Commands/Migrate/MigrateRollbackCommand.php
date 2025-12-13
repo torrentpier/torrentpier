@@ -23,7 +23,7 @@ use TorrentPier\Console\Helpers\PhinxManager;
  */
 #[AsCommand(
     name: 'migrate:rollback',
-    description: 'Rollback the last database migration'
+    description: 'Rollback the last database migration',
 )]
 class MigrateRollbackCommand extends Command
 {
@@ -34,13 +34,13 @@ class MigrateRollbackCommand extends Command
                 'target',
                 't',
                 InputOption::VALUE_OPTIONAL,
-                'Target migration version to rollback to (0 = rollback all)'
+                'Target migration version to rollback to (0 = rollback all)',
             )
             ->addOption(
                 'yes',
                 'y',
                 InputOption::VALUE_NONE,
-                'Skip confirmation prompt'
+                'Skip confirmation prompt',
             );
     }
 
@@ -57,32 +57,34 @@ class MigrateRollbackCommand extends Command
 
             if ($status['ran'] === 0) {
                 $this->warning('No migrations to rollback.');
+
                 return self::SUCCESS;
             }
 
             // Show what will be rolled back
             $ranMigrations = array_filter(
                 $status['migrations'],
-                fn($m) => $m['status'] === 'up'
+                fn ($m) => $m['status'] === 'up',
             );
 
             if (empty($ranMigrations)) {
                 $this->warning('No migrations to rollback.');
+
                 return self::SUCCESS;
             }
 
             if ($target === '0') {
                 $this->warning('This will rollback ALL migrations!');
             } elseif ($target !== null) {
-                $targetVersion = (int) $target;
-                $affectedCount = count(array_filter(
+                $targetVersion = (int)$target;
+                $affectedCount = \count(array_filter(
                     $ranMigrations,
-                    fn($m) => (int) $m['version'] > $targetVersion
+                    fn ($m) => (int)$m['version'] > $targetVersion,
                 ));
-                $this->info(sprintf('Rolling back to version %d (%d migration(s))', $targetVersion, $affectedCount));
+                $this->info(\sprintf('Rolling back to version %d (%d migration(s))', $targetVersion, $affectedCount));
             } else {
                 $lastMigration = end($ranMigrations);
-                $this->info(sprintf('Rolling back: %s', $lastMigration['name']));
+                $this->info(\sprintf('Rolling back: %s', $lastMigration['name']));
             }
 
             if (!$skipConfirm) {
@@ -92,13 +94,14 @@ class MigrateRollbackCommand extends Command
 
                 if (!$this->confirm('Are you sure you want to rollback?')) {
                     $this->comment('Operation cancelled.');
+
                     return self::SUCCESS;
                 }
             }
 
             $this->section('Rolling Back');
 
-            $targetVersion = $target !== null ? (int) $target : null;
+            $targetVersion = $target !== null ? (int)$target : null;
             $phinx->rollback($targetVersion);
 
             $this->line();

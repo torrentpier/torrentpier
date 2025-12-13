@@ -33,13 +33,13 @@ abstract class AbstractMaintenanceCommand extends Command
                 'force',
                 'f',
                 InputOption::VALUE_NONE,
-                'Skip confirmation prompts'
+                'Skip confirmation prompts',
             )
             ->addOption(
                 'dry-run',
                 null,
                 InputOption::VALUE_NONE,
-                'Show what would be done without making changes'
+                'Show what would be done without making changes',
             );
     }
 
@@ -48,7 +48,7 @@ abstract class AbstractMaintenanceCommand extends Command
      */
     protected function isForce(): bool
     {
-        return (bool) $this->input->getOption('force');
+        return (bool)$this->input->getOption('force');
     }
 
     /**
@@ -56,7 +56,7 @@ abstract class AbstractMaintenanceCommand extends Command
      */
     protected function isDryRun(): bool
     {
-        return (bool) $this->input->getOption('dry-run');
+        return (bool)$this->input->getOption('dry-run');
     }
 
     /**
@@ -95,7 +95,7 @@ abstract class AbstractMaintenanceCommand extends Command
      */
     protected function danger(string|array $message): void
     {
-        $messages = (array) $message;
+        $messages = (array)$message;
         $this->line();
         $this->line('<error>  ' . str_repeat(' ', max(array_map('strlen', $messages))) . '  </error>');
         foreach ($messages as $msg) {
@@ -104,5 +104,4 @@ abstract class AbstractMaintenanceCommand extends Command
         $this->line('<error>  ' . str_repeat(' ', max(array_map('strlen', $messages))) . '  </error>');
         $this->line();
     }
-
 }

@@ -267,7 +267,7 @@ describe('DatabaseDebugger Class', function () {
             $this->debugger->sql_starttime = microtime(true);
 
             // Should not throw
-            expect(fn() => $this->debugger->log_query())->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->log_query())->not->toThrow(Exception::class);
         });
 
         it('logs slow queries when they exceed threshold', function () {
@@ -275,7 +275,7 @@ describe('DatabaseDebugger Class', function () {
             $this->debugger->cur_query_time = 0.002; // Exceeds threshold
             $this->db->cur_query = 'SELECT SLEEP(1)';
 
-            expect(fn() => $this->debugger->log_slow_query())->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->log_slow_query())->not->toThrow(Exception::class);
         });
 
         it('respects slow query cache setting', function () {
@@ -294,7 +294,7 @@ describe('DatabaseDebugger Class', function () {
             $this->debugger->cur_query_time = 0.002;
 
             // Should not log due to cache setting
-            expect(fn() => $this->debugger->log_slow_query())->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->log_slow_query())->not->toThrow(Exception::class);
         });
     });
 
@@ -302,14 +302,14 @@ describe('DatabaseDebugger Class', function () {
         it('logs exceptions with detailed information', function () {
             $exception = new Exception('Test database error', 1064);
 
-            expect(fn() => $this->debugger->log_error($exception))->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->log_error($exception))->not->toThrow(Exception::class);
         });
 
         it('logs PDO exceptions with specific details', function () {
             $pdoException = new PDOException('Connection failed');
             $pdoException->errorInfo = ['42000', 1045, 'Access denied'];
 
-            expect(fn() => $this->debugger->log_error($pdoException))->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->log_error($pdoException))->not->toThrow(Exception::class);
         });
 
         it('logs comprehensive context information', function () {
@@ -319,14 +319,14 @@ describe('DatabaseDebugger Class', function () {
 
             $exception = new Exception('Table does not exist');
 
-            expect(fn() => $this->debugger->log_error($exception))->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->log_error($exception))->not->toThrow(Exception::class);
         });
 
         it('handles empty or no-error states gracefully', function () {
             // Mock sql_error to return no error
             $this->db->connection = mockConnection();
 
-            expect(fn() => $this->debugger->log_error())->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->log_error())->not->toThrow(Exception::class);
         });
 
         it('checks connection status during error logging', function () {
@@ -334,7 +334,7 @@ describe('DatabaseDebugger Class', function () {
 
             $exception = new Exception('No connection');
 
-            expect(fn() => $this->debugger->log_error($exception))->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->log_error($exception))->not->toThrow(Exception::class);
         });
     });
 
@@ -385,13 +385,13 @@ describe('DatabaseDebugger Class', function () {
     describe('Performance Optimization', function () {
         it('marks slow queries for ignoring when expected', function () {
             // Test that the method exists and can be called without throwing
-            expect(fn() => $this->debugger->expect_slow_query(60, 5))->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->expect_slow_query(60, 5))->not->toThrow(Exception::class);
         });
 
         it('respects priority levels for slow query marking', function () {
             // Test that the method handles multiple calls correctly
-            expect(fn() => $this->debugger->expect_slow_query(30, 10))->not->toThrow(Exception::class);
-            expect(fn() => $this->debugger->expect_slow_query(60, 5))->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->expect_slow_query(30, 10))->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->expect_slow_query(60, 5))->not->toThrow(Exception::class);
         });
     });
 
@@ -407,8 +407,8 @@ describe('DatabaseDebugger Class', function () {
             $this->debugger->debug('stop');
 
             // Test that the stats method exists and returns expected structure
-            $result = method_exists($this->debugger, 'getDebugStats') ||
-                !empty($this->debugger->dbg);
+            $result = method_exists($this->debugger, 'getDebugStats')
+                || !empty($this->debugger->dbg);
 
             expect($result)->toBe(true);
         });
@@ -475,21 +475,21 @@ describe('DatabaseDebugger Class', function () {
             $this->db->cur_query = null;
             $this->debugger->dbg_enabled = true;
 
-            expect(fn() => $this->debugger->debug('start'))->not->toThrow(Exception::class);
-            expect(fn() => $this->debugger->debug('stop'))->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->debug('start'))->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->debug('stop'))->not->toThrow(Exception::class);
         });
 
         it('handles debugging when connection is null', function () {
             $this->db->connection = null;
 
-            expect(fn() => $this->debugger->log_error(new Exception('Test')))->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->log_error(new Exception('Test')))->not->toThrow(Exception::class);
         });
 
         it('handles missing global functions gracefully', function () {
             // Test when bb_log function doesn't exist
             if (function_exists('bb_log')) {
                 // We can't really undefine it, but we can test error handling
-                expect(fn() => $this->debugger->log_query())->not->toThrow(Exception::class);
+                expect(fn () => $this->debugger->log_query())->not->toThrow(Exception::class);
             }
         });
 
@@ -503,7 +503,7 @@ describe('DatabaseDebugger Class', function () {
             expect($this->debugger->dbg_id)->toBe(0);
 
             // Test that debug operations still work with empty state
-            expect(fn() => $this->debugger->debug('start'))->not->toThrow(Exception::class);
+            expect(fn () => $this->debugger->debug('start'))->not->toThrow(Exception::class);
         });
     });
 });

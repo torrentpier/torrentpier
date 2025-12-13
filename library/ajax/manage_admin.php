@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -32,9 +33,9 @@ switch ($mode) {
     case 'clear_template_cache':
         $twigCacheDir = template()->getCacheDir() . 'twig';
         if (is_dir($twigCacheDir)) {
-            $iterator = new \RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator($twigCacheDir, \FilesystemIterator::SKIP_DOTS),
-                \RecursiveIteratorIterator::CHILD_FIRST
+            $iterator = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($twigCacheDir, FilesystemIterator::SKIP_DOTS),
+                RecursiveIteratorIterator::CHILD_FIRST,
             );
             foreach ($iterator as $file) {
                 if ($file->isDir()) {
@@ -56,20 +57,20 @@ switch ($mode) {
         }
         break;
     case 'update_user_level':
-        \TorrentPier\Legacy\Group::update_user_level('all');
+        TorrentPier\Legacy\Group::update_user_level('all');
         $this->response['update_user_level_html'] = '<span class="seed bold">' . __('USER_LEVELS_UPDATED') . '</span>';
         break;
     case 'sync_topics':
-        \TorrentPier\Legacy\Admin\Common::sync('topic', 'all');
-        \TorrentPier\Legacy\Admin\Common::sync_all_forums();
+        TorrentPier\Legacy\Admin\Common::sync('topic', 'all');
+        TorrentPier\Legacy\Admin\Common::sync_all_forums();
         $this->response['sync_topics_html'] = '<span class="seed bold">' . __('TOPICS_DATA_SYNCHRONIZED') . '</span>';
         break;
     case 'sync_user_posts':
-        \TorrentPier\Legacy\Admin\Common::sync('user_posts', 'all');
+        TorrentPier\Legacy\Admin\Common::sync('user_posts', 'all');
         $this->response['sync_user_posts_html'] = '<span class="seed bold">' . __('USER_POSTS_COUNT_SYNCHRONIZED') . '</span>';
         break;
     case 'unlock_cron':
-        \TorrentPier\Helpers\CronHelper::enableBoard();
+        TorrentPier\Helpers\CronHelper::enableBoard();
         $this->response['unlock_cron_html'] = '<span class="seed bold">' . __('ADMIN_UNLOCKED') . '</span>';
         break;
 
@@ -117,7 +118,7 @@ switch ($mode) {
 
         $html = '<table class="forumline"><tr><th colspan="2">' . __('TORRENT_STATS_TITLE') . '</th></tr>';
         foreach ($stats as $i => $value) {
-            $label = __('TR_STATS')[$i] ?? "Stat $i";
+            $label = __('TR_STATS')[$i] ?? "Stat {$i}";
             $html .= '<tr><td class="row1">' . $label . '</td><td class="row2"><b>' . $value . '</b></td></tr>';
         }
         $html .= '</table><br/>';
@@ -131,7 +132,8 @@ switch ($mode) {
 
         // Drop any existing temporary table and create a fresh one
         DB()->query('DROP TEMPORARY TABLE IF EXISTS tmp_tracker_stats');
-        DB()->query('
+        DB()->query(
+            '
             CREATE TEMPORARY TABLE tmp_tracker_stats (
                 `topic_id` mediumint(8) unsigned NOT NULL default 0,
                 `user_id` mediumint(9) NOT NULL default 0,
@@ -142,12 +144,13 @@ switch ($mode) {
                 `update_time` int(11) NOT NULL default 0
             )
             SELECT topic_id, user_id, peer_id, seeder, speed_up, speed_down, update_time
-            FROM ' . BB_BT_TRACKER
+            FROM ' . BB_BT_TRACKER,
         );
 
         // Collect stats (raw SQL for temporary table, Explorer doesn't support it)
-        $pWithinAnn = (int)DB()->fetch_row('
-            SELECT COUNT(*) AS cnt FROM tmp_tracker_stats WHERE update_time >= ' . (TIMENOW - $announceInterval)
+        $pWithinAnn = (int)DB()->fetch_row(
+            '
+            SELECT COUNT(*) AS cnt FROM tmp_tracker_stats WHERE update_time >= ' . (TIMENOW - $announceInterval),
         )['cnt'];
 
         $allPeersData = DB()->fetch_row('
@@ -182,7 +185,7 @@ switch ($mode) {
                 $clientsPercentage = [];
                 foreach ($clients as $client => $count) {
                     $percentage = number_format(($count / $clientCount) * 100, 2);
-                    $clientsPercentage[$client] = "[$count] => $percentage%";
+                    $clientsPercentage[$client] = "[{$count}] => {$percentage}%";
                 }
                 CACHE('tr_cache')->set('tracker_clients_stats', $clientsPercentage, 3600);
             }
@@ -192,7 +195,7 @@ switch ($mode) {
         $numwant = 10;
         $n = 1;
         foreach (array_slice($clientsPercentage, 0, $numwant) as $client => $value) {
-            $clientList .= "$n. " . get_user_torrent_client($client) . " $value<br/>";
+            $clientList .= "{$n}. " . get_user_torrent_client($client) . " {$value}<br/>";
             $n++;
         }
 

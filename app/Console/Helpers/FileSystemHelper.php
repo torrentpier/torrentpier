@@ -42,7 +42,7 @@ class FileSystemHelper
         try {
             $iterator = new RecursiveIteratorIterator(
                 new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS),
-                RecursiveIteratorIterator::CHILD_FIRST
+                RecursiveIteratorIterator::CHILD_FIRST,
             );
 
             foreach ($iterator as $item) {
@@ -51,17 +51,17 @@ class FileSystemHelper
 
                 if ($item->isDir()) {
                     // Only remove empty directories (may fail if not empty - that's ok)
-                    if (is_dir($path) && count(scandir($path)) === 2) {
+                    if (is_dir($path) && \count(scandir($path)) === 2) {
                         rmdir($path);
                     }
-                } elseif (!in_array($filename, $exclude, true)) {
+                } elseif (!\in_array($filename, $exclude, true)) {
                     if (is_file($path) && !unlink($path)) {
                         return false;
                     }
                 }
             }
 
-            if ($removeRoot && is_dir($dir) && count(scandir($dir)) === 2) {
+            if ($removeRoot && is_dir($dir) && \count(scandir($dir)) === 2) {
                 return rmdir($dir);
             }
 
@@ -99,7 +99,7 @@ class FileSystemHelper
 
         try {
             $iterator = new RecursiveIteratorIterator(
-                new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS)
+                new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS),
             );
 
             foreach ($iterator as $item) {
@@ -130,7 +130,7 @@ class FileSystemHelper
 
         try {
             $iterator = new RecursiveIteratorIterator(
-                new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS)
+                new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS),
             );
 
             foreach ($iterator as $item) {
@@ -163,7 +163,7 @@ class FileSystemHelper
         try {
             $iterator = new RecursiveIteratorIterator(
                 new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS),
-                RecursiveIteratorIterator::CHILD_FIRST
+                RecursiveIteratorIterator::CHILD_FIRST,
             );
 
             foreach ($iterator as $item) {
@@ -171,10 +171,10 @@ class FileSystemHelper
 
                 if ($item->isDir()) {
                     // Only remove empty directories
-                    if (is_dir($path) && count(scandir($path)) === 2) {
+                    if (is_dir($path) && \count(scandir($path)) === 2) {
                         rmdir($path);
                     }
-                } elseif (!in_array($item->getFilename(), $exclude, true)) {
+                } elseif (!\in_array($item->getFilename(), $exclude, true)) {
                     if (is_file($path) && unlink($path)) {
                         $count++;
                     }
@@ -199,7 +199,7 @@ class FileSystemHelper
         $units = ['B', 'KB', 'MB', 'GB', 'TB'];
         $i = 0;
 
-        while ($bytes >= 1024 && $i < count($units) - 1) {
+        while ($bytes >= 1024 && $i < \count($units) - 1) {
             $bytes /= 1024;
             $i++;
         }

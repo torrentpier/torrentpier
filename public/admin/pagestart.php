@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -24,5 +25,5 @@ if (!IS_ADMIN) {
 
 if (!userdata('session_admin')) {
     $redirect = url_arg(request()->getRequestUri(), 'admin', 1);
-    redirect(LOGIN_URL . "?redirect=$redirect");
+    redirect(LOGIN_URL . "?redirect={$redirect}");
 }

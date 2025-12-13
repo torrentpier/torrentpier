@@ -26,11 +26,10 @@ trait ResponseTrait
      * Create a 404 Not Found response
      *
      * @param string $message Error message to display
-     * @return ResponseInterface
      */
     protected function notFoundResponse(string $message): ResponseInterface
     {
-        $response = new Response();
+        $response = new Response;
         $response->getBody()->write($message);
 
         return $response
@@ -43,11 +42,10 @@ trait ResponseTrait
      *
      * @param string $url Target URL
      * @param int $status HTTP status code (301 for permanent, 302 for temporary)
-     * @return ResponseInterface
      */
     protected function redirectResponse(string $url, int $status = 301): ResponseInterface
     {
-        $response = new Response();
+        $response = new Response;
 
         return $response
             ->withStatus($status)
@@ -58,7 +56,6 @@ trait ResponseTrait
      * Create a permanent (301) redirect response
      *
      * @param string $url Target URL
-     * @return ResponseInterface
      */
     protected function permanentRedirect(string $url): ResponseInterface
     {
@@ -69,7 +66,6 @@ trait ResponseTrait
      * Create a temporary (302) redirect response
      *
      * @param string $url Target URL
-     * @return ResponseInterface
      */
     protected function temporaryRedirect(string $url): ResponseInterface
     {

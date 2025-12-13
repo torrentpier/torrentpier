@@ -31,9 +31,9 @@ if (IS_GUEST) {
 
 $errors = [];
 
-$sql = "SELECT username, user_id, user_rank, user_email, user_lang
-	FROM " . BB_USERS . "
-	WHERE user_id = $user_id
+$sql = 'SELECT username, user_id, user_rank, user_email, user_lang
+	FROM ' . BB_USERS . "
+	WHERE user_id = {$user_id}
 ";
 
 if ($row = DB()->fetch_row($sql)) {
@@ -54,7 +54,7 @@ if ($row = DB()->fetch_row($sql)) {
 
         if (!$errors) {
             // Sending email
-            $emailer = new TorrentPier\Emailer();
+            $emailer = new TorrentPier\Emailer;
 
             $emailer->set_to($user_email, $username);
             $emailer->set_subject($subject);
@@ -80,7 +80,6 @@ if ($row = DB()->fetch_row($sql)) {
     ]);
 
     print_page('usercp_email.tpl');
-
 } else {
     bb_die(__('USER_NOT_EXIST'));
 }

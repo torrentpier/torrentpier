@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,6 +12,7 @@ if (!empty($setmodules)) {
     if (IS_SUPER_ADMIN) {
         $module['GENERAL']['PHP_INFO'] = basename(__FILE__);
     }
+
     return;
 }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -21,14 +22,14 @@ if (config()->get('tracker.bt_off')) {
 //
 function silent_exit($msg = '')
 {
-    echo \Arokettu\Bencode\Bencode::encode(['warning message' => str_compact($msg)]);
+    echo Arokettu\Bencode\Bencode::encode(['warning message' => str_compact($msg)]);
 
     exit;
 }
 
 function error_exit($msg = '')
 {
-    echo \Arokettu\Bencode\Bencode::encode(['failure reason' => str_compact($msg)]);
+    echo Arokettu\Bencode\Bencode::encode(['failure reason' => str_compact($msg)]);
 
     exit;
 }
@@ -48,7 +49,7 @@ function drop_fast_announce($lp_info, $lp_cached_peers = [])
 
 function msg_die($msg)
 {
-    $output = \Arokettu\Bencode\Bencode::encode([
+    $output = Arokettu\Bencode\Bencode::encode([
         'interval' => (int)1800,
         'failure reason' => (string)$msg,
     ]);
@@ -78,7 +79,7 @@ function dummy_exit($interval = 1800, $cache_dict = [])
         $output['peers6'] = $cache_dict['peers6'];
     }
 
-    $output = \Arokettu\Bencode\Bencode::encode($output);
+    $output = Arokettu\Bencode\Bencode::encode($output);
 
     die($output);
 }

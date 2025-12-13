@@ -17,8 +17,9 @@ class ForumTree
     public static function getInstance(): self
     {
         if (self::$instance === null) {
-            self::$instance = new self();
+            self::$instance = new self;
         }
+
         return self::$instance;
     }
 
@@ -35,6 +36,7 @@ class ForumTree
             }
             $this->data = $data ?: [];
         }
+
         return $this->data;
     }
 

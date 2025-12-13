@@ -18,9 +18,6 @@ class StringHelper
 {
     /**
      * Return true if $value contains numbers
-     *
-     * @param string $value
-     * @return bool
      */
     public static function isContainsNums(string $value): bool
     {
@@ -29,10 +26,6 @@ class StringHelper
 
     /**
      * Return true if $value contains letters (Uppercase included)
-     *
-     * @param string $value
-     * @param bool $uppercase
-     * @return bool
      */
     public static function isContainsLetters(string $value, bool $uppercase = false): bool
     {
@@ -41,9 +34,6 @@ class StringHelper
 
     /**
      * Return true if $value contains special symbols
-     *
-     * @param string $value
-     * @return bool
      */
     public static function isContainsSpecSymbols(string $value): bool
     {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,6 +10,7 @@
 
 if (!empty($setmodules)) {
     $module['FORUMS']['PRUNE'] = basename(__FILE__);
+
     return;
 }
 
@@ -19,29 +21,29 @@ $pruned_total = 0;
 $prune_performed = false;
 
 if (request()->has('submit')) {
-    if (!$var = request()->get('f') or !$f_selected = get_id_ary($var)) {
+    if (!$var = request()->get('f') || !$f_selected = get_id_ary($var)) {
         bb_die(__('SELECT_FORUM'));
     }
-    if (!$var = request()->get('prunedays') or !$prunedays = abs((int)$var)) {
+    if (!$var = request()->get('prunedays') || !$prunedays = abs((int)$var)) {
         bb_die(__('NOT_DAYS'));
     }
 
     $prunetime = TIMENOW - 86400 * $prunedays;
     $forum_csv = in_array($all_forums, $f_selected) ? $all_forums : implode(',', $f_selected);
 
-    $where_sql = ($forum_csv != $all_forums) ? "WHERE forum_id IN($forum_csv)" : '';
+    $where_sql = ($forum_csv != $all_forums) ? "WHERE forum_id IN({$forum_csv})" : '';
 
-    $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS . " $where_sql";
+    $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS . " {$where_sql}";
 
     foreach (DB()->fetch_rowset($sql) as $i => $row) {
-        $pruned_topics = \TorrentPier\Legacy\Admin\Common::topic_delete('prune', $row['forum_id'], $prunetime, request()->post->has('prune_all_topic_types'));
+        $pruned_topics = TorrentPier\Legacy\Admin\Common::topic_delete('prune', $row['forum_id'], $prunetime, request()->post->has('prune_all_topic_types'));
         $pruned_total += $pruned_topics;
         $prune_performed = true;
 
         template()->assign_block_vars('pruned', [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
-            'PRUNED_TOPICS' => $pruned_topics
+            'PRUNED_TOPICS' => $pruned_topics,
         ]);
     }
     if (!$prune_performed) {
@@ -55,7 +57,7 @@ if (request()->has('submit')) {
 template()->assign_vars([
     'PRUNED_TOTAL' => $pruned_total,
     'S_PRUNE_ACTION' => basename(__FILE__),
-    'SEL_FORUM' => get_forum_select('admin', 'f[]', null, 65, 16, '', $all_forums)
+    'SEL_FORUM' => get_forum_select('admin', 'f[]', null, 65, 16, '', $all_forums),
 ]);
 
 print_page('admin_forum_prune.tpl', 'admin');
