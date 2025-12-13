@@ -131,15 +131,19 @@ class User
                 $userdata_cache_id = USER_IP;
             }
 
-            if (!$this->data = Sessions::cache_get_userdata($userdata_cache_id)) {
-                $this->data = DB()->fetch_row($SQL);
+            $cachedData = Sessions::cache_get_userdata($userdata_cache_id);
+            if ($cachedData) {
+                $this->data = $cachedData;
+            } else {
+                $rowData = DB()->fetch_row($SQL);
+                if ($rowData) {
+                    $this->data = $rowData;
 
-                if ($this->data && (TIMENOW - $this->data['session_time']) > config()->get('session_update_intrv')) {
-                    $this->data['session_time'] = TIMENOW;
-                    $update_sessions_table = true;
-                }
+                    if ((TIMENOW - $this->data['session_time']) > config()->get('session_update_intrv')) {
+                        $this->data['session_time'] = TIMENOW;
+                        $update_sessions_table = true;
+                    }
 
-                if ($this->data) {
                     Sessions::cache_set_userdata($this->data);
                 }
             }

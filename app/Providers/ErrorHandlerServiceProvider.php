@@ -32,12 +32,12 @@ class ErrorHandlerServiceProvider extends ServiceProvider
     {
         // Whoops error handler
         $this->app->singleton(WhoopsManager::class, function () {
-            return WhoopsManager::getInstance();
+            return new WhoopsManager;
         });
 
         // Tracy debug bar
         $this->app->singleton(TracyBarManager::class, function () {
-            return TracyBarManager::getInstance();
+            return new TracyBarManager;
         });
 
         // Register aliases

@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\ServerBag;
 use UnexpectedValueException;
 
 /**
- * HTTP Request (singleton)
+ * HTTP Request wrapper
  * Centralized request handling based on Symfony HttpFoundation
  *
  * Provides typed access to request parameters with fallback defaults.
@@ -40,13 +40,12 @@ use UnexpectedValueException;
  */
 final class Request
 {
-    private static ?self $instance = null;
     private SymfonyRequest $request;
 
     /**
-     * Private constructor to prevent direct instantiation
+     * Create a new Request instance from globals
      */
-    private function __construct()
+    public function __construct()
     {
         $this->request = SymfonyRequest::createFromGlobals();
     }
@@ -68,22 +67,6 @@ final class Request
             'attributes' => $this->request->attributes,
             default => null,
         };
-    }
-
-    /**
-     * Get a singleton instance
-     */
-    public static function getInstance(): self
-    {
-        return self::$instance ??= new self;
-    }
-
-    /**
-     * Reset singleton instance (useful for testing)
-     */
-    public static function resetInstance(): void
-    {
-        self::$instance = null;
     }
 
     /**

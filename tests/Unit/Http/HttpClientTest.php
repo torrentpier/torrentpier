@@ -13,9 +13,6 @@ use TorrentPier\Http\HttpClient;
 
 describe('HttpClient Class', function () {
     beforeEach(function () {
-        // Reset singleton between tests
-        HttpClient::resetInstance();
-
         // Mock config() function if not already defined
         if (!function_exists('config')) {
             function config(): object
@@ -56,52 +53,24 @@ describe('HttpClient Class', function () {
         }
     });
 
-    afterEach(function () {
-        HttpClient::resetInstance();
-    });
+    describe('Instance Creation', function () {
+        it('creates instance correctly', function () {
+            $instance = new HttpClient;
 
-    describe('Singleton Pattern', function () {
-        it('creates singleton instance correctly', function () {
-            $instance1 = HttpClient::getInstance();
-            $instance2 = HttpClient::getInstance();
-
-            expect($instance1)->toBe($instance2)
-                ->and($instance1)->toBeInstanceOf(HttpClient::class);
-        });
-
-        it('resets singleton instance', function () {
-            $instance1 = HttpClient::getInstance();
-            HttpClient::resetInstance();
-            $instance2 = HttpClient::getInstance();
-
-            expect($instance1)->not->toBe($instance2);
+            expect($instance)->toBeInstanceOf(HttpClient::class);
         });
 
         it('returns Guzzle client instance', function () {
-            $httpClient = HttpClient::getInstance();
+            $httpClient = new HttpClient;
             $guzzleClient = $httpClient->getClient();
 
             expect($guzzleClient)->toBeInstanceOf(Client::class);
         });
 
-        it('prevents cloning', function () {
-            $instance = HttpClient::getInstance();
+        it('creates simple client without retry middleware', function () {
+            $client = HttpClient::createSimpleClient();
 
-            expect(fn () => clone $instance)->toThrow(Error::class);
-        });
-
-        it('throws exception when trying to serialize', function () {
-            // Singleton pattern prevents serialization through __serialize (PHP 8.2+)
-            $instance = HttpClient::getInstance();
-
-            expect(fn () => $instance->__serialize())->toThrow(LogicException::class);
-        });
-
-        it('throws exception when trying to unserialize', function () {
-            // Singleton pattern prevents unserialization through __unserialize (PHP 8.2+)
-            $instance = HttpClient::getInstance();
-
-            expect(fn () => $instance->__unserialize([]))->toThrow(LogicException::class);
+            expect($client)->toBeInstanceOf(Client::class);
         });
     });
 
@@ -109,7 +78,7 @@ describe('HttpClient Class', function () {
         beforeEach(function () {
             $this->mockHandler = new MockHandler;
             $this->handlerStack = HandlerStack::create($this->mockHandler);
-            $this->httpClient = HttpClient::getInstance(['handler' => $this->handlerStack]);
+            $this->httpClient = new HttpClient(['handler' => $this->handlerStack]);
         });
 
         it('performs GET request successfully', function () {
@@ -208,7 +177,7 @@ describe('HttpClient Class', function () {
         beforeEach(function () {
             $this->mockHandler = new MockHandler;
             $this->handlerStack = HandlerStack::create($this->mockHandler);
-            $this->httpClient = HttpClient::getInstance(['handler' => $this->handlerStack]);
+            $this->httpClient = new HttpClient(['handler' => $this->handlerStack]);
         });
 
         it('does not throw on 4xx responses by default', function () {
@@ -257,7 +226,7 @@ describe('HttpClient Class', function () {
             $history = Middleware::history($container);
             $handlerStack->push($history);
 
-            $httpClient = HttpClient::getInstance(['handler' => $handlerStack]);
+            $httpClient = new HttpClient(['handler' => $handlerStack]);
             $response = $httpClient->get('https://example.com/notfound');
 
             expect($response->getStatusCode())->toBe(404)
@@ -268,7 +237,7 @@ describe('HttpClient Class', function () {
         it('validates retry configuration is present', function () {
             // Test that HttpClient has retry logic by checking it doesn't immediately fail
             // This is a behavioral test rather than testing internal implementation
-            $httpClient = HttpClient::getInstance();
+            $httpClient = new HttpClient;
 
             expect($httpClient)->toBeInstanceOf(HttpClient::class)
                 ->and($httpClient->getClient())->toBeInstanceOf(Client::class);
@@ -277,7 +246,7 @@ describe('HttpClient Class', function () {
         it('handles server errors gracefully', function () {
             $mockHandler = new MockHandler([new Response(500, [], 'Server Error')]);
             $handlerStack = HandlerStack::create($mockHandler);
-            $httpClient = HttpClient::getInstance(['handler' => $handlerStack]);
+            $httpClient = new HttpClient(['handler' => $handlerStack]);
 
             $response = $httpClient->get('https://example.com/api');
 
@@ -288,7 +257,7 @@ describe('HttpClient Class', function () {
         it('handles 429 Too Many Requests', function () {
             $mockHandler = new MockHandler([new Response(429, [], 'Too Many Requests')]);
             $handlerStack = HandlerStack::create($mockHandler);
-            $httpClient = HttpClient::getInstance(['handler' => $handlerStack]);
+            $httpClient = new HttpClient(['handler' => $handlerStack]);
 
             $response = $httpClient->get('https://example.com/api');
 
@@ -301,7 +270,7 @@ describe('HttpClient Class', function () {
                 new ConnectException('Connection failed', $request),
             ]);
             $handlerStack = HandlerStack::create($mockHandler);
-            $httpClient = HttpClient::getInstance(['handler' => $handlerStack]);
+            $httpClient = new HttpClient(['handler' => $handlerStack]);
 
             expect(fn () => $httpClient->get('https://example.com/api'))
                 ->toThrow(HttpClientException::class);
@@ -312,7 +281,7 @@ describe('HttpClient Class', function () {
         it('has retry delay configuration', function () {
             // Test that retry delay logic exists by verifying the HttpClient
             // is properly constructed with retry middleware
-            $httpClient = HttpClient::getInstance();
+            $httpClient = new HttpClient;
 
             // Behavioral test: verify instance is created successfully
             expect($httpClient)->toBeInstanceOf(HttpClient::class);
@@ -324,7 +293,7 @@ describe('HttpClient Class', function () {
                 new Response(429, ['Retry-After' => '5'], 'Too Many Requests'),
             ]);
             $handlerStack = HandlerStack::create($mockHandler);
-            $httpClient = HttpClient::getInstance(['handler' => $handlerStack]);
+            $httpClient = new HttpClient(['handler' => $handlerStack]);
 
             $response = $httpClient->get('https://example.com/api');
 
@@ -337,7 +306,7 @@ describe('HttpClient Class', function () {
         beforeEach(function () {
             $this->mockHandler = new MockHandler;
             $this->handlerStack = HandlerStack::create($this->mockHandler);
-            $this->httpClient = HttpClient::getInstance(['handler' => $this->handlerStack]);
+            $this->httpClient = new HttpClient(['handler' => $this->handlerStack]);
             $this->testFile = sys_get_temp_dir() . '/test_download_' . uniqid() . '.txt';
         });
 
@@ -441,7 +410,7 @@ describe('HttpClient Class', function () {
 
     describe('Configuration', function () {
         it('accepts custom timeout configuration', function () {
-            $httpClient = HttpClient::getInstance([
+            $httpClient = new HttpClient([
                 'timeout' => 30,
                 'connect_timeout' => 10,
             ]);
@@ -456,7 +425,7 @@ describe('HttpClient Class', function () {
             $history = Middleware::history($container);
             $handlerStack->push($history);
 
-            $httpClient = HttpClient::getInstance([
+            $httpClient = new HttpClient([
                 'handler' => $handlerStack,
                 'headers' => [
                     'X-Custom-Global' => 'global-value',
@@ -471,7 +440,7 @@ describe('HttpClient Class', function () {
         });
 
         it('verifies SSL certificates by default', function () {
-            $httpClient = HttpClient::getInstance();
+            $httpClient = new HttpClient;
 
             // We can't directly test this without making real requests,
             // but we can verify the instance is created with verify: true
@@ -486,7 +455,7 @@ describe('HttpClient Class', function () {
             $this->container = [];
             $this->history = Middleware::history($this->container);
             $this->handlerStack->push($this->history);
-            $this->httpClient = HttpClient::getInstance(['handler' => $this->handlerStack]);
+            $this->httpClient = new HttpClient(['handler' => $this->handlerStack]);
         });
 
         it('handles query parameters', function () {

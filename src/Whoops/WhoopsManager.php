@@ -13,7 +13,6 @@ namespace TorrentPier\Whoops;
 use Bugsnag\Client;
 use jacklul\MonologTelegramHandler\TelegramFormatter;
 use jacklul\MonologTelegramHandler\TelegramHandler;
-use LogicException;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\BrowserConsoleHandler;
 use Monolog\Handler\StreamHandler;
@@ -24,34 +23,17 @@ use Whoops\Run;
 /**
  * Whoops Error Handler Manager
  *
- * Singleton that initializes Whoops for error display.
+ * Initializes Whoops for error display.
  * Integrates with Monolog for logging and external services (Telegram, Bugsnag).
  */
 class WhoopsManager
 {
-    private static ?self $instance = null;
     public private(set) Run $whoops;
     private bool $initialized = false;
 
-    private function __construct()
+    public function __construct()
     {
         $this->whoops = new Run;
-    }
-
-    private function __clone() {}
-
-    public function __wakeup(): void
-    {
-        throw new LogicException('Cannot unserialize a singleton.');
-    }
-
-    public static function getInstance(): self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
     }
 
     /**
