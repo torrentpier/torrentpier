@@ -10,7 +10,7 @@
 
 namespace TorrentPier\Tracy\Collectors;
 
-use Exception;
+use Throwable;
 use TorrentPier\Cache\UnifiedCacheSystem;
 
 /**
@@ -37,7 +37,7 @@ class CacheCollector
         ];
 
         try {
-            $cacheSystem = UnifiedCacheSystem::getInstance();
+            $cacheSystem = app(UnifiedCacheSystem::class);
             $cacheObjects = $cacheSystem->obj; // Uses magic __get method
 
             foreach ($cacheObjects as $cacheName => $cacheObj) {
@@ -69,7 +69,7 @@ class CacheCollector
                 $data['total_queries'] += $cacheData['num_queries'];
                 $data['total_time'] += $cacheData['total_time'];
             }
-        } catch (Exception) {
+        } catch (Throwable) {
             // Cache system not available
         }
 
@@ -91,7 +91,7 @@ class CacheCollector
             $data['datastore'] = $datastoreData;
             $data['total_queries'] += $datastoreData['num_queries'];
             $data['total_time'] += $datastoreData['total_time'];
-        } catch (Exception) {
+        } catch (Throwable) {
             // Datastore not available
         }
 

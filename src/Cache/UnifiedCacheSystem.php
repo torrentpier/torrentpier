@@ -11,8 +11,8 @@
 namespace TorrentPier\Cache;
 
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InvalidArgumentException;
-use LogicException;
 use Memcached;
 use Nette\Caching\Storage;
 use Nette\Caching\Storages\FileStorage;
@@ -30,11 +30,6 @@ use Throwable;
  */
 class UnifiedCacheSystem
 {
-    /**
-     * Singleton instance
-     */
-    private static ?self $instance = null;
-
     /**
      * Configuration
      */
@@ -63,7 +58,7 @@ class UnifiedCacheSystem
     /**
      * Constructor
      */
-    private function __construct(array $cfg)
+    public function __construct(array $cfg)
     {
         $this->cfg = $cfg['cache'] ?? [];
 
@@ -73,7 +68,7 @@ class UnifiedCacheSystem
             'engine' => 'Memory',
             'prefix' => $this->cfg['prefix'] ?? 'tp_',
         ];
-        $this->stub = CacheManager::getInstance('__stub', $stubStorage, $stubConfig);
+        $this->stub = new CacheManager('__stub', $stubStorage, $stubConfig);
     }
 
     /**
@@ -101,47 +96,6 @@ class UnifiedCacheSystem
             default:
                 throw new InvalidArgumentException("Property '{$name}' not found");
         }
-    }
-
-    /**
-     * Prevent cloning of the singleton instance
-     */
-    private function __clone() {}
-
-    /**
-     * Prevent serialization of the singleton instance
-     */
-    public function __serialize(): array
-    {
-        throw new LogicException('Cannot serialize a singleton.');
-    }
-
-    /**
-     * Prevent unserialization of the singleton instance
-     */
-    public function __unserialize(array $data): void
-    {
-        throw new LogicException('Cannot unserialize a singleton.');
-    }
-
-    /**
-     * Get a singleton instance
-     */
-    public static function getInstance(?array $cfg = null): self
-    {
-        if (self::$instance === null) {
-            if ($cfg === null) {
-                // Fallback to global config if available
-                $cfg = \function_exists('config') ? config()->all() : [];
-
-                if (empty($cfg)) {
-                    throw new InvalidArgumentException('Configuration must be provided on first initialization');
-                }
-            }
-            self::$instance = new self($cfg);
-        }
-
-        return self::$instance;
     }
 
     /**
@@ -176,7 +130,7 @@ class UnifiedCacheSystem
                         ];
                     }
 
-                    $this->managers[$cache_name] = CacheManager::getInstance($cache_name, $storage, $config);
+                    $this->managers[$cache_name] = new CacheManager($cache_name, $storage, $config);
                 }
                 $this->ref[$cache_name] = $this->managers[$cache_name];
             }
@@ -187,6 +141,7 @@ class UnifiedCacheSystem
 
     /**
      * Get a datastore manager instance
+     * @throws BindingResolutionException
      */
     public function getDatastore(string $datastore_type = 'file'): DatastoreManager
     {
@@ -210,7 +165,7 @@ class UnifiedCacheSystem
                 ];
             }
 
-            $this->datastore = DatastoreManager::getInstance($storage, $config);
+            $this->datastore = new DatastoreManager($storage, $config);
         }
 
         return $this->datastore;
@@ -292,7 +247,7 @@ class UnifiedCacheSystem
             'prefix' => $fullConfig['prefix'],
         ];
 
-        return CacheManager::getInstance($namespace, $storage, $managerConfig);
+        return new CacheManager($namespace, $storage, $managerConfig);
     }
 
     /**
@@ -322,7 +277,7 @@ class UnifiedCacheSystem
             'prefix' => $this->cfg['prefix'] ?? 'tp_',
         ];
 
-        return CacheManager::getInstance($namespace, $storage, $config);
+        return new CacheManager($namespace, $storage, $config);
     }
 
     /**

@@ -22,7 +22,6 @@ class Template
     /** Reserved context keys that should not be overwritten */
     private const array RESERVED_KEYS = ['L', '_tpldata', 'V', 'IMG'];
 
-    private static array $instances = [];
     private static float $totalRenderTime = 0;
 
     /** @var array<array{variable: string, template: string, source: string, time: float}> */
@@ -31,7 +30,6 @@ class Template
     /** @var array<array{variable: string, old_value: mixed, new_value: mixed, source: string, time: float}> */
     private static array $variableShadowing = [];
 
-    private static ?self $defaultInstance = null;
     private ?Environment $twig = null;
 
     /** Block data for template loops */
@@ -52,7 +50,7 @@ class Template
     /** Current template name */
     private string $templateName;
 
-    private function __construct(string $root = '.')
+    public function __construct(string $root = '.')
     {
         $this->variables = &$this->blockData['.'][0];
         $this->rootDir = TwigEnvironmentFactory::normalizePath($root);
@@ -64,31 +62,6 @@ class Template
         }
 
         $this->initializeTwig();
-    }
-
-    public static function getInstance(?string $root = null): self
-    {
-        if ($root === null && self::$defaultInstance !== null) {
-            return self::$defaultInstance;
-        }
-
-        $root = $root ?: '.';
-        $key = md5($root);
-
-        if (!isset(self::$instances[$key])) {
-            self::$instances[$key] = new self($root);
-        }
-
-        // When called with a proper templates directory, make it the default
-        // This allows setup_style() to override any early initialization
-        $normalizedRoot = TwigEnvironmentFactory::normalizePath($root);
-        if ($root !== '.' && (str_contains($normalizedRoot, '/views/') || str_contains($normalizedRoot, '/templates/'))) {
-            self::$defaultInstance = self::$instances[$key];
-        } elseif (self::$defaultInstance === null) {
-            self::$defaultInstance = self::$instances[$key];
-        }
-
-        return self::$instances[$key];
     }
 
     /**

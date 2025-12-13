@@ -510,7 +510,7 @@ $datastore->store('custom_data', $data);
 #### Modern Foundation
 - **Nette Caching v3.3**: Modern, actively maintained caching library
 - **Unified System**: Single caching implementation instead of duplicate Cache/Datastore code
-- **Singleton Pattern**: Efficient memory usage and consistent TorrentPier architecture
+- **DI Container**: Managed via Application container for efficient memory usage
 - **Advanced Features**: Dependencies, tags, bulk operations, memoization
 
 #### Enhanced Performance
@@ -543,7 +543,7 @@ For comprehensive information about the unified cache system, advanced features,
 **[src/Cache/README.md](src/Cache/README.md)**
 
 This documentation covers:
-- Complete architecture overview and singleton pattern
+- Complete architecture overview and DI container integration
 - Advanced Nette Caching features and usage examples
 - Performance benchmarks and storage type comparisons
 - Critical compatibility issues resolved during implementation
@@ -700,7 +700,7 @@ $bb_cfg['search_fallback_to_mysql'] = true;
 
 ## 🌐 Language System Migration
 
-TorrentPier has modernized its language system with a singleton pattern while maintaining 100% backward compatibility with existing global `$lang` variable.
+TorrentPier has modernized its language system with DI container integration while maintaining 100% backward compatibility with existing global `$lang` variable.
 
 ### No Code Changes Required
 
@@ -716,7 +716,7 @@ echo $lang['DATETIME']['TODAY'];
 ### Key Improvements
 
 #### Modern Foundation
-- **Singleton Pattern**: Efficient memory usage and consistent TorrentPier architecture
+- **DI Container**: Managed via Application container for efficient memory usage
 - **Centralized Management**: Single point of control for language loading and switching
 - **Type Safety**: Better error detection and IDE support
 - **Dot Notation Support**: Access nested language arrays with simple syntax
@@ -729,7 +729,7 @@ echo $lang['DATETIME']['TODAY'];
 
 ### Enhanced Capabilities
 
-New code can leverage the modern Language singleton features with convenient shorthand functions:
+New code can leverage the modern Language class features with convenient shorthand functions:
 
 ```php
 // ✅ Convenient shorthand functions (recommended for frequent use)
@@ -738,7 +738,7 @@ echo __('DATETIME.TODAY');                  // Dot notation for nested arrays
 _e('WELCOME_MESSAGE');                      // Echo shorthand
 $message = __('CUSTOM_MESSAGE', 'Default'); // With default value
 
-// ✅ Full singleton access (for advanced features)
+// ✅ Full lang() helper access (for advanced features)
 echo lang()->get('FORUM');
 echo lang()->get('DATETIME.TODAY');  // Dot notation for nested arrays
 
@@ -799,10 +799,10 @@ lang()->set('LOGIN', 'Sign In');
 
 ### Backward Compatibility Features
 
-The singleton automatically maintains all global variables:
+The Language class automatically maintains all global variables:
 
 ```php
-// Global variable is automatically updated by the singleton
+// Global variable is automatically updated by the Language class
 global $lang;
 
 // When you call lang()->set(), global is updated
@@ -815,7 +815,7 @@ echo $lang['CUSTOM'];  // Outputs: "Value"
 
 ### Integration with User System
 
-The Language singleton integrates seamlessly with the User system:
+The Language class integrates seamlessly with the User system:
 
 ```php
 // User language is automatically detected and initialized
@@ -880,7 +880,7 @@ if (isset(lang()->ADVANCED_FEATURE)) {
 ### Performance Benefits
 
 While maintaining compatibility, you get:
-- **Single Language Loading**: Languages loaded once and cached in singleton
+- **Single Language Loading**: Languages loaded once and cached in container
 - **Memory Efficiency**: No duplicate language arrays across application
 - **Automatic Locale Setting**: Proper locale configuration for date/time formatting
 - **Fallback Chain**: Source language → Default language → Requested language
@@ -898,7 +898,7 @@ _e('INFORMATION');  // Echo directly
 // ✅ Test with default values
 echo "Custom: " . __('CUSTOM_KEY', 'Default Value');
 
-// ✅ Test full singleton access
+// ✅ Test full lang() helper access
 echo "Current language: " . lang()->getCurrentLanguage();
 echo "Language name: " . lang()->getLanguageName();
 
@@ -913,7 +913,7 @@ echo "Sync test: " . $lang['TEST_KEY'];  // Should output: "Test Value"
 
 ## 🛡️ Censor System Migration
 
-The word censoring system has been refactored to use a singleton pattern, similar to the Configuration system, providing better performance and consistency.
+The word censoring system has been refactored to use DI container, similar to the Configuration system, providing better performance and consistency.
 
 ### Quick Migration Overview
 
@@ -982,7 +982,7 @@ $censored = censor()->censorString($text);
 
 When you update censored words in the admin panel, the system now automatically:
 1. Updates the datastore cache
-2. Reloads the singleton instance with fresh words
+2. Reloads the Censor instance with fresh words
 3. Applies changes immediately without requiring page refresh
 
 ## 📋 Select System Migration
@@ -1055,7 +1055,7 @@ use TorrentPier\Legacy\Common\Select;
 
 ## 🛠️ Development System Migration
 
-The development and debugging system has been refactored to use a singleton pattern with Tracy debug bar integration, replacing the legacy HTML-based debug panel.
+The development and debugging system has been refactored with Tracy debug bar integration, replacing the legacy HTML-based debug panel.
 
 ### Quick Migration Overview
 
@@ -1134,11 +1134,11 @@ The following methods were removed (replaced by Tracy debug bar):
 ### Advanced Usage
 
 ```php
-// Access the singleton directly
-$devInstance = \TorrentPier\Dev::getInstance();
+// Access via dev() helper
+$devInstance = dev();
 
 // Initialize the system (called automatically in common.php)
-\TorrentPier\Dev::init();
+// Dev is automatically initialized when first accessed
 
 // Get detailed environment information
 $environment = [
@@ -1384,7 +1384,7 @@ function processUserInput(string $text): string {
     return $text;
 }
 
-// ✅ Use the singleton consistently
+// ✅ Use the censor() helper consistently
 $censoredText = censor()->censorString($input);
 ```
 

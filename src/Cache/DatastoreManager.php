@@ -12,6 +12,7 @@ namespace TorrentPier\Cache;
 
 use BadMethodCallException;
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InvalidArgumentException;
 use Nette\Caching\Cache;
 use Nette\Caching\Storage;
@@ -24,11 +25,6 @@ use Nette\Caching\Storage;
  */
 class DatastoreManager
 {
-    /**
-     * Singleton instance
-     */
-    private static ?self $instance = null;
-
     /**
      * Директория с builder-скриптами (внутри INC_DIR)
      */
@@ -95,11 +91,12 @@ class DatastoreManager
      * Constructor
      *
      * @param Storage $storage Pre-built storage instance from UnifiedCacheSystem
+     * @throws BindingResolutionException
      */
-    private function __construct(Storage $storage, array $config)
+    public function __construct(Storage $storage, array $config)
     {
-        // Create unified cache manager for datastore with pre-built storage
-        $this->cacheManager = CacheManager::getInstance('datastore', $storage, $config);
+        // Create a unified cache manager for datastore with pre-built storage
+        $this->cacheManager = new CacheManager('datastore', $storage, $config);
         $this->engine = $this->cacheManager->engine;
         $this->dbg_enabled = tracy()->isDebugAllowed();
     }
@@ -153,20 +150,6 @@ class DatastoreManager
         } else {
             throw new InvalidArgumentException("Property '{$name}' not found");
         }
-    }
-
-    /**
-     * Get singleton instance
-     *
-     * @param Storage $storage Pre-built storage instance
-     */
-    public static function getInstance(Storage $storage, array $config): self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self($storage, $config);
-        }
-
-        return self::$instance;
     }
 
     /**
