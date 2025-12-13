@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace TorrentPier\Router;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
+
 /**
  * Front Controller for TorrentPier
  *
@@ -234,11 +236,12 @@ class FrontController
 
     /**
      * Check if a route exists for the given path
+     * @throws BindingResolutionException
      */
     private function routeExists(string $path): bool
     {
         if ($this->router === null) {
-            $this->router = Router::getInstance();
+            $this->router = app(Router::class);
 
             if (!$this->router->areRoutesLoaded()) {
                 $routes = require $this->appPath . '/routes/web.php';

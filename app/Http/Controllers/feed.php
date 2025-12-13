@@ -27,7 +27,7 @@ if (!in_array($type, ['f', 'u'], true) || $id < 0) {
 }
 
 try {
-    $generator = FeedGenerator::getInstance();
+    $generator = app(FeedGenerator::class);
     $atomContent = '';
 
     if ($type === 'f') {

@@ -77,7 +77,7 @@ switch ($result['action']) {
             $app->boot();
         }
 
-        $router = TorrentPier\Router\Router::getInstance();
+        $router = app(TorrentPier\Router\Router::class);
 
         // Load routes only if not already loaded (FrontController may have loaded them)
         if (!$router->areRoutesLoaded()) {

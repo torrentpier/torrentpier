@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Console\Commands\Route;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -43,12 +44,15 @@ class ListCommand extends Command
             );
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Registered Routes');
 
         // Load routes
-        $router = Router::getInstance();
+        $router = app(Router::class);
         $routesFile = BB_ROOT . 'routes/web.php';
 
         if (!is_file($routesFile)) {

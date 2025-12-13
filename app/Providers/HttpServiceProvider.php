@@ -42,7 +42,7 @@ class HttpServiceProvider extends ServiceProvider
 
         // Router singleton
         $this->app->singleton(Router::class, function () {
-            return Router::getInstance();
+            return new Router;
         });
 
         // Register aliases

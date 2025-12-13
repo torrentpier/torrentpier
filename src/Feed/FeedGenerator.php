@@ -17,25 +17,20 @@ use FeedIo\Adapter\Http\Client;
 use FeedIo\Feed;
 use FeedIo\FeedIo;
 use Http\Discovery\Psr18ClientDiscovery;
-use LogicException;
 use Psr\Log\NullLogger;
 use Throwable;
 use TorrentPier\Feed\Exception\FeedGenerationException;
 use TorrentPier\Feed\Provider\FeedProviderInterface;
 
 /**
- * Feed generator (singleton)
+ * Feed generator
  * Generates Atom feeds using a feed-io library with caching support
  */
 final class FeedGenerator
 {
-    private static ?self $instance = null;
     private FeedIo $feedIo;
 
-    /**
-     * Private constructor to prevent direct instantiation
-     */
-    private function __construct()
+    public function __construct()
     {
         try {
             // Find PSR-18 HTTP client
@@ -51,39 +46,6 @@ final class FeedGenerator
 
         // Create a FeedIo instance
         $this->feedIo = new FeedIo($client, $logger);
-    }
-
-    /**
-     * Prevent cloning
-     */
-    private function __clone() {}
-
-    /**
-     * Prevent serialization of the singleton instance
-     */
-    public function __serialize(): array
-    {
-        throw new LogicException('Cannot serialize singleton');
-    }
-
-    /**
-     * Prevent unserialization of the singleton instance
-     */
-    public function __unserialize(array $data): void
-    {
-        throw new LogicException('Cannot unserialize singleton');
-    }
-
-    /**
-     * Get a singleton instance
-     */
-    public static function getInstance(): self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
     }
 
     /**

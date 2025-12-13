@@ -14,6 +14,7 @@ namespace App\Providers;
 
 use TorrentPier\Ajax;
 use TorrentPier\Censor;
+use TorrentPier\Feed\FeedGenerator;
 use TorrentPier\Forum\ForumTree;
 use TorrentPier\Language;
 use TorrentPier\ServiceProvider;
@@ -46,11 +47,17 @@ class AppServiceProvider extends ServiceProvider
         // Language system (auto-wired with Config)
         $this->app->singleton(Language::class);
 
+        // Feed generator
+        $this->app->singleton(FeedGenerator::class, function () {
+            return new FeedGenerator;
+        });
+
         // Register aliases
         $this->app->alias(Ajax::class, 'ajax');
         $this->app->alias(Censor::class, 'censor');
         $this->app->alias(ForumTree::class, 'forum_tree');
         $this->app->alias(Language::class, 'lang');
+        $this->app->alias(FeedGenerator::class, 'feed');
     }
 
     /**
@@ -73,10 +80,12 @@ class AppServiceProvider extends ServiceProvider
             Censor::class,
             ForumTree::class,
             Language::class,
+            FeedGenerator::class,
             'ajax',
             'censor',
             'forum_tree',
             'lang',
+            'feed',
         ];
     }
 }
