@@ -33,6 +33,7 @@ class VersionHelper
     {
         $version = trim($version);
         $version = mb_strtolower($version, DEFAULT_CHARSET);
+
         return str_replace(self::VERSION_PREFIX, '', $version);
     }
 

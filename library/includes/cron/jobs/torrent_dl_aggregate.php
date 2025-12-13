@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
@@ -27,5 +27,5 @@ foreach ($downloads as $row) {
 }
 
 // Clear tracking tables for the new day
-DB()->query("TRUNCATE TABLE " . BB_TORRENT_DL);
-DB()->query("TRUNCATE TABLE " . BB_USER_DL_DAY);
+DB()->query('TRUNCATE TABLE ' . BB_TORRENT_DL);
+DB()->query('TRUNCATE TABLE ' . BB_USER_DL_DAY);

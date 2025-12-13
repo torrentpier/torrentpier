@@ -40,6 +40,14 @@ class Romanization
     }
 
     /**
+     * Reset cached map (useful for testing)
+     */
+    public static function reset(): void
+    {
+        self::$map = null;
+    }
+
+    /**
      * Build the romanization map
      *
      * @return array<string, string>
@@ -1378,13 +1386,5 @@ class Romanization
             'ㅒ' => 'yay',
             'ㅖ' => 'yey',
         ];
-    }
-
-    /**
-     * Reset cached map (useful for testing)
-     */
-    public static function reset(): void
-    {
-        self::$map = null;
     }
 }

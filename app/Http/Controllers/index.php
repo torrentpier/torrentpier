@@ -7,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 page_cfg('load_tpl_vars', [
     'post_icons',
 ]);
@@ -49,8 +48,8 @@ if (!request()->attributes->get('semantic_route') && request()->getMethod() === 
         $forums = forum_tree();
         if (isset($forums['c'][$legacyCatId])) {
             $catTitle = $forums['c'][$legacyCatId]['cat_title'];
-            \TorrentPier\Http\Response::permanentRedirect(
-                make_url(url()->category($legacyCatId, $catTitle))
+            TorrentPier\Http\Response::permanentRedirect(
+                make_url(url()->category($legacyCatId, $catTitle)),
             )->send();
             exit;
         }
@@ -71,7 +70,7 @@ $req_page .= $viewcat ? "_c{$viewcat}" : '';
 define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . config()->get('default_lang'));
 
-$hide_cat_opt = isset(user()->opt_js['h_cat']) ? (string) user()->opt_js['h_cat'] : 0;
+$hide_cat_opt = isset(user()->opt_js['h_cat']) ? (string)user()->opt_js['h_cat'] : 0;
 $hide_cat_user = array_flip(explode('-', $hide_cat_opt));
 $showhide = request()->query->getInt('sh');
 
@@ -94,17 +93,17 @@ $excluded_forums_array = $excluded_forums_csv ? explode(',', $excluded_forums_cs
 $only_new = user()->opt_js['only_new'];
 
 // Validate requested category id
-if ($viewcat && !($viewcat = & $forums['c'][$viewcat]['cat_id'])) {
+if ($viewcat && !($viewcat = &$forums['c'][$viewcat]['cat_id'])) {
     redirect('/');
 }
 
 // Assert canonical URL for category (redirect if slug doesn't match)
 if (request()->attributes->get('semantic_route') && request()->attributes->get('semantic_route_type') === 'categories' && $viewcat) {
-    \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical(
+    TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical(
         'categories',
         $viewcat,
         $cat_data[$viewcat]['cat_title'],
-        request()->attributes->get('semantic_route_slug')
+        request()->attributes->get('semantic_route_slug'),
     );
     // Set canonical URL for the category page
     template()->assign_vars([
@@ -115,24 +114,24 @@ if (request()->attributes->get('semantic_route') && request()->attributes->get('
 // Forums
 $forums_join_sql = 'f.cat_id = c.cat_id';
 $forums_join_sql .= $viewcat ? "
-	AND f.cat_id = $viewcat
+	AND f.cat_id = {$viewcat}
 " : '';
 $forums_join_sql .= $excluded_forums_csv ? "
-	AND f.forum_id NOT IN($excluded_forums_csv)
-	AND f.forum_parent NOT IN($excluded_forums_csv)
+	AND f.forum_id NOT IN({$excluded_forums_csv})
+	AND f.forum_parent NOT IN({$excluded_forums_csv})
 " : '';
 
 // Posts
 $posts_join_sql = 'p.post_id = f.forum_last_post_id';
 $posts_join_sql .= ($only_new == ONLY_NEW_POSTS) ? "
-	AND p.post_time > $lastvisit
+	AND p.post_time > {$lastvisit}
 " : '';
 $join_p_type = ($only_new == ONLY_NEW_POSTS) ? 'INNER JOIN' : 'LEFT JOIN';
 
 // Topics
 $topics_join_sql = 't.topic_last_post_id = p.post_id';
 $topics_join_sql .= ($only_new == ONLY_NEW_TOPICS) ? "
-	AND t.topic_time > $lastvisit
+	AND t.topic_time > {$lastvisit}
 " : '';
 $join_t_type = ($only_new == ONLY_NEW_TOPICS) ? 'INNER JOIN' : 'LEFT JOIN';
 
@@ -141,11 +140,11 @@ $sql = "
 		p.post_id AS last_post_id, p.post_time AS last_post_time,
 		t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
 		u.user_id AS last_post_user_id, u.user_rank AS last_post_user_rank,
-		IF(p.poster_id = $anon, p.post_username, u.username) AS last_post_username
+		IF(p.poster_id = {$anon}, p.post_username, u.username) AS last_post_username
 	FROM         " . BB_CATEGORIES . ' c
-	INNER JOIN   ' . BB_FORUMS . " f ON($forums_join_sql)
-	$join_p_type " . BB_POSTS . " p ON($posts_join_sql)
-	$join_t_type " . BB_TOPICS . " t ON($topics_join_sql)
+	INNER JOIN   ' . BB_FORUMS . " f ON({$forums_join_sql})
+	{$join_p_type} " . BB_POSTS . " p ON({$posts_join_sql})
+	{$join_t_type} " . BB_TOPICS . " t ON({$topics_join_sql})
 	LEFT JOIN    " . BB_USERS . ' u ON(u.user_id = p.poster_id)
 	ORDER BY c.cat_order, f.forum_order
 ';
@@ -169,7 +168,7 @@ if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
         }
 
         if ($parent_id = $row['forum_parent']) {
-            if (!$parent = & $cat_forums[$cat_id]['f'][$parent_id]) {
+            if (!$parent = &$cat_forums[$cat_id]['f'][$parent_id]) {
                 $parent = $forums['f'][$parent_id];
                 $parent['last_post_time'] = 0;
             }
@@ -184,7 +183,7 @@ if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
                 continue;
             }
         } else {
-            $f = & $forums['f'][$forum_id];
+            $f = &$forums['f'][$forum_id];
             $row['forum_desc'] = $f['forum_desc'];
             $row['forum_posts'] = $f['forum_posts'];
             $row['forum_topics'] = $f['forum_topics'];
@@ -244,7 +243,7 @@ foreach ($cat_forums as $cid => $c) {
     ]);
 
     foreach ($c['f'] as $fid => $f) {
-        if (!$fname_html = & $forum_name_html[$fid]) {
+        if (!$fname_html = &$forum_name_html[$fid]) {
             continue;
         }
         $is_sf = $f['forum_parent'];
@@ -303,7 +302,7 @@ template()->assign_vars([
         __('USERS_TOTAL_GENDER'),
         $stats['male'],
         $stats['female'],
-        $stats['unselect']
+        $stats['unselect'],
     ) : '',
     'NEWEST_USER' => sprintf(__('NEWEST_USER'), profile_url($stats['newestuser'])),
 
@@ -311,17 +310,17 @@ template()->assign_vars([
     'TORRENTS_STAT' => config()->get('tor_stats') ? sprintf(
         __('TORRENTS_STAT'),
         $stats['torrentcount'],
-        humn_size($stats['size'])
+        humn_size($stats['size']),
     ) : '',
     'PEERS_STAT' => config()->get('tor_stats') ? sprintf(
         __('PEERS_STAT'),
         $stats['peers'],
         $stats['seeders'],
-        $stats['leechers']
+        $stats['leechers'],
     ) : '',
     'SPEED_STAT' => config()->get('tor_stats') ? sprintf(
         __('SPEED_STAT'),
-        humn_size($stats['speed']) . '/s'
+        humn_size($stats['speed']) . '/s',
     ) : '',
     'SHOW_MOD_INDEX' => config()->get('show_mod_index'),
     'FORUM_IMG' => theme_images('forum'),
@@ -333,13 +332,13 @@ template()->assign_vars([
     'ONLY_NEW_TOPICS_ON' => $only_new == ONLY_NEW_TOPICS,
 
     'U_SEARCH_NEW' => FORUM_PATH . 'search?new=1',
-    'U_SEARCH_SELF_BY_MY' => FORUM_PATH . "search?uid=" . userdata('user_id') . "&amp;o=1",
+    'U_SEARCH_SELF_BY_MY' => FORUM_PATH . 'search?uid=' . userdata('user_id') . '&amp;o=1',
     'U_SEARCH_LATEST' => FORUM_PATH . 'search?search_id=latest',
     'U_SEARCH_UNANSWERED' => FORUM_PATH . 'search?search_id=unanswered',
     'U_ATOM_FEED' => make_url('feed/f/0/'),
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
-    'BOARD_START' => config()->get('show_board_start_index') ? (__('BOARD_STARTED') . ':&nbsp;' . '<b>' . bb_date(config()->get('board_startdate')) . '</b>') : false,
+    'BOARD_START' => config()->get('show_board_start_index') ? (__('BOARD_STARTED') . ':&nbsp;<b>' . bb_date(config()->get('board_startdate')) . '</b>') : false,
 ]);
 
 // Set tpl vars for bt_userdata

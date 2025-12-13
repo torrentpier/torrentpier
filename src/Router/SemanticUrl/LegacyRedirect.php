@@ -58,7 +58,7 @@ class LegacyRedirect
     public function __construct(
         private readonly string  $type,
         private readonly ?string $fallbackController = null,
-        private readonly array   $options = []
+        private readonly array   $options = [],
     ) {}
 
     /**
@@ -81,7 +81,7 @@ class LegacyRedirect
         }
 
         // Get the entity ID from query parameters
-        $id = (int) ($queryParams[$config['param']] ?? 0);
+        $id = (int)($queryParams[$config['param']] ?? 0);
         if ($id <= 0) {
             // No valid ID, use fallback controller
             return $this->fallbackToLegacy($request, $args);
@@ -108,6 +108,7 @@ class LegacyRedirect
         // Log and 301 Permanent redirect
         $targetUrl = make_url($semanticUrl);
         RedirectLogger::legacy($request->getUri()->getPath(), $targetUrl, "LegacyRedirect::{$this->type}");
+
         return $this->permanentRedirect($targetUrl);
     }
 
@@ -119,7 +120,7 @@ class LegacyRedirect
         ServerRequestInterface $request,
         array                  $args,
         array                  $config,
-        array                  $queryParams
+        array                  $queryParams,
     ): ResponseInterface {
         $mode = $queryParams['mode'] ?? null;
 
@@ -132,10 +133,11 @@ class LegacyRedirect
 
         // Only redirect GET requests
         if ($request->getMethod() !== 'GET') {
-            $id = (int) ($queryParams[$config['param']] ?? 0);
+            $id = (int)($queryParams[$config['param']] ?? 0);
             if ($id > 0) {
                 return $this->processWithCanonicalHeader($request, $args, $id);
             }
+
             return $this->fallbackToLegacy($request, $args);
         }
 
@@ -153,11 +155,12 @@ class LegacyRedirect
 
             $targetUrl = make_url($url);
             RedirectLogger::legacy($request->getUri()->getPath(), $targetUrl, "LegacyRedirect::members::{$mode}");
+
             return $this->permanentRedirect($targetUrl);
         }
 
         // Handle modes that require user ID
-        $id = (int) ($queryParams[$config['param']] ?? 0);
+        $id = (int)($queryParams[$config['param']] ?? 0);
         if ($id <= 0) {
             return $this->fallbackToLegacy($request, $args);
         }
@@ -179,6 +182,7 @@ class LegacyRedirect
 
         $targetUrl = make_url($semanticUrl);
         RedirectLogger::legacy($request->getUri()->getPath(), $targetUrl, "LegacyRedirect::members::{$mode}");
+
         return $this->permanentRedirect($targetUrl);
     }
 
@@ -213,7 +217,7 @@ class LegacyRedirect
         $adapter = new LegacyAdapter(
             $this->fallbackController,
             $this->type,
-            $this->options
+            $this->options,
         );
 
         return $adapter($request, $args);
@@ -228,7 +232,7 @@ class LegacyRedirect
     private function processWithCanonicalHeader(
         ServerRequestInterface $request,
         array                  $args,
-        int                    $id
+        int                    $id,
     ): ResponseInterface {
         // Fetch title and build canonical URL
         $title = EntityConfig::fetchTitle($this->type, $id) ?? '';

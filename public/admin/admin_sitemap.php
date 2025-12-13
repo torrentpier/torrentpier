@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,15 +7,15 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!empty($setmodules)) {
     $module['MODS']['SITEMAP'] = basename(__FILE__);
+
     return;
 }
 
 require __DIR__ . '/pagestart.php';
 
-$sql = "SELECT * FROM " . BB_CONFIG . " WHERE config_name IN('sitemap_time', 'static_sitemap')";
+$sql = 'SELECT * FROM ' . BB_CONFIG . " WHERE config_name IN('sitemap_time', 'static_sitemap')";
 
 if (!$result = DB()->sql_query($sql)) {
     bb_die('Could not query config information in admin_sitemap');
@@ -48,7 +49,7 @@ $message = is_file(SITEMAP_DIR . '/sitemap.xml') ? $s_mess : __('SITEMAP_NOT_CRE
 
 template()->assign_vars([
     'STATIC_SITEMAP' => $new['static_sitemap'],
-    'MESSAGE' => $message
+    'MESSAGE' => $message,
 ]);
 
 print_page('admin_sitemap.tpl', 'admin');

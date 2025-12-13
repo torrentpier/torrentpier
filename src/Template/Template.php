@@ -10,6 +10,8 @@
 
 namespace TorrentPier\Template;
 
+use Exception;
+use RuntimeException;
 use Twig\Environment;
 
 /**
@@ -17,17 +19,20 @@ use Twig\Environment;
  */
 class Template
 {
-    private static array $instances = [];
-    private static float $totalRenderTime = 0;
-
     /** Reserved context keys that should not be overwritten */
     private const array RESERVED_KEYS = ['L', '_tpldata', 'V', 'IMG'];
+
+    private static array $instances = [];
+
+    private static float $totalRenderTime = 0;
 
     /** @var array<array{variable: string, template: string, source: string, time: float}> */
     private static array $variableConflicts = [];
 
     /** @var array<array{variable: string, old_value: mixed, new_value: mixed, source: string, time: float}> */
     private static array $variableShadowing = [];
+
+    private static ?self $defaultInstance = null;
 
     private ?Environment $twig = null;
 
@@ -57,13 +62,11 @@ class Template
         $this->cacheDir = TwigEnvironmentFactory::normalizePath(TEMPLATES_CACHE_DIR . '/');
 
         if (!is_dir($this->rootDir)) {
-            throw new \RuntimeException("Template directory not found: $this->templateName");
+            throw new RuntimeException("Template directory not found: {$this->templateName}");
         }
 
         $this->initializeTwig();
     }
-
-    private static ?self $defaultInstance = null;
 
     public static function getInstance(?string $root = null): self
     {
@@ -88,6 +91,46 @@ class Template
         }
 
         return self::$instances[$key];
+    }
+
+    /**
+     * Get variable conflicts logged during this request
+     */
+    public static function getVariableConflicts(): array
+    {
+        return self::$variableConflicts;
+    }
+
+    /**
+     * Reset variable conflicts tracking
+     */
+    public static function resetVariableConflicts(): void
+    {
+        self::$variableConflicts = [];
+    }
+
+    /**
+     * Get variable shadowing logged during this request
+     */
+    public static function getVariableShadowing(): array
+    {
+        return self::$variableShadowing;
+    }
+
+    /**
+     * Reset variable shadowing tracking
+     */
+    public static function resetVariableShadowing(): void
+    {
+        self::$variableShadowing = [];
+    }
+
+    /**
+     * Get total render time in milliseconds
+     */
+    public static function getTotalRenderTime(): float
+    {
+        return self::$totalRenderTime;
     }
 
     public function getCacheDir(): string
@@ -125,7 +168,7 @@ class Template
     {
         foreach ($variables as $key => $value) {
             // Track when a variable is being overwritten with a different value
-            if ($trackShadowing && array_key_exists($key, $this->variables) && $this->variables[$key] !== $value) {
+            if ($trackShadowing && \array_key_exists($key, $this->variables) && $this->variables[$key] !== $value) {
                 $this->logVariableShadowing($key, $this->variables[$key], $value);
             }
             $this->variables[$key] = $value;
@@ -149,7 +192,7 @@ class Template
     {
         if (str_contains($block, '.')) {
             $blocks = explode('.', $block);
-            $blockCount = count($blocks) - 1;
+            $blockCount = \count($blocks) - 1;
 
             $data = &$this->blockData;
             for ($i = 0; $i < $blockCount; $i++) {
@@ -159,7 +202,7 @@ class Template
                     $data[$key][] = [];
                 }
                 $data = &$data[$key];
-                $data = &$data[count($data) - 1];
+                $data = &$data[\count($data) - 1];
             }
             $data[$blocks[$blockCount] . '.'][] = $variables;
         } else {
@@ -167,6 +210,7 @@ class Template
         }
 
         $this->twig->addGlobal('_tpldata', $this->blockData);
+
         return true;
     }
 
@@ -179,7 +223,7 @@ class Template
         $templatePath = $this->buildTemplatePath($template);
 
         if (!@file_exists($templatePath)) {
-            throw new \RuntimeException('Template not found: ' . hide_bb_path($templatePath));
+            throw new RuntimeException('Template not found: ' . hide_bb_path($templatePath));
         }
 
         $templateName = $this->getRelativeTemplateName($templatePath);
@@ -194,8 +238,8 @@ class Template
 
         try {
             $output = $this->twig->render($templateName, $context);
-        } catch (\Exception $e) {
-            throw new \RuntimeException("Template render error '$template': " . $e->getMessage(), 0, $e);
+        } catch (Exception $e) {
+            throw new RuntimeException("Template render error '{$template}': " . $e->getMessage(), 0, $e);
         }
 
         $renderTime = (microtime(true) - $renderStart) * 1000;
@@ -210,7 +254,7 @@ class Template
     public function pparse(string $handle): bool
     {
         if (empty($this->files[$handle])) {
-            throw new \RuntimeException("Template error: no file for handle '$handle'");
+            throw new RuntimeException("Template error: no file for handle '{$handle}'");
         }
 
         $this->initStartupVars();
@@ -245,14 +289,15 @@ class Template
 
         try {
             $output = $this->twig->render($templateName, $context);
-        } catch (\Exception $e) {
-            throw new \RuntimeException("Template render error '$handle': " . $e->getMessage(), 0, $e);
+        } catch (Exception $e) {
+            throw new RuntimeException("Template render error '{$handle}': " . $e->getMessage(), 0, $e);
         }
 
         $renderTime = (microtime(true) - $renderStart) * 1000;
         self::$totalRenderTime += $renderTime;
 
         echo $output;
+
         return true;
     }
 
@@ -262,7 +307,7 @@ class Template
     private function checkVariableConflicts(string $templateName): void
     {
         foreach ($this->variables as $key => $value) {
-            if (in_array($key, self::RESERVED_KEYS, true)) {
+            if (\in_array($key, self::RESERVED_KEYS, true)) {
                 $this->logVariableConflict($key, $templateName);
             }
         }
@@ -274,7 +319,7 @@ class Template
     private function exposeVariablesToRoot(array $context, string $templateName): array
     {
         foreach ($this->variables as $key => $value) {
-            if (in_array($key, self::RESERVED_KEYS, true)) {
+            if (\in_array($key, self::RESERVED_KEYS, true)) {
                 continue;
             }
             $context[$key] = $value;
@@ -310,32 +355,16 @@ class Template
         $msg = str_repeat('=', 60) . LOG_LF;
         $msg .= 'Template Variable Conflict' . LOG_LF;
         $msg .= str_repeat('=', 60) . LOG_LF;
-        $msg .= "Variable: $variable" . LOG_LF;
-        $msg .= "Template: $template" . LOG_LF;
-        $msg .= "Source:   $source" . LOG_LF;
+        $msg .= "Variable: {$variable}" . LOG_LF;
+        $msg .= "Template: {$template}" . LOG_LF;
+        $msg .= "Source:   {$source}" . LOG_LF;
         $msg .= 'Time:     ' . date('Y-m-d H:i:s') . LOG_LF;
         $msg .= 'Note:     This variable conflicts with a reserved key and was not exposed to root context.' . LOG_LF;
         $msg .= '          Use V.' . $variable . ' in the template instead.' . LOG_LF;
 
-        if (function_exists('bb_log')) {
+        if (\function_exists('bb_log')) {
             bb_log($msg, 'template_conflicts', false);
         }
-    }
-
-    /**
-     * Get variable conflicts logged during this request
-     */
-    public static function getVariableConflicts(): array
-    {
-        return self::$variableConflicts;
-    }
-
-    /**
-     * Reset variable conflicts tracking
-     */
-    public static function resetVariableConflicts(): void
-    {
-        self::$variableConflicts = [];
     }
 
     /**
@@ -366,12 +395,12 @@ class Template
         self::$variableShadowing[] = $shadowing;
 
         // Format values for logging (truncate long values)
-        $oldStr = is_scalar($oldValue) ? (string) $oldValue : get_debug_type($oldValue);
-        $newStr = is_scalar($newValue) ? (string) $newValue : get_debug_type($newValue);
-        if (strlen($oldStr) > 50) {
+        $oldStr = \is_scalar($oldValue) ? (string)$oldValue : get_debug_type($oldValue);
+        $newStr = \is_scalar($newValue) ? (string)$newValue : get_debug_type($newValue);
+        if (\strlen($oldStr) > 50) {
             $oldStr = substr($oldStr, 0, 47) . '...';
         }
-        if (strlen($newStr) > 50) {
+        if (\strlen($newStr) > 50) {
             $newStr = substr($newStr, 0, 47) . '...';
         }
 
@@ -379,40 +408,16 @@ class Template
         $msg = str_repeat('=', 60) . LOG_LF;
         $msg .= 'Template Variable Shadowing' . LOG_LF;
         $msg .= str_repeat('=', 60) . LOG_LF;
-        $msg .= "Variable: $variable" . LOG_LF;
-        $msg .= "Old:      $oldStr" . LOG_LF;
-        $msg .= "New:      $newStr" . LOG_LF;
-        $msg .= "Source:   $source" . LOG_LF;
+        $msg .= "Variable: {$variable}" . LOG_LF;
+        $msg .= "Old:      {$oldStr}" . LOG_LF;
+        $msg .= "New:      {$newStr}" . LOG_LF;
+        $msg .= "Source:   {$source}" . LOG_LF;
         $msg .= 'Time:     ' . date('Y-m-d H:i:s') . LOG_LF;
         $msg .= 'Note:     This variable was overwritten. Check if this is intentional.' . LOG_LF;
 
-        if (function_exists('bb_log')) {
+        if (\function_exists('bb_log')) {
             bb_log($msg, 'template_shadowing', false);
         }
-    }
-
-    /**
-     * Get variable shadowing logged during this request
-     */
-    public static function getVariableShadowing(): array
-    {
-        return self::$variableShadowing;
-    }
-
-    /**
-     * Reset variable shadowing tracking
-     */
-    public static function resetVariableShadowing(): void
-    {
-        self::$variableShadowing = [];
-    }
-
-    /**
-     * Get total render time in milliseconds
-     */
-    public static function getTotalRenderTime(): float
-    {
-        return self::$totalRenderTime;
     }
 
     /**
@@ -420,7 +425,7 @@ class Template
      */
     private function initializeTwig(): void
     {
-        $useCache = (bool) config()->get('twig.cache_enabled', true);
+        $useCache = (bool)config()->get('twig.cache_enabled', true);
         $factory = new TwigEnvironmentFactory();
         $this->twig = $factory->create($this->rootDir, $this->cacheDir, $useCache);
 
@@ -437,11 +442,11 @@ class Template
         $this->files[$handle] = $this->buildTemplatePath($filename);
 
         if (!$this->files[$handle]) {
-            throw new \RuntimeException("Template error: invalid template $filename");
+            throw new RuntimeException("Template error: invalid template {$filename}");
         }
 
         if (!@file_exists($this->files[$handle])) {
-            throw new \RuntimeException('Template not found: ' . hide_bb_path($this->files[$handle]));
+            throw new RuntimeException('Template not found: ' . hide_bb_path($this->files[$handle]));
         }
     }
 
@@ -455,14 +460,14 @@ class Template
 
         // Handle admin templates
         if (str_starts_with($filename, 'admin/')) {
-            $adminDir = TwigEnvironmentFactory::normalizePath(dirname($this->rootDir) . '/admin');
+            $adminDir = TwigEnvironmentFactory::normalizePath(\dirname($this->rootDir) . '/admin');
             if (is_dir($adminDir)) {
                 return $adminDir . '/' . substr($filename, 6);
             }
         }
 
         // Relative path
-        if ($filename[0] !== '/' && (strlen($filename) < 2 || $filename[1] !== ':')) {
+        if ($filename[0] !== '/' && (\strlen($filename) < 2 || $filename[1] !== ':')) {
             return $this->rootDir . '/' . $filename;
         }
 
@@ -495,11 +500,11 @@ class Template
         $fullPath = TwigEnvironmentFactory::normalizePath(realpath($fullPath) ?: $fullPath);
 
         // Admin template - use @admin namespace
-        $adminDir = realpath(dirname($this->rootDir) . '/admin');
+        $adminDir = realpath(\dirname($this->rootDir) . '/admin');
         if ($adminDir) {
             $adminDir = TwigEnvironmentFactory::normalizePath($adminDir);
             if (str_starts_with($fullPath, $adminDir . '/')) {
-                return '@admin/' . substr($fullPath, strlen($adminDir) + 1);
+                return '@admin/' . substr($fullPath, \strlen($adminDir) + 1);
             }
         }
 
@@ -508,16 +513,16 @@ class Template
         if ($rootDir) {
             $rootDir = TwigEnvironmentFactory::normalizePath($rootDir);
             if (str_starts_with($fullPath, $rootDir . '/')) {
-                return substr($fullPath, strlen($rootDir) + 1);
+                return substr($fullPath, \strlen($rootDir) + 1);
             }
         }
 
         // Default theme fallback
-        $defaultDir = realpath(dirname($this->rootDir) . '/default');
+        $defaultDir = realpath(\dirname($this->rootDir) . '/default');
         if ($defaultDir) {
             $defaultDir = TwigEnvironmentFactory::normalizePath($defaultDir);
             if (str_starts_with($fullPath, $defaultDir . '/')) {
-                return substr($fullPath, strlen($defaultDir) + 1);
+                return substr($fullPath, \strlen($defaultDir) + 1);
             }
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
@@ -36,8 +36,8 @@ switch ($mode) {
         $this->ajax_die('Invalid mode: ' . $mode);
 }
 
-DB()->query("UPDATE " . BB_USERS . " SET avatar_ext_id = $new_ext_id WHERE user_id = $user_id LIMIT 1");
+DB()->query('UPDATE ' . BB_USERS . " SET avatar_ext_id = {$new_ext_id} WHERE user_id = {$user_id} LIMIT 1");
 
-\TorrentPier\Sessions::cache_rm_user_sessions($user_id);
+TorrentPier\Sessions::cache_rm_user_sessions($user_id);
 
 $this->response['avatar_html'] = $response;

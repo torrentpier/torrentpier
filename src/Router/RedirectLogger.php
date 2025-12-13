@@ -48,14 +48,14 @@ class RedirectLogger
         $referer = $_SERVER['HTTP_REFERER'] ?? '-';
 
         // Format log entry with timestamp and newline
-        $entry = sprintf(
-            "[%s] %s | %s -> %s | referer: %s | from: %s",
+        $entry = \sprintf(
+            '[%s] %s | %s -> %s | referer: %s | from: %s',
             date('Y-m-d H:i:s'),
             $type,
             $from,
             $to,
             $referer,
-            $source ?? 'unknown'
+            $source ?? 'unknown',
         );
 
         // Use bb_log to write to storage/logs/redirects.log

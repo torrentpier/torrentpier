@@ -7,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 define('IN_PROFILE', true);
 
 set_die_append_msg();

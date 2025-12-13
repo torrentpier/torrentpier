@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
@@ -14,12 +14,12 @@ if (!defined('BB_ROOT')) {
 bb_log(date('H:i:s - ') . getmypid() . ' --x- SELECT jobs' . LOG_LF, CRON_LOG_DIR . '/cron_check');
 
 // Get cron jobs
-$cron_jobs = DB()->fetch_rowset("
-	SELECT * FROM " . BB_CRON . "
+$cron_jobs = DB()->fetch_rowset('
+	SELECT * FROM ' . BB_CRON . '
 	WHERE cron_active = 1
 		AND next_run <= NOW()
 	ORDER BY run_order
-");
+');
 
 // Run cron jobs
 if ($cron_jobs) {
@@ -32,7 +32,7 @@ if ($cron_jobs) {
         }
     }
 
-    require(CRON_DIR . 'cron_run.php');
+    require CRON_DIR . 'cron_run.php';
 
     // Update cron_last_check
     bb_update_config(['cron_last_check' => TIMENOW + 10]);

@@ -29,6 +29,7 @@ class ImageService
         if (self::$manager === null) {
             self::$manager = new ImageManager(new GdDriver());
         }
+
         return self::$manager;
     }
 

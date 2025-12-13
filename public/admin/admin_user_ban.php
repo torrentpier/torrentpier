@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,9 +7,9 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!empty($setmodules)) {
     $module['USERS']['BAN_MANAGEMENT'] = basename(__FILE__);
+
     return;
 }
 
@@ -53,7 +54,7 @@ if ($submit) {
         }
 
         if ($where_sql != '') {
-            $sql = 'DELETE FROM ' . BB_BANLIST . " WHERE ban_id IN ($where_sql)";
+            $sql = 'DELETE FROM ' . BB_BANLIST . " WHERE ban_id IN ({$where_sql})";
             if (!DB()->sql_query($sql)) {
                 bb_die('Could not delete ban info from database');
             }
@@ -78,7 +79,7 @@ if ($submit) {
     template()->assign_vars([
         'U_SEARCH_USER' => './../search.php?mode=searchuser',
         'S_UNBAN_USERLIST_SELECT' => $select_userlist,
-        'S_BAN_ACTION' => 'admin_user_ban.php'
+        'S_BAN_ACTION' => 'admin_user_ban.php',
     ]);
 }
 

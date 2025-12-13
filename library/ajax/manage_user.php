@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
@@ -34,8 +34,8 @@ switch ($mode) {
         }
 
         if (!in_array($user_id, explode(',', EXCLUDED_USERS))) {
-            \TorrentPier\Sessions::delete_user_sessions($user_id);
-            \TorrentPier\Legacy\Admin\Common::user_delete($user_id);
+            TorrentPier\Sessions::delete_user_sessions($user_id);
+            TorrentPier\Legacy\Admin\Common::user_delete($user_id);
 
             $user_id = userdata('user_id'); // Store self user_id for redirect after successful deleting
             $this->response['info'] = __('USER_DELETED');
@@ -51,9 +51,9 @@ switch ($mode) {
             $this->prompt_for_confirm(__('DELETE_USER_ALL_POSTS_CONFIRM'));
         }
 
-        $user_topics = DB()->fetch_rowset("SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_poster = $user_id", 'topic_id');
-        $deleted_topics = \TorrentPier\Legacy\Admin\Common::topic_delete($user_topics);
-        $deleted_posts = \TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
+        $user_topics = DB()->fetch_rowset('SELECT topic_id FROM ' . BB_TOPICS . " WHERE topic_poster = {$user_id}", 'topic_id');
+        $deleted_topics = TorrentPier\Legacy\Admin\Common::topic_delete($user_topics);
+        $deleted_posts = TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
         $this->response['info'] = __('USER_DELETED_POSTS');
         break;
     case 'delete_message':
@@ -64,7 +64,7 @@ switch ($mode) {
             $this->prompt_for_confirm(__('DELETE_USER_POSTS_CONFIRM'));
         }
 
-        \TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
+        TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
         $this->response['info'] = __('USER_DELETED_POSTS');
         break;
     case 'user_activate':
@@ -72,7 +72,7 @@ switch ($mode) {
             $this->prompt_for_confirm(__('DEACTIVATE_CONFIRM'));
         }
 
-        DB()->query("UPDATE " . BB_USERS . " SET user_active = 1 WHERE user_id = " . $user_id);
+        DB()->query('UPDATE ' . BB_USERS . ' SET user_active = 1 WHERE user_id = ' . $user_id);
         $this->response['info'] = __('USER_ACTIVATE_ON');
         break;
     case 'user_deactivate':
@@ -83,8 +83,8 @@ switch ($mode) {
             $this->prompt_for_confirm(__('ACTIVATE_CONFIRM'));
         }
 
-        DB()->query("UPDATE " . BB_USERS . " SET user_active = 0 WHERE user_id = " . $user_id);
-        \TorrentPier\Sessions::delete_user_sessions($user_id);
+        DB()->query('UPDATE ' . BB_USERS . ' SET user_active = 0 WHERE user_id = ' . $user_id);
+        TorrentPier\Sessions::delete_user_sessions($user_id);
         $this->response['info'] = __('USER_ACTIVATE_OFF');
         break;
     default:

@@ -70,7 +70,7 @@ class Registry
         try {
             $tor = Bencode::decode($file_contents, dictType: Collection::ARRAY);
         } catch (Exception $e) {
-            self::errorExit(htmlCHR(__('TORFILE_INVALID') . ": " . $e->getMessage()));
+            self::errorExit(htmlCHR(__('TORFILE_INVALID') . ': ' . $e->getMessage()));
         }
 
         if (config()->get('bt_disable_dht')) {
@@ -87,8 +87,8 @@ class Registry
             $ann = $tor['announce'] ?? '';
             $announce_urls['main_url'] = config()->get('bt_announce_url');
 
-            if (!$ann || !in_array($ann, $announce_urls)) {
-                $msg = sprintf(__('INVALID_ANN_URL'), htmlspecialchars($ann), $announce_urls['main_url']);
+            if (!$ann || !\in_array($ann, $announce_urls)) {
+                $msg = \sprintf(__('INVALID_ANN_URL'), htmlspecialchars($ann), $announce_urls['main_url']);
                 self::errorExit($msg);
             }
             unset($announce_urls);
@@ -102,7 +102,7 @@ class Registry
 
         // Check if torrent contains info_hash v2 or v1
         if (isset($info['meta version'], $info['file tree'])) {
-            if ($info['meta version'] === 2 && is_array($info['file tree'])) {
+            if ($info['meta version'] === 2 && \is_array($info['file tree'])) {
                 $bt_v2 = true;
             }
         }
@@ -123,14 +123,14 @@ class Registry
         if (isset($bt_v1)) {
             $info_hash = hash('sha1', Bencode::encode($info), true);
             $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-            $info_hash_where = "WHERE info_hash = '$info_hash_sql'";
+            $info_hash_where = "WHERE info_hash = '{$info_hash_sql}'";
         }
 
         // Getting info_hash v2
         if (isset($bt_v2)) {
             $info_hash_v2 = hash('sha256', Bencode::encode($info), true);
             $info_hash_v2_sql = rtrim(DB()->escape($info_hash_v2), ' ');
-            $info_hash_where = "WHERE info_hash_v2 = '$info_hash_v2_sql'";
+            $info_hash_where = "WHERE info_hash_v2 = '{$info_hash_v2_sql}'";
         }
 
         // TorrServer integration
@@ -141,8 +141,8 @@ class Registry
             }
         }
 
-        if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where LIMIT 1")) {
-            $msg = sprintf(__('BT_REG_FAIL_SAME_HASH'), TOPIC_URL . $row['topic_id']);
+        if ($row = DB()->fetch_row('SELECT topic_id FROM ' . BB_BT_TORRENTS . " {$info_hash_where} LIMIT 1")) {
+            $msg = \sprintf(__('BT_REG_FAIL_SAME_HASH'), TOPIC_URL . $row['topic_id']);
             set_die_append_msg($forum_id, $topic_id);
             bb_die($msg);
         }
@@ -150,8 +150,8 @@ class Registry
         $totallen = 0;
 
         if (isset($info['length'])) {
-            $totallen = (float) $info['length'];
-        } elseif (isset($bt_v1, $info['files']) && !isset($bt_v2) && is_array($info['files'])) {
+            $totallen = (float)$info['length'];
+        } elseif (isset($bt_v1, $info['files']) && !isset($bt_v2) && \is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
                 // Exclude padding files
                 if (!isset($f['attr']) || $f['attr'] !== 'p') {
@@ -162,7 +162,7 @@ class Registry
                     }
                 }
             }
-            $totallen = (float) $totallen;
+            $totallen = (float)$totallen;
         } elseif (isset($bt_v2)) {
             $fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
                 $size = 0;
@@ -181,12 +181,12 @@ class Registry
                 return $size;
             };
 
-            $totallen = (float) $fileTreeSize($info['file tree']);
+            $totallen = (float)$fileTreeSize($info['file tree']);
         } else {
             self::errorExit(__('TORFILE_INVALID'));
         }
 
-        $size = sprintf('%.0f', (float) $totallen);
+        $size = \sprintf('%.0f', (float)$totallen);
 
         try {
             DB()->table(BB_BT_TORRENTS)->insert([
@@ -219,13 +219,13 @@ class Registry
 
         // Bump topic
         if (config()->get('tracker.tor_topic_up')) {
-            DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id");
+            DB()->query('UPDATE ' . BB_TOPICS . ' SET topic_last_post_time = GREATEST(topic_last_post_time, ' . (TIMENOW - 3 * 86400) . ") WHERE topic_id = {$topic_id}");
         }
 
         $reg_mode = self::regMode();
         if ($reg_mode === 'request' || $reg_mode === 'newtopic') {
             set_die_append_msg($forum_id, $topic_id);
-            bb_die(sprintf(__('BT_REGISTERED'), DL_URL . $topic_id . '/'));
+            bb_die(\sprintf(__('BT_REGISTERED'), DL_URL . $topic_id . '/'));
         }
 
         return true;
@@ -309,7 +309,7 @@ class Registry
                 ->fetchPairs('forum_id', 'forum_id');
 
             $forumIds = array_values($sectionForums);
-            if (!in_array($forumId, $forumIds)) {
+            if (!\in_array($forumId, $forumIds)) {
                 $forumIds[] = $forumId;
             }
 
@@ -355,5 +355,4 @@ class Registry
             'topic_title' => $torrent['topic_title'],
         ]);
     }
-
 }

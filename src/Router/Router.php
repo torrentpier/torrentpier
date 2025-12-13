@@ -18,6 +18,8 @@ use League\Route\Router as LeagueRouter;
 use League\Route\Strategy\ApplicationStrategy;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use ReflectionClass;
+use Throwable;
 
 /**
  * Router wrapper for TorrentPier
@@ -27,7 +29,9 @@ use Psr\Http\Message\ServerRequestInterface;
 class Router
 {
     private static ?self $instance = null;
+
     private LeagueRouter $router;
+
     private bool $routesLoaded = false;
 
     private function __construct()
@@ -49,6 +53,14 @@ class Router
         }
 
         return self::$instance;
+    }
+
+    /**
+     * Reset the singleton (useful for testing)
+     */
+    public static function reset(): void
+    {
+        self::$instance = null;
     }
 
     /**
@@ -119,21 +131,13 @@ class Router
     }
 
     /**
-     * Reset the singleton (useful for testing)
-     */
-    public static function reset(): void
-    {
-        self::$instance = null;
-    }
-
-    /**
      * Get all registered routes
      *
      * @return array<array{methods: string, path: string, handler: string}>
      */
     public function getRoutes(): array
     {
-        $reflection = new \ReflectionClass($this->router);
+        $reflection = new ReflectionClass($this->router);
         $prop = $reflection->getProperty('routes');
         $routes = $prop->getValue($this->router);
 
@@ -143,9 +147,9 @@ class Router
             $handler = $route->getCallable();
 
             $result[] = [
-                'methods' => is_array($methods) ? implode('|', $methods) : $methods,
+                'methods' => \is_array($methods) ? implode('|', $methods) : $methods,
                 'path' => $route->getPath(),
-                'handler' => is_object($handler) ? get_class($handler) : (is_string($handler) ? $handler : gettype($handler)),
+                'handler' => \is_object($handler) ? \get_class($handler) : (\is_string($handler) ? $handler : \gettype($handler)),
             ];
         }
 
@@ -161,15 +165,16 @@ class Router
         $request = new \Laminas\Diactoros\ServerRequest(
             serverParams: ['REQUEST_METHOD' => $method],
             uri: $path,
-            method: $method
+            method: $method,
         );
 
         try {
             $this->router->dispatch($request);
+
             return true;
         } catch (\League\Route\Http\Exception\NotFoundException) {
             return false;
-        } catch (\Throwable) {
+        } catch (Throwable) {
             // Route exists, but the handler failed - that's OK, route still exists
             return true;
         }

@@ -10,8 +10,6 @@
 
 namespace TorrentPier\Console\Commands\Rebuild;
 
-use function function_exists;
-
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -58,6 +56,16 @@ abstract class AbstractRebuildCommand extends Command
     protected int $processedCount = 0;
 
     /**
+     * Handle shutdown signal
+     */
+    public function handleShutdown(): void
+    {
+        $this->shutdownRequested = true;
+        $this->line();
+        $this->warning('Shutdown requested. Finishing current batch...');
+    }
+
+    /**
      * Configure common options for all rebuild commands
      */
     protected function configure(): void
@@ -68,26 +76,26 @@ abstract class AbstractRebuildCommand extends Command
                 'b',
                 InputOption::VALUE_REQUIRED,
                 'Number of items to process per batch',
-                static::DEFAULT_BATCH_SIZE
+                static::DEFAULT_BATCH_SIZE,
             )
             ->addOption(
                 'start-from',
                 's',
                 InputOption::VALUE_REQUIRED,
                 'Start processing from this ID (for resuming)',
-                0
+                0,
             )
             ->addOption(
                 'dry-run',
                 null,
                 InputOption::VALUE_NONE,
-                'Show what would be done without making changes'
+                'Show what would be done without making changes',
             )
             ->addOption(
                 'no-progress',
                 null,
                 InputOption::VALUE_NONE,
-                'Disable progress bar output'
+                'Disable progress bar output',
             );
     }
 
@@ -103,21 +111,11 @@ abstract class AbstractRebuildCommand extends Command
         $this->shutdownRequested = false;
 
         // Register signal handlers for graceful shutdown
-        if (function_exists('pcntl_signal')) {
+        if (\function_exists('pcntl_signal')) {
             pcntl_async_signals(true);
             pcntl_signal(SIGINT, [$this, 'handleShutdown']);
             pcntl_signal(SIGTERM, [$this, 'handleShutdown']);
         }
-    }
-
-    /**
-     * Handle shutdown signal
-     */
-    public function handleShutdown(): void
-    {
-        $this->shutdownRequested = true;
-        $this->line();
-        $this->warning('Shutdown requested. Finishing current batch...');
     }
 
     /**
@@ -126,7 +124,7 @@ abstract class AbstractRebuildCommand extends Command
     protected function shouldStop(): bool
     {
         // Process pending signals
-        if (function_exists('pcntl_signal_dispatch')) {
+        if (\function_exists('pcntl_signal_dispatch')) {
             pcntl_signal_dispatch();
         }
 
@@ -138,7 +136,7 @@ abstract class AbstractRebuildCommand extends Command
      */
     protected function getBatchSize(): int
     {
-        return max(1, (int) $this->input->getOption('batch-size'));
+        return max(1, (int)$this->input->getOption('batch-size'));
     }
 
     /**
@@ -146,7 +144,7 @@ abstract class AbstractRebuildCommand extends Command
      */
     protected function getStartFrom(): int
     {
-        return max(0, (int) $this->input->getOption('start-from'));
+        return max(0, (int)$this->input->getOption('start-from'));
     }
 
     /**
@@ -154,7 +152,7 @@ abstract class AbstractRebuildCommand extends Command
      */
     protected function isDryRun(): bool
     {
-        return (bool) $this->input->getOption('dry-run');
+        return (bool)$this->input->getOption('dry-run');
     }
 
     /**
@@ -177,7 +175,7 @@ abstract class AbstractRebuildCommand extends Command
         // Define custom format
         ProgressBar::setFormatDefinition(
             'rebuild',
-            " %current%/%max% [%bar%] %percent:3s%% | %elapsed:6s% / %estimated:-6s% | %memory:6s%\n %message%"
+            " %current%/%max% [%bar%] %percent:3s%% | %elapsed:6s% / %estimated:-6s% | %memory:6s%\n %message%",
         );
 
         $this->progressBar = $this->createProgressBar($max);

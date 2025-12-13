@@ -170,7 +170,8 @@ class EntityConfig
             return null;
         }
 
-        $basePath = dirname(__DIR__, 3);
+        $basePath = \dirname(__DIR__, 3);
+
         return $basePath . '/app/Http/Controllers/' . $config['controller'];
     }
 
@@ -183,6 +184,7 @@ class EntityConfig
     public static function getExtraParams(string $type): array
     {
         $config = self::get($type);
+
         return $config['extra'] ?? [];
     }
 }

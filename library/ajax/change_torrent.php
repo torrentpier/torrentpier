@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
@@ -21,7 +21,7 @@ if (!isset($this->request['type'])) {
 $topic_id = (int)$this->request['topic_id'];
 $type = (string)$this->request['type'];
 
-if (!$torrent = \TorrentPier\Torrent\Registry::getTorrentInfo($topic_id)) {
+if (!$torrent = TorrentPier\Torrent\Registry::getTorrentInfo($topic_id)) {
     $this->ajax_die(__('INVALID_TOPIC_ID'));
 }
 
@@ -52,10 +52,10 @@ switch ($type) {
             $tor_type_lang = __('GOLD');
         } else {
             $tor_type = TOR_TYPE_DEFAULT;
-            $tor_type_lang = __('UNSET_GOLD_TORRENT') . " / " . __('UNSET_SILVER_TORRENT');
+            $tor_type_lang = __('UNSET_GOLD_TORRENT') . ' / ' . __('UNSET_SILVER_TORRENT');
         }
 
-        \TorrentPier\Torrent\Moderation::changeType($topic_id, $tor_type);
+        TorrentPier\Torrent\Moderation::changeType($topic_id, $tor_type);
 
         // Log action
         log_action()->mod('mod_topic_change_tor_type', [
@@ -70,7 +70,7 @@ switch ($type) {
         break;
 
     case 'reg':
-        \TorrentPier\Torrent\Registry::register($topic_id);
+        TorrentPier\Torrent\Registry::register($topic_id);
         // Log action
         log_action()->mod('mod_topic_tor_register', [
             'forum_id' => $torrent['forum_id'],
@@ -81,7 +81,7 @@ switch ($type) {
         break;
 
     case 'unreg':
-        \TorrentPier\Torrent\Registry::unregister($topic_id);
+        TorrentPier\Torrent\Registry::unregister($topic_id);
         // Log action
         log_action()->mod('mod_topic_tor_unregister', [
             'forum_id' => $torrent['forum_id'],
@@ -95,7 +95,7 @@ switch ($type) {
         if (empty($this->request['confirmed'])) {
             $this->prompt_for_confirm(__('DEL_TORRENT'));
         }
-        \TorrentPier\Torrent\Registry::delete($topic_id);
+        TorrentPier\Torrent\Registry::delete($topic_id);
         $url = make_url(TOPIC_URL . $topic_id);
         break;
 
@@ -103,8 +103,8 @@ switch ($type) {
         if (empty($this->request['confirmed'])) {
             $this->prompt_for_confirm(__('DEL_MOVE_TORRENT'));
         }
-        \TorrentPier\Torrent\Registry::delete($topic_id);
-        $url = make_url("modcp?" . POST_TOPIC_URL . "={$topic_id}&mode=move&sid=" . userdata('session_id'));
+        TorrentPier\Torrent\Registry::delete($topic_id);
+        $url = make_url('modcp?' . POST_TOPIC_URL . "={$topic_id}&mode=move&sid=" . userdata('session_id'));
         break;
 }
 

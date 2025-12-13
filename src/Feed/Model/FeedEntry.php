@@ -31,6 +31,6 @@ readonly class FeedEntry
         public string $link,
         public DateTimeImmutable $lastModified,
         public string $author,
-        public ?string $description = null
+        public ?string $description = null,
     ) {}
 }

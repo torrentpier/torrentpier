@@ -7,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
@@ -25,7 +24,7 @@ if (request()->post->has('submit')) {
         bb_die(__('CAPTCHA_WRONG'));
     }
     $email = (!empty(request()->post->get('email'))) ? trim(strip_tags(htmlspecialchars(request()->post->get('email')))) : '';
-    $sql = "SELECT * FROM " . BB_USERS . " WHERE user_email = '" . DB()->escape($email) . "'";
+    $sql = 'SELECT * FROM ' . BB_USERS . " WHERE user_email = '" . DB()->escape($email) . "'";
     if ($result = DB()->sql_query($sql)) {
         if ($row = DB()->sql_fetchrow($result)) {
             if (!$row['user_active']) {
@@ -41,8 +40,8 @@ if (request()->post->has('submit')) {
             $user_actkey = make_rand_str(ACTKEY_LENGTH);
             $user_password = make_rand_str(PASSWORD_MIN_LENGTH);
 
-            $sql = "UPDATE " . BB_USERS . "
-				SET user_newpasswd = '$user_password', user_actkey = '$user_actkey'
+            $sql = 'UPDATE ' . BB_USERS . "
+				SET user_newpasswd = '{$user_password}', user_actkey = '{$user_actkey}'
 				WHERE user_id = " . $row['user_id'];
             if (!DB()->sql_query($sql)) {
                 bb_die('Could not update new password information');

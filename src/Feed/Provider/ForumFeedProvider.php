@@ -14,6 +14,7 @@ namespace TorrentPier\Feed\Provider;
 
 use DateTimeImmutable;
 use Exception;
+use Override;
 use TorrentPier\Feed\Exception\FeedGenerationException;
 use TorrentPier\Feed\Model\FeedMetadata;
 
@@ -27,6 +28,7 @@ class ForumFeedProvider implements FeedProviderInterface
     use TopicVisibilityFilterTrait;
 
     private ?string $forumName;
+
     private ?array $forumData;
 
     /**
@@ -35,7 +37,7 @@ class ForumFeedProvider implements FeedProviderInterface
      */
     public function __construct(
         private readonly int $forumId,
-        ?string $forumName = null
+        ?string $forumName = null,
     ) {
         $this->forumName = $forumName;
         $this->forumData = null;
@@ -43,6 +45,54 @@ class ForumFeedProvider implements FeedProviderInterface
         if ($forumName === null && $forumId > 0) {
             $this->loadForumData();
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    #[Override]
+    public function getCacheKey(): string
+    {
+        return 'atom:forum:' . $this->forumId;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    #[Override]
+    public function getMetadata(): FeedMetadata
+    {
+        $title = $this->forumId === 0
+            ? (__('ATOM_GLOBAL_FEED') ?: config()->get('server_name'))
+            : htmlCHR($this->forumName);
+
+        // Link to forum with semantic URL, or homepage for global feed
+        $link = $this->forumId === 0
+            ? FULL_URL
+            : make_url(url()->forum($this->forumId, $this->forumName ?? ''));
+
+        return new FeedMetadata(
+            title: $title,
+            link: $link,
+            lastModified: new DateTimeImmutable(),
+        );
+    }
+
+    /**
+     * @inheritDoc
+     * @throws Exception
+     */
+    #[Override]
+    public function getEntries(): array
+    {
+        $topics = $this->forumId === 0
+            ? $this->getGlobalTopics()
+            : $this->getForumTopics();
+
+        // Filter topics from forbidden forums (for guests)
+        $topics = $this->filterForbiddenTopics($topics);
+
+        return $this->mapTopicsToEntries($topics);
     }
 
     /**
@@ -64,61 +114,13 @@ class ForumFeedProvider implements FeedProviderInterface
     }
 
     /**
-     * @inheritDoc
-     */
-    #[\Override]
-    public function getCacheKey(): string
-    {
-        return 'atom:forum:' . $this->forumId;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    #[\Override]
-    public function getMetadata(): FeedMetadata
-    {
-        $title = $this->forumId === 0
-            ? (__('ATOM_GLOBAL_FEED') ?: config()->get('server_name'))
-            : htmlCHR($this->forumName);
-
-        // Link to forum with semantic URL, or homepage for global feed
-        $link = $this->forumId === 0
-            ? FULL_URL
-            : make_url(url()->forum($this->forumId, $this->forumName ?? ''));
-
-        return new FeedMetadata(
-            title: $title,
-            link: $link,
-            lastModified: new DateTimeImmutable()
-        );
-    }
-
-    /**
-     * @inheritDoc
-     * @throws Exception
-     */
-    #[\Override]
-    public function getEntries(): array
-    {
-        $topics = $this->forumId === 0
-            ? $this->getGlobalTopics()
-            : $this->getForumTopics();
-
-        // Filter topics from forbidden forums (for guests)
-        $topics = $this->filterForbiddenTopics($topics);
-
-        return $this->mapTopicsToEntries($topics);
-    }
-
-    /**
      * Get topics for global feed (all torrents)
      *
      * @return array
      */
     private function getGlobalTopics(): array
     {
-        $sql = "
+        $sql = '
             SELECT
                 t.topic_id, t.topic_title, t.topic_status, t.tracker_status, t.forum_id,
                 u1.username AS first_username,
@@ -128,15 +130,15 @@ class ForumFeedProvider implements FeedProviderInterface
                 p2.post_edit_time AS topic_last_post_edit_time,
                 tor.size AS tor_size, tor.tor_status,
                 pt.post_html
-            FROM " . BB_BT_TORRENTS . " tor
-            LEFT JOIN " . BB_TOPICS . " t ON(tor.topic_id = t.topic_id)
-            LEFT JOIN " . BB_USERS . " u1 ON(t.topic_poster = u1.user_id)
-            LEFT JOIN " . BB_POSTS . " p1 ON(t.topic_first_post_id = p1.post_id)
-            LEFT JOIN " . BB_POSTS . " p2 ON(t.topic_last_post_id = p2.post_id)
-            LEFT JOIN " . BB_POSTS_HTML . " pt ON(p1.post_id = pt.post_id)
+            FROM ' . BB_BT_TORRENTS . ' tor
+            LEFT JOIN ' . BB_TOPICS . ' t ON(tor.topic_id = t.topic_id)
+            LEFT JOIN ' . BB_USERS . ' u1 ON(t.topic_poster = u1.user_id)
+            LEFT JOIN ' . BB_POSTS . ' p1 ON(t.topic_first_post_id = p1.post_id)
+            LEFT JOIN ' . BB_POSTS . ' p2 ON(t.topic_last_post_id = p2.post_id)
+            LEFT JOIN ' . BB_POSTS_HTML . ' pt ON(p1.post_id = pt.post_id)
             ORDER BY t.topic_last_post_time DESC
             LIMIT 100
-        ";
+        ';
 
         return DB()->fetch_rowset($sql);
     }
@@ -154,7 +156,7 @@ class ForumFeedProvider implements FeedProviderInterface
 
         if ($this->forumData && $this->forumData['allow_reg_tracker']) {
             $selectTorSql = ', tor.size AS tor_size, tor.tor_status';
-            $joinTorSql = "LEFT JOIN " . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)";
+            $joinTorSql = 'LEFT JOIN ' . BB_BT_TORRENTS . ' tor ON(t.topic_id = tor.topic_id)';
         }
 
         $sql = "
@@ -166,13 +168,13 @@ class ForumFeedProvider implements FeedProviderInterface
                 p2.post_time AS topic_last_post_time,
                 p2.post_edit_time AS topic_last_post_edit_time,
                 pt.post_html
-                $selectTorSql
-            FROM " . BB_TOPICS . " t
-            LEFT JOIN " . BB_USERS . " u1 ON(t.topic_poster = u1.user_id)
-            LEFT JOIN " . BB_POSTS . " p1 ON(t.topic_first_post_id = p1.post_id)
-            LEFT JOIN " . BB_POSTS . " p2 ON(t.topic_last_post_id = p2.post_id)
-            LEFT JOIN " . BB_POSTS_HTML . " pt ON(p1.post_id = pt.post_id)
-            $joinTorSql
+                {$selectTorSql}
+            FROM " . BB_TOPICS . ' t
+            LEFT JOIN ' . BB_USERS . ' u1 ON(t.topic_poster = u1.user_id)
+            LEFT JOIN ' . BB_POSTS . ' p1 ON(t.topic_first_post_id = p1.post_id)
+            LEFT JOIN ' . BB_POSTS . ' p2 ON(t.topic_last_post_id = p2.post_id)
+            LEFT JOIN ' . BB_POSTS_HTML . " pt ON(p1.post_id = pt.post_id)
+            {$joinTorSql}
             WHERE t.forum_id = {$this->forumId}
             ORDER BY t.topic_last_post_time DESC
             LIMIT 50

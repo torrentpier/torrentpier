@@ -85,7 +85,7 @@ class TemplatePanel implements IBarPanel
         $html .= '<span class="tp-stat-label">Native (.twig)</span>';
         $html .= '</div>';
         $html .= '<div class="tp-stat">';
-        $html .= '<span class="tp-stat-value">' . sprintf('%.2f', $data['render_time']) . '</span>';
+        $html .= '<span class="tp-stat-value">' . \sprintf('%.2f', $data['render_time']) . '</span>';
         $html .= '<span class="tp-stat-label">Render (ms)</span>';
         $html .= '</div>';
         $html .= '</div>';
@@ -174,11 +174,12 @@ class TemplatePanel implements IBarPanel
      */
     private function formatValue(mixed $value): string
     {
-        if (is_scalar($value)) {
-            $str = (string) $value;
-            if (strlen($str) > 30) {
+        if (\is_scalar($value)) {
+            $str = (string)$value;
+            if (\strlen($str) > 30) {
                 return substr($str, 0, 27) . '...';
             }
+
             return $str;
         }
 

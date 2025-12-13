@@ -23,7 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 #[AsCommand(
     name: 'rebuild:search',
-    description: 'Rebuild the search index from all posts'
+    description: 'Rebuild the search index from all posts',
 )]
 class SearchCommand extends AbstractRebuildCommand
 {
@@ -46,36 +46,36 @@ class SearchCommand extends AbstractRebuildCommand
                 'clear-index',
                 'c',
                 InputOption::VALUE_NONE,
-                'Clear the search index before rebuilding (TRUNCATE)'
+                'Clear the search index before rebuilding (TRUNCATE)',
             )
             ->setHelp(
                 <<<'HELP'
-The <info>%command.name%</info> command rebuilds the full-text search index.
+                    The <info>%command.name%</info> command rebuilds the full-text search index.
 
-This is a heavy operation that processes all posts in the database,
-extracts keywords, and stores them in the search index table.
+                    This is a heavy operation that processes all posts in the database,
+                    extracts keywords, and stores them in the search index table.
 
-<comment>Basic usage:</comment>
-  <info>php %command.full_name%</info>
+                    <comment>Basic usage:</comment>
+                      <info>php %command.full_name%</info>
 
-<comment>Clear and rebuild from scratch:</comment>
-  <info>php %command.full_name% --clear-index</info>
+                    <comment>Clear and rebuild from scratch:</comment>
+                      <info>php %command.full_name% --clear-index</info>
 
-<comment>Custom batch size (default: 50):</comment>
-  <info>php %command.full_name% --batch-size=100</info>
+                    <comment>Custom batch size (default: 50):</comment>
+                      <info>php %command.full_name% --batch-size=100</info>
 
-<comment>Resume from a specific post ID:</comment>
-  <info>php %command.full_name% --start-from=12345</info>
+                    <comment>Resume from a specific post ID:</comment>
+                      <info>php %command.full_name% --start-from=12345</info>
 
-<comment>Preview what would be done:</comment>
-  <info>php %command.full_name% --dry-run</info>
+                    <comment>Preview what would be done:</comment>
+                      <info>php %command.full_name% --dry-run</info>
 
-<comment>Disable progress bar (for cron/scripts):</comment>
-  <info>php %command.full_name% --no-progress</info>
+                    <comment>Disable progress bar (for cron/scripts):</comment>
+                      <info>php %command.full_name% --no-progress</info>
 
-Note: This command can be safely interrupted with Ctrl+C.
-It will display the last processed ID so you can resume later.
-HELP
+                    Note: This command can be safely interrupted with Ctrl+C.
+                    It will display the last processed ID so you can resume later.
+                    HELP
             );
     }
 
@@ -100,6 +100,7 @@ HELP
 
         if ($totalPosts === 0) {
             $this->info('No posts to process.');
+
             return self::SUCCESS;
         }
 
@@ -152,13 +153,13 @@ HELP
             }
 
             // Update progress
-            $processedInBatch = count($posts);
-            $this->lastPostId = (int) $posts[array_key_last($posts)]['post_id'];
+            $processedInBatch = \count($posts);
+            $this->lastPostId = (int)$posts[array_key_last($posts)]['post_id'];
             $currentId = $this->lastPostId + 1;
 
             $this->advanceProgressBar(
                 $processedInBatch,
-                sprintf('Processing post ID %d...', $this->lastPostId)
+                \sprintf('Processing post ID %d...', $this->lastPostId),
             );
 
             // Allow garbage collection
@@ -170,6 +171,7 @@ HELP
         // Handle interruption
         if ($interrupted) {
             $this->displayInterruptedNotice($this->lastPostId);
+
             return self::FAILURE;
         }
 
@@ -184,6 +186,7 @@ HELP
         $this->displayStatistics('posts');
 
         $this->success('Search index rebuild completed!');
+
         return self::SUCCESS;
     }
 
@@ -192,16 +195,17 @@ HELP
      */
     private function getTotalPosts(int $startFrom): int
     {
-        $sql = "
+        $sql = '
             SELECT COUNT(*) as cnt
-            FROM " . BB_POSTS_TEXT . " pt
-            INNER JOIN " . BB_POSTS . " p ON p.post_id = pt.post_id
-            WHERE p.poster_id NOT IN(" . BOT_UID . ")
-            " . ($startFrom > 0 ? "AND pt.post_id >= $startFrom" : '') . "
-        ";
+            FROM ' . BB_POSTS_TEXT . ' pt
+            INNER JOIN ' . BB_POSTS . ' p ON p.post_id = pt.post_id
+            WHERE p.poster_id NOT IN(' . BOT_UID . ')
+            ' . ($startFrom > 0 ? "AND pt.post_id >= {$startFrom}" : '') . '
+        ';
 
         $row = DB()->fetch_row($sql);
-        return (int) ($row['cnt'] ?? 0);
+
+        return (int)($row['cnt'] ?? 0);
     }
 
     /**
@@ -214,13 +218,13 @@ HELP
                 pt.post_id,
                 pt.post_text,
                 IF(p.post_id = t.topic_first_post_id, t.topic_title, '') AS post_subject
-            FROM " . BB_POSTS_TEXT . " pt
-            INNER JOIN " . BB_POSTS . " p ON p.post_id = pt.post_id
-            INNER JOIN " . BB_TOPICS . " t ON t.topic_id = p.topic_id
-            WHERE p.poster_id NOT IN(" . BOT_UID . ")
-                AND pt.post_id >= $startId
+            FROM " . BB_POSTS_TEXT . ' pt
+            INNER JOIN ' . BB_POSTS . ' p ON p.post_id = pt.post_id
+            INNER JOIN ' . BB_TOPICS . ' t ON t.topic_id = p.topic_id
+            WHERE p.poster_id NOT IN(' . BOT_UID . ")
+                AND pt.post_id >= {$startId}
             ORDER BY pt.post_id
-            LIMIT $limit
+            LIMIT {$limit}
         ";
 
         return DB()->fetch_rowset($sql);
@@ -242,11 +246,11 @@ HELP
                 $row['post_id'],
                 stripslashes($postText),
                 stripslashes($postSubject),
-                true // only_return_words
+                true, // only_return_words
             );
 
             $wordsSql[] = [
-                'post_id' => (int) $row['post_id'],
+                'post_id' => (int)$row['post_id'],
                 'search_words' => $searchWords,
             ];
         }
@@ -272,11 +276,11 @@ HELP
     {
         $table = BB_POSTS_SEARCH;
 
-        $this->line("  Analyzing $table...");
-        DB()->query("ANALYZE TABLE $table");
+        $this->line("  Analyzing {$table}...");
+        DB()->query("ANALYZE TABLE {$table}");
 
-        $this->line("  Optimizing $table...");
-        DB()->query("OPTIMIZE TABLE $table");
+        $this->line("  Optimizing {$table}...");
+        DB()->query("OPTIMIZE TABLE {$table}");
 
         $this->info('Tables optimized.');
     }

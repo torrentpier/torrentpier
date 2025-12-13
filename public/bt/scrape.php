@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require dirname(__DIR__, 2) . '/library/common.php';
@@ -69,13 +69,13 @@ if (!empty($info_hash_count)) {
      * Currently torrent clients send truncated v2 hashes (the design raises questions).
      * @see https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
      */
-    $info_hash_where = "tor.info_hash IN ('$info_hashes_sql') OR SUBSTRING(tor.info_hash_v2, 1, 20) IN ('$info_hashes_sql')";
+    $info_hash_where = "tor.info_hash IN ('{$info_hashes_sql}') OR SUBSTRING(tor.info_hash_v2, 1, 20) IN ('{$info_hashes_sql}')";
 
-    $sql = "
+    $sql = '
         SELECT tor.info_hash, tor.info_hash_v2, tor.complete_count, snap.seeders, snap.leechers
-        FROM " . BB_BT_TORRENTS . " tor
-        LEFT JOIN " . BB_BT_TRACKER_SNAP . " snap ON (snap.topic_id = tor.topic_id)
-        WHERE $info_hash_where
+        FROM ' . BB_BT_TORRENTS . ' tor
+        LEFT JOIN ' . BB_BT_TRACKER_SNAP . " snap ON (snap.topic_id = tor.topic_id)
+        WHERE {$info_hash_where}
     ";
 
     $scrapes = DB()->fetch_rowset($sql);
@@ -89,7 +89,7 @@ if (!empty($info_hash_count)) {
             $torrents['files'][$info_hash_scrape] = [
                 'complete' => (int)$scrape['seeders'],
                 'downloaded' => (int)$scrape['complete_count'],
-                'incomplete' => (int)$scrape['leechers']
+                'incomplete' => (int)$scrape['leechers'],
             ];
             CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . bin2hex($info_hash_scrape), array_slice($torrents['files'], -1, null, true), SCRAPE_LIST_EXPIRE);
         }
@@ -101,4 +101,4 @@ if (empty($torrents)) {
     msg_die('Torrent not registered, info_hash = ' . (mb_check_encoding($info_hash, DEFAULT_CHARSET) ? $info_hash : $info_hash_hex));
 }
 
-die(\Arokettu\Bencode\Bencode::encode($torrents));
+die(Arokettu\Bencode\Bencode::encode($torrents));

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,9 +7,9 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!empty($setmodules)) {
     $module['GENERAL']['SMILIES'] = basename(__FILE__);
+
     return;
 }
 
@@ -35,7 +36,7 @@ foreach ($smilesDirectory as $files) {
         $extension = strtolower(pathinfo($files->getFilename(), PATHINFO_EXTENSION));
         if (in_array($extension, ['png', 'gif'], true) && getimagesize($pathToSmilesDir . '/' . $files->getFilename())) {
             $smiley_images[] = $files->getFilename();
-        } else if ($extension === 'pak') {
+        } elseif ($extension === 'pak') {
             $smiley_paks[] = $files->getFilename();
         }
     }
@@ -125,7 +126,7 @@ if (request()->has('import_pack')) {
 
             'S_SMILEY_ACTION' => 'admin_smilies.php',
             'S_SMILE_SELECT' => $smile_paks_select,
-            'S_HIDDEN_FIELDS' => $hidden_vars
+            'S_HIDDEN_FIELDS' => $hidden_vars,
         ]);
     }
 } elseif (request()->has('export_pack')) {
@@ -146,7 +147,7 @@ if (request()->has('import_pack')) {
             $smile_pak .= $resultset[$i]['code'] . "\n";
         }
 
-        $response = \TorrentPier\Http\Response::text($smile_pak);
+        $response = TorrentPier\Http\Response::text($smile_pak);
         $response->headers->set('Content-Type', 'text/x-delimtext; name="smiles.pak"');
         $response->headers->set('Content-Disposition', 'attachment; filename=smiles.pak');
         $response->send();
@@ -168,7 +169,7 @@ if (request()->has('import_pack')) {
         'S_SMILEY_ACTION' => 'admin_smilies.php',
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_FILENAME_OPTIONS' => $filename_list,
-        'S_SMILEY_BASEDIR' => $pathToSmilesDir
+        'S_SMILEY_BASEDIR' => $pathToSmilesDir,
     ]);
 } elseif ($mode != '') {
     switch ($mode) {
@@ -227,7 +228,7 @@ if (request()->has('import_pack')) {
                 'S_SMILEY_ACTION' => 'admin_smilies.php',
                 'S_HIDDEN_FIELDS' => $s_hidden_fields,
                 'S_FILENAME_OPTIONS' => $filename_list,
-                'S_SMILEY_BASEDIR' => $pathToSmilesDir
+                'S_SMILEY_BASEDIR' => $pathToSmilesDir,
             ]);
 
             break;
@@ -250,7 +251,7 @@ if (request()->has('import_pack')) {
             // Proceed with updating the smiley table
             $sql = 'UPDATE ' . BB_SMILIES . "
 				SET code = '" . DB()->escape($smile_code) . "', smile_url = '" . DB()->escape($smile_url) . "', emoticon = '" . DB()->escape($smile_emotion) . "'
-				WHERE smilies_id = $smile_id";
+				WHERE smilies_id = {$smile_id}";
             if (!($result = DB()->sql_query($sql))) {
                 bb_die('Could not update smilies #2');
             }
@@ -297,7 +298,7 @@ if (request()->has('import_pack')) {
     template()->assign_vars([
         'TPL_SMILE_MAIN' => true,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
-        'S_SMILEY_ACTION' => 'admin_smilies.php'
+        'S_SMILEY_ACTION' => 'admin_smilies.php',
     ]);
 
     // Loop throuh the rows of smilies setting block vars for the template

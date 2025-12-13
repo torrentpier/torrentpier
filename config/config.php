@@ -7,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
@@ -137,7 +136,7 @@ $bb_cfg['tp_updater_settings'] = [
 $bb_cfg['torr_server'] = [
     // Read more: https://github.com/YouROK/TorrServer
     'enabled' => false,
-    'url' => "http://$domain_name:8090",
+    'url' => "http://{$domain_name}:8090",
     'timeout' => 3,
     'disable_for_guest' => true,
 ];
@@ -399,8 +398,8 @@ $bb_cfg['show_sidebar1_on_every_page'] = false; // Show left sidebar in every pa
 $bb_cfg['show_sidebar2_on_every_page'] = false; // Show right sidebar in every page
 
 // Cookie
-$bb_cfg['cookie_domain'] = in_array($domain_name, [$_SERVER['SERVER_ADDR'], 'localhost'], true) ? '' : ".$domain_name";
-$bb_cfg['cookie_secure'] = \TorrentPier\Helpers\HttpHelper::isHTTPS();
+$bb_cfg['cookie_domain'] = in_array($domain_name, [$_SERVER['SERVER_ADDR'], 'localhost'], true) ? '' : ".{$domain_name}";
+$bb_cfg['cookie_secure'] = TorrentPier\Helpers\HttpHelper::isHTTPS();
 $bb_cfg['cookie_prefix'] = 'bb_'; // 'bb_'
 $bb_cfg['cookie_same_site'] = 'Lax'; // Lax, None, Strict | https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
@@ -463,7 +462,7 @@ $bb_cfg['emailer'] = [
 ];
 $bb_cfg['extended_email_validation'] = true; // DNS & RFC checks for entered email addresses
 
-$bb_cfg['board_email'] = "noreply@$domain_name"; // admin email address
+$bb_cfg['board_email'] = "noreply@{$domain_name}"; // admin email address
 $bb_cfg['board_email_form'] = false; // can users send email to each other via board
 $bb_cfg['board_email_sig'] = ''; // this text will be attached to all emails the board sends
 $bb_cfg['board_email_sitename'] = $domain_name; // sitename used in all emails header
@@ -474,10 +473,10 @@ $bb_cfg['group_send_email'] = true; // Send emails to users if a user was invite
 $bb_cfg['email_change_disabled'] = false; // Allow changing emails for users
 $bb_cfg['show_email_visibility_settings'] = true; // Allow changing the privacy status of profile for users (e.g. last time seen)
 
-$bb_cfg['bounce_email'] = "bounce@$domain_name"; // bounce email address
-$bb_cfg['tech_admin_email'] = "admin@$domain_name"; // email for sending error reports
-$bb_cfg['abuse_email'] = "abuse@$domain_name"; // abuse email (e.g. DMCA)
-$bb_cfg['adv_email'] = "adv@$domain_name"; // advertisement email
+$bb_cfg['bounce_email'] = "bounce@{$domain_name}"; // bounce email address
+$bb_cfg['tech_admin_email'] = "admin@{$domain_name}"; // email for sending error reports
+$bb_cfg['abuse_email'] = "abuse@{$domain_name}"; // abuse email (e.g. DMCA)
+$bb_cfg['adv_email'] = "adv@{$domain_name}"; // advertisement email
 
 // Error reporting
 $bb_cfg['whoops'] = [
@@ -726,16 +725,16 @@ $bb_cfg['nofollow'] = [
 // Page settings
 $bb_cfg['page'] = [
     'show_torhelp' => [
-        #BB_SCRIPT => true
+        //BB_SCRIPT => true
         'index' => true,
         'tracker' => true,
     ],
     'show_sidebar1' => [
-        #BB_SCRIPT => true
+        //BB_SCRIPT => true
         'index' => true,
     ],
     'show_sidebar2' => [
-        #BB_SCRIPT => true
+        //BB_SCRIPT => true
         'index' => true,
     ],
 ];
@@ -1143,7 +1142,7 @@ $bb_cfg['tor_clients'] = [
     '-CT' => 'CTorrent', '-DE' => 'Deluge', '-FD' => 'Free Download Manager', 'FD6' => 'Free Download Manager',
     '-FG' => 'FlashGet', '-FL' => 'Folx', '-HL' => 'Halite', '-KG' => 'KGet',
     '-KT' => 'KTorrent', '-LT' => 'libTorrent', '-Lr' => 'LibreTorrent',
-    '-TR' => 'Transmission', '-tT' => 'tTorrent', '-UM' => "uTorrent Mac", '-UT' => 'uTorrent',
+    '-TR' => 'Transmission', '-tT' => 'tTorrent', '-UM' => 'uTorrent Mac', '-UT' => 'uTorrent',
     '-UW' => 'uTorrent Web', '-WW' => 'WebTorrent', '-WD' => 'WebTorrent', '-XL' => 'Xunlei',
     '-PI' => 'PicoTorrent', '-qB' => 'qBittorrent', 'M' => 'BitTorrent', 'MG' => 'MediaGet',
     '-MG' => 'MediaGet', 'OP' => 'Opera', 'TIX' => 'Tixati', 'aria2-' => 'Aria2', 'A2' => 'Aria2',

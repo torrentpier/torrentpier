@@ -21,6 +21,33 @@ use samdark\sitemap\Sitemap as STM;
 class Sitemap
 {
     /**
+     * Генерация карты сайта
+     *
+     *
+     * @throws InvalidArgumentException
+     * @return bool
+     */
+    public function createSitemap(): bool
+    {
+        $index = new IDX(SITEMAP_DIR . '/sitemap.xml');
+
+        foreach ($this->buildDynamicSitemap() as $sitemapUrl) {
+            $index->addSitemap($sitemapUrl);
+        }
+
+        foreach ($this->buildStaticSitemap() as $sitemapUrl) {
+            $index->addSitemap($sitemapUrl);
+        }
+
+        $index->write();
+
+        /** обновляем время генерации карты сайта в конфиге */
+        bb_update_config(['sitemap_time' => TIMENOW]);
+
+        return true;
+    }
+
+    /**
      * Получение списка URL разделов
      *
      * @return array
@@ -32,25 +59,25 @@ class Sitemap
         $forums = forum_tree();
 
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
-        $ignore_forum_sql = $not_forums_id ? "WHERE f.forum_id NOT IN($not_forums_id)" : '';
+        $ignore_forum_sql = $not_forums_id ? "WHERE f.forum_id NOT IN({$not_forums_id})" : '';
 
-        $sql = DB()->sql_query("
+        $sql = DB()->sql_query('
             SELECT
                 f.forum_id,
                 f.forum_name,
                 MAX(t.topic_time) AS last_topic_time
-            FROM " . BB_FORUMS . " f
-            LEFT JOIN " . BB_TOPICS . " t ON f.forum_id = t.forum_id
-            " . $ignore_forum_sql . "
+            FROM ' . BB_FORUMS . ' f
+            LEFT JOIN ' . BB_TOPICS . ' t ON f.forum_id = t.forum_id
+            ' . $ignore_forum_sql . '
             GROUP BY f.forum_id, f.forum_name
             ORDER BY f.forum_id ASC
-        ");
+        ');
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $forum_url = FORUM_URL . $row['forum_id'];
-            if (function_exists('seo_url')) {
+            if (\function_exists('seo_url')) {
                 $forum_url = seo_url(FORUM_URL . $row['forum_id'], $row['forum_name']);
-            };
+            }
             $forumUrls[] = [
                 'url' => $forum_url,
                 'time' => $row['last_topic_time'],
@@ -72,15 +99,15 @@ class Sitemap
         $forums = forum_tree();
 
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
-        $ignore_forum_sql = $not_forums_id ? "WHERE forum_id NOT IN($not_forums_id)" : '';
+        $ignore_forum_sql = $not_forums_id ? "WHERE forum_id NOT IN({$not_forums_id})" : '';
 
-        $sql = DB()->sql_query("SELECT topic_id, topic_title, topic_last_post_time FROM " . BB_TOPICS . " " . $ignore_forum_sql . " ORDER BY topic_last_post_time ASC");
+        $sql = DB()->sql_query('SELECT topic_id, topic_title, topic_last_post_time FROM ' . BB_TOPICS . ' ' . $ignore_forum_sql . ' ORDER BY topic_last_post_time ASC');
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $topic_url = TOPIC_URL . $row['topic_id'];
-            if (function_exists('seo_url')) {
+            if (\function_exists('seo_url')) {
                 $topic_url = seo_url(TOPIC_URL . $row['topic_id'], $row['topic_title']);
-            };
+            }
             $topicUrls[] = [
                 'url' => $topic_url,
                 'time' => $row['topic_last_post_time'],
@@ -118,9 +145,9 @@ class Sitemap
     /**
      * Генерация карты сайта (динамичные URL)
      *
-     * @return array
      *
      * @throws InvalidArgumentException
+     * @return array
      */
     private function buildDynamicSitemap(): array
     {
@@ -142,9 +169,9 @@ class Sitemap
     /**
      * Генерация карты сайта (статичные URL)
      *
-     * @return array
      *
      * @throws InvalidArgumentException
+     * @return array
      */
     private function buildStaticSitemap(): array
     {
@@ -157,32 +184,5 @@ class Sitemap
         $staticSitemap->write();
 
         return $staticSitemap->getSitemapUrls(make_url('/storage/sitemap') . '/');
-    }
-
-    /**
-     * Генерация карты сайта
-     *
-     * @return bool
-     *
-     * @throws InvalidArgumentException
-     */
-    public function createSitemap(): bool
-    {
-        $index = new IDX(SITEMAP_DIR . '/sitemap.xml');
-
-        foreach ($this->buildDynamicSitemap() as $sitemapUrl) {
-            $index->addSitemap($sitemapUrl);
-        }
-
-        foreach ($this->buildStaticSitemap() as $sitemapUrl) {
-            $index->addSitemap($sitemapUrl);
-        }
-
-        $index->write();
-
-        /** обновляем время генерации карты сайта в конфиге */
-        bb_update_config(['sitemap_time' => TIMENOW]);
-
-        return true;
     }
 }

@@ -38,6 +38,7 @@ class Select
         }
         $lang_select .= '</select>';
         $languages = config()->get('lang');
+
         return ($x > 1) ? $lang_select : reset($languages);
     }
 
@@ -52,7 +53,7 @@ class Select
     public static function timezone(string $default = '', string $select_name = 'timezone'): string
     {
         if ($default === '') {
-            $default = (string) config()->get('board_timezone');
+            $default = (string)config()->get('board_timezone');
         }
         $tz_select = '<select name="' . $select_name . '">';
 
@@ -87,6 +88,7 @@ class Select
         }
         $templates_select .= '</select>';
         $templates = config()->get('templates');
+
         return ($x > 1) ? $templates_select : reset($templates);
     }
 }

@@ -17,9 +17,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use LogicException;
-
-use const PHP_ROUND_HALF_UP;
-
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -31,9 +28,6 @@ use TorrentPier\Http\Exception\HttpClientException;
  */
 final class HttpClient
 {
-    private static ?self $instance = null;
-    private Client $client;
-
     /**
      * Default timeout for HTTP requests (in seconds)
      */
@@ -49,6 +43,9 @@ final class HttpClient
      */
     private const int DEFAULT_MAX_RETRIES = 3;
 
+    private static ?self $instance = null;
+
+    private Client $client;
 
     /**
      * Private constructor to prevent direct instantiation
@@ -62,7 +59,7 @@ final class HttpClient
         // Add retry middleware
         $handler->push(Middleware::retry(
             $this->retryDecider(),
-            $this->retryDelay()
+            $this->retryDelay(),
         ));
 
         // Add logging middleware
@@ -84,6 +81,27 @@ final class HttpClient
     }
 
     /**
+     * Prevent cloning
+     */
+    private function __clone() {}
+
+    /**
+     * Prevent serialization of the singleton instance
+     */
+    public function __serialize(): array
+    {
+        throw new LogicException('Cannot serialize singleton');
+    }
+
+    /**
+     * Prevent unserialization of the singleton instance
+     */
+    public function __unserialize(array $data): void
+    {
+        throw new LogicException('Cannot unserialize singleton');
+    }
+
+    /**
      * Get a singleton instance
      *
      * @param array $config Additional Guzzle configuration (only used on the first call)
@@ -100,8 +118,6 @@ final class HttpClient
 
     /**
      * Reset singleton instance (useful for testing)
-     *
-     * @return void
      */
     public static function resetInstance(): void
     {
@@ -143,8 +159,8 @@ final class HttpClient
      *
      * @param string $uri URI to request
      * @param array $options Request options (headers, query, etc.)
-     * @return ResponseInterface
      * @throws HttpClientException
+     * @return ResponseInterface
      */
     public function get(string $uri, array $options = []): ResponseInterface
     {
@@ -156,8 +172,8 @@ final class HttpClient
      *
      * @param string $uri URI to request
      * @param array $options Request options (headers, form_params, json, multipart, etc.)
-     * @return ResponseInterface
      * @throws HttpClientException
+     * @return ResponseInterface
      */
     public function post(string $uri, array $options = []): ResponseInterface
     {
@@ -169,8 +185,8 @@ final class HttpClient
      *
      * @param string $uri URI to request
      * @param array $options Request options
-     * @return ResponseInterface
      * @throws HttpClientException
+     * @return ResponseInterface
      */
     public function put(string $uri, array $options = []): ResponseInterface
     {
@@ -182,8 +198,8 @@ final class HttpClient
      *
      * @param string $uri URI to request
      * @param array $options Request options
-     * @return ResponseInterface
      * @throws HttpClientException
+     * @return ResponseInterface
      */
     public function patch(string $uri, array $options = []): ResponseInterface
     {
@@ -195,8 +211,8 @@ final class HttpClient
      *
      * @param string $uri URI to request
      * @param array $options Request options
-     * @return ResponseInterface
      * @throws HttpClientException
+     * @return ResponseInterface
      */
     public function delete(string $uri, array $options = []): ResponseInterface
     {
@@ -208,8 +224,8 @@ final class HttpClient
      *
      * @param string $uri URI to request
      * @param array $options Request options
-     * @return ResponseInterface
      * @throws HttpClientException
+     * @return ResponseInterface
      */
     public function head(string $uri, array $options = []): ResponseInterface
     {
@@ -222,8 +238,8 @@ final class HttpClient
      * @param string $method HTTP method
      * @param string $uri URI to request
      * @param array $options Request options
-     * @return ResponseInterface
      * @throws HttpClientException
+     * @return ResponseInterface
      */
     public function request(string $method, string $uri, array $options = []): ResponseInterface
     {
@@ -233,13 +249,13 @@ final class HttpClient
             throw new HttpClientException(
                 "HTTP request failed: {$e->getMessage()}",
                 $e->getCode(),
-                $e
+                $e,
             );
         } catch (Throwable $e) {
             throw new HttpClientException(
                 "Unexpected error during HTTP request: {$e->getMessage()}",
                 0,
-                $e
+                $e,
             );
         }
     }
@@ -251,8 +267,8 @@ final class HttpClient
      * @param string $uri URI to download from
      * @param string $savePath Local path to save the file
      * @param array $options Additional request options
-     * @return bool True on success
      * @throws HttpClientException
+     * @return bool True on success
      */
     public function download(string $uri, string $savePath, array $options = []): bool
     {
@@ -273,7 +289,7 @@ final class HttpClient
             }
 
             throw new HttpClientException(
-                "Failed to download file: HTTP {$response->getStatusCode()}"
+                "Failed to download file: HTTP {$response->getStatusCode()}",
             );
         } catch (HttpClientException $e) {
             throw $e;
@@ -281,7 +297,7 @@ final class HttpClient
             throw new HttpClientException(
                 "Failed to download file: {$e->getMessage()}",
                 0,
-                $e
+                $e,
             );
         }
     }
@@ -294,14 +310,14 @@ final class HttpClient
      * @param string $savePath Local path to save the file
      * @param callable|null $progressCallback Callback function (float $percent, int $downloaded, int $total)
      * @param array $options Additional request options
-     * @return bool True on success
      * @throws HttpClientException
+     * @return bool True on success
      */
     public function downloadWithProgress(
         string    $uri,
         string    $savePath,
         ?callable $progressCallback = null,
-        array     $options = []
+        array     $options = [],
     ): bool {
         // Add a progress callback if provided
         if ($progressCallback !== null) {
@@ -309,11 +325,11 @@ final class HttpClient
                 int|float $downloadTotal,
                 int|float $downloadedBytes,
                 int|float $uploadTotal,
-                int|float $uploadedBytes
+                int|float $uploadedBytes,
             ) use ($progressCallback): void {
                 if ($downloadTotal > 0) {
-                    $percent = round(($downloadedBytes / $downloadTotal) * 100, 2, PHP_ROUND_HALF_UP);
-                    $progressCallback($percent, (int) $downloadedBytes, (int) $downloadTotal);
+                    $percent = round(($downloadedBytes / $downloadTotal) * 100, 2, \PHP_ROUND_HALF_UP);
+                    $progressCallback($percent, (int)$downloadedBytes, (int)$downloadTotal);
                 }
             };
         }
@@ -334,7 +350,7 @@ final class HttpClient
             int                $retries,
             RequestInterface   $request,
             ?ResponseInterface $response = null,
-            ?Throwable         $exception = null
+            ?Throwable         $exception = null,
         ) {
             // Don't retry if we've exceeded max retries
             if ($retries >= self::DEFAULT_MAX_RETRIES) {
@@ -352,11 +368,7 @@ final class HttpClient
             }
 
             // Retry on 429 Too Many Requests
-            if ($response && $response->getStatusCode() === 429) {
-                return true;
-            }
-
-            return false;
+            return (bool)($response && $response->getStatusCode() === 429);
         };
     }
 
@@ -373,18 +385,19 @@ final class HttpClient
             if ($response && $response->hasHeader('Retry-After')) {
                 $retryAfter = $response->getHeaderLine('Retry-After');
                 if (is_numeric($retryAfter)) {
-                    return (int) $retryAfter * 1000; // seconds -> ms
+                    return (int)$retryAfter * 1000; // seconds -> ms
                 }
                 // Support http-date format
                 $ts = strtotime($retryAfter);
                 if ($ts !== false) {
                     $delay = max(0, $ts - time());
-                    return (int) ($delay * 1000);
+
+                    return (int)($delay * 1000);
                 }
             }
 
             // Exponential backoff: 2s, 4s, 8s, etc.
-            return (int) (1000 * (2 ** $retries));
+            return (int)(1000 * (2 ** $retries));
         };
     }
 
@@ -399,18 +412,19 @@ final class HttpClient
         return function (callable $handler) {
             return function (RequestInterface $request, array $options) use ($handler) {
                 // Log request if debug logging is enabled
-                if (defined('IN_DEBUG_MODE') && IN_DEBUG_MODE && function_exists('bb_log')) {
+                if (\defined('IN_DEBUG_MODE') && IN_DEBUG_MODE && \function_exists('bb_log')) {
                     $this->logRequest($request);
                 }
 
                 return $handler($request, $options)->then(
                     function (ResponseInterface $response) use ($request) {
                         // Log response if debug logging is enabled
-                        if (defined('IN_DEBUG_MODE') && IN_DEBUG_MODE && function_exists('bb_log')) {
+                        if (\defined('IN_DEBUG_MODE') && IN_DEBUG_MODE && \function_exists('bb_log')) {
                             $this->logResponse($request, $response);
                         }
+
                         return $response;
-                    }
+                    },
                 );
             };
         };
@@ -420,14 +434,13 @@ final class HttpClient
      * Log HTTP request
      *
      * @param RequestInterface $request
-     * @return void
      */
     private function logRequest(RequestInterface $request): void
     {
-        $message = sprintf(
-            "[HTTP] Request: %s %s",
+        $message = \sprintf(
+            '[HTTP] Request: %s %s',
             $request->getMethod(),
-            $request->getUri()
+            $request->getUri(),
         );
 
         bb_log($message . LOG_LF);
@@ -438,39 +451,17 @@ final class HttpClient
      *
      * @param RequestInterface $request
      * @param ResponseInterface $response
-     * @return void
      */
     private function logResponse(RequestInterface $request, ResponseInterface $response): void
     {
-        $message = sprintf(
-            "[HTTP] Response: %s %s - Status: %d - Size: %d bytes",
+        $message = \sprintf(
+            '[HTTP] Response: %s %s - Status: %d - Size: %d bytes',
             $request->getMethod(),
             $request->getUri(),
             $response->getStatusCode(),
-            $response->getBody()->getSize() ?? 0
+            $response->getBody()->getSize() ?? 0,
         );
 
         bb_log($message . LOG_LF);
-    }
-
-    /**
-     * Prevent cloning
-     */
-    private function __clone() {}
-
-    /**
-     * Prevent serialization of the singleton instance
-     */
-    public function __serialize(): array
-    {
-        throw new LogicException('Cannot serialize singleton');
-    }
-
-    /**
-     * Prevent unserialization of the singleton instance
-     */
-    public function __unserialize(array $data): void
-    {
-        throw new LogicException('Cannot unserialize singleton');
     }
 }

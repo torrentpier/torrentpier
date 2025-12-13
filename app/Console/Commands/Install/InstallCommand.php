@@ -10,11 +10,16 @@
 
 namespace TorrentPier\Console\Commands\Install;
 
+use mysqli;
+use mysqli_sql_exception;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 use TorrentPier\Console\Commands\Command;
 use TorrentPier\Console\Helpers\FileSystemHelper;
 use TorrentPier\Console\Helpers\PhinxManager;
@@ -24,7 +29,7 @@ use TorrentPier\Console\Helpers\PhinxManager;
  */
 #[AsCommand(
     name: 'app:install',
-    description: 'Interactive TorrentPier installation wizard'
+    description: 'Interactive TorrentPier installation wizard',
 )]
 class InstallCommand extends Command
 {
@@ -172,6 +177,7 @@ class InstallCommand extends Command
 
         if (!$this->confirm('Do you want to reinstall? This will reset your configuration.', false)) {
             $this->comment('Installation cancelled.');
+
             return self::SUCCESS;
         }
 
@@ -205,11 +211,11 @@ class InstallCommand extends Command
 
         // Check PHP version
         $phpOk = version_compare(PHP_VERSION, self::PHP_MIN_VERSION, '>=');
-        $this->line(sprintf(
+        $this->line(\sprintf(
             '  %s PHP Version: %s (required: %s+)',
             $phpOk ? '<info>✓</info>' : '<error>✗</error>',
             PHP_VERSION,
-            self::PHP_MIN_VERSION
+            self::PHP_MIN_VERSION,
         ));
 
         if (!$phpOk) {
@@ -221,11 +227,11 @@ class InstallCommand extends Command
         $this->line('  <comment>Extensions:</comment>');
 
         foreach (self::REQUIRED_EXTENSIONS as $ext) {
-            $loaded = extension_loaded($ext);
-            $this->line(sprintf(
+            $loaded = \extension_loaded($ext);
+            $this->line(\sprintf(
                 '    %s %s',
                 $loaded ? '<info>✓</info>' : '<error>✗</error>',
-                $ext
+                $ext,
             ));
 
             if (!$loaded) {
@@ -255,9 +261,9 @@ class InstallCommand extends Command
             $path = BB_ROOT . $dir;
             if (is_dir($path)) {
                 $this->setPermissionsRecursively($path, 0755, 0644);
-                $this->line(sprintf('  <info>✓</info> %s', $dir));
+                $this->line(\sprintf('  <info>✓</info> %s', $dir));
             } else {
-                $this->line(sprintf('  <comment>-</comment> %s (not found)', $dir));
+                $this->line(\sprintf('  <comment>-</comment> %s (not found)', $dir));
             }
         }
 
@@ -269,9 +275,9 @@ class InstallCommand extends Command
      */
     private function setPermissionsRecursively(string $dir, int $dirPerm, int $filePerm): void
     {
-        $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::SELF_FIRST
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::SELF_FIRST,
         );
 
         @chmod($dir, $dirPerm);
@@ -294,6 +300,7 @@ class InstallCommand extends Command
 
         if (file_exists(BB_ROOT . 'vendor/autoload.php')) {
             $this->line('  <info>✓</info> Dependencies installed');
+
             return true;
         }
 
@@ -318,6 +325,7 @@ class InstallCommand extends Command
         if (!file_exists(BB_ROOT . '.env')) {
             if (!file_exists(BB_ROOT . '.env.example')) {
                 $this->error('.env.example file not found!');
+
                 return false;
             }
 
@@ -333,13 +341,13 @@ class InstallCommand extends Command
         $this->config['APP_ENV'] = $this->choice(
             'Application environment',
             ['production', 'development'],
-            'production'
+            'production',
         );
 
         $this->config['TP_HOST'] = $this->askWithValidation(
             'Site hostname (e.g., tracker.example.com)',
-            fn($v) => !empty($v),
-            'Hostname cannot be empty'
+            fn ($v) => !empty($v),
+            'Hostname cannot be empty',
         );
 
         // Clean up hostname
@@ -358,13 +366,13 @@ class InstallCommand extends Command
         $this->config['DB_PORT'] = $this->ask('Database port', '3306');
         $this->config['DB_DATABASE'] = $this->askWithValidation(
             'Database name',
-            fn($v) => !empty($v) && preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $v),
-            'Invalid database name'
+            fn ($v) => !empty($v) && preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $v),
+            'Invalid database name',
         );
         $this->config['DB_USERNAME'] = $this->askWithValidation(
             'Database username',
-            fn($v) => !empty($v),
-            'Username cannot be empty'
+            fn ($v) => !empty($v),
+            'Username cannot be empty',
         );
         $this->config['DB_PASSWORD'] = $this->io->askHidden('Database password (hidden input)') ?? '';
 
@@ -387,7 +395,7 @@ class InstallCommand extends Command
             if ($validator($value)) {
                 return $value;
             }
-            $this->line("  <error>$errorMessage</error>");
+            $this->line("  <error>{$errorMessage}</error>");
         }
     }
 
@@ -422,7 +430,7 @@ class InstallCommand extends Command
         $this->section('Database Setup');
 
         $host = $this->config['DB_HOST'];
-        $port = (int) $this->config['DB_PORT'];
+        $port = (int)$this->config['DB_PORT'];
         $database = $this->config['DB_DATABASE'];
         $username = $this->config['DB_USERNAME'];
         $password = $this->config['DB_PASSWORD'];
@@ -431,6 +439,7 @@ class InstallCommand extends Command
         // DDL statements like CREATE DATABASE don't support prepared statements
         if (!preg_match('/^[a-zA-Z0-9_]+$/', $database)) {
             $this->error('Invalid database name. Only alphanumeric characters and underscores are allowed.');
+
             return false;
         }
 
@@ -438,9 +447,10 @@ class InstallCommand extends Command
         $this->line('  Connecting to MySQL server...');
 
         try {
-            $conn = new \mysqli($host, $username, $password, port: $port);
-        } catch (\mysqli_sql_exception $e) {
+            $conn = new mysqli($host, $username, $password, port: $port);
+        } catch (mysqli_sql_exception $e) {
             $this->error('Connection failed: ' . $e->getMessage());
+
             return false;
         }
 
@@ -455,6 +465,7 @@ class InstallCommand extends Command
             if (!$this->confirm('Drop existing database and create new?', false)) {
                 $this->error('Cannot proceed without database reset.');
                 $conn->close();
+
                 return false;
             }
 
@@ -467,6 +478,7 @@ class InstallCommand extends Command
         if (!$conn->query($sql)) {
             $this->error('Failed to create database: ' . $conn->error);
             $conn->close();
+
             return false;
         }
 
@@ -493,10 +505,11 @@ class InstallCommand extends Command
 
             if ($status['pending'] === 0) {
                 $this->line('  <info>✓</info> Database already up to date');
+
                 return true;
             }
 
-            $this->line(sprintf('  Running %d migration(s)...', $status['pending']));
+            $this->line(\sprintf('  Running %d migration(s)...', $status['pending']));
             $this->line();
 
             $phinx->migrate();
@@ -505,7 +518,7 @@ class InstallCommand extends Command
             $this->success('Migrations completed!');
 
             return true;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->error('Migration failed: ' . $e->getMessage());
 
             if ($this->isVerbose()) {
@@ -557,7 +570,7 @@ class InstallCommand extends Command
 
         try {
             $command->run($arguments, $this->output);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->warning('Could not create storage symlink: ' . $e->getMessage());
             $this->comment('  Run manually: php bull storage:link');
         }
@@ -573,7 +586,7 @@ class InstallCommand extends Command
         $webserver = $this->choice(
             'Which web server are you using?',
             ['nginx', 'caddy', 'apache', 'other'],
-            'nginx'
+            'nginx',
         );
 
         $configFiles = [

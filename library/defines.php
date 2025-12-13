@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
@@ -52,10 +52,11 @@ define('IMAGES_DIR', ASSETS_DIR . '/images');
 define('TEMPLATES_DIR', BB_PATH . '/resources/views');
 
 // Languages
-define('LANG_ROOT_DIR',
+define(
+    'LANG_ROOT_DIR',
     file_exists(BB_PATH . '/vendor/torrentpier/translations/languages/')
         ? BB_PATH . '/vendor/torrentpier/translations/languages/'
-        : BB_PATH . '/library/language/'
+        : BB_PATH . '/library/language/',
 );
 
 // System

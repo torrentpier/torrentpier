@@ -16,13 +16,13 @@ namespace TorrentPier\Legacy;
  */
 class BBCode
 {
-    /** @var array $tpl Replacements for some code elements */
+    /** @var array Replacements for some code elements */
     public array $tpl = [];
 
-    /** @var array $smilies Replacements for smilies */
+    /** @var array Replacements for smilies */
     public array $smilies = [];
 
-    /** @var array $tidy_cfg Tidy preprocessor configuration */
+    /** @var array Tidy preprocessor configuration */
     public array $tidy_cfg = [
         'drop-empty-paras' => false,
         'fix-uri' => false,
@@ -42,7 +42,7 @@ class BBCode
         'wrap' => 0,
     ];
 
-    /** @var array $block_tags Define some elements as block-processed */
+    /** @var array Define some elements as block-processed */
     public array $block_tags = [
         'align',
         'br',
@@ -55,10 +55,15 @@ class BBCode
     ];
 
     public $preg = [];
+
     public $str = [];
+
     public $preg_search = [];
+
     public $preg_repl = [];
+
     public $str_search = [];
+
     public $str_repl = [];
 
     /**
@@ -69,6 +74,44 @@ class BBCode
         $this->tpl = get_bbcode_tpl();
 
         $this->init_replacements();
+    }
+
+    /**
+     * Clean up test from trailing spaces and more
+     *
+     * @param string $text
+     *
+     * @return string
+     */
+    public static function clean_up(string $text): string
+    {
+        $text = trim($text);
+        $text = str_replace("\r", '', $text);
+        $text = preg_replace('#[ \t]+$#m', '', $text);
+
+        return preg_replace('#\n{3,}#', "\n\n", $text);
+    }
+
+    /**
+     * Convert bbcodes to html. Text must be prepared with htmlCHR
+     *
+     * @param string $text
+     *
+     * @return string
+     */
+    public function bbcode2html(string $text): string
+    {
+        $text = self::clean_up($text);
+        $text = $this->parse($text);
+        $text = $this->make_clickable($text);
+        $text = $this->smilies_pass($text);
+        $text = $this->new_line2html($text);
+
+        if (config()->get('tidy_post')) {
+            $text = $this->tidy($text);
+        }
+
+        return trim($text);
     }
 
     /**
@@ -94,10 +137,10 @@ class BBCode
             '#\[align=(left|right|center|justify)\]#isu' => '<span class="post-align" style="text-align: $1;">',
             '#\[font="([\w\- \']+)"\]#isu' => '<span style="font-family: $1;">',
             '#\[font=([\w\- \']+)\]#isu' => '<span style="font-family: $1;">',
-            "#\[img\]($img_exp)\[/img\]#isu" => $tpl['img'],
-            "#\[img=(left|right|center)\]($img_exp)\[/img\]\s*#isu" => $tpl['img_aligned'],
-            "#\[email\]($email_exp)\[/email\]#isu" => '<a href="mailto:$1">$1</a>',
-            "#\[qpost=([0-9]*)\]#isu" => '<u class="q-post">$1</u>',
+            "#\\[img\\]({$img_exp})\\[/img\\]#isu" => $tpl['img'],
+            "#\\[img=(left|right|center)\\]({$img_exp})\\[/img\\]\\s*#isu" => $tpl['img_aligned'],
+            "#\\[email\\]({$email_exp})\\[/email\\]#isu" => '<a href="mailto:$1">$1</a>',
+            '#\\[qpost=([0-9]*)\\]#isu' => '<u class="q-post">$1</u>',
             '#\[box=(?:\s*[\'"])?([\#0-9a-zA-Z]+)(?:[\'"]\s*)?\]#isu' => $tpl['box_open_color_single'],
             '#\[box=(?:\s*[\'"])?([\#0-9a-zA-Z]+)(?:[\'"]\s*)?,\s*[\'"]?([\#0-9a-zA-Z]+)[\'"]?\]#isu' => $tpl['box_open_color'],
         ];
@@ -150,28 +193,6 @@ class BBCode
     }
 
     /**
-     * Convert bbcodes to html. Text must be prepared with htmlCHR
-     *
-     * @param string $text
-     *
-     * @return string
-     */
-    public function bbcode2html(string $text): string
-    {
-        $text = self::clean_up($text);
-        $text = $this->parse($text);
-        $text = $this->make_clickable($text);
-        $text = $this->smilies_pass($text);
-        $text = $this->new_line2html($text);
-
-        if (config()->get('tidy_post')) {
-            $text = $this->tidy($text);
-        }
-
-        return trim($text);
-    }
-
-    /**
      * Parse elements in the text
      *
      * @param string $text
@@ -193,36 +214,21 @@ class BBCode
 
         // [url]
         $url_exp = '[\w\#!$%&~/.\-;:=,?@а-яА-Я()\[\]+]+?';
-        $text = preg_replace_callback("#\[url\]((?:https?://)?$url_exp)\[/url\]#isu", [&$this, 'url_callback'], $text);
-        $text = preg_replace_callback("#\[url\](www\.$url_exp)\[/url\]#isu", [&$this, 'url_callback'], $text);
-        $text = preg_replace_callback("#\[url=((?:https?://)?$url_exp)\]([^?\n\t].*?)\[/url\]#isu", [&$this, 'url_callback'], $text);
-        $text = preg_replace_callback("#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu", [&$this, 'url_callback'], $text);
+        $text = preg_replace_callback("#\\[url\\]((?:https?://)?{$url_exp})\\[/url\\]#isu", [&$this, 'url_callback'], $text);
+        $text = preg_replace_callback("#\\[url\\](www\\.{$url_exp})\\[/url\\]#isu", [&$this, 'url_callback'], $text);
+        $text = preg_replace_callback("#\\[url=((?:https?://)?{$url_exp})\\]([^?\n\t].*?)\\[/url\\]#isu", [&$this, 'url_callback'], $text);
+        $text = preg_replace_callback("#\\[url=(www\\.{$url_exp})\\]([^?\n\t].*?)\\[/url\\]#isu", [&$this, 'url_callback'], $text);
 
         // Normalize block level tags wrapped with new lines
         $block_tags = implode('|', $this->block_tags);
         $text = str_replace("\n\n[hr]\n\n", '[br][hr][br]', $text);
-        $text = preg_replace("#(\s*)(\[/?($block_tags)(.*?)\])(\s*)#", '$2', $text);
+        $text = preg_replace("#(\\s*)(\\[/?({$block_tags})(.*?)\\])(\\s*)#", '$2', $text);
 
         // Tag replacements
         $text = preg_replace($this->preg_search, $this->preg_repl, $text);
         $text = str_replace($this->str_search, $this->str_repl, $text);
 
         return $text;
-    }
-
-    /**
-     * Clean up test from trailing spaces and more
-     *
-     * @param string $text
-     *
-     * @return string
-     */
-    public static function clean_up(string $text): string
-    {
-        $text = trim($text);
-        $text = str_replace("\r", '', $text);
-        $text = preg_replace('#[ \t]+$#m', '', $text);
-        return preg_replace('#\n{3,}#', "\n\n", $text);
     }
 
     /**
@@ -239,6 +245,7 @@ class BBCode
         $code = str_replace('  ', ' &nbsp;', $code);
         $code = str_replace("\t", '&nbsp; ', $code);
         $code = str_replace(['[', ']', ':', ')'], ['&#91;', '&#93;', '&#58;', '&#41;'], $code);
+
         return $this->tpl['code_open'] . $code . $this->tpl['code_close'];
     }
 
@@ -277,6 +284,7 @@ class BBCode
         $title = str_replace(['[', ']', ':', ')', '"'], ['&#91;', '&#93;', '&#58;', '&#41;', '&#34;'], $title);
         // reconvert because after extracting title there's a reverse convertion
         $title = htmlspecialchars($title, ENT_QUOTES);
+
         return $m[1] . $title . $m[4];
     }
 
@@ -291,16 +299,16 @@ class BBCode
     {
         $url_regexp = "#
 			(?<![\"'=])
-			\b
+			\\b
 			(
-				https?://[\w\#!$%&~/.\-;:=?@а-яА-Я()\[\]+]+
+				https?://[\\w\\#!$%&~/.\\-;:=?@а-яА-Я()\\[\\]+]+
 			)
-			(?![\"']|\[/url|\[/img|</a)
-			(?=[,!]?\s|[\)<!])
+			(?![\"']|\\[/url|\\[/img|</a)
+			(?=[,!]?\\s|[\\)<!])
 		#xiu";
 
         // pad it with a space so we can match things at the start of the 1st line.
-        $ret = " $text ";
+        $ret = " {$text} ";
 
         // hide passkey
         $ret = hide_passkey($ret);
@@ -342,7 +350,7 @@ class BBCode
         $this->smilies = datastore()->get('smile_replacements');
 
         if (!empty($this->smilies)) {
-            if (defined('IN_ADMIN')) {
+            if (\defined('IN_ADMIN')) {
                 foreach ($this->smilies['repl'] as &$smile) {
                     $smile = preg_replace('/src="([^"]+)"/', 'src="./../$1"', $smile);
                 }
@@ -368,6 +376,7 @@ class BBCode
     private function new_line2html(string $text): string
     {
         $text = preg_replace('#\n{2,}#', '<span class="post-br"><br /></span>', $text);
+
         return str_replace("\n", '<br />', $text);
     }
 
@@ -393,9 +402,9 @@ class BBCode
     private function nofollow_url(string $href, string $name): string
     {
         if (\in_array(parse_url($href, PHP_URL_HOST), config()->get('nofollow.allowed_url')) || config()->get('nofollow.disabled')) {
-            $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
+            $link = "<a href=\"{$href}\" class=\"postLink\">{$name}</a>";
         } else {
-            $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";
+            $link = "<a href=\"{$href}\" class=\"postLink\" rel=\"nofollow\">{$name}</a>";
         }
 
         return $link;

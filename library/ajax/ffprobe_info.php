@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
@@ -26,17 +26,17 @@ if (empty($topic_id) || !is_numeric($topic_id)) {
 
 $file_index = $this->request['file_index'] ?? null;
 if ($file_index === null || !is_numeric($file_index) || $file_index < 0) {
-    $this->ajax_die(__('TORRSERVER_INVALID_REQUEST') . ": file_index=$file_index");
+    $this->ajax_die(__('TORRSERVER_INVALID_REQUEST') . ": file_index={$file_index}");
 }
 
 if (!$info_hash = (string)$this->request['info_hash'] or !ctype_xdigit($info_hash)) {
-    $this->ajax_die(__('TORRSERVER_INVALID_REQUEST') . ": info_hash=$info_hash");
+    $this->ajax_die(__('TORRSERVER_INVALID_REQUEST') . ": info_hash={$info_hash}");
 }
 
 $isAudio = isset($this->request['is_audio']) && $this->request['is_audio'];
 
 // Get ffprobe info from TorrServer
-$ffpInfo = new \TorrentPier\TorrServerAPI()->getFfpInfo($info_hash, $file_index, $topic_id);
+$ffpInfo = new TorrentPier\TorrServerAPI()->getFfpInfo($info_hash, $file_index, $topic_id);
 if (!$ffpInfo || !isset($ffpInfo->{$file_index})) {
     $this->ajax_die(__('TORRSERVER_UNAVAILABLE'));
 }
@@ -56,7 +56,7 @@ if (isset($ffpInfo->streams)) {
         $result = '<span class="warnColor2">' . sprintf(__('AUDIO_TRACK'), (!isset($stream->index) || $stream->index === 0) ? 1 : $stream->index) . '</span><br/>';
         if (isset($stream->tags->language)) {
             if (isset($stream->tags->title)) {
-                $result .= '<b>' . mb_strtoupper($stream->tags->language, DEFAULT_CHARSET) . ' (' . $stream->tags->title . ')' . '</b>';
+                $result .= '<b>' . mb_strtoupper($stream->tags->language, DEFAULT_CHARSET) . ' (' . $stream->tags->title . ')</b>';
             } else {
                 $result .= '<b>' . mb_strtoupper($stream->tags->language, DEFAULT_CHARSET) . '</b>';
             }
@@ -87,7 +87,7 @@ if (isset($ffpInfo->streams)) {
         'filesize' => sprintf(__('FILESIZE') . ': <b>%s</b>', humn_size($ffpInfo->format->size)),
         'resolution' => (!$isAudio && isset($videoCodecInfo)) ? sprintf(__('RESOLUTION'), $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
         'video_codec' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf(__('VIDEO_CODEC'), $videoCodecInfo->codec_long_name, mb_strtoupper($videoCodecInfo->codec_name, DEFAULT_CHARSET)) : '',
-        'audio_dub' => implode('<hr/>', $audioDub)
+        'audio_dub' => implode('<hr/>', $audioDub),
     ];
 
     // Validate output data

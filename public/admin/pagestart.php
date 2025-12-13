@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 define('BB_ROOT', './../');
 define('IN_ADMIN', true);
 
@@ -24,5 +24,5 @@ if (!IS_ADMIN) {
 
 if (!userdata('session_admin')) {
     $redirect = url_arg(request()->getRequestUri(), 'admin', 1);
-    redirect(LOGIN_URL . "?redirect=$redirect");
+    redirect(LOGIN_URL . "?redirect={$redirect}");
 }

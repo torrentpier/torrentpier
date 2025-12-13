@@ -27,8 +27,8 @@ class Torrent
     public static function update_table_bool($table_name, $key, $field_name, $field_def_val)
     {
         // Clear current status
-        $sql = "UPDATE $table_name
-		SET $field_name = $field_def_val
+        $sql = "UPDATE {$table_name}
+		SET {$field_name} = {$field_def_val}
 		WHERE 1";
 
         if (!$result = DB()->sql_query($sql)) {
@@ -41,14 +41,14 @@ class Torrent
             $in_sql = [];
 
             foreach ($fieldValues as $val) {
-                $in_sql[] = (int) $val;
+                $in_sql[] = (int)$val;
             }
 
             // Update status
             if ($in_sql = implode(',', $in_sql)) {
-                $sql = "UPDATE $table_name
-				SET $field_name = 1
-				WHERE $key IN($in_sql)";
+                $sql = "UPDATE {$table_name}
+				SET {$field_name} = 1
+				WHERE {$key} IN({$in_sql})";
 
                 if (!$result = DB()->sql_query($sql)) {
                     bb_die('Could not update ' . $table_name);
@@ -110,7 +110,7 @@ class Torrent
                 } elseif ($type == 'bool') {
                     $config_value = ($postValue) ? 1 : 0;
                 } elseif ($type == 'num') {
-                    $config_value = abs((int) $postValue);
+                    $config_value = abs((int)$postValue);
                 } else {
                     return;
                 }

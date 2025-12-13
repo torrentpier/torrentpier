@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,14 +7,13 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
 // Obtain and encode user IP
 $client_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
-$user_ip = \TorrentPier\Helpers\IPHelper::ip2long($client_ip);
+$user_ip = TorrentPier\Helpers\IPHelper::ip2long($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
 
@@ -156,7 +156,6 @@ define('POLL_FINISHED', 2);
 // Group avatars
 define('GROUP_AVATAR_MASK', 999000);
 
-
 // Table names
 define('BUF_TOPIC_VIEW', 'buf_topic_view');
 define('BUF_LAST_SEEDER', 'buf_last_seeder');
@@ -298,10 +297,11 @@ function bb_exit($output = '')
  */
 function prn_r($var, $title = '', $print = true)
 {
-    $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
+    $r = '<pre>' . ($title ? "<b>{$title}</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
     if ($print) {
         echo $r;
     }
+
     return $r;
 }
 
@@ -412,11 +412,11 @@ function image_url(string $path): string
  *   url()->settings()
  *   url()->passwordRecovery()
  *
- * @return \TorrentPier\Router\SemanticUrl\UrlBuilder
+ * @return TorrentPier\Router\SemanticUrl\UrlBuilder
  */
-function url(): \TorrentPier\Router\SemanticUrl\UrlBuilder
+function url(): TorrentPier\Router\SemanticUrl\UrlBuilder
 {
-    return \TorrentPier\Router\SemanticUrl\UrlBuilder::instance();
+    return TorrentPier\Router\SemanticUrl\UrlBuilder::instance();
 }
 
 /**
@@ -445,6 +445,6 @@ if ((config()->get('board_disable') || is_file(BB_DISABLED)) && !defined('IN_ADM
         // trigger lock
         TorrentPier\Helpers\CronHelper::releaseDeadlock();
         send_no_cache_headers();
-        bb_die('BOARD_DISABLE_CRON', (\TorrentPier\Helpers\CronHelper::isEnabled() ? 503 : null));
+        bb_die('BOARD_DISABLE_CRON', (TorrentPier\Helpers\CronHelper::isEnabled() ? 503 : null));
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
@@ -28,9 +28,9 @@ foreach (bitfields('user_opt') as $opt_name => $opt_bit) {
     }
 }
 
-DB()->query("UPDATE " . BB_USERS . " SET user_opt = {$u_data['user_opt']} WHERE user_id = $user_id LIMIT 1");
+DB()->query('UPDATE ' . BB_USERS . " SET user_opt = {$u_data['user_opt']} WHERE user_id = {$user_id} LIMIT 1");
 
 // Remove data from cache
-\TorrentPier\Sessions::cache_rm_user_sessions($user_id);
+TorrentPier\Sessions::cache_rm_user_sessions($user_id);
 
 $this->response['resp_html'] = __('SAVED');

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
@@ -33,18 +33,18 @@ switch ($mode) {
                 continue;
             }
 
-            $tor = DB()->fetch_row("
+            $tor = DB()->fetch_row('
                 SELECT
                     tor.forum_id, tor.topic_id, t.topic_title, tor.tor_status
-                FROM       " . BB_BT_TORRENTS . " tor
-                INNER JOIN " . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
-                WHERE tor.topic_id = $topic_id LIMIT 1");
+                FROM       ' . BB_BT_TORRENTS . ' tor
+                INNER JOIN ' . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
+                WHERE tor.topic_id = {$topic_id} LIMIT 1");
 
             if (!$tor) {
                 $this->ajax_die(__('TORRENT_FAILED'));
             }
 
-            \TorrentPier\Torrent\Moderation::changeStatus($topic_id, $status);
+            TorrentPier\Torrent\Moderation::changeStatus($topic_id, $status);
 
             // Log action
             $log_msg = sprintf(__('TOR_STATUS_LOG_ACTION'), config()->get('tor_icons')[$status] . ' <b> ' . __('TOR_STATUS_NAME')[$status] . '</b>', config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . __('TOR_STATUS_NAME')[$tor['tor_status']] . '</b>');
@@ -71,14 +71,14 @@ switch ($mode) {
             $this->ajax_die(__('DONT_MESSAGE_TITLE'));
         }
 
-        if (!$t_data = DB()->fetch_row("SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
+        if (!$t_data = DB()->fetch_row('SELECT forum_id FROM ' . BB_TOPICS . " WHERE topic_id = {$topic_id} LIMIT 1")) {
             $this->ajax_die(__('INVALID_TOPIC_ID_DB'));
         }
         $this->verify_mod_rights($t_data['forum_id']);
 
         $topic_title_sql = DB()->escape($new_title);
 
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id LIMIT 1");
+        DB()->query('UPDATE ' . BB_TOPICS . " SET topic_title = '{$topic_title_sql}' WHERE topic_id = {$topic_id} LIMIT 1");
 
         // Manticore [Update topic title]
         sync_topic_to_manticore($topic_id, topic_title: $new_title);
@@ -87,7 +87,7 @@ switch ($mode) {
         $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
         if (isset($news_forums[$t_data['forum_id']]) && config()->get('show_latest_news')) {
             datastore()->enqueue([
-                'latest_news'
+                'latest_news',
             ]);
             datastore()->update('latest_news');
         }
@@ -95,7 +95,7 @@ switch ($mode) {
         $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
         if (isset($net_forums[$t_data['forum_id']]) && config()->get('show_network_news')) {
             datastore()->enqueue([
-                'network_news'
+                'network_news',
             ]);
             datastore()->update('network_news');
         }
@@ -106,7 +106,7 @@ switch ($mode) {
             'topic_id' => $topic_id,
             'topic_id_new' => $topic_id,
             'topic_title' => $old_title,
-            'topic_title_new' => $new_title
+            'topic_title_new' => $new_title,
         ]);
 
         $this->response['topic_id'] = $topic_id;
@@ -121,13 +121,13 @@ switch ($mode) {
             $this->ajax_die(__('NO_USER_ID_SPECIFIED'));
         }
 
-        $reg_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " . BB_USERS . "
+        $reg_ip = DB()->fetch_rowset('SELECT username, user_id, user_rank FROM ' . BB_USERS . "
 			WHERE user_reg_ip = '{$profiledata['user_reg_ip']}'
 				AND user_reg_ip != 0
 				AND user_id != {$profiledata['user_id']}
 			ORDER BY username ASC");
 
-        $last_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " . BB_USERS . "
+        $last_ip = DB()->fetch_rowset('SELECT username, user_id, user_rank FROM ' . BB_USERS . "
 			WHERE user_last_ip = '{$profiledata['user_last_ip']}'
 				AND user_last_ip != 0
 				AND user_id != {$profiledata['user_id']}");
@@ -155,8 +155,8 @@ switch ($mode) {
         } elseif ($profiledata['user_level'] == MOD && !IS_AM) {
             $reg_ip = $last_ip = __('HIDDEN');
         } else {
-            $user_reg_ip = \TorrentPier\Helpers\IPHelper::decode($profiledata['user_reg_ip']);
-            $user_last_ip = \TorrentPier\Helpers\IPHelper::decode($profiledata['user_last_ip']);
+            $user_reg_ip = TorrentPier\Helpers\IPHelper::decode($profiledata['user_reg_ip']);
+            $user_last_ip = TorrentPier\Helpers\IPHelper::decode($profiledata['user_last_ip']);
             $reg_ip = '<a href="' . config()->get('whois_info') . $user_reg_ip . '" class="gen" target="_blank">' . $user_reg_ip . '</a>';
             $last_ip = '<a href="' . config()->get('whois_info') . $user_last_ip . '" class="gen" target="_blank">' . $user_last_ip . '</a>';
         }

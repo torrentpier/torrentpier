@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_PROFILE')) {
     die(basename(__FILE__));
 }
@@ -17,22 +17,22 @@ $releasing_count = $seeding_count = $leeching_count = 0;
 // Auth
 $excluded_forums_csv = user()->get_excluded_forums(AUTH_VIEW);
 $not_auth_forums_sql = ($excluded_forums_csv) ? "
-	AND f.forum_id NOT IN($excluded_forums_csv)
-	AND f.forum_parent NOT IN($excluded_forums_csv)
+	AND f.forum_id NOT IN({$excluded_forums_csv})
+	AND f.forum_parent NOT IN({$excluded_forums_csv})
 " : '';
 
-$sql = DB()->fetch_rowset("
+$sql = DB()->fetch_rowset('
 	SELECT
 		f.forum_id, f.forum_name, t.topic_title,
 		tor.tor_type, tor.size,
 		sn.seeders, sn.leechers, tr.*
-	FROM " . BB_FORUMS . " f, " . BB_TOPICS . " t, " . BB_BT_TRACKER . " tr, " . BB_BT_TORRENTS . " tor, " . BB_BT_TRACKER_SNAP . " sn
+	FROM ' . BB_FORUMS . ' f, ' . BB_TOPICS . ' t, ' . BB_BT_TRACKER . ' tr, ' . BB_BT_TORRENTS . ' tor, ' . BB_BT_TRACKER_SNAP . " sn
 	WHERE tr.user_id = {$profiledata['user_id']}
 		AND tr.topic_id = tor.topic_id
 		AND sn.topic_id = tor.topic_id
 		AND tor.topic_id = t.topic_id
 		AND t.forum_id = f.forum_id
-			$not_auth_forums_sql
+			{$not_auth_forums_sql}
 	GROUP BY tr.topic_id, tr.peer_hash
 	ORDER BY f.forum_name, t.topic_title
 ");
@@ -54,7 +54,7 @@ if ($releasing) {
         template()->assign_block_vars('released', [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
-            'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>$topic_title</s>",
+            'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>{$topic_title}</s>",
             'U_VIEW_FORUM' => FORUM_URL . $row['forum_id'],
             'U_VIEW_TOPIC' => TOPIC_URL . $row['topic_id'],
             'TOR_TYPE' => is_gold($row['tor_type']),
@@ -74,7 +74,7 @@ if ($seeding) {
         template()->assign_block_vars('seed', [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
-            'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>$topic_title</s>",
+            'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>{$topic_title}</s>",
             'U_VIEW_FORUM' => FORUM_URL . $row['forum_id'],
             'U_VIEW_TOPIC' => TOPIC_URL . $row['topic_id'],
             'TOR_TYPE' => is_gold($row['tor_type']),
@@ -96,7 +96,7 @@ if ($leeching) {
         template()->assign_block_vars('leech', [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
-            'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>$topic_title</s>",
+            'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>{$topic_title}</s>",
             'U_VIEW_FORUM' => FORUM_URL . $row['forum_id'],
             'U_VIEW_TOPIC' => TOPIC_URL . $row['topic_id'],
             'COMPL_PERC' => $compl_perc,
@@ -113,8 +113,8 @@ if ($leeching) {
 template()->assign_vars([
     'SHOW_SEARCH_DL' => IS_AM || $profile_user_id,
     'USERNAME' => $profiledata['username'],
-    'L_RELEASINGS' => __('RELEASING') . ": " . (($releasing_count) ? "<b>$releasing_count</b>" : '0'),
-    'L_SEEDINGS' => __('SEEDING') . ": " . (($seeding_count) ? "<b>$seeding_count</b>" : '0'),
-    'L_LEECHINGS' => __('LEECHING') . ": " . (($leeching_count) ? "<b>$leeching_count</b>" : '0'),
-    'USER_DLS' => $releasing_count || $seeding_count || $leeching_count
+    'L_RELEASINGS' => __('RELEASING') . ': ' . (($releasing_count) ? "<b>{$releasing_count}</b>" : '0'),
+    'L_SEEDINGS' => __('SEEDING') . ': ' . (($seeding_count) ? "<b>{$seeding_count}</b>" : '0'),
+    'L_LEECHINGS' => __('LEECHING') . ': ' . (($leeching_count) ? "<b>{$leeching_count}</b>" : '0'),
+    'USER_DLS' => $releasing_count || $seeding_count || $leeching_count,
 ]);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
@@ -29,7 +29,7 @@ switch ($mode) {
         break;
 
     default:
-        $this->ajax_die("Invalid mode: $mode");
+        $this->ajax_die("Invalid mode: {$mode}");
 }
 
 $this->response['html'] = $html;

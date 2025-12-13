@@ -10,30 +10,38 @@
 
 namespace TorrentPier\Database;
 
+use Exception;
+use PDOException;
+
 /**
  * Database Debug functionality extracted from Database class
  * Handles all debug logging, timing, and query explanation features
  */
 class DatabaseDebugger
 {
-    private Database $db;
-
     // Debug configuration
     public bool $dbg_enabled = false;
+
     public bool $do_explain = false;
+
     public float $slow_time = 3.0;
 
     // Timing and statistics
     public float $sql_starttime = 0;
+
     public float $cur_query_time = 0;
 
     // Debug storage
     public array $dbg = [];
+
     public int $dbg_id = 0;
+
     public array $legacy_queries = []; // Track queries that needed legacy compatibility fixes
 
     // Nette Explorer tracking
     public bool $is_nette_explorer_query = false;
+
+    private Database $db;
 
     public function __construct(Database $db)
     {
@@ -41,17 +49,7 @@ class DatabaseDebugger
 
         // Initialize debug settings more safely
         $this->initializeDebugSettings();
-        $this->slow_time = defined('SQL_SLOW_QUERY_TIME') ? SQL_SLOW_QUERY_TIME : 3;
-    }
-
-    /**
-     * Initialize debug settings exactly like the original Database class
-     */
-    private function initializeDebugSettings(): void
-    {
-        $tracyExplain = (bool) request()->cookies->get('tracy_explain');
-        $this->dbg_enabled = tracy()->isDebugAllowed() || $tracyExplain;
-        $this->do_explain = $this->dbg_enabled && $tracyExplain;
+        $this->slow_time = \defined('SQL_SLOW_QUERY_TIME') ? SQL_SLOW_QUERY_TIME : 3;
     }
 
     /**
@@ -59,12 +57,12 @@ class DatabaseDebugger
      */
     public function debug(string $mode): void
     {
-        $id = & $this->dbg_id;
-        $dbg = & $this->dbg[$id];
+        $id = &$this->dbg_id;
+        $dbg = &$this->dbg[$id];
 
         if ($mode === 'start') {
             // Always update timing if required constants are defined
-            if (defined('SQL_CALC_QUERY_TIME') && SQL_CALC_QUERY_TIME || defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES) {
+            if (\defined('SQL_CALC_QUERY_TIME') && SQL_CALC_QUERY_TIME || \defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES) {
                 $this->sql_starttime = microtime(true);
                 $this->db->sql_starttime = $this->sql_starttime; // Update main Database object too
             }
@@ -83,16 +81,15 @@ class DatabaseDebugger
                 $dbg['line'] = $this->debug_find_source('line');
                 $dbg['time'] = 0;
                 $dbg['info'] = '';
-                $dbg['mem_before'] = function_exists('sys') ? sys('mem') : 0;
+                $dbg['mem_before'] = \function_exists('sys') ? sys('mem') : 0;
             }
-
         } elseif ($mode === 'stop') {
-            if (defined('SQL_CALC_QUERY_TIME') && SQL_CALC_QUERY_TIME || defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES) {
+            if (\defined('SQL_CALC_QUERY_TIME') && SQL_CALC_QUERY_TIME || \defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES) {
                 $this->cur_query_time = microtime(true) - $this->sql_starttime;
                 $this->db->sql_timetotal += $this->cur_query_time;
                 $this->db->DBS['sql_timetotal'] += $this->cur_query_time;
 
-                if (defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES && $this->cur_query_time > $this->slow_time) {
+                if (\defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES && $this->cur_query_time > $this->slow_time) {
                     $this->log_slow_query();
                 }
             }
@@ -100,7 +97,7 @@ class DatabaseDebugger
             if ($this->dbg_enabled) {
                 $dbg['time'] = $this->cur_query_time > 0 ? $this->cur_query_time : (microtime(true) - $this->sql_starttime);
                 $dbg['info'] = $this->db->query_info();
-                $dbg['mem_after'] = function_exists('sys') ? sys('mem') : 0;
+                $dbg['mem_after'] = \function_exists('sys') ? sys('mem') : 0;
 
                 // Add Nette Explorer marker to debug info for panel display
                 if ($this->is_nette_explorer_query && !str_contains($dbg['info'], '[Nette Explorer]')) {
@@ -135,7 +132,7 @@ class DatabaseDebugger
      */
     public function debug_find_source(string $mode = 'all'): string
     {
-        if (!defined('SQL_PREPEND_SRC') || !SQL_PREPEND_SRC) {
+        if (!\defined('SQL_PREPEND_SRC') || !SQL_PREPEND_SRC) {
             return 'src disabled';
         }
 
@@ -149,20 +146,21 @@ class DatabaseDebugger
 
         // Find first non-DB call (skip Database.php, DebugSelection.php, and DatabaseDebugger.php)
         foreach ($trace as $frame) {
-            if (isset($frame['file']) &&
-                !str_contains($frame['file'], 'Database/Database.php') &&
-                !str_contains($frame['file'], 'Database/DebugSelection.php') &&
-                !str_contains($frame['file'], 'Database/DatabaseDebugger.php')) {
+            if (isset($frame['file'])
+                && !str_contains($frame['file'], 'Database/Database.php')
+                && !str_contains($frame['file'], 'Database/DebugSelection.php')
+                && !str_contains($frame['file'], 'Database/DatabaseDebugger.php')) {
                 switch ($mode) {
                     case 'file':
                         return $frame['file'];
                     case 'line':
-                        return (string) ($frame['line'] ?? '?');
+                        return (string)($frame['line'] ?? '?');
                     case 'all':
                     default:
-                        $file = function_exists('hide_bb_path') ? hide_bb_path($frame['file']) : basename($frame['file']);
+                        $file = \function_exists('hide_bb_path') ? hide_bb_path($frame['file']) : basename($frame['file']);
                         $line = $frame['line'] ?? '?';
-                        return "$file($line)";
+
+                        return "{$file}({$line})";
                 }
             }
         }
@@ -178,16 +176,16 @@ class DatabaseDebugger
         foreach ($trace as $frame) {
             if (isset($frame['class'])) {
                 // Check for Nette Database classes in the call stack
-                if (str_contains($frame['class'], 'Nette\\Database\\') ||
-                    str_contains($frame['class'], 'TorrentPier\\Database\\DebugSelection')) {
+                if (str_contains($frame['class'], 'Nette\\Database\\')
+                    || str_contains($frame['class'], 'TorrentPier\\Database\\DebugSelection')) {
                     return true;
                 }
             }
 
             if (isset($frame['file'])) {
                 // Check for Nette Database files or our DebugSelection
-                if (str_contains($frame['file'], 'vendor/nette/database/') ||
-                    str_contains($frame['file'], 'Database/DebugSelection.php')) {
+                if (str_contains($frame['file'], 'vendor/nette/database/')
+                    || str_contains($frame['file'], 'Database/DebugSelection.php')) {
                     return true;
                 }
             }
@@ -235,23 +233,23 @@ class DatabaseDebugger
      */
     public function log_query(string $log_file = 'sql_queries'): void
     {
-        if (!function_exists('bb_log') || !function_exists('dev')) {
+        if (!\function_exists('bb_log') || !\function_exists('dev')) {
             return;
         }
 
-        $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.3f', $this->cur_query_time);
+        $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : \sprintf('%.3f', $this->cur_query_time);
         $msg = [];
         $msg[] = round($this->sql_starttime);
-        $msg[] = date('m-d H:i:s', (int) $this->sql_starttime);
-        $msg[] = sprintf('%-6s', $q_time);
-        $msg[] = sprintf('%05d', getmypid());
+        $msg[] = date('m-d H:i:s', (int)$this->sql_starttime);
+        $msg[] = \sprintf('%-6s', $q_time);
+        $msg[] = \sprintf('%05d', getmypid());
         $msg[] = $this->db->db_server;
         $msg[] = tracy()->formatQuery($this->db->cur_query);
-        $msg = implode(defined('LOG_SEPR') ? LOG_SEPR : ' | ', $msg);
+        $msg = implode(\defined('LOG_SEPR') ? LOG_SEPR : ' | ', $msg);
         $msg .= ($info = $this->db->query_info()) ? ' # ' . $info : '';
         $msg .= ' # ' . $this->debug_find_source() . ' ';
-        $msg .= defined('IN_CRON') ? 'cron' : basename($_SERVER['REQUEST_URI'] ?? '');
-        bb_log($msg . (defined('LOG_LF') ? LOG_LF : "\n"), $log_file);
+        $msg .= \defined('IN_CRON') ? 'cron' : basename($_SERVER['REQUEST_URI'] ?? '');
+        bb_log($msg . (\defined('LOG_LF') ? LOG_LF : "\n"), $log_file);
     }
 
     /**
@@ -259,7 +257,7 @@ class DatabaseDebugger
      */
     public function log_slow_query(string $log_file = 'sql_slow_bb'): void
     {
-        if (!defined('IN_FIRST_SLOW_QUERY') && function_exists('CACHE')) {
+        if (!\defined('IN_FIRST_SLOW_QUERY') && \function_exists('CACHE')) {
             $cache = CACHE('bb_cache');
             if ($cache && $cache->get('dont_log_slow_query')) {
                 return;
@@ -275,28 +273,28 @@ class DatabaseDebugger
      * Log files are not accessible to regular users, so detailed information is safe here.
      * User-facing error display is handled separately with proper security checks.
      */
-    public function log_error(?\Exception $exception = null): void
+    public function log_error(?Exception $exception = null): void
     {
         $error_details = [];
         $error_msg = '';
 
         if ($exception) {
             // Use the actual exception information which is more reliable
-            $error_msg = "Database Error: " . $exception->getMessage();
+            $error_msg = 'Database Error: ' . $exception->getMessage();
             $error_code = $exception->getCode();
             if ($error_code) {
                 $error_msg = "Database Error ({$error_code}): " . $exception->getMessage();
             }
 
             // Collect detailed error information
-            $error_details[] = "Exception: " . get_class($exception);
-            $error_details[] = "Message: " . $exception->getMessage();
-            $error_details[] = "Code: " . $exception->getCode();
-            $error_details[] = "File: " . $exception->getFile() . ":" . $exception->getLine();
+            $error_details[] = 'Exception: ' . \get_class($exception);
+            $error_details[] = 'Message: ' . $exception->getMessage();
+            $error_details[] = 'Code: ' . $exception->getCode();
+            $error_details[] = 'File: ' . $exception->getFile() . ':' . $exception->getLine();
 
             // Add PDO-specific details if it's a PDO exception
-            if ($exception instanceof \PDOException) {
-                $error_details[] = "PDO Error Info: " . json_encode($exception->errorInfo ?? []);
+            if ($exception instanceof PDOException) {
+                $error_details[] = 'PDO Error Info: ' . json_encode($exception->errorInfo ?? []);
             }
         } else {
             // Fallback to PDO error state (legacy behavior)
@@ -308,34 +306,34 @@ class DatabaseDebugger
             }
 
             $error_msg = "Database Error ({$error['code']}): " . $error['message'];
-            $error_details[] = "PDO Error Code: " . $error['code'];
-            $error_details[] = "PDO Error Message: " . $error['message'];
+            $error_details[] = 'PDO Error Code: ' . $error['code'];
+            $error_details[] = 'PDO Error Message: ' . $error['message'];
         }
 
         // Add comprehensive context for debugging
-        $error_details[] = "Query: " . ($this->db->cur_query ?: 'None');
-        $error_details[] = "Source: " . $this->debug_find_source();
-        $error_details[] = "Database: " . ($this->db->selected_db ?: 'None');
-        $error_details[] = "Server: " . $this->db->db_server;
-        $error_details[] = "Timestamp: " . date('Y-m-d H:i:s');
-        $error_details[] = "Request URI: " . ($_SERVER['REQUEST_URI'] ?? 'CLI');
-        $error_details[] = "User IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown');
+        $error_details[] = 'Query: ' . ($this->db->cur_query ?: 'None');
+        $error_details[] = 'Source: ' . $this->debug_find_source();
+        $error_details[] = 'Database: ' . ($this->db->selected_db ?: 'None');
+        $error_details[] = 'Server: ' . $this->db->db_server;
+        $error_details[] = 'Timestamp: ' . date('Y-m-d H:i:s');
+        $error_details[] = 'Request URI: ' . ($_SERVER['REQUEST_URI'] ?? 'CLI');
+        $error_details[] = 'User IP: ' . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown');
 
         // Check connection status
         try {
             if ($this->db->connection) {
-                $error_details[] = "Connection Status: Active";
+                $error_details[] = 'Connection Status: Active';
                 $pdo = $this->db->connection->getPdo();
-                $error_details[] = "PDO Connection: " . ($pdo ? 'Available' : 'Null');
+                $error_details[] = 'PDO Connection: ' . ($pdo ? 'Available' : 'Null');
                 if ($pdo) {
                     $errorInfo = $pdo->errorInfo();
-                    $error_details[] = "Current PDO Error Info: " . json_encode($errorInfo);
+                    $error_details[] = 'Current PDO Error Info: ' . json_encode($errorInfo);
                 }
             } else {
-                $error_details[] = "Connection Status: No connection";
+                $error_details[] = 'Connection Status: No connection';
             }
-        } catch (\Exception $e) {
-            $error_details[] = "Connection Check Failed: " . $e->getMessage();
+        } catch (Exception $e) {
+            $error_details[] = 'Connection Check Failed: ' . $e->getMessage();
         }
 
         // Build comprehensive log message
@@ -345,12 +343,12 @@ class DatabaseDebugger
         error_log($error_msg);
 
         // Use TorrentPier's bb_log for better file management and organization
-        if (function_exists('bb_log')) {
+        if (\function_exists('bb_log')) {
             bb_log($log_message . LOG_LF . str_repeat('=', 30) . LOG_LF, 'database_errors');
         }
 
         // Also log to PHP error log for immediate access
-        error_log("DETAILED: " . $log_message);
+        error_log('DETAILED: ' . $log_message);
     }
 
     /**
@@ -392,7 +390,7 @@ class DatabaseDebugger
         $msg .= 'Query:  ' . $query . LOG_LF;
         $msg .= 'Error:  ' . $error . LOG_LF;
         $msg .= 'Source: ' . $legacy_entry['source'] . LOG_LF;
-        $msg .= 'Time:   ' . date('Y-m-d H:i:s', (int) $legacy_entry['time']) . LOG_LF;
+        $msg .= 'Time:   ' . date('Y-m-d H:i:s', (int)$legacy_entry['time']) . LOG_LF;
 
         bb_log($msg, 'legacy_queries', false);
     }
@@ -402,7 +400,7 @@ class DatabaseDebugger
      */
     public function expect_slow_query(int $ignoring_time = 60, int $new_priority = 10): void
     {
-        if (function_exists('CACHE')) {
+        if (\function_exists('CACHE')) {
             $cache = CACHE('bb_cache');
             if ($old_priority = $cache->get('dont_log_slow_query')) {
                 if ($old_priority > $new_priority) {
@@ -410,8 +408,8 @@ class DatabaseDebugger
                 }
             }
 
-            if (!defined('IN_FIRST_SLOW_QUERY')) {
-                define('IN_FIRST_SLOW_QUERY', true);
+            if (!\defined('IN_FIRST_SLOW_QUERY')) {
+                \define('IN_FIRST_SLOW_QUERY', true);
             }
 
             $cache->set('dont_log_slow_query', $new_priority, $ignoring_time);
@@ -424,7 +422,7 @@ class DatabaseDebugger
     public function getDebugStats(): array
     {
         return [
-            'num_queries' => count($this->dbg),
+            'num_queries' => \count($this->dbg),
             'sql_timetotal' => $this->db->sql_timetotal,
             'queries' => $this->dbg,
         ];
@@ -453,5 +451,15 @@ class DatabaseDebugger
     public function resetNetteExplorerFlag(): void
     {
         $this->is_nette_explorer_query = false;
+    }
+
+    /**
+     * Initialize debug settings exactly like the original Database class
+     */
+    private function initializeDebugSettings(): void
+    {
+        $tracyExplain = (bool)request()->cookies->get('tracy_explain');
+        $this->dbg_enabled = tracy()->isDebugAllowed() || $tracyExplain;
+        $this->do_explain = $this->dbg_enabled && $tracyExplain;
     }
 }

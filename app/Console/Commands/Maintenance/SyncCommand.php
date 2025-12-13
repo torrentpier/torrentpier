@@ -24,7 +24,7 @@ use TorrentPier\Legacy\Admin\Common;
  */
 #[AsCommand(
     name: 'maintenance:sync',
-    description: 'Synchronize all counters (topics, users, forums)'
+    description: 'Synchronize all counters (topics, users, forums)',
 )]
 class SyncCommand extends AbstractMaintenanceCommand
 {
@@ -57,6 +57,7 @@ class SyncCommand extends AbstractMaintenanceCommand
                 'Synchronize user post counts',
                 'Synchronize forum counters (forum_posts, forum_topics)',
             ]);
+
             return self::SUCCESS;
         }
 
@@ -113,6 +114,7 @@ class SyncCommand extends AbstractMaintenanceCommand
         );
 
         $this->success('Synchronization completed!');
+
         return self::SUCCESS;
     }
 
@@ -138,6 +140,7 @@ class SyncCommand extends AbstractMaintenanceCommand
         if ($diff === 0) {
             return '-';
         }
+
         return ($diff > 0 ? '+' : '') . number_format($diff);
     }
 }

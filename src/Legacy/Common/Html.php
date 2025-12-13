@@ -17,10 +17,15 @@ namespace TorrentPier\Legacy\Common;
 class Html
 {
     public $options = '';
+
     public $out = '';
+
     public $attr = [];
+
     public $cur_attr;
+
     public $max_length = HTML_SELECT_MAX_LENGTH;
+
     public $selected = [];
 
     /**
@@ -39,11 +44,11 @@ class Html
         }
 
         $this->options = '';
-        $this->selected = array_flip((array) $selected);
+        $this->selected = array_flip((array)$selected);
         $this->max_length = $max_length;
 
         $this->attr = [];
-        $this->cur_attr = & $this->attr;
+        $this->cur_attr = &$this->attr;
 
         if (isset($params['__attributes'])) {
             $this->attr = $params['__attributes'];
@@ -52,13 +57,13 @@ class Html
 
         $this->_build_select_rec($params);
 
-        $select_params = $js ? " $js" : '';
+        $select_params = $js ? " {$js}" : '';
         $select_params .= ' autocomplete="off"';
         $select_params .= $multiple_size ? ' multiple size="' . $multiple_size . '"' : '';
         $select_params .= ' name="' . htmlCHR($name) . '"';
         $select_params .= ' id="' . htmlCHR($name) . '"';
 
-        return "\n<select $select_params>\n" . $this->options . "</select>\n";
+        return "\n<select {$select_params}>\n" . $this->options . "</select>\n";
     }
 
     /**
@@ -70,7 +75,7 @@ class Html
             $opt_name = rtrim($opt_name);
 
             if (\is_array($opt_val)) {
-                $this->cur_attr = & $this->cur_attr[$opt_name];
+                $this->cur_attr = &$this->cur_attr[$opt_name];
 
                 $label = str_short(htmlCHR($opt_name), $this->max_length);
 
@@ -78,7 +83,7 @@ class Html
                 $this->_build_select_rec($opt_val);
                 $this->options .= "\t</optgroup>\n";
 
-                $this->cur_attr = & $this->attr;
+                $this->cur_attr = &$this->attr;
             } else {
                 $text = str_short(htmlCHR($opt_name), $this->max_length);
                 $value = ' value="' . htmlCHR($opt_val) . '"';
@@ -104,7 +109,8 @@ class Html
     {
         $this->out = '';
         $this->_array2html_rec($array, $ul, $li);
-        return "<$ul class=\"tree-root\">{$this->out}</$ul>";
+
+        return "<{$ul} class=\"tree-root\">{$this->out}</{$ul}>";
     }
 
     /**
@@ -116,11 +122,11 @@ class Html
     {
         foreach ($array as $k => $v) {
             if (\is_array($v)) {
-                $this->out .= "<$li><span class=\"b\">$k</span><$ul>";
+                $this->out .= "<{$li}><span class=\"b\">{$k}</span><{$ul}>";
                 $this->_array2html_rec($v, $ul, $li);
-                $this->out .= "</$ul></$li>";
+                $this->out .= "</{$ul}></{$li}>";
             } else {
-                $this->out .= "<$li><span>$v</span></$li>";
+                $this->out .= "<{$li}><span>{$v}</span></{$li}>";
             }
         }
     }
@@ -142,7 +148,7 @@ class Html
         $name = ' name="' . $name . '" ';
         $value = ' value="' . $value . '" ';
         $title = $class ? '<span class="' . $class . '">' . $title . '</span>' : $title;
-        $id = $id ? " id=\"$id\" " : '';
+        $id = $id ? " id=\"{$id}\" " : '';
         $checked = $checked ? HTML_CHECKED : '';
         $disabled = $disabled ? HTML_DISABLED : '';
 

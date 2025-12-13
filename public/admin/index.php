@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -53,7 +54,7 @@ if (request()->query->get('pane') === 'left') {
     ksort($module);
 
     foreach ($module as $cat => $action_array) {
-        $cat = __($cat) ?: str_replace("_", ' ', $cat);
+        $cat = __($cat) ?: str_replace('_', ' ', $cat);
 
         template()->assign_block_vars('catrow', [
             'ADMIN_CATEGORY' => $cat,
@@ -65,7 +66,7 @@ if (request()->query->get('pane') === 'left') {
         foreach ($action_array as $action => $file) {
             $row_class = !($row_count % 2) ? 'row1' : 'row2';
 
-            $action = __($action) ?: str_replace("_", ' ', $action);
+            $action = __($action) ?: str_replace('_', ' ', $action);
 
             template()->assign_block_vars('catrow.modulerow', [
                 'ROW_CLASS' => $row_class,
@@ -90,7 +91,7 @@ if (request()->query->get('pane') === 'left') {
             'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
             'NEW_VERSION_DL_LINK' => $update_data['latest_version_dl_link'],
             'NEW_VERSION_LINK' => $update_data['latest_version_link'],
-            'NEW_VERSION_HASH' => $update_data['latest_version_checksum']
+            'NEW_VERSION_HASH' => $update_data['latest_version_checksum'],
         ]);
     }
 
@@ -198,7 +199,7 @@ if (request()->query->get('pane') === 'left') {
             for ($i = 0, $iMax = count($onlinerow_reg); $i < $iMax; $i++) {
                 $users_count++;
                 $row_class = 'row1';
-                $reg_ip = \TorrentPier\Helpers\IPHelper::decode($onlinerow_reg[$i]['session_ip']);
+                $reg_ip = TorrentPier\Helpers\IPHelper::decode($onlinerow_reg[$i]['session_ip']);
 
                 template()->assign_block_vars('reg_user_row', [
                     'ROW_CLASS' => $row_class,
@@ -218,7 +219,7 @@ if (request()->query->get('pane') === 'left') {
             for ($i = 0, $iMax = count($onlinerow_guest); $i < $iMax; $i++) {
                 $guest_users++;
                 $row_class = 'row2';
-                $guest_ip = \TorrentPier\Helpers\IPHelper::decode($onlinerow_guest[$i]['session_ip']);
+                $guest_ip = TorrentPier\Helpers\IPHelper::decode($onlinerow_guest[$i]['session_ip']);
 
                 template()->assign_block_vars('guest_user_row', [
                     'ROW_CLASS' => $row_class,
@@ -256,7 +257,7 @@ function getDiskSpaceInfo(string $path = BB_ROOT): array
         'total' => __('NOT_AVAILABLE'),
         'free' => __('NOT_AVAILABLE'),
         'used' => __('NOT_AVAILABLE'),
-        'percent_used' => __('NOT_AVAILABLE')
+        'percent_used' => __('NOT_AVAILABLE'),
     ];
 
     try {
@@ -275,11 +276,11 @@ function getDiskSpaceInfo(string $path = BB_ROOT): array
             'free' => humn_size($bytes_free),
             'used' => humn_size($bytes_used),
             'percent_used' => $percent_used,
-            'path' => realpath($path)
+            'path' => realpath($path),
         ];
-
     } catch (Exception $e) {
-        bb_log(__FUNCTION__ . ": " . $e->getMessage() . LOG_LF);
+        bb_log(__FUNCTION__ . ': ' . $e->getMessage() . LOG_LF);
+
         return $default_values;
     }
 }

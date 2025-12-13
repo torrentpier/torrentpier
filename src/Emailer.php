@@ -29,63 +29,19 @@ use Twig\Loader\FilesystemLoader;
  */
 class Emailer
 {
-    private string $subject;
-    private ?Address $to = null;
-    private ?Address $reply = null;
-    private string $template_file = '';
-    private string $template_lang = '';
-    private array $vars = [];
-
     private static ?Environment $twig = null;
 
-    /**
-     * Initialize Twig environment
-     */
-    private function getTwig(): Environment
-    {
-        if (self::$twig === null) {
-            $loader = new FilesystemLoader();
+    private string $subject;
 
-            // Add email_templates directories for all languages
-            $languages = glob(LANG_ROOT_DIR . '/*', GLOB_ONLYDIR) ?: [];
-            foreach ($languages as $langPath) {
-                $lang = basename($langPath);
-                $templatePath = LANG_ROOT_DIR . '/' . $lang . '/email_templates';
-                if (is_dir($templatePath)) {
-                    try {
-                        $loader->addPath($templatePath, $lang);
-                    } catch (LoaderError) {
-                        // Skip invalid template paths
-                    }
-                }
-            }
+    private ?Address $to = null;
 
-            // Add default language namespace
-            $defaultLang = config()->get('default_lang');
-            $defaultPath = LANG_ROOT_DIR . '/' . $defaultLang . '/email_templates';
-            if (is_dir($defaultPath)) {
-                try {
-                    $loader->addPath($defaultPath);
-                } catch (LoaderError) {
-                    // Skip invalid default path
-                }
-            }
+    private ?Address $reply = null;
 
-            // Ensure the cache directory exists
-            $cacheDir = TEMPLATES_CACHE_DIR;
-            if (!is_dir($cacheDir)) {
-                @mkdir($cacheDir, 0775, true);
-            }
+    private string $template_file = '';
 
-            self::$twig = new Environment($loader, [
-                'cache' => $cacheDir,
-                'auto_reload' => true,
-                'autoescape' => false, // Plain text emails
-            ]);
-        }
+    private string $template_lang = '';
 
-        return self::$twig;
-    }
+    private array $vars = [];
 
     public function set_subject(string $subject): void
     {
@@ -119,45 +75,11 @@ class Emailer
     }
 
     /**
-     * Render email message using Twig
-     *
-     * @throws Exception
-     */
-    private function renderMessage(): string
-    {
-        $twig = $this->getTwig();
-
-        // Try a language-specific template first, fallback to @source, then default
-        $twigTemplate = '@' . $this->template_lang . '/' . $this->template_file . '.twig';
-
-        if (!$twig->getLoader()->exists($twigTemplate)) {
-            $sourceTpl = '@source/' . $this->template_file . '.twig';
-            $twigTemplate = $twig->getLoader()->exists($sourceTpl)
-                ? $sourceTpl
-                : $this->template_file . '.twig';
-        }
-
-        // Convert UPPERCASE to lowercase for Twig
-        $twigVars = array_change_key_case($this->vars);
-
-        try {
-            return $twig->render($twigTemplate, $twigVars);
-        } catch (LoaderError|RuntimeError|SyntaxError $e) {
-            throw new Exception(sprintf(
-                'Email template render failed for "%s" (lang: %s): %s',
-                $this->template_file,
-                $this->template_lang,
-                $e->getMessage()
-            ), previous: $e);
-        }
-    }
-
-    /**
      * Send email
      *
      * @param string $email_format Email format constant (EMAIL_TYPE_TEXT or EMAIL_TYPE_HTML)
-     * @return bool
      * @throws Exception
+     * @return bool
      */
     public function send(string $email_format = 'text/plain'): bool
     {
@@ -175,7 +97,7 @@ class Emailer
                 $transport = new EsmtpTransport(
                     config()->get('emailer.smtp.host'),
                     config()->get('emailer.smtp.port'),
-                    $sslType
+                    $sslType,
                 )
                     ->setUsername(config()->get('emailer.smtp.username'))
                     ->setPassword(config()->get('emailer.smtp.password'));
@@ -233,5 +155,88 @@ class Emailer
             'SITENAME' => config()->get('board_email_sitename'),
             'EMAIL_SIG' => !empty(config()->get('board_email_sig')) ? "-- \n" . config()->get('board_email_sig') : '',
         ], $vars);
+    }
+
+    /**
+     * Initialize Twig environment
+     */
+    private function getTwig(): Environment
+    {
+        if (self::$twig === null) {
+            $loader = new FilesystemLoader();
+
+            // Add email_templates directories for all languages
+            $languages = glob(LANG_ROOT_DIR . '/*', GLOB_ONLYDIR) ?: [];
+            foreach ($languages as $langPath) {
+                $lang = basename($langPath);
+                $templatePath = LANG_ROOT_DIR . '/' . $lang . '/email_templates';
+                if (is_dir($templatePath)) {
+                    try {
+                        $loader->addPath($templatePath, $lang);
+                    } catch (LoaderError) {
+                        // Skip invalid template paths
+                    }
+                }
+            }
+
+            // Add default language namespace
+            $defaultLang = config()->get('default_lang');
+            $defaultPath = LANG_ROOT_DIR . '/' . $defaultLang . '/email_templates';
+            if (is_dir($defaultPath)) {
+                try {
+                    $loader->addPath($defaultPath);
+                } catch (LoaderError) {
+                    // Skip invalid default path
+                }
+            }
+
+            // Ensure the cache directory exists
+            $cacheDir = TEMPLATES_CACHE_DIR;
+            if (!is_dir($cacheDir)) {
+                @mkdir($cacheDir, 0775, true);
+            }
+
+            self::$twig = new Environment($loader, [
+                'cache' => $cacheDir,
+                'auto_reload' => true,
+                'autoescape' => false, // Plain text emails
+            ]);
+        }
+
+        return self::$twig;
+    }
+
+    /**
+     * Render email message using Twig
+     *
+     * @throws Exception
+     */
+    private function renderMessage(): string
+    {
+        $twig = $this->getTwig();
+
+        // Try a language-specific template first, fallback to @source, then default
+        $twigTemplate = '@' . $this->template_lang . '/' . $this->template_file . '.twig';
+
+        if (!$twig->getLoader()->exists($twigTemplate)) {
+            $sourceTpl = '@source/' . $this->template_file . '.twig';
+            $twigTemplate = $twig->getLoader()->exists($sourceTpl)
+                ? $sourceTpl
+                : $this->template_file . '.twig';
+        }
+
+        // Convert UPPERCASE to lowercase for Twig
+        $twigVars = array_change_key_case($this->vars);
+
+        try {
+            return $twig->render($twigTemplate, $twigVars);
+        } catch (LoaderError|RuntimeError|SyntaxError $e) {
+            throw new Exception(\sprintf(
+                'Email template render failed for "%s" (lang: %s): %s',
+                $this->template_file,
+                $this->template_lang,
+                $e->getMessage(),
+            ), previous: $e);
+        }
     }
 }

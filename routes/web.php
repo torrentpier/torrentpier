@@ -126,12 +126,12 @@ return function (Router $router): void {
     // viewtopic?t=123 -> /threads/slug.123/
     $router->any('/viewtopic', new LegacyRedirect(
         'threads',
-        $basePath . '/app/Http/Controllers/viewtopic.php'
+        $basePath . '/app/Http/Controllers/viewtopic.php',
     ));
 
     // viewforum?f=123 -> /forums/slug.123/
     $router->any('/viewforum', new LegacyRedirect(
         'forums',
-        $basePath . '/app/Http/Controllers/viewforum.php'
+        $basePath . '/app/Http/Controllers/viewforum.php',
     ));
 };

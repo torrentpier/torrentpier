@@ -7,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 define('IN_LOGIN', true);
 
 page_cfg('allow_robots', false);
@@ -43,7 +42,7 @@ if (!$redirect_url || str_contains(urldecode($redirect_url), "\n") || str_contai
     $redirect_url = 'index.php';
 }
 
-$redirect_url = str_replace("&sid=" . user()->data['session_id'], '', $redirect_url);
+$redirect_url = str_replace('&sid=' . user()->data['session_id'], '', $redirect_url);
 
 if (request()->has('admin') && !IS_AM) {
     bb_die(__('NOT_ADMIN'));

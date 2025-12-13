@@ -7,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (config()->get('bt_disable_dht') && IS_GUEST) {
     bb_die(__('BT_PRIVATE_TRACKER'), 403);
 }
@@ -41,7 +40,7 @@ $t_version_field = $meta_v2 ? 'v2' : 'v1';
 $t_files_field = $meta_v2 ? 'getFileTree' : 'getFiles';
 $t_hash_field = $meta_v2 ? 'piecesRoot' : 'sha1';
 
-$file_path = \TorrentPier\Attachment::getPath($topic_id);
+$file_path = TorrentPier\Attachment::getPath($topic_id);
 if (!is_file($file_path)) {
     bb_die(__('TOR_NOT_FOUND'), 410);
 }
@@ -63,9 +62,9 @@ if (config()->get('flist_max_files')) {
 }
 
 try {
-    $torrent = \Arokettu\Torrent\TorrentFile::loadFromString($file_contents);
-} catch (\Exception $e) {
-    bb_die(htmlCHR(__('TORFILE_INVALID') . ": " . $e->getMessage()), 410);
+    $torrent = Arokettu\Torrent\TorrentFile::loadFromString($file_contents);
+} catch (Exception $e) {
+    bb_die(htmlCHR(__('TORFILE_INVALID') . ': ' . $e->getMessage()), 410);
 }
 
 if (IS_GUEST && $torrent->isPrivate()) {
@@ -73,9 +72,9 @@ if (IS_GUEST && $torrent->isPrivate()) {
 }
 
 // Get torrent files
-$files = $torrent->$t_version_field()->$t_files_field();
+$files = $torrent->{$t_version_field}()->{$t_files_field}();
 if ($meta_v2) {
-    $files = new \RecursiveIteratorIterator($files); // Flatten the list
+    $files = new RecursiveIteratorIterator($files); // Flatten the list
 }
 
 $files_count = 0;
@@ -87,7 +86,7 @@ foreach ($files as $file) {
         'ROW_CLASS' => $row_class,
         'FILE_PATH' => clean_tor_dirname(implode('/', $file->path)),
         'FILE_LENGTH' => humn_size($file->length, 2),
-        'FILE_HASH' => $file->$t_hash_field ?? '-',
+        'FILE_HASH' => $file->{$t_hash_field} ?? '-',
     ]);
 }
 
@@ -96,7 +95,7 @@ $torrent_size = humn_size($row['size'], 2);
 
 // Output page
 template()->assign_vars([
-    'PAGE_TITLE' => "$torrent_name (" . $torrent_size . ")",
+    'PAGE_TITLE' => "{$torrent_name} (" . $torrent_size . ')',
     'FILES_COUNT' => sprintf(__('BT_FLIST_FILE_PATH'), declension(iterator_count($files), 'files')),
     'TORRENT_CREATION_DATE' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : __('UNKNOWN'),
     'TORRENT_CLIENT' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR($creator) : __('UNKNOWN'),

@@ -54,7 +54,8 @@ class Validate
         // Allowed symbols
         if (!preg_match('#^[' . $name_chars . ']+$#iu', $username, $m)) {
             $invalid_chars = preg_replace('#[' . $name_chars . ']#iu', '', $username);
-            return __('USERNAME_INVALID') . ": <b>" . htmlCHR($invalid_chars) . "</b>";
+
+            return __('USERNAME_INVALID') . ': <b>' . htmlCHR($invalid_chars) . '</b>';
         }
         // HTML Entities
         if (preg_match_all('/&(#[0-9]+|[a-z]+);/iu', $username, $m)) {
@@ -67,7 +68,7 @@ class Validate
         if ($check_ban_and_taken) {
             // Check taken
             $username_sql = DB()->escape($username);
-            if ($row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE username = '$username_sql' LIMIT 1")) {
+            if ($row = DB()->fetch_row('SELECT username FROM ' . BB_USERS . " WHERE username = '{$username_sql}' LIMIT 1")) {
                 if ((!IS_GUEST && $row['username'] != user()->name) || IS_GUEST) {
                     return __('USERNAME_TAKEN');
                 }
@@ -75,11 +76,11 @@ class Validate
 
             // Check banned
             $banned_names = [];
-            foreach (DB()->fetch_rowset("SELECT disallow_username FROM " . BB_DISALLOW . " ORDER BY NULL") as $row) {
+            foreach (DB()->fetch_rowset('SELECT disallow_username FROM ' . BB_DISALLOW . ' ORDER BY NULL') as $row) {
                 $banned_names[] = str_replace('\*', '.*?', preg_quote($row['disallow_username'], '#u'));
             }
             if ($banned_names_exp = implode('|', $banned_names)) {
-                if (preg_match("#^($banned_names_exp)$#iu", $username)) {
+                if (preg_match("#^({$banned_names_exp})$#iu", $username)) {
                     return __('USERNAME_DISALLOWED');
                 }
             }
@@ -132,7 +133,7 @@ class Validate
         // Check taken
         if ($check_taken) {
             $email_sql = DB()->escape($email);
-            if ($row = DB()->fetch_row("SELECT `user_email` FROM " . BB_USERS . " WHERE user_email = '$email_sql' LIMIT 1")) {
+            if ($row = DB()->fetch_row('SELECT `user_email` FROM ' . BB_USERS . " WHERE user_email = '{$email_sql}' LIMIT 1")) {
                 if ($row['user_email'] == userdata('user_email')) {
                     return false;
                 }
@@ -166,10 +167,10 @@ class Validate
 
         // Length
         if (mb_strlen($password, DEFAULT_CHARSET) > PASSWORD_MAX_LENGTH) {
-            return sprintf(__('CHOOSE_PASS_ERR_MAX'), PASSWORD_MAX_LENGTH);
+            return \sprintf(__('CHOOSE_PASS_ERR_MAX'), PASSWORD_MAX_LENGTH);
         }
         if (mb_strlen($password, DEFAULT_CHARSET) < PASSWORD_MIN_LENGTH) {
-            return sprintf(__('CHOOSE_PASS_ERR_MIN'), PASSWORD_MIN_LENGTH);
+            return \sprintf(__('CHOOSE_PASS_ERR_MIN'), PASSWORD_MIN_LENGTH);
         }
 
         // Symbols check

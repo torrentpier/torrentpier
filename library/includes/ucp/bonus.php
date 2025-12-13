@@ -7,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
@@ -38,16 +37,16 @@ if (request()->post->has('bonus_id')) {
         bb_die($message);
     }
 
-    DB()->query("UPDATE " . BB_BT_USERS . " bu, " . BB_USERS . " u
+    DB()->query('UPDATE ' . BB_BT_USERS . ' bu, ' . BB_USERS . " u
 		SET
-			bu.u_up_total   = u_up_total    + $upload,
-			u.user_points   = u.user_points - $points
+			bu.u_up_total   = u_up_total    + {$upload},
+			u.user_points   = u.user_points - {$points}
 		WHERE
-			bu.user_id      = $user_id
+			bu.user_id      = {$user_id}
 			AND u.user_id   = bu.user_id
 	");
 
-    \TorrentPier\Sessions::cache_rm_user_sessions($user_id);
+    TorrentPier\Sessions::cache_rm_user_sessions($user_id);
     meta_refresh(BONUS_URL, 10);
 
     $message = sprintf(__('BONUS_SUCCES'), humn_size($upload_row[$id] * 1024 * 1024 * 1024));

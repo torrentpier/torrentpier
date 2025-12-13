@@ -12,6 +12,8 @@ namespace TorrentPier\Cache;
 
 use Exception;
 use InvalidArgumentException;
+use LogicException;
+use Memcached;
 use Nette\Caching\Storage;
 use Nette\Caching\Storages\FileStorage;
 use Nette\Caching\Storages\MemcachedStorage;
@@ -65,29 +67,6 @@ class UnifiedCacheSystem
     private ?CacheManager $stub = null;
 
     /**
-     * Get a singleton instance
-     *
-     * @param array|null $cfg
-     * @return self
-     */
-    public static function getInstance(?array $cfg = null): self
-    {
-        if (self::$instance === null) {
-            if ($cfg === null) {
-                // Fallback to global config if available
-                $cfg = function_exists('config') ? config()->all() : [];
-
-                if (empty($cfg)) {
-                    throw new InvalidArgumentException('Configuration must be provided on first initialization');
-                }
-            }
-            self::$instance = new self($cfg);
-        }
-
-        return self::$instance;
-    }
-
-    /**
      * Constructor
      *
      * @param array $cfg
@@ -103,6 +82,80 @@ class UnifiedCacheSystem
             'prefix' => $this->cfg['prefix'] ?? 'tp_',
         ];
         $this->stub = CacheManager::getInstance('__stub', $stubStorage, $stubConfig);
+    }
+
+    /**
+     * Magic method for backward compatibility
+     * Allows access to legacy properties like ->obj
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function __get(string $name): mixed
+    {
+        switch ($name) {
+            case 'obj':
+                // Return array of cache objects for backward compatibility
+                $obj = ['__stub' => $this->stub];
+                foreach ($this->managers as $cache_name => $manager) {
+                    $obj[$cache_name] = $manager;
+                }
+
+                return $obj;
+
+            case 'cfg':
+                return $this->cfg;
+
+            case 'ref':
+                return $this->ref;
+
+            default:
+                throw new InvalidArgumentException("Property '{$name}' not found");
+        }
+    }
+
+    /**
+     * Prevent cloning of the singleton instance
+     */
+    private function __clone() {}
+
+    /**
+     * Prevent serialization of the singleton instance
+     */
+    public function __serialize(): array
+    {
+        throw new LogicException('Cannot serialize a singleton.');
+    }
+
+    /**
+     * Prevent unserialization of the singleton instance
+     */
+    public function __unserialize(array $data): void
+    {
+        throw new LogicException('Cannot unserialize a singleton.');
+    }
+
+    /**
+     * Get a singleton instance
+     *
+     * @param array|null $cfg
+     * @return self
+     */
+    public static function getInstance(?array $cfg = null): self
+    {
+        if (self::$instance === null) {
+            if ($cfg === null) {
+                // Fallback to global config if available
+                $cfg = \function_exists('config') ? config()->all() : [];
+
+                if (empty($cfg)) {
+                    throw new InvalidArgumentException('Configuration must be provided on first initialization');
+                }
+            }
+            self::$instance = new self($cfg);
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -184,169 +237,6 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Build a storage instance directly (eliminates redundancy with CacheManager)
-     *
-     * @param string $cache_type
-     * @param string $cache_name
-     * @return Storage
-     */
-    private function _buildStorage(string $cache_type, string $cache_name): Storage
-    {
-        switch ($cache_type) {
-            case 'file':
-            case 'filecache':
-            case 'apcu':
-            case 'redis':
-                // Some deprecated cache types will fall back to file storage
-                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
-
-                // Create a directory automatically using TorrentPier's bb_mkdir function
-                if (!is_dir($dir) && !bb_mkdir($dir)) {
-                    throw new RuntimeException("Failed to create cache directory: $dir");
-                }
-
-                return new FileStorage($dir);
-
-            case 'sqlite':
-                $dbFile = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '.db';
-
-                // Create parent directory for SQLite file
-                $dbDir = dirname($dbFile);
-                if (!is_dir($dbDir) && !bb_mkdir($dbDir)) {
-                    throw new RuntimeException("Failed to create cache directory for SQLite: $dbDir");
-                }
-
-                return new SQLiteStorage($dbFile);
-
-            case 'memory':
-                return new MemoryStorage();
-
-            case 'memcached':
-                $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
-                $host = $memcachedConfig['host'] ?? '127.0.0.1';
-                $port = (int) ($memcachedConfig['port'] ?? 11211);
-
-                $storage = new MemcachedStorage($host, $port);
-
-                // Set connection timeout to avoid hanging on an unreachable server
-                $connection = $storage->getConnection();
-                $connectTimeout = $memcachedConfig['connect_timeout'] ?? 100;
-                $pollTimeout = $memcachedConfig['poll_timeout'] ?? 100;
-                $connection->setOption(\Memcached::OPT_CONNECT_TIMEOUT, $connectTimeout);
-                $connection->setOption(\Memcached::OPT_POLL_TIMEOUT, $pollTimeout);
-
-                // Verify memcached is actually reachable
-                $stats = $connection->getStats();
-
-                if (empty($stats)) {
-                    throw new RuntimeException("Memcached server at {$host}:{$port} is unreachable");
-                }
-
-                return $storage;
-
-            default:
-                // Fallback to file storage
-                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
-
-                // Create a directory automatically using TorrentPier's bb_mkdir function
-                if (!is_dir($dir) && !bb_mkdir($dir)) {
-                    throw new RuntimeException("Failed to create cache directory: $dir");
-                }
-
-                return new FileStorage($dir);
-        }
-    }
-
-    /**
-     * Get an engine type name for debugging
-     *
-     * @param string $cache_type
-     * @return string
-     */
-    private function _getEngineType(string $cache_type): string
-    {
-        return match ($cache_type) {
-            'sqlite' => 'SQLite',
-            'memory' => 'Memory',
-            'memcached' => 'Memcached',
-            default => 'File',
-        };
-    }
-
-    /**
-     * Build datastore storage instance
-     *
-     * @param string $datastore_type
-     * @return Storage
-     */
-    private function _buildDatastoreStorage(string $datastore_type): Storage
-    {
-        switch ($datastore_type) {
-            case 'file':
-            case 'filecache':
-            case 'apcu':
-            case 'redis':
-                // Some deprecated cache types will fall back to file storage
-                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
-
-                // Create a directory automatically using TorrentPier's bb_mkdir function
-                if (!is_dir($dir) && !bb_mkdir($dir)) {
-                    throw new RuntimeException("Failed to create datastore directory: $dir");
-                }
-
-                return new FileStorage($dir);
-
-            case 'sqlite':
-                $dbFile = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore.db';
-
-                // Create parent directory for SQLite file
-                $dbDir = dirname($dbFile);
-                if (!is_dir($dbDir) && !bb_mkdir($dbDir)) {
-                    throw new RuntimeException("Failed to create datastore directory for SQLite: $dbDir");
-                }
-
-                return new SQLiteStorage($dbFile);
-
-            case 'memory':
-                return new MemoryStorage();
-
-            case 'memcached':
-                $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
-                $host = $memcachedConfig['host'] ?? '127.0.0.1';
-                $port = (int) ($memcachedConfig['port'] ?? 11211);
-
-                $storage = new MemcachedStorage($host, $port);
-
-                // Set connection timeout to avoid hanging on an unreachable server
-                $connection = $storage->getConnection();
-                $connectTimeout = $memcachedConfig['connect_timeout'] ?? 100;
-                $pollTimeout = $memcachedConfig['poll_timeout'] ?? 100;
-                $connection->setOption(\Memcached::OPT_CONNECT_TIMEOUT, $connectTimeout);
-                $connection->setOption(\Memcached::OPT_POLL_TIMEOUT, $pollTimeout);
-
-                // Verify memcached is actually reachable
-                $stats = $connection->getStats();
-
-                if (empty($stats)) {
-                    throw new RuntimeException("Memcached server at {$host}:{$port} is unreachable");
-                }
-
-                return $storage;
-
-            default:
-                // Fallback to file storage
-                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
-
-                // Create a directory automatically using TorrentPier's bb_mkdir function
-                if (!is_dir($dir) && !bb_mkdir($dir)) {
-                    throw new RuntimeException("Failed to create datastore directory: $dir");
-                }
-
-                return new FileStorage($dir);
-        }
-    }
-
-    /**
      * Get all cache managers (for debugging)
      *
      * @return array
@@ -368,8 +258,6 @@ class UnifiedCacheSystem
 
     /**
      * Clear all caches
-     *
-     * @return void
      */
     public function clearAll(): void
     {
@@ -388,7 +276,7 @@ class UnifiedCacheSystem
     public function getStatistics(): array
     {
         $stats = [
-            'total_managers' => count($this->managers),
+            'total_managers' => \count($this->managers),
             'managers' => [],
         ];
 
@@ -406,41 +294,12 @@ class UnifiedCacheSystem
                 'engine' => $this->datastore->engine,
                 'num_queries' => $this->datastore->num_queries,
                 'total_time' => $this->datastore->sql_timetotal,
-                'queued_items' => count($this->datastore->queued_items),
-                'loaded_items' => count($this->datastore->data),
+                'queued_items' => \count($this->datastore->queued_items),
+                'loaded_items' => \count($this->datastore->data),
             ];
         }
 
         return $stats;
-    }
-
-    /**
-     * Magic method for backward compatibility
-     * Allows access to legacy properties like ->obj
-     *
-     * @param string $name
-     * @return mixed
-     */
-    public function __get(string $name): mixed
-    {
-        switch ($name) {
-            case 'obj':
-                // Return array of cache objects for backward compatibility
-                $obj = ['__stub' => $this->stub];
-                foreach ($this->managers as $cache_name => $manager) {
-                    $obj[$cache_name] = $manager;
-                }
-                return $obj;
-
-            case 'cfg':
-                return $this->cfg;
-
-            case 'ref':
-                return $this->ref;
-
-            default:
-                throw new InvalidArgumentException("Property '$name' not found");
-        }
     }
 
     /**
@@ -504,23 +363,165 @@ class UnifiedCacheSystem
     }
 
     /**
-     * Prevent cloning of the singleton instance
+     * Build a storage instance directly (eliminates redundancy with CacheManager)
+     *
+     * @param string $cache_type
+     * @param string $cache_name
+     * @return Storage
      */
-    private function __clone() {}
-
-    /**
-     * Prevent serialization of the singleton instance
-     */
-    public function __serialize(): array
+    private function _buildStorage(string $cache_type, string $cache_name): Storage
     {
-        throw new \LogicException("Cannot serialize a singleton.");
+        switch ($cache_type) {
+            case 'file':
+            case 'filecache':
+            case 'apcu':
+            case 'redis':
+                // Some deprecated cache types will fall back to file storage
+                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
+
+                // Create a directory automatically using TorrentPier's bb_mkdir function
+                if (!is_dir($dir) && !bb_mkdir($dir)) {
+                    throw new RuntimeException("Failed to create cache directory: {$dir}");
+                }
+
+                return new FileStorage($dir);
+
+            case 'sqlite':
+                $dbFile = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '.db';
+
+                // Create parent directory for SQLite file
+                $dbDir = \dirname($dbFile);
+                if (!is_dir($dbDir) && !bb_mkdir($dbDir)) {
+                    throw new RuntimeException("Failed to create cache directory for SQLite: {$dbDir}");
+                }
+
+                return new SQLiteStorage($dbFile);
+
+            case 'memory':
+                return new MemoryStorage();
+
+            case 'memcached':
+                $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
+                $host = $memcachedConfig['host'] ?? '127.0.0.1';
+                $port = (int)($memcachedConfig['port'] ?? 11211);
+
+                $storage = new MemcachedStorage($host, $port);
+
+                // Set connection timeout to avoid hanging on an unreachable server
+                $connection = $storage->getConnection();
+                $connectTimeout = $memcachedConfig['connect_timeout'] ?? 100;
+                $pollTimeout = $memcachedConfig['poll_timeout'] ?? 100;
+                $connection->setOption(Memcached::OPT_CONNECT_TIMEOUT, $connectTimeout);
+                $connection->setOption(Memcached::OPT_POLL_TIMEOUT, $pollTimeout);
+
+                // Verify memcached is actually reachable
+                $stats = $connection->getStats();
+
+                if (empty($stats)) {
+                    throw new RuntimeException("Memcached server at {$host}:{$port} is unreachable");
+                }
+
+                return $storage;
+
+            default:
+                // Fallback to file storage
+                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
+
+                // Create a directory automatically using TorrentPier's bb_mkdir function
+                if (!is_dir($dir) && !bb_mkdir($dir)) {
+                    throw new RuntimeException("Failed to create cache directory: {$dir}");
+                }
+
+                return new FileStorage($dir);
+        }
     }
 
     /**
-     * Prevent unserialization of the singleton instance
+     * Get an engine type name for debugging
+     *
+     * @param string $cache_type
+     * @return string
      */
-    public function __unserialize(array $data): void
+    private function _getEngineType(string $cache_type): string
     {
-        throw new \LogicException("Cannot unserialize a singleton.");
+        return match ($cache_type) {
+            'sqlite' => 'SQLite',
+            'memory' => 'Memory',
+            'memcached' => 'Memcached',
+            default => 'File',
+        };
+    }
+
+    /**
+     * Build datastore storage instance
+     *
+     * @param string $datastore_type
+     * @return Storage
+     */
+    private function _buildDatastoreStorage(string $datastore_type): Storage
+    {
+        switch ($datastore_type) {
+            case 'file':
+            case 'filecache':
+            case 'apcu':
+            case 'redis':
+                // Some deprecated cache types will fall back to file storage
+                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
+
+                // Create a directory automatically using TorrentPier's bb_mkdir function
+                if (!is_dir($dir) && !bb_mkdir($dir)) {
+                    throw new RuntimeException("Failed to create datastore directory: {$dir}");
+                }
+
+                return new FileStorage($dir);
+
+            case 'sqlite':
+                $dbFile = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore.db';
+
+                // Create parent directory for SQLite file
+                $dbDir = \dirname($dbFile);
+                if (!is_dir($dbDir) && !bb_mkdir($dbDir)) {
+                    throw new RuntimeException("Failed to create datastore directory for SQLite: {$dbDir}");
+                }
+
+                return new SQLiteStorage($dbFile);
+
+            case 'memory':
+                return new MemoryStorage();
+
+            case 'memcached':
+                $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
+                $host = $memcachedConfig['host'] ?? '127.0.0.1';
+                $port = (int)($memcachedConfig['port'] ?? 11211);
+
+                $storage = new MemcachedStorage($host, $port);
+
+                // Set connection timeout to avoid hanging on an unreachable server
+                $connection = $storage->getConnection();
+                $connectTimeout = $memcachedConfig['connect_timeout'] ?? 100;
+                $pollTimeout = $memcachedConfig['poll_timeout'] ?? 100;
+                $connection->setOption(Memcached::OPT_CONNECT_TIMEOUT, $connectTimeout);
+                $connection->setOption(Memcached::OPT_POLL_TIMEOUT, $pollTimeout);
+
+                // Verify memcached is actually reachable
+                $stats = $connection->getStats();
+
+                if (empty($stats)) {
+                    throw new RuntimeException("Memcached server at {$host}:{$port} is unreachable");
+                }
+
+                return $storage;
+
+            default:
+                // Fallback to file storage
+                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
+
+                // Create a directory automatically using TorrentPier's bb_mkdir function
+                if (!is_dir($dir) && !bb_mkdir($dir)) {
+                    throw new RuntimeException("Failed to create datastore directory: {$dir}");
+                }
+
+                return new FileStorage($dir);
+        }
     }
 }

@@ -38,8 +38,6 @@ class Env
 
     /**
      * Enable the putenv adapter.
-     *
-     * @return void
      */
     public static function enablePutenv(): void
     {
@@ -49,8 +47,6 @@ class Env
 
     /**
      * Disable the putenv adapter.
-     *
-     * @return void
      */
     public static function disablePutenv(): void
     {
@@ -110,6 +106,6 @@ class Env
 
                 return $value;
             })
-            ->getOrCall(fn() => $default instanceof Closure ? $default() : $default);
+            ->getOrCall(fn () => $default instanceof Closure ? $default() : $default);
     }
 }

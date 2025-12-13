@@ -23,7 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 #[AsCommand(
     name: 'maintenance:prune',
-    description: 'Delete old logs, private messages, sessions, and search results'
+    description: 'Delete old logs, private messages, sessions, and search results',
 )]
 class PruneCommand extends AbstractMaintenanceCommand
 {
@@ -46,41 +46,41 @@ class PruneCommand extends AbstractMaintenanceCommand
                 'type',
                 't',
                 InputOption::VALUE_REQUIRED,
-                'Type to prune: logs, pm, sessions, search'
+                'Type to prune: logs, pm, sessions, search',
             )
             ->addOption(
                 'days',
                 'd',
                 InputOption::VALUE_REQUIRED,
-                'Delete records older than N days (for logs, pm)'
+                'Delete records older than N days (for logs, pm)',
             )
             ->setHelp(
                 <<<'HELP'
-The <info>%command.name%</info> command deletes old data from the database.
+                    The <info>%command.name%</info> command deletes old data from the database.
 
-<error>WARNING: This is a DESTRUCTIVE operation. Data cannot be recovered!</error>
+                    <error>WARNING: This is a DESTRUCTIVE operation. Data cannot be recovered!</error>
 
-<comment>Without parameters - shows information only:</comment>
-  <info>php %command.full_name%</info>
+                    <comment>Without parameters - shows information only:</comment>
+                      <info>php %command.full_name%</info>
 
-<comment>Prune specific type:</comment>
-  <info>php %command.full_name% --type=logs --days=30</info>
-  <info>php %command.full_name% --type=pm --days=90</info>
-  <info>php %command.full_name% --type=sessions</info>
-  <info>php %command.full_name% --type=search</info>
+                    <comment>Prune specific type:</comment>
+                      <info>php %command.full_name% --type=logs --days=30</info>
+                      <info>php %command.full_name% --type=pm --days=90</info>
+                      <info>php %command.full_name% --type=sessions</info>
+                      <info>php %command.full_name% --type=search</info>
 
-<comment>Skip confirmation (dangerous!):</comment>
-  <info>php %command.full_name% --type=logs --days=30 --force</info>
+                    <comment>Skip confirmation (dangerous!):</comment>
+                      <info>php %command.full_name% --type=logs --days=30 --force</info>
 
-<comment>Preview without changes:</comment>
-  <info>php %command.full_name% --type=logs --days=30 --dry-run</info>
+                    <comment>Preview without changes:</comment>
+                      <info>php %command.full_name% --type=logs --days=30 --dry-run</info>
 
-Available prune types:
-  <info>logs</info>     - Action and moderation logs (requires --days)
-  <info>pm</info>       - Private messages (requires --days)
-  <info>sessions</info> - Expired user sessions (automatic threshold)
-  <info>search</info>   - Search result cache (older than 3 hours)
-HELP
+                    Available prune types:
+                      <info>logs</info>     - Action and moderation logs (requires --days)
+                      <info>pm</info>       - Private messages (requires --days)
+                      <info>sessions</info> - Expired user sessions (automatic threshold)
+                      <info>search</info>   - Search result cache (older than 3 hours)
+                    HELP
             );
     }
 
@@ -99,23 +99,26 @@ HELP
         }
 
         // Validate type
-        if (!array_key_exists($type, self::PRUNE_TYPES)) {
-            $this->error("Unknown prune type: $type");
+        if (!\array_key_exists($type, self::PRUNE_TYPES)) {
+            $this->error("Unknown prune type: {$type}");
             $this->comment('Available types: ' . implode(', ', array_keys(self::PRUNE_TYPES)));
+
             return self::FAILURE;
         }
 
         // Validate days for types that require it
-        if (in_array($type, ['logs', 'pm']) && $days === null) {
-            $this->error("The --days option is required for '$type' type.");
-            $this->comment("Example: php bull maintenance:prune --type=$type --days=30");
+        if (\in_array($type, ['logs', 'pm']) && $days === null) {
+            $this->error("The --days option is required for '{$type}' type.");
+            $this->comment("Example: php bull maintenance:prune --type={$type} --days=30");
+
             return self::FAILURE;
         }
 
         if ($days !== null) {
-            $days = (int) $days;
+            $days = (int)$days;
             if ($days <= 0) {
                 $this->error('Days must be a positive number.');
+
                 return self::FAILURE;
             }
         }
@@ -124,7 +127,8 @@ HELP
         $count = $this->getRecordCount($type, $days);
 
         if ($count === 0) {
-            $this->info("No records to prune for type '$type'.");
+            $this->info("No records to prune for type '{$type}'.");
+
             return self::SUCCESS;
         }
 
@@ -132,7 +136,7 @@ HELP
         $this->section('Prune Target');
 
         $description = self::PRUNE_TYPES[$type];
-        $threshold = $days !== null ? "$days days old" : $this->getThresholdDescription($type);
+        $threshold = $days !== null ? "{$days} days old" : $this->getThresholdDescription($type);
 
         $this->definitionList(
             ['Type' => $type],
@@ -151,6 +155,7 @@ HELP
 
         if ($isDryRun) {
             $this->displayDryRunNotice();
+
             return self::SUCCESS;
         }
 
@@ -158,6 +163,7 @@ HELP
         if (!$isForce) {
             if (!$this->confirm('Are you sure you want to proceed?')) {
                 $this->comment('Operation cancelled.');
+
                 return self::SUCCESS;
             }
         }
@@ -178,6 +184,7 @@ HELP
         );
 
         $this->success('Prune completed!');
+
         return self::SUCCESS;
     }
 
@@ -266,6 +273,7 @@ HELP
     private function getLogsCount(int $days): int
     {
         $cutoff = TIMENOW - 86400 * $days;
+
         return DB()->table(BB_LOG)
             ->where('log_time < ?', $cutoff)
             ->count('*');
@@ -277,6 +285,7 @@ HELP
     private function getPmCount(int $days): int
     {
         $cutoff = TIMENOW - 86400 * $days;
+
         return DB()->table(BB_PRIVMSGS)
             ->where('privmsgs_date < ?', $cutoff)
             ->count('*');
@@ -288,16 +297,17 @@ HELP
      */
     private function getSessionsCount(): int
     {
-        $userExpire = TIMENOW - (int) config()->get('user_session_duration');
-        $adminExpire = TIMENOW - (int) config()->get('admin_session_duration');
-        $gcTime = $userExpire - (int) config()->get('user_session_gc_ttl');
+        $userExpire = TIMENOW - (int)config()->get('user_session_duration');
+        $adminExpire = TIMENOW - (int)config()->get('admin_session_duration');
+        $gcTime = $userExpire - (int)config()->get('user_session_gc_ttl');
 
-        $row = DB()->fetch_row("
-            SELECT COUNT(*) as cnt FROM " . BB_SESSIONS . "
-            WHERE (session_time < $gcTime AND session_admin = 0)
-               OR (session_time < $adminExpire AND session_admin != 0)
+        $row = DB()->fetch_row('
+            SELECT COUNT(*) as cnt FROM ' . BB_SESSIONS . "
+            WHERE (session_time < {$gcTime} AND session_admin = 0)
+               OR (session_time < {$adminExpire} AND session_admin != 0)
         ");
-        return (int) ($row['cnt'] ?? 0);
+
+        return (int)($row['cnt'] ?? 0);
     }
 
     /**
@@ -306,6 +316,7 @@ HELP
     private function getSearchCount(): int
     {
         $expire = TIMENOW - 3 * 3600;
+
         return DB()->table(BB_SEARCH)
             ->where('search_time < ?', $expire)
             ->count('*');
@@ -331,7 +342,8 @@ HELP
     private function pruneLogs(int $days): int
     {
         $cutoff = TIMENOW - 86400 * $days;
-        DB()->query("DELETE FROM " . BB_LOG . " WHERE log_time < $cutoff");
+        DB()->query('DELETE FROM ' . BB_LOG . " WHERE log_time < {$cutoff}");
+
         return DB()->affected_rows();
     }
 
@@ -343,9 +355,9 @@ HELP
         $cutoff = TIMENOW - 86400 * $days;
         $perCycle = 20000;
 
-        $row = DB()->fetch_row("SELECT MIN(privmsgs_id) AS start_id, MAX(privmsgs_id) AS finish_id FROM " . BB_PRIVMSGS);
-        $startId = (int) ($row['start_id'] ?? 0);
-        $finishId = (int) ($row['finish_id'] ?? 0);
+        $row = DB()->fetch_row('SELECT MIN(privmsgs_id) AS start_id, MAX(privmsgs_id) AS finish_id FROM ' . BB_PRIVMSGS);
+        $startId = (int)($row['start_id'] ?? 0);
+        $finishId = (int)($row['finish_id'] ?? 0);
 
         if ($startId === 0) {
             return 0;
@@ -356,12 +368,12 @@ HELP
         while (true) {
             $endId = $startId + $perCycle - 1;
 
-            DB()->query("
+            DB()->query('
                 DELETE pm, pmt
-                FROM " . BB_PRIVMSGS . " pm
-                LEFT JOIN " . BB_PRIVMSGS_TEXT . " pmt ON(pmt.privmsgs_text_id = pm.privmsgs_id)
-                WHERE pm.privmsgs_id BETWEEN $startId AND $endId
-                    AND pm.privmsgs_date < $cutoff
+                FROM ' . BB_PRIVMSGS . ' pm
+                LEFT JOIN ' . BB_PRIVMSGS_TEXT . " pmt ON(pmt.privmsgs_text_id = pm.privmsgs_id)
+                WHERE pm.privmsgs_id BETWEEN {$startId} AND {$endId}
+                    AND pm.privmsgs_date < {$cutoff}
             ");
 
             $totalDeleted += DB()->affected_rows();
@@ -381,9 +393,9 @@ HELP
      */
     private function pruneSessions(): int
     {
-        $userExpire = TIMENOW - (int) config()->get('user_session_duration');
-        $adminExpire = TIMENOW - (int) config()->get('admin_session_duration');
-        $gcTime = $userExpire - (int) config()->get('user_session_gc_ttl');
+        $userExpire = TIMENOW - (int)config()->get('user_session_duration');
+        $adminExpire = TIMENOW - (int)config()->get('admin_session_duration');
+        $gcTime = $userExpire - (int)config()->get('user_session_gc_ttl');
 
         // Update user session times before deleting
         DB()->lock([
@@ -391,24 +403,24 @@ HELP
             BB_SESSIONS . ' s',
         ]);
 
-        DB()->query("
-            UPDATE " . BB_USERS . " u, " . BB_SESSIONS . " s
+        DB()->query('
+            UPDATE ' . BB_USERS . ' u, ' . BB_SESSIONS . ' s
             SET u.user_session_time = IF(u.user_session_time < s.session_time, s.session_time, u.user_session_time)
             WHERE u.user_id = s.session_user_id
-                AND s.session_user_id != " . GUEST_UID . "
+                AND s.session_user_id != ' . GUEST_UID . "
                 AND (
-                    (s.session_time < $userExpire AND s.session_admin = 0)
-                    OR (s.session_time < $adminExpire AND s.session_admin != 0)
+                    (s.session_time < {$userExpire} AND s.session_admin = 0)
+                    OR (s.session_time < {$adminExpire} AND s.session_admin != 0)
                 )
         ");
 
         DB()->unlock();
 
         // Delete sessions
-        DB()->query("
-            DELETE FROM " . BB_SESSIONS . "
-            WHERE (session_time < $gcTime AND session_admin = 0)
-               OR (session_time < $adminExpire AND session_admin != 0)
+        DB()->query('
+            DELETE FROM ' . BB_SESSIONS . "
+            WHERE (session_time < {$gcTime} AND session_admin = 0)
+               OR (session_time < {$adminExpire} AND session_admin != 0)
         ");
 
         return DB()->affected_rows();
@@ -420,7 +432,8 @@ HELP
     private function pruneSearch(): int
     {
         $expire = TIMENOW - 3 * 3600;
-        DB()->query("DELETE FROM " . BB_SEARCH . " WHERE search_time < $expire");
+        DB()->query('DELETE FROM ' . BB_SEARCH . " WHERE search_time < {$expire}");
+
         return DB()->affected_rows();
     }
 }

@@ -21,7 +21,7 @@ use TorrentPier\Console\Helpers\FileSystemHelper;
  */
 #[AsCommand(
     name: 'cache:status',
-    description: 'Display cache status and statistics'
+    description: 'Display cache status and statistics',
 )]
 class CacheStatusCommand extends Command
 {

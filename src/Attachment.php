@@ -109,6 +109,7 @@ class Attachment
     public static function getSize(int $topicId): int
     {
         $path = self::getPath($topicId);
+
         return is_file($path) ? (filesize($path) ?: 0) : 0;
     }
 

@@ -10,6 +10,9 @@
 
 namespace TorrentPier\Cache;
 
+use BadMethodCallException;
+use Exception;
+use InvalidArgumentException;
 use Nette\Caching\Cache;
 use Nette\Caching\Storage;
 
@@ -26,12 +29,6 @@ class DatastoreManager
      * @var self|null
      */
     private static ?self $instance = null;
-
-    /**
-     * Unified cache manager instance
-     * @var CacheManager
-     */
-    private CacheManager $cacheManager;
 
     /**
      * Директория с builder-скриптами (внутри INC_DIR)
@@ -81,14 +78,28 @@ class DatastoreManager
      * Debug properties (delegated to CacheManager)
      */
     public int $num_queries = 0;
+
     public float $sql_starttime = 0;
+
     public float $sql_inittime = 0;
+
     public float $sql_timetotal = 0;
+
     public float $cur_query_time = 0;
+
     public array $dbg = [];
+
     public int $dbg_id = 0;
+
     public bool $dbg_enabled = false;
+
     public ?string $cur_query = null;
+
+    /**
+     * Unified cache manager instance
+     * @var CacheManager
+     */
+    private CacheManager $cacheManager;
 
     /**
      * Constructor
@@ -102,6 +113,67 @@ class DatastoreManager
         $this->cacheManager = CacheManager::getInstance('datastore', $storage, $config);
         $this->engine = $this->cacheManager->engine;
         $this->dbg_enabled = tracy()->isDebugAllowed();
+    }
+
+    /**
+     * Magic method to delegate unknown method calls to cache manager
+     *
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public function __call(string $method, array $args): mixed
+    {
+        if (method_exists($this->cacheManager, $method)) {
+            $result = $this->cacheManager->{$method}(...$args);
+            $this->_updateDebugCounters();
+
+            return $result;
+        }
+
+        throw new BadMethodCallException("Method '{$method}' not found in DatastoreManager or CacheManager");
+    }
+
+    /**
+     * Magic property getter to delegate to cache manager
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function __get(string $name): mixed
+    {
+        if (property_exists($this->cacheManager, $name)) {
+            return $this->cacheManager->{$name};
+        }
+
+        // Handle legacy properties that don't exist in unified system
+        if ($name === 'db') {
+            // Legacy cache systems sometimes had a 'db' property for database storage
+            // Our unified system doesn't use separate database connections for cache
+            // Return an object with empty debug arrays for compatibility
+            return (object)[
+                'dbg' => [],
+                'engine' => $this->engine,
+                'sql_timetotal' => 0,
+            ];
+        }
+
+        throw new InvalidArgumentException("Property '{$name}' not found");
+    }
+
+    /**
+     * Magic property setter to delegate to cache manager
+     *
+     * @param string $name
+     * @param mixed $value
+     */
+    public function __set(string $name, mixed $value): void
+    {
+        if (property_exists($this->cacheManager, $name)) {
+            $this->cacheManager->{$name} = $value;
+        } else {
+            throw new InvalidArgumentException("Property '{$name}' not found");
+        }
     }
 
     /**
@@ -124,12 +196,11 @@ class DatastoreManager
      * Enqueue items for batch loading
      *
      * @param array $items
-     * @return void
      */
     public function enqueue(array $items): void
     {
         foreach ($items as $item) {
-            if (!in_array($item, $this->queued_items) && !isset($this->data[$item])) {
+            if (!\in_array($item, $this->queued_items) && !isset($this->data[$item])) {
                 $this->queued_items[] = $item;
             }
         }
@@ -147,6 +218,7 @@ class DatastoreManager
             $this->enqueue([$title]);
             $this->_fetch();
         }
+
         return $this->data[$title];
     }
 
@@ -169,9 +241,11 @@ class DatastoreManager
         try {
             $this->cacheManager->save($item_name, $item_data, $dependencies);
             $this->_updateDebugCounters();
+
             return true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->_updateDebugCounters();
+
             return false;
         }
     }
@@ -180,11 +254,10 @@ class DatastoreManager
      * Remove data from memory cache
      *
      * @param array|string $items
-     * @return void
      */
     public function rm(array|string $items): void
     {
-        foreach ((array) $items as $item) {
+        foreach ((array)$items as $item) {
             unset($this->data[$item]);
         }
     }
@@ -193,22 +266,19 @@ class DatastoreManager
      * Update datastore items
      *
      * @param array|string $items
-     * @return void
      */
     public function update(array|string $items): void
     {
         if ($items == 'all') {
             $items = array_keys(array_unique($this->known_items));
         }
-        foreach ((array) $items as $item) {
+        foreach ((array)$items as $item) {
             $this->_build_item($item);
         }
     }
 
     /**
      * Clean datastore cache (for admin purposes)
-     *
-     * @return void
      */
     public function clean(): void
     {
@@ -220,8 +290,6 @@ class DatastoreManager
 
     /**
      * Fetch items from store
-     *
-     * @return void
      */
     public function _fetch(): void
     {
@@ -240,14 +308,14 @@ class DatastoreManager
     /**
      * Fetch items from cache store
      *
-     * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     public function _fetch_from_store(): void
     {
         if (!$items = $this->queued_items) {
             $src = $this->_debug_find_caller('enqueue');
-            throw new \Exception("Datastore: no items queued for fetching [$src]");
+
+            throw new Exception("Datastore: no items queued for fetching [{$src}]");
         }
 
         // Use bulk loading for efficiency
@@ -258,7 +326,7 @@ class DatastoreManager
             $fullKey = $this->cacheManager->prefix . $item;
 
             // Distinguish between cache miss (null) and cached false value
-            if (array_key_exists($fullKey, $results)) {
+            if (\array_key_exists($fullKey, $results)) {
                 // Item exists in cache (even if the value is null/false)
                 $this->data[$item] = $results[$fullKey];
             } else {
@@ -275,18 +343,17 @@ class DatastoreManager
      * Build item using builder script
      *
      * @param string $title
-     * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     public function _build_item(string $title): void
     {
         if (!isset($this->known_items[$title])) {
-            throw new \Exception("Unknown datastore item: $title");
+            throw new Exception("Unknown datastore item: {$title}");
         }
 
         $file = INC_DIR . '/' . $this->ds_dir . '/' . $this->known_items[$title];
         if (!file_exists($file)) {
-            throw new \Exception("Datastore builder script not found: $file");
+            throw new Exception("Datastore builder script not found: {$file}");
         }
 
         require $file;
@@ -305,20 +372,8 @@ class DatastoreManager
                 return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
             }
         }
-        return 'caller not found';
-    }
 
-    /**
-     * Update debug counters from cache manager
-     *
-     * @return void
-     */
-    private function _updateDebugCounters(): void
-    {
-        $this->num_queries = $this->cacheManager->num_queries;
-        $this->sql_timetotal = $this->cacheManager->sql_timetotal;
-        $this->dbg = $this->cacheManager->dbg;
-        $this->dbg_id = $this->cacheManager->dbg_id;
+        return 'caller not found';
     }
 
     /**
@@ -344,7 +399,6 @@ class DatastoreManager
      * @param string $key
      * @param mixed $value
      * @param array $dependencies
-     * @return void
      */
     public function save(string $key, mixed $value, array $dependencies = []): void
     {
@@ -356,7 +410,6 @@ class DatastoreManager
      * Clean by criteria
      *
      * @param array $conditions
-     * @return void
      */
     public function cleanByCriteria(array $conditions = []): void
     {
@@ -368,7 +421,6 @@ class DatastoreManager
      * Clean by tags
      *
      * @param array $tags
-     * @return void
      */
     public function cleanByTags(array $tags): void
     {
@@ -407,63 +459,13 @@ class DatastoreManager
     }
 
     /**
-     * Magic method to delegate unknown method calls to cache manager
-     *
-     * @param string $method
-     * @param array $args
-     * @return mixed
+     * Update debug counters from cache manager
      */
-    public function __call(string $method, array $args): mixed
+    private function _updateDebugCounters(): void
     {
-        if (method_exists($this->cacheManager, $method)) {
-            $result = $this->cacheManager->$method(...$args);
-            $this->_updateDebugCounters();
-            return $result;
-        }
-
-        throw new \BadMethodCallException("Method '$method' not found in DatastoreManager or CacheManager");
-    }
-
-    /**
-     * Magic property getter to delegate to cache manager
-     *
-     * @param string $name
-     * @return mixed
-     */
-    public function __get(string $name): mixed
-    {
-        if (property_exists($this->cacheManager, $name)) {
-            return $this->cacheManager->$name;
-        }
-
-        // Handle legacy properties that don't exist in unified system
-        if ($name === 'db') {
-            // Legacy cache systems sometimes had a 'db' property for database storage
-            // Our unified system doesn't use separate database connections for cache
-            // Return an object with empty debug arrays for compatibility
-            return (object) [
-                'dbg' => [],
-                'engine' => $this->engine,
-                'sql_timetotal' => 0,
-            ];
-        }
-
-        throw new \InvalidArgumentException("Property '$name' not found");
-    }
-
-    /**
-     * Magic property setter to delegate to cache manager
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return void
-     */
-    public function __set(string $name, mixed $value): void
-    {
-        if (property_exists($this->cacheManager, $name)) {
-            $this->cacheManager->$name = $value;
-        } else {
-            throw new \InvalidArgumentException("Property '$name' not found");
-        }
+        $this->num_queries = $this->cacheManager->num_queries;
+        $this->sql_timetotal = $this->cacheManager->sql_timetotal;
+        $this->dbg = $this->cacheManager->dbg;
+        $this->dbg_id = $this->cacheManager->dbg_id;
     }
 }

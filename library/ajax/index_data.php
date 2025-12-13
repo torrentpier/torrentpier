@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
@@ -19,7 +19,7 @@ $html = '';
 switch ($mode) {
     case 'birthday_week':
         datastore()->enqueue([
-            'stats'
+            'stats',
         ]);
         $stats = datastore()->get('stats');
 
@@ -37,7 +37,7 @@ switch ($mode) {
 
     case 'birthday_today':
         datastore()->enqueue([
-            'stats'
+            'stats',
         ]);
         $stats = datastore()->get('stats');
 
@@ -57,7 +57,7 @@ switch ($mode) {
         $forum_id = (int)$this->request['forum_id'];
 
         datastore()->enqueue([
-            'moderators'
+            'moderators',
         ]);
 
         $moderators = [];
@@ -111,7 +111,7 @@ switch ($mode) {
         }
 
         $ratio_nulled_sql = !IS_ADMIN ? ', ratio_nulled = 1' : '';
-        DB()->query("UPDATE " . BB_BT_USERS . " SET u_up_total = 0, u_down_total = 0, u_up_release = 0, u_up_bonus = 0 $ratio_nulled_sql WHERE user_id = " . $user_id);
+        DB()->query('UPDATE ' . BB_BT_USERS . " SET u_up_total = 0, u_down_total = 0, u_up_release = 0, u_up_bonus = 0 {$ratio_nulled_sql} WHERE user_id = " . $user_id);
         CACHE('bb_cache')->rm('btu_' . $user_id);
         $this->ajax_die(__('BT_NULL_RATIO_SUCCESS'));
         break;
@@ -123,12 +123,12 @@ switch ($mode) {
 
         $user_id = (int)$this->request['user_id'];
 
-        $sql = "
+        $sql = '
 				SELECT COUNT(tor.poster_id) as total_releases, SUM(tor.size) as total_size, SUM(tor.complete_count) as total_complete
-				FROM " . BB_BT_TORRENTS . " tor
-					LEFT JOIN " . BB_USERS . " u ON(u.user_id = tor.poster_id)
-					LEFT JOIN " . BB_BT_USERS . " ut ON(ut.user_id = tor.poster_id)
-				WHERE u.user_id = $user_id
+				FROM ' . BB_BT_TORRENTS . ' tor
+					LEFT JOIN ' . BB_USERS . ' u ON(u.user_id = tor.poster_id)
+					LEFT JOIN ' . BB_BT_USERS . " ut ON(ut.user_id = tor.poster_id)
+				WHERE u.user_id = {$user_id}
 				GROUP BY tor.poster_id
 				LIMIT 1
 			";

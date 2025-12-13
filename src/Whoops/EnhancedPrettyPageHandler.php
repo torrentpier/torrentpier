@@ -10,6 +10,8 @@
 
 namespace TorrentPier\Whoops;
 
+use Exception;
+use PDO;
 use Whoops\Handler\PrettyPageHandler;
 
 /**
@@ -29,6 +31,33 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
     }
 
     /**
+     * Override parent method to add database info and custom styling
+     */
+    public function handle()
+    {
+        // Add TorrentPier-specific database information dynamically
+        try {
+            $this->addDataTable('Database Information', $this->getDatabaseInformation());
+        } catch (Exception $e) {
+            $this->addDataTable('Database Information', ['Error' => $e->getMessage()]);
+        }
+
+        try {
+            $this->addDataTable('Recent SQL Queries', $this->getRecentSqlQueries());
+        } catch (Exception $e) {
+            $this->addDataTable('Recent SQL Queries', ['Error' => $e->getMessage()]);
+        }
+
+        try {
+            $this->addDataTable('TorrentPier Environment', $this->getTorrentPierEnvironment());
+        } catch (Exception $e) {
+            $this->addDataTable('TorrentPier Environment', ['Error' => $e->getMessage()]);
+        }
+
+        return parent::handle();
+    }
+
+    /**
      * Get comprehensive database information
      */
     private function getDatabaseInformation(): array
@@ -37,7 +66,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
 
         try {
             // Get main database instance information
-            if (function_exists('DB')) {
+            if (\function_exists('DB')) {
                 $db = DB();
 
                 $info['Connection Status'] = $db->connection ? 'Connected' : 'Disconnected';
@@ -47,7 +76,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                 $info['Total Queries'] = $db->num_queries ?? 0;
 
                 if (isset($db->sql_timetotal)) {
-                    $info['Total Query Time'] = sprintf('%.3f seconds', $db->sql_timetotal);
+                    $info['Total Query Time'] = \sprintf('%.3f seconds', $db->sql_timetotal);
                 }
 
                 // Current/Last executed query
@@ -69,8 +98,8 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                     try {
                         $pdo = $db->connection->getPdo();
                         if ($pdo) {
-                            $info['PDO Driver'] = $pdo->getAttribute(\PDO::ATTR_DRIVER_NAME) ?? 'Unknown';
-                            $info['Server Version'] = $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION) ?? 'Unknown';
+                            $info['PDO Driver'] = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME) ?? 'Unknown';
+                            $info['Server Version'] = $pdo->getAttribute(PDO::ATTR_SERVER_VERSION) ?? 'Unknown';
 
                             // Current PDO error state
                             $errorCode = $pdo->errorCode();
@@ -82,7 +111,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                                 ];
                             }
                         }
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         $info['PDO Error'] = $e->getMessage();
                     }
                 }
@@ -93,27 +122,26 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                 try {
                     $serverNames = \TorrentPier\Database\DatabaseFactory::getServerNames();
 
-                    if (count($serverNames) > 1) {
+                    if (\count($serverNames) > 1) {
                         foreach ($serverNames as $serverName) {
                             try {
                                 $db = \TorrentPier\Database\DatabaseFactory::getInstance($serverName);
-                                $info["Server: $serverName"] = [
+                                $info["Server: {$serverName}"] = [
                                     'Host' => $db->db_server ?? 'Unknown',
                                     'Database' => $db->selected_db ?? 'Unknown',
                                     'Queries' => $db->num_queries ?? 0,
                                     'Connected' => $db->connection ? 'Yes' : 'No',
                                 ];
-                            } catch (\Exception $e) {
-                                $info["Server: $serverName"] = ['Error' => $e->getMessage()];
+                            } catch (Exception $e) {
+                                $info["Server: {$serverName}"] = ['Error' => $e->getMessage()];
                             }
                         }
                     }
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     $info['Multi-Server Error'] = $e->getMessage();
                 }
             }
-
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $info['Collection Error'] = $e->getMessage();
         }
 
@@ -128,19 +156,19 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
         $queries = [];
 
         try {
-            if (function_exists('DB')) {
+            if (\function_exists('DB')) {
                 $db = DB();
 
                 // Check if debug information is available
-                if (!empty($db->dbg) && is_array($db->dbg)) {
+                if (!empty($db->dbg) && \is_array($db->dbg)) {
                     // Get last 5 queries
-                    $recentQueries = array_slice($db->dbg, -5);
+                    $recentQueries = \array_slice($db->dbg, -5);
 
                     foreach ($recentQueries as $index => $queryInfo) {
                         $queryNum = $index + 1;
-                        $queries["Query #$queryNum"] = [
+                        $queries["Query #{$queryNum}"] = [
                             'SQL' => $this->formatSqlQuery($queryInfo['sql'] ?? 'Unknown'),
-                            'Time' => isset($queryInfo['time']) ? sprintf('%.3f sec', $queryInfo['time']) : 'Unknown',
+                            'Time' => isset($queryInfo['time']) ? \sprintf('%.3f sec', $queryInfo['time']) : 'Unknown',
                             'Source' => $queryInfo['src'] ?? 'Unknown',
                             'Info' => $queryInfo['info'] ?? '',
                         ];
@@ -148,7 +176,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                         // Add memory info if available
                         if (isset($queryInfo['mem_before'], $queryInfo['mem_after'])) {
                             $memUsed = $queryInfo['mem_after'] - $queryInfo['mem_before'];
-                            $queries["Query #$queryNum"]['Memory'] = sprintf('%+d bytes', $memUsed);
+                            $queries["Query #{$queryNum}"]['Memory'] = \sprintf('%+d bytes', $memUsed);
                         }
                     }
                 }
@@ -157,7 +185,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                     $queries['Info'] = 'No query debug information available. Enable debug mode to see recent queries.';
                 }
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $queries['Error'] = $e->getMessage();
         }
 
@@ -173,12 +201,12 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
 
         try {
             // Basic environment
-            $env['Application Environment'] = defined('APP_ENV') ? APP_ENV : 'Unknown';
-            $env['Debug Mode'] = defined('DBG_USER') && DBG_USER ? 'Enabled' : 'Disabled';
-            $env['SQL Debug'] = defined('SQL_DEBUG') && SQL_DEBUG ? 'Enabled' : 'Disabled';
+            $env['Application Environment'] = \defined('APP_ENV') ? APP_ENV : 'Unknown';
+            $env['Debug Mode'] = \defined('DBG_USER') && DBG_USER ? 'Enabled' : 'Disabled';
+            $env['SQL Debug'] = \defined('SQL_DEBUG') && SQL_DEBUG ? 'Enabled' : 'Disabled';
 
             // Configuration status
-            if (function_exists('config')) {
+            if (\function_exists('config')) {
                 $config = config();
                 $env['Config Loaded'] = 'Yes';
                 $env['TorrentPier Version'] = $config->get('tp_version', 'Unknown');
@@ -188,12 +216,12 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
             }
 
             // Cache system
-            if (function_exists('CACHE')) {
+            if (\function_exists('CACHE')) {
                 $env['Cache System'] = 'Available';
             }
 
             // Language system
-            if (function_exists('lang')) {
+            if (\function_exists('lang')) {
                 $env['Language System'] = 'Available';
                 if (lang()->currentLanguage) {
                     $env['Current Language'] = lang()->currentLanguage;
@@ -201,15 +229,15 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
             }
 
             // Memory and timing
-            if (defined('TIMESTART')) {
-                $env['Execution Time'] = sprintf('%.3f sec', microtime(true) - TIMESTART);
+            if (\defined('TIMESTART')) {
+                $env['Execution Time'] = \sprintf('%.3f sec', microtime(true) - TIMESTART);
             }
 
-            if (function_exists('sys') && function_exists('humn_size')) {
+            if (\function_exists('sys') && \function_exists('humn_size')) {
                 // Use plain text formatting for memory values (no HTML entities)
-                $env['Peak Memory'] = str_replace('&nbsp;', ' ', \humn_size(sys('mem_peak')));
-                $env['Current Memory'] = str_replace('&nbsp;', ' ', \humn_size(sys('mem')));
-            } elseif (function_exists('sys')) {
+                $env['Peak Memory'] = str_replace('&nbsp;', ' ', humn_size(sys('mem_peak')));
+                $env['Current Memory'] = str_replace('&nbsp;', ' ', humn_size(sys('mem')));
+            } elseif (\function_exists('sys')) {
                 // Fallback if humn_size() is not available yet
                 $env['Peak Memory'] = number_format(sys('mem_peak')) . ' bytes';
                 $env['Current Memory'] = number_format(sys('mem')) . ' bytes';
@@ -220,8 +248,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
             $env['Request URI'] = $_SERVER['REQUEST_URI'] ?? 'CLI';
             $env['User Agent'] = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
             $env['Remote IP'] = $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
-
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $env['Error'] = $e->getMessage();
         }
 
@@ -238,37 +265,10 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
         $query = trim($query);
 
         // Truncate very long queries but keep them readable
-        if (strlen($query) > 1000) {
-            return substr($query, 0, 1000) . "\n... [Query truncated - " . (strlen($query) - 1000) . " more characters]";
+        if (\strlen($query) > 1000) {
+            return substr($query, 0, 1000) . "\n... [Query truncated - " . (\strlen($query) - 1000) . ' more characters]';
         }
 
         return $query;
-    }
-
-    /**
-     * Override parent method to add database info and custom styling
-     */
-    public function handle()
-    {
-        // Add TorrentPier-specific database information dynamically
-        try {
-            $this->addDataTable('Database Information', $this->getDatabaseInformation());
-        } catch (\Exception $e) {
-            $this->addDataTable('Database Information', ['Error' => $e->getMessage()]);
-        }
-
-        try {
-            $this->addDataTable('Recent SQL Queries', $this->getRecentSqlQueries());
-        } catch (\Exception $e) {
-            $this->addDataTable('Recent SQL Queries', ['Error' => $e->getMessage()]);
-        }
-
-        try {
-            $this->addDataTable('TorrentPier Environment', $this->getTorrentPierEnvironment());
-        } catch (\Exception $e) {
-            $this->addDataTable('TorrentPier Environment', ['Error' => $e->getMessage()]);
-        }
-
-        return parent::handle();
     }
 }

@@ -63,9 +63,9 @@ class PerformancePanel implements IBarPanel
 
         // Timing section
         $html .= '<tr><th colspan="2" style="background:#f5f5f5;text-align:left;padding:8px">Timing</th></tr>';
-        $html .= '<tr><td>Total Execution Time</td><td><b>' . sprintf('%.3f', $execTime) . ' s</b> (' . sprintf('%.1f', $execTime * 1000) . ' ms)</td></tr>';
-        $html .= '<tr><td>PHP Processing</td><td>' . sprintf('%.3f', $phpTime) . ' s (' . $phpPercent . '%)</td></tr>';
-        $html .= '<tr><td>SQL Queries</td><td>' . sprintf('%.3f', $sqlTime) . ' s (' . $sqlPercent . '%)</td></tr>';
+        $html .= '<tr><td>Total Execution Time</td><td><b>' . \sprintf('%.3f', $execTime) . ' s</b> (' . \sprintf('%.1f', $execTime * 1000) . ' ms)</td></tr>';
+        $html .= '<tr><td>PHP Processing</td><td>' . \sprintf('%.3f', $phpTime) . ' s (' . $phpPercent . '%)</td></tr>';
+        $html .= '<tr><td>SQL Queries</td><td>' . \sprintf('%.3f', $sqlTime) . ' s (' . $sqlPercent . '%)</td></tr>';
 
         // Visual bar chart
         $html .= '<tr><td colspan="2" style="padding:8px 0">';
@@ -128,9 +128,10 @@ class PerformancePanel implements IBarPanel
         }
 
         // Fallback to current time (less accurate, includes Tracy overhead)
-        if (!defined('TIMESTART')) {
+        if (!\defined('TIMESTART')) {
             return 0;
         }
+
         return microtime(true) - TIMESTART;
     }
 
@@ -149,6 +150,7 @@ class PerformancePanel implements IBarPanel
         // Fallback to current DB stats
         try {
             $db = DatabaseFactory::getInstance();
+
             return $db->sql_timetotal ?? 0;
         } catch (Exception) {
             return 0;
@@ -161,9 +163,9 @@ class PerformancePanel implements IBarPanel
     private function getMemory(string $type): int
     {
         return match ($type) {
-            'current' => function_exists('sys') ? sys('mem') : memory_get_usage(),
-            'peak' => function_exists('sys') ? sys('mem_peak') : memory_get_peak_usage(),
-            'start' => (int) (config()->get('mem_on_start') ?? 0),
+            'current' => \function_exists('sys') ? sys('mem') : memory_get_usage(),
+            'peak' => \function_exists('sys') ? sys('mem_peak') : memory_get_peak_usage(),
+            'start' => (int)(config()->get('mem_on_start') ?? 0),
             default => 0,
         };
     }
@@ -173,13 +175,13 @@ class PerformancePanel implements IBarPanel
      */
     private function getMemoryLimit(): int
     {
-        $limit = ini_get('memory_limit');
+        $limit = \ini_get('memory_limit');
         if ($limit === '-1') {
             return 0;
         }
 
         $unit = strtolower(substr($limit, -1));
-        $value = (int) $limit;
+        $value = (int)$limit;
 
         return match ($unit) {
             'g' => $value * 1024 * 1024 * 1024,
@@ -194,7 +196,7 @@ class PerformancePanel implements IBarPanel
      */
     private function isGzipEnabled(): bool
     {
-        return (bool) config()->get('gzip_compress', false);
+        return (bool)config()->get('gzip_compress', false);
     }
 
     /**
@@ -202,7 +204,7 @@ class PerformancePanel implements IBarPanel
      */
     private function isGzipSupported(): bool
     {
-        return defined('UA_GZIP_SUPPORTED') && UA_GZIP_SUPPORTED;
+        return \defined('UA_GZIP_SUPPORTED') && UA_GZIP_SUPPORTED;
     }
 
     /**
@@ -212,12 +214,14 @@ class PerformancePanel implements IBarPanel
     {
         if ($bytes < 1024) {
             return $bytes . ' B';
-        } elseif ($bytes < 1024 * 1024) {
-            return sprintf('%.2f KB', $bytes / 1024);
-        } elseif ($bytes < 1024 * 1024 * 1024) {
-            return sprintf('%.2f MB', $bytes / (1024 * 1024));
-        } else {
-            return sprintf('%.2f GB', $bytes / (1024 * 1024 * 1024));
         }
+        if ($bytes < 1024 * 1024) {
+            return \sprintf('%.2f KB', $bytes / 1024);
+        }
+        if ($bytes < 1024 * 1024 * 1024) {
+            return \sprintf('%.2f MB', $bytes / (1024 * 1024));
+        }
+
+        return \sprintf('%.2f GB', $bytes / (1024 * 1024 * 1024));
     }
 }

@@ -46,6 +46,7 @@ class TemplateCollector
         }
 
         $themeName = 'unknown';
+
         try {
             $themeName = template()->getVar('TEMPLATE_NAME') ?? 'unknown';
         } catch (Exception) {
@@ -53,6 +54,7 @@ class TemplateCollector
         }
 
         $renderTime = 0;
+
         try {
             $renderTime = Template::getTotalRenderTime();
         } catch (Exception) {
@@ -64,14 +66,14 @@ class TemplateCollector
             'theme_name' => $themeName,
             'legacy_templates' => $legacyTemplates,
             'native_templates' => $nativeTemplates,
-            'legacy_count' => count($legacyTemplates),
-            'native_count' => count($nativeTemplates),
-            'total_count' => count($legacyTemplates) + count($nativeTemplates),
+            'legacy_count' => \count($legacyTemplates),
+            'native_count' => \count($nativeTemplates),
+            'total_count' => \count($legacyTemplates) + \count($nativeTemplates),
             'conflicts' => $conflicts,
-            'conflict_count' => count($conflicts),
+            'conflict_count' => \count($conflicts),
             'shadowing' => $shadowing,
-            'shadowing_count' => count($shadowing),
-            'has_warnings' => count($conflicts) > 0 || count($shadowing) > 0,
+            'shadowing_count' => \count($shadowing),
+            'has_warnings' => \count($conflicts) > 0 || \count($shadowing) > 0,
             'render_time' => $renderTime,
         ];
     }

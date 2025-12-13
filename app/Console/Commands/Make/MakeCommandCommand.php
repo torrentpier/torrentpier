@@ -22,7 +22,7 @@ use TorrentPier\Console\Commands\Command;
  */
 #[AsCommand(
     name: 'make:command',
-    description: 'Create a new console command'
+    description: 'Create a new console command',
 )]
 class MakeCommandCommand extends Command
 {
@@ -32,14 +32,14 @@ class MakeCommandCommand extends Command
             ->addArgument(
                 'name',
                 InputArgument::REQUIRED,
-                'The command name (e.g., "cache:warmup" or "user:create")'
+                'The command name (e.g., "cache:warmup" or "user:create")',
             )
             ->addOption(
                 'description',
                 'd',
                 InputOption::VALUE_OPTIONAL,
                 'Command description',
-                'Command description'
+                'Command description',
             );
     }
 
@@ -53,7 +53,7 @@ class MakeCommandCommand extends Command
         // Parse command name to determine class name and directory
         $parts = explode(':', $name);
         $className = $this->generateClassName($parts);
-        $subDir = count($parts) > 1 ? ucfirst($parts[0]) : '';
+        $subDir = \count($parts) > 1 ? ucfirst($parts[0]) : '';
 
         // Determine a file path
         $baseDir = BB_ROOT . 'app/Console/Commands';
@@ -66,7 +66,8 @@ class MakeCommandCommand extends Command
         // Ensure directory exists
         if (!is_dir($dir)) {
             if (!mkdir($dir, 0755, true)) {
-                $this->error("Failed to create directory: $dir");
+                $this->error("Failed to create directory: {$dir}");
+
                 return self::FAILURE;
             }
         }
@@ -75,7 +76,8 @@ class MakeCommandCommand extends Command
 
         // Check if file already exists
         if (file_exists($filePath)) {
-            $this->error("Command file already exists: $filePath");
+            $this->error("Command file already exists: {$filePath}");
+
             return self::FAILURE;
         }
 
@@ -90,7 +92,8 @@ class MakeCommandCommand extends Command
 
         // Write file
         if (file_put_contents($filePath, $template) === false) {
-            $this->error("Failed to write file: $filePath");
+            $this->error("Failed to write file: {$filePath}");
+
             return self::FAILURE;
         }
 
@@ -136,51 +139,51 @@ class MakeCommandCommand extends Command
         string $namespace,
         string $className,
         string $commandName,
-        string $description
+        string $description,
     ): string {
         return <<<PHP
-<?php
-/**
- * TorrentPier – Bull-powered BitTorrent tracker engine
- *
- * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
- * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
- * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
- */
+            <?php
+            /**
+             * TorrentPier – Bull-powered BitTorrent tracker engine
+             *
+             * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+             * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+             * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+             */
 
-namespace {$namespace};
+            namespace {$namespace};
 
-use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use TorrentPier\Console\Commands\Command;
+            use Symfony\\Component\\Console\\Attribute\\AsCommand;
+            use Symfony\\Component\\Console\\Input\\InputInterface;
+            use Symfony\\Component\\Console\\Output\\OutputInterface;
+            use TorrentPier\\Console\\Commands\\Command;
 
-/**
- * {$description}
- */
-#[AsCommand(
-    name: '{$commandName}',
-    description: '{$description}'
-)]
-class {$className} extends Command
-{
-    protected function configure(): void
-    {
-        // Add arguments and options here
-        // \$this->addArgument('name', InputArgument::REQUIRED, 'Description');
-        // \$this->addOption('option', 'o', InputOption::VALUE_NONE, 'Description');
-    }
+            /**
+             * {$description}
+             */
+            #[AsCommand(
+                name: '{$commandName}',
+                description: '{$description}'
+            )]
+            class {$className} extends Command
+            {
+                protected function configure(): void
+                {
+                    // Add arguments and options here
+                    // \$this->addArgument('name', InputArgument::REQUIRED, 'Description');
+                    // \$this->addOption('option', 'o', InputOption::VALUE_NONE, 'Description');
+                }
 
-    protected function execute(InputInterface \$input, OutputInterface \$output): int
-    {
-        \$this->title('{$description}');
+                protected function execute(InputInterface \$input, OutputInterface \$output): int
+                {
+                    \$this->title('{$description}');
 
-        // Your command logic here
-        \$this->info('Command executed successfully!');
+                    // Your command logic here
+                    \$this->info('Command executed successfully!');
 
-        return self::SUCCESS;
-    }
-}
-PHP;
+                    return self::SUCCESS;
+                }
+            }
+            PHP;
     }
 }

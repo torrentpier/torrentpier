@@ -12,6 +12,7 @@ namespace TorrentPier\Captcha;
 
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
+use Override;
 
 /**
  * Class TextCaptcha
@@ -46,14 +47,14 @@ class TextCaptcha implements CaptchaInterface
      *
      * @return string
      */
-    #[\Override]
+    #[Override]
     public function get(): string
     {
         $_SESSION['phrase'] = $this->captcha->getPhrase();
         $this->captcha->build();
 
-        return "
-            <img src=" . $this->captcha->inline() . " /><br />
+        return '
+            <img src=' . $this->captcha->inline() . " /><br />
             <input type='text' name='captcha_phrase' />
         ";
     }
@@ -63,7 +64,7 @@ class TextCaptcha implements CaptchaInterface
      *
      * @return bool
      */
-    #[\Override]
+    #[Override]
     public function check(): bool
     {
         if (!request()->post->has('captcha_phrase') || !isset($_SESSION['phrase'])) {

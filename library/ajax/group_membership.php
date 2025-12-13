@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
@@ -21,12 +21,12 @@ if (!$mode = (string)$this->request['mode']) {
 
 switch ($mode) {
     case 'get_group_list':
-        $sql = "
+        $sql = '
 					SELECT ug.user_pending, g.group_id, g.group_type, g.group_name, g.group_moderator, self.user_id AS can_view
-					FROM       " . BB_USER_GROUP . " ug
-					INNER JOIN " . BB_GROUPS . " g ON(g.group_id = ug.group_id AND g.group_single_user = 0)
-					 LEFT JOIN " . BB_USER_GROUP . " self ON(self.group_id = g.group_id AND self.user_id = " . user()->id . " AND self.user_pending = 0)
-					WHERE ug.user_id = $user_id
+					FROM       ' . BB_USER_GROUP . ' ug
+					INNER JOIN ' . BB_GROUPS . ' g ON(g.group_id = ug.group_id AND g.group_single_user = 0)
+					 LEFT JOIN ' . BB_USER_GROUP . ' self ON(self.group_id = g.group_id AND self.user_id = ' . user()->id . " AND self.user_pending = 0)
+					WHERE ug.user_id = {$user_id}
 					ORDER BY g.group_name
 				";
         $html = [];
@@ -63,5 +63,5 @@ switch ($mode) {
         break;
 
     default:
-        $this->ajax_die("invalid mode: $mode");
+        $this->ajax_die("invalid mode: {$mode}");
 }

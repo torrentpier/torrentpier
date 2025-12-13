@@ -14,6 +14,7 @@ namespace TorrentPier\Feed\Provider;
 
 use DateTimeImmutable;
 use Exception;
+use Override;
 use TorrentPier\Feed\Model\FeedMetadata;
 
 /**
@@ -31,13 +32,13 @@ class UserFeedProvider implements FeedProviderInterface
      */
     public function __construct(
         private readonly int $userId,
-        private readonly string $username
+        private readonly string $username,
     ) {}
 
     /**
      * @inheritDoc
      */
-    #[\Override]
+    #[Override]
     public function getCacheKey(): string
     {
         return 'atom:user:' . $this->userId;
@@ -46,13 +47,13 @@ class UserFeedProvider implements FeedProviderInterface
     /**
      * @inheritDoc
      */
-    #[\Override]
+    #[Override]
     public function getMetadata(): FeedMetadata
     {
         return new FeedMetadata(
             title: $this->username,
             link: make_url(url()->member($this->userId, $this->username)),
-            lastModified: new DateTimeImmutable()
+            lastModified: new DateTimeImmutable(),
         );
     }
 
@@ -60,7 +61,7 @@ class UserFeedProvider implements FeedProviderInterface
      * @inheritDoc
      * @throws Exception
      */
-    #[\Override]
+    #[Override]
     public function getEntries(): array
     {
         $topics = $this->getUserTopics();
@@ -78,7 +79,7 @@ class UserFeedProvider implements FeedProviderInterface
      */
     private function getUserTopics(): array
     {
-        $sql = "
+        $sql = '
             SELECT
                 t.topic_id, t.topic_title, t.topic_status, t.tracker_status, t.forum_id,
                 u1.username AS first_username,
@@ -88,12 +89,12 @@ class UserFeedProvider implements FeedProviderInterface
                 p2.post_edit_time AS topic_last_post_edit_time,
                 tor.size AS tor_size, tor.tor_status,
                 pt.post_html
-            FROM " . BB_TOPICS . " t
-            LEFT JOIN " . BB_USERS . " u1 ON(t.topic_poster = u1.user_id)
-            LEFT JOIN " . BB_POSTS . " p1 ON(t.topic_first_post_id = p1.post_id)
-            LEFT JOIN " . BB_POSTS . " p2 ON(t.topic_last_post_id = p2.post_id)
-            LEFT JOIN " . BB_POSTS_HTML . " pt ON(p1.post_id = pt.post_id)
-            LEFT JOIN " . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)
+            FROM ' . BB_TOPICS . ' t
+            LEFT JOIN ' . BB_USERS . ' u1 ON(t.topic_poster = u1.user_id)
+            LEFT JOIN ' . BB_POSTS . ' p1 ON(t.topic_first_post_id = p1.post_id)
+            LEFT JOIN ' . BB_POSTS . ' p2 ON(t.topic_last_post_id = p2.post_id)
+            LEFT JOIN ' . BB_POSTS_HTML . ' pt ON(p1.post_id = pt.post_id)
+            LEFT JOIN ' . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)
             WHERE t.topic_poster = {$this->userId}
             ORDER BY t.topic_last_post_time DESC
             LIMIT 50

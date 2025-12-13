@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,9 +7,9 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!empty($setmodules)) {
     $module['MODS']['MASS_EMAIL'] = basename(__FILE__);
+
     return;
 }
 
@@ -46,7 +47,7 @@ if (request()->has('submit')) {
             $user_list = DB()->fetch_rowset('
 				SELECT u.username, u.user_email, u.user_lang
 				FROM ' . BB_USERS . ' u, ' . BB_USER_GROUP . " ug
-				WHERE ug.group_id = $group_id
+				WHERE ug.group_id = {$group_id}
 					AND ug.user_pending = 0
 					AND u.user_id = ug.user_id
 					AND u.user_active = 1
@@ -99,7 +100,7 @@ template()->assign_vars([
     'ERROR_MESSAGE' => $errors ? implode('<br />', array_unique($errors)) : '',
 
     'S_USER_ACTION' => 'admin_mass_email.php',
-    'S_GROUP_SELECT' => build_select(POST_GROUPS_URL, $groups)
+    'S_GROUP_SELECT' => build_select(POST_GROUPS_URL, $groups),
 ]);
 
 print_page('admin_mass_email.tpl', 'admin');

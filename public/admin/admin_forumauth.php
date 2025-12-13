@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,9 +7,9 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!empty($setmodules)) {
     $module['FORUMS']['PERMISSIONS'] = basename(__FILE__);
+
     return;
 }
 
@@ -60,7 +61,7 @@ $forum_auth_const = [AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN];
 
 if (request()->has(POST_FORUM_URL)) {
     $forum_id = request()->getInt(POST_FORUM_URL);
-    $forum_sql = "WHERE forum_id = $forum_id";
+    $forum_sql = "WHERE forum_id = {$forum_id}";
 } else {
     unset($forum_id);
     $forum_sql = '';
@@ -94,7 +95,7 @@ if ($submit) {
             }
 
             if (is_array($simple_ary)) {
-                $sql = 'UPDATE ' . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
+                $sql = 'UPDATE ' . BB_FORUMS . " SET {$sql} WHERE forum_id = {$forum_id}";
             }
         } else {
             for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
@@ -109,14 +110,14 @@ if ($submit) {
                 $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $value;
             }
 
-            $sql = 'UPDATE ' . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
+            $sql = 'UPDATE ' . BB_FORUMS . " SET {$sql} WHERE forum_id = {$forum_id}";
         }
 
         if ($sql != '') {
             $query = $sql;
             if (!empty(request()->post->get('apply_to_subforums'))) {
                 // Apply to subforums if checkbox is checked
-                $query .= " OR forum_parent = $forum_id";
+                $query .= " OR forum_parent = {$forum_id}";
             }
             if (!DB()->sql_query($query)) {
                 bb_die('Could not update auth table');
@@ -129,13 +130,13 @@ if ($submit) {
 
     forum_tree(refresh: true);
     CACHE('bb_cache')->rm();
-    bb_die(__('FORUM_AUTH_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMAUTH'), '<a href="' . 'admin_forumauth.php' . '">', '</a>'));
+    bb_die(__('FORUM_AUTH_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMAUTH'), '<a href="admin_forumauth.php">', '</a>'));
 }
 
 /**
  * Get required information
  */
-$forum_rows = DB()->fetch_rowset('SELECT * FROM ' . BB_FORUMS . " $forum_sql");
+$forum_rows = DB()->fetch_rowset('SELECT * FROM ' . BB_FORUMS . " {$forum_sql}");
 
 if (empty($forum_id)) {
     // Output the selection table if no forum id was specified
@@ -213,7 +214,7 @@ if (empty($forum_id)) {
     }
 
     $adv_mode = empty($adv) ? '1' : '0';
-    $switch_mode = "admin_forumauth.php?" . POST_FORUM_URL . "=$forum_id&amp;adv=$adv_mode";
+    $switch_mode = 'admin_forumauth.php?' . POST_FORUM_URL . "={$forum_id}&amp;adv={$adv_mode}";
     $switch_mode_text = empty($adv) ? __('ADVANCED_MODE') : __('SIMPLE_MODE');
     $u_switch_mode = '<a href="' . $switch_mode . '">' . $switch_mode_text . '</a>';
 

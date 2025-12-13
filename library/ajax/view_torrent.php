@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -6,7 +7,6 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
 if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
@@ -16,11 +16,11 @@ if (!isset($this->request['topic_id'])) {
 }
 $topic_id = (int)$this->request['topic_id'];
 
-$topic = DB()->fetch_row("
+$topic = DB()->fetch_row('
     SELECT
         t.topic_id, t.forum_id, t.attach_ext_id
-    FROM " . BB_TOPICS . " t
-    WHERE t.topic_id = $topic_id LIMIT 1");
+    FROM ' . BB_TOPICS . " t
+    WHERE t.topic_id = {$topic_id} LIMIT 1");
 if (!$topic || $topic['attach_ext_id'] != TORRENT_EXT_ID) {
     $this->ajax_die(__('ERROR_BUILD'));
 }
@@ -32,15 +32,16 @@ if (!$is_auth['auth_view']) {
 }
 
 $file_contents = null;
-$filename = \TorrentPier\Attachment::getPath($topic_id);
+$filename = TorrentPier\Attachment::getPath($topic_id);
 if (!is_file($filename) || !$file_contents = file_get_contents($filename)) {
     $this->ajax_die(__('ERROR_NO_ATTACHMENT') . "\n\n" . htmlCHR($filename));
 }
 
 try {
-    $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
-} catch (\Exception $e) {
-    $this->response['html'] = htmlCHR(__('TORFILE_INVALID') . ": " . $e->getMessage());
+    $tor = Arokettu\Bencode\Bencode::decode($file_contents, dictType: Arokettu\Bencode\Bencode\Collection::ARRAY);
+} catch (Exception $e) {
+    $this->response['html'] = htmlCHR(__('TORFILE_INVALID') . ': ' . $e->getMessage());
+
     return;
 }
 

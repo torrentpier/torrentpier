@@ -22,6 +22,7 @@ use Tracy\Debugger;
 class TracyBarManager
 {
     private static ?self $instance = null;
+
     public private(set) bool $initialized = false;
 
     /** @var float|null Captured execution time from page_footer */
@@ -32,6 +33,13 @@ class TracyBarManager
 
     private function __construct() {}
 
+    private function __clone() {}
+
+    public function __wakeup(): void
+    {
+        throw new LogicException('Cannot unserialize a singleton.');
+    }
+
     /**
      * Get a singleton instance
      */
@@ -40,6 +48,7 @@ class TracyBarManager
         if (self::$instance === null) {
             self::$instance = new self();
         }
+
         return self::$instance;
     }
 
@@ -56,8 +65,8 @@ class TracyBarManager
         }
 
         // Store current error handlers (set by Whoops)
-        $errorHandler = set_error_handler(fn() => false);
-        $exceptionHandler = set_exception_handler(fn() => null);
+        $errorHandler = set_error_handler(fn () => false);
+        $exceptionHandler = set_exception_handler(fn () => null);
         restore_error_handler();
         restore_exception_handler();
 
@@ -91,11 +100,40 @@ class TracyBarManager
     public function isEnabled(): bool
     {
         // Only enable for debug users in web context, excluding admin left pane
-        return defined('DBG_USER')
+        return \defined('DBG_USER')
             && DBG_USER
             && php_sapi_name() !== 'cli'
             && request()->query->get('pane') !== 'left'
             && config()->get('debug.enable');
+    }
+
+    /**
+     * Capture performance data at the correct measurement point (page_footer)
+     * This ensures Tracy shows the same timing as legacy debug bar
+     */
+    public function capturePerformanceData(float $execTime, float $sqlTime): void
+    {
+        $this->capturedExecTime = $execTime;
+        $this->capturedSqlTime = $sqlTime;
+    }
+
+    /**
+     * Check if SQL/debug data collection is allowed
+     * Used by DatabaseDebugger, CacheManager, DatastoreManager
+     */
+    public function isDebugAllowed(): bool
+    {
+        return \defined('SQL_DEBUG') && SQL_DEBUG && \defined('DBG_USER') && DBG_USER;
+    }
+
+    /**
+     * Format SQL query for display (compact whitespace)
+     */
+    public function formatQuery(string $sql, bool $escapeHtml = false): string
+    {
+        $sql = str_compact($sql);
+
+        return $escapeHtml ? htmlCHR($sql, true) : $sql;
     }
 
     /**
@@ -125,40 +163,5 @@ class TracyBarManager
         if ($panelConfig['template'] ?? true) {
             $bar->addPanel(new Panels\TemplatePanel(), 'tp-template');
         }
-    }
-
-    /**
-     * Capture performance data at the correct measurement point (page_footer)
-     * This ensures Tracy shows the same timing as legacy debug bar
-     */
-    public function capturePerformanceData(float $execTime, float $sqlTime): void
-    {
-        $this->capturedExecTime = $execTime;
-        $this->capturedSqlTime = $sqlTime;
-    }
-
-    /**
-     * Check if SQL/debug data collection is allowed
-     * Used by DatabaseDebugger, CacheManager, DatastoreManager
-     */
-    public function isDebugAllowed(): bool
-    {
-        return defined('SQL_DEBUG') && SQL_DEBUG && defined('DBG_USER') && DBG_USER;
-    }
-
-    /**
-     * Format SQL query for display (compact whitespace)
-     */
-    public function formatQuery(string $sql, bool $escapeHtml = false): string
-    {
-        $sql = str_compact($sql);
-        return $escapeHtml ? htmlCHR($sql, true) : $sql;
-    }
-
-    private function __clone() {}
-
-    public function __wakeup(): void
-    {
-        throw new LogicException('Cannot unserialize a singleton.');
     }
 }

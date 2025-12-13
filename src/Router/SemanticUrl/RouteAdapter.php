@@ -35,16 +35,8 @@ class RouteAdapter
      */
     public function __construct(
         private readonly string $type,
-        private readonly array  $options = []
+        private readonly array  $options = [],
     ) {}
-
-    /**
-     * Get the action/mode for this route
-     */
-    private function getAction(): ?string
-    {
-        return $this->options['action'] ?? null;
-    }
 
     /**
      * Handle the semantic URL request
@@ -65,8 +57,8 @@ class RouteAdapter
 
         // If no slug.id format, try bare ID
         if ($parsed === null) {
-            if (ctype_digit($params) && (int) $params > 0) {
-                $id = (int) $params;
+            if (ctype_digit($params) && (int)$params > 0) {
+                $id = (int)$params;
                 // Try to redirect to canonical URL if the entity exists
                 $title = EntityConfig::fetchTitle($this->type, $id);
                 if ($title !== null) {
@@ -84,7 +76,7 @@ class RouteAdapter
         $args['id'] = $parsed['id'];
 
         // Set the ID via Request singleton
-        request()->query->set($config['param'], (string) $parsed['id']);
+        request()->query->set($config['param'], (string)$parsed['id']);
 
         // Set any extra parameters (e.g., mode=viewprofile for profile)
         // An action option can override the default mode (e.g., action=email for /profile/slug.id/email/)
@@ -110,7 +102,7 @@ class RouteAdapter
         $adapter = new LegacyAdapter(
             $controllerPath,
             $config['script'],
-            $this->options
+            $this->options,
         );
 
         return $adapter($request, $args);
@@ -125,6 +117,14 @@ class RouteAdapter
     }
 
     /**
+     * Get the action/mode for this route
+     */
+    private function getAction(): ?string
+    {
+        return $this->options['action'] ?? null;
+    }
+
+    /**
      * Redirect to canonical URL with slug
      * e.g., /threads/5/ → /threads/some-title.5/
      */
@@ -133,7 +133,7 @@ class RouteAdapter
         $canonicalUrl = EntityConfig::buildUrl($this->type, $id, $title);
         $targetUrl = make_url($canonicalUrl);
 
-        $requestUri = (string) $request->getUri();
+        $requestUri = (string)$request->getUri();
         RedirectLogger::canonical($requestUri, $targetUrl, "RouteAdapter::{$this->type}");
 
         return $this->permanentRedirect($targetUrl);
