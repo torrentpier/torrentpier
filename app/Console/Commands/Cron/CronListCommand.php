@@ -15,7 +15,9 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
+use TorrentPier\Application;
 use TorrentPier\Console\Commands\Command;
+use TorrentPier\Database\Database;
 use TorrentPier\Helpers\CronHelper;
 
 /**
@@ -27,13 +29,20 @@ use TorrentPier\Helpers\CronHelper;
 )]
 class CronListCommand extends Command
 {
+    public function __construct(
+        private readonly Database $database,
+        ?Application              $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Cron Jobs');
 
         // Get cron jobs from a database
         try {
-            $jobs = DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . ' ORDER BY cron_active DESC, run_order');
+            $jobs = $this->database->fetch_rowset('SELECT * FROM ' . BB_CRON . ' ORDER BY cron_active DESC, run_order');
 
             if (empty($jobs)) {
                 $this->warning('No cron jobs found in the database.');

@@ -14,6 +14,8 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Application;
+use TorrentPier\Database\Database;
 
 /**
  * Rebuild the search index
@@ -36,6 +38,13 @@ class SearchCommand extends AbstractRebuildCommand
      * Last processed post ID (for resume capability)
      */
     private int $lastPostId = 0;
+
+    public function __construct(
+        private readonly Database $database,
+        ?Application              $app = null,
+    ) {
+        parent::__construct($app);
+    }
 
     protected function configure(): void
     {
@@ -203,7 +212,7 @@ class SearchCommand extends AbstractRebuildCommand
             ' . ($startFrom > 0 ? "AND pt.post_id >= {$startFrom}" : '') . '
         ';
 
-        $row = DB()->fetch_row($sql);
+        $row = $this->database->fetch_row($sql);
 
         return (int)($row['cnt'] ?? 0);
     }
@@ -227,7 +236,7 @@ class SearchCommand extends AbstractRebuildCommand
             LIMIT {$limit}
         ";
 
-        return DB()->fetch_rowset($sql);
+        return $this->database->fetch_rowset($sql);
     }
 
     /**
@@ -257,7 +266,7 @@ class SearchCommand extends AbstractRebuildCommand
 
         // Bulk insert
         if (!empty($wordsSql)) {
-            DB()->query('REPLACE INTO ' . BB_POSTS_SEARCH . DB()->build_array('MULTI_INSERT', $wordsSql));
+            $this->database->query('REPLACE INTO ' . BB_POSTS_SEARCH . $this->database->build_array('MULTI_INSERT', $wordsSql));
         }
     }
 
@@ -266,7 +275,7 @@ class SearchCommand extends AbstractRebuildCommand
      */
     private function clearSearchIndex(): void
     {
-        DB()->query('TRUNCATE TABLE ' . BB_POSTS_SEARCH);
+        $this->database->query('TRUNCATE TABLE ' . BB_POSTS_SEARCH);
     }
 
     /**
@@ -277,10 +286,10 @@ class SearchCommand extends AbstractRebuildCommand
         $table = BB_POSTS_SEARCH;
 
         $this->line("  Analyzing {$table}...");
-        DB()->query("ANALYZE TABLE {$table}");
+        $this->database->query("ANALYZE TABLE {$table}");
 
         $this->line("  Optimizing {$table}...");
-        DB()->query("OPTIMIZE TABLE {$table}");
+        $this->database->query("OPTIMIZE TABLE {$table}");
 
         $this->info('Tables optimized.');
     }

@@ -14,8 +14,10 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
+use TorrentPier\Application;
 use TorrentPier\Console\Commands\Command;
 use TorrentPier\Console\Helpers\FileSystemHelper;
+use TorrentPier\Database\Database;
 use TorrentPier\Sitemap;
 
 /**
@@ -29,6 +31,13 @@ use TorrentPier\Sitemap;
 )]
 class SitemapCommand extends Command
 {
+    public function __construct(
+        private readonly Database $database,
+        ?Application              $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Rebuild Sitemap');
@@ -124,7 +133,7 @@ class SitemapCommand extends Command
      */
     private function getForumCount(): int
     {
-        return DB()->table(BB_FORUMS)->count('*');
+        return $this->database->table(BB_FORUMS)->count('*');
     }
 
     /**
@@ -132,7 +141,7 @@ class SitemapCommand extends Command
      */
     private function getTopicCount(): int
     {
-        return DB()->table(BB_TOPICS)
+        return $this->database->table(BB_TOPICS)
             ->where('topic_status != ?', TOPIC_MOVED)
             ->count('*');
     }

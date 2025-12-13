@@ -15,6 +15,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
+use TorrentPier\Application;
+use TorrentPier\Cache\DatastoreManager;
 use TorrentPier\Console\Commands\Command;
 use TorrentPier\Console\Helpers\FileSystemHelper;
 
@@ -29,6 +31,14 @@ use TorrentPier\Console\Helpers\FileSystemHelper;
 )]
 class DatastoreCommand extends Command
 {
+    public function __construct(
+        private readonly DatastoreManager $datastore,
+        ?Application                      $app = null,
+    )
+    {
+        parent::__construct($app);
+    }
+
     /**
      * Available datastore items with descriptions
      */
@@ -150,7 +160,7 @@ class DatastoreCommand extends Command
             $progressBar->setMessage("Rebuilding: {$key}");
 
             try {
-                datastore()->update($key);
+                $this->datastore->update($key);
                 $success++;
             } catch (Throwable $e) {
                 $errors[$key] = $e->getMessage();

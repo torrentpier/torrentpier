@@ -12,50 +12,29 @@ namespace TorrentPier\Console\Commands\System;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Throwable;
 use TorrentPier\Console\Commands\Command;
-use TorrentPier\Console\Helpers\FileSystemHelper;
 
 /**
  * Optimize the application for production
  */
 #[AsCommand(
     name: 'optimize',
-    description: 'Optimize the application (clear caches, optimize autoloader)',
+    description: 'Optimize the application (autoloader, OPCache)',
 )]
 class OptimizeCommand extends Command
 {
-    protected function configure(): void
-    {
-        $this
-            ->addOption('no-cache', null, InputOption::VALUE_NONE, 'Skip cache clearing')
-            ->addOption('no-autoload', null, InputOption::VALUE_NONE, 'Skip autoloader optimization');
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Optimize Application');
 
-        $skipCache = $input->getOption('no-cache');
-        $skipAutoload = $input->getOption('no-autoload');
-
         $steps = [];
 
-        // Step 1: Clear cache
-        if (!$skipCache) {
-            $this->section('Clearing Cache');
-            $steps['cache'] = $this->clearCache();
-        }
+        // Step 1: Optimize autoloader
+        $this->section('Optimizing Autoloader');
+        $steps['autoload'] = $this->optimizeAutoloader();
 
-        // Step 2: Optimize autoloader
-        if (!$skipAutoload) {
-            $this->section('Optimizing Autoloader');
-            $steps['autoload'] = $this->optimizeAutoloader();
-        }
-
-        // Step 3: Clear OPCache if available
+        // Step 2: Clear OPCache if available
         $this->section('OPCache');
         $steps['opcache'] = $this->clearOpcache();
 
@@ -81,41 +60,6 @@ class OptimizeCommand extends Command
         }
 
         return $allSuccess ? self::SUCCESS : self::FAILURE;
-    }
-
-    /**
-     * Clear application cache
-     */
-    private function clearCache(): bool
-    {
-        $cacheDir = CACHE_DIR;
-
-        if (!is_dir($cacheDir)) {
-            $this->line('  <comment>-</comment> Cache directory not found');
-
-            return true;
-        }
-
-        try {
-            $count = FileSystemHelper::clearDirectoryWithCount($cacheDir);
-            $this->line("  <info>✓</info> Cleared {$count} cache file(s)");
-
-            // Clear runtime cache
-            if (\function_exists('CACHE')) {
-                try {
-                    CACHE('bb_cache')->clean();
-                    $this->line('  <info>✓</info> Cleared runtime cache');
-                } catch (Throwable) {
-                    // Ignore
-                }
-            }
-
-            return true;
-        } catch (Throwable $e) {
-            $this->line('  <error>✗</error> Failed: ' . $e->getMessage());
-
-            return false;
-        }
     }
 
     /**

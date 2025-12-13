@@ -14,8 +14,10 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Application;
 use TorrentPier\Console\Commands\Command;
 use TorrentPier\Console\Helpers\FileSystemHelper;
+use TorrentPier\Database\Database;
 
 /**
  * Optimize database tables
@@ -29,6 +31,13 @@ use TorrentPier\Console\Helpers\FileSystemHelper;
 )]
 class OptimizeCommand extends Command
 {
+    public function __construct(
+        private readonly Database $database,
+        ?Application              $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     protected function configure(): void
     {
         $this
@@ -144,13 +153,13 @@ class OptimizeCommand extends Command
             $progressBar->setMessage("Processing: {$table}");
 
             // ANALYZE
-            $analyzeResult = DB()->fetch_row("ANALYZE TABLE `{$table}`");
+            $analyzeResult = $this->database->fetch_row("ANALYZE TABLE `{$table}`");
             $analyzeStatus = $analyzeResult['Msg_type'] ?? 'unknown';
 
             // OPTIMIZE (unless analyze-only)
             $optimizeStatus = null;
             if (!$analyzeOnly) {
-                $optimizeResult = DB()->fetch_row("OPTIMIZE TABLE `{$table}`");
+                $optimizeResult = $this->database->fetch_row("OPTIMIZE TABLE `{$table}`");
                 $optimizeStatus = $optimizeResult['Msg_type'] ?? 'unknown';
             }
 
@@ -225,7 +234,7 @@ class OptimizeCommand extends Command
         $prefix = 'bb_';
         $tables = [];
 
-        $result = DB()->fetch_rowset('SHOW TABLES');
+        $result = $this->database->fetch_rowset('SHOW TABLES');
         foreach ($result as $row) {
             $table = array_values($row)[0];
             if (str_starts_with($table, $prefix)) {
@@ -242,10 +251,10 @@ class OptimizeCommand extends Command
     private function getTableSizes(array $tables): array
     {
         $sizes = [];
-        $database = DB()->selected_db;
+        $database = $this->database->selected_db;
 
         foreach ($tables as $table) {
-            $row = DB()->fetch_row("
+            $row = $this->database->fetch_row("
                 SELECT DATA_LENGTH + INDEX_LENGTH as size
                 FROM information_schema.TABLES
                 WHERE TABLE_SCHEMA = '{$database}' AND TABLE_NAME = '{$table}'

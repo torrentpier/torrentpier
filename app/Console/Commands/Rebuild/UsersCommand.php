@@ -14,6 +14,8 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Application;
+use TorrentPier\Database\Database;
 use TorrentPier\Legacy\Admin\Common;
 
 /**
@@ -27,6 +29,13 @@ use TorrentPier\Legacy\Admin\Common;
 )]
 class UsersCommand extends AbstractRebuildCommand
 {
+    public function __construct(
+        private readonly Database $database,
+        ?Application              $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     protected function configure(): void
     {
         parent::configure();
@@ -177,7 +186,7 @@ class UsersCommand extends AbstractRebuildCommand
      */
     private function getTotalUsers(): int
     {
-        return DB()->table(BB_USERS)
+        return $this->database->table(BB_USERS)
             ->where('user_id != ?', GUEST_UID)
             ->count('*');
     }
@@ -187,7 +196,7 @@ class UsersCommand extends AbstractRebuildCommand
      */
     private function getTotalPosts(): int
     {
-        return DB()->table(BB_POSTS)->count('*');
+        return $this->database->table(BB_POSTS)->count('*');
     }
 
     /**
@@ -195,7 +204,7 @@ class UsersCommand extends AbstractRebuildCommand
      */
     private function getUsersByIds(array $ids): array
     {
-        return DB()->table(BB_USERS)
+        return $this->database->table(BB_USERS)
             ->select('user_id, username, user_posts')
             ->where('user_id', $ids)
             ->order('user_id')
