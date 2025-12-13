@@ -3,13 +3,8 @@
 use TorrentPier\Database\Database;
 
 describe('Database Affected Rows Fix', function () {
-    beforeEach(function () {
-        // Reset singleton instances
-        Database::destroyInstances();
-    });
-
     afterEach(function () {
-        Database::destroyInstances();
+        Mockery::close();
     });
 
     it('has affected_rows method that returns integer', function () {

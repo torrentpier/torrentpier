@@ -5,20 +5,19 @@ use TorrentPier\Database\DatabaseDebugger;
 
 describe('DatabaseDebugger Class', function () {
     beforeEach(function () {
-        Database::destroyInstances();
         resetGlobalState();
         mockTracyFunction();
         mockBbLogFunction();
         mockHideBbPathFunction();
 
         // Set up test database instance
-        $this->db = Database::getInstance(getTestDatabaseConfig());
+        $this->db = new Database(array_values(getTestDatabaseConfig()));
         $this->db->connection = mockConnection();
         $this->debugger = $this->db->debugger;
     });
 
     afterEach(function () {
-        cleanupSingletons();
+        Mockery::close();
     });
 
     describe('Initialization', function () {

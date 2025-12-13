@@ -392,11 +392,6 @@ function assertDebugEntryValid(array $entry): void
  */
 function cleanupSingletons(): void
 {
-    // Reset database instances
-    if (class_exists(Database::class) && method_exists(Database::class, 'destroyInstances')) {
-        Database::destroyInstances();
-    }
-
     // Reset cache instances
     if (class_exists(UnifiedCacheSystem::class) && method_exists(UnifiedCacheSystem::class, 'destroyInstance')) {
         UnifiedCacheSystem::destroyInstance();
