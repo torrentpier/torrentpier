@@ -243,10 +243,11 @@ function tracy(): TorrentPier\Tracy\TracyBarManager
 
 /**
  * Get the Language instance
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function lang(): TorrentPier\Language
 {
-    return TorrentPier\Language::getInstance();
+    return app(TorrentPier\Language::class);
 }
 
 /**
@@ -254,11 +255,12 @@ function lang(): TorrentPier\Language
  *
  * @param string $key Language key, supports dot notation (e.g., 'DATETIME.TODAY')
  * @param mixed $default Default value if key doesn't exist
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  * @return mixed Language string or default value
  */
 function __(string $key, mixed $default = null): mixed
 {
-    return TorrentPier\Language::getInstance()->get($key, $default);
+    return app(TorrentPier\Language::class)->get($key, $default);
 }
 
 /**
@@ -266,10 +268,11 @@ function __(string $key, mixed $default = null): mixed
  *
  * @param string $key Language key, supports dot notation
  * @param mixed $default Default value if key doesn't exist
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function _e(string $key, mixed $default = null): void
 {
-    echo TorrentPier\Language::getInstance()->get($key, $default);
+    echo app(TorrentPier\Language::class)->get($key, $default);
 }
 
 /**
@@ -378,28 +381,20 @@ function userdata(?string $key = null): mixed
 
 /**
  * LogAction singleton helper
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function log_action(): TorrentPier\Legacy\LogAction
 {
-    static $instance = null;
-    if ($instance === null) {
-        $instance = new TorrentPier\Legacy\LogAction;
-    }
-
-    return $instance;
+    return app(TorrentPier\Legacy\LogAction::class);
 }
 
 /**
  * Html helper singleton
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function html(): TorrentPier\Legacy\Common\Html
 {
-    static $instance = null;
-    if ($instance === null) {
-        $instance = new TorrentPier\Legacy\Common\Html;
-    }
-
-    return $instance;
+    return app(TorrentPier\Legacy\Common\Html::class);
 }
 
 /**
@@ -420,41 +415,29 @@ function simple_header(?bool $set = null): bool
 
 /**
  * BBCode parser singleton
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function bbcode(): TorrentPier\Legacy\BBCode
 {
-    static $instance = null;
-    if ($instance === null) {
-        $instance = new TorrentPier\Legacy\BBCode;
-    }
-
-    return $instance;
+    return app(TorrentPier\Legacy\BBCode::class);
 }
 
 /**
  * Ajax handler singleton
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function ajax(): TorrentPier\Ajax
 {
-    static $instance = null;
-    if ($instance === null) {
-        $instance = new TorrentPier\Ajax;
-    }
-
-    return $instance;
+    return app(TorrentPier\Ajax::class);
 }
 
 /**
  * Manticore search singleton
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function manticore(): ?TorrentPier\ManticoreSearch
 {
-    static $instance = null;
-    if ($instance === null) {
-        $instance = new TorrentPier\ManticoreSearch;
-    }
-
-    return $instance;
+    return app(TorrentPier\ManticoreSearch::class);
 }
 
 /**
@@ -541,11 +524,12 @@ function &tracking_forums(): array
  * Get forum tree data (categories and forums hierarchy)
  *
  * @param bool $refresh Refresh cached data before returning
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  * @return array Forum tree data
  */
 function forum_tree(bool $refresh = false): array
 {
-    $instance = TorrentPier\Forum\ForumTree::getInstance();
+    $instance = app(TorrentPier\Forum\ForumTree::class);
     if ($refresh) {
         $instance->refresh();
     }

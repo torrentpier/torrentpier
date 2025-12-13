@@ -1,27 +1,29 @@
 <?php
 
+/**
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
+
 declare(strict_types=1);
 
 namespace TorrentPier\Forum;
 
+use TorrentPier\Cache\DatastoreManager;
+
 /**
- * Forum tree singleton - provides cached access to forum hierarchy data
+ * Forum tree - provides cached access to forum hierarchy data
  */
 class ForumTree
 {
-    private static ?self $instance = null;
     private ?array $data = null;
 
-    private function __construct() {}
-
-    public static function getInstance(): self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
+    public function __construct(
+        private readonly DatastoreManager $datastore,
+    ) {}
 
     /**
      * Get forum tree data from datastore
@@ -29,10 +31,10 @@ class ForumTree
     public function get(): array
     {
         if ($this->data === null) {
-            $data = datastore()->get('cat_forums');
+            $data = $this->datastore->get('cat_forums');
             if ($data === false) {
-                datastore()->update('cat_forums');
-                $data = datastore()->get('cat_forums');
+                $this->datastore->update('cat_forums');
+                $data = $this->datastore->get('cat_forums');
             }
             $this->data = $data ?: [];
         }
@@ -45,7 +47,7 @@ class ForumTree
      */
     public function refresh(): void
     {
-        datastore()->update('cat_forums');
+        $this->datastore->update('cat_forums');
         $this->data = null;
     }
 }

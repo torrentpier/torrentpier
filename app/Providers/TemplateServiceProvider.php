@@ -13,14 +13,13 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use ReflectionException;
-use TorrentPier\Language;
 use TorrentPier\ServiceProvider;
 use TorrentPier\Template\Template;
 
 /**
  * Template Service Provider
  *
- * Registers template and language services.
+ * Registers template rendering services.
  */
 class TemplateServiceProvider extends ServiceProvider
 {
@@ -30,11 +29,6 @@ class TemplateServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Language service singleton
-        $this->app->singleton(Language::class, function () {
-            return Language::getInstance();
-        });
-
         // Template service - uses keyed instances internally,
         // so we bind a closure that delegates to the singleton pattern
         $this->app->bind(Template::class, function ($app, array $params) {
@@ -49,7 +43,6 @@ class TemplateServiceProvider extends ServiceProvider
         });
 
         // Register aliases
-        $this->app->alias(Language::class, 'lang');
         $this->app->alias('template.default', 'template');
     }
 
@@ -61,9 +54,7 @@ class TemplateServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [
-            Language::class,
             Template::class,
-            'lang',
             'template',
             'template.default',
         ];

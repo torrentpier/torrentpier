@@ -44,8 +44,11 @@ return [
     // Template and view rendering
     App\Providers\TemplateServiceProvider::class,
 
-    // Legacy services (BBCode, Ajax, etc.)
+    // Legacy services (BBCode, Html, LogAction, User)
     App\Providers\LegacyServiceProvider::class,
+
+    // Search services (Manticore)
+    App\Providers\SearchServiceProvider::class,
 
     /*
     |--------------------------------------------------------------------------

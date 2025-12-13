@@ -10,17 +10,14 @@
 
 namespace TorrentPier;
 
-use LogicException;
-
 /**
  * Language management class
  *
- * Singleton class that manages language loading and provides access to language variables.
+ * Manages language loading and provides access to language variables.
  * Use lang() helper or __() function to access language strings.
  */
 class Language
 {
-    private static ?Language $instance = null;
     public private(set) string $currentLanguage = '';
     private array $userLanguage = [];
     private array $sourceLanguage = [];
@@ -28,10 +25,13 @@ class Language
     private string $libraryLangDir;
     private string $vendorLangDir;
 
-    private function __construct()
-    {
-        $this->libraryLangDir = BB_PATH . '/library/language';
-        $this->vendorLangDir = BB_PATH . '/vendor/torrentpier/translations/languages';
+    public function __construct(
+        private readonly Config $config,
+        ?string $libraryLangDir = null,
+        ?string $vendorLangDir = null,
+    ) {
+        $this->libraryLangDir = $libraryLangDir ?? BB_PATH . '/library/language';
+        $this->vendorLangDir = $vendorLangDir ?? BB_PATH . '/vendor/torrentpier/translations/languages';
     }
 
     /**
@@ -59,47 +59,6 @@ class Language
     }
 
     /**
-     * Prevent cloning of the singleton instance
-     */
-    private function __clone() {}
-
-    /**
-     * Prevent serialization of the singleton instance
-     */
-    public function __serialize(): array
-    {
-        throw new LogicException('Cannot serialize a singleton.');
-    }
-
-    /**
-     * Prevent unserialization of the singleton instance
-     */
-    public function __unserialize(array $data): void
-    {
-        throw new LogicException('Cannot unserialize a singleton.');
-    }
-
-    /**
-     * Get the singleton instance of Language
-     */
-    public static function getInstance(): Language
-    {
-        if (self::$instance === null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Initialize the language system (for compatibility)
-     */
-    public static function init(): Language
-    {
-        return self::getInstance();
-    }
-
-    /**
      * Initialize language loading based on user preferences
      * Maintains compatibility with existing User.php language initialization
      */
@@ -111,7 +70,7 @@ class Language
 
         // Determine language to use
         if (empty($userLang)) {
-            $userLang = config()->get('default_lang', 'en');
+            $userLang = $this->config->get('default_lang', 'en');
         }
 
         $this->currentLanguage = $userLang;
@@ -123,7 +82,7 @@ class Language
         $this->loadUserLanguage($userLang);
 
         // Set locale
-        $locale = config()->get("lang.{$userLang}.locale", 'en_US.UTF-8');
+        $locale = $this->config->get("lang.{$userLang}.locale", 'en_US.UTF-8');
         setlocale(LC_ALL, $locale);
 
         $this->initialized = true;
@@ -187,7 +146,7 @@ class Language
      */
     public function getAvailableLanguages(): array
     {
-        return config()->get('lang', []);
+        return $this->config->get('lang', []);
     }
 
     /**
@@ -238,7 +197,7 @@ class Language
             $code = $this->currentLanguage;
         }
 
-        return config()->get("lang.{$code}.name", $code);
+        return $this->config->get("lang.{$code}.name", $code);
     }
 
     /**
@@ -250,7 +209,7 @@ class Language
             $code = $this->currentLanguage;
         }
 
-        return config()->get("lang.{$code}.locale", 'en_US.UTF-8');
+        return $this->config->get("lang.{$code}.locale", 'en_US.UTF-8');
     }
 
     /**
@@ -296,7 +255,7 @@ class Language
             $this->userLanguage = $lang;
         } else {
             // Fall back to default language if user language doesn't exist
-            $defaultFile = $this->findLangFile(config()->get('default_lang', 'source'));
+            $defaultFile = $this->findLangFile($this->config->get('default_lang', 'source'));
             if ($defaultFile) {
                 $lang = [];
                 require $defaultFile;

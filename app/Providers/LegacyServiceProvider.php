@@ -12,19 +12,17 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use TorrentPier\Ajax;
-use TorrentPier\Censor;
 use TorrentPier\Legacy\BBCode;
 use TorrentPier\Legacy\Common\Html;
+use TorrentPier\Legacy\Common\User;
 use TorrentPier\Legacy\LogAction;
-use TorrentPier\ManticoreSearch;
 use TorrentPier\ServiceProvider;
 
 /**
  * Legacy Service Provider
  *
- * Registers legacy services that maintain backward compatibility
- * with older code patterns (BBCode, Ajax, Censor, etc.).
+ * Registers legacy services from TorrentPier\Legacy namespace
+ * that maintain backward compatibility with older code patterns.
  */
 class LegacyServiceProvider extends ServiceProvider
 {
@@ -33,17 +31,9 @@ class LegacyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Censor service for word filtering
-        $this->app->singleton(Censor::class);
-
         // BBCode parser
         $this->app->singleton(BBCode::class, function () {
             return new BBCode;
-        });
-
-        // Ajax handler
-        $this->app->singleton(Ajax::class, function () {
-            return new Ajax;
         });
 
         // HTML utilities
@@ -56,18 +46,16 @@ class LegacyServiceProvider extends ServiceProvider
             return new LogAction;
         });
 
-        // Manticore search (may not be configured)
-        $this->app->singleton(ManticoreSearch::class, function () {
-            return new ManticoreSearch;
+        // User session (legacy)
+        $this->app->singleton(User::class, function () {
+            return User::getInstance();
         });
 
         // Register aliases
-        $this->app->alias(Censor::class, 'censor');
         $this->app->alias(BBCode::class, 'bbcode');
-        $this->app->alias(Ajax::class, 'ajax');
         $this->app->alias(Html::class, 'html');
         $this->app->alias(LogAction::class, 'log_action');
-        $this->app->alias(ManticoreSearch::class, 'manticore');
+        $this->app->alias(User::class, 'user');
     }
 
     /**
@@ -78,18 +66,14 @@ class LegacyServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [
-            Censor::class,
             BBCode::class,
-            Ajax::class,
             Html::class,
             LogAction::class,
-            ManticoreSearch::class,
-            'censor',
+            User::class,
             'bbcode',
-            'ajax',
             'html',
             'log_action',
-            'manticore',
+            'user',
         ];
     }
 }
