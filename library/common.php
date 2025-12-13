@@ -361,10 +361,11 @@ function datastore(): TorrentPier\Cache\DatastoreManager
 
 /**
  * User singleton helper
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function user(): TorrentPier\Legacy\Common\User
 {
-    return TorrentPier\Legacy\Common\User::getInstance();
+    return app(TorrentPier\Legacy\Common\User::class);
 }
 
 /**

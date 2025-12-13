@@ -11,6 +11,7 @@
 namespace TorrentPier\Legacy\Common;
 
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use RuntimeException;
 use TorrentPier\Sessions;
 
@@ -21,26 +22,17 @@ use TorrentPier\Sessions;
 class User
 {
     /**
-     * Singleton instance
-     */
-    private static ?User $instance = null;
-
-    /**
      * Config
-     *
-     * @var array
      */
-    public $cfg = [
+    public array $cfg = [
         'req_login' => false,    // requires user to be logged in
         'req_session_admin' => false,    // requires active admin session (for moderation or admin actions)
     ];
 
     /**
      * PHP-JS exchangeable options (JSON'ized as {USER_OPTIONS_JS} in TPL)
-     *
-     * @var array
      */
-    public $opt_js = [
+    public array $opt_js = [
         'only_new' => 0,     // show ony new posts or topics
         'h_from' => 0,     // hide from
         'h_av' => 0,     // hide avatar
@@ -58,10 +50,8 @@ class User
 
     /**
      * Defaults options for guests
-     *
-     * @var array
      */
-    public $opt_js_guest = [
+    public array $opt_js_guest = [
         'h_av' => 1,     // hide avatar
         'h_rnk_i' => 1,     // hide rank images
         'h_sig' => 1,     // hide signatures
@@ -69,10 +59,8 @@ class User
 
     /**
      * Sessiondata
-     *
-     * @var array
      */
-    public $sessiondata = [
+    public array $sessiondata = [
         'uk' => null,
         'uid' => null,
         'sid' => '',
@@ -80,10 +68,8 @@ class User
 
     /**
      * Old $userdata
-     *
-     * @var array
      */
-    public $data = [];
+    public array $data = [];
 
     /**
      * Shortcuts
@@ -107,21 +93,10 @@ class User
     }
 
     /**
-     * Get singleton instance
-     */
-    public static function getInstance(): User
-    {
-        if (self::$instance === null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    /**
      * Start session (restore existent session or create new)
      *
      *
+     * @throws BindingResolutionException
      * @return array|bool
      */
     public function session_start(array $cfg = [])
@@ -671,6 +646,7 @@ class User
      * Get not auth forums
      *
      *
+     * @throws BindingResolutionException
      * @return string
      */
     public function get_not_auth_forums($auth_type)
