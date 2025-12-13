@@ -22,7 +22,7 @@ use TorrentPier\Router\Router;
  */
 #[AsCommand(
     name: 'route:list',
-    description: 'Display all registered routes'
+    description: 'Display all registered routes',
 )]
 class ListCommand extends Command
 {
@@ -33,13 +33,13 @@ class ListCommand extends Command
                 'method',
                 'm',
                 InputOption::VALUE_REQUIRED,
-                'Filter by HTTP method (GET, POST, etc.)'
+                'Filter by HTTP method (GET, POST, etc.)',
             )
             ->addOption(
                 'path',
                 'p',
                 InputOption::VALUE_REQUIRED,
-                'Filter by path (partial match)'
+                'Filter by path (partial match)',
             );
     }
 
@@ -53,13 +53,14 @@ class ListCommand extends Command
 
         if (!is_file($routesFile)) {
             $this->error('Routes file not found: routes/web.php');
+
             return self::FAILURE;
         }
 
         // Load route definitions if not already loaded
         if (!$router->areRoutesLoaded()) {
             $routeDefinitions = require $routesFile;
-            if (is_callable($routeDefinitions)) {
+            if (\is_callable($routeDefinitions)) {
                 $routeDefinitions($router);
             }
         }
@@ -68,6 +69,7 @@ class ListCommand extends Command
 
         if (empty($routes)) {
             $this->warning('No routes registered.');
+
             return self::SUCCESS;
         }
 
@@ -77,15 +79,16 @@ class ListCommand extends Command
 
         if ($methodFilter !== null) {
             $methodFilter = strtoupper($methodFilter);
-            $routes = array_filter($routes, fn($r) => str_contains($r['methods'], $methodFilter));
+            $routes = array_filter($routes, fn ($r) => str_contains($r['methods'], $methodFilter));
         }
 
         if ($pathFilter !== null) {
-            $routes = array_filter($routes, fn($r) => str_contains($r['path'], $pathFilter));
+            $routes = array_filter($routes, fn ($r) => str_contains($r['path'], $pathFilter));
         }
 
         if (empty($routes)) {
             $this->warning('No routes match the filters.');
+
             return self::SUCCESS;
         }
 
@@ -103,15 +106,15 @@ class ListCommand extends Command
         }
 
         // Sort by path
-        usort($rows, fn($a, $b) => $a[1] <=> $b[1]);
+        usort($rows, fn ($a, $b) => $a[1] <=> $b[1]);
 
         $this->table(
             ['Method', 'Path', 'Handler'],
-            $rows
+            $rows,
         );
 
         $this->line();
-        $this->comment(sprintf('Total: %d route(s)', count($rows)));
+        $this->comment(\sprintf('Total: %d route(s)', \count($rows)));
 
         return self::SUCCESS;
     }
@@ -134,7 +137,7 @@ class ListCommand extends Command
 
         foreach ($parts as $method) {
             $color = $colors[$method] ?? 'white';
-            $formatted[] = "<fg=$color>$method</>";
+            $formatted[] = "<fg={$color}>{$method}</>";
         }
 
         return implode('<fg=gray>|</>', $formatted);
@@ -150,6 +153,7 @@ class ListCommand extends Command
 
         // Shorten common patterns
         $handler = str_replace('Controllers\\', '', $handler);
+
         return str_replace('Router\\', '', $handler);
     }
 }

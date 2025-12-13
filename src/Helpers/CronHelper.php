@@ -28,8 +28,6 @@ class CronHelper
 
     /**
      * Unlock cron (time-dependent)
-     *
-     * @return void
      */
     public static function releaseDeadlock(): void
     {
@@ -43,8 +41,6 @@ class CronHelper
 
     /**
      * Снятие блокировки крона (по файлу)
-     *
-     * @return void
      */
     public static function releaseLockFile(): void
     {
@@ -58,7 +54,6 @@ class CronHelper
      * Создание файла блокировки
      *
      * @param string $lock_file
-     * @return void
      */
     public static function touchLockFile(string $lock_file): void
     {
@@ -67,8 +62,6 @@ class CronHelper
 
     /**
      * Включение форума (при разблокировке крона)
-     *
-     * @return void
      */
     public static function enableBoard(): void
     {
@@ -79,8 +72,6 @@ class CronHelper
 
     /**
      * Отключение форума (при блокировке крона)
-     *
-     * @return void
      */
     public static function disableBoard(): void
     {
@@ -114,12 +105,11 @@ class CronHelper
      * Отслеживание запуска задач
      *
      * @param string $mode
-     * @return void
      */
     public static function trackRunning(string $mode): void
     {
-        if (!defined('START_MARK')) {
-            define('START_MARK', TRIGGERS_DIR . '/cron_started_at_' . date('Y-m-d_H-i-s') . '_by_pid_' . getmypid());
+        if (!\defined('START_MARK')) {
+            \define('START_MARK', TRIGGERS_DIR . '/cron_started_at_' . date('Y-m-d_H-i-s') . '_by_pid_' . getmypid());
         }
 
         switch ($mode) {
@@ -133,7 +123,7 @@ class CronHelper
                 }
                 break;
             default:
-                bb_simple_die("Invalid cron track mode: $mode");
+                bb_simple_die("Invalid cron track mode: {$mode}");
         }
     }
 
@@ -150,7 +140,7 @@ class CronHelper
             return false;
         }
 
-        if (defined('IN_ADMIN') || defined('IN_AJAX')) {
+        if (\defined('IN_ADMIN') || \defined('IN_AJAX')) {
             return false;
         }
 
@@ -191,12 +181,12 @@ class CronHelper
 
             self::trackRunning('start');
 
-            require(CRON_DIR . 'cron_check.php');
+            require CRON_DIR . 'cron_check.php';
 
             self::trackRunning('end');
         }
 
-        if (defined('IN_CRON')) {
+        if (\defined('IN_CRON')) {
             bb_log(date('H:i:s - ') . getmypid() . ' --x- ALL jobs FINISHED *************************************************' . LOG_LF, CRON_LOG_DIR . '/cron_check');
         }
 

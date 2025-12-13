@@ -14,6 +14,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 use TorrentPier\Console\Commands\Command;
 use TorrentPier\Console\Helpers\FileSystemHelper;
 
@@ -22,7 +23,7 @@ use TorrentPier\Console\Helpers\FileSystemHelper;
  */
 #[AsCommand(
     name: 'optimize',
-    description: 'Optimize the application (clear caches, optimize autoloader)'
+    description: 'Optimize the application (clear caches, optimize autoloader)',
 )]
 class OptimizeCommand extends Command
 {
@@ -91,6 +92,7 @@ class OptimizeCommand extends Command
 
         if (!is_dir($cacheDir)) {
             $this->line('  <comment>-</comment> Cache directory not found');
+
             return true;
         }
 
@@ -99,18 +101,19 @@ class OptimizeCommand extends Command
             $this->line("  <info>✓</info> Cleared {$count} cache file(s)");
 
             // Clear runtime cache
-            if (function_exists('CACHE')) {
+            if (\function_exists('CACHE')) {
                 try {
                     CACHE('bb_cache')->clean();
                     $this->line('  <info>✓</info> Cleared runtime cache');
-                } catch (\Throwable) {
+                } catch (Throwable) {
                     // Ignore
                 }
             }
 
             return true;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->line('  <error>✗</error> Failed: ' . $e->getMessage());
+
             return false;
         }
     }
@@ -141,6 +144,7 @@ class OptimizeCommand extends Command
 
         if (!$composerCmd) {
             $this->line('  <comment>-</comment> Composer not found, skipping');
+
             return true;
         }
 
@@ -150,6 +154,7 @@ class OptimizeCommand extends Command
 
         if ($exitCode === 0) {
             $this->line('  <info>✓</info> Autoloader optimized');
+
             return true;
         }
 
@@ -168,22 +173,26 @@ class OptimizeCommand extends Command
      */
     private function clearOpcache(): bool
     {
-        if (!function_exists('opcache_reset')) {
+        if (!\function_exists('opcache_reset')) {
             $this->line('  <comment>-</comment> OPCache not available');
+
             return true;
         }
 
-        if (!ini_get('opcache.enable_cli')) {
+        if (!\ini_get('opcache.enable_cli')) {
             $this->line('  <comment>-</comment> OPCache disabled for CLI');
+
             return true;
         }
 
         if (@opcache_reset()) {
             $this->line('  <info>✓</info> OPCache cleared');
+
             return true;
         }
 
         $this->line('  <comment>-</comment> Could not clear OPCache');
+
         return true; // Not a critical failure
     }
 }

@@ -25,7 +25,7 @@ use TorrentPier\Console\Helpers\FileSystemHelper;
  */
 #[AsCommand(
     name: 'rebuild:datastore',
-    description: 'Rebuild datastore cache entries'
+    description: 'Rebuild datastore cache entries',
 )]
 class DatastoreCommand extends Command
 {
@@ -55,35 +55,35 @@ class DatastoreCommand extends Command
                 'key',
                 'k',
                 InputOption::VALUE_REQUIRED,
-                'Rebuild specific key(s), comma-separated (e.g., stats,cat_forums,moderators)'
+                'Rebuild specific key(s), comma-separated (e.g., stats,cat_forums,moderators)',
             )
             ->addOption(
                 'list',
                 'l',
                 InputOption::VALUE_NONE,
-                'List all available datastore keys'
+                'List all available datastore keys',
             )
             ->setHelp(
                 <<<'HELP'
-The <info>%command.name%</info> command rebuilds datastore cache entries.
+                    The <info>%command.name%</info> command rebuilds datastore cache entries.
 
-Datastore is a caching layer for frequently accessed data like
-forum structure, statistics, moderator lists, etc.
+                    Datastore is a caching layer for frequently accessed data like
+                    forum structure, statistics, moderator lists, etc.
 
-<comment>Rebuild all datastore items:</comment>
-  <info>php %command.full_name%</info>
+                    <comment>Rebuild all datastore items:</comment>
+                      <info>php %command.full_name%</info>
 
-<comment>Rebuild specific item(s):</comment>
-  <info>php %command.full_name% --key=stats</info>
-  <info>php %command.full_name% --key=cat_forums,moderators</info>
+                    <comment>Rebuild specific item(s):</comment>
+                      <info>php %command.full_name% --key=stats</info>
+                      <info>php %command.full_name% --key=cat_forums,moderators</info>
 
-<comment>List available keys:</comment>
-  <info>php %command.full_name% --list</info>
+                    <comment>List available keys:</comment>
+                      <info>php %command.full_name% --list</info>
 
-Available keys: stats, cat_forums, moderators, ranks, ban_list,
-smile_replacements, censor, jumpbox, viewtopic_forum_select,
-latest_news, network_news, ads, check_updates
-HELP
+                    Available keys: stats, cat_forums, moderators, ranks, ban_list,
+                    smile_replacements, censor, jumpbox, viewtopic_forum_select,
+                    latest_news, network_news, ads, check_updates
+                    HELP
             );
     }
 
@@ -107,6 +107,7 @@ HELP
             if (!empty($invalidKeys)) {
                 $this->error('Unknown datastore key(s): ' . implode(', ', $invalidKeys));
                 $this->comment('Use --list to see available keys.');
+
                 return self::FAILURE;
             }
         } else {
@@ -117,7 +118,7 @@ HELP
         // Display configuration
         $this->section('Configuration');
         $this->definitionList(
-            ['Keys to rebuild' => count($keys)],
+            ['Keys to rebuild' => \count($keys)],
             ['Mode' => $keyOption !== null ? 'Specific keys' : 'All keys'],
         );
 
@@ -140,13 +141,13 @@ HELP
         $errors = [];
 
         // Create a progress bar
-        $progressBar = $this->createProgressBar(count($keys));
+        $progressBar = $this->createProgressBar(\count($keys));
         $progressBar->setFormat(' %current%/%max% [%bar%] %percent:3s%% | %message%');
         $progressBar->setMessage('Starting...');
         $progressBar->start();
 
         foreach ($keys as $key) {
-            $progressBar->setMessage("Rebuilding: $key");
+            $progressBar->setMessage("Rebuilding: {$key}");
 
             try {
                 datastore()->update($key);
@@ -169,7 +170,7 @@ HELP
         $this->section('Results');
 
         $this->definitionList(
-            ['Successful' => $success . '/' . count($keys)],
+            ['Successful' => $success . '/' . \count($keys)],
             ['Time elapsed' => $elapsed . 's'],
             ['Memory used' => FileSystemHelper::formatBytes(memory_get_peak_usage(true))],
         );
@@ -179,12 +180,14 @@ HELP
             $this->line();
             $this->error('Errors occurred:');
             foreach ($errors as $key => $message) {
-                $this->line("  <error>$key</error>: $message");
+                $this->line("  <error>{$key}</error>: {$message}");
             }
+
             return self::FAILURE;
         }
 
         $this->success('Datastore rebuilt successfully!');
+
         return self::SUCCESS;
     }
 

@@ -64,9 +64,10 @@ class LegacySyntaxExtension extends AbstractExtension
             '/<\?php\s+include\s*\(\s*\$V\[\s*[\'"]([^\'"]+)[\'"]\s*\]\s*\)\s*;\s*\?>/',
             function ($matches) {
                 $varName = $matches[1];
-                return "{{ include_file(V.$varName) }}";
+
+                return "{{ include_file(V.{$varName}) }}";
             },
-            $content
+            $content,
         );
 
         // Convert legacy includes first (simplest)
@@ -82,6 +83,169 @@ class LegacySyntaxExtension extends AbstractExtension
         $content = $this->convertVariables($content);
 
         return $content;
+    }
+
+    /**
+     * Get variable from template data
+     */
+    public function getVariable(string $varName, mixed $default = ''): mixed
+    {
+        return template()->getVar($varName, $default);
+    }
+
+    /**
+     * Get language variable
+     */
+    public function getLanguageVariable(string $key, mixed $default = ''): mixed
+    {
+        return lang()->get($key, $default);
+    }
+
+    /**
+     * Get PHP constant value
+     */
+    public function getConstant(string $name): mixed
+    {
+        return \defined($name) ? \constant($name) : '';
+    }
+
+    /**
+     * Include a file from a path and return its contents
+     * Used to safely include HTML/PHP files in Twig templates
+     */
+    public function includeFile(?string $path): string
+    {
+        if (empty($path)) {
+            return '';
+        }
+
+        // Security: ensure a path is within allowed directories
+        $realPath = realpath($path);
+        if ($realPath === false) {
+            return "<!-- include_file: file not found: {$path} -->";
+        }
+
+        // Check if a file is within BB_PATH (the application root, not public/)
+        // BB_PATH is the actual app root, BB_ROOT is the public web root
+        $appRoot = \defined('BB_PATH') ? realpath(BB_PATH) : (\defined('BB_ROOT') ? realpath(BB_ROOT . '/..') : realpath('.'));
+        $appRootWithSeparator = rtrim($appRoot, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (!str_starts_with($realPath, $appRootWithSeparator) && $realPath !== $appRoot) {
+            return "<!-- include_file: access denied: {$path} -->";
+        }
+
+        // Read and return file content
+        $content = file_get_contents($realPath);
+        if ($content === false) {
+            return "<!-- include_file: cannot read: {$path} -->";
+        }
+
+        return $content;
+    }
+
+    /**
+     * Filter for language variable fallback with debug highlighting
+     * Used as: {{ V.L_VAR|default(L.VAR)|lang_fallback('VAR') }}
+     *
+     * @param mixed $value The value from the filter chain (could be the translation or null)
+     * @param string $key Language key (e.g., 'MEMBERSHIP_IN')
+     * @return string The value if not empty, or variable name with optional debug styling
+     */
+    public function langFallback(mixed $value, string $key): string
+    {
+        // If we have a valid value, return it
+        if ($value !== null && $value !== '') {
+            return (string)$value;
+        }
+
+        // Fallback: show the variable name, with red highlight in debug mode
+        $varName = 'L_' . $key;
+
+        if (\defined('DBG_USER') && DBG_USER) {
+            return '<span style="background:#ff6b6b;color:#fff;padding:1px 4px;border-radius:2px;font-size:11px;">' . $varName . '</span>';
+        }
+
+        return $varName;
+    }
+
+    /**
+     * Convert a single variable reference
+     */
+    public function convertVariable(string $varRef): string
+    {
+        if (preg_match('/^L_(.+)$/', $varRef, $matches)) {
+            return "L.{$matches[1]}";
+        }
+
+        if (preg_match('/^\$(.+)$/', $varRef, $matches)) {
+            return $matches[1];
+        }
+
+        if (preg_match('/^#(.+)#$/', $varRef, $matches)) {
+            return "constant('{$matches[1]}')";
+        }
+
+        return "V.{$varRef}";
+    }
+
+    /**
+     * Convert block reference
+     */
+    public function convertBlock(string $blockRef): string
+    {
+        $parts = explode('.', $blockRef);
+        $result = '_tpldata';
+
+        foreach ($parts as $part) {
+            $result .= "['{$part}.']";
+        }
+
+        return $result;
+    }
+
+    /**
+     * Legacy include function
+     */
+    public function legacyInclude(string $template): string
+    {
+        return "{{ include('{$template}') }}";
+    }
+
+    /**
+     * Legacy if function
+     */
+    public function legacyIf(string $condition, string $then = '', string $else = ''): string
+    {
+        $convertedCondition = $this->convertCondition($condition);
+
+        if ($else) {
+            return "{% if {$convertedCondition} %}{$then}{% else %}{$else}{% endif %}";
+        }
+
+        return "{% if {$convertedCondition} %}{$then}{% endif %}";
+    }
+
+    /**
+     * Test if content contains legacy syntax
+     */
+    public function isLegacySyntax(string $content): bool
+    {
+        $patterns = [
+            '/\{[A-Z0-9_]+\}/',           // {VARIABLE}
+            '/\{L_[A-Z0-9_]+\}/',         // {L_VARIABLE}
+            '/\{\$[a-zA-Z_][^}]*\}/',     // {$variable}
+            '/\{#[A-Z0-9_]+#\}/',         // {#CONSTANT#}
+            '/<!-- IF .+ -->/',           // <!-- IF ... -->
+            '/<!-- BEGIN .+ -->/',        // <!-- BEGIN ... -->
+            '/<!-- INCLUDE .+ -->/',      // <!-- INCLUDE ... -->
+        ];
+
+        foreach ($patterns as $pattern) {
+            if (preg_match($pattern, $content)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -109,9 +273,10 @@ class LegacySyntaxExtension extends AbstractExtension
                 function ($matches) {
                     $condition = $this->convertCondition(trim($matches[1]));
                     $body = $matches[2];
-                    return "{% if $condition %}$body{% endif %}";
+
+                    return "{% if {$condition} %}{$body}{% endif %}";
                 },
-                $content
+                $content,
             );
 
             // Pattern for IF...ELSE...ENDIF (no nested IF, no ELSEIF)
@@ -121,9 +286,10 @@ class LegacySyntaxExtension extends AbstractExtension
                     $condition = $this->convertCondition(trim($matches[1]));
                     $ifBody = $matches[2];
                     $elseBody = $matches[3];
-                    return "{% if $condition %}$ifBody{% else %}$elseBody{% endif %}";
+
+                    return "{% if {$condition} %}{$ifBody}{% else %}{$elseBody}{% endif %}";
                 },
-                $content
+                $content,
             );
 
             // Pattern for IF...ELSEIF...ENDIF (no nested IF)
@@ -134,9 +300,10 @@ class LegacySyntaxExtension extends AbstractExtension
                     $ifBody = $matches[2];
                     $condition2 = $this->convertCondition(trim($matches[3]));
                     $elseifBody = $matches[4];
-                    return "{% if $condition1 %}$ifBody{% elseif $condition2 %}$elseifBody{% endif %}";
+
+                    return "{% if {$condition1} %}{$ifBody}{% elseif {$condition2} %}{$elseifBody}{% endif %}";
                 },
-                $content
+                $content,
             );
 
             // Pattern for IF...ELSEIF...ELSE...ENDIF (no nested IF)
@@ -148,9 +315,10 @@ class LegacySyntaxExtension extends AbstractExtension
                     $condition2 = $this->convertCondition(trim($matches[3]));
                     $elseifBody = $matches[4];
                     $elseBody = $matches[5];
-                    return "{% if $condition1 %}$ifBody{% elseif $condition2 %}$elseifBody{% else %}$elseBody{% endif %}";
+
+                    return "{% if {$condition1} %}{$ifBody}{% elseif {$condition2} %}{$elseifBody}{% else %}{$elseBody}{% endif %}";
                 },
-                $content
+                $content,
             );
 
             // Handle multiple ELSEIF chains (up to 3 ELSEIFs for now)
@@ -163,9 +331,10 @@ class LegacySyntaxExtension extends AbstractExtension
                     $body2 = $matches[4];
                     $cond3 = $this->convertCondition(trim($matches[5]));
                     $body3 = $matches[6];
-                    return "{% if $cond1 %}$body1{% elseif $cond2 %}$body2{% elseif $cond3 %}$body3{% endif %}";
+
+                    return "{% if {$cond1} %}{$body1}{% elseif {$cond2} %}{$body2}{% elseif {$cond3} %}{$body3}{% endif %}";
                 },
-                $content
+                $content,
             );
 
             $iterations++;
@@ -187,25 +356,29 @@ class LegacySyntaxExtension extends AbstractExtension
         // If neither found - shows variable name with debug highlighting in DBG_USER mode
         $content = preg_replace_callback('/\{L_([A-Z0-9_]+)\}/', function ($matches) {
             $varName = $matches[1];
-            return "{{ V.L_$varName|default(L.$varName)|lang_fallback('$varName') }}";
+
+            return "{{ V.L_{$varName}|default(L.{$varName})|lang_fallback('{$varName}') }}";
         }, $content);
 
         // Convert constants {#CONSTANT#} to {{ constant('CONSTANT') }}
         $content = preg_replace_callback('/\{#([A-Z0-9_]+)#\}/', function ($matches) {
             $constantName = $matches[1];
-            return "{{ constant('$constantName')|default('') }}";
+
+            return "{{ constant('{$constantName}')|default('') }}";
         }, $content);
 
         // Convert PHP variables {$variable} to {{ variable }}
         $content = preg_replace_callback('/\{\$([a-zA-Z_][a-zA-Z0-9_]*(?:\[[^\]]+\])*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*)\}/', function ($matches) {
             $varName = $matches[1];
-            return "{{ $varName|default('') }}";
+
+            return "{{ {$varName}|default('') }}";
         }, $content);
 
         // Convert block item variables {blockname_item.VARIABLE} to {{ blockname_item.VARIABLE }}
         $content = preg_replace_callback('/\{([a-zA-Z0-9_]+_item\.[A-Z0-9_.]+)\}/', function ($matches) {
             $varPath = $matches[1];
-            return "{{ $varPath|default('') }}";
+
+            return "{{ {$varPath}|default('') }}";
         }, $content);
 
         // Convert legacy variables {VARIABLE} to Twig syntax
@@ -229,9 +402,9 @@ class LegacySyntaxExtension extends AbstractExtension
             foreach ($parts as $part) {
                 $twigVar .= "['" . $part . ".']";
             }
-            $twigVar .= "[loop.index0]['$varName']";
+            $twigVar .= "[loop.index0]['{$varName}']";
 
-            return "{{ $twigVar|default('') }}";
+            return "{{ {$twigVar}|default('') }}";
         }, $content);
 
         return $content;
@@ -307,7 +480,7 @@ class LegacySyntaxExtension extends AbstractExtension
 
                 return 'V.' . $var;
             },
-            $condition
+            $condition,
         );
 
         // Step 7: Convert word-based logical operators (after variable conversion to avoid conflicts)
@@ -351,14 +524,14 @@ class LegacySyntaxExtension extends AbstractExtension
             // Generate the appropriate loop structure based on how assign_block_vars works
             if (empty($parentBlocks)) {
                 // Top-level block: _tpldata['blockname.']
-                return "{% for {$blockName}_item in _tpldata['{$blockName}.']|default([]) %}$body{% endfor %}";
-            } else {
-                // Nested block: When assign_block_vars('parent.child', ...) is used,
-                // it creates _tpldata['parent.'][index]['child.'][nested_index]
-                // So we need to access parent_item['child.'] (with dot suffix)
-                $parentVar = end($parentBlocks) . '_item';
-                return "{% for {$blockName}_item in {$parentVar}['{$blockName}.']|default([]) %}$body{% endfor %}";
+                return "{% for {$blockName}_item in _tpldata['{$blockName}.']|default([]) %}{$body}{% endfor %}";
             }
+            // Nested block: When assign_block_vars('parent.child', ...) is used,
+            // it creates _tpldata['parent.'][index]['child.'][nested_index]
+            // So we need to access parent_item['child.'] (with dot suffix)
+            $parentVar = end($parentBlocks) . '_item';
+
+            return "{% for {$blockName}_item in {$parentVar}['{$blockName}.']|default([]) %}{$body}{% endfor %}";
         }, $content);
     }
 
@@ -380,17 +553,19 @@ class LegacySyntaxExtension extends AbstractExtension
         if (!empty($parentBlocks)) {
             // Convert full path variables like {parent.current.VARIABLE} to {{ current_item.VARIABLE }}
             // Use array_map with preg_quote to properly escape each block name
-            $fullPathPattern = implode('\.', array_map(fn($b) => preg_quote($b, '/'), $fullBlockPath));
+            $fullPathPattern = implode('\.', array_map(fn ($b) => preg_quote($b, '/'), $fullBlockPath));
             $content = preg_replace_callback('/\{' . $fullPathPattern . '\.([A-Z0-9_.]+)\}/', function ($matches) use ($currentBlock) {
                 $varPath = $matches[1];
-                return "{{ {$currentBlock}_item.$varPath|default('') }}";
+
+                return "{{ {$currentBlock}_item.{$varPath}|default('') }}";
             }, $content);
 
             // Also handle parent.current.subblock.VARIABLE patterns (like c.f.sf.VARIABLE)
             $content = preg_replace_callback('/\{' . $fullPathPattern . '\.([a-z0-9_]+)\.([A-Z0-9_.]+)\}/', function ($matches) use ($currentBlock) {
                 $subBlock = $matches[1];
                 $varPath = $matches[2];
-                return "{{ {$currentBlock}_item.$subBlock.$varPath|default('') }}";
+
+                return "{{ {$currentBlock}_item.{$subBlock}.{$varPath}|default('') }}";
             }, $content);
         }
 
@@ -398,7 +573,8 @@ class LegacySyntaxExtension extends AbstractExtension
         // Use negative lookbehind to ensure we match the exact block name, not partial (e.g., don't match 'cf' when looking for 'c')
         $content = preg_replace_callback('/\{(?<![a-z0-9_])' . $blockNameEscaped . '\.([A-Z0-9_.]+)\}/', function ($matches) use ($currentBlock) {
             $varPath = $matches[1];
-            return "{{ {$currentBlock}_item.$varPath|default('') }}";
+
+            return "{{ {$currentBlock}_item.{$varPath}|default('') }}";
         }, $content);
 
         // Convert block variables in attributes and other contexts (without curly braces)
@@ -428,9 +604,10 @@ class LegacySyntaxExtension extends AbstractExtension
                 function ($matches) use ($blockStack) {
                     $condition = $this->convertConditionWithContext(trim($matches[1]), $blockStack);
                     $body = $matches[2];
-                    return "{% if $condition %}$body{% endif %}";
+
+                    return "{% if {$condition} %}{$body}{% endif %}";
                 },
-                $content
+                $content,
             );
 
             // IF...ELSE...ENDIF
@@ -440,9 +617,10 @@ class LegacySyntaxExtension extends AbstractExtension
                     $condition = $this->convertConditionWithContext(trim($matches[1]), $blockStack);
                     $ifBody = $matches[2];
                     $elseBody = $matches[3];
-                    return "{% if $condition %}$ifBody{% else %}$elseBody{% endif %}";
+
+                    return "{% if {$condition} %}{$ifBody}{% else %}{$elseBody}{% endif %}";
                 },
-                $content
+                $content,
             );
 
             // IF...ELSEIF...ENDIF
@@ -453,9 +631,10 @@ class LegacySyntaxExtension extends AbstractExtension
                     $body1 = $matches[2];
                     $cond2 = $this->convertConditionWithContext(trim($matches[3]), $blockStack);
                     $body2 = $matches[4];
-                    return "{% if $cond1 %}$body1{% elseif $cond2 %}$body2{% endif %}";
+
+                    return "{% if {$cond1} %}{$body1}{% elseif {$cond2} %}{$body2}{% endif %}";
                 },
-                $content
+                $content,
             );
 
             // IF...ELSEIF...ELSE...ENDIF
@@ -467,9 +646,10 @@ class LegacySyntaxExtension extends AbstractExtension
                     $cond2 = $this->convertConditionWithContext(trim($matches[3]), $blockStack);
                     $body2 = $matches[4];
                     $elseBody = $matches[5];
-                    return "{% if $cond1 %}$body1{% elseif $cond2 %}$body2{% else %}$elseBody{% endif %}";
+
+                    return "{% if {$cond1} %}{$body1}{% elseif {$cond2} %}{$body2}{% else %}{$elseBody}{% endif %}";
                 },
-                $content
+                $content,
             );
 
             $iterations++;
@@ -494,7 +674,8 @@ class LegacySyntaxExtension extends AbstractExtension
             // This handles the pattern where the full path refers to the current block item
             $condition = preg_replace_callback('/\b' . preg_quote($fullBlockPath) . '\.([A-Z0-9_]+)\b/', function ($matches) use ($currentBlock) {
                 $varName = $matches[1];
-                return "{$currentBlock}_item.$varName";
+
+                return "{$currentBlock}_item.{$varName}";
             }, $condition);
 
             // Don't auto-convert standalone variables - let the main variable conversion handle them
@@ -513,172 +694,10 @@ class LegacySyntaxExtension extends AbstractExtension
         // <!-- INCLUDE filename -->
         $content = preg_replace_callback('/<!-- INCLUDE ([a-zA-Z0-9_\.\-\/]+) -->/', function ($matches) {
             $filename = $matches[1];
-            return "{{ include('$filename') }}";
+
+            return "{{ include('{$filename}') }}";
         }, $content);
 
         return $content;
-    }
-
-    /**
-     * Get variable from template data
-     */
-    public function getVariable(string $varName, mixed $default = ''): mixed
-    {
-        return template()->getVar($varName, $default);
-    }
-
-    /**
-     * Get language variable
-     */
-    public function getLanguageVariable(string $key, mixed $default = ''): mixed
-    {
-        return lang()->get($key, $default);
-    }
-
-    /**
-     * Get PHP constant value
-     */
-    public function getConstant(string $name): mixed
-    {
-        return defined($name) ? constant($name) : '';
-    }
-
-    /**
-     * Include a file from a path and return its contents
-     * Used to safely include HTML/PHP files in Twig templates
-     */
-    public function includeFile(?string $path): string
-    {
-        if (empty($path)) {
-            return '';
-        }
-
-        // Security: ensure a path is within allowed directories
-        $realPath = realpath($path);
-        if ($realPath === false) {
-            return "<!-- include_file: file not found: $path -->";
-        }
-
-        // Check if a file is within BB_PATH (the application root, not public/)
-        // BB_PATH is the actual app root, BB_ROOT is the public web root
-        $appRoot = defined('BB_PATH') ? realpath(BB_PATH) : (defined('BB_ROOT') ? realpath(BB_ROOT . '/..') : realpath('.'));
-        $appRootWithSeparator = rtrim($appRoot, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-        if (!str_starts_with($realPath, $appRootWithSeparator) && $realPath !== $appRoot) {
-            return "<!-- include_file: access denied: $path -->";
-        }
-
-        // Read and return file content
-        $content = file_get_contents($realPath);
-        if ($content === false) {
-            return "<!-- include_file: cannot read: $path -->";
-        }
-
-        return $content;
-    }
-
-    /**
-     * Filter for language variable fallback with debug highlighting
-     * Used as: {{ V.L_VAR|default(L.VAR)|lang_fallback('VAR') }}
-     *
-     * @param mixed $value The value from the filter chain (could be the translation or null)
-     * @param string $key Language key (e.g., 'MEMBERSHIP_IN')
-     * @return string The value if not empty, or variable name with optional debug styling
-     */
-    public function langFallback(mixed $value, string $key): string
-    {
-        // If we have a valid value, return it
-        if ($value !== null && $value !== '') {
-            return (string) $value;
-        }
-
-        // Fallback: show the variable name, with red highlight in debug mode
-        $varName = 'L_' . $key;
-
-        if (defined('DBG_USER') && DBG_USER) {
-            return '<span style="background:#ff6b6b;color:#fff;padding:1px 4px;border-radius:2px;font-size:11px;">' . $varName . '</span>';
-        }
-
-        return $varName;
-    }
-
-    /**
-     * Convert a single variable reference
-     */
-    public function convertVariable(string $varRef): string
-    {
-        if (preg_match('/^L_(.+)$/', $varRef, $matches)) {
-            return "L.{$matches[1]}";
-        }
-
-        if (preg_match('/^\$(.+)$/', $varRef, $matches)) {
-            return $matches[1];
-        }
-
-        if (preg_match('/^#(.+)#$/', $varRef, $matches)) {
-            return "constant('{$matches[1]}')";
-        }
-
-        return "V.$varRef";
-    }
-
-    /**
-     * Convert block reference
-     */
-    public function convertBlock(string $blockRef): string
-    {
-        $parts = explode('.', $blockRef);
-        $result = '_tpldata';
-
-        foreach ($parts as $part) {
-            $result .= "['$part.']";
-        }
-
-        return $result;
-    }
-
-    /**
-     * Legacy include function
-     */
-    public function legacyInclude(string $template): string
-    {
-        return "{{ include('$template') }}";
-    }
-
-    /**
-     * Legacy if function
-     */
-    public function legacyIf(string $condition, string $then = '', string $else = ''): string
-    {
-        $convertedCondition = $this->convertCondition($condition);
-
-        if ($else) {
-            return "{% if $convertedCondition %}$then{% else %}$else{% endif %}";
-        } else {
-            return "{% if $convertedCondition %}$then{% endif %}";
-        }
-    }
-
-    /**
-     * Test if content contains legacy syntax
-     */
-    public function isLegacySyntax(string $content): bool
-    {
-        $patterns = [
-            '/\{[A-Z0-9_]+\}/',           // {VARIABLE}
-            '/\{L_[A-Z0-9_]+\}/',         // {L_VARIABLE}
-            '/\{\$[a-zA-Z_][^}]*\}/',     // {$variable}
-            '/\{#[A-Z0-9_]+#\}/',         // {#CONSTANT#}
-            '/<!-- IF .+ -->/',           // <!-- IF ... -->
-            '/<!-- BEGIN .+ -->/',        // <!-- BEGIN ... -->
-            '/<!-- INCLUDE .+ -->/',      // <!-- INCLUDE ... -->
-        ];
-
-        foreach ($patterns as $pattern) {
-            if (preg_match($pattern, $content)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

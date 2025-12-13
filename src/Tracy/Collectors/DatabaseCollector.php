@@ -38,7 +38,7 @@ class DatabaseCollector
             'nette_count' => 0,
         ];
 
-        $slowThreshold = defined('SQL_SLOW_QUERY_TIME') ? SQL_SLOW_QUERY_TIME : 3.0;
+        $slowThreshold = \defined('SQL_SLOW_QUERY_TIME') ? SQL_SLOW_QUERY_TIME : 3.0;
 
         try {
             $serverNames = DatabaseFactory::getServerNames();
@@ -61,7 +61,7 @@ class DatabaseCollector
                     ];
 
                     // Check if EXPLAIN collection is enabled via cookie
-                    $collectExplain = (bool) request()->cookies->get('tracy_explain');
+                    $collectExplain = (bool)request()->cookies->get('tracy_explain');
 
                     // Process individual queries
                     foreach ($debugger->dbg ?? [] as $idx => $query) {
@@ -102,7 +102,6 @@ class DatabaseCollector
                     $data['servers'][$serverName] = $serverData;
                     $data['total_queries'] += $db->num_queries;
                     $data['total_time'] += $db->sql_timetotal;
-
                 } catch (Exception) {
                     // Server not available, skip
                 }
@@ -112,6 +111,7 @@ class DatabaseCollector
         }
 
         $this->cachedData = $data;
+
         return $data;
     }
 
@@ -128,21 +128,9 @@ class DatabaseCollector
             'legacy_count' => $data['legacy_count'],
             'slow_count' => $data['slow_count'],
             'nette_count' => $data['nette_count'],
-            'server_count' => count($data['servers']),
-            'explain_enabled' => (bool) request()->cookies->get('tracy_explain'),
+            'server_count' => \count($data['servers']),
+            'explain_enabled' => (bool)request()->cookies->get('tracy_explain'),
         ];
-    }
-
-    /**
-     * Check if query can be explained
-     */
-    private function canExplain(string $sql): bool
-    {
-        $sql = trim(preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $sql));
-        $upper = strtoupper($sql);
-        return str_starts_with($upper, 'SELECT')
-            || str_starts_with($upper, 'UPDATE')
-            || str_starts_with($upper, 'DELETE');
     }
 
     /**
@@ -159,9 +147,9 @@ class DatabaseCollector
 
             // Convert UPDATE/DELETE to SELECT for EXPLAIN
             if (preg_match('#UPDATE ([a-z0-9_]+).*?WHERE(.*)#si', $sql, $m)) {
-                $sql = "SELECT * FROM $m[1] WHERE $m[2]";
+                $sql = "SELECT * FROM {$m[1]} WHERE {$m[2]}";
             } elseif (preg_match('#DELETE FROM ([a-z0-9_]+).*?WHERE(.*)#si', $sql, $m)) {
-                $sql = "SELECT * FROM $m[1] WHERE $m[2]";
+                $sql = "SELECT * FROM {$m[1]} WHERE {$m[2]}";
             }
 
             // Only EXPLAIN SELECT queries
@@ -169,14 +157,13 @@ class DatabaseCollector
                 return null;
             }
 
-            $result = $db->connection->query("EXPLAIN $sql");
+            $result = $db->connection->query("EXPLAIN {$sql}");
             $rows = [];
             while ($row = $result->fetch()) {
-                $rows[] = (array) $row;
+                $rows[] = (array)$row;
             }
 
             return $rows;
-
         } catch (Exception) {
             return null;
         }
@@ -188,5 +175,18 @@ class DatabaseCollector
     public function reset(): void
     {
         $this->cachedData = null;
+    }
+
+    /**
+     * Check if query can be explained
+     */
+    private function canExplain(string $sql): bool
+    {
+        $sql = trim(preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $sql));
+        $upper = strtoupper($sql);
+
+        return str_starts_with($upper, 'SELECT')
+            || str_starts_with($upper, 'UPDATE')
+            || str_starts_with($upper, 'DELETE');
     }
 }

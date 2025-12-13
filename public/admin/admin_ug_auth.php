@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -10,6 +11,7 @@
 if (!empty($setmodules)) {
     $module['USERS']['PERMISSIONS'] = basename(__FILE__) . '?mode=user';
     $module['GROUPS']['PERMISSIONS'] = basename(__FILE__) . '?mode=group';
+
     return;
 }
 
@@ -50,11 +52,12 @@ function assign_acl_type_columns(array $forum_auth_fields): int
     $s_column_span = 2;
     foreach ($forum_auth_fields as $auth_type) {
         template()->assign_block_vars('acltype', [
-            'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", __(strtoupper($auth_type))),
+            'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', '\\1<br />', __(strtoupper($auth_type))),
             'ACL_TYPE_BF' => bitfields('forum_perm')[$auth_type],
         ]);
         $s_column_span++;
     }
+
     return $s_column_span;
 }
 
@@ -101,7 +104,7 @@ if (IN_DEMO_MODE && $submit) {
 
 $group_data = [];
 
-$forum_auth_fields = array(
+$forum_auth_fields = [
     'auth_view',
     'auth_read',
     'auth_reply',
@@ -114,7 +117,7 @@ $forum_auth_fields = array(
     'auth_post',
     'auth_sticky',
     'auth_announce',
-);
+];
 
 if ($submit && $mode == 'user') {
     $this_user_level = null;
@@ -128,7 +131,7 @@ if ($submit && $mode == 'user') {
     // Get "single_user" group_id for this user
     $sql = 'SELECT g.group_id
 		FROM ' . BB_USER_GROUP . ' ug, ' . BB_GROUPS . " g
-		WHERE ug.user_id = $user_id
+		WHERE ug.user_id = {$user_id}
 			AND g.group_id = ug.group_id
 			AND g.group_single_user = 1";
 
@@ -138,7 +141,7 @@ if ($submit && $mode == 'user') {
         $group_id = Group::create_user_group($user_id);
     }
 
-    if (!$group_id || !$user_id || null === $this_user_level) {
+    if (!$group_id || !$user_id || $this_user_level === null) {
         throw new RuntimeException('data missing');
     }
 
@@ -149,7 +152,7 @@ if ($submit && $mode == 'user') {
                 bb_die(__('AUTH_GENERAL_ERROR'));
             }
 
-            DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . ADMIN . " WHERE user_id = $user_id");
+            DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . ADMIN . " WHERE user_id = {$user_id}");
 
             // Delete any entries in auth_access, they are not required if the user is becoming an admin
             Group::delete_permissions($group_id, $user_id);
@@ -162,7 +165,7 @@ if ($submit && $mode == 'user') {
                 bb_die(__('AUTH_SELF_ERROR'));
             }
             // Update users' level, reset to USER
-            DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . USER . " WHERE user_id = $user_id");
+            DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . USER . " WHERE user_id = {$user_id}");
 
             Group::delete_permissions($group_id, $user_id);
 
@@ -247,7 +250,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
         bb_die($message);
     }
 
-    $base_url = basename(__FILE__) . "?mode=user&amp;" . POST_USERS_URL . "=$user_id";
+    $base_url = basename(__FILE__) . '?mode=user&amp;' . POST_USERS_URL . "={$user_id}";
 
     $ug_data = $this_userdata;
     $ug_data['session_logged_in'] = 1;
@@ -256,14 +259,14 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
     $g_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data, [], UG_PERM_GROUP_ONLY);
 
     foreach ($forums['c'] as $c_id => $c_data) {
-        template()->assign_block_vars('c', array(
+        template()->assign_block_vars('c', [
             'CAT_ID' => $c_id,
             'CAT_TITLE' => $forums['cat_title_html'][$c_id],
-            'CAT_HREF' => "$base_url&amp;" . POST_CAT_URL . "=$c_id",
-        ));
+            'CAT_HREF' => "{$base_url}&amp;" . POST_CAT_URL . "={$c_id}",
+        ]);
 
         $c = request()->get(POST_CAT_URL, '');
-        if (!$c || !in_array($c, array('all', $c_id)) || empty($c_data['forums'])) {
+        if (!$c || !in_array($c, ['all', $c_id]) || empty($c_data['forums'])) {
             continue;
         }
 
@@ -272,7 +275,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
             $auth_mod = ($u_access[$f_id]['auth_mod'] || $g_access[$f_id]['auth_mod']);
             $disabled = $g_access[$f_id]['auth_mod'];
 
-            template()->assign_block_vars('c.f', array(
+            template()->assign_block_vars('c.f', [
                 'DISABLED' => $disabled,
                 'FORUM_ID' => $f_id,
                 'FORUM_NAME' => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
@@ -281,7 +284,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
                 'MOD_STATUS' => $auth_mod ? __('MODERATOR') : __('NONE'),
                 'MOD_CLASS' => $auth_mod ? ($disabled ? 'yesDisabled' : 'yesMOD') : 'noMOD',
                 'AUTH_MOD_VAL' => $auth_mod ? 1 : 0,
-            ));
+            ]);
 
             foreach ($forum_auth_fields as $auth_type) {
                 $bf_num = bitfields('forum_perm')[$auth_type];
@@ -321,7 +324,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
 
     template()->assign_block_vars('switch_user_auth', []);
 
-    template()->assign_vars(array(
+    template()->assign_vars([
         'TPL_AUTH_UG_MAIN' => true,
         'USER_OR_GROUPNAME' => profile_url($this_userdata, true),
         'USER_LEVEL' => __('USER_LEVEL') . ' : ' . $s_user_type,
@@ -330,7 +333,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
         'T_AUTH_EXPLAIN' => __('USER_AUTH_EXPLAIN'),
         'S_COLUMN_SPAN' => $s_column_span,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
-    ));
+    ]);
 } elseif ($mode == 'group' && $group_id) {
     page_cfg('quirks_mode', true);
 
@@ -347,20 +350,20 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
         bb_die($message);
     }
 
-    $base_url = basename(__FILE__) . "?mode=group&amp;" . POST_GROUPS_URL . "=$group_id";
+    $base_url = basename(__FILE__) . '?mode=group&amp;' . POST_GROUPS_URL . "={$group_id}";
 
-    $ug_data = array('group_id' => $group_id);
+    $ug_data = ['group_id' => $group_id];
     $u_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data);
 
     foreach ($forums['c'] as $c_id => $c_data) {
-        template()->assign_block_vars('c', array(
+        template()->assign_block_vars('c', [
             'CAT_ID' => $c_id,
             'CAT_TITLE' => $forums['cat_title_html'][$c_id],
-            'CAT_HREF' => "$base_url&amp;" . POST_CAT_URL . "=$c_id",
-        ));
+            'CAT_HREF' => "{$base_url}&amp;" . POST_CAT_URL . "={$c_id}",
+        ]);
 
         $c = request()->get(POST_CAT_URL, '');
-        if (!$c || !in_array($c, array('all', $c_id)) || empty($c_data['forums'])) {
+        if (!$c || !in_array($c, ['all', $c_id]) || empty($c_data['forums'])) {
             continue;
         }
 
@@ -368,7 +371,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
             $f_data = $forums['f'][$f_id];
             $auth_mod = $u_access[$f_id]['auth_mod'];
 
-            template()->assign_block_vars('c.f', array(
+            template()->assign_block_vars('c.f', [
                 'DISABLED' => false,
                 'FORUM_ID' => $f_id,
                 'FORUM_NAME' => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
@@ -377,7 +380,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
                 'MOD_STATUS' => $auth_mod ? __('MODERATOR') : __('NO'),
                 'MOD_CLASS' => $auth_mod ? 'yesMOD' : 'noMOD',
                 'AUTH_MOD_VAL' => $auth_mod ? 1 : 0,
-            ));
+            ]);
 
             foreach ($forum_auth_fields as $auth_type) {
                 $bf_num = bitfields('forum_perm')[$auth_type];
@@ -421,30 +424,30 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
 } else {
     // Select a user/group
     if ($mode == 'user') {
-        template()->assign_vars(array(
+        template()->assign_vars([
             'TPL_SELECT_USER' => true,
             'U_SEARCH_USER' => BB_ROOT . 'search.php?mode=searchuser',
-        ));
+        ]);
     } else {
-        template()->assign_vars(array(
+        template()->assign_vars([
             'TPL_SELECT_GROUP' => true,
             'S_GROUP_SELECT' => get_select('groups'),
-        ));
+        ]);
     }
 
     $s_hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
 
-    template()->assign_vars(array(
+    template()->assign_vars([
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
-    ));
+    ]);
 }
 
-template()->assign_vars(array(
+template()->assign_vars([
     'YES_SIGN' => $yes_sign,
     'NO_SIGN' => $no_sign,
     'S_AUTH_ACTION' => 'admin_ug_auth.php',
     'SELECTED_CAT' => request()->get(POST_CAT_URL, ''),
-    'U_ALL_FORUMS' => !empty($base_url) ? "$base_url&amp;" . POST_CAT_URL . "=all" : '',
-));
+    'U_ALL_FORUMS' => !empty($base_url) ? "{$base_url}&amp;" . POST_CAT_URL . '=all' : '',
+]);
 
 print_page('admin_ug_auth.tpl', 'admin');

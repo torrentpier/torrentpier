@@ -18,11 +18,11 @@ if (defined('PAGE_HEADER_SENT')) {
 
 // Parse and show the overall page header
 
-$logged_in = (int) !empty(userdata('session_logged_in'));
+$logged_in = (int)!empty(userdata('session_logged_in'));
 
 // Generate logged in/logged out status
 if ($logged_in) {
-    $u_login_logout = BB_ROOT . LOGIN_URL . "?logout=1";
+    $u_login_logout = BB_ROOT . LOGIN_URL . '?logout=1';
 } else {
     $u_login_logout = BB_ROOT . LOGIN_URL;
 }
@@ -70,7 +70,7 @@ if ($logged_in && !simple_header() && !defined('IN_ADMIN')) {
         if (userdata('user_last_privmsg') > userdata('user_lastvisit') && defined('IN_PM')) {
             user()->data['user_last_privmsg'] = userdata('user_lastvisit');
 
-            \TorrentPier\Sessions::db_update_userdata(userdata(), [
+            TorrentPier\Sessions::db_update_userdata(userdata(), [
                 'user_last_privmsg' => userdata('user_lastvisit'),
             ]);
 
@@ -80,20 +80,20 @@ if ($logged_in && !simple_header() && !defined('IN_ADMIN')) {
     if (!$have_new_pm && userdata('user_unread_privmsg')) {
         // sync unread pm count
         if (defined('IN_PM')) {
-            $row = DB()->fetch_row("
+            $row = DB()->fetch_row('
 				SELECT COUNT(*) AS pm_count
-				FROM " . BB_PRIVMSGS . "
-				WHERE privmsgs_to_userid = " . userdata('user_id') . "
-					AND privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . "
+				FROM ' . BB_PRIVMSGS . '
+				WHERE privmsgs_to_userid = ' . userdata('user_id') . '
+					AND privmsgs_type = ' . PRIVMSGS_UNREAD_MAIL . '
 				GROUP BY privmsgs_to_userid
-			");
+			');
 
-            $real_unread_pm_count = (int) ($row['pm_count'] ?? 0);
+            $real_unread_pm_count = (int)($row['pm_count'] ?? 0);
 
             if (userdata('user_unread_privmsg') != $real_unread_pm_count) {
                 user()->data['user_unread_privmsg'] = $real_unread_pm_count;
 
-                \TorrentPier\Sessions::db_update_userdata(userdata(), [
+                TorrentPier\Sessions::db_update_userdata(userdata(), [
                     'user_unread_privmsg' => $real_unread_pm_count,
                 ]);
             }
@@ -120,13 +120,14 @@ template()->assign_vars([
     'USER_LANG_DIRECTION' => (function () {
         $langConfig = config()->get('lang') ?? [];
         $userLang = userdata('user_lang');
+
         return (isset($langConfig[$userLang]['rtl']) && $langConfig[$userLang]['rtl'] === true) ? 'rtl' : 'ltr';
     })(),
 
-    'INCLUDE_BBCODE_JS' => (bool) page_cfg('include_bbcode_js'),
+    'INCLUDE_BBCODE_JS' => (bool)page_cfg('include_bbcode_js'),
     'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode(user()->opt_js, JSON_THROW_ON_ERROR),
 
-    'USE_TABLESORTER' => (bool) page_cfg('use_tablesorter'),
+    'USE_TABLESORTER' => (bool)page_cfg('use_tablesorter'),
     'ALLOW_ROBOTS' => !config()->get('board_disable') && (page_cfg('allow_robots') ?? true),
     'META_DESCRIPTION' => (!defined('HAS_DIED') && page_cfg('meta_description')) ? trim(htmlCHR(page_cfg('meta_description'))) : '',
 
@@ -144,7 +145,7 @@ template()->assign_vars([
     'FULL_URL' => FULL_URL,
 
     'CURRENT_TIME' => sprintf(__('CURRENT_TIME'), bb_date(TIMENOW, config()->get('last_visit_date_format'), false)),
-    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf(__('ALL_TIMES'), config()->get('timezones')[str_replace(',', '.', (float) config()->get('board_timezone'))])),
+    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf(__('ALL_TIMES'), config()->get('timezones')[str_replace(',', '.', (float)config()->get('board_timezone'))])),
     'BOARD_TIMEZONE' => config()->get('board_timezone'),
 
     'PM_INFO' => $pm_info,
@@ -166,9 +167,9 @@ template()->assign_vars([
     'U_MEMBERLIST' => url()->members(),
     'U_MODCP' => FORUM_PATH . 'modcp',
     'U_OPTIONS' => SETTINGS_URL,
-    'U_PRIVATEMSGS' => PM_URL . "?folder=inbox",
+    'U_PRIVATEMSGS' => PM_URL . '?folder=inbox',
     'U_PROFILE' => url()->member(userdata('user_id'), userdata('username')),
-    'U_READ_PM' => PM_URL . "?folder=inbox" . ((userdata('user_newest_pm_id') && userdata('user_new_privmsg') == 1) ? "&mode=read&" . POST_POST_URL . "=" . userdata('user_newest_pm_id') : ''),
+    'U_READ_PM' => PM_URL . '?folder=inbox' . ((userdata('user_newest_pm_id') && userdata('user_new_privmsg') == 1) ? '&mode=read&' . POST_POST_URL . '=' . userdata('user_newest_pm_id') : ''),
     'U_REGISTER' => REGISTER_URL,
     'U_SEARCH' => FORUM_PATH . 'search',
     'U_SEND_PASSWORD' => PASSWORD_RECOVERY_URL,
@@ -214,24 +215,24 @@ template()->assign_vars([
     'READONLY' => HTML_READONLY,
     'SELECTED' => HTML_SELECTED,
 
-    'U_SEARCH_SELF_BY_LAST' => FORUM_PATH . "search?uid=" . userdata('user_id') . "&amp;o=5",
+    'U_SEARCH_SELF_BY_LAST' => FORUM_PATH . 'search?uid=' . userdata('user_id') . '&amp;o=5',
     'U_WATCHED_TOPICS' => WATCHLIST_URL,
 ]);
 
 if (defined('BB_SCRIPT') && !empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty(userdata('torhelp'))) {
-    $ignore_time = !empty($_COOKIE['torhelp']) ? (int) $_COOKIE['torhelp'] : 0;
+    $ignore_time = !empty($_COOKIE['torhelp']) ? (int)$_COOKIE['torhelp'] : 0;
 
-    if (TIMENOW > $ignore_time) {
+    if ($ignore_time < TIMENOW) {
         if ($ignore_time) {
             bb_setcookie('torhelp', '', COOKIE_EXPIRED);
         }
 
-        $sql = "
+        $sql = '
 			SELECT topic_id, topic_title
-			FROM " . BB_TOPICS . "
-			WHERE topic_id IN(" . userdata('torhelp') . ")
+			FROM ' . BB_TOPICS . '
+			WHERE topic_id IN(' . userdata('torhelp') . ')
 			LIMIT 8
-		";
+		';
         $torhelp_topics = [];
 
         foreach (DB()->fetch_rowset($sql) as $row) {

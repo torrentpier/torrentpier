@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Captcha;
 
+use Override;
 use ReCaptcha\ReCaptcha;
 
 /**
@@ -40,7 +41,7 @@ class GoogleCaptchaV3 implements CaptchaInterface
      *
      * @return string
      */
-    #[\Override]
+    #[Override]
     public function get(): string
     {
         return __('CAPTCHA_OCCURS_BACKGROUND') . "
@@ -60,7 +61,7 @@ class GoogleCaptchaV3 implements CaptchaInterface
      *
      * @return bool
      */
-    #[\Override]
+    #[Override]
     public function check(): bool
     {
         $reCaptcha = new ReCaptcha($this->settings['secret_key']);

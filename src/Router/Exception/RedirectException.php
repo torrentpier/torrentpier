@@ -39,9 +39,25 @@ class RedirectException extends RuntimeException
      */
     public function __construct(
         private readonly string $url,
-        private readonly int $status = 301
+        private readonly int $status = 301,
     ) {
-        parent::__construct("Redirect to: $url", $status);
+        parent::__construct("Redirect to: {$url}", $status);
+    }
+
+    /**
+     * Create a permanent (301) redirect exception
+     */
+    public static function permanent(string $url): self
+    {
+        return new self($url, 301);
+    }
+
+    /**
+     * Create a temporary (302) redirect exception
+     */
+    public static function temporary(string $url): self
+    {
+        return new self($url, 302);
     }
 
     /**
@@ -70,21 +86,5 @@ class RedirectException extends RuntimeException
         return $response
             ->withStatus($this->status)
             ->withHeader('Location', $this->url);
-    }
-
-    /**
-     * Create a permanent (301) redirect exception
-     */
-    public static function permanent(string $url): self
-    {
-        return new self($url, 301);
-    }
-
-    /**
-     * Create a temporary (302) redirect exception
-     */
-    public static function temporary(string $url): self
-    {
-        return new self($url, 302);
     }
 }

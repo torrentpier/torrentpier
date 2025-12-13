@@ -30,6 +30,7 @@ use TorrentPier\Feed\Provider\FeedProviderInterface;
 final class FeedGenerator
 {
     private static ?self $instance = null;
+
     private FeedIo $feedIo;
 
     /**
@@ -54,6 +55,27 @@ final class FeedGenerator
     }
 
     /**
+     * Prevent cloning
+     */
+    private function __clone() {}
+
+    /**
+     * Prevent serialization of the singleton instance
+     */
+    public function __serialize(): array
+    {
+        throw new LogicException('Cannot serialize singleton');
+    }
+
+    /**
+     * Prevent unserialization of the singleton instance
+     */
+    public function __unserialize(array $data): void
+    {
+        throw new LogicException('Cannot unserialize singleton');
+    }
+
+    /**
      * Get a singleton instance
      *
      * @return self
@@ -72,13 +94,13 @@ final class FeedGenerator
      * Results are cached for performance unless TTL is 0 or negative
      *
      * @param FeedProviderInterface $provider Feed data provider
-     * @return string Atom XML string
      * @throws FeedGenerationException
+     * @return string Atom XML string
      */
     public function generate(FeedProviderInterface $provider): string
     {
         try {
-            $cacheTtl = (int) config()->get('atom.cache_ttl', 600); // Default 10 minutes
+            $cacheTtl = (int)config()->get('atom.cache_ttl', 600); // Default 10 minutes
 
             // If TTL is 0 or negative, disable caching (always generate fresh)
             if ($cacheTtl <= 0) {
@@ -101,9 +123,9 @@ final class FeedGenerator
             return $cached;
         } catch (Throwable $e) {
             throw new FeedGenerationException(
-                "Failed to generate feed: " . $e->getMessage(),
+                'Failed to generate feed: ' . $e->getMessage(),
                 0,
-                $e
+                $e,
             );
         }
     }
@@ -145,26 +167,5 @@ final class FeedGenerator
 
         // Format as Atom XML
         return $this->feedIo->format($feed, 'atom');
-    }
-
-    /**
-     * Prevent cloning
-     */
-    private function __clone() {}
-
-    /**
-     * Prevent serialization of the singleton instance
-     */
-    public function __serialize(): array
-    {
-        throw new LogicException('Cannot serialize singleton');
-    }
-
-    /**
-     * Prevent unserialization of the singleton instance
-     */
-    public function __unserialize(array $data): void
-    {
-        throw new LogicException('Cannot unserialize singleton');
     }
 }

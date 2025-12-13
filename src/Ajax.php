@@ -11,6 +11,8 @@
 namespace TorrentPier;
 
 use Exception;
+use JsonException;
+use RuntimeException;
 
 /**
  * Class Ajax
@@ -19,6 +21,7 @@ use Exception;
 class Ajax
 {
     public array $request = [];
+
     public array $response = [];
 
     public array $valid_actions = [
@@ -83,7 +86,7 @@ class Ajax
         // Actions check
         if (!$action) {
             $this->ajax_die('no action specified');
-        } elseif (!$action_params = & $this->valid_actions[$action]) {
+        } elseif (!$action_params = &$this->valid_actions[$action]) {
             $this->ajax_die('invalid action: ' . $action);
         }
 
@@ -124,11 +127,11 @@ class Ajax
                 $this->check_admin_session();
                 break;
             default:
-                throw new \RuntimeException("invalid auth type for $action");
+                throw new RuntimeException("invalid auth type for {$action}");
         }
 
         // Run action
-        $this->$action();
+        $this->{$action}();
 
         // Send output
         $this->send();
@@ -154,13 +157,12 @@ class Ajax
     public function init()
     {
         $this->request = $_POST;
-        $this->action = & $this->request['action'];
+        $this->action = &$this->request['action'];
     }
 
     /**
      * Send data
      *
-     * @return void
      * @throws Exception
      */
     public function send(): void
@@ -175,8 +177,8 @@ class Ajax
      * OB Handler
      *
      * @param $contents
+     * @throws JsonException
      * @return string
-     * @throws \JsonException
      */
     public function ob_handler($contents): string
     {
@@ -263,8 +265,6 @@ class Ajax
 
     /**
      * Edit user profile actions
-     *
-     * @return void
      */
     public function edit_user_profile()
     {
@@ -273,8 +273,6 @@ class Ajax
 
     /**
      * Change user rank actions
-     *
-     * @return void
      */
     public function change_user_rank()
     {
@@ -283,8 +281,6 @@ class Ajax
 
     /**
      * Change user opt actions
-     *
-     * @return void
      */
     public function change_user_opt()
     {
@@ -293,8 +289,6 @@ class Ajax
 
     /**
      * Passkey actions
-     *
-     * @return void
      */
     public function passkey()
     {
@@ -303,8 +297,6 @@ class Ajax
 
     /**
      * Group membership actions
-     *
-     * @return void
      */
     public function group_membership()
     {
@@ -313,8 +305,6 @@ class Ajax
 
     /**
      * Manage group actions
-     *
-     * @return void
      */
     public function manage_group()
     {
@@ -323,8 +313,6 @@ class Ajax
 
     /**
      * Post moderator comment actions
-     *
-     * @return void
      */
     public function post_mod_comment()
     {
@@ -333,8 +321,6 @@ class Ajax
 
     /**
      * View post actions
-     *
-     * @return void
      */
     public function view_post()
     {
@@ -343,8 +329,6 @@ class Ajax
 
     /**
      * Change torrent status actions
-     *
-     * @return void
      */
     public function change_tor_status()
     {
@@ -353,8 +337,6 @@ class Ajax
 
     /**
      * Change torrent actions
-     *
-     * @return void
      */
     public function change_torrent()
     {
@@ -363,8 +345,6 @@ class Ajax
 
     /**
      * View torrent actions
-     *
-     * @return void
      */
     public function view_torrent()
     {
@@ -373,8 +353,6 @@ class Ajax
 
     /**
      * User registration actions
-     *
-     * @return void
      */
     public function user_register()
     {
@@ -383,8 +361,6 @@ class Ajax
 
     /**
      * Moderator actions
-     *
-     * @return void
      */
     public function mod_action()
     {
@@ -393,8 +369,6 @@ class Ajax
 
     /**
      * Posts actions
-     *
-     * @return void
      */
     public function posts()
     {
@@ -403,8 +377,6 @@ class Ajax
 
     /**
      * Manage user actions
-     *
-     * @return void
      */
     public function manage_user()
     {
@@ -413,8 +385,6 @@ class Ajax
 
     /**
      * Manage admin actions
-     *
-     * @return void
      */
     public function manage_admin()
     {
@@ -423,8 +393,6 @@ class Ajax
 
     /**
      * Topic tpl actions
-     *
-     * @return void
      */
     public function topic_tpl()
     {
@@ -433,8 +401,6 @@ class Ajax
 
     /**
      * Index data actions
-     *
-     * @return void
      */
     public function index_data()
     {
@@ -443,8 +409,6 @@ class Ajax
 
     /**
      * Avatar actions
-     *
-     * @return void
      */
     public function avatar()
     {
@@ -453,8 +417,6 @@ class Ajax
 
     /**
      * Sitemap actions
-     *
-     * @return void
      */
     public function sitemap()
     {
@@ -463,8 +425,6 @@ class Ajax
 
     /**
      * Call seed actions
-     *
-     * @return void
      */
     public function callseed()
     {
@@ -473,8 +433,6 @@ class Ajax
 
     /**
      * Get / Set votes
-     *
-     * @return void
      */
     public function thx()
     {
@@ -483,8 +441,6 @@ class Ajax
 
     /**
      * Get info from ffprobe (TorrServer API)
-     *
-     * @return void
      */
     public function ffprobe_info()
     {

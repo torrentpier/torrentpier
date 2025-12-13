@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -43,14 +44,14 @@ function get_thanks_list($topic_id, string $thanks_cache_key, int $cache_lifetim
 {
     if (!$cached_thanks = CACHE('bb_cache')->get($thanks_cache_key)) {
         $cached_thanks = [];
-        $sql = DB()->fetch_rowset('SELECT u.username, u.user_rank, u.user_id, thx.* FROM ' . BB_THX . ' thx, ' . BB_USERS . " u WHERE thx.topic_id = $topic_id AND thx.user_id = u.user_id");
+        $sql = DB()->fetch_rowset('SELECT u.username, u.user_rank, u.user_id, thx.* FROM ' . BB_THX . ' thx, ' . BB_USERS . " u WHERE thx.topic_id = {$topic_id} AND thx.user_id = u.user_id");
 
         foreach ($sql as $row) {
             $cached_thanks[$row['user_id']] = [
                 'user_id' => $row['user_id'],
                 'username' => $row['username'],
                 'user_rank' => $row['user_rank'],
-                'time' => $row['time']
+                'time' => $row['time'],
             ];
         }
 
@@ -78,14 +79,14 @@ switch ($mode) {
         }
 
         $columns = 'topic_id, user_id, time';
-        $values = "$topic_id, " . userdata('user_id') . ", " . TIMENOW;
-        DB()->query('INSERT IGNORE INTO ' . BB_THX . " ($columns) VALUES ($values)");
+        $values = "{$topic_id}, " . userdata('user_id') . ', ' . TIMENOW;
+        DB()->query('INSERT IGNORE INTO ' . BB_THX . " ({$columns}) VALUES ({$values})");
 
         $cached_thanks[userdata('user_id')] = [
             'user_id' => userdata('user_id'),
             'username' => userdata('username'),
             'user_rank' => userdata('user_rank'),
-            'time' => TIMENOW
+            'time' => TIMENOW,
         ];
 
         // Limit voters per topic
@@ -101,7 +102,7 @@ switch ($mode) {
                 }
 
                 if ($oldest_user_id) {
-                    DB()->query('DELETE FROM ' . BB_THX . " WHERE topic_id = $topic_id AND user_id = $oldest_user_id LIMIT 1");
+                    DB()->query('DELETE FROM ' . BB_THX . " WHERE topic_id = {$topic_id} AND user_id = {$oldest_user_id} LIMIT 1");
                     unset($cached_thanks[$oldest_user_id]);
                 }
             }

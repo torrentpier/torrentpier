@@ -29,6 +29,7 @@ use Transliterator;
 class Slug
 {
     private static ?Transliterator $transliterator = null;
+
     private static ?AsciiSlugger $slugger = null;
 
     /**
@@ -62,6 +63,16 @@ class Slug
     }
 
     /**
+     * Reset cached instances (useful for testing)
+     */
+    public static function reset(): void
+    {
+        self::$transliterator = null;
+        self::$slugger = null;
+        Romanization::reset();
+    }
+
+    /**
      * Check if a string contains only ASCII characters
      */
     private static function isAscii(string $string): bool
@@ -78,7 +89,7 @@ class Slug
     private static function transliterate(string $string): string
     {
         // If intl extension is available, use ICU (best quality)
-        if (function_exists('transliterator_transliterate')) {
+        if (\function_exists('transliterator_transliterate')) {
             $transliterator = self::getTransliterator();
             if ($transliterator !== null) {
                 $result = $transliterator->transliterate($string);
@@ -108,7 +119,7 @@ class Slug
             // 4. [:Nonspacing Mark:] Remove: Remove combining marks
             // 5. NFC: Normalize (compose)
             self::$transliterator = Transliterator::create(
-                'Any-Latin; Latin-ASCII; NFD; [:Nonspacing Mark:] Remove; NFC'
+                'Any-Latin; Latin-ASCII; NFD; [:Nonspacing Mark:] Remove; NFC',
             );
         }
 
@@ -164,15 +175,5 @@ class Slug
 
         // Remove trailing hyphens
         return rtrim($truncated, '-');
-    }
-
-    /**
-     * Reset cached instances (useful for testing)
-     */
-    public static function reset(): void
-    {
-        self::$transliterator = null;
-        self::$slugger = null;
-        Romanization::reset();
     }
 }

@@ -80,7 +80,7 @@ class CachePanel implements IBarPanel
         $stats = $this->collector->getStats();
         $html .= '<div class="tp-cache-stats">';
         $html .= '<div class="tp-stat"><span class="tp-stat-value">' . $data['total_queries'] . '</span><span class="tp-stat-label">Operations</span></div>';
-        $html .= '<div class="tp-stat"><span class="tp-stat-value">' . sprintf('%.3f', $data['total_time']) . 's</span><span class="tp-stat-label">Total Time</span></div>';
+        $html .= '<div class="tp-stat"><span class="tp-stat-value">' . \sprintf('%.3f', $data['total_time']) . 's</span><span class="tp-stat-label">Total Time</span></div>';
         $html .= '<div class="tp-stat"><span class="tp-stat-value">' . $stats['cache_count'] . '</span><span class="tp-stat-label">Engines</span></div>';
         $html .= '</div>';
 
@@ -116,7 +116,7 @@ class CachePanel implements IBarPanel
         $html .= 'CACHE(\'' . htmlspecialchars($name) . '\')';
         $html .= ' <small>(' . $data['num_queries'] . ' ops';
         if ($data['total_time'] > 0) {
-            $html .= ', ' . sprintf('%.3f', $data['total_time']) . 's';
+            $html .= ', ' . \sprintf('%.3f', $data['total_time']) . 's';
         }
         $html .= ')</small>';
         $html .= '</h3>';
@@ -143,7 +143,7 @@ class CachePanel implements IBarPanel
         $html .= 'Datastore';
         $html .= ' <small>(' . $data['num_queries'] . ' ops';
         if ($data['total_time'] > 0) {
-            $html .= ', ' . sprintf('%.3f', $data['total_time']) . 's';
+            $html .= ', ' . \sprintf('%.3f', $data['total_time']) . 's';
         }
         $html .= ')</small>';
         $html .= '</h3>';
@@ -176,7 +176,7 @@ class CachePanel implements IBarPanel
         foreach ($queries as $idx => $query) {
             $html .= '<tr>';
             $html .= '<td class="tp-num">' . ($idx + 1) . '</td>';
-            $html .= '<td class="tp-time">' . sprintf('%.3f', $query['time']) . 's</td>';
+            $html .= '<td class="tp-time">' . \sprintf('%.3f', $query['time']) . 's</td>';
             $html .= '<td class="tp-sql"><code>' . htmlspecialchars($this->truncate($query['sql'])) . '</code></td>';
             $html .= '<td class="tp-source">' . htmlspecialchars($query['source']) . '</td>';
             $html .= '</tr>';
@@ -192,10 +192,11 @@ class CachePanel implements IBarPanel
      */
     private function truncate(string $str): string
     {
-        $maxLen = (int) config()->get('debug.max_query_length', 1000);
-        if (strlen($str) > $maxLen) {
+        $maxLen = (int)config()->get('debug.max_query_length', 1000);
+        if (\strlen($str) > $maxLen) {
             return substr($str, 0, $maxLen - 3) . '...';
         }
+
         return $str;
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -98,14 +99,14 @@ require_once BB_PATH . '/vendor/autoload.php';
  */
 function env(string $key, mixed $default = null): mixed
 {
-    return \TorrentPier\Env::get($key, $default);
+    return TorrentPier\Env::get($key, $default);
 }
 
 // Load ENV
 try {
     $dotenv = Dotenv\Dotenv::createMutable(BB_PATH);
     $dotenv->load();
-} catch (\Dotenv\Exception\InvalidPathException $pathException) {
+} catch (Dotenv\Exception\InvalidPathException $pathException) {
     die('🔩 Setup required: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php bull app:install</code> to configure TorrentPier');
 }
 
@@ -119,26 +120,26 @@ if (is_file(BB_PATH . '/config/config.local.php')) {
 
 /** @noinspection PhpUndefinedVariableInspection */
 // Initialize Config singleton, bb_cfg from global file config
-$config = \TorrentPier\Config::init($bb_cfg);
+$config = TorrentPier\Config::init($bb_cfg);
 
 /**
  * Get the Config instance
  *
- * @return \TorrentPier\Config
+ * @return TorrentPier\Config
  */
-function config(): \TorrentPier\Config
+function config(): TorrentPier\Config
 {
-    return \TorrentPier\Config::getInstance();
+    return TorrentPier\Config::getInstance();
 }
 
 /**
  * Get the HTTP Client instance
  *
- * @return \TorrentPier\Http\HttpClient
+ * @return TorrentPier\Http\HttpClient
  */
-function httpClient(): \TorrentPier\Http\HttpClient
+function httpClient(): TorrentPier\Http\HttpClient
 {
-    return \TorrentPier\Http\HttpClient::getInstance();
+    return TorrentPier\Http\HttpClient::getInstance();
 }
 
 /**
@@ -183,11 +184,11 @@ function httpClient(): \TorrentPier\Http\HttpClient
  *   request()->getContent()                 // Raw request body
  *   request()->getSymfonyRequest()          // Underlying Symfony Request
  *
- * @return \TorrentPier\Http\Request
+ * @return TorrentPier\Http\Request
  */
-function request(): \TorrentPier\Http\Request
+function request(): TorrentPier\Http\Request
 {
-    return \TorrentPier\Http\Request::getInstance();
+    return TorrentPier\Http\Request::getInstance();
 }
 
 /**
@@ -197,47 +198,47 @@ function request(): \TorrentPier\Http\Request
  */
 function humanTime(int|string $timestamp, int|string|null $reference = null): string
 {
-    return \TorrentPier\Helpers\TimeHelper::humanTime($timestamp, $reference);
+    return TorrentPier\Helpers\TimeHelper::humanTime($timestamp, $reference);
 }
 
 /**
  * Get the Censor instance
  *
- * @return \TorrentPier\Censor
+ * @return TorrentPier\Censor
  */
-function censor(): \TorrentPier\Censor
+function censor(): TorrentPier\Censor
 {
-    return \TorrentPier\Censor::getInstance();
+    return TorrentPier\Censor::getInstance();
 }
 
 /**
  * Whoops error handler singleton
  *
- * @return \TorrentPier\Whoops\WhoopsManager
+ * @return TorrentPier\Whoops\WhoopsManager
  */
-function whoops(): \TorrentPier\Whoops\WhoopsManager
+function whoops(): TorrentPier\Whoops\WhoopsManager
 {
-    return \TorrentPier\Whoops\WhoopsManager::getInstance();
+    return TorrentPier\Whoops\WhoopsManager::getInstance();
 }
 
 /**
  * Tracy debug bar singleton
  *
- * @return \TorrentPier\Tracy\TracyBarManager
+ * @return TorrentPier\Tracy\TracyBarManager
  */
-function tracy(): \TorrentPier\Tracy\TracyBarManager
+function tracy(): TorrentPier\Tracy\TracyBarManager
 {
-    return \TorrentPier\Tracy\TracyBarManager::getInstance();
+    return TorrentPier\Tracy\TracyBarManager::getInstance();
 }
 
 /**
  * Get the Language instance
  *
- * @return \TorrentPier\Language
+ * @return TorrentPier\Language
  */
-function lang(): \TorrentPier\Language
+function lang(): TorrentPier\Language
 {
-    return \TorrentPier\Language::getInstance();
+    return TorrentPier\Language::getInstance();
 }
 
 /**
@@ -249,7 +250,7 @@ function lang(): \TorrentPier\Language
  */
 function __(string $key, mixed $default = null): mixed
 {
-    return \TorrentPier\Language::getInstance()->get($key, $default);
+    return TorrentPier\Language::getInstance()->get($key, $default);
 }
 
 /**
@@ -257,22 +258,21 @@ function __(string $key, mixed $default = null): mixed
  *
  * @param string $key Language key, supports dot notation
  * @param mixed $default Default value if key doesn't exist
- * @return void
  */
 function _e(string $key, mixed $default = null): void
 {
-    echo \TorrentPier\Language::getInstance()->get($key, $default);
+    echo TorrentPier\Language::getInstance()->get($key, $default);
 }
 
 /**
  * Get the Template instance
  *
  * @param string|null $root Template root directory
- * @return \TorrentPier\Template\Template
+ * @return TorrentPier\Template\Template
  */
-function template(?string $root = null): \TorrentPier\Template\Template
+function template(?string $root = null): TorrentPier\Template\Template
 {
-    return \TorrentPier\Template\Template::getInstance($root);
+    return TorrentPier\Template\Template::getInstance($root);
 }
 
 /**
@@ -326,9 +326,9 @@ TorrentPier\Database\DatabaseFactory::init(config()->get('db'), config()->get('d
  * Get the Database instance
  *
  * @param string $db_alias
- * @return \TorrentPier\Database\Database
+ * @return TorrentPier\Database\Database
  */
-function DB(string $db_alias = 'db'): \TorrentPier\Database\Database
+function DB(string $db_alias = 'db'): TorrentPier\Database\Database
 {
     return TorrentPier\Database\DatabaseFactory::getInstance($db_alias);
 }
@@ -340,9 +340,9 @@ TorrentPier\Cache\UnifiedCacheSystem::getInstance(config()->all());
  * Get cache manager instance (replaces legacy cache system)
  *
  * @param string $cache_name
- * @return \TorrentPier\Cache\CacheManager
+ * @return TorrentPier\Cache\CacheManager
  */
-function CACHE(string $cache_name): \TorrentPier\Cache\CacheManager
+function CACHE(string $cache_name): TorrentPier\Cache\CacheManager
 {
     return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->get_cache_obj($cache_name);
 }
@@ -350,9 +350,9 @@ function CACHE(string $cache_name): \TorrentPier\Cache\CacheManager
 /**
  * Get datastore manager instance (replaces legacy datastore system)
  *
- * @return \TorrentPier\Cache\DatastoreManager
+ * @return TorrentPier\Cache\DatastoreManager
  */
-function datastore(): \TorrentPier\Cache\DatastoreManager
+function datastore(): TorrentPier\Cache\DatastoreManager
 {
     return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->getDatastore(config()->get('datastore_type', 'file'));
 }
@@ -360,9 +360,9 @@ function datastore(): \TorrentPier\Cache\DatastoreManager
 /**
  * User singleton helper
  *
- * @return \TorrentPier\Legacy\Common\User
+ * @return TorrentPier\Legacy\Common\User
  */
-function user(): \TorrentPier\Legacy\Common\User
+function user(): TorrentPier\Legacy\Common\User
 {
     return TorrentPier\Legacy\Common\User::getInstance();
 }
@@ -376,34 +376,37 @@ function user(): \TorrentPier\Legacy\Common\User
 function userdata(?string $key = null): mixed
 {
     $data = user()->data;
+
     return $key === null ? $data : ($data[$key] ?? null);
 }
 
 /**
  * LogAction singleton helper
  *
- * @return \TorrentPier\Legacy\LogAction
+ * @return TorrentPier\Legacy\LogAction
  */
-function log_action(): \TorrentPier\Legacy\LogAction
+function log_action(): TorrentPier\Legacy\LogAction
 {
     static $instance = null;
     if ($instance === null) {
-        $instance = new \TorrentPier\Legacy\LogAction();
+        $instance = new TorrentPier\Legacy\LogAction();
     }
+
     return $instance;
 }
 
 /**
  * Html helper singleton
  *
- * @return \TorrentPier\Legacy\Common\Html
+ * @return TorrentPier\Legacy\Common\Html
  */
-function html(): \TorrentPier\Legacy\Common\Html
+function html(): TorrentPier\Legacy\Common\Html
 {
     static $instance = null;
     if ($instance === null) {
-        $instance = new \TorrentPier\Legacy\Common\Html();
+        $instance = new TorrentPier\Legacy\Common\Html();
     }
+
     return $instance;
 }
 
@@ -419,48 +422,52 @@ function simple_header(?bool $set = null): bool
     if ($set !== null) {
         $value = $set;
     }
+
     return $value;
 }
 
 /**
  * BBCode parser singleton
  *
- * @return \TorrentPier\Legacy\BBCode
+ * @return TorrentPier\Legacy\BBCode
  */
-function bbcode(): \TorrentPier\Legacy\BBCode
+function bbcode(): TorrentPier\Legacy\BBCode
 {
     static $instance = null;
     if ($instance === null) {
-        $instance = new \TorrentPier\Legacy\BBCode();
+        $instance = new TorrentPier\Legacy\BBCode();
     }
+
     return $instance;
 }
 
 /**
  * Ajax handler singleton
  *
- * @return \TorrentPier\Ajax
+ * @return TorrentPier\Ajax
  */
-function ajax(): \TorrentPier\Ajax
+function ajax(): TorrentPier\Ajax
 {
     static $instance = null;
     if ($instance === null) {
-        $instance = new \TorrentPier\Ajax();
+        $instance = new TorrentPier\Ajax();
     }
+
     return $instance;
 }
 
 /**
  * Manticore search singleton
  *
- * @return \TorrentPier\ManticoreSearch|null
+ * @return TorrentPier\ManticoreSearch|null
  */
-function manticore(): ?\TorrentPier\ManticoreSearch
+function manticore(): ?TorrentPier\ManticoreSearch
 {
     static $instance = null;
     if ($instance === null) {
-        $instance = new \TorrentPier\ManticoreSearch();
+        $instance = new TorrentPier\ManticoreSearch();
     }
+
     return $instance;
 }
 
@@ -513,17 +520,18 @@ function bitfields(?string $type = null): array
             ],
         ];
     }
+
     return $type === null ? $bf : ($bf[$type] ?? []);
 }
 
 /**
  * Read tracker singleton - tracks read status of topics and forums
  *
- * @return \TorrentPier\ReadTracker
+ * @return TorrentPier\ReadTracker
  */
-function read_tracker(): \TorrentPier\ReadTracker
+function read_tracker(): TorrentPier\ReadTracker
 {
-    return \TorrentPier\ReadTracker::getInstance();
+    return TorrentPier\ReadTracker::getInstance();
 }
 
 /**
@@ -554,10 +562,11 @@ function &tracking_forums(): array
  */
 function forum_tree(bool $refresh = false): array
 {
-    $instance = \TorrentPier\Forum\ForumTree::getInstance();
+    $instance = TorrentPier\Forum\ForumTree::getInstance();
     if ($refresh) {
         $instance->refresh();
     }
+
     return $instance->get();
 }
 
@@ -583,6 +592,7 @@ function page_cfg(?string $key = null, mixed $value = null): mixed
 
     if (func_num_args() === 2) {
         $config[$key] = $value;
+
         return $value;
     }
 
@@ -604,6 +614,7 @@ function dl_link_css(int $status): string
         DL_STATUS_COMPLETE => 'seedmed',
         DL_STATUS_CANCEL => 'dlCancel',
     ];
+
     return $map[$status] ?? 'genmed';
 }
 
@@ -622,6 +633,7 @@ function dl_status_css(int $status): string
         DL_STATUS_COMPLETE => 'dlComplete',
         DL_STATUS_CANCEL => 'dlCancel',
     ];
+
     return $map[$status] ?? 'gen';
 }
 
@@ -699,6 +711,7 @@ function bb_mkdir($path, $mode = 0777)
     $old_um = umask(0);
     $dir = mkdir_rec($path, $mode);
     umask($old_um);
+
     return $dir;
 }
 
@@ -713,12 +726,13 @@ function mkdir_rec($path, $mode): bool
 
 function verify_id($id, $length): bool
 {
-    return (is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id));
+    return is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id);
 }
 
 function clean_filename($fname)
 {
     static $s = ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' '];
+
     return str_replace($s, '_', str_compact($fname));
 }
 
@@ -751,8 +765,8 @@ function str_compact($str)
  * Should not be considered sufficient for cryptography, etc.
  *
  * @param int $length
- * @return string
  * @throws Exception
+ * @return string
  */
 function make_rand_str(int $length = 10): string
 {
@@ -787,7 +801,7 @@ function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $
         if (time() > (TIMENOW + $timeout)) {
             return [
                 'timeout' => true,
-                'recs' => $recursions
+                'recs' => $recursions,
             ];
         }
         $recursions++;
@@ -856,7 +870,7 @@ function sys(string $param)
         case 'mem_peak':
             return memory_get_peak_usage();
         default:
-            throw new \RuntimeException(__FUNCTION__ . ": invalid param '$param'");
+            throw new RuntimeException(__FUNCTION__ . ": invalid param '{$param}'");
     }
 }
 
@@ -876,7 +890,7 @@ if (!defined('IN_TRACKER')) {
     // Init board
     require_once INC_DIR . '/init_bb.php';
 } else {
-    define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long(request()->server->get('REMOTE_ADDR')), request()->query->getInt('port') ?: random_int(1000, 65000)));
+    define('DUMMY_PEER', pack('Nn', TorrentPier\Helpers\IPHelper::ip2long(request()->server->get('REMOTE_ADDR')), request()->query->getInt('port') ?: random_int(1000, 65000)));
 
     define('PEER_HASH_EXPIRE', round(config()->get('announce_interval') * (0.85 * config()->get('tracker.expire_factor'))));
     define('PEERS_LIST_EXPIRE', round(config()->get('announce_interval') * 0.7));

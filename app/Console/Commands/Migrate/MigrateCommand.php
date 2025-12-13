@@ -23,7 +23,7 @@ use TorrentPier\Console\Helpers\PhinxManager;
  */
 #[AsCommand(
     name: 'migrate',
-    description: 'Run database migrations'
+    description: 'Run database migrations',
 )]
 class MigrateCommand extends Command
 {
@@ -34,13 +34,13 @@ class MigrateCommand extends Command
                 'target',
                 't',
                 InputOption::VALUE_OPTIONAL,
-                'Target migration version'
+                'Target migration version',
             )
             ->addOption(
                 'fake',
                 null,
                 InputOption::VALUE_NONE,
-                'Mark migrations as run without actually running them'
+                'Mark migrations as run without actually running them',
             );
     }
 
@@ -59,10 +59,11 @@ class MigrateCommand extends Command
 
             if ($status['pending'] === 0) {
                 $this->success('Database is up to date. No migrations to run.');
+
                 return self::SUCCESS;
             }
 
-            $this->info(sprintf('Found %d pending migration(s)', $status['pending']));
+            $this->info(\sprintf('Found %d pending migration(s)', $status['pending']));
             $this->line();
 
             if ($fake) {
@@ -72,7 +73,7 @@ class MigrateCommand extends Command
 
             $this->section('Running Migrations');
 
-            $targetVersion = $target !== null ? (int) $target : null;
+            $targetVersion = $target !== null ? (int)$target : null;
             $phinx->migrate($targetVersion, $fake);
 
             $this->line();

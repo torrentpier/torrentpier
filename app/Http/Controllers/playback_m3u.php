@@ -41,7 +41,7 @@ if (!$row = DB()->fetch_row($sql)) {
 }
 
 // Check m3u file exist
-$torrServer = new \TorrentPier\TorrServerAPI();
+$torrServer = new TorrentPier\TorrServerAPI();
 if (!$m3uFile = $torrServer->getM3UPath($topic_id)) {
     bb_die(__('ERROR_NO_ATTACHMENT'));
 }
@@ -57,7 +57,7 @@ if (!$is_auth['auth_download']) {
 
 // Check for frozen torrent
 $tor_status = $row['tor_status'];
-if (!IS_AM && isset(config()->get('tor_frozen')[$tor_status]) && !(isset(config()->get('tor_frozen_author_download')[$tor_status]) && \TorrentPier\Topic\Guard::isAuthor($row['poster_id']))) {
+if (!IS_AM && isset(config()->get('tor_frozen')[$tor_status]) && !(isset(config()->get('tor_frozen_author_download')[$tor_status]) && TorrentPier\Topic\Guard::isAuthor($row['poster_id']))) {
     bb_die(__('TOR_STATUS_FORBIDDEN') . __('TOR_STATUS_NAME')[$tor_status]);
 }
 
@@ -83,7 +83,7 @@ foreach ($m3uData as $entry) {
     // Parse tags
     foreach ($entry->getExtTags() as $extTag) {
         // #EXTINF tag
-        if ($extTag instanceof \M3uParser\Tag\ExtInf) {
+        if ($extTag instanceof M3uParser\Tag\ExtInf) {
             $title = $extTag->getTitle();
         }
     }
@@ -107,7 +107,7 @@ foreach ($m3uData as $entry) {
         'FILE_INDEX' => $urlParams['index'],
         'ROW_CLASS' => $rowClass,
         'IS_VALID' => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
-        'IS_AUDIO' => (int) in_array($getExtension, $validFormats['audio']),
+        'IS_AUDIO' => (int)in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $streamLink,
         'M3U_DL_LINK' => DL_URL . $topic_id . '/?m3u=1',
         'TITLE' => $title,

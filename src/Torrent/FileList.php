@@ -16,11 +16,13 @@ namespace TorrentPier\Torrent;
 class FileList
 {
     public array $tor_decoded = [];
+
     public array $files_ary = [
         '/' => [],
     ];
 
     public bool $multiple = false;
+
     public string $root_dir = '';
 
     /**
@@ -42,7 +44,7 @@ class FileList
     {
         $info = &$this->tor_decoded['info'];
         if (isset($info['meta version'], $info['file tree'])) { //v2
-            if (($info['meta version']) === 2 && is_array($info['file tree'])) {
+            if (($info['meta version']) === 2 && \is_array($info['file tree'])) {
                 return $this->fileTreeList($info['file tree'], $info['name'] ?? '', config()->get('flist_timeout'));
             }
         }
@@ -57,81 +59,11 @@ class FileList
                 unset($this->files_ary['/']);
             }
             $filelist = html()->array2html($this->files_ary);
-            return "<div class=\"tor-root-dir\">$this->root_dir</div>$filelist";
+
+            return "<div class=\"tor-root-dir\">{$this->root_dir}</div>{$filelist}";
         }
 
         return implode('', $this->files_ary['/']);
-    }
-
-    /**
-     * Forming a file list
-     *
-     * @return void
-     */
-    private function build_filelist_array(): void
-    {
-        $info = &$this->tor_decoded['info'];
-
-        if (isset($info['name.utf-8'])) {
-            $info['name'] = & $info['name.utf-8'];
-        }
-
-        if (isset($info['files']) && is_array($info['files'])) {
-            $this->root_dir = isset($info['name']) ? clean_tor_dirname($info['name']) : '...';
-            $this->multiple = true;
-
-            foreach ($info['files'] as $f) {
-                if (isset($f['path.utf-8'])) {
-                    $f['path'] = & $f['path.utf-8'];
-                }
-                if (!isset($f['path']) || !is_array($f['path'])) {
-                    continue;
-                }
-                // Exclude padding files
-                if (isset($f['attr']) && $f['attr'] === 'p') {
-                    continue;
-                }
-
-                $structure = array_deep($f['path'], 'clean_tor_dirname', timeout: config()->get('flist_timeout'));
-                if (isset($structure['timeout'])) {
-                    bb_die("Timeout, too many nested files/directories for file listing, aborting after \n{$structure['recs']} recursive calls.\nNesting level: " . count($info['files'], COUNT_RECURSIVE));
-                }
-
-                $length = isset($f['length']) ? (float) $f['length'] : 0;
-                $subdir_count = count($f['path']) - 1;
-
-                if ($subdir_count > 0) {
-                    $name = array_pop($f['path']);
-                    $cur_files_ary = & $this->files_ary;
-
-                    for ($i = 0, $j = 1; $i < $subdir_count; $i++, $j++) {
-                        $subdir = $f['path'][$i];
-
-                        if (!isset($cur_files_ary[$subdir]) || !is_array($cur_files_ary[$subdir])) {
-                            $cur_files_ary[$subdir] = [];
-                        }
-                        $cur_files_ary = & $cur_files_ary[$subdir];
-
-                        if ($j === $subdir_count) {
-                            if (is_string($cur_files_ary)) {
-                                break;
-                            }
-                            $cur_files_ary[] = "$name <i>$length</i>";
-                        }
-                    }
-                    asort($cur_files_ary);
-                } else {
-                    $name = $f['path'][0];
-                    $this->files_ary['/'][] = "$name <i>$length</i>";
-                    natsort($this->files_ary['/']);
-                }
-            }
-        } else {
-            $name = clean_tor_dirname($info['name']);
-            $length = (float) $info['length'];
-            $this->files_ary['/'][] = "$name <i>$length</i>";
-            natsort($this->files_ary['/']);
-        }
     }
 
     /**
@@ -150,7 +82,7 @@ class FileList
         if ($timeout) {
             static $recursions = 0;
             if (time() > (TIMENOW + $timeout)) {
-                bb_die("Timeout, too many nested files/directories for file listing, aborting after \n$recursions recursive calls.\nNesting level: " . count($this->tor_decoded['info']['file tree'], COUNT_RECURSIVE));
+                bb_die("Timeout, too many nested files/directories for file listing, aborting after \n{$recursions} recursive calls.\nNesting level: " . \count($this->tor_decoded['info']['file tree'], COUNT_RECURSIVE));
             }
             $recursions++;
         }
@@ -159,10 +91,10 @@ class FileList
             $key = clean_tor_dirname($key);
             if (!isset($value[''])) {
                 $html_v2 = $this->fileTreeList($value, timeout: $timeout, child: true);
-                $allItems .= "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
+                $allItems .= "<li><span class=\"b\">{$key}</span><ul>{$html_v2}</ul></li>";
             } else {
                 $length = $value['']['length'];
-                $allItems .= "<li><span>$key<i>$length</i></span></li>";
+                $allItems .= "<li><span>{$key}<i>{$length}</i></span></li>";
             }
         }
 
@@ -171,5 +103,74 @@ class FileList
         }
 
         return $allItems;
+    }
+
+    /**
+     * Forming a file list
+     */
+    private function build_filelist_array(): void
+    {
+        $info = &$this->tor_decoded['info'];
+
+        if (isset($info['name.utf-8'])) {
+            $info['name'] = &$info['name.utf-8'];
+        }
+
+        if (isset($info['files']) && \is_array($info['files'])) {
+            $this->root_dir = isset($info['name']) ? clean_tor_dirname($info['name']) : '...';
+            $this->multiple = true;
+
+            foreach ($info['files'] as $f) {
+                if (isset($f['path.utf-8'])) {
+                    $f['path'] = &$f['path.utf-8'];
+                }
+                if (!isset($f['path']) || !\is_array($f['path'])) {
+                    continue;
+                }
+                // Exclude padding files
+                if (isset($f['attr']) && $f['attr'] === 'p') {
+                    continue;
+                }
+
+                $structure = array_deep($f['path'], 'clean_tor_dirname', timeout: config()->get('flist_timeout'));
+                if (isset($structure['timeout'])) {
+                    bb_die("Timeout, too many nested files/directories for file listing, aborting after \n{$structure['recs']} recursive calls.\nNesting level: " . \count($info['files'], COUNT_RECURSIVE));
+                }
+
+                $length = isset($f['length']) ? (float)$f['length'] : 0;
+                $subdir_count = \count($f['path']) - 1;
+
+                if ($subdir_count > 0) {
+                    $name = array_pop($f['path']);
+                    $cur_files_ary = &$this->files_ary;
+
+                    for ($i = 0, $j = 1; $i < $subdir_count; $i++, $j++) {
+                        $subdir = $f['path'][$i];
+
+                        if (!isset($cur_files_ary[$subdir]) || !\is_array($cur_files_ary[$subdir])) {
+                            $cur_files_ary[$subdir] = [];
+                        }
+                        $cur_files_ary = &$cur_files_ary[$subdir];
+
+                        if ($j === $subdir_count) {
+                            if (\is_string($cur_files_ary)) {
+                                break;
+                            }
+                            $cur_files_ary[] = "{$name} <i>{$length}</i>";
+                        }
+                    }
+                    asort($cur_files_ary);
+                } else {
+                    $name = $f['path'][0];
+                    $this->files_ary['/'][] = "{$name} <i>{$length}</i>";
+                    natsort($this->files_ary['/']);
+                }
+            }
+        } else {
+            $name = clean_tor_dirname($info['name']);
+            $length = (float)$info['length'];
+            $this->files_ary['/'][] = "{$name} <i>{$length}</i>";
+            natsort($this->files_ary['/']);
+        }
     }
 }

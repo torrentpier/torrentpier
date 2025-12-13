@@ -67,21 +67,22 @@ class Sender
                     ->fetch();
 
                 if (!$dl || $dl['user_status'] != DL_STATUS_COMPLETE) {
-                    bb_die(sprintf(__('BT_LOW_RATIO_FOR_DL'), round($user_ratio, 2), "search.php?dlu=$user_id&amp;dlc=1"));
+                    bb_die(\sprintf(__('BT_LOW_RATIO_FOR_DL'), round($user_ratio, 2), "search.php?dlu={$user_id}&amp;dlc=1"));
                 }
             }
         }
 
         // Torrent decoding
         $file_contents = file_get_contents($filename);
+
         try {
             $tor = Bencode::decode($file_contents, dictType: Collection::ARRAY);
         } catch (Exception $e) {
-            bb_die(htmlCHR(__('TORFILE_INVALID') . ": " . $e->getMessage()));
+            bb_die(htmlCHR(__('TORFILE_INVALID') . ': ' . $e->getMessage()));
         }
 
         // Get tracker announcer
-        $announce_url = config()->get('bt_announce_url') . "?$passkey_key=$passkey_val";
+        $announce_url = config()->get('bt_announce_url') . "?{$passkey_key}={$passkey_val}";
 
         // Replace the original announce url with tracker default
         if (config()->get('bt_replace_ann_url') || !isset($tor['announce'])) {
@@ -89,7 +90,7 @@ class Sender
         }
 
         // Creating / cleaning announce-list
-        if (!isset($tor['announce-list']) || !is_array($tor['announce-list']) || config()->get('bt_del_addit_ann_urls') || config()->get('bt_disable_dht')) {
+        if (!isset($tor['announce-list']) || !\is_array($tor['announce-list']) || config()->get('bt_del_addit_ann_urls') || config()->get('bt_disable_dht')) {
             $tor['announce-list'] = [];
         }
 

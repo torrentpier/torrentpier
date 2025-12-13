@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,7 +12,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$sql = "SELECT * FROM " . BB_BANLIST;
+$sql = 'SELECT * FROM ' . BB_BANLIST;
 $bans = [];
 
 foreach (DB()->fetch_rowset($sql) as $row) {

@@ -90,7 +90,7 @@ describe('TimeHelper class', function () {
         });
 
         it('accepts string timestamp', function () {
-            $timestamp = (string) Carbon::now()->subMinutes(30)->timestamp;
+            $timestamp = (string)Carbon::now()->subMinutes(30)->timestamp;
 
             $result = TimeHelper::humanTime($timestamp);
 

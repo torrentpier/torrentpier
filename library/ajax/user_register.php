@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -20,7 +21,7 @@ switch ($mode) {
     case 'check_name':
         $username = clean_username($this->request['username']);
 
-        if ($err = \TorrentPier\Validate::username($username)) {
+        if ($err = TorrentPier\Validate::username($username)) {
             $html = '<img src="/assets/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         }
         break;
@@ -28,7 +29,7 @@ switch ($mode) {
     case 'check_email':
         $email = (string)$this->request['email'];
 
-        if ($err = \TorrentPier\Validate::email($email)) {
+        if ($err = TorrentPier\Validate::email($email)) {
             $html = '<img src="/assets/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         }
         break;
@@ -37,7 +38,7 @@ switch ($mode) {
         $pass = (string)$this->request['pass'];
         $pass_confirm = (string)$this->request['pass_confirm'];
 
-        if ($err = \TorrentPier\Validate::password($pass, $pass_confirm)) {
+        if ($err = TorrentPier\Validate::password($pass, $pass_confirm)) {
             $html = '<img src="/assets/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         } else {
             $text = IS_GUEST ? __('CHOOSE_PASS_REG_OK') : __('CHOOSE_PASS_OK');

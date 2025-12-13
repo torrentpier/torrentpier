@@ -38,6 +38,7 @@ class TrailingSlashRedirect
 
         // 301 Permanent Redirect
         $response = new Response();
+
         return $response
             ->withStatus(301)
             ->withHeader('Location', make_url($newUrl));

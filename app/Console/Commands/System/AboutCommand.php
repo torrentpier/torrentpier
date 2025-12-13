@@ -20,7 +20,7 @@ use TorrentPier\Console\Commands\Command;
  */
 #[AsCommand(
     name: 'about',
-    description: 'Display information about TorrentPier'
+    description: 'Display information about TorrentPier',
 )]
 class AboutCommand extends Command
 {
@@ -38,11 +38,11 @@ class AboutCommand extends Command
         $this->section('Environment');
 
         $envInfo = [
-            ['Display Errors', ini_get('display_errors') ? 'On' : 'Off'],
-            ['Memory Limit', ini_get('memory_limit')],
-            ['Max Execution Time', ini_get('max_execution_time') . 's'],
-            ['Upload Max Filesize', ini_get('upload_max_filesize')],
-            ['Post Max Size', ini_get('post_max_size')],
+            ['Display Errors', \ini_get('display_errors') ? 'On' : 'Off'],
+            ['Memory Limit', \ini_get('memory_limit')],
+            ['Max Execution Time', \ini_get('max_execution_time') . 's'],
+            ['Upload Max Filesize', \ini_get('upload_max_filesize')],
+            ['Post Max Size', \ini_get('post_max_size')],
         ];
 
         $this->table(['Setting', 'Value'], $envInfo);
@@ -53,7 +53,7 @@ class AboutCommand extends Command
         $extensionStatus = [];
 
         foreach ($requiredExtensions as $ext) {
-            $loaded = extension_loaded($ext);
+            $loaded = \extension_loaded($ext);
             $extensionStatus[] = [
                 $ext,
                 $loaded ? '<info>✓ Loaded</info>' : '<error>✗ Not loaded</error>',

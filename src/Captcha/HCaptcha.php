@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Captcha;
 
+use Override;
 use Throwable;
 
 /**
@@ -47,7 +48,7 @@ class HCaptcha implements CaptchaInterface
      *
      * @return string
      */
-    #[\Override]
+    #[Override]
     public function get(): string
     {
         return "
@@ -60,7 +61,7 @@ class HCaptcha implements CaptchaInterface
      *
      * @return bool
      */
-    #[\Override]
+    #[Override]
     public function check(): bool
     {
         // Require token present - fail closed
@@ -85,9 +86,10 @@ class HCaptcha implements CaptchaInterface
             }
 
             // Safely decode JSON with error checking
-            $responseBody = (string) $response->getBody();
+            $responseBody = (string)$response->getBody();
             if (!json_validate($responseBody)) {
-                bb_log("HCaptcha verification failed: Invalid JSON response" . LOG_LF);
+                bb_log('HCaptcha verification failed: Invalid JSON response' . LOG_LF);
+
                 return false;
             }
             $responseData = json_decode($responseBody, false);
@@ -95,12 +97,14 @@ class HCaptcha implements CaptchaInterface
             // Validate that the response contains the expected 'success' field
             if (!isset($responseData->success)) {
                 bb_log("HCaptcha verification failed: Missing 'success' field in response" . LOG_LF);
+
                 return false;
             }
 
             return $responseData->success === true;
         } catch (Throwable $e) {
             bb_log("HCaptcha verification failed: {$e->getMessage()}" . LOG_LF);
+
             return false;
         }
     }

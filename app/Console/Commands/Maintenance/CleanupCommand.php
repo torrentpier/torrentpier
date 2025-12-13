@@ -23,7 +23,7 @@ use TorrentPier\Console\Helpers\FileSystemHelper;
  */
 #[AsCommand(
     name: 'maintenance:cleanup',
-    description: 'Clean up stale data (poll votes, password requests, post cache)'
+    description: 'Clean up stale data (poll votes, password requests, post cache)',
 )]
 class CleanupCommand extends AbstractMaintenanceCommand
 {
@@ -35,7 +35,7 @@ class CleanupCommand extends AbstractMaintenanceCommand
             'all-posts-cache',
             null,
             InputOption::VALUE_NONE,
-            'Clear ALL post HTML cache (bb_posts_html), not just stale entries'
+            'Clear ALL post HTML cache (bb_posts_html), not just stale entries',
         );
     }
 
@@ -49,7 +49,7 @@ class CleanupCommand extends AbstractMaintenanceCommand
             $this->displayDryRunNotice();
         }
 
-        $clearAllPostsCache = (bool) $input->getOption('all-posts-cache');
+        $clearAllPostsCache = (bool)$input->getOption('all-posts-cache');
 
         // Gather stats before cleanup
         $stats = $this->gatherStats($clearAllPostsCache);
@@ -66,19 +66,21 @@ class CleanupCommand extends AbstractMaintenanceCommand
                 ['Old poll votes', number_format($stats['poll_users']), 'poll_max_days: ' . (config()->get('poll_max_days') ?: 'disabled')],
                 ['Expired password requests', number_format($stats['password_requests']), '7 days old'],
                 ['Post HTML cache', number_format($stats['posts_cache']), $postsCacheConfig],
-            ]
+            ],
         );
 
         $totalRecords = $stats['poll_users'] + $stats['password_requests'] + $stats['posts_cache'];
 
         if ($totalRecords === 0) {
             $this->info('Nothing to clean up.');
+
             return self::SUCCESS;
         }
 
         if ($isDryRun) {
             $this->line();
             $this->comment('Would delete ' . number_format($totalRecords) . ' total record(s)');
+
             return self::SUCCESS;
         }
 
@@ -126,6 +128,7 @@ class CleanupCommand extends AbstractMaintenanceCommand
         );
 
         $this->success('Cleanup completed!');
+
         return self::SUCCESS;
     }
 
@@ -141,7 +144,7 @@ class CleanupCommand extends AbstractMaintenanceCommand
         ];
 
         // Poll users older than poll_max_days
-        $pollMaxDays = (int) config()->get('poll_max_days');
+        $pollMaxDays = (int)config()->get('poll_max_days');
         if ($pollMaxDays > 0) {
             $cutoff = TIMENOW - 86400 * $pollMaxDays;
             $stats['poll_users'] = DB()->table(BB_POLL_USERS)
@@ -162,10 +165,10 @@ class CleanupCommand extends AbstractMaintenanceCommand
             $stats['posts_cache'] = DB()->table(BB_POSTS_HTML)->count('*');
         } else {
             // Only older than posts_cache_days_keep
-            $postsCacheDays = (int) config()->get('posts_cache_days_keep');
+            $postsCacheDays = (int)config()->get('posts_cache_days_keep');
             if ($postsCacheDays > 0) {
-                $row = DB()->fetch_row("SELECT COUNT(*) as cnt FROM " . BB_POSTS_HTML . " WHERE post_html_time < DATE_SUB(NOW(), INTERVAL $postsCacheDays DAY)");
-                $stats['posts_cache'] = (int) ($row['cnt'] ?? 0);
+                $row = DB()->fetch_row('SELECT COUNT(*) as cnt FROM ' . BB_POSTS_HTML . " WHERE post_html_time < DATE_SUB(NOW(), INTERVAL {$postsCacheDays} DAY)");
+                $stats['posts_cache'] = (int)($row['cnt'] ?? 0);
             }
         }
 
@@ -177,7 +180,7 @@ class CleanupCommand extends AbstractMaintenanceCommand
      */
     private function cleanPollUsers(): int
     {
-        $pollMaxDays = (int) config()->get('poll_max_days');
+        $pollMaxDays = (int)config()->get('poll_max_days');
         if ($pollMaxDays <= 0) {
             return 0;
         }
@@ -185,9 +188,9 @@ class CleanupCommand extends AbstractMaintenanceCommand
         $cutoff = TIMENOW - 86400 * $pollMaxDays;
         $perCycle = 20000;
 
-        $row = DB()->fetch_row("SELECT MIN(topic_id) AS start_id, MAX(topic_id) AS finish_id FROM " . BB_POLL_USERS);
-        $startId = (int) ($row['start_id'] ?? 0);
-        $finishId = (int) ($row['finish_id'] ?? 0);
+        $row = DB()->fetch_row('SELECT MIN(topic_id) AS start_id, MAX(topic_id) AS finish_id FROM ' . BB_POLL_USERS);
+        $startId = (int)($row['start_id'] ?? 0);
+        $finishId = (int)($row['finish_id'] ?? 0);
 
         if ($startId === 0) {
             return 0;
@@ -198,10 +201,10 @@ class CleanupCommand extends AbstractMaintenanceCommand
         while (true) {
             $endId = $startId + $perCycle - 1;
 
-            DB()->query("
-                DELETE FROM " . BB_POLL_USERS . "
-                WHERE topic_id BETWEEN $startId AND $endId
-                    AND vote_dt < $cutoff
+            DB()->query('
+                DELETE FROM ' . BB_POLL_USERS . "
+                WHERE topic_id BETWEEN {$startId} AND {$endId}
+                    AND vote_dt < {$cutoff}
             ");
 
             $totalDeleted += DB()->affected_rows();
@@ -223,7 +226,7 @@ class CleanupCommand extends AbstractMaintenanceCommand
     {
         $cutoff = TIMENOW - 7 * 86400;
 
-        DB()->query("UPDATE " . BB_USERS . " SET user_newpasswd = '' WHERE user_newpasswd <> '' AND user_lastvisit < $cutoff");
+        DB()->query('UPDATE ' . BB_USERS . " SET user_newpasswd = '' WHERE user_newpasswd <> '' AND user_lastvisit < {$cutoff}");
 
         return DB()->affected_rows();
     }
@@ -236,16 +239,17 @@ class CleanupCommand extends AbstractMaintenanceCommand
         if ($clearAll) {
             // Get count before truncating (TRUNCATE doesn't return affected_rows)
             $count = DB()->table(BB_POSTS_HTML)->count('*');
-            DB()->query("TRUNCATE TABLE " . BB_POSTS_HTML);
+            DB()->query('TRUNCATE TABLE ' . BB_POSTS_HTML);
+
             return $count;
         }
 
-        $postsCacheDays = (int) config()->get('posts_cache_days_keep');
+        $postsCacheDays = (int)config()->get('posts_cache_days_keep');
         if ($postsCacheDays <= 0) {
             return 0;
         }
 
-        DB()->query("DELETE FROM " . BB_POSTS_HTML . " WHERE post_html_time < DATE_SUB(NOW(), INTERVAL $postsCacheDays DAY)");
+        DB()->query('DELETE FROM ' . BB_POSTS_HTML . " WHERE post_html_time < DATE_SUB(NOW(), INTERVAL {$postsCacheDays} DAY)");
 
         return DB()->affected_rows();
     }

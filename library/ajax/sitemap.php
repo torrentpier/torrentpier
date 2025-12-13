@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -29,7 +30,7 @@ switch ($mode) {
         break;
 
     default:
-        $this->ajax_die("Invalid mode: $mode");
+        $this->ajax_die("Invalid mode: {$mode}");
 }
 
 $this->response['html'] = $html;

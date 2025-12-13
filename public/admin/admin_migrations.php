@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,6 +12,7 @@ if (!empty($setmodules)) {
     if (IS_SUPER_ADMIN) {
         $module['GENERAL']['MIGRATIONS_STATUS'] = basename(__FILE__);
     }
+
     return;
 }
 
@@ -59,7 +61,7 @@ if (!empty($status['applied_migrations'])) {
             'NAME' => $migration['migration_name'] ?? __('UNKNOWN'),
             'START_TIME' => $migration['start_time'] ?? __('UNKNOWN'),
             'END_TIME' => $migration['end_time'] ?? __('UNKNOWN'),
-            'ROW_CLASS' => ($i % 2) ? 'row1' : 'row2'
+            'ROW_CLASS' => ($i % 2) ? 'row1' : 'row2',
         ]);
     }
 }
@@ -70,7 +72,7 @@ if (!empty($status['pending_migrations'])) {
             'VERSION' => $migration['version'],
             'NAME' => $migration['name'],
             'FILENAME' => $migration['filename'],
-            'ROW_CLASS' => ($i % 2) ? 'row1' : 'row2'
+            'ROW_CLASS' => ($i % 2) ? 'row1' : 'row2',
         ]);
     }
 }

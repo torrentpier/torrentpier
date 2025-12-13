@@ -40,6 +40,7 @@ final class Response
     public static function html(string $content, int $status = 200, array $headers = []): SymfonyResponse
     {
         $headers['Content-Type'] ??= 'text/html; charset=UTF-8';
+
         return new SymfonyResponse($content, $status, $headers);
     }
 
@@ -53,6 +54,7 @@ final class Response
     public static function text(string $content, int $status = 200, array $headers = []): SymfonyResponse
     {
         $headers['Content-Type'] ??= 'text/plain; charset=UTF-8';
+
         return new SymfonyResponse($content, $status, $headers);
     }
 
@@ -70,6 +72,7 @@ final class Response
         if ($encodingOptions !== 0) {
             $response->setEncodingOptions($encodingOptions);
         }
+
         return $response;
     }
 
@@ -105,7 +108,7 @@ final class Response
         string  $path,
         ?string $filename = null,
         string  $disposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-        bool    $deleteFile = false
+        bool    $deleteFile = false,
     ): BinaryFileResponse {
         $response = new BinaryFileResponse($path);
 
@@ -211,6 +214,7 @@ final class Response
         $response->headers->set('Pragma', 'no-cache');
         $response->headers->set('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT');
         $response->headers->set('Last-Modified', gmdate('D, d M Y H:i:s') . ' GMT');
+
         return $response;
     }
 
@@ -230,6 +234,7 @@ final class Response
             $response->setPrivate();
         }
         $response->headers->set('Expires', gmdate('D, d M Y H:i:s', time() + $maxAge) . ' GMT');
+
         return $response;
     }
 
@@ -241,6 +246,7 @@ final class Response
         $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
         $response->headers->set('X-Content-Type-Options', 'nosniff');
         $response->headers->set('X-XSS-Protection', '1; mode=block');
+
         return $response;
     }
 
@@ -256,11 +262,12 @@ final class Response
         SymfonyResponse $response,
         string          $origin = '*',
         array           $methods = ['GET', 'POST', 'OPTIONS'],
-        array           $headers = ['Content-Type', 'Authorization']
+        array           $headers = ['Content-Type', 'Authorization'],
     ): SymfonyResponse {
         $response->headers->set('Access-Control-Allow-Origin', $origin);
         $response->headers->set('Access-Control-Allow-Methods', implode(', ', $methods));
         $response->headers->set('Access-Control-Allow-Headers', implode(', ', $headers));
+
         return $response;
     }
 
@@ -279,6 +286,7 @@ final class Response
         $response = new SymfonyResponse($content, 200, [
             'Content-Type' => 'application/atom+xml; charset=UTF-8',
         ]);
+
         return self::cache($response, $cacheTtl);
     }
 
@@ -293,6 +301,7 @@ final class Response
         $response = new BinaryFileResponse($path);
         $response->headers->set('Content-Type', 'application/x-bittorrent');
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
+
         return $response;
     }
 
@@ -316,8 +325,9 @@ final class Response
 
         $response->headers->set(
             'Content-Disposition',
-            $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename, $fallback)
+            $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename, $fallback),
         );
+
         return $response;
     }
 }

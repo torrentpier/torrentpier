@@ -22,13 +22,13 @@ if (!$topic_id) {
 }
 
 // Get topic data with torrent info
-$sql = "
+$sql = '
     SELECT
         t.topic_id, t.topic_title, t.topic_poster, t.topic_first_post_id, t.forum_id, t.attach_ext_id, t.tracker_status,
         tor.tor_status, tor.poster_id
-    FROM " . BB_TOPICS . " t
-    LEFT JOIN " . BB_BT_TORRENTS . " tor ON tor.topic_id = t.topic_id
-    WHERE t.topic_id = $topic_id
+    FROM ' . BB_TOPICS . ' t
+    LEFT JOIN ' . BB_BT_TORRENTS . " tor ON tor.topic_id = t.topic_id
+    WHERE t.topic_id = {$topic_id}
     LIMIT 1
 ";
 
@@ -52,7 +52,7 @@ if (!$is_auth['auth_download']) {
 
 // TorrServer M3U support
 if ($m3u) {
-    $torrServer = new \TorrentPier\TorrServerAPI();
+    $torrServer = new TorrentPier\TorrServerAPI();
     if (!$m3uFile = $torrServer->getM3UPath($topic_id)) {
         bb_die(__('ERROR_NO_ATTACHMENT') . '[M3U]');
     }
@@ -65,13 +65,13 @@ if ($m3u) {
 
 // Check tor status for frozen downloads
 if (!IS_AM && $t_data['tor_status']) {
-    if (isset(config()->get('tor_frozen')[$t_data['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$t_data['tor_status']]) && \TorrentPier\Topic\Guard::isAuthor($t_data['poster_id']))) {
+    if (isset(config()->get('tor_frozen')[$t_data['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$t_data['tor_status']]) && TorrentPier\Topic\Guard::isAuthor($t_data['poster_id']))) {
         bb_die(__('TOR_STATUS_FORBIDDEN') . __('TOR_STATUS_NAME.' . $t_data['tor_status']));
     }
 }
 
 // Check download limit
-$dlCounter = new \TorrentPier\Torrent\DownloadCounter();
+$dlCounter = new TorrentPier\Torrent\DownloadCounter();
 if (!$dlCounter->recordDownload($topic_id, userdata('user_id'), IS_PREMIUM)) {
     bb_die(__('DOWNLOAD_LIMIT_EXCEEDED'));
 }
@@ -79,20 +79,20 @@ if (!$dlCounter->recordDownload($topic_id, userdata('user_id'), IS_PREMIUM)) {
 // For torrents - add a passkey and send
 if ($t_data['attach_ext_id'] == TORRENT_EXT_ID) {
     // Admins and topic author can download the original unmodified torrent file
-    if (!(request()->query->has('original') && (IS_ADMIN || \TorrentPier\Topic\Guard::isAuthor($t_data['topic_poster'])))) {
-        \TorrentPier\Torrent\Sender::sendWithPasskey($t_data);
+    if (!(request()->query->has('original') && (IS_ADMIN || TorrentPier\Topic\Guard::isAuthor($t_data['topic_poster'])))) {
+        TorrentPier\Torrent\Sender::sendWithPasskey($t_data);
     }
 }
 
 // Get a file path and send for non-torrent files
-$file_path = \TorrentPier\Attachment::getPath($topic_id);
+$file_path = TorrentPier\Attachment::getPath($topic_id);
 
 if (!is_file($file_path)) {
     bb_die(__('ERROR_NO_ATTACHMENT') . ' [HDD]');
 }
 
 $ext = config()->get('file_id_ext')[$t_data['attach_ext_id']] ?? '';
-$send_filename = \TorrentPier\Attachment::getDownloadFilename($topic_id, $t_data['topic_title'], $ext);
+$send_filename = TorrentPier\Attachment::getDownloadFilename($topic_id, $t_data['topic_title'], $ext);
 
 Response::download($file_path, $send_filename)->send();
 exit;

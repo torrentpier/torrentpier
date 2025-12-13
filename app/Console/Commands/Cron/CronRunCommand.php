@@ -24,7 +24,7 @@ use TorrentPier\Legacy\Admin\Cron;
  */
 #[AsCommand(
     name: 'cron:run',
-    description: 'Run cron jobs (all or specific by ID)'
+    description: 'Run cron jobs (all or specific by ID)',
 )]
 class CronRunCommand extends Command
 {
@@ -35,13 +35,13 @@ class CronRunCommand extends Command
                 'job',
                 'j',
                 InputOption::VALUE_REQUIRED,
-                'Run specific job(s) by ID (comma-separated, e.g., --job=1,2,3)'
+                'Run specific job(s) by ID (comma-separated, e.g., --job=1,2,3)',
             )
             ->addOption(
                 'force',
                 'f',
                 InputOption::VALUE_NONE,
-                'Force run regardless of schedule'
+                'Force run regardless of schedule',
             );
     }
 
@@ -60,6 +60,7 @@ class CronRunCommand extends Command
         // Run all scheduled jobs
         if (!CronHelper::isEnabled() && !$force) {
             $this->warning('Cron is disabled. Use --force to run anyway.');
+
             return self::SUCCESS;
         }
 
@@ -101,10 +102,11 @@ class CronRunCommand extends Command
         // Validate: only digits and commas
         if (!preg_match('/^[\d,]+$/', $jobIds)) {
             $this->error('Invalid job ID format. Use comma-separated numbers (e.g., 1,2,3)');
+
             return self::FAILURE;
         }
 
-        $this->info("Running jobs: $jobIds");
+        $this->info("Running jobs: {$jobIds}");
         $this->line();
 
         $startTime = microtime(true);

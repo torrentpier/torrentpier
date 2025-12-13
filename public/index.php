@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -23,11 +24,11 @@ switch ($result['action']) {
         exit;
 
     case FrontController::ACTION_REDIRECT:
-        \TorrentPier\Http\Response::permanentRedirect($result['url'])->send();
+        TorrentPier\Http\Response::permanentRedirect($result['url'])->send();
         exit;
 
     case FrontController::ACTION_NOT_FOUND:
-        \TorrentPier\Http\Response::notFound()->send();
+        TorrentPier\Http\Response::notFound()->send();
         exit;
 
     case FrontController::ACTION_STATIC:
@@ -61,7 +62,7 @@ switch ($result['action']) {
             exit;
         }
         // File not found - fall through to 404
-        \TorrentPier\Http\Response::notFound()->send();
+        TorrentPier\Http\Response::notFound()->send();
         exit;
 
     case FrontController::ACTION_ROUTE:
@@ -70,7 +71,7 @@ switch ($result['action']) {
         define('FRONT_CONTROLLER', true);
         require_once dirname(__DIR__) . '/library/common.php';
 
-        $router = \TorrentPier\Router\Router::getInstance();
+        $router = TorrentPier\Router\Router::getInstance();
 
         // Load routes only if not already loaded (FrontController may have loaded them)
         if (!$router->areRoutesLoaded()) {
@@ -79,7 +80,7 @@ switch ($result['action']) {
             $router->setRoutesLoaded();
         }
 
-        $request = \Laminas\Diactoros\ServerRequestFactory::fromGlobals();
+        $request = Laminas\Diactoros\ServerRequestFactory::fromGlobals();
 
         try {
             $response = $router->dispatch($request);
@@ -90,9 +91,8 @@ switch ($result['action']) {
                 exit;
             }
 
-            (new \Laminas\HttpHandlerRunner\Emitter\SapiEmitter())->emit($response);
-
-        } catch (\League\Route\Http\Exception\NotFoundException $e) {
+            (new Laminas\HttpHandlerRunner\Emitter\SapiEmitter())->emit($response);
+        } catch (League\Route\Http\Exception\NotFoundException $e) {
             http_response_code(404);
             if (!defined('BB_SCRIPT')) {
                 define('BB_SCRIPT', '404');
@@ -101,11 +101,9 @@ switch ($result['action']) {
                 user()->session_start();
             }
             bb_die('PAGE_NOT_FOUND', 404);
-
-        } catch (\League\Route\Http\Exception\MethodNotAllowedException $e) {
-            \TorrentPier\Http\Response::error('Method Not Allowed', 405)->send();
-
-        } catch (\Throwable $e) {
+        } catch (League\Route\Http\Exception\MethodNotAllowedException $e) {
+            TorrentPier\Http\Response::error('Method Not Allowed', 405)->send();
+        } catch (Throwable $e) {
             whoops()->whoops->handleException($e);
         }
         break;

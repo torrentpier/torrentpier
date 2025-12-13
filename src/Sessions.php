@@ -17,16 +17,6 @@ namespace TorrentPier;
 class Sessions
 {
     /**
-     * Check if session cache ignored
-     *
-     * @return bool
-     */
-    private static function ignore_cached_userdata(): bool
-    {
-        return defined('IN_PM');
-    }
-
-    /**
      * Get userdata from cache
      *
      * @param string $id
@@ -57,6 +47,7 @@ class Sessions
         }
 
         $id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
+
         return CACHE('session_cache')->set($id, $userdata, config()->get('session_update_intrv'));
     }
 
@@ -74,6 +65,7 @@ class Sessions
         }
 
         $id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
+
         return CACHE('session_cache')->rm($id);
     }
 
@@ -84,9 +76,9 @@ class Sessions
      */
     public static function cache_rm_user_sessions(int|string $user_id): void
     {
-        $user_id = get_id_csv(explode(',', (string) $user_id));
+        $user_id = get_id_csv(explode(',', (string)$user_id));
 
-        $rowset = DB()->fetch_rowset("SELECT session_id FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
+        $rowset = DB()->fetch_rowset('SELECT session_id FROM ' . BB_SESSIONS . " WHERE session_user_id IN({$user_id})");
 
         foreach ($rowset as $row) {
             CACHE('session_cache')->rm($row['session_id']);
@@ -121,7 +113,7 @@ class Sessions
         }
 
         $sql_args = DB()->build_array('UPDATE', $sql_ary, $data_already_escaped);
-        DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$userdata['user_id']}");
+        DB()->query('UPDATE ' . BB_USERS . " SET {$sql_args} WHERE user_id = {$userdata['user_id']}");
 
         if (DB()->affected_rows()) {
             self::cache_rm_userdata($userdata);
@@ -139,7 +131,17 @@ class Sessions
     {
         self::cache_rm_user_sessions($user_id);
 
-        $user_id = get_id_csv(explode(',', (string) $user_id));
-        DB()->query("DELETE FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
+        $user_id = get_id_csv(explode(',', (string)$user_id));
+        DB()->query('DELETE FROM ' . BB_SESSIONS . " WHERE session_user_id IN({$user_id})");
+    }
+
+    /**
+     * Check if session cache ignored
+     *
+     * @return bool
+     */
+    private static function ignore_cached_userdata(): bool
+    {
+        return \defined('IN_PM');
     }
 }

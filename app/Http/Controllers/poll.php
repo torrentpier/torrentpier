@@ -17,7 +17,7 @@ $forum_id = request()->getInt('forum_id');
 $vote_id = request()->getInt('vote_id');
 
 $return_topic_url = TOPIC_URL . $topic_id;
-$return_topic_url .= request()->getInt('start') ? "&amp;start=" . request()->getInt('start') : '';
+$return_topic_url .= request()->getInt('start') ? '&amp;start=' . request()->getInt('start') : '';
 
 set_die_append_msg($forum_id, $topic_id);
 
@@ -76,7 +76,7 @@ switch ($mode) {
         }
 
         // Checking that poll has not been finished
-        if (!\TorrentPier\Legacy\Poll::pollIsActive($t_data)) {
+        if (!TorrentPier\Legacy\Poll::pollIsActive($t_data)) {
             bb_die(__('NEW_POLL_ENDED'));
         }
 
@@ -84,14 +84,14 @@ switch ($mode) {
             bb_die(__('NO_VOTE_OPTION'));
         }
 
-        if (\TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int) userdata('user_id'))) {
+        if (TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)userdata('user_id'))) {
             bb_die(__('ALREADY_VOTED'));
         }
 
         $affected_rows = DB()->table(BB_POLL_VOTES)
             ->where('topic_id', $topic_id)
             ->where('vote_id', $vote_id)
-            ->update(['vote_result' => new \Nette\Database\SqlLiteral('vote_result + 1')]);
+            ->update(['vote_result' => new Nette\Database\SqlLiteral('vote_result + 1')]);
 
         if ($affected_rows != 1) {
             bb_die(__('NO_VOTE_OPTION'));
@@ -105,10 +105,10 @@ switch ($mode) {
                 'vote_ip' => USER_IP,
                 'vote_dt' => TIMENOW,
             ]);
-        } catch (\Nette\Database\UniqueConstraintViolationException $e) {
+        } catch (Nette\Database\UniqueConstraintViolationException $e) {
             // Ignore duplicate entry (equivalent to INSERT IGNORE)
         }
-        CACHE('bb_poll_data')->rm("poll_$topic_id");
+        CACHE('bb_poll_data')->rm("poll_{$topic_id}");
         bb_die(__('VOTE_CAST'));
         break;
     case 'poll_start':
@@ -214,7 +214,7 @@ switch ($mode) {
 
         // Updating poll info to the database
         $poll->insert_votes_into_db($topic_id);
-        CACHE('bb_poll_data')->rm("poll_$topic_id");
+        CACHE('bb_poll_data')->rm("poll_{$topic_id}");
         bb_die(__('NEW_POLL_RESULTS'));
         break;
     default:

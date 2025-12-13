@@ -51,26 +51,26 @@ $select_sort_role .= '</select>';
 
 switch ($mode) {
     case 'username':
-        $order_by = "username $sort_order LIMIT $start, " . config()->get('topics_per_page');
+        $order_by = "username {$sort_order} LIMIT {$start}, " . config()->get('topics_per_page');
         break;
     case 'location':
-        $order_by = "user_from $sort_order LIMIT $start, " . config()->get('topics_per_page');
+        $order_by = "user_from {$sort_order} LIMIT {$start}, " . config()->get('topics_per_page');
         break;
     case 'posts':
-        $order_by = "user_posts $sort_order LIMIT $start, " . config()->get('topics_per_page');
+        $order_by = "user_posts {$sort_order} LIMIT {$start}, " . config()->get('topics_per_page');
         break;
     case 'email':
-        $order_by = "user_email $sort_order LIMIT $start, " . config()->get('topics_per_page');
+        $order_by = "user_email {$sort_order} LIMIT {$start}, " . config()->get('topics_per_page');
         break;
     case 'website':
-        $order_by = "user_website $sort_order LIMIT $start, " . config()->get('topics_per_page');
+        $order_by = "user_website {$sort_order} LIMIT {$start}, " . config()->get('topics_per_page');
         break;
     case 'topten':
-        $order_by = "user_posts $sort_order LIMIT 10";
+        $order_by = "user_posts {$sort_order} LIMIT 10";
         break;
     case 'joined':
     default:
-        $order_by = "user_regdate $sort_order LIMIT $start, " . config()->get('topics_per_page');
+        $order_by = "user_regdate {$sort_order} LIMIT {$start}, " . config()->get('topics_per_page');
         break;
 }
 
@@ -95,7 +95,7 @@ if (!empty($username)) {
 }
 
 // Generate user information
-$sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email, avatar_ext_id FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ") $where_sql ORDER BY $order_by";
+$sql = 'SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email, avatar_ext_id FROM ' . BB_USERS . ' WHERE user_id NOT IN(' . EXCLUDED_USERS . ") {$where_sql} ORDER BY {$order_by}";
 if ($result = DB()->fetch_rowset($sql)) {
     foreach ($result as $i => $row) {
         $user_id = $row['user_id'];
@@ -121,11 +121,11 @@ if ($result = DB()->fetch_rowset($sql)) {
 }
 
 // Pagination
-$paginationurl = "memberlist?mode=$mode&amp;order=$sort_order&amp;role=$role";
-$paginationurl .= !empty($username) ? "&amp;username=$username" : '';
+$paginationurl = "memberlist?mode={$mode}&amp;order={$sort_order}&amp;role={$role}";
+$paginationurl .= !empty($username) ? "&amp;username={$username}" : '';
 
 if ($mode != 'topten') {
-    $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ") $where_sql";
+    $sql = 'SELECT COUNT(*) AS total FROM ' . BB_USERS . ' WHERE user_id NOT IN(' . EXCLUDED_USERS . ") {$where_sql}";
     if (!$result = DB()->sql_query($sql)) {
         bb_die('Error getting total users');
     }
@@ -142,7 +142,7 @@ template()->assign_vars([
     'S_MODE_SELECT' => $select_sort_mode,
     'S_ORDER_SELECT' => $select_sort_order,
     'S_ROLE_SELECT' => $select_sort_role,
-    'S_MODE_ACTION' => FORUM_PATH . "memberlist?mode=$mode&amp;order=$sort_order&amp;role=$role",
+    'S_MODE_ACTION' => FORUM_PATH . "memberlist?mode={$mode}&amp;order={$sort_order}&amp;role={$role}",
     'S_USERNAME' => $username,
 ]);
 

@@ -33,7 +33,7 @@ expect()->extend('toBeValidDatabaseConfig', function () {
 
     foreach ($requiredKeys as $key) {
         if (!array_key_exists($key, $this->value)) {
-            return $this->toBeNull("Missing required config key: $key");
+            return $this->toBeNull("Missing required config key: {$key}");
         }
     }
 
@@ -276,7 +276,7 @@ function expectException(callable $callback, string $exceptionClass, ?string $me
 {
     try {
         $callback();
-        fail("Expected exception $exceptionClass was not thrown");
+        fail("Expected exception {$exceptionClass} was not thrown");
     } catch (Exception $e) {
         expect($e)->toBeInstanceOf($exceptionClass);
         if ($message) {
@@ -292,6 +292,7 @@ function measureExecutionTime(callable $callback): float
 {
     $start = microtime(true);
     $callback();
+
     return microtime(true) - $start;
 }
 
@@ -318,6 +319,7 @@ function createSelectQuery(array $options = []): array
 function createInsertQuery(array $data = []): array
 {
     $defaultData = ['name' => 'test', 'value' => 'test_value'];
+
     return [
         'INSERT' => 'test_table',
         'VALUES' => array_merge($defaultData, $data),
@@ -327,6 +329,7 @@ function createInsertQuery(array $data = []): array
 function createUpdateQuery(array $data = [], string $where = 'id = 1'): array
 {
     $defaultData = ['updated_at' => date('Y-m-d H:i:s')];
+
     return [
         'UPDATE' => 'test_table',
         'SET' => array_merge($defaultData, $data),
@@ -417,6 +420,7 @@ function createTempDirectory(): string
 {
     $tempDir = sys_get_temp_dir() . '/torrentpier_test_' . uniqid();
     mkdir($tempDir, 0755, true);
+
     return $tempDir;
 }
 
@@ -438,7 +442,7 @@ function removeTempDirectory(string $dir): void
 function mockGlobalFunction(string $functionName, $returnValue): void
 {
     if (!function_exists($functionName)) {
-        eval("function $functionName() { return " . var_export($returnValue, true) . "; }");
+        eval("function {$functionName}() { return " . var_export($returnValue, true) . '; }');
     }
 }
 

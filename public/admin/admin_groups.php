@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,6 +10,7 @@
 
 if (!empty($setmodules)) {
     $module['GROUPS']['MANAGE'] = basename(__FILE__);
+
     return;
 }
 
@@ -19,7 +21,7 @@ $mode = request()->getString('mode');
 
 if (request()->post->get('edit') || request()->post->get('new')) {
     if (request()->post->get('edit')) {
-        if (!$row = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
+        if (!$row = TorrentPier\Legacy\Group::get_group_data($group_id)) {
             bb_die(__('GROUP_NOT_EXIST'));
         }
         $group_info = [
@@ -28,7 +30,7 @@ if (request()->post->get('edit') || request()->post->get('new')) {
             'group_moderator' => $row['group_moderator'],
             'group_mod_name' => $row['moderator_name'],
             'group_type' => $row['group_type'],
-            'release_group' => $row['release_group']
+            'release_group' => $row['release_group'],
         ];
         $mode = 'editgroup';
         template()->assign_block_vars('group_edit', []);
@@ -39,7 +41,7 @@ if (request()->post->get('edit') || request()->post->get('new')) {
             'group_moderator' => '',
             'group_mod_name' => '',
             'group_type' => GROUP_OPEN,
-            'release_group' => 0
+            'release_group' => 0,
         ];
         $mode = 'newgroup';
     }
@@ -66,15 +68,15 @@ if (request()->post->get('edit') || request()->post->get('new')) {
         'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? HTML_CHECKED : '',
         'RELEASE_GROUP' => (bool)$group_info['release_group'],
         'S_GROUP_ACTION' => 'admin_groups.php',
-        'S_HIDDEN_FIELDS' => $s_hidden_fields
+        'S_HIDDEN_FIELDS' => $s_hidden_fields,
     ]);
 } elseif (request()->post->get('group_update')) {
     if (request()->post->get('group_delete')) {
-        if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
+        if (!$group_info = TorrentPier\Legacy\Group::get_group_data($group_id)) {
             bb_die(__('GROUP_NOT_EXIST'));
         }
         // Delete Group
-        \TorrentPier\Legacy\Group::delete_group($group_id);
+        TorrentPier\Legacy\Group::delete_group($group_id);
 
         $message = __('DELETED_GROUP') . '<br /><br />';
         $message .= sprintf(__('CLICK_RETURN_GROUPSADMIN'), '<a href="admin_groups.php">', '</a>') . '<br /><br />';
@@ -109,25 +111,25 @@ if (request()->post->get('edit') || request()->post->get('new')) {
         ];
 
         if ($mode == 'editgroup') {
-            if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
+            if (!$group_info = TorrentPier\Legacy\Group::get_group_data($group_id)) {
                 bb_die(__('GROUP_NOT_EXIST'));
             }
 
             if ($group_info['group_moderator'] != $group_moderator) {
                 // Create user_group for new group's moderator
-                \TorrentPier\Legacy\Group::add_user_into_group($group_id, $group_moderator);
+                TorrentPier\Legacy\Group::add_user_into_group($group_id, $group_moderator);
                 $sql_ary['mod_time'] = TIMENOW;
 
                 // Delete old moderator's user_group
                 if (request()->post->get('delete_old_moderator')) {
-                    \TorrentPier\Legacy\Group::delete_user_group($group_id, $group_info['group_moderator']);
+                    TorrentPier\Legacy\Group::delete_user_group($group_id, $group_info['group_moderator']);
                 }
             }
 
             $sql_args = DB()->build_array('UPDATE', $sql_ary);
 
             // Update group's data
-            DB()->query('UPDATE ' . BB_GROUPS . " SET $sql_args WHERE group_id = $group_id");
+            DB()->query('UPDATE ' . BB_GROUPS . " SET {$sql_args} WHERE group_id = {$group_id}");
 
             $message = __('UPDATED_GROUP') . '<br /><br />';
             $message .= sprintf(__('CLICK_RETURN_GROUPSADMIN'), '<a href="admin_groups.php">', '</a>') . '<br /><br />';
@@ -139,11 +141,11 @@ if (request()->post->get('edit') || request()->post->get('new')) {
             $sql_args = DB()->build_array('INSERT', $sql_ary);
 
             // Create new group
-            DB()->query('INSERT INTO ' . BB_GROUPS . " $sql_args");
+            DB()->query('INSERT INTO ' . BB_GROUPS . " {$sql_args}");
             $new_group_id = DB()->sql_nextid();
 
             // Create user_group for group's moderator
-            \TorrentPier\Legacy\Group::add_user_into_group($new_group_id, $group_moderator);
+            TorrentPier\Legacy\Group::add_user_into_group($new_group_id, $group_moderator);
 
             $message = __('ADDED_NEW_GROUP') . '<br /><br />';
             $message .= sprintf(__('CLICK_RETURN_GROUPSADMIN'), '<a href="admin_groups.php">', '</a>') . '<br /><br />';

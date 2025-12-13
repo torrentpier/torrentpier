@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -53,7 +54,7 @@ switch ($mode) {
         if (!IS_ADMIN) {
             // IP limit
             if (config()->get('unique_ip')) {
-                if ($users = DB()->fetch_row("SELECT user_id, username FROM " . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
+                if ($users = DB()->fetch_row('SELECT user_id, username FROM ' . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
                     bb_die(sprintf(__('ALREADY_REG_IP'), '<a href="' . url()->member($users['user_id'], $users['username']) . '"><b>' . $users['username'] . '</b></a>', config()->get('tech_admin_email')));
                 }
             }
@@ -69,7 +70,7 @@ switch ($mode) {
                     $message = sprintf(
                         __('REGISTERED_IN_TIME'),
                         $time_info['intervals'],
-                        $time_info['current_time']
+                        $time_info['current_time'],
                     );
                     bb_die($message);
                 }
@@ -84,7 +85,7 @@ switch ($mode) {
             'invite_code' => true,
             'user_timezone' => true,
             'user_lang' => true,
-            'user_opt' => true
+            'user_opt' => true,
         ];
 
         $pr_data = [
@@ -96,13 +97,13 @@ switch ($mode) {
             'user_timezone' => config()->get('board_timezone'),
             'user_lang' => config()->get('default_lang'),
             'user_opt' => 0,
-            'avatar_ext_id' => 0
+            'avatar_ext_id' => 0,
         ];
         break;
 
-    /**
-     *  Profile editing
-     */
+        /**
+         *  Profile editing
+         */
     case 'editprofile':
         if (IS_GUEST) {
             login_redirect();
@@ -126,7 +127,7 @@ switch ($mode) {
             'user_sig' => true,
             'user_occ' => true,
             'user_interests' => true,
-            'tpl_name' => true
+            'tpl_name' => true,
         ];
 
         // Select a profile: your own for the user, any for the admin
@@ -142,9 +143,9 @@ switch ($mode) {
 				user_id,
 				user_rank,
 				user_level,
-				$profile_fields_sql
+				{$profile_fields_sql}
 			FROM " . BB_USERS . "
-			WHERE user_id = $pr_user_id
+			WHERE user_id = {$pr_user_id}
 			LIMIT 1
 		";
         if (!$pr_data = DB()->fetch_row($sql)) {
@@ -154,7 +155,7 @@ switch ($mode) {
         break;
 
     default:
-        throw new \RuntimeException("invalid mode: $mode");
+        throw new RuntimeException("invalid mode: {$mode}");
 }
 
 // Captcha
@@ -186,14 +187,14 @@ foreach ($profile_fields as $field => $can_edit) {
             }
             break;
 
-        /**
-         *  Имя (edit, reg)
-         */
+            /**
+             *  Имя (edit, reg)
+             */
         case 'username':
             $username = request()->post->has('username') ? clean_username(request()->post->get('username')) : $pr_data['username'];
 
             if ($submit && $can_edit) {
-                $err = \TorrentPier\Validate::username($username);
+                $err = TorrentPier\Validate::username($username);
                 if (!$errors and $err && $mode == 'register') {
                     $errors[] = $err;
                 }
@@ -205,9 +206,9 @@ foreach ($profile_fields as $field => $can_edit) {
             $tp_data['USERNAME'] = $pr_data['username'];
             break;
 
-        /**
-         *  Invite code (reg)
-         */
+            /**
+             *  Invite code (reg)
+             */
         case 'invite_code':
             if (config()->get('invites_system.enabled')) {
                 $invite_code = request()->post->get('invite_code', '');
@@ -215,7 +216,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     $inviteCodes = config()->get('invites_system.codes');
                     if (isset($inviteCodes[$invite_code])) {
                         if ($inviteCodes[$invite_code] !== 'permanent') {
-                            if (TIMENOW > strtotime($inviteCodes[$invite_code])) {
+                            if (strtotime($inviteCodes[$invite_code]) < TIMENOW) {
                                 $errors[] = __('INVITE_EXPIRED');
                             }
                         }
@@ -226,9 +227,9 @@ foreach ($profile_fields as $field => $can_edit) {
             }
             break;
 
-        /**
-         *  Пароль (edit, reg)
-         */
+            /**
+             *  Пароль (edit, reg)
+             */
         case 'user_password':
             if ($submit && $can_edit) {
                 $cur_pass = (string)request()->post->get('cur_pass', '');
@@ -237,7 +238,7 @@ foreach ($profile_fields as $field => $can_edit) {
 
                 // password for the guest (while registering) and when the user changes the password
                 if (!empty($new_pass)) {
-                    if ($err = \TorrentPier\Validate::password($new_pass, $cfm_pass)) {
+                    if ($err = TorrentPier\Validate::password($new_pass, $cfm_pass)) {
                         $errors[] = $err;
                     }
 
@@ -259,14 +260,14 @@ foreach ($profile_fields as $field => $can_edit) {
             }
             break;
 
-        /**
-         *  E-mail (edit, reg)
-         */
+            /**
+             *  E-mail (edit, reg)
+             */
         case 'user_email':
             $email = request()->post->has('user_email') ? (string)request()->post->get('user_email') : $pr_data['user_email'];
             if ($submit && $can_edit) {
                 if ($mode == 'register') {
-                    if (!$errors and $err = \TorrentPier\Validate::email($email)) {
+                    if (!$errors and $err = TorrentPier\Validate::email($email)) {
                         $errors[] = $err;
                     }
                     $db_data['user_email'] = $email;
@@ -277,7 +278,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     if (!$cur_pass_valid) {
                         $errors[] = __('CONFIRM_PASSWORD_EXPLAIN');
                     }
-                    if (!$errors and $err = \TorrentPier\Validate::email($email)) {
+                    if (!$errors and $err = TorrentPier\Validate::email($email)) {
                         $errors[] = $err;
                     }
                     if (config()->get('reg_email_activation')) {
@@ -291,9 +292,9 @@ foreach ($profile_fields as $field => $can_edit) {
             $tp_data['USER_EMAIL'] = htmlCHR($email);
             break;
 
-        /**
-         *  Язык (edit, reg)
-         */
+            /**
+             *  Язык (edit, reg)
+             */
         case 'user_lang':
             $user_lang = request()->post->has('user_lang') ? (string)request()->post->get('user_lang') : $pr_data['user_lang'];
             if ($submit && ($user_lang != $pr_data['user_lang'] || $mode == 'register')) {
@@ -302,9 +303,9 @@ foreach ($profile_fields as $field => $can_edit) {
             }
             break;
 
-        /**
-         *  Часовой пояс (edit, reg)
-         */
+            /**
+             *  Часовой пояс (edit, reg)
+             */
         case 'user_timezone':
             $user_timezone = request()->post->has('user_timezone') ? (float)request()->post->get('user_timezone') : (float)$pr_data['user_timezone'];
             if ($submit && ($user_timezone != $pr_data['user_timezone'] || $mode == 'register')) {
@@ -315,9 +316,9 @@ foreach ($profile_fields as $field => $can_edit) {
             }
             break;
 
-        /**
-         *  Пол (edit)
-         */
+            /**
+             *  Пол (edit)
+             */
         case 'user_gender':
             $user_gender = request()->post->has('user_gender') ? request()->post->getInt('user_gender') : $pr_data['user_gender'];
             if ($submit && $user_gender != $pr_data['user_gender']) {
@@ -327,9 +328,9 @@ foreach ($profile_fields as $field => $can_edit) {
             $tp_data['USER_GENDER'] = build_select('user_gender', array_flip(__('GENDER_SELECT')), $pr_data['user_gender']);
             break;
 
-        /**
-         *  Возраст (edit)
-         */
+            /**
+             *  Возраст (edit)
+             */
         case 'user_birthday':
             $user_birthday = request()->post->has('user_birthday') ? (string)request()->post->get('user_birthday') : $pr_data['user_birthday'];
 
@@ -351,15 +352,15 @@ foreach ($profile_fields as $field => $can_edit) {
             $tp_data['USER_BIRTHDAY'] = $pr_data['user_birthday'];
             break;
 
-        /**
-         *  opt (edit, reg)
-         */
+            /**
+             *  opt (edit, reg)
+             */
         case 'user_opt':
             $user_opt = $pr_data['user_opt'];
             $reg_mode = ($mode == 'register');
 
             $update_user_opt = [
-                #	'user_opt_name'  => ($reg_mode) ? #reg_value : #in_login_change
+                //	'user_opt_name'  => ($reg_mode) ? #reg_value : #in_login_change
                 'user_viewemail' => $reg_mode ? false : (IS_ADMIN || config()->get('show_email_visibility_settings')),
                 'user_viewonline' => $reg_mode ? false : true,
                 'user_notify' => $reg_mode ? true : true,
@@ -386,9 +387,9 @@ foreach ($profile_fields as $field => $can_edit) {
             }
             break;
 
-        /**
-         *  Avatar (edit)
-         */
+            /**
+             *  Avatar (edit)
+             */
         case 'avatar_ext_id':
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
                 $avatarFile = request()->getFileAsArray('avatar');
@@ -407,7 +408,7 @@ foreach ($profile_fields as $field => $can_edit) {
                             'type' => mime_content_type($tempAvatarPath),
                             'tmp_name' => $tempAvatarPath,
                             'error' => UPLOAD_ERR_OK,
-                            'size' => filesize($tempAvatarPath)
+                            'size' => filesize($tempAvatarPath),
                         ];
                     }
                 }
@@ -430,9 +431,9 @@ foreach ($profile_fields as $field => $can_edit) {
             $tp_data['AVATARS_MAX_SIZE'] = humn_size(config()->get('avatars.max_size'));
             break;
 
-        /**
-         *  Сайт (edit)
-         */
+            /**
+             *  Сайт (edit)
+             */
         case 'user_website':
             $website = request()->post->has('user_website') ? (string)request()->post->get('user_website') : $pr_data['user_website'];
             $website = htmlCHR($website);
@@ -448,9 +449,9 @@ foreach ($profile_fields as $field => $can_edit) {
             $tp_data['USER_WEBSITE'] = $pr_data['user_website'];
             break;
 
-        /**
-         *  Откуда (edit)
-         */
+            /**
+             *  Откуда (edit)
+             */
         case 'user_from':
             $from = request()->post->has('user_from') ? (string)request()->post->get('user_from') : $pr_data['user_from'];
             if ($submit && $from != $pr_data['user_from']) {
@@ -463,9 +464,9 @@ foreach ($profile_fields as $field => $can_edit) {
             $tp_data['CHECKED_MANUAL_COUNTRY'] = ($tp_data['COUNTRY_SELECTED'] === $pr_data['user_from']) ? 'checked' : '';
             break;
 
-        /**
-         *  Подпись (edit)
-         */
+            /**
+             *  Подпись (edit)
+             */
         case 'user_sig':
             $sig = request()->post->has('user_sig') ? (string)request()->post->get('user_sig') : $pr_data['user_sig'];
             if ($submit && $sig != $pr_data['user_sig']) {
@@ -483,9 +484,9 @@ foreach ($profile_fields as $field => $can_edit) {
             $tp_data['USER_SIG'] = $pr_data['user_sig'];
             break;
 
-        /**
-         *  Род занятий (edit)
-         */
+            /**
+             *  Род занятий (edit)
+             */
         case 'user_occ':
             $occ = request()->post->has('user_occ') ? (string)request()->post->get('user_occ') : $pr_data['user_occ'];
             $occ = htmlCHR($occ);
@@ -496,9 +497,9 @@ foreach ($profile_fields as $field => $can_edit) {
             $tp_data['USER_OCC'] = $pr_data['user_occ'];
             break;
 
-        /**
-         *  Интересы (edit)
-         */
+            /**
+             *  Интересы (edit)
+             */
         case 'user_interests':
             $interests = request()->post->has('user_interests') ? (string)request()->post->get('user_interests') : $pr_data['user_interests'];
             $interests = htmlCHR($interests);
@@ -509,13 +510,13 @@ foreach ($profile_fields as $field => $can_edit) {
             $tp_data['USER_INTERESTS'] = $pr_data['user_interests'];
             break;
 
-        /**
-         *  Twitter (edit)
-         */
+            /**
+             *  Twitter (edit)
+             */
         case 'user_twitter':
             $twitter = request()->post->has('user_twitter') ? (string)request()->post->get('user_twitter') : $pr_data['user_twitter'];
             if ($submit && $twitter != $pr_data['user_twitter']) {
-                if ($twitter != '' && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $twitter)) {
+                if ($twitter != '' && !preg_match('#^[a-zA-Z0-9_]{1,15}$#', $twitter)) {
                     $errors[] = __('TWITTER_ERROR');
                 }
                 $pr_data['user_twitter'] = $twitter;
@@ -524,9 +525,9 @@ foreach ($profile_fields as $field => $can_edit) {
             $tp_data['USER_TWITTER'] = $pr_data['user_twitter'];
             break;
 
-        /**
-         *  Выбор шаблона (edit)
-         */
+            /**
+             *  Выбор шаблона (edit)
+             */
         case 'tpl_name':
             $templates = request()->post->has('tpl_name') ? (string)request()->post->get('tpl_name') : $pr_data['tpl_name'];
             $templates = htmlCHR($templates);
@@ -541,14 +542,14 @@ foreach ($profile_fields as $field => $can_edit) {
                     }
                 }
             }
-            $tp_data['TEMPLATES_SELECT'] = \TorrentPier\Legacy\Common\Select::template($pr_data['tpl_name'], 'tpl_name');
+            $tp_data['TEMPLATES_SELECT'] = TorrentPier\Legacy\Common\Select::template($pr_data['tpl_name'], 'tpl_name');
             break;
 
-        /**
-         *  default
-         */
+            /**
+             *  default
+             */
         default:
-            throw new \RuntimeException("invalid profile field: $field");
+            throw new RuntimeException("invalid profile field: {$field}");
     }
 }
 
@@ -578,12 +579,12 @@ if ($submit && !$errors) {
 
         $sql_args = DB()->build_array('INSERT', $db_data);
 
-        DB()->query("INSERT INTO " . BB_USERS . $sql_args);
+        DB()->query('INSERT INTO ' . BB_USERS . $sql_args);
         $new_user_id = DB()->sql_nextid();
 
         // Generate passkey
         for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
-            if (\TorrentPier\Torrent\Passkey::generate($new_user_id, true)) {
+            if (TorrentPier\Torrent\Passkey::generate($new_user_id, true)) {
                 break;
             }
             if ($i == $max_try) {
@@ -619,7 +620,7 @@ if ($submit && !$errors) {
                 'WELCOME_MSG' => sprintf(__('WELCOME_SUBJECT'), config()->get('sitename')),
                 'USERNAME' => html_entity_decode($username),
                 'PASSWORD' => $new_pass,
-                'U_ACTIVATE' => make_url(ACTIVATE_URL . $new_user_id . '/' . $db_data['user_actkey'] . '/')
+                'U_ACTIVATE' => make_url(ACTIVATE_URL . $new_user_id . '/' . $db_data['user_actkey'] . '/'),
             ]);
 
             $emailer->send();
@@ -628,8 +629,7 @@ if ($submit && !$errors) {
         bb_die($message);
     } /**
      *  Редактирование
-     */
-    else {
+     */ else {
         set_pr_die_append_msg($pr_data['user_id']);
 
         // if anything has been changed
@@ -662,7 +662,7 @@ if ($submit && !$errors) {
 
             $sql_args = DB()->build_array('UPDATE', $db_data);
 
-            DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$pr_data['user_id']}");
+            DB()->query('UPDATE ' . BB_USERS . " SET {$sql_args} WHERE user_id = {$pr_data['user_id']}");
 
             // Manticore [Update username]
             if (!empty($db_data['username'])) {
@@ -675,7 +675,7 @@ if ($submit && !$errors) {
                 }
             }
 
-            \TorrentPier\Sessions::cache_rm_user_sessions($pr_data['user_id']);
+            TorrentPier\Sessions::cache_rm_user_sessions($pr_data['user_id']);
 
             if ($adm_edit) {
                 bb_die(__('PROFILE_USER') . ' <b>' . profile_url($pr_data) . '</b> ' . __('GOOD_UPDATE'));
@@ -706,8 +706,8 @@ template()->assign_vars([
     'INVITE_CODE' => request()->query->has('invite') ? htmlCHR(trim((string)request()->query->get('invite'))) : '',
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
 
-    'LANGUAGE_SELECT' => \TorrentPier\Legacy\Common\Select::language($pr_data['user_lang'], 'user_lang'),
-    'TIMEZONE_SELECT' => \TorrentPier\Legacy\Common\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
+    'LANGUAGE_SELECT' => TorrentPier\Legacy\Common\Select::language($pr_data['user_lang'], 'user_lang'),
+    'TIMEZONE_SELECT' => TorrentPier\Legacy\Common\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
 
     'AVATAR_EXPLAIN' => sprintf(__('AVATAR_EXPLAIN'), config()->get('avatars.max_width'), config()->get('avatars.max_height'), humn_size(config()->get('avatars.max_size'))),
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
@@ -718,7 +718,7 @@ template()->assign_vars([
     'SIG_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_sig'),
 
     'PR_USER_ID' => $pr_data['user_id'],
-    'U_RESET_AUTOLOGIN' => LOGIN_URL . "?logout=1&amp;reset_autologin=1&amp;sid=" . userdata('session_id'),
+    'U_RESET_AUTOLOGIN' => LOGIN_URL . '?logout=1&amp;reset_autologin=1&amp;sid=' . userdata('session_id'),
 ]);
 
 print_page('usercp_register.tpl');

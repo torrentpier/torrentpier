@@ -31,10 +31,11 @@ class OutputHelper
     {
         foreach (self::SENSITIVE_KEYWORDS as $keyword) {
             if (stripos($name, $keyword) !== false) {
-                if (strlen($value) <= 4) {
+                if (\strlen($value) <= 4) {
                     return '****';
                 }
-                return substr($value, 0, 2) . str_repeat('*', strlen($value) - 4) . substr($value, -2);
+
+                return substr($value, 0, 2) . str_repeat('*', \strlen($value) - 4) . substr($value, -2);
             }
         }
 
@@ -56,11 +57,13 @@ class OutputHelper
         if ($seconds < 3600) {
             $minutes = floor($seconds / 60);
             $secs = $seconds % 60;
+
             return "{$minutes}m {$secs}s";
         }
 
         $hours = floor($seconds / 3600);
         $minutes = floor(($seconds % 3600) / 60);
+
         return "{$hours}h {$minutes}m";
     }
 
@@ -78,6 +81,7 @@ class OutputHelper
         if ($number >= 1000) {
             return round($number / 1000, 1) . 'K';
         }
-        return (string) $number;
+
+        return (string)$number;
     }
 }

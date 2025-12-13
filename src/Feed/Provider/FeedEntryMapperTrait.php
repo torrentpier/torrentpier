@@ -25,8 +25,8 @@ trait FeedEntryMapperTrait
      * Map database topics to feed entries
      *
      * @param array $topics
-     * @return FeedEntry[]
      * @throws Exception
+     * @return FeedEntry[]
      */
     private function mapTopicsToEntries(array $topics): array
     {
@@ -51,7 +51,7 @@ trait FeedEntryMapperTrait
                 link: $this->buildEntryLink($topic),
                 lastModified: new DateTimeImmutable('@' . $lastTime),
                 author: $topic['first_username'] ?: __('GUEST'),
-                description: $this->buildEntryDescription($topic)
+                description: $this->buildEntryDescription($topic),
             );
         }
 
@@ -71,7 +71,8 @@ trait FeedEntryMapperTrait
         }
 
         $torFrozen = config()->get('tor_frozen');
-        return is_array($torFrozen) && isset($torFrozen[$topic['tor_status']]);
+
+        return \is_array($torFrozen) && isset($torFrozen[$topic['tor_status']]);
     }
 
     /**
@@ -115,7 +116,7 @@ trait FeedEntryMapperTrait
         }
 
         // Default to topic view with semantic URL
-        return make_url(url()->topic((int) $topic['topic_id'], $topic['topic_title']));
+        return make_url(url()->topic((int)$topic['topic_id'], $topic['topic_title']));
     }
 
     /**
@@ -130,7 +131,8 @@ trait FeedEntryMapperTrait
             return null;
         }
 
-        $topicUrl = make_url(url()->topic((int) $topic['topic_id'], $topic['topic_title']));
+        $topicUrl = make_url(url()->topic((int)$topic['topic_id'], $topic['topic_title']));
+
         return $topic['post_html'] . "\n\nTopic: " . $topicUrl;
     }
 
@@ -146,7 +148,7 @@ trait FeedEntryMapperTrait
             return '';
         }
 
-        $window = (int) (config()->get('atom.updated_window') ?? 604800); // default: 1 week
+        $window = (int)(config()->get('atom.updated_window') ?? 604800); // default: 1 week
 
         if ($topic['topic_first_post_edit_time'] > TIMENOW - $window) {
             return '[' . __('ATOM_UPDATED') . '] ';

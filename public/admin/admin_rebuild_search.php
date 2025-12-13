@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,6 +12,7 @@ if (!empty($setmodules)) {
     if (IS_SUPER_ADMIN) {
         $module['GENERAL']['REBUILD_SEARCH_INDEX'] = basename(__FILE__);
     }
+
     return;
 }
 
@@ -47,7 +49,7 @@ if (request()->has('cancel_button')) {
         DB()->query('
 			UPDATE ' . BB_SEARCH_REBUILD . ' SET
 				rebuild_session_status = ' . REBUILD_SEARCH_ABORTED . "
-			WHERE rebuild_session_id = $last_session_id
+			WHERE rebuild_session_id = {$last_session_id}
 		");
     }
 
@@ -72,7 +74,7 @@ $total_posts_processing = $total_posts - $total_posts_processed;
 
 // how many posts to process in this session
 $session_posts_processing = request()->has('session_posts_processing') ? request()->getInt('session_posts_processing') : null;
-if (null !== $session_posts_processing) {
+if ($session_posts_processing !== null) {
     if ($mode == 'submit') {
         // check if we passed over total_posts just after submitting
         if ($session_posts_processing + $total_posts_processed > $total_posts) {
@@ -155,9 +157,9 @@ if ($mode == 'submit' || $mode == 'refresh') {
 		WHERE p.post_id = pt.post_id
 			AND t.topic_id = p.topic_id
 			AND p.poster_id NOT IN(' . BOT_UID . ")
-			AND pt.post_id >= $start
+			AND pt.post_id >= {$start}
 		ORDER BY pt.post_id ASC
-		LIMIT $post_limit
+		LIMIT {$post_limit}
 	");
 
     $expire_time = $start_time + $time_limit - 5;
@@ -173,12 +175,12 @@ if ($mode == 'submit' || $mode == 'refresh') {
         // Get search words
         $s_post_text = str_replace('\n', "\n", $row['post_text']);
         $s_post_subject = str_replace('\n', "\n", $row['post_subject']);
-        $words_sql[] = array(
+        $words_sql[] = [
             'post_id' => (int)$row['post_id'],
             'search_words' => add_search_words($row['post_id'], stripslashes($s_post_text), stripslashes($s_post_subject), true),
-        );
+        ];
 
-        $timer_expired = (TIMENOW > $expire_time);
+        $timer_expired = ($expire_time < TIMENOW);
         $num_rows++;
     }
 
@@ -194,7 +196,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     if ($num_rows != 0) {
         if ($mode == 'submit') {
             // insert a new session entry
-            $args = DB()->build_array('INSERT', array(
+            $args = DB()->build_array('INSERT', [
                 'end_post_id' => (int)$end_post_id,
                 'end_time' => TIMENOW,
                 'last_cycle_time' => (int)$last_cycle_time,
@@ -205,7 +207,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
                 'start_time' => (int)$start_time,
                 'search_size' => (int)$search_tables_size,
                 'rebuild_session_status' => REBUILD_SEARCH_PROCESSED,
-            ));
+            ]);
             DB()->query('REPLACE INTO ' . BB_SEARCH_REBUILD . $args);
         } else {
             // refresh
@@ -213,20 +215,20 @@ if ($mode == 'submit' || $mode == 'refresh') {
             // update the last session entry
             DB()->query('
 				UPDATE ' . BB_SEARCH_REBUILD . " SET
-					end_post_id     = $end_post_id,
+					end_post_id     = {$end_post_id},
 					end_time        = " . TIMENOW . ",
-					last_cycle_time = $last_cycle_time,
-					session_time    = session_time + $last_cycle_time,
-					session_posts   = session_posts + $num_rows,
+					last_cycle_time = {$last_cycle_time},
+					session_time    = session_time + {$last_cycle_time},
+					session_posts   = session_posts + {$num_rows},
 					session_cycles  = session_cycles + 1,
 					rebuild_session_status = " . REBUILD_SEARCH_PROCESSED . "
-				WHERE rebuild_session_id = $last_session_id
+				WHERE rebuild_session_id = {$last_session_id}
 			");
         }
     }
 
     $last_session_data = get_rebuild_session_details('last', 'all');
-    template()->assign_vars(array('TPL_REBUILD_SEARCH_PROGRESS' => true));
+    template()->assign_vars(['TPL_REBUILD_SEARCH_PROGRESS' => true]);
 
     $processing_messages = '';
     $processing_messages .= $timer_expired ? sprintf(__('TIMER_EXPIRED'), TIMENOW - $start_time) : '';
@@ -244,7 +246,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
         $form_parameters .= '&time_limit=' . $time_limit;
         $form_parameters .= '&refresh_rate=' . $refresh_rate;
 
-        $form_action = 'admin_rebuild_search.php' . '?mode=refresh' . $form_parameters;
+        $form_action = 'admin_rebuild_search.php?mode=refresh' . $form_parameters;
         $next_button = __('NEXT');
         $progress_bar_img = theme_images('progress_bar');
 
@@ -253,9 +255,9 @@ if ($mode == 'submit' || $mode == 'refresh') {
         meta_refresh($form_action, $refresh_rate);
 
         // create the meta tag for refresh
-        template()->assign_vars(array(
+        template()->assign_vars([
             'CANCEL_BUTTON' => true,
-        ));
+        ]);
     } else {
         // end of processing
 
@@ -269,16 +271,16 @@ if ($mode == 'submit' || $mode == 'refresh') {
         // if we have processed all the db posts we need to update the rebuild_status
         DB()->query('UPDATE ' . BB_SEARCH_REBUILD . ' SET
 				rebuild_session_status = ' . REBUILD_SEARCH_COMPLETED . "
-			WHERE rebuild_session_id = $last_session_id
-				AND end_post_id = $max_post_id
+			WHERE rebuild_session_id = {$last_session_id}
+				AND end_post_id = {$max_post_id}
 		");
 
         // optimize all search tables when finished
-        $table_ary = array(BB_POSTS_SEARCH);
+        $table_ary = [BB_POSTS_SEARCH];
 
         foreach ($table_ary as $table) {
-            DB()->query("ANALYZE  TABLE $table");
-            DB()->query("OPTIMIZE TABLE $table");
+            DB()->query("ANALYZE  TABLE {$table}");
+            DB()->query("OPTIMIZE TABLE {$table}");
         }
 
         $processing_messages .= '<br />' . __('ALL_TABLES_OPTIMIZED');
@@ -320,7 +322,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     create_percent_box('session', create_percent_color($session_percent), $session_percent);
     create_percent_box('total', create_percent_color($total_percent), $total_percent);
 
-    template()->assign_vars(array(
+    template()->assign_vars([
         'L_NEXT' => $next_button,
         'L_TIME_LAST_POSTS_ADMIN' => sprintf(__('TIME_LAST_POSTS'), $num_rows),
 
@@ -350,7 +352,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
         'REFRESH_RATE' => $refresh_rate,
 
         'S_REBUILD_SEARCH_ACTION' => $form_action,
-    ));
+    ]);
 } else {// show the input page
     // create the page
     // used only with the select input
@@ -404,7 +406,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     }
 
     // create the output of page
-    template()->assign_vars(array(
+    template()->assign_vars([
         'TPL_REBUILD_SEARCH_MAIN' => true,
 
         'L_TIME_LIMIT_EXPLAIN' => $time_limit_explain,
@@ -422,7 +424,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_REBUILD_SEARCH_ACTION' => 'admin_rebuild_search.php?mode=submit',
-    ));
+    ]);
 }
 
 print_page('admin_rebuild_search.tpl', 'admin');
@@ -435,14 +437,14 @@ function get_db_sizes()
     $search_data_size = $search_index_size = 0;
     $search_table_like = DB()->escape(BB_POSTS_SEARCH);
 
-    $sql = 'SHOW TABLE STATUS FROM `' . DB()->selected_db . "` LIKE '$search_table_like'";
+    $sql = 'SHOW TABLE STATUS FROM `' . DB()->selected_db . "` LIKE '{$search_table_like}'";
 
     foreach (DB()->fetch_rowset($sql) as $row) {
         $search_data_size += $row['Data_length'];
         $search_index_size += $row['Index_length'];
     }
 
-    return array($search_data_size, $search_index_size, $search_data_size + $search_index_size);
+    return [$search_data_size, $search_index_size, $search_data_size + $search_index_size];
 }
 
 // get the latest post_id in the forum
@@ -455,7 +457,7 @@ function get_latest_post_id()
 
 function get_empty_last_session_data()
 {
-    return array(
+    return [
         'rebuild_session_id' => 0,
         'start_post_id' => 0,
         'end_post_id' => 0,
@@ -467,7 +469,7 @@ function get_empty_last_session_data()
         'session_cycles' => 0,
         'search_size' => 0,
         'rebuild_session_status' => REBUILD_SEARCH_COMPLETED,
-    );
+    ];
 }
 
 // get some or all of the rebuild details of a specific session or of the last session
@@ -478,7 +480,7 @@ function get_rebuild_session_details($id, $details = 'all')
     $session_details = get_empty_last_session_data();
 
     if ($id != 'last') {
-        $sql = 'SELECT * FROM ' . BB_SEARCH_REBUILD . " WHERE rebuild_session_id = $id";
+        $sql = 'SELECT * FROM ' . BB_SEARCH_REBUILD . " WHERE rebuild_session_id = {$id}";
     } else {
         $sql = 'SELECT * FROM ' . BB_SEARCH_REBUILD . ' ORDER BY rebuild_session_id DESC LIMIT 1';
     }
@@ -533,7 +535,7 @@ function clear_search_tables($mode = '')
     DB()->query('DELETE FROM ' . BB_SEARCH_REBUILD);
 
     if ($mode) {
-        $table_ary = array(BB_POSTS_SEARCH);
+        $table_ary = [BB_POSTS_SEARCH];
 
         foreach ($table_ary as $table) {
             $sql = (($mode == 1) ? 'DELETE FROM ' : 'TRUNCATE TABLE ') . $table;
@@ -550,11 +552,11 @@ function clear_search_tables($mode = '')
 function create_percent_color($percent)
 {
     $percent_color = null;
-    $percent_ary = array(
-        'r' => array(86, 100),
-        'g' => array(0, 50),
-        'b' => array(51, 85),
-    );
+    $percent_ary = [
+        'r' => [86, 100],
+        'g' => [0, 50],
+        'b' => [51, 85],
+    ];
 
     foreach ($percent_ary as $key => $value) {
         if ($percent <= $value[1]) {
@@ -576,16 +578,16 @@ function create_color($mode, $code)
 function create_percent_box($box, $percent_color, $percent_width)
 {
     if ($box == 'session') {
-        template()->assign_vars(array(
+        template()->assign_vars([
             'SESSION_PERCENT_BOX' => true,
             'SESSION_PERCENT_COLOR' => $percent_color,
             'SESSION_PERCENT_WIDTH' => round($percent_width),
-        ));
+        ]);
     } else {
-        template()->assign_vars(array(
+        template()->assign_vars([
             'TOTAL_PERCENT_BOX' => true,
             'TOTAL_PERCENT_COLOR' => $percent_color,
             'TOTAL_PERCENT_WIDTH' => round($percent_width),
-        ));
+        ]);
     }
 }

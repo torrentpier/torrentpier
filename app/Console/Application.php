@@ -37,12 +37,41 @@ class Application extends SymfonyApplication
     }
 
     /**
+     * Gets the help message
+     */
+    public function getHelp(): string
+    {
+        $version = $this->getVersion();
+        $cwd = $this->shortenPath(getcwd() ?: '.');
+
+        return <<<HELP
+
+              <fg=#b5651d>∩ ▄███▄ ∩</>    <options=bold>Bull CLI</> {$version}
+              <fg=#b5651d> ▐◉ █ ◉▌</>     TorrentPier Console
+              <fg=#b5651d>  ▐▄◎▄▌</>      {$cwd}
+
+            HELP;
+    }
+
+    /**
+     * Gets the long version string
+     */
+    public function getLongVersion(): string
+    {
+        return \sprintf(
+            '<info>%s</info> version <comment>%s</comment>',
+            $this->getName(),
+            $this->getVersion(),
+        );
+    }
+
+    /**
      * Detect an application version from config
      */
     private function detectVersion(): string
     {
         // Get a version from config (set by config.php)
-        if (function_exists('config')) {
+        if (\function_exists('config')) {
             $version = config()->get('tp_version');
             if ($version) {
                 return $version;
@@ -64,7 +93,7 @@ class Application extends SymfonyApplication
         }
 
         $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($commandDir, FilesystemIterator::SKIP_DOTS)
+            new RecursiveDirectoryIterator($commandDir, FilesystemIterator::SKIP_DOTS),
         );
 
         foreach ($iterator as $file) {
@@ -148,43 +177,15 @@ class Application extends SymfonyApplication
     }
 
     /**
-     * Gets the help message
-     */
-    public function getHelp(): string
-    {
-        $version = $this->getVersion();
-        $cwd = $this->shortenPath(getcwd() ?: '.');
-
-        return <<<HELP
-
-  <fg=#b5651d>∩ ▄███▄ ∩</>    <options=bold>Bull CLI</> {$version}
-  <fg=#b5651d> ▐◉ █ ◉▌</>     TorrentPier Console
-  <fg=#b5651d>  ▐▄◎▄▌</>      {$cwd}
-
-HELP;
-    }
-
-    /**
      * Shorten path for display (replace home dir with ~)
      */
     private function shortenPath(string $path): string
     {
         $home = getenv('HOME') ?: getenv('USERPROFILE') ?: '';
         if ($home && str_starts_with($path, $home)) {
-            return '~' . substr($path, strlen($home));
+            return '~' . substr($path, \strlen($home));
         }
-        return $path;
-    }
 
-    /**
-     * Gets the long version string
-     */
-    public function getLongVersion(): string
-    {
-        return sprintf(
-            '<info>%s</info> version <comment>%s</comment>',
-            $this->getName(),
-            $this->getVersion()
-        );
+        return $path;
     }
 }

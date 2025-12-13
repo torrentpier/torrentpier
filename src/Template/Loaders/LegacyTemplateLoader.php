@@ -23,14 +23,15 @@ use Twig\Source;
  */
 class LegacyTemplateLoader implements LoaderInterface
 {
-    private LoaderInterface $loader;
-    private LegacySyntaxExtension $syntaxConverter;
-
     /** @var array<string> Track legacy templates (converted) */
     private static array $legacyTemplates = [];
 
     /** @var array<string> Track native Twig templates (no conversion) */
     private static array $nativeTemplates = [];
+
+    private LoaderInterface $loader;
+
+    private LegacySyntaxExtension $syntaxConverter;
 
     public function __construct(LoaderInterface $loader)
     {
@@ -77,14 +78,15 @@ class LegacyTemplateLoader implements LoaderInterface
 
         // Native .twig files - skip conversion entirely
         if (str_ends_with($name, '.twig')) {
-            if (!in_array($name, self::$nativeTemplates, true)) {
+            if (!\in_array($name, self::$nativeTemplates, true)) {
                 self::$nativeTemplates[] = $name;
             }
+
             return $source;
         }
 
         // Track as a legacy template
-        if (!in_array($name, self::$legacyTemplates, true)) {
+        if (!\in_array($name, self::$legacyTemplates, true)) {
             self::$legacyTemplates[] = $name;
         }
 
@@ -92,6 +94,7 @@ class LegacyTemplateLoader implements LoaderInterface
         $content = $source->getCode();
         if ($this->syntaxConverter->isLegacySyntax($content)) {
             $convertedContent = $this->syntaxConverter->convertLegacySyntax($content);
+
             return new Source($convertedContent, $source->getName(), $source->getPath());
         }
 

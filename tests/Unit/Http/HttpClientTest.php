@@ -87,21 +87,21 @@ describe('HttpClient Class', function () {
         it('prevents cloning', function () {
             $instance = HttpClient::getInstance();
 
-            expect(fn() => clone $instance)->toThrow(Error::class);
+            expect(fn () => clone $instance)->toThrow(Error::class);
         });
 
         it('throws exception when trying to serialize', function () {
             // Singleton pattern prevents serialization through __serialize (PHP 8.2+)
             $instance = HttpClient::getInstance();
 
-            expect(fn() => $instance->__serialize())->toThrow(LogicException::class);
+            expect(fn () => $instance->__serialize())->toThrow(LogicException::class);
         });
 
         it('throws exception when trying to unserialize', function () {
             // Singleton pattern prevents unserialization through __unserialize (PHP 8.2+)
             $instance = HttpClient::getInstance();
 
-            expect(fn() => $instance->__unserialize([]))->toThrow(LogicException::class);
+            expect(fn () => $instance->__unserialize([]))->toThrow(LogicException::class);
         });
     });
 
@@ -118,7 +118,7 @@ describe('HttpClient Class', function () {
             $response = $this->httpClient->get('https://example.com/api');
 
             expect($response->getStatusCode())->toBe(200)
-                ->and((string) $response->getBody())->toBe('GET response');
+                ->and((string)$response->getBody())->toBe('GET response');
         });
 
         it('performs POST request successfully', function () {
@@ -129,7 +129,7 @@ describe('HttpClient Class', function () {
             ]);
 
             expect($response->getStatusCode())->toBe(201)
-                ->and((string) $response->getBody())->toBe('POST response');
+                ->and((string)$response->getBody())->toBe('POST response');
         });
 
         it('performs PUT request successfully', function () {
@@ -140,7 +140,7 @@ describe('HttpClient Class', function () {
             ]);
 
             expect($response->getStatusCode())->toBe(200)
-                ->and((string) $response->getBody())->toBe('PUT response');
+                ->and((string)$response->getBody())->toBe('PUT response');
         });
 
         it('performs PATCH request successfully', function () {
@@ -151,7 +151,7 @@ describe('HttpClient Class', function () {
             ]);
 
             expect($response->getStatusCode())->toBe(200)
-                ->and((string) $response->getBody())->toBe('PATCH response');
+                ->and((string)$response->getBody())->toBe('PATCH response');
         });
 
         it('performs DELETE request successfully', function () {
@@ -217,7 +217,7 @@ describe('HttpClient Class', function () {
             $response = $this->httpClient->get('https://example.com/notfound');
 
             expect($response->getStatusCode())->toBe(404)
-                ->and((string) $response->getBody())->toBe('Not Found');
+                ->and((string)$response->getBody())->toBe('Not Found');
         });
 
         it('does not throw on 5xx responses by default', function () {
@@ -226,25 +226,25 @@ describe('HttpClient Class', function () {
             $response = $this->httpClient->get('https://example.com/error');
 
             expect($response->getStatusCode())->toBe(500)
-                ->and((string) $response->getBody())->toBe('Internal Server Error');
+                ->and((string)$response->getBody())->toBe('Internal Server Error');
         });
 
         it('wraps GuzzleException in HttpClientException', function () {
             $request = new Request('GET', 'https://example.com');
             $this->mockHandler->append(
-                new RequestException('Connection timeout', $request)
+                new RequestException('Connection timeout', $request),
             );
 
-            expect(fn() => $this->httpClient->get('https://example.com'))
+            expect(fn () => $this->httpClient->get('https://example.com'))
                 ->toThrow(HttpClientException::class);
         });
 
         it('wraps generic exceptions in HttpClientException', function () {
             $this->mockHandler->append(
-                new RuntimeException('Unexpected error')
+                new RuntimeException('Unexpected error'),
             );
 
-            expect(fn() => $this->httpClient->get('https://example.com'))
+            expect(fn () => $this->httpClient->get('https://example.com'))
                 ->toThrow(HttpClientException::class);
         });
     });
@@ -303,7 +303,7 @@ describe('HttpClient Class', function () {
             $handlerStack = HandlerStack::create($mockHandler);
             $httpClient = HttpClient::getInstance(['handler' => $handlerStack]);
 
-            expect(fn() => $httpClient->get('https://example.com/api'))
+            expect(fn () => $httpClient->get('https://example.com/api'))
                 ->toThrow(HttpClientException::class);
         });
     });
@@ -360,7 +360,7 @@ describe('HttpClient Class', function () {
         it('throws exception on failed download', function () {
             $this->mockHandler->append(new Response(404, [], 'Not Found'));
 
-            expect(fn() => $this->httpClient->download('https://example.com/notfound.txt', $this->testFile))
+            expect(fn () => $this->httpClient->download('https://example.com/notfound.txt', $this->testFile))
                 ->toThrow(HttpClientException::class);
         });
 
@@ -380,7 +380,7 @@ describe('HttpClient Class', function () {
             $request = new Request('GET', 'https://example.com');
             $this->mockHandler->append(new ConnectException('Connection failed', $request));
 
-            expect(fn() => $this->httpClient->download('https://example.com/file.txt', $this->testFile))
+            expect(fn () => $this->httpClient->download('https://example.com/file.txt', $this->testFile))
                 ->toThrow(HttpClientException::class);
         });
 
@@ -394,7 +394,7 @@ describe('HttpClient Class', function () {
                 function ($percent, $downloaded, $total) {
                     // Note: MockHandler doesn't trigger progress callbacks
                     // This just validates the callback signature is correct
-                }
+                },
             );
 
             // File should be downloaded successfully even with a progress callback
@@ -408,7 +408,7 @@ describe('HttpClient Class', function () {
 
             $result = $this->httpClient->downloadWithProgress(
                 'https://example.com/file.txt',
-                $this->testFile
+                $this->testFile,
             );
 
             expect($result)->toBeTrue()
@@ -420,21 +420,21 @@ describe('HttpClient Class', function () {
             $request = new Request('GET', 'https://example.com');
             $this->mockHandler->append(new ConnectException('Connection failed', $request));
 
-            expect(fn() => $this->httpClient->downloadWithProgress(
+            expect(fn () => $this->httpClient->downloadWithProgress(
                 'https://example.com/file.txt',
                 $this->testFile,
                 function ($percent, $downloaded, $total) {
                     // Progress callback
-                }
+                },
             ))->toThrow(HttpClientException::class);
         });
 
         it('throws exception on failed download with progress', function () {
             $this->mockHandler->append(new Response(404, [], 'Not Found'));
 
-            expect(fn() => $this->httpClient->downloadWithProgress(
+            expect(fn () => $this->httpClient->downloadWithProgress(
                 'https://example.com/notfound.txt',
-                $this->testFile
+                $this->testFile,
             ))->toThrow(HttpClientException::class);
         });
     });
@@ -501,8 +501,8 @@ describe('HttpClient Class', function () {
 
             expect($this->container)->toHaveCount(1);
             $request = $this->container[0]['request'];
-            expect((string) $request->getUri())->toContain('page=1')
-                ->and((string) $request->getUri())->toContain('limit=10');
+            expect((string)$request->getUri())->toContain('page=1')
+                ->and((string)$request->getUri())->toContain('limit=10');
         });
 
         it('handles JSON body', function () {

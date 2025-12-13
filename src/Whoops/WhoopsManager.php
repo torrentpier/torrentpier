@@ -30,7 +30,9 @@ use Whoops\Run;
 class WhoopsManager
 {
     private static ?self $instance = null;
+
     public private(set) Run $whoops;
+
     private bool $initialized = false;
 
     private function __construct()
@@ -38,11 +40,19 @@ class WhoopsManager
         $this->whoops = new Run();
     }
 
+    private function __clone() {}
+
+    public function __wakeup(): void
+    {
+        throw new LogicException('Cannot unserialize a singleton.');
+    }
+
     public static function getInstance(): self
     {
         if (self::$instance === null) {
             self::$instance = new self();
         }
+
         return self::$instance;
     }
 
@@ -75,6 +85,11 @@ class WhoopsManager
         return $this;
     }
 
+    public function isDebugEnabled(): bool
+    {
+        return \defined('DBG_USER') && DBG_USER;
+    }
+
     /**
      * Pretty error page for debug mode
      */
@@ -101,7 +116,7 @@ class WhoopsManager
         $handler->setLogger(new Logger(
             APP_NAME,
             [new BrowserConsoleHandler()
-                ->setFormatter(new LineFormatter(null, null, true))]
+                ->setFormatter(new LineFormatter(null, null, true))],
         ));
         $this->whoops->pushHandler($handler);
     }
@@ -114,7 +129,7 @@ class WhoopsManager
         $this->whoops->pushHandler(function ($e) {
             echo config()->get('whoops.error_message');
             if (config()->get('whoops.show_error_details')) {
-                echo "<hr/>Error: " . $this->sanitizeErrorMessage($e->getMessage()) . ".";
+                echo '<hr/>Error: ' . $this->sanitizeErrorMessage($e->getMessage()) . '.';
             }
         });
     }
@@ -124,7 +139,7 @@ class WhoopsManager
      */
     private function registerFileLogger(): void
     {
-        if ((int) ini_get('log_errors') !== 1) {
+        if ((int)\ini_get('log_errors') !== 1) {
             return;
         }
 
@@ -133,7 +148,7 @@ class WhoopsManager
         $handler->setLogger(new Logger(
             APP_NAME,
             [new StreamHandler(WHOOPS_LOG_FILE)
-                ->setFormatter(new LineFormatter(null, null, true))]
+                ->setFormatter(new LineFormatter(null, null, true))],
         ));
         $this->whoops->pushHandler($handler);
     }
@@ -153,9 +168,9 @@ class WhoopsManager
             APP_NAME,
             [new TelegramHandler(
                 config()->get('telegram_sender.token'),
-                (int) config()->get('telegram_sender.chat_id'),
-                timeout: (int) config()->get('telegram_sender.timeout')
-            )->setFormatter(new TelegramFormatter())]
+                (int)config()->get('telegram_sender.chat_id'),
+                timeout: (int)config()->get('telegram_sender.timeout'),
+            )->setFormatter(new TelegramFormatter())],
         ));
         $this->whoops->pushHandler($handler);
     }
@@ -198,20 +213,8 @@ class WhoopsManager
         return htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
     }
 
-    public function isDebugEnabled(): bool
-    {
-        return defined('DBG_USER') && DBG_USER;
-    }
-
     private function isDevelopmentEnvironment(): bool
     {
-        return defined('APP_ENV') && APP_ENV === 'development';
-    }
-
-    private function __clone() {}
-
-    public function __wakeup(): void
-    {
-        throw new LogicException('Cannot unserialize a singleton.');
+        return \defined('APP_ENV') && APP_ENV === 'development';
     }
 }

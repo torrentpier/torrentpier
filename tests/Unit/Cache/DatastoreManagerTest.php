@@ -92,7 +92,7 @@ describe('DatastoreManager Class', function () {
                 ['float_item', 3.14],
                 ['bool_item', true],
                 ['array_item', ['nested' => ['data' => 'value']]],
-                ['object_item', (object) ['property' => 'value']],
+                ['object_item', (object)['property' => 'value']],
             ];
 
             foreach ($testCases as [$key, $value]) {
@@ -203,17 +203,17 @@ describe('DatastoreManager Class', function () {
         it('cleans all datastore cache', function () {
             $this->datastore->store('clean_test', 'value');
 
-            expect(fn() => $this->datastore->clean())->not->toThrow(Exception::class);
+            expect(fn () => $this->datastore->clean())->not->toThrow(Exception::class);
         });
 
         it('cleans cache by criteria', function () {
-            expect(fn() => $this->datastore->cleanByCriteria([Cache::All => true]))->not->toThrow(Exception::class);
+            expect(fn () => $this->datastore->cleanByCriteria([Cache::All => true]))->not->toThrow(Exception::class);
         });
 
         it('cleans cache by tags if supported', function () {
             $tags = ['datastore', 'test'];
 
-            expect(fn() => $this->datastore->cleanByTags($tags))->not->toThrow(Exception::class);
+            expect(fn () => $this->datastore->cleanByTags($tags))->not->toThrow(Exception::class);
         });
     });
 
@@ -223,7 +223,7 @@ describe('DatastoreManager Class', function () {
             $value = 'dependent_value';
             $dependencies = [Cache::Expire => '1 hour'];
 
-            expect(fn() => $this->datastore->load($key, null, $dependencies))->not->toThrow(Exception::class);
+            expect(fn () => $this->datastore->load($key, null, $dependencies))->not->toThrow(Exception::class);
         });
 
         it('saves with dependencies', function () {
@@ -231,7 +231,7 @@ describe('DatastoreManager Class', function () {
             $value = 'dependent_value';
             $dependencies = [Cache::Tags => ['datastore']];
 
-            expect(fn() => $this->datastore->save($key, $value, $dependencies))->not->toThrow(Exception::class);
+            expect(fn () => $this->datastore->save($key, $value, $dependencies))->not->toThrow(Exception::class);
         });
 
         it('uses callback for loading missing data', function () {
@@ -240,6 +240,7 @@ describe('DatastoreManager Class', function () {
 
             $result = $this->datastore->load($key, function () use (&$callbackExecuted) {
                 $callbackExecuted = true;
+
                 return ['generated' => 'data'];
             });
 
@@ -261,17 +262,17 @@ describe('DatastoreManager Class', function () {
 
             // We can't actually build items without the real files,
             // but we can test the error handling
-            expect(fn() => $this->datastore->_build_item('non_existent_item'))
+            expect(fn () => $this->datastore->_build_item('non_existent_item'))
                 ->toThrow(Exception::class);
         });
 
         it('updates specific datastore items', function () {
             // Mock the update process (would normally rebuild from database)
-            expect(fn() => $this->datastore->update(['censor']))->not->toThrow(Exception::class);
+            expect(fn () => $this->datastore->update(['censor']))->not->toThrow(Exception::class);
         });
 
         it('updates all items when requested', function () {
-            expect(fn() => $this->datastore->update('all'))->not->toThrow(Exception::class);
+            expect(fn () => $this->datastore->update('all'))->not->toThrow(Exception::class);
         });
     });
 
@@ -283,28 +284,28 @@ describe('DatastoreManager Class', function () {
 
             $this->datastore->enqueue(['bulk1', 'bulk2', 'bulk3']);
 
-            expect(fn() => $this->datastore->_fetch_from_store())->not->toThrow(Exception::class);
+            expect(fn () => $this->datastore->_fetch_from_store())->not->toThrow(Exception::class);
         });
 
         it('handles bulk loading efficiently', function () {
             // Setup bulk data directly in memory and cache
             for ($i = 1; $i <= 10; $i++) {
-                $this->datastore->store("bulk_item_$i", "value_$i");
+                $this->datastore->store("bulk_item_{$i}", "value_{$i}");
             }
 
             // Now test the fetching logic without building unknown items
-            $items = array_map(fn($i) => "bulk_item_$i", range(1, 10));
+            $items = array_map(fn ($i) => "bulk_item_{$i}", range(1, 10));
             $this->datastore->queued_items = $items;
 
             // Test the fetch_from_store part which should work fine
-            expect(fn() => $this->datastore->_fetch_from_store())->not->toThrow(Exception::class);
+            expect(fn () => $this->datastore->_fetch_from_store())->not->toThrow(Exception::class);
 
             // Manually clear the queue since we're not testing the full _fetch()
             $this->datastore->queued_items = [];
 
             // Verify items are accessible
             for ($i = 1; $i <= 10; $i++) {
-                expect($this->datastore->data["bulk_item_$i"])->toBe("value_$i");
+                expect($this->datastore->data["bulk_item_{$i}"])->toBe("value_{$i}");
             }
         });
     });
@@ -362,7 +363,7 @@ describe('DatastoreManager Class', function () {
 
         it('delegates method calls to cache manager', function () {
             // Test calling cache manager methods
-            expect(fn() => $this->datastore->bulkLoad(['test1', 'test2']))->not->toThrow(Exception::class);
+            expect(fn () => $this->datastore->bulkLoad(['test1', 'test2']))->not->toThrow(Exception::class);
         });
 
         it('provides legacy database property', function () {
@@ -374,12 +375,12 @@ describe('DatastoreManager Class', function () {
         });
 
         it('throws exception for invalid property access', function () {
-            expect(fn() => $this->datastore->__get('invalid_property'))
+            expect(fn () => $this->datastore->__get('invalid_property'))
                 ->toThrow(InvalidArgumentException::class);
         });
 
         it('throws exception for invalid method calls', function () {
-            expect(fn() => $this->datastore->__call('invalid_method', []))
+            expect(fn () => $this->datastore->__call('invalid_method', []))
                 ->toThrow(BadMethodCallException::class);
         });
     });
@@ -404,15 +405,15 @@ describe('DatastoreManager Class', function () {
             ->expect(function () {
                 return measureExecutionTime(function () {
                     for ($i = 0; $i < 100; $i++) {
-                        $this->datastore->store("perf_item_$i", ['data' => "value_$i"]);
-                        $this->datastore->get("perf_item_$i");
+                        $this->datastore->store("perf_item_{$i}", ['data' => "value_{$i}"]);
+                        $this->datastore->get("perf_item_{$i}");
                     }
                 });
             })
             ->toBeLessThan(0.5); // 500ms for 100 operations
 
         it('efficiently handles bulk enqueue operations', function () {
-            $items = array_map(fn($i) => "bulk_perf_$i", range(1, 1000));
+            $items = array_map(fn ($i) => "bulk_perf_{$i}", range(1, 1000));
 
             $time = measureExecutionTime(function () use ($items) {
                 $this->datastore->enqueue($items);
@@ -425,7 +426,7 @@ describe('DatastoreManager Class', function () {
     describe('Error Handling', function () {
         it('handles missing builder scripts', function () {
             // Test with non-existent item
-            expect(fn() => $this->datastore->_build_item('non_existent'))
+            expect(fn () => $this->datastore->_build_item('non_existent'))
                 ->toThrow(Exception::class);
         });
 
@@ -442,7 +443,7 @@ describe('DatastoreManager Class', function () {
             // Create large dataset
             $largeData = array_fill(0, 1000, str_repeat('x', 1000)); // ~1MB
 
-            expect(fn() => $this->datastore->store('large_dataset', $largeData))->not->toThrow(Exception::class);
+            expect(fn () => $this->datastore->store('large_dataset', $largeData))->not->toThrow(Exception::class);
             expect($this->datastore->get('large_dataset'))->toBe($largeData);
         });
 
@@ -451,8 +452,9 @@ describe('DatastoreManager Class', function () {
             $operations = [];
             for ($i = 0; $i < 50; $i++) {
                 $operations[] = function () use ($i) {
-                    $this->datastore->store("concurrent_$i", ['id' => $i, 'data' => "value_$i"]);
-                    return $this->datastore->get("concurrent_$i");
+                    $this->datastore->store("concurrent_{$i}", ['id' => $i, 'data' => "value_{$i}"]);
+
+                    return $this->datastore->get("concurrent_{$i}");
                 };
             }
 

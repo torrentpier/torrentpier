@@ -20,17 +20,17 @@ $is_moderator = false;
 $submit = request()->post->has('submit');
 
 if ($group_id) {
-    if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
+    if (!$group_info = TorrentPier\Legacy\Group::get_group_data($group_id)) {
         bb_die(__('GROUP_NOT_EXIST'));
     }
     if (!$group_info['group_id'] || !$group_info['group_moderator'] || !$group_info['moderator_name']) {
-        bb_die("Invalid group data [group_id: $group_id]");
+        bb_die("Invalid group data [group_id: {$group_id}]");
     }
     $is_moderator = (userdata('user_id') == $group_info['group_moderator'] || IS_ADMIN);
 
     // Assert canonical URL for SEO-friendly routing
     if (request()->attributes->get('semantic_route') && request()->attributes->get('semantic_route_type') === 'groups_edit') {
-        \TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('groups_edit', $group_id, $group_info['group_name']);
+        TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('groups_edit', $group_id, $group_info['group_name']);
     }
 }
 
@@ -42,8 +42,8 @@ if ($is_moderator) {
             $upload = new TorrentPier\Legacy\Common\Upload();
 
             if ($upload->init(config()->get('group_avatars'), $avatarData) and $upload->store('avatar', ['user_id' => GROUP_AVATAR_MASK . $group_id, 'avatar_ext_id' => $group_info['avatar_ext_id']])) {
-                $avatar_ext_id = (int) $upload->file_ext_id;
-                DB()->query("UPDATE " . BB_GROUPS . " SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id LIMIT 1");
+                $avatar_ext_id = (int)$upload->file_ext_id;
+                DB()->query('UPDATE ' . BB_GROUPS . " SET avatar_ext_id = {$avatar_ext_id} WHERE group_id = {$group_id} LIMIT 1");
             } else {
                 bb_die(implode($upload->errors));
             }
@@ -68,7 +68,7 @@ if ($is_moderator) {
         'GROUP_DESCRIPTION' => htmlCHR($group_info['group_description']),
         'GROUP_SIGNATURE' => htmlCHR($group_info['group_signature']),
         'U_GROUP_URL' => url()->group($group_id, $group_info['group_name']),
-        'RELEASE_GROUP' => (bool) $group_info['release_group'],
+        'RELEASE_GROUP' => (bool)$group_info['release_group'],
         'GROUP_TYPE' => $group_type,
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
         'S_GROUP_CLOSED_TYPE' => GROUP_CLOSED,
@@ -86,11 +86,11 @@ if ($is_moderator) {
     template()->set_filenames(['body' => 'group_edit.tpl']);
     template()->assign_vars(['PAGE_TITLE' => __('GROUP_CONFIGURATION')]);
 
-    require(PAGE_HEADER);
+    require PAGE_HEADER;
 
     template()->pparse('body');
 
-    require(PAGE_FOOTER);
+    require PAGE_FOOTER;
 } else {
     $redirect = 'index.php';
 

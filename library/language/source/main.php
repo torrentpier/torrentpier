@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -466,7 +467,7 @@ $lang['GENDER'] = 'Gender';
 $lang['GENDER_SELECT'] = [
     0 => 'Unknown',
     1 => 'Male',
-    2 => 'Female'
+    2 => 'Female',
 ];
 $lang['MODULE_OFF'] = 'Module is disabled!';
 
@@ -541,7 +542,6 @@ $lang['ACCOUNT_ADDED'] = 'Thank you for registering. Your account has been creat
 $lang['ACCOUNT_INACTIVE'] = 'Your account has been created. However, this forum requires account activation. An activation key has been sent to the e-mail address you provided. Please check your e-mail for further information';
 $lang['ACCOUNT_ACTIVE'] = 'Your account has just been activated. Thank you for registering';
 $lang['ALREADY_ACTIVATED'] = 'You have already activated your account';
-
 
 $lang['WRONG_ACTIVATION'] = 'The activation key you supplied does not match any in the database.';
 $lang['PASSWORD_UPDATED'] = 'A new password has been created; please check your e-mail for details on how to activate it.';
@@ -1042,7 +1042,7 @@ $lang['OPEN_IN_SAME_WINDOW'] = 'open in same window';
 $lang['SHOW_TIME_TOPICS'] = 'show time of the creation topics';
 $lang['SHOW_CURSOR'] = 'highlight the row under the cursor';
 
-$lang['BT_LOW_RATIO_FOR_DL'] = "With ratio <b>%s</b> you can not download torrents";
+$lang['BT_LOW_RATIO_FOR_DL'] = 'With ratio <b>%s</b> you can not download torrents';
 $lang['BT_RATIO_WARNING_MSG'] = 'If your ratio falls below %s, you will not be able to download Torrents! <a href="%s"><b>More about the rating.</b></a>';
 
 $lang['SEEDER_LAST_SEEN'] = 'Seeder not seen: <b>%s</b>';
@@ -1217,7 +1217,7 @@ $lang['CHOOSE_PASS_OK'] = 'Passwords match';
 $lang['CHOOSE_PASS_REG_OK'] = 'Passwords match, you can proceed with the registration';
 $lang['CHOOSE_PASS_FAILED'] = 'To change the password, you must correctly specify the current password';
 $lang['EMAILER_DISABLED'] = 'Sorry, this feature is temporarily not working';
-$lang['REGISTERED_IN_TIME'] = "Registration is currently closed<br /><br />Registration is available during: %s<br />Current server time: %s<br /><br />We apologize for the inconvenience";
+$lang['REGISTERED_IN_TIME'] = 'Registration is currently closed<br /><br />Registration is available during: %s<br />Current server time: %s<br /><br />We apologize for the inconvenience';
 $lang['AUTOCOMPLETE'] = 'Generate password';
 $lang['YOUR_NEW_PASSWORD'] = 'Your new password:';
 $lang['REGENERATE'] = 'Regenerate';
@@ -1844,7 +1844,7 @@ $lang['BT_TOR_BROWSE_ONLY_REG'] = 'Torrent browser (tracker.php) accessible only
 $lang['BT_SEARCH_BOOL_MODE'] = 'Allow boolean full-text searches';
 $lang['BT_SEARCH_BOOL_MODE_EXPL'] = 'use *, +, - in searches';
 
-$lang['BT_SHOW_DL_STAT_ON_INDEX_HEAD'] = "Miscellaneous";
+$lang['BT_SHOW_DL_STAT_ON_INDEX_HEAD'] = 'Miscellaneous';
 $lang['BT_SHOW_DL_STAT_ON_INDEX'] = "Show user UL/DL statistics at the top of the forum's main page";
 $lang['BT_NEWTOPIC_AUTO_REG'] = 'Automatically register torrent on tracker for new topics';
 $lang['BT_SET_DLTYPE_ON_TOR_REG'] = 'Change topic status to "Download" while registering torrent on tracker';
@@ -1892,7 +1892,7 @@ $lang['SCHEDULE'] = [
     'daily' => 'daily',
     'weekly' => 'weekly',
     'monthly' => 'monthly',
-    'interval' => 'interval'
+    'interval' => 'interval',
 ];
 $lang['NOSELECT'] = 'No select';
 $lang['RUN_DAY'] = 'Run day';
@@ -2161,7 +2161,7 @@ $lang['FORUMS_IN_CAT'] = 'forums in that category';
 $lang['MC_TITLE'] = 'Moderation comment';
 $lang['MC_LEGEND'] = 'Type a comment';
 $lang['MC_FAQ'] = 'Entered text will be displayed under this message';
-$lang['MC_COMMENT_PM_SUBJECT'] = "%s in your message";
+$lang['MC_COMMENT_PM_SUBJECT'] = '%s in your message';
 $lang['MC_COMMENT_PM_MSG'] = "Hello, [b]%s[/b]\nModerator left in your message [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
 $lang['MC_COMMENT'] = [
     0 => [
