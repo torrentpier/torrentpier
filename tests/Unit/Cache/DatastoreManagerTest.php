@@ -17,19 +17,21 @@ describe('DatastoreManager Class', function () {
         // Create memory storage for testing
         $this->storage = new MemoryStorage;
         $this->config = createTestCacheConfig();
-        $this->datastore = DatastoreManager::getInstance($this->storage, $this->config);
+        $this->datastore = new DatastoreManager($this->storage, $this->config);
     });
 
     afterEach(function () {
         cleanupSingletons();
     });
 
-    describe('Singleton Pattern', function () {
-        it('creates singleton instance correctly', function () {
-            $manager1 = DatastoreManager::getInstance($this->storage, $this->config);
-            $manager2 = DatastoreManager::getInstance($this->storage, $this->config);
+    describe('Instance Creation', function () {
+        it('creates new instance correctly', function () {
+            $manager1 = new DatastoreManager($this->storage, $this->config);
+            $manager2 = new DatastoreManager($this->storage, $this->config);
 
-            expect($manager1)->toBe($manager2);
+            expect($manager1)->not->toBe($manager2)
+                ->and($manager1)->toBeInstanceOf(DatastoreManager::class)
+                ->and($manager2)->toBeInstanceOf(DatastoreManager::class);
         });
 
         it('initializes with correct configuration', function () {

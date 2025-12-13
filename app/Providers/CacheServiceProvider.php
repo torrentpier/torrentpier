@@ -37,7 +37,7 @@ class CacheServiceProvider extends ServiceProvider
         $this->app->singleton(UnifiedCacheSystem::class, function ($app) {
             /** @var Config $config */
             $config = $app->make(Config::class);
-            return UnifiedCacheSystem::getInstance($config->all());
+            return new UnifiedCacheSystem($config->all());
         });
 
         // Datastore manager for persistent data

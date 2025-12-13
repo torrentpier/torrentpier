@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use ReflectionException;
+use RuntimeException;
 use TorrentPier\ServiceProvider;
 use TorrentPier\Template\Template;
 
@@ -25,25 +25,21 @@ class TemplateServiceProvider extends ServiceProvider
 {
     /**
      * Register template services
-     * @throws ReflectionException
+     *
+     * Template requires a root directory that is determined at runtime
+     * based on user preferences. We register a protective binding that
+     * throws an exception if accessed before setup_style() initializes it.
      */
     public function register(): void
     {
-        // Template service - uses keyed instances internally,
-        // so we bind a closure that delegates to the singleton pattern
-        $this->app->bind(Template::class, function ($app, array $params) {
-            $root = $params['root'] ?? null;
-
-            return Template::getInstance($root);
+        $this->app->singleton(Template::class, function () {
+            throw new RuntimeException(
+                'Template not initialized. Ensure setup_style() is called before using template().',
+            );
         });
 
-        // Default template instance (without root parameter)
-        $this->app->singleton('template.default', function () {
-            return Template::getInstance();
-        });
-
-        // Register aliases
-        $this->app->alias('template.default', 'template');
+        // Register alias
+        $this->app->alias(Template::class, 'template');
     }
 
     /**
@@ -56,7 +52,6 @@ class TemplateServiceProvider extends ServiceProvider
         return [
             Template::class,
             'template',
-            'template.default',
         ];
     }
 }

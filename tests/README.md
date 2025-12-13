@@ -131,22 +131,25 @@ tests/
 
 ## 🎨 Testing Patterns
 
-### 1. Singleton Testing Pattern
+### 1. Test Isolation Pattern
 
-For testing singleton classes like Database, Cache, etc.:
+For testing classes managed by DI container:
 
 ```php
 beforeEach(function () {
-    // Reset singleton instances between tests
-    Database::destroyInstances();
-    UnifiedCacheSystem::destroyInstance();
+    // Reset global state between tests
+    resetGlobalState();
+
+    // Set up test dependencies
+    $this->storage = new MemoryStorage();
+    $this->config = createTestCacheConfig();
 });
 
-it('creates singleton instance', function () {
-    $instance1 = Database::getInstance($config);
-    $instance2 = Database::getInstance();
+it('creates instance correctly', function () {
+    $manager1 = new CacheManager('test', $this->storage, $this->config);
+    $manager2 = new CacheManager('test', $this->storage, $this->config);
 
-    expect($instance1)->toBe($instance2);
+    expect($manager1)->not->toBe($manager2);  // Each call creates new instance
 });
 ```
 
@@ -207,18 +210,21 @@ it('validates configuration keys', function ($key, $isValid) {
 
 ## 🗄️ Database Testing
 
-### Singleton Pattern Testing
+### Database Instance Testing
 
 ```php
-// Test singleton pattern implementation
-it('creates singleton instance with valid configuration', function () {
-    $config = getTestDatabaseConfig();
+// Test database instance via DI container
+it('provides database instance via container', function () {
+    $db = app(Database::class);
 
-    $instance1 = Database::getInstance($config);
-    $instance2 = Database::getInstance();
+    expect($db)->toBeInstanceOf(Database::class);
+});
 
-    expect($instance1)->toBe($instance2);
-    expect($instance1)->toBeInstanceOf(Database::class);
+// Test DB() helper function
+it('returns database via helper function', function () {
+    $db = DB();
+
+    expect($db)->toBeInstanceOf(Database::class);
 });
 
 // Test multiple server instances
@@ -289,27 +295,28 @@ it('captures debug information when enabled', function () {
 
 ## 💾 Cache Testing
 
-### CacheManager Singleton Pattern
+### CacheManager Instance Creation
 
 ```php
-// Test singleton pattern for cache managers
-it('creates singleton instance correctly', function () {
+// Test instance creation for cache managers
+it('creates new instance correctly', function () {
     $storage = new MemoryStorage();
     $config = createTestCacheConfig();
 
-    $manager1 = CacheManager::getInstance('test', $storage, $config);
-    $manager2 = CacheManager::getInstance('test', $storage, $config);
+    $manager1 = new CacheManager('test', $storage, $config);
+    $manager2 = new CacheManager('test', $storage, $config);
 
-    expect($manager1)->toBe($manager2);
+    expect($manager1)->not->toBe($manager2);
+    expect($manager1)->toBeInstanceOf(CacheManager::class);
 });
 
 // Test namespace isolation
-it('creates different instances for different namespaces', function () {
+it('creates separate instances for different namespaces', function () {
     $storage = new MemoryStorage();
     $config = createTestCacheConfig();
 
-    $manager1 = CacheManager::getInstance('namespace1', $storage, $config);
-    $manager2 = CacheManager::getInstance('namespace2', $storage, $config);
+    $manager1 = new CacheManager('namespace1', $storage, $config);
+    $manager2 = new CacheManager('namespace2', $storage, $config);
 
     expect($manager1)->not->toBe($manager2);
 });
@@ -436,7 +443,7 @@ function getTestDatabaseConfig(): array
 ./vendor/bin/pest --parallel
 
 # Run with specific filter
-./vendor/bin/pest --filter="singleton"
+./vendor/bin/pest --filter="instance"
 ./vendor/bin/pest --filter="cache operations"
 
 # Run specific test files
@@ -473,10 +480,7 @@ function getTestDatabaseConfig(): array
 
 ```php
 beforeEach(function () {
-    // Reset singleton instances between tests
-    Database::destroyInstances();
-
-    // Reset global state
+    // Reset global state between tests
     resetGlobalState();
 
     // Mock required functions for testing
@@ -500,7 +504,7 @@ afterEach(function () {
 
 ```php
 // ✅ Good: Descriptive and specific (from actual tests)
-it('creates singleton instance with valid configuration');
+it('creates new instance correctly');
 it('creates different instances for different servers');
 it('handles different data types');
 it('loads with callback function');
@@ -654,7 +658,7 @@ it('database query executes within acceptable time', function () {
 - **Database Testing**: Comprehensive unit tests for Database and DatabaseDebugger classes
 - **Cache Testing**: Full test coverage for CacheManager and DatastoreManager
 - **Test Infrastructure**: Complete Pest.php helper functions and mock factories
-- **Singleton Pattern Testing**: Validated across all major components
+- **DI Container Testing**: Service providers and container integration validated
 
 ### 🚧 Current Test Coverage
 
@@ -678,7 +682,7 @@ it('database query executes within acceptable time', function () {
 When adding new components to TorrentPier:
 
 1. **Create test file** in appropriate Unit directory (`tests/Unit/ComponentName/`)
-2. **Write unit tests** for all public methods and singleton patterns
+2. **Write unit tests** for all public methods and DI container integrations
 3. **Use existing helpers** from Pest.php (mock factories, test data generators)
 4. **Follow naming patterns** used in existing tests
 5. **Add integration tests** to Feature directory for complex workflows

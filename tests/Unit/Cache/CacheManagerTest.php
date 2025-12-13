@@ -17,24 +17,26 @@ describe('CacheManager Class', function () {
         // Create memory storage for testing
         $this->storage = new MemoryStorage;
         $this->config = createTestCacheConfig();
-        $this->cacheManager = CacheManager::getInstance('test_namespace', $this->storage, $this->config);
+        $this->cacheManager = new CacheManager('test_namespace', $this->storage, $this->config);
     });
 
     afterEach(function () {
         cleanupSingletons();
     });
 
-    describe('Singleton Pattern', function () {
-        it('creates singleton instance correctly', function () {
-            $manager1 = CacheManager::getInstance('test', $this->storage, $this->config);
-            $manager2 = CacheManager::getInstance('test', $this->storage, $this->config);
+    describe('Instance Creation', function () {
+        it('creates new instance correctly', function () {
+            $manager1 = new CacheManager('test', $this->storage, $this->config);
+            $manager2 = new CacheManager('test', $this->storage, $this->config);
 
-            expect($manager1)->toBe($manager2);
+            expect($manager1)->not->toBe($manager2)
+                ->and($manager1)->toBeInstanceOf(CacheManager::class)
+                ->and($manager2)->toBeInstanceOf(CacheManager::class);
         });
 
-        it('creates different instances for different namespaces', function () {
-            $manager1 = CacheManager::getInstance('namespace1', $this->storage, $this->config);
-            $manager2 = CacheManager::getInstance('namespace2', $this->storage, $this->config);
+        it('creates separate instances for different namespaces', function () {
+            $manager1 = new CacheManager('namespace1', $this->storage, $this->config);
+            $manager2 = new CacheManager('namespace2', $this->storage, $this->config);
 
             expect($manager1)->not->toBe($manager2);
         });
@@ -342,7 +344,7 @@ describe('CacheManager Class', function () {
             // Test with file storage
             $tempDir = createTempDirectory();
             $fileStorage = new FileStorage($tempDir);
-            $fileManager = CacheManager::getInstance('file_test', $fileStorage, $this->config);
+            $fileManager = new CacheManager('file_test', $fileStorage, $this->config);
 
             $fileManager->set('file_key', 'file_value');
             expect($fileManager->get('file_key'))->toBe('file_value');
@@ -358,13 +360,13 @@ describe('CacheManager Class', function () {
             $mockStorage->shouldReceive('write')->andThrow(new Exception('Storage error'));
             $mockStorage->shouldReceive('lock')->andReturn(true);
 
-            $errorManager = CacheManager::getInstance('error_test', $mockStorage, $this->config);
+            $errorManager = new CacheManager('error_test', $mockStorage, $this->config);
 
             // Only set() method has exception handling - get() method will throw
-            expect($errorManager->set('any_key', 'any_value'))->toBeFalse();
+            expect($errorManager->set('any_key', 'any_value'))->toBeFalse()
+                ->and(method_exists($errorManager, 'get'))->toBeTrue();
 
             // Test that the method exists but note that get() doesn't handle storage errors
-            expect(method_exists($errorManager, 'get'))->toBeTrue();
         });
 
         it('handles invalid cache operations', function () {

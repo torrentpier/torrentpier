@@ -24,11 +24,6 @@ use Nette\Caching\Storage;
 class CacheManager
 {
     /**
-     * Singleton instances of cache managers
-     */
-    private static array $instances = [];
-
-    /**
      * Cache prefix
      */
     public string $prefix;
@@ -72,7 +67,7 @@ class CacheManager
      *
      * @param Storage $storage Pre-built storage instance from UnifiedCacheSystem
      */
-    private function __construct(string $namespace, Storage $storage, array $config)
+    public function __construct(string $namespace, Storage $storage, array $config)
     {
         $this->storage = $storage;
         $this->prefix = $config['prefix'] ?? 'tp_';
@@ -103,22 +98,6 @@ class CacheManager
         }
 
         throw new InvalidArgumentException("Property '{$name}' not found in CacheManager");
-    }
-
-    /**
-     * Get singleton instance (called by UnifiedCacheSystem)
-     *
-     * @param Storage $storage Pre-built storage instance
-     */
-    public static function getInstance(string $namespace, Storage $storage, array $config): self
-    {
-        $key = $namespace . '_' . md5(serialize($config));
-
-        if (!isset(self::$instances[$key])) {
-            self::$instances[$key] = new self($namespace, $storage, $config);
-        }
-
-        return self::$instances[$key];
     }
 
     /**

@@ -8,6 +8,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use Illuminate\Contracts\Container\BindingResolutionException;
+
 if (isset($_REQUEST['GLOBALS'])) {
     die();
 }
@@ -119,7 +121,7 @@ if (is_file(BB_PATH . '/config/config.local.php')) {
  *
  * @param string|null $abstract Service to resolve from the container
  * @param array $parameters Parameters for the service resolution
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  * @return mixed Application instance or resolved service
  */
 function app(?string $abstract = null, array $parameters = []): mixed
@@ -147,7 +149,7 @@ function app(?string $abstract = null, array $parameters = []): mixed
 
 /**
  * Get the Config instance
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function config(): TorrentPier\Config
 {
@@ -156,7 +158,7 @@ function config(): TorrentPier\Config
 
 /**
  * Get the HTTP Client instance
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function httpClient(): TorrentPier\Http\HttpClient
 {
@@ -204,7 +206,7 @@ function httpClient(): TorrentPier\Http\HttpClient
  *   request()->getContentType()             // Content-Type
  *   request()->getContent()                 // Raw request body
  *   request()->getSymfonyRequest()          // Underlying Symfony Request
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function request(): TorrentPier\Http\Request
 {
@@ -223,7 +225,7 @@ function humanTime(int|string $timestamp, int|string|null $reference = null): st
 
 /**
  * Get the Censor instance
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function censor(): TorrentPier\Censor
 {
@@ -232,7 +234,7 @@ function censor(): TorrentPier\Censor
 
 /**
  * Whoops error handler singleton
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function whoops(): TorrentPier\Whoops\WhoopsManager
 {
@@ -241,7 +243,7 @@ function whoops(): TorrentPier\Whoops\WhoopsManager
 
 /**
  * Tracy debug bar singleton
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function tracy(): TorrentPier\Tracy\TracyBarManager
 {
@@ -250,7 +252,7 @@ function tracy(): TorrentPier\Tracy\TracyBarManager
 
 /**
  * Get the Language instance
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function lang(): TorrentPier\Language
 {
@@ -262,7 +264,7 @@ function lang(): TorrentPier\Language
  *
  * @param string $key Language key, supports dot notation (e.g., 'DATETIME.TODAY')
  * @param mixed $default Default value if key doesn't exist
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  * @return mixed Language string or default value
  */
 function __(string $key, mixed $default = null): mixed
@@ -275,7 +277,7 @@ function __(string $key, mixed $default = null): mixed
  *
  * @param string $key Language key, supports dot notation
  * @param mixed $default Default value if key doesn't exist
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function _e(string $key, mixed $default = null): void
 {
@@ -285,17 +287,30 @@ function _e(string $key, mixed $default = null): void
 /**
  * Get the Template instance
  *
- * @param string|null $root Template root directory
+ * When $root is provided, creates a new Template and registers it in the container.
+ * When $root is null, returns the previously registered instance.
+ *
+ * @param string|null $root Template root directory (pass on first call to initialize)
+ * @throws RuntimeException If called without $root before initialization
+ * @throws BindingResolutionException
  */
 function template(?string $root = null): TorrentPier\Template\Template
 {
-    return TorrentPier\Template\Template::getInstance($root);
+    if ($root !== null) {
+        $template = new TorrentPier\Template\Template($root);
+        app()->instance(TorrentPier\Template\Template::class, $template);
+
+        return $template;
+    }
+
+    return app(TorrentPier\Template\Template::class);
 }
 
 /**
  * Get theme images array
  *
  * @param string|null $key Specific image key, or null for all images
+ * @throws BindingResolutionException
  * @return mixed Image path, all images array, or empty string if key not found
  */
 function theme_images(?string $key = null): mixed
@@ -338,19 +353,16 @@ unset($server_protocol, $server_port);
 
 /**
  * Get the Database instance
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function DB(): TorrentPier\Database\Database
 {
     return app(TorrentPier\Database\Database::class);
 }
 
-// Initialize Unified Cache System
-TorrentPier\Cache\UnifiedCacheSystem::getInstance(config()->all());
-
 /**
  * Get cache manager instance (replaces legacy cache system)
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function CACHE(string $cache_name): TorrentPier\Cache\CacheManager
 {
@@ -359,7 +371,7 @@ function CACHE(string $cache_name): TorrentPier\Cache\CacheManager
 
 /**
  * Get datastore manager instance (replaces legacy datastore system)
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function datastore(): TorrentPier\Cache\DatastoreManager
 {
@@ -368,7 +380,7 @@ function datastore(): TorrentPier\Cache\DatastoreManager
 
 /**
  * User singleton helper
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function user(): TorrentPier\Legacy\Common\User
 {
@@ -389,7 +401,7 @@ function userdata(?string $key = null): mixed
 
 /**
  * LogAction singleton helper
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function log_action(): TorrentPier\Legacy\LogAction
 {
@@ -398,7 +410,7 @@ function log_action(): TorrentPier\Legacy\LogAction
 
 /**
  * Html helper singleton
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function html(): TorrentPier\Legacy\Common\Html
 {
@@ -423,7 +435,7 @@ function simple_header(?bool $set = null): bool
 
 /**
  * BBCode parser singleton
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function bbcode(): TorrentPier\Legacy\BBCode
 {
@@ -432,7 +444,7 @@ function bbcode(): TorrentPier\Legacy\BBCode
 
 /**
  * Ajax handler singleton
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function ajax(): TorrentPier\Ajax
 {
@@ -441,7 +453,7 @@ function ajax(): TorrentPier\Ajax
 
 /**
  * Manticore search singleton
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function manticore(): ?TorrentPier\ManticoreSearch
 {
@@ -502,7 +514,7 @@ function bitfields(?string $type = null): array
 
 /**
  * Read tracker singleton - tracks read status of topics and forums
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function read_tracker(): TorrentPier\ReadTracker
 {
@@ -533,7 +545,7 @@ function &tracking_forums(): array
  * Get forum tree data (categories and forums hierarchy)
  *
  * @param bool $refresh Refresh cached data before returning
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  * @return array Forum tree data
  */
 function forum_tree(bool $refresh = false): array

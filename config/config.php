@@ -643,12 +643,12 @@ $bb_cfg['allow_change'] = [
 $bb_cfg['trash_forum_id'] = 0; // (int) 7
 
 $bb_cfg['first_logon_redirect_url'] = '/'; // Which page should the user be redirected to after registration is completed?
-$bb_cfg['terms_and_conditions_url'] = 'terms'; // Link to forum rules page
+$bb_cfg['terms_and_conditions_url'] = '/terms'; // Link to forum rules page
 $bb_cfg['tor_help_links'] = '<div class="mrg_2"><a target="_blank" class="genmed" href="https://yoursite.com/">See $bb_cfg[\'tor_help_links\'] in config.php</a></div>';
 
-$bb_cfg['user_agreement_url'] = 'info?show=user_agreement';
-$bb_cfg['copyright_holders_url'] = 'info?show=copyright_holders';
-$bb_cfg['advert_url'] = 'info?show=advert';
+$bb_cfg['user_agreement_url'] = '/info?show=user_agreement';
+$bb_cfg['copyright_holders_url'] = '/info?show=copyright_holders';
+$bb_cfg['advert_url'] = '/info?show=advert';
 
 // Extensions
 $bb_cfg['file_id_ext'] = [
