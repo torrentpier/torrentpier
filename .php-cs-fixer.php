@@ -106,7 +106,7 @@ return new Config()
 
         // PHPDoc
         'align_multiline_comment' => true,
-        'no_blank_lines_after_phpdoc' => true,
+        'no_blank_lines_after_phpdoc' => false,
         'no_empty_phpdoc' => true,
         'phpdoc_align' => ['align' => 'left'],
         'phpdoc_annotation_without_dot' => true,
