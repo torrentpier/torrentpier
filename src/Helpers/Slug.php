@@ -29,7 +29,6 @@ use Transliterator;
 class Slug
 {
     private static ?Transliterator $transliterator = null;
-
     private static ?AsciiSlugger $slugger = null;
 
     /**

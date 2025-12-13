@@ -28,7 +28,6 @@ class ForumFeedProvider implements FeedProviderInterface
     use TopicVisibilityFilterTrait;
 
     private ?string $forumName;
-
     private ?array $forumData;
 
     /**

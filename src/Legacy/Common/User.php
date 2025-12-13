@@ -93,17 +93,11 @@ class User
     public $id;
 
     public $ip;
-
     public $lastvisit;
-
     public $regdate;
-
     public $opt;
-
     public $name;
-
     public $active;
-
     public $level;
 
     /**

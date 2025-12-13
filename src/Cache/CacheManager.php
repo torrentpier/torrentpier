@@ -53,19 +53,12 @@ class CacheManager
     public int $num_queries = 0;
 
     public float $sql_starttime = 0;
-
     public float $sql_inittime = 0;
-
     public float $sql_timetotal = 0;
-
     public float $cur_query_time = 0;
-
     public array $dbg = [];
-
     public int $dbg_id = 0;
-
     public bool $dbg_enabled = false;
-
     public ?string $cur_query = null;
 
     /**

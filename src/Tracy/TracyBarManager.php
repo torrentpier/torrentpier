@@ -22,7 +22,6 @@ use Tracy\Debugger;
 class TracyBarManager
 {
     private static ?self $instance = null;
-
     public private(set) bool $initialized = false;
 
     /** @var float|null Captured execution time from page_footer */

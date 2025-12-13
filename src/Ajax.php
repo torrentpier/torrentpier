@@ -21,9 +21,7 @@ use RuntimeException;
 class Ajax
 {
     public array $request = [];
-
     public array $response = [];
-
     public array $valid_actions = [
         // ACTION NAME => [AJAX_AUTH]
         'edit_user_profile' => ['admin'],
@@ -53,7 +51,6 @@ class Ajax
         'posts' => ['guest'],
         'index_data' => ['guest'],
     ];
-
     public ?string $action;
 
     /**

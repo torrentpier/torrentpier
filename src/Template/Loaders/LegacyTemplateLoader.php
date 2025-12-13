@@ -30,7 +30,6 @@ class LegacyTemplateLoader implements LoaderInterface
     private static array $nativeTemplates = [];
 
     private LoaderInterface $loader;
-
     private LegacySyntaxExtension $syntaxConverter;
 
     public function __construct(LoaderInterface $loader)

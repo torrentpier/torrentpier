@@ -28,9 +28,7 @@ class FrontController
     public const string ACTION_ROUTE = 'route';
 
     private string $appPath;
-
     private string $publicPath;
-
     private ?Router $router = null;
 
     /** @var string[] Paths that bypass the router entirely */

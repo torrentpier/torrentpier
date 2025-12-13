@@ -16,9 +16,7 @@ namespace TorrentPier\Search;
 class SearchParams
 {
     private array $keys = [];
-
     private array $values = [];
-
     private array $types = [];
 
     /**

@@ -19,9 +19,7 @@ use JsonException;
 class Poll
 {
     public $err_msg = '';
-
     public $poll_votes = [];
-
     public $max_votes = 0;
 
     public function __construct()

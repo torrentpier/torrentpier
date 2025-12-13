@@ -21,9 +21,7 @@ use RuntimeException;
 class DatabaseFactory
 {
     private static array $instances = [];
-
     private static array $server_configs = [];
-
     private static array $server_aliases = [];
 
     /**

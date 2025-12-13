@@ -23,9 +23,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 abstract class Command extends SymfonyCommand
 {
     protected SymfonyStyle $io;
-
     protected InputInterface $input;
-
     protected OutputInterface $output;
 
     /**

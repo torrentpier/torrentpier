@@ -21,7 +21,6 @@ use LogicException;
 class Config
 {
     private static ?Config $instance = null;
-
     private array $config = [];
 
     private function __construct(array $config = [])

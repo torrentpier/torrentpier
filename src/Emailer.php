@@ -30,17 +30,11 @@ use Twig\Loader\FilesystemLoader;
 class Emailer
 {
     private static ?Environment $twig = null;
-
     private string $subject;
-
     private ?Address $to = null;
-
     private ?Address $reply = null;
-
     private string $template_file = '';
-
     private string $template_lang = '';
-
     private array $vars = [];
 
     public function set_subject(string $subject): void

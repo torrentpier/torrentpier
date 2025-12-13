@@ -27,54 +27,34 @@ use RuntimeException;
 class Database
 {
     private static ?Database $instance = null;
-
     private static array $instances = [];
-
     public ?Connection $connection = null;
-
     public ?DatabaseDebugger $debugger = null;
 
     // Configuration
     public array $cfg = [];
-
     public array $cfg_keys = ['dbhost', 'dbport', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
-
     public string $db_server = '';
-
     public ?string $selected_db = null;
-
     public bool $inited = false;
-
     public string $engine = 'MySQL';
 
     // Locking
     public bool $locked = false;
-
     public array $locks = [];
 
     // Statistics and debugging
     public int $num_queries = 0;
-
     public float $sql_starttime = 0;
-
     public float $sql_inittime = 0;
-
     public float $sql_timetotal = 0;
-
     public float $cur_query_time = 0;
-
     public ?string $cur_query = null;
-
     public ?string $last_query = null; // Store last executed query for error reporting
-
     public array $shutdown = [];
-
     public array $DBS = [];
-
     private ?Explorer $explorer = null;
-
     private ?ResultSet $result = null;
-
     private int $last_affected_rows = 0;
 
     /**

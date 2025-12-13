@@ -21,9 +21,7 @@ use Exception;
 class MigrationStatus
 {
     private string $migrationTable;
-
     private string $migrationPath;
-
     private array $initialMigrations = [
         '20250619000001',
         '20250619000002',

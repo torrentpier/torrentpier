@@ -21,17 +21,11 @@ use LogicException;
 class Language
 {
     private static ?Language $instance = null;
-
     public private(set) string $currentLanguage = '';
-
     private array $userLanguage = [];
-
     private array $sourceLanguage = [];
-
     private bool $initialized = false;
-
     private string $libraryLangDir;
-
     private string $vendorLangDir;
 
     private function __construct()

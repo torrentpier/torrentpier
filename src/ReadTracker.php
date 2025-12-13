@@ -19,9 +19,7 @@ use RuntimeException;
 class ReadTracker
 {
     private static ?self $instance = null;
-
     private ?array $topics = null;
-
     private ?array $forums = null;
 
     private function __construct() {}

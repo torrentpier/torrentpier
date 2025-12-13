@@ -16,13 +16,10 @@ namespace TorrentPier\Torrent;
 class FileList
 {
     public array $tor_decoded = [];
-
     public array $files_ary = [
         '/' => [],
     ];
-
     public bool $multiple = false;
-
     public string $root_dir = '';
 
     /**

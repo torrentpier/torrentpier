@@ -10,7 +10,6 @@ namespace TorrentPier\Forum;
 class ForumTree
 {
     private static ?self $instance = null;
-
     private ?array $data = null;
 
     private function __construct() {}

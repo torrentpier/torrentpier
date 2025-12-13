@@ -25,9 +25,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PhinxManager
 {
     public private(set) string $environment;
-
     private Config $config;
-
     private Manager $manager;
 
     public function __construct(InputInterface $input, OutputInterface $output)

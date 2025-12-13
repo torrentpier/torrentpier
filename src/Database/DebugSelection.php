@@ -20,7 +20,6 @@ use ReflectionClass;
 class DebugSelection
 {
     private Selection $selection;
-
     private Database $db;
 
     public function __construct(Selection $selection, Database $db)

@@ -21,26 +21,20 @@ class DatabaseDebugger
 {
     // Debug configuration
     public bool $dbg_enabled = false;
-
     public bool $do_explain = false;
-
     public float $slow_time = 3.0;
 
     // Timing and statistics
     public float $sql_starttime = 0;
-
     public float $cur_query_time = 0;
 
     // Debug storage
     public array $dbg = [];
-
     public int $dbg_id = 0;
-
     public array $legacy_queries = []; // Track queries that needed legacy compatibility fixes
 
     // Nette Explorer tracking
     public bool $is_nette_explorer_query = false;
-
     private Database $db;
 
     public function __construct(Database $db)

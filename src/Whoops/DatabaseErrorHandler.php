@@ -23,9 +23,7 @@ use Whoops\Handler\HandlerInterface;
 class DatabaseErrorHandler extends Handler implements HandlerInterface
 {
     private bool $addToOutput = true;
-
     private bool $includeQueryHistory = true;
-
     private int $maxQueryHistory = 5;
 
     /**

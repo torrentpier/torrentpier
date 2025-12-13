@@ -44,7 +44,6 @@ final class HttpClient
     private const int DEFAULT_MAX_RETRIES = 3;
 
     private static ?self $instance = null;
-
     private Client $client;
 
     /**

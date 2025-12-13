@@ -23,7 +23,6 @@ class Template
     private const array RESERVED_KEYS = ['L', '_tpldata', 'V', 'IMG'];
 
     private static array $instances = [];
-
     private static float $totalRenderTime = 0;
 
     /** @var array<array{variable: string, template: string, source: string, time: float}> */
@@ -33,7 +32,6 @@ class Template
     private static array $variableShadowing = [];
 
     private static ?self $defaultInstance = null;
-
     private ?Environment $twig = null;
 
     /** Block data for template loops */

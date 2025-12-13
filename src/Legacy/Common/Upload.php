@@ -50,7 +50,6 @@ class Upload
     ];
 
     public $file_ext = '';
-
     public $file_ext_id = '';
 
     /**

@@ -23,7 +23,6 @@ use Twig\TwigFunction;
 class ThemeExtension extends AbstractExtension implements GlobalsInterface
 {
     private string $imgPath = '';
-
     private string $sharedImgPath = '';
 
     public function setTemplatePath(string $templateDir): void

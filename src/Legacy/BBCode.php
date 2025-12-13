@@ -55,15 +55,10 @@ class BBCode
     ];
 
     public $preg = [];
-
     public $str = [];
-
     public $preg_search = [];
-
     public $preg_repl = [];
-
     public $str_search = [];
-
     public $str_repl = [];
 
     /**

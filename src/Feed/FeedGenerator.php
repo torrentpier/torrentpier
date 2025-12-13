@@ -30,7 +30,6 @@ use TorrentPier\Feed\Provider\FeedProviderInterface;
 final class FeedGenerator
 {
     private static ?self $instance = null;
-
     private FeedIo $feedIo;
 
     /**

@@ -29,9 +29,7 @@ use Throwable;
 class Router
 {
     private static ?self $instance = null;
-
     private LeagueRouter $router;
-
     private bool $routesLoaded = false;
 
     private function __construct()

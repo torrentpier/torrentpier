@@ -41,7 +41,6 @@ use UnexpectedValueException;
 final class Request
 {
     private static ?self $instance = null;
-
     private SymfonyRequest $request;
 
     /**
