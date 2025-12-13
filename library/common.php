@@ -123,8 +123,8 @@ $config = TorrentPier\Config::init($bb_cfg);
  *
  * @param string|null $abstract Service to resolve from the container
  * @param array $parameters Parameters for the service resolution
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  * @return mixed Application instance or resolved service
- * @throws \Illuminate\Contracts\Container\BindingResolutionException
  */
 function app(?string $abstract = null, array $parameters = []): mixed
 {
@@ -218,10 +218,11 @@ function humanTime(int|string $timestamp, int|string|null $reference = null): st
 
 /**
  * Get the Censor instance
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function censor(): TorrentPier\Censor
 {
-    return TorrentPier\Censor::getInstance();
+    return app(TorrentPier\Censor::class);
 }
 
 /**

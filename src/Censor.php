@@ -10,18 +10,16 @@
 
 namespace TorrentPier;
 
-use LogicException;
+use TorrentPier\Cache\DatastoreManager;
 
 /**
  * Word Censoring System
  *
- * Singleton class that provides word censoring functionality
- * with automatic loading of censored words from the datastore.
+ * Provides word censoring functionality with automatic loading
+ * of censored words from the datastore.
  */
 class Censor
 {
-    private static ?Censor $instance = null;
-
     /**
      * Word replacements
      */
@@ -32,57 +30,15 @@ class Censor
      */
     public array $words = [];
 
-    /**
-     * Initialize word censor
-     */
-    private function __construct()
-    {
+    public function __construct(
+        private readonly Config $config,
+        private readonly DatastoreManager $datastore,
+    ) {
         $this->loadCensoredWords();
     }
 
     /**
-     * Prevent cloning of the singleton instance
-     */
-    private function __clone() {}
-
-    /**
-     * Prevent serialization of the singleton instance
-     */
-    public function __serialize(): array
-    {
-        throw new LogicException('Cannot serialize a singleton.');
-    }
-
-    /**
-     * Prevent unserialization of the singleton instance
-     */
-    public function __unserialize(array $data): void
-    {
-        throw new LogicException('Cannot unserialize a singleton.');
-    }
-
-    /**
-     * Get the singleton instance of Censor
-     */
-    public static function getInstance(): Censor
-    {
-        if (self::$instance === null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Initialize the censor system (for compatibility)
-     */
-    public static function init(): Censor
-    {
-        return self::getInstance();
-    }
-
-    /**
-     * Word censor
+     * Censor a string by replacing banned words
      */
     public function censorString(string $word): string
     {
@@ -95,7 +51,6 @@ class Censor
 
     /**
      * Reload censored words from datastore
-     * Useful when words are updated in admin panel
      */
     public function reload(): void
     {
@@ -109,11 +64,11 @@ class Censor
      */
     public function isEnabled(): bool
     {
-        return config()->get('use_word_censor', false);
+        return $this->config->get('use_word_censor', false);
     }
 
     /**
-     * Add a censored word (runtime only)
+     * Add a censored word at runtime
      */
     public function addWord(string $word, string $replacement): void
     {
@@ -122,7 +77,7 @@ class Censor
     }
 
     /**
-     * Get all censored words count
+     * Get count of censored words
      */
     public function getWordsCount(): int
     {
@@ -138,8 +93,11 @@ class Censor
             return;
         }
 
-        // Get censored words
-        $censoredWords = datastore()->get('censor');
+        $censoredWords = $this->datastore->get('censor');
+
+        if (!\is_array($censoredWords)) {
+            return;
+        }
 
         foreach ($censoredWords as $word) {
             $this->words[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($word['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
