@@ -24,41 +24,20 @@ use Throwable;
 /**
  * Router wrapper for TorrentPier
  *
- * Provides singleton access to league/route with TorrentPier-specific defaults.
+ * Provides access to league/route with TorrentPier-specific defaults.
  */
 class Router
 {
-    private static ?self $instance = null;
     private LeagueRouter $router;
     private bool $routesLoaded = false;
 
-    private function __construct()
+    public function __construct()
     {
         $this->router = new LeagueRouter;
 
         // Use ApplicationStrategy for standard request handling
         $strategy = new ApplicationStrategy;
         $this->router->setStrategy($strategy);
-    }
-
-    /**
-     * Get the singleton instance
-     */
-    public static function getInstance(): self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Reset the singleton (useful for testing)
-     */
-    public static function reset(): void
-    {
-        self::$instance = null;
     }
 
     /**
