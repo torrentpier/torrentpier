@@ -114,10 +114,6 @@ if (is_file(BB_PATH . '/config/config.local.php')) {
     require_once BB_PATH . '/config/config.local.php';
 }
 
-/** @noinspection PhpUndefinedVariableInspection */
-// Initialize Config singleton, bb_cfg from global file config
-$config = TorrentPier\Config::init($bb_cfg);
-
 /**
  * Get the Application container instance
  *
@@ -132,8 +128,14 @@ function app(?string $abstract = null, array $parameters = []): mixed
     static $app = null;
 
     if ($app === null) {
-        // Create the application but don't boot yet - let the caller decide
+        // Create the application
         $app = require BB_PATH . '/bootstrap/app.php';
+
+        // TODO: Migrate to proper Laravel-style Bootstrappers (app/Bootstrap/LoadConfiguration.php)
+        // For now, pass raw config data through container instance binding
+        /** @noinspection PhpUndefinedVariableInspection */
+        global $bb_cfg;
+        $app->instance('config.data', $bb_cfg);
     }
 
     if ($abstract === null) {
@@ -145,18 +147,20 @@ function app(?string $abstract = null, array $parameters = []): mixed
 
 /**
  * Get the Config instance
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function config(): TorrentPier\Config
 {
-    return TorrentPier\Config::getInstance();
+    return app(TorrentPier\Config::class);
 }
 
 /**
  * Get the HTTP Client instance
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function httpClient(): TorrentPier\Http\HttpClient
 {
-    return TorrentPier\Http\HttpClient::getInstance();
+    return app(TorrentPier\Http\HttpClient::class);
 }
 
 /**
@@ -200,10 +204,11 @@ function httpClient(): TorrentPier\Http\HttpClient
  *   request()->getContentType()             // Content-Type
  *   request()->getContent()                 // Raw request body
  *   request()->getSymfonyRequest()          // Underlying Symfony Request
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function request(): TorrentPier\Http\Request
 {
-    return TorrentPier\Http\Request::getInstance();
+    return app(TorrentPier\Http\Request::class);
 }
 
 /**
@@ -227,18 +232,20 @@ function censor(): TorrentPier\Censor
 
 /**
  * Whoops error handler singleton
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function whoops(): TorrentPier\Whoops\WhoopsManager
 {
-    return TorrentPier\Whoops\WhoopsManager::getInstance();
+    return app(TorrentPier\Whoops\WhoopsManager::class);
 }
 
 /**
  * Tracy debug bar singleton
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function tracy(): TorrentPier\Tracy\TracyBarManager
 {
-    return TorrentPier\Tracy\TracyBarManager::getInstance();
+    return app(TorrentPier\Tracy\TracyBarManager::class);
 }
 
 /**
@@ -345,18 +352,20 @@ TorrentPier\Cache\UnifiedCacheSystem::getInstance(config()->all());
 
 /**
  * Get cache manager instance (replaces legacy cache system)
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function CACHE(string $cache_name): TorrentPier\Cache\CacheManager
 {
-    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->get_cache_obj($cache_name);
+    return app(TorrentPier\Cache\UnifiedCacheSystem::class)->get_cache_obj($cache_name);
 }
 
 /**
  * Get datastore manager instance (replaces legacy datastore system)
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function datastore(): TorrentPier\Cache\DatastoreManager
 {
-    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->getDatastore(config()->get('datastore_type', 'file'));
+    return app(TorrentPier\Cache\DatastoreManager::class);
 }
 
 /**
@@ -495,10 +504,11 @@ function bitfields(?string $type = null): array
 
 /**
  * Read tracker singleton - tracks read status of topics and forums
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
 function read_tracker(): TorrentPier\ReadTracker
 {
-    return TorrentPier\ReadTracker::getInstance();
+    return app(TorrentPier\ReadTracker::class);
 }
 
 /**

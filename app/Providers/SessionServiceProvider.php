@@ -29,7 +29,7 @@ class SessionServiceProvider extends ServiceProvider
     {
         // Read tracker for topic/forum read status
         $this->app->singleton(ReadTracker::class, function () {
-            return ReadTracker::getInstance();
+            return new ReadTracker;
         });
 
         // Register aliases

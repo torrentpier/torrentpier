@@ -11,7 +11,6 @@
 namespace TorrentPier;
 
 use InvalidArgumentException;
-use LogicException;
 
 /**
  * Configuration management class
@@ -20,10 +19,9 @@ use LogicException;
  */
 class Config
 {
-    private static ?Config $instance = null;
     private array $config = [];
 
-    private function __construct(array $config = [])
+    public function __construct(array $config = [])
     {
         $this->config = $config;
     }
@@ -50,49 +48,6 @@ class Config
     public function __isset(string $key): bool
     {
         return $this->has($key);
-    }
-
-    /**
-     * Prevent cloning of the singleton instance
-     */
-    private function __clone() {}
-
-    /**
-     * Prevent serialization of the singleton instance
-     */
-    public function __serialize(): array
-    {
-        throw new LogicException('Cannot serialize a singleton.');
-    }
-
-    /**
-     * Prevent unserialization of the singleton instance
-     */
-    public function __unserialize(array $data): void
-    {
-        throw new LogicException('Cannot unserialize a singleton.');
-    }
-
-    /**
-     * Get the singleton instance of Config
-     */
-    public static function getInstance(array $config = []): Config
-    {
-        if (self::$instance === null) {
-            self::$instance = new self($config);
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Initialize the config with the global $bb_cfg array
-     */
-    public static function init(array $bb_cfg): Config
-    {
-        self::$instance = new self($bb_cfg);
-
-        return self::$instance;
     }
 
     /**

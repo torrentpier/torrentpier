@@ -18,28 +18,10 @@ use RuntimeException;
  */
 class ReadTracker
 {
-    private static ?self $instance = null;
     private ?array $topics = null;
     private ?array $forums = null;
 
-    private function __construct() {}
-
-    public static function getInstance(): self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Reset singleton (for testing)
-     */
-    public static function reset(): void
-    {
-        self::$instance = null;
-    }
+    public function __construct() {}
 
     /**
      * Get topic tracking data (lazy-loaded)

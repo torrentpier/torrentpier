@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use Throwable;
 use TorrentPier\Config;
 use TorrentPier\ServiceProvider;
 
@@ -30,29 +29,26 @@ class ConfigServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(Config::class, function ($app) {
-            // Check if Config is already initialized (by common.php)
-            // This allows both standalone container boot and common.php bootstrap
-            try {
-                return Config::getInstance();
-            } catch (Throwable) {
-                // Not initialized yet - do it now
-                $bb_cfg = [];
-
-                // Load main configuration
-                $configPath = $app->configPath('config.php');
-                if (file_exists($configPath)) {
-                    require $configPath;
-                }
-
-                // Load local configuration overrides
-                $localConfigPath = $app->configPath('config.local.php');
-                if (file_exists($localConfigPath)) {
-                    require $localConfigPath;
-                }
-
-                // Initialize the Config singleton with the loaded configuration
-                return Config::init($bb_cfg);
+            // Get config data from container (set by common.php via app()->instance())
+            // TODO: Migrate to Laravel-style Bootstrapper (app/Bootstrap/LoadConfiguration.php)
+            if ($app->bound('config.data')) {
+                return new Config($app->make('config.data'));
             }
+
+            // Fallback: standalone container boot - load configuration files directly
+            $bb_cfg = [];
+
+            $configPath = $app->configPath('config.php');
+            if (file_exists($configPath)) {
+                require $configPath;
+            }
+
+            $localConfigPath = $app->configPath('config.local.php');
+            if (file_exists($localConfigPath)) {
+                require $localConfigPath;
+            }
+
+            return new Config($bb_cfg);
         });
 
         // Register alias for convenient access

@@ -10,7 +10,6 @@
 
 namespace TorrentPier\Tracy;
 
-use LogicException;
 use Tracy\Debugger;
 
 /**
@@ -21,7 +20,6 @@ use Tracy\Debugger;
  */
 class TracyBarManager
 {
-    private static ?self $instance = null;
     public private(set) bool $initialized = false;
 
     /** @var float|null Captured execution time from page_footer */
@@ -30,26 +28,7 @@ class TracyBarManager
     /** @var float|null Captured SQL time from page_footer */
     public private(set) ?float $capturedSqlTime = null;
 
-    private function __construct() {}
-
-    private function __clone() {}
-
-    public function __wakeup(): void
-    {
-        throw new LogicException('Cannot unserialize a singleton.');
-    }
-
-    /**
-     * Get a singleton instance
-     */
-    public static function getInstance(): self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
+    public function __construct() {}
 
     /**
      * Initialize Tracy debug bar

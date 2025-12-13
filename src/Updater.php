@@ -55,10 +55,8 @@ class Updater
      */
     public function __construct()
     {
-        // Initialize HTTP client with 10-second timeout
-        $this->httpClient = HttpClient::getInstance([
-            'timeout' => 10,
-        ]);
+        // Initialize HTTP client (default timeout is 10 seconds)
+        $this->httpClient = httpClient();
 
         try {
             $response = $this->httpClient->get(UPDATER_URL, [

@@ -32,12 +32,12 @@ class HttpServiceProvider extends ServiceProvider
     {
         // HTTP Request singleton
         $this->app->singleton(Request::class, function () {
-            return Request::getInstance();
+            return new Request;
         });
 
         // HTTP Client for external requests
         $this->app->singleton(HttpClient::class, function () {
-            return HttpClient::getInstance();
+            return new HttpClient;
         });
 
         // Router singleton

@@ -11,8 +11,8 @@
 namespace TorrentPier\Tracy\Panels;
 
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use TorrentPier\Database\DatabaseFactory;
-use TorrentPier\Tracy\TracyBarManager;
 use Tracy\IBarPanel;
 
 /**
@@ -118,11 +118,12 @@ class PerformancePanel implements IBarPanel
     /**
      * Get total execution time in seconds
      * Uses captured time from page_footer for accurate measurement
+     * @throws BindingResolutionException
      */
     private function getExecutionTime(): float
     {
         // Use captured time if available (set in page_footer.php)
-        $captured = TracyBarManager::getInstance()->capturedExecTime;
+        $captured = tracy()->capturedExecTime;
         if ($captured !== null) {
             return $captured;
         }
@@ -138,11 +139,12 @@ class PerformancePanel implements IBarPanel
     /**
      * Get total SQL query time in seconds
      * Uses captured time from page_footer for accurate measurement
+     * @throws BindingResolutionException
      */
     private function getSqlTime(): float
     {
         // Use captured time if available (set in page_footer.php)
-        $captured = TracyBarManager::getInstance()->capturedSqlTime;
+        $captured = tracy()->capturedSqlTime;
         if ($captured !== null) {
             return $captured;
         }

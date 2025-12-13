@@ -16,14 +16,14 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
-use LogicException;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 use TorrentPier\Http\Exception\HttpClientException;
 
 /**
- * HTTP Client (singleton)
+ * HTTP Client wrapper
  * Centralized HTTP client based on Guzzle with retry logic, error handling, and logging
  */
 final class HttpClient
@@ -43,15 +43,15 @@ final class HttpClient
      */
     private const int DEFAULT_MAX_RETRIES = 3;
 
-    private static ?self $instance = null;
     private Client $client;
 
     /**
-     * Private constructor to prevent direct instantiation
+     * Create a new HTTP client instance
      *
      * @param array $config Additional Guzzle configuration options
+     * @throws BindingResolutionException
      */
-    private function __construct(array $config = [])
+    public function __construct(array $config = [])
     {
         $handler = HandlerStack::create();
 
@@ -77,49 +77,6 @@ final class HttpClient
         ];
 
         $this->client = new Client(array_merge($defaultConfig, $config));
-    }
-
-    /**
-     * Prevent cloning
-     */
-    private function __clone() {}
-
-    /**
-     * Prevent serialization of the singleton instance
-     */
-    public function __serialize(): array
-    {
-        throw new LogicException('Cannot serialize singleton');
-    }
-
-    /**
-     * Prevent unserialization of the singleton instance
-     */
-    public function __unserialize(array $data): void
-    {
-        throw new LogicException('Cannot unserialize singleton');
-    }
-
-    /**
-     * Get a singleton instance
-     *
-     * @param array $config Additional Guzzle configuration (only used on the first call)
-     */
-    public static function getInstance(array $config = []): self
-    {
-        if (self::$instance === null) {
-            self::$instance = new self($config);
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Reset singleton instance (useful for testing)
-     */
-    public static function resetInstance(): void
-    {
-        self::$instance = null;
     }
 
     /**
