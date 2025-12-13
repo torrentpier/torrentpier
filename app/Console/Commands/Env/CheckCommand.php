@@ -14,8 +14,10 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
+use TorrentPier\Application;
 use TorrentPier\Console\Commands\Command;
 use TorrentPier\Console\Helpers\OutputHelper;
+use TorrentPier\Database\Database;
 
 /**
  * Check environment configuration
@@ -26,6 +28,13 @@ use TorrentPier\Console\Helpers\OutputHelper;
 )]
 class CheckCommand extends Command
 {
+    public function __construct(
+        private readonly Database $database,
+        ?Application              $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     /**
      * Required environment variables
      */
@@ -124,12 +133,12 @@ class CheckCommand extends Command
 
         try {
             // Test connection using ORM
-            $count = DB()->table(BB_CONFIG)->count();
+            $count = $this->database->table(BB_CONFIG)->count();
             if ($count >= 0) {
                 $this->line('  <info>✓</info> Database connection successful');
 
                 // Show database version
-                $version = DB()->fetch_row('SELECT VERSION() as version');
+                $version = $this->database->fetch_row('SELECT VERSION() as version');
                 if ($version) {
                     $this->line("  <info>✓</info> Server version: {$version['version']}");
                 }
