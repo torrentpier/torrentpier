@@ -34,9 +34,7 @@ class LegacyServiceProvider extends ServiceProvider
     public function register(): void
     {
         // Censor service for word filtering
-        $this->app->singleton(Censor::class, function () {
-            return Censor::getInstance();
-        });
+        $this->app->singleton(Censor::class);
 
         // BBCode parser
         $this->app->singleton(BBCode::class, function () {
