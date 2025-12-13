@@ -12,28 +12,29 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use TorrentPier\ReadTracker;
+use TorrentPier\ManticoreSearch;
 use TorrentPier\ServiceProvider;
 
 /**
- * Session Service Provider
+ * Search Service Provider
  *
- * Registers read tracking services.
+ * Registers search-related services (Manticore, Sphinx, etc.).
  */
-class SessionServiceProvider extends ServiceProvider
+class SearchServiceProvider extends ServiceProvider
 {
     /**
-     * Register session services
+     * Register search services
      */
     public function register(): void
     {
-        // Read tracker for topic/forum read status
-        $this->app->singleton(ReadTracker::class, function () {
-            return ReadTracker::getInstance();
+        // Manticore search engine
+        $this->app->singleton(ManticoreSearch::class, function () {
+            return new ManticoreSearch;
         });
 
         // Register aliases
-        $this->app->alias(ReadTracker::class, 'read_tracker');
+        $this->app->alias(ManticoreSearch::class, 'manticore');
+        $this->app->alias(ManticoreSearch::class, 'search');
     }
 
     /**
@@ -44,8 +45,9 @@ class SessionServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [
-            ReadTracker::class,
-            'read_tracker',
+            ManticoreSearch::class,
+            'manticore',
+            'search',
         ];
     }
 }

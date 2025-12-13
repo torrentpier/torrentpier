@@ -12,6 +12,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use TorrentPier\Ajax;
+use TorrentPier\Censor;
+use TorrentPier\Forum\ForumTree;
+use TorrentPier\Language;
 use TorrentPier\ServiceProvider;
 
 /**
@@ -28,12 +32,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Register application-specific bindings here
-        //
-        // Example:
-        // $this->app->singleton(SomeService::class, function ($app) {
-        //     return new SomeService($app->make(Config::class));
-        // });
+        // Ajax handler
+        $this->app->singleton(Ajax::class, function () {
+            return new Ajax;
+        });
+
+        // Censor service for word filtering (auto-wired with DatastoreManager)
+        $this->app->singleton(Censor::class);
+
+        // Forum tree - cached forum hierarchy (auto-wired with DatastoreManager)
+        $this->app->singleton(ForumTree::class);
+
+        // Language system (auto-wired with Config)
+        $this->app->singleton(Language::class);
+
+        // Register aliases
+        $this->app->alias(Ajax::class, 'ajax');
+        $this->app->alias(Censor::class, 'censor');
+        $this->app->alias(ForumTree::class, 'forum_tree');
+        $this->app->alias(Language::class, 'lang');
     }
 
     /**
@@ -42,13 +59,24 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Perform any application bootstrapping here
-        //
-        // This method is called after all service providers have been
-        // registered, so you have access to all services.
-        //
-        // Example:
-        // - Register event listeners
-        // - Configure third-party packages
-        // - Set up application-wide middleware
+    }
+
+    /**
+     * Get the services provided by this provider
+     *
+     * @return string[]
+     */
+    public function provides(): array
+    {
+        return [
+            Ajax::class,
+            Censor::class,
+            ForumTree::class,
+            Language::class,
+            'ajax',
+            'censor',
+            'forum_tree',
+            'lang',
+        ];
     }
 }
