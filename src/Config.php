@@ -10,6 +10,9 @@
 
 namespace TorrentPier;
 
+use InvalidArgumentException;
+use LogicException;
+
 /**
  * Configuration management class
  *
@@ -26,6 +29,51 @@ class Config
     }
 
     /**
+     * Magic method to allow property access
+     */
+    public function __get(string $key): mixed
+    {
+        return $this->get($key);
+    }
+
+    /**
+     * Magic method to allow property setting
+     */
+    public function __set(string $key, mixed $value): void
+    {
+        $this->set($key, $value);
+    }
+
+    /**
+     * Magic method to check if property exists
+     */
+    public function __isset(string $key): bool
+    {
+        return $this->has($key);
+    }
+
+    /**
+     * Prevent cloning of the singleton instance
+     */
+    private function __clone() {}
+
+    /**
+     * Prevent serialization of the singleton instance
+     */
+    public function __serialize(): array
+    {
+        throw new LogicException('Cannot serialize a singleton.');
+    }
+
+    /**
+     * Prevent unserialization of the singleton instance
+     */
+    public function __unserialize(array $data): void
+    {
+        throw new LogicException('Cannot unserialize a singleton.');
+    }
+
+    /**
      * Get the singleton instance of Config
      */
     public static function getInstance(array $config = []): Config
@@ -33,6 +81,7 @@ class Config
         if (self::$instance === null) {
             self::$instance = new self($config);
         }
+
         return self::$instance;
     }
 
@@ -42,6 +91,7 @@ class Config
     public static function init(array $bb_cfg): Config
     {
         self::$instance = new self($bb_cfg);
+
         return self::$instance;
     }
 
@@ -81,7 +131,7 @@ class Config
             return $this->getNestedValue($key) !== null;
         }
 
-        return array_key_exists($key, $this->config);
+        return \array_key_exists($key, $this->config);
     }
 
     /**
@@ -90,42 +140,6 @@ class Config
     public function all(): array
     {
         return $this->config;
-    }
-
-    /**
-     * Get a nested value using dot notation
-     */
-    private function getNestedValue(string $key, mixed $default = null): mixed
-    {
-        $keys = explode('.', $key);
-        $value = $this->config;
-
-        foreach ($keys as $k) {
-            if (!is_array($value) || !array_key_exists($k, $value)) {
-                return $default;
-            }
-            $value = $value[$k];
-        }
-
-        return $value;
-    }
-
-    /**
-     * Set a nested value using dot notation
-     */
-    private function setNestedValue(string $key, mixed $value): void
-    {
-        $keys = explode('.', $key);
-        $target = &$this->config;
-
-        foreach ($keys as $k) {
-            if (!isset($target[$k]) || !is_array($target[$k])) {
-                $target[$k] = [];
-            }
-            $target = &$target[$k];
-        }
-
-        $target = $value;
     }
 
     /**
@@ -149,19 +163,19 @@ class Config
         $this->validateTableName($table);
 
         if (!$fromDb) {
-            $cached = \CACHE('bb_config')->get("config_{$table}");
+            $cached = CACHE('bb_config')->get("config_{$table}");
             if ($cached) {
                 return $cached;
             }
         }
 
         $cfg = [];
-        foreach (\DB()->fetch_rowset("SELECT * FROM $table") as $row) {
+        foreach (DB()->fetch_rowset("SELECT * FROM {$table}") as $row) {
             $cfg[$row['config_name']] = $row['config_value'];
         }
 
         if ($updateCache) {
-            \CACHE('bb_config')->set("config_{$table}", $cfg);
+            CACHE('bb_config')->set("config_{$table}", $cfg);
         }
 
         return $cfg;
@@ -184,9 +198,9 @@ class Config
                 'config_value' => $val,
             ];
         }
-        $updates = \DB()->build_array('MULTI_INSERT', $updates);
+        $updates = DB()->build_array('MULTI_INSERT', $updates);
 
-        \DB()->query("REPLACE INTO $table $updates");
+        DB()->query("REPLACE INTO {$table} {$updates}");
 
         // Update cache
         $this->loadFromDatabase($table, true, true);
@@ -201,27 +215,39 @@ class Config
     }
 
     /**
-     * Magic method to allow property access
+     * Get a nested value using dot notation
      */
-    public function __get(string $key): mixed
+    private function getNestedValue(string $key, mixed $default = null): mixed
     {
-        return $this->get($key);
+        $keys = explode('.', $key);
+        $value = $this->config;
+
+        foreach ($keys as $k) {
+            if (!\is_array($value) || !\array_key_exists($k, $value)) {
+                return $default;
+            }
+            $value = $value[$k];
+        }
+
+        return $value;
     }
 
     /**
-     * Magic method to allow property setting
+     * Set a nested value using dot notation
      */
-    public function __set(string $key, mixed $value): void
+    private function setNestedValue(string $key, mixed $value): void
     {
-        $this->set($key, $value);
-    }
+        $keys = explode('.', $key);
+        $target = &$this->config;
 
-    /**
-     * Magic method to check if property exists
-     */
-    public function __isset(string $key): bool
-    {
-        return $this->has($key);
+        foreach ($keys as $k) {
+            if (!isset($target[$k]) || !\is_array($target[$k])) {
+                $target[$k] = [];
+            }
+            $target = &$target[$k];
+        }
+
+        $target = $value;
     }
 
     /**
@@ -230,28 +256,7 @@ class Config
     private function validateTableName(string $table): void
     {
         if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $table)) {
-            throw new \InvalidArgumentException("Invalid table name: $table");
+            throw new InvalidArgumentException("Invalid table name: {$table}");
         }
-    }
-
-    /**
-     * Prevent cloning of the singleton instance
-     */
-    private function __clone() {}
-
-    /**
-     * Prevent serialization of the singleton instance
-     */
-    public function __serialize(): array
-    {
-        throw new \LogicException("Cannot serialize a singleton.");
-    }
-
-    /**
-     * Prevent unserialization of the singleton instance
-     */
-    public function __unserialize(array $data): void
-    {
-        throw new \LogicException("Cannot unserialize a singleton.");
     }
 }

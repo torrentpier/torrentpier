@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -35,8 +36,8 @@ $start = abs(request()->query->getInt('start'));
 $per_page = config()->get('topics_per_page');
 
 if (request()->post->has('topic_id_list')) {
-    $topic_ids = implode(",", array_map('intval', request()->post->get('topic_id_list')));
-    $sql = "DELETE FROM " . BB_TOPICS_WATCH . "  WHERE topic_id IN(" . $topic_ids . ") AND user_id = $user_id";
+    $topic_ids = implode(',', array_map('intval', request()->post->get('topic_id_list')));
+    $sql = 'DELETE FROM ' . BB_TOPICS_WATCH . '  WHERE topic_id IN(' . $topic_ids . ") AND user_id = {$user_id}";
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not delete topic watch information #1');
     }
@@ -44,10 +45,10 @@ if (request()->post->has('topic_id_list')) {
 
 template()->assign_vars([
     'PAGE_TITLE' => __('WATCHED_TOPICS'),
-    'S_FORM_ACTION' => WATCHLIST_URL
+    'S_FORM_ACTION' => WATCHLIST_URL,
 ]);
 
-$sql = "SELECT COUNT(topic_id) as watch_count FROM " . BB_TOPICS_WATCH . " WHERE user_id = $user_id";
+$sql = 'SELECT COUNT(topic_id) as watch_count FROM ' . BB_TOPICS_WATCH . " WHERE user_id = {$user_id}";
 if (!($result = DB()->sql_query($sql))) {
     bb_die('Could not obtain watch topic information #2');
 }
@@ -56,17 +57,17 @@ $watch_count = ($row['watch_count']) ?: 0;
 DB()->sql_freeresult($result);
 
 if ($watch_count > 0) {
-    $sql = "SELECT w.*, t.*, f.*, u.*, u2.username as last_username, u2.user_id as last_user_id,
+    $sql = 'SELECT w.*, t.*, f.*, u.*, u2.username as last_username, u2.user_id as last_user_id,
 		u2.user_level as last_user_level, u2.user_rank as last_user_rank
-	FROM " . BB_TOPICS_WATCH . " w, " . BB_TOPICS . " t, " . BB_USERS . " u, " . BB_FORUMS . " f, " . BB_POSTS . " p, " . BB_USERS . " u2
+	FROM ' . BB_TOPICS_WATCH . ' w, ' . BB_TOPICS . ' t, ' . BB_USERS . ' u, ' . BB_FORUMS . ' f, ' . BB_POSTS . ' p, ' . BB_USERS . " u2
 	WHERE w.topic_id = t.topic_id
 		AND t.forum_id = f.forum_id
 		AND p.post_id = t.topic_last_post_id
 		AND p.poster_id = u2.user_id
 		AND t.topic_poster = u.user_id
-		AND w.user_id = $user_id
+		AND w.user_id = {$user_id}
 	ORDER BY t.topic_last_post_time DESC
-	LIMIT $start, $per_page";
+	LIMIT {$start}, {$per_page}";
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not obtain watch topic information #3');
     }
@@ -99,7 +100,7 @@ if ($watch_count > 0) {
                 'IS_UNREAD' => $is_unread,
                 'POLL' => (bool)$watch[$i]['topic_vote'],
                 'TOPIC_ICON' => get_topic_icon($watch[$i], $is_unread),
-                'PAGINATION' => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination($topicUrl, $watch[$i]['topic_replies'], config()->get('posts_per_page'))
+                'PAGINATION' => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination($topicUrl, $watch[$i]['topic_replies'], config()->get('posts_per_page')),
             ]);
         }
 
@@ -108,7 +109,7 @@ if ($watch_count > 0) {
             'PAGINATION' => generate_pagination(WATCHLIST_URL, $watch_count, $per_page, $start),
             'PAGE_NUMBER' => sprintf(__('PAGE_OF'), (floor($start / $per_page) + 1), ceil($watch_count / $per_page)),
             'U_PER_PAGE' => WATCHLIST_URL,
-            'PER_PAGE' => $per_page
+            'PER_PAGE' => $per_page,
         ]);
     }
     DB()->sql_freeresult($result);

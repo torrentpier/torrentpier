@@ -15,7 +15,7 @@ describe('CacheManager Class', function () {
         mockUtimeFunction();
 
         // Create memory storage for testing
-        $this->storage = new MemoryStorage();
+        $this->storage = new MemoryStorage;
         $this->config = createTestCacheConfig();
         $this->cacheManager = CacheManager::getInstance('test_namespace', $this->storage, $this->config);
     });
@@ -75,7 +75,7 @@ describe('CacheManager Class', function () {
                 ['float_key', 3.14],
                 ['bool_key', true],
                 ['array_key', ['nested' => ['data' => 'value']]],
-                ['object_key', (object) ['property' => 'value']],
+                ['object_key', (object)['property' => 'value']],
             ];
 
             foreach ($testCases as [$key, $value]) {
@@ -151,6 +151,7 @@ describe('CacheManager Class', function () {
 
             $result = $this->cacheManager->load($key, function () use (&$callbackExecuted) {
                 $callbackExecuted = true;
+
                 return 'callback_result';
             });
 
@@ -173,7 +174,7 @@ describe('CacheManager Class', function () {
                 Cache::Tags => ['user', 'data'],
             ];
 
-            expect(fn() => $this->cacheManager->save($key, $value, $dependencies))->not->toThrow(Exception::class);
+            expect(fn () => $this->cacheManager->save($key, $value, $dependencies))->not->toThrow(Exception::class);
             expect($this->cacheManager->get($key))->toBe($value);
         });
 
@@ -197,13 +198,15 @@ describe('CacheManager Class', function () {
                     static $callCount = 0;
                     if ($mode === 'reset') {
                         $callCount = 0;
+
                         return null;
                     }
                     if ($mode === 'count') {
                         return $callCount;
                     }
                     $callCount++;
-                    return "result_$param";
+
+                    return "result_{$param}";
                 }
             }
 
@@ -258,7 +261,7 @@ describe('CacheManager Class', function () {
         });
 
         it('cleans cache by criteria', function () {
-            expect(fn() => $this->cacheManager->clean([Cache::All => true]))->not->toThrow(Exception::class);
+            expect(fn () => $this->cacheManager->clean([Cache::All => true]))->not->toThrow(Exception::class);
 
             // All items should be removed
             expect($this->cacheManager->get('tagged1'))->toBeFalse();
@@ -268,7 +271,7 @@ describe('CacheManager Class', function () {
 
         it('cleans cache by tags if supported', function () {
             // This depends on the storage supporting tags
-            expect(fn() => $this->cacheManager->clean([Cache::Tags => ['tag1']]))->not->toThrow(Exception::class);
+            expect(fn () => $this->cacheManager->clean([Cache::Tags => ['tag1']]))->not->toThrow(Exception::class);
         });
     });
 
@@ -385,7 +388,7 @@ describe('CacheManager Class', function () {
         });
 
         it('throws exception for invalid properties', function () {
-            expect(fn() => $this->cacheManager->__get('invalid_property'))
+            expect(fn () => $this->cacheManager->__get('invalid_property'))
                 ->toThrow(InvalidArgumentException::class);
         });
     });
@@ -396,8 +399,8 @@ describe('CacheManager Class', function () {
             ->expect(function () {
                 return measureExecutionTime(function () {
                     for ($i = 0; $i < 1000; $i++) {
-                        $this->cacheManager->set("perf_key_$i", "value_$i");
-                        $this->cacheManager->get("perf_key_$i");
+                        $this->cacheManager->set("perf_key_{$i}", "value_{$i}");
+                        $this->cacheManager->get("perf_key_{$i}");
                     }
                 });
             })
@@ -408,8 +411,8 @@ describe('CacheManager Class', function () {
 
             for ($i = 0; $i < 10; $i++) {
                 $time = measureExecutionTime(function () use ($i) {
-                    $this->cacheManager->set("consistency_$i", "value_$i");
-                    $this->cacheManager->get("consistency_$i");
+                    $this->cacheManager->set("consistency_{$i}", "value_{$i}");
+                    $this->cacheManager->get("consistency_{$i}");
                 });
                 $times[] = $time;
             }
@@ -423,7 +426,7 @@ describe('CacheManager Class', function () {
         it('handles large datasets efficiently', function () {
             $largeData = array_fill(0, 1000, str_repeat('x', 1000)); // 1MB of data
 
-            expect(fn() => $this->cacheManager->set('large_data', $largeData))->not->toThrow(Exception::class);
+            expect(fn () => $this->cacheManager->set('large_data', $largeData))->not->toThrow(Exception::class);
             expect($this->cacheManager->get('large_data'))->toBe($largeData);
         });
 
@@ -431,14 +434,14 @@ describe('CacheManager Class', function () {
             // Simulate concurrent operations
             $keys = [];
             for ($i = 0; $i < 100; $i++) {
-                $key = "concurrent_$i";
+                $key = "concurrent_{$i}";
                 $keys[] = $key;
-                $this->cacheManager->set($key, "value_$i");
+                $this->cacheManager->set($key, "value_{$i}");
             }
 
             // Verify all operations completed successfully
             foreach ($keys as $i => $key) {
-                expect($this->cacheManager->get($key))->toBe("value_$i");
+                expect($this->cacheManager->get($key))->toBe("value_{$i}");
             }
         });
     });

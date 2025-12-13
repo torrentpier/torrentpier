@@ -16,21 +16,6 @@ namespace TorrentPier\Torrent;
 trait HelperTrait
 {
     /**
-     * Registration mode getter/setter (replaces global $reg_mode)
-     *
-     * @param string|null $mode Set mode ('request', 'newtopic', etc.) or null to just get
-     * @return string|null Current mode
-     */
-    protected static function regMode(?string $mode = null): ?string
-    {
-        static $value = null;
-        if ($mode !== null) {
-            $value = $mode;
-        }
-        return $value;
-    }
-
-    /**
      * Return message getter/setter (replaces global $return_message)
      *
      * @param string|null $message Set message or null to just get
@@ -42,6 +27,7 @@ trait HelperTrait
         if ($message !== null) {
             $value = $message;
         }
+
         return $value;
     }
 
@@ -69,6 +55,22 @@ trait HelperTrait
     }
 
     /**
+     * Registration mode getter/setter (replaces global $reg_mode)
+     *
+     * @param string|null $mode Set mode ('request', 'newtopic', etc.) or null to just get
+     * @return string|null Current mode
+     */
+    protected static function regMode(?string $mode = null): ?string
+    {
+        static $value = null;
+        if ($mode !== null) {
+            $value = $mode;
+        }
+
+        return $value;
+    }
+
+    /**
      * Check that the user has access to torrent operations.
      *
      * @param int $forumId Forum ID
@@ -85,7 +87,7 @@ trait HelperTrait
         if ($posterId != userdata('user_id') && !$is_auth['auth_mod']) {
             bb_die(__('NOT_MODERATOR'));
         } elseif (!$is_auth['auth_view'] || !$is_auth['auth_attachments']) {
-            bb_die(sprintf(__('SORRY_AUTH_READ'), $is_auth['auth_read_type']));
+            bb_die(\sprintf(__('SORRY_AUTH_READ'), $is_auth['auth_read_type']));
         }
     }
 

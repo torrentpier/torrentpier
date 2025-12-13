@@ -32,14 +32,22 @@ class TracyBarManager
 
     private function __construct() {}
 
+    private function __clone() {}
+
+    public function __wakeup(): void
+    {
+        throw new LogicException('Cannot unserialize a singleton.');
+    }
+
     /**
      * Get a singleton instance
      */
     public static function getInstance(): self
     {
         if (self::$instance === null) {
-            self::$instance = new self();
+            self::$instance = new self;
         }
+
         return self::$instance;
     }
 
@@ -56,8 +64,8 @@ class TracyBarManager
         }
 
         // Store current error handlers (set by Whoops)
-        $errorHandler = set_error_handler(fn() => false);
-        $exceptionHandler = set_exception_handler(fn() => null);
+        $errorHandler = set_error_handler(fn () => false);
+        $exceptionHandler = set_exception_handler(fn () => null);
         restore_error_handler();
         restore_exception_handler();
 
@@ -91,40 +99,11 @@ class TracyBarManager
     public function isEnabled(): bool
     {
         // Only enable for debug users in web context, excluding admin left pane
-        return defined('DBG_USER')
+        return \defined('DBG_USER')
             && DBG_USER
             && php_sapi_name() !== 'cli'
             && request()->query->get('pane') !== 'left'
             && config()->get('debug.enable');
-    }
-
-    /**
-     * Register all custom TorrentPier panels
-     */
-    private function registerPanels(): void
-    {
-        $bar = Debugger::getBar();
-        $panelConfig = config()->get('debug.panels', []);
-
-        // Performance panel - always first (shows timing)
-        if ($panelConfig['performance'] ?? true) {
-            $bar->addPanel(new Panels\PerformancePanel(), 'tp-performance');
-        }
-
-        // Database panel - SQL queries
-        if ($panelConfig['database'] ?? true) {
-            $bar->addPanel(new Panels\DatabasePanel(), 'tp-database');
-        }
-
-        // Cache panel - Cache/Datastore operations
-        if ($panelConfig['cache'] ?? true) {
-            $bar->addPanel(new Panels\CachePanel(), 'tp-cache');
-        }
-
-        // Template panel - Twig debugging
-        if ($panelConfig['template'] ?? true) {
-            $bar->addPanel(new Panels\TemplatePanel(), 'tp-template');
-        }
     }
 
     /**
@@ -143,7 +122,7 @@ class TracyBarManager
      */
     public function isDebugAllowed(): bool
     {
-        return defined('SQL_DEBUG') && SQL_DEBUG && defined('DBG_USER') && DBG_USER;
+        return \defined('SQL_DEBUG') && SQL_DEBUG && \defined('DBG_USER') && DBG_USER;
     }
 
     /**
@@ -152,13 +131,36 @@ class TracyBarManager
     public function formatQuery(string $sql, bool $escapeHtml = false): string
     {
         $sql = str_compact($sql);
+
         return $escapeHtml ? htmlCHR($sql, true) : $sql;
     }
 
-    private function __clone() {}
-
-    public function __wakeup(): void
+    /**
+     * Register all custom TorrentPier panels
+     */
+    private function registerPanels(): void
     {
-        throw new LogicException('Cannot unserialize a singleton.');
+        $bar = Debugger::getBar();
+        $panelConfig = config()->get('debug.panels', []);
+
+        // Performance panel - always first (shows timing)
+        if ($panelConfig['performance'] ?? true) {
+            $bar->addPanel(new Panels\PerformancePanel, 'tp-performance');
+        }
+
+        // Database panel - SQL queries
+        if ($panelConfig['database'] ?? true) {
+            $bar->addPanel(new Panels\DatabasePanel, 'tp-database');
+        }
+
+        // Cache panel - Cache/Datastore operations
+        if ($panelConfig['cache'] ?? true) {
+            $bar->addPanel(new Panels\CachePanel, 'tp-cache');
+        }
+
+        // Template panel - Twig debugging
+        if ($panelConfig['template'] ?? true) {
+            $bar->addPanel(new Panels\TemplatePanel, 'tp-template');
+        }
     }
 }

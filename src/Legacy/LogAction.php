@@ -59,15 +59,11 @@ class LogAction
 
     /**
      * Flag to disable logging.
-     *
-     * @var bool
      */
     public bool $log_disabled = false;
 
     /**
      * Initializes the log type select array using language definitions.
-     *
-     * @return void
      */
     public function init(): void
     {
@@ -79,17 +75,15 @@ class LogAction
     /**
      * Logs moderator actions.
      *
-     * @param string $type_name Action type key (from $log_type).
+     * @param string $type_name action type key (from $log_type)
      * @param array $args Action parameters:
-     *                          - forum_id
-     *                          - forum_id_new
-     *                          - topic_id
-     *                          - topic_id_new
-     *                          - topic_title
-     *                          - topic_title_new
-     *                          - log_msg
-     *
-     * @return void
+     *                    - forum_id
+     *                    - forum_id_new
+     *                    - topic_id
+     *                    - topic_id_new
+     *                    - topic_title
+     *                    - topic_title_new
+     *                    - log_msg
      */
     public function mod(string $type_name, array $args = []): void
     {
@@ -100,42 +94,40 @@ class LogAction
             return;
         }
 
-        $forum_id = & $args['forum_id'];
-        $forum_id_new = & $args['forum_id_new'];
-        $topic_id = & $args['topic_id'];
-        $topic_id_new = & $args['topic_id_new'];
-        $topic_title = & $args['topic_title'];
-        $topic_title_new = & $args['topic_title_new'];
-        $log_msg = & $args['log_msg'];
+        $forum_id = &$args['forum_id'];
+        $forum_id_new = &$args['forum_id_new'];
+        $topic_id = &$args['topic_id'];
+        $topic_id_new = &$args['topic_id_new'];
+        $topic_title = &$args['topic_title'];
+        $topic_title_new = &$args['topic_title_new'];
+        $log_msg = &$args['log_msg'];
 
         $user_id = userdata('user_id') ?: '';
         $session_ip = userdata('session_ip') ?: '';
 
         $sql_ary = [
-            'log_type_id' => (int) $this->log_type[(string) $type_name],
-            'log_user_id' => (int) $user_id,
-            'log_user_ip' => (string) $session_ip,
-            'log_forum_id' => (int) $forum_id,
-            'log_forum_id_new' => (int) $forum_id_new,
-            'log_topic_id' => (int) $topic_id,
-            'log_topic_id_new' => (int) $topic_id_new,
-            'log_topic_title' => (string) $topic_title,
-            'log_topic_title_new' => (string) $topic_title_new,
-            'log_time' => (int) TIMENOW,
-            'log_msg' => (string) $log_msg,
+            'log_type_id' => (int)$this->log_type[(string)$type_name],
+            'log_user_id' => (int)$user_id,
+            'log_user_ip' => (string)$session_ip,
+            'log_forum_id' => (int)$forum_id,
+            'log_forum_id_new' => (int)$forum_id_new,
+            'log_topic_id' => (int)$topic_id,
+            'log_topic_id_new' => (int)$topic_id_new,
+            'log_topic_title' => (string)$topic_title,
+            'log_topic_title_new' => (string)$topic_title_new,
+            'log_time' => (int)TIMENOW,
+            'log_msg' => (string)$log_msg,
         ];
         $sql_args = DB()->build_array('INSERT', $sql_ary);
 
-        DB()->query("INSERT INTO " . BB_LOG . " $sql_args");
+        DB()->query('INSERT INTO ' . BB_LOG . " {$sql_args}");
     }
 
     /**
      * Logs administrator actions (wrapper for mod()).
      *
-     * @param string $type_name Action type key (from $log_type).
-     * @param array $args Action parameters (same as mod()).
-     *
-     * @return void
+     * @param string $type_name action type key (from $log_type)
+     * @param array $args action parameters (same as mod())
      */
     public function admin(string $type_name, array $args = []): void
     {

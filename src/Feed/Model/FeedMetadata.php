@@ -27,6 +27,6 @@ readonly class FeedMetadata
     public function __construct(
         public string $title,
         public string $link,
-        public DateTimeImmutable $lastModified
+        public DateTimeImmutable $lastModified,
     ) {}
 }

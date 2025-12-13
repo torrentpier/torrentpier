@@ -25,7 +25,7 @@ use TorrentPier\Sitemap;
  */
 #[AsCommand(
     name: 'rebuild:sitemap',
-    description: 'Regenerate XML sitemap files'
+    description: 'Regenerate XML sitemap files',
 )]
 class SitemapCommand extends Command
 {
@@ -37,12 +37,14 @@ class SitemapCommand extends Command
         if (!is_dir(SITEMAP_DIR)) {
             $this->error('Sitemap directory does not exist: ' . SITEMAP_DIR);
             $this->comment('Create the directory first or run: php bull storage:link');
+
             return self::FAILURE;
         }
 
         // Check if writable
         if (!is_writable(SITEMAP_DIR)) {
             $this->error('Sitemap directory is not writable: ' . SITEMAP_DIR);
+
             return self::FAILURE;
         }
 
@@ -64,7 +66,7 @@ class SitemapCommand extends Command
         $startTime = microtime(true);
 
         try {
-            $sitemap = new Sitemap();
+            $sitemap = new Sitemap;
             $sitemap->createSitemap();
         } catch (Throwable $e) {
             $this->error('Failed to generate sitemap: ' . $e->getMessage());
@@ -72,6 +74,7 @@ class SitemapCommand extends Command
                 $this->line();
                 $this->line("<error>{$e->getTraceAsString()}</error>");
             }
+
             return self::FAILURE;
         }
 
@@ -112,6 +115,7 @@ class SitemapCommand extends Command
         );
 
         $this->success('Sitemap generated successfully!');
+
         return self::SUCCESS;
     }
 

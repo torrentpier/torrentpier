@@ -57,27 +57,27 @@ class UrlBuilder
     private static ?self $instance = null;
 
     /**
-     * Get a singleton instance for use in templates
-     */
-    public static function instance(): self
-    {
-        return self::$instance ??= new self();
-    }
-
-    /**
      * Magic method to proxy instance calls to static methods
      *
      * @param string $name Method name
      * @param array $args Method arguments
-     * @return mixed
      * @throws BadMethodCallException If the method doesn't exist
      */
     public function __call(string $name, array $args): mixed
     {
         if (!method_exists(self::class, $name)) {
-            throw new BadMethodCallException("Method UrlBuilder::$name() does not exist");
+            throw new BadMethodCallException("Method UrlBuilder::{$name}() does not exist");
         }
+
         return self::$name(...$args);
+    }
+
+    /**
+     * Get a singleton instance for use in templates
+     */
+    public static function instance(): self
+    {
+        return self::$instance ??= new self;
     }
 
     /**

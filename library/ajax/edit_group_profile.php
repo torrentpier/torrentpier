@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,7 +12,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-if (!$group_id = (int)$this->request['group_id'] or !$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
+if (!$group_id = (int)$this->request['group_id'] || !$group_info = TorrentPier\Legacy\Group::get_group_data($group_id)) {
     $this->ajax_die(__('NO_GROUP_ID_SPECIFIED'));
 }
 if (!$mode = (string)$this->request['mode']) {
@@ -49,4 +50,4 @@ switch ($mode) {
 }
 
 $value_sql = DB()->escape($value, true);
-DB()->query("UPDATE " . BB_GROUPS . " SET $mode = $value_sql WHERE group_id = $group_id LIMIT 1");
+DB()->query('UPDATE ' . BB_GROUPS . " SET {$mode} = {$value_sql} WHERE group_id = {$group_id} LIMIT 1");

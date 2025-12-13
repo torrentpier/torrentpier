@@ -25,7 +25,7 @@ use TorrentPier\Console\Helpers\FileSystemHelper;
  */
 #[AsCommand(
     name: 'log:clear',
-    description: 'Clear application log files'
+    description: 'Clear application log files',
 )]
 class ClearCommand extends Command
 {
@@ -46,6 +46,7 @@ class ClearCommand extends Command
 
         if (!is_dir($logDir)) {
             $this->warning('Log directory does not exist: ' . $logDir);
+
             return self::SUCCESS;
         }
 
@@ -54,6 +55,7 @@ class ClearCommand extends Command
 
         if (empty($files)) {
             $this->success('No log files to clear.');
+
             return self::SUCCESS;
         }
 
@@ -74,12 +76,13 @@ class ClearCommand extends Command
 
         $this->table(['File', 'Size', 'Modified'], $rows);
         $this->line();
-        $this->line(sprintf('  <comment>Total: %d file(s), %s</comment>', count($files), FileSystemHelper::formatBytes($totalSize)));
+        $this->line(\sprintf('  <comment>Total: %d file(s), %s</comment>', \count($files), FileSystemHelper::formatBytes($totalSize)));
         $this->line();
 
         // Confirm
         if (!$force && !$this->confirm('Delete these log files?')) {
             $this->comment('Operation cancelled.');
+
             return self::SUCCESS;
         }
 
@@ -97,9 +100,9 @@ class ClearCommand extends Command
 
         $this->line();
         if ($failed === 0) {
-            $this->success("Cleared $deleted log file(s)!");
+            $this->success("Cleared {$deleted} log file(s)!");
         } else {
-            $this->warning("Cleared $deleted file(s), failed to delete $failed file(s).");
+            $this->warning("Cleared {$deleted} file(s), failed to delete {$failed} file(s).");
         }
 
         return $failed === 0 ? self::SUCCESS : self::FAILURE;
@@ -114,12 +117,12 @@ class ClearCommand extends Command
         $cutoffTime = null;
 
         if ($olderThan !== null) {
-            $days = (int) $olderThan;
-            $cutoffTime = strtotime("-$days days");
+            $days = (int)$olderThan;
+            $cutoffTime = strtotime("-{$days} days");
         }
 
         $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS)
+            new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS),
         );
 
         foreach ($iterator as $file) {
@@ -129,7 +132,7 @@ class ClearCommand extends Command
 
             // Only log files
             $ext = strtolower($file->getExtension());
-            if (!in_array($ext, ['log', 'txt'])) {
+            if (!\in_array($ext, ['log', 'txt'])) {
                 continue;
             }
 

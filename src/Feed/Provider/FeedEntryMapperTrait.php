@@ -24,9 +24,8 @@ trait FeedEntryMapperTrait
     /**
      * Map database topics to feed entries
      *
-     * @param array $topics
-     * @return FeedEntry[]
      * @throws Exception
+     * @return FeedEntry[]
      */
     private function mapTopicsToEntries(array $topics): array
     {
@@ -51,7 +50,7 @@ trait FeedEntryMapperTrait
                 link: $this->buildEntryLink($topic),
                 lastModified: new DateTimeImmutable('@' . $lastTime),
                 author: $topic['first_username'] ?: __('GUEST'),
-                description: $this->buildEntryDescription($topic)
+                description: $this->buildEntryDescription($topic),
             );
         }
 
@@ -60,9 +59,6 @@ trait FeedEntryMapperTrait
 
     /**
      * Check if the torrent is frozen and should be excluded
-     *
-     * @param array $topic
-     * @return bool
      */
     private function isFrozenTorrent(array $topic): bool
     {
@@ -71,14 +67,12 @@ trait FeedEntryMapperTrait
         }
 
         $torFrozen = config()->get('tor_frozen');
-        return is_array($torFrozen) && isset($torFrozen[$topic['tor_status']]);
+
+        return \is_array($torFrozen) && isset($torFrozen[$topic['tor_status']]);
     }
 
     /**
      * Build torrent title with status and size info
-     *
-     * @param array $topic
-     * @return string
      */
     private function buildTorrentTitle(array $topic): string
     {
@@ -103,9 +97,6 @@ trait FeedEntryMapperTrait
 
     /**
      * Build entry link (direct download or topic view)
-     *
-     * @param array $topic
-     * @return string
      */
     private function buildEntryLink(array $topic): string
     {
@@ -115,14 +106,11 @@ trait FeedEntryMapperTrait
         }
 
         // Default to topic view with semantic URL
-        return make_url(url()->topic((int) $topic['topic_id'], $topic['topic_title']));
+        return make_url(url()->topic((int)$topic['topic_id'], $topic['topic_title']));
     }
 
     /**
      * Build entry description if enabled
-     *
-     * @param array $topic
-     * @return string|null
      */
     private function buildEntryDescription(array $topic): ?string
     {
@@ -130,15 +118,13 @@ trait FeedEntryMapperTrait
             return null;
         }
 
-        $topicUrl = make_url(url()->topic((int) $topic['topic_id'], $topic['topic_title']));
+        $topicUrl = make_url(url()->topic((int)$topic['topic_id'], $topic['topic_title']));
+
         return $topic['post_html'] . "\n\nTopic: " . $topicUrl;
     }
 
     /**
      * Get [UPDATED] prefix for recently edited topics
-     *
-     * @param array $topic
-     * @return string
      */
     private function getUpdatedPrefix(array $topic): string
     {
@@ -146,7 +132,7 @@ trait FeedEntryMapperTrait
             return '';
         }
 
-        $window = (int) (config()->get('atom.updated_window') ?? 604800); // default: 1 week
+        $window = (int)(config()->get('atom.updated_window') ?? 604800); // default: 1 week
 
         if ($topic['topic_first_post_edit_time'] > TIMENOW - $window) {
             return '[' . __('ATOM_UPDATED') . '] ';

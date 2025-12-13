@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,6 +10,7 @@
 
 if (!empty($setmodules)) {
     $module['MODS']['ROBOTS_TXT_EDITOR_TITLE'] = basename(__FILE__);
+
     return;
 }
 

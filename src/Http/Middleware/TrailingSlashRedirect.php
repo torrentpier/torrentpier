@@ -37,7 +37,8 @@ class TrailingSlashRedirect
         $newUrl = $newPath . ($query ? '?' . $query : '');
 
         // 301 Permanent Redirect
-        $response = new Response();
+        $response = new Response;
+
         return $response
             ->withStatus(301)
             ->withHeader('Location', make_url($newUrl));

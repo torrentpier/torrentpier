@@ -22,7 +22,7 @@ use TorrentPier\Console\Helpers\OutputHelper;
  */
 #[AsCommand(
     name: 'cron:unlock',
-    description: 'Remove the cron lock file to allow cron jobs to run'
+    description: 'Remove the cron lock file to allow cron jobs to run',
 )]
 class CronUnlockCommand extends Command
 {
@@ -32,7 +32,7 @@ class CronUnlockCommand extends Command
             'force',
             'f',
             InputOption::VALUE_NONE,
-            'Force unlock without confirmation'
+            'Force unlock without confirmation',
         );
     }
 
@@ -42,6 +42,7 @@ class CronUnlockCommand extends Command
 
         if (!is_file(CRON_RUNNING)) {
             $this->info('Cron is not locked.');
+
             return self::SUCCESS;
         }
 
@@ -58,15 +59,18 @@ class CronUnlockCommand extends Command
 
         if (!$input->getOption('force') && !$this->confirm('Remove the lock file?')) {
             $this->comment('Operation cancelled.');
+
             return self::SUCCESS;
         }
 
         if (!unlink(CRON_RUNNING)) {
             $this->error('Failed to remove lock file. Check permissions.');
+
             return self::FAILURE;
         }
 
         $this->success('Cron lock removed successfully.');
+
         return self::SUCCESS;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,7 +12,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
+if (!$user_id = (int)$this->request['user_id'] || !$profiledata = get_userdata($user_id)) {
     $this->ajax_die(__('NO_USER_ID_SPECIFIED'));
 }
 
@@ -30,7 +31,7 @@ $value = $this->request['value'] = (string)(isset($this->request['value'])) ? $t
 switch ($field) {
     case 'username':
         $value = clean_username($value);
-        if ($err = \TorrentPier\Validate::username($value)) {
+        if ($err = TorrentPier\Validate::username($value)) {
             $this->ajax_die($err);
         }
 
@@ -42,7 +43,7 @@ switch ($field) {
 
     case 'user_email':
         $value = htmlCHR($value);
-        if ($err = \TorrentPier\Validate::email($value)) {
+        if ($err = TorrentPier\Validate::email($value)) {
             $this->ajax_die($err);
         }
         $this->response['new_value'] = $this->request['value'];
@@ -86,7 +87,7 @@ switch ($field) {
         break;
 
     case 'user_twitter':
-        if ($value && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $value)) {
+        if ($value && !preg_match('#^[a-zA-Z0-9_]{1,15}$#', $value)) {
             $this->ajax_die(__('TWITTER_ERROR'));
         }
         $this->response['new_value'] = $this->request['value'];
@@ -136,12 +137,12 @@ switch ($field) {
         break;
 
     default:
-        $this->ajax_die("invalid profile field: $field");
+        $this->ajax_die("invalid profile field: {$field}");
 }
 
 $value_sql = DB()->escape($value, true);
-DB()->query("UPDATE $table SET $field = $value_sql WHERE user_id = $user_id LIMIT 1");
+DB()->query("UPDATE {$table} SET {$field} = {$value_sql} WHERE user_id = {$user_id} LIMIT 1");
 
-\TorrentPier\Sessions::cache_rm_user_sessions($user_id);
+TorrentPier\Sessions::cache_rm_user_sessions($user_id);
 
 $this->response['edit_id'] = $this->request['edit_id'];

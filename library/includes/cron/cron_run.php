@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -14,7 +15,7 @@ if (!defined('BB_ROOT')) {
 define('IN_CRON', true);
 
 // Set SESSION vars (optimized for InnoDB)
-DB()->query("
+DB()->query('
 	SET SESSION
 	  bulk_insert_buffer_size =  8*1024*1024
 	, join_buffer_size        =  4*1024*1024
@@ -23,10 +24,10 @@ DB()->query("
 	, sort_buffer_size        =  4*1024*1024
 	, tmp_table_size          = 80*1024*1024
 	, group_concat_max_len    =  1*1024*1024
-");
+');
 
 // Restore vars at shutdown
-DB()->add_shutdown_query("
+DB()->add_shutdown_query('
 	SET SESSION
 	  bulk_insert_buffer_size = DEFAULT
 	, join_buffer_size        = DEFAULT
@@ -35,7 +36,7 @@ DB()->add_shutdown_query("
 	, sort_buffer_size        = DEFAULT
 	, tmp_table_size          = DEFAULT
 	, group_concat_max_len    = DEFAULT
-");
+');
 
 // $cron_jobs obtained in cron_check.php
 foreach ($cron_jobs as $job) {
@@ -64,7 +65,7 @@ foreach ($cron_jobs as $job) {
 
         set_time_limit(600);
         $job_start_time = microtime(true);
-        require($job_script);
+        require $job_script;
         $job_execution_time = microtime(true) - $job_start_time;
 
         if ($job['log_sql_queries']) {
@@ -90,11 +91,11 @@ foreach ($cron_jobs as $job) {
             }
         }
 
-        DB()->query("
-			UPDATE " . BB_CRON . " SET
+        DB()->query('
+			UPDATE ' . BB_CRON . ' SET
 				last_run = NOW(),
 				run_counter = run_counter + 1,
-				execution_time = " . (float)$job_execution_time . ",
+				execution_time = ' . (float)$job_execution_time . ",
 				next_run =
 			CASE
 				WHEN schedule = 'hourly' THEN
@@ -121,7 +122,7 @@ foreach ($cron_jobs as $job) {
             return;
         }
     } else {
-        $cron_err_msg = "Can not run \"{$job['cron_title']}\" : file \"$job_script\" not found" . LOG_LF;
+        $cron_err_msg = "Can not run \"{$job['cron_title']}\" : file \"{$job_script}\" not found" . LOG_LF;
         bb_log($cron_err_msg, 'cron_error');
     }
 }

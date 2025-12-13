@@ -27,6 +27,15 @@ use Twig\TwigFunction;
 class TwigEnvironmentFactory
 {
     /**
+     * Normalize path separators for cross-platform compatibility
+     * PHP handles forward slashes on all platforms including Windows
+     */
+    public static function normalizePath(string $path): string
+    {
+        return str_replace('\\', '/', $path);
+    }
+
+    /**
      * Create a Twig environment with TorrentPier configuration
      * @throws LoaderError
      */
@@ -39,13 +48,13 @@ class TwigEnvironmentFactory
         $loader = new FilesystemLoader($templateDir);
 
         // Add an admin template directory with @admin namespace
-        $adminTemplateDir = self::normalizePath(dirname($templateDir) . '/admin');
+        $adminTemplateDir = self::normalizePath(\dirname($templateDir) . '/admin');
         if (is_dir($adminTemplateDir) && $adminTemplateDir !== $templateDir) {
             $loader->addPath($adminTemplateDir, 'admin');
         }
 
         // Add the default template directory as fallback if the current dir is not default
-        $defaultTemplateDir = self::normalizePath(dirname($templateDir) . '/default');
+        $defaultTemplateDir = self::normalizePath(\dirname($templateDir) . '/default');
         if (is_dir($defaultTemplateDir) && $defaultTemplateDir !== $templateDir) {
             $loader->addPath($defaultTemplateDir);
         }
@@ -84,13 +93,13 @@ class TwigEnvironmentFactory
     private function addExtensions(Environment $twig, string $templateDir): void
     {
         // Legacy syntax conversion extension
-        $twig->addExtension(new LegacySyntaxExtension());
+        $twig->addExtension(new LegacySyntaxExtension);
 
         // Language extension
-        $twig->addExtension(new LanguageExtension());
+        $twig->addExtension(new LanguageExtension);
 
         // Theme extension (images, icons, etc.)
-        $themeExtension = new ThemeExtension();
+        $themeExtension = new ThemeExtension;
         $themeExtension->setTemplatePath($templateDir);
         $twig->addExtension($themeExtension);
     }
@@ -101,8 +110,8 @@ class TwigEnvironmentFactory
     private function addGlobalFunctions(Environment $twig): void
     {
         // Add TorrentPier configuration functions
-        $twig->addFunction(new TwigFunction('config', fn($key = null) => $key ? config()->get($key) : config()));
-        $twig->addFunction(new TwigFunction('lang', fn($key = null, $default = '') => $key ? lang()->get($key, $default) : lang()));
+        $twig->addFunction(new TwigFunction('config', fn ($key = null) => $key ? config()->get($key) : config()));
+        $twig->addFunction(new TwigFunction('lang', fn ($key = null, $default = '') => $key ? lang()->get($key, $default) : lang()));
 
         // Add utility functions
         $twig->addFunction(new TwigFunction('make_url', 'make_url'));
@@ -119,14 +128,5 @@ class TwigEnvironmentFactory
         $twig->addFilter(new TwigFilter('clean_filename', 'clean_filename'));
         $twig->addFilter(new TwigFilter('hide_bb_path', 'hide_bb_path'));
         $twig->addFilter(new TwigFilter('str_short', 'str_short'));
-    }
-
-    /**
-     * Normalize path separators for cross-platform compatibility
-     * PHP handles forward slashes on all platforms including Windows
-     */
-    public static function normalizePath(string $path): string
-    {
-        return str_replace('\\', '/', $path);
     }
 }

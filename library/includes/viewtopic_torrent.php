@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -31,7 +32,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
     $max_peers_before_overflow = 20;
     $peers_overflow_div_height = '400px';
     $peers_div_style_normal = 'padding: 3px;';
-    $peers_div_style_overflow = "padding: 6px; height: $peers_overflow_div_height; overflow: auto; border: 1px inset;";
+    $peers_div_style_overflow = "padding: 6px; height: {$peers_overflow_div_height}; overflow: auto; border: 1px inset;";
     $s_last_seed_date_format = 'Y-m-d';
     $upload_image = '<img src="' . theme_images('icon_dn') . '" alt="' . __('DL_TORRENT') . '" border="0" />';
 
@@ -44,10 +45,10 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
         'LEECH_COUNT' => false,
         'TOR_SPEED_UP' => false,
         'TOR_SPEED_DOWN' => false,
-        'SHOW_RATIO_WARN' => false
+        'SHOW_RATIO_WARN' => false,
     ]);
 
-// Define show peers mode (count only || user names with complete % || full details)
+    // Define show peers mode (count only || user names with complete % || full details)
     $cfg_sp_mode = config()->get('bt_show_peers_mode');
     $get_sp_mode = request()->query->get('spmode', '');
 
@@ -71,11 +72,11 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
     $topic_id = $t_data['topic_id'];
     $bt_user_id = userdata('user_id');
 
-// Download count: historical (aggregated) + today's live count
+    // Download count: historical (aggregated) + today's live count
     $live_dl_count = DB()->table(BB_TORRENT_DL)->where('topic_id', $topic_id)->count('*');
     $download_count = declension((int)($t_data['download_count'] ?? 0) + $live_dl_count, 'times');
 
-    $tor_file_size = humn_size($t_data['attach_filesize'] ?: \TorrentPier\Attachment::getSize($topic_id));
+    $tor_file_size = humn_size($t_data['attach_filesize'] ?: TorrentPier\Attachment::getSize($topic_id));
     $tor_file_time = bb_date($t_data['topic_time']);
     $tor_reged = (bool)$t_data['tracker_status'];
     $show_peers = (bool)config()->get('bt_show_peers');
@@ -97,7 +98,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
         $tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
     }
 
-    $display_name = \TorrentPier\Attachment::getDownloadFilename($bt_topic_id, $t_data['topic_title']);
+    $display_name = TorrentPier\Attachment::getDownloadFilename($bt_topic_id, $t_data['topic_title']);
 
     if (!$tor_reged) {
         template()->assign_block_vars('unregistered_torrent', [
@@ -112,10 +113,10 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
             'POSTED_TIME' => $tor_file_time,
         ]);
     } else {
-        $sql = "SELECT bt.*, u.user_id, u.username, u.user_rank
-		FROM " . BB_BT_TORRENTS . " bt
-		LEFT JOIN " . BB_USERS . " u ON(bt.checked_user_id = u.user_id)
-		WHERE bt.topic_id = $topic_id";
+        $sql = 'SELECT bt.*, u.user_id, u.username, u.user_rank
+		FROM ' . BB_BT_TORRENTS . ' bt
+		LEFT JOIN ' . BB_USERS . " u ON(bt.checked_user_id = u.user_id)
+		WHERE bt.topic_id = {$topic_id}";
 
         if (!$result = DB()->sql_query($sql)) {
             bb_die('Could not obtain torrent information');
@@ -125,7 +126,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
     }
 
     if ($tor_reged && !$tor_info) {
-        DB()->query("UPDATE " . BB_TOPICS . " SET tracker_status = 0 WHERE topic_id = $topic_id LIMIT 1");
+        DB()->query('UPDATE ' . BB_TOPICS . " SET tracker_status = 0 WHERE topic_id = {$topic_id} LIMIT 1");
         bb_die('Torrent status fixed');
     }
 
@@ -146,7 +147,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
         $tor_type = $tor_info['tor_type'];
 
         // Magnet link
-        $user_passkey = \TorrentPier\Torrent\Passkey::get($bt_user_id);
+        $user_passkey = TorrentPier\Torrent\Passkey::get($bt_user_id);
         $tor_magnet = create_magnet($tor_info['info_hash'], $tor_info['info_hash_v2'], $user_passkey, html_ent_decode($t_data['topic_title']), $tor_size);
 
         // ratio limits
@@ -156,16 +157,16 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
         $user_ratio = 0;
 
         if (($min_ratio_dl || $min_ratio_warn) && ($bt_user_id != $poster_id && $bt_user_id != GUEST_UID)) {
-            $sql = "SELECT u.*, dl.user_status
-			FROM " . BB_BT_USERS . " u
-			LEFT JOIN " . BB_BT_DLSTATUS . " dl ON dl.user_id = $bt_user_id AND dl.topic_id = $bt_topic_id
-			WHERE u.user_id = $bt_user_id
+            $sql = 'SELECT u.*, dl.user_status
+			FROM ' . BB_BT_USERS . ' u
+			LEFT JOIN ' . BB_BT_DLSTATUS . " dl ON dl.user_id = {$bt_user_id} AND dl.topic_id = {$bt_topic_id}
+			WHERE u.user_id = {$bt_user_id}
 			LIMIT 1";
         } else {
-            $sql = "SELECT user_status
-			FROM " . BB_BT_DLSTATUS . "
-			WHERE user_id = $bt_user_id
-				AND topic_id = $bt_topic_id
+            $sql = 'SELECT user_status
+			FROM ' . BB_BT_DLSTATUS . "
+			WHERE user_id = {$bt_user_id}
+				AND topic_id = {$bt_topic_id}
 			LIMIT 1";
         }
 
@@ -189,7 +190,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
             template()->assign_block_vars('torrent', []);
             template()->assign_vars([
                 'TOR_BLOCKED' => true,
-                'TOR_BLOCKED_MSG' => sprintf(__('BT_LOW_RATIO_FOR_DL'), round($user_ratio, 2), "search?dlu=$bt_user_id&amp;dlc=1"),
+                'TOR_BLOCKED_MSG' => sprintf(__('BT_LOW_RATIO_FOR_DL'), round($user_ratio, 2), "search?dlu={$bt_user_id}&amp;dlc=1"),
             ]);
         } else {
             template()->assign_block_vars('torrent', [
@@ -199,12 +200,12 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                 'TOR_TYPE' => is_gold($tor_type),
 
                 // torrent status mod
-                'TOR_FROZEN' => !IS_AM ? (isset(config()->get('tor_frozen')[$tor_info['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$tor_info['tor_status']]) && \TorrentPier\Topic\Guard::isAuthor($tor_info['poster_id']))) ? true : '' : '',
+                'TOR_FROZEN' => !IS_AM ? (isset(config()->get('tor_frozen')[$tor_info['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$tor_info['tor_status']]) && TorrentPier\Topic\Guard::isAuthor($tor_info['poster_id']))) ? true : '' : '',
                 'TOR_STATUS_TEXT' => __('TOR_STATUS_NAME')[$tor_info['tor_status']],
                 'TOR_STATUS_ICON' => config()->get('tor_icons')[$tor_info['tor_status']],
                 'TOR_STATUS_BY' => ($tor_info['checked_user_id'] && ($is_auth['auth_mod'] || $tor_status_by_for_all)) ? ('<span title="' . bb_date($tor_info['checked_time']) . '"> &middot; ' . profile_url($tor_info) . ' &middot; <i>' . humanTime($tor_info['checked_time']) . __('TOR_BACK') . '</i></span>') : '',
                 'TOR_STATUS_SELECT' => build_select('sel_status', array_flip(__('TOR_STATUS_NAME')), TOR_APPROVED),
-                'TOR_STATUS_REPLY' => config()->get('tor_comment') && !IS_GUEST && in_array($tor_info['tor_status'], config()->get('tor_reply')) && \TorrentPier\Topic\Guard::isAuthor($tor_info['poster_id']) && $t_data['topic_status'] != TOPIC_LOCKED,
+                'TOR_STATUS_REPLY' => config()->get('tor_comment') && !IS_GUEST && in_array($tor_info['tor_status'], config()->get('tor_reply')) && TorrentPier\Topic\Guard::isAuthor($tor_info['poster_id']) && $t_data['topic_status'] != TOPIC_LOCKED,
                 //end torrent status mod
 
                 'S_UPLOAD_IMAGE' => $upload_image,
@@ -224,7 +225,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
             ]);
 
             // TorrServer integration
-            if (config()->get('torr_server.enabled') && (!IS_GUEST || !config()->get('torr_server.disable_for_guest')) && \TorrentPier\Attachment::m3uExists($topic_id)) {
+            if (config()->get('torr_server.enabled') && (!IS_GUEST || !config()->get('torr_server.disable_for_guest')) && TorrentPier\Attachment::m3uExists($topic_id)) {
                 template()->assign_block_vars('torrent.tor_server', [
                     'TORR_SERVER_M3U_LINK' => PLAYBACK_M3U_URL . $bt_topic_id . '/',
                     'TORR_SERVER_M3U_ICON' => theme_images('icon_tor_m3u_icon'),
@@ -280,27 +281,27 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
             }
             // SQL for each mode
             if ($s_mode == 'count') {
-                $sql = "SELECT seeders, leechers, speed_up, speed_down
-				FROM " . BB_BT_TRACKER_SNAP . "
-				WHERE topic_id = $tor_id
+                $sql = 'SELECT seeders, leechers, speed_up, speed_down
+				FROM ' . BB_BT_TRACKER_SNAP . "
+				WHERE topic_id = {$tor_id}
 				LIMIT 1";
             } elseif ($s_mode == 'names') {
-                $sql = "SELECT tr.user_id, tr.ip, tr.ipv6, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
-				FROM " . BB_BT_TRACKER . " tr, " . BB_USERS . " u
-				WHERE tr.topic_id = $tor_id
+                $sql = 'SELECT tr.user_id, tr.ip, tr.ipv6, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
+				FROM ' . BB_BT_TRACKER . ' tr, ' . BB_USERS . " u
+				WHERE tr.topic_id = {$tor_id}
 					AND u.user_id = tr.user_id
 				ORDER BY u.username
-				LIMIT $show_peers_limit";
+				LIMIT {$show_peers_limit}";
             } else {
-                $sql = "SELECT
+                $sql = 'SELECT
 					tr.user_id, tr.ip, tr.ipv6, tr.port, tr.peer_id, tr.uploaded, tr.downloaded, tr.remain,
 					tr.seeder, tr.releaser, tr.speed_up, tr.speed_down, tr.update_time,
 					tr.complete_percent, u.username, u.user_rank, u.user_opt
-				FROM " . BB_BT_TRACKER . " tr
-				LEFT JOIN " . BB_USERS . " u ON u.user_id = tr.user_id
-				WHERE tr.topic_id = $tor_id
-				ORDER BY $full_mode_order $full_mode_sort_dir
-				LIMIT $show_peers_limit";
+				FROM ' . BB_BT_TRACKER . ' tr
+				LEFT JOIN ' . BB_USERS . " u ON u.user_id = tr.user_id
+				WHERE tr.topic_id = {$tor_id}
+				ORDER BY {$full_mode_order} {$full_mode_sort_dir}
+				LIMIT {$show_peers_limit}";
             }
 
             // Build peers table
@@ -324,7 +325,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                         $sp_up_tot[$x] += $peer['speed_up'];
                         $sp_down_tot[$x] += $peer['speed_down'];
 
-                        $guest = ($peer['user_id'] == GUEST_UID || null === $peer['username']);
+                        $guest = ($peer['user_id'] == GUEST_UID || $peer['username'] === null);
                         $p_max_up = $peer['uploaded'];
                         $p_max_down = $peer['downloaded'];
 
@@ -367,12 +368,12 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
 
                     template()->assign_vars([
                         'TOR_SPEED_UP' => ($tor_speed_up) ? humn_size($tor_speed_up, min: 'KB') . '/s' : '0 KB/s',
-                        'TOR_SPEED_DOWN' => ($tor_speed_down) ? humn_size($tor_speed_down, min: 'KB') . '/s' : '0 KB/s'
+                        'TOR_SPEED_DOWN' => ($tor_speed_down) ? humn_size($tor_speed_down, min: 'KB') . '/s' : '0 KB/s',
                     ]);
                 }
 
                 foreach ($peers as $pid => $peer) {
-                    $u_prof_href = ($s_mode == 'count') ? '#' : url()->member($peer['user_id'], $peer['username'] ?? '') . "#torrent";
+                    $u_prof_href = ($s_mode == 'count') ? '#' : url()->member($peer['user_id'], $peer['username'] ?? '') . '#torrent';
 
                     // Full details mode
                     if ($s_mode == 'full') {
@@ -398,18 +399,18 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
 
                             if (!defined('SEEDER_EXIST')) {
                                 define('SEEDER_EXIST', true);
-                                $seed_order_action = TOPIC_URL . "$bt_topic_id/?spmode=full#seeders";
+                                $seed_order_action = TOPIC_URL . "{$bt_topic_id}/?spmode=full#seeders";
 
                                 template()->assign_block_vars((string)$x_full, [
                                     'SEED_ORD_ACT' => $seed_order_action,
-                                    'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s'
+                                    'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s',
                                 ]);
 
                                 if ($ip) {
-                                    template()->assign_block_vars("$x_full.iphead", []);
+                                    template()->assign_block_vars("{$x_full}.iphead", []);
                                 }
                                 if ($port !== false) {
-                                    template()->assign_block_vars("$x_full.porthead", []);
+                                    template()->assign_block_vars("{$x_full}.porthead", []);
                                 }
                             }
                             $compl_perc = ($tor_size) ? round(($p_max_up / $tor_size), 1) : 0;
@@ -420,19 +421,19 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
 
                             if (!defined('LEECHER_EXIST')) {
                                 define('LEECHER_EXIST', true);
-                                $leech_order_action = TOPIC_URL . "$bt_topic_id/?spmode=full#leechers";
+                                $leech_order_action = TOPIC_URL . "{$bt_topic_id}/?spmode=full#leechers";
 
                                 template()->assign_block_vars((string)$x_full, [
                                     'LEECH_ORD_ACT' => $leech_order_action,
                                     'LEECHERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s',
-                                    'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], min: 'KB') . '/s'
+                                    'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], min: 'KB') . '/s',
                                 ]);
 
                                 if ($ip) {
-                                    template()->assign_block_vars("$x_full.iphead", []);
+                                    template()->assign_block_vars("{$x_full}.iphead", []);
                                 }
                                 if ($port !== false) {
-                                    template()->assign_block_vars("$x_full.porthead", []);
+                                    template()->assign_block_vars("{$x_full}.porthead", []);
                                 }
                             }
                             $compl_size = ($peer['remain'] && $tor_size && $tor_size > $peer['remain']) ? ($tor_size - $peer['remain']) : 0;
@@ -446,14 +447,14 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                         $sp_down = ($peer['speed_down']) ? humn_size($peer['speed_down'], min: 'KB') . '/s' : '-';
 
                         $bgr_class = (!($tr[$x] % 2)) ? $bgr_class_1 : $bgr_class_2;
-                        $row_bgr = ($change_peers_bgr_over) ? " class=\"$bgr_class\" onmouseover=\"this.className='$bgr_class_over';\" onmouseout=\"this.className='$bgr_class';\"" : '';
+                        $row_bgr = ($change_peers_bgr_over) ? " class=\"{$bgr_class}\" onmouseover=\"this.className='{$bgr_class_over}';\" onmouseout=\"this.className='{$bgr_class}';\"" : '';
                         $tr[$x]++;
 
                         $peerUsername = __('HIDDEN_USER');
                         if (IS_AM || $peer['user_id'] == userdata('user_id') || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_username')) {
                             $releaserSign = (!$guest && $peer['releaser']) ? '&nbsp;<b><sup>&reg;</sup></b>' : '';
                             $peerUsername = profile_url($peer) . $releaserSign;
-                            $peerUsername = $peer['update_time'] ? $peerUsername : "<s>$peerUsername</s>";
+                            $peerUsername = $peer['update_time'] ? $peerUsername : "<s>{$peerUsername}</s>";
                         }
 
                         $peerTorrentClient = __('HIDDEN_USER');
@@ -476,32 +477,32 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                             }
                         }
 
-                        template()->assign_block_vars("$x_full.$x_row", [
+                        template()->assign_block_vars("{$x_full}.{$x_row}", [
                             'ROW_BGR' => $row_bgr,
                             'NAME' => $peerUsername,
                             'PEER_ID' => $peerTorrentClient,
                             'COUNTRY' => $peerCountry,
                             'COMPL_PRC' => $compl_perc,
-                            'UP_TOTAL' => ($max_up_id[$x] == $pid) ? "<b>$up_tot</b>" : $up_tot,
-                            'DOWN_TOTAL' => ($max_down_id[$x] == $pid) ? "<b>$down_tot</b>" : $down_tot,
-                            'SPEED_UP' => ($max_sp_up_id[$x] == $pid) ? "<b>$sp_up</b>" : $sp_up,
-                            'SPEED_DOWN' => ($max_sp_down_id[$x] == $pid) ? "<b>$sp_down</b>" : $sp_down,
+                            'UP_TOTAL' => ($max_up_id[$x] == $pid) ? "<b>{$up_tot}</b>" : $up_tot,
+                            'DOWN_TOTAL' => ($max_down_id[$x] == $pid) ? "<b>{$down_tot}</b>" : $down_tot,
+                            'SPEED_UP' => ($max_sp_up_id[$x] == $pid) ? "<b>{$sp_up}</b>" : $sp_up,
+                            'SPEED_DOWN' => ($max_sp_down_id[$x] == $pid) ? "<b>{$sp_down}</b>" : $sp_down,
                             'UP_TOTAL_RAW' => $peer['uploaded'],
                             'DOWN_TOTAL_RAW' => $peer['downloaded'],
                             'SPEED_UP_RAW' => $peer['speed_up'],
                             'SPEED_DOWN_RAW' => $peer['speed_down'],
                             'UPD_EXP_TIME' => $peer['update_time'] ? __('DL_UPD') . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . humanTime($peer['update_time']) . __('TOR_BACK') : __('DL_STOPPED'),
-                            'TOR_RATIO' => $up_ratio ? __('USER_RATIO') . "UL/DL: $up_ratio" : ''
+                            'TOR_RATIO' => $up_ratio ? __('USER_RATIO') . "UL/DL: {$up_ratio}" : '',
                         ]);
 
                         if ($ip) {
-                            template()->assign_block_vars("$x_full.$x_row.ip", [
+                            template()->assign_block_vars("{$x_full}.{$x_row}.ip", [
                                 'U_WHOIS_IP' => config()->get('whois_info') . $ip,
-                                'IP' => $ip
+                                'IP' => $ip,
                             ]);
                         }
                         if ($port !== false) {
-                            template()->assign_block_vars("$x_full.$x_row.port", ['PORT' => $port]);
+                            template()->assign_block_vars("{$x_full}.{$x_row}.port", ['PORT' => $port]);
                         }
                     } // Count only & only names modes
                     else {
@@ -552,7 +553,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
         if ($peers_cnt > $max_peers_before_overflow && $s_mode == 'full') {
             template()->assign_vars([
                 'PEERS_OVERFLOW' => true,
-                'PEERS_DIV_STYLE' => $peers_div_style_overflow
+                'PEERS_DIV_STYLE' => $peers_div_style_overflow,
             ]);
         } else {
             template()->assign_vars(['PEERS_DIV_STYLE' => $peers_div_style_normal]);
@@ -562,7 +563,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
     if (config()->get('bt_allow_spmode_change') && $s_mode != 'full') {
         template()->assign_vars([
             'PEERS_FULL_LINK' => true,
-            'SPMODE_FULL_HREF' => TOPIC_URL . "$topic_id/?spmode=full#seeders"
+            'SPMODE_FULL_HREF' => TOPIC_URL . "{$topic_id}/?spmode=full#seeders",
         ]);
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -13,7 +14,7 @@ if (!defined('BB_ROOT')) {
 
 $smilies = [];
 
-$rowset = DB()->fetch_rowset("SELECT * FROM " . BB_SMILIES);
+$rowset = DB()->fetch_rowset('SELECT * FROM ' . BB_SMILIES);
 sort($rowset);
 
 foreach ($rowset as $smile) {

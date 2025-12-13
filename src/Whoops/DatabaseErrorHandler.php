@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Whoops;
 
+use Exception;
 use Whoops\Handler\Handler;
 use Whoops\Handler\HandlerInterface;
 
@@ -52,6 +53,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
     public function setAddToOutput(bool $add): self
     {
         $this->addToOutput = $add;
+
         return $this;
     }
 
@@ -61,6 +63,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
     public function setIncludeQueryHistory(bool $include): self
     {
         $this->includeQueryHistory = $include;
+
         return $this;
     }
 
@@ -70,7 +73,16 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
     public function setMaxQueryHistory(int $max): self
     {
         $this->maxQueryHistory = max(1, $max);
+
         return $this;
+    }
+
+    /**
+     * Get priority - run after the main PrettyPageHandler
+     */
+    public function contentType(): ?string
+    {
+        return 'text/html';
     }
 
     /**
@@ -98,10 +110,10 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                 $frame->addComment('Database Context', 'This frame involves database operations');
 
                 foreach ($frameData['database_context'] as $key => $value) {
-                    if (is_string($value) || is_numeric($value)) {
-                        $frame->addComment("DB: $key", $value);
-                    } elseif (is_array($value) && !empty($value)) {
-                        $frame->addComment("DB: $key", json_encode($value, JSON_PRETTY_PRINT));
+                    if (\is_string($value) || is_numeric($value)) {
+                        $frame->addComment("DB: {$key}", $value);
+                    } elseif (\is_array($value) && !empty($value)) {
+                        $frame->addComment("DB: {$key}", json_encode($value, JSON_PRETTY_PRINT));
                     }
                 }
             }
@@ -126,7 +138,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                     $exception->databaseInfo = $databaseInfo;
                 }
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Don't let database info collection break error handling
             if (method_exists($exception, 'setAdditionalInfo')) {
                 $exception->setAdditionalInfo('Database Info Error', $e->getMessage());
@@ -205,7 +217,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
 
         try {
             // Get main database instance
-            if (function_exists('DB')) {
+            if (\function_exists('DB')) {
                 $db = DB();
 
                 $context['current_query'] = $db->cur_query ?? 'None';
@@ -217,7 +229,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
 
                 // Query stats
                 $context['total_queries'] = $db->num_queries ?? 0;
-                $context['total_time'] = isset($db->sql_timetotal) ? sprintf('%.3f sec', $db->sql_timetotal) : 'Unknown';
+                $context['total_time'] = isset($db->sql_timetotal) ? \sprintf('%.3f sec', $db->sql_timetotal) : 'Unknown';
 
                 // Recent error information
                 $sqlError = $db->sql_error();
@@ -225,7 +237,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                     $context['last_error'] = $sqlError;
                 }
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $context['error'] = 'Could not retrieve database context: ' . $e->getMessage();
         }
 
@@ -259,7 +271,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                             'database' => $db->selected_db ?? 'Unknown',
                             'connection_status' => $db->connection ? 'Connected' : 'Disconnected',
                             'total_queries' => $db->num_queries ?? 0,
-                            'total_time' => isset($db->sql_timetotal) ? sprintf('%.3f sec', $db->sql_timetotal) : 'Unknown',
+                            'total_time' => isset($db->sql_timetotal) ? \sprintf('%.3f sec', $db->sql_timetotal) : 'Unknown',
                         ];
 
                         // Current query
@@ -275,21 +287,20 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
 
                         // Recent query history (if available and enabled)
                         if ($this->includeQueryHistory && !empty($db->dbg)) {
-                            $recentQueries = array_slice($db->dbg, -$this->maxQueryHistory);
+                            $recentQueries = \array_slice($db->dbg, -$this->maxQueryHistory);
                             $serverInfo['recent_queries'] = [];
 
                             foreach ($recentQueries as $query) {
                                 $serverInfo['recent_queries'][] = [
                                     'sql' => $this->formatQueryForDisplay($query['sql'] ?? 'Unknown'),
-                                    'time' => isset($query['time']) ? sprintf('%.3f sec', $query['time']) : 'Unknown',
+                                    'time' => isset($query['time']) ? \sprintf('%.3f sec', $query['time']) : 'Unknown',
                                     'source' => $query['src'] ?? 'Unknown',
                                 ];
                             }
                         }
 
                         $info['databases'][$serverName] = $serverInfo;
-
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         $info['databases'][$serverName] = [
                             'error' => 'Could not retrieve info: ' . $e->getMessage(),
                         ];
@@ -298,7 +309,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
             }
 
             // Legacy single database support
-            if (function_exists('DB') && empty($info['databases'])) {
+            if (\function_exists('DB') && empty($info['databases'])) {
                 $db = DB();
 
                 $info['legacy_database'] = [
@@ -307,7 +318,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                     'database' => $db->selected_db ?? 'Unknown',
                     'connection_status' => $db->connection ? 'Connected' : 'Disconnected',
                     'total_queries' => $db->num_queries ?? 0,
-                    'total_time' => isset($db->sql_timetotal) ? sprintf('%.3f sec', $db->sql_timetotal) : 'Unknown',
+                    'total_time' => isset($db->sql_timetotal) ? \sprintf('%.3f sec', $db->sql_timetotal) : 'Unknown',
                 ];
 
                 if (!empty($db->cur_query)) {
@@ -319,8 +330,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                     $info['legacy_database']['last_error'] = $sqlError;
                 }
             }
-
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $info['collection_error'] = $e->getMessage();
         }
 
@@ -337,18 +347,10 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
         $query = trim($query);
 
         // Truncate if too long
-        if (strlen($query) > $maxLength) {
+        if (\strlen($query) > $maxLength) {
             $query = substr($query, 0, $maxLength) . '... [truncated]';
         }
 
         return $query;
-    }
-
-    /**
-     * Get priority - run after the main PrettyPageHandler
-     */
-    public function contentType(): ?string
-    {
-        return 'text/html';
     }
 }

@@ -22,7 +22,7 @@ use TorrentPier\Console\Helpers\PhinxManager;
  */
 #[AsCommand(
     name: 'migrate:status',
-    description: 'Show database migration status'
+    description: 'Show database migration status',
 )]
 class MigrateStatusCommand extends Command
 {
@@ -56,19 +56,20 @@ class MigrateStatusCommand extends Command
 
             if (empty($rows)) {
                 $this->warning('No migrations found.');
+
                 return self::SUCCESS;
             }
 
             $this->table(
                 ['Version', 'Migration Name', 'Status', 'Ran At'],
-                $rows
+                $rows,
             );
 
             // Summary
             $this->section('Summary');
             $this->definitionList(
                 ['Environment' => $phinx->environment],
-                ['Total Migrations' => count($status['migrations'])],
+                ['Total Migrations' => \count($status['migrations'])],
                 ['Pending' => $status['pending'] > 0
                     ? '<comment>' . $status['pending'] . '</comment>'
                     : '<info>0</info>'],

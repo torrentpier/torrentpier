@@ -23,7 +23,7 @@ use TorrentPier\Legacy\Admin\Common;
  */
 #[AsCommand(
     name: 'rebuild:forums',
-    description: 'Rebuild forum post and topic counters'
+    description: 'Rebuild forum post and topic counters',
 )]
 class ForumsCommand extends AbstractRebuildCommand
 {
@@ -36,27 +36,27 @@ class ForumsCommand extends AbstractRebuildCommand
                 'forum-id',
                 'f',
                 InputOption::VALUE_REQUIRED,
-                'Rebuild only specific forum ID (comma-separated for multiple)'
+                'Rebuild only specific forum ID (comma-separated for multiple)',
             )
             ->setHelp(
                 <<<'HELP'
-The <info>%command.name%</info> command recalculates forum counters.
+                    The <info>%command.name%</info> command recalculates forum counters.
 
-This rebuilds the following fields for each forum:
-  - forum_posts (total post count)
-  - forum_topics (total topic count)
-  - forum_last_post_id (last post reference)
+                    This rebuilds the following fields for each forum:
+                      - forum_posts (total post count)
+                      - forum_topics (total topic count)
+                      - forum_last_post_id (last post reference)
 
-<comment>Rebuild all forums:</comment>
-  <info>php %command.full_name%</info>
+                    <comment>Rebuild all forums:</comment>
+                      <info>php %command.full_name%</info>
 
-<comment>Rebuild specific forum(s):</comment>
-  <info>php %command.full_name% --forum-id=5</info>
-  <info>php %command.full_name% --forum-id=1,2,3</info>
+                    <comment>Rebuild specific forum(s):</comment>
+                      <info>php %command.full_name% --forum-id=5</info>
+                      <info>php %command.full_name% --forum-id=1,2,3</info>
 
-<comment>Preview what would be done:</comment>
-  <info>php %command.full_name% --dry-run</info>
-HELP
+                    <comment>Preview what would be done:</comment>
+                      <info>php %command.full_name% --dry-run</info>
+                    HELP
             );
     }
 
@@ -75,10 +75,11 @@ HELP
         $forumIds = [];
         if ($forumId !== null) {
             $forumIds = array_map('intval', explode(',', $forumId));
-            $forumIds = array_filter($forumIds, fn($id) => $id > 0);
+            $forumIds = array_filter($forumIds, fn ($id) => $id > 0);
 
             if (empty($forumIds)) {
                 $this->error('Invalid forum ID(s) specified.');
+
                 return self::FAILURE;
             }
 
@@ -89,13 +90,14 @@ HELP
 
         if (empty($forums)) {
             $this->info('No forums found to process.');
+
             return self::SUCCESS;
         }
 
         // Display configuration
         $this->section('Configuration');
         $this->definitionList(
-            ['Forums to process' => count($forums)],
+            ['Forums to process' => \count($forums)],
             ['Mode' => $forumId !== null ? 'Specific forums' : 'All forums'],
         );
 
@@ -119,13 +121,14 @@ HELP
         $this->section('Processing');
 
         if ($isDryRun) {
-            $this->comment('Would recalculate counters for ' . count($forums) . ' forum(s)');
+            $this->comment('Would recalculate counters for ' . \count($forums) . ' forum(s)');
             $this->displayStatistics('forums');
+
             return self::SUCCESS;
         }
 
         // Start progress bar
-        $this->startProgressBar(count($forums));
+        $this->startProgressBar(\count($forums));
 
         if ($forumId !== null) {
             // Sync specific forums
@@ -133,6 +136,7 @@ HELP
                 if ($this->shouldStop()) {
                     $this->finishProgressBar();
                     $this->warning('Processing interrupted.');
+
                     return self::FAILURE;
                 }
 
@@ -143,7 +147,7 @@ HELP
             // Use optimized batch sync for all forums
             $this->advanceProgressBar(0, 'Running batch sync for all forums...');
             Common::sync_all_forums();
-            $this->advanceProgressBar(count($forums), 'All forums synchronized');
+            $this->advanceProgressBar(\count($forums), 'All forums synchronized');
         }
 
         $this->finishProgressBar();
@@ -169,10 +173,11 @@ HELP
             ['Total topics' => number_format($totalTopics)],
         );
 
-        $this->processedCount = count($forums);
+        $this->processedCount = \count($forums);
         $this->displayStatistics('forums');
 
         $this->success('Forum counters rebuilt successfully!');
+
         return self::SUCCESS;
     }
 

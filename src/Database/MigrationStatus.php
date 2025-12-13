@@ -10,6 +10,8 @@
 
 namespace TorrentPier\Database;
 
+use Exception;
+
 /**
  * Migration Status Manager
  *
@@ -82,7 +84,7 @@ class MigrationStatus
             $availableMigrations = $this->getAvailableMigrations();
             $appliedVersions = array_column($appliedMigrationsArray, 'version');
             $pendingMigrations = array_filter($availableMigrations, function ($migration) use ($appliedVersions) {
-                return !in_array($migration['version'], $appliedVersions);
+                return !\in_array($migration['version'], $appliedVersions);
             });
 
             return [
@@ -93,9 +95,49 @@ class MigrationStatus
                 'setup_status' => $setupStatus,
                 'requires_setup' => $setupStatus['needs_setup'],
             ];
-
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             bb_die('Error checking migration status: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Get database schema information
+     *
+     * @return array Database statistics and information
+     */
+    public function getSchemaInfo(): array
+    {
+        try {
+            // Get database name using Nette Database Explorer
+            $dbInfo = DB()->query('SELECT DATABASE() as db_name')->fetch();
+
+            // Get table count using Nette Database Explorer
+            $tableInfo = DB()->query('
+                SELECT COUNT(*) as table_count
+                FROM information_schema.tables
+                WHERE table_schema = DATABASE()
+            ')->fetch();
+
+            // Get database size using Nette Database Explorer
+            $sizeInfo = DB()->query('
+                SELECT
+                    ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) as size_mb
+                FROM information_schema.tables
+                WHERE table_schema = DATABASE()
+            ')->fetch();
+
+            return [
+                'database_name' => $dbInfo->db_name ?? 'Unknown',
+                'table_count' => $tableInfo->table_count ?? 0,
+                'size_mb' => $sizeInfo->size_mb ?? 0,
+            ];
+        } catch (Exception $e) {
+            return [
+                'database_name' => 'Unknown',
+                'table_count' => 0,
+                'size_mb' => 0,
+                'error' => $e->getMessage(),
+            ];
         }
     }
 
@@ -152,8 +194,7 @@ class MigrationStatus
                 'message' => 'Migration system fully configured',
                 'action_required' => false,
             ];
-
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return [
                 'type' => 'error',
                 'needs_setup' => false,
@@ -181,7 +222,7 @@ class MigrationStatus
             ")->fetch();
 
             return $result && $result->table_count > 0;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
     }
@@ -198,11 +239,11 @@ class MigrationStatus
             $result = DB()->query("
                 SELECT COUNT(*) as migration_count
                 FROM {$this->migrationTable}
-                WHERE version IN ($initialMigrationsCSV)
+                WHERE version IN ({$initialMigrationsCSV})
             ")->fetch();
 
-            return $result && $result->migration_count >= count($this->initialMigrations);
-        } catch (\Exception $e) {
+            return $result && $result->migration_count >= \count($this->initialMigrations);
+        } catch (Exception $e) {
             return false;
         }
     }
@@ -225,7 +266,7 @@ class MigrationStatus
             ")->fetch();
 
             return $result && $result->table_count > 0;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
     }
@@ -260,47 +301,5 @@ class MigrationStatus
         });
 
         return $migrations;
-    }
-
-    /**
-     * Get database schema information
-     *
-     * @return array Database statistics and information
-     */
-    public function getSchemaInfo(): array
-    {
-        try {
-            // Get database name using Nette Database Explorer
-            $dbInfo = DB()->query("SELECT DATABASE() as db_name")->fetch();
-
-            // Get table count using Nette Database Explorer
-            $tableInfo = DB()->query("
-                SELECT COUNT(*) as table_count
-                FROM information_schema.tables
-                WHERE table_schema = DATABASE()
-            ")->fetch();
-
-            // Get database size using Nette Database Explorer
-            $sizeInfo = DB()->query("
-                SELECT
-                    ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) as size_mb
-                FROM information_schema.tables
-                WHERE table_schema = DATABASE()
-            ")->fetch();
-
-            return [
-                'database_name' => $dbInfo->db_name ?? 'Unknown',
-                'table_count' => $tableInfo->table_count ?? 0,
-                'size_mb' => $sizeInfo->size_mb ?? 0,
-            ];
-
-        } catch (\Exception $e) {
-            return [
-                'database_name' => 'Unknown',
-                'table_count' => 0,
-                'size_mb' => 0,
-                'error' => $e->getMessage(),
-            ];
-        }
     }
 }

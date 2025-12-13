@@ -73,6 +73,7 @@ class FrontController
         // /index.php -> redirect to /
         if ($path === '/index.php') {
             $query = $_SERVER['QUERY_STRING'] ?? '';
+
             return [
                 'action' => self::ACTION_REDIRECT,
                 'url' => '/' . ($query ? '?' . $query : ''),
@@ -81,6 +82,30 @@ class FrontController
 
         // Route through router
         return ['action' => self::ACTION_ROUTE];
+    }
+
+    /**
+     * Get the application path
+     */
+    public function getAppPath(): string
+    {
+        return $this->appPath;
+    }
+
+    /**
+     * Get the public path
+     */
+    public function getPublicPath(): string
+    {
+        return $this->publicPath;
+    }
+
+    /**
+     * Get the router instance (if initialized)
+     */
+    public function getRouter(): ?Router
+    {
+        return $this->router;
     }
 
     /**
@@ -181,6 +206,7 @@ class FrontController
             if ($method !== 'GET') {
                 // Rewrite REQUEST_URI to a clean path so the router can match it
                 $_SERVER['REQUEST_URI'] = $cleanPath . ($query ? '?' . $query : '');
+
                 return ['action' => self::ACTION_ROUTE];
             }
 
@@ -230,30 +256,7 @@ class FrontController
     private function isStatic(string $path): bool
     {
         $extension = pathinfo($path, PATHINFO_EXTENSION);
-        return in_array(strtolower($extension), $this->staticExtensions, true);
-    }
 
-    /**
-     * Get the application path
-     */
-    public function getAppPath(): string
-    {
-        return $this->appPath;
-    }
-
-    /**
-     * Get the public path
-     */
-    public function getPublicPath(): string
-    {
-        return $this->publicPath;
-    }
-
-    /**
-     * Get the router instance (if initialized)
-     */
-    public function getRouter(): ?Router
-    {
-        return $this->router;
+        return \in_array(strtolower($extension), $this->staticExtensions, true);
     }
 }

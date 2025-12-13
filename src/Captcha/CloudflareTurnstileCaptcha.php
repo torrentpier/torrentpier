@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Captcha;
 
+use Override;
 use Throwable;
 
 /**
@@ -20,22 +21,16 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
 {
     /**
      * Captcha service settings
-     *
-     * @var array
      */
     private array $settings;
 
     /**
      * Service verification endpoint
-     *
-     * @var string
      */
     private string $verifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
     /**
      * Constructor
-     *
-     * @param array $settings
      */
     public function __construct(array $settings)
     {
@@ -44,10 +39,8 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
 
     /**
      * Returns captcha widget
-     *
-     * @return string
      */
-    #[\Override]
+    #[Override]
     public function get(): string
     {
         return "
@@ -58,10 +51,8 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
 
     /**
      * Checking captcha answer
-     *
-     * @return bool
      */
-    #[\Override]
+    #[Override]
     public function check(): bool
     {
         // Require token present - fail closed
@@ -86,9 +77,10 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
             }
 
             // Safely decode JSON with error checking
-            $responseBody = (string) $response->getBody();
+            $responseBody = (string)$response->getBody();
             if (!json_validate($responseBody)) {
-                bb_log("Cloudflare Turnstile verification failed: Invalid JSON response" . LOG_LF);
+                bb_log('Cloudflare Turnstile verification failed: Invalid JSON response' . LOG_LF);
+
                 return false;
             }
             $responseData = json_decode($responseBody, false);
@@ -96,12 +88,14 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
             // Validate that the response contains the expected 'success' field
             if (!isset($responseData->success)) {
                 bb_log("Cloudflare Turnstile verification failed: Missing 'success' field in response" . LOG_LF);
+
                 return false;
             }
 
             return $responseData->success === true;
         } catch (Throwable $e) {
             bb_log("Cloudflare Turnstile verification failed: {$e->getMessage()}" . LOG_LF);
+
             return false;
         }
     }

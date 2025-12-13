@@ -18,11 +18,6 @@ class Select
 {
     /**
      * Select forum language
-     *
-     * @param string $default_lang
-     * @param string $select_name
-     *
-     * @return mixed
      */
     public static function language(string $default_lang, string $select_name = 'language'): mixed
     {
@@ -38,21 +33,17 @@ class Select
         }
         $lang_select .= '</select>';
         $languages = config()->get('lang');
+
         return ($x > 1) ? $lang_select : reset($languages);
     }
 
     /**
      * Select forum timezone
-     *
-     * @param string $default
-     * @param string $select_name
-     *
-     * @return string
      */
     public static function timezone(string $default = '', string $select_name = 'timezone'): string
     {
         if ($default === '') {
-            $default = (string) config()->get('board_timezone');
+            $default = (string)config()->get('board_timezone');
         }
         $tz_select = '<select name="' . $select_name . '">';
 
@@ -67,11 +58,6 @@ class Select
 
     /**
      * Select forum template
-     *
-     * @param string $default_style
-     * @param string $select_name
-     *
-     * @return mixed
      */
     public static function template(string $default_style, string $select_name = 'tpl_name'): mixed
     {
@@ -87,6 +73,7 @@ class Select
         }
         $templates_select .= '</select>';
         $templates = config()->get('templates');
+
         return ($x > 1) ? $templates_select : reset($templates);
     }
 }

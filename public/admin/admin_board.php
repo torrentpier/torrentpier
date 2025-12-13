@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -10,6 +11,7 @@
 if (!empty($setmodules)) {
     $module['GENERAL']['CONFIGURATION'] = basename(__FILE__) . '?mode=config';
     $module['MODS']['CONFIGURATION'] = basename(__FILE__) . '?mode=config_mods';
+
     return;
 }
 
@@ -20,7 +22,7 @@ $mode = request()->query->get('mode', '');
 $return_links = [
     'index' => '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'),
     'config' => '<br /><br />' . sprintf(__('CLICK_RETURN_CONFIG'), '<a href="admin_board.php?mode=config">', '</a>'),
-    'config_mods' => '<br /><br />' . sprintf(__('CLICK_RETURN_CONFIG_MODS'), '<a href="admin_board.php?mode=config_mods">', '</a>')
+    'config_mods' => '<br /><br />' . sprintf(__('CLICK_RETURN_CONFIG_MODS'), '<a href="admin_board.php?mode=config_mods">', '</a>'),
 ];
 
 /**
@@ -98,7 +100,7 @@ switch ($mode) {
             'TOR_COMMENT' => $new['tor_comment'],
             'SEED_BONUS_ENABLED' => $new['seed_bonus_enabled'],
             'SEED_BONUS_TOR_SIZE' => $new['seed_bonus_tor_size'],
-            'SEED_BONUS_USER_REGDATE' => $new['seed_bonus_user_regdate']
+            'SEED_BONUS_USER_REGDATE' => $new['seed_bonus_user_regdate'],
         ]);
 
         if ($new['seed_bonus_points'] && $new['seed_bonus_release']) {
@@ -109,7 +111,7 @@ switch ($mode) {
 
                 template()->assign_block_vars('seed_bonus', [
                     'RELEASE' => $new['seed_bonus_release'][$i],
-                    'POINTS' => $row
+                    'POINTS' => $row,
                 ]);
             }
         }
@@ -122,7 +124,7 @@ switch ($mode) {
 
                 template()->assign_block_vars('bonus_upload', [
                     'UP' => $row,
-                    'PRICE' => $new['bonus_upload_price'][$i]
+                    'PRICE' => $new['bonus_upload_price'][$i],
                 ]);
             }
         }
@@ -144,8 +146,8 @@ switch ($mode) {
             'POSTS_PER_PAGE' => $new['posts_per_page'],
             'HOT_TOPIC' => $new['hot_threshold'],
             'DEFAULT_DATEFORMAT' => $new['default_dateformat'],
-            'LANG_SELECT' => \TorrentPier\Legacy\Common\Select::language($new['default_lang'], 'default_lang'),
-            'TIMEZONE_SELECT' => \TorrentPier\Legacy\Common\Select::timezone($new['board_timezone'], 'board_timezone'),
+            'LANG_SELECT' => TorrentPier\Legacy\Common\Select::language($new['default_lang'], 'default_lang'),
+            'TIMEZONE_SELECT' => TorrentPier\Legacy\Common\Select::timezone($new['board_timezone'], 'board_timezone'),
             'MAX_LOGIN_ATTEMPTS' => $new['max_login_attempts'],
             'LOGIN_RESET_TIME' => $new['login_reset_time'],
             'PRUNE_ENABLE' => (bool)$new['prune_enable'],
@@ -154,7 +156,7 @@ switch ($mode) {
             'ALLOW_SIG' => (bool)$new['allow_sig'],
             'SIG_SIZE' => $new['max_sig_chars'],
             'ALLOW_NAMECHANGE' => (bool)$new['allow_namechange'],
-            'SMILIES_PATH' => $new['smilies_path']
+            'SMILIES_PATH' => $new['smilies_path'],
         ]);
         break;
 }

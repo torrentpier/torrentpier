@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace TorrentPier\Http;
 
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
@@ -20,6 +21,7 @@ use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\ServerBag;
+use UnexpectedValueException;
 
 /**
  * HTTP Request (singleton)
@@ -50,26 +52,9 @@ final class Request
     }
 
     /**
-     * Get a singleton instance
-     */
-    public static function getInstance(): self
-    {
-        return self::$instance ??= new self();
-    }
-
-    /**
-     * Reset singleton instance (useful for testing)
-     */
-    public static function resetInstance(): void
-    {
-        self::$instance = null;
-    }
-
-    /**
      * Magic getter for direct access to Symfony Request bags
      *
      * @param string $name Property name (query, post, cookies, server, files, headers, attributes)
-     * @return InputBag|ServerBag|FileBag|HeaderBag|ParameterBag|null
      */
     public function __get(string $name): InputBag|ServerBag|FileBag|HeaderBag|ParameterBag|null
     {
@@ -83,6 +68,33 @@ final class Request
             'attributes' => $this->request->attributes,
             default => null,
         };
+    }
+
+    /**
+     * Get a singleton instance
+     */
+    public static function getInstance(): self
+    {
+        return self::$instance ??= new self;
+    }
+
+    /**
+     * Reset singleton instance (useful for testing)
+     */
+    public static function resetInstance(): void
+    {
+        self::$instance = null;
+    }
+
+    /**
+     * Set trusted proxies for IP detection behind load balancers
+     *
+     * @param array<string> $proxies List of trusted proxy IPs
+     * @param int $trustedHeaderSet Bitmask of trusted headers
+     */
+    public static function setTrustedProxies(array $proxies, int $trustedHeaderSet = SymfonyRequest::HEADER_X_FORWARDED_FOR | SymfonyRequest::HEADER_X_FORWARDED_HOST | SymfonyRequest::HEADER_X_FORWARDED_PORT | SymfonyRequest::HEADER_X_FORWARDED_PROTO): void
+    {
+        SymfonyRequest::setTrustedProxies($proxies, $trustedHeaderSet);
     }
 
     // ========================================
@@ -105,14 +117,15 @@ final class Request
         if ($this->request->request->has($key)) {
             try {
                 return $this->request->request->get($key, $scalarDefault);
-            } catch (BadRequestException|\InvalidArgumentException) {
+            } catch (BadRequestException|InvalidArgumentException) {
                 // Value is an array, use all() to get it
                 return $this->request->request->all($key) ?: $default;
             }
         }
+
         try {
             return $this->request->query->get($key, $scalarDefault);
-        } catch (BadRequestException|\InvalidArgumentException) {
+        } catch (BadRequestException|InvalidArgumentException) {
             // Value is an array, use all() to get it
             return $this->request->query->all($key) ?: $default;
         }
@@ -135,7 +148,7 @@ final class Request
     {
         return array_merge(
             $this->request->query->all(),
-            $this->request->request->all()
+            $this->request->request->all(),
         );
     }
 
@@ -154,8 +167,9 @@ final class Request
             if ($this->request->request->has($key)) {
                 return $this->request->request->getInt($key, $default);
             }
+
             return $this->request->query->getInt($key, $default);
-        } catch (\UnexpectedValueException) {
+        } catch (UnexpectedValueException) {
             // Value is not a valid integer (e.g., "all", arrays, etc.)
             return $default;
         }
@@ -167,6 +181,7 @@ final class Request
     public function getString(string $key, string $default = ''): string
     {
         $value = $this->get($key, $default);
+
         return \is_string($value) ? $value : $default;
     }
 
@@ -181,8 +196,9 @@ final class Request
             if ($this->request->request->has($key)) {
                 return $this->request->request->getBoolean($key, $default);
             }
+
             return $this->request->query->getBoolean($key, $default);
-        } catch (\UnexpectedValueException) {
+        } catch (UnexpectedValueException) {
             return $default;
         }
     }
@@ -193,7 +209,8 @@ final class Request
     public function getFloat(string $key, float $default = 0.0): float
     {
         $value = $this->get($key, $default);
-        return \is_numeric($value) ? (float) $value : $default;
+
+        return is_numeric($value) ? (float)$value : $default;
     }
 
     /**
@@ -381,16 +398,5 @@ final class Request
     public function getSymfonyRequest(): SymfonyRequest
     {
         return $this->request;
-    }
-
-    /**
-     * Set trusted proxies for IP detection behind load balancers
-     *
-     * @param array<string> $proxies List of trusted proxy IPs
-     * @param int $trustedHeaderSet Bitmask of trusted headers
-     */
-    public static function setTrustedProxies(array $proxies, int $trustedHeaderSet = SymfonyRequest::HEADER_X_FORWARDED_FOR | SymfonyRequest::HEADER_X_FORWARDED_HOST | SymfonyRequest::HEADER_X_FORWARDED_PORT | SymfonyRequest::HEADER_X_FORWARDED_PROTO): void
-    {
-        SymfonyRequest::setTrustedProxies($proxies, $trustedHeaderSet);
     }
 }

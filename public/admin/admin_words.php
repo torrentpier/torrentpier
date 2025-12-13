@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,6 +10,7 @@
 
 if (!empty($setmodules)) {
     $module['GENERAL']['WORD_CENSOR'] = basename(__FILE__);
+
     return;
 }
 
@@ -34,7 +36,7 @@ if ($mode != '') {
 
         if ($mode == 'edit') {
             if ($word_id) {
-                $sql = 'SELECT * FROM ' . BB_WORDS . " WHERE word_id = $word_id";
+                $sql = 'SELECT * FROM ' . BB_WORDS . " WHERE word_id = {$word_id}";
                 if (!$result = DB()->sql_query($sql)) {
                     bb_die('Could not query words table #1');
                 }
@@ -67,7 +69,7 @@ if ($mode != '') {
         if ($word_id) {
             $sql = 'UPDATE ' . BB_WORDS . "
 				SET word = '" . DB()->escape($word) . "', replacement = '" . DB()->escape($replacement) . "'
-				WHERE word_id = $word_id";
+				WHERE word_id = {$word_id}";
             $message = __('WORD_UPDATED');
         } else {
             $sql = 'INSERT INTO ' . BB_WORDS . " (word, replacement)
@@ -88,7 +90,7 @@ if ($mode != '') {
         $word_id = request()->getInt('id');
 
         if ($word_id) {
-            $sql = 'DELETE FROM ' . BB_WORDS . " WHERE word_id = $word_id";
+            $sql = 'DELETE FROM ' . BB_WORDS . " WHERE word_id = {$word_id}";
 
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not remove data from words table');
@@ -114,7 +116,7 @@ if ($mode != '') {
     template()->assign_vars([
         'TPL_ADMIN_WORDS_LIST' => true,
         'S_WORDS_ACTION' => 'admin_words.php',
-        'S_HIDDEN_FIELDS' => ''
+        'S_HIDDEN_FIELDS' => '',
     ]);
 
     for ($i = 0; $i < $word_count; $i++) {
@@ -128,8 +130,8 @@ if ($mode != '') {
             'ROW_CLASS' => $row_class,
             'WORD' => $word,
             'REPLACEMENT' => $replacement,
-            'U_WORD_EDIT' => "admin_words.php?mode=edit&amp;id=$word_id",
-            'U_WORD_DELETE' => "admin_words.php?mode=delete&amp;id=$word_id"
+            'U_WORD_EDIT' => "admin_words.php?mode=edit&amp;id={$word_id}",
+            'U_WORD_DELETE' => "admin_words.php?mode=delete&amp;id={$word_id}",
         ]);
     }
 }

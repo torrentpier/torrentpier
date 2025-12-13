@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -28,8 +29,8 @@ switch ($mode) {
         if (!$tpl_id = (int)$this->request['tpl_id']) {
             $this->ajax_die('Выбранный шаблон не найден, создайте новый (empty tpl_id)');
         }
-        if (!$tpl_data = DB()->fetch_row("SELECT * FROM " . BB_TOPIC_TPL . " WHERE tpl_id = $tpl_id LIMIT 1")) {
-            $this->ajax_die("Шаблон [id: $tpl_id] не найден в БД");
+        if (!$tpl_data = DB()->fetch_row('SELECT * FROM ' . BB_TOPIC_TPL . " WHERE tpl_id = {$tpl_id} LIMIT 1")) {
+            $this->ajax_die("Шаблон [id: {$tpl_id}] не найден в БД");
         }
         break;
 }
@@ -66,7 +67,7 @@ switch ($mode) {
             'tpl_comment' => (string)$tpl_comment,
             'tpl_rules_post_id' => (int)$tpl_rules_post_id,
             'tpl_last_edit_tm' => (int)TIMENOW,
-            'tpl_last_edit_by' => (int)userdata('user_id')
+            'tpl_last_edit_by' => (int)userdata('user_id'),
         ];
         break;
 }
@@ -91,7 +92,7 @@ switch ($mode) {
         $this->response['tpl_rules_href'] = POST_URL . $tpl_data['tpl_rules_post_id'] . '#' . $tpl_data['tpl_rules_post_id'];
         break;
 
-    // включение / отключение шаблона в форуме
+        // включение / отключение шаблона в форуме
     case 'assign':
         if (!$tpl_id = (int)$this->request['tpl_id']) {
             $this->ajax_die('Выбранный шаблон не найден, создайте новый (empty tpl_id)');
@@ -100,7 +101,7 @@ switch ($mode) {
             $this->ajax_die('empty forum_id');
         }
         if (!forum_exists($forum_id)) {
-            $this->ajax_die("нет такого форума [id: $forum_id]");
+            $this->ajax_die("нет такого форума [id: {$forum_id}]");
         }
         // отключение
         if ($tpl_id == -1) {
@@ -108,16 +109,16 @@ switch ($mode) {
             $this->response['msg'] = 'Шаблоны в этом форуме отключены';
         } // включение
         else {
-            if (!$tpl_name = DB()->fetch_row("SELECT tpl_name FROM " . BB_TOPIC_TPL . " WHERE tpl_id = $tpl_id LIMIT 1", 'tpl_name')) {
-                $this->ajax_die("Шаблон [id: $tpl_id] не найден в БД");
+            if (!$tpl_name = DB()->fetch_row('SELECT tpl_name FROM ' . BB_TOPIC_TPL . " WHERE tpl_id = {$tpl_id} LIMIT 1", 'tpl_name')) {
+                $this->ajax_die("Шаблон [id: {$tpl_id}] не найден в БД");
             }
             $new_tpl_id = $tpl_id;
-            $this->response['msg'] = "Включен шаблон $tpl_name";
+            $this->response['msg'] = "Включен шаблон {$tpl_name}";
         }
-        DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = $new_tpl_id WHERE forum_id = $forum_id LIMIT 1");
+        DB()->query('UPDATE ' . BB_FORUMS . " SET forum_tpl_id = {$new_tpl_id} WHERE forum_id = {$forum_id} LIMIT 1");
         break;
 
-    // сохранение изменений
+        // сохранение изменений
     case 'save':
         if ($tpl_data['tpl_last_edit_tm'] > $this->request['tpl_l_ed_tst'] && $tpl_data['tpl_last_edit_by'] != userdata('user_id')) {
             $last_edit_by_username = get_username((int)$tpl_data['tpl_last_edit_by']);
@@ -125,7 +126,7 @@ switch ($mode) {
             $msg .= 'Шаблон был отредактирован: ' . html_ent_decode($last_edit_by_username) . ', ' . bb_date($tpl_data['tpl_last_edit_tm'], 'd-M-y H:i');
             $this->ajax_die($msg);
         }
-        $sql = "UPDATE " . BB_TOPIC_TPL . " SET " . DB()->build_array('UPDATE', $sql_args) . " WHERE tpl_id = $tpl_id LIMIT 1";
+        $sql = 'UPDATE ' . BB_TOPIC_TPL . ' SET ' . DB()->build_array('UPDATE', $sql_args) . " WHERE tpl_id = {$tpl_id} LIMIT 1";
         if (!DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
@@ -135,36 +136,36 @@ switch ($mode) {
         $this->response['html']['tpl-last-edit-by'] = profile_url(get_userdata(userdata('username'), true));
         break;
 
-    // создание нового шаблона
+        // создание нового шаблона
     case 'new':
-        $sql = "INSERT INTO " . BB_TOPIC_TPL . DB()->build_array('INSERT', $sql_args);
+        $sql = 'INSERT INTO ' . BB_TOPIC_TPL . DB()->build_array('INSERT', $sql_args);
         if (!DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
         break;
 
-    // удаление шаблона
+        // удаление шаблона
     case 'remove':
         if (!$forum_id = (int)$this->request['forum_id']) {
             $this->ajax_die('empty forum_id');
         }
         if (!forum_exists($forum_id)) {
-            $this->ajax_die("нет такого форума [id: $forum_id]");
+            $this->ajax_die("нет такого форума [id: {$forum_id}]");
         }
-        $sql = "DELETE FROM " . BB_TOPIC_TPL . " WHERE tpl_id = $tpl_id LIMIT 1";
+        $sql = 'DELETE FROM ' . BB_TOPIC_TPL . " WHERE tpl_id = {$tpl_id} LIMIT 1";
         if (!DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
-        $get_forum_tpl_id = DB()->fetch_row("SELECT forum_tpl_id FROM " . BB_FORUMS . " WHERE forum_id = " . $forum_id . " LIMIT 1");
+        $get_forum_tpl_id = DB()->fetch_row('SELECT forum_tpl_id FROM ' . BB_FORUMS . ' WHERE forum_id = ' . $forum_id . ' LIMIT 1');
         if ($tpl_id == $get_forum_tpl_id['forum_tpl_id']) {
-            DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = 0 WHERE forum_id = $forum_id LIMIT 1");
+            DB()->query('UPDATE ' . BB_FORUMS . " SET forum_tpl_id = 0 WHERE forum_id = {$forum_id} LIMIT 1");
         }
         $this->response['msg'] = "Шаблон {$tpl_data['tpl_name']} успешно удалён";
         break;
 
-    // ошибочный $mode
+        // ошибочный $mode
     default:
-        $this->ajax_die("invalid mode: $mode");
+        $this->ajax_die("invalid mode: {$mode}");
 }
 
 // возможный дубль названия шаблона

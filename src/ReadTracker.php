@@ -10,6 +10,8 @@
 
 namespace TorrentPier;
 
+use RuntimeException;
+
 /**
  * Tracks read status of topics and forums via cookies.
  * Replaces global $tracking_topics and $tracking_forums.
@@ -17,7 +19,6 @@ namespace TorrentPier;
 class ReadTracker
 {
     private static ?self $instance = null;
-
     private ?array $topics = null;
     private ?array $forums = null;
 
@@ -26,9 +27,18 @@ class ReadTracker
     public static function getInstance(): self
     {
         if (self::$instance === null) {
-            self::$instance = new self();
+            self::$instance = new self;
         }
+
         return self::$instance;
+    }
+
+    /**
+     * Reset singleton (for testing)
+     */
+    public static function reset(): void
+    {
+        self::$instance = null;
     }
 
     /**
@@ -39,6 +49,7 @@ class ReadTracker
         if ($this->topics === null) {
             $this->topics = $this->loadTracks('topic');
         }
+
         return $this->topics;
     }
 
@@ -50,6 +61,7 @@ class ReadTracker
         if ($this->forums === null) {
             $this->forums = $this->loadTracks('forum');
         }
+
         return $this->forums;
     }
 
@@ -75,7 +87,7 @@ class ReadTracker
         }
 
         if ($tracks !== null) {
-            if (!is_array($tracks)) {
+            if (!\is_array($tracks)) {
                 $tracks = [$tracks => $val];
             }
             foreach ($tracks as $key => $value) {
@@ -117,6 +129,18 @@ class ReadTracker
     }
 
     /**
+     * Get tracking data by type (uses cached methods for topic/forum)
+     */
+    public function getTracks(string $type): array
+    {
+        return match ($type) {
+            'topic' => $this->getTopics(),
+            'forum' => $this->getForums(),
+            default => $this->loadTracks($type),
+        };
+    }
+
+    /**
      * Handle overflow when too many tracks are stored
      */
     private function handleOverflow(array &$trackingAry): void
@@ -124,7 +148,7 @@ class ReadTracker
         $topics = $this->getTopics();
         $forums = $this->getForums();
 
-        $overflow = count($topics) + count($forums) - COOKIE_MAX_TRACKS;
+        $overflow = \count($topics) + \count($forums) - COOKIE_MAX_TRACKS;
 
         if ($overflow > 0) {
             arsort($trackingAry);
@@ -143,30 +167,11 @@ class ReadTracker
             'topic' => COOKIE_TOPIC,
             'forum' => COOKIE_FORUM,
             'pm' => COOKIE_PM,
-            default => throw new \RuntimeException("ReadTracker::loadTracks(): invalid type '$type'"),
+            default => throw new RuntimeException("ReadTracker::loadTracks(): invalid type '{$type}'"),
         };
 
         $tracks = !empty($_COOKIE[$cookieName]) ? json_decode($_COOKIE[$cookieName], true) : false;
+
         return $tracks ?: [];
-    }
-
-    /**
-     * Get tracking data by type (uses cached methods for topic/forum)
-     */
-    public function getTracks(string $type): array
-    {
-        return match ($type) {
-            'topic' => $this->getTopics(),
-            'forum' => $this->getForums(),
-            default => $this->loadTracks($type),
-        };
-    }
-
-    /**
-     * Reset singleton (for testing)
-     */
-    public static function reset(): void
-    {
-        self::$instance = null;
     }
 }

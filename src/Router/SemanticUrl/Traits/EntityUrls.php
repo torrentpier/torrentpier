@@ -32,6 +32,7 @@ trait EntityUrls
         if ($id === null || $id <= 0) {
             return '#';
         }
+
         return self::buildUrl('threads', $id, $title, $params);
     }
 
@@ -45,7 +46,7 @@ trait EntityUrls
      */
     public static function topicPost(int $topicId, string $title, int $postId): string
     {
-        return self::topic($topicId, $title, ['_fragment' => (string) $postId]);
+        return self::topic($topicId, $title, ['_fragment' => (string)$postId]);
     }
 
     /**
@@ -73,6 +74,7 @@ trait EntityUrls
         if ($id === null || $id <= 0) {
             return '#';
         }
+
         return self::buildUrl('forums', $id, $name, $params);
     }
 
@@ -89,6 +91,7 @@ trait EntityUrls
         if ($id === null || $id <= 0) {
             return '#';
         }
+
         return self::buildUrl('members', $id, $username, $params);
     }
 
@@ -100,6 +103,7 @@ trait EntityUrls
         if ($id <= 0) {
             return '#';
         }
+
         return rtrim(self::member($id, $username), '/') . '/email/';
     }
 
@@ -116,6 +120,7 @@ trait EntityUrls
         if ($id === null || $id <= 0) {
             return '#';
         }
+
         return self::buildUrl('groups', $id, $name, $params);
     }
 
@@ -128,6 +133,7 @@ trait EntityUrls
             return '#';
         }
         $url = rtrim(self::group($id, $name), '/') . '/edit/';
+
         return self::appendParams($url, $params);
     }
 
@@ -144,6 +150,7 @@ trait EntityUrls
         if ($id === null || $id <= 0) {
             return '/';
         }
+
         return self::buildUrl('categories', $id, $name, $params);
     }
 }

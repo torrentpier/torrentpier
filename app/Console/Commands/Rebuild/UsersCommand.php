@@ -23,7 +23,7 @@ use TorrentPier\Legacy\Admin\Common;
  */
 #[AsCommand(
     name: 'rebuild:users',
-    description: 'Rebuild user post counters'
+    description: 'Rebuild user post counters',
 )]
 class UsersCommand extends AbstractRebuildCommand
 {
@@ -36,25 +36,25 @@ class UsersCommand extends AbstractRebuildCommand
                 'user-id',
                 'u',
                 InputOption::VALUE_REQUIRED,
-                'Rebuild only specific user ID (comma-separated for multiple)'
+                'Rebuild only specific user ID (comma-separated for multiple)',
             )
             ->setHelp(
                 <<<'HELP'
-The <info>%command.name%</info> command recalculates user post counters.
+                    The <info>%command.name%</info> command recalculates user post counters.
 
-This rebuilds the <comment>user_posts</comment> field for each user by counting
-their actual posts in the database.
+                    This rebuilds the <comment>user_posts</comment> field for each user by counting
+                    their actual posts in the database.
 
-<comment>Rebuild all users:</comment>
-  <info>php %command.full_name%</info>
+                    <comment>Rebuild all users:</comment>
+                      <info>php %command.full_name%</info>
 
-<comment>Rebuild specific user(s):</comment>
-  <info>php %command.full_name% --user-id=1</info>
-  <info>php %command.full_name% --user-id=1,2,3</info>
+                    <comment>Rebuild specific user(s):</comment>
+                      <info>php %command.full_name% --user-id=1</info>
+                      <info>php %command.full_name% --user-id=1,2,3</info>
 
-<comment>Preview what would be done:</comment>
-  <info>php %command.full_name% --dry-run</info>
-HELP
+                    <comment>Preview what would be done:</comment>
+                      <info>php %command.full_name% --dry-run</info>
+                    HELP
             );
     }
 
@@ -72,14 +72,15 @@ HELP
         // Get users to the process
         if ($userId !== null) {
             $userIds = array_map('intval', explode(',', $userId));
-            $userIds = array_filter($userIds, fn($id) => $id > 0);
+            $userIds = array_filter($userIds, fn ($id) => $id > 0);
 
             if (empty($userIds)) {
                 $this->error('Invalid user ID(s) specified.');
+
                 return self::FAILURE;
             }
 
-            $userCount = count($userIds);
+            $userCount = \count($userIds);
             $mode = 'specific';
         } else {
             $userCount = $this->getTotalUsers();
@@ -89,6 +90,7 @@ HELP
 
         if ($userCount === 0) {
             $this->info('No users found to process.');
+
             return self::SUCCESS;
         }
 
@@ -122,6 +124,7 @@ HELP
             $this->comment('Would recalculate post counts for ' . number_format($userCount) . ' user(s)');
             $this->processedCount = $userCount;
             $this->displayStatistics('users');
+
             return self::SUCCESS;
         }
 
@@ -165,6 +168,7 @@ HELP
         $this->displayStatistics('users');
 
         $this->success('User post counters rebuilt successfully!');
+
         return self::SUCCESS;
     }
 

@@ -21,9 +21,6 @@ class IPHelper extends Ip
     /**
      * Anonymize an IP/IPv6.
      * Removes the last byte for v4 and the last 8 bytes for v6 IPs
-     *
-     * @param string $ip
-     * @return string
      */
     public static function anonymizeIP(string $ip): string
     {
@@ -34,7 +31,7 @@ class IPHelper extends Ip
         }
 
         $packedAddress = inet_pton($ip);
-        if (4 === strlen($packedAddress)) {
+        if (\strlen($packedAddress) === 4) {
             $mask = '255.255.255.0';
         } elseif ($ip === inet_ntop($packedAddress & inet_pton('::ffff:ffff:ffff'))) {
             $mask = '::ffff:ffff:ff00';
@@ -63,17 +60,18 @@ class IPHelper extends Ip
     {
         // If it's a valid string IP, return as is
         if (self::isValid($ip)) {
-            return (string) $ip;
+            return (string)$ip;
         }
 
         // If it's numeric (long format), convert to string IP
         if (is_numeric($ip)) {
-            $ipLong = (string) $ip;
+            $ipLong = (string)$ip;
             $isIPv6 = bccomp($ipLong, '4294967295') === 1;
+
             return self::long2ip($ipLong, $isIPv6);
         }
 
         // Fallback - return as is
-        return (string) $ip;
+        return (string)$ip;
     }
 }

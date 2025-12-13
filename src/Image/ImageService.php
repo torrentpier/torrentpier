@@ -27,8 +27,9 @@ class ImageService
     public static function getManager(): ImageManager
     {
         if (self::$manager === null) {
-            self::$manager = new ImageManager(new GdDriver());
+            self::$manager = new ImageManager(new GdDriver);
         }
+
         return self::$manager;
     }
 

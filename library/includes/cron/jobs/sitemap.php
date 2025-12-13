@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -11,5 +12,5 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$map = new TorrentPier\Sitemap();
+$map = new TorrentPier\Sitemap;
 $map->createSitemap();

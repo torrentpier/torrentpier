@@ -23,7 +23,7 @@ use TorrentPier\Console\Commands\Command;
  */
 #[AsCommand(
     name: 'release:create',
-    description: 'Create a new TorrentPier release (update version, changelog, git tag)'
+    description: 'Create a new TorrentPier release (update version, changelog, git tag)',
 )]
 class CreateCommand extends Command
 {
@@ -33,37 +33,37 @@ class CreateCommand extends Command
             ->addArgument(
                 'version',
                 InputArgument::OPTIONAL,
-                'Version number (e.g., v3.0.0 or 3.0.0)'
+                'Version number (e.g., v3.0.0 or 3.0.0)',
             )
             ->addOption(
                 'date',
                 'd',
                 InputOption::VALUE_OPTIONAL,
-                'Release date (DD-MM-YYYY), defaults to today'
+                'Release date (DD-MM-YYYY), defaults to today',
             )
             ->addOption(
                 'emoji',
                 'e',
                 InputOption::VALUE_OPTIONAL,
-                'Version emoji for commit message'
+                'Version emoji for commit message',
             )
             ->addOption(
                 'no-git',
                 null,
                 InputOption::VALUE_NONE,
-                'Skip git operations (commit, tag, push)'
+                'Skip git operations (commit, tag, push)',
             )
             ->addOption(
                 'no-changelog',
                 null,
                 InputOption::VALUE_NONE,
-                'Skip changelog generation'
+                'Skip changelog generation',
             )
             ->addOption(
                 'dry-run',
                 null,
                 InputOption::VALUE_NONE,
-                'Show what would be done without making changes'
+                'Show what would be done without making changes',
             );
     }
 
@@ -81,6 +81,7 @@ class CreateCommand extends Command
             $version = $this->ask('Version number (e.g., v3.0.0)');
             if (empty($version)) {
                 $this->error('Version is required.');
+
                 return self::FAILURE;
             }
         }
@@ -93,6 +94,7 @@ class CreateCommand extends Command
         // Validate semver format
         if (!preg_match('/^v\d+\.\d+\.\d+(-[\w.]+)?$/', $version)) {
             $this->error('Invalid version format. Use semantic versioning (e.g., v3.0.0, v3.0.0-beta.1)');
+
             return self::FAILURE;
         }
 
@@ -105,6 +107,7 @@ class CreateCommand extends Command
             $dateObj = DateTime::createFromFormat('d-m-Y', $date);
             if (!$dateObj || $dateObj->format('d-m-Y') !== $date) {
                 $this->error('Invalid date format. Use DD-MM-YYYY');
+
                 return self::FAILURE;
             }
         }
@@ -115,7 +118,7 @@ class CreateCommand extends Command
         // Show summary
         $this->section('Release Configuration');
         $this->definitionList(
-            ['Version' => "<info>$version</info>"],
+            ['Version' => "<info>{$version}</info>"],
             ['Release Date' => $date],
             ['Emoji' => $emoji ?: '<comment>(none)</comment>'],
             ['Generate Changelog' => $noChangelog ? '<comment>No</comment>' : '<info>Yes</info>'],
@@ -124,12 +127,14 @@ class CreateCommand extends Command
 
         if ($dryRun) {
             $this->warning('Dry run mode - no changes will be made.');
+
             return self::SUCCESS;
         }
 
         // Confirm
         if (!$this->confirm('Create this release?', true)) {
             $this->comment('Release cancelled.');
+
             return self::SUCCESS;
         }
 
@@ -152,39 +157,44 @@ class CreateCommand extends Command
             $this->section('Git Operations');
 
             // Commit
-            $commitMsg = "release: $version" . ($emoji ? " $emoji" : '');
+            $commitMsg = "release: {$version}" . ($emoji ? " {$emoji}" : '');
             if ($this->runGitCommand('git add -A') !== 0) {
                 $this->error('Failed to stage files');
+
                 return self::FAILURE;
             }
             if ($this->runGitCommand('git commit -m ' . escapeshellarg($commitMsg)) !== 0) {
                 $this->error('Failed to create commit');
+
                 return self::FAILURE;
             }
             $this->line('  <info>✓</info> Created commit');
 
             // Tag
-            if ($this->runGitCommand("git tag -a \"$version\" -m \"Release $version\"") !== 0) {
+            if ($this->runGitCommand("git tag -a \"{$version}\" -m \"Release {$version}\"") !== 0) {
                 $this->error('Failed to create tag');
+
                 return self::FAILURE;
             }
-            $this->line("  <info>✓</info> Created tag $version");
+            $this->line("  <info>✓</info> Created tag {$version}");
 
             // Push
             $this->line('  Pushing to origin...');
             if ($this->runGitCommand('git push origin master') !== 0) {
                 $this->error('Failed to push to origin');
+
                 return self::FAILURE;
             }
-            if ($this->runGitCommand("git push origin $version") !== 0) {
+            if ($this->runGitCommand("git push origin {$version}") !== 0) {
                 $this->error('Failed to push tag');
+
                 return self::FAILURE;
             }
             $this->line('  <info>✓</info> Pushed to origin');
         }
 
         $this->line();
-        $this->success("Release $version created successfully!");
+        $this->success("Release {$version} created successfully!");
 
         if (!$noGit) {
             $this->line();
@@ -208,11 +218,13 @@ class CreateCommand extends Command
 
         if (!is_file($configFile)) {
             $this->error('Config file not found: config/config.php');
+
             return false;
         }
 
         if (!is_writable($configFile)) {
             $this->error('Config file is not writable');
+
             return false;
         }
 
@@ -220,20 +232,21 @@ class CreateCommand extends Command
 
         // Update version
         $content = preg_replace(
-            "/(\\\$bb_cfg\['tp_version']\s*=\s*')[^']*';/",
-            "\${1}$version';",
-            $content
+            "/(\\\$bb_cfg\\['tp_version']\\s*=\\s*')[^']*';/",
+            "\${1}{$version}';",
+            $content,
         );
 
         // Update release date
         $content = preg_replace(
-            "/(\\\$bb_cfg\['tp_release_date']\s*=\s*')[^']*';/",
-            "\${1}$date';",
-            $content
+            "/(\\\$bb_cfg\\['tp_release_date']\\s*=\\s*')[^']*';/",
+            "\${1}{$date}';",
+            $content,
         );
 
         if (file_put_contents($configFile, $content) === false) {
             $this->error('Failed to write config file');
+
             return false;
         }
 
@@ -249,14 +262,15 @@ class CreateCommand extends Command
 
         if (!file_exists($cliffConfig)) {
             $this->warning('cliff.toml not found, skipping changelog generation');
+
             return;
         }
 
-        $command = sprintf(
+        $command = \sprintf(
             'npx git-cliff --config %s --tag %s > %s 2>/dev/null',
             escapeshellarg($cliffConfig),
             escapeshellarg($version),
-            escapeshellarg(BB_ROOT . 'CHANGELOG.md')
+            escapeshellarg(BB_ROOT . 'CHANGELOG.md'),
         );
 
         @exec($command);
@@ -268,14 +282,14 @@ class CreateCommand extends Command
     private function runGitCommand(string $command): int
     {
         if ($this->isVerbose()) {
-            $this->line("  <comment>\$ $command</comment>");
+            $this->line("  <comment>\$ {$command}</comment>");
         }
 
         exec($command . ' 2>&1', $gitOutput, $exitCode);
 
         if ($this->isVeryVerbose() && !empty($gitOutput)) {
             foreach ($gitOutput as $line) {
-                $this->line("    $line");
+                $this->line("    {$line}");
             }
         }
 

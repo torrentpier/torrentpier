@@ -17,21 +17,7 @@ namespace TorrentPier;
 class Sessions
 {
     /**
-     * Check if session cache ignored
-     *
-     * @return bool
-     */
-    private static function ignore_cached_userdata(): bool
-    {
-        return defined('IN_PM');
-    }
-
-    /**
      * Get userdata from cache
-     *
-     * @param string $id
-     *
-     * @return bool|array
      */
     public static function cache_get_userdata(string $id): bool|array
     {
@@ -44,11 +30,6 @@ class Sessions
 
     /**
      * Set userdata to cache
-     *
-     * @param array|null $userdata
-     * @param bool $force
-     *
-     * @return bool
      */
     public static function cache_set_userdata(?array $userdata, bool $force = false): bool
     {
@@ -57,15 +38,12 @@ class Sessions
         }
 
         $id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
+
         return CACHE('session_cache')->set($id, $userdata, config()->get('session_update_intrv'));
     }
 
     /**
      * Delete userdata from cache
-     *
-     * @param array $userdata
-     *
-     * @return bool
      */
     public static function cache_rm_userdata(array $userdata): bool
     {
@@ -74,19 +52,18 @@ class Sessions
         }
 
         $id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
+
         return CACHE('session_cache')->rm($id);
     }
 
     /**
      * Delete user sessions from cache
-     *
-     * @param int|string $user_id
      */
     public static function cache_rm_user_sessions(int|string $user_id): void
     {
-        $user_id = get_id_csv(explode(',', (string) $user_id));
+        $user_id = get_id_csv(explode(',', (string)$user_id));
 
-        $rowset = DB()->fetch_rowset("SELECT session_id FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
+        $rowset = DB()->fetch_rowset('SELECT session_id FROM ' . BB_SESSIONS . " WHERE session_user_id IN({$user_id})");
 
         foreach ($rowset as $row) {
             CACHE('session_cache')->rm($row['session_id']);
@@ -95,10 +72,6 @@ class Sessions
 
     /**
      * Update userdata in cache
-     *
-     * @param array|null $userdata
-     *
-     * @return bool
      */
     public static function cache_update_userdata(?array $userdata): bool
     {
@@ -107,12 +80,6 @@ class Sessions
 
     /**
      * Update userdata in database
-     *
-     * @param array $userdata
-     * @param array $sql_ary
-     * @param bool $data_already_escaped
-     *
-     * @return bool
      */
     public static function db_update_userdata(array $userdata, array $sql_ary, bool $data_already_escaped = true): bool
     {
@@ -121,7 +88,7 @@ class Sessions
         }
 
         $sql_args = DB()->build_array('UPDATE', $sql_ary, $data_already_escaped);
-        DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$userdata['user_id']}");
+        DB()->query('UPDATE ' . BB_USERS . " SET {$sql_args} WHERE user_id = {$userdata['user_id']}");
 
         if (DB()->affected_rows()) {
             self::cache_rm_userdata($userdata);
@@ -132,14 +99,20 @@ class Sessions
 
     /**
      * Delete user sessions from cache and database
-     *
-     * @param int|string $user_id
      */
     public static function delete_user_sessions(int|string $user_id): void
     {
         self::cache_rm_user_sessions($user_id);
 
-        $user_id = get_id_csv(explode(',', (string) $user_id));
-        DB()->query("DELETE FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
+        $user_id = get_id_csv(explode(',', (string)$user_id));
+        DB()->query('DELETE FROM ' . BB_SESSIONS . " WHERE session_user_id IN({$user_id})");
+    }
+
+    /**
+     * Check if session cache ignored
+     */
+    private static function ignore_cached_userdata(): bool
+    {
+        return \defined('IN_PM');
     }
 }

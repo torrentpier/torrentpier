@@ -56,14 +56,11 @@ class DownloadCounter
         // Check if limit exceeded
         if ($dailyCount >= $limit) {
             // Allow re-download of previously downloaded torrents
-            if ($this->hasDownloaded($topicId, $userId)) {
-                return true;
-            }
-            return false;
+            return (bool)($this->hasDownloaded($topicId, $userId));
         }
 
         // Record download (INSERT IGNORE for unique constraint)
-        $sql = "INSERT IGNORE INTO " . BB_TORRENT_DL . " (topic_id, user_id) VALUES ($topicId, $userId)";
+        $sql = 'INSERT IGNORE INTO ' . BB_TORRENT_DL . " (topic_id, user_id) VALUES ({$topicId}, {$userId})";
         DB()->query($sql);
 
         // If a new record was inserted, increment daily counter
@@ -85,7 +82,8 @@ class DownloadCounter
         $row = DB()->table(BB_USER_DL_DAY)
             ->where('user_id', $userId)
             ->fetch();
-        return (int) ($row?->cnt ?? 0);
+
+        return (int)($row?->cnt ?? 0);
     }
 
     /**
@@ -97,7 +95,7 @@ class DownloadCounter
      */
     public function hasDownloaded(int $topicId, int $userId): bool
     {
-        return (bool) DB()->table(BB_TORRENT_DL)
+        return (bool)DB()->table(BB_TORRENT_DL)
             ->where('topic_id', $topicId)
             ->where('user_id', $userId)
             ->fetch();
@@ -110,7 +108,7 @@ class DownloadCounter
      */
     private function incrementDailyCount(int $userId): void
     {
-        $sql = "INSERT INTO " . BB_USER_DL_DAY . " (user_id, cnt) VALUES ($userId, 1)
+        $sql = 'INSERT INTO ' . BB_USER_DL_DAY . " (user_id, cnt) VALUES ({$userId}, 1)
                 ON DUPLICATE KEY UPDATE cnt = cnt + 1";
         DB()->query($sql);
     }

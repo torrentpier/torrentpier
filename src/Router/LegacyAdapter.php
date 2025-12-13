@@ -37,7 +37,7 @@ class LegacyAdapter
     public function __construct(
         private readonly string $controllerPath,
         private ?string         $scriptName = null,
-        private readonly array  $options = []
+        private readonly array  $options = [],
     ) {
         $this->scriptName ??= pathinfo($controllerPath, PATHINFO_FILENAME);
     }
@@ -71,21 +71,22 @@ class LegacyAdapter
         // This is necessary because legacy files use $GLOBALS and expect global scope
         if ($selfBootstrap) {
             $GLOBALS['__legacy_controller_path'] = $this->controllerPath;
-            $response = new Response();
+            $response = new Response;
+
             return $response->withHeader('X-Legacy-Execute', 'true');
         }
 
         // Define BB_SCRIPT for migrated controllers
-        if (!defined('BB_SCRIPT')) {
-            define('BB_SCRIPT', $this->scriptName);
+        if (!\defined('BB_SCRIPT')) {
+            \define('BB_SCRIPT', $this->scriptName);
         }
 
         // Start a session for migrated controllers (simple controllers like terms.php)
         // Controllers that need custom session options can set 'manage_session' => true
         $manageSession = $this->options['manage_session'] ?? false;
-        if (!$manageSession && !defined('SESSION_STARTED')) {
+        if (!$manageSession && !\defined('SESSION_STARTED')) {
             user()->session_start();
-            define('SESSION_STARTED', true);
+            \define('SESSION_STARTED', true);
         }
 
         // Capture output from the controller
@@ -106,6 +107,7 @@ class LegacyAdapter
             while (ob_get_level() > $existingLevel) {
                 ob_end_clean();
             }
+
             // Return the redirect response
             return $e->toResponse();
         } catch (Throwable $e) {
@@ -113,11 +115,12 @@ class LegacyAdapter
             while (ob_get_level() > $existingLevel) {
                 ob_end_clean();
             }
+
             throw $e;
         }
 
         // Build PSR-7 response
-        $response = new Response();
+        $response = new Response;
 
         // Transfer any headers that were set
         if (!headers_sent()) {

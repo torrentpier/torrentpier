@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -13,12 +14,11 @@ if (!defined('BB_ROOT')) {
 
 // Obtain and encode user IP
 $client_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
-$user_ip = \TorrentPier\Helpers\IPHelper::ip2long($client_ip);
+$user_ip = TorrentPier\Helpers\IPHelper::ip2long($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
 
 /**
- * @param $contents
  * @return string
  */
 function send_page($contents)
@@ -27,7 +27,6 @@ function send_page($contents)
 }
 
 /**
- * @param $contents
  * @return string
  */
 function compress_output($contents)
@@ -66,12 +65,6 @@ define('COOKIE_MAX_TRACKS', 90);
 
 /**
  * Set cookie
- *
- * @param string $name
- * @param mixed $val
- * @param int|null $lifetime
- * @param bool $httponly
- * @return bool
  */
 function bb_setcookie(string $name, mixed $val, ?int $lifetime = null, bool $httponly = false): bool
 {
@@ -155,7 +148,6 @@ define('POLL_FINISHED', 2);
 
 // Group avatars
 define('GROUP_AVATAR_MASK', 999000);
-
 
 // Table names
 define('BUF_TOPIC_VIEW', 'buf_topic_view');
@@ -291,25 +283,22 @@ function bb_exit($output = '')
 }
 
 /**
- * @param $var
  * @param string $title
  * @param bool $print
  * @return string
  */
 function prn_r($var, $title = '', $print = true)
 {
-    $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
+    $r = '<pre>' . ($title ? "<b>{$title}</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
     if ($print) {
         echo $r;
     }
+
     return $r;
 }
 
 /**
  * Converts "<br/>" / "<br>" tags to "\n" line breaks
- *
- * @param string $string
- * @return string
  */
 function br2nl(string $string): string
 {
@@ -318,12 +307,6 @@ function br2nl(string $string): string
 
 /**
  * Adds commas between every group of thousands
- *
- * @param float|null $num
- * @param int $decimals
- * @param string|null $decimal_separator
- * @param string|null $thousands_separator
- * @return string
  */
 function commify(?float $num, int $decimals = 0, ?string $decimal_separator = '.', ?string $thousands_separator = ','): string
 {
@@ -332,11 +315,6 @@ function commify(?float $num, int $decimals = 0, ?string $decimal_separator = '.
 
 /**
  * Convert HTML entities to their corresponding characters
- *
- * @param string $string
- * @param int $flags
- * @param string $encoding
- * @return string
  */
 function html_ent_decode(string $string, int $flags = ENT_QUOTES, string $encoding = DEFAULT_CHARSET): string
 {
@@ -345,9 +323,6 @@ function html_ent_decode(string $string, int $flags = ENT_QUOTES, string $encodi
 
 /**
  * Makes URL from path
- *
- * @param string $path
- * @return string
  */
 function make_url(string $path = ''): string
 {
@@ -411,12 +386,10 @@ function image_url(string $path): string
  *   url()->register()
  *   url()->settings()
  *   url()->passwordRecovery()
- *
- * @return \TorrentPier\Router\SemanticUrl\UrlBuilder
  */
-function url(): \TorrentPier\Router\SemanticUrl\UrlBuilder
+function url(): TorrentPier\Router\SemanticUrl\UrlBuilder
 {
-    return \TorrentPier\Router\SemanticUrl\UrlBuilder::instance();
+    return TorrentPier\Router\SemanticUrl\UrlBuilder::instance();
 }
 
 /**
@@ -445,6 +418,6 @@ if ((config()->get('board_disable') || is_file(BB_DISABLED)) && !defined('IN_ADM
         // trigger lock
         TorrentPier\Helpers\CronHelper::releaseDeadlock();
         send_no_cache_headers();
-        bb_die('BOARD_DISABLE_CRON', (\TorrentPier\Helpers\CronHelper::isEnabled() ? 503 : null));
+        bb_die('BOARD_DISABLE_CRON', (TorrentPier\Helpers\CronHelper::isEnabled() ? 503 : null));
     }
 }

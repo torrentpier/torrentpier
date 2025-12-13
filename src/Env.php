@@ -24,8 +24,6 @@ class Env
 {
     /**
      * Indicates if the putenv adapter is enabled.
-     *
-     * @var bool
      */
     protected static bool $putenv = true;
 
@@ -38,8 +36,6 @@ class Env
 
     /**
      * Enable the putenv adapter.
-     *
-     * @return void
      */
     public static function enablePutenv(): void
     {
@@ -49,8 +45,6 @@ class Env
 
     /**
      * Disable the putenv adapter.
-     *
-     * @return void
      */
     public static function disablePutenv(): void
     {
@@ -60,8 +54,6 @@ class Env
 
     /**
      * Get the environment repository instance.
-     *
-     * @return RepositoryInterface|null
      */
     public static function getRepository(): ?RepositoryInterface
     {
@@ -80,10 +72,6 @@ class Env
 
     /**
      * Gets the value of an environment variable.
-     *
-     * @param string $key
-     * @param mixed|null $default
-     * @return mixed
      */
     public static function get(string $key, mixed $default = null): mixed
     {
@@ -110,6 +98,6 @@ class Env
 
                 return $value;
             })
-            ->getOrCall(fn() => $default instanceof Closure ? $default() : $default);
+            ->getOrCall(fn () => $default instanceof Closure ? $default() : $default);
     }
 }

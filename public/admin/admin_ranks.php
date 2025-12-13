@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -9,6 +10,7 @@
 
 if (!empty($setmodules)) {
     $module['USERS']['RANKS'] = basename(__FILE__);
+
     return;
 }
 
@@ -47,7 +49,7 @@ if ($mode != '') {
                 bb_die(__('MUST_SELECT_RANK'));
             }
 
-            $sql = 'SELECT * FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
+            $sql = 'SELECT * FROM ' . BB_RANKS . " WHERE rank_id = {$rank_id}";
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not obtain ranks data #1');
             }
@@ -86,7 +88,7 @@ if ($mode != '') {
             'IMAGE_DISPLAY' => !empty($rank_info['rank_image']) ? '<img src="/' . $rank_info['rank_image'] . '" />' : '',
 
             'S_RANK_ACTION' => 'admin_ranks.php',
-            'S_HIDDEN_FIELDS' => $s_hidden_fields
+            'S_HIDDEN_FIELDS' => $s_hidden_fields,
         ]);
 
         // Pass the list of images to the template
@@ -97,7 +99,7 @@ if ($mode != '') {
             template()->assign_block_vars('rank_images', [
                 'IMAGE_FILE' => $img,
                 'IMAGE_PATH' => $img_path,
-                'SELECTED' => $selected
+                'SELECTED' => $selected,
             ]);
         }
     } elseif ($mode == 'save') {
@@ -128,7 +130,7 @@ if ($mode != '') {
 				SET rank_title = '" . DB()->escape($rank_title) . "',
 					rank_image = '" . DB()->escape($rank_image) . "',
 					rank_style = '" . DB()->escape($rank_style) . "'
-				WHERE rank_id = $rank_id";
+				WHERE rank_id = {$rank_id}";
 
             $message = __('RANK_UPDATED');
         } else {
@@ -157,13 +159,13 @@ if ($mode != '') {
 
         if ($confirmed) {
             if ($rank_id) {
-                $sql = 'DELETE FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
+                $sql = 'DELETE FROM ' . BB_RANKS . " WHERE rank_id = {$rank_id}";
 
                 if (!$result = DB()->sql_query($sql)) {
                     bb_die('Could not delete rank data');
                 }
 
-                $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
+                $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = {$rank_id}";
                 if (!$result = DB()->sql_query($sql)) {
                     bb_die(__('NO_UPDATE_RANKS'));
                 }
@@ -199,7 +201,7 @@ if ($mode != '') {
 
     template()->assign_vars([
         'TPL_RANKS_LIST' => true,
-        'S_RANKS_ACTION' => 'admin_ranks.php'
+        'S_RANKS_ACTION' => 'admin_ranks.php',
     ]);
 
     for ($i = 0; $i < $rank_count; $i++) {
@@ -214,8 +216,8 @@ if ($mode != '') {
             'STYLE' => $rank_rows[$i]['rank_style'],
             'IMAGE_DISPLAY' => $rank_rows[$i]['rank_image'] ? '<img src="/' . $rank_rows[$i]['rank_image'] . '" />' : '',
 
-            'U_RANK_EDIT' => "admin_ranks.php?mode=edit&amp;id=$rank_id",
-            'U_RANK_DELETE' => "admin_ranks.php?mode=delete&amp;id=$rank_id"
+            'U_RANK_EDIT' => "admin_ranks.php?mode=edit&amp;id={$rank_id}",
+            'U_RANK_DELETE' => "admin_ranks.php?mode=delete&amp;id={$rank_id}",
         ]);
     }
 }

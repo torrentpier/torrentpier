@@ -24,7 +24,7 @@ use TorrentPier\Legacy\Admin\Common;
  */
 #[AsCommand(
     name: 'rebuild:topics',
-    description: 'Rebuild topic reply counters and post references'
+    description: 'Rebuild topic reply counters and post references',
 )]
 class TopicsCommand extends AbstractRebuildCommand
 {
@@ -37,30 +37,30 @@ class TopicsCommand extends AbstractRebuildCommand
                 'topic-id',
                 't',
                 InputOption::VALUE_REQUIRED,
-                'Rebuild only specific topic ID (comma-separated for multiple)'
+                'Rebuild only specific topic ID (comma-separated for multiple)',
             )
             ->setHelp(
                 <<<'HELP'
-The <info>%command.name%</info> command recalculates topic counters.
+                    The <info>%command.name%</info> command recalculates topic counters.
 
-This rebuilds the following fields for each topic:
-  - topic_replies (reply count)
-  - topic_first_post_id (first post reference)
-  - topic_last_post_id (last post reference)
-  - topic_last_post_time (last post timestamp)
+                    This rebuilds the following fields for each topic:
+                      - topic_replies (reply count)
+                      - topic_first_post_id (first post reference)
+                      - topic_last_post_id (last post reference)
+                      - topic_last_post_time (last post timestamp)
 
-It also removes orphan topics (topics with no posts).
+                    It also removes orphan topics (topics with no posts).
 
-<comment>Rebuild all topics:</comment>
-  <info>php %command.full_name%</info>
+                    <comment>Rebuild all topics:</comment>
+                      <info>php %command.full_name%</info>
 
-<comment>Rebuild specific topic(s):</comment>
-  <info>php %command.full_name% --topic-id=123</info>
-  <info>php %command.full_name% --topic-id=100,200,300</info>
+                    <comment>Rebuild specific topic(s):</comment>
+                      <info>php %command.full_name% --topic-id=123</info>
+                      <info>php %command.full_name% --topic-id=100,200,300</info>
 
-<comment>Preview what would be done:</comment>
-  <info>php %command.full_name% --dry-run</info>
-HELP
+                    <comment>Preview what would be done:</comment>
+                      <info>php %command.full_name% --dry-run</info>
+                    HELP
             );
     }
 
@@ -78,14 +78,15 @@ HELP
         // Get topics to process
         if ($topicId !== null) {
             $topicIds = array_map('intval', explode(',', $topicId));
-            $topicIds = array_filter($topicIds, fn($id) => $id > 0);
+            $topicIds = array_filter($topicIds, fn ($id) => $id > 0);
 
             if (empty($topicIds)) {
                 $this->error('Invalid topic ID(s) specified.');
+
                 return self::FAILURE;
             }
 
-            $topicCount = count($topicIds);
+            $topicCount = \count($topicIds);
             $mode = 'specific';
         } else {
             $topicCount = $this->getTotalTopics();
@@ -95,6 +96,7 @@ HELP
 
         if ($topicCount === 0) {
             $this->info('No topics found to process.');
+
             return self::SUCCESS;
         }
 
@@ -130,11 +132,12 @@ HELP
             // Check for orphan topics
             $orphanCount = $this->getOrphanTopicCount();
             if ($orphanCount > 0) {
-                $this->comment("Would remove $orphanCount orphan topic(s) (topics with no posts)");
+                $this->comment("Would remove {$orphanCount} orphan topic(s) (topics with no posts)");
             }
 
             $this->processedCount = $topicCount;
             $this->displayStatistics('topics');
+
             return self::SUCCESS;
         }
 
@@ -163,6 +166,7 @@ HELP
         $this->displayStatistics('topics');
 
         $this->success('Topic counters rebuilt successfully!');
+
         return self::SUCCESS;
     }
 
@@ -182,14 +186,15 @@ HELP
      */
     private function getOrphanTopicCount(): int
     {
-        $row = DB()->fetch_row("
+        $row = DB()->fetch_row('
             SELECT COUNT(*) as cnt
-            FROM " . BB_TOPICS . " t
-            LEFT JOIN " . BB_POSTS . " p ON p.topic_id = t.topic_id
-            WHERE t.topic_status != " . TOPIC_MOVED . "
+            FROM ' . BB_TOPICS . ' t
+            LEFT JOIN ' . BB_POSTS . ' p ON p.topic_id = t.topic_id
+            WHERE t.topic_status != ' . TOPIC_MOVED . '
                 AND p.post_id IS NULL
-        ");
-        return (int) ($row['cnt'] ?? 0);
+        ');
+
+        return (int)($row['cnt'] ?? 0);
     }
 
     /**

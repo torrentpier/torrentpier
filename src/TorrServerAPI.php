@@ -23,15 +23,11 @@ class TorrServerAPI
 {
     /**
      * URL to TorrServer instance
-     *
-     * @var string
      */
     private string $url;
 
     /**
      * HTTP client (simple, without retries)
-     *
-     * @var Client
      */
     private Client $client;
 
@@ -47,7 +43,6 @@ class TorrServerAPI
         'ffprobe' => 'ffp',
     ];
 
-
     /**
      * TorrServer constructor
      */
@@ -62,8 +57,6 @@ class TorrServerAPI
 
     /**
      * Check if TorrServer is available (cached for 30 sec)
-     *
-     * @return bool
      */
     public function isAvailable(): bool
     {
@@ -75,7 +68,7 @@ class TorrServerAPI
 
         $cacheKey = 'torrserver_available';
         if (($cached = CACHE('bb_cache')->get($cacheKey)) !== false) {
-            return $checked = (bool) $cached;
+            return $checked = (bool)$cached;
         }
 
         try {
@@ -88,16 +81,13 @@ class TorrServerAPI
             $checked = false;
         }
 
-        CACHE('bb_cache')->set($cacheKey, (int) $checked, 30);
+        CACHE('bb_cache')->set($cacheKey, (int)$checked, 30);
+
         return $checked;
     }
 
     /**
      * Upload torrent-file to TorrServer instance
-     *
-     * @param string $path
-     * @param string $mimetype
-     * @return bool
      */
     public function uploadTorrent(string $path, string $mimetype): bool
     {
@@ -129,22 +119,19 @@ class TorrServerAPI
 
             $isSuccess = $response->getStatusCode() === 200;
             if (!$isSuccess) {
-                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$response->getStatusCode()} | Content: {$response->getBody()->getContents()}" . LOG_LF);
+                bb_log("TorrServer (ERROR) [{$this->url}]: Response code: {$response->getStatusCode()} | Content: {$response->getBody()->getContents()}" . LOG_LF);
             }
 
             return $isSuccess;
         } catch (GuzzleException $e) {
-            bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
+            bb_log("TorrServer (EXCEPTION) [{$this->url}]: {$e->getMessage()}" . LOG_LF);
+
             return false;
         }
     }
 
     /**
      * Saves M3U file (local)
-     *
-     * @param int $topic_id
-     * @param string $hash
-     * @return bool
      */
     public function saveM3U(int $topic_id, string $hash): bool
     {
@@ -154,7 +141,8 @@ class TorrServerAPI
         for ($i = 0, $max_try = 2; $i <= $max_try; $i++) {
             if ($this->getStream($hash)) {
                 break;
-            } elseif ($i == $max_try) {
+            }
+            if ($i == $max_try) {
                 return false;
             }
         }
@@ -190,20 +178,17 @@ class TorrServerAPI
                     file_put_contents($m3uFile, $responseBody);
                 }
             } else {
-                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$response->getStatusCode()} | Content: {$responseBody}" . LOG_LF);
+                bb_log("TorrServer (ERROR) [{$this->url}]: Response code: {$response->getStatusCode()} | Content: {$responseBody}" . LOG_LF);
             }
         } catch (GuzzleException $e) {
-            bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
+            bb_log("TorrServer (EXCEPTION) [{$this->url}]: {$e->getMessage()}" . LOG_LF);
         }
 
-        return is_file($m3uFile) && (int) filesize($m3uFile) > 0;
+        return is_file($m3uFile) && (int)filesize($m3uFile) > 0;
     }
 
     /**
      * Returns full path to M3U file
-     *
-     * @param int $topic_id
-     * @return string|false
      */
     public function getM3UPath(int $topic_id): string|false
     {
@@ -216,23 +201,19 @@ class TorrServerAPI
 
     /**
      * Removes M3U file (local)
-     *
-     * @param int $topic_id
-     * @return bool
      */
     public function removeM3U(int $topic_id): bool
     {
         // Remove ffprobe data from cache
-        CACHE('tr_cache')->rm("ffprobe_m3u_$topic_id");
+        CACHE('tr_cache')->rm("ffprobe_m3u_{$topic_id}");
 
         // Unlink .m3u file
         if (Attachment::m3uExists($topic_id)) {
             $m3uFile = Attachment::getPath($topic_id, M3U_EXT_ID);
             if (unlink($m3uFile)) {
                 return true;
-            } else {
-                bb_log("TorrServer (ERROR) [removeM3U()]: Can't unlink file '$m3uFile'" . LOG_LF);
             }
+            bb_log("TorrServer (ERROR) [removeM3U()]: Can't unlink file '{$m3uFile}'" . LOG_LF);
         }
 
         return false;
@@ -240,16 +221,11 @@ class TorrServerAPI
 
     /**
      * Returns info from TorrServer in-build ffprobe
-     *
-     * @param string $hash
-     * @param int $index
-     * @param int $topic_id
-     * @return mixed
      */
     public function getFfpInfo(string $hash, int $index, int $topic_id): mixed
     {
-        if (!$response = CACHE('tr_cache')->get("ffprobe_m3u_$topic_id")) {
-            $response = new stdClass();
+        if (!$response = CACHE('tr_cache')->get("ffprobe_m3u_{$topic_id}")) {
+            $response = new stdClass;
         }
 
         if (!isset($response->{$index})) {
@@ -257,7 +233,8 @@ class TorrServerAPI
             for ($i = 0, $max_try = 2; $i <= $max_try; $i++) {
                 if ($this->getStream($hash)) {
                     break;
-                } elseif ($i == $max_try) {
+                }
+                if ($i == $max_try) {
                     return false;
                 }
             }
@@ -272,12 +249,12 @@ class TorrServerAPI
 
                 $response->{$index} = $httpResponse->getBody()->getContents();
                 if ($httpResponse->getStatusCode() === 200 && !empty($response->{$index})) {
-                    CACHE('tr_cache')->set("ffprobe_m3u_$topic_id", $response, 3600);
+                    CACHE('tr_cache')->set("ffprobe_m3u_{$topic_id}", $response, 3600);
                 } else {
-                    bb_log("TorrServer (ERROR) [$this->url]: Response code: {$httpResponse->getStatusCode()}" . LOG_LF);
+                    bb_log("TorrServer (ERROR) [{$this->url}]: Response code: {$httpResponse->getStatusCode()}" . LOG_LF);
                 }
             } catch (GuzzleException $e) {
-                bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
+                bb_log("TorrServer (EXCEPTION) [{$this->url}]: {$e->getMessage()}" . LOG_LF);
             }
         }
 
@@ -286,9 +263,6 @@ class TorrServerAPI
 
     /**
      * Upstream
-     *
-     * @param string $hash
-     * @return bool
      */
     private function getStream(string $hash): bool
     {
@@ -303,12 +277,13 @@ class TorrServerAPI
 
             $isSuccess = $response->getStatusCode() === 200;
             if (!$isSuccess) {
-                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$response->getStatusCode()} | Content: {$response->getBody()->getContents()}" . LOG_LF);
+                bb_log("TorrServer (ERROR) [{$this->url}]: Response code: {$response->getStatusCode()} | Content: {$response->getBody()->getContents()}" . LOG_LF);
             }
 
             return $isSuccess;
         } catch (GuzzleException $e) {
-            bb_log("TorrServer (EXCEPTION) [$this->url]: {$e->getMessage()}" . LOG_LF);
+            bb_log("TorrServer (EXCEPTION) [{$this->url}]: {$e->getMessage()}" . LOG_LF);
+
             return false;
         }
     }

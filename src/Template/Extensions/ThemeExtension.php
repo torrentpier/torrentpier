@@ -46,7 +46,7 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
             $this->getConfigVars(),
             $this->getPostButtonsVars(),
             $this->getPostIconsVars($images),
-            $this->getPmIconsVars($images)
+            $this->getPmIconsVars($images),
         );
     }
 
@@ -70,12 +70,13 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
             return '';
         }
         $classAttr = $class ? ' class="' . htmlspecialchars($class) . '"' : '';
+
         return '<img src="' . htmlspecialchars($src) . '"' . $classAttr . ' alt="' . htmlspecialchars($alt) . '" />';
     }
 
     private function getConfigVars(): array
     {
-        if (!function_exists('config')) {
+        if (!\function_exists('config')) {
             return [];
         }
 
@@ -93,7 +94,7 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
 
     private function getPostButtonsVars(): array
     {
-        if (!defined('POSTING_URL')) {
+        if (!\defined('POSTING_URL')) {
             return [];
         }
 

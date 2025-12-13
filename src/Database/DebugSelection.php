@@ -33,7 +33,7 @@ class DebugSelection
      */
     public function __call(string $name, array $arguments)
     {
-        $result = $this->selection->$name(...$arguments);
+        $result = $this->selection->{$name}(...$arguments);
 
         // If result is another Selection, wrap it too
         if ($result instanceof Selection) {
@@ -48,7 +48,7 @@ class DebugSelection
      */
     public function __get(string $name)
     {
-        return $this->selection->$name;
+        return $this->selection->{$name};
     }
 
     /**
@@ -56,7 +56,7 @@ class DebugSelection
      */
     public function __set(string $name, $value): void
     {
-        $this->selection->$name = $value;
+        $this->selection->{$name} = $value;
     }
 
     /**
@@ -64,7 +64,106 @@ class DebugSelection
      */
     public function __isset(string $name): bool
     {
-        return isset($this->selection->$name);
+        return isset($this->selection->{$name});
+    }
+
+    // Delegate common Selection methods with logging
+    public function where(...$args): self
+    {
+        return new self($this->selection->where(...$args), $this->db);
+    }
+
+    public function order(...$args): self
+    {
+        return new self($this->selection->order(...$args), $this->db);
+    }
+
+    public function select(...$args): self
+    {
+        return new self($this->selection->select(...$args), $this->db);
+    }
+
+    public function limit(...$args): self
+    {
+        return new self($this->selection->limit(...$args), $this->db);
+    }
+
+    public function fetch()
+    {
+        $this->logQuery('fetch', []);
+        $result = $this->selection->fetch();
+        $this->completeQueryLogging();
+
+        return $result;
+    }
+
+    public function fetchAll(): array
+    {
+        $this->logQuery('fetchAll', []);
+        $result = $this->selection->fetchAll();
+        $this->completeQueryLogging();
+
+        return $result;
+    }
+
+    public function insert($data)
+    {
+        $this->logQuery('insert', [$data]);
+        $result = $this->selection->insert($data);
+        $this->completeQueryLogging();
+
+        return $result;
+    }
+
+    public function update($data): int
+    {
+        $this->logQuery('update', [$data]);
+        $result = $this->selection->update($data);
+        $this->completeQueryLogging();
+
+        return $result;
+    }
+
+    public function delete(): int
+    {
+        $this->logQuery('delete', []);
+        $result = $this->selection->delete();
+        $this->completeQueryLogging();
+
+        return $result;
+    }
+
+    public function count(?string $column = null): int
+    {
+        $this->logQuery('count', [$column]);
+        $result = $this->selection->count($column);
+        $this->completeQueryLogging();
+
+        return $result;
+    }
+
+    public function aggregation(string $function): mixed
+    {
+        $this->logQuery('aggregation', [$function]);
+        $result = $this->selection->aggregation($function);
+        $this->completeQueryLogging();
+
+        return $result;
+    }
+
+    /**
+     * Fetch pairs as an associative array.
+     *
+     * @param string|int|null $key Column for keys (or null for numeric index)
+     * @param string|int|null $value Column for values (or null for entire row)
+     */
+    public function fetchPairs(string|int|null $key = null, string|int|null $value = null): array
+    {
+        $this->logQuery('fetchPairs', [$key, $value]);
+        $result = $this->selection->fetchPairs($key, $value);
+        $this->completeQueryLogging();
+
+        return $result;
     }
 
     /**
@@ -72,7 +171,7 @@ class DebugSelection
      */
     private function logQuery(string $method, array $arguments): void
     {
-        if (!defined('SQL_DEBUG') || !SQL_DEBUG) {
+        if (!\defined('SQL_DEBUG') || !SQL_DEBUG) {
             return;
         }
 
@@ -92,7 +191,7 @@ class DebugSelection
      */
     private function completeQueryLogging(): void
     {
-        if (!defined('SQL_DEBUG') || !SQL_DEBUG) {
+        if (!\defined('SQL_DEBUG') || !SQL_DEBUG) {
             return;
         }
 
@@ -106,7 +205,7 @@ class DebugSelection
     private function generateSqlForLogging(string $method, array $arguments, bool $useRawSQL = true): string
     {
         // For SELECT operations, try to get the SQL from Nette
-        if (in_array($method, ['fetch', 'fetchAll', 'count', 'aggregation'], true)) {
+        if (\in_array($method, ['fetch', 'fetchAll', 'count', 'aggregation'], true)) {
             $sql = $useRawSQL ? $this->getSqlFromSelection() : $this->getSqlFromSelection(true);
 
             // Modify the SQL based on the method
@@ -116,16 +215,19 @@ class DebugSelection
                     if (!preg_match('/LIMIT\s+\d+/i', $sql)) {
                         $sql .= ' LIMIT 1';
                     }
+
                     return $sql;
                 case 'count':
                     // Replace SELECT * with SELECT COUNT(*) or COUNT(column)
                     $countExpr = isset($arguments[0]) && $arguments[0] !== null
                         ? 'SELECT COUNT(' . $arguments[0] . ')'
                         : 'SELECT COUNT(*)';
+
                     return preg_replace('/^SELECT\s+\*/i', $countExpr, $sql);
                 case 'aggregation':
                     // Replace SELECT * with SELECT {aggregation_function}
                     $aggFunc = $arguments[0] ?? 'COUNT(*)';
+
                     return preg_replace('/^SELECT\s+\*/i', 'SELECT ' . $aggFunc, $sql);
                 case 'fetchAll':
                 default:
@@ -149,15 +251,15 @@ class DebugSelection
      */
     private function generateInsertSql(string $tableName, array $arguments): string
     {
-        if (!isset($arguments[0]) || !is_array($arguments[0])) {
+        if (!isset($arguments[0]) || !\is_array($arguments[0])) {
             return "INSERT INTO {$tableName} (...) VALUES (...)";
         }
 
         $data = $arguments[0];
         $columns = implode(', ', array_keys($data));
         $values = implode(', ', array_map(
-            static fn($v) => is_string($v) ? "'$v'" : $v,
-            array_values($data)
+            static fn ($v) => \is_string($v) ? "'{$v}'" : $v,
+            array_values($data),
         ));
 
         return "INSERT INTO {$tableName} ({$columns}) VALUES ({$values})";
@@ -169,9 +271,9 @@ class DebugSelection
     private function generateUpdateSql(string $tableName, array $arguments, bool $useRawSQL): string
     {
         $setPairs = [];
-        if (isset($arguments[0]) && is_array($arguments[0])) {
+        if (isset($arguments[0]) && \is_array($arguments[0])) {
             foreach ($arguments[0] as $key => $value) {
-                $setPairs[] = "{$key} = " . (is_string($value) ? "'$value'" : $value);
+                $setPairs[] = "{$key} = " . (\is_string($value) ? "'{$value}'" : $value);
             }
         }
 
@@ -217,7 +319,7 @@ class DebugSelection
                 $sql = $getSqlMethod->invoke($this->selection);
             } else {
                 // Try __toString() method as fallback
-                $sql = (string) $this->selection;
+                $sql = (string)$this->selection;
             }
 
             // For EXPLAIN to work, we need to replace ? with actual values
@@ -228,99 +330,7 @@ class DebugSelection
             return $sql;
         } catch (Exception $e) {
             // Fall back to simple representation
-            return "SELECT * FROM " . $this->selection->getName() . " WHERE 1=1";
+            return 'SELECT * FROM ' . $this->selection->getName() . ' WHERE 1=1';
         }
-    }
-
-    // Delegate common Selection methods with logging
-    public function where(...$args): self
-    {
-        return new self($this->selection->where(...$args), $this->db);
-    }
-
-    public function order(...$args): self
-    {
-        return new self($this->selection->order(...$args), $this->db);
-    }
-
-    public function select(...$args): self
-    {
-        return new self($this->selection->select(...$args), $this->db);
-    }
-
-    public function limit(...$args): self
-    {
-        return new self($this->selection->limit(...$args), $this->db);
-    }
-
-    public function fetch()
-    {
-        $this->logQuery('fetch', []);
-        $result = $this->selection->fetch();
-        $this->completeQueryLogging();
-        return $result;
-    }
-
-    public function fetchAll(): array
-    {
-        $this->logQuery('fetchAll', []);
-        $result = $this->selection->fetchAll();
-        $this->completeQueryLogging();
-        return $result;
-    }
-
-    public function insert($data)
-    {
-        $this->logQuery('insert', [$data]);
-        $result = $this->selection->insert($data);
-        $this->completeQueryLogging();
-        return $result;
-    }
-
-    public function update($data): int
-    {
-        $this->logQuery('update', [$data]);
-        $result = $this->selection->update($data);
-        $this->completeQueryLogging();
-        return $result;
-    }
-
-    public function delete(): int
-    {
-        $this->logQuery('delete', []);
-        $result = $this->selection->delete();
-        $this->completeQueryLogging();
-        return $result;
-    }
-
-    public function count(?string $column = null): int
-    {
-        $this->logQuery('count', [$column]);
-        $result = $this->selection->count($column);
-        $this->completeQueryLogging();
-        return $result;
-    }
-
-    public function aggregation(string $function): mixed
-    {
-        $this->logQuery('aggregation', [$function]);
-        $result = $this->selection->aggregation($function);
-        $this->completeQueryLogging();
-        return $result;
-    }
-
-    /**
-     * Fetch pairs as an associative array.
-     *
-     * @param string|int|null $key Column for keys (or null for numeric index)
-     * @param string|int|null $value Column for values (or null for entire row)
-     * @return array
-     */
-    public function fetchPairs(string|int|null $key = null, string|int|null $value = null): array
-    {
-        $this->logQuery('fetchPairs', [$key, $value]);
-        $result = $this->selection->fetchPairs($key, $value);
-        $this->completeQueryLogging();
-        return $result;
     }
 }
