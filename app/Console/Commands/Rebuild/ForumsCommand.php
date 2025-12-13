@@ -14,6 +14,8 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Application;
+use TorrentPier\Database\Database;
 use TorrentPier\Legacy\Admin\Common;
 
 /**
@@ -27,6 +29,13 @@ use TorrentPier\Legacy\Admin\Common;
 )]
 class ForumsCommand extends AbstractRebuildCommand
 {
+    public function __construct(
+        private readonly Database $database,
+        ?Application              $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     protected function configure(): void
     {
         parent::configure();
@@ -186,7 +195,7 @@ class ForumsCommand extends AbstractRebuildCommand
      */
     private function getAllForums(): array
     {
-        return DB()->table(BB_FORUMS)
+        return $this->database->table(BB_FORUMS)
             ->select('forum_id, forum_name, forum_posts, forum_topics')
             ->order('forum_id')
             ->fetchAll();
@@ -197,7 +206,7 @@ class ForumsCommand extends AbstractRebuildCommand
      */
     private function getForumsByIds(array $ids): array
     {
-        return DB()->table(BB_FORUMS)
+        return $this->database->table(BB_FORUMS)
             ->select('forum_id, forum_name, forum_posts, forum_topics')
             ->where('forum_id', $ids)
             ->order('forum_id')

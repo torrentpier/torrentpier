@@ -14,7 +14,10 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Application;
+use TorrentPier\Config;
 use TorrentPier\Console\Helpers\FileSystemHelper;
+use TorrentPier\Database\Database;
 
 /**
  * Cleanup stale data
@@ -27,6 +30,14 @@ use TorrentPier\Console\Helpers\FileSystemHelper;
 )]
 class CleanupCommand extends AbstractMaintenanceCommand
 {
+    public function __construct(
+        private readonly Database $database,
+        private readonly Config   $config,
+        ?Application              $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     protected function configure(): void
     {
         parent::configure();
@@ -58,12 +69,12 @@ class CleanupCommand extends AbstractMaintenanceCommand
 
         $postsCacheConfig = $clearAllPostsCache
             ? 'ALL (--all-posts-cache)'
-            : 'posts_cache_days_keep: ' . (config()->get('posts_cache_days_keep') ?: 'disabled');
+            : 'posts_cache_days_keep: ' . ($this->config->get('posts_cache_days_keep') ?: 'disabled');
 
         $this->table(
             ['Type', 'Records', 'Configuration'],
             [
-                ['Old poll votes', number_format($stats['poll_users']), 'poll_max_days: ' . (config()->get('poll_max_days') ?: 'disabled')],
+                ['Old poll votes', number_format($stats['poll_users']), 'poll_max_days: ' . ($this->config->get('poll_max_days') ?: 'disabled')],
                 ['Expired password requests', number_format($stats['password_requests']), '7 days old'],
                 ['Post HTML cache', number_format($stats['posts_cache']), $postsCacheConfig],
             ],
@@ -144,17 +155,17 @@ class CleanupCommand extends AbstractMaintenanceCommand
         ];
 
         // Poll users older than poll_max_days
-        $pollMaxDays = (int)config()->get('poll_max_days');
+        $pollMaxDays = (int)$this->config->get('poll_max_days');
         if ($pollMaxDays > 0) {
             $cutoff = TIMENOW - 86400 * $pollMaxDays;
-            $stats['poll_users'] = DB()->table(BB_POLL_USERS)
+            $stats['poll_users'] = $this->database->table(BB_POLL_USERS)
                 ->where('vote_dt < ?', $cutoff)
                 ->count('*');
         }
 
         // Password requests older than 7 days
         $passwordCutoff = TIMENOW - 7 * 86400;
-        $stats['password_requests'] = DB()->table(BB_USERS)
+        $stats['password_requests'] = $this->database->table(BB_USERS)
             ->where('user_newpasswd <> ?', '')
             ->where('user_lastvisit < ?', $passwordCutoff)
             ->count('*');
@@ -162,12 +173,12 @@ class CleanupCommand extends AbstractMaintenanceCommand
         // Post HTML cache
         if ($clearAllPostsCache) {
             // Count ALL records
-            $stats['posts_cache'] = DB()->table(BB_POSTS_HTML)->count('*');
+            $stats['posts_cache'] = $this->database->table(BB_POSTS_HTML)->count('*');
         } else {
             // Only older than posts_cache_days_keep
-            $postsCacheDays = (int)config()->get('posts_cache_days_keep');
+            $postsCacheDays = (int)$this->config->get('posts_cache_days_keep');
             if ($postsCacheDays > 0) {
-                $row = DB()->fetch_row('SELECT COUNT(*) as cnt FROM ' . BB_POSTS_HTML . " WHERE post_html_time < DATE_SUB(NOW(), INTERVAL {$postsCacheDays} DAY)");
+                $row = $this->database->fetch_row('SELECT COUNT(*) as cnt FROM ' . BB_POSTS_HTML . " WHERE post_html_time < DATE_SUB(NOW(), INTERVAL {$postsCacheDays} DAY)");
                 $stats['posts_cache'] = (int)($row['cnt'] ?? 0);
             }
         }
@@ -180,7 +191,7 @@ class CleanupCommand extends AbstractMaintenanceCommand
      */
     private function cleanPollUsers(): int
     {
-        $pollMaxDays = (int)config()->get('poll_max_days');
+        $pollMaxDays = (int)$this->config->get('poll_max_days');
         if ($pollMaxDays <= 0) {
             return 0;
         }
@@ -188,7 +199,7 @@ class CleanupCommand extends AbstractMaintenanceCommand
         $cutoff = TIMENOW - 86400 * $pollMaxDays;
         $perCycle = 20000;
 
-        $row = DB()->fetch_row('SELECT MIN(topic_id) AS start_id, MAX(topic_id) AS finish_id FROM ' . BB_POLL_USERS);
+        $row = $this->database->fetch_row('SELECT MIN(topic_id) AS start_id, MAX(topic_id) AS finish_id FROM ' . BB_POLL_USERS);
         $startId = (int)($row['start_id'] ?? 0);
         $finishId = (int)($row['finish_id'] ?? 0);
 
@@ -201,13 +212,13 @@ class CleanupCommand extends AbstractMaintenanceCommand
         while (true) {
             $endId = $startId + $perCycle - 1;
 
-            DB()->query('
+            $this->database->query('
                 DELETE FROM ' . BB_POLL_USERS . "
                 WHERE topic_id BETWEEN {$startId} AND {$endId}
                     AND vote_dt < {$cutoff}
             ");
 
-            $totalDeleted += DB()->affected_rows();
+            $totalDeleted += $this->database->affected_rows();
 
             if ($endId >= $finishId) {
                 break;
@@ -226,9 +237,9 @@ class CleanupCommand extends AbstractMaintenanceCommand
     {
         $cutoff = TIMENOW - 7 * 86400;
 
-        DB()->query('UPDATE ' . BB_USERS . " SET user_newpasswd = '' WHERE user_newpasswd <> '' AND user_lastvisit < {$cutoff}");
+        $this->database->query('UPDATE ' . BB_USERS . " SET user_newpasswd = '' WHERE user_newpasswd <> '' AND user_lastvisit < {$cutoff}");
 
-        return DB()->affected_rows();
+        return $this->database->affected_rows();
     }
 
     /**
@@ -238,19 +249,19 @@ class CleanupCommand extends AbstractMaintenanceCommand
     {
         if ($clearAll) {
             // Get count before truncating (TRUNCATE doesn't return affected_rows)
-            $count = DB()->table(BB_POSTS_HTML)->count('*');
-            DB()->query('TRUNCATE TABLE ' . BB_POSTS_HTML);
+            $count = $this->database->table(BB_POSTS_HTML)->count('*');
+            $this->database->query('TRUNCATE TABLE ' . BB_POSTS_HTML);
 
             return $count;
         }
 
-        $postsCacheDays = (int)config()->get('posts_cache_days_keep');
+        $postsCacheDays = (int)$this->config->get('posts_cache_days_keep');
         if ($postsCacheDays <= 0) {
             return 0;
         }
 
-        DB()->query('DELETE FROM ' . BB_POSTS_HTML . " WHERE post_html_time < DATE_SUB(NOW(), INTERVAL {$postsCacheDays} DAY)");
+        $this->database->query('DELETE FROM ' . BB_POSTS_HTML . " WHERE post_html_time < DATE_SUB(NOW(), INTERVAL {$postsCacheDays} DAY)");
 
-        return DB()->affected_rows();
+        return $this->database->affected_rows();
     }
 }

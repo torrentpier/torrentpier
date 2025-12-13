@@ -14,6 +14,9 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Application;
+use TorrentPier\Config;
+use TorrentPier\Database\Database;
 
 /**
  * Prune old data
@@ -27,6 +30,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class PruneCommand extends AbstractMaintenanceCommand
 {
+    public function __construct(
+        private readonly Database $database,
+        private readonly Config   $config,
+        ?Application              $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     /**
      * Prune types with descriptions
      */
@@ -219,10 +230,10 @@ class PruneCommand extends AbstractMaintenanceCommand
     private function getInfoCount(string $type): int
     {
         return match ($type) {
-            'logs' => DB()->table(BB_LOG)->count('*'),
-            'pm' => DB()->table(BB_PRIVMSGS)->count('*'),
-            'sessions' => DB()->table(BB_SESSIONS)->count('*'),
-            'search' => DB()->table(BB_SEARCH)->count('*'),
+            'logs' => $this->database->table(BB_LOG)->count('*'),
+            'pm' => $this->database->table(BB_PRIVMSGS)->count('*'),
+            'sessions' => $this->database->table(BB_SESSIONS)->count('*'),
+            'search' => $this->database->table(BB_SEARCH)->count('*'),
             default => 0,
         };
     }
@@ -233,9 +244,9 @@ class PruneCommand extends AbstractMaintenanceCommand
     private function getConfigInfo(string $type): string
     {
         return match ($type) {
-            'logs' => 'log_days_keep: ' . (config()->get('log_days_keep') ?: 'not set'),
-            'pm' => 'pm_days_keep: ' . (config()->get('pm_days_keep') ?: 'not set'),
-            'sessions' => 'user_session_duration: ' . config()->get('user_session_duration') . 's',
+            'logs' => 'log_days_keep: ' . ($this->config->get('log_days_keep') ?: 'not set'),
+            'pm' => 'pm_days_keep: ' . ($this->config->get('pm_days_keep') ?: 'not set'),
+            'sessions' => 'user_session_duration: ' . $this->config->get('user_session_duration') . 's',
             'search' => 'expires after 3 hours',
             default => '-',
         };
@@ -274,7 +285,7 @@ class PruneCommand extends AbstractMaintenanceCommand
     {
         $cutoff = TIMENOW - 86400 * $days;
 
-        return DB()->table(BB_LOG)
+        return $this->database->table(BB_LOG)
             ->where('log_time < ?', $cutoff)
             ->count('*');
     }
@@ -286,7 +297,7 @@ class PruneCommand extends AbstractMaintenanceCommand
     {
         $cutoff = TIMENOW - 86400 * $days;
 
-        return DB()->table(BB_PRIVMSGS)
+        return $this->database->table(BB_PRIVMSGS)
             ->where('privmsgs_date < ?', $cutoff)
             ->count('*');
     }
@@ -297,11 +308,11 @@ class PruneCommand extends AbstractMaintenanceCommand
      */
     private function getSessionsCount(): int
     {
-        $userExpire = TIMENOW - (int)config()->get('user_session_duration');
-        $adminExpire = TIMENOW - (int)config()->get('admin_session_duration');
-        $gcTime = $userExpire - (int)config()->get('user_session_gc_ttl');
+        $userExpire = TIMENOW - (int)$this->config->get('user_session_duration');
+        $adminExpire = TIMENOW - (int)$this->config->get('admin_session_duration');
+        $gcTime = $userExpire - (int)$this->config->get('user_session_gc_ttl');
 
-        $row = DB()->fetch_row('
+        $row = $this->database->fetch_row('
             SELECT COUNT(*) as cnt FROM ' . BB_SESSIONS . "
             WHERE (session_time < {$gcTime} AND session_admin = 0)
                OR (session_time < {$adminExpire} AND session_admin != 0)
@@ -317,7 +328,7 @@ class PruneCommand extends AbstractMaintenanceCommand
     {
         $expire = TIMENOW - 3 * 3600;
 
-        return DB()->table(BB_SEARCH)
+        return $this->database->table(BB_SEARCH)
             ->where('search_time < ?', $expire)
             ->count('*');
     }
@@ -342,9 +353,9 @@ class PruneCommand extends AbstractMaintenanceCommand
     private function pruneLogs(int $days): int
     {
         $cutoff = TIMENOW - 86400 * $days;
-        DB()->query('DELETE FROM ' . BB_LOG . " WHERE log_time < {$cutoff}");
+        $this->database->query('DELETE FROM ' . BB_LOG . " WHERE log_time < {$cutoff}");
 
-        return DB()->affected_rows();
+        return $this->database->affected_rows();
     }
 
     /**
@@ -355,7 +366,7 @@ class PruneCommand extends AbstractMaintenanceCommand
         $cutoff = TIMENOW - 86400 * $days;
         $perCycle = 20000;
 
-        $row = DB()->fetch_row('SELECT MIN(privmsgs_id) AS start_id, MAX(privmsgs_id) AS finish_id FROM ' . BB_PRIVMSGS);
+        $row = $this->database->fetch_row('SELECT MIN(privmsgs_id) AS start_id, MAX(privmsgs_id) AS finish_id FROM ' . BB_PRIVMSGS);
         $startId = (int)($row['start_id'] ?? 0);
         $finishId = (int)($row['finish_id'] ?? 0);
 
@@ -368,7 +379,7 @@ class PruneCommand extends AbstractMaintenanceCommand
         while (true) {
             $endId = $startId + $perCycle - 1;
 
-            DB()->query('
+            $this->database->query('
                 DELETE pm, pmt
                 FROM ' . BB_PRIVMSGS . ' pm
                 LEFT JOIN ' . BB_PRIVMSGS_TEXT . " pmt ON(pmt.privmsgs_text_id = pm.privmsgs_id)
@@ -376,7 +387,7 @@ class PruneCommand extends AbstractMaintenanceCommand
                     AND pm.privmsgs_date < {$cutoff}
             ");
 
-            $totalDeleted += DB()->affected_rows();
+            $totalDeleted += $this->database->affected_rows();
 
             if ($endId >= $finishId) {
                 break;
@@ -393,17 +404,17 @@ class PruneCommand extends AbstractMaintenanceCommand
      */
     private function pruneSessions(): int
     {
-        $userExpire = TIMENOW - (int)config()->get('user_session_duration');
-        $adminExpire = TIMENOW - (int)config()->get('admin_session_duration');
-        $gcTime = $userExpire - (int)config()->get('user_session_gc_ttl');
+        $userExpire = TIMENOW - (int)$this->config->get('user_session_duration');
+        $adminExpire = TIMENOW - (int)$this->config->get('admin_session_duration');
+        $gcTime = $userExpire - (int)$this->config->get('user_session_gc_ttl');
 
         // Update user session times before deleting
-        DB()->lock([
+        $this->database->lock([
             BB_USERS . ' u',
             BB_SESSIONS . ' s',
         ]);
 
-        DB()->query('
+        $this->database->query('
             UPDATE ' . BB_USERS . ' u, ' . BB_SESSIONS . ' s
             SET u.user_session_time = IF(u.user_session_time < s.session_time, s.session_time, u.user_session_time)
             WHERE u.user_id = s.session_user_id
@@ -414,16 +425,16 @@ class PruneCommand extends AbstractMaintenanceCommand
                 )
         ");
 
-        DB()->unlock();
+        $this->database->unlock();
 
         // Delete sessions
-        DB()->query('
+        $this->database->query('
             DELETE FROM ' . BB_SESSIONS . "
             WHERE (session_time < {$gcTime} AND session_admin = 0)
                OR (session_time < {$adminExpire} AND session_admin != 0)
         ");
 
-        return DB()->affected_rows();
+        return $this->database->affected_rows();
     }
 
     /**
@@ -432,8 +443,8 @@ class PruneCommand extends AbstractMaintenanceCommand
     private function pruneSearch(): int
     {
         $expire = TIMENOW - 3 * 3600;
-        DB()->query('DELETE FROM ' . BB_SEARCH . " WHERE search_time < {$expire}");
+        $this->database->query('DELETE FROM ' . BB_SEARCH . " WHERE search_time < {$expire}");
 
-        return DB()->affected_rows();
+        return $this->database->affected_rows();
     }
 }

@@ -14,6 +14,8 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Application;
+use TorrentPier\Database\Database;
 use TorrentPier\Legacy\Admin\Common;
 
 /**
@@ -28,6 +30,13 @@ use TorrentPier\Legacy\Admin\Common;
 )]
 class TopicsCommand extends AbstractRebuildCommand
 {
+    public function __construct(
+        private readonly Database $database,
+        ?Application $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     protected function configure(): void
     {
         parent::configure();
@@ -175,7 +184,7 @@ class TopicsCommand extends AbstractRebuildCommand
      */
     private function getTotalTopics(): int
     {
-        return DB()->table(BB_TOPICS)
+        return $this->database->table(BB_TOPICS)
             ->where('topic_status != ?', TOPIC_MOVED)
             ->count('*');
     }
@@ -186,7 +195,7 @@ class TopicsCommand extends AbstractRebuildCommand
      */
     private function getOrphanTopicCount(): int
     {
-        $row = DB()->fetch_row('
+        $row = $this->database->fetch_row('
             SELECT COUNT(*) as cnt
             FROM ' . BB_TOPICS . ' t
             LEFT JOIN ' . BB_POSTS . ' p ON p.topic_id = t.topic_id
@@ -202,7 +211,7 @@ class TopicsCommand extends AbstractRebuildCommand
      */
     private function getTopicsByIds(array $ids): array
     {
-        return DB()->table(BB_TOPICS)
+        return $this->database->table(BB_TOPICS)
             ->select('topic_id, topic_title, topic_replies')
             ->where('topic_id', $ids)
             ->order('topic_id')

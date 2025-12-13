@@ -13,7 +13,9 @@ namespace TorrentPier\Console\Commands\Maintenance;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Application;
 use TorrentPier\Console\Helpers\FileSystemHelper;
+use TorrentPier\Database\Database;
 use TorrentPier\Legacy\Admin\Common;
 
 /**
@@ -28,6 +30,13 @@ use TorrentPier\Legacy\Admin\Common;
 )]
 class SyncCommand extends AbstractMaintenanceCommand
 {
+    public function __construct(
+        private readonly Database $database,
+        ?Application              $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Maintenance: Synchronize Counters');
@@ -124,10 +133,10 @@ class SyncCommand extends AbstractMaintenanceCommand
     private function getCurrentStats(): array
     {
         return [
-            'topics' => DB()->table(BB_TOPICS)->where('topic_status != ?', TOPIC_MOVED)->count('*'),
-            'posts' => DB()->table(BB_POSTS)->count('*'),
-            'users' => DB()->table(BB_USERS)->where('user_id != ?', GUEST_UID)->count('*'),
-            'forums' => DB()->table(BB_FORUMS)->count('*'),
+            'topics' => $this->database->table(BB_TOPICS)->where('topic_status != ?', TOPIC_MOVED)->count('*'),
+            'posts' => $this->database->table(BB_POSTS)->count('*'),
+            'users' => $this->database->table(BB_USERS)->where('user_id != ?', GUEST_UID)->count('*'),
+            'forums' => $this->database->table(BB_FORUMS)->count('*'),
         ];
     }
 
