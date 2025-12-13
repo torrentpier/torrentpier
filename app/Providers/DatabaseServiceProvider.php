@@ -33,7 +33,6 @@ class DatabaseServiceProvider extends ServiceProvider
             $config = $app->make(Config::class);
             $dbConfig = $config->get('db');
 
-            // Get the default 'db' server configuration
             return new Database($dbConfig['db']);
         });
 
