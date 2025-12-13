@@ -22,12 +22,10 @@ use RuntimeException;
 
 /**
  * Modern Database class using Nette Database with backward compatibility
- * Implements singleton pattern while maintaining all existing SqlDb methods
+ * Maintains all existing SqlDb methods for seamless migration.
  */
 class Database
 {
-    private static ?Database $instance = null;
-    private static array $instances = [];
     public ?Connection $connection = null;
     public ?DatabaseDebugger $debugger = null;
 
@@ -57,10 +55,7 @@ class Database
     private ?ResultSet $result = null;
     private int $last_affected_rows = 0;
 
-    /**
-     * Private constructor for singleton pattern
-     */
-    private function __construct(array $cfg_values, string $server_name = 'db')
+    public function __construct(array $cfg_values, string $server_name = 'db')
     {
         $this->cfg = array_combine($this->cfg_keys, $cfg_values);
         $this->db_server = $server_name;
@@ -118,45 +113,6 @@ class Database
             default:
                 return false;
         }
-    }
-
-    /**
-     * Get singleton instance for default database
-     */
-    public static function getInstance(?array $cfg_values = null, string $server_name = 'db'): self
-    {
-        if (self::$instance === null && $cfg_values !== null) {
-            self::$instance = new self($cfg_values, $server_name);
-            self::$instances[$server_name] = self::$instance;
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Get instance for specific database server
-     */
-    public static function getServerInstance(array $cfg_values, string $server_name): self
-    {
-        if (!isset(self::$instances[$server_name])) {
-            self::$instances[$server_name] = new self($cfg_values, $server_name);
-
-            // If this is the first instance, set as default
-            if (self::$instance === null) {
-                self::$instance = self::$instances[$server_name];
-            }
-        }
-
-        return self::$instances[$server_name];
-    }
-
-    /**
-     * Destroy singleton instances (for testing)
-     */
-    public static function destroyInstances(): void
-    {
-        self::$instance = null;
-        self::$instances = [];
     }
 
     /**

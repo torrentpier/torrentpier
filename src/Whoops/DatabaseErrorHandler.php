@@ -10,7 +10,7 @@
 
 namespace TorrentPier\Whoops;
 
-use Exception;
+use Throwable;
 use Whoops\Handler\Handler;
 use Whoops\Handler\HandlerInterface;
 
@@ -138,7 +138,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                     $exception->databaseInfo = $databaseInfo;
                 }
             }
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             // Don't let database info collection break error handling
             if (method_exists($exception, 'setAdditionalInfo')) {
                 $exception->setAdditionalInfo('Database Info Error', $e->getMessage());
@@ -237,7 +237,7 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                     $context['last_error'] = $sqlError;
                 }
             }
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $context['error'] = 'Could not retrieve database context: ' . $e->getMessage();
         }
 
@@ -256,63 +256,12 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
         ];
 
         try {
-            // Get information from all database servers
-            if (class_exists('\TorrentPier\Database\DatabaseFactory')) {
-                $serverNames = \TorrentPier\Database\DatabaseFactory::getServerNames();
-
-                foreach ($serverNames as $serverName) {
-                    try {
-                        $db = \TorrentPier\Database\DatabaseFactory::getInstance($serverName);
-
-                        $serverInfo = [
-                            'server_name' => $serverName,
-                            'engine' => $db->engine ?? 'Unknown',
-                            'host' => $db->db_server ?? 'Unknown',
-                            'database' => $db->selected_db ?? 'Unknown',
-                            'connection_status' => $db->connection ? 'Connected' : 'Disconnected',
-                            'total_queries' => $db->num_queries ?? 0,
-                            'total_time' => isset($db->sql_timetotal) ? \sprintf('%.3f sec', $db->sql_timetotal) : 'Unknown',
-                        ];
-
-                        // Current query
-                        if (!empty($db->cur_query)) {
-                            $serverInfo['current_query'] = $this->formatQueryForDisplay($db->cur_query);
-                        }
-
-                        // Last error
-                        $sqlError = $db->sql_error();
-                        if (!empty($sqlError['message'])) {
-                            $serverInfo['last_error'] = $sqlError;
-                        }
-
-                        // Recent query history (if available and enabled)
-                        if ($this->includeQueryHistory && !empty($db->dbg)) {
-                            $recentQueries = \array_slice($db->dbg, -$this->maxQueryHistory);
-                            $serverInfo['recent_queries'] = [];
-
-                            foreach ($recentQueries as $query) {
-                                $serverInfo['recent_queries'][] = [
-                                    'sql' => $this->formatQueryForDisplay($query['sql'] ?? 'Unknown'),
-                                    'time' => isset($query['time']) ? \sprintf('%.3f sec', $query['time']) : 'Unknown',
-                                    'source' => $query['src'] ?? 'Unknown',
-                                ];
-                            }
-                        }
-
-                        $info['databases'][$serverName] = $serverInfo;
-                    } catch (Exception $e) {
-                        $info['databases'][$serverName] = [
-                            'error' => 'Could not retrieve info: ' . $e->getMessage(),
-                        ];
-                    }
-                }
-            }
-
-            // Legacy single database support
-            if (\function_exists('DB') && empty($info['databases'])) {
+            if (\function_exists('DB')) {
                 $db = DB();
+                $serverName = $db->db_server ?? 'db';
 
-                $info['legacy_database'] = [
+                $serverInfo = [
+                    'server_name' => $serverName,
                     'engine' => $db->engine ?? 'Unknown',
                     'host' => $db->db_server ?? 'Unknown',
                     'database' => $db->selected_db ?? 'Unknown',
@@ -321,16 +270,34 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
                     'total_time' => isset($db->sql_timetotal) ? \sprintf('%.3f sec', $db->sql_timetotal) : 'Unknown',
                 ];
 
+                // Current query
                 if (!empty($db->cur_query)) {
-                    $info['legacy_database']['current_query'] = $this->formatQueryForDisplay($db->cur_query);
+                    $serverInfo['current_query'] = $this->formatQueryForDisplay($db->cur_query);
                 }
 
+                // Last error
                 $sqlError = $db->sql_error();
                 if (!empty($sqlError['message'])) {
-                    $info['legacy_database']['last_error'] = $sqlError;
+                    $serverInfo['last_error'] = $sqlError;
                 }
+
+                // Recent query history (if available and enabled)
+                if ($this->includeQueryHistory && !empty($db->dbg)) {
+                    $recentQueries = \array_slice($db->dbg, -$this->maxQueryHistory);
+                    $serverInfo['recent_queries'] = [];
+
+                    foreach ($recentQueries as $query) {
+                        $serverInfo['recent_queries'][] = [
+                            'sql' => $this->formatQueryForDisplay($query['sql'] ?? 'Unknown'),
+                            'time' => isset($query['time']) ? \sprintf('%.3f sec', $query['time']) : 'Unknown',
+                            'source' => $query['src'] ?? 'Unknown',
+                        ];
+                    }
+                }
+
+                $info['databases'][$serverName] = $serverInfo;
             }
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $info['collection_error'] = $e->getMessage();
         }
 

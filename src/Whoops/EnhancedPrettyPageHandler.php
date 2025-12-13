@@ -10,8 +10,8 @@
 
 namespace TorrentPier\Whoops;
 
-use Exception;
 use PDO;
+use Throwable;
 use Whoops\Handler\PrettyPageHandler;
 
 /**
@@ -38,19 +38,19 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
         // Add TorrentPier-specific database information dynamically
         try {
             $this->addDataTable('Database Information', $this->getDatabaseInformation());
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $this->addDataTable('Database Information', ['Error' => $e->getMessage()]);
         }
 
         try {
             $this->addDataTable('Recent SQL Queries', $this->getRecentSqlQueries());
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $this->addDataTable('Recent SQL Queries', ['Error' => $e->getMessage()]);
         }
 
         try {
             $this->addDataTable('TorrentPier Environment', $this->getTorrentPierEnvironment());
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $this->addDataTable('TorrentPier Environment', ['Error' => $e->getMessage()]);
         }
 
@@ -111,37 +111,12 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                                 ];
                             }
                         }
-                    } catch (Exception $e) {
+                    } catch (Throwable $e) {
                         $info['PDO Error'] = $e->getMessage();
                     }
                 }
             }
-
-            // Get information from all database servers (new system)
-            if (class_exists('\TorrentPier\Database\DatabaseFactory')) {
-                try {
-                    $serverNames = \TorrentPier\Database\DatabaseFactory::getServerNames();
-
-                    if (\count($serverNames) > 1) {
-                        foreach ($serverNames as $serverName) {
-                            try {
-                                $db = \TorrentPier\Database\DatabaseFactory::getInstance($serverName);
-                                $info["Server: {$serverName}"] = [
-                                    'Host' => $db->db_server ?? 'Unknown',
-                                    'Database' => $db->selected_db ?? 'Unknown',
-                                    'Queries' => $db->num_queries ?? 0,
-                                    'Connected' => $db->connection ? 'Yes' : 'No',
-                                ];
-                            } catch (Exception $e) {
-                                $info["Server: {$serverName}"] = ['Error' => $e->getMessage()];
-                            }
-                        }
-                    }
-                } catch (Exception $e) {
-                    $info['Multi-Server Error'] = $e->getMessage();
-                }
-            }
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $info['Collection Error'] = $e->getMessage();
         }
 
@@ -185,7 +160,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
                     $queries['Info'] = 'No query debug information available. Enable debug mode to see recent queries.';
                 }
             }
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $queries['Error'] = $e->getMessage();
         }
 
@@ -248,7 +223,7 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
             $env['Request URI'] = $_SERVER['REQUEST_URI'] ?? 'CLI';
             $env['User Agent'] = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
             $env['Remote IP'] = $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $env['Error'] = $e->getMessage();
         }
 

@@ -10,9 +10,8 @@
 
 namespace TorrentPier\Tracy\Panels;
 
-use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use TorrentPier\Database\DatabaseFactory;
+use Throwable;
 use Tracy\IBarPanel;
 
 /**
@@ -151,10 +150,10 @@ class PerformancePanel implements IBarPanel
 
         // Fallback to current DB stats
         try {
-            $db = DatabaseFactory::getInstance();
+            $db = DB();
 
             return $db->sql_timetotal ?? 0;
-        } catch (Exception) {
+        } catch (Throwable) {
             return 0;
         }
     }

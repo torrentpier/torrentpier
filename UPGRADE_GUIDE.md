@@ -394,7 +394,7 @@ $escaped = DB()->escape($userInput);
 - **Nette Database v3.2**: Modern, actively maintained database layer
 - **PDO-based**: Improved security and performance
 - **Type Safety**: Better error detection and IDE support
-- **Singleton Pattern**: Efficient connection management
+- **DI Container**: Managed via Application container as singleton service
 
 #### Enhanced Reliability
 - **Automatic Resource Cleanup**: Better memory management
@@ -407,17 +407,6 @@ $escaped = DB()->escape($userInput);
 - **Better Query Logging**: More detailed performance tracking
 - **Debug Information**: Comprehensive debugging features
 - **Memory Tracking**: Better resource usage monitoring
-
-### Multiple Database Support
-
-Multiple database servers continue to work exactly as before:
-
-```php
-// ✅ Multiple database access unchanged
-$main_db = DB('db');           // Main database
-$tracker_db = DB('tr');        // Tracker database
-$stats_db = DB('stats');       // Statistics database
-```
 
 ### Error Handling
 
@@ -450,7 +439,7 @@ DB()->debug('stop');
 ### Performance Benefits
 
 While maintaining compatibility, you get:
-- **Faster Connection Handling**: Singleton pattern prevents connection overhead
+- **Faster Connection Handling**: DI container manages single instance
 - **Modern Query Execution**: Nette Database optimizations
 - **Better Resource Management**: Automatic cleanup and proper connection handling
 - **Reduced Memory Usage**: More efficient object management
@@ -475,8 +464,7 @@ The following legacy files have been removed from the codebase:
 - `src/Legacy/Dbs.php` - Original database factory
 
 These were completely replaced by:
-- `src/Database/Database.php` - Modern database class with Nette Database (renamed from `DB.php`)
-- `src/Database/DatabaseFactory.php` - Modern factory with backward compatibility (renamed from `DbFactory.php`)
+- `src/Database/Database.php` - Modern database class with Nette Database
 - `src/Database/DatabaseDebugger.php` - Dedicated debug functionality extracted from Database class
 - `src/Database/DebugSelection.php` - Debug-enabled wrapper for Nette Database Selection
 

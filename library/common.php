@@ -336,15 +336,13 @@ define('FORUM_PATH', config()->get('script_path'));
 define('FULL_URL', $server_protocol . config()->get('server_name') . $server_port . config()->get('script_path'));
 unset($server_protocol, $server_port);
 
-// Initialize the new DB factory with database configuration
-TorrentPier\Database\DatabaseFactory::init(config()->get('db'), config()->get('db_alias', []));
-
 /**
  * Get the Database instance
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
-function DB(string $db_alias = 'db'): TorrentPier\Database\Database
+function DB(): TorrentPier\Database\Database
 {
-    return TorrentPier\Database\DatabaseFactory::getInstance($db_alias);
+    return app(TorrentPier\Database\Database::class);
 }
 
 // Initialize Unified Cache System
