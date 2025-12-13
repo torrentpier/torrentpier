@@ -10,11 +10,14 @@
 
 namespace TorrentPier\Console\Commands\Database;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Application;
 use TorrentPier\Console\Commands\Command;
+use TorrentPier\Database\Database;
 
 /**
  * Check database integrity
@@ -27,6 +30,20 @@ use TorrentPier\Console\Commands\Command;
 )]
 class CheckCommand extends Command
 {
+    /**
+     * Create a new database check command
+     *
+     * @param Database $database The database instance
+     * @param Application|null $app The application container (optional)
+     * @throws BindingResolutionException
+     */
+    public function __construct(
+        private readonly Database $database,
+        ?Application $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     protected function configure(): void
     {
         $this
@@ -97,7 +114,7 @@ class CheckCommand extends Command
         foreach ($tables as $table) {
             $progressBar->setMessage("Checking: {$table}");
 
-            $result = DB()->fetch_row("CHECK TABLE `{$table}`");
+            $result = $this->database->fetch_row("CHECK TABLE `{$table}`");
             $status = $result['Msg_type'] ?? 'unknown';
             $message = $result['Msg_text'] ?? '';
 
@@ -210,7 +227,7 @@ class CheckCommand extends Command
         $prefix = 'bb_';
         $tables = [];
 
-        $result = DB()->fetch_rowset('SHOW TABLES');
+        $result = $this->database->fetch_rowset('SHOW TABLES');
         foreach ($result as $row) {
             $table = array_values($row)[0];
             if (str_starts_with($table, $prefix)) {
@@ -229,7 +246,7 @@ class CheckCommand extends Command
         $orphans = [];
 
         // Posts without topics
-        $row = DB()->fetch_row('
+        $row = $this->database->fetch_row('
             SELECT COUNT(*) as cnt
             FROM ' . BB_POSTS . ' p
             LEFT JOIN ' . BB_TOPICS . ' t ON t.topic_id = p.topic_id
@@ -238,7 +255,7 @@ class CheckCommand extends Command
         $orphans['Posts without topics'] = (int)($row['cnt'] ?? 0);
 
         // Topics without forums
-        $row = DB()->fetch_row('
+        $row = $this->database->fetch_row('
             SELECT COUNT(*) as cnt
             FROM ' . BB_TOPICS . ' t
             LEFT JOIN ' . BB_FORUMS . ' f ON f.forum_id = t.forum_id
@@ -247,7 +264,7 @@ class CheckCommand extends Command
         $orphans['Topics without forums'] = (int)($row['cnt'] ?? 0);
 
         // Post text without posts
-        $row = DB()->fetch_row('
+        $row = $this->database->fetch_row('
             SELECT COUNT(*) as cnt
             FROM ' . BB_POSTS_TEXT . ' pt
             LEFT JOIN ' . BB_POSTS . ' p ON p.post_id = pt.post_id
@@ -256,7 +273,7 @@ class CheckCommand extends Command
         $orphans['Post text without posts'] = (int)($row['cnt'] ?? 0);
 
         // Post search without posts
-        $row = DB()->fetch_row('
+        $row = $this->database->fetch_row('
             SELECT COUNT(*) as cnt
             FROM ' . BB_POSTS_SEARCH . ' ps
             LEFT JOIN ' . BB_POSTS . ' p ON p.post_id = ps.post_id
@@ -265,7 +282,7 @@ class CheckCommand extends Command
         $orphans['Post search without posts'] = (int)($row['cnt'] ?? 0);
 
         // Post HTML cache without posts
-        $row = DB()->fetch_row('
+        $row = $this->database->fetch_row('
             SELECT COUNT(*) as cnt
             FROM ' . BB_POSTS_HTML . ' ph
             LEFT JOIN ' . BB_POSTS . ' p ON p.post_id = ph.post_id
@@ -274,7 +291,7 @@ class CheckCommand extends Command
         $orphans['Post HTML cache without posts'] = (int)($row['cnt'] ?? 0);
 
         // Torrents without topics
-        $row = DB()->fetch_row('
+        $row = $this->database->fetch_row('
             SELECT COUNT(*) as cnt
             FROM ' . BB_BT_TORRENTS . ' tor
             LEFT JOIN ' . BB_TOPICS . ' t ON t.topic_id = tor.topic_id
@@ -283,7 +300,7 @@ class CheckCommand extends Command
         $orphans['Torrents without topics'] = (int)($row['cnt'] ?? 0);
 
         // Poll votes without topics
-        $row = DB()->fetch_row('
+        $row = $this->database->fetch_row('
             SELECT COUNT(*) as cnt
             FROM ' . BB_POLL_VOTES . ' pv
             LEFT JOIN ' . BB_TOPICS . ' t ON t.topic_id = pv.topic_id
@@ -292,7 +309,7 @@ class CheckCommand extends Command
         $orphans['Poll votes without topics'] = (int)($row['cnt'] ?? 0);
 
         // Poll users without topics
-        $row = DB()->fetch_row('
+        $row = $this->database->fetch_row('
             SELECT COUNT(*) as cnt
             FROM ' . BB_POLL_USERS . ' pu
             LEFT JOIN ' . BB_TOPICS . ' t ON t.topic_id = pu.topic_id
@@ -311,68 +328,68 @@ class CheckCommand extends Command
         $totalDeleted = 0;
 
         // Delete posts without topics
-        DB()->query('
+        $this->database->query('
             DELETE p FROM ' . BB_POSTS . ' p
             LEFT JOIN ' . BB_TOPICS . ' t ON t.topic_id = p.topic_id
             WHERE t.topic_id IS NULL
         ');
-        $totalDeleted += DB()->affected_rows();
+        $totalDeleted += $this->database->affected_rows();
 
         // Delete topics without forums
-        DB()->query('
+        $this->database->query('
             DELETE t FROM ' . BB_TOPICS . ' t
             LEFT JOIN ' . BB_FORUMS . ' f ON f.forum_id = t.forum_id
             WHERE f.forum_id IS NULL
         ');
-        $totalDeleted += DB()->affected_rows();
+        $totalDeleted += $this->database->affected_rows();
 
         // Delete orphan post text
-        DB()->query('
+        $this->database->query('
             DELETE pt FROM ' . BB_POSTS_TEXT . ' pt
             LEFT JOIN ' . BB_POSTS . ' p ON p.post_id = pt.post_id
             WHERE p.post_id IS NULL
         ');
-        $totalDeleted += DB()->affected_rows();
+        $totalDeleted += $this->database->affected_rows();
 
         // Delete orphan post search
-        DB()->query('
+        $this->database->query('
             DELETE ps FROM ' . BB_POSTS_SEARCH . ' ps
             LEFT JOIN ' . BB_POSTS . ' p ON p.post_id = ps.post_id
             WHERE p.post_id IS NULL
         ');
-        $totalDeleted += DB()->affected_rows();
+        $totalDeleted += $this->database->affected_rows();
 
         // Delete orphan post HTML cache
-        DB()->query('
+        $this->database->query('
             DELETE ph FROM ' . BB_POSTS_HTML . ' ph
             LEFT JOIN ' . BB_POSTS . ' p ON p.post_id = ph.post_id
             WHERE p.post_id IS NULL
         ');
-        $totalDeleted += DB()->affected_rows();
+        $totalDeleted += $this->database->affected_rows();
 
         // Delete orphan torrents
-        DB()->query('
+        $this->database->query('
             DELETE tor FROM ' . BB_BT_TORRENTS . ' tor
             LEFT JOIN ' . BB_TOPICS . ' t ON t.topic_id = tor.topic_id
             WHERE t.topic_id IS NULL
         ');
-        $totalDeleted += DB()->affected_rows();
+        $totalDeleted += $this->database->affected_rows();
 
         // Delete orphan poll votes
-        DB()->query('
+        $this->database->query('
             DELETE pv FROM ' . BB_POLL_VOTES . ' pv
             LEFT JOIN ' . BB_TOPICS . ' t ON t.topic_id = pv.topic_id
             WHERE t.topic_id IS NULL
         ');
-        $totalDeleted += DB()->affected_rows();
+        $totalDeleted += $this->database->affected_rows();
 
         // Delete orphan poll users
-        DB()->query('
+        $this->database->query('
             DELETE pu FROM ' . BB_POLL_USERS . ' pu
             LEFT JOIN ' . BB_TOPICS . ' t ON t.topic_id = pu.topic_id
             WHERE t.topic_id IS NULL
         ');
-        $totalDeleted += DB()->affected_rows();
+        $totalDeleted += $this->database->affected_rows();
 
         return $totalDeleted;
     }

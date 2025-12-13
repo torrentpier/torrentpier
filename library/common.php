@@ -119,6 +119,31 @@ if (is_file(BB_PATH . '/config/config.local.php')) {
 $config = TorrentPier\Config::init($bb_cfg);
 
 /**
+ * Get the Application container instance
+ *
+ * @param string|null $abstract Service to resolve from the container
+ * @param array $parameters Parameters for the service resolution
+ * @return mixed Application instance or resolved service
+ * @throws \Illuminate\Contracts\Container\BindingResolutionException
+ */
+function app(?string $abstract = null, array $parameters = []): mixed
+{
+    /** @var TorrentPier\Application|null $app */
+    static $app = null;
+
+    if ($app === null) {
+        // Create the application but don't boot yet - let the caller decide
+        $app = require BB_PATH . '/bootstrap/app.php';
+    }
+
+    if ($abstract === null) {
+        return $app;
+    }
+
+    return $app->make($abstract, $parameters);
+}
+
+/**
  * Get the Config instance
  */
 function config(): TorrentPier\Config

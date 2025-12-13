@@ -10,9 +10,12 @@
 
 namespace TorrentPier\Console\Commands\Cache;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use TorrentPier\Application;
+use TorrentPier\Config;
 use TorrentPier\Console\Commands\Command;
 use TorrentPier\Console\Helpers\FileSystemHelper;
 
@@ -25,12 +28,27 @@ use TorrentPier\Console\Helpers\FileSystemHelper;
 )]
 class CacheStatusCommand extends Command
 {
+    /**
+     * Create a new cache status command
+     *
+     * @param Config $config The configuration instance
+     * @param Application|null $app The application container (optional)
+     * @throws BindingResolutionException
+     */
+    public function __construct(
+        private readonly Config $config,
+        ?Application $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Cache Status');
 
-        $cacheDir = CACHE_DIR;
-        $templateCacheDir = TEMPLATES_CACHE_DIR;
+        // Use injected config or fall back to constants
+        $cacheDir = \defined('CACHE_DIR') ? CACHE_DIR : $this->config->get('cache_dir');
+        $templateCacheDir = \defined('TEMPLATES_CACHE_DIR') ? TEMPLATES_CACHE_DIR : $this->config->get('templates_cache_dir');
 
         $stats = [];
 

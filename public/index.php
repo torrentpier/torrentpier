@@ -71,6 +71,12 @@ switch ($result['action']) {
         define('FRONT_CONTROLLER', true);
         require_once dirname(__DIR__) . '/library/common.php';
 
+        // Boot the application container
+        $app = app();
+        if (!$app->isBooted()) {
+            $app->boot();
+        }
+
         $router = TorrentPier\Router\Router::getInstance();
 
         // Load routes only if not already loaded (FrontController may have loaded them)

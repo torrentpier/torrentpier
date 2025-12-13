@@ -1,5 +1,6 @@
 #!/usr/bin/env php
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -20,14 +21,20 @@ const BB_ROOT = __DIR__ . '/';
 // Bootstrap the application
 require __DIR__ . '/library/common.php';
 
-// Run the console application
-$application = new TorrentPier\Console\Application();
+// Create and run the console kernel
+$kernel = new App\Kernels\ConsoleKernel(app());
 
 try {
-    $exitCode = $application->run();
+    $exitCode = $kernel->handle();
 } catch (Exception $e) {
     fwrite(STDERR, "Error: {$e->getMessage()}\n");
     $exitCode = 1;
 }
+
+// Terminate the kernel
+$kernel->terminate(
+    new Symfony\Component\Console\Input\ArgvInput,
+    $exitCode,
+);
 
 exit($exitCode);

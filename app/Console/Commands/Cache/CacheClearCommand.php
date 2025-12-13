@@ -10,11 +10,15 @@
 
 namespace TorrentPier\Console\Commands\Cache;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
+use TorrentPier\Application;
+use TorrentPier\Cache\UnifiedCacheSystem;
+use TorrentPier\Config;
 use TorrentPier\Console\Commands\Command;
 use TorrentPier\Console\Helpers\FileSystemHelper;
 
@@ -27,6 +31,22 @@ use TorrentPier\Console\Helpers\FileSystemHelper;
 )]
 class CacheClearCommand extends Command
 {
+    /**
+     * Create a new cache clear command
+     *
+     * @param Config $config The configuration instance
+     * @param UnifiedCacheSystem $cacheSystem The unified cache system
+     * @param Application|null $app The application container (optional)
+     * @throws BindingResolutionException
+     */
+    public function __construct(
+        private readonly Config $config,
+        private readonly UnifiedCacheSystem $cacheSystem,
+        ?Application $app = null,
+    ) {
+        parent::__construct($app);
+    }
+
     protected function configure(): void
     {
         $this
@@ -105,19 +125,18 @@ class CacheClearCommand extends Command
      */
     private function clearSystemCache(): void
     {
-        $cacheDir = CACHE_DIR;
+        // Use injected config or fall back to constant
+        $cacheDir = \defined('CACHE_DIR') ? CACHE_DIR : $this->config->get('cache_dir');
 
         if (is_dir($cacheDir)) {
             FileSystemHelper::clearDirectory($cacheDir);
         }
 
-        // Clear runtime cache if available
-        if (\function_exists('CACHE')) {
-            try {
-                CACHE('bb_cache')->clean();
-            } catch (Throwable) {
-                // Ignore if the cache is not available
-            }
+        // Clear runtime cache using injected cache system
+        try {
+            $this->cacheSystem->get_cache_obj('bb_cache')?->clean();
+        } catch (Throwable) {
+            // Ignore if the cache is not available
         }
     }
 
@@ -126,7 +145,8 @@ class CacheClearCommand extends Command
      */
     private function clearTemplateCache(): void
     {
-        $templateCacheDir = TEMPLATES_CACHE_DIR;
+        // Use injected config or fall back to constant
+        $templateCacheDir = \defined('TEMPLATES_CACHE_DIR') ? TEMPLATES_CACHE_DIR : $this->config->get('templates_cache_dir');
 
         if (is_dir($templateCacheDir)) {
             FileSystemHelper::clearDirectory($templateCacheDir);
