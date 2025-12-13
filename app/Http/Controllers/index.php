@@ -8,6 +8,33 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+/*
+ * ===========================================================================
+ * Refactor to Modern Controller
+ * ===========================================================================
+ * Target: Convert to PSR-7 controller with constructor dependency injection
+ *
+ * Dependencies to inject:
+ * - TorrentPier\Config (configuration access)
+ * - TorrentPier\Database\Database (database operations)
+ * - TorrentPier\Legacy\User (user session)
+ * - TorrentPier\Http\Request (HTTP request handling)
+ * - TorrentPier\Legacy\Templates (template rendering)
+ * - TorrentPier\Cache\UnifiedCacheSystem (caching forum data)
+ *
+ * Target namespace: TorrentPier\Http\Controllers
+ * Target class: HomeController
+ *
+ * Key refactoring tasks:
+ * 1. Extract procedural code into controller method (index)
+ * 2. Replace global function calls with injected dependencies
+ * 3. Implement PSR-7 request/response handling
+ * 4. Extract forum tree building into ForumService
+ * 5. Implement proper caching with cache tags
+ * 6. Add SEO-friendly meta tags generation
+ * ===========================================================================
+ */
+
 page_cfg('load_tpl_vars', [
     'post_icons',
 ]);
