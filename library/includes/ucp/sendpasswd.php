@@ -8,6 +8,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use Illuminate\Support\Str;
+
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
@@ -38,8 +40,8 @@ if (request()->post->has('submit')) {
             $username = $row['username'];
             $user_id = $row['user_id'];
 
-            $user_actkey = make_rand_str(ACTKEY_LENGTH);
-            $user_password = make_rand_str(PASSWORD_MIN_LENGTH);
+            $user_actkey = Str::random(ACTKEY_LENGTH);
+            $user_password = Str::random(PASSWORD_MIN_LENGTH);
 
             $sql = 'UPDATE ' . BB_USERS . "
 				SET user_newpasswd = '{$user_password}', user_actkey = '{$user_actkey}'

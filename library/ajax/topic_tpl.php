@@ -8,6 +8,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use Illuminate\Support\Str;
+
 if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
@@ -37,7 +39,7 @@ switch ($mode) {
 switch ($mode) {
     case 'save':
     case 'new':
-        if (!$tpl_name = htmlCHR(str_compact($this->request['tpl_name']))) {
+        if (!$tpl_name = htmlCHR(Str::squish($this->request['tpl_name']))) {
             $this->ajax_die('не заполнено название шаблона');
         }
         $tpl_name = substr($tpl_name, 0, 60);
@@ -48,7 +50,7 @@ switch ($mode) {
         if (!$tpl_src_title = htmlCHR($this->request['tpl_src_title'])) {
             $this->ajax_die('не заполнен формат названия темы');
         }
-        $tpl_src_title = str_compact($tpl_src_title);
+        $tpl_src_title = Str::squish($tpl_src_title);
 
         if (!$tpl_src_msg = htmlCHR($this->request['tpl_src_msg'])) {
             $this->ajax_die('не заполнен формат создания сообщения');

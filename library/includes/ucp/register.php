@@ -8,6 +8,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use Illuminate\Support\Str;
+
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
@@ -560,7 +562,7 @@ if ($submit && !$errors) {
      */
     if ($mode == 'register') {
         if (config()->get('reg_email_activation')) {
-            $user_actkey = make_rand_str(ACTKEY_LENGTH);
+            $user_actkey = Str::random(ACTKEY_LENGTH);
             $db_data['user_active'] = 0;
             $db_data['user_actkey'] = $user_actkey;
         } else {
@@ -635,7 +637,7 @@ if ($submit && !$errors) {
         // if anything has been changed
         if ($db_data) {
             if (!$pr_data['user_active']) {
-                $user_actkey = make_rand_str(ACTKEY_LENGTH);
+                $user_actkey = Str::random(ACTKEY_LENGTH);
                 $pr_data['user_actkey'] = $user_actkey;
                 $db_data['user_actkey'] = $user_actkey;
 

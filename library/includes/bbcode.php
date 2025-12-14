@@ -8,6 +8,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use Illuminate\Support\Str;
+
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
@@ -108,7 +110,7 @@ function get_bbcode_tpl()
 
 function bbcode_tpl_compact($text)
 {
-    $text = str_compact($text);
+    $text = Str::squish($text);
     $text = str_replace('> <', '><', $text);
 
     return $text;
@@ -348,7 +350,7 @@ function extract_search_words($text)
     $min_word_len = max(2, config()->get('search_min_word_len') - 1);
     $max_word_len = config()->get('search_max_word_len');
 
-    $text = ' ' . str_compact(strip_tags(mb_strtolower($text, DEFAULT_CHARSET))) . ' ';
+    $text = ' ' . Str::squish(strip_tags(mb_strtolower($text, DEFAULT_CHARSET))) . ' ';
     $text = str_replace(['&#91;', '&#93;'], ['[', ']'], $text);
 
     // HTML entities like &nbsp;
@@ -363,7 +365,7 @@ function extract_search_words($text)
     $text = preg_replace('#[.,:;]#u', ' ', $text);
 
     // Trim 1+ spaces to one space and split this string into unique words
-    $text = array_unique(explode(' ', str_compact($text)));
+    $text = array_unique(explode(' ', Str::squish($text)));
 
     // short & long words 2
     $text_out = [];

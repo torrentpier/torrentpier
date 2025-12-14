@@ -38,6 +38,7 @@
 
 require INC_DIR . '/bbcode.php';
 
+use Illuminate\Support\Str;
 use TorrentPier\Search\SearchParams;
 
 page_cfg('use_tablesorter', true);
@@ -890,7 +891,7 @@ function fetch_search_ids(
     }
 
     // Save results in DB
-    $search_id = make_rand_str(SEARCH_ID_LENGTH);
+    $search_id = Str::random(SEARCH_ID_LENGTH);
 
     if ($items_count > $per_page) {
         $search_array = implode(',', $items_found);
@@ -942,7 +943,7 @@ function prevent_huge_searches($SQL)
 
         if (DB()->query($SQL) && $row = DB()->fetch_row('SELECT FOUND_ROWS() AS rows_count')) {
             if ($row['rows_count'] > config()->get('limit_max_search_results')) {
-                //				bb_log(str_compact(DB()->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
+                //				bb_log(Str::squish(DB()->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
                 bb_die('Too_many_search_results');
             }
         }

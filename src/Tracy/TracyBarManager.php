@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Tracy;
 
+use Illuminate\Support\Str;
 use Tracy\Debugger;
 
 /**
@@ -109,7 +110,7 @@ class TracyBarManager
      */
     public function formatQuery(string $sql, bool $escapeHtml = false): string
     {
-        $sql = str_compact($sql);
+        $sql = Str::squish($sql);
 
         return $escapeHtml ? htmlCHR($sql, true) : $sql;
     }
