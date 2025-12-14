@@ -131,8 +131,9 @@ function generate_smilies($mode)
     $inline_rows = 7;
     $window_columns = 8;
 
-    if ($mode == 'window') {
+    if ($mode == 'window' && !defined('SESSION_STARTED')) {
         user()->session_start();
+        define('SESSION_STARTED', true);
     }
 
     $data = datastore()->get('smile_replacements');

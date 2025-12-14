@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Kernels\HttpKernel;
 use TorrentPier\Http\HttpClient;
 use TorrentPier\Http\Request;
 use TorrentPier\Router\Router;
@@ -30,6 +31,11 @@ class HttpServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // HTTP Kernel singleton
+        $this->app->singleton(HttpKernel::class, function () {
+            return new HttpKernel($this->app);
+        });
+
         // HTTP Request singleton
         $this->app->singleton(Request::class, function () {
             return new Request;
@@ -60,6 +66,7 @@ class HttpServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [
+            HttpKernel::class,
             Request::class,
             HttpClient::class,
             Router::class,

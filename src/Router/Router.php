@@ -12,12 +12,15 @@ declare(strict_types=1);
 
 namespace TorrentPier\Router;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
+use InvalidArgumentException;
 use League\Route\Route;
 use League\Route\RouteGroup;
 use League\Route\Router as LeagueRouter;
 use League\Route\Strategy\ApplicationStrategy;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use ReflectionClass;
 use Throwable;
 
@@ -31,13 +34,57 @@ class Router
     private LeagueRouter $router;
     private bool $routesLoaded = false;
 
+    /** @var array<string, class-string<MiddlewareInterface>> */
+    private array $middlewareAliases = [];
+
     public function __construct()
     {
         $this->router = new LeagueRouter;
 
         // Use ApplicationStrategy for standard request handling
-        $strategy = new ApplicationStrategy;
-        $this->router->setStrategy($strategy);
+        $this->router->setStrategy(new ApplicationStrategy);
+    }
+
+    /**
+     * Set middleware aliases for string-based middleware resolution
+     *
+     * @param array<string, class-string<MiddlewareInterface>> $aliases
+     */
+    public function setMiddlewareAliases(array $aliases): void
+    {
+        $this->middlewareAliases = $aliases;
+    }
+
+    /**
+     * Resolve middleware from string alias or return as-is
+     *
+     * @param string|MiddlewareInterface $middleware Alias string or middleware instance
+     * @throws InvalidArgumentException|BindingResolutionException If alias not found
+     */
+    public function resolveMiddleware(string|MiddlewareInterface $middleware): MiddlewareInterface
+    {
+        if ($middleware instanceof MiddlewareInterface) {
+            return $middleware;
+        }
+
+        if (!isset($this->middlewareAliases[$middleware])) {
+            throw new InvalidArgumentException("Middleware alias '{$middleware}' not found");
+        }
+
+        return app()->make($this->middlewareAliases[$middleware]);
+    }
+
+    /**
+     * Add global middleware to the router
+     *
+     * @param string|MiddlewareInterface $middleware Middleware alias or instance
+     * @throws BindingResolutionException
+     */
+    public function middleware(string|MiddlewareInterface $middleware): self
+    {
+        $this->router->middleware($this->resolveMiddleware($middleware));
+
+        return $this;
     }
 
     /**

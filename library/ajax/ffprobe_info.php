@@ -16,7 +16,7 @@ if (!config()->get('torr_server.enabled')) {
     $this->ajax_die(__('MODULE_OFF'));
 }
 
-if (config()->get('torr_server.disable_for_guest') && IS_GUEST) {
+if (IS_GUEST) {
     $this->ajax_die(__('NEED_TO_LOGIN_FIRST'));
 }
 

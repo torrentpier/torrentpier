@@ -1142,8 +1142,9 @@ function bb_die($msg_text, $status_code = null)
     try {
         lang()->initializeLanguage();
 
-        if (empty(userdata())) {
+        if (empty(userdata()) && !defined('SESSION_STARTED')) {
             user()->session_start();
+            define('SESSION_STARTED', true);
         }
     } catch (Throwable $e) {
         // DB or other critical failure - fall back to simple output

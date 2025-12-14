@@ -36,7 +36,9 @@ class HttpKernel
         set => $this->_middleware = $value;
     }
 
-    private array $_middleware = [];
+    private array $_middleware = [
+        \App\Http\Middleware\WebMiddleware::class,
+    ];
 
     /**
      * The middleware groups
@@ -49,7 +51,9 @@ class HttpKernel
     }
 
     private array $_middlewareGroups = [
-        'web' => [],
+        'web' => [
+            \App\Http\Middleware\WebMiddleware::class,
+        ],
         'api' => [],
     ];
 
@@ -63,7 +67,10 @@ class HttpKernel
         set => $this->_middlewareAliases = $value;
     }
 
-    private array $_middlewareAliases = [];
+    private array $_middlewareAliases = [
+        'web' => \App\Http\Middleware\WebMiddleware::class,
+        'auth' => \App\Http\Middleware\AuthMiddleware::class,
+    ];
 
     /**
      * Create a new HTTP Kernel instance
@@ -121,6 +128,9 @@ class HttpKernel
         $router = $this->app->make(Router::class);
 
         if (!$router->areRoutesLoaded()) {
+            // Register middleware aliases from kernel
+            $router->setMiddlewareAliases($this->middlewareAliases);
+
             $routesPath = $this->app->routesPath('web.php');
 
             if (file_exists($routesPath)) {

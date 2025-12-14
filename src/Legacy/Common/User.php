@@ -101,8 +101,19 @@ class User
      */
     public function session_start(array $cfg = [])
     {
-        $update_sessions_table = false;
+        // Merge configuration
         $this->cfg = array_merge($this->cfg, $cfg);
+
+        // If the session already started, just apply req_login check
+        if (\defined('SESSION_STARTED')) {
+            if (IS_GUEST && $this->cfg['req_login']) {
+                login_redirect();
+            }
+
+            return $this->data;
+        }
+
+        $update_sessions_table = false;
 
         $session_id = $this->sessiondata['sid'];
 

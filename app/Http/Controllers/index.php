@@ -66,9 +66,6 @@ if (config()->get('show_network_news')) {
     ]);
 }
 
-// Init userdata
-user()->session_start();
-
 // Redirect legacy category URL (?c=1) to semantic URL (/category/kino.1/)
 if (!request()->attributes->get('semantic_route') && request()->getMethod() === 'GET') {
     $legacyCatId = request()->query->getInt(POST_CAT_URL);

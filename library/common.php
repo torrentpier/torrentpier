@@ -92,14 +92,6 @@ if (!is_file(BB_PATH . '/vendor/autoload.php')) {
 }
 require_once BB_PATH . '/vendor/autoload.php';
 
-/**
- * Gets the value of an environment variable.
- */
-function env(string $key, mixed $default = null): mixed
-{
-    return TorrentPier\Env::get($key, $default);
-}
-
 // Load ENV
 try {
     $dotenv = Dotenv\Dotenv::createMutable(BB_PATH);

@@ -15,9 +15,6 @@ page_cfg('use_tablesorter', true);
 $s_member_groups = $s_pending_groups = $s_member_groups_opt = $s_pending_groups_opt = '';
 $select_sort_mode = $select_sort_order = '';
 
-// Init userdata
-user()->session_start(['req_login' => true]);
-
 set_die_append_msg();
 
 $group_id = request()->query->has(POST_GROUPS_URL) ? request()->query->getInt(POST_GROUPS_URL) : null;

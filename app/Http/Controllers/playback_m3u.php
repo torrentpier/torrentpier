@@ -18,9 +18,6 @@ $validFormats = [
     'video' => ['mp4', 'mkv', 'avi', 'm4v'],
 ];
 
-// Start session management
-user()->session_start(['req_login' => config()->get('torr_server.disable_for_guest')]);
-
 // Disable robots indexing
 page_cfg('allow_robots', false);
 

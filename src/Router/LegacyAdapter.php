@@ -81,14 +81,6 @@ class LegacyAdapter
             \define('BB_SCRIPT', $this->scriptName);
         }
 
-        // Start a session for migrated controllers (simple controllers like terms.php)
-        // Controllers that need custom session options can set 'manage_session' => true
-        $manageSession = $this->options['manage_session'] ?? false;
-        if (!$manageSession && !\defined('SESSION_STARTED')) {
-            user()->session_start();
-            \define('SESSION_STARTED', true);
-        }
-
         // Capture output from the controller
         $existingLevel = ob_get_level();
         ob_start();

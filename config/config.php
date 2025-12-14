@@ -139,7 +139,6 @@ $bb_cfg['torr_server'] = [
     'enabled' => false,
     'url' => "http://{$domain_name}:8090",
     'timeout' => 3,
-    'disable_for_guest' => true,
 ];
 
 // FreeIPAPI settings
@@ -583,7 +582,6 @@ $bb_cfg['manticore_port'] = 9306;
 $bb_cfg['search_fallback_to_mysql'] = true;
 
 $bb_cfg['disable_ft_search_in_posts'] = false; // disable searching in post-bodies
-$bb_cfg['disable_search_for_guest'] = true; // Disable search for guests
 $bb_cfg['allow_search_in_bool_mode'] = true;
 $bb_cfg['max_search_words_per_post'] = 200; // Max word count for a post
 $bb_cfg['search_min_word_len'] = 3; // Min letters to perform a search

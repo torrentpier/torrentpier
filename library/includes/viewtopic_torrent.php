@@ -225,7 +225,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
             ]);
 
             // TorrServer integration
-            if (config()->get('torr_server.enabled') && (!IS_GUEST || !config()->get('torr_server.disable_for_guest')) && TorrentPier\Attachment::m3uExists($topic_id)) {
+            if (config()->get('torr_server.enabled') && !IS_GUEST && TorrentPier\Attachment::m3uExists($topic_id)) {
                 template()->assign_block_vars('torrent.tor_server', [
                     'TORR_SERVER_M3U_LINK' => PLAYBACK_M3U_URL . $bt_topic_id . '/',
                     'TORR_SERVER_M3U_ICON' => theme_images('icon_tor_m3u_icon'),

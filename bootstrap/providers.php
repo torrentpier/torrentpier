@@ -41,6 +41,9 @@ return [
     // HTTP and routing
     App\Providers\HttpServiceProvider::class,
 
+    // HTTP Middleware
+    App\Providers\MiddlewareServiceProvider::class,
+
     // Template and view rendering
     App\Providers\TemplateServiceProvider::class,
 

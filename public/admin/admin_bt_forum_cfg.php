@@ -49,7 +49,6 @@ $default_cfg_bool = [
     'bt_show_dl_but_cancel' => 1,
     'bt_show_dl_stat_on_index' => 1,
     'bt_newtopic_auto_reg' => 1,
-    'bt_tor_browse_only_reg' => 1,
     'bt_search_bool_mode' => 1,
     'bt_allow_spmode_change' => 1,
     'bt_del_addit_ann_urls' => 1,
