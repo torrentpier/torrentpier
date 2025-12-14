@@ -33,9 +33,6 @@
  * 6. Add sorting and filtering options
  * ===========================================================================
  */
-
-user()->session_start(['req_login' => true]);
-
 $start = abs(request()->getInt('start'));
 $mode = request()->getString('mode', 'joined');
 $sort_order = (request()->getString('order', 'ASC') === 'ASC') ? 'ASC' : 'DESC';

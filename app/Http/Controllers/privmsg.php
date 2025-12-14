@@ -80,9 +80,6 @@ if ($folder = request()->getString('folder')) {
     $folder = 'inbox';
 }
 
-// Start session management
-user()->session_start(['req_login' => true]);
-
 template()->assign_vars([
     'IN_PM' => true,
     'QUICK_REPLY' => config()->get('show_quick_reply') && $folder == 'inbox' && $mode == 'read',

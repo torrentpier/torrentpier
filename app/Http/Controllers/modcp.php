@@ -91,9 +91,6 @@ function validate_mode_condition($request_index, $mod_action = '')
     return request()->has($request_index) || (request()->post->has('mod_action') && request()->post->get('mod_action') === $mod_action);
 }
 
-// Start session management
-user()->session_start(['req_login' => true]);
-
 // Obtain initial vars
 $forum_id = request()->getInt(POST_FORUM_URL, 0);
 $topic_id = request()->getInt(POST_TOPIC_URL, 0);

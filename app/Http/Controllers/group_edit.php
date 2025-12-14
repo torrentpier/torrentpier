@@ -10,9 +10,6 @@
 
 page_cfg('include_bbcode_js', true);
 
-// Start session management
-user()->session_start(['req_login' => true]);
-
 $group_id = request()->getInt(POST_GROUPS_URL) ?: null;
 $group_info = [];
 $is_moderator = false;

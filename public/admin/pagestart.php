@@ -13,7 +13,10 @@ define('IN_ADMIN', true);
 
 require dirname(__DIR__, 2) . '/library/common.php';
 
-user()->session_start();
+if (!defined('SESSION_STARTED')) {
+    user()->session_start();
+    define('SESSION_STARTED', true);
+}
 
 if (IS_GUEST) {
     redirect(LOGIN_URL . '?redirect=admin/index.php');

@@ -43,9 +43,6 @@ page_cfg('load_tpl_vars', [
 ]);
 page_cfg('allow_robots', false);
 
-// Session start
-user()->session_start(['req_login' => config()->get('bt_tor_browse_only_reg')]);
-
 set_die_append_msg();
 
 $tor_search_limit = (IS_AM) ? 2000 : 500;

@@ -141,13 +141,6 @@
 </tr>
 
 <tr>
-	<th colspan="2">{L_BT_TOR_BROWSE_ONLY_REG_HEAD}</th>
-</tr>
-<tr>
-	<td><h4>{L_BT_TOR_BROWSE_ONLY_REG}</h4></td>
-	<td><label for="bt_tor_browse_only_reg1"><input type="radio" name="bt_tor_browse_only_reg" id="bt_tor_browse_only_reg1" value="1" {BT_TOR_BROWSE_ONLY_REG_YES} /> {L_BT_TOR_BROWSE_ONLY_REG_YES}&nbsp;</label><label for="bt_tor_browse_only_reg2">&nbsp;<input type="radio" name="bt_tor_browse_only_reg" id="bt_tor_browse_only_reg2" value="0" {BT_TOR_BROWSE_ONLY_REG_NO} /> {L_BT_TOR_BROWSE_ONLY_REG_NO} &nbsp;</label></td>
-</tr>
-<tr>
 	<td><h4>{L_BT_SEARCH_BOOL_MODE}</h4><h6>{L_BT_SEARCH_BOOL_MODE_EXPL}</h6></td>
 	<td><label for="bt_search_bool_mode1"><input type="radio" name="bt_search_bool_mode" id="bt_search_bool_mode1" value="1" {BT_SEARCH_BOOL_MODE_YES} /> {L_BT_SEARCH_BOOL_MODE_YES}&nbsp;</label><label for="bt_search_bool_mode2">&nbsp;<input type="radio" name="bt_search_bool_mode" id="bt_search_bool_mode2" value="0" {BT_SEARCH_BOOL_MODE_NO} /> {L_BT_SEARCH_BOOL_MODE_NO} &nbsp;</label></td>
 </tr>

@@ -66,30 +66,17 @@ switch ($result['action']) {
         exit;
 
     case FrontController::ACTION_ROUTE:
-        // Bootstrap and route
+        // Bootstrap and route via HttpKernel
         define('BB_ROOT', './');
         define('FRONT_CONTROLLER', true);
         require_once dirname(__DIR__) . '/library/common.php';
 
-        // Boot the application container
-        $app = app();
-        if (!$app->isBooted()) {
-            $app->boot();
-        }
-
-        $router = app(TorrentPier\Router\Router::class);
-
-        // Load routes only if not already loaded (FrontController may have loaded them)
-        if (!$router->areRoutesLoaded()) {
-            $routes = require dirname(__DIR__) . '/routes/web.php';
-            $routes($router);
-            $router->setRoutesLoaded();
-        }
-
         $request = Laminas\Diactoros\ServerRequestFactory::fromGlobals();
 
         try {
-            $response = $router->dispatch($request);
+            /** @var App\Kernels\HttpKernel $kernel */
+            $kernel = app(App\Kernels\HttpKernel::class);
+            $response = $kernel->handle($request);
 
             // Legacy file needs global scope execution
             if ($response->hasHeader('X-Legacy-Execute')) {
@@ -98,6 +85,9 @@ switch ($result['action']) {
             }
 
             (new Laminas\HttpHandlerRunner\Emitter\SapiEmitter)->emit($response);
+
+            // Terminate kernel (cleanup, logging, etc.)
+            $kernel->terminate($request, $response);
         } catch (League\Route\Http\Exception\NotFoundException $e) {
             http_response_code(404);
             if (!defined('BB_SCRIPT')) {
@@ -105,6 +95,7 @@ switch ($result['action']) {
             }
             if (!defined('SESSION_STARTED')) {
                 user()->session_start();
+                define('SESSION_STARTED', true);
             }
             bb_die('PAGE_NOT_FOUND', 404);
         } catch (League\Route\Http\Exception\MethodNotAllowedException $e) {

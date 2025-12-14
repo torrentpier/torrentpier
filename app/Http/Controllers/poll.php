@@ -8,9 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-// Start session management
-user()->session_start(['req_login' => true]);
-
 $mode = request()->post->get('mode', '');
 $topic_id = request()->getInt('topic_id');
 $forum_id = request()->getInt('forum_id');

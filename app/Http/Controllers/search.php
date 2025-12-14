@@ -48,9 +48,6 @@ page_cfg('load_tpl_vars', [
 ]);
 page_cfg('allow_robots', false);
 
-// Start session management
-user()->session_start(['req_login' => config()->get('disable_search_for_guest')]);
-
 set_die_append_msg();
 
 if (request()->post->has('del_my_post')) {
