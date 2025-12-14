@@ -8,6 +8,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use Illuminate\Support\Str;
+
 if (!defined('IN_TRACKER')) {
     die(basename(__FILE__));
 }
@@ -22,14 +24,14 @@ if (config()->get('tracker.bt_off')) {
 //
 function silent_exit($msg = '')
 {
-    echo Arokettu\Bencode\Bencode::encode(['warning message' => str_compact($msg)]);
+    echo Arokettu\Bencode\Bencode::encode(['warning message' => Str::squish($msg)]);
 
     exit;
 }
 
 function error_exit($msg = '')
 {
-    echo Arokettu\Bencode\Bencode::encode(['failure reason' => str_compact($msg)]);
+    echo Arokettu\Bencode\Bencode::encode(['failure reason' => Str::squish($msg)]);
 
     exit;
 }

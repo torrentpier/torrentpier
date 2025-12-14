@@ -8,6 +8,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use Illuminate\Support\Str;
+
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
@@ -1447,20 +1449,20 @@ function caching_output($enabled, $mode, $cache_var_name, $ttl = 300)
 function clean_title($str, $replace_underscore = false)
 {
     $str = ($replace_underscore) ? str_replace('_', ' ', $str) : $str;
-    $str = htmlCHR(str_compact($str));
+    $str = htmlCHR(Str::squish($str));
 
     return $str;
 }
 
 function clean_text_match(?string $text, bool $ltrim_star = true, bool $die_if_empty = false): string
 {
-    $text = str_compact($text);
+    $text = Str::squish($text);
     $ltrim_chars = ($ltrim_star) ? ' *-!' : ' ';
-    $text = ' ' . str_compact(ltrim($text, $ltrim_chars)) . ' ';
+    $text = ' ' . Str::squish(ltrim($text, $ltrim_chars)) . ' ';
 
     if (config()->get('search_engine_type') == 'manticore') {
         $text = strip_tags($text);
-        $text = str_compact($text);
+        $text = Str::squish($text);
         $text = trim($text);
     } else {
         $text = DB()->escape(trim($text));

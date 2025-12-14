@@ -11,6 +11,7 @@
 namespace TorrentPier\Torrent;
 
 use Exception;
+use Illuminate\Support\Str;
 
 /**
  * Passkey management for torrent downloads.
@@ -39,7 +40,7 @@ class Passkey
             }
         }
 
-        $passkey_val = make_rand_str(BT_AUTH_KEY_LENGTH);
+        $passkey_val = Str::random(BT_AUTH_KEY_LENGTH);
         $old_passkey = self::get($userId);
 
         if (!$old_passkey) {

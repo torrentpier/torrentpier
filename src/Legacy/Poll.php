@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Legacy;
 
+use Illuminate\Support\Str;
 use JsonException;
 
 /**
@@ -92,13 +93,13 @@ class Poll
         $poll_votes = (string)@$posted_data['poll_votes'];
         $this->poll_votes = [];
 
-        if (!$poll_caption = str_compact($poll_caption)) {
+        if (!$poll_caption = Str::squish($poll_caption)) {
             return $this->err_msg = __('EMPTY_POLL_TITLE');
         }
         $this->poll_votes[] = $poll_caption; // header is vote_id = 0
 
         foreach (explode("\n", $poll_votes) as $vote) {
-            if (!$vote = str_compact($vote)) {
+            if (!$vote = Str::squish($vote)) {
                 continue;
             }
             $this->poll_votes[] = $vote;

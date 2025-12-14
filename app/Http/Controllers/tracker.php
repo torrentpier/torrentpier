@@ -35,6 +35,8 @@
  * ===========================================================================
  */
 
+use Illuminate\Support\Str;
+
 // Page config
 page_cfg('include_bbcode_js', true);
 page_cfg('use_tablesorter', true);
@@ -659,7 +661,7 @@ if ($allowed_forums) {
     } else {
         // Save result in DB
         if ($tor_count > $per_page && !$search_id) {
-            $search_id = make_rand_str(SEARCH_ID_LENGTH);
+            $search_id = Str::random(SEARCH_ID_LENGTH);
             $search_type = SEARCH_TYPE_TRACKER;
 
             $columns = 'session_id,   search_type,   search_id,   search_time,   search_settings,  search_array';

@@ -10,6 +10,8 @@
 
 namespace TorrentPier\Legacy;
 
+use Illuminate\Support\Str;
+
 /**
  * Class WordsRate
  * @package TorrentPier\Legacy
@@ -27,7 +29,7 @@ class WordsRate
     {
         // words starting with..
         $del_list = file_get_contents(BB_ROOT . '/library/words_rate_del_list.txt');
-        $del_list = str_compact($del_list);
+        $del_list = Str::squish($del_list);
         $del_list = str_replace(' ', '|', preg_quote($del_list, '/'));
         $del_exp = '/\b(' . $del_list . ')[\w\-]*/i';
 

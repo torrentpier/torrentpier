@@ -9,6 +9,7 @@
  */
 
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Str;
 
 if (isset($_REQUEST['GLOBALS'])) {
     die();
@@ -713,7 +714,7 @@ function clean_filename($fname)
 {
     static $s = ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' '];
 
-    return str_replace($s, '_', str_compact($fname));
+    return str_replace($s, '_', Str::squish($fname));
 }
 
 /**
@@ -724,33 +725,6 @@ function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTE
     return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
 }
 
-/**
- * @param string $str
- * @return string
- */
-function str_compact($str)
-{
-    return preg_replace('/\s\s+/', ' ', trim($str ?? ''));
-}
-
-/**
- * Generate a "random" alphanumeric string.
- *
- * Should not be considered sufficient for cryptography, etc.
- *
- * @throws Exception
- */
-function make_rand_str(int $length = 10): string
-{
-    $pool = str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $pool[random_int(0, 61)];
-    }
-
-    return $randomString;
-}
 
 /**
  * Calculates user ratio

@@ -12,6 +12,7 @@ namespace TorrentPier\Legacy\Common;
 
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Str;
 use RuntimeException;
 use TorrentPier\Sessions;
 
@@ -255,7 +256,7 @@ class User
 
         // Create new session
         for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
-            $session_id = make_rand_str(SID_LENGTH);
+            $session_id = Str::random(SID_LENGTH);
 
             $args = DB()->build_array('INSERT', [
                 'session_id' => (string)$session_id,
@@ -526,7 +527,7 @@ class User
      */
     public function create_autologin_id(array $userdata, bool $create_new = true): string
     {
-        $autologin_id = $create_new ? make_rand_str(LOGIN_KEY_LENGTH) : '';
+        $autologin_id = $create_new ? Str::random(LOGIN_KEY_LENGTH) : '';
 
         DB()->query('
 			UPDATE ' . BB_USERS . " SET
