@@ -1,12 +1,9 @@
-# Caddy configuration for TorrentPier (Docker)
+# Caddy configuration for TorrentPier (Docker/FrankenPHP)
 # Web root is /app/public
 
 {$TP_HOST} {
     root * /app/public
     encode gzip zstd
-    php_server
-    try_files {path} {path}/ /index.php?{query}
-    file_server
 
     # Block access to parent directories and hidden files
     @blocked {
@@ -15,14 +12,48 @@
     }
     respond @blocked 404
 
-    # Sitemap is in parent directory
-    redir /sitemap.xml ../sitemap/sitemap.xml 301
+    # ==========================================================
+    # SEO Redirects - clean URLs
+    # ==========================================================
+
+    # Redirect /index.php to /
+    @indexphp {
+        path /index.php
+        not query *
+    }
+    redir @indexphp / 301
+
+    # Redirect *.php to clean URLs (301 for SEO)
+    # Example: /viewtopic.php?t=123 -> /viewtopic?t=123
+    @phpfiles {
+        path_regexp php ^/(.+)\.php$
+    }
+    redir @phpfiles /{re.php.1}{query} 301
+
+    # ==========================================================
+    # Static files
+    # ==========================================================
+
+    # Sitemap is in storage/app/public/sitemap (via storage symlink)
+    handle /sitemap.xml {
+        rewrite * /storage/sitemap/sitemap.xml
+        file_server
+        header Cache-Control "public, max-age=3600"
+    }
 
     # Static file caching
     @static {
-        path *.css *.js *.png *.jpg *.jpeg *.gif *.ico *.svg *.woff *.woff2 *.webp *.avif
+        path *.css *.js *.png *.jpg *.jpeg *.gif *.ico *.svg *.woff *.woff2 *.ttf *.eot *.map *.webp *.avif
     }
     header @static Cache-Control "public, max-age=2592000, immutable"
+
+    # ==========================================================
+    # PHP processing
+    # ==========================================================
+
+    php_server
+    try_files {path} {path}/ /index.php?{query}
+    file_server
 
     log {
         output stdout

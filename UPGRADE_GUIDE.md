@@ -1497,6 +1497,142 @@ $siteName = htmlspecialchars(config()->get('sitename', 'TorrentPier'));
 
 For comprehensive testing documentation and best practices, see [tests/README.md](tests/README.md).
 
+## 🌐 Web Server Configuration
+
+TorrentPier requires proper web server configuration for clean URLs and optimal performance. All `.php` file redirects and static file serving should be handled by the web server, not PHP.
+
+### Nginx Configuration
+
+Located at `install/nginx.conf`:
+
+```nginx
+server {
+    listen 80;
+    server_name example.com;
+    root /path/to/torrentpier/public;
+    index index.php;
+    charset utf-8;
+
+    # All requests go to front controller
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    # Block access to sensitive files
+    location ~ /\.\. { return 404; }
+    location ~ /\.(ht|en) { return 404; }
+    location ~ /\.git { return 404; }
+
+    # ==========================================================
+    # SEO Redirects - clean URLs
+    # ==========================================================
+
+    # Redirect /index.php to /
+    location = /index.php {
+        if ($args = '') {
+            return 301 /;
+        }
+        include fastcgi_params;
+        fastcgi_pass unix:/run/php/php-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root/index.php;
+    }
+
+    # Redirect *.php to clean URLs (301 for SEO)
+    # Example: /viewtopic.php?t=123 -> /viewtopic?t=123
+    location ~ ^/(.+)\.php$ {
+        return 301 /$1$is_args$args;
+    }
+
+    # ==========================================================
+    # Static files
+    # ==========================================================
+
+    # Sitemap location
+    location = /sitemap.xml {
+        alias /path/to/torrentpier/public/storage/sitemap/sitemap.xml;
+        expires 1h;
+    }
+
+    # Static file caching
+    location ~* \.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|map)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
+    # PHP processing
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass unix:/run/php/php-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}
+```
+
+### Caddy/FrankenPHP Configuration (Docker)
+
+Located at `install/docker/Caddyfile`:
+
+```caddyfile
+{$TP_HOST} {
+    root * /app/public
+    encode gzip zstd
+
+    # Block sensitive files
+    @blocked {
+        path /..
+        path /.ht* /.en* /.git* /.docker*
+    }
+    respond @blocked 404
+
+    # Redirect /index.php to /
+    @indexphp {
+        path /index.php
+        not query *
+    }
+    redir @indexphp / 301
+
+    # Redirect *.php to clean URLs (301 for SEO)
+    @phpfiles {
+        path_regexp php ^/(.+)\.php$
+    }
+    redir @phpfiles /{re.php.1}{query} 301
+
+    # Sitemap
+    handle /sitemap.xml {
+        rewrite * /storage/sitemap/sitemap.xml
+        file_server
+        header Cache-Control "public, max-age=3600"
+    }
+
+    # Static file caching
+    @static {
+        path *.css *.js *.png *.jpg *.jpeg *.gif *.ico *.svg *.woff *.woff2 *.ttf *.eot *.map
+    }
+    header @static Cache-Control "public, max-age=2592000, immutable"
+
+    php_server
+    try_files {path} {path}/ /index.php?{query}
+    file_server
+}
+```
+
+### Key Configuration Points
+
+| Feature | Nginx | Caddy |
+|---------|-------|-------|
+| Clean URLs | `try_files $uri $uri/ /index.php?$args` | `try_files {path} {path}/ /index.php?{query}` |
+| PHP redirects | `location ~ ^/(.+)\.php$ { return 301 /$1$is_args$args; }` | `redir @phpfiles /{re.php.1}{query} 301` |
+| Static caching | `expires 30d` | `header Cache-Control "public, max-age=2592000"` |
+| Sitemap | `alias /path/to/storage/sitemap/sitemap.xml` | `rewrite * /storage/sitemap/sitemap.xml` |
+
+### Why Web Server Handles Redirects
+
+- **Performance**: Redirects at web server level don't invoke PHP
+- **SEO**: 301 redirects preserve search engine rankings
+- **Standards**: Clean URLs (`/viewtopic` vs `/viewtopic.php`)
+
 ---
 
 **Important**: Always test the upgrade process in a staging environment before applying it to production. Keep backups of your database and files until you're confident the upgrade was successful.

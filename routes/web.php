@@ -16,7 +16,7 @@ use TorrentPier\Router\SemanticUrl\LegacyRedirect;
 use TorrentPier\Router\SemanticUrl\RouteAdapter;
 
 /**
- * Route definitions for TorrentPier
+ * Route definitions for TorrentPier web application
  *
  * @param Router $router
  */
