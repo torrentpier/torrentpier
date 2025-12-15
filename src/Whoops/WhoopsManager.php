@@ -54,7 +54,7 @@ class WhoopsManager
 
         $this->registerFileLogger();
 
-        if (!$this->isDevelopmentEnvironment()) {
+        if (!app()->isLocal()) {
             $this->registerTelegramHandler();
             $this->registerBugsnagHandler();
         }
@@ -191,10 +191,5 @@ class WhoopsManager
         }
 
         return htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
-    }
-
-    private function isDevelopmentEnvironment(): bool
-    {
-        return \defined('APP_ENV') && APP_ENV === 'development';
     }
 }

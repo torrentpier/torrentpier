@@ -39,7 +39,7 @@ class CheckCommand extends Command
      * Required environment variables
      */
     private const array REQUIRED_VARS = [
-        'APP_ENV' => 'Application environment (development/production)',
+        'APP_ENV' => 'Application environment (local/production)',
         'DB_HOST' => 'Database host',
         'DB_DATABASE' => 'Database name',
         'DB_USERNAME' => 'Database username',
@@ -50,7 +50,7 @@ class CheckCommand extends Command
      * Optional but recommended variables
      */
     private const array RECOMMENDED_VARS = [
-        'APP_DEBUG_MODE' => ['default' => false, 'description' => 'Enable debug mode'],
+        'APP_DEBUG' => ['default' => false, 'description' => 'Enable debug mode'],
         'APP_DEMO_MODE' => ['default' => false, 'description' => 'Enable demo mode'],
         'DB_PORT' => ['default' => 3306, 'description' => 'Database port'],
         'TP_PORT' => ['default' => 443, 'description' => 'Site port'],
@@ -119,9 +119,9 @@ class CheckCommand extends Command
         $appEnv = env('APP_ENV');
         if ($appEnv === 'production') {
             $this->line('  <info>✓</info> Running in <info>production</info> mode');
-        } elseif ($appEnv === 'development') {
-            $this->line('  <comment>!</comment> Running in <comment>development</comment> mode');
-            $warnings[] = 'Development mode is enabled - not recommended for production';
+        } elseif ($appEnv === 'local') {
+            $this->line('  <comment>!</comment> Running in <comment>local</comment> mode');
+            $warnings[] = 'Local mode is enabled - not recommended for production';
         } else {
             $this->line("  <error>!</error> Unknown environment: {$appEnv}");
             $warnings[] = "Unknown APP_ENV value: {$appEnv}";
