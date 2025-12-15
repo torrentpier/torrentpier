@@ -147,7 +147,7 @@ return Application::configure(basePath: dirname(__DIR__))
         tracker: __DIR__ . '/../routes/tracker.php',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias('auth', AuthMiddleware::class);
+        $middleware->alias('auth', Authenticate::class);
     })
     ->withExceptions(function (Handler $exceptions): void {
         // Custom exception handling
@@ -178,20 +178,20 @@ All major classes migrated from singleton pattern to DI:
 ->withMiddleware(function (Middleware $middleware): void {
     // Add to web middleware group
     $middleware->web(append: [
-        WebMiddleware::class,
+        StartSession::class,
     ]);
 
     // Define middleware aliases
-    $middleware->alias('auth', AuthMiddleware::class);
-    $middleware->alias('web', WebMiddleware::class);
+    $middleware->alias('auth', Authenticate::class);
+    $middleware->alias('session', StartSession::class);
 })
 ```
 
 ### Available Middleware
 
-- `WebMiddleware` - Standard web request handling
-- `AuthMiddleware` - Authentication checks
-- `TrackerMiddleware` - BitTorrent tracker optimization
+- `StartSession` - Starts user session and initializes locale
+- `Authenticate` - Requires authenticated user
+- `BootTracker` - Boots tracker environment for announce/scrape
 
 ## Entry Point Changes
 

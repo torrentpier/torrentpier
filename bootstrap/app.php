@@ -21,8 +21,8 @@ use App\Bootstrap\LoadEnvironmentVariables;
 use App\Bootstrap\RegisterHelpers;
 use App\Bootstrap\RegisterProviders;
 use App\Bootstrap\SetTrustedProxies;
-use App\Http\Middleware\WebMiddleware;
-use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\StartSession;
 use TorrentPier\Application;
 use TorrentPier\Exceptions\Handler;
 use TorrentPier\Http\Middleware;
@@ -105,12 +105,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Web middleware group
         $middleware->web(append: [
-            WebMiddleware::class,
+            StartSession::class,
         ]);
 
         // Middleware aliases for route definitions
-        $middleware->alias('web', WebMiddleware::class);
-        $middleware->alias('auth', AuthMiddleware::class);
+        $middleware->alias('session', StartSession::class);
+        $middleware->alias('auth', Authenticate::class);
     })
 
     /*

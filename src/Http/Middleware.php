@@ -33,7 +33,7 @@ namespace TorrentPier\Http;
  *       $middleware->group('admin', [AdminAuthMiddleware::class]);
  *
  *       // Aliases for route-specific middleware
- *       $middleware->alias('auth', AuthMiddleware::class);
+ *       $middleware->alias('auth', Authenticate::class);
  *       $middleware->alias('admin', AdminMiddleware::class);
  *   })
  */
@@ -159,7 +159,7 @@ class Middleware
      * Register a middleware alias
      *
      * Aliases allow using short names in route definitions.
-     * Example: $middleware->alias('auth', AuthMiddleware::class);
+     * Example: $middleware->alias('auth', Authenticate::class);
      * Then in routes: ->middleware('auth')
      *
      * @param string $name Alias name

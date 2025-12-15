@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Tracker;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Psr\Http\Message\ResponseInterface;
@@ -20,12 +20,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 use TorrentPier\Http\Response\BencodeResponse;
 
 /**
- * Tracker Middleware
- *
- * Initializes tracker mode for /bt/* requests.
+ * Boots tracker environment for /bt/* requests.
  * Sets up tracker constants and checks tracker availability.
  */
-class TrackerMiddleware implements MiddlewareInterface
+class BootTracker implements MiddlewareInterface
 {
     /**
      * Process tracker request

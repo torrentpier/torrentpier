@@ -8,13 +8,13 @@ use Phinx\Migration\AbstractMigration;
  * Remove obsolete guest access config options
  *
  * These config options are no longer used because guest access control
- * is now handled by AuthMiddleware on routes instead of config checks.
+ * is now handled by Authenticate middleware on routes instead of config checks.
  */
 final class RemoveObsoleteGuestConfig extends AbstractMigration
 {
     public function up(): void
     {
-        // Remove bt_tor_browse_only_reg - tracker access now controlled by AuthMiddleware
+        // Remove bt_tor_browse_only_reg - tracker access now controlled by Authenticate middleware
         $this->execute("DELETE FROM bb_config WHERE config_name = 'bt_tor_browse_only_reg'");
     }
 
