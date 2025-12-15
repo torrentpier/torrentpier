@@ -74,7 +74,7 @@ class HttpKernel
         $router = $this->app->make(Router::class);
 
         if (!$router->areRoutesLoaded()) {
-            $router->setMiddlewareAliases($this->app->getMiddlewareConfig()->getAliases());
+            $router->setMiddlewareAliases($this->app->getMiddlewareConfig()->aliases);
 
             $this->loadRoutesFromConfig($router);
             $router->setRoutesLoaded();
