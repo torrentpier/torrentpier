@@ -45,9 +45,8 @@ class AboutCommand extends Command
     {
         $this->title('TorrentPier - Bull-powered BitTorrent tracker engine');
 
-        // Use injected config or fall back to constant
         $rootPath = \defined('BB_ROOT') ? BB_ROOT : $this->app->basePath();
-        $version = $this->config->get('tp_version', 'dev');
+        $version = 'v' . $this->app->version();
 
         $this->definitionList(
             ['Version' => $version],

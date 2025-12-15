@@ -112,6 +112,7 @@ class TwigEnvironmentFactory
         // Add TorrentPier configuration functions
         $twig->addFunction(new TwigFunction('config', fn ($key = null) => $key ? config()->get($key) : config()));
         $twig->addFunction(new TwigFunction('lang', fn ($key = null, $default = '') => $key ? lang()->get($key, $default) : lang()));
+        $twig->addFunction(new TwigFunction('version', fn () => app()->version()));
 
         // Add utility functions
         $twig->addFunction(new TwigFunction('make_url', 'make_url'));

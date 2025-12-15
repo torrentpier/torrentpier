@@ -210,34 +210,30 @@ class CreateCommand extends Command
     }
 
     /**
-     * Update version and date in config.php
+     * Update version in Application.php and date in config.php
      */
     private function updateConfig(string $version, string $date): bool
     {
-        $configFile = BB_ROOT . 'config/config.php';
+        // Update Application::VERSION (semver without 'v' prefix)
+        $appFile = BB_ROOT . 'src/Application.php';
+        $semver = ltrim($version, 'v');
 
-        if (!is_file($configFile)) {
-            $this->error('Config file not found: config/config.php');
-
-            return false;
-        }
-
-        if (!is_writable($configFile)) {
-            $this->error('Config file is not writable');
-
-            return false;
-        }
-
-        $content = file_get_contents($configFile);
-
-        // Update version
+        $content = file_get_contents($appFile);
         $content = preg_replace(
-            "/(\\\$bb_cfg\\['tp_version']\\s*=\\s*')[^']*';/",
-            "\${1}{$version}';",
+            "/(public const string VERSION = ')[^']*';/",
+            "\${1}{$semver}';",
             $content,
         );
 
-        // Update release date
+        if (file_put_contents($appFile, $content) === false) {
+            $this->error('Failed to write Application.php');
+            return false;
+        }
+
+        // Update the release date in config.php
+        $configFile = BB_ROOT . 'config/config.php';
+
+        $content = file_get_contents($configFile);
         $content = preg_replace(
             "/(\\\$bb_cfg\\['tp_release_date']\\s*=\\s*')[^']*';/",
             "\${1}{$date}';",
@@ -245,8 +241,7 @@ class CreateCommand extends Command
         );
 
         if (file_put_contents($configFile, $content) === false) {
-            $this->error('Failed to write config file');
-
+            $this->error('Failed to write config.php');
             return false;
         }
 

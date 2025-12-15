@@ -18,8 +18,7 @@ $reserved_port = env('TP_PORT', 80);
 
 $bb_cfg = [];
 
-// Version info
-$bb_cfg['tp_version'] = 'v3.0.0';
+// Version info (version is in Application::VERSION)
 $bb_cfg['tp_release_date'] = 'xx-02-2026';
 $bb_cfg['tp_release_codename'] = 'Dexter';
 

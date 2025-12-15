@@ -14,6 +14,7 @@ namespace App\Bootstrap;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
 use TorrentPier\Application;
+use TorrentPier\Exceptions\Handler;
 use TorrentPier\Tracy\TracyBarManager;
 use TorrentPier\Whoops\WhoopsManager;
 
@@ -21,6 +22,7 @@ use TorrentPier\Whoops\WhoopsManager;
  * Initialize error and exception handlers
  *
  * This bootstrapper handles:
+ * - Exception handler configuration (from withExceptions())
  * - Whoops error handler initialization
  * - Tracy debug bar initialization
  */
@@ -32,6 +34,13 @@ class HandleExceptions
      */
     public function bootstrap(Application $app): void
     {
+        // Configure exception handler from fluent API
+        $handler = new Handler;
+        if ($callback = $app->getExceptionsCallback()) {
+            $callback($handler);
+        }
+        $app->instance(Handler::class, $handler);
+
         // Initialize Whoops error handler
         $whoops = $app->make(WhoopsManager::class);
         $whoops->init();

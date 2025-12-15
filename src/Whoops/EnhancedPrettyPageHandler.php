@@ -181,10 +181,10 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
             $env['SQL Debug'] = app()->isDebug() ? 'Enabled' : 'Disabled';
 
             // Configuration status
+            $env['TorrentPier Version'] = app()->version();
             if (\function_exists('config')) {
                 $config = config();
                 $env['Config Loaded'] = 'Yes';
-                $env['TorrentPier Version'] = $config->get('tp_version', 'Unknown');
                 $env['Board Title'] = $config->get('sitename', 'Unknown');
             } else {
                 $env['Config Loaded'] = 'No';

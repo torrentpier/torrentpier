@@ -70,7 +70,7 @@ final class HttpClient
             'timeout' => self::DEFAULT_TIMEOUT,
             'connect_timeout' => self::DEFAULT_CONNECT_TIMEOUT,
             'headers' => [
-                'User-Agent' => APP_NAME . '/' . config()->get('tp_version', 'Unknown'),
+                'User-Agent' => APP_NAME . '/' . app()->version(),
             ],
             'http_errors' => false, // Don't throw exceptions on 4xx/5xx responses
             'verify' => true, // Verify SSL certificates
