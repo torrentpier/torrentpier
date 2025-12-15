@@ -25,6 +25,7 @@ if ($mode == 'delete' && request()->has('cancel')) {
 }
 
 $pathToSmilesDir = BB_ROOT . config()->get('smilies_path');
+$smilesUrlPath = FORUM_PATH . config()->get('smilies_path');
 $delimeter = '=+:';
 $s_hidden_fields = '';
 $smiley_paks = $smiley_images = [];
@@ -166,11 +167,11 @@ if (request()->has('import_pack')) {
 
     template()->assign_vars([
         'TPL_SMILE_EDIT' => true,
-        'SMILEY_IMG' => $pathToSmilesDir . '/' . $smiley_images[0],
+        'SMILEY_IMG' => $smilesUrlPath . '/' . $smiley_images[0],
         'S_SMILEY_ACTION' => 'admin_smilies.php',
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_FILENAME_OPTIONS' => $filename_list,
-        'S_SMILEY_BASEDIR' => $pathToSmilesDir,
+        'S_SMILEY_BASEDIR' => $smilesUrlPath,
     ]);
 } elseif ($mode != '') {
     switch ($mode) {
@@ -225,11 +226,11 @@ if (request()->has('import_pack')) {
                 'TPL_SMILE_EDIT' => true,
                 'SMILEY_CODE' => $smile_data['code'],
                 'SMILEY_EMOTICON' => $smile_data['emoticon'],
-                'SMILEY_IMG' => $pathToSmilesDir . '/' . $smiley_edit_img,
+                'SMILEY_IMG' => $smilesUrlPath . '/' . $smiley_edit_img,
                 'S_SMILEY_ACTION' => 'admin_smilies.php',
                 'S_HIDDEN_FIELDS' => $s_hidden_fields,
                 'S_FILENAME_OPTIONS' => $filename_list,
-                'S_SMILEY_BASEDIR' => $pathToSmilesDir,
+                'S_SMILEY_BASEDIR' => $smilesUrlPath,
             ]);
 
             break;
@@ -313,7 +314,7 @@ if (request()->has('import_pack')) {
         template()->assign_block_vars('smiles', [
             'ROW_CLASS' => $row_class,
 
-            'SMILEY_IMG' => $pathToSmilesDir . '/' . $smilies[$i]['smile_url'],
+            'SMILEY_IMG' => $smilesUrlPath . '/' . $smilies[$i]['smile_url'],
             'CODE' => $smilies[$i]['code'],
             'EMOT' => $smilies[$i]['emoticon'],
 
