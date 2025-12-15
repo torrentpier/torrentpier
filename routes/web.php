@@ -30,7 +30,7 @@ return function (Router $router): void {
     // Global middleware (applied to all routes)
     // ==============================================================
 
-    $router->middleware('web');
+    $router->middleware('session');
 
     // ==============================================================
     // Modern PSR-7 controllers (in app/Http/Controllers/)
