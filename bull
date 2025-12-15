@@ -12,29 +12,10 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (PHP_SAPI !== 'cli') {
-    die('Bull CLI must be run from the command line.');
-}
+define('TORRENTPIER_START', microtime(true));
 
-const BB_ROOT = __DIR__ . '/';
+require __DIR__ . '/vendor/autoload.php';
 
-// Bootstrap the application
-require __DIR__ . '/library/common.php';
+$app = require_once __DIR__ . '/bootstrap/app.php';
 
-// Create and run the console kernel
-$kernel = new App\Kernels\ConsoleKernel(app());
-
-try {
-    $exitCode = $kernel->handle();
-} catch (Exception $e) {
-    fwrite(STDERR, "Error: {$e->getMessage()}\n");
-    $exitCode = 1;
-}
-
-// Terminate the kernel
-$kernel->terminate(
-    new Symfony\Component\Console\Input\ArgvInput,
-    $exitCode,
-);
-
-exit($exitCode);
+exit($app->handleCommand());

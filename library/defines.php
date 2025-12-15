@@ -12,9 +12,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-// Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
-define('ADMIN_DIR', BB_PATH . '/public/admin');
-
 // Storage paths
 define('STORAGE_DIR', BB_PATH . '/storage');
 define('STORAGE_PUBLIC_DIR', STORAGE_DIR . '/app/public');
