@@ -1183,9 +1183,12 @@ function bb_simple_die($txt, $status_code = null)
     exit;
 }
 
+/**
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
+ */
 function login_redirect($url = '')
 {
-    redirect(LOGIN_URL . '?redirect=' . (($url) ?: ($_SERVER['REQUEST_URI'] ?? '/')));
+    redirect(LOGIN_URL . '?redirect=' . (($url) ?: request()->getRequestUri()));
 }
 
 function meta_refresh($url, $time = 5)

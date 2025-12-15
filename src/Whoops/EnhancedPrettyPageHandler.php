@@ -219,10 +219,10 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
             }
 
             // Request information
-            $env['Request Method'] = $_SERVER['REQUEST_METHOD'] ?? 'Unknown';
-            $env['Request URI'] = $_SERVER['REQUEST_URI'] ?? 'CLI';
-            $env['User Agent'] = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
-            $env['Remote IP'] = $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
+            $env['Request Method'] = request()->getMethod();
+            $env['Request URI'] = PHP_SAPI === 'cli' ? 'CLI' : request()->getRequestUri();
+            $env['User Agent'] = request()->getUserAgent() ?? 'Unknown';
+            $env['Remote IP'] = request()->getClientIp() ?? 'Unknown';
         } catch (Throwable $e) {
             $env['Error'] = $e->getMessage();
         }

@@ -11,6 +11,7 @@
 namespace TorrentPier\Database;
 
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InvalidArgumentException;
 use Nette\Database\Connection;
 use Nette\Database\Conventions\DiscoveredConventions;
@@ -862,6 +863,7 @@ class Database
 
     /**
      * Trigger database error
+     * @throws BindingResolutionException
      */
     public function trigger_error(string $msg = 'Database Error'): void
     {
@@ -943,7 +945,8 @@ class Database
 
                 // Still log basic information for debugging
                 if (\function_exists('bb_log')) {
-                    bb_log("Database Error (User-facing): {$error_msg}\nRequest: " . ($_SERVER['REQUEST_URI'] ?? 'CLI') . LOG_LF . str_repeat('=', 30) . LOG_LF, 'user_db_errors');
+                    $requestUri = PHP_SAPI === 'cli' ? 'CLI' : request()->getRequestUri();
+                    bb_log("Database Error (User-facing): {$error_msg}\nRequest: " . $requestUri . LOG_LF . str_repeat('=', 30) . LOG_LF, 'user_db_errors');
                 }
             }
         }

@@ -65,7 +65,7 @@ class YandexSmartCaptcha implements CaptchaInterface
                 'form_params' => [
                     'secret' => $this->settings['secret_key'],
                     'token' => $token,
-                    'ip' => $_SERVER['REMOTE_ADDR'] ?? '',
+                    'ip' => request()->getClientIp() ?? '',
                 ],
                 'timeout' => 3,
                 'connect_timeout' => 2,

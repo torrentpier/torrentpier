@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 }
 
 // Obtain and encode user IP
-$client_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
+$client_ip = request()->getClientIp() ?? '127.0.0.1';
 $user_ip = TorrentPier\Helpers\IPHelper::ip2long($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
@@ -242,7 +242,7 @@ define('TOPIC_URL', FORUM_PATH . 'threads/');
 define('FILELIST_URL', FORUM_PATH . 'dl/');  // Usage: FILELIST_URL . $id . '/files/'
 define('PLAYBACK_M3U_URL', FORUM_PATH . 'playback/');
 
-define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
+define('USER_AGENT', strtolower(request()->getUserAgent() ?? ''));
 
 define('HTML_SELECT_MAX_LENGTH', 60);
 define('HTML_SF_SPACER', '&nbsp;|-&nbsp;');

@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace TorrentPier\Router;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
+
 /**
  * Log URL redirects for debugging and migration tracking
  *
@@ -32,6 +34,7 @@ class RedirectLogger
      * @param string $to Target URL
      * @param string $type Type of redirect (legacy, canonical, trailing_slash, etc.)
      * @param string|null $source Source file/class that triggered the redirect
+     * @throws BindingResolutionException
      */
     public static function log(string $from, string $to, string $type = 'unknown', ?string $source = null): void
     {
@@ -45,7 +48,7 @@ class RedirectLogger
         }
 
         // Get referrer info
-        $referer = $_SERVER['HTTP_REFERER'] ?? '-';
+        $referer = request()->getReferer() ?? '-';
 
         // Format log entry with timestamp and newline
         $entry = \sprintf(

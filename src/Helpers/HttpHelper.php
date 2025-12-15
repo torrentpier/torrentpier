@@ -18,16 +18,18 @@ class HttpHelper
 {
     /**
      * Return true if server have SSL
+     *
+     * Note: Uses $_SERVER directly because this is called during config loading
+     * before request() helper is available.
      */
     public static function isHTTPS(): bool
     {
-        return (bool)(
+        return
             (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-            || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
-            || (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] == 'on')
-            || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)
-            || (isset($_SERVER['HTTP_X_FORWARDED_PORT']) && $_SERVER['HTTP_X_FORWARDED_PORT'] == 443)
-            || (isset($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] == 'https')
-        );
+            || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https')
+            || (($_SERVER['HTTP_X_FORWARDED_SSL'] ?? '') === 'on')
+            || (($_SERVER['SERVER_PORT'] ?? 0) == 443)
+            || (($_SERVER['HTTP_X_FORWARDED_PORT'] ?? 0) == 443)
+            || (($_SERVER['REQUEST_SCHEME'] ?? '') === 'https');
     }
 }
