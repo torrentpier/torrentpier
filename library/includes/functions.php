@@ -1123,19 +1123,31 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
     return $pagination;
 }
 
-function bb_die($msg_text, $status_code = null)
+/**
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws JsonException
+ */
+function bb_die($msgText, $statusCode = null): void
 {
-    if (isset($status_code)) {
-        http_response_code($status_code);
-    }
+    $statusCode ??= 500;
+    http_response_code($statusCode);
 
-    if (defined('IN_AJAX')) {
-        ajax()->ajax_die($msg_text);
+    // Detect API requests and return JSON response
+    $isApiRequest = str_starts_with($_SERVER['REQUEST_URI'] ?? '', '/api/')
+        || str_contains($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json');
+
+    if ($isApiRequest) {
+        header('Content-Type: application/json; charset=UTF-8');
+        echo json_encode([
+            'error_code' => $statusCode,
+            'error_msg' => strip_tags(br2nl($msgText)),
+        ], JSON_THROW_ON_ERROR);
+        exit;
     }
 
     // Check for recursive calls - fall back to simple output
     if (defined('HAS_DIED')) {
-        bb_simple_die($msg_text, $status_code ?? 500);
+        bb_simple_die($msgText, $statusCode);
     }
     define('HAS_DIED', 1);
     define('DISABLE_CACHING_OUTPUT', true);
@@ -1150,7 +1162,7 @@ function bb_die($msg_text, $status_code = null)
         }
     } catch (Throwable $e) {
         // DB or other critical failure - fall back to simple output
-        bb_simple_die($msg_text, $status_code ?? 500);
+        bb_simple_die($msgText, $statusCode);
     }
 
     // If the header hasn't been output then do it
@@ -1160,13 +1172,13 @@ function bb_die($msg_text, $status_code = null)
     }
 
     // Check for lang variable
-    if ($translated = __($msg_text)) {
-        $msg_text = $translated;
+    if ($translated = __($msgText)) {
+        $msgText = $translated;
     }
 
     template()->assign_vars([
         'TPL_BB_DIE' => true,
-        'MESSAGE_TEXT' => $msg_text,
+        'MESSAGE_TEXT' => $msgText,
     ]);
 
     template()->set_filenames(['bb_die' => 'common.tpl']);
