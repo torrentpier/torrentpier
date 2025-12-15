@@ -18,36 +18,6 @@ $user_ip = TorrentPier\Helpers\IPHelper::ip2long($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
 
-/**
- * @return string
- */
-function send_page($contents)
-{
-    return compress_output($contents);
-}
-
-/**
- * @return string
- */
-function compress_output($contents)
-{
-    if (config()->get('gzip_compress') && GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP')) {
-        if (UA_GZIP_SUPPORTED && strlen($contents) > 2000) {
-            header('Content-Encoding: gzip');
-            $contents = gzencode($contents, 1);
-        }
-    }
-
-    return $contents;
-}
-
-/**
- * Start output buffering
- */
-if (!defined('IN_AJAX') && !defined('FRONT_CONTROLLER')) {
-    ob_start('send_page');
-}
-
 // Cookie params
 $c = config()->get('cookie_prefix');
 define('COOKIE_DATA', $c . 'data');
@@ -415,7 +385,8 @@ TorrentPier\Helpers\CronHelper::run(defined('START_CRON'));
 /**
  * Exit if the board is disabled via trigger
  */
-if ((config()->get('board_disable') || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
+$isApiRequest = str_starts_with($_SERVER['REQUEST_URI'] ?? '', '/api/');
+if ((config()->get('board_disable') || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !$isApiRequest && !defined('IN_LOGIN')) {
     if (config()->get('board_disable')) {
         // admin lock
         send_no_cache_headers();

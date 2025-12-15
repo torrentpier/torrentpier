@@ -11,7 +11,6 @@
  */
 
 define('TORRENTPIER_START', microtime(true));
-define('FRONT_CONTROLLER', true);
 
 require __DIR__ . '/../vendor/autoload.php';
 

@@ -84,9 +84,6 @@ $bb_cfg['server_name'] = $domain_name = !empty($_SERVER['SERVER_NAME']) ? idn_to
 $bb_cfg['server_port'] = !empty($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : $reserved_port;
 $bb_cfg['script_path'] = '/'; // The path where FORUM is located relative to the domain name
 
-// GZip
-$bb_cfg['gzip_compress'] = false; // Compress output
-
 // Tracker
 $bb_cfg['announce_interval'] = 1800; // Announce interval (default: 1800)
 $bb_cfg['scrape_interval'] = 300; // Scrape interval (default: 300)

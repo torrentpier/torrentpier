@@ -39,10 +39,6 @@ if (tracy()->isEnabled()) {
     tracy()->capturePerformanceData($captured_exec_time, $captured_sql_time);
 }
 
-if (!config()->get('gzip_compress')) {
-    flush();
-}
-
 echo '
 	</div><!--/body_container-->
 	</body>

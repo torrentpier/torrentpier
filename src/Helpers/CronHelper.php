@@ -132,10 +132,6 @@ class CronHelper
             return false;
         }
 
-        if (\defined('IN_ADMIN') || \defined('IN_AJAX')) {
-            return false;
-        }
-
         if (is_file(CRON_RUNNING)) {
             return false;
         }

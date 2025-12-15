@@ -10,8 +10,6 @@
 
 use TorrentPier\Http\Response;
 
-define('NO_GZIP', true);
-
 $topic_id = request()->getInt('t');
 $m3u = request()->getBool('m3u');
 
