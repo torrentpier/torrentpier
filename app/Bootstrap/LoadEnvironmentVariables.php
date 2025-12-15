@@ -52,7 +52,7 @@ class LoadEnvironmentVariables
         }
 
         // Security headers (only for HTTP requests)
-        if (PHP_SAPI !== 'cli') {
+        if (!$app->runningInConsole()) {
             header('X-Frame-Options: SAMEORIGIN');
         }
 
@@ -64,7 +64,7 @@ class LoadEnvironmentVariables
             $dotenv = Dotenv::createMutable($app->basePath());
             $dotenv->load();
         } catch (InvalidPathException) {
-            if (PHP_SAPI !== 'cli') {
+            if (!$app->runningInConsole()) {
                 die('Setup required: Run <code>php bull app:install</code> to configure TorrentPier');
             }
             // In CLI mode, allow running without .env for install command
