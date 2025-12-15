@@ -71,10 +71,11 @@ trait TrackerResponses
      *
      * @param int $interval Announce interval in seconds
      * @param array $cacheDict Optional cached peer statistics
+     * @throws BindingResolutionException
      */
     protected function dummyExit(int $interval = 1800, array $cacheDict = []): ResponseInterface
     {
-        $remoteAddr = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+        $remoteAddr = request()->getClientIp() ?? '127.0.0.1';
 
         $output = [
             'interval' => $interval,
