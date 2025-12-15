@@ -217,6 +217,12 @@ define('PASSWORD_MAX_LENGTH', 128);
 define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
 
+// Server URL constants
+$serverProtocol = config()->get('cookie_secure') ? 'https://' : 'http://';
+$serverPort = in_array((int)config()->get('server_port'), [80, 443], true) ? '' : ':' . config()->get('server_port');
+define('FORUM_PATH', config()->get('script_path'));
+define('FULL_URL', $serverProtocol . config()->get('server_name') . $serverPort . config()->get('script_path'));
+
 define('CAT_URL', FORUM_PATH . 'categories/');
 define('DL_URL', FORUM_PATH . 'dl/');
 define('FORUM_URL', FORUM_PATH . 'forums/');
