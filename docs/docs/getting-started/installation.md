@@ -65,6 +65,32 @@ php bull app:install
 5. Run migrations: `php bull migrate`
 6. Configure your web server
 
+### Method 4: Docker
+
+1. Ensure Docker and Docker Compose are installed on your system
+2. Verify that ports `80 (HTTP)` and `443 (HTTPS)` are free or adjust them in `docker-compose.yml`
+3. Clone the repository:
+   ```bash
+   git clone https://github.com/torrentpier/torrentpier.git
+   cd torrentpier
+   ```
+4. Copy the Docker environment template:
+   ```bash
+   cp .env.docker .env
+   ```
+5. Configure environment variables in `.env`:
+   ```bash
+   nano .env  # or use your preferred editor
+   ```
+6. Start the application:
+   ```bash
+   docker compose up -d
+   ```
+
+:::tip Permissions
+We recommend chmod **0755** for folders and chmod **0644** for files.
+:::
+
 ## Bull CLI
 
 TorrentPier includes a powerful CLI tool for management:

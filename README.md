@@ -24,9 +24,17 @@ architecture. In addition, we have a very helpful
 
 ## 🌈 Current status
 
-TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite the existing code to
-modern specifications. If you want to delve deep into the code, check our [issues](https://github.com/torrentpier/torrentpier/issues)
-and go from there. The documentation will be translated to English in the near future, currently Russian is the main language.
+TorrentPier 3.0 is a complete architectural overhaul of the engine, moving from legacy PHP to modern Laravel-inspired patterns.
+
+**Key modernizations in 3.0:**
+- **DI Container**: Illuminate Container with 11 service providers
+- **Bootstrap Pipeline**: Modular initialization with bootstrappers
+- **PSR-7/PSR-15**: Modern HTTP stack with middleware architecture
+- **Twig Templates**: Replacing a legacy styles system
+- **Bull CLI**: Console commands for all operations
+- **Unified Routing**: Single entry point with semantic URLs
+
+See the [Upgrade Guide](https://docs.torrentpier.com/docs/upgrade) for migration details and the [documentation](https://docs.torrentpier.com) for full reference.
 
 ## ✨ Features
 * Rich forum with browsing/moderation tools
@@ -62,91 +70,25 @@ and go from there. The documentation will be translated to English in the near f
 
 ## 💾 Installation
 
-For the installation, select one of the installation variants below:
+For detailed installation instructions, see our [Installation Guide](https://docs.torrentpier.com/docs/getting-started/installation).
 
-### Quick (Clean install) 🚀
+**Quick start:**
+```shell
+git clone https://github.com/torrentpier/torrentpier.git
+cd torrentpier
+composer install
+php bull app:install
+```
 
-Check out our [autoinstall](https://github.com/torrentpier/autoinstall) repository with detailed instructions.
-
-> [!NOTE]
-> Thanks to [Sergei Solovev](https://github.com/SeAnSolovev) for this installation script ❤️
-
-### Quick (With installation script) ☕️
-
-1. Select the folder where you want TorrentPier installed
-   ```shell
-   cd /path/to/www
-   ```
-2. Download the latest version of TorrentPier
-   ```shell
-   git clone --branch master --depth 1 https://github.com/torrentpier/torrentpier.git .
-   ```
-3. Install dependencies and run the installation wizard
-   ```shell
-   composer install
-   php bull app:install
-   ```
-4. Voila! ✨
-
-### Manual 🔩
-
-1. [Check our system requirements](#-requirements)
-2. Select the folder where you want TorrentPier installed
-   ```shell
-   cd /path/to/www
-   ```
-3. Download the latest version of TorrentPier
-   ```shell
-   git clone --branch master --depth 1 https://github.com/torrentpier/torrentpier.git .
-   ```
-4. Install Composer dependencies
-   ```shell
-   composer install --no-dev --prefer-dist --optimize-autoloader
-   ```
-5. Run the installation wizard (configures `.env`, creates database, runs migrations)
-   ```shell
-   php bull app:install
-   ```
-6. Voila! ✨
+For Docker setup, see the [Docker documentation](https://docs.torrentpier.com/docs/getting-started/installation#method-4-docker).
 
 > [!TIP]
 > The `php bull app:install` wizard handles all configuration: environment setup, database creation, migrations, and permissions.
 
-### Using Docker 🐳
-
-1. Ensure Docker and Docker Compose are installed on your system.
-   Verify that ports `80 (HTTP)` and `443 (HTTPS)` are free or adjust them in the `docker-compose.yml`
-2. Select the folder where you want TorrentPier installed
-   ```shell
-   cd /path/to/www
-   ```
-3. Download the latest version of TorrentPier
-   ```shell
-   git clone --branch master --depth 1 https://github.com/torrentpier/torrentpier.git .
-   ```
-4. Copy the Docker environment template (`.env.docker`) file and configure it
-   ```shell
-   cp .env.docker .env
-   ```
-5. Configure environment variables in `.env`. Edit the file and adjust values according to your environment
-   ```shell
-   nano .env  # or use your preferred editor
-   ```
-6. Start the application with Docker Compose
-   ```shell
-   docker compose up -d
-   ```
-7. Voila! ✨
-
-> [!IMPORTANT]
-> The specific settings depend on the server you are using, but in general we recommend chmod **0755** for folders, and chmod **0644** for the files in them.
-
-### Additional steps 👣
-
-1. Edit these files:
-   * `favicon.png` (change to your own)
-   * `robots.txt` (change the addresses in lines `Host` and `Sitemap` to your own)
-2. Log in to the forum using the **admin/admin** login/password, and finish setting up via admin panel. Don't forget to change your password!
+**After installation:**
+1. Log in using **admin/admin** credentials
+2. Change your password immediately
+3. Configure the site via admin panel
 
 ## 🔐 Security vulnerabilities
 
@@ -165,46 +107,6 @@ TorrentPier includes a comprehensive testing suite built with **Pest PHP**. Run 
 ```
 
 For detailed testing documentation, see [tests/README.md](tests/README.md).
-
-## 📌 Our recommendations
-
-* *Set up cron jobs.* - Run `php bull cron:run` every minute for maintenance tasks. For high-traffic trackers, consider running it more frequently or as a daemon.
-* *Local configuration copy.* - You can override the settings using the local configuration file `config/config.local.php`.
-
-## 💚 Contributing / Contributors
-
-Please read our [contributing policy](.github/CONTRIBUTING.md) and [code of conduct](.github/CODE_OF_CONDUCT.md) for details, and the process for
-submitting pull requests to us. But we are always ready to review your pull-request for compliance with
-these requirements. Just send it!
-
-<a href="https://github.com/torrentpier/torrentpier/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=torrentpier/torrentpier" alt="Contributors"/>
-</a>
-
-Made with [contrib.rocks](https://contrib.rocks).
-
-## 💞 Sponsoring
-
-Support this project by becoming a sponsor or a backer.
-
-[![OpenCollective sponsors](https://opencollective.com/torrentpier/sponsors/badge.svg)](https://opencollective.com/torrentpier)
-[![OpenCollective backers](https://opencollective.com/torrentpier/backers/badge.svg)](https://opencollective.com/torrentpier)
-
-<details>
-  <summary>Monero</summary>
-
-```
-42zJE3FDvN8foP9QYgDrBjgtd7h2FipGCGmAcmG5VFQuRkJBGMbCvoLSmivepmAMEgik2E8MPWUzKaoYsGCtmhvL7ZN73jh
-```
-</details>
-
-<details>
-  <summary>YooMoney</summary>
-
-```
-4100118022415720
-```
-</details>
 
 ## 📦 Versioning
 
