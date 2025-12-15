@@ -21,7 +21,6 @@ use TorrentPier\Whoops\WhoopsManager;
  * Initialize error and exception handlers
  *
  * This bootstrapper handles:
- * - DBG_USER flag (enabled in local env or when APP_DEBUG=true)
  * - Whoops error handler initialization
  * - Tracy debug bar initialization
  */
@@ -33,11 +32,6 @@ class HandleExceptions
      */
     public function bootstrap(Application $app): void
     {
-        // Define debug mode flag
-        if (!\defined('DBG_USER')) {
-            \define('DBG_USER', $app->isLocal() || env('APP_DEBUG', false));
-        }
-
         // Initialize Whoops error handler
         $whoops = $app->make(WhoopsManager::class);
         $whoops->init();

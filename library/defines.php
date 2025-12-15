@@ -67,8 +67,7 @@ define('UPDATER_FILE', FRAMEWORK_DIR . '/updater.json');
 define('ADMIN_TPL_DIR', TEMPLATES_DIR . '/admin/');
 
 // Debug
-define('SQL_DEBUG', true); // enable forum sql & cache debug
-define('SQL_LOG_ERRORS', true); // all SQL_xxx options enabled only if SQL_DEBUG == TRUE
+define('SQL_LOG_ERRORS', true); // log SQL errors
 define('SQL_BB_LOG_NAME', 'sql_error_bb'); // mysql log filename (Board)
 define('SQL_TR_LOG_NAME', 'sql_error_tr'); // mysql log filename (Tracker)
 define('SQL_CALC_QUERY_TIME', true); // for stats
@@ -170,3 +169,4 @@ if (!defined('EXCLUDED_USERS_CSV')) {
 // Ratio limits
 define('TR_RATING_LIMITS', true);        // ON/OFF
 define('MIN_DL_FOR_RATIO', 10737418240); // 10 GB in bytes, 0 - disable
+define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);

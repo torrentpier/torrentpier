@@ -1,10 +1,3 @@
-<!-- IF #IN_DEMO_MODE -->
-<div class="tCenter">
-    <span class="leech">{L_TP_VERSION}: {{ config('tp_version') }}</span><br/>
-    <span class="seed">{L_USERNAME}: admin / {L_PASSWORD}: admin</span>
-</div>
-<!-- ENDIF -->
-
 <!-- IF TORHELP_TOPICS -->
 	<!-- INCLUDE torhelp.tpl -->
 	<div class="spacer_6"></div>

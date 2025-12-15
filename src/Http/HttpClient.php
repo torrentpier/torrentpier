@@ -350,15 +350,15 @@ final class HttpClient
     {
         return function (callable $handler) {
             return function (RequestInterface $request, array $options) use ($handler) {
-                // Log request if debug logging is enabled
-                if (\defined('IN_DEBUG_MODE') && IN_DEBUG_MODE && \function_exists('bb_log')) {
+                // Log request if debug mode is enabled
+                if (app()->isDebug() && \function_exists('bb_log')) {
                     $this->logRequest($request);
                 }
 
                 return $handler($request, $options)->then(
                     function (ResponseInterface $response) use ($request) {
-                        // Log response if debug logging is enabled
-                        if (\defined('IN_DEBUG_MODE') && IN_DEBUG_MODE && \function_exists('bb_log')) {
+                        // Log response if debug mode is enabled
+                        if (app()->isDebug() && \function_exists('bb_log')) {
                             $this->logResponse($request, $response);
                         }
 

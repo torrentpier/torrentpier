@@ -20,11 +20,6 @@ if (!$user_id = (int)$this->request['user_id']) {
     $this->ajax_die(__('NO_USER_ID_SPECIFIED'));
 }
 
-// Check for demo mode
-if (IN_DEMO_MODE) {
-    $this->ajax_die(__('CANT_EDIT_IN_DEMO_MODE'));
-}
-
 switch ($mode) {
     case 'delete_profile':
         if (userdata('user_id') == $user_id) {

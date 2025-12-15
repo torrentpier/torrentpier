@@ -177,8 +177,8 @@ class EnhancedPrettyPageHandler extends PrettyPageHandler
         try {
             // Basic environment
             $env['Application Environment'] = app()->environment();
-            $env['Debug Mode'] = \defined('DBG_USER') && DBG_USER ? 'Enabled' : 'Disabled';
-            $env['SQL Debug'] = \defined('SQL_DEBUG') && SQL_DEBUG ? 'Enabled' : 'Disabled';
+            $env['Debug Mode'] = app()->isDebug() ? 'Enabled' : 'Disabled';
+            $env['SQL Debug'] = app()->isDebug() ? 'Enabled' : 'Disabled';
 
             // Configuration status
             if (\function_exists('config')) {

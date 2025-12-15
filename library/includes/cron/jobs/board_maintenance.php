@@ -55,10 +55,5 @@ if (empty(config()->get('bt_announce_url')) || (config()->get('bt_announce_url')
     bb_update_config(['bt_announce_url' => FULL_URL . 'bt/announce.php']);
 }
 
-// [Demo mode] Allow registering torrents by default for "Your first forum"
-if (IN_DEMO_MODE) {
-    DB()->query('UPDATE ' . BB_FORUMS . ' SET allow_reg_tracker = 1 WHERE allow_reg_tracker = 0 AND forum_id = 1 LIMIT 1');
-}
-
 // Check for updates
 datastore()->update('check_updates');

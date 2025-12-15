@@ -171,7 +171,7 @@ class DebugSelection
      */
     private function logQuery(string $method, array $arguments): void
     {
-        if (!\defined('SQL_DEBUG') || !SQL_DEBUG) {
+        if (!app()->isDebug()) {
             return;
         }
 
@@ -191,7 +191,7 @@ class DebugSelection
      */
     private function completeQueryLogging(): void
     {
-        if (!\defined('SQL_DEBUG') || !SQL_DEBUG) {
+        if (!app()->isDebug()) {
             return;
         }
 

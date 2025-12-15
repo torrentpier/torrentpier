@@ -58,11 +58,6 @@ if (request()->get('addforum') || request()->get('addcategory')) {
     }
 }
 
-// Check for demo mode
-if (IN_DEMO_MODE && in_array($mode, ['deletecat', 'deleteforum'])) {
-    bb_die(__('CANT_EDIT_IN_DEMO_MODE'));
-}
-
 $show_main_page = false;
 
 if ($mode) {

@@ -76,11 +76,6 @@ if (request()->query->has('adv')) {
 
 $submit = request()->post->has('submit');
 
-// Check for demo mode
-if (IN_DEMO_MODE && $submit) {
-    bb_die(__('CANT_EDIT_IN_DEMO_MODE'));
-}
-
 /**
  * Start program proper
  */

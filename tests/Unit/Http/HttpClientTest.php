@@ -39,10 +39,6 @@ describe('HttpClient Class', function () {
             define('LOG_LF', "\n");
         }
 
-        // Mock IN_DEBUG_MODE constant
-        if (!defined('IN_DEBUG_MODE')) {
-            define('IN_DEBUG_MODE', false);
-        }
 
         // Mock bb_log function
         if (!function_exists('bb_log')) {
