@@ -20,6 +20,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
+use TorrentPier\Application;
 use TorrentPier\Http\Exception\HttpClientException;
 
 /**
@@ -70,7 +71,7 @@ final class HttpClient
             'timeout' => self::DEFAULT_TIMEOUT,
             'connect_timeout' => self::DEFAULT_CONNECT_TIMEOUT,
             'headers' => [
-                'User-Agent' => APP_NAME . '/' . app()->version(),
+                'User-Agent' => APP_NAME . '/' . Application::VERSION,
             ],
             'http_errors' => false, // Don't throw exceptions on 4xx/5xx responses
             'verify' => true, // Verify SSL certificates
