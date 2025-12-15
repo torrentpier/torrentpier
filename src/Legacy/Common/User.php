@@ -458,36 +458,14 @@ class User
      */
     public function set_session_cookies($user_id)
     {
-        $debug_cookies = [
-            COOKIE_DBG,
-            'tracy_explain',
-        ];
-
         if ($user_id == GUEST_UID) {
-            $delete_cookies = [COOKIE_DATA, 'torhelp'];
-            $delete_cookies = array_merge($delete_cookies, $debug_cookies);
-
-            foreach ($delete_cookies as $cookie) {
+            // Clean up session cookies on logout
+            foreach ([COOKIE_DATA, 'torhelp'] as $cookie) {
                 if (isset($_COOKIE[$cookie])) {
                     bb_setcookie($cookie, '', COOKIE_EXPIRED);
                 }
             }
         } else {
-            if (!isset(config()->get('dbg_users')[$this->data['user_id']]) && DBG_USER) {
-                bb_setcookie(COOKIE_DBG, '', COOKIE_EXPIRED);
-            } elseif (isset(config()->get('dbg_users')[$this->data['user_id']]) && !DBG_USER) {
-                bb_setcookie(COOKIE_DBG, hash('xxh128', config()->get('dbg_users')[$this->data['user_id']]), COOKIE_SESSION);
-            }
-
-            // Unset sql debug cookies if SQL_DEBUG is disabled or DBG_USER cookie not present
-            if (!SQL_DEBUG || !DBG_USER) {
-                foreach ($debug_cookies as $cookie) {
-                    if (isset($_COOKIE[$cookie])) {
-                        bb_setcookie($cookie, '', COOKIE_EXPIRED);
-                    }
-                }
-            }
-
             // Set bb_data (session) cookie
             $c_sdata_resv = !empty($_COOKIE[COOKIE_DATA]) ? $_COOKIE[COOKIE_DATA] : null;
             $c_sdata_curr = ($this->sessiondata) ? json_encode($this->sessiondata) : '';

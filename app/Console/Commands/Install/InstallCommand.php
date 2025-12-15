@@ -340,7 +340,7 @@ class InstallCommand extends Command
         // Application settings
         $this->config['APP_ENV'] = $this->choice(
             'Application environment',
-            ['production', 'development'],
+            ['production', 'local'],
             'production',
         );
 
@@ -549,7 +549,7 @@ class InstallCommand extends Command
         }
 
         // Create local config for development
-        if ($this->config['APP_ENV'] === 'development') {
+        if ($this->config['APP_ENV'] === 'local') {
             $localConfig = BB_ROOT . 'config/config.local.php';
             if (!file_exists($localConfig)) {
                 copy(BB_ROOT . 'config/config.php', $localConfig);
@@ -617,7 +617,7 @@ class InstallCommand extends Command
      */
     private function cleanup(): void
     {
-        if ($this->config['APP_ENV'] === 'development') {
+        if ($this->config['APP_ENV'] === 'local') {
             return; // Skip cleanup in development
         }
 
