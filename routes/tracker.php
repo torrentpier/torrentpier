@@ -24,16 +24,16 @@ use TorrentPier\Router\Router;
 return static function (Router $router): void {
     $router->group('/bt', function ($group) {
         // Announce endpoint
-        $group->map('GET', '/announce.php', AnnounceController::class);
-        $group->map('GET', '/announce', AnnounceController::class);
+        $group->get('/announce.php', AnnounceController::class);
+        $group->get('/announce', AnnounceController::class);
 
         // Scrape endpoint
-        $group->map('GET', '/scrape.php', ScrapeController::class);
-        $group->map('GET', '/scrape', ScrapeController::class);
+        $group->get('/scrape.php', ScrapeController::class);
+        $group->get('/scrape', ScrapeController::class);
 
         // Legacy index.php and root paths -> announce
-        $group->map('GET', '/index.php', AnnounceController::class);
-        $group->map('GET', '/', AnnounceController::class);
-        $group->map('GET', '', AnnounceController::class);
+        $group->get('/index.php', AnnounceController::class);
+        $group->get('/', AnnounceController::class);
+        $group->get('', AnnounceController::class);
     })->middleware(new TrackerMiddleware);
 };

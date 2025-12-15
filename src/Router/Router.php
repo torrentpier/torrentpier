@@ -15,7 +15,7 @@ namespace TorrentPier\Router;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InvalidArgumentException;
 use League\Route\Route;
-use League\Route\RouteGroup;
+use League\Route\RouteGroup as LeagueRouteGroup;
 use League\Route\Router as LeagueRouter;
 use League\Route\Strategy\ApplicationStrategy;
 use Psr\Http\Message\ResponseInterface;
@@ -129,9 +129,11 @@ class Router
      * @param string $prefix URL prefix for the group
      * @param callable $callback Callback to define routes in the group
      */
-    public function group(string $prefix, callable $callback): RouteGroup
+    public function group(string $prefix, callable $callback): LeagueRouteGroup
     {
-        return $this->router->group($prefix, $callback);
+        return $this->router->group($prefix, function (LeagueRouteGroup $group) use ($callback) {
+            $callback(new RouteGroup($group));
+        });
     }
 
     /**
