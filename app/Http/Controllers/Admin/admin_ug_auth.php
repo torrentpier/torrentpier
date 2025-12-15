@@ -97,11 +97,6 @@ $cat_id = request()->getInt(POST_CAT_URL, 0);
 $mode = request()->getString('mode');
 $submit = request()->has('submit');
 
-// Check for demo mode
-if (IN_DEMO_MODE && $submit) {
-    bb_die(__('CANT_EDIT_IN_DEMO_MODE'));
-}
-
 $group_data = [];
 
 $forum_auth_fields = [

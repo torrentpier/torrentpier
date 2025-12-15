@@ -20,11 +20,6 @@ if (!$field = (string)$this->request['field']) {
     $this->ajax_die('invalid profile field');
 }
 
-// Check for demo mode
-if (IN_DEMO_MODE && in_array($field, ['username', 'user_email'])) {
-    $this->ajax_die(__('CANT_EDIT_IN_DEMO_MODE'));
-}
-
 $table = BB_USERS;
 $value = $this->request['value'] = (string)(isset($this->request['value'])) ? $this->request['value'] : 0;
 

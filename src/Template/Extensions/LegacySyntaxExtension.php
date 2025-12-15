@@ -160,7 +160,7 @@ class LegacySyntaxExtension extends AbstractExtension
         // Fallback: show the variable name, with red highlight in debug mode
         $varName = 'L_' . $key;
 
-        if (\defined('DBG_USER') && DBG_USER) {
+        if (app()->isDebug()) {
             return '<span style="background:#ff6b6b;color:#fff;padding:1px 4px;border-radius:2px;font-size:11px;">' . $varName . '</span>';
         }
 
@@ -353,7 +353,7 @@ class LegacySyntaxExtension extends AbstractExtension
     {
         // Convert language variables {L_VARIABLE} to use lang_fallback filter
         // Checks V.L_XXX first (template override), then L.XXX (language array)
-        // If neither found - shows variable name with debug highlighting in DBG_USER mode
+        // If neither found - shows variable name with debug highlighting in debug mode
         $content = preg_replace_callback('/\{L_([A-Z0-9_]+)\}/', function ($matches) {
             $varName = $matches[1];
 

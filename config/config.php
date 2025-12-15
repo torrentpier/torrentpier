@@ -491,7 +491,7 @@ $bb_cfg['whoops'] = [
 
 // Tracy debug bar configuration
 $bb_cfg['debug'] = [
-    'enable' => true, // requires DBG_USER cookie
+    'enable' => true,
     'panels' => [
         'performance' => true,
         'database' => true,

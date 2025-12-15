@@ -35,10 +35,6 @@ if (!$result = DB()->sql_query($sql)) {
     }
 
     if (request()->post->has('submit')) {
-        // Check for demo mode
-        if (IN_DEMO_MODE) {
-            bb_die(__('CANT_EDIT_IN_DEMO_MODE'));
-        }
         if (!empty($new_params)) {
             bb_update_config($new_params);
         }

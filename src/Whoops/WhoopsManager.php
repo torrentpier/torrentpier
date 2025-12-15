@@ -54,7 +54,7 @@ class WhoopsManager
 
         $this->registerFileLogger();
 
-        if (!app()->isLocal()) {
+        if (!app()->isDebug()) {
             $this->registerTelegramHandler();
             $this->registerBugsnagHandler();
         }
@@ -67,7 +67,7 @@ class WhoopsManager
 
     public function isDebugEnabled(): bool
     {
-        return \defined('DBG_USER') && DBG_USER;
+        return app()->isDebug();
     }
 
     /**

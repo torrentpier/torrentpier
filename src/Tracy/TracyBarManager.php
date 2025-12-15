@@ -79,8 +79,7 @@ class TracyBarManager
     public function isEnabled(): bool
     {
         // Only enable for debug users in web context, excluding admin left pane
-        return \defined('DBG_USER')
-            && DBG_USER
+        return app()->isDebug()
             && php_sapi_name() !== 'cli'
             && request()->query->get('pane') !== 'left'
             && config()->get('debug.enable');
@@ -102,7 +101,7 @@ class TracyBarManager
      */
     public function isDebugAllowed(): bool
     {
-        return \defined('SQL_DEBUG') && SQL_DEBUG && \defined('DBG_USER') && DBG_USER;
+        return app()->isDebug();
     }
 
     /**

@@ -28,11 +28,6 @@ if ($mode == 'run' && !$job_id) {
     redirect('admin/' . basename(__FILE__) . '?mode=list');
 }
 
-// Check for demo mode
-if (IN_DEMO_MODE && ($submit || !in_array($mode, ['add', 'list']))) {
-    bb_die(__('CANT_EDIT_IN_DEMO_MODE'));
-}
-
 if (!IS_SUPER_ADMIN) {
     bb_die(__('ONLY_FOR_SUPER_ADMIN'));
 }

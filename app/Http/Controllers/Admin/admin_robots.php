@@ -17,11 +17,6 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 if (request()->post->has('save')) {
-    // Check for demo mode
-    if (IN_DEMO_MODE) {
-        bb_die(__('CANT_EDIT_IN_DEMO_MODE'));
-    }
-
     $robots_txt = request()->post->get('robots_txt', '');
 
     bb_update_config(['robots_txt' => $robots_txt]);

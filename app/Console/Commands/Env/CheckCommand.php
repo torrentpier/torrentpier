@@ -51,7 +51,6 @@ class CheckCommand extends Command
      */
     private const array RECOMMENDED_VARS = [
         'APP_DEBUG' => ['default' => false, 'description' => 'Enable debug mode'],
-        'APP_DEMO_MODE' => ['default' => false, 'description' => 'Enable demo mode'],
         'DB_PORT' => ['default' => 3306, 'description' => 'Database port'],
         'TP_PORT' => ['default' => 443, 'description' => 'Site port'],
     ];

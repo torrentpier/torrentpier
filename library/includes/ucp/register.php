@@ -16,10 +16,6 @@ if (!defined('BB_ROOT')) {
 
 set_die_append_msg();
 
-if (IN_DEMO_MODE) {
-    config()->set('reg_email_activation', false);
-}
-
 if (IS_ADMIN) {
     config()->set('reg_email_activation', false);
 
@@ -114,9 +110,9 @@ switch ($mode) {
         // field => can_edit
         $profile_fields = [
             'user_active' => IS_ADMIN,
-            'username' => (IS_ADMIN || config()->get('allow_namechange')) && !IN_DEMO_MODE,
-            'user_password' => !IN_DEMO_MODE,
-            'user_email' => !IN_DEMO_MODE, // should be after user_password
+            'username' => IS_ADMIN || config()->get('allow_namechange'),
+            'user_password' => true,
+            'user_email' => true, // should be after user_password
             'user_lang' => config()->get('allow_change.language'),
             'user_gender' => config()->get('gender'),
             'user_birthday' => config()->get('birthday_enabled'),
