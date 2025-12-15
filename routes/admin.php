@@ -14,7 +14,7 @@ use TorrentPier\Router\LegacyAdapter;
 use TorrentPier\Router\Router;
 
 /**
- * Admin Panel Routes
+ * Admin route definitions
  *
  * All routes use LegacyAdapter to execute procedural PHP files.
  * Using GET and POST methods for admin pages (forms use POST).
