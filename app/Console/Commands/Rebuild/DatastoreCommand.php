@@ -34,8 +34,7 @@ class DatastoreCommand extends Command
     public function __construct(
         private readonly DatastoreManager $datastore,
         ?Application                      $app = null,
-    )
-    {
+    ) {
         parent::__construct($app);
     }
 

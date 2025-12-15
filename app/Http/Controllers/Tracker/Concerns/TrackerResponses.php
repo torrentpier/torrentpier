@@ -114,8 +114,8 @@ trait TrackerResponses
      *
      * @param array $lpInfo Last peer info with 'update_time' key
      * @param array $lpCachedPeers Cached peer list
-     * @return ResponseInterface|null Returns response if should exit, null to continue
      * @throws BindingResolutionException
+     * @return ResponseInterface|null Returns response if should exit, null to continue
      */
     protected function dropFastAnnounce(array $lpInfo, array $lpCachedPeers = []): ?ResponseInterface
     {

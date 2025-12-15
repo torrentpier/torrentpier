@@ -39,7 +39,6 @@ describe('HttpClient Class', function () {
             define('LOG_LF', "\n");
         }
 
-
         // Mock bb_log function
         if (!function_exists('bb_log')) {
             function bb_log($message)

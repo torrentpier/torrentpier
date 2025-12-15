@@ -1,7 +1,6 @@
 <?php
 
 use Nette\Database\Connection;
-use Nette\Database\ResultSet;
 use TorrentPier\Database\Database;
 use TorrentPier\Database\DatabaseDebugger;
 

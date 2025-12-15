@@ -244,8 +244,8 @@ function hide_bb_path(string $path): string
  * Get system resource statistics
  *
  * @param string $param Parameter name ('mem' or 'mem_peak')
- * @return int Memory usage in bytes
  * @throws RuntimeException If invalid parameter
+ * @return int Memory usage in bytes
  */
 function sys(string $param): int
 {
