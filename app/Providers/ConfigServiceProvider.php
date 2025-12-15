@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use RuntimeException;
 use TorrentPier\Config;
 use TorrentPier\ServiceProvider;
 
@@ -29,29 +30,15 @@ class ConfigServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(Config::class, function ($app) {
-            // Get config data from container (set by common.php via app()->instance())
-            // TODO: Migrate to Laravel-style Bootstrapper (app/Bootstrap/LoadConfiguration.php)
-            if ($app->bound('config.data')) {
-                return new Config($app->make('config.data'));
+            if (!$app->bound('config.data')) {
+                throw new RuntimeException(
+                    'Config data not loaded. Ensure LoadConfiguration bootstrapper runs before service providers.',
+                );
             }
 
-            // Fallback: standalone container boot - load configuration files directly
-            $bb_cfg = [];
-
-            $configPath = $app->configPath('config.php');
-            if (file_exists($configPath)) {
-                require $configPath;
-            }
-
-            $localConfigPath = $app->configPath('config.local.php');
-            if (file_exists($localConfigPath)) {
-                require $localConfigPath;
-            }
-
-            return new Config($bb_cfg);
+            return new Config($app->make('config.data'));
         });
 
-        // Register alias for convenient access
         $this->app->alias(Config::class, 'config');
     }
 
