@@ -6,6 +6,11 @@
 
 ### 🚀 Features
 
+- *(polls)* Enforce `auth_pollcreate` permission for `poll_add` mode ([#2242](https://github.com/torrentpier/torrentpier/pull/2242)) - ([d79e506](https://github.com/torrentpier/torrentpier/commit/d79e506107b9225742a449ec4ff0045f1bf93529))
+- Enhance PHP CS Fixer configuration with extended rules and modernized settings ([#2266](https://github.com/torrentpier/torrentpier/pull/2266)) - ([a873382](https://github.com/torrentpier/torrentpier/commit/a8733821690e924f76ba456610e505e902387700))
+- Improve SQL query handling in DatabasePanel - ([97d8c86](https://github.com/torrentpier/torrentpier/commit/97d8c86b128072fb58968d92d4a36c433f446b52))
+- Add initial V3.0 documentation, blog posts plugin, and API endpoints ([#2248](https://github.com/torrentpier/torrentpier/pull/2248)) - ([b3e7b8a](https://github.com/torrentpier/torrentpier/commit/b3e7b8acccf9a141f91d4c5bafe4ac0923f51c18))
+- Integrate PHP CS Fixer with GitHub Actions workflow ([#2247](https://github.com/torrentpier/torrentpier/pull/2247)) - ([f9905e9](https://github.com/torrentpier/torrentpier/commit/f9905e9ea5b2e5efec6799bb0d95bf6d3459a2e4))
 - Add up/down migration for topic attachment columns - ([94ce3f0](https://github.com/torrentpier/torrentpier/commit/94ce3f0e141db7c686a4c1f8a73f4a0c66f28cc1))
 - Remove legacy `attach_mod` tables and improve migration script - ([ec2fb19](https://github.com/torrentpier/torrentpier/commit/ec2fb19a749d8041b4000a10b8874b05a5f8fff5))
 - Add migration script for torrent attachments to topic-based storage - ([c16545e](https://github.com/torrentpier/torrentpier/commit/c16545e45b1409da5da45296d8fc69368d938677))
@@ -23,8 +28,14 @@
 
 ### 📦 Dependencies
 
+- *(deps)* Bump symfony/mailer from 7.4.0 to 8.0.0 ([#2256](https://github.com/torrentpier/torrentpier/pull/2256)) - ([92d6c61](https://github.com/torrentpier/torrentpier/commit/92d6c6191e176ce51abfb56fd701efe68ce7cb4c))
+- *(deps)* Bump symfony/mime from 7.4.0 to 8.0.0 ([#2251](https://github.com/torrentpier/torrentpier/pull/2251)) - ([2eb65ed](https://github.com/torrentpier/torrentpier/commit/2eb65ede893d5236a5eaf2e08001ca3ca7ad642e))
+- *(deps)* Bump symfony/string from 7.4.0 to 8.0.1 ([#2252](https://github.com/torrentpier/torrentpier/pull/2252)) - ([40d9f03](https://github.com/torrentpier/torrentpier/commit/40d9f03c5a66ce844e06ace04d6800c4e94a298b))
+- *(deps)* Bump symfony/filesystem from 7.4.0 to 8.0.1 ([#2254](https://github.com/torrentpier/torrentpier/pull/2254)) - ([8741c21](https://github.com/torrentpier/torrentpier/commit/8741c210de4321990894082d2062d56d0ccb395c))
+- *(deps)* Bump symfony/event-dispatcher from 7.4.0 to 8.0.0 ([#2250](https://github.com/torrentpier/torrentpier/pull/2250)) - ([094034a](https://github.com/torrentpier/torrentpier/commit/094034ab7709705144753b34c8b978da3ec82903))
 - *(deps)* Bump twig/twig from 3.22.0 to 3.22.1 ([#2234](https://github.com/torrentpier/torrentpier/pull/2234)) - ([11c6cb7](https://github.com/torrentpier/torrentpier/commit/11c6cb78c579bbb74eb215d6be9692d00e5a7725))
 - *(deps)* Bump nesbot/carbon from 3.10.3 to 3.11.0 ([#2236](https://github.com/torrentpier/torrentpier/pull/2236)) - ([a5645a2](https://github.com/torrentpier/torrentpier/commit/a5645a245b86822f9b14838a900105b29ed44dd0))
+- *(deps-dev)* Bump symfony/var-dumper from 7.4.0 to 8.0.0 ([#2253](https://github.com/torrentpier/torrentpier/pull/2253)) - ([b042c02](https://github.com/torrentpier/torrentpier/commit/b042c02bca44364e9552782220682c706848691d))
 
 ### 💼 Other
 
@@ -74,6 +85,14 @@
 
 ### 🚜 Refactor
 
+- Optimize `get_userdata()` function ([#2260](https://github.com/torrentpier/torrentpier/pull/2260)) - ([ac11785](https://github.com/torrentpier/torrentpier/commit/ac117853dda7d93a776763a16a2c084aa24b9208))
+- Remove legacy JS files and modernize editor functionality ([#2257](https://github.com/torrentpier/torrentpier/pull/2257)) - ([b1625aa](https://github.com/torrentpier/torrentpier/commit/b1625aaa0945e9eda255b319f3b29b6e42527c7d))
+- Modernize configuration and tracking systems ([#2255](https://github.com/torrentpier/torrentpier/pull/2255)) - ([6228a98](https://github.com/torrentpier/torrentpier/commit/6228a98e579bbf419aa2efebd11e4f2356243b0f))
+- Centralize and modernize cron handling logic ([#2245](https://github.com/torrentpier/torrentpier/pull/2245)) - ([64973c4](https://github.com/torrentpier/torrentpier/commit/64973c4babbd622acfdd856871afdd778bdfd547))
+- Migrate homepage routing to modern controller system - ([ffa8a85](https://github.com/torrentpier/torrentpier/commit/ffa8a853111596dd954e7ef6369a16391ae31dcd))
+- Migrate robots.txt handling to dynamic database configuration ([#2244](https://github.com/torrentpier/torrentpier/pull/2244)) - ([1ee7252](https://github.com/torrentpier/torrentpier/commit/1ee725233fbd7fa0343247f3bbdabdb69e70d5d9))
+- Introduce Http Request and Response classes with Symfony integration ([#2243](https://github.com/torrentpier/torrentpier/pull/2243)) - ([445c433](https://github.com/torrentpier/torrentpier/commit/445c433f9212812cf928adaf6ed1e78aadd3c241))
+- Normalize paths in Template and TwigEnvironmentFactory for cross-platform consistency - ([e5ff9c0](https://github.com/torrentpier/torrentpier/commit/e5ff9c02bdd8ab355e60598e2d033eb5254ccfbb))
 - Migrate terms.tpl to terms.twig and enhance variable handling in Template class - ([f6db2d0](https://github.com/torrentpier/torrentpier/commit/f6db2d0c04da6197b278cb1d221d50262639588d))
 - Remove redundant `Template::$instance` and improve block data initialization - ([d236a0c](https://github.com/torrentpier/torrentpier/commit/d236a0c87384d338ebaf6ed90985518b35b89f23))
 - Update torrent attachment checks and download count logic - ([536dc8c](https://github.com/torrentpier/torrentpier/commit/536dc8c56ab5e8a79580cf8804ebff8f54dd64c1))
@@ -87,6 +106,12 @@
 
 ### ⚙️ Miscellaneous
 
+- *(deps)* Bump js-yaml ([#2249](https://github.com/torrentpier/torrentpier/pull/2249)) - ([449dbda](https://github.com/torrentpier/torrentpier/commit/449dbda6f2ca586deda6c4a6b814f30d70481ad6))
+- Update composer.lock to latest translations commit - ([58ab6dd](https://github.com/torrentpier/torrentpier/commit/58ab6dd93228a7366d2ec092cb0ae68f2ce6e01c))
+- Simplify `composer.json` structure and update metadata - ([5033c99](https://github.com/torrentpier/torrentpier/commit/5033c99eccde00f2adae3c6611c7257fa9295d7f))
+- Update composer dependencies to latest versions - ([cc3eac8](https://github.com/torrentpier/torrentpier/commit/cc3eac8ade639c047704b292b693065b6a6a343e))
+- Add custom domain configuration for documentation - ([b1bc0ce](https://github.com/torrentpier/torrentpier/commit/b1bc0ce6abd975639a7c5d48861472a010e8dd02))
+- Update Node.js version to 22 in GitHub Actions docs workflow - ([edbd4f0](https://github.com/torrentpier/torrentpier/commit/edbd4f04eb21a487471c6a35611376750ebef8af))
 - Remove `_attach.php` and deprecated attachment handling logic - ([e2bb8ce](https://github.com/torrentpier/torrentpier/commit/e2bb8ce311319542cd46a3c0b837111cc5772d82))
 
 
