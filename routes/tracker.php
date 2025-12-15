@@ -16,7 +16,7 @@ use App\Http\Middleware\Tracker\BootTracker;
 use TorrentPier\Router\Router;
 
 /**
- * Route definitions for TorrentPier tracker application
+ * Tracker route definitions
  *
  * All routes are prefixed with /bt and use BootTracker middleware
  * for tracker initialization.
