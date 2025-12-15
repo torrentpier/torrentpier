@@ -74,13 +74,14 @@ php bull app:install
    git clone https://github.com/torrentpier/torrentpier.git
    cd torrentpier
    ```
-4. Copy the Docker environment template:
+4. Create environment file:
    ```bash
-   cp .env.docker .env
+   cp .env.example .env
    ```
-5. Configure environment variables in `.env`:
-   ```bash
-   nano .env  # or use your preferred editor
+5. Configure `.env` for Docker — update these values:
+   ```env
+   DB_HOST=database           # Docker service name, not localhost
+   APP_CRON_ENABLED=false     # Docker image has its own cron
    ```
 6. Start the application:
    ```bash

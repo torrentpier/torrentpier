@@ -18,7 +18,7 @@
 
 ## 🐂 About TorrentPier
 
-TorrentPier — bull-powered BitTorrent Public/Private tracker engine, written in PHP. High speed, simple modifications, load-balanced
+TorrentPier — bull-powered BitTorrent tracker engine, written in PHP. High speed, simple modifications, load-balanced
 architecture. In addition, we have a very helpful
 [official support forum](https://torrentpier.com), where it's possible to get support and download modifications for the engine.
 
