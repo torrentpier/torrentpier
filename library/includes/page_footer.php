@@ -28,7 +28,7 @@ if (defined('PAGE_HEADER_SENT')) {
 
 // Capture timing for Tracy debug bar
 if (tracy()->isEnabled()) {
-    $captured_exec_time = utime() - TIMESTART;
+    $captured_exec_time = microtime(true) - TIMESTART;
     $captured_sql_time = 0;
 
     try {

@@ -326,7 +326,7 @@ class CacheManager
 
         switch ($mode) {
             case 'start':
-                $this->sql_starttime = utime();
+                $this->sql_starttime = microtime(true);
                 $dbg['sql'] = tracy()->formatQuery($cur_query ?? $this->cur_query);
                 $dbg['src'] = $this->debug_find_source();
                 $dbg['file'] = $this->debug_find_source('file');
@@ -334,7 +334,7 @@ class CacheManager
                 $dbg['time'] = 0;
                 break;
             case 'stop':
-                $this->cur_query_time = utime() - $this->sql_starttime;
+                $this->cur_query_time = microtime(true) - $this->sql_starttime;
                 $this->sql_timetotal += $this->cur_query_time;
                 $dbg['time'] = $this->cur_query_time;
                 $id++;

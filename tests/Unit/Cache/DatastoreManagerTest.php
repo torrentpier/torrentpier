@@ -12,7 +12,6 @@ describe('DatastoreManager Class', function () {
         mockTracyFunction();
         mockBbLogFunction();
         mockHideBbPathFunction();
-        mockUtimeFunction();
 
         // Create memory storage for testing
         $this->storage = new MemoryStorage;
