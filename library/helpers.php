@@ -295,15 +295,6 @@ function bbcode(): TorrentPier\Legacy\BBCode
 }
 
 /**
- * Ajax handler singleton
- * @throws BindingResolutionException
- */
-function ajax(): TorrentPier\Ajax
-{
-    return app(TorrentPier\Ajax::class);
-}
-
-/**
  * Manticore search singleton
  * @throws BindingResolutionException
  */

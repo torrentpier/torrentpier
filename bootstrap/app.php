@@ -85,6 +85,7 @@ return Application::configure(basePath: dirname(__DIR__))
     */
     ->withRouting(
         web: __DIR__ . '/../routes/web.php',
+        api: __DIR__ . '/../routes/api.php',
         admin: __DIR__ . '/../routes/admin.php',
         tracker: __DIR__ . '/../routes/tracker.php',
         commands: __DIR__ . '/../routes/console.php',
