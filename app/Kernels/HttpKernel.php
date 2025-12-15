@@ -23,55 +23,11 @@ use TorrentPier\Router\Router;
  *
  * Handles HTTP requests by bootstrapping the application,
  * loading routes, and dispatching to the router.
+ *
+ * Middleware configuration is defined in bootstrap/app.php via withMiddleware().
  */
 class HttpKernel
 {
-    /**
-     * The middleware stack
-     *
-     * @var string[]
-     */
-    public array $middleware {
-        get => $this->_middleware;
-        set => $this->_middleware = $value;
-    }
-
-    private array $_middleware = [
-        \App\Http\Middleware\WebMiddleware::class,
-    ];
-
-    /**
-     * The middleware groups
-     *
-     * @var array<string, string[]>
-     */
-    public array $middlewareGroups {
-        get => $this->_middlewareGroups;
-        set => $this->_middlewareGroups = $value;
-    }
-
-    private array $_middlewareGroups = [
-        'web' => [
-            \App\Http\Middleware\WebMiddleware::class,
-        ],
-        'api' => [],
-    ];
-
-    /**
-     * The route middleware aliases
-     *
-     * @var array<string, string>
-     */
-    public array $middlewareAliases {
-        get => $this->_middlewareAliases;
-        set => $this->_middlewareAliases = $value;
-    }
-
-    private array $_middlewareAliases = [
-        'web' => \App\Http\Middleware\WebMiddleware::class,
-        'auth' => \App\Http\Middleware\AuthMiddleware::class,
-    ];
-
     /**
      * Create a new HTTP Kernel instance
      */
@@ -92,18 +48,13 @@ class HttpKernel
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        // Boot the application if not already booted
         if (!$this->app->isBooted()) {
             $this->app->boot();
         }
 
-        // Bootstrap the HTTP layer
         $this->bootstrap();
 
-        // Get the router and dispatch the request
-        $router = $this->app->make(Router::class);
-
-        return $router->dispatch($request);
+        return $this->app->make(Router::class)->dispatch($request);
     }
 
     /**
@@ -111,11 +62,7 @@ class HttpKernel
      */
     public function terminate(ServerRequestInterface $request, ResponseInterface $response): void
     {
-        // Perform cleanup after request handling
-        // This can be used for:
-        // - Logging
-        // - Session cleanup
-        // - Releasing resources
+        // Cleanup after request handling (logging, session cleanup, etc.)
     }
 
     /**
@@ -124,19 +71,24 @@ class HttpKernel
      */
     protected function bootstrap(): void
     {
-        // Load routes if not already loaded
         $router = $this->app->make(Router::class);
 
         if (!$router->areRoutesLoaded()) {
-            // Register middleware aliases from kernel
-            $router->setMiddlewareAliases($this->middlewareAliases);
+            $router->setMiddlewareAliases($this->app->getMiddlewareConfig()->getAliases());
 
-            $routesPath = $this->app->routesPath('web.php');
+            $this->loadRoutesFromConfig($router);
+            $router->setRoutesLoaded();
+        }
+    }
 
-            if (file_exists($routesPath)) {
-                $routes = require $routesPath;
-                $routes($router);
-                $router->setRoutesLoaded();
+    /**
+     * Load routes from application routing configuration
+     */
+    protected function loadRoutesFromConfig(Router $router): void
+    {
+        foreach ($this->app->getRoutingConfig() as $path) {
+            if (file_exists($path)) {
+                (require $path)($router);
             }
         }
     }

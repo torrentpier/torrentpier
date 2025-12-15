@@ -23,6 +23,8 @@ use TorrentPier\Console\Application as ConsoleApplication;
  *
  * Handles console commands by bootstrapping the application
  * and delegating to the Symfony Console application.
+ *
+ * Commands are auto-discovered from app/Console/Commands/ directory.
  */
 class ConsoleKernel
 {
@@ -30,18 +32,6 @@ class ConsoleKernel
      * The console application instance
      */
     protected ?ConsoleApplication $console = null;
-
-    /**
-     * The commands provided by the application
-     *
-     * @var string[]
-     */
-    public array $commands {
-        get => $this->_commands;
-        set => $this->_commands = $value;
-    }
-
-    private array $_commands = [];
 
     /**
      * Create a new Console Kernel instance
@@ -63,19 +53,13 @@ class ConsoleKernel
      */
     public function handle(?InputInterface $input = null, ?OutputInterface $output = null): int
     {
-        // Boot the application if not already booted
         if (!$this->app->isBooted()) {
             $this->app->boot();
         }
 
-        // Bootstrap the console layer
         $this->bootstrap();
 
-        // Get the console application
-        $this->console = $this->getConsoleApplication();
-
-        // Run the console application
-        return $this->console->run($input, $output);
+        return $this->getConsoleApplication()->run($input, $output);
     }
 
     /**
@@ -83,21 +67,7 @@ class ConsoleKernel
      */
     public function terminate(InputInterface $input, int $exitCode): void
     {
-        // Perform cleanup after command execution
-        // This can be used for:
-        // - Logging command execution
-        // - Releasing resources
-        // - Sending notifications
-    }
-
-    /**
-     * Register the commands for the application
-     *
-     * @param string[] $commands
-     */
-    public function registerCommands(array $commands): void
-    {
-        $this->commands = array_merge($this->commands, $commands);
+        // Cleanup after command execution (logging, etc.)
     }
 
     /**
@@ -105,11 +75,9 @@ class ConsoleKernel
      */
     protected function bootstrap(): void
     {
-        // Any console-specific bootstrapping can go here
-        // For example:
-        // - Setting memory limits
-        // - Disabling time limits
-        // - Loading console-specific configuration
+        // Console-specific bootstrapping (memory limits, time limits, etc.)
+        // Remove the time limit for long-running commands (migrations, queue workers, etc.)
+        set_time_limit(0);
     }
 
     /**
@@ -117,10 +85,6 @@ class ConsoleKernel
      */
     protected function getConsoleApplication(): ConsoleApplication
     {
-        if ($this->console === null) {
-            $this->console = new ConsoleApplication($this->app);
-        }
-
-        return $this->console;
+        return $this->console ??= new ConsoleApplication($this->app);
     }
 }
