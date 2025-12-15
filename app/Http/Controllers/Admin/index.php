@@ -28,11 +28,12 @@ if (request()->query->get('pane') === 'left') {
 
     // Scan modules
     if (!CACHE('bb_cache')->get('admin_module_' . user()->id)) {
-        $dir = opendir('.');
+        $adminDir = __DIR__;
+        $dir = opendir($adminDir);
         $setmodules = true;
         while ($file = readdir($dir)) {
             if (preg_match('/^admin_.*?\.php$/', $file)) {
-                include './' . $file;
+                include $adminDir . '/' . $file;
             }
         }
         unset($setmodules);
@@ -47,7 +48,7 @@ if (request()->query->get('pane') === 'left') {
 
     template()->assign_vars([
         'TPL_ADMIN_NAVIGATE' => true,
-        'U_FORUM_INDEX' => '../index.php',
+        'U_FORUM_INDEX' => '/',
         'U_ADMIN_INDEX' => 'index.php?pane=right',
     ]);
 

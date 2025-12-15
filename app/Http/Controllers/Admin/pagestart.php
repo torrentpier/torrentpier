@@ -8,10 +8,14 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_ROOT', './../');
-define('IN_ADMIN', true);
+// Already bootstrapped via routing - just define constants and check auth
+if (!defined('IN_ADMIN')) {
+    define('IN_ADMIN', true);
+}
 
-require dirname(__DIR__, 2) . '/library/common.php';
+if (!defined('BB_ROOT')) {
+    define('BB_ROOT', './');
+}
 
 if (!defined('SESSION_STARTED')) {
     user()->session_start();
