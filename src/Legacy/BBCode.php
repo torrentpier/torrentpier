@@ -10,12 +10,17 @@
 
 namespace TorrentPier\Legacy;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
+
 /**
  * Class BBCode
  * @package TorrentPier\Legacy
  */
 class BBCode
 {
+    /** @var bool Whether datastore has been enqueued */
+    private bool $booted = false;
+
     /** @var array Replacements for some code elements */
     public array $tpl = [];
 
@@ -66,9 +71,63 @@ class BBCode
      */
     public function __construct()
     {
-        $this->tpl = get_bbcode_tpl();
+        $this->tpl = $this->getBBCodeTpl();
 
         $this->init_replacements();
+    }
+
+    /**
+     * Boot the BBCode processor by enqueueing datastore items
+     *
+     * Call this before rendering BBCode that uses smilies.
+     * Safe to call multiple times.
+     * @throws BindingResolutionException
+     */
+    public function boot(): self
+    {
+        if (!$this->booted) {
+            datastore()->enqueue(['smile_replacements', 'cat_forums']);
+            $this->booted = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get BBCode template replacements
+     */
+    private function getBBCodeTpl(): array
+    {
+        $bbcode_tpl = [];
+
+        // Quote
+        $bbcode_tpl['quote_open'] = '<div class="q-wrap"><div class="q">';
+        $bbcode_tpl['quote_username_open'] = '<div class="q-wrap"><div class="q" head="\\1">';
+        $bbcode_tpl['quote_close'] = '</div></div>';
+
+        // Code
+        $bbcode_tpl['code_open'] = '<div class="c-wrap"><div class="c-body">';
+        $bbcode_tpl['code_close'] = '</div></div>';
+
+        // Spoiler
+        $bbcode_tpl['spoiler_open'] = '<div class="sp-wrap"><div class="sp-body">';
+        $bbcode_tpl['spoiler_title_open'] = '<div class="sp-wrap"><div class="sp-body" title="\\1"><h3 class="sp-title">\\1</h3>';
+        $bbcode_tpl['spoiler_close'] = '</div></div>';
+
+        // Image
+        $bbcode_tpl['img'] = '<var class="postImg" title="$1">&#10;</var>';
+        $bbcode_tpl['img_aligned'] = '<var class="postImg postImgAligned img-\\1" title="\\2">&#10;</var>';
+
+        // HR
+        $bbcode_tpl['hr'] = '<span class="post-hr">-</span>';
+
+        // Box
+        $bbcode_tpl['box_open'] = '<div class="post-box-default"><div class="post-box">';
+        $bbcode_tpl['box_open_color'] = '<div class="post-box-default"><div class="post-box" style="border-color: $1; background-color: $2;">';
+        $bbcode_tpl['box_open_color_single'] = '<div class="post-box-default"><div class="post-box" style="border-color: $1;">';
+        $bbcode_tpl['box_close'] = '</div></div>';
+
+        return $bbcode_tpl;
     }
 
     /**
