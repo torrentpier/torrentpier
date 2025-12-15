@@ -99,10 +99,13 @@ class Config
 
     /**
      * Merge additional configuration values
+     *
+     * Uses array_replace_recursive to properly override scalar values
+     * (array_merge_recursive converts scalar conflicts to arrays, which breaks configs)
      */
     public function merge(array $config): void
     {
-        $this->config = array_merge_recursive($this->config, $config);
+        $this->config = array_replace_recursive($this->config, $config);
     }
 
     /**
