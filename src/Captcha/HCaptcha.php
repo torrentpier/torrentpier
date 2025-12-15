@@ -65,7 +65,7 @@ class HCaptcha implements CaptchaInterface
                 'form_params' => [
                     'secret' => $this->settings['secret_key'],
                     'response' => $hcaptchaResponse,
-                    'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
+                    'remoteip' => request()->getClientIp() ?? '',
                 ],
                 'timeout' => 3,
                 'connect_timeout' => 2,

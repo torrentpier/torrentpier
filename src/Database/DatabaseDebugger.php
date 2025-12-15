@@ -11,6 +11,7 @@
 namespace TorrentPier\Database;
 
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use PDOException;
 
 /**
@@ -224,6 +225,7 @@ class DatabaseDebugger
 
     /**
      * Log query
+     * @throws BindingResolutionException
      */
     public function log_query(string $log_file = 'sql_queries'): void
     {
@@ -242,7 +244,7 @@ class DatabaseDebugger
         $msg = implode(\defined('LOG_SEPR') ? LOG_SEPR : ' | ', $msg);
         $msg .= ($info = $this->db->query_info()) ? ' # ' . $info : '';
         $msg .= ' # ' . $this->debug_find_source() . ' ';
-        $msg .= \defined('IN_CRON') ? 'cron' : basename($_SERVER['REQUEST_URI'] ?? '');
+        $msg .= \defined('IN_CRON') ? 'cron' : basename(request()->getRequestUri());
         bb_log($msg . (\defined('LOG_LF') ? LOG_LF : "\n"), $log_file);
     }
 
@@ -266,6 +268,7 @@ class DatabaseDebugger
      * NOTE: This method logs detailed information to FILES only (error_log, bb_log).
      * Log files are not accessible to regular users, so detailed information is safe here.
      * User-facing error display is handled separately with proper security checks.
+     * @throws BindingResolutionException
      */
     public function log_error(?Exception $exception = null): void
     {
@@ -310,8 +313,8 @@ class DatabaseDebugger
         $error_details[] = 'Database: ' . ($this->db->selected_db ?: 'None');
         $error_details[] = 'Server: ' . $this->db->db_server;
         $error_details[] = 'Timestamp: ' . date('Y-m-d H:i:s');
-        $error_details[] = 'Request URI: ' . ($_SERVER['REQUEST_URI'] ?? 'CLI');
-        $error_details[] = 'User IP: ' . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown');
+        $error_details[] = 'Request URI: ' . (PHP_SAPI === 'cli' ? 'CLI' : request()->getRequestUri());
+        $error_details[] = 'User IP: ' . (request()->getClientIp() ?? 'Unknown');
 
         // Check connection status
         try {

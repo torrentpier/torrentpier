@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Whoops;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Throwable;
 use Whoops\Handler\Handler;
 use Whoops\Handler\HandlerInterface;
@@ -246,13 +247,14 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
 
     /**
      * Collect comprehensive database information
+     * @throws BindingResolutionException
      */
     private function collectDatabaseInformation(): array
     {
         $info = [
             'timestamp' => date('Y-m-d H:i:s'),
-            'request_uri' => $_SERVER['REQUEST_URI'] ?? 'CLI',
-            'user_ip' => $_SERVER['REMOTE_ADDR'] ?? 'Unknown',
+            'request_uri' => PHP_SAPI === 'cli' ? 'CLI' : request()->getRequestUri(),
+            'user_ip' => request()->getClientIp() ?? 'Unknown',
         ];
 
         try {

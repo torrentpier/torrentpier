@@ -39,6 +39,7 @@ class PerformancePanel implements IBarPanel
 
     /**
      * Renders panel content (shown when expanded)
+     * @throws BindingResolutionException
      */
     public function getPanel(): string
     {
@@ -105,7 +106,7 @@ class PerformancePanel implements IBarPanel
         $html .= '<tr><td>GZIP Compression</td><td>' . $gzipStatus . '</td></tr>';
 
         if ($gzipSupported) {
-            $html .= '<tr><td>Accept-Encoding</td><td><code>' . htmlspecialchars($_SERVER['HTTP_ACCEPT_ENCODING'] ?? 'N/A') . '</code></td></tr>';
+            $html .= '<tr><td>Accept-Encoding</td><td><code>' . htmlspecialchars(request()->headers->get('Accept-Encoding') ?? 'N/A') . '</code></td></tr>';
         }
 
         $html .= '</table>';

@@ -13,6 +13,7 @@ namespace TorrentPier\Legacy\Common;
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Str;
+use JsonException;
 use RuntimeException;
 use TorrentPier\Sessions;
 
@@ -556,6 +557,7 @@ class User
 
     /**
      * Initialise user settings
+     * @throws BindingResolutionException|JsonException
      */
     public function init_userprefs()
     {
@@ -564,8 +566,9 @@ class User
         }  // prevent multiple calling
 
         // Apply browser language
-        if (config()->get('auto_language_detection') && IS_GUEST && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            $http_accept_language = locale_get_primary_language(locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']));
+        $acceptLanguage = request()->headers->get('Accept-Language');
+        if (config()->get('auto_language_detection') && IS_GUEST && $acceptLanguage) {
+            $http_accept_language = locale_get_primary_language(locale_accept_from_http($acceptLanguage));
             if (isset(config()->get('lang')[$http_accept_language])) {
                 config()->set('default_lang', $http_accept_language);
             }
