@@ -227,6 +227,7 @@ class CreateCommand extends Command
 
         if (file_put_contents($appFile, $content) === false) {
             $this->error('Failed to write Application.php');
+
             return false;
         }
 
@@ -242,6 +243,7 @@ class CreateCommand extends Command
 
         if (file_put_contents($configFile, $content) === false) {
             $this->error('Failed to write config.php');
+
             return false;
         }
 

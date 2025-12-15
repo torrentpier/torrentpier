@@ -37,6 +37,7 @@ class CacheServiceProvider extends ServiceProvider
         $this->app->singleton(UnifiedCacheSystem::class, function ($app) {
             /** @var Config $config */
             $config = $app->make(Config::class);
+
             return new UnifiedCacheSystem($config->all());
         });
 

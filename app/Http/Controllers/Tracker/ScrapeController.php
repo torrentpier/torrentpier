@@ -56,6 +56,7 @@ class ScrapeController
         // Check info_hash length (must be 20 bytes)
         if (\strlen($infoHash) !== 20) {
             $displayHash = mb_check_encoding($infoHash, DEFAULT_CHARSET) ? $infoHash : $infoHashHex;
+
             return $this->msgDie('Invalid info_hash: ' . $displayHash);
         }
 
@@ -137,6 +138,7 @@ class ScrapeController
         // Verify if torrent registered on tracker
         if (empty($torrents)) {
             $displayHash = mb_check_encoding($infoHash, DEFAULT_CHARSET) ? $infoHash : $infoHashHex;
+
             return $this->msgDie('Torrent not registered, info_hash = ' . $displayHash);
         }
 
