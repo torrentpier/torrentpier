@@ -20,12 +20,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 use TorrentPier\Legacy\Common\User;
 
 /**
- * Auth Middleware
- *
  * Requires an authenticated user to access the route.
  * Redirects guests to the login page with return URL.
  */
-readonly class AuthMiddleware implements MiddlewareInterface
+readonly class Authenticate implements MiddlewareInterface
 {
     public function __construct(
         private User $user,

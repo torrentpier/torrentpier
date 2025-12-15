@@ -21,13 +21,9 @@ use TorrentPier\Language;
 use TorrentPier\Legacy\Common\User;
 
 /**
- * Web Middleware
- *
- * Base web stack middleware that handles:
- * - User session initialization
- * - Locale setup based on user preferences
+ * Starts a user session and initializes locale.
  */
-readonly class WebMiddleware implements MiddlewareInterface
+readonly class StartSession implements MiddlewareInterface
 {
     public function __construct(
         private User     $user,
