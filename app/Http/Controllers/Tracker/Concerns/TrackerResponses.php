@@ -79,7 +79,7 @@ trait TrackerResponses
 
         $output = [
             'interval' => $interval,
-            'peers' => DUMMY_PEER,
+            'peers' => pack('Nn', 0, 0),
             'external ip' => inet_pton($remoteAddr),
         ];
 
