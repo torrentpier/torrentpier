@@ -94,19 +94,11 @@ class Application extends SymfonyApplication
     }
 
     /**
-     * Detect an application version from config
+     * Get the application version
      */
     private function detectVersion(): string
     {
-        // Get a version from config (set by config.php)
-        if (\function_exists('config')) {
-            $version = config()->get('tp_version');
-            if ($version) {
-                return $version;
-            }
-        }
-
-        return 'dev';
+        return 'v' . $this->container->version();
     }
 
     /**

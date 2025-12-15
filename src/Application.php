@@ -12,20 +12,32 @@ declare(strict_types=1);
 
 namespace TorrentPier;
 
+use App\Kernels\ConsoleKernel;
+use App\Kernels\HttpKernel;
+use Closure;
+use Exception;
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Laminas\Diactoros\ServerRequestFactory;
+use Psr\Http\Message\ServerRequestInterface;
+use ReflectionException;
+use Symfony\Component\Console\Input\InputInterface;
+use TorrentPier\Http\Middleware;
 
 /**
  * TorrentPier Application Container
  *
  * Main application class that extends Laravel's Container.
  * Manages service providers, bootstrapping, and dependency injection.
+ *
+ * Supports fluent style configuration via configure() method.
  */
 class Application extends Container
 {
     /**
      * The TorrentPier version
      */
-    public const string VERSION = '3.0.0';
+    public const string VERSION = '3.0.0-alpha.1';
 
     /**
      * The base path for the application
@@ -71,14 +83,60 @@ class Application extends Container
     protected array $bootingCallbacks = [];
 
     /**
+     * The bootstrappers to run during the application bootstrap
+     *
+     * @var string[]
+     */
+    protected array $bootstrappers = [];
+
+    /**
+     * The middleware configuration
+     */
+    protected Middleware $middlewareConfig;
+
+    /**
+     * The exceptions configuration callback
+     */
+    protected ?Closure $exceptionsCallback = null;
+
+    /**
+     * The routing configuration
+     *
+     * @var array{web?: string, api?: string, admin?: string, tracker?: string, commands?: string}
+     */
+    protected array $routingConfig = [];
+
+    /**
      * Create a new Application instance
      */
     public function __construct(string $basePath)
     {
         $this->setBasePath($basePath);
+        $this->middlewareConfig = new Middleware;
 
         $this->registerBaseBindings();
         $this->registerBaseServiceProviders();
+    }
+
+    /**
+     * Static entry point for fluent configuration (Laravel 12 style)
+     *
+     * Usage:
+     *   return Application::configure(basePath: dirname(__DIR__))
+     *       ->withBootstrappers([...])
+     *       ->withRouting(
+     *           web: __DIR__ . '/../routes/web.php',
+     *           admin: __DIR__ . '/../routes/admin.php',
+     *           tracker: __DIR__ . '/../routes/tracker.php',
+     *       )
+     *       ->withMiddleware(fn ($middleware) => $middleware->prepend(...))
+     *       ->create();
+     */
+    public static function configure(string $basePath): PendingApplicationConfiguration
+    {
+        return new PendingApplicationConfiguration(
+            new static($basePath),
+        );
     }
 
     /**
@@ -221,6 +279,7 @@ class Application extends Container
 
     /**
      * Register a service provider with the application
+     * @throws ReflectionException
      */
     public function register(ServiceProvider|string $provider, bool $force = false): ServiceProvider
     {
@@ -235,7 +294,7 @@ class Application extends Container
 
         $provider->register();
 
-        // If there are bindings / singletons set as properties on the provider
+        // If there are bindings / singletons set as properties on the provider,
         // we will spin through them and register them with the application
         if (property_exists($provider, 'bindings')) {
             foreach ($provider->bindings as $key => $value) {
@@ -354,7 +413,7 @@ class Application extends Container
      *
      * @param callable[] $callbacks
      */
-    protected function fireAppCallbacks(array &$callbacks): void
+    protected function fireAppCallbacks(array $callbacks): void
     {
         $index = 0;
 
@@ -407,11 +466,16 @@ class Application extends Container
     }
 
     /**
+     * Cached application environment
+     */
+    protected ?string $environment = null;
+
+    /**
      * Determine if the application is running unit tests
      */
     public function runningUnitTests(): bool
     {
-        return \defined('PEST_TESTING') || $this->bound('env') && $this['env'] === 'testing';
+        return \defined('PEST_TESTING') || $this->environment() === 'testing';
     }
 
     /**
@@ -419,11 +483,7 @@ class Application extends Container
      */
     public function environment(): string
     {
-        if ($this->bound('env')) {
-            return $this['env'];
-        }
-
-        return env('APP_ENV', 'production');
+        return $this->environment ??= env('APP_ENV', 'production');
     }
 
     /**
@@ -435,11 +495,21 @@ class Application extends Container
     }
 
     /**
-     * Determine if the application is in the development environment
+     * Determine if the application is in the local/development environment
      */
     public function isLocal(): bool
     {
-        return $this->environment() === 'development';
+        return $this->environment() === 'local';
+    }
+
+    /**
+     * Determine if debug mode is enabled
+     *
+     * Debug mode is enabled when running locally OR when APP_DEBUG=true
+     */
+    public function isDebug(): bool
+    {
+        return $this->isLocal() || env('APP_DEBUG', false);
     }
 
     /**
@@ -454,5 +524,216 @@ class Application extends Container
         $this->bootedCallbacks = [];
         $this->bootingCallbacks = [];
         $this->booted = false;
+    }
+
+    /**
+     * Set the bootstrappers to run during the application bootstrap
+     *
+     * @param string[] $bootstrappers Array of bootstrapper class names
+     */
+    public function setBootstrappers(array $bootstrappers): static
+    {
+        $this->bootstrappers = $bootstrappers;
+
+        return $this;
+    }
+
+    /**
+     * Get the registered bootstrappers
+     *
+     * @return string[]
+     */
+    public function getBootstrappers(): array
+    {
+        return $this->bootstrappers;
+    }
+
+    /**
+     * Set the middleware configuration via callback
+     *
+     * The callback receives a Middleware instance to configure.
+     */
+    public function setMiddlewareCallback(Closure $callback): static
+    {
+        $callback($this->middlewareConfig);
+
+        return $this;
+    }
+
+    /**
+     * Get the middleware configuration
+     */
+    public function getMiddlewareConfig(): Middleware
+    {
+        return $this->middlewareConfig;
+    }
+
+    /**
+     * Set the exceptions configuration callback
+     */
+    public function setExceptionsCallback(Closure $callback): static
+    {
+        $this->exceptionsCallback = $callback;
+
+        return $this;
+    }
+
+    /**
+     * Get the exceptions configuration callback
+     */
+    public function getExceptionsCallback(): ?Closure
+    {
+        return $this->exceptionsCallback;
+    }
+
+    /**
+     * Set the routing configuration
+     *
+     * @param array{web?: string, api?: string, admin?: string, tracker?: string, commands?: string} $config
+     */
+    public function setRoutingConfig(array $config): static
+    {
+        $this->routingConfig = $config;
+
+        return $this;
+    }
+
+    /**
+     * Get the routing configuration
+     *
+     * @return array{web?: string, api?: string, admin?: string, tracker?: string, commands?: string}
+     */
+    public function getRoutingConfig(): array
+    {
+        return $this->routingConfig;
+    }
+
+    /**
+     * Run the given array of bootstrap classes
+     *
+     * Bootstrappers are classes that perform initialization tasks
+     * like loading environment variables, configuration, error handlers, etc.
+     *
+     * @param string[] $bootstrappers Array of bootstrapper class names
+     */
+    public function bootstrapWith(array $bootstrappers): void
+    {
+        if ($this->hasBeenBootstrapped) {
+            return;
+        }
+
+        $this->hasBeenBootstrapped = true;
+
+        foreach ($bootstrappers as $bootstrapper) {
+            $instance = new $bootstrapper;
+            $instance->bootstrap($this);
+        }
+    }
+
+    /**
+     * Determine if the application has been bootstrapped
+     */
+    public function hasBeenBootstrapped(): bool
+    {
+        return $this->hasBeenBootstrapped;
+    }
+
+    /**
+     * Handle an incoming HTTP request
+     *
+     * This method bootstraps the application, creates the HTTP kernel,
+     * and dispatches the request through the routing layer.
+     *
+     * @param ServerRequestInterface|null $request PSR-7 request or null to capture from globals
+     * @throws BindingResolutionException
+     */
+    public function handleRequest(?ServerRequestInterface $request = null): void
+    {
+        // Bootstrap the application if not already done
+        if (!$this->hasBeenBootstrapped && !empty($this->bootstrappers)) {
+            $this->bootstrapWith($this->bootstrappers);
+        }
+
+        // Create request from globals if not provided
+        if ($request === null) {
+            $request = $this->captureRequest();
+        }
+
+        // Get or create the HTTP kernel
+        $kernel = $this->make(HttpKernel::class);
+
+        // Handle the request
+        $response = $kernel->handle($request);
+
+        // Send the response
+        $this->sendResponse($response);
+
+        // Terminate the request
+        $kernel->terminate($request, $response);
+    }
+
+    /**
+     * Capture the incoming HTTP request from PHP globals
+     */
+    protected function captureRequest(): ServerRequestInterface
+    {
+        return ServerRequestFactory::fromGlobals();
+    }
+
+    /**
+     * Send the PSR-7 response to the client
+     */
+    protected function sendResponse(\Psr\Http\Message\ResponseInterface $response): void
+    {
+        // Send status line
+        $statusLine = \sprintf(
+            'HTTP/%s %d %s',
+            $response->getProtocolVersion(),
+            $response->getStatusCode(),
+            $response->getReasonPhrase(),
+        );
+        header($statusLine, true, $response->getStatusCode());
+
+        // Send headers
+        foreach ($response->getHeaders() as $name => $values) {
+            $replace = strtolower($name) !== 'set-cookie';
+            foreach ($values as $value) {
+                header("{$name}: {$value}", $replace);
+                $replace = false;
+            }
+        }
+
+        // Send body
+        echo $response->getBody();
+    }
+
+    /**
+     * Handle an incoming console command
+     *
+     * This method bootstraps the application, creates the console kernel,
+     * and dispatches the command.
+     *
+     * @param InputInterface|null $input Symfony console input or null to use default
+     * @throws Exception
+     * @throws BindingResolutionException
+     * @return int Exit code
+     */
+    public function handleCommand(?InputInterface $input = null): int
+    {
+        // Bootstrap the application if not already done
+        if (!$this->hasBeenBootstrapped && !empty($this->bootstrappers)) {
+            $this->bootstrapWith($this->bootstrappers);
+        }
+
+        // Get or create the console kernel
+        $kernel = $this->make(ConsoleKernel::class);
+
+        // Handle the command
+        $status = $kernel->handle($input);
+
+        // Terminate
+        $kernel->terminate($input, $status);
+
+        return $status;
     }
 }
