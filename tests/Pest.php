@@ -469,13 +469,6 @@ function mockHideBbPathFunction(): void
     }
 }
 
-function mockUtimeFunction(): void
-{
-    if (!function_exists('utime')) {
-        eval('function utime() { return microtime(true); }');
-    }
-}
-
 function mockRequestFunction(): void
 {
     if (!function_exists('request')) {
@@ -501,5 +494,4 @@ setupTestEnvironment();
 mockTracyFunction();
 mockBbLogFunction();
 mockHideBbPathFunction();
-mockUtimeFunction();
 mockRequestFunction();
