@@ -30,7 +30,7 @@ try {
 }
 
 $getVersion = TorrentPier\Helpers\VersionHelper::removerPrefix($updaterDownloader['tag_name']);
-$currentVersion = TorrentPier\Helpers\VersionHelper::removerPrefix(config()->get('tp_version'));
+$currentVersion = app()->version();
 
 // Has update!
 if (z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
