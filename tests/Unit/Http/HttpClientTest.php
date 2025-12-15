@@ -164,7 +164,7 @@ describe('HttpClient Class', function () {
 
             expect($container)->toHaveCount(1);
             $request = $container[0]['request'];
-            expect($request->getHeaderLine('User-Agent'))->toBe('TorrentPier/' . \TorrentPier\Application::VERSION);
+            expect($request->getHeaderLine('User-Agent'))->toBe('TorrentPier/' . TorrentPier\Application::VERSION);
         });
     });
 
