@@ -45,6 +45,7 @@
         "gregwar/captcha": "1.*",
         "guzzlehttp/guzzle": "^7.10",
         "illuminate/container": "^12.42",
+        "illuminate/filesystem": "^12.43",
         "illuminate/pipeline": "^12.42",
         "illuminate/support": "^12.42",
         "intervention/image": "^3.0",
