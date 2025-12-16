@@ -34,7 +34,7 @@ class Sender
         $topic_title = $t_data['topic_title'];
         $filename = Attachment::getPath($topic_id);
 
-        if (!config()->get('bt_add_auth_key') || $t_data['attach_ext_id'] !== TORRENT_EXT_ID || !$size = files()->size($filename)) {
+        if (!config()->get('bt_add_auth_key') || $t_data['attach_ext_id'] !== TORRENT_EXT_ID || !files()->size($filename)) {
             return;
         }
 
