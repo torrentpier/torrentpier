@@ -132,8 +132,8 @@ class CronHelper
      * Run cron jobs
      *
      * @param bool $force Force run even if an interval not passed
-     * @return bool Whether cron was executed
      * @throws BindingResolutionException
+     * @return bool Whether cron was executed
      */
     public static function run(bool $force = false): bool
     {

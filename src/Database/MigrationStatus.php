@@ -275,8 +275,8 @@ class MigrationStatus
     /**
      * Get available migrations from filesystem
      *
-     * @return array List of available migration files
      * @throws BindingResolutionException
+     * @return array List of available migration files
      */
     private function getAvailableMigrations(): array
     {

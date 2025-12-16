@@ -33,8 +33,8 @@ class Registry
      * @param string $mode Registration mode (request, newtopic, or empty)
      * @param int $torStatus Initial torrent status
      * @param int $regTime Registration timestamp
-     * @return bool True on success
      * @throws BindingResolutionException
+     * @return bool True on success
      */
     public static function register(int $topicId, string $mode = '', int $torStatus = TOR_NOT_APPROVED, $regTime = TIMENOW): bool
     {

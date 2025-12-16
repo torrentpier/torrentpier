@@ -244,8 +244,8 @@ class Common
      * Topic deletion
      *
      *
-     * @return bool|int
      * @throws BindingResolutionException
+     * @return bool|int
      */
     public static function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $prune_all = false)
     {

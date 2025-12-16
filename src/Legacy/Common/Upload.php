@@ -216,8 +216,8 @@ class Upload
     /**
      * Move file to target path
      *
-     * @return bool
      * @throws BindingResolutionException
+     * @return bool
      */
     public function _move($file_path)
     {

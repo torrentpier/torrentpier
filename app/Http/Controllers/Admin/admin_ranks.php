@@ -68,7 +68,7 @@ if ($mode != '') {
             foreach (files()->files($ranks_dir) as $filePath) {
                 $file = basename($filePath);
                 $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-                if (\in_array($ext, $allowed_extensions)) {
+                if (in_array($ext, $allowed_extensions)) {
                     $rank_images[] = $file;
                 }
             }
