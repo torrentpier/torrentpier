@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Console\Commands\Release;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -79,6 +80,9 @@ class CleanupCommand extends Command
             );
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Release Cleanup');
@@ -90,7 +94,7 @@ class CleanupCommand extends Command
         $toDelete = [];
         foreach (self::CLEANUP_ITEMS as $item) {
             $path = BB_ROOT . $item;
-            if (file_exists($path) || is_dir($path)) {
+            if (files()->exists($path)) {
                 $toDelete[] = $item;
             }
         }
@@ -105,7 +109,7 @@ class CleanupCommand extends Command
         $this->section('Files to be removed');
         foreach ($toDelete as $item) {
             $path = BB_ROOT . $item;
-            $type = is_dir($path) ? '<comment>dir</comment> ' : '<info>file</info>';
+            $type = files()->isDirectory($path) ? '<comment>dir</comment> ' : '<info>file</info>';
             $this->line("  {$type} {$item}");
         }
 
@@ -135,13 +139,13 @@ class CleanupCommand extends Command
             $path = BB_ROOT . $item;
 
             try {
-                if (is_dir($path)) {
-                    FileSystemHelper::removeDirectory($path);
+                if (files()->isDirectory($path)) {
+                    files()->deleteDirectory($path);
                 } else {
-                    @unlink($path);
+                    files()->delete($path);
                 }
 
-                if (!file_exists($path)) {
+                if (!files()->exists($path)) {
                     $this->line("  <info>✓</info> {$item}");
                     $deleted++;
                 } else {

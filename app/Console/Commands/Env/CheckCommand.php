@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Console\Commands\Env;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -55,6 +56,9 @@ class CheckCommand extends Command
         'TP_PORT' => ['default' => 443, 'description' => 'Site port'],
     ];
 
+    /**
+     * @throws BindingResolutionException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Environment Check');
@@ -66,7 +70,7 @@ class CheckCommand extends Command
         $this->section('.env File');
         $envFile = BB_ROOT . '.env';
 
-        if (file_exists($envFile)) {
+        if (files()->exists($envFile)) {
             $this->line('  <info>✓</info> .env file exists');
 
             // Check permissions
@@ -164,10 +168,10 @@ class CheckCommand extends Command
         ];
 
         foreach ($dirs as $name => $path) {
-            if (!is_dir($path)) {
+            if (!files()->isDirectory($path)) {
                 $warnings[] = "Directory not found: {$name}";
                 $this->line("  <comment>-</comment> {$name} (not found)");
-            } elseif (!is_writable($path)) {
+            } elseif (!files()->isWritable($path)) {
                 $errors[] = "Directory not writable: {$name}";
                 $this->line("  <error>✗</error> {$name} (not writable)");
             } else {

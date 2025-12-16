@@ -80,7 +80,7 @@ class OptimizeCommand extends Command
                     $composerCmd = 'composer';
                     break;
                 }
-            } elseif (file_exists($path)) {
+            } elseif (files()->exists($path)) {
                 $composerCmd = 'php ' . escapeshellarg($path);
                 break;
             }

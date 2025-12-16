@@ -11,6 +11,7 @@
 namespace TorrentPier\Console;
 
 use FilesystemIterator;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use ReflectionClass;
@@ -103,12 +104,13 @@ class Application extends SymfonyApplication
 
     /**
      * Auto-discover and register all commands from the Commands directory
+     * @throws BindingResolutionException
      */
     private function discoverCommands(): void
     {
         $commandDir = __DIR__ . '/Commands';
 
-        if (!is_dir($commandDir)) {
+        if (!files()->isDirectory($commandDir)) {
             return;
         }
 
@@ -201,10 +203,11 @@ class Application extends SymfonyApplication
 
     /**
      * Extract a fully qualified class name from a PHP file
+     * @throws BindingResolutionException
      */
     private function getClassNameFromFile(string $filePath): ?string
     {
-        $contents = file_get_contents($filePath);
+        $contents = files()->get($filePath);
 
         if ($contents === false) {
             return null;

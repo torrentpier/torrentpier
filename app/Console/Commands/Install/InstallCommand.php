@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Console\Commands\Install;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use mysqli;
 use mysqli_sql_exception;
 use RecursiveDirectoryIterator;
@@ -162,14 +163,16 @@ class InstallCommand extends Command
 
     /**
      * Check if TorrentPier is already installed
+     * @throws BindingResolutionException
      */
     private function isInstalled(): bool
     {
-        return file_exists(BB_ROOT . '.env');
+        return files()->exists(BB_ROOT . '.env');
     }
 
     /**
      * Handle reinstallation prompt
+     * @throws BindingResolutionException
      */
     private function handleReinstall(): int
     {
@@ -184,14 +187,14 @@ class InstallCommand extends Command
         $this->section('Cleaning Previous Installation');
 
         // Remove .env
-        if (file_exists(BB_ROOT . '.env')) {
-            unlink(BB_ROOT . '.env');
+        if (files()->exists(BB_ROOT . '.env')) {
+            files()->delete(BB_ROOT . '.env');
             $this->line('  <info>✓</info> Removed .env file');
         }
 
         // Remove composer.phar if exists
-        if (file_exists(BB_ROOT . 'composer.phar')) {
-            unlink(BB_ROOT . 'composer.phar');
+        if (files()->exists(BB_ROOT . 'composer.phar')) {
+            files()->delete(BB_ROOT . 'composer.phar');
             $this->line('  <info>✓</info> Removed composer.phar');
         }
 
@@ -252,6 +255,7 @@ class InstallCommand extends Command
 
     /**
      * Fix directory permissions
+     * @throws BindingResolutionException
      */
     private function fixPermissions(): void
     {
@@ -259,7 +263,7 @@ class InstallCommand extends Command
 
         foreach (self::WRITABLE_DIRS as $dir) {
             $path = BB_ROOT . $dir;
-            if (is_dir($path)) {
+            if (files()->isDirectory($path)) {
                 $this->setPermissionsRecursively($path, 0755, 0644);
                 $this->line(\sprintf('  <info>✓</info> %s', $dir));
             } else {
@@ -272,6 +276,7 @@ class InstallCommand extends Command
 
     /**
      * Set permissions recursively
+     * @throws BindingResolutionException
      */
     private function setPermissionsRecursively(string $dir, int $dirPerm, int $filePerm): void
     {
@@ -280,25 +285,26 @@ class InstallCommand extends Command
             RecursiveIteratorIterator::SELF_FIRST,
         );
 
-        @chmod($dir, $dirPerm);
+        files()->chmod($dir, $dirPerm);
 
         foreach ($iterator as $item) {
             if ($item->isDir()) {
-                @chmod($item->getPathname(), $dirPerm);
+                files()->chmod($item->getPathname(), $dirPerm);
             } else {
-                @chmod($item->getPathname(), $filePerm);
+                files()->chmod($item->getPathname(), $filePerm);
             }
         }
     }
 
     /**
      * Check Composer dependencies
+     * @throws BindingResolutionException
      */
     private function checkComposer(): bool
     {
         $this->section('Checking Composer Dependencies');
 
-        if (file_exists(BB_ROOT . 'vendor/autoload.php')) {
+        if (files()->exists(BB_ROOT . 'vendor/autoload.php')) {
             $this->line('  <info>✓</info> Dependencies installed');
 
             return true;
@@ -316,20 +322,21 @@ class InstallCommand extends Command
 
     /**
      * Configure environment (.env file)
+     * @throws BindingResolutionException
      */
     private function configureEnvironment(): bool
     {
         $this->section('Environment Configuration');
 
         // Create .env from example if needed
-        if (!file_exists(BB_ROOT . '.env')) {
-            if (!file_exists(BB_ROOT . '.env.example')) {
+        if (!files()->exists(BB_ROOT . '.env')) {
+            if (!files()->exists(BB_ROOT . '.env.example')) {
                 $this->error('.env.example file not found!');
 
                 return false;
             }
 
-            copy(BB_ROOT . '.env.example', BB_ROOT . '.env');
+            files()->copy(BB_ROOT . '.env.example', BB_ROOT . '.env');
             $this->line('  <info>✓</info> Created .env file from template');
         }
 
@@ -401,11 +408,12 @@ class InstallCommand extends Command
 
     /**
      * Write configuration to .env file
+     * @throws BindingResolutionException
      */
     private function writeEnvFile(): void
     {
         $envPath = BB_ROOT . '.env';
-        $content = file_get_contents($envPath);
+        $content = files()->get($envPath);
 
         foreach ($this->config as $key => $value) {
             // Replace existing or append
@@ -419,7 +427,7 @@ class InstallCommand extends Command
             }
         }
 
-        file_put_contents($envPath, $content);
+        files()->put($envPath, $content);
     }
 
     /**
@@ -531,6 +539,7 @@ class InstallCommand extends Command
 
     /**
      * Post-installation tasks
+     * @throws BindingResolutionException
      */
     private function postInstallTasks(): void
     {
@@ -541,18 +550,18 @@ class InstallCommand extends Command
 
         // Update robots.txt
         $robotsFile = BB_ROOT . 'robots.txt';
-        if (file_exists($robotsFile) && is_writable($robotsFile)) {
-            $content = file_get_contents($robotsFile);
+        if (files()->exists($robotsFile) && files()->isWritable($robotsFile)) {
+            $content = files()->get($robotsFile);
             $content = str_replace('example.com', $this->config['TP_HOST'], $content);
-            file_put_contents($robotsFile, $content);
+            files()->put($robotsFile, $content);
             $this->line('  <info>✓</info> Updated robots.txt');
         }
 
         // Create local config for development
         if ($this->config['APP_ENV'] === 'local') {
             $localConfig = BB_ROOT . 'config/config.local.php';
-            if (!file_exists($localConfig)) {
-                copy(BB_ROOT . 'config/config.php', $localConfig);
+            if (!files()->exists($localConfig)) {
+                files()->copy(BB_ROOT . 'config/config.php', $localConfig);
                 $this->line('  <info>✓</info> Created config.local.php for development');
             }
         }
@@ -578,6 +587,7 @@ class InstallCommand extends Command
 
     /**
      * Show web server configuration suggestions
+     * @throws BindingResolutionException
      */
     private function showWebServerConfig(): void
     {
@@ -596,7 +606,7 @@ class InstallCommand extends Command
 
         if (isset($configFiles[$webserver])) {
             $configPath = BB_ROOT . $configFiles[$webserver];
-            if (file_exists($configPath)) {
+            if (files()->exists($configPath)) {
                 $this->line();
                 $this->line("  <info>Configuration template:</info> {$configPath}");
                 $this->line();
@@ -614,6 +624,7 @@ class InstallCommand extends Command
 
     /**
      * Cleanup development files
+     * @throws BindingResolutionException
      */
     private function cleanup(): void
     {
@@ -622,7 +633,7 @@ class InstallCommand extends Command
         }
 
         $cleanupScript = BB_ROOT . 'install/release_scripts/_cleanup.php';
-        if (!file_exists($cleanupScript)) {
+        if (!files()->exists($cleanupScript)) {
             return;
         }
 
@@ -639,7 +650,7 @@ class InstallCommand extends Command
 
             // Remove release scripts directory
             $releaseDir = BB_ROOT . 'install/release_scripts';
-            if (is_dir($releaseDir)) {
+            if (files()->isDirectory($releaseDir)) {
                 FileSystemHelper::removeDirectory($releaseDir);
             }
 
