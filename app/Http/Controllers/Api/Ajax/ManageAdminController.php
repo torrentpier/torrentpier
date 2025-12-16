@@ -13,12 +13,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\Ajax;
 
 use App\Http\Controllers\Api\Ajax\Concerns\AjaxResponse;
-use FilesystemIterator;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 use TorrentPier\Helpers\CronHelper;
 use TorrentPier\Legacy\Admin\Common;
 use TorrentPier\Legacy\Group;
@@ -63,18 +60,8 @@ class ManageAdminController
 
             case 'clear_template_cache':
                 $twigCacheDir = template()->getCacheDir() . 'twig';
-                if (is_dir($twigCacheDir)) {
-                    $iterator = new RecursiveIteratorIterator(
-                        new RecursiveDirectoryIterator($twigCacheDir, FilesystemIterator::SKIP_DOTS),
-                        RecursiveIteratorIterator::CHILD_FIRST,
-                    );
-                    foreach ($iterator as $file) {
-                        if ($file->isDir()) {
-                            @rmdir($file->getPathname());
-                        } else {
-                            @unlink($file->getPathname());
-                        }
-                    }
+                if (files()->isDirectory($twigCacheDir)) {
+                    files()->cleanDirectory($twigCacheDir);
                 }
                 $responseData['template_cache_html'] = '<span class="seed bold">' . __('ALL_TEMPLATE_CLEARED') . '</span>';
                 break;

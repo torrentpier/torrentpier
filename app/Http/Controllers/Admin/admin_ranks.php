@@ -62,16 +62,14 @@ if ($mode != '') {
         $ranks_dir = 'assets/images/ranks/';
         $rank_images = [];
 
-        if (is_dir($ranks_dir)) {
+        if (files()->isDirectory($ranks_dir)) {
             $allowed_extensions = ['gif', 'png', 'jpg', 'jpeg', 'bmp', 'webp', 'avif', 'ico'];
-            $files = scandir($ranks_dir);
 
-            foreach ($files as $file) {
-                if ($file != '.' && $file != '..') {
-                    $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-                    if (in_array($ext, $allowed_extensions)) {
-                        $rank_images[] = $file;
-                    }
+            foreach (files()->files($ranks_dir) as $filePath) {
+                $file = basename($filePath);
+                $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                if (\in_array($ext, $allowed_extensions)) {
+                    $rank_images[] = $file;
                 }
             }
             sort($rank_images);

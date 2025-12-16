@@ -47,7 +47,7 @@ class SitemapController
         switch ($mode) {
             case 'create':
                 $map->createSitemap();
-                if (is_file(SITEMAP_DIR . '/sitemap.xml')) {
+                if (files()->isFile(SITEMAP_DIR . '/sitemap.xml')) {
                     $html .= __('SITEMAP_CREATED') . ': <b>' . bb_date(TIMENOW, config()->get('post_date_format')) . '</b> '
                         . __('SITEMAP_AVAILABLE') . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">'
                         . make_url('sitemap/sitemap.xml') . '</a>';
