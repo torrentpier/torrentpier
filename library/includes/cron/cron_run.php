@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 define('IN_CRON', true);
 
 // Set SESSION vars (optimized for InnoDB)
@@ -42,7 +38,7 @@ DB()->add_shutdown_query('
 foreach ($cron_jobs as $job) {
     $job_script = CRON_JOB_DIR . basename($job['cron_script']);
 
-    if (is_file($job_script)) {
+    if (files()->isFile($job_script)) {
         $cron_start_time = microtime(true);
         $cron_runtime_log = [];
         $cron_write_log = (CRON_LOG_ENABLED && (CRON_FORCE_LOG || $job['log_enabled'] >= 1));

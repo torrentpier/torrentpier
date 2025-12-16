@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
-require INC_DIR . '/bbcode.php';
-
 datastore()->enqueue([
     'ranks',
     'cat_forums',
@@ -78,7 +72,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
         $signature = '';
     }
 } elseif ($signature) {
-    $signature = bbcode2html($signature);
+    $signature = bbcode()->toHtml($signature);
 }
 
 // Null ratio

@@ -36,8 +36,6 @@
  * ===========================================================================
  */
 
-require INC_DIR . '/bbcode.php';
-
 page_cfg('load_tpl_vars', [
     'post_icons',
 ]);
@@ -330,7 +328,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
                     'POSTER' => profile_url($row),
                     'POSTER_NAME_JS' => addslashes($row['username']),
                     'POST_DATE' => '<a class="small" href="' . POST_URL . $row['post_id'] . '#' . $row['post_id'] . '" title="' . __('POST_LINK') . '">' . bb_date($row['post_time'], config()->get('post_date_format')) . '</a>',
-                    'MESSAGE' => get_parsed_post($row),
+                    'MESSAGE' => bbcode()->getParsedPost($row),
                 ]);
             }
             template()->assign_vars(['TPL_SHOW_NEW_POSTS' => true]);
@@ -369,7 +367,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
         case 'reply':
             $username = request()->post->has('username') ? clean_username(request()->post->get('username')) : '';
             $subject = request()->post->has('subject') ? clean_title(request()->post->get('subject')) : '';
-            $message = request()->post->has('message') ? prepare_message(request()->post->get('message')) : '';
+            $message = request()->post->has('message') ? bbcode()->prepareMessage(request()->post->get('message')) : '';
             $poster_rg_raw = request()->post->getInt('poster_rg', -1);
             $attach_rg_sig = (request()->post->has('attach_rg_sig') && $poster_rg_raw != -1) ? 1 : 0;
             $poster_rg_id = ($poster_rg_raw != -1) ? $poster_rg_raw : 0;
@@ -459,13 +457,13 @@ if (($delete || $mode == 'delete') && !$confirm) {
 if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
     $username = request()->post->has('username') ? clean_username(request()->post->get('username')) : '';
     $subject = request()->post->has('subject') ? clean_title(request()->post->get('subject')) : '';
-    $message = request()->post->has('message') ? prepare_message(request()->post->get('message')) : '';
+    $message = request()->post->has('message') ? bbcode()->prepareMessage(request()->post->get('message')) : '';
 
     if ($preview) {
         $preview_subject = $subject;
         $preview_username = $username;
         $preview_message = htmlCHR($message, false, ENT_NOQUOTES);
-        $preview_message = bbcode2html($preview_message);
+        $preview_message = bbcode()->toHtml($preview_message);
 
         template()->assign_vars([
             'TPL_PREVIEW_POST' => true,

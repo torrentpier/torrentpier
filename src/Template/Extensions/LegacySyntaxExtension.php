@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Template\Extensions;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -112,6 +113,7 @@ class LegacySyntaxExtension extends AbstractExtension
     /**
      * Include a file from a path and return its contents
      * Used to safely include HTML/PHP files in Twig templates
+     * @throws BindingResolutionException
      */
     public function includeFile(?string $path): string
     {
@@ -134,7 +136,7 @@ class LegacySyntaxExtension extends AbstractExtension
         }
 
         // Read and return file content
-        $content = file_get_contents($realPath);
+        $content = files()->get($realPath);
         if ($content === false) {
             return "<!-- include_file: cannot read: {$path} -->";
         }

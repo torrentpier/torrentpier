@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 $pm_days_keep = (int)config()->get('pm_days_keep');
 
 if ($pm_days_keep !== 0) {

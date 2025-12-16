@@ -36,8 +36,6 @@
  * ===========================================================================
  */
 
-require INC_DIR . '/bbcode.php';
-
 use Illuminate\Support\Str;
 use TorrentPier\Search\SearchParams;
 
@@ -611,7 +609,7 @@ if ($post_mode) {
                 $edit_btn = $ip_btn = IS_AM;
             }
 
-            $message = get_parsed_post($post);
+            $message = bbcode()->getParsedPost($post);
             $message = censor()->censorString($message);
 
             template()->assign_block_vars('t.p', [

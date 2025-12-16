@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 $group_id = request()->getInt(POST_GROUPS_URL);
 $mode = request()->getString('mode');
 

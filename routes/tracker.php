@@ -12,13 +12,12 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Tracker\AnnounceController;
 use App\Http\Controllers\Tracker\ScrapeController;
-use App\Http\Middleware\TrackerMiddleware;
 use TorrentPier\Router\Router;
 
 /**
- * Route definitions for TorrentPier tracker application
+ * Tracker route definitions
  *
- * All routes are prefixed with /bt and use TrackerMiddleware
+ * All routes are prefixed with /bt and use BootTracker middleware
  * for tracker initialization.
  */
 return static function (Router $router): void {
@@ -35,5 +34,5 @@ return static function (Router $router): void {
         $group->get('/index.php', AnnounceController::class);
         $group->get('/', AnnounceController::class);
         $group->get('', AnnounceController::class);
-    })->middleware(new TrackerMiddleware);
+    })->middleware('tracker');
 };

@@ -16,13 +16,9 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 if (!IS_SUPER_ADMIN) {
     bb_die(__('ONLY_FOR_SUPER_ADMIN'));
 }
-
-require INC_DIR . '/bbcode.php';
 
 define('REBUILD_SEARCH_ABORTED', 0);  // when the user aborted the processing
 define('REBUILD_SEARCH_PROCESSED', 1);  // when a batch of posts has been processed

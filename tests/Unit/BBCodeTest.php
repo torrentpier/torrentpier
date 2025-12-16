@@ -3,8 +3,7 @@
 use TorrentPier\Legacy\BBCode;
 
 describe('BBCode', function () {
-    // Note: BBCode class requires get_bbcode_tpl() global function in constructor
-    // which is only available with full application bootstrap.
+    // Note: BBCode class requires full application bootstrap for datastore.
     // This test only verifies the class is autoloadable.
 
     it('class exists and is autoloadable', function () {

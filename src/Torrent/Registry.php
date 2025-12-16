@@ -13,6 +13,7 @@ namespace TorrentPier\Torrent;
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Nette\Database\DriverException;
 use Nette\Database\UniqueConstraintViolationException;
 use TorrentPier\Attachment;
@@ -32,6 +33,7 @@ class Registry
      * @param string $mode Registration mode (request, newtopic, or empty)
      * @param int $torStatus Initial torrent status
      * @param int $regTime Registration timestamp
+     * @throws BindingResolutionException
      * @return bool True on success
      */
     public static function register(int $topicId, string $mode = '', int $torStatus = TOR_NOT_APPROVED, $regTime = TIMENOW): bool
@@ -61,11 +63,11 @@ class Registry
 
         $filename = Attachment::getPath($topic_id);
 
-        if (!is_file($filename)) {
+        if (!files()->isFile($filename)) {
             self::errorExit(__('ERROR_NO_ATTACHMENT') . '<br /><br />' . htmlCHR($filename));
         }
 
-        $file_contents = file_get_contents($filename);
+        $file_contents = files()->get($filename);
 
         try {
             $tor = Bencode::decode($file_contents, dictType: Collection::ARRAY);
@@ -75,9 +77,7 @@ class Registry
 
         if (config()->get('bt_disable_dht')) {
             $tor['info']['private'] = 1;
-            $fp = fopen($filename, 'wb+');
-            fwrite($fp, Bencode::encode($tor));
-            fclose($fp);
+            files()->put($filename, Bencode::encode($tor));
         }
 
         if (config()->get('bt_check_announce_url')) {

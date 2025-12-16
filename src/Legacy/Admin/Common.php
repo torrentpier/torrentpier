@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Legacy\Admin;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use TorrentPier\Attachment;
 use TorrentPier\Legacy\Post;
 
@@ -243,6 +244,7 @@ class Common
      * Topic deletion
      *
      *
+     * @throws BindingResolutionException
      * @return bool|int
      */
     public static function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $prune_all = false)
@@ -380,8 +382,8 @@ class Common
 
         while ($row = DB()->fetch_next($result)) {
             $file_path = Attachment::getPath($row['topic_id']);
-            if (is_file($file_path)) {
-                @unlink($file_path);
+            if (files()->isFile($file_path)) {
+                files()->delete($file_path);
             }
             // TorrServer integration
             if (config()->get('torr_server.enabled')) {

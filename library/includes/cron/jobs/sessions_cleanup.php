@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 $user_session_expire_time = TIMENOW - (int)config()->get('user_session_duration');
 $admin_session_expire_time = TIMENOW - (int)config()->get('admin_session_duration');
 

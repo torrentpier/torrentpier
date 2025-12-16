@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Console\Commands\Make;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -43,6 +44,9 @@ class MakeCommandCommand extends Command
             );
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $name = $input->getArgument('name');
@@ -64,8 +68,8 @@ class MakeCommandCommand extends Command
         }
 
         // Ensure directory exists
-        if (!is_dir($dir)) {
-            if (!mkdir($dir, 0755, true)) {
+        if (!files()->isDirectory($dir)) {
+            if (!files()->makeDirectory($dir, 0755, true)) {
                 $this->error("Failed to create directory: {$dir}");
 
                 return self::FAILURE;
@@ -75,7 +79,7 @@ class MakeCommandCommand extends Command
         $filePath = $dir . '/' . $className . '.php';
 
         // Check if file already exists
-        if (file_exists($filePath)) {
+        if (files()->exists($filePath)) {
             $this->error("Command file already exists: {$filePath}");
 
             return self::FAILURE;
@@ -91,7 +95,7 @@ class MakeCommandCommand extends Command
         $template = $this->getCommandTemplate($namespace, $className, $name, $description);
 
         // Write file
-        if (file_put_contents($filePath, $template) === false) {
+        if (files()->put($filePath, $template) === false) {
             $this->error("Failed to write file: {$filePath}");
 
             return self::FAILURE;

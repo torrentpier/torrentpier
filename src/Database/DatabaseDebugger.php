@@ -12,6 +12,7 @@ namespace TorrentPier\Database;
 
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Str;
 use PDOException;
 
 /**
@@ -152,7 +153,7 @@ class DatabaseDebugger
                         return (string)($frame['line'] ?? '?');
                     case 'all':
                     default:
-                        $file = \function_exists('hide_bb_path') ? hide_bb_path($frame['file']) : basename($frame['file']);
+                        $file = Str::chopStart($frame['file'], BB_PATH . '/');
                         $line = $frame['line'] ?? '?';
 
                         return "{$file}({$line})";

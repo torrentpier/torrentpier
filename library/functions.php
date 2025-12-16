@@ -16,7 +16,7 @@
  * where available.
  */
 
-use Illuminate\Support\Str;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * Write to an application log file
@@ -24,6 +24,7 @@ use Illuminate\Support\Str;
  * @param array|string $msg Message to log (an array will be joined with newlines)
  * @param string $file_name Log file name (without extension)
  * @param bool $return_path Return file path instead of writing
+ * @throws BindingResolutionException
  * @return string|int|false File path, bytes written, or false on failure
  */
 function bb_log(array|string $msg, string $file_name = 'logs', bool $return_path = false): string|int|false
@@ -38,81 +39,7 @@ function bb_log(array|string $msg, string $file_name = 'logs', bool $return_path
         return $path;
     }
 
-    return file_write($msg, $path);
-}
-
-/**
- * Write string to a file with an optional size limit and rotation
- *
- * @param string $str Content to write
- * @param string $file File path
- * @param int $max_size Maximum file size before rotation (0 = no limit)
- * @param bool $lock Use file locking
- * @param bool $replace_content Replace file content instead of appending
- * @return int|false Bytes written or false on failure
- */
-function file_write(string $str, string $file, int $max_size = LOG_MAX_SIZE, bool $lock = true, bool $replace_content = false): int|false
-{
-    $bytes_written = false;
-    clearstatcache();
-
-    if (is_file($file) && ($max_size && (filesize($file) >= $max_size))) {
-        $file_parts = pathinfo($file);
-        $new_name = ($file_parts['dirname'] . '/' . $file_parts['filename'] . '_[old]_' . date('Y-m-d_H-i-s_') . getmypid() . '.' . $file_parts['extension']);
-        clearstatcache();
-        if (!is_file($new_name)) {
-            rename($file, $new_name);
-        }
-    }
-
-    clearstatcache();
-    if (bb_mkdir(dirname($file))) {
-        if ($fp = fopen($file, 'ab+')) {
-            if ($lock) {
-                flock($fp, LOCK_EX);
-            }
-            if ($replace_content) {
-                ftruncate($fp, 0);
-                fseek($fp, 0);
-            }
-            $bytes_written = fwrite($fp, $str);
-            fclose($fp);
-        }
-    }
-
-    return $bytes_written;
-}
-
-/**
- * Create a directory with proper permissions
- *
- * @param string $path Directory path
- * @param int $mode Permission mode
- * @return bool Success status
- */
-function bb_mkdir(string $path, int $mode = 0777): bool
-{
-    $old_um = umask(0);
-    $dir = mkdir_rec($path, $mode);
-    umask($old_um);
-
-    return $dir;
-}
-
-/**
- * Recursively create directory
- *
- * @param string $path Directory path
- * @param int $mode Permission mode
- * @return bool Success status
- */
-function mkdir_rec(string $path, int $mode): bool
-{
-    if (is_dir($path)) {
-        return ($path !== '.' && $path !== '..') && is_writable($path);
-    }
-
-    return mkdir_rec(dirname($path), $mode) && mkdir($path, $mode);
+    return files()->appendWithRotation($path, $msg);
 }
 
 /**
@@ -125,19 +52,6 @@ function mkdir_rec(string $path, int $mode): bool
 function verify_id(mixed $id, int $length): bool
 {
     return is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id);
-}
-
-/**
- * Clean filename by replacing invalid characters
- *
- * @param string $fname Filename to clean
- * @return string Cleaned filename
- */
-function clean_filename(string $fname): string
-{
-    static $s = ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' '];
-
-    return str_replace($s, '_', Str::squish($fname));
 }
 
 /**
@@ -210,37 +124,6 @@ function array_deep(mixed &$var, callable $fn, bool $one_dimensional = false, bo
 }
 
 /**
- * Deep merge arrays recursively
- *
- * @param array $base Base array
- * @param array $overlay Array to merge on top
- * @return array Merged array
- */
-function array_deep_merge(array $base, array $overlay): array
-{
-    foreach ($overlay as $key => $value) {
-        if (is_array($value) && isset($base[$key]) && is_array($base[$key])) {
-            $base[$key] = array_deep_merge($base[$key], $value);
-        } else {
-            $base[$key] = $value;
-        }
-    }
-
-    return $base;
-}
-
-/**
- * Hide BB_PATH from the path string for display purposes
- *
- * @param string $path Full path
- * @return string Path with BB_PATH removed
- */
-function hide_bb_path(string $path): string
-{
-    return ltrim(str_replace(BB_PATH, '', $path), '/\\');
-}
-
-/**
  * Get system resource statistics
  *
  * @param string $param Parameter name ('mem' or 'mem_peak')
@@ -289,47 +172,44 @@ function simple_header(?bool $set = null): bool
  */
 function bitfields(?string $type = null): array
 {
-    static $bf = null;
-    if ($bf === null) {
-        $bf = [
-            'forum_perm' => [
-                'auth_view' => AUTH_VIEW,
-                'auth_read' => AUTH_READ,
-                'auth_mod' => AUTH_MOD,
-                'auth_post' => AUTH_POST,
-                'auth_reply' => AUTH_REPLY,
-                'auth_edit' => AUTH_EDIT,
-                'auth_delete' => AUTH_DELETE,
-                'auth_sticky' => AUTH_STICKY,
-                'auth_announce' => AUTH_ANNOUNCE,
-                'auth_vote' => AUTH_VOTE,
-                'auth_pollcreate' => AUTH_POLLCREATE,
-                'auth_attachments' => AUTH_ATTACH,
-                'auth_download' => AUTH_DOWNLOAD,
-            ],
-            'user_opt' => [
-                'user_viewemail' => 0,
-                'dis_sig' => 1,
-                'dis_avatar' => 2,
-                'dis_pm' => 3,
-                'user_viewonline' => 4,
-                'user_notify' => 5,
-                'user_notify_pm' => 6,
-                'dis_passkey' => 7,
-                'user_porn_forums' => 8,
-                'user_callseed' => 9,
-                'user_empty' => 10,
-                'dis_topic' => 11,
-                'dis_post' => 12,
-                'dis_post_edit' => 13,
-                'user_dls' => 14,
-                'user_retracker' => 15,
-                'user_hide_torrent_client' => 16,
-                'user_hide_peer_country' => 17,
-                'user_hide_peer_username' => 18,
-            ],
-        ];
-    }
+    $bf = once(fn () => [
+        'forum_perm' => [
+            'auth_view' => AUTH_VIEW,
+            'auth_read' => AUTH_READ,
+            'auth_mod' => AUTH_MOD,
+            'auth_post' => AUTH_POST,
+            'auth_reply' => AUTH_REPLY,
+            'auth_edit' => AUTH_EDIT,
+            'auth_delete' => AUTH_DELETE,
+            'auth_sticky' => AUTH_STICKY,
+            'auth_announce' => AUTH_ANNOUNCE,
+            'auth_vote' => AUTH_VOTE,
+            'auth_pollcreate' => AUTH_POLLCREATE,
+            'auth_attachments' => AUTH_ATTACH,
+            'auth_download' => AUTH_DOWNLOAD,
+        ],
+        'user_opt' => [
+            'user_viewemail' => 0,
+            'dis_sig' => 1,
+            'dis_avatar' => 2,
+            'dis_pm' => 3,
+            'user_viewonline' => 4,
+            'user_notify' => 5,
+            'user_notify_pm' => 6,
+            'dis_passkey' => 7,
+            'user_porn_forums' => 8,
+            'user_callseed' => 9,
+            'user_empty' => 10,
+            'dis_topic' => 11,
+            'dis_post' => 12,
+            'dis_post_edit' => 13,
+            'user_dls' => 14,
+            'user_retracker' => 15,
+            'user_hide_torrent_client' => 16,
+            'user_hide_peer_country' => 17,
+            'user_hide_peer_username' => 18,
+        ],
+    ]);
 
     return $type === null ? $bf : ($bf[$type] ?? []);
 }

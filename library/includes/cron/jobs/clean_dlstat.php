@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 // Delete staled dl-status records
 $keeping_dlstat = [
     DL_STATUS_WILL => (int)config()->get('dl_will_days_keep'),

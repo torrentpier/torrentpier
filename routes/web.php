@@ -30,7 +30,7 @@ return function (Router $router): void {
     // Global middleware (applied to all routes)
     // ==============================================================
 
-    $router->middleware('web');
+    $router->middleware('session');
 
     // ==============================================================
     // Modern PSR-7 controllers (in app/Http/Controllers/)
@@ -130,7 +130,6 @@ return function (Router $router): void {
         ->middleware($auth);
 
     // ANY (GET + POST)
-    $router->any('/ajax', new LegacyAdapter($basePath . '/app/Http/Controllers/ajax.php'));
     $router->any('/login', new LegacyAdapter($basePath . '/app/Http/Controllers/login.php'));
     $router->any('/modcp', new LegacyAdapter($basePath . '/app/Http/Controllers/modcp.php'))
         ->middleware($auth);

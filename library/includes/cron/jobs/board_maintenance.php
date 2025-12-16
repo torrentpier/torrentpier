@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 // Synchronization
 TorrentPier\Legacy\Admin\Common::sync('topic', 'all');
 TorrentPier\Legacy\Admin\Common::sync('user_posts', 'all');

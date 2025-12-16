@@ -17,7 +17,7 @@ use Tracy\IBarPanel;
 /**
  * Performance Panel for Tracy Debug Bar
  *
- * Displays execution time, memory usage, and GZIP compression status.
+ * Displays execution time and memory usage.
  */
 class PerformancePanel implements IBarPanel
 {
@@ -50,9 +50,6 @@ class PerformancePanel implements IBarPanel
         $memCurrent = $this->getMemory('current');
         $memPeak = $this->getMemory('peak');
         $memStart = $this->getMemory('start');
-
-        $gzipEnabled = $this->isGzipEnabled();
-        $gzipSupported = $this->isGzipSupported();
 
         $sqlPercent = $execTime > 0 ? round($sqlTime * 100 / $execTime) : 0;
         $phpPercent = 100 - $sqlPercent;
@@ -91,22 +88,6 @@ class PerformancePanel implements IBarPanel
             $usagePercent = round($memPeak * 100 / $memLimit);
             $limitColor = $usagePercent > 80 ? '#B00' : ($usagePercent > 50 ? '#D80' : '#4A4');
             $html .= '<tr><td>Memory Limit</td><td>' . $this->formatBytes($memLimit) . ' <span style="color:' . $limitColor . '">(' . $usagePercent . '% used)</span></td></tr>';
-        }
-
-        // GZIP section
-        $html .= '<tr><th colspan="2" style="background:#f5f5f5;text-align:left;padding:8px">Compression</th></tr>';
-
-        if (!$gzipSupported) {
-            $gzipStatus = '<span style="color:#999">Not supported by client</span>';
-        } elseif ($gzipEnabled) {
-            $gzipStatus = '<span style="color:#4A4;font-weight:bold">Enabled</span>';
-        } else {
-            $gzipStatus = '<span style="color:#D80">Disabled</span>';
-        }
-        $html .= '<tr><td>GZIP Compression</td><td>' . $gzipStatus . '</td></tr>';
-
-        if ($gzipSupported) {
-            $html .= '<tr><td>Accept-Encoding</td><td><code>' . htmlspecialchars(request()->headers->get('Accept-Encoding') ?? 'N/A') . '</code></td></tr>';
         }
 
         $html .= '</table>';
@@ -191,22 +172,6 @@ class PerformancePanel implements IBarPanel
             'k' => $value * 1024,
             default => $value,
         };
-    }
-
-    /**
-     * Check if GZIP compression is enabled
-     */
-    private function isGzipEnabled(): bool
-    {
-        return (bool)config()->get('gzip_compress', false);
-    }
-
-    /**
-     * Check if client supports GZIP
-     */
-    private function isGzipSupported(): bool
-    {
-        return \defined('UA_GZIP_SUPPORTED') && UA_GZIP_SUPPORTED;
     }
 
     /**

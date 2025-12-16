@@ -18,6 +18,7 @@ use League\Route\Route;
 use League\Route\RouteGroup as LeagueRouteGroup;
 use League\Route\Router as LeagueRouter;
 use League\Route\Strategy\ApplicationStrategy;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -37,12 +38,15 @@ class Router
     /** @var array<string, class-string<MiddlewareInterface>> */
     private array $middlewareAliases = [];
 
-    public function __construct()
+    public function __construct(?ContainerInterface $container = null)
     {
         $this->router = new LeagueRouter;
 
-        // Use ApplicationStrategy for standard request handling
-        $this->router->setStrategy(new ApplicationStrategy);
+        $strategy = new ApplicationStrategy;
+        if ($container) {
+            $strategy->setContainer($container);
+        }
+        $this->router->setStrategy($strategy);
     }
 
     /**
@@ -126,14 +130,19 @@ class Router
     /**
      * Create a route group with shared attributes
      *
+     * Returns MiddlewareAwareGroup which supports string middleware aliases:
+     *   $router->group('/api', fn($g) => ...)->middleware('session');
+     *
      * @param string $prefix URL prefix for the group
      * @param callable $callback Callback to define routes in the group
      */
-    public function group(string $prefix, callable $callback): LeagueRouteGroup
+    public function group(string $prefix, callable $callback): MiddlewareAwareGroup
     {
-        return $this->router->group($prefix, function (LeagueRouteGroup $group) use ($callback) {
+        $leagueGroup = $this->router->group($prefix, function (LeagueRouteGroup $group) use ($callback) {
             $callback(new RouteGroup($group));
         });
+
+        return new MiddlewareAwareGroup($leagueGroup, $this);
     }
 
     /**
