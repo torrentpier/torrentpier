@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 $forum_auth_fields = [
     'auth_view',
     'auth_read',

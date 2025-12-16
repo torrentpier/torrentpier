@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\Ajax;
 
 use App\Http\Controllers\Api\Ajax\Concerns\AjaxResponse;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TorrentPier\Legacy\BBCode;
@@ -31,13 +30,8 @@ class ViewPostController
 
     public function __construct(
         private readonly BBCode $bbcode,
-    ) {
-        $this->bbcode->boot();
-    }
+    ) {}
 
-    /**
-     * @throws BindingResolutionException
-     */
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         $body = $request->getParsedBody() ?? [];
@@ -96,7 +90,7 @@ class ViewPostController
         if ($returnText) {
             $response['post_text'] = $postData['post_text'];
         } else {
-            $response['post_html'] = get_parsed_post($postData);
+            $response['post_html'] = $this->bbcode->getParsedPost($postData);
         }
 
         return $this->response($response);

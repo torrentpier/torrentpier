@@ -37,8 +37,6 @@
 
 define('IN_PM', true);
 
-require INC_DIR . '/bbcode.php';
-
 $privmsg_sent_id = $l_box_name = $to_username = $privmsg_subject = $privmsg_message = $error_msg = '';
 
 // Page config

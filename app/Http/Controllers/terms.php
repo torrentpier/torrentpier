@@ -8,8 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-require INC_DIR . '/bbcode.php';
-
 if (!config()->get('terms') && !IS_ADMIN) {
     redirect('index.php');
 }

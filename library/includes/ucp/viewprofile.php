@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
-require INC_DIR . '/bbcode.php';
-
 datastore()->enqueue([
     'ranks',
     'cat_forums',

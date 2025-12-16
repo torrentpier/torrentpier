@@ -15,8 +15,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 use TorrentPier\Legacy\Group;
 
 $max_forum_name_length = 50;

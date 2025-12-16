@@ -8,8 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-require __DIR__ . '/pagestart.php';
-
 // Statistics
 if (!$stats = datastore()->get('stats')) {
     datastore()->update('stats');

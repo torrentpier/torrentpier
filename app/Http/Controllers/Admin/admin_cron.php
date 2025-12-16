@@ -16,8 +16,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 $mode = request()->query->get('mode', '');
 $job_id = request()->query->getInt('id');
 $submit = request()->post->has('submit');

@@ -10,10 +10,6 @@
 
 use Illuminate\Support\Str;
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
     $ext = config()->get('file_id_ext')[$ext_id] ?? '';

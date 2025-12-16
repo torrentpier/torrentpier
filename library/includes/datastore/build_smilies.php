@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 $smilies = [];
 
 $rowset = DB()->fetch_rowset('SELECT * FROM ' . BB_SMILIES);

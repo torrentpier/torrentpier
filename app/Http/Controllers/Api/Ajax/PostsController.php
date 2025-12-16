@@ -13,10 +13,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\Ajax;
 
 use App\Http\Controllers\Api\Ajax\Concerns\AjaxResponse;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TorrentPier\Legacy\Admin\Common;
+use TorrentPier\Legacy\BBCode;
 use TorrentPier\Legacy\Post;
 use TorrentPier\Topic\Guard;
 
@@ -31,12 +31,12 @@ class PostsController
 
     protected string $action = 'posts';
 
-    /**
-     * @throws BindingResolutionException
-     */
+    public function __construct(
+        private readonly BBCode $bbcode,
+    ) {}
+
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
-        bbcode()->boot();
         $body = $request->getParsedBody() ?? [];
 
         if (!isset($body['type'])) {
@@ -173,7 +173,7 @@ class PostsController
         $message = htmlCHR($message, false, ENT_NOQUOTES);
 
         return $this->response([
-            'message_html' => bbcode2html($message),
+            'message_html' => $this->bbcode->toHtml($message),
             'res_id' => $body['res_id'] ?? null,
         ]);
     }
@@ -219,7 +219,7 @@ class PostsController
     private function handleEditorSubmit(array $body, array $post, int $postId): ResponseInterface
     {
         $text = (string)($body['text'] ?? '');
-        $text = prepare_message($text);
+        $text = $this->bbcode->prepareMessage($text);
 
         if (mb_strlen($text) <= 2) {
             return $this->error(__('EMPTY_MESSAGE'));
@@ -227,7 +227,7 @@ class PostsController
 
         if ($text != $post['post_text']) {
             if (config()->get('max_smilies')) {
-                $countSmilies = substr_count(bbcode2html($text), '<img class="smile" src="' . config()->get('smilies_path'));
+                $countSmilies = substr_count($this->bbcode->toHtml($text), '<img class="smile" src="' . config()->get('smilies_path'));
                 if ($countSmilies > config()->get('max_smilies')) {
                     return $this->error(\sprintf(__('MAX_SMILIES_PER_POST'), config()->get('max_smilies')));
                 }
@@ -252,7 +252,7 @@ class PostsController
         }
 
         return $this->response([
-            'html' => bbcode2html($text),
+            'html' => $this->bbcode->toHtml($text),
             'post_id' => $postId,
         ]);
     }
@@ -335,7 +335,7 @@ class PostsController
         }
 
         $message = (string)($body['message'] ?? '');
-        $message = prepare_message($message);
+        $message = $this->bbcode->prepareMessage($message);
 
         // Flood control
         $whereSql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : 'p.poster_id = ' . userdata('user_id');
@@ -370,7 +370,7 @@ class PostsController
         }
 
         if (config()->get('max_smilies')) {
-            $countSmilies = substr_count(bbcode2html($message), '<img class="smile" src="' . config()->get('smilies_path'));
+            $countSmilies = substr_count($this->bbcode->toHtml($message), '<img class="smile" src="' . config()->get('smilies_path'));
             if ($countSmilies > config()->get('max_smilies')) {
                 return $this->error(\sprintf(__('MAX_SMILIES_PER_POST'), config()->get('max_smilies')));
             }

@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 if (!config()->get('emailer.enabled')) {
     bb_die(__('EMAILER_DISABLED'));
 }

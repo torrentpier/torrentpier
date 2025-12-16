@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Tracker\AnnounceController;
 use App\Http\Controllers\Tracker\ScrapeController;
-use App\Http\Middleware\Tracker\BootTracker;
 use TorrentPier\Router\Router;
 
 /**
@@ -35,5 +34,5 @@ return static function (Router $router): void {
         $group->get('/index.php', AnnounceController::class);
         $group->get('/', AnnounceController::class);
         $group->get('', AnnounceController::class);
-    })->middleware(new BootTracker);
+    })->middleware('tracker');
 };

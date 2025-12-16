@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Kernels\HttpKernel;
+use TorrentPier\Container\PsrContainerAdapter;
 use TorrentPier\Http\HttpClient;
 use TorrentPier\Http\Request;
 use TorrentPier\Router\Router;
@@ -48,7 +49,7 @@ class HttpServiceProvider extends ServiceProvider
 
         // Router singleton
         $this->app->singleton(Router::class, function () {
-            return new Router;
+            return new Router(new PsrContainerAdapter($this->app));
         });
 
         // Register aliases

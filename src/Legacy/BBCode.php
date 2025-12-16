@@ -10,17 +10,12 @@
 
 namespace TorrentPier\Legacy;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
-
 /**
  * Class BBCode
  * @package TorrentPier\Legacy
  */
 class BBCode
 {
-    /** @var bool Whether datastore has been enqueued */
-    private bool $booted = false;
-
     /** @var array Replacements for some code elements */
     public array $tpl = [];
 
@@ -74,23 +69,6 @@ class BBCode
         $this->tpl = $this->getBBCodeTpl();
 
         $this->init_replacements();
-    }
-
-    /**
-     * Boot the BBCode processor by enqueueing datastore items
-     *
-     * Call this before rendering BBCode that uses smilies.
-     * Safe to call multiple times.
-     * @throws BindingResolutionException
-     */
-    public function boot(): self
-    {
-        if (!$this->booted) {
-            datastore()->enqueue(['smile_replacements', 'cat_forums']);
-            $this->booted = true;
-        }
-
-        return $this;
     }
 
     /**
@@ -337,7 +315,7 @@ class BBCode
         $ret = " {$text} ";
 
         // hide passkey
-        $ret = hide_passkey($ret);
+        $ret = $this->hidePasskey($ret);
 
         // matches an "xxxx://yyyy" URL at the start of a line, or after a space.
         $ret = preg_replace_callback($url_regexp, [&$this, 'make_url_clickable_callback'], $ret);
@@ -414,5 +392,62 @@ class BBCode
         }
 
         return $link;
+    }
+
+    /**
+     * Prepare message for database storage
+     */
+    public function prepareMessage(string $message): string
+    {
+        $message = self::clean_up($message);
+
+        return htmlCHR($message, false, ENT_NOQUOTES);
+    }
+
+    /**
+     * Convert BBCode to HTML with censoring
+     */
+    public function toHtml(string $text): string
+    {
+        $text = censor()->censorString($text);
+
+        return $this->bbcode2html($text);
+    }
+
+    /**
+     * Get parsed post HTML (with caching support)
+     *
+     * @param array $postrow Post data with post_id, post_text, and optionally post_html
+     */
+    public function getParsedPost(array $postrow): string
+    {
+        if (config()->get('use_posts_cache') && !empty($postrow['post_html'])) {
+            return $postrow['post_html'];
+        }
+
+        $message = $this->toHtml($postrow['post_text']);
+
+        if (config()->get('use_posts_cache')) {
+            DB()->shutdown['post_html'][] = [
+                'post_id' => (int)$postrow['post_id'],
+                'post_html' => (string)$message,
+            ];
+        }
+
+        return $message;
+    }
+
+    /**
+     * Hide passkey in URLs
+     */
+    private function hidePasskey(string $str): string
+    {
+        $passkeyKey = config()->get('passkey_key');
+
+        return preg_replace(
+            "#\\?{$passkeyKey}=[a-zA-Z0-9]{" . BT_AUTH_KEY_LENGTH . '}#',
+            "?{$passkeyKey}=passkey",
+            $str,
+        );
     }
 }

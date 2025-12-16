@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 if (!request()->query->has(POST_USERS_URL) || !request()->query->has('act_key')) {
     bb_die('Bad request');
 }

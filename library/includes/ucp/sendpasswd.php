@@ -10,10 +10,6 @@
 
 use Illuminate\Support\Str;
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 set_die_append_msg();
 
 if (!config()->get('emailer.enabled')) {

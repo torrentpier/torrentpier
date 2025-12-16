@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 if (request()->has('mode')) {
     $mode = request()->getString('mode');
 } else {

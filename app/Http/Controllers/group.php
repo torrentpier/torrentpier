@@ -8,8 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-require INC_DIR . '/bbcode.php';
-
 page_cfg('use_tablesorter', true);
 
 $s_member_groups = $s_pending_groups = $s_member_groups_opt = $s_pending_groups_opt = '';
