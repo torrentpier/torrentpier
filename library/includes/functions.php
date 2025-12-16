@@ -33,16 +33,14 @@ function get_attach_path($id, $ext_id = null, $base_path = null, $first_div = 10
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
+/**
+ * @throws BindingResolutionException
+ */
 function delete_avatar($user_id, $avatar_ext_id)
 {
     $avatar_file = $avatar_ext_id ? get_avatar_path($user_id, $avatar_ext_id) : false;
 
-    return $avatar_file && is_file($avatar_file) && unlink($avatar_file);
-}
-
-function get_tracks($type)
-{
-    return read_tracker()->getTracks($type);
+    return $avatar_file && files()->isFile($avatar_file) && files()->delete($avatar_file);
 }
 
 /**
@@ -916,6 +914,7 @@ function bb_date(int $timestamp, string|false $format = false, bool $friendly_da
 
 /**
  * Get user's torrent client string
+ * @throws BindingResolutionException
  */
 function get_user_torrent_client(string $peer_id): string
 {
@@ -931,7 +930,7 @@ function get_user_torrent_client(string $peer_id): string
     }
 
     $clientIconFile = IMAGES_DIR . '/clients/' . $bestMatch . $iconExtension;
-    if (!empty($bestMatch) && is_file($clientIconFile)) {
+    if (!empty($bestMatch) && files()->isFile($clientIconFile)) {
         $clientIconUrl = image_url('clients/' . $bestMatch . $iconExtension);
 
         return '<img class="client_icon" src="' . $clientIconUrl . '" alt="' . $bestMatch . '" title="' . $peer_id . '">';
@@ -942,6 +941,7 @@ function get_user_torrent_client(string $peer_id): string
 
 /**
  * Returns country flag by country code
+ * @throws BindingResolutionException
  */
 function render_flag(string $code, bool $showName = true): string
 {
@@ -957,7 +957,7 @@ function render_flag(string $code, bool $showName = true): string
     }
 
     $flagIconFile = IMAGES_DIR . '/flags/' . $code . $iconExtension;
-    if (!is_file($flagIconFile)) {
+    if (!files()->isFile($flagIconFile)) {
         return $code;
     }
 
@@ -1747,6 +1747,9 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
     return $profile;
 }
 
+/**
+ * @throws BindingResolutionException
+ */
 function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $width = '')
 {
     $height = $height ? 'height="' . $height . '"' : '';
@@ -1757,7 +1760,7 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
     if ($user_id == BOT_UID && config()->get('avatars.bot_avatar')) {
         $user_avatar = '<img src="' . make_url(config()->get('avatars.display_path') . config()->get('avatars.bot_avatar')) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
     } elseif ($allow_avatar && $ext_id) {
-        if (is_file(get_avatar_path($user_id, $ext_id))) {
+        if (files()->isFile(get_avatar_path($user_id, $ext_id))) {
             $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, config()->get('avatars.display_path'))) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
         }
     }
@@ -1913,14 +1916,15 @@ function getBanInfo(?int $userId = null): ?array
 
 /**
  * Read updater file
+ * @throws BindingResolutionException
  */
 function readUpdaterFile(): array|bool
 {
-    if (!is_file(UPDATER_FILE)) {
+    if (!files()->isFile(UPDATER_FILE)) {
         return false;
     }
 
-    return json_decode(file_get_contents(UPDATER_FILE), true);
+    return json_decode(files()->get(UPDATER_FILE), true);
 }
 
 /**
