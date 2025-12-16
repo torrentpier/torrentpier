@@ -11,6 +11,7 @@
 namespace TorrentPier\Console\Helpers;
 
 use FilesystemIterator;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Throwable;
@@ -31,11 +32,12 @@ class FileSystemHelper
      * @param string $dir Directory path to remove
      * @param bool $removeRoot Whether to remove the root directory itself (default: true)
      * @param array $exclude Filenames to exclude from deletion (default: ['.keep', '.gitkeep'])
+     * @throws BindingResolutionException
      * @return bool True if the operation succeeded, false otherwise
      */
     public static function removeDirectory(string $dir, bool $removeRoot = true, array $exclude = self::DEFAULT_EXCLUDE): bool
     {
-        if (!is_dir($dir)) {
+        if (!files()->isDirectory($dir)) {
             return true;
         }
 
@@ -51,18 +53,18 @@ class FileSystemHelper
 
                 if ($item->isDir()) {
                     // Only remove empty directories (may fail if not empty - that's ok)
-                    if (is_dir($path) && \count(scandir($path)) === 2) {
-                        rmdir($path);
+                    if (files()->isEmptyDirectory($path)) {
+                        files()->deleteDirectory($path);
                     }
                 } elseif (!\in_array($filename, $exclude, true)) {
-                    if (is_file($path) && !unlink($path)) {
+                    if (files()->isFile($path) && !files()->delete($path)) {
                         return false;
                     }
                 }
             }
 
-            if ($removeRoot && is_dir($dir) && \count(scandir($dir)) === 2) {
-                return rmdir($dir);
+            if ($removeRoot && files()->isEmptyDirectory($dir)) {
+                return files()->deleteDirectory($dir);
             }
 
             return true;
@@ -87,11 +89,12 @@ class FileSystemHelper
      * Get total size of directory and all contents recursively
      *
      * @param string $dir Directory path
+     * @throws BindingResolutionException
      * @return int Size in bytes
      */
     public static function getDirectorySize(string $dir): int
     {
-        if (!is_dir($dir)) {
+        if (!files()->isDirectory($dir)) {
             return 0;
         }
 
@@ -118,11 +121,12 @@ class FileSystemHelper
      * Count files in the directory recursively
      *
      * @param string $dir Directory path
+     * @throws BindingResolutionException
      * @return int Number of files
      */
     public static function countFiles(string $dir): int
     {
-        if (!is_dir($dir)) {
+        if (!files()->isDirectory($dir)) {
             return 0;
         }
 
@@ -150,11 +154,12 @@ class FileSystemHelper
      *
      * @param string $dir Directory path to clear
      * @param array $exclude Filenames to exclude from deletion (default: ['.keep', '.gitkeep'])
+     * @throws BindingResolutionException
      * @return int Number of files deleted
      */
     public static function clearDirectoryWithCount(string $dir, array $exclude = self::DEFAULT_EXCLUDE): int
     {
-        if (!is_dir($dir)) {
+        if (!files()->isDirectory($dir)) {
             return 0;
         }
 
@@ -171,11 +176,11 @@ class FileSystemHelper
 
                 if ($item->isDir()) {
                     // Only remove empty directories
-                    if (is_dir($path) && \count(scandir($path)) === 2) {
-                        rmdir($path);
+                    if (files()->isEmptyDirectory($path)) {
+                        files()->deleteDirectory($path);
                     }
                 } elseif (!\in_array($item->getFilename(), $exclude, true)) {
-                    if (is_file($path) && unlink($path)) {
+                    if (files()->isFile($path) && files()->delete($path)) {
                         $count++;
                     }
                 }

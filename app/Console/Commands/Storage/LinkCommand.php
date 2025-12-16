@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Console\Commands\Storage;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -42,6 +43,9 @@ class LinkCommand extends Command
             );
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Storage Link');
@@ -51,7 +55,7 @@ class LinkCommand extends Command
         $relativePath = '../storage/app/public';
 
         // Check if the target directory exists
-        if (!is_dir($target)) {
+        if (!files()->isDirectory($target)) {
             $this->error("Target directory does not exist: {$target}");
             $this->comment('Run the application installation first.');
 
@@ -80,11 +84,11 @@ class LinkCommand extends Command
                 return self::FAILURE;
             }
 
-            unlink($link);
+            files()->delete($link);
             $this->comment($isCorrectTarget
                 ? 'Existing symlink removed.'
                 : 'Existing symlink removed (was pointing to: ' . $currentTarget . ')');
-        } elseif (file_exists($link)) {
+        } elseif (files()->exists($link)) {
             $this->error("Path exists and is not a symlink: {$link}");
             $this->comment('Remove or rename this file/directory manually before creating the symlink.');
 

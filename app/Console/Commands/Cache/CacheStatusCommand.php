@@ -42,6 +42,9 @@ class CacheStatusCommand extends Command
         parent::__construct($app);
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Cache Status');
@@ -53,7 +56,7 @@ class CacheStatusCommand extends Command
         $stats = [];
 
         // System cache statistics
-        if (is_dir($cacheDir)) {
+        if (files()->isDirectory($cacheDir)) {
             $systemCacheSize = FileSystemHelper::getDirectorySize($cacheDir);
             $systemCacheFiles = FileSystemHelper::countFiles($cacheDir);
             $stats[] = ['System Cache', FileSystemHelper::formatBytes($systemCacheSize), $systemCacheFiles];
@@ -62,7 +65,7 @@ class CacheStatusCommand extends Command
         }
 
         // Template cache statistics
-        if (is_dir($templateCacheDir)) {
+        if (files()->isDirectory($templateCacheDir)) {
             $templateCacheSize = FileSystemHelper::getDirectorySize($templateCacheDir);
             $templateCacheFiles = FileSystemHelper::countFiles($templateCacheDir);
             $stats[] = ['Template Cache', FileSystemHelper::formatBytes($templateCacheSize), $templateCacheFiles];

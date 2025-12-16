@@ -11,6 +11,7 @@
 namespace TorrentPier\Console\Commands\Log;
 
 use FilesystemIterator;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -36,6 +37,9 @@ class ClearCommand extends Command
             ->addOption('older-than', 'o', InputOption::VALUE_OPTIONAL, 'Only clear logs older than X days');
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Clear Logs');
@@ -44,7 +48,7 @@ class ClearCommand extends Command
         $force = $input->getOption('force');
         $olderThan = $input->getOption('older-than');
 
-        if (!is_dir($logDir)) {
+        if (!files()->isDirectory($logDir)) {
             $this->warning('Log directory does not exist: ' . $logDir);
 
             return self::SUCCESS;
@@ -65,12 +69,12 @@ class ClearCommand extends Command
         $totalSize = 0;
         $rows = [];
         foreach ($files as $file) {
-            $size = filesize($file);
+            $size = files()->size($file);
             $totalSize += $size;
             $rows[] = [
                 basename($file),
                 FileSystemHelper::formatBytes($size),
-                date('Y-m-d H:i', filemtime($file)),
+                date('Y-m-d H:i', files()->lastModified($file)),
             ];
         }
 
@@ -91,7 +95,7 @@ class ClearCommand extends Command
         $failed = 0;
 
         foreach ($files as $file) {
-            if (@unlink($file)) {
+            if (files()->delete($file)) {
                 $deleted++;
             } else {
                 $failed++;

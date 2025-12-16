@@ -55,7 +55,7 @@ class ListCommand extends Command
         $router = app(Router::class);
         $routesFile = BB_ROOT . 'routes/web.php';
 
-        if (!is_file($routesFile)) {
+        if (!files()->isFile($routesFile)) {
             $this->error('Routes file not found: routes/web.php');
 
             return self::FAILURE;
