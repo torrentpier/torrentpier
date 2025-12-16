@@ -16,7 +16,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-
 if (!IS_SUPER_ADMIN) {
     bb_die(__('ONLY_FOR_SUPER_ADMIN'));
 }

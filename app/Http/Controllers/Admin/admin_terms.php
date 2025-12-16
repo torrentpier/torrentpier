@@ -14,7 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-
 $preview = request()->post->has('preview');
 
 if (request()->post->has('post') && (config()->get('terms') !== request()->post->get('message'))) {
