@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 $total_sql = '';
 
 if (!request()->get('dosearch')) {

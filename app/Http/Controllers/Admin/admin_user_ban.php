@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 $submit = request()->post->has('submit');
 
 if ($submit) {

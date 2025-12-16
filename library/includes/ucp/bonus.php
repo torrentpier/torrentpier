@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 $user_id = userdata('user_id');
 $user_points = userdata('user_points');
 

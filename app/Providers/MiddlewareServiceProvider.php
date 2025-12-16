@@ -12,8 +12,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Http\Middleware\AuthMiddleware;
-use App\Http\Middleware\WebMiddleware;
+use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\StartSession;
 use TorrentPier\ServiceProvider;
 
 /**
@@ -25,18 +25,18 @@ class MiddlewareServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        // WebMiddleware with dependencies (auto-wired)
-        $this->app->singleton(WebMiddleware::class);
+        // StartSession with dependencies (auto-wired)
+        $this->app->singleton(StartSession::class);
 
-        // AuthMiddleware without dependencies
-        $this->app->singleton(AuthMiddleware::class);
+        // Authenticate with dependencies (auto-wired)
+        $this->app->singleton(Authenticate::class);
     }
 
     public function provides(): array
     {
         return [
-            WebMiddleware::class,
-            AuthMiddleware::class,
+            StartSession::class,
+            Authenticate::class,
         ];
     }
 }

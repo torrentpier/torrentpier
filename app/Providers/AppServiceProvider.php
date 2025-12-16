@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use TorrentPier\Ajax;
 use TorrentPier\Censor;
 use TorrentPier\Feed\FeedGenerator;
 use TorrentPier\Forum\ForumTree;
@@ -33,11 +32,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Ajax handler
-        $this->app->singleton(Ajax::class, function () {
-            return new Ajax;
-        });
-
         // Censor service for word filtering (auto-wired with DatastoreManager)
         $this->app->singleton(Censor::class);
 
@@ -53,7 +47,6 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Register aliases
-        $this->app->alias(Ajax::class, 'ajax');
         $this->app->alias(Censor::class, 'censor');
         $this->app->alias(ForumTree::class, 'forum_tree');
         $this->app->alias(Language::class, 'lang');
@@ -76,12 +69,10 @@ class AppServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [
-            Ajax::class,
             Censor::class,
             ForumTree::class,
             Language::class,
             FeedGenerator::class,
-            'ajax',
             'censor',
             'forum_tree',
             'lang',

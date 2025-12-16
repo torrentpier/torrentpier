@@ -35,11 +35,11 @@ switch ($show) {
         break;
 }
 
-$require = is_file($htmlDir . $info['src']) ? ($htmlDir . $info['src']) : false;
+$require = files()->isFile($htmlDir . $info['src']) ? ($htmlDir . $info['src']) : false;
 
 template()->assign_vars([
     'PAGE_TITLE' => mb_strtoupper($info['title'], DEFAULT_CHARSET),
-    'REQUIRE' => $require ? file_get_contents($require) : __('NOT_FOUND'),
+    'REQUIRE' => $require ? files()->get($require) : __('NOT_FOUND'),
 ]);
 
 print_page('info.tpl', 'simple');

@@ -12,6 +12,7 @@ namespace TorrentPier;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use stdClass;
 use TorrentPier\Http\HttpClient;
 
@@ -174,8 +175,8 @@ class TorrServerAPI
                 }
 
                 // Store M3U file
-                if ($validResponse && !is_file($m3uFile)) {
-                    file_put_contents($m3uFile, $responseBody);
+                if ($validResponse && !files()->isFile($m3uFile)) {
+                    files()->put($m3uFile, $responseBody);
                 }
             } else {
                 bb_log("TorrServer (ERROR) [{$this->url}]: Response code: {$response->getStatusCode()} | Content: {$responseBody}" . LOG_LF);
@@ -184,7 +185,7 @@ class TorrServerAPI
             bb_log("TorrServer (EXCEPTION) [{$this->url}]: {$e->getMessage()}" . LOG_LF);
         }
 
-        return is_file($m3uFile) && (int)filesize($m3uFile) > 0;
+        return files()->isFile($m3uFile) && files()->size($m3uFile) > 0;
     }
 
     /**
@@ -201,6 +202,7 @@ class TorrServerAPI
 
     /**
      * Removes M3U file (local)
+     * @throws BindingResolutionException
      */
     public function removeM3U(int $topic_id): bool
     {
@@ -210,7 +212,7 @@ class TorrServerAPI
         // Unlink .m3u file
         if (Attachment::m3uExists($topic_id)) {
             $m3uFile = Attachment::getPath($topic_id, M3U_EXT_ID);
-            if (unlink($m3uFile)) {
+            if (files()->delete($m3uFile)) {
                 return true;
             }
             bb_log("TorrServer (ERROR) [removeM3U()]: Can't unlink file '{$m3uFile}'" . LOG_LF);

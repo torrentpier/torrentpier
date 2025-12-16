@@ -268,7 +268,7 @@ $(document).ready(function () {
 // Ajax
 //
 function Ajax(handlerURL, requestType, dataType) {
-  this.url = handlerURL;
+  this.baseUrl = handlerURL.replace(/\/ajax\/?$/, '');
   this.type = requestType;
   this.dataType = dataType;
   this.errors = {};
@@ -282,12 +282,50 @@ Ajax.prototype = {
   params: {},  // action params, format: ajax.params[ElementID] = { param: "val" ... }
   form_token: '', hide_loading: null,
 
+  // Action to endpoint mapping
+  endpoints: {
+    // Guest
+    'view_post': '/api/ajax/view-post',
+    'posts': '/api/ajax/posts',
+    'thx': '/api/ajax/thx',
+    'view_torrent': '/api/ajax/view-torrent',
+    'user_register': '/api/ajax/user-register',
+    'index_data': '/api/ajax/index-data',
+    'ffprobe_info': '/api/ajax/ffprobe-info',
+    // User
+    'avatar': '/api/ajax/avatar',
+    'passkey': '/api/ajax/passkey',
+    'change_torrent': '/api/ajax/change-torrent',
+    'change_tor_status': '/api/ajax/change-tor-status',
+    'manage_group': '/api/ajax/manage-group',
+    'callseed': '/api/ajax/callseed',
+    // Mod
+    'mod_action': '/api/ajax/mod-action',
+    'topic_tpl': '/api/ajax/topic-tpl',
+    'group_membership': '/api/ajax/group-membership',
+    'post_mod_comment': '/api/ajax/post-mod-comment',
+    // Admin
+    'edit_user_profile': '/api/ajax/edit-user-profile',
+    'change_user_rank': '/api/ajax/change-user-rank',
+    'change_user_opt': '/api/ajax/change-user-opt',
+    'manage_user': '/api/ajax/manage-user',
+    'manage_admin': '/api/ajax/manage-admin',
+    'sitemap': '/api/ajax/sitemap'
+  },
+
+  getEndpoint: function (action) {
+    if (!this.endpoints[action]) {
+      console.error('Unknown ajax action: ' + action);
+    }
+    return this.baseUrl + this.endpoints[action];
+  },
+
   exec: function (request, hide_loading = false) {
     this.request[request.action] = request;
     request['form_token'] = this.form_token;
     this.hide_loading = hide_loading;
     $.ajax({
-      url: this.url, type: this.type, dataType: this.dataType, data: request, success: ajax.success, error: ajax.error
+      url: this.getEndpoint(request.action), type: this.type, dataType: this.dataType, data: request, success: ajax.success, error: ajax.error
     });
   },
 

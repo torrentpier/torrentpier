@@ -36,8 +36,8 @@ use TorrentPier\Http\Middleware;
  *           commands: __DIR__ . '/../routes/console.php',
  *       )
  *       ->withMiddleware(function (Middleware $middleware): void {
- *           $middleware->web(append: [WebMiddleware::class]);
- *           $middleware->alias('auth', AuthMiddleware::class);
+ *           $middleware->web(append: [StartSession::class]);
+ *           $middleware->alias('auth', Authenticate::class);
  *       })
  *       ->withExceptions(function (Handler $exceptions): void {
  *           $exceptions->render(fn ($e) => Response::error());

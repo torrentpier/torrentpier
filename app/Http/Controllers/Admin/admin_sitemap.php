@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 $sql = 'SELECT * FROM ' . BB_CONFIG . " WHERE config_name IN('sitemap_time', 'static_sitemap')";
 
 if (!$result = DB()->sql_query($sql)) {
@@ -42,7 +40,7 @@ if (!$result = DB()->sql_query($sql)) {
 }
 
 $s_mess = __('SITEMAP_CREATED') . ': <b>' . bb_date($new['sitemap_time'], config()->get('post_date_format')) . '</b> ' . __('SITEMAP_AVAILABLE') . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">' . make_url('sitemap/sitemap.xml') . '</a>';
-$message = is_file(SITEMAP_DIR . '/sitemap.xml') ? $s_mess : __('SITEMAP_NOT_CREATED');
+$message = files()->isFile(SITEMAP_DIR . '/sitemap.xml') ? $s_mess : __('SITEMAP_NOT_CREATED');
 
 template()->assign_vars([
     'STATIC_SITEMAP' => $new['static_sitemap'],

@@ -556,13 +556,13 @@ class User
 
         // Determine language directory with fallback to source
         $defaultLangPath = LANG_ROOT_DIR . config()->get('default_lang') . '/';
-        \define('DEFAULT_LANG_DIR', is_dir($defaultLangPath) ? $defaultLangPath : SOURCE_LANG_DIR);
+        \define('DEFAULT_LANG_DIR', files()->isDirectory($defaultLangPath) ? $defaultLangPath : SOURCE_LANG_DIR);
 
         if ($this->data['user_id'] != GUEST_UID) {
             if ($this->data['user_lang'] && $this->data['user_lang'] != config()->get('default_lang')) {
                 config()->set('default_lang', basename($this->data['user_lang']));
                 $userLangPath = LANG_ROOT_DIR . config()->get('default_lang') . '/';
-                if (is_dir($userLangPath)) {
+                if (files()->isDirectory($userLangPath)) {
                     \define('LANG_DIR', $userLangPath);
                 }
             }

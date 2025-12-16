@@ -10,10 +10,6 @@
 
 use Illuminate\Support\Str;
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 set_die_append_msg();
 
 if (IS_ADMIN) {
@@ -32,8 +28,6 @@ $can_register = (IS_GUEST || IS_ADMIN);
 $submit = request()->post->has('submit');
 $errors = [];
 $adm_edit = false; // editing someone else's profile by an admin
-
-require INC_DIR . '/bbcode.php';
 
 $pr_data = []; // data of the edited or registration profile
 $db_data = []; // data for the database: registration or changed user data
@@ -400,13 +394,13 @@ foreach ($profile_fields as $field => $can_edit) {
                     $monsterAvatar->writeToStream($tempAvatar);
 
                     // Create avatar file array for MonsterID
-                    if (is_file($tempAvatarPath)) {
+                    if (files()->isFile($tempAvatarPath)) {
                         $avatarFile = [
                             'name' => "MonsterID_{$pr_data['user_id']}.png",
                             'type' => mime_content_type($tempAvatarPath),
                             'tmp_name' => $tempAvatarPath,
                             'error' => UPLOAD_ERR_OK,
-                            'size' => filesize($tempAvatarPath),
+                            'size' => files()->size($tempAvatarPath),
                         ];
                     }
                 }
@@ -468,7 +462,7 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'user_sig':
             $sig = request()->post->has('user_sig') ? (string)request()->post->get('user_sig') : $pr_data['user_sig'];
             if ($submit && $sig != $pr_data['user_sig']) {
-                $sig = prepare_message($sig);
+                $sig = bbcode()->prepareMessage($sig);
 
                 if (mb_strlen($sig, DEFAULT_CHARSET) > config()->get('max_sig_chars')) {
                     $errors[] = __('SIGNATURE_TOO_LONG');

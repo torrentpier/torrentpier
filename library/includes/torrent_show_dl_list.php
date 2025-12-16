@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 $show_canceled_in_count_mode = false;
 $title_date_format = 'Y-m-d';
 $dl_list_sql_limit = 300;     // DL-List overall limit

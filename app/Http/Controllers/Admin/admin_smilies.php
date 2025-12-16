@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 // Check to see what mode we should operate in
 $mode = request()->getString('mode');
 $mode = htmlspecialchars($mode);

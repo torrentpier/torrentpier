@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 $max_forum_name_len = 30;
 $max_forum_rows = 25;
 

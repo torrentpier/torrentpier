@@ -11,6 +11,7 @@
 namespace TorrentPier\Console\Commands\Release;
 
 use DateTime;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -211,6 +212,7 @@ class CreateCommand extends Command
 
     /**
      * Update version in Application.php and date in config.php
+     * @throws BindingResolutionException
      */
     private function updateConfig(string $version, string $date): bool
     {
@@ -218,14 +220,14 @@ class CreateCommand extends Command
         $appFile = BB_ROOT . 'src/Application.php';
         $semver = ltrim($version, 'v');
 
-        $content = file_get_contents($appFile);
+        $content = files()->get($appFile);
         $content = preg_replace(
             "/(public const string VERSION = ')[^']*';/",
             "\${1}{$semver}';",
             $content,
         );
 
-        if (file_put_contents($appFile, $content) === false) {
+        if (files()->put($appFile, $content) === false) {
             $this->error('Failed to write Application.php');
 
             return false;
@@ -234,14 +236,14 @@ class CreateCommand extends Command
         // Update the release date in config.php
         $configFile = BB_ROOT . 'config/config.php';
 
-        $content = file_get_contents($configFile);
+        $content = files()->get($configFile);
         $content = preg_replace(
             "/(\\\$bb_cfg\\['tp_release_date']\\s*=\\s*')[^']*';/",
             "\${1}{$date}';",
             $content,
         );
 
-        if (file_put_contents($configFile, $content) === false) {
+        if (files()->put($configFile, $content) === false) {
             $this->error('Failed to write config.php');
 
             return false;
@@ -252,12 +254,13 @@ class CreateCommand extends Command
 
     /**
      * Generate changelog using git-cliff
+     * @throws BindingResolutionException
      */
     private function generateChangelog(string $version): void
     {
         $cliffConfig = BB_ROOT . 'install/release_scripts/cliff.toml';
 
-        if (!file_exists($cliffConfig)) {
+        if (!files()->exists($cliffConfig)) {
             $this->warning('cliff.toml not found, skipping changelog generation');
 
             return;

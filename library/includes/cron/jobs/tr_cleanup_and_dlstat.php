@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 $releaser = DL_STATUS_RELEASER;
 
 define('NEW_BB_BT_LAST_TORSTAT', 'new_bt_last_torstat');

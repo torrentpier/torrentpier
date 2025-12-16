@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Console\Helpers;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Phinx\Config\Config;
 use Phinx\Migration\Manager;
 use RuntimeException;
@@ -131,6 +132,7 @@ class PhinxManager
      * Generate a new migration file
      *
      * @throws RuntimeException If a file cannot be written
+     * @throws BindingResolutionException
      */
     public function createMigration(string $name): string
     {
@@ -141,7 +143,7 @@ class PhinxManager
 
         $template = $this->getMigrationTemplate($className);
 
-        if (file_put_contents($filePath, $template) === false) {
+        if (files()->put($filePath, $template) === false) {
             throw new RuntimeException("Failed to write migration file: {$filePath}");
         }
 

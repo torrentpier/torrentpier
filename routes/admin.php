@@ -14,7 +14,7 @@ use TorrentPier\Router\LegacyAdapter;
 use TorrentPier\Router\Router;
 
 /**
- * Admin Panel Routes
+ * Admin route definitions
  *
  * All routes use LegacyAdapter to execute procedural PHP files.
  * Using GET and POST methods for admin pages (forms use POST).
@@ -52,5 +52,5 @@ return static function (Router $router): void {
         $group->any('/admin_user_ban.php', new LegacyAdapter($adminPath . '/admin_user_ban.php'));
         $group->any('/admin_user_search.php', new LegacyAdapter($adminPath . '/admin_user_search.php'));
         $group->any('/admin_words.php', new LegacyAdapter($adminPath . '/admin_words.php'));
-    });
+    })->middleware('session')->middleware('admin');
 };

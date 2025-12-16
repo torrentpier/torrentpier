@@ -144,7 +144,6 @@ return new Config()
 
         // String
         'escape_implicit_backslashes' => true,
-        'explicit_string_variable' => true, // "$a$b" → "{$a}{$b}"
         'heredoc_to_nowdoc' => true, // heredoc without vars → nowdoc
         'no_binary_string' => true, // Remove b"string"
         'single_quote' => true, // "string" → 'string'

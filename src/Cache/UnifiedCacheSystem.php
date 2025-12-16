@@ -282,6 +282,7 @@ class UnifiedCacheSystem
 
     /**
      * Build a storage instance directly (eliminates redundancy with CacheManager)
+     * @throws BindingResolutionException
      */
     private function _buildStorage(string $cache_type, string $cache_name): Storage
     {
@@ -293,8 +294,8 @@ class UnifiedCacheSystem
                 // Some deprecated cache types will fall back to file storage
                 $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
 
-                // Create a directory automatically using TorrentPier's bb_mkdir function
-                if (!is_dir($dir) && !bb_mkdir($dir)) {
+                // Create a directory automatically
+                if (!files()->isDirectory($dir) && !files()->ensureDirectoryExists($dir)) {
                     throw new RuntimeException("Failed to create cache directory: {$dir}");
                 }
 
@@ -305,7 +306,7 @@ class UnifiedCacheSystem
 
                 // Create parent directory for SQLite file
                 $dbDir = \dirname($dbFile);
-                if (!is_dir($dbDir) && !bb_mkdir($dbDir)) {
+                if (!files()->isDirectory($dbDir) && !files()->ensureDirectoryExists($dbDir)) {
                     throw new RuntimeException("Failed to create cache directory for SQLite: {$dbDir}");
                 }
 
@@ -341,8 +342,8 @@ class UnifiedCacheSystem
                 // Fallback to file storage
                 $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
 
-                // Create a directory automatically using TorrentPier's bb_mkdir function
-                if (!is_dir($dir) && !bb_mkdir($dir)) {
+                // Create a directory automatically
+                if (!files()->isDirectory($dir) && !files()->ensureDirectoryExists($dir)) {
                     throw new RuntimeException("Failed to create cache directory: {$dir}");
                 }
 
@@ -365,6 +366,7 @@ class UnifiedCacheSystem
 
     /**
      * Build datastore storage instance
+     * @throws BindingResolutionException
      */
     private function _buildDatastoreStorage(string $datastore_type): Storage
     {
@@ -376,8 +378,8 @@ class UnifiedCacheSystem
                 // Some deprecated cache types will fall back to file storage
                 $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
 
-                // Create a directory automatically using TorrentPier's bb_mkdir function
-                if (!is_dir($dir) && !bb_mkdir($dir)) {
+                // Create a directory automatically
+                if (!files()->isDirectory($dir) && !files()->ensureDirectoryExists($dir)) {
                     throw new RuntimeException("Failed to create datastore directory: {$dir}");
                 }
 
@@ -388,7 +390,7 @@ class UnifiedCacheSystem
 
                 // Create parent directory for SQLite file
                 $dbDir = \dirname($dbFile);
-                if (!is_dir($dbDir) && !bb_mkdir($dbDir)) {
+                if (!files()->isDirectory($dbDir) && !files()->ensureDirectoryExists($dbDir)) {
                     throw new RuntimeException("Failed to create datastore directory for SQLite: {$dbDir}");
                 }
 
@@ -424,8 +426,8 @@ class UnifiedCacheSystem
                 // Fallback to file storage
                 $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
 
-                // Create a directory automatically using TorrentPier's bb_mkdir function
-                if (!is_dir($dir) && !bb_mkdir($dir)) {
+                // Create a directory automatically
+                if (!files()->isDirectory($dir) && !files()->ensureDirectoryExists($dir)) {
                     throw new RuntimeException("Failed to create datastore directory: {$dir}");
                 }
 
