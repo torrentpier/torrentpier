@@ -10,22 +10,14 @@
 
 use Illuminate\Support\Str;
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
-// prepare a posted message for entry into the database
-function prepare_message($message)
-{
-    $message = TorrentPier\Legacy\BBCode::clean_up($message);
-    $message = htmlCHR($message, false, ENT_NOQUOTES);
-
-    return $message;
-}
+page_cfg('include_bbcode_js', true);
 
 // Fill smiley templates (or just the variables) with smileys
 // Either in a window or inline
-function generate_smilies($mode)
+/**
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
+ */
+function generate_smilies($mode): void
 {
     $inline_columns = 4;
     $inline_rows = 7;
@@ -105,11 +97,9 @@ function generate_smilies($mode)
 /**
  * Strips away [quote] tags and their contents from the specified string
  *
- * @param string    Text to be stripped of quote tags
- *
- * @return string
+ * @param string $text Text to be stripped of quote tags
  */
-function strip_quotes($text)
+function strip_quotes($text): string
 {
     $lowertext = mb_strtolower($text, DEFAULT_CHARSET);
 
@@ -190,13 +180,11 @@ function strip_quotes($text)
 /**
  * Strips away bbcode from a given string, leaving plain text
  *
- * @param string    Text to be stripped of bbcode tags
- * @param bool    If true, strip away quote tags AND their contents
- * @param bool    If true, use the fast-and-dirty method rather than the shiny and nice method
- *
- * @return string
+ * @param string $message Text to be stripped of bbcode tags
+ * @param bool $stripquotes If true, strip away quote tags AND their contents
+ * @param bool $fast_and_dirty If true, use the fast-and-dirty method rather than the shiny and nice method
  */
-function strip_bbcode($message, $stripquotes = true, $fast_and_dirty = false, $showlinks = true)
+function strip_bbcode(string $message, bool $stripquotes = true, bool $fast_and_dirty = false, bool $showlinks = true): string
 {
     $find = [];
     $replace = [];
@@ -242,7 +230,10 @@ function strip_bbcode($message, $stripquotes = true, $fast_and_dirty = false, $s
     return $message;
 }
 
-function extract_search_words($text)
+/**
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
+ */
+function extract_search_words($text): array
 {
     $max_words_count = config()->get('max_search_words_per_post');
     $min_word_len = max(2, config()->get('search_min_word_len') - 1);
@@ -254,7 +245,7 @@ function extract_search_words($text)
     // HTML entities like &nbsp;
     $text = preg_replace('/(\w*?)&#?[0-9a-z]+;(\w*?)/iu', '', $text);
     // Remove URL's       ((www|ftp)\.[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]*?)
-    $text = preg_replace('#\b[a-z0-9]+://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+(/[0-9a-z\?\.%_\-\+=&/]+)?#u', ' ', $text);
+    $text = preg_replace('#\b[a-z0-9]+://[\w\#!$%&~/.\-;:=,?@А-я\[\]+]+(/[0-9a-z\?\.%_\-\+=&/]+)?#u', ' ', $text);
     $text = str_replace(['[url=', '?', '!'], ' ', $text);
 
     $text = strip_bbcode($text);
@@ -281,6 +272,9 @@ function extract_search_words($text)
     return $text;
 }
 
+/**
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
+ */
 function add_search_words($post_id, $post_message, $topic_title = '', $only_return_words = false)
 {
     $text = $topic_title . ' ' . $post_message;
@@ -291,60 +285,17 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
         return $words_csv;
     }
 
-    DB()->query('DELETE FROM ' . BB_POSTS_SEARCH . " WHERE post_id = {$post_id}");
+    DB()->query('DELETE FROM ' . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
 
     if ($words_sql = DB()->escape($words_csv)) {
-        DB()->query('REPLACE INTO ' . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ({$post_id}, '{$words_sql}')");
+        DB()->query('REPLACE INTO ' . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ($post_id, '$words_sql')");
     }
 }
 
 /**
- * Dirty class removed from here since 2.2.0
- * To add new bbcodes see at src/Legacy/BBCode.php
+ * @throws Illuminate\Contracts\Container\BindingResolutionException
  */
-
-function bbcode2html($text)
-{
-    $text = censor()->censorString($text);
-
-    return bbcode()->bbcode2html($text);
-}
-
-function get_words_rate($text)
-{
-    static $wr = null;
-    if (!isset($wr)) {
-        $wr = new TorrentPier\Legacy\WordsRate;
-    }
-
-    return $wr->get_words_rate($text);
-}
-
-function hide_passkey($str)
-{
-    return preg_replace("#\\?{config()->get('passkey_key')}=[a-zA-Z0-9]{" . BT_AUTH_KEY_LENGTH . '}#', "?{config()->get('passkey_key')}=passkey", $str);
-}
-
-function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
-{
-    if (config()->get('use_posts_cache') && !empty($postrow['post_html'])) {
-        return $postrow['post_html'];
-    }
-
-    $message = bbcode2html($postrow['post_text']);
-
-    // Posts cache
-    if (config()->get('use_posts_cache')) {
-        DB()->shutdown['post_html'][] = [
-            'post_id' => (int)$postrow['post_id'],
-            'post_html' => (string)$message,
-        ];
-    }
-
-    return $message;
-}
-
-function update_post_html($postrow)
+function update_post_html($postrow): void
 {
     DB()->query('DELETE FROM ' . BB_POSTS_HTML . ' WHERE post_id = ' . (int)$postrow['post_id']);
 }

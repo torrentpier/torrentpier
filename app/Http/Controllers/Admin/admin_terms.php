@@ -26,7 +26,7 @@ template()->assign_vars([
     'S_ACTION' => 'admin_terms.php',
     'EXT_LINK_NW' => config()->get('ext_link_new_win'),
     'MESSAGE' => $preview ? request()->post->get('message') : config()->get('terms'),
-    'PREVIEW_HTML' => $preview ? bbcode2html(request()->post->get('message')) : '',
+    'PREVIEW_HTML' => $preview ? bbcode()->toHtml(request()->post->get('message')) : '',
 ]);
 
 print_page('admin_terms.tpl', 'admin');
