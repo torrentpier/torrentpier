@@ -14,6 +14,6 @@ if (!config()->get('terms') && !IS_ADMIN) {
 
 print_page('terms.twig', variables: [
     'PAGE_TITLE' => __('TERMS'),
-    'TERMS_EDIT' => bbcode2html(sprintf(__('TERMS_EMPTY_TEXT'), make_url('admin/admin_terms.php'))),
-    'TERMS_HTML' => bbcode2html(config()->get('terms')),
+    'TERMS_EDIT' => bbcode()->toHtml(sprintf(__('TERMS_EMPTY_TEXT'), make_url('admin/admin_terms.php'))),
+    'TERMS_HTML' => bbcode()->toHtml(config()->get('terms')),
 ]);

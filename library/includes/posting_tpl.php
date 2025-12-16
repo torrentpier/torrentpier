@@ -44,7 +44,7 @@ if ($tpl_data) {
     $tpl_rules_html = '';
 
     if ($tpl_data['tpl_rules_post_id']) {
-        if (!$tpl_rules_html = bbcode2html(DB()->fetch_row('SELECT post_text FROM ' . BB_POSTS_TEXT . ' WHERE post_id = ' . $tpl_data['tpl_rules_post_id'], 'post_text'))) {
+        if (!$tpl_rules_html = bbcode()->toHtml(DB()->fetch_row('SELECT post_text FROM ' . BB_POSTS_TEXT . ' WHERE post_id = ' . $tpl_data['tpl_rules_post_id'], 'post_text'))) {
             $tpl_data['tpl_rules_post_id'] = 0;
             DB()->query('UPDATE ' . BB_TOPIC_TPL . " SET tpl_rules_post_id = 0 WHERE tpl_id = {$f_data['forum_tpl_id']}");
         }

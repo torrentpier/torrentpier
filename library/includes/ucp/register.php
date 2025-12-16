@@ -462,7 +462,7 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'user_sig':
             $sig = request()->post->has('user_sig') ? (string)request()->post->get('user_sig') : $pr_data['user_sig'];
             if ($submit && $sig != $pr_data['user_sig']) {
-                $sig = prepare_message($sig);
+                $sig = bbcode()->prepareMessage($sig);
 
                 if (mb_strlen($sig, DEFAULT_CHARSET) > config()->get('max_sig_chars')) {
                     $errors[] = __('SIGNATURE_TOO_LONG');

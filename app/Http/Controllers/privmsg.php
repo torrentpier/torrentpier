@@ -393,7 +393,7 @@ if ($mode == 'read') {
     $private_message = $privmsg['privmsgs_text'];
     $post_subject = censor()->censorString($post_subject);
     $private_message = censor()->censorString($private_message);
-    $private_message = bbcode2html($private_message);
+    $private_message = bbcode()->toHtml($private_message);
 
     //
     // Dump it to the templating engine
@@ -806,7 +806,7 @@ if ($mode == 'read') {
 
         if (request()->post->has('message')) {
             if (!$error) {
-                $privmsg_message = prepare_message(request()->post->get('message'));
+                $privmsg_message = bbcode()->prepareMessage(request()->post->get('message'));
             }
         } else {
             $error = true;
@@ -815,7 +815,7 @@ if ($mode == 'read') {
 
         // Check smilies limit
         if (config()->get('max_smilies_pm')) {
-            $count_smilies = substr_count(bbcode2html($privmsg_message), '<img class="smile" src="' . config()->get('smilies_path'));
+            $count_smilies = substr_count(bbcode()->toHtml($privmsg_message), '<img class="smile" src="' . config()->get('smilies_path'));
             if ($count_smilies > config()->get('max_smilies_pm')) {
                 $error = true;
                 $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . sprintf(__('MAX_SMILIES_PER_POST'), config()->get('max_smilies_pm'));
@@ -943,7 +943,7 @@ if ($mode == 'read') {
         $to_username = request()->post->has('username') ? clean_username(request()->post->get('username')) : '';
 
         $privmsg_subject = request()->post->has('subject') ? clean_title(request()->post->get('subject')) : '';
-        $privmsg_message = request()->post->has('message') ? prepare_message(request()->post->get('message')) : '';
+        $privmsg_message = request()->post->has('message') ? bbcode()->prepareMessage(request()->post->get('message')) : '';
 
         //
         // Do mode specific things
@@ -1055,7 +1055,7 @@ if ($mode == 'read') {
     }
 
     if ($preview && !$error) {
-        $preview_message = bbcode2html($privmsg_message);
+        $preview_message = bbcode()->toHtml($privmsg_message);
         $preview_subject = censor()->censorString($privmsg_subject);
         $preview_message = censor()->censorString($preview_message);
 
