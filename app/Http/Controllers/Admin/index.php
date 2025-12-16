@@ -110,7 +110,7 @@ if (request()->query->get('pane') === 'left') {
 
     if (files()->isDirectory($avatarPath)) {
         foreach (files()->files($avatarPath) as $file) {
-            $avatar_dir_size += files()->size($file);
+            $avatar_dir_size += files()->size($file->getRealPath());
         }
         $avatar_dir_size = humn_size($avatar_dir_size);
     } else {
