@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 if (defined('PAGE_HEADER_SENT')) {
     return;
 }
@@ -257,7 +253,3 @@ template()->set_filenames(['page_header' => 'page_header.tpl']);
 template()->pparse('page_header');
 
 define('PAGE_HEADER_SENT', true);
-
-if (!config()->get('gzip_compress')) {
-    flush();
-}

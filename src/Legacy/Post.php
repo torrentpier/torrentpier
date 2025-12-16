@@ -60,7 +60,7 @@ class Post
 
         // Check smilies limit
         if (config()->get('max_smilies')) {
-            $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . config()->get('smilies_path'));
+            $count_smilies = substr_count(bbcode()->toHtml($message), '<img class="smile" src="' . config()->get('smilies_path'));
             if ($count_smilies > config()->get('max_smilies')) {
                 $to_many_smilies = \sprintf(__('MAX_SMILIES_PER_POST'), config()->get('max_smilies'));
                 $error_msg .= (!empty($error_msg)) ? '<br />' . $to_many_smilies : $to_many_smilies;
@@ -509,7 +509,7 @@ class Post
                 'POST_ID' => $post['post_id'],
                 'POST_DATE' => bb_date($post['post_time'], config()->get('post_date_format')),
                 'IS_UNREAD' => is_unread($post['post_time'], $topic_id, $post['forum_id']),
-                'MESSAGE' => get_parsed_post($post),
+                'MESSAGE' => bbcode()->getParsedPost($post),
             ]);
         }
 

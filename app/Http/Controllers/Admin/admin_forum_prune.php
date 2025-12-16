@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 $all_forums = -1;
 $pruned_total = 0;
 $prune_performed = false;

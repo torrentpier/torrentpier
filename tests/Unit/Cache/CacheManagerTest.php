@@ -11,7 +11,6 @@ describe('CacheManager Class', function () {
         resetGlobalState();
         mockTracyFunction();
         mockBbLogFunction();
-        mockHideBbPathFunction();
 
         // Create memory storage for testing
         $this->storage = new MemoryStorage;

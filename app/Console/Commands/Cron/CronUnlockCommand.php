@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Console\Commands\Cron;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -36,18 +37,21 @@ class CronUnlockCommand extends Command
         );
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Cron Unlock');
 
-        if (!is_file(CRON_RUNNING)) {
+        if (!files()->isFile(CRON_RUNNING)) {
             $this->info('Cron is not locked.');
 
             return self::SUCCESS;
         }
 
         // Show lock file info
-        $lockTime = filemtime(CRON_RUNNING);
+        $lockTime = files()->lastModified(CRON_RUNNING);
         $lockedFor = time() - $lockTime;
 
         $this->section('Lock Information');
@@ -63,7 +67,7 @@ class CronUnlockCommand extends Command
             return self::SUCCESS;
         }
 
-        if (!unlink(CRON_RUNNING)) {
+        if (!files()->delete(CRON_RUNNING)) {
             $this->error('Failed to remove lock file. Check permissions.');
 
             return self::FAILURE;

@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Console\Commands\Rebuild;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -38,12 +39,15 @@ class SitemapCommand extends Command
         parent::__construct($app);
     }
 
+    /**
+     * @throws BindingResolutionException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->title('Rebuild Sitemap');
 
         // Check if sitemap directory exists
-        if (!is_dir(SITEMAP_DIR)) {
+        if (!files()->isDirectory(SITEMAP_DIR)) {
             $this->error('Sitemap directory does not exist: ' . SITEMAP_DIR);
             $this->comment('Create the directory first or run: php bull storage:link');
 
@@ -51,7 +55,7 @@ class SitemapCommand extends Command
         }
 
         // Check if writable
-        if (!is_writable(SITEMAP_DIR)) {
+        if (!files()->isWritable(SITEMAP_DIR)) {
             $this->error('Sitemap directory is not writable: ' . SITEMAP_DIR);
 
             return self::FAILURE;
@@ -101,9 +105,9 @@ class SitemapCommand extends Command
 
         $rows = [];
         foreach ($files as $name => $path) {
-            if (file_exists($path)) {
-                $size = filesize($path);
-                $rows[] = [$name, FileSystemHelper::formatBytes($size), date('Y-m-d H:i:s', filemtime($path))];
+            if (files()->exists($path)) {
+                $size = files()->size($path);
+                $rows[] = [$name, FileSystemHelper::formatBytes($size), date('Y-m-d H:i:s', files()->lastModified($path))];
             }
         }
 

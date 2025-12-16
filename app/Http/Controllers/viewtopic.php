@@ -36,8 +36,6 @@
  * ===========================================================================
  */
 
-require INC_DIR . '/bbcode.php';
-
 datastore()->enqueue([
     'ranks',
     'cat_forums',
@@ -614,8 +612,8 @@ for ($i = 0; $i < $total_posts; $i++) {
     $rg_id = $postrow[$i]['poster_rg_id'] ?: 0;
     $rg_avatar = get_avatar(GROUP_AVATAR_MASK . $rg_id, $postrow[$i]['rg_avatar_id']);
     $rg_name = $postrow[$i]['group_name'] ? htmlCHR($postrow[$i]['group_name']) : '';
-    $rg_desc = $postrow[$i]['group_description'] ? bbcode2html(htmlCHR($postrow[$i]['group_description'])) : '';
-    $rg_signature = $postrow[$i]['group_signature'] ? bbcode2html(htmlCHR($postrow[$i]['group_signature'])) : '';
+    $rg_desc = $postrow[$i]['group_description'] ? bbcode()->toHtml(htmlCHR($postrow[$i]['group_description'])) : '';
+    $rg_signature = $postrow[$i]['group_signature'] ? bbcode()->toHtml(htmlCHR($postrow[$i]['group_signature'])) : '';
 
     $poster_avatar = '';
     if ((!user()->opt_js['h_av'] || $poster_bot) && !$poster_guest) {
@@ -650,14 +648,14 @@ for ($i = 0; $i < $total_posts; $i++) {
     $delpost_btn = ($post_id != $t_data['topic_first_post_id'] && ($is_auth['auth_mod'] || (TorrentPier\Topic\Guard::isAuthor($poster_id) && $is_auth['auth_delete'] && $t_data['topic_last_post_id'] == $post_id && $postrow[$i]['post_time'] + 3600 * 3 > TIMENOW)));
 
     // Parse message and sig
-    $message = get_parsed_post($postrow[$i]);
+    $message = bbcode()->getParsedPost($postrow[$i]);
 
     $user_sig = (config()->get('allow_sig') && !user()->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
 
     if (bf($postrow[$i]['user_opt'], 'user_opt', 'dis_sig')) {
         $user_sig = __('SIGNATURE_DISABLE');
     } elseif ($user_sig) {
-        $user_sig = bbcode2html($user_sig);
+        $user_sig = bbcode()->toHtml($user_sig);
     }
 
     // Replace naughty words
@@ -765,7 +763,7 @@ for ($i = 0; $i < $total_posts; $i++) {
 
         'POSTER_BIRTHDAY' => user_birthday_icon($poster_birthday, $postrow[$i]['user_id']),
 
-        'MC_COMMENT' => $mc_type ? bbcode2html($mc_comment) : '',
+        'MC_COMMENT' => $mc_type ? bbcode()->toHtml($mc_comment) : '',
         'MC_BBCODE' => $mc_type ? $mc_comment : '',
         'MC_CLASS' => $mc_class,
         'MC_TITLE' => sprintf(__('MC_COMMENT')[$mc_type]['title'], $mc_user_id),

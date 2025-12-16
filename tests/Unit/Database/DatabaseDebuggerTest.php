@@ -8,7 +8,6 @@ describe('DatabaseDebugger Class', function () {
         resetGlobalState();
         mockTracyFunction();
         mockBbLogFunction();
-        mockHideBbPathFunction();
 
         // Set up test database instance
         $this->db = new Database(array_values(getTestDatabaseConfig()));

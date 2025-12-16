@@ -29,20 +29,20 @@ TorrentPier 3.0 is a complete architectural overhaul, moving from legacy PHP to 
 
 This guide covers migration for each subsystem:
 
-- [Database Migration System](./database-migrations) - Phinx-based schema management
-- [Database Layer](./database-layer) - Nette Database integration
-- [Cache System](./cache-system) - Unified caching with Nette Caching
-- [Configuration](./configuration) - Modern config management
-- [Search System](./search-system) - Manticore Search integration
-- [Language System](./language-system) - DI container integration
-- [Censor System](./censor-system) - Word censoring refactor
-- [Select System](./select-system) - Namespace reorganization
-- [Development System](./development-system) - Tracy debug bar
-- [HTTP Request System](./http-request) - Symfony HTTP Foundation
-- [HTTP Helper](./http-helper) - Class rename
-- [Application Container](./application-container) - Laravel-style DI
-- [Web Server Configuration](./web-server) - Nginx/Caddy setup
-- [Breaking Changes](./breaking-changes) - Deprecated patterns and best practices
+- [Database Migration System](/docs/upgrade/database-migrations) - Phinx-based schema management
+- [Database Layer](/docs/upgrade/database-layer) - Nette Database integration
+- [Cache System](/docs/upgrade/cache-system) - Unified caching with Nette Caching
+- [Configuration](/docs/upgrade/configuration) - Modern config management
+- [Search System](/docs/upgrade/search-system) - Manticore Search integration
+- [Language System](/docs/upgrade/language-system) - DI container integration
+- [Censor System](/docs/upgrade/censor-system) - Word censoring refactor
+- [Select System](/docs/upgrade/select-system) - Namespace reorganization
+- [Development System](/docs/upgrade/development-system) - Tracy debug bar
+- [HTTP Request System](/docs/upgrade/http-request) - Symfony HTTP Foundation
+- [HTTP Helper](/docs/upgrade/http-helper) - Class rename
+- [Application Container](/docs/upgrade/application-container) - Laravel-style DI
+- [Web Server Configuration](/docs/upgrade/web-server) - Nginx/Caddy setup
+- [Breaking Changes](/docs/upgrade/breaking-changes) - Deprecated patterns and best practices
 
 ## Backward Compatibility
 
@@ -65,7 +65,7 @@ This is an internal modernization that requires **zero code changes** for standa
 3. **For Developers**: Leverage new DI container and service provider patterns
 
 :::tip Recommended Reading Order
-Start with [Application Container](./application-container) to understand the new architecture, then explore specific subsystems as needed.
+Start with [Application Container](/docs/upgrade/application-container) to understand the new architecture, then explore specific subsystems as needed.
 :::
 
 :::warning Production Upgrades

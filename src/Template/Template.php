@@ -11,6 +11,8 @@
 namespace TorrentPier\Template;
 
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Str;
 use RuntimeException;
 use Twig\Environment;
 
@@ -50,6 +52,9 @@ class Template
     /** Current template name */
     private string $templateName;
 
+    /**
+     * @throws BindingResolutionException
+     */
     public function __construct(string $root = '.')
     {
         $this->variables = &$this->blockData['.'][0];
@@ -57,7 +62,7 @@ class Template
         $this->templateName = basename($root);
         $this->cacheDir = TwigEnvironmentFactory::normalizePath(TEMPLATES_CACHE_DIR . '/');
 
-        if (!is_dir($this->rootDir)) {
+        if (!files()->isDirectory($this->rootDir)) {
             throw new RuntimeException("Template directory not found: {$this->templateName}");
         }
 
@@ -188,13 +193,14 @@ class Template
     /**
      * Render a native Twig template with variables directly in context
      * For new .twig templates - cleaner API without V. prefix
+     * @throws BindingResolutionException
      */
     public function render(string $template, array $variables = []): void
     {
         $templatePath = $this->buildTemplatePath($template);
 
-        if (!@file_exists($templatePath)) {
-            throw new RuntimeException('Template not found: ' . hide_bb_path($templatePath));
+        if (!files()->exists($templatePath)) {
+            throw new RuntimeException('Template not found: ' . Str::chopStart($templatePath, BB_PATH . '/'));
         }
 
         $templateName = $this->getRelativeTemplateName($templatePath);
@@ -407,6 +413,7 @@ class Template
 
     /**
      * Register template file
+     * @throws BindingResolutionException
      */
     private function registerTemplate(string $handle, string $filename): void
     {
@@ -416,13 +423,14 @@ class Template
             throw new RuntimeException("Template error: invalid template {$filename}");
         }
 
-        if (!@file_exists($this->files[$handle])) {
-            throw new RuntimeException('Template not found: ' . hide_bb_path($this->files[$handle]));
+        if (!files()->exists($this->files[$handle])) {
+            throw new RuntimeException('Template not found: ' . Str::chopStart($this->files[$handle], BB_PATH . '/'));
         }
     }
 
     /**
      * Build a full template path
+     * @throws BindingResolutionException
      */
     private function buildTemplatePath(string $filename): string
     {
@@ -432,7 +440,7 @@ class Template
         // Handle admin templates
         if (str_starts_with($filename, 'admin/')) {
             $adminDir = TwigEnvironmentFactory::normalizePath(\dirname($this->rootDir) . '/admin');
-            if (is_dir($adminDir)) {
+            if (files()->isDirectory($adminDir)) {
                 return $adminDir . '/' . substr($filename, 6);
             }
         }

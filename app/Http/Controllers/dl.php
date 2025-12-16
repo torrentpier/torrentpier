@@ -10,8 +10,6 @@
 
 use TorrentPier\Http\Response;
 
-define('NO_GZIP', true);
-
 $topic_id = request()->getInt('t');
 $m3u = request()->getBool('m3u');
 
@@ -87,7 +85,7 @@ if ($t_data['attach_ext_id'] == TORRENT_EXT_ID) {
 // Get a file path and send for non-torrent files
 $file_path = TorrentPier\Attachment::getPath($topic_id);
 
-if (!is_file($file_path)) {
+if (!files()->isFile($file_path)) {
     bb_die(__('ERROR_NO_ATTACHMENT') . ' [HDD]');
 }
 

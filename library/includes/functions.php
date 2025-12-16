@@ -8,11 +8,10 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
 
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
@@ -36,16 +35,14 @@ function get_attach_path($id, $ext_id = null, $base_path = null, $first_div = 10
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
+/**
+ * @throws BindingResolutionException
+ */
 function delete_avatar($user_id, $avatar_ext_id)
 {
     $avatar_file = $avatar_ext_id ? get_avatar_path($user_id, $avatar_ext_id) : false;
 
-    return $avatar_file && is_file($avatar_file) && unlink($avatar_file);
-}
-
-function get_tracks($type)
-{
-    return read_tracker()->getTracks($type);
+    return $avatar_file && files()->isFile($avatar_file) && files()->delete($avatar_file);
 }
 
 /**
@@ -494,18 +491,29 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
 }
 
 /**
- * Returns a size formatted in a more human-friendly format, rounded to the nearest GB, MB, KB..
+ * Format bytes to human-readable size string
+ *
+ * Note: Cannot use Number::fileSize() because it doesn't support:
+ * - $min parameter (minimum unit, e.g., 'KB' for speeds)
+ * - Custom rounding strategy per unit
+ * - Non-breaking space (&nbsp;) separator
+ *
+ * @param int|float|null $size Size in bytes (null treated as 0)
+ * @param int|null $rounder Decimal places (auto-detected if null)
+ * @param string|null $min Minimum unit ('KB' to avoid showing bytes)
+ * @param string $space Separator between number and unit
+ * @return string Formatted size string
  */
-function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
+function humn_size(int|float|null $size, ?int $rounder = null, ?string $min = null, string $space = '&nbsp;'): string
 {
     static $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     static $rounders = [0, 0, 0, 2, 3, 3, 3, 3, 3];
 
-    $size = (float)$size;
+    $size = (float)($size ?? 0);
     $ext = $sizes[0];
     $rnd = $rounders[0];
 
-    if ($min == 'KB' && $size < 1024) {
+    if ($min === 'KB' && $size < 1024) {
         $size /= 1024;
         $ext = 'KB';
         $rounder = 1;
@@ -516,9 +524,8 @@ function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
             $rnd = $rounders[$i];
         }
     }
-    if (!$rounder) {
-        $rounder = $rnd;
-    }
+
+    $rounder ??= $rnd;
 
     return round($size, $rounder) . $space . $ext;
 }
@@ -612,22 +619,19 @@ function get_user_id($username)
     return false;
 }
 
-function str_short($text, $max_length, $space = ' ')
+/**
+ * Truncate string to specified length with ellipsis
+ *
+ * @deprecated Use Str::limit() directly: Str::limit($text, $max_length, '...')
+ * @see Str::limit
+ */
+function str_short($text, $max_length): string
 {
-    if (!empty($max_length) && !empty($text) && (mb_strlen($text, DEFAULT_CHARSET) > $max_length)) {
-        $text = mb_substr($text, 0, $max_length, DEFAULT_CHARSET);
-
-        if ($last_space_pos = $max_length - (int)strpos(strrev($text), (string)$space)) {
-            if ($last_space_pos > round($max_length * 3 / 4)) {
-                $last_space_pos--;
-                $text = mb_substr($text, 0, $last_space_pos, DEFAULT_CHARSET);
-            }
-        }
-        $text .= '...';
-        $text = preg_replace('!&#?(\w+)?;?(\w{1,5})?\.\.\.$!', '...', $text);
+    if (empty($max_length) || empty($text)) {
+        return $text ?? '';
     }
 
-    return $text ?? '';
+    return Str::limit($text, $max_length);
 }
 
 function generate_user_info($row, bool $have_auth = IS_ADMIN): array
@@ -848,37 +852,36 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
     return build_select($name, $select, $selected, $max_length, $multiple_size, $js);
 }
 
-function setup_style()
+/**
+ * @throws BindingResolutionException
+ */
+function setup_style(): void
 {
-    static $initialized = false;
-    if ($initialized) {
-        return;
-    }
-    $initialized = true;
+    once(function () {
+        // AdminCP works only with the default template
+        $tpl_dir_name = defined('IN_ADMIN') ? 'default' : basename(config()->get('tpl_name'));
+        $stylesheet = defined('IN_ADMIN') ? 'main.css' : basename(config()->get('stylesheet'));
 
-    // AdminCP works only with default template
-    $tpl_dir_name = defined('IN_ADMIN') ? 'default' : basename(config()->get('tpl_name'));
-    $stylesheet = defined('IN_ADMIN') ? 'main.css' : basename(config()->get('stylesheet'));
-
-    if (!IS_GUEST && !empty(userdata('tpl_name'))) {
-        foreach (config()->get('templates') as $folder => $name) {
-            if (userdata('tpl_name') == $folder) {
-                $tpl_dir_name = basename(userdata('tpl_name'));
+        if (!IS_GUEST && !empty(userdata('tpl_name'))) {
+            foreach (config()->get('templates') as $folder => $name) {
+                if (userdata('tpl_name') == $folder) {
+                    $tpl_dir_name = basename(userdata('tpl_name'));
+                }
             }
         }
-    }
 
-    template(TEMPLATES_DIR . '/' . $tpl_dir_name);
+        template(TEMPLATES_DIR . '/' . $tpl_dir_name);
 
-    template()->assign_vars([
-        'BB_ROOT' => BB_ROOT,
-        'SPACER' => make_url('assets/images/spacer.gif'),
-        'STYLESHEET' => asset_url('css/' . $stylesheet, 'css'),
-        'EXT_LINK_NEW_WIN' => config()->get('ext_link_new_win'),
-        'TPL_DIR' => make_url('assets/css/'),
-        'SITE_URL' => make_url('/'),
-        'ASSETS_URL' => make_url('assets/'),
-    ]);
+        template()->assign_vars([
+            'BB_ROOT' => BB_ROOT,
+            'SPACER' => make_url('assets/images/spacer.gif'),
+            'STYLESHEET' => asset_url('css/' . $stylesheet, 'css'),
+            'EXT_LINK_NEW_WIN' => config()->get('ext_link_new_win'),
+            'TPL_DIR' => make_url('assets/css/'),
+            'SITE_URL' => make_url('/'),
+            'ASSETS_URL' => make_url('assets/'),
+        ]);
+    });
 }
 
 /**
@@ -920,6 +923,7 @@ function bb_date(int $timestamp, string|false $format = false, bool $friendly_da
 
 /**
  * Get user's torrent client string
+ * @throws BindingResolutionException
  */
 function get_user_torrent_client(string $peer_id): string
 {
@@ -935,7 +939,7 @@ function get_user_torrent_client(string $peer_id): string
     }
 
     $clientIconFile = IMAGES_DIR . '/clients/' . $bestMatch . $iconExtension;
-    if (!empty($bestMatch) && is_file($clientIconFile)) {
+    if (!empty($bestMatch) && files()->isFile($clientIconFile)) {
         $clientIconUrl = image_url('clients/' . $bestMatch . $iconExtension);
 
         return '<img class="client_icon" src="' . $clientIconUrl . '" alt="' . $bestMatch . '" title="' . $peer_id . '">';
@@ -946,6 +950,7 @@ function get_user_torrent_client(string $peer_id): string
 
 /**
  * Returns country flag by country code
+ * @throws BindingResolutionException
  */
 function render_flag(string $code, bool $showName = true): string
 {
@@ -961,7 +966,7 @@ function render_flag(string $code, bool $showName = true): string
     }
 
     $flagIconFile = IMAGES_DIR . '/flags/' . $code . $iconExtension;
-    if (!is_file($flagIconFile)) {
+    if (!files()->isFile($flagIconFile)) {
         return $code;
     }
 
@@ -1123,19 +1128,31 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
     return $pagination;
 }
 
-function bb_die($msg_text, $status_code = null)
+/**
+ * @throws BindingResolutionException
+ * @throws JsonException
+ */
+function bb_die($msgText, $statusCode = null): void
 {
-    if (isset($status_code)) {
-        http_response_code($status_code);
-    }
+    $statusCode ??= 500;
+    http_response_code($statusCode);
 
-    if (defined('IN_AJAX')) {
-        ajax()->ajax_die($msg_text);
+    // Detect API requests and return JSON response
+    $isApiRequest = str_starts_with($_SERVER['REQUEST_URI'] ?? '', '/api/')
+        || str_contains($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json');
+
+    if ($isApiRequest) {
+        header('Content-Type: application/json; charset=UTF-8');
+        echo json_encode([
+            'error_code' => $statusCode,
+            'error_msg' => strip_tags(br2nl($msgText)),
+        ], JSON_THROW_ON_ERROR);
+        exit;
     }
 
     // Check for recursive calls - fall back to simple output
     if (defined('HAS_DIED')) {
-        bb_simple_die($msg_text, $status_code ?? 500);
+        bb_simple_die($msgText, $statusCode);
     }
     define('HAS_DIED', 1);
     define('DISABLE_CACHING_OUTPUT', true);
@@ -1150,7 +1167,7 @@ function bb_die($msg_text, $status_code = null)
         }
     } catch (Throwable $e) {
         // DB or other critical failure - fall back to simple output
-        bb_simple_die($msg_text, $status_code ?? 500);
+        bb_simple_die($msgText, $statusCode);
     }
 
     // If the header hasn't been output then do it
@@ -1160,13 +1177,13 @@ function bb_die($msg_text, $status_code = null)
     }
 
     // Check for lang variable
-    if ($translated = __($msg_text)) {
-        $msg_text = $translated;
+    if ($translated = __($msgText)) {
+        $msgText = $translated;
     }
 
     template()->assign_vars([
         'TPL_BB_DIE' => true,
-        'MESSAGE_TEXT' => $msg_text,
+        'MESSAGE_TEXT' => $msgText,
     ]);
 
     template()->set_filenames(['bb_die' => 'common.tpl']);
@@ -1184,7 +1201,7 @@ function bb_simple_die($txt, $status_code = null)
 }
 
 /**
- * @throws Illuminate\Contracts\Container\BindingResolutionException
+ * @throws BindingResolutionException
  */
 function login_redirect($url = '')
 {
@@ -1270,22 +1287,30 @@ function clear_dl_list($topics_csv)
     DB()->query('DELETE FROM ' . BB_BT_DLSTATUS_SNAP . " WHERE topic_id IN({$topics_csv})");
 }
 
-// $ids - array(id1,id2,..) or (string) id
-function get_id_csv($ids)
+/**
+ * Convert array or single ID to a comma-separated string of integers
+ *
+ * @param array|int|string $ids Array of IDs or single ID
+ * @return string Comma-separated string of integers
+ *@deprecated Use collect($ids)->flatten()->map('intval')->implode(',') directly
+ */
+function get_id_csv(array|int|string $ids): string
 {
-    $ids = array_values((array)$ids);
-    array_deep($ids, 'intval', 'one-dimensional');
-
-    return (string)implode(',', $ids);
+    return new Collection(Arr::wrap($ids))->flatten()->map('intval')->implode(',');
 }
 
-// $ids - array(id1,id2,..) or (string) id1,id2,..
-function get_id_ary($ids)
+/**
+ * Convert a comma-separated string or array to an array of integers
+ *
+ * @param array|string $ids Comma-separated string or array of IDs
+ * @return array<int> Array of integers
+ *@deprecated Use collect(explode(',', $ids))->map('intval')->values()->all() directly
+ */
+function get_id_ary(array|string $ids): array
 {
-    $ids = is_string($ids) ? explode(',', $ids) : array_values((array)$ids);
-    array_deep($ids, 'intval', 'one-dimensional');
+    $ids = is_string($ids) ? explode(',', $ids) : Arr::wrap($ids);
 
-    return (array)$ids;
+    return new Collection($ids)->flatten()->map('intval')->values()->all();
 }
 
 function get_topic_title($topic_id)
@@ -1739,6 +1764,9 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
     return $profile;
 }
 
+/**
+ * @throws BindingResolutionException
+ */
 function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $width = '')
 {
     $height = $height ? 'height="' . $height . '"' : '';
@@ -1749,7 +1777,7 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
     if ($user_id == BOT_UID && config()->get('avatars.bot_avatar')) {
         $user_avatar = '<img src="' . make_url(config()->get('avatars.display_path') . config()->get('avatars.bot_avatar')) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
     } elseif ($allow_avatar && $ext_id) {
-        if (is_file(get_avatar_path($user_id, $ext_id))) {
+        if (files()->isFile(get_avatar_path($user_id, $ext_id))) {
             $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, config()->get('avatars.display_path'))) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
         }
     }
@@ -1867,7 +1895,15 @@ function bb_captcha(string $mode): bool|string
     return false;
 }
 
-function clean_tor_dirname($dirname)
+/**
+ * Escape special characters in the torrent directory name for safe HTML output
+ *
+ * Note: Cannot use htmlspecialchars() as it doesn't escape square brackets
+ *
+ * @param string $dirname Directory name to escape
+ * @return string Escaped directory name safe for HTML
+ */
+function clean_tor_dirname(string $dirname): string
 {
     return str_replace(['[', ']', '<', '>', "'"], ['&#91;', '&#93;', '&lt;', '&gt;', '&#039;'], $dirname);
 }
@@ -1905,14 +1941,15 @@ function getBanInfo(?int $userId = null): ?array
 
 /**
  * Read updater file
+ * @throws BindingResolutionException
  */
 function readUpdaterFile(): array|bool
 {
-    if (!is_file(UPDATER_FILE)) {
+    if (!files()->isFile(UPDATER_FILE)) {
         return false;
     }
 
-    return json_decode(file_get_contents(UPDATER_FILE), true);
+    return json_decode(files()->get(UPDATER_FILE), true);
 }
 
 /**

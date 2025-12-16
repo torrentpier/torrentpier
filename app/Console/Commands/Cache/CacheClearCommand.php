@@ -122,13 +122,14 @@ class CacheClearCommand extends Command
 
     /**
      * Clear system cache
+     * @throws BindingResolutionException
      */
     private function clearSystemCache(): void
     {
         // Use injected config or fall back to constant
         $cacheDir = \defined('CACHE_DIR') ? CACHE_DIR : $this->config->get('cache_dir');
 
-        if (is_dir($cacheDir)) {
+        if (files()->isDirectory($cacheDir)) {
             FileSystemHelper::clearDirectory($cacheDir);
         }
 
@@ -148,7 +149,7 @@ class CacheClearCommand extends Command
         // Use injected config or fall back to constant
         $templateCacheDir = \defined('TEMPLATES_CACHE_DIR') ? TEMPLATES_CACHE_DIR : $this->config->get('templates_cache_dir');
 
-        if (is_dir($templateCacheDir)) {
+        if (files()->isDirectory($templateCacheDir)) {
             FileSystemHelper::clearDirectory($templateCacheDir);
         }
     }

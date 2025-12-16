@@ -8,8 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-require INC_DIR . '/bbcode.php';
-
 page_cfg('use_tablesorter', true);
 
 $s_member_groups = $s_pending_groups = $s_member_groups_opt = $s_pending_groups_opt = '';
@@ -376,8 +374,8 @@ if (!$group_id) {
         'PAGE_TITLE' => __('GROUP_CONTROL_PANEL'),
         'CANONICAL_URL' => make_url(url()->group($group_id, $group_info['group_name'])),
         'GROUP_NAME' => htmlCHR($group_info['group_name']),
-        'GROUP_DESCRIPTION' => bbcode2html($group_info['group_description']),
-        'GROUP_SIGNATURE' => bbcode2html($group_info['group_signature']),
+        'GROUP_DESCRIPTION' => bbcode()->toHtml($group_info['group_description']),
+        'GROUP_SIGNATURE' => bbcode()->toHtml($group_info['group_signature']),
         'GROUP_AVATAR' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),
         'GROUP_DETAILS' => $group_details,
         'GROUP_TIME' => !empty($group_info['group_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($group_info['group_time']), humanTime($group_info['group_time'])) : __('NONE'),

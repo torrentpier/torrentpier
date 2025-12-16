@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 if (request()->post->has('save')) {
     $robots_txt = request()->post->get('robots_txt', '');
 

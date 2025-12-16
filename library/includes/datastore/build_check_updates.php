@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 if (!config()->get('tp_updater_settings.enabled')) {
     return;
 }
@@ -54,11 +50,11 @@ if (z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
     $updaterFileNeedReplaced = !empty($updaterFile) && z4kn4fein\SemVer\Version::greaterThan($getVersion, $updaterFile['latest_version']);
 
     // Save current version & latest available
-    if (!is_file(UPDATER_FILE) || $updaterFileNeedReplaced) {
-        file_write(json_encode([
+    if (!files()->isFile(UPDATER_FILE) || $updaterFileNeedReplaced) {
+        files()->write(UPDATER_FILE, json_encode([
             'previous_version' => $currentVersion,
             'latest_version' => $getVersion,
-        ]), UPDATER_FILE, replace_content: true);
+        ]));
     }
 
     // Get MD5 / sha256 checksum

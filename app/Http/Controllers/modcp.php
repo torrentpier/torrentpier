@@ -35,8 +35,6 @@
  * ===========================================================================
  */
 
-require INC_DIR . '/bbcode.php';
-
 //
 // Functions
 //
@@ -584,7 +582,7 @@ switch ($mode) {
                     // If the board has HTML off but the post has HTML
                     // on then we process it, else leave it alone
                     //
-                    $message = bbcode2html($message);
+                    $message = bbcode()->toHtml($message);
 
                     $row_class = !($i % 2) ? 'row1' : 'row2';
                     template()->assign_block_vars('postrow', [

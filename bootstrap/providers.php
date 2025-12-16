@@ -35,6 +35,9 @@ return [
     App\Providers\DatabaseServiceProvider::class,
     App\Providers\CacheServiceProvider::class,
 
+    // Filesystem operations
+    App\Providers\FilesystemServiceProvider::class,
+
     // Session/User depends on DB and Cache
     App\Providers\SessionServiceProvider::class,
 

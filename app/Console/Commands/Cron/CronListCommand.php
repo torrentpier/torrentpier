@@ -80,7 +80,7 @@ class CronListCommand extends Command
             $this->section('Status');
             $this->definitionList(
                 ['Cron Enabled' => CronHelper::isEnabled() ? '<info>Yes</info>' : '<comment>No</comment>'],
-                ['Lock File' => is_file(CRON_RUNNING) ? '<comment>Locked</comment>' : '<info>Free</info>'],
+                ['Lock File' => files()->isFile(CRON_RUNNING) ? '<comment>Locked</comment>' : '<info>Free</info>'],
             );
         } catch (Throwable $e) {
             $this->error('Failed to fetch cron jobs: ' . $e->getMessage());

@@ -42,11 +42,11 @@ $t_files_field = $meta_v2 ? 'getFileTree' : 'getFiles';
 $t_hash_field = $meta_v2 ? 'piecesRoot' : 'sha1';
 
 $file_path = TorrentPier\Attachment::getPath($topic_id);
-if (!is_file($file_path)) {
+if (!files()->isFile($file_path)) {
     bb_die(__('TOR_NOT_FOUND'), 410);
 }
 
-$file_contents = file_get_contents($file_path);
+$file_contents = files()->get($file_path);
 if (config()->get('flist_max_files')) {
     $filetree_pos = $meta_v2 ? strpos($file_contents, '9:file tree') : false;
     $files_pos = $meta_v1 ? strpos($file_contents, '5:files', $filetree_pos) : false;

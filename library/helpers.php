@@ -26,8 +26,8 @@ use Illuminate\Contracts\Container\BindingResolutionException;
  *
  * @param string|null $abstract Service to resolve from the container
  * @param array $parameters Parameters for the service resolution
- * @throws BindingResolutionException
  * @throws RuntimeException If the application is not bootstrapped
+ * @throws BindingResolutionException
  * @return mixed Application instance or resolved service
  */
 function app(?string $abstract = null, array $parameters = []): mixed
@@ -52,6 +52,57 @@ function app(?string $abstract = null, array $parameters = []): mixed
 function config(): TorrentPier\Config
 {
     return app(TorrentPier\Config::class);
+}
+
+/**
+ * Get the Filesystem instance
+ *
+ * Provides access to file operations with TorrentPier-specific features
+ * like log rotation and proper umask handling for directories.
+ *
+ * Usage:
+ *   // Reading files
+ *   files()->get('/path/to/file')              // Get file contents
+ *   files()->json('/path/to/file.json')        // Get JSON decoded
+ *   files()->lines('/path/to/file')            // Get LazyCollection of lines
+ *   files()->exists('/path/to/file')           // Check existence
+ *   files()->isFile('/path/to/file')           // Check if file (not dir)
+ *   files()->isDirectory('/path/to/dir')       // Check if directory
+ *
+ *   // Writing files
+ *   files()->put($path, $content)              // Write/replace content
+ *   files()->write($path, $content, lock: true) // Write with locking
+ *   files()->append($path, $content)           // Append to file
+ *   files()->appendWithRotation($path, $content, maxSize: 1048576) // Log rotation
+ *
+ *   // File operations
+ *   files()->delete($path)                     // Delete file(s)
+ *   files()->move($from, $to)                  // Move/rename file
+ *   files()->copy($from, $to)                  // Copy file
+ *
+ *   // Directory operations
+ *   files()->ensureDirectoryExists($path)      // Create dir with umask handling
+ *   files()->makeDirectory($path, 0755, true)  // Create directory
+ *   files()->deleteDirectory($path)            // Delete directory recursively
+ *   files()->cleanDirectory($path)             // Empty directory
+ *
+ *   // File info
+ *   files()->size($path)                       // Get file size
+ *   files()->lastModified($path)               // Get modification time
+ *   files()->mimeType($path)                   // Get MIME type
+ *   files()->hash($path)                       // Get file hash
+ *
+ *   // Directory listing
+ *   files()->files($dir)                       // Get files in directory
+ *   files()->allFiles($dir)                    // Get all files recursively
+ *   files()->directories($dir)                 // Get subdirectories
+ *   files()->glob($pattern)                    // Find by pattern
+ *
+ * @throws BindingResolutionException
+ */
+function files(): TorrentPier\Filesystem\Filesystem
+{
+    return app(TorrentPier\Filesystem\Filesystem::class);
 }
 
 /**
@@ -292,15 +343,6 @@ function html(): TorrentPier\Legacy\Common\Html
 function bbcode(): TorrentPier\Legacy\BBCode
 {
     return app(TorrentPier\Legacy\BBCode::class);
-}
-
-/**
- * Ajax handler singleton
- * @throws BindingResolutionException
- */
-function ajax(): TorrentPier\Ajax
-{
-    return app(TorrentPier\Ajax::class);
 }
 
 /**

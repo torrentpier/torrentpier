@@ -10,10 +10,6 @@
 
 use TorrentPier\Torrent\Registry;
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 if (empty(config()->get('seeder_last_seen_days_keep')) || empty(config()->get('seeder_never_seen_days_keep'))) {
     return;
 }
