@@ -24,8 +24,8 @@ use Illuminate\Contracts\Container\BindingResolutionException;
  * @param array|string $msg Message to log (an array will be joined with newlines)
  * @param string $file_name Log file name (without extension)
  * @param bool $return_path Return file path instead of writing
- * @return string|int|false File path, bytes written, or false on failure
  * @throws BindingResolutionException
+ * @return string|int|false File path, bytes written, or false on failure
  */
 function bb_log(array|string $msg, string $file_name = 'logs', bool $return_path = false): string|int|false
 {

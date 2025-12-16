@@ -17,7 +17,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 use TorrentPier\Console\Commands\Command;
-use TorrentPier\Console\Helpers\FileSystemHelper;
 
 /**
  * Remove development files for production release
