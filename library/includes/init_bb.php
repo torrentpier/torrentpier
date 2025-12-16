@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 // Obtain and encode user IP
 $client_ip = request()->getClientIp() ?? '127.0.0.1';
 $user_ip = TorrentPier\Helpers\IPHelper::ip2long($client_ip);
@@ -372,6 +368,7 @@ function url(): TorrentPier\Router\SemanticUrl\UrlBuilder
  * Functions
  */
 require_once INC_DIR . '/functions.php';
+require_once INC_DIR . '/bbcode.php';
 
 // Merge database configuration with base configuration using singleton
 config()->merge(bb_get_config(BB_CONFIG));

@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 $sql = 'SELECT * FROM ' . BB_CONFIG . " WHERE config_name IN('sitemap_time', 'static_sitemap')";
 
 if (!$result = DB()->sql_query($sql)) {

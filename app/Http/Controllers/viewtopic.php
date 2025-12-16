@@ -36,8 +36,6 @@
  * ===========================================================================
  */
 
-require INC_DIR . '/bbcode.php';
-
 datastore()->enqueue([
     'ranks',
     'cat_forums',

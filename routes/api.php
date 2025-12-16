@@ -72,5 +72,5 @@ return static function (Router $router): void {
         $group->post('/manage-user', ManageUserController::class)->middleware(new EnsureRole('admin'));
         $group->post('/manage-admin', ManageAdminController::class)->middleware(new EnsureRole('admin'));
         $group->post('/sitemap', SitemapController::class)->middleware(new EnsureRole('admin'));
-    });
+    })->middleware('session');
 };

@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 if (config()->get('topic_moved_days_keep')) {
     $prune_time = TIMENOW - 86400 * config()->get('topic_moved_days_keep');
 

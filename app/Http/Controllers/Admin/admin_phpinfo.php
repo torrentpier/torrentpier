@@ -16,8 +16,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-
 if (!IS_SUPER_ADMIN) {
     bb_die(__('ONLY_FOR_SUPER_ADMIN'));
 }

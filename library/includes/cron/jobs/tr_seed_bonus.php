@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 DB()->expect_slow_query(600);
 
 if (config()->get('seed_bonus_enabled') && config()->get('seed_bonus_points') && config()->get('seed_bonus_release')) {

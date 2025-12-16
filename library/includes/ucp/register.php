@@ -10,10 +10,6 @@
 
 use Illuminate\Support\Str;
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 set_die_append_msg();
 
 if (IS_ADMIN) {
@@ -32,8 +28,6 @@ $can_register = (IS_GUEST || IS_ADMIN);
 $submit = request()->post->has('submit');
 $errors = [];
 $adm_edit = false; // editing someone else's profile by an admin
-
-require INC_DIR . '/bbcode.php';
 
 $pr_data = []; // data of the edited or registration profile
 $db_data = []; // data for the database: registration or changed user data

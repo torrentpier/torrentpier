@@ -8,10 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
-
 $can_edit_tpl = IS_SUPER_ADMIN;
 $edit_tpl_mode = ($can_edit_tpl && request()->has('edit_tpl'));
 

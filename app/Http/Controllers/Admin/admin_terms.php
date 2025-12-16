@@ -14,8 +14,6 @@ if (!empty($setmodules)) {
     return;
 }
 
-require __DIR__ . '/pagestart.php';
-require INC_DIR . '/bbcode.php';
 
 $preview = request()->post->has('preview');
 

@@ -36,8 +36,6 @@
  * ===========================================================================
  */
 
-require INC_DIR . '/bbcode.php';
-
 use Illuminate\Support\Str;
 use TorrentPier\Search\SearchParams;
 

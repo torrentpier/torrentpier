@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\Ajax;
 
 use App\Http\Controllers\Api\Ajax\Concerns\AjaxResponse;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TorrentPier\Legacy\BBCode;
@@ -32,13 +31,8 @@ class PostModCommentController
 
     public function __construct(
         private readonly BBCode $bbcode,
-    ) {
-        $this->bbcode->boot();
-    }
+    ) {}
 
-    /**
-     * @throws BindingResolutionException
-     */
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         $body = $request->getParsedBody() ?? [];
@@ -48,7 +42,7 @@ class PostModCommentController
         $mcText = (string)($body['mc_text'] ?? '');
 
         if ($mcType != 0) {
-            $mcText = prepare_message($mcText);
+            $mcText = $this->bbcode->prepareMessage($mcText);
             if (!$mcText) {
                 return $this->error(__('EMPTY_MESSAGE'));
             }
@@ -99,7 +93,7 @@ class PostModCommentController
             'mc_type' => $mcType,
             'post_id' => $postId,
             'mc_title' => \sprintf(__('MC_COMMENT')[$mcType]['title'], profile_url(userdata())),
-            'mc_text' => bbcode2html($mcText),
+            'mc_text' => $this->bbcode->toHtml($mcText),
             'mc_class' => $mcClass,
         ]);
     }

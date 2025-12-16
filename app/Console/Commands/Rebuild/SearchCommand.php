@@ -92,9 +92,6 @@ class SearchCommand extends AbstractRebuildCommand
     {
         $this->title('Rebuild Search Index');
 
-        // Include bbcode functions for search word extraction
-        require_once INC_DIR . '/bbcode.php';
-
         $batchSize = $this->getBatchSize();
         $startFrom = $this->getStartFrom();
         $clearIndex = $input->getOption('clear-index');
