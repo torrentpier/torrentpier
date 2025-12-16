@@ -394,13 +394,13 @@ foreach ($profile_fields as $field => $can_edit) {
                     $monsterAvatar->writeToStream($tempAvatar);
 
                     // Create avatar file array for MonsterID
-                    if (is_file($tempAvatarPath)) {
+                    if (files()->isFile($tempAvatarPath)) {
                         $avatarFile = [
                             'name' => "MonsterID_{$pr_data['user_id']}.png",
                             'type' => mime_content_type($tempAvatarPath),
                             'tmp_name' => $tempAvatarPath,
                             'error' => UPLOAD_ERR_OK,
-                            'size' => filesize($tempAvatarPath),
+                            'size' => files()->size($tempAvatarPath),
                         ];
                     }
                 }

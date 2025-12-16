@@ -383,12 +383,12 @@ TorrentPier\Helpers\CronHelper::run(defined('START_CRON'));
  * Exit if the board is disabled via trigger
  */
 $isApiRequest = str_starts_with($_SERVER['REQUEST_URI'] ?? '', '/api/');
-if ((config()->get('board_disable') || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !$isApiRequest && !defined('IN_LOGIN')) {
+if ((config()->get('board_disable') || files()->isFile(BB_DISABLED)) && !defined('IN_ADMIN') && !$isApiRequest && !defined('IN_LOGIN')) {
     if (config()->get('board_disable')) {
         // admin lock
         send_no_cache_headers();
         bb_die('BOARD_DISABLE', 503);
-    } elseif (is_file(BB_DISABLED)) {
+    } elseif (files()->isFile(BB_DISABLED)) {
         // trigger lock
         TorrentPier\Helpers\CronHelper::releaseDeadlock();
         send_no_cache_headers();
