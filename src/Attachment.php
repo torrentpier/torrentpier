@@ -10,6 +10,7 @@
 
 namespace TorrentPier;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use TorrentPier\Legacy\Common\Upload;
 use TorrentPier\Torrent\Registry;
 
@@ -59,6 +60,7 @@ class Attachment
      * Also handles TorrServer cleanup.
      *
      * @param int $topicId Topic ID
+     * @throws BindingResolutionException
      * @return bool True on success
      */
     public static function delete(int $topicId): bool
@@ -73,8 +75,8 @@ class Attachment
 
         // Delete a physical file
         $attachPath = self::getPath($topicId);
-        if (is_file($attachPath)) {
-            unlink($attachPath);
+        if (files()->isFile($attachPath)) {
+            files()->delete($attachPath);
         }
 
         // Clear attachment info in a topic
@@ -104,35 +106,38 @@ class Attachment
      * Get attachment file size in bytes.
      *
      * @param int $topicId Topic ID
+     * @throws BindingResolutionException
      * @return int File size in bytes, 0 if a file doesn't exist
      */
     public static function getSize(int $topicId): int
     {
         $path = self::getPath($topicId);
 
-        return is_file($path) ? (filesize($path) ?: 0) : 0;
+        return files()->isFile($path) ? files()->size($path) : 0;
     }
 
     /**
      * Check if an attachment file exists.
      *
      * @param int $topicId Topic ID
+     * @throws BindingResolutionException
      * @return bool True if a file exists
      */
     public static function exists(int $topicId): bool
     {
-        return is_file(self::getPath($topicId));
+        return files()->isFile(self::getPath($topicId));
     }
 
     /**
      * Check if the M3U file exists for TorrServer integration.
      *
      * @param int $topicId Topic ID
+     * @throws BindingResolutionException
      * @return bool True if M3U file exists
      */
     public static function m3uExists(int $topicId): bool
     {
-        return is_file(self::getPath($topicId, M3U_EXT_ID));
+        return files()->isFile(self::getPath($topicId, M3U_EXT_ID));
     }
 
     /**

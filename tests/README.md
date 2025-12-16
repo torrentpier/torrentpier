@@ -486,7 +486,6 @@ beforeEach(function () {
     // Mock required functions for testing
     mockTracyFunction();
     mockBbLogFunction();
-    mockHideBbPathFunction();
 
     // Initialize test data
     $this->storage = new MemoryStorage();

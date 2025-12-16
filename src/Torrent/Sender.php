@@ -13,6 +13,7 @@ namespace TorrentPier\Torrent;
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use TorrentPier\Attachment;
 use TorrentPier\Http\Response;
 
@@ -25,6 +26,7 @@ class Sender
      * Send a torrent file with passkey to browser.
      *
      * @param array $t_data Topic data array with topic_id, topic_title, attach_ext_id, tracker_status, topic_poster
+     * @throws BindingResolutionException
      */
     public static function sendWithPasskey(array $t_data): void
     {
@@ -32,7 +34,7 @@ class Sender
         $topic_title = $t_data['topic_title'];
         $filename = Attachment::getPath($topic_id);
 
-        if (!config()->get('bt_add_auth_key') || $t_data['attach_ext_id'] !== TORRENT_EXT_ID || !$size = @filesize($filename)) {
+        if (!config()->get('bt_add_auth_key') || $t_data['attach_ext_id'] !== TORRENT_EXT_ID || !$size = files()->size($filename)) {
             return;
         }
 
@@ -73,7 +75,7 @@ class Sender
         }
 
         // Torrent decoding
-        $file_contents = file_get_contents($filename);
+        $file_contents = files()->get($filename);
 
         try {
             $tor = Bencode::decode($file_contents, dictType: Collection::ARRAY);

@@ -10,6 +10,8 @@
 
 namespace TorrentPier;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
+
 /**
  * Language management class
  *
@@ -214,16 +216,17 @@ class Language
 
     /**
      * Find language file in library or vendor directories
+     * @throws BindingResolutionException
      */
     private function findLangFile(string $langCode, string $filename = 'main.php'): ?string
     {
         $libraryFile = $this->libraryLangDir . '/' . $langCode . '/' . $filename;
-        if (is_file($libraryFile)) {
+        if (files()->isFile($libraryFile)) {
             return $libraryFile;
         }
 
         $vendorFile = $this->vendorLangDir . '/' . $langCode . '/' . $filename;
-        if (is_file($vendorFile)) {
+        if (files()->isFile($vendorFile)) {
             return $vendorFile;
         }
 
@@ -264,7 +267,7 @@ class Language
         }
 
         // Merge with source language as fallback
-        $this->userLanguage = array_deep_merge($this->sourceLanguage, $this->userLanguage);
+        $this->userLanguage = array_replace_recursive($this->sourceLanguage, $this->userLanguage);
     }
 
     /**

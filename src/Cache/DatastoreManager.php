@@ -13,6 +13,7 @@ namespace TorrentPier\Cache;
 use BadMethodCallException;
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Nette\Caching\Cache;
 use Nette\Caching\Storage;
@@ -298,7 +299,7 @@ class DatastoreManager
         }
 
         $file = INC_DIR . '/' . $this->ds_dir . '/' . $this->known_items[$title];
-        if (!file_exists($file)) {
+        if (!files()->exists($file)) {
             throw new Exception("Datastore builder script not found: {$file}");
         }
 
@@ -312,7 +313,7 @@ class DatastoreManager
     {
         foreach (debug_backtrace() as $trace) {
             if (isset($trace['function']) && $trace['function'] === $function_name) {
-                return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
+                return Str::chopStart($trace['file'], BB_PATH . '/') . '(' . $trace['line'] . ')';
             }
         }
 

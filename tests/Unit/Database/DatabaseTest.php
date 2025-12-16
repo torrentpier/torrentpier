@@ -12,7 +12,6 @@ describe('Database Class', function () {
         // Mock required functions that might not exist in test environment
         mockTracyFunction();
         mockBbLogFunction();
-        mockHideBbPathFunction();
     });
 
     afterEach(function () {

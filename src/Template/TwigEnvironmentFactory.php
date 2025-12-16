@@ -10,6 +10,7 @@
 
 namespace TorrentPier\Template;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use TorrentPier\Template\Extensions\LanguageExtension;
 use TorrentPier\Template\Extensions\LegacySyntaxExtension;
 use TorrentPier\Template\Extensions\ThemeExtension;
@@ -38,6 +39,7 @@ class TwigEnvironmentFactory
     /**
      * Create a Twig environment with TorrentPier configuration
      * @throws LoaderError
+     * @throws BindingResolutionException
      */
     public function create(string $templateDir, string $cacheDir, bool $useCache = true): Environment
     {
@@ -49,13 +51,13 @@ class TwigEnvironmentFactory
 
         // Add an admin template directory with @admin namespace
         $adminTemplateDir = self::normalizePath(\dirname($templateDir) . '/admin');
-        if (is_dir($adminTemplateDir) && $adminTemplateDir !== $templateDir) {
+        if (files()->isDirectory($adminTemplateDir) && $adminTemplateDir !== $templateDir) {
             $loader->addPath($adminTemplateDir, 'admin');
         }
 
         // Add the default template directory as fallback if the current dir is not default
         $defaultTemplateDir = self::normalizePath(\dirname($templateDir) . '/default');
-        if (is_dir($defaultTemplateDir) && $defaultTemplateDir !== $templateDir) {
+        if (files()->isDirectory($defaultTemplateDir) && $defaultTemplateDir !== $templateDir) {
             $loader->addPath($defaultTemplateDir);
         }
 
@@ -126,8 +128,6 @@ class TwigEnvironmentFactory
 
         // Add filters for backward compatibility
         $twig->addFilter(new TwigFilter('htmlspecialchars', 'htmlspecialchars'));
-        $twig->addFilter(new TwigFilter('clean_filename', 'clean_filename'));
-        $twig->addFilter(new TwigFilter('hide_bb_path', 'hide_bb_path'));
         $twig->addFilter(new TwigFilter('str_short', 'str_short'));
     }
 }

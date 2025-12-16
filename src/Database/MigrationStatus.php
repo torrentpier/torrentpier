@@ -11,6 +11,7 @@
 namespace TorrentPier\Database;
 
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 /**
  * Migration Status Manager
@@ -275,14 +276,15 @@ class MigrationStatus
      * Get available migrations from filesystem
      *
      * @return array List of available migration files
+     * @throws BindingResolutionException
      */
     private function getAvailableMigrations(): array
     {
         $migrations = [];
 
-        if (is_dir($this->migrationPath)) {
-            $files = glob($this->migrationPath . '/*.php');
-            foreach ($files as $file) {
+        if (files()->isDirectory($this->migrationPath)) {
+            $globFiles = files()->glob($this->migrationPath . '/*.php');
+            foreach ($globFiles as $file) {
                 $filename = basename($file);
                 if (preg_match('/^(\d+)_(.+)\.php$/', $filename, $matches)) {
                     $migrations[] = [

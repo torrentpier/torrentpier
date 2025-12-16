@@ -11,6 +11,7 @@
 namespace TorrentPier\Legacy\Common;
 
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use RuntimeException;
 use TorrentPier\Attachment;
 use TorrentPier\Image\ImageService;
@@ -80,6 +81,7 @@ class Upload
 
     /**
      * Initialize uploader
+     * @throws BindingResolutionException
      */
     public function init(array $cfg = [], array $post_params = [], bool $uploaded_only = true): bool
     {
@@ -105,14 +107,14 @@ class Upload
         }
 
         // Check file exists
-        if (!file_exists($this->file['tmp_name'])) {
+        if (!files()->exists($this->file['tmp_name'])) {
             $this->errors[] = "Uploaded file not exists: {$this->file['tmp_name']}";
 
             return false;
         }
 
         // Check file is not empty
-        if (!$this->file_size = filesize($this->file['tmp_name'])) {
+        if (!$this->file_size = files()->size($this->file['tmp_name'])) {
             $this->errors[] = "Uploaded file is empty: {$this->file['tmp_name']}";
 
             return false;
@@ -154,12 +156,12 @@ class Upload
                         ->save($this->file['tmp_name']);
 
                     // Update file size after resize
-                    $this->file_size = filesize($this->file['tmp_name']);
+                    $this->file_size = files()->size($this->file['tmp_name']);
 
                     // If still too large, try to compress with lower quality
                     if ($this->cfg['max_size'] && $this->file_size > $this->cfg['max_size']) {
                         $this->compressToMaxSize($this->file['tmp_name'], $this->cfg['max_size']);
-                        $this->file_size = filesize($this->file['tmp_name']);
+                        $this->file_size = files()->size($this->file['tmp_name']);
                     }
                 } catch (Exception $e) {
                     $this->errors[] = \sprintf(__('UPLOAD_ERROR_DIMENSIONS'), $this->cfg['max_width'], $this->cfg['max_height']);
@@ -215,39 +217,43 @@ class Upload
      * Move file to target path
      *
      * @return bool
+     * @throws BindingResolutionException
      */
     public function _move($file_path)
     {
         $dir = \dirname($file_path);
-        if (!file_exists($dir)) {
-            if (!bb_mkdir($dir)) {
+        if (!files()->exists($dir)) {
+            if (!files()->ensureDirectoryExists($dir)) {
                 $this->errors[] = "Cannot create dir: {$dir}";
 
                 return false;
             }
         }
-        if (!@rename($this->file['tmp_name'], $file_path)) {
-            if (!@copy($this->file['tmp_name'], $file_path)) {
+
+        if (!files()->move($this->file['tmp_name'], $file_path)) {
+            if (!files()->copy($this->file['tmp_name'], $file_path)) {
                 $this->errors[] = 'Cannot copy tmp file';
 
                 return false;
             }
-            @unlink($this->file['tmp_name']);
+            files()->delete($this->file['tmp_name']);
         }
-        @chmod($file_path, 0664);
+        files()->chmod($file_path, 0664);
 
-        return file_exists($file_path);
+        return files()->exists($file_path);
     }
 
     /**
      * Compress image to fit max file size by reducing quality
+     * @throws BindingResolutionException
      */
     private function compressToMaxSize(string $path, int $maxSize): void
     {
         $quality = 85;
         $minQuality = 30;
 
-        while (filesize($path) > $maxSize && $quality > $minQuality) {
+        clearstatcache(true, $path);
+        while (files()->size($path) > $maxSize && $quality > $minQuality) {
             $quality = max($quality - 10, $minQuality);
             ImageService::read($path)->save($path, quality: $quality);
             clearstatcache(true, $path);

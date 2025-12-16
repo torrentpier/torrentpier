@@ -10,6 +10,8 @@
 
 namespace TorrentPier\Helpers;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
+
 /**
  * Class CronHelper
  * @package TorrentPier\Helpers
@@ -26,11 +28,12 @@ class CronHelper
 
     /**
      * Unlock cron (time-dependent)
+     * @throws BindingResolutionException
      */
     public static function releaseDeadlock(): void
     {
-        if (is_file(CRON_RUNNING)) {
-            if (TIMENOW - filemtime(CRON_RUNNING) > 2400) {
+        if (files()->isFile(CRON_RUNNING)) {
+            if (TIMENOW - files()->lastModified(CRON_RUNNING) > 2400) {
                 self::enableBoard();
                 self::releaseLockFile();
             }
@@ -39,57 +42,62 @@ class CronHelper
 
     /**
      * Снятие блокировки крона (по файлу)
+     * @throws BindingResolutionException
      */
     public static function releaseLockFile(): void
     {
-        if (is_file(CRON_RUNNING)) {
-            rename(CRON_RUNNING, CRON_ALLOWED);
+        if (files()->isFile(CRON_RUNNING)) {
+            files()->move(CRON_RUNNING, CRON_ALLOWED);
         }
         self::touchLockFile(CRON_ALLOWED);
     }
 
     /**
      * Создание файла блокировки
+     * @throws BindingResolutionException
      */
     public static function touchLockFile(string $lock_file): void
     {
-        file_write('', $lock_file, replace_content: true);
+        files()->put($lock_file, '');
     }
 
     /**
      * Включение форума (при разблокировке крона)
+     * @throws BindingResolutionException
      */
     public static function enableBoard(): void
     {
-        if (is_file(BB_DISABLED)) {
-            rename(BB_DISABLED, BB_ENABLED);
+        if (files()->isFile(BB_DISABLED)) {
+            files()->move(BB_DISABLED, BB_ENABLED);
         }
     }
 
     /**
      * Отключение форума (при блокировке крона)
+     * @throws BindingResolutionException
      */
     public static function disableBoard(): void
     {
-        if (is_file(BB_ENABLED)) {
-            rename(BB_ENABLED, BB_DISABLED);
+        if (files()->isFile(BB_ENABLED)) {
+            files()->move(BB_ENABLED, BB_DISABLED);
         }
     }
 
     /**
      * Проверка наличия файла блокировки
+     * @throws BindingResolutionException
      */
     public static function hasFileLock(): bool
     {
         $lock_obtained = false;
 
-        if (is_file(CRON_ALLOWED)) {
-            $lock_obtained = rename(CRON_ALLOWED, CRON_RUNNING);
-        } elseif (is_file(CRON_RUNNING)) {
+        if (files()->isFile(CRON_ALLOWED)) {
+            $lock_obtained = files()->move(CRON_ALLOWED, CRON_RUNNING);
+        } elseif (files()->isFile(CRON_RUNNING)) {
             self::releaseDeadlock();
-        } elseif (!is_file(CRON_ALLOWED) && !is_file(CRON_RUNNING)) {
-            file_write('', CRON_ALLOWED);
-            $lock_obtained = rename(CRON_ALLOWED, CRON_RUNNING);
+        } elseif (!files()->isFile(CRON_ALLOWED) && !files()->isFile(CRON_RUNNING)) {
+            files()->put(CRON_ALLOWED, '');
+            $lock_obtained = files()->move(CRON_ALLOWED, CRON_RUNNING);
         }
 
         return $lock_obtained;
@@ -97,6 +105,7 @@ class CronHelper
 
     /**
      * Отслеживание запуска задач
+     * @throws BindingResolutionException
      */
     public static function trackRunning(string $mode): void
     {
@@ -107,11 +116,11 @@ class CronHelper
         switch ($mode) {
             case 'start':
                 self::touchLockFile(CRON_RUNNING);
-                file_write('', START_MARK);
+                files()->put(START_MARK, '');
                 break;
             case 'end':
-                if (is_file(START_MARK)) {
-                    unlink(START_MARK);
+                if (files()->isFile(START_MARK)) {
+                    files()->delete(START_MARK);
                 }
                 break;
             default:
@@ -124,6 +133,7 @@ class CronHelper
      *
      * @param bool $force Force run even if an interval not passed
      * @return bool Whether cron was executed
+     * @throws BindingResolutionException
      */
     public static function run(bool $force = false): bool
     {
@@ -132,7 +142,7 @@ class CronHelper
             return false;
         }
 
-        if (is_file(CRON_RUNNING)) {
+        if (files()->isFile(CRON_RUNNING)) {
             return false;
         }
 

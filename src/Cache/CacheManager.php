@@ -11,6 +11,7 @@
 namespace TorrentPier\Cache;
 
 use Exception;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Nette\Caching\Cache;
 use Nette\Caching\Storage;
@@ -362,7 +363,7 @@ class CacheManager
                         return (string)$trace['line'];
                     case 'all':
                     default:
-                        return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
+                        return Str::chopStart($trace['file'], BB_PATH . '/') . '(' . $trace['line'] . ')';
                 }
             }
         }
