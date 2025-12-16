@@ -462,13 +462,6 @@ function mockBbLogFunction(): void
     }
 }
 
-function mockHideBbPathFunction(): void
-{
-    if (!function_exists('hide_bb_path')) {
-        eval('function hide_bb_path($path) { return basename($path); }');
-    }
-}
-
 function mockRequestFunction(): void
 {
     if (!function_exists('request')) {
@@ -489,9 +482,34 @@ function mockRequestFunction(): void
     }
 }
 
+function mockFilesFunction(): void
+{
+    if (!function_exists('files')) {
+        eval('
+            function files() {
+                return new class {
+                    public function exists(string $path): bool {
+                        return file_exists($path);
+                    }
+                    public function delete(string|array $paths): bool {
+                        $paths = is_array($paths) ? $paths : [$paths];
+                        $success = true;
+                        foreach ($paths as $path) {
+                            if (file_exists($path) && !@unlink($path)) {
+                                $success = false;
+                            }
+                        }
+                        return $success;
+                    }
+                };
+            }
+        ');
+    }
+}
+
 // Initialize test environment when Pest loads
 setupTestEnvironment();
 mockTracyFunction();
 mockBbLogFunction();
-mockHideBbPathFunction();
 mockRequestFunction();
+mockFilesFunction();

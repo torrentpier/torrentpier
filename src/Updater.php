@@ -131,7 +131,7 @@ class Updater
         $this->savePath = $path . $versionInfo['assets'][0]['name'];
 
         // Download the file if it doesn't exist or a force flag is set
-        if (!is_file($this->savePath) || $force) {
+        if (!files()->isFile($this->savePath) || $force) {
             try {
                 $success = $this->httpClient->downloadWithProgress(
                     $downloadLink,
@@ -139,13 +139,13 @@ class Updater
                     $progressCallback,
                 );
 
-                if (!$success || !is_file($this->savePath)) {
+                if (!$success || !files()->isFile($this->savePath)) {
                     throw new Exception("Failed to save TorrentPier build file to: {$this->savePath}");
                 }
             } catch (HttpClientException $e) {
                 // Clean up failed download
-                if (is_file($this->savePath)) {
-                    @unlink($this->savePath);
+                if (files()->isFile($this->savePath)) {
+                    files()->delete($this->savePath);
                 }
 
                 throw new Exception("Failed to download release: {$e->getMessage()}", 0, $e);
@@ -153,7 +153,7 @@ class Updater
         }
 
         // Verify a file exists and has content
-        if (!is_file($this->savePath) || filesize($this->savePath) === 0) {
+        if (!files()->isFile($this->savePath) || files()->size($this->savePath) === 0) {
             throw new Exception("Downloaded file is empty or does not exist: {$this->savePath}");
         }
 

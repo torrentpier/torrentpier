@@ -226,12 +226,12 @@ final class HttpClient
 
             // Check if the download was successful
             if ($response->getStatusCode() >= 200 && $response->getStatusCode() < 300) {
-                return file_exists($savePath);
+                return files()->exists($savePath);
             }
 
             // Remove the failed download file if it exists
-            if (file_exists($savePath)) {
-                @unlink($savePath);
+            if (files()->exists($savePath)) {
+                files()->delete($savePath);
             }
 
             throw new HttpClientException(

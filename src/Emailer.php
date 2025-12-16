@@ -11,6 +11,7 @@
 namespace TorrentPier;
 
 use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport\SendmailTransport;
@@ -152,6 +153,7 @@ class Emailer
 
     /**
      * Initialize Twig environment
+     * @throws BindingResolutionException
      */
     private function getTwig(): Environment
     {
@@ -159,11 +161,11 @@ class Emailer
             $loader = new FilesystemLoader;
 
             // Add email_templates directories for all languages
-            $languages = glob(LANG_ROOT_DIR . '/*', GLOB_ONLYDIR) ?: [];
+            $languages = files()->glob(LANG_ROOT_DIR . '/*', GLOB_ONLYDIR) ?: [];
             foreach ($languages as $langPath) {
                 $lang = basename($langPath);
                 $templatePath = LANG_ROOT_DIR . '/' . $lang . '/email_templates';
-                if (is_dir($templatePath)) {
+                if (files()->isDirectory($templatePath)) {
                     try {
                         $loader->addPath($templatePath, $lang);
                     } catch (LoaderError) {
@@ -175,7 +177,7 @@ class Emailer
             // Add default language namespace
             $defaultLang = config()->get('default_lang');
             $defaultPath = LANG_ROOT_DIR . '/' . $defaultLang . '/email_templates';
-            if (is_dir($defaultPath)) {
+            if (files()->isDirectory($defaultPath)) {
                 try {
                     $loader->addPath($defaultPath);
                 } catch (LoaderError) {
@@ -185,8 +187,8 @@ class Emailer
 
             // Ensure the cache directory exists
             $cacheDir = TEMPLATES_CACHE_DIR;
-            if (!is_dir($cacheDir)) {
-                @mkdir($cacheDir, 0775, true);
+            if (!files()->isDirectory($cacheDir)) {
+                files()->makeDirectory($cacheDir, 0775, true);
             }
 
             self::$twig = new Environment($loader, [
