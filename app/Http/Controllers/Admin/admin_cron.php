@@ -95,7 +95,7 @@ switch ($mode) {
         ]);
 
         //detect cron status
-        if (is_file(CRON_RUNNING)) {
+        if (files()->isFile(CRON_RUNNING)) {
             template()->assign_vars([
                 'CRON_RUNNING' => true,
             ]);
@@ -103,8 +103,8 @@ switch ($mode) {
         break;
 
     case 'repair':
-        if (is_file(CRON_RUNNING)) {
-            rename(CRON_RUNNING, CRON_ALLOWED);
+        if (files()->isFile(CRON_RUNNING)) {
+            files()->move(CRON_RUNNING, CRON_ALLOWED);
         }
         redirect('admin/' . basename(__FILE__) . '?mode=list');
         break;

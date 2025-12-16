@@ -461,11 +461,11 @@ if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
 
 // Allow cron
 if (IS_AM) {
-    if (is_file(CRON_RUNNING)) {
-        if (is_file(CRON_ALLOWED)) {
-            unlink(CRON_ALLOWED);
+    if (files()->isFile(CRON_RUNNING)) {
+        if (files()->isFile(CRON_ALLOWED)) {
+            files()->delete(CRON_ALLOWED);
         }
-        rename(CRON_RUNNING, CRON_ALLOWED);
+        files()->move(CRON_RUNNING, CRON_ALLOWED);
     }
 }
 

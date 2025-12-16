@@ -79,7 +79,7 @@ if (request()->query->get('pane') === 'left') {
     template()->assign_vars([
         'TPL_ADMIN_MAIN' => true,
         'ADMIN_LOCK' => (bool)config()->get('board_disable'),
-        'ADMIN_LOCK_CRON' => is_file(BB_DISABLED),
+        'ADMIN_LOCK_CRON' => files()->isFile(BB_DISABLED),
     ]);
 
     // Check for updates
@@ -106,15 +106,12 @@ if (request()->query->get('pane') === 'left') {
     $users_per_day = sprintf('%.2f', $total_users / $boarddays);
 
     $avatar_dir_size = 0;
+    $avatarPath = config()->get('avatars.upload_path');
 
-    if ($avatar_dir = opendir(config()->get('avatars.upload_path'))) {
-        while ($file = readdir($avatar_dir)) {
-            if ($file != '.' && $file != '..') {
-                $avatar_dir_size += @filesize(config()->get('avatars.upload_path') . $file);
-            }
+    if (files()->isDirectory($avatarPath)) {
+        foreach (files()->files($avatarPath) as $file) {
+            $avatar_dir_size += files()->size($file);
         }
-        closedir($avatar_dir);
-
         $avatar_dir_size = humn_size($avatar_dir_size);
     } else {
         $avatar_dir_size = __('NOT_AVAILABLE');

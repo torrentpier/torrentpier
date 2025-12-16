@@ -61,7 +61,7 @@ class ViewTorrentController
         }
 
         $filename = Attachment::getPath($topicId);
-        if (!is_file($filename) || !$fileContents = file_get_contents($filename)) {
+        if (!files()->isFile($filename) || !$fileContents = files()->get($filename)) {
             return $this->error(__('ERROR_NO_ATTACHMENT') . "\n\n" . htmlCHR($filename));
         }
 
