@@ -289,47 +289,44 @@ function simple_header(?bool $set = null): bool
  */
 function bitfields(?string $type = null): array
 {
-    static $bf = null;
-    if ($bf === null) {
-        $bf = [
-            'forum_perm' => [
-                'auth_view' => AUTH_VIEW,
-                'auth_read' => AUTH_READ,
-                'auth_mod' => AUTH_MOD,
-                'auth_post' => AUTH_POST,
-                'auth_reply' => AUTH_REPLY,
-                'auth_edit' => AUTH_EDIT,
-                'auth_delete' => AUTH_DELETE,
-                'auth_sticky' => AUTH_STICKY,
-                'auth_announce' => AUTH_ANNOUNCE,
-                'auth_vote' => AUTH_VOTE,
-                'auth_pollcreate' => AUTH_POLLCREATE,
-                'auth_attachments' => AUTH_ATTACH,
-                'auth_download' => AUTH_DOWNLOAD,
-            ],
-            'user_opt' => [
-                'user_viewemail' => 0,
-                'dis_sig' => 1,
-                'dis_avatar' => 2,
-                'dis_pm' => 3,
-                'user_viewonline' => 4,
-                'user_notify' => 5,
-                'user_notify_pm' => 6,
-                'dis_passkey' => 7,
-                'user_porn_forums' => 8,
-                'user_callseed' => 9,
-                'user_empty' => 10,
-                'dis_topic' => 11,
-                'dis_post' => 12,
-                'dis_post_edit' => 13,
-                'user_dls' => 14,
-                'user_retracker' => 15,
-                'user_hide_torrent_client' => 16,
-                'user_hide_peer_country' => 17,
-                'user_hide_peer_username' => 18,
-            ],
-        ];
-    }
+    $bf = once(fn () => [
+        'forum_perm' => [
+            'auth_view' => AUTH_VIEW,
+            'auth_read' => AUTH_READ,
+            'auth_mod' => AUTH_MOD,
+            'auth_post' => AUTH_POST,
+            'auth_reply' => AUTH_REPLY,
+            'auth_edit' => AUTH_EDIT,
+            'auth_delete' => AUTH_DELETE,
+            'auth_sticky' => AUTH_STICKY,
+            'auth_announce' => AUTH_ANNOUNCE,
+            'auth_vote' => AUTH_VOTE,
+            'auth_pollcreate' => AUTH_POLLCREATE,
+            'auth_attachments' => AUTH_ATTACH,
+            'auth_download' => AUTH_DOWNLOAD,
+        ],
+        'user_opt' => [
+            'user_viewemail' => 0,
+            'dis_sig' => 1,
+            'dis_avatar' => 2,
+            'dis_pm' => 3,
+            'user_viewonline' => 4,
+            'user_notify' => 5,
+            'user_notify_pm' => 6,
+            'dis_passkey' => 7,
+            'user_porn_forums' => 8,
+            'user_callseed' => 9,
+            'user_empty' => 10,
+            'dis_topic' => 11,
+            'dis_post' => 12,
+            'dis_post_edit' => 13,
+            'user_dls' => 14,
+            'user_retracker' => 15,
+            'user_hide_torrent_client' => 16,
+            'user_hide_peer_country' => 17,
+            'user_hide_peer_username' => 18,
+        ],
+    ]);
 
     return $type === null ? $bf : ($bf[$type] ?? []);
 }

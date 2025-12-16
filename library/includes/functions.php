@@ -8,6 +8,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Str;
 
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
@@ -844,37 +845,36 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
     return build_select($name, $select, $selected, $max_length, $multiple_size, $js);
 }
 
-function setup_style()
+/**
+ * @throws BindingResolutionException
+ */
+function setup_style(): void
 {
-    static $initialized = false;
-    if ($initialized) {
-        return;
-    }
-    $initialized = true;
+    once(function () {
+        // AdminCP works only with the default template
+        $tpl_dir_name = defined('IN_ADMIN') ? 'default' : basename(config()->get('tpl_name'));
+        $stylesheet = defined('IN_ADMIN') ? 'main.css' : basename(config()->get('stylesheet'));
 
-    // AdminCP works only with default template
-    $tpl_dir_name = defined('IN_ADMIN') ? 'default' : basename(config()->get('tpl_name'));
-    $stylesheet = defined('IN_ADMIN') ? 'main.css' : basename(config()->get('stylesheet'));
-
-    if (!IS_GUEST && !empty(userdata('tpl_name'))) {
-        foreach (config()->get('templates') as $folder => $name) {
-            if (userdata('tpl_name') == $folder) {
-                $tpl_dir_name = basename(userdata('tpl_name'));
+        if (!IS_GUEST && !empty(userdata('tpl_name'))) {
+            foreach (config()->get('templates') as $folder => $name) {
+                if (userdata('tpl_name') == $folder) {
+                    $tpl_dir_name = basename(userdata('tpl_name'));
+                }
             }
         }
-    }
 
-    template(TEMPLATES_DIR . '/' . $tpl_dir_name);
+        template(TEMPLATES_DIR . '/' . $tpl_dir_name);
 
-    template()->assign_vars([
-        'BB_ROOT' => BB_ROOT,
-        'SPACER' => make_url('assets/images/spacer.gif'),
-        'STYLESHEET' => asset_url('css/' . $stylesheet, 'css'),
-        'EXT_LINK_NEW_WIN' => config()->get('ext_link_new_win'),
-        'TPL_DIR' => make_url('assets/css/'),
-        'SITE_URL' => make_url('/'),
-        'ASSETS_URL' => make_url('assets/'),
-    ]);
+        template()->assign_vars([
+            'BB_ROOT' => BB_ROOT,
+            'SPACER' => make_url('assets/images/spacer.gif'),
+            'STYLESHEET' => asset_url('css/' . $stylesheet, 'css'),
+            'EXT_LINK_NEW_WIN' => config()->get('ext_link_new_win'),
+            'TPL_DIR' => make_url('assets/css/'),
+            'SITE_URL' => make_url('/'),
+            'ASSETS_URL' => make_url('assets/'),
+        ]);
+    });
 }
 
 /**
