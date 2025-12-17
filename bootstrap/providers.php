@@ -31,8 +31,13 @@ return [
     // Error handling should be early to catch boot errors
     App\Providers\ErrorHandlerServiceProvider::class,
 
+    // Events must be registered before Eloquent (required for model events)
+    App\Providers\EventServiceProvider::class,
+
     // Database and cache are core infrastructure
     App\Providers\DatabaseServiceProvider::class,
+    // Eloquent ORM (works alongside Nette Database for gradual migration)
+    App\Providers\EloquentServiceProvider::class,
     App\Providers\CacheServiceProvider::class,
 
     // Filesystem operations
