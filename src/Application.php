@@ -230,6 +230,14 @@ class Application extends Container
     }
 
     /**
+     * Get the path to the cached config file
+     */
+    public function getCachedConfigPath(): string
+    {
+        return $this->storagePath('framework/cache/config.php');
+    }
+
+    /**
      * Get the path to the resources directory
      */
     public function resourcePath(string $path = ''): string

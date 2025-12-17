@@ -23,6 +23,7 @@ use TorrentPier\Application;
  * - GLOBALS injection protection
  * - Base time constants (TIMESTART, TIMENOW)
  * - Path constants (BB_PATH, BB_ROOT)
+ * - Application constants from defines.php (storage paths, table names, etc.)
  * - Security headers (X-Frame-Options)
  * - Timezone configuration (UTC)
  * - Environment variables from .env file
@@ -50,6 +51,9 @@ class LoadEnvironmentVariables
         if (!\defined('BB_ROOT')) {
             \define('BB_ROOT', './');
         }
+
+        // Load constant definitions (paths, table names, etc.)
+        require_once $app->basePath('library/defines.php');
 
         // Security headers (only for HTTP requests)
         if (!$app->runningInConsole()) {
