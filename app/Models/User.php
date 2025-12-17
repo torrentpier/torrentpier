@@ -162,6 +162,22 @@ class User extends Model
     }
 
     /**
+     * Check if the user is a bot
+     */
+    public function isBot(): bool
+    {
+        return $this->user_id === BOT_UID;
+    }
+
+    /**
+     * Check if the user is a system user (guest, bot)
+     */
+    public function isSystemUser(): bool
+    {
+        return $this->isGuest() || $this->isBot();
+    }
+
+    /**
      * Check if the user is active
      */
     public function isActive(): bool
