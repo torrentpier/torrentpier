@@ -10,111 +10,20 @@
 
 namespace TorrentPier;
 
+use Illuminate\Config\Repository;
+use Illuminate\Contracts\Config\Repository as RepositoryContract;
 use InvalidArgumentException;
 
 /**
  * Configuration management class
  *
- * Encapsulates the global $bb_cfg array and provides methods to access configuration values
+ * Extends Illuminate\Config\Repository for Laravel 12 compatibility
+ * while providing TorrentPier-specific database configuration methods.
  */
-class Config
+class Config extends Repository implements RepositoryContract
 {
-    private array $config = [];
-
-    public function __construct(array $config = [])
-    {
-        $this->config = $config;
-    }
-
-    /**
-     * Magic method to allow property access
-     */
-    public function __get(string $key): mixed
-    {
-        return $this->get($key);
-    }
-
-    /**
-     * Magic method to allow property setting
-     */
-    public function __set(string $key, mixed $value): void
-    {
-        $this->set($key, $value);
-    }
-
-    /**
-     * Magic method to check if property exists
-     */
-    public function __isset(string $key): bool
-    {
-        return $this->has($key);
-    }
-
-    /**
-     * Get a configuration value by key
-     * Supports dot notation for nested arrays (e.g., 'db.host')
-     */
-    public function get(string $key, mixed $default = null): mixed
-    {
-        if (str_contains($key, '.')) {
-            return $this->getNestedValue($key, $default);
-        }
-
-        return $this->config[$key] ?? $default;
-    }
-
-    /**
-     * Set a configuration value by key
-     * Supports dot notation for nested arrays
-     */
-    public function set(string $key, mixed $value): void
-    {
-        if (str_contains($key, '.')) {
-            $this->setNestedValue($key, $value);
-        } else {
-            $this->config[$key] = $value;
-        }
-    }
-
-    /**
-     * Check if a configuration key exists
-     * Supports dot notation for nested arrays
-     */
-    public function has(string $key): bool
-    {
-        if (str_contains($key, '.')) {
-            return $this->getNestedValue($key) !== null;
-        }
-
-        return \array_key_exists($key, $this->config);
-    }
-
-    /**
-     * Get all configuration values
-     */
-    public function all(): array
-    {
-        return $this->config;
-    }
-
-    /**
-     * Merge additional configuration values
-     *
-     * Uses array_replace_recursive to properly override scalar values
-     * (array_merge_recursive converts scalar conflicts to arrays, which breaks configs)
-     */
-    public function merge(array $config): void
-    {
-        $this->config = array_replace_recursive($this->config, $config);
-    }
-
     /**
      * Load configuration from the database table
-     *
-     * @param string $table Database table name
-     * @param bool $fromDb Force load from database (skip cache)
-     * @param bool $updateCache Update cache after loading
-     * @return array Configuration array
      */
     public function loadFromDatabase(string $table, bool $fromDb = false, bool $updateCache = true): array
     {
@@ -141,9 +50,6 @@ class Config
 
     /**
      * Update configuration in database table
-     *
-     * @param array $params Key-value pairs to update
-     * @param string $table Database table name
      */
     public function updateDatabase(array $params, string $table): void
     {
@@ -169,43 +75,20 @@ class Config
      */
     public function getSection(string $section): array
     {
-        return $this->config[$section] ?? [];
+        return $this->get($section, []);
     }
 
     /**
-     * Get a nested value using dot notation
+     * Merge additional configuration values
      */
-    private function getNestedValue(string $key, mixed $default = null): mixed
+    public function merge(array $config): void
     {
-        $keys = explode('.', $key);
-        $value = $this->config;
-
-        foreach ($keys as $k) {
-            if (!\is_array($value) || !\array_key_exists($k, $value)) {
-                return $default;
+        foreach ($config as $key => $value) {
+            if (\is_array($value) && \is_array($existing = $this->get($key))) {
+                $value = array_replace_recursive($existing, $value);
             }
-            $value = $value[$k];
+            $this->set($key, $value);
         }
-
-        return $value;
-    }
-
-    /**
-     * Set a nested value using dot notation
-     */
-    private function setNestedValue(string $key, mixed $value): void
-    {
-        $keys = explode('.', $key);
-        $target = &$this->config;
-
-        foreach ($keys as $k) {
-            if (!isset($target[$k]) || !\is_array($target[$k])) {
-                $target[$k] = [];
-            }
-            $target = &$target[$k];
-        }
-
-        $target = $value;
     }
 
     /**
