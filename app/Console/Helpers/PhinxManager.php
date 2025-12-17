@@ -182,7 +182,7 @@ class PhinxManager
                 'default_migration_table' => \defined('BB_MIGRATIONS') ? BB_MIGRATIONS : 'bb_migrations',
                 'default_environment' => $environment,
                 'production' => $dbConfig,
-                'development' => $dbConfig,
+                'local' => $dbConfig,
             ],
             'version_order' => 'creation',
         ];
