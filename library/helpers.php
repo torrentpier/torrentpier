@@ -270,12 +270,28 @@ function theme_images(?string $key = null): mixed
 }
 
 /**
- * Get the Database instance
+ * Get the Database instance (Nette Database)
  * @throws BindingResolutionException
  */
 function DB(): TorrentPier\Database\Database
 {
     return app(TorrentPier\Database\Database::class);
+}
+
+/**
+ * Get Eloquent Capsule Manager instance
+ *
+ * Use this to access Eloquent ORM directly:
+ * - eloquent()->connection() - get PDO connection
+ * - eloquent()->table('bb_users') - query builder
+ *
+ * For models, use them directly: User::find(1), Topic::where(...)->get()
+ *
+ * @throws BindingResolutionException
+ */
+function eloquent(): Illuminate\Database\Capsule\Manager
+{
+    return app(Illuminate\Database\Capsule\Manager::class);
 }
 
 /**

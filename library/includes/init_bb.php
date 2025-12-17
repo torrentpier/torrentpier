@@ -138,7 +138,7 @@ define('BB_POLL_USERS', 'bb_poll_users');
 define('BB_POLL_VOTES', 'bb_poll_votes');
 define('BB_POSTS_SEARCH', 'bb_posts_search');
 define('BB_POSTS', 'bb_posts');
-define('BB_POSTS_TEXT', 'bb_posts_text');
+define('BB_POSTS_TEXT', 'bb_post_texts');
 define('BB_POSTS_HTML', 'bb_posts_html');
 define('BB_PRIVMSGS', 'bb_privmsgs');
 define('BB_PRIVMSGS_TEXT', 'bb_privmsgs_text');
