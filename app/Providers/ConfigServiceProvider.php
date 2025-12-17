@@ -12,34 +12,29 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use RuntimeException;
+use Illuminate\Contracts\Config\Repository as RepositoryContract;
 use TorrentPier\Config;
 use TorrentPier\ServiceProvider;
 
 /**
  * Configuration Service Provider
  *
- * Registers the configuration service. This provider must be registered
- * first as other providers depend on the configuration being available.
+ * Config is already instantiated by LoadConfiguration bootstrapper.
+ * This provider just ensures aliases are set up correctly.
  */
 class ConfigServiceProvider extends ServiceProvider
 {
     /**
-     * Register the configuration service
+     * Register config aliases
      */
     public function register(): void
     {
-        $this->app->singleton(Config::class, function ($app) {
-            if (!$app->bound('config.data')) {
-                throw new RuntimeException(
-                    'Config data not loaded. Ensure LoadConfiguration bootstrapper runs before service providers.',
-                );
-            }
-
-            return new Config($app->make('config.data'));
-        });
+        if (!$this->app->bound(Config::class)) {
+            return;
+        }
 
         $this->app->alias(Config::class, 'config');
+        $this->app->alias(Config::class, RepositoryContract::class);
     }
 
     /**
@@ -51,6 +46,7 @@ class ConfigServiceProvider extends ServiceProvider
     {
         return [
             Config::class,
+            RepositoryContract::class,
             'config',
         ];
     }
