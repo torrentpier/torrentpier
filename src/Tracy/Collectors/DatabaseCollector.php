@@ -10,10 +10,12 @@
 
 namespace TorrentPier\Tracy\Collectors;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Capsule\Manager as Capsule;
 use Throwable;
 
 /**
- * Collects database query debug information from DatabaseDebugger
+ * Collects database query debug information from DatabaseDebugger and Eloquent
  */
 class DatabaseCollector
 {
@@ -21,6 +23,7 @@ class DatabaseCollector
 
     /**
      * Collect all database debug data
+     * @throws BindingResolutionException
      */
     public function collect(): array
     {
@@ -35,6 +38,7 @@ class DatabaseCollector
             'legacy_count' => 0,
             'slow_count' => 0,
             'nette_count' => 0,
+            'eloquent_count' => 0,
         ];
 
         $slowThreshold = \defined('SQL_SLOW_QUERY_TIME') ? SQL_SLOW_QUERY_TIME : 3.0;
@@ -56,7 +60,7 @@ class DatabaseCollector
                 'legacy_queries' => $debugger->legacy_queries ?? [],
             ];
 
-            // Check if EXPLAIN collection is enabled via cookie
+            // Check if an EXPLAIN collection is enabled via cookie
             $collectExplain = (bool)request()->cookies->get('tracy_explain');
 
             // Process individual queries
@@ -102,13 +106,17 @@ class DatabaseCollector
             // Database not available
         }
 
+        // Collect Eloquent queries
+        $this->collectEloquentQueries($data, $slowThreshold);
+
         $this->cachedData = $data;
 
         return $data;
     }
 
     /**
-     * Get summary statistics for tab display
+     * Get summary statistics for the tab display
+     * @throws BindingResolutionException
      */
     public function getStats(): array
     {
@@ -120,36 +128,88 @@ class DatabaseCollector
             'legacy_count' => $data['legacy_count'],
             'slow_count' => $data['slow_count'],
             'nette_count' => $data['nette_count'],
+            'eloquent_count' => $data['eloquent_count'],
             'server_count' => \count($data['servers']),
             'explain_enabled' => (bool)request()->cookies->get('tracy_explain'),
         ];
     }
 
     /**
-     * Get EXPLAIN results for a query
+     * Collect Eloquent ORM queries
+     * @throws BindingResolutionException
+     */
+    private function collectEloquentQueries(array &$data, float $slowThreshold): void
+    {
+        $eloquentQueries = EloquentCollector::getQueries();
+
+        if (empty($eloquentQueries)) {
+            return;
+        }
+
+        // Check if an EXPLAIN collection is enabled via cookie
+        $collectExplain = (bool)request()->cookies->get('tracy_explain');
+
+        $serverName = 'Eloquent ORM';
+        $serverData = [
+            'name' => $serverName,
+            'engine' => 'Eloquent',
+            'version' => '',
+            'database' => '',
+            'host' => '',
+            'num_queries' => EloquentCollector::getCount(),
+            'total_time' => EloquentCollector::getTotalTime(),
+            'queries' => [],
+            'legacy_queries' => [],
+        ];
+
+        foreach ($eloquentQueries as $idx => $query) {
+            $isSlow = $query['time'] > $slowThreshold;
+
+            $queryData = [
+                'id' => $idx,
+                'sql' => $query['sql'],
+                'time' => $query['time'],
+                'source' => $query['source'],
+                'file' => $query['file'],
+                'line' => $query['line'],
+                'info' => '',
+                'is_legacy' => false,
+                'is_nette' => false,
+                'is_eloquent' => true,
+                'is_slow' => $isSlow,
+                'explain' => null,
+            ];
+
+            // Collect EXPLAIN if enabled
+            if ($collectExplain && $this->canExplain($query['sql'])) {
+                $queryData['explain'] = $this->explainEloquentQuery($query['sql']);
+            }
+
+            $serverData['queries'][] = $queryData;
+
+            if ($isSlow) {
+                $data['slow_count']++;
+            }
+        }
+
+        $data['servers'][$serverName] = $serverData;
+        $data['total_queries'] += $serverData['num_queries'];
+        $data['total_time'] += $serverData['total_time'];
+        $data['eloquent_count'] = $serverData['num_queries'];
+    }
+
+    /**
+     * Get EXPLAIN results for a query (Nette connection)
      */
     public function explainQuery(string $sql): ?array
     {
         try {
-            $db = DB();
-
-            // Remove debug comments
-            $sql = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $sql);
-            $sql = trim($sql);
-
-            // Convert UPDATE/DELETE to SELECT for EXPLAIN
-            if (preg_match('#UPDATE ([a-z0-9_]+).*?WHERE(.*)#si', $sql, $m)) {
-                $sql = "SELECT * FROM {$m[1]} WHERE {$m[2]}";
-            } elseif (preg_match('#DELETE FROM ([a-z0-9_]+).*?WHERE(.*)#si', $sql, $m)) {
-                $sql = "SELECT * FROM {$m[1]} WHERE {$m[2]}";
-            }
-
-            // Only EXPLAIN SELECT queries
-            if (!str_starts_with(strtoupper($sql), 'SELECT')) {
+            $sql = $this->prepareExplainSql($sql);
+            if ($sql === null) {
                 return null;
             }
 
-            $result = $db->connection->query("EXPLAIN {$sql}");
+            $result = DB()->connection->query("EXPLAIN $sql");
             $rows = [];
             while ($row = $result->fetch()) {
                 $rows[] = (array)$row;
@@ -159,6 +219,58 @@ class DatabaseCollector
         } catch (Throwable) {
             return null;
         }
+    }
+
+    /**
+     * Get EXPLAIN results for an Eloquent query
+     */
+    public function explainEloquentQuery(string $sql): ?array
+    {
+        try {
+            if (!class_exists(Capsule::class)) {
+                return null;
+            }
+
+            $connection = Capsule::connection();
+            if ($connection === null) {
+                return null;
+            }
+
+            $sql = $this->prepareExplainSql($sql);
+            if ($sql === null) {
+                return null;
+            }
+
+            $results = $connection->select("EXPLAIN $sql");
+
+            return array_map(fn ($row) => (array)$row, $results);
+        } catch (Throwable) {
+            return null;
+        }
+    }
+
+    /**
+     * Prepare SQL for EXPLAIN (cleanup, convert UPDATE/DELETE to SELECT)
+     */
+    private function prepareExplainSql(string $sql): ?string
+    {
+        // Remove debug comments
+        $sql = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $sql);
+        $sql = trim($sql);
+
+        // Convert UPDATE/DELETE to SELECT for EXPLAIN
+        if (preg_match('#UPDATE ([a-z0-9_]+).*?WHERE(.*)#si', $sql, $m)) {
+            $sql = "SELECT * FROM $m[1] WHERE $m[2]";
+        } elseif (preg_match('#DELETE FROM ([a-z0-9_]+).*?WHERE(.*)#si', $sql, $m)) {
+            $sql = "SELECT * FROM $m[1] WHERE $m[2]";
+        }
+
+        // Only EXPLAIN SELECT queries
+        if (!str_starts_with(strtoupper($sql), 'SELECT')) {
+            return null;
+        }
+
+        return $sql;
     }
 
     /**

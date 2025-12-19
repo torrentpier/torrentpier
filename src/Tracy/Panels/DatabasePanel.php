@@ -101,6 +101,9 @@ class DatabasePanel implements IBarPanel
         // Stat bar
         $html .= '<div class="tp-db-stats">';
         $html .= '<div class="tp-stat"><span class="tp-stat-value">' . $data['total_queries'] . '</span><span class="tp-stat-label">Queries</span></div>';
+        if ($data['eloquent_count'] > 0) {
+            $html .= '<div class="tp-stat tp-stat-eloquent"><span class="tp-stat-value">' . $data['eloquent_count'] . '</span><span class="tp-stat-label">Eloquent</span></div>';
+        }
         if ($data['nette_count'] > 0) {
             $html .= '<div class="tp-stat tp-stat-nette"><span class="tp-stat-value">' . $data['nette_count'] . '</span><span class="tp-stat-label">Nette Explorer</span></div>';
         }
@@ -205,6 +208,9 @@ class DatabasePanel implements IBarPanel
         // Badges
         if ($query['is_legacy']) {
             $html .= '<span class="tp-badge tp-badge-legacy">[LEGACY]</span> ';
+        }
+        if ($query['is_eloquent'] ?? false) {
+            $html .= '<span class="tp-badge tp-badge-eloquent">[Eloquent]</span> ';
         }
         if ($query['is_nette']) {
             $html .= '<span class="tp-badge tp-badge-nette">[Nette Explorer]</span> ';
@@ -329,6 +335,7 @@ class DatabasePanel implements IBarPanel
             .tp-stat-label { font-size: 11px; color: #666; text-transform: uppercase; }
             .tp-stat-warning .tp-stat-value { color: #B00; }
             .tp-stat-nette .tp-stat-value { color: #155724; }
+            .tp-stat-eloquent .tp-stat-value { color: #FF2D20; }
             .tp-alert { padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; }
             .tp-alert-danger, .tp-alert-danger:hover { background: #f8d7da !important; border: 1px solid #f5c6cb; color: #721c24 !important; }
             .tp-db-server { margin-bottom: 20px; }
@@ -348,6 +355,7 @@ class DatabasePanel implements IBarPanel
             .tp-sql-code { display: block; font-size: 11px; word-break: break-all; white-space: pre-wrap; }
             .tp-badge { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-right: 5px; }
             .tp-badge-legacy, .tp-badge-legacy:hover { background: #f8d7da !important; color: #721c24 !important; }
+            .tp-badge-eloquent, .tp-badge-eloquent:hover { background: #fff0ed !important; color: #FF2D20 !important; border: 1px solid #FF2D20; }
             .tp-badge-nette, .tp-badge-nette:hover { background: #d4edda !important; color: #155724 !important; }
             .tp-query-actions { margin-top: 5px; }
             .tp-btn { padding: 3px 8px; font-size: 10px; border: 1px solid #ccc; background: #fff; border-radius: 3px; cursor: pointer; margin-right: 5px; }

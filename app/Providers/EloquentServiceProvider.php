@@ -25,6 +25,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Eloquent\Model;
 use TorrentPier\ServiceProvider;
+use TorrentPier\Tracy\Collectors\EloquentCollector;
 
 /**
  * Eloquent Service Provider
@@ -70,12 +71,19 @@ class EloquentServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Ensure Capsule is initialized
-        $this->app->make(Capsule::class);
+        $capsule = $this->app->make(Capsule::class);
 
         // Configure Eloquent strict mode for development
         $debugEnabled = (bool)config()->get('debug.enable', false);
         Model::preventLazyLoading($debugEnabled);
         Model::preventSilentlyDiscardingAttributes($debugEnabled);
+
+        // Register query listener for Tracy debug bar
+        if ($debugEnabled) {
+            $capsule->getConnection()->listen(function ($query) {
+                EloquentCollector::recordQuery($query->sql, $query->bindings, $query->time);
+            });
+        }
 
         // Register observers for ManticoreSearch synchronization
         $this->registerObservers();
