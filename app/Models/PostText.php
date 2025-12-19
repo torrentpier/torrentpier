@@ -27,7 +27,6 @@ use Illuminate\Support\Carbon;
 class PostText extends Model
 {
     protected $primaryKey = 'post_id';
-
     public $incrementing = false;
 
     /**
