@@ -56,6 +56,10 @@ class UserObserver
 
     public function deleted(User $user): void
     {
+        if ($user->isSystemUser()) {
+            return;
+        }
+
         $this->manticore->deleteUser($user->user_id);
     }
 }
