@@ -28,8 +28,6 @@ if (request()->attributes->get('semantic_route') && request()->attributes->get('
     TorrentPier\Router\SemanticUrl\UrlBuilder::assertCanonical('members', $user_id, $profiledata['username']);
 }
 
-$profiledata['user_birthday'] = $profiledata['user_birthday']->format('Y-m-d');
-
 if (!$ranks = datastore()->get('ranks')) {
     datastore()->update('ranks');
     $ranks = datastore()->get('ranks');

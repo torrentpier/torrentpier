@@ -238,8 +238,6 @@ class User
             }
         }
 
-        $this->data['user_birthday'] = $this->data['user_birthday']->format('Y-m-d');
-
         return $this->data;
     }
 

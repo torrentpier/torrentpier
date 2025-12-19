@@ -8,6 +8,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use App\Models\User;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -744,39 +745,34 @@ function clean_username($username)
 
 /**
  * Get Userdata
- *
- * @return array|bool
  */
-function get_userdata(int|string $u, bool $is_name = false, bool $allow_guest = false)
+function get_userdata(int|string $u, bool $is_name = false, bool $allow_guest = false): array|false
 {
     if (empty($u)) {
         return false;
     }
 
-    if (!$is_name) {
-        if ((int)$u === GUEST_UID && $allow_guest) {
-            if ($u_data = CACHE('bb_cache')->get('guest_userdata')) {
-                return $u_data;
-            }
+    if (!$is_name && (int)$u === GUEST_UID && $allow_guest) {
+        if ($cached = CACHE('bb_cache')->get('guest_userdata')) {
+            return $cached;
         }
-
-        $where_sql = 'WHERE user_id = ' . (int)$u;
-    } else {
-        $where_sql = "WHERE username = '" . DB()->escape(clean_username($u)) . "'";
     }
 
-    $exclude_anon_sql = (!$allow_guest) ? 'AND user_id != ' . GUEST_UID : '';
-    $sql = 'SELECT * FROM ' . BB_USERS . " {$where_sql} {$exclude_anon_sql} LIMIT 1";
+    $user = $is_name
+        ? User::where('username', clean_username($u))->first()
+        : User::find($u);
 
-    if (!$u_data = DB()->fetch_row($sql)) {
+    if (!$user || (!$allow_guest && $user->user_id === GUEST_UID)) {
         return false;
     }
 
-    if ((int)$u_data['user_id'] === GUEST_UID) {
-        CACHE('bb_cache')->set('guest_userdata', $u_data);
+    $userData = $user->makeVisible($user->getHidden())->toArray();
+
+    if ($user->user_id === GUEST_UID) {
+        CACHE('bb_cache')->set('guest_userdata', $userData);
     }
 
-    return $u_data;
+    return $userData;
 }
 
 function make_jumpbox(): void

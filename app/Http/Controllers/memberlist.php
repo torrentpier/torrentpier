@@ -8,6 +8,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use App\Models\User;
+
 /*
  * ===========================================================================
  * Refactor to Modern Controller
@@ -72,56 +74,44 @@ foreach ($role_select as $key => $value) {
 }
 $select_sort_role .= '</select>';
 
-switch ($mode) {
-    case 'username':
-        $order_by = "username {$sort_order} LIMIT {$start}, " . config()->get('topics_per_page');
-        break;
-    case 'location':
-        $order_by = "user_from {$sort_order} LIMIT {$start}, " . config()->get('topics_per_page');
-        break;
-    case 'posts':
-        $order_by = "user_posts {$sort_order} LIMIT {$start}, " . config()->get('topics_per_page');
-        break;
-    case 'email':
-        $order_by = "user_email {$sort_order} LIMIT {$start}, " . config()->get('topics_per_page');
-        break;
-    case 'website':
-        $order_by = "user_website {$sort_order} LIMIT {$start}, " . config()->get('topics_per_page');
-        break;
-    case 'topten':
-        $order_by = "user_posts {$sort_order} LIMIT 10";
-        break;
-    case 'joined':
-    default:
-        $order_by = "user_regdate {$sort_order} LIMIT {$start}, " . config()->get('topics_per_page');
-        break;
-}
-
-$where_sql = '';
+// Build base query with filters
+$query = User::whereNotIn('user_id', explode(',', EXCLUDED_USERS));
 
 // Search by role
-switch ($role) {
-    case 'user':
-        $where_sql .= ' AND user_level = ' . USER;
-        break;
-    case 'admin':
-        $where_sql .= ' AND user_level = ' . ADMIN;
-        break;
-    case 'moderator':
-        $where_sql .= ' AND user_level = ' . MOD;
-        break;
-}
+match ($role) {
+    'user' => $query->where('user_level', USER),
+    'admin' => $query->where('user_level', ADMIN),
+    'moderator' => $query->where('user_level', MOD),
+    default => null,
+};
 
 // Search by username
 if (!empty($username)) {
-    $where_sql .= ' AND username LIKE "' . DB()->escape(str_replace('*', '%', clean_username($username))) . '"';
+    $query->where('username', 'LIKE', str_replace('*', '%', clean_username($username)));
 }
 
 // Generate user information
-$sql = 'SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email, avatar_ext_id FROM ' . BB_USERS . ' WHERE user_id NOT IN(' . EXCLUDED_USERS . ") {$where_sql} ORDER BY {$order_by}";
-if ($result = DB()->fetch_rowset($sql)) {
+$orderColumn = match ($mode) {
+    'username' => 'username',
+    'location' => 'user_from',
+    'posts', 'topten' => 'user_posts',
+    'email' => 'user_email',
+    'website' => 'user_website',
+    default => 'user_regdate',
+};
+$limit = $mode === 'topten' ? 10 : config()->get('topics_per_page');
+
+$result = (clone $query)
+    ->select(['username', 'user_id', 'user_rank', 'user_opt', 'user_posts', 'user_regdate', 'user_from', 'user_website', 'user_email', 'avatar_ext_id'])
+    ->orderBy($orderColumn, $sort_order)
+    ->offset($mode === 'topten' ? 0 : $start)
+    ->limit($limit)
+    ->toBase()
+    ->get()
+    ->map(fn ($row) => (array)$row);
+
+if ($result->isNotEmpty()) {
     foreach ($result as $i => $row) {
-        $user_id = $row['user_id'];
         $user_info = generate_user_info($row);
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
@@ -136,7 +126,7 @@ if ($result = DB()->fetch_rowset($sql)) {
             'PM' => $user_info['pm'],
             'EMAIL' => $user_info['email'],
             'WWW' => $user_info['www'],
-            'U_VIEWPROFILE' => url()->member($user_id, $row['username']),
+            'U_VIEWPROFILE' => url()->member($row['user_id'], $row['username']),
         ]);
     }
 } else {
@@ -148,15 +138,16 @@ $paginationurl = "memberlist?mode={$mode}&amp;order={$sort_order}&amp;role={$rol
 $paginationurl .= !empty($username) ? "&amp;username={$username}" : '';
 
 if ($mode != 'topten') {
-    $sql = 'SELECT COUNT(*) AS total FROM ' . BB_USERS . ' WHERE user_id NOT IN(' . EXCLUDED_USERS . ") {$where_sql}";
-    if (!$result = DB()->sql_query($sql)) {
-        bb_die('Error getting total users');
+    // Cache the count for 5 minutes to avoid expensive COUNT queries
+    $cacheKey = 'memberlist_count_' . md5($role . '_' . $username);
+    $total_members = CACHE('bb_cache')->get($cacheKey);
+
+    if ($total_members === false) {
+        $total_members = (clone $query)->count();
+        CACHE('bb_cache')->set($cacheKey, $total_members, 300);
     }
-    if ($total = DB()->sql_fetchrow($result)) {
-        $total_members = $total['total'];
-        generate_pagination($paginationurl, $total_members, config()->get('topics_per_page'), $start);
-    }
-    DB()->sql_freeresult($result);
+
+    generate_pagination($paginationurl, $total_members, config()->get('topics_per_page'), $start);
 }
 
 // Generate output
