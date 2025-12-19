@@ -11,7 +11,6 @@
 namespace TorrentPier;
 
 use Illuminate\Config\Repository;
-use Illuminate\Contracts\Config\Repository as RepositoryContract;
 use InvalidArgumentException;
 
 /**
@@ -20,7 +19,7 @@ use InvalidArgumentException;
  * Extends Illuminate\Config\Repository for Laravel 12 compatibility
  * while providing TorrentPier-specific database configuration methods.
  */
-class Config extends Repository implements RepositoryContract
+class Config extends Repository
 {
     /**
      * Load configuration from the database table
