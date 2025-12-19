@@ -58,12 +58,46 @@ function bootEloquentForTest(): Capsule
     return $capsule;
 }
 
+/**
+ * Check if database connection is available
+ */
+function isDatabaseAvailable(): bool
+{
+    static $available = null;
+
+    if ($available !== null) {
+        return $available;
+    }
+
+    try {
+        bootEloquentForTest();
+        Capsule::connection()->getPdo();
+        $available = true;
+    } catch (Throwable) {
+        $available = false;
+    }
+
+    return $available;
+}
+
+/**
+ * Skip test if database is not available
+ */
+function skipIfNoDatabaseConnection(): void
+{
+    if (!isDatabaseAvailable()) {
+        test()->markTestSkipped('Database connection not available');
+    }
+}
+
 beforeEach(function () {
     // Ensure Eloquent is booted for tests
     bootEloquentForTest();
 });
 
 test('can connect to database via Eloquent', function () {
+    skipIfNoDatabaseConnection();
+
     $connection = Capsule::connection();
 
     expect($connection)->toBeInstanceOf(Connection::class)
@@ -71,6 +105,8 @@ test('can connect to database via Eloquent', function () {
 });
 
 test('can query users via Eloquent', function () {
+    skipIfNoDatabaseConnection();
+
     $users = User::limit(5)->get();
 
     expect($users)->toBeInstanceOf(Collection::class);
@@ -113,6 +149,8 @@ test('forum model has correct table', function () {
 });
 
 test('can query real users from database', function () {
+    skipIfNoDatabaseConnection();
+
     $user = User::first();
 
     if ($user) {
@@ -126,6 +164,8 @@ test('can query real users from database', function () {
 });
 
 test('can query topics with relationships', function () {
+    skipIfNoDatabaseConnection();
+
     $topic = Topic::with(['forum', 'poster'])->first();
 
     if ($topic) {
@@ -138,6 +178,8 @@ test('can query topics with relationships', function () {
 });
 
 test('can query posts with text relationship', function () {
+    skipIfNoDatabaseConnection();
+
     $post = Post::with('text')->first();
 
     if ($post) {
@@ -153,6 +195,8 @@ test('can query posts with text relationship', function () {
 });
 
 test('eloquent capsule is globally accessible', function () {
+    skipIfNoDatabaseConnection();
+
     // In tests, we use bootEloquentForTest() which sets capsule as global
     $capsule = Capsule::connection();
 
