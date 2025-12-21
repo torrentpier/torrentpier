@@ -683,7 +683,9 @@ function get_bt_userdata($user_id)
 			LIMIT 1
 		');
 
-        CACHE('bb_cache')->set('btu_' . $user_id, $btu, 300);
+        if ($btu) {
+            CACHE('bb_cache')->set('btu_' . $user_id, $btu, 300);
+        }
     }
 
     return $btu;
@@ -988,7 +990,7 @@ function birthday_age($date)
 function format_registration_intervals(array $restricted_hours): array
 {
     // Validate and filter restricted hours to be within 0-23
-    $restricted_hours = array_filter($restricted_hours, fn ($h) => is_int($h) && $h >= 0 && $h <= 23);
+    $restricted_hours = array_filter($restricted_hours, fn($h) => is_int($h) && $h >= 0 && $h <= 23);
 
     // Use board timezone for the current time
     $tz = config()->get('board_timezone');
@@ -1288,7 +1290,7 @@ function clear_dl_list($topics_csv)
  *
  * @param array|int|string $ids Array of IDs or single ID
  * @return string Comma-separated string of integers
- *@deprecated Use collect($ids)->flatten()->map('intval')->implode(',') directly
+ * @deprecated Use collect($ids)->flatten()->map('intval')->implode(',') directly
  */
 function get_id_csv(array|int|string $ids): string
 {
@@ -1300,7 +1302,7 @@ function get_id_csv(array|int|string $ids): string
  *
  * @param array|string $ids Comma-separated string or array of IDs
  * @return array<int> Array of integers
- *@deprecated Use collect(explode(',', $ids))->map('intval')->values()->all() directly
+ * @deprecated Use collect(explode(',', $ids))->map('intval')->values()->all() directly
  */
 function get_id_ary(array|string $ids): array
 {
