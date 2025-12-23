@@ -96,7 +96,7 @@ trait EntityUrls
     }
 
     /**
-     * Generate a member email URL (/members/slug.id/email/)
+     * Generate a member email URL (/members/slug.id/email)
      */
     public static function memberEmail(int $id, string $username = ''): string
     {
@@ -104,7 +104,7 @@ trait EntityUrls
             return '#';
         }
 
-        return rtrim(self::member($id, $username), '/') . '/email/';
+        return self::member($id, $username) . '/email';
     }
 
     /**
@@ -125,14 +125,14 @@ trait EntityUrls
     }
 
     /**
-     * Generate a group edit URL (/groups/slug.id/edit/)
+     * Generate a group edit URL (/groups/slug.id/edit)
      */
     public static function groupEdit(int $id, string $name = '', array $params = []): string
     {
         if ($id <= 0) {
             return '#';
         }
-        $url = rtrim(self::group($id, $name), '/') . '/edit/';
+        $url = self::group($id, $name) . '/edit';
 
         return self::appendParams($url, $params);
     }

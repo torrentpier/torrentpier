@@ -22,7 +22,7 @@ use TorrentPier\Router\ResponseTrait;
 /**
  * Redirect handler for legacy URLs
  *
- * Redirects old-style URLs (e.g., /viewtopic?t=5) to new semantic URLs (/threads/slug.5/)
+ * Redirects old-style URLs (e.g., /viewtopic?t=5) to new semantic URLs (/threads/slug.5)
  *
  * GET requests: 301 redirect to semantic URL
  * POST requests: Process normally (can't redirect POST without losing data)
@@ -33,21 +33,21 @@ class LegacyRedirect
 
     /**
      * Member mode redirects mapping
-     * Modes with user ID: redirect to /members/slug.id/ or /members/slug.id/action/
+     * Modes with user ID: redirect to /members/slug.id or /members/slug.id/action
      * Modes without user ID: redirect to standalone URLs
      */
     private const array MEMBER_MODE_REDIRECTS = [
-        // Modes that require user ID → /members/slug.id/[action/]
-        'viewprofile' => ['needs_id' => true, 'path' => null],      // /members/slug.id/
-        'email' => ['needs_id' => true, 'path' => 'email'],   // /members/slug.id/email/
+        // Modes that require user ID → /members/slug.id[/action]
+        'viewprofile' => ['needs_id' => true, 'path' => null],      // /members/slug.id
+        'email' => ['needs_id' => true, 'path' => 'email'],   // /members/slug.id/email
 
         // Standalone modes → fixed URLs
-        'register' => ['needs_id' => false, 'url' => '/register/'],
-        'editprofile' => ['needs_id' => false, 'url' => '/settings/'],
-        'sendpassword' => ['needs_id' => false, 'url' => '/password-recovery/'],
-        'bonus' => ['needs_id' => false, 'url' => '/profile/bonus/'],
-        'watch' => ['needs_id' => false, 'url' => '/profile/watchlist/'],
-        'activate' => ['needs_id' => false, 'url' => '/activate/', 'key_param' => 'act_key'],
+        'register' => ['needs_id' => false, 'url' => '/register'],
+        'editprofile' => ['needs_id' => false, 'url' => '/settings'],
+        'sendpassword' => ['needs_id' => false, 'url' => '/password-recovery'],
+        'bonus' => ['needs_id' => false, 'url' => '/profile/bonus'],
+        'watch' => ['needs_id' => false, 'url' => '/profile/watchlist'],
+        'activate' => ['needs_id' => false, 'url' => '/activate', 'key_param' => 'act_key'],
     ];
 
     /**
@@ -149,7 +149,7 @@ class LegacyRedirect
             if (isset($modeConfig['key_param'])) {
                 $key = $queryParams[$modeConfig['key_param']] ?? '';
                 if ($key !== '') {
-                    $url = rtrim($url, '/') . '/' . urlencode($key) . '/';
+                    $url .= '/' . urlencode($key);
                 }
             }
 
@@ -169,9 +169,9 @@ class LegacyRedirect
         $title = EntityConfig::fetchTitle($this->type, $id) ?? '';
         $semanticUrl = UrlBuilder::member($id, $title);
 
-        // Append an action path if needed (e.g., /email/)
+        // Append an action path if needed (e.g., /email)
         if (!empty($modeConfig['path'])) {
-            $semanticUrl = rtrim($semanticUrl, '/') . '/' . $modeConfig['path'] . '/';
+            $semanticUrl .= '/' . $modeConfig['path'];
         }
 
         // Preserve extra query parameters (except u and mode)

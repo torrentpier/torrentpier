@@ -21,11 +21,11 @@ use TorrentPier\Router\SemanticUrl\Traits\StaticUrls;
 /**
  * Central URL builder for SEO-friendly URLs
  *
- * Generates URLs in the format: /type/slug.id/
+ * Generates URLs in the format: /type/slug.id
  * Examples:
- *   - /threads/bugonia.5/
- *   - /forums/hd-video.1/
- *   - /members/admin.2/
+ *   - /threads/bugonia.5
+ *   - /forums/hd-video.1
+ *   - /members/admin.2
  *
  * @method static string topic(?int $id, string $title = '', array $params = [])
  * @method static string topicPost(int $topicId, string $title, int $postId)
@@ -81,7 +81,7 @@ class UrlBuilder
     }
 
     /**
-     * Build the URL with the format: /type/slug.id/
+     * Build the URL with the format: /type/slug.id
      *
      * @param string $type Entity type (topic, forum, members, groups)
      * @param int $id Entity ID
@@ -100,8 +100,8 @@ class UrlBuilder
             unset($params['_fragment']);
         }
 
-        // Build base path: /type/slug.id/
-        $path = '/' . $type . '/' . $slug . '.' . $id . '/';
+        // Build base path: /type/slug.id
+        $path = '/' . $type . '/' . $slug . '.' . $id;
 
         // Append a query string if there are additional parameters
         if (!empty($params)) {
