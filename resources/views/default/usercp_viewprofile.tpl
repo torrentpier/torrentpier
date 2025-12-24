@@ -1,4 +1,4 @@
-<!-- INCLUDE ajax_edit.tpl -->
+<!-- INCLUDE ajax_edit.twig -->
 <!-- IF IS_ADMIN -->
 <script type="text/javascript">
     // edit_user_profile

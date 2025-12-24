@@ -37,9 +37,7 @@ switch ($show) {
 
 $require = files()->isFile($htmlDir . $info['src']) ? ($htmlDir . $info['src']) : false;
 
-template()->assign_vars([
+print_page('info.twig', 'simple', variables: [
     'PAGE_TITLE' => mb_strtoupper($info['title'], DEFAULT_CHARSET),
     'REQUIRE' => $require ? files()->get($require) : __('NOT_FOUND'),
 ]);
-
-print_page('info.tpl', 'simple');

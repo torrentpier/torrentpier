@@ -21,12 +21,12 @@
 <br/>
 <div id="infobox-wrap" class="bCenter row1">
     <fieldset class="pad_6">
-        <legend class="med bold mrg_2 warnColor1"><!-- IF PAGE_TITLE -->{PAGE_TITLE}<!-- ENDIF --></legend>
-        <!-- IF REQUIRE -->
-        <div class="bCenter">{REQUIRE}</div>
-        <!-- ENDIF -->
+        <legend class="med bold mrg_2 warnColor1">{% if PAGE_TITLE %}{{ PAGE_TITLE }}{% endif %}</legend>
+        {% if REQUIRE %}
+        <div class="bCenter">{{ REQUIRE|raw }}</div>
+        {% endif %}
     </fieldset>
-    <p class="gen tRight pad_6"><a href="javascript:window.close();" class="gen">[ {L_LOCK} ]</a>
+    <p class="gen tRight pad_6"><a href="javascript:window.close();" class="gen">[ {{ __('LOCK') }} ]</a>
     </p>
 </div><!--/infobox-wrap-->
 <br/>

@@ -1,0 +1,60 @@
+<h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
+
+<form action="{{ S_LOGIN_ACTION }}" method="post">
+
+    <input type="hidden" name="redirect" value="{{ REDIRECT_URL }}"/>
+    {% if ADMIN_LOGIN %}<input type="hidden" name="admin" value="1"/>{% endif %}
+
+    <p class="nav"><a href="{{ U_INDEX }}">{{ __('INDEX') }}</a></p>
+
+    <table class="forumline">
+        <tr>
+            <th>{{ __('ENTER_PASSWORD') }}</th>
+        </tr>
+        <tr>
+            <td class="row1">
+                {% if ADMIN_LOGIN %}
+                <h4 class="tCenter mrg_16">{{ __('ADMIN_REAUTHENTICATE') }}</h4>
+                {% endif %}
+                <div class="mrg_16">
+                    <table class="borderless bCenter">
+                        <tr>
+                            <td width="35%" class="tRight">{{ __('USERNAME') }}:</td>
+                            <td><input type="text" class="post" name="login_username" size="25" maxlength="40" value="{{ LOGIN_USERNAME }}" tabindex="101"{% if ADMIN_LOGIN %} readonly style="color: gray"{% endif %} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tRight">{{ __('PASSWORD') }}:</td>
+                            <td><input type="password" class="post show_pass_input" name="login_password" value="{{ LOGIN_PASSWORD }}" tabindex="102" size="25" maxlength="32"/>&nbsp;<label><input type="checkbox" class="password_show_checkbox">&nbsp;{{ __('PASSWORD_SHOW_BTN') }}</label></td>
+                        </tr>
+                        {% if CAPTCHA_HTML %}
+                        <tr>
+                            <td class="tRight nowrap">{{ __('CAPTCHA') }}:</td>
+                            <td>{{ CAPTCHA_HTML|raw }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td colspan="2" class="tCenter nowrap">{{ __('AUTO_LOGIN') }}:&nbsp;<input type="checkbox" name="autologin" tabindex="103" {% if ADMIN_LOGIN or AUTOLOGIN_DISABLED %}disabled{% else %}checked{% endif %} /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="tCenter pad_6"><input type="submit" name="login" class="bold long" value="{{ __('LOGIN') }}"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="tCenter"><a href="{{ U_SEND_PASSWORD }}" class="small">{{ __('FORGOTTEN_PASSWORD') }}</a>&nbsp;&middot;&nbsp;<a href="{{ U_REGISTER }}" class="small">{{ __('REGISTER') }}</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<script type="text/javascript">
+    $('body').on('click', '.password_show_checkbox', function () {
+        if ($(this).is(':checked')) {
+            $('input.show_pass_input').attr('type', 'text');
+        } else {
+            $('input.show_pass_input').attr('type', 'password');
+        }
+    });
+</script>

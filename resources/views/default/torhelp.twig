@@ -24,13 +24,13 @@
 <div id="torhelp">
     <table class="bordered bCenter w100">
         <tr>
-            <td class="catTitle">{L_TORHELP_TITLE}</td>
+            <td class="catTitle">{{ __('TORHELP_TITLE') }}</td>
         </tr>
         <tr>
             <td class="med bold row1 pad_8">
-                <p class="normal floatR">[ <a href="#" onclick="tor_help(); return false;">{L_HIDE}</a> ]</p>
+                <p class="normal floatR">[ <a href="#" onclick="tor_help(); return false;">{{ __('HIDE') }}</a> ]</p>
                 <ul>
-                    <li>{TORHELP_TOPICS}</li>
+                    <li>{{ TORHELP_TOPICS|raw }}</li>
                 </ul>
             </td>
         </tr>

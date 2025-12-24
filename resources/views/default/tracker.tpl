@@ -72,7 +72,7 @@ ajax.callback.view_post = function(data) {
 </div>
 
 <!-- IF TORHELP_TOPICS -->
-	<!-- INCLUDE torhelp.tpl -->
+	<!-- INCLUDE torhelp.twig -->
 	<div class="spacer_6"></div>
 <!-- ENDIF / TORHELP_TOPICS -->
 

@@ -1,5 +1,5 @@
 <!-- IF TORHELP_TOPICS -->
-	<!-- INCLUDE torhelp.tpl -->
+	<!-- INCLUDE torhelp.twig -->
 	<div class="spacer_6"></div>
 <!-- ENDIF / TORHELP_TOPICS -->
 
