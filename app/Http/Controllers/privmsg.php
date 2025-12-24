@@ -1182,7 +1182,7 @@ if ($mode == 'read') {
     //
     // Load templates
     //
-    template()->set_filenames(['body' => 'privmsgs.tpl']);
+    template()->set_filenames(['body' => 'privmsgs.twig']);
 
     //
     // New message
@@ -1383,6 +1383,7 @@ if ($mode == 'read') {
         bb_die('Could not query private messages');
     }
 
+    $listrow = [];
     if ($row = DB()->sql_fetchrow($result)) {
         $i = 0;
         do {
@@ -1410,7 +1411,7 @@ if ($mode == 'read') {
             $row_class = !($i & 1) ? 'row1' : 'row2';
             $i++;
 
-            template()->assign_block_vars('listrow', [
+            $listrow[] = [
                 'ROW_CLASS' => $row_class,
                 'FROM' => $msg_user,
                 'SUBJECT' => htmlCHR($msg_subject),
@@ -1421,13 +1422,15 @@ if ($mode == 'read') {
                 'L_PRIVMSG_FOLDER_ALT' => $icon_flag_alt,
                 'S_MARK_ID' => $privmsg_id,
                 'U_READ' => $u_subject,
-            ]);
+            ];
         } while ($row = DB()->sql_fetchrow($result));
 
         generate_pagination(PM_URL . "?folder={$folder}", $pm_total, config()->get('topics_per_page'), $start);
-    } else {
-        template()->assign_block_vars('switch_no_messages', []);
     }
+    template()->assign_vars([
+        'LISTROW' => $listrow,
+        'NO_MESSAGES' => empty($listrow),
+    ]);
 }
 
 template()->assign_vars(['PAGE_TITLE' => @$page_title]);

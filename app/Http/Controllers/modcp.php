@@ -318,7 +318,7 @@ switch ($mode) {
                 'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
             ]);
 
-            template()->set_filenames(['body' => 'modcp.tpl']);
+            template()->set_filenames(['body' => 'modcp.twig']);
         }
         break;
 
@@ -654,6 +654,7 @@ switch ($mode) {
             bb_die('Could not get IP information for this user');
         }
 
+        $iprowList = [];
         if ($row = DB()->sql_fetchrow($result)) {
             $i = 0;
             do {
@@ -669,12 +670,12 @@ switch ($mode) {
                 }
                 $ip = ($rdns_ip_num == $ip || $rdns_ip_num == 'all') ? gethostbyaddr($ip) : $ip;
 
-                template()->assign_block_vars('iprow', [
+                $iprowList[] = [
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'IP' => $ip,
                     'POSTS' => $row['postings'],
                     'U_LOOKUP_IP' => !$no_lookup ? 'modcp?mode=ip&amp;' . POST_POST_URL . "={$post_id}&amp;" . POST_TOPIC_URL . "={$topic_id}&amp;rdns=" . $ip . '&amp;sid=' . userdata('session_id') : '',
-                ]);
+                ];
                 unset($no_lookup);
 
                 $i++;
@@ -698,21 +699,27 @@ switch ($mode) {
             bb_die('Could not get posters information based on IP');
         }
 
+        $userrowList = [];
         if ($row = DB()->sql_fetchrow($result)) {
             $i = 0;
             do {
-                template()->assign_block_vars('userrow', [
+                $userrowList[] = [
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'USERNAME' => profile_url($row),
                     'POSTS' => $row['postings'],
                     'U_SEARCHPOSTS' => FORUM_PATH . "search?search_author=1&amp;uid={$row['user_id']}",
-                ]);
+                ];
 
                 $i++;
             } while ($row = DB()->sql_fetchrow($result));
         }
 
-        template()->set_filenames(['body' => 'modcp.tpl']);
+        template()->assign_vars([
+            'IPROW' => $iprowList,
+            'USERROW' => $userrowList,
+        ]);
+
+        template()->set_filenames(['body' => 'modcp.twig']);
         break;
 
     case 'post_pin':

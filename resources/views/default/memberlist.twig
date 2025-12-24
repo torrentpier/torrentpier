@@ -1,0 +1,76 @@
+<h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
+
+<form method="post" action="{{ S_MODE_ACTION }}" name="post">
+    <table width="100%">
+        <tr>
+            <td class="med nowrap tRight">{{ __('SORT_BY') }}:&nbsp;{{ S_MODE_SELECT|raw }}&nbsp;&middot;&nbsp;{{ __('ORDER') }}:&nbsp;{{ S_ORDER_SELECT|raw }}&nbsp;&middot;&nbsp;{{ __('ROLE') }}&nbsp;{{ S_ROLE_SELECT|raw }}&nbsp;<input type="submit" name="submit" value="{{ __('SUBMIT') }}"></td>
+        </tr>
+        <tr>
+            <td class="nowrap tRight">
+			    <span class="genmed">
+				    <input placeholder="{{ __('SEARCH_S') }}" type="text" class="post" name="username" maxlength="25" size="25" tabindex="1" value="{{ S_USERNAME }}">&nbsp;<input type="submit" name="submituser" value="{{ __('FIND_USERNAME') }}" class="mainoption">
+			    </span>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<table class="forumline">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>{{ __('USERNAME') }}</th>
+        <th>{{ __('PM') }}</th>
+        <th>{{ __('EMAIL') }}</th>
+        <th>{{ __('LOCATION') }}</th>
+        <th>{{ __('JOINED') }}</th>
+        <th>{{ __('POSTS_SHORT') }}</th>
+        <th>{{ __('WEBSITE') }}</th>
+    </tr>
+    </thead>
+    {% for item in MEMBER_LIST %}
+    <tr class="{{ item.ROW_CLASS }} tCenter">
+        <td>{{ item.ROW_NUMBER }}</td>
+        <td>
+            <div>{{ item.AVATAR|raw }}</div>
+            <b>{{ item.USER|raw }}</b>
+        </td>
+        <td>{{ item.PM|raw }}</td>
+        <td>{{ item.EMAIL|raw }}</td>
+        <td>{{ item.FROM }}</td>
+        <td>{{ item.JOINED }}</td>
+        <td>{{ item.POSTS }}</td>
+        <td>{{ item.WWW|raw }}</td>
+    </tr>
+    {% endfor %}
+    {% if NO_MEMBERS %}
+    <tbody>
+    <tr>
+        <td class="row1 tCenter pad_8" colspan="9">{{ __('NO_USER_ID_SPECIFIED') }}</td>
+    </tr>
+    </tbody>
+    {% endif %}
+    <tfoot>
+    <tr>
+        <td class="catBottom" colspan="9">&nbsp;</td>
+    </tr>
+    </tfoot>
+</table>
+
+<div class="bottom_info">
+    {% if PAGINATION %}
+    <div class="nav">
+        <p style="float: left">{{ PAGE_NUMBER }}</p>
+        <p style="float: right">{{ PAGINATION|raw }}</p>
+        <div class="clear"></div>
+    </div>
+    {% endif %}
+
+    <div class="spacer_4"></div>
+
+    <div id="timezone">
+        <p>{{ CURRENT_TIME }}</p>
+        <p>{{ S_TIMEZONE }}</p>
+    </div>
+    <div class="clear"></div>
+</div><!--/bottom_info-->

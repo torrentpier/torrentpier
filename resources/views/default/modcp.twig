@@ -1,0 +1,132 @@
+<h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
+
+<p class="nav"><a href="{{ U_INDEX }}">{{ __('HOME') }}</a></p>
+
+{% if TPL_MODCP_IP %}
+<!--========================================================================-->
+
+<table class="forumline">
+<tr>
+	<th>{{ __('IP_INFO') }}</th>
+</tr>
+<tr>
+	<td class="catTitle">{{ __('THIS_POSTS_IP') }}</td>
+</tr>
+<tr>
+	<td class="row1 pad_6">
+		<p class="floatL"><b>{{ IP }}</b></p>
+		{% if U_LOOKUP_IP %}
+		<p class="floatR">[ <a href="{{ U_LOOKUP_IP }}">{{ __('LOOKUP_IP') }}</a> ]&nbsp;</p>
+		{% endif %}
+	</td>
+</tr>
+<tr>
+	<td class="catTitle">{{ __('USERS_THIS_IP') }}</td>
+</tr>
+{% for item in USERROW %}
+<tr>
+	<td class="{{ item.ROW_CLASS }} pad_4 nowrap">
+		<p class="floatL" style="width: 160px;"><b>{{ item.USERNAME|raw }}</b></p>
+		<p class="floatL">[ {{ __('POSTS') }}: {{ item.POSTS }} ]</p>
+		<p class="floatR">[ <a href="{{ item.U_SEARCHPOSTS }}">{{ __('SEARCH_USER_POSTS_SHORT') }}</a> ]&nbsp;</p>
+	</td>
+</tr>
+{% endfor %}
+<tr>
+	<td class="catTitle">{{ __('OTHER_IP_THIS_USER') }}</td>
+</tr>
+{% for item in IPROW %}
+<tr>
+	<td class="{{ item.ROW_CLASS }} pad_4 nowrap">
+		<p class="floatL" style="_width: 160px; min-width: 160px;">{{ item.IP }}</p>
+		<p class="floatL">[ {{ __('POSTS') }}: {{ item.POSTS }} ]</p>
+		{% if item.U_LOOKUP_IP %}
+		<p class="floatR">[ <a href="{{ item.U_LOOKUP_IP }}">{{ __('LOOKUP_IP') }}</a> ]&nbsp;</p>
+		{% endif %}
+	</td>
+</tr>
+{% endfor %}
+</table>
+
+<!--========================================================================-->
+{% endif %}
+
+{% if TPL_MODCP_MOVE %}
+<!--========================================================================-->
+
+<form action="{{ S_MODCP_ACTION }}" method="post">
+{{ S_HIDDEN_FIELDS|raw }}
+
+<table class="forumline">
+<tr>
+	<th><b>{{ MESSAGE_TITLE }}</b></th>
+</tr>
+<tr>
+	<td class="row1">
+
+		<div class="mrg_14 tCenter">
+			<table class="borderless bCenter" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="nowrap vTop">{{ __('MOVE_TO_FORUM') }}</td>
+				<td>
+					<p>{{ S_FORUM_SELECT|raw }}</p>
+				</td>
+			</tr>
+			</table>
+		</div>
+
+		{% if SHOW_LEAVESHADOW or SHOW_BOT_OPTIONS %}
+		<div style="margin: -6px;">
+		<table class="borderless bCenter" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="nowrap">
+				{% if SHOW_LEAVESHADOW %}
+				<p class="mrg_2"><input type="checkbox" name="move_leave_shadow" id="move_leave_shadow" /><label for="move_leave_shadow">{{ __('LEAVE_SHADOW_TOPIC') }}</label></p>
+				{% endif %}
+				{% if SHOW_BOT_OPTIONS %}
+				<p class="mrg_2"><input type="checkbox" name="insert_bot_msg" id="insert_bot_msg" checked /><label for="insert_bot_msg">{{ __('BOT_LEAVE_MSG_MOVED') }}</label></p>
+				<p class="mrg_2">{{ __('BOT_REASON_MOVED') }}&nbsp;<input type="text" name="reason_move_bot" maxlength="60" size="30"/></p>
+				{% endif %}
+			</td>
+		</tr>
+		</table>
+		</div>
+		{% endif %}
+
+		<h4 class="mrg_14 tCenter">{{ MESSAGE_TEXT }}</h4>
+
+		{% if TOPIC_TITLES %}
+		<table class="borderless bCenter">
+		<tr>
+			<td class="med">
+				<ul><li>{{ TOPIC_TITLES|raw }}</li></ul>
+			</td>
+		</tr>
+		</table>
+		{% endif %}
+
+		<div class="mrg_14 tCenter">
+			<input class="mainoption" type="submit" name="confirm" value="{{ __('YES') }}" />&nbsp;
+			<input class="liteoption" type="submit" name="cancel" value="{{ __('NO') }}" />
+		</div>
+
+	</td>
+</tr>
+</table>
+
+</form>
+
+<!--========================================================================-->
+{% endif %}
+
+<div class="bottom_info">
+
+	<div class="spacer_4"></div>
+
+	<div id="timezone">
+		<p>{{ CURRENT_TIME }}</p>
+		<p>{{ S_TIMEZONE }}</p>
+	</div>
+	<div class="clear"></div>
+
+</div><!--/bottom_info-->
