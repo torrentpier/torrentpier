@@ -17,28 +17,28 @@ function emoticon(text) {
 		<td>
 			<table class="forumline">
 				<tr>
-					<th>{L_EMOTICONS}</th>
+					<th>{{ __('EMOTICONS') }}</th>
 				</tr>
 				<tr>
 					<td class="row1">
 						<table class="borderless w100" cellpadding="5">
-							<!-- BEGIN smilies_row -->
+							{% for row in SMILIES_ROWS %}
 							<tr class="tCenter">
-								<!-- BEGIN smilies_col -->
-								<td><a href="javascript:emoticon('{smilies_row.smilies_col.SMILEY_CODE}')"><img src="{smilies_row.smilies_col.SMILEY_IMG}" border="0" alt="{smilies_row.smilies_col.SMILEY_DESC}" title="{smilies_row.smilies_col.SMILEY_DESC}" /></a></td>
-								<!-- END smilies_col -->
+								{% for smiley in row.COLS %}
+								<td><a href="javascript:emoticon('{{ smiley.SMILEY_CODE }}')"><img src="{{ smiley.SMILEY_IMG }}" border="0" alt="{{ smiley.SMILEY_DESC }}" title="{{ smiley.SMILEY_DESC }}" /></a></td>
+								{% endfor %}
 							</tr>
-							<!-- END smilies_row -->
-							<!-- BEGIN switch_smilies_extra -->
+							{% endfor %}
+							{% if SHOW_MORE_SMILIES %}
 							<tr class="tCenter">
-								<td colspan="{S_SMILIES_COLSPAN}"><span class="nav"><a href="{U_MORE_SMILIES}" onclick="open_window('{U_MORE_SMILIES}', 250, 300);return false" target="_smilies" class="nav">{L_MORE_EMOTICONS}</a></td>
+								<td colspan="{{ S_SMILIES_COLSPAN }}"><span class="nav"><a href="{{ U_MORE_SMILIES }}" onclick="open_window('{{ U_MORE_SMILIES }}', 250, 300);return false" target="_smilies" class="nav">{{ __('MORE_EMOTICONS') }}</a></td>
 							</tr>
-							<!-- END switch_smilies_extra -->
+							{% endif %}
 						</table>
 					</td>
 				</tr>
 				<tr>
-					<td class="row2 tCenter"><br /><span class="med"><a href="javascript:window.close();" class="med">{L_CLOSE_WINDOW}</a></span></td>
+					<td class="row2 tCenter"><br /><span class="med"><a href="javascript:window.close();" class="med">{{ __('CLOSE_WINDOW') }}</a></span></td>
 				</tr>
 			</table>
 		</td>

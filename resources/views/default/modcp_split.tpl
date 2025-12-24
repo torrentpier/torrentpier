@@ -20,7 +20,7 @@ function toggle_cbox (cb_id, tr_id)
 <table width="100%">
 	<tr>
 		<td style="padding-left: 0;" class="nav">
-			<a href="{U_INDEX}" class="nav">{T_INDEX}</a>
+			<a href="{U_INDEX}" class="nav">{L_HOME}</a>
 			<span class="nav">
 				&raquo;&nbsp;<a href="{U_VIEW_FORUM}" class="nav">{FORUM_NAME}</a>
 			</span>

@@ -52,11 +52,11 @@
 </style>
 
 <div id="mod-action-content" style="display: none;">
-    <form id="mod-action" name="watch_form" method="post" action="{S_FORM_ACTION}">
+    <form id="mod-action" name="watch_form" method="post" action="{{ S_FORM_ACTION }}">
         <table class="borderless pad_0" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="pad_4">
-                    <input type="submit" name="del_from_ut" value="{L_DEL_LIST_MY_MESSAGE}"
+                    <input type="submit" name="del_from_ut" value="{{ __('DEL_LIST_MY_MESSAGE') }}"
                            onclick="if (!window.confirm( this.value +'?' )) { return false; }"/>
             </tr>
         </table>
@@ -77,15 +77,15 @@
 <table cellpadding="2" cellspacing="0" width="100%">
     <tr>
         <td width="100%">
-            <h1 class="pagetitle">{PAGE_TITLE}</h1>
+            <h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
             <div id="forums_top_links" class="nav">
-                <a href="{U_INDEX}">{T_INDEX}</a>&nbsp;<em>&middot;</em>
-                <span id="show-edit-btn"><a href="#">{L_EDIT_MY_MESSAGE_LIST}</a></span>
-                <span id="edit-sel-topics" style="display: none;"><a href="#" class="bold adm" onclick="$('input.topic-chbox').trigger('click'); return false;">{L_SELECT_INVERT}</a></span><em>&middot;</em>
-                <a href="#" class="med normal" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums'); window.location.reload();">{L_MARK_ALL_FORUMS_READ}</a>
+                <a href="{{ U_INDEX }}">{{ __('HOME') }}</a>&nbsp;<em>&middot;</em>
+                <span id="show-edit-btn"><a href="#">{{ __('EDIT_MY_MESSAGE_LIST') }}</a></span>
+                <span id="edit-sel-topics" style="display: none;"><a href="#" class="bold adm" onclick="$('input.topic-chbox').trigger('click'); return false;">{{ __('SELECT_INVERT') }}</a></span><em>&middot;</em>
+                <a href="#" class="med normal" onclick="setCookie('{{ constant('COOKIE_MARK') }}', 'all_forums'); window.location.reload();">{{ __('MARK_ALL_FORUMS_READ') }}</a>
             </div>
         </td>
-        <td class="vBottom tLeft nowrap med"><b>{PAGINATION}</b></td>
+        <td class="vBottom tLeft nowrap med"><b>{{ PAGINATION|raw }}</b></td>
     </tr>
 </table>
 
@@ -93,38 +93,38 @@
     <thead>
     <tr>
         <th class="{sorter: 'text'}"></th>
-        <th class="{sorter: 'text'}" width="25%"><b class="tbs-text">{L_FORUM}</b></th>
-        <th class="{sorter: 'text'}" width="75%"><b class="tbs-text">{L_TOPIC}</b></th>
-        <th class="{sorter: 'text'}"><b class="tbs-text">{L_AUTHOR}</b></th>
-        <th width="80" class="{sorter: 'digit'}"><b class="tbs-text">{L_REPLIES}</b></th>
-        <th width="120" class="{sorter: 'digit'} nowrap"><b class="tbs-text">{L_LASTPOST}</b></th>
+        <th class="{sorter: 'text'}" width="25%"><b class="tbs-text">{{ __('FORUM') }}</b></th>
+        <th class="{sorter: 'text'}" width="75%"><b class="tbs-text">{{ __('TOPIC') }}</b></th>
+        <th class="{sorter: 'text'}"><b class="tbs-text">{{ __('AUTHOR') }}</b></th>
+        <th width="80" class="{sorter: 'digit'}"><b class="tbs-text">{{ __('REPLIES') }}</b></th>
+        <th width="120" class="{sorter: 'digit'} nowrap"><b class="tbs-text">{{ __('LASTPOST') }}</b></th>
     </tr>
     </thead>
-    <!-- BEGIN watch -->
-    <tr class="tCenter {watch.ROW_CLASS}" id="tr-{watch.TOPIC_ID}">
-        <td id="{watch.TOPIC_ID}" class="topic_id">
-            <span style="display: none;">{watch.TOPIC_ICON}</span>
-            <img class="topic_icon" src="{watch.TOPIC_ICON}">
+    {% for item in WATCH_LIST %}
+    <tr class="tCenter {{ item.ROW_CLASS }}" id="tr-{{ item.TOPIC_ID }}">
+        <td id="{{ item.TOPIC_ID }}" class="topic_id">
+            <span style="display: none;">{{ item.TOPIC_ICON }}</span>
+            <img class="topic_icon" src="{{ item.TOPIC_ICON }}">
         </td>
-        <td><a href="{watch.U_FORUM}" class="genmed">{watch.FORUM_TITLE}</a></td>
+        <td><a href="{{ item.U_FORUM }}" class="genmed">{{ item.FORUM_TITLE }}</a></td>
         <td class="tLeft nowrap">
-            <!-- IF watch.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span><!-- ENDIF -->
-            <a class="topictitle" title="{watch.FULL_TOPIC_TITLE}" href="{watch.U_TOPIC}">{watch.TOPIC_TITLE}</a>
-            <!-- IF watch.PAGINATION --><br/><span class="topicPG">&nbsp;[{ICON_GOTOPOST}{L_GOTO_SHORT} {watch.PAGINATION} ]</span><!-- ENDIF -->
+            {% if item.POLL %}<span class="topicPoll">{{ __('TOPIC_POLL') }}</span>{% endif %}
+            <a class="topictitle" title="{{ item.FULL_TOPIC_TITLE }}" href="{{ item.U_TOPIC }}">{{ item.TOPIC_TITLE }}</a>
+            {% if item.PAGINATION %}<br/><span class="topicPG">&nbsp;[{{ ICON_GOTOPOST|raw }}{{ __('GOTO_SHORT') }} {{ item.PAGINATION|raw }} ]</span>{% endif %}
         </td>
-        <td>{watch.AUTHOR}</td>
-        <td class="gensmall">{watch.REPLIES}</td>
+        <td>{{ item.AUTHOR|raw }}</td>
+        <td class="gensmall">{{ item.REPLIES }}</td>
         <td class="gensmall nowrap">
-            <u>{watch.LAST_POST_RAW}</u>
-            {watch.LAST_POST}<!-- IF watch.IS_UNREAD --><a href="{watch.U_TOPIC_NEWEST}">{ICON_NEWEST_REPLY}</a><!-- ELSE -->
-            <a href="{watch.U_LAST_POST}">{ICON_LATEST_REPLY}</a><!-- ENDIF -->
+            <u>{{ item.LAST_POST_RAW }}</u>
+            {{ item.LAST_POST|raw }}{% if item.IS_UNREAD %}<a href="{{ item.U_TOPIC_NEWEST }}">{{ ICON_NEWEST_REPLY|raw }}</a>{% else %}
+            <a href="{{ item.U_LAST_POST }}">{{ ICON_LATEST_REPLY|raw }}</a>{% endif %}
         </td>
     </tr>
-    <!-- END watch -->
+    {% endfor %}
     <tfoot>
     <tr id="mod-action-row">
         <td colspan="6" id="mod-action-cell" class="row2">
-            <span id="ed-list-desc" class="small">{L_DEL_LIST_INFO}<span class="floatR">{MATCHES}</span></span>
+            <span id="ed-list-desc" class="small">{{ __('DEL_LIST_INFO') }}<span class="floatR">{{ MATCHES }}</span></span>
         </td>
     </tr>
     </tfoot>

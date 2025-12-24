@@ -15,23 +15,23 @@ $show = request()->getString('show');
 switch ($show) {
     case 'advert':
         $info['title'] = __('ADVERT');
-        $info['src'] = 'advert.html';
+        $info['src'] = 'advert.twig';
         break;
 
     case 'copyright_holders':
         $info['title'] = __('COPYRIGHT_HOLDERS');
-        $info['src'] = 'copyright_holders.html';
+        $info['src'] = 'copyright_holders.twig';
         break;
 
     case 'user_agreement':
         $info['title'] = __('USER_AGREEMENT');
-        $info['src'] = 'user_agreement.html';
+        $info['src'] = 'user_agreement.twig';
         break;
 
     default:
     case 'not_found':
         $info['title'] = __('NOT_FOUND');
-        $info['src'] = 'not_found.html';
+        $info['src'] = 'not_found.twig';
         break;
 }
 

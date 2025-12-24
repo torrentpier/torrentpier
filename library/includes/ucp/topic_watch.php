@@ -39,11 +39,6 @@ if (request()->post->has('topic_id_list')) {
     }
 }
 
-template()->assign_vars([
-    'PAGE_TITLE' => __('WATCHED_TOPICS'),
-    'S_FORM_ACTION' => WATCHLIST_URL,
-]);
-
 $sql = 'SELECT COUNT(topic_id) as watch_count FROM ' . BB_TOPICS_WATCH . " WHERE user_id = {$user_id}";
 if (!($result = DB()->sql_query($sql))) {
     bb_die('Could not obtain watch topic information #2');
@@ -69,6 +64,11 @@ if ($watch_count > 0) {
     }
     $watch = DB()->sql_fetchrowset($result);
 
+    $watchList = [];
+    $matches = '';
+    $pagination = '';
+    $pageNumber = '';
+
     if ($watch) {
         for ($i = 0, $iMax = count($watch); $i < $iMax; $i++) {
             $is_unread = is_unread($watch[$i]['topic_last_post_time'], $watch[$i]['topic_id'], $watch[$i]['forum_id']);
@@ -77,7 +77,7 @@ if ($watch_count > 0) {
             $topicTitle = $watch[$i]['topic_title'];
             $topicUrl = url()->topic($topicId, $topicTitle);
 
-            template()->assign_block_vars('watch', [
+            $watchList[] = [
                 'ROW_CLASS' => (!($i % 2)) ? 'row1' : 'row2',
                 'POST_ID' => $watch[$i]['topic_first_post_id'],
                 'TOPIC_ID' => $topicId,
@@ -97,21 +97,26 @@ if ($watch_count > 0) {
                 'POLL' => (bool)$watch[$i]['topic_vote'],
                 'TOPIC_ICON' => get_topic_icon($watch[$i], $is_unread),
                 'PAGINATION' => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination($topicUrl, $watch[$i]['topic_replies'], config()->get('posts_per_page')),
-            ]);
+            ];
         }
 
-        template()->assign_vars([
-            'MATCHES' => (count($watch) == 1) ? sprintf(__('FOUND_SEARCH_MATCH'), count($watch)) : sprintf(__('FOUND_SEARCH_MATCHES'), count($watch)),
-            'PAGINATION' => generate_pagination(WATCHLIST_URL, $watch_count, $per_page, $start),
-            'PAGE_NUMBER' => sprintf(__('PAGE_OF'), (floor($start / $per_page) + 1), ceil($watch_count / $per_page)),
-            'U_PER_PAGE' => WATCHLIST_URL,
-            'PER_PAGE' => $per_page,
-        ]);
+        $matches = (count($watch) == 1) ? sprintf(__('FOUND_SEARCH_MATCH'), count($watch)) : sprintf(__('FOUND_SEARCH_MATCHES'), count($watch));
+        $pagination = generate_pagination(WATCHLIST_URL, $watch_count, $per_page, $start);
+        $pageNumber = sprintf(__('PAGE_OF'), (floor($start / $per_page) + 1), ceil($watch_count / $per_page));
     }
     DB()->sql_freeresult($result);
+
+    print_page('usercp_topic_watch.twig', variables: [
+        'PAGE_TITLE' => __('WATCHED_TOPICS'),
+        'S_FORM_ACTION' => WATCHLIST_URL,
+        'WATCH_LIST' => $watchList,
+        'MATCHES' => $matches,
+        'PAGINATION' => $pagination,
+        'PAGE_NUMBER' => $pageNumber,
+        'U_PER_PAGE' => WATCHLIST_URL,
+        'PER_PAGE' => $per_page,
+    ]);
 } else {
     meta_refresh('index.php');
     bb_die(__('NO_WATCHED_TOPICS'));
 }
-
-print_page('usercp_topic_watch.tpl');

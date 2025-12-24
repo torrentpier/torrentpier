@@ -19,7 +19,7 @@
 <table class="borderless">
 <tr>
 	<!-- IF REPLY_PM_IMG --><td class="nowrap">{REPLY_PM_IMG}&nbsp;</td><!-- ENDIF -->
-	<td width="100%" class="nav"><a href="{U_INDEX}">{T_INDEX}</a></td>
+	<td width="100%" class="nav"><a href="{U_INDEX}">{L_HOME}</a></td>
 </tr>
 </table>
 

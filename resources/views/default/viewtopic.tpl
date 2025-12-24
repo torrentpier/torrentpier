@@ -252,7 +252,7 @@ function build_poll_add_form (src_el)
 <!-- ENDIF -->
 <!-- IF TOPIC_HAS_POLL or CAN_ADD_POLL -->
 <div id="poll" class="row5" style="padding: 0 10%; display: none;">
-<!-- IF TOPIC_HAS_POLL --><!-- INCLUDE viewtopic_poll.tpl --><!-- ENDIF -->
+<!-- IF TOPIC_HAS_POLL --><!-- INCLUDE viewtopic_poll.twig --><!-- ENDIF -->
 </div>
 <!-- ENDIF -->
 
@@ -463,7 +463,7 @@ function build_poll_add_form (src_el)
 				</div>
                 <!-- IF postrow.IS_FIRST_POST -->
                     <!-- IF SHOW_GUEST_STUB -->
-                        <!-- INCLUDE viewtopic_attach_guest.tpl -->
+                        <!-- INCLUDE viewtopic_attach_guest.twig -->
                     <!-- ELSE -->
                         <!-- INCLUDE viewtopic_attach.tpl -->
                     <!-- ENDIF -->

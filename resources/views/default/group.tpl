@@ -10,7 +10,7 @@
 
 <div class="spacer_4"></div>
 
-<p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
+<p class="nav"><a href="{U_INDEX}">{L_HOME}</a></p>
 
 <!-- IF SELECT_GROUP -->
 <!--========================================================================-->

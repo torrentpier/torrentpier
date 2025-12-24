@@ -66,7 +66,7 @@ ajax.callback.view_post = function(data) {
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
 
 <div class="nav">
-	<p class="floatL"><a href="{U_INDEX}">{T_INDEX}</a></p>
+	<p class="floatL"><a href="{U_INDEX}">{L_HOME}</a></p>
 	<p class="floatR"><!-- IF config('tracker.random_release_button') --><a href="{U_TRACKER}?random_release=1">{L_RANDOM_RELEASE}</a><!-- ENDIF --><!-- IF MATCHES -->&nbsp;&middot;&nbsp;{MATCHES}{SERACH_MAX}<!-- ENDIF --></p>
 	<div class="clear"></div>
 </div>

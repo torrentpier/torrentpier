@@ -177,7 +177,7 @@ ajax.callback.group_membership = function(data) {
 <h1 class="pagetitle"><!-- IF PROFILE_USER -->{L_MY_PROFILE}<!-- ELSE -->{L_VIEWING_PROFILE}<!-- ENDIF --></h1>
 
 <div class="nav">
-	<p class="floatL"><a href="{U_INDEX}">{T_INDEX}</a></p>
+	<p class="floatL"><a href="{U_INDEX}">{L_HOME}</a></p>
 	<!-- IF IS_ADMIN -->
 	<p class="floatR">
 		<a href="{U_MANAGE}">{L_PROFILE}</a> &middot;

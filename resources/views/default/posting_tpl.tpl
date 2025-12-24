@@ -4598,7 +4598,7 @@ function tpl_submit ()
 <h1 class="maintitle"><a href="{FORUM_URL}{FORUM_ID}">{FORUM_NAME}</a></h1>
 
 <div class="nav">
-	<p class="floatL"><a href="{U_INDEX}">{T_INDEX}</a></p>
+	<p class="floatL"><a href="{U_INDEX}">{L_HOME}</a></p>
 	<p class="floatR">
 		<!-- IF CAN_EDIT_TPL and not EDIT_TPL --><a href="{EDIT_TPL_URL}" class="adm">Редактировать шаблон</a> &nbsp;&middot;&nbsp;<!-- ENDIF -->
 		<a href="{REGULAR_TOPIC_HREF}">Создать обычную тему</a>

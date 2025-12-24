@@ -45,7 +45,7 @@
 <table width="100%">
 <tr>
 	<td>{POST_PM_IMG}</td>
-	<td width="100%" class="nav">&nbsp;<a href="{U_INDEX}">{T_INDEX}</a></td>
+	<td width="100%" class="nav">&nbsp;<a href="{U_INDEX}">{L_HOME}</a></td>
 	<td class="tRight nowrap med">
 		{L_DISPLAY_MESSAGES}:
 		<select name="msgdays">{S_SELECT_MSG_DAYS}</select>

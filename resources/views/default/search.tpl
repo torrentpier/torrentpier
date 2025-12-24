@@ -4,7 +4,7 @@
 <a name="start"></a>
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
 
-<p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
+<p class="nav"><a href="{U_INDEX}">{L_HOME}</a></p>
 
 <form action="{SEARCH_ACTION}" method="POST" name="post">
 {S_HIDDEN_FIELDS}

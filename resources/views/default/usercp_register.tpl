@@ -47,7 +47,7 @@
 </div>
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
 
-<p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
+<p class="nav"><a href="{U_INDEX}">{L_HOME}</a></p>
 
 <form id="prof-form" method="post" action="<!-- IF IS_ADMIN && PR_USER_ID -->?{#POST_USERS_URL#}={PR_USER_ID}<!-- ENDIF -->"
       class="tokenized" enctype="multipart/form-data">
@@ -376,7 +376,7 @@
                     <fieldset class="pad_6">
                         <legend class="med bold mrg_2 warnColor1">{L_USER_AGREEMENT_HEAD}</legend>
                         <div class="bCenter">
-                            <?php include($V['HTML_AGREEMENT']); ?>
+                            {% include '@lang/user_agreement.twig' ignore missing %}
                         </div>
                         <p class="med bold mrg_4 tCenter"><label><input type="checkbox" value="" onclick="toggle_disabled('agreement', this.checked)"/>&nbsp;{L_USER_AGREEMENT_AGREE}</label></p>
                     </fieldset>

@@ -6,7 +6,7 @@
 <div id="forums_list_wrap">
 
 <div id="forums_top_nav">
-	<h1 class="pagetitle"><a href="{U_INDEX}">{T_INDEX}</a></h1>
+	<h1 class="pagetitle"><a href="{U_INDEX}">{L_HOME}</a></h1>
 </div><!--/forums_top_nav-->
 
 <!-- IF LOGGED_IN -->

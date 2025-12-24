@@ -1,6 +1,6 @@
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
 
-<p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
+<p class="nav"><a href="{U_INDEX}">{L_HOME}</a></p>
 
 <!-- IF TPL_MODCP_IP -->
 <!--========================================================================-->

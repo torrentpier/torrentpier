@@ -1,23 +1,23 @@
-<!-- IF TPL_ADD_ATTACHMENT -->
+{% if TPL_ADD_ATTACHMENT %}
 <!--========================================================================-->
 
 <style>#clear_file_upload { display: none; }</style>
 
 <tr>
-	<th colspan="2" class="thHead"><!-- IF FILE_ATTACHED -->{L_UPDATE_ATTACHMENT}<!-- ELSE -->{L_ADD_ATTACHMENT}<!-- ENDIF --></th>
+	<th colspan="2" class="thHead">{% if FILE_ATTACHED %}{{ __('UPDATE_ATTACHMENT') }}{% else %}{{ __('ADD_ATTACHMENT') }}{% endif %}</th>
 </tr>
 <tr>
-	<td class="pad_4"><b>{L_FILENAME}</b></td>
+	<td class="pad_4"><b>{{ __('FILENAME') }}</b></td>
 	<td>
 		<table class="borderless" cellspacing="0">
 		<tr>
 			<td class="pad_4">
-				<input type="button" id="clear_file_upload" value="{L_CLEAR}" />
-				<input type="file" name="fileupload" size="45" maxlength="{FILESIZE}" />
-				<input type="submit" class="bold" name="post" value="<!-- IF FILE_ATTACHED -->{L_UPDATE_ATTACHMENT}<!-- ELSE -->{L_ADD_ATTACHMENT}<!-- ENDIF -->" style="margin-left: 8px;" />
-				<p class="small nowrap">{L_ADD_ATTACHMENT_EXPLAIN}</p>
+				<input type="button" id="clear_file_upload" value="{{ __('CLEAR') }}" />
+				<input type="file" name="fileupload" size="45" maxlength="{{ FILESIZE }}" />
+				<input type="submit" class="bold" name="post" value="{% if FILE_ATTACHED %}{{ __('UPDATE_ATTACHMENT') }}{% else %}{{ __('ADD_ATTACHMENT') }}{% endif %}" style="margin-left: 8px;" />
+				<p class="small nowrap">{{ __('ADD_ATTACHMENT_EXPLAIN') }}</p>
 			</td>
-			<td class="med pad_4" style="padding-left: 12px;">{RULES}</td>
+			<td class="med pad_4" style="padding-left: 12px;">{{ RULES|raw }}</td>
 		</tr>
 		</table>
 	</td>
@@ -41,31 +41,31 @@
 </script>
 
 <!--========================================================================-->
-<!-- ENDIF / TPL_ADD_ATTACHMENT -->
+{% endif %}
 
-<!-- IF FILE_ATTACHED -->
+{% if FILE_ATTACHED %}
 <!--========================================================================-->
 
 <tbody class="pad_4">
 <tr>
-	<th colspan="2" class="thHead">{L_POSTED_ATTACHMENTS}</th>
+	<th colspan="2" class="thHead">{{ __('POSTED_ATTACHMENTS') }}</th>
 </tr>
-<!-- BEGIN attach_row -->
+{% for item in ATTACH_ROW %}
 <tr>
-	<td class="row5"><b>{L_FILENAME}</b></td>
-	<td class="row5"><a class="gen" href="{attach_row.U_VIEW_ATTACHMENT}" target="_blank"><b>{attach_row.FILE_NAME}</b></a></td>
+	<td class="row5"><b>{{ __('FILENAME') }}</b></td>
+	<td class="row5"><a class="gen" href="{{ item.U_VIEW_ATTACHMENT }}" target="_blank"><b>{{ item.FILE_NAME }}</b></a></td>
 </tr>
 <tr>
-	<td class="row1">{L_OPTIONS}</td>
+	<td class="row1">{{ __('OPTIONS') }}</td>
 	<td class="row1">
-		<input type="submit" name="del_attachment[{attach_row.ATTACH_FILENAME}]" value="{L_DELETE_ATTACHMENT}" />&nbsp;
+		<input type="submit" name="del_attachment[{{ item.ATTACH_FILENAME }}]" value="{{ __('DELETE_ATTACHMENT') }}" />&nbsp;
 	</td>
 </tr>
 <tr>
 	<td colspan="2" class="spaceRow"><div class="spacer_4"></div></td>
 </tr>
-<!-- END attach_row -->
+{% endfor %}
 </tbody>
 
 <!--========================================================================-->
-<!-- ENDIF / FILE_ATTACHED -->
+{% endif %}

@@ -401,9 +401,7 @@ function go_to_page ()
 					<!-- IF config('seed_bonus_enabled') --><tr><td>{L_SEED_BONUS}</td><td><a href="{BONUS_URL}"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
 				</table>
 			</div><!-- ENDIF -->
-			<!-- IF HTML_SIDEBAR_1 -->
-				<?php include($V['HTML_SIDEBAR_1']); ?>
-			<!-- ENDIF -->
+			{% include '@lang/sidebar1.twig' ignore missing %}
 			<img width="210" class="spacer" src="{SPACER}" alt="" />
 		</div><!--/sidebar1-wrap-->
 	</td><!--/sidebar1-->

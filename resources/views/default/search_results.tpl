@@ -3,7 +3,7 @@
 <!-- ENDIF -->
 
 <div class="nav">
-    <a href="{U_INDEX}">{T_INDEX}</a>
+    <a href="{U_INDEX}">{L_HOME}</a>
     <!-- IF MY_POSTS -->
     &nbsp;&middot;&nbsp;
     <span id="show-edit-btn"><a href="#">{L_EDIT_MY_MESSAGE_LIST}</a></span>

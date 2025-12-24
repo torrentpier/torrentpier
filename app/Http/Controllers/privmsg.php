@@ -121,7 +121,7 @@ $savebox_url = ($folder != 'savebox' || $mode != '') ? '<a href="' . PM_URL . '?
 //
 // Start main
 //
-template()->assign_var('POSTING_SUBJECT');
+template()->assign_vars(['POSTING_SUBJECT' => true]);
 
 if ($mode == 'read') {
     if (request()->query->has(POST_POST_URL)) {
@@ -1089,13 +1089,15 @@ if ($mode == 'read') {
     //
     // Load templates
     //
-    template()->set_filenames(['body' => 'posting.tpl']);
+    template()->set_filenames(['body' => 'posting.twig']);
 
     //
     // Enable extensions in posting_body
     //
-    template()->assign_block_vars('switch_privmsg', []);
-    template()->assign_var('POSTING_USERNAME');
+    template()->assign_vars([
+        'IN_PM' => true,
+        'POSTING_USERNAME' => true,
+    ]);
 
     //
     // Assign posting title & hidden fields

@@ -129,7 +129,6 @@ template()->assign_vars([
 
     'SITENAME' => config()->get('sitename'),
     'U_INDEX' => FORUM_PATH,
-    'T_INDEX' => sprintf(__('FORUM_INDEX'), config()->get('sitename')),
 
     'IS_GUEST' => IS_GUEST,
     'IS_USER' => IS_USER,
