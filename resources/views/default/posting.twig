@@ -190,7 +190,7 @@
         <td class="message td2">
             <div class="post_head pad_4">
                 {% if item.IS_UNREAD %}{{ MINIPOST_IMG_NEW|raw }}{% else %}{{ MINIPOST_IMG|raw }}{% endif %}
-                <a class="small" href="{{ POST_URL }}{{ item.POST_ID }}#{{ item.POST_ID }}" title="{{ __('POST_LINK') }}">{{ item.POST_DATE|raw }}</a>
+                <a class="small" href="{{ POST_URL }}{{ item.POST_ID }}#{{ item.POST_ID }}" title="{{ __('POST_LINK') }}">{{ item.POST_DATE }}</a>
             </div>
             <div class="post_wrap post_body">{{ item.MESSAGE|raw }}</div>
         </td>

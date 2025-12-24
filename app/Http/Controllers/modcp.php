@@ -69,7 +69,7 @@ function validate_topics($forum_id, &$req_topics, &$topic_titles)
 
         foreach (DB()->fetch_rowset($sql) as $row) {
             $valid_topics[] = $row['topic_id'];
-            $valid_titles[] = $row['topic_title'];
+            $valid_titles[] = htmlspecialchars($row['topic_title']);
         }
     }
 
