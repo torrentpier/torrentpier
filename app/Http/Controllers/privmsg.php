@@ -350,7 +350,7 @@ if ($mode == 'read') {
     //
     // Load templates
     //
-    template()->set_filenames(['body' => 'privmsgs_read.tpl']);
+    template()->set_filenames(['body' => 'privmsgs_read.twig']);
 
     template()->assign_vars([
         'INBOX' => $inbox_url,

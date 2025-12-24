@@ -1,0 +1,331 @@
+<h1 class="pagetitle">{{ PAGE_TITLE }}{% if GROUP_NAME %} :: {{ GROUP_NAME }}{% endif %}</h1>
+
+{% if GROUP_TYPE_TEXT %}
+<div class="pad_4">{{ __('GROUP_TYPE') }}: <b>{{ GROUP_TYPE_TEXT }}</b></div>
+{% endif %}
+
+{% if PAGINATION %}
+<div class="pad_4">{{ PAGE_NUMBER }}</div>
+{% endif %}
+
+<div class="spacer_4"></div>
+
+<p class="nav"><a href="{{ U_INDEX }}">{{ __('HOME') }}</a></p>
+
+{% if SELECT_GROUP %}
+<!--========================================================================-->
+
+<table class="forumline">
+    <tr>
+        <th>{{ __('MEMBERSHIP_DETAILS') }}</th>
+    </tr>
+    <tbody class="row1">
+    <tr>
+        <td class="pad_4">
+            <table class="bordered wAuto bCenter">
+                <tr class="row2">
+                    {% for item in GROUPS %}
+                    <td class="pad_8 med bold">{{ item.MEMBERSHIP }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for item in GROUPS %}
+                    <td class="vTop pad_4">
+                        <ul>
+                            {{ item.GROUP_SELECT|raw }}
+                        </ul>
+                    </td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+    <tr>
+        <td class="catBottom">&nbsp;</td>
+    </tr>
+</table>
+
+<!--========================================================================-->
+{% endif %}
+
+{% if GROUP_INFO %}
+<!--========================================================================-->
+
+<form action="{{ S_GROUP_ACTION }}" method="post">
+    {{ S_HIDDEN_FIELDS|raw }}
+
+    <table class="forumline pad_4">
+        <col class="row1" width="20%">
+        <col class="row2" width="100%">
+        <tr>
+            <th colspan="2">{{ __('GROUP_INFORMATION') }}</th>
+        </tr>
+        <tr>
+            <td colspan="2"><h2>{{ GROUP_NAME }}</h2></td>
+        </tr>
+        <tr>
+            <td class="tCenter" valign="top">
+                {{ GROUP_AVATAR|raw }}
+            </td>
+            <td valign="top">
+                {% if GROUP_DESCRIPTION %}
+                <div class="post_wrap">{{ GROUP_DESCRIPTION|raw }}</div>
+                {% else %}
+                {% if SWITCH_MOD_OPTION %}
+                <a href="{{ U_GROUP_CONFIG }}#group_description">{{ __('EDIT') }}</a>
+                {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+        {% if GROUP_SIGNATURE %}
+        <tr>
+            <td>{{ __('GROUP_SIGNATURE') }}:</td>
+            <td>
+                <div class="post_wrap">{{ GROUP_SIGNATURE|raw }}</div>
+            </td>
+        </tr>
+        {% endif %}
+        {% if RELEASE_GROUP %}
+        <tr>
+            <td>{{ __('GROUP_TYPE') }}:</td>
+            <td>{{ __('RELEASE_GROUP') }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td>{{ __('GROUP_TIME') }}:</td>
+            <td>{{ GROUP_TIME }}</td>
+        </tr>
+        <tr>
+            <td>{{ __('GROUP_MEMBERSHIP') }}:</td>
+            <td><p>{{ GROUP_DETAILS|raw }}
+                    {% if SHOW_SUBSCRIBE_CONTROLS %}
+                    <input class="mainoption" type="submit" name="joingroup" value="{{ __('JOIN_A_GROUP') }}"
+                           onclick="return confirm('{{ __('JOIN_A_GROUP') }}?');"/>
+                    {% endif %}
+                    {% if SHOW_UNSUBSCRIBE_CONTROLS %}
+                    <input class="mainoption" type="submit" name="{{ CONTROL_NAME }}" value="{{ __('UNSUBSCRIBE_GROUP') }}"
+                           onclick="return confirm('{{ __('UNSUBSCRIBE_GROUP') }}?');"/>
+                    {% endif %}
+                </p>
+            </td>
+        </tr>
+        {% if SWITCH_MOD_OPTION %}
+        <tr>
+            <td>{{ __('GROUP_CONFIGURATION') }}:</td>
+            <td>
+                <a href="{{ U_GROUP_CONFIG }}">{{ __('GROUP_GOTO_CONFIG') }}</a>
+            </td>
+        </tr>
+        {% endif %}
+    </table>
+</form>
+
+<div class="spacer_10"></div>
+<p class="nav"><a href="{{ U_GROUP_MEMBERS }}" name="members">{{ __('GROUP_MEMBERS') }}</a>{% if RELEASE_GROUP %}&nbsp;::&nbsp;<a
+        href="{{ U_GROUP_RELEASES }}" name="releases">{{ __('GROUPS_RELEASES') }}</a>{% endif %}</p>
+
+{% if MEMBERS %}
+<form action="{{ S_GROUP_ACTION }}" method="post" name="post">
+    {{ S_HIDDEN_FIELDS|raw }}
+
+    <table class="forumline tablesorter">
+        <thead>
+        <tr>
+            <th class="{sorter: 'digit'}"><b class="tbs-text">#</b></th>
+            <th class="{sorter: false}"><b class="tbs-text">{{ __('AVATAR') }}</b></th>
+            <th class="{sorter: 'text'}"><b class="tbs-text">{{ __('USERNAME') }}</b></th>
+            <th class="{sorter: false}"><b class="tbs-text">{{ __('PM') }}</b></th>
+            <th class="{sorter: 'text'}"><b class="tbs-text">{{ __('EMAIL') }}</b></th>
+            <th class="{sorter: false}"><b class="tbs-text">{{ __('LOCATION') }}</b></th>
+            <th width="10%" class="{sorter: 'digit'}"><b class="tbs-text">{{ __('JOINED') }}</b></th>
+            <th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('POSTS_SHORT') }}</b></th>
+            <th class="{sorter: false}"><b class="tbs-text">{{ __('WEBSITE') }}</b></th>
+            <th width="10%" class="{sorter: 'digit'}"><b class="tbs-text">{{ __('EFFECTIVE_DATE') }}</b></th>
+            <th class="{sorter: false}"><b class="tbs-text">#</b></th>
+        </tr>
+        <tr>
+            <td colspan="11" class="catTitle">{{ __('GROUP_MODERATOR') }}</td>
+        </tr>
+        <tr class="row1 tCenter">
+            <td width="3%">{{ ROW_NUMBER }}</td>
+            <td width="3%" class="tCenter">{{ MOD_AVATAR|raw }}</td>
+            <td><b>{{ MOD_USER|raw }}</b></td>
+            <td>{{ MOD_PM|raw }}</td>
+            <td>{{ MOD_EMAIL|raw }}</td>
+            <td>{{ MOD_FROM }}</td>
+            <td class="small"><u>{{ MOD_JOINED_RAW }}</u>{{ MOD_JOINED }}</td>
+            <td>{{ MOD_POSTS }}</td>
+            <td>{{ MOD_WWW|raw }}</td>
+            <td class="small"><u>{{ MOD_TIME_RAW }}</u>{{ MOD_TIME }}</td>
+            <td width="3%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="11" class="catTitle">{{ __('GROUP_MEMBERS') }}</td>
+        </tr>
+        </thead>
+
+        {% for item in MEMBER_LIST %}
+        <tr class="{{ item.ROW_CLASS }} tCenter">
+            <td width="3%">{{ item.ROW_NUMBER }}</td>
+            <td width="3%" class="tCenter">{{ item.AVATAR_IMG|raw }}</td>
+            <td>{{ item.USER|raw }}</td>
+            <td>{{ item.PM|raw }}</td>
+            <td>{{ item.EMAIL|raw }}</td>
+            <td>{{ item.FROM }}</td>
+            <td class="small"><u>{{ item.JOINED_RAW }}</u>{{ item.JOINED }}</td>
+            <td>{{ item.POSTS }}</td>
+            <td>{{ item.WWW|raw }}</td>
+            <td class="small"><u>{{ item.TIME_RAW }}</u>{{ item.TIME }}</td>
+            <td width="3%">
+                {% if SWITCH_MOD_OPTION %}
+                <input type="checkbox" name="members[]" value="{{ item.USER_ID }}"/>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+
+        {% if SWITCH_NO_MEMBERS %}
+        <tr>
+            <td colspan="11" class="row1 tCenter pad_10">{{ __('NO_GROUP_MEMBERS') }}</td>
+        </tr>
+        {% endif %}
+
+        {% if SWITCH_HIDDEN_GROUP %}
+        <tr>
+            <td colspan="11" class="row1 tCenter">{{ __('HIDDEN_GROUP_MEMBERS') }}</td>
+        </tr>
+        {% endif %}
+
+        {% if SWITCH_MOD_OPTION %}
+        <tfoot>
+        <tr>
+            <td colspan="11" class="cat" style="padding: 2px 12px;">
+                <p id="add_group_member" class="floatL">
+                    <input type="text" name="username" maxlength="50" size="20"/>
+                    <input type="submit" name="add" value="{{ __('ADD_MEMBER') }}" class="mainoption"/>
+                    <input type="button" name="usersubmit" value="{{ __('FIND_USERNAME') }}" class="liteoption"
+                           onclick="window.open('{{ U_SEARCH_USER }}', '_bbsearch', IWP_US);return false;"/>
+                </p>
+                <p class="floatR" style="padding-top: 1px;">
+                    <input type="submit" name="remove" value="{{ __('REMOVE_SELECTED') }}" class="mainoption"
+                           onclick="return confirm('{{ __('REMOVE_SELECTED') }}?');"/>
+                </p>
+            </td>
+        </tr>
+        </tfoot>
+        {% endif %}
+    </table>
+
+    {% if PAGINATION %}
+    <div class="bottom_info">
+        <div class="nav">
+            <p style="float: left">{{ PAGE_NUMBER }}</p>
+            <p style="float: right">{{ PAGINATION|raw }}</p>
+            <div class="clear"></div>
+        </div>
+    </div><!--/bottom_info-->
+    {% endif %}
+
+    {% if PENDING_USERS %}
+    <table class="forumline tablesorter">
+        <thead>
+        <tr>
+            <th class="{sorter: false}"><b class="tbs-text">#</b></th>
+            <th class="{sorter: false}"><b class="tbs-text">{{ __('AVATAR') }}</b></th>
+            <th class="{sorter: 'text'}"><b class="tbs-text">{{ __('USERNAME') }}</b></th>
+            <th class="{sorter: false}"><b class="tbs-text">{{ __('PM') }}</b></th>
+            <th class="{sorter: 'text'}"><b class="tbs-text">{{ __('EMAIL') }}</b></th>
+            <th class="{sorter: false}"><b class="tbs-text">{{ __('LOCATION') }}</b></th>
+            <th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('JOINED') }}</b></th>
+            <th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('POSTS_SHORT') }}</b></th>
+            <th class="{sorter: false}"><b class="tbs-text">{{ __('WEBSITE') }}</b></th>
+        </tr>
+        <tr>
+            <td class="catTitle" colspan="9">{{ __('PENDING_MEMBERS') }}</td>
+        </tr>
+        </thead>
+        {% for item in PENDING_LIST %}
+        <tr class="{{ item.ROW_CLASS }} tCenter">
+            <td width="3%"><input type="checkbox" name="pending_members[]" value="{{ item.USER_ID }}"/></td>
+            <td width="3%">{{ item.AVATAR_IMG|raw }}</td>
+            <td>{{ item.USER|raw }}</td>
+            <td>{{ item.PM|raw }}</td>
+            <td>{{ item.EMAIL|raw }}</td>
+            <td>{{ item.FROM }}</td>
+            <td class="small"><u>{{ item.JOINED_RAW }}</u>{{ item.JOINED }}</td>
+            <td>{{ item.POSTS }}</td>
+            <td>{{ item.WWW|raw }}</td>
+        </tr>
+        {% endfor %}
+        <tfoot>
+        <tr>
+            <td class="cat" colspan="9">
+                <input type="submit" name="approve" value="{{ __('APPROVE_SELECTED') }}"
+                       onclick="return confirm('{{ __('APPROVE_SELECTED') }}?');" class="mainoption"/>
+                &nbsp;
+                <input type="submit" name="deny" value="{{ __('DENY_SELECTED') }}"
+                       onclick="return confirm('{{ __('DENY_SELECTED') }}?');" class="liteoption"/>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+    {% endif %}
+</form>
+{% endif %}
+
+{% if RELEASES %}
+<table class="forumline tablesorter">
+    <thead>
+    <tr>
+        <th class="{sorter: false}"><b class="tbs-text">#</b></th>
+        <th class="{sorter: false}"><b class="tbs-text">{{ __('AVATAR') }}</b></th>
+        <th class="{sorter: 'text'}"><b class="tbs-text">{{ __('USERNAME') }}</b></th>
+        <th class="{sorter: 'text'}"><b class="tbs-text">{{ __('TOPIC') }}</b></th>
+        <th class="{sorter: 'text'}"><b class="tbs-text">{{ __('FORUM') }}</b></th>
+        <th class="{sorter: 'digit'}" width="3%"><b class="tbs-text">{{ __('BT_CREATED') }}</b></th>
+    </tr>
+    <tr>
+        <td class="catTitle" colspan="9">{{ __('GROUPS_RELEASES') }}</td>
+    </tr>
+    </thead>
+    {% for item in RELEASES_LIST %}
+    <tr class="{{ item.ROW_CLASS }} tCenter">
+        <td width="3%">{{ item.ROW_NUMBER }}</td>
+        <td width="3%">{{ item.AVATAR_IMG|raw }}</td>
+        <td><b>{{ item.RELEASER|raw }}</b></td>
+        <td>{{ item.RELEASE_NAME|raw }}</td>
+        <td>{{ item.RELEASE_FORUM|raw }}</td>
+        <td>{{ item.RELEASE_TIME }}</td>
+    </tr>
+    {% endfor %}
+    <tfoot>
+    <tr>
+        <td class="cat tCenter" colspan="9"><b><a href="{{ U_SEARCH_RELEASES }}">{{ __('MORE_RELEASES') }}</a></b></td>
+    </tr>
+    </tfoot>
+</table>
+
+{% if PAGINATION %}
+<div class="bottom_info">
+    <div class="nav">
+        <p style="float: left">{{ PAGE_NUMBER }}</p>
+        <p style="float: right">{{ PAGINATION|raw }}</p>
+        <div class="clear"></div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+
+<!--========================================================================-->
+{% endif %}
+
+<!--bottom_info-->
+<div class="bottom_info">
+    <div class="spacer_4"></div>
+    <div id="timezone">
+        <p>{{ CURRENT_TIME }}</p>
+        <p>{{ S_TIMEZONE }}</p>
+    </div>
+    <div class="clear"></div>
+</div><!--/bottom_info-->

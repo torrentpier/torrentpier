@@ -560,13 +560,7 @@ switch ($mode) {
             if (($total_posts = DB()->num_rows($result)) > 0) {
                 $postrow = DB()->sql_fetchrowset($result);
 
-                template()->assign_vars([
-                    'FORUM_NAME' => htmlCHR($forum_name),
-                    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
-                    'S_SPLIT_ACTION' => FORUM_PATH . 'modcp',
-                    'S_HIDDEN_FIELDS' => $s_hidden_fields,
-                    'S_FORUM_SELECT' => get_forum_select('admin', 'new_forum_id', $forum_id),
-                ]);
+                $postrowList = [];
 
                 for ($i = 0; $i < $total_posts; $i++) {
                     $post_id = $postrow[$i]['post_id'];
@@ -585,7 +579,7 @@ switch ($mode) {
                     $message = bbcode()->toHtml($message);
 
                     $row_class = !($i % 2) ? 'row1' : 'row2';
-                    template()->assign_block_vars('postrow', [
+                    $postrowList[] = [
                         'ROW_CLASS' => $row_class,
                         'POSTER_NAME' => profile_url(['username' => $poster, 'user_id' => $poster_id, 'user_rank' => $poster_rank]),
                         'POST_DATE' => $post_date,
@@ -594,15 +588,24 @@ switch ($mode) {
                         'POST_ID' => $post_id,
                         'ROW_ID' => $i,
                         'CB_ID' => 'cb_' . $i,
-                    ]);
+                    ];
 
                     if ($post_id == $topic_first_post_id) {
                         define('BEGIN_CHECKBOX', true);
                     }
                 }
+
+                template()->assign_vars([
+                    'FORUM_NAME' => htmlCHR($forum_name),
+                    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
+                    'S_SPLIT_ACTION' => FORUM_PATH . 'modcp',
+                    'S_HIDDEN_FIELDS' => $s_hidden_fields,
+                    'S_FORUM_SELECT' => get_forum_select('admin', 'new_forum_id', $forum_id),
+                    'POSTROW' => $postrowList,
+                ]);
             }
         }
-        template()->set_filenames(['body' => 'modcp_split.tpl']);
+        template()->set_filenames(['body' => 'modcp_split.twig']);
         break;
 
     case 'ip':

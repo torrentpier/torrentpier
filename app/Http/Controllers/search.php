@@ -322,7 +322,7 @@ if (empty(request()->query->all()) && empty(request()->post->all())) {
         'DISPLAY_AS_SELECT' => build_select($params->key('display_as'), $display_as_select, $params->val('display_as')),
     ]);
 
-    print_page('search.tpl');
+    print_page('search.twig');
 }
 
 unset($forums);
