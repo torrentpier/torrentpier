@@ -146,10 +146,10 @@ $bb_cfg['ip2country_settings'] = [
 ];
 
 // FAQ url help link
-$bb_cfg['how_to_download_url_help'] = 'viewtopic?t=1'; // How to download?
-$bb_cfg['what_is_torrent_url_help'] = 'viewtopic?t=2'; // What is a torrent?
-$bb_cfg['ratio_url_help'] = 'viewtopic?t=3'; // Rating and limits
-$bb_cfg['search_help_url'] = 'viewtopic?t=4'; // Help doc about performing basic searches
+$bb_cfg['how_to_download_url_help'] = '/threads/1'; // How to download?
+$bb_cfg['what_is_torrent_url_help'] = '/threads/2'; // What is a torrent?
+$bb_cfg['ratio_url_help'] = '/threads/3'; // Rating and limits
+$bb_cfg['search_help_url'] = '/threads/4'; // Help doc about performing basic searches
 
 // Torrents
 $bb_cfg['bt_min_ratio_allow_dl_tor'] = 0.3; // 0 - disable
