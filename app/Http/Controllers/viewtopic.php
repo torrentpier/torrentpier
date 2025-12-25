@@ -783,10 +783,10 @@ for ($i = 0; $i < $total_posts; $i++) {
         template()->assign_block_vars('postrow.ban', ['IS_BANNED' => true]);
     }
 
-    if ($is_first_post && $t_data['attach_ext_id'] && $is_auth['auth_download']) {
-        if (IS_GUEST) {
-            template()->assign_var('SHOW_GUEST_STUB', ($t_data['attach_ext_id'] == TORRENT_EXT_ID));
-        } elseif ($t_data['attach_ext_id'] == TORRENT_EXT_ID) {
+    if ($is_first_post && $t_data['attach_ext_id'] == TORRENT_EXT_ID) {
+        if (IS_GUEST && !$is_auth['auth_download']) {
+            template()->assign_var('SHOW_GUEST_STUB', true);
+        } elseif ($is_auth['auth_download']) {
             require_once INC_DIR . '/viewtopic_torrent.php';
             render_torrent_block($t_data, $poster_id, $is_auth, $post_id);
         }
