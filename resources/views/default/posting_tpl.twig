@@ -36,10 +36,10 @@ $(function(){
 	$('#tpl-src-title').val( $('#tpl-src-title-val').val() );
 	$('#tpl-src-msg').val( $('#tpl-src-msg-val').val() );
 
-<!-- IF EDIT_TPL -->
-	<!-- IF NO_TPL_ASSIGNED -->
+{% if EDIT_TPL %}
+	{% if NO_TPL_ASSIGNED %}
 	$('#toggle-info-a').click();
-	<!-- ENDIF -->
+	{% endif %}
 
 	// список-подсказка атрибутов для #tpl-src-msg (HEAD, POSTER, req..)
 	var ls = [];
@@ -110,11 +110,11 @@ $(function(){
 		$('#tpl-row-src').trigger('keypress', [13]).focus();
 	});
 	$('#tpl-el_id-sel').append($el_id_sel);
-<!-- ENDIF / EDIT_TPL -->
+{% endif %}
 });
 
 var TPL = {
-	<!-- IF EDIT_TPL -->
+	{% if EDIT_TPL %}
 	el_def_val: {
 		// значения для автозаполнителя формы. если не определено, то заполняется названием
 
@@ -125,7 +125,7 @@ var TPL = {
 		// dummy
 		dummy : ''
 	},
-	<!-- ENDIF -->
+	{% endif %}
 
 	match_rows: function(s) {
 		return $.trim(s).split(/\->/g) || [];
@@ -349,27 +349,27 @@ var TPL = {
 	},
 	// сообщения об ошибках при валидации заполнения формы
 	err_msg: {
-		empty_INP : '{L_TPL_EMPTY_FIELD}',
-		empty_TXT : '{L_TPL_EMPTY_FIELD}',
-		empty_SEL : '{L_TPL_EMPTY_SEL}',
-		not_num   : '{L_TPL_NOT_NUM}',
-		not_url   : '{L_TPL_NOT_URL}',
-		not_img   : '{L_TPL_NOT_IMG_URL}'
+		empty_INP : '{{ __('TPL_EMPTY_FIELD') }}',
+		empty_TXT : '{{ __('TPL_EMPTY_FIELD') }}',
+		empty_SEL : '{{ __('TPL_EMPTY_SEL') }}',
+		not_num   : '{{ __('TPL_NOT_NUM') }}',
+		not_url   : '{{ __('TPL_NOT_URL') }}',
+		not_img   : '{{ __('TPL_NOT_IMG_URL') }}'
 	},
 
 	msg_attr: {
-		HEAD     : '{L_TPL_PUT_INTO_SUBJECT}',
-		POSTER   : '{L_TPL_POSTER}',
-		req      : '{L_TPL_REQ_FILLING}',
-		spoiler  : '{L_TPL_SPOILER}',
-		BR       : '{L_TPL_NEW_LINE}',
-		br2      : '{L_TPL_NEW_LINE_AFTER}',
-		num      : '{L_TPL_NUM}',
-		URL      : '{L_TPL_URL}',
-		img      : '{L_TPL_IMG}',
-		pre      : '{L_TPL_PRE}',
-		inline   : '{L_TPL_IN_LINE}',
-		headonly : '{L_TPL_HEADER_ONLY}'
+		HEAD     : '{{ __('TPL_PUT_INTO_SUBJECT') }}',
+		POSTER   : '{{ __('TPL_POSTER') }}',
+		req      : '{{ __('TPL_REQ_FILLING') }}',
+		spoiler  : '{{ __('TPL_SPOILER') }}',
+		BR       : '{{ __('TPL_NEW_LINE') }}',
+		br2      : '{{ __('TPL_NEW_LINE_AFTER') }}',
+		num      : '{{ __('TPL_NUM') }}',
+		URL      : '{{ __('TPL_URL') }}',
+		img      : '{{ __('TPL_IMG') }}',
+		pre      : '{{ __('TPL_PRE') }}',
+		inline   : '{{ __('TPL_IN_LINE') }}',
+		headonly : '{{ __('TPL_HEADER_ONLY') }}'
 	},
 	reg: {
 		num     : /^\d+$/,
@@ -4352,7 +4352,7 @@ function preg_quote (str) {
 	return (str+'').replace(/([\\\.\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|\:])/g, "\\$1");
 }
 
-<!-- IF EDIT_TPL -->
+{% if EDIT_TPL %}
 TPL.build_el_attr_select = function(){
 	var s = '<select><option value="">&raquo;&raquo; Элементы формы/Названия &nbsp;</option>';
 	var q = /"/g;  //"
@@ -4585,7 +4585,7 @@ function str_pad ( input, pad_length, pad_string, pad_type ) {
 
 	return input;
 }
-<!-- ENDIF / EDIT_TPL -->
+{% endif %}
 
 function tpl_submit ()
 {
@@ -4598,15 +4598,15 @@ function tpl_submit ()
 <h1 class="maintitle"><a href="{FORUM_URL}{FORUM_ID}">{FORUM_NAME}</a></h1>
 
 <div class="nav">
-	<p class="floatL"><a href="{U_INDEX}">{L_HOME}</a></p>
+	<p class="floatL"><a href="{U_INDEX}">{{ __('HOME') }}</a></p>
 	<p class="floatR">
-		<!-- IF CAN_EDIT_TPL and not EDIT_TPL --><a href="{EDIT_TPL_URL}" class="adm">Редактировать шаблон</a> &nbsp;&middot;&nbsp;<!-- ENDIF -->
+		{% if CAN_EDIT_TPL and not EDIT_TPL %}<a href="{EDIT_TPL_URL}" class="adm">Редактировать шаблон</a> &nbsp;&middot;&nbsp;{% endif %}
 		<a href="{REGULAR_TOPIC_HREF}">Создать обычную тему</a>
 	</p>
 	<div class="clear"></div>
 </div>
 
-<!-- IF not EDIT_TPL -->
+{% if not EDIT_TPL %}
 <div style="display: none;">
 	<textarea id="tpl-src-form" rows="10" cols="10"></textarea>
 	<textarea id="tpl-src-title" rows="10" cols="10"></textarea>
@@ -4618,7 +4618,7 @@ $(function(){
 	initPostBBCode('#tpl-rules-html');
 });
 </script>
-<!-- IF TPL_RULES_HTML -->
+{% if TPL_RULES_HTML %}
 <table class="forumline">
 <tr>
 	<th>Правила оформления</th>
@@ -4631,10 +4631,10 @@ $(function(){
 </tr>
 </table>
 <div class="spacer_12"></div>
-<!-- ENDIF / TPL_RULES_HTML -->
-<!-- ENDIF / !EDIT_TPL -->
+{% endif %}
+{% endif %}
 
-<!-- IF EDIT_TPL -->
+{% if EDIT_TPL %}
 <table class="forumline">
 <col class="row2" width="75%">
 <col class="row2" width="25%">
@@ -4717,25 +4717,25 @@ $(function(){
 			<fieldset>
 			<legend>Включить/Загрузить</legend>
 			<div style="padding: 2px 12px 6px;">
-            {L_RELEASE}: &nbsp;
-			<!-- IF TPL_SELECT -->{TPL_SELECT} &nbsp;
+            {{ __('RELEASE') }}: &nbsp;
+			{% if TPL_SELECT %}{TPL_SELECT} &nbsp;
 			<input type="button" value="Включить в этом форуме" class="bold" onclick="ajax.topic_tpl('assign', {tpl_id: $('#forum_tpl_select').val()})" /> &nbsp;
 			<input type="button" value="Загрузить" onclick="ajax.topic_tpl('load')" /> &nbsp;
-            <input type="button" value="{L_REMOVE}" onclick="ajax.topic_tpl('remove')" /> &nbsp;
-			<!-- ELSE -->Нет шаблонов для релизов<!-- ENDIF -->
+            <input type="button" value="{{ __('REMOVE') }}" onclick="ajax.topic_tpl('remove')" /> &nbsp;
+			{% else %}Нет шаблонов для релизов{% endif %}
 			<br /><br />
 			<span class="gen">
-			<!-- IF NO_TPL_ASSIGNED -->
+			{% if NO_TPL_ASSIGNED %}
 			В этом форуме шаблоны <b>не включены</b><br />
-			<!-- ELSE -->
+			{% else %}
 			Сейчас в этом форуме включен шаблон: <b>{TPL_NAME}</b><br />
-			<!-- ENDIF -->
+			{% endif %}
 			</span>
 			</div>
 			</fieldset>
 			<br />
 
-			<div <!-- IF NO_TPL_ASSIGNED -->style="display: none;"<!-- ENDIF --> id="tpl-save-block">
+			<div {% if NO_TPL_ASSIGNED %}style="display: none;"{% endif %} id="tpl-save-block">
 			<fieldset>
 			<legend>Сохранить изменения для шаблона <b id="tpl-name-old-save">{TPL_NAME}</b></legend>
 			<div style="padding: 2px 12px 6px;">
@@ -4745,7 +4745,7 @@ $(function(){
 			<div class="label"><a href="{POST_URL}{TPL_RULES_POST_ID}#{TPL_RULES_POST_ID}" id="tpl-rules-link" target="_blank">Правила</a> (ссылка на сообщение с правилами или номер сообщения):</div>
 			<input type="text" id="tpl-rules-save" size="60" value="{TPL_RULES_POST_ID}" style="width: 75%" /><br />
 
-			<div class="label">{L_COMMENT}:</div>
+			<div class="label">{{ __('COMMENT') }}:</div>
 			<textarea id="tpl-comment-save" rows="2" cols="80" class="editor" style="width: 90%">{TPL_COMMENT}</textarea>
 
 			<div class="label">Последний раз редактировалось: <i id="tpl-last-edit-time">{TPL_LAST_EDIT_TIME}</i> by <b id="tpl-last-edit-by">{TPL_LAST_EDIT_USER}</b></div>
@@ -4769,7 +4769,7 @@ $(function(){
 			<div class="label">Правила (ссылка на сообщение с правилами или номер сообщения):</div>
 			<input type="text" id="tpl-rules-new" size="60" value="" style="width: 75%" /><br />
 
-			<div class="label">{L_COMMENT}:</div>
+			<div class="label">{{ __('COMMENT') }}:</div>
 			<textarea id="tpl-comment-new" rows="2" cols="10" class="editor" style="width: 100%"></textarea><br />
 
 			<input type="button" class="bold" value="Создать новый шаблон" onclick="ajax.topic_tpl('new');" /><br /><br />
@@ -4797,7 +4797,7 @@ $(function(){
 		<div><input type="text" id="preview-title" size="60" value="" class="bold" style="width: 100%" /></div>
 		<div><textarea id="preview-msg" rows="15" cols="10" wrap="off" class="editor" style="width: 100%"></textarea></div>
         <div class="tCenter mrg_8">
-            <input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.posts( $('#preview-msg').val(), 'preview-html-body' );" class="bold"/>&nbsp;&nbsp;
+            <input type="button" value="{{ __('AJAX_PREVIEW') }}" onclick="ajax.posts( $('#preview-msg').val(), 'preview-html-body' );" class="bold"/>&nbsp;&nbsp;
             <input type="button" value="Продолжить (Создать релиз)" onclick="tpl_submit(true);" class="bold"/>
         </div>
 	</div>
@@ -4820,7 +4820,7 @@ $(function(){
 	Заполните созданную форму (вручную либо автозаполнителем)<br /><br />
     Кнопки <b>Продолжить</b> и <b>Создать сообщение</b> - создают BBCode сообщения<br /><br />
     Далее заполните поле <b>название</b><br /><br />
-    Кнопка <b>{L_AJAX_PREVIEW}</b> - показывает итоговый результат<br /><br />
+    Кнопка <b>{{ __('AJAX_PREVIEW') }}</b> - показывает итоговый результат<br /><br />
     Далее нажмите на кнопку <b>Продолжить (Создать релиз)</b> - откроется страница где вы сможете прикрепить файл и опубликовать релиз
 	</div>
 	</td>
@@ -4828,7 +4828,7 @@ $(function(){
 </tfoot>
 </table>
 <div class="spacer_12"></div>
-<!-- ENDIF / EDIT_TPL -->
+{% endif %}
 
 <div style="display: none;">
 <form id="tpl-post-form" method="post" action="{TPL_FORM_ACTION}" name="post" class="tokenized">
@@ -4845,7 +4845,7 @@ $(function(){
 <col class="row2" width="80%">
 <thead>
 <tr>
-	<th colspan="2">Заполните форму для релиза<!-- IF EDIT_TPL --> &nbsp; [ <u title="Генерирует случайное заполнение" class="clickable" onclick="tpl_fill_form();">Заполнить</u> ]<!-- ENDIF --></th>
+	<th colspan="2">Заполните форму для релиза{% if EDIT_TPL %} &nbsp; [ <u title="Генерирует случайное заполнение" class="clickable" onclick="tpl_fill_form();">Заполнить</u> ]{% endif %}</th>
 </tr>
 </thead>
 <tbody id="rel-tpl">
@@ -4856,19 +4856,19 @@ $(function(){
 </tr>
 <tr>
 	<td class="catBottom" colspan="2">
-		<!-- IF EDIT_TPL -->
+		{% if EDIT_TPL %}
 		<input type="button" title="Генерирует случайное заполнение" value="Заполнить" style="width: 120px;" onclick="tpl_fill_form();" />&nbsp;&nbsp;
 		<input type="button" value="Продолжить" class="bold" style="width: 150px;" onclick="tpl_build_msg(true);" />
-		<!-- ELSE -->
+		{% else %}
 		<input type="button" value="Продолжить" class="bold" style="width: 150px;" onclick="tpl_submit(true);" />
-		<!-- ENDIF -->
+		{% endif %}
 	</td>
 </tr>
 </tfoot>
 </table>
 </div>
 
-<!-- IF EDIT_TPL -->
+{% if EDIT_TPL %}
 <div id="tpl-help-form" class="menu-sub tpl-help-msg" style="width: 800px;">
 	<h4>Скрипт для построения формы</h4>
 	<br />
@@ -4941,7 +4941,7 @@ $(function(){
 <div id="tpl-help-ctl" class="menu-sub tpl-help-msg" style="width: 400px;">
 	Клик по <b class="adm">[ Инфо/Изменить ]</b> открывает/закрывает окно опций (так же работают другие кнопки)
 </div>
-<!-- ENDIF -->
+{% endif %}
 
 <div style="display: none;">
 	<!-- TPL.el_id элементы, для E[el] в форму подставляется $(el).html() -->

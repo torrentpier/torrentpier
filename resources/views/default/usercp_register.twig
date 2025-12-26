@@ -1,0 +1,411 @@
+<style>
+    .prof-tbl * {
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    input[name="username"], input[name="user_email"], input[name="cur_pass"], input[name="new_pass"] {
+        width: 255px;
+    }
+
+    .prof-tbl td {
+        padding: 4px 6px;
+    }
+
+    .prof-title {
+        text-align: right;
+    }
+
+    .prof-tbl h6 {
+        margin: 4px 0 4px 4px;
+        color: #444444;
+        line-height: 100%;
+        display: inline-block;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        var tab_idx = 100;
+        $('input,select,textarea', '#prof-form').not(':hidden').not(':disabled').each(function () {
+            $(this).attr({tabindex: ++tab_idx});
+        });
+    });
+
+    ajax.callback.user_register = function (data) {
+        $('#' + data.mode).html(data.html);
+    };
+</script>
+<div id="autocomplete_popup">
+    <div class="relative">
+        <div class="close" onclick="$('div#autocomplete_popup').hide();"></div>
+        <div class="title">{{ __('YOUR_NEW_PASSWORD') }}</div>
+        <div>
+            <input value="" autocomplete="off" type="text"/>
+            <span class="regenerate" title="{{ __('REGENERATE') }}" onclick="autocomplete(true, {{ constant('PASSWORD_MIN_LENGTH') }});"></span>
+        </div>
+    </div>
+</div>
+<h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
+
+<p class="nav"><a href="{{ U_INDEX }}">{{ __('HOME') }}</a></p>
+
+<form id="prof-form" method="post" action="{% if IS_ADMIN && PR_USER_ID %}?{{ constant('POST_USERS_URL') }}={{ PR_USER_ID }}{% endif %}"
+      class="tokenized" enctype="multipart/form-data">
+    <input type="hidden" name="mode" value="{{ MODE }}"/>
+    <input type="hidden" name="reg_agreed" value="1"/>
+    {% if NEW_USER %}<input type="hidden" name="admin" value="1"/>{% endif %}
+    {% if ADM_EDIT %}
+    <input type="hidden" name="{{ constant('POST_USERS_URL') }}" value="{{ PR_USER_ID }}"/>
+    {% endif %}
+
+    <table class="forumline prof-tbl">
+        <col class="row1" width="35%">
+        <col class="row2" width="65%">
+        <tbody class="pad_4">
+        <tr>
+            <th colspan="2">{{ __('REGISTRATION_INFO') }}</th>
+        </tr>
+        <tr>
+            <td class="row2 small tCenter" colspan="2">{{ __('ITEMS_REQUIRED') }}</td>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('USERNAME') }}: *</td>
+            <td>{% if CAN_EDIT_USERNAME %}<input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{{ USERNAME }}"/>{% else %}<b>{{ USERNAME }}</b>{% endif %}&nbsp;<span id="check_name"></span></td>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('EMAIL') }}: * {% if EDIT_PROFILE %}{% elseif config('reg_email_activation') %}<br/><h6>{{ __('EMAIL_EXPLAIN') }}</h6>{% endif %}</td>
+            <td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{{ USER_EMAIL }}"{% if EDIT_PROFILE and not ADM_EDIT and not IS_ADMIN %}{% if not config('emailer.enabled') or config('email_change_disabled') %} readonly style="color: gray;"{% endif %}{% endif %} />&nbsp;<span id="check_email"></span></td>
+        </tr>
+        {% if EDIT_PROFILE and not ADM_EDIT %}
+        <tr>
+            <td class="prof-title">{{ __('CURRENT_PASSWORD') }}: * <br/><h6>{{ __('CONFIRM_PASSWORD_EXPLAIN') }}</h6></td>
+            <td><input class="show_pass_input" type="password" name="cur_pass" size="35" maxlength="32" value=""/>&nbsp;<label><input type="checkbox" class="password_show_checkbox">&nbsp;{{ __('PASSWORD_SHOW_BTN') }}</label></td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td class="prof-title">{% if EDIT_PROFILE %}{{ __('NEW_PASSWORD') }}: * <br/><h6>{{ __('PASSWORD_IF_CHANGED') }}</h6>{% else %}{{ __('PASSWORD') }}: *{% endif %}</td>
+            <td>
+                <input id="pass" type="{% if SHOW_PASS %}text{% else %}password{% endif %}" name="new_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="autocomplete" data-password-length="{{ constant('PASSWORD_MIN_LENGTH') }}" title="{{ __('AUTOCOMPLETE') }}">&#9668;</span>&nbsp;<i class="med">{{ PASSWORD_LONG }}</i>
+            </td>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('CONFIRM_PASSWORD') }}: * {% if EDIT_PROFILE %}<br/>
+                <h6>{{ __('PASSWORD_CONFIRM_IF_CHANGED') }}</h6>{% endif %}</td>
+            <td>
+                <input id="pass_confirm" onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('#pass').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="{% if SHOW_PASS %}text{% else %}password{% endif %}" name="cfm_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="check_pass"></span>
+            </td>
+        </tr>
+        {% if config('invites_system.enabled') and not EDIT_PROFILE %}
+        <tr>
+            <td class="prof-title">{{ __('INVITE_CODE') }}: *</td>
+            <td><input type="text" name="invite_code" size="35" value="{{ INVITE_CODE }}"/></td>
+        </tr>
+        {% endif %}
+        {% if CAPTCHA_HTML %}
+        <tr>
+            <td class="prof-title">{{ __('CAPTCHA') }}: *</td>
+            <td>{{ CAPTCHA_HTML }}</td>
+        </tr>
+        {% endif %}
+        {% if EDIT_PROFILE %}
+        {% if not ADM_EDIT %}
+        <tr>
+            <td class="prof-title">{{ __('AUTOLOGIN') }}:</td>
+            <td><a href="{{ U_RESET_AUTOLOGIN }}">{{ __('RESET_AUTOLOGIN') }}</a><br/><h6>{{ __('RESET_AUTOLOGIN_EXPL') }}</h6></td>
+        </tr>
+        {% endif %}
+        <tr>
+            <th colspan="2">{{ __('PROFILE_INFO') }}</th>
+        </tr>
+        {% if config('gender') %}
+        <tr>
+            <td class="prof-title">{{ __('GENDER') }}:</td>
+            <td>{{ USER_GENDER }}</td>
+        </tr>
+        {% endif %}
+        {% if config('birthday_enabled') %}
+        <tr>
+            <td class="prof-title">{{ __('BIRTHDAY') }}:</td>
+            <td><input type="date" name="user_birthday" value="{{ USER_BIRTHDAY }}"/></td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td class="prof-title">{{ __('TWITTER') }}:</td>
+            <td><input type="text" name="user_twitter" size="30" maxlength="15" value="{{ USER_TWITTER }}"/></td>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('WEBSITE') }}:</td>
+            <td><input type="text" name="user_website" size="50" maxlength="100" value="{{ USER_WEBSITE }}"/></td>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('OCCUPATION') }}:</td>
+            <td><input type="text" name="user_occ" size="50" maxlength="100" value="{{ USER_OCC }}"/></td>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('INTERESTS') }}:</td>
+            <td><input type="text" name="user_interests" size="50" maxlength="150" value="{{ USER_INTERESTS }}"/></td>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('LOCATION') }}:</td>
+            <td>
+                <label>{{ __('SET_OWN_COUNTRY') }}
+                    <input {{ CHECKED_MANUAL_COUNTRY }} name="user_from_set_manual" type="checkbox">
+                </label>
+                <hr/>
+                <div id="country_select_hide">{{ COUNTRY_SELECT }}&nbsp;<span id="check_country">{{ COUNTRY_SELECTED }}</span></div>
+                <div style="display: none;" id="country_manual_select"><input type="text" name="user_from" size="50" maxlength="150" value="{{ USER_FROM }}"/></div>
+            </td>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    // Handle manual country select
+                    const $manualCheckbox = $('input[name="user_from_set_manual"]');
+                    const $countrySelectHide = $('div#country_select_hide');
+                    const $countryManualSelect = $('div#country_manual_select');
+                    function toggleCountrySelectors() {
+                        if ($manualCheckbox.is(':checked')) {
+                            $countrySelectHide.find('select').prop('disabled', true);
+                            $countrySelectHide.hide();
+                            $countryManualSelect.find('input').prop('disabled', false);
+                            $countryManualSelect.show();
+                        } else {
+                            $countryManualSelect.find('input').prop('disabled', true);
+                            $countryManualSelect.hide();
+                            $countrySelectHide.find('select').prop('disabled', false);
+                            $countrySelectHide.show();
+                        }
+                    }
+                    toggleCountrySelectors();
+                    $manualCheckbox.change(toggleCountrySelectors);
+
+                    // Handle flag icon changing
+                    $('#user_from').bind('change', function () {
+                        ajax.exec({
+                            action: 'user_register',
+                            mode: 'check_country',
+                            country: $(this).val()
+                        });
+                    });
+                });
+            </script>
+        </tr>
+        {% endif %}
+        {% if config('allow_change.language') %}
+        <tr>
+            <td class="prof-title">{{ __('BOARD_LANG') }}:</td>
+            <td>{{ LANGUAGE_SELECT }}</td>
+        </tr>
+        {% endif %}
+        {% if config('allow_change.timezone') %}
+        <tr>
+            <td class="prof-title">{{ __('SYSTEM_TIMEZONE') }}:</td>
+            <td>{{ TIMEZONE_SELECT }}</td>
+        </tr>
+        {% endif %}
+        {% if EDIT_PROFILE %}
+        <tr>
+            <th colspan="2">{{ __('PREFERENCES') }}</th>
+        </tr>
+        {% if TEMPLATES_SELECT %}
+        <tr>
+            <td class="prof-title">{{ __('FORUM_STYLE') }}:</td>
+            <td>
+                <div style="margin: 3px 0;">
+                    {{ TEMPLATES_SELECT }}
+                </div>
+            </td>
+        </tr>
+        {% endif %}
+        {% if not SIG_DISALLOWED %}
+        <tr id="view_message" class="hidden">
+            <td class="prof-title">{{ __('PREVIEW') }}:</td>
+            <td>
+                <div class="signature"></div>
+            </td>
+        </tr>
+        <script type="text/javascript">
+            ajax.callback.posts = function (data) {
+                $('#view_message').show();
+                $('.signature').html(data.message_html);
+                initPostBBCode('.signature');
+            };
+        </script>
+        {% endif %}
+        <tr>
+            <td class="prof-title">{{ __('SIGNATURE') }}: <br/><h6>{{ SIGNATURE_EXPLAIN }}</h6></td>
+            {% if SIG_DISALLOWED %}
+            <td class="tCenter">{{ __('SIGNATURE_DISABLE') }}</td>
+            {% else %}
+            <td>
+                <textarea id="user_sig" name="user_sig" rows="5" cols="60" style="width: 96%;">{{ USER_SIG }}</textarea>
+                <input type="button" value="{{ __('PREVIEW') }}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#user_sig').val() });">
+            </td>
+            {% endif %}
+        </tr>
+
+        {% if IS_ADMIN || config('show_email_visibility_settings') %}
+        <tr>
+            <td class="prof-title">{{ __('PUBLIC_VIEW_EMAIL') }}:</td>
+            <td>
+                <label><input type="radio" name="user_viewemail" value="1" {% if USER_VIEWEMAIL %}checked{% endif %} />{{ __('YES') }}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_viewemail" value="0" {% if not USER_VIEWEMAIL %}checked{% endif %} />{{ __('NO') }}</label>
+            </td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td class="prof-title">{{ __('HIDE_USER') }}:</td>
+            <td>
+                <label><input type="radio" name="user_viewonline" value="1" {% if USER_VIEWONLINE %}checked{% endif %} />{{ __('YES') }}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_viewonline" value="0" {% if not USER_VIEWONLINE %}checked{% endif %} />{{ __('NO') }}</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('ALWAYS_NOTIFY') }}:<br/><h6>{{ __('ALWAYS_NOTIFY_EXPLAIN') }}</h6></td>
+            <td>
+                <label><input type="radio" name="user_notify" value="1" {% if USER_NOTIFY %}checked{% endif %} />{{ __('YES') }}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_notify" value="0" {% if not USER_NOTIFY %}checked{% endif %} />{{ __('NO') }}</label>
+            </td>
+        </tr>
+        {% if config('pm_notify_enabled') %}
+        <tr>
+            <td class="prof-title">{{ __('NOTIFY_ON_PRIVMSG') }}:</td>
+            <td>
+                <label><input type="radio" name="user_notify_pm" value="1" {% if USER_NOTIFY_PM %}checked{% endif %} />{{ __('YES') }}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_notify_pm" value="0" {% if not USER_NOTIFY_PM %}checked{% endif %} />{{ __('NO') }}</label>
+            </td>
+        </tr>
+        {% endif %}
+        {% if SHOW_DATEFORMAT %}
+        <tr>
+            <td class="prof-title">{{ __('DATE_FORMAT') }}:<br/><h6>{{ __('DATE_FORMAT_EXPLAIN') }}</h6></td>
+            <td><input type="text" name="dateformat" value="{{ DATE_FORMAT }}" maxlength="14"/></td>
+        </tr>
+        {% endif %}
+        <tr>
+            <th colspan="2">{{ __('UCP_DOWNLOADS') }}</th>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('HIDE_PORN_FORUMS') }}:</td>
+            <td>
+                <label><input type="radio" name="user_porn_forums" value="1" {% if USER_PORN_FORUMS %}checked{% endif %} />{{ __('YES') }}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_porn_forums" value="0" {% if not USER_PORN_FORUMS %}checked{% endif %} />{{ __('NO') }}</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('ADD_RETRACKER') }}:</td>
+            <td>
+                <label><input type="radio" name="user_retracker" value="1" {% if USER_RETRACKER %}checked{% endif %} />{{ __('YES') }}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_retracker" value="0" {% if not USER_RETRACKER %}checked{% endif %} />{{ __('NO') }}</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('HIDE_DOWNLOADS') }}:</td>
+            <td>
+                <label><input type="radio" name="user_dls" value="1" {% if USER_DLS %}checked{% endif %} />{{ __('YES') }}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_dls" value="0" {% if not USER_DLS %}checked{% endif %} />{{ __('NO') }}</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('CALLSEED_EXPLAIN') }}:</td>
+            <td>
+                <label><input type="radio" name="user_callseed" value="1" {% if USER_CALLSEED %}checked{% endif %} />{{ __('YES') }}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_callseed" value="0" {% if not USER_CALLSEED %}checked{% endif %} />{{ __('NO') }}</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('HIDE_PEER_TORRENT_CLIENT') }}:</td>
+            <td>
+                <label><input type="radio" name="user_hide_torrent_client" value="1" {% if USER_HIDE_TORRENT_CLIENT %}checked{% endif %} />{{ __('YES') }}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_hide_torrent_client" value="0" {% if not USER_HIDE_TORRENT_CLIENT %}checked{% endif %} />{{ __('NO') }}</label>
+            </td>
+        </tr>
+        {% if config('ip2country_settings.enabled') %}
+        <tr>
+            <td class="prof-title">{{ __('HIDE_PEER_COUNTRY_NAME') }}:</td>
+            <td>
+                <label><input type="radio" name="user_hide_peer_country" value="1" {% if USER_HIDE_PEER_COUNTRY %}checked{% endif %} />{{ __('YES') }}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_hide_peer_country" value="0" {% if not USER_HIDE_PEER_COUNTRY %}checked{% endif %} />{{ __('NO') }}</label>
+            </td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td class="prof-title">{{ __('HIDE_PEER_USERNAME') }}:</td>
+            <td>
+                <label><input type="radio" name="user_hide_peer_username" value="1" {% if USER_HIDE_PEER_USERNAME %}checked{% endif %} />{{ __('YES') }}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_hide_peer_username" value="0" {% if not USER_HIDE_PEER_USERNAME %}checked{% endif %} />{{ __('NO') }}</label>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">{{ __('AVATAR_PANEL') }}</th>
+        </tr>
+        {% if AVATAR_DISALLOWED %}
+        <tr>
+            <td colspan="2" class="tCenter pad_12">{{ AVATAR_DIS_EXPLAIN }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="2">
+                <table class="borderless bCenter med" style="width: 600px;">
+                    <col class="w60">
+                    <col class="w40">
+                    <tr>
+                        <td>
+                            {{ AVATAR_EXPLAIN }}
+                            {% if config('avatars.up_allowed') %}
+                            <div class="spacer_4"></div>
+                            {{ __('UPLOAD_AVATAR_FILE') }}:
+                            <input type="hidden" name="MAX_FILE_SIZE" value="{{ config('avatars.max_size') }}"/>
+                            <input type="file" name="avatar" accept="image/*"/>
+                            {% endif %}
+                        </td>
+                        <td class="tCenter nowrap">
+                            <p class="mrg_6">{{ AVATAR_IMG }}</p>
+                            <p><label><input type="checkbox" name="delete_avatar"/> {{ __('DELETE_IMAGE') }}</label></p>
+                            <p><label><input type="checkbox" name="use_monster_avatar"/> {{ __('SET_MONSTERID_AVATAR') }}</label></p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        {% endif %}
+        {% endif %}
+
+        {% if SHOW_REG_AGREEMENT %}
+        <tr>
+            <td class="row2" colspan="2">
+                <div id="infobox-wrap" class="bCenter row1">
+                    <fieldset class="pad_6">
+                        <legend class="med bold mrg_2 warnColor1">{{ __('USER_AGREEMENT_HEAD') }}</legend>
+                        <div class="bCenter">
+                            {% include '@lang/user_agreement.twig' ignore missing %}
+                        </div>
+                        <p class="med bold mrg_4 tCenter"><label><input type="checkbox" value="" onclick="toggle_disabled('agreement', this.checked)"/>&nbsp;{{ __('USER_AGREEMENT_AGREE') }}</label></p>
+                    </fieldset>
+                </div><!--/infobox-wrap-->
+            </td>
+        </tr>
+        {% endif %}
+
+        <tr>
+            <td class="catBottom" colspan="2">
+                <div id="submit-buttons">
+                    {% if EDIT_PROFILE %}
+                    <input type="reset" value="{{ __('RESET') }}" name="reset" class="lite"/>&nbsp;&nbsp;
+                    {% endif %}
+                    <input type="submit" {% if SHOW_REG_AGREEMENT %}id="agreement" disabled{% endif %} name="submit" value="{{ __('SUBMIT') }}" class="main"/>
+                </div>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</form>
+
+<script type="text/javascript">
+    $('body').on('click', '.password_show_checkbox', function () {
+        if ($(this).is(':checked')) {
+            $('input.show_pass_input').attr('type', 'text');
+        } else {
+            $('input.show_pass_input').attr('type', 'password');
+        }
+    });
+</script>
