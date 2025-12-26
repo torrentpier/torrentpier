@@ -1,0 +1,694 @@
+{% if LOGGED_IN %}
+<style>
+{% if HIDE_FROM %}.from { display: none; }{% endif %}
+{% if HIDE_AVATAR %}.avatar { display: none; }{% endif %}
+{% if HIDE_RANK_IMG %}.rank_img { display: none; }{% endif %}
+{% if HIDE_POST_IMG %}img.postImg, div.postImg-wrap { display: none; }{% endif %}
+{% if HIDE_SMILE %}.smile { display: none; }{% endif %}
+{% if HIDE_SIGNATURE %}.signature { display: none; }{% endif %}
+</style>
+{% if SPOILER_OPENED %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('div.sp-head').not('.ignore-sp-open').click();
+    });
+</script>
+{% endif %}
+{% endif %}
+
+{% if config('show_post_bbcode_button.enabled') %}
+<script type="text/javascript">
+    let loadedText = [];
+
+    ajax.view_post = function (post_id) {
+        if (loadedText[post_id] != null) {
+            $('#ptx-' + post_id).toggle();
+            return;
+        }
+        ajax.exec({
+            action: 'view_post',
+            post_id: post_id,
+            return_text: true,
+        });
+    };
+    ajax.callback.view_post = function (data) {
+        loadedText[data.post_id] = true;
+        $('#post_' + data.post_id + ' div.post_body').prepend(
+            '<div class="tCenter" id="ptx-' + data.post_id + '"><textarea style="width: 99%; height: 200px; line-height: 1.2;" readonly>' + data['post_text'] + '</textarea><hr/></div>'
+        );
+    };
+</script>
+{% endif %}
+
+{% if config('use_ajax_posts') and (AUTH_DELETE or AUTH_REPLY or AUTH_EDIT) %}
+<script type="text/javascript">
+ajax.open_edit = false;
+function edit_post(post_id, type, text) {
+	if(ajax.open_edit && ajax.open_edit != post_id) {
+		alert('{{ __('AJAX_EDIT_OPEN') }}');
+	} else{
+		if(ajax.open_edit && !text){
+			$('#pp_'+ post_id).show();
+			$('#pe_'+ post_id).hide();
+		} else{
+			$('#pp_'+ post_id).hide();
+			$('#pe_'+ post_id).show();
+			ajax.exec({
+				action   : 'posts',
+				post_id  : post_id,
+				topic_id : {{ TOPIC_ID }},
+				text     : text,
+				type     : type
+			});
+		}
+		ajax.open_edit = false;
+	}
+}
+ajax.callback.posts = function(data) {
+	if(data.html){
+		$('#pp_'+ data.post_id).show().html(data.html);
+		initPostBBCode('#pp_'+ data.post_id);
+		$('#pe_'+ data.post_id).hide();
+		ajax.open_edit = false;
+	} else if(data.text){
+		ajax.open_edit = data.post_id;
+		$('#pe_'+ data.post_id).html(data.text);
+	}
+	if(data.redirect) document.location.href = data.redirect;
+	if(data.hide) {
+		if(ajax.open_edit == data.post_id) ajax.open_edit = false;
+		$('tbody#post_'+ data.post_id).hide();
+	}
+	if(data.quote) $('textarea#message').attr('value', $('textarea#message').val() + data.message +' ').focus();
+	if(data.message_html){
+		$('#view_message').show();
+			$('.view-message').html(data.message_html);
+			initPostBBCode('.view-message');
+			var maxH   = screen.height - 490;
+		$('.view-message').css({ maxHeight: maxH });
+	}
+};
+</script>
+{% endif %}
+
+{% if SPLIT_FORM %}
+<script type="text/javascript">
+function set_hid_chbox (id)
+{
+	$('#del_split_row').show();
+
+	// set checkbox value
+	$('#cb_'+id).val( $('#cb_'+id).val() == id ? 0 : id );
+	// highlight selected post
+	$('#post_'+id+' td').toggleClass('hl-selected-post');
+
+	return false;
+}
+</script>
+{% endif %}
+
+<div class="spacer_6"></div>
+
+<h1 class="maintitle">
+	<a class="tt-text" href="{{ U_VIEW_TOPIC }}">{{ TOPIC_TITLE }}</a>
+{% if AUTH_MOD %}
+<script type="text/javascript">
+var $tt_td = $('.maintitle');
+function edit_topic_title (mode)
+{
+	if (mode == 'edit') {
+		var tt_text = $tt_td.find('.tt-text').text();
+
+		ajax.tte_orig_html = $tt_td.html();
+		$tt_td.html( $('#tt-edit-tpl').html() );
+		$('.tt-edit-input', $tt_td).val(tt_text).focus();
+	}
+	else if (mode == 'save') {
+		var topic_title = $('.tt-edit-input', $tt_td).val();
+
+		ajax.edit_topic_title(topic_title);
+	}
+	else {
+		$tt_td.html(ajax.tte_orig_html);
+	}
+}
+ajax.edit_topic_title = function(topic_title) {
+	ajax.exec({
+		action      : 'mod_action',
+		mode        : 'edit_topic_title',
+		topic_id    : {{ TOPIC_ID }},
+		topic_title : topic_title
+	});
+};
+ajax.callback.mod_action = function(data) {
+	$tt_td.html(ajax.tte_orig_html);
+	$('.tt-text', $tt_td).html(data.topic_title);
+};
+ajax.post_mod_comment = function(post_id, mc_text, mc_type) {
+	ajax.exec({
+		action  : 'post_mod_comment',
+		post_id : post_id,
+		mc_type : mc_type,
+		mc_text : mc_text
+	});
+};
+ajax.callback.post_mod_comment = function(data) {
+	if (data.mc_type == 0) {
+		$('#mc_text_'+ data.post_id).attr('value', '');
+		$('#pc_'+ data.post_id).hide();
+	}
+	else {
+		$('#pc_'+ data.post_id +' h4').html(data.mc_title);
+		$('#mc_comment_'+ data.post_id).html(data.mc_text);
+		$('#mc_class_'+ data.post_id).attr('class', 'alert alert-'+ data.mc_class);
+		initPostBBCode('#pc_'+ data.post_id);
+		$('#pc_'+ data.post_id).show();
+	}
+};
+</script>
+<a style="cursor: help; color: #800000;" title="{{ __('EDIT_TOPIC_TITLE') }}" onclick="edit_topic_title('edit'); return false" href="#">&para;</a>
+
+<div id="tt-edit-tpl" style="display: none;">
+	<div class="tt-edit" style="padding: 4px;">
+		<textarea class="tt-edit-input" rows="2" cols="50" style="width: 98%; height: 35px;"></textarea>
+		<input type="button" value="{{ __('SAVE') }}" onclick="edit_topic_title('save'); return false;" />
+		<input type="button" value="{{ __('CANCEL') }}" onclick="edit_topic_title('cancel'); return false;" />
+	</div>
+</div>
+{% endif %}
+</h1>
+
+{% if PAGINATION %}
+<p class="small" style="padding: 1px 6px 5px;"><b>{{ PAGINATION|raw }}</b></p>
+{% endif %}
+
+<table cellpadding="0" class="w100">
+<tr>
+	<td valign="bottom">
+		<a href="{{ U_POST_REPLY_TOPIC }}" class="btn-post-topic">{{ T_POST_REPLY }}</a>
+	</td>
+	<td class="nav w100" style="padding-left: 8px;">
+		<a href="{{ U_INDEX }}">{{ __('HOME') }}</a>&nbsp;<em>&raquo;</em>
+		<a href="{{ U_VIEWCAT }}">{{ CAT_TITLE }}</a>
+		{% if PARENT_FORUM_NAME %}<em>&raquo;</em>&nbsp;<a href="{{ PARENT_FORUM_HREF }}">{{ PARENT_FORUM_NAME }}</a>{% endif %}
+		<em>&raquo;</em>&nbsp;<a href="{{ U_VIEW_FORUM }}">{{ FORUM_NAME }}</a>
+	</td>
+</tr>
+</table>
+
+{% if SHOW_DL_LIST or SHOW_TOR_ACT %}{% include 'viewtopic_torrent.tpl' %}{% endif %}
+
+{% if TOPIC_HAS_POLL or CAN_MANAGE_POLL %}
+<form id="poll-form" method="post" action="poll" style="display: none;">
+<input id="poll-mode" type="hidden" name="mode" value="" />
+<input type="hidden" name="topic_id" value="{{ TOPIC_ID }}" />
+<input type="hidden" name="{{ TOPIC_HASH }}" value="1" />
+<input type="hidden" name="start" value="{{ START }}" />
+<input type="hidden" name="forum_id" value="{{ FORUM_ID }}" />
+<input id="vote-id" type="hidden" name="vote_id" value="-1" />
+<input id="poll-submit-btn" type="submit" name="submit" value="1" />
+<input id="poll-caption-val" name="poll_caption" type="hidden" value="" />
+<textarea id="poll-votes-val" name="poll_votes" rows="10" cols="10"></textarea>
+</form>
+{% endif %}
+{% if CAN_MANAGE_POLL %}
+<script type="text/javascript">
+// fills out the #poll-form and sends the request
+function poll_manage (mode, confirm_msg)
+{
+	if (confirm_msg != null && !window.confirm( confirm_msg )) {
+		return false;
+	}
+	$('#poll-mode').val(mode);
+	$('#poll-caption-val').val( $('#poll-caption-inp').val() );
+	$('#poll-votes-val').val( $('#poll-votes-inp').val() );
+	$('#poll-submit-btn').click();
+	return false;
+}
+function build_poll_add_form (src_el)
+{
+	$('#poll').empty().append( $('#poll-edit-tpl').contents() ).show();
+	$('#poll-legend').html('{{ __('ADD_POLL') }}');
+	$('#poll-edit-submit-btn').click(function(){
+		return poll_manage('poll_add');
+	});
+	$(src_el).remove();
+	return false;
+}
+</script>
+<div id="poll-edit-tpl" style="display: none;">
+	<table class="med bCenter"><tr><td>
+	<fieldset style="padding: 0 8px;">
+	<legend id="poll-legend"></legend>
+		<div style="margin-top: 4px;">{{ __('NEW_POLL_M_TITLE') }}:</div>
+		<input id="poll-caption-inp" name="poll_caption" type="text" value="" class="bold" style="width: 550px;" />
+		<div class="med" style="margin-top: 4px;">{{ __('NEW_POLL_M_VOTES') }}:</div>
+		<textarea id="poll-votes-inp" rows="8" cols="10" wrap="off" class="gen" style="width: 550px;"></textarea>
+		<div class="med mrg_4"><i>{{ __('NEW_POLL_M_EXPLAIN') }}: {{ config('max_poll_options') }})</i></div>
+		<div class="mrg_8 tCenter"><input onclick="window.location.reload();" type="button" class="bold" value="{{ __('CANCEL') }}" />&nbsp;&nbsp;<input id="poll-edit-submit-btn" type="button" value="{{ __('SUBMIT') }}" class="bold" /></div>
+	</fieldset>
+	</td></tr></table>
+</div>
+{% endif %}
+{% if TOPIC_HAS_POLL or CAN_ADD_POLL %}
+<div id="poll" class="row5" style="padding: 0 10%; display: none;">
+{% if TOPIC_HAS_POLL %}{% include 'viewtopic_poll.twig' %}{% endif %}
+</div>
+{% endif %}
+
+<table class="w100 border bw_TRL" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="cat pad_2">
+
+	<table cellspacing="0" cellpadding="0" class="borderless w100">
+	<tr>
+		{% if AUTH_MOD %}
+		<td class="small bold nowrap" style="padding: 0 0 0 4px;">
+			{% if IN_MODERATION %}{{ __('MODERATE_TOPIC') }}{% else %}<a href="{{ PAGE_URL }}{{ PAGE_URL_SEP }}mod=1&amp;start={{ PAGE_START }}" class="small bold">{{ __('MODERATE_TOPIC') }}</a>{% endif %}
+			&nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
+			<a class="small bold" href="{{ PIN_HREF }}">{{ PIN_TITLE }}</a>
+            &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
+            <a class="small bold" href="#" onclick="$('#main_content').printThis(); return false;">{{ __('PRINT_PAGE') }}</a>
+		</td>
+		{% if SELECT_PPP %}
+		<td class="med" style="padding: 0 4px 2px 4px;">|</td>
+		<td class="small nowrap" style="padding: 0 0 0 0;">{{ __('SELECT_POSTS_PER_PAGE') }}</td>
+		<td class="small nowrap" style="padding: 0 0 0 3px;">
+			<form id="ppp" action="{{ PAGE_URL_PPP }}" method="post">{{ SELECT_PPP|raw }}</form>
+		</td>
+		{% endif %}
+		{% endif %}
+
+		<td class="small bold nowrap tRight" width="100%">
+			&nbsp;
+			{% if LOGGED_IN %}
+			<a class="small" href="{{ U_SEARCH_SELF }}">{{ __('SEARCH_SELF') }}</a> &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
+			<a class="menu-root" href="#topic-options">{{ __('DISPLAYING_OPTIONS') }}</a>
+			{% endif %}
+		</td>
+
+		<td class="nowrap" style="padding: 0 4px 2px 4px;">
+			<form action="{{ U_SEARCH }}?{{ constant('POST_TOPIC_URL') }}={{ TOPIC_ID }}&amp;dm=1&amp;s=1" method="post">
+				<input id="search-text" type="text" name="nm" class="hint" style="width: 150px;" placeholder="{{ __('SEARCH_IN_TOPIC') }}" required />
+				<input type="submit" class="bold" value="&raquo;" style="width: 30px;" />
+			</form>
+		</td>
+	</tr>
+	</table>
+
+	</td>
+</tr>
+</table>
+
+{% if LOGGED_IN %}
+<div class="menu-sub" id="topic-options">
+	<table cellspacing="1" cellpadding="4">
+	<tr>
+		<th>{{ __('DISPLAYING_OPTIONS') }}</th>
+	</tr>
+	<tr>
+		<td>
+			<fieldset id="show-only">
+			<legend>{{ __('HIDE_IN_TOPIC') }}</legend>
+			<div class="med pad_4">
+				<label>
+					<input type="checkbox" {% if HIDE_FROM %}{{ CHECKED }}{% endif %}
+						onclick="user.set('h_from', this.checked ? 1 : 0);"
+					/>{{ __('LOCATION') }}
+				</label>
+				<label>
+					<input type="checkbox" {% if HIDE_AVATAR %}{{ CHECKED }}{% endif %}
+						onclick="user.set('h_av', this.checked ? 1 : 0);"
+					/>{{ __('AVATARS') }}
+				</label>
+				<label>
+					<input type="checkbox" {% if HIDE_RANK_IMG %}{{ CHECKED }}{% endif %}{% if HIDE_RANK_IMG_DIS %}{{ DISABLED }}{% endif %}
+						onclick="user.set('h_rnk_i', this.checked ? 1 : 0);"
+					/>{{ __('RANK_IMAGES') }}
+				</label>
+				<label>
+					<input type="checkbox" {% if HIDE_POST_IMG %}{{ CHECKED }}{% endif %}
+						onclick="user.set('h_post_i', this.checked ? 1 : 0);"
+					/>{{ __('POST_IMAGES') }}
+				</label>
+				<label>
+					<input type="checkbox" {% if HIDE_SMILE %}{{ CHECKED }}{% endif %}
+						onclick="user.set('h_smile', this.checked ? 1 : 0);"
+					/>{{ __('SMILIES') }}
+				</label>
+				<label>
+					<input type="checkbox" {% if HIDE_SIGNATURE %}{{ CHECKED }}{% endif %}
+						onclick="user.set('h_sig', this.checked ? 1 : 0);"
+					/>{{ __('SIGNATURES') }}
+				</label>
+			</div>
+			</fieldset>
+			<div class="spacer_4"></div>
+			<fieldset id="spoiler-opt">
+			<legend>{{ __('SHOW') }}</legend>
+			<div class="med pad_4">
+			<p>
+				<label>
+					<input type="checkbox" {% if SPOILER_OPENED %}{{ CHECKED }}{% endif %}
+						onclick="user.set('sp_op', this.checked ? 1 : 0);"
+					/>{{ __('SHOW_OPENED') }}
+				</label>
+				<label>
+				<input type="checkbox" {% if SHOW_IMG_AFTER_LOAD %}{{ CHECKED }}{% endif %}
+					onclick="user.set('i_aft_l', this.checked ? 1 : 0);"
+				/>{{ __('DOWNLOAD_PIC') }}
+			</label>
+			</p>
+			</div>
+			</fieldset>
+		</td>
+	</tr>
+	<tr>
+		<td class="cat tCenter pad_4"><input type="button" value="{{ __('SUBMIT') }}" style="width: 100px;" onclick="window.location.reload();" /></td>
+	</tr>
+	</table>
+</div><!--/topic-options-->
+{% endif %}
+
+<table class="topic" id="topic_main" cellpadding="0" cellspacing="0">
+<tr>
+	<th class="thHead td1">{{ __('AUTHOR') }}</th>
+	<th class="thHead td2">{{ __('MESSAGE') }}</th>
+</tr>
+
+{% for postrow_item in POSTROW %}
+<tbody id="post_{{ postrow_item.POST_ID }}" class="{{ postrow_item.ROW_CLASS }}">
+<tr>
+	<td class="poster_info td1"><a name="{{ postrow_item.POST_ID }}"></a>{% if postrow_item.IS_NEWEST %}<a name="newest"></a>{% endif %}
+
+	{% if postrow_item.POSTER_BOT %}
+		{% if SHOW_BOT_NICK %}<p class="nick">{{ postrow_item.POSTER_NAME|raw }}</p>{% endif %}
+		{% if postrow_item.POSTER_AVATAR %}<p class="avatar">{{ postrow_item.POSTER_AVATAR|raw }}</p>{% endif %}
+	{% else %}
+		{% if QUICK_REPLY %}
+		<p class="nick" title="{{ __('INS_NAME_TIP') }}" onclick="bbcode.onclickPoster('{{ postrow_item.POSTER_NAME_JS }}', {{ postrow_item.POST_ID }});">
+			<a href="#" onclick="return false;">{{ postrow_item.POSTER_NAME|raw }}</a> {% if postrow_item.POSTER_AUTHOR %}<sup>&reg;</sup>{% endif %}
+		</p>
+		{% else %}
+		<p class="nick">{{ postrow_item.POSTER_NAME|raw }} {% if postrow_item.POSTER_AUTHOR %}<sup>&reg;</sup>{% endif %}</p>
+		{% endif %}
+
+        {% if postrow_item.IS_BANNED %}<p class="poster-banned" title="{{ __('BANNED_USERS') }}">{{ __('BANNED') }}</p>{% endif %}
+
+		{% if postrow_item.POSTER_RANK %}<p class="rank_txt">{{ postrow_item.POSTER_RANK }}</p>{% endif %}
+		{% if postrow_item.RANK_IMAGE %}<p class="rank_img">{{ postrow_item.RANK_IMAGE|raw }}</p>{% endif %}
+		{% if postrow_item.POSTER_AVATAR %}<p class="avatar">{{ postrow_item.POSTER_AVATAR|raw }}</p>{% endif %}
+		{% if postrow_item.POSTER_GENDER %}<p class="joined"><em>{{ __('GENDER') }}:</em>&nbsp;{{ postrow_item.POSTER_GENDER }}</p>{% endif %}
+		{% if postrow_item.POSTER_JOINED %}<p class="joined" title="{{ postrow_item.POSTER_JOINED_DATE }}"><em>{{ __('LONGEVITY') }}:</em> {{ postrow_item.POSTER_JOINED }}</p>{% endif %}
+		{% if postrow_item.POSTER_POSTS %}<p class="posts"><em>{{ __('POSTS') }}:</em> {{ postrow_item.POSTER_POSTS }}</p>{% endif %}
+		{% if postrow_item.POSTER_FROM %}<p class="from"><em>{{ __('LOCATION') }}:</em> {{ postrow_item.POSTER_FROM }}</p>{% endif %}
+
+		{% if postrow_item.POSTER_BIRTHDAY %}<p class="birthday">{{ postrow_item.POSTER_BIRTHDAY|raw }}</p>{% endif %}
+	{% endif %}
+
+	<p><img src="{{ SPACER }}" width="{{ TOPIC_LEFT_COL_SPACER_WITDH }}" height="{% if postrow_item.POSTER_AVATAR or postrow_item.RANK_IMAGE %}2{% else %}30{% endif %}" border="0" alt="" /></p>
+
+	</td>
+	<td class="message td2" rowspan="2">
+
+		<div class="post_head">
+			<p style="float: left; padding: 4px 0 3px;">
+				{% if postrow_item.IS_UNREAD %}{{ MINIPOST_IMG_NEW|raw }}{% else %}{{ MINIPOST_IMG|raw }}{% endif %}
+				<a class="small" href="{{ POST_URL }}{{ postrow_item.POST_ID }}#{{ postrow_item.POST_ID }}" title="{{ __('POST_LINK') }}">{{ postrow_item.POST_DATE }}&nbsp;|&nbsp;#{{ postrow_item.POST_NUMBER }}</a>
+                {% if postrow_item.POSTER_AUTHOR %}&middot;&nbsp;<span>{{ __('AUTHOR') }}</span>{% endif %}
+				{% if postrow_item.POSTED_AFTER %}
+					<span class="posted_since">({{ postrow_item.POSTED_AFTER }})</span>
+				{% endif %}
+			</p>
+
+			{% if postrow_item.MOD_CHECKBOX %}<input type="checkbox" class="select_post" onclick="set_hid_chbox('{{ postrow_item.POST_ID }}');">{% endif %}
+
+			<p style="float: right; padding: 3px 2px 4px;" class="post_btn_1">
+				{% if postrow_item.IS_FIRST_POST and CAN_ADD_POLL %}<a href="#" onclick="return build_poll_add_form(this);" class="txtb">[ {{ __('POLL') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
+				{% if postrow_item.QUOTE %}<a class="txtb" href="{% if config('use_ajax_posts') %}" onclick="ajax.exec({ action: 'posts', post_id: {{ postrow_item.POST_ID }}, type: 'reply'}); return false;{% else %}{{ QUOTE_URL }}{{ postrow_item.POST_ID }}{% endif %}">[ {{ __('QUOTE') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
+				{% if postrow_item.EDIT %}<a class="txtb" href="{% if config('use_ajax_posts') %}" onclick="edit_post({{ postrow_item.POST_ID }}, 'edit'); return false;{% else %}{{ EDIT_POST_URL }}{{ postrow_item.POST_ID }}{% endif %}">[ {{ __('EDIT') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
+				{% if postrow_item.DELETE %}<a class="txtb" href="{% if config('use_ajax_posts') %}" onclick="ajax.exec({ action: 'posts', post_id: {{ postrow_item.POST_ID }}, topic_id : {{ TOPIC_ID }}, type: 'delete'}); return false;{% else %}{{ DELETE_POST_URL }}{{ postrow_item.POST_ID }}{% endif %}">[ {{ __('DELETE') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
+				{% if config('show_post_bbcode_button.enabled') %}{% if postrow_item.IS_FIRST_POST or not config('show_post_bbcode_button.only_for_first_post') %}<a href="#" class="txtb" onclick="ajax.view_post('{{ postrow_item.POST_ID }}'); return false;">[ {{ __('CODE') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}{% endif %}
+				{% if postrow_item.IP %}<a class="txtb" href="{{ IP_POST_URL }}{{ postrow_item.POST_ID }}&amp;{{ constant('POST_TOPIC_URL') }}={{ TOPIC_ID }}">[ {{ __('IP') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
+				{% if AUTH_MOD %}
+					<a class="menu-root menu-alt1 txtb" href="#mc_{{ postrow_item.POST_ID }}">[ {{ __('COMMENT') }} ]</a>{{ POST_BTN_SPACER|raw }}
+					{% if not IN_MODERATION %}<a class="txtb" href="{{ PAGE_URL }}{{ PAGE_URL_SEP }}mod=1&amp;start={{ PAGE_START }}#{{ postrow_item.POST_ID }}">[ {{ __('MODERATE') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
+				{% endif %}
+			</p>
+			<div class="clear"></div>
+		</div>
+
+		<div class="post_body">
+			<div class="post_wrap">
+				<span id="pe_{{ postrow_item.POST_ID }}"></span>
+				<span id="pp_{{ postrow_item.POST_ID }}">{{ postrow_item.MESSAGE|raw }}</span>
+				{% if postrow_item.RG_NAME %}
+				<div id="pg_{{ postrow_item.POST_ID }}" class="alert alert-gray" style="width: 92%;">
+					<h4 class="alert-heading">{{ __('RELEASE_FROM_RG') }} — <a href="{{ postrow_item.RG_URL }}">{{ postrow_item.RG_NAME }}</a></h4>
+					<div id="pg_info_{{ postrow_item.POST_ID }}">
+						{% if postrow_item.RG_AVATAR %}<hr/><a href="{{ postrow_item.RG_URL }}">{{ postrow_item.RG_AVATAR|raw }}</a>{% endif %}
+                        {% if postrow_item.RG_DESC %}<div class="post-wrap">{{ __('DESCRIPTION') }}: {{ postrow_item.RG_DESC|raw }}</div>{% endif %}
+						{% if postrow_item.RG_SIG and postrow_item.RG_SIG_ATTACH %}<hr/><div id="rg_sig">{{ __('SIGNATURE') }}: {{ postrow_item.RG_SIG|raw }}</div>{% endif %}
+						<hr/><a href="{{ postrow_item.RG_FIND_URL }}">{{ __('MORE_RELEASES') }}</a>
+					</div>
+				</div>
+				{% endif %}
+				<div id="pc_{{ postrow_item.POST_ID }}" {% if not postrow_item.MC_COMMENT %}style="display: none;"{% endif %}>
+					<div id="mc_class_{{ postrow_item.POST_ID }}" class="alert alert-{{ postrow_item.MC_CLASS }}" style="width: 92%;">
+						<h4 class="alert-heading">{{ postrow_item.MC_TITLE }}</h4><hr/>
+						<div id="mc_comment_{{ postrow_item.POST_ID }}">{{ postrow_item.MC_COMMENT|raw }}</div>
+					</div>
+				</div>
+                {% if postrow_item.IS_FIRST_POST %}
+                    {% if SHOW_GUEST_STUB %}
+                        {% include 'viewtopic_attach_guest.twig' %}
+                    {% else %}
+                        {% include 'viewtopic_attach.tpl' %}
+                    {% endif %}
+                {% endif %}
+			</div><!--/post_wrap-->
+			{% if postrow_item.SIGNATURE %}{{ postrow_item.SIGNATURE|raw }}{% endif %}
+			{% if postrow_item.EDITED_MESSAGE %}<div class="last_edited">{{ postrow_item.EDITED_MESSAGE|raw }}</div>{% endif %}
+		</div><!--/post_body-->
+
+		{% if AUTH_MOD %}
+		<div class="menu-sub" id="mc_{{ postrow_item.POST_ID }}">
+		<table cellspacing="1" cellpadding="4">
+		<tr>
+			<th>{{ __('MC_TITLE') }}</th>
+		</tr>
+		<tr>
+			<td>
+			<fieldset>
+				<legend>{{ __('MC_LEGEND') }}</legend>
+				<div class="pad_4">
+					{{ postrow_item.MC_SELECT_TYPE|raw }}
+				</div>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<textarea name="mc_text_{{ postrow_item.POST_ID }}" rows="10" cols="60" id="mc_text_{{ postrow_item.POST_ID }}" placeholder="{{ __('MC_FAQ') }}">{{ postrow_item.MC_BBCODE }}</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td class="cat tCenter pad_4">
+				<input type="button" value="{{ __('SUBMIT') }}" onclick="ajax.post_mod_comment({{ postrow_item.POST_ID }}, $('#mc_text_{{ postrow_item.POST_ID }}').val(), $('#mc_type_{{ postrow_item.POST_ID }}').val());" />
+			</td>
+		</tr>
+		</table>
+		</div>
+		{% endif %}
+
+	</td>
+</tr>
+<tr>
+	<td class="poster_btn td3">
+
+	{% if postrow_item.POSTER_BOT or not postrow_item.PROFILE %}
+		&nbsp;
+	{% else %}
+		<div style="padding: 2px 6px 4px;" class="post_btn_2">
+			<a class="txtb" href="{{ postrow_item.POSTER_URL }}">[ {{ __('PROFILE') }} ]</a>{{ POST_BTN_SPACER|raw }}
+			<a class="txtb" href="{{ PM_URL }}?mode=post&amp;{{ constant('POST_USERS_URL') }}={{ postrow_item.POSTER_ID }}">[ {{ __('SEND_PM_SHORT') }} ]</a>{{ POST_BTN_SPACER|raw }}
+		</div>
+	{% endif %}
+
+	</td>
+</tr>
+</tbody>
+{% endfor %}
+
+{% if SPLIT_FORM %}
+<tbody>
+<tr id="del_split_row" class="row5" style="display: none;">
+	<td colspan="2" class="med pad_4 td2">
+	<form method="post" action="{{ S_SPLIT_ACTION }}">
+	<input type="hidden" name="redirect" value="modcp?{{ constant('POST_TOPIC_URL') }}={{ TOPIC_ID }}&amp;mode=split" />
+	<input type="hidden" name="{{ constant('POST_FORUM_URL') }}" value="{{ FORUM_ID }}" />
+	<input type="hidden" name="{{ constant('POST_TOPIC_URL') }}" value="{{ TOPIC_ID }}" />
+	<input type="hidden" name="start" value="{{ START }}" />
+	<input type="hidden" name="mode" value="split" />
+
+		{% for postrow_item in POSTROW %}
+		<input type="hidden" name="post_id_list[]" id="cb_{{ postrow_item.POST_ID }}" />
+		{% endfor %}
+
+		<table class="bordered bCenter">
+		<tr>
+			<td class="row1">{{ __('NEW_TOPIC_TITLE') }}</td>
+			<td class="row2"><input class="post" type="text" size="35" style="width: 500px" maxlength="120" name="subject" /></td>
+		</tr>
+		<tr>
+			<td class="row1">{{ __('FORUM_FOR_NEW_TOPIC') }}</td>
+			<td class="row2">{{ S_FORUM_SELECT|raw }}</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="row2 tCenter">
+				<label><input type="checkbox" name="after_split_to_old" checked /> {{ __('BOT_AFTER_SPLIT_TO_OLD') }}</label>
+				&nbsp;
+				<label><input type="checkbox" name="after_split_to_new" checked /> {{ __('BOT_AFTER_SPLIT_TO_NEW') }}</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="row3 tCenter">
+				<input type="submit" name="delete_posts" id="del" value="{{ __('DELETE_POSTS') }}" disabled onclick="return window.confirm('{{ __('DELETE_POSTS') }}?');" />
+				<input type="submit" name="split_type_all" id="spl_all" value="{{ __('SPLIT_POSTS') }}" disabled onclick="return window.confirm('{{ __('SPLIT_POSTS') }}?');" />
+				<input type="submit" name="split_type_beyond" id="spl_b" value="{{ __('SPLIT_AFTER') }}" disabled onclick="return window.confirm('{{ __('SPLIT_AFTER') }}?');" />
+				<label for="spl_cnf">
+					{{ __('CONFIRM') }}
+					<input id="spl_cnf" type="checkbox" name="confirm" value="1" onclick="
+						toggle_disabled('del', this.checked);
+						toggle_disabled('spl_all', this.checked);
+						toggle_disabled('spl_b', this.checked);
+					" />
+				</label>
+			</td>
+		</tr>
+		</table>
+	</form>
+	</td>
+</tr>
+</tbody>
+{% endif %}
+
+</table><!--/topic_main-->
+
+{% if HIDE_POST_IMG %}<script type="text/javascript">$('img.postImg').remove();</script>{% endif %}
+{% if HIDE_SMILE %}<script type="text/javascript">$('img.smile').remove();</script>{% endif %}
+
+<table class="topic" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="catBottom med">
+            <form method="post" action="{{ S_POST_DAYS_ACTION }}">
+                {{ __('DISPLAY_POSTS') }}: {{ S_SELECT_POST_DAYS|raw }}&nbsp;
+                {{ S_SELECT_POST_ORDER|raw }}&nbsp;
+                <input type="submit" value="{{ __('GO') }}" class="lite" name="submit" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+{% if PAGINATION %}
+<table id="pagination" class="topic" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="nav pad_6 {{ PG_ROW_CLASS }}">
+		<p style="float: left">{{ PAGE_NUMBER }}</p>
+		<p style="float: right">{{ PAGINATION|raw }}</p>
+	</td>
+</tr>
+</table><!--/pagination-->
+{% endif %}
+
+{% if QUICK_REPLY %}
+<br/>
+<form action="{{ QR_POST_ACTION }}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
+<input type="hidden" name="mode" value="reply" />
+<input type="hidden" name="{{ constant('POST_TOPIC_URL') }}" value="{{ QR_TOPIC_ID }}" />
+
+<table id="topic_quick_reply" class="topic" cellpadding="0" cellspacing="0">
+<tr>
+	<th class="thHead gen"><b>{{ __('QUICK_REPLY') }}</b></th>
+</tr>
+<tr>
+	<td class="td2 row2 tCenter">
+		<div id="view_message" class="hidden">
+			<div class="tLeft view-message"></div>
+		</div>
+		<div class="quick_reply_box bCenter">
+			{% if not LOGGED_IN %}
+			<p class="mrg_6"><b>{{ __('QR_USERNAME') }}: </b><input type="text" name="username" size="20" maxlength="25" /></p>
+			{% endif %}
+			<div class="spacer_2"></div>
+			{% include 'posting_editor.tpl' %}
+			<div class="spacer_2"></div>
+		</div>
+
+	</td>
+</tr>
+{% if S_WATCH_TOPIC %}
+<tr id="post_opt" class="row2">
+	<td class="td2 med tCenter pad_4">
+		<label><input type="checkbox" name="notify" {% if QR_NOTIFY_CHECKED %}checked{% endif %}/>
+		{{ __('QR_NOTIFY') }}&nbsp;</label>
+	</td>
+</tr>
+{% endif %}
+</table><!--/topic_quick_reply-->
+
+</form>
+{% endif %}
+
+<table cellpadding="0" class="w100" style="padding-top: 2px;">
+<tr>
+	<td valign="top">
+		<a href="{{ U_POST_REPLY_TOPIC }}" class="btn-post-topic">{{ T_POST_REPLY }}</a>
+	</td>
+	<td class="nav w100" style="padding-left: 8px;">
+		<a href="{{ U_INDEX }}">{{ __('HOME') }}</a>&nbsp;<em>&raquo;</em>
+		<a href="{{ U_VIEWCAT }}">{{ CAT_TITLE }}</a>
+		{% if PARENT_FORUM_NAME %}<em>&raquo;</em>&nbsp;<a href="{{ PARENT_FORUM_HREF }}">{{ PARENT_FORUM_NAME }}</a>{% endif %}
+		<em>&raquo;</em>&nbsp;<a href="{{ U_VIEW_FORUM }}">{{ FORUM_NAME }}</a>
+	</td>
+</tr>
+</table>
+
+<!--bottom_info-->
+<div class="bottom_info">
+	<a href="#" onclick="$.scrollTo('#topic_main', {duration: 200, axis: 'y'}); return false;">{{ __('MOVE_TO_TOP') }}</a>
+
+	<div class="jumpbox"></div>
+
+	<div id="timezone">
+		<p>{{ CURRENT_TIME }}</p>
+		<p>{{ S_TIMEZONE }}</p>
+	</div>
+	<div class="clear"></div>
+
+</div><!--/bottom_info-->
+
+<table width="100%">
+<tr>
+	<td width="40%" valign="top" nowrap="nowrap"><span class="small">{{ S_WATCH_TOPIC|raw }}</span><br />
+	<div class="small">
+{% if S_TOPIC_ADMIN %}
+		<br clear="all" />
+		<div style="float: left;">{{ S_TOPIC_ADMIN|raw }}</div>
+{% endif %}
+{% if IS_ADMIN %}
+		<div class="med" style="float: right;">
+		{{ __('ADMIN') }}:&nbsp;
+		<a href="{{ U_LOGS }}">{{ __('LOGS') }}</a>&nbsp;
+		</div>
+{% endif %}
+{% if S_DL_DELETE %}
+		<br clear="all" />
+		<div style="float: left;">{{ S_DL_DELETE|raw }}</div>
+{% endif %}
+		<br clear="all" />
+		<div style="float: left;">{{ S_AUTH_LIST|raw }}</div>
+	</div>
+	</td>
+</tr>
+</table>
