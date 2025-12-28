@@ -168,6 +168,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		ORDER BY f.forum_order
 	";
 
+    $subforumsList = [];
     if ($rowset = DB()->fetch_rowset($sql)) {
         template()->assign_vars([
             'SHOW_SUBFORUMS' => true,
@@ -203,7 +204,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
         // Get raw forum name for URL slug (fname_html is HTML-encoded)
         $sf_forum_name = $forums['forum'][$sf_forum_id]['forum_name'] ?? '';
 
-        template()->assign_block_vars('f', [
+        $forumItem = [
             'FORUM_FOLDER_IMG' => $folder_image,
 
             'FORUM_ID' => $sf_forum_id,
@@ -213,14 +214,15 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
             'TOPICS' => commify($sf_data['forum_topics']),
             'POSTS' => commify($sf_data['forum_posts']),
             'LAST_POST' => $last_post,
-        ]);
+            'LAST' => null,
+        ];
 
         if ($sf_data['forum_last_post_id']) {
             $lastTopicTitle = $sf_data['last_topic_title'] ?? '';
             $lastTopicId = (int)$sf_data['last_topic_id'];
             $lastPostId = (int)$sf_data['forum_last_post_id'];
 
-            template()->assign_block_vars('f.last', [
+            $forumItem['LAST'] = [
                 'FORUM_LAST_POST' => true,
                 'SHOW_LAST_TOPIC' => $show_last_topic,
                 'LAST_TOPIC_ID' => $lastTopicId,
@@ -232,11 +234,14 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
                 'LAST_POST_ID' => $lastPostId,
                 'LAST_POST_USER' => $last_post_user,
                 'ICON_LATEST_REPLY' => theme_images('icon_latest_reply'),
-            ]);
+            ];
         } else {
-            template()->assign_block_vars('f.last', ['FORUM_LAST_POST' => false]);
+            $forumItem['LAST'] = ['FORUM_LAST_POST' => false];
         }
+
+        $subforumsList[] = $forumItem;
     }
+    template()->assign_vars(['SUBFORUMS' => $subforumsList]);
 }
 unset($rowset);
 datastore()->rm('cat_forums');
@@ -442,6 +447,7 @@ template()->assign_vars([
 
 // Okay, lets dump out the page ...
 $found_topics = 0;
+$topicsList = [];
 foreach ($topic_rowset as $topic) {
     $topic_id = $topic['topic_id'];
     $moved = ($topic['topic_status'] == TOPIC_MOVED);
@@ -470,7 +476,7 @@ foreach ($topic_rowset as $topic) {
     $topicUrl = url()->topic($hrefTopicId, $topicTitle);
     $lastPostId = (int)$topic['topic_last_post_id'];
 
-    template()->assign_block_vars('t', [
+    $topicItem = [
         'FORUM_ID' => $forum_id,
         'TOPIC_ID' => $topic_id,
         'HREF_TOPIC_ID' => $hrefTopicId,
@@ -502,22 +508,26 @@ foreach ($topic_rowset as $topic) {
         'LAST_POSTER' => profile_url(['username' => $topic['last_username'], 'display_username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
         'LAST_POST_TIME' => bb_date($topic['topic_last_post_time'], config()->get('last_post_date_format')),
         'LAST_POST_ID' => $lastPostId,
-    ]);
+        'TOR' => null,
+    ];
 
     if (isset($topic['tor_size'])) {
         $tor_magnet = create_magnet($topic['info_hash'], $topic['info_hash_v2'], $topic['auth_key'], html_ent_decode($topic['topic_title']), $topic['tor_size']);
 
-        template()->assign_block_vars('t.tor', [
+        $topicItem['TOR'] = [
             'SEEDERS' => (int)$topic['seeders'],
             'LEECHERS' => (int)$topic['leechers'],
             'TOR_SIZE' => humn_size($topic['tor_size'], 1),
             'COMPL_CNT' => declension((int)$topic['complete_count'], 'times'),
             'DOWNLOADED' => (int)$topic['complete_count'],
             'MAGNET' => $tor_magnet,
-        ]);
+        ];
     }
+
+    $topicsList[] = $topicItem;
     $found_topics++;
 }
+template()->assign_vars(['TOPICS' => $topicsList]);
 unset($topic_rowset);
 
 // Build pagination URL with query parameters
@@ -579,4 +589,4 @@ template()->assign_vars([
     'PARENT_FORUM_NAME' => ($parent_id = $forum_data['forum_parent']) ? $forums['forum_name_html'][$parent_id] : '',
 ]);
 
-print_page('viewforum.tpl');
+print_page('viewforum.twig');

@@ -63,7 +63,9 @@ $m3uParser = new M3uParser\M3uParser;
 $m3uParser->addDefaultTags();
 $m3uData = $m3uParser->parseFile($m3uFile);
 
+$m3ulist = [];
 $filesCount = 0;
+
 foreach ($m3uData as $entry) {
     // Validate URL
     $streamLink = $entry->getPath();
@@ -98,27 +100,24 @@ foreach ($m3uData as $entry) {
     }
 
     $filesCount++;
-    $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
-    template()->assign_block_vars('m3ulist', [
+    $m3ulist[] = [
         'ROW_NUMBER' => $filesCount,
         'FILE_INDEX' => $urlParams['index'],
-        'ROW_CLASS' => $rowClass,
+        'ROW_CLASS' => ($filesCount % 2) ? 'row1' : 'row2',
         'IS_VALID' => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
         'IS_AUDIO' => (int)in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $streamLink,
         'M3U_DL_LINK' => DL_URL . $topic_id . '/?m3u=1',
         'TITLE' => $title,
-    ]);
+    ];
 }
 
-// Generate output
-template()->assign_vars([
-    'HAS_ITEMS' => $filesCount > 0,
+print_page('playback_m3u.twig', variables: [
     'PAGE_TITLE' => __('PLAYBACK_M3U'),
     'TOPIC_ID' => $topic_id,
     'INFO_HASH' => bin2hex($row['info_hash'] ?? $row['info_hash_v2']),
     'FILES_COUNT_TITLE' => sprintf(__('BT_FLIST_FILE_PATH'), declension($filesCount, 'files')),
     'U_TOPIC' => TOPIC_URL . $topic_id,
+    'HAS_ITEMS' => $filesCount > 0,
+    'M3ULIST' => $m3ulist,
 ]);
-
-print_page('playback_m3u.tpl');

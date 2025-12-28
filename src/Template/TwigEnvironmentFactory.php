@@ -61,6 +61,14 @@ class TwigEnvironmentFactory
             $loader->addPath($defaultTemplateDir);
         }
 
+        // Add a language directory with @lang namespace for language-specific templates
+        if (\defined('LANG_DIR')) {
+            $langHtmlDir = self::normalizePath(LANG_DIR . 'html');
+            if (files()->isDirectory($langHtmlDir)) {
+                $loader->addPath($langHtmlDir, 'lang');
+            }
+        }
+
         // Wrap with a legacy loader for backward compatibility
         $legacyLoader = new LegacyTemplateLoader($loader);
 

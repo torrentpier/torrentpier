@@ -1,0 +1,250 @@
+{% if TORHELP_TOPICS %}
+	{% include 'torhelp.twig' %}
+	<div class="spacer_6"></div>
+{% endif %}
+
+<div id="forums_list_wrap">
+
+<div id="forums_top_nav">
+	<h1 class="pagetitle"><a href="{{ U_INDEX }}">{{ __('HOME') }}</a></h1>
+</div><!--/forums_top_nav-->
+
+{% if LOGGED_IN %}
+<div id="forums_top_links">
+	<div class="floatL">
+		<a href="{{ U_SEARCH_LATEST }}" class="med">{{ __('SEARCH_LATEST') }}</a> &#0183;
+		<a href="{{ U_SEARCH_SELF_BY_LAST }}" class="med">{{ __('SEARCH_SELF') }}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{{ OPEN_MENU_IMG_ALT|raw }}</a> &#0183;
+        {% if U_ATOM_FEED %}<a href="{{ U_ATOM_FEED }}" class="med">{{ FEED_IMG|raw }} {{ __('LATEST_RELEASES') }}</a> &#0183;{% endif %}
+		<a href="/map/" class="med bold">{{ FEED_IMG|raw }} {{ __('FORUM_MAP') }}</a>
+	</div>
+	<div class="floatR med bold">
+		<a class="menu-root" href="#only-new-options">{{ __('DISPLAYING_OPTIONS') }}</a>
+	</div>
+	<div class="clear"></div>
+</div><!--/forums_top_links-->
+
+<div class="menu-sub" id="search-my-posts">
+	<table cellspacing="1" cellpadding="4">
+	<tr>
+		<th>{{ __('SEARCH_SELF') }}</th>
+	</tr>
+	<tr>
+		<td>
+			<fieldset id="search-my">
+			<legend>{{ __('SORT_BY') }}</legend>
+			<div class="bold nowrap pad_2">
+				<p class="mrg_4"><a class="med" href="{{ U_SEARCH_SELF_BY_LAST }}">{{ __('SEARCH_SELF_BY_LAST') }}</a></p>
+				<p class="mrg_4"><a class="med" href="{{ U_SEARCH_SELF_BY_MY }}">{{ __('SEARCH_SELF_BY_MY') }}</a></p>
+			</div>
+			</fieldset>
+		</td>
+	</tr>
+	</table>
+</div><!--/search-my-posts-->
+{% endif %}
+
+<img width="540" class="spacer" src="{{ SPACER }}" alt="" />
+
+<div id="forums_wrap">
+
+{% if H_C_AL_MESS %}
+<div class="row1 med tCenter pad_4 border bw_TRBL" style="margin: 4px 0;">{{ __('HIDE_CAT_MESS') }} &middot; <a href="{{ U_INDEX }}?sh=1">{{ __('SHOW_ALL') }}</a></div>
+<div class="spacer_2"></div>
+{% endif %}
+
+{% if SHOW_FORUMS %}
+
+{% if SHOW_MAP %}
+	{% include 'index_map.twig' %}
+{% else %}
+
+{% for c in CATEGORIES %}
+<div class="category">
+	<h3 class="cat_title"><a href="{{ c.U_VIEWCAT }}">{{ c.CAT_TITLE }}</a></h3>
+	<div class="f_tbl_wrap">
+
+		<table class="forums">
+		<thead>
+		<tr class="row3">
+			<th class="f_icon">&nbsp;</th>
+			<th class="f_titles">{{ __('FORUM') }}</th>
+			<th class="f_topics">{{ __('TOPICS_SHORT') }}</th>
+			<th class="f_posts">{{ __('POSTS_SHORT') }}</th>
+			<th class="f_last_post last_td">{{ __('LASTPOST') }}</th>
+		</tr>
+		</thead>
+
+		<tbody>
+		{% for f in c.FORUMS %}
+		<tr>
+			<td class="row1 f_icon">
+			<a href="{{ U_SEARCH }}?{{ constant('POST_FORUM_URL') }}={{ f.FORUM_ID }}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1"><img class="forum_icon" src="{{ f.FORUM_FOLDER_IMG }}" alt="{{ f.FORUM_FOLDER_ALT }}" /></a>
+			</td>
+			<td class="row1 f_titles">
+
+				<h4 class="forumlink"><a href="{{ url.forum(f.FORUM_ID, f.FORUM_NAME) }}">{{ f.FORUM_NAME }}</a></h4>
+
+				{% if f.FORUM_DESC %}
+				<p class="forum_desc">{{ f.FORUM_DESC }}</p>
+				{% endif %}
+
+				{% if f.LAST_SF_ID %}
+				<p class="subforums">
+					<em>{{ __('SUBFORUMS') }}:</em>
+					{% for sf in f.SUBFORUMS %}
+					<span class="sf_title{{ sf.SF_NEW }}"><a href="{{ U_SEARCH }}?{{ constant('POST_FORUM_URL') }}={{ sf.SF_ID }}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1" class="dot-sf">&#9658;</a><a href="{{ url.forum(sf.SF_ID, sf.SF_NAME) }}" class="dot-sf">{{ sf.SF_NAME }}</a></span><span class="sf_separator"></span>
+					{% endfor %}{# /SUBFORUMS #}
+				</p>
+				{% endif %}
+
+				{% if f.MODERATORS and SHOW_MOD_INDEX %}
+				<p class="moderators"><em>{{ __('MODERATORS') }}:</em> {{ f.MODERATORS|raw }}</p>
+				{% endif %}
+
+			</td>
+			<td class="row2 f_topics">{{ f.TOPICS }}</td>
+			<td class="row2 f_posts">{{ f.POSTS }}</td>
+			<td class="row2 f_last_post last_td">
+
+			{% if f.POSTS %}
+				{% if f.LAST %}
+					{% if SHOW_LAST_TOPIC %}
+					<h6 class="last_topic">
+						<a href="{{ url.topic(f.LAST.LAST_TOPIC_ID, f.LAST.LAST_TOPIC_TIP, {view: 'newest', _fragment: 'newest'}) }}" title="{{ f.LAST.LAST_TOPIC_TIP }}">{{ f.LAST.LAST_TOPIC_TITLE }}</a>
+					</h6>
+					{% endif %}
+
+					<p class="last_post_time">
+						<span class="last_time">{{ f.LAST.LAST_POST_TIME }}</span>
+						<span class="last_author">&middot;
+							{{ f.LAST.LAST_POST_USER|raw }}
+						</span>
+					</p>
+				{% endif %}
+
+			{% else %}
+				{{ __('NO_POSTS') }}
+			{% endif %}
+
+			</td>
+		</tr>
+		{% endfor %}{# /FORUMS #}
+		</tbody>
+		</table>
+	</div><!--/f_tbl_wrap-->
+</div><!--/category-->
+<div class="cat_footer"></div>
+<div class="cat_separator"></div>
+{% endfor %}{# /CATEGORIES #}
+
+{% endif %}
+
+{% else %}
+
+<table class="forumline">
+	<tr><td class="row1 tCenter pad_8">{{ NO_FORUMS_MSG }}</td></tr>
+</table>
+<div class="spacer_6"></div>
+
+{% endif %}
+
+</div><!--/forums_wrap-->
+
+<div id="forums_footer"></div>
+
+{% if LOGGED_IN and SHOW_FORUMS %}
+<div id="mark_all_forums_read">
+	<a href="{{ U_SEARCH_NEW }}" class="med">{{ __('SEARCH_NEW') }}</a> &#0183;
+	<a href="#" class="med" onclick="setCookie('{{ constant('COOKIE_MARK') }}', 'all_forums'); window.location.reload();">{{ __('MARK_ALL_FORUMS_READ') }}</a>
+</div>
+{% endif %}
+
+<div id="board_stats">
+	<h3 class="cat_title">{{ __('STATISTICS') }}</h3>
+	<div id="board_stats_wrap">
+
+	<table class="forums">
+	<tr>
+		<td class="row1 f_icon"><img class="forum_icon" src="{{ IMG }}whosonline.gif" alt="" /></td>
+		<td class="row1 small last_td">
+			<div class="med" style="line-height: 16px">
+				<p>{{ TOTAL_TOPICS|raw }}</p>
+				<p>{{ TOTAL_POSTS|raw }}</p>
+				<p>{{ TOTAL_USERS|raw }}</p>
+				<p>{{ TOTAL_GENDER|raw }}</p>
+				<p>{{ NEWEST_USER|raw }}</p>
+
+                {% if BOARD_START %}
+                <p style="margin-top: 4px;">{{ BOARD_START|raw }}</p>
+                {% endif %}
+
+				{% if config('tor_stats') %}
+				<div class="hr1" style="margin: 5px 0 4px;"></div>
+				<p>{{ TORRENTS_STAT|raw }}</p>
+				<p>{{ PEERS_STAT|raw }}</p>
+				<p>{{ SPEED_STAT|raw }}</p>
+				{% endif %}
+
+				{% if config('birthday_enabled') %}
+				<script type="text/javascript">
+				ajax.callback.index_data = function(data) {
+					$('#'+ data.mode).html(data.html);
+				};
+				</script>
+				<div class="hr1" style="margin: 5px 0 4px;"></div>
+				<p id="birthday_today" class="birthday">{{ WHOSBIRTHDAY_TODAY|raw }}</p>
+				<p id="birthday_week" class="birthday">{{ WHOSBIRTHDAY_WEEK|raw }}</p>
+				{% endif %}
+
+				<div class="hr1" style="margin: 5px 0 4px;"></div>
+
+				<p>{{ TOTAL_USERS_ONLINE|raw }}{% if IS_ADMIN %} &nbsp;{{ USERS_ONLINE_COUNTS|raw }}{% endif %}</p>
+				<p>{{ RECORD_USERS|raw }}</p>
+
+				{% if SHOW_ONLINE_LIST %}
+					<style>{% if IS_ADMIN %}.colorISL, a.colorISL, a.colorISL:visited { color: #793D00; }{% else %}.ou_stat { display: none; }{% endif %}</style>
+					<a name="online"></a>
+					<div id="online_userlist" style="margin-top: 4px;">{{ LOGGED_IN_USER_LIST|raw }}</div>
+
+					<div class="hr1" style="margin: 5px 0 4px;"></div>
+
+					<p id="online_time">{{ __('ONLINE_EXPLAIN') }}</p>
+					<p id="online_explain">
+						[ <span class="colorAdmin"><b>{{ __('ONLINE_ADMIN') }}</b></span> ]
+						[ <span class="colorMod"><b>{{ __('ONLINE_MOD') }}</b></span> ]
+						[ <span class="colorGroup"><b>{{ __('ONLINE_GROUP_MEMBER') }}</b></span> ]
+					</p>
+				{% endif %}
+			</div>
+		</td>
+	</tr>
+	</table>
+	</div><!--/board_stats_wrap-->
+</div><!--/board_stats-->
+<div class="cat_footer"></div>
+
+<div class="spacer_4"></div>
+
+<!--bottom_info-->
+<div class="bottom_info">
+
+	<div id="timezone">
+		<p>{{ CURRENT_TIME }}</p>
+		<p>{{ S_TIMEZONE }}</p>
+	</div>
+	<div class="clear"></div>
+
+	<table class="bCenter med" id="f_icons_legend">
+	<tr>
+		<td><img class="forum_icon" src="{{ IMG }}folder_new_big.gif" alt="{{ __('NEW') }}"/></td>
+		<td>{{ __('NEW_POSTS') }}</td>
+		<td><img class="forum_icon" src="{{ IMG }}folder_big.gif" alt="{{ __('OLD') }}" /></td>
+		<td>{{ __('NO_NEW_POSTS') }}</td>
+		<td><img class="forum_icon" src="{{ IMG }}folder_locked_big.gif" alt="{{ __('FORUM_LOCKED_MAIN') }}" /></td>
+		<td>{{ __('FORUM_LOCKED_MAIN') }}</td>
+	</tr>
+	</table>
+
+</div><!--/bottom_info-->
+
+</div><!--/forums_list_wrap-->

@@ -403,7 +403,7 @@ $view_next_topic_url = url()->topic($topic_id, $topic_title, ['view' => 'next', 
 $reply_alt = $locked ? __('TOPIC_LOCKED_SHORT') : __('REPLY_TO_TOPIC');
 
 // Set 'body' template for attach_mod
-template()->set_filenames(['body' => 'viewtopic.tpl']);
+template()->set_filenames(['body' => 'viewtopic.twig']);
 
 //
 // User authorisation levels output
@@ -590,6 +590,7 @@ if ($topic_has_poll) {
 }
 
 $prev_post_time = $max_post_time = 0;
+$postrowList = [];
 
 for ($i = 0; $i < $total_posts; $i++) {
     $poster_id = $postrow[$i]['user_id'];
@@ -723,7 +724,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         page_cfg('meta_description', str_short(strip_tags($message_meta), 220));
     }
 
-    template()->assign_block_vars('postrow', [
+    $postrowItem = [
         'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
         'POST_ID' => $post_id,
         'IS_NEWEST' => ($post_id == $newest),
@@ -776,17 +777,15 @@ for ($i = 0; $i < $total_posts; $i++) {
         'RG_FIND_URL' => FORUM_PATH . 'tracker?srg=' . $rg_id,
         'RG_SIG' => $rg_signature,
         'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig'],
-    ]);
+        'IS_BANNED' => (bool)getBanInfo((int)$poster_id),
+    ];
 
-    // Ban information
-    if ($banInfo = getBanInfo((int)$poster_id)) {
-        template()->assign_block_vars('postrow.ban', ['IS_BANNED' => true]);
-    }
+    $postrowList[] = $postrowItem;
 
-    if ($is_first_post && $t_data['attach_ext_id'] && $is_auth['auth_download']) {
-        if (IS_GUEST) {
-            template()->assign_var('SHOW_GUEST_STUB', ($t_data['attach_ext_id'] == TORRENT_EXT_ID));
-        } elseif ($t_data['attach_ext_id'] == TORRENT_EXT_ID) {
+    if ($is_first_post && $t_data['attach_ext_id'] == TORRENT_EXT_ID) {
+        if (IS_GUEST && !$is_auth['auth_download']) {
+            template()->assign_var('SHOW_GUEST_STUB', true);
+        } elseif ($is_auth['auth_download']) {
             require_once INC_DIR . '/viewtopic_torrent.php';
             render_torrent_block($t_data, $poster_id, $is_auth, $post_id);
         }
@@ -803,6 +802,8 @@ for ($i = 0; $i < $total_posts; $i++) {
 
 $topics_tracking = &tracking_topics();
 set_tracks(COOKIE_TOPIC, $topics_tracking, $topic_id, $max_post_time);
+
+template()->assign_vars(['POSTROW' => $postrowList]);
 
 if (defined('SPLIT_FORM_START')) {
     template()->assign_vars([
@@ -842,4 +843,4 @@ if (IS_ADMIN) {
     template()->assign_vars(['U_LOGS' => FORUM_PATH . 'admin/admin_log.php?' . POST_TOPIC_URL . "={$topic_id}&amp;db=" . config()->get('log_days_keep')]);
 }
 
-print_page('viewtopic.tpl');
+print_page('viewtopic.twig');

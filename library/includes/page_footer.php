@@ -18,7 +18,7 @@ if (defined('PAGE_HEADER_SENT')) {
         'ADMIN_LINK_HREF' => FORUM_PATH . 'admin/index.php',
     ]);
 
-    template()->set_filenames(['page_footer' => 'page_footer.tpl']);
+    template()->set_filenames(['page_footer' => 'page_footer.twig']);
     template()->pparse('page_footer');
 }
 

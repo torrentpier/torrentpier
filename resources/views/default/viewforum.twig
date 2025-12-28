@@ -1,0 +1,673 @@
+{% if AUTH_MOD %}
+{% if SESSION_ADMIN %}
+
+<script type="text/javascript">
+ajax.in_moderation    = false;
+ajax.in_title_edit    = false;
+ajax.tte_cur_topic_id = 0;
+ajax.tte_orig_html    = '';
+
+{% if MODERATION_ON %}
+$(function(){
+	show_forum_mod_options();
+});
+{% else %}
+$(function(){
+	$('#show_mod_options a').click( function(){ show_forum_mod_options(); return false; } );
+
+	$('td.topic_id').click(function(){
+		if (!ajax.in_moderation) {
+			show_forum_mod_options();
+		}
+	});
+	$('td.tt').dblclick(function(){
+		if (!ajax.in_moderation) {
+			show_forum_mod_options();
+			$(this).dblclick();
+		}
+	});
+});
+{% endif %}
+
+function show_forum_mod_options ()
+{
+	$('td.topic_id').each(function(){
+		var topic_id = $(this).attr('id');
+		var input = '<input id="sel-'+ topic_id +'" type="checkbox" value="'+ topic_id +'" class="topic-chbox" />';
+
+		$(this).before('<td>'+input+'</td>').attr('colSpan', 1);
+		$(this).click(function(){ edit_topic_title(topic_id); });
+		$(this).siblings('td.tt').dblclick(function(){ edit_topic_title(topic_id); });
+	});
+	$('.tt-text').addClass('folded2 tLink')
+		.click(function(){ ajax.view_post($(this).attr('id').substr(3), this); return false; });
+	$('input.topic-chbox').click(function(){
+		$('#tt-'+this.value).toggleClass('hl-tt');
+	});
+	$('#mod-action-cell').append( $('#mod-action-content')[0] );
+	$('#show_mod_options').html($('#show_mod_options').text());
+	$('#mod-action-row, #mod-action-content, #mod-sel-topics').show();
+
+	$('#mod-action').submit(function(){
+		var $form = $(this);
+		var in_new_window = $('#in-new-window').attr('checked');
+		if(!mod_action('go')) return false;
+		$('input[name~=topic_id_list]', $form).remove();
+		$('input.topic-chbox:checked').each(function(){
+			$form.append('<input type="hidden" name="topic_id_list[]" value="'+ this.value +'" />');
+			if (in_new_window) {
+				$('#tr-'+this.value).remove();
+			}
+		});
+		if (in_new_window) {
+			$form.attr('target', '_blank');
+		}
+	});
+	ajax.in_moderation = true;
+}
+
+function edit_topic_title(topic_id) {
+    if (ajax.in_title_edit) return false;
+
+    var $tt_td = $('td#' + topic_id).siblings('td.tt');
+    var tt_text = $tt_td.find('.tt-text').text();
+
+    $tt_td.attr({id: 'tte-'+topic_id});
+    ajax.tte_cur_topic_id = topic_id;
+    ajax.tte_orig_html = $tt_td.html();
+
+    $tt_td.html($('#tt-edit-tpl').html());
+    $('.tt-edit-input', $tt_td).val(tt_text).focus();
+
+    ajax.in_title_edit = true;
+}
+
+function tte_submit(mode) {
+    var topic_id = ajax.tte_cur_topic_id;
+    var $tt_td = $('#tte-' + topic_id);
+    var topic_title = $('.tt-edit-input', $tt_td).val();
+
+    if (mode == 'save') {
+        ajax.edit_topic_title(topic_id, topic_title);
+    } else {
+        $tt_td.html(ajax.tte_orig_html);
+        $('.tt-text').addClass('folded2 tLink').click(function () {
+            ajax.view_post(topic_id, this);
+            return false;
+        });
+    }
+    ajax.in_title_edit = false;
+}
+
+ajax.edit_topic_title = function (topic_id, topic_title) {
+    ajax.exec({
+        action: 'mod_action',
+        mode: 'edit_topic_title',
+        topic_id: topic_id,
+        topic_title: topic_title
+    });
+};
+
+function mod_action(mode) {
+    var topics = 0;
+    $('input.topic-chbox:checked').each(function () {
+        topics += ',' + this.value;
+    });
+    if (!topics) {
+        alert('{{ __('NONE_SELECTED') }}');
+        return false;
+    }
+    if (mode == 'tor_status') {
+        status = $('#st option:selected').val();
+        if (status == '-1') {
+            alert('{{ __('TOR_STATUS_NOT_SELECT') }}');
+            return false;
+        }
+        ajax.mod_action(topics, mode, status);
+    }
+    return true;
+}
+
+ajax.mod_action = function (topic_ids, mode, status) {
+    ajax.exec({
+        action: 'mod_action',
+        mode: mode,
+        topic_ids: topic_ids,
+        status: status
+    });
+};
+
+ajax.callback.mod_action = function (data) {
+    if (data.topics) {
+        for (i = 0; i < data.topics.length; i++) {
+            $('#status-' + data.topics[i]).html(data.status);
+        }
+    }
+    if (data.topic_title) {
+        var $tt_td = $('#tte-' + data.topic_id);
+        $tt_td.html(ajax.tte_orig_html);
+        $('.tt-text', $tt_td).html(data.topic_title);
+    }
+};
+</script>
+
+<div id="mod-action-content" style="display: none;">
+<form id="mod-action" method="post" action="modcp" class="tokenized">
+	<input type="hidden" name="{{ constant('POST_FORUM_URL') }}" value="{{ FORUM_ID }}" />
+	<div class="floatL">
+	<input type="checkbox" onclick="$('.topic-chbox').attr({ checked: this.checked }); if(this.checked){$('.tt-text').addClass('hl-tt');}else{$('.tt-text').removeClass('hl-tt');}" />
+	{% if TORRENTS %}
+	{{ SELECT_ST|raw }}
+	<input type="button" onclick="mod_action('tor_status');" value="{{ __('EDIT') }}" />
+	{% endif %}
+	</div>
+	<div class="floatR">
+	<input type="submit" name="delete" value="{{ __('DELETE') }}" />
+	<input type="submit" name="move" value="{{ __('MOVE') }}" />&nbsp;&middot;
+	<input type="submit" name="lock" value="{{ __('LOCK') }}" />
+	<input type="submit" name="unlock" value="{{ __('UNLOCK') }}" />&nbsp;&middot;
+	<input type="submit" name="post_pin" value="{{ __('POST_PIN') }}" />
+	<input type="submit" name="post_unpin" value="{{ __('POST_UNPIN') }}" />&nbsp;&middot;
+	<label><input id="in-new-window" type="checkbox" />{{ __('NEW_WINDOW') }}</label>
+	</div>
+</form>
+</div>
+
+<div id="tt-edit-tpl" style="display: none;">
+	<div class="tt-edit" style="padding: 4px;">
+		<textarea class="tt-edit-input" rows="2" cols="50" style="width: 98%; height: 35px;"></textarea>
+		<input type="button" value="{{ __('SAVE') }}" onclick="tte_submit('save'); return false;" />
+		<input type="button" value="{{ __('CANCEL') }}" onclick="tte_submit('cancel'); return false;" />
+	</div>
+</div>
+
+<script type="text/javascript">
+ajax.openedPosts = {};
+
+ajax.view_post = function(topic_id, src) {
+	if (!ajax.openedPosts[topic_id]) {
+		ajax.exec({
+			action   : 'view_post',
+			topic_id : topic_id
+		});
+	}
+	else {
+		var $post = $('#post_'+topic_id);
+		if ($post.is(':visible')) {
+			$post.hide();
+		}	else {
+			$post.css({ display: '' });
+		}
+	}
+	$(src).toggleClass('unfolded2');
+};
+
+ajax.callback.view_post = function(data) {
+	var topic_id = data.topic_id;
+	var $tor = $('#tr-'+topic_id);
+	window.location.href='#tr-'+topic_id;
+	$('#post-row tr')
+		.clone()
+		.attr({ id: 'post_'+topic_id })
+		.find('div.post_body').html(data.post_html).end()
+		.find('a.tLink').attr({ href: $('a.tLink', $tor).attr('href') }).end()
+		.insertAfter($tor)
+	;
+	initPostBBCode('#post_'+topic_id);
+	var maxH   = screen.height - 290;
+	var maxW   = screen.width - 60;
+	var $post  = $('div.post_wrap', $('#post_'+topic_id));
+	var $links = $('div.post_links', $('#post_'+topic_id));
+	$post.css({ maxWidth: maxW, maxHeight: maxH });
+	$links.css({ maxWidth: maxW });
+	ajax.openedPosts[topic_id] = true;
+};
+</script>
+
+<style>
+.post_wrap { border: 1px #A5AFB4 solid; margin: 8px 8px 6px; overflow: auto; }
+.post_links { margin: 6px; }
+.unfolded2, .folded2 { display: inline !important; }
+</style>
+
+<table id="post-row" style="display: none;">
+<tr>
+	<td class="row2" colspan="7">
+		<div class="post_wrap row1">
+			<div class="post_body pad_6"></div>
+			<div class="clear"></div>
+		</div>
+		<div class="post_links med bold tCenter"><a class="tLink">{{ __('OPEN_TOPIC') }}</a></div>
+	</td>
+</tr>
+</table>
+
+{% else %}
+<script type="text/javascript">
+$(function(){
+	$('#show_mod_options a').attr('href', '{{ MOD_REDIRECT_URL }}');
+});
+</script>
+{% endif %}
+
+<style>
+.tor-time { font-size: 10px; padding-left: 2px; }
+td.topic_id { cursor: pointer; }
+.tt-edit-input { font-size: 11px; }
+.hl-tt, a.hl-tt, a.hl-tt:visited { color: #9E0000; }
+</style>
+{% endif %}
+
+<table width="100%">
+	<tr>
+		<td valign="bottom">
+			<h1 class="maintitle" style="margin-bottom: 0 !important;"><a href="{{ U_VIEW_FORUM }}">{{ FORUM_NAME }}</a></h1>
+			<p class="pagetitle" style="font-size: 17px;">{{ FORUM_DESC }}</p>
+
+			<p class="small" id="moderators"><a style="text-decoration: none;" href="#">{{ __('MODERATORS') }}</a></p>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#moderators a").one('click', function(){
+						$('#moderators').html($('#moderators').text());
+						ajax.index_data();
+						return false;
+					});
+				});
+				ajax.index_data = function() {
+					ajax.exec({
+						action   : 'index_data',
+						mode     : 'get_forum_mods',
+						forum_id : {{ FORUM_ID }}
+					});
+				};
+				ajax.callback.index_data = function(data) {
+					$('#moderators').append(data.html);
+				};
+			</script>
+		</td>
+		<td class="tRight vBottom nowrap small"><b>{{ PAGINATION|raw }}</b></td>
+	</tr>
+</table>
+
+<table width="100%">
+	<tr>
+		<td><a href="{{ U_POST_NEW_TOPIC }}" class="btn-post-topic">{{ T_POST_NEW_TOPIC|raw }}</a></td>
+		<td class="nav" width="100%">
+			&nbsp;<a href="{{ U_INDEX }}">{{ __('HOME') }}</a>&nbsp;<em>&raquo;</em>
+			<a href="{{ U_VIEWCAT }}">{{ CAT_TITLE }}</a>
+			{% if PARENT_FORUM_NAME %}<em>&raquo;</em>&nbsp;<a href="{{ PARENT_FORUM_HREF }}">{{ PARENT_FORUM_NAME }}</a>{% endif %}
+			<em>&raquo;</em>&nbsp;<a href="{{ U_VIEW_FORUM }}">{{ FORUM_NAME }}</a>
+		</td>
+	</tr>
+</table>
+
+{% if SHOW_SUBFORUMS %}
+<table class="forumline forum">
+<col class="row1">
+<col class="row1" width="65%">
+<col class="row2" width="10%">
+<col class="row2" width="10%">
+<col class="row2" width="15%">
+<tr>
+	<th colspan="2">{{ __('FORUM') }}</th>
+	<th>{{ __('TOPICS') }}</th>
+	<th>{{ __('POSTS_SHORT') }}</th>
+	<th>{{ __('LASTPOST') }}</th>
+</tr>
+{% for f in SUBFORUMS %}
+<tr>
+	<td class="f_icon"><img class="forum_icon" src="{{ f.FORUM_FOLDER_IMG }}" /></td>
+	<td class="pad_4">{{ f.TOPIC_TYPE|raw }}
+		<h4 class="forumlink"><a href="{{ f.U_VIEWFORUM }}">{{ f.FORUM_NAME }}</a></h4>
+		{% if f.FORUM_DESC %}<p class="forum_desc">{{ f.FORUM_DESC }}</p>{% endif %}
+	</td>
+	<td class="med tCenter">{{ f.TOPICS }}</td>
+	<td class="med tCenter">{{ f.POSTS }}</td>
+	<td class="small tCenter" nowrap="nowrap" style="padding: 4px 8px;">
+		{% if f.LAST %}
+			{% if f.LAST.FORUM_LAST_POST %}
+
+				{% if f.LAST.SHOW_LAST_TOPIC %}
+
+				<h6 class="last_topic">
+					<a title="{{ f.LAST.LAST_TOPIC_TIP }}" href="{{ f.LAST.LAST_TOPIC_URL }}">{{ f.LAST.LAST_TOPIC_TITLE }}</a>
+					<a href="{{ f.LAST.LAST_POST_URL }}">{{ ICON_LATEST_REPLY|raw }}</a>
+				</h6>
+				<p class="small" style="margin-top:4px;">
+					{{ f.LAST.LAST_POST_TIME }}
+					&middot;
+					{{ f.LAST.LAST_POST_USER|raw }}
+				</p>
+
+				{% else %}
+
+				<p class="small">{{ f.LAST.LAST_POST_TIME }}</p>
+				<p class="small" style="margin-top:3px;">
+					{{ f.LAST.LAST_POST_USER|raw }}
+					<a href="{{ f.LAST.LAST_POST_URL }}">{{ ICON_LATEST_REPLY|raw }}</a>
+				</p>
+
+				{% endif %}
+			{% else %}
+			<span class="med">{{ __('NO_POSTS') }}</span>
+			{% endif %}
+		{% endif %}
+	</td>
+</tr>
+{% endfor %}{# /SUBFORUMS #}
+</table>
+<div class="spacer_6"></div>
+
+{% endif %}
+
+<table class="forumline">
+<tr>
+	<td class="cat bw_TRL pad_2">
+
+	<table cellspacing="0" cellpadding="0" class="borderless w100">
+	<tr>
+		{% if AUTH_MOD %}
+		<td class="small bold nowrap" style="padding: 0 0 0 4px;">
+			<span id="show_mod_options"><a href="#" class="small bold">{{ __('MODERATE_FORUM') }}</a></span>
+		</td>
+		<td class="med" style="padding: 0 4px 2px 4px;color:#CDCDCD">|</td>
+		<td class="small nowrap" style="padding: 0;">{{ __('TOPICS_PER_PAGE') }}:</td>
+		<td class="small nowrap" style="padding: 0 0 0 3px;">
+			<form id="tpp" action="{{ PAGE_URL_TPP }}" method="post">{{ SELECT_TPP|raw }}</form>
+		</td>
+		{% if TORRENTS %}
+		<td class="small nowrap" style="padding: 0 0 0 6px;">{{ __('STATUS') }}:</td>
+		<td class="small nowrap" style="padding: 0 0 0 3px;">{{ SELECT_TST|raw }}</td>
+		{% endif %}
+		<td class="small nowrap" style="padding: 0 0 0 3px;">&nbsp;<input id="tst-submit-btn" type="button" class="bold" value="&raquo;" style="width: 30px;" onclick="mod_goto(); return false;" /></td>
+		<script type="text/javascript">
+		function mod_goto(){
+			window.location = '{{ MOD_URL }}' +'&tpp='+ $('#tpp').val() {% if TORRENTS %}+'&tst='+ $('#tst').val(){% endif %} +'&mod=1';
+		}
+		$(function(){
+			$('#tst').bind('change', function(){ $('#tst-submit-btn').attr({disabled: 1}); mod_goto(); });
+		});
+		</script>
+		{% endif %}
+
+		<td class="small bold nowrap tRight w100">
+			&nbsp;
+			{% if LOGGED_IN %}
+			<a class="small" href="/feed/f/{{ FORUM_ID }}/" target="_blank">{{ FEED_IMG|raw }} {{ __('ATOM_SUBSCRIBE') }}</a>&nbsp;&#0183;
+			<a class="small" href="{{ U_SEARCH_SELF }}">{{ __('SEARCH_SELF') }}</a>&nbsp;&#0183;
+			<a class="menu-root" href="#only-new-options">{{ __('DISPLAYING_OPTIONS') }}</a>
+			{% endif %}
+		</td>
+
+		<td class="nowrap" style="padding: 0 4px 2px 4px;">
+			<form action="{{ PAGE_URL }}" method="post">
+				<input id="search-text" type="text" name="nm"
+				{% if TITLE_MATCH %}
+					value="{{ TITLE_MATCH }}" required {% if FOUND_TOPICS %}class="found"{% else %}class="error"{% endif %}
+				{% else %}
+					placeholder="{{ __('TITLE_SEARCH_HINT') }}" required class="hint"
+				{% endif %}
+				style="width: 150px;" />
+				<input type="submit" class="bold" value="&raquo;" style="width: 30px;" />
+			</form>
+		</td>
+	</tr>
+	</table>
+
+	</td>
+</tr>
+</table>
+
+{% if TORRENTS %}
+<table class="forumline forum" id="forum-table">
+<col class="row1">
+<col class="row1">
+<col class="row1" width="75%">
+<col class="row2" width="5%">
+<col class="row2" width="5%">
+<col class="row2" width="15%">
+<tr>
+	<th colspan="3">{{ __('TOPICS') }}</th>
+	<th>{{ __('TORRENT') }}</th>
+	<th>{{ __('REPLIES_SHORT') }}</th>
+	<th>{{ __('LASTPOST') }}</th>
+</tr>
+{% for t in TOPICS %}
+{% if t.TOPICS_SEPARATOR %}
+<tr>
+	<td colspan="6" class="row3 topicSep">{{ t.TOPICS_SEPARATOR }}</td>
+</tr>
+{% endif %}
+<tr id="tr-{{ t.TOPIC_ID }}">
+	<td colspan="2" id="{{ t.TOPIC_ID }}" class="topic_id"><img class="topic_icon" src="{{ t.TOPIC_ICON }}" /></td>
+
+	<td style="padding: 2px 5px 3px 3px;" class="tt">
+	<div class="torTopic">
+		{% if t.TOR_STATUS_ICON %}<span id="status-{{ t.TOPIC_ID }}" title="{{ t.TOR_STATUS_TEXT }}">{{ t.TOR_STATUS_ICON|raw }}</span>&#0183;{% endif %}
+		{% if t.IS_UNREAD %}<a href="{{ t.TOPIC_NEWEST_URL }}">{{ ICON_NEWEST_REPLY|raw }}</a>{% endif %}
+		{% if t.STATUS == 2 %}<span class="topicMoved">{{ __('TOPIC_MOVED') }}</span>
+			{% elseif t.DL_CLASS %}<span class="{{ t.DL_CLASS }} iconDL"><b>{{ __('TOPIC_DL') }}</b></span>
+		{% endif %}
+		{% if t.POLL %}<span class="topicPoll">{{ __('TOPIC_POLL') }}</span>{% endif %}
+		{% if t.TOR_STALED or t.TOR_FROZEN %}
+			{% if t.ATTACH %}<span>{{ TOPIC_ATTACH_ICON|raw }}</span>{% endif %}
+			<a id="tt-{{ t.TOPIC_ID }}" href="{{ t.TOPIC_URL }}" class="gen tt-text">{{ t.TOPIC_TITLE }}</a>
+		{% else %}
+			{{ t.TOR_TYPE|raw }}<a id="tt-{{ t.TOPIC_ID }}" href="{{ t.TOPIC_URL }}" class="torTopic tt-text"><b>{{ t.TOPIC_TITLE }}</b></a>
+		{% endif %}
+		{% if t.PAGINATION %}<span class="topicPG">[{{ ICON_GOTOPOST|raw }}{{ __('GOTO_SHORT') }} {{ t.PAGINATION|raw }} ]</span>{% endif %}
+	</div>
+	<div class="topicAuthor nowrap" style="padding-top: 2px;">
+		{{ t.TOPIC_AUTHOR|raw }}
+	</div>
+	</td>
+
+	<td class="tCenter nowrap" style="padding: 2px 4px;">
+	{% if t.TOR %}
+		<div>
+			<div><span class="seedmed" title="{{ __('SEEDERS') }}"><b>{{ t.TOR.SEEDERS }}</b></span><span class="med"> | </span><span class="leechmed" title="{{ __('LEECHERS') }}"><b>{{ t.TOR.LEECHERS }}</b></span></div>
+			<div style="padding-top: 2px" class="small">{% if t.TOR_FROZEN %}{{ t.TOR.TOR_SIZE }}{% else %}<a href="{{ DOWNLOAD_URL }}{{ t.TOPIC_ID }}" title="{{ __('DL_TORRENT') }}" class="small">{{ t.TOR.TOR_SIZE }}</a> {% if t.TOR.MAGNET %}{{ t.TOR.MAGNET|raw }}{% endif %}{% endif %}</div>
+		</div>
+	{% endif %}
+	</td>
+
+    <td class="tCenter small nowrap" style="padding: 3px 4px 2px;">
+        <p>
+            <span title="{{ __('REPLIES') }}: {{ t.REPLIES }}">{{ t.REPLIES }}</span>
+            {% if t.STATUS != 2 %}<span class="small"> | </span>{% endif %}
+            <span title="{{ __('VIEWS') }}: {{ t.VIEWS }}">{{ t.VIEWS }}</span>
+        </p>
+        {% if t.TOR %}
+        <p style="padding-top: 2px;" class="med" title="{{ __('COMPLETED') }}: {{ t.TOR.COMPL_CNT }}">
+            <b>{{ t.TOR.DOWNLOADED }}</b>
+        </p>
+        {% endif %}
+    </td>
+
+	<td class="tCenter small nowrap" style="padding: 3px 6px 2px;">
+		<p>{{ t.LAST_POST_TIME }}</p>
+		<p style="padding-top: 2px">
+			{{ t.LAST_POSTER|raw }}
+			<a href="{{ t.LAST_POST_URL }}">{{ ICON_LATEST_REPLY|raw }}</a>
+		</p>
+	</td>
+</tr>
+{% endfor %}{# /TOPICS #}
+{% if NO_TOPICS %}
+<tr>
+	<td colspan="6" class="row1 pad_10 tCenter">{{ NO_TOPICS }}</td>
+</tr>
+{% endif %}
+{% if SESSION_ADMIN %}
+<tr id="mod-action-row" style="display: none;">
+	<td colspan="6" id="mod-action-cell" class="row5 med tCenter pad_4"></td>
+</tr>
+{% endif %}
+<tr>
+	<td colspan="6" class="catBottom med pad_4">
+	{% if LOGGED_IN %}
+	<form method="post" action="{{ S_POST_DAYS_ACTION }}">
+		{{ __('DISPLAY_TOPICS') }}: {{ S_SELECT_TOPIC_DAYS|raw }} {{ S_DISPLAY_ORDER|raw }}
+		<input type="submit" value="{{ __('GO') }}" />
+	</form>
+	{% else %}
+	&nbsp;
+	{% endif %}
+	</td>
+</tr>
+</table>
+
+{% else %}
+
+<table class="forumline forum" id="forum-table">
+<col class="row1">
+<col class="row1">
+<col class="row1" width="60%">
+<col class="row2" width="3%">
+<col class="row2" width="10%">
+<col class="row2" width="7%">
+<col class="row2" width="20%">
+<tr>
+	<th colspan="3">{{ __('TOPICS') }}</th>
+	<th>{{ __('REPLIES') }}</th>
+	<th>{{ __('AUTHOR') }}</th>
+	<th>{{ __('VIEWS') }}</th>
+	<th>{{ __('LASTPOST') }}</th>
+</tr>
+{% for t in TOPICS %}
+{% if t.TOPICS_SEPARATOR %}
+<tr>
+	<td colspan="7" class="row3 topicSep">{{ t.TOPICS_SEPARATOR }}</td>
+</tr>
+{% endif %}
+<tr id="tr-{{ t.TOPIC_ID }}">
+	<td colspan="2" id="{{ t.TOPIC_ID }}" class="topic_id"><img class="topic_icon" src="{{ t.TOPIC_ICON }}" /></td>
+	<td class="tt">
+		<span class="topictitle">
+			{% if t.IS_UNREAD %}<a href="{{ t.TOPIC_NEWEST_URL }}">{{ ICON_NEWEST_REPLY|raw }}</a>{% endif %}
+			{% if t.STATUS == 2 %}<span class="topicMoved">{{ __('TOPIC_MOVED') }}</span>
+				{% elseif t.DL %}<span class="">{{ __('TOPIC_DL') }}</span>
+				{% elseif t.ATTACH %}{{ TOPIC_ATTACH_ICON|raw }}
+			{% endif %}
+			{% if t.POLL %}<span class="topicPoll">{{ __('TOPIC_POLL') }}</span>{% endif %}
+			<a id="tt-{{ t.TOPIC_ID }}" href="{{ t.TOPIC_URL }}" class="topictitle tt-text">{{ t.TOPIC_TITLE }}</a>
+		</span>
+		{% if t.PAGINATION %}<span class="topicPG">[{{ ICON_GOTOPOST|raw }}{{ __('GOTO_SHORT') }} {{ t.PAGINATION|raw }} ]</span>{% endif %}
+	</td>
+	<td class="tCenter med">{{ t.REPLIES }}</td>
+	<td class="tCenter med nowrap">{{ t.TOPIC_AUTHOR|raw }}</td>
+	<td class="tCenter med">{{ t.VIEWS }}</td>
+	<td class="tCenter nowrap small" style="padding: 1px 6px 2px;">
+		<p>{{ t.LAST_POST_TIME }}</p>
+		<p>
+			{{ t.LAST_POSTER|raw }}
+			<a href="{{ t.LAST_POST_URL }}">{{ ICON_LATEST_REPLY|raw }}</a>
+		</p>
+	</td>
+</tr>
+{% endfor %}{# /TOPICS #}
+{% if NO_TOPICS %}
+<tr>
+	<td colspan="7" class="row1 pad_10 tCenter">{{ NO_TOPICS }}</td>
+</tr>
+{% endif %}
+{% if SESSION_ADMIN %}
+<tr id="mod-action-row" style="display: none;">
+	<td colspan="7" id="mod-action-cell" class="row5 med tCenter pad_4"></td>
+</tr>
+{% endif %}
+<tr>
+	<td colspan="7" class="catBottom med pad_4">
+	{% if LOGGED_IN %}
+	<form method="post" action="{{ S_POST_DAYS_ACTION }}">
+		{{ __('DISPLAY_TOPICS') }}: {{ S_SELECT_TOPIC_DAYS|raw }} {{ S_DISPLAY_ORDER|raw }}
+		<input type="submit" value="{{ __('GO') }}" />
+	</form>
+	{% else %}
+	&nbsp;
+	{% endif %}
+	</td>
+</tr>
+</table>
+
+{% endif %}
+
+<table width="100%">
+	<tr>
+		<td><a href="{{ U_POST_NEW_TOPIC }}" class="btn-post-topic">{{ T_POST_NEW_TOPIC|raw }}</a></td>
+		<td class="nav" width="100%">
+			&nbsp;<a href="{{ U_INDEX }}">{{ __('HOME') }}</a>&nbsp;<em>&raquo;</em>
+			<a href="{{ U_VIEWCAT }}">{{ CAT_TITLE }}</a>
+			{% if PARENT_FORUM_NAME %}<em>&raquo;</em>&nbsp;<a href="{{ PARENT_FORUM_HREF }}">{{ PARENT_FORUM_NAME }}</a>{% endif %}
+			<em>&raquo;</em>&nbsp;<a href="{{ U_VIEW_FORUM }}">{{ FORUM_NAME }}</a>
+		</td>
+	</tr>
+</table>
+
+<!--bottom_info-->
+<div class="bottom_info">
+<a href="#" onclick="$.scrollTo('#forum-table', {duration: 200, axis: 'y'}); return false;">{{ __('MOVE_TO_TOP') }}</a>
+
+{% if PAGINATION %}
+<div class="nav">
+	<p style="float: left">{{ PAGE_NUMBER }}</p>
+	<p style="float: right">{{ PAGINATION|raw }}</p>
+	<div class="clear"></div>
+</div>
+{% endif %}
+
+<div class="jumpbox"></div>
+
+<div id="timezone">
+	<p>{{ CURRENT_TIME }}</p>
+	<p>{{ S_TIMEZONE }}</p>
+</div>
+<div class="clear"></div>
+
+{% if LOGGED_IN %}
+<p class="med"><a href="{{ U_MARK_READ }}">{{ __('MARK_TOPICS_READ') }}</a></p>
+{% if IS_AM %}
+<p class="mrg_2 tRight">{{ __('AUTOCLEAN') }}: {% if PRUNE_DAYS %}<b>{{ PRUNE_DAYS }}</b>{% else %}{{ __('DISABLED') }}{% endif %}</p>
+{% endif %}
+
+{% if IS_ADMIN %}
+<div class="med tCenter">{{ __('ADMIN') }}:
+  <a href="{{ POSTING_URL }}?mode=new_rel&amp;{{ constant('POST_FORUM_URL') }}={{ FORUM_ID }}&amp;edit_tpl=1" class="bold" target="_blank">{{ __('DESIGNER') }}</a>&nbsp;&middot;
+  <a href="/admin/admin_log.php?{{ constant('POST_FORUM_URL') }}={{ FORUM_ID }}&amp;db={{ config('log_days_keep') }}" target="_blank">{{ __('FORUM_LOGS') }}</a>&nbsp;&middot;
+  <a href="/admin/admin_forums.php?mode=editforum&amp;{{ constant('POST_FORUM_URL') }}={{ FORUM_ID }}" target="_blank">{{ __('EDIT') }}</a>&nbsp;&middot;
+  <a href="/admin/admin_forumauth.php?{{ constant('POST_FORUM_URL') }}={{ FORUM_ID }}" target="_blank">{{ __('PERMISSIONS') }}</a>&nbsp;&middot;
+  <a href="/admin/admin_forums.php?mode=deleteforum&amp;{{ constant('POST_FORUM_URL') }}={{ FORUM_ID }}" target="_blank">{{ __('DELETE') }}</a>
+</div>
+{% endif %}
+
+{% endif %}
+
+<table width="100%" cellspacing="0">
+<tr>
+	<td width="40%" class="small"><span>{{ S_AUTH_LIST|raw }}</span></td>
+	<td width="60%" valign="top">
+		<table class="bRight small">
+		<tr>
+			<td><img class="topic_icons" src="{{ FOLDER_NEW_IMG }}" /></td>
+			<td>{{ __('NEW_POSTS') }}</td>
+			<td><img class="topic_icons" src="{{ FOLDER_ANNOUNCE_IMG }}" /></td>
+			<td>{{ __('POST_ANNOUNCEMENT') }}</td>
+		</tr>
+		<tr>
+			<td><img class="topic_icons" src="{{ FOLDER_IMG }}" /></td>
+			<td>{{ __('NO_NEW_POSTS') }}</td>
+			<td><img class="topic_icons" src="{{ FOLDER_STICKY_IMG }}" /></td>
+			<td>{{ __('POST_STICKY') }}</td>
+		</tr>
+		<tr>
+			<td><img class="topic_icons" src="{{ FOLDER_LOCKED_IMG }}" /></td>
+			<td>{{ __('TOPIC_LOCKED_SHORT') }}</td>
+			<td><img class="topic_icons" src="{{ FOLDER_DOWNLOAD_IMG }}" /></td>
+			<td>{{ __('POST_DOWNLOAD') }}</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+</div><!--/bottom_info-->
