@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html dir="{{ USER_LANG_DIRECTION }}" lang="{{ USER_LANG }}">
+<head>
+<meta charset="{{ CONTENT_ENCODING }}">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="initial-scale=1.0">
+<meta name="generator" content="{{ constant('APP_NAME') }}">
+{% if META_DESCRIPTION %}
+<meta name="description" content="{{ META_DESCRIPTION }}"/>
+<meta property="og:description" content="{{ META_DESCRIPTION }}">
+<meta property="twitter:description" content="{{ META_DESCRIPTION }}">
+{% endif %}
+<title>{% if HAVE_NEW_PM %}({{ HAVE_NEW_PM }}) {% endif %}{% if PAGE_TITLE %}{{ PAGE_TITLE }} :: {{ SITENAME }}{% else %}{{ SITENAME }}{% endif %}</title>
+<meta name="apple-mobile-web-app-title" content="{{ SITENAME }}">
+<meta name="application-name" content="{{ SITENAME }}"/>
+<meta property="og:site_name" content="{{ SITENAME }}">
+<meta property="og:image" content="{{ SITE_URL }}assets/images/logo/logo.png" />
+<meta property="og:type" content="website">
+<meta property="twitter:image" content="{{ SITE_URL }}assets/images/logo/logo.png">
+<meta property="og:title" content="{% if PAGE_TITLE %}{{ PAGE_TITLE }} :: {{ SITENAME }}{% else %}{{ SITENAME }}{% endif %}">
+<meta property="twitter:title" content="{% if PAGE_TITLE %}{{ PAGE_TITLE }} :: {{ SITENAME }}{% else %}{{ SITENAME }}{% endif %}">
+<meta property="twitter:card" content="summary">
+{% if not ALLOW_ROBOTS %}
+<meta name="robots" content="noindex">
+{% endif %}
+{% if META_PREV_PAGE %}
+<link rel="prev" href="{{ META_PREV_PAGE }}">
+{% endif %}
+{% if META_NEXT_PAGE %}
+<link rel="next" href="{{ META_NEXT_PAGE }}">
+{% endif %}
+{% if CANONICAL_URL %}
+<link rel="canonical" href="{{ CANONICAL_URL }}">
+{% endif %}
+{{ META }}
+<link rel="stylesheet" href="{{ STYLESHEET }}" type="text/css">
+<link rel="stylesheet" href="{{ SITE_URL }}assets/css/dark-mode.css?v={{ config('css_ver') }}" type="text/css">
+<link rel="shortcut icon" href="{{ SITE_URL }}favicon.png" type="image/x-icon">
+
+<script type="text/javascript" src="{{ SITE_URL }}assets/js/libs/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="{{ SITE_URL }}assets/js/libs/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="{{ SITE_URL }}assets/js/libs/clipboard.min.js"></script>
+<script type="text/javascript" src="{{ SITE_URL }}assets/js/libs/printThis.min.js"></script>
+<script type="text/javascript" src="{{ SITE_URL }}assets/js/libs/legacy.js"></script>
+<script type="text/javascript" src="{{ SITE_URL }}assets/js/main.js?v={{ config('js_ver') }}"></script>
+
+{% if INCLUDE_BBCODE_JS %}
+<script type="text/javascript" src="{{ SITE_URL }}assets/js/bbcode.js?v={{ config('js_ver') }}"></script>
+<script type="text/javascript">
+	window.BB = {};
+	window.encURL = encodeURIComponent;
+</script>
+<script type="text/javascript">
+var bb_url = '{{ SITE_URL }}';
+var bbl    = { "code": "{{ __('CODE') }}", "wrote": "{{ __('WROTE') }}", "quote": "{{ __('QUOTE') }}", "quoted_post": "{{ __('GOTO_QUOTED_POST') }}", "loading": "{{ __('LOADING') }}", "spoiler_head": "{{ __('SPOILER_HEAD') }}", "spoiler_close": "{{ __('SPOILER_CLOSE') }}", "links_are": "{{ __('LINKS_ARE_FORBIDDEN') }}", "scr_rules": "{{ __('SCREENSHOTS_RULES') }}", "play_on": "{{ __('PLAY_ON_CURPAGE') }}" };
+
+var postImg_MaxWidth = screen.width - {{ POST_IMG_WIDTH_DECR_JS }};
+var postImgAligned_MaxWidth = Math.round(screen.width/3);
+var attachImg_MaxWidth = screen.width - {{ ATTACH_IMG_WIDTH_DECR_JS }};
+var ExternalLinks_InNewWindow = '{{ EXT_LINK_NEW_WIN }}';
+var hidePostImg = false;
+</script>
+{% endif %}
+
+<script type="text/javascript">
+var BB_ROOT      = "{{ constant('BB_ROOT') }}";
+var cookieDomain = "{{ config('cookie_domain') }}";
+var cookiePath   = "{{ config('script_path') }}";
+var cookiePrefix = "{{ config('cookie_prefix') }}";
+var cookieSecure = "{{ config('cookie_secure') }}";
+var cookieSameSite = "{{ config('cookie_same_site') }}";
+var LOGGED_IN    = {{ LOGGED_IN }};
+var IWP          = 'HEIGHT=510,WIDTH=780,resizable=yes';
+var IWP_US       = 'HEIGHT=250,WIDTH=400,resizable=yes';
+var IWP_SM       = 'HEIGHT=420,WIDTH=470,resizable=yes,scrollbars=yes';
+
+var user = {
+	opt_js: {{ USER_OPTIONS_JS }},
+
+	set: function (opt, val, days, reload) {
+		this.opt_js[opt] = val;
+		setCookie('opt_js', JSON.stringify(this.opt_js), days);
+		if (reload) {
+			window.location.reload();
+		}
+	}
+};
+
+{% if JUMPBOX %}
+$(document).ready(function () {
+    $("div.jumpbox").html('\
+		<span id="jumpbox-container"> \
+		<select id="jumpbox"> \
+			<option id="jumpbox-title" value="-1">&nbsp;&raquo;&raquo; {{ __('JUMPBOX_TITLE') }} &nbsp;</option> \
+		</select> \
+		</span> \
+		<input id="jumpbox-submit" type="button" class="lite" value="{{ __('GO') }}" /> \
+	');
+    $('#jumpbox-container').one('click', function () {
+        $('#jumpbox-title').html('&nbsp;&nbsp; {{ __('LOADING') }} ... &nbsp;');
+        $(this).html('{{ JUMPBOX }}');
+        $('#jumpbox-submit').click(function () {
+            window.location.href = '{{ FORUM_URL }}' + $('#jumpbox').val();
+        });
+    });
+});
+{% endif %}
+
+var ajax = new Ajax('{{ SITE_URL }}ajax', 'POST', 'json');
+
+function getElText (e)
+{
+	var t = '';
+	if (e.textContent !== undefined) { t = e.textContent; } else if (e.innerText !== undefined) { t = e.innerText; } else { t = jQuery(e).text(); }
+	return t;
+}
+function escHTML (txt)
+{
+	return txt.replace(/</g, '&lt;');
+}
+{% if USE_TABLESORTER %}
+$(document).ready(function() {
+	$('.tablesorter').tablesorter();
+});
+{% endif %}
+
+function cfm (txt)
+{
+	return window.confirm(txt);
+}
+function post2url (url, params) {
+	params = params || {};
+	var f = document.createElement('form');
+	f.setAttribute('method', 'post');
+	f.setAttribute('action', url);
+	params['form_token'] = '{{ FORM_TOKEN }}';
+	for (var k in params) {
+		var h = document.createElement('input');
+		h.setAttribute('type', 'hidden');
+		h.setAttribute('name', k);
+		h.setAttribute('value', params[k]);
+		f.appendChild(h);
+	}
+	document.body.appendChild(f);
+	f.submit();
+	return false;
+}
+</script>
+
+<!--[if gte IE 7]><style>
+input[type="checkbox"] { margin-bottom: -1px; }
+</style><![endif]-->
+
+<!--[if IE]><style>
+.post-hr { margin: 2px auto; }
+.fieldsets div > p { margin-bottom: 0; }
+</style><![endif]-->
+
+<style>
+	.menu-sub, #ajax-loading, #ajax-error, var.ajax-params, .sp-title, .q-post { display: none; }
+</style>
+</head>
+
+<body>
+{% if PAGINATION %}
+<div class="menu-sub" id="pg-jump">
+	<table cellspacing="1" cellpadding="4">
+	<tr><th>{{ __('GO_TO_PAGE') }}</th></tr>
+	<tr><td>
+		<form method="get" onsubmit="return go_to_page();">
+			<input id="pg-page" type="text" size="5" maxlength="4" />
+			<input type="submit" value="{{ __('GO') }}"/>
+		</form>
+	</td></tr>
+	</table>
+</div>
+<script type="text/javascript">
+function go_to_page ()
+{
+	var page_num = (parseInt( $('#pg-page').val() ) > 1) ? $('#pg-page').val() : 1;
+	var pg_start = (page_num - 1) * {{ PG_PER_PAGE }};
+	var base_url = '{{ PG_BASE_URL }}';
+	var separator = base_url.indexOf('?') === -1 ? '?' : '&';
+	window.location = base_url + separator + 'start=' + pg_start;
+	return false;
+}
+</script>
+{% endif %}
+
+<div id="ajax-loading"></div><div id="ajax-error"></div>
+<div id="preload" style="position: absolute; overflow: hidden; top: 0; left: 0; height: 1px; width: 1px;"></div>
+
+<div id="body_container">
+
+<!--******************-->
+{% if SIMPLE_HEADER %}
+<!--==================-->
+
+<style>body { background: #E3E3E3; min-width: 10px; }</style>
+
+<!--=================-->
+{% elseif IN_ADMIN %}
+<!--=================-->
+
+<!-- ====== -->
+{% else %}
+<!-- ====== -->
+
+<!--page_container-->
+<div id="page_container">
+<a name="top"></a>
+
+<!--page_header-->
+<div id="page_header">
+
+<!--main_nav-->
+<div id="main-nav"{% if HAVE_NEW_PM %} class="new-pm"{% endif %}>
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="nowrap">
+			<a href="{{ U_INDEX }}"><b>{{ __('HOME') }}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{{ U_TRACKER }}"><b>{{ __('TRACKER') }}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{{ U_SEARCH }}"><b>{{ __('SEARCH') }}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{{ U_TERMS }}"><b style="color: #993300;">{{ __('TERMS') }}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{{ U_GROUPS }}"><b>{{ __('USERGROUPS') }}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{{ U_MEMBERLIST }}"><b>{{ __('MEMBERLIST') }}</b></a>
+		</td>
+		<td class="nowrap tRight">
+			{% if LOGGED_IN %}
+				{% if HAVE_NEW_PM or HAVE_UNREAD_PM %}
+					<a href="{{ U_READ_PM }}" class="new-pm-link"><b>{{ __('PRIVATE_MESSAGES') }}: {{ PM_INFO }}</b></a>
+				{% else %}
+					<a href="{{ U_PRIVATEMSGS }}"><b>{{ __('PRIVATE_MESSAGES') }}: {{ PM_INFO }}</b></a>
+				{% endif %}
+			{% endif %}
+		</td>
+	</tr>
+	</table>
+</div>
+<!--/main_nav-->
+
+<!--logo-->
+<div id="logo">
+	<!--<h1>{{ SITENAME }}</h1>
+	<h6>{{ SITE_DESCRIPTION }}</h6> -->
+	<a href="{{ U_INDEX }}"><img src="{{ FORUM_PATH }}assets/images/logo/logo.png" title="{{ SITENAME }}" alt="{{ SITENAME }}" /></a>
+</div>
+<!--/logo-->
+
+{% if LOGGED_IN %}
+<!--logout-->
+<div class="topmenu">
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+	<td width="40%">
+		{{ __('USER_WELCOME') }}&nbsp;<b class="med">{{ THIS_USER }}</b>&nbsp;[ <a href="{{ U_LOGIN_LOGOUT }}" onclick="return confirm('{{ __('CONFIRM_LOGOUT') }}');">{{ __('LOGOUT') }}</a> ]
+	</td>
+	<td style="padding: 3px;">
+		<div>
+			<form id="quick-search" action="" method="get" onsubmit="$(this).attr('action', $('#search-action').val()); if($('#search-action option:selected').attr('class') == 'hash') $('#search-text').attr('name', 'hash');">
+				<input type="hidden" name="max" value="1" />
+				<input type="hidden" name="to" value="1" />
+				<input id="search-text" type="text" name="nm" placeholder="{{ __('SEARCH_S') }}" required />
+				<select id="search-action">
+					<option value="{{ U_TRACKER }}#results" selected> {{ __('TRACKER_S') }} </option>
+					<option value="{{ U_SEARCH }}"> {{ __('FORUM_S') }} </option>
+					<option value="{{ U_TRACKER }}" class="hash"> {{ __('HASH_S') }} </option>
+				</select>
+				<input type="submit" class="med" value="{{ __('SEARCH') }}" style="width: 55px;" />
+			</form>
+		</div>
+	</td>
+	<td width="50%" class="tRight">
+		<a href="{{ U_OPTIONS }}"><b>{{ __('OPTIONS') }}</b></a> &#0183;
+		<a href="{{ U_CUR_DOWNLOADS }}">{{ __('PROFILE') }}</a> <a href="#dls-menu" class="menu-root menu-alt1">&#9660;</a>
+		&#0183;
+		<a href="#" class="dark-mode-toggle" title="{{ __('DARK_MODE_TOGGLE') }}"><span class="theme-icon">☀️</span></a>
+	</td>
+</tr>
+</table>
+</div>
+<!--/logout-->
+
+<div class="menu-sub" id="dls-menu">
+	<div class="menu-a bold nowrap">
+		<a class="med" href="{{ U_TRACKER }}?rid={{ SESSION_USER_ID }}#results">{{ __('CUR_UPLOADS') }}</a>
+		<a class="med" href="{{ U_SEARCH }}?dlu={{ SESSION_USER_ID }}&dlc=1">{{ __('SEARCH_DL_COMPLETE_DOWNLOADS') }}</a>
+		<a class="med" href="{{ U_SEARCH }}?dlu={{ SESSION_USER_ID }}&dlw=1">{{ __('SEARCH_DL_WILL_DOWNLOADS') }}</a>
+		<a class="med" href="{{ U_WATCHED_TOPICS }}">{{ __('WATCHED_TOPICS') }}</a>
+	</div>
+</div>
+{% else %}
+
+<!--login form-->
+<div class="topmenu">
+	<table width="100%" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="tCenter pad_2">
+				<a href="{{ U_REGISTER }}" id="register_link"><b>{{ __('REGISTER') }}</b></a> &#0183;
+					<form action="{{ S_LOGIN_ACTION }}" method="post">
+						{{ __('USERNAME') }}: <input type="text" name="login_username" size="12" tabindex="1" accesskey="l" />
+						{{ __('PASSWORD') }}: <input type="password" name="login_password" size="12" tabindex="2" />
+						<label title="{{ __('AUTO_LOGIN') }}"><input type="checkbox" name="autologin" value="1" tabindex="3" checked />{{ __('REMEMBER') }}</label>&nbsp;
+						<input type="submit" name="login" value="{{ __('LOGIN') }}" tabindex="4" />
+					</form> &#0183;
+				<a href="{{ U_SEND_PASSWORD }}">{{ __('FORGOTTEN_PASSWORD') }}</a>
+				&#0183;
+				<a href="#" class="dark-mode-toggle" title="{{ __('DARK_MODE_TOGGLE') }}"><span class="theme-icon">☀️</span></a>
+			</td>
+		</tr>
+	</table>
+</div>
+<!--/login form-->
+{% endif %}
+
+</div>
+<!--/page_header-->
+
+<!--menus-->
+
+{% if SHOW_ONLY_NEW_MENU %}
+<div class="menu-sub" id="only-new-options">
+	<table cellspacing="1" cellpadding="4">
+	<tr>
+		<th>{{ __('DISPLAYING_OPTIONS') }}</th>
+	</tr>
+	<tr>
+		<td>
+			<fieldset id="show-only">
+			<legend>{{ __('SHOW_ONLY') }}</legend>
+			<div class="pad_4">
+				<label>
+					<input id="only_new_posts" type="checkbox" {% if ONLY_NEW_POSTS_ON %}{{ CHECKED }}{% endif %}
+						onclick="
+							user.set('only_new', ( this.checked ? {{ constant('ONLY_NEW_POSTS') }} : 0 ), 365, true);
+							$('#only_new_topics').attr('checked', false);
+						" />{{ __('ONLY_NEW_POSTS') }}
+				</label>
+				<label>
+					<input id="only_new_topics" type="checkbox" {% if ONLY_NEW_TOPICS_ON %}{{ CHECKED }}{% endif %}
+						onclick="
+							user.set('only_new', ( this.checked ? {{ constant('ONLY_NEW_TOPICS') }} : 0 ), 365, true);
+							$('#only_new_posts').attr('checked', false);
+						" />{{ __('ONLY_NEW_TOPICS') }}
+				</label>
+			</div>
+			</fieldset>
+			{% if USER_HIDE_CAT %}
+			<fieldset id="user_hide_cat">
+			<legend>{{ __('HIDE_CAT') }}</legend>
+			<div id="h-cat-ctl" class="pad_4 nowrap">
+				<form autocomplete="off">
+					{% for h_c_item in H_C %}
+					<label><input class="h-cat-cbx" type="checkbox" value="{{ h_c_item.H_C_ID }}" {{ h_c_item.H_C_CHEKED }} />{{ h_c_item.H_C_TITLE }}</label>
+					{% endfor %}
+				</form>
+				<div class="spacer_6"></div>
+				<div class="tCenter">
+					{% if H_C_AL_MESS %}
+					<input style="width: 100px;" type="button" onclick="$('input.h-cat-cbx').attr('checked', false); $('input#sec_h_cat').click(); return false;" value="{{ __('RESET') }}">
+					{% endif %}
+					<input id="sec_h_cat" type="button" onclick="set_h_cat();" style="width: 100px;" value="{{ __('SUBMIT') }}">
+					<script type="text/javascript">
+					function set_h_cat ()
+					{
+						h_cats = [];
+						$.each($('input.h-cat-cbx:checked'), function(i,el){
+							h_cats.push( $(this).val() );
+						});
+						user.set('h_cat', h_cats.join('-'), 365, true);
+					}
+					</script>
+				</div>
+			</div>
+			</fieldset>
+			{% endif %}
+		</td>
+	</tr>
+	</table>
+</div><!--/only-new-options-->
+{% endif %}
+
+<!--/menus-->
+
+<!--page_content-->
+<div id="page_content">
+<table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
+<tr>{% if SHOW_SIDEBAR1 %}
+	<!--sidebar1-->
+	<td id="sidebar1">
+		<div id="sidebar1-wrap">
+			{% if SHOW_BT_USERDATA %}<div id="user_ratio">
+				<h3>{{ __('USER_RATIO') }}</h3>
+				<table cellpadding="0">
+					<div align="center">{{ THIS_AVATAR }}</div>
+					<tr><td>{{ __('USER_RATIO') }}</td><td>{% if DOWN_TOTAL_BYTES > MIN_DL_BYTES %}<b>{{ USER_RATIO }}</b>{% else %}<b>{{ __('NONE') }}</b> (DL < {{ MIN_DL_FOR_RATIO }}){% endif %}</td></tr>
+					<tr><td>{{ __('DOWNLOADED') }}</td><td class="leechmed"><b>{{ DOWN_TOTAL }}</b></td></tr>
+					<tr><td>{{ __('UPLOADED') }}</td><td class="seedmed"><b>{{ UP_TOTAL }}</b></td></tr>
+					<tr><td>{{ __('RELEASED') }}</td><td class="seedmed">{{ RELEASED }}</td></tr>
+					<tr><td>{{ __('BONUS') }}</td><td class="seedmed">{{ UP_BONUS }}</td></tr>
+					{% if config('seed_bonus_enabled') %}<tr><td>{{ __('SEED_BONUS') }}</td><td><a href="{{ BONUS_URL }}"><span class="points bold">{{ POINTS }}</span></a></td></tr>{% endif %}
+				</table>
+			</div>{% endif %}
+			{% include '@lang/sidebar1.twig' ignore missing %}
+			<img width="210" class="spacer" src="{{ SPACER }}" alt="" />
+		</div><!--/sidebar1-wrap-->
+	</td><!--/sidebar1-->
+{% endif %}
+
+<!--main_content-->
+<td id="main_content">
+	<div id="main_content_wrap">
+		<div id="latest_news">
+			<table cellspacing="0" cellpadding="0" width="100%">
+				<tr>
+					{% if SHOW_LATEST_NEWS %}
+					<td width="50%">
+						<h3>{{ __('LATEST_NEWS') }}</h3>
+						<table cellpadding="0">
+							{% for news_item in NEWS %}
+							<tr>
+								<td><div class="news_date">{{ news_item.NEWS_TIME }}</div></td>
+								<td width="100%">
+									<div class="news_title{% if news_item.NEWS_IS_NEW %} new{% endif %}"><a href="{{ news_item.NEWS_URL }}">{{ news_item.NEWS_TITLE }}</a></div>
+								</td>
+							</tr>
+							{% endfor %}
+						</table>
+					</td>
+					{% endif %}
+
+					{% if SHOW_NETWORK_NEWS %}
+						<td width="50%">
+						<h3>{{ __('NETWORK_NEWS') }}</h3>
+						<table cellpadding="0">
+							{% for net_item in NET %}
+							<tr>
+								<td><div class="news_date">{{ net_item.NEWS_TIME }}</div></td>
+								<td width="100%">
+									<div class="news_title{% if net_item.NEWS_IS_NEW %} new{% endif %}"><a href="{{ net_item.NEWS_URL }}">{{ net_item.NEWS_TITLE }}</a></div>
+								</td>
+							</tr>
+							{% endfor %}
+						</table>
+					</td>
+					{% endif %}
+				</tr>
+			</table>
+		</div>
+
+<!--=======================-->
+{% endif %}
+<!--***********************-->
+
+{% if ERROR_MESSAGE %}
+<div class="info_msg_wrap">
+<table class="error">
+	<tr><td><div class="msg">{{ ERROR_MESSAGE }}</div></td></tr>
+</table>
+</div>
+{% endif %}
+
+<!-- page_header.tpl END -->
+<!-- module_xx.tpl START -->

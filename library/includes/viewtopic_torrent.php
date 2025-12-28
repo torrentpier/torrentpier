@@ -68,6 +68,10 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
     $topic_id = $t_data['topic_id'];
     $bt_user_id = userdata('user_id');
 
+    // Initialize arrays for Twig templates
+    $unregisteredTorrentList = [];
+    $torrentList = [];
+
     // Download count: historical (aggregated) + today's live count
     $live_dl_count = DB()->table(BB_TORRENT_DL)->where('topic_id', $topic_id)->count('*');
     $download_count = declension((int)($t_data['download_count'] ?? 0) + $live_dl_count, 'times');
@@ -97,7 +101,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
     $display_name = TorrentPier\Attachment::getDownloadFilename($bt_topic_id, $t_data['topic_title']);
 
     if (!$tor_reged) {
-        template()->assign_block_vars('unregistered_torrent', [
+        $unregisteredTorrentList[] = [
             'DOWNLOAD_NAME' => $display_name,
             'TRACKER_LINK' => $tracker_link,
 
@@ -107,7 +111,8 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
 
             'DOWNLOAD_COUNT' => $download_count,
             'POSTED_TIME' => $tor_file_time,
-        ]);
+        ];
+        template()->assign_vars(['UNREGISTERED_TORRENT' => $unregisteredTorrentList]);
     } else {
         $sql = 'SELECT bt.*, u.user_id, u.username, u.user_rank
 		FROM ' . BB_BT_TORRENTS . ' bt
@@ -183,13 +188,14 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
         }
 
         if (!$dl_allowed) {
-            template()->assign_block_vars('torrent', []);
+            $torrentList[] = [];
             template()->assign_vars([
+                'TORRENT' => $torrentList,
                 'TOR_BLOCKED' => true,
                 'TOR_BLOCKED_MSG' => sprintf(__('BT_LOW_RATIO_FOR_DL'), round($user_ratio, 2), "search?dlu={$bt_user_id}&amp;dlc=1"),
             ]);
         } else {
-            template()->assign_block_vars('torrent', [
+            $torrentItem = [
                 'DOWNLOAD_NAME' => $display_name,
                 'TRACKER_LINK' => $tracker_link,
                 'TOR_SILVER_GOLD' => $tor_type,
@@ -218,15 +224,19 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                 'TORRENT_SIZE' => humn_size($tor_size, 2),
                 'DOWNLOAD_COUNT' => $download_count,
                 'COMPLETED' => $tor_completed_count,
-            ]);
+            ];
 
             // TorrServer integration
+            $torrentItem['TOR_SERVER'] = [];
             if (config()->get('torr_server.enabled') && !IS_GUEST && TorrentPier\Attachment::m3uExists($topic_id)) {
-                template()->assign_block_vars('torrent.tor_server', [
+                $torrentItem['TOR_SERVER'][] = [
                     'TORR_SERVER_M3U_LINK' => PLAYBACK_M3U_URL . $bt_topic_id . '/',
                     'TORR_SERVER_M3U_ICON' => theme_images('icon_tor_m3u_icon'),
-                ]);
+                ];
             }
+
+            $torrentList[] = $torrentItem;
+            template()->assign_vars(['TORRENT' => $torrentList]);
         }
 
         if (config()->get('show_tor_info_in_dl_list')) {

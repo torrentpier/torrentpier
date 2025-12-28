@@ -248,7 +248,7 @@ if (!IS_GUEST) {
     header('Cache-Control: private, no-cache, no-store, must-revalidate');
 }
 
-template()->set_filenames(['page_header' => 'page_header.tpl']);
+template()->set_filenames(['page_header' => 'page_header.twig']);
 template()->pparse('page_header');
 
 define('PAGE_HEADER_SENT', true);

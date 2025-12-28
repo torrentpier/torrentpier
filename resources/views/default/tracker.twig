@@ -1,0 +1,518 @@
+{% if AJAX_TOPICS %}
+<script type="text/javascript">
+ajax.openedPosts = {};
+
+ajax.view_post = function(topic_id, src) {
+	var rowId = 'tpc_' + topic_id;
+	if (!ajax.openedPosts[topic_id]) {
+		ajax.exec({
+			action   : 'view_post',
+			topic_id : topic_id
+		});
+	}
+	else {
+		var $row = $('#' + rowId);
+		if ($row.is(':visible')) {
+			$row.hide();
+		} else {
+			$row.css({ display: '' });
+		}
+	}
+	$(src).toggleClass('unfolded2');
+};
+
+ajax.callback.view_post = function(data) {
+	var topic_id = data.topic_id;
+	var rowId = 'tpc_' + topic_id;
+	var $tor = $('#tor_' + topic_id);
+	window.location.href = '#tor_' + topic_id;
+	$('#post-row tr')
+		.clone()
+		.attr({ id: rowId })
+		.find('div.post_body').html(data.post_html).end()
+		.find('a.tLink').attr({ href: $('a.tLink', $tor).attr('href') }).end()
+		.find('a.dLink').attr({ href: $('a.tr-dl', $tor).attr('href') }).end()
+		.insertAfter($tor)
+	;
+	initPostBBCode('#' + rowId);
+	var maxH = screen.height - 290;
+	var maxW = screen.width - 60;
+	var $row = $('#' + rowId);
+	$('div.post_wrap', $row).css({ maxWidth: maxW, maxHeight: maxH });
+	$('div.post_links', $row).css({ maxWidth: maxW });
+	ajax.openedPosts[topic_id] = true;
+};
+</script>
+
+<style>
+.post_wrap { border: 1px #A5AFB4 solid; margin: 8px 8px 6px; overflow: auto; }
+.post_links { margin: 6px; }
+</style>
+
+<table id="post-row" style="display: none;">
+<tr>
+	<td class="row2" colspan="{{ TOR_COLSPAN }}">
+		<div class="post_wrap row1">
+			<div class="post_body pad_6"></div><!--/post_body-->
+			<div class="clear"></div>
+		</div><!--/post_wrap-->
+		<div class="post_links med bold tCenter"><a class="tLink">{{ __('OPEN_TOPIC') }}</a> &nbsp;&#0183;&nbsp; <a class="dLink">{{ __('DL_TORRENT') }}</a></div>
+	</td>
+</tr>
+</table>
+{% endif %}
+
+<a name="start"></a>
+<h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
+
+<div class="nav">
+	<p class="floatL"><a href="{{ U_INDEX }}">{{ __('HOME') }}</a></p>
+	<p class="floatR">{% if config('tracker.random_release_button') %}<a href="{{ U_TRACKER }}?random_release=1">{{ __('RANDOM_RELEASE') }}</a>{% endif %}{% if MATCHES %}&nbsp;&middot;&nbsp;{{ MATCHES }}{{ SERACH_MAX }}{% endif %}</p>
+	<div class="clear"></div>
+</div>
+
+{% if TORHELP_TOPICS %}
+	{% include 'torhelp.twig' %}
+	<div class="spacer_6"></div>
+{% endif %}
+
+{% if SHOW_SEARCH_OPT %}
+<script type="text/javascript">
+    var FSN = {
+        fs_all: '',
+        fs_og: [],
+        fs_lb: [],
+        sel_width: null,
+        nav_inited: false,
+
+        show_nav: function () {
+            $('#fs>legend').empty().append($('#fs-nav-legend').contents());
+        },
+        build_nav: function () {
+
+            if (FSN.nav_inited) return;
+
+            var $fieldset = $('fieldset#fs');
+            var $select = $('select:last', $fieldset);
+            var $optgroup = $('optgroup', $select);
+
+            $optgroup.each(function (i) {
+                var $og = $(this);
+                $og.attr({id: 'og-' + i});
+                FSN.fs_og[i] = $(this).html();
+                FSN.fs_lb[i] = $(this).attr('label');
+                $('#fs-sel-cat').append('<option class="cat-title" value="' + i + '">&nbsp;&nbsp;&middot;&nbsp;' + FSN.fs_lb[i] + '&nbsp;</option>\n');
+                $('<li><span class="b">' + FSN.fs_lb[i] + '</span>\n<ul id="nav-c-' + i + '"></ul>\n</li>').appendTo('#fs-nav-ul').click(function () {
+                });
+                $('option', $og).each(function () {
+                    var $op = $(this);
+                    if ($op[0].className) {
+                        $('<li><span class="f">' + $op.html() + '</span>\n</li>').appendTo('#nav-c-' + i).click(function (e) {
+                            e.stopPropagation();
+                            $('option', $select).removeAttr('selected');
+                            $('#' + $op.attr('id')).attr({selected: 1});
+                            $('#fs-nav-list').fadeOut();
+                        });
+                    }
+                });
+            });
+
+            $('#fs-nav-ul').treeview({collapsed: true});
+
+            $('#fs-sel-cat').bind('change', function () {
+                var i = $(this).val();
+                if (FSN.sel_width == null) {
+                    FSN.sel_width = $select.width() + 4;
+                }
+                if (i == 'all') {
+                    var fs_html = FSN.fs_all;
+                } else {
+                    var fs_html = '<optgroup label="' + FSN.fs_lb[i] + '">' + FSN.fs_og[i] + '</optgroup>';
+                }
+                $select.html(fs_html).focus();
+                if (i == 'all') {
+                    $('#fs-nav-menu').show();
+                } else {
+                    $('#fs-nav-menu').hide();
+                }
+                $select.width(FSN.sel_width);
+            });
+
+            FSN.fs_all = $select.html();
+
+            FSN.nav_inited = true;
+        }
+    };
+
+    $(function () {
+        FSN.show_nav();
+        $('#fs legend').one('mouseenter', FSN.build_nav);
+    });
+</script>
+
+<div class="menu-sub" id="fs-nav-list">
+	<div class="tRight"><span id="fs-nav-close" class="med" onclick="$('#fs-nav-list').hide();"> [ {{ __('HIDE') }} ] </span></div>
+	<ul id="fs-nav-ul" class="tree-root"></ul>
+</div>
+
+<div id="fs-nav-legend" style="display: none;">
+	<select id="fs-sel-cat"><option value="all">&nbsp;{{ __('SELECT_CAT') }}&nbsp;</option></select>
+	<span id="fs-nav-menu">&nbsp;&middot;&nbsp;<a class="menu-root" href="#fs-nav-list">{{ __('GO_TO_SECTION') }}</a></span>
+</div>
+
+<form method="POST" name="post" action="{{ TOR_SEARCH_ACTION }}#results">
+{{ S_HIDDEN_FIELDS }}
+
+<table class="bordered w100" cellspacing="0">
+<col class="row1">
+<tr>
+	<th class="thHead">{{ __('TOR_SEARCH_TITLE') }}</th>
+</tr>
+<tr>
+	<td class="row4" style="padding: 4px;">
+
+		<table class="fieldsets borderless bCenter pad_0" cellspacing="0">
+		<tr>
+			<td rowspan="2" width="50%">
+				<fieldset id="fs">
+				<legend>{{ __('SEARCH_IN_FORUMS') }}</legend>
+				<div>
+					<p class="select">{{ CAT_FORUM_SELECT }}</p>
+					<p id="fs-qs-div" class="med" style="display: none;"><input id="fs-qs-input" type="text" style="width: 200px;"> {{ __('FILTER_BY_NAME') }}</p>
+					<p><img width="300" class="spacer" src="{{ SPACER }}" alt="" /></p>
+				</div>
+				</fieldset>
+			</td>
+			<td height="1" width="20%">
+				<fieldset>
+				<legend>{{ __('SORT_BY') }}</legend>
+				<div class="med">
+					<p class="select">{{ ORDER_SELECT }}</p>
+					<p class="radio"><label><input type="radio" name="{{ SORT_NAME }}" value="{{ SORT_ASC }}" {{ SORT_ASC_CHECKED }} /> {{ __('ASC') }}</label></p>
+					<p class="radio"><label><input type="radio" name="{{ SORT_NAME }}" value="{{ SORT_DESC }}" {{ SORT_DESC_CHECKED }} /> {{ __('DESC') }}</label></p>
+				</div>
+				</fieldset>
+				<fieldset>
+				<legend>{{ __('TORRENTS_FROM') }}</legend>
+				<div>
+					<p class="select">{{ TIME_SELECT }}</p>
+				</div>
+				</fieldset>
+				<fieldset>
+				<legend>{{ __('SEED_NOT_SEEN') }}</legend>
+				<div>
+					<p class="select">{{ S_NOT_SEEN_SELECT }}</p>
+				</div>
+				</fieldset>
+				<fieldset>
+				<legend>{{ __('GROUPS_RELEASES') }}</legend>
+				<div>
+					<p class="select">{{ S_RG_SELECT }}</p>
+				</div>
+				</fieldset>
+			</td>
+			<td width="30%">
+				<fieldset>
+				<legend>{{ __('SHOW_ONLY') }}</legend>
+				<div class="gen">
+					<p class="chbox">{{ ONLY_MY_CHBOX }}[<b>&reg;</b>]</p>
+					<p class="chbox">{{ ONLY_ACTIVE_CHBOX }}</p>
+					<p class="chbox">{{ SEED_EXIST_CHBOX }}</p>
+					<p class="chbox">{{ ONLY_NEW_CHBOX }}[{{ MINIPOST_IMG_NEW }}]&nbsp;</p>
+					<p>
+						<label>
+							<input type="checkbox" {% if HIDE_CONTENTS %}checked{% endif %}
+								onclick="user.set('h_tsp', this.checked ? 1 : 0);"
+							/>&nbsp;{{ __('HIDE_CONTENTS') }}
+						</label>
+					</p>
+					{% if config('tracker.gold_silver_enabled') %}<p class="chbox">{{ TOR_TYPE_CHBOX }}</p>{% endif %}
+				</div>
+				</fieldset>
+				<fieldset>
+				<legend>{{ __('MY_DOWNLOADS') }}</legend>
+				<div>
+					<table class="borderless my_downloads" cellspacing="0">
+						<tr>
+							<td>{{ DL_COMPL_CHBOX }}</td>
+						</tr>
+						<tr>
+							<td>{{ DL_WILL_CHBOX }}</td>
+						</tr>
+						<tr>
+							<td>{{ DL_DOWN_CHBOX }}</td>
+						</tr>
+						<tr>
+							<td>{{ DL_CANCEL_CHBOX }}</td>
+						</tr>
+					</table>
+				</div>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" width="50%">
+				{% if TOR_STATUS %}
+				<fieldset style="margin-top: 0;">
+					<legend>{{ __('TORRENT_STATUS') }}</legend>
+					<div>{{ TOR_STATUS }}</div>
+				</fieldset>
+				{% endif %}
+				<fieldset style="margin-top: 0;">
+				<legend>{{ __('SHOW_COLUMN') }}</legend>
+				<div>
+					<p class="chbox">{{ SHOW_CAT_CHBOX }}&nbsp; {{ SHOW_FORUM_CHBOX }}&nbsp; {{ SHOW_AUTHOR_CHBOX }}&nbsp; {{ SHOW_SPEED_CHBOX }}&nbsp;</p>
+				</div>
+				</fieldset>
+				<fieldset>
+				<legend>{{ __('AUTHOR') }}</legend>
+				<div>
+					<p class="input"><input style="width: 40%" {% if POSTER_ERROR %}style="color: red"{% else %}class="post"{% endif %} type="text" size="16" maxlength="{{ POSTER_NAME_MAX }}" name="{{ POSTER_NAME_NAME }}" value="{{ POSTER_NAME_VAL }}" /> <input style="width: 40%;" type="button" value="{{ __('FIND_USERNAME') }}" onclick="window.open('{{ U_SEARCH_USER }}', '_bbsearch', IWP_US); return false;" /></p>
+				</div>
+				</fieldset>
+				<fieldset>
+				<legend><span class="a-hash bold" onclick="$(this).addClass('bold').next().removeClass('bold'); $('#title_search').attr('name','{{ TITLE_MATCH_NAME }}').attr('maxlength','{{ TITLE_MATCH_MAX }}');">{{ __('TITLE_MATCH') }}</span>&nbsp;&middot;&nbsp;<span class="a-hash" onclick="$(this).addClass('bold').prev().removeClass('bold'); $('#title_search').attr('name','hash').attr('maxlength',64);">{{ __('HASH_S') }}</span></legend>
+				<div>
+					<p class="input">
+						<input id="title_search" style="width: 95%;" class="post" type="text" size="50" maxlength="{{ TITLE_MATCH_MAX }}" name="{{ TITLE_MATCH_NAME }}" value="{{ TITLE_MATCH_VAL }}" />
+					</p>
+					<p class="chbox med">
+						{{ ALL_WORDS_CHBOX }}
+						&middot; <a class="med" href="#" onclick="return get_fs_link();">{{ __('SEL_CHAPTERS') }}</a>
+						{% if config('search_help_url') %} &middot; <a class="med" href="{{ config('search_help_url') }}">{{ __('SEARCH_HELP_URL') }}</a>{% endif %}
+					</p>
+				</div>
+				</fieldset>
+			</td>
+		</tr>
+		</table>
+
+	</td>
+</tr>
+<tr>
+	<td class="row3 pad_4 tCenter">
+		<input class="bold long" type="submit" name="submit" value="&nbsp;&nbsp;{{ __('SEARCH') }}&nbsp;&nbsp;" />
+	</td>
+</tr>
+</table>
+
+</form>
+
+<div class="spacer_6"></div>
+
+{% endif %}
+
+<table class="w100 border bw_TRL" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="cat pad_2">
+
+	<table cellspacing="0" cellpadding="0" class="borderless w100">
+	<tr>
+
+		<td class="small bold nowrap tRight" width="100%" style="padding: 2px 8px 5px 4px;">
+			&nbsp;
+			{% if LOGGED_IN %}
+			<a class="menu-root" href="#tr-options">{{ __('DISPLAYING_OPTIONS') }}</a>
+			{% endif %}
+		</td>
+
+	</tr>
+	</table>
+
+	</td>
+</tr>
+</table>
+
+{% if LOGGED_IN %}
+<div class="menu-sub" id="tr-options">
+	<table cellspacing="1" cellpadding="4">
+	<tr>
+		<th>{{ __('DISPLAYING_OPTIONS') }}</th>
+	</tr>
+	<tr>
+		<td>
+			<fieldset id="ajax-topics">
+			<legend>{{ __('OPEN_TOPICS') }}</legend>
+			<div class="med pad_4">
+				<label>
+					<input type="checkbox" {% if AJAX_TOPICS %}checked{% endif %}
+						onclick="user.set('tr_t_ax', this.checked ? 1 : 0);"
+					/>{{ __('OPEN_IN_SAME_WINDOW') }}
+				</label>
+				<label>
+					<input type="checkbox" {% if SHOW_TIME_TOPICS %}checked{% endif %}
+						onclick="user.set('tr_t_t', this.checked ? 1 : 0);"
+					/>{{ __('SHOW_TIME_TOPICS') }}
+				</label>
+				<label>
+					<input type="checkbox" {% if SHOW_CURSOR %}checked{% endif %}
+						onclick="user.set('hl_tr', this.checked ? 1 : 0);"
+					/>{{ __('SHOW_CURSOR') }}
+				</label>
+			</div>
+			</fieldset>
+		</td>
+	</tr>
+	<tr>
+		<td class="cat tCenter pad_4"><input type="button" value="{{ __('SUBMIT') }}" style="width: 100px;" onclick="window.location.reload();" /></td>
+	</tr>
+	</table>
+</div><!--/tr-options-->
+{% endif %}
+
+<a name="results"></a>
+<table class="forumline tablesorter" id="tor-tbl">
+<thead>
+<tr>
+	<th class="{sorter: false}">&nbsp;</th>
+	<th class="{sorter: 'text'}">&nbsp;</th>
+	{% if SHOW_CAT %}
+	<th class="{sorter: 'text'}" width="10%" title="{{ __('CATEGORY') }}"><b class="tbs-text">{{ __('CATEGORY') }}</b></th>
+	{% endif %}
+	{% if SHOW_FORUM %}
+	<th class="{sorter: 'text'}" width="10%" title="{{ __('FORUM') }}"><b class="tbs-text">{{ __('FORUM') }}</b></th>
+	{% endif %}
+	<th class="{sorter: 'text'}" width="75%" title="{{ __('TOPIC') }}"><b class="tbs-text">{{ __('TOPIC') }}</b></th>
+	{% if SHOW_AUTHOR %}
+	<th class="{sorter: 'text'}" title="{{ __('AUTHOR') }}"><b class="tbs-text">{{ __('AUTHOR') }}</b></th>
+	{% endif %}
+	<th class="{sorter: 'digit'}" title="{{ __('SIZE') }}"><b class="tbs-text">{{ __('SIZE') }}</b></th>
+	<th class="{sorter: 'digit'}" title="{{ __('SEEDERS') }}"><b class="tbs-text">S</b></th>
+	<th class="{sorter: 'digit'}" title="{{ __('LEECHERS') }}"><b class="tbs-text">L</b></th>
+    <th class="{sorter: false}" width="5%" title="{{ __('REPLIES') }}"><b class="tbs-text">{{ __('REPLIES_SHORT') }}</b></th>
+	{% if SHOW_SPEED %}
+	<th class="{sorter: false}" title="{{ __('DL_SPEED') }}"><b class="tbs-text">SP</b></th>
+	{% endif %}
+	<th class="{sorter: 'digit'}" title="{{ __('ADDED') }}"><b class="tbs-text">{{ __('ADDED') }}</b></th>
+</tr>
+</thead>
+{% for tor_item in TOR %}
+<tr class="tCenter {% if SHOW_CURSOR %}hl-tr{% endif %}" id="tor_{{ tor_item.TOPIC_ID }}">
+	<td class="row1">{% if tor_item.USER_AUTHOR %}<p style="padding-bottom: 3px">&nbsp;<b>&reg;</b>&nbsp;</p>{% elseif tor_item.IS_NEW %}{{ MINIPOST_IMG_NEW|raw }}{% else %}{{ MINIPOST_IMG|raw }}{% endif %}</td>
+	<td class="row1 tCenter" title="{{ tor_item.TOR_STATUS_TEXT }}">{{ tor_item.TOR_STATUS_ICON|raw }}</td>
+	{% if SHOW_CAT %}
+	<td class="row1"><a class="gen" href="{{ TR_CAT_URL }}{{ tor_item.CAT_ID }}">{{ tor_item.CAT_TITLE }}</a></td>
+	{% endif %}
+	{% if SHOW_FORUM %}
+	<td class="row1"><a class="gen" href="{{ url.forum(tor_item.FORUM_ID, tor_item.FORUM_NAME) }}">{{ tor_item.FORUM_NAME }}</a></td>
+	{% endif %}
+	<td class="row4 med tLeft">
+		<a class="{{ tor_item.DL_CLASS }}{% if AJAX_TOPICS %} folded2{% endif %} tLink" {% if AJAX_TOPICS %}onclick="ajax.view_post({{ tor_item.TOPIC_ID }}, this); return false;"{% endif %} href="{{ url.topic(tor_item.TOPIC_ID, tor_item.TOPIC_TITLE) }}">{% if tor_item.POLL %}<span class="topicPoll">{{ __('TOPIC_POLL') }}</span>&nbsp;{% endif %}{% if tor_item.TOR_FROZEN %}{{ tor_item.TOPIC_TITLE }}{% else %}{{ tor_item.TOR_TYPE|raw }}<b>{{ tor_item.TOPIC_TITLE }}</b>{% endif %}</a>
+	    {% if SHOW_TIME_TOPICS %}<div class="tr_tm">{{ tor_item.TOPIC_TIME|raw }}</div>{% endif %}
+	</td>
+	{% if SHOW_AUTHOR %}
+	<td class="row1">{{ tor_item.USERNAME|raw }}</td>
+	{% endif %}
+	<td class="row4 small nowrap">
+		<u>{{ tor_item.TOR_SIZE_RAW }}</u>
+		{% if not tor_item.TOR_FROZEN %}<a class="small tr-dl" title="{{ __('DOWNLOAD') }}" href="{{ DOWNLOAD_URL }}{{ tor_item.TOPIC_ID }}">{{ tor_item.TOR_SIZE }}</a> {% if tor_item.MAGNET %}{{ tor_item.MAGNET|raw }}{% endif %}{% else %}
+		{{ tor_item.TOR_SIZE }}{% endif %}
+	</td>
+	<td class="row4 seedmed" title="{{ tor_item.SEEDS_TITLE }}"><b>{{ tor_item.SEEDS }}</b></td>
+	<td class="row4 leechmed" title="{{ __('LEECHERS') }}"><b>{{ tor_item.LEECHS }}</b></td>
+    <td class="row4 small" style="padding: 3px 4px 2px;">
+        <p>
+            <span title="{{ __('REPLIES') }}: {{ tor_item.REPLIES }}">{{ tor_item.REPLIES }}</span>
+            <span class="small"> | </span>
+            <span title="{{ __('VIEWS') }}: {{ tor_item.VIEWS }}">{{ tor_item.VIEWS }}</span>
+        </p>
+        <p style="padding-top: 2px;" class="med" title="{{ __('COMPLETED') }}: {{ tor_item.COMPLETED }}">
+            <b>{{ tor_item.DOWNLOADED }}</b>
+        </p>
+    </td>
+	{% if SHOW_SPEED %}
+	<td class="row4 nowrap">
+		<p class="seedmed">{{ tor_item.UL_SPEED }}</p>
+		<p class="leechmed">{{ tor_item.DL_SPEED }}</p>
+	</td>
+	{% endif %}
+	<td class="row4 small nowrap" style="padding: 1px 3px 2px;" title="{{ __('ADDED') }}">
+		<u>{{ tor_item.ADDED_RAW }}</u>
+		<p>{{ tor_item.ADDED_TIME }}</p>
+		<p>{{ tor_item.ADDED_DATE }}</p>
+	</td>
+</tr>
+{% endfor %}
+
+{% if TOR_NOT_FOUND %}
+<tbody>
+<tr>
+	<td class="row1 tCenter pad_8" colspan="{{ TOR_COLSPAN }}">{{ NO_MATCH_MSG }}</td>
+</tr>
+</tbody>
+{% endif %}
+<tfoot>
+<tr>
+	<td class="catBottom" colspan="{{ TOR_COLSPAN }}">&nbsp;</td>
+</tr>
+</tfoot>
+</table>
+
+<div class="bottom_info">
+
+    {% if PAGINATION %}
+	<div class="nav">
+		<p style="float: left">{{ PAGE_NUMBER }}</p>
+		<p style="float: right">{{ PAGINATION }}</p>
+		<div class="clear"></div>
+	</div>
+    {% endif %}
+
+	<div class="spacer_4"></div>
+
+	<div id="timezone">
+		<p>{{ CURRENT_TIME }}</p>
+		<p>{{ S_TIMEZONE }}</p>
+	</div>
+	<div class="clear"></div>
+
+</div><!--/bottom_info-->
+
+<script type="text/javascript">
+// Hide content
+if (user.opt_js.h_tsp) {
+	$('a.tLink').each(function(){
+		$(this).html( $(this).html().replace(/\{.+?\}/g, '{...}') );
+	});
+}
+$.each( [{{ SELECTED_FORUMS }}], function(i,n){ $('#fs-'+ n).attr('selected', 1) });
+$('#search_opt, #search-results').show();
+var fs_last_val = [];
+$(function(){
+	{% if TITLE_MATCH_URL %}
+	$('a.f, a.pg').each(function(){ this.href += '&{{ TITLE_MATCH_URL }}'; });
+	$('a.s-all').each(function(){ this.href += '?{{ TITLE_MATCH_URL }}'; });
+	{% endif %}
+	{% if POSTER_MATCH_URL %}
+	$('a.f, a.pg').each(function(){ this.href += '&{{ POSTER_MATCH_URL }}'; });
+	{% endif %}
+	// limit on the number of selected sections
+	fs_last_val = $('#fs-main').val();
+
+	$('#fs-main').bind('change', function(){
+		var fs_val = $('#fs-main').val();
+		if (fs_val != null) {
+			if (fs_val.length > {{ MAX_FS }}) {
+				alert('{{ __('MAX_FS') }}');
+				$('#fs-main').val( fs_last_val );
+			}
+			else {
+				fs_last_val = fs_val;
+			}
+		}
+	});
+});
+function get_fs_link() {
+  var fs_url = '{{ TRACKER_URL }}';
+  var fs_val = $('#fs-main').val();
+
+  if (fs_val != null && $.inArray('-1', fs_val) == -1) {
+    fs_url += 'f=' + fs_val.sort().join();
+    window.prompt('{{ __('SEL_CHAPTERS') }}:', fs_url);
+  }
+  else {
+    alert('{{ __('NOT_SEL_CHAPTERS') }}');
+  }
+  return false;
+}
+</script>

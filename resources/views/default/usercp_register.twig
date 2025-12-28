@@ -49,7 +49,7 @@
 
 <p class="nav"><a href="{{ U_INDEX }}">{{ __('HOME') }}</a></p>
 
-<form id="prof-form" method="post" action="{% if IS_ADMIN && PR_USER_ID %}?{{ constant('POST_USERS_URL') }}={{ PR_USER_ID }}{% endif %}"
+<form id="prof-form" method="post" action="{% if IS_ADMIN and PR_USER_ID %}?{{ constant('POST_USERS_URL') }}={{ PR_USER_ID }}{% endif %}"
       class="tokenized" enctype="multipart/form-data">
     <input type="hidden" name="mode" value="{{ MODE }}"/>
     <input type="hidden" name="reg_agreed" value="1"/>
@@ -242,7 +242,7 @@
             {% endif %}
         </tr>
 
-        {% if IS_ADMIN || config('show_email_visibility_settings') %}
+        {% if IS_ADMIN or config('show_email_visibility_settings') %}
         <tr>
             <td class="prof-title">{{ __('PUBLIC_VIEW_EMAIL') }}:</td>
             <td>

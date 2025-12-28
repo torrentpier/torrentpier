@@ -1,0 +1,240 @@
+{% if SEARCH_MATCHES %}
+<h1 class="pagetitle">{{ SEARCH_MATCHES }}</h1>
+{% endif %}
+
+<div class="nav">
+    <a href="{{ U_INDEX }}">{{ __('HOME') }}</a>
+    {% if MY_POSTS %}
+    &nbsp;&middot;&nbsp;
+    <span id="show-edit-btn"><a href="#">{{ __('EDIT_MY_MESSAGE_LIST') }}</a></span>
+    <span id="edit-sel-topics" style="display: none;"><a href="#" class="bold adm" onclick="$('input.topic-chbox').trigger('click'); return false;">{{ __('SELECT_INVERT') }}</a></span>
+    {% endif %}
+    {% if LOGGED_IN %}
+    &nbsp;&middot;&nbsp;
+    <a href="#" class="med normal" onclick="setCookie('{{ constant('COOKIE_MARK') }}', 'all_forums'); window.location.reload();">{{ __('MARK_ALL_FORUMS_READ') }}</a>
+    {% endif %}
+</div>
+
+{% if DISPLAY_AS_POSTS %}
+<table class="topic" cellpadding="0" cellspacing="0">
+<tr>
+	<th class="thHead td1">{{ __('AUTHOR') }}</th>
+	<th class="thHead td2">{{ __('MESSAGE') }}</th>
+</tr>
+{% for t_item in T %}
+<tr>
+	<td colspan="2" class="td2	cat nav pad_4">
+		&nbsp;<img class="topic_icon" src="{{ t_item.TOPIC_ICON }}" align="absmiddle" />&nbsp;
+		<a href="{{ url.forum(t_item.FORUM_ID, t_item.FORUM_NAME) }}" class="med normal"><i>{{ t_item.FORUM_NAME }}</i></a>
+		<em>&raquo;</em>
+		<a href="{{ url.topic(t_item.TOPIC_ID, t_item.TOPIC_TITLE) }}" class="med">{{ t_item.TOPIC_TITLE }}</a>
+	</td>
+</tr>
+{% for p_item in t_item.P %}
+<tr class="{% if p_item.ROW_NUM is even %}row1{% else %}row2{% endif %}">
+	<td class="poster_info td1">
+
+		<p class="nick">{{ p_item.POSTER }}</p>
+		<p><img src="{{ SPACER }}" width="{{ TOPIC_LEFT_COL_SPACER_WITDH }}" height="30" alt="" /></p>
+
+	</td>
+	<td class="message td2">
+
+		<div class="post_head">
+			<p style="float: left; padding: 4px 0 3px;">
+				{% if p_item.IS_UNREAD %}{{ MINIPOST_IMG_NEW }}{% else %}{{ MINIPOST_IMG }}{% endif %}
+				<a class="small" href="{{ POST_URL }}{{ p_item.POST_ID }}#{{ p_item.POST_ID }}" title="{{ __('POST_LINK') }}">{{ p_item.POST_DATE }}</a>
+				{% if p_item.POSTED_AFTER %}
+					<span class="posted_since">({{ p_item.POSTED_AFTER }})</span>
+				{% endif %}
+			</p>
+
+			<p style="float: right; padding: 3px 2px 4px;" class="post_btn_1">
+				{% if p_item.QUOTE %}<a class="txtb" href="{{ QUOTE_URL }}{{ p_item.POST_ID }}">[ {{ __('QUOTE') }} ]</a>{{ POST_BTN_SPACER }}{% endif %}
+				{% if p_item.EDIT %}<a class="txtb" href="{{ EDIT_POST_URL }}{{ p_item.POST_ID }}">[ {{ __('EDIT') }} ]</a>{{ POST_BTN_SPACER }}{% endif %}
+				{% if p_item.DELETE %}<a class="txtb" href="{{ DELETE_POST_URL }}{{ p_item.POST_ID }}">[ {{ __('DELETE') }} ]</a>{{ POST_BTN_SPACER }}{% endif %}
+				{% if p_item.IP %}<a class="txtb" href="{{ IP_POST_URL }}{{ p_item.POST_ID }}&amp;{{ constant('POST_TOPIC_URL') }}={{ t_item.TOPIC_ID }}">[ {{ __('IP') }} ]</a>{{ POST_BTN_SPACER }}{% endif %}
+			</p>
+			<div class="clear"></div>
+		</div>
+
+		<div class="post_wrap">
+			<div class="post_body">{{ p_item.MESSAGE }}</div>
+		</div>
+
+	</td>
+</tr>
+{% endfor %}
+{% endfor %}
+<tr>
+	<td colspan="2" class="catBottom td2">&nbsp;</td>
+</tr>
+</table>
+
+{% else %}
+
+{% if DL_CONTROLS %}
+<form method="POST" action="{{ DL_ACTION }}">
+{% elseif MY_POSTS %}
+<script type="text/javascript">
+ajax.in_edit_mode = false;
+
+$(document).ready(function(){
+	$('#show-edit-btn a').click(function(){
+		show_edit_options();
+		$('#show-edit-btn').html( $('#edit-sel-topics').html() );
+		return false;
+	});
+
+	$('td.topic_id').click(function(){
+		if (!ajax.in_edit_mode) {
+			$('#show-edit-btn a').click();
+			$(this).find('input').click();
+		}
+	});
+});
+
+function show_edit_options ()
+{
+	$('td.topic_id').each(function(){
+		var topic_id = $(this).attr('id');
+		var input = '<input id="sel-'+ topic_id +'" type="checkbox" value="'+ topic_id +'" class="topic-chbox" />';
+		$(this).html(input);
+	});
+
+	$('input.topic-chbox').click(function(){
+		$('#tr-'+this.value).toggleClass('hl-selected-row');
+	});
+	$('#pagination a.pg').each(function(){ this.href += '&mod=1'; });
+	$('#ed-list-desc').hide();
+	$('#mod-action-cell').append( $('#mod-action-content')[0] );
+	$('#mod-action-row, #mod-action-content').show();
+
+	$('#mod-action').submit(function(){
+		var $form = $(this);
+		$('input[name~=topic_id_list]', $form).remove();
+		$('input.topic-chbox:checked').each(function(){
+			$form.append('<input type="hidden" name="topic_id_list[]" value="'+ this.value +'" />');
+			$('#tr-'+this.value).remove();
+		});
+	});
+	ajax.in_edit_mode = true;
+}
+</script>
+
+<div id="mod-action-content" style="display: none;">
+<form id="mod-action" method="POST" action="{{ U_SEARCH }}" target="_blank">
+    <table class="borderless pad_0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="pad_4">
+                <input type="submit" name="del_my_post" value="{{ __('DEL_LIST_MY_MESSAGE') }}" class="bold" onclick="if (!window.confirm( this.value +'?' )){ return false }"/>
+            </td>
+            <td class="med" style="padding: 0 8px;">{{ __('DEL_LIST_MY_MESSAGE_INFO') }}</td>
+        </tr>
+    </table>
+</form>
+</div>
+{% endif %}
+
+<table class="forumline tablesorter forum">
+<col class="row1">
+<col class="row1" width="25%">
+<col class="row4" width="75%">
+<col class="row1">
+<col class="row4">
+<col class="row1">
+<thead>
+<tr>
+	<th>&nbsp;</th>
+	<th class="{sorter: 'text'}" title="{{ __('FORUM') }}"><b class="tbs-text">{{ __('FORUM') }}</b></th>
+	<th class="{sorter: 'text'}" title="{{ __('TOPICS') }}"><b class="tbs-text">{{ __('TOPICS') }}</b></th>
+	<th class="{sorter: 'text'}" title="{{ __('AUTHOR') }}"><b class="tbs-text">{{ __('AUTHOR') }}</b></th>
+	<th class="{sorter: 'digit'}" title="{{ __('REPLIES') }}"><b class="tbs-text">{{ __('REPLIES_SHORT') }}</b></th>
+	<th class="{sorter: 'digit'}" title="{{ __('LASTPOST') }}"><b class="tbs-text">{{ __('LASTPOST') }}</b></th>
+</tr>
+</thead>
+{% for t_item in T %}
+<tr id="tr-{{ t_item.TOPIC_ID }}" class="tCenter">
+	<td id="{{ t_item.TOPIC_ID }}" class="topic_id">
+		{% if DL_CONTROLS %}
+			<input type="checkbox" name="dl_topics_id_list[]" value="{{ t_item.TOPIC_ID }}" />
+		{% else %}
+			<img class="topic_icon" src="{{ t_item.TOPIC_ICON }}" />
+		{% endif %}
+	</td>
+	<td><a href="{{ url.forum(t_item.FORUM_ID, t_item.FORUM_NAME) }}" class="gen">{{ t_item.FORUM_NAME }}</a></td>
+		<td class="tLeft" style="padding: 2px 5px 3px 4px;">
+		<div class="topictitle" onmousedown="$p('tid_{{ t_item.TOPIC_ID }}').className='opened'">
+			{% if t_item.IS_UNREAD %}<a href="{{ t_item.TOPIC_NEWEST_URL }}">{{ ICON_NEWEST_REPLY }}</a>{% endif %}
+			{% if t_item.STATUS == 2 %}<span class="topicMoved">{{ __('TOPIC_MOVED') }}</span>
+				{% elseif t_item.TYPE == 2 %}<span class="topicAnnounce">{{ __('TOPIC_ANNOUNCEMENT') }}</span>
+				{% elseif t_item.DL_CLASS %}<span class="{{ t_item.DL_CLASS }} iconDL">{{ __('TOPIC_DL') }}</span>
+				{% elseif t_item.ATTACH and not t.DL %}{{ TOPIC_ATTACH_ICON }}
+			{% endif %}
+			{% if t_item.POLL %}<span class="topicPoll">{{ __('TOPIC_POLL') }}</span>{% endif %}
+			<a href="{{ url.topic(t_item.TOPIC_ID, t_item.TOPIC_TITLE) }}" class="topictitle"><span id="tid_{{ t_item.TOPIC_ID }}">{{ t_item.TOPIC_TITLE }}</span></a>
+		{% if t_item.PAGINATION %}<span class="topicPG">[{{ ICON_GOTOPOST }}{{ __('GOTO_SHORT') }} {{ t_item.PAGINATION }} ]</span>{% endif %}
+		</div>
+	</td>
+	<td class="med nowrap">{{ t_item.TOPIC_AUTHOR }}</td>
+	<td title="{{ __('REPLIES') }}: {{ t_item.REPLIES }}" class="small">{{ t_item.REPLIES }}</td>
+	<td class="small nowrap" style="padding: 1px 4px 3px 4px;">
+        <u>{{ t_item.LAST_POST_TIME_RAW }}</u>
+		<p>{{ t_item.LAST_POST_TIME }}</p>
+		<p>
+			{{ t_item.LAST_POSTER }}
+			<span onmousedown="$p('tid_{{ t_item.TOPIC_ID }}').className='opened'"><a href="{{ t_item.LAST_POST_URL }}">{{ ICON_LATEST_REPLY }}</a></span>
+		</p>
+	</td>
+</tr>
+{% endfor %}
+<tfoot>
+{% if MY_POSTS %}
+<tr id="mod-action-row">
+	<td colspan="6" id="mod-action-cell" class="row2">
+		<span id="ed-list-desc" class="small">{{ __('DEL_LIST_INFO') }}</span>
+	</td>
+</tr>
+{% endif %}
+<tr>
+	<td class="row2" colspan="6">
+		{% if DL_CONTROLS %}
+		<input type="submit" name="dl_set_will" value="{{ __('DLWILL') }}" class="liteoption" />
+		<input type="submit" name="dl_set_down" value="{{ __('DLDOWN') }}" class="liteoption" />
+		<input type="submit" name="dl_set_complete" value="{{ __('DLCOMPLETE') }}" class="liteoption" />
+		<input type="submit" name="dl_set_cancel" value="{{ __('DLCANCEL') }}" class="liteoption" />
+		<input type="hidden" name="redirect_type" value="search" />
+		<input type="hidden" name="mode" value="set_topics_dl_status" />
+		{% else %}
+		&nbsp;
+		{% endif %}
+	</td>
+</tr>
+</tfoot>
+</table>
+
+{% if DL_CONTROLS %}
+</form>
+{% endif %}
+
+{% endif %}
+
+<div class="bottom_info">
+
+    {% if PAGINATION %}
+	<div class="nav">
+		<p style="float: left">{{ PAGE_NUMBER }}</p>
+		<p style="float: right">{{ PAGINATION }}</p>
+		<div class="clear"></div>
+	</div>
+    {% endif %}
+
+	<div class="spacer_4"></div>
+
+	<div id="timezone">
+		<p>{{ CURRENT_TIME }}</p>
+		<p>{{ S_TIMEZONE }}</p>
+	</div>
+	<div class="clear"></div>
+
+</div><!--/bottom_info-->

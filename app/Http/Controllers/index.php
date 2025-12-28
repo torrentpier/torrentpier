@@ -248,12 +248,13 @@ datastore()->rm('moderators');
 
 // Build index page
 $forums_count = 0;
+$h_c_list = [];
 foreach ($cat_forums as $cid => $c) {
-    template()->assign_block_vars('h_c', [
+    $h_c_list[] = [
         'H_C_ID' => $cid,
         'H_C_TITLE' => $cat_title_html[$cid],
         'H_C_CHEKED' => in_array($cid, preg_split('/[-]+/', $hide_cat_opt)) ? 'checked' : '',
-    ]);
+    ];
 
     template()->assign_vars(['H_C_AL_MESS' => $hide_cat_opt && !$showhide]);
 
@@ -313,6 +314,8 @@ foreach ($cat_forums as $cid => $c) {
         }
     }
 }
+
+template()->assign_vars(['H_C' => $h_c_list]);
 
 template()->assign_vars([
     'SHOW_FORUMS' => $forums_count,
@@ -381,18 +384,21 @@ if (config()->get('show_latest_news')) {
 
     template()->assign_vars(['SHOW_LATEST_NEWS' => true]);
 
+    $news_list = [];
     foreach ($latest_news as $news) {
         if (in_array($news['forum_id'], $excluded_forums_array)) {
             continue;
         }
 
-        template()->assign_block_vars('news', [
+        $news_list[] = [
             'NEWS_URL' => url()->topic($news['topic_id'], $news['topic_title']),
             'NEWS_TITLE' => str_short(censor()->censorString($news['topic_title']), config()->get('max_news_title')),
             'NEWS_TIME' => bb_date($news['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($news['topic_time'], $news['topic_id'], $news['forum_id']),
-        ]);
+        ];
     }
+
+    template()->assign_vars(['NEWS' => $news_list]);
 }
 
 // Network news
@@ -405,18 +411,21 @@ if (config()->get('show_network_news')) {
 
     template()->assign_vars(['SHOW_NETWORK_NEWS' => true]);
 
+    $net_list = [];
     foreach ($network_news as $net) {
         if (in_array($net['forum_id'], $excluded_forums_array)) {
             continue;
         }
 
-        template()->assign_block_vars('net', [
+        $net_list[] = [
             'NEWS_URL' => url()->topic($net['topic_id'], $net['topic_title']),
             'NEWS_TITLE' => str_short(censor()->censorString($net['topic_title']), config()->get('max_net_title')),
             'NEWS_TIME' => bb_date($net['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($net['topic_time'], $net['topic_id'], $net['forum_id']),
-        ]);
+        ];
     }
+
+    template()->assign_vars(['NET' => $net_list]);
 }
 
 if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
