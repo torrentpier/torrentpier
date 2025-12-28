@@ -26,9 +26,9 @@ function emoticon(text) {
 							<tr class="tCenter">
 								{% for smiley in row.COLS %}
 								<td><a href="javascript:emoticon('{{ smiley.SMILEY_CODE }}')"><img src="{{ smiley.SMILEY_IMG }}" border="0" alt="{{ smiley.SMILEY_DESC }}" title="{{ smiley.SMILEY_DESC }}" /></a></td>
-								{% endfor %}
+								{% endfor %}{# /row.COLS #}
 							</tr>
-							{% endfor %}
+							{% endfor %}{# /SMILIES_ROWS #}
 							{% if SHOW_MORE_SMILIES %}
 							<tr class="tCenter">
 								<td colspan="{{ S_SMILIES_COLSPAN }}"><span class="nav"><a href="{{ U_MORE_SMILIES }}" onclick="open_window('{{ U_MORE_SMILIES }}', 250, 300);return false" target="_smilies" class="nav">{{ __('MORE_EMOTICONS') }}</a></td>

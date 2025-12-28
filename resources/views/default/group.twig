@@ -26,7 +26,7 @@
                 <tr class="row2">
                     {% for item in GROUPS %}
                     <td class="pad_8 med bold">{{ item.MEMBERSHIP }}</td>
-                    {% endfor %}
+                    {% endfor %}{# /GROUPS #}
                 </tr>
                 <tr>
                     {% for item in GROUPS %}
@@ -35,7 +35,7 @@
                             {{ item.GROUP_SELECT|raw }}
                         </ul>
                     </td>
-                    {% endfor %}
+                    {% endfor %}{# /GROUPS #}
                 </tr>
             </table>
         </td>
@@ -183,7 +183,7 @@
                 {% endif %}
             </td>
         </tr>
-        {% endfor %}
+        {% endfor %}{# /MEMBER_LIST #}
 
         {% if SWITCH_NO_MEMBERS %}
         <tr>
@@ -257,7 +257,7 @@
             <td>{{ item.POSTS }}</td>
             <td>{{ item.WWW|raw }}</td>
         </tr>
-        {% endfor %}
+        {% endfor %}{# /PENDING_LIST #}
         <tfoot>
         <tr>
             <td class="cat" colspan="9">
@@ -298,7 +298,7 @@
         <td>{{ item.RELEASE_FORUM|raw }}</td>
         <td>{{ item.RELEASE_TIME }}</td>
     </tr>
-    {% endfor %}
+    {% endfor %}{# /RELEASES_LIST #}
     <tfoot>
     <tr>
         <td class="cat tCenter" colspan="9"><b><a href="{{ U_SEARCH_RELEASES }}">{{ __('MORE_RELEASES') }}</a></b></td>

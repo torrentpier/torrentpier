@@ -24,7 +24,7 @@
             <div class="post_wrap post_body">{{ item.MESSAGE|raw }}</div>
         </td>
     </tr>
-    {% endfor %}
+    {% endfor %}{# /NEW_POSTS #}
 </table>
 
 <div class="spacer_12"></div>
@@ -99,9 +99,9 @@
                     <tr>
                         {% for col in row.COLS %}
                         <td><a href="#" onclick="bbcode && bbcode.emoticon('{{ col.SMILEY_CODE }}'); return false;"><img src="{{ col.SMILEY_IMG }}" alt="" title="{{ col.SMILEY_DESC }}"/></a></td>
-                        {% endfor %}
+                        {% endfor %}{# /row.COLS #}
                     </tr>
-                    {% endfor %}
+                    {% endfor %}{# /SMILIES_ROWS #}
                     {% if SMILIES_MORE %}
                     <tr>
                         <td colspan="{{ S_SMILIES_COLSPAN }}"><a href="{{ U_MORE_SMILIES }}" onclick="window.open('{{ U_MORE_SMILIES }}', '_bbsmilies', IWP_SM); return false;" target="_bbsmilies" class="med">{{ __('MORE_EMOTICONS') }}</a></td>
@@ -195,7 +195,7 @@
             <div class="post_wrap post_body">{{ item.MESSAGE|raw }}</div>
         </td>
     </tr>
-    {% endfor %}
+    {% endfor %}{# /REVIEW #}
 </table>
 
 <div class="spacer_12"></div>

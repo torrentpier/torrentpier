@@ -352,7 +352,7 @@ function go_to_page ()
 				<form autocomplete="off">
 					{% for h_c_item in H_C %}
 					<label><input class="h-cat-cbx" type="checkbox" value="{{ h_c_item.H_C_ID }}" {{ h_c_item.H_C_CHEKED }} />{{ h_c_item.H_C_TITLE }}</label>
-					{% endfor %}
+					{% endfor %}{# /H_C #}
 				</form>
 				<div class="spacer_6"></div>
 				<div class="tCenter">
@@ -424,7 +424,7 @@ function go_to_page ()
 									<div class="news_title{% if news_item.NEWS_IS_NEW %} new{% endif %}"><a href="{{ news_item.NEWS_URL }}">{{ news_item.NEWS_TITLE }}</a></div>
 								</td>
 							</tr>
-							{% endfor %}
+							{% endfor %}{# /NEWS #}
 						</table>
 					</td>
 					{% endif %}
@@ -440,7 +440,7 @@ function go_to_page ()
 									<div class="news_title{% if net_item.NEWS_IS_NEW %} new{% endif %}"><a href="{{ net_item.NEWS_URL }}">{{ net_item.NEWS_TITLE }}</a></div>
 								</td>
 							</tr>
-							{% endfor %}
+							{% endfor %}{# /NET #}
 						</table>
 					</td>
 					{% endif %}

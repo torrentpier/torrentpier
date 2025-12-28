@@ -57,7 +57,7 @@
 </table>
 
 <div class="spacer_12"></div>
-{% endfor %}
+{% endfor %}{# /UNREGISTERED_TORRENT #}
 
 {% for torrent_item in TORRENT %}
 
@@ -112,7 +112,7 @@
 			<hr/>
 			<a href="{{ tor_server_item.TORR_SERVER_M3U_LINK }}" target="_blank"><p><img alt="{{ __('PLAYBACK_M3U') }}" src="{{ tor_server_item.TORR_SERVER_M3U_ICON }}" width="21" height="21" border="0"></p>{{ __('PLAYBACK_M3U') }}</a>
 			{% endif %}
-			{% endfor %}
+			{% endfor %}{# /TOR_SERVER #}
 			{% endif %}
 		</td>
 	</tr>
@@ -416,4 +416,4 @@ $('#tor-filelist-btn').click(function () {
 <div class="spacer_12"></div>
 {% endif %}
 
-{% endfor %}
+{% endfor %}{# /TORRENT #}

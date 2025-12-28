@@ -518,7 +518,7 @@ function build_poll_add_form (src_el)
 	</td>
 </tr>
 </tbody>
-{% endfor %}
+{% endfor %}{# /POSTROW #}
 
 {% if SPLIT_FORM %}
 <tbody>
@@ -533,7 +533,7 @@ function build_poll_add_form (src_el)
 
 		{% for postrow_item in POSTROW %}
 		<input type="hidden" name="post_id_list[]" id="cb_{{ postrow_item.POST_ID }}" />
-		{% endfor %}
+		{% endfor %}{# /POSTROW #}
 
 		<table class="bordered bCenter">
 		<tr>

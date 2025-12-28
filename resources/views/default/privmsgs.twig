@@ -72,7 +72,7 @@
 	<td><u>{{ item.DATE_RAW }}</u>{{ item.DATE|raw }}</td>
 	<td><input type="checkbox" name="mark[]2" value="{{ item.S_MARK_ID }}" /></td>
 </tr>
-{% endfor %}
+{% endfor %}{# /LISTROW #}
 {% if NO_MESSAGES %}
 <tr>
 	<td class="row1 pad_10 tCenter" colspan="5">{{ __('NO_MESSAGES_FOLDER') }}</td>
