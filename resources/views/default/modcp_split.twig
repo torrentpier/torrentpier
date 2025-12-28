@@ -1,0 +1,101 @@
+<script type="text/javascript">
+function toggle_cbox (cb_id, tr_id)
+{
+	var cb = document.getElementById(cb_id);
+	var tr = document.getElementById(tr_id);
+	cb.checked	= (cb.checked) ? 0 : 1;
+	if (cb.checked) {
+		tr.className = 'sel';
+	}
+	else {
+		tr.className = ( !(tr_id % 2) ) ? 'row1' : 'row2';
+	}
+	return false;
+}
+</script>
+<style> .sel { background-color:#FFEFD5; } </style>
+
+<form method="post" action="{{ S_SPLIT_ACTION }}">
+
+<table width="100%">
+	<tr>
+		<td style="padding-left: 0;" class="nav">
+			<a href="{{ U_INDEX }}" class="nav">{{ __('HOME') }}</a>
+			<span class="nav">
+				&raquo;&nbsp;<a href="{{ U_VIEW_FORUM }}" class="nav">{{ FORUM_NAME }}</a>
+			</span>
+		</td>
+	</tr>
+</table>
+
+<table class="forumline">
+	<tr>
+		<th colspan="2">{{ __('TOPIC_SPLIT') }}</th>
+	</tr>
+	<tr>
+		<td class="row2 tCenter" colspan="2">
+			<span class="small">{{ __('SPLIT_TOPIC_EXPLAIN') }}</span>
+		</td>
+	</tr>
+	<tr>
+		<td class="row1 nowrap"><span class="gen">{{ __('NEW_TOPIC_TITLE') }}</span></td>
+		<td class="row2"><input class="post" type="text" size="35" style="width: 500px;" maxlength="120" name="subject"></td>
+	</tr>
+	<tr>
+		<td class="row1 nowrap"><span class="gen">{{ __('FORUM_FOR_NEW_TOPIC') }}</span></td>
+		<td class="row2">{{ S_FORUM_SELECT|raw }}</td>
+	</tr>
+	<!-- //bot -->
+	<tr>
+		<td colspan="2" class="row2 tCenter" style="padding: 0;">
+		<table class="borderless">
+			<tr>
+				 <td class="row2 tCenter"><span class="gen"><input type="checkbox" name="after_split_to_old" id="after_split_to_old" checked><label for="after_split_to_old">{{ __('BOT_AFTER_SPLIT_TO_OLD') }}</label></span></td>
+				 <td>&nbsp;</td>
+				 <td class="row2 tCenter"><span class="gen"><input type="checkbox" name="after_split_to_new" id="after_split_to_new" checked><label for="after_split_to_new">{{ __('BOT_AFTER_SPLIT_TO_NEW') }}</label></span></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<!-- //bot end -->
+	<tr>
+		<td colspan="2" class="catBottom">
+			<input type="submit" name="delete_posts" value="{{ __('DELETE_POSTS') }}">
+			<input type="submit" name="split_type_all" value="{{ __('SPLIT_POSTS') }}">
+			<input type="submit" name="split_type_beyond" value="{{ __('SPLIT_AFTER') }}">
+		</td>
+	</tr>
+</table>
+<div><img src="{{ SPACER }}" alt="" width="1" height="6"></div>
+
+<table class="topic" cellpadding="0" cellspacing="0">
+	<tr>
+		<th class="thHead td1">#</th>
+		<th class="thHead td1">{{ __('AUTHOR') }}</th>
+		<th class="thHead td2">{{ __('MESSAGE') }}</th>
+	</tr>
+	{% for item in POSTROW %}
+	<tr {% if item.CHECKBOX %}id="{{ item.ROW_ID }}" onclick="toggle_cbox('{{ item.CB_ID }}', '{{ item.ROW_ID }}');"{% endif %} class="{{ item.ROW_CLASS }}">
+		<td class="td1 tCenter">{% if item.CHECKBOX %}<input type="checkbox" name="post_id_list[]" value="{{ item.POST_ID }}" id="{{ item.CB_ID }}" onclick="toggle_cbox('{{ item.CB_ID }}', '{{ item.ROW_ID }}');" />{% endif %}</td>
+		<td class="td1 vTop pad_2">
+			<p><b>{{ item.POSTER_NAME|raw }}</b></p>
+			<p class="small nowrap">{{ item.POST_DATE }}</p>
+		</td>
+		<td class="message td2" width="100%">
+			<div class="post_wrap">
+				<div class="post_body">{{ item.MESSAGE|raw }}</div>
+			</div>
+		</td>
+	</tr>
+	{% endfor %}{# /POSTROW #}
+	<tr>
+		<td class="catBottom" colspan="3">
+			<input type="hidden" name="confirm" value="1">
+			<input class="liteoption" type="submit" name="delete_posts" value="{{ __('DELETE_POSTS') }}">
+			<input class="liteoption" type="submit" name="split_type_all" value="{{ __('SPLIT_POSTS') }}">
+			<input class="liteoption" type="submit" name="split_type_beyond" value="{{ __('SPLIT_AFTER') }}">
+		{{ S_HIDDEN_FIELDS|raw }}
+		</td>
+	</tr>
+</table>
+</form>

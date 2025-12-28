@@ -80,8 +80,6 @@ $lang['PAGE_OF'] = 'Page <b>%d</b> of <b>%s</b>';
 $lang['TWITTER'] = 'X (Twitter)';
 $lang['TWITTER_ERROR'] = 'You entered an invalid X (Twitter) login';
 
-$lang['FORUM_INDEX'] = '%s Forum Index'; // e.g. sitename Forum Index, %s can be removed if you prefer
-
 $lang['POST_NEW_TOPIC'] = 'Post new topic';
 $lang['POST_NEW_RELEASE'] = 'Post new release';
 $lang['REPLY_TO_TOPIC'] = 'Reply to topic';

@@ -322,16 +322,20 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
         if ($rowset = DB()->fetch_rowset($sql)) {
             $topic_has_new_posts = true;
 
+            $newPosts = [];
             foreach ($rowset as $i => $row) {
-                template()->assign_block_vars('new_posts', [
+                $newPosts[] = [
                     'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
                     'POSTER' => profile_url($row),
                     'POSTER_NAME_JS' => addslashes($row['username']),
                     'POST_DATE' => '<a class="small" href="' . POST_URL . $row['post_id'] . '#' . $row['post_id'] . '" title="' . __('POST_LINK') . '">' . bb_date($row['post_time'], config()->get('post_date_format')) . '</a>',
                     'MESSAGE' => bbcode()->getParsedPost($row),
-                ]);
+                ];
             }
-            template()->assign_vars(['TPL_SHOW_NEW_POSTS' => true]);
+            template()->assign_vars([
+                'TPL_SHOW_NEW_POSTS' => true,
+                'NEW_POSTS' => $newPosts,
+            ]);
 
             $topics_tracking = &tracking_topics();
             set_tracks(COOKIE_TOPIC, $topics_tracking, $topic_id);
@@ -534,9 +538,6 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
         template()->assign_var('SHOW_ROBOTS_CHECKBOX');
     }
 
-    // Topic type selection
-    template()->assign_block_vars('switch_type_toggle', []);
-
     if ($is_auth['auth_sticky']) {
         $topic_type_toggle .= '<label><input type="radio" name="topictype" value="' . POST_STICKY . '"';
         if (isset($post_data['topic_type']) && ($post_data['topic_type'] == POST_STICKY || $topic_type == POST_STICKY)) {
@@ -625,7 +626,7 @@ switch ($mode) {
 // Generate smilies listing for page output
 generate_smilies('inline');
 
-template()->set_filenames(['body' => 'posting.tpl']);
+template()->set_filenames(['body' => 'posting.twig']);
 
 // Output the data to the template
 template()->assign_vars([
@@ -648,6 +649,7 @@ template()->assign_vars([
 
     'S_NOTIFY_CHECKED' => $notify_user ? 'checked' : '',
     'S_ROBOTS_CHECKED' => $robots_indexing ? 'checked' : '',
+    'SWITCH_TYPE_TOGGLE' => !empty($topic_type_toggle),
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,
@@ -680,12 +682,11 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
 
             template()->assign_vars([
                 'FILE_ATTACHED' => true,
-            ]);
-
-            template()->assign_block_vars('attach_row', [
-                'FILE_NAME' => TorrentPier\Attachment::getDownloadFilename($topic_id, $post_info['topic_title']),
-                'ATTACH_FILENAME' => $topic_id,
-                'U_VIEW_ATTACHMENT' => $dl_url,
+                'ATTACH_ROW' => [[
+                    'FILE_NAME' => TorrentPier\Attachment::getDownloadFilename($topic_id, $post_info['topic_title']),
+                    'ATTACH_FILENAME' => $topic_id,
+                    'U_VIEW_ATTACHMENT' => $dl_url,
+                ]],
             ]);
         }
     }
