@@ -196,7 +196,7 @@ ajax.callback.post_mod_comment = function(data) {
 </tr>
 </table>
 
-{% if SHOW_DL_LIST or SHOW_TOR_ACT %}{% include 'viewtopic_torrent.tpl' %}{% endif %}
+{% if SHOW_DL_LIST or SHOW_TOR_ACT %}{% include 'viewtopic_torrent.twig' %}{% endif %}
 
 {% if TOPIC_HAS_POLL or CAN_MANAGE_POLL %}
 <form id="poll-form" method="post" action="poll" style="display: none;">

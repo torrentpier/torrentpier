@@ -80,9 +80,11 @@ if (config()->get('ratio_null_enabled') && $btu = get_bt_userdata($profiledata['
 
 // Ban information
 if ($banInfo = getBanInfo((int)$profiledata['user_id'])) {
-    template()->assign_block_vars('ban', [
-        'IS_BANNED' => true,
-        'BAN_REASON' => IS_ADMIN ? $banInfo['ban_reason'] : '',
+    template()->assign_vars([
+        'BAN_INFO' => [
+            'IS_BANNED' => true,
+            'BAN_REASON' => IS_ADMIN ? $banInfo['ban_reason'] : '',
+        ]
     ]);
 }
 
@@ -227,4 +229,4 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_topic')) {
 
 template()->assign_var('USER_RESTRICTIONS', implode('</li><li>', $user_restrictions));
 
-print_page('usercp_viewprofile.tpl');
+print_page('usercp_viewprofile.twig');

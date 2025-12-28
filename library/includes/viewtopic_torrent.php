@@ -35,6 +35,8 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
     $peers_cnt = $seed_count = $leech_count = 0;
     $seeders = $leechers = '';
     $tor_info = [];
+    $sfullData = null;
+    $lfullData = null;
 
     template()->assign_vars([
         'SEED_COUNT' => false,
@@ -400,47 +402,31 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
 
                         if ($peer['seeder']) {
                             $x = 's';
-                            $x_row = 'srow';
-                            $x_full = 'sfull';
 
-                            if (!defined('SEEDER_EXIST')) {
+                            if ($sfullData === null) {
                                 define('SEEDER_EXIST', true);
-                                $seed_order_action = TOPIC_URL . "{$bt_topic_id}/?spmode=full#seeders";
-
-                                template()->assign_block_vars((string)$x_full, [
-                                    'SEED_ORD_ACT' => $seed_order_action,
+                                $sfullData = [
+                                    'SEED_ORD_ACT' => TOPIC_URL . "{$bt_topic_id}/?spmode=full#seeders",
                                     'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s',
-                                ]);
-
-                                if ($ip) {
-                                    template()->assign_block_vars("{$x_full}.iphead", []);
-                                }
-                                if ($port !== false) {
-                                    template()->assign_block_vars("{$x_full}.porthead", []);
-                                }
+                                    'IPHEAD' => (bool)$ip,
+                                    'PORTHEAD' => ($port !== false),
+                                    'ROWS' => [],
+                                ];
                             }
                             $compl_perc = ($tor_size) ? round(($p_max_up / $tor_size), 1) : 0;
                         } else {
                             $x = 'l';
-                            $x_row = 'lrow';
-                            $x_full = 'lfull';
 
-                            if (!defined('LEECHER_EXIST')) {
+                            if ($lfullData === null) {
                                 define('LEECHER_EXIST', true);
-                                $leech_order_action = TOPIC_URL . "{$bt_topic_id}/?spmode=full#leechers";
-
-                                template()->assign_block_vars((string)$x_full, [
-                                    'LEECH_ORD_ACT' => $leech_order_action,
+                                $lfullData = [
+                                    'LEECH_ORD_ACT' => TOPIC_URL . "{$bt_topic_id}/?spmode=full#leechers",
                                     'LEECHERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s',
                                     'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], min: 'KB') . '/s',
-                                ]);
-
-                                if ($ip) {
-                                    template()->assign_block_vars("{$x_full}.iphead", []);
-                                }
-                                if ($port !== false) {
-                                    template()->assign_block_vars("{$x_full}.porthead", []);
-                                }
+                                    'IPHEAD' => (bool)$ip,
+                                    'PORTHEAD' => ($port !== false),
+                                    'ROWS' => [],
+                                ];
                             }
                             $compl_size = ($peer['remain'] && $tor_size && $tor_size > $peer['remain']) ? ($tor_size - $peer['remain']) : 0;
                             $compl_perc = ($compl_size) ? floor($compl_size * 100 / $tor_size) : 0;
@@ -483,7 +469,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                             }
                         }
 
-                        template()->assign_block_vars("{$x_full}.{$x_row}", [
+                        $rowData = [
                             'ROW_BGR' => $row_bgr,
                             'NAME' => $peerUsername,
                             'PEER_ID' => $peerTorrentClient,
@@ -499,16 +485,14 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                             'SPEED_DOWN_RAW' => $peer['speed_down'],
                             'UPD_EXP_TIME' => $peer['update_time'] ? __('DL_UPD') . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . humanTime($peer['update_time']) . __('TOR_BACK') : __('DL_STOPPED'),
                             'TOR_RATIO' => $up_ratio ? __('USER_RATIO') . "UL/DL: {$up_ratio}" : '',
-                        ]);
+                            'IP' => $ip ? ['U_WHOIS_IP' => config()->get('whois_info') . $ip, 'IP' => $ip] : null,
+                            'PORT' => ($port !== false) ? ['PORT' => $port] : null,
+                        ];
 
-                        if ($ip) {
-                            template()->assign_block_vars("{$x_full}.{$x_row}.ip", [
-                                'U_WHOIS_IP' => config()->get('whois_info') . $ip,
-                                'IP' => $ip,
-                            ]);
-                        }
-                        if ($port !== false) {
-                            template()->assign_block_vars("{$x_full}.{$x_row}.port", ['PORT' => $port]);
+                        if ($peer['seeder']) {
+                            $sfullData['ROWS'][] = $rowData;
+                        } else {
+                            $lfullData['ROWS'][] = $rowData;
                         }
                     } // Count only & only names modes
                     else {
@@ -554,7 +538,11 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
             }
         }
 
-        template()->assign_block_vars('tor_title', ['U_DOWNLOAD_LINK' => $download_link]);
+        template()->assign_vars([
+            'TOR_TITLE' => ['U_DOWNLOAD_LINK' => $download_link],
+            'SFULL' => $sfullData,
+            'LFULL' => $lfullData,
+        ]);
 
         if ($peers_cnt > $max_peers_before_overflow && $s_mode == 'full') {
             template()->assign_vars([

@@ -249,6 +249,10 @@ datastore()->rm('moderators');
 // Build index page
 $forums_count = 0;
 $h_c_list = [];
+$categoriesList = [];
+
+template()->assign_vars(['H_C_AL_MESS' => $hide_cat_opt && !$showhide]);
+
 foreach ($cat_forums as $cid => $c) {
     $h_c_list[] = [
         'H_C_ID' => $cid,
@@ -256,17 +260,18 @@ foreach ($cat_forums as $cid => $c) {
         'H_C_CHEKED' => in_array($cid, preg_split('/[-]+/', $hide_cat_opt)) ? 'checked' : '',
     ];
 
-    template()->assign_vars(['H_C_AL_MESS' => $hide_cat_opt && !$showhide]);
-
     if (!$showhide && isset($hide_cat_user[$cid]) && !$viewcat) {
         continue;
     }
 
-    template()->assign_block_vars('c', [
+    $categoryItem = [
         'CAT_ID' => $cid,
         'CAT_TITLE' => $cat_title_html[$cid],
         'U_VIEWCAT' => url()->category($cid, $cat_data[$cid]['cat_title']),
-    ]);
+        'FORUMS' => [],
+    ];
+
+    $currentForumIndex = -1;
 
     foreach ($c['f'] as $fid => $f) {
         if (!$fname_html = &$forum_name_html[$fid]) {
@@ -283,15 +288,18 @@ foreach ($cat_forums as $cid => $c) {
         }
 
         if ($is_sf) {
-            template()->assign_block_vars('c.f.sf', [
-                'SF_ID' => $fid,
-                'SF_NAME' => $fname_html,
-                'SF_NEW' => $new ? ' new' : '',
-            ]);
+            // Add to the last forum's subforums
+            if ($currentForumIndex >= 0) {
+                $categoryItem['FORUMS'][$currentForumIndex]['SUBFORUMS'][] = [
+                    'SF_ID' => $fid,
+                    'SF_NAME' => $fname_html,
+                    'SF_NEW' => $new ? ' new' : '',
+                ];
+            }
             continue;
         }
 
-        template()->assign_block_vars('c.f', [
+        $forumItem = [
             'FORUM_FOLDER_IMG' => $folder_image,
             'FORUM_ID' => $fid,
             'FORUM_NAME' => $fname_html,
@@ -301,21 +309,31 @@ foreach ($cat_forums as $cid => $c) {
             'LAST_SF_ID' => $f['last_sf_id'] ?? null,
             'MODERATORS' => isset($moderators[$fid]) ? implode(', ', $moderators[$fid]) : '',
             'FORUM_FOLDER_ALT' => $new ? __('NEW') : __('OLD'),
-        ]);
+            'SUBFORUMS' => [],
+            'LAST' => null,
+        ];
 
         if ($f['last_post_id']) {
-            template()->assign_block_vars('c.f.last', [
+            $forumItem['LAST'] = [
                 'LAST_TOPIC_ID' => $f['last_topic_id'],
                 'LAST_TOPIC_TIP' => $f['last_topic_title'],
                 'LAST_TOPIC_TITLE' => str_short($f['last_topic_title'], $last_topic_max_len),
                 'LAST_POST_TIME' => bb_date($f['last_post_time'], config()->get('last_post_date_format')),
                 'LAST_POST_USER' => profile_url(['username' => $f['last_post_username'], 'display_username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank']]),
-            ]);
+            ];
         }
+
+        $categoryItem['FORUMS'][] = $forumItem;
+        $currentForumIndex = count($categoryItem['FORUMS']) - 1;
     }
+
+    $categoriesList[] = $categoryItem;
 }
 
-template()->assign_vars(['H_C' => $h_c_list]);
+template()->assign_vars([
+    'H_C' => $h_c_list,
+    'CATEGORIES' => $categoriesList,
+]);
 
 template()->assign_vars([
     'SHOW_FORUMS' => $forums_count,
@@ -485,4 +503,4 @@ if (request()->query->has('map')) {
     template()->assign_vars(['PAGE_TITLE' => __('FORUM_MAP')]);
 }
 
-print_page('index.tpl');
+print_page('index.twig');

@@ -54,39 +54,39 @@ $(function(){
 	<div style="margin: 20px 56px;">
 		<div style="padding: 0 0 12px 3px;">
 			<form autocomplete="off">
-				<i>{L_FILTER_BY_NAME}:</i> &nbsp;<input type="text" id="q-search" style="width: 200px;">
+				<i>{{ __('FILTER_BY_NAME') }}:</i> &nbsp;<input type="text" id="q-search" style="width: 200px;">
 			</form>
-			<div id="f-none" style="padding: 25px 0 0 0; display: none;">{L_NO_MATCH}</div>
+			<div id="f-none" style="padding: 25px 0 0 0; display: none;">{{ __('NO_MATCH') }}</div>
 		</div>
-		<div id="f-load" style="padding: 6px;"><i class="loading-1">{L_LOADING}</i></div>
+		<div id="f-load" style="padding: 6px;"><i class="loading-1">{{ __('LOADING') }}</i></div>
 		<div id="f-map" style="display: none;">
-			<!-- BEGIN c -->
+			{% for c in CATEGORIES %}
 			<ul class="tree-root">
 				<li>
 					<span class="b">
-						<span class="c_title" title="{c.CAT_TITLE}"></span>
+						<span class="c_title" title="{{ c.CAT_TITLE }}"></span>
 					</span>
-					<!-- BEGIN f -->
+					{% for f in c.FORUMS %}
 					<ul>
 						<li>
 							<span class="b">
-								<a href="{{ url.forum(f_item.FORUM_ID, f_item.FORUM_NAME) }}" data-forum-id="{c.f.FORUM_ID}">{c.f.FORUM_NAME}</a>
+								<a href="{{ url.forum(f.FORUM_ID, f.FORUM_NAME) }}" data-forum-id="{{ f.FORUM_ID }}">{{ f.FORUM_NAME }}</a>
 							</span>
-							<!-- IF c.f.LAST_SF_ID -->
+							{% if f.LAST_SF_ID %}
 							<ul>
-								<!-- BEGIN sf -->
+								{% for sf in f.SUBFORUMS %}
 								<li>
-									<span><a href="{{ url.forum(sf_item.SF_ID, sf_item.SF_NAME) }}" data-forum-id="{c.f.sf.SF_ID}">{c.f.sf.SF_NAME}</a></span>
+									<span><a href="{{ url.forum(sf.SF_ID, sf.SF_NAME) }}" data-forum-id="{{ sf.SF_ID }}">{{ sf.SF_NAME }}</a></span>
 								</li>
-								<!-- END sf -->
+								{% endfor %}{# /SUBFORUMS #}
 							</ul>
-							<!-- ENDIF -->
+							{% endif %}
 						</li>
 					</ul>
-					<!-- END f -->
+					{% endfor %}{# /FORUMS #}
 				</li>
 			</ul>
-			<!-- END c -->
+			{% endfor %}{# /CATEGORIES #}
 		</div>
 	</div>
 </div>

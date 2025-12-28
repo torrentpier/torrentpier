@@ -34,6 +34,9 @@ if (($is_auth['auth_mod']) && ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL)) {
 }
 
 $dl_cat = $dl_count = [];
+$dlUsersList = [];
+$dlCountsList = [];
+$dlListNone = false;
 
 if ($show_dl_list) {
     foreach (dl_status_list() as $i) {
@@ -56,12 +59,6 @@ if ($show_dl_list) {
     }
 
     if ($dl_info = DB()->fetch_rowset($sql)) {
-        if ($count_mode) {
-            template()->assign_block_vars('dl_counts', []);
-        } else {
-            template()->assign_block_vars('dl_users', []);
-        }
-
         foreach ($dl_info as $rid => $u) {
             $u_link_class = dl_status_css($u['user_status']);
 
@@ -82,26 +79,32 @@ if ($show_dl_list) {
                 $dl_cat[$i][strlen($dl_cat[$i]) - 2] = ' ';
                 $dl_cat[$i] = "<span class={$desc}>" . $dl_cat[$i] . '</span>';
 
-                template()->assign_block_vars('dl_users.users_row', [
+                $dlUsersList[] = [
                     'DL_OPTION_NAME' => __(strtoupper($desc)),
                     'DL_OPTION_USERS' => $dl_cat[$i],
                     'DL_COUNT' => $dl_count[$i],
                     'DL_USERS_DIV_STYLE' => $dl_users_div_style,
-                ]);
+                ];
             } elseif ($dl_count[$i] && $count_mode) {
                 if ($i == DL_STATUS_CANCEL && !$show_canceled_in_count_mode) {
                     continue;
                 }
-                template()->assign_block_vars('dl_counts.count_row', [
+                $dlCountsList[] = [
                     'DL_OPTION_NAME' => __(strtoupper($desc)),
                     'DL_OPTION_USERS' => $dl_count[$i],
-                ]);
+                ];
             }
         }
     } elseif (config()->get('bt_show_dl_list_buttons') && $have_dl_buttons_enabled) {
-        template()->assign_block_vars('dl_list_none', []);
+        $dlListNone = true;
     }
 }
+
+template()->assign_vars([
+    'DL_USERS' => $dlUsersList,
+    'DL_COUNTS' => $dlCountsList,
+    'DL_LIST_NONE' => $dlListNone,
+]);
 
 if ($show_dl_buttons) {
     template()->assign_vars([

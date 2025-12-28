@@ -1,0 +1,264 @@
+<table class="forumline dl_list">
+
+<col class="row1">
+<col class="row1">
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('table.tablesorter').tablesorter({
+		sortList: [[4,1]]
+	});
+});
+
+// callseed
+ajax.callseed = function (topic_id) {
+    ajax.exec({
+        action: 'callseed',
+        topic_id: topic_id,
+    });
+};
+ajax.callback.callseed = function (data) {
+    alert(data.response);
+};
+</script>
+
+<tr>
+	<td colspan="2" class="catTitle"><a href="{{ DL_LIST_HREF }}">{{ __('DL_LIST_AND_TORRENT_ACTIVITY') }}</a></td>
+</tr>
+
+{% for item in DL_USERS %}
+<tr>
+	<td width="5%" class="nowrap"><span title="{{ item.DL_OPTION_NAME }}: {{ item.DL_COUNT }}"><b>{{ item.DL_OPTION_NAME }}</b></span></td>
+	<td width="95%" class="tLeft med pad_4"><div style="{{ item.DL_USERS_DIV_STYLE }}"><b>{{ item.DL_OPTION_USERS|raw }}</b></div></td>
+</tr>
+{% endfor %}{# /DL_USERS #}
+
+{% if DL_COUNTS %}
+<tr>
+	<td colspan="2">
+		<table class="borderless bCenter mrg_4">
+		{% for item in DL_COUNTS %}
+		<tr>
+			<td><b>{{ item.DL_OPTION_NAME }}:</b></td>
+			<td>[ <b>{{ item.DL_OPTION_USERS }}</b> ]</td>
+		</tr>
+		{% endfor %}{# /DL_COUNTS #}
+		</table>
+	</td>
+</tr>
+{% endif %}
+
+{% if SHOW_DL_LIST_TOR_INFO %}
+<tr>
+	<td colspan="2" class="borderless bCenter pad_8">
+			{{ __('SIZE') }}:&nbsp; <b>{{ TOR_SIZE }}</b>&nbsp; &nbsp;|&nbsp; &nbsp;
+			{{ __('IS_REGISTERED') }}:&nbsp; <b>{{ TOR_LONGEVITY }}</b>&nbsp; &nbsp;|&nbsp; &nbsp;
+			{{ __('DOWNLOADED') }}:&nbsp; <b title="{{ __('COMPLETED') }}: {{ TOR_COMPLETED }}">{{ TOR_DOWNLOAD_COUNT }}</b>
+	</td>
+</tr>
+{% endif %}
+
+{% if SHOW_DL_LIST and SHOW_TOR_ACT %}
+{% if DL_LIST_NONE %}
+<tr>
+    <td colspan="2" class="pad_6">{{ __('SHOW_DL_LIST') }}: {{ __('NONE') }}</td>
+</tr>
+{% endif %}
+{% endif %}
+
+{% if SHOW_TOR_ACT %}
+	{% if S_MODE_COUNT %}
+		<tr>
+			<td colspan="2" class="{% if SHOW_DL_LIST %}row2{% else %}row1{% endif %} pad_2">
+				{% if not SEED_COUNT %}
+				<p class="mrg_10">{{ SEEDER_LAST_SEEN|raw }} {{ SEEDER_USERNAME|raw }}</p>
+				{% endif %}
+
+				{% if PEER_EXIST %}
+				<div class="mrg_4 pad_4">
+					{% if SEED_COUNT or LEECH_COUNT %}
+					{% if SEED_COUNT %}
+					<span class="seed">{{ __('SEEDERS') }}:&nbsp; <b>{{ SEED_COUNT }}</b> &nbsp;[&nbsp; {{ TOR_SPEED_UP }} &nbsp;]</span> &nbsp;
+					{% endif %}
+					{% if LEECH_COUNT %}
+					<span class="leech">{{ __('LEECHERS') }}:&nbsp;	<b>{{ LEECH_COUNT }}</b> &nbsp;[&nbsp; {{ TOR_SPEED_DOWN }} &nbsp;]</span> &nbsp;
+					{% endif %}
+					{% endif %}
+
+					{% if PEERS_FULL_LINK %}
+					<a href="{{ SPMODE_FULL_HREF }}" class="gen">{{ __('SPMODE_FULL') }}</a>
+					{% endif %}
+				</div>
+				{% endif %}
+			</td>
+		</tr>
+
+	{% elseif S_MODE_NAMES %}
+
+		{% if SEED_LIST %}
+		<tr>
+			<td width="5%" class="seed"><b>{{ __('SEEDERS') }}</b><img width="116" class="spacer" src="{{ SPACER }}" alt="" /></td>
+			<td width="95%" class="seedsmall tLeft">{{ SEED_LIST|raw }}</td>
+		</tr>
+		{% else %}
+		<tr>
+			<td colspan="2" class="row2 pad_4">
+				<p class="mrg_10">{{ SEEDER_LAST_SEEN|raw }} {{ SEEDER_USERNAME|raw }}</p>
+			</td>
+		</tr>
+		{% endif %}
+		{% if LEECH_LIST %}
+		<tr>
+			<td width="5%" class="leech"><b>{{ __('LEECHERS') }}</b><img width="116" class="spacer" src="{{ SPACER }}" alt="" /></td>
+			<td width="95%" class="leechsmall tLeft">{{ LEECH_LIST|raw }}</td>
+		</tr>
+		{% endif %}
+
+	{% elseif S_MODE_FULL %}
+
+		<tr>
+		<td colspan="2">
+
+		{% if SEEDER_LAST_SEEN %}
+		<div id="last_seed_info" class="row5 w60 mrg_4 bCenter">
+			<p class="mrg_10">{{ SEEDER_LAST_SEEN|raw }} {{ SEEDER_USERNAME|raw }}</p>
+		</div>
+		{% endif %}
+
+		{% if PEER_EXIST %}
+		<div id="full_details" class="bCenter" style="width: 97%;{{ PEERS_DIV_STYLE }}">
+
+		{% if SFULL %}
+		<a name="seeders"></a>
+		<table class="borderless w60 bCenter">
+		<tr>
+			<td><p class="floatL" style="margin-top: 4px;"><b class="seed">{{ __('SEEDERS') }}</b>:</p></td>
+		</tr>
+		<tr>
+			<td class="pad_0">
+
+			<table cellpadding="0" class="peers w100 med tablesorter" id="seeders-tbl">
+			<thead>
+			<tr>
+				<th class="{sorter: 'text'}"><b class="tbs-text">{{ __('DL_USER') }}</b><img width="130" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				<th class="{sorter: 'digit'}" title="{{ __('DL_FORMULA') }}"><b class="tbs-text">{{ __('DL_ULR') }}</b><img width="40" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('DL_UL') }}</b><img width="70" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('DL_DL') }}</b><img width="70" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('DL_UL_SPEED') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('DL_DL_SPEED') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				{% if SFULL.IPHEAD %}
+				<th class="{sorter: false}"><b class="tbs-text">{{ __('IP_ADDRESS') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				{% endif %}
+				{% if SFULL.PORTHEAD %}
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('DL_PORT') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				{% endif %}
+                <th class="{sorter: false}"><b class="tbs-text">{{ __('DL_CLIENT') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
+                {% if config('ip2country_settings.enabled') %}<th class="{sorter: false}"><b class="tbs-text">{{ __('COUNTRY') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>{% endif %}
+			</tr>
+			</thead>
+			{% for row in SFULL.ROWS %}
+			<tr{{ row.ROW_BGR|raw }}>
+				<td class="tLeft" title="{{ row.UPD_EXP_TIME }}"><b>{{ row.NAME|raw }}</b></td>
+				<td>{{ row.COMPL_PRC }}</td>
+				<td><u>{{ row.UP_TOTAL_RAW }}</u>{{ row.UP_TOTAL|raw }}</td>
+				<td><u>{{ row.DOWN_TOTAL_RAW }}</u>{{ row.DOWN_TOTAL|raw }}</td>
+				<td class="seedmed"><u>{{ row.SPEED_UP_RAW }}</u>{{ row.SPEED_UP|raw }}</td>
+				<td class="leechmed"><u>{{ row.SPEED_DOWN_RAW }}</u>{{ row.SPEED_DOWN|raw }}</td>
+				{% if row.IP %}
+                <td><a href="{{ row.IP.U_WHOIS_IP }}" target="_blank">{{ row.IP.IP }}</a></td>
+				{% endif %}
+				{% if row.PORT %}
+				<td>{{ row.PORT.PORT }}</td>
+				{% endif %}
+                <td>{{ row.PEER_ID|raw }}</td>
+                {% if config('ip2country_settings.enabled') %}<td>{{ row.COUNTRY|raw }}</td>{% endif %}
+			</tr>
+			{% endfor %}{# /SFULL.ROWS #}
+			</table>
+
+			</td>
+		</tr>
+		</table>
+		{% endif %}
+
+		{% if LFULL %}
+		<a name="leechers"></a>
+		<table class="borderless w60 bCenter">
+		<tr>
+			<td><p class="floatL" style="margin-top: 4px;"><b class="leech">{{ __('LEECHERS') }}</b>:</p></td>
+		</tr>
+		<tr>
+			<td class="pad_0">
+
+			<table cellpadding="0" class="peers w100 med tablesorter" id="leechers-tbl">
+			<thead>
+			<tr>
+				<th class="{sorter: 'text'}"><b class="tbs-text">{{ __('DL_USER') }}</b><img width="130" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				<th class="{sorter: 'digit'}" title="{{ __('DL_PERCENT') }}"><b class="tbs-text">%</b><img width="40" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('DL_UL') }}</b><img width="70" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('DL_DL') }}</b><img width="70" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('DL_UL_SPEED') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('DL_DL_SPEED') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				{% if LFULL.IPHEAD %}
+				<th class="{sorter: false}"><b class="tbs-text">{{ __('IP_ADDRESS') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
+				{% endif %}
+				{% if LFULL.PORTHEAD %}
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('DL_PORT') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
+                {% endif %}
+                <th class="{sorter: false}"><b class="tbs-text">{{ __('DL_CLIENT') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
+                {% if config('ip2country_settings.enabled') %}<th class="{sorter: false}"><b class="tbs-text">{{ __('COUNTRY') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>{% endif %}
+			</tr>
+			</thead>
+			{% for row in LFULL.ROWS %}
+			<tr{{ row.ROW_BGR|raw }}>
+				<td class="tLeft" title="{{ row.UPD_EXP_TIME }}"><b>{{ row.NAME|raw }}</b></td>
+				<td title="{{ row.TOR_RATIO }}">{{ row.COMPL_PRC }}</td>
+				<td><u>{{ row.UP_TOTAL_RAW }}</u>{{ row.UP_TOTAL|raw }}</td>
+				<td><u>{{ row.DOWN_TOTAL_RAW }}</u>{{ row.DOWN_TOTAL|raw }}</td>
+				<td class="seedmed"><u>{{ row.SPEED_UP_RAW }}</u>{{ row.SPEED_UP|raw }}</td>
+				<td class="leechmed"><u>{{ row.SPEED_DOWN_RAW }}</u>{{ row.SPEED_DOWN|raw }}</td>
+				{% if row.IP %}
+                <td><a href="{{ row.IP.U_WHOIS_IP }}" target="_blank">{{ row.IP.IP }}</a></td>
+				{% endif %}
+				{% if row.PORT %}
+				<td>{{ row.PORT.PORT }}</td>
+				{% endif %}
+                <td>{{ row.PEER_ID|raw }}</td>
+                {% if config('ip2country_settings.enabled') %}<td>{{ row.COUNTRY|raw }}</td>{% endif %}
+			</tr>
+			{% endfor %}{# /LFULL.ROWS #}
+			</table>
+
+			</td>
+		</tr>
+		</table>
+		{% endif %}
+
+		<div class="med tCenter mrg_4 warnColor1">{{ __('DL_INFO') }}</div>
+
+		</div><!--/full_details-->
+		{% endif %}
+
+		</td>
+		</tr>
+	{% endif %}
+{% endif %}
+
+{% if LOGGED_IN %}
+<tr>
+	<td colspan="2" class="row3 pad_4">
+	{% if DL_BUTTONS %}
+	<form method="POST" action="{{ S_DL_ACTION }}">{{ DL_HIDDEN_FIELDS|raw }}
+		{% if DL_BUT_WILL %}<input type="submit" name="dl_set_will" value="{{ __('DLWILL') }}" class="liteoption" />&nbsp;{% endif %}
+		{% if DL_BUT_DOWN %}<input type="submit" name="dl_set_down" value="{{ __('DLDOWN') }}" class="liteoption" />&nbsp;{% endif %}
+		{% if DL_BUT_COMPL %}<input type="submit" name="dl_set_complete" value="{{ __('DLCOMPLETE') }}" class="liteoption" />&nbsp;{% endif %}
+		{% if DL_BUT_CANCEL %}<input type="submit" name="dl_set_cancel" value="{{ __('DLCANCEL') }}" class="liteoption" />{% endif %}
+	</form>
+	{% endif %}
+    {% if CALL_SEED %}<input onclick="ajax.callseed({{ TOPIC_ID }}); return false;" type="button" value="{{ __('CALLSEED') }}" class="liteoption"/>&nbsp;{% endif %}
+	</td>
+</tr>
+{% endif %}
+
+</table>
+<div class="spacer_6"></div>
