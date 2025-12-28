@@ -1,0 +1,204 @@
+<div class="spacer_12"></div>
+
+{% if TPL_SHOW_NEW_POSTS %}
+<!--========================================================================-->
+
+<table class="topic" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="2" class="catTitle td2">{{ __('NEW_POSTS_PREVIEW') }}</td>
+    </tr>
+    <tr>
+        <th class="thHead td1">{{ __('AUTHOR') }}</th>
+        <th class="thHead td2">{{ __('MESSAGE') }}</th>
+    </tr>
+    {% for item in NEW_POSTS %}
+    <tr class="{{ item.ROW_CLASS }}">
+        <td width="120" class="poster_info td1">
+            <p class="nick" onclick="bbcode.onclickPoster('{{ item.POSTER_NAME_JS }}');">
+                <a href="#" onclick="return false;">{{ item.POSTER|raw }}</a>
+            </p>
+            <p><img src="{{ SPACER }}" width="120" height="10" alt=""/></p>
+        </td>
+        <td class="message td2">
+            <div class="post_head pad_4">{{ MINIPOST_IMG_NEW|raw }} {{ item.POST_DATE|raw }}</div>
+            <div class="post_wrap post_body">{{ item.MESSAGE|raw }}</div>
+        </td>
+    </tr>
+    {% endfor %}{# /NEW_POSTS #}
+</table>
+
+<div class="spacer_12"></div>
+
+<!--========================================================================-->
+{% endif %}
+
+{% if TPL_PREVIEW_POST %}
+<!--========================================================================-->
+
+<table class="forumline">
+    <tr>
+        <th>{{ __('PREVIEW') }}</th>
+    </tr>
+    <tr>
+        <td class="row1">
+            <div class="post_wrap post_body">{{ PREVIEW_MSG|raw }}</div>
+        </td>
+    </tr>
+</table>
+
+<div class="spacer_12"></div>
+
+<!--========================================================================-->
+{% endif %}
+
+<p class="nav">
+    <a href="{{ U_INDEX }}">{{ __('HOME') }}</a>
+    {% if U_VIEW_FORUM %}<em>&raquo;</em> <a href="{{ U_VIEW_FORUM }}">{{ FORUM_NAME }}</a>{% endif %}
+    {% if POSTING_TOPIC_URL %}<em>&raquo;</em> <a class="normal" href="{{ POSTING_TOPIC_URL }}">{{ POSTING_TOPIC_TITLE }}</a>{% endif %}
+</p>
+
+<form action="{{ S_POST_ACTION }}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }" {{ S_FORM_ENCTYPE }}>
+    {{ S_HIDDEN_FORM_FIELDS|raw }}
+    {{ ADD_ATTACH_HIDDEN_FIELDS|raw }}
+    {{ POSTED_ATTACHMENTS_HIDDEN_FIELDS|raw }}
+
+    <table class="bordered">
+        <col class="row1">
+        <col class="row2">
+
+        <tbody class="pad_4">
+        <tr>
+            <th colspan="2" class="thHead"><b>{{ POSTING_TYPE_TITLE }}</b></th>
+        </tr>
+        <tr id="view_message" class="hidden">
+            <td colspan="2">
+                <div class="view-message"></div>
+            </td>
+        </tr>
+        {% if POSTING_USERNAME %}
+        <tr>
+            <td><b>{{ __('USERNAME') }}</b></td>
+            <td>
+                <input type="text" name="username" size="25" maxlength="25" tabindex="1" value="{{ USERNAME }}"/>&nbsp;
+                {% if not IS_GUEST %}<input type="submit" name="usersubmit" class="lite" value="{{ __('FIND_USERNAME') }}" onclick="window.open('{{ U_SEARCH_USER }}', '_bbsearch', IWP_US);return false;"/>{% endif %}
+            </td>
+        </tr>
+        {% endif %}
+        {% if POSTING_SUBJECT %}
+        <tr>
+            <td><b>{{ __('SUBJECT') }}</b></td>
+            <td><input type="text" name="subject" size="90" tabindex="2" value="{{ SUBJECT }}" maxlength="250" style="width: 98%;"/></td>
+        </tr>
+        {% endif %}
+        </tbody>
+        <tr>
+            <td class="vTop pad_4">
+                <p><b>{{ __('MESSAGE') }}</b></p>
+                <table id="smilies" class="smilies borderless mrg_16">
+                    {% for row in SMILIES_ROWS %}
+                    <tr>
+                        {% for col in row.COLS %}
+                        <td><a href="#" onclick="bbcode && bbcode.emoticon('{{ col.SMILEY_CODE }}'); return false;"><img src="{{ col.SMILEY_IMG }}" alt="" title="{{ col.SMILEY_DESC }}"/></a></td>
+                        {% endfor %}{# /row.COLS #}
+                    </tr>
+                    {% endfor %}{# /SMILIES_ROWS #}
+                    {% if SMILIES_MORE %}
+                    <tr>
+                        <td colspan="{{ S_SMILIES_COLSPAN }}"><a href="{{ U_MORE_SMILIES }}" onclick="window.open('{{ U_MORE_SMILIES }}', '_bbsmilies', IWP_SM); return false;" target="_bbsmilies" class="med">{{ __('MORE_EMOTICONS') }}</a></td>
+                    </tr>
+                    {% endif %}
+                </table><!--/smilies-->
+            </td>
+            <td class="vTop pad_0 w100">{% include 'posting_editor.twig' %}</td>
+        </tr>
+        {% if IN_PM %}
+        {% elseif LOGGED_IN %}
+        <tr>
+            <td class="vTop pad_4" valign="top">
+                <p><b>{{ __('OPTIONS') }}</b></p>
+            </td>
+            <td>
+                <div class="floatL">
+                    <table class="borderless inline">
+                        {% if SHOW_UPDATE_POST_TIME %}
+                        <tr>
+                            <td><input type="checkbox" id="update_post_time" name="update_post_time" {% if UPDATE_POST_TIME_CHECKED %}checked{% endif %} /></td>
+                            <td><label for="update_post_time">{{ __('UPDATE_POST_TIME') }}</label></td>
+                        </tr>
+                        {% endif %}
+                        {% if SHOW_NOTIFY_CHECKBOX %}
+                        <tr>
+                            <td><input type="checkbox" id="notify" name="notify" {{ S_NOTIFY_CHECKED }} /></td>
+                            <td><label for="notify">{{ __('NOTIFY') }}</label></td>
+                        </tr>
+                        {% endif %}
+                        {% if SHOW_ROBOTS_CHECKBOX %}
+                        <tr>
+                            <td><input type="checkbox" id="robots" name="robots" {{ S_ROBOTS_CHECKED }} /></td>
+                            <td><label for="robots">{{ __('ALLOW_ROBOTS_INDEXING') }}</label></td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            </td>
+        </tr>
+        {% if ATTACHBOX %}
+        {% if POSTER_RGROUPS %}
+        <tr>
+            <td class="vTop pad_4" valign="top"><b>{{ __('POST_RELEASE_FROM_GROUP') }}</b></td>
+            <td>
+                <select name="poster_rg">
+                    <option value="-1">{{ __('CHOOSE_RELEASE_GROUP') }}</option>
+                    {{ POSTER_RGROUPS|raw }}
+                </select>
+                <label><input type="checkbox" name="attach_rg_sig" {% if ATTACH_RG_SIG %}checked{% endif %} /> {{ __('ATTACH_RG_SIG') }}</label>
+            </td>
+        </tr>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        {% if SWITCH_TYPE_TOGGLE %}
+        <tr>
+            <td colspan="2" class="row2 tCenter pad_6">{{ S_TYPE_TOGGLE|raw }}</td>
+        </tr>
+        {% endif %}
+        {% if ATTACHBOX %}{% include 'posting_attach.twig' %}{% endif %}
+    </table>
+</form>
+
+{% if TPL_TOPIC_REVIEW %}
+<!--========================================================================-->
+
+<div class="spacer_12"></div>
+
+<table class="topic" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="2" class="catTitle td2">{{ __('TOPIC_REVIEW') }}</td>
+    </tr>
+    <tr>
+        <th class="thHead td1">{{ __('AUTHOR') }}</th>
+        <th class="thHead td2">{{ __('MESSAGE') }}</th>
+    </tr>
+    {% for item in REVIEW %}
+    <tr class="{{ item.ROW_CLASS }}">
+        <td width="120" class="poster_info td1">
+            <p class="nick" onclick="bbcode.onclickPoster('{{ item.POSTER_NAME_JS }}');">
+                <a href="#" onclick="return false;">{{ item.POSTER|raw }}</a>
+            </p>
+            <p><img src="{{ SPACER }}" width="120" height="10" alt=""/></p>
+        </td>
+        <td class="message td2">
+            <div class="post_head pad_4">
+                {% if item.IS_UNREAD %}{{ MINIPOST_IMG_NEW|raw }}{% else %}{{ MINIPOST_IMG|raw }}{% endif %}
+                <a class="small" href="{{ POST_URL }}{{ item.POST_ID }}#{{ item.POST_ID }}" title="{{ __('POST_LINK') }}">{{ item.POST_DATE }}</a>
+            </div>
+            <div class="post_wrap post_body">{{ item.MESSAGE|raw }}</div>
+        </td>
+    </tr>
+    {% endfor %}{# /REVIEW #}
+</table>
+
+<div class="spacer_12"></div>
+
+<!--========================================================================-->
+{% endif %}

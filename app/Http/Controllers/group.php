@@ -119,11 +119,12 @@ if (!$group_id) {
     if ($groups) {
         $s_hidden_fields = '';
 
+        $groupsList = [];
         foreach ($groups as $type => $grp) {
-            template()->assign_block_vars('groups', [
+            $groupsList[] = [
                 'MEMBERSHIP' => __('GROUP_MEMBER_' . strtoupper($type)),
                 'GROUP_SELECT' => build_group($grp),
-            ]);
+            ];
         }
 
         template()->assign_vars([
@@ -131,6 +132,7 @@ if (!$group_id) {
             'PAGE_TITLE' => __('GROUP_CONTROL_PANEL'),
             'S_USERGROUP_ACTION' => url()->groups(),
             'S_HIDDEN_FIELDS' => $s_hidden_fields,
+            'GROUPS' => $groupsList,
         ]);
     } else {
         if (IS_ADMIN) {
@@ -396,7 +398,7 @@ if (!$group_id) {
         'U_GROUP_MEMBERS' => url()->group($group_id, $group_info['group_name'], ['view' => 'members']),
         'U_GROUP_CONFIG' => url()->groupEdit($group_id, $group_info['group_name']),
         'RELEASE_GROUP' => (bool)$group_info['release_group'],
-        'GROUP_TYPE' => $group_type,
+        'GROUP_TYPE_TEXT' => $group_type,
 
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
         'S_GROUP_CLOSED_TYPE' => GROUP_CLOSED,
@@ -451,10 +453,11 @@ if (!$group_id) {
                 bb_die(__('NO_SEARCH_MATCH'));
             }
 
+            $releasesList = [];
             foreach ($releases as $i => $release) {
                 $row_class = !($i % 2) ? 'row1' : 'row2';
 
-                template()->assign_block_vars('releases', [
+                $releasesList[] = [
                     'ROW_NUMBER' => $i + ($start + 1),
                     'ROW_CLASS' => $row_class,
                     'RELEASER' => profile_url(['user_id' => $release['poster_id'], 'username' => $release['username'], 'user_rank' => $release['user_rank']]),
@@ -462,10 +465,13 @@ if (!$group_id) {
                     'RELEASE_NAME' => sprintf('<a href="%s">%s</a>', url()->topic($release['topic_id'], $release['topic_title']), htmlCHR($release['topic_title'])),
                     'RELEASE_TIME' => bb_date($release['topic_time']),
                     'RELEASE_FORUM' => sprintf('<a href="%s">%s</a>', url()->forum($release['forum_id'], $release['forum_name']), htmlCHR($release['forum_name'])),
-                ]);
+                ];
             }
 
-            template()->assign_vars(['RELEASES' => true]);
+            template()->assign_vars([
+                'RELEASES' => true,
+                'RELEASES_LIST' => $releasesList,
+            ]);
 
             break;
 
@@ -503,6 +509,7 @@ if (!$group_id) {
             generate_pagination(url()->group($group_id, $group_info['group_name']), $count_members, $per_page, $start);
 
             // Dump out the remaining users
+            $memberList = [];
             foreach ($group_members as $i => $member) {
                 $user_id = $member['user_id'];
 
@@ -511,7 +518,7 @@ if (!$group_id) {
                 if ($group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator) {
                     $row_class = !($i % 2) ? 'row1' : 'row2';
 
-                    template()->assign_block_vars('member', [
+                    $memberList[] = [
                         'ROW_NUMBER' => $i + ($start + 1),
                         'ROW_CLASS' => $row_class,
                         'USER' => profile_url($member),
@@ -526,23 +533,15 @@ if (!$group_id) {
                         'WWW' => $member_info['www'],
                         'TIME' => $member_info['user_time'],
                         'TIME_RAW' => $member_info['user_time_raw'],
-                    ]);
-
-                    if ($is_moderator) {
-                        template()->assign_block_vars('member.switch_mod_option', []);
-                    }
+                    ];
                 }
             }
 
-            // No group members
-            if (!$members_count) {
-                template()->assign_block_vars('switch_no_members', []);
-            }
-
-            // No group members
-            if ($group_info['group_type'] == GROUP_HIDDEN && !$is_group_member && !$is_moderator) {
-                template()->assign_block_vars('switch_hidden_group', []);
-            }
+            template()->assign_vars([
+                'MEMBER_LIST' => $memberList,
+                'SWITCH_NO_MEMBERS' => !$members_count,
+                'SWITCH_HIDDEN_GROUP' => $group_info['group_type'] == GROUP_HIDDEN && !$is_group_member && !$is_moderator,
+            ]);
 
             // Pending
             if ($is_moderator) {
@@ -559,6 +558,7 @@ if (!$group_id) {
             }
 
             if ($is_moderator && $modgroup_pending_list) {
+                $pendingList = [];
                 foreach ($modgroup_pending_list as $i => $member) {
                     $user_id = $member['user_id'];
 
@@ -566,9 +566,7 @@ if (!$group_id) {
 
                     $row_class = !($i % 2) ? 'row1' : 'row2';
 
-                    $user_select = '<input type="checkbox" name="member[]" value="' . $user_id . '">';
-
-                    template()->assign_block_vars('pending', [
+                    $pendingList[] = [
                         'ROW_CLASS' => $row_class,
                         'AVATAR_IMG' => $pending_info['avatar'],
                         'USER' => profile_url($member),
@@ -580,19 +578,21 @@ if (!$group_id) {
                         'PM' => $pending_info['pm'],
                         'EMAIL' => $pending_info['email'],
                         'WWW' => $pending_info['www'],
-                    ]);
+                    ];
                 }
 
-                template()->assign_vars(['PENDING_USERS' => true]);
+                template()->assign_vars([
+                    'PENDING_USERS' => true,
+                    'PENDING_LIST' => $pendingList,
+                ]);
             }
 
             template()->assign_vars(['MEMBERS' => true]);
     }
 
     if ($is_moderator) {
-        template()->assign_block_vars('switch_mod_option', []);
-        template()->assign_block_vars('switch_add_member', []);
+        template()->assign_vars(['SWITCH_MOD_OPTION' => true]);
     }
 }
 
-print_page('group.tpl');
+print_page('group.twig');

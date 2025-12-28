@@ -1,0 +1,71 @@
+{% if TPL_ADD_ATTACHMENT %}
+<!--========================================================================-->
+
+<style>#clear_file_upload { display: none; }</style>
+
+<tr>
+	<th colspan="2" class="thHead">{% if FILE_ATTACHED %}{{ __('UPDATE_ATTACHMENT') }}{% else %}{{ __('ADD_ATTACHMENT') }}{% endif %}</th>
+</tr>
+<tr>
+	<td class="pad_4"><b>{{ __('FILENAME') }}</b></td>
+	<td>
+		<table class="borderless" cellspacing="0">
+		<tr>
+			<td class="pad_4">
+				<input type="button" id="clear_file_upload" value="{{ __('CLEAR') }}" />
+				<input type="file" name="fileupload" size="45" maxlength="{{ FILESIZE }}" />
+				<input type="submit" class="bold" name="post" value="{% if FILE_ATTACHED %}{{ __('UPDATE_ATTACHMENT') }}{% else %}{{ __('ADD_ATTACHMENT') }}{% endif %}" style="margin-left: 8px;" />
+				<p class="small nowrap">{{ __('ADD_ATTACHMENT_EXPLAIN') }}</p>
+			</td>
+			<td class="med pad_4" style="padding-left: 12px;">{{ RULES|raw }}</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[name="fileupload"]').on('change', function () {
+            if (this.files && this.files.length > 0) {
+                $('input[type=button]#clear_file_upload').show();
+            } else {
+                $('input[type=button]#clear_file_upload').hide();
+            }
+        });
+
+        $('input[type=button]#clear_file_upload').on('click', function () {
+            $('input[name="fileupload"]').val('');
+            $('input[type=button]#clear_file_upload').hide();
+        });
+    });
+</script>
+
+<!--========================================================================-->
+{% endif %}
+
+{% if FILE_ATTACHED %}
+<!--========================================================================-->
+
+<tbody class="pad_4">
+<tr>
+	<th colspan="2" class="thHead">{{ __('POSTED_ATTACHMENTS') }}</th>
+</tr>
+{% for item in ATTACH_ROW %}
+<tr>
+	<td class="row5"><b>{{ __('FILENAME') }}</b></td>
+	<td class="row5"><a class="gen" href="{{ item.U_VIEW_ATTACHMENT }}" target="_blank"><b>{{ item.FILE_NAME }}</b></a></td>
+</tr>
+<tr>
+	<td class="row1">{{ __('OPTIONS') }}</td>
+	<td class="row1">
+		<input type="submit" name="del_attachment[{{ item.ATTACH_FILENAME }}]" value="{{ __('DELETE_ATTACHMENT') }}" />&nbsp;
+	</td>
+</tr>
+<tr>
+	<td colspan="2" class="spaceRow"><div class="spacer_4"></div></td>
+</tr>
+{% endfor %}{# /ATTACH_ROW #}
+</tbody>
+
+<!--========================================================================-->
+{% endif %}

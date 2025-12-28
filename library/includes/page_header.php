@@ -129,7 +129,6 @@ template()->assign_vars([
 
     'SITENAME' => config()->get('sitename'),
     'U_INDEX' => FORUM_PATH,
-    'T_INDEX' => sprintf(__('FORUM_INDEX'), config()->get('sitename')),
 
     'IS_GUEST' => IS_GUEST,
     'IS_USER' => IS_USER,
@@ -249,7 +248,7 @@ if (!IS_GUEST) {
     header('Cache-Control: private, no-cache, no-store, must-revalidate');
 }
 
-template()->set_filenames(['page_header' => 'page_header.tpl']);
+template()->set_filenames(['page_header' => 'page_header.twig']);
 template()->pparse('page_header');
 
 define('PAGE_HEADER_SENT', true);

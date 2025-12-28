@@ -729,6 +729,7 @@ if ($allowed_forums) {
 		";
 
         // Build torrents table
+        $torList = [];
         foreach (DB()->fetch_rowset($sql) as $tor) {
             $dl = $tor['speed_down'] ?? 0;
             $ul = $tor['speed_up'] ?? 0;
@@ -750,7 +751,7 @@ if ($allowed_forums) {
             $forum_id = (!$hide_forum && isset($tor['forum_id'])) ? $tor['forum_id'] : '';
             $poster_id = (!$hide_author && isset($tor['poster_id'])) ? $tor['poster_id'] : '';
 
-            template()->assign_block_vars('tor', [
+            $torList[] = [
                 'CAT_ID' => $cat_id,
                 'CAT_TITLE' => $cat_id ? $cat_title_html[$cat_id] : '',
                 'FORUM_ID' => $forum_id,
@@ -790,8 +791,10 @@ if ($allowed_forums) {
                 'ADDED_RAW' => $tor['reg_time'],
                 'ADDED_TIME' => bb_date($tor['reg_time'], $time_format),
                 'ADDED_DATE' => bb_date($tor['reg_time'], $date_format, false),
-            ]);
+            ];
         }
+
+        template()->assign_vars(['TOR' => $torList]);
     }
 } else {
     template()->assign_vars([
@@ -953,4 +956,4 @@ template()->assign_vars([
     'TR_POSTER_URL' => "{$tracker_url}?{$poster_id_key}=",
 ]);
 
-print_page('tracker.tpl');
+print_page('tracker.twig');

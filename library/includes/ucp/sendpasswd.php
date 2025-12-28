@@ -72,12 +72,10 @@ if (request()->post->has('submit')) {
     $email = $username = '';
 }
 
-template()->assign_vars([
+print_page('usercp_sendpasswd.twig', variables: [
     'USERNAME' => $username,
     'EMAIL' => $email,
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
     'S_HIDDEN_FIELDS' => '',
     'S_PROFILE_ACTION' => PASSWORD_RECOVERY_URL,
 ]);
-
-print_page('usercp_sendpasswd.tpl');

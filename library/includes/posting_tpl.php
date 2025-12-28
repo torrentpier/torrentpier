@@ -77,4 +77,4 @@ if ($edit_tpl_mode) {
     }
 }
 
-print_page('posting_tpl.tpl');
+print_page('posting_tpl.twig');
