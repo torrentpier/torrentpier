@@ -500,9 +500,10 @@ class Post
 		LIMIT ' . config()->get('posts_per_page') . '
 	');
 
-        // Topic posts block
+        // Build review posts array
+        $review = [];
         foreach ($review_posts as $i => $post) {
-            template()->assign_block_vars('review', [
+            $review[] = [
                 'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
                 'POSTER' => profile_url($post),
                 'POSTER_NAME_JS' => addslashes($post['username']),
@@ -510,11 +511,12 @@ class Post
                 'POST_DATE' => bb_date($post['post_time'], config()->get('post_date_format')),
                 'IS_UNREAD' => is_unread($post['post_time'], $topic_id, $post['forum_id']),
                 'MESSAGE' => bbcode()->getParsedPost($post),
-            ]);
+            ];
         }
 
         template()->assign_vars([
             'TPL_TOPIC_REVIEW' => (bool)$review_posts,
+            'REVIEW' => $review,
         ]);
     }
 }

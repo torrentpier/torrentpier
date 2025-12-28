@@ -1,0 +1,419 @@
+<div class="clear"></div>
+
+<div class="spacer_8"></div>
+
+{% for unreg_item in UNREGISTERED_TORRENT %}
+<table class="attach bordered med">
+	<tr class="row3">
+		<th colspan="3">{{ unreg_item.DOWNLOAD_NAME }}</th>
+	</tr>
+	<tr class="row1">
+		<td width="15%">{{ __('TORRENT') }}:</td>
+		<td width="70%">{{ unreg_item.TRACKER_LINK }}</td>
+		<td width="15%" rowspan="3" class="tCenter pad_6">
+			<p>{{ unreg_item.S_UPLOAD_IMAGE }}</p>
+			<p>{{ __('DOWNLOAD') }}</p>
+			<p class="small">{{ unreg_item.FILESIZE }}</p>
+		</td>
+	</tr>
+	<tr class="row1">
+		<td>{{ __('ADDED') }}:</td>
+		<td>{{ unreg_item.POSTED_TIME }}</td>
+	</tr>
+	<tr class="row1">
+		<td>{{ __('DOWNLOADED') }}:</td>
+		<td>{{ unreg_item.DOWNLOAD_COUNT }} {% if SHOW_DL_LIST_LINK %}&nbsp;[ <a href="{{ DL_LIST_HREF }}" class="med">{{ __('SHOW_DL_LIST') }}</a> ] {% endif %}</td>
+	</tr>
+    {% if TOR_CONTROLS %}
+    <tr class="row3 tCenter">
+        <td colspan="3">
+            <script type="text/javascript">
+                ajax.callback.change_torrent = function (data) {
+                    if (data.title) alert(data.title);
+                    if (data.url) document.location.href = data.url;
+                };
+            </script>
+            <script type="text/javascript">
+                function change_torrents() {
+                    ajax.exec({
+                        action: 'change_torrent',
+                        topic_id: {{ TOPIC_ID }},
+                        type: $('#tor-select-{{ TOPIC_ID }}').val(),
+                    });
+                }
+            </script>
+            <select name="tor_action" id="tor-select-{{ TOPIC_ID }}"
+                    onchange="$('#tor-confirm-{{ TOPIC_ID }}').attr('checked', false); $('#tor-submit-{{ TOPIC_ID }}').attr('disabled', true);">
+                <option value="" selected class="select-action">&raquo; {{ __('SELECT_ACTION') }}</option>
+                <option value="del_torrent">{{ __('DELETE_TORRENT') }}</option>
+                <option value="del_torrent_move_topic">{{ __('DELETE_MOVE_TORRENT') }}</option>
+            </select>
+            <a href="#"
+               onclick="change_torrents($('#tor-{{ TOPIC_ID }} select').val()); return false;"><input
+                    type="submit" value="{{ __('SUBMIT') }}" class="liteoption"/></a>
+        </td>
+    </tr>
+    {% endif %}
+</table>
+
+<div class="spacer_12"></div>
+{% endfor %}{# /UNREGISTERED_TORRENT #}
+
+{% for torrent_item in TORRENT %}
+
+{% if TOR_BLOCKED %}
+<table id="tor_blocked" class="error">
+	<tr><td><p class="error_msg">{{ TOR_BLOCKED_MSG }}</p></td></tr>
+</table>
+
+<div class="spacer_12"></div>
+{% else %}
+{% if SHOW_RATIO_WARN %}
+<table id="tor_blocked" class="error">
+	<tr><td><p class="error_msg">{{ RATIO_WARN_MSG }}</p></td></tr>
+</table>
+
+<div class="spacer_12"></div>
+{% endif %}
+
+<table class="attach bordered med">
+	<tr class="row3">
+		<th colspan="3" class="{{ torrent_item.DL_LINK_CLASS }}">{{ torrent_item.DOWNLOAD_NAME }}
+		<a href="{{ constant('FILELIST_URL') }}{{ TOPIC_ID }}/files/" title="{{ __('BT_FLIST_LINK_TITLE') }}" target="_blank"><img alt="{{ __('BT_FLIST_LINK_TITLE') }}" src="{{ torrent_item.FILELIST_ICON }}" width="12" height="12" border="0"></a>
+		{% if torrent_item.MAGNET and not torrent_item.TOR_FROZEN %}&nbsp;{{ torrent_item.MAGNET|raw }}{% endif %}</th>
+	</tr>
+    {% if torrent_item.TOR_TYPE %}
+    <tr class="row4">
+        <th colspan="3" class="row7">{{ torrent_item.TOR_TYPE|raw }}&nbsp;{% if torrent_item.TOR_SILVER_GOLD == 2 %}{{ __('SILVER_STATUS') }}{% elseif torrent_item.TOR_SILVER_GOLD == 1 %}{{ __('GOLD_STATUS') }}{% endif %}&nbsp;{{ torrent_item.TOR_TYPE|raw }}</th>
+    </tr>
+    {% endif %}
+	<tr class="row1">
+		<td width="15%">{{ __('TORRENT') }}:</td>
+		<td width="70%">
+			{{ torrent_item.TRACKER_LINK }}
+			[ <span title="{{ torrent_item.REGED_DELTA }}">{{ torrent_item.REGED_TIME }}</span> ]
+            {% if not torrent_item.TOR_FROZEN %}
+            <br/>{% if torrent_item.HASH %}<br/>info_hash: <span class="copyElement" data-clipboard-text="{{ torrent_item.HASH }}" title="{{ __('COPY_TO_CLIPBOARD') }}">{{ torrent_item.HASH }}</span>{% endif %}
+            {% if torrent_item.HASH_V2 %}<br/>info_hash v2: <span class="copyElement" data-clipboard-text="{{ torrent_item.HASH_V2 }}" title="{{ __('COPY_TO_CLIPBOARD') }}">{{ torrent_item.HASH_V2 }}</span>{% endif %}
+            {% endif %}
+        </td>
+		<td width="15%" rowspan="4" class="tCenter pad_6">
+			{% if torrent_item.TOR_FROZEN %}
+			<p>{{ torrent_item.S_UPLOAD_IMAGE }}</p><p>{{ __('DOWNLOAD') }}</p>
+			{% else %}
+			<a href="{{ torrent_item.U_DOWNLOAD_LINK }}" class="{{ torrent_item.DL_LINK_CLASS }}">
+			<p>{{ torrent_item.S_UPLOAD_IMAGE }}</p><p><b>{{ __('DOWNLOAD') }}</b></p></a>
+			{% endif %}
+			<p class="small">{{ torrent_item.FILESIZE }}</p>
+			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{{ __('BT_FLIST') }}" /></p>
+			{% if not torrent_item.TOR_FROZEN %}
+			{% for tor_server_item in torrent_item.TOR_SERVER %}
+			{% if tor_server_item.TORR_SERVER_M3U_LINK %}
+			<hr/>
+			<a href="{{ tor_server_item.TORR_SERVER_M3U_LINK }}" target="_blank"><p><img alt="{{ __('PLAYBACK_M3U') }}" src="{{ tor_server_item.TORR_SERVER_M3U_ICON }}" width="21" height="21" border="0"></p>{{ __('PLAYBACK_M3U') }}</a>
+			{% endif %}
+			{% endfor %}{# /TOR_SERVER #}
+			{% endif %}
+		</td>
+	</tr>
+	<tr class="row1">
+		<td>{{ __('TOR_STATUS') }}:</td>
+		<td>
+			<span id="tor-{{ TOPIC_ID }}-status">{{ torrent_item.TOR_STATUS_ICON }} <b>{{ torrent_item.TOR_STATUS_TEXT }}</b>
+			{% if torrent_item.TOR_STATUS_BY %}{{ torrent_item.TOR_STATUS_BY|raw }}{% endif %}
+			</span>
+			{% if torrent_item.TOR_STATUS_REPLY or AUTH_MOD %}
+			<script type="text/javascript">
+				ajax.change_tor_status = function(mode) {
+					ajax.exec({
+						action    : 'change_tor_status',
+						topic_id  : {{ TOPIC_ID }},
+						mode      : mode,
+						status    : $('#sel_status').val(),
+						comment   : $('#comment').val(),
+					});
+				};
+				ajax.callback.change_tor_status = function(data) {
+				{% if AUTH_MOD %}
+					$('#tor-'+ data.topic_id +'-status').html(data.status);
+				{% elseif torrent_item.TOR_STATUS_REPLY %}
+					$('#tor_comment').html('{{ __('TOR_AUTH_SENT_COMMENT') }}');
+				{% endif %}
+					$('#comment').attr('value', '');
+				};
+			</script>
+
+			<span id="tor_comment">
+			{% if config('tor_comment') %}
+			<input type="text" id="comment" placeholder="{{ __('COMMENT') }}" />
+			{% endif %}
+
+			{% if AUTH_MOD %}
+			<span id="tor-{{ TOPIC_ID }}">{{ torrent_item.TOR_STATUS_SELECT }}</span>
+			<a href="#" onclick="ajax.change_tor_status('status'); return false;"><input type="submit" value="{{ __('EDIT') }}" class="liteoption" /></a>
+			{% elseif torrent_item.TOR_STATUS_REPLY %}
+			<a href="#" onclick="ajax.change_tor_status('status_reply'); return false;"><input type="submit" value="{{ __('TOR_AUTH_FIXED') }}" class="liteoption" /></a>
+			{% endif %}
+			</span>
+			{% endif %}
+		</td>
+	</tr>
+	<tr class="row1">
+		<td>{{ __('DOWNLOADED') }}:</td>
+		<td><span title="{{ __('COMPLETED') }}: {{ torrent_item.COMPLETED }}">{{ torrent_item.DOWNLOAD_COUNT }}</span></td>
+	</tr>
+	<tr class="row1">
+		<td>{{ __('SIZE') }}:</td>
+		<td>{{ torrent_item.TORRENT_SIZE }}</td>
+	</tr>
+    {% if TOR_CONTROLS %}
+    <tr class="row3 tCenter">
+        <td colspan="3">
+            <script type="text/javascript">
+                ajax.callback.change_torrent = function (data) {
+                    if (data.title) alert(data.title);
+                    if (data.url) document.location.href = data.url;
+                };
+            </script>
+            <script type="text/javascript">
+                function change_torrents() {
+                    ajax.exec({
+                        action: 'change_torrent',
+                        topic_id: {{ TOPIC_ID }},
+                        type: $('#tor-select-{{ TOPIC_ID }}').val(),
+                    });
+                }
+            </script>
+            <select name="tor_action" id="tor-select-{{ TOPIC_ID }}"
+                    onchange="$('#tor-confirm-{{ TOPIC_ID }}').attr('checked', false); $('#tor-submit-{{ TOPIC_ID }}').attr('disabled', true);">
+                <option value="" selected class="select-action">&raquo; {{ __('SELECT_ACTION') }}</option>
+                <option value="del_torrent">{{ __('DELETE_TORRENT') }}</option>
+                <option value="del_torrent_move_topic">{{ __('DELETE_MOVE_TORRENT') }}</option>
+                {% if AUTH_MOD %}
+                {% if config('tracker.gold_silver_enabled') %}
+                {% if torrent_item.TOR_SILVER_GOLD == 1 %}
+                <option value="unset_silver_gold">{{ __('UNSET_GOLD_TORRENT') }} / {{ __('UNSET_SILVER_TORRENT') }}</option>
+                <option value="set_silver">{{ __('SET_SILVER_TORRENT') }}</option>
+                {% elseif torrent_item.TOR_SILVER_GOLD == 2 %}
+                <option value="unset_silver_gold">{{ __('UNSET_GOLD_TORRENT') }} / {{ __('UNSET_SILVER_TORRENT') }}</option>
+                <option value="set_gold">{{ __('SET_GOLD_TORRENT') }}</option>
+                {% else %}
+                <option value="set_gold">{{ __('SET_GOLD_TORRENT') }}</option>
+                <option value="set_silver">{{ __('SET_SILVER_TORRENT') }}</option>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+            </select>
+            <a href="#"
+               onclick="change_torrents($('#tor-{{ TOPIC_ID }} select').val()); return false;"><input
+                    type="submit" value="{{ __('EDIT') }}" class="liteoption"/></a>
+        </td>
+    </tr>
+    {% endif %}
+    {% if TOR_HELP_LINKS %}
+    <tr class="row3 tCenter">
+        <td colspan="3">{{ TOR_HELP_LINKS }}</td>
+    </tr>
+    {% endif %}
+</table>
+
+<script type="text/javascript">
+function humn_size (size) {
+	var i = 0;
+	var units = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+	while ((size/1024) >= 1) {
+		size = size/1024;
+		i++;
+	}
+	size = new String(size);
+	if (size.indexOf('.') != -1) {
+		size = size.substring(0, size.indexOf('.') + 3);
+	}
+	return size + ' ' + units[i];
+}
+
+ajax.tor_filelist_loaded = false;
+$('#tor-filelist-btn').click(function () {
+    if (ajax.tor_filelist_loaded) {
+        $('#tor-fl-wrap').toggle();
+        return false;
+    } else {
+        $("#tor-filelist-btn").attr('disabled', true);
+    }
+    $('#tor-fl-wrap').show();
+
+    ajax.exec({
+        action: 'view_torrent',
+        topic_id: {{ TOPIC_ID }}
+    });
+    ajax.callback.view_torrent = function (data) {
+        $('#tor-filelist').html(data.html);
+        $('#tor-filelist > ul.tree-root').treeview({
+            control: "#tor-fl-treecontrol"
+        });
+        $('#tor-filelist li.collapsable').each(function () {
+            var $li = $(this);
+            var dir_size = 0;
+            $('i', $li).each(function () {
+                dir_size += parseInt(this.innerHTML)
+            });
+            $('span.b:first', $li).append(' &middot; <s>' + humn_size(dir_size) + '</s>');
+        });
+        $('#tor-filelist i').each(function () {
+            var size_bytes = this.innerHTML;
+            this.innerHTML = '(' + size_bytes + ')';
+            $(this).prepend('<s>' + humn_size(size_bytes) + '</s> ');
+        });
+        ajax.tor_filelist_loaded = true;
+        $("#tor-filelist-btn").attr('disabled', false);
+    };
+    $('#tor-fl-treecontrol a').click(function () {
+        this.blur();
+    });
+    return false;
+});
+</script>
+
+<style>
+#tor-fl-wrap {
+	margin: 12px auto 0; width: 95%;
+}
+#fl-tbl-wrap { margin: 2px 14px 16px 14px; }
+#tor-filelist {
+	margin: 0 2px; padding: 8px 6px;
+	max-height: 284px; overflow: auto;
+}
+.tor-filelist-fullsize { max-height: unset !important; }
+#tor-filelist i { color: #7A7A7A; padding-left: 4px; }
+#tor-filelist s { color: #0000FF; text-decoration: none; }
+#tor-filelist .b > s { color: #800000; }
+#tor-filelist .b { font-weight: bold; padding-left: 20px; background: transparent url('{{ FORUM_PATH }}assets/images/folder.gif') no-repeat 3px 50%;}
+#tor-filelist ul li span { padding-left: 20px; background: transparent url('{{ FORUM_PATH }}assets/images/page.gif') no-repeat 3px 50%;}
+#tor-filelist .tor-root-dir { font-size: 13px; font-weight: bold; line-height: 12px; padding-left: 4px; }
+#tor-fl-treecontrol { padding: 2px 0 4px; }
+#tor-fl-treecontrol a { padding: 0 8px; font-size: 11px; text-decoration: none; }
+#tor-fl-bgn { width: 200px; height: 300px; margin-right: 6px; border: 1px solid #B5BEC4;}
+</style>
+
+<div id="tor-fl-wrap" class="border bw_TRBL row2 hidden">
+<div id="fl-tbl-wrap">
+	<table class="w100 borderless" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+			<div style="float: left;" id="tor-fl-treecontrol">
+				<a href="#">{{ __('COLLAPSE') }}</a>&middot;<a href="#">{{ __('EXPAND') }}</a>&middot;<a href="#">{{ __('SWITCH') }}</a>
+			</div>
+			<div style="float: right; padding: 2px 0 4px;">
+				<a style="padding: 0 8px; font-size: 11px; text-decoration: none;" href="#" onclick="$('#tor-filelist').toggleClass('tor-filelist-fullsize'); return false;">{{ __('TOGGLE_WINDOW_FULL_SIZE') }}</a>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="vTop" style="width: 100%;"><div id="tor-filelist" class="border bw_TRBL med row1"><span class="loading-1">{{ __('LOADING') }}</span></div></td>
+	</tr>
+	</table>
+</div>
+</div>
+
+{% if config('tor_thank') %}
+<style type="text/css">
+    #thx-block {
+        width: 95%;
+        margin: 12px auto 0;
+    }
+
+    #thx-block .sp-wrap {
+        width: 100% !important;
+    }
+
+    #thx-btn-div {
+        text-align: center;
+        margin: 0 0 12px;
+    }
+
+    #thx-list a {
+        text-decoration: none;
+    }
+
+    #thx-list b {
+        font-size: 11px;
+        color: #2E2E2E;
+        white-space: nowrap;
+    }
+
+    #thx-list i {
+        font-weight: normal;
+        color: #000000;
+    }
+
+    #thx-list u {
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $thx_head = $('#thx-block').find('.sp-head');
+        $thx_btn = $('#thx-btn');
+        close_thx_list();
+
+        $thx_btn.one('click', function () {
+            ajax.thx('add');
+            $(this).prop({disabled: true});
+        });
+        $thx_head.one('click', function () {
+            ajax.thx('get');
+        });
+    });
+
+    ajax.thx = function (mode) {
+        ajax.exec({
+            action: 'thx',
+            mode: mode,
+            topic_id: {{ TOPIC_ID }},
+            poster_id: {{ POSTER_ID }}
+        });
+    }
+    ajax.callback.thx = function (data) {
+        if (data.mode === 'add') {
+            $thx_btn.hide().after('<h2 style="color: green;">' + '{{ __('THANKS_GRATITUDE') }}' + '!<h2>');
+            open_thx_list();
+        } else {
+            $('#thx-list').html(data.html);
+        }
+    }
+
+    function thx_is_visible() {
+        return $('#thx-list').is(':visible');
+    }
+
+    function open_thx_list() {
+        ajax.thx('get');
+        if (!thx_is_visible()) {
+            $thx_head.click();
+        }
+    }
+
+    function close_thx_list() {
+        if (thx_is_visible()) {
+            $thx_head.click();
+        }
+    }
+</script>
+<div id="thx-block">
+    {% if not IS_GUEST %}
+    <div id="thx-btn-div">
+        <input id="thx-btn" type="button" class="bold" style="width: 200px;" value="{{ __('THANK_TOPIC') }}">
+    </div>
+    {% endif %}
+    {% if not IS_GUEST or config('tor_thanks_list_guests') %}
+    <div class="sp-wrap">
+        <div id="thx-list" class="sp-body" data-no-sp-open="true" title="{{ __('LAST_LIKES') }}"></div>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+<div class="spacer_12"></div>
+{% endif %}
+
+{% endfor %}{# /TORRENT #}

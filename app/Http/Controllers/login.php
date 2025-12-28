@@ -134,7 +134,7 @@ if (request()->post->has('login')) {
 
 // Login page
 if (IS_GUEST || $mod_admin_login) {
-    template()->assign_vars([
+    print_page('login.twig', variables: [
         'LOGIN_USERNAME' => htmlCHR($login_username),
         'LOGIN_PASSWORD' => htmlCHR($login_password),
         'ERROR_MESSAGE' => implode('<br />', $login_errors),
@@ -144,8 +144,6 @@ if (IS_GUEST || $mod_admin_login) {
         'PAGE_TITLE' => __('LOGIN'),
         'S_LOGIN_ACTION' => LOGIN_URL,
     ]);
-
-    print_page('login.tpl');
 }
 
 redirect($redirect_url);

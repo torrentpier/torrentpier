@@ -121,7 +121,7 @@ $savebox_url = ($folder != 'savebox' || $mode != '') ? '<a href="' . PM_URL . '?
 //
 // Start main
 //
-template()->assign_var('POSTING_SUBJECT');
+template()->assign_vars(['POSTING_SUBJECT' => true]);
 
 if ($mode == 'read') {
     if (request()->query->has(POST_POST_URL)) {
@@ -350,7 +350,7 @@ if ($mode == 'read') {
     //
     // Load templates
     //
-    template()->set_filenames(['body' => 'privmsgs_read.tpl']);
+    template()->set_filenames(['body' => 'privmsgs_read.twig']);
 
     template()->assign_vars([
         'INBOX' => $inbox_url,
@@ -1089,13 +1089,15 @@ if ($mode == 'read') {
     //
     // Load templates
     //
-    template()->set_filenames(['body' => 'posting.tpl']);
+    template()->set_filenames(['body' => 'posting.twig']);
 
     //
     // Enable extensions in posting_body
     //
-    template()->assign_block_vars('switch_privmsg', []);
-    template()->assign_var('POSTING_USERNAME');
+    template()->assign_vars([
+        'IN_PM' => true,
+        'POSTING_USERNAME' => true,
+    ]);
 
     //
     // Assign posting title & hidden fields
@@ -1180,7 +1182,7 @@ if ($mode == 'read') {
     //
     // Load templates
     //
-    template()->set_filenames(['body' => 'privmsgs.tpl']);
+    template()->set_filenames(['body' => 'privmsgs.twig']);
 
     //
     // New message
@@ -1381,6 +1383,7 @@ if ($mode == 'read') {
         bb_die('Could not query private messages');
     }
 
+    $listrow = [];
     if ($row = DB()->sql_fetchrow($result)) {
         $i = 0;
         do {
@@ -1408,7 +1411,7 @@ if ($mode == 'read') {
             $row_class = !($i & 1) ? 'row1' : 'row2';
             $i++;
 
-            template()->assign_block_vars('listrow', [
+            $listrow[] = [
                 'ROW_CLASS' => $row_class,
                 'FROM' => $msg_user,
                 'SUBJECT' => htmlCHR($msg_subject),
@@ -1419,13 +1422,15 @@ if ($mode == 'read') {
                 'L_PRIVMSG_FOLDER_ALT' => $icon_flag_alt,
                 'S_MARK_ID' => $privmsg_id,
                 'U_READ' => $u_subject,
-            ]);
+            ];
         } while ($row = DB()->sql_fetchrow($result));
 
         generate_pagination(PM_URL . "?folder={$folder}", $pm_total, config()->get('topics_per_page'), $start);
-    } else {
-        template()->assign_block_vars('switch_no_messages', []);
     }
+    template()->assign_vars([
+        'LISTROW' => $listrow,
+        'NO_MESSAGES' => empty($listrow),
+    ]);
 }
 
 template()->assign_vars(['PAGE_TITLE' => @$page_title]);
