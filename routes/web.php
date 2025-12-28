@@ -9,7 +9,6 @@
  */
 
 use TorrentPier\Http\Controllers\RobotsController;
-use TorrentPier\Http\Middleware\TrailingSlashRedirect;
 use TorrentPier\Router\LegacyAdapter;
 use TorrentPier\Router\Router;
 use TorrentPier\Router\SemanticUrl\LegacyRedirect;
@@ -40,59 +39,44 @@ return function (Router $router): void {
 
     // ==============================================================
     // SEO-friendly semantic routes (must be defined before legacy routes)
-    // Format: /type/slug.id/
+    // Format: /type/slug.id
     // ==============================================================
 
-    // Threads: /threads/slug.123/
-    $router->any('/threads/{params}/', new RouteAdapter('threads'));
-    $router->get('/threads/{params}', new TrailingSlashRedirect);
+    // Threads: /threads/slug.123
+    $router->any('/threads/{params}[/]', new RouteAdapter('threads'));
 
-    // Forums: /forums/slug.123/
-    $router->any('/forums/{params}/', new RouteAdapter('forums'));
-    $router->get('/forums/{params}', new TrailingSlashRedirect);
+    // Forums: /forums/slug.123
+    $router->any('/forums/{params}[/]', new RouteAdapter('forums'));
 
-    // Groups: /groups/ (list), /groups/slug.123/, /groups/slug.123/edit/
-    $router->any('/groups/', new LegacyAdapter($basePath . '/app/Http/Controllers/group.php', 'group'))
+    // Groups: /groups (list), /groups/slug.123, /groups/slug.123/edit
+    $router->any('/groups[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/group.php', 'group'))
         ->middleware($auth);
-    $router->get('/groups', new TrailingSlashRedirect);
-    $router->any('/groups/{params}/edit/', new RouteAdapter('groups_edit'))
+    $router->any('/groups/{params}/edit[/]', new RouteAdapter('groups_edit'))
         ->middleware($auth);
-    $router->get('/groups/{params}/edit', new TrailingSlashRedirect);
-    $router->any('/groups/{params}/', new RouteAdapter('groups'))
+    $router->any('/groups/{params}[/]', new RouteAdapter('groups'))
         ->middleware($auth);
-    $router->get('/groups/{params}', new TrailingSlashRedirect);
 
-    // Categories: /categories/slug.123/
-    $router->any('/categories/{params}/', new RouteAdapter('categories'));
-    $router->get('/categories/{params}', new TrailingSlashRedirect);
+    // Categories: /categories/slug.123
+    $router->any('/categories/{params}[/]', new RouteAdapter('categories'));
 
     // Profile standalone pages (static routes MUST come before variable routes)
-    $router->any('/profile/bonus/', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'bonus']))
+    $router->any('/profile/bonus[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'bonus']))
         ->middleware($auth);
-    $router->get('/profile/bonus', new TrailingSlashRedirect);
-    $router->any('/profile/watchlist/', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'watch']))
+    $router->any('/profile/watchlist[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'watch']))
         ->middleware($auth);
-    $router->get('/profile/watchlist', new TrailingSlashRedirect);
 
-    // Members: /members/ (list), /members/slug.123/ (profile), /members/slug.123/email/
-    $router->any('/members/', new LegacyAdapter($basePath . '/app/Http/Controllers/memberlist.php'))
+    // Members: /members (list), /members/slug.123 (profile), /members/slug.123/email
+    $router->any('/members[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/memberlist.php'))
         ->middleware($auth);
-    $router->get('/members', new TrailingSlashRedirect);
-    $router->any('/members/{params}/email/', new RouteAdapter('members', options: ['action' => 'email']));
-    $router->get('/members/{params}/email', new TrailingSlashRedirect);
-    $router->any('/members/{params}/', new RouteAdapter('members'));
-    $router->get('/members/{params}', new TrailingSlashRedirect);
+    $router->any('/members/{params}/email[/]', new RouteAdapter('members', options: ['action' => 'email']));
+    $router->any('/members/{params}[/]', new RouteAdapter('members'));
 
     // Standalone auth/account pages
-    $router->any('/register/', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'register']));
-    $router->get('/register', new TrailingSlashRedirect);
-    $router->any('/settings/', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'editprofile']))
+    $router->any('/register[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'register']));
+    $router->any('/settings[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'editprofile']))
         ->middleware($auth);
-    $router->get('/settings', new TrailingSlashRedirect);
-    $router->any('/password-recovery/', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'sendpassword']));
-    $router->get('/password-recovery', new TrailingSlashRedirect);
-    $router->any('/activate/{u}/{key}/', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'activate']));
-    $router->get('/activate/{u}/{key}', new TrailingSlashRedirect);
+    $router->any('/password-recovery[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'sendpassword']));
+    $router->any('/activate/{u}/{key}[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'activate']));
 
     // ==============================================================
     // Migrated controllers (in app/Http/Controllers/)
@@ -100,26 +84,20 @@ return function (Router $router): void {
 
     // Index (homepage) and forum map
     $router->any('/', new LegacyAdapter($basePath . '/app/Http/Controllers/index.php'));
-    $router->get('/map/', new LegacyAdapter($basePath . '/app/Http/Controllers/index.php', options: ['map' => 1]));
-    $router->get('/map', new TrailingSlashRedirect);
+    $router->get('/map[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/index.php', options: ['map' => 1]));
 
-    // Downloads: /dl/123/, /dl/123/files/, /dl/123/list/
-    $router->get('/dl/{t}/', new LegacyAdapter($basePath . '/app/Http/Controllers/dl.php'));
-    $router->get('/dl/{t}', new TrailingSlashRedirect);
-    $router->get('/dl/{t}/files/', new LegacyAdapter($basePath . '/app/Http/Controllers/filelist.php'));
-    $router->get('/dl/{t}/files', new TrailingSlashRedirect);
-    $router->any('/dl/{t}/list/', new LegacyAdapter($basePath . '/app/Http/Controllers/dl_list.php'));
-    $router->get('/dl/{t}/list', new TrailingSlashRedirect);
+    // Downloads: /dl/123, /dl/123/files, /dl/123/list
+    $router->get('/dl/{t}[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/dl.php'));
+    $router->get('/dl/{t}/files[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/filelist.php'));
+    $router->any('/dl/{t}/list[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/dl_list.php'));
 
-    // Feed: /feed/f/123/ (forum), /feed/u/123/ (user)
-    $router->get('/feed/{type}/{id}/', new LegacyAdapter($basePath . '/app/Http/Controllers/feed.php'))
+    // Feed: /feed/f/123 (forum), /feed/u/123 (user)
+    $router->get('/feed/{type}/{id}[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/feed.php'))
         ->middleware($auth);
-    $router->get('/feed/{type}/{id}', new TrailingSlashRedirect);
 
-    // Playback: /playback/123/
-    $router->get('/playback/{t}/', new LegacyAdapter($basePath . '/app/Http/Controllers/playback_m3u.php'))
+    // Playback: /playback/123
+    $router->get('/playback/{t}[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/playback_m3u.php'))
         ->middleware($auth);
-    $router->get('/playback/{t}', new TrailingSlashRedirect);
 
     // GET
     $router->get('/info', new LegacyAdapter($basePath . '/app/Http/Controllers/info.php'));
@@ -145,13 +123,13 @@ return function (Router $router): void {
     // Legacy routes with redirects to SEO-friendly URLs
     // ==============================================================
 
-    // viewtopic?t=123 -> /threads/slug.123/
+    // viewtopic?t=123 -> /threads/slug.123
     $router->any('/viewtopic', new LegacyRedirect(
         'threads',
         $basePath . '/app/Http/Controllers/viewtopic.php',
     ));
 
-    // viewforum?f=123 -> /forums/slug.123/
+    // viewforum?f=123 -> /forums/slug.123
     $router->any('/viewforum', new LegacyRedirect(
         'forums',
         $basePath . '/app/Http/Controllers/viewforum.php',

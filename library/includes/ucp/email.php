@@ -68,14 +68,12 @@ if ($row = DB()->fetch_row($sql)) {
         }
     }
 
-    template()->assign_vars([
+    print_page('usercp_email.twig', variables: [
         'USERNAME' => profile_url($row),
         'S_HIDDEN_FIELDS' => '',
         'S_POST_ACTION' => url()->memberEmail($user_id, $username),
         'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
     ]);
-
-    print_page('usercp_email.tpl');
 } else {
     bb_die(__('USER_NOT_EXIST'));
 }

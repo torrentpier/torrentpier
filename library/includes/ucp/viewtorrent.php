@@ -48,11 +48,12 @@ foreach ($sql as $rowset) {
     }
 }
 
+$releasedList = [];
 if ($releasing) {
     foreach ($releasing as $i => $row) {
         $topic_title = $row['topic_title'];
 
-        template()->assign_block_vars('released', [
+        $releasedList[] = [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
             'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>{$topic_title}</s>",
@@ -62,17 +63,18 @@ if ($releasing) {
             'TOPIC_SEEDERS' => ($row['seeders']) ?: 0,
             'TOPIC_LEECHERS' => ($row['leechers']) ?: 0,
             'SPEED_UP' => ($row['speed_up']) ? humn_size($row['speed_up'], min: 'KB') . '/s' : '-',
-        ]);
+        ];
 
         $releasing_count++;
     }
 }
 
+$seedList = [];
 if ($seeding) {
     foreach ($seeding as $i => $row) {
         $topic_title = $row['topic_title'];
 
-        template()->assign_block_vars('seed', [
+        $seedList[] = [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
             'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>{$topic_title}</s>",
@@ -82,19 +84,20 @@ if ($seeding) {
             'TOPIC_SEEDERS' => ($row['seeders']) ?: 0,
             'TOPIC_LEECHERS' => ($row['leechers']) ?: 0,
             'SPEED_UP' => ($row['speed_up']) ? humn_size($row['speed_up'], min: 'KB') . '/s' : '-',
-        ]);
+        ];
 
         $seeding_count++;
     }
 }
 
+$leechList = [];
 if ($leeching) {
     foreach ($leeching as $i => $row) {
         $compl_size = ($row['remain'] && $row['size'] && ($row['size'] > $row['remain'])) ? ($row['size'] - $row['remain']) : 0;
         $compl_perc = $compl_size ? floor($compl_size * 100 / $row['size']) : 0;
         $topic_title = $row['topic_title'];
 
-        template()->assign_block_vars('leech', [
+        $leechList[] = [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
             'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>{$topic_title}</s>",
@@ -105,7 +108,7 @@ if ($leeching) {
             'TOPIC_SEEDERS' => ($row['seeders']) ?: 0,
             'TOPIC_LEECHERS' => ($row['leechers']) ?: 0,
             'SPEED_DOWN' => ($row['speed_down']) ? humn_size($row['speed_down'], min: 'KB') . '/s' : '-',
-        ]);
+        ];
 
         $leeching_count++;
     }
@@ -118,4 +121,7 @@ template()->assign_vars([
     'L_SEEDINGS' => __('SEEDING') . ': ' . (($seeding_count) ? "<b>{$seeding_count}</b>" : '0'),
     'L_LEECHINGS' => __('LEECHING') . ': ' . (($leeching_count) ? "<b>{$leeching_count}</b>" : '0'),
     'USER_DLS' => $releasing_count || $seeding_count || $leeching_count,
+    'RELEASED' => $releasedList,
+    'SEED' => $seedList,
+    'LEECH' => $leechList,
 ]);

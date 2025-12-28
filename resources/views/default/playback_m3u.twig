@@ -1,0 +1,85 @@
+<h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
+
+<script type="text/javascript">
+    ajax.ffprobe_info = function (file_index, is_audio) {
+        ajax.exec({
+            action: 'ffprobe_info',
+            topic_id: {{ TOPIC_ID }},
+            info_hash: '{{ INFO_HASH }}',
+            file_index: file_index,
+            is_audio: is_audio
+        });
+    };
+    ajax.callback.ffprobe_info = function (data) {
+        if (data.ffprobe_data) {
+            $('#ffprobe_' + data.file_index).html(data.ffprobe_data);
+        } else {
+            if ($('#ffprobe_' + data.file_index).find('span.warnColor2').length >= 3) {
+                $('#ffprobe_' + data.file_index).html('<hr/><span class="warnColor2">{{ __('M3U_FFPROBE_NO_DATA') }}</span>');
+            } else {
+                $('#ffprobe_' + data.file_index).append('<hr/><span class="warnColor2">{{ __('PLEASE_TRY_AGAIN') }}</span>');
+            }
+        }
+    }
+</script>
+
+<table class="forumline">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>{{ FILES_COUNT_TITLE }}</th>
+        <th>{{ __('STREAM') }}</th>
+    </tr>
+    </thead>
+    {% if HAS_ITEMS %}
+    {% for item in M3ULIST %}
+    <tbody>
+    <tr class="{{ item.ROW_CLASS }} tCenter">
+        <td>{{ item.ROW_NUMBER }}</td>
+        <td width="40%"><b>{{ item.TITLE }}</b>
+            <div id="ffprobe_{{ item.FILE_INDEX }}">
+                <hr/>
+                <input onclick="ajax.ffprobe_info({{ item.FILE_INDEX }}, {{ item.IS_AUDIO }});" type="button" value="{{ __('SHOW_MORE_INFORMATION_FILE') }}">
+            </div>
+        </td>
+        <td>
+            <a href="#" onclick="return false;" class="copyElement" data-clipboard-text="{{ item.STREAM_LINK }}">{{ __('COPY_STREAM_LINK') }}</a>&nbsp;&middot;
+            <a target="_blank" href="{{ item.M3U_DL_LINK }}">{{ __('DOWNLOAD_M3U_FILE') }}</a>
+            <hr/>
+            {% if item.IS_VALID %}
+                {% if item.IS_AUDIO %}
+                    <audio preload="none" src="{{ item.STREAM_LINK }}" controls></audio>
+                {% else %}
+                    <video preload="none" width="500" height="auto" src="{{ item.STREAM_LINK }}" controls></video>
+                {% endif %}
+            {% else %}
+                <span class="warnColor2">{{ __('M3U_NOT_SUPPORTED') }}</span>
+            {% endif %}
+        </td>
+    </tr>
+    </tbody>
+    {% endfor %}{# /M3ULIST #}
+    {% else %}
+    <tbody>
+    <tr>
+        <td class="row1 tCenter pad_8" colspan="3">{{ __('NO_ITEMS') }}</td>
+    </tr>
+    </tbody>
+    {% endif %}
+    <tfoot>
+    <tr>
+        <td class="catBottom warnColor1" colspan="4">{{ __('M3U_NOTICE') }}</td>
+    </tr>
+    </tfoot>
+</table>
+
+<!--bottom_info-->
+<div class="bottom_info">
+    <div class="spacer_8"></div>
+    <a href="{{ U_TOPIC }}">{{ __('TOPIC_RETURN') }}</a>
+    <div id="timezone">
+        <p>{{ CURRENT_TIME }}</p>
+        <p>{{ S_TIMEZONE }}</p>
+    </div>
+    <div class="clear"></div>
+</div><!--/bottom_info-->

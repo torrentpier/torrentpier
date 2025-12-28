@@ -18,67 +18,67 @@ namespace TorrentPier\Router\SemanticUrl\Traits;
 trait StaticUrls
 {
     /**
-     * Generate a members list URL (/members/)
+     * Generate a members list URL (/members)
      */
     public static function members(): string
     {
-        return '/members/';
+        return '/members';
     }
 
     /**
-     * Generate a groups list URL (/groups/)
+     * Generate a groups list URL (/groups)
      */
     public static function groups(): string
     {
-        return '/groups/';
+        return '/groups';
     }
 
     /**
-     * Generate a registration URL (/register/)
+     * Generate a registration URL (/register)
      */
     public static function register(): string
     {
-        return '/register/';
+        return '/register';
     }
 
     /**
-     * Generate a settings/edit profile URL (/settings/)
+     * Generate a settings/edit profile URL (/settings)
      */
     public static function settings(): string
     {
-        return '/settings/';
+        return '/settings';
     }
 
     /**
-     * Generate a password recovery URL (/password-recovery/)
+     * Generate a password recovery URL (/password-recovery)
      */
     public static function passwordRecovery(): string
     {
-        return '/password-recovery/';
+        return '/password-recovery';
     }
 
     /**
-     * Generate a profile bonus URL (/profile/bonus/)
+     * Generate a profile bonus URL (/profile/bonus)
      */
     public static function profileBonus(): string
     {
-        return '/profile/bonus/';
+        return '/profile/bonus';
     }
 
     /**
-     * Generate a profile watchlist URL (/profile/watchlist/)
+     * Generate a profile watchlist URL (/profile/watchlist)
      */
     public static function profileWatchlist(): string
     {
-        return '/profile/watchlist/';
+        return '/profile/watchlist';
     }
 
     /**
-     * Generate an activation URL (/activate/{user_id}/{key}/)
+     * Generate an activation URL (/activate/{user_id}/{key})
      */
     public static function activate(int $userId, string $key): string
     {
-        return '/activate/' . $userId . '/' . rawurlencode($key) . '/';
+        return '/activate/' . $userId . '/' . rawurlencode($key);
     }
 
     /**

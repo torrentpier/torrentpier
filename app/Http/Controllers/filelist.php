@@ -78,32 +78,29 @@ if ($meta_v2) {
     $files = new RecursiveIteratorIterator($files); // Flatten the list
 }
 
+$filelist = [];
 $files_count = 0;
 foreach ($files as $file) {
     $files_count++;
-    $row_class = ($files_count % 2) ? 'row1' : 'row2';
-    template()->assign_block_vars('filelist', [
+    $filelist[] = [
         'ROW_NUMBER' => $files_count,
-        'ROW_CLASS' => $row_class,
+        'ROW_CLASS' => ($files_count % 2) ? 'row1' : 'row2',
         'FILE_PATH' => clean_tor_dirname(implode('/', $file->path)),
         'FILE_LENGTH' => humn_size($file->length, 2),
         'FILE_HASH' => $file->{$t_hash_field} ?? '-',
-    ]);
+    ];
 }
 
 $torrent_name = !empty($t_name = $torrent->getName()) ? str_short(htmlCHR($t_name), 200) : __('UNKNOWN');
 $torrent_size = humn_size($row['size'], 2);
 
-// Output page
-template()->assign_vars([
+print_page('filelist.twig', variables: [
     'PAGE_TITLE' => "{$torrent_name} (" . $torrent_size . ')',
-    'FILES_COUNT' => sprintf(__('BT_FLIST_FILE_PATH'), declension(iterator_count($files), 'files')),
+    'FILES_COUNT' => sprintf(__('BT_FLIST_FILE_PATH'), declension($files_count, 'files')),
     'TORRENT_CREATION_DATE' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : __('UNKNOWN'),
     'TORRENT_CLIENT' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR($creator) : __('UNKNOWN'),
     'TORRENT_PRIVATE' => $torrent->isPrivate() ? __('YES') : __('NO'),
-
     'BTMR_NOTICE' => sprintf(__('BT_FLIST_BTMR_NOTICE'), 'https://github.com/kovalensky/tmrr'),
     'U_TOPIC' => TOPIC_URL . $topic_id,
+    'FILELIST' => $filelist,
 ]);
-
-print_page('filelist.tpl');

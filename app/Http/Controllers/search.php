@@ -322,7 +322,7 @@ if (empty(request()->query->all()) && empty(request()->post->all())) {
         'DISPLAY_AS_SELECT' => build_select($params->key('display_as'), $display_as_select, $params->val('display_as')),
     ]);
 
-    print_page('search.tpl');
+    print_page('search.twig');
 }
 
 unset($forums);
@@ -583,6 +583,7 @@ if ($post_mode) {
 
     // Output page
     $new_tracks = [];
+    $topicList = [];
 
     foreach ($sorted_rows as $topic_id => $topic_posts) {
         // Topic title block
@@ -591,13 +592,14 @@ if ($post_mode) {
         $forum_id = (int)$first_post['forum_id'];
         $is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);
 
-        template()->assign_block_vars('t', [
+        $topicItem = [
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
             'TOPIC_TITLE' => censor()->censorString($first_post['topic_title']),
             'TOPIC_ICON' => get_topic_icon($first_post, $is_unread_t),
-        ]);
+            'P' => [],
+        ];
 
         $quote_btn = $edit_btn = $ip_btn = '';
         $delpost_btn = IS_AM;
@@ -612,7 +614,7 @@ if ($post_mode) {
             $message = bbcode()->getParsedPost($post);
             $message = censor()->censorString($message);
 
-            template()->assign_block_vars('t.p', [
+            $topicItem['P'][] = [
                 'ROW_NUM' => $row_num,
                 'POSTER_ID' => $post['poster_id'],
                 'POSTER' => profile_url($post),
@@ -625,12 +627,16 @@ if ($post_mode) {
                 'EDIT' => $edit_btn,
                 'DELETE' => $delpost_btn,
                 'IP' => $ip_btn,
-            ]);
+            ];
 
             $curr_new_track_val = !empty($new_tracks[$topic_id]) ? $new_tracks[$topic_id] : 0;
             $new_tracks[$topic_id] = max($curr_new_track_val, $post['post_time']);
         }
+
+        $topicList[] = $topicItem;
     }
+
+    template()->assign_vars(['T' => $topicList]);
     $topics_tracking = &tracking_topics();
     set_tracks(COOKIE_TOPIC, $topics_tracking, $new_tracks);
 } // Displaying "as topics" mode
@@ -804,6 +810,7 @@ else {
     }
 
     // Output page
+    $topicList = [];
     foreach ($items_display as $row_num => $item_id) {
         if (empty($topic_rows[$item_id])) {
             continue;  // if topic was deleted but still remain in search results
@@ -818,7 +825,7 @@ else {
         $hrefTopicId = $moved ? $topic['topic_moved_id'] : $topic_id;
         $topicUrl = url()->topic($hrefTopicId, $topicTitle);
 
-        template()->assign_block_vars('t', [
+        $topicList[] = [
             'ROW_NUM' => $row_num,
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
@@ -843,8 +850,10 @@ else {
             'LAST_POST_TIME' => bb_date($topic['topic_last_post_time']),
             'LAST_POST_TIME_RAW' => $topic['topic_last_post_time'],
             'LAST_POST_ID' => $topic['topic_last_post_id'],
-        ]);
+        ];
     }
+
+    template()->assign_vars(['T' => $topicList]);
 }
 
 if ($items_display) {
@@ -865,7 +874,7 @@ if ($items_display) {
         'MY_POSTS' => (!$post_mode && $my_posts && user()->id == $params->val('poster_id')),
     ]);
 
-    print_page('search_results.tpl');
+    print_page('search_results.twig');
 }
 
 redirect($url);

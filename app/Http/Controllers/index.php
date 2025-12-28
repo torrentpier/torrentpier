@@ -248,24 +248,30 @@ datastore()->rm('moderators');
 
 // Build index page
 $forums_count = 0;
+$h_c_list = [];
+$categoriesList = [];
+
+template()->assign_vars(['H_C_AL_MESS' => $hide_cat_opt && !$showhide]);
+
 foreach ($cat_forums as $cid => $c) {
-    template()->assign_block_vars('h_c', [
+    $h_c_list[] = [
         'H_C_ID' => $cid,
         'H_C_TITLE' => $cat_title_html[$cid],
         'H_C_CHEKED' => in_array($cid, preg_split('/[-]+/', $hide_cat_opt)) ? 'checked' : '',
-    ]);
-
-    template()->assign_vars(['H_C_AL_MESS' => $hide_cat_opt && !$showhide]);
+    ];
 
     if (!$showhide && isset($hide_cat_user[$cid]) && !$viewcat) {
         continue;
     }
 
-    template()->assign_block_vars('c', [
+    $categoryItem = [
         'CAT_ID' => $cid,
         'CAT_TITLE' => $cat_title_html[$cid],
         'U_VIEWCAT' => url()->category($cid, $cat_data[$cid]['cat_title']),
-    ]);
+        'FORUMS' => [],
+    ];
+
+    $currentForumIndex = -1;
 
     foreach ($c['f'] as $fid => $f) {
         if (!$fname_html = &$forum_name_html[$fid]) {
@@ -282,15 +288,18 @@ foreach ($cat_forums as $cid => $c) {
         }
 
         if ($is_sf) {
-            template()->assign_block_vars('c.f.sf', [
-                'SF_ID' => $fid,
-                'SF_NAME' => $fname_html,
-                'SF_NEW' => $new ? ' new' : '',
-            ]);
+            // Add to the last forum's subforums
+            if ($currentForumIndex >= 0) {
+                $categoryItem['FORUMS'][$currentForumIndex]['SUBFORUMS'][] = [
+                    'SF_ID' => $fid,
+                    'SF_NAME' => $fname_html,
+                    'SF_NEW' => $new ? ' new' : '',
+                ];
+            }
             continue;
         }
 
-        template()->assign_block_vars('c.f', [
+        $forumItem = [
             'FORUM_FOLDER_IMG' => $folder_image,
             'FORUM_ID' => $fid,
             'FORUM_NAME' => $fname_html,
@@ -300,19 +309,31 @@ foreach ($cat_forums as $cid => $c) {
             'LAST_SF_ID' => $f['last_sf_id'] ?? null,
             'MODERATORS' => isset($moderators[$fid]) ? implode(', ', $moderators[$fid]) : '',
             'FORUM_FOLDER_ALT' => $new ? __('NEW') : __('OLD'),
-        ]);
+            'SUBFORUMS' => [],
+            'LAST' => null,
+        ];
 
         if ($f['last_post_id']) {
-            template()->assign_block_vars('c.f.last', [
+            $forumItem['LAST'] = [
                 'LAST_TOPIC_ID' => $f['last_topic_id'],
                 'LAST_TOPIC_TIP' => $f['last_topic_title'],
                 'LAST_TOPIC_TITLE' => str_short($f['last_topic_title'], $last_topic_max_len),
                 'LAST_POST_TIME' => bb_date($f['last_post_time'], config()->get('last_post_date_format')),
                 'LAST_POST_USER' => profile_url(['username' => $f['last_post_username'], 'display_username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank']]),
-            ]);
+            ];
         }
+
+        $categoryItem['FORUMS'][] = $forumItem;
+        $currentForumIndex = count($categoryItem['FORUMS']) - 1;
     }
+
+    $categoriesList[] = $categoryItem;
 }
+
+template()->assign_vars([
+    'H_C' => $h_c_list,
+    'CATEGORIES' => $categoriesList,
+]);
 
 template()->assign_vars([
     'SHOW_FORUMS' => $forums_count,
@@ -381,18 +402,21 @@ if (config()->get('show_latest_news')) {
 
     template()->assign_vars(['SHOW_LATEST_NEWS' => true]);
 
+    $news_list = [];
     foreach ($latest_news as $news) {
         if (in_array($news['forum_id'], $excluded_forums_array)) {
             continue;
         }
 
-        template()->assign_block_vars('news', [
+        $news_list[] = [
             'NEWS_URL' => url()->topic($news['topic_id'], $news['topic_title']),
             'NEWS_TITLE' => str_short(censor()->censorString($news['topic_title']), config()->get('max_news_title')),
             'NEWS_TIME' => bb_date($news['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($news['topic_time'], $news['topic_id'], $news['forum_id']),
-        ]);
+        ];
     }
+
+    template()->assign_vars(['NEWS' => $news_list]);
 }
 
 // Network news
@@ -405,18 +429,21 @@ if (config()->get('show_network_news')) {
 
     template()->assign_vars(['SHOW_NETWORK_NEWS' => true]);
 
+    $net_list = [];
     foreach ($network_news as $net) {
         if (in_array($net['forum_id'], $excluded_forums_array)) {
             continue;
         }
 
-        template()->assign_block_vars('net', [
+        $net_list[] = [
             'NEWS_URL' => url()->topic($net['topic_id'], $net['topic_title']),
             'NEWS_TITLE' => str_short(censor()->censorString($net['topic_title']), config()->get('max_net_title')),
             'NEWS_TIME' => bb_date($net['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($net['topic_time'], $net['topic_id'], $net['forum_id']),
-        ]);
+        ];
     }
+
+    template()->assign_vars(['NET' => $net_list]);
 }
 
 if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
@@ -476,4 +503,4 @@ if (request()->query->has('map')) {
     template()->assign_vars(['PAGE_TITLE' => __('FORUM_MAP')]);
 }
 
-print_page('index.tpl');
+print_page('index.twig');

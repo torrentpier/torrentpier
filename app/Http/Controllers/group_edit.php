@@ -80,7 +80,7 @@ if ($is_moderator) {
         'AVATAR_IMG' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),
     ]);
 
-    template()->set_filenames(['body' => 'group_edit.tpl']);
+    template()->set_filenames(['body' => 'group_edit.twig']);
     template()->assign_vars(['PAGE_TITLE' => __('GROUP_CONFIGURATION')]);
 
     require PAGE_HEADER;
