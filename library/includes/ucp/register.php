@@ -713,4 +713,4 @@ template()->assign_vars([
     'U_RESET_AUTOLOGIN' => LOGIN_URL . '?logout=1&amp;reset_autologin=1&amp;sid=' . userdata('session_id'),
 ]);
 
-print_page('usercp_register.tpl');
+print_page('usercp_register.twig');

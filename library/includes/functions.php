@@ -1184,7 +1184,7 @@ function bb_die($msgText, $statusCode = null): void
         'MESSAGE_TEXT' => $msgText,
     ]);
 
-    template()->set_filenames(['bb_die' => 'common.tpl']);
+    template()->set_filenames(['bb_die' => 'common.twig']);
     template()->pparse('bb_die');
 
     require PAGE_FOOTER;
@@ -1409,7 +1409,7 @@ function print_confirmation($tpl_vars): void
 
     template()->assign_vars($tpl_vars);
 
-    print_page('common.tpl');
+    print_page('common.twig');
 }
 
 /**

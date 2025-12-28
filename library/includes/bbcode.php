@@ -30,6 +30,11 @@ function generate_smilies($mode): void
 
     $data = datastore()->get('smile_replacements');
 
+    $smiliesRows = [];
+    $s_colspan = 0;
+    $showMoreSmilies = false;
+    $uMoreSmilies = '';
+
     if (isset($data['smile']) && $sql = $data['smile']) {
         $num_smilies = 0;
         $rowset = [];
@@ -44,24 +49,23 @@ function generate_smilies($mode): void
         if ($num_smilies) {
             $smilies_split_row = ($mode == 'inline') ? $inline_columns - 1 : $window_columns - 1;
 
-            $s_colspan = 0;
             $row = 0;
             $col = 0;
+            $currentRow = ['COLS' => []];
 
             foreach ($rowset as $smile_url => $data) {
-                if (!$col) {
-                    template()->assign_block_vars('smilies_row', []);
-                }
-
-                template()->assign_block_vars('smilies_row.smilies_col', [
+                $currentRow['COLS'][] = [
                     'SMILEY_CODE' => $data['code'],
                     'SMILEY_IMG' => FORUM_PATH . config()->get('smilies_path') . '/' . $smile_url,
                     'SMILEY_DESC' => $data['emoticon'],
-                ]);
+                ];
 
                 $s_colspan = max($s_colspan, $col + 1);
 
                 if ($col == $smilies_split_row) {
+                    $smiliesRows[] = $currentRow;
+                    $currentRow = ['COLS' => []];
+
                     if ($mode == 'inline' && $row == $inline_rows - 1) {
                         break;
                     }
@@ -72,23 +76,36 @@ function generate_smilies($mode): void
                 }
             }
 
-            if ($mode == 'inline' && $num_smilies > $inline_rows * $inline_columns) {
-                template()->assign_block_vars('switch_smilies_extra', []);
-
-                template()->assign_vars([
-                    'U_MORE_SMILIES' => POSTING_URL . '?mode=smilies',
-                ]);
+            // Add the last incomplete row
+            if (!empty($currentRow['COLS'])) {
+                $smiliesRows[] = $currentRow;
             }
 
-            template()->assign_vars([
-                'PAGE_TITLE' => __('EMOTICONS'),
-                'S_SMILIES_COLSPAN' => $s_colspan,
-            ]);
+            if ($mode == 'inline' && $num_smilies > $inline_rows * $inline_columns) {
+                $showMoreSmilies = true;
+                $uMoreSmilies = POSTING_URL . '?mode=smilies';
+            }
+
+            // For inline mode, assign variables for Twig template
+            if ($mode == 'inline') {
+                template()->assign_vars([
+                    'SMILIES_ROWS' => $smiliesRows,
+                    'SMILIES_MORE' => $showMoreSmilies,
+                    'U_MORE_SMILIES' => $uMoreSmilies,
+                    'S_SMILIES_COLSPAN' => $s_colspan,
+                ]);
+            }
         }
     }
 
     if ($mode == 'window') {
-        print_page('posting_smilies.tpl', 'simple');
+        print_page('posting_smilies.twig', 'simple', variables: [
+            'PAGE_TITLE' => __('EMOTICONS'),
+            'S_SMILIES_COLSPAN' => $s_colspan,
+            'SMILIES_ROWS' => $smiliesRows,
+            'SHOW_MORE_SMILIES' => $showMoreSmilies,
+            'U_MORE_SMILIES' => $uMoreSmilies,
+        ]);
     }
 }
 

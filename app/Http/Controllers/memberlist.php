@@ -110,12 +110,13 @@ $result = (clone $query)
     ->get()
     ->map(fn ($row) => (array)$row);
 
+$memberList = [];
 if ($result->isNotEmpty()) {
     foreach ($result as $i => $row) {
         $user_info = generate_user_info($row);
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
-        template()->assign_block_vars('memberrow', [
+        $memberList[] = [
             'ROW_NUMBER' => $i + ($start + 1),
             'ROW_CLASS' => $row_class,
             'USER' => profile_url($row),
@@ -127,14 +128,16 @@ if ($result->isNotEmpty()) {
             'EMAIL' => $user_info['email'],
             'WWW' => $user_info['www'],
             'U_VIEWPROFILE' => url()->member($row['user_id'], $row['username']),
-        ]);
+        ];
     }
-} else {
-    template()->assign_block_vars('no_username', ['NO_USER_ID_SPECIFIED' => __('NO_USER_ID_SPECIFIED')]);
 }
+template()->assign_vars([
+    'MEMBER_LIST' => $memberList,
+    'NO_MEMBERS' => empty($memberList),
+]);
 
 // Pagination
-$paginationurl = "memberlist?mode={$mode}&amp;order={$sort_order}&amp;role={$role}";
+$paginationurl = "members?mode={$mode}&amp;order={$sort_order}&amp;role={$role}";
 $paginationurl .= !empty($username) ? "&amp;username={$username}" : '';
 
 if ($mode != 'topten') {
@@ -156,8 +159,8 @@ template()->assign_vars([
     'S_MODE_SELECT' => $select_sort_mode,
     'S_ORDER_SELECT' => $select_sort_order,
     'S_ROLE_SELECT' => $select_sort_role,
-    'S_MODE_ACTION' => FORUM_PATH . "memberlist?mode={$mode}&amp;order={$sort_order}&amp;role={$role}",
+    'S_MODE_ACTION' => FORUM_PATH . "members?mode={$mode}&amp;order={$sort_order}&amp;role={$role}",
     'S_USERNAME' => $username,
 ]);
 
-print_page('memberlist.tpl');
+print_page('memberlist.twig');

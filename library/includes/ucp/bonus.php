@@ -51,26 +51,26 @@ if (request()->post->has('bonus_id')) {
 
     bb_die($message);
 } else {
-    template()->assign_vars([
-        'U_USER_PROFILE' => url()->member(userdata('user_id'), userdata('username')),
-        'S_MODE_ACTION' => BONUS_URL,
-        'PAGE_TITLE' => __('EXCHANGE_BONUS'),
-        'MY_BONUS' => sprintf(__('MY_BONUS'), $user_points),
-    ]);
-
+    $bonusUpload = [];
     foreach ($price_row as $i => $price) {
         if (!$price || !$upload_row[$i]) {
             continue;
         }
         $class = ($user_points >= $price) ? 'seed' : 'leech';
 
-        template()->assign_block_vars('bonus_upload', [
+        $bonusUpload[] = [
             'ROW_CLASS' => !($i % 2) ? 'row2' : 'row1',
             'ID' => $i,
             'DESC' => sprintf(__('BONUS_UPLOAD_DESC'), humn_size($upload_row[$i] * 1024 * 1024 * 1024)),
             'PRICE' => sprintf(__('BONUS_UPLOAD_PRICE'), $class, sprintf('%.2f', $price)),
-        ]);
+        ];
     }
 
-    print_page('usercp_bonus.tpl');
+    print_page('usercp_bonus.twig', variables: [
+        'U_USER_PROFILE' => url()->member(userdata('user_id'), userdata('username')),
+        'S_MODE_ACTION' => BONUS_URL,
+        'PAGE_TITLE' => __('EXCHANGE_BONUS'),
+        'MY_BONUS' => sprintf(__('MY_BONUS'), $user_points),
+        'BONUS_UPLOAD' => $bonusUpload,
+    ]);
 }
