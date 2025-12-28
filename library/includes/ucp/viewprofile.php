@@ -84,7 +84,7 @@ if ($banInfo = getBanInfo((int)$profiledata['user_id'])) {
         'BAN_INFO' => [
             'IS_BANNED' => true,
             'BAN_REASON' => IS_ADMIN ? $banInfo['ban_reason'] : '',
-        ]
+        ],
     ]);
 }
 
