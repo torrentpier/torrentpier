@@ -393,6 +393,13 @@ class Common
         }
         unset($row, $result);
 
+        // Delete thanks
+        DB()->query('
+            DELETE thx
+            FROM      ' . $tmp_delete_topics . ' del
+            LEFT JOIN ' . BB_THX . ' thx  USING(topic_id)
+        ');
+
         // Delete posts, posts_text (from DB)
         DB()->query('
 		DELETE p, pt, ps, ph
