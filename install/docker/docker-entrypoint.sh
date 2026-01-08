@@ -42,9 +42,9 @@ php -r "
 \$db = getenv('DB_DATABASE');
 
 // Validate database name (same whitelist as InstallCommand.php)
-// Only allow alphanumeric characters and underscores
-if (!preg_match('/^[a-zA-Z0-9_]+$/', \$db)) {
-    echo \"ERROR: Invalid database name '\$db'. Only alphanumeric characters and underscores are allowed.\n\";
+// Must start with letter or underscore, then alphanumeric and underscores
+if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', \$db)) {
+    echo \"ERROR: Invalid database name '\$db'. Must start with a letter or underscore, followed by alphanumeric characters and underscores.\n\";
     exit(1);
 }
 
