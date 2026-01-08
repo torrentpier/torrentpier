@@ -41,6 +41,13 @@ php -r "
 \$pass = getenv('DB_PASSWORD');
 \$db = getenv('DB_DATABASE');
 
+// Validate database name (same whitelist as InstallCommand.php)
+// Only allow alphanumeric characters and underscores
+if (!preg_match('/^[a-zA-Z0-9_]+$/', \$db)) {
+    echo \"ERROR: Invalid database name '\$db'. Only alphanumeric characters and underscores are allowed.\n\";
+    exit(1);
+}
+
 try {
     \$conn = new PDO(\"mysql:host=\$host;port=\$port\", \$user, \$pass);
     \$conn->exec(\"CREATE DATABASE IF NOT EXISTS \`\$db\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci\");
@@ -55,9 +62,9 @@ try {
 if [ -d "/app/database/migrations" ]; then
     echo "Running database migrations..."
     cd /app
-    php bull migrate
     
-    if [ $? -eq 0 ]; then
+    # Run migrations, but don't exit on failure (set -e is active)
+    if php bull migrate; then
         echo "Migrations completed successfully!"
     else
         echo "Warning: Migration failed, but continuing..."
