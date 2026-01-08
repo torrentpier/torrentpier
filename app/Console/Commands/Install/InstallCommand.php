@@ -388,16 +388,18 @@ class InstallCommand extends Command
         $this->line();
 
         // Cron settings
+        $cronOptions = [
+            'TorrentPier cron manager (built-in, no external setup needed)',
+            'External cron (system crontab)',
+        ];
+
         $cronChoice = $this->choice(
             'How do you want to handle scheduled tasks?',
-            [
-                'internal' => 'TorrentPier cron manager (built-in, no external setup needed)',
-                'external' => 'External cron (system crontab)',
-            ],
-            'internal',
+            $cronOptions,
+            0, // default to first option (TorrentPier cron manager)
         );
 
-        $this->config['APP_CRON_ENABLED'] = $cronChoice === 'internal' ? 'true' : 'false';
+        $this->config['APP_CRON_ENABLED'] = $cronChoice === $cronOptions[0] ? 'true' : 'false';
 
         // Write to .env
         $this->writeEnvFile();
