@@ -5,10 +5,19 @@
 *.twig diff=html
 *.md diff=markdown
 *.php diff=php
+*.js diff=js
+*.json diff=json
 
 /.github export-ignore
+/docs export-ignore
+/tests export-ignore
+.editorconfig export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+.php-cs-fixer.php export-ignore
 CHANGELOG.md export-ignore
-CLAUDE.md export-ignore
+docker-compose.yml export-ignore
+Dockerfile export-ignore
 LICENSE export-ignore
+phpunit.xml export-ignore
 README.md export-ignore
-UPGRADE_GUIDE.md export-ignore

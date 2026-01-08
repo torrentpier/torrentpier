@@ -383,6 +383,22 @@ class InstallCommand extends Command
         );
         $this->config['DB_PASSWORD'] = $this->io->askHidden('Database password (hidden input)') ?? '';
 
+        $this->line();
+        $this->line('  <comment>Cron configuration:</comment>');
+        $this->line();
+
+        // Cron settings
+        $cronChoice = $this->choice(
+            'How do you want to handle scheduled tasks?',
+            [
+                'internal' => 'Internal cron manager (engine handles everything)',
+                'external' => 'External cron (system crontab)',
+            ],
+            'internal',
+        );
+
+        $this->config['APP_CRON_ENABLED'] = $cronChoice === 'internal' ? 'true' : 'false';
+
         // Write to .env
         $this->writeEnvFile();
 
@@ -683,12 +699,19 @@ class InstallCommand extends Command
 
         $this->line();
         $this->comment('Next steps:');
-        $this->listing([
+        
+        $nextSteps = [
             'Configure your web server using the provided templates',
             'Login to admin panel and change the default password',
             'Configure site settings in the admin panel',
-            'Setup cron job: <comment>* * * * * php ' . BB_ROOT . 'bull cron:run</comment>',
-        ]);
+        ];
+
+        // Add cron setup instruction only if external cron is selected
+        if (isset($this->config['APP_CRON_ENABLED']) && $this->config['APP_CRON_ENABLED'] === 'false') {
+            $nextSteps[] = 'Setup cron job: <comment>*/10 * * * * cd ' . BB_ROOT . ' && php bull cron:run</comment>';
+        }
+
+        $this->listing($nextSteps);
 
         $this->line('<fg=cyan>Good luck & have fun! 🚀</>');
         $this->line();

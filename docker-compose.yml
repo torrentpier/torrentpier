@@ -2,27 +2,38 @@ services:
   torrentpier:
     build: .
     container_name: TorrentPier
+    restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
+      - "${TP_PORT:-80}:80"
+      - "${TP_HTTPS_PORT:-443}:443"
+      - "${TP_HTTPS_PORT:-443}:443/udp"
     env_file:
       - .env
     volumes:
-      - ./storage:/var/www/storage
-      - ./config/config.php:/var/www/config/config.php
-      - ./library/defines.php:/var/www/library/defines.php
+      - ./storage:/app/public/storage
+      - ./config/config.php:/app/public/config/config.php
+      - ./library/defines.php:/app/public/library/defines.php
       - ./install/docker/Caddyfile:/etc/frankenphp/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
-      - database
-      # - redis
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      memcached:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "php", "-r", "echo 'OK';"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   database:
     image: mariadb:10.11
     container_name: MariaDB
-    restart: always
+    restart: unless-stopped
     env_file:
       - .env
     environment:
@@ -33,11 +44,32 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./install/docker/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
-  # redis:
-  #   image: redis:7-alpine
-  #   container_name: Redis
-  #   restart: always
+  redis:
+    image: redis:7-alpine
+    container_name: Redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  memcached:
+    image: memcached:1-alpine
+    container_name: Memcached
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 2 sh -c 'echo stats | nc localhost 11211' || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
 volumes:
   db_data:
