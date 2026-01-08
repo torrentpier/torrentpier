@@ -699,7 +699,7 @@ class InstallCommand extends Command
 
         $this->line();
         $this->comment('Next steps:');
-        
+
         $nextSteps = [
             'Configure your web server using the provided templates',
             'Login to admin panel and change the default password',
