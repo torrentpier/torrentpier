@@ -52,9 +52,9 @@ try {
 "
 
 # Run migrations if available
-if [ -d "/app/public/database/migrations" ]; then
+if [ -d "/app/database/migrations" ]; then
     echo "Running database migrations..."
-    cd /app/public
+    cd /app
     php bull migrate
     
     if [ $? -eq 0 ]; then

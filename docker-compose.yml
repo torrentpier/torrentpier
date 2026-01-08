@@ -10,9 +10,9 @@ services:
     env_file:
       - .env
     volumes:
-      - ./storage:/app/public/storage
-      - ./config/config.php:/app/public/config/config.php
-      - ./library/defines.php:/app/public/library/defines.php
+      - ./storage:/app/storage
+      - ./config/config.php:/app/config/config.php
+      - ./library/defines.php:/app/library/defines.php
       - ./install/docker/Caddyfile:/etc/frankenphp/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
