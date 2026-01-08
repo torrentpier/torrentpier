@@ -391,7 +391,7 @@ class InstallCommand extends Command
         $cronChoice = $this->choice(
             'How do you want to handle scheduled tasks?',
             [
-                'internal' => 'Internal cron manager (engine handles everything)',
+                'internal' => 'TorrentPier cron manager (built-in, no external setup needed)',
                 'external' => 'External cron (system crontab)',
             ],
             'internal',

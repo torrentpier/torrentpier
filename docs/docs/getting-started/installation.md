@@ -68,17 +68,12 @@ php bull app:install
 ### Method 4: Docker
 
 1. Ensure Docker and Docker Compose are installed on your system
-2. Verify that ports `80 (HTTP)` and `443 (HTTPS)` are free or adjust them in `docker-compose.yml`
-3. Clone the repository:
+2. Clone the repository:
    ```bash
    git clone https://github.com/torrentpier/torrentpier.git
    cd torrentpier
    ```
-4. Create environment file:
-   ```bash
-   cp .env.example .env
-   ```
-5. Configure `.env` for Docker:
+3. Create and configure environment file:
    ```bash
    cp .env.example .env
    ```
@@ -87,7 +82,7 @@ php bull app:install
    ```env
    # Application
    TP_HOST=your-domain.com
-   APP_CRON_ENABLED=false     # REQUIRED: Set to false for Docker cron
+   APP_CRON_ENABLED=false     # REQUIRED: Set to false for Docker
    
    # Database (use Docker service names)
    DB_HOST=database
@@ -100,22 +95,30 @@ php bull app:install
    REDIS_HOST=redis
    MEMCACHED_HOST=memcached
    ```
-6. (Optional) Customize ports if 80/443 are already in use:
+
+4. (Optional) Customize ports if 80/443 are already in use:
    ```env
    # Add to .env
    TP_PORT=8080
    TP_HTTPS_PORT=8443
    ```
 
-7. Start the application:
+5. Start the application:
    ```bash
    docker compose up -d
    ```
 
-8. Check logs to ensure everything started correctly:
+6. Check logs to ensure everything started correctly:
    ```bash
    docker compose logs -f torrentpier
    ```
+
+The Docker container will automatically:
+- Wait for database to be ready
+- Create database if it doesn't exist
+- Run migrations
+- Start cron daemon (runs `php bull cron:run` every 10 minutes)
+- Start FrankenPHP web server
 
 :::tip Permissions
 We recommend chmod **0755** for folders and chmod **0644** for files.
@@ -154,8 +157,9 @@ Edit `.env` file with your settings:
 APP_ENV=production
 TP_HOST=your-domain.com
 
-# Cron (false = external cron, true = internal cron manager)
-APP_CRON_ENABLED=true
+# Cron manager
+APP_CRON_ENABLED=true      # Use TorrentPier cron manager (default)
+                           # Set to 'false' for Docker or external crontab
 
 # Database
 DB_HOST=localhost          # Use 'database' for Docker
@@ -164,7 +168,7 @@ DB_DATABASE=torrentpier
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 
-# Cache drivers
+# Cache drivers (optional)
 REDIS_HOST=localhost       # Use 'redis' for Docker
 MEMCACHED_HOST=localhost   # Use 'memcached' for Docker
 ```
@@ -172,13 +176,13 @@ MEMCACHED_HOST=localhost   # Use 'memcached' for Docker
 :::info Docker vs Local Installation
 **For Docker installations:**
 - Set `DB_HOST=database`, `REDIS_HOST=redis`, `MEMCACHED_HOST=memcached` (service names)
-- Set `APP_CRON_ENABLED=false` (Docker container runs `php bull cron:run` via cron)
+- Set `APP_CRON_ENABLED=false` (Docker container has built-in cron)
 - Add `DB_ROOT_PASSWORD` for database initialization
 
 **For local installations:**
 - Use `localhost` or `127.0.0.1` for all hosts
+- Set `APP_CRON_ENABLED=true` to use TorrentPier cron manager (default, no external setup)
 - Set `APP_CRON_ENABLED=false` if using system crontab with `php bull cron:run`
-- Set `APP_CRON_ENABLED=true` to use internal cron manager (no external cron needed)
 :::
 
 ## Web server configuration
@@ -234,9 +238,9 @@ cp install/Caddyfile /etc/caddy/Caddyfile
 
 TorrentPier supports two cron modes:
 
-**Option 1: Internal cron manager (default, recommended for most users)**
+**Option 1: TorrentPier cron manager (default, recommended for most users)**
 
-Set `APP_CRON_ENABLED=true` in `.env`. The engine will handle cron internally without external crontab. No additional setup required.
+Set `APP_CRON_ENABLED=true` in `.env`. TorrentPier will handle cron internally without external crontab. No additional setup required.
 
 **Option 2: External cron (recommended for high-load production)**
 

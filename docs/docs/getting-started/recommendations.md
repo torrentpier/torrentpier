@@ -9,14 +9,29 @@ Best practices and recommendations for running TorrentPier in production.
 
 ## Cron Jobs
 
-Set up cron jobs for automatic maintenance tasks. Run `php bull cron:run` every minute:
+TorrentPier supports two cron modes:
+
+### Option 1: TorrentPier Cron Manager (Default)
+
+Set `APP_CRON_ENABLED=true` in `.env`. TorrentPier will handle cron internally without external crontab. No additional setup required.
+
+This is the recommended option for most installations.
+
+### Option 2: External Cron (High-Load Production)
+
+Set `APP_CRON_ENABLED=false` in `.env` and add to your crontab:
 
 ```bash
 # Add to crontab (crontab -e)
-* * * * * php /path/to/torrentpier/bull cron:run >> /dev/null 2>&1
+# Run maintenance tasks every 10 minutes
+*/10 * * * * cd /path/to/torrentpier && php bull cron:run >> /dev/null 2>&1
 ```
 
-For high-traffic trackers, consider running cron more frequently or as a daemon.
+For high-traffic trackers, external cron provides better control and monitoring.
+
+:::tip Docker
+Docker installations automatically use external cron. The container runs `php bull cron:run` every 10 minutes. Set `APP_CRON_ENABLED=false` in your `.env` file.
+:::
 
 ### What Cron Handles
 
