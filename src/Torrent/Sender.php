@@ -60,7 +60,7 @@ class Sender
         // Ratio limits
         $min_ratio = config()->get('bt_min_ratio_allow_dl_tor');
 
-        if ($min_ratio && $user_id != $t_data['topic_poster'] && $bt_userdata && ($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
+        if ($min_ratio && $user_id != $t_data['topic_poster'] && $user_id != GUEST_UID && $t_data['tor_type'] != TOR_TYPE_GOLD && $bt_userdata && ($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
             if ($user_ratio < $min_ratio) {
                 $dl = DB()->table(BB_BT_DLSTATUS)
                     ->select('user_status')
@@ -68,7 +68,9 @@ class Sender
                     ->where('user_id', $user_id)
                     ->fetch();
 
-                if (!$dl || $dl['user_status'] != DL_STATUS_COMPLETE) {
+                $user_status = $dl['user_status'] ?? null;
+
+                if ($user_status != DL_STATUS_COMPLETE) {
                     bb_die(\sprintf(__('BT_LOW_RATIO_FOR_DL'), round($user_ratio, 2), "search.php?dlu={$user_id}&amp;dlc=1"));
                 }
             }

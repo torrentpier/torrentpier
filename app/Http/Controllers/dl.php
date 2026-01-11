@@ -23,7 +23,7 @@ if (!$topic_id) {
 $sql = '
     SELECT
         t.topic_id, t.topic_title, t.topic_poster, t.topic_first_post_id, t.forum_id, t.attach_ext_id, t.tracker_status,
-        tor.tor_status, tor.poster_id
+        tor.tor_status, tor.poster_id, tor.tor_type
     FROM ' . BB_TOPICS . ' t
     LEFT JOIN ' . BB_BT_TORRENTS . " tor ON tor.topic_id = t.topic_id
     WHERE t.topic_id = {$topic_id}
