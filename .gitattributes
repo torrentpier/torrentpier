@@ -11,6 +11,7 @@
 /.github export-ignore
 /docs export-ignore
 /tests export-ignore
+.cliffignore export-ignore
 .editorconfig export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
