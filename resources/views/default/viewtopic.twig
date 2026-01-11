@@ -41,54 +41,56 @@
 {% endif %}
 
 {% if config('use_ajax_posts') and (AUTH_DELETE or AUTH_REPLY or AUTH_EDIT) %}
-<script type="text/javascript">
-ajax.open_edit = false;
-function edit_post(post_id, type, text) {
-	if(ajax.open_edit && ajax.open_edit != post_id) {
-		alert('{{ __('AJAX_EDIT_OPEN') }}');
-	} else{
-		if(ajax.open_edit && !text){
-			$('#pp_'+ post_id).show();
-			$('#pe_'+ post_id).hide();
-		} else{
-			$('#pp_'+ post_id).hide();
-			$('#pe_'+ post_id).show();
-			ajax.exec({
-				action   : 'posts',
-				post_id  : post_id,
-				topic_id : {{ TOPIC_ID }},
-				text     : text,
-				type     : type
-			});
+	<script type="text/javascript">
+		ajax.open_edit = false;
+
+		function edit_post(post_id, type, text) {
+			if (ajax.open_edit && ajax.open_edit != post_id) {
+				alert('{{ __('AJAX_EDIT_OPEN') }}');
+			} else {
+				if ((ajax.open_edit && !text) || !type) {
+					$('#pp_' + post_id).show();
+					$('#pe_' + post_id).hide();
+					ajax.open_edit = false;
+				} else {
+					$('#pp_' + post_id).hide();
+					$('#pe_' + post_id).show();
+					ajax.exec({
+						action: 'posts',
+						post_id: post_id,
+						topic_id: {{ TOPIC_ID }},
+						text: text,
+						type: type
+					});
+				}
+			}
 		}
-		ajax.open_edit = false;
-	}
-}
-ajax.callback.posts = function(data) {
-	if(data.html){
-		$('#pp_'+ data.post_id).show().html(data.html);
-		initPostBBCode('#pp_'+ data.post_id);
-		$('#pe_'+ data.post_id).hide();
-		ajax.open_edit = false;
-	} else if(data.text){
-		ajax.open_edit = data.post_id;
-		$('#pe_'+ data.post_id).html(data.text);
-	}
-	if(data.redirect) document.location.href = data.redirect;
-	if(data.hide) {
-		if(ajax.open_edit == data.post_id) ajax.open_edit = false;
-		$('tbody#post_'+ data.post_id).hide();
-	}
-	if(data.quote) $('textarea#message').attr('value', $('textarea#message').val() + data.message +' ').focus();
-	if(data.message_html){
-		$('#view_message').show();
-			$('.view-message').html(data.message_html);
-			initPostBBCode('.view-message');
-			var maxH   = screen.height - 490;
-		$('.view-message').css({ maxHeight: maxH });
-	}
-};
-</script>
+
+		ajax.callback.posts = function (data) {
+			if (data.html) {
+				$('#pp_' + data.post_id).show().html(data.html);
+				initPostBBCode('#pp_' + data.post_id);
+				$('#pe_' + data.post_id).hide();
+				ajax.open_edit = false;
+			} else if (data.text) {
+				ajax.open_edit = data.post_id;
+				$('#pe_' + data.post_id).html(data.text);
+			}
+			if (data.redirect) document.location.href = data.redirect;
+			if (data.hide) {
+				if (ajax.open_edit == data.post_id) ajax.open_edit = false;
+				$('tbody#post_' + data.post_id).hide();
+			}
+			if (data.quote) $('textarea#message').attr('value', $('textarea#message').val() + data.message + ' ').focus();
+			if (data.message_html) {
+				$('#view_message').show();
+				$('.view-message').html(data.message_html);
+				initPostBBCode('.view-message');
+				var maxH = screen.height - 490;
+				$('.view-message').css({maxHeight: maxH});
+			}
+		};
+	</script>
 {% endif %}
 
 {% if SPLIT_FORM %}

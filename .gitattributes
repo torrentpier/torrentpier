@@ -15,9 +15,4 @@
 .gitattributes export-ignore
 .gitignore export-ignore
 .php-cs-fixer.php export-ignore
-CHANGELOG.md export-ignore
-docker-compose.yml export-ignore
-Dockerfile export-ignore
-LICENSE export-ignore
 phpunit.xml export-ignore
-README.md export-ignore
