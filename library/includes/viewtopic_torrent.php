@@ -181,7 +181,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                 $dl_allowed = ($user_ratio > $min_ratio_dl);
             }
 
-            if ((isset($user_ratio, $min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
+            if ((isset($user_ratio, $min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || (isset($bt_userdata['u_down_total']) && $bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
                 template()->assign_vars([
                     'SHOW_RATIO_WARN' => true,
                     'RATIO_WARN_MSG' => sprintf(__('BT_RATIO_WARNING_MSG'), $min_ratio_dl, config()->get('ratio_url_help')),
