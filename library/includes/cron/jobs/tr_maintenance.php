@@ -30,6 +30,13 @@ if ($dead_topics) {
         ->where('topic_id', array_keys($dead_topics))
         ->delete();
 
+    // Unset DL-Type for topics
+    if (config()->get('bt_unset_dltype_on_tor_unreg')) {
+        DB()->table(BB_TOPICS)
+            ->where('topic_id', array_keys($dead_topics))
+            ->update(['topic_dl_type' => TOPIC_DL_TYPE_NORMAL]);
+    }
+
     // Unregister each torrent properly
     foreach ($dead_topics as $topic_id) {
         try {

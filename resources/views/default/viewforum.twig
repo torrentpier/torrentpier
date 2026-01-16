@@ -50,7 +50,7 @@ function show_forum_mod_options ()
 
 	$('#mod-action').submit(function(){
 		var $form = $(this);
-		var in_new_window = $('#in-new-window').attr('checked');
+		var in_new_window = $('#in-new-window').prop('checked');
 		if(!mod_action('go')) return false;
 		$('input[name~=topic_id_list]', $form).remove();
 		$('input.topic-chbox:checked').each(function(){
@@ -139,7 +139,7 @@ ajax.mod_action = function (topic_ids, mode, status) {
 
 ajax.callback.mod_action = function (data) {
     if (data.topics) {
-        for (i = 0; i < data.topics.length; i++) {
+        for (var i = 0; i < data.topics.length; i++) {
             $('#status-' + data.topics[i]).html(data.status);
         }
     }

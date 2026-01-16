@@ -51,7 +51,7 @@
         $('#user-opt').find('input[type=checkbox]').click(function () {
             var $chbox = $(this);
             var opt_name = $chbox.attr('name');
-            var opt_val = $chbox.attr('checked') ? 1 : 0;
+            var opt_val = $chbox.prop('checked') ? 1 : 0;
             ajax.user_opt[opt_name] = opt_val;
             $chbox.parents('label').toggleClass('bold');
             $('#user-opt-save').show();

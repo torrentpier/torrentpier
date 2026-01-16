@@ -336,7 +336,7 @@ Ajax.prototype = {
       $('body').prepend(response.raw_output);
     }
     if (response.update_ids) {
-      for (id in response.update_ids) {
+      for (var id in response.update_ids) {
         $('#' + id).html(response.update_ids[id]);
       }
     }
