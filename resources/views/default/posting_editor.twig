@@ -154,9 +154,10 @@ function checkForm(form) {
 {% if config('use_ajax_posts') and not IS_GUEST %}
 	if(form.message.value.length < 100 && submitted)
 	{
+        var notify = 0;
 		setTimeout(function() {
 			if ($('input[name="notify"]').attr('checked') == 'checked') {
-				var notify = 1;
+				notify = 1;
 			}
 
 			ajax.exec({

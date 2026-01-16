@@ -139,7 +139,7 @@
 				{% elseif torrent_item.TOR_STATUS_REPLY %}
 					$('#tor_comment').html('{{ __('TOR_AUTH_SENT_COMMENT') }}');
 				{% endif %}
-					$('#comment').attr('value', '');
+					$('#comment').val('');
 				};
 			</script>
 
