@@ -2010,7 +2010,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v12.46.0",
+            "version": "v12.47.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
