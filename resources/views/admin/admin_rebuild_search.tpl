@@ -16,7 +16,7 @@ function update_button(button)
 function update_clear_search(myselect)
 {
 	// enable/disable radio buttons
-	for (i = 0; i < 3; i++)
+	for (var i = 0; i < 3; i++)
 	{
 		document.rebuild.clear_search[i].disabled = ( myselect.options[myselect.selectedIndex].value != 0 );
 	}
