@@ -81,7 +81,7 @@
 				if (ajax.open_edit == data.post_id) ajax.open_edit = false;
 				$('tbody#post_' + data.post_id).hide();
 			}
-			if (data.quote) $('textarea#message').attr('value', $('textarea#message').val() + data.message + ' ').focus();
+			if (data.quote) $('textarea#message').val($('textarea#message').val() + data.message + ' ').focus();
 			if (data.message_html) {
 				$('#view_message').show();
 				$('.view-message').html(data.message_html);
@@ -156,7 +156,7 @@ ajax.post_mod_comment = function(post_id, mc_text, mc_type) {
 };
 ajax.callback.post_mod_comment = function(data) {
 	if (data.mc_type == 0) {
-		$('#mc_text_'+ data.post_id).attr('value', '');
+		$('#mc_text_'+ data.post_id).val('');
 		$('#pc_'+ data.post_id).hide();
 	}
 	else {

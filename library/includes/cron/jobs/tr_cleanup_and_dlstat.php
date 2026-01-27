@@ -112,15 +112,6 @@ if (config()->get('tracker.update_dlstat')) {
 		WHERE u.user_id = ub.user_id
 	');
 
-    // Delete from dl_list what exists in BUF but not exsits in NEW
-    DB()->query('
-		DELETE dl
-		FROM ' . BB_BT_DLSTATUS . ' dl
-		INNER JOIN ' . NEW_BB_BT_LAST_TORSTAT . ' buf USING(user_id, topic_id)
-		WHERE buf.user_id IS NULL
-			AND buf.topic_id IS NULL
-	');
-
     // Update DL-Status
     DB()->query('
 		REPLACE INTO ' . BB_BT_DLSTATUS . '
