@@ -472,16 +472,16 @@
         },
         {
             "name": "bugsnag/bugsnag",
-            "version": "v3.30.0",
+            "version": "v3.30.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bugsnag/bugsnag-php.git",
-                "reference": "ea174966d8a09424d7963e1e0fe9d570b63ff98c"
+                "reference": "cb2324147efe7aedb5177fdcd68a94f5c5bedf78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bugsnag/bugsnag-php/zipball/ea174966d8a09424d7963e1e0fe9d570b63ff98c",
-                "reference": "ea174966d8a09424d7963e1e0fe9d570b63ff98c",
+                "url": "https://api.github.com/repos/bugsnag/bugsnag-php/zipball/cb2324147efe7aedb5177fdcd68a94f5c5bedf78",
+                "reference": "cb2324147efe7aedb5177fdcd68a94f5c5bedf78",
                 "shasum": ""
             },
             "require": {
@@ -529,9 +529,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bugsnag/bugsnag-php/issues",
-                "source": "https://github.com/bugsnag/bugsnag-php/tree/v3.30.0"
+                "source": "https://github.com/bugsnag/bugsnag-php/tree/v3.30.1"
             },
-            "time": "2025-07-08T15:15:58+00:00"
+            "time": "2026-01-22T16:10:16+00:00"
         },
         {
             "name": "cakephp/chronos",
