@@ -48,6 +48,10 @@ return [
     'search_max_word_len' => 35,
     'limit_max_search_results' => false,
 
+    // Content processing
+    'use_word_censor' => true,
+    'tidy_post' => env('TIDY_POST_ENABLED', false),
+
     // Posting
     'prevent_multiposting' => true,
     'max_smilies' => 25,

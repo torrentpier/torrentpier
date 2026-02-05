@@ -64,7 +64,7 @@ class Censor
      */
     public function isEnabled(): bool
     {
-        return $this->config->get('use_word_censor', false);
+        return $this->config->get('forum.use_word_censor', false);
     }
 
     /**

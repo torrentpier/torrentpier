@@ -108,7 +108,7 @@ if (request()->post->has('login')) {
 
     if (!$login_errors) {
         if (user()->login(request()->post->all(), $mod_admin_login)) {
-            $redirect_url = (defined('FIRST_LOGON')) ? config()->get('app.first_logon_redirect_url') : $redirect_url;
+            $redirect_url = (defined('FIRST_LOGON')) ? config()->get('auth.first_logon_redirect_url') : $redirect_url;
             // Reset when entering the correct login/password combination
             CACHE('bb_login_err')->rm('l_err_' . USER_IP);
 

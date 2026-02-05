@@ -36,6 +36,7 @@ return [
             'options' => ['cost' => 12],
         ],
     ],
+    'first_logon_redirect_url' => '/',
     'invalid_logins' => 5,
     'sessions' => [
         'update_interval' => 180,
@@ -51,7 +52,13 @@ return [
         'domain' => env('COOKIE_DOMAIN', ''),
         'same_site' => 'Lax',
     ],
-    'unlimited_users' => [2 => 'admin'],
-    'super_admins' => [2 => 'admin'],
-    'premium_users' => [2 => 'admin'],
+    'unlimited_users' => [
+        2 => 'admin',
+    ],
+    'super_admins' => [
+        2 => 'admin',
+    ],
+    'premium_users' => [
+        2 => 'admin',
+    ],
 ];

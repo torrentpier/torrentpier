@@ -16,7 +16,6 @@ return [
     'server_name' => env('TP_HOST', 'example.com'),
     'server_port' => env('TP_PORT', 80),
     'script_path' => '/',
-    'first_logon_redirect_url' => '/',
     'terms_and_conditions_url' => '/terms',
     'user_agreement_url' => '/info?show=user_agreement',
     'copyright_holders_url' => '/info?show=copyright_holders',
@@ -27,6 +26,4 @@ return [
         'ratio' => '/threads/3',
         'search' => '/threads/4',
     ],
-    'use_word_censor' => true,
-    'tidy_post' => env('TIDY_POST_ENABLED', false),
 ];
