@@ -62,7 +62,7 @@ class Emailer
     public function set_template(string $template_file, string $template_lang = ''): void
     {
         if (!$template_lang) {
-            $template_lang = config()->get('default_lang');
+            $template_lang = config()->get('localization.default_lang');
         }
 
         $this->template_file = $template_file;
@@ -77,7 +77,7 @@ class Emailer
      */
     public function send(string $email_format = 'text/plain'): bool
     {
-        if (!config()->get('emailer.enabled')) {
+        if (!config()->get('mail.enabled')) {
             return false;
         }
 
@@ -85,21 +85,21 @@ class Emailer
         $this->subject = !empty($this->subject) ? $this->subject : lang()->get('EMAILER_SUBJECT.EMPTY');
 
         // Configure transport
-        if (config()->get('emailer.smtp.enabled')) {
-            if (!empty(config()->get('emailer.smtp.host'))) {
-                $sslType = config()->get('emailer.smtp.ssl_type') ?: null;
+        if (config()->get('mail.smtp.enabled')) {
+            if (!empty(config()->get('mail.smtp.host'))) {
+                $sslType = config()->get('mail.smtp.ssl_type') ?: null;
                 $transport = new EsmtpTransport(
-                    config()->get('emailer.smtp.host'),
-                    config()->get('emailer.smtp.port'),
+                    config()->get('mail.smtp.host'),
+                    config()->get('mail.smtp.port'),
                     $sslType,
                 )
-                    ->setUsername(config()->get('emailer.smtp.username'))
-                    ->setPassword(config()->get('emailer.smtp.password'));
+                    ->setUsername(config()->get('mail.smtp.username'))
+                    ->setPassword(config()->get('mail.smtp.password'));
             } else {
                 $transport = new EsmtpTransport('localhost', 25);
             }
         } else {
-            $transport = new SendmailTransport(config()->get('emailer.sendmail_command'));
+            $transport = new SendmailTransport(config()->get('mail.sendmail_command'));
         }
 
         $mailer = new Mailer($transport);
@@ -111,9 +111,9 @@ class Emailer
         $message = new Email()
             ->subject($this->subject)
             ->to($this->to)
-            ->from(new Address(config()->get('board_email'), config()->get('board_email_sitename')))
-            ->returnPath(new Address(config()->get('bounce_email')))
-            ->replyTo($this->reply ?? new Address(config()->get('board_email')));
+            ->from(new Address(config()->get('mail.addresses.board'), config()->get('mail.addresses.board_sitename')))
+            ->returnPath(new Address(config()->get('mail.addresses.bounce')))
+            ->replyTo($this->reply ?? new Address(config()->get('mail.addresses.board')));
 
         $message->getHeaders()->addTextHeader('X-Auto-Response-Suppress', 'OOF, DR, RN, NRN, AutoReply');
         $message->getHeaders()->addTextHeader('Auto-Submitted', 'auto-generated');
@@ -145,9 +145,9 @@ class Emailer
     public function assign_vars(array $vars): void
     {
         $this->vars = array_merge([
-            'BOARD_EMAIL' => config()->get('board_email'),
-            'SITENAME' => config()->get('board_email_sitename'),
-            'EMAIL_SIG' => !empty(config()->get('board_email_sig')) ? "-- \n" . config()->get('board_email_sig') : '',
+            'BOARD_EMAIL' => config()->get('mail.addresses.board'),
+            'SITENAME' => config()->get('mail.addresses.board_sitename'),
+            'EMAIL_SIG' => !empty(config()->get('mail.addresses.board_sig')) ? "-- \n" . config()->get('mail.addresses.board_sig') : '',
         ], $vars);
     }
 
@@ -175,7 +175,7 @@ class Emailer
             }
 
             // Add default language namespace
-            $defaultLang = config()->get('default_lang');
+            $defaultLang = config()->get('localization.default_lang');
             $defaultPath = LANG_ROOT_DIR . '/' . $defaultLang . '/email_templates';
             if (files()->isDirectory($defaultPath)) {
                 try {

@@ -108,7 +108,7 @@ class Validate
         }
 
         // Extended email validation
-        if (config()->get('extended_email_validation')) {
+        if (config()->get('auth.extended_email_validation')) {
             $validator = new EmailValidator;
 
             $multipleValidations = new MultipleValidationWithAnd([
@@ -165,26 +165,26 @@ class Validate
         }
 
         // Symbols check
-        if (config()->get('password_symbols')) {
+        if (config()->get('auth.password.symbols')) {
             // Numbers
-            if (config()->get('password_symbols.nums')) {
+            if (config()->get('auth.password.symbols.nums')) {
                 if (!StringHelper::isContainsNums($password)) {
                     return __('CHOOSE_PASS_ERR_NUM');
                 }
             }
             // Letters
-            if (config()->get('password_symbols.letters.lowercase')) {
+            if (config()->get('auth.password.symbols.letters.lowercase')) {
                 if (!StringHelper::isContainsLetters($password)) {
                     return __('CHOOSE_PASS_ERR_LETTER');
                 }
             }
-            if (config()->get('password_symbols.letters.uppercase')) {
+            if (config()->get('auth.password.symbols.letters.uppercase')) {
                 if (!StringHelper::isContainsLetters($password, true)) {
                     return __('CHOOSE_PASS_ERR_LETTER_UPPERCASE');
                 }
             }
             // Spec symbols
-            if (config()->get('password_symbols.spec_symbols')) {
+            if (config()->get('auth.password.symbols.spec_symbols')) {
                 if (!StringHelper::isContainsSpecSymbols($password)) {
                     return __('CHOOSE_PASS_ERR_SPEC_SYMBOL');
                 }

@@ -77,7 +77,7 @@ class WhoopsManager
     {
         $handler = new EnhancedPrettyPageHandler;
 
-        foreach (config()->get('whoops.blacklist', []) as $key => $secrets) {
+        foreach (config()->get('logging.whoops.blacklist', []) as $key => $secrets) {
             foreach ($secrets as $secret) {
                 $handler->blacklist($key, $secret);
             }
@@ -107,8 +107,8 @@ class WhoopsManager
     private function registerPlaceholderHandler(): void
     {
         $this->whoops->pushHandler(function ($e) {
-            echo config()->get('whoops.error_message');
-            if (config()->get('whoops.show_error_details')) {
+            echo config()->get('logging.whoops.error_message');
+            if (config()->get('logging.whoops.show_error_details')) {
                 echo '<hr/>Error: ' . $this->sanitizeErrorMessage($e->getMessage()) . '.';
             }
         });
@@ -138,7 +138,7 @@ class WhoopsManager
      */
     private function registerTelegramHandler(): void
     {
-        if (!config()->get('telegram_sender.enabled')) {
+        if (!config()->get('services.telegram.enabled')) {
             return;
         }
 
@@ -147,9 +147,9 @@ class WhoopsManager
         $handler->setLogger(new Logger(
             APP_NAME,
             [new TelegramHandler(
-                config()->get('telegram_sender.token'),
-                (int)config()->get('telegram_sender.chat_id'),
-                timeout: (int)config()->get('telegram_sender.timeout'),
+                config()->get('services.telegram.token'),
+                (int)config()->get('services.telegram.chat_id'),
+                timeout: (int)config()->get('services.telegram.timeout'),
             )->setFormatter(new TelegramFormatter)],
         ));
         $this->whoops->pushHandler($handler);
@@ -160,11 +160,11 @@ class WhoopsManager
      */
     private function registerBugsnagHandler(): void
     {
-        if (!config()->get('bugsnag.enabled')) {
+        if (!config()->get('services.bugsnag.enabled')) {
             return;
         }
 
-        $bugsnag = Client::make(config()->get('bugsnag.api_key'));
+        $bugsnag = Client::make(config()->get('services.bugsnag.api_key'));
         $this->whoops->pushHandler(function ($e) use ($bugsnag) {
             $bugsnag->notifyException($e);
         });

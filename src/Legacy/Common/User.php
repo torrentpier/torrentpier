@@ -131,7 +131,7 @@ class User
             if ($session_id) {
                 $SQL['WHERE'][] = "s.session_id = '{$session_id}'";
 
-                if (config()->get('torhelp_enabled')) {
+                if (config()->get('tracker.torhelp_enabled')) {
                     $SQL['SELECT'][] = 'th.topic_id_csv AS torhelp';
                     $SQL['LEFT JOIN'][] = BB_BT_TORHELP . ' th ON(u.user_id = th.user_id)';
                 }
@@ -152,7 +152,7 @@ class User
                 if ($rowData) {
                     $this->data = $rowData;
 
-                    if ((TIMENOW - $this->data['session_time']) > config()->get('session_update_intrv')) {
+                    if ((TIMENOW - $this->data['session_time']) > config()->get('auth.sessions.update_interval')) {
                         $this->data['session_time'] = TIMENOW;
                         $update_sessions_table = true;
                     }
@@ -215,9 +215,9 @@ class User
         \define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
         \define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
         \define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
-        \define('IS_SUPER_ADMIN', IS_ADMIN && isset(config()->get('super_admins')[$this->data['user_id']]));
+        \define('IS_SUPER_ADMIN', IS_ADMIN && isset(config()->get('auth.super_admins')[$this->data['user_id']]));
         \define('IS_AM', IS_ADMIN || IS_MOD);
-        \define('IS_PREMIUM', !IS_GUEST && isset(config()->get('premium_users')[$this->data['user_id']]));
+        \define('IS_PREMIUM', !IS_GUEST && isset(config()->get('auth.premium_users')[$this->data['user_id']]));
 
         $this->set_shortcuts();
 
@@ -282,8 +282,8 @@ class User
             if (!$session_time = $this->data['user_session_time']) {
                 $last_visit = TIMENOW;
                 \define('FIRST_LOGON', true);
-            } elseif ($session_time < (TIMENOW - config()->get('last_visit_update_intrv'))) {
-                $last_visit = max($session_time, (TIMENOW - 86400 * config()->get('max_last_visit_days')));
+            } elseif ($session_time < (TIMENOW - config()->get('auth.sessions.last_visit_update_interval'))) {
+                $last_visit = max($session_time, (TIMENOW - 86400 * config()->get('auth.sessions.max_last_visit_days')));
             }
 
             if ($last_visit != $this->data['user_lastvisit']) {
@@ -460,7 +460,7 @@ class User
             // Clean up session cookies on logout
             foreach ([COOKIE_DATA, 'torhelp'] as $cookie) {
                 if (isset($_COOKIE[$cookie])) {
-                    bb_setcookie($cookie, '', COOKIE_EXPIRED);
+                    bb_setcookie($cookie, '', COOKIE_EXPIRED, true);
                 }
             }
         } else {
@@ -543,35 +543,35 @@ class User
 
         // Apply browser language
         $acceptLanguage = request()->headers->get('Accept-Language');
-        if (config()->get('auto_language_detection') && IS_GUEST && $acceptLanguage) {
+        if (config()->get('localization.auto_language_detection') && IS_GUEST && $acceptLanguage) {
             $http_accept_language = locale_get_primary_language(locale_accept_from_http($acceptLanguage));
-            if (isset(config()->get('lang')[$http_accept_language])) {
-                config()->set('default_lang', $http_accept_language);
+            if (isset(config()->get('localization.languages')[$http_accept_language])) {
+                config()->set('localization.default_lang', $http_accept_language);
             }
         }
 
         \define('SOURCE_LANG_DIR', LANG_ROOT_DIR . 'source/');
 
         // Determine language directory with fallback to source
-        $defaultLangPath = LANG_ROOT_DIR . config()->get('default_lang') . '/';
+        $defaultLangPath = LANG_ROOT_DIR . config()->get('localization.default_lang') . '/';
         \define('DEFAULT_LANG_DIR', files()->isDirectory($defaultLangPath) ? $defaultLangPath : SOURCE_LANG_DIR);
 
         if ($this->data['user_id'] != GUEST_UID) {
-            if ($this->data['user_lang'] && $this->data['user_lang'] != config()->get('default_lang')) {
-                config()->set('default_lang', basename($this->data['user_lang']));
-                $userLangPath = LANG_ROOT_DIR . config()->get('default_lang') . '/';
+            if ($this->data['user_lang'] && $this->data['user_lang'] != config()->get('localization.default_lang')) {
+                config()->set('localization.default_lang', basename($this->data['user_lang']));
+                $userLangPath = LANG_ROOT_DIR . config()->get('localization.default_lang') . '/';
                 if (files()->isDirectory($userLangPath)) {
                     \define('LANG_DIR', $userLangPath);
                 }
             }
 
             if (isset($this->data['user_timezone'])) {
-                config()->set('board_timezone', $this->data['user_timezone']);
+                config()->set('localization.board_timezone', $this->data['user_timezone']);
             }
         }
 
-        $this->data['user_lang'] = config()->get('default_lang');
-        $this->data['user_timezone'] = config()->get('board_timezone');
+        $this->data['user_lang'] = config()->get('localization.default_lang');
+        $this->data['user_timezone'] = config()->get('localization.board_timezone');
 
         if (!\defined('LANG_DIR')) {
             \define('LANG_DIR', DEFAULT_LANG_DIR);
@@ -732,7 +732,7 @@ class User
     public function checkPassword(string $enteredPassword, array $userdata): bool
     {
         if (password_verify($enteredPassword, $userdata['user_password'])) {
-            if (password_needs_rehash($userdata['user_password'], config()->get('password_hash_options.algo'), config()->get('password_hash_options.options'))) {
+            if (password_needs_rehash($userdata['user_password'], config()->get('auth.password.hash_options.algo'), config()->get('auth.password.hash_options.options'))) {
                 // Update password_hash
                 DB()->query('UPDATE ' . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
             }
@@ -754,6 +754,6 @@ class User
      */
     public function password_hash(string $enteredPassword): string
     {
-        return password_hash($enteredPassword, config()->get('password_hash_options.algo'), config()->get('password_hash_options.options'));
+        return password_hash($enteredPassword, config()->get('auth.password.hash_options.algo'), config()->get('auth.password.hash_options.options'));
     }
 }

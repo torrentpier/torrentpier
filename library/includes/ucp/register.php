@@ -9,6 +9,8 @@
  */
 
 use Illuminate\Support\Str;
+use TorrentPier\Data\Countries;
+use TorrentPier\Data\Timezones;
 
 set_die_append_msg();
 
@@ -45,20 +47,20 @@ switch ($mode) {
 
         if (!IS_ADMIN) {
             // IP limit
-            if (config()->get('unique_ip')) {
+            if (config()->get('auth.registration.unique_ip')) {
                 if ($users = DB()->fetch_row('SELECT user_id, username FROM ' . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
-                    bb_die(sprintf(__('ALREADY_REG_IP'), '<a href="' . url()->member($users['user_id'], $users['username']) . '"><b>' . $users['username'] . '</b></a>', config()->get('tech_admin_email')));
+                    bb_die(sprintf(__('ALREADY_REG_IP'), '<a href="' . url()->member($users['user_id'], $users['username']) . '"><b>' . $users['username'] . '</b></a>', config()->get('mail.addresses.tech_admin')));
                 }
             }
             // Disabling registration
-            if (config()->get('new_user_reg_disabled') || (config()->get('reg_email_activation') && !config()->get('emailer.enabled'))) {
+            if (config()->get('auth.registration.disabled') || (config()->get('auth.registration.email_activation') && !config()->get('mail.enabled'))) {
                 bb_die(__('NEW_USER_REG_DISABLED'));
             } // Time limit
-            elseif (config()->get('new_user_reg_restricted')) {
-                $tz = config()->get('board_timezone');
+            elseif (config()->get('auth.registration.restricted')) {
+                $tz = config()->get('localization.board_timezone');
                 $current_hour = (int)gmdate('G', TIMENOW + (3600 * $tz));
-                if (in_array($current_hour, config()->get('new_user_reg_interval'), true)) {
-                    $time_info = format_registration_intervals(config()->get('new_user_reg_interval'));
+                if (in_array($current_hour, config()->get('auth.registration.restricted_hours'), true)) {
+                    $time_info = format_registration_intervals(config()->get('auth.registration.restricted_hours'));
                     $message = sprintf(
                         __('REGISTERED_IN_TIME'),
                         $time_info['intervals'],
@@ -86,8 +88,8 @@ switch ($mode) {
             'user_password' => '',
             'user_email' => '',
             'invite_code' => '',
-            'user_timezone' => config()->get('board_timezone'),
-            'user_lang' => config()->get('default_lang'),
+            'user_timezone' => config()->get('localization.board_timezone'),
+            'user_lang' => config()->get('localization.default_lang'),
             'user_opt' => 0,
             'avatar_ext_id' => 0,
         ];
@@ -107,10 +109,10 @@ switch ($mode) {
             'username' => IS_ADMIN || config()->get('allow_namechange'),
             'user_password' => true,
             'user_email' => true, // should be after user_password
-            'user_lang' => config()->get('allow_change.language'),
+            'user_lang' => config()->get('localization.allow_change.language'),
             'user_gender' => config()->get('gender'),
             'user_birthday' => config()->get('birthday_enabled'),
-            'user_timezone' => config()->get('allow_change.timezone'),
+            'user_timezone' => config()->get('localization.allow_change.timezone'),
             'user_opt' => true,
             'avatar_ext_id' => true,
             'user_twitter' => true,
@@ -264,7 +266,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     }
                     $db_data['user_email'] = $email;
                 } elseif ($email != $pr_data['user_email']) {
-                    if (config()->get('email_change_disabled') && !$adm_edit && !IS_ADMIN) {
+                    if (config()->get('mail.email_change_disabled') && !$adm_edit && !IS_ADMIN) {
                         $errors[] = __('EMAIL_CHANGING_DISABLED');
                     }
                     if (!$cur_pass_valid) {
@@ -273,7 +275,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     if (!$errors && $err = TorrentPier\Validate::email($email)) {
                         $errors[] = $err;
                     }
-                    if (config()->get('reg_email_activation')) {
+                    if (config()->get('auth.registration.email_activation')) {
                         $pr_data['user_active'] = 0;
                         $db_data['user_active'] = 0;
                     }
@@ -301,7 +303,7 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'user_timezone':
             $user_timezone = request()->post->has('user_timezone') ? (float)request()->post->get('user_timezone') : (float)$pr_data['user_timezone'];
             if ($submit && ($user_timezone != $pr_data['user_timezone'] || $mode == 'register')) {
-                if (isset(config()->get('timezones')[str_replace(',', '.', $user_timezone)])) {
+                if (Timezones::exists(str_replace(',', '.', $user_timezone))) {
                     $pr_data['user_timezone'] = $user_timezone;
                     $db_data['user_timezone'] = $user_timezone;
                 }
@@ -353,10 +355,10 @@ foreach ($profile_fields as $field => $can_edit) {
 
             $update_user_opt = [
                 //	'user_opt_name'  => ($reg_mode) ? #reg_value : #in_login_change
-                'user_viewemail' => $reg_mode ? false : (IS_ADMIN || config()->get('show_email_visibility_settings')),
+                'user_viewemail' => $reg_mode ? false : (IS_ADMIN || config()->get('mail.show_email_visibility_settings')),
                 'user_viewonline' => $reg_mode ? false : true,
                 'user_notify' => $reg_mode ? true : true,
-                'user_notify_pm' => $reg_mode ? true : config()->get('pm_notify_enabled'),
+                'user_notify_pm' => $reg_mode ? true : config()->get('mail.notifications.pm_notify'),
                 'user_porn_forums' => $reg_mode ? false : true,
                 'user_dls' => $reg_mode ? false : true,
                 'user_callseed' => $reg_mode ? true : true,
@@ -388,7 +390,7 @@ foreach ($profile_fields as $field => $can_edit) {
 
                 // Integration with MonsterID
                 if (empty($avatarFile['name']) && !request()->post->has('delete_avatar') && request()->post->has('use_monster_avatar')) {
-                    $monsterAvatar = new Arokettu\MonsterID\Monster($pr_data['user_email'], config()->get('avatars.max_height'));
+                    $monsterAvatar = new Arokettu\MonsterID\Monster($pr_data['user_email'], config()->get('avatars.user.max_height'));
                     $tempAvatar = tmpfile();
                     $tempAvatarPath = stream_get_meta_data($tempAvatar)['uri'];
                     $monsterAvatar->writeToStream($tempAvatar);
@@ -409,10 +411,10 @@ foreach ($profile_fields as $field => $can_edit) {
                     delete_avatar($pr_data['user_id'], $pr_data['avatar_ext_id']);
                     $pr_data['avatar_ext_id'] = 0;
                     $db_data['avatar_ext_id'] = 0;
-                } elseif (!empty($avatarFile['name']) && config()->get('avatars.up_allowed')) {
+                } elseif (!empty($avatarFile['name']) && config()->get('avatars.user.up_allowed')) {
                     $upload = new TorrentPier\Legacy\Common\Upload;
 
-                    if ($upload->init(config()->getSection('avatars'), $avatarFile, !request()->post->has('use_monster_avatar')) && $upload->store('avatar', $pr_data)) {
+                    if ($upload->init(config()->get('avatars.user'), $avatarFile, !request()->post->has('use_monster_avatar')) && $upload->store('avatar', $pr_data)) {
                         $pr_data['avatar_ext_id'] = $upload->file_ext_id;
                         $db_data['avatar_ext_id'] = (int)$upload->file_ext_id;
                     } else {
@@ -420,7 +422,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     }
                 }
             }
-            $tp_data['AVATARS_MAX_SIZE'] = humn_size(config()->get('avatars.max_size'));
+            $tp_data['AVATARS_MAX_SIZE'] = humn_size(config()->get('avatars.user.max_size'));
             break;
 
             /**
@@ -452,7 +454,7 @@ foreach ($profile_fields as $field => $can_edit) {
             }
             $tp_data['USER_FROM'] = $pr_data['user_from'];
             $tp_data['COUNTRY_SELECTED'] = render_flag($pr_data['user_from']);
-            $tp_data['COUNTRY_SELECT'] = build_select('user_from', array_flip(config()->get('countries')), $pr_data['user_from']);
+            $tp_data['COUNTRY_SELECT'] = build_select('user_from', array_flip(Countries::all()), $pr_data['user_from']);
             $tp_data['CHECKED_MANUAL_COUNTRY'] = ($tp_data['COUNTRY_SELECTED'] === $pr_data['user_from']) ? 'checked' : '';
             break;
 
@@ -524,9 +526,9 @@ foreach ($profile_fields as $field => $can_edit) {
             $templates = request()->post->has('tpl_name') ? (string)request()->post->get('tpl_name') : $pr_data['tpl_name'];
             $templates = htmlCHR($templates);
             if ($submit && $templates != $pr_data['tpl_name']) {
-                $pr_data['tpl_name'] = config()->get('tpl_name');
-                $db_data['tpl_name'] = (string)config()->get('tpl_name');
-                $availableTemplates = config()->get('templates');
+                $pr_data['tpl_name'] = config()->get('templates.default');
+                $db_data['tpl_name'] = (string)config()->get('templates.default');
+                $availableTemplates = config()->get('templates.available');
                 foreach ($availableTemplates as $folder => $name) {
                     if ($templates == $folder) {
                         $pr_data['tpl_name'] = $templates;
@@ -551,7 +553,7 @@ if ($submit && !$errors) {
      *  Создание нового профиля
      */
     if ($mode == 'register') {
-        if (config()->get('reg_email_activation')) {
+        if (config()->get('auth.registration.email_activation')) {
             $user_actkey = Str::random(ACTKEY_LENGTH);
             $db_data['user_active'] = 0;
             $db_data['user_actkey'] = $user_actkey;
@@ -566,7 +568,7 @@ if ($submit && !$errors) {
         }
 
         if (!isset($db_data['tpl_name'])) {
-            $db_data['tpl_name'] = (string)config()->get('tpl_name');
+            $db_data['tpl_name'] = (string)config()->get('templates.default');
         }
 
         $sql_args = DB()->build_array('INSERT', $db_data);
@@ -591,7 +593,7 @@ if ($submit && !$errors) {
             set_pr_die_append_msg($new_user_id);
             $message = __('ACCOUNT_ADDED');
         } else {
-            if (config()->get('reg_email_activation')) {
+            if (config()->get('auth.registration.email_activation')) {
                 $message = __('ACCOUNT_INACTIVE');
                 $email_subject = sprintf(__('EMAILER_SUBJECT')['USER_WELCOME_INACTIVE'], config()->get('sitename'));
                 $email_template = 'user_welcome_inactive';
@@ -701,9 +703,9 @@ template()->assign_vars([
     'LANGUAGE_SELECT' => TorrentPier\Legacy\Common\Select::language($pr_data['user_lang'], 'user_lang'),
     'TIMEZONE_SELECT' => TorrentPier\Legacy\Common\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
 
-    'AVATAR_EXPLAIN' => sprintf(__('AVATAR_EXPLAIN'), config()->get('avatars.max_width'), config()->get('avatars.max_height'), humn_size(config()->get('avatars.max_size'))),
+    'AVATAR_EXPLAIN' => sprintf(__('AVATAR_EXPLAIN'), config()->get('avatars.user.max_width'), config()->get('avatars.user.max_height'), humn_size(config()->get('avatars.user.max_size'))),
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
-    'AVATAR_DIS_EXPLAIN' => sprintf(__('AVATAR_DISABLE'), config()->get('terms_and_conditions_url')),
+    'AVATAR_DIS_EXPLAIN' => sprintf(__('AVATAR_DISABLE'), config()->get('app.terms_and_conditions_url')),
     'AVATAR_IMG' => get_avatar($pr_data['user_id'], $pr_data['avatar_ext_id'], !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')),
 
     'SIGNATURE_EXPLAIN' => sprintf(__('SIGNATURE_EXPLAIN'), config()->get('max_sig_chars')),

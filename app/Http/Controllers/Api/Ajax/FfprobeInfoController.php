@@ -34,7 +34,7 @@ class FfprobeInfoController
      */
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
-        if (!config()->get('torr_server.enabled')) {
+        if (!config()->get('services.torrserver.enabled')) {
             return $this->error(__('MODULE_OFF'));
         }
 

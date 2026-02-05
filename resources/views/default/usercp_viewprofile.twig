@@ -373,7 +373,7 @@ ajax.callback.group_membership = function(data) {
 						[ <a href="{{ U_SEARCH_USER }}" class="med">{{ __('SEARCH_USER_POSTS') }}</a> ]
 						[ <a href="{{ U_SEARCH_TOPICS }}" class="med">{{ __('SEARCH_USER_TOPICS') }}</a> ]
 						[ <a href="{{ U_SEARCH_RELEASES }}" class="med">{{ __('SEARCH_RELEASES') }}</a> ]
-						{% if config('topic_notify_enabled') %}{% if PROFILE_USER %}[ <a href="{{ U_WATCHED_TOPICS }}" class="med">{{ __('WATCHED_TOPICS') }}</a> ]{% elseif IS_ADMIN %}[ <a href="{{ U_WATCHED_TOPICS }}?{{ constant('POST_USERS_URL') }}={{ PROFILE_USER_ID }}" class="med">{{ __('WATCHED_TOPICS') }}</a> ]{% endif %}{% endif %}
+						{% if config('mail.notifications.topic_notify') %}{% if PROFILE_USER %}[ <a href="{{ U_WATCHED_TOPICS }}" class="med">{{ __('WATCHED_TOPICS') }}</a> ]{% elseif IS_ADMIN %}[ <a href="{{ U_WATCHED_TOPICS }}?{{ constant('POST_USERS_URL') }}={{ PROFILE_USER_ID }}" class="med">{{ __('WATCHED_TOPICS') }}</a> ]{% endif %}{% endif %}
 						[ <a title="{{ __('ATOM_SUBSCRIBE') }}" href="/feed/u/{{ PROFILE_USER_ID }}/" target="_blank">{{ FEED_IMG|raw }}</a> ]
 					</p>
 				</td>
@@ -396,7 +396,7 @@ ajax.callback.group_membership = function(data) {
 						<b id="passkey" class="med bold">{% if AUTH_KEY %}{{ AUTH_KEY }}{% else %}{{ __('NOSELECT') }}{% endif %}</b>&nbsp;|&nbsp;<a href="#" onclick="ajax.exec({ action: 'passkey', mode: 'generate', user_id  : {{ PROFILE_USER_ID }} }); return false;">{{ __('BT_GEN_PASSKEY') }}</a>
 					</span> ]
 					{% endif %}
-					{% if PROFILE_USER or IS_ADMIN %}{% if config('ratio_null_enabled') %}{% if not NULLED_RATIO or IS_ADMIN %}
+					{% if PROFILE_USER or IS_ADMIN %}{% if config('tracker.ratio_null_enabled') %}{% if not NULLED_RATIO or IS_ADMIN %}
 					[ <a class="med" href="#" onclick="ajax.index_data('null_ratio'); return false;">{{ __('BT_NULL_RATIO') }}</a> ]
 					{% endif %}{% endif %}{% endif %}
 				</td>

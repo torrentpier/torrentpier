@@ -153,7 +153,7 @@ ajax.callback.callseed = function (data) {
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('DL_PORT') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
 				{% endif %}
                 <th class="{sorter: false}"><b class="tbs-text">{{ __('DL_CLIENT') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
-                {% if config('ip2country_settings.enabled') %}<th class="{sorter: false}"><b class="tbs-text">{{ __('COUNTRY') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>{% endif %}
+                {% if config('services.ip2country.enabled') %}<th class="{sorter: false}"><b class="tbs-text">{{ __('COUNTRY') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>{% endif %}
 			</tr>
 			</thead>
 			{% for row in SFULL.ROWS %}
@@ -171,7 +171,7 @@ ajax.callback.callseed = function (data) {
 				<td>{{ row.PORT.PORT }}</td>
 				{% endif %}
                 <td>{{ row.PEER_ID|raw }}</td>
-                {% if config('ip2country_settings.enabled') %}<td>{{ row.COUNTRY|raw }}</td>{% endif %}
+                {% if config('services.ip2country.enabled') %}<td>{{ row.COUNTRY|raw }}</td>{% endif %}
 			</tr>
 			{% endfor %}{# /SFULL.ROWS #}
 			</table>
@@ -206,7 +206,7 @@ ajax.callback.callseed = function (data) {
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{{ __('DL_PORT') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
                 {% endif %}
                 <th class="{sorter: false}"><b class="tbs-text">{{ __('DL_CLIENT') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>
-                {% if config('ip2country_settings.enabled') %}<th class="{sorter: false}"><b class="tbs-text">{{ __('COUNTRY') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>{% endif %}
+                {% if config('services.ip2country.enabled') %}<th class="{sorter: false}"><b class="tbs-text">{{ __('COUNTRY') }}</b><img width="75" class="spacer" src="{{ SPACER }}" alt="" /></th>{% endif %}
 			</tr>
 			</thead>
 			{% for row in LFULL.ROWS %}
@@ -224,7 +224,7 @@ ajax.callback.callseed = function (data) {
 				<td>{{ row.PORT.PORT }}</td>
 				{% endif %}
                 <td>{{ row.PEER_ID|raw }}</td>
-                {% if config('ip2country_settings.enabled') %}<td>{{ row.COUNTRY|raw }}</td>{% endif %}
+                {% if config('services.ip2country.enabled') %}<td>{{ row.COUNTRY|raw }}</td>{% endif %}
 			</tr>
 			{% endfor %}{# /LFULL.ROWS #}
 			</table>

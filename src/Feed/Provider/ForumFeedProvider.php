@@ -62,7 +62,7 @@ class ForumFeedProvider implements FeedProviderInterface
     public function getMetadata(): FeedMetadata
     {
         $title = $this->forumId === 0
-            ? (__('ATOM_GLOBAL_FEED') ?: config()->get('server_name'))
+            ? (__('ATOM_GLOBAL_FEED') ?: config()->get('app.server_name'))
             : htmlCHR($this->forumName);
 
         // Link to forum with semantic URL, or homepage for global feed

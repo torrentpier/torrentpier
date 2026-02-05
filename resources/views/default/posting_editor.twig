@@ -151,7 +151,7 @@ function checkForm(form) {
 {% if QUICK_REPLY %}
 {% if IN_PM %}
 {% else %}
-{% if config('use_ajax_posts') and not IS_GUEST %}
+{% if config('forum.use_ajax_posts') and not IS_GUEST %}
 	if(form.message.value.length < 100 && submitted)
 	{
         var notify = 0;

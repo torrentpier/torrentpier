@@ -99,7 +99,7 @@ DB()->query('DROP TABLE IF EXISTS ' . NEW_BB_BT_DLSTATUS_SNAP . ', ' . OLD_BB_BT
 //
 // TORHELP
 //
-if (config()->get('torhelp_enabled')) {
+if (config()->get('tracker.torhelp_enabled')) {
     $tor_min_seeders = 0;   // "<="
     $tor_min_leechers = 2;   // ">="
     $tor_min_completed = 10;  // ">="
@@ -142,7 +142,7 @@ if (config()->get('torhelp_enabled')) {
 			WHERE
 			      trsn.seeders          <=  {$tor_min_seeders}
 			  AND trsn.leechers         >=  {$tor_min_leechers}
-			                          AND tor.forum_id          !=  " . (int)config()->get('trash_forum_id') . "
+			                          AND tor.forum_id          !=  " . (int)config()->get('forum.trash_forum_id') . "
 			  AND tor.complete_count    >=  {$tor_min_completed}
 			  AND tor.seeder_last_seen  <=  (UNIX_TIMESTAMP() - {$tor_seed_last_seen_days}*86400)
 			  AND dl.user_id            IN({$online_users_csv})

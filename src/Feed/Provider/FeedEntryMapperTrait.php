@@ -66,7 +66,7 @@ trait FeedEntryMapperTrait
             return false;
         }
 
-        $torFrozen = config()->get('tor_frozen');
+        $torFrozen = config()->get('tracker.tor_frozen');
 
         return \is_array($torFrozen) && isset($torFrozen[$topic['tor_status']]);
     }
@@ -101,7 +101,7 @@ trait FeedEntryMapperTrait
     private function buildEntryLink(array $topic): string
     {
         // Direct download link if enabled and torrent is registered
-        if (config()->get('atom.direct_down') && !empty($topic['tracker_status'])) {
+        if (config()->get('forum.atom.direct_down') && !empty($topic['tracker_status'])) {
             return make_url(DL_URL . $topic['topic_id'] . '/');
         }
 
@@ -114,7 +114,7 @@ trait FeedEntryMapperTrait
      */
     private function buildEntryDescription(array $topic): ?string
     {
-        if (!config()->get('atom.direct_view') || empty($topic['post_html'])) {
+        if (!config()->get('forum.atom.direct_view') || empty($topic['post_html'])) {
             return null;
         }
 
@@ -132,7 +132,7 @@ trait FeedEntryMapperTrait
             return '';
         }
 
-        $window = (int)(config()->get('atom.updated_window') ?? 604800); // default: 1 week
+        $window = (int)(config()->get('forum.atom.updated_window') ?? 604800); // default: 1 week
 
         if ($topic['topic_first_post_edit_time'] > TIMENOW - $window) {
             return '[' . __('ATOM_UPDATED') . '] ';

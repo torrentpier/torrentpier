@@ -37,7 +37,7 @@ class ThxController
     {
         $body = $request->getParsedBody() ?? [];
 
-        if (!config()->get('tor_thank')) {
+        if (!config()->get('tracker.tor_thank')) {
             return $this->error(__('MODULE_OFF'));
         }
 
@@ -95,7 +95,7 @@ class ThxController
         ];
 
         // Limit voters per topic
-        $torThankLimitPerTopic = (int)config()->get('tor_thank_limit_per_topic');
+        $torThankLimitPerTopic = (int)config()->get('tracker.tor_thank_limit_per_topic');
         if ($torThankLimitPerTopic > 0) {
             $thanksCount = \count($cachedThanks);
             if ($thanksCount > $torThankLimitPerTopic) {
@@ -126,7 +126,7 @@ class ThxController
      */
     private function handleGet(int $topicId, string $thanksCacheKey): ResponseInterface
     {
-        if (IS_GUEST && !config()->get('tor_thanks_list_guests')) {
+        if (IS_GUEST && !config()->get('tracker.tor_thanks_list_guests')) {
             return $this->error(__('NEED_TO_LOGIN_FIRST'));
         }
 

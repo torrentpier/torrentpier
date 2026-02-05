@@ -43,7 +43,7 @@ echo '
 
 if (defined('REQUESTED_PAGE') && !defined('DISABLE_CACHING_OUTPUT')) {
     if (IS_GUEST === true) {
-        caching_output(true, 'store', REQUESTED_PAGE . '_guest_' . config()->get('default_lang'));
+        caching_output(true, 'store', REQUESTED_PAGE . '_guest_' . config()->get('localization.default_lang'));
     }
 }
 

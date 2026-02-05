@@ -106,7 +106,7 @@ if (request()->query->get('pane') === 'left') {
     $users_per_day = sprintf('%.2f', $total_users / $boarddays);
 
     $avatar_dir_size = 0;
-    $avatarPath = config()->get('avatars.upload_path');
+    $avatarPath = config()->get('avatars.user.upload_path');
 
     if (files()->isDirectory($avatarPath)) {
         foreach (files()->files($avatarPath) as $file) {
@@ -203,7 +203,7 @@ if (request()->query->get('pane') === 'left') {
                     'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'd-M-Y H:i', false),
                     'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'd-M-Y H:i', false),
                     'IP_ADDRESS' => $reg_ip,
-                    'U_WHOIS_IP' => config()->get('whois_info') . $reg_ip,
+                    'U_WHOIS_IP' => config()->get('services.whois_info') . $reg_ip,
                 ]);
             }
         }
@@ -222,7 +222,7 @@ if (request()->query->get('pane') === 'left') {
                     'STARTED' => bb_date($onlinerow_guest[$i]['session_start'], 'd-M-Y H:i', false),
                     'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'd-M-Y H:i', false),
                     'IP_ADDRESS' => $guest_ip,
-                    'U_WHOIS_IP' => config()->get('whois_info') . $guest_ip,
+                    'U_WHOIS_IP' => config()->get('services.whois_info') . $guest_ip,
                 ]);
             }
         }

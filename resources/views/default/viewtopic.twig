@@ -16,7 +16,7 @@
 {% endif %}
 {% endif %}
 
-{% if config('show_post_bbcode_button.enabled') %}
+{% if config('forum.show_post_bbcode_button.enabled') %}
 <script type="text/javascript">
     let loadedText = [];
 
@@ -40,7 +40,7 @@
 </script>
 {% endif %}
 
-{% if config('use_ajax_posts') and (AUTH_DELETE or AUTH_REPLY or AUTH_EDIT) %}
+{% if config('forum.use_ajax_posts') and (AUTH_DELETE or AUTH_REPLY or AUTH_EDIT) %}
 	<script type="text/javascript">
 		ajax.open_edit = false;
 
@@ -427,10 +427,10 @@ function build_poll_add_form (src_el)
 
 			<p style="float: right; padding: 3px 2px 4px;" class="post_btn_1">
 				{% if postrow_item.IS_FIRST_POST and CAN_ADD_POLL %}<a href="#" onclick="return build_poll_add_form(this);" class="txtb">[ {{ __('POLL') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
-				{% if postrow_item.QUOTE %}<a class="txtb" href="{% if config('use_ajax_posts') %}" onclick="ajax.exec({ action: 'posts', post_id: {{ postrow_item.POST_ID }}, type: 'reply'}); return false;{% else %}{{ QUOTE_URL }}{{ postrow_item.POST_ID }}{% endif %}">[ {{ __('QUOTE') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
-				{% if postrow_item.EDIT %}<a class="txtb" href="{% if config('use_ajax_posts') %}" onclick="edit_post({{ postrow_item.POST_ID }}, 'edit'); return false;{% else %}{{ EDIT_POST_URL }}{{ postrow_item.POST_ID }}{% endif %}">[ {{ __('EDIT') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
-				{% if postrow_item.DELETE %}<a class="txtb" href="{% if config('use_ajax_posts') %}" onclick="ajax.exec({ action: 'posts', post_id: {{ postrow_item.POST_ID }}, topic_id : {{ TOPIC_ID }}, type: 'delete'}); return false;{% else %}{{ DELETE_POST_URL }}{{ postrow_item.POST_ID }}{% endif %}">[ {{ __('DELETE') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
-				{% if config('show_post_bbcode_button.enabled') %}{% if postrow_item.IS_FIRST_POST or not config('show_post_bbcode_button.only_for_first_post') %}<a href="#" class="txtb" onclick="ajax.view_post('{{ postrow_item.POST_ID }}'); return false;">[ {{ __('CODE') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}{% endif %}
+				{% if postrow_item.QUOTE %}<a class="txtb" href="{% if config('forum.use_ajax_posts') %}" onclick="ajax.exec({ action: 'posts', post_id: {{ postrow_item.POST_ID }}, type: 'reply'}); return false;{% else %}{{ QUOTE_URL }}{{ postrow_item.POST_ID }}{% endif %}">[ {{ __('QUOTE') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
+				{% if postrow_item.EDIT %}<a class="txtb" href="{% if config('forum.use_ajax_posts') %}" onclick="edit_post({{ postrow_item.POST_ID }}, 'edit'); return false;{% else %}{{ EDIT_POST_URL }}{{ postrow_item.POST_ID }}{% endif %}">[ {{ __('EDIT') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
+				{% if postrow_item.DELETE %}<a class="txtb" href="{% if config('forum.use_ajax_posts') %}" onclick="ajax.exec({ action: 'posts', post_id: {{ postrow_item.POST_ID }}, topic_id : {{ TOPIC_ID }}, type: 'delete'}); return false;{% else %}{{ DELETE_POST_URL }}{{ postrow_item.POST_ID }}{% endif %}">[ {{ __('DELETE') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
+				{% if config('forum.show_post_bbcode_button.enabled') %}{% if postrow_item.IS_FIRST_POST or not config('forum.show_post_bbcode_button.only_for_first_post') %}<a href="#" class="txtb" onclick="ajax.view_post('{{ postrow_item.POST_ID }}'); return false;">[ {{ __('CODE') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}{% endif %}
 				{% if postrow_item.IP %}<a class="txtb" href="{{ IP_POST_URL }}{{ postrow_item.POST_ID }}&amp;{{ constant('POST_TOPIC_URL') }}={{ TOPIC_ID }}">[ {{ __('IP') }} ]</a>{{ POST_BTN_SPACER|raw }}{% endif %}
 				{% if AUTH_MOD %}
 					<a class="menu-root menu-alt1 txtb" href="#mc_{{ postrow_item.POST_ID }}">[ {{ __('COMMENT') }} ]</a>{{ POST_BTN_SPACER|raw }}

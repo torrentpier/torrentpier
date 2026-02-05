@@ -148,7 +148,7 @@ class PerformancePanel implements IBarPanel
         return match ($type) {
             'current' => \function_exists('sys') ? sys('mem') : memory_get_usage(),
             'peak' => \function_exists('sys') ? sys('mem_peak') : memory_get_peak_usage(),
-            'start' => (int)(config()->get('mem_on_start') ?? 0),
+            'start' => 0, // Runtime value - track externally if needed
             default => 0,
         };
     }

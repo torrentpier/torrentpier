@@ -38,7 +38,7 @@ class FileList
         $info = &$this->tor_decoded['info'];
         if (isset($info['meta version'], $info['file tree'])) { //v2
             if (($info['meta version']) === 2 && \is_array($info['file tree'])) {
-                return $this->fileTreeList($info['file tree'], $info['name'] ?? '', config()->get('flist_timeout'));
+                return $this->fileTreeList($info['file tree'], $info['name'] ?? '', config()->get('forum.flist_timeout'));
             }
         }
 
@@ -119,7 +119,7 @@ class FileList
                     continue;
                 }
 
-                $structure = array_deep($f['path'], 'clean_tor_dirname', timeout: config()->get('flist_timeout'));
+                $structure = array_deep($f['path'], 'clean_tor_dirname', timeout: config()->get('forum.flist_timeout'));
                 if (isset($structure['timeout'])) {
                     bb_die("Timeout, too many nested files/directories for file listing, aborting after \n{$structure['recs']} recursive calls.\nNesting level: " . \count($info['files'], COUNT_RECURSIVE));
                 }

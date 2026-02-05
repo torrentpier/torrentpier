@@ -48,7 +48,7 @@ page_cfg('load_tpl_vars', [
 //
 // Is PM disabled?
 //
-if (config()->get('privmsg_disable')) {
+if (config()->get('forum.privmsg_disable')) {
     bb_die('PM_DISABLED');
 }
 
@@ -80,13 +80,13 @@ if ($folder = request()->getString('folder')) {
 
 template()->assign_vars([
     'IN_PM' => true,
-    'QUICK_REPLY' => config()->get('show_quick_reply') && $folder == 'inbox' && $mode == 'read',
+    'QUICK_REPLY' => config()->get('forum.show_quick_reply') && $folder == 'inbox' && $mode == 'read',
 ]);
 
 //
 // Set mode for quick reply
 //
-if (empty($mode) && config()->get('show_quick_reply') && $folder == 'inbox' && $preview) {
+if (empty($mode) && config()->get('forum.show_quick_reply') && $folder == 'inbox' && $preview) {
     $mode = 'reply';
 }
 
@@ -227,7 +227,7 @@ if ($mode == 'read') {
         }
 
         if ($sent_info = DB()->sql_fetchrow($result)) {
-            if (config()->get('max_sentbox_privmsgs') && $sent_info['sent_items'] >= config()->get('max_sentbox_privmsgs')) {
+            if (config()->get('forum.max_sentbox_privmsgs') && $sent_info['sent_items'] >= config()->get('forum.max_sentbox_privmsgs')) {
                 $sql = 'SELECT privmsgs_id FROM ' . BB_PRIVMSGS . '
 					WHERE privmsgs_type = ' . PRIVMSGS_SENT_MAIL . '
 						AND privmsgs_date = ' . $sent_info['oldest_post_time'] . '
@@ -616,7 +616,7 @@ if ($mode == 'read') {
         }
 
         if ($saved_info = DB()->sql_fetchrow($result)) {
-            if (config()->get('max_savebox_privmsgs') && $saved_info['savebox_items'] >= config()->get('max_savebox_privmsgs')) {
+            if (config()->get('forum.max_savebox_privmsgs') && $saved_info['savebox_items'] >= config()->get('forum.max_savebox_privmsgs')) {
                 $sql = 'SELECT privmsgs_id FROM ' . BB_PRIVMSGS . '
 					WHERE ( ( privmsgs_to_userid = ' . userdata('user_id') . '
 								AND privmsgs_type = ' . PRIVMSGS_SAVED_IN_MAIL . ' )
@@ -814,11 +814,11 @@ if ($mode == 'read') {
         }
 
         // Check smilies limit
-        if (config()->get('max_smilies_pm')) {
+        if (config()->get('forum.max_smilies_pm')) {
             $count_smilies = substr_count(bbcode()->toHtml($privmsg_message), '<img class="smile" src="' . config()->get('smilies_path'));
-            if ($count_smilies > config()->get('max_smilies_pm')) {
+            if ($count_smilies > config()->get('forum.max_smilies_pm')) {
                 $error = true;
-                $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . sprintf(__('MAX_SMILIES_PER_POST'), config()->get('max_smilies_pm'));
+                $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . sprintf(__('MAX_SMILIES_PER_POST'), config()->get('forum.max_smilies_pm'));
             }
         }
     }
@@ -846,7 +846,7 @@ if ($mode == 'read') {
             }
 
             if ($inbox_info = DB()->sql_fetchrow($result)) {
-                if (config()->get('max_inbox_privmsgs') && $inbox_info['inbox_items'] >= config()->get('max_inbox_privmsgs')) {
+                if (config()->get('forum.max_inbox_privmsgs') && $inbox_info['inbox_items'] >= config()->get('forum.max_inbox_privmsgs')) {
                     $sql = 'SELECT privmsgs_id FROM ' . BB_PRIVMSGS . '
 						WHERE ( privmsgs_type = ' . PRIVMSGS_NEW_MAIL . '
 								OR privmsgs_type = ' . PRIVMSGS_READ_MAIL . '
@@ -914,7 +914,7 @@ if ($mode == 'read') {
 
             TorrentPier\Sessions::cache_rm_user_sessions($to_userdata['user_id']);
 
-            if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && config()->get('pm_notify_enabled')) {
+            if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && config()->get('mail.notifications.pm_notify')) {
                 // Sending email
                 $emailer = new TorrentPier\Emailer;
 
@@ -1322,11 +1322,11 @@ if ($mode == 'read') {
     // Output data for inbox status
     //
     $box_limit_img_length = $box_limit_percent = $l_box_size_status = '';
-    $max_pm = ($folder != 'outbox') ? config()->get("max_{$folder}_privmsgs") : null;
+    $max_pm = ($folder != 'outbox') ? config()->get("forum.max_{$folder}_privmsgs") : null;
 
     if ($max_pm) {
         $box_limit_percent = min(round(($pm_all_total / $max_pm) * 100), 100);
-        $box_limit_img_length = min(round(($pm_all_total / $max_pm) * config()->get('privmsg_graphic_length')), config()->get('privmsg_graphic_length'));
+        $box_limit_img_length = min(round(($pm_all_total / $max_pm) * config()->get('forum.privmsg_graphic_length')), config()->get('forum.privmsg_graphic_length'));
         $box_limit_remain = max(($max_pm - $pm_all_total), 0);
 
         template()->assign_var('PM_BOX_SIZE_INFO');

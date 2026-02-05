@@ -305,7 +305,7 @@ if (empty(request()->query->all()) && empty(request()->post->all())) {
 
         'MY_TOPICS_ID' => 'my_topics',
         'MY_TOPICS_CHBOX' => build_checkbox($params->key('my_topics'), __('SEARCH_MY_TOPICS'), $params->val('my_topics'), true, null, 'my_topics'),
-        'TITLE_ONLY_CHBOX' => build_checkbox($params->key('title_only'), __('SEARCH_TITLES_ONLY'), true, config()->get('disable_ft_search_in_posts')),
+        'TITLE_ONLY_CHBOX' => build_checkbox($params->key('title_only'), __('SEARCH_TITLES_ONLY'), true, config()->get('forum.disable_ft_search_in_posts')),
         'ALL_WORDS_CHBOX' => build_checkbox($params->key('all_words'), __('SEARCH_ALL_WORDS'), true),
         'DL_CANCEL_CHBOX' => build_checkbox($params->key('dl_cancel'), __('SEARCH_DL_CANCEL'), $params->val('dl_cancel'), IS_GUEST, dl_link_css(DL_STATUS_CANCEL)),
         'DL_COMPL_CHBOX' => build_checkbox($params->key('dl_compl'), __('SEARCH_DL_COMPLETE'), $params->val('dl_compl'), IS_GUEST, dl_link_css(DL_STATUS_COMPLETE)),
@@ -441,7 +441,7 @@ $prev_days = ($params->val('time') != $search_all);
 $new_topics = (!IS_GUEST && ($params->val('new_topics') || request()->query->has('newposts')));
 $my_topics = ($params->val('poster_id') && $params->val('my_topics'));
 $my_posts = ($params->val('poster_id') && !$params->val('my_topics'));
-$title_match = ($text_match_sql && ($params->val('title_only') || config()->get('disable_ft_search_in_posts')));
+$title_match = ($text_match_sql && ($params->val('title_only') || config()->get('forum.disable_ft_search_in_posts')));
 
 // "Display as" mode (posts or topics)
 $post_mode = (!$dl_search && ($params->val('display_as') == $as_posts || request()->query->has('search_author')));
@@ -619,7 +619,7 @@ if ($post_mode) {
                 'POSTER_ID' => $post['poster_id'],
                 'POSTER' => profile_url($post),
                 'POST_ID' => $post['post_id'],
-                'POST_DATE' => bb_date($post['post_time'], config()->get('post_date_format')),
+                'POST_DATE' => bb_date($post['post_time'], config()->get('localization.date_formats.post')),
                 'IS_UNREAD' => is_unread($post['post_time'], $topic_id, $forum_id),
                 'MESSAGE' => $message,
                 'POSTED_AFTER' => '',
@@ -772,7 +772,7 @@ else {
 
     // Build SQL for displaying topics
     $SQL = DB()->get_empty_sql_array();
-    $join_dl = (config()->get('show_dl_status_in_search') && !IS_GUEST);
+    $join_dl = (config()->get('tracker.show_dl_status_in_search') && !IS_GUEST);
 
     $SQL['SELECT'][] = "
 		t.*, t.topic_poster AS first_user_id, u1.user_rank AS first_user_rank,
@@ -943,13 +943,13 @@ function fetch_search_ids(
 
 function prevent_huge_searches($SQL)
 {
-    if (config()->get('limit_max_search_results')) {
+    if (config()->get('forum.limit_max_search_results')) {
         $SQL['select_options'][] = 'SQL_CALC_FOUND_ROWS';
         $SQL['ORDER BY'] = [];
         $SQL['LIMIT'] = ['0'];
 
         if (DB()->query($SQL) && $row = DB()->fetch_row('SELECT FOUND_ROWS() AS rows_count')) {
-            if ($row['rows_count'] > config()->get('limit_max_search_results')) {
+            if ($row['rows_count'] > config()->get('forum.limit_max_search_results')) {
                 //				bb_log(Str::squish(DB()->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
                 bb_die('Too_many_search_results');
             }

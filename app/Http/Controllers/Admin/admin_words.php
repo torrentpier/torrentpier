@@ -14,7 +14,7 @@ if (!empty($setmodules)) {
     return;
 }
 
-if (!config()->get('use_word_censor')) {
+if (!config()->get('app.use_word_censor')) {
     bb_die('Word censor disabled <br /><br /> (use_word_censor in config.php)');
 }
 

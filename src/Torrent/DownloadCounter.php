@@ -30,7 +30,7 @@ class DownloadCounter
 
     public function __construct()
     {
-        $config = config()->get('torrent_dl');
+        $config = config()->get('tracker.torrent_dl');
         $this->dailyLimit = $config['daily_limit'] ?? 50;
         $this->dailyLimitPremium = $config['daily_limit_premium'] ?? 100;
     }

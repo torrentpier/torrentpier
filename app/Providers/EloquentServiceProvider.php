@@ -96,7 +96,7 @@ class EloquentServiceProvider extends ServiceProvider
     protected function registerObservers(): void
     {
         // Only register observers if ManticoreSearch is enabled
-        if (config()->get('search_engine_type') !== 'manticore') {
+        if (config()->get('forum.search_engine_type') !== 'manticore') {
             return;
         }
 

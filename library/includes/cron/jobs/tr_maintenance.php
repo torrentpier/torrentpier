@@ -10,12 +10,12 @@
 
 use TorrentPier\Torrent\Registry;
 
-if (empty(config()->get('seeder_last_seen_days_keep')) || empty(config()->get('seeder_never_seen_days_keep'))) {
+if (empty(config()->get('tracker.seeder_last_seen_days_keep')) || empty(config()->get('tracker.seeder_never_seen_days_keep'))) {
     return;
 }
 
-$last_seen_time = TIMENOW - 86400 * config()->get('seeder_last_seen_days_keep');
-$never_seen_time = TIMENOW - 86400 * config()->get('seeder_never_seen_days_keep');
+$last_seen_time = TIMENOW - 86400 * config()->get('tracker.seeder_last_seen_days_keep');
+$never_seen_time = TIMENOW - 86400 * config()->get('tracker.seeder_never_seen_days_keep');
 $limit_sql = 3000;
 
 $dead_topics = DB()->table(BB_BT_TORRENTS)

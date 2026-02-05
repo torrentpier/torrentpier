@@ -47,7 +47,7 @@ if (!files()->isFile($file_path)) {
 }
 
 $file_contents = files()->get($file_path);
-if (config()->get('flist_max_files')) {
+if (config()->get('forum.flist_max_files')) {
     $filetree_pos = $meta_v2 ? strpos($file_contents, '9:file tree') : false;
     $files_pos = $meta_v1 ? strpos($file_contents, '5:files', $filetree_pos) : false;
 
@@ -57,8 +57,8 @@ if (config()->get('flist_max_files')) {
         $file_count = substr_count($file_contents, '6:length', $files_pos);
     }
 
-    if ($file_count > config()->get('flist_max_files')) {
-        bb_die(sprintf(__('BT_FLIST_LIMIT'), config()->get('flist_max_files'), $file_count), 410);
+    if ($file_count > config()->get('forum.flist_max_files')) {
+        bb_die(sprintf(__('BT_FLIST_LIMIT'), config()->get('forum.flist_max_files'), $file_count), 410);
     }
 }
 

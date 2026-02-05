@@ -134,7 +134,7 @@ class Registry
         }
 
         // TorrServer integration
-        if (config()->get('torr_server.enabled')) {
+        if (config()->get('services.torrserver.enabled')) {
             $torrServer = new TorrServerAPI;
             if ($torrServer->uploadTorrent($filename, TORRENT_MIMETYPE)) {
                 $torrServer->saveM3U($topic_id, bin2hex($info_hash ?? $info_hash_v2));
@@ -218,7 +218,7 @@ class Registry
         }
 
         // Bump topic
-        if (config()->get('tracker.tor_topic_up')) {
+        if (config()->get('bt_tor_topic_up')) {
             DB()->query('UPDATE ' . BB_TOPICS . ' SET topic_last_post_time = GREATEST(topic_last_post_time, ' . (TIMENOW - 3 * 86400) . ") WHERE topic_id = {$topic_id}");
         }
 
@@ -259,7 +259,7 @@ class Registry
         DB()->table(BB_BT_TRACKER)->where('topic_id', $topicId)->delete();
 
         // TorrServer integration
-        if (config()->get('torr_server.enabled')) {
+        if (config()->get('services.torrserver.enabled')) {
             $torrServer = new TorrServerAPI;
             $torrServer->removeM3U($topicId);
         }

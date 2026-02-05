@@ -568,7 +568,7 @@ switch ($mode) {
                     $poster = $postrow[$i]['username'];
                     $poster_rank = $postrow[$i]['user_rank'];
 
-                    $post_date = bb_date($postrow[$i]['post_time'], config()->get('post_date_format'));
+                    $post_date = bb_date($postrow[$i]['post_time'], config()->get('localization.date_formats.post'));
 
                     $message = $postrow[$i]['post_text'];
 

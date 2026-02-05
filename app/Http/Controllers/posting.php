@@ -240,7 +240,7 @@ if (!$is_auth[$is_auth_type]) {
 }
 
 if ($mode == 'new_rel') {
-    if ($tor_status = implode(',', config()->get('tor_cannot_new'))) {
+    if ($tor_status = implode(',', config()->get('tracker.tor_cannot_new'))) {
         $sql = DB()->fetch_rowset('SELECT t.topic_title, t.topic_id, tor.tor_status
 			FROM ' . BB_BT_TORRENTS . ' tor, ' . BB_TOPICS . ' t
 			WHERE poster_id = ' . userdata('user_id') . "
@@ -251,7 +251,7 @@ if ($mode == 'new_rel') {
 
         $topics = '';
         foreach ($sql as $row) {
-            $topics .= config()->get('tor_icons')[$row['tor_status']] . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
+            $topics .= config()->get('tracker.tor_icons')[$row['tor_status']] . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
         }
         if ($topics && !(IS_SUPER_ADMIN && request()->query->has('edit_tpl'))) {
             bb_die($topics . __('UNEXECUTED_RELEASE'));
@@ -262,9 +262,9 @@ if ($mode == 'new_rel') {
 }
 
 // Disallowed release editing with a certain status
-if (!empty(config()->get('tor_cannot_edit')) && $post_info['allow_reg_tracker'] && $post_data['first_post'] && !IS_AM) {
-    if ($tor_status = DB()->fetch_row('SELECT tor_status FROM ' . BB_BT_TORRENTS . " WHERE topic_id = {$topic_id} AND forum_id = {$forum_id} AND tor_status IN(" . implode(',', config()->get('tor_cannot_edit')) . ') LIMIT 1')) {
-        bb_die(__('NOT_EDIT_TOR_STATUS') . ':&nbsp;<span title="' . __('TOR_STATUS_NAME')[$tor_status['tor_status']] . '">' . config()->get('tor_icons')[$tor_status['tor_status']] . '&nbsp;' . __('TOR_STATUS_NAME')[$tor_status['tor_status']] . '</span>.');
+if (!empty(config()->get('tracker.tor_cannot_edit')) && $post_info['allow_reg_tracker'] && $post_data['first_post'] && !IS_AM) {
+    if ($tor_status = DB()->fetch_row('SELECT tor_status FROM ' . BB_BT_TORRENTS . " WHERE topic_id = {$topic_id} AND forum_id = {$forum_id} AND tor_status IN(" . implode(',', config()->get('tracker.tor_cannot_edit')) . ') LIMIT 1')) {
+        bb_die(__('NOT_EDIT_TOR_STATUS') . ':&nbsp;<span title="' . __('TOR_STATUS_NAME')[$tor_status['tor_status']] . '">' . config()->get('tracker.tor_icons')[$tor_status['tor_status']] . '&nbsp;' . __('TOR_STATUS_NAME')[$tor_status['tor_status']] . '</span>.');
     }
 }
 
@@ -328,7 +328,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
                     'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
                     'POSTER' => profile_url($row),
                     'POSTER_NAME_JS' => addslashes($row['username']),
-                    'POST_DATE' => '<a class="small" href="' . POST_URL . $row['post_id'] . '#' . $row['post_id'] . '" title="' . __('POST_LINK') . '">' . bb_date($row['post_time'], config()->get('post_date_format')) . '</a>',
+                    'POST_DATE' => '<a class="small" href="' . POST_URL . $row['post_id'] . '#' . $row['post_id'] . '" title="' . __('POST_LINK') . '">' . bb_date($row['post_time'], config()->get('localization.date_formats.post')) . '</a>',
                     'MESSAGE' => bbcode()->getParsedPost($row),
                 ];
             }
@@ -498,7 +498,7 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
             $message = '[quote="' . $quote_username . '"][qpost=' . $post_info['post_id'] . ']' . $message . '[/quote]';
 
             // hide user passkey
-            $message = preg_replace('#(?<=[\?&;]' . config()->get('passkey_key') . '=)[a-zA-Z0-9]#', 'passkey', $message);
+            $message = preg_replace('#(?<=[\?&;]' . config()->get('tracker.passkey_key') . '=)[a-zA-Z0-9]#', 'passkey', $message);
             // hide sid
             $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
 
@@ -638,7 +638,7 @@ template()->assign_vars([
     'U_VIEW_FORUM' => url()->forum($forum_id, $forum_name),
 
     'USERNAME' => @$username,
-    'CAPTCHA_HTML' => (IS_GUEST && !config()->get('captcha.disabled')) ? bb_captcha('get') : '',
+    'CAPTCHA_HTML' => (IS_GUEST && !config()->get('forum.captcha.disabled')) ? bb_captcha('get') : '',
     'SUBJECT' => $subject,
     'MESSAGE' => $message,
 

@@ -39,8 +39,8 @@ class AnnounceController
             return new BencodeResponse(['failure reason' => 'No User-Agent provided'], 200);
         }
 
-        $announce_interval = config()->get('announce_interval');
-        $passkey_key = config()->get('passkey_key');
+        $announce_interval = config()->get('tracker.announce_interval');
+        $passkey_key = config()->get('tracker.passkey_key');
 
         // Recover info_hash
         if (request()->query->has('?info_hash') && !request()->query->has('info_hash')) {
@@ -145,7 +145,7 @@ class AnnounceController
             || !is_numeric($port)
             || ($port < 1024 && !$stopped)
             || $port > 0xFFFF
-            || (!empty(config()->get('disallowed_ports')) && \in_array($port, config()->get('disallowed_ports')))
+            || (!empty(config()->get('tracker.disallowed_ports')) && \in_array($port, config()->get('tracker.disallowed_ports')))
         ) {
             return $this->msgDie('Invalid port: ' . $port);
         }
@@ -174,13 +174,13 @@ class AnnounceController
         $ip = request()->server->get('REMOTE_ADDR');
 
         // 'ip' query handling
-        if (!config()->get('ignore_reported_ip') && request()->query->has('ip') && $ip !== request()->query->get('ip')) {
-            if (!config()->get('verify_reported_ip') && request()->server->has('HTTP_X_FORWARDED_FOR')) {
+        if (!config()->get('tracker.ignore_reported_ip') && request()->query->has('ip') && $ip !== request()->query->get('ip')) {
+            if (!config()->get('tracker.verify_reported_ip') && request()->server->has('HTTP_X_FORWARDED_FOR')) {
                 $x_ip = request()->server->get('HTTP_X_FORWARDED_FOR');
 
                 if ($x_ip === request()->query->get('ip')) {
                     $filteredIp = filter_var($x_ip, FILTER_VALIDATE_IP);
-                    if ($filteredIp !== false && (config()->get('allow_internal_ip') || !filter_var($filteredIp, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE))) {
+                    if ($filteredIp !== false && (config()->get('tracker.allow_internal_ip') || !filter_var($filteredIp, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE))) {
                         $ip = $filteredIp;
                     }
                 }
@@ -290,7 +290,7 @@ class AnnounceController
                 \define('IS_USER', !IS_GUEST && (int)$row['user_level'] === USER);
             }
             if (!\defined('IS_SUPER_ADMIN')) {
-                \define('IS_SUPER_ADMIN', IS_ADMIN && isset(config()->get('super_admins')[$user_id]));
+                \define('IS_SUPER_ADMIN', IS_ADMIN && isset(config()->get('auth.super_admins')[$user_id]));
             }
             if (!\defined('IS_AM')) {
                 \define('IS_AM', IS_ADMIN || IS_MOD);
@@ -301,7 +301,7 @@ class AnnounceController
             $tor_status = $row['tor_status'];
 
             // Check tor status
-            if (!IS_AM && isset(config()->get('tor_frozen')[$tor_status]) && !(isset(config()->get('tor_frozen_author_download')[$tor_status]) && $releaser)) {
+            if (!IS_AM && isset(config()->get('tracker.tor_frozen')[$tor_status]) && !(isset(config()->get('tracker.tor_frozen_author_download')[$tor_status]) && $releaser)) {
                 return $this->msgDie('Torrent frozen and cannot be downloaded');
             }
 
@@ -325,7 +325,7 @@ class AnnounceController
                 $rating_msg = '';
 
                 if (!$seeder) {
-                    foreach (config()->get('rating') as $ratio => $limit) {
+                    foreach (config()->get('tracker.rating') as $ratio => $limit) {
                         if ($user_ratio < $ratio) {
                             config()->set('tracker.limit_active_tor', 1);
                             config()->set('tracker.limit_leech_count', $limit);
@@ -336,7 +336,7 @@ class AnnounceController
                 }
 
                 // Limit active torrents
-                if (!isset(config()->get('unlimited_users')[$user_id]) && config()->get('tracker.limit_active_tor') && ((config()->get('tracker.limit_seed_count') && $seeder) || (config()->get('tracker.limit_leech_count') && !$seeder))) {
+                if (!isset(config()->get('auth.unlimited_users')[$user_id]) && config()->get('tracker.limit_active_tor') && ((config()->get('tracker.limit_seed_count') && $seeder) || (config()->get('tracker.limit_leech_count') && !$seeder))) {
                     $sql = 'SELECT COUNT(DISTINCT topic_id) AS active_torrents
                         FROM ' . BB_BT_TRACKER . "
                         WHERE user_id = {$user_id}

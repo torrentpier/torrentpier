@@ -58,7 +58,7 @@ class CallseedController
             return $this->error(\sprintf(__('CALLSEED_MSG_SPAM'), $timeLeft));
         }
 
-        if (isset(config()->get('tor_no_tor_act')[$tData['tor_status']])) {
+        if (isset(config()->get('tracker.tor_no_tor_act')[$tData['tor_status']])) {
             return $this->error(__('NOT_AVAILABLE'));
         }
 

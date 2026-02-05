@@ -39,7 +39,7 @@ class Sessions
 
         $id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
 
-        return CACHE('session_cache')->set($id, $userdata, config()->get('session_update_intrv'));
+        return CACHE('session_cache')->set($id, $userdata, config()->get('auth.sessions.update_interval'));
     }
 
     /**

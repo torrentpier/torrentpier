@@ -8,7 +8,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!config()->get('torr_server.enabled')) {
+if (!config()->get('services.torrserver.enabled')) {
     redirect('index.php');
 }
 
@@ -54,7 +54,7 @@ if (!$is_auth['auth_download']) {
 
 // Check for frozen torrent
 $tor_status = $row['tor_status'];
-if (!IS_AM && isset(config()->get('tor_frozen')[$tor_status]) && !(isset(config()->get('tor_frozen_author_download')[$tor_status]) && TorrentPier\Topic\Guard::isAuthor($row['poster_id']))) {
+if (!IS_AM && isset(config()->get('tracker.tor_frozen')[$tor_status]) && !(isset(config()->get('tracker.tor_frozen_author_download')[$tor_status]) && TorrentPier\Topic\Guard::isAuthor($row['poster_id']))) {
     bb_die(__('TOR_STATUS_FORBIDDEN') . __('TOR_STATUS_NAME')[$tor_status]);
 }
 

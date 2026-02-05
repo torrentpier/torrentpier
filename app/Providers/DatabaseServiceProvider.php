@@ -31,9 +31,24 @@ class DatabaseServiceProvider extends ServiceProvider
         $this->app->singleton(Database::class, function ($app) {
             /** @var Config $config */
             $config = $app->make(Config::class);
-            $dbConfig = $config->get('db');
 
-            return new Database($dbConfig['db']);
+            // Get the default connection name
+            $default = $config->get('database.default', 'mysql');
+            $connection = $config->get("database.connections.{$default}");
+
+            // Convert Laravel-style config to legacy Database class format
+            // Expected: [dbhost, dbport, dbname, dbuser, dbpasswd, charset, persist]
+            $legacyConfig = [
+                $connection['host'] ?? '127.0.0.1',
+                $connection['port'] ?? '3306',
+                $connection['database'] ?? 'torrentpier',
+                $connection['username'] ?? 'root',
+                $connection['password'] ?? '',
+                $connection['charset'] ?? 'utf8mb4',
+                false, // persist (persistent connections)
+            ];
+
+            return new Database($legacyConfig);
         });
 
         $this->app->alias(Database::class, 'db');

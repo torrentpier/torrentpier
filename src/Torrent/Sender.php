@@ -41,7 +41,7 @@ class Sender
         $passkey_val = '';
         $user_id = userdata('user_id');
 
-        if (!$passkey_key = config()->get('passkey_key')) {
+        if (!$passkey_key = config()->get('tracker.passkey_key')) {
             bb_die('Could not add passkey (wrong config passkey_key)');
         }
 
@@ -58,7 +58,7 @@ class Sender
         }
 
         // Ratio limits
-        $min_ratio = config()->get('bt_min_ratio_allow_dl_tor');
+        $min_ratio = config()->get('tracker.min_ratio_allow_dl');
 
         if ($min_ratio && $user_id != $t_data['topic_poster'] && $user_id != GUEST_UID && $t_data['tor_type'] != TOR_TYPE_GOLD && $bt_userdata && ($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
             if ($user_ratio < $min_ratio) {
@@ -113,7 +113,7 @@ class Sender
         }
 
         // Add retracker
-        if (!empty(config()->get('tracker.retracker_host')) && config()->get('tracker.retracker')) {
+        if (!empty(config()->get('tracker.retracker_host')) && config()->get('tracker.retracker_enabled')) {
             if (bf(userdata('user_opt'), 'user_opt', 'user_retracker') || IS_GUEST) {
                 $tor['announce-list'] = array_merge($tor['announce-list'], [[config()->get('tracker.retracker_host')]]);
             }
@@ -145,7 +145,7 @@ class Sender
         }
 
         // Add publisher and topic url
-        $publisher_name = config()->get('server_name');
+        $publisher_name = config()->get('app.server_name');
         $publisher_url = make_url(TOPIC_URL . $topic_id);
 
         $tor['publisher'] = $publisher_name;

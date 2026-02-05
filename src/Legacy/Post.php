@@ -59,15 +59,15 @@ class Post
         }
 
         // Check smilies limit
-        if (config()->get('max_smilies')) {
+        if (config()->get('forum.max_smilies')) {
             $count_smilies = substr_count(bbcode()->toHtml($message), '<img class="smile" src="' . config()->get('smilies_path'));
-            if ($count_smilies > config()->get('max_smilies')) {
-                $to_many_smilies = \sprintf(__('MAX_SMILIES_PER_POST'), config()->get('max_smilies'));
+            if ($count_smilies > config()->get('forum.max_smilies')) {
+                $to_many_smilies = \sprintf(__('MAX_SMILIES_PER_POST'), config()->get('forum.max_smilies'));
                 $error_msg .= (!empty($error_msg)) ? '<br />' . $to_many_smilies : $to_many_smilies;
             }
         }
 
-        if (IS_GUEST && !config()->get('captcha.disabled') && !bb_captcha('check')) {
+        if (IS_GUEST && !config()->get('forum.captcha.disabled') && !bb_captcha('check')) {
             $error_msg .= (!empty($error_msg)) ? '<br />' . __('CAPTCHA_WRONG') : __('CAPTCHA_WRONG');
         }
     }
@@ -342,7 +342,7 @@ class Post
      */
     public static function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
     {
-        if (!config()->get('topic_notify_enabled')) {
+        if (!config()->get('mail.notifications.topic_notify')) {
             return;
         }
 
@@ -508,7 +508,7 @@ class Post
                 'POSTER' => profile_url($post),
                 'POSTER_NAME_JS' => addslashes($post['username']),
                 'POST_ID' => $post['post_id'],
-                'POST_DATE' => bb_date($post['post_time'], config()->get('post_date_format')),
+                'POST_DATE' => bb_date($post['post_time'], config()->get('localization.date_formats.post')),
                 'IS_UNREAD' => is_unread($post['post_time'], $topic_id, $post['forum_id']),
                 'MESSAGE' => bbcode()->getParsedPost($post),
             ];
