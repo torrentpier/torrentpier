@@ -76,6 +76,7 @@ final class TorrentClients
                 return $name;
             }
         }
+
         return null;
     }
 }

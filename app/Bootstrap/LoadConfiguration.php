@@ -31,7 +31,6 @@ use TorrentPier\Config;
  */
 class LoadConfiguration
 {
-
     /**
      * Static config override closure (useful for testing)
      *

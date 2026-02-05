@@ -58,6 +58,7 @@ final class FileExtensions
     public static function getId(string $ext): ?int
     {
         $key = array_search(strtolower($ext), self::ID_TO_EXT, true);
+
         return $key !== false ? $key : null;
     }
 }
