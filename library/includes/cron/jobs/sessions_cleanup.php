@@ -11,7 +11,7 @@
 $user_session_expire_time = TIMENOW - (int)config()->get('auth.sessions.user_duration');
 $admin_session_expire_time = TIMENOW - (int)config()->get('auth.sessions.admin_duration');
 
-$user_session_gc_time = $user_session_expire_time - (int)config()->get('auth.sessions.user_gc_ttl');
+$user_session_gc_time = $user_session_expire_time - (int)config()->get('auth.sessions.gc_ttl');
 $admin_session_gc_time = $admin_session_expire_time;
 
 // ############################ Tables LOCKED ################################

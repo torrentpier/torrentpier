@@ -206,6 +206,7 @@ return [
         ],
     ],
     'date_formats' => [
+        'default' => 'd-M-Y H:i',
         'last_visit' => 'd-M H:i',
         'last_post' => 'd-M-y H:i',
         'post' => 'd-M-Y H:i',

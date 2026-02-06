@@ -10,8 +10,8 @@
 
 return [
     'bugsnag' => [
-        'enabled' => true,
-        'api_key' => '33b3ed0102946bab71341f9edc125e21',
+        'enabled' => !!env('BUGSNAG_API_KEY'),
+        'api_key' => env('BUGSNAG_API_KEY', ''),
     ],
     'telegram' => [
         'enabled' => env('TELEGRAM_ENABLED', false),
@@ -33,4 +33,5 @@ return [
         'enabled' => true,
         'allow_pre_releases' => false,
     ],
+    'whois_info' => env('WHOIS_INFO_URL', 'https://whatismyipaddress.com/ip/'),
 ];

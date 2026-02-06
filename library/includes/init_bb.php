@@ -39,6 +39,7 @@ function bb_setcookie(string $name, mixed $val, ?int $lifetime = null, bool $htt
     return setcookie($name, $val, [
         'expires' => $lifetime,
         'path' => config()->get('app.script_path'),
+        'domain' => config()->get('auth.cookie.domain'),
         'secure' => request()->isSecure(),
         'httponly' => $httponly,
         'samesite' => config()->get('auth.cookie.same_site'),

@@ -111,7 +111,7 @@ class Emailer
         $message = new Email()
             ->subject($this->subject)
             ->to($this->to)
-            ->from(new Address(config()->get('mail.addresses.board'), config()->get('mail.addresses.board_sitename')))
+            ->from(new Address(config()->get('mail.addresses.board'), config()->get('mail.board_email_sitename')))
             ->returnPath(new Address(config()->get('mail.addresses.bounce')))
             ->replyTo($this->reply ?? new Address(config()->get('mail.addresses.board')));
 
@@ -146,8 +146,8 @@ class Emailer
     {
         $this->vars = array_merge([
             'BOARD_EMAIL' => config()->get('mail.addresses.board'),
-            'SITENAME' => config()->get('mail.addresses.board_sitename'),
-            'EMAIL_SIG' => !empty(config()->get('mail.addresses.board_sig')) ? "-- \n" . config()->get('mail.addresses.board_sig') : '',
+            'SITENAME' => config()->get('mail.board_email_sitename'),
+            'EMAIL_SIG' => !empty(config()->get('mail.board_email_sig')) ? "-- \n" . config()->get('mail.board_email_sig') : '',
         ], $vars);
     }
 

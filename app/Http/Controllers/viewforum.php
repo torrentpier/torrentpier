@@ -251,7 +251,8 @@ $topics_per_page = config()->get('topics_per_page');
 $select_tpp = '';
 
 if ($is_auth['auth_mod']) {
-    if ($req_tpp = abs(request()->getInt('tpp')) && in_array($req_tpp, config()->get('forum.allowed_topics_per_page'))) {
+    $req_tpp = abs(request()->getInt('tpp'));
+    if ($req_tpp && in_array($req_tpp, config()->get('forum.allowed_topics_per_page'))) {
         $topics_per_page = $req_tpp;
     }
 

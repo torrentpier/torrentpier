@@ -36,6 +36,10 @@ class DatabaseServiceProvider extends ServiceProvider
             $default = $config->get('database.default', 'mysql');
             $connection = $config->get("database.connections.{$default}");
 
+            if (!$connection || !\is_array($connection)) {
+                throw new \RuntimeException("Database connection '{$default}' is not configured or invalid.");
+            }
+
             // Convert Laravel-style config to legacy Database class format
             // Expected: [dbhost, dbport, dbname, dbuser, dbpasswd, charset, persist]
             $legacyConfig = [

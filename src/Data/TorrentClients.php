@@ -71,9 +71,12 @@ final class TorrentClients
      */
     public static function getName(string $peerId): ?string
     {
-        foreach (self::PEER_IDS as $prefix => $name) {
+        $prefixes = array_keys(self::PEER_IDS);
+        usort($prefixes, fn($a, $b) => \strlen($b) - \strlen($a));
+
+        foreach ($prefixes as $prefix) {
             if (str_starts_with($peerId, $prefix)) {
-                return $name;
+                return self::PEER_IDS[$prefix];
             }
         }
 

@@ -59,7 +59,8 @@ $posts_per_page = config()->get('posts_per_page');
 $select_ppp = '';
 
 if (userdata('session_admin')) {
-    if ($req_ppp = abs((int)(request()->get('ppp') ?? 0)) && in_array($req_ppp, config()->get('forum.allowed_posts_per_page'))) {
+    $req_ppp = abs((int)(request()->get('ppp') ?? 0));
+    if ($req_ppp && in_array($req_ppp, config()->get('forum.allowed_posts_per_page'))) {
         $posts_per_page = $req_ppp;
     }
 

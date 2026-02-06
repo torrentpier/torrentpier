@@ -42,7 +42,7 @@ class Sender
         $user_id = userdata('user_id');
 
         if (!$passkey_key = config()->get('tracker.passkey_key')) {
-            bb_die('Could not add passkey (wrong config passkey_key)');
+            bb_die('Could not add passkey (wrong config tracker.passkey_key)');
         }
 
         if (!$t_data['tracker_status']) {
