@@ -24,6 +24,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Eloquent\Model;
+use RuntimeException;
 use TorrentPier\ServiceProvider;
 use TorrentPier\Tracy\Collectors\EloquentCollector;
 
@@ -48,7 +49,7 @@ class EloquentServiceProvider extends ServiceProvider
             $connectionConfig = config()->get("database.connections.$default");
 
             if (!$connectionConfig || !\is_array($connectionConfig)) {
-                throw new \RuntimeException("Database connection '{$default}' is not configured or invalid.");
+                throw new RuntimeException("Database connection '{$default}' is not configured or invalid.");
             }
 
             $capsule->addConnection($connectionConfig);
