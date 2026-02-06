@@ -47,6 +47,10 @@ class EloquentServiceProvider extends ServiceProvider
             $default = config()->get('database.default');
             $connectionConfig = config()->get("database.connections.$default");
 
+            if (!$connectionConfig || !\is_array($connectionConfig)) {
+                throw new \RuntimeException("Database connection '{$default}' is not configured or invalid.");
+            }
+
             $capsule->addConnection($connectionConfig);
 
             // Set event dispatcher for model events (required for Observers)

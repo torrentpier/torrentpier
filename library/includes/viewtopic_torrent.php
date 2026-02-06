@@ -230,7 +230,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
 
             // TorrServer integration
             $torrentItem['TOR_SERVER'] = [];
-            if (config()->get('torr_server.enabled') && !IS_GUEST && TorrentPier\Attachment::m3uExists($topic_id)) {
+            if (config()->get('services.torrserver.enabled') && !IS_GUEST && TorrentPier\Attachment::m3uExists($topic_id)) {
                 $torrentItem['TOR_SERVER'][] = [
                     'TORR_SERVER_M3U_LINK' => PLAYBACK_M3U_URL . $bt_topic_id . '/',
                     'TORR_SERVER_M3U_ICON' => theme_images('icon_tor_m3u_icon'),
@@ -457,7 +457,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                         }
 
                         $peerCountry = __('HIDDEN_USER');
-                        if (config()->get('ip2country_settings.enabled')) {
+                        if (config()->get('services.ip2country.enabled')) {
                             if (IS_AM || $peer['user_id'] == userdata('user_id') || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_country')) {
                                 if ($infoByIP = infoByIP((!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']), $peer['port'])) {
                                     if (!empty($infoByIP['countryCode'])) {

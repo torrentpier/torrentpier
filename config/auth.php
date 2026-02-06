@@ -50,6 +50,7 @@ return [
     'cookie' => [
         'prefix' => 'bb_',
         'domain' => env('COOKIE_DOMAIN', ''),
+        'secure' => env('COOKIE_SECURE', false),
         'same_site' => 'Lax',
     ],
     'unlimited_users' => [

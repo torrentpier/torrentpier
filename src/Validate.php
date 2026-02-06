@@ -108,7 +108,7 @@ class Validate
         }
 
         // Extended email validation
-        if (config()->get('auth.extended_email_validation')) {
+        if (config()->get('mail.extended_validation')) {
             $validator = new EmailValidator;
 
             $multipleValidations = new MultipleValidationWithAnd([

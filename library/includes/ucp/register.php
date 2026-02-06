@@ -364,7 +364,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 'user_callseed' => $reg_mode ? true : true,
                 'user_retracker' => $reg_mode ? true : true,
                 'user_hide_torrent_client' => $reg_mode ? true : true,
-                'user_hide_peer_country' => $reg_mode ? true : config()->get('ip2country_settings.enabled'),
+                'user_hide_peer_country' => $reg_mode ? true : config()->get('services.ip2country.enabled'),
                 'user_hide_peer_username' => $reg_mode ? false : true,
             ];
 

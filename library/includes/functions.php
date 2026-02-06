@@ -1950,7 +1950,7 @@ function readUpdaterFile(): array|bool
  */
 function infoByIP(string $ipAddress, int $port = 0): array
 {
-    if (!config()->get('ip2country_settings.enabled')) {
+    if (!config()->get('services.ip2country.enabled')) {
         return [];
     }
 
@@ -1959,7 +1959,7 @@ function infoByIP(string $ipAddress, int $port = 0): array
 
     if (!$data = CACHE('bb_ip2countries')->get($cacheName)) {
         $data = [];
-        $svc = parse_url((string)config()->get('ip2country_settings.endpoint'), PHP_URL_HOST) ?: 'ip2country';
+        $svc = parse_url((string)config()->get('services.ip2country.endpoint'), PHP_URL_HOST) ?: 'ip2country';
 
         try {
             $requestOptions = [
@@ -1969,12 +1969,12 @@ function infoByIP(string $ipAddress, int $port = 0): array
             ];
 
             // Add authorization header if API token is configured
-            if (!empty(config()->get('ip2country_settings.api_token'))) {
-                $requestOptions['headers']['Authorization'] = 'Bearer ' . config()->get('ip2country_settings.api_token');
+            if (!empty(config()->get('services.ip2country.api_token'))) {
+                $requestOptions['headers']['Authorization'] = 'Bearer ' . config()->get('services.ip2country.api_token');
             }
 
             $response = httpClient()->get(
-                config()->get('ip2country_settings.endpoint') . $ipAddress,
+                config()->get('services.ip2country.endpoint') . $ipAddress,
                 $requestOptions,
             );
 

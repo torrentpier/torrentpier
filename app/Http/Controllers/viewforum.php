@@ -278,7 +278,8 @@ $sel_previous_days = [
 ];
 
 if (request()->has('topicdays')) {
-    if ($req_topic_days = abs(request()->getInt('topicdays')) && isset($sel_previous_days[$req_topic_days])) {
+    $req_topic_days = abs(request()->getInt('topicdays'));
+    if ($req_topic_days && isset($sel_previous_days[$req_topic_days])) {
         $sql = '
 			SELECT COUNT(*) AS forum_topics
 			FROM ' . BB_TOPICS . "
