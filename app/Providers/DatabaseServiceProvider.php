@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use RuntimeException;
 use TorrentPier\Config;
 use TorrentPier\Database\Database;
 use TorrentPier\ServiceProvider;
@@ -37,7 +38,7 @@ class DatabaseServiceProvider extends ServiceProvider
             $connection = $config->get("database.connections.{$default}");
 
             if (!$connection || !\is_array($connection)) {
-                throw new \RuntimeException("Database connection '{$default}' is not configured or invalid.");
+                throw new RuntimeException("Database connection '{$default}' is not configured or invalid.");
             }
 
             // Convert Laravel-style config to legacy Database class format
