@@ -131,7 +131,7 @@ class BBCode
         $text = $this->smilies_pass($text);
         $text = $this->new_line2html($text);
 
-        if (config()->get('tidy_post')) {
+        if (config()->get('forum.tidy_post')) {
             $text = $this->tidy($text);
         }
 
@@ -385,7 +385,7 @@ class BBCode
      */
     private function nofollow_url(string $href, string $name): string
     {
-        if (\in_array(parse_url($href, PHP_URL_HOST), config()->get('nofollow.allowed_url')) || config()->get('nofollow.disabled')) {
+        if (\in_array(parse_url($href, PHP_URL_HOST), config()->get('forum.nofollow.allowed_url')) || config()->get('forum.nofollow.disabled')) {
             $link = "<a href=\"{$href}\" class=\"postLink\">{$name}</a>";
         } else {
             $link = "<a href=\"{$href}\" class=\"postLink\" rel=\"nofollow\">{$name}</a>";
@@ -421,13 +421,13 @@ class BBCode
      */
     public function getParsedPost(array $postrow): string
     {
-        if (config()->get('use_posts_cache') && !empty($postrow['post_html'])) {
+        if (config()->get('forum.use_posts_cache') && !empty($postrow['post_html'])) {
             return $postrow['post_html'];
         }
 
         $message = $this->toHtml($postrow['post_text']);
 
-        if (config()->get('use_posts_cache')) {
+        if (config()->get('forum.use_posts_cache')) {
             DB()->shutdown['post_html'][] = [
                 'post_id' => (int)$postrow['post_id'],
                 'post_html' => (string)$message,
@@ -442,7 +442,7 @@ class BBCode
      */
     private function hidePasskey(string $str): string
     {
-        $passkeyKey = config()->get('passkey_key');
+        $passkeyKey = config()->get('tracker.passkey_key');
 
         return preg_replace(
             "#\\?{$passkeyKey}=[a-zA-Z0-9]{" . BT_AUTH_KEY_LENGTH . '}#',

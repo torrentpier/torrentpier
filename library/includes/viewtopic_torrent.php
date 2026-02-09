@@ -154,8 +154,8 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
         $tor_magnet = create_magnet($tor_info['info_hash'], $tor_info['info_hash_v2'], $user_passkey, html_ent_decode($t_data['topic_title']), $tor_size);
 
         // ratio limits
-        $min_ratio_dl = config()->get('bt_min_ratio_allow_dl_tor');
-        $min_ratio_warn = config()->get('bt_min_ratio_warning');
+        $min_ratio_dl = config()->get('tracker.min_ratio_allow_dl');
+        $min_ratio_warn = config()->get('tracker.min_ratio_warning');
         $dl_allowed = true;
         $user_ratio = 0;
 
@@ -184,7 +184,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
             if ((isset($user_ratio, $min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || (isset($bt_userdata['u_down_total']) && $bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
                 template()->assign_vars([
                     'SHOW_RATIO_WARN' => true,
-                    'RATIO_WARN_MSG' => sprintf(__('BT_RATIO_WARNING_MSG'), $min_ratio_dl, config()->get('ratio_url_help')),
+                    'RATIO_WARN_MSG' => sprintf(__('BT_RATIO_WARNING_MSG'), $min_ratio_dl, config()->get('app.help_urls.ratio')),
                 ]);
             }
         }
@@ -204,12 +204,12 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                 'TOR_TYPE' => is_gold($tor_type),
 
                 // torrent status mod
-                'TOR_FROZEN' => !IS_AM ? (isset(config()->get('tor_frozen')[$tor_info['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$tor_info['tor_status']]) && TorrentPier\Topic\Guard::isAuthor($tor_info['poster_id']))) ? true : '' : '',
+                'TOR_FROZEN' => !IS_AM ? (isset(config()->get('tracker.tor_frozen')[$tor_info['tor_status']]) && !(isset(config()->get('tracker.tor_frozen_author_download')[$tor_info['tor_status']]) && TorrentPier\Topic\Guard::isAuthor($tor_info['poster_id']))) ? true : '' : '',
                 'TOR_STATUS_TEXT' => __('TOR_STATUS_NAME')[$tor_info['tor_status']],
-                'TOR_STATUS_ICON' => config()->get('tor_icons')[$tor_info['tor_status']],
+                'TOR_STATUS_ICON' => config()->get('tracker.tor_icons')[$tor_info['tor_status']],
                 'TOR_STATUS_BY' => ($tor_info['checked_user_id'] && ($is_auth['auth_mod'] || $tor_status_by_for_all)) ? ('<span title="' . bb_date($tor_info['checked_time']) . '"> &middot; ' . profile_url($tor_info) . ' &middot; <i>' . humanTime($tor_info['checked_time']) . __('TOR_BACK') . '</i></span>') : '',
                 'TOR_STATUS_SELECT' => build_select('sel_status', array_flip(__('TOR_STATUS_NAME')), TOR_APPROVED),
-                'TOR_STATUS_REPLY' => config()->get('tor_comment') && !IS_GUEST && in_array($tor_info['tor_status'], config()->get('tor_reply')) && TorrentPier\Topic\Guard::isAuthor($tor_info['poster_id']) && $t_data['topic_status'] != TOPIC_LOCKED,
+                'TOR_STATUS_REPLY' => config()->get('tor_comment') && !IS_GUEST && in_array($tor_info['tor_status'], config()->get('tracker.tor_reply')) && TorrentPier\Topic\Guard::isAuthor($tor_info['poster_id']) && $t_data['topic_status'] != TOPIC_LOCKED,
                 //end torrent status mod
 
                 'S_UPLOAD_IMAGE' => $upload_image,
@@ -230,7 +230,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
 
             // TorrServer integration
             $torrentItem['TOR_SERVER'] = [];
-            if (config()->get('torr_server.enabled') && !IS_GUEST && TorrentPier\Attachment::m3uExists($topic_id)) {
+            if (config()->get('services.torrserver.enabled') && !IS_GUEST && TorrentPier\Attachment::m3uExists($topic_id)) {
                 $torrentItem['TOR_SERVER'][] = [
                     'TORR_SERVER_M3U_LINK' => PLAYBACK_M3U_URL . $bt_topic_id . '/',
                     'TORR_SERVER_M3U_ICON' => theme_images('icon_tor_m3u_icon'),
@@ -241,7 +241,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
             template()->assign_vars(['TORRENT' => $torrentList]);
         }
 
-        if (config()->get('show_tor_info_in_dl_list')) {
+        if (config()->get('tracker.show_tor_info_in_dl_list')) {
             template()->assign_vars([
                 'SHOW_DL_LIST' => true,
                 'SHOW_DL_LIST_TOR_INFO' => true,
@@ -457,7 +457,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                         }
 
                         $peerCountry = __('HIDDEN_USER');
-                        if (config()->get('ip2country_settings.enabled')) {
+                        if (config()->get('services.ip2country.enabled')) {
                             if (IS_AM || $peer['user_id'] == userdata('user_id') || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_country')) {
                                 if ($infoByIP = infoByIP((!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']), $peer['port'])) {
                                     if (!empty($infoByIP['countryCode'])) {
@@ -485,7 +485,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                             'SPEED_DOWN_RAW' => $peer['speed_down'],
                             'UPD_EXP_TIME' => $peer['update_time'] ? __('DL_UPD') . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . humanTime($peer['update_time']) . __('TOR_BACK') : __('DL_STOPPED'),
                             'TOR_RATIO' => $up_ratio ? __('USER_RATIO') . "UL/DL: {$up_ratio}" : '',
-                            'IP' => $ip ? ['U_WHOIS_IP' => config()->get('whois_info') . $ip, 'IP' => $ip] : null,
+                            'IP' => $ip ? ['U_WHOIS_IP' => config()->get('services.whois_info') . $ip, 'IP' => $ip] : null,
                             'PORT' => ($port !== false) ? ['PORT' => $port] : null,
                         ];
 
@@ -562,15 +562,15 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
     }
 
     template()->assign_vars([
-        'SHOW_DL_LIST_LINK' => ((config()->get('bt_show_dl_list') || config()->get('allow_dl_list_names_mode')) && $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL),
-        'SHOW_TOR_ACT' => ($tor_reged && $show_peers && (!isset(config()->get('tor_no_tor_act')[$tor_info['tor_status']]) || IS_AM)),
+        'SHOW_DL_LIST_LINK' => ((config()->get('bt_show_dl_list') || config()->get('tracker.allow_dl_list_names_mode')) && $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL),
+        'SHOW_TOR_ACT' => ($tor_reged && $show_peers && (!isset(config()->get('tracker.tor_no_tor_act')[$tor_info['tor_status']]) || IS_AM)),
         'S_MODE_COUNT' => ($s_mode == 'count'),
         'S_MODE_NAMES' => ($s_mode == 'names'),
         'S_MODE_FULL' => ($s_mode == 'full'),
         'PEER_EXIST' => ($seeders || $leechers || defined('SEEDER_EXIST') || defined('LEECHER_EXIST')),
         'SEED_EXIST' => ($seeders || defined('SEEDER_EXIST')),
         'LEECH_EXIST' => ($leechers || defined('LEECHER_EXIST')),
-        'TOR_HELP_LINKS' => config()->get('tor_help_links'),
-        'CALL_SEED' => (!IS_GUEST && config()->get('callseed') && $tor_reged && !isset(config()->get('tor_no_tor_act')[$tor_info['tor_status']]) && $seed_count < 3 && $tor_info['call_seed_time'] < (TIMENOW - 86400)),
+        'TOR_HELP_LINKS' => config()->get('forum.tor_help_links'),
+        'CALL_SEED' => (!IS_GUEST && config()->get('callseed') && $tor_reged && !isset(config()->get('tracker.tor_no_tor_act')[$tor_info['tor_status']]) && $seed_count < 3 && $tor_info['call_seed_time'] < (TIMENOW - 86400)),
     ]);
 }

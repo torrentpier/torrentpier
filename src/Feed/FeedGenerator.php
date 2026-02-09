@@ -59,7 +59,7 @@ final class FeedGenerator
     public function generate(FeedProviderInterface $provider): string
     {
         try {
-            $cacheTtl = (int)config()->get('atom.cache_ttl', 600); // Default 10 minutes
+            $cacheTtl = (int)config()->get('forum.atom.cache_ttl', 600); // Default 10 minutes
 
             // If TTL is 0 or negative, disable caching (always generate fresh)
             if ($cacheTtl <= 0) {

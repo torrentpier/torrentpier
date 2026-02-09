@@ -386,7 +386,7 @@ class Common
                 files()->delete($file_path);
             }
             // TorrServer integration
-            if (config()->get('torr_server.enabled')) {
+            if (config()->get('services.torrserver.enabled')) {
                 $torrServer = new \TorrentPier\TorrServerAPI;
                 $torrServer->removeM3U($row['topic_id']);
             }

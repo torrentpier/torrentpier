@@ -192,7 +192,7 @@ class CachePanel implements IBarPanel
      */
     private function truncate(string $str): string
     {
-        $maxLen = (int)config()->get('debug.max_query_length', 1000);
+        $maxLen = (int)config()->get('logging.debug.max_query_length', 1000);
         if (\strlen($str) > $maxLen) {
             return substr($str, 0, $maxLen - 3) . '...';
         }

@@ -8,10 +8,10 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-$user_session_expire_time = TIMENOW - (int)config()->get('user_session_duration');
-$admin_session_expire_time = TIMENOW - (int)config()->get('admin_session_duration');
+$user_session_expire_time = TIMENOW - (int)config()->get('auth.sessions.user_duration');
+$admin_session_expire_time = TIMENOW - (int)config()->get('auth.sessions.admin_duration');
 
-$user_session_gc_time = $user_session_expire_time - (int)config()->get('user_session_gc_ttl');
+$user_session_gc_time = $user_session_expire_time - (int)config()->get('auth.sessions.gc_ttl');
 $admin_session_gc_time = $admin_session_expire_time;
 
 // ############################ Tables LOCKED ################################

@@ -49,7 +49,7 @@ if (IS_ADMIN) {
 }
 
 if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == userdata('user_id') || IS_ADMIN) {
-    $email_uri = (config()->get('board_email_form')) ? url()->memberEmail($profiledata['user_id'], $profiledata['username']) : 'mailto:' . $profiledata['user_email'];
+    $email_uri = (config()->get('mail.board_email_form')) ? url()->memberEmail($profiledata['user_id'], $profiledata['username']) : 'mailto:' . $profiledata['user_email'];
     $email = '<a class="editable" href="' . $email_uri . '">' . $profiledata['user_email'] . '</a>';
 } else {
     $email = '';
@@ -61,7 +61,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['
 
 $profile_user_id = ($profiledata['user_id'] == userdata('user_id'));
 
-$signature = (config()->get('allow_sig') && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
+$signature = (config()->get('forum.user_signature.enabled') && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
 
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
     if ($profile_user_id) {
@@ -74,7 +74,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
 }
 
 // Null ratio
-if (config()->get('ratio_null_enabled') && $btu = get_bt_userdata($profiledata['user_id'])) {
+if (config()->get('tracker.ratio_null_enabled') && $btu = get_bt_userdata($profiledata['user_id'])) {
     template()->assign_vars(['NULLED_RATIO' => $btu['ratio_nulled']]);
 }
 

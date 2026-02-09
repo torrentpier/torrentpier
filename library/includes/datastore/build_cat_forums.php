@@ -101,7 +101,7 @@ $this->store('cat_forums', $data);
 //
 // jumpbox
 //
-if (config()->get('show_jumpbox')) {
+if (config()->get('forum.show_jumpbox')) {
     $data = [
         'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
         'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),

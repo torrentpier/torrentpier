@@ -163,7 +163,7 @@ class ManageAdminController
      */
     private function getTrackerStats(): string
     {
-        $announceInterval = (int)config()->get('announce_interval');
+        $announceInterval = (int)config()->get('tracker.announce_interval');
 
         DB()->query('DROP TEMPORARY TABLE IF EXISTS tmp_tracker_stats');
         DB()->query(

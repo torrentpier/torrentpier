@@ -15,7 +15,7 @@ define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
 
 // Cookie params
-$c = config()->get('cookie_prefix');
+$c = config()->get('auth.cookie.prefix');
 define('COOKIE_DATA', $c . 'data');
 define('COOKIE_FORUM', $c . 'f');
 define('COOKIE_MARK', $c . 'mark_read');
@@ -38,11 +38,11 @@ function bb_setcookie(string $name, mixed $val, ?int $lifetime = null, bool $htt
 
     return setcookie($name, $val, [
         'expires' => $lifetime,
-        'path' => config()->get('script_path'),
-        'domain' => config()->get('cookie_domain'),
-        'secure' => config()->get('cookie_secure'),
+        'path' => config()->get('app.script_path'),
+        'domain' => config()->get('auth.cookie.domain'),
+        'secure' => request()->isSecure(),
         'httponly' => $httponly,
-        'samesite' => config()->get('cookie_same_site'),
+        'samesite' => config()->get('auth.cookie.same_site'),
     ]);
 }
 
@@ -184,10 +184,10 @@ define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
 
 // Server URL constants
-$serverProtocol = config()->get('cookie_secure') ? 'https://' : 'http://';
-$serverPort = in_array((int)config()->get('server_port'), [80, 443], true) ? '' : ':' . config()->get('server_port');
-define('FORUM_PATH', config()->get('script_path'));
-define('FULL_URL', $serverProtocol . config()->get('server_name') . $serverPort . config()->get('script_path'));
+$serverProtocol = request()->isSecure() ? 'https://' : 'http://';
+$serverPort = in_array((int)config()->get('app.server_port'), [80, 443], true) ? '' : ':' . config()->get('app.server_port');
+define('FORUM_PATH', config()->get('app.script_path'));
+define('FULL_URL', $serverProtocol . config()->get('app.server_name') . $serverPort . config()->get('app.script_path'));
 
 define('CAT_URL', FORUM_PATH . 'categories/');
 define('DL_URL', FORUM_PATH . 'dl/');
@@ -322,8 +322,8 @@ function asset_url(string $path, ?string $type = null): string
     }
 
     $version = match ($type) {
-        'js' => config()->get('js_ver', 1),
-        'css' => config()->get('css_ver', 1),
+        'js' => config()->get('app.js_ver', 1),
+        'css' => config()->get('app.css_ver', 1),
         default => null,
     };
 

@@ -138,7 +138,7 @@ class PostsController
         $message = '[quote="' . $quoteUsername . '"][qpost=' . $post['post_id'] . ']' . $post['post_text'] . "[/quote]\r";
 
         // Hide user passkey
-        $message = preg_replace('#(?<=[?&;]' . config()->get('passkey_key') . '=)[a-zA-Z0-9]#', 'passkey', $message);
+        $message = preg_replace('#(?<=[?&;]' . config()->get('tracker.passkey_key') . '=)[a-zA-Z0-9]#', 'passkey', $message);
         // Hide sid
         $message = preg_replace('#(?<=[?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
 
@@ -226,10 +226,10 @@ class PostsController
         }
 
         if ($text != $post['post_text']) {
-            if (config()->get('max_smilies')) {
+            if (config()->get('forum.max_smilies')) {
                 $countSmilies = substr_count($this->bbcode->toHtml($text), '<img class="smile" src="' . config()->get('smilies_path'));
-                if ($countSmilies > config()->get('max_smilies')) {
-                    return $this->error(\sprintf(__('MAX_SMILIES_PER_POST'), config()->get('max_smilies')));
+                if ($countSmilies > config()->get('forum.max_smilies')) {
+                    return $this->error(\sprintf(__('MAX_SMILIES_PER_POST'), config()->get('forum.max_smilies')));
                 }
             }
 
@@ -369,10 +369,10 @@ class PostsController
             }
         }
 
-        if (config()->get('max_smilies')) {
+        if (config()->get('forum.max_smilies')) {
             $countSmilies = substr_count($this->bbcode->toHtml($message), '<img class="smile" src="' . config()->get('smilies_path'));
-            if ($countSmilies > config()->get('max_smilies')) {
-                return $this->error(\sprintf(__('MAX_SMILIES_PER_POST'), config()->get('max_smilies')));
+            if ($countSmilies > config()->get('forum.max_smilies')) {
+                return $this->error(\sprintf(__('MAX_SMILIES_PER_POST'), config()->get('forum.max_smilies')));
             }
         }
 
@@ -390,7 +390,7 @@ class PostsController
             'post_text' => $message,
         ]);
 
-        if (config()->get('topic_notify_enabled')) {
+        if (config()->get('mail.notifications.topic_notify')) {
             $notify = !empty($body['notify']);
             Post::user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topicId, $notify);
         }

@@ -151,7 +151,7 @@ class CronHelper
         }
 
         // Check interval
-        if (!$force && (TIMENOW - config()->get('cron_last_check') <= config()->get('cron_check_interval'))) {
+        if (!$force && (TIMENOW - config()->get('cron.last_check') <= config()->get('cron.check_interval'))) {
             return false;
         }
 

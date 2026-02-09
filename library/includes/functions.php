@@ -13,17 +13,20 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use TorrentPier\Data\Countries;
+use TorrentPier\Data\FileExtensions;
+use TorrentPier\Data\TorrentClients;
 
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
-    $ext = config()->get('file_id_ext')[$ext_id] ?? '';
+    $ext = FileExtensions::getExtension($ext_id) ?? '';
 
     return ($base_path ? "{$base_path}/" : '') . floor($id / $first_div) . '/' . ($id % $sec_div) . '/' . $id . ($ext ? ".{$ext}" : '');
 }
 
 function get_avatar_path($id, $ext_id, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
-    $base_path ??= config()->get('avatars.upload_path');
+    $base_path ??= config()->get('avatars.user.upload_path');
 
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
@@ -31,7 +34,7 @@ function get_avatar_path($id, $ext_id, $base_path = null, $first_div = 10000, $s
 function get_attach_path($id, $ext_id = null, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
     $ext_id ??= TORRENT_EXT_ID;
-    $base_path ??= config()->get('attach.upload_path');
+    $base_path ??= config()->get('tracker.attach.upload_path');
 
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
@@ -645,7 +648,7 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $have_auth || ($row['user_id'] == userdata('user_id'))) {
-        $email_uri = (config()->get('board_email_form')) ? url()->memberEmail($row['user_id'], $row['username']) : 'mailto:' . $row['user_email'];
+        $email_uri = (config()->get('mail.board_email_form')) ? url()->memberEmail($row['user_id'], $row['username']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
         $email = __('HIDDEN_USER');
@@ -779,7 +782,7 @@ function get_userdata(int|string $u, bool $is_name = false, bool $allow_guest = 
 
 function make_jumpbox(): void
 {
-    if (!config()->get('show_jumpbox')) {
+    if (!config()->get('forum.show_jumpbox')) {
         return;
     }
 
@@ -857,11 +860,11 @@ function setup_style(): void
 {
     once(function () {
         // AdminCP works only with the default template
-        $tpl_dir_name = defined('IN_ADMIN') ? 'default' : basename(config()->get('tpl_name'));
-        $stylesheet = defined('IN_ADMIN') ? 'main.css' : basename(config()->get('stylesheet'));
+        $tpl_dir_name = defined('IN_ADMIN') ? 'default' : basename(config()->get('templates.default'));
+        $stylesheet = defined('IN_ADMIN') ? 'main.css' : basename(config()->get('templates.stylesheet'));
 
         if (!IS_GUEST && !empty(userdata('tpl_name'))) {
-            foreach (config()->get('templates') as $folder => $name) {
+            foreach (config()->get('templates.available') as $folder => $name) {
                 if (userdata('tpl_name') == $folder) {
                     $tpl_dir_name = basename(userdata('tpl_name'));
                 }
@@ -874,7 +877,7 @@ function setup_style(): void
             'BB_ROOT' => BB_ROOT,
             'SPACER' => make_url('assets/images/spacer.gif'),
             'STYLESHEET' => asset_url('css/' . $stylesheet, 'css'),
-            'EXT_LINK_NEW_WIN' => config()->get('ext_link_new_win'),
+            'EXT_LINK_NEW_WIN' => config()->get('forum.ext_link_new_win'),
             'TPL_DIR' => make_url('assets/css/'),
             'SITE_URL' => make_url('/'),
             'ASSETS_URL' => make_url('assets/'),
@@ -894,13 +897,13 @@ function bb_date(int $timestamp, string|false $format = false, bool $friendly_da
 {
     // Determine timezone offset
     if (!defined('IS_GUEST') || IS_GUEST) {
-        $tz = (float)config()->get('board_timezone', 0);
+        $tz = (float)config()->get('localization.board_timezone', 0);
     } else {
         $tz = (float)(userdata('user_timezone') ?? 0);
     }
 
     // Determine user locale
-    $locale = userdata('user_lang') ?? config()->get('default_lang', 'en');
+    $locale = userdata('user_lang') ?? config()->get('localization.default_lang', 'en');
 
     // Prepare labels for "today" and "yesterday"
     $labels = [
@@ -927,14 +930,7 @@ function get_user_torrent_client(string $peer_id): string
 {
     static $iconExtension = '.png';
 
-    $bestMatch = null;
-    $bestMatchLength = 0;
-    foreach (config()->get('tor_clients') as $key => $clientName) {
-        if (str_starts_with($peer_id, $key) !== false && strlen($key) > $bestMatchLength) {
-            $bestMatch = $clientName;
-            $bestMatchLength = strlen($key);
-        }
-    }
+    $bestMatch = TorrentClients::getName($peer_id);
 
     $clientIconFile = IMAGES_DIR . '/clients/' . $bestMatch . $iconExtension;
     if (!empty($bestMatch) && files()->isFile($clientIconFile)) {
@@ -958,8 +954,7 @@ function render_flag(string $code, bool $showName = true): string
         return ''; // No selected
     }
 
-    $countries = config()->get('countries');
-    if (!isset($countries[$code])) {
+    if (!Countries::exists($code)) {
         return $code;
     }
 
@@ -969,7 +964,7 @@ function render_flag(string $code, bool $showName = true): string
     }
 
     $flagIconUrl = image_url('flags/' . $code . $iconExtension);
-    $langName = $countries[$code];
+    $langName = Countries::getName($code);
     $countryName = $showName ? '&nbsp;' . str_short($langName, 20) : '';
 
     return '<span title="' . $langName . '"><img src="' . $flagIconUrl . '" class="poster-flag" alt="' . $code . '">' . $countryName . '</span>';
@@ -993,7 +988,7 @@ function format_registration_intervals(array $restricted_hours): array
     $restricted_hours = array_filter($restricted_hours, fn ($h) => is_int($h) && $h >= 0 && $h <= 23);
 
     // Use board timezone for the current time
-    $tz = config()->get('board_timezone');
+    $tz = config()->get('localization.board_timezone');
     $current_time = gmdate('H:i', TIMENOW + (3600 * $tz));
 
     // Calculate allowed hours (0-23 minus restricted)
@@ -1222,12 +1217,12 @@ function redirect($url)
     }
 
     $url = trim($url);
-    $server_protocol = (config()->get('cookie_secure')) ? 'https://' : 'http://';
+    $server_protocol = request()->isSecure() ? 'https://' : 'http://';
 
-    $server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('server_name')));
-    $port = (int)config()->get('server_port');
+    $server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('app.server_name')));
+    $port = (int)config()->get('app.server_port');
     $server_port = ($port > 0 && !in_array($port, [80, 443], true)) ? ':' . $port : '';
-    $script_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('script_path')));
+    $script_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config()->get('app.script_path')));
 
     if ($script_name) {
         $script_name = "/{$script_name}";
@@ -1237,7 +1232,7 @@ function redirect($url)
     $redirect_url = $server_protocol . $server_name . $server_port . $script_name . preg_replace('#^\/?(.*?)\/?$#', '/\1', $url);
 
     // Send redirect response with no-cache headers
-    $response = TorrentPier\Http\Response::permanentRedirect($redirect_url);
+    $response = TorrentPier\Http\Response::redirect($redirect_url);
     TorrentPier\Http\Response::noCache($response)->send();
     exit;
 }
@@ -1486,7 +1481,7 @@ function clean_text_match(?string $text, bool $ltrim_star = true, bool $die_if_e
     $ltrim_chars = ($ltrim_star) ? ' *-!' : ' ';
     $text = ' ' . Str::squish(ltrim($text, $ltrim_chars)) . ' ';
 
-    if (config()->get('search_engine_type') == 'manticore') {
+    if (config()->get('forum.search_engine_type') == 'manticore') {
         $text = strip_tags($text);
         $text = Str::squish($text);
         $text = trim($text);
@@ -1508,7 +1503,7 @@ function get_title_match_topics(string $title_match_sql, array $forum_ids = [], 
         $forum_ids = array_diff($forum_ids, [0 => 0]);
     }
 
-    if (config()->get('search_engine_type') == 'manticore') {
+    if (config()->get('forum.search_engine_type') == 'manticore') {
         try {
             $manticore = manticore();
             $index = $title_only ? 'topics_rt' : 'posts_rt';
@@ -1521,7 +1516,7 @@ function get_title_match_topics(string $title_match_sql, array $forum_ids = [], 
             bb_log('Manticore search error: ' . $e->getMessage() . LOG_LF, 'manticore_errors');
 
             // Fallback to MySQL if needed
-            if (config()->get('search_fallback_to_mysql')) {
+            if (config()->get('forum.search_fallback_to_mysql')) {
                 get_title_match_topics_mysql($title_match_sql, $forum_ids, $where_ids, $title_only);
             }
         }
@@ -1535,7 +1530,7 @@ function get_title_match_topics(string $title_match_sql, array $forum_ids = [], 
 function get_title_match_topics_mysql(string $title_match_sql, array $forum_ids, array &$where_ids, bool $title_only = true): void
 {
     $where_forum = $forum_ids ? 'AND forum_id IN(' . implode(',', $forum_ids) . ')' : '';
-    $search_bool_mode = config()->get('allow_search_in_bool_mode') ? ' IN BOOLEAN MODE' : '';
+    $search_bool_mode = config()->get('forum.allow_search_in_bool_mode') ? ' IN BOOLEAN MODE' : '';
 
     if ($title_only) {
         // topics
@@ -1562,7 +1557,7 @@ function get_title_match_topics_mysql(string $title_match_sql, array $forum_ids,
  */
 function sync_topic_to_manticore($topic_id, $topic_title = null, $forum_id = null, string $action = 'upsert'): void
 {
-    if (config()->get('search_engine_type') !== 'manticore') {
+    if (config()->get('forum.search_engine_type') !== 'manticore') {
         return;
     }
 
@@ -1584,7 +1579,7 @@ function sync_topic_to_manticore($topic_id, $topic_title = null, $forum_id = nul
  */
 function sync_post_to_manticore($post_id, $post_text = null, $topic_title = null, $topic_id = null, $forum_id = null, string $action = 'upsert'): void
 {
-    if (config()->get('search_engine_type') !== 'manticore') {
+    if (config()->get('forum.search_engine_type') !== 'manticore') {
         return;
     }
 
@@ -1606,7 +1601,7 @@ function sync_post_to_manticore($post_id, $post_text = null, $topic_title = null
  */
 function sync_user_to_manticore($user_id, ?string $username = null, string $action = 'upsert'): void
 {
-    if (config()->get('search_engine_type') !== 'manticore') {
+    if (config()->get('forum.search_engine_type') !== 'manticore') {
         return;
     }
 
@@ -1667,7 +1662,7 @@ function create_magnet(?string $infohash, ?string $infohash_v2, string $auth_key
     $icon = $v2_support ? theme_images('icon_magnet_v2') : theme_images('icon_magnet');
     $title = $v2_support ? __('MAGNET_v2') : __('MAGNET');
 
-    return '<a title="' . $title . '" href="' . $magnet . '&tr=' . urlencode(config()->get('bt_announce_url') . '?' . config()->get('passkey_key') . "={$auth_key}") . '&dn=' . urlencode($name) . '"><img src="' . $icon . '" width="12" height="12" border="0" /></a>';
+    return '<a title="' . $title . '" href="' . $magnet . '&tr=' . urlencode(config()->get('bt_announce_url') . '?' . config()->get('tracker.passkey_key') . "={$auth_key}") . '&dn=' . urlencode($name) . '"><img src="' . $icon . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
@@ -1736,7 +1731,7 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
     $style = 'colorUser';
     if (isset($ranks[$user_rank])) {
         $title = $ranks[$user_rank]['rank_title'];
-        if (config()->get('color_nick')) {
+        if (config()->get('forum.color_nick')) {
             $style = $ranks[$user_rank]['rank_style'];
         }
     }
@@ -1770,13 +1765,13 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
     $height = $height ? 'height="' . $height . '"' : '';
     $width = $width ? 'width="' . $width . '"' : '';
 
-    $user_avatar = '<img src="' . make_url(config()->get('avatars.display_path') . config()->get('avatars.no_avatar')) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+    $user_avatar = '<img src="' . make_url(config()->get('avatars.user.display_path') . config()->get('avatars.user.no_avatar')) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
 
-    if ($user_id == BOT_UID && config()->get('avatars.bot_avatar')) {
-        $user_avatar = '<img src="' . make_url(config()->get('avatars.display_path') . config()->get('avatars.bot_avatar')) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+    if ($user_id == BOT_UID && config()->get('avatars.user.bot_avatar')) {
+        $user_avatar = '<img src="' . make_url(config()->get('avatars.user.display_path') . config()->get('avatars.user.bot_avatar')) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
     } elseif ($allow_avatar && $ext_id) {
         if (files()->isFile(get_avatar_path($user_id, $ext_id))) {
-            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, config()->get('avatars.display_path'))) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, config()->get('avatars.user.display_path'))) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
         }
     }
 
@@ -1854,8 +1849,8 @@ function hash_search($hash)
  */
 function bb_captcha(string $mode): bool|string
 {
-    $settings = config()->get('captcha');
-    $settings['language'] = config()->get('default_lang');
+    $settings = config()->get('forum.captcha');
+    $settings['language'] = config()->get('localization.default_lang');
 
     // Checking captcha settings
     if (!$settings['disabled'] && $settings['service'] !== 'text') {
@@ -1955,7 +1950,7 @@ function readUpdaterFile(): array|bool
  */
 function infoByIP(string $ipAddress, int $port = 0): array
 {
-    if (!config()->get('ip2country_settings.enabled')) {
+    if (!config()->get('services.ip2country.enabled')) {
         return [];
     }
 
@@ -1964,7 +1959,7 @@ function infoByIP(string $ipAddress, int $port = 0): array
 
     if (!$data = CACHE('bb_ip2countries')->get($cacheName)) {
         $data = [];
-        $svc = parse_url((string)config()->get('ip2country_settings.endpoint'), PHP_URL_HOST) ?: 'ip2country';
+        $svc = parse_url((string)config()->get('services.ip2country.endpoint'), PHP_URL_HOST) ?: 'ip2country';
 
         try {
             $requestOptions = [
@@ -1974,12 +1969,12 @@ function infoByIP(string $ipAddress, int $port = 0): array
             ];
 
             // Add authorization header if API token is configured
-            if (!empty(config()->get('ip2country_settings.api_token'))) {
-                $requestOptions['headers']['Authorization'] = 'Bearer ' . config()->get('ip2country_settings.api_token');
+            if (!empty(config()->get('services.ip2country.api_token'))) {
+                $requestOptions['headers']['Authorization'] = 'Bearer ' . config()->get('services.ip2country.api_token');
             }
 
             $response = httpClient()->get(
-                config()->get('ip2country_settings.endpoint') . $ipAddress,
+                config()->get('services.ip2country.endpoint') . $ipAddress,
                 $requestOptions,
             );
 

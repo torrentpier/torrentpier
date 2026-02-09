@@ -14,8 +14,8 @@ if (!empty($setmodules)) {
     return;
 }
 
-if (!config()->get('use_word_censor')) {
-    bb_die('Word censor disabled <br /><br /> (use_word_censor in config.php)');
+if (!config()->get('forum.use_word_censor')) {
+    bb_die('Word censor disabled <br /><br /> (use_word_censor in config/forum.php)');
 }
 
 $mode = htmlspecialchars(request()->getString('mode'));

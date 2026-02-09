@@ -124,7 +124,7 @@
     <td><b>{L_UPDATE}:</b></td>
     <td>
       <a href="#" id="update_user_level" onclick="ajax.manage_admin('update_user_level'); return false;">{L_USER_LEVELS}</a>
-      <!-- IF config('search_engine_type') == "manticore" -->&middot;
+      <!-- IF config('forum.search_engine_type') == "manticore" -->&middot;
       <a href="#" id="indexer" onclick="ajax.manage_admin('indexer'); $(this).text('{L_LOADING}'); return false;">{L_INDEXER}</a>
       <!-- ENDIF -->
     </td>
@@ -161,11 +161,11 @@
     </tr>
     <tr>
         <td class="row1" nowrap="nowrap" width="25%">{L_TP_VERSION}:</td>
-        <td class="row2"><b>{{ config('tp_release_codename') }} (v{{ version() }})</b></td>
+        <td class="row2"><b>{{ config('app.release_codename') }} (v{{ version() }})</b></td>
     </tr>
     <tr>
         <td class="row1" nowrap="nowrap" width="25%">{L_TP_RELEASE_DATE}:</td>
-        <td class="row2"><b>{{ config('tp_release_date') }}</b></td>
+        <td class="row2"><b>{{ config('app.release_date') }}</b></td>
     </tr>
     <!-- BEGIN updater -->
     <!-- IF updater.UPDATE_AVAILABLE -->

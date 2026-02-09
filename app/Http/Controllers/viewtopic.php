@@ -59,12 +59,13 @@ $posts_per_page = config()->get('posts_per_page');
 $select_ppp = '';
 
 if (userdata('session_admin')) {
-    if ($req_ppp = abs((int)(request()->get('ppp') ?? 0)) && in_array($req_ppp, config()->get('allowed_posts_per_page'))) {
+    $req_ppp = abs((int)(request()->get('ppp') ?? 0));
+    if ($req_ppp && in_array($req_ppp, config()->get('forum.allowed_posts_per_page'))) {
         $posts_per_page = $req_ppp;
     }
 
     $select_ppp = [];
-    foreach (config()->get('allowed_posts_per_page') as $ppp) {
+    foreach (config()->get('forum.allowed_posts_per_page') as $ppp) {
         $select_ppp[$ppp] = $ppp;
     }
 }
@@ -262,7 +263,7 @@ if ($post_id && !request()->attributes->get('semantic_route') && request()->isGe
 // Is user watching this thread?
 $can_watch_topic = $is_watching_topic = false;
 
-if (config()->get('topic_notify_enabled')) {
+if (config()->get('mail.notifications.topic_notify')) {
     if (!IS_GUEST) {
         $can_watch_topic = true;
 
@@ -490,7 +491,7 @@ $sel_post_order_ary = [
 ];
 
 $topic_has_poll = $t_data['topic_vote'];
-$poll_time_expired = ($t_data['topic_time'] < TIMENOW - config()->get('poll_max_days') * 86400);
+$poll_time_expired = ($t_data['topic_time'] < TIMENOW - config()->get('forum.poll_max_days') * 86400);
 $can_manage_poll = ($t_data['topic_poster'] == userdata('user_id') || $is_auth['auth_mod']);
 $can_add_poll = ($can_manage_poll && $is_auth['auth_pollcreate'] && !$topic_has_poll && !$poll_time_expired && !$start);
 
@@ -513,19 +514,19 @@ template()->assign_vars([
     'TOPIC_TITLE' => $topic_title,
     'CANONICAL_URL' => make_url(url()->topic($topic_id, $topic_title)),
     'PORNO_FORUM' => $t_data['allow_porno_topic'],
-    'SHOW_BOT_NICK' => config()->get('show_bot_nick'),
+    'SHOW_BOT_NICK' => config()->get('forum.show_bot_nick'),
     'T_POST_REPLY' => $reply_alt,
 
     'HIDE_FROM' => user()->opt_js['h_from'],
     'HIDE_AVATAR' => user()->opt_js['h_av'],
-    'HIDE_RANK_IMG' => (user()->opt_js['h_rnk_i'] && config()->get('show_rank_image')),
+    'HIDE_RANK_IMG' => (user()->opt_js['h_rnk_i'] && config()->get('forum.show_rank_image')),
     'HIDE_POST_IMG' => user()->opt_js['h_post_i'],
     'HIDE_SMILE' => user()->opt_js['h_smile'],
     'HIDE_SIGNATURE' => user()->opt_js['h_sig'],
     'SPOILER_OPENED' => user()->opt_js['sp_op'],
     'SHOW_IMG_AFTER_LOAD' => user()->opt_js['i_aft_l'],
 
-    'HIDE_RANK_IMG_DIS' => !config()->get('show_rank_image'),
+    'HIDE_RANK_IMG_DIS' => !config()->get('forum.show_rank_image'),
 
     'PINNED_FIRST_POST' => $t_data['topic_show_first_post'],
     'PIN_HREF' => $t_data['topic_show_first_post'] ? 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=post_unpin" : 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=post_pin",
@@ -598,7 +599,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $poster_bot = ($poster_id == BOT_UID);
     $poster = $poster_guest ? __('GUEST') : $postrow[$i]['username'];
 
-    $post_date = bb_date($postrow[$i]['post_time'], config()->get('post_date_format'));
+    $post_date = bb_date($postrow[$i]['post_time'], config()->get('localization.date_formats.post'));
     $max_post_time = max($max_post_time, $postrow[$i]['post_time']);
     $poster_posts = !$poster_guest ? $postrow[$i]['user_posts'] : '';
     $poster_from = ($postrow[$i]['user_from'] && !$poster_guest) ? $postrow[$i]['user_from'] : '';
@@ -624,8 +625,8 @@ for ($i = 0; $i < $total_posts; $i++) {
     $poster_rank = $rank_image = '';
     $user_rank = $postrow[$i]['user_rank'];
     if (!user()->opt_js['h_rnk_i'] && isset($ranks[$user_rank])) {
-        $rank_image = (config()->get('show_rank_image') && $ranks[$user_rank]['rank_image']) ? '<img src="' . make_url($ranks[$user_rank]['rank_image']) . '" alt="" title="" border="0" />' : '';
-        $poster_rank = config()->get('show_rank_text') ? $ranks[$user_rank]['rank_title'] : '';
+        $rank_image = (config()->get('forum.show_rank_image') && $ranks[$user_rank]['rank_image']) ? '<img src="' . make_url($ranks[$user_rank]['rank_image']) . '" alt="" title="" border="0" />' : '';
+        $poster_rank = config()->get('forum.show_rank_text') ? $ranks[$user_rank]['rank_title'] : '';
     }
 
     // Handle anon users posting with usernames
@@ -651,7 +652,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     // Parse message and sig
     $message = bbcode()->getParsedPost($postrow[$i]);
 
-    $user_sig = (config()->get('allow_sig') && !user()->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
+    $user_sig = (config()->get('forum.user_signature.enabled') && !user()->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
 
     if (bf($postrow[$i]['user_opt'], 'user_opt', 'dis_sig')) {
         $user_sig = __('SIGNATURE_DISABLE');
@@ -688,7 +689,7 @@ for ($i = 0; $i < $total_posts; $i++) {
 
     // Replace newlines (we use this rather than nl2br because till recently it wasn't XHTML compliant)
     if ($user_sig) {
-        $user_sig = config()->get('user_signature_start') . $user_sig . config()->get('user_signature_end');
+        $user_sig = config()->get('forum.user_signature_start') . $user_sig . config()->get('forum.user_signature_end');
     }
 
     // Editing information
@@ -732,11 +733,11 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_NAME_JS' => addslashes($poster),
         'POSTER_RANK' => $poster_rank,
         'RANK_IMAGE' => $rank_image,
-        'POSTER_JOINED' => config()->get('show_poster_joined') ? $poster_longevity : '',
+        'POSTER_JOINED' => config()->get('forum.show_poster_joined') ? $poster_longevity : '',
 
         'POSTER_JOINED_DATE' => $poster_joined,
-        'POSTER_POSTS' => (config()->get('show_poster_posts') && $poster_posts) ? '<a href="' . FORUM_PATH . 'search?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
-        'POSTER_FROM' => config()->get('show_poster_from') ? render_flag($poster_from, false) : '',
+        'POSTER_POSTS' => (config()->get('forum.show_poster_posts') && $poster_posts) ? '<a href="' . FORUM_PATH . 'search?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
+        'POSTER_FROM' => config()->get('forum.show_poster_from') ? render_flag($poster_from, false) : '',
         'POSTER_BOT' => $poster_bot,
         'POSTER_GUEST' => $poster_guest,
         'POSTER_ID' => $poster_id,
@@ -816,13 +817,13 @@ if (defined('SPLIT_FORM_START')) {
 }
 
 // Quick Reply
-if (config()->get('show_quick_reply')) {
+if (config()->get('forum.show_quick_reply')) {
     if ($is_auth['auth_reply'] && !$locked) {
         template()->assign_vars([
             'QUICK_REPLY' => true,
             'QR_POST_ACTION' => POSTING_URL,
             'QR_TOPIC_ID' => $topic_id,
-            'CAPTCHA_HTML' => (IS_GUEST && !config()->get('captcha.disabled')) ? bb_captcha('get') : '',
+            'CAPTCHA_HTML' => (IS_GUEST && !config()->get('forum.captcha.disabled')) ? bb_captcha('get') : '',
         ]);
 
         if (!IS_GUEST) {
@@ -840,7 +841,7 @@ foreach ($is_auth as $name => $is) {
 template()->assign_vars(['PG_ROW_CLASS' => $pg_row_class ?? 'row1']);
 
 if (IS_ADMIN) {
-    template()->assign_vars(['U_LOGS' => FORUM_PATH . 'admin/admin_log.php?' . POST_TOPIC_URL . "={$topic_id}&amp;db=" . config()->get('log_days_keep')]);
+    template()->assign_vars(['U_LOGS' => FORUM_PATH . 'admin/admin_log.php?' . POST_TOPIC_URL . "={$topic_id}&amp;db=" . config()->get('logging.log_days_keep')]);
 }
 
 print_page('viewtopic.twig');

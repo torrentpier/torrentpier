@@ -142,7 +142,7 @@ function sys(string $param): int
 /**
  * Format time difference in human-readable format
  *
- * @see \TorrentPier\Helpers\TimeHelper::humanTime()
+ * @see TorrentPier\Helpers\TimeHelper::humanTime()
  */
 function humanTime(int|string $timestamp, int|string|null $reference = null): string
 {

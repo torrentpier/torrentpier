@@ -101,11 +101,11 @@
         </td>
         <td valign="top">
             <div id="avatar_explain" class="med">{{ AVATAR_EXPLAIN|raw }}</div>
-            {% if config('group_avatars.up_allowed') %}
+            {% if config('avatars.group.up_allowed') %}
             <br/>
             <form action="{{ S_GROUP_CONFIG_ACTION }}" method="post" enctype="multipart/form-data">
                 {{ S_HIDDEN_FIELDS|raw }}
-                <input type="hidden" name="MAX_FILE_SIZE" value="{{ config('group_avatars.max_size') }}"/>
+                <input type="hidden" name="MAX_FILE_SIZE" value="{{ config('avatars.group.max_size') }}"/>
                 <input type="file" name="avatar" accept="image/*"/>
                 <input class="mainoption" type="submit" name="submit" value="{{ __('UPLOAD_AVATAR_FILE') }}"/>
             </form>

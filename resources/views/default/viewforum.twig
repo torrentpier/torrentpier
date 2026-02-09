@@ -633,7 +633,7 @@ td.topic_id { cursor: pointer; }
 {% if IS_ADMIN %}
 <div class="med tCenter">{{ __('ADMIN') }}:
   <a href="{{ POSTING_URL }}?mode=new_rel&amp;{{ constant('POST_FORUM_URL') }}={{ FORUM_ID }}&amp;edit_tpl=1" class="bold" target="_blank">{{ __('DESIGNER') }}</a>&nbsp;&middot;
-  <a href="/admin/admin_log.php?{{ constant('POST_FORUM_URL') }}={{ FORUM_ID }}&amp;db={{ config('log_days_keep') }}" target="_blank">{{ __('FORUM_LOGS') }}</a>&nbsp;&middot;
+  <a href="/admin/admin_log.php?{{ constant('POST_FORUM_URL') }}={{ FORUM_ID }}&amp;db={{ config('logging.log_days_keep') }}" target="_blank">{{ __('FORUM_LOGS') }}</a>&nbsp;&middot;
   <a href="/admin/admin_forums.php?mode=editforum&amp;{{ constant('POST_FORUM_URL') }}={{ FORUM_ID }}" target="_blank">{{ __('EDIT') }}</a>&nbsp;&middot;
   <a href="/admin/admin_forumauth.php?{{ constant('POST_FORUM_URL') }}={{ FORUM_ID }}" target="_blank">{{ __('PERMISSIONS') }}</a>&nbsp;&middot;
   <a href="/admin/admin_forums.php?mode=deleteforum&amp;{{ constant('POST_FORUM_URL') }}={{ FORUM_ID }}" target="_blank">{{ __('DELETE') }}</a>

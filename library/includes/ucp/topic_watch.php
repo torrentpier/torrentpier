@@ -8,7 +8,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!config()->get('topic_notify_enabled')) {
+if (!config()->get('mail.notifications.topic_notify')) {
     bb_die(__('DISABLED'));
 }
 

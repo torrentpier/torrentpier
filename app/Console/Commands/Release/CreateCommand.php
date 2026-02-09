@@ -139,12 +139,12 @@ class CreateCommand extends Command
             return self::SUCCESS;
         }
 
-        // Step 1: Update config.php
+        // Step 1: Update config/app.php
         $this->section('Updating Configuration');
         if (!$this->updateConfig($version, $date)) {
             return self::FAILURE;
         }
-        $this->line('  <info>✓</info> Updated config/config.php');
+        $this->line('  <info>✓</info> Updated config/app.php');
 
         // Step 2: Generate changelog
         if (!$noChangelog) {
@@ -211,7 +211,7 @@ class CreateCommand extends Command
     }
 
     /**
-     * Update version in Application.php and date in config.php
+     * Update version in Application.php and date in config/app.php
      * @throws BindingResolutionException
      */
     private function updateConfig(string $version, string $date): bool
@@ -233,18 +233,18 @@ class CreateCommand extends Command
             return false;
         }
 
-        // Update the release date in config.php
-        $configFile = BB_ROOT . 'config/config.php';
+        // Update the release date in config/app.php
+        $configFile = BB_ROOT . 'config/app.php';
 
         $content = files()->get($configFile);
         $content = preg_replace(
-            "/(\\\$bb_cfg\\['tp_release_date']\\s*=\\s*')[^']*';/",
-            "\${1}{$date}';",
+            "/('release_date'\\s*=>\\s*')[^']*'/",
+            "\${1}{$date}'",
             $content,
         );
 
         if (files()->put($configFile, $content) === false) {
-            $this->error('Failed to write config.php');
+            $this->error('Failed to write config/app.php');
 
             return false;
         }

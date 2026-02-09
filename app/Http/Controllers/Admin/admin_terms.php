@@ -23,7 +23,7 @@ if (request()->post->has('post') && (config()->get('terms') !== request()->post-
 
 template()->assign_vars([
     'S_ACTION' => 'admin_terms.php',
-    'EXT_LINK_NW' => config()->get('ext_link_new_win'),
+    'EXT_LINK_NW' => config()->get('forum.ext_link_new_win'),
     'MESSAGE' => $preview ? request()->post->get('message') : config()->get('terms'),
     'PREVIEW_HTML' => $preview ? bbcode()->toHtml(request()->post->get('message')) : '',
 ]);

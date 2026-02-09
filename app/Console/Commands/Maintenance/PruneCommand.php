@@ -246,7 +246,7 @@ class PruneCommand extends AbstractMaintenanceCommand
         return match ($type) {
             'logs' => 'log_days_keep: ' . ($this->config->get('log_days_keep') ?: 'not set'),
             'pm' => 'pm_days_keep: ' . ($this->config->get('pm_days_keep') ?: 'not set'),
-            'sessions' => 'user_session_duration: ' . $this->config->get('user_session_duration') . 's',
+            'sessions' => 'user_session_duration: ' . $this->config->get('auth.sessions.user_duration') . 's',
             'search' => 'expires after 3 hours',
             default => '-',
         };
@@ -308,9 +308,9 @@ class PruneCommand extends AbstractMaintenanceCommand
      */
     private function getSessionsCount(): int
     {
-        $userExpire = TIMENOW - (int)$this->config->get('user_session_duration');
-        $adminExpire = TIMENOW - (int)$this->config->get('admin_session_duration');
-        $gcTime = $userExpire - (int)$this->config->get('user_session_gc_ttl');
+        $userExpire = TIMENOW - (int)$this->config->get('auth.sessions.user_duration');
+        $adminExpire = TIMENOW - (int)$this->config->get('auth.sessions.admin_duration');
+        $gcTime = $userExpire - (int)$this->config->get('auth.sessions.gc_ttl');
 
         $row = $this->database->fetch_row('
             SELECT COUNT(*) as cnt FROM ' . BB_SESSIONS . "
@@ -404,9 +404,9 @@ class PruneCommand extends AbstractMaintenanceCommand
      */
     private function pruneSessions(): int
     {
-        $userExpire = TIMENOW - (int)$this->config->get('user_session_duration');
-        $adminExpire = TIMENOW - (int)$this->config->get('admin_session_duration');
-        $gcTime = $userExpire - (int)$this->config->get('user_session_gc_ttl');
+        $userExpire = TIMENOW - (int)$this->config->get('auth.sessions.user_duration');
+        $adminExpire = TIMENOW - (int)$this->config->get('auth.sessions.admin_duration');
+        $gcTime = $userExpire - (int)$this->config->get('auth.sessions.gc_ttl');
 
         // Update user session times before deleting
         $this->database->lock([

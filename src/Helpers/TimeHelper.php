@@ -33,7 +33,7 @@ class TimeHelper
      */
     public static function humanTime(int|string $timestamp, int|string|null $reference = null): string
     {
-        $locale = config()->get('default_lang', 'en');
+        $locale = config()->get('localization.default_lang', 'en');
 
         try {
             // Parse timestamp - handle both numeric strings and date strings
@@ -77,12 +77,12 @@ class TimeHelper
     ): string {
         if (!$format) {
             $format = \function_exists('config')
-                ? config()->get('default_dateformat', 'd-M-Y H:i')
+                ? config()->get('localization.date_formats.default', 'd-M-Y H:i')
                 : 'd-M-Y H:i';
         }
 
-        $locale = $locale ?? (\function_exists('config') ? config()->get('default_lang', 'en') : 'en');
-        $translateDates = \function_exists('config') ? config()->get('translate_dates', true) : true;
+        $locale = $locale ?? (\function_exists('config') ? config()->get('localization.default_lang', 'en') : 'en');
+        $translateDates = \function_exists('config') ? config()->get('localization.translate_dates', true) : true;
 
         try {
             // Create Carbon instance with timezone offset
@@ -128,7 +128,7 @@ class TimeHelper
             return '';
         }
 
-        $timezoneOffset ??= (float)config()->get('board_timezone', 0);
+        $timezoneOffset ??= (float)config()->get('localization.board_timezone', 0);
         $now = \defined('TIMENOW') ? TIMENOW : time();
 
         return self::humanTime(strtotime($date, $now + (3600 * $timezoneOffset)));

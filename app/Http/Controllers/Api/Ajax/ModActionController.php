@@ -86,8 +86,8 @@ class ModActionController
             // Log action
             $logMsg = \sprintf(
                 __('TOR_STATUS_LOG_ACTION'),
-                config()->get('tor_icons')[$status] . ' <b> ' . __('TOR_STATUS_NAME')[$status] . '</b>',
-                config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . __('TOR_STATUS_NAME')[$tor['tor_status']] . '</b>',
+                config()->get('tracker.tor_icons')[$status] . ' <b> ' . __('TOR_STATUS_NAME')[$status] . '</b>',
+                config()->get('tracker.tor_icons')[$tor['tor_status']] . ' <b> ' . __('TOR_STATUS_NAME')[$tor['tor_status']] . '</b>',
             );
             log_action()->mod('mod_topic_change_tor_status', [
                 'forum_id' => $tor['forum_id'],
@@ -98,7 +98,7 @@ class ModActionController
         }
 
         return $this->response([
-            'status' => config()->get('tor_icons')[$status],
+            'status' => config()->get('tracker.tor_icons')[$status],
             'topics' => $topicIdsList,
         ]);
     }
@@ -210,8 +210,8 @@ class ModActionController
         } else {
             $userRegIp = IPHelper::decode($profiledata['user_reg_ip']);
             $userLastIp = IPHelper::decode($profiledata['user_last_ip']);
-            $regIpDisplay = '<a href="' . config()->get('whois_info') . $userRegIp . '" class="gen" target="_blank">' . $userRegIp . '</a>';
-            $lastIpDisplay = '<a href="' . config()->get('whois_info') . $userLastIp . '" class="gen" target="_blank">' . $userLastIp . '</a>';
+            $regIpDisplay = '<a href="' . config()->get('services.whois_info') . $userRegIp . '" class="gen" target="_blank">' . $userRegIp . '</a>';
+            $lastIpDisplay = '<a href="' . config()->get('services.whois_info') . $userLastIp . '" class="gen" target="_blank">' . $userLastIp . '</a>';
         }
 
         $ipListHtml = '

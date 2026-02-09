@@ -90,7 +90,7 @@ class ScrapeController
 
         if ($infoHashCount > 0) {
             // Limit number of hashes to prevent abuse
-            $maxScrapes = config()->get('max_scrapes');
+            $maxScrapes = config()->get('tracker.max_scrapes');
             if ($infoHashCount > $maxScrapes) {
                 $infoHashes = \array_slice($infoHashes, 0, $maxScrapes);
             }

@@ -8,8 +8,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (config()->get('topic_moved_days_keep')) {
-    $prune_time = TIMENOW - 86400 * config()->get('topic_moved_days_keep');
+if (config()->get('forum.topic_moved_days_keep')) {
+    $prune_time = TIMENOW - 86400 * config()->get('forum.topic_moved_days_keep');
 
     DB()->query('
 		DELETE FROM ' . BB_TOPICS . '

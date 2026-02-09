@@ -73,8 +73,8 @@
             <td>{% if CAN_EDIT_USERNAME %}<input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{{ USERNAME }}"/>{% else %}<b>{{ USERNAME }}</b>{% endif %}&nbsp;<span id="check_name"></span></td>
         </tr>
         <tr>
-            <td class="prof-title">{{ __('EMAIL') }}: * {% if EDIT_PROFILE %}{% elseif config('reg_email_activation') %}<br/><h6>{{ __('EMAIL_EXPLAIN') }}</h6>{% endif %}</td>
-            <td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{{ USER_EMAIL }}"{% if EDIT_PROFILE and not ADM_EDIT and not IS_ADMIN %}{% if not config('emailer.enabled') or config('email_change_disabled') %} readonly style="color: gray;"{% endif %}{% endif %} />&nbsp;<span id="check_email"></span></td>
+            <td class="prof-title">{{ __('EMAIL') }}: * {% if EDIT_PROFILE %}{% elseif config('auth.registration.email_activation') %}<br/><h6>{{ __('EMAIL_EXPLAIN') }}</h6>{% endif %}</td>
+            <td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{{ USER_EMAIL }}"{% if EDIT_PROFILE and not ADM_EDIT and not IS_ADMIN %}{% if not config('mail.enabled') or config('mail.email_change_disabled') %} readonly style="color: gray;"{% endif %}{% endif %} />&nbsp;<span id="check_email"></span></td>
         </tr>
         {% if EDIT_PROFILE and not ADM_EDIT %}
         <tr>
@@ -95,7 +95,7 @@
                 <input id="pass_confirm" onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('#pass').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="{% if SHOW_PASS %}text{% else %}password{% endif %}" name="cfm_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="check_pass"></span>
             </td>
         </tr>
-        {% if config('invites_system.enabled') and not EDIT_PROFILE %}
+        {% if config('auth.invites.enabled') and not EDIT_PROFILE %}
         <tr>
             <td class="prof-title">{{ __('INVITE_CODE') }}: *</td>
             <td><input type="text" name="invite_code" size="35" value="{{ INVITE_CODE }}"/></td>
@@ -189,13 +189,13 @@
             </script>
         </tr>
         {% endif %}
-        {% if config('allow_change.language') %}
+        {% if config('localization.allow_change.language') %}
         <tr>
             <td class="prof-title">{{ __('BOARD_LANG') }}:</td>
             <td>{{ LANGUAGE_SELECT }}</td>
         </tr>
         {% endif %}
-        {% if config('allow_change.timezone') %}
+        {% if config('localization.allow_change.timezone') %}
         <tr>
             <td class="prof-title">{{ __('SYSTEM_TIMEZONE') }}:</td>
             <td>{{ TIMEZONE_SELECT }}</td>
@@ -242,7 +242,7 @@
             {% endif %}
         </tr>
 
-        {% if IS_ADMIN or config('show_email_visibility_settings') %}
+        {% if IS_ADMIN or config('mail.show_email_visibility_settings') %}
         <tr>
             <td class="prof-title">{{ __('PUBLIC_VIEW_EMAIL') }}:</td>
             <td>
@@ -265,7 +265,7 @@
                 <label><input type="radio" name="user_notify" value="0" {% if not USER_NOTIFY %}checked{% endif %} />{{ __('NO') }}</label>
             </td>
         </tr>
-        {% if config('pm_notify_enabled') %}
+        {% if config('mail.notifications.pm_notify') %}
         <tr>
             <td class="prof-title">{{ __('NOTIFY_ON_PRIVMSG') }}:</td>
             <td>
@@ -318,7 +318,7 @@
                 <label><input type="radio" name="user_hide_torrent_client" value="0" {% if not USER_HIDE_TORRENT_CLIENT %}checked{% endif %} />{{ __('NO') }}</label>
             </td>
         </tr>
-        {% if config('ip2country_settings.enabled') %}
+        {% if config('services.ip2country.enabled') %}
         <tr>
             <td class="prof-title">{{ __('HIDE_PEER_COUNTRY_NAME') }}:</td>
             <td>
@@ -350,10 +350,10 @@
                     <tr>
                         <td>
                             {{ AVATAR_EXPLAIN }}
-                            {% if config('avatars.up_allowed') %}
+                            {% if config('avatars.user.up_allowed') %}
                             <div class="spacer_4"></div>
                             {{ __('UPLOAD_AVATAR_FILE') }}:
-                            <input type="hidden" name="MAX_FILE_SIZE" value="{{ config('avatars.max_size') }}"/>
+                            <input type="hidden" name="MAX_FILE_SIZE" value="{{ config('avatars.user.max_size') }}"/>
                             <input type="file" name="avatar" accept="image/*"/>
                             {% endif %}
                         </td>
