@@ -22,6 +22,7 @@ RUN apk add --no-cache dcron && \
 
 WORKDIR /app
 COPY . /app
+# Remove dev files (complements .dockerignore for builds from archives/tarballs without it)
 RUN rm -rf .git .github .gitattributes .gitignore \
     .editorconfig .idea .vscode \
     .php-cs-fixer.php .styleci.yml phpunit.xml phpstan.neon \

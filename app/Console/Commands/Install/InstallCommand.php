@@ -460,10 +460,11 @@ class InstallCommand extends Command
         $username = $this->config['DB_USERNAME'];
         $password = $this->config['DB_PASSWORD'];
 
-        // Validate database name (whitelist: alphanumeric and underscore only)
+        // Validate database name: must start with letter or underscore, then alphanumeric/underscores
         // DDL statements like CREATE DATABASE don't support prepared statements
-        if (!preg_match('/^[a-zA-Z0-9_]+$/', $database)) {
-            $this->error('Invalid database name. Only alphanumeric characters and underscores are allowed.');
+        // Same regex as docker-entrypoint.sh — MySQL does not allow names starting with digits
+        if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $database)) {
+            $this->error('Invalid database name. Must start with a letter or underscore, followed by alphanumeric characters and underscores.');
 
             return false;
         }
