@@ -153,7 +153,7 @@ switch ($mode) {
 }
 
 // Captcha
-$need_captcha = ($mode == 'register' && !IS_ADMIN && !config()->get('captcha.disabled'));
+$need_captcha = ($mode == 'register' && !IS_ADMIN && !config()->get('forum.captcha.disabled'));
 
 if ($submit) {
     if ($need_captcha && !bb_captcha('check')) {
@@ -204,10 +204,10 @@ foreach ($profile_fields as $field => $can_edit) {
              *  Invite code (reg)
              */
         case 'invite_code':
-            if (config()->get('invites_system.enabled')) {
+            if (config()->get('auth.invites.enabled')) {
                 $invite_code = request()->post->get('invite_code', '');
                 if ($submit) {
-                    $inviteCodes = config()->get('invites_system.codes');
+                    $inviteCodes = config()->get('auth.invites.codes');
                     if (isset($inviteCodes[$invite_code])) {
                         if ($inviteCodes[$invite_code] !== 'permanent') {
                             if (strtotime($inviteCodes[$invite_code]) < TIMENOW) {

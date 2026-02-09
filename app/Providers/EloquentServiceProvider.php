@@ -79,7 +79,7 @@ class EloquentServiceProvider extends ServiceProvider
         $capsule = $this->app->make(Capsule::class);
 
         // Configure Eloquent strict mode for development
-        $debugEnabled = (bool)config()->get('debug.enable', false);
+        $debugEnabled = (bool)config()->get('logging.debug.enable', false);
         Model::preventLazyLoading($debugEnabled);
         Model::preventSilentlyDiscardingAttributes($debugEnabled);
 

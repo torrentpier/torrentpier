@@ -668,9 +668,9 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
         template()->assign_vars([
             'TPL_ADD_ATTACHMENT' => true,
             'S_FORM_ENCTYPE' => 'enctype="multipart/form-data"',
-            'FILESIZE' => config()->get('attach.max_size'),
-            'RULES' => __('ALLOWED_EXTENSIONS') . ': .' . implode(', .', config()->get('attach.allowed_ext'))
-                . '<br />' . __('MAX_FILE_SIZE') . ': ' . humn_size(config()->get('attach.max_size')),
+            'FILESIZE' => config()->get('tracker.attach.max_size'),
+            'RULES' => __('ALLOWED_EXTENSIONS') . ': .' . implode(', .', config()->get('tracker.attach.allowed_ext'))
+                . '<br />' . __('MAX_FILE_SIZE') . ': ' . humn_size(config()->get('tracker.attach.max_size')),
         ]);
 
         if ($file_attached && $mode == 'editpost') {

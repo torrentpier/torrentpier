@@ -88,10 +88,10 @@ class AnnounceController
         }
 
         // Check for a client ban
-        if (config()->get('client_ban.enabled')) {
+        if (config()->get('tracker.client_ban.enabled')) {
             $targetClient = [];
 
-            foreach (config()->get('client_ban.clients') as $clientId => $banReason) {
+            foreach (config()->get('tracker.client_ban.clients') as $clientId => $banReason) {
                 if (str_starts_with($peer_id, $clientId)) {
                     $targetClient = [
                         'peer_id' => $clientId,
@@ -101,7 +101,7 @@ class AnnounceController
                 }
             }
 
-            if (config()->get('client_ban.only_allow_mode')) {
+            if (config()->get('tracker.client_ban.only_allow_mode')) {
                 if (empty($targetClient['peer_id'])) {
                     return $this->msgDie('Your BitTorrent client has been banned!');
                 }

@@ -34,7 +34,7 @@ function get_avatar_path($id, $ext_id, $base_path = null, $first_div = 10000, $s
 function get_attach_path($id, $ext_id = null, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
     $ext_id ??= TORRENT_EXT_ID;
-    $base_path ??= config()->get('attach.upload_path');
+    $base_path ??= config()->get('tracker.attach.upload_path');
 
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
@@ -897,13 +897,13 @@ function bb_date(int $timestamp, string|false $format = false, bool $friendly_da
 {
     // Determine timezone offset
     if (!defined('IS_GUEST') || IS_GUEST) {
-        $tz = (float)config()->get('board_timezone', 0);
+        $tz = (float)config()->get('localization.board_timezone', 0);
     } else {
         $tz = (float)(userdata('user_timezone') ?? 0);
     }
 
     // Determine user locale
-    $locale = userdata('user_lang') ?? config()->get('default_lang', 'en');
+    $locale = userdata('user_lang') ?? config()->get('localization.default_lang', 'en');
 
     // Prepare labels for "today" and "yesterday"
     $labels = [

@@ -498,8 +498,8 @@ class ManticoreSearch
      */
     private function connect(): void
     {
-        $host = config()->get('services.manticore.host', '127.0.0.1');
-        $port = config()->get('services.manticore.port', 9306);
+        $host = config()->get('forum.manticore_host', '127.0.0.1');
+        $port = config()->get('forum.manticore_port', 9306);
 
         $this->pdo = new PDO(
             "mysql:host={$host};port={$port};charset=utf8mb4",

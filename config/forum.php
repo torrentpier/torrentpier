@@ -82,13 +82,6 @@ return [
     'poll_max_days' => 180,
     'trash_forum_id' => 0,
 
-    // Graphics
-    'vote_graphic_length' => 205,
-    'privmsg_graphic_length' => 175,
-    'topic_left_column_width' => 150,
-    'post_img_width_decr' => 52,
-    'attach_img_width_decr' => 130,
-
     // Captcha
     'captcha' => [
         'disabled' => false,

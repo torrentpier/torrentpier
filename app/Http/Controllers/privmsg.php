@@ -1326,7 +1326,7 @@ if ($mode == 'read') {
 
     if ($max_pm) {
         $box_limit_percent = min(round(($pm_all_total / $max_pm) * 100), 100);
-        $box_limit_img_length = min(round(($pm_all_total / $max_pm) * config()->get('forum.privmsg_graphic_length')), config()->get('forum.privmsg_graphic_length'));
+        $box_limit_img_length = min(round(($pm_all_total / $max_pm) * config()->get('layouts.privmsg_graphic_length')), config()->get('layouts.privmsg_graphic_length'));
         $box_limit_remain = max(($max_pm - $pm_all_total), 0);
 
         template()->assign_var('PM_BOX_SIZE_INFO');
