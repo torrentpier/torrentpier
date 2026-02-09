@@ -22,10 +22,15 @@ RUN apk add --no-cache dcron && \
 
 WORKDIR /app
 COPY . /app
-RUN php install/release_scripts/_cleanup.php && rm -rf install/release_scripts
+# Remove dev files (complements .dockerignore for builds from archives/tarballs without it)
+RUN rm -rf .git .github .gitattributes .gitignore \
+    .editorconfig .idea .vscode \
+    .php-cs-fixer.php .styleci.yml phpunit.xml phpstan.neon \
+    CHANGELOG.md CLAUDE.md README.md UPGRADE_GUIDE.md CONTRIBUTING.md \
+    tests install/release_scripts
 RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader && \
     chmod +x ./bull ./install/docker/docker-entrypoint.sh && \
     ln -s /app/bull /usr/local/bin/bull && \
     cp ./install/docker/php.ini /usr/local/etc/php/php.ini
 
-ENTRYPOINT "/app/install/docker/docker-entrypoint.sh"
+ENTRYPOINT ["/app/install/docker/docker-entrypoint.sh"]

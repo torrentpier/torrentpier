@@ -22,7 +22,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 use TorrentPier\Console\Commands\Command;
-use TorrentPier\Console\Helpers\FileSystemHelper;
 use TorrentPier\Console\Helpers\PhinxManager;
 
 /**
@@ -461,10 +460,11 @@ class InstallCommand extends Command
         $username = $this->config['DB_USERNAME'];
         $password = $this->config['DB_PASSWORD'];
 
-        // Validate database name (whitelist: alphanumeric and underscore only)
+        // Validate database name: must start with letter or underscore, then alphanumeric/underscores
         // DDL statements like CREATE DATABASE don't support prepared statements
-        if (!preg_match('/^[a-zA-Z0-9_]+$/', $database)) {
-            $this->error('Invalid database name. Only alphanumeric characters and underscores are allowed.');
+        // Same regex as docker-entrypoint.sh — MySQL does not allow names starting with digits
+        if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $database)) {
+            $this->error('Invalid database name. Must start with a letter or underscore, followed by alphanumeric characters and underscores.');
 
             return false;
         }
@@ -641,11 +641,6 @@ class InstallCommand extends Command
             return; // Skip cleanup in development
         }
 
-        $cleanupScript = BB_ROOT . 'install/release_scripts/_cleanup.php';
-        if (!files()->exists($cleanupScript)) {
-            return;
-        }
-
         $this->section('Cleanup');
 
         $this->line('  The following files can be removed:');
@@ -655,15 +650,14 @@ class InstallCommand extends Command
         $this->line();
 
         if ($this->confirm('Remove development files?', false)) {
-            require_once $cleanupScript;
+            $command = $this->getApplication()->find('release:cleanup');
+            $arguments = new ArrayInput(['--force' => true]);
 
-            // Remove release scripts directory
-            $releaseDir = BB_ROOT . 'install/release_scripts';
-            if (files()->isDirectory($releaseDir)) {
-                FileSystemHelper::removeDirectory($releaseDir);
+            try {
+                $command->run($arguments, $this->output);
+            } catch (Throwable $e) {
+                $this->warning('Cleanup failed: ' . $e->getMessage());
             }
-
-            $this->line('  <info>✓</info> Cleanup completed');
         } else {
             $this->comment('  Skipped cleanup');
         }
