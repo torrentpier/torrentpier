@@ -93,7 +93,7 @@ $req_page = 'index_page';
 $req_page .= $viewcat ? "_c{$viewcat}" : '';
 
 define('REQUESTED_PAGE', $req_page);
-caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . config()->get('default_lang'));
+caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . config()->get('localization.default_lang'));
 
 $hide_cat_opt = isset(user()->opt_js['h_cat']) ? (string)user()->opt_js['h_cat'] : 0;
 $hide_cat_user = array_flip(explode('-', $hide_cat_opt));
@@ -318,7 +318,7 @@ foreach ($cat_forums as $cid => $c) {
                 'LAST_TOPIC_ID' => $f['last_topic_id'],
                 'LAST_TOPIC_TIP' => $f['last_topic_title'],
                 'LAST_TOPIC_TITLE' => str_short($f['last_topic_title'], $last_topic_max_len),
-                'LAST_POST_TIME' => bb_date($f['last_post_time'], config()->get('last_post_date_format')),
+                'LAST_POST_TIME' => bb_date($f['last_post_time'], config()->get('localization.date_formats.last_post')),
                 'LAST_POST_USER' => profile_url(['username' => $f['last_post_username'], 'display_username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank']]),
             ];
         }

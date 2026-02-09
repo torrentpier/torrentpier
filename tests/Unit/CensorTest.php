@@ -9,7 +9,7 @@ describe('Censor', function () {
         it('does not censor when disabled', function () {
             $config = Mockery::mock(Config::class);
             $config->shouldReceive('get')
-                ->with('use_word_censor', false)
+                ->with('forum.use_word_censor', false)
                 ->andReturn(false);
 
             $datastore = Mockery::mock(DatastoreManager::class);
@@ -25,7 +25,7 @@ describe('Censor', function () {
         it('censors words when enabled', function () {
             $config = Mockery::mock(Config::class);
             $config->shouldReceive('get')
-                ->with('use_word_censor', false)
+                ->with('forum.use_word_censor', false)
                 ->andReturn(true);
 
             $datastore = Mockery::mock(DatastoreManager::class);
@@ -48,7 +48,7 @@ describe('Censor', function () {
         it('handles wildcard patterns', function () {
             $config = Mockery::mock(Config::class);
             $config->shouldReceive('get')
-                ->with('use_word_censor', false)
+                ->with('forum.use_word_censor', false)
                 ->andReturn(true);
 
             $datastore = Mockery::mock(DatastoreManager::class);
@@ -68,7 +68,7 @@ describe('Censor', function () {
         it('handles empty datastore gracefully', function () {
             $config = Mockery::mock(Config::class);
             $config->shouldReceive('get')
-                ->with('use_word_censor', false)
+                ->with('forum.use_word_censor', false)
                 ->andReturn(true);
 
             $datastore = Mockery::mock(DatastoreManager::class);
@@ -87,7 +87,7 @@ describe('Censor', function () {
         it('allows adding words at runtime', function () {
             $config = Mockery::mock(Config::class);
             $config->shouldReceive('get')
-                ->with('use_word_censor', false)
+                ->with('forum.use_word_censor', false)
                 ->andReturn(true);
 
             $datastore = Mockery::mock(DatastoreManager::class);
@@ -110,7 +110,7 @@ describe('Censor', function () {
         it('reloads words from datastore', function () {
             $config = Mockery::mock(Config::class);
             $config->shouldReceive('get')
-                ->with('use_word_censor', false)
+                ->with('forum.use_word_censor', false)
                 ->andReturn(true);
 
             $callCount = 0;
@@ -142,7 +142,7 @@ describe('Censor', function () {
         it('handles unicode words correctly', function () {
             $config = Mockery::mock(Config::class);
             $config->shouldReceive('get')
-                ->with('use_word_censor', false)
+                ->with('forum.use_word_censor', false)
                 ->andReturn(true);
 
             $datastore = Mockery::mock(DatastoreManager::class);
@@ -165,7 +165,7 @@ describe('Censor', function () {
         it('respects word boundaries', function () {
             $config = Mockery::mock(Config::class);
             $config->shouldReceive('get')
-                ->with('use_word_censor', false)
+                ->with('forum.use_word_censor', false)
                 ->andReturn(true);
 
             $datastore = Mockery::mock(DatastoreManager::class);

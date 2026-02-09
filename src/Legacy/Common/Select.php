@@ -10,6 +10,8 @@
 
 namespace TorrentPier\Legacy\Common;
 
+use TorrentPier\Data\Timezones;
+
 /**
  * Class Select
  * @package TorrentPier\Legacy\Common
@@ -23,7 +25,7 @@ class Select
     {
         $lang_select = '<select name="' . $select_name . '">';
         $x = 0;
-        foreach (config()->get('lang') as $key => $data) {
+        foreach (config()->get('localization.languages') as $key => $data) {
             $selected = '';
             if ($key == $default_lang) {
                 $selected = ' selected';
@@ -32,7 +34,7 @@ class Select
             $x++;
         }
         $lang_select .= '</select>';
-        $languages = config()->get('lang');
+        $languages = config()->get('localization.languages');
 
         return ($x > 1) ? $lang_select : reset($languages);
     }
@@ -43,11 +45,11 @@ class Select
     public static function timezone(string $default = '', string $select_name = 'timezone'): string
     {
         if ($default === '') {
-            $default = (string)config()->get('board_timezone');
+            $default = (string)config()->get('localization.board_timezone');
         }
         $tz_select = '<select name="' . $select_name . '">';
 
-        foreach (config()->get('timezones') as $offset => $zone) {
+        foreach (Timezones::all() as $offset => $zone) {
             $selected = ($offset == $default) ? ' selected' : '';
             $tz_select .= '<option value="' . $offset . '"' . $selected . '>' . $zone . '</option>';
         }
@@ -63,7 +65,7 @@ class Select
     {
         $templates_select = '<select name="' . $select_name . '">';
         $x = 0;
-        foreach (config()->get('templates') as $folder => $name) {
+        foreach (config()->get('templates.available') as $folder => $name) {
             $selected = '';
             if ($folder == $default_style) {
                 $selected = ' selected';
@@ -72,7 +74,7 @@ class Select
             $x++;
         }
         $templates_select .= '</select>';
-        $templates = config()->get('templates');
+        $templates = config()->get('templates.available');
 
         return ($x > 1) ? $templates_select : reset($templates);
     }

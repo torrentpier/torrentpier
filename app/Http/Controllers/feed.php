@@ -47,7 +47,7 @@ try {
     }
 
     // Output Atom feed with proper headers
-    $cacheTtl = config()->get('atom.cache_ttl') ?? 600;
+    $cacheTtl = config()->get('forum.atom.cache_ttl') ?? 600;
     Response::atom($atomContent, $cacheTtl)->send();
     exit;
 } catch (FeedGenerationException $e) {

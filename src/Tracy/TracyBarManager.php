@@ -82,7 +82,7 @@ class TracyBarManager
         return app()->isDebug()
             && php_sapi_name() !== 'cli'
             && request()->query->get('pane') !== 'left'
-            && config()->get('debug.enable');
+            && config()->get('logging.debug.enable');
     }
 
     /**
@@ -120,7 +120,7 @@ class TracyBarManager
     private function registerPanels(): void
     {
         $bar = Debugger::getBar();
-        $panelConfig = config()->get('debug.panels', []);
+        $panelConfig = config()->get('logging.debug.panels', []);
 
         // Performance panel - always first (shows timing)
         if ($panelConfig['performance'] ?? true) {

@@ -80,9 +80,9 @@ class ThemeExtension extends AbstractExtension implements GlobalsInterface
             return [];
         }
 
-        $topicLeftColWidth = config()->get('topic_left_column_witdh') ?? 150;
-        $postImgWidthDecr = config()->get('post_img_width_decr') ?? 52;
-        $attachImgWidthDecr = config()->get('attach_img_width_decr') ?? 52;
+        $topicLeftColWidth = config()->get('layouts.topic_left_column_width') ?? 150;
+        $postImgWidthDecr = config()->get('layouts.post_img_width_decr') ?? 52;
+        $attachImgWidthDecr = config()->get('layouts.attach_img_width_decr') ?? 52;
 
         return [
             'TOPIC_LEFT_COL_SPACER_WITDH' => $topicLeftColWidth - 8,

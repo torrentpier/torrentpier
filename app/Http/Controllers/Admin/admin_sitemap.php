@@ -39,7 +39,7 @@ if (!$result = DB()->sql_query($sql)) {
     }
 }
 
-$s_mess = __('SITEMAP_CREATED') . ': <b>' . bb_date($new['sitemap_time'], config()->get('post_date_format')) . '</b> ' . __('SITEMAP_AVAILABLE') . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">' . make_url('sitemap/sitemap.xml') . '</a>';
+$s_mess = __('SITEMAP_CREATED') . ': <b>' . bb_date($new['sitemap_time'], config()->get('localization.date_formats.post')) . '</b> ' . __('SITEMAP_AVAILABLE') . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">' . make_url('sitemap/sitemap.xml') . '</a>';
 $message = files()->isFile(SITEMAP_DIR . '/sitemap.xml') ? $s_mess : __('SITEMAP_NOT_CREATED');
 
 template()->assign_vars([

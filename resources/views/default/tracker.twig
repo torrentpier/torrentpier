@@ -279,7 +279,7 @@ ajax.callback.view_post = function(data) {
 					<p class="chbox med">
 						{{ ALL_WORDS_CHBOX }}
 						&middot; <a class="med" href="#" onclick="return get_fs_link();">{{ __('SEL_CHAPTERS') }}</a>
-						{% if config('search_help_url') %} &middot; <a class="med" href="{{ config('search_help_url') }}">{{ __('SEARCH_HELP_URL') }}</a>{% endif %}
+						{% if config('app.help_urls.search') %} &middot; <a class="med" href="{{ config('app.help_urls.search') }}">{{ __('SEARCH_HELP_URL') }}</a>{% endif %}
 					</p>
 				</div>
 				</fieldset>

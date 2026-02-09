@@ -152,7 +152,7 @@ class IndexDataController
      */
     private function handleNullRatio(array $body): ResponseInterface
     {
-        if (!config()->get('ratio_null_enabled') || !RATIO_ENABLED) {
+        if (!config()->get('tracker.ratio_null_enabled') || !RATIO_ENABLED) {
             return $this->error(__('MODULE_OFF'));
         }
         if (empty($body['confirmed'])) {
@@ -174,8 +174,8 @@ class IndexDataController
         if ($ratioNulled && !IS_ADMIN) {
             return $this->error(__('BT_NULL_RATIO_AGAIN'));
         }
-        if (($userRatio >= config()->get('ratio_to_null')) && !IS_ADMIN) {
-            return $this->error(\sprintf(__('BT_NULL_RATIO_NOT_NEEDED'), config()->get('ratio_to_null')));
+        if (($userRatio >= config()->get('tracker.ratio_to_null')) && !IS_ADMIN) {
+            return $this->error(\sprintf(__('BT_NULL_RATIO_NOT_NEEDED'), config()->get('tracker.ratio_to_null')));
         }
 
         $ratioNulledSql = !IS_ADMIN ? ', ratio_nulled = 1' : '';
@@ -272,7 +272,7 @@ class IndexDataController
         if (RATIO_ENABLED) {
             $userRatio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">' . get_bt_ratio($btu) . '</b>' : __('IT_WILL_BE_DOWN') . ' <b>' . humn_size(MIN_DL_FOR_RATIO) . '</b>';
             $responseData['user_ratio'] = '
-                <th><a href="' . config()->get('ratio_url_help') . '" class="bold">' . __('USER_RATIO') . '</a>:</th>
+                <th><a href="' . config()->get('forum.ratio_url_help') . '" class="bold">' . __('USER_RATIO') . '</a>:</th>
                 <td>' . $userRatio . '</td>
             ';
         }

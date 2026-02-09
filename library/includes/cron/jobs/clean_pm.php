@@ -8,7 +8,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-$pm_days_keep = (int)config()->get('pm_days_keep');
+$pm_days_keep = (int)config()->get('forum.pm_days_keep');
 
 if ($pm_days_keep !== 0) {
     $per_cycle = 20000;

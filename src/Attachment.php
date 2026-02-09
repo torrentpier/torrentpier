@@ -36,7 +36,7 @@ class Attachment
 
         $upload = new Upload;
 
-        if (!$upload->init(config()->getSection('attach'), $fileData)) {
+        if (!$upload->init(config()->getSection('tracker.attach'), $fileData)) {
             return ['success' => false, 'error' => implode('<br />', $upload->errors), 'ext_id' => null];
         }
 
@@ -154,10 +154,10 @@ class Attachment
      */
     public static function getDownloadFilename(int $topicId, string $topicTitle, string $extension = TORRENT_EXT): string
     {
-        $serverName = config()->get('server_name');
+        $serverName = config()->get('app.server_name');
         $title = html_ent_decode($topicTitle);
 
-        if (config()->get('tracker.torrent_filename_with_title')) {
+        if (config()->get('tracker.torrent_dl.filename_with_title')) {
             return $title . ' [' . $serverName . '].t' . $topicId . '.' . $extension;
         }
 

@@ -327,7 +327,7 @@ if (request()->query->has($user_releases_key)) {
 
 // Random release
 if (config()->get('tracker.random_release_button') && request()->query->has('random_release')) {
-    if ($random_release = DB()->fetch_row('SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE tor_status NOT IN(' . implode(', ', array_keys(config()->get('tor_frozen'))) . ') ORDER BY RAND() LIMIT 1')) {
+    if ($random_release = DB()->fetch_row('SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE tor_status NOT IN(' . implode(', ', array_keys(config()->get('tracker.tor_frozen'))) . ') ORDER BY RAND() LIMIT 1')) {
         redirect(TOPIC_URL . $random_release['topic_id']);
     } else {
         bb_die(__('NO_MATCH'));
@@ -773,8 +773,8 @@ if ($allowed_forums) {
                 'MAGNET' => $tor_magnet,
                 'TOR_TYPE' => is_gold($tor['tor_type']),
 
-                'TOR_FROZEN' => !IS_AM ? isset(config()->get('tor_frozen')[$tor['tor_status']]) : '',
-                'TOR_STATUS_ICON' => config()->get('tor_icons')[$tor['tor_status']],
+                'TOR_FROZEN' => !IS_AM ? isset(config()->get('tracker.tor_frozen')[$tor['tor_status']]) : '',
+                'TOR_STATUS_ICON' => config()->get('tracker.tor_icons')[$tor['tor_status']],
                 'TOR_STATUS_TEXT' => __('TOR_STATUS_NAME')[$tor['tor_status']],
 
                 'TOR_SIZE_RAW' => $size,
@@ -847,7 +847,7 @@ $cat_forum_select = "\n" . '<select id="fs-main" style="width: 100%;" name="' . 
 // Status select
 if (config()->get('tracker.search_by_tor_status')) {
     $statuses = '<table border="0" cellpadding="0" cellspacing="0">';
-    foreach (array_chunk(config()->get('tor_icons'), 2, true) as $statuses_part) {
+    foreach (array_chunk(config()->get('tracker.tor_icons'), 2, true) as $statuses_part) {
         $statuses .= '<tr>';
         foreach ($statuses_part as $status_id => $status_styles) {
             $checked_status = in_array($status_id, $status) ? 'checked' : '';

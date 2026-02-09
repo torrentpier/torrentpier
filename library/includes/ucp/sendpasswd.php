@@ -12,11 +12,11 @@ use Illuminate\Support\Str;
 
 set_die_append_msg();
 
-if (!config()->get('emailer.enabled')) {
+if (!config()->get('mail.enabled')) {
     bb_die(__('EMAILER_DISABLED'));
 }
 
-$need_captcha = (request()->query->get('mode') == 'sendpassword' && !IS_ADMIN && !config()->get('captcha.disabled'));
+$need_captcha = (request()->query->get('mode') == 'sendpassword' && !IS_ADMIN && !config()->get('forum.captcha.disabled'));
 
 if (request()->post->has('submit')) {
     if ($need_captcha && !bb_captcha('check')) {

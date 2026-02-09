@@ -149,7 +149,7 @@ if (($var = request()->get($daysback_key)) && $var != $def_days) {
     $url = url_arg($url, $daysback_key, $daysback_val);
 }
 if (($var = request()->get($datetime_key)) && $var != $def_datetime) {
-    $tz = TIMENOW + (3600 * config()->get('board_timezone'));
+    $tz = TIMENOW + (3600 * config()->get('localization.board_timezone'));
     if (($tmp_timestamp = strtotime($var, $tz)) > 0) {
         $datetime_val = $tmp_timestamp;
         $url = url_arg($url, $datetime_key, date($dt_format, $datetime_val));

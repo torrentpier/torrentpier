@@ -252,9 +252,9 @@ function strip_bbcode(string $message, bool $stripquotes = true, bool $fast_and_
  */
 function extract_search_words($text): array
 {
-    $max_words_count = config()->get('max_search_words_per_post');
-    $min_word_len = max(2, config()->get('search_min_word_len') - 1);
-    $max_word_len = config()->get('search_max_word_len');
+    $max_words_count = config()->get('forum.max_search_words_per_post');
+    $min_word_len = max(2, config()->get('forum.search_min_word_len') - 1);
+    $max_word_len = config()->get('forum.search_max_word_len');
 
     $text = ' ' . Str::squish(strip_tags(mb_strtolower($text, DEFAULT_CHARSET))) . ' ';
     $text = str_replace(['&#91;', '&#93;'], ['[', ']'], $text);

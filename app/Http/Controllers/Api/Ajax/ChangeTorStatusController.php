@@ -131,7 +131,7 @@ class ChangeTorStatusController
         Moderation::changeStatus($topicId, $newStatus);
 
         // Log action
-        $logMsg = \sprintf(__('TOR_STATUS_LOG_ACTION'), config()->get('tor_icons')[$newStatus] . ' <b> ' . __('TOR_STATUS_NAME')[$newStatus] . '</b>', config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . __('TOR_STATUS_NAME')[$tor['tor_status']] . '</b>');
+        $logMsg = \sprintf(__('TOR_STATUS_LOG_ACTION'), config()->get('tracker.tor_icons')[$newStatus] . ' <b> ' . __('TOR_STATUS_NAME')[$newStatus] . '</b>', config()->get('tracker.tor_icons')[$tor['tor_status']] . ' <b> ' . __('TOR_STATUS_NAME')[$tor['tor_status']] . '</b>');
         if ($comment && $comment != __('COMMENT')) {
             $logMsg .= '<br/>' . __('COMMENT') . ": <b>$comment</b>.";
         }
@@ -142,12 +142,12 @@ class ChangeTorStatusController
             'log_msg' => $logMsg . '<br/>-------------',
         ]);
 
-        $status = config()->get('tor_icons')[$newStatus] . ' <b> ' . __('TOR_STATUS_NAME')[$newStatus] . '</b> &middot; ' . profile_url(userdata()) . ' &middot; <i>' . humanTime(TIMENOW) . __('TOR_BACK') . '</i>';
+        $status = config()->get('tracker.tor_icons')[$newStatus] . ' <b> ' . __('TOR_STATUS_NAME')[$newStatus] . '</b> &middot; ' . profile_url(userdata()) . ' &middot; <i>' . humanTime(TIMENOW) . __('TOR_BACK') . '</i>';
 
-        if (config()->get('tor_comment') && (($comment && $comment != __('COMMENT')) || \in_array($newStatus, config()->get('tor_reply')))) {
+        if (config()->get('tor_comment') && (($comment && $comment != __('COMMENT')) || \in_array($newStatus, config()->get('tracker.tor_reply')))) {
             if ($tor['poster_id'] > 0) {
                 $subject = \sprintf(__('TOR_MOD_TITLE'), $tor['topic_title']);
-                $message = \sprintf(__('TOR_MOD_MSG'), get_username($tor['poster_id']), make_url(TOPIC_URL . $tor['topic_id']), config()->get('tor_icons')[$newStatus] . ' ' . __('TOR_STATUS_NAME')[$newStatus]);
+                $message = \sprintf(__('TOR_MOD_MSG'), get_username($tor['poster_id']), make_url(TOPIC_URL . $tor['topic_id']), config()->get('tracker.tor_icons')[$newStatus] . ' ' . __('TOR_STATUS_NAME')[$newStatus]);
 
                 if ($comment && $comment != __('COMMENT')) {
                     $message .= "\n\n[b]" . __('COMMENT') . '[/b]: ' . $comment;

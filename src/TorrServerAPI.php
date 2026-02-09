@@ -49,9 +49,9 @@ class TorrServerAPI
      */
     public function __construct()
     {
-        $this->url = rtrim(trim(config()->get('torr_server.url')), '/') . '/';
+        $this->url = rtrim(trim(config()->get('services.torrserver.url')), '/') . '/';
         $this->client = HttpClient::createSimpleClient([
-            'timeout' => config()->get('torr_server.timeout'),
+            'timeout' => config()->get('services.torrserver.timeout'),
             'connect_timeout' => 2,
         ]);
     }
@@ -104,7 +104,7 @@ class TorrServerAPI
 
         try {
             $response = $this->client->post($this->url . $this->endpoints['upload'], [
-                'timeout' => config()->get('torr_server.timeout'),
+                'timeout' => config()->get('services.torrserver.timeout'),
                 'headers' => [
                     'Accept' => 'application/json',
                 ],
@@ -150,7 +150,7 @@ class TorrServerAPI
 
         try {
             $response = $this->client->get($this->url . $this->endpoints['playlist'], [
-                'timeout' => config()->get('torr_server.timeout'),
+                'timeout' => config()->get('services.torrserver.timeout'),
                 'headers' => [
                     'Accept' => 'audio/x-mpegurl',
                 ],
@@ -243,7 +243,7 @@ class TorrServerAPI
 
             try {
                 $httpResponse = $this->client->get($this->url . $this->endpoints['ffprobe'] . '/' . $hash . '/' . $index, [
-                    'timeout' => config()->get('torr_server.timeout'),
+                    'timeout' => config()->get('services.torrserver.timeout'),
                     'headers' => [
                         'Accept' => 'application/json',
                     ],
@@ -270,7 +270,7 @@ class TorrServerAPI
     {
         try {
             $response = $this->client->get($this->url . $this->endpoints['stream'], [
-                'timeout' => config()->get('torr_server.timeout'),
+                'timeout' => config()->get('services.torrserver.timeout'),
                 'headers' => [
                     'Accept' => 'application/octet-stream',
                 ],

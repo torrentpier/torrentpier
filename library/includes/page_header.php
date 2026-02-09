@@ -8,6 +8,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use TorrentPier\Data\Timezones;
+
 if (defined('PAGE_HEADER_SENT')) {
     return;
 }
@@ -114,7 +116,7 @@ template()->assign_vars([
 
     'USER_LANG' => userdata('user_lang'),
     'USER_LANG_DIRECTION' => (function () {
-        $langConfig = config()->get('lang') ?? [];
+        $langConfig = config()->get('localization.languages') ?? [];
         $userLang = userdata('user_lang');
 
         return (isset($langConfig[$userLang]['rtl']) && $langConfig[$userLang]['rtl'] === true) ? 'rtl' : 'ltr';
@@ -139,9 +141,9 @@ template()->assign_vars([
     'FORUM_PATH' => FORUM_PATH,
     'FULL_URL' => FULL_URL,
 
-    'CURRENT_TIME' => sprintf(__('CURRENT_TIME'), bb_date(TIMENOW, config()->get('last_visit_date_format'), false)),
-    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf(__('ALL_TIMES'), config()->get('timezones')[str_replace(',', '.', (float)config()->get('board_timezone'))])),
-    'BOARD_TIMEZONE' => config()->get('board_timezone'),
+    'CURRENT_TIME' => sprintf(__('CURRENT_TIME'), bb_date(TIMENOW, config()->get('localization.date_formats.last_visit'), false)),
+    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf(__('ALL_TIMES'), Timezones::getName(str_replace(',', '.', (float)config()->get('localization.board_timezone'))))),
+    'BOARD_TIMEZONE' => config()->get('localization.board_timezone'),
 
     'PM_INFO' => $pm_info,
     'PRIVMSG_IMG' => $icon_pm,
@@ -168,11 +170,11 @@ template()->assign_vars([
     'U_REGISTER' => REGISTER_URL,
     'U_SEARCH' => FORUM_PATH . 'search',
     'U_SEND_PASSWORD' => PASSWORD_RECOVERY_URL,
-    'U_TERMS' => FORUM_PATH . ltrim(config()->get('terms_and_conditions_url'), './'),
+    'U_TERMS' => FORUM_PATH . ltrim(config()->get('app.terms_and_conditions_url'), './'),
     'U_TRACKER' => FORUM_PATH . 'tracker',
 
-    'SHOW_SIDEBAR1' => (defined('BB_SCRIPT') && !empty((config()->get('page.show_sidebar1') ?? [])[BB_SCRIPT])) || config()->get('show_sidebar1_on_every_page'),
-    'SHOW_SIDEBAR2' => (defined('BB_SCRIPT') && !empty((config()->get('page.show_sidebar2') ?? [])[BB_SCRIPT])) || config()->get('show_sidebar2_on_every_page'),
+    'SHOW_SIDEBAR1' => (defined('BB_SCRIPT') && !empty((config()->get('layouts.page.show_sidebar1') ?? [])[BB_SCRIPT])) || config()->get('layouts.show_sidebar1_on_every_page'),
+    'SHOW_SIDEBAR2' => (defined('BB_SCRIPT') && !empty((config()->get('layouts.page.show_sidebar2') ?? [])[BB_SCRIPT])) || config()->get('layouts.show_sidebar2_on_every_page'),
 
     'HTML_AGREEMENT' => LANG_DIR . 'html/user_agreement.html',
     'HTML_COPYRIGHT' => LANG_DIR . 'html/copyright_holders.html',
@@ -214,7 +216,7 @@ template()->assign_vars([
     'U_WATCHED_TOPICS' => WATCHLIST_URL,
 ]);
 
-if (defined('BB_SCRIPT') && !empty((config()->get('page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty(userdata('torhelp'))) {
+if (defined('BB_SCRIPT') && !empty((config()->get('layouts.page.show_torhelp') ?? [])[BB_SCRIPT]) && !empty(userdata('torhelp'))) {
     $ignore_time = !empty($_COOKIE['torhelp']) ? (int)$_COOKIE['torhelp'] : 0;
 
     if ($ignore_time < TIMENOW) {

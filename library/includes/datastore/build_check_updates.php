@@ -8,7 +8,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!config()->get('tp_updater_settings.enabled')) {
+if (!config()->get('services.updater.enabled')) {
     return;
 }
 
@@ -17,7 +17,7 @@ $data[] = ['latest_check_timestamp' => TIMENOW];
 
 try {
     $updaterDownloader = new TorrentPier\Updater;
-    $updaterDownloader = $updaterDownloader->getLastVersion(config()->get('tp_updater_settings.allow_pre_releases'));
+    $updaterDownloader = $updaterDownloader->getLastVersion(config()->get('services.updater.allow_pre_releases'));
 } catch (Exception $exception) {
     bb_log('[Updater] Exception: ' . $exception->getMessage() . LOG_LF);
     $this->store('check_updates', $data);

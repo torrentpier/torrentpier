@@ -119,7 +119,7 @@ trait TrackerResponses
      */
     protected function dropFastAnnounce(array $lpInfo, array $lpCachedPeers = []): ?ResponseInterface
     {
-        $announceInterval = config()->get('announce_interval');
+        $announceInterval = config()->get('tracker.announce_interval');
 
         // If an announce interval is correct, allow the announce
         if ($lpInfo['update_time'] < (TIMENOW - $announceInterval + 60)) {

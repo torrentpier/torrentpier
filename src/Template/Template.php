@@ -402,7 +402,7 @@ class Template
      */
     private function initializeTwig(): void
     {
-        $useCache = (bool)config()->get('twig.cache_enabled', true);
+        $useCache = (bool)config()->get('templates.twig.cache_enabled', true);
         $factory = new TwigEnvironmentFactory;
         $this->twig = $factory->create($this->rootDir, $this->cacheDir, $useCache);
 
@@ -458,7 +458,7 @@ class Template
      */
     private function initStartupVars(): void
     {
-        $this->variables['LANG'] ??= config()->get('default_lang');
+        $this->variables['LANG'] ??= config()->get('localization.default_lang');
 
         $tpl = $this->rootDir . '/';
         if (str_starts_with($tpl, './')) {

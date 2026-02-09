@@ -575,15 +575,6 @@ class InstallCommand extends Command
             $this->line('  <info>✓</info> Updated robots.txt');
         }
 
-        // Create local config for development
-        if ($this->config['APP_ENV'] === 'local') {
-            $localConfig = BB_ROOT . 'config/config.local.php';
-            if (!files()->exists($localConfig)) {
-                files()->copy(BB_ROOT . 'config/config.php', $localConfig);
-                $this->line('  <info>✓</info> Created config.local.php for development');
-            }
-        }
-
         $this->line();
     }
 

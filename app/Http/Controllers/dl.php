@@ -8,6 +8,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use TorrentPier\Data\FileExtensions;
 use TorrentPier\Http\Response;
 
 $topic_id = request()->getInt('t');
@@ -63,7 +64,7 @@ if ($m3u) {
 
 // Check tor status for frozen downloads
 if (!IS_AM && $t_data['tor_status']) {
-    if (isset(config()->get('tor_frozen')[$t_data['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$t_data['tor_status']]) && TorrentPier\Topic\Guard::isAuthor($t_data['poster_id']))) {
+    if (isset(config()->get('tracker.tor_frozen')[$t_data['tor_status']]) && !(isset(config()->get('tracker.tor_frozen_author_download')[$t_data['tor_status']]) && TorrentPier\Topic\Guard::isAuthor($t_data['poster_id']))) {
         bb_die(__('TOR_STATUS_FORBIDDEN') . __('TOR_STATUS_NAME.' . $t_data['tor_status']));
     }
 }
@@ -89,7 +90,7 @@ if (!files()->isFile($file_path)) {
     bb_die(__('ERROR_NO_ATTACHMENT') . ' [HDD]');
 }
 
-$ext = config()->get('file_id_ext')[$t_data['attach_ext_id']] ?? '';
+$ext = FileExtensions::getExtension($t_data['attach_ext_id']) ?? '';
 $send_filename = TorrentPier\Attachment::getDownloadFilename($topic_id, $t_data['topic_title'], $ext);
 
 Response::download($file_path, $send_filename)->send();

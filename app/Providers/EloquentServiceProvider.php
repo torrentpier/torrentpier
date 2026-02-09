@@ -24,6 +24,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Eloquent\Model;
+use RuntimeException;
 use TorrentPier\ServiceProvider;
 use TorrentPier\Tracy\Collectors\EloquentCollector;
 
@@ -46,6 +47,10 @@ class EloquentServiceProvider extends ServiceProvider
             // Get default connection config from config/database.php
             $default = config()->get('database.default');
             $connectionConfig = config()->get("database.connections.$default");
+
+            if (!$connectionConfig || !\is_array($connectionConfig)) {
+                throw new RuntimeException("Database connection '{$default}' is not configured or invalid.");
+            }
 
             $capsule->addConnection($connectionConfig);
 
@@ -74,7 +79,7 @@ class EloquentServiceProvider extends ServiceProvider
         $capsule = $this->app->make(Capsule::class);
 
         // Configure Eloquent strict mode for development
-        $debugEnabled = (bool)config()->get('debug.enable', false);
+        $debugEnabled = (bool)config()->get('logging.debug.enable', false);
         Model::preventLazyLoading($debugEnabled);
         Model::preventSilentlyDiscardingAttributes($debugEnabled);
 
@@ -96,7 +101,7 @@ class EloquentServiceProvider extends ServiceProvider
     protected function registerObservers(): void
     {
         // Only register observers if ManticoreSearch is enabled
-        if (config()->get('search_engine_type') !== 'manticore') {
+        if (config()->get('forum.search_engine_type') !== 'manticore') {
             return;
         }
 

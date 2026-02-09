@@ -43,7 +43,7 @@ class RedirectLogger
         }
 
         // Skip if not configured to log
-        if (!config()->get('log_redirects', false)) {
+        if (!config()->get('logging.log_redirects', false)) {
             return;
         }
 
@@ -118,6 +118,6 @@ class RedirectLogger
      */
     public static function isEnabled(): bool
     {
-        return self::$enabled && config()->get('log_redirects', false);
+        return self::$enabled && config()->get('logging.log_redirects', false);
     }
 }

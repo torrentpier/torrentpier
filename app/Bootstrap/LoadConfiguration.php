@@ -27,13 +27,10 @@ use TorrentPier\Config;
  * - Cached configuration for performance
  * - Nested directory support (config/auth/guards.php → auth.guards)
  * - Deep merging for specific options (connections, guards, etc.)
- * - Legacy $bb_cfg format for backwards compatibility
  * - Static config override for testing (alwaysUse)
  */
 class LoadConfiguration
 {
-    private const array LEGACY_FILES = ['config.php', 'config.local.php'];
-
     /**
      * Static config override closure (useful for testing)
      *
@@ -73,13 +70,6 @@ class LoadConfiguration
     protected function loadConfigurationFiles(Application $app, RepositoryContract $repository): void
     {
         $configPath = $app->basePath('config');
-
-        // Load legacy configuration first (config.php, config.local.php)
-        $legacyConfig = $this->loadLegacyConfig($configPath);
-        foreach ($legacyConfig as $key => $value) {
-            $repository->set($key, $value);
-        }
-
         $files = $this->getConfigurationFiles($configPath);
 
         foreach ($files as $name => $path) {
@@ -137,14 +127,15 @@ class LoadConfiguration
             return $files;
         }
 
-        foreach (Finder::create()->files()->name('*.php')->in($configPath) as $file) {
-            $filename = $file->getBasename('.php');
+        // Guard against legacy config files that should not be auto-loaded
+        $skipFiles = ['config.php', 'config.local.php'];
 
-            // Skip legacy files
-            if (\in_array($file->getFilename(), self::LEGACY_FILES, true)) {
+        foreach (Finder::create()->files()->name('*.php')->in($configPath) as $file) {
+            if (\in_array($file->getFilename(), $skipFiles, true)) {
                 continue;
             }
 
+            $filename = $file->getBasename('.php');
             $directory = $this->getNestedDirectory($file, $configPath);
             $files[$directory . $filename] = $file->getRealPath();
         }
@@ -170,26 +161,6 @@ class LoadConfiguration
     }
 
     /**
-     * Load legacy config.php and config.local.php
-     */
-    protected function loadLegacyConfig(string $configPath): array
-    {
-        $bb_cfg = [];
-
-        $mainConfig = $configPath . '/config.php';
-        if (is_file($mainConfig)) {
-            require $mainConfig;
-        }
-
-        $localConfig = $configPath . '/config.local.php';
-        if (is_file($localConfig)) {
-            require $localConfig;
-        }
-
-        return $bb_cfg;
-    }
-
-    /**
      * Get fresh configuration from files (bypasses cache)
      * @throws BindingResolutionException
      */
@@ -197,7 +168,7 @@ class LoadConfiguration
     {
         $loader = new self;
         $configPath = app()->configPath();
-        $config = new Config($loader->loadLegacyConfig($configPath));
+        $config = new Config([]);
 
         $files = $loader->getConfigurationFiles($configPath);
         foreach ($files as $name => $path) {

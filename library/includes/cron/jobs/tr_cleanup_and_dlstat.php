@@ -62,7 +62,7 @@ DB()->query('
 
 // Clean peers table
 if (config()->get('tracker.autoclean')) {
-    $announce_interval = max((int)config()->get('announce_interval'), 60);
+    $announce_interval = max((int)config()->get('tracker.announce_interval'), 60);
     $expire_factor = max((float)config()->get('tracker.expire_factor'), 1);
     $peer_expire_time = TIMENOW - floor($announce_interval * $expire_factor);
 

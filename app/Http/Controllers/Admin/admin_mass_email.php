@@ -14,7 +14,7 @@ if (!empty($setmodules)) {
     return;
 }
 
-if (!config()->get('emailer.enabled')) {
+if (!config()->get('mail.enabled')) {
     bb_die(__('EMAILER_DISABLED'));
 }
 
@@ -23,7 +23,7 @@ set_time_limit(1200);
 $subject = trim(request()->getString('subject'));
 $message = request()->getString('message');
 $group_id = request()->getInt(POST_GROUPS_URL);
-$reply_to = request()->getString('reply_to', config()->get('board_email'));
+$reply_to = request()->getString('reply_to', config()->get('mail.addresses.board'));
 $message_type = request()->getString('message_type');
 
 $errors = $user_id_sql = [];

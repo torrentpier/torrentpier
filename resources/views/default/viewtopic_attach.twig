@@ -315,7 +315,7 @@ $('#tor-filelist-btn').click(function () {
 </div>
 </div>
 
-{% if config('tor_thank') %}
+{% if config('tracker.tor_thank') %}
 <style type="text/css">
     #thx-block {
         width: 95%;
@@ -405,7 +405,7 @@ $('#tor-filelist-btn').click(function () {
         <input id="thx-btn" type="button" class="bold" style="width: 200px;" value="{{ __('THANK_TOPIC') }}">
     </div>
     {% endif %}
-    {% if not IS_GUEST or config('tor_thanks_list_guests') %}
+    {% if not IS_GUEST or config('tracker.tor_thanks_list_guests') %}
     <div class="sp-wrap">
         <div id="thx-list" class="sp-body" data-no-sp-open="true" title="{{ __('LAST_LIKES') }}"></div>
     </div>

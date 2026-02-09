@@ -305,7 +305,7 @@ class DatabasePanel implements IBarPanel
         $sql = $this->cleanSql($sql);
 
         // Truncate very long queries for display
-        $maxLen = (int)config()->get('debug.max_query_length', 1000);
+        $maxLen = (int)config()->get('logging.debug.max_query_length', 1000);
         if (\strlen($sql) > $maxLen) {
             $sql = substr($sql, 0, $maxLen) . '... [truncated]';
         }

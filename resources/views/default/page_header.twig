@@ -34,7 +34,7 @@
 {% endif %}
 {{ META }}
 <link rel="stylesheet" href="{{ STYLESHEET }}" type="text/css">
-<link rel="stylesheet" href="{{ SITE_URL }}assets/css/dark-mode.css?v={{ config('css_ver') }}" type="text/css">
+<link rel="stylesheet" href="{{ SITE_URL }}assets/css/dark-mode.css?v={{ config('app.css_ver') }}" type="text/css">
 <link rel="shortcut icon" href="{{ SITE_URL }}favicon.png" type="image/x-icon">
 
 <script type="text/javascript" src="{{ SITE_URL }}assets/js/libs/jquery-1.12.4.min.js"></script>
@@ -42,10 +42,10 @@
 <script type="text/javascript" src="{{ SITE_URL }}assets/js/libs/clipboard.min.js"></script>
 <script type="text/javascript" src="{{ SITE_URL }}assets/js/libs/printThis.min.js"></script>
 <script type="text/javascript" src="{{ SITE_URL }}assets/js/libs/legacy.js"></script>
-<script type="text/javascript" src="{{ SITE_URL }}assets/js/main.js?v={{ config('js_ver') }}"></script>
+<script type="text/javascript" src="{{ SITE_URL }}assets/js/main.js?v={{ config('app.js_ver') }}"></script>
 
 {% if INCLUDE_BBCODE_JS %}
-<script type="text/javascript" src="{{ SITE_URL }}assets/js/bbcode.js?v={{ config('js_ver') }}"></script>
+<script type="text/javascript" src="{{ SITE_URL }}assets/js/bbcode.js?v={{ config('app.js_ver') }}"></script>
 <script type="text/javascript">
 	window.BB = {};
 	window.encURL = encodeURIComponent;
@@ -64,11 +64,11 @@ var hidePostImg = false;
 
 <script type="text/javascript">
 var BB_ROOT      = "{{ constant('BB_ROOT') }}";
-var cookieDomain = "{{ config('cookie_domain') }}";
-var cookiePath   = "{{ config('script_path') }}";
-var cookiePrefix = "{{ config('cookie_prefix') }}";
-var cookieSecure = "{{ config('cookie_secure') }}";
-var cookieSameSite = "{{ config('cookie_same_site') }}";
+var cookieDomain = "{{ config('auth.cookie.domain') }}";
+var cookiePath   = "{{ config('app.script_path') }}";
+var cookiePrefix = "{{ config('auth.cookie.prefix') }}";
+var cookieSecure = "{{ config('auth.cookie.secure') }}";
+var cookieSameSite = "{{ config('auth.cookie.same_site') }}";
 var LOGGED_IN    = {{ LOGGED_IN }};
 var IWP          = 'HEIGHT=510,WIDTH=780,resizable=yes';
 var IWP_US       = 'HEIGHT=250,WIDTH=400,resizable=yes';

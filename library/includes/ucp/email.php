@@ -9,7 +9,7 @@
  */
 
 // Is send through board enabled? No, return to index
-if (!config()->get('board_email_form')) {
+if (!config()->get('mail.board_email_form')) {
     redirect('/');
 }
 
