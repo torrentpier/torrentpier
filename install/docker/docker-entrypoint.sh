@@ -9,7 +9,7 @@ until php -r "
 \$host = getenv('DB_HOST') ?: 'database';
 \$port = getenv('DB_PORT') ?: 3306;
 \$user = getenv('DB_USERNAME');
-\$pass = getenv('DB_PASSWORD');
+\$pass = (\$user === 'root') ? (getenv('DB_ROOT_PASSWORD') ?: getenv('DB_PASSWORD')) : getenv('DB_PASSWORD');
 \$db = getenv('DB_DATABASE');
 
 while (\$attempt < \$maxAttempts) {
@@ -38,7 +38,7 @@ php -r "
 \$host = getenv('DB_HOST') ?: 'database';
 \$port = getenv('DB_PORT') ?: 3306;
 \$user = getenv('DB_USERNAME');
-\$pass = getenv('DB_PASSWORD');
+\$pass = (\$user === 'root') ? (getenv('DB_ROOT_PASSWORD') ?: getenv('DB_PASSWORD')) : getenv('DB_PASSWORD');
 \$db = getenv('DB_DATABASE');
 
 // Validate database name (same whitelist as InstallCommand.php)
