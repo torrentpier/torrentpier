@@ -19,7 +19,7 @@ return [
         ],
     ],
     'debug' => [
-        'enable' => env('APP_DEBUG', true),
+        'enable' => env('APP_DEBUG', false),
         'panels' => [
             'performance' => true,
             'database' => true,
