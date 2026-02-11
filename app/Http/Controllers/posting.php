@@ -246,9 +246,11 @@ if (!$is_auth[$is_auth_type]) {
 // or selectively per-forum when the global setting is off.
 $forum_allows_anonymous = !empty($post_info['allow_anonymous']) || config()->get('forum.allow_anonymous_posting');
 if ($forum_allows_anonymous && !IS_GUEST) {
-    // On edit, use the post's current anonymous state; on new post, use user's default preference.
+    // On edit, use the post's current anonymous state; otherwise use user's default preference.
     // Retroactive toggle on edit is intentional — users should be able to anonymize/deanonymize their posts.
-    $anonymous_mode = $post_info['post_anonymous'] ?? (bool)bf(userdata('user_opt'), 'user_opt', 'user_anonymous');
+    $anonymous_mode = ($mode == 'editpost' && isset($post_info['post_anonymous']))
+        ? (int)$post_info['post_anonymous']
+        : (int)bf(userdata('user_opt'), 'user_opt', 'user_anonymous');
 }
 
 if ($mode == 'new_rel') {
