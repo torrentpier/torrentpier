@@ -104,14 +104,14 @@ if ($topic_id && request()->query->has('view') && (request()->query->get('view')
 
 // Get forum/topic data
 if ($topic_id) {
-    $sql = 'SELECT t.*, f.cat_id, f.forum_name, f.forum_desc, f.forum_status, f.forum_order, f.forum_posts, f.forum_topics, f.forum_last_post_id, f.forum_tpl_id, f.prune_days, f.auth_view, f.auth_read, f.auth_post, f.auth_reply, f.auth_edit, f.auth_delete, f.auth_sticky, f.auth_announce, f.auth_vote, f.auth_pollcreate, f.auth_attachments, f.auth_download, f.allow_reg_tracker, f.allow_porno_topic, f.self_moderated, f.forum_parent, f.show_on_index, f.forum_display_sort, f.forum_display_order, tw.notify_status
+    $sql = 'SELECT t.*, f.cat_id, f.forum_name, f.forum_desc, f.forum_status, f.forum_order, f.forum_posts, f.forum_topics, f.forum_last_post_id, f.forum_tpl_id, f.prune_days, f.auth_view, f.auth_read, f.auth_post, f.auth_reply, f.auth_edit, f.auth_delete, f.auth_sticky, f.auth_announce, f.auth_vote, f.auth_pollcreate, f.auth_attachments, f.auth_download, f.allow_reg_tracker, f.allow_porno_topic, f.self_moderated, f.allow_anonymous, f.forum_parent, f.show_on_index, f.forum_display_sort, f.forum_display_order, tw.notify_status
 		FROM ' . BB_TOPICS . ' t
 		LEFT JOIN ' . BB_FORUMS . ' f ON t.forum_id = f.forum_id
 		LEFT JOIN ' . BB_TOPICS_WATCH . ' tw ON(tw.topic_id = t.topic_id AND tw.user_id = ' . userdata('user_id') . ")
 		WHERE t.topic_id = {$topic_id}
 	";
 } elseif ($post_id) {
-    $sql = 'SELECT t.*, f.cat_id, f.forum_name, f.forum_desc, f.forum_status, f.forum_order, f.forum_posts, f.forum_topics, f.forum_last_post_id, f.forum_tpl_id, f.prune_days, f.auth_view, f.auth_read, f.auth_post, f.auth_reply, f.auth_edit, f.auth_delete, f.auth_sticky, f.auth_announce, f.auth_vote, f.auth_pollcreate, f.auth_attachments, f.auth_download, f.allow_reg_tracker, f.allow_porno_topic, f.self_moderated, f.forum_parent, f.show_on_index, f.forum_display_sort, f.forum_display_order, p.post_time, tw.notify_status
+    $sql = 'SELECT t.*, f.cat_id, f.forum_name, f.forum_desc, f.forum_status, f.forum_order, f.forum_posts, f.forum_topics, f.forum_last_post_id, f.forum_tpl_id, f.prune_days, f.auth_view, f.auth_read, f.auth_post, f.auth_reply, f.auth_edit, f.auth_delete, f.auth_sticky, f.auth_announce, f.auth_vote, f.auth_pollcreate, f.auth_attachments, f.auth_download, f.allow_reg_tracker, f.allow_porno_topic, f.self_moderated, f.allow_anonymous, f.forum_parent, f.show_on_index, f.forum_display_sort, f.forum_display_order, p.post_time, tw.notify_status
 		FROM ' . BB_TOPICS . ' t
 		LEFT JOIN ' . BB_FORUMS . ' f ON t.forum_id = f.forum_id
 		LEFT JOIN ' . BB_POSTS . ' p ON t.topic_id = p.topic_id
@@ -597,28 +597,50 @@ for ($i = 0; $i < $total_posts; $i++) {
     $poster_id = $postrow[$i]['user_id'];
     $poster_guest = ($poster_id == GUEST_UID);
     $poster_bot = ($poster_id == BOT_UID);
+    $poster_anonymous = !empty($postrow[$i]['post_anonymous']) && !$poster_guest;
     $poster = $poster_guest ? __('GUEST') : $postrow[$i]['username'];
+
+    // Anonymous posting: override display name based on viewer role
+    $poster_display_as_anonymous = false;
+    if ($poster_anonymous) {
+        if (IS_AM) {
+            $poster = $postrow[$i]['username'] . ' (' . __('POSTED_ANONYMOUSLY') . ')';
+        } elseif ($poster_id == (int)userdata('user_id')) {
+            $poster = __('ANONYMOUS') . ' (' . __('YOU') . ')';
+        } else {
+            $poster = __('ANONYMOUS');
+            $poster_display_as_anonymous = true;
+        }
+    }
 
     $post_date = bb_date($postrow[$i]['post_time'], config()->get('localization.date_formats.post'));
     $max_post_time = max($max_post_time, $postrow[$i]['post_time']);
-    $poster_posts = !$poster_guest ? $postrow[$i]['user_posts'] : '';
-    $poster_from = ($postrow[$i]['user_from'] && !$poster_guest) ? $postrow[$i]['user_from'] : '';
-    $poster_joined = !$poster_guest ? __('JOINED') . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
-    $poster_longevity = !$poster_guest ? humanTime($postrow[$i]['user_regdate']) : '';
+    $poster_posts = (!$poster_guest && !$poster_display_as_anonymous) ? $postrow[$i]['user_posts'] : '';
+    $poster_from = ($postrow[$i]['user_from'] && !$poster_guest && !$poster_display_as_anonymous) ? $postrow[$i]['user_from'] : '';
+    $poster_joined = (!$poster_guest && !$poster_display_as_anonymous) ? __('JOINED') . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
+    $poster_longevity = (!$poster_guest && !$poster_display_as_anonymous) ? humanTime($postrow[$i]['user_regdate']) : '';
     $poster_birthday = $postrow[$i]['user_birthday']->format('Y-m-d');
     $post_id = $postrow[$i]['post_id'];
     $mc_type = (int)$postrow[$i]['mc_type'];
     $mc_comment = $postrow[$i]['mc_comment'];
     $mc_user_id = profile_url(['username' => $postrow[$i]['mc_username'], 'user_id' => $postrow[$i]['mc_user_id'], 'user_rank' => $postrow[$i]['mc_user_rank']]);
 
-    $rg_id = $postrow[$i]['poster_rg_id'] ?: 0;
-    $rg_avatar = get_avatar(GROUP_AVATAR_MASK . $rg_id, $postrow[$i]['rg_avatar_id']);
-    $rg_name = $postrow[$i]['group_name'] ? htmlCHR($postrow[$i]['group_name']) : '';
-    $rg_desc = $postrow[$i]['group_description'] ? bbcode()->toHtml(htmlCHR($postrow[$i]['group_description'])) : '';
-    $rg_signature = $postrow[$i]['group_signature'] ? bbcode()->toHtml(htmlCHR($postrow[$i]['group_signature'])) : '';
+    if ($poster_display_as_anonymous) {
+        $rg_id = 0;
+        $rg_avatar = '';
+        $rg_name = '';
+        $rg_desc = '';
+        $rg_signature = '';
+    } else {
+        $rg_id = $postrow[$i]['poster_rg_id'] ?: 0;
+        $rg_avatar = get_avatar(GROUP_AVATAR_MASK . $rg_id, $postrow[$i]['rg_avatar_id']);
+        $rg_name = $postrow[$i]['group_name'] ? htmlCHR($postrow[$i]['group_name']) : '';
+        $rg_desc = $postrow[$i]['group_description'] ? bbcode()->toHtml(htmlCHR($postrow[$i]['group_description'])) : '';
+        $rg_signature = $postrow[$i]['group_signature'] ? bbcode()->toHtml(htmlCHR($postrow[$i]['group_signature'])) : '';
+    }
 
     $poster_avatar = '';
-    if ((!user()->opt_js['h_av'] || $poster_bot) && !$poster_guest) {
+    if ((!user()->opt_js['h_av'] || $poster_bot) && !$poster_guest && !$poster_display_as_anonymous) {
         $poster_avatar = get_avatar($poster_id, $postrow[$i]['avatar_ext_id'], !bf($postrow[$i]['user_opt'], 'user_opt', 'dis_avatar'));
     }
 
@@ -637,7 +659,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     // Buttons
     $pm_btn = $profile_btn = $delpost_btn = $edit_btn = $ip_btn = $quote_btn = '';
 
-    if (!$poster_guest) {
+    if (!$poster_guest && !$poster_display_as_anonymous) {
         $profile_btn = true;
         $pm_btn = true;
     }
@@ -652,7 +674,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     // Parse message and sig
     $message = bbcode()->getParsedPost($postrow[$i]);
 
-    $user_sig = (config()->get('forum.user_signature.enabled') && !user()->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
+    $user_sig = (config()->get('forum.user_signature.enabled') && !user()->opt_js['h_sig'] && $postrow[$i]['user_sig'] && !$poster_display_as_anonymous) ? $postrow[$i]['user_sig'] : '';
 
     if (bf($postrow[$i]['user_opt'], 'user_opt', 'dis_sig')) {
         $user_sig = __('SIGNATURE_DISABLE');
@@ -695,7 +717,10 @@ for ($i = 0; $i < $total_posts; $i++) {
     // Editing information
     if ($postrow[$i]['post_edit_count']) {
         $l_edit_time_total = ($postrow[$i]['post_edit_count'] == 1) ? __('EDITED_TIME_TOTAL') : __('EDITED_TIMES_TOTAL');
-        $l_edited_by = '<br /><br />' . sprintf($l_edit_time_total, profile_url(['username' => $poster, 'user_id' => $poster_id, 'user_rank' => $user_rank]), bb_date($postrow[$i]['post_edit_time']), $postrow[$i]['post_edit_count']);
+        $edit_user_data = $poster_display_as_anonymous
+            ? ['username' => __('ANONYMOUS'), 'user_id' => GUEST_UID, 'user_rank' => 0]
+            : ['username' => $poster, 'user_id' => $poster_id, 'user_rank' => $user_rank];
+        $l_edited_by = '<br /><br />' . sprintf($l_edit_time_total, profile_url($edit_user_data), bb_date($postrow[$i]['post_edit_time']), $postrow[$i]['post_edit_count']);
     } else {
         $l_edited_by = '';
     }
@@ -729,10 +754,10 @@ for ($i = 0; $i < $total_posts; $i++) {
         'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
         'POST_ID' => $post_id,
         'IS_NEWEST' => ($post_id == $newest),
-        'POSTER_NAME' => profile_url(['username' => $poster, 'user_id' => $poster_id, 'user_rank' => $user_rank], no_link: true),
-        'POSTER_NAME_JS' => addslashes($poster),
-        'POSTER_RANK' => $poster_rank,
-        'RANK_IMAGE' => $rank_image,
+        'POSTER_NAME' => $poster_display_as_anonymous ? htmlCHR($poster) : profile_url(['username' => $poster, 'user_id' => $poster_id, 'user_rank' => $user_rank], no_link: true),
+        'POSTER_NAME_JS' => $poster_anonymous ? addslashes(__('ANONYMOUS')) : addslashes($poster),
+        'POSTER_RANK' => $poster_display_as_anonymous ? '' : $poster_rank,
+        'RANK_IMAGE' => $poster_display_as_anonymous ? '' : $rank_image,
         'POSTER_JOINED' => config()->get('forum.show_poster_joined') ? $poster_longevity : '',
 
         'POSTER_JOINED_DATE' => $poster_joined,
@@ -740,10 +765,11 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_FROM' => config()->get('forum.show_poster_from') ? render_flag($poster_from, false) : '',
         'POSTER_BOT' => $poster_bot,
         'POSTER_GUEST' => $poster_guest,
-        'POSTER_ID' => $poster_id,
-        'POSTER_URL' => url()->member($poster_id, $poster),
-        'POSTER_AUTHOR' => ($poster_id == $t_data['topic_poster']),
-        'POSTER_GENDER' => !$poster_guest ? genderImage((int)$postrow[$i]['user_gender']) : '',
+        'POSTER_ANONYMOUS' => $poster_anonymous,
+        'POSTER_ID' => $poster_display_as_anonymous ? 0 : $poster_id,
+        'POSTER_URL' => $poster_display_as_anonymous ? '' : url()->member($poster_id, $poster),
+        'POSTER_AUTHOR' => !$poster_display_as_anonymous && ($poster_id == $t_data['topic_poster']),
+        'POSTER_GENDER' => (!$poster_guest && !$poster_display_as_anonymous) ? genderImage((int)$postrow[$i]['user_gender']) : '',
         'POSTED_AFTER' => $prev_post_time ? humanTime($postrow[$i]['post_time'], $prev_post_time) : '',
         'IS_UNREAD' => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
         'IS_FIRST_POST' => (!$start && $is_first_post),
@@ -830,6 +856,15 @@ if (config()->get('forum.show_quick_reply')) {
             $notify_user = bf(userdata('user_opt'), 'user_opt', 'user_notify');
 
             template()->assign_vars(['QR_NOTIFY_CHECKED' => ($notify_user) ? ($notify_user && $is_watching_topic) : $is_watching_topic]);
+
+            // Anonymous posting checkbox
+            $forum_allows_anonymous = !empty($t_data['allow_anonymous']) || config()->get('forum.allow_anonymous_posting');
+            if ($forum_allows_anonymous) {
+                template()->assign_vars([
+                    'QR_SHOW_ANONYMOUS_CHECKBOX' => true,
+                    'QR_ANONYMOUS_CHECKED' => (bool)bf(userdata('user_opt'), 'user_opt', 'user_anonymous'),
+                ]);
+            }
         }
     }
 }

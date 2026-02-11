@@ -53,8 +53,9 @@ class PostsController
             $postId = (int)$body['post_id'];
             $post = DB()->fetch_row('SELECT
                     t.topic_id, t.topic_title, t.topic_status, t.topic_first_post_id, t.topic_last_post_id, t.forum_id,
-                    p.post_id, p.poster_id, p.post_time, p.post_username,
-                    pt.post_text
+                    p.post_id, p.poster_id, p.post_time, p.post_username, p.post_anonymous,
+                    pt.post_text,
+                    f.allow_anonymous
                 FROM ' . BB_TOPICS . ' t, ' . BB_FORUMS . ' f, ' . BB_POSTS . ' p, ' . BB_POSTS_TEXT . " pt
                 WHERE p.post_id = {$postId}
                     AND t.topic_id = p.topic_id
@@ -72,8 +73,9 @@ class PostsController
             }
         } elseif (isset($body['topic_id'])) {
             $topicId = (int)$body['topic_id'];
-            $post = DB()->fetch_row('SELECT t.topic_id, t.topic_title, t.topic_status, t.forum_id
-                FROM ' . BB_TOPICS . " t
+            $post = DB()->fetch_row('SELECT t.topic_id, t.topic_title, t.topic_status, t.forum_id, f.allow_anonymous
+                FROM ' . BB_TOPICS . ' t
+                LEFT JOIN ' . BB_FORUMS . " f ON f.forum_id = t.forum_id
                 WHERE t.topic_id = {$topicId}
                 LIMIT 1");
 
@@ -134,7 +136,11 @@ class PostsController
             return $this->error(\sprintf(__('SORRY_AUTH_REPLY'), strip_tags($isAuth['auth_reply_type'])));
         }
 
-        $quoteUsername = ($post['post_username'] != '') ? $post['post_username'] : get_username($post['poster_id']);
+        if (!empty($post['post_anonymous']) && !IS_AM) {
+            $quoteUsername = __('ANONYMOUS');
+        } else {
+            $quoteUsername = ($post['post_username'] != '') ? $post['post_username'] : get_username($post['poster_id']);
+        }
         $message = '[quote="' . $quoteUsername . '"][qpost=' . $post['post_id'] . ']' . $post['post_text'] . "[/quote]\r";
 
         // Hide user passkey
@@ -376,7 +382,16 @@ class PostsController
             }
         }
 
-        DB()->sql_query('INSERT INTO ' . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ($topicId, " . $post['forum_id'] . ', ' . userdata('user_id') . ", '" . TIMENOW . "', '" . USER_IP . "')");
+        // Anonymous posting support
+        $anonymousMode = 0;
+        if (!IS_GUEST) {
+            $forumAllowsAnonymous = !empty($post['allow_anonymous']) || config()->get('forum.allow_anonymous_posting');
+            if ($forumAllowsAnonymous && !empty($body['anonymous'])) {
+                $anonymousMode = 1;
+            }
+        }
+
+        DB()->sql_query('INSERT INTO ' . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip, post_anonymous) VALUES ($topicId, " . $post['forum_id'] . ', ' . userdata('user_id') . ", '" . TIMENOW . "', '" . USER_IP . "', {$anonymousMode})");
         $postId = DB()->sql_nextid();
         DB()->sql_query('INSERT INTO ' . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($postId, '" . DB()->escape($message) . "')");
 

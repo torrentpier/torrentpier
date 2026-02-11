@@ -53,6 +53,7 @@ return [
     'tidy_post' => env('TIDY_POST_ENABLED', false),
 
     // Posting
+    'allow_anonymous_posting' => false,
     'prevent_multiposting' => true,
     'max_smilies' => 25,
     'max_symbols_post' => 5000,

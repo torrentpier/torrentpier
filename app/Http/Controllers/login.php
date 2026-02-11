@@ -43,10 +43,10 @@ if (request()->getBool('logout')) {
     if (!IS_GUEST) {
         user()->session_end();
     }
-    redirect('index.php');
+    redirect('/');
 }
 
-$redirect_url = 'index.php';
+$redirect_url = '/';
 $login_errors = [];
 
 // Requested redirect
@@ -60,13 +60,13 @@ if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $queryString, $matches
 } elseif ($postRedirect = request()->post->get('redirect')) {
     $redirect_url = str_replace('&amp;', '&', htmlspecialchars($postRedirect));
 } elseif (($referer = request()->getReferer()) && ($parts = @parse_url($referer))) {
-    $redirect_url = ($parts['path'] ?? 'index.php') . (isset($parts['query']) ? '?' . $parts['query'] : '');
+    $redirect_url = ($parts['path'] ?? '/') . (isset($parts['query']) ? '?' . $parts['query'] : '');
 }
 
 $redirect_url = str_replace(['&admin=1', '?admin=1'], '', $redirect_url);
 
 if (!$redirect_url || str_contains(urldecode($redirect_url), "\n") || str_contains(urldecode($redirect_url), "\r") || str_contains(urldecode($redirect_url), ';url')) {
-    $redirect_url = 'index.php';
+    $redirect_url = '/';
 }
 
 $redirect_url = str_replace('&sid=' . user()->data['session_id'], '', $redirect_url);
@@ -94,7 +94,7 @@ if (!$mod_admin_login) {
 if (request()->post->has('login')) {
     if (!$mod_admin_login) {
         if (!IS_GUEST) {
-            redirect('index.php');
+            redirect('/');
         }
         if ($login_username == '' || $login_password == '') {
             $login_errors[] = __('ENTER_PASSWORD');
@@ -113,7 +113,7 @@ if (request()->post->has('login')) {
             CACHE('bb_login_err')->rm('l_err_' . USER_IP);
 
             if ($redirect_url == '/' . LOGIN_URL || $redirect_url == LOGIN_URL) {
-                $redirect_url = 'index.php';
+                $redirect_url = '/';
             }
             redirect($redirect_url);
         }

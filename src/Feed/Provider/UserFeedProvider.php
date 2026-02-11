@@ -83,6 +83,7 @@ class UserFeedProvider implements FeedProviderInterface
                 u1.username AS first_username,
                 p1.post_time AS topic_first_post_time,
                 p1.post_edit_time AS topic_first_post_edit_time,
+                p1.post_anonymous AS first_post_anonymous,
                 p2.post_time AS topic_last_post_time,
                 p2.post_edit_time AS topic_last_post_edit_time,
                 tor.size AS tor_size, tor.tor_status,

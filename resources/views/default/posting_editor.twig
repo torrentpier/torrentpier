@@ -155,17 +155,22 @@ function checkForm(form) {
 	if(form.message.value.length < 100 && submitted)
 	{
         var notify = 0;
+        var anonymous = 0;
 		setTimeout(function() {
 			if ($('input[name="notify"]').attr('checked') == 'checked') {
 				notify = 1;
 			}
+			if ($('input[name="anonymous"]').is(':checked')) {
+				anonymous = 1;
+			}
 
 			ajax.exec({
-				action   : 'posts',
-				type     : 'add',
-				message  : $('textarea#message').val(),
-				topic_id : {{ TOPIC_ID }},
-				notify   : notify,
+				action    : 'posts',
+				type      : 'add',
+				message   : $('textarea#message').val(),
+				topic_id  : {{ TOPIC_ID }},
+				notify    : notify,
+				anonymous : anonymous,
 			});
 		}, 100);
 		return false;

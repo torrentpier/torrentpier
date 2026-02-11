@@ -138,6 +138,12 @@
                             <td><label for="robots">{{ __('ALLOW_ROBOTS_INDEXING') }}</label></td>
                         </tr>
                         {% endif %}
+                        {% if SHOW_ANONYMOUS_CHECKBOX %}
+                        <tr>
+                            <td><input type="checkbox" id="anonymous" name="anonymous" {{ S_ANONYMOUS_CHECKED }} /></td>
+                            <td><label for="anonymous">{{ ANONYMOUS_MODE_LABEL }}</label><br /><h6>{{ __('ANONYMOUS_ADMIN_NOTICE') }}</h6></td>
+                        </tr>
+                        {% endif %}
                     </table>
                 </div>
             </td>

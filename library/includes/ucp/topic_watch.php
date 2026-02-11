@@ -49,12 +49,15 @@ DB()->sql_freeresult($result);
 
 if ($watch_count > 0) {
     $sql = 'SELECT w.*, t.*, f.*, u.*, u2.username as last_username, u2.user_id as last_user_id,
-		u2.user_level as last_user_level, u2.user_rank as last_user_rank
-	FROM ' . BB_TOPICS_WATCH . ' w, ' . BB_TOPICS . ' t, ' . BB_USERS . ' u, ' . BB_FORUMS . ' f, ' . BB_POSTS . ' p, ' . BB_USERS . " u2
+		u2.user_level as last_user_level, u2.user_rank as last_user_rank,
+		p_first.post_anonymous as first_post_anonymous,
+		p.post_anonymous as last_post_anonymous
+	FROM ' . BB_TOPICS_WATCH . ' w, ' . BB_TOPICS . ' t, ' . BB_USERS . ' u, ' . BB_FORUMS . ' f, ' . BB_POSTS . ' p, ' . BB_USERS . ' u2, ' . BB_POSTS . " p_first
 	WHERE w.topic_id = t.topic_id
 		AND t.forum_id = f.forum_id
 		AND p.post_id = t.topic_last_post_id
 		AND p.poster_id = u2.user_id
+		AND p_first.post_id = t.topic_first_post_id
 		AND t.topic_poster = u.user_id
 		AND w.user_id = {$user_id}
 	ORDER BY t.topic_last_post_time DESC
@@ -77,6 +80,21 @@ if ($watch_count > 0) {
             $topicTitle = $watch[$i]['topic_title'];
             $topicUrl = url()->topic($topicId, $topicTitle);
 
+            // Anonymous posting: hide author/last poster identity from non-staff
+            $authorAnonymous = !empty($watch[$i]['first_post_anonymous']) && $watch[$i]['user_id'] != GUEST_UID;
+            if ($authorAnonymous && !IS_AM) {
+                $authorDisplay = htmlCHR(__('ANONYMOUS'));
+            } else {
+                $authorDisplay = profile_url($watch[$i]);
+            }
+
+            $lastPosterAnonymous = !empty($watch[$i]['last_post_anonymous']) && $watch[$i]['last_user_id'] != GUEST_UID;
+            if ($lastPosterAnonymous && !IS_AM) {
+                $lastPosterDisplay = htmlCHR(__('ANONYMOUS'));
+            } else {
+                $lastPosterDisplay = profile_url(['user_id' => $watch[$i]['last_user_id'], 'username' => $watch[$i]['last_username'], 'user_rank' => $watch[$i]['last_user_rank']]);
+            }
+
             $watchList[] = [
                 'ROW_CLASS' => (!($i % 2)) ? 'row1' : 'row2',
                 'POST_ID' => $watch[$i]['topic_first_post_id'],
@@ -89,8 +107,8 @@ if ($watch_count > 0) {
                 'FORUM_TITLE' => $watch[$i]['forum_name'],
                 'U_FORUM' => url()->forum($watch[$i]['forum_id'], $watch[$i]['forum_name']),
                 'REPLIES' => $watch[$i]['topic_replies'],
-                'AUTHOR' => profile_url($watch[$i]),
-                'LAST_POST' => bb_date($watch[$i]['topic_last_post_time']) . '<br />' . profile_url(['user_id' => $watch[$i]['last_user_id'], 'username' => $watch[$i]['last_username'], 'user_rank' => $watch[$i]['last_user_rank']]),
+                'AUTHOR' => $authorDisplay,
+                'LAST_POST' => bb_date($watch[$i]['topic_last_post_time']) . '<br />' . $lastPosterDisplay,
                 'LAST_POST_RAW' => $watch[$i]['topic_last_post_time'],
                 'LAST_POST_ID' => $watch[$i]['topic_last_post_id'],
                 'IS_UNREAD' => $is_unread,

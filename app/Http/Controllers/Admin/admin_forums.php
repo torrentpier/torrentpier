@@ -89,6 +89,7 @@ if ($mode) {
                 $allow_reg_tracker = $row['allow_reg_tracker'];
                 $allow_porno_topic = $row['allow_porno_topic'];
                 $self_moderated = $row['self_moderated'];
+                $allow_anonymous = $row['allow_anonymous'];
             } else {
                 $l_title = __('CREATE_FORUM');
                 $newmode = 'createforum';
@@ -105,6 +106,7 @@ if ($mode) {
                 $allow_reg_tracker = 0;
                 $allow_porno_topic = 0;
                 $self_moderated = 0;
+                $allow_anonymous = 0;
             }
 
             if (request()->has('forum_parent')) {
@@ -153,6 +155,7 @@ if ($mode) {
                 'ALLOW_REG_TRACKER' => build_select('allow_reg_tracker', [__('DISALLOWED') => 0, __('ALLOWED') => 1], $allow_reg_tracker),
                 'ALLOW_PORNO_TOPIC' => build_select('allow_porno_topic', [__('NONE') => 0, __('YES') => 1], $allow_porno_topic),
                 'SELF_MODERATED' => build_select('self_moderated', [__('NONE') => 0, __('YES') => 1], $self_moderated),
+                'ALLOW_ANONYMOUS' => build_select('allow_anonymous', [__('DISALLOWED') => 0, __('ALLOWED') => 1], $allow_anonymous),
 
                 'L_FORUM_TITLE' => $l_title,
 
@@ -183,6 +186,7 @@ if ($mode) {
             $allow_reg_tracker = (int)request()->post->get('allow_reg_tracker', 0);
             $allow_porno_topic = (int)request()->post->get('allow_porno_topic', 0);
             $self_moderated = (int)request()->post->get('self_moderated', 0);
+            $allow_anonymous = (int)request()->post->get('allow_anonymous', 0);
 
             if (!$forum_name) {
                 bb_die('Can not create a forum without a name');
@@ -212,8 +216,8 @@ if ($mode) {
             $forum_name_sql = DB()->escape($forum_name);
             $forum_desc_sql = DB()->escape($forum_desc);
 
-            $columns = ' forum_name,   cat_id,   forum_desc,   forum_order,  forum_status,  prune_days,  forum_parent,  show_on_index,  forum_display_sort,  forum_display_order,  forum_tpl_id,  allow_reg_tracker,  allow_porno_topic,  self_moderated' . $field_sql;
-            $values = "'{$forum_name_sql}', {$cat_id}, '{$forum_desc_sql}', {$forum_order}, {$forum_status}, {$prune_days}, {$forum_parent}, {$show_on_index}, {$forum_display_sort}, {$forum_display_order}, {$forum_tpl_id}, {$allow_reg_tracker}, {$allow_porno_topic}, {$self_moderated}" . $value_sql;
+            $columns = ' forum_name,   cat_id,   forum_desc,   forum_order,  forum_status,  prune_days,  forum_parent,  show_on_index,  forum_display_sort,  forum_display_order,  forum_tpl_id,  allow_reg_tracker,  allow_porno_topic,  self_moderated,  allow_anonymous' . $field_sql;
+            $values = "'{$forum_name_sql}', {$cat_id}, '{$forum_desc_sql}', {$forum_order}, {$forum_status}, {$prune_days}, {$forum_parent}, {$show_on_index}, {$forum_display_sort}, {$forum_display_order}, {$forum_tpl_id}, {$allow_reg_tracker}, {$allow_porno_topic}, {$self_moderated}, {$allow_anonymous}" . $value_sql;
 
             DB()->query('INSERT INTO ' . BB_FORUMS . " ({$columns}) VALUES ({$values})");
 
@@ -245,6 +249,7 @@ if ($mode) {
             $allow_reg_tracker = (int)request()->post->get('allow_reg_tracker', 0);
             $allow_porno_topic = (int)request()->post->get('allow_porno_topic', 0);
             $self_moderated = (int)request()->post->get('self_moderated', 0);
+            $allow_anonymous = (int)request()->post->get('allow_anonymous', 0);
 
             $forum_data = get_forum_data($forum_id, $cat_forums);
             $old_cat_id = $forum_data['cat_id'];
@@ -291,6 +296,7 @@ if ($mode) {
 					allow_reg_tracker   = {$allow_reg_tracker},
 					allow_porno_topic   = {$allow_porno_topic},
 					self_moderated      = {$self_moderated},
+					allow_anonymous     = {$allow_anonymous},
 					forum_display_order = {$forum_display_order},
 					forum_display_sort  = {$forum_display_sort}
 				WHERE forum_id          = {$forum_id}
