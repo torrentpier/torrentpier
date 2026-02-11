@@ -2408,7 +2408,7 @@
         },
         {
             "name": "illuminate/pipeline",
-            "version": "v12.50.0",
+            "version": "v12.51.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/pipeline.git",
@@ -2511,16 +2511,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v12.50.0",
+            "version": "v12.51.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "411a11401406e7d542aa67a4b400feed6bedef0c"
+                "reference": "fcc84cf4fba138f1835d6a5978ac4434f11a55aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/411a11401406e7d542aa67a4b400feed6bedef0c",
-                "reference": "411a11401406e7d542aa67a4b400feed6bedef0c",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/fcc84cf4fba138f1835d6a5978ac4434f11a55aa",
+                "reference": "fcc84cf4fba138f1835d6a5978ac4434f11a55aa",
                 "shasum": ""
             },
             "require": {
@@ -2587,7 +2587,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-02-04T15:14:59+00:00"
+            "time": "2026-02-10T16:02:09+00:00"
         },
         {
             "name": "intervention/gif",
