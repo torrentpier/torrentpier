@@ -136,7 +136,7 @@ class PostsController
             return $this->error(\sprintf(__('SORRY_AUTH_REPLY'), strip_tags($isAuth['auth_reply_type'])));
         }
 
-        if (!empty($post['post_anonymous']) && !IS_AM) {
+        if (!empty($post['post_anonymous'])) {
             $quoteUsername = __('ANONYMOUS');
         } else {
             $quoteUsername = ($post['post_username'] != '') ? $post['post_username'] : get_username($post['poster_id']);

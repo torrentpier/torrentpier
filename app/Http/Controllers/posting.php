@@ -59,7 +59,7 @@ $topic_type = in_array($topic_type, [POST_NORMAL, POST_STICKY, POST_ANNOUNCE]) ?
 $selected_rg = 0;
 $switch_rg_sig = 0;
 $switch_poster_rg_sig = 0;
-$anonymous_mode = false;
+$anonymous_mode = 0;
 
 if ($mode == 'smilies') {
     generate_smilies('window');
@@ -309,7 +309,7 @@ if ($submit || $refresh) {
 
     // Read anonymous posting checkbox
     if (!IS_GUEST && $forum_allows_anonymous) {
-        $anonymous_mode = !empty($_POST['anonymous']);
+        $anonymous_mode = (int)request()->post->has('anonymous');
     }
 } else {
     $notify_user = bf(userdata('user_opt'), 'user_opt', 'user_notify');

@@ -80,17 +80,29 @@ if ($watch_count > 0) {
             $topicTitle = $watch[$i]['topic_title'];
             $topicUrl = url()->topic($topicId, $topicTitle);
 
-            // Anonymous posting: hide author/last poster identity from non-staff
+            // Anonymous posting: hide author/last poster identity
             $authorAnonymous = !empty($watch[$i]['first_post_anonymous']) && $watch[$i]['user_id'] != GUEST_UID;
-            if ($authorAnonymous && !IS_AM) {
-                $authorDisplay = htmlCHR(__('ANONYMOUS'));
+            if ($authorAnonymous) {
+                if (IS_AM) {
+                    $authorDisplay = profile_url($watch[$i]) . ' (' . htmlCHR(__('POSTED_ANONYMOUSLY')) . ')';
+                } elseif ($watch[$i]['user_id'] == (int)userdata('user_id')) {
+                    $authorDisplay = htmlCHR(__('ANONYMOUS') . ' (' . __('YOU') . ')');
+                } else {
+                    $authorDisplay = htmlCHR(__('ANONYMOUS'));
+                }
             } else {
                 $authorDisplay = profile_url($watch[$i]);
             }
 
             $lastPosterAnonymous = !empty($watch[$i]['last_post_anonymous']) && $watch[$i]['last_user_id'] != GUEST_UID;
-            if ($lastPosterAnonymous && !IS_AM) {
-                $lastPosterDisplay = htmlCHR(__('ANONYMOUS'));
+            if ($lastPosterAnonymous) {
+                if (IS_AM) {
+                    $lastPosterDisplay = profile_url(['user_id' => $watch[$i]['last_user_id'], 'username' => $watch[$i]['last_username'], 'user_rank' => $watch[$i]['last_user_rank']]) . ' (' . htmlCHR(__('POSTED_ANONYMOUSLY')) . ')';
+                } elseif ($watch[$i]['last_user_id'] == (int)userdata('user_id')) {
+                    $lastPosterDisplay = htmlCHR(__('ANONYMOUS') . ' (' . __('YOU') . ')');
+                } else {
+                    $lastPosterDisplay = htmlCHR(__('ANONYMOUS'));
+                }
             } else {
                 $lastPosterDisplay = profile_url(['user_id' => $watch[$i]['last_user_id'], 'username' => $watch[$i]['last_username'], 'user_rank' => $watch[$i]['last_user_rank']]);
             }

@@ -194,8 +194,14 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
         }
 
         $sf_last_anonymous = !empty($sf_data['sf_last_post_anonymous']) && $sf_data['sf_last_user_id'] != GUEST_UID;
-        if ($sf_last_anonymous && !IS_AM) {
-            $last_post_user = htmlCHR(__('ANONYMOUS'));
+        if ($sf_last_anonymous) {
+            if (IS_AM) {
+                $last_post_user = profile_url(['username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']]) . ' (' . htmlCHR(__('POSTED_ANONYMOUSLY')) . ')';
+            } elseif ($sf_data['sf_last_user_id'] == (int)userdata('user_id')) {
+                $last_post_user = htmlCHR(__('ANONYMOUS') . ' (' . __('YOU') . ')');
+            } else {
+                $last_post_user = htmlCHR(__('ANONYMOUS'));
+            }
         } else {
             $last_post_user = profile_url(['username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']]);
         }
@@ -513,11 +519,19 @@ foreach ($topic_rowset as $topic) {
         'POLL' => (bool)$topic['topic_vote'],
         'DL_CLASS' => isset($topic['dl_status']) ? dl_link_css($topic['dl_status']) : '',
 
-        'TOPIC_AUTHOR' => (!empty($topic['first_post_anonymous']) && $topic['first_user_id'] != GUEST_UID && !IS_AM)
-            ? htmlCHR(__('ANONYMOUS'))
+        'TOPIC_AUTHOR' => (!empty($topic['first_post_anonymous']) && $topic['first_user_id'] != GUEST_UID)
+            ? (IS_AM
+                ? profile_url(['username' => $topic['first_username'], 'display_username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]) . ' (' . htmlCHR(__('POSTED_ANONYMOUSLY')) . ')'
+                : ($topic['first_user_id'] == (int)userdata('user_id')
+                    ? htmlCHR(__('ANONYMOUS') . ' (' . __('YOU') . ')')
+                    : htmlCHR(__('ANONYMOUS'))))
             : profile_url(['username' => $topic['first_username'], 'display_username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
-        'LAST_POSTER' => (!empty($topic['last_post_anonymous']) && $topic['last_user_id'] != GUEST_UID && !IS_AM)
-            ? htmlCHR(__('ANONYMOUS'))
+        'LAST_POSTER' => (!empty($topic['last_post_anonymous']) && $topic['last_user_id'] != GUEST_UID)
+            ? (IS_AM
+                ? profile_url(['username' => $topic['last_username'], 'display_username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]) . ' (' . htmlCHR(__('POSTED_ANONYMOUSLY')) . ')'
+                : ($topic['last_user_id'] == (int)userdata('user_id')
+                    ? htmlCHR(__('ANONYMOUS') . ' (' . __('YOU') . ')')
+                    : htmlCHR(__('ANONYMOUS'))))
             : profile_url(['username' => $topic['last_username'], 'display_username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
         'LAST_POST_TIME' => bb_date($topic['topic_last_post_time'], config()->get('localization.date_formats.last_post')),
         'LAST_POST_ID' => $lastPostId,
