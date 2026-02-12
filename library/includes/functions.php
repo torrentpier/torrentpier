@@ -989,7 +989,7 @@ function birthday_age($date)
 function format_registration_intervals(array $restricted_hours): array
 {
     // Validate and filter restricted hours to be within 0-23
-    $restricted_hours = array_filter($restricted_hours, fn($h) => is_int($h) && $h >= 0 && $h <= 23);
+    $restricted_hours = array_filter($restricted_hours, fn ($h) => is_int($h) && $h >= 0 && $h <= 23);
 
     // Use board timezone for the current time
     $tz = config()->get('localization.board_timezone');
