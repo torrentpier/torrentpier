@@ -317,7 +317,7 @@ class AnnounceController
             }
 
             // Ratio limits
-            if ((RATIO_ENABLED || config()->get('tracker.limit_concurrent_ips')) && !$stopped) {
+            if ((RATIO_LIMITS_ENABLED || config()->get('tracker.limit_concurrent_ips')) && !$stopped) {
                 $user_ratio = get_bt_ratio($row);
                 if ($user_ratio === null) {
                     $user_ratio = 1;

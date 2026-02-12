@@ -6,7 +6,7 @@
             <a href="{{ constant('FILELIST_URL') }}{{ V.TOPIC_ID }}/files/" target="_blank" class="med"><b>{{ __('BT_FLIST_LINK_TITLE') }}</b></a> &middot;
             <a href="{{ config('app.help_urls.how_to_download') }}" class="med"><b>{{ __('HOW_TO_DOWNLOAD') }}</b></a> &middot;
             <a href="{{ config('app.help_urls.what_is_torrent') }}" class="med"><b>{{ __('WHAT_IS_A_TORRENT') }}</b></a>
-            {% if constant('RATIO_ENABLED') %}
+            {% if constant('RATIO_LIMITS_ENABLED') %}
             &middot; <a href="{{ config('app.help_urls.ratio') }}" class="med"><b>{{ __('RATINGS_AND_LIMITATIONS') }}</b></a>
             {% endif %}<br/>
         </p>

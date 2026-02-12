@@ -379,7 +379,7 @@ ajax.callback.group_membership = function(data) {
 				</td>
 			</tr>
 
-			{% if constant('RATIO_ENABLED') %}
+			{% if constant('SHOW_BT_STATS') %}
 			<tr id="bt_user_ratio" {% if TRAF_STATS %}style="display: none;"{% endif %}>
 				<th>{{ __('USER_RATIO') }}:</th>
 				<td>
