@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace TorrentPier\Spam\Provider;
 
+use Throwable;
 use TorrentPier\Spam\Decision;
 use TorrentPier\Spam\ProviderResult;
 
@@ -82,7 +83,7 @@ class AkismetProvider extends AbstractProvider implements ContentProviderInterfa
                 "https://{$apiKey}.rest.akismet.com/1.1/submit-spam",
                 ['form_params' => $this->buildParams($userId, $message, $extra)],
             );
-        } catch (\Throwable) {
+        } catch (Throwable) {
         }
     }
 
@@ -98,7 +99,7 @@ class AkismetProvider extends AbstractProvider implements ContentProviderInterfa
                 "https://{$apiKey}.rest.akismet.com/1.1/submit-ham",
                 ['form_params' => $this->buildParams($userId, $message, $extra)],
             );
-        } catch (\Throwable) {
+        } catch (Throwable) {
         }
     }
 

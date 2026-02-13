@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace TorrentPier\Spam\Provider;
 
+use Throwable;
 use TorrentPier\Spam\Decision;
 use TorrentPier\Spam\ProviderResult;
 
@@ -101,7 +102,7 @@ class StopForumSpamProvider extends AbstractProvider implements UserProviderInte
                     'username' => $username,
                 ],
             ]);
-        } catch (\Throwable) {
+        } catch (Throwable) {
         }
     }
 }
