@@ -34,19 +34,10 @@ class AkismetProvider extends AbstractProvider implements ContentProviderInterfa
             $start = microtime(true);
 
             $apiKey = $this->config['api_key'];
-            $blog = config()->get('app.url', 'http://localhost');
 
             $response = $this->getHttpClient()->post(
                 "https://{$apiKey}.rest.akismet.com/1.1/comment-check",
-                [
-                    'form_params' => [
-                        'blog' => $blog,
-                        'user_ip' => $extra['ip'] ?? '',
-                        'comment_content' => $message,
-                        'comment_type' => $extra['type'] ?? 'forum-post',
-                        'comment_author' => (string)$userId,
-                    ],
-                ],
+                ['form_params' => $this->buildParams($userId, $message, $extra)],
             );
 
             $body = $response->getBody()->getContents();

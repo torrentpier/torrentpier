@@ -2030,23 +2030,33 @@ function spam_check_user(string $username, string $email, string $ip): TorrentPi
 
             // BannedUsers — always first, local + fast
             $cfg = $spamConfig['providers']['banned_users'] ?? [];
-            $providers[] = new TorrentPier\Spam\Provider\BannedUsersProvider($cfg);
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\BannedUsersProvider($cfg);
+            }
 
             // SpamPhrases
             $cfg = $spamConfig['providers']['spam_phrases'] ?? [];
-            $providers[] = new TorrentPier\Spam\Provider\SpamPhraseProvider($cfg);
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\SpamPhraseProvider($cfg);
+            }
 
             // StopForumSpam
             $cfg = $spamConfig['providers']['stop_forum_spam'] ?? [];
-            $providers[] = new TorrentPier\Spam\Provider\StopForumSpamProvider($cfg);
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\StopForumSpamProvider($cfg);
+            }
 
             // Project Honey Pot
             $cfg = $spamConfig['providers']['project_honeypot'] ?? [];
-            $providers[] = new TorrentPier\Spam\Provider\ProjectHoneyPotProvider($cfg);
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\ProjectHoneyPotProvider($cfg);
+            }
 
             // DNS Blacklists
             $cfg = $spamConfig['providers']['dns_blacklist'] ?? [];
-            $providers[] = new TorrentPier\Spam\Provider\DnsBlacklistProvider($cfg);
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\DnsBlacklistProvider($cfg);
+            }
 
             $shortCircuit = (bool)($spamConfig['short_circuit'] ?? true);
             $checker = new TorrentPier\Spam\Checker\UserChecker($providers, $shortCircuit);
@@ -2076,11 +2086,15 @@ function spam_check_content(int $userId, string $message, array $extra = []): To
 
             // SpamPhrases (also a content provider)
             $cfg = $spamConfig['providers']['spam_phrases'] ?? [];
-            $providers[] = new TorrentPier\Spam\Provider\SpamPhraseProvider($cfg);
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\SpamPhraseProvider($cfg);
+            }
 
             // Akismet
             $cfg = $spamConfig['providers']['akismet'] ?? [];
-            $providers[] = new TorrentPier\Spam\Provider\AkismetProvider($cfg);
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\AkismetProvider($cfg);
+            }
 
             $shortCircuit = (bool)($spamConfig['short_circuit'] ?? true);
             $checker = new TorrentPier\Spam\Checker\ContentChecker($providers, $shortCircuit);

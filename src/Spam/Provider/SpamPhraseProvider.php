@@ -89,7 +89,11 @@ class SpamPhraseProvider extends AbstractProvider implements UserProviderInterfa
 
         foreach ($phrases as $phrase) {
             if (str_starts_with($phrase, '/')) {
-                if (@preg_match($phrase, $text)) {
+                $matchResult = @preg_match($phrase, $text);
+                if ($matchResult === false && \function_exists('bb_log')) {
+                    bb_log("[Spam] Invalid regex in spam_phrases config: {$phrase}" . LOG_LF);
+                }
+                if ($matchResult === 1) {
                     return $phrase;
                 }
             } else {

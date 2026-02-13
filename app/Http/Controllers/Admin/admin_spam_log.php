@@ -124,7 +124,8 @@ if ($provider_val) {
     $query->where('provider_name', $provider_val);
 }
 if ($ip_val !== '') {
-    $query->where('check_ip', 'LIKE', "%{$ip_val}%");
+    $escaped = str_replace(['%', '_'], ['\\%', '\\_'], $ip_val);
+    $query->where('check_ip', 'LIKE', "%{$escaped}%");
 }
 
 $query->orderBy('check_time', $sort_val)
