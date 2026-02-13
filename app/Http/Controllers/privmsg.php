@@ -871,6 +871,18 @@ if ($mode == 'read') {
                 }
             }
 
+            // Spam content check for private messages
+            if (config()->get('spam.enabled') && (!IS_ADMIN || config()->get('spam.check_admins', true))) {
+                $contentResult = spam_check_content(
+                    (int)userdata('user_id'),
+                    $privmsg_message,
+                    ['type' => 'pm', 'ip' => CLIENT_IP, 'subject' => $privmsg_subject, 'username' => userdata('username')]
+                );
+                if ($contentResult->isDenied()) {
+                    bb_die(__('PM_SPAM_DENIED'));
+                }
+            }
+
             $sql_info = 'INSERT INTO ' . BB_PRIVMSGS . ' (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip)
 				VALUES (' . PRIVMSGS_NEW_MAIL . ", '" . DB()->escape($privmsg_subject) . "', " . userdata('user_id') . ', ' . $to_userdata['user_id'] . ", {$msg_time}, '" . USER_IP . "')";
         } else {

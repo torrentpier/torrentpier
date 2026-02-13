@@ -161,6 +161,19 @@ if ($submit) {
     }
 }
 
+// Spam check
+if ($submit && $mode === 'register' && !IS_ADMIN) {
+    $spamResult = spam_check_user(
+        clean_username((string)request()->post->get('username', '')),
+        (string)request()->post->get('user_email', ''),
+        CLIENT_IP,
+    );
+
+    if ($spamResult->isDenied()) {
+        $errors[] = __('REGISTRATION_DENIED');
+    }
+}
+
 // Data validation
 $cur_pass_valid = $adm_edit;
 $can_edit_tpl = [];
@@ -562,6 +575,13 @@ if ($submit && !$errors) {
             $db_data['user_active'] = 1;
             $db_data['user_actkey'] = '';
         }
+        // Force email activation for spam-moderated users
+        if (isset($spamResult) && $spamResult->isModerated()) {
+            $user_actkey = Str::random(ACTKEY_LENGTH);
+            $db_data['user_active'] = 0;
+            $db_data['user_actkey'] = $user_actkey;
+        }
+
         $db_data['user_regdate'] = TIMENOW;
 
         if (!IS_ADMIN) {

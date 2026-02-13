@@ -33,6 +33,7 @@ return [
         'bb_login_err' => ['file'],
         'bb_poll_data' => ['file'],
         'bb_ip2countries' => ['file'],
+        'bb_spam' => ['file'],
     ],
     'datastore_type' => 'file',
 ];
