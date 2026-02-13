@@ -3796,16 +3796,16 @@
         },
         {
             "name": "nette/utils",
-            "version": "v4.1.2",
+            "version": "v4.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "f76b5dc3d6c6d3043c8d937df2698515b99cbaf5"
+                "reference": "bb3ea637e3d131d72acc033cfc2746ee893349fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/f76b5dc3d6c6d3043c8d937df2698515b99cbaf5",
-                "reference": "f76b5dc3d6c6d3043c8d937df2698515b99cbaf5",
+                "url": "https://api.github.com/repos/nette/utils/zipball/bb3ea637e3d131d72acc033cfc2746ee893349fe",
+                "reference": "bb3ea637e3d131d72acc033cfc2746ee893349fe",
                 "shasum": ""
             },
             "require": {
@@ -3817,8 +3817,10 @@
             },
             "require-dev": {
                 "jetbrains/phpstorm-attributes": "^1.2",
+                "nette/phpstan-rules": "^1.0",
                 "nette/tester": "^2.5",
-                "phpstan/phpstan": "^2.0@stable",
+                "phpstan/extension-installer": "^1.4@stable",
+                "phpstan/phpstan": "^2.1@stable",
                 "tracy/tracy": "^2.9"
             },
             "suggest": {
@@ -3879,9 +3881,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v4.1.2"
+                "source": "https://github.com/nette/utils/tree/v4.1.3"
             },
-            "time": "2026-02-03T17:21:09+00:00"
+            "time": "2026-02-13T03:05:33+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -6529,12 +6531,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/torrentpier/translations.git",
-                "reference": "93903b837243dad0479af6d05d890bc98a34b541"
+                "reference": "9e47c013d74055a4014503534a23c08bde0c5deb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/torrentpier/translations/zipball/93903b837243dad0479af6d05d890bc98a34b541",
-                "reference": "93903b837243dad0479af6d05d890bc98a34b541",
+                "url": "https://api.github.com/repos/torrentpier/translations/zipball/9e47c013d74055a4014503534a23c08bde0c5deb",
+                "reference": "9e47c013d74055a4014503534a23c08bde0c5deb",
                 "shasum": ""
             },
             "require": {
@@ -6580,7 +6582,7 @@
                 "issues": "https://github.com/torrentpier/torrentpier/issues",
                 "source": "https://github.com/torrentpier/translations/tree/main"
             },
-            "time": "2025-12-31T13:43:55+00:00"
+            "time": "2026-02-13T09:20:40+00:00"
         },
         {
             "name": "tracy/tracy",
@@ -11279,5 +11281,5 @@
         "php": ">=8.4"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
