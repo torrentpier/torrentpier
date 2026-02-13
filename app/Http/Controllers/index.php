@@ -165,7 +165,8 @@ $sql = "
 		p.post_id AS last_post_id, p.post_time AS last_post_time,
 		t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
 		u.user_id AS last_post_user_id, u.user_rank AS last_post_user_rank,
-		IF(p.poster_id = {$anon}, p.post_username, u.username) AS last_post_username
+		IF(p.poster_id = {$anon}, p.post_username, u.username) AS last_post_username,
+		p.post_anonymous AS last_post_anonymous
 	FROM         " . BB_CATEGORIES . ' c
 	INNER JOIN   ' . BB_FORUMS . " f ON({$forums_join_sql})
 	{$join_p_type} " . BB_POSTS . " p ON({$posts_join_sql})
@@ -180,6 +181,7 @@ $replace_in_parent = [
     'last_post_user_id',
     'last_post_username',
     'last_post_user_rank',
+    'last_post_anonymous',
     'last_topic_title',
     'last_topic_id',
 ];
@@ -314,12 +316,19 @@ foreach ($cat_forums as $cid => $c) {
         ];
 
         if ($f['last_post_id']) {
+            $last_post_anonymous = !empty($f['last_post_anonymous']) && $f['last_post_user_id'] != GUEST_UID;
+            if ($last_post_anonymous && !IS_AM) {
+                $last_post_user = htmlCHR(__('ANONYMOUS'));
+            } else {
+                $last_post_user = profile_url(['username' => $f['last_post_username'], 'display_username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank']]);
+            }
+
             $forumItem['LAST'] = [
                 'LAST_TOPIC_ID' => $f['last_topic_id'],
                 'LAST_TOPIC_TIP' => $f['last_topic_title'],
                 'LAST_TOPIC_TITLE' => str_short($f['last_topic_title'], $last_topic_max_len),
                 'LAST_POST_TIME' => bb_date($f['last_post_time'], config()->get('localization.date_formats.last_post')),
-                'LAST_POST_USER' => profile_url(['username' => $f['last_post_username'], 'display_username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank']]),
+                'LAST_POST_USER' => $last_post_user,
             ];
         }
 

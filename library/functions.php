@@ -208,6 +208,7 @@ function bitfields(?string $type = null): array
             'user_hide_torrent_client' => 16,
             'user_hide_peer_country' => 17,
             'user_hide_peer_username' => 18,
+            'user_anonymous' => 19,
         ],
     ]);
 

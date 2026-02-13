@@ -62,6 +62,10 @@ function toggle_cat_list (val)
 		<td>{ALLOW_REG_TRACKER} &nbsp; {L_SELF_MODERATED}: {SELF_MODERATED}  &nbsp; {L_ALLOW_PORNO_TOPIC}: {ALLOW_PORNO_TOPIC}</td>
 	</tr>
 	<tr>
+		<td>{L_ALLOW_ANONYMOUS_POSTING}</td>
+		<td>{ALLOW_ANONYMOUS}</td>
+	</tr>
+	<tr>
 		<td>{L_DESIGNER}</td>
 		<td>{TPL_SELECT} - {L_FOR_NEW_TEMPLATE}</td>
 	</tr>

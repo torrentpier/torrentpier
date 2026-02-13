@@ -614,10 +614,23 @@ if ($post_mode) {
             $message = bbcode()->getParsedPost($post);
             $message = censor()->censorString($message);
 
+            $poster_anonymous = !empty($post['post_anonymous']) && $post['poster_id'] != GUEST_UID;
+            $poster_hide_identity = $poster_anonymous && !IS_AM;
+            if ($poster_anonymous && IS_AM) {
+                $poster_display = profile_url($post) . ' (' . htmlCHR(__('POSTED_ANONYMOUSLY')) . ')';
+            } elseif ($poster_anonymous && $post['poster_id'] == (int)userdata('user_id')) {
+                $poster_display = htmlCHR(__('ANONYMOUS') . ' (' . __('YOU') . ')');
+                $poster_hide_identity = true;
+            } elseif ($poster_hide_identity) {
+                $poster_display = htmlCHR(__('ANONYMOUS'));
+            } else {
+                $poster_display = profile_url($post);
+            }
+
             $topicItem['P'][] = [
                 'ROW_NUM' => $row_num,
-                'POSTER_ID' => $post['poster_id'],
-                'POSTER' => profile_url($post),
+                'POSTER_ID' => $poster_hide_identity ? 0 : $post['poster_id'],
+                'POSTER' => $poster_display,
                 'POST_ID' => $post['post_id'],
                 'POST_DATE' => bb_date($post['post_time'], config()->get('localization.date_formats.post')),
                 'IS_UNREAD' => is_unread($post['post_time'], $topic_id, $forum_id),
@@ -778,7 +791,9 @@ else {
 		t.*, t.topic_poster AS first_user_id, u1.user_rank AS first_user_rank,
 		IF(t.topic_poster = {$anon_id}, p1.post_username, u1.username) AS first_username,
 		p2.poster_id AS last_user_id, u2.user_rank AS last_user_rank,
-		IF(p2.poster_id = {$anon_id}, p2.post_username, u2.username) AS last_username
+		IF(p2.poster_id = {$anon_id}, p2.post_username, u2.username) AS last_username,
+		p1.post_anonymous AS first_post_anonymous,
+		p2.post_anonymous AS last_post_anonymous
 	";
     if ($join_dl) {
         $SQL['SELECT'][] = 'dl.user_status AS dl_status';
@@ -825,6 +840,30 @@ else {
         $hrefTopicId = $moved ? $topic['topic_moved_id'] : $topic_id;
         $topicUrl = url()->topic($hrefTopicId, $topicTitle);
 
+        // Anonymous posting: determine display for topic author
+        $first_post_anon = !empty($topic['first_post_anonymous']) && $topic['first_user_id'] != GUEST_UID;
+        if ($first_post_anon && !IS_AM) {
+            $first_anon_display = ($topic['first_user_id'] == (int)userdata('user_id'))
+                ? htmlCHR(__('ANONYMOUS') . ' (' . __('YOU') . ')')
+                : htmlCHR(__('ANONYMOUS'));
+        } elseif ($first_post_anon && IS_AM) {
+            $first_anon_display = profile_url(['username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]) . ' (' . htmlCHR(__('POSTED_ANONYMOUSLY')) . ')';
+        } else {
+            $first_anon_display = profile_url(['username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]);
+        }
+
+        // Anonymous posting: determine display for last poster
+        $last_post_anon = !empty($topic['last_post_anonymous']) && $topic['last_user_id'] != GUEST_UID;
+        if ($last_post_anon && !IS_AM) {
+            $last_anon_display = ($topic['last_user_id'] == (int)userdata('user_id'))
+                ? htmlCHR(__('ANONYMOUS') . ' (' . __('YOU') . ')')
+                : htmlCHR(__('ANONYMOUS'));
+        } elseif ($last_post_anon && IS_AM) {
+            $last_anon_display = profile_url(['username' => $topic['last_username'], 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]) . ' (' . htmlCHR(__('POSTED_ANONYMOUSLY')) . ')';
+        } else {
+            $last_anon_display = profile_url(['username' => $topic['last_username'], 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]);
+        }
+
         $topicList[] = [
             'ROW_NUM' => $row_num,
             'FORUM_ID' => $forum_id,
@@ -845,8 +884,8 @@ else {
             'POLL' => (bool)$topic['topic_vote'],
             'DL_CLASS' => isset($topic['dl_status']) ? dl_link_css($topic['dl_status']) : '',
 
-            'TOPIC_AUTHOR' => profile_url(['username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
-            'LAST_POSTER' => profile_url(['username' => $topic['last_username'], 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
+            'TOPIC_AUTHOR' => $first_anon_display,
+            'LAST_POSTER' => $last_anon_display,
             'LAST_POST_TIME' => bb_date($topic['topic_last_post_time']),
             'LAST_POST_TIME_RAW' => $topic['topic_last_post_time'],
             'LAST_POST_ID' => $topic['topic_last_post_id'],

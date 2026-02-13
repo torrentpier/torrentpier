@@ -397,6 +397,7 @@ function build_poll_add_form (src_el)
 
         {% if postrow_item.IS_BANNED %}<p class="poster-banned" title="{{ __('BANNED_USERS') }}">{{ __('BANNED') }}</p>{% endif %}
 
+		{% if not postrow_item.POSTER_ANONYMOUS %}
 		{% if postrow_item.POSTER_RANK %}<p class="rank_txt">{{ postrow_item.POSTER_RANK }}</p>{% endif %}
 		{% if postrow_item.RANK_IMAGE %}<p class="rank_img">{{ postrow_item.RANK_IMAGE|raw }}</p>{% endif %}
 		{% if postrow_item.POSTER_AVATAR %}<p class="avatar">{{ postrow_item.POSTER_AVATAR|raw }}</p>{% endif %}
@@ -404,8 +405,8 @@ function build_poll_add_form (src_el)
 		{% if postrow_item.POSTER_JOINED %}<p class="joined" title="{{ postrow_item.POSTER_JOINED_DATE }}"><em>{{ __('LONGEVITY') }}:</em> {{ postrow_item.POSTER_JOINED }}</p>{% endif %}
 		{% if postrow_item.POSTER_POSTS %}<p class="posts"><em>{{ __('POSTS') }}:</em> {{ postrow_item.POSTER_POSTS }}</p>{% endif %}
 		{% if postrow_item.POSTER_FROM %}<p class="from"><em>{{ __('LOCATION') }}:</em> {{ postrow_item.POSTER_FROM }}</p>{% endif %}
-
 		{% if postrow_item.POSTER_BIRTHDAY %}<p class="birthday">{{ postrow_item.POSTER_BIRTHDAY|raw }}</p>{% endif %}
+		{% endif %}
 	{% endif %}
 
 	<p><img src="{{ SPACER }}" width="{{ TOPIC_LEFT_COL_SPACER_WITDH }}" height="{% if postrow_item.POSTER_AVATAR or postrow_item.RANK_IMAGE %}2{% else %}30{% endif %}" border="0" alt="" /></p>
@@ -508,7 +509,7 @@ function build_poll_add_form (src_el)
 <tr>
 	<td class="poster_btn td3">
 
-	{% if postrow_item.POSTER_BOT or not postrow_item.PROFILE %}
+	{% if postrow_item.POSTER_BOT or not postrow_item.PROFILE or postrow_item.POSTER_ANONYMOUS %}
 		&nbsp;
 	{% else %}
 		<div style="padding: 2px 6px 4px;" class="post_btn_2">
@@ -634,6 +635,14 @@ function build_poll_add_form (src_el)
 	<td class="td2 med tCenter pad_4">
 		<label><input type="checkbox" name="notify" {% if QR_NOTIFY_CHECKED %}checked{% endif %}/>
 		{{ __('QR_NOTIFY') }}&nbsp;</label>
+	</td>
+</tr>
+{% endif %}
+{% if QR_SHOW_ANONYMOUS_CHECKBOX is defined and QR_SHOW_ANONYMOUS_CHECKBOX %}
+<tr class="row2">
+	<td class="td2 med tCenter pad_4">
+		<label><input type="checkbox" name="anonymous" {% if QR_ANONYMOUS_CHECKED %}checked{% endif %}/>
+		{{ __('ANONYMOUS_REPLY') }}&nbsp;</label>
 	</td>
 </tr>
 {% endif %}

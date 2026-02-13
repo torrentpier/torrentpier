@@ -45,11 +45,15 @@ trait FeedEntryMapperTrait
             $title = $this->getUpdatedPrefix($topic) . $this->buildTorrentTitle($topic);
             $lastTime = $topic['topic_last_post_edit_time'] ?: $topic['topic_last_post_time'];
 
+            // Hide author if the first post was made anonymously
+            $isAnonymousPost = !empty($topic['first_post_anonymous']);
+            $author = $isAnonymousPost ? __('ANONYMOUS') : ($topic['first_username'] ?: __('GUEST'));
+
             $entries[] = new FeedEntry(
                 title: $title,
                 link: $this->buildEntryLink($topic),
                 lastModified: new DateTimeImmutable('@' . $lastTime),
-                author: $topic['first_username'] ?: __('GUEST'),
+                author: $author,
                 description: $this->buildEntryDescription($topic),
             );
         }

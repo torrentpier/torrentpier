@@ -59,6 +59,7 @@ $topic_type = in_array($topic_type, [POST_NORMAL, POST_STICKY, POST_ANNOUNCE]) ?
 $selected_rg = 0;
 $switch_rg_sig = 0;
 $switch_poster_rg_sig = 0;
+$anonymous_mode = 0;
 
 if ($mode == 'smilies') {
     generate_smilies('window');
@@ -239,6 +240,19 @@ if (!$is_auth[$is_auth_type]) {
     redirect(LOGIN_URL . '?redirect=/' . POSTING_URL . "?{$redirect}");
 }
 
+// Anonymous posting support
+// OR logic is intentional: anonymous posting is enabled if EITHER the global setting is on
+// OR the per-forum setting is on. This lets admins enable it globally for all forums,
+// or selectively per-forum when the global setting is off.
+$forum_allows_anonymous = !empty($post_info['allow_anonymous']) || config()->get('forum.allow_anonymous_posting');
+if ($forum_allows_anonymous && !IS_GUEST) {
+    // On edit, use the post's current anonymous state; otherwise use user's default preference.
+    // Retroactive toggle on edit is intentional — users should be able to anonymize/deanonymize their posts.
+    $anonymous_mode = ($mode == 'editpost' && isset($post_info['post_anonymous']))
+        ? (int)$post_info['post_anonymous']
+        : (int)bf(userdata('user_opt'), 'user_opt', 'user_anonymous');
+}
+
 if ($mode == 'new_rel') {
     if ($tor_status = implode(',', config()->get('tracker.tor_cannot_new'))) {
         $sql = DB()->fetch_rowset('SELECT t.topic_title, t.topic_id, tor.tor_status
@@ -294,6 +308,11 @@ if ($submit || $refresh) {
         }
     }
     $notify_user = (int)request()->post->has('notify');
+
+    // Read anonymous posting checkbox
+    if (!IS_GUEST && $forum_allows_anonymous) {
+        $anonymous_mode = (int)request()->post->has('anonymous');
+    }
 } else {
     $notify_user = bf(userdata('user_opt'), 'user_opt', 'user_notify');
 
@@ -324,10 +343,11 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 
             $newPosts = [];
             foreach ($rowset as $i => $row) {
+                $anon_post = !empty($row['post_anonymous']) && !IS_AM;
                 $newPosts[] = [
                     'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
-                    'POSTER' => profile_url($row),
-                    'POSTER_NAME_JS' => addslashes($row['username']),
+                    'POSTER' => $anon_post ? htmlCHR(__('ANONYMOUS')) : profile_url($row),
+                    'POSTER_NAME_JS' => $anon_post ? addslashes(__('ANONYMOUS')) : addslashes($row['username']),
                     'POST_DATE' => '<a class="small" href="' . POST_URL . $row['post_id'] . '#' . $row['post_id'] . '" title="' . __('POST_LINK') . '">' . bb_date($row['post_time'], config()->get('localization.date_formats.post')) . '</a>',
                     'MESSAGE' => bbcode()->getParsedPost($row),
                 ];
@@ -381,7 +401,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             if (!$error_msg) {
                 $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
 
-                TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing, (bool)$post_info['allow_reg_tracker'], (bool)$is_auth['auth_mod']);
+                TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing, (bool)$post_info['allow_reg_tracker'], (bool)$is_auth['auth_mod'], (int)$anonymous_mode);
 
                 $post_url = POST_URL . "{$post_id}#{$post_id}";
                 $post_msg = ($mode == 'editpost') ? __('EDITED') : __('STORED');
@@ -495,6 +515,9 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
                 $message = $post_info['topic_title'];
             }
             $quote_username = ($post_info['post_username'] != '') ? $post_info['post_username'] : $post_info['username'];
+            if (!empty($post_info['post_anonymous'])) {
+                $quote_username = __('ANONYMOUS');
+            }
             $message = '[quote="' . $quote_username . '"][qpost=' . $post_info['post_id'] . ']' . $message . '[/quote]';
 
             // hide user passkey
@@ -649,6 +672,9 @@ template()->assign_vars([
 
     'S_NOTIFY_CHECKED' => $notify_user ? 'checked' : '',
     'S_ROBOTS_CHECKED' => $robots_indexing ? 'checked' : '',
+    'SHOW_ANONYMOUS_CHECKBOX' => $forum_allows_anonymous && !IS_GUEST,
+    'ANONYMOUS_MODE_LABEL' => ($mode == 'newtopic' || $mode == 'new_rel') ? __('ANONYMOUS_TOPIC') : __('ANONYMOUS_REPLY'),
+    'S_ANONYMOUS_CHECKED' => $anonymous_mode ? 'checked' : '',
     'SWITCH_TYPE_TOGGLE' => !empty($topic_type_toggle),
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,

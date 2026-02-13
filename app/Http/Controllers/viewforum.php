@@ -157,7 +157,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		SELECT
 			f.forum_id, f.forum_status, f.forum_last_post_id, f.forum_posts, f.forum_topics,
 			t.topic_last_post_time, t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
-			p.poster_id AS sf_last_user_id, IF(p.poster_id = ' . GUEST_UID . ', p.post_username, u.username) AS sf_last_username, u.user_rank
+			p.poster_id AS sf_last_user_id, IF(p.poster_id = ' . GUEST_UID . ', p.post_username, u.username) AS sf_last_username, u.user_rank, p.post_anonymous AS sf_last_post_anonymous
 		FROM      ' . BB_FORUMS . ' f
 		LEFT JOIN ' . BB_TOPICS . ' t ON(f.forum_last_post_id = t.topic_last_post_id)
 		LEFT JOIN ' . BB_POSTS . ' p ON(f.forum_last_post_id = p.post_id)
@@ -193,7 +193,18 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
             $folder_image = theme_images('forum_new');
         }
 
-        $last_post_user = profile_url(['username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']]);
+        $sf_last_anonymous = !empty($sf_data['sf_last_post_anonymous']) && $sf_data['sf_last_user_id'] != GUEST_UID;
+        if ($sf_last_anonymous) {
+            if (IS_AM) {
+                $last_post_user = profile_url(['username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']]) . ' (' . htmlCHR(__('POSTED_ANONYMOUSLY')) . ')';
+            } elseif ($sf_data['sf_last_user_id'] == (int)userdata('user_id')) {
+                $last_post_user = htmlCHR(__('ANONYMOUS') . ' (' . __('YOU') . ')');
+            } else {
+                $last_post_user = htmlCHR(__('ANONYMOUS'));
+            }
+        } else {
+            $last_post_user = profile_url(['username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']]);
+        }
 
         if ($sf_data['forum_last_post_id']) {
             $last_post = bb_date($sf_data['topic_last_post_time'], config()->get('localization.date_formats.last_post'));
@@ -375,8 +386,10 @@ if ($topics_csv = implode(',', $topic_ids)) {
 		SELECT
 			t.*, t.topic_poster AS first_user_id, u1.user_rank as first_user_rank,
 			IF(t.topic_poster = ' . GUEST_UID . ', p1.post_username, u1.username) AS first_username,
+			p1.post_anonymous AS first_post_anonymous,
 			p2.poster_id AS last_user_id, u2.user_rank as last_user_rank,
-			IF(p2.poster_id = ' . GUEST_UID . ", p2.post_username, u2.username) AS last_username
+			IF(p2.poster_id = ' . GUEST_UID . ", p2.post_username, u2.username) AS last_username,
+			p2.post_anonymous AS last_post_anonymous
 				{$select_tor_sql}
 		FROM      " . BB_TOPICS . ' t
 		LEFT JOIN ' . BB_POSTS . ' p1 ON(t.topic_first_post_id = p1.post_id)
@@ -506,8 +519,20 @@ foreach ($topic_rowset as $topic) {
         'POLL' => (bool)$topic['topic_vote'],
         'DL_CLASS' => isset($topic['dl_status']) ? dl_link_css($topic['dl_status']) : '',
 
-        'TOPIC_AUTHOR' => profile_url(['username' => $topic['first_username'], 'display_username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
-        'LAST_POSTER' => profile_url(['username' => $topic['last_username'], 'display_username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
+        'TOPIC_AUTHOR' => (!empty($topic['first_post_anonymous']) && $topic['first_user_id'] != GUEST_UID)
+            ? (IS_AM
+                ? profile_url(['username' => $topic['first_username'], 'display_username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]) . ' (' . htmlCHR(__('POSTED_ANONYMOUSLY')) . ')'
+                : ($topic['first_user_id'] == (int)userdata('user_id')
+                    ? htmlCHR(__('ANONYMOUS') . ' (' . __('YOU') . ')')
+                    : htmlCHR(__('ANONYMOUS'))))
+            : profile_url(['username' => $topic['first_username'], 'display_username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
+        'LAST_POSTER' => (!empty($topic['last_post_anonymous']) && $topic['last_user_id'] != GUEST_UID)
+            ? (IS_AM
+                ? profile_url(['username' => $topic['last_username'], 'display_username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]) . ' (' . htmlCHR(__('POSTED_ANONYMOUSLY')) . ')'
+                : ($topic['last_user_id'] == (int)userdata('user_id')
+                    ? htmlCHR(__('ANONYMOUS') . ' (' . __('YOU') . ')')
+                    : htmlCHR(__('ANONYMOUS'))))
+            : profile_url(['username' => $topic['last_username'], 'display_username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
         'LAST_POST_TIME' => bb_date($topic['topic_last_post_time'], config()->get('localization.date_formats.last_post')),
         'LAST_POST_ID' => $lastPostId,
         'TOR' => null,

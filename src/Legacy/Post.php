@@ -93,7 +93,7 @@ class Post
      *
      * @return string
      */
-    public static function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig, $robots_indexing, bool $allow_reg_tracker = false, bool $is_moderator = false)
+    public static function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig, $robots_indexing, bool $allow_reg_tracker = false, bool $is_moderator = false, int $anonymous_mode = 0)
     {
         $current_time = TIMENOW;
 
@@ -103,7 +103,7 @@ class Post
 
         if ($mode == 'newtopic' || $mode == 'reply') {
             $sql = 'SELECT MAX(p.post_time) AS last_post_time FROM ' . BB_POSTS . " p WHERE {$where_sql}";
-            if ($row = DB()->fetch_row($sql) && $row['last_post_time']) {
+            if (($row = DB()->fetch_row($sql)) && $row['last_post_time']) {
                 if (userdata('user_level') == USER) {
                     if ((TIMENOW - $row['last_post_time']) < config()->get('flood_interval')) {
                         bb_die(__('FLOOD_ERROR'));
@@ -177,7 +177,7 @@ class Post
             DB()->sql_query('UPDATE ' . BB_TOPICS . " SET topic_last_post_time = {$current_time} WHERE topic_id = {$topic_id} LIMIT 1");
         }
 
-        $sql = ($mode != 'editpost') ? 'INSERT INTO ' . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip, poster_rg_id, attach_rg_sig) VALUES ({$topic_id}, {$forum_id}, " . userdata('user_id') . ", '{$post_username}', {$current_time}, '" . USER_IP . "', {$poster_rg_id}, {$attach_rg_sig})" : 'UPDATE ' . BB_POSTS . " SET post_username = '{$post_username}'" . $edited_sql . ", poster_rg_id = {$poster_rg_id}, attach_rg_sig = {$attach_rg_sig} WHERE post_id = {$post_id}";
+        $sql = ($mode != 'editpost') ? 'INSERT INTO ' . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip, poster_rg_id, attach_rg_sig, post_anonymous) VALUES ({$topic_id}, {$forum_id}, " . userdata('user_id') . ", '{$post_username}', {$current_time}, '" . USER_IP . "', {$poster_rg_id}, {$attach_rg_sig}, {$anonymous_mode})" : 'UPDATE ' . BB_POSTS . " SET post_username = '{$post_username}'" . $edited_sql . ", poster_rg_id = {$poster_rg_id}, attach_rg_sig = {$attach_rg_sig}, post_anonymous = {$anonymous_mode} WHERE post_id = {$post_id}";
         if (!DB()->sql_query($sql)) {
             bb_die('Error in posting #2');
         }
@@ -503,10 +503,26 @@ class Post
         // Build review posts array
         $review = [];
         foreach ($review_posts as $i => $post) {
+            $poster_anonymous = !empty($post['post_anonymous']) && $post['poster_id'] != GUEST_UID;
+
+            if ($poster_anonymous && IS_AM) {
+                $poster_display = profile_url($post) . ' (' . htmlCHR(__('POSTED_ANONYMOUSLY')) . ')';
+                $poster_name_js = addslashes($post['username']);
+            } elseif ($poster_anonymous && $post['poster_id'] == (int)userdata('user_id')) {
+                $poster_display = htmlCHR(__('ANONYMOUS') . ' (' . __('YOU') . ')');
+                $poster_name_js = addslashes(__('ANONYMOUS'));
+            } elseif ($poster_anonymous) {
+                $poster_display = htmlCHR(__('ANONYMOUS'));
+                $poster_name_js = addslashes(__('ANONYMOUS'));
+            } else {
+                $poster_display = profile_url($post);
+                $poster_name_js = addslashes($post['username']);
+            }
+
             $review[] = [
                 'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
-                'POSTER' => profile_url($post),
-                'POSTER_NAME_JS' => addslashes($post['username']),
+                'POSTER' => $poster_display,
+                'POSTER_NAME_JS' => $poster_name_js,
                 'POST_ID' => $post['post_id'],
                 'POST_DATE' => bb_date($post['post_time'], config()->get('localization.date_formats.post')),
                 'IS_UNREAD' => is_unread($post['post_time'], $topic_id, $post['forum_id']),

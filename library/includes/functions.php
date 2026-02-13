@@ -1744,7 +1744,7 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
         };
     }
 
-    $profile = '<span title="' . $title . '" class="' . $style . '">' . $display_username . '</span>';
+    $profile = '<span title="' . htmlCHR($title) . '" class="' . $style . '">' . htmlCHR($display_username) . '</span>';
     if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && !$no_link) {
         $target_blank = $target_blank ? ' target="_blank" ' : '';
         $profile = '<a ' . $target_blank . ' href="' . make_url(url()->member($user_id, $username)) . '">' . $profile . '</a>';

@@ -258,6 +258,15 @@
                 <label><input type="radio" name="user_viewonline" value="0" {% if not USER_VIEWONLINE %}checked{% endif %} />{{ __('NO') }}</label>
             </td>
         </tr>
+        {% if SHOW_ANONYMOUS_SETTING %}
+        <tr>
+            <td class="prof-title">{{ __('HIDE_AUTHORSHIP') }}:<br /><h6>{{ __('HIDE_AUTHORSHIP_EXPLAIN') }}</h6></td>
+            <td>
+                <label><input type="radio" name="user_anonymous" value="1" {% if USER_ANONYMOUS %}checked{% endif %} />{{ __('YES') }}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_anonymous" value="0" {% if not USER_ANONYMOUS %}checked{% endif %} />{{ __('NO') }}</label>
+            </td>
+        </tr>
+        {% endif %}
         <tr>
             <td class="prof-title">{{ __('ALWAYS_NOTIFY') }}:<br/><h6>{{ __('ALWAYS_NOTIFY_EXPLAIN') }}</h6></td>
             <td>

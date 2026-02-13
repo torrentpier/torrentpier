@@ -366,6 +366,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 'user_hide_torrent_client' => $reg_mode ? true : true,
                 'user_hide_peer_country' => $reg_mode ? true : config()->get('services.ip2country.enabled'),
                 'user_hide_peer_username' => $reg_mode ? false : true,
+                'user_anonymous' => $reg_mode ? false : true,
             ];
 
             foreach ($update_user_opt as $opt => $can_change_opt) {
@@ -713,6 +714,8 @@ template()->assign_vars([
 
     'PR_USER_ID' => $pr_data['user_id'],
     'U_RESET_AUTOLOGIN' => LOGIN_URL . '?logout=1&amp;reset_autologin=1&amp;sid=' . userdata('session_id'),
+
+    'SHOW_ANONYMOUS_SETTING' => (bool)config()->get('forum.allow_anonymous_posting'),
 ]);
 
 print_page('usercp_register.twig');
