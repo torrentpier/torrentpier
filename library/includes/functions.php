@@ -696,6 +696,10 @@ function get_bt_userdata($user_id)
 
 function show_bt_userdata($user_id): void
 {
+    if (!SHOW_BT_STATS) {
+        return;
+    }
+
     if (!$btu = get_bt_userdata($user_id)) {
         return;
     }

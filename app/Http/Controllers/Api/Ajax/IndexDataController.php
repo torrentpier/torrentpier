@@ -152,7 +152,7 @@ class IndexDataController
      */
     private function handleNullRatio(array $body): ResponseInterface
     {
-        if (!config()->get('tracker.ratio_null_enabled') || !RATIO_ENABLED) {
+        if (!config()->get('tracker.ratio_null_enabled') || !SHOW_BT_STATS) {
             return $this->error(__('MODULE_OFF'));
         }
         if (empty($body['confirmed'])) {
@@ -269,7 +269,7 @@ class IndexDataController
             'mode' => 'get_traf_stats',
         ];
 
-        if (RATIO_ENABLED) {
+        if (SHOW_BT_STATS) {
             $userRatio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">' . get_bt_ratio($btu) . '</b>' : __('IT_WILL_BE_DOWN') . ' <b>' . humn_size(MIN_DL_FOR_RATIO) . '</b>';
             $responseData['user_ratio'] = '
                 <th><a href="' . config()->get('forum.ratio_url_help') . '" class="bold">' . __('USER_RATIO') . '</a>:</th>

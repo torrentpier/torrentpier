@@ -163,6 +163,9 @@ if (!defined('EXCLUDED_USERS_CSV')) {
 }
 
 // Ratio limits
-define('TR_RATING_LIMITS', true);        // ON/OFF
+define('TR_RATING_LIMITS', true); // ON/OFF - Enable/disable ratio-based restrictions (download limits, warnings)
 define('MIN_DL_FOR_RATIO', 10737418240); // 10 GB in bytes, 0 - disable
-define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);
+define('RATIO_LIMITS_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);
+
+// Statistics display
+define('SHOW_BT_STATS', true); // ON/OFF - Show BitTorrent statistics (upload/download/ratio display)
