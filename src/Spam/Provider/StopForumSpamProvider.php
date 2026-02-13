@@ -27,7 +27,7 @@ class StopForumSpamProvider extends AbstractProvider implements UserProviderInte
         return $this->safeExecute(function () use ($username, $email, $ip) {
             $start = microtime(true);
 
-            $cacheKey = md5($ip . $email . $username);
+            $cacheKey = md5($ip . '|' . $email . '|' . $username);
             $cached = $this->getCached($cacheKey);
             if ($cached instanceof ProviderResult) {
                 return $cached;
@@ -92,13 +92,16 @@ class StopForumSpamProvider extends AbstractProvider implements UserProviderInte
             return;
         }
 
-        $this->getHttpClient()->post('https://www.stopforumspam.org/add', [
-            'form_params' => [
-                'api_key' => $apiKey,
-                'ip_addr' => $ip,
-                'email' => $email,
-                'username' => $username,
-            ],
-        ]);
+        try {
+            $this->getHttpClient()->post('https://www.stopforumspam.org/add', [
+                'form_params' => [
+                    'api_key' => $apiKey,
+                    'ip_addr' => $ip,
+                    'email' => $email,
+                    'username' => $username,
+                ],
+            ]);
+        } catch (\Throwable) {
+        }
     }
 }

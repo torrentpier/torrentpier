@@ -77,10 +77,13 @@ class AkismetProvider extends AbstractProvider implements ContentProviderInterfa
             return;
         }
 
-        $this->getHttpClient()->post(
-            "https://{$apiKey}.rest.akismet.com/1.1/submit-spam",
-            ['form_params' => $this->buildParams($userId, $message, $extra)],
-        );
+        try {
+            $this->getHttpClient()->post(
+                "https://{$apiKey}.rest.akismet.com/1.1/submit-spam",
+                ['form_params' => $this->buildParams($userId, $message, $extra)],
+            );
+        } catch (\Throwable) {
+        }
     }
 
     public function submitHam(int $userId, string $message, array $extra = []): void
@@ -90,10 +93,13 @@ class AkismetProvider extends AbstractProvider implements ContentProviderInterfa
             return;
         }
 
-        $this->getHttpClient()->post(
-            "https://{$apiKey}.rest.akismet.com/1.1/submit-ham",
-            ['form_params' => $this->buildParams($userId, $message, $extra)],
-        );
+        try {
+            $this->getHttpClient()->post(
+                "https://{$apiKey}.rest.akismet.com/1.1/submit-ham",
+                ['form_params' => $this->buildParams($userId, $message, $extra)],
+            );
+        } catch (\Throwable) {
+        }
     }
 
     private function buildParams(int $userId, string $message, array $extra): array

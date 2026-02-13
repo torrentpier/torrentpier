@@ -99,7 +99,7 @@ $ip_val = '';
 if ($var = request()->get($ip_key)) {
     $ip_val = trim($var);
     if ($ip_val !== '') {
-        $url = url_arg($url, $ip_key, urlencode($ip_val));
+        $url = url_arg($url, $ip_key, $ip_val);
     }
 }
 

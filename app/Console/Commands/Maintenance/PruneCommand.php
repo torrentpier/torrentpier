@@ -58,7 +58,7 @@ class PruneCommand extends AbstractMaintenanceCommand
                 'type',
                 't',
                 InputOption::VALUE_REQUIRED,
-                'Type to prune: logs, pm, sessions, search',
+                'Type to prune: logs, spam_log, pm, sessions, search',
             )
             ->addOption(
                 'days',

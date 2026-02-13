@@ -63,5 +63,11 @@ describe('Decision Enum', function () {
 
             expect($result)->toBe(Decision::Denied);
         });
+
+        it('keeps Moderated when escalating with Allowed', function () {
+            $result = Decision::Moderated->escalate(Decision::Allowed);
+
+            expect($result)->toBe(Decision::Moderated);
+        });
     });
 });
