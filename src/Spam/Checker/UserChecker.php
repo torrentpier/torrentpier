@@ -20,6 +20,7 @@ class UserChecker
 {
     /** @var UserProviderInterface[] */
     private array $providers;
+
     private bool $shortCircuit;
     private SpamLogger $logger;
 
@@ -30,7 +31,7 @@ class UserChecker
     {
         $this->providers = $providers;
         $this->shortCircuit = $shortCircuit;
-        $this->logger = new SpamLogger();
+        $this->logger = new SpamLogger;
     }
 
     public function check(string $username, string $email, string $ip): SpamResult

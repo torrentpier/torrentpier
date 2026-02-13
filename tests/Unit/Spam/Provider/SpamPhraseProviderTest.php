@@ -6,7 +6,7 @@ use TorrentPier\Spam\Provider\SpamPhraseProvider;
 describe('SpamPhraseProvider', function () {
     describe('getName()', function () {
         it('returns spam_phrases', function () {
-            $provider = new SpamPhraseProvider();
+            $provider = new SpamPhraseProvider;
 
             expect($provider->getName())->toBe('spam_phrases');
         });
@@ -14,7 +14,7 @@ describe('SpamPhraseProvider', function () {
 
     describe('isEnabled()', function () {
         it('is disabled by default', function () {
-            $provider = new SpamPhraseProvider();
+            $provider = new SpamPhraseProvider;
 
             expect($provider->isEnabled())->toBeFalse();
         });

@@ -387,7 +387,7 @@ class PostsController
             $contentResult = spam_check_content(
                 (int)userdata('user_id'),
                 $message,
-                ['type' => 'post', 'ip' => CLIENT_IP, 'subject' => $post['topic_title'] ?? '', 'username' => userdata('username')]
+                ['type' => 'post', 'ip' => CLIENT_IP, 'subject' => $post['topic_title'] ?? '', 'username' => userdata('username')],
             );
             if ($contentResult->isDenied()) {
                 return $this->error(__('POST_SPAM_DENIED'));
@@ -409,7 +409,7 @@ class PostsController
 
         // Link spam log entry to the new post
         if (isset($contentResult) && $contentResult->getLogId()) {
-            (new \TorrentPier\Spam\SpamLogger())->linkPost($contentResult->getLogId(), $postId);
+            (new \TorrentPier\Spam\SpamLogger)->linkPost($contentResult->getLogId(), $postId);
         }
 
         Post::update_post_stats('reply', $post, $post['forum_id'], $topicId, $postId, userdata('user_id'));

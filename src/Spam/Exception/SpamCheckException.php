@@ -12,4 +12,6 @@ declare(strict_types=1);
 
 namespace TorrentPier\Spam\Exception;
 
-class SpamCheckException extends \Exception {}
+use Exception;
+
+class SpamCheckException extends Exception {}

@@ -20,6 +20,7 @@ class ContentChecker
 {
     /** @var ContentProviderInterface[] */
     private array $providers;
+
     private bool $shortCircuit;
     private SpamLogger $logger;
 
@@ -30,7 +31,7 @@ class ContentChecker
     {
         $this->providers = $providers;
         $this->shortCircuit = $shortCircuit;
-        $this->logger = new SpamLogger();
+        $this->logger = new SpamLogger;
     }
 
     public function check(int $userId, string $message, array $extra = []): SpamResult

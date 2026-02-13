@@ -80,7 +80,7 @@ class Post
             $contentResult = spam_check_content(
                 (int)userdata('user_id'),
                 $message,
-                ['type' => 'post', 'ip' => CLIENT_IP, 'subject' => $subject, 'username' => userdata('username')]
+                ['type' => 'post', 'ip' => CLIENT_IP, 'subject' => $subject, 'username' => userdata('username')],
             );
             if ($contentResult->isDenied()) {
                 $error_msg .= (!empty($error_msg)) ? '<br />' . __('POST_SPAM_DENIED') : __('POST_SPAM_DENIED');
@@ -204,7 +204,7 @@ class Post
 
             // Link spam log entry to the newly created post
             if (self::$spamLogId !== null) {
-                (new \TorrentPier\Spam\SpamLogger())->linkPost(self::$spamLogId, $post_id);
+                (new \TorrentPier\Spam\SpamLogger)->linkPost(self::$spamLogId, $post_id);
                 self::$spamLogId = null;
             }
         }

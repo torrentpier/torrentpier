@@ -76,7 +76,5 @@ class DnsBlacklistProvider extends AbstractProvider implements UserProviderInter
         });
     }
 
-    public function submitSpam(string $username, string $email, string $ip): void
-    {
-    }
+    public function submitSpam(string $username, string $email, string $ip): void {}
 }

@@ -51,7 +51,7 @@ $decision_options = [
 ];
 
 if ($var = request()->get($decision_key)) {
-    if (\in_array($var, ['Denied', 'Moderated'], true)) {
+    if (in_array($var, ['Denied', 'Moderated'], true)) {
         $decision_val = $var;
         $url = url_arg($url, $decision_key, $decision_val);
     }
@@ -66,7 +66,7 @@ $type_options = [
 ];
 
 if ($var = request()->get($type_key)) {
-    if (\in_array($var, ['registration', 'content'], true)) {
+    if (in_array($var, ['registration', 'content'], true)) {
         $type_val = $var;
         $url = url_arg($url, $type_key, $type_val);
     }

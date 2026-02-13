@@ -2,8 +2,8 @@
 
 use TorrentPier\Spam\Checker\UserChecker;
 use TorrentPier\Spam\Decision;
-use TorrentPier\Spam\ProviderResult;
 use TorrentPier\Spam\Provider\UserProviderInterface;
+use TorrentPier\Spam\ProviderResult;
 
 // Mock config() for SpamLogger — logging disabled so DB() is never called
 beforeAll(function () {

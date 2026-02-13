@@ -28,7 +28,7 @@ function injectMockClient(object $provider, MockHandler $mockHandler): void
 describe('StopForumSpamProvider', function () {
     describe('getName()', function () {
         it('returns stop_forum_spam', function () {
-            $provider = new StopForumSpamProvider();
+            $provider = new StopForumSpamProvider;
 
             expect($provider->getName())->toBe('stop_forum_spam');
         });
@@ -36,7 +36,7 @@ describe('StopForumSpamProvider', function () {
 
     describe('isEnabled()', function () {
         it('is disabled by default', function () {
-            $provider = new StopForumSpamProvider();
+            $provider = new StopForumSpamProvider;
 
             expect($provider->isEnabled())->toBeFalse();
         });
@@ -188,9 +188,9 @@ describe('StopForumSpamProvider', function () {
     describe('checkUser() - Error Handling (safeExecute)', function () {
         it('returns Allowed when API call fails', function () {
             $mockHandler = new MockHandler([
-                new \GuzzleHttp\Exception\ConnectException(
+                new GuzzleHttp\Exception\ConnectException(
                     'Connection timeout',
-                    new \GuzzleHttp\Psr7\Request('GET', 'https://api.stopforumspam.org/api'),
+                    new GuzzleHttp\Psr7\Request('GET', 'https://api.stopforumspam.org/api'),
                 ),
             ]);
 

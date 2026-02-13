@@ -876,7 +876,7 @@ if ($mode == 'read') {
                 $contentResult = spam_check_content(
                     (int)userdata('user_id'),
                     $privmsg_message,
-                    ['type' => 'pm', 'ip' => CLIENT_IP, 'subject' => $privmsg_subject, 'username' => userdata('username')]
+                    ['type' => 'pm', 'ip' => CLIENT_IP, 'subject' => $privmsg_subject, 'username' => userdata('username')],
                 );
                 if ($contentResult->isDenied()) {
                     bb_die(__('PM_SPAM_DENIED'));

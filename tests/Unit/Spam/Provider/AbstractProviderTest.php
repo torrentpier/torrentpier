@@ -36,7 +36,7 @@ class ConcreteTestProvider extends AbstractProvider
 describe('AbstractProvider', function () {
     describe('isEnabled()', function () {
         it('returns false by default (no config)', function () {
-            $provider = new ConcreteTestProvider();
+            $provider = new ConcreteTestProvider;
 
             expect($provider->isEnabled())->toBeFalse();
         });
@@ -74,17 +74,17 @@ describe('AbstractProvider', function () {
 
     describe('safeExecute()', function () {
         it('returns the result from the callable on success', function () {
-            $provider = new ConcreteTestProvider();
+            $provider = new ConcreteTestProvider;
 
             $expected = new ProviderResult('test', Decision::Denied, 'reason', 99.0, 1.0);
 
-            $result = $provider->callSafeExecute(fn() => $expected);
+            $result = $provider->callSafeExecute(fn () => $expected);
 
             expect($result)->toBe($expected);
         });
 
         it('returns Allowed on exception (fail-open)', function () {
-            $provider = new ConcreteTestProvider();
+            $provider = new ConcreteTestProvider;
 
             $result = $provider->callSafeExecute(function () {
                 throw new RuntimeException('API connection failed');
@@ -98,7 +98,7 @@ describe('AbstractProvider', function () {
         });
 
         it('returns Allowed on TypeError', function () {
-            $provider = new ConcreteTestProvider();
+            $provider = new ConcreteTestProvider;
 
             $result = $provider->callSafeExecute(function () {
                 throw new TypeError('Unexpected type');
@@ -109,7 +109,7 @@ describe('AbstractProvider', function () {
         });
 
         it('includes response time in error result', function () {
-            $provider = new ConcreteTestProvider();
+            $provider = new ConcreteTestProvider;
 
             $result = $provider->callSafeExecute(function () {
                 throw new RuntimeException('fail');
@@ -121,31 +121,31 @@ describe('AbstractProvider', function () {
 
     describe('reverseIp()', function () {
         it('reverses a standard IPv4 address', function () {
-            $provider = new ConcreteTestProvider();
+            $provider = new ConcreteTestProvider;
 
             expect($provider->callReverseIp('1.2.3.4'))->toBe('4.3.2.1');
         });
 
         it('reverses a loopback address', function () {
-            $provider = new ConcreteTestProvider();
+            $provider = new ConcreteTestProvider;
 
             expect($provider->callReverseIp('127.0.0.1'))->toBe('1.0.0.127');
         });
 
         it('reverses all-zeros', function () {
-            $provider = new ConcreteTestProvider();
+            $provider = new ConcreteTestProvider;
 
             expect($provider->callReverseIp('0.0.0.0'))->toBe('0.0.0.0');
         });
 
         it('reverses 255.255.255.255', function () {
-            $provider = new ConcreteTestProvider();
+            $provider = new ConcreteTestProvider;
 
             expect($provider->callReverseIp('255.255.255.255'))->toBe('255.255.255.255');
         });
 
         it('reverses a typical public IP', function () {
-            $provider = new ConcreteTestProvider();
+            $provider = new ConcreteTestProvider;
 
             expect($provider->callReverseIp('192.168.1.100'))->toBe('100.1.168.192');
         });
@@ -153,7 +153,7 @@ describe('AbstractProvider', function () {
 
     describe('getName()', function () {
         it('returns the concrete provider name', function () {
-            $provider = new ConcreteTestProvider();
+            $provider = new ConcreteTestProvider;
 
             expect($provider->getName())->toBe('test_provider');
         });

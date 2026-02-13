@@ -2,8 +2,8 @@
 
 use TorrentPier\Spam\Checker\ContentChecker;
 use TorrentPier\Spam\Decision;
-use TorrentPier\Spam\ProviderResult;
 use TorrentPier\Spam\Provider\ContentProviderInterface;
+use TorrentPier\Spam\ProviderResult;
 
 // config() should already be mocked from Pest.php or UserCheckerTest;
 // if not, mock it here for SpamLogger suppression

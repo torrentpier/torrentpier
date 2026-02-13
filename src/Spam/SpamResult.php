@@ -21,7 +21,6 @@ class SpamResult
     private array $providerResults;
 
     private Decision $decision;
-
     private ?int $logId = null;
 
     private function __construct(Decision $decision, array $providerResults = [])
@@ -133,7 +132,7 @@ class SpamResult
         return [
             'decision' => $this->decision->name,
             'total_time_ms' => $this->getTotalTimeMs(),
-            'providers' => array_map(static fn(ProviderResult $r) => [
+            'providers' => array_map(static fn (ProviderResult $r) => [
                 'provider' => $r->providerName,
                 'decision' => $r->decision->name,
                 'reason' => $r->reason,

@@ -24,7 +24,7 @@ class TestableDnsBlacklistProvider extends DnsBlacklistProvider
 describe('DnsBlacklistProvider', function () {
     describe('getName()', function () {
         it('returns dns_blacklist', function () {
-            $provider = new DnsBlacklistProvider();
+            $provider = new DnsBlacklistProvider;
 
             expect($provider->getName())->toBe('dns_blacklist');
         });
@@ -32,7 +32,7 @@ describe('DnsBlacklistProvider', function () {
 
     describe('isEnabled()', function () {
         it('is disabled by default', function () {
-            $provider = new DnsBlacklistProvider();
+            $provider = new DnsBlacklistProvider;
 
             expect($provider->isEnabled())->toBeFalse();
         });

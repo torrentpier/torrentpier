@@ -79,13 +79,9 @@ class SpamPhraseProvider extends AbstractProvider implements UserProviderInterfa
         });
     }
 
-    public function submitSpam(string|int $usernameOrUserId, string $emailOrMessage, string|array $ipOrExtra = []): void
-    {
-    }
+    public function submitSpam(string|int $usernameOrUserId, string $emailOrMessage, string|array $ipOrExtra = []): void {}
 
-    public function submitHam(int $userId, string $message, array $extra = []): void
-    {
-    }
+    public function submitHam(int $userId, string $message, array $extra = []): void {}
 
     private function matchesPhrase(string $text): ?string
     {

@@ -24,7 +24,7 @@ class TestableProjectHoneyPotProvider extends ProjectHoneyPotProvider
 describe('ProjectHoneyPotProvider', function () {
     describe('getName()', function () {
         it('returns project_honeypot', function () {
-            $provider = new ProjectHoneyPotProvider();
+            $provider = new ProjectHoneyPotProvider;
 
             expect($provider->getName())->toBe('project_honeypot');
         });
@@ -32,7 +32,7 @@ describe('ProjectHoneyPotProvider', function () {
 
     describe('isEnabled()', function () {
         it('is disabled by default', function () {
-            $provider = new ProjectHoneyPotProvider();
+            $provider = new ProjectHoneyPotProvider;
 
             expect($provider->isEnabled())->toBeFalse();
         });

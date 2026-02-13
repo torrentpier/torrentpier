@@ -33,7 +33,7 @@ class BannedUsersProvider extends AbstractProvider implements UserProviderInterf
             $ipMatch = DB()->fetch_row(
                 'SELECT u.user_id FROM ' . BB_USERS . ' u'
                 . ' INNER JOIN ' . BB_BANLIST . ' b ON b.ban_userid = u.user_id'
-                . " WHERE u.user_reg_ip = '{$ipSql}' LIMIT 1"
+                . " WHERE u.user_reg_ip = '{$ipSql}' LIMIT 1",
             );
 
             if ($ipMatch) {
@@ -50,7 +50,7 @@ class BannedUsersProvider extends AbstractProvider implements UserProviderInterf
                 $emailMatch = DB()->fetch_row(
                     'SELECT u.user_id FROM ' . BB_USERS . ' u'
                     . ' INNER JOIN ' . BB_BANLIST . ' b ON b.ban_userid = u.user_id'
-                    . " WHERE u.user_email = '{$emailSql}' LIMIT 1"
+                    . " WHERE u.user_email = '{$emailSql}' LIMIT 1",
                 );
 
                 if ($emailMatch) {
@@ -74,7 +74,5 @@ class BannedUsersProvider extends AbstractProvider implements UserProviderInterf
         });
     }
 
-    public function submitSpam(string $username, string $email, string $ip): void
-    {
-    }
+    public function submitSpam(string $username, string $email, string $ip): void {}
 }

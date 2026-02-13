@@ -44,7 +44,7 @@ beforeAll(function () {
 describe('AkismetProvider', function () {
     describe('getName()', function () {
         it('returns akismet', function () {
-            $provider = new AkismetProvider();
+            $provider = new AkismetProvider;
 
             expect($provider->getName())->toBe('akismet');
         });
@@ -52,7 +52,7 @@ describe('AkismetProvider', function () {
 
     describe('isEnabled()', function () {
         it('is disabled by default', function () {
-            $provider = new AkismetProvider();
+            $provider = new AkismetProvider;
 
             expect($provider->isEnabled())->toBeFalse();
         });
@@ -125,9 +125,9 @@ describe('AkismetProvider', function () {
     describe('checkContent() - Error Handling', function () {
         it('returns Allowed when Akismet API fails (safeExecute)', function () {
             $mockHandler = new MockHandler([
-                new \GuzzleHttp\Exception\ConnectException(
+                new GuzzleHttp\Exception\ConnectException(
                     'Connection refused',
-                    new \GuzzleHttp\Psr7\Request('POST', 'https://test.rest.akismet.com/1.1/comment-check'),
+                    new GuzzleHttp\Psr7\Request('POST', 'https://test.rest.akismet.com/1.1/comment-check'),
                 ),
             ]);
 
