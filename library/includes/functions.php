@@ -2011,3 +2011,97 @@ function infoByIP(string $ipAddress, int $port = 0): array
 
     return $data;
 }
+
+/**
+ * Check user registration data against spam providers
+ */
+function spam_check_user(string $username, string $email, string $ip): TorrentPier\Spam\SpamResult
+{
+    if (!config()->get('spam.enabled')) {
+        return TorrentPier\Spam\SpamResult::allowed();
+    }
+
+    try {
+        static $checker = null;
+
+        if ($checker === null) {
+            $providers = [];
+            $spamConfig = config()->getSection('spam');
+
+            // BannedUsers — always first, local + fast
+            $cfg = $spamConfig['providers']['banned_users'] ?? [];
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\BannedUsersProvider($cfg);
+            }
+
+            // SpamPhrases
+            $cfg = $spamConfig['providers']['spam_phrases'] ?? [];
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\SpamPhraseProvider($cfg);
+            }
+
+            // StopForumSpam
+            $cfg = $spamConfig['providers']['stop_forum_spam'] ?? [];
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\StopForumSpamProvider($cfg);
+            }
+
+            // Project Honey Pot
+            $cfg = $spamConfig['providers']['project_honeypot'] ?? [];
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\ProjectHoneyPotProvider($cfg);
+            }
+
+            // DNS Blacklists
+            $cfg = $spamConfig['providers']['dns_blacklist'] ?? [];
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\DnsBlacklistProvider($cfg);
+            }
+
+            $shortCircuit = (bool)($spamConfig['short_circuit'] ?? true);
+            $checker = new TorrentPier\Spam\Checker\UserChecker($providers, $shortCircuit);
+        }
+
+        return $checker->check($username, $email, $ip);
+    } catch (Throwable) {
+        return TorrentPier\Spam\SpamResult::allowed();
+    }
+}
+
+/**
+ * Check content against spam providers
+ */
+function spam_check_content(int $userId, string $message, array $extra = []): TorrentPier\Spam\SpamResult
+{
+    if (!config()->get('spam.enabled')) {
+        return TorrentPier\Spam\SpamResult::allowed();
+    }
+
+    try {
+        static $checker = null;
+
+        if ($checker === null) {
+            $providers = [];
+            $spamConfig = config()->getSection('spam');
+
+            // SpamPhrases (also a content provider)
+            $cfg = $spamConfig['providers']['spam_phrases'] ?? [];
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\SpamPhraseProvider($cfg);
+            }
+
+            // Akismet
+            $cfg = $spamConfig['providers']['akismet'] ?? [];
+            if (!empty($cfg['enabled'])) {
+                $providers[] = new TorrentPier\Spam\Provider\AkismetProvider($cfg);
+            }
+
+            $shortCircuit = (bool)($spamConfig['short_circuit'] ?? true);
+            $checker = new TorrentPier\Spam\Checker\ContentChecker($providers, $shortCircuit);
+        }
+
+        return $checker->check($userId, $message, $extra);
+    } catch (Throwable) {
+        return TorrentPier\Spam\SpamResult::allowed();
+    }
+}

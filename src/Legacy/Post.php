@@ -20,6 +20,9 @@ use TorrentPier\Validate;
  */
 class Post
 {
+    /** Spam log entry ID from the last prepare_post() content check */
+    private static ?int $spamLogId = null;
+
     /**
      * Prepare message for posting
      *
@@ -69,6 +72,20 @@ class Post
 
         if (IS_GUEST && !config()->get('forum.captcha.disabled') && !bb_captcha('check')) {
             $error_msg .= (!empty($error_msg)) ? '<br />' . __('CAPTCHA_WRONG') : __('CAPTCHA_WRONG');
+        }
+
+        // Spam content check
+        self::$spamLogId = null;
+        if (!$error_msg && config()->get('spam.enabled') && (!IS_ADMIN || config()->get('spam.check_admins', true))) {
+            $contentResult = spam_check_content(
+                (int)userdata('user_id'),
+                $message,
+                ['type' => 'post', 'ip' => CLIENT_IP, 'subject' => $subject, 'username' => userdata('username')],
+            );
+            if ($contentResult->isDenied()) {
+                $error_msg .= (!empty($error_msg)) ? '<br />' . __('POST_SPAM_DENIED') : __('POST_SPAM_DENIED');
+            }
+            self::$spamLogId = $contentResult->getLogId();
         }
     }
 
@@ -184,6 +201,12 @@ class Post
 
         if ($mode != 'editpost') {
             $post_id = DB()->sql_nextid();
+
+            // Link spam log entry to the newly created post
+            if (self::$spamLogId !== null) {
+                (new \TorrentPier\Spam\SpamLogger)->linkPost(self::$spamLogId, $post_id);
+                self::$spamLogId = null;
+            }
         }
 
         $sql = ($mode != 'editpost') ? 'INSERT INTO ' . BB_POSTS_TEXT . " (post_id, post_text) VALUES ({$post_id}, '{$post_message}')" : 'UPDATE ' . BB_POSTS_TEXT . " SET post_text = '{$post_message}' WHERE post_id = {$post_id}";

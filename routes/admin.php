@@ -47,6 +47,7 @@ return static function (Router $router): void {
         $group->any('/admin_robots.php', new LegacyAdapter($adminPath . '/admin_robots.php'));
         $group->any('/admin_sitemap.php', new LegacyAdapter($adminPath . '/admin_sitemap.php'));
         $group->any('/admin_smilies.php', new LegacyAdapter($adminPath . '/admin_smilies.php'));
+        $group->any('/admin_spam_log.php', new LegacyAdapter($adminPath . '/admin_spam_log.php'));
         $group->any('/admin_terms.php', new LegacyAdapter($adminPath . '/admin_terms.php'));
         $group->any('/admin_ug_auth.php', new LegacyAdapter($adminPath . '/admin_ug_auth.php'));
         $group->any('/admin_user_ban.php', new LegacyAdapter($adminPath . '/admin_user_ban.php'));

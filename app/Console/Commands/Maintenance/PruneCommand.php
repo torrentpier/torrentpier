@@ -43,6 +43,7 @@ class PruneCommand extends AbstractMaintenanceCommand
      */
     private const array PRUNE_TYPES = [
         'logs' => 'Action and moderation logs',
+        'spam_log' => 'Spam check log',
         'pm' => 'Private messages',
         'sessions' => 'Expired user sessions',
         'search' => 'Search result cache',
@@ -57,7 +58,7 @@ class PruneCommand extends AbstractMaintenanceCommand
                 'type',
                 't',
                 InputOption::VALUE_REQUIRED,
-                'Type to prune: logs, pm, sessions, search',
+                'Type to prune: logs, spam_log, pm, sessions, search',
             )
             ->addOption(
                 'days',
@@ -88,6 +89,7 @@ class PruneCommand extends AbstractMaintenanceCommand
 
                     Available prune types:
                       <info>logs</info>     - Action and moderation logs (requires --days)
+                      <info>spam_log</info> - Spam check log (requires --days)
                       <info>pm</info>       - Private messages (requires --days)
                       <info>sessions</info> - Expired user sessions (automatic threshold)
                       <info>search</info>   - Search result cache (older than 3 hours)
@@ -118,7 +120,7 @@ class PruneCommand extends AbstractMaintenanceCommand
         }
 
         // Validate days for types that require it
-        if (\in_array($type, ['logs', 'pm']) && $days === null) {
+        if (\in_array($type, ['logs', 'spam_log', 'pm']) && $days === null) {
             $this->error("The --days option is required for '{$type}' type.");
             $this->comment("Example: php bull maintenance:prune --type={$type} --days=30");
 
@@ -231,6 +233,7 @@ class PruneCommand extends AbstractMaintenanceCommand
     {
         return match ($type) {
             'logs' => $this->database->table(BB_LOG)->count('*'),
+            'spam_log' => eloquent()->table('spam_log')->count(),
             'pm' => $this->database->table(BB_PRIVMSGS)->count('*'),
             'sessions' => $this->database->table(BB_SESSIONS)->count('*'),
             'search' => $this->database->table(BB_SEARCH)->count('*'),
@@ -245,6 +248,7 @@ class PruneCommand extends AbstractMaintenanceCommand
     {
         return match ($type) {
             'logs' => 'log_days_keep: ' . ($this->config->get('log_days_keep') ?: 'not set'),
+            'spam_log' => 'spam.logging.retention_days: ' . ($this->config->get('spam.logging.retention_days') ?: 'not set'),
             'pm' => 'pm_days_keep: ' . ($this->config->get('pm_days_keep') ?: 'not set'),
             'sessions' => 'user_session_duration: ' . $this->config->get('auth.sessions.user_duration') . 's',
             'search' => 'expires after 3 hours',
@@ -259,6 +263,7 @@ class PruneCommand extends AbstractMaintenanceCommand
     {
         return match ($type) {
             'logs' => $this->getLogsCount($days),
+            'spam_log' => $this->getSpamLogCount($days),
             'pm' => $this->getPmCount($days),
             'sessions' => $this->getSessionsCount(),
             'search' => $this->getSearchCount(),
@@ -340,6 +345,7 @@ class PruneCommand extends AbstractMaintenanceCommand
     {
         return match ($type) {
             'logs' => $this->pruneLogs($days),
+            'spam_log' => $this->pruneSpamLog($days),
             'pm' => $this->prunePm($days),
             'sessions' => $this->pruneSessions(),
             'search' => $this->pruneSearch(),
@@ -356,6 +362,30 @@ class PruneCommand extends AbstractMaintenanceCommand
         $this->database->query('DELETE FROM ' . BB_LOG . " WHERE log_time < {$cutoff}");
 
         return $this->database->affected_rows();
+    }
+
+    /**
+     * Get spam log count for given days
+     */
+    private function getSpamLogCount(int $days): int
+    {
+        $cutoff = TIMENOW - 86400 * $days;
+
+        return eloquent()->table('spam_log')
+            ->where('check_time', '<', $cutoff)
+            ->count();
+    }
+
+    /**
+     * Prune spam log
+     */
+    private function pruneSpamLog(int $days): int
+    {
+        $cutoff = TIMENOW - 86400 * $days;
+
+        return eloquent()->table('spam_log')
+            ->where('check_time', '<', $cutoff)
+            ->delete();
     }
 
     /**

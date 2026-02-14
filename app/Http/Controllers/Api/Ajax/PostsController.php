@@ -382,6 +382,18 @@ class PostsController
             }
         }
 
+        // Spam content check
+        if (config()->get('spam.enabled') && (!IS_ADMIN || config()->get('spam.check_admins', true))) {
+            $contentResult = spam_check_content(
+                (int)userdata('user_id'),
+                $message,
+                ['type' => 'post', 'ip' => CLIENT_IP, 'subject' => $post['topic_title'] ?? '', 'username' => userdata('username')],
+            );
+            if ($contentResult->isDenied()) {
+                return $this->error(__('POST_SPAM_DENIED'));
+            }
+        }
+
         // Anonymous posting support
         $anonymousMode = 0;
         if (!IS_GUEST) {
@@ -394,6 +406,11 @@ class PostsController
         DB()->sql_query('INSERT INTO ' . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip, post_anonymous) VALUES ($topicId, " . $post['forum_id'] . ', ' . userdata('user_id') . ", '" . TIMENOW . "', '" . USER_IP . "', {$anonymousMode})");
         $postId = DB()->sql_nextid();
         DB()->sql_query('INSERT INTO ' . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($postId, '" . DB()->escape($message) . "')");
+
+        // Link spam log entry to the new post
+        if (isset($contentResult) && $contentResult->getLogId()) {
+            (new \TorrentPier\Spam\SpamLogger)->linkPost($contentResult->getLogId(), $postId);
+        }
 
         Post::update_post_stats('reply', $post, $post['forum_id'], $topicId, $postId, userdata('user_id'));
 
