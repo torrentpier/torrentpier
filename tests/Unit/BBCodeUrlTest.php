@@ -5,8 +5,9 @@
  * The nofollow_url() method calls config() which isn't bootstrapped in unit tests.
  * We define it in the TorrentPier\Legacy namespace so it takes priority.
  */
+
 namespace TorrentPier\Legacy {
-    if (!function_exists('TorrentPier\Legacy\config')) {
+    if (!\function_exists('TorrentPier\Legacy\config')) {
         function config()
         {
             return new class {
@@ -25,7 +26,6 @@ namespace TorrentPier\Legacy {
 }
 
 namespace {
-
     use TorrentPier\Legacy\BBCode;
 
     /**
@@ -43,7 +43,7 @@ namespace {
          */
         function parseBBCode(string $text): string
         {
-            $bbcode = new BBCode();
+            $bbcode = new BBCode;
             $reflection = new ReflectionMethod($bbcode, 'parse');
 
             return $reflection->invoke($bbcode, $text);
