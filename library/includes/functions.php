@@ -635,7 +635,15 @@ function str_short($text, $max_length): string
         return $text ?? '';
     }
 
-    return Str::limit($text, $max_length);
+    // Decode HTML entities before truncating so that encoded characters
+    // (e.g. &lt; &gt; &amp;) count as single characters, not 4-5 each.
+    // Re-encode after truncation to maintain pre-escaped storage convention.
+    $decoded = htmlspecialchars_decode($text, ENT_QUOTES);
+    if (mb_strlen($decoded) <= $max_length) {
+        return $text;
+    }
+
+    return htmlspecialchars(Str::limit($decoded, $max_length), ENT_QUOTES, DEFAULT_CHARSET, false);
 }
 
 function generate_user_info($row, bool $have_auth = IS_ADMIN): array
