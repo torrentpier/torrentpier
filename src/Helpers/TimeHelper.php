@@ -11,6 +11,7 @@
 namespace TorrentPier\Helpers;
 
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Exception;
 
 /**
@@ -118,19 +119,25 @@ class TimeHelper
     /**
      * Calculate age from a birthday and return a human-readable format
      *
+     * Returns absolute age (e.g. "15 years" / "15 лет") without "ago" suffix.
+     *
      * @param string|null $date Birthday date string
-     * @param float|null $timezoneOffset Timezone offset in hours (null = use board default)
      * @return string Human-readable age or empty string
      */
-    public static function birthdayAge(?string $date, ?float $timezoneOffset = null): string
+    public static function birthdayAge(?string $date): string
     {
         if (empty($date)) {
             return '';
         }
 
-        $timezoneOffset ??= (float)config()->get('localization.board_timezone', 0);
-        $now = \defined('TIMENOW') ? TIMENOW : time();
+        $locale = config()->get('localization.default_lang', 'en');
 
-        return self::humanTime(strtotime($date, $now + (3600 * $timezoneOffset)));
+        try {
+            $birthday = Carbon::parse($date);
+
+            return $birthday->locale($locale)->diffForHumans(null, CarbonInterface::DIFF_ABSOLUTE);
+        } catch (Exception) {
+            return '';
+        }
     }
 }

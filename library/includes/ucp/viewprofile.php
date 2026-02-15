@@ -88,6 +88,14 @@ if ($banInfo = getBanInfo((int)$profiledata['user_id'])) {
     ]);
 }
 
+$birthdayTs = false;
+if (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && !str_starts_with((string)$profiledata['user_birthday'], '1900-01-01')) {
+    $birthdayTs = strtotime((string)$profiledata['user_birthday']);
+    if ($birthdayTs === false) {
+        $birthdayTs = false;
+    }
+}
+
 template()->assign_vars([
     'PAGE_TITLE' => sprintf(__('VIEWING_USER_PROFILE'), $profiledata['username']),
     'CANONICAL_URL' => make_url(url()->member($profiledata['user_id'], $profiledata['username'])),
@@ -111,9 +119,10 @@ template()->assign_vars([
     'TWITTER' => $profiledata['user_twitter'],
     'USER_POINTS' => $profiledata['user_points'],
     'GENDER' => config()->get('gender') ? __('GENDER_SELECT')[$profiledata['user_gender']] : '',
-    'BIRTHDAY' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? $profiledata['user_birthday'] : '',
+    'BIRTHDAY' => $birthdayTs ? bb_date($birthdayTs, 'd-M-Y', false) : '',
+    'BIRTHDAY_DATE' => $birthdayTs ? date('Y-m-d', $birthdayTs) : '',
     'BIRTHDAY_ICON' => user_birthday_icon($profiledata['user_birthday'], $profiledata['user_id']),
-    'AGE' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? birthday_age($profiledata['user_birthday']) : '',
+    'AGE' => $birthdayTs ? birthday_age((string)$profiledata['user_birthday']) : '',
 
     'L_VIEWING_PROFILE' => sprintf(__('VIEWING_USER_PROFILE'), $profiledata['username']),
     'L_MY_PROFILE' => sprintf(__('VIEWING_MY_PROFILE'), SETTINGS_URL),

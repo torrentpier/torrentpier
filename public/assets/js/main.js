@@ -406,8 +406,18 @@ Ajax.prototype = {
     var inputsHtml = $('#editable-tpl-' + editableType).html();
     $editable.hide().after(inputsHtml);
     var $inputs = $('.editable-inputs', $root);
+    var currentText = $.trim($editable.text());
     if (editableType === 'input' || editableType === 'textarea') {
-      $('.editable-value', $inputs).val($.trim($editable.text()));
+      $('.editable-value', $inputs).val(currentText);
+    }
+    var $select = $('select.editable-value', $inputs);
+    if ($select.length) {
+      $select.find('option').each(function () {
+        if ($.trim($(this).text()) === currentText) {
+          $select.val($(this).val());
+          return false;
+        }
+      });
     }
     $('input.editable-submit', $inputs).click(function () {
       var params = ajax.params[rootElementId];
