@@ -12,8 +12,6 @@ declare(strict_types=1);
  * Requires a real MySQL/MariaDB connection configured in .env
  */
 
-use TorrentPier\Database\Database;
-
 // Use a dedicated test topic_id range to avoid conflicts
 const TEST_TOPIC_ID_BASE = 9999000;
 
@@ -45,7 +43,7 @@ beforeEach(function () {
             "mysql:host={$host};port={$port};dbname={$dbname};charset=utf8mb4",
             $user,
             $pass,
-            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],
         );
     } catch (PDOException $e) {
         $this->markTestSkipped('MySQL connection not available: ' . $e->getMessage());
@@ -89,6 +87,7 @@ function findByUnhex(PDO $pdo, string $infoHashHex): ?array
                OR SUBSTRING(info_hash_v2, 1, 20) = UNHEX('{$infoHashHex}')
             LIMIT 1";
     $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+
     return $row ?: null;
 }
 
@@ -107,6 +106,7 @@ function findByOldEscape(PDO $pdo, string $rawInfoHash): ?array
             WHERE info_hash = '{$escaped}'
             LIMIT 1";
     $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+
     return $row ?: null;
 }
 
