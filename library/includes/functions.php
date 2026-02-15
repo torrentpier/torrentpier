@@ -1911,8 +1911,8 @@ function clean_tor_dirname(string $dirname): string
 function user_birthday_icon($user_birthday, $user_id): string
 {
     $current_date = bb_date(TIMENOW, 'md', false);
-    $user_birthday = ($user_id != GUEST_UID && !empty($user_birthday) && $user_birthday != '1900-01-01')
-        ? bb_date(strtotime($user_birthday), 'md', false) : false;
+    $user_birthday = ($user_id != GUEST_UID && !empty($user_birthday) && !str_starts_with((string)$user_birthday, '1900-01-01'))
+        ? bb_date(strtotime((string)$user_birthday), 'md', false) : false;
 
     if (config()->get('birthday_enabled') && $current_date == $user_birthday) {
         return '<img src="' . theme_images('icon_birthday') . '" alt="' . __('HAPPY_BIRTHDAY') . '" title="' . __('HAPPY_BIRTHDAY') . '" border="0" />';

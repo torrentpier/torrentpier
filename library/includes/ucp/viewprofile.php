@@ -111,9 +111,10 @@ template()->assign_vars([
     'TWITTER' => $profiledata['user_twitter'],
     'USER_POINTS' => $profiledata['user_points'],
     'GENDER' => config()->get('gender') ? __('GENDER_SELECT')[$profiledata['user_gender']] : '',
-    'BIRTHDAY' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? $profiledata['user_birthday'] : '',
+    'BIRTHDAY' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && !str_starts_with((string)$profiledata['user_birthday'], '1900-01-01')) ? bb_date(strtotime((string)$profiledata['user_birthday']), 'd-M-Y', false) : '',
+    'BIRTHDAY_DATE' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && !str_starts_with((string)$profiledata['user_birthday'], '1900-01-01')) ? date('Y-m-d', strtotime((string)$profiledata['user_birthday'])) : '',
     'BIRTHDAY_ICON' => user_birthday_icon($profiledata['user_birthday'], $profiledata['user_id']),
-    'AGE' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? birthday_age($profiledata['user_birthday']) : '',
+    'AGE' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && !str_starts_with((string)$profiledata['user_birthday'], '1900-01-01')) ? birthday_age((string)$profiledata['user_birthday']) : '',
 
     'L_VIEWING_PROFILE' => sprintf(__('VIEWING_USER_PROFILE'), $profiledata['username']),
     'L_MY_PROFILE' => sprintf(__('VIEWING_MY_PROFILE'), SETTINGS_URL),
