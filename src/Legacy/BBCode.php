@@ -234,10 +234,22 @@ class BBCode
 
         // [url]
         $url_exp = '[\w\#!$%&~/.\-;:=,?@\p{Cyrillic}()\[\]+]+?';
+
+        // URL expression for [url=PARAM] attribute context:
+        // Uses balanced bracket matching (\[[^\]]*\]) instead of allowing bare ]
+        // to prevent ] inside URLs from being mistaken for the closing ] of [url=...]
+        $url_exp_attr = '(?:[\w\#!$%&~/.\-;:=,?@\p{Cyrillic}()+]|\[[^\]]*\])+';
+
+        // [url]content[/url] — URL as content (terminated by [/url], no bracket ambiguity)
         $text = preg_replace_callback("#\\[url\\]((?:https?://)?{$url_exp})\\[/url\\]#isu", [&$this, 'url_callback'], $text);
         $text = preg_replace_callback("#\\[url\\](www\\.{$url_exp})\\[/url\\]#isu", [&$this, 'url_callback'], $text);
-        $text = preg_replace_callback("#\\[url=((?:https?://)?{$url_exp})\\]([^?\n\t].*?)\\[/url\\]#isu", [&$this, 'url_callback'], $text);
-        $text = preg_replace_callback("#\\[url=(www\\.{$url_exp})\\]([^?\n\t].*?)\\[/url\\]#isu", [&$this, 'url_callback'], $text);
+
+        // [url="PARAM"]text[/url] — quoted URL attribute (brackets safe inside quotes)
+        $text = preg_replace_callback('#\[url="([^"]+)"\]([^?\n\t].*?)\[/url\]#isu', [&$this, 'url_callback'], $text);
+
+        // [url=PARAM]text[/url] — unquoted URL attribute (balanced bracket matching)
+        $text = preg_replace_callback("#\\[url=((?:https?://)?{$url_exp_attr})\\]([^?\\n\\t].*?)\\[/url\\]#isu", [&$this, 'url_callback'], $text);
+        $text = preg_replace_callback("#\\[url=(www\\.{$url_exp_attr})\\]([^?\\n\\t].*?)\\[/url\\]#isu", [&$this, 'url_callback'], $text);
 
         // Normalize block level tags wrapped with new lines
         $block_tags = implode('|', $this->block_tags);
@@ -273,6 +285,11 @@ class BBCode
         $url = trim($m[1]);
         $url_name = isset($m[2]) ? trim($m[2]) : $url;
         $url_parse = parse_url($url);
+
+        // Reject dangerous URI schemes (javascript:, data:, vbscript:, etc.)
+        if (isset($url_parse['scheme']) && !\in_array(strtolower($url_parse['scheme']), ['http', 'https'], true)) {
+            return htmlspecialchars($url_name, ENT_QUOTES);
+        }
 
         if (!isset($url_parse['scheme']) && isset($url_parse['path'])) {
             if (!preg_match('/^([a-zA-Z0-9_\-\.]+\.php)(\?[^#]*)?$/', $url_parse['path'])) {
