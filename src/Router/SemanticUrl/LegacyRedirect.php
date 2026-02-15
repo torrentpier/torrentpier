@@ -47,6 +47,7 @@ class LegacyRedirect
         'sendpassword' => ['needs_id' => false, 'url' => '/password-recovery'],
         'bonus' => ['needs_id' => false, 'url' => '/profile/bonus'],
         'watch' => ['needs_id' => false, 'url' => '/profile/watchlist'],
+        'two-step' => ['needs_id' => false, 'url' => '/profile/two-step'],
         'activate' => ['needs_id' => false, 'url' => '/activate', 'key_param' => 'act_key'],
     ];
 

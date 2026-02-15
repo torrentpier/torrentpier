@@ -172,6 +172,15 @@ function censor(): TorrentPier\Censor
 }
 
 /**
+ * Two-Factor Authentication service helper
+ * @throws BindingResolutionException
+ */
+function two_factor(): TorrentPier\Auth\TwoFactor\TwoFactorAuth
+{
+    return app(TorrentPier\Auth\TwoFactor\TwoFactorAuth::class);
+}
+
+/**
  * Whoops error handler singleton
  * @throws BindingResolutionException
  */

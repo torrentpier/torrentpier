@@ -114,6 +114,20 @@ class ManageUserController
                 $info = __('USER_ACTIVATE_OFF');
                 break;
 
+            case '2fa_disable':
+                if (userdata('user_id') == $userId) {
+                    return $this->error(__('TWO_FACTOR_ADMIN_DISABLE_SELF'));
+                }
+
+                if (empty($body['confirmed'])) {
+                    return $this->promptConfirm(__('TWO_FACTOR_ADMIN_DISABLE_CONFIRM'));
+                }
+
+                two_factor()->disableForUser($userId);
+                Sessions::delete_user_sessions($userId);
+                $info = __('TWO_FACTOR_DISABLED_SUCCESS');
+                break;
+
             default:
                 return $this->error('Invalid mode');
         }

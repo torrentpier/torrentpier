@@ -1,0 +1,38 @@
+<h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
+
+<p class="nav">
+    <a href="{{ U_INDEX }}">{{ __('HOME') }}</a>
+    &raquo; <a href="{{ U_USER_PROFILE }}">{{ __('EDIT_PROFILE') }}</a>
+    &raquo; {{ __('TWO_FACTOR_REGENERATE') }}
+</p>
+
+<form method="post" action="{{ FORUM_PATH }}profile/two-step?action=regenerate" class="tokenized">
+
+<table class="forumline">
+    <col class="row1" width="35%">
+    <col class="row2" width="65%">
+    <tbody class="pad_4">
+    <tr>
+        <th colspan="2">{{ __('TWO_FACTOR_REGENERATE') }}</th>
+    </tr>
+    <tr>
+        <td colspan="2" class="row2 tCenter pad_6">
+            <p class="warnColor1 bold">{{ __('TWO_FACTOR_REGENERATE_WARNING') }}</p>
+        </td>
+    </tr>
+    <tr>
+        <td class="tRight">{{ __('TWO_FACTOR_ENTER_CODE') }}:</td>
+        <td>
+            <input type="text" name="totp_code" size="10" maxlength="6" inputmode="numeric" pattern="[0-9]{6}" autocomplete="one-time-code" autofocus class="post" style="font-size: 1.2em; text-align: center; letter-spacing: 4px;"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="catBottom" colspan="2">
+            <input type="submit" name="regenerate_codes" value="{{ __('TWO_FACTOR_REGENERATE_CONFIRM') }}" class="main"/>&nbsp;&nbsp;
+            <a href="{{ U_USER_PROFILE }}">{{ __('CANCEL') }}</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</form>

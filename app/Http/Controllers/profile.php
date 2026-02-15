@@ -82,6 +82,13 @@ switch ($mode) {
         require UCP_DIR . '/topic_watch.php';
         break;
 
+    case 'two-step':
+        if (IS_GUEST) {
+            login_redirect();
+        }
+        require UCP_DIR . '/twofactor.php';
+        break;
+
     default:
         bb_die('Invalid mode');
 }

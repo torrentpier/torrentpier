@@ -64,6 +64,8 @@ return function (Router $router): void {
         ->middleware($auth);
     $router->any('/profile/watchlist[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'watch']))
         ->middleware($auth);
+    $router->any('/profile/two-step[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/profile.php', 'profile', options: ['mode' => 'two-step']))
+        ->middleware($auth);
 
     // Members: /members (list), /members/slug.123 (profile), /members/slug.123/email
     $router->any('/members[/]', new LegacyAdapter($basePath . '/app/Http/Controllers/memberlist.php'))

@@ -207,6 +207,13 @@ class User
                 $userdata = get_userdata(GUEST_UID, false, true);
             }
 
+            // Users with 2FA enabled cannot autologin — force login flow
+            if ($login && !empty($userdata['totp_enabled']) && config()->get('auth.two_factor.enabled')) {
+                $userdata = get_userdata(GUEST_UID, false, true);
+                $login = false;
+                $this->set_session_cookies(GUEST_UID);
+            }
+
             $this->session_create($userdata, true);
         }
 
@@ -396,6 +403,17 @@ class User
                 // Check password
                 if (!$this->checkPassword($password, $userdata)) {
                     return [];
+                }
+
+                // Check if 2FA is enabled
+                if (config()->get('auth.two_factor.enabled') && two_factor()->isEnabled($userdata)) {
+                    $pendingToken = Str::random(32);
+                    CACHE('bb_cache')->set('2fa_pending_' . $pendingToken, [
+                        'user_id' => $userdata['user_id'],
+                        'mod_admin_login' => $mod_admin_login,
+                        'ip' => USER_IP,
+                    ], config()->get('auth.two_factor.pending_ttl'));
+                    return ['2fa_required' => true, '2fa_token' => $pendingToken];
                 }
 
                 // Start mod/admin session
