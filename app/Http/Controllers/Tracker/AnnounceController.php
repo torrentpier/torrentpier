@@ -244,13 +244,11 @@ class AnnounceController
             $tor_type = $lp_info['tor_type'];
             $hybrid_unrecord = $lp_info['hybrid_unrecord'] ?? false;
         } else {
-            $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-
             /**
              * Currently torrent clients send truncated v2 hashes (the design raises questions).
              * @see https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
              */
-            $info_hash_where = "WHERE tor.info_hash = '{$info_hash_sql}' OR SUBSTRING(tor.info_hash_v2, 1, 20) = '{$info_hash_sql}'";
+            $info_hash_where = "WHERE tor.info_hash = UNHEX('{$info_hash_hex}') OR SUBSTRING(tor.info_hash_v2, 1, 20) = UNHEX('{$info_hash_hex}')";
 
             $passkey_sql = DB()->escape($passkey);
 

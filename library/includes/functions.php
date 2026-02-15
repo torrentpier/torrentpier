@@ -1838,13 +1838,11 @@ function hash_search($hash)
         bb_die(sprintf(__('HASH_INVALID'), $hash));
     }
 
-    $info_hash = DB()->escape(pack('H*', $hash));
-
     // Check info_hash version
     if (mb_strlen($hash, DEFAULT_CHARSET) == 40) {
-        $info_hash_where = "WHERE info_hash = '{$info_hash}'";
+        $info_hash_where = "WHERE info_hash = UNHEX('{$hash}')";
     } elseif (mb_strlen($hash, DEFAULT_CHARSET) == 64) {
-        $info_hash_where = "WHERE info_hash_v2 = '{$info_hash}'";
+        $info_hash_where = "WHERE info_hash_v2 = UNHEX('{$hash}')";
     } else {
         bb_die(sprintf(__('HASH_INVALID'), $hash));
     }
