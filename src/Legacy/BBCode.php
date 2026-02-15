@@ -234,10 +234,22 @@ class BBCode
 
         // [url]
         $url_exp = '[\w\#!$%&~/.\-;:=,?@\p{Cyrillic}()\[\]+]+?';
+
+        // URL expression for [url=PARAM] attribute context:
+        // Uses balanced bracket matching (\[[^\]]*\]) instead of allowing bare ]
+        // to prevent ] inside URLs from being mistaken for the closing ] of [url=...]
+        $url_exp_attr = '(?:[\w\#!$%&~/.\-;:=,?@\p{Cyrillic}()+]|\[[^\]]*\])+';
+
+        // [url]content[/url] — URL as content (terminated by [/url], no bracket ambiguity)
         $text = preg_replace_callback("#\\[url\\]((?:https?://)?{$url_exp})\\[/url\\]#isu", [&$this, 'url_callback'], $text);
         $text = preg_replace_callback("#\\[url\\](www\\.{$url_exp})\\[/url\\]#isu", [&$this, 'url_callback'], $text);
-        $text = preg_replace_callback("#\\[url=((?:https?://)?{$url_exp})\\]([^?\n\t].*?)\\[/url\\]#isu", [&$this, 'url_callback'], $text);
-        $text = preg_replace_callback("#\\[url=(www\\.{$url_exp})\\]([^?\n\t].*?)\\[/url\\]#isu", [&$this, 'url_callback'], $text);
+
+        // [url="PARAM"]text[/url] — quoted URL attribute (brackets safe inside quotes)
+        $text = preg_replace_callback('#\[url="([^"]+)"\]([^?\n\t].*?)\[/url\]#isu', [&$this, 'url_callback'], $text);
+
+        // [url=PARAM]text[/url] — unquoted URL attribute (balanced bracket matching)
+        $text = preg_replace_callback("#\\[url=((?:https?://)?{$url_exp_attr})\\]([^?\\n\\t].*?)\\[/url\\]#isu", [&$this, 'url_callback'], $text);
+        $text = preg_replace_callback("#\\[url=(www\\.{$url_exp_attr})\\]([^?\\n\\t].*?)\\[/url\\]#isu", [&$this, 'url_callback'], $text);
 
         // Normalize block level tags wrapped with new lines
         $block_tags = implode('|', $this->block_tags);
