@@ -122,15 +122,15 @@ class Registry
         // Getting info_hash v1
         if (isset($bt_v1)) {
             $info_hash = hash('sha1', Bencode::encode($info), true);
-            $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-            $info_hash_where = "WHERE info_hash = '{$info_hash_sql}'";
+            $info_hash_hex = bin2hex($info_hash);
+            $info_hash_where = "WHERE info_hash = UNHEX('{$info_hash_hex}')";
         }
 
         // Getting info_hash v2
         if (isset($bt_v2)) {
             $info_hash_v2 = hash('sha256', Bencode::encode($info), true);
-            $info_hash_v2_sql = rtrim(DB()->escape($info_hash_v2), ' ');
-            $info_hash_where = "WHERE info_hash_v2 = '{$info_hash_v2_sql}'";
+            $info_hash_v2_hex = bin2hex($info_hash_v2);
+            $info_hash_where = "WHERE info_hash_v2 = UNHEX('{$info_hash_v2_hex}')";
         }
 
         // TorrServer integration

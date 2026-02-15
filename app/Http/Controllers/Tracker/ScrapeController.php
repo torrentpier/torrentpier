@@ -81,7 +81,7 @@ class ScrapeController
                 $infoKey = array_key_first($scrapeCache);
                 $torrents['files'][$infoKey] = $scrapeCache[$infoKey];
             } else {
-                $infoHashes[] = DB()->escape($decodedHash);
+                $infoHashes[] = bin2hex($decodedHash);
             }
         }
 
@@ -95,13 +95,13 @@ class ScrapeController
                 $infoHashes = \array_slice($infoHashes, 0, $maxScrapes);
             }
 
-            $infoHashesSql = implode("', '", $infoHashes);
+            $infoHashesUnhex = implode("'), UNHEX('", $infoHashes);
 
             /**
              * Currently torrent clients send truncated v2 hashes (the design raises questions).
              * @see https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
              */
-            $infoHashWhere = "tor.info_hash IN ('{$infoHashesSql}') OR SUBSTRING(tor.info_hash_v2, 1, 20) IN ('{$infoHashesSql}')";
+            $infoHashWhere = "tor.info_hash IN (UNHEX('{$infoHashesUnhex}')) OR SUBSTRING(tor.info_hash_v2, 1, 20) IN (UNHEX('{$infoHashesUnhex}'))";
 
             $sql = '
                 SELECT tor.info_hash, tor.info_hash_v2, tor.complete_count, snap.seeders, snap.leechers
