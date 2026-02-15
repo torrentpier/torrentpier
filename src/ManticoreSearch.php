@@ -39,26 +39,7 @@ class ManticoreSearch
      */
     public function createIndexes(): bool
     {
-        $indexes = [
-            'topics_rt' => 'CREATE TABLE IF NOT EXISTS topics_rt (
-                id bigint,
-                topic_title text indexed,
-                forum_id int
-            )',
-
-            'posts_rt' => 'CREATE TABLE IF NOT EXISTS posts_rt (
-                id bigint,
-                post_text text indexed,
-                topic_title text indexed,
-                topic_id int,
-                forum_id int
-            )',
-
-            'users_rt' => 'CREATE TABLE IF NOT EXISTS users_rt (
-                id bigint,
-                username string attribute indexed
-            )',
-        ];
+        $indexes = $this->getIndexDefinitions();
 
         foreach ($indexes as $name => $sql) {
             try {
@@ -71,6 +52,82 @@ class ManticoreSearch
         }
 
         return true;
+    }
+
+    /**
+     * Get RT index definitions with proper charset_table for full Cyrillic support
+     *
+     * The default Manticore charset_table (non_cjk) covers standard Russian Cyrillic
+     * (U+0410-U+044F) but does NOT include Ukrainian-specific characters:
+     * - Є/є (U+0404/U+0454)
+     * - І/і (U+0406/U+0456)
+     * - Ї/ї (U+0407/U+0457)
+     * - Ґ/ґ (U+0490/U+0491)
+     *
+     * Without these mappings, Ukrainian characters are treated as word separators,
+     * causing queries like "гвардія" to be split into "гвард" + "я".
+     *
+     * @return array<string, string> Index name => CREATE TABLE SQL
+     */
+    public function getIndexDefinitions(): array
+    {
+        $charsetTable = $this->getCharsetTable();
+
+        return [
+            'topics_rt' => "CREATE TABLE IF NOT EXISTS topics_rt (
+                id bigint,
+                topic_title text indexed,
+                forum_id int
+            ) charset_table='{$charsetTable}'",
+
+            'posts_rt' => "CREATE TABLE IF NOT EXISTS posts_rt (
+                id bigint,
+                post_text text indexed,
+                topic_title text indexed,
+                topic_id int,
+                forum_id int
+            ) charset_table='{$charsetTable}'",
+
+            'users_rt' => "CREATE TABLE IF NOT EXISTS users_rt (
+                id bigint,
+                username string attribute indexed
+            ) charset_table='{$charsetTable}'",
+        ];
+    }
+
+    /**
+     * Get charset_table configuration for Manticore indexes
+     *
+     * Extends the default non_cjk charset with additional Cyrillic characters
+     * used in Ukrainian, Belarusian, and other Slavic languages.
+     *
+     * @see https://manual.manticoresearch.com/Creating_a_table/NLP_and_tokenization/Low-level_tokenization#charset_table
+     */
+    public function getCharsetTable(): string
+    {
+        return implode(', ', [
+            'non_cjk',
+
+            // Ukrainian
+            'U+0404->U+0454', 'U+0454',   // Є -> є
+            'U+0406->U+0456', 'U+0456',   // І -> і
+            'U+0407->U+0457', 'U+0457',   // Ї -> ї
+            'U+0490->U+0491', 'U+0491',   // Ґ -> ґ
+
+            // Belarusian / shared Cyrillic
+            'U+040E->U+045E', 'U+045E',   // Ў -> ў
+
+            // Serbian / Macedonian
+            'U+0402->U+0452', 'U+0452',   // Ђ -> ђ
+            'U+0403->U+0453', 'U+0453',   // Ѓ -> ѓ
+            'U+0405->U+0455', 'U+0455',   // Ѕ -> ѕ
+            'U+0408->U+0458', 'U+0458',   // Ј -> ј
+            'U+0409->U+0459', 'U+0459',   // Љ -> љ
+            'U+040A->U+045A', 'U+045A',   // Њ -> њ
+            'U+040B->U+045B', 'U+045B',   // Ћ -> ћ
+            'U+040C->U+045C', 'U+045C',   // Ќ -> ќ
+            'U+040F->U+045F', 'U+045F',   // Џ -> џ
+        ]);
     }
 
     /**

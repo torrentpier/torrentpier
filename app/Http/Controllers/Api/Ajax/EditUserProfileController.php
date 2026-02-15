@@ -71,7 +71,7 @@ class EditUserProfileController
                 break;
 
             case 'user_website':
-                if ($value == '' || preg_match('#^https?://[\w\#!$%&~/.\-;:=,?@А-я\[\]+]+$#iu', $value)) {
+                if ($value == '' || preg_match('#^https?://[\w\#!$%&~/.\-;:=,?@\p{Cyrillic}\[\]+]+$#iu', $value)) {
                     $responseData['new_value'] = htmlCHR($value);
                 } else {
                     return $this->error(__('WEBSITE_ERROR'));

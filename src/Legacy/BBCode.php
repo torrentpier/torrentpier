@@ -233,7 +233,7 @@ class BBCode
         $text = preg_replace_callback('#(\[(quote|spoiler)=")(.+?)("\])#', [&$this, 'escape_titles_callback'], $text);
 
         // [url]
-        $url_exp = '[\w\#!$%&~/.\-;:=,?@а-яА-Я()\[\]+]+?';
+        $url_exp = '[\w\#!$%&~/.\-;:=,?@\p{Cyrillic}()\[\]+]+?';
         $text = preg_replace_callback("#\\[url\\]((?:https?://)?{$url_exp})\\[/url\\]#isu", [&$this, 'url_callback'], $text);
         $text = preg_replace_callback("#\\[url\\](www\\.{$url_exp})\\[/url\\]#isu", [&$this, 'url_callback'], $text);
         $text = preg_replace_callback("#\\[url=((?:https?://)?{$url_exp})\\]([^?\n\t].*?)\\[/url\\]#isu", [&$this, 'url_callback'], $text);
@@ -305,7 +305,7 @@ class BBCode
 			(?<![\"'=])
 			\\b
 			(
-				https?://[\\w\\#!$%&~/.\\-;:=?@а-яА-Я()\\[\\]+]+
+				https?://[\\w\\#!$%&~/.\\-;:=?@\\p{Cyrillic}()\\[\\]+]+
 			)
 			(?![\"']|\\[/url|\\[/img|</a)
 			(?=[,!]?\\s|[\\)<!])

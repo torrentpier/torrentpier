@@ -24,7 +24,7 @@ class WordsRate
     public $deleted_words = [];
     public $del_text_hl = '';
     public $words_del_exp = '';
-    public $words_cnt_exp = '#[a-zA-Zа-яА-ЯёЁ]{4,}#';
+    public $words_cnt_exp = '#[a-zA-Z\p{Cyrillic}]{4,}#u';
 
     /**
      * @throws BindingResolutionException
