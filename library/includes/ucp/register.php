@@ -446,7 +446,7 @@ foreach ($profile_fields as $field => $can_edit) {
             $website = request()->post->has('user_website') ? (string)request()->post->get('user_website') : $pr_data['user_website'];
             $website = htmlCHR($website);
             if ($submit && $website != $pr_data['user_website']) {
-                if ($website == '' || preg_match('#^https?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+$#iu', $website)) {
+                if ($website == '' || preg_match('#^https?://[\w\#!$%&~/.\-;:=,?@\p{Cyrillic}\[\]+]+$#iu', $website)) {
                     $pr_data['user_website'] = $website;
                     $db_data['user_website'] = (string)$website;
                 } else {

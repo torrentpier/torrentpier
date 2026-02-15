@@ -29,7 +29,7 @@ class Validate
      */
     public static function username(string $username, bool $check_ban_and_taken = true): bool|string
     {
-        static $name_chars = 'a-z0-9а-яё_@$%^&;(){}\#\-\'.:+ ';
+        static $name_chars = 'a-z0-9\p{Cyrillic}_@$%^&;(){}\#\-\'.:+ ';
 
         // Check for empty
         if (empty($username)) {

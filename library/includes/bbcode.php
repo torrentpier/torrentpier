@@ -262,7 +262,7 @@ function extract_search_words($text): array
     // HTML entities like &nbsp;
     $text = preg_replace('/(\w*?)&#?[0-9a-z]+;(\w*?)/iu', '', $text);
     // Remove URL's       ((www|ftp)\.[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]*?)
-    $text = preg_replace('#\b[a-z0-9]+://[\w\#!$%&~/.\-;:=,?@А-я\[\]+]+(/[0-9a-z\?\.%_\-\+=&/]+)?#u', ' ', $text);
+    $text = preg_replace('#\b[a-z0-9]+://[\w\#!$%&~/.\-;:=,?@\p{Cyrillic}\[\]+]+(/[0-9a-z\?\.%_\-\+=&/]+)?#u', ' ', $text);
     $text = str_replace(['[url=', '?', '!'], ' ', $text);
 
     $text = strip_bbcode($text);
