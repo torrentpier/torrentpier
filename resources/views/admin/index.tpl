@@ -146,7 +146,7 @@
   <tr>
     <td><b>{L_ADMIN}:</b></td>
     <td>
-      <a href="../profile.php?mode=register&admin=1">{L_CREATE_PROFILE}</a>
+      <a href="../register?admin=1">{L_CREATE_PROFILE}</a>
     </td>
   </tr>
 </table>
