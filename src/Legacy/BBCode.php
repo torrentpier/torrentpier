@@ -286,6 +286,11 @@ class BBCode
         $url_name = isset($m[2]) ? trim($m[2]) : $url;
         $url_parse = parse_url($url);
 
+        // Reject dangerous URI schemes (javascript:, data:, vbscript:, etc.)
+        if (isset($url_parse['scheme']) && !\in_array(strtolower($url_parse['scheme']), ['http', 'https'], true)) {
+            return htmlspecialchars($url_name, ENT_QUOTES);
+        }
+
         if (!isset($url_parse['scheme']) && isset($url_parse['path'])) {
             if (!preg_match('/^([a-zA-Z0-9_\-\.]+\.php)(\?[^#]*)?$/', $url_parse['path'])) {
                 $url = 'http://' . $url;

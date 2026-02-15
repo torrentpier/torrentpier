@@ -209,5 +209,51 @@ namespace {
                 ->and($result)->toContain('href="http://normal.com"')
                 ->and($result)->toContain('>plain</a>');
         });
+
+        it('leaves unbalanced bracket URL intact when pattern cannot match', function () {
+            $input = '[url=http://example.com/path_[test]click[/url]';
+            $result = parseBBCode($input);
+
+            expect($result)->not->toContain('<a ');
+        });
+
+        // ---------------------------------------------------------------
+        // Security — dangerous URI schemes must be rejected
+        // ---------------------------------------------------------------
+
+        it('rejects javascript: scheme in unquoted URL', function () {
+            $result = parseBBCode('[url=javascript:alert(1)]click[/url]');
+
+            expect($result)->not->toContain('href="javascript:')
+                ->and($result)->not->toContain('<a ');
+        });
+
+        it('rejects javascript: scheme in quoted URL', function () {
+            $result = parseBBCode('[url="javascript:alert(1)"]click[/url]');
+
+            expect($result)->not->toContain('href="javascript:')
+                ->and($result)->not->toContain('<a ');
+        });
+
+        it('rejects data: scheme', function () {
+            $result = parseBBCode('[url=data:text/html,<script>alert(1)</script>]click[/url]');
+
+            expect($result)->not->toContain('href="data:');
+        });
+
+        it('rejects vbscript: scheme', function () {
+            $result = parseBBCode('[url=vbscript:MsgBox]click[/url]');
+
+            expect($result)->not->toContain('href="vbscript:')
+                ->and($result)->not->toContain('<a ');
+        });
+
+        it('allows http and https schemes', function () {
+            $http = parseBBCode('[url=http://example.com]link[/url]');
+            $https = parseBBCode('[url=https://example.com]link[/url]');
+
+            expect($http)->toContain('href="http://example.com"')
+                ->and($https)->toContain('href="https://example.com"');
+        });
     });
 }
