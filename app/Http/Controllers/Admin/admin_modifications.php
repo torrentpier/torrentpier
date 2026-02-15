@@ -91,11 +91,11 @@ try {
             }
         }
     }
-} catch (\TorrentPier\Http\Exception\HttpClientException $e) {
+} catch (TorrentPier\Http\Exception\HttpClientException $e) {
     $hasError = true;
     $apiError = __('MODS_API_UNAVAILABLE');
     bb_log("[Marketplace] API error: {$e->getMessage()}" . LOG_LF);
-} catch (\Throwable $e) {
+} catch (Throwable $e) {
     $hasError = true;
     $apiError = __('MODS_API_UNAVAILABLE');
     bb_log("[Marketplace] Unexpected error: {$e->getMessage()}" . LOG_LF);
@@ -111,12 +111,13 @@ $catCacheKey = 'xf_resource_categories';
 
 try {
     $categories = CACHE('bb_cache')->get($catCacheKey);
-} catch (\Throwable $e) {
+} catch (Throwable $e) {
     $categories = false;
 }
 
 if ($categories === false) {
     $categories = [];
+
     try {
         $catResponse = httpClient()->get($apiUrl . '/resource-categories/', [
             'headers' => [
@@ -136,7 +137,7 @@ if ($categories === false) {
             }
             CACHE('bb_cache')->set($catCacheKey, $categories, (int)config()->get('mods.categories_cache_ttl', 3600));
         }
-    } catch (\Throwable $e) {
+    } catch (Throwable $e) {
         // Categories are non-critical — silently fall back to empty
     }
 }
