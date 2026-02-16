@@ -260,12 +260,13 @@ describe('delta_time() backward compatibility', function () {
     });
 
     it('ignores granularity parameter for backward compatibility', function () {
+        $now = Carbon::now()->timestamp;
         $timestamp = Carbon::now()->subDays(1)->timestamp;
 
         // All these should return the same result (granularity ignored)
-        $result1 = delta_time($timestamp, TIMENOW, 'auto');
-        $result2 = delta_time($timestamp, TIMENOW, 'days');
-        $result3 = delta_time($timestamp, TIMENOW, 'hours');
+        $result1 = delta_time($timestamp, $now, 'auto');
+        $result2 = delta_time($timestamp, $now, 'days');
+        $result3 = delta_time($timestamp, $now, 'hours');
 
         expect($result1)->toBe($result2)
             ->and($result2)->toBe($result3)
@@ -273,17 +274,19 @@ describe('delta_time() backward compatibility', function () {
     });
 
     it('works with two parameters', function () {
+        $now = Carbon::now()->timestamp;
         $past = Carbon::now()->subWeeks(2)->timestamp;
 
-        $result = delta_time($past, TIMENOW);
+        $result = delta_time($past, $now);
 
         expect($result)->toBe('2 weeks before');
     });
 
     it('works with one parameter (defaults to TIMENOW)', function () {
+        $now = Carbon::now()->timestamp;
         $past = Carbon::now()->subMonths(1)->timestamp;
 
-        $result = delta_time($past);
+        $result = delta_time($past, $now);
 
         expect($result)->toBe('1 month before');
     });
