@@ -60,7 +60,7 @@ describe('TwoFactorAuth', function () {
 
     /**
      * Build an eloquent mock that stubs the fluent chain:
-     * eloquent()->table(BB_USERS)->where('user_id', $userId)->first/update(...)
+     * eloquent()->table('users')->where('user_id', $userId)->first/update(...)
      */
     function mockEloquent(int $userId, string $terminalMethod, mixed $terminalReturn, array $terminalArgs = []): void
     {
