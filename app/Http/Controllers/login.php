@@ -142,12 +142,14 @@ if (request()->post->has('verify_2fa')) {
 
     if (!$userId || ($pending['ip'] ?? '') !== USER_IP) {
         $render2fa(__('TWO_FACTOR_SESSION_EXPIRED'));
+
         return;
     }
 
     if (!two_factor()->checkRateLimit($userId)) {
         CACHE('bb_cache')->rm('2fa_pending_' . $twoFaToken);
         $render2fa(__('TWO_FACTOR_TOO_MANY_ATTEMPTS'));
+
         return;
     }
 
@@ -155,6 +157,7 @@ if (request()->post->has('verify_2fa')) {
     $userdata = get_userdata($userId, false, true);
     if (!$userdata || !$userdata['user_active']) {
         $render2fa(__('TWO_FACTOR_SESSION_EXPIRED'));
+
         return;
     }
 
@@ -163,6 +166,7 @@ if (request()->post->has('verify_2fa')) {
         $decryptedSecret = two_factor()->decryptSecret($userdata['totp_secret']);
     } catch (RuntimeException) {
         $render2fa(__('TWO_FACTOR_SESSION_EXPIRED'));
+
         return;
     }
 
@@ -174,6 +178,7 @@ if (request()->post->has('verify_2fa')) {
         if ($codeIndex === false) {
             two_factor()->incrementAttempts($userId);
             $render2fa(__('TWO_FACTOR_INVALID_RECOVERY'));
+
             return;
         }
         two_factor()->consumeRecoveryCode($userId, $codeIndex, $hashedCodes);
@@ -181,6 +186,7 @@ if (request()->post->has('verify_2fa')) {
         if (!two_factor()->verifyCode($decryptedSecret, $totpCode, $userId)) {
             two_factor()->incrementAttempts($userId);
             $render2fa(__('TWO_FACTOR_INVALID_CODE'));
+
             return;
         }
     }
