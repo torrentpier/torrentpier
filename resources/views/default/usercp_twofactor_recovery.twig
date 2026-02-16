@@ -19,10 +19,9 @@
                 <p class="med">{{ __('TWO_FACTOR_RECOVERY_EXPLAIN') }}</p>
             </div>
             <div class="tCenter mrg_10">
-                <div id="recovery-codes" style="display: inline-block; text-align: left; font-family: monospace; font-size: 1.1em; line-height: 2em; background: #f5f5f5; padding: 12px 24px; border: 1px solid #ddd;">
-{% for code in RECOVERY_CODES %}{{ code }}{% if not loop.last %}
-{% endif %}{% endfor %}
-                </div>
+                <div id="recovery-codes" style="display: inline-block; text-align: left; font-family: monospace; font-size: 1.1em; line-height: 2em; background: #f5f5f5; padding: 12px 24px; border: 1px solid #ddd; white-space: pre-line;">
+{% for code in RECOVERY_CODES %}{{ code }}
+{% endfor %}</div>
             </div>
             <div class="tCenter mrg_10">
                 <button type="button" class="copyElement lite" data-clipboard-target="#recovery-codes" title="{{ __('COPY_TO_CLIPBOARD') }}">{{ __('COPY_TO_CLIPBOARD') }}</button>
