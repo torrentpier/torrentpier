@@ -198,10 +198,10 @@ class TwoFactorAuth
         eloquent()->table('users')
             ->where('user_id', $userId)
             ->update([
-                'totp_secret' => null,
+                'totp_secret' => '',
                 'totp_enabled' => 0,
                 'totp_recovery_codes' => null,
-                'totp_enabled_at' => null,
+                'totp_enabled_at' => 0,
             ]);
     }
 
