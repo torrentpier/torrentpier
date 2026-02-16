@@ -903,12 +903,40 @@ table.bordered {
 table.message {
   margin: 0 auto;
   width: 100%;
+  border-collapse: collapse;
 }
 
 table.message td {
-  padding: 16px;
+  padding: 20px 24px;
   text-align: center;
-  background: #EFEFEF;
+  background: #f8f9fa;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+table.forumline.message {
+  background: transparent;
+  border-top: none;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #dee2e6;
+}
+
+table.forumline.message th {
+  background: #e9ecef;
+  color: #495057;
+  text-transform: none;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  padding: 10px 16px;
+  border: none;
+  border-bottom: 1px solid #dee2e6;
+}
+
+table.forumline.message td {
+  border: none;
+  background: #f8f9fa;
+  padding: 20px 24px;
 }
 
 .cat, td.cat, td.catTitle, td.catHead, td.catBottom {
@@ -944,31 +972,43 @@ table.message td {
 
 table.info_msg {
   width: 100%;
-  border: 1px solid #B7C0C5;
-  background: #DEE3E7;
+  border: none;
+  border-left: 4px solid #0d6efd;
+  border-radius: 6px;
+  background: #f0f4ff;
   margin: 0 auto;
+  border-collapse: collapse;
 }
 
 table.info_msg .msg {
-  border: 1px solid #B7C0C5;
-  background: #EFEFEF;
-  padding: 20px;
+  border: none;
+  background: transparent;
+  padding: 14px 20px;
   text-align: center;
+  color: #084298;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 table.error {
   width: 100%;
-  border: 2px solid #993300;
-  background: #FFD4CC;
+  border: none;
+  border-left: 4px solid #dc3545;
+  border-radius: 6px;
+  background: #fff5f5;
   margin: 0 auto;
+  border-collapse: collapse;
 }
 
-table.error .msg {
-  border: 1px solid #993300;
-  background: #FAEBD7;
-  padding: 20px;
-  color: #A52A2A;
+table.error .msg,
+table.error .error_msg {
+  border: none;
+  background: transparent;
+  padding: 14px 20px;
+  color: #842029;
   text-align: center;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 table.search_username {

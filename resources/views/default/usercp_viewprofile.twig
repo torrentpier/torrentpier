@@ -328,6 +328,9 @@ ajax.callback.group_membership = function(data) {
 								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_profile', user_id : '{{ PROFILE_USER_ID }}'}); return false;" class="adm">{{ __('USER_DELETE_EXPLAIN') }}</a> <br />
 								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_topics', user_id : '{{ PROFILE_USER_ID }}'}); return false;" class="adm">{{ __('DELETE_USER_ALL_POSTS') }}</a> <br />
 								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_message', user_id : '{{ PROFILE_USER_ID }}'}); return false;" class="adm">{{ __('DELETE_USER_POSTS') }}</a> <br />
+								{% if PROFILE_USER_2FA_ENABLED %}
+								<a href="#" onclick="if (window.confirm('{{ __('TWO_FACTOR_ADMIN_DISABLE') }}?')) { ajax.exec({action : 'manage_user', mode: '2fa_disable', user_id : {{ PROFILE_USER_ID }}}); } return false;" class="adm">{{ __('TWO_FACTOR_ADMIN_DISABLE') }}</a> <br />
+								{% endif %}
 							</div>
 						</fieldset>
 						<fieldset class="mrg_6">

@@ -1,0 +1,38 @@
+<h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
+
+<p class="nav">
+    <a href="{{ U_INDEX }}">{{ __('HOME') }}</a>
+    &raquo; <a href="{{ U_USER_PROFILE }}">{{ __('EDIT_PROFILE') }}</a>
+    &raquo; {{ __('TWO_FACTOR_RECOVERY_CODES') }}
+</p>
+
+<table class="forumline">
+    <tbody class="pad_4">
+    <tr>
+        <th>{{ __('TWO_FACTOR_RECOVERY_CODES') }}</th>
+    </tr>
+    <tr>
+        <td class="row1 pad_6">
+            <div class="tCenter mrg_10">
+                <p class="warnColor1 bold">{{ __('TWO_FACTOR_RECOVERY_WARNING') }}</p>
+                <p class="warnColor1 bold">{{ __('TWO_FACTOR_RECOVERY_ONETIME') }}</p>
+                <p class="med">{{ __('TWO_FACTOR_RECOVERY_EXPLAIN') }}</p>
+            </div>
+            <div class="tCenter mrg_10">
+                <div id="recovery-codes" style="display: inline-block; text-align: left; font-family: monospace; font-size: 1.1em; line-height: 2em; background: #f5f5f5; padding: 12px 24px; border: 1px solid #ddd;">
+{% for code in RECOVERY_CODES %}{{ code }}{% if not loop.last %}
+{% endif %}{% endfor %}
+                </div>
+            </div>
+            <div class="tCenter mrg_10">
+                <button type="button" class="copyElement lite" data-clipboard-target="#recovery-codes" title="{{ __('COPY_TO_CLIPBOARD') }}">{{ __('COPY_TO_CLIPBOARD') }}</button>
+                &nbsp;
+                <a href="{{ FORUM_PATH }}profile/two-step?action=download_codes&amp;token={{ DOWNLOAD_TOKEN }}" class="lite">{{ __('TWO_FACTOR_DOWNLOAD_CODES') }}</a>
+            </div>
+            <div class="tCenter mrg_10">
+                <a href="{{ U_USER_PROFILE }}" class="main bold">{{ __('TWO_FACTOR_DONE') }}</a>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

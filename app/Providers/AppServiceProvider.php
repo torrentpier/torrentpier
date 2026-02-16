@@ -12,6 +12,12 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Psr\Clock\ClockInterface;
+use Symfony\Component\Clock\NativeClock;
+use TorrentPier\Auth\TwoFactor\Encryption;
+use TorrentPier\Auth\TwoFactor\RecoveryCodes;
+use TorrentPier\Auth\TwoFactor\TotpService;
+use TorrentPier\Auth\TwoFactor\TwoFactorAuth;
 use TorrentPier\Censor;
 use TorrentPier\Feed\FeedGenerator;
 use TorrentPier\Forum\ForumTree;
@@ -41,6 +47,15 @@ class AppServiceProvider extends ServiceProvider
         // Language system (auto-wired with Config)
         $this->app->singleton(Language::class);
 
+        // PSR-20 Clock (used by TOTP service)
+        $this->app->singleton(ClockInterface::class, NativeClock::class);
+
+        // Two-Factor authentication services
+        $this->app->singleton(Encryption::class);
+        $this->app->singleton(TotpService::class);
+        $this->app->singleton(RecoveryCodes::class);
+        $this->app->singleton(TwoFactorAuth::class);
+
         // Feed generator
         $this->app->singleton(FeedGenerator::class, function () {
             return new FeedGenerator;
@@ -51,6 +66,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->alias(ForumTree::class, 'forum_tree');
         $this->app->alias(Language::class, 'lang');
         $this->app->alias(FeedGenerator::class, 'feed');
+        $this->app->alias(TwoFactorAuth::class, 'two_factor');
     }
 
     /**
@@ -73,10 +89,15 @@ class AppServiceProvider extends ServiceProvider
             ForumTree::class,
             Language::class,
             FeedGenerator::class,
+            Encryption::class,
+            TotpService::class,
+            RecoveryCodes::class,
+            TwoFactorAuth::class,
             'censor',
             'forum_tree',
             'lang',
             'feed',
+            'two_factor',
         ];
     }
 }

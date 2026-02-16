@@ -736,6 +736,9 @@ template()->assign_vars([
     'U_RESET_AUTOLOGIN' => LOGIN_URL . '?logout=1&amp;reset_autologin=1&amp;sid=' . userdata('session_id'),
 
     'SHOW_ANONYMOUS_SETTING' => (bool)config()->get('forum.allow_anonymous_posting'),
+
+    'USER_2FA_ENABLED' => $mode == 'editprofile' && two_factor()->isFeatureEnabled() && two_factor()->isEnabledForUser($pr_data['user_id']),
+    'TWO_FACTOR_FEATURE_ENABLED' => $mode == 'editprofile' && two_factor()->isFeatureEnabled(),
 ]);
 
 print_page('usercp_register.twig');

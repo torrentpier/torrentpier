@@ -9,6 +9,10 @@ describe('DatabaseDebugger Class', function () {
         mockTracyFunction();
         mockBbLogFunction();
 
+        if (!defined('BB_PATH')) {
+            define('BB_PATH', dirname(__DIR__, 3));
+        }
+
         // Set up test database instance
         $this->db = new Database(array_values(getTestDatabaseConfig()));
         $this->db->connection = mockConnection();

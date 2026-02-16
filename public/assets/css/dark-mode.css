@@ -470,7 +470,24 @@ body.dark-mode .bordered td {
 }
 
 body.dark-mode table.message td {
+  background: #333;
+  color: #e0e0e0;
+}
+
+body.dark-mode table.forumline.message {
+  background: transparent;
+  border-color: #555;
+}
+
+body.dark-mode table.forumline.message th {
   background: #3a3a3a;
+  color: #ccc;
+  border-bottom-color: #555;
+}
+
+body.dark-mode table.forumline.message td {
+  background: #333;
+  border: none;
 }
 
 body.dark-mode .cat,
@@ -497,24 +514,28 @@ body.dark-mode td.catHead a {
 }
 
 body.dark-mode table.info_msg {
-  border-color: #555;
-  background: #424242;
+  border-color: transparent;
+  border-left-color: #5b9bff;
+  background: #1e2a3a;
 }
 
 body.dark-mode table.info_msg .msg {
-  border-color: #555;
-  background: #3a3a3a;
+  border: none;
+  background: transparent;
+  color: #8bb8ff;
 }
 
 body.dark-mode table.error {
-  border-color: #993300;
-  background: #5a3030;
+  border-color: transparent;
+  border-left-color: #f55;
+  background: #3a1e1e;
 }
 
-body.dark-mode table.error .msg {
-  border-color: #993300;
-  background: #4a2828;
-  color: #FF9999;
+body.dark-mode table.error .msg,
+body.dark-mode table.error .error_msg {
+  border: none;
+  background: transparent;
+  color: #ffaaaa;
 }
 
 body.dark-mode .pm_box_size .progress {

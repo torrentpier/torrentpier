@@ -1,0 +1,54 @@
+<h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
+
+<p class="nav">
+    <a href="{{ U_INDEX }}">{{ __('HOME') }}</a>
+    &raquo; <a href="{{ U_USER_PROFILE }}">{{ __('EDIT_PROFILE') }}</a>
+    &raquo; {{ __('TWO_FACTOR_SETUP') }}
+</p>
+
+<table class="forumline">
+    <col class="row1" width="35%">
+    <col class="row2" width="65%">
+    <tbody class="pad_4">
+    <tr>
+        <th colspan="2">{{ __('TWO_FACTOR_SETUP') }}</th>
+    </tr>
+    <tr>
+        <td colspan="2" class="row2 small tCenter pad_6">
+            {{ __('TWO_FACTOR_SETUP_EXPLAIN') }}
+        </td>
+    </tr>
+    <tr>
+        <td class="tCenter pad_6" colspan="2">
+            <div class="mrg_10">
+                <img src="{{ FORUM_PATH }}profile/two-step?action=qrcode&amp;setup_token={{ SETUP_TOKEN }}" width="200" height="200" alt="QR Code"/>
+            </div>
+            <div class="mrg_10">
+                {{ __('TWO_FACTOR_MANUAL_ENTRY') }}:<br/>
+                <code id="secret-key" class="bold" style="font-size: 1.2em; letter-spacing: 2px;">{{ SECRET_KEY }}</code>
+                <button type="button" class="copyElement lite" data-clipboard-target="#secret-key" title="{{ __('COPY_TO_CLIPBOARD') }}">{{ __('COPY_TO_CLIPBOARD') }}</button>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <form method="post" action="{{ FORUM_PATH }}profile/two-step?action=enable" class="tokenized">
+                <input type="hidden" name="setup_token" value="{{ SETUP_TOKEN }}"/>
+                <table class="borderless bCenter" style="width: 400px;">
+                    <tr>
+                        <td class="tCenter pad_6">
+                            <label class="bold">{{ __('TWO_FACTOR_ENTER_CODE') }}:</label><br/>
+                            <input type="text" name="totp_code" size="10" maxlength="6" inputmode="numeric" pattern="[0-9]{6}" autocomplete="one-time-code" autofocus class="post" style="font-size: 1.4em; text-align: center; letter-spacing: 4px;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tCenter pad_6">
+                            <input type="submit" name="verify_2fa" value="{{ __('TWO_FACTOR_VERIFY_AND_ENABLE') }}" class="main"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>

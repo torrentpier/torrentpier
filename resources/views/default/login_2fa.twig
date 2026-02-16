@@ -1,0 +1,85 @@
+<h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
+
+<form action="{{ S_LOGIN_ACTION }}" method="post" class="tokenized">
+
+    <input type="hidden" name="redirect" value="{{ REDIRECT_URL }}"/>
+    <input type="hidden" name="2fa_token" value="{{ TWO_FA_TOKEN }}"/>
+
+    <p class="nav"><a href="{{ U_INDEX }}">{{ __('HOME') }}</a></p>
+
+    <table class="forumline">
+        <tr>
+            <th>{{ __('TWO_FACTOR_VERIFICATION') }}</th>
+        </tr>
+        <tr>
+            <td class="row1">
+                {% if ERROR_MESSAGE %}
+                <div class="mrg_16 tCenter">
+                    <span class="gen bold" style="color: #CC0000;">{{ ERROR_MESSAGE }}</span>
+                </div>
+                {% endif %}
+
+                <div class="mrg_16">
+                    <table class="borderless bCenter">
+                        {% if not USE_RECOVERY %}
+                        <tr>
+                            <td colspan="2" class="tCenter pad_4">
+                                <p class="gen">{{ __('TWO_FACTOR_ENTER_CODE') }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tRight">{{ __('TWO_FACTOR_CODE') }}:</td>
+                            <td>
+                                <input type="text" class="post" name="totp_code" size="10" maxlength="6"
+                                       inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code"
+                                       autofocus tabindex="101"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="tCenter pad_6">
+                                <input type="submit" name="verify_2fa" class="bold long" value="{{ __('TWO_FACTOR_VERIFY') }}">
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="2" class="tCenter pad_4">
+                                <p class="gen">{{ __('TWO_FACTOR_ENTER_RECOVERY') }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tRight">{{ __('TWO_FACTOR_RECOVERY_CODE') }}:</td>
+                            <td>
+                                <input type="text" class="post" name="recovery_code" size="12" maxlength="9"
+                                       autocomplete="off" autofocus tabindex="101"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="tCenter pad_6">
+                                <input type="submit" name="verify_2fa" class="bold long" value="{{ __('TWO_FACTOR_VERIFY') }}">
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<div class="tCenter pad_4">
+{% if not USE_RECOVERY %}
+<form action="{{ S_LOGIN_ACTION }}" method="post" style="display:inline" class="tokenized">
+    <input type="hidden" name="2fa_token" value="{{ TWO_FA_TOKEN }}"/>
+    <input type="hidden" name="redirect" value="{{ REDIRECT_URL }}"/>
+    <input type="hidden" name="switch_2fa_mode" value="recovery"/>
+    <button type="submit" class="small" style="background:none;border:none;color:inherit;cursor:pointer;text-decoration:underline;padding:0;font:inherit;">{{ __('TWO_FACTOR_USE_RECOVERY') }}</button>
+</form>
+{% else %}
+<form action="{{ S_LOGIN_ACTION }}" method="post" style="display:inline" class="tokenized">
+    <input type="hidden" name="2fa_token" value="{{ TWO_FA_TOKEN }}"/>
+    <input type="hidden" name="redirect" value="{{ REDIRECT_URL }}"/>
+    <input type="hidden" name="switch_2fa_mode" value="totp"/>
+    <button type="submit" class="small" style="background:none;border:none;color:inherit;cursor:pointer;text-decoration:underline;padding:0;font:inherit;">{{ __('TWO_FACTOR_USE_TOTP') }}</button>
+</form>
+{% endif %}
+</div>

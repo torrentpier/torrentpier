@@ -289,6 +289,27 @@
             <td><input type="text" name="dateformat" value="{{ DATE_FORMAT }}" maxlength="14"/></td>
         </tr>
         {% endif %}
+        {% if TWO_FACTOR_FEATURE_ENABLED %}
+        <tr>
+            <th colspan="2">{{ __('TWO_FACTOR_SECURITY') }}</th>
+        </tr>
+        <tr>
+            <td class="prof-title">{{ __('TWO_FACTOR_AUTH') }}:<br/><h6>{{ __('TWO_FACTOR_AUTH_EXPLAIN') }}</h6></td>
+            <td>
+                {% if USER_2FA_ENABLED %}
+                <span class="seed bold">{{ __('TWO_FACTOR_ENABLED') }}</span>
+                &nbsp;&nbsp;
+                <a href="{{ FORUM_PATH }}profile/two-step?action=disable" class="lite">{{ __('TWO_FACTOR_DISABLE') }}</a>
+                &nbsp;
+                <a href="{{ FORUM_PATH }}profile/two-step?action=regenerate" class="lite">{{ __('TWO_FACTOR_REGENERATE') }}</a>
+                {% else %}
+                <span class="leech">{{ __('TWO_FACTOR_DISABLED') }}</span>
+                &nbsp;&nbsp;
+                <a href="{{ FORUM_PATH }}profile/two-step?action=enable" class="bold">{{ __('TWO_FACTOR_ENABLE') }}</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endif %}
         <tr>
             <th colspan="2">{{ __('UCP_DOWNLOADS') }}</th>
         </tr>

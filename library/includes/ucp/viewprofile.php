@@ -113,6 +113,7 @@ template()->assign_vars([
     'LAST_VISIT_TIME' => $profiledata['user_lastvisit'] ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? __('HIDDEN_USER') : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : __('NEVER'),
     'LAST_ACTIVITY_TIME' => $profiledata['user_session_time'] ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? __('HIDDEN_USER') : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : __('NEVER'),
     'USER_ACTIVE' => $profiledata['user_active'],
+    'PROFILE_USER_2FA_ENABLED' => ($profile_user_id || IS_ADMIN) && !empty($profiledata['totp_enabled']),
     'LOCATION' => render_flag($profiledata['user_from']),
     'OCCUPATION' => $profiledata['user_occ'],
     'INTERESTS' => $profiledata['user_interests'],

@@ -62,4 +62,17 @@ return [
     'premium_users' => [
         2 => 'admin',
     ],
+    'two_factor' => [
+        'enabled' => true,
+        'issuer' => env('APP_NAME', 'TorrentPier'),
+        'digits' => 6,
+        'period' => 30,
+        'algorithm' => 'sha1',
+        'window' => 1,
+        'recovery_codes_count' => 8,
+        'encryption_key' => env('TOTP_ENCRYPTION_KEY', ''),
+        'pending_ttl' => 300,
+        'max_attempts' => 5,
+        'lockout_duration' => 900,
+    ],
 ];
