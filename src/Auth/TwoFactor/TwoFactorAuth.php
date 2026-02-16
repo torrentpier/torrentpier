@@ -30,8 +30,7 @@ class TwoFactorAuth
         private readonly TotpService $totp,
         private readonly RecoveryCodes $recoveryCodes,
         private readonly Encryption $encryption,
-    ) {
-    }
+    ) {}
 
     // ---------------------------------------------------------------
     // Feature toggle
@@ -106,9 +105,8 @@ class TwoFactorAuth
     }
 
     /**
-     * @return string[]|null New plain recovery codes if auto-regenerated, null otherwise
-     *
      * @throws RandomException
+     * @return string[]|null New plain recovery codes if auto-regenerated, null otherwise
      */
     public function consumeRecoveryCode(int $userId, int $codeIndex, array $currentCodes): ?array
     {
@@ -169,10 +167,10 @@ class TwoFactorAuth
     /**
      * Enable 2FA — encrypts secret, generates recovery codes, updates DB
      *
-     * @return string[] Plain recovery codes for one-time display
      *
      * @throws RuntimeException
      * @throws RandomException
+     * @return string[] Plain recovery codes for one-time display
      */
     public function enableForUser(int $userId, string $secret): array
     {
@@ -229,7 +227,7 @@ class TwoFactorAuth
         CACHE('bb_cache')->set(
             $key,
             $attempts + 1,
-            (int)$this->config->get('auth.two_factor.lockout_duration')
+            (int)$this->config->get('auth.two_factor.lockout_duration'),
         );
     }
 

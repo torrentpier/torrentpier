@@ -27,15 +27,14 @@ class RecoveryCodes
 
     public function __construct(
         private readonly Config $config,
-    ) {
-    }
+    ) {}
 
     /**
      * Generate a set of recovery codes
      *
-     * @return array{plain: string[], hashed: string[]}
      *
      * @throws RandomException
+     * @return array{plain: string[], hashed: string[]}
      */
     public function generate(int $count = 0): array
     {
@@ -50,12 +49,12 @@ class RecoveryCodes
             do {
                 $code = strtoupper(bin2hex(random_bytes(4)));
                 $code = substr($code, 0, 4) . '-' . substr($code, 4, 4);
-            } while (in_array($code, $plain));
+            } while (\in_array($code, $plain));
             $plain[] = $code;
             $hashed[] = password_hash(
                 $this->normalize($code),
                 PASSWORD_BCRYPT,
-                ['cost' => self::BCRYPT_COST]
+                ['cost' => self::BCRYPT_COST],
             );
         }
 
@@ -83,9 +82,9 @@ class RecoveryCodes
     /**
      * Consume a recovery code — removes it from the stored set
      *
-     * @return string[]|null New plain recovery codes if auto-regenerated, null otherwise
      *
      * @throws RandomException
+     * @return string[]|null New plain recovery codes if auto-regenerated, null otherwise
      */
     public function consume(int $userId, int $codeIndex, array $currentCodes): ?array
     {
@@ -106,9 +105,9 @@ class RecoveryCodes
     /**
      * Regenerate recovery codes for a user — replaces all existing codes
      *
-     * @return string[] Plain recovery codes for one-time display
      *
      * @throws RandomException
+     * @return string[] Plain recovery codes for one-time display
      */
     public function regenerateForUser(int $userId): array
     {

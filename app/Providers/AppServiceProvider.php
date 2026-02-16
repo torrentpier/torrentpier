@@ -12,17 +12,17 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use TorrentPier\Censor;
-use TorrentPier\Feed\FeedGenerator;
-use TorrentPier\Forum\ForumTree;
-use TorrentPier\Language;
-use TorrentPier\ServiceProvider;
 use Psr\Clock\ClockInterface;
 use Symfony\Component\Clock\NativeClock;
 use TorrentPier\Auth\TwoFactor\Encryption;
 use TorrentPier\Auth\TwoFactor\RecoveryCodes;
 use TorrentPier\Auth\TwoFactor\TotpService;
 use TorrentPier\Auth\TwoFactor\TwoFactorAuth;
+use TorrentPier\Censor;
+use TorrentPier\Feed\FeedGenerator;
+use TorrentPier\Forum\ForumTree;
+use TorrentPier\Language;
+use TorrentPier\ServiceProvider;
 
 /**
  * Application Service Provider

@@ -12,9 +12,20 @@ if (!function_exists('CACHE')) {
     function CACHE()
     {
         return $GLOBALS['__test_cache_mock'] ?? new class {
-            public function get($key) { return null; }
-            public function set($key, $value, $ttl = 0) { return true; }
-            public function rm($key) { return true; }
+            public function get($key)
+            {
+                return null;
+            }
+
+            public function set($key, $value, $ttl = 0)
+            {
+                return true;
+            }
+
+            public function rm($key)
+            {
+                return true;
+            }
         };
     }
 }
@@ -561,8 +572,8 @@ describe('TwoFactorAuth', function () {
     });
 
     afterEach(function () {
-        unset($GLOBALS['__test_cache_mock']);
-        unset($GLOBALS['__test_eloquent_mock']);
+        unset($GLOBALS['__test_cache_mock'], $GLOBALS['__test_eloquent_mock']);
+
         Mockery::close();
     });
 });

@@ -11,9 +11,20 @@ if (!function_exists('CACHE')) {
     function CACHE()
     {
         return $GLOBALS['__test_cache_mock'] ?? new class {
-            public function get($key) { return null; }
-            public function set($key, $value, $ttl = 0) { return true; }
-            public function rm($key) { return true; }
+            public function get($key)
+            {
+                return null;
+            }
+
+            public function set($key, $value, $ttl = 0)
+            {
+                return true;
+            }
+
+            public function rm($key)
+            {
+                return true;
+            }
         };
     }
 }
@@ -28,7 +39,7 @@ describe('TotpService', function () {
         $config->shouldReceive('get')->with('auth.two_factor.window')->andReturn(1);
         $config->shouldReceive('get')->with('auth.two_factor.issuer')->andReturn('TorrentPier');
 
-        return new TotpService($config, new NativeClock());
+        return new TotpService($config, new NativeClock);
     }
 
     function mockCache(): void
@@ -76,7 +87,7 @@ describe('TotpService', function () {
             $secret = $service->generateSecret();
 
             // Generate a real code using OTPHP directly
-            $totp = TOTP::createFromSecret($secret, new NativeClock());
+            $totp = TOTP::createFromSecret($secret, new NativeClock);
             $totp->setDigits(6);
             $totp->setPeriod(30);
             $totp->setDigest('sha1');
@@ -126,7 +137,7 @@ describe('TotpService', function () {
             $service = createTotpService();
             $secret = $service->generateSecret();
 
-            $totp = TOTP::createFromSecret($secret, new NativeClock());
+            $totp = TOTP::createFromSecret($secret, new NativeClock);
             $totp->setDigits(6);
             $totp->setPeriod(30);
             $totp->setDigest('sha1');
@@ -150,7 +161,7 @@ describe('TotpService', function () {
             $service = createTotpService();
             $secret = $service->generateSecret();
 
-            $totp = TOTP::createFromSecret($secret, new NativeClock());
+            $totp = TOTP::createFromSecret($secret, new NativeClock);
             $totp->setDigits(6);
             $totp->setPeriod(30);
             $totp->setDigest('sha1');

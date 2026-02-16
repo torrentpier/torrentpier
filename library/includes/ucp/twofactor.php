@@ -105,9 +105,9 @@ switch ($action) {
         ]);
         break;
 
-    /**
-     * Show recovery codes (one-time display after enabling)
-     */
+        /**
+         * Show recovery codes (one-time display after enabling)
+         */
     case 'recovery':
         $token = request()->getString('token', '');
 
@@ -140,9 +140,9 @@ switch ($action) {
         CACHE('bb_cache')->rm($cache_key);
         break;
 
-    /**
-     * Disable 2FA — confirmation page and processing
-     */
+        /**
+         * Disable 2FA — confirmation page and processing
+         */
     case 'disable':
         if (!two_factor()->isEnabledForUser($user_id)) {
             bb_die(__('TWO_FACTOR_NOT_ENABLED'));
@@ -172,9 +172,9 @@ switch ($action) {
         ]);
         break;
 
-    /**
-     * Regenerate recovery codes
-     */
+        /**
+         * Regenerate recovery codes
+         */
     case 'regenerate':
         if (!two_factor()->isEnabledForUser($user_id)) {
             bb_die(__('TWO_FACTOR_NOT_ENABLED'));
@@ -213,9 +213,9 @@ switch ($action) {
         ]);
         break;
 
-    /**
-     * Download recovery codes as a text file
-     */
+        /**
+         * Download recovery codes as a text file
+         */
     case 'download_codes':
         $token = request()->getString('token', '');
 
@@ -235,8 +235,8 @@ switch ($action) {
 
         $content = "TorrentPier - Two-Factor Authentication Recovery Codes\n";
         $content .= "======================================================\n";
-        $content .= "Generated: " . bb_date(TIMENOW) . "\n";
-        $content .= "User: " . userdata('username') . "\n\n";
+        $content .= 'Generated: ' . bb_date(TIMENOW) . "\n";
+        $content .= 'User: ' . userdata('username') . "\n\n";
         $content .= "Each code can only be used once.\n";
         $content .= "Keep these codes in a safe place.\n\n";
 
@@ -251,9 +251,9 @@ switch ($action) {
         echo $content;
         exit;
 
-    /**
-     * Serve QR code PNG image
-     */
+        /**
+         * Serve QR code PNG image
+         */
     case 'qrcode':
         $setup_token = request()->getString('setup_token', '');
 

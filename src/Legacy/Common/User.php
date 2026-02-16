@@ -413,6 +413,7 @@ class User
                         'mod_admin_login' => $mod_admin_login,
                         'ip' => USER_IP,
                     ], config()->get('auth.two_factor.pending_ttl'));
+
                     return ['2fa_required' => true, '2fa_token' => $pendingToken];
                 }
 

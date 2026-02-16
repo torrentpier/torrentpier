@@ -30,8 +30,7 @@ class TotpService
     public function __construct(
         private readonly Config $config,
         private readonly ClockInterface $clock,
-    ) {
-    }
+    ) {}
 
     /**
      * Generate a new TOTP secret (20 bytes = 32 chars Base32, standard for SHA1)

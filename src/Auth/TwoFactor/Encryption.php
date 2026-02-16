@@ -16,8 +16,6 @@ use Random\RandomException;
 use RuntimeException;
 use TorrentPier\Config;
 
-use function strlen;
-
 /**
  * AES-256-GCM encryption for TOTP secrets at rest
  */
@@ -29,8 +27,7 @@ class Encryption
 
     public function __construct(
         private readonly Config $config,
-    ) {
-    }
+    ) {}
 
     /**
      * Encrypt a plaintext secret
@@ -53,7 +50,7 @@ class Encryption
             $nonce,
             $tag,
             '',
-            self::TAG_LENGTH
+            self::TAG_LENGTH,
         );
 
         if ($ciphertext === false) {
@@ -74,7 +71,7 @@ class Encryption
         $decoded = base64_decode($encrypted, true);
 
         $minLength = self::NONCE_LENGTH + self::TAG_LENGTH;
-        if ($decoded === false || strlen($decoded) < $minLength) {
+        if ($decoded === false || \strlen($decoded) < $minLength) {
             throw new RuntimeException('Invalid encrypted data');
         }
 
@@ -88,7 +85,7 @@ class Encryption
             $key,
             OPENSSL_RAW_DATA,
             $nonce,
-            $tag
+            $tag,
         );
 
         if ($plaintext === false) {
@@ -108,7 +105,6 @@ class Encryption
         if (empty($configKey)) {
             throw new RuntimeException('TOTP encryption key is not configured. Set TOTP_ENCRYPTION_KEY in .env');
         }
-
 
         return hash_hkdf('sha256', $configKey, 32, 'totp-secret-encryption');
     }

@@ -120,7 +120,7 @@ if (request()->post->has('verify_2fa')) {
     $useRecovery = !empty($recoveryCode);
 
     // Helper to re-render 2FA page with error
-    $render2fa = static fn(string $error = '') => print_page('login_2fa.twig', variables: [
+    $render2fa = static fn (string $error = '') => print_page('login_2fa.twig', variables: [
         'TWO_FA_TOKEN' => htmlCHR($twoFaToken),
         'REDIRECT_URL' => htmlCHR($redirect_url),
         'PAGE_TITLE' => __('TWO_FACTOR_AUTH'),
@@ -151,7 +151,7 @@ if (request()->post->has('verify_2fa')) {
     // Decrypt TOTP secret
     try {
         $decryptedSecret = two_factor()->decryptSecret($userdata['totp_secret']);
-    } catch (\RuntimeException) {
+    } catch (RuntimeException) {
         $render2fa(__('TWO_FACTOR_SESSION_EXPIRED'));
     }
 
@@ -185,7 +185,7 @@ if (request()->post->has('verify_2fa')) {
             ->update(['session_admin' => $userdata['user_level']]);
 
         user()->data['session_admin'] = $userdata['user_level'];
-        \TorrentPier\Sessions::cache_update_userdata(user()->data);
+        TorrentPier\Sessions::cache_update_userdata(user()->data);
     } else {
         user()->session_create($userdata, false);
 
