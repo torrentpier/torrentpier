@@ -115,7 +115,13 @@ trait AjaxResponse
                 'login_password' => $body['user_password'],
             ];
 
-            if (!user()->login($loginArgs, true)) {
+            $loginResult = user()->login($loginArgs, true);
+
+            if (!empty($loginResult['2fa_required'])) {
+                return $this->error(__('TWO_FACTOR_AUTH'));
+            }
+
+            if (!$loginResult) {
                 return $this->error(__('ERROR_LOGIN'));
             }
         }

@@ -737,7 +737,8 @@ template()->assign_vars([
 
     'SHOW_ANONYMOUS_SETTING' => (bool)config()->get('forum.allow_anonymous_posting'),
 
-    'USER_2FA_ENABLED' => $mode == 'editprofile' && two_factor()->isEnabledForUser($pr_data['user_id']),
+    'USER_2FA_ENABLED' => $mode == 'editprofile' && two_factor()->isFeatureEnabled() && two_factor()->isEnabledForUser($pr_data['user_id']),
+    'TWO_FACTOR_FEATURE_ENABLED' => $mode == 'editprofile' && two_factor()->isFeatureEnabled(),
 ]);
 
 print_page('usercp_register.twig');

@@ -39,7 +39,7 @@
         "arokettu/random-polyfill": "1.0.2",
         "arokettu/torrent-file": "^5.2.1",
         "bugsnag/bugsnag": "^v3.29.1",
-        "chillerlan/php-qrcode": "^5.0",
+        "chillerlan/php-qrcode": "^5.0.3",
         "egulias/email-validator": "^4.0.1",
         "filp/whoops": "^2.15",
         "gemorroj/m3u-parser": "^6.0",

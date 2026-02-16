@@ -48,6 +48,7 @@ if (request()->getBool('logout')) {
 
 $redirect_url = '/';
 $login_errors = [];
+$loginResult = [];
 
 // Requested redirect
 $queryString = request()->getQueryString() ?? '';
@@ -95,6 +96,12 @@ if (request()->post->has('switch_2fa_mode')) {
     $twoFaToken = request()->post->get('2fa_token', '');
     $switchMode = request()->post->get('switch_2fa_mode', '');
 
+    // Validate that the pending session actually exists before re-rendering
+    $pending = $twoFaToken ? CACHE('bb_cache')->get('2fa_pending_' . $twoFaToken) : null;
+    if (!$pending || !is_array($pending)) {
+        redirect(LOGIN_URL);
+    }
+
     print_page('login_2fa.twig', variables: [
         'TWO_FA_TOKEN' => htmlCHR($twoFaToken),
         'REDIRECT_URL' => htmlCHR($redirect_url),
@@ -135,17 +142,20 @@ if (request()->post->has('verify_2fa')) {
 
     if (!$userId || ($pending['ip'] ?? '') !== USER_IP) {
         $render2fa(__('TWO_FACTOR_SESSION_EXPIRED'));
+        return;
     }
 
     if (!two_factor()->checkRateLimit($userId)) {
         CACHE('bb_cache')->rm('2fa_pending_' . $twoFaToken);
         $render2fa(__('TWO_FACTOR_TOO_MANY_ATTEMPTS'));
+        return;
     }
 
     // Load and validate user
     $userdata = get_userdata($userId, false, true);
     if (!$userdata || !$userdata['user_active']) {
         $render2fa(__('TWO_FACTOR_SESSION_EXPIRED'));
+        return;
     }
 
     // Decrypt TOTP secret
@@ -153,6 +163,7 @@ if (request()->post->has('verify_2fa')) {
         $decryptedSecret = two_factor()->decryptSecret($userdata['totp_secret']);
     } catch (RuntimeException) {
         $render2fa(__('TWO_FACTOR_SESSION_EXPIRED'));
+        return;
     }
 
     // Verify code
@@ -163,12 +174,14 @@ if (request()->post->has('verify_2fa')) {
         if ($codeIndex === false) {
             two_factor()->incrementAttempts($userId);
             $render2fa(__('TWO_FACTOR_INVALID_RECOVERY'));
+            return;
         }
         two_factor()->consumeRecoveryCode($userId, $codeIndex, $hashedCodes);
     } else {
         if (!two_factor()->verifyCode($decryptedSecret, $totpCode, $userId)) {
             two_factor()->incrementAttempts($userId);
             $render2fa(__('TWO_FACTOR_INVALID_CODE'));
+            return;
         }
     }
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "862fca912ad20f665d3bd82f7fabecee",
+    "content-hash": "47ca2a141a4e1d89603caf6c99b18653",
     "packages": [
         {
             "name": "arokettu/bencode",

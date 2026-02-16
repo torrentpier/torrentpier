@@ -106,6 +106,6 @@ class Encryption
             throw new RuntimeException('TOTP encryption key is not configured. Set TOTP_ENCRYPTION_KEY in .env');
         }
 
-        return hash_hkdf('sha256', $configKey, 32, 'totp-secret-encryption');
+        return hash_hkdf('sha256', $configKey, 32, 'totp-secret-encryption', 'torrentpier-2fa');
     }
 }

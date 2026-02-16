@@ -11,11 +11,6 @@ if (!function_exists('eloquent')) {
     }
 }
 
-// Define BB_USERS constant
-if (!defined('BB_USERS')) {
-    define('BB_USERS', 'bb_users');
-}
-
 describe('RecoveryCodes', function () {
     function createRecoveryCodes(int $count = 8): RecoveryCodes
     {

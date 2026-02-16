@@ -129,15 +129,16 @@ switch ($action) {
             'codes' => $cached['codes'],
         ], 600); // 10 minutes
 
+        // Remove recovery display cache before rendering (one-time view)
+        // Must be before print_page() which calls bb_exit() and terminates execution
+        CACHE('bb_cache')->rm($cache_key);
+
         print_page('usercp_twofactor_recovery.twig', variables: [
             'PAGE_TITLE' => __('TWO_FACTOR_RECOVERY_CODES'),
             'RECOVERY_CODES' => $cached['codes'],
             'DOWNLOAD_TOKEN' => $download_token,
             'U_USER_PROFILE' => SETTINGS_URL,
         ]);
-
-        // Remove recovery display cache after showing (one-time view)
-        CACHE('bb_cache')->rm($cache_key);
         break;
 
         /**
@@ -155,10 +156,16 @@ switch ($action) {
                 bb_die(__('TWO_FACTOR_INVALID_CODE'));
             }
 
+            if (!two_factor()->checkRateLimit($user_id)) {
+                bb_die(__('TWO_FACTOR_TOO_MANY_ATTEMPTS'));
+            }
+
             if (!two_factor()->verifyUserCode($user_id, $code)) {
+                two_factor()->incrementAttempts($user_id);
                 bb_die(__('TWO_FACTOR_INVALID_CODE'));
             }
 
+            two_factor()->clearAttempts($user_id);
             two_factor()->disableForUser($user_id);
 
             meta_refresh(SETTINGS_URL, 5);
@@ -187,10 +194,16 @@ switch ($action) {
                 bb_die(__('TWO_FACTOR_INVALID_CODE'));
             }
 
+            if (!two_factor()->checkRateLimit($user_id)) {
+                bb_die(__('TWO_FACTOR_TOO_MANY_ATTEMPTS'));
+            }
+
             if (!two_factor()->verifyUserCode($user_id, $code)) {
+                two_factor()->incrementAttempts($user_id);
                 bb_die(__('TWO_FACTOR_INVALID_CODE'));
             }
 
+            two_factor()->clearAttempts($user_id);
             $recovery_codes = two_factor()->regenerateRecoveryCodes($user_id);
 
             $download_token = bin2hex(random_bytes(16));

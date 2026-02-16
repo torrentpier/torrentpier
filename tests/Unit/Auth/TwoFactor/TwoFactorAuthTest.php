@@ -38,11 +38,6 @@ if (!function_exists('eloquent')) {
     }
 }
 
-// Define BB_USERS constant
-if (!defined('BB_USERS')) {
-    define('BB_USERS', 'bb_users');
-}
-
 // Define TIMENOW constant
 if (!defined('TIMENOW')) {
     define('TIMENOW', time());
@@ -547,10 +542,10 @@ describe('TwoFactorAuth', function () {
                 ->andReturnSelf();
             $queryMock->shouldReceive('update')
                 ->with([
-                    'totp_secret' => '',
+                    'totp_secret' => null,
                     'totp_enabled' => 0,
                     'totp_recovery_codes' => null,
-                    'totp_enabled_at' => 0,
+                    'totp_enabled_at' => null,
                 ])
                 ->once()
                 ->andReturn(1);
