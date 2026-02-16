@@ -198,7 +198,7 @@ if (request()->post->has('verify_2fa')) {
 
     $pendingModAdmin = !empty($pending['mod_admin_login']);
     if ($pendingModAdmin) {
-        eloquent()->table(BB_SESSIONS)
+        eloquent()->table('sessions')
             ->where('session_user_id', $userId)
             ->where('session_id', user()->data['session_id'])
             ->update(['session_admin' => $userdata['user_level']]);
@@ -208,7 +208,7 @@ if (request()->post->has('verify_2fa')) {
     } else {
         user()->session_create($userdata, false);
 
-        eloquent()->table(BB_SESSIONS)
+        eloquent()->table('sessions')
             ->where('session_ip', USER_IP)
             ->where('session_user_id', GUEST_UID)
             ->delete();
