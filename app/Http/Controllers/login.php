@@ -91,6 +91,25 @@ if (!$mod_admin_login) {
     }
 }
 
+// 2FA re-authentication via autologin (cookie-based)
+if (IS_GUEST && !empty($_COOKIE['bb_2fa_reauth'])) {
+    $reauthToken = $_COOKIE['bb_2fa_reauth'];
+    $pending = CACHE('bb_cache')->get('2fa_pending_' . $reauthToken);
+
+    if ($pending && is_array($pending) && ($pending['ip'] ?? '') === USER_IP) {
+        print_page('login_2fa.twig', variables: [
+            'TWO_FA_TOKEN' => htmlCHR($reauthToken),
+            'REDIRECT_URL' => htmlCHR($redirect_url),
+            'PAGE_TITLE' => __('TWO_FACTOR_AUTH'),
+            'USE_RECOVERY' => false,
+            'ERROR_MESSAGE' => '',
+            'S_LOGIN_ACTION' => LOGIN_URL,
+        ]);
+    } else {
+        bb_setcookie('bb_2fa_reauth', '', COOKIE_EXPIRED, true);
+    }
+}
+
 // 2FA recovery/totp mode switch (via POST)
 if (request()->post->has('switch_2fa_mode')) {
     $twoFaToken = request()->post->get('2fa_token', '');
@@ -98,7 +117,7 @@ if (request()->post->has('switch_2fa_mode')) {
 
     // Validate that the pending session actually exists before re-rendering
     $pending = $twoFaToken ? CACHE('bb_cache')->get('2fa_pending_' . $twoFaToken) : null;
-    if (!$pending || !is_array($pending)) {
+    if (!$pending || !is_array($pending) || ($pending['ip'] ?? '') !== USER_IP) {
         redirect(LOGIN_URL);
     }
 
@@ -206,13 +225,16 @@ if (request()->post->has('verify_2fa')) {
         user()->data['session_admin'] = $userdata['user_level'];
         TorrentPier\Sessions::cache_update_userdata(user()->data);
     } else {
-        user()->session_create($userdata, false);
+        $autologin = !empty($pending['autologin']);
+        user()->session_create($userdata, false, $autologin);
 
         eloquent()->table('sessions')
             ->where('session_ip', USER_IP)
             ->where('session_user_id', GUEST_UID)
             ->delete();
     }
+
+    bb_setcookie('bb_2fa_reauth', '', COOKIE_EXPIRED, true);
 
     if ($redirect_url == '/' . LOGIN_URL || $redirect_url == LOGIN_URL) {
         $redirect_url = '/';
