@@ -207,8 +207,21 @@ class User
                 $userdata = get_userdata(GUEST_UID, false, true);
             }
 
-            // Users with 2FA enabled cannot autologin — force login flow
+            // Users with 2FA enabled: autologin triggers 2FA re-verification
             if ($login && !empty($userdata['totp_enabled']) && config()->get('auth.two_factor.enabled')) {
+                $pendingToken = Str::random(32);
+                CACHE('bb_cache')->set('2fa_pending_' . $pendingToken, [
+                    'user_id' => $userdata['user_id'],
+                    'mod_admin_login' => false,
+                    'ip' => USER_IP,
+                    'autologin' => true,
+                ], config()->get('auth.two_factor.pending_ttl'));
+
+                bb_setcookie('bb_2fa_reauth', $pendingToken, COOKIE_SESSION, true);
+
+                // Invalidate autologin key so stolen cookie can't be reused
+                $this->create_autologin_id($userdata, false);
+
                 $userdata = get_userdata(GUEST_UID, false, true);
                 $login = false;
                 $this->set_session_cookies(GUEST_UID);
@@ -251,7 +264,7 @@ class User
     /**
      * Create new session for the given user
      */
-    public function session_create(array $userdata, bool $auto_created = false): array
+    public function session_create(array $userdata, bool $auto_created = false, bool $autologin = false): array
     {
         $this->data = $userdata;
         $session_id = $this->sessiondata['sid'];
@@ -309,7 +322,7 @@ class User
 
                 $this->data['user_lastvisit'] = $last_visit;
             }
-            if (request()->post->has('autologin') && config()->get('allow_autologin')) {
+            if (($autologin || request()->post->has('autologin')) && config()->get('allow_autologin')) {
                 if (!$auto_created) {
                     $this->verify_autologin_id($this->data, true, true);
                 }
@@ -412,6 +425,7 @@ class User
                         'user_id' => $userdata['user_id'],
                         'mod_admin_login' => $mod_admin_login,
                         'ip' => USER_IP,
+                        'autologin' => request()->post->has('autologin'),
                     ], config()->get('auth.two_factor.pending_ttl'));
 
                     return ['2fa_required' => true, '2fa_token' => $pendingToken];

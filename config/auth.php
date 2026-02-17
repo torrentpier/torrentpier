@@ -40,9 +40,9 @@ return [
     'invalid_logins' => 5,
     'sessions' => [
         'update_interval' => 180,
-        'user_duration' => 1800,
+        'user_duration' => 1209600,
         'admin_duration' => 6 * 3600,
-        'gc_ttl' => 1800,
+        'gc_ttl' => 86400,
         'cache_gc_ttl' => 1200,
         'max_last_visit_days' => 14,
         'last_visit_update_interval' => 3600,
