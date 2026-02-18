@@ -94,7 +94,7 @@ class ManageUserController
 
             case 'user_activate':
                 if (empty($body['confirmed'])) {
-                    return $this->promptConfirm(__('DEACTIVATE_CONFIRM'));
+                    return $this->promptConfirm(__('ACTIVATE_CONFIRM'));
                 }
 
                 DB()->query('UPDATE ' . BB_USERS . ' SET user_active = 1 WHERE user_id = ' . $userId);
@@ -106,7 +106,7 @@ class ManageUserController
                     return $this->error(__('USER_DEACTIVATE_ME'));
                 }
                 if (empty($body['confirmed'])) {
-                    return $this->promptConfirm(__('ACTIVATE_CONFIRM'));
+                    return $this->promptConfirm(__('DEACTIVATE_CONFIRM'));
                 }
 
                 DB()->query('UPDATE ' . BB_USERS . ' SET user_active = 0 WHERE user_id = ' . $userId);
