@@ -3800,16 +3800,16 @@
         },
         {
             "name": "nette/caching",
-            "version": "v3.4.0",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/caching.git",
-                "reference": "a1c13221b350d0db0a2bd4a77c1e7b65e0aa065d"
+                "reference": "7133d653156b3b9fac2f6f0b5ba35fa020a94e8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/caching/zipball/a1c13221b350d0db0a2bd4a77c1e7b65e0aa065d",
-                "reference": "a1c13221b350d0db0a2bd4a77c1e7b65e0aa065d",
+                "url": "https://api.github.com/repos/nette/caching/zipball/7133d653156b3b9fac2f6f0b5ba35fa020a94e8c",
+                "reference": "7133d653156b3b9fac2f6f0b5ba35fa020a94e8c",
                 "shasum": ""
             },
             "require": {
@@ -3822,8 +3822,10 @@
             "require-dev": {
                 "latte/latte": "^3.0.12",
                 "nette/di": "^3.1 || ^4.0",
-                "nette/tester": "^2.4",
-                "phpstan/phpstan-nette": "^2.0@stable",
+                "nette/phpstan-rules": "^1.0",
+                "nette/tester": "^2.6",
+                "phpstan/extension-installer": "^1.4@stable",
+                "phpstan/phpstan": "^2.1.40@stable",
                 "psr/simple-cache": "^2.0 || ^3.0",
                 "tracy/tracy": "^2.9"
             },
@@ -3871,9 +3873,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/caching/issues",
-                "source": "https://github.com/nette/caching/tree/v3.4.0"
+                "source": "https://github.com/nette/caching/tree/v3.4.1"
             },
-            "time": "2025-08-06T23:05:08+00:00"
+            "time": "2026-02-25T23:23:41+00:00"
         },
         {
             "name": "nette/database",
@@ -11580,5 +11582,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
