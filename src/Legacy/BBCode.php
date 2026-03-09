@@ -322,10 +322,10 @@ class BBCode
 			(?<![\"'=])
 			\\b
 			(
-				https?://[\\w\\#!$%&~/.\\-;:=?@\\p{Cyrillic}()\\[\\]+]+
+				https?://[\\w\\#!$%&~/.\\-;:=,?@\\p{Cyrillic}()\\[\\]+]+
 			)
 			(?![\"']|\\[/url|\\[/img|</a)
-			(?=[,!]?\\s|[\\)<!])
+			(?=\\s|[\\)<!]|,\\s)
 		#xiu";
 
         // pad it with a space so we can match things at the start of the 1st line.

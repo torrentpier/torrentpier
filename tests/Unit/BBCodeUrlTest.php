@@ -176,6 +176,20 @@ namespace {
             expect($result)->toContain('href="http://example.com/path?foo=bar&baz=1"');
         });
 
+        it('handles URL with commas in query parameters', function () {
+            $result = parseBBCode('[url=portal.php?mode=forum&search=55,49,50,47,51,48]link text[/url]');
+
+            expect($result)->toContain('href="portal.php?mode=forum&search=55,49,50,47,51,48"')
+                ->and($result)->toContain('>link text</a>');
+        });
+
+        it('handles URL with commas in query parameters (http)', function () {
+            $result = parseBBCode('[url=http://example.com/page?ids=1,2,3,4,5]link[/url]');
+
+            expect($result)->toContain('href="http://example.com/page?ids=1,2,3,4,5"')
+                ->and($result)->toContain('>link</a>');
+        });
+
         it('handles empty brackets in URL parameter', function () {
             $result = parseBBCode('[url=http://example.com/page_[]_test]click[/url]');
 
