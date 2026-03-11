@@ -104,8 +104,8 @@ class LinkCommand extends Command
                 // Compare paths: check if it's the same relative path or resolves to the same absolute path
                 $currentRealPath = @realpath($currentTarget);
                 $targetRealPath = @realpath($target);
-                $isCorrectTarget = $currentTarget === $relativePath ||
-                                   ($currentRealPath !== false && $targetRealPath !== false && $currentRealPath === $targetRealPath);
+                $isCorrectTarget = $currentTarget === $relativePath
+                                   || ($currentRealPath !== false && $targetRealPath !== false && $currentRealPath === $targetRealPath);
 
                 if (!$input->getOption('force')) {
                     if ($isCorrectTarget) {
@@ -174,6 +174,7 @@ class LinkCommand extends Command
                 $this->error('Failed to create symbolic link.');
                 $this->comment('mklink output: ' . implode("\n", $execOutput));
                 $this->comment('On Windows, you may need to run as Administrator or enable Developer Mode.');
+
                 return self::FAILURE;
             }
         } else {
