@@ -9,7 +9,7 @@
  */
 
 if (!config()->get('terms') && !IS_ADMIN) {
-    redirect('index.php');
+    redirect('/');
 }
 
 print_page('terms.twig', variables: [

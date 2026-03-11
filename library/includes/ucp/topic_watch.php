@@ -147,6 +147,6 @@ if ($watch_count > 0) {
         'PER_PAGE' => $per_page,
     ]);
 } else {
-    meta_refresh('index.php');
+    meta_refresh('/');
     bb_die(__('NO_WATCHED_TOPICS'));
 }
