@@ -42,7 +42,7 @@ switch ($mode) {
      */
     case 'register':
         if (!$can_register) {
-            redirect('index.php');
+            redirect('/');
         }
 
         if (!IS_ADMIN) {
@@ -671,7 +671,7 @@ if ($submit && !$errors) {
                 $message = __('PROFILE_UPDATED_INACTIVE');
                 user()->session_end();
             } else {
-                meta_refresh('index.php', 10);
+                meta_refresh('/', 10);
                 $message = __('PROFILE_UPDATED');
             }
 
@@ -697,7 +697,7 @@ if ($submit && !$errors) {
             } elseif (!$pr_data['user_active']) {
                 bb_die(__('PROFILE_UPDATED_INACTIVE'));
             } else {
-                meta_refresh('index.php', 10);
+                meta_refresh('/', 10);
                 bb_die(__('PROFILE_UPDATED'));
             }
         } else {

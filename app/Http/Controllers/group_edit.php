@@ -89,7 +89,7 @@ if ($is_moderator) {
 
     require PAGE_FOOTER;
 } else {
-    $redirect = 'index.php';
+    $redirect = '/';
 
     if ($group_id) {
         $redirect = url()->group($group_id, $group_info['group_name']);

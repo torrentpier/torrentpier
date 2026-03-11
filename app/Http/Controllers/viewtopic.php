@@ -123,7 +123,7 @@ if ($topic_id) {
 }
 
 if (!$t_data = DB()->fetch_row($sql)) {
-    meta_refresh('index.php', 10);
+    meta_refresh('/', 10);
     bb_die(__('TOPIC_POST_NOT_EXIST'), 404);
 }
 

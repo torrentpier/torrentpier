@@ -9,7 +9,7 @@
  */
 
 if (!config()->get('services.torrserver.enabled')) {
-    redirect('index.php');
+    redirect('/');
 }
 
 // Valid file formats

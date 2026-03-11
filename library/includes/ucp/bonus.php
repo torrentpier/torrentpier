@@ -27,7 +27,7 @@ if (request()->post->has('bonus_id')) {
     $points = $price_row[$id];
 
     if (userdata('user_points') < $points) {
-        meta_refresh(FORUM_PATH, 10);
+        meta_refresh('/', 10);
 
         $message = __('BONUS_NOT_SUCCES') . '<br /><br /><a href="' . BONUS_URL . '">' . __('BONUS_RETURN') . '</a><br /><br /><a href="' . url()->member(userdata('user_id'), userdata('username')) . '">' . __('RETURN_PROFILE') . '</a><br /><br />' . sprintf(__('CLICK_RETURN_INDEX'), '<a href="' . FORUM_PATH . '">', '</a>');
 

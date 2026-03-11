@@ -151,7 +151,7 @@ if ($topic_id) {
 
 // Check if user did or did not confirm. If they did not, forward them to the last page they were on
 if (request()->post->has('cancel') || IS_GUEST) {
-    $redirect = 'index.php';
+    $redirect = '/';
 
     if ($topic_id || $forum_id) {
         $redirect = ($topic_id) ? TOPIC_URL . $topic_id : FORUM_URL . $forum_id;
