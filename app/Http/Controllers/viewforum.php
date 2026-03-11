@@ -360,7 +360,7 @@ if ($title_match) {
             $title_match_sql = "AND t.topic_id IN({$search_match_topics_csv})";
         } else {
             // No topics found - ensure SQL returns empty result
-            $title_match_sql = "AND t.topic_id IN(0)";
+            $title_match_sql = 'AND t.topic_id IN(0)';
         }
     }
 }
