@@ -40,6 +40,12 @@ class LinkCommand extends Command
                 'r',
                 InputOption::VALUE_NONE,
                 'Create a relative symlink (default behavior)',
+            )
+            ->addOption(
+                'absolute',
+                'a',
+                InputOption::VALUE_NONE,
+                'Create an absolute symlink instead of relative',
             );
     }
 
@@ -54,6 +60,10 @@ class LinkCommand extends Command
         $link = PUBLIC_DIR . '/storage';  // public/storage
         $relativePath = '../storage/app/public';
 
+        // Determine whether to use relative or absolute paths
+        // Default is relative unless --absolute is specified
+        $useRelative = !$input->getOption('absolute');
+
         // Check if the target directory exists
         if (!files()->isDirectory($target)) {
             $this->error("Target directory does not exist: {$target}");
@@ -64,30 +74,74 @@ class LinkCommand extends Command
 
         // Check current state
         if (is_link($link)) {
-            $currentTarget = readlink($link);
-            $isCorrectTarget = $currentTarget === $relativePath || realpath($currentTarget) === realpath($target);
+            $currentTarget = @readlink($link);
 
-            if (!$input->getOption('force')) {
-                if ($isCorrectTarget) {
-                    $this->info('Symlink already exists and points to the correct location.');
-                    $this->definitionList(
-                        ['Link' => $link],
-                        ['Target' => $relativePath],
-                    );
+            // Handle case when readlink fails (e.g., on Windows with invalid symlinks)
+            if ($currentTarget === false) {
+                if (!$input->getOption('force')) {
+                    $this->warning('Symlink exists but cannot be read (possibly corrupted).');
+                    $this->comment('Use --force to overwrite.');
 
-                    return self::SUCCESS;
+                    return self::FAILURE;
                 }
 
-                $this->warning('Symlink exists but points to a different location: ' . $currentTarget);
-                $this->comment('Use --force to overwrite.');
+                if (!$this->deleteSymlink($link)) {
+                    $this->error('Failed to remove existing symlink.');
 
-                return self::FAILURE;
+                    return self::FAILURE;
+                }
+
+                // Verify deletion on Windows
+                if (PHP_OS_FAMILY === 'Windows' && file_exists($link)) {
+                    $this->error('Symlink still exists after deletion attempt.');
+                    $this->comment('Try running as Administrator or manually delete: ' . $link);
+
+                    return self::FAILURE;
+                }
+
+                $this->comment('Existing invalid symlink removed.');
+            } else {
+                // Compare paths: check if it's the same relative path or resolves to the same absolute path
+                $currentRealPath = @realpath($currentTarget);
+                $targetRealPath = @realpath($target);
+                $isCorrectTarget = $currentTarget === $relativePath
+                                   || ($currentRealPath !== false && $targetRealPath !== false && $currentRealPath === $targetRealPath);
+
+                if (!$input->getOption('force')) {
+                    if ($isCorrectTarget) {
+                        $this->info('Symlink already exists and points to the correct location.');
+                        $this->definitionList(
+                            ['Link' => $link],
+                            ['Target' => $currentTarget],
+                        );
+
+                        return self::SUCCESS;
+                    }
+
+                    $this->warning('Symlink exists but points to a different location: ' . $currentTarget);
+                    $this->comment('Use --force to overwrite.');
+
+                    return self::FAILURE;
+                }
+
+                if (!$this->deleteSymlink($link)) {
+                    $this->error('Failed to remove existing symlink.');
+
+                    return self::FAILURE;
+                }
+
+                // Verify deletion on Windows
+                if (PHP_OS_FAMILY === 'Windows' && file_exists($link)) {
+                    $this->error('Symlink still exists after deletion attempt.');
+                    $this->comment('Try running as Administrator or manually delete: ' . $link);
+
+                    return self::FAILURE;
+                }
+
+                $this->comment($isCorrectTarget
+                    ? 'Existing symlink removed.'
+                    : 'Existing symlink removed (was pointing to: ' . $currentTarget . ')');
             }
-
-            files()->delete($link);
-            $this->comment($isCorrectTarget
-                ? 'Existing symlink removed.'
-                : 'Existing symlink removed (was pointing to: ' . $currentTarget . ')');
         } elseif (files()->exists($link)) {
             $this->error("Path exists and is not a symlink: {$link}");
             $this->comment('Remove or rename this file/directory manually before creating the symlink.');
@@ -96,23 +150,56 @@ class LinkCommand extends Command
         }
 
         // Create the symlink
-        // We need to change to the public directory to create a relative symlink
-        $originalDir = getcwd();
-        chdir(PUBLIC_DIR);
-        $success = symlink($relativePath, 'storage');
-        chdir($originalDir);
+        if (PHP_OS_FAMILY === 'Windows') {
+            // On Windows, use mklink command for proper directory symlink creation
+            $linkPath = str_replace('/', DIRECTORY_SEPARATOR, $link);
+
+            // Use relative or absolute path based on configuration
+            if ($useRelative) {
+                // Convert relative path to Windows format
+                $targetPath = str_replace('/', DIRECTORY_SEPARATOR, $relativePath);
+            } else {
+                $targetPath = str_replace('/', DIRECTORY_SEPARATOR, $target);
+            }
+
+            // Use mklink /D for directory symbolic link
+            $command = \sprintf('mklink /D "%s" "%s"', $linkPath, $targetPath);
+            $execOutput = [];
+            exec($command, $execOutput, $returnCode);
+
+            $success = $returnCode === 0;
+
+            // If failed, provide detailed error information
+            if (!$success && !empty($execOutput)) {
+                $this->error('Failed to create symbolic link.');
+                $this->comment('mklink output: ' . implode("\n", $execOutput));
+                $this->comment('On Windows, you may need to run as Administrator or enable Developer Mode.');
+
+                return self::FAILURE;
+            }
+        } else {
+            // On Unix-like systems
+            $originalDir = getcwd();
+            chdir(PUBLIC_DIR);
+
+            // Use relative or absolute path based on configuration
+            $symlinkTarget = $useRelative ? $relativePath : $target;
+            $success = symlink($symlinkTarget, 'storage');
+
+            chdir($originalDir);
+        }
 
         if ($success) {
             $this->success('Symbolic link created successfully!');
             $this->definitionList(
                 ['Link' => $link],
-                ['Target' => $relativePath],
+                ['Target' => $useRelative ? $relativePath : $target],
             );
 
             return self::SUCCESS;
         }
 
-        // Symlink creation failed
+        // Symlink creation failed (Unix or Windows without detailed error)
         $this->error('Failed to create symbolic link.');
 
         if (PHP_OS_FAMILY === 'Windows') {
@@ -120,5 +207,22 @@ class LinkCommand extends Command
         }
 
         return self::FAILURE;
+    }
+
+    /**
+     * Delete a symbolic link (Windows-compatible)
+     */
+    private function deleteSymlink(string $link): bool
+    {
+        if (PHP_OS_FAMILY === 'Windows') {
+            // On Windows, try rmdir first (for directory symlinks), then unlink
+            if (@rmdir($link)) {
+                return true;
+            }
+
+            return @unlink($link);
+        }
+
+        return files()->delete($link);
     }
 }
