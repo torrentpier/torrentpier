@@ -77,6 +77,7 @@ class LinkCommand extends Command
 
                 if (!$this->deleteSymlink($link)) {
                     $this->error('Failed to remove existing symlink.');
+
                     return self::FAILURE;
                 }
 
@@ -84,6 +85,7 @@ class LinkCommand extends Command
                 if (PHP_OS_FAMILY === 'Windows' && file_exists($link)) {
                     $this->error('Symlink still exists after deletion attempt.');
                     $this->comment('Try running as Administrator or manually delete: ' . $link);
+
                     return self::FAILURE;
                 }
 
@@ -110,6 +112,7 @@ class LinkCommand extends Command
 
                 if (!$this->deleteSymlink($link)) {
                     $this->error('Failed to remove existing symlink.');
+
                     return self::FAILURE;
                 }
 
@@ -117,6 +120,7 @@ class LinkCommand extends Command
                 if (PHP_OS_FAMILY === 'Windows' && file_exists($link)) {
                     $this->error('Symlink still exists after deletion attempt.');
                     $this->comment('Try running as Administrator or manually delete: ' . $link);
+
                     return self::FAILURE;
                 }
 
@@ -138,7 +142,7 @@ class LinkCommand extends Command
             $targetPath = str_replace('/', DIRECTORY_SEPARATOR, $target);
 
             // Use mklink /D for directory symbolic link
-            $command = sprintf('mklink /D "%s" "%s"', $linkPath, $targetPath);
+            $command = \sprintf('mklink /D "%s" "%s"', $linkPath, $targetPath);
             exec($command, $output, $returnCode);
 
             $success = $returnCode === 0;
@@ -180,6 +184,7 @@ class LinkCommand extends Command
             if (@rmdir($link)) {
                 return true;
             }
+
             return @unlink($link);
         }
 
