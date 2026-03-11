@@ -201,7 +201,7 @@ ajax.callback.post_mod_comment = function(data) {
 {% if SHOW_DL_LIST or SHOW_TOR_ACT %}{% include 'viewtopic_torrent.twig' %}{% endif %}
 
 {% if TOPIC_HAS_POLL or CAN_MANAGE_POLL %}
-<form id="poll-form" method="post" action="poll" style="display: none;">
+<form id="poll-form" method="post" action="/poll" style="display: none;">
 <input id="poll-mode" type="hidden" name="mode" value="" />
 <input type="hidden" name="topic_id" value="{{ TOPIC_ID }}" />
 <input type="hidden" name="{{ TOPIC_HASH }}" value="1" />
