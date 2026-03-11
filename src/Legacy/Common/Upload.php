@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use RuntimeException;
 use TorrentPier\Attachment;
+use TorrentPier\Data\FileExtensions;
 use TorrentPier\Image\ImageService;
 
 /**
@@ -53,11 +54,6 @@ class Upload
      * File size
      */
     public int $file_size = 0;
-
-    /**
-     * All allowed extensions to upload
-     */
-    public array $ext_ids = [];
 
     /**
      * Store caught errors while uploading
@@ -131,8 +127,6 @@ class Upload
         $file_name_ary = explode('.', $this->file['name']);
         $this->file_ext = strtolower(end($file_name_ary));
 
-        $this->ext_ids = array_flip(config()->get('attachments.file_id_ext'));
-
         // Actions for images [E.g. Change avatar]
         if ($this->cfg['max_width'] || $this->cfg['max_height']) {
             if ($img_info = getimagesize($this->file['tmp_name'])) {
@@ -183,12 +177,13 @@ class Upload
         }
 
         // Check extension
-        if ($uploaded_only && (!isset($this->ext_ids[$this->file_ext]) || !\in_array($this->file_ext, $this->cfg['allowed_ext'], true))) {
+        $this->file_ext_id = FileExtensions::getId($this->file_ext);
+
+        if ($this->file_ext_id === null || ($uploaded_only && !\in_array($this->file_ext, $this->cfg['allowed_ext'], true))) {
             $this->errors[] = \sprintf(__('UPLOAD_ERROR_NOT_ALLOWED'), htmlCHR($this->file_ext));
 
             return false;
         }
-        $this->file_ext_id = $this->ext_ids[$this->file_ext];
 
         return true;
     }
