@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['MODS']['MASS_EMAIL'] = basename(__FILE__);
-
-    return;
-}
-
 if (!config()->get('mail.enabled')) {
     bb_die(__('EMAILER_DISABLED'));
 }

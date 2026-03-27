@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['FORUMS']['MANAGE'] = basename(__FILE__);
-
-    return;
-}
-
 $post = request()->post->all();
 array_deep($post, 'trim');
 
@@ -225,7 +219,7 @@ if ($mode) {
             forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
-            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>'));
 
             break;
 
@@ -316,7 +310,7 @@ if ($mode) {
 
             $message = __('FORUMS_UPDATED') . '<br /><br />';
             $message .= $fix ? "{$fix}<br /><br />" : '';
-            $message .= sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+            $message .= sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
             bb_die($message);
 
             break;
@@ -343,7 +337,7 @@ if ($mode) {
             forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
-            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>'));
 
             break;
 
@@ -397,7 +391,7 @@ if ($mode) {
             forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
-            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>'));
 
             break;
 
@@ -484,7 +478,7 @@ if ($mode) {
             forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
-            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>'));
 
             break;
 
@@ -556,7 +550,7 @@ if ($mode) {
 
             $message = __('FORUMS_UPDATED') . '<br /><br />';
             $message .= $fix ? "{$fix}<br /><br />" : '';
-            $message .= sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+            $message .= sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
             bb_die($message);
 
             break;
@@ -1052,7 +1046,7 @@ function fix_orphan_sf(array $cat_forums, string $orphan_sf_sql = '', bool $show
         if ($show_mess) {
             $message = $done_mess . '<br /><br />';
             $message .= sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />';
-            $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+            $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
             bb_die($message);
         }
     }

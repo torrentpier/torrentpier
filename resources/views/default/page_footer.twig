@@ -1,4 +1,9 @@
-{% if SIMPLE_FOOTER %}<div class="copyright tCenter">{{ POWERED|raw }}</div>{% elseif IN_ADMIN %}{% else %}
+{% if SIMPLE_FOOTER %}<div class="copyright tCenter">{{ POWERED|raw }}</div>{% elseif IN_ADMIN %}
+    </main>
+  </div>
+</div>
+<script src="{{ SITE_URL }}assets/js/admin.js"></script>
+{% else %}
 
 	</div><!--/main_content_wrap-->
 	</td><!--/main_content-->

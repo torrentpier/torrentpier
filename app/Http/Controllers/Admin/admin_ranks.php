@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['USERS']['RANKS'] = basename(__FILE__);
-
-    return;
-}
-
 if (request()->has('mode')) {
     $mode = request()->getString('mode');
 } else {
@@ -140,7 +134,7 @@ if ($mode != '') {
             bb_die('Could not update / insert into ranks table');
         }
 
-        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
 
         datastore()->update('ranks');
 
@@ -168,7 +162,7 @@ if ($mode != '') {
 
                 datastore()->update('ranks');
 
-                bb_die(__('RANK_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+                bb_die(__('RANK_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>'));
             } else {
                 bb_die(__('MUST_SELECT_RANK'));
             }

@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['USERS']['DISALLOW'] = basename(__FILE__);
-
-    return;
-}
-
 $message = '';
 
 if (request()->post->has('add_name')) {
@@ -33,7 +27,7 @@ if (request()->post->has('add_name')) {
         $message = __('DISALLOW_SUCCESSFUL');
     }
 
-    $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_DISALLOWADMIN'), '<a href="admin_disallow.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+    $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_DISALLOWADMIN'), '<a href="admin_disallow.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
 
     bb_die($message);
 } elseif (request()->post->has('delete_name')) {
@@ -46,7 +40,7 @@ if (request()->post->has('add_name')) {
             bb_die('Could not removed disallowed user');
         }
 
-        $message .= __('DISALLOWED_DELETED') . '<br /><br />' . sprintf(__('CLICK_RETURN_DISALLOWADMIN'), '<a href="admin_disallow.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+        $message .= __('DISALLOWED_DELETED') . '<br /><br />' . sprintf(__('CLICK_RETURN_DISALLOWADMIN'), '<a href="admin_disallow.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
 
         bb_die($message);
     }

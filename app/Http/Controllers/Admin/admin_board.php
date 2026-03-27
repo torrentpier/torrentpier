@@ -8,17 +8,10 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['GENERAL']['CONFIGURATION'] = basename(__FILE__) . '?mode=config';
-    $module['MODS']['CONFIGURATION'] = basename(__FILE__) . '?mode=config_mods';
-
-    return;
-}
-
 $mode = request()->query->get('mode', '');
 
 $return_links = [
-    'index' => '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'),
+    'index' => '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>'),
     'config' => '<br /><br />' . sprintf(__('CLICK_RETURN_CONFIG'), '<a href="admin_board.php?mode=config">', '</a>'),
     'config_mods' => '<br /><br />' . sprintf(__('CLICK_RETURN_CONFIG_MODS'), '<a href="admin_board.php?mode=config_mods">', '</a>'),
 ];

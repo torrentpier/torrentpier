@@ -8,17 +8,11 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['GENERAL']['TERMS'] = basename(__FILE__);
-
-    return;
-}
-
 $preview = request()->post->has('preview');
 
 if (request()->post->has('post') && (config()->get('terms') !== request()->post->get('message'))) {
     bb_update_config(['terms' => request()->post->get('message')]);
-    bb_die(__('TERMS_UPDATED_SUCCESSFULLY') . '<br /><br />' . sprintf(__('CLICK_RETURN_TERMS_CONFIG'), '<a href="admin_terms.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+    bb_die(__('TERMS_UPDATED_SUCCESSFULLY') . '<br /><br />' . sprintf(__('CLICK_RETURN_TERMS_CONFIG'), '<a href="admin_terms.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>'));
 }
 
 template()->assign_vars([

@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['FORUMS']['PERMISSIONS'] = basename(__FILE__);
-
-    return;
-}
-
 $forum_auth_fields = [
     'auth_view',
     'auth_read',
