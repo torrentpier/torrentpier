@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['GROUPS']['MANAGE'] = basename(__FILE__);
-
-    return;
-}
-
 $group_id = request()->getInt(POST_GROUPS_URL);
 $mode = request()->getString('mode');
 
@@ -78,7 +72,7 @@ if (request()->post->get('edit') || request()->post->get('new')) {
 
         $message = __('DELETED_GROUP') . '<br /><br />';
         $message .= sprintf(__('CLICK_RETURN_GROUPSADMIN'), '<a href="admin_groups.php">', '</a>') . '<br /><br />';
-        $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+        $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
 
         bb_die($message);
     } else {
@@ -131,7 +125,7 @@ if (request()->post->get('edit') || request()->post->get('new')) {
 
             $message = __('UPDATED_GROUP') . '<br /><br />';
             $message .= sprintf(__('CLICK_RETURN_GROUPSADMIN'), '<a href="admin_groups.php">', '</a>') . '<br /><br />';
-            $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+            $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
 
             bb_die($message);
         } elseif ($mode == 'newgroup') {
@@ -147,7 +141,7 @@ if (request()->post->get('edit') || request()->post->get('new')) {
 
             $message = __('ADDED_NEW_GROUP') . '<br /><br />';
             $message .= sprintf(__('CLICK_RETURN_GROUPSADMIN'), '<a href="admin_groups.php">', '</a>') . '<br /><br />';
-            $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+            $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
 
             bb_die($message);
         } else {

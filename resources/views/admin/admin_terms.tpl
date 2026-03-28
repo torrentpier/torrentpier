@@ -15,7 +15,7 @@
 		</tr>
 		<tr class="row2">
 			<td>
-				<!-- INCLUDE posting_editor.tpl -->
+				{% include 'posting_editor.twig' %}
 			</td>
 		</tr>
 	</table>

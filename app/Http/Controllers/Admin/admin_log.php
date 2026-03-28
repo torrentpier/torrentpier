@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['USERS']['ACTIONS_LOG'] = basename(__FILE__);
-
-    return;
-}
-
 datastore()->enqueue([
     'moderators',
     'cat_forums',

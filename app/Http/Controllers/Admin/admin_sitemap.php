@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['MODS']['SITEMAP'] = basename(__FILE__);
-
-    return;
-}
-
 $sql = 'SELECT * FROM ' . BB_CONFIG . " WHERE config_name IN('sitemap_time', 'static_sitemap')";
 
 if (!$result = DB()->sql_query($sql)) {

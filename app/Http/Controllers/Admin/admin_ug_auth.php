@@ -8,13 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['USERS']['PERMISSIONS'] = basename(__FILE__) . '?mode=user';
-    $module['GROUPS']['PERMISSIONS'] = basename(__FILE__) . '?mode=group';
-
-    return;
-}
-
 use TorrentPier\Legacy\Group;
 
 $max_forum_name_length = 50;
@@ -38,7 +31,7 @@ function auth_updated_redirect(string $return_key, string $mode, string $post_pa
 {
     $message = __('AUTH_UPDATED') . '<br /><br />';
     $message .= sprintf(__($return_key), '<a href="admin_ug_auth.php?mode=' . $mode . '&' . $post_param . '=' . $id . '">', '</a>') . '<br /><br />';
-    $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+    $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
     bb_die($message);
 }
 
@@ -239,7 +232,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
     // Check if forums exist
     if (empty($forums['f'])) {
         $message = __('NO_FORUMS_AVAILABLE');
-        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
         bb_die($message);
     }
 
@@ -339,7 +332,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
     // Check if forums exist
     if (empty($forums['f'])) {
         $message = __('NO_FORUMS_AVAILABLE');
-        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
         bb_die($message);
     }
 

@@ -8,18 +8,12 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['MODS']['ROBOTS_TXT_EDITOR_TITLE'] = basename(__FILE__);
-
-    return;
-}
-
 if (request()->post->has('save')) {
     $robots_txt = request()->post->get('robots_txt', '');
 
     bb_update_config(['robots_txt' => $robots_txt]);
 
-    bb_die(__('ROBOTS_TXT_UPDATED_SUCCESSFULLY') . '<br /><br />' . sprintf(__('CLICK_RETURN_ROBOTS_TXT_CONFIG'), '<a href="admin_robots.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+    bb_die(__('ROBOTS_TXT_UPDATED_SUCCESSFULLY') . '<br /><br />' . sprintf(__('CLICK_RETURN_ROBOTS_TXT_CONFIG'), '<a href="admin_robots.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>'));
 }
 
 $current_content = config()->get('robots_txt') ?? '';

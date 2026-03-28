@@ -1,68 +1,3 @@
-<!-- IF TPL_ADMIN_FRAMESET -->
-<!--========================================================================-->
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="{CONTENT_ENCODING}">
-  <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
-  <title>{L_ADMIN}</title>
-</head>
-
-<frameset cols="220,*" rows="*" border="1" framespacing="1" frameborder="yes">
-  <frame src="index.php?pane=left" name="nav" marginwidth="0" marginheight="0" scrolling="auto">
-  <frame src="index.php?pane=right" name="main" marginwidth="0" marginheight="0" scrolling="auto">
-</frameset>
-</html>
-<!--========================================================================-->
-<!-- ENDIF / TPL_ADMIN_FRAMESET -->
-
-<!-- IF TPL_ADMIN_NAVIGATE -->
-<!--========================================================================-->
-
-<style>
-  body {
-    background: #E5E5E5;
-    min-width: 10px;
-  }
-
-  #body_container {
-    background: #E5E5E5;
-    padding: 4px 3px 4px;
-  }
-
-  table.forumline {
-    margin: 0 auto;
-  }
-</style>
-
-<table class="forumline" id="acp_main_nav">
-  <col class="row1">
-  <tr>
-    <th>{L_ADMIN}</th>
-  </tr>
-  <tr>
-    <td><a href="{U_ADMIN_INDEX}" target="main" class="med">{L_ADMIN_INDEX}</a></td>
-  </tr>
-  <tr>
-    <td><a href="{U_FORUM_INDEX}" target="_parent" class="med">{L_MAIN_INDEX}</a></td>
-  </tr>
-  <!-- BEGIN catrow -->
-  <tr>
-    <td class="catTitle">{catrow.ADMIN_CATEGORY}</td>
-  </tr>
-  <!-- BEGIN modulerow -->
-  <tr>
-    <td><a href="{catrow.modulerow.U_ADMIN_MODULE}" target="main" class="med">{catrow.modulerow.ADMIN_MODULE}</a></td>
-  </tr>
-  <!-- END modulerow -->
-  <!-- END catrow -->
-</table>
-
-<!--========================================================================-->
-<!-- ENDIF / TPL_ADMIN_NAVIGATE -->
-
-<!-- IF TPL_ADMIN_MAIN -->
-<!--========================================================================-->
 <script type="text/javascript">
   ajax.manage_admin = function (mode) {
     ajax.exec({
@@ -91,10 +26,8 @@
   }
 </script>
 
-<br/>
-
 <!-- IF ADMIN_LOCK_CRON -->
-<div class="alert alert-danger" style="width: 95%;">
+<div class="alert alert-danger">
   <h4 class="alert-heading">{L_ADMIN_DISABLE_CRON_TITLE}</h4>
   <hr/>
   <a href="#" id="unlock_cron" onclick="ajax.manage_admin('unlock_cron'); return false;">{L_ADMIN_UNLOCK_CRON}</a>
@@ -103,7 +36,7 @@
 <!-- ENDIF -->
 
 <!-- IF ADMIN_LOCK -->
-<div class="alert alert-danger" style="width: 95%;">
+<div class="alert alert-danger">
   <h4 class="alert-heading">{L_ADMIN_DISABLE_TITLE}</h4>
   <hr/>
   <a href="admin_board.php?mode=config">{L_ADMIN_UNLOCK}</a>
@@ -266,6 +199,3 @@
 <!-- ELSE -->
 <a href="{USERS_ONLINE_HREF}#online">{L_SHOW_ONLINE_USERLIST}</a>
 <!-- ENDIF -->
-
-<!--========================================================================-->
-<!-- ENDIF / TPL_ADMIN_MAIN -->

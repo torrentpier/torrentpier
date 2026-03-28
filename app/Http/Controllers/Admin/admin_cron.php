@@ -8,14 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    if (IS_SUPER_ADMIN) {
-        $module[APP_NAME]['CRON'] = basename(__FILE__) . '?mode=list';
-    }
-
-    return;
-}
-
 $mode = request()->query->get('mode', '');
 $job_id = request()->query->getInt('id');
 $submit = request()->post->has('submit');
@@ -76,7 +68,7 @@ switch ($mode) {
                 'ROW_CLASS' => !($i % 2) ? 'row2' : 'row1',
                 'JOB_ID' => $i + 1,
                 'CRON_ID' => $row['cron_id'],
-                'CRON_ACTIVE' => $row['cron_active'] ? '<img src="/assets/images/icon_run.gif" alt="' . __('YES') . '" />' : '<img src="/assets/images/icon_delete.gif" alt="' . __('NO') . '" />',
+                'CRON_ACTIVE' => $row['cron_active'] ? '<i class="icon-circle-check cron-icon" style="color: #28a745;" title="' . __('YES') . '"></i>' : '<i class="icon-circle-x cron-icon" style="color: #dc3545;" title="' . __('NO') . '"></i>',
                 'CRON_TITLE' => $row['cron_title'],
                 'CRON_SCRIPT' => $row['cron_script'],
                 'SCHEDULE' => $row['schedule'] ? __('SCHEDULE')[$row['schedule']] : '<b class="leech">' . __('NOSELECT') . '</b>',
@@ -194,7 +186,7 @@ switch ($mode) {
 
     case 'delete':
         TorrentPier\Legacy\Admin\Cron::delete_jobs($job_id);
-        bb_die(__('JOB_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+        bb_die(__('JOB_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>'));
         break;
 }
 

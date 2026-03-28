@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['MARKETPLACE']['MODIFICATIONS_LIST'] = basename(__FILE__);
-
-    return;
-}
-
 $apiUrl = config()->get('mods.api_url');
 $apiKey = config()->get('mods.api_key');
 $per_page = max(1, (int)config()->get('mods.per_page', 20));

@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['FORUMS']['PRUNE'] = basename(__FILE__);
-
-    return;
-}
-
 $all_forums = -1;
 $pruned_total = 0;
 $prune_performed = false;

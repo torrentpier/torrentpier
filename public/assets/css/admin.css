@@ -6,40 +6,1631 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+/* ==========================================================================
+   CSS Custom Properties
+   ========================================================================== */
+
+:root {
+  /* Brand */
+  --admin-brand: #273F61;
+  --admin-brand-dark: #1C2F4A;
+  --admin-brand-light: #34567E;
+  --admin-accent: #3B82F6;
+  --admin-accent-hover: #2563EB;
+
+  /* Layout dimensions */
+  --admin-topbar-height: 48px;
+  --admin-sidebar-width: 220px;
+
+  /* Surfaces */
+  --admin-bg: #F3F4F6;
+  --admin-surface: #FFFFFF;
+  --admin-surface-hover: #F9FAFB;
+  --admin-border: #E5E7EB;
+  --admin-border-light: #F0F0F0;
+
+  /* Text */
+  --admin-text: #1F2937;
+  --admin-text-secondary: #6B7280;
+  --admin-text-muted: #9CA3AF;
+  --admin-text-inverse: #FFFFFF;
+  --admin-text-topbar: rgba(255, 255, 255, 0.85);
+  --admin-text-topbar-hover: #FFFFFF;
+
+  /* Shadows */
+  --admin-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --admin-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --admin-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --admin-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* Transitions */
+  --admin-transition: 0.2s ease;
+  --admin-transition-fast: 0.15s ease;
+
+  /* Typography — single consistent font stack for entire admin panel */
+  --admin-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --admin-font-mono: "SF Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Font sizes — coherent scale */
+  --admin-font-size-xs: 11px;
+  --admin-font-size-sm: 12px;
+  --admin-font-size-base: 13px;
+  --admin-font-size-md: 14px;
+  --admin-font-size-lg: 16px;
+  --admin-font-size-xl: 18px;
+  --admin-font-size-2xl: 20px;
+
+  /* Radius */
+  --admin-radius: 6px;
+  --admin-radius-sm: 4px;
+  --admin-radius-lg: 8px;
+}
+
+/* ==========================================================================
+   Reset & Base — force consistent font across the entire admin panel
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--admin-font) !important;
+}
+
 body {
-  background: #E5E5E5;
-  min-width: 10px;
+  margin: 0;
+  padding: 0;
+  font-family: var(--admin-font);
+  font-size: var(--admin-font-size-md);
+  line-height: 1.5;
+  color: var(--admin-text);
+  background: var(--admin-bg);
+  min-width: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Override globals.css Verdana on form elements and options */
+#admin-wrapper input,
+#admin-wrapper textarea,
+#admin-wrapper select,
+#admin-wrapper optgroup,
+#admin-wrapper option,
+#admin-wrapper fieldset,
+#admin-wrapper legend,
+#admin-wrapper button {
+  font-family: var(--admin-font);
 }
 
 #body_container {
-  background: #E5E5E5;
-  padding: 0 6px 4px;
+  background: transparent;
+  padding: 0;
 }
 
-h1, h2, h3 {
-  margin: 0.8em 0;
-  font-size: 16px;
+/* ==========================================================================
+   Admin Wrapper
+   ========================================================================== */
+
+#admin-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   Top Navigation Bar (minimal — XenForo style)
+   ========================================================================== */
+
+#admin-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--admin-topbar-height);
+  background: var(--admin-brand);
+  color: var(--admin-text-inverse);
+  box-shadow: var(--admin-shadow-md);
+  padding: 0 16px;
+  flex-shrink: 0;
+}
+
+/* Brand area */
+.admin-topbar-brand {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.admin-topbar-brand a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--admin-text-inverse);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.admin-topbar-brand a:hover {
+  color: var(--admin-text-inverse);
+  opacity: 0.9;
+}
+
+/* Topbar right area */
+.admin-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+.admin-topbar-right a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: var(--admin-font-size-base);
+  font-weight: 500;
+  border-radius: var(--admin-radius-sm);
+  transition: color var(--admin-transition-fast), background var(--admin-transition-fast);
+  white-space: nowrap;
+}
+
+.admin-topbar-right a:hover {
+  color: var(--admin-text-inverse);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.admin-topbar-right a i {
+  width: 18px;
+  height: 18px;
+}
+
+/* Dashboard link in sidebar */
+.admin-sidebar-dashboard {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  color: var(--admin-text);
+  text-decoration: none;
+  font-size: var(--admin-font-size-md);
+  font-weight: 600;
+  transition: background var(--admin-transition-fast), color var(--admin-transition-fast);
+}
+
+.admin-sidebar-dashboard:hover {
+  background: var(--admin-surface-hover);
+  color: var(--admin-accent);
+}
+
+.admin-sidebar-dashboard.active {
+  color: var(--admin-accent);
+  background: #EFF6FF;
+  border-left: 3px solid var(--admin-accent);
+}
+
+.admin-sidebar-dashboard i {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
+   Layout: Sidebar + Content
+   ========================================================================== */
+
+#admin-layout {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - var(--admin-topbar-height));
+}
+
+/* ==========================================================================
+   Sidebar
+   ========================================================================== */
+
+#admin-sidebar {
+  width: var(--admin-sidebar-width);
+  min-width: var(--admin-sidebar-width);
+  background: var(--admin-surface);
+  border-right: 1px solid var(--admin-border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex-shrink: 0;
+  transition: width var(--admin-transition), min-width var(--admin-transition),
+              transform var(--admin-transition);
+  z-index: 900;
+}
+
+#admin-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+#admin-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#admin-sidebar::-webkit-scrollbar-thumb {
+  background: var(--admin-border);
+  border-radius: 4px;
+}
+
+#admin-sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--admin-text-muted);
+}
+
+/* Collapsed sidebar */
+.sidebar-collapsed #admin-sidebar {
+  width: 0;
+  min-width: 0;
+  border-right-width: 0;
+  overflow: hidden;
+}
+
+/* Sidebar sections */
+.admin-sidebar-section {
+  border-bottom: 1px solid var(--admin-border-light);
+}
+
+.admin-sidebar-section:last-child {
+  border-bottom: none;
+}
+
+/* Sidebar headings */
+/* Sidebar heading — XenForo-style large clickable section */
+.admin-sidebar-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  margin: 0;
+  font-size: var(--admin-font-size-md);
+  font-weight: 500;
+  color: var(--admin-text);
+  cursor: pointer;
+  user-select: none;
+  transition: color var(--admin-transition-fast), background var(--admin-transition-fast);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--admin-border-light);
+  width: 100%;
+  text-align: left;
+}
+
+.admin-sidebar-heading span {
+  flex: 1;
+}
+
+.admin-sidebar-heading:hover {
+  color: var(--admin-accent);
+  background: var(--admin-surface-hover);
+}
+
+.admin-sidebar-heading i {
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* Arrow indicator */
+.admin-sidebar-heading::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid currentColor;
+  opacity: 0.4;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.admin-sidebar-section.open .admin-sidebar-heading::after {
+  transform: rotate(180deg);
+}
+
+.admin-sidebar-section.open .admin-sidebar-heading {
+  color: var(--admin-accent);
+  background: rgba(59, 130, 246, 0.04);
+}
+
+/* Sidebar items */
+.admin-sidebar-items {
+  display: none;
+  padding: 4px 0 8px;
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+.admin-sidebar-section.open .admin-sidebar-items {
+  display: block;
+}
+
+.admin-sidebar-items a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px 6px 24px;
+  color: var(--admin-text-secondary);
+  text-decoration: none;
+  font-size: var(--admin-font-size-base);
+  line-height: 1.4;
+  transition: color var(--admin-transition-fast),
+              background var(--admin-transition-fast),
+              border-color var(--admin-transition-fast);
+  border-left: 3px solid transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-sidebar-items a:hover {
+  color: var(--admin-text);
+  background: var(--admin-surface-hover);
+}
+
+.admin-sidebar-items a.active {
+  color: var(--admin-accent);
+  background: #EFF6FF;
+  border-left-color: var(--admin-accent);
+  font-weight: 500;
+}
+
+.admin-sidebar-items a svg,
+.admin-sidebar-items a i {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.65;
+}
+
+.admin-sidebar-items a.active svg,
+.admin-sidebar-items a.active i {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Main Content Area
+   ========================================================================== */
+
+#admin-content {
+  flex: 1;
+  min-width: 0;
+  padding: 24px;
+  overflow-x: auto;
+  font-size: var(--admin-font-size-md);
+}
+
+/* Page title inside content area — direct children */
+#admin-content > h1,
+#admin-content > h2,
+#admin-content > h3 {
+  margin: 0 0 16px;
+  font-size: var(--admin-font-size-2xl);
+  font-weight: 600;
+  color: var(--admin-text);
+  line-height: 1.3;
+}
+
+/* ==========================================================================
+   Typography overrides for admin context
+   Establishes a proper heading hierarchy within the admin panel.
+   ========================================================================== */
+
+h1 {
+  margin: 0.6em 0;
+  font-size: var(--admin-font-size-xl);
+  font-weight: 600;
+  color: var(--admin-text);
+}
+
+h2 {
+  margin: 0.5em 0;
+  font-size: var(--admin-font-size-lg);
+  font-weight: 600;
+  color: var(--admin-text);
+}
+
+h3 {
+  margin: 0.4em 0;
+  font-size: var(--admin-font-size-md);
+  font-weight: 600;
+  color: var(--admin-text);
 }
 
 h4 {
-  margin: 0.1em 0.2em;
-  color: #273F61;
-  font-size: 11px;
-  font-weight: bold;
+  margin: 0.3em 0;
+  color: var(--admin-brand);
+  font-size: var(--admin-font-size-base);
+  font-weight: 600;
 }
 
 h5 {
-  margin: 0.1em 0.6em;
+  margin: 0.2em 0.6em;
   color: #333399;
-  font-family: "Courier New", serif;
+  font-family: var(--admin-font-mono);
+  font-size: var(--admin-font-size-sm);
 }
 
 h6 {
   margin: 0.3em 0.6em;
-  color: #444444;
-  line-height: 100%;
+  color: var(--admin-text-secondary);
+  font-size: var(--admin-font-size-sm);
+  line-height: 1.4;
 }
 
-* html table.forumline {
-  width: 97%;
+/* ==========================================================================
+   Normalize legacy text-size classes from globals.css
+   These classes (.gen, .med, .small, .tiny etc.) use very small font sizes
+   (9-12px) that are too small for admin readability. We bump them ALL up to
+   at least 13px (--admin-font-size-base) within the admin wrapper so that
+   table cell text on pages like migrations, forum_prune, and user_ban is
+   always readable.
+   ========================================================================== */
+
+#admin-wrapper .gen,
+#admin-wrapper .gen td,
+#admin-wrapper .seed,
+#admin-wrapper .leech {
+  font-size: var(--admin-font-size-base) !important;
+}
+
+#admin-wrapper .med,
+#admin-wrapper .genmed,
+#admin-wrapper .seedmed,
+#admin-wrapper .leechmed,
+#admin-wrapper .med td {
+  font-size: var(--admin-font-size-base) !important;
+}
+
+#admin-wrapper .small,
+#admin-wrapper .gensmall,
+#admin-wrapper .seedsmall,
+#admin-wrapper .leechsmall,
+#admin-wrapper .small td {
+  font-size: var(--admin-font-size-base) !important;
+}
+
+#admin-wrapper .tiny,
+#admin-wrapper .tiny td {
+  font-size: var(--admin-font-size-base) !important;
+  letter-spacing: normal;
+}
+
+#admin-wrapper td.gen {
+  font-size: var(--admin-font-size-base) !important;
+}
+
+#admin-wrapper td.med {
+  font-size: var(--admin-font-size-base) !important;
+}
+
+#admin-wrapper td.small {
+  font-size: var(--admin-font-size-base) !important;
+}
+
+/* Catch-all: ensure ALL table cell text within admin content is at least 13px.
+   This prevents any missed classes from rendering too small. */
+#admin-content td,
+#admin-content th {
+  font-size: var(--admin-font-size-base);
+}
+
+/* Legacy navigation text inside admin */
+#admin-wrapper .nav {
+  font-size: var(--admin-font-size-base);
+}
+
+/* Admin link class from globals.css */
+#admin-wrapper .adm,
+#admin-wrapper a.adm,
+#admin-wrapper a.adm:visited {
+  font-size: var(--admin-font-size-base);
+}
+
+/* ==========================================================================
+   Preserved Legacy Table Styles (forumline, row1, row2, catTitle)
+   Admin module templates depend on these classes.
+
+   FIX #2 (white corners on tables): Changed from border-collapse: collapse
+   to border-collapse: separate + border-spacing: 0. This allows
+   border-radius + overflow: hidden to properly clip corner cells and
+   prevent white corner artifacts on .forumline tables (e.g. admin_disallow).
+   ========================================================================== */
+
+table.forumline {
+  width: 100%;
+  background: #B7C0C5;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid #B7C0C5;
+  border-radius: var(--admin-radius);
+  overflow: hidden;
+}
+
+.forumline th,
+.thHead {
+  border: 1px solid #B7C0C5;
+  border-top-color: #92A3A4;
+  padding: 8px 10px;
+  text-align: center;
+  color: #D5E4EC;
+  font-size: var(--admin-font-size-base) !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background: #1C508C;
+}
+
+.forumline td {
+  border: 1px solid #B7C0C5;
+  border-width: 0 1px 1px;
+  padding: 6px 10px;
+  font-size: var(--admin-font-size-base);
+}
+
+.forumline th:first-child {
+  border-left-color: #92A3A4;
+}
+
+.forumline th:last-child {
+  border-right-color: #92A3A4;
+}
+
+.row1,
+.row1 td {
+  background: #EFEFEF;
+}
+
+.row2,
+.row2 td {
+  background: #DEE3E7;
+}
+
+.row3 {
+  background: #D1D7DC;
+}
+
+.cat,
+td.cat,
+td.catTitle,
+td.catHead,
+td.catBottom {
+  padding: 5px 8px 6px;
+  background: #E0E5E9;
+}
+
+.catTitle {
+  font-weight: 600;
+  font-size: var(--admin-font-size-base);
+  letter-spacing: 1px;
+  color: #333333;
+  text-align: center;
+}
+
+.catTitle a {
+  text-decoration: none;
+}
+
+.cattitle {
+  font-weight: 600;
+  font-size: var(--admin-font-size-base);
+  letter-spacing: 1px;
+  color: #333333;
+}
+
+.catBottom {
+  text-align: center;
+}
+
+/* Admin main nav category titles (sidebar legacy) */
+#acp_main_nav .catTitle {
+  padding: 2px 6px 3px;
+  text-align: left;
+  font-size: var(--admin-font-size-xs);
+  letter-spacing: 0;
+}
+
+/* ==========================================================================
+   Enhanced forumline tables within admin content
+   ========================================================================== */
+
+#admin-content table.forumline {
+  border-radius: var(--admin-radius);
+  overflow: hidden;
+  box-shadow: var(--admin-shadow-sm);
+  margin-bottom: 16px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+#admin-content .forumline th {
+  background: var(--admin-brand);
+  color: var(--admin-text-inverse);
+  border-color: rgba(255, 255, 255, 0.08);
+  font-size: var(--admin-font-size-base) !important;
+  padding: 10px 12px;
+  letter-spacing: 0.03em;
+}
+
+#admin-content .forumline td {
+  padding: 7px 12px;
+  font-size: var(--admin-font-size-base);
+  border-color: var(--admin-border);
+}
+
+#admin-content .row1,
+#admin-content .row1 td {
+  background: var(--admin-surface);
+}
+
+#admin-content .row2,
+#admin-content .row2 td {
+  background: var(--admin-surface-hover);
+}
+
+/* ==========================================================================
+   FIX #4: Legacy bordered tables within admin content (admin_log,
+   admin_spam_log). The globals.css .bordered class has old blue borders
+   that clash with the admin panel design. Override to match the clean
+   admin aesthetic so these tables look consistent.
+   ========================================================================== */
+
+#admin-content table.bordered {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  overflow: hidden;
+  box-shadow: var(--admin-shadow-sm);
+  margin-bottom: 16px;
+  background: var(--admin-surface);
+}
+
+#admin-content .bordered th,
+#admin-content .bordered td {
+  border-color: var(--admin-border);
+}
+
+#admin-content .bordered th,
+#admin-content .bordered .thHead {
+  background: var(--admin-brand);
+  color: var(--admin-text-inverse);
+  border-color: rgba(255, 255, 255, 0.08);
+  font-size: var(--admin-font-size-base) !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+/* Fieldsets within admin log filter forms — clean up borders/spacing */
+#admin-content .fieldsets fieldset {
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-sm);
+  margin: 4px;
+  padding: 6px 10px;
+}
+
+#admin-content .fieldsets fieldset legend {
+  font-size: var(--admin-font-size-base);
+  font-weight: 500;
+  color: var(--admin-text-secondary);
+  padding: 0 4px;
+}
+
+/* Log filter tables (admin_log.tpl) */
+#admin-content table.log_filters {
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+
+#admin-content table.log_filters td {
+  border: 1px solid var(--admin-border) !important;
+  border-radius: var(--admin-radius-sm);
+  padding: 8px 12px;
+  background: var(--admin-surface) !important;
+}
+
+/* Row3 header row in admin tables (used in cron, log filter) */
+#admin-content .row3 {
+  background: var(--admin-surface-hover);
+}
+
+#admin-content .row3 td {
+  background: var(--admin-surface-hover);
+}
+
+/* spaceRow (bottom spacer row in forumline tables) */
+#admin-content .spaceRow,
+#admin-content .spaceRow td {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* ==========================================================================
+   Plain tables in admin content (non-forumline, e.g. dashboard action table)
+   ========================================================================== */
+
+#admin-content > table:not(.forumline) {
+  font-size: var(--admin-font-size-md);
+}
+
+#admin-content > table:not(.forumline) td {
+  padding: 4px 8px 4px 0;
+  vertical-align: top;
+}
+
+/* ==========================================================================
+   Form Elements (admin-scoped)
+   ========================================================================== */
+
+#admin-content input[type="text"],
+#admin-content input[type="password"],
+#admin-content input[type="email"],
+#admin-content input[type="number"],
+#admin-content input[type="url"],
+#admin-content input[type="search"],
+#admin-content textarea,
+#admin-content select {
+  font-family: var(--admin-font);
+  font-size: var(--admin-font-size-base);
+  padding: 6px 10px;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-surface);
+  color: var(--admin-text);
+  transition: border-color var(--admin-transition-fast), box-shadow var(--admin-transition-fast);
+  outline: none;
+}
+
+#admin-content input[type="text"]:focus,
+#admin-content input[type="password"]:focus,
+#admin-content input[type="email"]:focus,
+#admin-content input[type="number"]:focus,
+#admin-content input[type="url"]:focus,
+#admin-content input[type="search"]:focus,
+#admin-content textarea:focus,
+#admin-content select:focus {
+  border-color: var(--admin-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+#admin-content textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+#admin-content select {
+  cursor: pointer;
+}
+
+/* Buttons — unified admin blue accent color scheme, not random green/red */
+#admin-content input[type="submit"],
+#admin-content input[type="button"],
+#admin-content input[type="reset"],
+#admin-content button:not(.admin-sidebar-toggle) {
+  font-family: var(--admin-font);
+  font-size: var(--admin-font-size-base);
+  font-weight: 500;
+  padding: 6px 16px;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-sm);
+  background: var(--admin-surface);
+  color: var(--admin-text);
+  cursor: pointer;
+  transition: background var(--admin-transition-fast), border-color var(--admin-transition-fast),
+              box-shadow var(--admin-transition-fast), opacity var(--admin-transition-fast);
+}
+
+#admin-content input[type="submit"]:hover,
+#admin-content input[type="button"]:hover,
+#admin-content input[type="reset"]:hover,
+#admin-content button:not(.admin-sidebar-toggle):hover {
+  background: var(--admin-surface-hover);
+  border-color: #D1D5DB;
+  box-shadow: var(--admin-shadow-sm);
+}
+
+#admin-content input[type="submit"] {
+  background: var(--admin-accent);
+  color: var(--admin-text-inverse);
+  border-color: var(--admin-accent);
+}
+
+#admin-content input[type="submit"]:hover {
+  background: var(--admin-accent-hover);
+  border-color: var(--admin-accent-hover);
+}
+
+/* Disabled buttons — clearly look disabled with reduced opacity */
+#admin-content input[type="submit"]:disabled,
+#admin-content input[type="button"]:disabled,
+#admin-content input[type="reset"]:disabled,
+#admin-content button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Links within admin content
+   ========================================================================== */
+
+#admin-content a {
+  color: var(--admin-accent);
+  text-decoration: none;
+  transition: color var(--admin-transition-fast);
+}
+
+#admin-content a:hover {
+  color: var(--admin-accent-hover);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Alert boxes (used in admin templates)
+   ========================================================================== */
+
+#admin-content .alert {
+  padding: 14px 18px;
+  border-radius: var(--admin-radius);
+  margin-bottom: 16px;
+  font-size: var(--admin-font-size-base);
+  line-height: 1.5;
+}
+
+#admin-content .alert-danger {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #991B1B;
+}
+
+#admin-content .alert-success {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: #166534;
+}
+
+#admin-content .alert-warning {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  color: #92400E;
+}
+
+#admin-content .alert-info {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1E40AF;
+}
+
+#admin-content .alert-heading {
+  font-size: var(--admin-font-size-md);
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+#admin-content .alert hr {
+  border-color: inherit;
+  opacity: 0.25;
+  margin: 8px 0;
+}
+
+/* ==========================================================================
+   FIX #3: Migrations page — info box and setup guide contrast fixes.
+   The .info-box uses inline background: #e9ecef which is gray-on-gray
+   against the admin background (#F3F4F6). Override to a white card with
+   border for clear visual separation.
+   The .setup-guide uses inline background: #f8d7da. Override similarly.
+   The pending migrations warning div uses class="alert-warning" without
+   the .alert class.
+   ========================================================================== */
+
+#admin-content .info-box {
+  background: var(--admin-surface) !important;
+  border: 1px solid var(--admin-border) !important;
+  border-radius: var(--admin-radius) !important;
+  box-shadow: var(--admin-shadow-sm);
+  padding: 18px !important;
+  color: var(--admin-text);
+}
+
+#admin-content .info-box h3 {
+  margin: 0 0 8px;
+  color: var(--admin-text);
+  font-size: var(--admin-font-size-lg);
+}
+
+#admin-content .info-box p {
+  margin: 6px 0;
+  line-height: 1.6;
+}
+
+#admin-content .info-box ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+#admin-content .info-box li {
+  margin: 4px 0;
+  line-height: 1.6;
+}
+
+#admin-content .info-box code {
+  background: var(--admin-surface-hover);
+  border: 1px solid var(--admin-border);
+  padding: 2px 6px;
+  border-radius: var(--admin-radius-sm);
+  font-family: var(--admin-font-mono);
+  font-size: var(--admin-font-size-sm);
+}
+
+/* Setup guide (danger variant in migrations page) */
+#admin-content .setup-guide {
+  background: #FEF2F2 !important;
+  border: 1px solid #FECACA !important;
+  border-radius: var(--admin-radius) !important;
+  box-shadow: var(--admin-shadow-sm);
+  padding: 18px !important;
+  color: #991B1B;
+}
+
+#admin-content .setup-guide h3 {
+  color: #991B1B !important;
+  font-size: var(--admin-font-size-lg);
+}
+
+#admin-content .setup-guide h4 {
+  color: #B91C1C;
+  font-size: var(--admin-font-size-md);
+}
+
+#admin-content .setup-guide p {
+  color: var(--admin-text);
+}
+
+#admin-content .setup-guide pre {
+  background: var(--admin-surface) !important;
+  border: 1px solid var(--admin-border);
+  padding: 10px !important;
+  border-radius: var(--admin-radius-sm) !important;
+  font-family: var(--admin-font-mono);
+  font-size: var(--admin-font-size-sm);
+  color: var(--admin-text);
+  overflow-x: auto;
+}
+
+/* Pending migrations warning (div.alert-warning without .alert parent) */
+#admin-content div.alert-warning {
+  background: #FFFBEB !important;
+  border: 1px solid #FDE68A !important;
+  border-radius: var(--admin-radius) !important;
+  padding: 14px 18px !important;
+  color: #92400E;
+  font-size: var(--admin-font-size-base);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+#admin-content div.alert-warning code {
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  padding: 2px 6px;
+  border-radius: var(--admin-radius-sm);
+  font-family: var(--admin-font-mono);
+  font-size: var(--admin-font-size-sm);
+}
+
+/* ==========================================================================
+   FIX #5: Sitemap page — green button and burgundy text overrides.
+   The template uses inline .btn-success (green gradient) and inline
+   style="color: #993300" (burgundy). Override both to match the admin
+   blue accent color scheme.
+   ========================================================================== */
+
+#admin-content .btn {
+  display: inline-block;
+  padding: 6px 16px !important;
+  font-size: var(--admin-font-size-base) !important;
+  font-weight: 500;
+  border-radius: var(--admin-radius-sm) !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: background var(--admin-transition-fast), box-shadow var(--admin-transition-fast);
+}
+
+#admin-content .btn-success {
+  background: var(--admin-accent) !important;
+  background-image: none !important;
+  border: 1px solid var(--admin-accent) !important;
+  border-color: var(--admin-accent) !important;
+  color: var(--admin-text-inverse) !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+#admin-content .btn-success:hover,
+#admin-content .btn-success:focus {
+  background: var(--admin-accent-hover) !important;
+  background-color: var(--admin-accent-hover) !important;
+  border-color: var(--admin-accent-hover) !important;
+  box-shadow: var(--admin-shadow-sm);
+  color: var(--admin-text-inverse) !important;
+  text-shadow: none !important;
+}
+
+#admin-content .btn-success:active {
+  background: #1D4ED8 !important;
+  background-color: #1D4ED8 !important;
+  color: var(--admin-text-inverse) !important;
+  text-shadow: none !important;
+}
+
+#admin-content .btn-success:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Override inline burgundy/maroon text color: #993300 in sitemap template */
+#admin-content b[style*="color: #993300"],
+#admin-content b[style*="color:#993300"] {
+  color: var(--admin-text-secondary) !important;
+}
+
+/* Sitemap .td_pads custom padding — preserve */
+#admin-content .td_pads {
+  padding: 10px 15px !important;
+}
+
+/* ==========================================================================
+   FIX #6: Cron page — table width and layout fixes.
+   The cron table has 11 columns with nowrap on many cells, making it too
+   wide for the content area. Reduce padding, allow text wrap on less
+   critical columns, and provide graceful horizontal scroll as fallback.
+   ========================================================================== */
+
+/* Cron status indicator tables — modernize the green/yellow boxes */
+#admin-content table.cron_true,
+#admin-content table.cron_false {
+  border-radius: var(--admin-radius-sm);
+  overflow: hidden;
+}
+
+#admin-content table.cron_true {
+  border-color: #16A34A !important;
+  background: #DCFCE7 !important;
+}
+
+#admin-content table.cron_true td {
+  background: #F0FDF4 !important;
+  color: #166534 !important;
+  padding: 6px 10px !important;
+  font-size: var(--admin-font-size-base);
+}
+
+#admin-content table.cron_false {
+  border-color: #D97706 !important;
+  background: #FEF3C7 !important;
+}
+
+#admin-content table.cron_false td {
+  background: #FFFBEB !important;
+  color: #92400E !important;
+  padding: 6px 10px !important;
+  font-size: var(--admin-font-size-base);
+}
+
+/* Cron main table — compact cell padding to fit 11 columns */
+#admin-content .forumline .hl-tr td {
+  padding: 5px 6px;
+  font-size: var(--admin-font-size-base);
+}
+
+/* Cron warning row (.warnColor1 for disabled cron warning) */
+#admin-content .warnColor1 {
+  background: #FFFBEB !important;
+  color: #92400E !important;
+  border: none;
+  padding: 10px 12px;
+}
+
+/* Cron hover row — use admin blue tint instead of green */
+#admin-content tr.hl-tr:hover td {
+  background-color: #EFF6FF !important;
+}
+
+/* ==========================================================================
+   FIX #7: Modifications page — disabled install buttons and alignment.
+   The .mod-install-btn has inline styles that make it look like a gray
+   blob. Override to clearly look disabled with proper admin styling.
+   ========================================================================== */
+
+#admin-content .mod-install-btn {
+  background: var(--admin-surface-hover) !important;
+  color: var(--admin-text-muted) !important;
+  border: 1px solid var(--admin-border) !important;
+  border-radius: var(--admin-radius-sm) !important;
+  padding: 5px 14px !important;
+  font-size: var(--admin-font-size-base) !important;
+  font-family: var(--admin-font);
+  cursor: not-allowed;
+  opacity: 0.55;
+  transition: opacity var(--admin-transition-fast);
+}
+
+#admin-content .mod-install-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Mod tagline — bump up to base size for readability */
+#admin-content .mod-tagline {
+  font-size: var(--admin-font-size-sm) !important;
+  color: var(--admin-text-secondary);
+}
+
+/* Mod badges — slightly larger for readability */
+#admin-content .mod-badge-version,
+#admin-content .mod-badge-free,
+#admin-content .mod-badge-paid,
+#admin-content .mod-badge-other {
+  font-size: var(--admin-font-size-xs) !important;
+  padding: 2px 6px;
+}
+
+/* Total count alignment in modifications filter bar */
+#admin-content table.bordered .borderless td {
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   Spam log — spam-details expandable panel styling
+   ========================================================================== */
+
+#admin-content .spam-details {
+  background: var(--admin-surface-hover) !important;
+  border: 1px solid var(--admin-border) !important;
+  border-radius: var(--admin-radius-sm);
+  font-family: var(--admin-font-mono);
+  font-size: var(--admin-font-size-sm) !important;
+  color: var(--admin-text);
+  padding: 8px !important;
+  margin-top: 6px;
+}
+
+/* ==========================================================================
+   Admin Breadcrumb
+   ========================================================================== */
+
+.admin-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 0 16px;
+  margin: 0;
+  list-style: none;
+  font-size: var(--admin-font-size-base);
+  color: var(--admin-text-muted);
+}
+
+.admin-breadcrumb li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-breadcrumb li + li::before {
+  content: "/";
+  color: var(--admin-border);
+}
+
+.admin-breadcrumb a {
+  color: var(--admin-text-secondary);
+  text-decoration: none;
+}
+
+.admin-breadcrumb a:hover {
+  color: var(--admin-accent);
+}
+
+.admin-breadcrumb li:last-child {
+  color: var(--admin-text);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Admin Cards (optional utility)
+   ========================================================================== */
+
+.admin-card {
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-lg);
+  box-shadow: var(--admin-shadow-sm);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.admin-card-header {
+  padding: 14px 18px;
+  background: var(--admin-surface-hover);
+  border-bottom: 1px solid var(--admin-border);
+  font-size: var(--admin-font-size-md);
+  font-weight: 600;
+  color: var(--admin-text);
+}
+
+.admin-card-body {
+  padding: 18px;
+}
+
+/* ==========================================================================
+   Sidebar Overlay Backdrop (mobile)
+   ========================================================================== */
+
+.admin-sidebar-backdrop {
+  display: none;
+  position: fixed;
+  top: var(--admin-topbar-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 899;
+  opacity: 0;
+  transition: opacity var(--admin-transition);
+}
+
+.admin-sidebar-backdrop.visible {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Responsive: Tablet (< 1024px)
+   ========================================================================== */
+
+@media (max-width: 1023px) {
+  :root {
+    --admin-sidebar-width: 200px;
+  }
+
+  #admin-content {
+    padding: 20px;
+  }
+}
+
+/* ==========================================================================
+   Responsive: Mobile (< 768px)
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  /* Brand simplification */
+  .admin-topbar-brand {
+    width: auto;
+    min-width: auto;
+    padding: 0 12px;
+    background: var(--admin-brand-dark);
+  }
+
+  /* Topbar nav scrolls */
+  .admin-topbar-nav {
+    padding: 0 4px;
+  }
+
+  .admin-dropdown-toggle {
+    padding: 0 8px;
+    font-size: var(--admin-font-size-sm);
+  }
+
+  /* Sidebar becomes off-canvas overlay */
+  #admin-sidebar {
+    position: fixed;
+    top: var(--admin-topbar-height);
+    left: 0;
+    bottom: 0;
+    width: var(--admin-sidebar-width);
+    min-width: var(--admin-sidebar-width);
+    transform: translateX(-100%);
+    box-shadow: none;
+    z-index: 950;
+  }
+
+  /* Show sidebar when NOT collapsed on mobile */
+  #admin-wrapper:not(.sidebar-collapsed) #admin-sidebar {
+    transform: translateX(0);
+    box-shadow: var(--admin-shadow-lg);
+  }
+
+  /* Show backdrop when sidebar is open on mobile */
+  #admin-wrapper:not(.sidebar-collapsed) .admin-sidebar-backdrop {
+    display: block;
+  }
+
+  /* Collapsed state hides sidebar on mobile */
+  .sidebar-collapsed #admin-sidebar {
+    transform: translateX(-100%);
+    width: var(--admin-sidebar-width);
+    min-width: var(--admin-sidebar-width);
+    border-right-width: 1px;
+    overflow-y: auto;
+  }
+
+  /* Content takes full width */
+  #admin-content {
+    padding: 16px;
+  }
+
+  /* Slightly smaller table text on mobile for fitting */
+  #admin-content table.forumline {
+    font-size: var(--admin-font-size-sm);
+  }
+
+  /* Right area compacts */
+  .admin-topbar-right {
+    padding: 0 8px;
+  }
+
+  .admin-topbar-right a span {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Responsive: Extra small (< 480px)
+   ========================================================================== */
+
+@media (max-width: 479px) {
+  #admin-content {
+    padding: 12px;
+  }
+
+  .admin-topbar-brand-logo span {
+    display: none;
+  }
+
+  .admin-dropdown-toggle {
+    font-size: var(--admin-font-size-xs);
+    padding: 0 6px;
+  }
+
+  .admin-dropdown-menu {
+    position: fixed;
+    left: 0;
+    right: 0;
+    min-width: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+
+.admin-text-muted {
+  color: var(--admin-text-muted) !important;
+}
+
+.admin-text-danger {
+  color: #DC2626 !important;
+}
+
+.admin-text-success {
+  color: #16A34A !important;
+}
+
+.admin-text-warning {
+  color: #D97706 !important;
+}
+
+.admin-mt-0 { margin-top: 0 !important; }
+.admin-mb-0 { margin-bottom: 0 !important; }
+.admin-mb-sm { margin-bottom: 8px !important; }
+.admin-mb-md { margin-bottom: 16px !important; }
+.admin-mb-lg { margin-bottom: 24px !important; }
+.admin-p-0 { padding: 0 !important; }
+
+.admin-nowrap {
+  white-space: nowrap;
+}
+
+.admin-bold {
+  font-weight: 600;
+}
+
+.admin-mono {
+  font-family: var(--admin-font-mono);
+  font-size: var(--admin-font-size-sm);
+}
+
+/* ==========================================================================
+   Lucide Icon Integration
+   ========================================================================== */
+
+[class^="icon-"],
+[class*=" icon-"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+/* Ensure icons in sidebar and topbar are sized consistently */
+#admin-sidebar [class^="icon-"],
+#admin-sidebar [class*=" icon-"],
+#admin-topbar [class^="icon-"],
+#admin-topbar [class*=" icon-"] {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Scrollbar (Firefox)
+   ========================================================================== */
+
+#admin-sidebar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--admin-border) transparent;
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  #admin-topbar,
+  #admin-sidebar,
+  .admin-sidebar-backdrop,
+  .admin-sidebar-toggle {
+    display: none !important;
+  }
+
+  #admin-layout {
+    display: block;
+  }
+
+  #admin-content {
+    padding: 0;
+  }
+
+  body {
+    background: #FFFFFF;
+  }
+}
+
+/* ==========================================================================
+   phpinfo() output scoped styling
+   ========================================================================== */
+
+.phpinfo-output {
+  font-family: var(--admin-font);
+  font-size: var(--admin-font-size-base);
+  color: var(--admin-text);
+}
+
+.phpinfo-output table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+  background: var(--admin-surface);
+  border-radius: var(--admin-radius);
+  overflow: hidden;
+  box-shadow: var(--admin-shadow-sm);
+}
+
+.phpinfo-output td,
+.phpinfo-output th {
+  padding: 6px 10px;
+  border: 1px solid var(--admin-border);
+  text-align: left;
+  vertical-align: top;
+  font-size: var(--admin-font-size-base);
+  word-break: break-word;
+}
+
+.phpinfo-output th {
+  background: var(--admin-brand);
+  color: var(--admin-text-inverse);
+  font-weight: 600;
+}
+
+.phpinfo-output h1 {
+  font-size: var(--admin-font-size-xl);
+  margin: 16px 0 8px;
+  color: var(--admin-text);
+}
+
+.phpinfo-output h2 {
+  font-size: var(--admin-font-size-lg);
+  margin: 20px 0 8px;
+  padding: 8px 12px;
+  background: var(--admin-brand);
+  color: var(--admin-text-inverse);
+  border-radius: var(--admin-radius-sm);
+}
+
+.phpinfo-output .e {
+  background: var(--admin-surface-hover);
+  font-weight: 500;
+  width: 30%;
+}
+
+.phpinfo-output .v {
+  background: var(--admin-surface);
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.phpinfo-output hr {
+  border: none;
+  border-top: 1px solid var(--admin-border);
+  margin: 12px 0;
+}
+
+.phpinfo-output img {
+  display: none;
+}
+
+.phpinfo-output a {
+  color: var(--admin-accent);
+}
+
+.phpinfo-output a:hover {
+  color: var(--admin-accent-hover);
+}
+
+/* ==========================================================================
+   Cron Icons
+   ========================================================================== */
+
+/* Cron action icons — colored like the original GIF icons */
+#admin-content .cron-icon {
+  font-size: 16px;
+  vertical-align: middle;
+  margin: 0 1px;
+}
+
+#admin-content .icon-play.cron-icon {
+  color: #28a745;
+}
+
+#admin-content .icon-pencil.cron-icon {
+  color: #3B82F6;
+}
+
+#admin-content .icon-trash-2.cron-icon {
+  color: #dc3545;
+}
+
+/* Cron table — fit within content area */
+#admin-content .forumline .hl-tr td {
+  padding: 4px 6px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+#admin-content .forumline .hl-tr td.tLeft {
+  white-space: normal;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
