@@ -61,7 +61,7 @@ $have_new_pm = $have_unread_pm = 0;
 
 // Admin navigation
 if (defined('IN_ADMIN')) {
-    $adminNav = \TorrentPier\Admin\AdminNavigation::getTree(defined('BB_SCRIPT') ? BB_SCRIPT : '');
+    $adminNav = TorrentPier\Admin\AdminNavigation::getTree(defined('BB_SCRIPT') ? BB_SCRIPT : '');
     template()->assign_vars([
         'ADMIN_NAV_TREE' => $adminNav,
         'ADMIN_CURRENT_SCRIPT' => defined('BB_SCRIPT') ? BB_SCRIPT : '',

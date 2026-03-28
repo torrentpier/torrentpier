@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
@@ -22,7 +23,7 @@ class AdminNavigation
      */
     public static function getTree(string $currentScript = ''): array
     {
-        $cacheKey = self::CACHE_KEY . '_' . (defined('IS_SUPER_ADMIN') && IS_SUPER_ADMIN ? 'sa' : 'a');
+        $cacheKey = self::CACHE_KEY . '_' . (\defined('IS_SUPER_ADMIN') && IS_SUPER_ADMIN ? 'sa' : 'a');
 
         $tree = CACHE('bb_cache')->get($cacheKey);
 
@@ -56,7 +57,7 @@ class AdminNavigation
         }
 
         // Filter by permissions
-        $isSuperAdmin = defined('IS_SUPER_ADMIN') && IS_SUPER_ADMIN;
+        $isSuperAdmin = \defined('IS_SUPER_ADMIN') && IS_SUPER_ADMIN;
 
         $filtered = [];
         foreach ($rows as $row) {
@@ -85,8 +86,8 @@ class AdminNavigation
 
             // Translate title (handle constants like APP_NAME)
             $titleKey = $root['title_key'];
-            if (defined($titleKey)) {
-                $title = constant($titleKey);
+            if (\defined($titleKey)) {
+                $title = \constant($titleKey);
             } else {
                 $title = __($titleKey);
                 if (!$title || $title === $titleKey) {
@@ -106,8 +107,8 @@ class AdminNavigation
             if (isset($children[$id])) {
                 foreach ($children[$id] as $child) {
                     $childTitleKey = $child['title_key'];
-                    if (defined($childTitleKey)) {
-                        $childTitle = constant($childTitleKey);
+                    if (\defined($childTitleKey)) {
+                        $childTitle = \constant($childTitleKey);
                     } else {
                         $childTitle = __($childTitleKey);
                         if (!$childTitle || $childTitle === $childTitleKey) {
