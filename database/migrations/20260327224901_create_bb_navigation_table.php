@@ -17,87 +17,41 @@ final class CreateBbNavigationTable extends AbstractMigration
     {
         $table = $this->table('bb_navigation', [
             'id' => false,
-            'primary_key' => 'navigation_id',
-            'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_unicode_ci',
+            'primary_key' => 'navigation_id'
         ]);
 
         $table
-            ->addColumn('navigation_id', 'string', [
-                'limit' => 50,
-                'null' => false,
-            ])
-            ->addColumn('parent_navigation_id', 'string', [
-                'limit' => 50,
-                'default' => '',
-                'null' => false,
-            ])
-            ->addColumn('navigation_type', 'string', [
-                'limit' => 20,
-                'default' => 'admin',
-                'null' => false,
-            ])
-            ->addColumn('display_order', 'integer', [
-                'default' => 100,
-                'null' => false,
-            ])
-            ->addColumn('link', 'string', [
-                'limit' => 255,
-                'default' => '',
-                'null' => false,
-            ])
-            ->addColumn('icon', 'string', [
-                'limit' => 100,
-                'default' => '',
-                'null' => false,
-            ])
-            ->addColumn('title_key', 'string', [
-                'limit' => 100,
-                'default' => '',
-                'null' => false,
-            ])
-            ->addColumn('permission_check', 'string', [
-                'limit' => 50,
-                'default' => '',
-                'null' => false,
-            ])
-            ->addColumn('addon_id', 'string', [
-                'limit' => 100,
-                'null' => true,
-                'default' => null,
-            ])
-            ->addColumn('is_active', 'boolean', [
-                'default' => true,
-                'null' => false,
-            ])
-            ->addColumn('created_at', 'timestamp', [
-                'default' => 'CURRENT_TIMESTAMP',
-                'null' => false,
-            ])
-            ->addColumn('updated_at', 'timestamp', [
-                'default' => 'CURRENT_TIMESTAMP',
-                'update' => 'CURRENT_TIMESTAMP',
-                'null' => false,
-            ])
+            ->addColumn('navigation_id', 'string', ['limit' => 50, 'null' => false])
+            ->addColumn('parent_navigation_id', 'string', ['limit' => 50, 'default' => '', 'null' => false])
+            ->addColumn('navigation_type', 'string', ['limit' => 20, 'default' => 'admin', 'null' => false])
+            ->addColumn('display_order', 'integer', ['default' => 100, 'null' => false])
+            ->addColumn('link', 'string', ['limit' => 255, 'default' => '', 'null' => false])
+            ->addColumn('icon', 'string', ['limit' => 100, 'default' => '', 'null' => false])
+            ->addColumn('title_key', 'string', ['limit' => 100, 'default' => '', 'null' => false])
+            ->addColumn('permission_check', 'string', ['limit' => 50, 'default' => '', 'null' => false])
+            ->addColumn('addon_id', 'string', ['limit' => 100, 'null' => true, 'default' => null])
+            ->addColumn('is_active', 'boolean', ['default' => true, 'null' => false])
+            ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP', 'null' => false])
+            ->addColumn('updated_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP', 'update' => 'CURRENT_TIMESTAMP', 'null' => false])
             ->addIndex(['parent_navigation_id'], ['name' => 'idx_parent'])
             ->addIndex(['navigation_type'], ['name' => 'idx_type'])
             ->addIndex(['addon_id'], ['name' => 'idx_addon'])
             ->addIndex(['navigation_type', 'parent_navigation_id', 'display_order'], ['name' => 'idx_type_parent_order'])
             ->create();
 
-        // Seed admin navigation: root categories
+        // Seed: root categories
         $this->table('bb_navigation')->insert([
-            ['navigation_id' => 'admin.dashboard', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 10, 'link' => 'index.php', 'icon' => 'lucide-layout-dashboard', 'title_key' => 'ADMIN_INDEX', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
-            ['navigation_id' => 'admin.general', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 20, 'link' => '', 'icon' => 'lucide-settings', 'title_key' => 'GENERAL', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
-            ['navigation_id' => 'admin.forums', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 30, 'link' => '', 'icon' => 'lucide-messages-square', 'title_key' => 'FORUMS', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
-            ['navigation_id' => 'admin.users', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 40, 'link' => '', 'icon' => 'lucide-users', 'title_key' => 'USERS', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
-            ['navigation_id' => 'admin.groups', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 50, 'link' => '', 'icon' => 'lucide-users-round', 'title_key' => 'GROUPS', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
-            ['navigation_id' => 'admin.mods', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 60, 'link' => '', 'icon' => 'lucide-wrench', 'title_key' => 'MODS', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
-            ['navigation_id' => 'admin.torrentpier', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 70, 'link' => '', 'icon' => 'lucide-download', 'title_key' => 'APP_NAME', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
-            ['navigation_id' => 'admin.marketplace', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 80, 'link' => '', 'icon' => 'lucide-store', 'title_key' => 'MARKETPLACE', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
+            ['navigation_id' => 'admin.dashboard', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 10, 'link' => 'index.php', 'icon' => 'icon-layout-dashboard', 'title_key' => 'ADMIN_INDEX', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
+            ['navigation_id' => 'admin.general', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 20, 'link' => '', 'icon' => 'icon-settings', 'title_key' => 'GENERAL', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
+            ['navigation_id' => 'admin.forums', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 30, 'link' => '', 'icon' => 'icon-messages-square', 'title_key' => 'FORUMS', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
+            ['navigation_id' => 'admin.users', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 40, 'link' => '', 'icon' => 'icon-users', 'title_key' => 'USERS', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
+            ['navigation_id' => 'admin.groups', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 50, 'link' => '', 'icon' => 'icon-users-round', 'title_key' => 'GROUPS', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
+            ['navigation_id' => 'admin.mods', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 60, 'link' => '', 'icon' => 'icon-wrench', 'title_key' => 'MODS', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
+            ['navigation_id' => 'admin.torrentpier', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 70, 'link' => '', 'icon' => 'icon-download', 'title_key' => 'APP_NAME', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
+            ['navigation_id' => 'admin.marketplace', 'parent_navigation_id' => '', 'navigation_type' => 'admin', 'display_order' => 80, 'link' => '', 'icon' => 'icon-store', 'title_key' => 'MARKETPLACE', 'permission_check' => '', 'addon_id' => null, 'is_active' => true]
         ])->saveData();
 
-        // Seed admin navigation: child items
+        // Seed: child items
         $this->table('bb_navigation')->insert([
             // General
             ['navigation_id' => 'admin.general.config', 'parent_navigation_id' => 'admin.general', 'navigation_type' => 'admin', 'display_order' => 10, 'link' => 'admin_board.php?mode=config', 'icon' => '', 'title_key' => 'CONFIGURATION', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
@@ -133,12 +87,12 @@ final class CreateBbNavigationTable extends AbstractMigration
             ['navigation_id' => 'admin.mods.sitemap', 'parent_navigation_id' => 'admin.mods', 'navigation_type' => 'admin', 'display_order' => 30, 'link' => 'admin_sitemap.php', 'icon' => '', 'title_key' => 'SITEMAP', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
             ['navigation_id' => 'admin.mods.robots', 'parent_navigation_id' => 'admin.mods', 'navigation_type' => 'admin', 'display_order' => 40, 'link' => 'admin_robots.php', 'icon' => '', 'title_key' => 'ROBOTS_TXT_EDITOR_TITLE', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
 
-            // TorrentPier (APP_NAME)
+            // TorrentPier
             ['navigation_id' => 'admin.torrentpier.cron', 'parent_navigation_id' => 'admin.torrentpier', 'navigation_type' => 'admin', 'display_order' => 10, 'link' => 'admin_cron.php?mode=list', 'icon' => '', 'title_key' => 'CRON', 'permission_check' => 'super_admin', 'addon_id' => null, 'is_active' => true],
             ['navigation_id' => 'admin.torrentpier.forum_config', 'parent_navigation_id' => 'admin.torrentpier', 'navigation_type' => 'admin', 'display_order' => 20, 'link' => 'admin_bt_forum_cfg.php', 'icon' => '', 'title_key' => 'FORUM_CONFIG', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
 
             // Marketplace
-            ['navigation_id' => 'admin.marketplace.modifications', 'parent_navigation_id' => 'admin.marketplace', 'navigation_type' => 'admin', 'display_order' => 10, 'link' => 'admin_modifications.php', 'icon' => '', 'title_key' => 'MODIFICATIONS_LIST', 'permission_check' => '', 'addon_id' => null, 'is_active' => true],
+            ['navigation_id' => 'admin.marketplace.modifications', 'parent_navigation_id' => 'admin.marketplace', 'navigation_type' => 'admin', 'display_order' => 10, 'link' => 'admin_modifications.php', 'icon' => '', 'title_key' => 'MODIFICATIONS_LIST', 'permission_check' => '', 'addon_id' => null, 'is_active' => true]
         ])->saveData();
     }
 
