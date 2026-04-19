@@ -70,7 +70,7 @@
         "samdark/sitemap": "2.4.1",
         "spomky-labs/otphp": "^11.4",
         "symfony/config": "^7.3",
-        "symfony/console": "^7.3",
+        "symfony/console": "^8.0",
         "symfony/event-dispatcher": "^8.0",
         "symfony/filesystem": "^8.0",
         "symfony/http-foundation": "^8.0",
