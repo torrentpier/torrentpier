@@ -2898,16 +2898,16 @@
         },
         {
             "name": "jacklul/monolog-telegram",
-            "version": "3.2.0",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jacklul/monolog-telegram.git",
-                "reference": "1f2069f5556b1c8d6eb2d8b8ac29ff376675cf46"
+                "reference": "c4b69e46b27c0301c6ebccb74b50f5892ed02102"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jacklul/monolog-telegram/zipball/1f2069f5556b1c8d6eb2d8b8ac29ff376675cf46",
-                "reference": "1f2069f5556b1c8d6eb2d8b8ac29ff376675cf46",
+                "url": "https://api.github.com/repos/jacklul/monolog-telegram/zipball/c4b69e46b27c0301c6ebccb74b50f5892ed02102",
+                "reference": "c4b69e46b27c0301c6ebccb74b50f5892ed02102",
                 "shasum": ""
             },
             "require": {
@@ -2955,7 +2955,7 @@
                 "issues": "https://github.com/jacklul/monolog-telegram/issues",
                 "source": "https://github.com/jacklul/monolog-telegram"
             },
-            "time": "2025-01-24T18:07:58+00:00"
+            "time": "2026-03-31T16:31:33+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",
