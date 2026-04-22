@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "34d818481a826aa1cba6273aa40ad11d",
+    "content-hash": "067dc34776c689bde82e36238a9405eb",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -5364,16 +5364,16 @@
         },
         {
             "name": "samdark/sitemap",
-            "version": "2.4.1",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/samdark/sitemap.git",
-                "reference": "cf514750781275ad90fc9a828b4330c9c5ccba98"
+                "reference": "9f8e1d051e128f64f5efeeef5b0f5ff17eb3d27a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/samdark/sitemap/zipball/cf514750781275ad90fc9a828b4330c9c5ccba98",
-                "reference": "cf514750781275ad90fc9a828b4330c9c5ccba98",
+                "url": "https://api.github.com/repos/samdark/sitemap/zipball/9f8e1d051e128f64f5efeeef5b0f5ff17eb3d27a",
+                "reference": "9f8e1d051e128f64f5efeeef5b0f5ff17eb3d27a",
                 "shasum": ""
             },
             "require": {
@@ -5381,7 +5381,7 @@
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.4"
+                "phpunit/phpunit": "^9.0"
             },
             "type": "library",
             "autoload": {
@@ -5419,7 +5419,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-11-01T08:41:34+00:00"
+            "time": "2026-04-09T21:03:43+00:00"
         },
         {
             "name": "spomky-labs/otphp",
