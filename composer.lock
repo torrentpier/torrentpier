@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "067dc34776c689bde82e36238a9405eb",
+    "content-hash": "c8a5c77db8137b4ca12410ac66237cea",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -6350,16 +6350,16 @@
         },
         {
             "name": "symfony/polyfill",
-            "version": "v1.33.0",
+            "version": "v1.36.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill.git",
-                "reference": "293ea305a8c3511ff1d64c009d7855399bc5beeb"
+                "reference": "10d0b8cf29ec8c647989b0a2439e267dd093f262"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill/zipball/293ea305a8c3511ff1d64c009d7855399bc5beeb",
-                "reference": "293ea305a8c3511ff1d64c009d7855399bc5beeb",
+                "url": "https://api.github.com/repos/symfony/polyfill/zipball/10d0b8cf29ec8c647989b0a2439e267dd093f262",
+                "reference": "10d0b8cf29ec8c647989b0a2439e267dd093f262",
                 "shasum": ""
             },
             "require": {
@@ -6368,6 +6368,7 @@
             "replace": {
                 "symfony/polyfill-apcu": "self.version",
                 "symfony/polyfill-ctype": "self.version",
+                "symfony/polyfill-deepclone": "self.version",
                 "symfony/polyfill-iconv": "self.version",
                 "symfony/polyfill-intl-grapheme": "self.version",
                 "symfony/polyfill-intl-icu": "self.version",
@@ -6383,6 +6384,7 @@
                 "symfony/polyfill-php83": "self.version",
                 "symfony/polyfill-php84": "self.version",
                 "symfony/polyfill-php85": "self.version",
+                "symfony/polyfill-php86": "self.version",
                 "symfony/polyfill-util": "self.version",
                 "symfony/polyfill-uuid": "self.version"
             },
@@ -6397,6 +6399,7 @@
                     "src/bootstrap.php",
                     "src/Apcu/bootstrap.php",
                     "src/Ctype/bootstrap.php",
+                    "src/DeepClone/bootstrap.php",
                     "src/Uuid/bootstrap.php",
                     "src/Iconv/bootstrap.php",
                     "src/Intl/Grapheme/bootstrap.php",
@@ -6410,9 +6413,11 @@
                     "Symfony\\Polyfill\\": "src/"
                 },
                 "classmap": [
+                    "src/DeepClone/Resources/stubs",
                     "src/Intl/Icu/Resources/stubs",
                     "src/Intl/MessageFormatter/Resources/stubs",
                     "src/Intl/Normalizer/Resources/stubs",
+                    "src/Php86/Resources/stubs",
                     "src/Php85/Resources/stubs",
                     "src/Php84/Resources/stubs",
                     "src/Php83/Resources/stubs",
@@ -6447,7 +6452,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/polyfill/issues",
-                "source": "https://github.com/symfony/polyfill/tree/v1.33.0"
+                "source": "https://github.com/symfony/polyfill/tree/v1.36.0"
             },
             "funding": [
                 {
@@ -6467,7 +6472,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-19T12:13:28+00:00"
+            "time": "2026-04-15T15:27:51+00:00"
         },
         {
             "name": "symfony/service-contracts",
