@@ -59,6 +59,15 @@ $icon_pm = theme_images('pm_no_new_msg');
 $pm_info = __('NO_NEW_PM');
 $have_new_pm = $have_unread_pm = 0;
 
+// Admin navigation
+if (defined('IN_ADMIN')) {
+    $adminNav = TorrentPier\Admin\AdminNavigation::getTree(defined('BB_SCRIPT') ? BB_SCRIPT : '');
+    template()->assign_vars([
+        'ADMIN_NAV_TREE' => $adminNav,
+        'ADMIN_CURRENT_SCRIPT' => defined('BB_SCRIPT') ? BB_SCRIPT : '',
+    ]);
+}
+
 if ($logged_in && !simple_header() && !defined('IN_ADMIN')) {
     if (userdata('user_new_privmsg')) {
         $have_new_pm = userdata('user_new_privmsg');

@@ -202,6 +202,40 @@ function go_to_page ()
 {% elseif IN_ADMIN %}
 <!--=================-->
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/lucide.min.css">
+<link rel="stylesheet" href="{{ SITE_URL }}assets/css/admin.css">
+
+<div id="admin-wrapper">
+  <nav id="admin-topbar">
+    <div class="admin-topbar-brand">
+      <a href="./"><i class="icon-layout-dashboard"></i> {{ __('ADMIN_INDEX') }}</a>
+    </div>
+    <div class="admin-topbar-right">
+      <a href="{{ U_INDEX }}" title="{{ SITENAME }}"><i class="icon-external-link"></i> {{ SITENAME }}</a>
+    </div>
+  </nav>
+
+  <div id="admin-layout">
+    <aside id="admin-sidebar">
+      {% for cat in ADMIN_NAV_TREE %}
+      {% if cat.children is not empty %}
+      <div class="admin-sidebar-section{% if cat.has_active_child %} open{% endif %}">
+        <div class="admin-sidebar-heading" data-toggle-section>
+          <i class="{{ cat.icon }}"></i> <span>{{ cat.title }}</span>
+        </div>
+        <ul class="admin-sidebar-items">
+          {% for item in cat.children %}
+          <li><a href="{{ item.link }}"{% if item.is_current %} class="active"{% endif %}>
+            {{ item.title }}
+          </a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </aside>
+    <main id="admin-content">
+
 <!-- ====== -->
 {% else %}
 <!-- ====== -->

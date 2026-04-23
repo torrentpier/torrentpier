@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['GENERAL']['WORD_CENSOR'] = basename(__FILE__);
-
-    return;
-}
-
 if (!config()->get('forum.use_word_censor')) {
     bb_die('Word censor disabled <br /><br /> (use_word_censor in config/forum.php)');
 }
@@ -81,7 +75,7 @@ if ($mode != '') {
 
         datastore()->update('censor');
         censor()->reload(); // Reload the singleton instance with updated words
-        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_WORDADMIN'), '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
+        $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_WORDADMIN'), '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>');
 
         bb_die($message);
     } elseif ($mode == 'delete') {
@@ -97,7 +91,7 @@ if ($mode != '') {
             datastore()->update('censor');
             censor()->reload(); // Reload the singleton instance with updated words
 
-            bb_die(__('WORD_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_WORDADMIN'), '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('WORD_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_WORDADMIN'), '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>'));
         } else {
             bb_die(__('NO_WORD_SELECTED'));
         }

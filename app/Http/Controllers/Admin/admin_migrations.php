@@ -8,14 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    if (IS_SUPER_ADMIN) {
-        $module['GENERAL']['MIGRATIONS_STATUS'] = basename(__FILE__);
-    }
-
-    return;
-}
-
 if (!IS_SUPER_ADMIN) {
     bb_die(__('ONLY_FOR_SUPER_ADMIN'));
 }

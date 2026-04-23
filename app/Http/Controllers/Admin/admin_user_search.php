@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module['USERS']['SEARCH'] = basename(__FILE__);
-
-    return;
-}
-
 $total_sql = '';
 
 if (!request()->get('dosearch')) {

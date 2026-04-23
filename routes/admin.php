@@ -23,7 +23,7 @@ return static function (Router $router): void {
     $adminPath = dirname(__DIR__) . '/app/Http/Controllers/Admin';
 
     $router->group('/admin', function ($group) use ($adminPath) {
-        // Index (frameset, left pane, right pane)
+        // Admin dashboard
         $group->any('/index.php', new LegacyAdapter($adminPath . '/index.php', 'admin_index'));
         $group->any('/', new LegacyAdapter($adminPath . '/index.php', 'admin_index'));
         $group->any('', new LegacyAdapter($adminPath . '/index.php', 'admin_index'));

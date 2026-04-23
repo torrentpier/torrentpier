@@ -8,12 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!empty($setmodules)) {
-    $module[APP_NAME]['FORUM_CONFIG'] = basename(__FILE__);
-
-    return;
-}
-
 $max_forum_name_len = 30;
 $max_forum_rows = 25;
 
@@ -85,7 +79,7 @@ if ($submit && $confirm) {
 
     forum_tree(refresh: true);
 
-    bb_die(__('CONFIG_UPD') . '<br /><br />' . sprintf(__('RETURN_CONFIG'), '<a href="admin_bt_forum_cfg.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+    bb_die(__('CONFIG_UPD') . '<br /><br />' . sprintf(__('RETURN_CONFIG'), '<a href="admin_bt_forum_cfg.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php">', '</a>'));
 }
 
 // Set template vars

@@ -99,6 +99,9 @@ define('CRON_RUNNING', TRIGGERS_DIR . '/cron_running');
 // Migrations table
 define('BB_MIGRATIONS', 'bb_migrations');
 
+// Navigation table
+define('BB_NAVIGATION', 'bb_navigation');
+
 // Tracker shared constants
 define('BB_BT_TORRENTS', 'bb_bt_torrents');
 define('BB_BT_TRACKER', 'bb_bt_tracker');
