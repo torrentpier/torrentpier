@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8a5c77db8137b4ca12410ac66237cea",
+    "content-hash": "14b75be07062aaf41563a2d8776d07c8",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -5366,29 +5366,36 @@
         },
         {
             "name": "samdark/sitemap",
-            "version": "2.5.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/samdark/sitemap.git",
-                "reference": "9f8e1d051e128f64f5efeeef5b0f5ff17eb3d27a"
+                "reference": "5244852d7612fb51a83a74e7e0d8ec39f5332ea7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/samdark/sitemap/zipball/9f8e1d051e128f64f5efeeef5b0f5ff17eb3d27a",
-                "reference": "9f8e1d051e128f64f5efeeef5b0f5ff17eb3d27a",
+                "url": "https://api.github.com/repos/samdark/sitemap/zipball/5244852d7612fb51a83a74e7e0d8ec39f5332ea7",
+                "reference": "5244852d7612fb51a83a74e7e0d8ec39f5332ea7",
                 "shasum": ""
             },
             "require": {
                 "ext-xmlwriter": "*",
-                "php": ">=5.3.0"
+                "php": ">=7.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.0"
+                "phpbench/phpbench": "~1.0.0",
+                "phpstan/phpstan": "^1.12.5",
+                "phpunit/phpunit": "^9.0",
+                "rector/rector": "^1.2.10"
+            },
+            "suggest": {
+                "ext-intl": "For encoding international domain names",
+                "ext-zlib": "For gzipped sitemaps"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "samdark\\sitemap\\": ""
+                    "samdark\\sitemap\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5421,7 +5428,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2026-04-09T21:03:43+00:00"
+            "time": "2026-04-25T00:01:34+00:00"
         },
         {
             "name": "spomky-labs/otphp",
