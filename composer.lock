@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8a5c77db8137b4ca12410ac66237cea",
+    "content-hash": "61d1066de160447a9cf2eb9745c5671e",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -6352,16 +6352,16 @@
         },
         {
             "name": "symfony/polyfill",
-            "version": "v1.36.0",
+            "version": "v1.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill.git",
-                "reference": "10d0b8cf29ec8c647989b0a2439e267dd093f262"
+                "reference": "9473fdea62d1f47e2201583b9aeb097aeefd3ac2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill/zipball/10d0b8cf29ec8c647989b0a2439e267dd093f262",
-                "reference": "10d0b8cf29ec8c647989b0a2439e267dd093f262",
+                "url": "https://api.github.com/repos/symfony/polyfill/zipball/9473fdea62d1f47e2201583b9aeb097aeefd3ac2",
+                "reference": "9473fdea62d1f47e2201583b9aeb097aeefd3ac2",
                 "shasum": ""
             },
             "require": {
@@ -6454,7 +6454,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/polyfill/issues",
-                "source": "https://github.com/symfony/polyfill/tree/v1.36.0"
+                "source": "https://github.com/symfony/polyfill/tree/v1.37.0"
             },
             "funding": [
                 {
@@ -6474,7 +6474,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-15T15:27:51+00:00"
+            "time": "2026-04-26T14:42:55+00:00"
         },
         {
             "name": "symfony/service-contracts",
