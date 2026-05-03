@@ -11,58 +11,40 @@
 namespace TorrentPier\Console;
 
 use FilesystemIterator;
-use Illuminate\Contracts\Container\BindingResolutionException;
+use ReflectionClass;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use ReflectionClass;
-use ReflectionException;
 use Symfony\Component\Console\Application as SymfonyApplication;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Throwable;
+use Symfony\Component\Console\CommandLoader\FactoryCommandLoader;
 use TorrentPier\Application as Container;
-use TorrentPier\Console\Commands\Command as BaseCommand;
 
 /**
  * Bull Console Application
  *
- * Main entry point for all TorrentPier CLI commands.
- * Supports dependency injection via the Application container.
+ * Auto-discovers commands from app/Console/Commands/ and registers them
+ * via a lazy FactoryCommandLoader: each command is only instantiated
+ * when actually invoked.
  */
 class Application extends SymfonyApplication
 {
     /**
-     * The DI container instance
-     */
-    protected ?Container $container = null;
-
-    /**
-     * Create a new console application
+     * PSR-4 prefixes mapped to the commands directory, tried in order.
      *
-     * @param Container|null $container The DI container (optional for backward compatibility)
+     * @var list<string>
      */
-    public function __construct(?Container $container = null)
-    {
-        $this->container = $container;
+    private const array COMMAND_NAMESPACES = [
+        'TorrentPier\\Console\\Commands\\',
+        'App\\Console\\Commands\\',
+    ];
 
-        parent::__construct('Bull CLI', $this->detectVersion());
+    public function __construct(
+        private readonly Container $container,
+    ) {
+        parent::__construct('Bull CLI', 'v' . $container->version());
 
-        $this->discoverCommands();
-    }
-
-    /**
-     * Get the DI container instance
-     */
-    public function getContainer(): ?Container
-    {
-        return $this->container;
-    }
-
-    /**
-     * Set the DI container instance
-     */
-    public function setContainer(Container $container): void
-    {
-        $this->container = $container;
+        $this->setCommandLoader(new FactoryCommandLoader($this->discoverFactories()));
     }
 
     /**
@@ -95,27 +77,22 @@ class Application extends SymfonyApplication
     }
 
     /**
-     * Get the application version
+     * Walk the commands directory and build a `name => factory` map.
+     *
+     * @return array<string, callable(): Command>
      */
-    private function detectVersion(): string
+    private function discoverFactories(): array
     {
-        return 'v' . $this->container->version();
-    }
+        $commandsDir = __DIR__ . '/Commands';
 
-    /**
-     * Auto-discover and register all commands from the Commands directory
-     * @throws BindingResolutionException
-     */
-    private function discoverCommands(): void
-    {
-        $commandDir = __DIR__ . '/Commands';
-
-        if (!files()->isDirectory($commandDir)) {
-            return;
+        if (!is_dir($commandsDir)) {
+            return [];
         }
 
+        $factories = [];
+
         $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($commandDir, FilesystemIterator::SKIP_DOTS),
+            new RecursiveDirectoryIterator($commandsDir, FilesystemIterator::SKIP_DOTS),
         );
 
         foreach ($iterator as $file) {
@@ -123,114 +100,53 @@ class Application extends SymfonyApplication
                 continue;
             }
 
-            $className = $this->getClassNameFromFile($file->getPathname());
-
+            $className = $this->resolveClassName($file->getPathname(), $commandsDir);
             if ($className === null) {
                 continue;
             }
 
-            // Skip the base Command class
-            if ($className === BaseCommand::class) {
-                continue;
-            }
-
-            // Check if a class exists and is a valid command
-            if (!class_exists($className)) {
-                continue;
-            }
-
             $reflection = new ReflectionClass($className);
-
-            // Skip abstract classes and interfaces
-            if ($reflection->isAbstract() || $reflection->isInterface()) {
+            if ($reflection->isAbstract() || !$reflection->isSubclassOf(Command::class)) {
                 continue;
             }
 
-            // Must extend Symfony Command
-            if (!$reflection->isSubclassOf(Command::class)) {
+            $attribute = $reflection->getAttributes(AsCommand::class)[0] ?? null;
+            if ($attribute === null) {
                 continue;
             }
 
-            // Register the command (using container if available)
-            try {
-                $command = $this->resolveCommand($className, $reflection);
-                if ($command !== null) {
-                    $this->add($command);
+            /** @var AsCommand $asCommand */
+            $asCommand = $attribute->newInstance();
+            $factory = fn (): Command => $this->container->make($className);
+
+            // AsCommand encodes aliases (and hidden flag) in `name` as a `|`-separated
+            // string: "primary|alias1|alias2", or "|hidden:cmd" when hidden.
+            foreach (explode('|', $asCommand->name) as $alias) {
+                if ($alias !== '') {
+                    $factories[$alias] = $factory;
                 }
-            } catch (Throwable) {
-                // Skip commands that cannot be instantiated
             }
         }
+
+        return $factories;
     }
 
     /**
-     * Resolve a command instance, using the DI container if available
-     * @throws ReflectionException
+     * Convert a command file path to its FQCN via PSR-4 prefix lookup.
      */
-    private function resolveCommand(string $className, ReflectionClass $reflection): ?Command
+    private function resolveClassName(string $filePath, string $commandsDir): ?string
     {
-        // Try to resolve via container first (enables constructor injection)
-        if ($this->container !== null) {
-            try {
-                /** @var Command $command */
-                $command = $this->container->make($className);
+        $relative = substr($filePath, \strlen($commandsDir) + 1, -4);
+        $suffix = str_replace(['/', '\\'], '\\', $relative);
 
-                return $command;
-            } catch (Throwable) {
-                // Container couldn't resolve - fall through to direct instantiation
+        foreach (self::COMMAND_NAMESPACES as $prefix) {
+            $candidate = $prefix . $suffix;
+            if (class_exists($candidate)) {
+                return $candidate;
             }
         }
 
-        // Fall back to direct instantiation (requires no constructor params)
-        if (!$reflection->isInstantiable()) {
-            return null;
-        }
-
-        // Check if the constructor has required parameters
-        $constructor = $reflection->getConstructor();
-        if ($constructor !== null) {
-            // If there's a required parameter without a default, skip this command (it needs DI, but no container is available)
-            if (array_any($constructor->getParameters(), fn ($param) => !$param->isOptional() && !$param->isDefaultValueAvailable())) {
-                return null;
-            }
-        }
-
-        /** @var Command $command */
-        $command = $reflection->newInstance();
-
-        return $command;
-    }
-
-    /**
-     * Extract a fully qualified class name from a PHP file
-     * @throws BindingResolutionException
-     */
-    private function getClassNameFromFile(string $filePath): ?string
-    {
-        $contents = files()->get($filePath);
-
-        if ($contents === false) {
-            return null;
-        }
-
-        $namespace = null;
-        $class = null;
-
-        // Extract namespace
-        if (preg_match('/namespace\s+([^;]+);/', $contents, $matches)) {
-            $namespace = $matches[1];
-        }
-
-        // Extract class name
-        if (preg_match('/class\s+(\w+)/', $contents, $matches)) {
-            $class = $matches[1];
-        }
-
-        if ($namespace === null || $class === null) {
-            return null;
-        }
-
-        return $namespace . '\\' . $class;
+        return null;
     }
 
     /**
