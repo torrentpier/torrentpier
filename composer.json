@@ -67,7 +67,7 @@
         "php-feed-io/feed-io": "^6.1",
         "php-http/guzzle7-adapter": "^1.1",
         "robmorgan/phinx": "^0.16.9",
-        "samdark/sitemap": "2.5.0",
+        "samdark/sitemap": "3.0.1",
         "spomky-labs/otphp": "^11.4",
         "symfony/config": "^8.0",
         "symfony/console": "^8.0",
