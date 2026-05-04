@@ -2822,16 +2822,16 @@
         },
         {
             "name": "intervention/image",
-            "version": "4.0.2",
+            "version": "4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "3c449518c7782ea7454d18c4a7a54e6c2250e889"
+                "reference": "76d4e5a48b78f7b48f84d90160e6973b1e800832"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/3c449518c7782ea7454d18c4a7a54e6c2250e889",
-                "reference": "3c449518c7782ea7454d18c4a7a54e6c2250e889",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/76d4e5a48b78f7b48f84d90160e6973b1e800832",
+                "reference": "76d4e5a48b78f7b48f84d90160e6973b1e800832",
                 "shasum": ""
             },
             "require": {
@@ -2878,7 +2878,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Intervention/image/issues",
-                "source": "https://github.com/Intervention/image/tree/4.0.2"
+                "source": "https://github.com/Intervention/image/tree/4.0.3"
             },
             "funding": [
                 {
@@ -2894,7 +2894,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2026-04-24T13:57:17+00:00"
+            "time": "2026-05-01T08:19:10+00:00"
         },
         {
             "name": "jacklul/monolog-telegram",
