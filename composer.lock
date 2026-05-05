@@ -6897,16 +6897,16 @@
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.11.4",
+            "version": "v2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "4c8c72e8c6ba11847e78fbf80f7d9b0e524c0a0d"
+                "reference": "535eda4871fd04f2756c8d95f6bdfa43706d79be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/4c8c72e8c6ba11847e78fbf80f7d9b0e524c0a0d",
-                "reference": "4c8c72e8c6ba11847e78fbf80f7d9b0e524c0a0d",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/535eda4871fd04f2756c8d95f6bdfa43706d79be",
+                "reference": "535eda4871fd04f2756c8d95f6bdfa43706d79be",
                 "shasum": ""
             },
             "require": {
@@ -6932,7 +6932,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.11-dev"
+                    "dev-master": "2.12-dev"
                 }
             },
             "autoload": {
@@ -6971,9 +6971,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/tracy/issues",
-                "source": "https://github.com/nette/tracy/tree/v2.11.4"
+                "source": "https://github.com/nette/tracy/tree/v2.12.0"
             },
-            "time": "2026-04-22T05:55:37+00:00"
+            "time": "2026-05-04T00:23:53+00:00"
         },
         {
             "name": "twig/twig",
