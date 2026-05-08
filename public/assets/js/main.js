@@ -230,27 +230,38 @@ var Menu = {
 };
 
 $(document).ready(function () {
-  // CSRF: pull token from <meta name="csrf-token"> and attach to every same-origin AJAX request.
   var _csrfToken = $('meta[name="csrf-token"]').attr('content') || '';
   if (_csrfToken) {
+    // Resolve url against current location and compare origins so absolute
+    // same-origin URLs (e.g. SITE_URL-prefixed AJAX endpoints) are not skipped
+    // and protocol-relative cross-origin URLs do not leak the token.
+    var _isSameOrigin = function (url) {
+      if (!url) return true;
+      try {
+        return new URL(url, window.location.href).origin === window.location.origin;
+      } catch (e) {
+        return true;
+      }
+    };
+
     $.ajaxSetup({
       beforeSend: function (xhr, settings) {
-        var crossDomain = settings.crossDomain;
-        var url = settings.url || '';
-        var sameOrigin = !crossDomain && !/^https?:\/\//i.test(url);
-        if (sameOrigin && !/^(GET|HEAD|OPTIONS)$/i.test(settings.type || 'GET')) {
-          xhr.setRequestHeader('X-CSRF-Token', _csrfToken);
-        }
+        if (settings.crossDomain) return;
+        if (/^(GET|HEAD|OPTIONS)$/i.test(settings.type || 'GET')) return;
+        if (!_isSameOrigin(settings.url || '')) return;
+        xhr.setRequestHeader('X-CSRF-Token', _csrfToken);
       }
     });
     if (typeof Ajax !== 'undefined' && Ajax.prototype) {
       Ajax.prototype.form_token = _csrfToken;
     }
-    // Auto-inject hidden _token into every POST form rendered without csrf_field().
-    $('form').each(function () {
-      if (((this.method || '').toUpperCase() === 'POST') && !$(this).find('input[name="_token"]').length) {
-        $('<input>').attr({ type: 'hidden', name: '_token', value: _csrfToken }).appendTo(this);
-      }
+    // Inject hidden _token at submit time so dynamically-added forms are covered
+    // and the token never leaks to a form action pointing at another origin.
+    $(document).on('submit', 'form', function () {
+      if ((this.method || '').toUpperCase() !== 'POST') return;
+      if (!_isSameOrigin($(this).attr('action') || '')) return;
+      if ($(this).find('input[name="_token"]').length) return;
+      $('<input>').attr({ type: 'hidden', name: '_token', value: _csrfToken }).appendTo(this);
     });
   }
 
