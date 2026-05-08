@@ -437,8 +437,9 @@ class AnnounceController
 
             $sql .= ($tor_type != $lp_info['tor_type']) ? ", tor_type = {$tor_type}" : '';
 
-            $sql .= ", up_add = up_add + GREATEST(0, {$uploaded} - uploaded)";
-            $sql .= ", down_add = down_add + CEIL(GREATEST(0, {$downloaded} - downloaded) * {$down_ratio})";
+            // CAST AS SIGNED to dodge ER_DATA_OUT_OF_RANGE on stale-client underflow (BIGINT UNSIGNED columns).
+            $sql .= ", up_add = up_add + GREATEST(0, CAST({$uploaded} AS SIGNED) - CAST(uploaded AS SIGNED))";
+            $sql .= ", down_add = down_add + CEIL(GREATEST(0, CAST({$downloaded} AS SIGNED) - CAST(downloaded AS SIGNED)) * {$down_ratio})";
 
             $sql .= ", uploaded = GREATEST(uploaded, {$uploaded})";
             $sql .= ", downloaded = GREATEST(downloaded, {$downloaded})";
