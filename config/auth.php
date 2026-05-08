@@ -38,6 +38,7 @@ return [
     ],
     'first_logon_redirect_url' => '/',
     'invalid_logins' => 5,
+    'actkey_ttl' => 86400,
     'sessions' => [
         'update_interval' => 180,
         'user_duration' => 1209600,

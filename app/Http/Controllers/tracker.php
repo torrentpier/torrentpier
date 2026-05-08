@@ -352,7 +352,7 @@ if ($search_id) {
         bb_die(__('SESSION_EXPIRED'));
     }
 
-    $previous_settings = unserialize($row['search_settings']);
+    $previous_settings = unserialize($row['search_settings'], ['allowed_classes' => false]);
     $tor_list_sql = $row['search_array'];
     $tor_list_ary = explode(',', $tor_list_sql);
     $tor_count = count($tor_list_ary);

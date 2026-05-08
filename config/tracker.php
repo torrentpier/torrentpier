@@ -17,6 +17,7 @@ return [
 
     // IP handling
     'ignore_reported_ip' => false,
+    // Disable only behind a strictly trusted proxy: turning this off lets peers spoof their IP via X-Forwarded-For.
     'verify_reported_ip' => true,
     'allow_internal_ip' => false,
     'disallowed_ports' => [

@@ -343,7 +343,7 @@ if ($search_id) {
         bb_die(__('SESSION_EXPIRED'));
     }
 
-    $previous_settings = unserialize($row['search_settings']);
+    $previous_settings = unserialize($row['search_settings'], ['allowed_classes' => false]);
     $items_found = explode(',', $row['search_array']);
 }
 

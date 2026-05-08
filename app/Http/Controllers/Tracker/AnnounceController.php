@@ -418,6 +418,16 @@ class AnnounceController
         $update_time = ($stopped) ? 0 : TIMENOW;
 
         if ($lp_info && empty($hybrid_unrecord)) {
+            // Mirror the freeleech/gold/silver discount applied to PHP-side $down_add for INSERT.
+            $down_ratio = '1';
+            if (config()->get('tracker.freeleech')
+                || (config()->get('tracker.gold_silver_enabled') && $tor_type == TOR_TYPE_GOLD)
+            ) {
+                $down_ratio = '0';
+            } elseif (config()->get('tracker.gold_silver_enabled') && $tor_type == TOR_TYPE_SILVER) {
+                $down_ratio = '0.5';
+            }
+
             $sql = 'UPDATE ' . BB_BT_TRACKER . " SET update_time = {$update_time}";
 
             $sql .= ", {$ip_version} = '{$ip_sql}'";
@@ -427,12 +437,13 @@ class AnnounceController
 
             $sql .= ($tor_type != $lp_info['tor_type']) ? ", tor_type = {$tor_type}" : '';
 
-            $sql .= ($uploaded != $lp_info['uploaded']) ? ", uploaded = {$uploaded}" : '';
-            $sql .= ($downloaded != $lp_info['downloaded']) ? ", downloaded = {$downloaded}" : '';
-            $sql .= ", remain = {$left}";
+            // CAST AS SIGNED to dodge ER_DATA_OUT_OF_RANGE on stale-client underflow (BIGINT UNSIGNED columns).
+            $sql .= ", up_add = up_add + GREATEST(0, CAST({$uploaded} AS SIGNED) - CAST(uploaded AS SIGNED))";
+            $sql .= ", down_add = down_add + CEIL(GREATEST(0, CAST({$downloaded} AS SIGNED) - CAST(downloaded AS SIGNED)) * {$down_ratio})";
 
-            $sql .= $up_add ? ", up_add = up_add + {$up_add}" : '';
-            $sql .= $down_add ? ", down_add = down_add + {$down_add}" : '';
+            $sql .= ", uploaded = GREATEST(uploaded, {$uploaded})";
+            $sql .= ", downloaded = GREATEST(downloaded, {$downloaded})";
+            $sql .= ", remain = {$left}";
 
             $sql .= ", speed_up = {$speed_up}";
             $sql .= ", speed_down = {$speed_down}";
