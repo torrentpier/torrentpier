@@ -32,7 +32,7 @@ jobs:
           fetch-depth: 0
 
       - name: Configure GitHub Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
