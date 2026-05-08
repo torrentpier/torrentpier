@@ -7,7 +7,7 @@ tags: [announcement, development, v3]
 
 For several years, we've been developing TorrentPier in a fairly conservative manner — we have version 2, and within it we release more or less minor versions, which sometimes (for no particular reason) we give a new code name and bump the minor number instead of the patch. Since this forum appeared, we've never considered version 3.0 as something that wouldn't necessarily be written from scratch on Laravel or any other framework (Zend, Yii, Symfony). There have been so many attempts to write this mythical version that it's actually hard to count. As you can see, all unsuccessful.
 
-<!-- truncate -->
+{/* truncate */}
 
 Over time, these attempts began to tire everyone out, and the engine development has been carried out by a couple of people in a sluggish manner for years now. A couple of years ago, belomaxorka joined the project, who turned out to be a bit more interested in it and put enormous effort into developing the engine, but we still remained somewhere beyond time in terms of the codebase state. Some time ago, I reconnected to the project development, managed to do several interesting things, but again the question arose — why is the engine still called 2, even though it's already 2.8, but most importantly — why don't we follow semantic versioning. After all, the changes we've made over the past couple of months definitely don't fall under the definition of a minor version anymore.
 
