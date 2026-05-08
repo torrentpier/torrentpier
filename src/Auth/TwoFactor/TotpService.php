@@ -13,7 +13,7 @@ declare(strict_types=1);
 namespace TorrentPier\Auth\TwoFactor;
 
 use chillerlan\QRCode\Common\EccLevel;
-use chillerlan\QRCode\Output\QROutputInterface;
+use chillerlan\QRCode\Output\QRGdImagePNG;
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
 use OTPHP\TOTP;
@@ -70,10 +70,10 @@ class TotpService
         $provisioningUri = $this->getProvisioningUri($secret, $username);
 
         $options = new QROptions([
-            'outputType' => QROutputInterface::GDIMAGE_PNG,
+            'outputInterface' => QRGdImagePNG::class,
             'eccLevel' => EccLevel::M,
             'scale' => 5,
-            'imageBase64' => false,
+            'outputBase64' => false,
         ]);
 
         return new QRCode($options)->render($provisioningUri);
