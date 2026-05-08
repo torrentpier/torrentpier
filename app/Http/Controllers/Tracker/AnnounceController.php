@@ -418,8 +418,16 @@ class AnnounceController
         $update_time = ($stopped) ? 0 : TIMENOW;
 
         if ($lp_info && empty($hybrid_unrecord)) {
-            // Compute up_add / down_add atomically against the row's current values to avoid
-            // double-counting when concurrent announces share the same stale lp_info cache.
+            // Mirror the freeleech/gold/silver discount applied to PHP-side $down_add for INSERT.
+            $down_ratio = '1';
+            if (config()->get('tracker.freeleech')
+                || (config()->get('tracker.gold_silver_enabled') && $tor_type == TOR_TYPE_GOLD)
+            ) {
+                $down_ratio = '0';
+            } elseif (config()->get('tracker.gold_silver_enabled') && $tor_type == TOR_TYPE_SILVER) {
+                $down_ratio = '0.5';
+            }
+
             $sql = 'UPDATE ' . BB_BT_TRACKER . " SET update_time = {$update_time}";
 
             $sql .= ", {$ip_version} = '{$ip_sql}'";
@@ -430,10 +438,10 @@ class AnnounceController
             $sql .= ($tor_type != $lp_info['tor_type']) ? ", tor_type = {$tor_type}" : '';
 
             $sql .= ", up_add = up_add + GREATEST(0, {$uploaded} - uploaded)";
-            $sql .= ", down_add = down_add + GREATEST(0, {$downloaded} - downloaded)";
+            $sql .= ", down_add = down_add + CEIL(GREATEST(0, {$downloaded} - downloaded) * {$down_ratio})";
 
-            $sql .= ", uploaded = {$uploaded}";
-            $sql .= ", downloaded = {$downloaded}";
+            $sql .= ", uploaded = GREATEST(uploaded, {$uploaded})";
+            $sql .= ", downloaded = GREATEST(downloaded, {$downloaded})";
             $sql .= ", remain = {$left}";
 
             $sql .= ", speed_up = {$speed_up}";
