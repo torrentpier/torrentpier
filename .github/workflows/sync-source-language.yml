@@ -14,12 +14,12 @@ jobs:
       contents: read
     steps:
       - name: Checkout main repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           path: main
 
       - name: Checkout translations repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: torrentpier/translations
           token: ${{ secrets.TRANSLATIONS_REPO_TOKEN }}
