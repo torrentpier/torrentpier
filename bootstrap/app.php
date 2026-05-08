@@ -25,6 +25,7 @@ use App\Http\Middleware\Admin;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\StartSession;
 use App\Http\Middleware\Tracker;
+use App\Http\Middleware\VerifyCsrfToken;
 use TorrentPier\Application;
 use TorrentPier\Exceptions\Handler;
 use TorrentPier\Http\Middleware;
@@ -108,6 +109,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Middleware aliases for route definitions
         $middleware->alias('session', StartSession::class);
         $middleware->alias('auth', Authenticate::class);
+        $middleware->alias('csrf', VerifyCsrfToken::class);
         $middleware->alias('tracker', Tracker\BootTracker::class);
         $middleware->alias('admin', Admin\EnsureAdmin::class);
     })
