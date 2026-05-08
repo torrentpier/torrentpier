@@ -161,6 +161,7 @@ ajax.callback.view_post = function(data) {
 </div>
 
 <form method="POST" name="post" action="{{ TOR_SEARCH_ACTION }}#results">
+{{ csrf_field() }}
 {{ S_HIDDEN_FIELDS }}
 
 <table class="bordered w100" cellspacing="0">

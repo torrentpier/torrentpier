@@ -1,6 +1,7 @@
 <h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
 
 <form method="post" action="{{ S_MODE_ACTION }}" name="post">
+    {{ csrf_field() }}
     <table width="100%">
         <tr>
             <td class="med nowrap tRight">{{ __('SORT_BY') }}:&nbsp;{{ S_MODE_SELECT|raw }}&nbsp;&middot;&nbsp;{{ __('ORDER') }}:&nbsp;{{ S_ORDER_SELECT|raw }}&nbsp;&middot;&nbsp;{{ __('ROLE') }}&nbsp;{{ S_ROLE_SELECT|raw }}&nbsp;<input type="submit" name="submit" value="{{ __('SUBMIT') }}"></td>

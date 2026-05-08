@@ -53,6 +53,7 @@
 <!--========================================================================-->
 
 <form action="{{ S_GROUP_ACTION }}" method="post">
+    {{ csrf_field() }}
     {{ S_HIDDEN_FIELDS|raw }}
 
     <table class="forumline pad_4">
@@ -127,6 +128,7 @@
 
 {% if MEMBERS %}
 <form action="{{ S_GROUP_ACTION }}" method="post" name="post">
+    {{ csrf_field() }}
     {{ S_HIDDEN_FIELDS|raw }}
 
     <table class="forumline tablesorter">

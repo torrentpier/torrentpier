@@ -248,7 +248,7 @@ ajax.callback.callseed = function (data) {
 <tr>
 	<td colspan="2" class="row3 pad_4">
 	{% if DL_BUTTONS %}
-	<form method="POST" action="{{ S_DL_ACTION }}">{{ DL_HIDDEN_FIELDS|raw }}
+	<form method="POST" action="{{ S_DL_ACTION }}">{{ csrf_field() }}{{ DL_HIDDEN_FIELDS|raw }}
 		{% if DL_BUT_WILL %}<input type="submit" name="dl_set_will" value="{{ __('DLWILL') }}" class="liteoption" />&nbsp;{% endif %}
 		{% if DL_BUT_DOWN %}<input type="submit" name="dl_set_down" value="{{ __('DLDOWN') }}" class="liteoption" />&nbsp;{% endif %}
 		{% if DL_BUT_COMPL %}<input type="submit" name="dl_set_complete" value="{{ __('DLCOMPLETE') }}" class="liteoption" />&nbsp;{% endif %}
