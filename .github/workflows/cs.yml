@@ -34,7 +34,7 @@ jobs:
         run: ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --diff
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: 'style: apply PHP CS Fixer changes'
           file_pattern: '*.php'
