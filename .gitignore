@@ -4,6 +4,7 @@
 
 ### Claude ###
 CLAUDE.local.md
+.claude/worktrees
 
 ### TorrentPier ###
 *.log
@@ -12,6 +13,8 @@ composer-setup.php
 .env
 .php-cs-fixer.cache
 config/config.local.php
+public/build
+node_modules
 vendor
 
 # Storage directories
