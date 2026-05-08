@@ -5,6 +5,9 @@ on:
     - cron: '0 0 1,15 * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   changelog:
     name: Generate changelog 📖

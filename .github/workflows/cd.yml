@@ -5,6 +5,9 @@ on:
     tags:
       - "v2.8.*"
 
+permissions:
+  contents: read
+
 jobs:
   generate-changelog:
     name: Generate changelog 📖
@@ -32,6 +35,8 @@ jobs:
     name: Create release
     needs: [ generate-changelog ]
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
