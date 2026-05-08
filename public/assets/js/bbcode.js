@@ -305,8 +305,16 @@ function initPostImages(context) {
   var $in_spoilers = $('div.sp-body var.postImg', context);
   $('var.postImg', context).not($in_spoilers).each(function () {
     var $v = $(this);
-    var src = $v.attr('title');
-    if (typeof src !== 'string' || !/^(?:https?:)?\/\//i.test(src)) return;
+    var rawSrc = $v.attr('title');
+    if (typeof rawSrc !== 'string') return;
+    var parsed;
+    try {
+      parsed = new URL(rawSrc, document.baseURI);
+    } catch (_) {
+      return;
+    }
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return;
+    var src = parsed.href;
     var imgEl = document.createElement('img');
     imgEl.alt = 'pic';
     imgEl.className = $v.attr('class') || '';
