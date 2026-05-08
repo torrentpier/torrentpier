@@ -392,8 +392,8 @@ function go_to_page ()
 		<div id="sidebar1-wrap">
 			{% if SHOW_BT_USERDATA %}<div id="user_ratio">
 				<h3>{{ __('USER_RATIO') }}</h3>
+				<div class="tCenter">{{ THIS_AVATAR }}</div>
 				<table cellpadding="0">
-					<div align="center">{{ THIS_AVATAR }}</div>
 					<tr><td>{{ __('USER_RATIO') }}</td><td>{% if DOWN_TOTAL_BYTES > MIN_DL_BYTES %}<b>{{ USER_RATIO }}</b>{% else %}<b>{{ __('NONE') }}</b> (DL < {{ MIN_DL_FOR_RATIO }}){% endif %}</td></tr>
 					<tr><td>{{ __('DOWNLOADED') }}</td><td class="leechmed"><b>{{ DOWN_TOTAL }}</b></td></tr>
 					<tr><td>{{ __('UPLOADED') }}</td><td class="seedmed"><b>{{ UP_TOTAL }}</b></td></tr>
@@ -411,6 +411,7 @@ function go_to_page ()
 <!--main_content-->
 <td id="main_content">
 	<div id="main_content_wrap">
+		{% if SHOW_LATEST_NEWS or SHOW_NETWORK_NEWS %}
 		<div id="latest_news">
 			<table cellspacing="0" cellpadding="0" width="100%">
 				<tr>
@@ -448,6 +449,7 @@ function go_to_page ()
 				</tr>
 			</table>
 		</div>
+		{% endif %}
 
 <!--=======================-->
 {% endif %}

@@ -571,15 +571,18 @@ if ($submit && !$errors) {
             $user_actkey = Str::random(ACTKEY_LENGTH);
             $db_data['user_active'] = 0;
             $db_data['user_actkey'] = $user_actkey;
+            $db_data['user_actkey_time'] = TIMENOW;
         } else {
             $db_data['user_active'] = 1;
             $db_data['user_actkey'] = '';
+            $db_data['user_actkey_time'] = 0;
         }
         // Force email activation for spam-moderated users
         if (isset($spamResult) && $spamResult->isModerated()) {
             $user_actkey = Str::random(ACTKEY_LENGTH);
             $db_data['user_active'] = 0;
             $db_data['user_actkey'] = $user_actkey;
+            $db_data['user_actkey_time'] = TIMENOW;
         }
 
         $db_data['user_regdate'] = TIMENOW;
@@ -653,6 +656,7 @@ if ($submit && !$errors) {
                 $user_actkey = Str::random(ACTKEY_LENGTH);
                 $pr_data['user_actkey'] = $user_actkey;
                 $db_data['user_actkey'] = $user_actkey;
+                $db_data['user_actkey_time'] = TIMENOW;
 
                 // Sending email
                 $emailer = new TorrentPier\Emailer;

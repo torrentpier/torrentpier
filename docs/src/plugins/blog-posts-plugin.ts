@@ -31,13 +31,14 @@ export default function blogPostsPlugin(context: LoadContext): Plugin {
           const {data, content: body} = matter(content);
 
           if (data.slug && data.title) {
-            // Extract description from truncated content or first paragraph
             let description = '';
-            const truncateIndex = body.indexOf('<!-- truncate -->');
-            if (truncateIndex !== -1) {
+            const truncateIndex = ['<!-- truncate -->', '{/* truncate */}']
+              .map(marker => body.indexOf(marker))
+              .filter(idx => idx !== -1)
+              .reduce((min, idx) => Math.min(min, idx), Infinity);
+            if (truncateIndex !== Infinity) {
               description = body.substring(0, truncateIndex).trim();
             } else {
-              // Get first paragraph
               const firstPara = body.split('\n\n')[0];
               description = firstPara?.replace(/^#.*\n/, '').trim() || '';
             }
