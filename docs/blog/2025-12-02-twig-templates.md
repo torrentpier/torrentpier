@@ -9,7 +9,7 @@ This is the first article in the promised series where we'll be talking about wh
 
 Today we'll discuss one of the main changes — we've completely reworked the template system.
 
-<!-- truncate -->
+{/* truncate */}
 
 ## What we had
 
