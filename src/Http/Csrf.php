@@ -62,6 +62,7 @@ final class Csrf
         if ($stored === '') {
             return false;
         }
+
         return hash_equals($stored, $supplied);
     }
 
@@ -98,12 +99,14 @@ final class Csrf
         if ($identifier === '') {
             return null;
         }
+
         return self::CACHE_PREFIX . $identifier;
     }
 
     private static function ttl(): int
     {
         $ttl = (int)config()->get('auth.sessions.user_duration');
+
         return $ttl > 0 ? $ttl : 86400;
     }
 }
