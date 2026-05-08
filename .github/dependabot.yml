@@ -1,16 +1,80 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
-
 version: 2
 
 updates:
-  - package-ecosystem: "composer"
-    directory: "/"
-    versioning-strategy: increase-if-necessary
+  - package-ecosystem: composer
+    directory: /
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
     commit-message:
       prefix: "Composer"
       include: "scope"
+    groups:
+      composer-minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "daily"
+      interval: daily
+    labels:
+      - dependencies
+      - ci
+    commit-message:
+      prefix: "GitHub Actions"
+      include: "scope"
+    groups:
+      actions-minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: npm
+    directory: /docs
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - documentation
+    commit-message:
+      prefix: "Docs npm"
+      include: "scope"
+    groups:
+      docs-minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - docker
+    commit-message:
+      prefix: "Docker"
+      include: "scope"
+    groups:
+      docker-minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: docker-compose
+    directory: /
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - docker
+    commit-message:
+      prefix: "Docker Compose"
+      include: "scope"
+    groups:
+      docker-compose-all:
+        patterns:
+          - "*"
