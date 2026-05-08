@@ -70,7 +70,7 @@
 	<td class="tLeft pad_0"><a href="{{ item.U_READ }}" class="med bold block pad_4">{{ item.SUBJECT|raw }}</a></td>
 	<td>{{ item.FROM|raw }}</td>
 	<td><u>{{ item.DATE_RAW }}</u>{{ item.DATE|raw }}</td>
-	<td><input type="checkbox" name="mark[]2" value="{{ item.S_MARK_ID }}" /></td>
+	<td><input type="checkbox" name="mark[]" value="{{ item.S_MARK_ID }}" /></td>
 </tr>
 {% endfor %}{# /LISTROW #}
 {% if NO_MESSAGES %}
