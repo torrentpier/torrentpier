@@ -33,6 +33,7 @@
     <tr>
         <td colspan="2">
             <form method="post" action="{{ FORUM_PATH }}profile/two-step?action=enable" class="tokenized">
+                {{ csrf_field() }}
                 <input type="hidden" name="setup_token" value="{{ SETUP_TOKEN }}"/>
                 <table class="borderless bCenter" style="width: 400px;">
                     <tr>

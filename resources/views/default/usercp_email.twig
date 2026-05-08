@@ -3,6 +3,7 @@
 <p class="nav"><a href="{{ U_INDEX }}">{{ __('HOME') }}</a></p>
 
 <form action="{{ S_POST_ACTION }}" method="post" name="post" onSubmit="return checkForm(this);">
+{{ csrf_field() }}
 {{ S_HIDDEN_FIELDS|raw }}
 
 <table class="forumline">

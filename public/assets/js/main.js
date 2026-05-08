@@ -230,6 +230,30 @@ var Menu = {
 };
 
 $(document).ready(function () {
+  // CSRF: pull token from <meta name="csrf-token"> and attach to every same-origin AJAX request.
+  var _csrfToken = $('meta[name="csrf-token"]').attr('content') || '';
+  if (_csrfToken) {
+    $.ajaxSetup({
+      beforeSend: function (xhr, settings) {
+        var crossDomain = settings.crossDomain;
+        var url = settings.url || '';
+        var sameOrigin = !crossDomain && !/^https?:\/\//i.test(url);
+        if (sameOrigin && !/^(GET|HEAD|OPTIONS)$/i.test(settings.type || 'GET')) {
+          xhr.setRequestHeader('X-CSRF-Token', _csrfToken);
+        }
+      }
+    });
+    if (typeof Ajax !== 'undefined' && Ajax.prototype) {
+      Ajax.prototype.form_token = _csrfToken;
+    }
+    // Auto-inject hidden _token into every POST form rendered without csrf_field().
+    $('form').each(function () {
+      if (((this.method || '').toUpperCase() === 'POST') && !$(this).find('input[name="_token"]').length) {
+        $('<input>').attr({ type: 'hidden', name: '_token', value: _csrfToken }).appendTo(this);
+      }
+    });
+  }
+
   // Menus
   $('body').append($('div.menu-sub'));
   $('a.menu-root')

@@ -7,7 +7,7 @@
 </p>
 
 <form method="post" action="{{ FORUM_PATH }}profile/two-step?action=disable" class="tokenized">
-
+{{ csrf_field() }}
 <table class="forumline">
     <col class="row1" width="35%">
     <col class="row2" width="65%">

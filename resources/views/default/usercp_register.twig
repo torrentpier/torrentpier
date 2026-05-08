@@ -51,6 +51,7 @@
 
 <form id="prof-form" method="post" action="{% if IS_ADMIN and PR_USER_ID %}?{{ constant('POST_USERS_URL') }}={{ PR_USER_ID }}{% endif %}"
       class="tokenized" enctype="multipart/form-data">
+    {{ csrf_field() }}
     <input type="hidden" name="mode" value="{{ MODE }}"/>
     <input type="hidden" name="reg_agreed" value="1"/>
     {% if NEW_USER %}<input type="hidden" name="admin" value="1"/>{% endif %}
