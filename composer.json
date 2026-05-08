@@ -36,7 +36,7 @@
         "ext-openssl": "*",
         "arokettu/bencode": "^4.1.0",
         "arokettu/monsterid": "^4.1.0",
-        "arokettu/random-polyfill": "1.0.2",
+        "arokettu/random-polyfill": "1.99.0",
         "arokettu/torrent-file": "^5.2.1",
         "bugsnag/bugsnag": "^v3.29.1",
         "chillerlan/php-qrcode": "^6.0.1",
