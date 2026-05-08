@@ -40,8 +40,8 @@ if (request()->post->has('submit')) {
             $user_password = Str::random(PASSWORD_MIN_LENGTH);
 
             $sql = 'UPDATE ' . BB_USERS . "
-				SET user_newpasswd = '{$user_password}', user_actkey = '{$user_actkey}'
-				WHERE user_id = " . $row['user_id'];
+				SET user_newpasswd = '{$user_password}', user_actkey = '{$user_actkey}', user_actkey_time = " . TIMENOW . '
+				WHERE user_id = ' . $row['user_id'];
             if (!DB()->sql_query($sql)) {
                 bb_die('Could not update new password information');
             }
