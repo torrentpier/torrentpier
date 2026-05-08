@@ -813,7 +813,7 @@ if ($tor_count) {
 
     template()->assign_vars([
         'MATCHES' => $search_matches,
-        'SERACH_MAX' => $search_max,
+        'SEARCH_MAX' => $search_max,
     ]);
 }
 

@@ -10,7 +10,11 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   future: {
-    v4: true,
+    // Keep 3.9.2 v4 defaults; opt out of new 3.10 flags (mdx1CompatDisabledByDefault, fasterByDefault, siteStorageNamespacing) until we evaluate them.
+    v4: {
+      removeLegacyPostBuildHeadAttribute: true,
+      useCssCascadeLayers: true,
+    },
   },
 
   url: 'https://docs.torrentpier.com',

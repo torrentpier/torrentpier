@@ -271,14 +271,32 @@ function initCodes(context) {
 function initQuotes(context) {
   $('div.q', context).each(function () {
     var $q = $(this);
-    var name = $(this).attr('head');
-    var q_title = (name ? '<b>' + name + '</b> ' + bbl['wrote'] + ':' : '<b>' + bbl['quote'] + '</b>');
-    if (quoted_pid = $q.children('u.q-post:first').text()) {
-      var on_this_page = $('#post_' + quoted_pid).length;
-      var href = (on_this_page) ? '#' + quoted_pid : './viewtopic?p=' + quoted_pid + '#' + quoted_pid;
-      q_title += ' <a href="' + href + '" title="' + bbl['quoted_post'] + '"><img src="' + bb_url + 'assets/images/theme/icon_latest_reply.gif" class="icon2" alt="" /></a>';
+    var name = $q.attr('head');
+    var $head;
+    if (name) {
+      $head = $('<div class="q-head"><b></b> ' + bbl['wrote'] + ':</div>');
+      $head.find('b').first().text(name);
+    } else {
+      $head = $('<div class="q-head"><b>' + bbl['quote'] + '</b></div>');
     }
-    $q.before('<div class="q-head">' + q_title + '</div>');
+    var quoted_pid = $q.children('u.q-post:first').text();
+    if (quoted_pid) {
+      var on_this_page = !!document.getElementById('post_' + quoted_pid);
+      var encoded_pid = encodeURIComponent(quoted_pid);
+      var href = on_this_page
+        ? '#' + encoded_pid
+        : './viewtopic?p=' + encoded_pid + '#' + encoded_pid;
+      var $a = $('<a></a>').attr({
+        href: href,
+        title: bbl['quoted_post']
+      });
+      $a.append($('<img alt=""/>').attr({
+        src: bb_url + 'assets/images/theme/icon_latest_reply.gif',
+        'class': 'icon2'
+      }));
+      $head.append(' ').append($a);
+    }
+    $head.insertBefore($q);
   });
 }
 
@@ -287,17 +305,35 @@ function initPostImages(context) {
   var $in_spoilers = $('div.sp-body var.postImg', context);
   $('var.postImg', context).not($in_spoilers).each(function () {
     var $v = $(this);
-    var src = $v.attr('title');
-    var $img = $('<img src="' + src + '" class="' + $v.attr('class') + '" alt="pic" />');
-    $img = fixPostImage($img);
+    var rawSrc = $v.attr('title');
+    if (typeof rawSrc !== 'string') return;
+    var parsed;
+    try {
+      parsed = new URL(rawSrc, document.baseURI);
+    } catch (_) {
+      return;
+    }
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return;
+    var src = parsed.href;
+    var imgEl = document.createElement('img');
+    imgEl.alt = 'pic';
+    imgEl.className = $v.attr('class') || '';
+    imgEl.src = src;
+    var $img = fixPostImage($(imgEl));
     var maxW = ($v.hasClass('postImgAligned')) ? postImgAligned_MaxWidth : postImg_MaxWidth;
     $img.bind('click', function () {
       return imgFit(this, maxW);
     });
     if (user.opt_js.i_aft_l) {
       $('#preload').append($img);
-      var loading_icon = '<a href="' + src + '" target="_blank"><img src="' + bb_url + 'assets/images/pic_loading.gif" alt="" /></a>';
-      $v.html(loading_icon);
+      var aEl = document.createElement('a');
+      aEl.target = '_blank';
+      aEl.href = src;
+      var loadingImg = document.createElement('img');
+      loadingImg.alt = '';
+      loadingImg.src = bb_url + 'assets/images/pic_loading.gif';
+      aEl.appendChild(loadingImg);
+      $v.empty().append(aEl);
       $img.one('load', function () {
         imgFit(this, maxW);
         $v.empty().append(this);
@@ -367,12 +403,12 @@ function initMedia(context) {
     if (typeof link.href !== 'string') {
       continue;
     }
-    if (/^http(?:s|):\/\/www.youtube.com\/watch\?(.*)?(&?v=([a-z0-9\-_]+))(.*)?|http:\/\/youtu.be\/.+/i.test(link.href)) {
+    if (/^https?:\/\/(?:www\.youtube\.com\/watch\?(?:.*&)?v=([a-z0-9\-_]+).*|youtu\.be\/.+)/i.test(link.href)) {
       var a = document.createElement('span');
       a.className = 'YTLink';
       a.innerHTML = '<span title="' + bbl['play_on'] + '" class="YTLinkButton">&#9658;</span>';
       window.addEvent(a, 'click', function (e) {
-        var vhref = e.target.nextSibling.href.replace(/^http(?:s|):\/\/www.youtube.com\/watch\?(.*)?(&?v=([a-z0-9\-_]+))(.*)?|http:\/\/youtu.be\//ig, "https://www.youtube.com/embed/$3");
+        var vhref = e.target.nextSibling.href.replace(/^(?:https?:\/\/www\.youtube\.com\/watch\?(?:.*&)?v=([a-z0-9\-_]+).*|https?:\/\/youtu\.be\/)/i, "https://www.youtube.com/embed/$1");
         var text = e.target.nextSibling.innerText !== "" ? e.target.nextSibling.innerText : e.target.nextSibling.href;
         $('#Panel_youtube').remove();
         ypanel('youtube', {
