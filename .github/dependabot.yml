@@ -31,3 +31,50 @@ updates:
         update-types:
           - minor
           - patch
+
+  - package-ecosystem: npm
+    directory: /docs
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - documentation
+    commit-message:
+      prefix: "Docs npm"
+      include: "scope"
+    groups:
+      docs-minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - docker
+    commit-message:
+      prefix: "Docker"
+      include: "scope"
+    groups:
+      docker-minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: docker-compose
+    directory: /
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - docker
+    commit-message:
+      prefix: "Docker Compose"
+      include: "scope"
+    groups:
+      docker-compose-all:
+        patterns:
+          - "*"
