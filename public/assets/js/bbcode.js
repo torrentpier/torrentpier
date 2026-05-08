@@ -261,12 +261,6 @@ function initPostBBCode(context) {
   initMedia(context);
 }
 
-// Reject URL schemes that execute code/markup when used in href/src.
-function _isSafeBbcodeUrl(url) {
-  if (typeof url !== 'string') return false;
-  return !/^\s*(?:javascript|data|vbscript|file):/i.test(url);
-}
-
 function initCodes(context) {
   $('div.c-body', context).each(function () {
     var $c = $(this);
@@ -312,21 +306,26 @@ function initPostImages(context) {
   $('var.postImg', context).not($in_spoilers).each(function () {
     var $v = $(this);
     var src = $v.attr('title');
-    if (!_isSafeBbcodeUrl(src)) return;
-    var $img = $('<img alt="pic"/>').attr({
-      src: src,
-      'class': $v.attr('class')
-    });
-    $img = fixPostImage($img);
+    if (typeof src !== 'string' || !/^(?:https?:)?\/\//i.test(src)) return;
+    var imgEl = document.createElement('img');
+    imgEl.alt = 'pic';
+    imgEl.className = $v.attr('class') || '';
+    imgEl.src = src;
+    var $img = fixPostImage($(imgEl));
     var maxW = ($v.hasClass('postImgAligned')) ? postImgAligned_MaxWidth : postImg_MaxWidth;
     $img.bind('click', function () {
       return imgFit(this, maxW);
     });
     if (user.opt_js.i_aft_l) {
       $('#preload').append($img);
-      var $loading = $('<a target="_blank"></a>').attr('href', src)
-        .append($('<img alt=""/>').attr('src', bb_url + 'assets/images/pic_loading.gif'));
-      $v.empty().append($loading);
+      var aEl = document.createElement('a');
+      aEl.target = '_blank';
+      aEl.href = src;
+      var loadingImg = document.createElement('img');
+      loadingImg.alt = '';
+      loadingImg.src = bb_url + 'assets/images/pic_loading.gif';
+      aEl.appendChild(loadingImg);
+      $v.empty().append(aEl);
       $img.one('load', function () {
         imgFit(this, maxW);
         $v.empty().append(this);
@@ -396,12 +395,12 @@ function initMedia(context) {
     if (typeof link.href !== 'string') {
       continue;
     }
-    if (/^http(?:s|):\/\/www\.youtube\.com\/watch\?(.*)?(&?v=([a-z0-9\-_]+))(.*)?|http:\/\/youtu\.be\/.+/i.test(link.href)) {
+    if (/^https?:\/\/(?:www\.youtube\.com\/watch\?(?:.*&)?v=([a-z0-9\-_]+).*|youtu\.be\/.+)/i.test(link.href)) {
       var a = document.createElement('span');
       a.className = 'YTLink';
       a.innerHTML = '<span title="' + bbl['play_on'] + '" class="YTLinkButton">&#9658;</span>';
       window.addEvent(a, 'click', function (e) {
-        var vhref = e.target.nextSibling.href.replace(/^http(?:s|):\/\/www\.youtube\.com\/watch\?(.*)?(&?v=([a-z0-9\-_]+))(.*)?|http:\/\/youtu\.be\//ig, "https://www.youtube.com/embed/$3");
+        var vhref = e.target.nextSibling.href.replace(/^(?:https?:\/\/www\.youtube\.com\/watch\?(?:.*&)?v=([a-z0-9\-_]+).*|https?:\/\/youtu\.be\/)/i, "https://www.youtube.com/embed/$1");
         var text = e.target.nextSibling.innerText !== "" ? e.target.nextSibling.innerText : e.target.nextSibling.href;
         $('#Panel_youtube').remove();
         ypanel('youtube', {
