@@ -15,12 +15,7 @@ namespace TorrentPier\Http;
 use Illuminate\Support\Str;
 
 /**
- * Per-session CSRF token store.
- *
- * Tokens are bound to the active session identifier (real session_id for
- * authenticated users, session_ip for guests) and persisted in the bb_cache
- * store so they survive across page loads. Same identifier → same token until
- * it expires or session_id changes (login regenerates).
+ * Per-session CSRF token store keyed on session_id and persisted in bb_cache.
  */
 final class Csrf
 {
@@ -93,9 +88,9 @@ final class Csrf
         if (!$userdata) {
             return null;
         }
-        $identifier = ((int)($userdata['user_id'] ?? GUEST_UID) === GUEST_UID)
-            ? (string)($userdata['session_ip'] ?? '')
-            : (string)($userdata['session_id'] ?? '');
+        // Always key on session_id: User::session_create() issues one for guests too,
+        // so per-browser isolation works without sharing tokens behind NAT.
+        $identifier = (string)($userdata['session_id'] ?? '');
         if ($identifier === '') {
             return null;
         }
