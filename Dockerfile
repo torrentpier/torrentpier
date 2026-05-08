@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:1.9-php8.4-alpine
+FROM dunglas/frankenphp:1.12-php8.4-alpine
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
