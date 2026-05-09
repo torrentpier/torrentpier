@@ -104,6 +104,7 @@
             {% if config('avatars.group.up_allowed') %}
             <br/>
             <form action="{{ S_GROUP_CONFIG_ACTION }}" method="post" enctype="multipart/form-data">
+                {{ csrf_field() }}
                 {{ S_HIDDEN_FIELDS|raw }}
                 <input type="hidden" name="MAX_FILE_SIZE" value="{{ config('avatars.group.max_size') }}"/>
                 <input type="file" name="avatar" accept="image/*"/>

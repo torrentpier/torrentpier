@@ -1,7 +1,7 @@
 <h1 class="pagetitle">{{ PAGE_TITLE }}</h1>
 
 <form action="{{ S_LOGIN_ACTION }}" method="post">
-
+    {{ csrf_field() }}
     <input type="hidden" name="redirect" value="{{ REDIRECT_URL }}"/>
     {% if ADMIN_LOGIN %}<input type="hidden" name="admin" value="1"/>{% endif %}
 

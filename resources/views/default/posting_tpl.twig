@@ -4831,6 +4831,7 @@ $(function(){
 
 <div style="display: none;">
 <form id="tpl-post-form" method="post" action="{TPL_FORM_ACTION}" name="post" class="tokenized">
+	{{ csrf_field() }}
 	<input type="hidden" name="tor_required" value="{TOR_REQUIRED}">
 	<input type="hidden" name="preview" value="1">
 	<input id="tpl-post-subject" type="text" name="subject" size="90" value="" />

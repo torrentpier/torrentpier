@@ -58,6 +58,7 @@
 </p>
 
 <form action="{{ S_POST_ACTION }}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }" {{ S_FORM_ENCTYPE }}>
+    {{ csrf_field() }}
     {{ S_HIDDEN_FORM_FIELDS|raw }}
     {{ ADD_ATTACH_HIDDEN_FIELDS|raw }}
     {{ POSTED_ATTACHMENTS_HIDDEN_FIELDS|raw }}

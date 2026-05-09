@@ -55,6 +55,7 @@
 <!--========================================================================-->
 
 <form action="{{ S_MODCP_ACTION }}" method="post">
+{{ csrf_field() }}
 {{ S_HIDDEN_FIELDS|raw }}
 
 <table class="forumline">

@@ -202,6 +202,7 @@ ajax.callback.post_mod_comment = function(data) {
 
 {% if TOPIC_HAS_POLL or CAN_MANAGE_POLL %}
 <form id="poll-form" method="post" action="/poll" style="display: none;">
+{{ csrf_field() }}
 <input id="poll-mode" type="hidden" name="mode" value="" />
 <input type="hidden" name="topic_id" value="{{ TOPIC_ID }}" />
 <input type="hidden" name="{{ TOPIC_HASH }}" value="1" />
@@ -276,7 +277,7 @@ function build_poll_add_form (src_el)
 		<td class="med" style="padding: 0 4px 2px 4px;">|</td>
 		<td class="small nowrap" style="padding: 0 0 0 0;">{{ __('SELECT_POSTS_PER_PAGE') }}</td>
 		<td class="small nowrap" style="padding: 0 0 0 3px;">
-			<form id="ppp" action="{{ PAGE_URL_PPP }}" method="post">{{ SELECT_PPP|raw }}</form>
+			<form id="ppp" action="{{ PAGE_URL_PPP }}" method="post">{{ csrf_field() }}{{ SELECT_PPP|raw }}</form>
 		</td>
 		{% endif %}
 		{% endif %}
@@ -291,6 +292,7 @@ function build_poll_add_form (src_el)
 
 		<td class="nowrap" style="padding: 0 4px 2px 4px;">
 			<form action="{{ U_SEARCH }}?{{ constant('POST_TOPIC_URL') }}={{ TOPIC_ID }}&amp;dm=1&amp;s=1" method="post">
+				{{ csrf_field() }}
 				<input id="search-text" type="text" name="nm" class="hint" style="width: 150px;" placeholder="{{ __('SEARCH_IN_TOPIC') }}" required />
 				<input type="submit" class="bold" value="&raquo;" style="width: 30px;" />
 			</form>
@@ -528,6 +530,7 @@ function build_poll_add_form (src_el)
 <tr id="del_split_row" class="row5" style="display: none;">
 	<td colspan="2" class="med pad_4 td2">
 	<form method="post" action="{{ S_SPLIT_ACTION }}">
+	{{ csrf_field() }}
 	<input type="hidden" name="redirect" value="modcp?{{ constant('POST_TOPIC_URL') }}={{ TOPIC_ID }}&amp;mode=split" />
 	<input type="hidden" name="{{ constant('POST_FORUM_URL') }}" value="{{ FORUM_ID }}" />
 	<input type="hidden" name="{{ constant('POST_TOPIC_URL') }}" value="{{ TOPIC_ID }}" />
@@ -585,6 +588,7 @@ function build_poll_add_form (src_el)
     <tr>
         <td class="catBottom med">
             <form method="post" action="{{ S_POST_DAYS_ACTION }}">
+                {{ csrf_field() }}
                 {{ __('DISPLAY_POSTS') }}: {{ S_SELECT_POST_DAYS|raw }}&nbsp;
                 {{ S_SELECT_POST_ORDER|raw }}&nbsp;
                 <input type="submit" value="{{ __('GO') }}" class="lite" name="submit" />
@@ -607,6 +611,7 @@ function build_poll_add_form (src_el)
 {% if QUICK_REPLY %}
 <br/>
 <form action="{{ QR_POST_ACTION }}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
+{{ csrf_field() }}
 <input type="hidden" name="mode" value="reply" />
 <input type="hidden" name="{{ constant('POST_TOPIC_URL') }}" value="{{ QR_TOPIC_ID }}" />
 

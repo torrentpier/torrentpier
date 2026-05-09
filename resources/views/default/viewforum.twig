@@ -153,6 +153,7 @@ ajax.callback.mod_action = function (data) {
 
 <div id="mod-action-content" style="display: none;">
 <form id="mod-action" method="post" action="/modcp" class="tokenized">
+	{{ csrf_field() }}
 	<input type="hidden" name="{{ constant('POST_FORUM_URL') }}" value="{{ FORUM_ID }}" />
 	<div class="floatL">
 	<input type="checkbox" onclick="$('.topic-chbox').attr({ checked: this.checked }); if(this.checked){$('.tt-text').addClass('hl-tt');}else{$('.tt-text').removeClass('hl-tt');}" />
@@ -373,7 +374,7 @@ td.topic_id { cursor: pointer; }
 		<td class="med" style="padding: 0 4px 2px 4px;color:#CDCDCD">|</td>
 		<td class="small nowrap" style="padding: 0;">{{ __('TOPICS_PER_PAGE') }}:</td>
 		<td class="small nowrap" style="padding: 0 0 0 3px;">
-			<form id="tpp" action="{{ PAGE_URL_TPP }}" method="post">{{ SELECT_TPP|raw }}</form>
+			<form id="tpp" action="{{ PAGE_URL_TPP }}" method="post">{{ csrf_field() }}{{ SELECT_TPP|raw }}</form>
 		</td>
 		{% if TORRENTS %}
 		<td class="small nowrap" style="padding: 0 0 0 6px;">{{ __('STATUS') }}:</td>
@@ -401,6 +402,7 @@ td.topic_id { cursor: pointer; }
 
 		<td class="nowrap" style="padding: 0 4px 2px 4px;">
 			<form action="{{ PAGE_URL }}" method="post">
+				{{ csrf_field() }}
 				<input id="search-text" type="text" name="nm"
 				{% if TITLE_MATCH %}
 					value="{{ TITLE_MATCH }}" required {% if FOUND_TOPICS %}class="found"{% else %}class="error"{% endif %}
@@ -507,6 +509,7 @@ td.topic_id { cursor: pointer; }
 	<td colspan="6" class="catBottom med pad_4">
 	{% if LOGGED_IN %}
 	<form method="post" action="{{ S_POST_DAYS_ACTION }}">
+		{{ csrf_field() }}
 		{{ __('DISPLAY_TOPICS') }}: {{ S_SELECT_TOPIC_DAYS|raw }} {{ S_DISPLAY_ORDER|raw }}
 		<input type="submit" value="{{ __('GO') }}" />
 	</form>
@@ -580,6 +583,7 @@ td.topic_id { cursor: pointer; }
 	<td colspan="7" class="catBottom med pad_4">
 	{% if LOGGED_IN %}
 	<form method="post" action="{{ S_POST_DAYS_ACTION }}">
+		{{ csrf_field() }}
 		{{ __('DISPLAY_TOPICS') }}: {{ S_SELECT_TOPIC_DAYS|raw }} {{ S_DISPLAY_ORDER|raw }}
 		<input type="submit" value="{{ __('GO') }}" />
 	</form>

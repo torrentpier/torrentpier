@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="initial-scale=1.0">
 <meta name="generator" content="{{ constant('APP_NAME') }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 {% if META_DESCRIPTION %}
 <meta name="description" content="{{ META_DESCRIPTION }}"/>
 <meta property="og:description" content="{{ META_DESCRIPTION }}">
@@ -298,6 +299,7 @@ function go_to_page ()
 			<td class="tCenter pad_2">
 				<a href="{{ U_REGISTER }}" id="register_link"><b>{{ __('REGISTER') }}</b></a> &#0183;
 					<form action="{{ S_LOGIN_ACTION }}" method="post">
+						{{ csrf_field() }}
 						{{ __('USERNAME') }}: <input type="text" name="login_username" size="12" tabindex="1" accesskey="l" />
 						{{ __('PASSWORD') }}: <input type="password" name="login_password" size="12" tabindex="2" />
 						<label title="{{ __('AUTO_LOGIN') }}"><input type="checkbox" name="autologin" value="1" tabindex="3" checked />{{ __('REMEMBER') }}</label>&nbsp;

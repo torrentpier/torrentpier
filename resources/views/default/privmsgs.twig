@@ -40,6 +40,7 @@
 <div class="spacer_6"></div>
 
 <form method="post" name="privmsg_list" action="{{ S_PRIVMSGS_ACTION }}">
+{{ csrf_field() }}
 {{ S_HIDDEN_FIELDS|raw }}
 
 <table width="100%">

@@ -30,6 +30,7 @@ return function (Router $router): void {
     // ==============================================================
 
     $router->middleware('session');
+    $router->middleware('csrf');
 
     // ==============================================================
     // Modern PSR-7 controllers (in app/Http/Controllers/)

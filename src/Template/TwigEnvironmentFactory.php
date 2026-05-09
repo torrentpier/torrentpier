@@ -131,6 +131,17 @@ class TwigEnvironmentFactory
         $twig->addFunction(new TwigFunction('profile_url', 'profile_url'));
         $twig->addFunction(new TwigFunction('render_flag', 'render_flag'));
 
+        // CSRF helpers
+        $twig->addFunction(new TwigFunction('csrf_token', \TorrentPier\Http\Csrf::token(...)));
+        $twig->addFunction(
+            new TwigFunction(
+                'csrf_field',
+                static fn (): string => '<input type="hidden" name="' . \TorrentPier\Http\Csrf::FIELD
+                    . '" value="' . htmlspecialchars(\TorrentPier\Http\Csrf::token(), ENT_QUOTES) . '">',
+                ['is_safe' => ['html']],
+            ),
+        );
+
         // SEO-friendly URL builder (use as: url.topic(id, title), url.forum(id, name), etc.)
         $twig->addGlobal('url', url());
 
