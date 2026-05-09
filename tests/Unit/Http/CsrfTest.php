@@ -22,4 +22,15 @@ describe('Csrf', function () {
     test('TOKEN_LENGTH is at least 32 characters', function () {
         expect(Csrf::TOKEN_LENGTH)->toBeGreaterThanOrEqual(32);
     });
+
+    test('CACHE_PREFIX is "csrf_" so keys cannot collide with other bb_cache namespaces', function () {
+        expect(Csrf::CACHE_PREFIX)->toBe('csrf_');
+    });
+
+    test('protectedMethods() does not include safe HTTP methods', function () {
+        $protected = Csrf::protectedMethods();
+        expect($protected)->not->toContain('GET')
+            ->not->toContain('HEAD')
+            ->not->toContain('OPTIONS');
+    });
 });
