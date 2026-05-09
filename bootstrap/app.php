@@ -8,7 +8,7 @@
  * This file creates and configures the Application instance using
  * a fluent API for clean, expressive configuration.
  *
- * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2026 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
