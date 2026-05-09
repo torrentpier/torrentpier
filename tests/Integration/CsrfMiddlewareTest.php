@@ -27,7 +27,7 @@ beforeEach(function () {
     // a live instance does not flap.
     $ctx = stream_context_create([
         'http' => ['timeout' => 2, 'ignore_errors' => true],
-        'ssl'  => ['verify_peer' => false, 'verify_peer_name' => false],
+        'ssl' => ['verify_peer' => false, 'verify_peer_name' => false],
     ]);
     $head = @file_get_contents($this->base . CSRF_LOGIN_PATH, false, $ctx);
     if ($head === false) {
@@ -90,7 +90,7 @@ function csrfRequest(
     $status = 0;
     foreach ($meta['wrapper_data'] ?? [] as $line) {
         if (preg_match('#^HTTP/[\d.]+\s+(\d+)#', $line, $m)) {
-            $status = (int) $m[1];
+            $status = (int)$m[1];
             continue;
         }
         if (str_contains($line, ':')) {
