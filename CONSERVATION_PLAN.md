@@ -115,7 +115,8 @@ CLI `Status:` line.
       `install/` and `php bull app:install` directly
 - [ ] Line 83 — replace the Docker docs link; point to `docker-compose.yml`
       / `Dockerfile` in repo
-- [ ] Lines 54-61 — "Demo" section: **DECIDE** (see §10)
+- [ ] Lines 54-61 — **remove the entire "Demo" section** (header + URL +
+      credentials + NOTE block) — see §11
 - [ ] Insert a prominent EOL banner at the very top (blockquote) using the
       Canonical EOL Notice
 - [ ] Line 109 — `tests/README.md` link — verify file exists, keep
@@ -170,8 +171,8 @@ CLI `Status:` line.
 - [x] Welcome post intro (line 922) — `TorrentPier Ox` (already updated)
 - [ ] Welcome post body — rewrite into EOL tone using the Canonical EOL
       Notice. Replace `[url=https://torrentpier.com/]visit our forum[/url]`
-      (line 926) with `https://ox.torrentpier.com/`. Decide demo line
-      (line 931) per §10.
+      (line 926) with `https://ox.torrentpier.com/`. **Drop the demo line
+      (line 931)** entirely — see §11.
 - [x] Seed admin email `admin@torrentpier.com` (line 180) — keep
       (installer overrides it on first run)
 - [x] Seed bot email `bot@torrentpier.com` (line 142) — keep
@@ -191,20 +192,6 @@ CLI `Status:` line.
 
 ### 10. Decisions deferred — do not silently change
 
-- **Demo site `https://torrentpier.duckdns.org`.** Referenced in:
-  - `README.md:56-58` (Demo section)
-  - `database/migrations/20250619000002_seed_initial_data.php:931` (welcome
-    post)
-  - `app/Http/Controllers/Admin/admin_bt_forum_cfg.php:29` (announce-URL
-    placeholder)
-  - `resources/views/default/posting_tpl.twig:122-123` (BBCode poster
-    example)
-  - `library/includes/torrent_announce_urls.php:17` (commented example)
-
-  Will the duckdns demo stay running post-release? If no → remove README
-  section + welcome-post line. The other three are config defaults the
-  operator overrides — they can stay regardless.
-
 - **Out of scope, already gitignored:** `storage/framework/templates/*`
   cached `.php` template files contain stale `torrentpier.com/threads/260`
   links. Per `.gitignore:32`, the directory is not tracked — operator
@@ -215,6 +202,28 @@ CLI `Status:` line.
   (HTTP 200, 17 434 bytes) at plan-write time. If long-term durability is a
   concern, mirror the file into the repo and link relatively. Not blocking.
 
+### 11. Demo site retirement (`torrentpier.duckdns.org` is being shut down)
+
+Remove every reference to the duckdns demo and replace the trackerside
+defaults with neutral `example.com` placeholders.
+
+- [ ] `README.md:54-61` — delete the whole "Demo" section (`## 🖥️ Demo`,
+      URL, admin/admin credentials, NOTE block). See §5 too.
+- [ ] `database/migrations/20250619000002_seed_initial_data.php:931` —
+      drop the `"Our demo website: [url=https://torrentpier.duckdns.org]..."`
+      line from the welcome post string. See §8 too.
+- [ ] `app/Http/Controllers/Admin/admin_bt_forum_cfg.php:29` — replace the
+      `bt_announce_url` default `https://torrentpier.duckdns.org/bt/` with
+      `https://example.com/bt/` (or empty string if the form tolerates it).
+- [ ] `resources/views/default/posting_tpl.twig:122-123` — replace both
+      `torrentpier.duckdns.org/assets/images/logo/logo.png` poster/screenshot
+      examples with `https://example.com/poster.png` (or strip the example
+      JS block entirely if it isn't needed for the BBCode editor).
+- [ ] `library/includes/torrent_announce_urls.php:17` — rewrite the
+      commented example to `// $announce_urls[] = 'https://example.com/bt/announce.php';`.
+- [ ] After all edits: `grep -rn "torrentpier\.duckdns" .` (skip vendor,
+      node_modules, storage, public/build, .git) must return zero.
+
 ## Release sequence (proposed)
 
 1. Land §1–§3 (mechanical cleanups, no user-facing surprises) — one commit
@@ -222,10 +231,12 @@ CLI `Status:` line.
 2. Land §4 (delete `docs/`) — single commit.
 3. Land §5 and §6 (README + `.github`) — separate commits.
 4. Land §7 and §8 (EOL copy in user-facing surfaces) — separate commits.
-5. Hand-curate `CHANGELOG.md` (§9) as the last commit before tagging.
-6. Tag `v3.0.0` on `master` after merging `ox`; let `cd.yml` build the
+5. Land §11 (duckdns demo retirement) — single commit; fold into §5/§8
+   commits if they end up in the same edit window.
+6. Hand-curate `CHANGELOG.md` (§9) as the last commit before tagging.
+7. Tag `v3.0.0` on `master` after merging `ox`; let `cd.yml` build the
    release artifact.
-7. Post-tag housekeeping: close any open Dependabot PRs; optionally archive
+8. Post-tag housekeeping: close any open Dependabot PRs; optionally archive
    the GitHub repo.
 
 ## Working notes
