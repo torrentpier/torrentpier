@@ -877,7 +877,7 @@ class SeedInitialData extends AbstractMigration
             [
                 'topic_id' => 1,
                 'forum_id' => 1,
-                'topic_title' => 'Welcome to TorrentPier Cattle',
+                'topic_title' => 'Welcome to TorrentPier Ox',
                 'topic_poster' => 2,
                 'topic_time' => $currentTime,
                 'topic_views' => 0,
@@ -919,7 +919,7 @@ class SeedInitialData extends AbstractMigration
         ])->saveData();
 
         // Create welcome post text
-        $welcomeText = "Thank you for installing the new — TorrentPier Cattle!\n\n" .
+        $welcomeText = "Thank you for installing the new — TorrentPier Ox!\n\n" .
             "What to do next? First of all configure your site in the administration panel (link in the bottom).\n\n" .
             "Change main options: site description, number of messages per topic, time zone, language by default, seed-bonus options, birthdays etc... " .
             "Create a couple of forums, delete or change this one. Change settings of categories to allow registration of torrents, change announcer url. " .

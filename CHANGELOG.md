@@ -1,4 +1,4 @@
-[![TorrentPier](https://raw.githubusercontent.com/torrentpier/.github/refs/heads/main/versions/Cattle.png)](https://github.com/torrentpier)
+[![TorrentPier](https://raw.githubusercontent.com/torrentpier/.github/refs/heads/main/versions/Ox.png)](https://github.com/torrentpier)
 
 # 📖 Change Log
 
