@@ -106,7 +106,22 @@ class WhoopsManager
      */
     private function registerPlaceholderHandler(): void
     {
-        $this->whoops->pushHandler(function ($e) {
+        $this->whoops->pushHandler(function ($e, $inspector, $run) {
+            // League\Route\Http\Exception (NotFound, MethodNotAllowed, ...) carries
+            // its own status code; render the engine's themed error page via bb_die()
+            // so the user sees a real header/footer instead of a bare placeholder line.
+            if ($e instanceof \League\Route\Http\Exception && function_exists('bb_die')) {
+                $status = $e->getStatusCode();
+                // bb_die() runs the lang lookup internally, so pass the key
+                $message = $status === 404 ? 'PAGE_NOT_FOUND' : config()->get('logging.whoops.error_message');
+                try {
+                    bb_die($message, $status); // exits; templated page with proper status
+                } catch (\Throwable) {
+                    // Fall through to bare placeholder if engine isn't bootstrapped enough
+                }
+                $run->sendHttpCode($status);
+            }
+
             echo config()->get('logging.whoops.error_message');
             if (config()->get('logging.whoops.show_error_details')) {
                 echo '<hr/>Error: ' . $this->sanitizeErrorMessage($e->getMessage()) . '.';
