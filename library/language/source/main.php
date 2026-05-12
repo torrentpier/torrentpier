@@ -1732,6 +1732,8 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Click %sHere%s to return to Disallow User
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Information';
 $lang['CHANGELOG'] = 'Changelog';
+$lang['EOL_PROJECT_CLOSED'] = 'Project closed';
+$lang['EOL_FORUM_ARCHIVE'] = 'Forum archive';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Allowed login attempts';

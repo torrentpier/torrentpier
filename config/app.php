@@ -9,7 +9,7 @@
  */
 
 return [
-    'release_date' => '11-05-2026',
+    'release_date' => '13-05-2026',
     'release_codename' => 'Ox',
     'js_ver' => 1,
     'css_ver' => 1,

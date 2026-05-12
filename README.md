@@ -15,8 +15,9 @@
 </p>
 
 > **TorrentPier 3.0 (Ox) is the final release of this codebase.**
-> The project entered conservation in May 2026. No further patches, security
-> fixes, or feature work are planned.
+> The project closed in May 2026 — read the closure announcement at
+> <https://sunset.torrentpier.com/>. No further patches,
+> security fixes, or feature work are planned.
 > The community forum is preserved read-only at <https://ox.torrentpier.com/>.
 > A new generation of the engine is being written from scratch, possibly under
 > a different name. There is no timeline yet.
@@ -31,8 +32,8 @@ architecture. The original community forum is preserved read-only at
 
 ## 🌈 Current status
 
-TorrentPier 3.0 (Ox) is the final release of this codebase. The project has
-entered conservation: no further patches, security fixes, or feature work are
+TorrentPier 3.0 (Ox) is the final release of this codebase. The project
+closed in May 2026: no further patches, security fixes, or feature work are
 planned. GitHub Issues remain open as a low-noise channel for community
 discussion, but there is no commitment to respond.
 
@@ -85,7 +86,7 @@ For Docker setup, see [`docker-compose.yml`](docker-compose.yml) and
 
 ## 🔐 Security vulnerabilities
 
-This release is in conservation and will not receive security patches. If you
+This release is closed and will not receive security patches. If you
 self-host TorrentPier 3.0 (Ox), you are responsible for your own security
 maintenance. See [SECURITY.md](.github/SECURITY.md) for details.
 

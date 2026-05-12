@@ -3,7 +3,8 @@
 # 📖 Change Log
 
 > **TorrentPier 3.0 (Ox) is the final release of this codebase.** The project
-> entered conservation in May 2026. No further patches, security fixes, or
+> closed in May 2026 — see <https://sunset.torrentpier.com/> for the
+> closure announcement. No further patches, security fixes, or
 > feature work are planned. The community forum is preserved read-only at
 > <https://ox.torrentpier.com/>. A new generation of the engine is being
 > written from scratch, possibly under a different name; there is no timeline

@@ -1,7 +1,7 @@
 # TorrentPier Code of Conduct
 
-> **Conservation notice:** TorrentPier 3.0 (Ox) is the final release of this
-> codebase. The project entered conservation in May 2026. This Code of Conduct
+> **Closure notice:** TorrentPier 3.0 (Ox) is the final release of this
+> codebase. The project closed in May 2026. This Code of Conduct
 > still applies to all remaining community spaces (GitHub Issues, the
 > read-only forum archive at <https://ox.torrentpier.com/>) for as long as
 > they remain open.
