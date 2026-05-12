@@ -14,12 +14,6 @@ if (!$stats = datastore()->get('stats')) {
     $stats = datastore()->get('stats');
 }
 
-// Check for updates
-if (!$update_data = datastore()->get('check_updates')) {
-    datastore()->update('check_updates');
-    $update_data = datastore()->get('check_updates');
-}
-
 // Generate relevant output
 if (request()->query->get('pane') === 'left') {
     $module = [];
@@ -81,18 +75,6 @@ if (request()->query->get('pane') === 'left') {
         'ADMIN_LOCK' => (bool)config()->get('board_disable'),
         'ADMIN_LOCK_CRON' => files()->isFile(BB_DISABLED),
     ]);
-
-    // Check for updates
-    if (isset($update_data['available_update'])) {
-        template()->assign_block_vars('updater', [
-            'UPDATE_AVAILABLE' => $update_data['available_update'],
-            'NEW_VERSION_NUMBER' => $update_data['latest_version'],
-            'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
-            'NEW_VERSION_DL_LINK' => $update_data['latest_version_dl_link'],
-            'NEW_VERSION_LINK' => $update_data['latest_version_link'],
-            'NEW_VERSION_HASH' => $update_data['latest_version_checksum'],
-        ]);
-    }
 
     // Get forum statistics
     $total_posts = $stats['postcount'];

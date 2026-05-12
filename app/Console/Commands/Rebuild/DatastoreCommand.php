@@ -54,7 +54,6 @@ class DatastoreCommand extends Command
         'latest_news' => 'Latest news items',
         'network_news' => 'Network news items',
         'ads' => 'Advertisements data',
-        'check_updates' => 'Update check cache',
     ];
 
     protected function configure(): void
@@ -91,7 +90,7 @@ class DatastoreCommand extends Command
 
                     Available keys: stats, cat_forums, moderators, ranks, ban_list,
                     smile_replacements, censor, jumpbox, viewtopic_forum_select,
-                    latest_news, network_news, ads, check_updates
+                    latest_news, network_news, ads
                     HELP
             );
     }

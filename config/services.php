@@ -29,9 +29,5 @@ return [
         'url' => env('TORRSERVER_URL', 'http://localhost:8090'),
         'timeout' => 3,
     ],
-    'updater' => [
-        'enabled' => true,
-        'allow_pre_releases' => false,
-    ],
     'whois_info' => env('WHOIS_INFO_URL', 'https://whatismyipaddress.com/ip/'),
 ];
