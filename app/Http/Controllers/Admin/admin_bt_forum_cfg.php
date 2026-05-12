@@ -26,7 +26,7 @@ $cfg = [];
  * All config names with default values
  */
 $default_cfg_str = [
-    'bt_announce_url' => 'https://torrentpier.duckdns.org/bt/',
+    'bt_announce_url' => 'https://example.com/bt/',
 ];
 
 $default_cfg_bool = [

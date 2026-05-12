@@ -1,224 +1,246 @@
-[![TorrentPier](https://raw.githubusercontent.com/torrentpier/.github/refs/heads/main/versions/Cattle.png)](https://github.com/torrentpier)
+[![TorrentPier](https://raw.githubusercontent.com/torrentpier/.github/refs/heads/main/versions/Ox.png)](https://github.com/torrentpier)
 
 # 📖 Change Log
 
-## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/master/TorrentPier-master)
+> **TorrentPier 3.0 (Ox) is the final release of this codebase.** The project
+> closed in May 2026 — see <https://sunset.torrentpier.com/> for the
+> closure announcement. No further patches, security fixes, or
+> feature work are planned. The community forum is preserved read-only at
+> <https://ox.torrentpier.com/>. A new generation of the engine — codename
+> **Dexter** — is being written from scratch, expected in 2027. See
+> [SECURITY.md](.github/SECURITY.md) for what this means for self-hosted
+> installations.
 
-### 🚀 Features
+## 3.0.0 - 13-05-2026
 
-- *(polls)* Enforce `auth_pollcreate` permission for `poll_add` mode ([#2242](https://github.com/torrentpier/torrentpier/pull/2242)) - ([d79e506](https://github.com/torrentpier/torrentpier/commit/d79e506107b9225742a449ec4ff0045f1bf93529))
-- Add SQLite database configuration and fix form action rendering bug - ([99eb22a](https://github.com/torrentpier/torrentpier/commit/99eb22a67f2546d3af75c6607481ebdfd6eece4a))
-- Integrate Eloquent Collector for improved query debugging - ([3d63c4f](https://github.com/torrentpier/torrentpier/commit/3d63c4fcde7f97111fb83eee9009df9a0fe94bd2))
-- Register `EloquentServiceProvider` and add unit tests for Capsule integration - ([44ead6e](https://github.com/torrentpier/torrentpier/commit/44ead6edd9f578e0c0f10a604ed23f58d7ad6f63))
-- Modernize `LoadConfiguration` for Laravel 12 compatibility - ([41f0b41](https://github.com/torrentpier/torrentpier/commit/41f0b419c089b18063edc68b5b929dddf2a66182))
-- Add `config:cache` and `config:clear` Artisan commands - ([bda4f72](https://github.com/torrentpier/torrentpier/commit/bda4f72928132fbedf0e84d97e7610e19aca6fba))
-- Migrate `Config` class to extend `Illuminate\Config\Repository` for Laravel 12 compatibility - ([fe82ea4](https://github.com/torrentpier/torrentpier/commit/fe82ea458eb412006b03903f9d412c4e9ed91f83))
-- Add `isBot` and `isSystemUser` methods to `User` model - ([e47b0a1](https://github.com/torrentpier/torrentpier/commit/e47b0a17c328a8097b026de13f053013f7688788))
-- Add Eloquent model observers for ManticoreSearch synchronization - ([b897713](https://github.com/torrentpier/torrentpier/commit/b897713e5aacc10497aaa7d2221cc7c1a1b2e444))
-- Implement Eloquent models for forum entities - ([63db8bf](https://github.com/torrentpier/torrentpier/commit/63db8bf404467a76a899ff6ba7713139be7f7c52))
-- Register `EventServiceProvider` and `EloquentServiceProvider` for event handling and ORM integration - ([24f6784](https://github.com/torrentpier/torrentpier/commit/24f6784e0a6991f547526fbda298614eb616188a))
-- Register event handling and add Eloquent Capsule accessor - ([bb08664](https://github.com/torrentpier/torrentpier/commit/bb086647bb362d7211652526c713b4341b425cf9))
-- Add timestamps to core database tables and rename `bb_posts_text` table - ([8754e12](https://github.com/torrentpier/torrentpier/commit/8754e1237d832cae43d680dbae646e37e6492cd8))
-- Add database configuration with support for multiple drivers - ([311521a](https://github.com/torrentpier/torrentpier/commit/311521a5664e93bf1ae76b7af21f42bc5cba73c7))
-- Introduce TorrentPier filesystem services with log rotation and umask handling - ([1a8a558](https://github.com/torrentpier/torrentpier/commit/1a8a5585fc3e89cb953352850360828b8fd7abf9))
-- Add BBCode boot process and improve template management - ([0ac89c1](https://github.com/torrentpier/torrentpier/commit/0ac89c125b32fd150e60506726ef50689500e23b))
-- Add API route definitions and update existing route docs - ([4067990](https://github.com/torrentpier/torrentpier/commit/4067990aa6824dc48f29427ed3f649fc45e6ff29))
-- Add `EnsureRole` middleware for role-based API access control - ([e562657](https://github.com/torrentpier/torrentpier/commit/e5626577602b9d1bff5204afe002c533dddc7fda))
-- Add PSR-7 compliant API controllers for AJAX functionality - ([990a4e4](https://github.com/torrentpier/torrentpier/commit/990a4e4866a1e045d699f62c1d550d3be22bf8e5))
-- Add modular bootstrappers, routing, and exception handling - ([457b954](https://github.com/torrentpier/torrentpier/commit/457b9542a1d79147a4292e9a77ff055483497546))
-- Enhance `Application` with routing, middleware, and environment configuration - ([bb36236](https://github.com/torrentpier/torrentpier/commit/bb362369aa6614ca48e65ef743dcf69da218b962))
-- Centralize version handling in `Application::VERSION` - ([c4fb9da](https://github.com/torrentpier/torrentpier/commit/c4fb9da26f03b2a0f25860059ad40289998ecab4))
-- Add `BencodeResponse` for BitTorrent tracker responses - ([0cdda7c](https://github.com/torrentpier/torrentpier/commit/0cdda7c5a6de073678f5b6a1645c809d2e70c82e))
-- Add `TrackerMiddleware` and define tracker-specific routes - ([0f4deb9](https://github.com/torrentpier/torrentpier/commit/0f4deb94905a36611a9ec444a6633a445f5d9b6d))
-- Add `Middleware` configuration builder for streamlined middleware management - ([3f03955](https://github.com/torrentpier/torrentpier/commit/3f0395510fd2e40f5cbb42d4b310a6791259e8fe))
-- Add `PendingApplicationConfiguration` for fluent application setup - ([8893149](https://github.com/torrentpier/torrentpier/commit/8893149447d348d069e5d37c224feb58821d4ab5))
-- Add `SetTrustedProxies` bootstrapper for client IP extraction and proxy handling - ([94871b2](https://github.com/torrentpier/torrentpier/commit/94871b279658d7a71bba5d58e93041625b99c7df))
-- Add `RegisterHelpers` bootstrapper and legacy utility functions - ([f7e4677](https://github.com/torrentpier/torrentpier/commit/f7e46775f568e41278b90f0b882983acaf3ae68f))
-- Add container access helpers to simplify service resolution - ([f06b009](https://github.com/torrentpier/torrentpier/commit/f06b0091d2c1db1fa287264f86d47ae891cd4950))
-- Introduce `HandleExceptions` bootstrapper and standardize environment handling - ([ebc425a](https://github.com/torrentpier/torrentpier/commit/ebc425a879b64ad193c1499c80d782189373d984))
-- Add `BootProviders` bootstrapper for service provider initialization - ([5b615e3](https://github.com/torrentpier/torrentpier/commit/5b615e366092f999dfd4297ccca530a581399816))
-- Introduce `LoadConfiguration` and `LoadEnvironmentVariables` bootstrappers - ([ad283cf](https://github.com/torrentpier/torrentpier/commit/ad283cfee7b435bb9b3eb3fb013d7e7421e2e6ff))
-- Add server URL constants for dynamic full URL generation - ([21a926f](https://github.com/torrentpier/torrentpier/commit/21a926f4e21ff0d115d559a151d2703e085c671f))
-- Add PSR-7 compatible Announce and Scrape controllers - ([b6fcd5a](https://github.com/torrentpier/torrentpier/commit/b6fcd5aaa1138504909bc69b9a4207bad8dcc812))
-- Implement `SearchServiceProvider` and add unit tests for services - ([76f235b](https://github.com/torrentpier/torrentpier/commit/76f235bec1062aee5c1a32edc58d0563b614a505))
-- Refactor `Censor` to remove singleton design and enhance testability - ([79dbe29](https://github.com/torrentpier/torrentpier/commit/79dbe298ce12f18a6ee6540b5c6e069508cd5344))
-- Implement application container, kernels, and service providers - ([e990ebd](https://github.com/torrentpier/torrentpier/commit/e990ebdc4496971a56a65140b7d80b2a3856101a))
-- Enhance PHP CS Fixer configuration with extended rules and modernized settings ([#2266](https://github.com/torrentpier/torrentpier/pull/2266)) - ([a873382](https://github.com/torrentpier/torrentpier/commit/a8733821690e924f76ba456610e505e902387700))
-- Improve SQL query handling in DatabasePanel - ([97d8c86](https://github.com/torrentpier/torrentpier/commit/97d8c86b128072fb58968d92d4a36c433f446b52))
-- Add initial V3.0 documentation, blog posts plugin, and API endpoints ([#2248](https://github.com/torrentpier/torrentpier/pull/2248)) - ([b3e7b8a](https://github.com/torrentpier/torrentpier/commit/b3e7b8acccf9a141f91d4c5bafe4ac0923f51c18))
-- Integrate PHP CS Fixer with GitHub Actions workflow ([#2247](https://github.com/torrentpier/torrentpier/pull/2247)) - ([f9905e9](https://github.com/torrentpier/torrentpier/commit/f9905e9ea5b2e5efec6799bb0d95bf6d3459a2e4))
-- Add up/down migration for topic attachment columns - ([94ce3f0](https://github.com/torrentpier/torrentpier/commit/94ce3f0e141db7c686a4c1f8a73f4a0c66f28cc1))
-- Remove legacy `attach_mod` tables and improve migration script - ([ec2fb19](https://github.com/torrentpier/torrentpier/commit/ec2fb19a749d8041b4000a10b8874b05a5f8fff5))
-- Add migration script for torrent attachments to topic-based storage - ([c16545e](https://github.com/torrentpier/torrentpier/commit/c16545e45b1409da5da45296d8fc69368d938677))
-- Introduce `Topic\Guard` class for user authorization checks - ([d7c84e2](https://github.com/torrentpier/torrentpier/commit/d7c84e2fbffa40f1b3efaa031474e41e10bf400d))
-- Enhance tracker functionality with `tracker_status` support and attachment improvements - ([244cf19](https://github.com/torrentpier/torrentpier/commit/244cf19b0f827a58b14e2d0f4b858abd8b035222))
-- Add `fetchPairs` method and `autoRegister` logic to streamline torrent registration - ([83f2678](https://github.com/torrentpier/torrentpier/commit/83f26786469e6b411669614b008ac96283550620))
-- Enable attachment upload and deletion for the first post in tracker forums - ([8e1e6c6](https://github.com/torrentpier/torrentpier/commit/8e1e6c6eeeb93c0de01c5b461bea3f53b17c9339))
+Final release of the TorrentPier project — codename **Ox**, the last stop on
+the line after twenty-one years of development (2005–2026). The entire
+codebase was rewritten from a legacy phpBB2 derivative onto a modern
+Laravel-style application stack across ~360 commits since 2.8.9. After this
+release the project enters closure: no further patches, security fixes, or
+feature work are planned. See <https://sunset.torrentpier.com/> for the
+closure announcement.
 
-### 🐛 Bug Fixes
+### 🏗️ Application architecture — the 3.0 rewrite
 
-- *(ip)* Add universal IP decode method for mixed format handling ([#2241](https://github.com/torrentpier/torrentpier/pull/2241)) - ([094926f](https://github.com/torrentpier/torrentpier/commit/094926fec072aa1aef61c1650cc5624cdc533acc))
-- Delete thanks records when topic is deleted ([#2284](https://github.com/torrentpier/torrentpier/pull/2284)) - ([71f96e9](https://github.com/torrentpier/torrentpier/commit/71f96e9514106350b32c8be9d4e01dceef329786))
-- Prevent caching null `bt_userdata` for new users - ([a9621ee](https://github.com/torrentpier/torrentpier/commit/a9621ee9ed8ac5eb79d8abb54147f1a450ffb067))
-- Remove unused $size variable assignment - ([5a7cca2](https://github.com/torrentpier/torrentpier/commit/5a7cca2bbbe3b9fe1a5614ac201d35e08fcc3dca))
-- Pass string path to files()->size() instead of SplFileInfo - ([bfa48c9](https://github.com/torrentpier/torrentpier/commit/bfa48c9142fe69d10d4abe62319bb6d42eaf92d9))
-- Add exception handling to `Registry::unregister` to ensure cron job continuity - ([cbf980a](https://github.com/torrentpier/torrentpier/commit/cbf980ada8e1b44bc2473be2000d27b96cfdff1a))
-- Ensure null-safe check for `$bt_userdata` in ratio handling & improve attachment migration tracking - ([6054770](https://github.com/torrentpier/torrentpier/commit/60547701df245b31c49a754af2fef7876df9d05e))
-- Handle potential null values in cron run times and intervals - ([ffac8ae](https://github.com/torrentpier/torrentpier/commit/ffac8ae0beb696d75d849ee091bc1a08bc00e3dd))
+- **DI container** (Illuminate Container) with 11 service providers wiring
+  database, cache, sessions, templates, search, filesystem, events, HTTP,
+  middleware, error handling, and Eloquent.
+- **Modular bootstrap pipeline**: `LoadEnvironmentVariables`,
+  `LoadConfiguration`, `HandleExceptions`, `RegisterFacades`,
+  `RegisterHelpers`, `BootProviders`, `SetTrustedProxies`.
+- **HTTP and console kernels** split (`HttpKernel`, `ConsoleKernel`),
+  driven by a fluent `PendingApplicationConfiguration` builder.
+- **PSR-7 / PSR-15 HTTP stack** built on Symfony components (Request,
+  Response, Mailer, MIME, Filesystem, Event Dispatcher, String, Var Dumper —
+  all on 8.x).
+- **League\Route** with semantic URLs: `/threads/slug.id`,
+  `/forums/slug.id`, `/members/slug.id`, `/categories/slug.id`.
+- **LegacyRedirect** issues 301s from `?t=`, `?f=`, `?u=`, `?p=` query-string
+  URLs to the canonical semantic forms.
+- **TrackerMiddleware** + dedicated tracker routes; PSR-7 Announce / Scrape
+  controllers; `BencodeResponse` for BitTorrent responses.
+- **Middleware**: CSRF verification, sessions, `EnsureAdmin`, `EnsureRole`
+  for role-gated API access.
+- **Singletons removed** across BBCode, Censor, FeedGenerator, Router,
+  Template, DatabaseFactory, `User`, caching layers and helpers — all
+  resolved through DI now.
+- **Centralized `Application::VERSION`** used by the User-Agent header,
+  admin panel, and CLI.
+- **Tracy** debug panel integrated with custom Performance and Database
+  query inspector panes.
+- **Enhanced Whoops**: themed error pages via `bb_die()` so unknown URLs
+  return a proper 404 with header/footer and `PAGE_NOT_FOUND` text instead
+  of a bare placeholder line on HTTP 500.
 
-### 📦 Dependencies
+### 🗄️ Database & ORM
 
-- *(deps)* Bump symfony/mailer from 7.4.0 to 8.0.0 ([#2256](https://github.com/torrentpier/torrentpier/pull/2256)) - ([92d6c61](https://github.com/torrentpier/torrentpier/commit/92d6c6191e176ce51abfb56fd701efe68ce7cb4c))
-- *(deps)* Bump symfony/mime from 7.4.0 to 8.0.0 ([#2251](https://github.com/torrentpier/torrentpier/pull/2251)) - ([2eb65ed](https://github.com/torrentpier/torrentpier/commit/2eb65ede893d5236a5eaf2e08001ca3ca7ad642e))
-- *(deps)* Bump symfony/string from 7.4.0 to 8.0.1 ([#2252](https://github.com/torrentpier/torrentpier/pull/2252)) - ([40d9f03](https://github.com/torrentpier/torrentpier/commit/40d9f03c5a66ce844e06ace04d6800c4e94a298b))
-- *(deps)* Bump symfony/filesystem from 7.4.0 to 8.0.1 ([#2254](https://github.com/torrentpier/torrentpier/pull/2254)) - ([8741c21](https://github.com/torrentpier/torrentpier/commit/8741c210de4321990894082d2062d56d0ccb395c))
-- *(deps)* Bump symfony/event-dispatcher from 7.4.0 to 8.0.0 ([#2250](https://github.com/torrentpier/torrentpier/pull/2250)) - ([094034a](https://github.com/torrentpier/torrentpier/commit/094034ab7709705144753b34c8b978da3ec82903))
-- *(deps)* Bump twig/twig from 3.22.0 to 3.22.1 ([#2234](https://github.com/torrentpier/torrentpier/pull/2234)) - ([11c6cb7](https://github.com/torrentpier/torrentpier/commit/11c6cb78c579bbb74eb215d6be9692d00e5a7725))
-- *(deps)* Bump nesbot/carbon from 3.10.3 to 3.11.0 ([#2236](https://github.com/torrentpier/torrentpier/pull/2236)) - ([a5645a2](https://github.com/torrentpier/torrentpier/commit/a5645a245b86822f9b14838a900105b29ed44dd0))
-- *(deps-dev)* Bump pestphp/pest from 4.2.0 to 4.3.0 ([#2283](https://github.com/torrentpier/torrentpier/pull/2283)) - ([e116cee](https://github.com/torrentpier/torrentpier/commit/e116cee30ef126416bcaa9cc65a872d5f543a9b8))
-- *(deps-dev)* Bump symfony/var-dumper from 7.4.0 to 8.0.0 ([#2253](https://github.com/torrentpier/torrentpier/pull/2253)) - ([b042c02](https://github.com/torrentpier/torrentpier/commit/b042c02bca44364e9552782220682c706848691d))
+- **Eloquent** (Illuminate Database Capsule) sits alongside the legacy
+  Nette\Database layer for gradual migration.
+- **Eloquent models** for forum entities (`User`, `Forum`, `Topic`, `Post`)
+  with helper accessors like `isBot`, `isSystemUser`.
+- **Eloquent observers** synchronize forum entities into ManticoreSearch.
+- **`EloquentServiceProvider`** + `EventServiceProvider` registered.
+- **Multi-driver support**: MySQL / MariaDB / Percona and SQLite via the
+  new `database` config file with per-driver options.
+- **Eloquent Collector** panel for query debugging inside Tracy.
+- **Migration tracking** table renamed `phinxlog` → `bb_migrations`.
+- **Attachments refactor**: torrents now attach directly to topics
+  (`topic_id`); legacy `attach_mod`, `bb_extensions`, `bb_extension_groups`,
+  `attach_extensions` tables and constants dropped. `topic_attachment` field
+  retired.
+- **Timestamps** added to `bb_users`, `bb_forums`, `bb_categories`,
+  `bb_topics`, `bb_posts`, `bb_post_texts` (the renamed `bb_posts_text`).
+- **Dynamic robots.txt** driven by DB config (#2244).
+- **`tracker_status`** column for torrent state.
+- **Anonymous posting** column / support (#2327).
+- **Two-factor auth** column on `bb_users` (#2340).
+- **Spam log** table added (#2332).
 
-### 💼 Other
+### 🎨 Templates & frontend
 
-- *(admin)* Remove legacy attachment-related admin files** - ([bf177b7](https://github.com/torrentpier/torrentpier/commit/bf177b7576132d9095f387fb004f1069ecd5fe16))
-- *(attachments)* Remove legacy attachment-mod components and maintenance cron** - ([0ea2a4a](https://github.com/torrentpier/torrentpier/commit/0ea2a4a3668ec216797e7c3c4f2d26cd138ce352))
-- *(tracker)* Remove legacy attachment dependency and update queries** - ([0f572d6](https://github.com/torrentpier/torrentpier/commit/0f572d638a164e0212cca7c9eb5aee8f84cf3f52))
-- Bump `illuminate/pipeline` and add `illuminate/support` to dependencies in `composer.json` - ([1102691](https://github.com/torrentpier/torrentpier/commit/11026914b1f2cb24725102765ae069f39733d4a2))
-- Update minimum PHP version to 8.4 across workflows, dependencies, and documentation ([#2239](https://github.com/torrentpier/torrentpier/pull/2239)) - ([b49cd41](https://github.com/torrentpier/torrentpier/commit/b49cd41789f16a39792da790d0247a8334b2fe49))
-- Enhance TorrServer integration and streamline validation logic** - ([55391f5](https://github.com/torrentpier/torrentpier/commit/55391f5beea4d9bc9e16e5cad0ea8d7b57074c06))
-- Enhance language variable handling and streamline template logic** - ([045660f](https://github.com/torrentpier/torrentpier/commit/045660f1cdd51e5a83f4af23357fc5d98d0836f0))
-- Remove legacy attachment deletion logic and optimize M3U handling** - ([e7a6359](https://github.com/torrentpier/torrentpier/commit/e7a6359055b433fc3b4ab000f64d5c400e474dbb))
-- Clean up attachment and torrent logic** - ([b0e57a6](https://github.com/torrentpier/torrentpier/commit/b0e57a69e67cbaae364423cef5e9b7cce429c8eb))
-- Improve attachment handling and migrate download tracker logic** - ([6a7482d](https://github.com/torrentpier/torrentpier/commit/6a7482d3f596cbaa4ed61108a60413823beeb837))
-- Split `Torrent` class into modular components under `TorrentPier\Torrent` namespace** - ([265f01c](https://github.com/torrentpier/torrentpier/commit/265f01cdb9301a594f7b4845026604e163bacc6a))
-- Migrate `TorrentFileList` to `Torrent\FileList` with namespace update** - ([e519d1c](https://github.com/torrentpier/torrentpier/commit/e519d1ccb4b365b94f02bafbe9f5f7e2a6998897))
-- Add download tracking system with daily limits and aggregation** - ([797d06a](https://github.com/torrentpier/torrentpier/commit/797d06ae82e0d8398c156b071b6f3faef2aec558))
-- Update `dl_url` format and improve attachment path handling** - ([712d59d](https://github.com/torrentpier/torrentpier/commit/712d59d031cfc2299cab195587ba0cfc95fa6003))
-- Replace `attach_id` with `topic_id` across torrent logic and templates** - ([e098ac3](https://github.com/torrentpier/torrentpier/commit/e098ac3f8b6415cc42dab1d800114d87910843be))
-- Update torrent template variables and remove legacy logic checks** - ([2daa494](https://github.com/torrentpier/torrentpier/commit/2daa4945fabce9b8a4fee60086e24d12766915df))
-- Remove `attach_id` from `bb_bt_torrents` and simplify torrent logic** - ([3ee3bcf](https://github.com/torrentpier/torrentpier/commit/3ee3bcf3139de7b81a14adf8835e3de12f67dc0d))
-- Add `tracker_status` column and update torrent methods** - ([a6585d6](https://github.com/torrentpier/torrentpier/commit/a6585d68944f3d3aee4205b20c336cd4b4af7696))
-- Replace `attach_id` with `topic_id` in torrents logic** - ([89aead1](https://github.com/torrentpier/torrentpier/commit/89aead1dec4b2d4b328c3121657da8538d654694))
-- Remove deprecated attachment-related columns and indexes** - ([d03209e](https://github.com/torrentpier/torrentpier/commit/d03209e29327ab1b2e620cd634253408fb9db175))
-- Update caching headers and remove unused attachment constants** - ([d55bff4](https://github.com/torrentpier/torrentpier/commit/d55bff49c338bbfc8288fbbb90d924fb02d8a61d))
-- Remove unused `orig_name` and `file_path` properties from `Upload` class** - ([2f464d3](https://github.com/torrentpier/torrentpier/commit/2f464d3a7a326da8e50918b0d5ee2e04e356179a))
-- Remove `TorrentUpload` class and legacy torrent handling logic** - ([3332649](https://github.com/torrentpier/torrentpier/commit/33326495db3b0f10439fea97fc5ab9d2002dfa96))
-- Standardize attachment logic and fix error handling** - ([66e7233](https://github.com/torrentpier/torrentpier/commit/66e72336b73f218df248d9f119e56fba12d62653))
-- Remove `attach_id` references and standardize on `topic_id`** - ([a1ca111](https://github.com/torrentpier/torrentpier/commit/a1ca1114168c326a6fcca33905c017dc93bfdfdb))
-- Rename `Attach.php` and move to root for better organization** - ([ac65ae0](https://github.com/torrentpier/torrentpier/commit/ac65ae0c4e819f580349ee3b34a7ff467f747c58))
-- Remove legacy attachment mod and associated functions** - ([310e49a](https://github.com/torrentpier/torrentpier/commit/310e49ad4e5d4647b49f28b884d54cdbdff903ac))
-- Remove legacy thumbnail handling from attachments** - ([13176b3](https://github.com/torrentpier/torrentpier/commit/13176b30175819f570e9fcb760c8d1e0b52f0ac1))
-- Drop `bb_extensions` and `bb_extension_groups` tables** - ([d52691d](https://github.com/torrentpier/torrentpier/commit/d52691ddfd79a6f4a17f7c5092ef9e9695cfefb0))
-- Remove `attach_extensions` support and related constants** - ([654a076](https://github.com/torrentpier/torrentpier/commit/654a076c206e0869e1c14b6b0b60d2a92a2d9c88))
-- Remove thumbnail support from attachment handling** - ([b3b4e33](https://github.com/torrentpier/torrentpier/commit/b3b4e3367137428cbe998109769a32561f8a0706))
-- Update `bb_setcookie` to use nullable lifetime parameter** - ([30a41fc](https://github.com/torrentpier/torrentpier/commit/30a41fc860b8b340b01908e1986565068bb349c5))
-- Remove legacy attachment mod and related functionality** - ([36f8cb2](https://github.com/torrentpier/torrentpier/commit/36f8cb25dcfbc33983357e3948912c3d139809cc))
-- Replace `attach_id` references with `topic_id` in torrent view logic** - ([19a48a0](https://github.com/torrentpier/torrentpier/commit/19a48a0884dd6def8e29dfa787124f2385476cb2))
-- Streamline attachment logic and replace `attach_id` references with `topic_id`** - ([c208b50](https://github.com/torrentpier/torrentpier/commit/c208b50e498048c661d1e9c3de3040fe5afe874b))
-- Implement `TorrentUpload` class for managing torrent file attachments** - ([d65a11a](https://github.com/torrentpier/torrentpier/commit/d65a11ad289eaff3eb75c9a9386e8ee919316fdd))
-- Remove obsolete attachment logic from common module** - ([ec9894f](https://github.com/torrentpier/torrentpier/commit/ec9894feb52d463478a166cc15859f5a9ce3a94a))
-- Add new columns for attachment metadata in topics table** - ([be6d83f](https://github.com/torrentpier/torrentpier/commit/be6d83f1aec95036947d780b0563463ee00efa14))
-- Remove `attach_id` logic from torrent maintenance cron** - ([6656310](https://github.com/torrentpier/torrentpier/commit/66563102cd22ca95954b8b0d0f2502c74c3aed3c))
-- Replace `attach_id` with `topic_id` in ajax torrent view** - ([c6d5b63](https://github.com/torrentpier/torrentpier/commit/c6d5b634ce1cd1388a7d7aa77aa946b4fa576887))
-- Standardize topic handling in moderator actions** - ([8a9fa62](https://github.com/torrentpier/torrentpier/commit/8a9fa62e7a4063d0b0a5ee1edabbab8fb36cf62e))
-- Remove legacy download count logic in user stats query** - ([4c715c6](https://github.com/torrentpier/torrentpier/commit/4c715c6a7a42fde2b338b60f4823b52c79d146de))
-- Remove legacy attachment-related language entries** - ([ac8cf1a](https://github.com/torrentpier/torrentpier/commit/ac8cf1a3f553b5455b32c34c4faeeecc52779926))
-- Replace `attach_id` with `topic_id` across ajax library** - ([2cb12f0](https://github.com/torrentpier/torrentpier/commit/2cb12f09660d9f44341ad57ca66519b1cae5595b))
+- **Twig migration**: Smarty-style `.tpl` templates ported to `.twig`
+  (#2282). Custom Twig environment factory with cross-platform path
+  normalization.
+- **BBCode service** replaces the static function pile; correctly handles
+  commas in URL query parameters (#2360) and square brackets inside `[url]`
+  tags (#2337). Backed by a boot process that warms up parsers once.
+- **Posting editor** JS rewritten and modularized (#2257); legacy editor
+  files removed.
+- **Smiley paths** are URL-based instead of bare filesystem paths.
+- **Admin templates** stay in legacy `.tpl` syntax for now, but transparently
+  include Twig templates via the legacy `<!-- INCLUDE -->` parser.
+- **Quick reply, posting, post_attach, post_smilies, post_editor** templates
+  all consolidated under `resources/views/default/`.
 
-### 🚜 Refactor
+### 🔐 Authentication & security
 
-- Remove trailing slash redirects and update URL generation logic - ([e0c2f37](https://github.com/torrentpier/torrentpier/commit/e0c2f37f7593a231018154433cc3fa57aefa696b))
-- Remove unused `RepositoryContract` import and update configuration defaults - ([1e0d9e1](https://github.com/torrentpier/torrentpier/commit/1e0d9e146f370d52e0fd31f49e44912414e7c82c))
-- Rename `development` environment to `local` in Phinx configuration - ([436c7d0](https://github.com/torrentpier/torrentpier/commit/436c7d079a150c0de69a7d4227066953adb13845))
-- Update utility functions for consistency and deprecate legacy logic - ([ad81a17](https://github.com/torrentpier/torrentpier/commit/ad81a179757f0ebb2a8a3d4e5dabc7c9edaa7157))
-- Update unit tests and core files to use `Filesystem` service - ([dfb5dec](https://github.com/torrentpier/torrentpier/commit/dfb5dece48074a60b26c9c7a13c98040324f533c))
-- Replace native file handling with `Filesystem` service across core files - ([a06fb49](https://github.com/torrentpier/torrentpier/commit/a06fb497071d229c7399aa9841c0524fcc18947b))
-- Replace native file handling with `Filesystem` service in controllers - ([6612ea2](https://github.com/torrentpier/torrentpier/commit/6612ea28fbf4a3bd5188a4db72e864446aded8f3))
-- Replace native file handling with `Filesystem` service - ([b0168cc](https://github.com/torrentpier/torrentpier/commit/b0168cc55df228550d8fbf08fed3bd2a2f68d6f2))
-- Replace static initialization with `once` calls in utility functions - ([9f431bf](https://github.com/torrentpier/torrentpier/commit/9f431bf962f658b30cec2b779936e8f7c4501530))
-- Replace static BBCode functions with `bbcode` service methods - ([94dbfe0](https://github.com/torrentpier/torrentpier/commit/94dbfe03c056f892038a648335bfd4f5b7352b65))
-- Replace legacy admin auth logic with `EnsureAdmin` middleware - ([7423a01](https://github.com/torrentpier/torrentpier/commit/7423a014dd7ac395ae26042d8562578dd2955ccb))
-- Update default route middleware to `session` - ([e3c1117](https://github.com/torrentpier/torrentpier/commit/e3c1117c5b2964e06f1696d6a1f5923352b1c290))
-- Remove legacy `ajax` handlers and migrate to modern PSR-7 controllers - ([523bd05](https://github.com/torrentpier/torrentpier/commit/523bd059129f05378c0c237704fc900455bee433))
-- Rename middleware classes for clarity and update references - ([3aac791](https://github.com/torrentpier/torrentpier/commit/3aac79186a938e21c6c0be8a85faba965178e9f9))
-- Remove GZIP compression logic from `PerformancePanel` - ([95cd741](https://github.com/torrentpier/torrentpier/commit/95cd7416be379c9894605807335d86bc5fb240f6))
-- Remove legacy `ajax.php` and `Ajax` class, migrate to modern PSR-7 API - ([6c73abe](https://github.com/torrentpier/torrentpier/commit/6c73abef95ff30e63517d2bdf15157bfce93c716))
-- Use centralized `Application::VERSION` for User-Agent header - ([3d02535](https://github.com/torrentpier/torrentpier/commit/3d025354a12d196e771c8dd4ca96ef349ef25726))
-- Update smiley image paths to use URL-based configuration - ([8674a8e](https://github.com/torrentpier/torrentpier/commit/8674a8eebc4115370ce3e651619594ebb934fe28))
-- Streamline `ConsoleKernel` and `HttpKernel` by removing unused properties and improving method clarity - ([3f2ab0c](https://github.com/torrentpier/torrentpier/commit/3f2ab0c5541f2bb079b36c260999f42491dddbfd))
-- Remove `IN_DEMO_MODE` and replace debug checks with `app()->isDebug()` - ([1190380](https://github.com/torrentpier/torrentpier/commit/1190380e6e5d3283adf561266f57b06fe7731c20))
-- Replace `utime()` with `microtime(true)` and remove `mockUtimeFunction` - ([ad539f2](https://github.com/torrentpier/torrentpier/commit/ad539f206242e850b8e28bffe55582a3d663daf4))
-- Replace `$_SERVER['REMOTE_ADDR']` with `request()->getClientIp()` in `TrackerResponses` - ([c292485](https://github.com/torrentpier/torrentpier/commit/c2924857681968b51d32dc33a362f945bed6fb5b))
-- Replace direct `$_SERVER` access with `request()` helper for request data handling - ([b22b679](https://github.com/torrentpier/torrentpier/commit/b22b679d8ea683fc46d565d0d7e5d9dc8c49a716))
-- Remove deprecated `common.php` and `FrontController` for legacy cleanup - ([1c7187c](https://github.com/torrentpier/torrentpier/commit/1c7187cc652beaf0afdf9328b3113e9f30e283ac))
-- Simplify `ConfigServiceProvider` and enforce config pre-loading - ([dbfda35](https://github.com/torrentpier/torrentpier/commit/dbfda352a408a7c6eb898ce5b1969ee31c0fe78e))
-- Replace `array_merge_recursive` with `array_replace_recursive` in config merge - ([3b57300](https://github.com/torrentpier/torrentpier/commit/3b57300e972478bb652ff30f0a3d2673ac80eec9))
-- Remove legacy BitTorrent tracker files - ([31357fa](https://github.com/torrentpier/torrentpier/commit/31357fa54e7a3352a32bf47214ed6425331144b1))
-- Migrate admin controllers to PSR-4 and improve path handling - ([8ac8bc1](https://github.com/torrentpier/torrentpier/commit/8ac8bc1c1196420838651a2622723734c39bb8b7))
-- Replace `str_compact` and `make_rand_str` with `Str::squish` and `Str::random` - ([4bff4e3](https://github.com/torrentpier/torrentpier/commit/4bff4e301acd41d8e9366aa00683d03ee0a49ff9))
-- Replace `Env` class and improve middleware integration - ([38b0ee9](https://github.com/torrentpier/torrentpier/commit/38b0ee96ab704bb740877a5f1e34695b14e68750))
-- Simplify template path in `print_page` for `posting_tpl` - ([02eb8da](https://github.com/torrentpier/torrentpier/commit/02eb8dac9af0f191aa81a0bd177219d90650572e))
-- Remove remaining singleton patterns from caching-related classes - ([e055dc8](https://github.com/torrentpier/torrentpier/commit/e055dc8f1f0248768de6ca915ff4e81bf7d447ff))
-- Remove redundant comment in `DatabaseServiceProvider` binding - ([98c4d44](https://github.com/torrentpier/torrentpier/commit/98c4d44fad1c5538b478286b4043aefa23084e77))
-- Remove `DatabaseFactory` singleton and migrate to dependency injection - ([8f91f6d](https://github.com/torrentpier/torrentpier/commit/8f91f6d20dfecf80230338129da27db9a27fb6ce))
-- Replace singleton patterns in `FeedGenerator` and `Router` with dependency injection - ([8341160](https://github.com/torrentpier/torrentpier/commit/8341160114c43f9c0bb531c1d9c15d3d3e0f9784))
-- Remove singleton design across multiple classes and migrate to dependency injection - ([d5bc186](https://github.com/torrentpier/torrentpier/commit/d5bc186141dc448c038d81be5d81c1486472e381))
-- Migrate legacy controllers to PSR-7 with constructor dependency injection - ([f452c8a](https://github.com/torrentpier/torrentpier/commit/f452c8a0e60294324ffec6c5f19f3f2c4178669f))
-- Remove `User` singleton and migrate to dependency injection - ([738ca35](https://github.com/torrentpier/torrentpier/commit/738ca351d3f22789ed4d20731bfd4a5e2a495c1a))
-- Replace global `DB()` calls with dependency-injected `Database` in `CheckCommand` - ([1f4db59](https://github.com/torrentpier/torrentpier/commit/1f4db599e046e381aad295c5146e1e72af2573a0))
-- Replace global `DB()` calls with dependency-injected `Database` instance across console commands - ([4ee2f9b](https://github.com/torrentpier/torrentpier/commit/4ee2f9b6efd8d3ba8842da783f5ea6a177a3748d))
-- Optimize `get_userdata()` function ([#2260](https://github.com/torrentpier/torrentpier/pull/2260)) - ([ac11785](https://github.com/torrentpier/torrentpier/commit/ac117853dda7d93a776763a16a2c084aa24b9208))
-- Remove legacy JS files and modernize editor functionality ([#2257](https://github.com/torrentpier/torrentpier/pull/2257)) - ([b1625aa](https://github.com/torrentpier/torrentpier/commit/b1625aaa0945e9eda255b319f3b29b6e42527c7d))
-- Modernize configuration and tracking systems ([#2255](https://github.com/torrentpier/torrentpier/pull/2255)) - ([6228a98](https://github.com/torrentpier/torrentpier/commit/6228a98e579bbf419aa2efebd11e4f2356243b0f))
-- Centralize and modernize cron handling logic ([#2245](https://github.com/torrentpier/torrentpier/pull/2245)) - ([64973c4](https://github.com/torrentpier/torrentpier/commit/64973c4babbd622acfdd856871afdd778bdfd547))
-- Migrate homepage routing to modern controller system - ([ffa8a85](https://github.com/torrentpier/torrentpier/commit/ffa8a853111596dd954e7ef6369a16391ae31dcd))
-- Migrate robots.txt handling to dynamic database configuration ([#2244](https://github.com/torrentpier/torrentpier/pull/2244)) - ([1ee7252](https://github.com/torrentpier/torrentpier/commit/1ee725233fbd7fa0343247f3bbdabdb69e70d5d9))
-- Introduce Http Request and Response classes with Symfony integration ([#2243](https://github.com/torrentpier/torrentpier/pull/2243)) - ([445c433](https://github.com/torrentpier/torrentpier/commit/445c433f9212812cf928adaf6ed1e78aadd3c241))
-- Normalize paths in Template and TwigEnvironmentFactory for cross-platform consistency - ([e5ff9c0](https://github.com/torrentpier/torrentpier/commit/e5ff9c02bdd8ab355e60598e2d033eb5254ccfbb))
-- Migrate terms.tpl to terms.twig and enhance variable handling in Template class - ([f6db2d0](https://github.com/torrentpier/torrentpier/commit/f6db2d0c04da6197b278cb1d221d50262639588d))
-- Remove redundant `Template::$instance` and improve block data initialization - ([d236a0c](https://github.com/torrentpier/torrentpier/commit/d236a0c87384d338ebaf6ed90985518b35b89f23))
-- Update torrent attachment checks and download count logic - ([536dc8c](https://github.com/torrentpier/torrentpier/commit/536dc8c56ab5e8a79580cf8804ebff8f54dd64c1))
-- Centralize torrent filename generation logic - ([1fcd205](https://github.com/torrentpier/torrentpier/commit/1fcd205d1eda4535396a969e5cd4a71a0bfd6897))
-- Improve attachment handling and template logic - ([3834565](https://github.com/torrentpier/torrentpier/commit/38345654bff91d66fcd5c3cedc52ee8190cf8db8))
-- Remove `topic_attachment` field and update attachment checks - ([94f53f6](https://github.com/torrentpier/torrentpier/commit/94f53f6bc3ea9449a87320a5f99c66435f80ee8d))
+- **TOTP-based two-step verification** (#2340) with recovery codes shown
+  one-per-line on the recovery screen.
+- **Persistent sessions** with 2FA re-verification on autologin (#2341).
+- **CSRF token verification** on public POST handlers (#2420).
+- **Hardened actkey + unserialize**, tracker race conditions plugged
+  (#2418).
+- **Anonymous posting** support, with per-forum permission (#2327).
+- **Multi-provider spam protection** architecture (#2332).
+- **`auth_pollcreate`** permission enforcement on `poll_add` (#2242).
+- **CodeQL alerts** (10) closed across bbcode.js and workflows (#2416).
 
-### 📚 Documentation
+### ⚙️ Configuration
 
-- Update upgrade guide links to use absolute paths - ([4c71d84](https://github.com/torrentpier/torrentpier/commit/4c71d84fc9717d37dd7a04ea39eb543ffdd14cb3))
-- Remove `.env.docker` and update installation guide - ([22762d8](https://github.com/torrentpier/torrentpier/commit/22762d8c05a7cdaa599a9ea50f2c37fd7f395c6a))
-- Remove outdated UPGRADE_GUIDE - ([67c2288](https://github.com/torrentpier/torrentpier/commit/67c2288fbd1a6427e2c9a2035d7c37ba5bad87d8))
-- Update UPGRADE_GUIDE with application container details - ([20241c7](https://github.com/torrentpier/torrentpier/commit/20241c7d630c872363fe3f598c185556e4bc1e2d))
+- **`Config` class** extends `Illuminate\Config\Repository` (Laravel 12
+  compatible). Access via `config()->get('section.key')`.
+- **Configuration split** into 13 dedicated files under `config/`: `app`,
+  `auth`, `avatars`, `cache`, `database`, `forum`, `layouts`,
+  `localization`, `logging`, `mail`, `services`, `templates`, `tracker`.
+- **DB-backed config** merged into the runtime repository via
+  `config()->merge()` from `bb_config` at boot.
+- **`config:cache`** and **`config:clear`** commands.
+- **Filesystem services** with log rotation and umask handling
+  (Illuminate Filesystem-driven, replacing native `file_*` calls
+  throughout the codebase).
+- **`.env`** loaded via `LoadEnvironmentVariables`; legacy monolithic
+  `config.php` removed (#2319).
+- **Trusted proxies** bootstrapped for correct client IP behind reverse
+  proxies.
 
-### 🎨 Styling
+### 🛠️ Bull CLI — `php bull`
 
-- Apply PHP CS Fixer changes - ([aab409a](https://github.com/torrentpier/torrentpier/commit/aab409a22b19db94a7c12c1b85888fa3816282ac))
-- Apply PHP CS Fixer changes - ([f67e4e7](https://github.com/torrentpier/torrentpier/commit/f67e4e72bd8256bf536f4202d93b1eed8e9e332d))
-- Apply PHP CS Fixer changes - ([8e4a1b2](https://github.com/torrentpier/torrentpier/commit/8e4a1b24f569ec71cc3ffc76dec8b8b234286025))
-- Apply PHP CS Fixer changes - ([6a495cd](https://github.com/torrentpier/torrentpier/commit/6a495cd2fb2ffee8edc8d494f2473a77427357e3))
-- Apply PHP CS Fixer changes - ([de102cc](https://github.com/torrentpier/torrentpier/commit/de102ccc904bb3ae4b0e7b5aaba70d0ede87428e))
-- Apply PHP CS Fixer changes - ([119b25c](https://github.com/torrentpier/torrentpier/commit/119b25c0c4067a9d18426a1dbf6a866db3258275))
+Single unified console entry point replacing the old install/maintenance
+scripts:
 
-### 🧪 Testing
+- **`app:install`** — interactive wizard: `.env` setup, DB connection,
+  migrations, default permissions.
+- **`migrate`**, **`migrate:rollback`**, **`migrate:status`**.
+- **`db:check`** (orphan detection), **`db:optimize`** (table analyze).
+- **`cache:clear`**, **`cache:cache`**.
+- **`config:cache`**, **`config:clear`**.
+- **`storage:link`** with Windows symlink support (#2369).
+- **`rebuild:datastore`**, **`rebuild:sitemap`**, **`rebuild:search`**.
+- **`2fa:reset`** admin recovery.
+- **`release:cleanup`** used by the CD workflow.
+- **Symfony Console 8** compatibility (#2404).
 
-- Skip Eloquent tests when database unavailable - ([57b8eaa](https://github.com/torrentpier/torrentpier/commit/57b8eaa63736450615dcfbbc545b19c501d5d568))
-- Add unit tests for `LoadConfiguration::alwaysUse` behavior - ([0307a36](https://github.com/torrentpier/torrentpier/commit/0307a362b3436e99cc7e367b1cbf3b9a427c8dfd))
-- Add missing `DBG_USER` constant definition in `TemplateGracefulFallbackTest` - ([1f04619](https://github.com/torrentpier/torrentpier/commit/1f04619f7eb381a68c3dce97c0ff4770501ea4b2))
+### 🌍 Internationalization
 
-### ⚙️ Miscellaneous
+- Comprehensive English language corrections in `main.php` (#2342).
+- English HTML templates rewritten for grammar and clarity (#2333).
+- Full Cyrillic support for Ukrainian and other Slavic languages (#2336).
+- Crowdin source-sync workflow runs on every push to the source language
+  file.
 
-- *(deps)* Bump js-yaml ([#2249](https://github.com/torrentpier/torrentpier/pull/2249)) - ([449dbda](https://github.com/torrentpier/torrentpier/commit/449dbda6f2ca586deda6c4a6b814f30d70481ad6))
-- Update dependencies in `composer.lock` - ([609c770](https://github.com/torrentpier/torrentpier/commit/609c7707c7c821e396a6dc1b1874cead88ad8386))
-- Update `friendsofphp/php-cs-fixer` to v3.92.3 in `composer.lock` - ([f68e626](https://github.com/torrentpier/torrentpier/commit/f68e626fd437383fbe6473a80f7d24e1589b8742))
-- Update dependencies and add Illuminate Filesystem - ([9522972](https://github.com/torrentpier/torrentpier/commit/9522972f0fddabb3da0417ce5483a8063a13bdd1))
-- Update CS workflow to simplify path matching - ([4f16e2f](https://github.com/torrentpier/torrentpier/commit/4f16e2f0e6637417d34d6798193274a770362af1))
-- Update PHP CS Fixer configuration and dependencies - ([c5e4ae9](https://github.com/torrentpier/torrentpier/commit/c5e4ae9faf4f86187657b9dc0d29c8a76b1f063b))
-- Update composer.lock to latest translations commit - ([58ab6dd](https://github.com/torrentpier/torrentpier/commit/58ab6dd93228a7366d2ec092cb0ae68f2ce6e01c))
-- Simplify `composer.json` structure and update metadata - ([5033c99](https://github.com/torrentpier/torrentpier/commit/5033c99eccde00f2adae3c6611c7257fa9295d7f))
-- Update composer dependencies to latest versions - ([cc3eac8](https://github.com/torrentpier/torrentpier/commit/cc3eac8ade639c047704b292b693065b6a6a343e))
-- Add custom domain configuration for documentation - ([b1bc0ce](https://github.com/torrentpier/torrentpier/commit/b1bc0ce6abd975639a7c5d48861472a010e8dd02))
-- Update Node.js version to 22 in GitHub Actions docs workflow - ([edbd4f0](https://github.com/torrentpier/torrentpier/commit/edbd4f04eb21a487471c6a35611376750ebef8af))
-- Remove `_attach.php` and deprecated attachment handling logic - ([e2bb8ce](https://github.com/torrentpier/torrentpier/commit/e2bb8ce311319542cd46a3c0b837111cc5772d82))
+### 🚢 Docker & deployment
 
+- Docker setup overhauled with healthchecks and cron configuration (#2291).
+- Frankenphp image bumps tracked.
+- Build failures resolved (#2321).
+- Dependabot now also covers npm, Docker, and Docker Compose images
+  alongside Composer and GitHub Actions.
+
+### 🐛 Notable fixes
+
+- Universal IP decode for mixed format handling (#2241).
+- Delete thanks records when a topic is deleted (#2284).
+- Skip ratio check for gold (freeleech) torrents (#2297).
+- Null-safe checks for `bt_userdata`, cron run times, cron intervals.
+- Tracker binary `info_hash` queries use `UNHEX(bin2hex())` instead of
+  `rtrim(escape())` (#2338).
+- HTML entities preserved in `str_short` truncation (#2335).
+- Birthday / age display and inline edit value binding (#2334).
+- `viewforum` handles empty search results in topic filter (#2366).
+- Upload uses `FileExtensions` class instead of removed config (#2367).
+- Form action URLs corrected for semantic routing (#2370).
+- Root-path routing compatibility (#2368).
+- Eloquent sessions queries use unprefixed table names.
+- PM list checkbox name corrected (#2415).
+- npm dependabot advisories in docs closed (#2417).
+- 2FA recovery codes display on separate lines.
+- Themed 404 page on unknown URLs (previously returned bare-text HTTP 500).
+
+### 🪦 Removals — final-release cleanup
+
+- **Auto-updater** removed entirely (`src/Updater.php`,
+  `build_check_updates.php`, related defines, services config, datastore
+  entries, cron call, admin block).
+- **Admin "Marketplace"** (modifications listing) page removed; the
+  separate `admin_board.php?mode=config_mods` feature-toggle page (magnets,
+  birthday, seed bonus etc.) stays.
+- **`/docs` Docusaurus** tree deleted (53 files); `docs.torrentpier.com`
+  shut down.
+- **Demo site** references purged (`torrentpier.duckdns.org`).
+- **Nightly badge** removed from README; `nightly.link` URL retired.
+- **Legacy `attach_mod`** subsystem and code paths dropped.
+- **Legacy `ajax.php` / `Ajax` class / `common.php` / `FrontController`**
+  removed in favor of PSR-7 controllers.
+- **`IN_DEMO_MODE`** constant retired; debug checks unified under
+  `app()->isDebug()`.
+- **GitHub workflows** `ci.yml` (nightlies), `claude.yml`, `docs.yml`,
+  `schedule.yml` (cron changelog) removed.
+- **`.github/dependabot.yml`**, **`PULL_REQUEST_TEMPLATE.md`**,
+  **`ISSUE_TEMPLATE/`**, **`.cliffignore`** removed.
+
+### 🏁 End-of-life housekeeping
+
+- Closure notices surfaced on every operator-facing surface: README banner,
+  admin index "Status" row (Version Information table), CLI `php bull
+  about`, `SECURITY.md`, `CONTRIBUTING.md` (rewritten as a short EOL stub),
+  `CODE_OF_CONDUCT.md` (with closure banner), and the welcome topic body
+  for fresh installs.
+- Closure announcement: <https://sunset.torrentpier.com/>.
+- Forum archive (read-only): <https://ox.torrentpier.com/>.
+- Successor codename: **Dexter**, expected in 2027.
+- Admin index Version Information row shows "Status: Project closed ·
+  Forum archive" inline via two localized links (`STATUS`,
+  `EOL_PROJECT_CLOSED`, `EOL_FORUM_ARCHIVE`).
+- Cache-clear button on admin index reloads with a success banner so CSRF
+  tokens are refreshed cleanly.
+- `cd.yml` release workflow tag pattern updated to `v3.0.0`.
+
+### 🔧 Dependencies
+
+- **PHP minimum: 8.4** (8.5 supported in CI; #2239).
+- **Laravel 12** compatible: Illuminate Container, Database, Config,
+  Filesystem, Pipeline, Support.
+- **Symfony 8.x** family: Mailer, MIME, String, Filesystem, Event
+  Dispatcher, Var Dumper.
+- **Twig 3.x**, **Nesbot/Carbon 3.x**, **Nette/Database** retained
+  alongside Eloquent during transition.
+- **Pest 4.x** for tests.
+- **PHP-CS-Fixer 3.92+** enforced on PRs.
+
+### 📌 Upgrade notes for self-hosted operators
+
+- If you previously ran the auto-updater, the filesystem cache file
+  `storage/framework/datastore/check_updates.php` is now orphaned and may
+  be deleted.
+- Legacy `.php` URLs (`/login.php`, `/viewforum.php?f=N`, etc.) now return
+  proper 404 instead of 500. Internal links and post permalinks
+  (`viewtopic?p=N`) are 301-redirected to clean URLs automatically.
+- Monolithic `config.php` is gone — configuration lives under
+  `config/*.php` and `.env`.
+- Admin "Marketplace" tab is removed; per-feature toggles remain under
+  General Settings → Configuration modifications.
+- Phinx migration tracking table is renamed `phinxlog` → `bb_migrations`.
 
 ## [v2.8.9](https://github.com/torrentpier/torrentpier/compare/v2.8.8..v2.8.9) (2025-11-28)
 

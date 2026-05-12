@@ -82,9 +82,4 @@ Icon
 *.rej
 
 docker-compose.local.yml
-
-# Docusaurus
-/docs/.docusaurus
-/docs/.cache-loader
-/docs/build
-/docs/node_modules
+.playwright-mcp

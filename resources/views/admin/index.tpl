@@ -65,6 +65,7 @@
 <!--========================================================================-->
 <script type="text/javascript">
   ajax.manage_admin = function (mode) {
+    ajax._last_admin_mode = mode;
     ajax.exec({
       action: 'manage_admin',
       mode: mode,
@@ -72,6 +73,12 @@
     });
   };
   ajax.callback.manage_admin = function (data) {
+    if (ajax._last_admin_mode === 'clear_cache') {
+      var url = new URL(window.location.href);
+      url.searchParams.set('cache_cleared', '1');
+      window.location.href = url.toString();
+      return;
+    }
     $('#cache').html(data.cache_html);
     $('#datastore').html(data.datastore_html);
     $('#indexer').html(data.indexer_html);
@@ -92,6 +99,10 @@
 </script>
 
 <br/>
+
+<!-- IF CACHE_CLEARED -->
+<div class="alert alert-success" style="width: 95%;">{L_ALL_CACHE_CLEARED}</div>
+<!-- ENDIF -->
 
 <!-- IF ADMIN_LOCK_CRON -->
 <div class="alert alert-danger" style="width: 95%;">
@@ -167,14 +178,10 @@
         <td class="row1" nowrap="nowrap" width="25%">{L_TP_RELEASE_DATE}:</td>
         <td class="row2"><b>{{ config('app.release_date') }}</b></td>
     </tr>
-    <!-- BEGIN updater -->
-    <!-- IF updater.UPDATE_AVAILABLE -->
     <tr>
-        <td class="row1" nowrap="nowrap" width="25%"><b>{L_UPDATE_AVAILABLE}:</b></td>
-        <td class="row2"><b>{updater.NEW_VERSION_NUMBER}</b><!-- IF updater.NEW_VERSION_SIZE -->&nbsp;({L_SIZE}:&nbsp;{updater.NEW_VERSION_SIZE})<!-- ENDIF -->&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_DL_LINK}">{L_DOWNLOAD}</a>&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_LINK}">{L_CHANGELOG}</a><!-- IF updater.NEW_VERSION_HASH -->&nbsp;&middot;&nbsp;<span class="copyElement" data-clipboard-text="{updater.NEW_VERSION_HASH}" title="{L_COPY_TO_CLIPBOARD}">{updater.NEW_VERSION_HASH}</span><!-- ENDIF --></td>
+        <td class="row1" nowrap="nowrap" width="25%">{L_STATUS}:</td>
+        <td class="row2"><a target="_blank" href="https://sunset.torrentpier.com/">{L_EOL_PROJECT_CLOSED}</a>&nbsp;&middot;&nbsp;<a target="_blank" href="https://ox.torrentpier.com/">{L_EOL_FORUM_ARCHIVE}</a></td>
     </tr>
-    <!-- ENDIF -->
-    <!-- END updater -->
 </table>
 <br/>
 

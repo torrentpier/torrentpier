@@ -877,7 +877,7 @@ class SeedInitialData extends AbstractMigration
             [
                 'topic_id' => 1,
                 'forum_id' => 1,
-                'topic_title' => 'Welcome to TorrentPier Cattle',
+                'topic_title' => 'Welcome to TorrentPier Ox',
                 'topic_poster' => 2,
                 'topic_time' => $currentTime,
                 'topic_views' => 0,
@@ -919,17 +919,18 @@ class SeedInitialData extends AbstractMigration
         ])->saveData();
 
         // Create welcome post text
-        $welcomeText = "Thank you for installing the new — TorrentPier Cattle!\n\n" .
-            "What to do next? First of all configure your site in the administration panel (link in the bottom).\n\n" .
-            "Change main options: site description, number of messages per topic, time zone, language by default, seed-bonus options, birthdays etc... " .
-            "Create a couple of forums, delete or change this one. Change settings of categories to allow registration of torrents, change announcer url. " .
-            "If you will have questions or want additional modifications of the engine, [url=https://torrentpier.com/]visit our forum[/url] " .
-            "(you can use english, we will try to help in any case).\n\n" .
-            "If you want to help with the translations: [url=https://crowdin.com/project/torrentpier]Crowdin[/url].\n\n" .
+        $welcomeText = "Thank you for installing TorrentPier Ox — the final release of the TorrentPier project.\n\n" .
+            "[b]Closure notice:[/b] the project closed in May 2026. " .
+            "No further patches, security fixes, or feature work are planned. " .
+            "If you self-host this release, you are responsible for your own security maintenance.\n\n" .
+            "Closure announcement: [url=https://sunset.torrentpier.com/]https://sunset.torrentpier.com/[/url]. " .
+            "The community forum is preserved read-only at [url=https://ox.torrentpier.com/]https://ox.torrentpier.com/[/url] as a historical archive. " .
+            "Something new is on the horizon — codename [b]Dexter[/b], expected in 2027 — written from scratch.\n\n" .
+            "What to do next? Configure your site in the administration panel (link at the bottom): " .
+            "site description, messages per topic, time zone, default language, seed-bonus options, birthdays, and so on. " .
+            "Create a couple of forums, delete or change this one. Adjust categories to allow torrent registration, set the announcer URL.\n\n" .
             "Our GitHub organization: [url=https://github.com/torrentpier]https://github.com/torrentpier[/url].\n" .
-            "Our SourceForge repository: [url=https://sourceforge.net/projects/torrentpier-engine]https://sourceforge.net/projects/torrentpier-engine[/url].\n" .
-            "Our demo website: [url=https://torrentpier.duckdns.org]https://torrentpier.duckdns.org[/url].\n\n" .
-            "We are sure that you will be able to create the best tracker available!\n" .
+            "Translations on Crowdin: [url=https://crowdin.com/project/torrentpier]https://crowdin.com/project/torrentpier[/url].\n\n" .
             "Good luck! 😉";
 
         $this->table('bb_posts_text')->insert([

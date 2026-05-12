@@ -83,10 +83,11 @@ class AboutCommand extends Command
 
         $this->table(['Extension', 'Status'], $extensionStatus);
 
-        $this->section('Documentation');
-        $this->line('  Website:  <comment>https://torrentpier.com</comment>');
-        $this->line('  Docs:     <comment>https://docs.torrentpier.com</comment>');
+        $this->section('Links');
         $this->line('  GitHub:   <comment>https://github.com/torrentpier/torrentpier</comment>');
+        $this->line('  Archive:  <comment>https://ox.torrentpier.com/</comment>');
+        $this->line('  Notice:   <comment>https://sunset.torrentpier.com/</comment>');
+        $this->line('  Status:   <comment>Project closed (May 2026)</comment>');
         $this->line();
 
         return self::SUCCESS;

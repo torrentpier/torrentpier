@@ -50,6 +50,3 @@ if ($posts_days = (int)config()->get('forum.posts_cache_days_keep')) {
 if (empty(config()->get('bt_announce_url')) || (config()->get('bt_announce_url') === 'https://localhost/bt/announce.php')) {
     bb_update_config(['bt_announce_url' => FULL_URL . 'bt/announce.php']);
 }
-
-// Check for updates
-datastore()->update('check_updates');

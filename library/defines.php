@@ -60,8 +60,6 @@ define(
 // System
 define('APP_NAME', 'TorrentPier');
 define('DEFAULT_CHARSET', 'UTF-8');
-define('UPDATER_URL', 'https://api.github.com/repos/torrentpier/torrentpier/releases');
-define('UPDATER_FILE', FRAMEWORK_DIR . '/updater.json');
 
 // Templates
 define('ADMIN_TPL_DIR', TEMPLATES_DIR . '/admin/');

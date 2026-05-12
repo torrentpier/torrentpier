@@ -9,8 +9,8 @@
  */
 
 return [
-    'release_date' => 'xx-02-2026',
-    'release_codename' => 'Dexter',
+    'release_date' => '13-05-2026',
+    'release_codename' => 'Ox',
     'js_ver' => 1,
     'css_ver' => 1,
     'server_name' => env('TP_HOST', 'example.com'),

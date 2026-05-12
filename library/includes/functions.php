@@ -1943,19 +1943,6 @@ function getBanInfo(?int $userId = null): ?array
 }
 
 /**
- * Read updater file
- * @throws BindingResolutionException
- */
-function readUpdaterFile(): array|bool
-{
-    if (!files()->isFile(UPDATER_FILE)) {
-        return false;
-    }
-
-    return json_decode(files()->get(UPDATER_FILE), true);
-}
-
-/**
  * IP Geolocation API
  */
 function infoByIP(string $ipAddress, int $port = 0): array
