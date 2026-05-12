@@ -17,6 +17,7 @@ use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\BrowserConsoleHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Throwable;
 use Whoops\Handler\PlainTextHandler;
 use Whoops\Run;
 
@@ -110,13 +111,14 @@ class WhoopsManager
             // League\Route\Http\Exception (NotFound, MethodNotAllowed, ...) carries
             // its own status code; render the engine's themed error page via bb_die()
             // so the user sees a real header/footer instead of a bare placeholder line.
-            if ($e instanceof \League\Route\Http\Exception && function_exists('bb_die')) {
+            if ($e instanceof \League\Route\Http\Exception && \function_exists('bb_die')) {
                 $status = $e->getStatusCode();
                 // bb_die() runs the lang lookup internally, so pass the key
                 $message = $status === 404 ? 'PAGE_NOT_FOUND' : config()->get('logging.whoops.error_message');
+
                 try {
                     bb_die($message, $status); // exits; templated page with proper status
-                } catch (\Throwable) {
+                } catch (Throwable) {
                     // Fall through to bare placeholder if engine isn't bootstrapped enough
                 }
                 $run->sendHttpCode($status);
