@@ -919,13 +919,13 @@ class SeedInitialData extends AbstractMigration
         ])->saveData();
 
         // Create welcome post text
-        $welcomeText = "Thank you for installing TorrentPier Ox — the final release of this codebase.\n\n" .
+        $welcomeText = "Thank you for installing TorrentPier Ox — the final release of the TorrentPier project.\n\n" .
             "[b]Closure notice:[/b] the project closed in May 2026. " .
             "No further patches, security fixes, or feature work are planned. " .
             "If you self-host this release, you are responsible for your own security maintenance.\n\n" .
             "Closure announcement: [url=https://sunset.torrentpier.com/]https://sunset.torrentpier.com/[/url]. " .
             "The community forum is preserved read-only at [url=https://ox.torrentpier.com/]https://ox.torrentpier.com/[/url] as a historical archive. " .
-            "A new generation of the engine is being written from scratch, possibly under a different name. There is no timeline yet.\n\n" .
+            "Something new is on the horizon — codename [b]Dexter[/b], expected in 2027 — written from scratch.\n\n" .
             "What to do next? Configure your site in the administration panel (link at the bottom): " .
             "site description, messages per topic, time zone, default language, seed-bonus options, birthdays, and so on. " .
             "Create a couple of forums, delete or change this one. Adjust categories to allow torrent registration, set the announcer URL.\n\n" .
