@@ -65,6 +65,7 @@
 <!--========================================================================-->
 <script type="text/javascript">
   ajax.manage_admin = function (mode) {
+    ajax._last_admin_mode = mode;
     ajax.exec({
       action: 'manage_admin',
       mode: mode,
@@ -72,6 +73,12 @@
     });
   };
   ajax.callback.manage_admin = function (data) {
+    if (ajax._last_admin_mode === 'clear_cache') {
+      var url = new URL(window.location.href);
+      url.searchParams.set('cache_cleared', '1');
+      window.location.href = url.toString();
+      return;
+    }
     $('#cache').html(data.cache_html);
     $('#datastore').html(data.datastore_html);
     $('#indexer').html(data.indexer_html);
@@ -92,6 +99,10 @@
 </script>
 
 <br/>
+
+<!-- IF CACHE_CLEARED -->
+<div class="alert alert-success" style="width: 95%;">{L_ALL_CACHE_CLEARED}</div>
+<!-- ENDIF -->
 
 <!-- IF ADMIN_LOCK_CRON -->
 <div class="alert alert-danger" style="width: 95%;">

@@ -74,6 +74,7 @@ if (request()->query->get('pane') === 'left') {
         'TPL_ADMIN_MAIN' => true,
         'ADMIN_LOCK' => (bool)config()->get('board_disable'),
         'ADMIN_LOCK_CRON' => files()->isFile(BB_DISABLED),
+        'CACHE_CLEARED' => (bool)request()->query->get('cache_cleared'),
     ]);
 
     // Get forum statistics
