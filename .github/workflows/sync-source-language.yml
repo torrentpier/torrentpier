@@ -6,6 +6,7 @@ on:
       - 'library/language/source/**'
     branches:
       - master
+      - ox
 
 jobs:
   sync-source:

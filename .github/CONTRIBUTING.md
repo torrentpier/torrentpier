@@ -10,8 +10,8 @@
 public as a historical reference and as a base for self-hosted operators who
 want to run or fork the code.
 
-A new generation of the engine is being written from scratch, possibly under
-a different name. There is no timeline yet.
+A new generation of the engine — codename **Dexter** — is being written from
+scratch, expected in 2027.
 
 ## What you can still do
 

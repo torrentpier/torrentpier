@@ -19,8 +19,8 @@
 > <https://sunset.torrentpier.com/>. No further patches,
 > security fixes, or feature work are planned.
 > The community forum is preserved read-only at <https://ox.torrentpier.com/>.
-> A new generation of the engine is being written from scratch, possibly under
-> a different name. There is no timeline yet.
+> A new generation of the engine — codename **Dexter** — is being written
+> from scratch, expected in 2027.
 > If you self-host this release, you are responsible for your own security
 > maintenance.
 
@@ -37,8 +37,8 @@ closed in May 2026: no further patches, security fixes, or feature work are
 planned. GitHub Issues remain open as a low-noise channel for community
 discussion, but there is no commitment to respond.
 
-A new generation of the engine is being written from scratch, possibly under a
-different name. There is no timeline yet.
+A new generation of the engine — codename **Dexter** — is being written from
+scratch, expected in 2027.
 
 ## ✨ Features
 * Rich forum with browsing/moderation tools

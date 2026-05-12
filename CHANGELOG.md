@@ -6,12 +6,12 @@
 > closed in May 2026 — see <https://sunset.torrentpier.com/> for the
 > closure announcement. No further patches, security fixes, or
 > feature work are planned. The community forum is preserved read-only at
-> <https://ox.torrentpier.com/>. A new generation of the engine is being
-> written from scratch, possibly under a different name; there is no timeline
-> yet. See [SECURITY.md](.github/SECURITY.md) for what this means for
-> self-hosted installations.
+> <https://ox.torrentpier.com/>. A new generation of the engine — codename
+> **Dexter** — is being written from scratch, expected in 2027. See
+> [SECURITY.md](.github/SECURITY.md) for what this means for self-hosted
+> installations.
 
-## 3.0.0 - 12-05-2026
+## 3.0.0 - 13-05-2026
 
 ### 🚀 Features
 

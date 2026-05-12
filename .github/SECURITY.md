@@ -10,8 +10,8 @@ Read the closure announcement at
 [https://sunset.torrentpier.com/](https://sunset.torrentpier.com/). The
 community forum is preserved read-only at
 [https://ox.torrentpier.com/](https://ox.torrentpier.com/). A new generation
-of the engine is being written from scratch, possibly under a different name;
-there is no timeline yet.
+of the engine — codename **Dexter** — is being written from scratch,
+expected in 2027.
 
 If you self-host this release, **you are responsible for your own security
 maintenance**.
