@@ -2,7 +2,15 @@
 
 # 📖 Change Log
 
-## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/master/TorrentPier-master)
+> **TorrentPier 3.0 (Ox) is the final release of this codebase.** The project
+> entered conservation in May 2026. No further patches, security fixes, or
+> feature work are planned. The community forum is preserved read-only at
+> <https://ox.torrentpier.com/>. A new generation of the engine is being
+> written from scratch, possibly under a different name; there is no timeline
+> yet. See [SECURITY.md](.github/SECURITY.md) for what this means for
+> self-hosted installations.
+
+## 3.0.0 - 12-05-2026
 
 ### 🚀 Features
 

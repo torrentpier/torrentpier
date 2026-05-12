@@ -1,4 +1,4 @@
-<p align="center"><a href="https://torrentpier.com"><img src="https://torrentpier.com/styles/default/xenforo/bull-logo.svg" width="400px" alt="TorrentPier" /></a></p>
+<p align="center"><a href="https://github.com/torrentpier/torrentpier"><img src="https://files-ox.torrentpier.com/tp_ox_long.svg" width="400px" alt="TorrentPier" /></a></p>
 
 <p align="center">
   Bull-powered BitTorrent tracker engine
@@ -9,32 +9,35 @@
   <a href="https://github.com/torrentpier/torrentpier/blob/master/LICENSE"><img src="https://img.shields.io/github/license/torrentpier/torrentpier" alt="License"></a>
   <a href="https://packagist.org/packages/torrentpier/torrentpier"><img src="https://img.shields.io/packagist/stars/torrentpier/torrentpier" alt="Stars Packagist"></a>
   <a href="https://crowdin.com/project/torrentpier"><img src="https://badges.crowdin.net/torrentpier/localized.svg" alt="Crowdin"></a>
-  <a href="https://nightly.link/torrentpier/torrentpier/workflows/ci/master/TorrentPier-master"><img src="https://img.shields.io/badge/Nightly%20release-gray?logo=hackthebox&logoColor=fff" alt="TorrentPier nightly"></a>
   <a href="https://packagist.org/packages/torrentpier/torrentpier"><img src="https://img.shields.io/packagist/dt/torrentpier/torrentpier" alt="Downloads"></a>
   <a href="https://packagist.org/packages/torrentpier/torrentpier"><img src="https://img.shields.io/packagist/v/torrentpier/torrentpier" alt="Version"></a>
-  <a href="https://github.com/torrentpier/torrentpier/releases"><img src="https://img.shields.io/github/release-date/torrentpier/torrentpier" alt="Last release"></a>
   <img src="https://img.shields.io/github/repo-size/torrentpier/torrentpier" alt="Size">
 </p>
+
+> **TorrentPier 3.0 (Ox) is the final release of this codebase.**
+> The project entered conservation in May 2026. No further patches, security
+> fixes, or feature work are planned.
+> The community forum is preserved read-only at <https://ox.torrentpier.com/>.
+> A new generation of the engine is being written from scratch, possibly under
+> a different name. There is no timeline yet.
+> If you self-host this release, you are responsible for your own security
+> maintenance.
 
 ## 🐂 About TorrentPier
 
 TorrentPier — bull-powered BitTorrent tracker engine, written in PHP. High speed, simple modifications, load-balanced
-architecture. In addition, we have a very helpful
-[official support forum](https://torrentpier.com), where it's possible to get support and download modifications for the engine.
+architecture. The original community forum is preserved read-only at
+[ox.torrentpier.com](https://ox.torrentpier.com/) as a historical archive.
 
 ## 🌈 Current status
 
-TorrentPier 3.0 is a complete architectural overhaul of the engine, moving from legacy PHP to modern Laravel-inspired patterns.
+TorrentPier 3.0 (Ox) is the final release of this codebase. The project has
+entered conservation: no further patches, security fixes, or feature work are
+planned. GitHub Issues remain open as a low-noise channel for community
+discussion, but there is no commitment to respond.
 
-**Key modernizations in 3.0:**
-- **DI Container**: Illuminate Container with 11 service providers
-- **Bootstrap Pipeline**: Modular initialization with bootstrappers
-- **PSR-7/PSR-15**: Modern HTTP stack with middleware architecture
-- **Twig Templates**: Replacing a legacy styles system
-- **Bull CLI**: Console commands for all operations
-- **Unified Routing**: Single entry point with semantic URLs
-
-See the [Upgrade Guide](https://docs.torrentpier.com/docs/upgrade) for migration details and the [documentation](https://docs.torrentpier.com) for full reference.
+A new generation of the engine is being written from scratch, possibly under a
+different name. There is no timeline yet.
 
 ## ✨ Features
 * Rich forum with browsing/moderation tools
@@ -51,15 +54,6 @@ See the [Upgrade Guide](https://docs.torrentpier.com/docs/upgrade) for migration
 * Atom/RSS feeds
 * ... and so MUCH MORE!
 
-## 🖥️ Demo
-
-* URL: https://torrentpier.duckdns.org
-* Username: `admin`
-* Password: `admin`
-
-> [!NOTE]
-> Demo resets every 24 hours!
-
 ## 🔧 Requirements
 
 * Apache / nginx ([example config](install/nginx.conf)) / caddy ([example config](install/Caddyfile))
@@ -70,8 +64,6 @@ See the [Upgrade Guide](https://docs.torrentpier.com/docs/upgrade) for migration
 
 ## 💾 Installation
 
-For detailed installation instructions, see our [Installation Guide](https://docs.torrentpier.com/docs/getting-started/installation).
-
 **Quick start:**
 ```shell
 git clone https://github.com/torrentpier/torrentpier.git
@@ -80,7 +72,8 @@ composer install
 php bull app:install
 ```
 
-For Docker setup, see the [Docker documentation](https://docs.torrentpier.com/docs/getting-started/installation#method-4-docker).
+For Docker setup, see [`docker-compose.yml`](docker-compose.yml) and
+[`Dockerfile`](Dockerfile) in this repository.
 
 > [!TIP]
 > The `php bull app:install` wizard handles all configuration: environment setup, database creation, migrations, and permissions.
@@ -92,7 +85,9 @@ For Docker setup, see the [Docker documentation](https://docs.torrentpier.com/do
 
 ## 🔐 Security vulnerabilities
 
-If you discover a security vulnerability within TorrentPier, please follow our [security policy](https://github.com/torrentpier/torrentpier/security/policy), so we can address it promptly.
+This release is in conservation and will not receive security patches. If you
+self-host TorrentPier 3.0 (Ox), you are responsible for your own security
+maintenance. See [SECURITY.md](.github/SECURITY.md) for details.
 
 ## 🧪 Testing
 
