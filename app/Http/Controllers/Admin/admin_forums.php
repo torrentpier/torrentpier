@@ -99,7 +99,7 @@ if ($mode) {
                 $forumstatus = FORUM_UNLOCKED;
                 $forum_display_sort = 0;
                 $forum_display_order = 0;
-                $forum_id = '';
+                $forum_id = 0;
                 $show_on_index = 1;
                 $prune_days = 0;
                 $forum_tpl_id = 0;

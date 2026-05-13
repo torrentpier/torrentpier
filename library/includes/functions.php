@@ -716,7 +716,7 @@ function show_bt_userdata($user_id): void
         'SHOW_BT_USERDATA' => true,
         'UP_TOTAL' => humn_size($btu['u_up_total']),
         'UP_BONUS' => humn_size($btu['u_up_bonus']),
-        'RELEASED' => humn_size($btu['u_up_release']),
+        'RELEASED_TOTAL' => humn_size($btu['u_up_release']),
         'DOWN_TOTAL' => humn_size($btu['u_down_total']),
         'DOWN_TOTAL_BYTES' => $btu['u_down_total'],
         'USER_RATIO' => get_bt_ratio($btu),
