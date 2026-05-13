@@ -1164,12 +1164,12 @@ function bb_die($msgText, $statusCode = null): void
 
     // Try to initialize session/language, but don't fail if DB is broken
     try {
-        lang()->initializeLanguage();
-
         if (empty(userdata()) && !defined('SESSION_STARTED')) {
             user()->session_start();
             define('SESSION_STARTED', true);
         }
+
+        lang()->initializeLanguage((string)(userdata('user_lang') ?? ''));
     } catch (Throwable $e) {
         // DB or other critical failure - fall back to simple output
         bb_simple_die($msgText, $statusCode);

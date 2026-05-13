@@ -93,11 +93,12 @@ $req_topics_ary = $topics_ary = [];
 
 // Get topics selected by user
 if ($mode == 'set_topics_dl_status') {
-    if (!request()->post->has('dl_topics_id_list') || !is_array(request()->post->get('dl_topics_id_list'))) {
+    $dlTopicsIdList = request()->getArray('dl_topics_id_list');
+    if (empty($dlTopicsIdList)) {
         bb_die(__('NONE_SELECTED'));
     }
 
-    foreach (request()->post->get('dl_topics_id_list') as $topic_id) {
+    foreach ($dlTopicsIdList as $topic_id) {
         $req_topics_ary[] = (int)$topic_id;
     }
 } elseif ($mode == 'set_dl_status') {

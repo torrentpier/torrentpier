@@ -207,7 +207,7 @@ switch ($mode) {
             bb_die(__('NONE_SELECTED'));
         }
 
-        $req_topics = request()->post->get('topic_id_list') ?? $topic_id;
+        $req_topics = request()->getArray('topic_id_list') ?: $topic_id;
         validate_topics($forum_id, $req_topics, $topic_titles);
 
         if (!$req_topics || !($topic_csv = get_id_csv($req_topics))) {
@@ -405,7 +405,7 @@ switch ($mode) {
         //mpd
         $delete_posts = request()->post->has('delete_posts');
         $split = (request()->post->has('split_type_all') || request()->post->has('split_type_beyond'));
-        $posts = request()->post->get('post_id_list', []);
+        $posts = request()->getArray('post_id_list');
         $start = 0;
         $topic_first_post_id = $topic_row['topic_first_post_id'] ?? '';
 

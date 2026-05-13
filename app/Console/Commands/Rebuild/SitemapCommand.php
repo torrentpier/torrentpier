@@ -46,6 +46,13 @@ class SitemapCommand extends Command
     {
         $this->title('Rebuild Sitemap');
 
+        if (!\defined('BB_FORUMS')) {
+            if (!\defined('IN_ADMIN')) {
+                \define('IN_ADMIN', true);
+            }
+            require_once BB_PATH . '/library/includes/init_bb.php';
+        }
+
         // Check if sitemap directory exists
         if (!files()->isDirectory(SITEMAP_DIR)) {
             $this->error('Sitemap directory does not exist: ' . SITEMAP_DIR);

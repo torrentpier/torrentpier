@@ -195,9 +195,9 @@ class Group
      */
     public static function delete_permissions($group_id = null, $user_id = null, $cat_id = null)
     {
-        $group_id = get_id_csv($group_id);
-        $user_id = get_id_csv($user_id);
-        $cat_id = get_id_csv($cat_id);
+        $group_id = $group_id !== null ? get_id_csv($group_id) : '';
+        $user_id = $user_id !== null ? get_id_csv($user_id) : '';
+        $cat_id = $cat_id !== null ? get_id_csv($cat_id) : '';
 
         $forums_join_sql = ($cat_id) ? '
 		INNER JOIN ' . BB_FORUMS . " f ON(a.forum_id = f.forum_id AND f.cat_id IN({$cat_id}))

@@ -56,7 +56,8 @@ if (request()->post->has('del_my_post')) {
 		<a href="' . FORUM_PATH . '">' . __('INDEX_RETURN') . '</a>
 	');
 
-    if (empty(request()->post->get('topic_id_list')) || !$topic_csv = get_id_csv(request()->post->get('topic_id_list'))) {
+    $topicIdList = request()->getArray('topic_id_list');
+    if (empty($topicIdList) || !$topic_csv = get_id_csv($topicIdList)) {
         bb_die(__('NONE_SELECTED'));
     }
 
