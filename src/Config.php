@@ -78,7 +78,12 @@ class Config extends Repository
     }
 
     /**
-     * Merge additional configuration values
+     * Merge additional configuration values.
+     *
+     * Flat scalar keys are also mirrored into any already-loaded namespaced
+     * section that declares a default with the same key (e.g. bb_config row
+     * `default_lang` updates `localization.default_lang`). This lets admin-saved
+     * DB values override file defaults without renaming readers throughout the code.
      */
     public function merge(array $config): void
     {
@@ -87,6 +92,14 @@ class Config extends Repository
                 $value = array_replace_recursive($existing, $value);
             }
             $this->set($key, $value);
+
+            if (!\is_array($value)) {
+                foreach ($this->all() as $section => $sectionData) {
+                    if (\is_array($sectionData) && \array_key_exists($key, $sectionData)) {
+                        $this->set("{$section}.{$key}", $value);
+                    }
+                }
+            }
         }
     }
 
