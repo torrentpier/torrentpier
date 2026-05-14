@@ -494,14 +494,25 @@ $(document).ready(function () {
   });
 
   // Setup ajax-error box
-  $("#ajax-error").ajaxError(function (req, xml) {
+  $("#ajax-error").ajaxError(function (event, xml, settings) {
     var status = xml.status;
     var text = xml.statusText;
     if (status === 200) {
       status = '';
       text = 'invalid data format';
+    } else if (!text || text === 'error') {
+      text = 'Internal Server Error';
     }
-    $(this).html("Error in: <i>" + ajax.url + "</i><br /><b>" + status + " " + text + "</b>").show();
+    var url = (settings && settings.url) || xml.responseURL || '';
+    var body = xml.responseJSON;
+    if (!body && xml.responseText) {
+      try { body = JSON.parse(xml.responseText); } catch (e) {}
+    }
+    var urlPart = url ? "Error in: <i>" + $('<span>').text(url).html() + "</i><br />" : '';
+    var detail = (body && body.error_msg)
+      ? '<br />' + $('<span>').text(body.error_msg).prop('outerHTML')
+      : '';
+    $(this).html(urlPart + "<b>" + status + " " + text + "</b>" + detail).show();
     ajax.setStatusBoxPosition($(this));
   });
 
