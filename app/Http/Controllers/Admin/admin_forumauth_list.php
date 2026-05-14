@@ -58,11 +58,13 @@ foreach ($forum_auth_fields as $auth_type) {
 $forum_auth_levels = ['ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN'];
 $forum_auth_const = [AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN];
 
+$forum_id = 0;
+$cat_id = 0;
+
 if (request()->query->has(POST_FORUM_URL) || request()->post->has(POST_FORUM_URL)) {
     $forum_id = request()->getInt(POST_FORUM_URL, 0);
     $forum_sql = "AND forum_id = {$forum_id}";
 } else {
-    unset($forum_id);
     $forum_sql = '';
 }
 
@@ -70,7 +72,6 @@ if (request()->query->has(POST_CAT_URL) || request()->post->has(POST_CAT_URL)) {
     $cat_id = request()->getInt(POST_CAT_URL, 0);
     $cat_sql = "AND c.cat_id = {$cat_id}";
 } else {
-    unset($cat_id);
     $cat_sql = '';
 }
 
@@ -258,6 +259,10 @@ if (empty($forum_id) && empty($cat_id)) {
     }
 
     $category_rows = DB()->sql_fetchrowset($result);
+
+    if (empty($category_rows)) {
+        bb_die(sprintf(__('CLICK_RETURN_FORUMAUTH'), '<a href="admin_forumauth_list.php">', '</a>'));
+    }
 
     $cat_id = reset($category_rows)['cat_id'];
     $cat_name = reset($category_rows)['cat_title'];
