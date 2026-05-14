@@ -75,7 +75,7 @@ if ($submit) {
     $select_userlist = '<select name="unban_user[]" multiple size="5">' . $select_userlist . '</select>';
 
     template()->assign_vars([
-        'U_SEARCH_USER' => './../search.php?mode=searchuser',
+        'U_SEARCH_USER' => '/search?mode=searchuser',
         'S_UNBAN_USERLIST_SELECT' => $select_userlist,
         'S_BAN_ACTION' => 'admin_user_ban.php',
     ]);
