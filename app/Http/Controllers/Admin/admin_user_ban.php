@@ -36,11 +36,10 @@ if ($submit) {
     }
 
     // Unban action
-    $where_sql = '';
+    $user_list = request()->getArray('unban_user');
 
-    if (!empty(request()->post->get('unban_user'))) {
-        $user_list = request()->getArray('unban_user');
-
+    if (!empty($user_list)) {
+        $where_sql = '';
         for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
             if ($user_list[$i] != -1) {
                 $where_sql .= (($where_sql != '') ? ', ' : '') . (int)$user_list[$i];
