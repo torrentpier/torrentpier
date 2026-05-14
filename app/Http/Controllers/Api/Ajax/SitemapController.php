@@ -49,8 +49,8 @@ class SitemapController
                 $map->createSitemap();
                 if (files()->isFile(SITEMAP_DIR . '/sitemap.xml')) {
                     $html .= __('SITEMAP_CREATED') . ': <b>' . bb_date(TIMENOW, config()->get('localization.date_formats.post')) . '</b> '
-                        . __('SITEMAP_AVAILABLE') . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">'
-                        . make_url('sitemap/sitemap.xml') . '</a>';
+                        . __('SITEMAP_AVAILABLE') . ': <a href="' . make_url('sitemap.xml') . '" target="_blank">'
+                        . make_url('sitemap.xml') . '</a>';
                 } else {
                     $html .= __('SITEMAP_NOT_CREATED');
                 }
