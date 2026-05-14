@@ -252,9 +252,6 @@ $(document).ready(function () {
         xhr.setRequestHeader('X-CSRF-Token', _csrfToken);
       }
     });
-    if (typeof Ajax !== 'undefined' && Ajax.prototype) {
-      Ajax.prototype.form_token = _csrfToken;
-    }
     // Inject hidden _token at submit time so dynamically-added forms are covered
     // and the token never leaks to a form action pointing at another origin.
     $(document).on('submit', 'form', function () {
@@ -315,7 +312,7 @@ Ajax.prototype = {
   state: {},  // current action state
   request: {},  // request data
   params: {},  // action params, format: ajax.params[ElementID] = { param: "val" ... }
-  form_token: '', hide_loading: null,
+  hide_loading: null,
 
   // Action to endpoint mapping
   endpoints: {
@@ -357,7 +354,6 @@ Ajax.prototype = {
 
   exec: function (request, hide_loading = false) {
     this.request[request.action] = request;
-    request['form_token'] = this.form_token;
     this.hide_loading = hide_loading;
     $.ajax({
       url: this.getEndpoint(request.action), type: this.type, dataType: this.dataType, data: request, success: ajax.success, error: ajax.error
