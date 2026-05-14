@@ -114,13 +114,13 @@ function mod_action(mode) {
         topics += ',' + this.value;
     });
     if (!topics) {
-        alert('{{ __('NONE_SELECTED') }}');
+        alert('{{ __('NONE_SELECTED')|e('js') }}');
         return false;
     }
     if (mode == 'tor_status') {
         status = $('#st option:selected').val();
         if (status == '-1') {
-            alert('{{ __('TOR_STATUS_NOT_SELECT') }}');
+            alert('{{ __('TOR_STATUS_NOT_SELECT')|e('js') }}');
             return false;
         }
         ajax.mod_action(topics, mode, status);

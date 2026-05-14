@@ -46,7 +46,7 @@
 
 		function edit_post(post_id, type, text) {
 			if (ajax.open_edit && ajax.open_edit != post_id) {
-				alert('{{ __('AJAX_EDIT_OPEN') }}');
+				alert('{{ __('AJAX_EDIT_OPEN')|e('js') }}');
 			} else {
 				if ((ajax.open_edit && !text) || !type) {
 					$('#pp_' + post_id).show();
@@ -231,7 +231,7 @@ function poll_manage (mode, confirm_msg)
 function build_poll_add_form (src_el)
 {
 	$('#poll').empty().append( $('#poll-edit-tpl').contents() ).show();
-	$('#poll-legend').html('{{ __('ADD_POLL') }}');
+	$('#poll-legend').html('{{ __('ADD_POLL')|e('js') }}');
 	$('#poll-edit-submit-btn').click(function(){
 		return poll_manage('poll_add');
 	});
@@ -559,9 +559,9 @@ function build_poll_add_form (src_el)
 		</tr>
 		<tr>
 			<td colspan="2" class="row3 tCenter">
-				<input type="submit" name="delete_posts" id="del" value="{{ __('DELETE_POSTS') }}" disabled onclick="return window.confirm('{{ __('DELETE_POSTS') }}?');" />
-				<input type="submit" name="split_type_all" id="spl_all" value="{{ __('SPLIT_POSTS') }}" disabled onclick="return window.confirm('{{ __('SPLIT_POSTS') }}?');" />
-				<input type="submit" name="split_type_beyond" id="spl_b" value="{{ __('SPLIT_AFTER') }}" disabled onclick="return window.confirm('{{ __('SPLIT_AFTER') }}?');" />
+				<input type="submit" name="delete_posts" id="del" value="{{ __('DELETE_POSTS') }}" disabled onclick="return window.confirm('{{ __('DELETE_POSTS')|e('js') }}?');" />
+				<input type="submit" name="split_type_all" id="spl_all" value="{{ __('SPLIT_POSTS') }}" disabled onclick="return window.confirm('{{ __('SPLIT_POSTS')|e('js') }}?');" />
+				<input type="submit" name="split_type_beyond" id="spl_b" value="{{ __('SPLIT_AFTER') }}" disabled onclick="return window.confirm('{{ __('SPLIT_AFTER')|e('js') }}?');" />
 				<label for="spl_cnf">
 					{{ __('CONFIRM') }}
 					<input id="spl_cnf" type="checkbox" name="confirm" value="1" onclick="

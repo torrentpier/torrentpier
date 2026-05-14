@@ -65,7 +65,7 @@ function submit_vote ()
 	var $voted_id = $('input.vote-inp:checked');
 
 	if ($voted_id.length == 0) {
-		alert('{{ __('NEW_POLL_U_NOSEL') }}');
+		alert('{{ __('NEW_POLL_U_NOSEL')|e('js') }}');
 	}
 	else {
 		$('#poll-mode').val('poll_vote');
@@ -78,9 +78,9 @@ function submit_vote ()
 function build_poll_edit_form ()
 {
 	$('#poll').empty().append($('#poll-edit-tpl').contents());
-	$('#poll-legend').html('{{ __('NEW_POLL_U_CHANGE') }}');
+	$('#poll-legend').html('{{ __('NEW_POLL_U_CHANGE')|e('js') }}');
 	$('#poll-edit-submit-btn').click(function(){
-		return poll_manage('poll_edit', '{{ __('NEW_POLL_U_EDIT') }}?');
+		return poll_manage('poll_edit', '{{ __('NEW_POLL_U_EDIT')|e('js') }}?');
 	});
 
 	$('#poll-caption-inp').val( html2text(bb_poll.title) );
@@ -139,7 +139,7 @@ function html2text (str)
 
 {% if CAN_MANAGE_POLL %}
 <div id="poll-manage" class="mrg_8 tCenter">
-[ <a href="#" onclick="return poll_manage('poll_delete', '{{ __('CONFIRM_DELETE_POLL') }}');" class="med">{{ __('DELETE_POLL') }}</a> ]&nbsp;&nbsp;
+[ <a href="#" onclick="return poll_manage('poll_delete', '{{ __('CONFIRM_DELETE_POLL')|e('js') }}');" class="med">{{ __('DELETE_POLL') }}</a> ]&nbsp;&nbsp;
 	{% if POLL_IS_EDITABLE %}
 	[ <a href="#" onclick="return build_poll_edit_form();" class="med">{{ __('EDIT') }}</a> ]&nbsp;&nbsp;
 		{% if POLL_IS_FINISHED %}

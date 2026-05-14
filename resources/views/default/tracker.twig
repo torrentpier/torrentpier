@@ -494,7 +494,7 @@ $(function(){
 		var fs_val = $('#fs-main').val();
 		if (fs_val != null) {
 			if (fs_val.length > {{ MAX_FS }}) {
-				alert('{{ __('MAX_FS') }}');
+				alert('{{ __('MAX_FS')|e('js') }}');
 				$('#fs-main').val( fs_last_val );
 			}
 			else {
@@ -512,7 +512,7 @@ function get_fs_link() {
     window.prompt('{{ __('SEL_CHAPTERS') }}:', fs_url);
   }
   else {
-    alert('{{ __('NOT_SEL_CHAPTERS') }}');
+    alert('{{ __('NOT_SEL_CHAPTERS')|e('js') }}');
   }
   return false;
 }

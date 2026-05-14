@@ -92,13 +92,13 @@ $(document).ready(function () {
     $("div.jumpbox").html('\
 		<span id="jumpbox-container"> \
 		<select id="jumpbox"> \
-			<option id="jumpbox-title" value="-1">&nbsp;&raquo;&raquo; {{ __('JUMPBOX_TITLE') }} &nbsp;</option> \
+			<option id="jumpbox-title" value="-1">&nbsp;&raquo;&raquo; {{ __('JUMPBOX_TITLE')|e('js') }} &nbsp;</option> \
 		</select> \
 		</span> \
-		<input id="jumpbox-submit" type="button" class="lite" value="{{ __('GO') }}" /> \
+		<input id="jumpbox-submit" type="button" class="lite" value="{{ __('GO')|e('js') }}" /> \
 	');
     $('#jumpbox-container').one('click', function () {
-        $('#jumpbox-title').html('&nbsp;&nbsp; {{ __('LOADING') }} ... &nbsp;');
+        $('#jumpbox-title').html('&nbsp;&nbsp; {{ __('LOADING')|e('js') }} ... &nbsp;');
         $(this).html('{{ JUMPBOX }}');
         $('#jumpbox-submit').click(function () {
             window.location.href = '{{ FORUM_URL }}' + $('#jumpbox').val();
@@ -256,7 +256,7 @@ function go_to_page ()
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr>
 	<td width="40%">
-		{{ __('USER_WELCOME') }}&nbsp;<b class="med">{{ THIS_USER }}</b>&nbsp;[ <a href="{{ U_LOGIN_LOGOUT }}" onclick="return confirm('{{ __('CONFIRM_LOGOUT') }}');">{{ __('LOGOUT') }}</a> ]
+		{{ __('USER_WELCOME') }}&nbsp;<b class="med">{{ THIS_USER }}</b>&nbsp;[ <a href="{{ U_LOGIN_LOGOUT }}" onclick="return confirm('{{ __('CONFIRM_LOGOUT')|e('js') }}');">{{ __('LOGOUT') }}</a> ]
 	</td>
 	<td style="padding: 3px;">
 		<div>
