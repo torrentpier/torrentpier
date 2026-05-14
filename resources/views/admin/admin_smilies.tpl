@@ -39,8 +39,6 @@
 <!--========================================================================-->
 
 <h1>{L_SMILEY_TITLE}</h1>
-
-<p>{L_SMILEY_IMPORT_INST}</p>
 <br />
 
 <script type="text/javascript">
