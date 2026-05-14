@@ -1301,7 +1301,7 @@ function clear_dl_list($topics_csv)
  */
 function get_id_csv(array|int|string $ids): string
 {
-    return new Collection(Arr::wrap($ids))->flatten()->map('intval')->implode(',');
+    return new Collection(Arr::wrap($ids))->flatten()->map(fn ($v) => (int)$v)->implode(',');
 }
 
 /**
@@ -1315,7 +1315,7 @@ function get_id_ary(array|string $ids): array
 {
     $ids = is_string($ids) ? explode(',', $ids) : Arr::wrap($ids);
 
-    return new Collection($ids)->flatten()->map('intval')->values()->all();
+    return new Collection($ids)->flatten()->map(fn ($v) => (int)$v)->values()->all();
 }
 
 function get_topic_title($topic_id)
