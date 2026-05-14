@@ -387,8 +387,8 @@ class Post
                 if ($watch_list) {
                     $topic_title = censor()->censorString($topic_title);
 
-                    $u_topic = make_url(TOPIC_URL . $topic_id . '&view=newest#newest');
-                    $unwatch_topic = make_url(TOPIC_URL . "{$topic_id}&unwatch=topic");
+                    $u_topic = make_url(TOPIC_URL . $topic_id . '?view=newest#newest');
+                    $unwatch_topic = make_url(TOPIC_URL . "{$topic_id}?unwatch=topic");
 
                     foreach ($watch_list as $row) {
                         // Sending email
