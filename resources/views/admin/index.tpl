@@ -9,8 +9,8 @@
 </head>
 
 <frameset cols="220,*" rows="*" border="1" framespacing="1" frameborder="yes">
-  <frame src="index.php?pane=left" name="nav" marginwidth="0" marginheight="0" scrolling="auto">
-  <frame src="index.php?pane=right" name="main" marginwidth="0" marginheight="0" scrolling="auto">
+  <frame src="/admin/index.php?pane=left" name="nav" marginwidth="0" marginheight="0" scrolling="auto">
+  <frame src="/admin/index.php?pane=right" name="main" marginwidth="0" marginheight="0" scrolling="auto">
 </frameset>
 </html>
 <!--========================================================================-->
