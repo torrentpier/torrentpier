@@ -1,0 +1,24 @@
+<h1>{{ L.TERMS }}</h1>
+
+<p>{{ L.TERMS_EXPLAIN }}</p>
+<br />
+
+<form action="{{ S_ACTION }}" method="post">{{ CSRF_FIELD|raw }}
+	<table class="forumline">
+		<tr>
+			<th>{{ L.TERMS }}</th>
+		</tr>
+		<tr id="view_message"{% if not PREVIEW_HTML %} class="hidden"{% endif %}>
+			<td class="row1">
+				<div class="view-message">{{ PREVIEW_HTML|raw }}</div>
+			</td>
+		</tr>
+		<tr class="row2">
+			<td>
+				{% include 'posting_editor.twig' %}
+			</td>
+		</tr>
+	</table>
+</form>
+
+<br clear="all"/>
