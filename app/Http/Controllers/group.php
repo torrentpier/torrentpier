@@ -240,7 +240,7 @@ if (!$group_id) {
             }
         } else {
             if (((request()->post->has('approve') || request()->post->has('deny')) && request()->post->has('pending_members')) || (request()->post->has('remove') && request()->post->has('members'))) {
-                $members = (request()->post->has('approve') || request()->post->has('deny')) ? request()->post->get('pending_members') : request()->post->get('members');
+                $members = (request()->post->has('approve') || request()->post->has('deny')) ? request()->getArray('pending_members') : request()->getArray('members');
 
                 $sql_in = [];
                 foreach ($members as $members_id) {

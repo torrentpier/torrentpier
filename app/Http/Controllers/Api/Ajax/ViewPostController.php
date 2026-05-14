@@ -38,7 +38,7 @@ class ViewPostController
 
         $postId = isset($body['post_id']) ? (int)$body['post_id'] : null;
         $topicId = isset($body['topic_id']) ? (int)$body['topic_id'] : null;
-        $returnText = config()->get('show_post_bbcode_button.enabled')
+        $returnText = config()->get('forum.show_post_bbcode_button.enabled')
             && isset($body['return_text'])
             && $body['return_text'];
 

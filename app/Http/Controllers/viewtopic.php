@@ -529,7 +529,7 @@ template()->assign_vars([
     'HIDE_RANK_IMG_DIS' => !config()->get('forum.show_rank_image'),
 
     'PINNED_FIRST_POST' => $t_data['topic_show_first_post'],
-    'PIN_HREF' => $t_data['topic_show_first_post'] ? 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=post_unpin" : 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=post_pin",
+    'PIN_HREF' => $t_data['topic_show_first_post'] ? FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=post_unpin" : FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=post_pin",
     'PIN_TITLE' => $t_data['topic_show_first_post'] ? __('POST_UNPIN') : __('POST_PIN'),
 
     'AUTH_MOD' => $is_auth['auth_mod'],

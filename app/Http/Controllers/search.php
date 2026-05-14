@@ -1034,5 +1034,5 @@ function username_search($search_match)
         'SEARCH_ACTION' => "search?mode=searchuser&amp;input_name={$input_name}",
     ]);
 
-    print_page('search.tpl', 'simple');
+    print_page('search.twig', 'simple');
 }
