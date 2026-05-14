@@ -19,10 +19,10 @@ $pruned_total = 0;
 $prune_performed = false;
 
 if (request()->has('submit')) {
-    if (!$var = request()->get('f') || !$f_selected = get_id_ary($var)) {
+    if (!($var = request()->get('f')) || !($f_selected = get_id_ary($var))) {
         bb_die(__('SELECT_FORUM'));
     }
-    if (!$var = request()->get('prunedays') || !$prunedays = abs((int)$var)) {
+    if (!($var = request()->get('prunedays')) || !($prunedays = abs((int)$var))) {
         bb_die(__('NOT_DAYS'));
     }
 

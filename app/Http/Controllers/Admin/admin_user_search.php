@@ -78,7 +78,7 @@ if (!request()->get('dosearch')) {
         }
     }
 
-    $lastvisited = [1, 7, 14, 30, 60, 120, 365, 500, 730, 1000];
+    $lastvisited = [1, 7, 14, 30, 90, 180, 365, 730];
     $lastvisited_list = '';
 
     foreach ($lastvisited as $days) {
@@ -98,7 +98,7 @@ if (!request()->get('dosearch')) {
         'FORUMS_LIST' => $forums_list,
         'LASTVISITED_LIST' => $lastvisited_list,
 
-        'U_SEARCH_USER' => BB_ROOT . 'search.php?mode=searchuser',
+        'U_SEARCH_USER' => '/search?mode=searchuser',
         'S_SEARCH_ACTION' => 'admin_user_search.php',
     ]);
 } else {
@@ -809,12 +809,13 @@ if (!request()->get('dosearch')) {
         $select_sql .= 'u.username';
     }
 
-    if (request()->get('order')) {
-        $o_order = 'ASC';
+    $reqOrder = strtoupper((string)request()->get('order'));
+    if ($reqOrder === 'DESC') {
         $order = 'DESC';
+        $o_order = 'ASC';
     } else {
-        $o_order = 'DESC';
         $order = 'ASC';
+        $o_order = 'DESC';
     }
 
     $select_sql .= " {$order}";
@@ -881,24 +882,19 @@ if (!request()->get('dosearch')) {
 
     $rowset = DB()->sql_fetchrowset($result);
 
-    $users_sql = '';
-
-    foreach ($rowset as $array) {
-        $users_sql .= ($users_sql == '') ? $array['user_id'] : ', ' . $array['user_id'];
-    }
-
-    $sql = 'SELECT ban_userid AS user_id FROM ' . BB_BANLIST . " WHERE ban_userid IN ({$users_sql})";
-
-    if (!$result = DB()->sql_query($sql)) {
-        bb_die('Could not select banned data');
-    }
-
-    unset($banned);
-
     $banned = [];
 
-    while ($row = DB()->sql_fetchrow($result)) {
-        $banned[$row['user_id']] = true;
+    if ($rowset) {
+        $user_ids = array_map(static fn ($row) => (int)$row['user_id'], $rowset);
+        $sql = 'SELECT ban_userid AS user_id FROM ' . BB_BANLIST . ' WHERE ban_userid IN (' . implode(', ', $user_ids) . ')';
+
+        if (!$result = DB()->sql_query($sql)) {
+            bb_die('Could not select banned data');
+        }
+
+        while ($row = DB()->sql_fetchrow($result)) {
+            $banned[$row['user_id']] = true;
+        }
     }
 
     for ($i = 0, $iMax = count($rowset); $i < $iMax; $i++) {

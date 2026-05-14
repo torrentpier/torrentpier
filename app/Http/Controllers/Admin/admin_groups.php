@@ -57,7 +57,7 @@ if (request()->post->get('edit') || request()->post->get('new')) {
         'GROUP_DESCRIPTION' => stripslashes(htmlspecialchars($group_info['group_description'])),
         'GROUP_MODERATOR' => htmlspecialchars($group_info['group_mod_name'], ENT_QUOTES),
         'T_GROUP_EDIT_DELETE' => ($mode == 'newgroup') ? __('CREATE_NEW_GROUP') : __('EDIT_GROUP'),
-        'U_SEARCH_USER' => BB_ROOT . 'search.php?mode=searchuser',
+        'U_SEARCH_USER' => '/search?mode=searchuser',
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
         'S_GROUP_CLOSED_TYPE' => GROUP_CLOSED,
         'S_GROUP_HIDDEN_TYPE' => GROUP_HIDDEN,
@@ -95,9 +95,10 @@ if (request()->post->get('edit') || request()->post->get('new')) {
         }
         $this_userdata = get_userdata($group_moderator, true);
 
-        if (!$group_moderator = $this_userdata['user_id']) {
+        if (!$this_userdata || empty($this_userdata['user_id'])) {
             bb_die(__('NO_GROUP_MODERATOR'));
         }
+        $group_moderator = $this_userdata['user_id'];
 
         $sql_ary = [
             'group_type' => (int)$group_type,

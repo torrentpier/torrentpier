@@ -8,7 +8,7 @@
 
 <br />
 
-<form action="{S_PRUNE_ACTION}" method="post">
+<form action="{S_PRUNE_ACTION}" method="post">{CSRF_FIELD}
 
 <table class="forumline wAuto">
 <!-- IF PRUNED_TOTAL -->

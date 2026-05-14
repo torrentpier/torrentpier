@@ -64,7 +64,7 @@
 </table>
 <br />
 
-<form method="post" action="{S_FORUMAUTH_ACTION}">
+<form method="post" action="{S_FORUMAUTH_ACTION}">{CSRF_FIELD}
 <table class="forumline med">
 	<tr>
 		<th>&nbsp;</th>

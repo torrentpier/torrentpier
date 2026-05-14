@@ -6,7 +6,7 @@
 <p>{L_RANKS_EXPLAIN}</p>
 <br />
 
-<form action="{S_RANK_ACTION}" method="post">
+<form action="{S_RANK_ACTION}" method="post">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline wAuto">
@@ -80,7 +80,7 @@
 <p>{L_RANKS_EXPLAIN}</p>
 <br />
 
-<form method="post" action="{S_RANKS_ACTION}">
+<form method="post" action="{S_RANKS_ACTION}">{CSRF_FIELD}
 
 <table class="forumline w80">
 <tr>
