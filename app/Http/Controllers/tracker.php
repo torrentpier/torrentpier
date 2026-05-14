@@ -308,7 +308,12 @@ foreach ($GPC as $name => $params) {
 
 if (request()->query->has($user_releases_key)) {
     // Search releases by user - set values directly instead of modifying the request
-    $pid_val = request()->query->getInt($user_releases_key);
+    $poster_id_val = request()->query->getInt($user_releases_key);
+    if ($poster_id_val == GUEST_UID) {
+        $poster_name_val = __('GUEST');
+    } elseif ($poster_name = get_username($poster_id_val)) {
+        $poster_name_val = stripslashes(html_entity_decode($poster_name));
+    }
     $forum_val = $search_all;
 } elseif (request()->get('max')) {
     $forum_val = $search_all;

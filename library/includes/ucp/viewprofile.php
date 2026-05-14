@@ -61,7 +61,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['
 
 $profile_user_id = ($profiledata['user_id'] == userdata('user_id'));
 
-$signature = (config()->get('forum.user_signature.enabled') && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
+$signature = (config()->get('allow_sig') && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
 
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
     if ($profile_user_id) {

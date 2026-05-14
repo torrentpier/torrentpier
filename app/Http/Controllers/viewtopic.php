@@ -674,7 +674,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     // Parse message and sig
     $message = bbcode()->getParsedPost($postrow[$i]);
 
-    $user_sig = (config()->get('forum.user_signature.enabled') && !user()->opt_js['h_sig'] && $postrow[$i]['user_sig'] && !$poster_display_as_anonymous) ? $postrow[$i]['user_sig'] : '';
+    $user_sig = (config()->get('allow_sig') && !user()->opt_js['h_sig'] && $postrow[$i]['user_sig'] && !$poster_display_as_anonymous) ? $postrow[$i]['user_sig'] : '';
 
     if (bf($postrow[$i]['user_opt'], 'user_opt', 'dis_sig')) {
         $user_sig = __('SIGNATURE_DISABLE');
