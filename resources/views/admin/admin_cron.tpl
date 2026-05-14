@@ -20,7 +20,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 
 <!-- IF TPL_CRON_LIST -->
 <!--========================================================================-->
-<form action="{S_CRON_ACTION}" method="post">
+<form action="{S_CRON_ACTION}" method="post">{CSRF_FIELD}
 <input class="text" type="hidden" name="mode" value="{S_MODE}" />
 
 <table cellpadding="2" cellspacing="0" width="100%">
@@ -129,7 +129,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <a href="admin_cron.php?mode=list">{L_CRON_LIST}</a>
 <br /><br />
 
-<form action="{S_CRON_ACTION}" method="post">
+<form action="{S_CRON_ACTION}" method="post">{CSRF_FIELD}
 <input class="text" type="hidden" name="mode" value="{S_MODE}" />
 
 <table class="forumline">

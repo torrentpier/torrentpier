@@ -8,7 +8,7 @@
 
 <br />
 
-<form method="post" action="{S_AUTH_ACTION}">
+<form method="post" action="{S_AUTH_ACTION}">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline wAuto">
@@ -34,7 +34,7 @@
 
 <h2>{L_FORUM}: <a href="{U_VIEWFORUM}">{FORUM_NAME}</a></h2>
 
-<form method="post" action="{S_FORUMAUTH_ACTION}">
+<form method="post" action="{S_FORUMAUTH_ACTION}">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline wAuto">

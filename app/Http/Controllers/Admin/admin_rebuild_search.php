@@ -49,7 +49,7 @@ if (request()->has('cancel_button')) {
 		");
     }
 
-    bb_die(sprintf(__('REBUILD_SEARCH_ABORTED'), $last_session_data['end_post_id']) . '<br /><br />' . sprintf(__('CLICK_RETURN_REBUILD_SEARCH'), '<a href="admin_rebuild_search.php">', '</a>'));
+    bb_die(sprintf(__('REBUILD_SEARCH_ABORTED'), $last_session_data['end_post_id']) . '<br /><br />' . sprintf(__('CLICK_RETURN_REBUILD_SEARCH'), '<a href="admin_rebuild_search.php">', '</a>'), 200);
 }
 
 // from which post to start processing
@@ -62,7 +62,9 @@ $total_posts = get_total_posts();
 $clear_search = request()->getInt('clear_search');
 
 // get the number of total/session posts already processed
-$total_posts_processed = ($start != 0) ? get_total_posts('before', $last_session_data['end_post_id']) : 0;
+$total_posts_processed = !empty($last_session_data['end_post_id'])
+    ? get_total_posts('before', $last_session_data['end_post_id'])
+    : 0;
 $session_posts_processed = ($mode == 'refresh') ? get_processed_posts('session', $last_session_data) : 0;
 
 // find how many posts aren't processed
@@ -71,6 +73,8 @@ $total_posts_processing = $total_posts - $total_posts_processed;
 // how many posts to process in this session
 $session_posts_processing = request()->has('session_posts_processing') ? request()->getInt('session_posts_processing') : null;
 if ($session_posts_processing !== null) {
+    // reject negative input that would break downstream math/SQL
+    $session_posts_processing = max(0, $session_posts_processing);
     if ($mode == 'submit') {
         // check if we passed over total_posts just after submitting
         if ($session_posts_processing + $total_posts_processed > $total_posts) {
@@ -84,8 +88,8 @@ if ($session_posts_processing !== null) {
     $session_posts_processing = (!$total_posts_processing) ? $total_posts : $total_posts_processing;
 }
 
-// how many posts to process per cycle
-$post_limit = request()->getInt('post_limit', $def_post_limit);
+// how many posts to process per cycle (clamp to avoid negative LIMIT in SQL)
+$post_limit = max(0, request()->getInt('post_limit', $def_post_limit));
 
 // correct the post_limit when we pass over it
 if ($session_posts_processed + $post_limit > $session_posts_processing) {
@@ -94,7 +98,7 @@ if ($session_posts_processed + $post_limit > $session_posts_processing) {
 
 // how much time to wait per cycle
 if (request()->has('time_limit')) {
-    $time_limit = request()->getInt('time_limit');
+    $time_limit = max(0, request()->getInt('time_limit'));
 } else {
     $time_limit = $def_time_limit;
     $time_limit_explain = __('TIME_LIMIT_EXPLAIN');
@@ -118,12 +122,12 @@ if (request()->has('time_limit')) {
 }
 
 // how much time to wait between page refreshes
-$refresh_rate = request()->getInt('refresh_rate', $def_refresh_rate);
+$refresh_rate = max(0, request()->getInt('refresh_rate', $def_refresh_rate));
 
-// check if the user gave wrong input
+// check if the user gave wrong input — every value must be strictly positive
 if ($mode == 'submit') {
-    if (($session_posts_processing || $post_limit || $refresh_rate || $time_limit) <= 0) {
-        bb_die(__('WRONG_INPUT') . '<br /><br />' . sprintf(__('CLICK_RETURN_REBUILD_SEARCH'), '<a href="admin_rebuild_search.php">', '</a>'));
+    if ($session_posts_processing <= 0 || $post_limit <= 0 || $refresh_rate <= 0 || $time_limit <= 0) {
+        bb_die(__('WRONG_INPUT') . '<br /><br />' . sprintf(__('CLICK_RETURN_REBUILD_SEARCH'), '<a href="admin_rebuild_search.php">', '</a>'), 400);
     }
 }
 

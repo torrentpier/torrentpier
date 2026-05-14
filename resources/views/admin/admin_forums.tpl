@@ -21,7 +21,7 @@ function toggle_cat_list (val)
 <p>{L_FORUM_EDIT_DELETE_EXPLAIN}</p>
 <br />
 
-<form method="post" action="{S_FORUM_ACTION}" name="frm">
+<form method="post" action="{S_FORUM_ACTION}" name="frm">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline pad_4">
@@ -99,7 +99,7 @@ function toggle_cat_list (val)
 <p>{L_EDIT_CATEGORY_EXPLAIN}</p>
 <br />
 
-<form method="post" action="{S_FORUM_ACTION}">
+<form method="post" action="{S_FORUM_ACTION}">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline">
@@ -129,7 +129,7 @@ function toggle_cat_list (val)
 <p>{L_FORUM_DELETE_EXPLAIN}</p>
 <br />
 
-<form method="post" action="{S_FORUM_ACTION}">
+<form method="post" action="{S_FORUM_ACTION}">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline">
@@ -185,7 +185,7 @@ function hl (id, on)
 <p>{L_FORUM_EDIT_DELETE_EXPLAIN}</p>
 <br />
 
-<form method="post" action="{S_FORUM_ACTION}">
+<form method="post" action="{S_FORUM_ACTION}">{CSRF_FIELD}
 
 <!-- BEGIN c -->
 <table class="forumline">

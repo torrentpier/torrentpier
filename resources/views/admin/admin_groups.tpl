@@ -3,7 +3,7 @@
 
 <h1>{L_GROUP_ADMINISTRATION}</h1>
 
-<form action="{S_GROUP_ACTION}" method="post" name="post">
+<form action="{S_GROUP_ACTION}" method="post" name="post">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline wAuto">
@@ -74,7 +74,7 @@
 
 <br /><br />
 
-<form method="post" action="{S_GROUP_ACTION}">
+<form method="post" action="{S_GROUP_ACTION}">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline wAuto">

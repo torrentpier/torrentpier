@@ -6,7 +6,7 @@
 <p>{L_WORDS_EXPLAIN}</p>
 <br/>
 
-<form method="post" action="{S_WORDS_ACTION}">
+<form method="post" action="{S_WORDS_ACTION}">{CSRF_FIELD}
     <table class="forumline">
         <tr>
             <th>{L_WORD}</th>
@@ -41,7 +41,7 @@
 <p>{L_WORDS_EXPLAIN}</p>
 <br/>
 
-<form method="post" action="{S_WORDS_ACTION}">
+<form method="post" action="{S_WORDS_ACTION}">{CSRF_FIELD}
     <table class="forumline">
         <tr>
             <th colspan="2">{L_EDIT_WORD_CENSOR}</th>

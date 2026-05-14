@@ -78,10 +78,10 @@ if ($mode != '') {
         template()->assign_vars([
             'TPL_RANKS_EDIT' => true,
 
-            'RANK' => !empty($rank_info['rank_title']) ? $rank_info['rank_title'] : '',
-            'IMAGE' => !empty($rank_info['rank_image']) ? $rank_info['rank_image'] : 'assets/images/ranks/rank_image.png',
-            'STYLE' => !empty($rank_info['rank_style']) ? $rank_info['rank_style'] : '',
-            'IMAGE_DISPLAY' => !empty($rank_info['rank_image']) ? '<img src="/' . $rank_info['rank_image'] . '" />' : '',
+            'RANK' => !empty($rank_info['rank_title']) ? htmlCHR($rank_info['rank_title']) : '',
+            'IMAGE' => !empty($rank_info['rank_image']) ? htmlCHR($rank_info['rank_image']) : 'assets/images/ranks/rank_image.png',
+            'STYLE' => !empty($rank_info['rank_style']) ? htmlCHR($rank_info['rank_style']) : '',
+            'IMAGE_DISPLAY' => !empty($rank_info['rank_image']) ? '<img src="/' . htmlCHR($rank_info['rank_image']) . '" />' : '',
 
             'S_RANK_ACTION' => 'admin_ranks.php',
             'S_HIDDEN_FIELDS' => $s_hidden_fields,
@@ -116,7 +116,7 @@ if ($mode != '') {
         // The rank image has to be a jpg, gif or png
         //
         if ($rank_image != '') {
-            if (!preg_match('/(\.gif|\.png|\.jpg|\.jpeg|\.bmp|\.webp|\.avif\.ico)$/is', $rank_image)) {
+            if (!preg_match('/(\.gif|\.png|\.jpg|\.jpeg|\.bmp|\.webp|\.avif|\.ico)$/is', $rank_image)) {
                 $rank_image = '';
             }
         }
@@ -208,9 +208,9 @@ if ($mode != '') {
 
         template()->assign_block_vars('ranks', [
             'ROW_CLASS' => $row_class,
-            'RANK' => $rank,
-            'STYLE' => $rank_rows[$i]['rank_style'],
-            'IMAGE_DISPLAY' => $rank_rows[$i]['rank_image'] ? '<img src="/' . $rank_rows[$i]['rank_image'] . '" />' : '',
+            'RANK' => htmlCHR($rank),
+            'STYLE' => htmlCHR($rank_rows[$i]['rank_style']),
+            'IMAGE_DISPLAY' => $rank_rows[$i]['rank_image'] ? '<img src="/' . htmlCHR($rank_rows[$i]['rank_image']) . '" />' : '',
 
             'U_RANK_EDIT' => "admin_ranks.php?mode=edit&amp;id={$rank_id}",
             'U_RANK_DELETE' => "admin_ranks.php?mode=delete&amp;id={$rank_id}",

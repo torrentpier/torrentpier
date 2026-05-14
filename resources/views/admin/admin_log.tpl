@@ -18,7 +18,7 @@
 
 <h1>{L_ACTIONS_LOG}</h1>
 
-<form action="{S_LOG_ACTION}" method="post">
+<form action="{S_LOG_ACTION}" method="post">{CSRF_FIELD}
     <!-- IF TOPIC_CSV --><input type="hidden" name="{#POST_TOPIC_URL#}" value="{TOPIC_CSV}"/><!-- ENDIF -->
 
     <table class="bordered w100" cellspacing="0">
