@@ -1509,6 +1509,7 @@ $lang['UNBAN_USERNAME'] = 'Unban one or more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'You can unban multiple users in one go using the appropriate combination of mouse and keyboard for your computer and browser';
 $lang['NO_BANNED_USERS'] = 'No banned usernames';
 $lang['BAN_UPDATE_SUCESSFUL'] = 'The banlist has been updated successfully';
+$lang['BAN_SELF_FORBIDDEN'] = 'You cannot ban yourself';
 $lang['CLICK_RETURN_BANADMIN'] = 'Click %sHere%s to return to Ban Control';
 
 // Configuration
@@ -1920,6 +1921,8 @@ $lang['BOARD_DISABLE_EXPL'] = 'disable board when this job is run';
 $lang['RUN_COUNTER'] = 'Run counter';
 
 $lang['JOB_REMOVED'] = 'The job has been removed successfully';
+$lang['JOB_NOT_FOUND'] = 'No cron job matched the requested id';
+$lang['CRON_SCRIPT_MISSING'] = 'Cron script "%s" is missing on disk and was not executed';
 $lang['SCRIPT_DUPLICATE'] = 'A cron job with this script already exists';
 $lang['TITLE_DUPLICATE'] = 'A cron job with this title already exists';
 $lang['CLICK_RETURN_JOBS_ADDED'] = '%sReturn to add job%s';

@@ -22,12 +22,23 @@ $submit = request()->post->has('submit');
 $jobs = request()->post->has('select') ? implode(',', request()->getArray('select')) : '';
 $cron_action = request()->post->get('cron_action', '');
 
-if ($mode == 'run' && !$job_id) {
+// Route GETs with no mode (or run without an id) straight to the list. POST
+// form submits carry their `mode` in the body, so leave those alone.
+if (!$submit && (!$mode || ($mode == 'run' && !$job_id))) {
     redirect('admin/' . basename(__FILE__) . '?mode=list');
 }
 
 if (!IS_SUPER_ADMIN) {
     bb_die(__('ONLY_FOR_SUPER_ADMIN'));
+}
+
+// State-changing GET actions still need a CSRF token in the URL — admin row
+// actions (Run, Delete, Repair) are rendered as `<a>` links in the legacy
+// template, so the token rides as ?_token=… instead of a POST body field.
+if (\in_array($mode, ['run', 'delete', 'repair'], true)
+    && !TorrentPier\Http\Csrf::verify(request()->query->get(TorrentPier\Http\Csrf::FIELD))
+) {
+    bb_die('CSRF token mismatch.', 419);
 }
 
 $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CONFIG . " WHERE config_name = 'cron_check_interval'");
@@ -115,28 +126,28 @@ switch ($mode) {
         break;
 
     case 'edit':
-        $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . " WHERE cron_id = {$job_id}");
-
-        foreach ($sql as $row) {
-            template()->assign_vars([
-                'CRON_ID' => $row['cron_id'],
-                'CRON_ACTIVE' => $row['cron_active'],
-                'CRON_TITLE' => $row['cron_title'],
-                'CRON_SCRIPT' => $row['cron_script'],
-                'SCHEDULE' => $row['schedule'] ? __('SCHEDULE')[$row['schedule']] : '',
-                'RUN_DAY' => $row['run_day'],
-                'RUN_TIME' => $row['run_time']?->format('%H:%I:%S') ?? '',
-                'RUN_ORDER' => $row['run_order'],
-                'LAST_RUN' => $row['last_run'],
-                'NEXT_RUN' => $row['next_run'],
-                'RUN_INTERVAL' => $row['run_interval']?->format('%H:%I:%S') ?? '',
-                'LOG_ENABLED' => $row['log_enabled'],
-                'LOG_FILE' => $row['log_file'],
-                'LOG_SQL_QUERIES' => $row['log_sql_queries'],
-                'DISABLE_BOARD' => $row['disable_board'],
-                'RUN_COUNTER' => $row['run_counter'],
-            ]);
+        $row = DB()->fetch_row('SELECT * FROM ' . BB_CRON . " WHERE cron_id = {$job_id}");
+        if (!$row) {
+            bb_die(__('JOB_NOT_FOUND') . '<br /><br />' . \sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>'));
         }
+
+        template()->assign_vars([
+            'CRON_ID' => $row['cron_id'],
+            'CRON_ACTIVE' => $row['cron_active'],
+            'CRON_TITLE' => $row['cron_title'],
+            'CRON_SCRIPT' => $row['cron_script'],
+            'RUN_DAY' => $row['run_day'],
+            'RUN_TIME' => $row['run_time']?->format('%H:%I:%S') ?? '',
+            'RUN_ORDER' => $row['run_order'],
+            'LAST_RUN' => $row['last_run'],
+            'NEXT_RUN' => $row['next_run'],
+            'RUN_INTERVAL' => $row['run_interval']?->format('%H:%I:%S') ?? '',
+            'LOG_ENABLED' => $row['log_enabled'],
+            'LOG_FILE' => $row['log_file'],
+            'LOG_SQL_QUERIES' => $row['log_sql_queries'],
+            'DISABLE_BOARD' => $row['disable_board'],
+            'RUN_COUNTER' => $row['run_counter'],
+        ]);
 
         $run_day = [__('DAY') => 0];
         for ($i = 1; $i <= 28; $i++) {
@@ -193,8 +204,9 @@ switch ($mode) {
         break;
 
     case 'delete':
-        TorrentPier\Legacy\Admin\Cron::delete_jobs($job_id);
-        bb_die(__('JOB_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+        $removed = TorrentPier\Legacy\Admin\Cron::delete_jobs($job_id);
+        $message = $removed > 0 ? __('JOB_REMOVED') : __('JOB_NOT_FOUND');
+        bb_die($message . '<br /><br />' . sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
         break;
 }
 

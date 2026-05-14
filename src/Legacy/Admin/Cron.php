@@ -21,7 +21,9 @@ class Cron
      */
     public static function run_jobs(string $jobs): void
     {
-        \define('IN_CRON', true);
+        if (!\defined('IN_CRON')) {
+            \define('IN_CRON', true);
+        }
 
         $sql = 'SELECT * FROM ' . BB_CRON . " WHERE cron_id IN ({$jobs})";
         if (!$result = DB()->sql_query($sql)) {
@@ -32,6 +34,10 @@ class Cron
             $job = $row['cron_script'];
             $job_id = $row['cron_id'];
             $job_script = INC_DIR . '/cron/jobs/' . $job;
+
+            if (!is_file($job_script)) {
+                bb_die(\sprintf(__('CRON_SCRIPT_MISSING'), htmlCHR($job)) . '<br /><br />' . \sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>'));
+            }
 
             $cron_runtime_log = [];
             $cron_write_log = ($row['log_enabled'] >= 1);
@@ -81,9 +87,11 @@ class Cron
     /**
      * Delete cron jobs
      */
-    public static function delete_jobs(string $jobs): void
+    public static function delete_jobs(string $jobs): int
     {
         DB()->query('DELETE FROM ' . BB_CRON . " WHERE cron_id IN ({$jobs})");
+
+        return DB()->affected_rows();
     }
 
     /**
@@ -105,11 +113,11 @@ class Cron
     {
         $errors = 'Errors in: ';
         $errnum = 0;
-        if (!$cron_arr['cron_title']) {
+        if (empty($cron_arr['cron_title'])) {
             $errors .= 'cron title (empty value), ';
             $errnum++;
         }
-        if (!$cron_arr['cron_script']) {
+        if (empty($cron_arr['cron_script'])) {
             $errors .= 'cron script (empty value), ';
             $errnum++;
         }
