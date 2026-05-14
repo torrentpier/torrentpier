@@ -406,7 +406,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                             if ($sfullData === null) {
                                 define('SEEDER_EXIST', true);
                                 $sfullData = [
-                                    'SEED_ORD_ACT' => TOPIC_URL . "{$bt_topic_id}/?spmode=full#seeders",
+                                    'SEED_ORD_ACT' => url()->topic($bt_topic_id, $t_data['topic_title'], ['spmode' => 'full', '_fragment' => 'seeders']),
                                     'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s',
                                     'IPHEAD' => (bool)$ip,
                                     'PORTHEAD' => ($port !== false),
@@ -420,7 +420,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
                             if ($lfullData === null) {
                                 define('LEECHER_EXIST', true);
                                 $lfullData = [
-                                    'LEECH_ORD_ACT' => TOPIC_URL . "{$bt_topic_id}/?spmode=full#leechers",
+                                    'LEECH_ORD_ACT' => url()->topic($bt_topic_id, $t_data['topic_title'], ['spmode' => 'full', '_fragment' => 'leechers']),
                                     'LEECHERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s',
                                     'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], min: 'KB') . '/s',
                                     'IPHEAD' => (bool)$ip,
@@ -557,7 +557,7 @@ function render_torrent_block(array $t_data, int $poster_id, array $is_auth, int
     if (config()->get('bt_allow_spmode_change') && $s_mode != 'full') {
         template()->assign_vars([
             'PEERS_FULL_LINK' => true,
-            'SPMODE_FULL_HREF' => TOPIC_URL . "{$topic_id}/?spmode=full#seeders",
+            'SPMODE_FULL_HREF' => url()->topic($topic_id, $t_data['topic_title'], ['spmode' => 'full', '_fragment' => 'seeders']),
         ]);
     }
 

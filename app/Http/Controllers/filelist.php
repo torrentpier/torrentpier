@@ -100,7 +100,6 @@ print_page('filelist.twig', variables: [
     'TORRENT_CREATION_DATE' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : __('UNKNOWN'),
     'TORRENT_CLIENT' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR($creator) : __('UNKNOWN'),
     'TORRENT_PRIVATE' => $torrent->isPrivate() ? __('YES') : __('NO'),
-    'BTMR_NOTICE' => sprintf(__('BT_FLIST_BTMR_NOTICE'), 'https://github.com/kovalensky/tmrr'),
     'U_TOPIC' => TOPIC_URL . $topic_id,
     'FILELIST' => $filelist,
 ]);

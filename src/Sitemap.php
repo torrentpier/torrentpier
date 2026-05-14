@@ -71,12 +71,8 @@ class Sitemap
         ');
 
         while ($row = DB()->sql_fetchrow($sql)) {
-            $forum_url = FORUM_URL . $row['forum_id'];
-            if (\function_exists('seo_url')) {
-                $forum_url = seo_url(FORUM_URL . $row['forum_id'], $row['forum_name']);
-            }
             $forumUrls[] = [
-                'url' => $forum_url,
+                'url' => \url()->forum((int)$row['forum_id'], $row['forum_name']),
                 'time' => $row['last_topic_time'],
             ];
         }
@@ -99,12 +95,8 @@ class Sitemap
         $sql = DB()->sql_query('SELECT topic_id, topic_title, topic_last_post_time FROM ' . BB_TOPICS . ' ' . $ignore_forum_sql . ' ORDER BY topic_last_post_time ASC');
 
         while ($row = DB()->sql_fetchrow($sql)) {
-            $topic_url = TOPIC_URL . $row['topic_id'];
-            if (\function_exists('seo_url')) {
-                $topic_url = seo_url(TOPIC_URL . $row['topic_id'], $row['topic_title']);
-            }
             $topicUrls[] = [
-                'url' => $topic_url,
+                'url' => \url()->topic((int)$row['topic_id'], $row['topic_title']),
                 'time' => $row['topic_last_post_time'],
             ];
         }

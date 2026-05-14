@@ -130,7 +130,14 @@ class RouteAdapter
      */
     private function redirectToCanonical(int $id, string $title, ServerRequestInterface $request): ResponseInterface
     {
-        $canonicalUrl = EntityConfig::buildUrl($this->type, $id, $title);
+        // Preserve original query parameters so links like /threads/123/?spmode=full keep their state after 301
+        $params = [];
+        $queryString = $request->getUri()->getQuery();
+        if ($queryString !== '') {
+            parse_str($queryString, $params);
+        }
+
+        $canonicalUrl = EntityConfig::buildUrl($this->type, $id, $title, $params);
         $targetUrl = make_url($canonicalUrl);
 
         $requestUri = (string)$request->getUri();
