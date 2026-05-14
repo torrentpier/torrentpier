@@ -4411,7 +4411,7 @@ ajax.topic_tpl = function(mode, params) {
 			ajax.exec({
 				action : 'topic_tpl',
 				mode   : mode,
-                forum_id : {FORUM_ID},
+                forum_id : {{ FORUM_ID }},
 				tpl_id : $('#forum_tpl_select').val()
 			});
 			break;
@@ -4425,7 +4425,7 @@ ajax.topic_tpl = function(mode, params) {
 			ajax.exec({
 				action   : 'topic_tpl',
 				mode     : 'assign',
-				forum_id : {FORUM_ID},
+				forum_id : {{ FORUM_ID }},
 				tpl_id   : params.tpl_id
 			});
 			break;
@@ -4594,13 +4594,13 @@ function tpl_submit ()
 }
 </script>
 
-<h1 class="maintitle"><a href="{FORUM_URL}{FORUM_ID}">{FORUM_NAME}</a></h1>
+<h1 class="maintitle"><a href="{{ FORUM_URL }}{{ FORUM_ID }}">{{ FORUM_NAME }}</a></h1>
 
 <div class="nav">
-	<p class="floatL"><a href="{U_INDEX}">{{ __('HOME') }}</a></p>
+	<p class="floatL"><a href="{{ U_INDEX }}">{{ __('HOME') }}</a></p>
 	<p class="floatR">
-		{% if CAN_EDIT_TPL and not EDIT_TPL %}<a href="{EDIT_TPL_URL}" class="adm">Редактировать шаблон</a> &nbsp;&middot;&nbsp;{% endif %}
-		<a href="{REGULAR_TOPIC_HREF}">Создать обычную тему</a>
+		{% if CAN_EDIT_TPL and not EDIT_TPL %}<a href="{{ EDIT_TPL_URL }}" class="adm">Редактировать шаблон</a> &nbsp;&middot;&nbsp;{% endif %}
+		<a href="{{ REGULAR_TOPIC_HREF }}">Создать обычную тему</a>
 	</p>
 	<div class="clear"></div>
 </div>
@@ -4624,7 +4624,7 @@ $(function(){
 </tr>
 <tr>
 	<td class="row1">
-	<div class="w95 bCenter" style="padding: 12px;" id="tpl-rules-html">{TPL_RULES_HTML}</div>
+	<div class="w95 bCenter" style="padding: 12px;" id="tpl-rules-html">{{ TPL_RULES_HTML|raw }}</div>
 	<div class="clear"></div>
 	</td>
 </tr>
@@ -4717,7 +4717,7 @@ $(function(){
 			<legend>Включить/Загрузить</legend>
 			<div style="padding: 2px 12px 6px;">
             {{ __('RELEASE') }}: &nbsp;
-			{% if TPL_SELECT %}{TPL_SELECT} &nbsp;
+			{% if TPL_SELECT %}{{ TPL_SELECT|raw }} &nbsp;
 			<input type="button" value="Включить в этом форуме" class="bold" onclick="ajax.topic_tpl('assign', {tpl_id: $('#forum_tpl_select').val()})" /> &nbsp;
 			<input type="button" value="Загрузить" onclick="ajax.topic_tpl('load')" /> &nbsp;
             <input type="button" value="{{ __('REMOVE') }}" onclick="ajax.topic_tpl('remove')" /> &nbsp;
@@ -4727,7 +4727,7 @@ $(function(){
 			{% if NO_TPL_ASSIGNED %}
 			В этом форуме шаблоны <b>не включены</b><br />
 			{% else %}
-			Сейчас в этом форуме включен шаблон: <b>{TPL_NAME}</b><br />
+			Сейчас в этом форуме включен шаблон: <b>{{ TPL_NAME }}</b><br />
 			{% endif %}
 			</span>
 			</div>
@@ -4736,22 +4736,22 @@ $(function(){
 
 			<div {% if NO_TPL_ASSIGNED %}style="display: none;"{% endif %} id="tpl-save-block">
 			<fieldset>
-			<legend>Сохранить изменения для шаблона <b id="tpl-name-old-save">{TPL_NAME}</b></legend>
+			<legend>Сохранить изменения для шаблона <b id="tpl-name-old-save">{{ TPL_NAME }}</b></legend>
 			<div style="padding: 2px 12px 6px;">
 			<div class="label">Новое название шаблона:</div>
-			<input type="text" id="tpl-name-save" size="60" value="{TPL_NAME}" maxlength="60" class="bold" style="width: 75%" /><br />
+			<input type="text" id="tpl-name-save" size="60" value="{{ TPL_NAME }}" maxlength="60" class="bold" style="width: 75%" /><br />
 
-			<div class="label"><a href="{POST_URL}{TPL_RULES_POST_ID}#{TPL_RULES_POST_ID}" id="tpl-rules-link" target="_blank">Правила</a> (ссылка на сообщение с правилами или номер сообщения):</div>
-			<input type="text" id="tpl-rules-save" size="60" value="{TPL_RULES_POST_ID}" style="width: 75%" /><br />
+			<div class="label"><a href="{{ POST_URL }}{{ TPL_RULES_POST_ID }}#{{ TPL_RULES_POST_ID }}" id="tpl-rules-link" target="_blank">Правила</a> (ссылка на сообщение с правилами или номер сообщения):</div>
+			<input type="text" id="tpl-rules-save" size="60" value="{{ TPL_RULES_POST_ID }}" style="width: 75%" /><br />
 
 			<div class="label">{{ __('COMMENT') }}:</div>
-			<textarea id="tpl-comment-save" rows="2" cols="80" class="editor" style="width: 90%">{TPL_COMMENT}</textarea>
+			<textarea id="tpl-comment-save" rows="2" cols="80" class="editor" style="width: 90%">{{ TPL_COMMENT }}</textarea>
 
-			<div class="label">Последний раз редактировалось: <i id="tpl-last-edit-time">{TPL_LAST_EDIT_TIME}</i> by <b id="tpl-last-edit-by">{TPL_LAST_EDIT_USER}</b></div>
+			<div class="label">Последний раз редактировалось: <i id="tpl-last-edit-time">{{ TPL_LAST_EDIT_TIME }}</i> by <b id="tpl-last-edit-by">{{ TPL_LAST_EDIT_USER|raw }}</b></div>
 			<br />
 
-			<input type="hidden" id="tpl-id-save" value="{TPL_ID}">
-			<input type="hidden" id="tpl-last-edit-tst" value="{TPL_LAST_EDIT_TIMESTAMP}">
+			<input type="hidden" id="tpl-id-save" value="{{ TPL_ID }}">
+			<input type="hidden" id="tpl-last-edit-tst" value="{{ TPL_LAST_EDIT_TIMESTAMP }}">
 			<input type="button" class="bold" value="Сохранить изменения" onclick="ajax.topic_tpl('save')" />
 			<br />
 			</div>
@@ -4830,9 +4830,9 @@ $(function(){
 {% endif %}
 
 <div style="display: none;">
-<form id="tpl-post-form" method="post" action="{TPL_FORM_ACTION}" name="post" class="tokenized">
+<form id="tpl-post-form" method="post" action="{{ TPL_FORM_ACTION }}" name="post" class="tokenized">
 	{{ csrf_field() }}
-	<input type="hidden" name="tor_required" value="{TOR_REQUIRED}">
+	<input type="hidden" name="tor_required" value="{{ TOR_REQUIRED }}">
 	<input type="hidden" name="preview" value="1">
 	<input id="tpl-post-subject" type="text" name="subject" size="90" value="" />
 	<textarea id="tpl-post-message" name="message" rows="1" cols="1"></textarea>
@@ -5160,9 +5160,9 @@ $(function(){
 
 <div style="display: none;">
 	<!-- исходные значения всех #tpl-src -->
-	<textarea id="tpl-src-form-val" rows="10" cols="10">{TPL_SRC_FORM_VAL}</textarea>
-	<textarea id="tpl-src-title-val" rows="10" cols="10">{TPL_SRC_TITLE_VAL}</textarea>
-	<textarea id="tpl-src-msg-val" rows="10" cols="10">{TPL_SRC_MSG_VAL}</textarea>
+	<textarea id="tpl-src-form-val" rows="10" cols="10">{{ TPL_SRC_FORM_VAL }}</textarea>
+	<textarea id="tpl-src-title-val" rows="10" cols="10">{{ TPL_SRC_TITLE_VAL }}</textarea>
+	<textarea id="tpl-src-msg-val" rows="10" cols="10">{{ TPL_SRC_MSG_VAL }}</textarea>
 </div>
 
 <noscript><div class="warningBox2 bold tCenter">Для показа необходимo включить JavaScript</div></noscript>
