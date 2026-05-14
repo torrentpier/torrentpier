@@ -22,7 +22,7 @@ $dlMode = request()->query->get('dl');
 $count_mode = (config()->get('bt_dl_list_only_count') && $dlMode !== 'names');
 
 $have_dl_buttons_enabled = (config()->get('bt_show_dl_but_will') || config()->get('bt_show_dl_but_down') || config()->get('bt_show_dl_but_compl') || config()->get('bt_show_dl_but_cancel'));
-$dl_topic = ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL && !(config()->get('bt_dl_list_only_1st_page') && $start));
+$dl_topic = ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL && !(config()->get('bt_dl_list_only_1st_page') && $start && !$t_data['topic_show_first_post']));
 $show_dl_list = ($dl_topic && (config()->get('bt_show_dl_list') || (config()->get('tracker.allow_dl_list_names_mode') && $dlMode === 'names')));
 $show_dl_buttons = (!IS_GUEST && $dl_topic && config()->get('bt_show_dl_list_buttons'));
 
