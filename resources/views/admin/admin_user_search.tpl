@@ -6,7 +6,7 @@
 <p>{L_SEARCH_USERS_EXPLAIN}</p>
 <br />
 
-<form method="post" name="post" action="{S_SEARCH_ACTION}"><input type="hidden" name="dosearch" value="true" />
+<form method="post" name="post" action="{S_SEARCH_ACTION}">{CSRF_FIELD}<input type="hidden" name="dosearch" value="true" />
 
 <table class="forumline">
 	<tr>
@@ -110,7 +110,7 @@
 <p>{NEW_SEARCH}</p>
 <br />
 
-<form action="{S_POST_ACTION}" method="post" name="post">
+<form action="{S_POST_ACTION}" method="post" name="post">{CSRF_FIELD}
 <table width="98%" class="bCenter">
 	<tr>
 		<td class="nav tCenter"><span class="gen">{L_SORT_OPTIONS}</span> <a href="{U_USERNAME}">{L_USERNAME}</a> | <a href="{U_EMAIL}">{L_EMAIL_ADDRESS}</a> | <a href="{U_POSTS}">{L_POSTS}</a> | <a href="{U_JOINDATE}">{L_JOINED}</a> | <a href="{U_LASTVISIT}">{L_LAST_VISIT}</a></td>

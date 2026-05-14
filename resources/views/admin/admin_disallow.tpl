@@ -3,7 +3,7 @@
 <p>{L_DISALLOW_EXPLAIN}</p>
 <br/>
 
-<form method="post" action="{S_FORM_ACTION}">
+<form method="post" action="{S_FORM_ACTION}">{CSRF_FIELD}
     <table class="forumline wAuto">
         <col class="row1">
         <col class="row2">
