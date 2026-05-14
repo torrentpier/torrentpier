@@ -141,6 +141,10 @@ if (empty($forum_id)) {
     ]);
 } else {
     // Output the authorisation details if an id was specified
+    if (empty($forum_rows)) {
+        bb_die(__('FORUM_NOT_EXIST'), 404);
+    }
+
     $forum_name = reset($forum_rows)['forum_name'];
 
     reset($simple_auth_ary);
