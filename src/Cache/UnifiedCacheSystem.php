@@ -188,6 +188,14 @@ class UnifiedCacheSystem
     }
 
     /**
+     * Base directory used by file-backed namespaces and datastore.
+     */
+    public function getCacheBaseDir(): string
+    {
+        return rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/');
+    }
+
+    /**
      * Clear all caches
      */
     public function clearAll(): void
