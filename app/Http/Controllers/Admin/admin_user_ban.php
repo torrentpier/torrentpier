@@ -23,12 +23,17 @@ if ($submit) {
             bb_die(__('NO_USER_ID_SPECIFIED') . '<br /><br />' . sprintf(__('CLICK_RETURN_BANADMIN'), '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
         }
 
-        if (!getBanInfo((int)$this_userdata['user_id'])) {
+        $target_id = (int)$this_userdata['user_id'];
+        if ($target_id === (int)user()->id) {
+            bb_die('You cannot ban yourself');
+        }
+
+        if (!getBanInfo($target_id)) {
             $ban_reason = '';
             if (!empty(request()->post->get('ban_reason'))) {
                 $ban_reason = trim(request()->post->get('ban_reason'));
             }
-            $sql = 'INSERT INTO ' . BB_BANLIST . ' (ban_userid, ban_reason) VALUES (' . $this_userdata['user_id'] . ', "' . DB()->escape($ban_reason) . '")';
+            $sql = 'INSERT INTO ' . BB_BANLIST . ' (ban_userid, ban_reason) VALUES (' . $target_id . ', "' . DB()->escape($ban_reason) . '")';
             if (!DB()->sql_query($sql)) {
                 bb_die('Could not insert ban_userid info into database');
             }
@@ -36,11 +41,10 @@ if ($submit) {
     }
 
     // Unban action
-    $where_sql = '';
+    $user_list = request()->getArray('unban_user');
 
-    if (!empty(request()->post->get('unban_user'))) {
-        $user_list = request()->getArray('unban_user');
-
+    if (!empty($user_list)) {
+        $where_sql = '';
         for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
             if ($user_list[$i] != -1) {
                 $where_sql .= (($where_sql != '') ? ', ' : '') . (int)$user_list[$i];
@@ -71,7 +75,7 @@ if ($submit) {
     $select_userlist = '<select name="unban_user[]" multiple size="5">' . $select_userlist . '</select>';
 
     template()->assign_vars([
-        'U_SEARCH_USER' => './../search.php?mode=searchuser',
+        'U_SEARCH_USER' => '/search?mode=searchuser',
         'S_UNBAN_USERLIST_SELECT' => $select_userlist,
         'S_BAN_ACTION' => 'admin_user_ban.php',
     ]);
