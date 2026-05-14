@@ -163,7 +163,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $timer_expired = false;
     $words_sql = [];
 
-    while ($row = DB()->fetch_next($result) && !$timer_expired) {
+    while (($row = DB()->fetch_next($result)) && !$timer_expired) {
         set_time_limit(600);
         $start_post_id = ($num_rows == 0) ? $row['post_id'] : $start_post_id;
         $end_post_id = $row['post_id'];
@@ -235,7 +235,11 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $total_posts_processed = get_total_posts('before', $last_session_data['end_post_id']);
     $total_posts = get_total_posts();
 
-    if ($session_posts_processed < $session_posts_processing && $total_posts_processed < $total_posts) {
+    // Treat an empty SELECT as exhaustion of indexable posts. Without this guard, when start > last indexable post_id,
+    // $end_post_id stays 0 and the next meta_refresh jumps back to start=1, looping and overwriting session counters.
+    $exhausted = ($num_rows == 0);
+
+    if (!$exhausted && $session_posts_processed < $session_posts_processing && $total_posts_processed < $total_posts) {
         $form_parameters = '&start=' . ($end_post_id + 1);
         $form_parameters .= '&session_posts_processing=' . $session_posts_processing;
         $form_parameters .= '&post_limit=' . $post_limit;
@@ -264,12 +268,15 @@ if ($mode == 'submit' || $mode == 'refresh') {
         $processing_messages .= ($session_posts_processed < $session_posts_processing) ? sprintf(__('DELETED_POSTS'), $session_posts_processing - $session_posts_processed) : '';
         $processing_messages .= ($total_posts_processed == $total_posts) ? __('ALL_POSTS_PROCESSED') : __('ALL_SESSION_POSTS_PROCESSED');
 
-        // if we have processed all the db posts we need to update the rebuild_status
-        DB()->query('UPDATE ' . BB_SEARCH_REBUILD . ' SET
+        // Mark COMPLETED when there's nothing left to index — either the SELECT exhausted, or every indexable
+        // post in the DB is already processed. Tying it to end_post_id == $max_post_id broke when the trailing
+        // posts were bots (filtered out of SELECT) — session stayed PROCESSED forever.
+        if (($exhausted || $total_posts_processed >= $total_posts) && $last_session_id) {
+            DB()->query('UPDATE ' . BB_SEARCH_REBUILD . ' SET
 				rebuild_session_status = ' . REBUILD_SEARCH_COMPLETED . "
 			WHERE rebuild_session_id = {$last_session_id}
-				AND end_post_id = {$max_post_id}
 		");
+        }
 
         // optimize all search tables when finished
         $table_ary = [BB_POSTS_SEARCH];
@@ -443,10 +450,13 @@ function get_db_sizes()
     return [$search_data_size, $search_index_size, $search_data_size + $search_index_size];
 }
 
-// get the latest post_id in the forum
+// get the latest indexable post_id in the forum (matches the SELECT used by the indexer)
 function get_latest_post_id()
 {
-    $row = DB()->fetch_row('SELECT MAX(post_id) as post_id FROM ' . BB_POSTS_TEXT);
+    $row = DB()->fetch_row('SELECT MAX(pt.post_id) AS post_id
+		FROM ' . BB_POSTS_TEXT . ' pt
+		INNER JOIN ' . BB_POSTS . ' p ON p.post_id = pt.post_id
+		WHERE p.poster_id NOT IN(' . BOT_UID . ')');
 
     return (int)$row['post_id'];
 }
@@ -505,16 +515,18 @@ function get_processed_posts(string $mode = 'session', array $session_data = [])
     return (int)$row['posts'];
 }
 
-// how many posts are in the db before or after a specific post_id
-// after/before require and the post_id
+// how many indexable posts (excluding bot posts) are in the db before or after a specific post_id
+// after/before require the post_id; the bot filter must mirror the main SELECT or the progress counters drift
 function get_total_posts($mode = 'after', $post_id = 0)
 {
+    $where = 'WHERE p.poster_id NOT IN(' . BOT_UID . ')';
     if ($post_id) {
-        $sql = 'SELECT COUNT(post_id) as total_posts FROM ' . BB_POSTS_TEXT . '
-			WHERE post_id ' . (($mode == 'after') ? '>= ' : '<= ') . (int)$post_id;
-    } else {
-        $sql = 'SELECT COUNT(*) as total_posts FROM ' . BB_POSTS_TEXT;
+        $where .= ' AND pt.post_id ' . (($mode == 'after') ? '>= ' : '<= ') . (int)$post_id;
     }
+    $sql = 'SELECT COUNT(pt.post_id) AS total_posts
+		FROM ' . BB_POSTS_TEXT . ' pt
+		INNER JOIN ' . BB_POSTS . " p ON p.post_id = pt.post_id
+		{$where}";
 
     $row = DB()->fetch_row($sql);
     $totalPosts = (int)$row['total_posts'];
