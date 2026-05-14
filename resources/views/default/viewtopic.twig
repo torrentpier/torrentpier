@@ -468,7 +468,7 @@ function build_poll_add_form (src_el)
                     {% if SHOW_GUEST_STUB %}
                         {% include 'viewtopic_attach_guest.twig' %}
                     {% else %}
-                        {% include 'viewtopic_attach.twig' %}
+                        {% include 'viewtopic_attach.twig' with { 'POSTER_ID': postrow_item.POSTER_ID } %}
                     {% endif %}
                 {% endif %}
 			</div><!--/post_wrap-->
