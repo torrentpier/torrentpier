@@ -809,7 +809,7 @@ if (!request()->get('dosearch')) {
         $select_sql .= 'u.username';
     }
 
-    $reqOrder = strtoupper((string) request()->get('order'));
+    $reqOrder = strtoupper((string)request()->get('order'));
     if ($reqOrder === 'DESC') {
         $order = 'DESC';
         $o_order = 'ASC';
@@ -885,7 +885,7 @@ if (!request()->get('dosearch')) {
     $banned = [];
 
     if ($rowset) {
-        $user_ids = array_map(static fn ($row) => (int) $row['user_id'], $rowset);
+        $user_ids = array_map(static fn ($row) => (int)$row['user_id'], $rowset);
         $sql = 'SELECT ban_userid AS user_id FROM ' . BB_BANLIST . ' WHERE ban_userid IN (' . implode(', ', $user_ids) . ')';
 
         if (!$result = DB()->sql_query($sql)) {
