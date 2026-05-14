@@ -235,8 +235,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $total_posts_processed = get_total_posts('before', $last_session_data['end_post_id']);
     $total_posts = get_total_posts();
 
-    // Treat an empty SELECT as exhaustion of indexable posts. Without this guard, when start > last indexable post_id,
-    // $end_post_id stays 0 and the next meta_refresh jumps back to start=1, looping and overwriting session counters.
+    // Without this exhaustion guard, the next refresh ends up at start=1 and overwrites the session counters.
     $exhausted = ($num_rows == 0);
 
     if (!$exhausted && $session_posts_processed < $session_posts_processing && $total_posts_processed < $total_posts) {
@@ -268,9 +267,6 @@ if ($mode == 'submit' || $mode == 'refresh') {
         $processing_messages .= ($session_posts_processed < $session_posts_processing) ? sprintf(__('DELETED_POSTS'), $session_posts_processing - $session_posts_processed) : '';
         $processing_messages .= ($total_posts_processed == $total_posts) ? __('ALL_POSTS_PROCESSED') : __('ALL_SESSION_POSTS_PROCESSED');
 
-        // Mark COMPLETED when there's nothing left to index — either the SELECT exhausted, or every indexable
-        // post in the DB is already processed. Tying it to end_post_id == $max_post_id broke when the trailing
-        // posts were bots (filtered out of SELECT) — session stayed PROCESSED forever.
         if (($exhausted || $total_posts_processed >= $total_posts) && $last_session_id) {
             DB()->query('UPDATE ' . BB_SEARCH_REBUILD . ' SET
 				rebuild_session_status = ' . REBUILD_SEARCH_COMPLETED . "
@@ -450,7 +446,6 @@ function get_db_sizes()
     return [$search_data_size, $search_index_size, $search_data_size + $search_index_size];
 }
 
-// get the latest indexable post_id in the forum (matches the SELECT used by the indexer)
 function get_latest_post_id()
 {
     $row = DB()->fetch_row('SELECT MAX(pt.post_id) AS post_id

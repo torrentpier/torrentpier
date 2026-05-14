@@ -237,7 +237,11 @@ class IndexDataController
         }
 
         $userId = (int)($body['user_id'] ?? 0);
-        $btu = get_bt_userdata($userId);
+        $btu = get_bt_userdata($userId) ?: [];
+        $btu += [
+            'u_up_total' => 0, 'u_down_total' => 0, 'u_up_release' => 0, 'u_up_bonus' => 0,
+            'speed_up' => 0, 'speed_down' => 0,
+        ];
         $profiledata = get_userdata($userId);
 
         $speedUp = ($btu['speed_up']) ? humn_size($btu['speed_up']) . '/s' : '0 KB/s';
