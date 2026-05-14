@@ -20,9 +20,9 @@ $logged_in = (int)!empty(userdata('session_logged_in'));
 
 // Generate logged in/logged out status
 if ($logged_in) {
-    $u_login_logout = BB_ROOT . LOGIN_URL . '?logout=1';
+    $u_login_logout = LOGIN_URL . '?logout=1';
 } else {
-    $u_login_logout = BB_ROOT . LOGIN_URL;
+    $u_login_logout = LOGIN_URL;
 }
 
 // Online userlist

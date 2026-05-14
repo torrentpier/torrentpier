@@ -275,12 +275,12 @@ if ($log_rowset) {
             'USER_IP' => TorrentPier\Helpers\IPHelper::decode($row['log_user_ip']),
 
             'FORUM_ID' => $row['log_forum_id'],
-            'FORUM_HREF' => BB_ROOT . FORUM_URL . $row['log_forum_id'],
+            'FORUM_HREF' => FORUM_URL . $row['log_forum_id'],
             'FORUM_HREF_S' => url_arg($url, $forum_key, $row['log_forum_id']),
             'FORUM_NAME' => htmlCHR($forum_name),
 
             'FORUM_ID_NEW' => $row['log_forum_id_new'],
-            'FORUM_HREF_NEW' => BB_ROOT . FORUM_URL . $row['log_forum_id_new'],
+            'FORUM_HREF_NEW' => FORUM_URL . $row['log_forum_id_new'],
             'FORUM_HREF_NEW_S' => url_arg($url, $forum_key, $row['log_forum_id_new']),
             'FORUM_NAME_NEW' => htmlCHR($forum_name_new),
 
