@@ -35,7 +35,7 @@ if (!IS_SUPER_ADMIN) {
 // State-changing GET actions still need a CSRF token in the URL — admin row
 // actions (Run, Delete, Repair) are rendered as `<a>` links in the legacy
 // template, so the token rides as ?_token=… instead of a POST body field.
-if (\in_array($mode, ['run', 'delete', 'repair'], true)
+if (in_array($mode, ['run', 'delete', 'repair'], true)
     && !TorrentPier\Http\Csrf::verify(request()->query->get(TorrentPier\Http\Csrf::FIELD))
 ) {
     bb_die('CSRF token mismatch.', 419);
@@ -128,7 +128,7 @@ switch ($mode) {
     case 'edit':
         $row = DB()->fetch_row('SELECT * FROM ' . BB_CRON . " WHERE cron_id = {$job_id}");
         if (!$row) {
-            bb_die(__('JOB_NOT_FOUND') . '<br /><br />' . \sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>'));
+            bb_die(__('JOB_NOT_FOUND') . '<br /><br />' . sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>'));
         }
 
         template()->assign_vars([
