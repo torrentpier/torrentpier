@@ -165,6 +165,9 @@ class IndexDataController
         }
 
         $btu = get_bt_userdata($userId);
+        if (!$btu) {
+            return $this->error(__('BT_NULL_RATIO_NONE'));
+        }
         $ratioNulled = (bool)$btu['ratio_nulled'];
         $userRatio = get_bt_ratio($btu);
 
