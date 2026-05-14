@@ -126,18 +126,20 @@ class CacheClearCommand extends Command
      */
     private function clearSystemCache(): void
     {
-        // Use injected config or fall back to constant
-        $cacheDir = \defined('CACHE_DIR') ? CACHE_DIR : $this->config->get('cache_dir');
-
-        if (files()->isDirectory($cacheDir)) {
-            FileSystemHelper::clearDirectory($cacheDir);
+        // Legacy path (storage/framework/cache); active caches live under cache.db_dir.
+        $legacyCacheDir = \defined('CACHE_DIR') ? CACHE_DIR : $this->config->get('cache_dir');
+        if ($legacyCacheDir && files()->isDirectory($legacyCacheDir)) {
+            FileSystemHelper::clearDirectory($legacyCacheDir);
         }
 
-        // Clear runtime cache using injected cache system
+        $activeCacheDir = $this->cacheSystem->getCacheBaseDir();
+        if ($activeCacheDir && files()->isDirectory($activeCacheDir)) {
+            FileSystemHelper::clearDirectory($activeCacheDir);
+        }
+
         try {
-            $this->cacheSystem->get_cache_obj('bb_cache')?->clean();
+            $this->cacheSystem->clearAll();
         } catch (Throwable) {
-            // Ignore if the cache is not available
         }
     }
 

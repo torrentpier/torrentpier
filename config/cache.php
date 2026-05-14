@@ -24,6 +24,8 @@ return [
         ],
     ],
     'prefix' => 'tp_',
+    // Single cache root for CLI and PHP-FPM; otherwise sys_get_temp_dir() diverges between them.
+    'db_dir' => CACHE_DIR . '/filecache/',
     'engines' => [
         'bb_cache' => ['file'],
         'bb_config' => ['file'],
