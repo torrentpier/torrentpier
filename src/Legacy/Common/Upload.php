@@ -147,6 +147,7 @@ class Upload
 
                     ImageService::read($this->file['tmp_name'])
                         ->scaleDown($maxWidth, $maxHeight)
+                        ->encodeUsingFileExtension($this->file_ext)
                         ->save($this->file['tmp_name']);
 
                     // Update file size after resize
@@ -250,7 +251,7 @@ class Upload
         clearstatcache(true, $path);
         while (files()->size($path) > $maxSize && $quality > $minQuality) {
             $quality = max($quality - 10, $minQuality);
-            ImageService::read($path)->save($path, quality: $quality);
+            ImageService::read($path)->encodeUsingFileExtension($this->file_ext, quality: $quality)->save($path);
             clearstatcache(true, $path);
         }
     }

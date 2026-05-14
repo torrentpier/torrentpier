@@ -38,7 +38,7 @@ class ImageService
      */
     public static function read(string $path): ImageInterface
     {
-        return self::getManager()->read($path);
+        return self::getManager()->decodePath($path);
     }
 
     /**
@@ -46,6 +46,6 @@ class ImageService
      */
     public static function create(int $width, int $height): ImageInterface
     {
-        return self::getManager()->create($width, $height);
+        return self::getManager()->createImage($width, $height);
     }
 }
