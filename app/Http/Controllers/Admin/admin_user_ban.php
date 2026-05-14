@@ -25,7 +25,7 @@ if ($submit) {
 
         $target_id = (int)$this_userdata['user_id'];
         if ($target_id === (int)user()->id) {
-            bb_die('You cannot ban yourself');
+            bb_die(__('BAN_SELF_FORBIDDEN'));
         }
 
         if (!getBanInfo($target_id)) {
