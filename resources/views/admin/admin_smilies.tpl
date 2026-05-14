@@ -6,7 +6,7 @@
 <p>{L_SMILE_DESC}</p>
 <br />
 
-<form method="post" action="{S_SMILEY_ACTION}">
+<form method="post" action="{S_SMILEY_ACTION}">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline">
@@ -50,7 +50,7 @@ function update_smiley(newimage)
 }
 </script>
 
-<form method="post" action="{S_SMILEY_ACTION}">
+<form method="post" action="{S_SMILEY_ACTION}">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline">
@@ -87,7 +87,7 @@ function update_smiley(newimage)
 <p>{L_SMILEY_IMPORT_INST}</p>
 <br />
 
-<form method="post" action="{S_SMILEY_ACTION}">
+<form method="post" action="{S_SMILEY_ACTION}">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline">

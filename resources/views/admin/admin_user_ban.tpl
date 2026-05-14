@@ -3,7 +3,7 @@
 <p>{L_BAN_EXPLAIN}</p>
 <br />
 
-<form method="post" name="post" action="{S_BANLIST_ACTION}">
+<form method="post" name="post" action="{S_BANLIST_ACTION}">{CSRF_FIELD}
 
 <table width="80%" class="forumline">
 	<tr>

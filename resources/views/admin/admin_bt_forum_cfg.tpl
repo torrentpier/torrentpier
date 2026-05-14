@@ -1,6 +1,6 @@
 <h1>{L_FORUM_CONFIG}</h1>
 
-<form action="{S_CONFIG_ACTION}" method="post">
+<form action="{S_CONFIG_ACTION}" method="post">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline wAuto">

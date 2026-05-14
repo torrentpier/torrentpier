@@ -3,7 +3,7 @@
 <p>{L_MASS_EMAIL_EXPLAIN}</p>
 <br/>
 
-<form method="post" action="{S_USER_ACTION}" onSubmit="return checkForm(this);">
+<form method="post" action="{S_USER_ACTION}" onSubmit="return checkForm(this);">{CSRF_FIELD}
     <table class="forumline">
         <tr>
             <th colspan="2">{L_COMPOSE}</th>

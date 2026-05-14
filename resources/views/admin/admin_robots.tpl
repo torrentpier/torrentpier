@@ -1,7 +1,7 @@
 <h1>{L_ROBOTS_TXT_EDITOR_TITLE}</h1>
 <br />
 
-<form action="{S_ACTION}" method="post">
+<form action="{S_ACTION}" method="post">{CSRF_FIELD}
     <table class="forumline">
         <tr>
             <th>{L_ROBOTS_TXT_EDITOR_TITLE}</th>

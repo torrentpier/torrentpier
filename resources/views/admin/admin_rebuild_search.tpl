@@ -45,7 +45,7 @@ function swap_values()
 
 <br />
 
-<form name="rebuild" method="post" action="{S_REBUILD_SEARCH_ACTION}" onsubmit="update_button(rebuild.submit);">
+<form name="rebuild" method="post" action="{S_REBUILD_SEARCH_ACTION}" onsubmit="update_button(rebuild.submit);">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline wAuto med">
@@ -145,7 +145,7 @@ function updateButton()
 
 <div class="spacer_2"></div>
 
-<form name="form_rebuild_progress" method="post" action="{S_REBUILD_SEARCH_ACTION}">
+<form name="form_rebuild_progress" method="post" action="{S_REBUILD_SEARCH_ACTION}">{CSRF_FIELD}
 
 <table class="forumline w80 med">
 	<tr>
