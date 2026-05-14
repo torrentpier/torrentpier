@@ -72,7 +72,7 @@ class Sitemap
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $forumUrls[] = [
-                'url' => \url()->forum((int)$row['forum_id'], $row['forum_name']),
+                'url' => url()->forum((int)$row['forum_id'], $row['forum_name']),
                 'time' => $row['last_topic_time'],
             ];
         }
@@ -96,7 +96,7 @@ class Sitemap
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $topicUrls[] = [
-                'url' => \url()->topic((int)$row['topic_id'], $row['topic_title']),
+                'url' => url()->topic((int)$row['topic_id'], $row['topic_title']),
                 'time' => $row['topic_last_post_time'],
             ];
         }
