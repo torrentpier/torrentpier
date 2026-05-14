@@ -90,7 +90,7 @@ thead tr {
 <p>{T_AUTH_EXPLAIN}</p>
 <br />
 
-<form method="post" action="{S_AUTH_ACTION}">
+<form method="post" action="{S_AUTH_ACTION}">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <div class="tScrollContainer" id="tScrollCont">
@@ -173,7 +173,7 @@ thead tr {
 <input type="hidden" name="{#POST_CAT_URL#}" value="{SELECTED_CAT}" />
 </form>
 
-<form method="post" action="{S_AUTH_ACTION}">
+<form method="post" action="{S_AUTH_ACTION}">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <p class="gen">{T_USER_OR_GROUPNAME}: <b>{USER_OR_GROUPNAME}</b></p>
@@ -260,7 +260,7 @@ function mark_changed (f_id, acl_id)
 <p>{L_USER_AUTH_EXPLAIN}</p>
 <br /><br />
 
-<form method="post" name="post" action="{S_AUTH_ACTION}">
+<form method="post" name="post" action="{S_AUTH_ACTION}">{CSRF_FIELD}
 <input type="hidden" name="mode" value="edit" />
 {S_HIDDEN_FIELDS}
 
@@ -296,7 +296,7 @@ function mark_changed (f_id, acl_id)
 <p>{L_GROUP_AUTH_EXPLAIN}</p>
 <br /><br />
 
-<form method="post" action="{S_AUTH_ACTION}">
+<form method="post" action="{S_AUTH_ACTION}">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline wAuto">

@@ -8,7 +8,7 @@
 <a href="admin_board.php?mode=config_mods">{L_CONFIG_MODS}</a>
 <br /><br />
 
-<form action="{S_CONFIG_ACTION}" method="post">
+<form action="{S_CONFIG_ACTION}" method="post">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline">
@@ -155,7 +155,7 @@
 <a href="admin_board.php?mode=config_mods" class="bold">{L_CONFIG_MODS}</a>
 <br /><br />
 
-<form action="{S_CONFIG_ACTION}" method="post">
+<form action="{S_CONFIG_ACTION}" method="post">{CSRF_FIELD}
 {S_HIDDEN_FIELDS}
 
 <table class="forumline">

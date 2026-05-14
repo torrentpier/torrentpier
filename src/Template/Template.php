@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Str;
 use RuntimeException;
+use TorrentPier\Http\Csrf;
 use Twig\Environment;
 
 /**
@@ -466,6 +467,14 @@ class Template
         }
         $this->variables['TEMPLATE'] ??= $tpl;
         $this->variables['TEMPLATE_NAME'] ??= $this->templateName;
+
+        // CSRF helpers for legacy .tpl forms.
+        // Token() returns '' for guests outside an active session — emit the
+        // input anyway, the middleware will reject the eventual POST.
+        $token = Csrf::token();
+        $this->variables['CSRF_TOKEN'] ??= $token;
+        $this->variables['CSRF_FIELD'] ??= '<input type="hidden" name="'
+            . Csrf::FIELD . '" value="' . htmlspecialchars($token, ENT_QUOTES) . '">';
 
         $this->twig->addGlobal('V', $this->variables);
     }

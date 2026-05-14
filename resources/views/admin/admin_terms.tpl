@@ -3,7 +3,7 @@
 <p>{L_TERMS_EXPLAIN}</p>
 <br />
 
-<form action="{S_ACTION}" method="post">
+<form action="{S_ACTION}" method="post">{CSRF_FIELD}
 	<table class="forumline">
 		<tr>
 			<th>{L_TERMS}</th>

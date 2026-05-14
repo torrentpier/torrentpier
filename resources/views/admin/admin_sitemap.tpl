@@ -58,7 +58,7 @@
 
 <h1>{L_SITEMAP_ADMIN}</h1>
 
-<form action="admin_sitemap.php" method="post">
+<form action="admin_sitemap.php" method="post">{CSRF_FIELD}
     <table class="forumline">
         <tr class="row1">
             <td width="25%"><span class="gen"><b>{L_INFORMATION}:</b></span></td>
