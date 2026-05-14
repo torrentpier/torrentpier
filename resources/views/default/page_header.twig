@@ -135,6 +135,9 @@ function post2url (url, params) {
 	f.setAttribute('method', 'post');
 	f.setAttribute('action', url);
 	params['form_token'] = '{{ FORM_TOKEN }}';
+	// Native HTMLFormElement.submit() does not dispatch the "submit" event,
+	// so the delegated jQuery handler in main.js cannot inject _token here.
+	params['_token'] = '{{ csrf_token() }}';
 	for (var k in params) {
 		var h = document.createElement('input');
 		h.setAttribute('type', 'hidden');
