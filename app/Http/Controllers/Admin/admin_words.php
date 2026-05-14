@@ -40,11 +40,14 @@ if ($mode != '') {
                 }
 
                 $word_info = DB()->sql_fetchrow($result);
+                if (!$word_info) {
+                    bb_die(__('NO_WORD_SELECTED'), 404);
+                }
                 $s_hidden_fields .= '<input type="hidden" name="id" value="' . $word_id . '" />';
                 $word = $word_info['word'];
                 $replacement = $word_info['replacement'];
             } else {
-                bb_die(__('NO_WORD_SELECTED'));
+                bb_die(__('NO_WORD_SELECTED'), 400);
             }
         }
 
@@ -83,24 +86,38 @@ if ($mode != '') {
         censor()->reload(); // Reload the singleton instance with updated words
         $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_WORDADMIN'), '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
-        bb_die($message);
+        bb_die($message, 200);
     } elseif ($mode == 'delete') {
         $word_id = request()->getInt('id');
 
-        if ($word_id) {
+        if (!$word_id) {
+            bb_die(__('NO_WORD_SELECTED'), 400);
+        }
+
+        if (request()->post->has('confirm')) {
             $sql = 'DELETE FROM ' . BB_WORDS . " WHERE word_id = {$word_id}";
 
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not remove data from words table');
             }
 
+            if (DB()->affected_rows() < 1) {
+                bb_die(__('NO_WORD_SELECTED'), 404);
+            }
+
             datastore()->update('censor');
             censor()->reload(); // Reload the singleton instance with updated words
 
-            bb_die(__('WORD_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_WORDADMIN'), '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
-        } else {
-            bb_die(__('NO_WORD_SELECTED'));
+            bb_die(__('WORD_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_WORDADMIN'), '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
         }
+
+        $hidden_fields = '<input type="hidden" name="mode" value="delete" />';
+        $hidden_fields .= '<input type="hidden" name="id" value="' . $word_id . '" />';
+
+        print_confirmation([
+            'FORM_ACTION' => 'admin_words.php',
+            'HIDDEN_FIELDS' => $hidden_fields,
+        ]);
     }
 } else {
     $sql = 'SELECT * FROM ' . BB_WORDS . ' ORDER BY word';

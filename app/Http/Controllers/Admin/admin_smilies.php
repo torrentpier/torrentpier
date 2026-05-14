@@ -108,7 +108,7 @@ if (request()->has('import_pack')) {
             }
         }
 
-        bb_die(__('SMILEY_IMPORT_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+        bb_die(__('SMILEY_IMPORT_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
     } else {
         // Display the script to get the smile_pak cfg file
         $smile_paks_select = '<select name="smile_pak"><option value="">' . __('SELECT_PAK') . '</option>';
@@ -154,7 +154,7 @@ if (request()->has('import_pack')) {
         exit;
     }
 
-    bb_die(sprintf(__('EXPORT_SMILES'), '<a href="admin_smilies.php?export_pack=send">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+    bb_die(sprintf(__('EXPORT_SMILES'), '<a href="admin_smilies.php?export_pack=send">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
 } elseif (request()->has('add')) {
     $filename_list = '';
     for ($i = 0, $iMax = count($smiley_images); $i < $iMax; $i++) {
@@ -174,7 +174,7 @@ if (request()->has('import_pack')) {
 } elseif ($mode != '') {
     switch ($mode) {
         case 'delete':
-            $confirmed = request()->has('confirm');
+            $confirmed = request()->post->has('confirm');
             $smiley_id = request()->getInt('id');
 
             if ($confirmed) {
@@ -185,7 +185,7 @@ if (request()->has('import_pack')) {
                 }
 
                 datastore()->update('smile_replacements');
-                bb_die(__('SMILEY_DEL_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+                bb_die(__('SMILEY_DEL_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
             } else {
                 $hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
                 $hidden_fields .= '<input type="hidden" name="id" value="' . $smiley_id . '" />';
@@ -206,6 +206,9 @@ if (request()->has('import_pack')) {
                 bb_die('Could not obtain emoticon information');
             }
             $smile_data = DB()->sql_fetchrow($result);
+            if (!$smile_data) {
+                bb_die(__('PAGE_NOT_FOUND'), 404);
+            }
 
             $filename_list = $smiley_edit_img = '';
             for ($i = 0, $iMax = count($smiley_images); $i < $iMax; $i++) {
@@ -257,7 +260,7 @@ if (request()->has('import_pack')) {
             }
             datastore()->update('smile_replacements');
 
-            bb_die(__('SMILEY_EDIT_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('SMILEY_EDIT_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
             break;
 
         case 'savenew':
@@ -283,7 +286,7 @@ if (request()->has('import_pack')) {
             }
             datastore()->update('smile_replacements');
 
-            bb_die(__('SMILEY_ADD_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('SMILEY_ADD_SUCCESS') . '<br /><br />' . sprintf(__('CLICK_RETURN_SMILEADMIN'), '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
             break;
     }
 } else {

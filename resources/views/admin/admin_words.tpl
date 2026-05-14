@@ -57,7 +57,7 @@
         <tr>
             <td class="catBottom" colspan="2">
                 {S_HIDDEN_FIELDS}
-                <input type="reset" value="{L_CANCEL}" class="liteoption"/>
+                <a class="liteoption" href="admin_words.php">{L_CANCEL}</a>
                 <input type="submit" name="save" value="{L_SUBMIT}" class="mainoption"/>
             </td>
         </tr>
