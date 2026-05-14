@@ -145,6 +145,9 @@ class EditUserProfileController
                 $responseData['new_value'] = humn_size($numericValue, space: ' ');
 
                 $btu = get_bt_userdata($userId);
+                if (!$btu) {
+                    return $this->error(__('NO_USER_ID_SPECIFIED'));
+                }
                 $btu[$field] = $numericValue;
                 $responseData['update_ids']['u_ratio'] = (string)get_bt_ratio($btu);
                 CACHE('bb_cache')->rm('btu_' . $userId);

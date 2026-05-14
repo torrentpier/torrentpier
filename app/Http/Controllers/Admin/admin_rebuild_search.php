@@ -49,7 +49,7 @@ if (request()->has('cancel_button')) {
 		");
     }
 
-    bb_die(sprintf(__('REBUILD_SEARCH_ABORTED'), $last_session_data['end_post_id']) . '<br /><br />' . sprintf(__('CLICK_RETURN_REBUILD_SEARCH'), '<a href="admin_rebuild_search.php">', '</a>'));
+    bb_die(sprintf(__('REBUILD_SEARCH_ABORTED'), $last_session_data['end_post_id']) . '<br /><br />' . sprintf(__('CLICK_RETURN_REBUILD_SEARCH'), '<a href="admin_rebuild_search.php">', '</a>'), 200);
 }
 
 // from which post to start processing
@@ -62,7 +62,9 @@ $total_posts = get_total_posts();
 $clear_search = request()->getInt('clear_search');
 
 // get the number of total/session posts already processed
-$total_posts_processed = ($start != 0) ? get_total_posts('before', $last_session_data['end_post_id']) : 0;
+$total_posts_processed = !empty($last_session_data['end_post_id'])
+    ? get_total_posts('before', $last_session_data['end_post_id'])
+    : 0;
 $session_posts_processed = ($mode == 'refresh') ? get_processed_posts('session', $last_session_data) : 0;
 
 // find how many posts aren't processed
@@ -71,6 +73,8 @@ $total_posts_processing = $total_posts - $total_posts_processed;
 // how many posts to process in this session
 $session_posts_processing = request()->has('session_posts_processing') ? request()->getInt('session_posts_processing') : null;
 if ($session_posts_processing !== null) {
+    // reject negative input that would break downstream math/SQL
+    $session_posts_processing = max(0, $session_posts_processing);
     if ($mode == 'submit') {
         // check if we passed over total_posts just after submitting
         if ($session_posts_processing + $total_posts_processed > $total_posts) {
@@ -84,8 +88,8 @@ if ($session_posts_processing !== null) {
     $session_posts_processing = (!$total_posts_processing) ? $total_posts : $total_posts_processing;
 }
 
-// how many posts to process per cycle
-$post_limit = request()->getInt('post_limit', $def_post_limit);
+// how many posts to process per cycle (clamp to avoid negative LIMIT in SQL)
+$post_limit = max(0, request()->getInt('post_limit', $def_post_limit));
 
 // correct the post_limit when we pass over it
 if ($session_posts_processed + $post_limit > $session_posts_processing) {
@@ -94,7 +98,7 @@ if ($session_posts_processed + $post_limit > $session_posts_processing) {
 
 // how much time to wait per cycle
 if (request()->has('time_limit')) {
-    $time_limit = request()->getInt('time_limit');
+    $time_limit = max(0, request()->getInt('time_limit'));
 } else {
     $time_limit = $def_time_limit;
     $time_limit_explain = __('TIME_LIMIT_EXPLAIN');
@@ -118,12 +122,12 @@ if (request()->has('time_limit')) {
 }
 
 // how much time to wait between page refreshes
-$refresh_rate = request()->getInt('refresh_rate', $def_refresh_rate);
+$refresh_rate = max(0, request()->getInt('refresh_rate', $def_refresh_rate));
 
-// check if the user gave wrong input
+// check if the user gave wrong input — every value must be strictly positive
 if ($mode == 'submit') {
-    if (($session_posts_processing || $post_limit || $refresh_rate || $time_limit) <= 0) {
-        bb_die(__('WRONG_INPUT') . '<br /><br />' . sprintf(__('CLICK_RETURN_REBUILD_SEARCH'), '<a href="admin_rebuild_search.php">', '</a>'));
+    if ($session_posts_processing <= 0 || $post_limit <= 0 || $refresh_rate <= 0 || $time_limit <= 0) {
+        bb_die(__('WRONG_INPUT') . '<br /><br />' . sprintf(__('CLICK_RETURN_REBUILD_SEARCH'), '<a href="admin_rebuild_search.php">', '</a>'), 400);
     }
 }
 
@@ -163,7 +167,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $timer_expired = false;
     $words_sql = [];
 
-    while ($row = DB()->fetch_next($result) && !$timer_expired) {
+    while (($row = DB()->fetch_next($result)) && !$timer_expired) {
         set_time_limit(600);
         $start_post_id = ($num_rows == 0) ? $row['post_id'] : $start_post_id;
         $end_post_id = $row['post_id'];
@@ -235,7 +239,10 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $total_posts_processed = get_total_posts('before', $last_session_data['end_post_id']);
     $total_posts = get_total_posts();
 
-    if ($session_posts_processed < $session_posts_processing && $total_posts_processed < $total_posts) {
+    // Without this exhaustion guard, the next refresh ends up at start=1 and overwrites the session counters.
+    $exhausted = ($num_rows == 0);
+
+    if (!$exhausted && $session_posts_processed < $session_posts_processing && $total_posts_processed < $total_posts) {
         $form_parameters = '&start=' . ($end_post_id + 1);
         $form_parameters .= '&session_posts_processing=' . $session_posts_processing;
         $form_parameters .= '&post_limit=' . $post_limit;
@@ -264,12 +271,12 @@ if ($mode == 'submit' || $mode == 'refresh') {
         $processing_messages .= ($session_posts_processed < $session_posts_processing) ? sprintf(__('DELETED_POSTS'), $session_posts_processing - $session_posts_processed) : '';
         $processing_messages .= ($total_posts_processed == $total_posts) ? __('ALL_POSTS_PROCESSED') : __('ALL_SESSION_POSTS_PROCESSED');
 
-        // if we have processed all the db posts we need to update the rebuild_status
-        DB()->query('UPDATE ' . BB_SEARCH_REBUILD . ' SET
+        if (($exhausted || $total_posts_processed >= $total_posts) && $last_session_id) {
+            DB()->query('UPDATE ' . BB_SEARCH_REBUILD . ' SET
 				rebuild_session_status = ' . REBUILD_SEARCH_COMPLETED . "
 			WHERE rebuild_session_id = {$last_session_id}
-				AND end_post_id = {$max_post_id}
 		");
+        }
 
         // optimize all search tables when finished
         $table_ary = [BB_POSTS_SEARCH];
@@ -443,10 +450,12 @@ function get_db_sizes()
     return [$search_data_size, $search_index_size, $search_data_size + $search_index_size];
 }
 
-// get the latest post_id in the forum
 function get_latest_post_id()
 {
-    $row = DB()->fetch_row('SELECT MAX(post_id) as post_id FROM ' . BB_POSTS_TEXT);
+    $row = DB()->fetch_row('SELECT MAX(pt.post_id) AS post_id
+		FROM ' . BB_POSTS_TEXT . ' pt
+		INNER JOIN ' . BB_POSTS . ' p ON p.post_id = pt.post_id
+		WHERE p.poster_id NOT IN(' . BOT_UID . ')');
 
     return (int)$row['post_id'];
 }
@@ -505,16 +514,18 @@ function get_processed_posts(string $mode = 'session', array $session_data = [])
     return (int)$row['posts'];
 }
 
-// how many posts are in the db before or after a specific post_id
-// after/before require and the post_id
+// how many indexable posts (excluding bot posts) are in the db before or after a specific post_id
+// after/before require the post_id; the bot filter must mirror the main SELECT or the progress counters drift
 function get_total_posts($mode = 'after', $post_id = 0)
 {
+    $where = 'WHERE p.poster_id NOT IN(' . BOT_UID . ')';
     if ($post_id) {
-        $sql = 'SELECT COUNT(post_id) as total_posts FROM ' . BB_POSTS_TEXT . '
-			WHERE post_id ' . (($mode == 'after') ? '>= ' : '<= ') . (int)$post_id;
-    } else {
-        $sql = 'SELECT COUNT(*) as total_posts FROM ' . BB_POSTS_TEXT;
+        $where .= ' AND pt.post_id ' . (($mode == 'after') ? '>= ' : '<= ') . (int)$post_id;
     }
+    $sql = 'SELECT COUNT(pt.post_id) AS total_posts
+		FROM ' . BB_POSTS_TEXT . ' pt
+		INNER JOIN ' . BB_POSTS . " p ON p.post_id = pt.post_id
+		{$where}";
 
     $row = DB()->fetch_row($sql);
     $totalPosts = (int)$row['total_posts'];
