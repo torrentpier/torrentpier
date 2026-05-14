@@ -113,12 +113,8 @@ final class Response
         $response = new BinaryFileResponse($path);
 
         if ($filename !== null) {
-            // Create ASCII fallback for non-ASCII filenames
-            $fallback = preg_replace('/[^\x20-\x7E]/', '_', $filename);
-            if ($fallback === '' || $fallback === null) {
-                $fallback = 'download';
-            }
-            $response->setContentDisposition($disposition, $filename, $fallback);
+            $filename = self::sanitizeDispositionFilename($filename);
+            $response->setContentDisposition($disposition, $filename, self::buildDispositionFallback($filename));
         } else {
             $response->setContentDisposition($disposition);
         }
@@ -300,7 +296,12 @@ final class Response
     {
         $response = new BinaryFileResponse($path);
         $response->headers->set('Content-Type', 'application/x-bittorrent');
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
+        $filename = self::sanitizeDispositionFilename($filename);
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $filename,
+            self::buildDispositionFallback($filename, 'download.torrent'),
+        );
 
         return $response;
     }
@@ -317,17 +318,37 @@ final class Response
             'Content-Type' => 'application/x-bittorrent',
         ]);
 
-        // Create ASCII fallback for non-ASCII filenames
-        $fallback = preg_replace('/[^\x20-\x7E]/', '_', $filename);
-        if ($fallback === '' || $fallback === null) {
-            $fallback = 'download.torrent';
-        }
-
+        $filename = self::sanitizeDispositionFilename($filename);
         $response->headers->set(
             'Content-Disposition',
-            $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename, $fallback),
+            $response->headers->makeDisposition(
+                ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+                $filename,
+                self::buildDispositionFallback($filename, 'download.torrent'),
+            ),
         );
 
         return $response;
+    }
+
+    /**
+     * Strip characters that RFC 6266 disallows in Content-Disposition `filename` / `filename*`.
+     * Symfony's HeaderUtils::makeDisposition throws when "/" or "\" appear in either parameter
+     * (browsers reject them anyway and most replace with "_" on save).
+     */
+    private static function sanitizeDispositionFilename(string $filename): string
+    {
+        return str_replace(['/', '\\'], '_', $filename);
+    }
+
+    /**
+     * Build an ASCII fallback for the `filename` parameter of Content-Disposition.
+     * Non-ASCII and "%" are forbidden in the fallback per RFC 6266.
+     */
+    private static function buildDispositionFallback(string $filename, string $default = 'download'): string
+    {
+        $fallback = preg_replace('/[^\x20-\x7E]|%/', '_', $filename);
+
+        return ($fallback === '' || $fallback === null) ? $default : $fallback;
     }
 }
