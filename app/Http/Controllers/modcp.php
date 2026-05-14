@@ -51,7 +51,7 @@ function return_msg_mcp(string $status_msg, int $topic_id, array $req_topics, in
         $message .= sprintf(__('CLICK_RETURN_TOPIC'), '<a href="' . TOPIC_URL . $topic_id . '">', '</a>');
         $message .= '<br /><br />';
     } elseif (count($req_topics) != 1) {
-        $message .= sprintf(__('CLICK_RETURN_MODCP'), '<a href="' . FORUM_URL . "{$forum_id}&amp;mod=1" . '">', '</a>');
+        $message .= sprintf(__('CLICK_RETURN_MODCP'), '<a href="' . FORUM_URL . "{$forum_id}?mod=1" . '">', '</a>');
         $message .= '<br /><br />';
     }
 
