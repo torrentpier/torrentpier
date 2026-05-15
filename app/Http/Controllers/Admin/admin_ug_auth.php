@@ -331,7 +331,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
     page_cfg('quirks_mode', true);
 
     if (!$group_data = Group::get_group_data($group_id)) {
-        bb_die(__('GROUP_NOT_EXIST'));
+        bb_die(__('GROUP_NOT_EXIST'), 404);
     }
 
     $forums = forum_tree();

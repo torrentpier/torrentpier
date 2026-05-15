@@ -245,7 +245,7 @@ if (request()->has('import_pack')) {
 
             // If no code was entered complain
             if ($smile_code == '' || $smile_url == '') {
-                bb_die(__('FIELDS_EMPTY'));
+                bb_die(__('FIELDS_EMPTY'), 400);
             }
 
             // Convert < and > to proper htmlentities for parsing
@@ -271,7 +271,7 @@ if (request()->has('import_pack')) {
 
             // If no code was entered complain
             if ($smile_code == '' || $smile_url == '') {
-                bb_die(__('FIELDS_EMPTY'));
+                bb_die(__('FIELDS_EMPTY'), 400);
             }
 
             // Convert < and > to proper htmlentities for parsing
