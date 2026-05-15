@@ -51,6 +51,10 @@ class Post
         // Check subject
         if (!empty($subject)) {
             $subject = str_replace('&amp;', '&', $subject);
+            if (mb_strlen($subject, 'UTF-8') > 250) {
+                $too_long = __('SUBJECT_TOO_LONG') !== 'SUBJECT_TOO_LONG' ? __('SUBJECT_TOO_LONG') : 'Subject must be 250 characters or fewer.';
+                $error_msg .= (!empty($error_msg)) ? '<br />' . $too_long : $too_long;
+            }
         } elseif ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
             $error_msg .= (!empty($error_msg)) ? '<br />' . __('EMPTY_SUBJECT') : __('EMPTY_SUBJECT');
         }

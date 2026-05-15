@@ -70,7 +70,7 @@ $lastvisit = (!IS_GUEST) ? userdata('user_lastvisit') : '';
 $search_id = (request()->query->has('search_id') && verify_id(request()->query->get('search_id'), SEARCH_ID_LENGTH)) ? request()->query->get('search_id') : '';
 $session_id = userdata('session_id');
 
-$status = request()->getArray('status');
+$status = array_map('intval', request()->getArray('status'));
 
 $cat_forum = $tor_to_show = $search_in_forums_ary = [];
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';

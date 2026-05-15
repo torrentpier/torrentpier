@@ -35,6 +35,10 @@
  * ===========================================================================
  */
 
+// Modes that mutate state without a confirmation step. Requests for these
+// must arrive via POST so the CSRF middleware is exercised.
+const MODCP_IMMEDIATE_MODES = ['lock', 'unlock', 'post_pin', 'post_unpin', 'set_download', 'unset_download'];
+
 //
 // Functions
 //
@@ -117,6 +121,10 @@ if (request()->has('mode')) {
     }
 }
 
+if (in_array($mode, MODCP_IMMEDIATE_MODES, true) && !request()->isPost()) {
+    bb_die('Method Not Allowed', 405);
+}
+
 // Obtain relevant data
 if ($topic_id) {
     $sql = '
@@ -130,7 +138,7 @@ if ($topic_id) {
 	";
 
     if (!$topic_row = DB()->fetch_row($sql)) {
-        bb_die(__('INVALID_TOPIC_ID_DB'));
+        bb_die(__('INVALID_TOPIC_ID_DB'), 404);
     }
 
     $forum_id = $topic_row['forum_id'];
@@ -140,13 +148,13 @@ if ($topic_id) {
     $sql = 'SELECT forum_name, forum_topics FROM ' . BB_FORUMS . " WHERE forum_id = {$forum_id} LIMIT 1";
 
     if (!$topic_row = DB()->fetch_row($sql)) {
-        bb_die(__('FORUM_NOT_EXIST'));
+        bb_die(__('FORUM_NOT_EXIST'), 404);
     }
 
     $forum_name = $topic_row['forum_name'];
     $forum_topics = (!$topic_row['forum_topics']) ? 1 : $topic_row['forum_topics'];
 } else {
-    bb_die('Invalid request');
+    bb_die('Invalid request', 400);
 }
 
 // Check if user did or did not confirm. If they did not, forward them to the last page they were on
@@ -179,7 +187,7 @@ if ($mode == 'ip') {
 
 // Exit if user not authorized
 if (!$is_auth['auth_mod']) {
-    bb_die(__('NOT_MODERATOR'));
+    bb_die(__('NOT_MODERATOR'), 403);
 }
 
 // Redirect to login page if not admin session

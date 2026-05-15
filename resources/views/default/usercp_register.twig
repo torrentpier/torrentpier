@@ -71,29 +71,29 @@
         </tr>
         <tr>
             <td class="prof-title">{{ __('USERNAME') }}: *</td>
-            <td>{% if CAN_EDIT_USERNAME %}<input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{{ USERNAME }}"/>{% else %}<b>{{ USERNAME }}</b>{% endif %}&nbsp;<span id="check_name"></span></td>
+            <td>{% if CAN_EDIT_USERNAME %}<input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="30" autocomplete="username" value="{{ USERNAME }}"/>{% else %}<b>{{ USERNAME }}</b>{% endif %}&nbsp;<span id="check_name"></span></td>
         </tr>
         <tr>
             <td class="prof-title">{{ __('EMAIL') }}: * {% if EDIT_PROFILE %}{% elseif config('auth.registration.email_activation') %}<br/><h6>{{ __('EMAIL_EXPLAIN') }}</h6>{% endif %}</td>
-            <td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{{ USER_EMAIL }}"{% if EDIT_PROFILE and not ADM_EDIT and not IS_ADMIN %}{% if not config('mail.enabled') or config('mail.email_change_disabled') %} readonly style="color: gray;"{% endif %}{% endif %} />&nbsp;<span id="check_email"></span></td>
+            <td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="email" name="user_email" size="35" maxlength="230" autocomplete="email" value="{{ USER_EMAIL }}"{% if EDIT_PROFILE and not ADM_EDIT and not IS_ADMIN %}{% if not config('mail.enabled') or config('mail.email_change_disabled') %} readonly style="color: gray;"{% endif %}{% endif %} />&nbsp;<span id="check_email"></span></td>
         </tr>
         {% if EDIT_PROFILE and not ADM_EDIT %}
         <tr>
             <td class="prof-title">{{ __('CURRENT_PASSWORD') }}: * <br/><h6>{{ __('CONFIRM_PASSWORD_EXPLAIN') }}</h6></td>
-            <td><input class="show_pass_input" type="password" name="cur_pass" size="35" maxlength="32" value=""/>&nbsp;<label><input type="checkbox" class="password_show_checkbox">&nbsp;{{ __('PASSWORD_SHOW_BTN') }}</label></td>
+            <td><input class="show_pass_input" type="password" name="cur_pass" size="35" maxlength="128" autocomplete="current-password" value=""/>&nbsp;<label><input type="checkbox" class="password_show_checkbox">&nbsp;{{ __('PASSWORD_SHOW_BTN') }}</label></td>
         </tr>
         {% endif %}
         <tr>
             <td class="prof-title">{% if EDIT_PROFILE %}{{ __('NEW_PASSWORD') }}: * <br/><h6>{{ __('PASSWORD_IF_CHANGED') }}</h6>{% else %}{{ __('PASSWORD') }}: *{% endif %}</td>
             <td>
-                <input id="pass" type="{% if SHOW_PASS %}text{% else %}password{% endif %}" name="new_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="autocomplete" data-password-length="{{ constant('PASSWORD_MIN_LENGTH') }}" title="{{ __('AUTOCOMPLETE') }}">&#9668;</span>&nbsp;<i class="med">{{ PASSWORD_LONG }}</i>
+                <input id="pass" type="{% if SHOW_PASS %}text{% else %}password{% endif %}" name="new_pass" size="35" maxlength="128" autocomplete="new-password" value=""/>&nbsp;<span id="autocomplete" data-password-length="{{ constant('PASSWORD_MIN_LENGTH') }}" title="{{ __('AUTOCOMPLETE') }}">&#9668;</span>&nbsp;<i class="med">{{ PASSWORD_LONG }}</i>
             </td>
         </tr>
         <tr>
             <td class="prof-title">{{ __('CONFIRM_PASSWORD') }}: * {% if EDIT_PROFILE %}<br/>
                 <h6>{{ __('PASSWORD_CONFIRM_IF_CHANGED') }}</h6>{% endif %}</td>
             <td>
-                <input id="pass_confirm" onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('#pass').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="{% if SHOW_PASS %}text{% else %}password{% endif %}" name="cfm_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="check_pass"></span>
+                <input id="pass_confirm" onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('#pass').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="{% if SHOW_PASS %}text{% else %}password{% endif %}" name="cfm_pass" size="35" maxlength="128" autocomplete="new-password" value=""/>&nbsp;<span id="check_pass"></span>
             </td>
         </tr>
         {% if config('auth.invites.enabled') and not EDIT_PROFILE %}

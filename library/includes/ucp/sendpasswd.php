@@ -20,54 +20,45 @@ $need_captcha = (request()->query->get('mode') == 'sendpassword' && !IS_ADMIN &&
 
 if (request()->post->has('submit')) {
     if ($need_captcha && !bb_captcha('check')) {
-        bb_die(__('CAPTCHA_WRONG'));
+        bb_die(__('CAPTCHA_WRONG'), 400);
     }
     $email = (!empty(request()->post->get('email'))) ? trim(strip_tags(htmlspecialchars(request()->post->get('email')))) : '';
+
     $sql = 'SELECT * FROM ' . BB_USERS . " WHERE user_email = '" . DB()->escape($email) . "'";
-    if ($result = DB()->sql_query($sql)) {
-        if ($row = DB()->sql_fetchrow($result)) {
-            if (!$row['user_active']) {
-                bb_die(__('NO_SEND_ACCOUNT_INACTIVE'));
-            }
-            if (in_array($row['user_level'], [MOD, ADMIN])) {
-                bb_die(__('NO_SEND_ACCOUNT'));
-            }
-
-            $username = $row['username'];
-            $user_id = $row['user_id'];
-
-            $user_actkey = Str::random(ACTKEY_LENGTH);
-            $user_password = Str::random(PASSWORD_MIN_LENGTH);
-
-            $sql = 'UPDATE ' . BB_USERS . "
-				SET user_newpasswd = '{$user_password}', user_actkey = '{$user_actkey}', user_actkey_time = " . TIMENOW . '
-				WHERE user_id = ' . $row['user_id'];
-            if (!DB()->sql_query($sql)) {
-                bb_die('Could not update new password information');
-            }
-
-            // Sending email
-            $emailer = new TorrentPier\Emailer;
-
-            $emailer->set_to($row['user_email'], $username);
-            $emailer->set_subject(__('EMAILER_SUBJECT')['USER_ACTIVATE_PASSWD']);
-
-            $emailer->set_template('user_activate_passwd', $row['user_lang']);
-            $emailer->assign_vars([
-                'USERNAME' => $username,
-                'PASSWORD' => $user_password,
-                'U_ACTIVATE' => make_url(ACTIVATE_URL . $user_id . '/' . $user_actkey . '/'),
-            ]);
-
-            $emailer->send();
-
-            bb_die(__('PASSWORD_UPDATED'));
-        } else {
-            bb_die(__('NO_EMAIL_MATCH'));
-        }
-    } else {
+    if (!$result = DB()->sql_query($sql)) {
         bb_die('Could not obtain user information for sendpassword');
     }
+    $row = DB()->sql_fetchrow($result);
+
+    $eligible = $row && $row['user_active'] && !in_array($row['user_level'], [MOD, ADMIN], true);
+
+    if ($eligible) {
+        $username = $row['username'];
+        $user_id = $row['user_id'];
+
+        $user_actkey = Str::random(ACTKEY_LENGTH);
+        $user_password = Str::random(PASSWORD_MIN_LENGTH);
+
+        $sql = 'UPDATE ' . BB_USERS . "
+			SET user_newpasswd = '{$user_password}', user_actkey = '{$user_actkey}', user_actkey_time = " . TIMENOW . '
+			WHERE user_id = ' . $row['user_id'];
+        if (!DB()->sql_query($sql)) {
+            bb_die('Could not update new password information');
+        }
+
+        $emailer = new TorrentPier\Emailer;
+        $emailer->set_to($row['user_email'], $username);
+        $emailer->set_subject(__('EMAILER_SUBJECT')['USER_ACTIVATE_PASSWD']);
+        $emailer->set_template('user_activate_passwd', $row['user_lang']);
+        $emailer->assign_vars([
+            'USERNAME' => $username,
+            'PASSWORD' => $user_password,
+            'U_ACTIVATE' => make_url(ACTIVATE_URL . $user_id . '/' . $user_actkey . '/'),
+        ]);
+        $emailer->send();
+    }
+
+    bb_die(__('PASSWORD_UPDATED'), 200);
 } else {
     $email = $username = '';
 }

@@ -34,6 +34,21 @@ beforeEach(function () {
         $this->markTestSkipped("TorrentPier instance not reachable at {$this->base}");
     }
 
+    // Clear any leftover invalid-login lockouts so the captcha doesn't flap
+    // the admin re-login step below.
+    $lockoutDir = __DIR__ . '/../../storage/framework/cache/filecache/bb_login_err';
+    if (is_dir($lockoutDir)) {
+        $rii = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($lockoutDir, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST,
+        );
+        foreach ($rii as $entry) {
+            if ($entry->isFile()) {
+                @unlink($entry->getPathname());
+            }
+        }
+    }
+
     $this->cookieJar = [];
 });
 

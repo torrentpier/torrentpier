@@ -74,7 +74,7 @@ switch ($mode) {
     case 'newtopic':
     case 'new_rel':
         if (bf(userdata('user_opt'), 'user_opt', 'dis_topic')) {
-            bb_die(__('RULES_POST_CANNOT'));
+            bb_die(__('RULES_POST_CANNOT'), 403);
         }
         if ($topic_type == POST_ANNOUNCE) {
             $is_auth_type = 'auth_announce';
@@ -88,14 +88,14 @@ switch ($mode) {
     case 'reply':
     case 'quote':
         if (bf(userdata('user_opt'), 'user_opt', 'dis_post')) {
-            bb_die(__('RULES_REPLY_CANNOT'));
+            bb_die(__('RULES_REPLY_CANNOT'), 403);
         }
         $is_auth_type = 'auth_reply';
         break;
 
     case 'editpost':
         if (bf(userdata('user_opt'), 'user_opt', 'dis_post_edit')) {
-            bb_die(__('RULES_EDIT_CANNOT'));
+            bb_die(__('RULES_EDIT_CANNOT'), 403);
         }
         $is_auth_type = 'auth_edit';
         break;
@@ -123,7 +123,7 @@ switch ($mode) {
 
     case 'reply':
         if (!$topic_id) {
-            bb_die(__('NO_TOPIC_ID'));
+            bb_die(__('NO_TOPIC_ID'), 400);
         }
         $sql = 'SELECT f.*, t.*
 			FROM ' . BB_FORUMS . ' f, ' . BB_TOPICS . " t
@@ -171,9 +171,9 @@ if ($post_info = DB()->fetch_row($sql)) {
     $is_auth = auth(AUTH_ALL, $forum_id, userdata(), $post_info);
 
     if ($post_info['forum_status'] == FORUM_LOCKED && !$is_auth['auth_mod']) {
-        bb_die(__('FORUM_LOCKED'));
+        bb_die(__('FORUM_LOCKED'), 403);
     } elseif ($mode != 'newtopic' && $mode != 'new_rel' && $post_info['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
-        bb_die(__('TOPIC_LOCKED'));
+        bb_die(__('TOPIC_LOCKED'), 403);
     }
 
     if ($mode == 'editpost' || $mode == 'delete') {
@@ -210,7 +210,8 @@ if ($post_info = DB()->fetch_row($sql)) {
         $post_data['last_post'] = false;
     }
 } else {
-    bb_die(__('NO_SUCH_POST'));
+    $missingKey = ($mode === 'newtopic' || $mode === 'new_rel') ? 'FORUM_NOT_EXIST' : 'NO_SUCH_POST';
+    bb_die(__($missingKey), 404);
 }
 
 // The user is not authed, if they're not logged in then redirect

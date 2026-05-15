@@ -230,7 +230,7 @@ class BBCode
         $text = preg_replace_callback('#(\s*)\[code\](.+?)\[/code\](\s*)#s', [&$this, 'code_callback'], $text);
 
         // Escape tags inside titles in [quote="tilte"]
-        $text = preg_replace_callback('#(\[(quote|spoiler)=")(.+?)("\])#', [&$this, 'escape_titles_callback'], $text);
+        $text = preg_replace_callback('#(\[(quote|spoiler|acronym)=")(.+?)("\])#', [&$this, 'escape_titles_callback'], $text);
 
         // [url]
         $url_exp = '[\w\#!$%&~/.\-;:=,?@\p{Cyrillic}()\[\]+]+?';

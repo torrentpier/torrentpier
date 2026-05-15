@@ -447,6 +447,20 @@ $title_match = ($text_match_sql && ($params->val('title_only') || config()->get(
 // "Display as" mode (posts or topics)
 $post_mode = (!$dl_search && ($params->val('display_as') == $as_posts || request()->query->has('search_author')));
 
+// Require at least one user-supplied filter — otherwise an empty submission would
+// dump the entire forum.
+$has_user_criteria = $text_match_sql
+    || $params->val('poster_id')
+    || $params->val('forum')
+    || $params->val('topic')
+    || $prev_days
+    || $dl_search
+    || $new_posts
+    || $new_topics;
+if (!$items_found && !$has_user_criteria) {
+    redirect($url);
+}
+
 // Start building SQL
 $SQL = DB()->get_empty_sql_array();
 
@@ -1004,21 +1018,27 @@ function username_search($search_match)
     if (!empty($search_match)) {
         $username_search = str_replace('*', '%', clean_username($search_match));
 
-        $sql = '
-			SELECT username
-			FROM ' . BB_USERS . "
-			WHERE username LIKE '" . DB()->escape($username_search) . "'
-				AND user_id <> " . GUEST_UID . '
-			ORDER BY username
-			LIMIT 200
-		';
-
-        foreach (DB()->fetch_rowset($sql) as $row) {
-            $username = htmlCHR(stripslashes(html_entity_decode($row['username'])));
-            $username_list .= '<option value="' . $username . '">' . $username . '</option>';
-        }
-        if (!$username_list) {
+        // Require at least two literal characters to avoid dumping the whole user list with bare wildcards.
+        $literal = preg_replace('/[%_]/u', '', $username_search);
+        if (mb_strlen($literal, 'UTF-8') < 2) {
             $username_list = '<option value="">' . __('NO_MATCH') . '</option>';
+        } else {
+            $sql = '
+				SELECT username
+				FROM ' . BB_USERS . "
+				WHERE username LIKE '" . DB()->escape($username_search) . "'
+					AND user_id <> " . GUEST_UID . '
+				ORDER BY username
+				LIMIT 200
+			';
+
+            foreach (DB()->fetch_rowset($sql) as $row) {
+                $username = htmlCHR(stripslashes(html_entity_decode($row['username'])));
+                $username_list .= '<option value="' . $username . '">' . $username . '</option>';
+            }
+            if (!$username_list) {
+                $username_list = '<option value="">' . __('NO_MATCH') . '</option>';
+            }
         }
     }
 

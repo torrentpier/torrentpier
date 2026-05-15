@@ -132,7 +132,7 @@ $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
 
 if ($t_data['allow_porno_topic'] && bf(userdata('user_opt'), 'user_opt', 'user_porn_forums')) {
-    bb_die(__('ERROR_PORNO_FORUM'));
+    bb_die(__('ERROR_PORNO_FORUM'), 403);
 }
 
 if (userdata('session_admin') && request()->has('mod')) {
@@ -383,7 +383,7 @@ if ($postrow = DB()->fetch_rowset($sql)) {
     }
     $total_posts = count($postrow);
 } else {
-    bb_die(__('NO_POSTS_TOPIC'));
+    bb_die(__('NO_POSTS_TOPIC'), 404);
 }
 
 if (!$ranks = datastore()->get('ranks')) {

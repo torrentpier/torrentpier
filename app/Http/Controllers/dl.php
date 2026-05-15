@@ -17,7 +17,7 @@ $m3u = request()->getBool('m3u');
 set_die_append_msg();
 
 if (!$topic_id) {
-    bb_die(__('NO_ATTACHMENT_SELECTED'));
+    bb_die(__('NO_ATTACHMENT_SELECTED'), 400);
 }
 
 // Get topic data with torrent info
@@ -32,11 +32,11 @@ $sql = '
 ";
 
 if (!$t_data = DB()->fetch_row($sql)) {
-    bb_die(__('ERROR_NO_ATTACHMENT') . '[DB]');
+    bb_die(__('ERROR_NO_ATTACHMENT') . '[DB]', 404);
 }
 
 if (!$t_data['attach_ext_id']) {
-    bb_die(__('ERROR_NO_ATTACHMENT') . '[EXT_ID]');
+    bb_die(__('ERROR_NO_ATTACHMENT') . '[EXT_ID]', 404);
 }
 
 $forum_id = $t_data['forum_id'];
@@ -53,7 +53,7 @@ if (!$is_auth['auth_download']) {
 if ($m3u) {
     $torrServer = new TorrentPier\TorrServerAPI;
     if (!$m3uFile = $torrServer->getM3UPath($topic_id)) {
-        bb_die(__('ERROR_NO_ATTACHMENT') . '[M3U]');
+        bb_die(__('ERROR_NO_ATTACHMENT') . '[M3U]', 404);
     }
 
     $response = Response::download($m3uFile, basename($m3uFile));
@@ -65,14 +65,14 @@ if ($m3u) {
 // Check tor status for frozen downloads
 if (!IS_AM && $t_data['tor_status']) {
     if (isset(config()->get('tracker.tor_frozen')[$t_data['tor_status']]) && !(isset(config()->get('tracker.tor_frozen_author_download')[$t_data['tor_status']]) && TorrentPier\Topic\Guard::isAuthor($t_data['poster_id']))) {
-        bb_die(__('TOR_STATUS_FORBIDDEN') . __('TOR_STATUS_NAME.' . $t_data['tor_status']));
+        bb_die(__('TOR_STATUS_FORBIDDEN') . __('TOR_STATUS_NAME.' . $t_data['tor_status']), 403);
     }
 }
 
 // Check download limit
 $dlCounter = new TorrentPier\Torrent\DownloadCounter;
 if (!$dlCounter->recordDownload($topic_id, userdata('user_id'), IS_PREMIUM)) {
-    bb_die(__('DOWNLOAD_LIMIT_EXCEEDED'));
+    bb_die(__('DOWNLOAD_LIMIT_EXCEEDED'), 429);
 }
 
 // For torrents - add a passkey and send
@@ -87,7 +87,7 @@ if ($t_data['attach_ext_id'] == TORRENT_EXT_ID) {
 $file_path = TorrentPier\Attachment::getPath($topic_id);
 
 if (!files()->isFile($file_path)) {
-    bb_die(__('ERROR_NO_ATTACHMENT') . ' [HDD]');
+    bb_die(__('ERROR_NO_ATTACHMENT') . ' [HDD]', 404);
 }
 
 $ext = FileExtensions::getExtension($t_data['attach_ext_id']) ?? '';

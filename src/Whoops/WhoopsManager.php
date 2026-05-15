@@ -108,20 +108,25 @@ class WhoopsManager
     private function registerPlaceholderHandler(): void
     {
         $this->whoops->pushHandler(function ($e, $inspector, $run) {
-            // League\Route\Http\Exception (NotFound, MethodNotAllowed, ...) carries
-            // its own status code; render the engine's themed error page via bb_die()
-            // so the user sees a real header/footer instead of a bare placeholder line.
-            if ($e instanceof \League\Route\Http\Exception && \function_exists('bb_die')) {
-                $status = $e->getStatusCode();
-                // bb_die() runs the lang lookup internally, so pass the key
-                $message = $status === 404 ? 'PAGE_NOT_FOUND' : config()->get('logging.whoops.error_message');
-
-                try {
-                    bb_die($message, $status); // exits; templated page with proper status
-                } catch (Throwable) {
-                    // Fall through to bare placeholder if engine isn't bootstrapped enough
+            // Render the engine's themed error page via bb_die() so the user
+            // sees a real header/footer instead of a bare placeholder line.
+            $dispatch = function (string $message, int $status) use ($run): void {
+                if (\function_exists('bb_die')) {
+                    try {
+                        bb_die($message, $status); // exits on success
+                    } catch (Throwable) {
+                        // Engine not bootstrapped enough; fall through to placeholder.
+                    }
                 }
                 $run->sendHttpCode($status);
+            };
+
+            if ($e instanceof \League\Route\Http\Exception) {
+                $status = $e->getStatusCode();
+                $dispatch($status === 404 ? 'PAGE_NOT_FOUND' : config()->get('logging.whoops.error_message'), $status);
+            } elseif ($e instanceof \Symfony\Component\HttpFoundation\Exception\BadRequestException) {
+                // Strict InputBag throws on non-scalar/non-numeric — surface as 400, not 500.
+                $dispatch('Bad request', 400);
             }
 
             echo config()->get('logging.whoops.error_message');

@@ -967,19 +967,19 @@ function render_flag(string $code, bool $showName = true): string
     }
 
     if (!Countries::exists($code)) {
-        return $code;
+        return htmlCHR($code);
     }
 
     $flagIconFile = IMAGES_DIR . '/flags/' . $code . $iconExtension;
     if (!files()->isFile($flagIconFile)) {
-        return $code;
+        return htmlCHR($code);
     }
 
     $flagIconUrl = image_url('flags/' . $code . $iconExtension);
     $langName = Countries::getName($code);
     $countryName = $showName ? '&nbsp;' . str_short($langName, 20) : '';
 
-    return '<span title="' . $langName . '"><img src="' . $flagIconUrl . '" class="poster-flag" alt="' . $code . '">' . $countryName . '</span>';
+    return '<span title="' . htmlCHR($langName) . '"><img src="' . $flagIconUrl . '" class="poster-flag" alt="' . htmlCHR($code) . '">' . $countryName . '</span>';
 }
 
 function birthday_age($date)
@@ -1267,7 +1267,7 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
 
     // init the result
     $res = '';
-    if ($selected_row > count($listrow['lang_key'])) {
+    if (!isset($listrow['fields'][$selected_row])) {
         $selected_row = 0;
     }
 
@@ -1498,11 +1498,21 @@ function clean_text_match(?string $text, bool $ltrim_star = true, bool $die_if_e
         $text = Str::squish($text);
         $text = trim($text);
     } else {
+        if (config()->get('forum.allow_search_in_bool_mode')) {
+            // Strip MySQL BOOLEAN MODE meta chars that would otherwise raise
+            // a 1064 syntax error on payloads like "<x>", "@x", "(x", etc.
+            $text = strtr($text, ['<' => ' ', '>' => ' ', '(' => ' ', ')' => ' ', '~' => ' ', '@' => ' ']);
+            // Drop unbalanced double-quotes so phrase syntax stays well-formed.
+            if (substr_count($text, '"') % 2 !== 0) {
+                $text = str_replace('"', ' ', $text);
+            }
+            $text = Str::squish($text);
+        }
         $text = DB()->escape(trim($text));
     }
 
     if (!$text && $die_if_empty) {
-        bb_die(__('NO_SEARCH_MATCH'));
+        bb_die(__('NO_SEARCH_MATCH'), 200);
     }
 
     return $text;

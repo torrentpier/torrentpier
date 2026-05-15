@@ -16,12 +16,12 @@ use TorrentPier\Http\Response;
 
 // Get request parameters
 $type = request()->query->get('type', '');
-$id = request()->getInt('id');
+$idRaw = (string)request()->query->get('id', '');
 
-// Validate type and ID
-if (!in_array($type, ['f', 'u'], true) || $id < 0) {
+if (!in_array($type, ['f', 'u'], true) || !ctype_digit($idRaw)) {
     bb_simple_die(__('ATOM_ERROR'));
 }
+$id = (int)$idRaw;
 
 try {
     $generator = app(FeedGenerator::class);

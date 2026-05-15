@@ -41,14 +41,17 @@ class ChangeUserRankController
             $ranks = datastore()->get('ranks');
         }
 
-        $rankId = (int)($body['rank_id'] ?? 0);
-        $userId = (int)($body['user_id'] ?? 0);
+        if (!isset($body['rank_id']) || !is_numeric($body['rank_id'])) {
+            return $this->error('invalid rank_id');
+        }
+        $rankId = (int)$body['rank_id'];
+        $userId = isset($body['user_id']) && is_numeric($body['user_id']) ? (int)$body['user_id'] : 0;
 
         if (!$userId || !get_userdata($userId)) {
             return $this->error(__('NO_USER_ID_SPECIFIED'));
         }
 
-        if ($rankId != 0 && !isset($ranks[$rankId])) {
+        if ($rankId !== 0 && !isset($ranks[$rankId])) {
             return $this->error("invalid rank_id: $rankId");
         }
 
@@ -56,7 +59,9 @@ class ChangeUserRankController
 
         Sessions::cache_rm_user_sessions($userId);
 
-        $userRank = $rankId ? '<span class="' . $ranks[$rankId]['rank_style'] . '">' . $ranks[$rankId]['rank_title'] . '</span>' : '';
+        $userRank = $rankId
+            ? '<span class="' . htmlCHR((string)$ranks[$rankId]['rank_style']) . '">' . htmlCHR((string)$ranks[$rankId]['rank_title']) . '</span>'
+            : '';
 
         return $this->response([
             'html' => $rankId ? __('AWARDED_RANK') . "<b> $userRank </b>" : __('SHOT_RANK'),

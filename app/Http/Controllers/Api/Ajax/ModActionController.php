@@ -108,8 +108,7 @@ class ModActionController
      */
     private function handleEditTopicTitle(array $body): ResponseInterface
     {
-        $topicId = (int)($body['topic_id'] ?? 0);
-        $oldTitle = get_topic_title($topicId);
+        $topicId = isset($body['topic_id']) && is_numeric($body['topic_id']) ? (int)$body['topic_id'] : 0;
         $newTitle = clean_title((string)($body['topic_title'] ?? ''));
 
         if (!$topicId) {
@@ -119,10 +118,11 @@ class ModActionController
             return $this->error(__('DONT_MESSAGE_TITLE'));
         }
 
-        $tData = DB()->fetch_row('SELECT forum_id FROM ' . BB_TOPICS . " WHERE topic_id = $topicId LIMIT 1");
+        $tData = DB()->fetch_row('SELECT topic_title, forum_id FROM ' . BB_TOPICS . " WHERE topic_id = $topicId LIMIT 1");
         if (!$tData) {
             return $this->error(__('INVALID_TOPIC_ID_DB'));
         }
+        $oldTitle = $tData['topic_title'];
 
         if ($error = $this->verifyModRights($tData['forum_id'])) {
             return $error;
@@ -167,10 +167,14 @@ class ModActionController
      */
     private function handleProfileIp(array $body): ResponseInterface
     {
-        $userId = (int)($body['user_id'] ?? 0);
-        $profiledata = get_userdata($userId);
+        $userId = isset($body['user_id']) && is_numeric($body['user_id']) ? (int)$body['user_id'] : 0;
 
         if (!$userId) {
+            return $this->error(__('NO_USER_ID_SPECIFIED'));
+        }
+
+        $profiledata = get_userdata($userId);
+        if (!$profiledata) {
             return $this->error(__('NO_USER_ID_SPECIFIED'));
         }
 

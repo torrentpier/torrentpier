@@ -20,7 +20,7 @@ $user_id = (int)userdata('user_id');
 
 // Allow disable even when feature is off, so users aren't trapped with stale 2FA
 if (!two_factor()->isFeatureEnabled() && !(request()->getString('action', '') === 'disable' && two_factor()->isEnabledForUser($user_id))) {
-    bb_die(__('TWO_FACTOR_FEATURE_DISABLED'));
+    bb_die(__('TWO_FACTOR_FEATURE_DISABLED'), 403);
 }
 
 $action = request()->getString('action', '');
@@ -33,7 +33,7 @@ switch ($action) {
         if (request()->isPost() && request()->post->has('verify_2fa')) {
             // Guard against dual-tab race condition
             if (two_factor()->isEnabledForUser($user_id)) {
-                bb_die(__('TWO_FACTOR_ALREADY_ENABLED'));
+                bb_die(__('TWO_FACTOR_ALREADY_ENABLED'), 409);
             }
 
             // POST: Verify the code and enable 2FA
@@ -41,7 +41,7 @@ switch ($action) {
             $code = (string)request()->post->get('totp_code', '');
 
             if (empty($setup_token) || empty($code)) {
-                bb_die(__('TWO_FACTOR_INVALID_CODE'));
+                bb_die(__('TWO_FACTOR_INVALID_CODE'), 400);
             }
 
             // Retrieve cached secret by setup token
@@ -49,7 +49,7 @@ switch ($action) {
             $cached = CACHE('bb_cache')->get($cache_key);
 
             if (!$cached || !isset($cached['secret'], $cached['user_id']) || $cached['user_id'] !== $user_id) {
-                bb_die(__('TWO_FACTOR_SETUP_EXPIRED'));
+                bb_die(__('TWO_FACTOR_SETUP_EXPIRED'), 410);
             }
 
             $secret = $cached['secret'];
@@ -59,10 +59,10 @@ switch ($action) {
                 $cached['attempts'] = ($cached['attempts'] ?? 0) + 1;
                 if ($cached['attempts'] >= 5) {
                     CACHE('bb_cache')->rm($cache_key);
-                    bb_die(__('TWO_FACTOR_SETUP_EXPIRED'));
+                    bb_die(__('TWO_FACTOR_SETUP_EXPIRED'), 410);
                 }
                 CACHE('bb_cache')->set($cache_key, $cached, 600);
-                bb_die(__('TWO_FACTOR_INVALID_CODE'));
+                bb_die(__('TWO_FACTOR_INVALID_CODE'), 400);
             }
 
             // Enable 2FA for this user
@@ -83,7 +83,7 @@ switch ($action) {
 
         // GET: Generate secret and show setup page
         if (two_factor()->isEnabledForUser($user_id)) {
-            bb_die(__('TWO_FACTOR_ALREADY_ENABLED'));
+            bb_die(__('TWO_FACTOR_ALREADY_ENABLED'), 409);
         }
 
         $secret = two_factor()->generateSecret();
@@ -112,14 +112,14 @@ switch ($action) {
         $token = request()->getString('token', '');
 
         if (empty($token)) {
-            bb_die(__('TWO_FACTOR_INVALID_TOKEN'));
+            bb_die(__('TWO_FACTOR_INVALID_TOKEN'), 400);
         }
 
         $cache_key = '2fa_recovery_' . $token;
         $cached = CACHE('bb_cache')->get($cache_key);
 
         if (!$cached || !isset($cached['codes'], $cached['user_id']) || $cached['user_id'] !== $user_id) {
-            bb_die(__('TWO_FACTOR_RECOVERY_EXPIRED'));
+            bb_die(__('TWO_FACTOR_RECOVERY_EXPIRED'), 410);
         }
 
         // Prepare download token (same token, separate cache entry for download)
@@ -146,30 +146,30 @@ switch ($action) {
          */
     case 'disable':
         if (!two_factor()->isEnabledForUser($user_id)) {
-            bb_die(__('TWO_FACTOR_NOT_ENABLED'));
+            bb_die(__('TWO_FACTOR_NOT_ENABLED'), 409);
         }
 
         if (request()->isPost() && request()->post->has('disable_2fa')) {
             $code = (string)request()->post->get('totp_code', '');
 
             if (empty($code)) {
-                bb_die(__('TWO_FACTOR_INVALID_CODE'));
+                bb_die(__('TWO_FACTOR_INVALID_CODE'), 400);
             }
 
             if (!two_factor()->checkRateLimit($user_id)) {
-                bb_die(__('TWO_FACTOR_TOO_MANY_ATTEMPTS'));
+                bb_die(__('TWO_FACTOR_TOO_MANY_ATTEMPTS'), 429);
             }
 
             if (!two_factor()->verifyUserCode($user_id, $code)) {
                 two_factor()->incrementAttempts($user_id);
-                bb_die(__('TWO_FACTOR_INVALID_CODE'));
+                bb_die(__('TWO_FACTOR_INVALID_CODE'), 400);
             }
 
             two_factor()->clearAttempts($user_id);
             two_factor()->disableForUser($user_id);
 
             meta_refresh(SETTINGS_URL, 5);
-            bb_die(__('TWO_FACTOR_DISABLED_SUCCESS'));
+            bb_die(__('TWO_FACTOR_DISABLED_SUCCESS'), 200);
         }
 
         // GET: Show disable confirmation form
@@ -184,23 +184,23 @@ switch ($action) {
          */
     case 'regenerate':
         if (!two_factor()->isEnabledForUser($user_id)) {
-            bb_die(__('TWO_FACTOR_NOT_ENABLED'));
+            bb_die(__('TWO_FACTOR_NOT_ENABLED'), 409);
         }
 
         if (request()->isPost() && request()->post->has('regenerate_codes')) {
             $code = (string)request()->post->get('totp_code', '');
 
             if (empty($code)) {
-                bb_die(__('TWO_FACTOR_INVALID_CODE'));
+                bb_die(__('TWO_FACTOR_INVALID_CODE'), 400);
             }
 
             if (!two_factor()->checkRateLimit($user_id)) {
-                bb_die(__('TWO_FACTOR_TOO_MANY_ATTEMPTS'));
+                bb_die(__('TWO_FACTOR_TOO_MANY_ATTEMPTS'), 429);
             }
 
             if (!two_factor()->verifyUserCode($user_id, $code)) {
                 two_factor()->incrementAttempts($user_id);
-                bb_die(__('TWO_FACTOR_INVALID_CODE'));
+                bb_die(__('TWO_FACTOR_INVALID_CODE'), 400);
             }
 
             two_factor()->clearAttempts($user_id);
@@ -233,14 +233,14 @@ switch ($action) {
         $token = request()->getString('token', '');
 
         if (empty($token)) {
-            bb_die(__('TWO_FACTOR_INVALID_TOKEN'));
+            bb_die(__('TWO_FACTOR_INVALID_TOKEN'), 400);
         }
 
         $cache_key = '2fa_download_' . $token;
         $cached = CACHE('bb_cache')->get($cache_key);
 
         if (!$cached || !isset($cached['codes'], $cached['user_id']) || $cached['user_id'] !== $user_id) {
-            bb_die(__('TWO_FACTOR_DOWNLOAD_EXPIRED'));
+            bb_die(__('TWO_FACTOR_DOWNLOAD_EXPIRED'), 410);
         }
 
         // Clean up after download
@@ -271,14 +271,14 @@ switch ($action) {
         $setup_token = request()->getString('setup_token', '');
 
         if (empty($setup_token)) {
-            bb_die(__('TWO_FACTOR_INVALID_TOKEN'));
+            bb_die(__('TWO_FACTOR_INVALID_TOKEN'), 400);
         }
 
         $cache_key = '2fa_setup_' . $setup_token;
         $cached = CACHE('bb_cache')->get($cache_key);
 
         if (!$cached || !isset($cached['secret'], $cached['user_id']) || $cached['user_id'] !== $user_id) {
-            bb_die(__('TWO_FACTOR_SETUP_EXPIRED'));
+            bb_die(__('TWO_FACTOR_SETUP_EXPIRED'), 410);
         }
 
         $qrImage = two_factor()->generateQrCode(
