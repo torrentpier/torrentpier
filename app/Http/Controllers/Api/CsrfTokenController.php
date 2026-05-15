@@ -22,7 +22,6 @@ final class CsrfTokenController
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         return (new JsonResponse(['token' => Csrf::token()]))
-            ->withHeader('Cache-Control', 'no-store')
-            ->withHeader('Pragma', 'no-cache');
+            ->withHeader('Cache-Control', 'no-store');
     }
 }

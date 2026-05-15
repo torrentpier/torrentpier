@@ -278,7 +278,7 @@ $(document).ready(function () {
       if (retrySettings.data && typeof retrySettings.data === 'object') {
         retrySettings.data = $.extend({}, retrySettings.data, { _token: resp.token });
       } else if (typeof retrySettings.data === 'string') {
-        retrySettings.data = retrySettings.data.replace(/(^|&)_token=[^&]*/, '$1_token=' + encodeURIComponent(resp.token));
+        retrySettings.data = retrySettings.data.replace(/(^|&)_token=[^&]*/g, '$1_token=' + encodeURIComponent(resp.token));
       }
       return $.ajax(retrySettings);
     });
