@@ -15,7 +15,8 @@ namespace TorrentPier\Http;
 use Illuminate\Support\Str;
 
 /**
- * Per-session CSRF token store keyed on session_id and persisted in bb_cache.
+ * CSRF token store persisted in bb_cache. Keyed on the stable cookie sid
+ * for logged-in users, with an sha1(ip|user-agent) fallback for guests.
  */
 final class Csrf
 {
@@ -84,18 +85,24 @@ final class Csrf
 
     private static function cacheKey(): ?string
     {
-        $userdata = userdata() ?: null;
-        if (!$userdata) {
-            return null;
-        }
-        // Always key on session_id: User::session_create() issues one for guests too,
-        // so per-browser isolation works without sharing tokens behind NAT.
-        $identifier = (string)($userdata['session_id'] ?? '');
-        if ($identifier === '') {
-            return null;
+        // Logged-in: stable cookie sid survives session_create() rotations.
+        $sid = (string)(user()->sessiondata['sid'] ?? '');
+        if ($sid !== '') {
+            return self::CACHE_PREFIX . $sid;
         }
 
-        return self::CACHE_PREFIX . $identifier;
+        // Guests have no persistent sid; the DB session_id rotates after the
+        // 180s userdata cache (auth.sessions.update_interval), so derive a
+        // per-browser key from IP+UA instead. Tradeoff: guests behind the
+        // same NAT with identical UA share one token; acceptable because
+        // guest POST endpoints are read-only or low-privilege.
+        $ip = \defined('USER_IP') && USER_IP !== '' ? (string)USER_IP : (string)(request()->getClientIp() ?? '');
+        if ($ip === '') {
+            return null;
+        }
+        $ua = (string)(request()->getUserAgent() ?? '');
+
+        return self::CACHE_PREFIX . 'guest_' . sha1($ip . '|' . $ua);
     }
 
     private static function ttl(): int

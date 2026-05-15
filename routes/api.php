@@ -31,6 +31,7 @@ use App\Http\Controllers\Api\Ajax\TopicTplController;
 use App\Http\Controllers\Api\Ajax\UserRegisterController;
 use App\Http\Controllers\Api\Ajax\ViewPostController;
 use App\Http\Controllers\Api\Ajax\ViewTorrentController;
+use App\Http\Controllers\Api\CsrfTokenController;
 use App\Http\Middleware\Api\EnsureRole;
 use TorrentPier\Router\RouteGroup;
 use TorrentPier\Router\Router;
@@ -41,6 +42,8 @@ use TorrentPier\Router\Router;
  * @param Router $router
  */
 return static function (Router $router): void {
+    $router->get('/api/csrf', CsrfTokenController::class);
+
     $router->group('/api/ajax', function (RouteGroup $group) {
         // Guest
         $group->post('/view-post', ViewPostController::class);
