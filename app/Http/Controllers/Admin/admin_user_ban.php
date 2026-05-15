@@ -20,12 +20,12 @@ if ($submit) {
     // Ban action
     if (!empty(request()->post->get('username'))) {
         if (!$this_userdata = get_userdata(request()->post->get('username'), true)) {
-            bb_die(__('NO_USER_ID_SPECIFIED') . '<br /><br />' . sprintf(__('CLICK_RETURN_BANADMIN'), '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('NO_USER_ID_SPECIFIED') . '<br /><br />' . sprintf(__('CLICK_RETURN_BANADMIN'), '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 404);
         }
 
         $target_id = (int)$this_userdata['user_id'];
         if ($target_id === (int)user()->id) {
-            bb_die(__('BAN_SELF_FORBIDDEN'));
+            bb_die(__('BAN_SELF_FORBIDDEN'), 403);
         }
 
         if (!getBanInfo($target_id)) {
@@ -60,7 +60,7 @@ if ($submit) {
     }
 
     datastore()->update('ban_list');
-    bb_die(__('BAN_UPDATE_SUCESSFUL') . '<br /><br />' . sprintf(__('CLICK_RETURN_BANADMIN'), '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+    bb_die(__('BAN_UPDATE_SUCESSFUL') . '<br /><br />' . sprintf(__('CLICK_RETURN_BANADMIN'), '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
 } else {
     template()->assign_vars(['S_BANLIST_ACTION' => 'admin_user_ban.php']);
 

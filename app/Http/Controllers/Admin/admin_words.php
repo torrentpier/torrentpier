@@ -15,7 +15,7 @@ if (!empty($setmodules)) {
 }
 
 if (!config()->get('forum.use_word_censor')) {
-    bb_die('Word censor disabled <br /><br /> (use_word_censor in config/forum.php)');
+    bb_die('Word censor disabled <br /><br /> (use_word_censor in config/forum.php)', 403);
 }
 
 $mode = htmlspecialchars(request()->getString('mode'));
@@ -64,7 +64,7 @@ if ($mode != '') {
         $replacement = trim(request()->getString('replacement'));
 
         if ($word == '' || $replacement == '') {
-            bb_die(__('MUST_ENTER_WORD'));
+            bb_die(__('MUST_ENTER_WORD'), 400);
         }
 
         if ($word_id) {

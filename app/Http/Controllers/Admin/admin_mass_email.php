@@ -15,7 +15,7 @@ if (!empty($setmodules)) {
 }
 
 if (!config()->get('mail.enabled')) {
-    bb_die(__('EMAILER_DISABLED'));
+    bb_die(__('EMAILER_DISABLED'), 403);
 }
 
 set_time_limit(1200);

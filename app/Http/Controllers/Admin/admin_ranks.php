@@ -44,7 +44,7 @@ if ($mode != '') {
 
         if ($mode == 'edit') {
             if (empty($rank_id)) {
-                bb_die(__('MUST_SELECT_RANK'));
+                bb_die(__('MUST_SELECT_RANK'), 400);
             }
 
             $sql = 'SELECT * FROM ' . BB_RANKS . " WHERE rank_id = {$rank_id}";
@@ -109,7 +109,7 @@ if ($mode != '') {
         $rank_image = trim(request()->post->getString('rank_image'));
 
         if ($rank_title == '') {
-            bb_die(__('MUST_SELECT_RANK'));
+            bb_die(__('MUST_SELECT_RANK'), 400);
         }
 
         //
@@ -144,7 +144,7 @@ if ($mode != '') {
 
         datastore()->update('ranks');
 
-        bb_die($message);
+        bb_die($message, 200);
     } elseif ($mode == 'delete') {
         //
         // Ok, they want to delete their rank
@@ -168,9 +168,9 @@ if ($mode != '') {
 
                 datastore()->update('ranks');
 
-                bb_die(__('RANK_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+                bb_die(__('RANK_REMOVED') . '<br /><br />' . sprintf(__('CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
             } else {
-                bb_die(__('MUST_SELECT_RANK'));
+                bb_die(__('MUST_SELECT_RANK'), 400);
             }
         } else {
             $hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
@@ -182,7 +182,7 @@ if ($mode != '') {
             ]);
         }
     } else {
-        bb_die('Invalid mode');
+        bb_die('Invalid mode', 400);
     }
 } else {
     //

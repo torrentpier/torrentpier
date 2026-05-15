@@ -85,7 +85,7 @@ if ($submit && $confirm) {
 
     forum_tree(refresh: true);
 
-    bb_die(__('CONFIG_UPD') . '<br /><br />' . sprintf(__('RETURN_CONFIG'), '<a href="admin_bt_forum_cfg.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+    bb_die(__('CONFIG_UPD') . '<br /><br />' . sprintf(__('RETURN_CONFIG'), '<a href="admin_bt_forum_cfg.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
 }
 
 // Set template vars

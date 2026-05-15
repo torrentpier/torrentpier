@@ -29,7 +29,7 @@ if (!$submit && (!$mode || ($mode == 'run' && !$job_id))) {
 }
 
 if (!IS_SUPER_ADMIN) {
-    bb_die(__('ONLY_FOR_SUPER_ADMIN'));
+    bb_die(__('ONLY_FOR_SUPER_ADMIN'), 403);
 }
 
 // State-changing GET actions still need a CSRF token in the URL — admin row
@@ -128,7 +128,7 @@ switch ($mode) {
     case 'edit':
         $row = DB()->fetch_row('SELECT * FROM ' . BB_CRON . " WHERE cron_id = {$job_id}");
         if (!$row) {
-            bb_die(__('JOB_NOT_FOUND') . '<br /><br />' . sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>'));
+            bb_die(__('JOB_NOT_FOUND') . '<br /><br />' . sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>'), 404);
         }
 
         template()->assign_vars([
@@ -206,7 +206,7 @@ switch ($mode) {
     case 'delete':
         $removed = TorrentPier\Legacy\Admin\Cron::delete_jobs($job_id);
         $message = $removed > 0 ? __('JOB_REMOVED') : __('JOB_NOT_FOUND');
-        bb_die($message . '<br /><br />' . sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+        bb_die($message . '<br /><br />' . sprintf(__('CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), $removed > 0 ? 200 : 404);
         break;
 }
 
@@ -227,12 +227,12 @@ if ($submit) {
         } elseif ($mode2 == 'add') {
             TorrentPier\Legacy\Admin\Cron::insert_cron_job(request()->post->all());
         } else {
-            bb_die("Invalid mode: {$mode2}");
+            bb_die("Invalid mode: {$mode2}", 400);
         }
 
         redirect('admin/' . basename(__FILE__) . '?mode=list');
     } else {
-        bb_die(TorrentPier\Legacy\Admin\Cron::validate_cron_post(request()->post->all()));
+        bb_die(TorrentPier\Legacy\Admin\Cron::validate_cron_post(request()->post->all()), 400);
     }
 }
 

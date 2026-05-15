@@ -64,7 +64,7 @@ if (!$result = DB()->sql_query($sql)) {
     }
 
     if (request()->post->has('submit')) {
-        bb_die(__('CONFIG_UPDATED') . $return_links[$mode] . $return_links['index']);
+        bb_die(__('CONFIG_UPDATED') . $return_links[$mode] . $return_links['index'], 200);
     }
 }
 

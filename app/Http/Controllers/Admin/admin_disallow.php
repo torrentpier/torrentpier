@@ -20,7 +20,7 @@ if (request()->post->has('add_name')) {
     $disallowed_user = trim(request()->get('disallowed_user', ''));
 
     if ($disallowed_user == '') {
-        bb_die(__('FIELDS_EMPTY'));
+        bb_die(__('FIELDS_EMPTY'), 400);
     }
     if (TorrentPier\Validate::username($disallowed_user)) {
         $message = __('DISALLOWED_ALREADY');
@@ -35,7 +35,7 @@ if (request()->post->has('add_name')) {
 
     $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_DISALLOWADMIN'), '<a href="admin_disallow.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
-    bb_die($message);
+    bb_die($message, 200);
 } elseif (request()->post->has('delete_name')) {
     $disallowed_id = request()->getInt('disallowed_id');
 
@@ -48,7 +48,7 @@ if (request()->post->has('add_name')) {
 
         $message .= __('DISALLOWED_DELETED') . '<br /><br />' . sprintf(__('CLICK_RETURN_DISALLOWADMIN'), '<a href="admin_disallow.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
-        bb_die($message);
+        bb_die($message, 200);
     }
 }
 

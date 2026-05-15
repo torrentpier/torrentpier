@@ -150,7 +150,7 @@ if ($submit) {
 
     forum_tree(refresh: true);
     CACHE('bb_cache')->rm();
-    bb_die(__('FORUM_AUTH_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMAUTH'), '<a href="admin_forumauth_list.php">', '</a>'));
+    bb_die(__('FORUM_AUTH_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMAUTH'), '<a href="admin_forumauth_list.php">', '</a>'), 200);
 } // End of submit
 
 //
@@ -261,7 +261,7 @@ if (empty($forum_id) && empty($cat_id)) {
     $category_rows = DB()->sql_fetchrowset($result);
 
     if (empty($category_rows)) {
-        bb_die(sprintf(__('CLICK_RETURN_FORUMAUTH'), '<a href="admin_forumauth_list.php">', '</a>'));
+        bb_die(sprintf(__('CLICK_RETURN_FORUMAUTH'), '<a href="admin_forumauth_list.php">', '</a>'), 404);
     }
 
     $cat_id = reset($category_rows)['cat_id'];

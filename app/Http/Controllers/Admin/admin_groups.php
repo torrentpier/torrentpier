@@ -20,7 +20,7 @@ $mode = request()->getString('mode');
 if (request()->post->get('edit') || request()->post->get('new')) {
     if (request()->post->get('edit')) {
         if (!$row = TorrentPier\Legacy\Group::get_group_data($group_id)) {
-            bb_die(__('GROUP_NOT_EXIST'));
+            bb_die(__('GROUP_NOT_EXIST'), 404);
         }
         $group_info = [
             'group_name' => $row['group_name'],
@@ -71,7 +71,7 @@ if (request()->post->get('edit') || request()->post->get('new')) {
 } elseif (request()->post->get('group_update')) {
     if (request()->post->get('group_delete')) {
         if (!$group_info = TorrentPier\Legacy\Group::get_group_data($group_id)) {
-            bb_die(__('GROUP_NOT_EXIST'));
+            bb_die(__('GROUP_NOT_EXIST'), 404);
         }
         // Delete Group
         TorrentPier\Legacy\Group::delete_group($group_id);
@@ -80,7 +80,7 @@ if (request()->post->get('edit') || request()->post->get('new')) {
         $message .= sprintf(__('CLICK_RETURN_GROUPSADMIN'), '<a href="admin_groups.php">', '</a>') . '<br /><br />';
         $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
-        bb_die($message);
+        bb_die($message, 200);
     } else {
         $group_type = request()->getInt('group_type', GROUP_OPEN);
         $release_group = request()->getInt('release_group');
@@ -89,14 +89,14 @@ if (request()->post->get('edit') || request()->post->get('new')) {
         $group_moderator = request()->getString('username');
 
         if ($group_name === '') {
-            bb_die(__('NO_GROUP_NAME'));
+            bb_die(__('NO_GROUP_NAME'), 400);
         } elseif ($group_moderator === '') {
-            bb_die(__('NO_GROUP_MODERATOR'));
+            bb_die(__('NO_GROUP_MODERATOR'), 400);
         }
         $this_userdata = get_userdata($group_moderator, true);
 
         if (!$this_userdata || empty($this_userdata['user_id'])) {
-            bb_die(__('NO_GROUP_MODERATOR'));
+            bb_die(__('NO_GROUP_MODERATOR'), 404);
         }
         $group_moderator = $this_userdata['user_id'];
 
@@ -111,7 +111,7 @@ if (request()->post->get('edit') || request()->post->get('new')) {
 
         if ($mode == 'editgroup') {
             if (!$group_info = TorrentPier\Legacy\Group::get_group_data($group_id)) {
-                bb_die(__('GROUP_NOT_EXIST'));
+                bb_die(__('GROUP_NOT_EXIST'), 404);
             }
 
             if ($group_info['group_moderator'] != $group_moderator) {
@@ -134,7 +134,7 @@ if (request()->post->get('edit') || request()->post->get('new')) {
             $message .= sprintf(__('CLICK_RETURN_GROUPSADMIN'), '<a href="admin_groups.php">', '</a>') . '<br /><br />';
             $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
-            bb_die($message);
+            bb_die($message, 200);
         } elseif ($mode == 'newgroup') {
             $sql_ary['group_time'] = $sql_ary['mod_time'] = TIMENOW;
             $sql_args = DB()->build_array('INSERT', $sql_ary);
@@ -150,9 +150,9 @@ if (request()->post->get('edit') || request()->post->get('new')) {
             $message .= sprintf(__('CLICK_RETURN_GROUPSADMIN'), '<a href="admin_groups.php">', '</a>') . '<br /><br />';
             $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
-            bb_die($message);
+            bb_die($message, 200);
         } else {
-            bb_die(__('NO_GROUP_ACTION'));
+            bb_die(__('NO_GROUP_ACTION'), 400);
         }
     }
 } else {

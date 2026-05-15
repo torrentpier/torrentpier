@@ -20,10 +20,10 @@ $prune_performed = false;
 
 if (request()->has('submit')) {
     if (!($var = request()->get('f')) || !($f_selected = get_id_ary($var))) {
-        bb_die(__('SELECT_FORUM'));
+        bb_die(__('SELECT_FORUM'), 400);
     }
     if (!($var = request()->get('prunedays')) || !($prunedays = abs((int)$var))) {
-        bb_die(__('NOT_DAYS'));
+        bb_die(__('NOT_DAYS'), 400);
     }
 
     $prunetime = TIMENOW - 86400 * $prunedays;
@@ -45,10 +45,10 @@ if (request()->has('submit')) {
         ]);
     }
     if (!$prune_performed) {
-        bb_die(__('NONE_SELECTED'));
+        bb_die(__('NONE_SELECTED'), 400);
     }
     if (!$pruned_total) {
-        bb_die(__('NO_SEARCH_MATCH'));
+        bb_die(__('NO_SEARCH_MATCH'), 200);
     }
 }
 

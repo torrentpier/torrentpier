@@ -124,7 +124,7 @@ if ($submit) {
 
     forum_tree(refresh: true);
     CACHE('bb_cache')->rm();
-    bb_die(__('FORUM_AUTH_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMAUTH'), '<a href="admin_forumauth.php">', '</a>'));
+    bb_die(__('FORUM_AUTH_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMAUTH'), '<a href="admin_forumauth.php">', '</a>'), 200);
 }
 
 /**

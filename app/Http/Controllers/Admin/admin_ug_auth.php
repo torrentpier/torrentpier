@@ -39,7 +39,7 @@ function auth_updated_redirect(string $return_key, string $mode, string $post_pa
     $message = __('AUTH_UPDATED') . '<br /><br />';
     $message .= sprintf(__($return_key), '<a href="admin_ug_auth.php?mode=' . $mode . '&' . $post_param . '=' . $id . '">', '</a>') . '<br /><br />';
     $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
-    bb_die($message);
+    bb_die($message, 200);
 }
 
 /**
@@ -117,7 +117,7 @@ if ($submit && $mode == 'user') {
 
     // Collect relevant data for this user
     if (!$row = get_userdata($user_id)) {
-        bb_die(__('NO_SUCH_USER'));
+        bb_die(__('NO_SUCH_USER'), 404);
     }
     $this_user_level = $row['user_level'];
 
@@ -142,7 +142,7 @@ if ($submit && $mode == 'user') {
     if (request()->post->has('userlevel')) {
         if (request()->post->get('userlevel') === 'admin') {
             if (userdata('user_id') == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID) {
-                bb_die(__('AUTH_GENERAL_ERROR'));
+                bb_die(__('AUTH_GENERAL_ERROR'), 400);
             }
 
             DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . ADMIN . " WHERE user_id = {$user_id}");
@@ -155,7 +155,7 @@ if ($submit && $mode == 'user') {
         elseif (request()->post->get('userlevel') === 'user') {
             // ignore if you're trying to change yourself from an admin to user!
             if (userdata('user_id') == $user_id) {
-                bb_die(__('AUTH_SELF_ERROR'));
+                bb_die(__('AUTH_SELF_ERROR'), 400);
             }
             // Update users' level, reset to USER
             DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . USER . " WHERE user_id = {$user_id}");
@@ -197,7 +197,7 @@ elseif ($submit && $mode == 'group') {
         // Skip if no auth data submitted
     } else {
         if (!$group_data = Group::get_group_data($group_id)) {
-            bb_die(__('GROUP_NOT_EXIST'));
+            bb_die(__('GROUP_NOT_EXIST'), 404);
         }
 
         $auth = [];
@@ -230,7 +230,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
         $this_userdata = get_userdata($user_id);
     }
     if (!$this_userdata) {
-        bb_die(__('NO_SUCH_USER'));
+        bb_die(__('NO_SUCH_USER'), 404);
     }
     $user_id = $this_userdata['user_id'];
 
@@ -240,7 +240,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
     if (empty($forums['f'])) {
         $message = __('NO_FORUMS_AVAILABLE');
         $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
-        bb_die($message);
+        bb_die($message, 200);
     }
 
     $base_url = basename(__FILE__) . '?mode=user&amp;' . POST_USERS_URL . "={$user_id}";
@@ -340,7 +340,7 @@ if ($mode == 'user' && (request()->post->get('username') || $user_id)) {
     if (empty($forums['f'])) {
         $message = __('NO_FORUMS_AVAILABLE');
         $message .= '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
-        bb_die($message);
+        bb_die($message, 200);
     }
 
     $base_url = basename(__FILE__) . '?mode=group&amp;' . POST_GROUPS_URL . "={$group_id}";

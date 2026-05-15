@@ -1139,15 +1139,12 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
  */
 function bb_die($msgText, $statusCode = null): void
 {
+    $statusCode ??= 500;
+    http_response_code($statusCode);
+
     // Detect API requests and return JSON response
     $isApiRequest = str_starts_with($_SERVER['REQUEST_URI'] ?? '', '/api/')
         || str_contains($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json');
-
-    // API consumers always need an explicit error code; HTML pages are rendered
-    // as informational interstitials (config saved, job removed, etc.) so the
-    // default stays 200 and callers can pass a specific status when needed.
-    $statusCode ??= $isApiRequest ? 500 : 200;
-    http_response_code($statusCode);
 
     if ($isApiRequest) {
         header('Content-Type: application/json; charset=UTF-8');

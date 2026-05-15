@@ -189,12 +189,12 @@ if ($mode) {
             $allow_anonymous = (int)request()->post->get('allow_anonymous', 0);
 
             if (!$forum_name) {
-                bb_die('Can not create a forum without a name');
+                bb_die('Can not create a forum without a name', 400);
             }
 
             if ($forum_parent) {
                 if (!$parent = get_forum_data($forum_parent, $cat_forums)) {
-                    bb_die('Parent forum with id <b>' . $forum_parent . '</b> not found');
+                    bb_die('Parent forum with id <b>' . $forum_parent . '</b> not found', 404);
                 }
 
                 $cat_id = $parent['cat_id'];
@@ -225,7 +225,7 @@ if ($mode) {
             forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
-            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
 
             break;
 
@@ -256,12 +256,12 @@ if ($mode) {
             $forum_order = $forum_data['forum_order'];
 
             if (!$forum_name) {
-                bb_die('Can not modify a forum without a name');
+                bb_die('Can not modify a forum without a name', 400);
             }
 
             if ($forum_parent) {
                 if (!$parent = get_forum_data($forum_parent, $cat_forums)) {
-                    bb_die('Parent forum with id <b>' . $forum_parent . '</b> not found');
+                    bb_die('Parent forum with id <b>' . $forum_parent . '</b> not found', 404);
                 }
 
                 $cat_id = $parent['cat_id'];
@@ -269,7 +269,7 @@ if ($mode) {
                 $forum_order = $parent['forum_order'] + 5;
 
                 if ($forum_id == $forum_parent) {
-                    bb_die('Ambiguous forum ID. Please select other parent forum');
+                    bb_die('Ambiguous forum ID. Please select other parent forum', 400);
                 }
             } elseif ($cat_id != $old_cat_id) {
                 $max_order = get_max_forum_order($cat_id);
@@ -317,7 +317,7 @@ if ($mode) {
             $message = __('FORUMS_UPDATED') . '<br /><br />';
             $message .= $fix ? "{$fix}<br /><br />" : '';
             $message .= sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
-            bb_die($message);
+            bb_die($message, 200);
 
             break;
 
@@ -326,7 +326,7 @@ if ($mode) {
             // Create a category in the DB
             //
             if (!$new_cat_title = trim(request()->post->get('categoryname', ''))) {
-                bb_die(__('CATEGORY_NAME_EMPTY'));
+                bb_die(__('CATEGORY_NAME_EMPTY'), 400);
             }
 
             check_name_dup('cat', $new_cat_title);
@@ -343,7 +343,7 @@ if ($mode) {
             forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
-            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
 
             break;
 
@@ -374,7 +374,7 @@ if ($mode) {
             // Modify a category in the DB
             //
             if (!$new_cat_title = trim(request()->post->get('cat_title', ''))) {
-                bb_die(__('CATEGORY_NAME_EMPTY'));
+                bb_die(__('CATEGORY_NAME_EMPTY'), 400);
             }
 
             $cat_id = (int)request()->post->get(POST_CAT_URL, 0);
@@ -397,7 +397,7 @@ if ($mode) {
             forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
-            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
 
             break;
 
@@ -449,7 +449,7 @@ if ($mode) {
                 $result = DB()->query($sql);
 
                 if (DB()->num_rows($result) != 2) {
-                    bb_die('Ambiguous forum ID');
+                    bb_die('Ambiguous forum ID', 400);
                 }
 
                 DB()->query('UPDATE ' . BB_TOPICS . " SET forum_id = {$to_id} WHERE forum_id = {$from_id}");
@@ -484,7 +484,7 @@ if ($mode) {
             forum_tree(refresh: true);
             CACHE('bb_cache')->rm();
 
-            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
+            bb_die(__('FORUMS_UPDATED') . '<br /><br />' . sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'), 200);
 
             break;
 
@@ -498,7 +498,7 @@ if ($mode) {
                 $row = DB()->fetch_row('SELECT COUNT(*) AS forums_count FROM ' . BB_FORUMS);
 
                 if ($row['forums_count'] > 0) {
-                    bb_die(__('MUST_DELETE_FORUMS'));
+                    bb_die(__('MUST_DELETE_FORUMS'), 400);
                 } else {
                     template()->assign_var('NOWHERE_TO_MOVE', __('NOWHERE_TO_MOVE'));
                 }
@@ -530,11 +530,11 @@ if ($mode) {
             $to_id = (int)request()->post->get('to_id', -1);
 
             if ($to_id === -1) {
-                bb_die(__('NOWHERE_TO_MOVE'));
+                bb_die(__('NOWHERE_TO_MOVE'), 400);
             }
 
             if ($from_id == $to_id || !cat_exists($from_id) || !cat_exists($to_id)) {
-                bb_die('Bad input');
+                bb_die('Bad input', 400);
             }
 
             $order_shear = get_max_forum_order($to_id) + 10;
@@ -557,7 +557,7 @@ if ($mode) {
             $message = __('FORUMS_UPDATED') . '<br /><br />';
             $message .= $fix ? "{$fix}<br /><br />" : '';
             $message .= sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
-            bb_die($message);
+            bb_die($message, 200);
 
             break;
 
@@ -662,7 +662,7 @@ if ($mode) {
             break;
 
         default:
-            bb_die(__('NO_MODE'));
+            bb_die(__('NO_MODE'), 400);
             break;
     }
 }
@@ -1053,7 +1053,7 @@ function fix_orphan_sf(array $cat_forums, string $orphan_sf_sql = '', bool $show
             $message = $done_mess . '<br /><br />';
             $message .= sprintf(__('CLICK_RETURN_FORUMADMIN'), '<a href="admin_forums.php">', '</a>') . '<br /><br />';
             $message .= sprintf(__('CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
-            bb_die($message);
+            bb_die($message, 200);
         }
     }
 
@@ -1128,7 +1128,7 @@ function check_name_dup($mode, $name, $die_on_error = true)
     $name_is_dup = DB()->fetch_row($sql);
 
     if ($name_is_dup && $die_on_error) {
-        bb_die('This ' . $what_checked . ' name taken, please choose something else');
+        bb_die('This ' . $what_checked . ' name taken, please choose something else', 400);
     }
 
     return $name_is_dup;
