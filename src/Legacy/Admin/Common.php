@@ -814,7 +814,7 @@ class Common
             $sql = 'SELECT user_id, username FROM ' . BB_USERS . " WHERE user_id IN({$user_csv})";
 
             foreach (DB()->fetch_rowset($sql) as $row) {
-                $users_log_msg[] = "<b>{$row['username']}</b> [{$row['user_id']}]";
+                $users_log_msg[] = '<b>' . htmlCHR($row['username']) . '</b> [' . (int)$row['user_id'] . ']';
             }
         }
 

@@ -288,12 +288,12 @@ if ($log_rowset) {
             'TOPIC_ID' => $row['log_topic_id'],
             'TOPIC_HREF' => (!$topic_deleted) ? BB_ROOT . TOPIC_URL . $row['log_topic_id'] : '',
             'TOPIC_HREF_S' => url_arg($url, $topic_key, $row['log_topic_id']),
-            'TOPIC_TITLE' => $topic_title,
+            'TOPIC_TITLE' => htmlCHR($topic_title),
 
             'TOPIC_ID_NEW' => $row['log_topic_id_new'],
             'TOPIC_HREF_NEW' => BB_ROOT . TOPIC_URL . $row['log_topic_id_new'],
             'TOPIC_HREF_NEW_S' => url_arg($url, $topic_key, $row['log_topic_id_new']),
-            'TOPIC_TITLE_NEW' => $topic_title_new,
+            'TOPIC_TITLE_NEW' => htmlCHR($topic_title_new),
 
             'DATETIME' => bb_date($row['log_time'], 'd-M-y H:i'),
             'DATETIME_HREF_S' => $datetime_href_s,
@@ -304,7 +304,7 @@ if ($log_rowset) {
         // Topics
         if ($topic_csv && empty($filter['topics'][$row['log_topic_title']])) {
             template()->assign_block_vars('topics', [
-                'TOPIC_TITLE' => $row['log_topic_title'],
+                'TOPIC_TITLE' => htmlCHR($row['log_topic_title']),
             ]);
             $filter['topics'][$row['log_topic_title']] = true;
         }
