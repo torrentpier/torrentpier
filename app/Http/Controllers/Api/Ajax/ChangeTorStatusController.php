@@ -133,7 +133,7 @@ class ChangeTorStatusController
         // Log action
         $logMsg = \sprintf(__('TOR_STATUS_LOG_ACTION'), config()->get('tracker.tor_icons')[$newStatus] . ' <b> ' . __('TOR_STATUS_NAME')[$newStatus] . '</b>', config()->get('tracker.tor_icons')[$tor['tor_status']] . ' <b> ' . __('TOR_STATUS_NAME')[$tor['tor_status']] . '</b>');
         if ($comment && $comment != __('COMMENT')) {
-            $logMsg .= '<br/>' . __('COMMENT') . ": <b>$comment</b>.";
+            $logMsg .= '<br/>' . __('COMMENT') . ': <b>' . htmlCHR($comment) . '</b>.';
         }
         log_action()->mod('mod_topic_change_tor_status', [
             'forum_id' => $tor['forum_id'],

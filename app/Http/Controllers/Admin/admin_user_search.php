@@ -46,7 +46,7 @@ if (!request()->get('dosearch')) {
         while ($row = DB()->sql_fetchrow($result)) {
             $rank = $row['rank_title'];
             $rank_id = $row['rank_id'];
-            $rank_select_box .= '<option value="' . $rank_id . '">' . $rank . '</option>';
+            $rank_select_box .= '<option value="' . $rank_id . '">' . htmlCHR($rank) . '</option>';
         }
     }
 
