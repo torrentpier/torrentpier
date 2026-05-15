@@ -53,8 +53,8 @@ if ($mode != '') {
 
         template()->assign_vars([
             'TPL_ADMIN_WORDS_EDIT' => true,
-            'WORD' => $word,
-            'REPLACEMENT' => $replacement,
+            'WORD' => htmlspecialchars($word, ENT_QUOTES),
+            'REPLACEMENT' => htmlspecialchars($replacement, ENT_QUOTES),
             'S_WORDS_ACTION' => 'admin_words.php',
             'S_HIDDEN_FIELDS' => $s_hidden_fields,
         ]);
@@ -143,8 +143,8 @@ if ($mode != '') {
 
         template()->assign_block_vars('words', [
             'ROW_CLASS' => $row_class,
-            'WORD' => $word,
-            'REPLACEMENT' => $replacement,
+            'WORD' => htmlspecialchars($word, ENT_QUOTES),
+            'REPLACEMENT' => htmlspecialchars($replacement, ENT_QUOTES),
             'U_WORD_EDIT' => "admin_words.php?mode=edit&amp;id={$word_id}",
             'U_WORD_DELETE' => "admin_words.php?mode=delete&amp;id={$word_id}",
         ]);

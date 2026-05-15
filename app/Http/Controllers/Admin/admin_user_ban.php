@@ -66,7 +66,7 @@ if ($submit) {
 
     $select_userlist = '';
     foreach (getBanInfo() as $ban) {
-        $select_userlist .= '<option value="' . $ban['ban_id'] . '">' . get_username($ban['ban_userid']) . '</option>';
+        $select_userlist .= '<option value="' . $ban['ban_id'] . '">' . htmlspecialchars(get_username($ban['ban_userid']), ENT_QUOTES) . '</option>';
     }
 
     if ($select_userlist == '') {

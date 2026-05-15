@@ -225,8 +225,8 @@ if (request()->has('import_pack')) {
 
             template()->assign_vars([
                 'TPL_SMILE_EDIT' => true,
-                'SMILEY_CODE' => $smile_data['code'],
-                'SMILEY_EMOTICON' => $smile_data['emoticon'],
+                'SMILEY_CODE' => htmlspecialchars($smile_data['code'], ENT_QUOTES),
+                'SMILEY_EMOTICON' => htmlspecialchars($smile_data['emoticon'], ENT_QUOTES),
                 'SMILEY_IMG' => $smilesUrlPath . '/' . $smiley_edit_img,
                 'S_SMILEY_ACTION' => 'admin_smilies.php',
                 'S_HIDDEN_FIELDS' => $s_hidden_fields,
@@ -316,8 +316,8 @@ if (request()->has('import_pack')) {
             'ROW_CLASS' => $row_class,
 
             'SMILEY_IMG' => $smilesUrlPath . '/' . $smilies[$i]['smile_url'],
-            'CODE' => $smilies[$i]['code'],
-            'EMOT' => $smilies[$i]['emoticon'],
+            'CODE' => htmlspecialchars($smilies[$i]['code'], ENT_QUOTES),
+            'EMOT' => htmlspecialchars($smilies[$i]['emoticon'], ENT_QUOTES),
 
             'U_SMILEY_EDIT' => 'admin_smilies.php?mode=edit&amp;id=' . $smilies[$i]['smilies_id'],
             'U_SMILEY_DELETE' => 'admin_smilies.php?mode=delete&amp;id=' . $smilies[$i]['smilies_id'],

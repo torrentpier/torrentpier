@@ -72,7 +72,7 @@ if (count($disallowed) <= 0) {
     $disallow_select .= '<option value="">' . __('NO_DISALLOWED') . '</option>';
 } else {
     for ($i = 0, $iMax = count($disallowed); $i < $iMax; $i++) {
-        $disallow_select .= '<option value="' . $disallowed[$i]['disallow_id'] . '">' . $disallowed[$i]['disallow_username'] . '</option>';
+        $disallow_select .= '<option value="' . $disallowed[$i]['disallow_id'] . '">' . htmlspecialchars($disallowed[$i]['disallow_username'], ENT_QUOTES) . '</option>';
     }
 }
 
