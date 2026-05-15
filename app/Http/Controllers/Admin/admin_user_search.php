@@ -138,21 +138,21 @@ if (!request()->get('dosearch')) {
         case 'search_username':
             $username = request()->get('username');
             if (!$username) {
-                bb_die(__('SEARCH_INVALID_USERNAME'));
+                bb_die(__('SEARCH_INVALID_USERNAME'), 400);
             }
             break;
 
         case 'search_email':
             $email = request()->get('email');
             if (!$email) {
-                bb_die(__('SEARCH_INVALID_EMAIL'));
+                bb_die(__('SEARCH_INVALID_EMAIL'), 400);
             }
             break;
 
         case 'search_ip':
             $ip_address = request()->get('ip_address');
             if (!$ip_address) {
-                bb_die(__('SEARCH_INVALID_IP'));
+                bb_die(__('SEARCH_INVALID_IP'), 400);
             }
             break;
 
@@ -162,21 +162,21 @@ if (!request()->get('dosearch')) {
             $date_month = request()->get('date_month');
             $date_year = request()->get('date_year');
             if (!($date_type || $date_day || $date_month || $date_year)) {
-                bb_die(__('SEARCH_INVALID_DATE'));
+                bb_die(__('SEARCH_INVALID_DATE'), 400);
             }
             break;
 
         case 'search_group':
             $group_id = request()->get('group_id');
             if (!$group_id) {
-                bb_die(__('SEARCH_INVALID_GROUP'));
+                bb_die(__('SEARCH_INVALID_GROUP'), 400);
             }
             break;
 
         case 'search_rank':
             $rank_id = request()->get('rank_id');
             if (!$rank_id) {
-                bb_die(__('SEARCH_INVALID_RANK'));
+                bb_die(__('SEARCH_INVALID_RANK'), 400);
             }
             break;
 
@@ -184,7 +184,7 @@ if (!request()->get('dosearch')) {
             $postcount_type = request()->get('postcount_type');
             $postcount_value = request()->get('postcount_value');
             if (!$postcount_type || (!$postcount_value && $postcount_value != 0)) {
-                bb_die(__('SEARCH_INVALID_POSTCOUNT'));
+                bb_die(__('SEARCH_INVALID_POSTCOUNT'), 400);
             }
             break;
 
@@ -192,7 +192,7 @@ if (!request()->get('dosearch')) {
             $userfield_type = request()->get('userfield_type');
             $userfield_value = request()->get('userfield_value');
             if (!$userfield_type || !$userfield_value) {
-                bb_die(__('SEARCH_INVALID_USERFIELD'));
+                bb_die(__('SEARCH_INVALID_USERFIELD'), 400);
             }
             break;
 
@@ -200,40 +200,40 @@ if (!request()->get('dosearch')) {
             $lastvisited_days = request()->get('lastvisited_days');
             $lastvisited_type = request()->get('lastvisited_type');
             if (!$lastvisited_days || !$lastvisited_type) {
-                bb_die(__('SEARCH_INVALID_LASTVISITED'));
+                bb_die(__('SEARCH_INVALID_LASTVISITED'), 400);
             }
             break;
 
         case 'search_language':
             $language_type = request()->get('language_type');
             if (!$language_type) {
-                bb_die(__('SEARCH_INVALID_LANGUAGE'));
+                bb_die(__('SEARCH_INVALID_LANGUAGE'), 400);
             }
             break;
 
         case 'search_timezone':
             $timezone_type = request()->get('timezone_type');
             if (!$timezone_type && $timezone_type != 0) {
-                bb_die(__('SEARCH_INVALID_TIMEZONE'));
+                bb_die(__('SEARCH_INVALID_TIMEZONE'), 400);
             }
             break;
 
         case 'search_moderators':
             $moderators_forum = request()->get('moderators_forum');
             if (!$moderators_forum) {
-                bb_die(__('SEARCH_INVALID_MODERATORS'));
+                bb_die(__('SEARCH_INVALID_MODERATORS'), 400);
             }
             break;
 
         case 'search_misc':
             $misc = request()->get('misc');
             if (!$misc) {
-                bb_die(__('SEARCH_INVALID'));
+                bb_die(__('SEARCH_INVALID'), 400);
             }
             break;
 
         default:
-            bb_die('Invalid mode');
+            bb_die('Invalid mode', 400);
     }
 
     $base_url = 'admin_user_search.php?dosearch=true';
@@ -255,7 +255,7 @@ if (!request()->get('dosearch')) {
             }
 
             if ($username == '') {
-                bb_die(__('SEARCH_INVALID_USERNAME'));
+                bb_die(__('SEARCH_INVALID_USERNAME'), 400);
             }
 
             $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE username {$op} '" . DB()->escape($username) . "' AND user_id <> " . GUEST_UID;
@@ -275,7 +275,7 @@ if (!request()->get('dosearch')) {
             }
 
             if ($email == '') {
-                bb_die(__('SEARCH_INVALID_EMAIL'));
+                bb_die(__('SEARCH_INVALID_EMAIL'), 400);
             }
 
             $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE user_email {$op} '" . DB()->escape($email) . "' AND user_id <> " . GUEST_UID;
@@ -296,7 +296,7 @@ if (!request()->get('dosearch')) {
                 $ip = TorrentPier\Helpers\IPHelper::ip2long($ip_address);
                 $users[] = $ip;
             } else {
-                bb_die(__('SEARCH_INVALID_IP'));
+                bb_die(__('SEARCH_INVALID_IP'), 400);
             }
 
             $ip_in_sql = $ip_like_sql = $ip_like_sql_flylast = $ip_like_sql_flyreg = '';
@@ -310,7 +310,7 @@ if (!request()->get('dosearch')) {
             $where_sql .= ($ip_like_sql != '') ? ($where_sql != '') ? " OR {$ip_like_sql}" : (string)$ip_like_sql : '';
 
             if (!$where_sql) {
-                bb_die('invalid request');
+                bb_die('invalid request', 400);
             }
 
             // start search
@@ -367,7 +367,7 @@ if (!request()->get('dosearch')) {
                 }
             }
             if ($no_result_search == true) {
-                bb_die(__('SEARCH_NO_RESULTS'));
+                bb_die(__('SEARCH_NO_RESULTS'), 200);
             }
 
             $select_sql .= "	WHERE u.user_id IN ({$ip_users_sql})";
@@ -379,25 +379,25 @@ if (!request()->get('dosearch')) {
             $date_type = strtolower(trim($date_type));
 
             if ($date_type != 'before' && $date_type != 'after') {
-                bb_die(__('SEARCH_INVALID_DATE'));
+                bb_die(__('SEARCH_INVALID_DATE'), 400);
             }
 
             $date_day = (int)$date_day;
 
             if (!preg_match('/^([1-9]|[0-2][0-9]|3[0-1])$/', $date_day)) {
-                bb_die(__('SEARCH_INVALID_DAY'));
+                bb_die(__('SEARCH_INVALID_DAY'), 400);
             }
 
             $date_month = (int)$date_month;
 
             if (!preg_match('/^(0?[1-9]|1[0-2])$/', $date_month)) {
-                bb_die(__('SEARCH_INVALID_MONTH'));
+                bb_die(__('SEARCH_INVALID_MONTH'), 400);
             }
 
             $date_year = (int)$date_year;
 
             if (!preg_match('/^(20[0-9]{2}|19[0-9]{2})$/', $date_year)) {
-                bb_die(__('SEARCH_INVALID_YEAR'));
+                bb_die(__('SEARCH_INVALID_YEAR'), 400);
             }
 
             $text = sprintf(__('SEARCH_FOR_DATE'), strip_tags(htmlspecialchars(stripslashes($date_type))), $date_year, $date_month, $date_day);
@@ -420,7 +420,7 @@ if (!request()->get('dosearch')) {
             $base_url .= '&search_group=true&group_id=' . rawurlencode($group_id);
 
             if (!$group_id) {
-                bb_die(__('SEARCH_INVALID_GROUP'));
+                bb_die(__('SEARCH_INVALID_GROUP'), 400);
             }
 
             $sql = 'SELECT group_name FROM ' . BB_GROUPS . " WHERE group_id = {$group_id} AND group_single_user = 0";
@@ -430,7 +430,7 @@ if (!request()->get('dosearch')) {
             }
 
             if (DB()->num_rows($result) == 0) {
-                bb_die(__('SEARCH_INVALID_GROUP'));
+                bb_die(__('SEARCH_INVALID_GROUP'), 400);
             }
 
             $group_name = DB()->sql_fetchrow($result);
@@ -455,7 +455,7 @@ if (!request()->get('dosearch')) {
             $base_url .= '&search_rank=true&rank_id=' . rawurlencode($rank_id);
 
             if (!$rank_id) {
-                bb_die(__('SEARCH_INVALID_RANK'));
+                bb_die(__('SEARCH_INVALID_RANK'), 400);
             }
 
             $sql = 'SELECT rank_title FROM ' . BB_RANKS . " WHERE rank_id = {$rank_id}";
@@ -465,7 +465,7 @@ if (!request()->get('dosearch')) {
             }
 
             if (DB()->num_rows($result) == 0) {
-                bb_die(__('SEARCH_INVALID_RANK'));
+                bb_die(__('SEARCH_INVALID_RANK'), 400);
             }
 
             $rank_title = DB()->sql_fetchrow($result);
@@ -523,7 +523,7 @@ if (!request()->get('dosearch')) {
                         $range_end = (int)$range[1];
 
                         if ($range_begin > $range_end) {
-                            bb_die(__('SEARCH_INVALID_POSTCOUNT'));
+                            bb_die(__('SEARCH_INVALID_POSTCOUNT'), 400);
                         }
 
                         $text = sprintf(__('SEARCH_FOR_POSTCOUNT_RANGE'), $range_begin, $range_end);
@@ -552,7 +552,7 @@ if (!request()->get('dosearch')) {
                     }
                     break;
                 default:
-                    bb_die(__('SEARCH_INVALID'));
+                    bb_die(__('SEARCH_INVALID'), 400);
             }
             break;
 
@@ -569,7 +569,7 @@ if (!request()->get('dosearch')) {
             }
 
             if ($userfield_value == '') {
-                bb_die(__('SEARCH_INVALID_USERFIELD'));
+                bb_die(__('SEARCH_INVALID_USERFIELD'), 400);
             }
 
             $userfield_type = strtolower(trim($userfield_type));
@@ -596,7 +596,7 @@ if (!request()->get('dosearch')) {
                     $field = 'user_occ';
                     break;
                 default:
-                    bb_die(__('SEARCH_INVALID'));
+                    bb_die(__('SEARCH_INVALID'), 400);
             }
 
             $total_sql .= 'SELECT COUNT(user_id) AS total
@@ -641,7 +641,7 @@ if (!request()->get('dosearch')) {
 
                     break;
                 default:
-                    bb_die(__('SEARCH_INVALID_LASTVISITED'));
+                    bb_die(__('SEARCH_INVALID_LASTVISITED'), 400);
             }
             break;
 
@@ -651,7 +651,7 @@ if (!request()->get('dosearch')) {
             $language_type = strtolower(trim(stripslashes($language_type)));
 
             if ($language_type == '') {
-                bb_die(__('SEARCH_INVALID_LANGUAGE'));
+                bb_die(__('SEARCH_INVALID_LANGUAGE'), 400);
             }
 
             $text = sprintf(__('SEARCH_FOR_LANGUAGE'), strip_tags(htmlspecialchars($language_type)));
@@ -691,7 +691,7 @@ if (!request()->get('dosearch')) {
             }
 
             if (DB()->num_rows($result) == 0) {
-                bb_die(__('SEARCH_INVALID_MODERATORS'));
+                bb_die(__('SEARCH_INVALID_MODERATORS'), 400);
             }
 
             $forum_name = DB()->sql_fetchrow($result);
@@ -772,7 +772,7 @@ if (!request()->get('dosearch')) {
 
                     break;
                 default:
-                    bb_die(__('SEARCH_INVALID'));
+                    bb_die(__('SEARCH_INVALID'), 400);
             }
     }
 
@@ -844,7 +844,7 @@ if (!request()->get('dosearch')) {
         $total_pages = DB()->sql_fetchrow($result);
 
         if ($total_pages['total'] == 0) {
-            bb_die(__('SEARCH_NO_RESULTS'));
+            bb_die(__('SEARCH_NO_RESULTS'), 200);
         }
     }
     $num_pages = ceil($total_pages['total'] / config()->get('topics_per_page'));

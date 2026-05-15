@@ -129,6 +129,11 @@ if ($mode == 'submit') {
     if ($session_posts_processing <= 0 || $post_limit <= 0 || $refresh_rate <= 0 || $time_limit <= 0) {
         bb_die(__('WRONG_INPUT') . '<br /><br />' . sprintf(__('CLICK_RETURN_REBUILD_SEARCH'), '<a href="admin_rebuild_search.php">', '</a>'), 400);
     }
+} elseif ($mode == 'refresh') {
+    // refresh_rate and time_limit must stay positive to prevent rapid-fire requests
+    if ($refresh_rate <= 0 || $time_limit <= 0) {
+        bb_die(__('WRONG_INPUT') . '<br /><br />' . sprintf(__('CLICK_RETURN_REBUILD_SEARCH'), '<a href="admin_rebuild_search.php">', '</a>'), 400);
+    }
 }
 
 // Increase maximum execution time in case of a lot of posts, but don't complain about it if it isn't allowed.
