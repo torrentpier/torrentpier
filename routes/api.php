@@ -8,7 +8,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-use App\Http\Controllers\Api\CsrfTokenController;
 use App\Http\Controllers\Api\Ajax\AvatarController;
 use App\Http\Controllers\Api\Ajax\CallseedController;
 use App\Http\Controllers\Api\Ajax\ChangeTorrentController;
@@ -32,6 +31,7 @@ use App\Http\Controllers\Api\Ajax\TopicTplController;
 use App\Http\Controllers\Api\Ajax\UserRegisterController;
 use App\Http\Controllers\Api\Ajax\ViewPostController;
 use App\Http\Controllers\Api\Ajax\ViewTorrentController;
+use App\Http\Controllers\Api\CsrfTokenController;
 use App\Http\Middleware\Api\EnsureRole;
 use TorrentPier\Router\RouteGroup;
 use TorrentPier\Router\Router;
