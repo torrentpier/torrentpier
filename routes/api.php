@@ -8,6 +8,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use App\Http\Controllers\Api\CsrfTokenController;
 use App\Http\Controllers\Api\Ajax\AvatarController;
 use App\Http\Controllers\Api\Ajax\CallseedController;
 use App\Http\Controllers\Api\Ajax\ChangeTorrentController;
@@ -41,6 +42,8 @@ use TorrentPier\Router\Router;
  * @param Router $router
  */
 return static function (Router $router): void {
+    $router->get('/api/csrf', CsrfTokenController::class);
+
     $router->group('/api/ajax', function (RouteGroup $group) {
         // Guest
         $group->post('/view-post', ViewPostController::class);

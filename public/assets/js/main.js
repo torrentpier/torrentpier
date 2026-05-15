@@ -262,6 +262,28 @@ $(document).ready(function () {
     });
   }
 
+  var _csrfRefreshPromise = null;
+  window._csrfRefreshAndRetry = function (settings) {
+    if (!settings || settings._csrfRetried) return null;
+    if (!_csrfRefreshPromise) {
+      _csrfRefreshPromise = $.ajax({ url: '/api/csrf', method: 'GET', dataType: 'json', global: false })
+        .always(function () { _csrfRefreshPromise = null; });
+    }
+    return _csrfRefreshPromise.then(function (resp) {
+      if (!resp || !resp.token) return $.Deferred().reject().promise();
+      _csrfToken = resp.token;
+      $('meta[name="csrf-token"]').attr('content', resp.token);
+      $('input[name="_token"]').val(resp.token);
+      var retrySettings = $.extend({}, settings, { _csrfRetried: true });
+      if (retrySettings.data && typeof retrySettings.data === 'object') {
+        retrySettings.data = $.extend({}, retrySettings.data, { _token: resp.token });
+      } else if (typeof retrySettings.data === 'string') {
+        retrySettings.data = retrySettings.data.replace(/(^|&)_token=[^&]*/, '$1_token=' + encodeURIComponent(resp.token));
+      }
+      return $.ajax(retrySettings);
+    });
+  };
+
   // Menus
   $('body').append($('div.menu-sub'));
   $('a.menu-root')
@@ -496,12 +518,26 @@ $(document).ready(function () {
   // Setup ajax-error box
   $("#ajax-error").ajaxError(function (event, xml, settings) {
     var status = xml.status;
+    var $box = $(this);
+    if (status === 419) {
+      var retry = window._csrfRefreshAndRetry && window._csrfRefreshAndRetry(settings);
+      if (retry) {
+        retry.fail(function () {
+          $box.html('<b>Session expired.</b> Please reload the page to continue.').show();
+          ajax.setStatusBoxPosition($box);
+        });
+        return;
+      }
+      $box.html('<b>Session expired.</b> Please reload the page to continue.').show();
+      ajax.setStatusBoxPosition($box);
+      return;
+    }
     var text = xml.statusText;
     if (status === 200) {
       status = '';
       text = 'invalid data format';
     } else if (!text || text === 'error') {
-      text = 'Internal Server Error';
+      text = 'Server Error';
     }
     var url = (settings && settings.url) || xml.responseURL || '';
     var body = xml.responseJSON;
@@ -512,8 +548,8 @@ $(document).ready(function () {
     var detail = (body && body.error_msg)
       ? '<br />' + $('<span>').text(body.error_msg).prop('outerHTML')
       : '';
-    $(this).html(urlPart + "<b>" + status + " " + text + "</b>" + detail).show();
-    ajax.setStatusBoxPosition($(this));
+    $box.html(urlPart + "<b>" + status + " " + text + "</b>" + detail).show();
+    ajax.setStatusBoxPosition($box);
   });
 
   // Bind ajax events
