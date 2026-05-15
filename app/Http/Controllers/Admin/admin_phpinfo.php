@@ -17,7 +17,7 @@ if (!empty($setmodules)) {
 }
 
 if (!IS_SUPER_ADMIN) {
-    bb_die(__('ONLY_FOR_SUPER_ADMIN'));
+    bb_die(__('ONLY_FOR_SUPER_ADMIN'), 403);
 }
 
 /** @noinspection ForgottenDebugOutputInspection */
