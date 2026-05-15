@@ -31,7 +31,7 @@ trait TopicVisibilityFilterTrait
         return array_filter($topics, function ($topic) use ($notForumsId) {
             $forumId = isset($topic['forum_id']) ? (int)$topic['forum_id'] : 0;
 
-            return !\in_array($forumId, $notForumsId);
+            return !\in_array($forumId, $notForumsId, true);
         });
     }
 }
