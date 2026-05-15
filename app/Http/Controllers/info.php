@@ -9,7 +9,6 @@
  */
 
 $info = [];
-$htmlDir = LANG_DIR . 'html/';
 $show = request()->getString('show');
 
 switch ($show) {
@@ -35,9 +34,11 @@ switch ($show) {
         break;
 }
 
-$require = files()->isFile($htmlDir . $info['src']) ? ($htmlDir . $info['src']) : false;
+$twig = template()->getTwig();
+$templateName = '@lang/' . $info['src'];
+$require = $twig->getLoader()->exists($templateName) ? $twig->render($templateName) : __('NOT_FOUND');
 
 print_page('info.twig', 'simple', variables: [
     'PAGE_TITLE' => mb_strtoupper($info['title'], DEFAULT_CHARSET),
-    'REQUIRE' => $require ? files()->get($require) : __('NOT_FOUND'),
+    'REQUIRE' => $require,
 ]);
