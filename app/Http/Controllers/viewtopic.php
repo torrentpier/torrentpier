@@ -425,9 +425,10 @@ $modcp_link = static function (string $mode, string $image, string $title) use (
 };
 // Immediate-mutation modes (lock/unlock/set_download/unset_download/post_pin/post_unpin) require POST + CSRF.
 $modcp_form = static function (string $mode, string $image, string $title) use ($topic_id): string {
-    $token = htmlspecialchars(\TorrentPier\Http\Csrf::token(), ENT_QUOTES);
+    $token = htmlspecialchars(TorrentPier\Http\Csrf::token(), ENT_QUOTES);
+
     return '<form action="' . FORUM_PATH . 'modcp" method="post" style="display:inline">'
-        . '<input type="hidden" name="' . \TorrentPier\Http\Csrf::FIELD . '" value="' . $token . '">'
+        . '<input type="hidden" name="' . TorrentPier\Http\Csrf::FIELD . '" value="' . $token . '">'
         . '<input type="hidden" name="' . POST_TOPIC_URL . '" value="' . (int)$topic_id . '">'
         . '<input type="hidden" name="mode" value="' . $mode . '">'
         . '<input type="image" src="' . theme_images($image) . '" alt="' . $title . '" title="' . $title . '" border="0">'
