@@ -37,7 +37,7 @@ class Application extends Container
     /**
      * The TorrentPier version
      */
-    public const string VERSION = '3.0.3';
+    public const string VERSION = '3.0.4';
 
     /**
      * The base path for the application
