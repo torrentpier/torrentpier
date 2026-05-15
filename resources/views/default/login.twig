@@ -20,12 +20,12 @@
                     <table class="borderless bCenter">
                         <tr>
                             <td width="35%" class="tRight">{{ __('USERNAME') }}:</td>
-                            <td><input type="text" class="post" name="login_username" size="25" maxlength="40" value="{{ LOGIN_USERNAME }}" tabindex="101"{% if ADMIN_LOGIN %} readonly style="color: gray"{% endif %} />
+                            <td><input type="text" class="post" name="login_username" size="25" maxlength="40" autocomplete="username" value="{{ LOGIN_USERNAME }}" tabindex="101"{% if ADMIN_LOGIN %} readonly style="color: gray"{% endif %} />
                             </td>
                         </tr>
                         <tr>
                             <td class="tRight">{{ __('PASSWORD') }}:</td>
-                            <td><input type="password" class="post show_pass_input" name="login_password" value="{{ LOGIN_PASSWORD }}" tabindex="102" size="25" maxlength="32"/>&nbsp;<label><input type="checkbox" class="password_show_checkbox">&nbsp;{{ __('PASSWORD_SHOW_BTN') }}</label></td>
+                            <td><input type="password" class="post show_pass_input" name="login_password" value="{{ LOGIN_PASSWORD }}" tabindex="102" size="25" maxlength="128" autocomplete="current-password"/>&nbsp;<label><input type="checkbox" class="password_show_checkbox">&nbsp;{{ __('PASSWORD_SHOW_BTN') }}</label></td>
                         </tr>
                         {% if CAPTCHA_HTML %}
                         <tr>

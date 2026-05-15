@@ -18,32 +18,19 @@ namespace TorrentPier\Feed\Provider;
 trait TopicVisibilityFilterTrait
 {
     /**
-     * Filter topics from forbidden forums (for guests)
+     * Filter topics from forums the current viewer cannot see
      */
     private function filterForbiddenTopics(array $topics): array
     {
-        // Get forbidden forums for guests
-        $forums = forum_tree();
+        $notForumsId = user()->get_excluded_forums(AUTH_VIEW, 'array');
 
-        // Get guest_view string, default to empty
-        $guestView = $forums['not_auth_forums']['guest_view'] ?? '';
-
-        // Explode and cast to an int array (empty string produces an empty array)
-        $notForumsId = $guestView !== ''
-            ? array_map('intval', explode(',', $guestView))
-            : [];
-
-        // If no forbidden forums, return all topics
         if (empty($notForumsId)) {
             return $topics;
         }
 
-        // Filter out topics from forbidden forums
         return array_filter($topics, function ($topic) use ($notForumsId) {
-            // Get forum_id as int, default to 0 if missing
             $forumId = isset($topic['forum_id']) ? (int)$topic['forum_id'] : 0;
 
-            // Keep a topic if its forum is NOT in a forbidden list (strict comparison)
             return !\in_array($forumId, $notForumsId, true);
         });
     }

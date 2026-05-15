@@ -36,17 +36,23 @@ class ViewPostController
     {
         $body = $request->getParsedBody() ?? [];
 
-        $postId = isset($body['post_id']) ? (int)$body['post_id'] : null;
-        $topicId = isset($body['topic_id']) ? (int)$body['topic_id'] : null;
+        $postId = isset($body['post_id']) && is_numeric($body['post_id']) ? (int)$body['post_id'] : null;
+        $topicId = isset($body['topic_id']) && is_numeric($body['topic_id']) ? (int)$body['topic_id'] : null;
         $returnText = config()->get('forum.show_post_bbcode_button.enabled')
             && isset($body['return_text'])
             && $body['return_text'];
 
         if ($postId === null) {
+            if (!$topicId) {
+                return $this->error(__('TOPIC_POST_NOT_EXIST'));
+            }
             $postId = DB()->fetch_row(
-                'SELECT topic_first_post_id FROM ' . BB_TOPICS . " WHERE topic_id = $topicId",
+                'SELECT topic_first_post_id FROM ' . BB_TOPICS . " WHERE topic_id = {$topicId}",
                 'topic_first_post_id',
             );
+            if (!$postId) {
+                return $this->error(__('TOPIC_POST_NOT_EXIST'));
+            }
         }
 
         $postTextSql = $returnText
@@ -84,7 +90,7 @@ class ViewPostController
 
         $response = [
             'post_id' => $postId,
-            'topic_id' => $topicId,
+            'topic_id' => $topicId ?? (int)$postData['topic_id'],
         ];
 
         if ($returnText) {

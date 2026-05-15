@@ -173,6 +173,15 @@ class ChangeTorStatusController
             return $this->error(__('MODULE_OFF'));
         }
 
+        // Only the torrent's release author or a moderator/admin may reply.
+        if (!IS_AM && (int)$tor['poster_id'] !== (int)userdata('user_id')) {
+            return $this->error(__('NOT_MODERATOR'));
+        }
+
+        if (empty($tor['checked_user_id'])) {
+            return $this->error(__('TORRENT_FAILED'));
+        }
+
         $subject = \sprintf(__('TOR_AUTH_TITLE'), $tor['topic_title']);
         $message = \sprintf(__('TOR_AUTH_MSG'), get_username($tor['checked_user_id']), make_url(TOPIC_URL . $tor['topic_id']), $tor['topic_title']);
 

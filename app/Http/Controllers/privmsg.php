@@ -127,7 +127,7 @@ if ($mode == 'read') {
     if (request()->query->has(POST_POST_URL)) {
         $privmsgs_id = request()->query->getInt(POST_POST_URL);
     } else {
-        bb_die(__('NO_PM_ID'));
+        bb_die(__('NO_PM_ID'), 400);
     }
 
     switch ($folder) {
@@ -158,7 +158,7 @@ if ($mode == 'read') {
 				)';
             break;
         default:
-            bb_die(__('NO_SUCH_FOLDER'));
+            bb_die(__('NO_SUCH_FOLDER'), 404);
             break;
     }
 
@@ -599,7 +599,7 @@ if ($mode == 'read') {
 
             pm_die(__('DELETE_POSTS_SUCCESFULLY'));
         } else {
-            pm_die(__('NONE_SELECTED'));
+            pm_die(__('NONE_SELECTED'), 400);
         }
     }
 } elseif ($save && $mark_list && $folder != 'savebox' && $folder != 'outbox') {
@@ -762,7 +762,7 @@ if ($mode == 'read') {
             $current_time = TIMENOW;
 
             if (($current_time - $last_post_time) < config()->get('flood_interval')) {
-                bb_die(__('FLOOD_ERROR'));
+                bb_die(__('FLOOD_ERROR'), 429);
             }
         }
     }
@@ -778,7 +778,7 @@ if ($mode == 'read') {
         }
 
         if (!($row = DB()->sql_fetchrow($result))) {
-            bb_die(__('NO_SUCH_POST'));
+            bb_die(__('NO_SUCH_POST'), 404);
         }
         DB()->sql_freeresult($result);
 
@@ -828,7 +828,7 @@ if ($mode == 'read') {
         // Has admin prevented user from sending PM's?
         //
         if (bf(userdata('user_opt'), 'user_opt', 'dis_pm')) {
-            bb_die(__('CANNOT_SEND_PRIVMSG'));
+            bb_die(__('CANNOT_SEND_PRIVMSG'), 403);
         }
 
         $msg_time = TIMENOW;
@@ -842,7 +842,7 @@ if ($mode == 'read') {
 						OR privmsgs_type = ' . PRIVMSGS_UNREAD_MAIL . ' )
 					AND privmsgs_to_userid = ' . $to_userdata['user_id'];
             if (!($result = DB()->sql_query($sql))) {
-                bb_die(__('NO_SUCH_USER'));
+                bb_die(__('NO_SUCH_USER'), 404);
             }
 
             if ($inbox_info = DB()->sql_fetchrow($result)) {
@@ -879,7 +879,7 @@ if ($mode == 'read') {
                     ['type' => 'pm', 'ip' => CLIENT_IP, 'subject' => $privmsg_subject, 'username' => userdata('username')],
                 );
                 if ($contentResult->isDenied()) {
-                    bb_die(__('PM_SPAM_DENIED'));
+                    bb_die(__('PM_SPAM_DENIED'), 429);
                 }
             }
 
@@ -973,13 +973,13 @@ if ($mode == 'read') {
 
             if ($postrow = DB()->sql_fetchrow($result)) {
                 if (userdata('user_id') != $postrow['user_id']) {
-                    bb_die(__('EDIT_OWN_POSTS'));
+                    bb_die(__('EDIT_OWN_POSTS'), 403);
                 }
             }
         }
     } else {
         if (!$privmsg_id && ($mode == 'reply' || $mode == 'edit' || $mode == 'quote')) {
-            bb_die(__('NO_POST_ID'));
+            bb_die(__('NO_POST_ID'), 400);
         }
 
         if (request()->query->has(POST_USERS_URL)) {
@@ -1256,7 +1256,7 @@ if ($mode == 'read') {
             break;
 
         default:
-            bb_die(__('NO_SUCH_FOLDER'));
+            bb_die(__('NO_SUCH_FOLDER'), 404);
             break;
     }
 
@@ -1456,7 +1456,7 @@ require PAGE_FOOTER;
 //
 // Functions
 //
-function pm_die($msg)
+function pm_die($msg, int $statusCode = 200)
 {
     $msg .= '<br /><br />';
     $msg .= sprintf(__('CLICK_RETURN_INBOX'), '<a href="' . PM_URL . '?folder=inbox">', '</a> ');
@@ -1466,5 +1466,5 @@ function pm_die($msg)
     $msg .= '<br /><br />';
     $msg .= sprintf(__('CLICK_RETURN_INDEX'), '<a href="index.php">', '</a>');
 
-    bb_die($msg);
+    bb_die($msg, $statusCode);
 }

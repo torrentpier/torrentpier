@@ -100,10 +100,11 @@ $orderColumn = match ($mode) {
     default => 'user_regdate',
 };
 $limit = $mode === 'topten' ? 10 : config()->get('topics_per_page');
+$effective_sort_order = $mode === 'topten' ? 'DESC' : $sort_order;
 
 $result = (clone $query)
     ->select(['username', 'user_id', 'user_rank', 'user_opt', 'user_posts', 'user_regdate', 'user_from', 'user_website', 'user_email', 'avatar_ext_id'])
-    ->orderBy($orderColumn, $sort_order)
+    ->orderBy($orderColumn, $effective_sort_order)
     ->offset($mode === 'topten' ? 0 : $start)
     ->limit($limit)
     ->toBase()

@@ -132,7 +132,7 @@ $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
 
 if ($t_data['allow_porno_topic'] && bf(userdata('user_opt'), 'user_opt', 'user_porn_forums')) {
-    bb_die(__('ERROR_PORNO_FORUM'));
+    bb_die(__('ERROR_PORNO_FORUM'), 403);
 }
 
 if (userdata('session_admin') && request()->has('mod')) {
@@ -383,7 +383,7 @@ if ($postrow = DB()->fetch_rowset($sql)) {
     }
     $total_posts = count($postrow);
 } else {
-    bb_die(__('NO_POSTS_TOPIC'));
+    bb_die(__('NO_POSTS_TOPIC'), 404);
 }
 
 if (!$ranks = datastore()->get('ranks')) {
@@ -419,22 +419,40 @@ $s_auth_can .= (($is_auth['auth_download']) ? __('RULES_DOWNLOAD_CAN') : __('RUL
 
 // Moderator output
 $topic_mod = '';
+// Confirmation-form modes (delete/move/split) stay as GET links; the controller renders a confirm screen.
+$modcp_link = static function (string $mode, string $image, string $title) use ($topic_id): string {
+    return '<a href="' . FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode={$mode}&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images($image) . '" alt="' . $title . '" title="' . $title . '" border="0" /></a>';
+};
+// Immediate-mutation modes (lock/unlock/set_download/unset_download/post_pin/post_unpin) require POST + CSRF.
+$modcp_form = static function (string $mode, string $image, string $title) use ($topic_id): string {
+    $token = htmlspecialchars(TorrentPier\Http\Csrf::token(), ENT_QUOTES);
+
+    return '<form action="' . FORUM_PATH . 'modcp" method="post" style="display:inline">'
+        . '<input type="hidden" name="' . TorrentPier\Http\Csrf::FIELD . '" value="' . $token . '">'
+        . '<input type="hidden" name="' . POST_TOPIC_URL . '" value="' . (int)$topic_id . '">'
+        . '<input type="hidden" name="mode" value="' . $mode . '">'
+        . '<input type="image" src="' . theme_images($image) . '" alt="' . $title . '" title="' . $title . '" border="0">'
+        . '</form>';
+};
+
 if ($is_auth['auth_mod']) {
     $s_auth_can .= __('RULES_MODERATE');
-    $topic_mod .= '<a href="' . FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=delete&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_delete') . '" alt="' . __('DELETE_TOPIC') . '" title="' . __('DELETE_TOPIC') . '" border="0" /></a>&nbsp;';
-    $topic_mod .= '<a href="' . FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=move&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . __('MOVE_TOPIC') . '" title="' . __('MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
-    $topic_mod .= ($t_data['topic_status'] == TOPIC_UNLOCKED) ? '<a href="' . FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=lock&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_lock') . '" alt="' . __('LOCK_TOPIC') . '" title="' . __('LOCK_TOPIC') . '" border="0" /></a>&nbsp;' : '<a href="' . FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=unlock&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_unlock') . '" alt="' . __('UNLOCK_TOPIC') . '" title="' . __('UNLOCK_TOPIC') . '" border="0" /></a>&nbsp;';
-    $topic_mod .= '<a href="' . FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=split&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_split') . '" alt="' . __('SPLIT_TOPIC') . '" title="' . __('SPLIT_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= $modcp_link('delete', 'topic_mod_delete', __('DELETE_TOPIC')) . '&nbsp;';
+    $topic_mod .= $modcp_link('move', 'topic_mod_move', __('MOVE_TOPIC')) . '&nbsp;';
+    $topic_mod .= ($t_data['topic_status'] == TOPIC_UNLOCKED)
+        ? $modcp_form('lock', 'topic_mod_lock', __('LOCK_TOPIC')) . '&nbsp;'
+        : $modcp_form('unlock', 'topic_mod_unlock', __('UNLOCK_TOPIC')) . '&nbsp;';
+    $topic_mod .= $modcp_link('split', 'topic_mod_split', __('SPLIT_TOPIC')) . '&nbsp;';
 
     if ($t_data['allow_reg_tracker'] || $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL || IS_ADMIN) {
         if ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL) {
-            $topic_mod .= '<a href="' . FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=unset_download&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_normal') . '" alt="' . __('UNSET_DL_STATUS') . '" title="' . __('UNSET_DL_STATUS') . '" border="0" /></a>';
+            $topic_mod .= $modcp_form('unset_download', 'topic_normal', __('UNSET_DL_STATUS'));
         } else {
-            $topic_mod .= '<a href="' . FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=set_download&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_dl') . '" alt="' . __('SET_DL_STATUS') . '" title="' . __('SET_DL_STATUS') . '" border="0" /></a>';
+            $topic_mod .= $modcp_form('set_download', 'topic_dl', __('SET_DL_STATUS'));
         }
     }
 } elseif (!IS_GUEST && ($t_data['topic_poster'] == userdata('user_id')) && $t_data['self_moderated']) {
-    $topic_mod .= '<a href="' . FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=move&amp;sid=" . userdata('session_id') . '"><img src="' . theme_images('topic_mod_move') . '" alt="' . __('MOVE_TOPIC') . '" title="' . __('MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= $modcp_link('move', 'topic_mod_move', __('MOVE_TOPIC')) . '&nbsp;';
 }
 
 // Topic watch information
@@ -529,7 +547,6 @@ template()->assign_vars([
     'HIDE_RANK_IMG_DIS' => !config()->get('forum.show_rank_image'),
 
     'PINNED_FIRST_POST' => $t_data['topic_show_first_post'],
-    'PIN_HREF' => $t_data['topic_show_first_post'] ? FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=post_unpin" : FORUM_PATH . 'modcp?' . POST_TOPIC_URL . "={$topic_id}&amp;mode=post_pin",
     'PIN_TITLE' => $t_data['topic_show_first_post'] ? __('POST_UNPIN') : __('POST_PIN'),
 
     'AUTH_MOD' => $is_auth['auth_mod'],

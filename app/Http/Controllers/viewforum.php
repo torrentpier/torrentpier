@@ -64,7 +64,7 @@ caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest');
 set_die_append_msg();
 $forums = forum_tree();
 if (!$forum_id || !$forum_data = @$forums['forum'][$forum_id]) {
-    bb_die(__('FORUM_NOT_EXIST'));
+    bb_die(__('FORUM_NOT_EXIST'), 404);
 }
 
 // Set meta description
@@ -146,7 +146,7 @@ $show_subforums = !config()->get('forum.sf_on_first_page_only') || !$start;
 $forums = forum_tree();
 
 if ($forums['forum'][$forum_id]['allow_porno_topic'] && bf(userdata('user_opt'), 'user_opt', 'user_porn_forums')) {
-    bb_die(__('ERROR_PORNO_FORUM'));
+    bb_die(__('ERROR_PORNO_FORUM'), 403);
 }
 
 if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) && $show_subforums) {

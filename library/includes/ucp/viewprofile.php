@@ -17,10 +17,16 @@ if (IS_GUEST) {
     redirect(LOGIN_URL . '?redirect=' . request()->server->get('REQUEST_URI'));
 }
 
-$user_id = request()->query->getInt(POST_USERS_URL) ?: userdata('user_id');
+$user_id = request()->query->has(POST_USERS_URL)
+    ? request()->query->getInt(POST_USERS_URL)
+    : (int)userdata('user_id');
+
+if ($user_id <= 0) {
+    bb_die(__('NO_USER_ID_SPECIFIED'), 404);
+}
 
 if (!$profiledata = get_userdata($user_id)) {
-    bb_die(__('NO_USER_ID_SPECIFIED'));
+    bb_die(__('NO_USER_ID_SPECIFIED'), 404);
 }
 
 // Assert canonical URL for SEO-friendly routing

@@ -269,7 +269,12 @@ function build_poll_add_form (src_el)
 		<td class="small bold nowrap" style="padding: 0 0 0 4px;">
 			{% if IN_MODERATION %}{{ __('MODERATE_TOPIC') }}{% else %}<a href="{{ PAGE_URL }}{{ PAGE_URL_SEP }}mod=1&amp;start={{ PAGE_START }}" class="small bold">{{ __('MODERATE_TOPIC') }}</a>{% endif %}
 			&nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
-			<a class="small bold" href="{{ PIN_HREF }}">{{ PIN_TITLE }}</a>
+			<form id="pin-form" action="{{ constant('FORUM_PATH') }}modcp" method="post" style="display:inline">
+				{{ csrf_field() }}
+				<input type="hidden" name="{{ constant('POST_TOPIC_URL') }}" value="{{ V.TOPIC_ID }}">
+				<input type="hidden" name="mode" value="{{ PINNED_FIRST_POST ? 'post_unpin' : 'post_pin' }}">
+				<a class="small bold" href="#" onclick="document.getElementById('pin-form').submit(); return false;">{{ PIN_TITLE }}</a>
+			</form>
             &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
             <a class="small bold" href="#" onclick="$('#main_content').printThis(); return false;">{{ __('PRINT_PAGE') }}</a>
 		</td>
